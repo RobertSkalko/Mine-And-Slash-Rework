@@ -1,0 +1,30 @@
+{
+  "id": "negative/18",
+  "one_of_a_kind_id": "",
+  "type": "negative",
+  "max_stacks": 1,
+  "tags": [
+    "negative"
+  ],
+  "mc_stats": [],
+  "stats": [
+    {
+      "min": -20.0,
+      "max": -50.0,
+      "stat": "armor",
+      "type": "FLAT"
+    },
+    {
+      "min": -10.0,
+      "max": -25.0,
+      "stat": "dodge",
+      "type": "PERCENT"
+    },
+    {
+      "min": -5.0,
+      "max": -10.0,
+      "stat": "elemental_resist",
+      "type": "PERCENT"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+These are all default registry entries of this type.
+This registry is modify-able through datapacks.
+ghostly_shores
+skull_cleaver
+mana_dominion
+winter_chill
+bone_shatterer
+spring_blossoms
+insight
+air_disaster
+rabbit_paw
+heavenly_rainbow
+autumn_harvest
+skull_of_spirits
+heavenly_tear
+summer_heat
+playful_hope
+witch_brew
+azuna_ring
+ghast_necklace

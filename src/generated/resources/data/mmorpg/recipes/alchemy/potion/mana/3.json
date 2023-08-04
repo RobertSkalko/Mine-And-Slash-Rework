@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "item": "mmorpg:mat/condensed_salvage/c3"
+    }
+  ],
+  "result": {
+    "item": "mmorpg:alchemy/potion/mana/3",
+    "count": 3
+  }
+}

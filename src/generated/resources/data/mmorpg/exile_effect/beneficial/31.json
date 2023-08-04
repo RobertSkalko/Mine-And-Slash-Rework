@@ -1,0 +1,37 @@
+{
+  "id": "beneficial/31",
+  "one_of_a_kind_id": "",
+  "type": "beneficial",
+  "max_stacks": 1,
+  "tags": [
+    "positive",
+    "offensive"
+  ],
+  "mc_stats": [],
+  "stats": [
+    {
+      "min": 3.0,
+      "max": 5.0,
+      "stat": "total_damage",
+      "type": "FLAT"
+    },
+    {
+      "min": 5.0,
+      "max": 25.0,
+      "stat": "dodge",
+      "type": "PERCENT"
+    },
+    {
+      "min": 3.0,
+      "max": 5.0,
+      "stat": "attack_speed",
+      "type": "FLAT"
+    },
+    {
+      "min": 3.0,
+      "max": 10.0,
+      "stat": "critical_damage",
+      "type": "FLAT"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ovo",
+    "vtv",
+    "ovo"
+  ],
+  "key": {
+    "t": {
+      "item": "mmorpg:currency/orb_of_transmutation"
+    },
+    "v": {
+      "item": "minecraft:torch"
+    },
+    "o": {
+      "item": "mmorpg:mat/salvage/salvage3"
+    }
+  },
+  "result": {
+    "item": "mmorpg:currency/crystal_of_purification"
+  }
+}

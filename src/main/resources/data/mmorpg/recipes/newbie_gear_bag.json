@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C",
+    "A",
+    "B"
+  ],
+  "key": {  
+	"C": {
+      "item": "minecraft:coal"
+    }, 
+	"A": {
+      "item": "minecraft:wheat_seeds"
+    }, 
+	"B": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "mmorpg:newbie_gear_bag"
+  }
+}

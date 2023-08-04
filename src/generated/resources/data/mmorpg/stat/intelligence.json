@@ -1,0 +1,36 @@
+{
+  "ser": "core_stat",
+  "data": {
+    "id": "intelligence",
+    "min": 0.0,
+    "max": 2.14748365E9,
+    "base": 0.0,
+    "perc": true,
+    "ele": "Physical",
+    "scale": "NORMAL",
+    "core_stat_data": {
+      "stats": [
+        {
+          "v1": 0.1,
+          "stat": "spell_power",
+          "type": "FLAT"
+        },
+        {
+          "v1": 1.0,
+          "stat": "fire_resist",
+          "type": "FLAT"
+        },
+        {
+          "v1": 1.0,
+          "stat": "water_resist",
+          "type": "FLAT"
+        },
+        {
+          "v1": 1.0,
+          "stat": "earth_resist",
+          "type": "FLAT"
+        }
+      ]
+    }
+  }
+}

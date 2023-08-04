@@ -1,0 +1,197 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'idea'
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
+}
+apply plugin: 'net.minecraftforge.gradle'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+
+archivesBaseName = "${mod_archive_name}-${minecraft_version}"
+version = project.mod_version
+group = project.maven_group
+
+repositories {
+    maven { url '"https://maven.theillusivec4.top/' }
+}
+
+minecraft {
+    //mappings channel: "snapshot", version: "20201028-1.16.3"
+
+    mappings channel: 'official', version: "$project.minecraft_version"
+
+       // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+            arg "-mixin.config=${mod_id}-mixins.json"
+            // This makes dependencies with mixins work
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+            // This makes dependencies with mixins work
+            mods {
+                modid {
+                    source sourceSets.main
+                }
+            }
+        }
+        server {
+            workingDirectory project.file('run')
+            arg "-mixin.config=${mod_id}-mixins.json"
+            // This makes dependencies with mixins work
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+            // This makes dependencies with mixins work
+            mods {
+                modid {
+                    source sourceSets.main
+                }
+            }
+        }
+        data {
+            workingDirectory project.file('run')
+            arg "-mixin.config=${mod_id}-mixins.json"
+            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
+            args '--mod', '${mod_id}', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            mods {
+                modid {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+
+///////////////////////////////////////////////
+// LOCAL JAR DEPENDENCIES
+def getModVersion(filename) {
+    println(filename);
+    def pattern = /^(?<modid>[^-]+)(?:-(?<mcversion>[0-9.]+))?(?:-(?<modver>[0-9.\-]+))\.jar$/;
+    def matcher = filename =~ pattern
+    def found = matcher.find()
+    if (found) {
+        def mod = matcher.group("modid");
+        // Extract MC version or default
+        def mcVersion = matcher.group("mcversion");
+        // Extract mod version
+        def version = matcher.group("modver");
+        // println("> mod: ${mod}; mc: ${mcVersion}; version: ${version}");
+        if (mcVersion == null)
+            return "${mod}:${mod}:${version}";
+        else
+            return "${mod}:${mod}-${mcVersion}:${version}";
+
+    } else {
+        println("> not a mod filename")
+        return filename;
+    }
+}
+
+def dev_mods_dir = "libs"
+def dev_mods = fileTree(dev_mods_dir).matching {
+    include "**/*.jar"
+}.filter { it -> it.isFile() }.files.name.collect({ getModVersion(it) })
+
+repositories {
+    maven {
+        url = "https://maven.theillusivec4.top/"
+    }
+    flatDir {
+        dirs dev_mods_dir
+    }
+}
+dependencies {  
+    dev_mods.each {
+        implementation fg.deobf(it)
+    }
+}
+// LOCAL JAR DEPENDENCIES
+///////////////////////////////////////////////
+
+dependencies {
+
+    minecraft([
+            group  : "net.minecraftforge",
+            name   : 'forge',
+            version: "$project.minecraft_version-${project.forgeversion}"
+    ])
+
+
+	
+    if (System.getProperty("idea.sync.active") != "true") {       
+    annotationProcessor 'org.spongepowered:mixin:0.8.3:processor'	
+	}
+
+    implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
+
+}
+
+
+// CURSEFORGE STUFF
+
+
+jar {
+    manifest {
+        attributes([
+                "MixinConnector": "com.robertx22.age_of_exile.mmorpg.MixinConnector",
+                "MixinConfigs"  : "mmorpg-mixins.json"
+        ])
+    }
+}
+
+/*
+curseforge {
+
+    def curseProp = new Properties()
+    File secretPropsFile = file("key.properties")
+    curseProp.load(secretPropsFile.newInputStream())
+
+    project {
+        apiKey = curseProp.getProperty('curseKey')
+        id = "${curse_id}"
+        releaseType = "${curse_release}"
+        changelogType = 'text'
+        changelog = file('CHANGELOG.md')
+        addGameVersion("${project.minecraft_version}")
+        addGameVersion("Forge")
+        addGameVersion("Java 8")
+
+        relations {          
+            requiredDependency 'library-of-exile'
+            requiredDependency 'curios'
+            requiredDependency 'dungeons-of-exile'
+			requiredDependency 'divine-missions'
+        }
+        mainArtifact(jar)
+
+        afterEvaluate {
+            uploadTask.dependsOn("jar")
+        }
+    }
+    options {
+        forgeGradleIntegration = true
+    }
+}
+
+ */
+
+apply plugin: 'org.spongepowered.mixin'
+mixin {
+    add sourceSets.main, "mmorpg.refmap.json"
+}

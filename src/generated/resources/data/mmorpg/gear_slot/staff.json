@@ -1,0 +1,7 @@
+{
+  "id": "staff",
+  "weight": 1500,
+  "energy_cost": 3,
+  "model_num": 3,
+  "fam": "Weapon"
+}

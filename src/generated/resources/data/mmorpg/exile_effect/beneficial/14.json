@@ -1,0 +1,29 @@
+{
+  "id": "beneficial/14",
+  "one_of_a_kind_id": "",
+  "type": "beneficial",
+  "max_stacks": 1,
+  "tags": [
+    "positive",
+    "defensive"
+  ],
+  "mc_stats": [],
+  "stats": [
+    {
+      "min": 10.0,
+      "max": 20.0,
+      "stat": "water_resist",
+      "type": "PERCENT"
+    },
+    {
+      "min": 15.0,
+      "max": 25.0,
+      "stat": "armor",
+      "type": "FLAT"
+    }
+  ],
+  "spell": {
+    "on_cast": [],
+    "entity_components": {}
+  }
+}
