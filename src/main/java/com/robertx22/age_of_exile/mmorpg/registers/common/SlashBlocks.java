@@ -1,8 +1,5 @@
 package com.robertx22.age_of_exile.mmorpg.registers.common;
 
-import com.robertx22.age_of_exile.dimension.spawner.ModSpawnerBlock;
-import com.robertx22.age_of_exile.dimension.teleporter.TeleporterBlock;
-import com.robertx22.age_of_exile.dimension.teleporter.portal_block.PortalBlock;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
 import com.robertx22.age_of_exile.vanilla_mc.blocks.BlackHoleBlock;
@@ -21,11 +18,8 @@ public class SlashBlocks {
     }
 
     public static RegObj<RuneWordStationBlock> RUNEWORD = Def.block("runeword_station", () -> new RuneWordStationBlock());
-    public static RegObj<TeleporterBlock> TELEPORTER = Def.block("teleporter", () -> new TeleporterBlock());
-    public static RegObj<PortalBlock> PORTAL = Def.block("portal", () -> new PortalBlock());
 
     public static RegObj<BlackHoleBlock> BLACK_HOLE = Def.block("black_hole", () -> new BlackHoleBlock());
-    public static RegObj<ModSpawnerBlock> SPAWNER = Def.block("spawner", () -> new ModSpawnerBlock());
     public static RegObj<TotemBlock> BLUE_TOTEM = Def.block("blue_totem", () -> new TotemBlock());
     public static RegObj<TotemBlock> GREEN_TOTEM = Def.block("green_totem", () -> new TotemBlock());
     public static RegObj<TotemBlock> GUARD_TOTEM = Def.block("guard_totem", () -> new TotemBlock());
@@ -34,10 +28,10 @@ public class SlashBlocks {
 
     static RegObj<Block> plant(String id) {
         return Def.block(id, () -> new BeetrootBlock(AbstractBlock.Properties.of(Material.PLANT)
-            .noCollission()
-            .randomTicks()
-            .instabreak()
-            .sound(SoundType.CROP)));
+                .noCollission()
+                .randomTicks()
+                .instabreak()
+                .sound(SoundType.CROP)));
     }
 
 }

@@ -7,5 +7,5 @@ fire_mob_affix
 vampire
 water_mob_affix
 winter
-earth_mob_affix
+chaos_mob_affix
 nature_lord

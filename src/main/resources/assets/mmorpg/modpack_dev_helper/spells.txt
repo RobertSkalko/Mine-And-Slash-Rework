@@ -48,7 +48,6 @@ entangling_seed
 nature_balm
 black_hole
 rejuv_totem
-demon
 test_spell
 fireball
 levitation

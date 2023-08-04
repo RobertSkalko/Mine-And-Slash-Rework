@@ -15,6 +15,7 @@ public class DataGeneration {
             new RecipeGenerator().run();
             new LootTableGenerator().run();
 
+
             ModpackerHelperLists.generate();
 
             CreateLangFile.create();

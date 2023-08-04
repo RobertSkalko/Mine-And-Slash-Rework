@@ -2,7 +2,10 @@ package com.robertx22.age_of_exile.mmorpg.registers.server;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.robertx22.age_of_exile.vanilla_mc.commands.*;
-import com.robertx22.age_of_exile.vanilla_mc.commands.entity.*;
+import com.robertx22.age_of_exile.vanilla_mc.commands.entity.GiveExp;
+import com.robertx22.age_of_exile.vanilla_mc.commands.entity.GiveFavor;
+import com.robertx22.age_of_exile.vanilla_mc.commands.entity.SetEntityRarity;
+import com.robertx22.age_of_exile.vanilla_mc.commands.entity.SetLevel;
 import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GiveExactUnique;
 import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GiveGear;
 import com.robertx22.age_of_exile.vanilla_mc.commands.open_gui.OpenHub;
@@ -21,7 +24,7 @@ public class CommandRegister {
         System.out.println("Registering Age of Exile Commands.");
 
         CommandDispatcher<CommandSource> dispatcher = server.getCommands()
-            .getDispatcher();
+                .getDispatcher();
 
         GiveExactUnique.register(dispatcher);
         GiveGear.register(dispatcher);
@@ -29,8 +32,7 @@ public class CommandRegister {
         SetLevel.register(dispatcher);
         GiveExp.register(dispatcher);
         GiveFavor.register(dispatcher);
-        SetSkillLevel.register(dispatcher);
-
+       
         TestBuild.register(dispatcher);
 
         ResetSpellCooldowns.register(dispatcher);

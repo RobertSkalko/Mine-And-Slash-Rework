@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.capability.player.data;
 
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.favor.FavorRank;
-import com.robertx22.age_of_exile.database.data.stats.types.misc.BonusFavor;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.LootUtils;
@@ -23,7 +22,7 @@ public class FavorData {
 
     private FavorRank getDefault() {
         return ExileDB.FavorRanks()
-            .get("normal");
+                .get("normal");
     }
 
     public FavorRank getRank() {
@@ -32,16 +31,16 @@ public class FavorData {
                 return getDefault(); // simplest way of disabling everything around the system
             }
             Optional<FavorRank> opt = ExileDB.FavorRanks()
-                .getFiltered(x -> this.getFavor() >= x.min)
-                .stream()
-                .max(Comparator.comparingInt(x -> x.rank));
+                    .getFiltered(x -> this.getFavor() >= x.min)
+                    .stream()
+                    .max(Comparator.comparingInt(x -> x.rank));
 
             return opt.orElseGet(this::getDefault);
 
         } catch (Exception e) {
             e.printStackTrace();
             return ExileDB.FavorRanks()
-                .get("normal");
+                    .get("normal");
         }
     }
 
@@ -66,13 +65,10 @@ public class FavorData {
     public void onOpenNewLootChest(LootInfo info) {
 
         float lvlpenalty = LootUtils.getLevelDistancePunishmentMulti(info.level, info.playerData
-            .getLevel());
+                .getLevel());
 
         float favorGained = (float) (ServerContainer.get().FAVOR_GAIN_PER_CHEST_LOOTED.get() * lvlpenalty);
 
-        favorGained *= info.playerData.getUnit()
-            .getCalculatedStat(BonusFavor.getInstance())
-            .getMultiplier();
 
         this.favor += favorGained;
 

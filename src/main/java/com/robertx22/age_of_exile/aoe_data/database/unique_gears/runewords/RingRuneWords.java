@@ -21,33 +21,33 @@ public class RingRuneWords implements ExileRegistryInit {
     public void registerAll() {
 
         UniqueGearBuilder.of(
-                "air_disaster",
-                "Aria of Disaster",
-                BaseGearTypes.RING)
-            .setReplacesName()
-            .stats(Arrays.asList(
-                new StatModifier(15, 30, Stats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.song), ModType.FLAT),
-                new StatModifier(5, 15, Stats.AREA_DAMAGE.get(), ModType.FLAT),
-                new StatModifier(3, 10, ManaRegen.getInstance(), ModType.FLAT)
-            ))
-            .makeRuneWordOnly(Arrays.asList(RuneItem.RuneType.ANO, RuneItem.RuneType.ORU, RuneItem.RuneType.DOS))
-            .devComment("song buffer / area damage")
-            .build();
+                        "air_disaster",
+                        "Aria of Disaster",
+                        BaseGearTypes.RING)
+                .setReplacesName()
+                .stats(Arrays.asList(
+                        new StatModifier(15, 30, Stats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.song), ModType.FLAT),
+                        new StatModifier(5, 15, Stats.AREA_DAMAGE.get(), ModType.FLAT),
+                        new StatModifier(3, 10, ManaRegen.getInstance(), ModType.FLAT)
+                ))
+                .makeRuneWordOnly(Arrays.asList(RuneItem.RuneType.ANO, RuneItem.RuneType.ORU, RuneItem.RuneType.DOS))
+                .devComment("song buffer / area damage")
+                .build();
 
         UniqueGearBuilder.of(
-                "playful_hope",
-                "Playful Hope",
-                BaseGearTypes.RING)
-            .setReplacesName()
-            .stats(Arrays.asList(
-                new StatModifier(-75, 25, GlobalCriticalDamage.getInstance()),
-                new StatModifier(-50, 15, new ElementalResist(Elements.Water), ModType.PERCENT),
-                new StatModifier(-50, 15, new ElementalResist(Elements.Fire), ModType.PERCENT),
-                new StatModifier(-50, 15, new ElementalResist(Elements.Earth), ModType.PERCENT)
-            ))
-            .makeRuneWordOnly(Arrays.asList(RuneItem.RuneType.YUN, RuneItem.RuneType.FEY, RuneItem.RuneType.ORU))
-            .devComment("global crit + res, high RNG")
-            .build();
+                        "playful_hope",
+                        "Playful Hope",
+                        BaseGearTypes.RING)
+                .setReplacesName()
+                .stats(Arrays.asList(
+                        new StatModifier(-75, 25, GlobalCriticalDamage.getInstance()),
+                        new StatModifier(-50, 15, new ElementalResist(Elements.Cold), ModType.PERCENT),
+                        new StatModifier(-50, 15, new ElementalResist(Elements.Fire), ModType.PERCENT),
+                        new StatModifier(-50, 15, new ElementalResist(Elements.Chaos), ModType.PERCENT)
+                ))
+                .makeRuneWordOnly(Arrays.asList(RuneItem.RuneType.YUN, RuneItem.RuneType.FEY, RuneItem.RuneType.ORU))
+                .devComment("global crit + res, high RNG")
+                .build();
 
     }
 }

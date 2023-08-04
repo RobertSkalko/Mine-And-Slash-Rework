@@ -18,25 +18,25 @@ public class StaffRuneWords implements ExileRegistryInit, GearDataHelper {
     public void registerAll() {
 
         UniqueGearBuilder.of(
-                "heavenly_rainbow",
-                "Heavenly Rainbow",
-                BaseGearTypes.STAFF)
-            .setReplacesName()
-            .baseStats(
-                Arrays.asList(
-                    this.getAttackDamageStat(WeaponTypes.staff, Number.THIRD, Elements.Water),
-                    this.getAttackDamageStat(WeaponTypes.staff, Number.THIRD, Elements.Fire),
-                    this.getAttackDamageStat(WeaponTypes.staff, Number.THIRD, Elements.Earth)
+                        "heavenly_rainbow",
+                        "Heavenly Rainbow",
+                        BaseGearTypes.STAFF)
+                .setReplacesName()
+                .baseStats(
+                        Arrays.asList(
+                                this.getAttackDamageStat(WeaponTypes.staff, Number.THIRD, Elements.Cold),
+                                this.getAttackDamageStat(WeaponTypes.staff, Number.THIRD, Elements.Fire),
+                                this.getAttackDamageStat(WeaponTypes.staff, Number.THIRD, Elements.Chaos)
+                        )
                 )
-            )
-            .stats(Arrays.asList(
-                new StatModifier(-25, 25, Stats.ELEMENTAL_DAMAGE.get(Elements.Water)),
-                new StatModifier(-25, 25, Stats.ELEMENTAL_DAMAGE.get(Elements.Fire)),
-                new StatModifier(-25, 25, Stats.ELEMENTAL_DAMAGE.get(Elements.Earth))
-            ))
-            .makeRuneWordOnly(Arrays.asList(RuneItem.RuneType.YUN, RuneItem.RuneType.MOS, RuneItem.RuneType.ORU, RuneItem.RuneType.VEN))
-            .devComment("all ele high rng staff")
-            .build();
+                .stats(Arrays.asList(
+                        new StatModifier(-25, 25, Stats.ELEMENTAL_DAMAGE.get(Elements.Cold)),
+                        new StatModifier(-25, 25, Stats.ELEMENTAL_DAMAGE.get(Elements.Fire)),
+                        new StatModifier(-25, 25, Stats.ELEMENTAL_DAMAGE.get(Elements.Chaos))
+                ))
+                .makeRuneWordOnly(Arrays.asList(RuneItem.RuneType.YUN, RuneItem.RuneType.MOS, RuneItem.RuneType.ORU, RuneItem.RuneType.VEN))
+                .devComment("all ele high rng staff")
+                .build();
 
     }
 }

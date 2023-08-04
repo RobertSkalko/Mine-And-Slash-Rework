@@ -14,7 +14,6 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Hea
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
 import com.robertx22.age_of_exile.database.data.tiers.base.Difficulty;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import com.robertx22.age_of_exile.dimension.dungeon_data.DungeonData;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.unit.InCalcStatData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
@@ -38,16 +37,16 @@ public class MobStatUtils {
         Difficulty tier = mobdata.getMapDifficulty();
 
         for (InCalcStatData data : unit.getStats().statsInCalc
-            .values()
-            .stream()
-            .filter(x -> x.GetStat() != Health.getInstance() && !x.GetStat()
-                .IsPercent())
-            .collect(Collectors.toList())) {
+                .values()
+                .stream()
+                .filter(x -> x.GetStat() != Health.getInstance() && !x.GetStat()
+                        .IsPercent())
+                .collect(Collectors.toList())) {
 
             int num = (int) ((tier.stat_multi - 1F) * 100F);
             ExactStatData.noScaling(num, ModType.PERCENT, data.GetStat()
-                    .GUID())
-                .applyStats(mobdata);
+                            .GUID())
+                    .applyStats(mobdata);
 
             //data.multiplyFlat(tier.stat_multi);
         }
@@ -57,19 +56,11 @@ public class MobStatUtils {
         int hp = (int) ((multi) * 100F);
 
         ExactStatData.noScaling(hp, ModType.PERCENT, Health.getInstance()
-                .GUID())
-            .applyStats(mobdata);
+                        .GUID())
+                .applyStats(mobdata);
 
         if (WorldUtils.isMapWorldClass(en.level)) {
-            DungeonData data = Load.dungeonData(en.level).data.get(en.blockPosition()).data;
-            if (!data.isEmpty()) {
-                data.af.getStats(mobdata.getLevel())
-                    .forEach(x -> x.applyStats(mobdata));
-
-                data.team.getMobStr(data.dun_type)
-                    .addStats(mobdata);
-
-            }
+         
 
         }
 
@@ -78,9 +69,9 @@ public class MobStatUtils {
     public static List<StatContext> getAffixStats(LivingEntity en) {
         List<StatContext> list = new ArrayList<>();
         Load.Unit(en)
-            .getAffixData()
-            .getAffixes()
-            .forEach(x -> list.addAll(x.getStatAndContext(en)));
+                .getAffixData()
+                .getAffixes()
+                .forEach(x -> list.addAll(x.getStatAndContext(en)));
         return list;
 
     }
@@ -94,9 +85,9 @@ public class MobStatUtils {
         float val = (-1F + ExileDB.getDimensionConfig(en.level).mob_strength_multi) * 100F;
 
         stats.add(ExactStatData.noScaling(val, ModType.GLOBAL_INCREASE, Health.getInstance()
-            .GUID()));
+                .GUID()));
         stats.add(ExactStatData.noScaling(val, ModType.GLOBAL_INCREASE, Stats.TOTAL_DAMAGE.get()
-            .GUID()));
+                .GUID()));
 
         list.add(new MiscStatCtx(stats));
 
@@ -117,18 +108,18 @@ public class MobStatUtils {
         float stat = (float) ((-1F + config.stat_multi) * 100F);
 
         stats.add(ExactStatData.noScaling(hp, ModType.GLOBAL_INCREASE, Health.getInstance()
-            .GUID()));
+                .GUID()));
         stats.add(ExactStatData.noScaling(dmg, ModType.FLAT, Stats.TOTAL_DAMAGE.get()
-            .GUID()));
+                .GUID()));
 
         stats.add(ExactStatData.noScaling(stat, ModType.GLOBAL_INCREASE, DodgeRating.getInstance()
-            .GUID()));
+                .GUID()));
         stats.add(ExactStatData.noScaling(stat, ModType.GLOBAL_INCREASE, Armor.getInstance()
-            .GUID()));
+                .GUID()));
         stats.add(ExactStatData.noScaling(stat, ModType.GLOBAL_INCREASE, new ElementalResist(Elements.Elemental)
-            .GUID()));
+                .GUID()));
         stats.add(ExactStatData.noScaling(stat, ModType.GLOBAL_INCREASE, Health.getInstance()
-            .GUID()));
+                .GUID()));
 
         list.add(new MiscStatCtx(stats));
 
@@ -154,23 +145,23 @@ public class MobStatUtils {
         hpToAdd *= ScalingPlayerDiffData.getHPMulti(unitdata.mobScalingDiff);
 
         stats.add(ExactStatData.scaleTo(hpToAdd, ModType.FLAT, Health.getInstance()
-            .GUID(), lvl));
+                .GUID(), lvl));
 
         stats.add(ExactStatData.scaleTo(0.5F, ModType.FLAT, HealthRegen.getInstance()
-            .GUID(), lvl));
+                .GUID(), lvl));
 
         stats.add(ExactStatData.scaleTo(1, ModType.FLAT, Stats.ACCURACY.get()
-            .GUID(), lvl));
+                .GUID(), lvl));
         stats.add(ExactStatData.scaleTo(10 * rar.StatMultiplier(), ModType.FLAT, Armor.getInstance()
-            .GUID(), lvl));
+                .GUID(), lvl));
         stats.add(ExactStatData.scaleTo(10 * rar.StatMultiplier(), ModType.FLAT, new ElementalResist(Elements.Elemental)
-            .GUID(), lvl));
+                .GUID(), lvl));
 
         stats.add(ExactStatData.scaleTo(5 * rar.DamageMultiplier(), ModType.FLAT, Stats.CRIT_CHANCE.get()
-            .GUID(), lvl));
+                .GUID(), lvl));
 
         stats.add(ExactStatData.scaleTo(-25, ModType.FLAT, SpellDamage.getInstance()
-            .GUID(), lvl));
+                .GUID(), lvl));
 
         list.add(new MiscStatCtx(stats));
 

@@ -31,10 +31,10 @@ public class CreateLangFile {
             for (IAutoLocName iauto : entry.getValue()) {
 
                 if (iauto.shouldRegisterLangName() && iauto.locNameForLangFile() != null && !iauto.locNameForLangFile()
-                    .isEmpty()) {
+                        .isEmpty()) {
 
                     if (iauto.locNameForLangFile()
-                        .contains("\"")) {
+                            .contains("\"")) {
                         try {
                             throw new Exception(iauto.locNameForLangFile() + " contains double \"");
                         } catch (Exception e) {
@@ -60,10 +60,10 @@ public class CreateLangFile {
             json += CreateLangFileUtils.comment(entry.getKey());
             for (IAutoLocDesc iauto : entry.getValue()) {
                 if (iauto.shouldRegisterLangDesc() && iauto.locDescForLangFile()
-                    .isEmpty() == false) {
+                        .isEmpty() == false) {
 
                     if (iauto.locDescForLangFile()
-                        .contains("\"")) {
+                            .contains("\"")) {
                         try {
                             throw new Exception(iauto.locDescForLangFile() + " contains double \"");
                         } catch (Exception e) {
@@ -102,7 +102,7 @@ public class CreateLangFile {
             fw.write(json);
             fw.close();
             System.out.println("Saved lang file to " + file.toPath()
-                .toString());
+                    .toString());
 
         } catch (Exception e) {
             System.out.println(e);
@@ -114,62 +114,60 @@ public class CreateLangFile {
         List<IAutoLocName> list = CreateLangFileUtils.getFromRegistries(IAutoLocName.class);
 
         list.addAll(ExileDB.MobAffixes()
-            .getSerializable());
+                .getSerializable());
         list.addAll(ExileDB.Synergies()
-            .getSerializable());
+                .getSerializable());
         list.addAll(ExileDB.GearSlots()
-            .getSerializable());
+                .getSerializable());
         list.addAll(ExileDB.Difficulties()
-            .getSerializable());
+                .getSerializable());
         list.addAll(ExileDB.Sets()
-            .getSerializable());
+                .getSerializable());
         list.addAll(ExileDB.Perks()
-            .getSerializable());
+                .getSerializable());
         list.addAll(ExileDB.Spells()
-            .getSerializable());
+                .getSerializable());
         list.addAll(ExileDB.UniqueGears()
-            .getSerializable());
+                .getSerializable());
         list.addAll(ExileDB.Affixes()
-            .getSerializable());
+                .getSerializable());
         list.addAll(ExileDB.FavorRanks()
-            .getSerializable());
+                .getSerializable());
 
         List<Stat> stats = ExileDB.Stats()
-            .getList()
-            .stream()
-            .filter(x -> !x.isFromDatapack())
-            .collect(Collectors.toList());
+                .getList()
+                .stream()
+                .filter(x -> !x.isFromDatapack())
+                .collect(Collectors.toList());
         list.addAll(ExileDB.Stats()
-            .getSerializable());
+                .getSerializable());
         list.addAll(stats);
 
         list.addAll(ExileDB.GearTypes()
-            .getSerializable());
+                .getSerializable());
         list.addAll(ExileDB.ExileEffects()
-            .getSerializable());
+                .getSerializable());
         list.addAll(Arrays.asList(Words.values()));
         list.addAll(ExileDB.GearRarities()
-            .getSerializable());
+                .getSerializable());
         list.addAll(ExileDB.MobRarities()
-            .getSerializable());
+                .getSerializable());
         list.addAll(Arrays.asList(Chats.values()));
         list.addAll(Arrays.asList(RandomTips.values()));
-        list.addAll(ExileDB.Ingredients()
-            .getSerializable());
-
+    
         ExileDB.Spells()
-            .getSerializable()
-            .forEach(x -> list.add(new OneOfAKindName(x)));
+                .getSerializable()
+                .forEach(x -> list.add(new OneOfAKindName(x)));
 
         HashMap<IAutoLocName.AutoLocGroup, List<IAutoLocName>> map = new HashMap<>();
 
         for (IAutoLocName.AutoLocGroup autoLocGroup : IAutoLocName.AutoLocGroup.values()) {
             map.put(
-                autoLocGroup,
-                list.stream()
-                    .filter(x -> x.locNameGroup()
-                        .equals(autoLocGroup))
-                    .collect(Collectors.toList())
+                    autoLocGroup,
+                    list.stream()
+                            .filter(x -> x.locNameGroup()
+                                    .equals(autoLocGroup))
+                            .collect(Collectors.toList())
             );
         }
 
@@ -179,8 +177,8 @@ public class CreateLangFile {
             CreateLangFileUtils.sortName(sortedlist);
             if (sortedlist.size() > 0) {
                 sortedMap.put(entry.getValue()
-                    .get(0)
-                    .getGroupName(), sortedlist);
+                        .get(0)
+                        .getGroupName(), sortedlist);
             }
         }
 
@@ -192,15 +190,15 @@ public class CreateLangFile {
         List<IAutoLocDesc> list = CreateLangFileUtils.getFromRegistries(IAutoLocDesc.class);
 
         list.addAll(ExileDB.Spells()
-            .getSerializable());
+                .getSerializable());
 
         List<Stat> stats = ExileDB.Stats()
-            .getList()
-            .stream()
-            .filter(x -> !x.isFromDatapack())
-            .collect(Collectors.toList());
+                .getList()
+                .stream()
+                .filter(x -> !x.isFromDatapack())
+                .collect(Collectors.toList());
         list.addAll(ExileDB.Stats()
-            .getSerializable());
+                .getSerializable());
 
         list.addAll(stats);
 
@@ -208,11 +206,11 @@ public class CreateLangFile {
 
         for (IAutoLocName.AutoLocGroup autoLocGroup : IAutoLocName.AutoLocGroup.values()) {
             map.put(
-                autoLocGroup,
-                list.stream()
-                    .filter(x -> x.locDescGroup()
-                        .equals(autoLocGroup))
-                    .collect(Collectors.toList())
+                    autoLocGroup,
+                    list.stream()
+                            .filter(x -> x.locDescGroup()
+                                    .equals(autoLocGroup))
+                            .collect(Collectors.toList())
             );
         }
 
@@ -222,8 +220,8 @@ public class CreateLangFile {
             CreateLangFileUtils.sortDesc(sortedlist);
             if (sortedlist.size() > 0) {
                 sortedMap.put(entry.getValue()
-                    .get(0)
-                    .getDescGroupName(), sortedlist);
+                        .get(0)
+                        .getDescGroupName(), sortedlist);
             }
         }
 

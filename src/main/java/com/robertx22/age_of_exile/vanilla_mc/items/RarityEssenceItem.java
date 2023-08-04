@@ -6,15 +6,11 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.library_of_exile.registry.IGUID;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -29,7 +25,7 @@ public class RarityEssenceItem extends Item implements IGUID, ISalvagable {
 
     public RarityEssenceItem() {
         super(new Properties().stacksTo(64)
-            .tab(CreativeTabs.GemRuneCurrency));
+                .tab(CreativeTabs.GemRuneCurrency));
     }
 
     @Override
@@ -38,7 +34,7 @@ public class RarityEssenceItem extends Item implements IGUID, ISalvagable {
         if (this.allowdedIn(group)) {
 
             for (GearRarity rar : ExileDB.GearRarities()
-                .getList()) {
+                    .getList()) {
                 if (rar.rar_ess_per_sal > 0) {
                     stacks.add(rar.getRarityEssenceStack());
                 }
@@ -47,6 +43,7 @@ public class RarityEssenceItem extends Item implements IGUID, ISalvagable {
         }
     }
 
+    /*
     @Override
     public ActionResult<ItemStack> use(World worldIn, PlayerEntity player, Hand handIn) {
         ItemStack stack = player.getItemInHand(handIn);
@@ -69,6 +66,8 @@ public class RarityEssenceItem extends Item implements IGUID, ISalvagable {
         return ActionResult.success(stack);
     }
 
+     */
+
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag context) {
@@ -80,10 +79,10 @@ public class RarityEssenceItem extends Item implements IGUID, ISalvagable {
             if (rar != null) {
                 tooltip.clear();
                 tooltip.add(rar.locName()
-                    .withStyle(rar.textFormatting())
-                    .append(" ")
-                    .append(Words.Essence.locName())
-                    .withStyle(rar.textFormatting()));
+                        .withStyle(rar.textFormatting())
+                        .append(" ")
+                        .append(Words.Essence.locName())
+                        .withStyle(rar.textFormatting()));
 
                 tooltip.add(new StringTextComponent("Click to combine 9 into a rarity upgrade stone"));
                 tooltip.add(new StringTextComponent("Can be salvaged."));

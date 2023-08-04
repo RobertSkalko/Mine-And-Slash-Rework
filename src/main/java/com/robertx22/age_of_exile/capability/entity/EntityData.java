@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.capability.entity;
 
-import com.robertx22.addon.infinite_dungeons.InfiniteDungeonWrapper;
 import com.robertx22.age_of_exile.capability.bases.EntityGears;
 import com.robertx22.age_of_exile.capability.bases.ICommonPlayerCap;
 import com.robertx22.age_of_exile.capability.bases.INeededForClient;
@@ -17,11 +16,8 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Ene
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.tiers.base.Difficulty;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import com.robertx22.age_of_exile.dimension.dungeon_data.DungeonData;
-import com.robertx22.age_of_exile.dimension.dungeon_data.WorldDungeonCap;
 import com.robertx22.age_of_exile.event_hooks.my_events.CollectGearEvent;
 import com.robertx22.age_of_exile.event_hooks.player.OnLogin;
-import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.saveclasses.CustomExactStatsData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.unit.*;
@@ -39,7 +35,6 @@ import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityTypeUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.OnScreenMessageUtils;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.age_of_exile.vanilla_mc.potion_effects.EntityStatusEffectsData;
 import com.robertx22.library_of_exile.components.forge.BaseProvider;
 import com.robertx22.library_of_exile.components.forge.BaseStorage;
@@ -54,7 +49,6 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.play.server.STitlePacket;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -168,7 +162,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
         nbt.putString(RACE, race);
         nbt.putInt(SCROLL_BUFF_SEED, buffSeed);
         nbt.putInt(HP, (int) getUnit().getCalculatedStat(Health.getInstance())
-            .getValue());
+                .getValue());
         nbt.putString(ENTITY_TYPE, this.type.toString());
         nbt.putFloat(MOB_SCALE_DIFF, this.mobScalingDiff);
 
@@ -305,15 +299,15 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
 
         if (type == ResourceType.blood) {
             return getUnit().bloodData()
-                .getValue();
+                    .getValue();
         } else if (type == ResourceType.mana) {
             return getUnit().manaData()
-                .getValue();
+                    .getValue();
         } else if (type == ResourceType.health) {
             return entity.getMaxHealth();
         } else if (type == ResourceType.energy) {
             return getUnit().energyData()
-                .getValue();
+                    .getValue();
         }
 
         return 0;
@@ -384,11 +378,11 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
     public MobRarity getMobRarity() {
         String rar = rarity;
         if (!ExileDB.MobRarities()
-            .isRegistered(rar)) {
+                .isRegistered(rar)) {
             rar = IRarity.COMMON_ID;
         }
         return ExileDB.MobRarities()
-            .get(rar);
+                .get(rar);
     }
 
     public void setUUID(UUID id) {
@@ -399,17 +393,17 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
 
         if (entity instanceof PlayerEntity) {
             return new StringTextComponent("")
-                .append(entity.getDisplayName());
+                    .append(entity.getDisplayName());
 
         } else {
 
             MobRarity rarity = ExileDB.MobRarities()
-                .get(getRarity());
+                    .get(getRarity());
 
             TextFormatting rarformat = rarity.textFormatting();
 
             IFormattableTextComponent name = new StringTextComponent("").append(entity.getDisplayName())
-                .withStyle(rarformat);
+                    .withStyle(rarformat);
 
             String icons = "";
 
@@ -421,11 +415,11 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
             }
 
             IFormattableTextComponent finalName = new StringTextComponent(icons).append(
-                name);
+                    name);
 
             IFormattableTextComponent part = new StringTextComponent("")
-                .append(finalName)
-                .withStyle(rarformat);
+                    .append(finalName)
+                    .withStyle(rarformat);
 
             IFormattableTextComponent tx = (part);
 
@@ -497,7 +491,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
                 }
 
                 Load.playerRPGData(player).favor
-                    .setFavor(ServerContainer.get().STARTING_FAVOR.get()); // newbie starting favor
+                        .setFavor(ServerContainer.get().STARTING_FAVOR.get()); // newbie starting favor
 
             }
 
@@ -509,11 +503,11 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
     public boolean increaseRarity() {
 
         MobRarity rar = ExileDB.MobRarities()
-            .get(rarity);
+                .get(rarity);
 
         if (rar.hasHigherRarity()) {
             rarity = rar.getHigherRarity()
-                .GUID();
+                    .GUID();
             this.equipsChanged = true;
             this.shouldSync = true;
             this.forceRecalculateStats();
@@ -529,16 +523,12 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
 
     public Difficulty getMapDifficulty() {
 
-        if (WorldUtils.isMapWorldClass(entity.level)) {
-            WorldDungeonCap data = Load.dungeonData(entity.level);
-            return data.data.get(entity.blockPosition()).data.getDifficulty();
-        }
 
         return ExileDB.Difficulties()
-            .getList()
-            .stream()
-            .min(Comparator.comparingInt(x -> x.rank))
-            .get();
+                .getList()
+                .stream()
+                .min(Comparator.comparingInt(x -> x.rank))
+                .get();
 
     }
 
@@ -561,13 +551,13 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
     public void attackWithWeapon(AttackInformation data) {
 
         if (data.weaponData.GetBaseGearType()
-            .getWeaponMechanic() != null) {
+                .getWeaponMechanic() != null) {
 
             GearSlot slot = data.weaponData.GetBaseGearType()
-                .getGearSlot();
+                    .getGearSlot();
 
             float cost = Energy.getInstance()
-                .scale(ModType.FLAT, slot.energy_cost, getLevel());
+                    .scale(ModType.FLAT, slot.energy_cost, getLevel());
             SpendResourceEvent event = new SpendResourceEvent(entity, ResourceType.energy, cost);
             event.calculateEffects();
 
@@ -582,16 +572,16 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
             }
 
             data.weaponData.GetBaseGearType()
-                .getWeaponMechanic()
-                .attack(data);
+                    .getWeaponMechanic()
+                    .attack(data);
 
         }
     }
 
     public void mobBasicAttack(AttackInformation data) {
         MobRarity rar = ExileDB.MobRarities()
-            .get(data.getAttackerEntityData()
-                .getRarity());
+                .get(data.getAttackerEntityData()
+                        .getRarity());
 
         float multi = (float) (ServerContainer.get().VANILLA_MOB_DMG_AS_EXILE_DMG.get() + (LevelUtils.getMaxLevelMultiplier(getLevel()) * (ServerContainer.get().VANILLA_MOB_DMG_AS_EXILE_DMG_AT_MAX_LVL.get() - ServerContainer.get().VANILLA_MOB_DMG_AS_EXILE_DMG.get())));
 
@@ -606,14 +596,14 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
         PlayStyle style = PlayStyle.melee;
 
         if (data.getSource() != null && data.getSource()
-            .isProjectile()) {
+                .isProjectile()) {
             style = PlayStyle.ranged;
         }
 
         DamageEvent dmg = EventBuilder.ofDamage(data, entity, data.getTargetEntity(), num)
-            .setupDamage(AttackType.attack, WeaponTypes.none, style)
-            .setIsBasicAttack()
-            .build();
+                .setupDamage(AttackType.attack, WeaponTypes.none, style)
+                .setIsBasicAttack()
+                .build();
 
         dmg.Activate();
 
@@ -654,16 +644,8 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
     public void SetMobLevelAtSpawn(PlayerEntity nearestPlayer) {
         this.setMobStats = true;
 
-        if (MMORPG.isInfiniteDungeonsLoaded()) {
-            if (InfiniteDungeonWrapper.isDungeonMob(entity)) {
-                if (nearestPlayer != null) {
-                    this.setLevel(Load.Unit(nearestPlayer)
-                        .getLevel());
-                    return;
-                }
-            }
-        }
 
+        /*
         if (WorldUtils.isMapWorldClass(entity.level)) {
             try {
                 BlockPos pos = entity.blockPosition();
@@ -680,6 +662,8 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
             }
         }
 
+         */
+
         setMobLvlNormally(entity, nearestPlayer);
 
     }
@@ -688,7 +672,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
         EntityConfig entityConfig = ExileDB.getEntityConfig(entity, this);
 
         LevelUtils.LevelDetermInfo lvl = LevelUtils.determineLevel(entity.level, entity.blockPosition(),
-            nearestPlayer
+                nearestPlayer
         );
 
         if (nearestPlayer != null) {
@@ -785,7 +769,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
         for (GearData x : gears) {
             if (x.gear != null) {
                 if (!x.gear.GetBaseGearType()
-                    .isWeapon() && !x.gear.GetBaseGearType().tags.contains(BaseGearType.SlotTag.offhand_family)) {
+                        .isWeapon() && !x.gear.GetBaseGearType().tags.contains(BaseGearType.SlotTag.offhand_family)) {
                     totalILVL += x.gear.getILVL();
                 }
             }

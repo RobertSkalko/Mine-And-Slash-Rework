@@ -43,7 +43,6 @@ public abstract class BaseModificationStation extends TileEntity implements ISid
     public int fuel = 0;
 
     public int expEarned = 0;
-    OwnerData ownerData = new OwnerData();
 
     public UUID ownerID = EMPTY_ID;
 
@@ -56,8 +55,8 @@ public abstract class BaseModificationStation extends TileEntity implements ISid
         PlayerEntity en = null;
         try {
             en = level.getServer()
-                .getPlayerList()
-                .getPlayer(ownerID);
+                    .getPlayerList()
+                    .getPlayer(ownerID);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -82,23 +81,14 @@ public abstract class BaseModificationStation extends TileEntity implements ISid
                 ISmeltingStation smelt = (ISmeltingStation) this;
                 smelt.onSmeltTick();
                 level.setBlock(this.worldPosition, this.level.getBlockState(this.worldPosition)
-                    .setValue(NonFullBlock.light, this.cook_ticks > 0), 3);
+                        .setValue(NonFullBlock.light, this.cook_ticks > 0), 3);
             }
             if (ticks % 2000 == 0) {
-                updateOwnerData();
+                //    updateOwnerData();
             }
         }
     }
 
-    void updateOwnerData() {
-
-        PlayerEntity p = getOwner();
-
-        if (p != null) {
-            this.ownerData = new OwnerData(p);
-        }
-
-    }
 
     @Override
     public int[] getSlotsForFace(Direction side) {
@@ -127,12 +117,12 @@ public abstract class BaseModificationStation extends TileEntity implements ISid
         if (this instanceof IAutomatable) {
             IAutomatable auto = (IAutomatable) this;
             if (direction.getAxis()
-                .isVertical() && auto.isInputSlot(index)) {
+                    .isVertical() && auto.isInputSlot(index)) {
                 // don't insert shit
                 return auto.isValidInput(stack);
             }
             if (direction.getAxis()
-                .isHorizontal()) {
+                    .isHorizontal()) {
                 // don't insert shit
                 if (auto.isFuelSlot(index)) {
                     return auto.isValidFuel(stack);
@@ -295,7 +285,7 @@ public abstract class BaseModificationStation extends TileEntity implements ISid
         final double Z_CENTRE_OFFSET = 0.5;
         final double MAXIMUM_DISTANCE_SQ = 8.0 * 8.0;
         return player.distanceToSqr(worldPosition.getX() + X_CENTRE_OFFSET, worldPosition.getY() + Y_CENTRE_OFFSET, worldPosition
-            .getZ() + Z_CENTRE_OFFSET) < MAXIMUM_DISTANCE_SQ;
+                .getZ() + Z_CENTRE_OFFSET) < MAXIMUM_DISTANCE_SQ;
     }
 
     @Override

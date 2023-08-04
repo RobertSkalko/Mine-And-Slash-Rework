@@ -16,19 +16,19 @@ public class FabledJewelry implements ExileRegistryInit {
     @Override
     public void registerAll() {
         UniqueGearBuilder.of(
-                "azuna_ring",
-                "Azuna's Eternal Decree",
-                BaseGearTypes.RING)
-            .setReplacesName()
-            .stats(Arrays.asList(
-                new StatModifier(10, 15, new ElementalResist(Elements.Fire), ModType.PERCENT),
-                new StatModifier(10, 15, new ElementalResist(Elements.Earth), ModType.PERCENT),
-                new StatModifier(5, 5, DatapackStats.GLOBAL_CRIT_CHANCE_PER_MAGIC_FIND_25, ModType.FLAT),
-                new StatModifier(10, 10, DatapackStats.GLOBAL_CRIT_DMG_PER_ITEM_FIND_25, ModType.FLAT)
-            ))
+                        "azuna_ring",
+                        "Azuna's Eternal Decree",
+                        BaseGearTypes.RING)
+                .setReplacesName()
+                .stats(Arrays.asList(
+                        new StatModifier(10, 15, new ElementalResist(Elements.Fire), ModType.PERCENT),
+                        new StatModifier(10, 15, new ElementalResist(Elements.Chaos), ModType.PERCENT),
+                        new StatModifier(5, 5, DatapackStats.GLOBAL_CRIT_CHANCE_PER_MAGIC_FIND_25, ModType.FLAT),
+                        new StatModifier(10, 10, DatapackStats.GLOBAL_CRIT_DMG_PER_ITEM_FIND_25, ModType.FLAT)
+                ))
 
-            .devComment("God's ring: item find and luck")
-            .build();
+                .devComment("God's ring: item find and luck")
+                .build();
 
     }
 }

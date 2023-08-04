@@ -74,7 +74,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
     @Override
     public String locNameLangFileGUID() {
         return Registry.ITEM.getKey(this)
-            .toString();
+                .toString();
     }
 
     @Override
@@ -130,18 +130,18 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
 
                     if (success) {
                         ItemStack newstack = new ItemStack(getGem().getHigherTierGem()
-                            .getItem());
+                                .getItem());
                         Packets.sendToClient(p, new TotemAnimationPacket(newstack));
                         p.displayClientMessage(new StringTextComponent(TextFormatting.GREEN + "").append(old.getName(new ItemStack(old)))
-                            .append(" has been upgraded to ")
-                            .append(newstack.getDisplayName()), false);
+                                .append(" has been upgraded to ")
+                                .append(newstack.getDisplayName()), false);
                         PlayerUtils.giveItem(newstack, p);
 
                     } else {
                         SoundUtils.playSound(p, SoundEvents.VILLAGER_NO, 1, 1);
 
                         p.displayClientMessage(new StringTextComponent(TextFormatting.RED + "").append(old.getName(new ItemStack(old)))
-                            .append(" has failed the upgrade and was destroyed."), false);
+                                .append(" has failed the upgrade and was destroyed."), false);
                     }
                 }
             }
@@ -324,8 +324,8 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
             }
         }),
         RUBY("ruby", "Ruby", TextFormatting.RED, new EleGem(Elements.Fire)),
-        EMERALD("emerald", "Emerald", TextFormatting.GREEN, new EleGem(Elements.Earth)),
-        SAPPHIRE("sapphire", "Sapphire", TextFormatting.BLUE, new EleGem(Elements.Water));
+        EMERALD("emerald", "Emerald", TextFormatting.GREEN, new EleGem(Elements.Chaos)),
+        SAPPHIRE("sapphire", "Sapphire", TextFormatting.BLUE, new EleGem(Elements.Cold));
 
         public String locName;
         public String id;
@@ -380,7 +380,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
 
     public GemItem(GemType type, GemRank gemRank) {
         super(new Properties().tab(CreativeTabs.Gems)
-            .stacksTo(16));
+                .stacksTo(16));
 
         this.gemType = type;
         this.gemRank = gemRank;
@@ -401,13 +401,13 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
 
     public Gem getGem() {
         String id = Registry.ITEM.getKey(this)
-            .toString();
+                .toString();
 
         Optional<Gem> opt = ExileDB.Gems()
-            .getList()
-            .stream()
-            .filter(x -> id.equals(x.item_id))
-            .findFirst();
+                .getList()
+                .stream()
+                .filter(x -> id.equals(x.item_id))
+                .findFirst();
 
         return opt.orElse(new Gem());
     }

@@ -58,7 +58,7 @@ public class Unit {
 
     @Store
     public String GUID = UUID.randomUUID()
-        .toString();
+            .toString();
 
     public InCalcStatData getStatInCalculation(Stat stat) {
         return getStats().getStatInCalculation(stat);
@@ -70,7 +70,7 @@ public class Unit {
 
     public boolean isBloodMage() {
         return getCalculatedStat(BloodUser.getInstance())
-            .getValue() > 0;
+                .getValue() > 0;
     }
 
     public StatContainer getStats() {
@@ -165,14 +165,14 @@ public class Unit {
     public String randomRarity(LivingEntity entity, EntityData data) {
 
         List<MobRarity> rarities = ExileDB.MobRarities()
-            .getList()
-            .stream()
-            .filter(x -> data.getLevel() >= x.minMobLevelForRandomSpawns() || data.getLevel() >= GameBalanceConfig.get().MAX_LEVEL)
-            .collect(Collectors.toList());
+                .getList()
+                .stream()
+                .filter(x -> data.getLevel() >= x.minMobLevelForRandomSpawns() || data.getLevel() >= GameBalanceConfig.get().MAX_LEVEL)
+                .collect(Collectors.toList());
 
         if (rarities.isEmpty()) {
             rarities.add(ExileDB.MobRarities()
-                .get(IRarity.COMMON_ID));
+                    .get(IRarity.COMMON_ID));
         }
 
         MobRarity finalRarity = RandomUtils.weightedRandom(rarities);
@@ -231,7 +231,7 @@ public class Unit {
                                 setUniqueids.add(uniq.GUID());
                                 GearSet set = uniq.getSet();
                                 String key = set
-                                    .GUID();
+                                        .GUID();
                                 int current = sets.getOrDefault(key, 0);
                                 sets.put(key, current + 1);
                             }
@@ -273,22 +273,20 @@ public class Unit {
             if (entity instanceof PlayerEntity) {
 
                 sets.entrySet()
-                    .forEach(x -> {
-                        GearSet set = ExileDB.Sets()
-                            .get(x.getKey());
-                        statContexts.add(set.getStats(data));
-                    });
+                        .forEach(x -> {
+                            GearSet set = ExileDB.Sets()
+                                    .get(x.getKey());
+                            statContexts.add(set.getStats(data));
+                        });
 
                 Load.playerRPGData((PlayerEntity) entity).statPoints.addStats(data);
                 statContexts.addAll(PlayerStatUtils.AddPlayerBaseStats(entity));
                 statContexts.addAll(Load.playerRPGData((PlayerEntity) entity).talents
-                    .getStatAndContext(entity));
-                statContexts.addAll(Load.playerRPGData((PlayerEntity) entity).professions
-                    .getStatAndContext(entity));
+                        .getStatAndContext(entity));
                 statContexts.addAll(Load.spells(entity)
-                    .getStatAndContext(entity));
+                        .getStatAndContext(entity));
                 statContexts.add(data.getStatusEffectsData()
-                    .getStats(entity));
+                        .getStats(entity));
             } else {
                 statContexts.addAll(MobStatUtils.getMobBaseStats(data, entity));
                 statContexts.addAll(MobStatUtils.getAffixStats(entity));
@@ -306,55 +304,55 @@ public class Unit {
             }
             statContexts.forEach(x -> {
                 map.get(x.type)
-                    .add(x);
+                        .add(x);
             });
 
             map.forEach((key, value) -> value
-                .forEach(v -> {
-                    v.stats.forEach(s -> {
-                        if (s.getStat().statContextModifier != null) {
-                            map.get(s.getStat().statContextModifier.getCtxTypeNeeded())
-                                .forEach(c -> s.getStat().statContextModifier.modify(s, c));
-                        }
-                    });
-                }));
+                    .forEach(v -> {
+                        v.stats.forEach(s -> {
+                            if (s.getStat().statContextModifier != null) {
+                                map.get(s.getStat().statContextModifier.getCtxTypeNeeded())
+                                        .forEach(c -> s.getStat().statContextModifier.modify(s, c));
+                            }
+                        });
+                    }));
 
             statContexts.forEach(x -> x.stats.forEach(s -> s.applyStats(data)));
 
             addVanillaHpToStats(entity, data);
 
             new HashMap<>(getStats().statsInCalc).entrySet()
-                .forEach(x -> {
-                    InCalcStatData statdata = x.getValue();
-                    Stat stat = x.getValue()
-                        .GetStat();
-                    if (stat instanceof IAffectsStats) {
-                        IAffectsStats add = (IAffectsStats) stat;
-                        add.affectStats(data, statdata);
-                    }
-                });
+                    .forEach(x -> {
+                        InCalcStatData statdata = x.getValue();
+                        Stat stat = x.getValue()
+                                .GetStat();
+                        if (stat instanceof IAffectsStats) {
+                            IAffectsStats add = (IAffectsStats) stat;
+                            add.affectStats(data, statdata);
+                        }
+                    });
 
             new HashMap<>(getStats().statsInCalc).entrySet()
-                .forEach(x -> {
-                    InCalcStatData statdata = x.getValue();
-                    Stat stat = x.getValue()
-                        .GetStat();
-                    if (stat instanceof ITransferToOtherStats) {
-                        ITransferToOtherStats add = (ITransferToOtherStats) stat;
-                        add.transferStats(data, statdata);
-                    }
-                });
+                    .forEach(x -> {
+                        InCalcStatData statdata = x.getValue();
+                        Stat stat = x.getValue()
+                                .GetStat();
+                        if (stat instanceof ITransferToOtherStats) {
+                            ITransferToOtherStats add = (ITransferToOtherStats) stat;
+                            add.transferStats(data, statdata);
+                        }
+                    });
 
             new HashMap<>(getStats().statsInCalc).entrySet()
-                .forEach(x -> {
-                    InCalcStatData statdata = x.getValue();
-                    Stat stat = x.getValue()
-                        .GetStat();
-                    if (stat instanceof ICoreStat) {
-                        ICoreStat add = (ICoreStat) stat;
-                        add.addToOtherStats(data, statdata);
-                    }
-                });
+                    .forEach(x -> {
+                        InCalcStatData statdata = x.getValue();
+                        Stat stat = x.getValue()
+                                .GetStat();
+                        if (stat instanceof ICoreStat) {
+                            ICoreStat add = (ICoreStat) stat;
+                            add.addToOtherStats(data, statdata);
+                        }
+                    });
 
             stats.calculate();
 
@@ -368,36 +366,36 @@ public class Unit {
             });
 
             this.getStats().stats.values()
-                .forEach(x -> {
-                    if (x.GetStat() instanceof AttributeStat) {
-                        AttributeStat stat = (AttributeStat) x.GetStat();
-                        stat.addToEntity(entity, x);
-                    }
+                    .forEach(x -> {
+                        if (x.GetStat() instanceof AttributeStat) {
+                            AttributeStat stat = (AttributeStat) x.GetStat();
+                            stat.addToEntity(entity, x);
+                        }
 
-                });
+                    });
 
             if (entity instanceof PlayerEntity) {
 
                 Load.spells(entity)
-                    .getSpellsData().extra_lvls.clear();
+                        .getSpellsData().extra_lvls.clear();
 
                 // add 1 spell level if you have the spell on gear
                 gears.forEach(x -> {
                     if (x.gear != null && x.gear.hasSpell()) {
                         Load.spells(entity)
-                            .getSpellsData()
-                            .addToLevelsFromStat(x.gear.spell, 1);
+                                .getSpellsData()
+                                .addToLevelsFromStat(x.gear.spell, 1);
                     }
                 });
 
                 this.getStats().stats.values()
-                    .forEach(x -> {
+                        .forEach(x -> {
 
-                        if (x.GetStat() instanceof IAfterStatCalc) {
-                            IAfterStatCalc af = (IAfterStatCalc) x.GetStat();
-                            af.affectUnit(data, x);
-                        }
-                    });
+                            if (x.GetStat() instanceof IAfterStatCalc) {
+                                IAfterStatCalc af = (IAfterStatCalc) x.GetStat();
+                                af.affectUnit(data, x);
+                            }
+                        });
 
             }
             if (old.isDirty(aftercalc)) {
@@ -423,7 +421,7 @@ public class Unit {
             // all increases after this would just reduce enviro damage
 
             getStats().getStatInCalculation(Health.getInstance())
-                .addAlreadyScaledFlat(maxhp);
+                    .addAlreadyScaledFlat(maxhp);
 
             // add vanila hp to extra hp
         }
@@ -452,8 +450,8 @@ public class Unit {
     public static boolean shouldSendUpdatePackets(LivingEntity en) {
         if (ServerContainer.get().DONT_SYNC_DATA_OF_AMBIENT_MOBS.get()) {
             return en.getType()
-                .getCategory() != EntityClassification.AMBIENT && en.getType()
-                .getCategory() != EntityClassification.WATER_AMBIENT;
+                    .getCategory() != EntityClassification.AMBIENT && en.getType()
+                    .getCategory() != EntityClassification.WATER_AMBIENT;
         }
         return true;
     }

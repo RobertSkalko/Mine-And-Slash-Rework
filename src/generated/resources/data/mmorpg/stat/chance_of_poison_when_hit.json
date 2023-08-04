@@ -1,7 +1,7 @@
 {
   "ser": "data",
   "id": "chance_of_poison_when_hit",
-  "ele": "Earth",
+  "ele": "Chaos",
   "effect": {
     "order": 100,
     "side": "Target",

@@ -5,7 +5,7 @@
   "on_armor_stats": [
     {
       "v1": 3.6000001,
-      "stat": "earth_resist",
+      "stat": "chaos_resist",
       "type": "PERCENT",
       "scale_to_lvl": true
     }
@@ -13,7 +13,7 @@
   "on_jewelry_stats": [
     {
       "v1": 3.0,
-      "stat": "spell_earth_damage",
+      "stat": "spell_chaos_damage",
       "type": "FLAT",
       "scale_to_lvl": true
     }
@@ -21,7 +21,7 @@
   "on_weapons_stats": [
     {
       "v1": 4.5,
-      "stat": "all_earth_damage",
+      "stat": "all_chaos_damage",
       "type": "FLAT",
       "scale_to_lvl": true
     }

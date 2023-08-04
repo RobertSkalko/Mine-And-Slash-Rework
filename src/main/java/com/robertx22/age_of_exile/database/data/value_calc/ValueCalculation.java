@@ -61,16 +61,16 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
 
         float amount = 0;
         if (attack_scaling.getValue(provider) > 0) {
-            for (Stat stat : new AttackDamage(Elements.Earth).generateAllPossibleStatVariations()) {
+            for (Stat stat : new AttackDamage(Elements.Chaos).generateAllPossibleStatVariations()) {
                 amount += provider.getCasterData()
-                    .getUnit()
-                    .getCalculatedStat(stat.GUID())
-                    .getValue() * attack_scaling.getValue(provider);
+                        .getUnit()
+                        .getCalculatedStat(stat.GUID())
+                        .getValue() * attack_scaling.getValue(provider);
             }
         }
         amount += getAllScalingValues().stream()
-            .mapToInt(x -> x.getCalculatedValue(provider))
-            .sum();
+                .mapToInt(x -> x.getCalculatedValue(provider))
+                .sum();
 
         return (int) amount;
     }
@@ -98,7 +98,7 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
 
             if (val < 1 || Screen.hasShiftDown()) {
                 text.append(" (" + (int) (attack_scaling.getValue(provider) * 100) + "% Weapon Damage)")
-                    .withStyle(TextFormatting.YELLOW);
+                        .withStyle(TextFormatting.YELLOW);
             }
         }
 
@@ -106,7 +106,7 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
             text.append(getCalculatedValue(provider) + "");
 
             text.append(" ")
-                .append(x.GetTooltipString(provider));
+                    .append(x.GetTooltipString(provider));
         });
 
         return text;

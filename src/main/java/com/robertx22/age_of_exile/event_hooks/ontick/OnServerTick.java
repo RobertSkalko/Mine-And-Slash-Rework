@@ -6,8 +6,6 @@ import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.entities.EntitySavedSpellData;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
-import com.robertx22.age_of_exile.dimension.PopulateDungeonChunks;
-import com.robertx22.age_of_exile.dimension.rules.OnTickSetGameMode;
 import com.robertx22.age_of_exile.mixin_methods.OnItemStoppedUsingCastImbuedSpell;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -41,67 +39,65 @@ public class OnServerTick {
         TICK_ACTIONS.add(new PlayerTickAction("spawn_bow_cast_particles", 1, (player, data) -> {
             if (OnItemStoppedUsingCastImbuedSpell.canCastImbuedSpell(player)) {
                 if (Load.spells(player)
-                    .getCastingData().imbued_spell_stacks > 0) {
+                        .getCastingData().imbued_spell_stacks > 0) {
                     ParticleUtils.spawnParticles(ParticleTypes.WITCH, player.level, player.blockPosition(), 2);
                 }
             }
         }));
 
         TICK_ACTIONS.add(new PlayerTickAction("update_caps", 20, (player, data) -> {
-            OnTickSetGameMode.onTick(player);
             CapSyncUtil.syncPerSecond(player);
             Packets.sendToClient(player, new SyncAreaLevelPacket(LevelUtils.determineLevel(player.level, player.blockPosition(), player).level));
         }));
 
         TICK_ACTIONS.add(new
-            PlayerTickAction("second_pass", 20, (player, data) ->
+                PlayerTickAction("second_pass", 20, (player, data) ->
         {
 
             if (Load.Unit(player)
-                .getResources()
-                .getEnergy() < Load.Unit(player)
-                .getUnit()
-                .energyData()
-                .getValue() / 10) {
+                    .getResources()
+                    .getEnergy() < Load.Unit(player)
+                    .getUnit()
+                    .energyData()
+                    .getValue() / 10) {
                 player.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 20 * 3, 1));
             }
 
             UnequipGear.onTick(player);
             Load.spells(player)
-                .getCastingData().charges.onTicks(player, 20);
+                    .getCastingData().charges.onTicks(player, 20);
         }));
 
         TICK_ACTIONS.add(new
 
-            PlayerTickAction("regen", 60, (player, data) ->
+                PlayerTickAction("regen", 60, (player, data) ->
 
         {
 
             if (player.isAlive()) {
 
-                PopulateDungeonChunks.tryPopulateChunksAroundPlayer(player.level, player);
 
                 EntityData unitdata = Load.Unit(player);
 
                 unitdata.getResources()
-                    .shields.onTicksPassed(60);
+                        .shields.onTicksPassed(60);
 
                 unitdata.tryRecalculateStats();
 
                 RestoreResourceEvent mana = EventBuilder.ofRestore(player, player, ResourceType.mana, RestoreType.regen, 0)
-                    .build();
+                        .build();
                 mana.Activate();
 
                 if (!player.isSprinting()) {
                     RestoreResourceEvent energy = EventBuilder.ofRestore(player, player, ResourceType.energy, RestoreType.regen, 0)
-                        .build();
+                            .build();
                     energy.Activate();
                 }
 
                 boolean restored = false;
 
                 boolean canHeal = player.getFoodData()
-                    .getFoodLevel() >= 16;
+                        .getFoodLevel() >= 16;
 
                 if (canHeal) {
                     if (player.getHealth() < player.getMaxHealth()) {
@@ -109,7 +105,7 @@ public class OnServerTick {
                     }
 
                     RestoreResourceEvent hpevent = EventBuilder.ofRestore(player, player, ResourceType.health, RestoreType.regen, 0)
-                        .build();
+                            .build();
                     hpevent.Activate();
 
                     if (restored) {
@@ -118,10 +114,10 @@ public class OnServerTick {
                         float percentHealed = hpevent.data.getNumber() / HealthUtils.getMaxHealth(player);
 
                         float exhaustion = (float) ServerContainer.get().REGEN_HUNGER_COST.get()
-                            .floatValue() * percentHealed;
+                                .floatValue() * percentHealed;
 
                         player.getFoodData()
-                            .addExhaustion(exhaustion);
+                                .addExhaustion(exhaustion);
 
                     }
                 }
@@ -135,46 +131,46 @@ public class OnServerTick {
         }));
 
         TICK_ACTIONS.add(new
-            PlayerTickAction("every_tick", 1, (player, data) ->
+                PlayerTickAction("every_tick", 1, (player, data) ->
         {
             if (player.isBlocking()) {
                 if (Load.spells(player)
-                    .getCastingData()
-                    .isCasting()) {
-                    Load.spells(player)
                         .getCastingData()
-                        .cancelCast(player);
+                        .isCasting()) {
+                    Load.spells(player)
+                            .getCastingData()
+                            .cancelCast(player);
                 }
             }
 
             Load.spells(player)
-                .getCastingData()
-                .onTimePass(player, Load.spells(player), 1);
+                    .getCastingData()
+                    .onTimePass(player, Load.spells(player), 1);
 
             Load.Unit(player)
-                .getResources()
-                .onTickBlock(player);
+                    .getResources()
+                    .onTickBlock(player);
 
             Spell spell = Load.spells(player)
-                .getCastingData()
-                .getSpellBeingCast();
+                    .getCastingData()
+                    .getSpellBeingCast();
 
             if (spell != null) {
                 spell.getAttached()
-                    .tryActivate(Spell.CASTER_NAME, SpellCtx.onTick(player, player, EntitySavedSpellData.create(Load.Unit(player)
-                        .getLevel(), player, spell)));
+                        .tryActivate(Spell.CASTER_NAME, SpellCtx.onTick(player, player, EntitySavedSpellData.create(Load.Unit(player)
+                                .getLevel(), player, spell)));
 
                 PlayerUtils.getNearbyPlayers(player, 50)
-                    .forEach(x -> {
-                        Packets.sendToClient(x, new TellClientEntityIsCastingSpellPacket(player, spell));
-                    });
+                        .forEach(x -> {
+                            Packets.sendToClient(x, new TellClientEntityIsCastingSpellPacket(player, spell));
+                        });
 
             }
         }));
 
         TICK_ACTIONS.add(new
 
-            PlayerTickAction("level_warning", 200, (player, data) ->
+                PlayerTickAction("level_warning", 200, (player, data) ->
 
         {
 
@@ -186,18 +182,18 @@ public class OnServerTick {
                 }
 
                 int lvl = Load.Unit(player)
-                    .getLevel();
+                        .getLevel();
 
                 if (lvl < 20) {
                     data.isInHighLvlZone = LevelUtils.determineLevel(player.level, player.blockPosition(), player).level - lvl > 10;
 
                     if (wasnt && data.isInHighLvlZone) {
                         OnScreenMessageUtils.sendMessage(
-                            player,
-                            new StringTextComponent("YOU ARE ENTERING").withStyle(TextFormatting.RED)
-                                .withStyle(TextFormatting.BOLD),
-                            new StringTextComponent("A HIGH LEVEL ZONE").withStyle(TextFormatting.RED)
-                                .withStyle(TextFormatting.BOLD));
+                                player,
+                                new StringTextComponent("YOU ARE ENTERING").withStyle(TextFormatting.RED)
+                                        .withStyle(TextFormatting.BOLD),
+                                new StringTextComponent("A HIGH LEVEL ZONE").withStyle(TextFormatting.RED)
+                                        .withStyle(TextFormatting.BOLD));
                     }
                 }
             }
@@ -210,7 +206,7 @@ public class OnServerTick {
     public static void onEndTick(MinecraftServer server) {
 
         for (ServerPlayerEntity player : server.getPlayerList()
-            .getPlayers()) {
+                .getPlayers()) {
 
             try {
 

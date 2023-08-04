@@ -118,7 +118,7 @@
             "type": "damage",
             "map": {
               "value_calculation": "poison_cloud",
-              "element": "Earth"
+              "element": "Chaos"
             }
           }
         ],

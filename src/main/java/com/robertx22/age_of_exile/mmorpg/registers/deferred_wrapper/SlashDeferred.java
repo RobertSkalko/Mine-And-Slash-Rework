@@ -34,7 +34,7 @@ public class SlashDeferred {
 
     public static void registerDefferedAtStartOfModLoading() {
         IEventBus bus = FMLJavaModLoadingContext.get()
-            .getModEventBus();
+                .getModEventBus();
 
         BLOCKS.register(bus);
         ITEMS.register(bus);
@@ -60,16 +60,12 @@ public class SlashDeferred {
 
         //items
         CurrencyItems.init();
-        AlchemyPotions.init();
-        BackpackItems.init();
         ProfessionItems.init();
         SlashItems.init();
         SlashItems.GearItems.init();
         RuneItems.init();
-        IngredientItems.init();
         GemItems.init();
-        CraftToolItems.init();
-        CraftedConsumableItems.init();
+    
     }
 
 }

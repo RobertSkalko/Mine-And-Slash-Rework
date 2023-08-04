@@ -15,16 +15,16 @@ public class NonWeaponSuffixes implements ExileRegistryInit {
     public void registerAll() {
 
         ElementalAffixBuilder.start()
-            .guid(x -> x.guidName + "_res")
-            .add(Elements.Fire, "Of the Drake")
-            .add(Elements.Water, "Of the Yeti")
-            .add(Elements.Earth, "Of the Snake")
+                .guid(x -> x.guidName + "_res")
+                .add(Elements.Fire, "Of the Drake")
+                .add(Elements.Cold, "Of the Yeti")
+                .add(Elements.Chaos, "Of the Snake")
 
-            .stats(x -> Arrays.asList(new StatModifier(10, 25, new ElementalResist(x), ModType.PERCENT)))
-            .includesTags(SlotTag.jewelry_family, SlotTag.armor_family, SlotTag.offhand_family)
-            .Weight(2000)
-            .Suffix()
-            .Build();
+                .stats(x -> Arrays.asList(new StatModifier(10, 25, new ElementalResist(x), ModType.PERCENT)))
+                .includesTags(SlotTag.jewelry_family, SlotTag.armor_family, SlotTag.offhand_family)
+                .Weight(2000)
+                .Suffix()
+                .Build();
 
     }
 

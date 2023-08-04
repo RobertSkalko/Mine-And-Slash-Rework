@@ -14,14 +14,15 @@ import com.robertx22.age_of_exile.database.data.stats.types.defense.*;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.*;
 import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuality;
 import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuantity;
-import com.robertx22.age_of_exile.database.data.stats.types.misc.*;
+import com.robertx22.age_of_exile.database.data.stats.types.misc.BonusExp;
+import com.robertx22.age_of_exile.database.data.stats.types.misc.DamageTakenToMana;
+import com.robertx22.age_of_exile.database.data.stats.types.misc.ExtraMobDropsStat;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.DarknessDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.DualWieldDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SpellDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SpellPower;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.crit.GlobalCriticalDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.crit.GlobalCriticalHit;
-import com.robertx22.age_of_exile.database.data.stats.types.professions.all.*;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.DamageAbsorbedByMana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.RegeneratePercentStat;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.blood.Blood;
@@ -33,8 +34,6 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Hea
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
-import com.robertx22.age_of_exile.player_skills.items.foods.SkillItemTier;
-import com.robertx22.age_of_exile.saveclasses.player_skills.PlayerSkillEnum;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.IGenerated;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -79,9 +78,7 @@ public class StatsRegister implements ExileRegistryInit {
 
                     add(ExtraMobDropsStat.getInstance());
                     add(BonusExp.getInstance());
-                    add(BonusFavor.getInstance());
                     add(DamageTakenToMana.getInstance());
-                    add(new BonusXpToMobsOfTier(SkillItemTier.TIER0));
 
                     add(new UnknownStat());
 
@@ -116,12 +113,6 @@ public class StatsRegister implements ExileRegistryInit {
                     add(MaxUsesStat.getInstance());
                     add(CraftingSuccessChance.getInstance());
 
-                    add(new BonusSkillExp(PlayerSkillEnum.NONE));
-
-                    add(new BonusYield(BonusRequirement.COLD_BIOME));
-                    add(new BonusSkillYield(PlayerSkillEnum.NONE));
-                    add(DoubleDropChance.getInstance());
-                    add(TripleDropChance.getInstance());
                 }
             }
         };

@@ -1,7 +1,7 @@
 {
   "ser": "data",
   "id": "all_water_damage",
-  "ele": "Water",
+  "ele": "Cold",
   "effect": {
     "order": 0,
     "side": "Source",

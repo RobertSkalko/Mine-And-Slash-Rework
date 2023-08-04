@@ -1,7 +1,10 @@
 package com.robertx22.age_of_exile.loot;
 
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
-import com.robertx22.age_of_exile.loot.generators.*;
+import com.robertx22.age_of_exile.loot.generators.CurrencyLootGen;
+import com.robertx22.age_of_exile.loot.generators.GearSoulLootGen;
+import com.robertx22.age_of_exile.loot.generators.GemLootGen;
+import com.robertx22.age_of_exile.loot.generators.RuneLootGen;
 import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ItemUtils;
 import com.robertx22.library_of_exile.utils.RandomUtils;
@@ -100,14 +103,13 @@ public class MasterLootGen {
             items.addAll(new GearSoulLootGen(info).tryGenerate());
             items.addAll(new GemLootGen(info).tryGenerate());
             items.addAll(new RuneLootGen(info).tryGenerate());
-            items.addAll(new IngredientLootGen(info).tryGenerate());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return items.stream()
-            .filter(x -> x != null && !x.isEmpty())
-            .collect(Collectors.toList());
+                .filter(x -> x != null && !x.isEmpty())
+                .collect(Collectors.toList());
     }
 
     public static List<ItemStack> generateLoot(LivingEntity victim, PlayerEntity killer) {
@@ -124,7 +126,7 @@ public class MasterLootGen {
 
             if (Gear.has(stack)) {
                 GearRarity rar = Gear.Load(stack)
-                    .getRarity();
+                        .getRarity();
                 if (rar.is_unique_item) {
                     SoundUtils.ding(victim.level, victim.blockPosition());
                 }

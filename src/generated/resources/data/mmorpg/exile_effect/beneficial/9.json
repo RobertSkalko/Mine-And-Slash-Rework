@@ -12,7 +12,7 @@
     {
       "min": 1.0,
       "max": 2.0,
-      "stat": "earth_weapon_damage",
+      "stat": "chaos_weapon_damage",
       "type": "FLAT"
     },
     {

@@ -1,14 +1,11 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
-import com.robertx22.age_of_exile.gui.screens.dungeon.DungeonInfoScreen;
-import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.UUID;
@@ -27,7 +24,7 @@ public class ClientOnly {
         if (world instanceof ClientWorld) {
             for (Entity entity : ((ClientWorld) world).entitiesForRendering()) {
                 if (entity.getUUID()
-                    .equals(id)) {
+                        .equals(id)) {
 
                     return entity;
                 }
@@ -55,12 +52,7 @@ public class ClientOnly {
         Minecraft.getInstance().options.keyUse.setDown(true);
     }
 
-    public static void openMapsScreen(BlockPos pos) {
-        Minecraft.getInstance()
-            .setScreen(new DungeonInfoScreen(pos, Load.playerRPGData(Minecraft.getInstance().player).maps.dungeonData));
-
-    }
-
+ 
     public static void stopUseKey() {
         Minecraft.getInstance().options.keyUse.setDown(false);
     }

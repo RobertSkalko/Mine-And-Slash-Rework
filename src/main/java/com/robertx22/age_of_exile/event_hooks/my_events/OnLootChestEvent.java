@@ -26,23 +26,18 @@ public class OnLootChestEvent extends EventConsumer<ExileEvents.OnChestLooted> {
         LootInfo info = LootInfo.ofChestLoot(player, event.pos);
 
         if (WorldUtils.isMapWorldClass(player.level)) {
-            if (Load.dungeonData(event.player.level).data.get(event.pos).data.failedOrEmpty()) {
-                event.inventory.clearContent();
-                // dont gen loot
-                event.canceled = true;
-                return;
-            }
+           
             info.multi += 10;
         }
 
         if (LootUtils.preventLootDueToLevelPenalty(info.level, Load.Unit(player)
-            .getLevel())) {
+                .getLevel())) {
             event.canceled = true;
             return;
         }
 
         Load.playerRPGData(player).favor
-            .onOpenNewLootChest(info);
+                .onOpenNewLootChest(info);
 
         List<ItemStack> items = MasterLootGen.generateLoot(info);
 
@@ -65,7 +60,7 @@ public class OnLootChestEvent extends EventConsumer<ExileEvents.OnChestLooted> {
 
         for (int i = 0; i < inventory.getContainerSize(); ++i) {
             if (inventory.getItem(i)
-                .isEmpty()) {
+                    .isEmpty()) {
                 list.add(i);
             }
         }

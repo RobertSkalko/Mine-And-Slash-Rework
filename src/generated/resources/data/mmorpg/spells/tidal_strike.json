@@ -56,7 +56,7 @@
             "type": "damage",
             "map": {
               "value_calculation": "tidal_strike",
-              "element": "Water"
+              "element": "Cold"
             }
           }
         ],

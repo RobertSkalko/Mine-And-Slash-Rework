@@ -1,7 +1,7 @@
 {
   "ser": "data",
   "id": "water_dmg_when_target_low_hp",
-  "ele": "Water",
+  "ele": "Cold",
   "effect": {
     "order": 100,
     "side": "Source",

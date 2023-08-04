@@ -1,27 +1,10 @@
 package com.robertx22.age_of_exile.mixins;
 
-import com.robertx22.age_of_exile.player_skills.items.backpacks.BackpackContainer;
-import com.robertx22.age_of_exile.player_skills.items.backpacks.BackpackInfo;
-import com.robertx22.age_of_exile.player_skills.items.backpacks.BackpackItem;
-import com.robertx22.age_of_exile.player_skills.items.backpacks.TryAutoInsert;
-import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
-import com.robertx22.library_of_exile.utils.RandomUtils;
-import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundEvents;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Mixin(PlayerInventory.class)
 public class PlayerInventoryMixin {
@@ -30,6 +13,9 @@ public class PlayerInventoryMixin {
     @Final
     public PlayerEntity player;
 
+    // TODO ADD NEW BACKPACK SYSTEM!!!
+
+    /*
     @Inject(method = "add(Lnet/minecraft/item/ItemStack;)Z", at = @At(value = "HEAD"))
     private void hookonStackInserted(ItemStack stack, CallbackInfoReturnable<Boolean> ci) {
         try {
@@ -85,4 +71,6 @@ public class PlayerInventoryMixin {
         }
 
     }
+
+     */
 }

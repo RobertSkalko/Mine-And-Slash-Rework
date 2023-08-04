@@ -85,8 +85,6 @@
     "scale_mana_cost_to_player_lvl": true
   },
   "manual_tip": true,
-  "disabled_dims": [
-    "mmorpg:dungeon"
-  ],
+  "disabled_dims": [],
   "effect_tip": ""
 }

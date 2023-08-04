@@ -60,30 +60,22 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
         return this.hasHigherRarity() && upgrade_lvl_to_increase_rar > 0;
     }
 
-    public ItemStack getRarityUpgradeStack() {
-        ItemStack stack = new ItemStack(SlashItems.RARITY_UPGRADE.get());
-        stack.getOrCreateTag()
-            .putString("rar", GUID());
-        stack.getOrCreateTag()
-            .putInt("CustomModelData", this.item_model_data_num);
-        return stack;
-    }
-
+    
     public ItemStack getRarityEssenceStack() {
         ItemStack stack = new ItemStack(SlashItems.RARITY_ESSENCE.get());
 
         stack.getOrCreateTag()
-            .putString("rar", GUID());
+                .putString("rar", GUID());
         stack.getOrCreateTag()
-            .putInt("CustomModelData", this.item_model_data_num);
+                .putInt("CustomModelData", this.item_model_data_num);
 
         return stack;
     }
 
     public static GearRarity getRarityFromEssence(ItemStack stack) {
         return ExileDB.GearRarities()
-            .get(stack.getOrCreateTag()
-                .getString("rar"));
+                .get(stack.getOrCreateTag()
+                        .getString("rar"));
     }
 
     public ResourceLocation getGlintTextureFull() {
@@ -156,11 +148,11 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
 
     public boolean hasHigherRarity() {
         return ExileDB.GearRarities()
-            .isRegistered(higher_rar);
+                .isRegistered(higher_rar);
     }
 
     public GearRarity getHigherRarity() {
         return ExileDB.GearRarities()
-            .get(higher_rar);
+                .get(higher_rar);
     }
 }

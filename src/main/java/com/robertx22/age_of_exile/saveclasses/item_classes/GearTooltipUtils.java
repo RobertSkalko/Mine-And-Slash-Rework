@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.saveclasses.item_classes;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
-import com.robertx22.age_of_exile.database.data.currency.GearBlessingType;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
@@ -32,17 +31,13 @@ public class GearTooltipUtils {
         }
 
         TooltipInfo info = new TooltipInfo(data, gear.getRarity()
-            .StatPercents());
+                .StatPercents());
 
         tip.clear();
 
         List<IFormattableTextComponent> name = gear.GetDisplayName(stack);
 
-        if (gear.up.getUpgradeLevel() > 0) {
-            name.get(name.size() - 1)
-                .append(new StringTextComponent(TextFormatting.GREEN + " +[" + gear.up.getUpgradeLevel() + "]"));
-        }
-
+        
         name.forEach(x -> {
             tip.add(x.withStyle(TextFormatting.BOLD));
         });
@@ -71,24 +66,24 @@ public class GearTooltipUtils {
             tip.addAll(gear.imp.GetTooltipString(info, gear));
             if (gear.hasCraftedStats()) {
                 tip.addAll(gear.getCraftedStats()
-                    .GetTooltipString(info, gear));
+                        .GetTooltipString(info, gear));
             }
 
         } else {
             List<ExactStatData> stats = new ArrayList<>();
             gear.affixes.getAllAffixesAndSockets()
-                .forEach(x -> stats.addAll(x.GetAllStats(gear)));
+                    .forEach(x -> stats.addAll(x.GetAllStats(gear)));
             if (gear.hasCraftedStats()) {
                 stats.addAll(gear.getCraftedStats()
-                    .GetAllStats(gear));
+                        .GetAllStats(gear));
             }
             stats.addAll(gear.imp.GetAllStats(gear));
             if (gear.uniqueStats != null) {
                 stats.addAll(gear.uniqueStats.GetAllStats(gear));
             }
             List<ExactStatData> longstats = stats.stream()
-                .filter(x -> x.getStat().is_long)
-                .collect(Collectors.toList());
+                    .filter(x -> x.getStat().is_long)
+                    .collect(Collectors.toList());
             specialStats.addAll(longstats);
 
             MergedStats merged = new MergedStats(stats, info);
@@ -108,10 +103,10 @@ public class GearTooltipUtils {
 
         specialStats.forEach(x -> {
             x.GetTooltipString(info)
-                .forEach(e -> {
-                    tip.add(e);
+                    .forEach(e -> {
+                        tip.add(e);
 
-                });
+                    });
         });
         tip.add(new StringTextComponent(""));
 
@@ -120,15 +115,15 @@ public class GearTooltipUtils {
 
             if (uniq != null && uniq.hasSet()) {
                 tooltip.addAll(uniq.getSet()
-                    .GetTooltipString(info));
+                        .GetTooltipString(info));
             }
         }
 
         if (Screen.hasShiftDown()) {
             if (!gear.can_sal) {
                 tip.add(
-                    Words.Unsalvagable.locName()
-                        .withStyle(TextFormatting.RED));
+                        Words.Unsalvagable.locName()
+                                .withStyle(TextFormatting.RED));
             }
         }
 
@@ -144,14 +139,6 @@ public class GearTooltipUtils {
             lvl.append(new StringTextComponent(TextFormatting.YELLOW + " [ILvl:" + (int) gear.getILVL() + "]"));
         }
 
-        if (gear.up.getTimesCanBeUpgradedInTotal() > 0) {
-            tip.add(TooltipUtils.upgradeStars(gear));
-        }
-
-        if (gear.up.bless != GearBlessingType.NONE) {
-            tip.add(gear.up.bless.word.locName()
-                .withStyle(TextFormatting.GOLD));
-        }
 
         tip.add(lvl);
         tip.add(TooltipUtils.gearTier(gear.getTier()));
@@ -161,8 +148,8 @@ public class GearTooltipUtils {
 
         if (gear.isCorrupted()) {
             tip.add(new StringTextComponent(TextFormatting.RED + "").append(
-                    Words.Corrupted.locName())
-                .withStyle(TextFormatting.RED));
+                            Words.Corrupted.locName())
+                    .withStyle(TextFormatting.RED));
         }
         if (gear.hasCraftedStats()) {
             tip.add(new StringTextComponent("Crafted").withStyle(TextFormatting.GOLD));
@@ -185,25 +172,25 @@ public class GearTooltipUtils {
 
         if (Screen.hasShiftDown() == false) {
             tooltip.add(new StringTextComponent(TextFormatting.BLUE + "").append(new TranslationTextComponent(SlashRef.MODID + ".tooltip." + "press_shift_more_info")
-                )
-                .withStyle(TextFormatting.BLUE));
+                    )
+                    .withStyle(TextFormatting.BLUE));
         } else {
             tip.add(Words.Instability.locName()
-                .withStyle(TextFormatting.RED)
-                .append(": " + (int) gear.getInstability() + "/" + (int) ServerContainer.get().MAX_INSTABILITY.get()
-                    .intValue())
+                    .withStyle(TextFormatting.RED)
+                    .append(": " + (int) gear.getInstability() + "/" + (int) ServerContainer.get().MAX_INSTABILITY.get()
+                            .intValue())
             );
         }
 
         if (gear.hasSpell()) {
             tooltip.add(new StringTextComponent(""));
             tooltip.add(gear.getSpell()
-                .locName()
-                .withStyle(TextFormatting.LIGHT_PURPLE));
+                    .locName()
+                    .withStyle(TextFormatting.LIGHT_PURPLE));
         }
 
         List<ITextComponent> tool = TooltipUtils.removeDoubleBlankLines(tip,
-            ClientConfigs.getConfig().REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES);
+                ClientConfigs.getConfig().REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES);
 
         tip.clear();
         tip.addAll(tool);

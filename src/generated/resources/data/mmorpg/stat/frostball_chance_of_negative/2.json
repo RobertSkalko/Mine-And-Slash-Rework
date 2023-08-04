@@ -1,7 +1,7 @@
 {
   "ser": "data",
   "id": "frostball_chance_of_negative/2",
-  "ele": "Water",
+  "ele": "Cold",
   "effect": {
     "order": 100,
     "side": "Source",

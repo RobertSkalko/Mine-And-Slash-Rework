@@ -1,7 +1,7 @@
 {
   "ser": "data",
   "id": "give_regenerate_to_allies_in_aoe",
-  "ele": "Earth",
+  "ele": "Chaos",
   "effect": {
     "order": 0,
     "side": "Source",

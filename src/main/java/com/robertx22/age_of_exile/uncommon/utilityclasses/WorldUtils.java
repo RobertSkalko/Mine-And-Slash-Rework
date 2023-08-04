@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
-import com.robertx22.age_of_exile.dimension.DimensionIds;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.block.material.Material;
@@ -35,9 +34,9 @@ public class WorldUtils {
     public static BlockPos getSurfaceCenterOfChunk(IWorld world, BlockPos pos) {
 
         int x = world.getChunk(pos)
-            .getPos().x + 8;
+                .getPos().x + 8;
         int z = world.getChunk(pos)
-            .getPos().z + 8;
+                .getPos().z + 8;
 
         pos = furtherby8(pos);
 
@@ -75,7 +74,7 @@ public class WorldUtils {
 
         for (BlockPos x : Arrays.asList(surface.above(), surface.above(2), surface.below(), surface.below(2), surface)) {
             if (world.getBlockState(x)
-                .getMaterial() == Material.WATER) {
+                    .getMaterial() == Material.WATER) {
                 return true;
             }
         }
@@ -91,7 +90,7 @@ public class WorldUtils {
         boolean goingDown = world.isEmptyBlock(pos);
 
         while (world.isEmptyBlock(pos) || world.getBlockState(pos)
-            .getBlock() instanceof LeavesBlock) {
+                .getBlock() instanceof LeavesBlock) {
 
             if (goingDown) {
                 pos = pos.below();
@@ -110,11 +109,11 @@ public class WorldUtils {
     }
 
     public static boolean isDungeonWorld(IWorldReader world) {
-        return isId(world, DimensionIds.DUNGEON_DIMENSION);
+        return false;
     }
 
     public static boolean isMapWorldClass(IWorldReader world) {
-        return isId(world, DimensionIds.DUNGEON_DIMENSION);
+        return false; // todo
 
     }
 
@@ -124,8 +123,8 @@ public class WorldUtils {
             return false;
         }
         ResourceLocation id = MMORPG.server.registryAccess()
-            .dimensionTypes()
-            .getKey(world.dimensionType());
+                .dimensionTypes()
+                .getKey(world.dimensionType());
 
         if (id != null) {
             return id.equals(dimid);

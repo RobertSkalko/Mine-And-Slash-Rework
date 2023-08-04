@@ -19,24 +19,24 @@ public class SwordRunewords implements ExileRegistryInit, GearDataHelper {
     public void registerAll() {
 
         UniqueGearBuilder.of(
-                "skull_cleaver",
-                "Skull Cleaver",
-                BaseGearTypes.SWORD)
-            .setReplacesName()
-            .baseStats(
-                Arrays.asList(
-                    this.getAttackDamageStat(WeaponTypes.sword, Number.HALF, Elements.Physical),
-                    this.getAttackDamageStat(WeaponTypes.sword, Number.HALF, Elements.Water)
+                        "skull_cleaver",
+                        "Skull Cleaver",
+                        BaseGearTypes.SWORD)
+                .setReplacesName()
+                .baseStats(
+                        Arrays.asList(
+                                this.getAttackDamageStat(WeaponTypes.sword, Number.HALF, Elements.Physical),
+                                this.getAttackDamageStat(WeaponTypes.sword, Number.HALF, Elements.Cold)
+                        )
                 )
-            )
-            .stats(Arrays.asList(
-                new StatModifier(15, 25, Stats.DAMAGE_TO_UNDEAD.get(), ModType.FLAT),
-                new StatModifier(1, 10, Stats.CRIT_CHANCE.get(), ModType.FLAT),
-                new StatModifier(5, 25, Stats.INCREASED_LEECH.get(), ModType.FLAT)
-            ))
-            .makeRuneWordOnly(Arrays.asList(RuneItem.RuneType.ANO, RuneItem.RuneType.TOQ, RuneItem.RuneType.MOS, RuneItem.RuneType.HAR))
-            .devComment("undead dmg / leech multi")
-            .build();
+                .stats(Arrays.asList(
+                        new StatModifier(15, 25, Stats.DAMAGE_TO_UNDEAD.get(), ModType.FLAT),
+                        new StatModifier(1, 10, Stats.CRIT_CHANCE.get(), ModType.FLAT),
+                        new StatModifier(5, 25, Stats.INCREASED_LEECH.get(), ModType.FLAT)
+                ))
+                .makeRuneWordOnly(Arrays.asList(RuneItem.RuneType.ANO, RuneItem.RuneType.TOQ, RuneItem.RuneType.MOS, RuneItem.RuneType.HAR))
+                .devComment("undead dmg / leech multi")
+                .build();
 
     }
 }

@@ -30,11 +30,8 @@ import com.robertx22.age_of_exile.gui.bases.BaseScreen;
 import com.robertx22.age_of_exile.gui.bases.INamedScreen;
 import com.robertx22.age_of_exile.gui.buttons.FavorButton;
 import com.robertx22.age_of_exile.gui.buttons.ScalingDifficultyButton;
-import com.robertx22.age_of_exile.gui.screens.player_skills.ProfessionsScreen;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.TalentsScreen;
 import com.robertx22.age_of_exile.gui.screens.spell.SpellScreen;
-import com.robertx22.age_of_exile.gui.screens.wiki.WikiScreen;
-import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -62,6 +59,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 public class CharacterScreen extends BaseScreen implements INamedScreen {
 
@@ -99,14 +97,14 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
     static <T extends Stat> void addTo(StatType type, List<T> stats) {
 
         List<Stat> list = stats.stream()
-            .map(x -> (Stat) x)
-            .collect(Collectors.toList());
+                .map(x -> (Stat) x)
+                .collect(Collectors.toList());
 
         if (!STAT_MAP.containsKey(type)) {
             STAT_MAP.put(type, new ArrayList<>());
         }
         STAT_MAP.get(type)
-            .add(list);
+                .add(list);
     }
 
     static {
@@ -170,7 +168,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
             help.add(Words.DidYouKnow.locName());
             help.add(new StringTextComponent(""));
             help.addAll(TooltipUtils.cutIfTooLong(RandomUtils.randomFromList(Arrays.asList(RandomTips.values()))
-                .locName()));
+                    .locName()));
             addButton(new HelpButton(help, guiLeft + 15, guiTop + 15));
 
             if (true) {
@@ -210,7 +208,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         if (!isMainScreen()) {
 
             int XSPACING = 240 / STAT_MAP.get(statToShow)
-                .size();
+                    .size();
             int YSPACING = 19;
 
             int ynum = 0;
@@ -240,12 +238,9 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
 
             List<INamedScreen> screens = new ArrayList<>();
             screens.add(new SpellScreen());
-            if (MMORPG.RUN_DEV_TOOLS) {
-                screens.add(new TalentsScreen());
-                // todo until talents are done
-            }
-            screens.add(new ProfessionsScreen());
-            screens.add(new WikiScreen());
+
+            screens.add(new TalentsScreen());
+
 
             int x = guiLeft + sizeX - 1;
             int y = guiTop + 20;
@@ -275,18 +270,18 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
 
         if (isMainScreen()) {
             mc.getTextureManager()
-                .bind(BACKGROUND);
+                    .bind(BACKGROUND);
         } else {
             mc.getTextureManager()
-                .bind(WIDE_BACKGROUND);
+                    .bind(WIDE_BACKGROUND);
         }
 
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
         blit(matrix, mc.getWindow()
-                .getGuiScaledWidth() / 2 - sizeX / 2,
-            mc.getWindow()
-                .getGuiScaledHeight() / 2 - sizeY / 2, 0, 0, sizeX, sizeY
+                        .getGuiScaledWidth() / 2 - sizeX / 2,
+                mc.getWindow()
+                        .getGuiScaledHeight() / 2 - sizeY / 2, 0, 0, sizeX, sizeY
         );
 
         super.render(matrix, x, y, ticks);
@@ -294,7 +289,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         buttons.forEach(b -> b.renderToolTip(matrix, x, y));
 
         int p = Load.playerRPGData(mc.player).statPoints
-            .getFreePoints(mc.player);
+                .getFreePoints(mc.player);
         if (p > 0) {
             String points = "Points: " + p;
             mc.font.drawShadow(matrix, points, guiLeft + sizeX / 2 - mc.font.width(points) / 2, guiTop + sizeY + 25, TextFormatting.GREEN.getColor());
@@ -317,10 +312,10 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         public AllocateStatButton(String stat, int xPos, int yPos) {
             super(xPos, yPos, SIZEX, SIZEY, 0, 0, SIZEY, BUTTON_TEX, (button) -> {
                 Packets.sendToServer(new AllocateStatPacket(ExileDB.Stats()
-                    .get(stat)));
+                        .get(stat)));
             });
             this.stat = ExileDB.Stats()
-                .get(stat);
+                    .get(stat);
         }
 
         @Override
@@ -332,17 +327,17 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
                 List<ITextComponent> tooltip = new ArrayList<>();
 
                 tooltip.add(stat
-                    .locName()
-                    .withStyle(TextFormatting.GREEN));
+                        .locName()
+                        .withStyle(TextFormatting.GREEN));
 
                 tooltip.add(new SText(""));
 
                 tooltip.addAll(((CoreStat) stat).getCoreStatTooltip(Load.Unit(mc.player), Load.Unit(mc.player)
-                    .getUnit()
-                    .getCalculatedStat(stat)));
+                        .getUnit()
+                        .getCalculatedStat(stat)));
 
                 GuiUtils.renderTooltip(matrix,
-                    tooltip, x, y);
+                        tooltip, x, y);
 
             }
         }
@@ -359,9 +354,9 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
             Minecraft mc = Minecraft.getInstance();
 
             String txt = ((int) Load.Unit(mc.player)
-                .getUnit()
-                .getCalculatedStat(stat)
-                .getValue()) + "";
+                    .getUnit()
+                    .getCalculatedStat(stat)
+                    .getValue()) + "";
 
             RenderUtils.render16Icon(matrix, stat.getIconForRendering(), this.x - 20, this.y + 1);
 
@@ -393,14 +388,14 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
                 List<ITextComponent> tooltip = new ArrayList<>();
 
                 tooltip.add(stat
-                    .locName()
-                    .withStyle(TextFormatting.GREEN));
+                        .locName()
+                        .withStyle(TextFormatting.GREEN));
 
                 tooltip.addAll(stat
-                    .getCutDescTooltip());
+                        .getCutDescTooltip());
 
                 GuiUtils.renderTooltip(matrix,
-                    tooltip, x, y);
+                        tooltip, x, y);
 
             }
         }
@@ -414,15 +409,15 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
             if (!(stat instanceof UnknownStat)) {
                 Minecraft mc = Minecraft.getInstance();
                 String str = getStatString(Load.Unit(mc.player)
-                    .getUnit()
-                    .getCalculatedStat(stat), Load.Unit(mc.player));
+                        .getUnit()
+                        .getCalculatedStat(stat), Load.Unit(mc.player));
 
                 if (!presetValue.isEmpty()) {
                     str = presetValue;
                 }
 
                 ResourceLocation res = stat
-                    .getIconForRendering();
+                        .getIconForRendering();
 
                 RenderUtils.render16Icon(matrix, res, this.x, this.y);
 
@@ -437,7 +432,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         Stat stat = data.GetStat();
 
         String v1 = NumberUtils.formatForTooltip(data
-            .getValue());
+                .getValue());
 
         String str = "";
 
@@ -451,8 +446,8 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
             IUsableStat usable = (IUsableStat) stat;
 
             String value = NumberUtils.format(
-                usable.getUsableValue((int) data
-                    .getValue(), unitdata.getLevel()) * 100);
+                    usable.getUsableValue((int) data
+                            .getValue(), unitdata.getLevel()) * 100);
 
             str = "" + value + "%";
 
@@ -487,7 +482,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
             if (isHovered()) {
                 String txt = page.id;
                 Minecraft.getInstance().font.drawShadow(matrices,
-                    txt, this.x + SIZEX - 30 - mc.font.width(txt), this.y + 9, TextFormatting.YELLOW.getColor());
+                        txt, this.x + SIZEX - 30 - mc.font.width(txt), this.y + 9, TextFormatting.YELLOW.getColor());
             }
 
         }

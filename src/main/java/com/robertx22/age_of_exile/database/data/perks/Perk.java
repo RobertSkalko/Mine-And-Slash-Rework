@@ -111,7 +111,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipL
                 list.add(locName().withStyle(type.format));
             }
 
-            info.statTooltipType = StatTooltipType.BASE_LOCAL_STATS;
+            info.statTooltipType = StatTooltipType.NORMAL;
 
             stats.forEach(x -> list.addAll(x.GetTooltipString(info)));
 

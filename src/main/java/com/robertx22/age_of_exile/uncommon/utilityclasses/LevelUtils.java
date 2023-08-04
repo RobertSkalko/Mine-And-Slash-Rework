@@ -7,8 +7,8 @@ import com.robertx22.age_of_exile.database.data.MinMax;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
-import com.robertx22.age_of_exile.player_skills.items.foods.SkillItemTier;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.temp.SkillItemTier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -75,15 +75,15 @@ public class LevelUtils {
         int lvl = 1;
         try {
             Optional<Map.Entry<MinMax, Integer>> opt = GameBalanceConfig.get()
-                .getTierMap()
-                .entrySet()
-                .stream()
-                .filter(e -> e.getValue() == tier)
-                .findAny();
+                    .getTierMap()
+                    .entrySet()
+                    .stream()
+                    .filter(e -> e.getValue() == tier)
+                    .findAny();
 
             if (opt.isPresent()) {
                 lvl = opt.get()
-                    .getKey().min;
+                        .getKey().min;
             } else {
                 if (tier > 0) {
                     return GameBalanceConfig.get().MAX_LEVEL;
@@ -106,14 +106,14 @@ public class LevelUtils {
         int tier = 0;
         try {
             Stream<Map.Entry<MinMax, Integer>> opt = GameBalanceConfig.get()
-                .getTierMap()
-                .entrySet()
-                .stream()
-                .filter(e -> isTier(e.getKey(), level));
+                    .getTierMap()
+                    .entrySet()
+                    .stream()
+                    .filter(e -> isTier(e.getKey(), level));
 
             OptionalInt biggest = opt.mapToInt(x -> x.getValue())
-                .sorted()
-                .max();
+                    .sorted()
+                    .max();
 
             if (biggest.isPresent()) {
                 tier = biggest.getAsInt();
@@ -188,7 +188,7 @@ public class LevelUtils {
                     lvl = dimConfig.min_lvl;
                 } else {
                     lvl = Load.Unit(nearestPlayer)
-                        .getLevel();
+                            .getLevel();
                 }
             } else {
                 lvl = determineLevelPerDistanceFromSpawn(sw, pos, dimConfig);
@@ -206,7 +206,7 @@ public class LevelUtils {
             int bonusDiffLevel = Load.playerRPGData(nearestPlayer).scalingDifficulty.getBonusLevels();
 
             int max = Load.Unit(nearestPlayer)
-                .getLevel() + ServerContainer.get().MAX_MOB_LVL_HIGHER_THAN_PLAYER_FOR_DIFF.get();
+                    .getLevel() + ServerContainer.get().MAX_MOB_LVL_HIGHER_THAN_PLAYER_FOR_DIFF.get();
 
             int cangive = max - lvl;
             if (cangive < 0) {
@@ -230,10 +230,10 @@ public class LevelUtils {
 
     public static boolean isInMinLevelArea(ServerWorld world, BlockPos pos, DimensionConfig config) {
         double distance = world.getSharedSpawnPos()
-            .distManhattan(pos);
+                .distManhattan(pos);
 
         double scale = MathHelper.clamp(world.dimensionType()
-            .coordinateScale() / 3F, 1, Integer.MAX_VALUE);
+                .coordinateScale() / 3F, 1, Integer.MAX_VALUE);
 
         distance *= scale;
 
@@ -246,10 +246,10 @@ public class LevelUtils {
     public static int determineLevelPerDistanceFromSpawn(ServerWorld world, BlockPos pos, DimensionConfig config) {
 
         double distance = world.getSharedSpawnPos()
-            .distManhattan(pos);
+                .distManhattan(pos);
 
         double scale = MathHelper.clamp(world.dimensionType()
-            .coordinateScale() / 3F, 1, Integer.MAX_VALUE);
+                .coordinateScale() / 3F, 1, Integer.MAX_VALUE);
 
         distance *= scale;
 
@@ -269,7 +269,7 @@ public class LevelUtils {
         DimensionConfig config = ExileDB.getDimensionConfig(world);
 
         double scale = MathHelper.clamp(world.dimensionType()
-            .coordinateScale() / 3F, 1, Integer.MAX_VALUE);
+                .coordinateScale() / 3F, 1, Integer.MAX_VALUE);
 
         return config.mob_lvl_per_distance / scale;
     }

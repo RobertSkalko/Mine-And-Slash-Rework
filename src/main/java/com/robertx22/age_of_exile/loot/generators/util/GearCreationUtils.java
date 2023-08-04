@@ -32,11 +32,9 @@ public class GearCreationUtils {
         GearItemData data = new GearItemData();
 
         data.gear_type = blueprint.gearItemSlot.get()
-            .GUID();
+                .GUID();
         data.lvl = blueprint.level.get();
         data.rarity = rarity.GUID();
-
-        data.up.regenerate(rarity);
 
         if (rarity.is_unique_item && blueprint.uniquePart.get() != null) {
 
@@ -45,8 +43,8 @@ public class GearCreationUtils {
             Preconditions.checkNotNull(unique);
 
             data.rarity = ExileDB.GearRarities()
-                .get(unique.uniqueRarity)
-                .GUID();
+                    .get(unique.uniqueRarity)
+                    .GUID();
 
             data.gear_type = unique.base_gear;
             data.uniq_id = unique.GUID();
@@ -65,12 +63,12 @@ public class GearCreationUtils {
         data.affixes.randomize(data);
 
         if (data.GetBaseGearType()
-            .isMageWeapon()) {
+                .isMageWeapon()) {
             try {
                 data.spell = ExileDB.Spells()
-                    .getFilterWrapped(x -> x.config.tags.contains(SpellTag.staff_spell))
-                    .random()
-                    .GUID();
+                        .getFilterWrapped(x -> x.config.tags.contains(SpellTag.staff_spell))
+                        .random()
+                        .GUID();
             } catch (Exception e) {
                 e.printStackTrace();
             }

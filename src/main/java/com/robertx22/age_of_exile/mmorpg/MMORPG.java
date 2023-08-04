@@ -1,7 +1,5 @@
 package com.robertx22.age_of_exile.mmorpg;
 
-import com.robertx22.addon.divine_missions.DMRegInit;
-import com.robertx22.addon.infinite_dungeons.IDAddonRegInit;
 import com.robertx22.age_of_exile.a_libraries.curios.CurioEvents;
 import com.robertx22.age_of_exile.aoe_data.GeneratedData;
 import com.robertx22.age_of_exile.aoe_data.database.stat_conditions.StatConditions;
@@ -15,7 +13,6 @@ import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.stats.types.special.SpecialStats;
 import com.robertx22.age_of_exile.database.registrators.CurrencyItems;
 import com.robertx22.age_of_exile.database.registry.ExileDBInit;
-import com.robertx22.age_of_exile.dimension.DimensionInit;
 import com.robertx22.age_of_exile.event_hooks.player.ScalingDifficultyEvents;
 import com.robertx22.age_of_exile.mmorpg.event_registers.CommonEvents;
 import com.robertx22.age_of_exile.mmorpg.init.ClientInit;
@@ -34,7 +31,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -53,10 +49,10 @@ public class MMORPG {
 
     private static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel NETWORK = NetworkRegistry.newSimpleChannel(
-        new ResourceLocation(SlashRef.MODID, "main"),
-        () -> PROTOCOL_VERSION,
-        PROTOCOL_VERSION::equals,
-        PROTOCOL_VERSION::equals
+            new ResourceLocation(SlashRef.MODID, "main"),
+            () -> PROTOCOL_VERSION,
+            PROTOCOL_VERSION::equals,
+            PROTOCOL_VERSION::equals
     );
 
     public MMORPG() {
@@ -64,7 +60,7 @@ public class MMORPG {
         Watch watch = new Watch();
 
         ModLoadingContext.get()
-            .registerConfig(ModConfig.Type.SERVER, ServerContainer.spec);
+                .registerConfig(ModConfig.Type.SERVER, ServerContainer.spec);
 
         ExileEvents.CHECK_IF_DEV_TOOLS_SHOULD_RUN.register(new EventConsumer<ExileEvents.OnCheckIsDevToolsRunning>() {
             @Override
@@ -76,11 +72,11 @@ public class MMORPG {
         StackSaving.init();
 
         final IEventBus bus = FMLJavaModLoadingContext.get()
-            .getModEventBus();
+                .getModEventBus();
 
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
             ModLoadingContext.get()
-                .registerConfig(ModConfig.Type.CLIENT, ClientConfigs.clientSpec);
+                    .registerConfig(ModConfig.Type.CLIENT, ClientConfigs.clientSpec);
             bus.addListener(ClientInit::onInitializeClient);
         });
 
@@ -106,7 +102,6 @@ public class MMORPG {
         SlashItemTags.init();
 
         ExileDBInit.registerAllItems(); // after config registerAll
-        DMRegInit.init();
 
         CommonEvents.register();
 
@@ -115,7 +110,6 @@ public class MMORPG {
 
         LifeCycleEvents.register();
 
-        DimensionInit.init();
 
         // DungeonDimensionJigsaw.initStatics();
         // DungeonDimensionJigsaw test = new DungeonDimensionJigsaw();
@@ -126,21 +120,14 @@ public class MMORPG {
 
     }
 
-    public static boolean isInfiniteDungeonsLoaded() {
-        return ModList.get()
-            .isLoaded("infinite_dungeons");
-    }
 
     public void interMod(InterModEnqueueEvent event) {
 
-        if (isInfiniteDungeonsLoaded()) {
-            IDAddonRegInit.init();
-        }
-
+      
         InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("ring").size(2)
-            .build());
+                .build());
         InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("necklace").size(1)
-            .build());
+                .build());
     }
 
     public void commonSetupEvent(FMLCommonSetupEvent event) {

@@ -6,11 +6,11 @@ import com.robertx22.age_of_exile.database.base.CreativeTabs;
 import com.robertx22.age_of_exile.database.data.currency.base.IShapelessRecipe;
 import com.robertx22.age_of_exile.database.data.level_ranges.LevelRange;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.ProfessionItems;
-import com.robertx22.age_of_exile.player_skills.items.foods.SkillItemTier;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.registry.IWeighted;
+import com.robertx22.temp.SkillItemTier;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.data.ShapelessRecipeBuilder;
 import net.minecraft.item.Item;
@@ -34,7 +34,7 @@ public class SalvagedDustItem extends Item implements IAutoLocName, IWeighted, I
 
     public SalvagedDustItem(String name, SkillItemTier tier, LevelRange range, int durabilityRepair) {
         super(new Properties().stacksTo(64)
-            .tab(CreativeTabs.MyModTab));
+                .tab(CreativeTabs.MyModTab));
         this.name = name;
         this.tier = tier;
         this.range = range;
@@ -66,7 +66,7 @@ public class SalvagedDustItem extends Item implements IAutoLocName, IWeighted, I
     @Override
     public String locNameLangFileGUID() {
         return Registry.ITEM.getKey(this)
-            .toString();
+                .toString();
     }
 
     @Override
@@ -97,15 +97,15 @@ public class SalvagedDustItem extends Item implements IAutoLocName, IWeighted, I
         }
 
         Item output = ProfessionItems.SALVAGED_ESSENCE_MAP.values()
-            .stream()
-            .filter(x -> x.get().tier.tier == tier.tier - 1)
-            .findAny()
-            .get()
-            .get();
+                .stream()
+                .filter(x -> x.get().tier.tier == tier.tier - 1)
+                .findAny()
+                .get()
+                .get();
 
         return ShapelessRecipeBuilder.shapeless(output, 3)
-            .requires(this, 1)
-            .unlockedBy("player_level", trigger());
+                .requires(this, 1)
+                .unlockedBy("player_level", trigger());
 
     }
 }

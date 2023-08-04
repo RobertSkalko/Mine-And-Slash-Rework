@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.mmorpg.event_registers;
 
-import com.robertx22.addon.divine_missions.events.IsMobKilledValid;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.capability.player.RPGPlayerData;
 import com.robertx22.age_of_exile.damage_hooks.*;
@@ -71,7 +70,6 @@ public class CommonEvents {
             }
         });
 
-        ExileEvents.IS_KILLED_ENTITY_VALID.register(new IsMobKilledValid());
         ExileEvents.ON_CHEST_LOOTED.register(new OnLootChestEvent());
         ExileEvents.LIVING_ENTITY_TICK.register(new OnEntityTick());
         ExileEvents.MOB_DEATH.register(new OnMobDeathDrops());
@@ -92,9 +90,9 @@ public class CommonEvents {
                     if (LivingHurtUtils.isEnviromentalDmg(event.getSource())) {
                         EntityData data = Load.Unit(event.getEntityLiving());
                         float reduction = Health.getInstance()
-                            .getUsableValue((int) data.getUnit()
-                                .healthData()
-                                .getValue(), data.getLevel());
+                                .getUsableValue((int) data.getUnit()
+                                        .healthData()
+                                        .getValue(), data.getLevel());
 
                         float multi = 1 - reduction;
 
@@ -117,8 +115,8 @@ public class CommonEvents {
 
                         data.deathStats.deathPos = event.player.blockPosition();
                         data.deathStats.deathDim = event.player.level.dimension()
-                            .location()
-                            .toString();
+                                .location()
+                                .toString();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -138,7 +136,7 @@ public class CommonEvents {
                 Cached.reset();
                 setupStatsThatAffectVanillaStatsList();
                 ErrorChecks.getAll()
-                    .forEach(x -> x.check());
+                        .forEach(x -> x.check());
             }
         });
 
@@ -148,9 +146,9 @@ public class CommonEvents {
         Cached.VANILLA_STAT_UIDS_TO_CLEAR_EVERY_STAT_CALC = new ArrayList<>();
 
         ExileDB.Stats()
-            .getFilterWrapped(x -> x instanceof AttributeStat).list.forEach(x -> {
-                AttributeStat attri = (AttributeStat) x;
-                Cached.VANILLA_STAT_UIDS_TO_CLEAR_EVERY_STAT_CALC.add(ImmutablePair.of(attri.attribute, attri.uuid));
-            });
+                .getFilterWrapped(x -> x instanceof AttributeStat).list.forEach(x -> {
+                    AttributeStat attri = (AttributeStat) x;
+                    Cached.VANILLA_STAT_UIDS_TO_CLEAR_EVERY_STAT_CALC.add(ImmutablePair.of(attri.attribute, attri.uuid));
+                });
     }
 }

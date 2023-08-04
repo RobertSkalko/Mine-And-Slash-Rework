@@ -23,7 +23,7 @@
     {
       "min": -50.0,
       "max": 15.0,
-      "stat": "earth_resist",
+      "stat": "chaos_resist",
       "type": "percent"
     }
   ],

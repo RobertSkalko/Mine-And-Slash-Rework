@@ -22,43 +22,43 @@ public class UniqueNecklaces implements ExileRegistryInit {
     public void registerAll() {
 
         UniqueGearBuilder.of(
-                "rabbit_paw",
-                "Rabbit's Paw",
-                BaseGearTypes.NECKLACE)
-            .stats(Arrays.asList(
-                new StatModifier(2, 10, DatapackStats.MOVE_SPEED, ModType.FLAT),
-                new StatModifier(5, 25, EnergyRegen.getInstance(), ModType.PERCENT),
-                new StatModifier(2, 6, DatapackStats.AGI, ModType.FLAT)
-            ))
-            .setReplacesName()
-            .build();
+                        "rabbit_paw",
+                        "Rabbit's Paw",
+                        BaseGearTypes.NECKLACE)
+                .stats(Arrays.asList(
+                        new StatModifier(2, 10, DatapackStats.MOVE_SPEED, ModType.FLAT),
+                        new StatModifier(5, 25, EnergyRegen.getInstance(), ModType.PERCENT),
+                        new StatModifier(2, 6, DatapackStats.AGI, ModType.FLAT)
+                ))
+                .setReplacesName()
+                .build();
 
         UniqueGearBuilder.of(
-                "ghast_necklace",
-                "Ghast Tear",
-                BaseGearTypes.NECKLACE)
+                        "ghast_necklace",
+                        "Ghast Tear",
+                        BaseGearTypes.NECKLACE)
 
-            .stats(Arrays.asList(
-                new StatModifier(1, 2, PlusSkillsInSchoolStats.PLUS_OCEAN),
-                new StatModifier(25, 25, DatapackStats.MANA_PER_10_INT, ModType.FLAT),
-                new StatModifier(3, 5, SpellDamage.getInstance(), ModType.FLAT),
-                new StatModifier(1, 3, DatapackStats.VIT, ModType.FLAT),
-                new StatModifier(2, 6, DatapackStats.AGI, ModType.FLAT)
-            ))
+                .stats(Arrays.asList(
+                        new StatModifier(1, 2, PlusSkillsInSchoolStats.PLUS_OCEAN),
+                        new StatModifier(25, 25, DatapackStats.MANA_PER_10_INT, ModType.FLAT),
+                        new StatModifier(3, 5, SpellDamage.getInstance(), ModType.FLAT),
+                        new StatModifier(1, 3, DatapackStats.VIT, ModType.FLAT),
+                        new StatModifier(2, 6, DatapackStats.AGI, ModType.FLAT)
+                ))
 
-            .build();
+                .build();
 
         UniqueGearBuilder.of(
-                "skull_of_spirits",
-                "Skull of Spirits",
-                BaseGearTypes.NECKLACE)
-            .stats(Arrays.asList(
-                new StatModifier(1, 2, AllAttributes.getInstance(), ModType.FLAT),
-                new StatModifier(10, 20, ManaRegen.getInstance(), ModType.PERCENT),
-                new StatModifier(-5, -15, new ElementalResist(Elements.Water), ModType.PERCENT),
-                new StatModifier(-5, -15, new ElementalResist(Elements.Fire), ModType.PERCENT)
-            ))
-            .build();
+                        "skull_of_spirits",
+                        "Skull of Spirits",
+                        BaseGearTypes.NECKLACE)
+                .stats(Arrays.asList(
+                        new StatModifier(1, 2, AllAttributes.getInstance(), ModType.FLAT),
+                        new StatModifier(10, 20, ManaRegen.getInstance(), ModType.PERCENT),
+                        new StatModifier(-5, -15, new ElementalResist(Elements.Cold), ModType.PERCENT),
+                        new StatModifier(-5, -15, new ElementalResist(Elements.Fire), ModType.PERCENT)
+                ))
+                .build();
 
     }
 }

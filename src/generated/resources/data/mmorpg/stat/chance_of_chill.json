@@ -1,7 +1,7 @@
 {
   "ser": "data",
   "id": "chance_of_chill",
-  "ele": "Water",
+  "ele": "Cold",
   "effect": {
     "order": 100,
     "side": "Source",

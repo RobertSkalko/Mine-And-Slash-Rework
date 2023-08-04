@@ -19,13 +19,13 @@
     {
       "min": 75.0,
       "max": 75.0,
-      "stat": "convert_earth_to_phys",
+      "stat": "convert_chaos_to_phys",
       "type": "flat"
     },
     {
       "min": 1.0,
       "max": 1.0,
-      "stat": "earth_weapon_damage",
+      "stat": "chaos_weapon_damage",
       "type": "flat"
     },
     {

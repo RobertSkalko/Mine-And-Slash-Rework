@@ -9,8 +9,9 @@ public enum Elements {
 
     Physical(false, "Physical", TextFormatting.GOLD, "physical", "\u2726"),
     Fire(true, "Fire", TextFormatting.RED, "fire", "\u2600"),
-    Water(true, "Water", TextFormatting.AQUA, "water", "\u2749"),
-    Earth(true, "Earth", TextFormatting.DARK_GREEN, "earth", "\u273F"), /* Reminder: if i rename this to "earth" satte will get pissed off */
+    Cold(true, "Cold", TextFormatting.AQUA, "water", "\u2749"),
+    Lightning(true, "Lightning", TextFormatting.YELLOW, "lightning", "\u2749"),
+    Chaos(true, "Chaos", TextFormatting.DARK_GREEN, "chaos", "\u273F"),
 
     Elemental(false, "Elemental", TextFormatting.LIGHT_PURPLE, "elemental", "\u269C"),
     All(false, "All", TextFormatting.LIGHT_PURPLE, "all", "\u273F");
@@ -57,16 +58,16 @@ public enum Elements {
     }
 
     public boolean isWater() {
-        return this == Water;
+        return this == Cold;
     }
 
     public boolean isNature() {
-        return this == Earth;
+        return this == Chaos;
     }
 
-    private static List<Elements> allIncludingPhys = Arrays.asList(Physical, Fire, Water, Earth);
-    private static List<Elements> allExcludingPhys = Arrays.asList(Fire, Water, Earth, Elemental);
-    private static List<Elements> allSingleElementals = Arrays.asList(Fire, Water, Earth);
+    private static List<Elements> allIncludingPhys = Arrays.asList(Physical, Fire, Cold, Lightning, Chaos);
+    private static List<Elements> allExcludingPhys = Arrays.asList(Fire, Cold, Lightning, Chaos, Elemental);
+    private static List<Elements> allSingleElementals = Arrays.asList(Fire, Cold, Lightning, Chaos);
 
     public static List<Elements> getAllSingleElementals() {
         return allSingleElementals;

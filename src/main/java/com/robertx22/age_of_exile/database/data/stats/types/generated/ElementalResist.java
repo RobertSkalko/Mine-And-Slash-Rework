@@ -58,7 +58,7 @@ public class ElementalResist extends ElementalStat implements IUsableStat {
 
     @Override
     public String locNameForLangFile() {
-        return this.getElement().dmgName + " Defense";
+        return this.getElement().dmgName + " Resistance";
     }
 
     @Override

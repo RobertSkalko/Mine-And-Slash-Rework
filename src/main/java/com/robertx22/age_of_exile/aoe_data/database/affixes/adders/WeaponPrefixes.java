@@ -17,69 +17,69 @@ public class WeaponPrefixes implements ExileRegistryInit {
     public void registerAll() {
 
         ElementalAffixBuilder.start()
-            .guid(x -> x.guidName + "_wep_dmg")
-            .add(Elements.Fire, "Scorched")
-            .add(Elements.Water, "Chilled")
-            .add(Elements.Earth, "Poisoned")
-            .add(Elements.Physical, "Tyrannical")
-            .stats(x -> Arrays.asList(new StatModifier(3, 10, Stats.ELEMENTAL_DAMAGE.get(x), ModType.FLAT)))
-            .includesTags(SlotTag.weapon_family)
-            .Prefix()
-            .Build();
+                .guid(x -> x.guidName + "_wep_dmg")
+                .add(Elements.Fire, "Scorched")
+                .add(Elements.Cold, "Chilled")
+                .add(Elements.Chaos, "Poisoned")
+                .add(Elements.Physical, "Tyrannical")
+                .stats(x -> Arrays.asList(new StatModifier(3, 10, Stats.ELEMENTAL_DAMAGE.get(x), ModType.FLAT)))
+                .includesTags(SlotTag.weapon_family)
+                .Prefix()
+                .Build();
 
         ElementalAffixBuilder.start()
-            .guid(x -> x.guidName + "_spell_ele_dmg")
-            .add(Elements.Fire, "Scorched")
-            .add(Elements.Water, "Chilled")
-            .add(Elements.Earth, "Poisoned")
-            .stats(x -> Arrays.asList(new StatModifier(5, 15, Stats.ELEMENTAL_SPELL_DAMAGE.get(x))))
-            .Weight(500)
-            .includesTags(SlotTag.mage_weapon)
-            .Prefix()
-            .Build();
+                .guid(x -> x.guidName + "_spell_ele_dmg")
+                .add(Elements.Fire, "Scorched")
+                .add(Elements.Cold, "Chilled")
+                .add(Elements.Lightning, "Poisoned")
+                .stats(x -> Arrays.asList(new StatModifier(5, 15, Stats.ELEMENTAL_SPELL_DAMAGE.get(x))))
+                .Weight(500)
+                .includesTags(SlotTag.mage_weapon)
+                .Prefix()
+                .Build();
 
         AffixBuilder.Normal("desolation")
-            .Named("Desolation")
-            .stats(new StatModifier(2, 6, Stats.SPELL_CRIT_CHANCE.get()), new StatModifier(3, 10, Stats.SPELL_CRIT_DAMAGE.get()))
-            .includesTags(SlotTag.mage_weapon)
-            .Weight(100)
-            .Prefix()
-            .Build();
+                .Named("Desolation")
+                .stats(new StatModifier(2, 6, Stats.SPELL_CRIT_CHANCE.get()), new StatModifier(3, 10, Stats.SPELL_CRIT_DAMAGE.get()))
+                .includesTags(SlotTag.mage_weapon)
+                .Weight(100)
+                .Prefix()
+                .Build();
 
         AffixBuilder.Normal("cruel")
-            .Named("Cruel")
-            .stats(new StatModifier(5, 15, new AttackDamage(Elements.Physical), ModType.PERCENT))
-            .includesTags(SlotTag.weapon_family)
-            .Prefix()
-            .Build();
+                .Named("Cruel")
+                .stats(new StatModifier(5, 15, new AttackDamage(Elements.Physical), ModType.PERCENT))
+                .includesTags(SlotTag.weapon_family)
+                .Prefix()
+                .Build();
 
         AffixBuilder.Normal("true_hit")
-            .Named("True Hit")
-            .stats(new StatModifier(2, 10, Stats.CRIT_CHANCE.get(), ModType.FLAT))
-            .includesTags(SlotTag.weapon_family)
-            .Prefix()
-            .Build();
+                .Named("True Hit")
+                .stats(new StatModifier(2, 10, Stats.CRIT_CHANCE.get(), ModType.FLAT))
+                .includesTags(SlotTag.weapon_family)
+                .Prefix()
+                .Build();
 
         AffixBuilder.Normal("crit_prefix")
-            .Named("Critical")
-            .stats(new StatModifier(4, 12, Stats.CRIT_DAMAGE.get(), ModType.FLAT))
-            .includesTags(SlotTag.weapon_family)
-            .Prefix()
-            .Build();
+                .Named("Critical")
+                .stats(new StatModifier(4, 12, Stats.CRIT_DAMAGE.get(), ModType.FLAT))
+                .includesTags(SlotTag.weapon_family)
+                .Prefix()
+                .Build();
 
         AffixBuilder.Normal("heal_crit_prefix")
-            .Named("Truthful")
-            .stats(new StatModifier(3, 12, Stats.HEAL_CRIT_CHANCE.get(), ModType.FLAT))
-            .includesTags(SlotTag.scepter)
-            .Prefix()
-            .Build();
+                .Named("Truthful")
+                .stats(new StatModifier(3, 12, Stats.HEAL_CRIT_CHANCE.get(), ModType.FLAT))
+                .includesTags(SlotTag.scepter)
+                .Prefix()
+                .Build();
 
         AffixBuilder.Normal("heal_crit_dmg_prefix")
-            .Named("Inspiring")
-            .stats(new StatModifier(5, 20, Stats.HEAL_CRIT_DAMAGE.get(), ModType.FLAT))
-            .includesTags(SlotTag.scepter)
-            .Prefix()
-            .Build();
+                .Named("Inspiring")
+                .stats(new StatModifier(5, 20, Stats.HEAL_CRIT_DAMAGE.get(), ModType.FLAT))
+                .includesTags(SlotTag.scepter)
+                .Prefix()
+                .Build();
 
     }
 

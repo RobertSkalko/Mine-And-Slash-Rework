@@ -59,9 +59,6 @@ public class OnItemInteract {
 
                 int repair = essence.durabilityRepair;
 
-                if (gear.getTier() > essence.tier.tier) {
-                    repair /= 5;
-                }
                 stack.setDamageValue(stack.getDamageValue() - repair);
                 success = true;
 
@@ -94,7 +91,7 @@ public class OnItemInteract {
 
                     stack.shrink(1);
                     data.getSalvageResult(stack)
-                        .forEach(x -> PlayerUtils.giveItem(x, player));
+                            .forEach(x -> PlayerUtils.giveItem(x, player));
                     ci.setReturnValue(ItemStack.EMPTY);
                     ci.cancel();
                     return;
@@ -107,8 +104,8 @@ public class OnItemInteract {
                     if (gear.sockets != null && gear.sockets.sockets.size() > 0) {
                         try {
                             ItemStack gem = new ItemStack(gear.sockets.sockets.get(0)
-                                .getGem()
-                                .getItem());
+                                    .getGem()
+                                    .getItem());
                             gear.sockets.sockets.remove(0);
                             Gear.Save(stack, gear);
                             PlayerUtils.giveItem(gem, player);

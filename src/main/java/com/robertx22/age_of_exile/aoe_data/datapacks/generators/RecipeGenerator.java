@@ -17,7 +17,6 @@ import net.minecraft.advancements.criterion.*;
 import net.minecraft.data.*;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IItemProvider;
 import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -31,14 +30,14 @@ import java.util.function.Consumer;
 public class RecipeGenerator {
 
     public static final Gson GSON = (new GsonBuilder()).setPrettyPrinting()
-        .create();
+            .create();
     protected DirectoryCache cache;
 
     public RecipeGenerator() {
 
         try {
             cache = new DirectoryCache(FMLPaths.GAMEDIR.get()
-                , "datagencache");
+                    , "datagencache");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -57,8 +56,8 @@ public class RecipeGenerator {
     private Path resolve(Path path, String id) {
 
         return path.resolve(
-            "data/" + SlashRef.MODID + "/recipes/" + id
-                + ".json");
+                "data/" + SlashRef.MODID + "/recipes/" + id
+                        + ".json");
     }
 
     public void run() {
@@ -72,7 +71,7 @@ public class RecipeGenerator {
         generate(x -> {
 
             Path target = movePath(resolve(path, x.getId()
-                .getPath()));
+                    .getPath()));
 
             try {
                 IDataProvider.save(GSON, cache, x.serializeRecipe(), target);
@@ -108,25 +107,17 @@ public class RecipeGenerator {
 
         }
 
-        ProfessionItems.SMELTED_ESSENCE.values()
-            .forEach(x -> {
-                Item ess = ProfessionItems.SALVAGED_ESSENCE_MAP.get(x.get().tier)
-                    .get();
-                CookingRecipeBuilder.smelting(Ingredient.of(ess), x.get(), 0.2F, 200)
-                    .unlockedBy("ess" + x.get().tier, conditionsFromItem(ess))
-                    .save(consumer);
-            });
-
+    
         ProfessionItems.SALVAGED_ESSENCE_MAP.values()
-            .forEach(x -> {
-                if (x.get().tier.lowerTier() != null) {
-                    ShapelessRecipeBuilder fac = ShapelessRecipeBuilder.shapeless(x.get(), 1);
-                    fac.requires(ProfessionItems.SALVAGED_ESSENCE_MAP.get(x.get().tier.lowerTier())
-                        .get(), 4);
-                    fac.unlockedBy("player_level", EnchantedItemTrigger.Instance.enchantedItem())
-                        .save(consumer);
-                }
-            });
+                .forEach(x -> {
+                    if (x.get().tier.lowerTier() != null) {
+                        ShapelessRecipeBuilder fac = ShapelessRecipeBuilder.shapeless(x.get(), 1);
+                        fac.requires(ProfessionItems.SALVAGED_ESSENCE_MAP.get(x.get().tier.lowerTier())
+                                .get(), 4);
+                        fac.unlockedBy("player_level", EnchantedItemTrigger.Instance.enchantedItem())
+                                .save(consumer);
+                    }
+                });
 
         gearRecipe(consumer, SlashItems.GearItems.NECKLACES, GearSlots.NECKLACE);
         gearRecipe(consumer, SlashItems.GearItems.RINGS, GearSlots.RING);
@@ -137,42 +128,42 @@ public class RecipeGenerator {
     public static void gearRecipe(Consumer<IFinishedRecipe> cons, HashMap<VanillaMaterial, RegObj<Item>> map, String slot) {
 
         map.entrySet()
-            .forEach(x -> {
+                .forEach(x -> {
 
-                ShapedRecipeBuilder fac = ShapedRecipeBuilder.shaped(x.getValue()
-                    .get(), 1);
+                    ShapedRecipeBuilder fac = ShapedRecipeBuilder.shaped(x.getValue()
+                            .get(), 1);
 
-                String[] pattern = getRecipePattern(ExileDB.GearSlots()
-                    .get(slot));
+                    String[] pattern = getRecipePattern(ExileDB.GearSlots()
+                            .get(slot));
 
-                String all = Strings.join(pattern, "");
+                    String all = Strings.join(pattern, "");
 
-                if (all.contains("M")) {
-                    if (x.getKey().mat.tag != null) {
-                        fac.define('M', x.getKey().mat.tag);
-                    } else {
-                        fac.define('M', x.getKey().mat.item);
+                    if (all.contains("M")) {
+                        if (x.getKey().mat.tag != null) {
+                            fac.define('M', x.getKey().mat.tag);
+                        } else {
+                            fac.define('M', x.getKey().mat.item);
+                        }
                     }
-                }
-                if (all.contains("S")) {
-                    fac.define('S', Items.STICK);
-                }
-                if (all.contains("B")) {
-                    fac.define('B', Items.STRING);
-                }
-
-                for (String pat : pattern) {
-                    try {
-                        fac.pattern(pat);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    if (all.contains("S")) {
+                        fac.define('S', Items.STICK);
                     }
-                }
+                    if (all.contains("B")) {
+                        fac.define('B', Items.STRING);
+                    }
 
-                fac.unlockedBy("player_level", EnchantedItemTrigger.Instance.enchantedItem());
+                    for (String pat : pattern) {
+                        try {
+                            fac.pattern(pat);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
 
-                fac.save(cons);
-            });
+                    fac.unlockedBy("player_level", EnchantedItemTrigger.Instance.enchantedItem());
+
+                    fac.save(cons);
+                });
     }
 
     public static String[] getRecipePattern(GearSlot type) {
@@ -181,90 +172,90 @@ public class RecipeGenerator {
 
         if (id.equals(GearSlots.SWORD)) {
             return new String[]{
-                " M ",
-                " M ",
-                " S "
+                    " M ",
+                    " M ",
+                    " S "
             };
         }
 
         if (id.equals(GearSlots.AXE)) {
             return new String[]{
-                "MM ",
-                " S ",
-                " S "
+                    "MM ",
+                    " S ",
+                    " S "
             };
         }
 
         if (id.equals(GearSlots.SCEPTER)) {
             return new String[]{
-                "M  ",
-                "MS ",
-                "SS "
+                    "M  ",
+                    "MS ",
+                    "SS "
             };
         }
 
         if (id.equals(GearSlots.STAFF)) {
             return new String[]{
-                "  M",
-                "SM ",
-                "SS "
+                    "  M",
+                    "SM ",
+                    "SS "
             };
         }
 
         if (id.equals(GearSlots.BOW)) {
             return new String[]{
-                " MB",
-                "M B",
-                " MB"
+                    " MB",
+                    "M B",
+                    " MB"
             };
         }
         if (id.equals(GearSlots.CROSBOW)) {
             return new String[]{
-                "MSM",
-                "S S",
-                " S "
+                    "MSM",
+                    "S S",
+                    " S "
             };
         }
 
         if (id.equals(GearSlots.CHEST)) {
             return new String[]{
-                "M M",
-                "MMM",
-                "MMM"
+                    "M M",
+                    "MMM",
+                    "MMM"
             };
         }
         if (id.equals(GearSlots.BOW)) {
             return new String[]{
-                "M M",
-                "M M"
+                    "M M",
+                    "M M"
             };
         }
         if (id.equals(GearSlots.PANTS)) {
             return new String[]{
-                "MMM",
-                "M M",
-                "M M"
+                    "MMM",
+                    "M M",
+                    "M M"
             };
         }
         if (id.equals(GearSlots.HELMET)) {
             return new String[]{
-                "MMM",
-                "M M"
+                    "MMM",
+                    "M M"
             };
         }
 
         if (id.equals(GearSlots.NECKLACE)) {
             return new String[]{
-                "MMM",
-                "M M",
-                "MMM"
+                    "MMM",
+                    "M M",
+                    "MMM"
             };
         }
         if (id.equals(GearSlots.RING)) {
             return new String[]{
-                " M ",
-                "M M",
-                " M "
+                    " M ",
+                    "M M",
+                    " M "
             };
         }
 
@@ -275,8 +266,8 @@ public class RecipeGenerator {
 
     static InventoryChangeTrigger.Instance conditionsFromItem(IItemProvider itemConvertible) {
         return conditionsFromItemPredicates(ItemPredicate.Builder.item()
-            .of(itemConvertible)
-            .build());
+                .of(itemConvertible)
+                .build());
     }
 
     private static InventoryChangeTrigger.Instance conditionsFromItemPredicates(ItemPredicate... itemPredicates) {

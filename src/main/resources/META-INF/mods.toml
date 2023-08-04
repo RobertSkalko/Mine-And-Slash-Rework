@@ -31,18 +31,6 @@ Turns Minecraft into a hack and slash RPG!
     ordering="NONE"
     side="BOTH"
 [[dependencies.mmorpg]]
-    modId="divine_missions"
-    mandatory=true
-    versionRange="[0,)"
-    ordering="NONE"
-    side="BOTH"
-[[dependencies.mmorpg]]
-    modId="world_of_exile"
-    mandatory=true
-    versionRange="[0,)"
-    ordering="NONE"
-    side="BOTH"
-[[dependencies.mmorpg]]
     modId="library_of_exile"
     mandatory=true
     versionRange="[1.2.3,)"

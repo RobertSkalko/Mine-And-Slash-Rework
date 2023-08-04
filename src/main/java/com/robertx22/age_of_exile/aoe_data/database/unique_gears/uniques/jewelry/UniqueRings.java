@@ -23,36 +23,36 @@ public class UniqueRings implements ExileRegistryInit {
     public void registerAll() {
 
         UniqueGearBuilder.of(
-                "witch_brew",
-                "Witch's Brew",
-                BaseGearTypes.RING)
+                        "witch_brew",
+                        "Witch's Brew",
+                        BaseGearTypes.RING)
 
-            .stats(Arrays.asList(
-                new StatModifier(15, 25, new ElementalResist(Elements.Earth), ModType.PERCENT),
-                new StatModifier(25, 50, SpecialStats.BETTER_FOOD_BUFFS, ModType.FLAT),
-                new StatModifier(10, 15, SpellDamage.getInstance(), ModType.FLAT),
-                new StatModifier(5, 10, ManaRegen.getInstance(), ModType.PERCENT)
+                .stats(Arrays.asList(
+                        new StatModifier(15, 25, new ElementalResist(Elements.Chaos), ModType.PERCENT),
+                        new StatModifier(25, 50, SpecialStats.BETTER_FOOD_BUFFS, ModType.FLAT),
+                        new StatModifier(10, 15, SpellDamage.getInstance(), ModType.FLAT),
+                        new StatModifier(5, 10, ManaRegen.getInstance(), ModType.PERCENT)
 
-            ))
+                ))
 
-            .devComment("Food buff mage ring")
-            .build();
+                .devComment("Food buff mage ring")
+                .build();
 
         UniqueGearBuilder.of(
-                "ghostly_shores",
-                "Ghostly Shores",
-                BaseGearTypes.RING)
-            .setReplacesName()
-            .stats(Arrays.asList(
-                new StatModifier(5, 15, Stats.ELEMENTAL_DAMAGE.get(Elements.Water), ModType.FLAT),
-                new StatModifier(6, 10, DodgeRating.getInstance(), ModType.PERCENT),
-                new StatModifier(6, 15, Stats.RESOURCE_ON_KILL.get(ResourceType.mana), ModType.FLAT),
-                new StatModifier(10, 15, Stats.CRIT_DAMAGE.get(), ModType.FLAT),
-                new StatModifier(5, 10, Stats.COOLDOWN_REDUCTION.get(), ModType.FLAT),
-                new StatModifier(-3, -6, DatapackStats.VIT, ModType.FLAT)
-            ))
+                        "ghostly_shores",
+                        "Ghostly Shores",
+                        BaseGearTypes.RING)
+                .setReplacesName()
+                .stats(Arrays.asList(
+                        new StatModifier(5, 15, Stats.ELEMENTAL_DAMAGE.get(Elements.Cold), ModType.FLAT),
+                        new StatModifier(6, 10, DodgeRating.getInstance(), ModType.PERCENT),
+                        new StatModifier(6, 15, Stats.RESOURCE_ON_KILL.get(ResourceType.mana), ModType.FLAT),
+                        new StatModifier(10, 15, Stats.CRIT_DAMAGE.get(), ModType.FLAT),
+                        new StatModifier(5, 10, Stats.COOLDOWN_REDUCTION.get(), ModType.FLAT),
+                        new StatModifier(-3, -6, DatapackStats.VIT, ModType.FLAT)
+                ))
 
-            .build();
+                .build();
 
     }
 }

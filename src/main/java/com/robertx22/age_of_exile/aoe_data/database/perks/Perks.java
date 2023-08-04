@@ -73,7 +73,7 @@ public class Perks implements ExileRegistryInit {
 
         PerkBuilder.stat(new OptScaleExactStat(5, ManaRegen.getInstance(), ModType.PERCENT));
         PerkBuilder.stat("small_positive_effect_increase",
-            new OptScaleExactStat(3, Stats.EFFECT_OF_BUFFS_ON_YOU_PER_EFFECT_TAG.get(EffectTags.positive))
+                new OptScaleExactStat(3, Stats.EFFECT_OF_BUFFS_ON_YOU_PER_EFFECT_TAG.get(EffectTags.positive))
         );
 
         PerkBuilder.stat("cooldown_reduction", new OptScaleExactStat(3, Stats.COOLDOWN_REDUCTION.get()));
@@ -100,48 +100,48 @@ public class Perks implements ExileRegistryInit {
         PerkBuilder.stat("more_dualwield_dmg", new OptScaleExactStat(3, DualWieldDamage.getInstance()));
 
         Stats.ELEMENTAL_SPELL_DAMAGE.getAll()
-            .forEach(x -> {
-                PerkBuilder.stat(x.GUID(), new OptScaleExactStat(3, x, ModType.FLAT));
-                PerkBuilder.stat(x.GUID() + "_and_dot", new OptScaleExactStat(1, x, ModType.FLAT), new OptScaleExactStat(3, Stats.ELE_DOT_DAMAGE.get(x.getElement()), ModType.FLAT));
-            });
+                .forEach(x -> {
+                    PerkBuilder.stat(x.GUID(), new OptScaleExactStat(3, x, ModType.FLAT));
+                    PerkBuilder.stat(x.GUID() + "_and_dot", new OptScaleExactStat(1, x, ModType.FLAT), new OptScaleExactStat(3, Stats.ELE_DOT_DAMAGE.get(x.getElement()), ModType.FLAT));
+                });
 
         Stats.WEAPON_DAMAGE.getAll()
-            .forEach(x -> {
-                PerkBuilder.stat(x.GUID(), new OptScaleExactStat(2, x, ModType.FLAT));
-            });
+                .forEach(x -> {
+                    PerkBuilder.stat(x.GUID(), new OptScaleExactStat(2, x, ModType.FLAT));
+                });
 
         Stats.RESOURCE_ON_KILL.getAll()
-            .forEach(x -> {
-                PerkBuilder.stat(x.GUID(), new OptScaleExactStat(10, x, ModType.FLAT));
-            });
+                .forEach(x -> {
+                    PerkBuilder.stat(x.GUID(), new OptScaleExactStat(10, x, ModType.FLAT));
+                });
 
         Stats.ELEMENTAL_WEAPON_DAMAGE.getAll()
-            .forEach(x -> {
-                PerkBuilder.stat(x.GUID(), new OptScaleExactStat(3, x, ModType.FLAT));
+                .forEach(x -> {
+                    PerkBuilder.stat(x.GUID(), new OptScaleExactStat(3, x, ModType.FLAT));
 
-            });
+                });
 
         Stats.ELEMENTAL_DAMAGE.getAll()
-            .forEach(x -> {
-                PerkBuilder.stat(x.GUID(), new OptScaleExactStat(2, x, ModType.FLAT));
-            });
+                .forEach(x -> {
+                    PerkBuilder.stat(x.GUID(), new OptScaleExactStat(2, x, ModType.FLAT));
+                });
 
-        new ElementalResist(Elements.Earth).generateAllPossibleStatVariations()
-            .forEach(x -> {
-                PerkBuilder.stat(x.GUID(), new OptScaleExactStat(4, x, ModType.FLAT));
+        new ElementalResist(Elements.Chaos).generateAllPossibleStatVariations()
+                .forEach(x -> {
+                    PerkBuilder.stat(x.GUID(), new OptScaleExactStat(4, x, ModType.FLAT));
 
-            });
+                });
 
-        new ElementalPenetration(Elements.Earth).generateAllPossibleStatVariations()
-            .forEach(x -> {
-                PerkBuilder.stat(x.GUID(), new OptScaleExactStat(5, x, ModType.FLAT));
-            });
+        new ElementalPenetration(Elements.Chaos).generateAllPossibleStatVariations()
+                .forEach(x -> {
+                    PerkBuilder.stat(x.GUID(), new OptScaleExactStat(5, x, ModType.FLAT));
+                });
 
-        new AttackDamage(Elements.Earth).generateAllPossibleStatVariations()
-            .forEach(x -> {
-                PerkBuilder.stat(x.GUID(), new OptScaleExactStat(2, x, ModType.PERCENT));
+        new AttackDamage(Elements.Chaos).generateAllPossibleStatVariations()
+                .forEach(x -> {
+                    PerkBuilder.stat(x.GUID(), new OptScaleExactStat(2, x, ModType.PERCENT));
 
-            });
+                });
 
     }
 }

@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.saveclasses.item_classes;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
@@ -10,8 +9,6 @@ import com.robertx22.age_of_exile.database.data.requirements.bases.GearRequested
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import com.robertx22.age_of_exile.mmorpg.registers.common.items.ProfessionItems;
-import com.robertx22.age_of_exile.player_skills.items.foods.SkillItemTier;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.*;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.*;
@@ -24,7 +21,6 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import info.loenwind.autosave.annotations.Storable;
 import info.loenwind.autosave.annotations.Store;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.ITextComponent;
@@ -53,8 +49,6 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     public CraftedStatsData cr;
     @Store
     public UniqueStatsData uniqueStats;
-    @Store
-    public UpgradeData up = new UpgradeData();
 
     @Store
     public String spell = "";
@@ -96,7 +90,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
         GearRarity old = this.getRarity();
         GearRarity rar = this.getRarity()
-            .getHigherRarity();
+                .getHigherRarity();
 
         this.rarity = rar.GUID();
 
@@ -106,32 +100,8 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
             this.affixes.addOneRandomAffix(this);
         }
 
-        this.up.regenerate(rar);
     }
 
-    public void onUpgrade(PlayerEntity player, UpgradeData.SlotType type) {
-
-        for (int i = 0; i < this.up.ups.size(); i++) {
-            UpgradeData.SlotType slot = this.up.ups.get(i);
-            if (slot == UpgradeData.SlotType.EMPTY && type == UpgradeData.SlotType.UP1) {
-                this.up.ups.set(i, type);
-                break;
-            } else if (slot == UpgradeData.SlotType.UP1 && type == UpgradeData.SlotType.UP2) {
-                this.up.ups.set(i, type);
-                break;
-            } else if (slot == UpgradeData.SlotType.UP2 && type == UpgradeData.SlotType.UP3) {
-                this.up.ups.set(i, type);
-                break;
-            }
-        }
-
-        if (type.upgradeLevel > 0) {
-            player.displayClientMessage(new StringTextComponent("Upgraded Item to +" + up.getUpgradeLevel() + " with a +" + type.upgradeLevel).withStyle(TextFormatting.GREEN), false);
-        } else {
-            player.displayClientMessage(new StringTextComponent("Upgrade failed").withStyle(TextFormatting.RED), false);
-        }
-
-    }
 
     public boolean isCorrupted() {
         return c;
@@ -153,10 +123,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
         float ilvl = lvl + getRarity().bonus_effective_lvls;
 
-        int upgrades = (int) (ServerContainer.get().ILVL_PER_UPGRADE_LEVEL.get() * this.up.getUpgradeLevel());
-        if (upgrades > 0) {
-            ilvl += upgrades;
-        }
+        
         return ilvl;
     }
 
@@ -173,35 +140,27 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     public boolean isValidItem() {
 
         return ExileDB.GearTypes()
-            .isRegistered(gear_type);
+                .isRegistered(gear_type);
     }
 
     public boolean hasSpell() {
         return ExileDB.Spells()
-            .isRegistered(spell);
+                .isRegistered(spell);
 
     }
 
     public Spell getSpell() {
         return ExileDB.Spells()
-            .get(spell);
+                .get(spell);
     }
 
     public int getTotalSockets() {
         int sockets = 0;
         sockets += getRarity().sockets;
 
-        int uplvl = this.up.getUpgradeLevel();
 
-        if (uplvl >= 4) {
-            sockets++;
-        }
-        if (uplvl >= 8) {
-            sockets++;
-        }
-        if (uplvl >= 12) {
-            sockets++;
-        }
+        // todo make new socket system..
+
         return sockets;
     }
 
@@ -249,7 +208,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     @Override
     public GearRarity getRarity() {
         return ExileDB.GearRarities()
-            .get(this.rarity);
+                .get(this.rarity);
     }
 
     public ITextComponent name(ItemStack stack) {
@@ -264,14 +223,14 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
     public BaseGearType GetBaseGearType() {
         return ExileDB.GearTypes()
-            .get(gear_type);
+                .get(gear_type);
     }
 
     public List<IFormattableTextComponent> GetDisplayName(ItemStack stack) {
 
         try {
             TextFormatting format = this.getRarity()
-                .textFormatting();
+                    .textFormatting();
 
             if (useFullAffixedName()) {
                 return getFullAffixedName();
@@ -295,7 +254,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     private List<IFormattableTextComponent> getFullAffixedName() {
         List<IFormattableTextComponent> list = new ArrayList<>();
         TextFormatting format = this.getRarity()
-            .textFormatting();
+                .textFormatting();
 
         IFormattableTextComponent text = new StringTextComponent("");
 
@@ -304,23 +263,23 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
             AffixData prefix = affixes.pre.get(0);
 
             text
-                .append(prefix.BaseAffix()
-                    .locName()
-                    .append(" "));
+                    .append(prefix.BaseAffix()
+                            .locName()
+                            .append(" "));
         }
         if (this.uniqueStats == null) {
             text.append(GetBaseGearType().locName());
         } else {
             text.append(uniqueStats.getUnique(this)
-                .locName()
+                    .locName()
             );
         }
 
         if (affixes.hasSuffix()) {
             AffixData suffix = affixes.suf.get(0);
             text.append(" ")
-                .append(suffix.BaseAffix()
-                    .locName());
+                    .append(suffix.BaseAffix()
+                            .locName());
         }
 
         text.withStyle(format);
@@ -334,16 +293,16 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     private List<IFormattableTextComponent> getUniqueName() {
         List<IFormattableTextComponent> list = new ArrayList<>();
         TextFormatting format = this.getRarity()
-            .textFormatting();
+                .textFormatting();
 
         UniqueGear uniq = this.uniqueStats.getUnique(this);
 
         IFormattableTextComponent txt = new StringTextComponent("").append(uniq.locName()
-            .withStyle(format));
+                .withStyle(format));
 
         if (!uniq.replaces_name) {
             txt.append(new StringTextComponent(format + " ").append(GetBaseGearType().locName()
-                .withStyle(format)));
+                    .withStyle(format)));
         }
 
         list.addAll(TooltipUtils.cutIfTooLong(txt, format));
@@ -354,7 +313,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     private List<IFormattableTextComponent> getTooManyAffixesName() {
         List<IFormattableTextComponent> list = new ArrayList<>();
         TextFormatting format = this.getRarity()
-            .textFormatting();
+                .textFormatting();
 
         Words prefix = RareItemAffixNames.getPrefix(this);
         Words suffix = RareItemAffixNames.getSuffix(this);
@@ -364,10 +323,10 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
             IFormattableTextComponent txt = new StringTextComponent("");
 
             txt.append(new StringTextComponent("").append(prefix.locName())
-                .append(" "));
+                    .append(" "));
 
             txt.append(new StringTextComponent("").append(suffix.locName())
-                .withStyle(format));
+                    .withStyle(format));
 
             txt.append(new StringTextComponent(" ").append(GetBaseGearType().locName()));
 
@@ -407,7 +366,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         IfNotNullAdd(imp, list);
 
         affixes.getAllAffixesAndSockets()
-            .forEach(x -> IfNotNullAdd(x, list));
+                .forEach(x -> IfNotNullAdd(x, list));
 
         IfNotNullAdd(sockets, list);
 
@@ -443,7 +402,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         IfNotNullAdd(baseStats, list);
 
         affixes.getAllAffixesAndSockets()
-            .forEach(x -> IfNotNullAdd(x, list));
+                .forEach(x -> IfNotNullAdd(x, list));
 
         list.add(imp);
 
@@ -472,6 +431,8 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         try {
             List<ItemStack> list = new ArrayList<>();
 
+            // todo
+            /*
             ItemStack dust = new ItemStack(ProfessionItems.SALVAGED_ESSENCE_MAP.get(SkillItemTier.of(info.tier))
                 .get());
 
@@ -484,6 +445,8 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
                 essence.setCount(info.rarity.rar_ess_per_sal);
                 list.add(essence);
             }
+
+             */
 
             return list;
 
@@ -520,8 +483,8 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     public boolean isWeapon() {
         try {
             if (GetBaseGearType()
-                .family()
-                .equals(SlotFamily.Weapon)) {
+                    .family()
+                    .equals(SlotFamily.Weapon)) {
                 return true;
             }
         } catch (Exception e) {
@@ -536,7 +499,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
             return false;
         }
         return getRarity()
-            .isHigherThan(other.getRarity());
+                .isHigherThan(other.getRarity());
     }
 
 }
