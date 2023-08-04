@@ -60,7 +60,7 @@ public class GearAffixesData implements IGearPartTooltip {
 
     public int getMaxAffixesPerType(GearItemData gear) {
         int affixes = gear.getRarity()
-            .maximumOfOneAffixType();
+                .maximumOfOneAffixType();
 
         return affixes;
     }
@@ -75,14 +75,11 @@ public class GearAffixesData implements IGearPartTooltip {
 
     public boolean canGetMore(Affix.Type type, GearItemData gear) {
 
-        if (gear.hasCraftedStats()) {
-            return false;
-        }
-
+        
         int current;
         if (type == Affix.Type.prefix) {
             current = pre
-                .size();
+                    .size();
         } else {
             current = suf.size();
         }
@@ -107,7 +104,7 @@ public class GearAffixesData implements IGearPartTooltip {
         GearRarity rar = gear.getRarity();
 
         for (int i = 0; i < rar
-            .maximumOfOneAffixType(); i++) {
+                .maximumOfOneAffixType(); i++) {
 
             AffixData suffix = new AffixData(Affix.Type.suffix);
             suffix.RerollFully(gear);
@@ -119,8 +116,7 @@ public class GearAffixesData implements IGearPartTooltip {
 
         }
 
-        int minaffixes = rar
-            .affixes;
+        int minaffixes = rar.min_affixes;
         int affixesToGen = minaffixes - (this.getNumberOfAffixes());
 
         while (affixesToGen > 0) {
@@ -166,7 +162,7 @@ public class GearAffixesData implements IGearPartTooltip {
 
     public boolean containsAffix(String id) {
         return getAllAffixesAndSockets().stream()
-            .anyMatch(x -> x.affix.equals(id));
+                .anyMatch(x -> x.affix.equals(id));
     }
 
     public int getNumberOfAffixes() {

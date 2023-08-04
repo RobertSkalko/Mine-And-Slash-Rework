@@ -55,32 +55,7 @@ public class MasterLootGen {
                 items.remove(RandomUtils.RandomRange(0, items.size() - 1));
             }
 
-            if (info.rpgData != null && info.favorRank != null) {
-                info.rpgData.favor.afterLootingItems(info.player, info.favorRank.favor_drain_per_item, info, items.size());
-
-                List<ItemStack> extraFavorItems = new ArrayList<ItemStack>();
-
-                int extraTries = 0;
-
-                while (extraFavorItems.size() < info.getExtraFavorItems()) {
-
-                    extraTries++;
-                    if (extraTries > 20) {
-                        System.out.println("Tried to generate loot many times but failed! ");
-                        break;
-                    }
-                    List<ItemStack> extra = populateOnce(info);
-                    if (!extra.isEmpty()) {
-                        extraFavorItems.add(RandomUtils.randomFromList(extra));
-                    }
-                }
-
-                info.rpgData.favor.afterLootingItems(info.player, info.favorRank.extra_item_favor_cost, info, extraFavorItems.size());
-
-                items.addAll(extraFavorItems);
-
-            }
-
+        
             items.forEach(x -> {
                 ItemUtils.tryAnnounceItem(x, info.player);
             });

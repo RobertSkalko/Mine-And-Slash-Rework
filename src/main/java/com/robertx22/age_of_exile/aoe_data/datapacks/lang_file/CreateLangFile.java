@@ -5,7 +5,6 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
-import com.robertx22.age_of_exile.uncommon.localization.RandomTips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.DirUtils;
 
@@ -119,8 +118,6 @@ public class CreateLangFile {
                 .getSerializable());
         list.addAll(ExileDB.GearSlots()
                 .getSerializable());
-        list.addAll(ExileDB.Difficulties()
-                .getSerializable());
         list.addAll(ExileDB.Sets()
                 .getSerializable());
         list.addAll(ExileDB.Perks()
@@ -130,8 +127,6 @@ public class CreateLangFile {
         list.addAll(ExileDB.UniqueGears()
                 .getSerializable());
         list.addAll(ExileDB.Affixes()
-                .getSerializable());
-        list.addAll(ExileDB.FavorRanks()
                 .getSerializable());
 
         List<Stat> stats = ExileDB.Stats()
@@ -153,8 +148,7 @@ public class CreateLangFile {
         list.addAll(ExileDB.MobRarities()
                 .getSerializable());
         list.addAll(Arrays.asList(Chats.values()));
-        list.addAll(Arrays.asList(RandomTips.values()));
-    
+      
         ExileDB.Spells()
                 .getSerializable()
                 .forEach(x -> list.add(new OneOfAKindName(x)));

@@ -1,0 +1,16 @@
+{
+  "item_model_data_num": 6,
+  "potential": 1000,
+  "min_affixes": 6,
+  "max_sockets": 3,
+  "item_tier": 5,
+  "item_tier_power": 3.0,
+  "item_value_multi": 3.0,
+  "announce_in_chat": true,
+  "is_unique_item": false,
+  "rarity_type": "GEAR",
+  "weight": 25,
+  "text_format": "DARK_PURPLE",
+  "higher_rar": "",
+  "guid": "mythic"
+}

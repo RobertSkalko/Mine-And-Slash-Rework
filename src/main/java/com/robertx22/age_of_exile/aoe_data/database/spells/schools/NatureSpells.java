@@ -61,8 +61,10 @@ public class NatureSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(SlashItems.SLIMEBALL.get(), 1D, 2.5D, SlashEntities.SIMPLE_PROJECTILE.get(), 8D, false)
                 ))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.SNEEZE, 1D, 0.15D))
-                .onHit(PartBuilder.damageInAoe(SpellCalcs.POISON_BALL, Elements.Chaos, 2D))
-                .onHit(PartBuilder.aoeParticles(ParticleTypes.ITEM_SLIME, 10D, 1D))
+                .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.ITEM_SLIME, 10D, 0.15D))
+                .onExpire(PartBuilder.damageInAoe(SpellCalcs.POISON_BALL, Elements.Chaos, 2D))
+                .onExpire(PartBuilder.aoeParticles(ParticleTypes.ITEM_SLIME, 100D, 1D))
+                .onExpire(PartBuilder.aoeParticles(ParticleTypes.SNEEZE, 25D, 1D))
 
                 .build();
         SpellBuilder.of(THORN_ARMOR, SpellConfiguration.Builder.instant(15, 200 * 20), "Thorn Armor",

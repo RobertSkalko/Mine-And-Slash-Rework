@@ -27,7 +27,7 @@ public class TreasureQuality extends Stat {
 
     @Override
     public String locDescForLangFile() {
-        return "Adds chance for higher rarity of items found in chests.";
+        return "Adds chance for higher rarity of items found.";
     }
 
     @Override

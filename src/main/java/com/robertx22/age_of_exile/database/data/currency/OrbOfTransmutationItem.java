@@ -10,8 +10,6 @@ import com.robertx22.age_of_exile.database.data.currency.loc_reqs.item_types.Gea
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.CurrencyItems;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
-import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.item.ItemStack;
@@ -47,12 +45,15 @@ public class OrbOfTransmutationItem extends CurrencyItem implements ICurrencyIte
     @Override
     public ItemStack internalModifyMethod(LocReqContext ctx, ItemStack stack, ItemStack Currency) {
 
+        /*
         GearItemData gear = Gear.Load(stack);
         gear.upgradeToHigherRarity();
         ItemStack result = stack.copy();
         Gear.Save(result, gear);
 
-        return result;
+         */
+// todo remove later
+        return null; // todo
     }
 
     @Override
@@ -78,13 +79,13 @@ public class OrbOfTransmutationItem extends CurrencyItem implements ICurrencyIte
     @Override
     public ShapedRecipeBuilder getRecipe() {
         return shaped(CurrencyItems.ORB_OF_TRANSMUTATION.get())
-            .define('t', Items.REDSTONE)
-            .define('v', Items.COAL)
-            .define('o', SlashItems.T0_DUST())
-            .pattern("ovo")
-            .pattern("vtv")
-            .pattern("ovo")
-            .unlockedBy("player_level", trigger());
+                .define('t', Items.REDSTONE)
+                .define('v', Items.COAL)
+                .define('o', SlashItems.T0_DUST())
+                .pattern("ovo")
+                .pattern("vtv")
+                .pattern("ovo")
+                .unlockedBy("player_level", trigger());
     }
 
 }

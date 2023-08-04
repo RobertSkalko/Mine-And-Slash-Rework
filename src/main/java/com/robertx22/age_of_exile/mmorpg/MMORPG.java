@@ -13,7 +13,6 @@ import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.stats.types.special.SpecialStats;
 import com.robertx22.age_of_exile.database.registrators.CurrencyItems;
 import com.robertx22.age_of_exile.database.registry.ExileDBInit;
-import com.robertx22.age_of_exile.event_hooks.player.ScalingDifficultyEvents;
 import com.robertx22.age_of_exile.mmorpg.event_registers.CommonEvents;
 import com.robertx22.age_of_exile.mmorpg.init.ClientInit;
 import com.robertx22.age_of_exile.mmorpg.registers.client.S2CPacketRegister;
@@ -85,8 +84,7 @@ public class MMORPG {
 
         CurioEvents.reg();
 
-        ScalingDifficultyEvents.register();
-
+       
         StatEffects.loadClass();
         StatConditions.loadClass();
         Stats.loadClass();
@@ -123,7 +121,7 @@ public class MMORPG {
 
     public void interMod(InterModEnqueueEvent event) {
 
-      
+
         InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("ring").size(2)
                 .build());
         InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("necklace").size(1)

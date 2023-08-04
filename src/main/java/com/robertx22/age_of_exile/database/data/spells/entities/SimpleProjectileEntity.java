@@ -135,8 +135,8 @@ public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRe
 
         if (getCaster() != null) {
             List<LivingEntity> entities = EntityFinder.start(getCaster(), LivingEntity.class, position())
-                .radius(radius)
-                .build();
+                    .radius(radius)
+                    .build();
 
             if (entities.size() > 0) {
 
@@ -162,9 +162,9 @@ public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRe
 
         if (getCaster() != null) {
             this.getSpellData()
-                .getSpell()
-                .getAttached()
-                .tryActivate(getScoreboardName(), SpellCtx.onTick(getCaster(), this, getSpellData()));
+                    .getSpell()
+                    .getAttached()
+                    .tryActivate(getScoreboardName(), SpellCtx.onTick(getCaster(), this, getSpellData()));
 
         }
     }
@@ -176,9 +176,9 @@ public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRe
 
         if (caster != null) {
             this.getSpellData()
-                .getSpell()
-                .getAttached()
-                .tryActivate(getScoreboardName(), SpellCtx.onExpire(caster, this, getSpellData()));
+                    .getSpell()
+                    .getAttached()
+                    .tryActivate(getScoreboardName(), SpellCtx.onExpire(caster, this, getSpellData()));
         }
 
         super.remove();
@@ -234,11 +234,11 @@ public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRe
     protected EntityRayTraceResult findHitEntity(Vector3d pos, Vector3d posPlusMotion) {
 
         EntityRayTraceResult res = ProjectileHelper.getEntityHitResult(
-            this.level, this, pos, posPlusMotion, this.getBoundingBox()
-                .expandTowards(this.getDeltaMovement())
-                .inflate(1D), (e) -> {
-                return !e.isSpectator() && e.isPickable() && e instanceof Entity && e != this.getCaster() && e != this.ignoreEntity;
-            });
+                this.level, this, pos, posPlusMotion, this.getBoundingBox()
+                        .expandTowards(this.getDeltaMovement())
+                        .inflate(1D), (e) -> {
+                    return !e.isSpectator() && e.isPickable() && e instanceof Entity && e != this.getCaster() && e != this.ignoreEntity;
+                });
 
         if (!this.entityData.get(HIT_ALLIES)) {
             if (res != null && getCaster() != null && res.getEntity() instanceof LivingEntity) {
@@ -269,7 +269,7 @@ public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRe
             BlockState blockstate = this.level.getBlockState(blockraytraceresult.getBlockPos());
 
             Vector3d vec3d = blockraytraceresult.getLocation()
-                .subtract(this.getX(), this.getY(), this.getZ());
+                    .subtract(this.getX(), this.getY(), this.getZ());
             this.setDeltaMovement(vec3d);
 
             this.inGround = true;
@@ -312,17 +312,28 @@ public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRe
 
             if (caster != null) {
                 if (!Load.spells(caster)
-                    .alreadyHit(this, en)) {
+                        .alreadyHit(this, en)) {
                     this.getSpellData()
-                        .getSpell()
-                        .getAttached()
-                        .tryActivate(getScoreboardName(), SpellCtx.onHit(caster, this, en, getSpellData()));
+                            .getSpell()
+                            .getAttached()
+                            .tryActivate(getScoreboardName(), SpellCtx.onHit(caster, this, en, getSpellData()));
                 }
             }
 
         } else {
+
             if (level.isClientSide) {
                 SoundUtils.playSound(this, SoundEvents.STONE_HIT, 0.7F, 0.9F);
+            } else {
+/*
+                if (caster != null) {
+                    this.getSpellData()
+                            .getSpell()
+                            .getAttached()
+                            .tryActivate(getScoreboardName(), SpellCtx.onHit(caster, this, en, getSpellData()));
+                }
+                */
+ 
             }
         }
 
@@ -474,7 +485,7 @@ public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRe
 
         this.setNoGravity(!holder.getOrDefault(MapField.GRAVITY, true));
         this.setDeathTime(holder.get(MapField.LIFESPAN_TICKS)
-            .intValue());
+                .intValue());
 
         this.entityData.set(EXPIRE_ON_ENTITY_HIT, holder.getOrDefault(MapField.EXPIRE_ON_ENTITY_HIT, true));
         this.entityData.set(EXPIRE_ON_BLOCK_HIT, holder.getOrDefault(MapField.EXPIRE_ON_BLOCK_HIT, true));

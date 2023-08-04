@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.saveclasses.item_classes;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
-import com.robertx22.age_of_exile.config.forge.ServerContainer;
+import com.robertx22.age_of_exile.database.data.MinMax;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
@@ -30,14 +30,13 @@ public class GearTooltipUtils {
             return;
         }
 
-        TooltipInfo info = new TooltipInfo(data, gear.getRarity()
-                .StatPercents());
+        TooltipInfo info = new TooltipInfo(data, new MinMax(0, 100));
 
         tip.clear();
 
         List<IFormattableTextComponent> name = gear.GetDisplayName(stack);
 
-        
+
         name.forEach(x -> {
             tip.add(x.withStyle(TextFormatting.BOLD));
         });
@@ -64,19 +63,13 @@ public class GearTooltipUtils {
             }
             tip.addAll(gear.affixes.GetTooltipString(info, gear));
             tip.addAll(gear.imp.GetTooltipString(info, gear));
-            if (gear.hasCraftedStats()) {
-                tip.addAll(gear.getCraftedStats()
-                        .GetTooltipString(info, gear));
-            }
+
 
         } else {
             List<ExactStatData> stats = new ArrayList<>();
             gear.affixes.getAllAffixesAndSockets()
                     .forEach(x -> stats.addAll(x.GetAllStats(gear)));
-            if (gear.hasCraftedStats()) {
-                stats.addAll(gear.getCraftedStats()
-                        .GetAllStats(gear));
-            }
+
             stats.addAll(gear.imp.GetAllStats(gear));
             if (gear.uniqueStats != null) {
                 stats.addAll(gear.uniqueStats.GetAllStats(gear));
@@ -120,7 +113,7 @@ public class GearTooltipUtils {
         }
 
         if (Screen.hasShiftDown()) {
-            if (!gear.can_sal) {
+            if (!gear.sal) {
                 tip.add(
                         Words.Unsalvagable.locName()
                                 .withStyle(TextFormatting.RED));
@@ -141,7 +134,7 @@ public class GearTooltipUtils {
 
 
         tip.add(lvl);
-        tip.add(TooltipUtils.gearTier(gear.getTier()));
+        //tip.add(TooltipUtils.gearTier(gear.getTier()));
         tip.add(TooltipUtils.gearRarity(gear.getRarity()));
 
         tip.add(new StringTextComponent(""));
@@ -151,9 +144,7 @@ public class GearTooltipUtils {
                             Words.Corrupted.locName())
                     .withStyle(TextFormatting.RED));
         }
-        if (gear.hasCraftedStats()) {
-            tip.add(new StringTextComponent("Crafted").withStyle(TextFormatting.GOLD));
-        }
+
         int socketed = gear.sockets.sockets.size();
         if (socketed > 0) {
             TooltipUtils.addSocketNamesLine(tip, gear);
@@ -169,25 +160,16 @@ public class GearTooltipUtils {
                 tip.add(new SText(TextFormatting.WHITE + "Unbreakable"));
             }
         }
+        
 
         if (Screen.hasShiftDown() == false) {
             tooltip.add(new StringTextComponent(TextFormatting.BLUE + "").append(new TranslationTextComponent(SlashRef.MODID + ".tooltip." + "press_shift_more_info")
                     )
                     .withStyle(TextFormatting.BLUE));
         } else {
-            tip.add(Words.Instability.locName()
-                    .withStyle(TextFormatting.RED)
-                    .append(": " + (int) gear.getInstability() + "/" + (int) ServerContainer.get().MAX_INSTABILITY.get()
-                            .intValue())
-            );
+
         }
 
-        if (gear.hasSpell()) {
-            tooltip.add(new StringTextComponent(""));
-            tooltip.add(gear.getSpell()
-                    .locName()
-                    .withStyle(TextFormatting.LIGHT_PURPLE));
-        }
 
         List<ITextComponent> tool = TooltipUtils.removeDoubleBlankLines(tip,
                 ClientConfigs.getConfig().REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES);

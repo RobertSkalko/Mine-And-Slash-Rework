@@ -2,19 +2,16 @@ package com.robertx22.age_of_exile.database.data.currency.base;
 
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.IAutoModel;
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.ItemModelManager;
-import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.base.CreativeTabs;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.BaseLocRequirement;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.Rarity;
-import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.ItemType;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
-import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.ItemDefault;
 import com.robertx22.library_of_exile.registry.ExileRegistry;
@@ -42,7 +39,7 @@ public abstract class CurrencyItem extends Item implements ExileRegistry<Currenc
 
     public CurrencyItem(String name) {
         super(new ItemDefault().stacksTo(64)
-            .tab(CreativeTabs.GemRuneCurrency));
+                .tab(CreativeTabs.GemRuneCurrency));
 
     }
 
@@ -60,17 +57,7 @@ public abstract class CurrencyItem extends Item implements ExileRegistry<Currenc
             return false;
         }
 
-        if (context.isGear()) {
 
-            GearItemData gear = (GearItemData) context.data;
-
-            if (this.getInstability() > 0) {
-
-                if (gear.getInstability() >= ServerContainer.get().MAX_INSTABILITY.get()) {
-                    return false;
-                }
-            }
-        }
         for (BaseLocRequirement req : requirements()) {
             if (req.isNotAllowed(context)) {
                 return false;
@@ -88,7 +75,7 @@ public abstract class CurrencyItem extends Item implements ExileRegistry<Currenc
     @Override
     public String locDescLangFileGUID() {
         return Registry.ITEM.getKey(this)
-            .toString() + ".desc";
+                .toString() + ".desc";
     }
 
     public abstract int getWeight();
@@ -106,7 +93,7 @@ public abstract class CurrencyItem extends Item implements ExileRegistry<Currenc
     @Override
     public String locNameLangFileGUID() {
         return Registry.ITEM.getKey(this)
-            .toString();
+                .toString();
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -115,25 +102,14 @@ public abstract class CurrencyItem extends Item implements ExileRegistry<Currenc
                                 ITooltipFlag flagIn) {
 
         tooltip.add(
-            this.locDesc()
-                .withStyle(TextFormatting.YELLOW));
+                this.locDesc()
+                        .withStyle(TextFormatting.YELLOW));
 
         tooltip.add(ItemType.getTooltipString(this.itemTypesUsableOn));
 
         TooltipUtils.addEmpty(tooltip);
 
-        if (this.getInstability() > 0) {
-            tooltip.add(Words.Instability.locName()
-                .withStyle(TextFormatting.RED)
-                .append(": " + getInstability()));
-
-        }
-
-        if (this.getBreakChance() > 0) {
-            tooltip.add(Words.BreakChance.locName()
-                .append(": " + (int) getBreakChance())
-                .withStyle(TextFormatting.RED));
-        }
+   
         tooltip.add(TooltipUtils.dragOntoGearToUse());
 
         TooltipUtils.addEmpty(tooltip);
@@ -153,7 +129,7 @@ public abstract class CurrencyItem extends Item implements ExileRegistry<Currenc
     @Override
     public Rarity getRarity() {
         return ExileDB.MobRarities()
-            .get(getRarityRank());
+                .get(getRarityRank());
     }
 
 }

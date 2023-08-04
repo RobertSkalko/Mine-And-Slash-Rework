@@ -72,7 +72,6 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
 
                     if (loot_multi > 0) {
                         MasterLootGen.genAndDrop(mobKilled, player);
-                        Load.playerRPGData(player).favor.onAnyMobKilledSpendFavor();
                     }
                     if (exp_multi > 0) {
                         GiveExp(mobKilled, player, playerData, mobKilledData, exp_multi);
@@ -111,7 +110,7 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
                 .expMulti();
 
         if (WorldUtils.isMapWorldClass(victim.level)) {
-       
+
         }
 
         float baseexp = exp;
@@ -120,9 +119,7 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
 
         exp += (-1F + ServerContainer.get().EXP_GAIN_MULTI.get()) * baseexp;
 
-        exp += (-1F + Load.playerRPGData(killer).favor
-                .getRank().exp_multi) * baseexp;
-
+    
         exp += (-1F + ExileDB.getDimensionConfig(victim.level).exp_multi) * baseexp;
 
 

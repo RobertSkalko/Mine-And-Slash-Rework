@@ -8,7 +8,6 @@ import com.robertx22.age_of_exile.aoe_data.database.base_stats.BaseStatsAdder;
 import com.robertx22.age_of_exile.aoe_data.database.dim_configs.DimConfigs;
 import com.robertx22.age_of_exile.aoe_data.database.entity_configs.EntityConfigs;
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ExileEffects;
-import com.robertx22.age_of_exile.aoe_data.database.favor.FavorAdder;
 import com.robertx22.age_of_exile.aoe_data.database.gear_rarities.GearRaritiesAdder;
 import com.robertx22.age_of_exile.aoe_data.database.gear_slots.GearSlots;
 import com.robertx22.age_of_exile.aoe_data.database.gems.Gems;
@@ -29,7 +28,6 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.old.AutoDatapackStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.PlusToSpecificSpellLevelStats;
 import com.robertx22.age_of_exile.aoe_data.database.synergy.SynergiesAdder;
-import com.robertx22.age_of_exile.aoe_data.database.tiers.DifficultyAdders;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearReg;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 
@@ -62,8 +60,7 @@ public class GeneratedData {
         new UniqueGearReg().registerAll();
 
         new ExileEffects().registerAll();
-        new DifficultyAdders().registerAll();
-
+  
         new DungeonAffixAdder().registerAll();
         new Prefixes().registerAll();
         new Suffixes().registerAll();
@@ -79,7 +76,6 @@ public class GeneratedData {
 
         new AutoDatapackStats().registerAll();
 
-        new FavorAdder().registerAll();
         new BaseStatsAdder().registerAll();
 
         GameBalanceConfig c = new GameBalanceConfig();

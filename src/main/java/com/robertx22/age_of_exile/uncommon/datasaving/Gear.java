@@ -12,7 +12,7 @@ public class Gear {
 
     public static boolean has(ItemStack stack) {
         return stack != null && stack.hasTag() && stack.getTag()
-            .contains(LOC);
+                .contains(LOC);
     }
 
     public static GearItemData Load(ItemStack stack) {
@@ -29,7 +29,7 @@ public class Gear {
         if (gear != null) {
 
             String id = Registry.ITEM.getKey(stack.getItem())
-                .toString();
+                    .toString();
 
             if (gear.item_id.isEmpty()) {
                 gear.item_id = id;
@@ -37,10 +37,11 @@ public class Gear {
                 if (id.equals(gear.item_id) == false) {
                     // reroll by clearing gear tag because it was changed/upgraded
                     stack.getTag()
-                        .remove(LOC);
+                            .remove(LOC);
                     return new GearItemData();
                 }
             }
+            gear.stack = stack;
         }
 
         return gear;

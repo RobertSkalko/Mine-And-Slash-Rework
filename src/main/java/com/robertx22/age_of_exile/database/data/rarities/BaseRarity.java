@@ -90,6 +90,22 @@ public abstract class BaseRarity implements Rarity {
         onSetFields();
     }
 
+    public void setLegendFields() {
+        this.guid = IRarity.LEGENDARY_ID;
+        this.loc_name = "Legendary";
+        this.text_format = TextFormatting.GOLD.name();
+
+        onSetFields();
+    }
+
+    public void setMythicFields() {
+        this.guid = IRarity.MYTHIC_ID;
+        this.loc_name = "Mythic";
+        this.text_format = TextFormatting.DARK_PURPLE.name();
+
+        onSetFields();
+    }
+
     public void setBossFields() {
         this.guid = IRarity.BOSS_ID;
         this.loc_name = "Boss";

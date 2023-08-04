@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.uncommon.stat_calculation;
 
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.capability.player.data.ScalingPlayerDiffData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.EntityConfig;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
@@ -12,10 +11,8 @@ import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalR
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SpellDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
-import com.robertx22.age_of_exile.database.data.tiers.base.Difficulty;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
-import com.robertx22.age_of_exile.saveclasses.unit.InCalcStatData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
@@ -28,39 +25,14 @@ import net.minecraft.entity.LivingEntity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MobStatUtils {
 
     public static void addMapStats(LivingEntity en, EntityData mobdata, Unit unit) {
 
-        Difficulty tier = mobdata.getMapDifficulty();
-
-        for (InCalcStatData data : unit.getStats().statsInCalc
-                .values()
-                .stream()
-                .filter(x -> x.GetStat() != Health.getInstance() && !x.GetStat()
-                        .IsPercent())
-                .collect(Collectors.toList())) {
-
-            int num = (int) ((tier.stat_multi - 1F) * 100F);
-            ExactStatData.noScaling(num, ModType.PERCENT, data.GetStat()
-                            .GUID())
-                    .applyStats(mobdata);
-
-            //data.multiplyFlat(tier.stat_multi);
-        }
-
-        float multi = tier.hp_multi - 1F;
-
-        int hp = (int) ((multi) * 100F);
-
-        ExactStatData.noScaling(hp, ModType.PERCENT, Health.getInstance()
-                        .GUID())
-                .applyStats(mobdata);
-
+       
         if (WorldUtils.isMapWorldClass(en.level)) {
-         
+
 
         }
 
@@ -142,7 +114,6 @@ public class MobStatUtils {
             hpToAdd = 0;
         }
 
-        hpToAdd *= ScalingPlayerDiffData.getHPMulti(unitdata.mobScalingDiff);
 
         stats.add(ExactStatData.scaleTo(hpToAdd, ModType.FLAT, Health.getInstance()
                 .GUID(), lvl));

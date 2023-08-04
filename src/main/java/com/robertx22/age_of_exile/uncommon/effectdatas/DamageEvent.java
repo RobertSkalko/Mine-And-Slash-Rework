@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.uncommon.effectdatas;
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.BeneficialEffects;
 import com.robertx22.age_of_exile.capability.PlayerDamageChart;
 import com.robertx22.age_of_exile.capability.entity.CooldownsData;
-import com.robertx22.age_of_exile.capability.player.data.ScalingPlayerDiffData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.MyDamageSource;
@@ -84,19 +83,19 @@ public class DamageEvent extends EffectEvent {
     private void calcBlock() {
 
         if (targetData
-            .getResources()
-            .getEnergy() < 1) {
+                .getResources()
+                .getEnergy() < 1) {
             return;
         }
 
         // blocking check
         if (target.isBlocking() && attackInfo != null) {
             Vector3d vec3d = attackInfo.getSource()
-                .getSourcePosition();
+                    .getSourcePosition();
             if (vec3d != null) {
                 Vector3d vec3d2 = target.getViewVector(1.0F);
                 Vector3d vec3d3 = vec3d.vectorTo(target.position())
-                    .normalize();
+                        .normalize();
                 vec3d3 = new Vector3d(vec3d3.x, 0.0D, vec3d3.z);
                 if (vec3d3.dot(vec3d2) < 0.0D) {
                     this.data.setBoolean(EventData.IS_BLOCKED, true);
@@ -151,7 +150,7 @@ public class DamageEvent extends EffectEvent {
 
                 if (gear != null) {
                     float atkpersec = gear.GetBaseGearType()
-                        .getAttacksPerSecondCalculated(sourceData);
+                            .getAttacksPerSecondCalculated(sourceData);
 
                     float secWaited = (float) (source.tickCount - source.getLastHurtMobTimestamp()) / 20F;
 
@@ -188,12 +187,12 @@ public class DamageEvent extends EffectEvent {
     private float modifyIfArrowDamage(float dmg) {
         if (attackInfo != null && attackInfo.getSource() != null) {
             if (attackInfo.getSource()
-                .getDirectEntity() instanceof ProjectileEntityDuck) {
+                    .getDirectEntity() instanceof ProjectileEntityDuck) {
                 if (data.getWeaponType() == WeaponTypes.bow) {
                     // don't use this for crossbows, only bows need to be charged fully
 
                     ProjectileEntityDuck duck = (ProjectileEntityDuck) attackInfo.getSource()
-                        .getDirectEntity();
+                            .getDirectEntity();
 
                     float arrowmulti = duck.my$getDmgMulti();
 
@@ -256,10 +255,10 @@ public class DamageEvent extends EffectEvent {
     }
 
     AttributeModifier NO_KNOCKBACK = new AttributeModifier(
-        UUID.fromString("e926df30-c376-11ea-87d0-0242ac131053"),
-        Attributes.KNOCKBACK_RESISTANCE.getDescriptionId(),
-        100,
-        AttributeModifier.Operation.ADDITION
+            UUID.fromString("e926df30-c376-11ea-87d0-0242ac131053"),
+            Attributes.KNOCKBACK_RESISTANCE.getDescriptionId(),
+            100,
+            AttributeModifier.Operation.ADDITION
     );
 
     @Override
@@ -289,10 +288,7 @@ public class DamageEvent extends EffectEvent {
 
         float dmg = info.totalDmg;
 
-        if (source instanceof PlayerEntity == false) {
-            dmg *= ScalingPlayerDiffData.getDMGMulti(sourceData.mobScalingDiff);
-        }
-
+        
         float vanillaDamage = HealthUtils.realToVanilla(target, dmg);
 
         if (this.data.isCanceled()) {
@@ -349,9 +345,9 @@ public class DamageEvent extends EffectEvent {
                     // Dumb vanilla hardcodings require dumb workarounds
                     EnderDragonEntity dragon = (EnderDragonEntity) target;
                     EnderDragonPartEntity part = Arrays.stream(dragon.getSubEntities())
-                        .filter(x -> x.name.equals("body"))
-                        .findFirst()
-                        .get();
+                            .filter(x -> x.name.equals("body"))
+                            .findFirst()
+                            .get();
                     dragon.hurt(part, dmgsource, vanillaDamage);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -380,9 +376,9 @@ public class DamageEvent extends EffectEvent {
 
                         this.targetData.getAffixData().player_hits = 0;
                         ExilePotionEvent potionEvent = EventBuilder.ofEffect(target, target, targetData.getLevel(),
-                                ExileDB.ExileEffects()
-                                    .get(BeneficialEffects.MOB_ANGER_LVL1.GUID()), GiveOrTake.give, 8 * 20)
-                            .build();
+                                        ExileDB.ExileEffects()
+                                                .get(BeneficialEffects.MOB_ANGER_LVL1.GUID()), GiveOrTake.give, 8 * 20)
+                                .build();
                         potionEvent.Activate();
                     }
                 }
@@ -409,7 +405,7 @@ public class DamageEvent extends EffectEvent {
         if (dmg > 0) {
             if (source instanceof PlayerEntity) {
                 sourceData.getCooldowns()
-                    .setOnCooldown(CooldownsData.IN_COMBAT, 20 * 10);
+                        .setOnCooldown(CooldownsData.IN_COMBAT, 20 * 10);
 
                 if (target instanceof MobEntity) {
                     PlayerDamageChart.onDamage((PlayerEntity) source, dmg);
@@ -420,7 +416,7 @@ public class DamageEvent extends EffectEvent {
             } else if (source instanceof MobEntity) {
                 if (target instanceof PlayerEntity) {
                     targetData.getCooldowns()
-                        .setOnCooldown(CooldownsData.IN_COMBAT, 20 * 10);
+                            .setOnCooldown(CooldownsData.IN_COMBAT, 20 * 10);
 
                     GenerateThreatEvent threatEvent = new GenerateThreatEvent((PlayerEntity) target, (MobEntity) source, ThreatGenType.take_dmg, dmg);
                     threatEvent.Activate();
@@ -454,10 +450,10 @@ public class DamageEvent extends EffectEvent {
 
             for (Entry<Elements, Float> entry : info.dmgmap.entrySet()) {
                 if (entry.getValue()
-                    .intValue() > 0) {
+                        .intValue() > 0) {
 
                     text = entry.getKey().format + NumberUtils.formatDamageNumber(this, entry.getValue()
-                        .intValue());
+                            .intValue());
 
                     DmgNumPacket packet = new DmgNumPacket(target, text, data.isCrit(), entry.getKey().format);
                     Packets.sendToClient(player, packet);
@@ -504,9 +500,9 @@ public class DamageEvent extends EffectEvent {
             if (entry.getValue() > 0) {
 
                 DamageEvent bonus = EventBuilder.ofDamage(attackInfo, source, target, entry.getValue())
-                    .setupDamage(AttackType.attack, data.getWeaponType(), data.getStyle())
-                    .set(x -> x.setElement(entry.getKey()))
-                    .build();
+                        .setupDamage(AttackType.attack, data.getWeaponType(), data.getStyle())
+                        .set(x -> x.setElement(entry.getKey()))
+                        .build();
 
                 bonus.data.setBoolean(EventData.IS_BASIC_ATTACK, this.data.getBoolean(EventData.IS_BASIC_ATTACK));
                 bonus.data.setBoolean(EventData.IS_ATTACK_FULLY_CHARGED, this.data.getBoolean(EventData.IS_ATTACK_FULLY_CHARGED));

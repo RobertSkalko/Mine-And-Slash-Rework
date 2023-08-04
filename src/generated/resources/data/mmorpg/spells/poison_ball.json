@@ -75,6 +75,29 @@
           "en_preds": []
         },
         {
+          "targets": [],
+          "acts": [
+            {
+              "type": "particles_in_radius",
+              "map": {
+                "particle_type": "minecraft:item_slime",
+                "motion": "None",
+                "radius": 0.15,
+                "particle_count": 10.0
+              }
+            }
+          ],
+          "ifs": [
+            {
+              "type": "x_ticks_condition",
+              "map": {
+                "tick_rate": 1.0
+              }
+            }
+          ],
+          "en_preds": []
+        },
+        {
           "targets": [
             {
               "type": "aoe",
@@ -96,7 +119,7 @@
           ],
           "ifs": [
             {
-              "type": "on_hit",
+              "type": "on_entity_expire",
               "map": {}
             }
           ],
@@ -111,13 +134,34 @@
                 "particle_type": "minecraft:item_slime",
                 "motion": "None",
                 "radius": 1.0,
-                "particle_count": 10.0
+                "particle_count": 100.0
               }
             }
           ],
           "ifs": [
             {
-              "type": "on_hit",
+              "type": "on_entity_expire",
+              "map": {}
+            }
+          ],
+          "en_preds": []
+        },
+        {
+          "targets": [],
+          "acts": [
+            {
+              "type": "particles_in_radius",
+              "map": {
+                "particle_type": "minecraft:sneeze",
+                "motion": "None",
+                "radius": 1.0,
+                "particle_count": 25.0
+              }
+            }
+          ],
+          "ifs": [
+            {
+              "type": "on_entity_expire",
               "map": {}
             }
           ],

@@ -18,7 +18,7 @@ public class GemLootGen extends BaseLootGen<GearBlueprint> {
     @Override
     public float baseDropChance() {
         return (float) (ServerContainer.get().GEM_DROPRATE.get()
-            .floatValue());
+                .floatValue());
     }
 
     @Override
@@ -29,14 +29,9 @@ public class GemLootGen extends BaseLootGen<GearBlueprint> {
     @Override
     public boolean condition() {
 
-        if (info.favorRank != null) {
-            if (!info.favorRank.drop_gems) {
-                return false;
-            }
-        }
-
+       
         return !ExileDB.Gems()
-            .getFilterWrapped(x -> this.info.level >= x.getReqLevelToDrop()).list.isEmpty();
+                .getFilterWrapped(x -> this.info.level >= x.getReqLevelToDrop()).list.isEmpty();
     }
 
     @Override
@@ -45,8 +40,8 @@ public class GemLootGen extends BaseLootGen<GearBlueprint> {
         LootCrateData data = new LootCrateData();
         data.type = LootType.Gem;
         data.tier = ExileDB.Gems()
-            .getFilterWrapped(x -> info.level >= x.getReqLevelToDrop())
-            .random().tier;
+                .getFilterWrapped(x -> info.level >= x.getReqLevelToDrop())
+                .random().tier;
 
         return data.createStack();
 

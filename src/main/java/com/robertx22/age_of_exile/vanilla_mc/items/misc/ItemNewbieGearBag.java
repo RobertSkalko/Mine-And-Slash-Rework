@@ -42,7 +42,7 @@ public class ItemNewbieGearBag extends Item {
 
     static HashMap<String, NewbieContent> MAP = new HashMap<>();
     static NewbieContent defaultContent = new NewbieContent(Arrays.asList(() -> SlashItems.GearItems.STAFFS.get(VanillaMaterial.IRON)
-        .get()), Arrays.asList(GearSlots.STAFF));
+            .get()), Arrays.asList(GearSlots.STAFF));
 
     static {
     }
@@ -83,16 +83,16 @@ public class ItemNewbieGearBag extends Item {
 
             gearslots.forEach(x -> {
                 BaseGearType gear = ExileDB.GearTypes()
-                    .getFilterWrapped(e -> e.gear_slot.equals(x))
-                    .random();
+                        .getFilterWrapped(e -> e.gear_slot.equals(x))
+                        .random();
                 GearItemData data = getBlueprint(gear).createData();
                 data.lvl = 1;
-                data.can_sal = false;
+                data.sal = false;
 
                 GearBlueprint b = new GearBlueprint(1);
                 b.level.set(1);
                 b.rarity.set(ExileDB.GearRarities()
-                    .get(IRarity.COMMON_ID));
+                        .get(IRarity.COMMON_ID));
                 b.gearItemSlot.set(gear);
 
                 ItemStack stack = GearSoulLootGen.createSoulBasedOnGear(b);
@@ -114,11 +114,11 @@ public class ItemNewbieGearBag extends Item {
             try {
 
                 List<Perk> starts = Load.playerRPGData(playerIn).talents
-                    .getAllAllocatedPerks()
-                    .values()
-                    .stream()
-                    .filter(x -> x.is_entry)
-                    .collect(Collectors.toList());
+                        .getAllAllocatedPerks()
+                        .values()
+                        .stream()
+                        .filter(x -> x.is_entry)
+                        .collect(Collectors.toList());
 
                 if (true || !starts.isEmpty()) { // todo
 
@@ -126,7 +126,7 @@ public class ItemNewbieGearBag extends Item {
                     // ItemNewbieGearBag.giveNewbieItemsFor(playerIn, starts.get(0));
 
                     if (ModList.get()
-                        .isLoaded("patchouli")) {
+                            .isLoaded("patchouli")) {
                         /*
                         // dont give till i update it
                         // guide book
@@ -140,7 +140,7 @@ public class ItemNewbieGearBag extends Item {
                     }
 
                     playerIn.getItemInHand(handIn)
-                        .shrink(1);
+                            .shrink(1);
 
                 } else {
                     playerIn.displayClientMessage(new StringTextComponent("Choose your path to open this. (Press [H] and then open Talent Tree scren"), false);
@@ -159,7 +159,7 @@ public class ItemNewbieGearBag extends Item {
         GearBlueprint print = new GearBlueprint(1);        //TODO
         print.gearItemSlot.set(type);
         print.rarity.set(ExileDB.GearRarities()
-            .get(IRarity.COMMON_ID));
+                .get(IRarity.COMMON_ID));
         return print;
     }
 

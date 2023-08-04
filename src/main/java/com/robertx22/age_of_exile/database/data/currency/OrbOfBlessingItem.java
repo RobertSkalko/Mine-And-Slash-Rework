@@ -52,9 +52,9 @@ public class OrbOfBlessingItem extends CurrencyItem implements ICurrencyItemEffe
         GearItemData gear = Gear.Load(stack);
 
         gear.GetAllRerollable()
-            .stream()
-            .filter(x -> !(x instanceof BaseStatsData))
-            .forEach(x -> x.RerollNumbers(gear));
+                .stream()
+                .filter(x -> !(x instanceof BaseStatsData))
+                .forEach(x -> x.RerollNumbers(gear));
 
         Gear.Save(stack, gear);
 
@@ -64,11 +64,6 @@ public class OrbOfBlessingItem extends CurrencyItem implements ICurrencyItemEffe
     @Override
     public List<BaseLocRequirement> requirements() {
         return Arrays.asList(GearReq.INSTANCE, GearEnumLocReq.REROLL_NUMBERS, SimpleGearLocReq.IS_NOT_UNIQUE);
-    }
-
-    @Override
-    public float getInstability() {
-        return 50;
     }
 
     @Override
@@ -89,14 +84,14 @@ public class OrbOfBlessingItem extends CurrencyItem implements ICurrencyItemEffe
     @Override
     public ShapedRecipeBuilder getRecipe() {
         return shaped(CurrencyItems.ORB_OF_BLESSING.get())
-            .define('#', SlashItems.CRYSTALLIZED_ESSENCE.get())
-            .define('t', CurrencyItems.ORB_OF_TURBULENCE.get())
-            .define('v', Items.COAL)
-            .define('o', SlashItems.T4_DUST())
-            .pattern("v#v")
-            .pattern("vtv")
-            .pattern("ovo")
-            .unlockedBy("player_level", trigger());
+                .define('#', SlashItems.CRYSTALLIZED_ESSENCE.get())
+                .define('t', CurrencyItems.ORB_OF_TURBULENCE.get())
+                .define('v', Items.COAL)
+                .define('o', SlashItems.T4_DUST())
+                .pattern("v#v")
+                .pattern("vtv")
+                .pattern("ovo")
+                .unlockedBy("player_level", trigger());
     }
 
 }

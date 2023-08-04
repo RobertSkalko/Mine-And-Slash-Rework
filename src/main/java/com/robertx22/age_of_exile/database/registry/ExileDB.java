@@ -7,7 +7,6 @@ import com.robertx22.age_of_exile.database.data.affixes.Affix;
 import com.robertx22.age_of_exile.database.data.base_stats.BaseStatsConfig;
 import com.robertx22.age_of_exile.database.data.currency.base.CurrencyItem;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
-import com.robertx22.age_of_exile.database.data.favor.FavorRank;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.gems.Gem;
@@ -24,7 +23,6 @@ import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.synergy.Synergy;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
-import com.robertx22.age_of_exile.database.data.tiers.base.Difficulty;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.action.StatEffect;
@@ -118,9 +116,6 @@ public class ExileDB {
         return Database.getRegistry(ExileRegistryTypes.EXILE_EFFECT);
     }
 
-    public static ExileRegistryContainer<FavorRank> FavorRanks() {
-        return Database.getRegistry(ExileRegistryTypes.FAVOR_RANK);
-    }
 
     public static ExileRegistryContainer<TalentTree> TalentTrees() {
         return Database.getRegistry(ExileRegistryTypes.TALENT_TREE);
@@ -154,10 +149,7 @@ public class ExileDB {
         return (RarityRegistryContainer<MobRarity>) Database.getRegistry(ExileRegistryTypes.MOB_RARITY);
     }
 
-    public static ExileRegistryContainer<Difficulty> Difficulties() {
-        return Database.getRegistry(ExileRegistryTypes.TIER);
-    }
-
+    
     public static ExileRegistryContainer<BaseGearType> GearTypes() {
         return Database.getRegistry(ExileRegistryTypes.GEAR_TYPE);
     }

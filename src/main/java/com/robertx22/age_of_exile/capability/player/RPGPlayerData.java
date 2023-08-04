@@ -1,8 +1,6 @@
 package com.robertx22.age_of_exile.capability.player;
 
 import com.robertx22.age_of_exile.capability.bases.ICommonPlayerCap;
-import com.robertx22.age_of_exile.capability.player.data.FavorData;
-import com.robertx22.age_of_exile.capability.player.data.ScalingPlayerDiffData;
 import com.robertx22.age_of_exile.capability.player.data.StatPointsData;
 import com.robertx22.age_of_exile.capability.player.data.TeamData;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -60,23 +58,17 @@ public class RPGPlayerData implements ICommonPlayerCap {
     public static final Capability<RPGPlayerData> Data = null;
     // stupid bloatware
 
-    private static final String MAP_DATA = "maps";
     private static final String TEAM_DATA = "teams";
-    private static final String FAVOR_DATA = "favor";
     private static final String TALENTS_DATA = "talents";
     private static final String STAT_POINTS = "stat_points";
     private static final String DEATH_STATS = "death_stats";
-    private static final String PROFESSIONS = "profs";
-    private static final String DIFF = "diff";
-
+  
     PlayerEntity player;
 
     public TeamData team = new TeamData();
-    public FavorData favor = new FavorData();
     public TalentsData talents = new TalentsData();
     public StatPointsData statPoints = new StatPointsData();
     public DeathStatsData deathStats = new DeathStatsData();
-    public ScalingPlayerDiffData scalingDifficulty = new ScalingPlayerDiffData();
 
     public RPGPlayerData(PlayerEntity player) {
         this.player = player;
@@ -89,11 +81,9 @@ public class RPGPlayerData implements ICommonPlayerCap {
         CompoundNBT nbt = new CompoundNBT();
 
         LoadSave.Save(team, nbt, TEAM_DATA);
-        LoadSave.Save(favor, nbt, FAVOR_DATA);
         LoadSave.Save(talents, nbt, TALENTS_DATA);
         LoadSave.Save(statPoints, nbt, STAT_POINTS);
         LoadSave.Save(deathStats, nbt, DEATH_STATS);
-        LoadSave.Save(scalingDifficulty, nbt, DIFF);
 
         return nbt;
     }
@@ -102,11 +92,9 @@ public class RPGPlayerData implements ICommonPlayerCap {
     public void loadFromNBT(CompoundNBT nbt) {
 
         this.team = loadOrBlank(TeamData.class, new TeamData(), nbt, TEAM_DATA, new TeamData());
-        this.favor = loadOrBlank(FavorData.class, new FavorData(), nbt, FAVOR_DATA, new FavorData());
         this.talents = loadOrBlank(TalentsData.class, new TalentsData(), nbt, TALENTS_DATA, new TalentsData());
         this.statPoints = loadOrBlank(StatPointsData.class, new StatPointsData(), nbt, STAT_POINTS, new StatPointsData());
         this.deathStats = loadOrBlank(DeathStatsData.class, new DeathStatsData(), nbt, DEATH_STATS, new DeathStatsData());
-        this.scalingDifficulty = loadOrBlank(ScalingPlayerDiffData.class, new ScalingPlayerDiffData(), nbt, DIFF, new ScalingPlayerDiffData());
 
     }
 

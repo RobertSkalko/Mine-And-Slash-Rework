@@ -18,7 +18,7 @@ public class RuneLootGen extends BaseLootGen<GearBlueprint> {
     @Override
     public float baseDropChance() {
         return (float) (ServerContainer.get().RUNE_DROPRATE.get()
-            .floatValue());
+                .floatValue());
     }
 
     @Override
@@ -28,13 +28,9 @@ public class RuneLootGen extends BaseLootGen<GearBlueprint> {
 
     @Override
     public boolean condition() {
-        if (info.favorRank != null) {
-            if (!info.favorRank.drop_runes) {
-                return false;
-            }
-        }
+        
         return !ExileDB.Runes()
-            .getFilterWrapped(x -> this.info.level >= x.getReqLevelToDrop()).list.isEmpty();
+                .getFilterWrapped(x -> this.info.level >= x.getReqLevelToDrop()).list.isEmpty();
     }
 
     @Override

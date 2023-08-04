@@ -14,7 +14,6 @@ import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.AttackDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
-import com.robertx22.age_of_exile.database.data.tiers.base.Difficulty;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.event_hooks.my_events.CollectGearEvent;
 import com.robertx22.age_of_exile.event_hooks.player.OnLogin;
@@ -24,7 +23,6 @@ import com.robertx22.age_of_exile.saveclasses.unit.*;
 import com.robertx22.age_of_exile.threat_aggro.ThreatData;
 import com.robertx22.age_of_exile.uncommon.datasaving.CustomExactStats;
 import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
-import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.UnitNbt;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
@@ -59,7 +57,9 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Mod.EventBusSubscriber
 public class EntityData implements ICommonPlayerCap, INeededForClient {
@@ -104,7 +104,6 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
     public static final Capability<EntityData> Data = null;
 
     private static final String RARITY = "rarity";
-    private static final String RACE = "race";
     private static final String LEVEL = "level";
     private static final String EXP = "exp";
     private static final String HP = "hp";
@@ -117,10 +116,8 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
     private static final String ENTITY_TYPE = "ENTITY_TYPE";
     private static final String RESOURCES_LOC = "res_loc";
     private static final String STATUSES = "statuses";
-    private static final String SCROLL_BUFF_SEED = "sb_seed";
     private static final String COOLDOWNS = "cds";
     private static final String THREAT = "th";
-    private static final String MOB_SCALE_DIFF = "msd";
 
     LivingEntity entity;
 
@@ -129,13 +126,10 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
     // sync these for mobs
     Unit unit = new Unit();
     String rarity = IRarity.COMMON_ID;
-    String race = "";
     int level = 1;
     int exp = 0;
     int maxHealth = 0;
     MobData affixes = new MobData();
-    int buffSeed = 0;
-    public float mobScalingDiff = 0;
 
     public EntityStatusEffectsData statusEffects = new EntityStatusEffectsData();
 
@@ -159,12 +153,9 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
 
         nbt.putInt(LEVEL, level);
         nbt.putString(RARITY, rarity);
-        nbt.putString(RACE, race);
-        nbt.putInt(SCROLL_BUFF_SEED, buffSeed);
         nbt.putInt(HP, (int) getUnit().getCalculatedStat(Health.getInstance())
                 .getValue());
         nbt.putString(ENTITY_TYPE, this.type.toString());
-        nbt.putFloat(MOB_SCALE_DIFF, this.mobScalingDiff);
 
         if (affixes != null) {
             LoadSave.Save(affixes, nbt, AFFIXES);
@@ -176,10 +167,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
     public void loadFromClientNBT(CompoundNBT nbt) {
 
         this.rarity = nbt.getString(RARITY);
-        this.mobScalingDiff = nbt.getFloat(MOB_SCALE_DIFF);
-        this.race = nbt.getString(RACE);
         this.level = nbt.getInt(LEVEL);
-        this.buffSeed = nbt.getInt(SCROLL_BUFF_SEED);
         if (level < 1) {
             level = 1;
         }
@@ -490,9 +478,6 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
                     OnLogin.GiveStarterItems(player);
                 }
 
-                Load.playerRPGData(player).favor
-                        .setFavor(ServerContainer.get().STARTING_FAVOR.get()); // newbie starting favor
-
             }
 
         } catch (Exception e) {
@@ -521,16 +506,6 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
         return this.maxHealth;
     }
 
-    public Difficulty getMapDifficulty() {
-
-
-        return ExileDB.Difficulties()
-                .getList()
-                .stream()
-                .min(Comparator.comparingInt(x -> x.rank))
-                .get();
-
-    }
 
     public CustomExactStatsData getCustomExactStats() {
         return this.customExactStats;
@@ -587,7 +562,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
 
         float vanilla = data.getAmount() * multi;
 
-        float num = vanilla * rar.DamageMultiplier() * getMapDifficulty().dmg_multi;
+        float num = vanilla * rar.DamageMultiplier();
 
         num *= ExileDB.getEntityConfig(entity, this).dmg_multi;
 
@@ -633,13 +608,6 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
         return affixes;
     }
 
-    public int getBuffSeed() {
-        return buffSeed;
-    }
-
-    public void randomizeBuffSeed() {
-        this.buffSeed = new Random().nextInt();
-    }
 
     public void SetMobLevelAtSpawn(PlayerEntity nearestPlayer) {
         this.setMobStats = true;
@@ -675,9 +643,6 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
                 nearestPlayer
         );
 
-        if (nearestPlayer != null) {
-            this.mobScalingDiff = Load.playerRPGData(nearestPlayer).scalingDifficulty.getMobDifficultyAdder(lvl.levelWithoutScalingDifficulty);
-        }
 
         setLevel(MathHelper.clamp(lvl.level, entityConfig.min_lvl, entityConfig.max_lvl));
     }

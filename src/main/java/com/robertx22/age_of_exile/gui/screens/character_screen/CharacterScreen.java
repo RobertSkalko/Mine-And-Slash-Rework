@@ -4,7 +4,6 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.stats.IUsableStat;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.CoreStat;
@@ -28,30 +27,23 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaR
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.bases.BaseScreen;
 import com.robertx22.age_of_exile.gui.bases.INamedScreen;
-import com.robertx22.age_of_exile.gui.buttons.FavorButton;
-import com.robertx22.age_of_exile.gui.buttons.ScalingDifficultyButton;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.TalentsScreen;
 import com.robertx22.age_of_exile.gui.screens.spell.SpellScreen;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
-import com.robertx22.age_of_exile.uncommon.localization.RandomTips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.NumberUtils;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.age_of_exile.uncommon.wrappers.SText;
 import com.robertx22.age_of_exile.vanilla_mc.packets.AllocateStatPacket;
-import com.robertx22.library_of_exile.gui.HelpButton;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.GuiUtils;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.widget.button.ImageButton;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.ArrayList;
@@ -163,14 +155,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
 
         if (this.isMainScreen()) {
 
-            List<ITextComponent> help = new ArrayList<>();
-
-            help.add(Words.DidYouKnow.locName());
-            help.add(new StringTextComponent(""));
-            help.addAll(TooltipUtils.cutIfTooLong(RandomUtils.randomFromList(Arrays.asList(RandomTips.values()))
-                    .locName()));
-            addButton(new HelpButton(help, guiLeft + 15, guiTop + 15));
-
+       
             if (true) {
 
                 xpos = guiLeft + 78;
@@ -226,13 +211,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         }
 
         if (this.isMainScreen()) {
-            if (ServerContainer.get().ENABLE_FAVOR_SYSTEM.get()) {
-                addButton(new FavorButton(guiLeft + sizeX / 2 - FavorButton.FAVOR_BUTTON_SIZE_X / 2, guiTop - FavorButton.FAVOR_BUTTON_SIZE_Y));
-            }
 
-            if (ServerContainer.get().MAX_DIFFICULTY.get() > 1) {
-                addButton(new ScalingDifficultyButton(guiLeft + sizeX / 2 - ScalingDifficultyButton.BUTTON_SIZE_X / 2, guiTop + CharacterScreen.sizeY + 5));
-            }
 
             // hub buttons
 

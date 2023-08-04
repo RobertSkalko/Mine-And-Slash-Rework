@@ -49,7 +49,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 // this stores data that can be lost without issue, stats that are recalculated all the time
-// and mob status effects.
 @Storable
 public class Unit {
 
@@ -57,8 +56,7 @@ public class Unit {
     private StatContainer stats = new StatContainer();
 
     @Store
-    public String GUID = UUID.randomUUID()
-            .toString();
+    public String GUID = UUID.randomUUID().toString();
 
     public InCalcStatData getStatInCalculation(Stat stat) {
         return getStats().getStatInCalculation(stat);
@@ -379,14 +377,6 @@ public class Unit {
                 Load.spells(entity)
                         .getSpellsData().extra_lvls.clear();
 
-                // add 1 spell level if you have the spell on gear
-                gears.forEach(x -> {
-                    if (x.gear != null && x.gear.hasSpell()) {
-                        Load.spells(entity)
-                                .getSpellsData()
-                                .addToLevelsFromStat(x.gear.spell, 1);
-                    }
-                });
 
                 this.getStats().stats.values()
                         .forEach(x -> {

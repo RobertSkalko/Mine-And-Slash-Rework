@@ -116,7 +116,7 @@ public class StatSoulData implements ISalvagable, IRarity, ISettableLevelTier {
         }
 
         GearItemData gear = b.createData();
-        gear.can_sal = this.can_sal;
+        gear.sal = this.can_sal;
         return gear;
     }
 

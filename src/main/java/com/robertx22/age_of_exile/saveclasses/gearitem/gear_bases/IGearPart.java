@@ -12,8 +12,7 @@ public interface IGearPart {
     Part getPart();
 
     default MinMax getMinMax(GearItemData gear) {
-        return gear.getRarity()
-            .getStatPercentsFor(getPart());
+        return new MinMax(0, 100);
     }
 
 }

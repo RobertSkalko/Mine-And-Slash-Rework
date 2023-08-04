@@ -3,23 +3,13 @@ package com.robertx22.age_of_exile.saveclasses.unit;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import info.loenwind.autosave.Registry;
 import info.loenwind.autosave.annotations.Storable;
 import info.loenwind.autosave.annotations.Store;
-import info.loenwind.autosave.exceptions.NoHandlerFoundException;
-import info.loenwind.autosave.handlers.IHandler;
-import info.loenwind.autosave.util.NBTAction;
-import info.loenwind.autosave.util.NullHelper;
-import net.minecraft.nbt.CompoundNBT;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
 
-@Storable(handler = StatContainer.class)
-public class StatContainer implements IHandler<StatContainer> {
+@Storable
+public class StatContainer {
 
     @Store
     public HashMap<String, StatData> stats = new HashMap<>();
@@ -33,9 +23,9 @@ public class StatContainer implements IHandler<StatContainer> {
     public void calculate() {
 
         statsInCalc.values()
-            .forEach(x -> {
-                stats.put(x.id, x.getCalculated());
-            });
+                .forEach(x -> {
+                    stats.put(x.id, x.getCalculated());
+                });
         statsInCalc.clear();
     }
 
@@ -49,7 +39,7 @@ public class StatContainer implements IHandler<StatContainer> {
 
         if (data == null) {
             Stat stat = ExileDB.Stats()
-                .get(guid);
+                    .get(guid);
             if (stat != null) {
                 statsInCalc.put(stat.GUID(), new InCalcStatData(stat.GUID()));
 
@@ -61,7 +51,7 @@ public class StatContainer implements IHandler<StatContainer> {
             return data;
         }
     }
-
+/*
     @Override
     public boolean store(Registry registry, Set<NBTAction> phase, CompoundNBT nbt, Type type, String name, StatContainer object) throws IllegalArgumentException, IllegalAccessException, InstantiationException, NoHandlerFoundException {
         CompoundNBT tag = new CompoundNBT();
@@ -105,4 +95,6 @@ public class StatContainer implements IHandler<StatContainer> {
         }
         return object;
     }
+
+ */
 }

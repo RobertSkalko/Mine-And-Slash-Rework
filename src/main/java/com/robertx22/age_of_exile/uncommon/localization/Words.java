@@ -37,16 +37,7 @@ public enum Words implements IAutoLocName {
     DungeonKey("Dungeon Key"),
     SavesNamedOrEnchanted("Doesn't auto salvage named or enchanted items."),
     BagUpgradeDesc("Backpack Upgrade Item."),
-    DidYouKnow("Did You Know?"),
     BlacksmithDesc("Blacksmithing turns stones and minerals into useful tools."),
-    AlchemyDesc("Combine the alchemist's mortar with ingredients to produce potions. Potions have strong but short effects."),
-    CookingDesc("Combine the Cook's pot with ingredients to produce foods. Food has a long lasting effect."),
-    InscribingDesc("Combine the Scribe's Fabric with ingredients to produce scrolls. Scrolls buff everyone around you for a short duration."),
-    SalvagingDesc("Salvaging is about turning useless gear into essence, a material that's useful for many things."),
-    FishingDesc("Fishing is the simplest profession. You catch fish and get experience. Sometimes you might get important materials like ink, which is used in other professions. You can also catch different fish in different biomes."),
-    ExplorationDesc("Exploration is all about treasure finding! Looting chests out in the world gives not only loot and favor, but also exploration experience. Completing minecraft advancements also rewards experience."),
-    MiningDesc("Mining is one of the basic gatherer professions. You gain experience for mining ores and smelting them. When mining ores, there's a small chance Mystical Stones pop up. They have various uses."),
-    FarmingDesc("Farming is the process of turning purified essence into edible crops. These crops can then be used for alchemy or cooking."),
     Professions("Professions"),
     Wiki("Wiki"),
     CorruptedExplanation1("Use Orb of Purification to clear corruption."),
@@ -71,8 +62,6 @@ public enum Words implements IAutoLocName {
     Small("Small"),
     Big("Big"),
     CreatedInSalvageStation("Created in Salvage Station."),
-    Favor("Favor"),
-    AzunasFavor("Azuna's Favor"),
     IsSealed("Is sealed"),
     Sealed("Sealed"),
     AltDescShiftDetails("[Shift]: Details"),
@@ -271,9 +260,6 @@ public enum Words implements IAutoLocName {
 
     InstabilityLimitReached("Instability Limit Reached"),
 
-    BreakChance("Break Chance"),
-
-    Instability("Instability"),
 
     CurrentMapInfo("Current Map Info"),
 
@@ -576,6 +562,6 @@ public enum Words implements IAutoLocName {
     @Override
     public String GUID() {
         return this.name()
-            .toLowerCase(Locale.ROOT);
+                .toLowerCase(Locale.ROOT);
     }
 }

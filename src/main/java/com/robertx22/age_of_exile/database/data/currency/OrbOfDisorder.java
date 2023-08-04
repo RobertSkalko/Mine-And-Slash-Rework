@@ -60,10 +60,6 @@ public class OrbOfDisorder extends CurrencyItem implements ICurrencyItemEffect, 
         return Arrays.asList(GearReq.INSTANCE, SimpleGearLocReq.IS_NOT_UNIQUE, GearEnumLocReq.AFFIXES);
     }
 
-    @Override
-    public float getInstability() {
-        return 15;
-    }
 
     @Override
     public String getRarityRank() {
@@ -83,14 +79,14 @@ public class OrbOfDisorder extends CurrencyItem implements ICurrencyItemEffect, 
     @Override
     public ShapedRecipeBuilder getRecipe() {
         return ShapedRecipeBuilder.shaped(CurrencyItems.ORB_OF_DISORDER.get(), 1)
-            .define('#', SlashItems.INFUSED_IRON.get())
-            .define('t', CurrencyItems.ORB_OF_TRANSMUTATION.get())
-            .define('v', Items.GOLD_NUGGET)
-            .define('o', SlashItems.T3_DUST())
-            .pattern("o#o")
-            .pattern("oto")
-            .pattern("vvv")
-            .unlockedBy("player_level", trigger());
+                .define('#', SlashItems.INFUSED_IRON.get())
+                .define('t', CurrencyItems.ORB_OF_TRANSMUTATION.get())
+                .define('v', Items.GOLD_NUGGET)
+                .define('o', SlashItems.T3_DUST())
+                .pattern("o#o")
+                .pattern("oto")
+                .pattern("vvv")
+                .unlockedBy("player_level", trigger());
 
     }
 

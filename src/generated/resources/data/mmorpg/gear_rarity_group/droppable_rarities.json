@@ -2,6 +2,8 @@
   "rarities": [
     "uncommon",
     "common",
+    "mythic",
+    "legendary",
     "rare",
     "unique",
     "epic",

@@ -18,8 +18,8 @@ public class GearRarityPart extends BlueprintPart<GearRarity, GearBlueprint> {
     GearRarity specialRar = null;
 
     public List<GearRarity> possible = ExileDB.GearRarityGroups()
-        .get(GearRarityGroups.DROPPABLE_RARITIES_ID)
-        .getRarities();
+            .get(GearRarityGroups.DROPPABLE_RARITIES_ID)
+            .getRarities();
 
     public float chanceForHigherRarity = 0;
 
@@ -30,20 +30,15 @@ public class GearRarityPart extends BlueprintPart<GearRarity, GearBlueprint> {
 
     public void setupChances(LootInfo info) {
 
-        this.possible.removeIf(x -> !info.favorRank.drop_unique_gears && x.is_unique_item);
 
         if (info.playerData != null) {
-            if (info.lootOrigin == LootInfo.LootOrigin.CHEST) {
-                chanceForHigherRarity += info.playerData.getUnit()
+            // if (info.lootOrigin == LootInfo.LootOrigin.CHEST) {
+            chanceForHigherRarity += info.playerData.getUnit()
                     .getCalculatedStat(TreasureQuality.getInstance())
                     .getValue();
-            }
+            //}
         }
 
-        if (info.favorRank != null) {
-            possible.removeIf(x -> info.favorRank.excludedRarities.stream()
-                .anyMatch(e -> e.equals(x.GUID())));
-        }
 
     }
 

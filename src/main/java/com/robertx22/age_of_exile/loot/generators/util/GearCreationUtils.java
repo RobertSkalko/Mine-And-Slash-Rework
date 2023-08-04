@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.loot.generators.util;
 
 import com.google.common.base.Preconditions;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
@@ -62,18 +61,7 @@ public class GearCreationUtils {
         data.imp.RerollFully(data);
         data.affixes.randomize(data);
 
-        if (data.GetBaseGearType()
-                .isMageWeapon()) {
-            try {
-                data.spell = ExileDB.Spells()
-                        .getFilterWrapped(x -> x.config.tags.contains(SpellTag.staff_spell))
-                        .random()
-                        .GUID();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
+  
         return data;
     }
 }

@@ -11,8 +11,7 @@ public interface IGearPartTooltip extends IGearPart {
     public List<ITextComponent> GetTooltipString(TooltipInfo info, GearItemData gear);
 
     default MinMax getMinMax(GearItemData gear) {
-        return gear.getRarity()
-            .getStatPercentsFor(getPart());
+        return new MinMax(0, 100);
     }
 }
 

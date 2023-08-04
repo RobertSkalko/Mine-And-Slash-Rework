@@ -1,10 +1,8 @@
 package com.robertx22.age_of_exile.gui.overlays;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.blood.BloodUser;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.HealthUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
@@ -52,14 +50,14 @@ public enum BarGuiType {
         public float getCurrent(EntityData data, PlayerEntity en) {
 
             return data.getResources()
-                .getEnergy();
+                    .getEnergy();
         }
 
         @Override
         public float getMax(EntityData data, PlayerEntity en) {
             return data.getUnit()
-                .energyData()
-                .getValue();
+                    .energyData()
+                    .getValue();
         }
 
         @Override
@@ -72,32 +70,32 @@ public enum BarGuiType {
         @Override
         public float getCurrent(EntityData data, PlayerEntity en) {
             if (data.getUnit()
-                .isBloodMage()) {
+                    .isBloodMage()) {
                 return data.getResources()
-                    .getBlood();
+                        .getBlood();
             }
             return data.getResources()
-                .getMana();
+                    .getMana();
         }
 
         @Override
         public float getMax(EntityData data, PlayerEntity en) {
             if (data.getUnit()
-                .isBloodMage()) {
+                    .isBloodMage()) {
                 return data.getUnit()
-                    .bloodData()
-                    .getValue();
+                        .bloodData()
+                        .getValue();
             }
             return data.getUnit()
-                .manaData()
-                .getValue();
+                    .manaData()
+                    .getValue();
         }
 
         @Override
         public ResourceLocation getTexture(EntityData data, PlayerEntity en) {
             if (data.getUnit()
-                .getCalculatedStat(BloodUser.getInstance())
-                .getValue() > 0) {
+                    .getCalculatedStat(BloodUser.getInstance())
+                    .getValue() > 0) {
                 return SlashRef.id("textures/gui/overlay/blood.png");
             } else {
                 return SlashRef.id("textures/gui/overlay/mana.png");
@@ -121,28 +119,12 @@ public enum BarGuiType {
         }
 
     },
-    SCALING_DIFFICULTY {
-        @Override
-        public float getCurrent(EntityData data, PlayerEntity en) {
-            return Load.playerRPGData(en).scalingDifficulty.getDifficulty();
-        }
 
-        @Override
-        public float getMax(EntityData data, PlayerEntity en) {
-            return ServerContainer.get().MAX_DIFFICULTY.get()
-                .floatValue();
-        }
-
-        @Override
-        public ResourceLocation getTexture(EntityData data, PlayerEntity en) {
-            return SlashRef.id("textures/gui/overlay/difficulty.png");
-        }
-    },
     SHIELD {
         @Override
         public float getCurrent(EntityData data, PlayerEntity en) {
             return data.getResources()
-                .getShield();
+                    .getShield();
         }
 
         @Override
@@ -166,7 +148,7 @@ public enum BarGuiType {
         @Override
         public float getCurrent(EntityData data, PlayerEntity en) {
             return en.getFoodData()
-                .getFoodLevel();
+                    .getFoodLevel();
         }
 
         @Override
@@ -182,7 +164,7 @@ public enum BarGuiType {
         @Override
         public String getText(EntityData data, PlayerEntity en) {
             return "H: " + (int) getCurrent(data, en) + " S: " + (int) en.getFoodData()
-                .getSaturationLevel();
+                    .getSaturationLevel();
         }
 
     },
@@ -218,7 +200,7 @@ public enum BarGuiType {
 
     public ResourceLocation getIcon(EntityData data, PlayerEntity en) {
         return new ResourceLocation(getTexture(data, en).toString()
-            .replaceAll(".png", "_icon.png"));
+                .replaceAll(".png", "_icon.png"));
     }
 
     public boolean shouldRender(EntityData data, PlayerEntity en) {

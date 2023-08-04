@@ -166,7 +166,6 @@ public class LevelUtils {
 
     public static class LevelDetermInfo {
 
-        public int levelWithoutScalingDifficulty;
         public int level;
 
     }
@@ -200,9 +199,9 @@ public class LevelUtils {
         lvl = MathHelper.clamp(lvl, dimConfig.min_lvl, dimConfig.max_lvl);
         lvl = MathHelper.clamp(lvl, 1, GameBalanceConfig.get().MAX_LEVEL);
 
-        info.levelWithoutScalingDifficulty = lvl;
 
         if (nearestPlayer != null) {
+            /*
             int bonusDiffLevel = Load.playerRPGData(nearestPlayer).scalingDifficulty.getBonusLevels();
 
             int max = Load.Unit(nearestPlayer)
@@ -218,6 +217,8 @@ public class LevelUtils {
             }
 
             lvl += bonusDiffLevel;
+
+             */
         }
 
         lvl = MathHelper.clamp(lvl, dimConfig.min_lvl, dimConfig.max_lvl);

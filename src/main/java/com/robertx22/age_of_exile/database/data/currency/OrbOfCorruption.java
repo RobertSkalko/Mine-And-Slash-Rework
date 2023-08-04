@@ -52,10 +52,6 @@ public class OrbOfCorruption extends CurrencyItem implements ICurrencyItemEffect
         return stack;
     }
 
-    @Override
-    public float getBreakChance() {
-        return 50;
-    }
 
     @Override
     public int getWeight() {
@@ -67,11 +63,7 @@ public class OrbOfCorruption extends CurrencyItem implements ICurrencyItemEffect
         return Arrays.asList(GearReq.INSTANCE, SimpleGearLocReq.IS_NOT_CORRUPTED);
     }
 
-    @Override
-    public float getInstability() {
-        return 0;
-    }
-
+ 
     @Override
     public String getRarityRank() {
         return IRarity.RARE_ID;
@@ -90,14 +82,14 @@ public class OrbOfCorruption extends CurrencyItem implements ICurrencyItemEffect
     @Override
     public ShapedRecipeBuilder getRecipe() {
         return shaped(CurrencyItems.ORB_OF_CORRUPTION.get())
-            .define('#', SlashItems.MYTHIC_ESSENCE.get())
-            .define('t', CurrencyItems.ORB_OF_TRANSMUTATION.get())
-            .define('v', Items.EMERALD)
-            .define('o', SlashItems.GOLDEN_ORB.get())
-            .pattern("v#v")
-            .pattern("vtv")
-            .pattern("ooo")
-            .unlockedBy("player_level", trigger());
+                .define('#', SlashItems.MYTHIC_ESSENCE.get())
+                .define('t', CurrencyItems.ORB_OF_TRANSMUTATION.get())
+                .define('v', Items.EMERALD)
+                .define('o', SlashItems.GOLDEN_ORB.get())
+                .pattern("v#v")
+                .pattern("vtv")
+                .pattern("ooo")
+                .unlockedBy("player_level", trigger());
     }
 
 }

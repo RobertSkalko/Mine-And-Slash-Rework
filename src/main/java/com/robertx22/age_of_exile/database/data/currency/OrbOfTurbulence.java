@@ -46,7 +46,7 @@ public class OrbOfTurbulence extends CurrencyItem implements ICurrencyItemEffect
         GearItemData gear = Gear.Load(stack);
 
         gear.affixes.getAllAffixesAndSockets()
-            .forEach(x -> x.RerollNumbers(gear));
+                .forEach(x -> x.RerollNumbers(gear));
 
         Gear.Save(stack, gear);
 
@@ -63,11 +63,7 @@ public class OrbOfTurbulence extends CurrencyItem implements ICurrencyItemEffect
         return Arrays.asList(GearReq.INSTANCE, SimpleGearLocReq.IS_NOT_UNIQUE, GearEnumLocReq.AFFIXES);
     }
 
-    @Override
-    public float getInstability() {
-        return 20;
-    }
-
+   
     @Override
     public String getRarityRank() {
         return IRarity.EPIC_ID;
@@ -86,14 +82,14 @@ public class OrbOfTurbulence extends CurrencyItem implements ICurrencyItemEffect
     @Override
     public ShapedRecipeBuilder getRecipe() {
         return shaped(CurrencyItems.ORB_OF_TURBULENCE.get())
-            .define('#', SlashItems.CRYSTALLIZED_ESSENCE.get())
-            .define('t', CurrencyItems.ORB_OF_TRANSMUTATION.get())
-            .define('v', Items.GLISTERING_MELON_SLICE)
-            .define('o', SlashItems.T4_DUST())
-            .pattern("v#v")
-            .pattern("vtv")
-            .pattern("ooo")
-            .unlockedBy("player_level", trigger());
+                .define('#', SlashItems.CRYSTALLIZED_ESSENCE.get())
+                .define('t', CurrencyItems.ORB_OF_TRANSMUTATION.get())
+                .define('v', Items.GLISTERING_MELON_SLICE)
+                .define('o', SlashItems.T4_DUST())
+                .pattern("v#v")
+                .pattern("vtv")
+                .pattern("ooo")
+                .unlockedBy("player_level", trigger());
     }
 
 }

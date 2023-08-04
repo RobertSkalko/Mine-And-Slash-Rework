@@ -26,7 +26,7 @@ public class OnLootChestEvent extends EventConsumer<ExileEvents.OnChestLooted> {
         LootInfo info = LootInfo.ofChestLoot(player, event.pos);
 
         if (WorldUtils.isMapWorldClass(player.level)) {
-           
+
             info.multi += 10;
         }
 
@@ -36,9 +36,7 @@ public class OnLootChestEvent extends EventConsumer<ExileEvents.OnChestLooted> {
             return;
         }
 
-        Load.playerRPGData(player).favor
-                .onOpenNewLootChest(info);
-
+      
         List<ItemStack> items = MasterLootGen.generateLoot(info);
 
         List<Integer> list1 = mygetEmptySlotsRandomized(event.inventory, new Random());

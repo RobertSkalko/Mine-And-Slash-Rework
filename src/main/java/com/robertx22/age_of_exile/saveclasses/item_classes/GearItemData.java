@@ -6,12 +6,12 @@ import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.requirements.bases.GearRequestedFor;
-import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.*;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.*;
+import com.robertx22.age_of_exile.saveclasses.util.NbtKey;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
@@ -36,6 +36,11 @@ import java.util.List;
 @Storable
 public class GearItemData implements ICommonDataItem<GearRarity> {
 
+    public static NbtKey.Stringkey RARITY = new NbtKey.Stringkey(IRarity.COMMON_ID, "rar");
+
+
+    public ItemStack stack = ItemStack.EMPTY;
+
     // Stats
     @Store
     public BaseStatsData baseStats = new BaseStatsData();
@@ -46,12 +51,8 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     @Store
     public GearSocketsData sockets = new GearSocketsData();
     @Store
-    public CraftedStatsData cr;
-    @Store
     public UniqueStatsData uniqueStats;
 
-    @Store
-    public String spell = "";
 
     // Stats
 
@@ -77,43 +78,22 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     @Store
     public String gear_type = "";
 
+    // potential
     @Store
-    private float in = 0;
+    private int pot = 0;
 
+    // salvagable
     @Store
-    public boolean can_sal = true;
+    public boolean sal = true;
 
     @Store
     public boolean c = false; // corrupted
-
-    public void upgradeToHigherRarity() {
-
-        GearRarity old = this.getRarity();
-        GearRarity rar = this.getRarity()
-                .getHigherRarity();
-
-        this.rarity = rar.GUID();
-
-        int affixes = rar.affixes - old.affixes;
-
-        for (int i = 0; i < affixes; i++) {
-            this.affixes.addOneRandomAffix(this);
-        }
-
-    }
 
 
     public boolean isCorrupted() {
         return c;
     }
 
-    public boolean hasCraftedStats() {
-        return cr != null;
-    }
-
-    public CraftedStatsData getCraftedStats() {
-        return cr;
-    }
 
     public int getTier() {
         return LevelUtils.levelToTier(lvl);
@@ -121,9 +101,9 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
     public float getILVL() {
 
-        float ilvl = lvl + getRarity().bonus_effective_lvls;
+        float ilvl = lvl;
 
-        
+
         return ilvl;
     }
 
@@ -143,20 +123,11 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
                 .isRegistered(gear_type);
     }
 
-    public boolean hasSpell() {
-        return ExileDB.Spells()
-                .isRegistered(spell);
-
-    }
-
-    public Spell getSpell() {
-        return ExileDB.Spells()
-                .get(spell);
-    }
 
     public int getTotalSockets() {
         int sockets = 0;
-        sockets += getRarity().sockets;
+
+        // sockets += getRarity().max_sockets;
 
 
         // todo make new socket system..
@@ -179,15 +150,16 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
     }
 
-    public float getInstability() {
-        return in;
+
+    public int getPotential() {
+        return pot;
     }
 
-    public void setInstability(float insta) {
-        this.in = insta;
+    public void setPotential(int potential) {
+        this.pot = pot;
 
-        if (in < 0) {
-            in = 0;
+        if (pot < 0) {
+            pot = 0;
         }
     }
 
@@ -217,7 +189,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
     public void WriteOverDataThatShouldStay(GearItemData newdata) {
 
-        newdata.can_sal = this.can_sal;
+        newdata.sal = this.sal;
 
     }
 
@@ -361,7 +333,6 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
         IfNotNullAdd(baseStats, list);
 
-        IfNotNullAdd(cr, list);
 
         IfNotNullAdd(imp, list);
 
@@ -458,7 +429,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
     @Override
     public List<ItemStack> getSalvageResult(ItemStack stack) {
-        if (this.can_sal) {
+        if (this.sal) {
             return getSalvagedResults(new SalvagedItemInfo(getTier(), getRarity()));
         }
 
@@ -467,7 +438,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
     @Override
     public boolean isSalvagable(SalvageContext context) {
-        return this.can_sal;
+        return this.sal;
     }
 
     @Override

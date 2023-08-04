@@ -2,19 +2,14 @@ package com.robertx22.age_of_exile.loot;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.capability.player.RPGPlayerData;
-import com.robertx22.age_of_exile.capability.player.data.ScalingPlayerDiffData;
-import com.robertx22.age_of_exile.config.forge.ServerContainer;
-import com.robertx22.age_of_exile.database.data.favor.FavorRank;
 import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuantity;
 import com.robertx22.age_of_exile.database.data.stats.types.misc.ExtraMobDropsStat;
-import com.robertx22.age_of_exile.database.data.tiers.base.Difficulty;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.generators.BaseLootGen;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
-import com.robertx22.library_of_exile.utils.EntityUtils;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
@@ -31,7 +26,6 @@ public class LootInfo {
     }
 
     public int amount = 0;
-    public Difficulty diff;
     public int level = 0;
     public int tier = 1;
 
@@ -44,9 +38,7 @@ public class LootInfo {
     public float multi = 1;
     private int minItems = 0;
     private int maxItems = 50;
-    private int extraFavorItems = 0;
     public boolean isMapWorld = false;
-    public FavorRank favorRank;
     public RPGPlayerData rpgData;
     public BlockPos pos;
 
@@ -55,9 +47,6 @@ public class LootInfo {
 
     }
 
-    public int getExtraFavorItems() {
-        return extraFavorItems;
-    }
 
     public int getMaxItems() {
         return maxItems;
@@ -77,13 +66,6 @@ public class LootInfo {
 
             info.setupAllFields();
 
-            if (ExileDB.MobRarities()
-                    .get(info.mobData.getRarity()).extra_hp_multi > 5 || EntityUtils.getVanillaMaxHealth(mob) > 100) {
-                // is boss basically
-                if (info.favorRank != null) {
-                    info.extraFavorItems = info.favorRank.extra_items_per_boss;
-                }
-            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -109,9 +91,6 @@ public class LootInfo {
         info.maxItems = 7;
         info.setupAllFields();
 
-        if (info.favorRank != null) {
-            info.extraFavorItems = info.favorRank.extra_items_per_chest;
-        }
 
         return info;
     }
@@ -142,7 +121,6 @@ public class LootInfo {
         info.setupAllFields();
 
         info.isMapWorld = false;
-        info.diff = null;
         return info;
     }
 
@@ -162,31 +140,12 @@ public class LootInfo {
         setWorld();
         setDifficulty();
         setLevel();
-        setFavor();
 
         if (player != null) {
             playerData = Load.Unit(player);
         }
     }
 
-    private void setFavor() {
-        if (player != null) {
-            rpgData = Load.playerRPGData(player);
-            favorRank = rpgData.favor
-                    .getRank();
-
-            if (ServerContainer.get().ENABLE_FAVOR_SYSTEM.get()) {
-                if (lootOrigin != LootOrigin.CHEST) {
-                    if (favorRank.favor_drain_per_item > 0) {
-                        this.maxItems = (int) (rpgData.favor.getFavor() * favorRank.favor_drain_per_item);
-                        if (minItems > maxItems) {
-                            minItems = maxItems;
-                        }
-                    }
-                }
-            }
-        }
-    }
 
     private LootInfo setDifficulty() {
 
@@ -208,7 +167,7 @@ public class LootInfo {
                 level = LevelUtils.determineLevel(world, pos, player).level;
             }
         }
-        
+
 
         this.tier = LevelUtils.levelToTier(level);
     }
@@ -235,7 +194,6 @@ public class LootInfo {
 
         if (mobKilled != null && mobData != null) {
 
-            modifier += ScalingPlayerDiffData.getDMGMulti(mobData.mobScalingDiff) - 1F;
 
             if (this.playerData != null) {
                 modifier += LootUtils.getLevelDistancePunishmentMulti(mobData.getLevel(), playerData.getLevel()) - 1F;

@@ -10,8 +10,6 @@ import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulItem;
 import com.robertx22.age_of_exile.vanilla_mc.items.*;
 import com.robertx22.age_of_exile.vanilla_mc.items.crates.gem_crate.LootCrateItem;
 import com.robertx22.age_of_exile.vanilla_mc.items.crates.rarity_gear.RarityGearCrateItem;
-import com.robertx22.age_of_exile.vanilla_mc.items.favor.EmptyFavorItem;
-import com.robertx22.age_of_exile.vanilla_mc.items.favor.FullFavorItem;
 import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.VanillaMaterial;
 import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.baubles.ItemNecklace;
 import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.baubles.ItemRing;
@@ -41,7 +39,6 @@ public class SlashItems {
 
     public static RegObj<StatSoulItem> STAT_SOUL = Def.item(() -> new StatSoulItem());
     public static RegObj<IdentifyTomeItem> IDENTIFY_TOME = Def.item(() -> new IdentifyTomeItem(), "identify_tome");
-    public static RegObj<RarityEssenceItem> RARITY_ESSENCE = Def.item(() -> new RarityEssenceItem());
     public static RegObj<LootCrateItem> LOOT_CRATE = Def.item(() -> new LootCrateItem());
     public static RegObj<SourceOfStrengthItem> SOURCE_OF_STRENGTH = Def.item(() -> new SourceOfStrengthItem());
 
@@ -79,8 +76,6 @@ public class SlashItems {
 
     public static RegObj<LootTableItem> LOOT_TABLE_ITEM = Def.item(() -> new LootTableItem(), "loot_table_chest");
 
-    public static RegObj<FullFavorItem> FULL_FAVOR = Def.item(() -> new FullFavorItem(), "full_favor");
-    public static RegObj<EmptyFavorItem> EMPTY_FAVOR = Def.item(() -> new EmptyFavorItem(), "empty_favor");
 
     public static RegObj<RarityGearCrateItem> RARITY_GEAR_CRATE = Def.item(() -> new RarityGearCrateItem(), "custom_crate");
 

@@ -61,11 +61,7 @@ public class OrbOfUniqueBlessingItem extends CurrencyItem implements ICurrencyIt
         return Arrays.asList(GearReq.INSTANCE, SimpleGearLocReq.IS_UNIQUE);
     }
 
-    @Override
-    public float getInstability() {
-        return 50;
-    }
-
+  
     @Override
     public String getRarityRank() {
         return IRarity.EPIC_ID;
@@ -84,14 +80,14 @@ public class OrbOfUniqueBlessingItem extends CurrencyItem implements ICurrencyIt
     @Override
     public ShapedRecipeBuilder getRecipe() {
         return shaped(CurrencyItems.ORB_OF_UNIQUE_BLESSING.get())
-            .define('#', SlashItems.GOLDEN_ORB.get())
-            .define('t', CurrencyItems.ORB_OF_BLESSING.get())
-            .define('v', Items.GOLD_INGOT)
-            .define('o', SlashItems.T4_DUST())
-            .pattern("o#o")
-            .pattern("oto")
-            .pattern("v#v")
-            .unlockedBy("player_level", trigger());
+                .define('#', SlashItems.GOLDEN_ORB.get())
+                .define('t', CurrencyItems.ORB_OF_BLESSING.get())
+                .define('v', Items.GOLD_INGOT)
+                .define('o', SlashItems.T4_DUST())
+                .pattern("o#o")
+                .pattern("oto")
+                .pattern("v#v")
+                .unlockedBy("player_level", trigger());
     }
 
 }
