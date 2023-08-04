@@ -42,12 +42,6 @@
       "y": 3
     }
   },
-  "synergies": {
-    "poisonball_poison": {
-      "x": 0,
-      "y": 1
-    }
-  },
   "lvl_reqs": [
     1,
     5,

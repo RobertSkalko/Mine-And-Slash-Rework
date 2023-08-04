@@ -5,7 +5,6 @@ import com.robertx22.age_of_exile.aoe_data.GeneratedData;
 import com.robertx22.age_of_exile.aoe_data.database.stat_conditions.StatConditions;
 import com.robertx22.age_of_exile.aoe_data.database.stat_effects.StatEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
-import com.robertx22.age_of_exile.aoe_data.database.stats.SynergyStats;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.spells.components.conditions.EffectCondition;
@@ -84,11 +83,10 @@ public class MMORPG {
 
         CurioEvents.reg();
 
-       
+
         StatEffects.loadClass();
         StatConditions.loadClass();
         Stats.loadClass();
-        SynergyStats.loadClass();
         ExileDBInit.initRegistries();
         SpecialStats.init();
 

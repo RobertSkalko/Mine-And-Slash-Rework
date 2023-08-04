@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.saveclasses.item_classes;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.MinMax;
-import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPartTooltip;
@@ -103,15 +102,7 @@ public class GearTooltipUtils {
         });
         tip.add(new StringTextComponent(""));
 
-        if (gear.uniqueStats != null) {
-            UniqueGear uniq = gear.uniqueStats.getUnique(gear);
-
-            if (uniq != null && uniq.hasSet()) {
-                tooltip.addAll(uniq.getSet()
-                        .GetTooltipString(info));
-            }
-        }
-
+        
         if (Screen.hasShiftDown()) {
             if (!gear.sal) {
                 tip.add(
@@ -160,7 +151,7 @@ public class GearTooltipUtils {
                 tip.add(new SText(TextFormatting.WHITE + "Unbreakable"));
             }
         }
-        
+
 
         if (Screen.hasShiftDown() == false) {
             tooltip.add(new StringTextComponent(TextFormatting.BLUE + "").append(new TranslationTextComponent(SlashRef.MODID + ".tooltip." + "press_shift_more_info")

@@ -37,20 +37,15 @@ public class PlusSchoolLevels extends BaseDatapackStat implements IAfterStatCalc
     public void affectUnit(EntityData unitdata, StatData statdata) {
 
         SpellSchool sc = ExileDB.SpellSchools()
-            .get(school);
+                .get(school);
 
         sc.spells.keySet()
-            .forEach(x -> {
-                Load.spells(unitdata.getEntity())
-                    .getSpellsData()
-                    .addToLevelsFromStat(x, (int) statdata.getValue());
-            });
-        sc.synergies.keySet()
-            .forEach(x -> {
-                Load.spells(unitdata.getEntity())
-                    .getSpellsData()
-                    .addToLevelsFromStat(x, (int) statdata.getValue());
-            });
+                .forEach(x -> {
+                    Load.spells(unitdata.getEntity())
+                            .getSpellsData()
+                            .addToLevelsFromStat(x, (int) statdata.getValue());
+                });
+       
     }
 
     @Override

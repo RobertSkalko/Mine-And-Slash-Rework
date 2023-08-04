@@ -5,7 +5,6 @@ import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
-import com.robertx22.age_of_exile.database.data.set.GearSet;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.AttributeStat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.IAfterStatCalc;
@@ -16,7 +15,6 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.blood.Bloo
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
-import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.event_hooks.my_events.CollectGearEvent;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
@@ -105,9 +103,8 @@ public class Unit {
         if (obj == null) {
             return false;
         }
-
         if (obj instanceof Unit) {
-            return ((Unit) obj).GUID.equals(this.GUID); // todo this bugfix sounds big, might mess with things!!!
+            return ((Unit) obj).GUID.equals(this.GUID);
         }
         return false;
     }
@@ -210,35 +207,6 @@ public class Unit {
         return check;
     }
 
-    @Store
-    public HashMap<String, Integer> sets = new HashMap<>();
-
-    private void calcSets(List<GearData> gears) {
-        sets.clear();
-
-        List<String> setUniqueids = new ArrayList<>();
-
-        // todo possibly cache it?
-        gears.forEach(x -> {
-            if (x.gear != null) {
-                if (x.gear.uniqueStats != null) {
-                    UniqueGear uniq = x.gear.uniqueStats.getUnique(x.gear);
-                    if (uniq != null) {
-                        if (uniq.hasSet()) {
-                            if (!setUniqueids.contains(uniq.GUID())) {
-                                setUniqueids.add(uniq.GUID());
-                                GearSet set = uniq.getSet();
-                                String key = set
-                                        .GUID();
-                                int current = sets.getOrDefault(key, 0);
-                                sets.put(key, current + 1);
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    }
 
     public void recalculateStats(LivingEntity entity, EntityData data, AttackInformation dmgData) {
 
@@ -256,7 +224,6 @@ public class Unit {
             List<GearData> gears = new ArrayList<>();
             new CollectGearEvent.CollectedGearStacks(entity, gears, dmgData);
 
-            calcSets(gears);
 
             stats.stats.clear();
             stats.statsInCalc.clear();
@@ -270,21 +237,13 @@ public class Unit {
 
             if (entity instanceof PlayerEntity) {
 
-                sets.entrySet()
-                        .forEach(x -> {
-                            GearSet set = ExileDB.Sets()
-                                    .get(x.getKey());
-                            statContexts.add(set.getStats(data));
-                        });
-
                 Load.playerRPGData((PlayerEntity) entity).statPoints.addStats(data);
                 statContexts.addAll(PlayerStatUtils.AddPlayerBaseStats(entity));
                 statContexts.addAll(Load.playerRPGData((PlayerEntity) entity).talents
                         .getStatAndContext(entity));
                 statContexts.addAll(Load.spells(entity)
                         .getStatAndContext(entity));
-                statContexts.add(data.getStatusEffectsData()
-                        .getStats(entity));
+
             } else {
                 statContexts.addAll(MobStatUtils.getMobBaseStats(data, entity));
                 statContexts.addAll(MobStatUtils.getAffixStats(entity));
@@ -293,6 +252,9 @@ public class Unit {
                 statContexts.addAll(MobStatUtils.getMobConfigStats(entity, data));
                 //ExtraMobRarityAttributes.add(entity, data);
             }
+
+            statContexts.add(data.getStatusEffectsData()
+                    .getStats(entity));
 
             statContexts.addAll(addGearStats(gears, entity, data));
 

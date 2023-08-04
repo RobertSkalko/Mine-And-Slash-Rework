@@ -4,7 +4,6 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
-import com.robertx22.age_of_exile.database.data.synergy.Synergy;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.bases.BaseScreen;
 import com.robertx22.age_of_exile.gui.bases.INamedScreen;
@@ -31,10 +30,10 @@ public class SpellScreen extends BaseScreen implements INamedScreen, ILeftRight 
     Minecraft mc = Minecraft.getInstance();
 
     public List<SpellSchool> schoolsInOrder = ExileDB.SpellSchools()
-        .getList();
+            .getList();
     public int currentIndex = 0;
     public int maxIndex = ExileDB.SpellSchools()
-        .getSize() - 1;
+            .getSize() - 1;
 
     public SpellSchool currentSchool() {
         return schoolsInOrder.get(currentIndex);
@@ -69,36 +68,21 @@ public class SpellScreen extends BaseScreen implements INamedScreen, ILeftRight 
             addButton(new LeftRightButton(this, guiLeft + 150 + 5, guiTop + 25 - LeftRightButton.ySize / 2, false));
 
             currentSchool().spells.entrySet()
-                .forEach(e -> {
+                    .forEach(e -> {
 
-                    PointData point = e.getValue();
-                    Spell spell = ExileDB.Spells()
-                        .get(e.getKey());
+                        PointData point = e.getValue();
+                        Spell spell = ExileDB.Spells()
+                                .get(e.getKey());
 
-                    if (spell != null) {
-                        int x = this.guiLeft + 12 + (point.x * SLOT_SPACING);
-                        int y = this.guiTop + 177 - (point.y * SLOT_SPACING);
+                        if (spell != null) {
+                            int x = this.guiLeft + 12 + (point.x * SLOT_SPACING);
+                            int y = this.guiTop + 177 - (point.y * SLOT_SPACING);
 
-                        this.addButton(new LearnSpellButton(this, spell, x, y));
-                    }
-                });
+                            this.addButton(new LearnSpellButton(this, spell, x, y));
+                        }
+                    });
 
-            currentSchool().synergies.entrySet()
-                .forEach(e -> {
-
-                    PointData point = e.getValue();
-                    Synergy synergy = ExileDB.Synergies()
-                        .get(e.getKey());
-
-                    if (synergy != null) {
-
-                        int x = this.guiLeft + 12 + (point.x * SLOT_SPACING);
-                        int y = this.guiTop + 177 - (point.y * SLOT_SPACING);
-
-                        this.addButton(new LearnSynergyButton(this, synergy, x, y));
-                    }
-                });
-
+          
             for (int i = 0; i < 8; i++) {
 
                 int x = guiLeft + 10 + (PickHotbarButton.BUTTON_SIZE_X * i);
@@ -126,22 +110,22 @@ public class SpellScreen extends BaseScreen implements INamedScreen, ILeftRight 
 
         try {
             mc.getTextureManager()
-                .bind(BACKGROUND);
+                    .bind(BACKGROUND);
             RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
             blit(matrix, mc.getWindow()
-                    .getGuiScaledWidth() / 2 - sizeX / 2,
-                mc.getWindow()
-                    .getGuiScaledHeight() / 2 - sizeY / 2, 0, 0, sizeX, sizeY
+                            .getGuiScaledWidth() / 2 - sizeX / 2,
+                    mc.getWindow()
+                            .getGuiScaledHeight() / 2 - sizeY / 2, 0, 0, sizeX, sizeY
             );
 
             mc.getTextureManager()
-                .bind(currentSchool().getIconLoc());
+                    .bind(currentSchool().getIconLoc());
             RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
             blit(matrix, guiLeft + 108, guiTop + 8, 34, 34, 34, 34, 34, 34);
 
             // background
             mc.getTextureManager()
-                .bind(currentSchool().getBackgroundLoc());
+                    .bind(currentSchool().getBackgroundLoc());
             RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
             blit(matrix, guiLeft + 7, guiTop + 7, 93, 36, 93, 36, 93, 36);
@@ -150,7 +134,7 @@ public class SpellScreen extends BaseScreen implements INamedScreen, ILeftRight 
             super.render(matrix, x, y, ticks);
 
             String txt = "Points: " + Load.spells(mc.player)
-                .getFreeSpellPoints();
+                    .getFreeSpellPoints();
             GuiUtils.renderScaledText(matrix, guiLeft + 125, guiTop + 215, 1D, txt, TextFormatting.GREEN);
 
             buttons.forEach(b -> b.renderToolTip(matrix, x, y));

@@ -15,11 +15,9 @@ import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.database.data.runewords.RuneWord;
-import com.robertx22.age_of_exile.database.data.set.GearSet;
 import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.base.BaseDatapackStat;
-import com.robertx22.age_of_exile.database.data.synergy.Synergy;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
@@ -60,11 +58,9 @@ public class ExileRegistryTypes {
     public static ExileRegistryType GEAR_RARITY_GROUP = ExileRegistryType.register(SlashRef.MODID, "gear_rarity_group", 20, GearRarityGroup.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType BASE_STATS = ExileRegistryType.register(SlashRef.MODID, "base_stats", 22, BaseStatsConfig.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType VALUE_CALC = ExileRegistryType.register(SlashRef.MODID, "value_calc", 40, ValueCalculation.SERIALIZER, SyncTime.ON_LOGIN);
-    public static ExileRegistryType GEAR_SET = ExileRegistryType.register(SlashRef.MODID, "set", 31, GearSet.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType STAT_EFFECT = ExileRegistryType.register(SlashRef.MODID, "stat_effect", 32, StatEffect.SERIALIZER, SyncTime.NEVER);
     public static ExileRegistryType STAT_CONDITION = ExileRegistryType.register(SlashRef.MODID, "stat_condition", 32, StatCondition.SERIALIZER, SyncTime.NEVER);
     public static ExileRegistryType GAME_BALANCE = ExileRegistryType.register(SlashRef.MODID, "game_balance", 26, GameBalanceConfig.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType SPELL_SCHOOL = ExileRegistryType.register(SlashRef.MODID, "spell_school", 26, SpellSchool.SERIALIZER, SyncTime.ON_LOGIN);
-    public static ExileRegistryType SYNERGY = ExileRegistryType.register(SlashRef.MODID, "synergy", 26, Synergy.SERIALIZER, SyncTime.ON_LOGIN);
 
 }

@@ -8,17 +8,12 @@ public interface MaxLevelProvider extends IGUID {
     static MaxLevelProvider get(String id) {
 
         if (ExileDB.Spells()
-            .isRegistered(id)) {
+                .isRegistered(id)) {
             return ExileDB.Spells()
-                .get(id);
-        }
-        if (ExileDB.Synergies()
-            .isRegistered(id)) {
-            return ExileDB.Synergies()
-                .get(id);
+                    .get(id);
         }
 
-        return null; // todo add synergies here
+        return null;
     }
 
     int getMaxLevel();

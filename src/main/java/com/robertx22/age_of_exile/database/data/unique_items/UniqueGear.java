@@ -6,7 +6,6 @@ import com.robertx22.age_of_exile.database.data.StatModifier;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
-import com.robertx22.age_of_exile.database.data.set.GearSet;
 import com.robertx22.age_of_exile.database.data.unique_items.drop_filters.DropFiltersGroupData;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
@@ -29,7 +28,6 @@ public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, 
     public int weight = 1000;
     public String guid;
     public String uniqueRarity = IRarity.UNIQUE_ID;
-    public String set = "";
     public boolean replaces_name = false;
 
     public String base_gear = "";
@@ -38,15 +36,6 @@ public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, 
 
     public transient String langName;
 
-    public boolean hasSet() {
-        return ExileDB.Sets()
-            .isRegistered(set);
-    }
-
-    public GearSet getSet() {
-        return ExileDB.Sets()
-            .get(set);
-    }
 
     @Override
     public JsonObject toJson() {
@@ -56,7 +45,6 @@ public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, 
         JsonUtils.addStats(base_stats, json, "base_stats");
 
         json.addProperty("rarity", this.uniqueRarity);
-        json.addProperty("set", this.set);
         json.addProperty("replaces_name", this.replaces_name);
 
         json.addProperty("base_gear", base_gear);
@@ -77,16 +65,13 @@ public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, 
         uniq.base_stats = JsonUtils.getStats(json, "base_stats");
 
         uniq.base_gear = json.get("base_gear")
-            .getAsString();
-        uniq.uniqueRarity = json.get("rarity")
-            .getAsString();
-        if (json.has("set")) {
-            uniq.set = json.get("set")
                 .getAsString();
-        }
+        uniq.uniqueRarity = json.get("rarity")
+                .getAsString();
+        
         if (json.has("replaces_name")) {
             uniq.replaces_name = json.get("replaces_name")
-                .getAsBoolean();
+                    .getAsBoolean();
         }
         uniq.filters = DropFiltersGroupData.fromJson(json.get("filters"));
 
@@ -110,7 +95,7 @@ public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, 
 
     public GearRarity getUniqueRarity() {
         return ExileDB.GearRarities()
-            .get(uniqueRarity);
+                .get(uniqueRarity);
     }
 
     public List<StatModifier> uniqueStats() {
@@ -134,11 +119,11 @@ public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, 
 
     public GearSlot getSlot() {
         return ExileDB.GearSlots()
-            .get(getBaseGear().gear_slot);
+                .get(getBaseGear().gear_slot);
     }
 
     public BaseGearType getBaseGear() {
         return ExileDB.GearTypes()
-            .get(base_gear);
+                .get(base_gear);
     }
 }

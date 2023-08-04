@@ -9,7 +9,6 @@ import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
-import com.robertx22.age_of_exile.database.data.set.GearSet;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
 import com.robertx22.age_of_exile.database.empty_entries.EmptyAffix;
@@ -55,13 +54,11 @@ public class ExileDBInit {
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.PERK, null).setIsDatapack());
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.TALENT_TREE, null).setIsDatapack());
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.SPELL_SCHOOL, null).setIsDatapack());
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.SYNERGY, null).setIsDatapack());
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.BASE_STATS, null).setIsDatapack());
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.GAME_BALANCE, new GameBalanceConfig()).setIsDatapack());
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.VALUE_CALC, new ValueCalculation()).setIsDatapack());
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.STAT_EFFECT, null).setIsDatapack());
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.STAT_CONDITION, null).setIsDatapack());
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.GEAR_SET, new GearSet()).setIsDatapack());
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.DIMENSION_CONFIGS, DimensionConfig.DefaultExtra()
                 ).logAdditions()
                         .setIsDatapack()

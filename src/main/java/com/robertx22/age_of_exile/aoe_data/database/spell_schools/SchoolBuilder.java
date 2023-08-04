@@ -16,22 +16,14 @@ public class SchoolBuilder {
         return b;
     }
 
-    public SchoolBuilder addSynergy(String id, PointData point) {
-
-        Preconditions.checkArgument(SpellSchool.MAX_X_ROWS >= point.x && point.x > -1);
-        Preconditions.checkArgument(SpellSchool.MAX_Y_ROWS >= point.y && point.y > -1);
-
-        school.synergies.put(id, point);
-        return this;
-    }
-
+    
     public SchoolBuilder addSpell(String id, PointData point) {
 
         Preconditions.checkArgument(SpellSchool.MAX_X_ROWS >= point.x && point.x > -1);
         Preconditions.checkArgument(SpellSchool.MAX_Y_ROWS >= point.y && point.y > -1);
         Preconditions.checkArgument(school.spells.values()
-            .stream()
-            .noneMatch(x -> x.equals(point)));
+                .stream()
+                .noneMatch(x -> x.equals(point)));
 
         school.spells.put(id, point);
         return this;

@@ -16,7 +16,6 @@ import com.robertx22.age_of_exile.aoe_data.database.mob_affixes.MobAffixes;
 import com.robertx22.age_of_exile.aoe_data.database.mob_rarities.MobRaritiesAdder;
 import com.robertx22.age_of_exile.aoe_data.database.perks.AllPerks;
 import com.robertx22.age_of_exile.aoe_data.database.runes.Runes;
-import com.robertx22.age_of_exile.aoe_data.database.sets.GearSetsAdder;
 import com.robertx22.age_of_exile.aoe_data.database.spell_schools.SpellSchoolsAdder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
 import com.robertx22.age_of_exile.aoe_data.database.spells.Spells;
@@ -26,8 +25,6 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.PlusSkillsInSchoolStat
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.AutoDatapackStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
-import com.robertx22.age_of_exile.aoe_data.database.stats.old.PlusToSpecificSpellLevelStats;
-import com.robertx22.age_of_exile.aoe_data.database.synergy.SynergiesAdder;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearReg;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 
@@ -49,10 +46,8 @@ public class GeneratedData {
 
         SpellCalcs.init();
         new Spells().registerAll();
-        new SynergiesAdder().registerAll();
         new SpellSchoolsAdder().registerAll();
 
-        new PlusToSpecificSpellLevelStats().registerAll();
         new PlusSkillsInSchoolStats().registerAll();
 
         new GearSlots().registerAll();
@@ -60,7 +55,7 @@ public class GeneratedData {
         new UniqueGearReg().registerAll();
 
         new ExileEffects().registerAll();
-  
+
         new DungeonAffixAdder().registerAll();
         new Prefixes().registerAll();
         new Suffixes().registerAll();
@@ -81,8 +76,6 @@ public class GeneratedData {
         GameBalanceConfig c = new GameBalanceConfig();
         c.addToSerializables();
 
-        new GearSetsAdder().registerAll();
-
-
+   
     }
 }

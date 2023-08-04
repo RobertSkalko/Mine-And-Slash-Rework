@@ -114,11 +114,7 @@ public class CreateLangFile {
 
         list.addAll(ExileDB.MobAffixes()
                 .getSerializable());
-        list.addAll(ExileDB.Synergies()
-                .getSerializable());
         list.addAll(ExileDB.GearSlots()
-                .getSerializable());
-        list.addAll(ExileDB.Sets()
                 .getSerializable());
         list.addAll(ExileDB.Perks()
                 .getSerializable());
@@ -148,7 +144,7 @@ public class CreateLangFile {
         list.addAll(ExileDB.MobRarities()
                 .getSerializable());
         list.addAll(Arrays.asList(Chats.values()));
-      
+
         ExileDB.Spells()
                 .getSerializable()
                 .forEach(x -> list.add(new OneOfAKindName(x)));

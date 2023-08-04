@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.jewelry;
 
 import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearTypes;
-import com.robertx22.age_of_exile.aoe_data.database.sets.GearSetsAdder;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuilder;
 import com.robertx22.age_of_exile.database.data.StatModifier;
@@ -36,8 +35,6 @@ public class SeasonRings implements ExileRegistryInit {
                         new StatModifier(15, 25, new ElementalResist(Elements.Chaos), ModType.PERCENT)
                 ))
 
-                .gearSet(GearSetsAdder.SEASONS_SET)
-
                 .devComment("")
                 .build();
 
@@ -57,7 +54,6 @@ public class SeasonRings implements ExileRegistryInit {
                         new StatModifier(2, 3, AllAttributes.getInstance(), ModType.FLAT)
                 ))
 
-                .gearSet(GearSetsAdder.SEASONS_SET)
 
                 .devComment("")
                 .build();
@@ -73,7 +69,6 @@ public class SeasonRings implements ExileRegistryInit {
                         new StatModifier(5, 15, Mana.getInstance(), ModType.PERCENT),
                         new StatModifier(5, 15, Stats.SPELL_CRIT_CHANCE.get(), ModType.FLAT)
                 ))
-                .gearSet(GearSetsAdder.SEASONS_SET)
                 .devComment("")
                 .build();
 
@@ -89,7 +84,6 @@ public class SeasonRings implements ExileRegistryInit {
                         new StatModifier(5, 15, Mana.getInstance(), ModType.PERCENT),
                         new StatModifier(5, 15, Stats.SPELL_CRIT_DAMAGE.get(), ModType.FLAT)
                 ))
-                .gearSet(GearSetsAdder.SEASONS_SET)
                 .devComment("")
                 .build();
     }

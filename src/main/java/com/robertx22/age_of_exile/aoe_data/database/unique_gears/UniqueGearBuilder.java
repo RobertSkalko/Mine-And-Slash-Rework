@@ -53,17 +53,13 @@ public class UniqueGearBuilder {
     public UniqueGearBuilder baseStats(List<StatModifier> stat) {
         this.uniq.base_stats.addAll(stat);
         if (uniq.getBaseGear()
-            .isWeapon()) {
+                .isWeapon()) {
             uniq.base_stats.add(new StatModifier(2, 4, SpellPower.getInstance()));
         }
         return this;
     }
 
-    public UniqueGearBuilder gearSet(String set) {
-        this.uniq.set = set;
-        return this;
-    }
-
+    
     public UniqueGearBuilder devComment(String comment) {
         // OMAE WA MOU SHINDEIRU
         return this;

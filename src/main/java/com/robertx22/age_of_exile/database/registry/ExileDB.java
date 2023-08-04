@@ -17,11 +17,9 @@ import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.database.data.runewords.RuneWord;
-import com.robertx22.age_of_exile.database.data.set.GearSet;
 import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
-import com.robertx22.age_of_exile.database.data.synergy.Synergy;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
@@ -121,10 +119,7 @@ public class ExileDB {
         return Database.getRegistry(ExileRegistryTypes.TALENT_TREE);
     }
 
-    public static ExileRegistryContainer<GearSet> Sets() {
-        return Database.getRegistry(ExileRegistryTypes.GEAR_SET);
-    }
-
+  
     public static ExileRegistryContainer<Perk> Perks() {
         return Database.getRegistry(ExileRegistryTypes.PERK);
     }
@@ -149,7 +144,7 @@ public class ExileDB {
         return (RarityRegistryContainer<MobRarity>) Database.getRegistry(ExileRegistryTypes.MOB_RARITY);
     }
 
-    
+
     public static ExileRegistryContainer<BaseGearType> GearTypes() {
         return Database.getRegistry(ExileRegistryTypes.GEAR_TYPE);
     }
@@ -171,10 +166,6 @@ public class ExileDB {
         return Database.getRegistry(ExileRegistryTypes.ENTITY_CONFIGS);
     }
 
-
-    public static ExileRegistryContainer<Synergy> Synergies() {
-        return Database.getRegistry(ExileRegistryTypes.SYNERGY);
-    }
 
     public static ExileRegistryContainer<SpellSchool> SpellSchools() {
         return Database.getRegistry(ExileRegistryTypes.SPELL_SCHOOL);
