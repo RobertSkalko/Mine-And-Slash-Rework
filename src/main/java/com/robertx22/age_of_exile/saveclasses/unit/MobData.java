@@ -17,19 +17,17 @@ public class MobData {
     @Store
     public List<String> affixes = new ArrayList<>();
 
-    @Store
-    public int player_hits = 0;
-
+  
     public List<MobAffix> getAffixes() {
         try {
             return affixes.stream()
-                .filter(x -> ExileDB.MobAffixes()
-                    .isRegistered(x))
-                .map(x -> {
-                    return ExileDB.MobAffixes()
-                        .get(x);
-                })
-                .collect(Collectors.toList());
+                    .filter(x -> ExileDB.MobAffixes()
+                            .isRegistered(x))
+                    .map(x -> {
+                        return ExileDB.MobAffixes()
+                                .get(x);
+                    })
+                    .collect(Collectors.toList());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -45,8 +43,8 @@ public class MobData {
         if (amount > 0) {
 
             this.affixes.add(ExileDB.MobAffixes()
-                .random()
-                .GUID());
+                    .random()
+                    .GUID());
         }
     }
 }

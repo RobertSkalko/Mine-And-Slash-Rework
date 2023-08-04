@@ -30,7 +30,7 @@ public class MobStatUtils {
 
     public static void addMapStats(LivingEntity en, EntityData mobdata, Unit unit) {
 
-       
+
         if (WorldUtils.isMapWorldClass(en.level)) {
 
 
@@ -56,9 +56,9 @@ public class MobStatUtils {
 
         float val = (-1F + ExileDB.getDimensionConfig(en.level).mob_strength_multi) * 100F;
 
-        stats.add(ExactStatData.noScaling(val, ModType.GLOBAL_INCREASE, Health.getInstance()
+        stats.add(ExactStatData.noScaling(val, ModType.MORE, Health.getInstance()
                 .GUID()));
-        stats.add(ExactStatData.noScaling(val, ModType.GLOBAL_INCREASE, Stats.TOTAL_DAMAGE.get()
+        stats.add(ExactStatData.noScaling(val, ModType.MORE, Stats.TOTAL_DAMAGE.get()
                 .GUID()));
 
         list.add(new MiscStatCtx(stats));
@@ -79,18 +79,18 @@ public class MobStatUtils {
         float dmg = (float) ((-1F + config.dmg_multi) * 100F);
         float stat = (float) ((-1F + config.stat_multi) * 100F);
 
-        stats.add(ExactStatData.noScaling(hp, ModType.GLOBAL_INCREASE, Health.getInstance()
+        stats.add(ExactStatData.noScaling(hp, ModType.MORE, Health.getInstance()
                 .GUID()));
         stats.add(ExactStatData.noScaling(dmg, ModType.FLAT, Stats.TOTAL_DAMAGE.get()
                 .GUID()));
 
-        stats.add(ExactStatData.noScaling(stat, ModType.GLOBAL_INCREASE, DodgeRating.getInstance()
+        stats.add(ExactStatData.noScaling(stat, ModType.MORE, DodgeRating.getInstance()
                 .GUID()));
-        stats.add(ExactStatData.noScaling(stat, ModType.GLOBAL_INCREASE, Armor.getInstance()
+        stats.add(ExactStatData.noScaling(stat, ModType.MORE, Armor.getInstance()
                 .GUID()));
-        stats.add(ExactStatData.noScaling(stat, ModType.GLOBAL_INCREASE, new ElementalResist(Elements.Elemental)
+        stats.add(ExactStatData.noScaling(stat, ModType.MORE, new ElementalResist(Elements.Elemental)
                 .GUID()));
-        stats.add(ExactStatData.noScaling(stat, ModType.GLOBAL_INCREASE, Health.getInstance()
+        stats.add(ExactStatData.noScaling(stat, ModType.MORE, Health.getInstance()
                 .GUID()));
 
         list.add(new MiscStatCtx(stats));

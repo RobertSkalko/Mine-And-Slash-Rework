@@ -9,11 +9,11 @@ public class GuiPartConfig {
     public BarGuiType type = BarGuiType.HEALTH;
     PointData position_offset = new PointData(0, 0);
     public boolean enabled = true;
-    public IconRenderer icon_renderer = IconRenderer.NONE;
+    public IconRenderer icon_renderer = IconRenderer.LEFT; // todo
 
     public PointData getPosition() {
         PointData pos = ClientConfigs.getConfig().GUI_POSITION.get()
-            .getPos();
+                .getPos();
 
         return new PointData(pos.x + position_offset.x, pos.y + position_offset.y);
     }

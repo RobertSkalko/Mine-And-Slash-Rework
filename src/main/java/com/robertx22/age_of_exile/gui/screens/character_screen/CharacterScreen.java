@@ -155,7 +155,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
 
         if (this.isMainScreen()) {
 
-       
+
             if (true) {
 
                 xpos = guiLeft + 78;
@@ -164,12 +164,6 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
                 int YSEP = 20;
 
                 // TODO MAKE STATIC IDS
-                addButton(new AllocateStatButton(AllAttributes.VIT_ID, xpos, ypos));
-                ypos += YSEP;
-                addButton(new AllocateStatButton(AllAttributes.WIS_ID, xpos, ypos));
-                ypos += YSEP;
-                addButton(new AllocateStatButton(AllAttributes.AGI_ID, xpos, ypos));
-
                 xpos = guiLeft + 159;
                 ypos = guiTop + 105;
 

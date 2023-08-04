@@ -15,13 +15,7 @@
       "min": 2.0,
       "max": 4.0,
       "stat": "physical_weapon_damage",
-      "type": "FLAT"
-    },
-    {
-      "min": 3.0,
-      "max": 5.0,
-      "stat": "spell_power",
-      "type": "FLAT"
+      "type": "ITEM_FLAT"
     }
   ],
   "weapon_type": "staff",

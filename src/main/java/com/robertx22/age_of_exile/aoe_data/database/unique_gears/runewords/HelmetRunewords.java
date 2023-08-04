@@ -19,18 +19,18 @@ public class HelmetRunewords implements ExileRegistryInit {
     public void registerAll() {
 
         UniqueGearBuilder.of(
-                "insight",
-                "Insight",
-                BaseGearTypes.HELMET)
-            .setReplacesName()
-            .stats(Arrays.asList(
-                new StatModifier(20, 30, ManaRegen.getInstance(), ModType.PERCENT),
-                new StatModifier(10, 25, Mana.getInstance(), ModType.FLAT),
-                new StatModifier(10, 25, new ElementalResist(Elements.Fire), ModType.PERCENT)
-            ))
-            .makeRuneWordOnly(Arrays.asList(RuneItem.RuneType.ITA, RuneItem.RuneType.DOS, RuneItem.RuneType.TOQ))
-            .devComment("Mana focused caster helmet")
-            .build();
+                        "insight",
+                        "Insight",
+                        BaseGearTypes.CLOTH_HELMET)
+                .setReplacesName()
+                .stats(Arrays.asList(
+                        new StatModifier(20, 30, ManaRegen.getInstance(), ModType.PERCENT),
+                        new StatModifier(10, 25, Mana.getInstance(), ModType.FLAT),
+                        new StatModifier(10, 25, new ElementalResist(Elements.Fire), ModType.PERCENT)
+                ))
+                .makeRuneWordOnly(Arrays.asList(RuneItem.RuneType.ITA, RuneItem.RuneType.DOS, RuneItem.RuneType.TOQ))
+                .devComment("Mana focused caster helmet")
+                .build();
 
     }
 }

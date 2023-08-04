@@ -53,7 +53,7 @@ public class RPGGuiOverlay extends AbstractGui {
                 return;
             }
 
-        
+
             PlayerEntity en = mc.player;
             EntityData data = Load.Unit(en);
 
@@ -66,7 +66,7 @@ public class RPGGuiOverlay extends AbstractGui {
                 areaLvlTicks = 200;
             }
 
-            OverlayTypes.map.get(ClientConfigs.getConfig().GUI_POSITION.get())
+            ClientConfigs.getConfig().GUI_POSITION.get().getGuiConfig(data, en)
                     .forEach(c -> {
 
                         if (c.type.shouldRender(data, mc.player)) {

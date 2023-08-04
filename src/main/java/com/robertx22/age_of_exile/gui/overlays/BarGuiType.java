@@ -65,6 +65,31 @@ public enum BarGuiType {
             return SlashRef.id("textures/gui/overlay/energy.png");
         }
     },
+    MAGIC_SHIELD {
+        @Override
+        public float getCurrent(EntityData data, PlayerEntity en) {
+
+            return data.getResources()
+                    .getMagicShield();
+        }
+
+        @Override
+        public float getMax(EntityData data, PlayerEntity en) {
+            return data.getUnit()
+                    .magicShieldData()
+                    .getValue();
+        }
+
+        @Override
+        public ResourceLocation getTexture(EntityData data, PlayerEntity en) {
+            return SlashRef.id("textures/gui/overlay/magic_shield.png");
+        }
+
+        @Override
+        public boolean shouldRender(EntityData data, PlayerEntity en) {
+            return data.getUnit().magicShieldData().getValue() > 0;
+        }
+    },
 
     MANA {
         @Override

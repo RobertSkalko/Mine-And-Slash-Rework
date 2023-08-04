@@ -25,6 +25,7 @@ public abstract class StatNameRegex {
     protected StatNameRegex setAddPlus(boolean bool) {
         this.addPlus = bool;
         return this;
+
     }
 
     public TextFormatting statColor(Stat stat) {
@@ -50,26 +51,35 @@ public abstract class StatNameRegex {
 
         String plusminus = v1 > 0 && addPlus ? "+" : "";
 
-        String percent = "";
+        String perc = "";
 
-        if (type == ModType.PERCENT || type == ModType.GLOBAL_INCREASE || stat.IsPercent()) {
-            percent = "%";
+        if (type.isPercent() || stat.IsPercent()) {
+            perc = "%";
         }
+        String add = "";
+
+        if (type.isItemLocal()) {
+            add += " Gear";
+        }
+        if (type == ModType.MORE) {
+            add += " More";
+        }
+
         String v1s = NumberUtils.formatForTooltip(v1);
 
         if (stat.is_long) {
             String txt = CLOC.translate(stat.locName());
 
-            txt = txt.replace(Stat.VAL1, plusminus + v1s + percent);
+            txt = txt.replace(Stat.VAL1, plusminus + v1s + perc);
 
             return txt;
         }
 
         String str = statColor(stat) + getStatNameRegex(format, type, stat, v1);
 
-        str = str.replace(VALUE, numberColor(format, stat, v1) + "" + plusminus + v1s + percent + TextFormatting.RESET + statColor(stat));
+        str = str.replace(VALUE, numberColor(format, stat, v1) + "" + plusminus + v1s + perc + TextFormatting.RESET + statColor(stat));
 
-        str = str.replace(NAME, CLOC.translate(stat.locName()));
+        str = str.replace(NAME, add + " " + CLOC.translate(stat.locName()));
 
         return str;
 

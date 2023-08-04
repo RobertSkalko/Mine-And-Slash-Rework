@@ -11,7 +11,7 @@
       "val": 0.2,
       "uuid": "bd9f32fa-c8c1-455c-92aa-4a94c2a70cd8",
       "id": "minecraft:generic.movement_speed",
-      "type": "GLOBAL_INCREASE"
+      "type": "MORE"
     }
   ],
   "stats": [

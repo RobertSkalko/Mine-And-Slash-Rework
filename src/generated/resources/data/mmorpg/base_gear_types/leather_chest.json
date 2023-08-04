@@ -1,0 +1,30 @@
+{
+  "attacksPerSecond": 1.0,
+  "guid": "leather_chest",
+  "level_range": {
+    "start": 0.0,
+    "end": 1.0
+  },
+  "gear_slot": "chest",
+  "weight": 1000,
+  "weapon_offhand_stat_util": 0,
+  "style": "melee",
+  "implicit_stats": [],
+  "base_stats": [
+    {
+      "min": 6.0,
+      "max": 15.0,
+      "stat": "dodge",
+      "type": "ITEM_FLAT"
+    }
+  ],
+  "weapon_type": "none",
+  "tags": {
+    "tags": [
+      "dexterity",
+      "dodge_stat",
+      "chest",
+      "armor_family"
+    ]
+  }
+}

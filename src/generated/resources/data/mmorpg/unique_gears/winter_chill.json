@@ -33,9 +33,7 @@
       "type": "flat"
     }
   ],
-  "base_stats": [],
   "rarity": "unique",
-  "set": "seasons_set",
   "replaces_name": true,
   "base_gear": "ring",
   "filters": {

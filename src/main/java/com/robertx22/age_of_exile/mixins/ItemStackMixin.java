@@ -29,14 +29,6 @@ public abstract class ItemStackMixin {
         TooltipMethod.getTooltip(stack, entity, tooltipContext, list);
     }
 
-    /*
-    @Inject(method = {"releaseUsing"}, cancellable = true, at = {@At("HEAD")})
-    public void onStoppedUsing(World world, LivingEntity user, int remainingUseTicks, CallbackInfo ci) {
-        ItemStack stack = (ItemStack) (Object) this;
-        OnItemStoppedUsingCastImbuedSpell.onStoppedUsing(stack, world, user, remainingUseTicks, ci);
-    }
-
-     */
 
     @Inject(method = {"use"}, cancellable = true, at = {@At("HEAD")})
     public void onUseItemstackmethod(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<ActionResult<ItemStack>> ci) {

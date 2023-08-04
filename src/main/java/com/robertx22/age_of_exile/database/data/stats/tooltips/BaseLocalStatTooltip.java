@@ -21,11 +21,11 @@ public class BaseLocalStatTooltip implements IStatTooltipType {
         if (true) {
             String icon = "\u25CF";
             list.add(new StringTextComponent(icon + " ")
-                .append(info.stat.locName())
-                .append(": ")
-                .withStyle(format != null ? format : TextFormatting.WHITE)
-                .append(new StringTextComponent((int) info.firstValue + "")
-                    .withStyle(TextFormatting.GRAY)));
+                    .append(info.stat.locName())
+                    .append(": ")
+                    .withStyle(format != null ? format : TextFormatting.WHITE)
+                    .append(new StringTextComponent((int) info.firstValue + "")
+                            .withStyle(TextFormatting.GRAY)));
 
             return list;
 
@@ -37,7 +37,7 @@ public class BaseLocalStatTooltip implements IStatTooltipType {
         }
 
         IFormattableTextComponent txt = new StringTextComponent(StatNameRegex.BASIC_LOCAL
-            .translate(format, ctx, info.type, info.firstValue, info.stat));
+                .translate(format, ctx, info.type, info.firstValue, info.stat));
 
         if (ctx.statinfo.stat.is_long) {
             return longStat(ctx, txt);
@@ -45,8 +45,9 @@ public class BaseLocalStatTooltip implements IStatTooltipType {
 
         if (ctx.showStatRanges()) {
             txt.append(" ")
-                .append(NormalStatTooltip.getPercentageView(ctx.statinfo.percent));
+                    .append(NormalStatTooltip.getPercentageView(ctx.statinfo.percent));
         }
+     
 
         list.add(txt);
 

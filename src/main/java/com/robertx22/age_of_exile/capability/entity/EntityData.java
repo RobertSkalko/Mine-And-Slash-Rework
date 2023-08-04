@@ -296,6 +296,9 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
         } else if (type == ResourceType.energy) {
             return getUnit().energyData()
                     .getValue();
+        } else if (type == ResourceType.magic_shield) {
+            return getUnit().magicShieldData()
+                    .getValue();
         }
 
         return 0;

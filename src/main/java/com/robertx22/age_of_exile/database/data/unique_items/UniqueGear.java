@@ -24,7 +24,6 @@ public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, 
     public static UniqueGear SERIALIZER = new UniqueGear();
 
     public List<StatModifier> uniqueStats = new ArrayList<>();
-    public List<StatModifier> base_stats = new ArrayList<>();
     public int weight = 1000;
     public String guid;
     public String uniqueRarity = IRarity.UNIQUE_ID;
@@ -42,7 +41,6 @@ public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, 
         JsonObject json = getDefaultJson();
 
         JsonUtils.addStats(uniqueStats(), json, "unique_stats");
-        JsonUtils.addStats(base_stats, json, "base_stats");
 
         json.addProperty("rarity", this.uniqueRarity);
         json.addProperty("replaces_name", this.replaces_name);
@@ -62,13 +60,12 @@ public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, 
         uniq.weight = getWeightFromJson(json);
 
         uniq.uniqueStats = JsonUtils.getStats(json, "unique_stats");
-        uniq.base_stats = JsonUtils.getStats(json, "base_stats");
-
+  
         uniq.base_gear = json.get("base_gear")
                 .getAsString();
         uniq.uniqueRarity = json.get("rarity")
                 .getAsString();
-        
+
         if (json.has("replaces_name")) {
             uniq.replaces_name = json.get("replaces_name")
                     .getAsBoolean();

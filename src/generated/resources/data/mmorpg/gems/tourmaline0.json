@@ -5,7 +5,7 @@
   "on_armor_stats": [
     {
       "v1": 0.5,
-      "stat": "vitality",
+      "stat": "strength",
       "type": "FLAT",
       "scale_to_lvl": true
     }

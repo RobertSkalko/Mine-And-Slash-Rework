@@ -25,18 +25,18 @@ public class StatPointsData {
 
     public void addStats(EntityData data) {
         map.entrySet()
-            .forEach(x -> {
-                float val = x.getValue();
-                ExactStatData stat = ExactStatData.of(val, ExileDB.Stats()
-                    .get(x.getKey()), ModType.FLAT, 1);
-                stat.applyStats(data);
-            });
+                .forEach(x -> {
+                    float val = x.getValue();
+                    ExactStatData stat = ExactStatData.levelScaled(val, ExileDB.Stats()
+                            .get(x.getKey()), ModType.FLAT, 1);
+                    stat.applyStats(data);
+                });
 
     }
 
     public int getFreePoints(PlayerEntity player) {
         int total = (int) (Load.Unit(player)
-            .getLevel() * GameBalanceConfig.get().STAT_POINTS_PER_LEVEL);
+                .getLevel() * GameBalanceConfig.get().STAT_POINTS_PER_LEVEL);
 
         int spent = 0;
 

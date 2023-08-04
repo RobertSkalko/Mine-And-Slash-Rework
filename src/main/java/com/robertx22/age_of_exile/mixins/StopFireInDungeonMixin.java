@@ -14,27 +14,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(FireBlock.class)
 public class StopFireInDungeonMixin {
 
-    // TODO
-    /*
-    @Inject(method = "tick(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/server/ServerWorld;Lnet/minecraft/util/math/BlockPos;Ljava/util/Random;)V", cancellable = true, at = @At(value = "HEAD"))
-    public void hookDisableFire(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        try {
-            if (WorldUtils.isMapWorldClass(world)) {
-                ci.cancel();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-     */
-
+   
     @Inject(method = "canSurvive(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/IWorldReader;Lnet/minecraft/util/math/BlockPos;)Z", cancellable = true, at = @At(value = "HEAD"))
     public void hookDisableFire(BlockState state, IWorldReader world, BlockPos pos, CallbackInfoReturnable<Boolean> ci) {
         try {
             if (WorldUtils.isDungeonWorld(world)) {
                 if (world.getBlockState(pos.below())
-                    .getBlock() != Blocks.NETHERRACK) {
+                        .getBlock() != Blocks.NETHERRACK) {
                     ci.setReturnValue(false);
                 }
             }

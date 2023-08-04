@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.loot.blueprints.bases;
 
-import com.robertx22.age_of_exile.database.data.groups.GearRarityGroups;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuality;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -17,9 +16,7 @@ public class GearRarityPart extends BlueprintPart<GearRarity, GearBlueprint> {
 
     GearRarity specialRar = null;
 
-    public List<GearRarity> possible = ExileDB.GearRarityGroups()
-            .get(GearRarityGroups.DROPPABLE_RARITIES_ID)
-            .getRarities();
+    public List<GearRarity> possible = ExileDB.GearRarities().getFiltered(x -> !x.is_unique_item);
 
     public float chanceForHigherRarity = 0;
 

@@ -1,0 +1,32 @@
+{
+  "guid": "item_both_armor",
+  "loc_name": "Reinforced",
+  "only_one_per_item": true,
+  "weight": 1000,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "included": [
+          "armor_stat"
+        ],
+        "excluded": []
+      }
+    ]
+  },
+  "tags": [],
+  "type": "prefix",
+  "stats": [
+    {
+      "min": 2.0,
+      "max": 4.0,
+      "stat": "armor",
+      "type": "ITEM_FLAT"
+    },
+    {
+      "min": 5.0,
+      "max": 30.0,
+      "stat": "armor",
+      "type": "ITEM_PERCENT"
+    }
+  ]
+}

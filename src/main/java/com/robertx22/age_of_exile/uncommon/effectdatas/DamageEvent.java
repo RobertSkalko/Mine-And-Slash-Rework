@@ -1,13 +1,12 @@
 package com.robertx22.age_of_exile.uncommon.effectdatas;
 
-import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.BeneficialEffects;
 import com.robertx22.age_of_exile.capability.PlayerDamageChart;
 import com.robertx22.age_of_exile.capability.entity.CooldownsData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.MyDamageSource;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.DamageAbsorbedByMana;
-import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
 import com.robertx22.age_of_exile.mixin_ducks.LivingEntityAccesor;
 import com.robertx22.age_of_exile.mixin_ducks.ProjectileEntityDuck;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -24,7 +23,6 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.NumberUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TeamUtils;
 import com.robertx22.age_of_exile.vanilla_mc.packets.DmgNumPacket;
 import com.robertx22.library_of_exile.main.Packets;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
@@ -124,6 +122,7 @@ public class DamageEvent extends EffectEvent {
 
         if (!data.isDodged() && target instanceof PlayerEntity) { // todo this code sucks
             // a getter should not modify anything
+            dmg = MagicShield.modifyEntityDamage(this, dmg);
             dmg = DamageAbsorbedByMana.modifyEntityDamage(this, dmg);
 
             if (dmg > 0) {
@@ -280,6 +279,9 @@ public class DamageEvent extends EffectEvent {
         DmgByElement info = getDmgByElement();
 
         if (data.isDodged()) {
+            if (attackInfo != null) {
+                attackInfo.event.damage = 0; // todo test this
+            }
             cancelDamage();
             sendDamageParticle(info);
             SoundUtils.playSound(target, SoundEvents.SHIELD_BLOCK, 1, 1.5F);
@@ -288,7 +290,7 @@ public class DamageEvent extends EffectEvent {
 
         float dmg = info.totalDmg;
 
-        
+
         float vanillaDamage = HealthUtils.realToVanilla(target, dmg);
 
         if (this.data.isCanceled()) {
@@ -326,6 +328,7 @@ public class DamageEvent extends EffectEvent {
                 target.hurtTime = 0;
             }
 
+
             if (this.data.isSpellEffect()) {
                 if (!data.getBoolean(EventData.DISABLE_KNOCKBACK) && dmg > 0 && !data.isDodged()) {
                     // if magic shield absorbed the damage, still do knockback
@@ -358,6 +361,8 @@ public class DamageEvent extends EffectEvent {
                 if (attackInfo != null && attackInfo.event != null) {
                     if (source instanceof PlayerEntity) {
                         attackInfo.event.damage *= ServerContainer.get().PLAYER_VANILLA_DMG_MULTI.get();
+                    } else {
+                        attackInfo.event.damage = 0;// todo test this
                     }
                 }
                 int inv = target.invulnerableTime;
@@ -368,20 +373,6 @@ public class DamageEvent extends EffectEvent {
 
             if (target instanceof PlayerEntity == false) {
 
-                this.targetData.getAffixData().player_hits++;
-                if (this.targetData.getAffixData().player_hits > 5) {
-                    if (RandomUtils.roll(25)) {
-
-                        SoundUtils.playSound(target, SoundEvents.GENERIC_EXPLODE);
-
-                        this.targetData.getAffixData().player_hits = 0;
-                        ExilePotionEvent potionEvent = EventBuilder.ofEffect(target, target, targetData.getLevel(),
-                                        ExileDB.ExileEffects()
-                                                .get(BeneficialEffects.MOB_ANGER_LVL1.GUID()), GiveOrTake.give, 8 * 20)
-                                .build();
-                        potionEvent.Activate();
-                    }
-                }
 
                 if (getAttackType() == AttackType.dot) {
                     target.invulnerableTime = 0; // disable iframes hopefully

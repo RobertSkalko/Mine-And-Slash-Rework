@@ -21,7 +21,7 @@ public class Armor extends Stat implements IUsableStat {
     public static String GUID = "armor";
 
     private Armor() {
-
+    
         this.min = 0;
         this.scaling = StatScaling.NORMAL;
         this.group = StatGroup.MAIN;
@@ -60,7 +60,7 @@ public class Armor extends Stat implements IUsableStat {
 
     @Override
     public String locNameForLangFile() {
-        return "Physical Defense";
+        return "Armor";
     }
 
     private static class SingletonHolder {

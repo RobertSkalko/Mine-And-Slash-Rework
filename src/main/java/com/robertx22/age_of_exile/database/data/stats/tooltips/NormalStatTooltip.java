@@ -20,15 +20,21 @@ public class NormalStatTooltip implements IStatTooltipType {
         List<ITextComponent> list = new ArrayList<>();
 
         IFormattableTextComponent txt = new StringTextComponent(TextFormatting.BLUE + info.stat.getStatNameRegex()
-            .translate(format, ctx, info.type, info.firstValue, info.stat));
+                .translate(format, ctx, info.type, info.firstValue, info.stat));
 
         if (ctx.statinfo.stat.is_long) {
             return longStat(ctx, txt);
         }
+        
 
         if (ctx.showStatRanges()) {
             txt.append(" ")
-                .append(getPercentageView(ctx.statinfo.percent));
+                    .append(getPercentageView(ctx.statinfo.percent));
+        }
+        if (ctx.showStatRanges()) {
+            if (ctx.statinfo.affix_tier > 0) {
+                txt.append(" [T" + ctx.statinfo.affix_tier + "]");
+            }
         }
 
         list.add(txt);

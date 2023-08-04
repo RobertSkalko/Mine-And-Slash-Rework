@@ -77,7 +77,7 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
 
     public GearSlot getGearSlot() {
         return ExileDB.GearSlots()
-            .get(gear_slot);
+                .get(gear_slot);
     }
 
     @Override
@@ -119,13 +119,13 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
 
     public final float getAttacksPerSecondCalculated(EntityData data) {
         return getAttacksPerSecondCalculated(data.getUnit()
-            .getCalculatedStat(Stats.ATTACK_SPEED.get()));
+                .getCalculatedStat(Stats.ATTACK_SPEED.get()));
     }
 
     public final float getAttacksPerSecondCalculated(StatData stat) {
 
         float multi = stat
-            .getMultiplier();
+                .getMultiplier();
 
         float f = multi * attacksPerSecond;
 
@@ -146,7 +146,7 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
 
     public final boolean isMeleeWeapon() {
         return this.getTags()
-            .contains(SlotTag.melee_weapon);
+                .contains(SlotTag.melee_weapon);
     }
 
     public boolean isShield() {
@@ -176,6 +176,8 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
         mage_weapon(SlotFamily.NONE), melee_weapon(SlotFamily.NONE), ranged_weapon(SlotFamily.NONE),
 
         armor_stat(SlotFamily.NONE),
+        magic_shield_stat(SlotFamily.NONE),
+        dodge_stat(SlotFamily.NONE),
 
         warrior_casting_weapon(SlotFamily.Weapon),
         ranger_casting_weapon(SlotFamily.Weapon),

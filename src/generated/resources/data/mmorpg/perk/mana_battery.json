@@ -14,13 +14,13 @@
     {
       "v1": -20.0,
       "stat": "health",
-      "type": "GLOBAL_INCREASE",
+      "type": "MORE",
       "scale_to_lvl": false
     },
     {
       "v1": -15.0,
       "stat": "dodge",
-      "type": "GLOBAL_INCREASE",
+      "type": "MORE",
       "scale_to_lvl": false
     }
   ]

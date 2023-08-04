@@ -67,6 +67,7 @@ public class NatureSpells implements ExileRegistryInit {
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.SNEEZE, 25D, 1D))
 
                 .build();
+        
         SpellBuilder.of(THORN_ARMOR, SpellConfiguration.Builder.instant(15, 200 * 20), "Thorn Armor",
                         Arrays.asList(SpellTag.damage))
                 .manualDesc("Gives buff to self:")

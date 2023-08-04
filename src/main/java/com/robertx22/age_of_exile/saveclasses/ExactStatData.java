@@ -29,7 +29,7 @@ public class ExactStatData implements ISerializable<ExactStatData>, ITooltipList
 
     }
 
-    public static ExactStatData of(float first, Stat stat, ModType type, int lvl) {
+    public static ExactStatData levelScaled(float first, Stat stat, ModType type, int lvl) {
         ExactStatData data = new ExactStatData();
         data.v1 = first;
         data.stat = stat.GUID();
@@ -117,7 +117,7 @@ public class ExactStatData implements ISerializable<ExactStatData>, ITooltipList
 
     public void increaseByAddedPercent() {
 
-        v1 += v1 * percentIncrease / 100F;
+        v1 += v1 * (1 + percentIncrease / 100F);
 
         percentIncrease = 0;
     }
@@ -132,14 +132,14 @@ public class ExactStatData implements ISerializable<ExactStatData>, ITooltipList
 
     public Stat getStat() {
         return ExileDB.Stats()
-            .get(stat);
+                .get(stat);
     }
 
     public void applyStats(EntityData data) {
         data.getUnit()
-            .getStats()
-            .getStatInCalculation(stat)
-            .add(this, data);
+                .getStats()
+                .getStatInCalculation(stat)
+                .add(this, data);
     }
 
     @Override
@@ -167,12 +167,12 @@ public class ExactStatData implements ISerializable<ExactStatData>, ITooltipList
     public ExactStatData fromJson(JsonObject json) {
 
         float first = json.get("v1")
-            .getAsFloat();
+                .getAsFloat();
         String stat = json.get("stat")
-            .getAsString();
+                .getAsString();
 
         ModType type = ModType.fromString(json.get("type")
-            .getAsString());
+                .getAsString());
 
         ExactStatData data = new ExactStatData();
         data.v1 = first;
@@ -199,7 +199,7 @@ public class ExactStatData implements ISerializable<ExactStatData>, ITooltipList
 
                 if (i == 0) {
                     toRemove.add(stat);
-                    current = ExactStatData.of(stat.v1, stat.getStat(), stat.getType(), 1);
+                    current = ExactStatData.levelScaled(stat.v1, stat.getStat(), stat.getType(), 1);
                     i++;
                     continue;
                 }

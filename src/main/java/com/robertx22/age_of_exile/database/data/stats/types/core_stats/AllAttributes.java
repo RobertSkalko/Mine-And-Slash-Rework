@@ -18,9 +18,6 @@ public class AllAttributes extends Stat implements ITransferToOtherStats {
     public static String INT_ID = "intelligence";
     public static String STR_ID = "strength";
     public static String DEX_ID = "dexterity";
-    public static String VIT_ID = "vitality";
-    public static String WIS_ID = "wisdom";
-    public static String AGI_ID = "agility";
 
     private AllAttributes() {
         this.scaling = StatScaling.CORE_STAT;
@@ -43,13 +40,13 @@ public class AllAttributes extends Stat implements ITransferToOtherStats {
 
     public List<Stat> coreStatsThatBenefit() {
         return coreStatsThatBenefitIDS().stream()
-            .map(x -> ExileDB.Stats()
-                .get(x))
-            .collect(Collectors.toList());
+                .map(x -> ExileDB.Stats()
+                        .get(x))
+                .collect(Collectors.toList());
     }
 
     public List<String> coreStatsThatBenefitIDS() {
-        return Arrays.asList(AllAttributes.AGI_ID, AllAttributes.WIS_ID, AllAttributes.VIT_ID, AllAttributes.INT_ID, AllAttributes.STR_ID, AllAttributes.DEX_ID);
+        return Arrays.asList(AllAttributes.INT_ID, AllAttributes.STR_ID, AllAttributes.DEX_ID);
     }
 
     @Override
@@ -71,7 +68,7 @@ public class AllAttributes extends Stat implements ITransferToOtherStats {
     public void transferStats(EntityData unit, InCalcStatData thisstat) {
         for (Stat ele : coreStatsThatBenefit()) {
             thisstat.addFullyTo(unit.getUnit()
-                .getStatInCalculation(ele));
+                    .getStatInCalculation(ele));
         }
         thisstat.clear();
     }

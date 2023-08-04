@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.event_hooks.ontick;
 
 import com.robertx22.age_of_exile.a_libraries.curios.MyCurioUtils;
-import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -29,10 +28,10 @@ public class UnequipGear {
         player.setItemSlot(slot, ItemStack.EMPTY); // todo is this good?
 
         if (player.getItemBySlot(slot)
-            .isEmpty()) {
+                .isEmpty()) {
             PlayerUtils.giveItem(copy, player);
             player.displayClientMessage(txt
-                , false);
+                    , false);
         } else {
             player.setItemSlot(slot, copy);
             System.out.print("Error in unequipping gear, weird!!!");
@@ -43,15 +42,13 @@ public class UnequipGear {
 
         ItemStack copy = stack.copy();
         handler.getStacks()
-            .setStackInSlot(number, ItemStack.EMPTY);
+                .setStackInSlot(number, ItemStack.EMPTY);
         PlayerUtils.giveItem(copy, player);
         player.displayClientMessage(txt, false);
     }
 
     public static void onTick(PlayerEntity player) {
 
-        int runewords = 0;
-        int uniques = 0;
 
         for (EquipmentSlotType slot : SLOTS) {
 
@@ -62,11 +59,6 @@ public class UnequipGear {
             if (gear != null) {
                 if (!gear.canPlayerWear(Load.Unit(player))) {
                     drop(player, slot, stack, new StringTextComponent("You do not meet the requirements of that item.").withStyle(TextFormatting.RED));
-                } else if (gear.isUnique()) {
-                    uniques++;
-                    if (uniques > ServerContainer.get().MAX_UNIQUE_GEARS_WORN.get()) {
-                        drop(player, slot, stack, new StringTextComponent("You cannot equip that many unique items.").withStyle(TextFormatting.RED));
-                    }
                 }
             }
         }
@@ -74,11 +66,11 @@ public class UnequipGear {
         for (ICurioStacksHandler handler : MyCurioUtils.getHandlers(player)) {
 
             for (int i = 0; i < handler
-                .getSlots(); i++) {
+                    .getSlots(); i++) {
 
                 ItemStack stack = handler
-                    .getStacks()
-                    .getStackInSlot(i);
+                        .getStacks()
+                        .getStackInSlot(i);
 
                 if (!stack.isEmpty()) {
                     GearItemData gear = Gear.Load(stack);
@@ -86,11 +78,6 @@ public class UnequipGear {
                     if (gear != null) {
                         if (!gear.canPlayerWear(Load.Unit(player))) {
                             drop(player, handler, i, stack, new StringTextComponent("You do not meet the requirements of that item.").withStyle(TextFormatting.RED));
-                        } else if (gear.isUnique()) {
-                            uniques++;
-                            if (uniques > ServerContainer.get().MAX_UNIQUE_GEARS_WORN.get()) {
-                                drop(player, handler, i, stack, new StringTextComponent("You cannot equip that many unique items.").withStyle(TextFormatting.RED));
-                            }
                         }
                     }
                 }

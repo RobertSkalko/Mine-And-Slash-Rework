@@ -30,6 +30,8 @@ public class ResourcesData {
     @Store
     private float mana = 0;
     @Store
+    private float magic_shield = 0;
+    @Store
     private float energy = 0;
     @Store
     private float blood = 0;
@@ -49,11 +51,15 @@ public class ResourcesData {
         return blood;
     }
 
+    public float getMagicShield() {
+        return magic_shield;
+    }
+
     public void onTickBlock(PlayerEntity player) {
         if (player.isBlocking()) {
             float cost = Energy.getInstance()
-                .scale(ModType.FLAT, 0.25F, Load.Unit(player)
-                    .getLevel());
+                    .scale(ModType.FLAT, 0.25F, Load.Unit(player)
+                            .getLevel());
             SpendResourceEvent event = new SpendResourceEvent(player, ResourceType.energy, cost);
             event.calculateEffects();
             event.Activate();
@@ -85,6 +91,8 @@ public class ResourcesData {
             return blood;
         } else if (type == ResourceType.energy) {
             return energy;
+        } else if (type == ResourceType.magic_shield) {
+            return magic_shield;
         } else if (type == ResourceType.health) {
             return HealthUtils.getCurrentHealth(en);
         }
@@ -99,21 +107,25 @@ public class ResourcesData {
             return 100F;
         } else if (type == ResourceType.shield) {
             return data.getUnit()
-                .healthData()
-                .getValue();
+                    .healthData()
+                    .getValue();
         } else if (type == ResourceType.mana) {
             return data.getUnit()
-                .manaData()
-                .getValue();
+                    .manaData()
+                    .getValue();
 
         } else if (type == ResourceType.blood) {
             return data.getUnit()
-                .bloodData()
-                .getValue();
+                    .bloodData()
+                    .getValue();
         } else if (type == ResourceType.energy) {
             return data.getUnit()
-                .energyData()
-                .getValue();
+                    .energyData()
+                    .getValue();
+        } else if (type == ResourceType.magic_shield) {
+            return data.getUnit()
+                    .magicShieldData()
+                    .getValue();
         } else if (type == ResourceType.health) {
             return HealthUtils.getMaxHealth(en);
         }
@@ -139,6 +151,8 @@ public class ResourcesData {
             blood = getModifiedValue(en, type, use, amount);
         } else if (type == ResourceType.energy) {
             energy = getModifiedValue(en, type, use, amount);
+        } else if (type == ResourceType.magic_shield) {
+            magic_shield = getModifiedValue(en, type, use, amount);
         } else if (type == ResourceType.health) {
             if (use == Use.RESTORE) {
                 HealthUtils.heal(en, amount);
@@ -151,13 +165,16 @@ public class ResourcesData {
     private void cap(LivingEntity en, ResourceType type) {
         if (type == ResourceType.mana) {
             mana = MathHelper.clamp(mana, 0, Load.Unit(en)
-                .getMaximumResource(type));
+                    .getMaximumResource(type));
         } else if (type == ResourceType.energy) {
             energy = MathHelper.clamp(energy, 0, Load.Unit(en)
-                .getMaximumResource(type));
+                    .getMaximumResource(type));
+        } else if (type == ResourceType.magic_shield) {
+            magic_shield = MathHelper.clamp(magic_shield, 0, Load.Unit(en)
+                    .getMaximumResource(type));
         } else if (type == ResourceType.blood) {
             blood = MathHelper.clamp(blood, 0, Load.Unit(en)
-                .getMaximumResource(type));
+                    .getMaximumResource(type));
         }
 
     }

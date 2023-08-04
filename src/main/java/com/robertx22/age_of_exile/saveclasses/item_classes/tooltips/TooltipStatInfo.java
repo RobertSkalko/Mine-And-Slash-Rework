@@ -24,7 +24,10 @@ public class TooltipStatInfo implements ITooltipList {
 
     public int percent = -99;
 
+    public int affix_tier = -1;
+
     public TooltipStatInfo(ExactStatData data, int percent, TooltipInfo info) {
+        
         this.stat = data.getStat();
         this.firstValue = data.getFirstValue();
         this.type = data.getType();
@@ -54,7 +57,7 @@ public class TooltipStatInfo implements ITooltipList {
 
     public boolean canBeCombined(TooltipStatInfo another) {
         return stat.GUID()
-            .equals(another.stat.GUID()) && type.equals(another.type);
+                .equals(another.stat.GUID()) && type.equals(another.type);
     }
 
     @Override
@@ -69,12 +72,12 @@ public class TooltipStatInfo implements ITooltipList {
         for (TooltipStatInfo duplicate : duplicates) {
 
             Optional<TooltipStatInfo> found = list.stream()
-                .filter(x -> x.canBeCombined(duplicate))
-                .findFirst();
+                    .filter(x -> x.canBeCombined(duplicate))
+                    .findFirst();
 
             if (found.isPresent()) {
                 found.get()
-                    .combine(duplicate);
+                        .combine(duplicate);
 
             } else {
                 list.add(duplicate);

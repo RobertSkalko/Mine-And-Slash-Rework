@@ -12,12 +12,11 @@
     "LivingEntityMixin",
     "LootTableMixin",
     "PlayerInventoryMixin",
-    "ServerPlayerEntityAccessor",
     "StopFireInDungeonMixin"
   ],
   "client": [
     "ItemGlintMixin",
-    "ItemStackMixin",    
+    "ItemStackMixin",
     "WorldRendererMixin"
   ],
   "injectors": {

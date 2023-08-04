@@ -5,7 +5,7 @@
   "on_armor_stats": [
     {
       "v1": 1.5,
-      "stat": "agility",
+      "stat": "dexterity",
       "type": "FLAT",
       "scale_to_lvl": true
     }

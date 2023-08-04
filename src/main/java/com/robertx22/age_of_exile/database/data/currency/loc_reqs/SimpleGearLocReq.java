@@ -1,14 +1,11 @@
 package com.robertx22.age_of_exile.database.data.currency.loc_reqs;
 
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
-import com.robertx22.age_of_exile.database.data.groups.GearRarityGroups;
-import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import net.minecraft.util.text.IFormattableTextComponent;
 
-import java.util.Comparator;
 import java.util.function.Predicate;
 
 public class SimpleGearLocReq extends BaseLocRequirement {
@@ -31,16 +28,7 @@ public class SimpleGearLocReq extends BaseLocRequirement {
     public static final SimpleGearLocReq IS_COMMON = new SimpleGearLocReq(
             x -> x.rarity.equals(IRarity.COMMON_ID), Words.IsCommon.locName());
 
-    public static final SimpleGearLocReq IS_NOT_HIGHEST_RARITY = new SimpleGearLocReq(
-            x -> ExileDB.GearRarityGroups()
-                    .get(GearRarityGroups.NON_UNIQUE_ID)
-                    .getRarities()
 
-                    .stream()
-                    .max(Comparator.comparingDouble(r -> r.itemTierPower()))
-                    .get()
-                    .isHigherThan(x.getRarity())
-            , Words.IsNotMaxRarity.locName());
     public static final SimpleGearLocReq IS_NOT_UNIQUE = new SimpleGearLocReq(
             x -> !x.isUnique(), Words.isNotUnique.locName());
     public static final SimpleGearLocReq IS_UNIQUE = new SimpleGearLocReq(

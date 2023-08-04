@@ -17,17 +17,17 @@ public class HelmetUniques implements ExileRegistryInit {
     public void registerAll() {
 
         UniqueGearBuilder.of(
-                "mana_dominion",
-                "Dominion of Mana",
-                BaseGearTypes.HELMET)
-            .setReplacesName()
-            .stats(Arrays.asList(
-                new StatModifier(25, 50, Mana.getInstance(), ModType.PERCENT),
-                new StatModifier(3, 10, Stats.SPELL_CRIT_CHANCE.get(), ModType.FLAT),
-                new StatModifier(-10, -25, Health.getInstance(), ModType.PERCENT),
-                new StatModifier(1, 10, DatapackStats.MANA_PER_10_INT, ModType.FLAT)
-            ))
-            .devComment("mana crit helmet")
-            .build();
+                        "mana_dominion",
+                        "Dominion of Mana",
+                        BaseGearTypes.CLOTH_HELMET)
+                .setReplacesName()
+                .stats(Arrays.asList(
+                        new StatModifier(25, 50, Mana.getInstance(), ModType.PERCENT),
+                        new StatModifier(3, 10, Stats.SPELL_CRIT_CHANCE.get(), ModType.FLAT),
+                        new StatModifier(-10, -25, Health.getInstance(), ModType.PERCENT),
+                        new StatModifier(1, 10, DatapackStats.MANA_PER_10_INT, ModType.FLAT)
+                ))
+                .devComment("mana crit helmet")
+                .build();
     }
 }

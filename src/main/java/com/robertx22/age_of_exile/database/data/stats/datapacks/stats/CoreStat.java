@@ -50,7 +50,7 @@ public class CoreStat extends BaseDatapackStat implements ICoreStat {
         String str = "Determines your total: ";
         for (OptScaleExactStat x : this.statsThatBenefit()) {
             str += x.getStat()
-                .translate() + ", ";
+                    .translate() + ", ";
         }
         str = str.substring(0, str.length() - 2);
 
@@ -70,13 +70,13 @@ public class CoreStat extends BaseDatapackStat implements ICoreStat {
         List<ITextComponent> list = new ArrayList<>();
 
         list.add(
-            new StringTextComponent("For each point: ").withStyle(TextFormatting.GREEN));
+                new StringTextComponent("For each point: ").withStyle(TextFormatting.GREEN));
         getMods(1).forEach(x -> list.addAll(x.GetTooltipString(info)));
 
         list.add(new SText(""));
 
         list.add(
-            new StringTextComponent("Total: ").withStyle(TextFormatting.GREEN));
+                new StringTextComponent("Total: ").withStyle(TextFormatting.GREEN));
         getMods(val).forEach(x -> list.addAll(x.GetTooltipString(info)));
 
         return list;
@@ -86,21 +86,21 @@ public class CoreStat extends BaseDatapackStat implements ICoreStat {
     public List<ExactStatData> getMods(int amount) {
 
         return data.stats.stream()
-            .map(x -> {
-                ExactStatData exact = ExactStatData.of(amount * x.v1, x.getStat()
-                    .getStat(), x.getStat()
-                    .getModType(), 1);
-                return exact;
-            })
-            .collect(Collectors.toList());
+                .map(x -> {
+                    ExactStatData exact = ExactStatData.levelScaled(amount * x.v1, x.getStat()
+                            .getStat(), x.getStat()
+                            .getModType(), 1);
+                    return exact;
+                })
+                .collect(Collectors.toList());
 
     }
 
     @Override
     public final List<OptScaleExactStat> statsThatBenefit() {
         return data.stats.stream()
-            .map(e -> e.getStat())
-            .collect(Collectors.toList());
+                .map(e -> e.getStat())
+                .collect(Collectors.toList());
     }
 
     @Override

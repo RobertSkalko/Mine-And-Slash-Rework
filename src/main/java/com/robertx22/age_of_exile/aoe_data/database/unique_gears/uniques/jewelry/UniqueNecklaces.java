@@ -28,7 +28,7 @@ public class UniqueNecklaces implements ExileRegistryInit {
                 .stats(Arrays.asList(
                         new StatModifier(2, 10, DatapackStats.MOVE_SPEED, ModType.FLAT),
                         new StatModifier(5, 25, EnergyRegen.getInstance(), ModType.PERCENT),
-                        new StatModifier(2, 6, DatapackStats.AGI, ModType.FLAT)
+                        new StatModifier(2, 6, DatapackStats.DEX, ModType.FLAT)
                 ))
                 .setReplacesName()
                 .build();
@@ -42,8 +42,8 @@ public class UniqueNecklaces implements ExileRegistryInit {
                         new StatModifier(1, 2, PlusSkillsInSchoolStats.PLUS_OCEAN),
                         new StatModifier(25, 25, DatapackStats.MANA_PER_10_INT, ModType.FLAT),
                         new StatModifier(3, 5, SpellDamage.getInstance(), ModType.FLAT),
-                        new StatModifier(1, 3, DatapackStats.VIT, ModType.FLAT),
-                        new StatModifier(2, 6, DatapackStats.AGI, ModType.FLAT)
+                        new StatModifier(1, 3, DatapackStats.STR, ModType.FLAT),
+                        new StatModifier(2, 6, DatapackStats.DEX, ModType.FLAT)
                 ))
 
                 .build();

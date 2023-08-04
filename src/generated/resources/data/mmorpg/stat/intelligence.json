@@ -11,23 +11,18 @@
     "core_stat_data": {
       "stats": [
         {
+          "v1": 1.0,
+          "stat": "mana",
+          "type": "FLAT"
+        },
+        {
+          "v1": 1.0,
+          "stat": "magic_shield",
+          "type": "PERCENT"
+        },
+        {
           "v1": 0.1,
-          "stat": "spell_power",
-          "type": "FLAT"
-        },
-        {
-          "v1": 1.0,
-          "stat": "fire_resist",
-          "type": "FLAT"
-        },
-        {
-          "v1": 1.0,
-          "stat": "water_resist",
-          "type": "FLAT"
-        },
-        {
-          "v1": 1.0,
-          "stat": "chaos_resist",
+          "stat": "magic_shield_regen",
           "type": "FLAT"
         }
       ]

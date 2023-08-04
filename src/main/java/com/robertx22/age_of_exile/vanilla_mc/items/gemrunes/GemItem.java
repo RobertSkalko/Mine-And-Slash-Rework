@@ -229,7 +229,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
         TOURMALINE("tourmaline", "Tourmaline", TextFormatting.LIGHT_PURPLE, new GemStatPerTypes() {
             @Override
             public List<StatModifier> onArmor() {
-                return Arrays.asList(new StatModifier(1, 5, DatapackStats.VIT));
+                return Arrays.asList(new StatModifier(1, 5, DatapackStats.STR));
             }
 
             @Override
@@ -245,7 +245,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
         AZURITE("azurite", "Azurite", TextFormatting.AQUA, new GemStatPerTypes() {
             @Override
             public List<StatModifier> onArmor() {
-                return Arrays.asList(new StatModifier(1, 5, DatapackStats.WIS));
+                return Arrays.asList(new StatModifier(1, 5, DatapackStats.INT));
             }
 
             @Override
@@ -294,7 +294,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
         TOPAZ("topaz", "Topaz", TextFormatting.YELLOW, new GemStatPerTypes() {
             @Override
             public List<StatModifier> onArmor() {
-                return Arrays.asList(new StatModifier(1, 5, DatapackStats.AGI));
+                return Arrays.asList(new StatModifier(1, 5, DatapackStats.DEX));
             }
 
             @Override

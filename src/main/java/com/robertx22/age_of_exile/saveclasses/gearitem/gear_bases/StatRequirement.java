@@ -35,13 +35,13 @@ public class StatRequirement implements IAutoGson<StatRequirement> {
         StatRequirement req = new StatRequirement(one);
 
         two.scaling_req.entrySet()
-            .forEach(x -> {
-                req.scaling_req.put(x.getKey(), req.scaling_req.getOrDefault(x.getKey(), 0F) + x.getValue());
-            });
+                .forEach(x -> {
+                    req.scaling_req.put(x.getKey(), req.scaling_req.getOrDefault(x.getKey(), 0F) + x.getValue());
+                });
         two.base_req.entrySet()
-            .forEach(x -> {
-                req.base_req.put(x.getKey(), req.base_req.getOrDefault(x.getKey(), 0F) + x.getValue());
-            });
+                .forEach(x -> {
+                    req.base_req.put(x.getKey(), req.base_req.getOrDefault(x.getKey(), 0F) + x.getValue());
+                });
 
         return req;
     }
@@ -52,13 +52,13 @@ public class StatRequirement implements IAutoGson<StatRequirement> {
     public boolean meetsReq(int lvl, EntityData data) {
 
         for (Stat x : AllAttributes.getInstance()
-            .coreStatsThatBenefit()) {
+                .coreStatsThatBenefit()) {
 
             int num = getReq(x, lvl);
 
             if (num > data.getUnit()
-                .getCalculatedStat(x)
-                .getValue()) {
+                    .getCalculatedStat(x)
+                    .getValue()) {
                 return false;
             }
 
@@ -72,21 +72,6 @@ public class StatRequirement implements IAutoGson<StatRequirement> {
         return (int) (base_req.getOrDefault(stat.GUID(), 0F) + StatScaling.STAT_REQ.scale(scaling_req.getOrDefault(stat.GUID(), 0F), lvl));
     }
 
-    public StatRequirement setVit(float req) {
-        this.scaling_req.put(DatapackStats.VIT.GUID(), req);
-        return this;
-    }
-
-    public StatRequirement setWis(float req) {
-
-        this.scaling_req.put(DatapackStats.WIS.GUID(), req);
-        return this;
-    }
-
-    public StatRequirement setAgi(float req) {
-        this.scaling_req.put(DatapackStats.AGI.GUID(), req);
-        return this;
-    }
 
     public StatRequirement setDex(float req) {
         this.scaling_req.put(DatapackStats.DEX.GUID(), req);
@@ -122,7 +107,7 @@ public class StatRequirement implements IAutoGson<StatRequirement> {
         List<ITextComponent> list = new ArrayList<>();
 
         for (Stat x : AllAttributes.getInstance()
-            .coreStatsThatBenefit()) {
+                .coreStatsThatBenefit()) {
 
             int num = getReq(x, lvl);
 
@@ -143,16 +128,16 @@ public class StatRequirement implements IAutoGson<StatRequirement> {
     static ITextComponent getTooltip(int req, Stat stat, EntityData data) {
 
         if (data.getUnit()
-            .getCalculatedStat(stat)
-            .getValue() >= req) {
+                .getCalculatedStat(stat)
+                .getValue() >= req) {
             return new StringTextComponent(TextFormatting.GREEN + "" + TextFormatting.BOLD + CHECK_YES_ICON + " ").append(stat.locName()
-                    .withStyle(TextFormatting.GRAY))
-                .append(" " + TextFormatting.GRAY + "Min: " + req + " ");
+                            .withStyle(TextFormatting.GRAY))
+                    .append(" " + TextFormatting.GRAY + "Min: " + req + " ");
         } else {
 
             return new StringTextComponent(TextFormatting.RED + "" + TextFormatting.BOLD + NO_ICON + " ").append(stat.locName()
-                    .withStyle(TextFormatting.GRAY))
-                .append(" " + TextFormatting.GRAY + "Min: " + req + " ");
+                            .withStyle(TextFormatting.GRAY))
+                    .append(" " + TextFormatting.GRAY + "Min: " + req + " ");
 
         }
 

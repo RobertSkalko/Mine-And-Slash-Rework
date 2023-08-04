@@ -20,7 +20,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.misc.ExtraMobDropsSt
 import com.robertx22.age_of_exile.database.data.stats.types.offense.DarknessDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.DualWieldDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SpellDamage;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.SpellPower;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.crit.GlobalCriticalDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.crit.GlobalCriticalHit;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.DamageAbsorbedByMana;
@@ -32,6 +32,8 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Ene
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.EnergyRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShieldRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -60,7 +62,10 @@ public class StatsRegister implements ExileRegistryInit {
 
                     add(DarknessDamage.getInstance());
 
-                    add(SpellPower.getInstance());
+                    add(WeaponDamage.getInstance());
+
+                    add(MagicShield.getInstance());
+                    add(MagicShieldRegen.getInstance());
 
                     add(SpellDodge.getInstance());
 

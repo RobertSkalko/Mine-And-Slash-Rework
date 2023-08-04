@@ -1,43 +1,36 @@
 package com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts;
 
 import com.robertx22.age_of_exile.database.data.StatModifier;
-import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.tooltips.StatTooltipType;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.*;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
-import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
+import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import info.loenwind.autosave.annotations.Storable;
 import info.loenwind.autosave.annotations.Store;
-import net.minecraft.util.Tuple;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Storable
 public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartTooltip {
 
     @Store
-    public List<Integer> perc = new ArrayList<Integer>();
+    public Integer perc = 0;
 
     @Override
     public void RerollFully(GearItemData gear) {
 
-        perc = new ArrayList<>();
+        perc = getMinMax(gear).random();
 
-        for (int i = 0; i < 8; i++) {
-            perc.add(getMinMax(gear).random());
-
-            gear.rp = RandomUtils.randomFromList(new ArrayList<>(RareItemAffixNames.prefixAny
+        gear.rp = RandomUtils.randomFromList(new ArrayList<>(RareItemAffixNames.prefixAny
                 .keySet()));
-            gear.rs = RandomUtils.randomFromList(new ArrayList<>(RareItemAffixNames.getSuffixMap(gear.GetBaseGearType())
+        gear.rs = RandomUtils.randomFromList(new ArrayList<>(RareItemAffixNames.getSuffixMap(gear.GetBaseGearType())
                 .keySet()));
-        }
 
     }
 
@@ -49,21 +42,28 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
     @Override
     public List<ITextComponent> GetTooltipString(TooltipInfo info, GearItemData gear) {
 
-        List<ExactStatData> all = GetAllStats(gear);
+
+        List<ExactStatData> all = getBaseItemStats(gear);
+
 
         info.statTooltipType = StatTooltipType.BASE_LOCAL_STATS;
 
         List<ITextComponent> list = new ArrayList<>();
         list.add(new StringTextComponent(" "));
 
+        for (ExactStatData stat : all) {
+            list.addAll(stat.GetTooltipString(info));
+        }
+
+        info.statTooltipType = StatTooltipType.NORMAL;
+
+        return list;
+
+        /*
         List<Tuple<Stat, List<ITextComponent>>> pairs = new ArrayList<>();
 
         List<StatModifier> stats = gear.GetBaseGearType().base_stats;
 
-        if (gear.uniqueBaseStatsReplaceBaseStats()) {
-            stats = gear.uniqueStats.getUnique(gear)
-                .base_stats;
-        }
 
         if (!info.useInDepthStats()) {
 
@@ -78,9 +78,9 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
                     TooltipStatInfo ctx = new TooltipStatInfo(all.get(i), perc, info);
 
                     pairs.add(new Tuple(all.get(i)
-                        .getStat()
-                        , info.statTooltipType.impl.getTooltipList(gear.getRarity()
-                        .textFormatting(), new TooltipStatWithContext(ctx, stats.size() > i ? stats.get(i) : null, (int) gear.getILVL()))));
+                            .getStat()
+                            , info.statTooltipType.impl.getTooltipList(gear.getRarity()
+                            .textFormatting(), new TooltipStatWithContext(ctx, stats.size() > i ? stats.get(i) : null, (int) gear.getILVL()))));
                 }
             }
         }
@@ -95,6 +95,8 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
 
         return list;
 
+
+         */
     }
 
     @Override
@@ -102,26 +104,49 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
         return true;
     }
 
-    @Override
-    public List<ExactStatData> GetAllStats(GearItemData gear) {
+    public List<ExactStatData> getBaseItemStats(GearItemData gear) {
 
         List<ExactStatData> local = new ArrayList<>();
 
         try {
 
-            if (!gear.uniqueBaseStatsReplaceBaseStats()) {
-                int i = 0;
-                for (StatModifier mod : gear.GetBaseGearType()
+            for (StatModifier mod : gear.GetBaseGearType()
                     .baseStats()) {
-                    local.add(mod.ToExactStat(perc.get(i), gear.getILVL()));
-                    i++;
+                local.add(mod.ToExactStat(perc, gear.getILVL()));
+
+            }
+
+            for (IStatsContainer co : gear.GetAllStatContainersExceptBase()) {
+                for (ExactStatData stat : co.GetAllStats(gear)) {
+                    if (stat.getType().isItemLocal()) {
+
+                        for (ExactStatData l : local) {
+                            if (l.getStat().GUID().equals(stat.getStatId())) {
+                                if (l.getType().isFlat() && l.getType() == stat.getType()) {
+                                    l.add(stat);
+                                }
+                            }
+                        }
+
+                    }
                 }
-            } else {
-                int n = 0;
-                for (StatModifier mod : gear.uniqueStats.getUnique(gear)
-                    .base_stats) {
-                    local.add(mod.ToExactStat(perc.get(n), gear.getILVL()));
-                    n++;
+            }
+
+
+            for (IStatsContainer co : gear.GetAllStatContainersExceptBase()) {
+                for (ExactStatData stat : co.GetAllStats(gear)) {
+                    if (stat.getType().isItemLocal()) {
+
+                        for (ExactStatData l : local) {
+                            if (l.getStat().GUID().equals(stat.getStatId())) {
+                                if (stat.getType() == ModType.ITEM_PERCENT) {
+                                    l.percentIncrease = stat.getAverageValue();
+                                    l.increaseByAddedPercent();
+                                }
+                            }
+                        }
+
+                    }
                 }
             }
 
@@ -129,7 +154,15 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
             e.printStackTrace();
         }
 
+
         return local;
+    }
+
+    @Override
+    public List<ExactStatData> GetAllStats(GearItemData gear) {
+        return getBaseItemStats(gear).stream()
+                .map(x -> ExactStatData.noScaling(x.getFirstValue(), x.getType().toNonItemType(), x.getStatId())).collect(Collectors.toList());
+
     }
 
     @Override

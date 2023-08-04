@@ -9,16 +9,16 @@
   ],
   "mc_stats": [
     {
-      "val": -1000.0,
+      "val": -100.0,
       "uuid": "5eccf34c-29f7-4eea-bbad-82a905594064",
       "id": "minecraft:generic.attack_damage",
-      "type": "GLOBAL_INCREASE"
+      "type": "MORE"
     },
     {
-      "val": -1000.0,
+      "val": -100.0,
       "uuid": "57eb6210-2a42-4ad3-a604-6f679d440a9b",
       "id": "minecraft:generic.attack_speed",
-      "type": "GLOBAL_INCREASE"
+      "type": "MORE"
     }
   ],
   "stats": [],

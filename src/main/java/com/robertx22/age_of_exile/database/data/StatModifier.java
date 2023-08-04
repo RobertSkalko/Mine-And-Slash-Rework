@@ -107,7 +107,7 @@ public class StatModifier implements ISerializable<StatModifier>, IByteBuf<StatM
 
     public Stat GetStat() {
         return ExileDB.Stats()
-            .get(stat);
+                .get(stat);
     }
 
     public IFormattableTextComponent getRangeToShow(int lvl) {
@@ -120,15 +120,15 @@ public class StatModifier implements ISerializable<StatModifier>, IByteBuf<StatM
 
         String text = fmin + "/" + fmax;
 
-        if (GetStat().IsPercent() || getModType().isLocalIncrease()) {
+        if (GetStat().IsPercent() || getModType().isPercent()) {
             text = text + "%";
-        } else if (getModType().isGlobalIncrease()) {
-            text = text + " Global";
+        } else if (getModType() == ModType.MORE) {
+            text = text + " More";
         }
 
         return new StringTextComponent("(").withStyle(TextFormatting.GREEN)
-            .append(text)
-            .append(")");
+                .append(text)
+                .append(")");
 
     }
 
@@ -154,15 +154,15 @@ public class StatModifier implements ISerializable<StatModifier>, IByteBuf<StatM
     public StatModifier fromJson(JsonObject json) {
 
         float firstMin = json.get("min")
-            .getAsFloat();
+                .getAsFloat();
         float firstMax = json.get("max")
-            .getAsFloat();
+                .getAsFloat();
 
         String stat = json.get("stat")
-            .getAsString();
+                .getAsString();
 
         ModType type = ModType.fromString(json.get("type")
-            .getAsString());
+                .getAsString());
 
         return new StatModifier(firstMin, firstMax, stat, type);
 
@@ -174,12 +174,12 @@ public class StatModifier implements ISerializable<StatModifier>, IByteBuf<StatM
 
         if (GetStat().is_long) {
             return TooltipUtils.cutIfTooLong(new StringTextComponent(
-                StatNameRegex.JUST_NAME.translate(TextFormatting.GREEN, null, getModType(), min, GetStat())
+                    StatNameRegex.JUST_NAME.translate(TextFormatting.GREEN, null, getModType(), min, GetStat())
             ));
         }
 
         ITextComponent txt = getRangeToShow(lvl).append(" ")
-            .append(GetStat().locName());
+                .append(GetStat().locName());
 
         list.add(txt);
 

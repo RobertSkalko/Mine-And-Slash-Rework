@@ -56,30 +56,7 @@ public class JewelrySuffixes implements ExileRegistryInit {
                 .Suffix()
                 .Build();
 
-        AffixBuilder.Normal("of_the_wise")
-                .Named("Of the Wise")
-                .coreStat(DatapackStats.WIS)
-                .includesTags(SlotTag.jewelry_family, SlotTag.armor_family)
-                .excludesTags(SlotTag.weapon_family)
-                .Suffix()
-                .Build();
-
-        AffixBuilder.Normal("of_the_agile")
-                .Named("Of Agility")
-                .coreStat(DatapackStats.AGI)
-                .includesTags(SlotTag.jewelry_family, SlotTag.armor_family)
-                .excludesTags(SlotTag.weapon_family)
-                .Suffix()
-                .Build();
-
-        AffixBuilder.Normal("of_the_virile")
-                .Named("Of the Virile")
-                .coreStat(DatapackStats.VIT)
-                .includesTags(SlotTag.jewelry_family, SlotTag.armor_family)
-                .excludesTags(SlotTag.weapon_family)
-                .Suffix()
-                .Build();
-
+    
         AffixBuilder.Normal("of_the_sky")
                 .Named("Of the Sky")
                 .stats(new StatModifier(0.1F, 0.4F, AllAttributes.getInstance(), ModType.FLAT))

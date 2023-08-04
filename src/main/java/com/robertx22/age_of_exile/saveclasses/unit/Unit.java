@@ -14,6 +14,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.blood.Bloo
 import com.robertx22.age_of_exile.database.data.stats.types.resources.blood.BloodUser;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.event_hooks.my_events.CollectGearEvent;
@@ -142,6 +143,15 @@ public class Unit {
     public StatData energyData() {
         try {
             return getCalculatedStat(Energy.GUID);
+        } catch (Exception e) {
+
+        }
+        return StatData.empty();
+    }
+
+    public StatData magicShieldData() {
+        try {
+            return getCalculatedStat(MagicShield.GUID);
         } catch (Exception e) {
 
         }

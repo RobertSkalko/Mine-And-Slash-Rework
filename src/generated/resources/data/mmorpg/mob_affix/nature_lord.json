@@ -1,8 +1,8 @@
 {
   "id": "nature_lord",
   "weight": 250,
-  "format": "DARK_GREEN",
-  "icon": "§2✿",
+  "format": "DARK_PURPLE",
+  "icon": "§5✿",
   "stats": [
     {
       "min": 15.0,

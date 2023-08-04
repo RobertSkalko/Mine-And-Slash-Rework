@@ -14,13 +14,13 @@
     {
       "v1": -50.0,
       "stat": "critical_damage",
-      "type": "GLOBAL_INCREASE",
+      "type": "MORE",
       "scale_to_lvl": false
     },
     {
       "v1": -50.0,
       "stat": "spell_critical_damage",
-      "type": "GLOBAL_INCREASE",
+      "type": "MORE",
       "scale_to_lvl": false
     }
   ]

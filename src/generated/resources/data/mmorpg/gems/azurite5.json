@@ -5,7 +5,7 @@
   "on_armor_stats": [
     {
       "v1": 4.0,
-      "stat": "wisdom",
+      "stat": "intelligence",
       "type": "FLAT",
       "scale_to_lvl": true
     }

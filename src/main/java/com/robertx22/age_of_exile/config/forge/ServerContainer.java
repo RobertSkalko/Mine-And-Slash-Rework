@@ -45,10 +45,6 @@ public class ServerContainer {
         HP_VALUE_NEEDED_FOR_MAX_ENVIRO_DMG_PROTECTION = b.defineInRange("HP_VALUE_NEEDED_FOR_MAX_ENVIRO_DMG_PROTECTION", 125, 0, 100000);
         MAX_ENVIRO_DMG_PROTECTION_FROM_HP_MULTI = b.defineInRange("MAX_ENVIRO_DMG_PROTECTION_FROM_HP_MULTI", 0.75F, 0, 1);
 
-        MAX_UNIQUE_GEARS_WORN = b.defineInRange("max_uniques_worn", 100, 0, 20);
-
-
-        ILVL_PER_UPGRADE_LEVEL = b.defineInRange("ILVL_PER_UPGRADE_LEVEL", 0.5D, 0, 1000);
 
         REGEN_HUNGER_COST = b.defineInRange("regen_hunger_cost", 10D, 0, 1000);
         EXP_LOSS_ON_DEATH = b.defineInRange("death_exp_penalty", 0.1D, 0, 1);
@@ -151,7 +147,6 @@ public class ServerContainer {
     public ForgeConfigSpec.BooleanValue DONT_SYNC_DATA_OF_AMBIENT_MOBS;
     public ForgeConfigSpec.BooleanValue TURN_REQ_ILVL_INTO_RECCOMENDATION;
 
-    public ForgeConfigSpec.IntValue MAX_UNIQUE_GEARS_WORN;
 
     public ForgeConfigSpec.DoubleValue REGEN_HUNGER_COST;
     public ForgeConfigSpec.DoubleValue EXP_LOSS_ON_DEATH;
@@ -163,7 +158,6 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue VANILLA_MOB_DMG_AS_EXILE_DMG;
     public ForgeConfigSpec.DoubleValue VANILLA_MOB_DMG_AS_EXILE_DMG_AT_MAX_LVL;
     public ForgeConfigSpec.DoubleValue PVP_DMG_MULTI;
-    public ForgeConfigSpec.DoubleValue ILVL_PER_UPGRADE_LEVEL;
     public ForgeConfigSpec.DoubleValue PLAYER_VANILLA_DMG_MULTI;
 
     public ForgeConfigSpec.DoubleValue GEAR_DROPRATE;

@@ -13,7 +13,7 @@ public class BasicStatRegex extends StatNameRegex {
             return NAME;
         }
 
-        if (type == ModType.FLAT) {
+        if (type.isFlat()) {
 
             String adds = "";
 
@@ -22,13 +22,17 @@ public class BasicStatRegex extends StatNameRegex {
             return adds + VALUE + to + NAME;
 
         }
-        if (type == ModType.PERCENT) {
+        if (type.isPercent()) {
             String s = v1 > 0 && stat.IsPercent() ? " Extra " : " ";
             return VALUE + s + NAME;
         }
-        if (type == ModType.GLOBAL_INCREASE) {
-            return VALUE + " Total " + NAME;
+        if (type == ModType.MORE) {
+            return VALUE + " More " + NAME;
         }
+        if (type.isItemLocal()) {
+            return VALUE + " Gear " + NAME;
+        }
+
 
         return null;
 

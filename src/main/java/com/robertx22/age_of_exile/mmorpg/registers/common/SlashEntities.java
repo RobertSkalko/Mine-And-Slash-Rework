@@ -21,8 +21,7 @@ public class SlashEntities {
     public static RegObj<EntityType<StationaryFallingBlockEntity>> SIMPLE_BLOCK_ENTITY = projectile(StationaryFallingBlockEntity::new, "spell_block_entity", false);
     public static RegObj<EntityType<SimpleTridentEntity>> SIMPLE_TRIDENT = projectile(SimpleTridentEntity::new, "spell_trident", false);
 
-    private static <T extends Entity> RegObj<EntityType<T>> projectile(EntityType.IFactory<T> factory,
-                                                                       String id) {
+    private static <T extends Entity> RegObj<EntityType<T>> projectile(EntityType.IFactory<T> factory, String id) {
         return projectile(factory, id, true);
 
     }
@@ -31,10 +30,10 @@ public class SlashEntities {
                                                                        String id, boolean itemRender) {
 
         EntityType<T> type = EntityType.Builder.of(factory, EntityClassification.MISC)
-            .sized(0.7F, 0.7F)
-            .setUpdateInterval(20)
-            .setTrackingRange(10)
-            .build(id);
+                .sized(0.5F, 0.5F)
+                .setUpdateInterval(20)
+                .setTrackingRange(4)
+                .build(id);
 
         RegObj<EntityType<T>> def = Def.entity(id, () -> type);
 

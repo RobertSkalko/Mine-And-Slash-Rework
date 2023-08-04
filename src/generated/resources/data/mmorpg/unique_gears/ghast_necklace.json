@@ -23,19 +23,17 @@
     {
       "min": 1.0,
       "max": 3.0,
-      "stat": "vitality",
+      "stat": "strength",
       "type": "flat"
     },
     {
       "min": 2.0,
       "max": 6.0,
-      "stat": "agility",
+      "stat": "dexterity",
       "type": "flat"
     }
   ],
-  "base_stats": [],
   "rarity": "unique",
-  "set": "",
   "replaces_name": false,
   "base_gear": "necklace",
   "filters": {

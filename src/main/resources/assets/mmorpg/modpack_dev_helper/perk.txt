@@ -1,6 +1,5 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
-agi
 chaos_weapon_damage
 lifesteal
 ele_bow_damage
@@ -17,8 +16,9 @@ small_positive_effect_increase
 healing_strength
 water_weapon_damage
 heal_crit_dmg
-vit
 dot_damage
+all_resist
+spell_all_damage
 mana_on_hit
 all_lightning_damage
 cdr
@@ -29,6 +29,7 @@ tormentor
 spell_damage
 all_elemental_damage
 spell_fire_damage_and_dot
+all_penetration
 scion
 water_penetration
 all_physical_damage
@@ -54,6 +55,7 @@ staff_damage
 mana
 spell_lightning_damage
 spell_critical_hit
+spell_all_damage_and_dot
 harmony
 mantra
 melee_dmg
@@ -103,7 +105,6 @@ spell_slinger
 ele_crossbow_damage
 spell_lightning_damage_and_dot
 fire_weapon_damage
-wis
 dot_dmg
 spell_water_damage_and_dot
 less_aggro

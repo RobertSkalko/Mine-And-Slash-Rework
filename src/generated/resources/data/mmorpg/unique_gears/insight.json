@@ -21,11 +21,9 @@
       "type": "percent"
     }
   ],
-  "base_stats": [],
   "rarity": "runeword",
-  "set": "",
   "replaces_name": true,
-  "base_gear": "helmet",
+  "base_gear": "cloth_helmet",
   "filters": {
     "list": []
   }

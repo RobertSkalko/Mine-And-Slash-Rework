@@ -35,13 +35,11 @@
     {
       "min": -3.0,
       "max": -6.0,
-      "stat": "vitality",
+      "stat": "strength",
       "type": "flat"
     }
   ],
-  "base_stats": [],
   "rarity": "unique",
-  "set": "",
   "replaces_name": true,
   "base_gear": "ring",
   "filters": {

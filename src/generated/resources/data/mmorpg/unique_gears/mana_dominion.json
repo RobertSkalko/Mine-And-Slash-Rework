@@ -27,11 +27,9 @@
       "type": "flat"
     }
   ],
-  "base_stats": [],
   "rarity": "unique",
-  "set": "",
   "replaces_name": true,
-  "base_gear": "helmet",
+  "base_gear": "cloth_helmet",
   "filters": {
     "list": []
   }

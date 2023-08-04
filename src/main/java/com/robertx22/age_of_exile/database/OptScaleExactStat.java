@@ -73,7 +73,7 @@ public class OptScaleExactStat implements IByteBuf<OptScaleExactStat> {
 
     public Stat getStat() {
         return ExileDB.Stats()
-            .get(stat);
+                .get(stat);
     }
 
     public ModType getModType() {
@@ -82,17 +82,17 @@ public class OptScaleExactStat implements IByteBuf<OptScaleExactStat> {
 
     public ExactStatData toExactStat(int lvl) {
         Stat stat = ExileDB.Stats()
-            .get(this.stat);
+                .get(this.stat);
 
-        return ExactStatData.of(v1, stat, getModType(), scale_to_lvl ? lvl : 1);
+        return ExactStatData.levelScaled(v1, stat, getModType(), scale_to_lvl ? lvl : 1);
 
     }
 
     public ExactStatData ToExactScaleToLevel(int lvl) {
         Stat stat = ExileDB.Stats()
-            .get(this.stat);
+                .get(this.stat);
 
-        return ExactStatData.of(v1, stat, getModType(), lvl);
+        return ExactStatData.levelScaled(v1, stat, getModType(), lvl);
 
     }
 

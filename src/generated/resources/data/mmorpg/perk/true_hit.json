@@ -8,7 +8,7 @@
     {
       "v1": 25.0,
       "stat": "critical_damage",
-      "type": "GLOBAL_INCREASE",
+      "type": "MORE",
       "scale_to_lvl": false
     },
     {

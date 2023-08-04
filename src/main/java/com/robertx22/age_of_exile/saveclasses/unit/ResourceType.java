@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.saveclasses.unit;
 
 public enum ResourceType {
     health("health", "Health"),
+    magic_shield("magic_shield", "Magic Shield"),
     mana("mana", "Mana"),
     shield("shield", "Shield"),
     block("block", "Block"),

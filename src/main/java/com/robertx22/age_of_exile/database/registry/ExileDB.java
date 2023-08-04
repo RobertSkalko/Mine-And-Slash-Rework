@@ -10,7 +10,6 @@ import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.gems.Gem;
-import com.robertx22.age_of_exile.database.data.groups.GearRarityGroup;
 import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
@@ -85,10 +84,7 @@ public class ExileDB {
         return Database.getRegistry(ExileRegistryTypes.UNIQUE_GEAR);
     }
 
-    public static ExileRegistryContainer<GearRarityGroup> GearRarityGroups() {
-        return Database.getRegistry(ExileRegistryTypes.GEAR_RARITY_GROUP);
-    }
-
+   
     public static ExileRegistryContainer<CurrencyItem> CurrencyItems() {
         return Database.getRegistry(ExileRegistryTypes.CURRENCY_ITEMS);
     }
@@ -119,7 +115,7 @@ public class ExileDB {
         return Database.getRegistry(ExileRegistryTypes.TALENT_TREE);
     }
 
-  
+
     public static ExileRegistryContainer<Perk> Perks() {
         return Database.getRegistry(ExileRegistryTypes.PERK);
     }

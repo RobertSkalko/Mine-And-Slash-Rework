@@ -1,7 +1,7 @@
 {
   "id": "chaos_mob_affix",
   "weight": 2000,
-  "format": "DARK_GREEN",
+  "format": "DARK_PURPLE",
   "icon": "",
   "stats": [
     {

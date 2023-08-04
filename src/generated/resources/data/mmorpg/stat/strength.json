@@ -12,12 +12,17 @@
       "stats": [
         {
           "v1": 0.1,
-          "stat": "physical_weapon_damage",
+          "stat": "weapon_damage",
+          "type": "FLAT"
+        },
+        {
+          "v1": 0.1,
+          "stat": "health_regen",
           "type": "FLAT"
         },
         {
           "v1": 1.0,
-          "stat": "armor",
+          "stat": "health",
           "type": "FLAT"
         }
       ]

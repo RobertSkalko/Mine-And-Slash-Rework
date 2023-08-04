@@ -1,10 +1,18 @@
 {
-  "stat_scalings": [],
+  "stat_scalings": [
+    {
+      "stat": "weapon_damage",
+      "multi": {
+        "min": 1.0,
+        "max": 2.0
+      }
+    }
+  ],
   "id": "execute",
   "base_scaling_type": "NORMAL",
   "attack_scaling": {
-    "min": 1.0,
-    "max": 2.0
+    "min": 0.0,
+    "max": 0.0
   },
   "base": {
     "min": 0.0,

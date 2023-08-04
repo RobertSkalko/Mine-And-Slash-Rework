@@ -18,7 +18,7 @@ public class InCalcStatData {
 
     private float Flat = 0;
     private float Percent = 0;
-    private float Multi = 0;
+    private float Multi = 1;
     private boolean calc = false;
 
     @Factory
@@ -45,7 +45,7 @@ public class InCalcStatData {
 
         finalValue *= 1 + Percent / 100;
 
-        finalValue *= 1 + Multi / 100;
+        finalValue *= Multi;
 
         this.calc = true;
 
@@ -55,9 +55,9 @@ public class InCalcStatData {
 
     public Stat GetStat() {
         return ExileDB.Stats()
-            .get(id);
+                .get(id);
     }
-
+/*
     public void addMulti(float multi) {
         this.Multi += multi;
     }
@@ -65,6 +65,8 @@ public class InCalcStatData {
     public void addPercent(float percent) {
         this.Percent += percent;
     }
+
+ */
 
     public void addAlreadyScaledFlat(float val1) {
         this.Flat += val1;
@@ -76,7 +78,7 @@ public class InCalcStatData {
         other.Multi += Multi;
 
     }
-
+/*
     public void addFlat(float val1, int lvl) {
         this.Flat += GetStat().scale(ModType.FLAT, val1, lvl);
     }
@@ -97,6 +99,8 @@ public class InCalcStatData {
         this.Flat *= multi;
     }
 
+ */
+
     public void add(ExactStatData modData, EntityData data) {
         ModType type = modData.getType();
 
@@ -108,8 +112,8 @@ public class InCalcStatData {
             Flat += v1;
         } else if (type == ModType.PERCENT) {
             Percent += v;
-        } else if (type == ModType.GLOBAL_INCREASE) {
-            Multi += v;
+        } else if (type == ModType.MORE) {
+            Multi *= 1 + (v / 100F);
         }
 
     }

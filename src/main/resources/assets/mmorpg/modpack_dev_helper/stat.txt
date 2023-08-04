@@ -1,6 +1,5 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
-blood_per_10_vitality
 movement_cdr
 fire_mana_leech
 mana_on_spell_hit
@@ -16,15 +15,18 @@ increase_healing
 scepter_damage
 convert_lightning_to_phys
 give_regenerate_to_allies_in_aoe
+blood_per_10_strength
 bonus_exp
 all_water_damage
 energy
 heal_crit_dmg
 inc_effect_of_song_buff_given
+weapon_damage
 trap_spell_dmg
 convert_water_to_phys
 arrow_cdr
 craft_suc_chance
+spell_all_damage
 food_eff_dur_u_cast
 heal_on_shielded_targets
 potion_strength
@@ -42,7 +44,6 @@ physical_health_leech
 damage_spell_dmg
 health_on_spell_hit
 all_health_leech
-convert_chaos_to_phys
 all_physical_damage
 totem_spell_dmg
 elemental_mana_leech
@@ -66,6 +67,7 @@ all_all_damage
 chance_of_torment
 spell_elemental_damage
 dodge
+magic_shield_ooc_regen
 inc_effect_of_curse_buff_on_you
 fire_vuln_crit
 elemental_any_wep_damage
@@ -90,7 +92,6 @@ convert_fire_to_phys
 fire_any_wep_damage
 global_critical_hit_per_25_magic_find
 water_resist
-vitality
 armor_penetration
 bow_damage
 dmg_to_living
@@ -108,6 +109,7 @@ curse_spell_dmg
 more_food_stats
 staff_spell_cdr
 physical_mana_leech
+magic_shield
 spell_lifesteal
 heal_cdr
 shield_cdr
@@ -117,7 +119,6 @@ ele_staff_damage
 lightning_vuln_crit
 plus_to_water
 heal_over_time_eff_dur_u_cast
-agility
 movement_spell_dmg
 water_focus
 spell_water_damage
@@ -127,7 +128,6 @@ fire_dmg_when_target_low_hp
 elemental_penetration
 ele_sword_damage
 totem_cdr
-wisdom
 dmg_to_undead
 absorb_ele_dmg_to_hp
 projectile_cdr
@@ -157,26 +157,26 @@ hp_resto_to_blood
 fire_health_leech
 lifesteal
 ele_bow_damage
-poison_ball_chance_of_negative/3
 health_per_10_intelligence
 global_critical_damage
 ele_axe_damage
 chance_of_burn_on_crit
 water_weapon_damage
 elemental_vuln_crit
+all_resist
 water_mana_leech
 all_lightning_damage
 intelligence
 song_spell_dmg
 song_eff_dur_u_cast
 spell_damage
+all_penetration
 night_dmg
 darkness_dmg
 water_penetration
 technique_cdr
 projectile_spell_dmg
 chance_of_blind
-frostball_chance_of_negative/2
 spell_damage_per_perc_of_increase_healing
 positive_eff_dur_u_cast
 shield_spell_dmg
@@ -186,7 +186,6 @@ water_dmg_when_target_low_hp
 increased_quantity
 elemental_dot_damage
 spell_critical_damage
-spell_power
 give_taunt_stance_to_self_on_tick
 chaos_dot_damage
 damage_cdr
@@ -200,7 +199,6 @@ lightning_resist
 plus_to_hunting
 curse_eff_dur_u_cast
 lightning_dot_damage
-chaos_focus
 health
 elemental_health_leech
 inc_effect_of_curse_buff_given
@@ -214,7 +212,6 @@ blood_user
 random_craft_stat
 fire_dot_damage
 dmg_received
-chaos_dmg_when_target_low_hp
 melee_dmg
 shield_strength
 mana_regen
@@ -257,7 +254,7 @@ heal_over_time_eff_duration
 staff_spell_spell_dmg
 renamed_or_deleted_stat
 elemental_resist
-health_regen_per_10_wisdom
+health_regen_per_10_intelligence
 chaos_penetration
 plus_to_divine
 chance_of_chill
@@ -279,6 +276,7 @@ fire_focus
 inc_aoe
 water_health_leech
 ele_crossbow_damage
+magic_shield_regen
 crit_water_dmg_mana
 energy_ooc_regen
 negative_eff_duration
@@ -293,7 +291,6 @@ dexterity
 totem_resto
 heal_effect_on_self
 shield_duration
-fireball_chance_of_negative/5
 plus_consu_uses
 negative_eff_dur_u_cast
 water_any_wep_damage

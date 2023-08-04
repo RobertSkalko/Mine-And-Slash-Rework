@@ -4,23 +4,26 @@ import net.minecraft.util.text.TextFormatting;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Elements {
 
-    Physical(false, "Physical", TextFormatting.GOLD, "physical", "\u2726"),
-    Fire(true, "Fire", TextFormatting.RED, "fire", "\u2600"),
-    Cold(true, "Cold", TextFormatting.AQUA, "water", "\u2749"),
-    Lightning(true, "Lightning", TextFormatting.YELLOW, "lightning", "\u2749"),
-    Chaos(true, "Chaos", TextFormatting.DARK_GREEN, "chaos", "\u273F"),
+    Physical(false, true, "Physical", TextFormatting.GOLD, "physical", "\u2726"),
+    Fire(true, true, "Fire", TextFormatting.RED, "fire", "\u2600"),
+    Cold(true, true, "Cold", TextFormatting.AQUA, "water", "\u2749"),
+    Lightning(true, true, "Lightning", TextFormatting.YELLOW, "lightning", "\u2749"),
+    Chaos(false, true, "Chaos", TextFormatting.DARK_PURPLE, "chaos", "\u273F"),
 
-    Elemental(false, "Elemental", TextFormatting.LIGHT_PURPLE, "elemental", "\u269C"),
-    All(false, "All", TextFormatting.LIGHT_PURPLE, "all", "\u273F");
+    Elemental(true, false, "Elemental", TextFormatting.LIGHT_PURPLE, "elemental", "\u269C"),
+    All(false, false, "All", TextFormatting.LIGHT_PURPLE, "all", "\u273F");
 
-    public boolean isSingleElement = true;
+    public boolean isSingle = true;
+    public boolean isElemental = false;
 
-    Elements(boolean isSingleElement, String dmgname, TextFormatting format, String guidname, String icon) {
+    Elements(boolean isElemental, boolean isSingle, String dmgname, TextFormatting format, String guidname, String icon) {
 
-        this.isSingleElement = isSingleElement;
+        this.isElemental = isElemental;
+        this.isSingle = isSingle;
         this.dmgName = dmgname;
         this.format = format;
         this.guidName = guidname;
@@ -61,13 +64,13 @@ public enum Elements {
         return this == Cold;
     }
 
-    public boolean isNature() {
+    public boolean IsChaos() {
         return this == Chaos;
     }
 
-    private static List<Elements> allIncludingPhys = Arrays.asList(Physical, Fire, Cold, Lightning, Chaos);
-    private static List<Elements> allExcludingPhys = Arrays.asList(Fire, Cold, Lightning, Chaos, Elemental);
-    private static List<Elements> allSingleElementals = Arrays.asList(Fire, Cold, Lightning, Chaos);
+    private static List<Elements> allIncludingPhys = Arrays.stream(Elements.values()).filter(x -> x.isSingle).collect(Collectors.toList());
+    private static List<Elements> allExcludingPhys = Arrays.stream(Elements.values()).filter(x -> !x.isPhysical()).collect(Collectors.toList());
+    private static List<Elements> allSingleElementals = Arrays.stream(Elements.values()).filter(x -> x.isSingle && x.isElemental).collect(Collectors.toList());
 
     public static List<Elements> getAllSingleElementals() {
         return allSingleElementals;
@@ -95,14 +98,10 @@ public enum Elements {
         }
 
         if (other == Elements.Elemental) {
-            if (this != Elements.Physical) {
-                return true;
-            }
+            return this.isElemental;
         }
         if (this == Elements.Elemental) {
-            if (other != Elements.Physical) {
-                return true;
-            }
+            return other.isElemental;
         }
 
         return false;

@@ -32,6 +32,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Storable
 public class GearItemData implements ICommonDataItem<GearRarity> {
@@ -219,9 +220,6 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         return Arrays.asList();
     }
 
-    public boolean uniqueBaseStatsReplaceBaseStats() {
-        return uniqueStats != null && this.uniqueStats.getUnique(this) != null && !uniqueStats.getUnique(this).base_stats.isEmpty();
-    }
 
     private List<IFormattableTextComponent> getFullAffixedName() {
         List<IFormattableTextComponent> list = new ArrayList<>();
@@ -333,7 +331,6 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
         IfNotNullAdd(baseStats, list);
 
-
         IfNotNullAdd(imp, list);
 
         affixes.getAllAffixesAndSockets()
@@ -344,6 +341,12 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         IfNotNullAdd(uniqueStats, list);
 
         return list;
+
+    }
+
+    public List<IStatsContainer> GetAllStatContainersExceptBase() {
+        return this.GetAllStatContainers().stream().filter(x -> x instanceof BaseStatsData == false).collect(Collectors.toList());
+
 
     }
 
@@ -464,13 +467,5 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         return false;
     }
 
-    public boolean isBetterThan(GearItemData other) {
-
-        if (other.lvl > lvl + 10) {
-            return false;
-        }
-        return getRarity()
-                .isHigherThan(other.getRarity());
-    }
 
 }
