@@ -20,7 +20,6 @@ public class GearBlueprint extends ItemBlueprint {
 
     public GearBlueprint(int lvl) {
         super(lvl);
-        this.item = item;
     }
 
     public GearBlueprint(LootInfo info) {
@@ -50,6 +49,9 @@ public class GearBlueprint extends ItemBlueprint {
 
     @Override
     ItemStack generate() {
+
+        // todo need to make this drop normal items not souls, or make souls rare?
+
         if (item == Items.AIR) {
             return GearSoulLootGen.createSoulBasedOnGear(this);
         } else {

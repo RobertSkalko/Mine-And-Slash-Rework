@@ -15,7 +15,7 @@ public class RenderLayersRegister {
         RenderTypeLookup.setRenderLayer(SlashBlocks.GREEN_TOTEM.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(SlashBlocks.GLYPH.get(), RenderType.cutout());
 
-        RenderTypeLookup.setRenderLayer(SlashBlocks.RUNEWORD.get(), RenderType.cutout());
-        
+        //  RenderTypeLookup.setRenderLayer(SlashBlocks.RUNEWORD.get(), RenderType.cutout());
+
     }
 }

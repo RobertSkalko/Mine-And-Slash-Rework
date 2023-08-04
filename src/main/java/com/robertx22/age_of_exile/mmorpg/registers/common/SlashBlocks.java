@@ -4,7 +4,6 @@ import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
 import com.robertx22.age_of_exile.vanilla_mc.blocks.BlackHoleBlock;
 import com.robertx22.age_of_exile.vanilla_mc.blocks.TotemBlock;
-import com.robertx22.age_of_exile.vanilla_mc.blocks.runeword_station.RuneWordStationBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BeetrootBlock;
 import net.minecraft.block.Block;
@@ -17,7 +16,7 @@ public class SlashBlocks {
 
     }
 
-    public static RegObj<RuneWordStationBlock> RUNEWORD = Def.block("runeword_station", () -> new RuneWordStationBlock());
+    // public static RegObj<RuneWordStationBlock> RUNEWORD = Def.block("runeword_station", () -> new RuneWordStationBlock());
 
     public static RegObj<BlackHoleBlock> BLACK_HOLE = Def.block("black_hole", () -> new BlackHoleBlock());
     public static RegObj<TotemBlock> BLUE_TOTEM = Def.block("blue_totem", () -> new TotemBlock());

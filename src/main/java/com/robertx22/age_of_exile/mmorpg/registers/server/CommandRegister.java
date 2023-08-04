@@ -1,7 +1,10 @@
 package com.robertx22.age_of_exile.mmorpg.registers.server;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.robertx22.age_of_exile.vanilla_mc.commands.*;
+import com.robertx22.age_of_exile.vanilla_mc.commands.RollCommand;
+import com.robertx22.age_of_exile.vanilla_mc.commands.RunTestCommand;
+import com.robertx22.age_of_exile.vanilla_mc.commands.SyncDatapacks;
+import com.robertx22.age_of_exile.vanilla_mc.commands.TeamCommand;
 import com.robertx22.age_of_exile.vanilla_mc.commands.entity.GiveExp;
 import com.robertx22.age_of_exile.vanilla_mc.commands.entity.SetEntityRarity;
 import com.robertx22.age_of_exile.vanilla_mc.commands.entity.SetLevel;
@@ -30,13 +33,12 @@ public class CommandRegister {
         SetEntityRarity.register(dispatcher);
         SetLevel.register(dispatcher);
         GiveExp.register(dispatcher);
-     
+
         TestBuild.register(dispatcher);
 
         ResetSpellCooldowns.register(dispatcher);
         SyncDatapacks.register(dispatcher);
-        GenerateWikiCommand.register(dispatcher);
-
+    
         GiveStat.register(dispatcher);
         RemoveStat.register(dispatcher);
         ClearStats.register(dispatcher);

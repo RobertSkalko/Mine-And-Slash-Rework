@@ -1,9 +1,7 @@
 package com.robertx22.age_of_exile.mmorpg.registers.common.items;
 
-import com.robertx22.age_of_exile.database.base.CreativeTabs;
 import com.robertx22.age_of_exile.database.data.level_ranges.LevelRange;
 import com.robertx22.age_of_exile.database.registrators.LevelRanges;
-import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
 import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulItem;
@@ -20,7 +18,6 @@ import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.SingleTalentR
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.SpellResetPotion;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.TalentResetPotion;
 import com.robertx22.temp.SkillItemTier;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 
 import java.util.Arrays;
@@ -94,12 +91,6 @@ public class SlashItems {
     public static RegObj<ResetStatsPotion> RESET_STATS = Def.item(() -> new ResetStatsPotion());
     public static RegObj<FunnyDeathPotion> DEATH_POTION = Def.item(() -> new FunnyDeathPotion());
 
-    //public static RegObj<BackpackItem> BACKPACK = Def.item(() -> new BackpackItem(), "backpack/normal");
-    // public static RegObj<MaterialBagItem> MATERIAL_POUCH = Def.item(() -> new MaterialBagItem(), "backpack/material_pouch");
-
-    static Item.Properties stationProp = new Item.Properties().tab(CreativeTabs.MyModTab);
-
-    public static RegObj<Item> RUNEWORD_STATION = Def.item("runeword_station", () -> new BlockItem(SlashBlocks.RUNEWORD.get(), stationProp));
 
     public static class GearItems {
 
