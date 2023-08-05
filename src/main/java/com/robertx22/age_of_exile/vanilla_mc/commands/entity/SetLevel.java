@@ -12,21 +12,22 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.Objects;
 
-import static net.minecraft.command.Commands.argument;
-import staticnet.minecraft.commands.Commandss.literal;
+import static net.minecraft.commands.Commands.argument;
+import static net.minecraft.commands.Commands.literal;
+
 
 public class SetLevel {
 
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
         commandDispatcher.register(
-            literal(CommandRefs.ID)
-                .then(literal("set").requires(e -> e.hasPermission(2))
-                    .then(literal("level")
-                        .requires(e -> e.hasPermission(2))
-                        .then(argument("target", EntityArgument.player())
-                            .then(argument("level", IntegerArgumentType.integer())
-                                .executes(e -> execute(e.getSource(), EntityArgument.getPlayer(e, "target"), IntegerArgumentType
-                                    .getInteger(e, "level"))))))));
+                literal(CommandRefs.ID)
+                        .then(literal("set").requires(e -> e.hasPermission(2))
+                                .then(literal("level")
+                                        .requires(e -> e.hasPermission(2))
+                                        .then(argument("target", EntityArgument.player())
+                                                .then(argument("level", IntegerArgumentType.integer())
+                                                        .executes(e -> execute(e.getSource(), EntityArgument.getPlayer(e, "target"), IntegerArgumentType
+                                                                .getInteger(e, "level"))))))));
     }
 
     private static int execute(CommandSourceStack commandSource, Player player,

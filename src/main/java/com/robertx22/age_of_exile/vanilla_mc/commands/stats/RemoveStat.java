@@ -10,26 +10,27 @@ import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 
-import static net.minecraft.command.Commands.argument;
-import staticnet.minecraft.commands.Commandss.literal;
+import static net.minecraft.commands.Commands.argument;
+import static net.minecraft.commands.Commands.literal;
+
 
 public class RemoveStat {
 
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
         commandDispatcher.register(
-            literal(CommandRefs.ID)
-                .then(literal("stat").requires(e -> e.hasPermission(2))
-                    .then(literal("remove")
-                        .requires(e -> e.hasPermission(2))
-                        .then(argument("target", EntityArgument.entity())
-                            .then(argument("scaling", StringArgumentType.string())
-                                .suggests(new GiveStat.ModOrExact())
-                                .then(argument("GUID", StringArgumentType.string())
-                                    .executes(ctx -> {
-                                        return run(EntityArgument.getPlayer(ctx, "target"), StringArgumentType
-                                            .getString(ctx, "scaling"), StringArgumentType
-                                            .getString(ctx, "GUID"));
-                                    })))))));
+                literal(CommandRefs.ID)
+                        .then(literal("stat").requires(e -> e.hasPermission(2))
+                                .then(literal("remove")
+                                        .requires(e -> e.hasPermission(2))
+                                        .then(argument("target", EntityArgument.entity())
+                                                .then(argument("scaling", StringArgumentType.string())
+                                                        .suggests(new GiveStat.ModOrExact())
+                                                        .then(argument("GUID", StringArgumentType.string())
+                                                                .executes(ctx -> {
+                                                                    return run(EntityArgument.getPlayer(ctx, "target"), StringArgumentType
+                                                                            .getString(ctx, "scaling"), StringArgumentType
+                                                                            .getString(ctx, "GUID"));
+                                                                })))))));
     }
 
     private static int run(Entity en, String scaling, String GUID) {
@@ -42,10 +43,10 @@ public class RemoveStat {
 
                 if (scaling.equals("exact")) {
                     data.getCustomExactStats()
-                        .removeExactStat(GUID);
+                            .removeExactStat(GUID);
                 } else {
                     data.getCustomExactStats()
-                        .removeMod(GUID);
+                            .removeMod(GUID);
                 }
             }
 

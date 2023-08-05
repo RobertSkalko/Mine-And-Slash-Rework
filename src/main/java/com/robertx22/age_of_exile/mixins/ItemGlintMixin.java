@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.mixins;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
@@ -8,11 +7,11 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,8 +20,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(AbstractContainerScreen.class)
 public class ItemGlintMixin {
 
-    @Inject(method = "renderSlot(Lcom/mojang/blaze3d/matrix/MatrixStack;Lnet/minecraft/inventory/container/Slot;)V", at = @At(value = "HEAD"))
-    private void drawMyGlint(PoseStack matrices, Slot slot, CallbackInfo ci) {
+    @Inject(method = "renderSlot", at = @At(value = "HEAD"))
+    private void drawMyGlint(GuiGraphics gui, Slot slot, CallbackInfo ci) {
 
         try {
             AbstractContainerScreen screen = (AbstractContainerScreen) (Object) this;
@@ -42,7 +41,7 @@ public class ItemGlintMixin {
                 if (StackSaving.STAT_SOULS.has(stack)) {
                     try {
                         rar = ExileDB.GearRarities()
-                            .get(StackSaving.STAT_SOULS.loadFrom(stack).rar);
+                                .get(StackSaving.STAT_SOULS.loadFrom(stack).rar);
                     } catch (Exception e) {
 
                     }
@@ -53,23 +52,25 @@ public class ItemGlintMixin {
                 }
 
                 RenderSystem.enableBlend();
-                RenderSystem.color4f(1.0F, 1.0F, 1.0F, ClientConfigs.getConfig().ITEM_RARITY_OPACITY.get()
-                    .floatValue()); // transparency
+                gui.setColor(1.0F, 1.0F, 1.0F, ClientConfigs.getConfig().ITEM_RARITY_OPACITY.get()
+                        .floatValue()); // transparency
 
                 ResourceLocation tex = rar
-                    .getGlintTextureFull();
+                        .getGlintTextureFull();
 
                 if (ClientConfigs.getConfig().ITEM_RARITY_BACKGROUND_TYPE.get() == ClientConfigs.GlintType.BORDER) {
                     tex = rar
-                        .getGlintTextureBorder();
+                            .getGlintTextureBorder();
                 }
-
+/*
                 Minecraft.getInstance()
-                    .getTextureManager()
-                    .bind(tex);
+                        .getTextureManager()
+                        .bind(tex);
 
-                screen.blit(matrices, slot.x, slot.y, 0, 0, 16, 16, 16, 16);
-                RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1F);
+ */
+
+                gui.blit(tex, slot.x, slot.y, 0, 0, 16, 16, 16, 16);
+                gui.setColor(1.0F, 1.0F, 1.0F, 1F);
                 RenderSystem.disableBlend();
             }
 

@@ -8,31 +8,32 @@ import com.robertx22.age_of_exile.vanilla_mc.commands.CommandRefs;
 import joptsimple.internal.Strings;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.network.chat.TextComponent;
 
 import java.util.stream.Collectors;
 
-import static net.minecraft.command.Commands.argument;
-import staticnet.minecraft.commands.Commandss.literal;
+import static net.minecraft.commands.Commands.argument;
+import static net.minecraft.commands.Commands.literal;
+
 
 public class ListStats {
 
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
         commandDispatcher.register(
-            literal(CommandRefs.ID)
-                .then(literal("stat").requires(e -> e.hasPermission(2))
-                    .then(literal("list")
-                        .requires(e -> e.hasPermission(0))
-                        .then(argument("target", EntityArgument.entity())
-                            .then(argument("scaling", StringArgumentType.string())
-                                .suggests(new GiveStat.ModOrExact())
-                                .executes(ctx -> {
-                                    return run(EntityArgument.getPlayer(ctx, "target"), StringArgumentType
-                                        .getString(ctx, "scaling"));
+                literal(CommandRefs.ID)
+                        .then(literal("stat").requires(e -> e.hasPermission(2))
+                                .then(literal("list")
+                                        .requires(e -> e.hasPermission(0))
+                                        .then(argument("target", EntityArgument.entity())
+                                                .then(argument("scaling", StringArgumentType.string())
+                                                        .suggests(new GiveStat.ModOrExact())
+                                                        .executes(ctx -> {
+                                                            return run(EntityArgument.getPlayer(ctx, "target"), StringArgumentType
+                                                                    .getString(ctx, "scaling"));
 
-                                }))))));
+                                                        }))))));
     }
 
     private static int run(Entity en, String type) {
@@ -47,16 +48,16 @@ public class ListStats {
 
                 if (type.equals("exact")) {
                     str = Strings.join(data.getCustomExactStats().stats.values()
-                        .stream()
-                        .map(x -> x.getStatId())
-                        .collect(Collectors.toList()), ",");
+                            .stream()
+                            .map(x -> x.getStatId())
+                            .collect(Collectors.toList()), ",");
                 } else {
                     str = Strings.join(data.getCustomExactStats().mods.values()
-                        .stream()
-                        .map(x -> x.stat)
-                        .collect(Collectors.toList()), ",");
+                            .stream()
+                            .map(x -> x.stat)
+                            .collect(Collectors.toList()), ",");
                 }
-                player.displayClientMessage(new TextComponent(str), false);
+                player.displayClientMessage(Component.literal(str), false);
 
             }
 

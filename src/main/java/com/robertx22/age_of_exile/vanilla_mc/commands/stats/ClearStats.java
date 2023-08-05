@@ -10,26 +10,27 @@ import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 
-import static net.minecraft.command.Commands.argument;
-import staticnet.minecraft.commands.Commandss.literal;
+import static net.minecraft.commands.Commands.argument;
+import static net.minecraft.commands.Commands.literal;
+
 
 public class ClearStats {
 
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
         commandDispatcher.register(
-            literal(CommandRefs.ID)
-                .then(literal("stat").requires(e -> e.hasPermission(2))
-                    .then(literal("clear")
-                        .requires(e -> e.hasPermission(2))
-                        .then(argument("target", EntityArgument.entity())
-                            .then(argument("scaling", StringArgumentType.string())
-                                .suggests(new GiveStat.ModOrExact())
-                                .executes(ctx -> {
+                literal(CommandRefs.ID)
+                        .then(literal("stat").requires(e -> e.hasPermission(2))
+                                .then(literal("clear")
+                                        .requires(e -> e.hasPermission(2))
+                                        .then(argument("target", EntityArgument.entity())
+                                                .then(argument("scaling", StringArgumentType.string())
+                                                        .suggests(new GiveStat.ModOrExact())
+                                                        .executes(ctx -> {
 
-                                    return run(EntityArgument.getPlayer(ctx, "target"), StringArgumentType
-                                        .getString(ctx, "scaling"));
+                                                            return run(EntityArgument.getPlayer(ctx, "target"), StringArgumentType
+                                                                    .getString(ctx, "scaling"));
 
-                                }))))));
+                                                        }))))));
     }
 
     private static int run(Entity en, String type) {

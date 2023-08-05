@@ -2,11 +2,12 @@ package com.robertx22.age_of_exile.database.data.spells.spell_classes.bases;
 
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.EntityDamageSource;
+import net.minecraft.world.entity.Entity;
 
-public class MyDamageSource extends EntityDamageSource {
+
+// todo this needs a rework?
+public class MyDamageSource extends DamageSource {
 
     public Elements element;
     public float realDamage;

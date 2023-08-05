@@ -14,65 +14,66 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.Objects;
 
-import static net.minecraft.command.Commands.argument;
-import staticnet.minecraft.commands.Commandss.literal;
+import static net.minecraft.commands.Commands.argument;
+import static net.minecraft.commands.Commands.literal;
+
 
 public class GiveGear {
 
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
 
         commandDispatcher.register(
-            literal(CommandRefs.ID)
-                .then(literal("give").requires(e -> e.hasPermission(2))
-                    .then(literal("gear")
-                        .then(argument("target", EntityArgument.player())
-                            .then(argument("type", StringArgumentType.word())
-                                .suggests(new DatabaseSuggestions(ExileRegistryTypes.GEAR_TYPE))
-                                .then(argument("level",
-                                    IntegerArgumentType.integer()
-                                )
-                                    .then(argument(
-                                        "rarity",
-                                        StringArgumentType.string()
-                                    ).suggests(new GearRaritySuggestions())
-                                        .then(argument(
-                                            "amount",
-                                            IntegerArgumentType
-                                                .integer(
-                                                    1,
-                                                    5000
-                                                )
-                                        )
-                                            .executes(
-                                                e -> execute(
-                                                    e.getSource(),
-                                                    EntityArgument
-                                                        .getPlayer(
-                                                            e,
-                                                            "target"
-                                                        ),
-                                                    StringArgumentType
-                                                        .getString(
-                                                            e,
-                                                            "type"
-                                                        ),
-                                                    IntegerArgumentType
-                                                        .getInteger(
-                                                            e,
-                                                            "level"
-                                                        ),
-                                                    StringArgumentType
-                                                        .getString(
-                                                            e,
-                                                            "rarity"
-                                                        ),
-                                                    IntegerArgumentType
-                                                        .getInteger(
-                                                            e,
-                                                            "amount"
+                literal(CommandRefs.ID)
+                        .then(literal("give").requires(e -> e.hasPermission(2))
+                                .then(literal("gear")
+                                        .then(argument("target", EntityArgument.player())
+                                                .then(argument("type", StringArgumentType.word())
+                                                        .suggests(new DatabaseSuggestions(ExileRegistryTypes.GEAR_TYPE))
+                                                        .then(argument("level",
+                                                                IntegerArgumentType.integer()
                                                         )
+                                                                .then(argument(
+                                                                        "rarity",
+                                                                        StringArgumentType.string()
+                                                                ).suggests(new GearRaritySuggestions())
+                                                                        .then(argument(
+                                                                                "amount",
+                                                                                IntegerArgumentType
+                                                                                        .integer(
+                                                                                                1,
+                                                                                                5000
+                                                                                        )
+                                                                        )
+                                                                                .executes(
+                                                                                        e -> execute(
+                                                                                                e.getSource(),
+                                                                                                EntityArgument
+                                                                                                        .getPlayer(
+                                                                                                                e,
+                                                                                                                "target"
+                                                                                                        ),
+                                                                                                StringArgumentType
+                                                                                                        .getString(
+                                                                                                                e,
+                                                                                                                "type"
+                                                                                                        ),
+                                                                                                IntegerArgumentType
+                                                                                                        .getInteger(
+                                                                                                                e,
+                                                                                                                "level"
+                                                                                                        ),
+                                                                                                StringArgumentType
+                                                                                                        .getString(
+                                                                                                                e,
+                                                                                                                "rarity"
+                                                                                                        ),
+                                                                                                IntegerArgumentType
+                                                                                                        .getInteger(
+                                                                                                                e,
+                                                                                                                "amount"
+                                                                                                        )
 
-                                                ))))))))));
+                                                                                        ))))))))));
     }
 
     private static int execute(CommandSourceStack commandSource, Player player, String type, int lvl,

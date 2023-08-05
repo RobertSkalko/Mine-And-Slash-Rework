@@ -10,23 +10,24 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.world.entity.Entity;
 
-import static net.minecraft.command.Commands.argument;
-import staticnet.minecraft.commands.Commandss.literal;
+import static net.minecraft.commands.Commands.argument;
+import static net.minecraft.commands.Commands.literal;
+
 
 public class SetEntityRarity {
 
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
         commandDispatcher.register(
 
-            literal(CommandRefs.ID)
-                .then(literal("set").requires(e -> e.hasPermission(2))
-                    .then(literal("entity")
-                        .then(literal("rarity")
-                            .requires(e -> e.hasPermission(2))
-                            .then(argument("target", EntityArgument.entity())
-                                .then(argument("rarity", IntegerArgumentType.integer(0, 5))
-                                    .executes(e -> execute(e.getSource(), EntityArgument.getEntity(e, "target"), StringArgumentType
-                                        .getString(e, "rarity")))))))));
+                literal(CommandRefs.ID)
+                        .then(literal("set").requires(e -> e.hasPermission(2))
+                                .then(literal("entity")
+                                        .then(literal("rarity")
+                                                .requires(e -> e.hasPermission(2))
+                                                .then(argument("target", EntityArgument.entity())
+                                                        .then(argument("rarity", IntegerArgumentType.integer(0, 5))
+                                                                .executes(e -> execute(e.getSource(), EntityArgument.getEntity(e, "target"), StringArgumentType
+                                                                        .getString(e, "rarity")))))))));
     }
 
     private static int execute(CommandSourceStack commandSource, Entity player,

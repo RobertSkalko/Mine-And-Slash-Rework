@@ -12,17 +12,17 @@ import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.SalvagedDustItem;
 import com.robertx22.library_of_exile.utils.SoundUtils;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.sounds.SoundEvents;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 public class OnItemInteract {
 
-    public static void on(AbstractContainerMenu screen, int i, int j, ClickType slotActionType, Player player, CallbackInfoReturnable<ItemStack> ci) {
+    public static void on(AbstractContainerMenu screen, int i, int j, ClickType slotActionType, Player player, CallbackInfo ci) {
 
         if (slotActionType != ClickType.PICKUP) {
             return;
@@ -92,7 +92,8 @@ public class OnItemInteract {
                     stack.shrink(1);
                     data.getSalvageResult(stack)
                             .forEach(x -> PlayerUtils.giveItem(x, player));
-                    ci.setReturnValue(ItemStack.EMPTY);
+                    //ci.setReturnValue(ItemStack.EMPTY);
+                    stack.shrink(1000);
                     ci.cancel();
                     return;
                 }
@@ -112,7 +113,8 @@ public class OnItemInteract {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        ci.setReturnValue(ItemStack.EMPTY);
+                        stack.shrink(1000);
+                        // ci.setReturnValue(ItemStack.EMPTY);
                         ci.cancel();
                         return;
                     }
@@ -120,11 +122,12 @@ public class OnItemInteract {
             }
 
             if (success) {
-                SoundUtils.ding(player.level, player.blockPosition());
-                SoundUtils.playSound(player.level, player.blockPosition(), SoundEvents.ANVIL_USE, 1, 1);
+                SoundUtils.ding(player.level(), player.blockPosition());
+                SoundUtils.playSound(player.level(), player.blockPosition(), SoundEvents.ANVIL_USE, 1, 1);
 
                 cursor.shrink(1);
-                ci.setReturnValue(ItemStack.EMPTY);
+                stack.shrink(1000);
+                //ci.setReturnValue(ItemStack.EMPTY);
                 ci.cancel();
             }
 

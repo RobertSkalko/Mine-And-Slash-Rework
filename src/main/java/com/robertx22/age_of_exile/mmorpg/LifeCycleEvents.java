@@ -5,9 +5,9 @@ import com.robertx22.age_of_exile.uncommon.testing.TestManager;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.library_of_exile.main.ForgeEvents;
 import net.minecraft.world.level.GameRules;
-import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
-import net.minecraftforge.fml.event.server.FMLServerStoppedEvent;
+import net.minecraftforge.event.server.ServerStartedEvent;
+import net.minecraftforge.event.server.ServerStartingEvent;
+import net.minecraftforge.event.server.ServerStoppedEvent;
 
 public class LifeCycleEvents {
 
@@ -15,40 +15,40 @@ public class LifeCycleEvents {
 
     public static void register() {
 
-        ForgeEvents.registerForgeEvent(FMLServerStartingEvent.class, event -> {
+        ForgeEvents.registerForgeEvent(ServerStartingEvent.class, event -> {
             if (MMORPG.RUN_DEV_TOOLS) {
                 DataGeneration.generateAll();
             }
             MMORPG.server = event.getServer();
         });
 
-        ForgeEvents.registerForgeEvent(FMLServerStartedEvent.class, event -> {
+        ForgeEvents.registerForgeEvent(ServerStartedEvent.class, event -> {
 
             LevelUtils.runTests();
 
             CommandRegister.Register(event.getServer());
 
             regenDefault = event.getServer()
-                .getGameRules()
-                .getRule(GameRules.RULE_NATURAL_REGENERATION)
-                .get();
+                    .getGameRules()
+                    .getRule(GameRules.RULE_NATURAL_REGENERATION)
+                    .get();
 
             event.getServer()
-                .getGameRules()
-                .getRule(GameRules.RULE_NATURAL_REGENERATION)
-                .set(false, event.getServer());
+                    .getGameRules()
+                    .getRule(GameRules.RULE_NATURAL_REGENERATION)
+                    .set(false, event.getServer());
 
             if (MMORPG.RUN_DEV_TOOLS) { // CHANGE ON PUBLIC BUILDS TO FALSE
                 TestManager.RunAllTests(event.getServer()
-                    .overworld());
+                        .overworld());
             }
         });
 
-        ForgeEvents.registerForgeEvent(FMLServerStoppedEvent.class, event -> {
+        ForgeEvents.registerForgeEvent(ServerStoppedEvent.class, event -> {
             event.getServer()
-                .getGameRules()
-                .getRule(GameRules.RULE_NATURAL_REGENERATION)
-                .set(regenDefault, event.getServer());
+                    .getGameRules()
+                    .getRule(GameRules.RULE_NATURAL_REGENERATION)
+                    .set(regenDefault, event.getServer());
         });
 
     }

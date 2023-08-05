@@ -15,30 +15,31 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.Objects;
 
-import static net.minecraft.command.Commands.argument;
-import staticnet.minecraft.commands.Commandss.literal;
+import static net.minecraft.commands.Commands.argument;
+import static net.minecraft.commands.Commands.literal;
+
 
 public class GiveExactUnique {
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
 
         commandDispatcher.register(
-            literal(CommandRefs.ID)
-                .then(literal("give").requires(e -> e.hasPermission(2))
-                    .then(literal("unique_gear")
-                        .requires(e -> e.hasPermission(2))
-                        .then(argument("target", EntityArgument.player())
-                            .then(argument("uniqueID", StringArgumentType.word())
-                                .suggests(new DatabaseSuggestions(ExileRegistryTypes.UNIQUE_GEAR))
-                                .then(argument("level", IntegerArgumentType.integer())
-                                    .then(argument("amount", IntegerArgumentType
-                                        .integer(1, 5000))
-                                        .executes(e -> execute(e.getSource(), EntityArgument
-                                            .getPlayer(e, "target"), StringArgumentType
-                                            .getString(e, "uniqueID"), IntegerArgumentType
-                                            .getInteger(e, "level"), IntegerArgumentType
-                                            .getInteger(e, "amount")
+                literal(CommandRefs.ID)
+                        .then(literal("give").requires(e -> e.hasPermission(2))
+                                .then(literal("unique_gear")
+                                        .requires(e -> e.hasPermission(2))
+                                        .then(argument("target", EntityArgument.player())
+                                                .then(argument("uniqueID", StringArgumentType.word())
+                                                        .suggests(new DatabaseSuggestions(ExileRegistryTypes.UNIQUE_GEAR))
+                                                        .then(argument("level", IntegerArgumentType.integer())
+                                                                .then(argument("amount", IntegerArgumentType
+                                                                        .integer(1, 5000))
+                                                                        .executes(e -> execute(e.getSource(), EntityArgument
+                                                                                .getPlayer(e, "target"), StringArgumentType
+                                                                                .getString(e, "uniqueID"), IntegerArgumentType
+                                                                                .getInteger(e, "level"), IntegerArgumentType
+                                                                                .getInteger(e, "amount")
 
-                                        )))))))));
+                                                                        )))))))));
     }
 
     private static int execute(CommandSourceStack commandSource, Player player,
@@ -60,24 +61,24 @@ public class GiveExactUnique {
             if (!id.equals("random")) {
 
                 blueprint.rarity.set(ExileDB.GearRarities()
-                    .get(ExileDB.UniqueGears()
-                        .random().uniqueRarity));
+                        .get(ExileDB.UniqueGears()
+                                .random().uniqueRarity));
 
                 blueprint.uniquePart.set(ExileDB.UniqueGears()
-                    .get(id));
+                        .get(id));
                 blueprint.gearItemSlot.set(blueprint.uniquePart.get()
-                    .getBaseGear());
+                        .getBaseGear());
             } else {
 
                 blueprint.rarity.set(ExileDB.GearRarities()
-                    .getFilterWrapped(x -> x.is_unique_item)
-                    .random());
+                        .getFilterWrapped(x -> x.is_unique_item)
+                        .random());
                 blueprint.uniquePart.set(ExileDB.UniqueGears()
-                    .getFilterWrapped(x -> x.uniqueRarity.equals(blueprint.rarity.get()
-                        .GUID()))
-                    .random());
+                        .getFilterWrapped(x -> x.uniqueRarity.equals(blueprint.rarity.get()
+                                .GUID()))
+                        .random());
                 blueprint.gearItemSlot.set(blueprint.uniquePart.get()
-                    .getBaseGear());
+                        .getBaseGear());
             }
 
             player.addItem(blueprint.createStack());

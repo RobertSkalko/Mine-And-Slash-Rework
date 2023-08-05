@@ -7,14 +7,16 @@ import com.robertx22.library_of_exile.main.Packets;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.level.ServerPlayer;
 
-import static net.minecraft.command.Commands.literal;
+import static net.minecraft.commands.Commands.literal;
 
-public clasnet.minecraft.commands.Commands void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
+
+public class OpenHub {
+    public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
         commandDispatcher.register(
-            literal(CommandRefs.ID)
-                .then(literal("open").requires(e -> e.hasPermission(0))
-                    .then(literal("hub")
-                        .executes(ctx -> run(ctx.getSource())))));
+                literal(CommandRefs.ID)
+                        .then(literal("open").requires(e -> e.hasPermission(0))
+                                .then(literal("hub")
+                                        .executes(ctx -> run(ctx.getSource())))));
     }
 
     public static final String COMMAND = "slash open hub";
@@ -25,7 +27,7 @@ public clasnet.minecraft.commands.Commands void register(CommandDispatcher<Comma
 
             if (source.getEntity() instanceof ServerPlayer) {
                 Packets.sendToClient(source.getPlayerOrException(),
-                    new OpenGuiPacket(OpenGuiPacket.GuiType.MAIN_HUB));
+                        new OpenGuiPacket(OpenGuiPacket.GuiType.MAIN_HUB));
             }
 
         } catch (Exception e) {

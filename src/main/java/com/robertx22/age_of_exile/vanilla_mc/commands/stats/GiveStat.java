@@ -18,8 +18,9 @@ import net.minecraft.world.entity.LivingEntity;
 import java.util.Arrays;
 import java.util.List;
 
-import static net.minecraft.command.Commands.argument;
-import staticnet.minecraft.commands.Commandss.literal;
+import static net.minecraft.commands.Commands.argument;
+import static net.minecraft.commands.Commands.literal;
+
 
 public class GiveStat {
 
@@ -32,31 +33,31 @@ public class GiveStat {
 
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
         commandDispatcher.register(
-            literal(CommandRefs.ID)
-                .then(literal("stat").requires(e -> e.hasPermission(2))
-                    .then(literal("give")
-                        .requires(e -> e.hasPermission(2))
-                        .then(argument("target", EntityArgument.entity())
-                            .then(argument("scaling", StringArgumentType.string())
-                                .suggests(new ModOrExact())
-                                .then(argument("statGUID", StringArgumentType.string())
-                                    .suggests(new StatSuggestions())
-                                    .then(argument("statType", StringArgumentType.string())
-                                        .suggests(new StatTypeSuggestions())
-                                        .then(argument("GUID", StringArgumentType
-                                            .string())
-                                            .then(argument("value", FloatArgumentType
-                                                .floatArg())
+                literal(CommandRefs.ID)
+                        .then(literal("stat").requires(e -> e.hasPermission(2))
+                                .then(literal("give")
+                                        .requires(e -> e.hasPermission(2))
+                                        .then(argument("target", EntityArgument.entity())
+                                                .then(argument("scaling", StringArgumentType.string())
+                                                        .suggests(new ModOrExact())
+                                                        .then(argument("statGUID", StringArgumentType.string())
+                                                                .suggests(new StatSuggestions())
+                                                                .then(argument("statType", StringArgumentType.string())
+                                                                        .suggests(new StatTypeSuggestions())
+                                                                        .then(argument("GUID", StringArgumentType
+                                                                                .string())
+                                                                                .then(argument("value", FloatArgumentType
+                                                                                        .floatArg())
 
-                                                .executes(ctx -> {
-                                                    return run(EntityArgument
-                                                        .getPlayer(ctx, "target"), StringArgumentType
-                                                        .getString(ctx, "scaling"), StringArgumentType
-                                                        .getString(ctx, "statGUID"), StringArgumentType
-                                                        .getString(ctx, "statType"), StringArgumentType
-                                                        .getString(ctx, "GUID"), FloatArgumentType
-                                                        .getFloat(ctx, "value"));
-                                                }))))))))));
+                                                                                        .executes(ctx -> {
+                                                                                            return run(EntityArgument
+                                                                                                    .getPlayer(ctx, "target"), StringArgumentType
+                                                                                                    .getString(ctx, "scaling"), StringArgumentType
+                                                                                                    .getString(ctx, "statGUID"), StringArgumentType
+                                                                                                    .getString(ctx, "statType"), StringArgumentType
+                                                                                                    .getString(ctx, "GUID"), FloatArgumentType
+                                                                                                    .getFloat(ctx, "value"));
+                                                                                        }))))))))));
     }
 
     private static int run(Entity en, String scaling, String statGUID, String statType,
@@ -69,7 +70,7 @@ public class GiveStat {
 
                 if (scaling.equals("exact")) {
                     data.getCustomExactStats()
-                        .addExactStat(GUID, statGUID, v1, ModType.valueOf(statType));
+                            .addExactStat(GUID, statGUID, v1, ModType.valueOf(statType));
                 }
             }
 
