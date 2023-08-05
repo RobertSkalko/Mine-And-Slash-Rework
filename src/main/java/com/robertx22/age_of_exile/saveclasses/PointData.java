@@ -1,17 +1,9 @@
 package com.robertx22.age_of_exile.saveclasses;
 
-import info.loenwind.autosave.annotations.Factory;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
-
-@Storable
 public class PointData {
-    @Store
     public int x;
-    @Store
     public int y;
 
-    @Factory
     protected PointData() {
 
     }

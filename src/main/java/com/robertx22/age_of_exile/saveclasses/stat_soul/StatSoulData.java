@@ -14,34 +14,30 @@ import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISettableLevelTier;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.library_of_exile.utils.LoadSave;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable.SalvageContext;
 
-@Storable
 public class StatSoulData implements ISalvagable, IRarity, ISettableLevelTier {
 
-    @Store
+
     public int tier = 1;
 
-    @Store
+
     public String slot = "";
 
-    @Store
+
     public String rar = "";
 
-    @Store
+
     public String uniq = "";
 
-    @Store
+
     public boolean can_sal = true;
 
-    @Store
+
     public GearItemData gear = null;
 
     public static StatSoulData anySlotOfRarity(String rar) {
@@ -67,8 +63,8 @@ public class StatSoulData implements ISalvagable, IRarity, ISettableLevelTier {
 
         if (!slot.isEmpty()) {
             stack.getOrCreateTag()
-                .putInt("CustomModelData", ExileDB.GearSlots()
-                    .get(slot).model_num);
+                    .putInt("CustomModelData", ExileDB.GearSlots()
+                            .get(slot).model_num);
         }
 
         return stack;
@@ -90,10 +86,10 @@ public class StatSoulData implements ISalvagable, IRarity, ISettableLevelTier {
         GearBlueprint b = new GearBlueprint(lvl);
         b.level.set(lvl);
         b.rarity.set(ExileDB.GearRarities()
-            .get(rar));
+                .get(rar));
 
         UniqueGear uniq = ExileDB.UniqueGears()
-            .get(this.uniq);
+                .get(this.uniq);
 
         if (uniq != null) {
             b.uniquePart.set(uniq);
@@ -102,19 +98,19 @@ public class StatSoulData implements ISalvagable, IRarity, ISettableLevelTier {
 
         if (this.canBeOnAnySlot()) {
             GearSlot gearslot = ExileDB.GearSlots()
-                .random();
+                    .random();
             if (stack != null) {
                 gearslot = GearSlot.getSlotOf(stack.getItem());
             }
             String slotid = gearslot.GUID();
 
             b.gearItemSlot.set(ExileDB.GearTypes()
-                .getFilterWrapped(x -> x.gear_slot.equals(slotid))
-                .random());
+                    .getFilterWrapped(x -> x.gear_slot.equals(slotid))
+                    .random());
         } else {
             b.gearItemSlot.set(ExileDB.GearTypes()
-                .getFilterWrapped(x -> x.gear_slot.equals(slot))
-                .random());
+                    .getFilterWrapped(x -> x.gear_slot.equals(slot))
+                    .random());
         }
 
         GearItemData gear = b.createData();
@@ -134,13 +130,13 @@ public class StatSoulData implements ISalvagable, IRarity, ISettableLevelTier {
 
         if (this.gear != null) {
             return GearSlot.isItemOfThisSlot(gear.GetBaseGearType()
-                .getGearSlot(), stack.getItem());
+                    .getGearSlot(), stack.getItem());
         }
 
         if (this.canBeOnAnySlot()) {
             GearSlot slot = GearSlot.getSlotOf(stack.getItem());
             if (slot != null && !slot.GUID()
-                .isEmpty()) {
+                    .isEmpty()) {
                 return true;
             } else {
                 return false;
@@ -148,7 +144,7 @@ public class StatSoulData implements ISalvagable, IRarity, ISettableLevelTier {
         }
 
         Boolean can = GearSlot.isItemOfThisSlot(ExileDB.GearSlots()
-            .get(slot), stack.getItem());
+                .get(slot), stack.getItem());
 
         return can;
     }
@@ -161,7 +157,7 @@ public class StatSoulData implements ISalvagable, IRarity, ISettableLevelTier {
     @Override
     public GearRarity getRarity() {
         return ExileDB.GearRarities()
-            .get(rar);
+                .get(rar);
     }
 
     @Override

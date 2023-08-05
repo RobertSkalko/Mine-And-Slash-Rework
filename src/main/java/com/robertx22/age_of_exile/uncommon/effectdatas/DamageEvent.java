@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.uncommon.effectdatas;
 
-import com.robertx22.age_of_exile.capability.PlayerDamageChart;
 import com.robertx22.age_of_exile.capability.entity.CooldownsData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.damage_hooks.util.AttackInformation;
@@ -25,22 +24,24 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.TeamUtils;
 import com.robertx22.age_of_exile.vanilla_mc.packets.DmgNumPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.SoundUtils;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
-import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
-import net.minecraft.world.entity.boss.EnderDragonPart;
-import net.minecraft.world.entity.TamableAnimal;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.boss.EnderDragonPart;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.ChatFormatting;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -302,13 +303,18 @@ public class DamageEvent extends EffectEvent {
             cancelDamage();
             return;
         }
-        DamageSource ds = null;
 
+
+        // DamageSource ds = null;
+
+        /*
         if (attackInfo != null) {
             ds = attackInfo.getSource();
         } else {
-            ds = DamageSource.GENERIC; // todo unsure.
+            ds = DamageTypes.GENERIC; // todo unsure.
         }
+
+         */
 
         if (target instanceof Player) {
             info.dmgmap.forEach((key, value) -> {
@@ -316,7 +322,9 @@ public class DamageEvent extends EffectEvent {
             });
         }
 
-        MyDamageSource dmgsource = new MyDamageSource(ds, source, getElement(), dmg);
+        DamageSource dmgsource = new DamageSource(source.level().registryAccess().registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(DamageTypes.FELL_OUT_OF_WORLD), source, target);
+
+        // todo MyDamageSource dmgsource = new MyDamageSource(ds, source, getElement(), dmg);
 
         if (attackInfo == null || !(attackInfo.getSource() instanceof MyDamageSource)) { // todo wtf
 
@@ -342,7 +350,7 @@ public class DamageEvent extends EffectEvent {
 
                 // play spell hurt sounds or else spells will feel like they do nothing
                 LivingEntityAccesor duck = (LivingEntityAccesor) target;
-                SoundEvent sound = duck.myGetHurtSound(ds);
+                SoundEvent sound = SoundEvents.GENERIC_HURT;
                 float volume = duck.myGetHurtVolume();
                 float pitch = duck.myGetHurtPitch();
                 SoundUtils.playSound(target, sound, volume, pitch);
@@ -404,8 +412,7 @@ public class DamageEvent extends EffectEvent {
                         .setOnCooldown(CooldownsData.IN_COMBAT, 20 * 10);
 
                 if (target instanceof Mob) {
-                    PlayerDamageChart.onDamage((Player) source, dmg);
-
+                   
                     GenerateThreatEvent threatEvent = new GenerateThreatEvent((Player) source, (Mob) target, ThreatGenType.deal_dmg, dmg);
                     threatEvent.Activate();
                 }

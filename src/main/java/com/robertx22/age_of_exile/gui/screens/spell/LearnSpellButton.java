@@ -1,7 +1,5 @@
 package com.robertx22.age_of_exile.gui.screens.spell;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.gui.TextUtils;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -10,16 +8,18 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.vanilla_mc.packets.AllocateSpellPacket;
 import com.robertx22.age_of_exile.vanilla_mc.packets.spells.SetupHotbarPacket;
 import com.robertx22.library_of_exile.main.Packets;
-import com.robertx22.library_of_exile.utils.GuiUtils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
+import com.robertx22.library_of_exile.utils.TextUTIL;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.Tooltip;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class LearnSpellButton extends ImageButton {
 
@@ -49,49 +49,46 @@ public class LearnSpellButton extends ImageButton {
     }
 
     @Override
-    public void render(PoseStack matrix, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics gui, int mouseX, int mouseY, float delta) {
+        setModTooltip();
+
         Minecraft mc = Minecraft.getInstance();
 
-        mc.getTextureManager()
-            .bind(SPELL_SLOT);
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        blit(matrix, x, y, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X);
+        gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+        gui.blit(SPELL_SLOT, getX(), getY(), BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X);
 
-        mc.getTextureManager()
-            .bind(spell.getIconLoc());
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        blit(matrix, x + 1, y + 1, 16, 16, 16, 16, 16, 16);
+        gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+        gui.blit(spell.getIconLoc(), getX() + 1, getY() + 1, 16, 16, 16, 16, 16, 16);
 
         int currentlvl = Load.spells(mc.player)
-            .getLevelOf(spell.GUID());
+                .getLevelOf(spell.GUID());
         int maxlvl = spell.getMaxLevel();
         String lvltext = currentlvl + "/" + maxlvl;
-        TextUtils.renderText(matrix, 0.8F, lvltext, x + BUTTON_SIZE_X / 2, (int) (y + BUTTON_SIZE_Y * 0.85F), ChatFormatting.GREEN);
+        TextUtils.renderText(gui, 0.8F, lvltext, getX() + BUTTON_SIZE_X / 2, (int) (getY() + BUTTON_SIZE_Y * 0.85F), ChatFormatting.GREEN);
+
+        super.render(gui, mouseX, mouseY, delta);
 
     }
 
-    @Override
-    public void renderToolTip(PoseStack matrix, int x, int y) {
-        if (isInside(x, y)) {
 
-            List<Component> tooltip = new ArrayList<>();
+    public void setModTooltip() {
 
-            TooltipInfo info = new TooltipInfo(mc.player);
+        List<Component> tooltip = new ArrayList<>();
 
-            tooltip.addAll(spell.GetTooltipString(info));
+        TooltipInfo info = new TooltipInfo(mc.player);
 
-            int reqlvl = screen.currentSchool()
+        tooltip.addAll(spell.GetTooltipString(info));
+
+        int reqlvl = screen.currentSchool()
                 .getLevelNeededToAllocate(screen.currentSchool().spells.get(spell.GUID()));
 
-            tooltip.add(new TextComponent("Required Level: " + reqlvl).withStyle(ChatFormatting.RED));
+        tooltip.add(Component.literal("Required Level: " + reqlvl).withStyle(ChatFormatting.RED));
 
-            GuiUtils.renderTooltip(matrix, tooltip, x, y);
 
-        }
+        this.setTooltip(Tooltip.create(TextUTIL.mergeList(tooltip)));
+
+
     }
 
-    public boolean isInside(int x, int y) {
-        return GuiUtils.isInRect(this.x, this.y, BUTTON_SIZE_X, BUTTON_SIZE_Y, x, y);
-    }
 
 }

@@ -11,20 +11,15 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatI
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.serialization.ISerializable;
-import info.loenwind.autosave.annotations.Factory;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
 import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Storable
 public class ExactStatData implements ISerializable<ExactStatData>, ITooltipList {
 
     public static ExactStatData EMPTY = new ExactStatData();
 
-    @Factory
     private ExactStatData() {
 
     }
@@ -89,12 +84,8 @@ public class ExactStatData implements ISerializable<ExactStatData>, ITooltipList
         }
     }
 
-    @Store
     private float v1 = 0;
-    @Store
     private ModType type = ModType.FLAT;
-
-    @Store
     private String stat = "";
 
     public transient float percentIncrease = 0;

@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.capability.entity;
 
 import com.robertx22.age_of_exile.capability.bases.EntityGears;
-import com.robertx22.age_of_exile.capability.bases.ICommonPlayerCap;
 import com.robertx22.age_of_exile.capability.bases.INeededForClient;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.damage_hooks.util.AttackInformation;
@@ -37,74 +36,76 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityTypeUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.OnScreenMessageUtils;
 import com.robertx22.age_of_exile.vanilla_mc.potion_effects.EntityStatusEffectsData;
-import com.robertx22.library_of_exile.components.forge.BaseProvider;
-import com.robertx22.library_of_exile.components.forge.BaseStorage;
+import com.robertx22.library_of_exile.components.ICap;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.main.Ref;
 import com.robertx22.library_of_exile.utils.CLOC;
 import com.robertx22.library_of_exile.utils.LoadSave;
+import com.robertx22.library_of_exile.wrappers.ExileText;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.game.ClientboundSetTitlesPacket;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.ChatFormatting;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityInject;
+import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.capabilities.CapabilityToken;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Mod.EventBusSubscriber
-public class EntityData implements ICommonPlayerCap, INeededForClient {
 
-    public EntityData(LivingEntity entity) {
-        this.entity = entity;
-    }
+@Mod.EventBusSubscriber
+public class EntityData implements ICap, INeededForClient {
 
     public static final ResourceLocation RESOURCE = new ResourceLocation(Ref.MODID, "entity_data");
+    public static Capability<EntityData> INSTANCE = CapabilityManager.get(new CapabilityToken<>() {
+    });
+
+    public static EntityData get(LivingEntity entity) {
+        return entity.getCapability(INSTANCE)
+                .orElse(null);
+    }
+
+    final LazyOptional<EntityData> supp = LazyOptional.of(() -> this);
+
+    @Override
+    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+        if (cap == INSTANCE) {
+            return supp.cast();
+        }
+        return LazyOptional.empty();
+       
+    }
+
 
     @Mod.EventBusSubscriber
     public static class EventHandler {
         @SubscribeEvent
         public static void onEntityConstruct(AttachCapabilitiesEvent<Entity> event) {
-            if (event.getObject() instanceof LivingEntity) {
-                event.addCapability(RESOURCE, new Provider((LivingEntity) event.getObject()));
+            if (event.getObject() instanceof LivingEntity en) {
+                event.addCapability(RESOURCE, new EntityData(en));
             }
         }
     }
 
-    public static class Storage implements BaseStorage<EntityData> {
-
+    public EntityData(LivingEntity entity) {
+        this.entity = entity;
     }
 
-    public static class Provider extends BaseProvider<EntityData, LivingEntity> {
-        public Provider(LivingEntity owner) {
-            super(owner);
-        }
-
-        @Override
-        public EntityData newDefaultImpl(LivingEntity owner) {
-            return new EntityData(owner);
-        }
-
-        @Override
-        public Capability<EntityData> dataInstance() {
-            return Data;
-        }
-    }
-
-    @CapabilityInject(EntityData.class)
-    public static final Capability<EntityData> Data = null;
 
     private static final String RARITY = "rarity";
     private static final String LEVEL = "level";
@@ -196,7 +197,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
     }
 
     @Override
-    public CompoundTag saveToNBT() {
+    public CompoundTag serializeNBT() {
         CompoundTag nbt = new CompoundTag();
 
         addClientNBT(nbt);
@@ -231,7 +232,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
     }
 
     @Override
-    public void loadFromNBT(CompoundTag nbt) {
+    public void deserializeNBT(CompoundTag nbt) {
 
         loadFromClientNBT(nbt);
 
@@ -386,7 +387,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
     public MutableComponent getName() {
 
         if (entity instanceof Player) {
-            return new TextComponent("")
+            return ExileText.emptyLine().get()
                     .append(entity.getDisplayName());
 
         } else {
@@ -396,7 +397,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
 
             ChatFormatting rarformat = rarity.textFormatting();
 
-            MutableComponent name = new TextComponent("").append(entity.getDisplayName())
+            MutableComponent name = ExileText.emptyLine().get().append(entity.getDisplayName())
                     .withStyle(rarformat);
 
             String icons = "";
@@ -408,10 +409,10 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
                 icons += " ";
             }
 
-            MutableComponent finalName = new TextComponent(icons).append(
+            MutableComponent finalName = ExileText.ofText(icons).get().append(
                     name);
 
-            MutableComponent part = new TextComponent("")
+            MutableComponent part = ExileText.emptyLine().get()
                     .append(finalName)
                     .withStyle(rarformat);
 
@@ -576,8 +577,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
 
         PlayStyle style = PlayStyle.melee;
 
-        if (data.getSource() != null && data.getSource()
-                .isProjectile()) {
+        if (data.getSource() != null && data.getSource().is(DamageTypeTags.IS_PROJECTILE)) {
             style = PlayStyle.ranged;
         }
 
@@ -645,7 +645,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
     private void setMobLvlNormally(LivingEntity entity, Player nearestPlayer) {
         EntityConfig entityConfig = ExileDB.getEntityConfig(entity, this);
 
-        LevelUtils.LevelDetermInfo lvl = LevelUtils.determineLevel(entity.level, entity.blockPosition(),
+        LevelUtils.LevelDetermInfo lvl = LevelUtils.determineLevel(entity.level(), entity.blockPosition(),
                 nearestPlayer
         );
 
@@ -655,8 +655,8 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
 
     public int GiveExp(Player player, int i) {
 
-        MutableComponent txt = new TextComponent("+" + (int) i + " Experience").withStyle(ChatFormatting.GREEN);
-        OnScreenMessageUtils.sendMessage((ServerPlayer) player, txt, ClientboundSetTitlesPacket.Type.ACTIONBAR);
+        MutableComponent txt = ExileText.ofText("+" + (int) i + " Experience").format(ChatFormatting.GREEN).get();
+        // todo  OnScreenMessageUtils.sendMessage((ServerPlayer) player, txt, ClientboundSetTitlesPacket.Type.ACTIONBAR);
 
         setExp(exp + i);
 
@@ -715,7 +715,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
             this.setLevel(level + 1);
             setExp(getRemainingExp());
 
-            OnScreenMessageUtils.sendLevelUpMessage(player, new TextComponent("Player"), level - 1, level);
+            OnScreenMessageUtils.sendLevelUpMessage(player, ExileText.ofText("Player").get(), level - 1, level);
 
             return true;
         }

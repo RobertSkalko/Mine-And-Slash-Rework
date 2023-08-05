@@ -4,16 +4,16 @@ import com.robertx22.age_of_exile.database.data.currency.loc_reqs.BaseLocRequire
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
 public interface ICurrencyItemEffect {
 
+    
     public abstract ItemStack internalModifyMethod(LocReqContext ctx, ItemStack stack, ItemStack currency);
 
     public abstract List<BaseLocRequirement> requirements();
@@ -38,7 +38,7 @@ public interface ICurrencyItemEffect {
 
             for (BaseLocRequirement req : requirements()) {
                 tooltip.add(TooltipUtils.color(ChatFormatting.RED,
-                        new TextComponent(" * ").append(req.getText())
+                        Component.literal(" * ").append(req.getText())
                 ));
             }
         } else {

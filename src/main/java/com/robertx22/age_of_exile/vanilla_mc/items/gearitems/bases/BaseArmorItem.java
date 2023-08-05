@@ -18,7 +18,7 @@ public class BaseArmorItem extends ArmorItem implements IAutoLocName {
 
     @Override
     public String locNameLangFileGUID() {
-        return Registry.ITEM.getKey(this)
+        return VanillaUTIL.REGISTRY.items().getKey(this)
             .toString();
     }
 

@@ -1,22 +1,18 @@
 package com.robertx22.age_of_exile.saveclasses.unit;
 
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
 import net.minecraft.util.Mth;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Storable
 public class AllShieldsData {
 
-    @Store
     public List<ShieldData> shields = new ArrayList<>();
 
     public int getTotalShields() {
         return shields.stream()
-            .mapToInt(x -> (int) x.amount)
-            .sum();
+                .mapToInt(x -> (int) x.amount)
+                .sum();
     }
 
     public void giveShield(ShieldData data) {
@@ -36,6 +32,7 @@ public class AllShieldsData {
             if (reduced >= dmg) {
                 break;
             }
+            
 
             float leftToReduce = dmg - reduced;
 
@@ -51,12 +48,12 @@ public class AllShieldsData {
 
     }
 
-    @Storable
+
     public static class ShieldData {
 
-        @Store
+
         public float amount = 0;
-        @Store
+
         public int ticks = 0;
 
         public ShieldData(float amount, int ticks) {

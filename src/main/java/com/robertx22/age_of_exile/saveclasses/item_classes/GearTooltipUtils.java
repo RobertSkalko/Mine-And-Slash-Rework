@@ -10,20 +10,18 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.MergedStats;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
-import com.robertx22.age_of_exile.uncommon.wrappers.SText;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.util.text.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.util.text.*;
+import net.minecraft.world.item.ItemStack;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class GearTooltipUtils {
 
@@ -50,7 +48,7 @@ public class GearTooltipUtils {
             tip.addAll(gear.baseStats.GetTooltipString(info, gear));
         }
 
-        tip.add(new SText(""));
+        tip.add(ExileText.ofText(""));
 
         if (gear.imp != null) {
             tip.addAll(gear.imp.GetTooltipString(info, gear));
@@ -94,7 +92,7 @@ public class GearTooltipUtils {
         for (IGearPartTooltip part : list) {
             if (part != null) {
                 tip.addAll(part.GetTooltipString(info, gear));
-                tip.add(new TextComponent(""));
+                tip.add(Component.literal(""));
             }
             n++;
         }
@@ -106,9 +104,9 @@ public class GearTooltipUtils {
 
                     });
         });
-        tip.add(new TextComponent(""));
+        tip.add(Component.literal(""));
 
-        
+
         if (Screen.hasShiftDown()) {
             if (!gear.sal) {
                 tip.add(
@@ -117,16 +115,16 @@ public class GearTooltipUtils {
             }
         }
 
-        tip.add(new TextComponent(""));
+        tip.add(Component.literal(""));
         tip.addAll(gear.sockets.GetTooltipString(info, gear));
-        tip.add(new TextComponent(""));
+        tip.add(Component.literal(""));
 
-        tip.add(new TextComponent(""));
+        tip.add(Component.literal(""));
 
         MutableComponent lvl = TooltipUtils.gearLevel(gear.lvl);
 
         if (Screen.hasShiftDown()) {
-            lvl.append(new TextComponent(ChatFormatting.YELLOW + " [ILvl:" + (int) gear.getILVL() + "]"));
+            lvl.append(Component.literal(ChatFormatting.YELLOW + " [ILvl:" + (int) gear.getILVL() + "]"));
         }
 
 
@@ -134,10 +132,10 @@ public class GearTooltipUtils {
         //tip.add(TooltipUtils.gearTier(gear.getTier()));
         tip.add(TooltipUtils.gearRarity(gear.getRarity()));
 
-        tip.add(new TextComponent(""));
+        tip.add(Component.literal(""));
 
         if (gear.isCorrupted()) {
-            tip.add(new TextComponent(ChatFormatting.RED + "").append(
+            tip.add(Component.literal(ChatFormatting.RED + "").append(
                             Words.Corrupted.locName())
                     .withStyle(ChatFormatting.RED));
         }
@@ -146,21 +144,21 @@ public class GearTooltipUtils {
         if (socketed > 0) {
             TooltipUtils.addSocketNamesLine(tip, gear);
         }
-        tip.add(new TextComponent(""));
+        tip.add(Component.literal(""));
 
         ItemStack.appendEnchantmentNames(tip, stack.getEnchantmentTags());
 
         if (ClientConfigs.getConfig().SHOW_DURABILITY.get()) {
             if (stack.isDamageableItem()) {
-                tip.add(new SText(ChatFormatting.WHITE + "Durability: " + (stack.getMaxDamage() - stack.getDamageValue()) + "/" + stack.getMaxDamage()));
+                tip.add(ExileText.ofText(ChatFormatting.WHITE + "Durability: " + (stack.getMaxDamage() - stack.getDamageValue()) + "/" + stack.getMaxDamage()));
             } else {
-                tip.add(new SText(ChatFormatting.WHITE + "Unbreakable"));
+                tip.add(ExileText.ofText(ChatFormatting.WHITE + "Unbreakable"));
             }
         }
 
 
         if (Screen.hasShiftDown() == false) {
-            tooltip.add(new TextComponent(ChatFormatting.BLUE + "").append(new TranslatableComponent(SlashRef.MODID + ".tooltip." + "press_shift_more_info")
+            tooltip.add(Component.literal(ChatFormatting.BLUE + "").append(Component.translatable(SlashRef.MODID + ".tooltip." + "press_shift_more_info")
                     )
                     .withStyle(ChatFormatting.BLUE));
         } else {

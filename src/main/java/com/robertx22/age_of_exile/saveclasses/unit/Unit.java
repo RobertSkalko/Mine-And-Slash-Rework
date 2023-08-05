@@ -33,13 +33,11 @@ import com.robertx22.age_of_exile.vanilla_mc.packets.EntityUnitPacket;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.RandomUtils;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
-import net.minecraft.world.entity.MobCategory;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.util.Mth;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,13 +46,11 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 // this stores data that can be lost without issue, stats that are recalculated all the time
-@Storable
+
 public class Unit {
 
-    @Store
     private StatContainer stats = new StatContainer();
 
-    @Store
     public String GUID = UUID.randomUUID().toString();
 
     public InCalcStatData getStatInCalculation(Stat stat) {
@@ -221,7 +217,7 @@ public class Unit {
     public void recalculateStats(LivingEntity entity, EntityData data, AttackInformation dmgData) {
 
         try {
-            if (entity.level.isClientSide) {
+            if (entity.level().isClientSide) {
                 return;
             }
 

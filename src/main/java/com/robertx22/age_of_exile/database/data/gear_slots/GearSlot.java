@@ -12,20 +12,10 @@ import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.item.*;
+import net.minecraft.world.item.*;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.HashMap;
-
-import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.BowItem;
-import net.minecraft.world.item.CrossbowItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.ShieldItem;
-import net.minecraft.world.item.SwordItem;
 
 public class GearSlot implements JsonExileRegistry<GearSlot>, IAutoGson<GearSlot>, IAutoLocName {
 
@@ -56,16 +46,16 @@ public class GearSlot implements JsonExileRegistry<GearSlot>, IAutoGson<GearSlot
         }
 
         if (ServerContainer.get()
-            .getCompatMap()
-            .containsKey(item)) {
-            CACHED.put(item, ServerContainer.get()
                 .getCompatMap()
-                .get(item));
+                .containsKey(item)) {
+            CACHED.put(item, ServerContainer.get()
+                    .getCompatMap()
+                    .get(item));
             return CACHED.get(item);
         }
 
         for (GearSlot slot : ExileDB.GearSlots()
-            .getList()) {
+                .getList()) {
             if (isItemOfThisSlot(slot, item)) {
                 CACHED.put(item, slot);
                 return slot;
@@ -96,9 +86,9 @@ public class GearSlot implements JsonExileRegistry<GearSlot>, IAutoGson<GearSlot
             CACHED_GEAR_SLOTS.put(id, new HashMap<>());
         }
         if (CACHED_GEAR_SLOTS.get(id)
-            .containsKey(item)) {
+                .containsKey(item)) {
             return CACHED_GEAR_SLOTS.get(id)
-                .get(item);
+                    .get(item);
         }
 
         boolean bool = false;
@@ -106,19 +96,19 @@ public class GearSlot implements JsonExileRegistry<GearSlot>, IAutoGson<GearSlot
         try {
 
             if (ServerContainer.get()
-                .getCompatMap()
-                .containsKey(item)) {
-                if (ServerContainer.get()
                     .getCompatMap()
-                    .get(item)
-                    .GUID()
-                    .equals(slot.GUID())) {
+                    .containsKey(item)) {
+                if (ServerContainer.get()
+                        .getCompatMap()
+                        .get(item)
+                        .GUID()
+                        .equals(slot.GUID())) {
                     bool = true;
                 }
             } else {
 
                 if (item instanceof ArmorItem) {
-                    EquipmentSlot eqslot = ((ArmorItem) item).getSlot();
+                    EquipmentSlot eqslot = ((ArmorItem) item).getEquipmentSlot();
                     if (eqslot == EquipmentSlot.CHEST && id.equals(GearSlots.CHEST)) {
                         bool = true;
                     } else if (eqslot == EquipmentSlot.LEGS && id.equals(GearSlots.PANTS)) {
@@ -143,17 +133,17 @@ public class GearSlot implements JsonExileRegistry<GearSlot>, IAutoGson<GearSlot
                     bool = item instanceof StaffWeapon;
                 } else if (id.equals(GearSlots.NECKLACE)) {
                     bool = CuriosApi.getCuriosHelper()
-                        .getCurioTags(item)
-                        .contains(RefCurio.NECKLACE);
+                            .getCurioTags(item)
+                            .contains(RefCurio.NECKLACE);
                 } else if (id.equals(GearSlots.RING)) {
                     bool = CuriosApi.getCuriosHelper()
-                        .getCurioTags(item)
-                        .contains(RefCurio.RING);
+                            .getCurioTags(item)
+                            .contains(RefCurio.RING);
                 }
             }
 
             CACHED_GEAR_SLOTS.get(id)
-                .put(item, bool);
+                    .put(item, bool);
 
             return bool;
 

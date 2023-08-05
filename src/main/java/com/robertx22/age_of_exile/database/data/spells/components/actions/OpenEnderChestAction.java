@@ -2,12 +2,12 @@ package com.robertx22.age_of_exile.database.data.spells.components.actions;
 
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.PlayerEnderChestContainer;
 import net.minecraft.world.inventory.ChestMenu;
-import net.minecraft.world.SimpleMenuProvider;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.inventory.PlayerEnderChestContainer;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,7 +21,7 @@ public class OpenEnderChestAction extends SpellAction {
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
         if (ctx.caster instanceof Player) {
-            if (!ctx.caster.level.isClientSide) {
+            if (!ctx.caster.level().isClientSide) {
                 Player player = (Player) ctx.caster;
 
                 // copied from EnderChestBlock, if bug copy again
@@ -29,7 +29,7 @@ public class OpenEnderChestAction extends SpellAction {
 
                 player.openMenu(new SimpleMenuProvider((i, playerInventory, playerEntity) -> {
                     return ChestMenu.threeRows(i, playerInventory, enderChestInventory);
-                }, new TranslatableComponent("container.enderchest")));
+                }, Component.translatable("container.enderchest")));
             }
         }
     }

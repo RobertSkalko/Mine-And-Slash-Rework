@@ -3,11 +3,8 @@ package com.robertx22.age_of_exile.vanilla_mc.items.misc;
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.IAutoModel;
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.ItemModelManager;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
-import net.minecraft.world.item.Item;
 import net.minecraft.core.Registry;
-
-import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
-import net.minecraft.world.item.Item.Properties;
+import net.minecraft.world.item.Item;
 
 public abstract class AutoItem extends Item implements IAutoLocName, IAutoModel {
 
@@ -22,8 +19,8 @@ public abstract class AutoItem extends Item implements IAutoLocName, IAutoModel 
 
     @Override
     public String locNameLangFileGUID() {
-        return Registry.ITEM.getKey(this)
-            .toString();
+        return VanillaUTIL.REGISTRY.items().getKey(this)
+                .toString();
     }
 
     @Override

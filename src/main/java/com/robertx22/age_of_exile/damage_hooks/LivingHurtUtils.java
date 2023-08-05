@@ -4,20 +4,17 @@ import com.robertx22.age_of_exile.a_libraries.curios.MyCurioUtils;
 import com.robertx22.age_of_exile.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.damage_hooks.util.DmgSourceUtils;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.OnScreenMessageUtils;
+import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.network.protocol.game.ClientboundSetTitlesPacket;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.util.Mth;
-import net.minecraft.network.chat.TextComponent;
 
 import java.util.List;
 
 public class LivingHurtUtils {
+
 
     public static int getItemDamage(float dmg) {
         return (int) Mth.clamp(dmg / 10F, 1, 4);
@@ -42,7 +39,7 @@ public class LivingHurtUtils {
 
         LivingEntity target = event.getTargetEntity();
 
-        if (target.level.isClientSide) {
+        if (target.level().isClientSide) {
             return;
         }
 
@@ -55,7 +52,7 @@ public class LivingHurtUtils {
                 return;
             }
             if (event.getSource()
-                .getEntity() instanceof LivingEntity) {
+                    .getEntity() instanceof LivingEntity) {
                 onAttack(event);
             }
 
@@ -68,16 +65,16 @@ public class LivingHurtUtils {
         try {
 
             if (data.getTargetEntity()
-                .isAlive() == false) {
+                    .isAlive() == false) {
                 return; // stops attacking dead mobs
             }
 
             GearItemData weapondata = data.weaponData;
 
             data.getTargetEntityData()
-                .tryRecalculateStats();
+                    .tryRecalculateStats();
             data.getAttackerEntityData()
-                .tryRecalculateStats();
+                    .tryRecalculateStats();
 
             if (data.getAttackerEntity() instanceof Player) {
 
@@ -86,15 +83,15 @@ public class LivingHurtUtils {
                 }
 
                 if (!weapondata.canPlayerWear(data.getAttackerEntityData())) {
-                    OnScreenMessageUtils.sendMessage((ServerPlayer) data.getAttackerEntity(), new TextComponent("Weapon requirements not met"), ClientboundSetTitlesPacket.Type.ACTIONBAR);
+                    // todo    OnScreenMessageUtils.sendMessage((ServerPlayer) data.getAttackerEntity(), Component.literal("Weapon requirements not met"), ClientboundSetTitlesPacket.Type.ACTIONBAR);
                     return;
                 }
 
                 if (weapondata != null && weapondata.isWeapon()) {
                     if (data.getAttackerEntityData()
-                        .canUseWeapon(weapondata)) {
+                            .canUseWeapon(weapondata)) {
                         data.getAttackerEntityData()
-                            .attackWithWeapon(data);
+                                .attackWithWeapon(data);
                     }
 
                 } else {
@@ -104,7 +101,7 @@ public class LivingHurtUtils {
 
             } else { // if its a mob
                 data.getAttackerEntityData()
-                    .mobBasicAttack(data);
+                        .mobBasicAttack(data);
             }
 
         } catch (Exception e) {

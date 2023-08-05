@@ -46,7 +46,7 @@ public class Gem extends BaseRuneGem implements IAutoGson<Gem>, JsonExileRegistr
     }
 
     public Item getItem() {
-        return Registry.ITEM.get(new ResourceLocation(item_id));
+        return VanillaUTIL.REGISTRY.items().get(new ResourceLocation(item_id));
     }
 
     @Override

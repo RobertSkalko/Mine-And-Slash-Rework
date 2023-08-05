@@ -15,19 +15,14 @@ import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.library_of_exile.registry.serialization.IByteBuf;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
-import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
 
 public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipList, IByteBuf<Perk>, IAutoLocName {
     public static Perk SERIALIZER = new Perk();
@@ -119,9 +114,9 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipL
 
 
             if (this.one_of_a_kind != null) {
-                list.add(new TextComponent("Can only have one Perk of this type: ").withStyle(ChatFormatting.GREEN));
+                list.add(Component.literal("Can only have one Perk of this type: ").withStyle(ChatFormatting.GREEN));
 
-                list.add(new TranslatableComponent(SlashRef.MODID + ".one_of_a_kind." + one_of_a_kind).withStyle(ChatFormatting.GREEN));
+                list.add(Component.translatable(SlashRef.MODID + ".one_of_a_kind." + one_of_a_kind).withStyle(ChatFormatting.GREEN));
             }
 
             if (lvl_req > 1) {
@@ -132,7 +127,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipL
 
             if (this.type == PerkType.MAJOR) {
 
-                list.add(new TextComponent("Game changer talent.").withStyle(ChatFormatting.RED));
+                list.add(Component.literal("Game changer talent.").withStyle(ChatFormatting.RED));
             }
 
             list.add(Words.PressAltForStatInfo.locName()

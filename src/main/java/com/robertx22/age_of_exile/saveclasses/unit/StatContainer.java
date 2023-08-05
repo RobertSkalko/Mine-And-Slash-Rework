@@ -3,17 +3,15 @@ package com.robertx22.age_of_exile.saveclasses.unit;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-@Storable
-public class StatContainer {
 
-    @Store
+public class StatContainer {
+    
+
     public HashMap<String, StatData> stats = new HashMap<>();
 
     public transient HashMap<String, InCalcStatData> statsInCalc = new HashMap<>();

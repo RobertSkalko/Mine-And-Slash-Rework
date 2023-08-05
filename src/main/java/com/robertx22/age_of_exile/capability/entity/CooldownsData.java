@@ -1,27 +1,20 @@
 package com.robertx22.age_of_exile.capability.entity;
 
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Storable
 public class CooldownsData {
 
     public static String IN_COMBAT = "in_combat";
 
-    @Store
     private HashMap<String, Data> map = new HashMap<>();
 
-    @Storable
     public static class Data {
-        @Store
         public int ticks = 0;
-        @Store
-
+    
         public int need = 0;
 
         public Data() {
@@ -54,17 +47,17 @@ public class CooldownsData {
             return;
         }
         new HashMap<>(map).entrySet()
-            .forEach(x -> {
-                tickDownCooldown(x.getKey(), ticks);
-            });
+                .forEach(x -> {
+                    tickDownCooldown(x.getKey(), ticks);
+                });
     }
 
     public List<String> getAllSpellsOnCooldown() {
         return map.keySet()
-            .stream()
-            .filter(x -> ExileDB.Spells()
-                .isRegistered(x))
-            .collect(Collectors.toList());
+                .stream()
+                .filter(x -> ExileDB.Spells()
+                        .isRegistered(x))
+                .collect(Collectors.toList());
     }
 
     public void setOnCooldown(String id, int ticks) {

@@ -1,16 +1,14 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import net.minecraft.entity.*;
-import net.minecraft.world.entity.monster.Enemy;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.player.Player;
-
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.NeutralMob;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.npc.Npc;
+import net.minecraft.world.entity.player.Player;
 
 public class EntityTypeUtils {
 
@@ -53,13 +51,13 @@ public class EntityTypeUtils {
             return true;
         }
         if (!en.getType()
-            .getCategory()
-            .isFriendly()) {
+                .getCategory()
+                .isFriendly()) {
             return true;
         }
         if (EntityType.getKey(en.getType())
-            .getNamespace()
-            .equals(SlashRef.WORLD_OF_EXILE_ID)) {
+                .getNamespace()
+                .equals(SlashRef.WORLD_OF_EXILE_ID)) {
             return true; // all my mobs are supposed to be rewarding
         }
 

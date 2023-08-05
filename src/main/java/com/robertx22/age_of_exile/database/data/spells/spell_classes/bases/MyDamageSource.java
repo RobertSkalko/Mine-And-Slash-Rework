@@ -1,24 +1,22 @@
 package com.robertx22.age_of_exile.database.data.spells.spell_classes.bases;
 
-import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
-import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
+import net.minecraft.core.Holder;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.damagesource.DamageType;
 
 
 // todo this needs a rework?
 public class MyDamageSource extends DamageSource {
+    public MyDamageSource(Holder<DamageType> pType) {
+        super(pType);
+    }
 
-    public Elements element;
-    public float realDamage;
-
+/*
     DamageSource source;
 
-    public MyDamageSource(DamageSource s, Entity source, Elements element, float dmg) {
+    public MyDamageSource(DamageSource s, Entity source, float dmg) {
         super(source(s), source);
-        this.element = element;
         this.bypassArmor();
-        realDamage = dmg;
         this.source = s;
 
     }
@@ -29,4 +27,6 @@ public class MyDamageSource extends DamageSource {
         }
         return s.msgId;
     }
+
+ */
 }

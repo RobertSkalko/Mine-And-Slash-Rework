@@ -8,13 +8,12 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequiremen
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
-import com.robertx22.age_of_exile.uncommon.wrappers.SText;
 import com.robertx22.library_of_exile.utils.CLOC;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,17 +25,17 @@ public class TooltipUtils {
     public static String X = ChatFormatting.RED + "\u2716";
 
     public static MutableComponent color(ChatFormatting format, MutableComponent comp) {
-        return new TextComponent(format + "").append(comp);
+        return Component.literal(format + "").append(comp);
     }
 
     public static void addRequirements(List<Component> tip, int lvl, StatRequirement req, EntityData data) {
 
         if (data.getLevel() >= lvl) {
-            tip.add(new TextComponent(ChatFormatting.GREEN + "" + ChatFormatting.BOLD + StatRequirement.CHECK_YES_ICON + ChatFormatting.GRAY)
+            tip.add(Component.literal(ChatFormatting.GREEN + "" + ChatFormatting.BOLD + StatRequirement.CHECK_YES_ICON + ChatFormatting.GRAY)
                     .append(ChatFormatting.GRAY + " Level Min: " + lvl + " "));
 
         } else {
-            tip.add(new TextComponent(ChatFormatting.RED + "" + ChatFormatting.BOLD + StatRequirement.NO_ICON + ChatFormatting.GRAY)
+            tip.add(Component.literal(ChatFormatting.RED + "" + ChatFormatting.BOLD + StatRequirement.NO_ICON + ChatFormatting.GRAY)
                     .append(ChatFormatting.GRAY + " Level Min: " + lvl + " ")
             );
         }
@@ -46,7 +45,7 @@ public class TooltipUtils {
 
     public static void addSocketNamesLine(List<Component> tip, GearItemData gear) {
         if (gear.sockets.sockets.size() > 0) {
-            tip.add(new TextComponent("Gemmed").withStyle(ChatFormatting.LIGHT_PURPLE));
+            tip.add(Component.literal("Gemmed").withStyle(ChatFormatting.LIGHT_PURPLE));
         }
     }
 
@@ -61,7 +60,7 @@ public class TooltipUtils {
     }
 
     public static MutableComponent level(int lvl) {
-        return new TextComponent(ChatFormatting.YELLOW + "").append(Words.Level.locName())
+        return Component.literal(ChatFormatting.YELLOW + "").append(Words.Level.locName())
                 .append((": " + lvl))
                 .withStyle(ChatFormatting.YELLOW);
 
@@ -70,7 +69,7 @@ public class TooltipUtils {
     public static List<Component> cutIfTooLong(MutableComponent comp) {
         List<String> stringList = cutIfTooLong(CLOC.translate(comp));
         return stringList.stream()
-                .map(x -> new SText(x))
+                .map(x -> ExileText.ofText(x))
                 .collect(Collectors.toList());
 
     }
@@ -78,7 +77,7 @@ public class TooltipUtils {
     public static List<MutableComponent> cutIfTooLong(MutableComponent comp, ChatFormatting format) {
         List<String> stringList = cutIfTooLong(CLOC.translate(comp));
         return stringList.stream()
-                .map(x -> new SText(x).withStyle(format))
+                .map(x -> ExileText.ofText(x).withStyle(format))
                 .collect(Collectors.toList());
 
     }
@@ -142,7 +141,7 @@ public class TooltipUtils {
         if (data != null) {
 
             if (RepairUtils.isItemBroken(stack)) {
-                MutableComponent comp = new TextComponent(X + " ").append(Words.Broken.locName());
+                MutableComponent comp = Component.literal(X + " ").append(Words.Broken.locName());
                 return comp;
             }
 
@@ -192,13 +191,13 @@ public class TooltipUtils {
 
     public static MutableComponent rarity(Rarity rarity) {
 
-        return new TextComponent(rarity.textFormatting() + "")
+        return Component.literal(rarity.textFormatting() + "")
                 .append(rarity.locName())
                 .withStyle(rarity.textFormatting());
     }
 
     public static MutableComponent rarityShort(Rarity rarity) {
-        return (new TextComponent(rarity.textFormatting() + "").append(rarity.locName()));
+        return (Component.literal(rarity.textFormatting() + "").append(rarity.locName()));
     }
 
     public static MutableComponent tier(int tier) {
@@ -208,33 +207,33 @@ public class TooltipUtils {
     }
 
     public static MutableComponent gearSlot(GearSlot slot) {
-        return new TextComponent("Item Type: ").withStyle(ChatFormatting.WHITE)
+        return Component.literal("Item Type: ").withStyle(ChatFormatting.WHITE)
                 .append(slot.locName()
                         .withStyle(ChatFormatting.AQUA));
     }
 
     public static MutableComponent gearTier(int tier) {
-        return new TextComponent("Item Tier: ").withStyle(ChatFormatting.WHITE)
-                .append(new TextComponent(tier + "").withStyle(ChatFormatting.AQUA));
+        return Component.literal("Item Tier: ").withStyle(ChatFormatting.WHITE)
+                .append(Component.literal(tier + "").withStyle(ChatFormatting.AQUA));
     }
 
     public static MutableComponent gearRarity(GearRarity rarity) {
-        return new TextComponent("Rarity: ").withStyle(ChatFormatting.WHITE)
+        return Component.literal("Rarity: ").withStyle(ChatFormatting.WHITE)
                 .append(rarity.locName()
                         .withStyle(rarity.textFormatting()));
     }
 
     public static MutableComponent gearLevel(int lvl) {
-        return new TextComponent("Level Req: ")
+        return Component.literal("Level Req: ")
                 .withStyle(ChatFormatting.WHITE)
-                .append(new TextComponent(lvl + "")
+                .append(Component.literal(lvl + "")
                         .withStyle(ChatFormatting.YELLOW));
     }
 
     public static String STAR = "\u272B";
 
- 
+
     public static MutableComponent dragOntoGearToUse() {
-        return new TextComponent("[Drag onto gear to use]").withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD);
+        return Component.literal("[Drag onto gear to use]").withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD);
     }
 }

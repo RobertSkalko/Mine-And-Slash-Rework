@@ -5,16 +5,16 @@ import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
-import net.minecraft.world.item.Item;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 
 public class Rune extends BaseRuneGem implements IAutoGson<Rune>, JsonExileRegistry<Rune> {
 
     public static Rune SERIALIZER = new Rune();
 
     public Item getItem() {
-        return Registry.ITEM.get(new ResourceLocation(item_id));
+        return VanillaUTIL.REGISTRY.items().get(new ResourceLocation(item_id));
     }
 
     @Override

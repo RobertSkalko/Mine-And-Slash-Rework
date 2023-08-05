@@ -13,7 +13,7 @@ public class Runes implements ExileRegistryInit {
             RuneItem x = obj.get();
 
             Rune rune = new Rune();
-            rune.item_id = Registry.ITEM.getKey(x)
+            rune.item_id = VanillaUTIL.REGISTRY.items().getKey(x)
                 .toString();
             rune.identifier = x.type.id;
 

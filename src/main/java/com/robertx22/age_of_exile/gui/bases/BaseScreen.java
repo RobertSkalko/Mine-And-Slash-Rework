@@ -1,19 +1,16 @@
 package com.robertx22.age_of_exile.gui.bases;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.event_hooks.player.OnKeyPress;
 import com.robertx22.age_of_exile.mmorpg.registers.client.KeybindsRegister;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 
 public class BaseScreen extends Screen {
 
     protected BaseScreen(int width, int height) {
-        super(new TextComponent(""));
+        super(Component.literal(""));
         this.sizeX = width;
         this.sizeY = height;
     }
@@ -26,6 +23,7 @@ public class BaseScreen extends Screen {
     public int sizeX = 0;
     public int sizeY = 0;
 
+    /*
     public void renderBackground(PoseStack matrix, ResourceLocation id) {
 
         mc.getTextureManager()
@@ -37,6 +35,8 @@ public class BaseScreen extends Screen {
                         .getGuiScaledHeight() / 2 - sizeY / 2, 0, 0, sizeX, sizeY
         );
     }
+
+     */
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
@@ -58,7 +58,7 @@ public class BaseScreen extends Screen {
     }
 
     public <T extends AbstractWidget> T publicAddButton(T w) {
-        return this.addButton(w);
+        return this.addWidget(w);
     }
 
 }

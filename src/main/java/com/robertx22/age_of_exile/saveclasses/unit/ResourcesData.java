@@ -8,14 +8,11 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.HealthUtils;
 import com.robertx22.age_of_exile.vanilla_mc.packets.EntityUnitPacket;
 import com.robertx22.library_of_exile.main.Packets;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 
-@Storable
 public class ResourcesData {
 
     public ResourcesData() {
@@ -27,16 +24,11 @@ public class ResourcesData {
         RESTORE
     }
 
-    @Store
     private float mana = 0;
-    @Store
     private float magic_shield = 0;
-    @Store
     private float energy = 0;
-    @Store
     private float blood = 0;
 
-    @Store
     public AllShieldsData shields = new AllShieldsData();
 
     public float getMana() {

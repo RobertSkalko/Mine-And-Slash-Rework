@@ -2,27 +2,23 @@ package com.robertx22.age_of_exile.vanilla_mc.items.gemrunes;
 
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.IAutoModel;
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.ItemModelManager;
-import com.robertx22.age_of_exile.database.base.CreativeTabs;
 import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.registry.IWeighted;
-import net.minecraft.world.item.TooltipFlag;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.core.Registry;
-import net.minecraft.network.chat.Component;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
-import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
-import net.minecraft.world.item.Item.Properties;
 
 public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, IWeighted {
 
@@ -35,13 +31,13 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
 
     @Override
     public Component getName(ItemStack stack) {
-        return new TranslatableComponent(this.getDescriptionId()).withStyle(ChatFormatting.GOLD);
+        return Component.translatable(this.getDescriptionId()).withStyle(ChatFormatting.GOLD);
     }
 
     @Override
     public String locNameLangFileGUID() {
-        return Registry.ITEM.getKey(this)
-            .toString();
+        return VanillaUTIL.REGISTRY.items().getKey(this)
+                .toString();
     }
 
     @Override
@@ -57,8 +53,7 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
     public RuneType type;
 
     public RuneItem(RuneType type) {
-        super(new Properties().stacksTo(64)
-            .tab(CreativeTabs.GemRuneCurrency));
+        super(new Properties().stacksTo(64));
         this.type = type;
 
         this.weight = type.weight;
@@ -107,7 +102,7 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
 
     public Rune getRune() {
         return ExileDB.Runes()
-            .get(type.id);
+                .get(type.id);
     }
 
     @Override

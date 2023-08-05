@@ -17,18 +17,16 @@ import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
+import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
 
 public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDesc, JsonExileRegistry<BaseDatapackStat> {
 
@@ -105,7 +103,7 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
         }
         return stat;
     }
-    
+
     public List<MutableComponent> getCutDescTooltip() {
         List<MutableComponent> list = new ArrayList<>();
 
@@ -113,7 +111,7 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
 
         for (int i = 0; i < cut.size(); i++) {
 
-            MutableComponent comp = new TextComponent("");
+            MutableComponent comp = ExileText.emptyLine().get();
             if (i == 0) {
                 comp.append(" [");
             }

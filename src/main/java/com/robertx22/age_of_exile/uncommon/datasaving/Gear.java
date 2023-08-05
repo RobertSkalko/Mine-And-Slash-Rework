@@ -28,7 +28,7 @@ public class Gear {
 
         if (gear != null) {
 
-            String id = Registry.ITEM.getKey(stack.getItem())
+            String id = VanillaUTIL.REGISTRY.items().getKey(stack.getItem())
                     .toString();
 
             if (gear.item_id.isEmpty()) {

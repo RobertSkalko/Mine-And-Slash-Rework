@@ -7,24 +7,19 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatsContaine
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
-import com.robertx22.age_of_exile.uncommon.wrappers.SText;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
-import net.minecraft.network.chat.Component;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPart.Part;
 
-@Storable
 public class GearSocketsData implements IStatsContainer, IGearPartTooltip {
 
-    @Store
+
     public List<SocketData> sockets = new ArrayList<>();
 
-    @Store
+
     private int slots = 1;
 
     public int getSocketedGemsCount() {
@@ -37,7 +32,7 @@ public class GearSocketsData implements IStatsContainer, IGearPartTooltip {
         for (int i = 0; i < gear.getTotalSockets(); i++) {
             if (sockets.size() > i) {
                 list.addAll(sockets.get(i)
-                    .GetAllStats(gear));
+                        .GetAllStats(gear));
             }
         }
         return list;
@@ -51,13 +46,13 @@ public class GearSocketsData implements IStatsContainer, IGearPartTooltip {
             if (sockets.size() > i) {
                 SocketData data = sockets.get(i);
                 Gem gem = data.getGem();
-                list.add(new SText(gem.getFormat() + "[" + TooltipUtils.STAR + "] ").append(data.GetTooltipString(info, gear)
-                    .get(0)));
+                list.add(ExileText.ofText(gem.getFormat() + "[" + TooltipUtils.STAR + "] ").append(data.GetTooltipString(info, gear)
+                        .get(0)));
             }
         }
 
         for (int i = 0; i < gear.getEmptySockets(); i++) {
-            list.add(new SText(ChatFormatting.YELLOW + "[Socket]"));
+            list.add(ExileText.ofText(ChatFormatting.YELLOW + "[Socket]"));
         }
 
         return list;

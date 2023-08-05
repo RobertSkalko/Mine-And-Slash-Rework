@@ -106,7 +106,7 @@ public class MapHolder {
     }
 
     public Block getBlock() {
-        return Registry.BLOCK.get(new ResourceLocation(get(MapField.BLOCK)));
+        return VanillaUTIL.REGISTRY.blocks().get(new ResourceLocation(get(MapField.BLOCK)));
     }
 
     public SoundEvent getSound() {

@@ -7,13 +7,14 @@ import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.library_of_exile.utils.Watch;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 public class OnLogin {
+
 
     public static void onLoad(ServerPlayer player) {
 
@@ -25,9 +26,9 @@ public class OnLogin {
         try {
 
             if (!player.getServer()
-                .isCommandBlockEnabled()) {
-                player.displayClientMessage(new TextComponent("Command blocks are disabled, this will stop you from playing Age of Exile Dungeons!").withStyle(ChatFormatting.RED), false);
-                player.displayClientMessage(new TextComponent("To enable go to your server.properties file and put enable-command-block as true.").withStyle(ChatFormatting.GREEN), false);
+                    .isCommandBlockEnabled()) {
+                player.displayClientMessage(Component.literal("Command blocks are disabled, this will stop you from playing Age of Exile Dungeons!").withStyle(ChatFormatting.RED), false);
+                player.displayClientMessage(Component.literal("To enable go to your server.properties file and put enable-command-block as true.").withStyle(ChatFormatting.GREEN), false);
             }
 
             CapSyncUtil.syncAll(player);
@@ -43,7 +44,7 @@ public class OnLogin {
             data.syncToClient(player);
 
         } catch (
-            Exception e) {
+                Exception e) {
             e.printStackTrace();
         }
 
@@ -54,11 +55,11 @@ public class OnLogin {
 
     public static void GiveStarterItems(Player player) {
 
-        if (player.level.isClientSide) {
+        if (player.level().isClientSide) {
             return;
         }
 
-        player.inventory.add(new ItemStack(SlashItems.NEWBIE_GEAR_BAG.get()));
+        player.getInventory().add(new ItemStack(SlashItems.NEWBIE_GEAR_BAG.get()));
 
     }
 

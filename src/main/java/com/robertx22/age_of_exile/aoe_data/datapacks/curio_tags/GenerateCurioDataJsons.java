@@ -24,7 +24,7 @@ public class GenerateCurioDataJsons {
 
         for (Item item : Registry.ITEM) {
 
-            if (Registry.ITEM.getKey(item)
+            if (VanillaUTIL.REGISTRY.items().getKey(item)
                 .getNamespace()
                 .equals(SlashRef.MODID) && item instanceof ICuriosType) {
 
@@ -37,7 +37,7 @@ public class GenerateCurioDataJsons {
                     list.addAll(map.get(slot));
                 }
 
-                list.add("\"" + Registry.ITEM.getKey(item)
+                list.add("\"" + VanillaUTIL.REGISTRY.items().getKey(item)
                     .toString() + "\"");
 
                 map.put(slot, list);

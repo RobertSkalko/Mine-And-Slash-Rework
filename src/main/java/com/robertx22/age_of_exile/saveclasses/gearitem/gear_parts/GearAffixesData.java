@@ -7,23 +7,19 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.library_of_exile.utils.RandomUtils;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
 import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPart.Part;
 
-@Storable
 public class GearAffixesData implements IGearPartTooltip {
 
-    @Store
+
     public List<AffixData> suf = new ArrayList<>();
-    @Store
+
     public List<AffixData> pre = new ArrayList<>();
-    @Store
+
     public List<AffixData> cor = new ArrayList<>();
 
     public boolean canCorrupt() {
@@ -77,7 +73,7 @@ public class GearAffixesData implements IGearPartTooltip {
 
     public boolean canGetMore(Affix.Type type, GearItemData gear) {
 
-        
+
         int current;
         if (type == Affix.Type.prefix) {
             current = pre

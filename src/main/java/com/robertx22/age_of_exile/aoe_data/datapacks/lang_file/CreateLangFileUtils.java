@@ -4,11 +4,11 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,7 +22,7 @@ public class CreateLangFileUtils {
         int pos = string.lastIndexOf(toReplace);
         if (pos > -1) {
             return string.substring(0, pos) + replacement + string.substring(pos + toReplace
-                .length(), string.length());
+                    .length(), string.length());
         } else {
             return string;
         }
@@ -34,7 +34,7 @@ public class CreateLangFileUtils {
 
     public static boolean matches(ResourceLocation loc) {
         if (loc == null || loc.getNamespace()
-            .equals(SlashRef.MODID) == false) {
+                .equals(SlashRef.MODID) == false) {
             return false;
         }
         return true;
@@ -45,13 +45,13 @@ public class CreateLangFileUtils {
         List<T> list = new ArrayList<>();
 
         for (Item item : Registry.ITEM) {
-            if (matches(Registry.ITEM.getKey(item)) && theclass.isAssignableFrom(item.getClass())) {
+            if (matches(VanillaUTIL.REGISTRY.items().getKey(item)) && theclass.isAssignableFrom(item.getClass())) {
                 list.add((T) item);
             }
         }
 
-        for (Block item : Registry.BLOCK) {
-            if (matches(Registry.BLOCK.getKey(item)) && theclass.isAssignableFrom(item.getClass())) {
+        for (Block item : VanillaUTIL.REGISTRY.blocks()) {
+            if (matches(VanillaUTIL.REGISTRY.blocks().getKey(item)) && theclass.isAssignableFrom(item.getClass())) {
                 list.add((T) item);
             }
         }

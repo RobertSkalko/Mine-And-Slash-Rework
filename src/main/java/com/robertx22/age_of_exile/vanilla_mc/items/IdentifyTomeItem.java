@@ -1,21 +1,18 @@
 package com.robertx22.age_of_exile.vanilla_mc.items;
 
-import com.robertx22.age_of_exile.database.base.CreativeTabs;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.level.Level;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import net.minecraft.world.item.Item.Properties;
 
 public class IdentifyTomeItem extends AutoItem {
 

@@ -30,22 +30,19 @@ import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.ChatFormatting;
 import net.minecraft.world.level.Level;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
 
 public final class Spell implements IGUID, IAutoGson<Spell>, JsonExileRegistry<Spell>, IAutoLocName, IAutoLocDesc, MaxLevelProvider {
     public static Spell SERIALIZER = new Spell();
@@ -73,8 +70,8 @@ public final class Spell implements IGUID, IAutoGson<Spell>, JsonExileRegistry<S
             return true;
         }
         return disabled_dims.stream()
-            .map(x -> new ResourceLocation(x))
-            .noneMatch(x -> x.equals(MapManager.getResourceLocation(world)));
+                .map(x -> new ResourceLocation(x))
+                .noneMatch(x -> x.equals(MapManager.getResourceLocation(world)));
 
     }
 
@@ -168,7 +165,7 @@ public final class Spell implements IGUID, IAutoGson<Spell>, JsonExileRegistry<S
 
         if (imbue && this.config.cast_type == SpellCastType.USE_ITEM) {
             ctx.spellsCap.getCastingData()
-                .imbueSpell(this, config.imbues);
+                    .imbueSpell(this, config.imbues);
         } else {
             attached.onCast(SpellCtx.onCast(caster, ctx.calcData));
         }
@@ -215,28 +212,28 @@ public final class Spell implements IGUID, IAutoGson<Spell>, JsonExileRegistry<S
         if (true || Screen.hasShiftDown()) {
 
             SpellDesc.getTooltip(ctx.caster, this)
-                .forEach(x -> list.add(new TextComponent(x)));
+                    .forEach(x -> list.add(Component.literal(x)));
 
         }
 
         TooltipUtils.addEmpty(list);
 
-        list.add(new TextComponent(ChatFormatting.BLUE + "Mana Cost: " + getCalculatedManaCost(ctx)));
+        list.add(Component.literal(ChatFormatting.BLUE + "Mana Cost: " + getCalculatedManaCost(ctx)));
         if (config.usesCharges()) {
-            list.add(new TextComponent(ChatFormatting.YELLOW + "Max Charges: " + config.charges));
-            list.add(new TextComponent(ChatFormatting.YELLOW + "Charge Regen: " + config.charge_regen / 20 + "s"));
+            list.add(Component.literal(ChatFormatting.YELLOW + "Max Charges: " + config.charges));
+            list.add(Component.literal(ChatFormatting.YELLOW + "Charge Regen: " + config.charge_regen / 20 + "s"));
 
         } else {
-            list.add(new TextComponent(ChatFormatting.YELLOW + "Cooldown: " + (getCooldownTicks(ctx) / 20) + "s"));
+            list.add(Component.literal(ChatFormatting.YELLOW + "Cooldown: " + (getCooldownTicks(ctx) / 20) + "s"));
         }
 
         int casttime = getCastTimeTicks(ctx);
 
         if (casttime == 0) {
-            list.add(new TextComponent(ChatFormatting.GREEN + "Cast time: " + "Instant"));
+            list.add(Component.literal(ChatFormatting.GREEN + "Cast time: " + "Instant"));
 
         } else {
-            list.add(new TextComponent(ChatFormatting.GREEN + "Cast time: " + casttime / 20 + "s"));
+            list.add(Component.literal(ChatFormatting.GREEN + "Cast time: " + casttime / 20 + "s"));
 
         }
 
@@ -248,7 +245,7 @@ public final class Spell implements IGUID, IAutoGson<Spell>, JsonExileRegistry<S
 
         if (this.config.times_to_cast > 1) {
             TooltipUtils.addEmpty(list);
-            list.add(new TextComponent("Casted " + config.times_to_cast + " times during channel.").withStyle(ChatFormatting.RED));
+            list.add(Component.literal("Casted " + config.times_to_cast + " times during channel.").withStyle(ChatFormatting.RED));
 
         }
 
@@ -257,21 +254,21 @@ public final class Spell implements IGUID, IAutoGson<Spell>, JsonExileRegistry<S
             Set<ExileEffect> effect = new HashSet<>();
 
             if (ExileDB.ExileEffects()
-                .isRegistered(effect_tip)) {
+                    .isRegistered(effect_tip)) {
                 effect.add(ExileDB.ExileEffects()
-                    .get(effect_tip));
+                        .get(effect_tip));
             }
 
             try {
                 this.getAttached()
-                    .getAllComponents()
-                    .forEach(x -> {
-                        x.acts.forEach(a -> {
-                            if (a.has(MapField.EXILE_POTION_ID)) {
-                                effect.add(a.getExileEffect());
-                            }
+                        .getAllComponents()
+                        .forEach(x -> {
+                            x.acts.forEach(a -> {
+                                if (a.has(MapField.EXILE_POTION_ID)) {
+                                    effect.add(a.getExileEffect());
+                                }
+                            });
                         });
-                    });
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -283,10 +280,10 @@ public final class Spell implements IGUID, IAutoGson<Spell>, JsonExileRegistry<S
         }
 
         int currentlvl = Load.spells(info.player)
-            .getLevelOf(GUID());
+                .getLevelOf(GUID());
         int maxlvl = getMaxLevel();
 
-        list.add(new TextComponent("Level: " + currentlvl + "/" + maxlvl).withStyle(ChatFormatting.YELLOW));
+        list.add(Component.literal("Level: " + currentlvl + "/" + maxlvl).withStyle(ChatFormatting.YELLOW));
 
         TooltipUtils.removeDoubleBlankLines(list);
 

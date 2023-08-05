@@ -6,10 +6,10 @@ import com.robertx22.age_of_exile.database.data.spells.entities.StationaryFallin
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellUtils;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.entity.LivingEntity;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.block.Block;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -65,7 +65,7 @@ public class SummonBlockAction extends SpellAction {
             if (found) {
                 StationaryFallingBlockEntity be = new StationaryFallingBlockEntity(ctx.world, pos, block.defaultBlockState());
                 be.getEntityData()
-                    .set(StationaryFallingBlockEntity.IS_FALLING, data.getOrDefault(MapField.IS_BLOCK_FALLING, false));
+                        .set(StationaryFallingBlockEntity.IS_FALLING, data.getOrDefault(MapField.IS_BLOCK_FALLING, false));
                 SpellUtils.initSpellEntity(be, ctx.caster, ctx.calculatedSpellData, data);
                 ctx.world.addFreshEntity(be);
             }
@@ -75,8 +75,8 @@ public class SummonBlockAction extends SpellAction {
 
     public MapHolder create(Block block, Double lifespan) {
         MapHolder c = new MapHolder();
-        c.put(MapField.BLOCK, Registry.BLOCK.getKey(block)
-            .toString());
+        c.put(MapField.BLOCK, VanillaUTIL.REGISTRY.blocks().getKey(block)
+                .toString());
         c.put(MapField.ENTITY_NAME, Spell.DEFAULT_EN_NAME);
         c.put(MapField.LIFESPAN_TICKS, lifespan);
         c.type = GUID();

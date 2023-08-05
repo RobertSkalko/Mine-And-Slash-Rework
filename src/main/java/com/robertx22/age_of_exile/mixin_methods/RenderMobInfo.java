@@ -62,11 +62,11 @@ public class RenderMobInfo {
                     .getLevel();
 
                 MutableComponent lvlcomp =
-                    new TextComponent(" [" + data.getLevel() + "]").withStyle(ChatFormatting.YELLOW);
+                    Component.literal(" [" + data.getLevel() + "]").withStyle(ChatFormatting.YELLOW);
 
                 if (hidelvl) {
                     lvlcomp =
-                        new TextComponent(" [" + "???" + "]").withStyle(ChatFormatting.YELLOW);
+                        Component.literal(" [" + "???" + "]").withStyle(ChatFormatting.YELLOW);
                 }
 
                 Component text = data.getName()
@@ -75,30 +75,30 @@ public class RenderMobInfo {
 
                 float percent = HealthUtils.getCurrentHealth(entity) / HealthUtils.getMaxHealth(entity) * 100F;
 
-                MutableComponent hpText = new TextComponent("[").withStyle(ChatFormatting.DARK_RED);
+                MutableComponent hpText = Component.literal("[").withStyle(ChatFormatting.DARK_RED);
                 int times = 0;
 
                 for (int x = 0; x < 10; x++) {
                     times++;
 
                     if (percent > 0) {
-                        hpText.append(new TextComponent("|")
+                        hpText.append(Component.literal("|")
                             .withStyle(ChatFormatting.RED)
                         );
                     } else {
-                        hpText.append(new TextComponent("|")
+                        hpText.append(Component.literal("|")
                             .withStyle(ChatFormatting.DARK_RED)
                         );
                     }
 
                     if (times == 5) {
-                        hpText.append(new TextComponent((int) HealthUtils.getCurrentHealth(entity) + "").withStyle(ChatFormatting.GOLD));
+                        hpText.append(Component.literal((int) HealthUtils.getCurrentHealth(entity) + "").withStyle(ChatFormatting.GOLD));
                     }
                     percent -= 10;
 
                 }
 
-                hpText.append(new TextComponent("]").withStyle(ChatFormatting.DARK_RED));
+                hpText.append(Component.literal("]").withStyle(ChatFormatting.DARK_RED));
 
                 matrixStack.pushPose();
                 matrixStack.translate(0.0D, yOffset, 0.0D);

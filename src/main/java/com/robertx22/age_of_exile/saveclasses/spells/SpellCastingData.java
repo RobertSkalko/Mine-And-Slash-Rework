@@ -11,44 +11,33 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.SpendResourceEvent;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.OnScreenMessageUtils;
 import com.robertx22.age_of_exile.vanilla_mc.packets.NoManaPacket;
 import com.robertx22.library_of_exile.main.Packets;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.network.protocol.game.ClientboundSetTitlesPacket;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.network.chat.TextComponent;
 
 import java.util.List;
 
-@Storable
 public class SpellCastingData {
 
-    @Store
     public int castingTicksLeft = 0;
 
-    @Store
     public int castingTicksDone = 0;
 
-    @Store
     public int lastSpellCastTimeInTicks = 0;
 
-    @Store
     public String spellBeingCast = "";
 
-    @Store
     public Boolean casting = false;
 
-    @Store
     public ChargeData charges = new ChargeData();
 
-    @Store
     public String imbued_spell = "";
-    @Store
+
     public int imbued_spell_stacks = 0;
 
     public void imbueSpell(Spell spell, int amount) {
@@ -67,7 +56,7 @@ public class SpellCastingData {
         if (imbued_spell_stacks > 0) {
 
             Spell spell = ExileDB.Spells()
-                .get(imbued_spell);
+                    .get(imbued_spell);
 
             if (spell != null) {
                 spell.cast(new SpellCastContext(en, 0, spell), false);
@@ -87,8 +76,8 @@ public class SpellCastingData {
                 if (spell != null) {
                     int cd = ctx.spell.getCooldownTicks(ctx);
                     Load.Unit(entity)
-                        .getCooldowns()
-                        .setOnCooldown(spell.GUID(), cd);
+                            .getCooldowns()
+                            .setOnCooldown(spell.GUID(), cd);
 
                 }
 
@@ -106,7 +95,7 @@ public class SpellCastingData {
 
     public boolean isCasting() {
         return spellBeingCast != null && casting && ExileDB.Spells()
-            .isRegistered(spellBeingCast);
+                .isRegistered(spellBeingCast);
     }
 
     transient static Spell lastSpell = null;
@@ -117,12 +106,12 @@ public class SpellCastingData {
 
             if (isCasting()) {
                 Spell spell = ExileDB.Spells()
-                    .get(spellBeingCast);
+                        .get(spellBeingCast);
 
                 SpellCastContext ctx = new SpellCastContext(entity, castingTicksDone, spell);
 
                 if (spell != null && spells != null && ExileDB.Spells()
-                    .isRegistered(spell)) {
+                        .isRegistered(spell)) {
                     spell.onCastingTick(ctx);
 
                     /*
@@ -160,8 +149,8 @@ public class SpellCastingData {
 
     public List<String> getSpellsOnCooldown(LivingEntity en) {
         return Load.Unit(en)
-            .getCooldowns()
-            .getAllSpellsOnCooldown();
+                .getCooldowns()
+                .getAllSpellsOnCooldown();
     }
 
     public void setToCast(Spell spell, LivingEntity entity) {
@@ -197,17 +186,17 @@ public class SpellCastingData {
     public Spell getSpellBeingCast() {
 
         if (!ExileDB.Spells()
-            .isRegistered(spellBeingCast)) {
+                .isRegistered(spellBeingCast)) {
             return null;
         }
 
         return ExileDB.Spells()
-            .get(spellBeingCast);
+                .get(spellBeingCast);
     }
 
     public boolean canCast(Spell spell, Player player) {
 
-        if (player.level.isClientSide) {
+        if (player.level().isClientSide) {
             return false;
         }
 
@@ -220,8 +209,8 @@ public class SpellCastingData {
         }
 
         if (Load.Unit(player)
-            .getCooldowns()
-            .isOnCooldown(spell.GUID())) {
+                .getCooldowns()
+                .isOnCooldown(spell.GUID())) {
             return false;
         }
 
@@ -230,7 +219,7 @@ public class SpellCastingData {
         }
 
         if (spell.GUID()
-            .contains("test")) {
+                .contains("test")) {
             if (!MMORPG.RUN_DEV_TOOLS) {
                 return false;
             }
@@ -255,12 +244,11 @@ public class SpellCastingData {
         }
 
         if (!ServerContainer.get().BLACKLIST_SPELLS_IN_DIMENSIONS.isEmpty()) {
-            ResourceLocation id = ctx.caster.level.registryAccess()
-                .dimensionTypes()
-                .getKey(ctx.caster.level.dimensionType());
+            ResourceLocation id = ctx.caster.level().registryAccess().registry(Registries.DIMENSION_TYPE).get()
+                    .getKey(ctx.caster.level().dimensionType());
 
             if (ServerContainer.get().BLACKLIST_SPELLS_IN_DIMENSIONS.stream()
-                .anyMatch(x -> x.equals(id.toString()))) {
+                    .anyMatch(x -> x.equals(id.toString()))) {
                 return false;
             }
         }
@@ -269,9 +257,9 @@ public class SpellCastingData {
 
         if (data != null) {
 
-            if (!spell.isAllowedInDimension(caster.level)) {
+            if (!spell.isAllowedInDimension(caster.level())) {
                 if (caster instanceof Player) {
-                    ((Player) caster).displayClientMessage(new TextComponent("You feel an entity watching you. [Spell can not be casted in this dimension]"), false);
+                    ((Player) caster).displayClientMessage(Component.literal("You feel an entity watching you. [Spell can not be casted in this dimension]"), false);
                 }
                 return false;
             }
@@ -279,7 +267,7 @@ public class SpellCastingData {
             SpendResourceEvent rctx = spell.getManaCostCtx(ctx);
 
             if (data.getResources()
-                .hasEnough(rctx)) {
+                    .hasEnough(rctx)) {
 
                 if (!spell.getConfig().castingWeapon.predicate.predicate.test(caster)) {
                     return false;
@@ -293,7 +281,7 @@ public class SpellCastingData {
 
                 if (!wep.canPlayerWear(ctx.data)) {
                     if (ctx.caster instanceof Player) {
-                        OnScreenMessageUtils.sendMessage((ServerPlayer) ctx.caster, new TextComponent("Weapon requirements not met"), ClientboundSetTitlesPacket.Type.ACTIONBAR);
+                        // todo  OnScreenMessageUtils.sendMessage((ServerPlayer) ctx.caster, Component.literal("Weapon requirements not met"), ClientboundSetTitlesPacket.Type.ACTIONBAR);
                     }
                     return false;
                 }
@@ -315,7 +303,7 @@ public class SpellCastingData {
         int cd = ctx.spell.getCooldownTicks(ctx);
 
         ctx.data.getCooldowns()
-            .setOnCooldown(ctx.spell.GUID(), cd);
+                .setOnCooldown(ctx.spell.GUID(), cd);
 
         if (ctx.spell.config.charges > 0) {
             if (ctx.caster instanceof Player) {
@@ -328,7 +316,7 @@ public class SpellCastingData {
             if (p.isCreative()) {
                 if (cd > 20) {
                     ctx.data.getCooldowns()
-                        .setOnCooldown(ctx.spell.GUID(), 20);
+                            .setOnCooldown(ctx.spell.GUID(), 20);
 
                 }
             }
@@ -338,7 +326,7 @@ public class SpellCastingData {
 
         if (ctx.caster instanceof ServerPlayer) {
             Load.Unit(ctx.caster)
-                .syncToClient((Player) ctx.caster);
+                    .syncToClient((Player) ctx.caster);
         }
     }
 

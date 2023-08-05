@@ -9,15 +9,12 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
-import net.minecraft.world.item.Item;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import net.minecraft.world.item.Item.Properties;
 
 public abstract class BaseGemRuneItem extends Item {
     public BaseGemRuneItem(Properties settings) {
@@ -39,12 +36,12 @@ public abstract class BaseGemRuneItem extends Item {
         float multi = getStatValueMulti();
 
         this.getStatModsForSerialization(family)
-            .forEach(x -> {
-                OptScaleExactStat stat = new OptScaleExactStat(x.max * multi, x.GetStat(), x.getModType());
-                stat.scale_to_lvl = true;
-                list.add(stat);
+                .forEach(x -> {
+                    OptScaleExactStat stat = new OptScaleExactStat(x.max * multi, x.GetStat(), x.getModType());
+                    stat.scale_to_lvl = true;
+                    list.add(stat);
 
-            });
+                });
 
         return list;
     }
@@ -53,40 +50,40 @@ public abstract class BaseGemRuneItem extends Item {
         List<Component> tooltip = new ArrayList<>();
 
         if (ExileDB.Runes()
-            .isEmpty() || ExileDB.Gems()
-            .isEmpty() || getBaseRuneGem() == null) {
+                .isEmpty() || ExileDB.Gems()
+                .isEmpty() || getBaseRuneGem() == null) {
             return tooltip; // datapacks didnt register yet
         }
 
         BaseRuneGem gem = getBaseRuneGem();
 
         int efflvl = Load.Unit(ClientOnly.getPlayer())
-            .getLevel();
+                .getLevel();
 
         TooltipInfo info = new TooltipInfo();
 
-        tooltip.add(new TextComponent(""));
+        tooltip.add(Component.literal(""));
         List<OptScaleExactStat> wep = gem.getFor(SlotFamily.Weapon);
-        tooltip.add(new TextComponent("On Weapon:").withStyle(ChatFormatting.RED));
+        tooltip.add(Component.literal("On Weapon:").withStyle(ChatFormatting.RED));
         for (OptScaleExactStat x : wep) {
             tooltip.addAll(x.GetTooltipString(info));
         }
 
-        tooltip.add(new TextComponent(""));
+        tooltip.add(Component.literal(""));
         List<OptScaleExactStat> armor = gem.getFor(SlotFamily.Armor);
-        tooltip.add(new TextComponent("On Armor:").withStyle(ChatFormatting.BLUE));
+        tooltip.add(Component.literal("On Armor:").withStyle(ChatFormatting.BLUE));
         for (OptScaleExactStat x : armor) {
             tooltip.addAll(x.GetTooltipString(info));
         }
 
-        tooltip.add(new TextComponent(""));
+        tooltip.add(Component.literal(""));
         List<OptScaleExactStat> jewelry = gem.getFor(SlotFamily.Jewelry);
-        tooltip.add(new TextComponent("On Jewelry:").withStyle(ChatFormatting.LIGHT_PURPLE));
+        tooltip.add(Component.literal("On Jewelry:").withStyle(ChatFormatting.LIGHT_PURPLE));
         for (OptScaleExactStat x : jewelry) {
             tooltip.addAll(x.GetTooltipString(info));
         }
 
-        tooltip.add(new TextComponent(""));
+        tooltip.add(Component.literal(""));
         tooltip.add(TooltipUtils.tier(gem.tier));
 
         return tooltip;

@@ -1,19 +1,17 @@
 package com.robertx22.age_of_exile.capability.player.data;
 
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.UUID;
 
-@Storable
+
 public class TeamData {
-    @Store
+
     public String team_id = "";
-    @Store
+
     public String invitedToTeam = "";
-    @Store
+
     public boolean isLeader = false;
 
     public void joinTeamOf(Player other) {
@@ -39,7 +37,7 @@ public class TeamData {
 
     public void createTeam() {
         this.team_id = UUID.randomUUID()
-            .toString();
+                .toString();
         this.isLeader = true;
     }
 

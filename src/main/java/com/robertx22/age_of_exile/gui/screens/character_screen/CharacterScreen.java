@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.gui.screens.character_screen;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.stats.IUsableStat;
@@ -35,16 +35,15 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.NumberUtils;
-import com.robertx22.age_of_exile.uncommon.wrappers.SText;
 import com.robertx22.age_of_exile.vanilla_mc.packets.AllocateStatPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.GuiUtils;
 import com.robertx22.library_of_exile.utils.RenderUtils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
-import net.minecraft.ChatFormatting;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -303,7 +302,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
                         .locName()
                         .withStyle(ChatFormatting.GREEN));
 
-                tooltip.add(new SText(""));
+                tooltip.add(ExileText.ofText(""));
 
                 tooltip.addAll(((CoreStat) stat).getCoreStatTooltip(Load.Unit(mc.player), Load.Unit(mc.player)
                         .getUnit()

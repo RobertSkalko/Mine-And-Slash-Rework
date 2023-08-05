@@ -3,13 +3,13 @@ package com.robertx22.age_of_exile.database.data.stats.tooltips;
 import com.robertx22.age_of_exile.database.data.stats.name_regex.StatNameRegex;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class BaseLocalStatTooltip implements IStatTooltipType {
 
@@ -20,11 +20,11 @@ public class BaseLocalStatTooltip implements IStatTooltipType {
         List<Component> list = new ArrayList<Component>();
         if (true) {
             String icon = "\u25CF";
-            list.add(new TextComponent(icon + " ")
+            list.add(Component.literal(icon + " ")
                     .append(info.stat.locName())
                     .append(": ")
                     .withStyle(format != null ? format : ChatFormatting.WHITE)
-                    .append(new TextComponent((int) info.firstValue + "")
+                    .append(Component.literal((int) info.firstValue + "")
                             .withStyle(ChatFormatting.GRAY)));
 
             return list;
@@ -36,7 +36,7 @@ public class BaseLocalStatTooltip implements IStatTooltipType {
             icon = "";
         }
 
-        MutableComponent txt = new TextComponent(StatNameRegex.BASIC_LOCAL
+        MutableComponent txt = Component.literal(StatNameRegex.BASIC_LOCAL
                 .translate(format, ctx, info.type, info.firstValue, info.stat));
 
         if (ctx.statinfo.stat.is_long) {
@@ -47,7 +47,7 @@ public class BaseLocalStatTooltip implements IStatTooltipType {
             txt.append(" ")
                     .append(NormalStatTooltip.getPercentageView(ctx.statinfo.percent));
         }
-     
+
 
         list.add(txt);
 

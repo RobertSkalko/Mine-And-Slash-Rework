@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.gui.overlays.bar_overlays.types;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -8,11 +7,11 @@ import com.robertx22.age_of_exile.mmorpg.SyncedToClientValues;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayerGUIs;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiComponent;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 
-public class RPGGuiOverlay extends GuiComponent {
+public class RPGGuiOverlay {
 
     static ResourceLocation BASETEX = new ResourceLocation(SlashRef.MODID, "textures/gui/overlay/base.png");
     static ResourceLocation MANA_RESERVE = new ResourceLocation(SlashRef.MODID, "textures/gui/overlay/mana_reserve.png");
@@ -38,7 +37,7 @@ public class RPGGuiOverlay extends GuiComponent {
     }
 
 
-    public void onHudRender(PoseStack matrix, float v) {
+    public void onHudRender(GuiGraphics gui) {
 
         try {
 
@@ -71,7 +70,7 @@ public class RPGGuiOverlay extends GuiComponent {
 
                         if (c.type.shouldRender(data, mc.player)) {
                             MineAndSlashBars.renderMineAndSlashBar(c, c.type,
-                                    matrix,
+                                    gui,
                                     c.getPosition(),
                                     c.type.getText(data, mc.player),
                                     false);
@@ -79,7 +78,7 @@ public class RPGGuiOverlay extends GuiComponent {
 
                         if (c.type.shouldRender(data, mc.player)) {
                             MineAndSlashBars.renderMineAndSlashBar(c, c.type,
-                                    matrix,
+                                    gui,
                                     c.getPosition(),
                                     c.type.getText(data, mc.player),
                                     true);

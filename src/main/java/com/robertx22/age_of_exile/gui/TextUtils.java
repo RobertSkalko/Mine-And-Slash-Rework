@@ -1,22 +1,21 @@
 package com.robertx22.age_of_exile.gui;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.Minecraft;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 
 public class TextUtils {
 
-    public static void renderText(PoseStack matrix, double scale, String text, int x, int y, ChatFormatting color) {
+    public static void renderText(GuiGraphics gui, float scale, String text, int x, int y, ChatFormatting color) {
         Minecraft mc = Minecraft.getInstance();
 
         int width = mc.font.width(text);
         int textX = (int) (x - width / 2F);
         int textY = y;
 
-        double antiScale = 1.0D / scale;
+        float antiScale = 1.0F / scale;
 
-        RenderSystem.scaled(scale, scale, scale);
+        gui.pose().scale(scale, scale, scale);
         double textWidthMinus = (width * antiScale / 2) - width / 2F;// fixed the centering with this!!!
         double textHeightMinus = 9.0D * scale / 2.0D;
         float xp = (float) ((double) textX + textWidthMinus);
@@ -24,8 +23,11 @@ public class TextUtils {
         float xf = (float) ((double) xp * antiScale);
         float yf = (float) ((double) yp * antiScale);
 
-        mc.font.drawShadow(matrix, text, xf, yf, color.getColor());
-        RenderSystem.scaled(antiScale, antiScale, antiScale);
+
+        gui.drawString(mc.font, text, (int) xf, (int) yf, color.getColor());
+
+
+        gui.pose().scale(antiScale, antiScale, antiScale);
     }
 
 }

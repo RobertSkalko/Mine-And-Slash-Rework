@@ -9,34 +9,26 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.registry.serialization.IByteBuf;
 import com.robertx22.library_of_exile.registry.serialization.ISerializable;
-import info.loenwind.autosave.annotations.Factory;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
+import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Storable
+
 public class StatModifier implements ISerializable<StatModifier>, IByteBuf<StatModifier> {
 
-    @Store
     public float min = 0;
-    @Store
     public float max = 0;
 
-    @Store
     public String stat;
-    @Store
     public String type;
 
     public static StatModifier EMPTY = new StatModifier();
 
-    @Factory
     private StatModifier() {
 
     }
@@ -126,7 +118,7 @@ public class StatModifier implements ISerializable<StatModifier>, IByteBuf<StatM
             text = text + " More";
         }
 
-        return new TextComponent("(").withStyle(ChatFormatting.GREEN)
+        return ExileText.ofText("(").get().withStyle(ChatFormatting.GREEN)
                 .append(text)
                 .append(")");
 
@@ -173,9 +165,9 @@ public class StatModifier implements ISerializable<StatModifier>, IByteBuf<StatM
         List<Component> list = new ArrayList<>();
 
         if (GetStat().is_long) {
-            return TooltipUtils.cutIfTooLong(new TextComponent(
+            return TooltipUtils.cutIfTooLong(ExileText.ofText(
                     StatNameRegex.JUST_NAME.translate(ChatFormatting.GREEN, null, getModType(), min, GetStat())
-            ));
+            ).get());
         }
 
         Component txt = getRangeToShow(lvl).append(" ")

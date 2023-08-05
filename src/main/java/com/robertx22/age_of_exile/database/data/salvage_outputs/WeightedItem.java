@@ -11,13 +11,13 @@ public class WeightedItem implements IWeighted {
     int weight;
 
     public WeightedItem(Item item, int weight) {
-        this.item = Registry.ITEM.getKey(item)
+        this.item = VanillaUTIL.REGISTRY.items().getKey(item)
             .toString();
         this.weight = weight;
     }
 
     public Item getItem() {
-        return Registry.ITEM.get(new ResourceLocation(item));
+        return VanillaUTIL.REGISTRY.items().get(new ResourceLocation(item));
     }
 
     @Override

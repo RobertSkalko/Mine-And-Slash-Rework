@@ -42,7 +42,7 @@ public abstract class BaseBaublesItem extends Item implements IAutoLocName, IAut
 
     @Override
     public String locNameLangFileGUID() {
-        return getFormatedForLangFile(Registry.ITEM.getKey(this)
+        return getFormatedForLangFile(VanillaUTIL.REGISTRY.items().getKey(this)
             .toString());
     }
 

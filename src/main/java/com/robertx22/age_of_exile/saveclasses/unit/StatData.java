@@ -2,11 +2,8 @@ package com.robertx22.age_of_exile.saveclasses.unit;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
 import net.minecraft.util.Mth;
 
-@Storable
 public class StatData {
 
     private static StatData empty = new StatData();
@@ -30,12 +27,10 @@ public class StatData {
 
     public Stat GetStat() {
         return ExileDB.Stats()
-            .get(id);
+                .get(id);
     }
 
-    @Store// guid
     private String id = "";
-    @Store
     private float v1 = 0;
 
     public String toSerializationString() {

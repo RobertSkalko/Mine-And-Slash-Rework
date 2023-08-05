@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.vanilla_mc.items.crates.gem_crate;
 
-import com.robertx22.age_of_exile.database.base.CreativeTabs;
 import com.robertx22.age_of_exile.database.data.currency.base.CurrencyItem;
 import com.robertx22.age_of_exile.database.data.gems.Gem;
 import com.robertx22.age_of_exile.database.data.runes.Rune;
@@ -16,27 +15,25 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.gemrunes.GemItem;
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.utils.SoundUtils;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.core.NonNullList;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Arrays;
 import java.util.List;
-
-import net.minecraft.world.item.Item.Properties;
 
 public class LootCrateItem extends Item implements IGUID {
     public LootCrateItem() {
@@ -56,7 +53,7 @@ public class LootCrateItem extends Item implements IGUID {
         ItemStack stack = new ItemStack(SlashItems.LOOT_CRATE.get());
         StackSaving.GEM_CRATE.saveTo(stack, data);
         stack.getTag()
-            .putInt("CustomModelData", data.type.custommodeldata);
+                .putInt("CustomModelData", data.type.custommodeldata);
 
         return stack;
 
@@ -76,21 +73,21 @@ public class LootCrateItem extends Item implements IGUID {
 
                 if (data.type == LootType.Gem) {
                     Gem gem = ExileDB.Gems()
-                        .getFilterWrapped(x -> data.tier == x.tier)
-                        .random();
+                            .getFilterWrapped(x -> data.tier == x.tier)
+                            .random();
                     reward = new ItemStack(gem.getItem());
                 } else if (data.type == LootType.Rune) {
                     Rune rune = ExileDB.Runes()
-                        .getFilterWrapped(x -> data.tier >= x.tier)
-                        .random();
+                            .getFilterWrapped(x -> data.tier >= x.tier)
+                            .random();
                     reward = new ItemStack(rune.getItem());
                 } else if (data.type == LootType.Currency) {
                     CurrencyItem currency = ExileDB.CurrencyItems()
-                        .getFilterWrapped(x -> data.tier >= x.getTier())
-                        .random();
+                            .getFilterWrapped(x -> data.tier >= x.getTier())
+                            .random();
                     if (currency == null) {
                         currency = ExileDB.CurrencyItems()
-                            .random();
+                                .random();
                     }
                     reward = new ItemStack(currency);
                 }
@@ -122,7 +119,7 @@ public class LootCrateItem extends Item implements IGUID {
                     StackSaving.GEM_CRATE.saveTo(stack, data);
 
                     stack.getTag()
-                        .putInt("CustomModelData", type.custommodeldata);
+                            .putInt("CustomModelData", type.custommodeldata);
 
                     stacks.add(stack);
                 }
@@ -147,7 +144,7 @@ public class LootCrateItem extends Item implements IGUID {
 
         LootCrateData data = getData(stack);
 
-        MutableComponent comp = new TextComponent("");
+        MutableComponent comp = Component.literal("");
 
         if (data != null) {
 
@@ -156,22 +153,22 @@ public class LootCrateItem extends Item implements IGUID {
                 GemItem.GemRank rank = GemItem.GemRank.ofTier(data.tier);
                 gemrank = rank.locName; // todo make loc
                 comp.append(gemrank)
-                    .append(" ");
+                        .append(" ");
             }
 
             comp.append(data.type.word.locName())
-                .append(" ")
-                .append(Words.Loot.locName())
-                .append(" ")
-                .append(Words.Crate.locName())
-                .withStyle(TierColors.get(data.tier))
-                .withStyle(ChatFormatting.BOLD);
+                    .append(" ")
+                    .append(Words.Loot.locName())
+                    .append(" ")
+                    .append(Words.Crate.locName())
+                    .withStyle(TierColors.get(data.tier))
+                    .withStyle(ChatFormatting.BOLD);
 
             return comp;
 
         }
 
-        return new TextComponent("Box");
+        return Component.literal("Box");
 
     }
 

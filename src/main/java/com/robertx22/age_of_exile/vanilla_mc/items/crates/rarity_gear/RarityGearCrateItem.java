@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.vanilla_mc.items.crates.rarity_gear;
 
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.IAutoModel;
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.ItemModelManager;
-import com.robertx22.age_of_exile.database.base.CreativeTabs;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -13,20 +12,20 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.utils.SoundUtils;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FireworkRocketEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Component;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -34,13 +33,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.world.item.Item.Properties;
-
 public class RarityGearCrateItem extends Item implements IAutoModel {
 
     public RarityGearCrateItem() {
         super(new Properties().stacksTo(16)
-            .tab(CreativeTabs.MyModTab));
+                .tab(CreativeTabs.MyModTab));
 
     }
 
@@ -68,17 +65,17 @@ public class RarityGearCrateItem extends Item implements IAutoModel {
             RarityGearCrateData data = getData(stack);
 
             MutableComponent comp = data.getRarity()
-                .locName()
-                .append(" ")
-                .append(new TranslatableComponent(this.getDescriptionId()))
-                .withStyle(data.getRarity()
-                    .textFormatting(), ChatFormatting.BOLD);
+                    .locName()
+                    .append(" ")
+                    .append(Component.translatable(this.getDescriptionId()))
+                    .withStyle(data.getRarity()
+                            .textFormatting(), ChatFormatting.BOLD);
 
             return comp;
 
         } catch (Exception e) {
         }
-        return new TranslatableComponent(this.getDescriptionId()).withStyle(ChatFormatting.LIGHT_PURPLE);
+        return Component.translatable(this.getDescriptionId()).withStyle(ChatFormatting.LIGHT_PURPLE);
     }
 
     @Override
@@ -106,7 +103,7 @@ public class RarityGearCrateItem extends Item implements IAutoModel {
 
                 if (data.set_to_player_lvl) {
                     tier = LevelUtils.levelToTier(Load.Unit(player)
-                        .getLevel());
+                            .getLevel());
                 }
 
                 GearBlueprint blueprint = new GearBlueprint((LevelUtils.tierToLevel(tier)));
@@ -139,7 +136,7 @@ public class RarityGearCrateItem extends Item implements IAutoModel {
     public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
         try {
             tooltip.add(Words.ClickToOpen.locName()
-                .withStyle(ChatFormatting.RED));
+                    .withStyle(ChatFormatting.RED));
 
         } catch (Exception e) {
             // e.printStackTrace();

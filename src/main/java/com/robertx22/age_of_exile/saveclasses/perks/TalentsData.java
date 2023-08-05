@@ -13,20 +13,18 @@ import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.TalentStatCtx;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.*;
 
-@Storable
+
 public class TalentsData implements IApplyableStats {
 
-    @Store
+
     private HashMap<String, SchoolData> perks = new HashMap<>();
 
-    @Store
+
     public int reset_points = 5;
 
     public HashMap<String, SchoolData> getPerks(TalentTree.SchoolType type) {
@@ -37,7 +35,7 @@ public class TalentsData implements IApplyableStats {
         int points = 0;
         for (Map.Entry<String, SchoolData> x : getPerks(type).entrySet()) {
             points += x.getValue()
-                .getAllocatedPointsInSchool();
+                    .getAllocatedPointsInSchool();
         }
         return points;
     }
@@ -92,8 +90,8 @@ public class TalentsData implements IApplyableStats {
             Set<PointData> con = school.calcData.connections.get(point);
 
             if (con == null || !con.stream()
-                .anyMatch(x -> getSchool(school)
-                    .isAllocated(x))) {
+                    .anyMatch(x -> getSchool(school)
+                            .isAllocated(x))) {
                 return false;
             }
         }
@@ -161,7 +159,7 @@ public class TalentsData implements IApplyableStats {
 
     public void clearAllTalents() {
         getPerks(TalentTree.SchoolType.TALENTS)
-            .clear();
+                .clear();
 
     }
 
@@ -169,15 +167,15 @@ public class TalentsData implements IApplyableStats {
         HashMap<PointData, Perk> perks = new HashMap<>();
         for (TalentTree.SchoolType type : TalentTree.SchoolType.values()) {
             for (Map.Entry<String, SchoolData> x : getPerks(type)
-                .entrySet()) {
+                    .entrySet()) {
                 if (ExileDB.TalentTrees()
-                    .isRegistered(x.getKey())) {
+                        .isRegistered(x.getKey())) {
 
                     TalentTree school = ExileDB.TalentTrees()
-                        .get(x.getKey());
+                            .get(x.getKey());
                     if (school != null) {
                         for (PointData p : x.getValue()
-                            .getAllocatedPoints(school)) {
+                                .getAllocatedPoints(school)) {
                             perks.put(p, school.calcData.getPerk(p));
                         }
                     }
@@ -222,7 +220,7 @@ public class TalentsData implements IApplyableStats {
 
     public boolean isAllocated(TalentTree school, PointData point) {
         return getSchool(school)
-            .isAllocated(point);
+                .isAllocated(point);
     }
 
     @Override
@@ -232,7 +230,7 @@ public class TalentsData implements IApplyableStats {
         HashMap<PointData, Perk> map = getAllAllocatedPerks();
 
         int lvl = Load.Unit(en)
-            .getLevel();
+                .getLevel();
 
         map.forEach((key, value) -> {
             List<ExactStatData> stats = new ArrayList<>();

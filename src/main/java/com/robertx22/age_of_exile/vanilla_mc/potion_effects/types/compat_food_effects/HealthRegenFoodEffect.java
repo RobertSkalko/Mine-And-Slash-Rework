@@ -26,7 +26,7 @@ public class HealthRegenFoodEffect extends FoodEffectPotion {
     public List<Component> GetTooltipString(TooltipInfo info, int duration, int amplifier) {
         List<Component> list = new ArrayList<>();
         int val = (int) getTotalRestored(info.unitdata, amplifier);
-        list.add(new TextComponent("Restores " + val + " Health over " + duration / 20 + "s").withStyle(ChatFormatting.RED));
+        list.add(Component.literal("Restores " + val + " Health over " + duration / 20 + "s").withStyle(ChatFormatting.RED));
         return list;
     }
 }

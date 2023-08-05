@@ -3,18 +3,15 @@ package com.robertx22.age_of_exile.vanilla_mc.items.gearitems.bases;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
+import net.minecraft.core.Registry;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tiers;
-import net.minecraft.core.Registry;
-
-import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
-import net.minecraft.world.item.Item.Properties;
 
 public abstract class SingleTargetWeapon extends Item implements IAutoLocName {
 
@@ -47,8 +44,8 @@ public abstract class SingleTargetWeapon extends Item implements IAutoLocName {
 
     @Override
     public String locNameLangFileGUID() {
-        return Registry.ITEM.getKey(this)
-            .toString();
+        return VanillaUTIL.REGISTRY.items().getKey(this)
+                .toString();
     }
 
     @Override
@@ -61,15 +58,15 @@ public abstract class SingleTargetWeapon extends Item implements IAutoLocName {
         Multimap<Attribute, AttributeModifier> map = HashMultimap.create();
         if (slot == EquipmentSlot.MAINHAND) {
             map.put(
-                Attributes.ATTACK_DAMAGE,
-                new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", 6,
-                    AttributeModifier.Operation.ADDITION
-                )
+                    Attributes.ATTACK_DAMAGE,
+                    new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", 6,
+                            AttributeModifier.Operation.ADDITION
+                    )
             );
             map.put(
-                Attributes.ATTACK_SPEED,
-                new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier",
-                    (double) this.attackSpeed, AttributeModifier.Operation.ADDITION));
+                    Attributes.ATTACK_SPEED,
+                    new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier",
+                            (double) this.attackSpeed, AttributeModifier.Operation.ADDITION));
 
         }
 

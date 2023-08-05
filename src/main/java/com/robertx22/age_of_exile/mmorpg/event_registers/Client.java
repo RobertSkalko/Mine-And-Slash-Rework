@@ -8,7 +8,7 @@ import com.robertx22.age_of_exile.gui.overlays.spell_cast_bar.SpellCastBarOverla
 import com.robertx22.age_of_exile.gui.overlays.spell_hotbar.SpellHotbarOverlay;
 import com.robertx22.library_of_exile.main.ForgeEvents;
 import net.minecraft.client.Minecraft;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.event.TickEvent;
 
 public class Client {
@@ -29,15 +29,18 @@ public class Client {
         });
 
         // todo does this work?
-        ForgeEvents.registerForgeEvent(RenderGameOverlayEvent.class, event -> {
+        ForgeEvents.registerForgeEvent(RenderGuiOverlayEvent.class, event -> {
 
-            if (event.isCancelable() || event.getType() != RenderGameOverlayEvent.ElementType.ALL) {
+               /*
+            if (event.isCancelable() || event.getOverlay().overlay().getType() != RenderGameOverlayEvent.ElementType.ALL) {
                 return;
             }
 
-            spellHotbarOverlay.onHudRender(event.getMatrixStack(), event.getPartialTicks());
-            castbar.onHudRender(event.getMatrixStack(), event.getPartialTicks());
-            rpggui.onHudRender(event.getMatrixStack(), event.getPartialTicks());
+             */
+
+            spellHotbarOverlay.onHudRender(event.getGuiGraphics());
+            castbar.onHudRender(event.getGuiGraphics());
+            rpggui.onHudRender(event.getGuiGraphics());
 
         });
     }

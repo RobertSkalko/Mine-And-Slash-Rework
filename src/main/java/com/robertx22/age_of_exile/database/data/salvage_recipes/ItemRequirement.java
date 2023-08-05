@@ -26,7 +26,7 @@ public class ItemRequirement {
     public boolean matches(ItemStack stack) {
 
         if (req_type.equals("item")) {
-            return stack.getItem() == Registry.ITEM.get(new ResourceLocation(req_str));
+            return stack.getItem() == VanillaUTIL.REGISTRY.items().get(new ResourceLocation(req_str));
         }
         if (req_type.equals("tag")) {
             return stack.getItem()

@@ -1,26 +1,25 @@
 package com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots;
 
-import com.robertx22.age_of_exile.database.base.CreativeTabs;
 import com.robertx22.age_of_exile.database.data.currency.base.IShapedRecipe;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.level.Level;
 
 public class ResetStatsPotion extends AutoItem implements IShapedRecipe {
 
     public ResetStatsPotion() {
         super(new Item.Properties().tab(CreativeTabs.MyModTab)
-            .stacksTo(10));
+                .stacksTo(10));
     }
 
     @Override
@@ -62,14 +61,14 @@ public class ResetStatsPotion extends AutoItem implements IShapedRecipe {
     @Override
     public ShapedRecipeBuilder getRecipe() {
         return shaped(this)
-            .define('t', SlashItems.T1_DUST())
-            .define('v', Items.GOLD_INGOT)
-            .define('b', Items.GLASS_BOTTLE)
-            .define('c', Items.DIAMOND)
-            .pattern("cvc")
-            .pattern("vtv")
-            .pattern("cbc")
-            .unlockedBy("player_level", trigger());
+                .define('t', SlashItems.T1_DUST())
+                .define('v', Items.GOLD_INGOT)
+                .define('b', Items.GLASS_BOTTLE)
+                .define('c', Items.DIAMOND)
+                .pattern("cvc")
+                .pattern("vtv")
+                .pattern("cbc")
+                .unlockedBy("player_level", trigger());
     }
 
     @Override

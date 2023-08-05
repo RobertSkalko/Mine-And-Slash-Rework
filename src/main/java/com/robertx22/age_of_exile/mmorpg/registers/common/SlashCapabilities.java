@@ -1,48 +1,26 @@
 package com.robertx22.age_of_exile.mmorpg.registers.common;
 
-import com.robertx22.age_of_exile.capability.ChunkPopulatedCap;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.capability.player.EntitySpellCap;
 import com.robertx22.age_of_exile.capability.player.RPGPlayerData;
 import com.robertx22.library_of_exile.components.PlayerCapabilities;
-import net.minecraftforge.common.capabilities.CapabilityManager;
+import com.robertx22.library_of_exile.main.ForgeEvents;
+import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 
 public class SlashCapabilities {
 
     public static void register() {
 
-        CapabilityManager.INSTANCE.register(
-                EntitySpellCap.ISpellsCap.class,
-                new EntitySpellCap.Storage(),
-                () -> {
-                    return new EntitySpellCap.SpellCap(null);
-                });
+        ForgeEvents.registerForgeEvent(RegisterCapabilitiesEvent.class, x -> {
+            x.register(EntityData.class);
+            x.register(RPGPlayerData.class);
+            x.register(EntitySpellCap.SpellCap.class);
+            // todo
+        });
 
-        CapabilityManager.INSTANCE.register(
-                RPGPlayerData.class,
-                new RPGPlayerData.Storage(),
-                () -> {
-                    return new RPGPlayerData(null);
-                });
-
-        CapabilityManager.INSTANCE.register(
-                ChunkPopulatedCap.class,
-                new ChunkPopulatedCap.Storage(),
-                () -> {
-                    return new ChunkPopulatedCap();
-                });
-
-   
-        CapabilityManager.INSTANCE.register(
-                EntityData.class,
-                new EntityData.Storage(),
-                () -> {
-                    return new EntityData(null);
-                });
-
-        PlayerCapabilities.register(EntityData.Data, new EntityData(null)); // todo will forge's async screw with this?
-        PlayerCapabilities.register(EntitySpellCap.Data, new EntitySpellCap.SpellCap(null)); // todo will forge's async screw with this?
-        PlayerCapabilities.register(RPGPlayerData.Data, new RPGPlayerData(null)); // todo will forge's async screw with this?
+        PlayerCapabilities.register(EntityData.INSTANCE, new EntityData(null)); // todo will forge's async screw with this?
+        PlayerCapabilities.register(EntitySpellCap.INSTANCE, new EntitySpellCap.SpellCap(null)); // todo will forge's async screw with this?
+        PlayerCapabilities.register(RPGPlayerData.INSTANCE, new RPGPlayerData(null)); // todo will forge's async screw with this?
 
     }
 }

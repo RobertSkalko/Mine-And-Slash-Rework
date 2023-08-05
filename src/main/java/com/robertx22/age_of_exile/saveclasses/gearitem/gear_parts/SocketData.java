@@ -9,23 +9,18 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPartToolt
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatsContainer;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import info.loenwind.autosave.annotations.Factory;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
 import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPart.Part;
 
-@Storable
 public class SocketData implements IGearPartTooltip, IStatsContainer {
 
-    @Store
+
     public String gem = "";
 
-    @Factory
+
     public SocketData() {
     }
 
@@ -72,9 +67,9 @@ public class SocketData implements IGearPartTooltip, IStatsContainer {
 
     public Gem getGem() {
         if (ExileDB.Gems()
-            .isRegistered(gem)) {
+                .isRegistered(gem)) {
             return ExileDB.Gems()
-                .get(gem);
+                    .get(gem);
 
         }
         return null;
@@ -83,16 +78,16 @@ public class SocketData implements IGearPartTooltip, IStatsContainer {
     @Override
     public List<ExactStatData> GetAllStats(GearItemData gear) {
         SlotFamily fam = gear.GetBaseGearType()
-            .family();
+                .family();
 
         List<ExactStatData> stats = new ArrayList<>();
         try {
             if (isGem()) {
                 getGem()
-                    .getFor(fam)
-                    .forEach(x -> {
-                        stats.add(x.toExactStat((int) gear.getILVL()));
-                    });
+                        .getFor(fam)
+                        .forEach(x -> {
+                            stats.add(x.toExactStat((int) gear.getILVL()));
+                        });
             }
 
         } catch (Exception e) {

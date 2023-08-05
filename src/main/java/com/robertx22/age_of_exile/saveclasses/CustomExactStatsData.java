@@ -6,8 +6,6 @@ import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
 import net.minecraft.world.entity.LivingEntity;
 
 import java.util.ArrayList;
@@ -15,17 +13,14 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-@Storable
 public class CustomExactStatsData implements IApplyableStats {
 
     public CustomExactStatsData() {
 
     }
 
-    @Store
     public HashMap<String, ExactStatData> stats = new HashMap<>();
 
-    @Store
     public HashMap<String, StatModifier> mods = new HashMap<>();
 
     public void addExactStat(String hashmapGUID, String statGUID, float v1, ModType type) {
@@ -58,8 +53,8 @@ public class CustomExactStatsData implements IApplyableStats {
 
         stats.addAll(this.stats.values());
         this.mods.values()
-            .forEach(x -> stats.add(x.ToExactStat(100, Load.Unit(en)
-                .getLevel())));
+                .forEach(x -> stats.add(x.ToExactStat(100, Load.Unit(en)
+                        .getLevel())));
         return Arrays.asList(new MiscStatCtx(stats));
     }
 

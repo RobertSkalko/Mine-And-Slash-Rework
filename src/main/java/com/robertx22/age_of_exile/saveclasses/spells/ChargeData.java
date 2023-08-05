@@ -3,21 +3,16 @@ package com.robertx22.age_of_exile.saveclasses.spells;
 import com.robertx22.age_of_exile.capability.player.EntitySpellCap;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-@Storable
 public class ChargeData {
-    @Store
     private HashMap<String, Integer> charges = new HashMap<>();
 
-    @Store
     private HashMap<String, Integer> charge_regen = new HashMap<>();
 
     public int getCurrentTicksChargingOf(String id) {
@@ -30,14 +25,14 @@ public class ChargeData {
 
     public void spendCharge(Player player, String id) {
 
-        if (player.level.isClientSide) {
+        if (player.level().isClientSide) {
             return;
         }
 
         charges.put(id, Mth.clamp(charges.getOrDefault(id, 0) - 1, 0, 100000));
 
         Load.spells(player)
-            .syncToClient(player);
+                .syncToClient(player);
 
     }
 
@@ -52,7 +47,7 @@ public class ChargeData {
 
     public void onTicks(Player player, int ticks) {
 
-        if (player.level.isClientSide) {
+        if (player.level().isClientSide) {
             return;
         }
 
@@ -94,7 +89,7 @@ public class ChargeData {
 
         if (sync) {
             Load.spells(player)
-                .syncToClient(player);
+                    .syncToClient(player);
         }
     }
 }

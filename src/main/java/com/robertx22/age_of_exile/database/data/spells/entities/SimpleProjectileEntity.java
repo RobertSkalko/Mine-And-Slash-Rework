@@ -11,39 +11,37 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.Utilities;
 import com.robertx22.library_of_exile.utils.SoundUtils;
-import net.minecraft.world.level.block.state.BlockState;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.boss.EnderDragonPart;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.core.Registry;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.network.NetworkHooks;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import net.minecraft.world.entity.projectile.AbstractArrow.Pickup;
 
 public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAsItem, IDatapackSpellEntity {
 
@@ -89,7 +87,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
     }
 
     @Override
-    public Packet<?> getAddEntityPacket() {
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
@@ -172,7 +170,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
     }
 
     @Override
-    public void remove() {
+    public void remove(RemovalReason r) {
 
         LivingEntity caster = getCaster();
 
@@ -183,7 +181,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
                     .tryActivate(getScoreboardName(), SpellCtx.onExpire(caster, this, getSpellData()));
         }
 
-        super.remove();
+        super.remove(r);
     }
 
     @Override
@@ -195,7 +193,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
     public final void tick() {
 
         if (this.removeNextTick) {
-            this.remove();
+            this.remove(RemovalReason.KILLED);
             return;
         }
 
@@ -236,7 +234,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
     protected EntityHitResult findHitEntity(Vec3 pos, Vec3 posPlusMotion) {
 
         EntityHitResult res = ProjectileUtil.getEntityHitResult(
-                this.level, this, pos, posPlusMotion, this.getBoundingBox()
+                this.level(), this, pos, posPlusMotion, this.getBoundingBox()
                         .expandTowards(this.getDeltaMovement())
                         .inflate(1D), (e) -> {
                     return !e.isSpectator() && e.isPickable() && e instanceof Entity && e != this.getCaster() && e != this.ignoreEntity;
@@ -268,7 +266,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
             collidedAlready = true;
 
             BlockHitResult blockraytraceresult = (BlockHitResult) raytraceResultIn;
-            BlockState blockstate = this.level.getBlockState(blockraytraceresult.getBlockPos());
+            BlockState blockstate = this.level().getBlockState(blockraytraceresult.getBlockPos());
 
             Vec3 vec3d = blockraytraceresult.getLocation()
                     .subtract(this.getX(), this.getY(), this.getZ());
@@ -278,7 +276,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
 
             this.onImpact(blockraytraceresult);
 
-            blockstate.onProjectileHit(this.level, blockstate, blockraytraceresult, this);
+            blockstate.onProjectileHit(this.level(), blockstate, blockraytraceresult, this);
         }
 
     }
@@ -288,7 +286,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
         Entity entityHit = getEntityHit(result, 0.3D);
 
         if (entityHit != null) {
-            if (level.isClientSide) {
+            if (level().isClientSide) {
                 SoundUtils.playSound(this, SoundEvents.GENERIC_HURT, 1F, 0.9F);
             }
 
@@ -300,7 +298,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
                 // HARDCODED support for dumb ender dragon non living entity dragon parts
                 if (entityHit instanceof EnderDragonPart) {
                     EnderDragonPart part = (EnderDragonPart) entityHit;
-                    if (!part.isInvulnerableTo(DamageSource.mobAttack(caster))) {
+                    if (!part.isInvulnerableTo(this.damageSources().mobAttack(caster))) {
                         en = part.parentMob;
                     }
                 }
@@ -324,7 +322,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
 
         } else {
 
-            if (level.isClientSide) {
+            if (level().isClientSide) {
                 SoundUtils.playSound(this, SoundEvents.STONE_HIT, 0.7F, 0.9F);
             } else {
 /*
@@ -335,7 +333,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
                             .tryActivate(getScoreboardName(), SpellCtx.onHit(caster, this, en, getSpellData()));
                 }
                 */
- 
+
             }
         }
 
@@ -409,7 +407,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
     public LivingEntity getCaster() {
         if (caster == null) {
             try {
-                this.caster = Utilities.getLivingEntityByUUID(level, UUID.fromString(getSpellData().caster_uuid));
+                this.caster = Utilities.getLivingEntityByUUID(level(), UUID.fromString(getSpellData().caster_uuid));
             } catch (Exception e) {
                 // e.printStackTrace();
             }
@@ -442,7 +440,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
 
     public EntitySavedSpellData getSpellData() {
         try {
-            if (level.isClientSide) {
+            if (level().isClientSide) {
                 if (spellData == null) {
                     CompoundTag nbt = entityData.get(SPELL_DATA);
                     if (nbt != null) {
@@ -459,7 +457,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
     @Override
     public ItemStack getItem() {
         try {
-            Item item = Registry.ITEM.get(new ResourceLocation(getSpellData().item_id));
+            Item item = VanillaUTIL.REGISTRY.items().get(new ResourceLocation(getSpellData().item_id));
             if (item != null) {
                 return new ItemStack(item);
             }

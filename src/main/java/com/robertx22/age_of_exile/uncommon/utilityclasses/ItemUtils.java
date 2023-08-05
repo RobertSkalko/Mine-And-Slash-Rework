@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
-import com.robertx22.age_of_exile.database.base.CreativeTabs;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
@@ -39,7 +38,7 @@ public class ItemUtils {
 
                 if (rar.announce_in_chat) {
 
-                    MutableComponent name = new TextComponent("").append(player.getName())
+                    MutableComponent name = Component.literal("").append(player.getName())
                         .withStyle(ChatFormatting.BOLD)
                         .withStyle(ChatFormatting.LIGHT_PURPLE);
 

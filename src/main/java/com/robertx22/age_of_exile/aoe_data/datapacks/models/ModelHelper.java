@@ -2,8 +2,8 @@ package com.robertx22.age_of_exile.aoe_data.datapacks.models;
 
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.DirUtils;
-import net.minecraft.world.item.Item;
 import net.minecraft.core.Registry;
+import net.minecraft.world.item.Item;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -50,17 +50,17 @@ public class ModelHelper {
 
         Path path = DirUtils.generatedResourcesDir();
 
-        String reg = "assets/" + SlashRef.MODID + "/models/item/" + Registry.ITEM.getKey(item)
-            .getPath()
-            + ".json";
+        String reg = "assets/" + SlashRef.MODID + "/models/item/" + VanillaUTIL.REGISTRY.items().getKey(item)
+                .getPath()
+                + ".json";
 
         path = path.resolve(reg);
 
         int index = path.toString()
-            .lastIndexOf("\\");
+                .lastIndexOf("\\");
 
         String withoutname = path.toString()
-            .substring(0, index + 1);
+                .substring(0, index + 1);
 
         try {
             new File(withoutname).mkdirs();
@@ -78,15 +78,15 @@ public class ModelHelper {
 
     private String getTextureString() {
 
-        String id = Registry.ITEM.getKey(item)
-            .toString();
+        String id = VanillaUTIL.REGISTRY.items().getKey(item)
+                .toString();
 
         if (!modelPath.isEmpty()) {
             id = SlashRef.MODID + ":" + modelPath;
         }
 
         String tex = id
-            .replace(SlashRef.MODID + ":", SlashRef.MODID + ":items/");
+                .replace(SlashRef.MODID + ":", SlashRef.MODID + ":items/");
 
         return tex;
     }

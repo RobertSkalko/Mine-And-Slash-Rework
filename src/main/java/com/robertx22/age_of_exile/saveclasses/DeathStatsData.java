@@ -3,24 +3,22 @@ package com.robertx22.age_of_exile.saveclasses;
 import com.robertx22.age_of_exile.capability.player.RPGPlayerData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.HashMap;
 
-@Storable
+
 public class DeathStatsData {
-    @Store
+
     public BlockPos deathPos;
-    @Store
+
     public String deathDim;
 
-    @Store
+
     public HashMap<Elements, Float> dmg = new HashMap<Elements, Float>();
 
-    @Store
+
     public boolean died = false;
 
     public static void record(Player player, Elements ele, float amount) {

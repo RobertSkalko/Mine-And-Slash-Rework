@@ -1,17 +1,16 @@
 package com.robertx22.age_of_exile.vanilla_mc.items.misc;
 
-import com.robertx22.age_of_exile.database.base.CreativeTabs;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -31,7 +30,7 @@ public class FunnyDeathPotion extends AutoItem {
 
     public FunnyDeathPotion() {
         super(new Item.Properties().tab(CreativeTabs.MyModTab)
-            .stacksTo(64));
+                .stacksTo(64));
     }
 
     public static final DamageSource DMG_SOURCE = (new MySource("death_potion"));
@@ -61,7 +60,7 @@ public class FunnyDeathPotion extends AutoItem {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {
-        tooltip.add(new TextComponent("Are you sure it's a good idea to drink this?"));
+        tooltip.add(Component.literal("Are you sure it's a good idea to drink this?"));
     }
 
     @Override

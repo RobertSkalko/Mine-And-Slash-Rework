@@ -8,21 +8,16 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
-import com.robertx22.age_of_exile.uncommon.wrappers.SText;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
 import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPart.Part;
 
-@Storable
 public class ImplicitStatsData implements IGearPartTooltip, IRerollable, IStatsContainer {
 
-    @Store
+
     public Integer perc = 0;
 
     @Override
@@ -45,10 +40,10 @@ public class ImplicitStatsData implements IGearPartTooltip, IRerollable, IStatsC
         List<ExactStatData> stats = GetAllStats(gear);
 
         if (!stats.isEmpty()) {
-            list.add(new SText(""));
+            list.add(ExileText.ofText(""));
 
             getAllStatsWithCtx(gear, info)
-                .forEach(x -> list.addAll(x.GetTooltipString(info)));
+                    .forEach(x -> list.addAll(x.GetTooltipString(info)));
         }
         return list;
     }
@@ -61,20 +56,20 @@ public class ImplicitStatsData implements IGearPartTooltip, IRerollable, IStatsC
     public List<TooltipStatWithContext> getAllStatsWithCtx(GearItemData gear, TooltipInfo info) {
         List<TooltipStatWithContext> list = new ArrayList<>();
         gear.GetBaseGearType()
-            .implicitStats()
-            .forEach(x -> {
-                ExactStatData exact = x.ToExactStat(perc, gear.getILVL());
-                list.add(new TooltipStatWithContext(new TooltipStatInfo(exact, perc, info), x, (int) gear.getILVL()));
-            });
+                .implicitStats()
+                .forEach(x -> {
+                    ExactStatData exact = x.ToExactStat(perc, gear.getILVL());
+                    list.add(new TooltipStatWithContext(new TooltipStatInfo(exact, perc, info), x, (int) gear.getILVL()));
+                });
         return list;
     }
 
     @Override
     public List<ExactStatData> GetAllStats(GearItemData gear) {
         return gear.GetBaseGearType()
-            .implicitStats()
-            .stream()
-            .map(x -> x.ToExactStat(perc, gear.lvl))
-            .collect(Collectors.toList());
+                .implicitStats()
+                .stream()
+                .map(x -> x.ToExactStat(perc, gear.lvl))
+                .collect(Collectors.toList());
     }
 }

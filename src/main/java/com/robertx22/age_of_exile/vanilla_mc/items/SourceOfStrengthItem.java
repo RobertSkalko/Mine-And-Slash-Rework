@@ -1,9 +1,6 @@
 package com.robertx22.age_of_exile.vanilla_mc.items;
 
-import com.robertx22.age_of_exile.database.base.CreativeTabs;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
-
-import net.minecraft.world.item.Item.Properties;
 
 public class SourceOfStrengthItem extends AutoItem {
     public SourceOfStrengthItem() {

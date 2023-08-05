@@ -13,43 +13,32 @@ import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
 import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.VanillaMaterial;
 import joptsimple.internal.Strings;
-import net.minecraft.advancements.criterion.*;
-import net.minecraft.data.*;
+import net.minecraft.advancements.critereon.*;
+import net.minecraft.data.CachedOutput;
+import net.minecraft.data.DataProvider;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.function.Consumer;
 
-import net.minecraft.advancements.critereon.EnchantedItemTrigger;
-import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.InventoryChangeTrigger;
-import net.minecraft.advancements.critereon.ItemPredicate;
-import net.minecraft.advancements.critereon.MinMaxBounds;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
-
 public class RecipeGenerator {
 
     public static final Gson GSON = (new GsonBuilder()).setPrettyPrinting()
             .create();
-    protected HashCache cache;
 
     public RecipeGenerator() {
 
-        try {
-            cache = new HashCache(FMLPaths.GAMEDIR.get()
-                    , "datagencache");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
     protected Path getBasePath() {
@@ -69,11 +58,8 @@ public class RecipeGenerator {
                         + ".json");
     }
 
-    public void run() {
-        generateAll(cache);
-    }
 
-    protected void generateAll(HashCache cache) {
+    protected void generateAll(CachedOutput cache) {
 
         Path path = getBasePath();
 
@@ -82,13 +68,10 @@ public class RecipeGenerator {
             Path target = movePath(resolve(path, x.getId()
                     .getPath()));
 
-            try {
-                DataProvider.save(GSON, cache, x.serializeRecipe(), target);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            DataProvider.saveStable(cache, x.serializeRecipe(), target);
 
         });
+
 
     }
 
@@ -116,11 +99,11 @@ public class RecipeGenerator {
 
         }
 
-    
+
         ProfessionItems.SALVAGED_ESSENCE_MAP.values()
                 .forEach(x -> {
                     if (x.get().tier.lowerTier() != null) {
-                        ShapelessRecipeBuilder fac = ShapelessRecipeBuilder.shapeless(x.get(), 1);
+                        ShapelessRecipeBuilder fac = ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, x.get(), 1);
                         fac.requires(ProfessionItems.SALVAGED_ESSENCE_MAP.get(x.get().tier.lowerTier())
                                 .get(), 4);
                         fac.unlockedBy("player_level", EnchantedItemTrigger.TriggerInstance.enchantedItem())
@@ -139,7 +122,7 @@ public class RecipeGenerator {
         map.entrySet()
                 .forEach(x -> {
 
-                    ShapedRecipeBuilder fac = ShapedRecipeBuilder.shaped(x.getValue()
+                    ShapedRecipeBuilder fac = ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, x.getValue()
                             .get(), 1);
 
                     String[] pattern = getRecipePattern(ExileDB.GearSlots()
@@ -280,7 +263,7 @@ public class RecipeGenerator {
     }
 
     private static InventoryChangeTrigger.TriggerInstance conditionsFromItemPredicates(ItemPredicate... itemPredicates) {
-        return new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, itemPredicates);
+        return new InventoryChangeTrigger.TriggerInstance(ContextAwarePredicate.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, itemPredicates);
     }
 
 }

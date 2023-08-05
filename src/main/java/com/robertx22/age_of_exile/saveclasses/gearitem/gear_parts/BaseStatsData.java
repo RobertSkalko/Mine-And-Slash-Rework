@@ -7,21 +7,16 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.*;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.utils.RandomUtils;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPart.Part;
 
-@Storable
 public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartTooltip {
 
-    @Store
+
     public Integer perc = 0;
 
     @Override
@@ -51,7 +46,7 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
         info.statTooltipType = StatTooltipType.BASE_LOCAL_STATS;
 
         List<Component> list = new ArrayList<>();
-        list.add(new TextComponent(" "));
+        list.add(Component.literal(" "));
 
         for (ExactStatData stat : all) {
             list.addAll(stat.GetTooltipString(info));

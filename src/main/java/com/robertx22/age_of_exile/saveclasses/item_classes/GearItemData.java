@@ -19,13 +19,11 @@ import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
+import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -34,9 +32,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable.SalvageContext;
-
-@Storable
 public class GearItemData implements ICommonDataItem<GearRarity> {
 
     public static NbtKey.Stringkey RARITY = new NbtKey.Stringkey(IRarity.COMMON_ID, "rar");
@@ -45,15 +40,10 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     public ItemStack stack = ItemStack.EMPTY;
 
     // Stats
-    @Store
     public BaseStatsData baseStats = new BaseStatsData();
-    @Store
     public ImplicitStatsData imp = new ImplicitStatsData(); // implicit stats
-    @Store
     public GearAffixesData affixes = new GearAffixesData();
-    @Store
     public GearSocketsData sockets = new GearSocketsData();
-    @Store
     public UniqueStatsData uniqueStats;
 
 
@@ -61,35 +51,25 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
     // i added rename ideas to comments. As tiny as possible while still allowing people to understand kinda what it is
     // apparently people had big issues with many storage mods, So i should try minimize the nbt.
-    @Store
     public String uniq_id = ""; // uniq_id
 
-    @Store
     public String rarity = IRarity.COMMON_ID; // rar
 
-    @Store
     public String item_id = ""; // item registry name
 
-    @Store
     public int rp = -1; // pre_name rare prefix
-    @Store
     public int rs = -1; // suf_name rare suffix
 
-    @Store
     public int lvl = 1; // lvl
 
-    @Store
     public String gear_type = "";
 
     // potential
-    @Store
     private int pot = 0;
 
     // salvagable
-    @Store
     public boolean sal = true;
 
-    @Store
     public boolean c = false; // corrupted
 
 
@@ -228,7 +208,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         ChatFormatting format = this.getRarity()
                 .textFormatting();
 
-        MutableComponent text = new TextComponent("");
+        MutableComponent text = ExileText.emptyLine().get();
 
         if (affixes.hasPrefix()) {
 
@@ -269,12 +249,12 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
         UniqueGear uniq = this.uniqueStats.getUnique(this);
 
-        MutableComponent txt = new TextComponent("").append(uniq.locName()
+        MutableComponent txt = ExileText.emptyLine().get().append(uniq.locName()
                 .withStyle(format));
 
         if (!uniq.replaces_name) {
-            txt.append(new TextComponent(format + " ").append(GetBaseGearType().locName()
-                    .withStyle(format)));
+            txt.append(ExileText.ofText(format + " ").append(GetBaseGearType().locName())
+                    .format(format).get());
         }
 
         list.addAll(TooltipUtils.cutIfTooLong(txt, format));
@@ -292,15 +272,15 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
         if (prefix != null && suffix != null) {
 
-            MutableComponent txt = new TextComponent("");
+            MutableComponent txt = ExileText.emptyLine().get();
 
-            txt.append(new TextComponent("").append(prefix.locName())
+            txt.append(ExileText.emptyLine().get().append(prefix.locName())
                     .append(" "));
 
-            txt.append(new TextComponent("").append(suffix.locName())
+            txt.append(ExileText.emptyLine().get().append(suffix.locName())
                     .withStyle(format));
 
-            txt.append(new TextComponent(" ").append(GetBaseGearType().locName()));
+            txt.append((ExileText.emptyLine().get().append(GetBaseGearType().locName())));
 
             txt.withStyle(format);
 

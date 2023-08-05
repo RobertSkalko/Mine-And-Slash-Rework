@@ -6,23 +6,25 @@ import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.mixin_ducks.FallingBlockAccessor;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
-import net.minecraft.world.level.block.state.BlockState;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.phys.Vec3;
-import net.minecraft.core.Registry;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.network.NetworkHooks;
 
 import java.util.ArrayList;
 
@@ -32,7 +34,7 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
         super(SlashEntities.SIMPLE_BLOCK_ENTITY.get(), world);
     }
 
-    
+
     public StationaryFallingBlockEntity(Level world, BlockPos pos, BlockState block) {
         this(SlashEntities.SIMPLE_BLOCK_ENTITY.get(), world);
         FallingBlockAccessor acc = (FallingBlockAccessor) this;
@@ -51,7 +53,7 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
     public BlockState getBlockState() {
 
         try {
-            return Registry.BLOCK.get(new ResourceLocation(this.entityData.get(BLOCK)))
+            return VanillaUTIL.REGISTRY.blocks().get(new ResourceLocation(this.entityData.get(BLOCK)))
                     .defaultBlockState();
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,7 +83,7 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
     }
 
     @Override
-    public Packet<?> getAddEntityPacket() {
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
@@ -89,7 +91,7 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
     public void tick() {
 
         if (this.removeNextTick) {
-            this.remove();
+            this.remove(RemovalReason.KILLED);
             return;
         }
 
@@ -106,8 +108,8 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
             }
             this.move(MoverType.SELF, this.getDeltaMovement());
 
-            if (this.onGround) {
-                remove();
+            if (this.onGround()) {
+                remove(RemovalReason.KILLED);
             }
 
         }
@@ -116,23 +118,25 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
             this.getSpellData()
                     .getSpell()
                     .getAttached()
-                    .tryActivate(getScoreboardName(), SpellCtx.onTick(getSpellData().getCaster(level), this, getSpellData()));
+                    .tryActivate(getScoreboardName(), SpellCtx.onTick(getSpellData().getCaster(level()), this, getSpellData()));
         } catch (Exception e) {
             e.printStackTrace();
-            this.remove();
+            this.remove(RemovalReason.KILLED);
         }
 
         if (tickCount > lifespan) {
-            remove();
+            remove(RemovalReason.KILLED);
         }
     }
 
+    // todo does this work?
+
     @Override
-    public void remove() {
+    public void remove(Entity.RemovalReason pReason) {
 
         try {
             if (getSpellData() != null) {
-                LivingEntity caster = getSpellData().getCaster(level);
+                LivingEntity caster = getSpellData().getCaster(level());
 
                 if (caster != null) {
                     this.getSpellData()
@@ -145,13 +149,13 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
             e.printStackTrace();
         }
 
-        super.remove();
+        super.remove(pReason);
     }
 
     static Gson GSON = new Gson();
 
     public EntitySavedSpellData getSpellData() {
-        if (level.isClientSide) {
+        if (level().isClientSide) {
             if (spellData == null) {
                 CompoundTag nbt = entityData.get(SPELL_DATA);
                 if (nbt != null) {

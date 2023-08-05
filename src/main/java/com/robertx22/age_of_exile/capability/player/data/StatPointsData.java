@@ -6,17 +6,15 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Storable
+
 public class StatPointsData {
 
-    @Store
+
     public HashMap<String, Integer> map = new HashMap<>();
 
     public void reset() {

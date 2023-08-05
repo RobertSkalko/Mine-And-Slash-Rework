@@ -6,13 +6,13 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttributes;
 import com.robertx22.library_of_exile.registry.IAutoGson;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 
 public class StatRequirement implements IAutoGson<StatRequirement> {
 
@@ -130,12 +130,12 @@ public class StatRequirement implements IAutoGson<StatRequirement> {
         if (data.getUnit()
                 .getCalculatedStat(stat)
                 .getValue() >= req) {
-            return new TextComponent(ChatFormatting.GREEN + "" + ChatFormatting.BOLD + CHECK_YES_ICON + " ").append(stat.locName()
+            return Component.literal(ChatFormatting.GREEN + "" + ChatFormatting.BOLD + CHECK_YES_ICON + " ").append(stat.locName()
                             .withStyle(ChatFormatting.GRAY))
                     .append(" " + ChatFormatting.GRAY + "Min: " + req + " ");
         } else {
 
-            return new TextComponent(ChatFormatting.RED + "" + ChatFormatting.BOLD + NO_ICON + " ").append(stat.locName()
+            return Component.literal(ChatFormatting.RED + "" + ChatFormatting.BOLD + NO_ICON + " ").append(stat.locName()
                             .withStyle(ChatFormatting.GRAY))
                     .append(" " + ChatFormatting.GRAY + "Min: " + req + " ");
 

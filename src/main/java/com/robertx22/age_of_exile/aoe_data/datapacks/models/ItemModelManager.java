@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.aoe_data.datapacks.models;
 
-import net.minecraft.world.item.Item;
 import net.minecraft.core.Registry;
+import net.minecraft.world.item.Item;
 
 public class ItemModelManager {
 
@@ -9,7 +9,7 @@ public class ItemModelManager {
 
     public void generateModels() {
 
-        Registry.ITEM.forEach(x -> {
+        VanillaUTIL.REGISTRY.items().forEach(x -> {
             if (x instanceof IAutoModel) {
                 IAutoModel auto = (IAutoModel) x;
                 auto.generateModel(this);

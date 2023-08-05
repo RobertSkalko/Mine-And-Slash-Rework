@@ -1,18 +1,16 @@
 package com.robertx22.age_of_exile.gui.overlays.bar_overlays.types;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.config.GuiPartConfig;
 import com.robertx22.age_of_exile.gui.overlays.BarGuiType;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.resources.ResourceLocation;
 
-public class MineAndSlashBars extends GuiComponent {
+public class MineAndSlashBars {
     static ResourceLocation BASETEX = new ResourceLocation(SlashRef.MODID, "textures/gui/overlay/base.png");
 
     static int BAR_HEIGHT = 11;
@@ -22,41 +20,33 @@ public class MineAndSlashBars extends GuiComponent {
 
     static Minecraft mc = Minecraft.getInstance();
 
-    public static void renderMineAndSlashBar(GuiPartConfig config, BarGuiType type, PoseStack matrix, PointData point, String text, boolean drawText) {
+    public static void renderMineAndSlashBar(GuiPartConfig config, BarGuiType type, GuiGraphics gui, PointData point, String text, boolean drawText) {
 
         if (!drawText) {
-            mc.getTextureManager()
-                .bind(BASETEX);
-            blit(matrix, point.x, point.y, BAR_WIDTH, BAR_HEIGHT, 0, 0, BAR_WIDTH, BAR_HEIGHT, BAR_WIDTH, BAR_HEIGHT);
+            gui.blit(BASETEX, point.x, point.y, BAR_WIDTH, BAR_HEIGHT, 0, 0, BAR_WIDTH, BAR_HEIGHT, BAR_WIDTH, BAR_HEIGHT);
             float multi = type.getMulti(Load.Unit(mc.player), mc.player);
             int bar = (int) (multi * INNER_BAR_WIDTH);
-            mc.getTextureManager()
-                .bind(type.getTexture(Load.Unit(mc.player), mc.player));
-            blit(matrix, point.x + 2, point.y + 2, bar, INNER_BAR_HEIGHT, 0, 0, bar, INNER_BAR_HEIGHT, INNER_BAR_WIDTH, INNER_BAR_HEIGHT);
+            gui.blit(type.getTexture(Load.Unit(mc.player), mc.player), point.x + 2, point.y + 2, bar, INNER_BAR_HEIGHT, 0, 0, bar, INNER_BAR_HEIGHT, INNER_BAR_WIDTH, INNER_BAR_HEIGHT);
 
             if (config.icon_renderer == GuiPartConfig.IconRenderer.LEFT) {
-                mc.getTextureManager()
-                    .bind(type.getIcon(Load.Unit(mc.player), mc.player));
-                blit(matrix, point.x - 10, point.y, 9, 9, 0, 0, 9, 9, 9, 9); // draw icon
+                gui.blit(type.getIcon(Load.Unit(mc.player), mc.player), point.x - 10, point.y, 9, 9, 0, 0, 9, 9, 9, 9); // draw icon
             } else if (config.icon_renderer == GuiPartConfig.IconRenderer.RIGHT) {
-                mc.getTextureManager()
-                    .bind(type.getIcon(Load.Unit(mc.player), mc.player));
-                blit(matrix, point.x + BAR_WIDTH + 1, point.y, 9, 9, 0, 0, 9, 9, 9, 9); // draw icon
+                gui.blit(type.getIcon(Load.Unit(mc.player), mc.player), point.x + BAR_WIDTH + 1, point.y, 9, 9, 0, 0, 9, 9, 9, 9); // draw icon
             }
 
         }
 
         if (drawText) {
 
-            double scale = 0.9D;
+            float scale = 0.9F;
 
             int width = mc.font.width(text);
             int textX = (int) (point.x - width / 2F + BAR_WIDTH / 2F);
             int textY = point.y + 2 + 3;
 
-            double antiScale = 1.0D / scale;
+            float antiScale = 1.0F / scale;
 
-            RenderSystem.scaled(scale, scale, scale);
+            gui.pose().scale(scale, scale, scale);
             double textWidthMinus = (width * antiScale / 2) - width / 2F;// fixed the centering with this!!!
             double textHeightMinus = 9.0D * scale / 2.0D;
             float xp = (float) ((double) textX + textWidthMinus);
@@ -64,8 +54,10 @@ public class MineAndSlashBars extends GuiComponent {
             float xf = (float) ((double) xp * antiScale);
             float yf = (float) ((double) yp * antiScale);
 
-            mc.font.drawShadow(matrix, text, xf, yf, ChatFormatting.WHITE.getColor());
-            RenderSystem.scaled(antiScale, antiScale, antiScale);
+
+            gui.drawString(mc.font, text, (int) xf, (int) yf, ChatFormatting.WHITE.getColor());
+
+            gui.pose().scale(antiScale, antiScale, antiScale);
         }
     }
 }

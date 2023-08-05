@@ -46,7 +46,7 @@ public class SummonAtTargetFeet extends SpellAction {
         c.put(MapField.ENTITY_NAME, Spell.DEFAULT_EN_NAME);
         c.put(MapField.PROJECTILE_SPEED, 0D);
         c.put(MapField.LIFESPAN_TICKS, lifespan);
-        c.put(MapField.ITEM, Registry.ITEM.getKey(item)
+        c.put(MapField.ITEM, VanillaUTIL.REGISTRY.items().getKey(item)
             .toString());
         c.put(MapField.GRAVITY, false);
         c.put(MapField.PROJECTILE_ENTITY, EntityType.getKey(type)

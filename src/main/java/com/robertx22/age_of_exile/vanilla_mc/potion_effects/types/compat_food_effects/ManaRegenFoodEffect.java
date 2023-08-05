@@ -26,7 +26,7 @@ public class ManaRegenFoodEffect extends FoodEffectPotion {
     public List<Component> GetTooltipString(TooltipInfo info, int duration, int amplifier) {
         List<Component> list = new ArrayList<>();
         int val = (int) getTotalRestored(info.unitdata, amplifier);
-        list.add(new TextComponent("Restores " + val + " Mana over " + duration / 20 + "s").withStyle(ChatFormatting.AQUA));
+        list.add(Component.literal("Restores " + val + " Mana over " + duration / 20 + "s").withStyle(ChatFormatting.AQUA));
         return list;
     }
 

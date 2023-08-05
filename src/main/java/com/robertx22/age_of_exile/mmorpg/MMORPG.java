@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.aoe_data.GeneratedData;
 import com.robertx22.age_of_exile.aoe_data.database.stat_conditions.StatConditions;
 import com.robertx22.age_of_exile.aoe_data.database.stat_effects.StatEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.datapacks.generators.DataGenHook;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.spells.components.conditions.EffectCondition;
@@ -18,14 +19,25 @@ import com.robertx22.age_of_exile.mmorpg.registers.client.S2CPacketRegister;
 import com.robertx22.age_of_exile.mmorpg.registers.common.C2SPacketRegister;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashCapabilities;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashItemTags;
+import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.SlashDeferred;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.vanilla_mc.items.misc.ICreativeTabNbt;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
+import com.robertx22.library_of_exile.main.ForgeEvents;
 import com.robertx22.library_of_exile.utils.Watch;
-import net.minecraft.server.MinecraftServer;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
@@ -35,8 +47,8 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.simple.SimpleChannel;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 
 @Mod(SlashRef.MODID)
@@ -53,9 +65,15 @@ public class MMORPG {
             PROTOCOL_VERSION::equals
     );
 
+    public static CreativeModeTab CREATIVE_TAB = Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, SlashRef.id("tab"),
+            new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 10)
+                    .icon(() -> SlashItems.IDENTIFY_TOME.get().getDefaultInstance())
+                    .build());
+
     public MMORPG() {
 
         Watch watch = new Watch();
+
 
         ModLoadingContext.get()
                 .registerConfig(ModConfig.Type.SERVER, ServerContainer.spec);
@@ -107,10 +125,9 @@ public class MMORPG {
         LifeCycleEvents.register();
 
 
-        // DungeonDimensionJigsaw.initStatics();
-        // DungeonDimensionJigsaw test = new DungeonDimensionJigsaw();
-        // test.initFeature();
-        // WorldOfExile.registerStructure(test);
+        ForgeEvents.registerForgeEvent(GatherDataEvent.class, x -> {
+            x.getGenerator().addProvider(true, new DataGenHook(x.getGenerator().getPackOutput()));
+        });
 
         watch.print("Age of Exile mod initialization ");
 
@@ -135,7 +152,25 @@ public class MMORPG {
             GeneratedData.addAllObjectsToGenerate();
         }
 
+
         SlashCapabilities.register();
+
+        // todo test if works
+        ForgeEvents.registerForgeEvent(BuildCreativeModeTabContentsEvent.class, x -> {
+            if (x.getTab() == CREATIVE_TAB) {
+
+                for (Item item : VanillaUTIL.REGISTRY.items().getAll()) {
+                    if (item instanceof ICreativeTabNbt nbt) {
+                        for (ItemStack stack : nbt.createAllVariationsForCreativeTabs()) {
+                            x.accept(stack);
+                        }
+                    } else {
+                        x.accept(() -> item);
+                    }
+                }
+            }
+        });
+
     }
 
     public static void devToolsLog(String string) {

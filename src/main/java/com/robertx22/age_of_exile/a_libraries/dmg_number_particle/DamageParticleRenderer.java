@@ -1,17 +1,18 @@
 package com.robertx22.age_of_exile.a_libraries.dmg_number_particle;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.Minecraft;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Camera;
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
-import com.mojang.math.Vector3f;
-import net.minecraft.ChatFormatting;
 import org.lwjgl.opengl.GL11;
 
 import java.util.HashSet;
 import java.util.Set;
+
 
 public class DamageParticleRenderer {
 
@@ -47,8 +48,8 @@ public class DamageParticleRenderer {
 
         matrix.pushPose();
         matrix.translate(x - camX, y - camY, z - camZ);
-        matrix.mulPose(Vector3f.YP.rotationDegrees(-camera.getYRot()));
-        matrix.mulPose(Vector3f.XP.rotationDegrees(camera.getXRot()));
+        matrix.mulPose(Axis.YP.rotationDegrees(-camera.getYRot()));
+        matrix.mulPose(Axis.XP.rotationDegrees(camera.getXRot()));
         matrix.scale(-scaleToGui, -scaleToGui, scaleToGui);
 
         RenderSystem.disableLighting();
@@ -56,7 +57,7 @@ public class DamageParticleRenderer {
         RenderSystem.disableAlphaTest();
         RenderSystem.enableBlend();
         RenderSystem.blendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE,
-            GL11.GL_ZERO);
+                GL11.GL_ZERO);
         RenderSystem.shadeModel(7425);
 
         drawDamageNumber(matrix, particle.renderString, 0, 0, 10);

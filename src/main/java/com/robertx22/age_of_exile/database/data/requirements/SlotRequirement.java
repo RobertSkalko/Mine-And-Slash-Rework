@@ -10,10 +10,9 @@ import com.robertx22.age_of_exile.database.data.requirements.bases.GearRequested
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
-import com.robertx22.age_of_exile.uncommon.wrappers.SText;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Component;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +40,7 @@ public class SlotRequirement extends BaseRequirement<SlotRequirement> {
 
         for (BaseGearType slot : slots) {
             if (requested.forSlot.GUID()
-                .equals(slot.GUID())) {
+                    .equals(slot.GUID())) {
                 return true;
             }
         }
@@ -51,39 +50,39 @@ public class SlotRequirement extends BaseRequirement<SlotRequirement> {
 
     public static SlotRequirement everythingBesides(SlotFamily type) {
         return new SlotRequirement(ExileDB.GearTypes()
-            .getFiltered(x -> x.family() != type));
+                .getFiltered(x -> x.family() != type));
 
     }
 
     public static SlotRequirement of(SlotFamily type) {
         return new SlotRequirement(ExileDB.GearTypes()
-            .getFiltered(x -> x.family() == type));
+                .getFiltered(x -> x.family() == type));
 
     }
 
     public SlotRequirement plus(Predicate<BaseGearType> pred) {
         this.slots.addAll(ExileDB.GearTypes()
-            .getFilterWrapped(pred).list);
+                .getFilterWrapped(pred).list);
         return this;
     }
 
     public static SlotRequirement of(Predicate<BaseGearType> pred) {
         return new SlotRequirement(ExileDB.GearTypes()
-            .getFilterWrapped(pred).list);
+                .getFilterWrapped(pred).list);
     }
 
     public static SlotRequirement hasBaseStat(Stat stat) {
         return new SlotRequirement(ExileDB.GearTypes()
-            .getFiltered(x -> x.baseStats()
-                .stream()
-                .anyMatch(s -> s.stat.equals(stat.GUID()))));
+                .getFiltered(x -> x.baseStats()
+                        .stream()
+                        .anyMatch(s -> s.stat.equals(stat.GUID()))));
 
     }
 
     public static SlotRequirement of(BaseGearType.SlotTag tag) {
         return new SlotRequirement(ExileDB.GearTypes()
-            .getFiltered(x -> x.getTags()
-                .contains(tag)));
+                .getFiltered(x -> x.getTags()
+                        .contains(tag)));
 
     }
 
@@ -96,10 +95,10 @@ public class SlotRequirement extends BaseRequirement<SlotRequirement> {
     public JsonObject toJson() {
         JsonObject json = new JsonObject();
         json.add(
-            "slots",
-            JsonUtils.stringListToJsonArray(slots.stream()
-                .map(x -> x.GUID())
-                .collect(Collectors.toList()))
+                "slots",
+                JsonUtils.stringListToJsonArray(slots.stream()
+                        .map(x -> x.GUID())
+                        .collect(Collectors.toList()))
         );
         return json;
     }
@@ -113,10 +112,10 @@ public class SlotRequirement extends BaseRequirement<SlotRequirement> {
             JsonArray array = json.getAsJsonArray("slots");
 
             newobj.slots = JsonUtils.jsonArrayToStringList(array)
-                .stream()
-                .map(x -> ExileDB.GearTypes()
-                    .get(x))
-                .collect(Collectors.toList());
+                    .stream()
+                    .map(x -> ExileDB.GearTypes()
+                            .get(x))
+                    .collect(Collectors.toList());
 
             return newobj;
         } catch (Exception e) {
@@ -130,44 +129,44 @@ public class SlotRequirement extends BaseRequirement<SlotRequirement> {
 
         List<Component> list = new ArrayList<>();
 
-        list.add(new SText(ChatFormatting.GREEN + "Allowed on: "));
+        list.add(ExileText.ofText(ChatFormatting.GREEN + "Allowed on: "));
 
         List<BaseGearType> copy = new ArrayList<>(this.slots);
 
-        MutableComponent comp = new SText(ChatFormatting.RED + "");
+        MutableComponent comp = ExileText.ofText(ChatFormatting.RED + "");
 
         List<BaseGearType> armors = ExileDB.GearTypes()
-            .getFiltered(x -> x.family()
-                .equals(SlotFamily.Armor));
+                .getFiltered(x -> x.family()
+                        .equals(SlotFamily.Armor));
         if (copy.containsAll(armors)) {
             copy.removeIf(x -> x.family()
-                .equals(SlotFamily.Armor));
+                    .equals(SlotFamily.Armor));
             comp.append(" ")
-                .append(new SText("All Armors"));
+                    .append(ExileText.ofText("All Armors"));
         }
 
         List<BaseGearType> weapons = ExileDB.GearTypes()
-            .getFiltered(x -> x.family()
-                .equals(SlotFamily.Weapon));
+                .getFiltered(x -> x.family()
+                        .equals(SlotFamily.Weapon));
         if (copy.containsAll(weapons)) {
             copy.removeIf(x -> x.family()
-                .equals(SlotFamily.Weapon));
+                    .equals(SlotFamily.Weapon));
             comp.append(" ")
-                .append(new SText("All Weapons"));
+                    .append(ExileText.ofText("All Weapons"));
         }
 
         List<BaseGearType> jewerly = ExileDB.GearTypes()
-            .getFiltered(x -> x.family()
-                .equals(SlotFamily.Jewelry));
+                .getFiltered(x -> x.family()
+                        .equals(SlotFamily.Jewelry));
         if (copy.containsAll(jewerly)) {
             copy.removeIf(x -> x.family()
-                .equals(SlotFamily.Jewelry));
+                    .equals(SlotFamily.Jewelry));
             comp.append(" ")
-                .append(new SText("All Jewerly"));
+                    .append(ExileText.ofText("All Jewerly"));
         }
         copy.forEach(x -> {
             comp.append(" ")
-                .append(x.locName());
+                    .append(x.locName());
 
         });
 

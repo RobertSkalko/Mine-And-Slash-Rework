@@ -15,13 +15,13 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.*;
 import com.robertx22.age_of_exile.vanilla_mc.packets.SyncAreaLevelPacket;
 import com.robertx22.age_of_exile.vanilla_mc.packets.spells.TellClientEntityIsCastingSpellPacket;
 import com.robertx22.library_of_exile.main.Packets;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.ChatFormatting;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,14 +39,14 @@ public class OnServerTick {
             if (OnItemStoppedUsingCastImbuedSpell.canCastImbuedSpell(player)) {
                 if (Load.spells(player)
                         .getCastingData().imbued_spell_stacks > 0) {
-                    ParticleUtils.spawnParticles(ParticleTypes.WITCH, player.level, player.blockPosition(), 2);
+                    ParticleUtils.spawnParticles(ParticleTypes.WITCH, player.level(), player.blockPosition(), 2);
                 }
             }
         }));
 
         TICK_ACTIONS.add(new PlayerTickAction("update_caps", 20, (player, data) -> {
             CapSyncUtil.syncPerSecond(player);
-            Packets.sendToClient(player, new SyncAreaLevelPacket(LevelUtils.determineLevel(player.level, player.blockPosition(), player).level));
+            Packets.sendToClient(player, new SyncAreaLevelPacket(LevelUtils.determineLevel(player.level(), player.blockPosition(), player).level));
         }));
 
         TICK_ACTIONS.add(new
@@ -169,7 +169,7 @@ public class OnServerTick {
 
         {
 
-            if (!WorldUtils.isMapWorldClass(player.level)) {
+            if (!WorldUtils.isMapWorldClass(player.level())) {
 
                 boolean wasnt = false;
                 if (!data.isInHighLvlZone) {
@@ -180,14 +180,14 @@ public class OnServerTick {
                         .getLevel();
 
                 if (lvl < 20) {
-                    data.isInHighLvlZone = LevelUtils.determineLevel(player.level, player.blockPosition(), player).level - lvl > 10;
+                    data.isInHighLvlZone = LevelUtils.determineLevel(player.level(), player.blockPosition(), player).level - lvl > 10;
 
                     if (wasnt && data.isInHighLvlZone) {
                         OnScreenMessageUtils.sendMessage(
                                 player,
-                                new TextComponent("YOU ARE ENTERING").withStyle(ChatFormatting.RED)
+                                Component.literal("YOU ARE ENTERING").withStyle(ChatFormatting.RED)
                                         .withStyle(ChatFormatting.BOLD),
-                                new TextComponent("A HIGH LEVEL ZONE").withStyle(ChatFormatting.RED)
+                                Component.literal("A HIGH LEVEL ZONE").withStyle(ChatFormatting.RED)
                                         .withStyle(ChatFormatting.BOLD));
                     }
                 }

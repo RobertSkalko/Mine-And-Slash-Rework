@@ -18,7 +18,7 @@ public class VanillaReg {
     }
 
     public static ResourceLocation getId(Item item) {
-        return Registry.ITEM.getKey(item);
+        return VanillaUTIL.REGISTRY.items().getKey(item);
     }
 
 }

@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.capability.player;
 
-import com.robertx22.age_of_exile.capability.bases.ICommonPlayerCap;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
@@ -12,19 +11,23 @@ import com.robertx22.age_of_exile.saveclasses.spells.SpellsData;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import com.robertx22.library_of_exile.components.forge.BaseProvider;
-import com.robertx22.library_of_exile.components.forge.BaseStorage;
+import com.robertx22.library_of_exile.components.ICap;
 import com.robertx22.library_of_exile.main.Ref;
 import com.robertx22.library_of_exile.utils.LoadSave;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityInject;
+import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.capabilities.CapabilityToken;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,7 +36,16 @@ import java.util.UUID;
 
 @Mod.EventBusSubscriber
 public class EntitySpellCap {
+
     public static final ResourceLocation RESOURCE = new ResourceLocation(Ref.MODID, "spells");
+    public static Capability<SpellCap> INSTANCE = CapabilityManager.get(new CapabilityToken<>() {
+    });
+
+    public static SpellCap get(LivingEntity entity) {
+        return entity.getCapability(INSTANCE)
+                .orElse(null);
+    }
+
 
     private static final String PLAYER_SPELL_DATA = "player_spells_data";
     private static final String GEMS = "gems";
@@ -42,36 +54,14 @@ public class EntitySpellCap {
     public static class EventHandler {
         @SubscribeEvent
         public static void onEntityConstruct(AttachCapabilitiesEvent<Entity> event) {
-            if (event.getObject() instanceof LivingEntity) {
-                event.addCapability(RESOURCE, new Provider((LivingEntity) event.getObject()));
+            if (event.getObject() instanceof LivingEntity en) {
+                event.addCapability(RESOURCE, new SpellCap(en));
             }
         }
     }
 
-    public static class Storage implements BaseStorage<ISpellsCap> {
 
-    }
-
-    public static class Provider extends BaseProvider<ISpellsCap, LivingEntity> {
-        public Provider(LivingEntity owner) {
-            super(owner);
-        }
-
-        @Override
-        public ISpellsCap newDefaultImpl(LivingEntity owner) {
-            return new SpellCap(owner);
-        }
-
-        @Override
-        public Capability<ISpellsCap> dataInstance() {
-            return Data;
-        }
-    }
-
-    @CapabilityInject(ISpellsCap.class)
-    public static final Capability<ISpellsCap> Data = null;
-
-    public abstract static class ISpellsCap implements ICommonPlayerCap, IApplyableStats {
+    public abstract static class ISpellsCap implements ICap, IApplyableStats {
 
         public abstract Spell getSpellByNumber(int key);
 
@@ -99,6 +89,17 @@ public class EntitySpellCap {
 
     public static class SpellCap extends ISpellsCap {
 
+        final LazyOptional<SpellCap> supp = LazyOptional.of(() -> this);
+
+        @Override
+        public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+            if (cap == INSTANCE) {
+                return supp.cast();
+            }
+            return LazyOptional.empty();
+
+        }
+
         SpellCastingData spellCastingData = new SpellCastingData();
 
         SpellsData spellData = new SpellsData();
@@ -110,7 +111,7 @@ public class EntitySpellCap {
         }
 
         @Override
-        public CompoundTag saveToNBT() {
+        public CompoundTag serializeNBT() {
 
             CompoundTag nbt = new CompoundTag();
 
@@ -126,7 +127,7 @@ public class EntitySpellCap {
         }
 
         @Override
-        public void loadFromNBT(CompoundTag nbt) {
+        public void deserializeNBT(CompoundTag nbt) {
 
             try {
                 this.spellCastingData = LoadSave.Load(SpellCastingData.class, new SpellCastingData(), nbt, PLAYER_SPELL_DATA);
@@ -260,7 +261,7 @@ public class EntitySpellCap {
 
             List<ExactStatData> stats = new ArrayList<>();
 
-           
+
             ctxs.add(new MiscStatCtx(stats));
 
             return ctxs;

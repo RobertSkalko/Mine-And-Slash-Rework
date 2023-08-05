@@ -11,32 +11,29 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatI
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.library_of_exile.registry.FilterListWrap;
 import com.robertx22.library_of_exile.utils.RandomUtils;
-import info.loenwind.autosave.annotations.Factory;
-import info.loenwind.autosave.annotations.Storable;
-import info.loenwind.autosave.annotations.Store;
-import net.minecraft.util.Mth;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Storable
+
 public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer {
 
     // MAJOR NBT PROBLEM. RENAME ALL THESE
 
-    @Store
+
     public Integer perc = 0;
 
-    @Store
+
     public String affix;
 
-    @Store
+
     public int t;
 
-    @Store
+
     public Affix.Type type;
 
 
@@ -50,7 +47,7 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
         this.type = type;
     }
 
-    @Factory
+
     private AffixData() {
     }
 

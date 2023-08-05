@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.saveclasses.stat_soul;
 
-import com.robertx22.age_of_exile.database.base.CreativeTabs;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -12,33 +11,28 @@ import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
+import com.robertx22.age_of_exile.vanilla_mc.items.misc.ICreativeTabNbt;
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.utils.LoadSave;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.core.NonNullList;
-import net.minecraft.util.text.*;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.world.item.Item.Properties;
-
-public class StatSoulItem extends Item implements IGUID {
+public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt {
 
     public static String TAG = "stat_soul";
 
     public StatSoulItem() {
-        super(new Properties().tab(CreativeTabs.GearSouls));
+        super(new Properties());
     }
 
     public static ItemStack ofAnySlotOfRarity(String rar) {
@@ -48,33 +42,34 @@ public class StatSoulItem extends Item implements IGUID {
         return stack;
     }
 
-    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> stacks) {
-        if (this.allowdedIn(group)) {
 
-            for (GearRarity rarity : ExileDB.GearRarities()
+    @Override
+    public List<ItemStack> createAllVariationsForCreativeTabs() {
+        var list = new ArrayList<ItemStack>();
+        for (GearRarity rarity : ExileDB.GearRarities()
                 .getList()) {
-                for (GearSlot slot : ExileDB.GearSlots()
+            for (GearSlot slot : ExileDB.GearSlots()
                     .getList()) {
-                    for (int i = 0; i <= LevelUtils.getMaxTier(); i++) {
-                        StatSoulData data = new StatSoulData();
-                        data.tier = i;
-                        data.rar = rarity.GUID();
-                        data.slot = slot.GUID();
+                for (int i = 0; i <= LevelUtils.getMaxTier(); i++) {
+                    StatSoulData data = new StatSoulData();
+                    data.tier = i;
+                    data.rar = rarity.GUID();
+                    data.slot = slot.GUID();
 
-                        ItemStack stack = data.toStack();
-                        stacks.add(stack);
-                    }
-
+                    ItemStack stack = data.toStack();
+                    list.add(stack);
                 }
-            }
 
+            }
         }
+        return list;
     }
+
 
     @Override
     public Component getName(ItemStack stack) {
 
-        MutableComponent txt = new TranslatableComponent(this.getDescriptionId());
+        MutableComponent txt = Component.translatable(this.getDescriptionId());
 
         try {
             StatSoulData data = getSoul(stack);
@@ -84,19 +79,19 @@ public class StatSoulItem extends Item implements IGUID {
             } else {
 
                 GearRarity rar = ExileDB.GearRarities()
-                    .get(data.rar);
+                        .get(data.rar);
                 GearSlot slot = ExileDB.GearSlots()
-                    .get(data.slot);
+                        .get(data.slot);
 
                 MutableComponent t = rar.locName();
                 if (!data.canBeOnAnySlot()) {
                     t.append(" ")
-                        .append(slot.locName());
+                            .append(slot.locName());
                 }
 
                 t.append(" ")
-                    .append(Words.Soul.locName())
-                    .withStyle(rar.textFormatting());
+                        .append(Words.Soul.locName())
+                        .withStyle(rar.textFormatting());
 
                 return t;
             }
@@ -108,7 +103,7 @@ public class StatSoulItem extends Item implements IGUID {
 
     public static boolean hasSoul(ItemStack stack) {
         return stack.hasTag() && stack.getTag()
-            .contains(TAG);
+                .contains(TAG);
     }
 
     public static StatSoulData getSoul(ItemStack stack) {
@@ -130,21 +125,21 @@ public class StatSoulItem extends Item implements IGUID {
                 if (data.canBeOnAnySlot()) {
 
                 } else {
-                    tooltip.add(new TextComponent("Item Type: ").withStyle(ChatFormatting.WHITE)
-                        .append(ExileDB.GearSlots()
-                            .get(data.slot)
-                            .locName()
-                            .withStyle(ChatFormatting.BLUE)));
+                    tooltip.add(Component.literal("Item Type: ").withStyle(ChatFormatting.WHITE)
+                            .append(ExileDB.GearSlots()
+                                    .get(data.slot)
+                                    .locName()
+                                    .withStyle(ChatFormatting.BLUE)));
                 }
                 tooltip.add(TooltipUtils.gearRarity(ExileDB.GearRarities()
-                    .get(data.rar)));
+                        .get(data.rar)));
 
             }
         }
 
-        tooltip.add(new TextComponent(""));
+        tooltip.add(Component.literal(""));
 
-        tooltip.add(new TextComponent("Infuses stats into empty gear").withStyle(ChatFormatting.AQUA));
+        tooltip.add(Component.literal("Infuses stats into empty gear").withStyle(ChatFormatting.AQUA));
         tooltip.add(TooltipUtils.dragOntoGearToUse());
 
     }
@@ -153,4 +148,6 @@ public class StatSoulItem extends Item implements IGUID {
     public String GUID() {
         return "stat_soul/stat_soul";
     }
+
+
 }

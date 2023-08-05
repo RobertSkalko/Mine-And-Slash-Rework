@@ -9,12 +9,10 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
-import info.loenwind.autosave.annotations.Factory;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +21,6 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
 
     public static ValueCalculation SERIALIZER = new ValueCalculation();
 
-    @Factory
     public ValueCalculation() {
 
     }
@@ -83,7 +80,7 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
     }
 
     public Component getShortTooltip(LevelProvider provider) {
-        MutableComponent text = new TextComponent("");
+        MutableComponent text = Component.literal("");
 
         int val = getCalculatedValue(provider);
 

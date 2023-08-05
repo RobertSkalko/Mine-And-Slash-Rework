@@ -2,13 +2,13 @@ package com.robertx22.age_of_exile.database.data.stats.tooltips;
 
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class NormalStatTooltip implements IStatTooltipType {
 
@@ -19,13 +19,13 @@ public class NormalStatTooltip implements IStatTooltipType {
 
         List<Component> list = new ArrayList<>();
 
-        MutableComponent txt = new TextComponent(ChatFormatting.BLUE + info.stat.getStatNameRegex()
+        MutableComponent txt = Component.literal(ChatFormatting.BLUE + info.stat.getStatNameRegex()
                 .translate(format, ctx, info.type, info.firstValue, info.stat));
 
         if (ctx.statinfo.stat.is_long) {
             return longStat(ctx, txt);
         }
-        
+
 
         if (ctx.showStatRanges()) {
             txt.append(" ")
@@ -62,7 +62,7 @@ public class NormalStatTooltip implements IStatTooltipType {
             format = ChatFormatting.LIGHT_PURPLE;
         }
 
-        return new TextComponent(format + " [" + perc + "%]").withStyle(format);
+        return Component.literal(format + " [" + perc + "%]").withStyle(format);
 
     }
 

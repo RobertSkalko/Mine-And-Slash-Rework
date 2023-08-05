@@ -1,12 +1,11 @@
 package com.robertx22.age_of_exile.vanilla_mc.items.gearitems;
 
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.Items;
-import net.minecraft.tags.Tag;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.SetTag;
+import net.minecraft.world.item.Tiers;
 
 public enum VanillaMaterial {
 
@@ -29,13 +28,13 @@ public enum VanillaMaterial {
 
     public static class ItemOrTag {
         public Item item;
-        public Tag.Named<Item> tag;
+        public TagKey<Item> tag;
 
         public ItemOrTag(Item item) {
             this.item = item;
         }
 
-        public ItemOrTag(SetTag.Named<Item> tag) {
+        public ItemOrTag(TagKey<Item> tag) {
             this.tag = tag;
         }
     }
