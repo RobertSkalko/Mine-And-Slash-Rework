@@ -4,9 +4,9 @@
   "perc_upgrade_chance": 0,
   "on_armor_stats": [
     {
-      "v1": 12.0,
+      "v1": 25.0,
       "stat": "water_resist",
-      "type": "PERCENT",
+      "type": "FLAT",
       "scale_to_lvl": true
     }
   ],

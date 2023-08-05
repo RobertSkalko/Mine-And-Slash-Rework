@@ -17,10 +17,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuantit
 import com.robertx22.age_of_exile.database.data.stats.types.misc.BonusExp;
 import com.robertx22.age_of_exile.database.data.stats.types.misc.DamageTakenToMana;
 import com.robertx22.age_of_exile.database.data.stats.types.misc.ExtraMobDropsStat;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.DarknessDamage;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.DualWieldDamage;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.SpellDamage;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.*;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.crit.GlobalCriticalDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.crit.GlobalCriticalHit;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.DamageAbsorbedByMana;
@@ -64,6 +61,8 @@ public class StatsRegister implements ExileRegistryInit {
 
                     add(WeaponDamage.getInstance());
 
+                    add(FullSwingDamage.getInstance());
+
                     add(MagicShield.getInstance());
                     add(MagicShieldRegen.getInstance());
 
@@ -72,7 +71,7 @@ public class StatsRegister implements ExileRegistryInit {
                     add(TreasureQuality.getInstance());
                     add(TreasureQuantity.getInstance());
 
-                    add(new AttackDamage(Elements.Physical));
+                    add(new BonusAttackDamage(Elements.Physical));
                     add(new ElementalResist(Elements.Physical));
                     add(new ElementalPenetration(Elements.Physical));
                     add(new ElementalFocus(Elements.Physical));

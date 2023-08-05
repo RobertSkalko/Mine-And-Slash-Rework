@@ -24,7 +24,7 @@
       "min": 15.0,
       "max": 25.0,
       "stat": "chaos_resist",
-      "type": "percent"
+      "type": "flat"
     }
   ],
   "rarity": "unique",

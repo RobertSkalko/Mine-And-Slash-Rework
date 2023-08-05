@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.capability.entity.CooldownsData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.MyDamageSource;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.FullSwingDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.DamageAbsorbedByMana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
 import com.robertx22.age_of_exile.mixin_ducks.LivingEntityAccesor;
@@ -80,6 +81,7 @@ public class DamageEvent extends EffectEvent {
 
     private void calcBlock() {
 
+
         if (targetData
                 .getResources()
                 .getEnergy() < 1) {
@@ -148,8 +150,7 @@ public class DamageEvent extends EffectEvent {
                 GearItemData gear = Gear.Load(source.getMainHandItem());
 
                 if (gear != null) {
-                    float atkpersec = gear.GetBaseGearType()
-                            .getAttacksPerSecondCalculated(sourceData);
+                    float atkpersec = 1;
 
                     float secWaited = (float) (source.tickCount - source.getLastHurtMobTimestamp()) / 20F;
 
@@ -165,17 +166,21 @@ public class DamageEvent extends EffectEvent {
         data.setupNumber(EventData.ATTACK_COOLDOWN, cool);
     }
 
+
     private float modifyByAttackSpeedIfMelee(float dmg) {
 
         float cool = data.getNumber(EventData.ATTACK_COOLDOWN).number;
 
-        dmg *= cool;
+        // we no longer remove damage from fast clicked attacks, energy exists! dmg *= cool;
 
-        if (cool < 0.2F) { // TODO
+        if (cool < 0.1F) {
+            // we dont want to allow too fast mob clickings
             this.cancelDamage();
         }
 
+
         if (cool > 0.8F) {
+            dmg *= sourceData.getUnit().getCalculatedStat(FullSwingDamage.getInstance()).getMultiplier();
             //ParticleUtils.spawnDefaultSlashingWeaponParticles(source);
         }
 

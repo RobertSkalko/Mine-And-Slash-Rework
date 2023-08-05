@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.database.data.stats.effects.defense;
 
-import com.robertx22.age_of_exile.database.data.stats.IUsableStat;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageEffect;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
@@ -8,7 +7,6 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
-import net.minecraft.util.math.MathHelper;
 
 public class ElementalResistEffect extends BaseDamageEffect {
 
@@ -31,6 +29,16 @@ public class ElementalResistEffect extends BaseDamageEffect {
 
         float pene = effect.getPenetration();
 
+        int resist = (int) data.getValue();
+
+        int defense = (int) (resist - pene);
+
+
+        float multi = 1 - (defense / 100F);
+
+        effect.data.getNumber(EventData.NUMBER).number *= multi;
+
+/*
         IUsableStat eleresist = (IUsableStat) stat;
 
         float EffectiveArmor = eleresist.getUsableValue((int) (data.getValue() - pene), effect.sourceData.getLevel());
@@ -39,6 +47,8 @@ public class ElementalResistEffect extends BaseDamageEffect {
 
         effect.data.getNumber(EventData.NUMBER).number -= EffectiveArmor * effect.data.getNumber();
 
+
+ */
         return effect;
 
     }
@@ -47,7 +57,7 @@ public class ElementalResistEffect extends BaseDamageEffect {
     public boolean canActivate(DamageEvent effect, StatData data, Stat stat) {
         if (effect.GetElement() != Elements.Physical) {
             if (effect.GetElement()
-                .equals(stat.getElement())) {
+                    .equals(stat.getElement())) {
                 return true;
             }
         }

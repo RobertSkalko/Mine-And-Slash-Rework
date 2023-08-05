@@ -12,12 +12,6 @@
       "scale_to_lvl": false
     },
     {
-      "v1": -10.0,
-      "stat": "attack_speed",
-      "type": "FLAT",
-      "scale_to_lvl": false
-    },
-    {
       "v1": -25.0,
       "stat": "critical_hit",
       "type": "FLAT",

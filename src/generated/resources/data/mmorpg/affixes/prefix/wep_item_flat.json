@@ -1,13 +1,13 @@
 {
-  "guid": "glimmering",
-  "loc_name": "Glimmering",
+  "guid": "wep_item_flat",
+  "loc_name": "Deadly",
   "only_one_per_item": true,
   "weight": 1000,
   "requirements": {
     "tag_requirements": [
       {
         "included": [
-          "armor_family"
+          "weapon_family"
         ],
         "excluded": []
       }
@@ -17,15 +17,9 @@
   "type": "prefix",
   "stats": [
     {
-      "min": 4.0,
-      "max": 15.0,
-      "stat": "mana",
-      "type": "PERCENT"
-    },
-    {
-      "min": 4.0,
+      "min": 1.0,
       "max": 6.0,
-      "stat": "armor",
+      "stat": "weapon_damage",
       "type": "ITEM_FLAT"
     }
   ]

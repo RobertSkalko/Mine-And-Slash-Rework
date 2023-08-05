@@ -36,19 +36,9 @@ public class GearData {
     }
 
     private void calcStatUtilization(EntityData data) {
+
         if (slot == EquipmentSlotType.OFFHAND) {
-            if (gear != null && gear.GetBaseGearType()
-                .isWeapon()) {
-                GearItemData mainhand = Gear.Load(data.getEntity()
-                    .getMainHandItem());
-
-                if (mainhand != null) {
-                    if (mainhand.GetBaseGearType().weapon_type == gear.GetBaseGearType().weapon_type) {
-                        percentStatUtilization = gear.GetBaseGearType().weapon_offhand_stat_util;
-                        return;
-                    }
-                }
-
+            if (gear != null && !gear.GetBaseGearType().getTags().contains(BaseGearType.SlotTag.offhand_family)) {
                 percentStatUtilization = 0;
                 return;
             }

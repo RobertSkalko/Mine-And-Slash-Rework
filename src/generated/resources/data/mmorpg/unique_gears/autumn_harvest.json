@@ -6,19 +6,19 @@
       "min": 10.0,
       "max": 20.0,
       "stat": "chaos_resist",
-      "type": "percent"
+      "type": "flat"
     },
     {
       "min": 10.0,
       "max": 20.0,
       "stat": "fire_resist",
-      "type": "percent"
+      "type": "flat"
     },
     {
       "min": 10.0,
       "max": 20.0,
       "stat": "water_resist",
-      "type": "percent"
+      "type": "flat"
     },
     {
       "min": 25.0,

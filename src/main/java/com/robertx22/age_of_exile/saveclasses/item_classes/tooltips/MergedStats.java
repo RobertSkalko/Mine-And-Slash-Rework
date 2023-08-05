@@ -7,7 +7,6 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import net.minecraft.util.text.ITextComponent;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class MergedStats implements IGearPartTooltip {
@@ -16,6 +15,7 @@ public class MergedStats implements IGearPartTooltip {
 
     public MergedStats(List<ExactStatData> stats, TooltipInfo info) {
 
+        
         stats.removeIf(x -> x.getStat().is_long);
 
         List<TooltipStatInfo> infolist = new ArrayList<>();
@@ -24,8 +24,8 @@ public class MergedStats implements IGearPartTooltip {
 
         this.mergedList = TooltipStatInfo.mergeDuplicates(infolist);
 
-        this.mergedList.sort(Comparator.comparingInt(x -> 100 - x.stat.translate()
-            .length()));
+        //  this.mergedList.sort(Comparator.comparingInt(x -> 100 - x.stat.translate()
+        //    .length()));
 
     }
 

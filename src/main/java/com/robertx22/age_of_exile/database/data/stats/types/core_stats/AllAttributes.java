@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.database.data.stats.types.core_stats;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
-import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.base.ITransferToOtherStats;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.unit.InCalcStatData;
@@ -20,7 +19,6 @@ public class AllAttributes extends Stat implements ITransferToOtherStats {
     public static String DEX_ID = "dexterity";
 
     private AllAttributes() {
-        this.scaling = StatScaling.CORE_STAT;
         this.format = TextFormatting.LIGHT_PURPLE.getName();
     }
 

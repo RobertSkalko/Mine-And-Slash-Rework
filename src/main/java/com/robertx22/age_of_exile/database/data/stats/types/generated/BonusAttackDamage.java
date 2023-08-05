@@ -13,18 +13,18 @@ import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AttackDamage extends ElementalStat {
+public class BonusAttackDamage extends ElementalStat {
 
     @Override
     public List<Stat> generateAllPossibleStatVariations() {
 
         List<Stat> list = new ArrayList<>();
         Elements.getAllSingleIncludingPhysical()
-            .forEach(x -> list.add(newGeneratedInstance(x)));
+                .forEach(x -> list.add(newGeneratedInstance(x)));
         return list;
     }
 
-    public AttackDamage(Elements element) {
+    public BonusAttackDamage(Elements element) {
         super(element);
         this.scaling = StatScaling.NORMAL;
         this.group = StatGroup.ELEMENTAL;
@@ -37,7 +37,7 @@ public class AttackDamage extends ElementalStat {
 
     @Override
     public Stat newGeneratedInstance(Elements element) {
-        return new AttackDamage(element);
+        return new BonusAttackDamage(element);
     }
 
     @Override
@@ -78,7 +78,9 @@ public class AttackDamage extends ElementalStat {
 
         @Override
         public EffectSides Side() {
+
             return EffectSides.Source;
+
         }
 
         @Override
@@ -89,7 +91,7 @@ public class AttackDamage extends ElementalStat {
 
         @Override
         public boolean canActivate(DamageEvent effect, StatData data, Stat stat) {
-            return stat.getElement() != Elements.Physical && effect.data.isBasicAttack();
+            return effect.data.isBasicAttack();
         }
 
     }

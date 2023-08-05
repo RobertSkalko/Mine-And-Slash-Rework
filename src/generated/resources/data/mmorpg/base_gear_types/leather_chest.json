@@ -1,5 +1,4 @@
 {
-  "attacksPerSecond": 1.0,
   "guid": "leather_chest",
   "level_range": {
     "start": 0.0,
@@ -7,7 +6,6 @@
   },
   "gear_slot": "chest",
   "weight": 1000,
-  "weapon_offhand_stat_util": 0,
   "style": "melee",
   "implicit_stats": [],
   "base_stats": [

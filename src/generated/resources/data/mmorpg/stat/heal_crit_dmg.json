@@ -23,7 +23,7 @@
   "max": 500.0,
   "base": 50.0,
   "is_perc": true,
-  "scaling": "SLOW",
+  "scaling": "NONE",
   "is_long": false,
   "icon": "⚔",
   "order": 100,

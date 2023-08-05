@@ -12,29 +12,29 @@ public class WeaponOrNecklaceSpecific implements ExileRegistryInit {
     @Override
     public void registerAll() {
         AffixBuilder.Normal("precise")
-            .Named("Precise")
-            .stats(new StatModifier(4, 8, Stats.CRIT_CHANCE.get(), ModType.FLAT))
-            .includesTags(SlotTag.necklace, SlotTag.weapon_family)
-            .Prefix()
-            .Build();
+                .Named("Precise")
+                .stats(new StatModifier(4, 30, Stats.CRIT_CHANCE.get(), ModType.FLAT))
+                .includesTags(SlotTag.necklace, SlotTag.weapon_family)
+                .Prefix()
+                .Build();
         AffixBuilder.Normal("of_brutality")
-            .Named("Of Brutality")
-            .stats(new StatModifier(6, 20, Stats.CRIT_DAMAGE.get(), ModType.FLAT))
-            .includesTags(SlotTag.necklace, SlotTag.weapon_family)
-            .Suffix()
-            .Build();
+                .Named("Of Brutality")
+                .stats(new StatModifier(6, 50, Stats.CRIT_DAMAGE.get(), ModType.FLAT))
+                .includesTags(SlotTag.necklace, SlotTag.weapon_family)
+                .Suffix()
+                .Build();
 
         AffixBuilder.Normal("focused")
-            .Named("Focused")
-            .stats(new StatModifier(4, 8, Stats.SPELL_CRIT_CHANCE.get(), ModType.FLAT))
-            .includesTags(SlotTag.necklace, SlotTag.mage_weapon)
-            .Prefix()
-            .Build();
+                .Named("Focused")
+                .stats(new StatModifier(4, 30, Stats.SPELL_CRIT_CHANCE.get(), ModType.FLAT))
+                .includesTags(SlotTag.necklace, SlotTag.mage_weapon)
+                .Prefix()
+                .Build();
         AffixBuilder.Normal("of_devastation")
-            .Named("Of Devastation")
-            .stats(new StatModifier(6, 20, Stats.SPELL_CRIT_DAMAGE.get(), ModType.FLAT))
-            .includesTags(SlotTag.necklace, SlotTag.mage_weapon)
-            .Suffix()
-            .Build();
+                .Named("Of Devastation")
+                .stats(new StatModifier(6, 50, Stats.SPELL_CRIT_DAMAGE.get(), ModType.FLAT))
+                .includesTags(SlotTag.necklace, SlotTag.mage_weapon)
+                .Suffix()
+                .Build();
     }
 }

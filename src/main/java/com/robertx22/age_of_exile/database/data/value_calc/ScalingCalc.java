@@ -19,7 +19,7 @@ public class ScalingCalc {
 
     public Stat getStat() {
         return ExileDB.Stats()
-            .get(stat);
+                .get(stat);
     }
 
     @Factory
@@ -52,12 +52,13 @@ public class ScalingCalc {
         if (el != null) {
             eleStr = el.format + el.icon;
         }
+        
 
         if (statname != null) {
             list.add(new StringTextComponent(
-                TextFormatting.RED + "Scales with " + (int) (multi * 100F) + "% " + eleStr + " ").append(
-                    statname)
-                .append(" (" + value + ")"));
+                    TextFormatting.RED + "Scales with " + (int) (multi * 100F) + "% " + eleStr + " ").append(
+                            statname)
+                    .append(" (" + value + ")"));
         }
 
         return list;
@@ -66,9 +67,9 @@ public class ScalingCalc {
     public int getCalculatedValue(LevelProvider provider) {
 
         return (int) (getMulti().getValue(provider) * provider.getCasterData()
-            .getUnit()
-            .getCalculatedStat(stat)
-            .getValue());
+                .getUnit()
+                .getCalculatedStat(stat)
+                .getValue());
 
     }
 }

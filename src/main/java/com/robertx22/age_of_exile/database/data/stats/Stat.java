@@ -56,7 +56,7 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     public float max = Integer.MAX_VALUE;
     public float base = 0;
     public boolean is_perc = false;
-    public StatScaling scaling = StatScaling.SLOW;
+    public StatScaling scaling = StatScaling.NONE;
     public boolean is_long = false;
     public String icon = "\u2741";
     public int order = 100;
@@ -100,11 +100,10 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     public final float scale(ModType mod, float stat, float lvl) {
         if (mod.isFlat()) {
             return getScaling().scale(stat, lvl);
-        } else {
-            return StatScaling.SLOW.scale(stat, lvl);
         }
+        return stat;
     }
-
+    
     public List<IFormattableTextComponent> getCutDescTooltip() {
         List<IFormattableTextComponent> list = new ArrayList<>();
 

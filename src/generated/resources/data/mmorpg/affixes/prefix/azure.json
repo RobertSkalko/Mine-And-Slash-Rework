@@ -17,8 +17,8 @@
   "type": "prefix",
   "stats": [
     {
-      "min": 5.0,
-      "max": 12.0,
+      "min": 2.0,
+      "max": 14.0,
       "stat": "mana",
       "type": "PERCENT"
     }

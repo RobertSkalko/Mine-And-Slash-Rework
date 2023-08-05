@@ -41,9 +41,9 @@ public class RingRuneWords implements ExileRegistryInit {
                 .setReplacesName()
                 .stats(Arrays.asList(
                         new StatModifier(-75, 25, GlobalCriticalDamage.getInstance()),
-                        new StatModifier(-50, 15, new ElementalResist(Elements.Cold), ModType.PERCENT),
-                        new StatModifier(-50, 15, new ElementalResist(Elements.Fire), ModType.PERCENT),
-                        new StatModifier(-50, 15, new ElementalResist(Elements.Chaos), ModType.PERCENT)
+                        new StatModifier(-50, 15, new ElementalResist(Elements.Cold), ModType.FLAT),
+                        new StatModifier(-50, 15, new ElementalResist(Elements.Fire), ModType.FLAT),
+                        new StatModifier(-50, 15, new ElementalResist(Elements.Chaos), ModType.FLAT)
                 ))
                 .makeRuneWordOnly(Arrays.asList(RuneItem.RuneType.YUN, RuneItem.RuneType.FEY, RuneItem.RuneType.ORU))
                 .devComment("global crit + res, high RNG")

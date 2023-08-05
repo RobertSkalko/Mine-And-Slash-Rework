@@ -1,7 +1,5 @@
 package com.robertx22.age_of_exile.database.data.gear_types.bases;
 
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
-import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.StatModifier;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gear_types.weapons.mechanics.NormalWeaponMechanic;
@@ -10,7 +8,6 @@ import com.robertx22.age_of_exile.database.data.level_ranges.LevelRange;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
@@ -115,21 +112,7 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
         return weight;
     }
 
-    public final float getAttacksPerSecondCalculated(EntityData data) {
-        return getAttacksPerSecondCalculated(data.getUnit()
-                .getCalculatedStat(Stats.ATTACK_SPEED.get()));
-    }
-
-    public final float getAttacksPerSecondCalculated(StatData stat) {
-
-        float multi = stat
-                .getMultiplier();
-
-        float f = multi;
-
-        return f;
-    }
-
+    
     public final boolean isArmor() {
         return family() == SlotFamily.Armor;
     }

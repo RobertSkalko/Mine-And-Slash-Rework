@@ -23,12 +23,6 @@
     },
     {
       "min": 3.0,
-      "max": 5.0,
-      "stat": "attack_speed",
-      "type": "FLAT"
-    },
-    {
-      "min": 3.0,
       "max": 10.0,
       "stat": "critical_damage",
       "type": "FLAT"

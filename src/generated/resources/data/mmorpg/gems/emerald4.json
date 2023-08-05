@@ -4,9 +4,9 @@
   "perc_upgrade_chance": 10,
   "on_armor_stats": [
     {
-      "v1": 7.2000003,
+      "v1": 15.000001,
       "stat": "chaos_resist",
-      "type": "PERCENT",
+      "type": "FLAT",
       "scale_to_lvl": true
     }
   ],

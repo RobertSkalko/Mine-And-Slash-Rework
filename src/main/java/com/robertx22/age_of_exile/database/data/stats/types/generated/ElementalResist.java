@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.database.data.stats.types.generated;
 
-import com.robertx22.age_of_exile.database.data.stats.IUsableStat;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.ElementalResistEffect;
@@ -11,7 +10,7 @@ import com.robertx22.age_of_exile.uncommon.wrappers.MapWrapper;
 
 import java.util.List;
 
-public class ElementalResist extends ElementalStat implements IUsableStat {
+public class ElementalResist extends ElementalStat {
 
     public static MapWrapper<Elements, ElementalResist> MAP = new MapWrapper();
 
@@ -27,12 +26,14 @@ public class ElementalResist extends ElementalStat implements IUsableStat {
         this.min = -300;
 
         this.group = StatGroup.ELEMENTAL;
-        this.is_perc = false;
-        this.scaling = StatScaling.NORMAL;
+        this.is_perc = true;
+        this.scaling = StatScaling.NONE;
 
         this.format = element.format.getName();
         this.icon = element.icon;
         this.statEffect = new ElementalResistEffect();
+
+        this.max = 75;
 
     }
 
@@ -61,15 +62,6 @@ public class ElementalResist extends ElementalStat implements IUsableStat {
         return this.getElement().dmgName + " Resistance";
     }
 
-    @Override
-    public float getMaxMulti() {
-        return 0.8F;
-    }
-
-    @Override
-    public float valueNeededToReachMaximumPercentAtLevelOne() {
-        return 20;
-    }
 
 }
 

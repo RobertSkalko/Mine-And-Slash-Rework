@@ -11,7 +11,7 @@ import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
-import com.robertx22.age_of_exile.database.data.stats.types.generated.AttackDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -27,7 +27,10 @@ import com.robertx22.age_of_exile.uncommon.datasaving.UnitNbt;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
 import com.robertx22.age_of_exile.uncommon.effectdatas.SpendResourceEvent;
-import com.robertx22.age_of_exile.uncommon.enumclasses.*;
+import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
+import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
+import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
+import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityTypeUtils;
@@ -569,7 +572,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
 
         num *= ExileDB.getEntityConfig(entity, this).dmg_multi;
 
-        num = new AttackDamage(Elements.Physical).scale(ModType.FLAT, num, getLevel());
+        num = WeaponDamage.getInstance().scale(ModType.FLAT, num, getLevel());
 
         PlayStyle style = PlayStyle.melee;
 

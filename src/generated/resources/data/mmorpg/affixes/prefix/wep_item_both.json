@@ -1,6 +1,6 @@
 {
-  "guid": "cruel",
-  "loc_name": "Cruel",
+  "guid": "wep_item_both",
+  "loc_name": "Miserable",
   "only_one_per_item": true,
   "weight": 1000,
   "requirements": {
@@ -17,10 +17,16 @@
   "type": "prefix",
   "stats": [
     {
-      "min": 5.0,
-      "max": 15.0,
-      "stat": "physical_weapon_damage",
-      "type": "PERCENT"
+      "min": 1.0,
+      "max": 3.0,
+      "stat": "weapon_damage",
+      "type": "ITEM_FLAT"
+    },
+    {
+      "min": 10.0,
+      "max": 50.0,
+      "stat": "weapon_damage",
+      "type": "ITEM_PERCENT"
     }
   ]
 }

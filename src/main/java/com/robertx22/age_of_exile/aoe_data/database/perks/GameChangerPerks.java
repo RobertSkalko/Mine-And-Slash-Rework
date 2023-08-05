@@ -25,7 +25,6 @@ public class GameChangerPerks implements ExileRegistryInit {
 
         PerkBuilder.gameChanger("mantra", "Mantra",
                 new OptScaleExactStat(3, DatapackStats.PHYS_DMG_PER_MANA),
-                new OptScaleExactStat(-10, Stats.ATTACK_SPEED.get()),
                 new OptScaleExactStat(-25, Stats.CRIT_CHANCE.get(), ModType.FLAT)
         );
 

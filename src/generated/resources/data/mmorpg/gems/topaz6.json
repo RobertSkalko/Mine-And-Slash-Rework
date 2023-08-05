@@ -4,8 +4,8 @@
   "perc_upgrade_chance": 0,
   "on_armor_stats": [
     {
-      "v1": 5.0,
-      "stat": "dexterity",
+      "v1": 25.0,
+      "stat": "lightning_resist",
       "type": "FLAT",
       "scale_to_lvl": true
     }

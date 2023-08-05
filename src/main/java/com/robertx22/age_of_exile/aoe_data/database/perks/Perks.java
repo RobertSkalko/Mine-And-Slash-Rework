@@ -8,7 +8,7 @@ import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DamageShield;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
-import com.robertx22.age_of_exile.database.data.stats.types.generated.AttackDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalPenetration;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.DualWieldDamage;
@@ -32,12 +32,12 @@ public class Perks implements ExileRegistryInit {
         PerkBuilder.stat("int", new OptScaleExactStat(1, DatapackStats.INT, ModType.FLAT));
         PerkBuilder.stat("dex", new OptScaleExactStat(1, DatapackStats.DEX, ModType.FLAT));
         PerkBuilder.stat("str", new OptScaleExactStat(1, DatapackStats.STR, ModType.FLAT));
-      
+
         PerkBuilder.stat("cast_speed", new OptScaleExactStat(3, Stats.CAST_SPEED.get(), ModType.FLAT));
 
         PerkBuilder.stat(new OptScaleExactStat(-2, Stats.MANA_COST.get(), ModType.FLAT));
 
-        PerkBuilder.stat(new OptScaleExactStat(3, Stats.ATTACK_SPEED.get(), ModType.FLAT));
+        //  PerkBuilder.stat(new OptScaleExactStat(3, Stats.ATTACK_SPEED.get(), ModType.FLAT));
 
         PerkBuilder.stat(new OptScaleExactStat(2, Stats.PROJECTILE_DAMAGE.get(), ModType.FLAT));
 
@@ -134,7 +134,7 @@ public class Perks implements ExileRegistryInit {
                     PerkBuilder.stat(x.GUID(), new OptScaleExactStat(5, x, ModType.FLAT));
                 });
 
-        new AttackDamage(Elements.Chaos).generateAllPossibleStatVariations()
+        new BonusAttackDamage(Elements.Chaos).generateAllPossibleStatVariations()
                 .forEach(x -> {
                     PerkBuilder.stat(x.GUID(), new OptScaleExactStat(2, x, ModType.PERCENT));
 

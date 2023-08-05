@@ -2,7 +2,7 @@
   "guid": "chaos_res",
   "loc_name": "Of the Snake",
   "only_one_per_item": true,
-  "weight": 2000,
+  "weight": 3000,
   "requirements": {
     "tag_requirements": [
       {
@@ -19,10 +19,10 @@
   "type": "suffix",
   "stats": [
     {
-      "min": 10.0,
-      "max": 25.0,
+      "min": 5.0,
+      "max": 32.0,
       "stat": "chaos_resist",
-      "type": "PERCENT"
+      "type": "FLAT"
     }
   ]
 }

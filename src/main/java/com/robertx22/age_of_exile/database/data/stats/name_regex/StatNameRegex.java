@@ -59,10 +59,10 @@ public abstract class StatNameRegex {
         String add = "";
 
         if (type.isItemLocal()) {
-            add += " Gear";
+            add += "Gear ";
         }
         if (type == ModType.MORE) {
-            add += " More";
+            add += "More ";
         }
 
         String v1s = NumberUtils.formatForTooltip(v1);
@@ -79,7 +79,7 @@ public abstract class StatNameRegex {
 
         str = str.replace(VALUE, numberColor(format, stat, v1) + "" + plusminus + v1s + perc + TextFormatting.RESET + statColor(stat));
 
-        str = str.replace(NAME, add + " " + CLOC.translate(stat.locName()));
+        str = str.replace(NAME, add + "" + CLOC.translate(stat.locName()));
 
         return str;
 

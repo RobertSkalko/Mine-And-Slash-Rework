@@ -12,6 +12,7 @@ heal_crit_dmg_prefix
 water_ele_dmg_jewelry
 true_hit
 heal_crit_prefix
+lightning_res
 fire_wep_dmg
 item_perc_dodge
 of_spell_dmg
@@ -22,10 +23,11 @@ of_energy
 item_both_armor
 azure
 of_fast_cast
-cruel
 chaos_ele_dmg_jewelry
+wep_item_flat
 armored_mobs
 physical_wep_dmg_dun
+wep_item_both
 of_brutality
 focused
 of_affluence
@@ -50,11 +52,11 @@ item_flat_magic_shield
 of_the_troll
 scavanger
 of_the_sky
+wep_item_perc
 fire_wep_dmg_dun
 strong_str_armor_suf
 fire_ele_mobs
 precise
-of_speed
 of_mana
 of_vampirism
 desolation

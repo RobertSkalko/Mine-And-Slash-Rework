@@ -18,7 +18,7 @@ public class WeaponPrefixes implements ExileRegistryInit {
 
         AffixBuilder.Normal("wep_item_flat")
                 .Named("Deadly")
-                .stats(new StatModifier(1, 8, WeaponDamage.getInstance(), ModType.ITEM_FLAT))
+                .stats(new StatModifier(1, 6, WeaponDamage.getInstance(), ModType.ITEM_FLAT))
                 .includesTags(SlotTag.weapon_family)
                 .Prefix()
                 .Build();
@@ -30,7 +30,7 @@ public class WeaponPrefixes implements ExileRegistryInit {
                 .Build();
         AffixBuilder.Normal("wep_item_both")
                 .Named("Miserable")
-                .stats(new StatModifier(1, 4, WeaponDamage.getInstance(), ModType.ITEM_FLAT),
+                .stats(new StatModifier(1, 3, WeaponDamage.getInstance(), ModType.ITEM_FLAT),
                         new StatModifier(10, 50, WeaponDamage.getInstance(), ModType.ITEM_PERCENT))
                 .includesTags(SlotTag.weapon_family)
                 .Prefix()

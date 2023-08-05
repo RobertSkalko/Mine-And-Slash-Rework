@@ -11,7 +11,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttributes;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
-import com.robertx22.age_of_exile.database.data.stats.types.generated.AttackDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalPenetration;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuality;
@@ -105,9 +105,9 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         addTo(StatType.MAIN, Arrays.asList(HealthRegen.getInstance(), ManaRegen.getInstance(), EnergyRegen.getInstance()));
         addTo(StatType.MAIN, Arrays.asList(Armor.getInstance(), DodgeRating.getInstance()));
         addTo(StatType.MAIN, Arrays.asList(Stats.CRIT_CHANCE.get(), Stats.CRIT_DAMAGE.get(), Stats.SPELL_CRIT_CHANCE.get(), Stats.SPELL_CRIT_DAMAGE.get()));
-        addTo(StatType.MAIN, Arrays.asList(Stats.ACCURACY.get(), SpellDamage.getInstance(), Stats.ATTACK_SPEED.get(), Stats.CAST_SPEED.get(), Stats.COOLDOWN_REDUCTION.get()));
+        addTo(StatType.MAIN, Arrays.asList(Stats.ACCURACY.get(), SpellDamage.getInstance(), Stats.CAST_SPEED.get(), Stats.COOLDOWN_REDUCTION.get()));
 
-        addTo(StatType.ELEMENTAL, new AttackDamage(Elements.Elemental).generateAllPossibleStatVariations());
+        addTo(StatType.ELEMENTAL, new BonusAttackDamage(Elements.Elemental).generateAllPossibleStatVariations());
         addTo(StatType.ELEMENTAL, Stats.ELEMENTAL_SPELL_DAMAGE.getAll());
         addTo(StatType.ELEMENTAL, Stats.ELEMENTAL_DAMAGE.getAll());
 

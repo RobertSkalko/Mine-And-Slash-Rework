@@ -2,7 +2,7 @@
   "guid": "strong_str_armor_suf",
   "loc_name": "Of the Monster",
   "only_one_per_item": true,
-  "weight": 10000,
+  "weight": 1000,
   "requirements": {
     "tag_requirements": [
       {

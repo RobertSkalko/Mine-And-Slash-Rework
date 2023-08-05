@@ -1,5 +1,4 @@
 {
-  "attacksPerSecond": 1.2,
   "guid": "scepter",
   "level_range": {
     "start": 0.0,
@@ -7,14 +6,13 @@
   },
   "gear_slot": "scepter",
   "weight": 1000,
-  "weapon_offhand_stat_util": 0,
   "style": "magic",
   "implicit_stats": [],
   "base_stats": [
     {
-      "min": 1.8,
-      "max": 3.6,
-      "stat": "physical_weapon_damage",
+      "min": 2.0,
+      "max": 6.0,
+      "stat": "weapon_damage",
       "type": "ITEM_FLAT"
     }
   ],

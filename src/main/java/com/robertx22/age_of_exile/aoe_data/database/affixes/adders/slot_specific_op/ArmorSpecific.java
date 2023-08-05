@@ -15,7 +15,7 @@ public class ArmorSpecific implements ExileRegistryInit {
                 .bigCoreStat(DatapackStats.INT)
                 .includesTags(SlotTag.armor_family)
                 .Suffix()
-                .Weight(10000)
+                .Weight(1000)
                 .Build();
 
         AffixBuilder.Normal("strong_str_armor_suf")
@@ -23,7 +23,7 @@ public class ArmorSpecific implements ExileRegistryInit {
                 .bigCoreStat(DatapackStats.STR)
                 .includesTags(SlotTag.armor_family)
                 .Suffix()
-                .Weight(10000)
+                .Weight(1000)
                 .Build();
 
         AffixBuilder.Normal("strong_dex_armor_suf")
@@ -31,9 +31,9 @@ public class ArmorSpecific implements ExileRegistryInit {
                 .bigCoreStat(DatapackStats.DEX)
                 .includesTags(SlotTag.armor_family)
                 .Suffix()
-                .Weight(10000)
+                .Weight(1000)
                 .Build();
 
-      
+
     }
 }

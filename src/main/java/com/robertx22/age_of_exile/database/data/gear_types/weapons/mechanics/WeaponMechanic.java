@@ -1,11 +1,10 @@
 package com.robertx22.age_of_exile.database.data.gear_types.weapons.mechanics;
 
 import com.robertx22.age_of_exile.damage_hooks.util.AttackInformation;
-import com.robertx22.age_of_exile.database.data.stats.types.generated.AttackDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
-import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.library_of_exile.registry.IGUID;
 
@@ -28,17 +27,17 @@ public abstract class WeaponMechanic implements IGUID {
     protected void doNormalAttack(AttackInformation data) {
 
         WeaponTypes weptype = data.weaponData.GetBaseGearType()
-            .weaponType();
+                .weaponType();
 
         int num = (int) data.getAttackerEntityData()
-            .getUnit()
-            .getCalculatedStat(new AttackDamage(Elements.Physical))
-            .getValue();
+                .getUnit()
+                .getCalculatedStat(WeaponDamage.getInstance())
+                .getValue();
 
         DamageEvent dmg = EventBuilder.ofDamage(data, data.getAttackerEntity(), data.getTargetEntity(), num)
-            .setupDamage(AttackType.attack, weptype, data.weaponData.GetBaseGearType().style)
-            .setIsBasicAttack()
-            .build();
+                .setupDamage(AttackType.attack, weptype, data.weaponData.GetBaseGearType().style)
+                .setIsBasicAttack()
+                .build();
 
         dmg.Activate();
 

@@ -77,8 +77,8 @@ inc_effect_of_heal_over_time_buff_given
 mana
 chance_of_poison
 trap_cdr
+full_swing_damage
 health_on_all_hit
-critical_damage_per_10_attack_speed
 inc_effect_of_heal_over_time_buff_on_you
 chance_of_slow
 strength
@@ -117,6 +117,7 @@ mana_ooc_regen
 armor
 ele_staff_damage
 lightning_vuln_crit
+double_attack_chance
 plus_to_water
 heal_over_time_eff_dur_u_cast
 movement_spell_dmg
@@ -219,7 +220,6 @@ heal_spell_dmg
 chaos_vuln_crit
 chaos_resist
 shout_cdr
-attack_speed
 ranged_dmg
 mana_on_kill
 shout_spell_dmg

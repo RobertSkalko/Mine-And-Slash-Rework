@@ -15,7 +15,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellA
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
-import com.robertx22.age_of_exile.database.data.stats.types.generated.AttackDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SpellDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
@@ -56,13 +56,13 @@ public class BeneficialEffects implements ExileRegistryInit {
     public void registerAll() {
 
         ExileEffectBuilder.of(ICY_WEAPON)
-                .stat(1, 3, new AttackDamage(Elements.Cold), ModType.FLAT)
+                .stat(1, 3, new BonusAttackDamage(Elements.Cold), ModType.FLAT)
                 .maxStacks(1)
                 .addTags(EffectTags.positive)
                 .build();
 
         ExileEffectBuilder.of(FIRE_WEAPON)
-                .stat(1, 3, new AttackDamage(Elements.Fire), ModType.FLAT)
+                .stat(1, 3, new BonusAttackDamage(Elements.Fire), ModType.FLAT)
                 .maxStacks(1)
                 .addTags(EffectTags.positive)
                 .build();
@@ -92,11 +92,10 @@ public class BeneficialEffects implements ExileRegistryInit {
                 .addTags(EffectTags.offensive)
                 .build();
 
-   
+
         ExileEffectBuilder.of(MURDER_INSTINCT)
                 .stat(3, 5, Stats.TOTAL_DAMAGE.get(), ModType.FLAT)
                 .stat(5, 25, DodgeRating.getInstance(), ModType.PERCENT)
-                .stat(3, 5, Stats.ATTACK_SPEED.get(), ModType.FLAT)
                 .stat(3, 10, Stats.CRIT_DAMAGE.get(), ModType.FLAT)
                 .maxStacks(1)
                 .addTags(EffectTags.offensive)
@@ -145,7 +144,6 @@ public class BeneficialEffects implements ExileRegistryInit {
 
         ExileEffectBuilder.of(VALOR)
                 .stat(3, 6, Stats.TOTAL_DAMAGE.get(), ModType.FLAT)
-                .stat(2, 5, Stats.ATTACK_SPEED.get(), ModType.FLAT)
                 .stat(2, 5, Stats.CAST_SPEED.get(), ModType.FLAT)
                 .maxStacks(3)
                 .addTags(EffectTags.song, EffectTags.offensive)
@@ -178,7 +176,7 @@ public class BeneficialEffects implements ExileRegistryInit {
                 .build();
 
         ExileEffectBuilder.of(THORN_ARMOR)
-                .stat(10, 25, new ElementalResist(Elements.Chaos), ModType.PERCENT)
+                .stat(10, 25, new ElementalResist(Elements.Chaos), ModType.FLAT)
                 .stat(5, 10, Armor.getInstance(), ModType.FLAT)
                 .stat(5, 10, DodgeRating.getInstance(), ModType.FLAT)
                 .spell(SpellBuilder.forEffect()
@@ -194,7 +192,7 @@ public class BeneficialEffects implements ExileRegistryInit {
                 .build();
 
         ExileEffectBuilder.of(FROST_ARMOR)
-                .stat(10, 20, new ElementalResist(Elements.Cold), ModType.PERCENT)
+                .stat(10, 20, new ElementalResist(Elements.Cold), ModType.FLAT)
                 .stat(15, 25, Armor.getInstance(), ModType.FLAT)
                 .spell(SpellBuilder.forEffect()
                         .buildForEffect())
@@ -203,13 +201,13 @@ public class BeneficialEffects implements ExileRegistryInit {
                 .build();
 
         ExileEffectBuilder.of(DIVINE_SHIELD)
-                .stat(10, 15, new ElementalResist(Elements.Elemental), ModType.PERCENT)
+                .stat(10, 15, new ElementalResist(Elements.Elemental), ModType.FLAT)
                 .stat(5, 15, Armor.getInstance(), ModType.FLAT)
                 .addTags(EffectTags.defensive)
                 .build();
 
         ExileEffectBuilder.of(POISON_WEAPONS)
-                .stat(1, 2, new AttackDamage(Elements.Chaos), ModType.FLAT)
+                .stat(1, 2, new BonusAttackDamage(Elements.Chaos), ModType.FLAT)
                 .stat(5, 15, Stats.CHANCE_OF_APPLYING_EFFECT.get(NegativeEffects.POISON), ModType.FLAT)
                 .addTags(EffectTags.offensive)
                 .build();

@@ -1,14 +1,13 @@
 {
-  "guid": "focused",
-  "loc_name": "Focused",
+  "guid": "wep_item_perc",
+  "loc_name": "Cruel",
   "only_one_per_item": true,
   "weight": 1000,
   "requirements": {
     "tag_requirements": [
       {
         "included": [
-          "necklace",
-          "mage_weapon"
+          "weapon_family"
         ],
         "excluded": []
       }
@@ -18,10 +17,10 @@
   "type": "prefix",
   "stats": [
     {
-      "min": 4.0,
-      "max": 30.0,
-      "stat": "spell_critical_hit",
-      "type": "FLAT"
+      "min": 10.0,
+      "max": 150.0,
+      "stat": "weapon_damage",
+      "type": "ITEM_PERCENT"
     }
   ]
 }

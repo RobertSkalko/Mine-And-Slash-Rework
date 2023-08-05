@@ -13,7 +13,7 @@
       "min": 10.0,
       "max": 25.0,
       "stat": "chaos_resist",
-      "type": "PERCENT"
+      "type": "FLAT"
     },
     {
       "min": 5.0,

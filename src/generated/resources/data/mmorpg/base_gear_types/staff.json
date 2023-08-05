@@ -1,5 +1,4 @@
 {
-  "attacksPerSecond": 1.2,
   "guid": "staff",
   "level_range": {
     "start": 0.0,
@@ -7,14 +6,13 @@
   },
   "gear_slot": "staff",
   "weight": 1000,
-  "weapon_offhand_stat_util": 0,
   "style": "magic",
   "implicit_stats": [],
   "base_stats": [
     {
       "min": 2.0,
-      "max": 4.0,
-      "stat": "physical_weapon_damage",
+      "max": 6.0,
+      "stat": "weapon_damage",
       "type": "ITEM_FLAT"
     }
   ],

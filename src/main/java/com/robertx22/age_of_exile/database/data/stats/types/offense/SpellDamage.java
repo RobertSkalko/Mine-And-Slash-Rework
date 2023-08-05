@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.database.data.stats.types.offense;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
-import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageEffect;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
@@ -12,11 +11,12 @@ import net.minecraft.util.text.TextFormatting;
 public class SpellDamage extends Stat {
 
     private SpellDamage() {
-        this.scaling = StatScaling.SLOW;
         this.group = StatGroup.MAIN;
 
         this.statEffect = new Effect();
         this.format = TextFormatting.LIGHT_PURPLE.getName();
+
+
     }
 
     public static String GUID = "spell_damage";
@@ -75,7 +75,7 @@ public class SpellDamage extends Stat {
         @Override
         public boolean canActivate(DamageEvent effect, StatData data, Stat stat) {
             return effect.getAttackType()
-                .isSpell() && effect.isSpell();
+                    .isSpell() && effect.isSpell();
         }
     }
 

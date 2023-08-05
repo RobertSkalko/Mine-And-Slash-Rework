@@ -1,10 +1,11 @@
 package com.robertx22.age_of_exile.aoe_data.database.unique_gears.fabled;
 
 import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearTypes;
-import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuilder;
 import com.robertx22.age_of_exile.database.data.StatModifier;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
+import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuality;
+import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuantity;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -21,10 +22,10 @@ public class FabledJewelry implements ExileRegistryInit {
                         BaseGearTypes.RING)
                 .setReplacesName()
                 .stats(Arrays.asList(
-                        new StatModifier(10, 15, new ElementalResist(Elements.Fire), ModType.PERCENT),
-                        new StatModifier(10, 15, new ElementalResist(Elements.Chaos), ModType.PERCENT),
-                        new StatModifier(5, 5, DatapackStats.GLOBAL_CRIT_CHANCE_PER_MAGIC_FIND_25, ModType.FLAT),
-                        new StatModifier(10, 10, DatapackStats.GLOBAL_CRIT_DMG_PER_ITEM_FIND_25, ModType.FLAT)
+                        new StatModifier(-50, 50, new ElementalResist(Elements.Fire), ModType.FLAT),
+                        new StatModifier(-50, 50, new ElementalResist(Elements.Chaos), ModType.FLAT),
+                        new StatModifier(-50, 15, TreasureQuality.getInstance(), ModType.FLAT),
+                        new StatModifier(-50, 15, TreasureQuantity.getInstance(), ModType.FLAT)
                 ))
 
                 .devComment("God's ring: item find and luck")

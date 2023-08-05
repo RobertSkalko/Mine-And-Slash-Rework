@@ -64,7 +64,6 @@ ele_scepter_damage
 mana_regen
 lightning_weapon_damage
 chaos_resist
-attack_speed
 ranged_dmg
 mana_on_kill
 mana_battery

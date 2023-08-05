@@ -4,9 +4,9 @@
   "perc_upgrade_chance": 75,
   "on_armor_stats": [
     {
-      "v1": 2.4,
+      "v1": 5.0,
       "stat": "fire_resist",
-      "type": "PERCENT",
+      "type": "FLAT",
       "scale_to_lvl": true
     }
   ],

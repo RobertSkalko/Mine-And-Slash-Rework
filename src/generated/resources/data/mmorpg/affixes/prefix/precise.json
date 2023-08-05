@@ -19,7 +19,7 @@
   "stats": [
     {
       "min": 4.0,
-      "max": 8.0,
+      "max": 30.0,
       "stat": "critical_hit",
       "type": "FLAT"
     }

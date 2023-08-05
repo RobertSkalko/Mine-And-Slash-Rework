@@ -1,13 +1,15 @@
 {
-  "guid": "of_speed",
-  "loc_name": "Of Speed",
+  "guid": "lightning_res",
+  "loc_name": "Of the Yeti",
   "only_one_per_item": true,
-  "weight": 1000,
+  "weight": 5000,
   "requirements": {
     "tag_requirements": [
       {
         "included": [
-          "melee_weapon"
+          "jewelry_family",
+          "armor_family",
+          "offhand_family"
         ],
         "excluded": []
       }
@@ -18,8 +20,8 @@
   "stats": [
     {
       "min": 5.0,
-      "max": 20.0,
-      "stat": "attack_speed",
+      "max": 45.0,
+      "stat": "lightning_resist",
       "type": "FLAT"
     }
   ]

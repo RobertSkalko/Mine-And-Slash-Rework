@@ -51,8 +51,8 @@ public interface GearDataHelper {
 
     public default StatModifier getAttackDamageStat(WeaponTypes weapon) {
 
-        float v1min = 2 * weapon.statMulti;
-        float v1max = 4 * weapon.statMulti;
+        float v1min = 2;
+        float v1max = 6;
 
         return new StatModifier(v1min, v1max, WeaponDamage.getInstance(), ModType.ITEM_FLAT);
     }

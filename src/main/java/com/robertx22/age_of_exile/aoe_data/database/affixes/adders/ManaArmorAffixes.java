@@ -15,27 +15,27 @@ public class ManaArmorAffixes implements ExileRegistryInit {
     public void registerAll() {
 
         AffixBuilder.Normal("glimmering")
-            .Named("Glimmering")
-            .stats(new StatModifier(4, 10, Mana.getInstance(), ModType.PERCENT),
-                new StatModifier(4, 6, Armor.getInstance(), ModType.PERCENT))
-            .includesTags(SlotTag.armor_family)
-            .Prefix()
-            .Build();
+                .Named("Glimmering")
+                .stats(new StatModifier(4, 15, Mana.getInstance(), ModType.PERCENT),
+                        new StatModifier(4, 6, Armor.getInstance(), ModType.ITEM_FLAT))
+                .includesTags(SlotTag.armor_family)
+                .Prefix()
+                .Build();
 
         AffixBuilder.Normal("seraphim")
-            .Named("Seraphim's")
-            .stats(new StatModifier(4, 10, Mana.getInstance(), ModType.PERCENT),
-                new StatModifier(3, 6, Health.getInstance(), ModType.PERCENT))
-            .includesTags(SlotTag.armor_family)
-            .Prefix()
-            .Build();
+                .Named("Seraphim's")
+                .stats(new StatModifier(4, 10, Mana.getInstance(), ModType.PERCENT),
+                        new StatModifier(3, 6, Health.getInstance(), ModType.PERCENT))
+                .includesTags(SlotTag.armor_family)
+                .Prefix()
+                .Build();
 
         AffixBuilder.Normal("azure")
-            .Named("Azure")
-            .stats(new StatModifier(5, 12, Mana.getInstance(), ModType.PERCENT))
-            .includesTags(SlotTag.armor_family)
-            .Prefix()
-            .Build();
+                .Named("Azure")
+                .stats(new StatModifier(2, 14, Mana.getInstance(), ModType.PERCENT))
+                .includesTags(SlotTag.armor_family)
+                .Prefix()
+                .Build();
 
     }
 }

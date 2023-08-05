@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.database.data.value_calc;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
-import com.robertx22.age_of_exile.database.data.stats.types.generated.AttackDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -61,7 +61,7 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
 
         float amount = 0;
         if (attack_scaling.getValue(provider) > 0) {
-            for (Stat stat : new AttackDamage(Elements.Chaos).generateAllPossibleStatVariations()) {
+            for (Stat stat : new BonusAttackDamage(Elements.Chaos).generateAllPossibleStatVariations()) {
                 amount += provider.getCasterData()
                         .getUnit()
                         .getCalculatedStat(stat.GUID())

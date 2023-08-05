@@ -21,7 +21,7 @@
   "max": 1.0,
   "base": 0.0,
   "is_perc": false,
-  "scaling": "SLOW",
+  "scaling": "NONE",
   "is_long": true,
   "icon": "❁",
   "order": 100,

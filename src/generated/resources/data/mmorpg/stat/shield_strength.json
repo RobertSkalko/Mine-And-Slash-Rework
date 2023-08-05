@@ -18,7 +18,7 @@
   "max": 2.14748365E9,
   "base": 0.0,
   "is_perc": true,
-  "scaling": "SLOW",
+  "scaling": "NONE",
   "is_long": false,
   "icon": "❈",
   "order": 100,

@@ -20,7 +20,7 @@
   "max": 50.0,
   "base": 0.0,
   "is_perc": true,
-  "scaling": "SLOW",
+  "scaling": "NONE",
   "is_long": false,
   "icon": "❁",
   "order": 100,

@@ -1,26 +1,26 @@
 {
   "ser": "data",
-  "id": "attack_speed",
+  "id": "double_attack_chance",
   "ele": "Physical",
   "effect": {
-    "order": 0,
+    "order": 100,
     "side": "Source",
     "ifs": [
-      "style_is_magic_is_false"
+      "attack_type_is_attack"
     ],
     "effects": [
-      "decrease_cast_ticks_num"
+      "double_dmg"
     ],
     "events": [
-      "on_spell_stat_calc"
+      "on_damage"
     ]
   },
   "show": true,
   "min": -1000.0,
-  "max": 75.0,
+  "max": 100.0,
   "base": 0.0,
   "is_perc": true,
-  "scaling": "SLOW",
+  "scaling": "NONE",
   "is_long": false,
   "icon": "❁",
   "order": 100,

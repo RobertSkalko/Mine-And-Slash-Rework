@@ -4,7 +4,7 @@ import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.Negativ
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.database.data.StatModifier;
 import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
-import com.robertx22.age_of_exile.database.data.stats.types.generated.AttackDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.PhysConvertToEle;
 import com.robertx22.age_of_exile.database.data.stats.types.misc.ExtraMobDropsStat;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
@@ -18,10 +18,10 @@ import static com.robertx22.age_of_exile.uncommon.enumclasses.Elements.*;
 public class MobAffixes implements ExileRegistryInit {
 
     static void eleAffix(String name, Elements element) {
-        new MobAffix(element.guidName + "_mob_affix", new AttackDamage(element).getFormatAndIcon(), element.format)
+        new MobAffix(element.guidName + "_mob_affix", new BonusAttackDamage(element).getFormatAndIcon(), element.format)
                 .setMods(
                         new StatModifier(75, 75, new PhysConvertToEle(element)),
-                        new StatModifier(1, 1, new AttackDamage(element), ModType.FLAT),
+                        new StatModifier(1, 1, new BonusAttackDamage(element), ModType.FLAT),
                         new StatModifier(10, 10, ExtraMobDropsStat.getInstance()))
                 .setWeight(2000)
                 .addToSerializables();
@@ -41,43 +41,43 @@ public class MobAffixes implements ExileRegistryInit {
                 .setWeight(200)
                 .addToSerializables();
 
-        new MobAffix("winter", new AttackDamage(Cold).getFormatAndIcon(), Cold.format)
+        new MobAffix("winter", new BonusAttackDamage(Cold).getFormatAndIcon(), Cold.format)
                 .setMods(
                         new StatModifier(15, 15, Health.getInstance()),
                         new StatModifier(5, 5, Stats.CHANCE_OF_APPLYING_EFFECT.get(NegativeEffects.CHILL)),
                         new StatModifier(75, 75, new PhysConvertToEle(Cold)),
-                        new StatModifier(1, 1, new AttackDamage(Cold), ModType.FLAT),
+                        new StatModifier(1, 1, new BonusAttackDamage(Cold), ModType.FLAT),
                         new StatModifier(20, 20, ExtraMobDropsStat.getInstance()))
                 .icon(Cold.format + Cold.icon)
                 .setWeight(250)
                 .addToSerializables();
 
-        new MobAffix("fire_lord", new AttackDamage(Fire).getFormatAndIcon(), Fire.format)
+        new MobAffix("fire_lord", new BonusAttackDamage(Fire).getFormatAndIcon(), Fire.format)
                 .setMods(
                         new StatModifier(15, 15, Health.getInstance()),
                         new StatModifier(5, 5, Stats.CHANCE_OF_APPLYING_EFFECT.get(NegativeEffects.BURN)),
                         new StatModifier(75, 75, new PhysConvertToEle(Fire)),
-                        new StatModifier(1, 1, new AttackDamage(Fire), ModType.FLAT),
+                        new StatModifier(1, 1, new BonusAttackDamage(Fire), ModType.FLAT),
                         new StatModifier(20, 20, ExtraMobDropsStat.getInstance()))
                 .icon(Fire.format + Fire.icon)
                 .setWeight(250)
                 .addToSerializables();
 
-        new MobAffix("nature_lord", new AttackDamage(Chaos).getFormatAndIcon(), Chaos.format)
+        new MobAffix("nature_lord", new BonusAttackDamage(Chaos).getFormatAndIcon(), Chaos.format)
                 .setMods(
                         new StatModifier(15, 15, Health.getInstance()),
                         new StatModifier(5, 5, Stats.CHANCE_OF_APPLYING_EFFECT.get(NegativeEffects.POISON)),
                         new StatModifier(75, 75, new PhysConvertToEle(Chaos)),
-                        new StatModifier(1, 1, new AttackDamage(Chaos), ModType.FLAT),
+                        new StatModifier(1, 1, new BonusAttackDamage(Chaos), ModType.FLAT),
                         new StatModifier(20, 20, ExtraMobDropsStat.getInstance()))
                 .icon(Chaos.format + Chaos.icon)
                 .setWeight(250)
                 .addToSerializables();
 
-        new MobAffix("phys_lord", new AttackDamage(Physical).getFormatAndIcon(), TextFormatting.GRAY)
+        new MobAffix("phys_lord", new BonusAttackDamage(Physical).getFormatAndIcon(), TextFormatting.GRAY)
                 .setMods(
                         new StatModifier(15, 15, Health.getInstance()),
-                        new StatModifier(2, 2, new AttackDamage(Physical)),
+                        new StatModifier(2, 2, new BonusAttackDamage(Physical)),
                         new StatModifier(20, 20, ExtraMobDropsStat.getInstance()))
                 .setWeight(250)
                 .addToSerializables();

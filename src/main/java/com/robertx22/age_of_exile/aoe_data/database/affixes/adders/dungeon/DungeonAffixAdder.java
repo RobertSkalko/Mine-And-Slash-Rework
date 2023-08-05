@@ -5,7 +5,7 @@ import com.robertx22.age_of_exile.aoe_data.database.affixes.ElementalAffixBuilde
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.database.data.StatModifier;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
-import com.robertx22.age_of_exile.database.data.stats.types.generated.AttackDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
@@ -24,7 +24,7 @@ public class DungeonAffixAdder implements ExileRegistryInit {
                 .add(Elements.Cold, "Freezing")
                 .add(Elements.Chaos, "Poisonous")
                 .add(Elements.Physical, "Tyrannical")
-                .stats(x -> Arrays.asList(new StatModifier(1, 2, new AttackDamage(x), ModType.FLAT)))
+                .stats(x -> Arrays.asList(new StatModifier(1, 2, new BonusAttackDamage(x), ModType.FLAT)))
                 .DungeonPrefix()
                 .Build();
 
@@ -34,8 +34,8 @@ public class DungeonAffixAdder implements ExileRegistryInit {
                 .add(Elements.Cold, "Of Frost")
                 .add(Elements.Chaos, "Of Diseases")
                 .stats(x -> Arrays.asList(
-                        new StatModifier(1, 2, new AttackDamage(x), ModType.FLAT),
-                        new StatModifier(20, 30, new ElementalResist(x), ModType.PERCENT)
+                        new StatModifier(1, 2, new BonusAttackDamage(x), ModType.FLAT),
+                        new StatModifier(20, 30, new ElementalResist(x), ModType.FLAT)
                 ))
                 .DungeonSuffix()
                 .Build();
