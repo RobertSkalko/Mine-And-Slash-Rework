@@ -4,9 +4,8 @@ import com.robertx22.age_of_exile.database.data.StatModifier;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
-import com.robertx22.age_of_exile.database.data.stats.types.generated.AttackDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
-import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 
@@ -50,12 +49,12 @@ public interface GearDataHelper {
         return new StatModifier(v1min, v1max, stat.stat, ModType.ITEM_FLAT);
     }
 
-    public default StatModifier getAttackDamageStat(WeaponTypes weapon, Elements element) {
+    public default StatModifier getAttackDamageStat(WeaponTypes weapon) {
 
         float v1min = 2 * weapon.statMulti;
         float v1max = 4 * weapon.statMulti;
-// todo
-        return new StatModifier(v1min, v1max, new AttackDamage(element), ModType.ITEM_FLAT);
+
+        return new StatModifier(v1min, v1max, WeaponDamage.getInstance(), ModType.ITEM_FLAT);
     }
 
 }

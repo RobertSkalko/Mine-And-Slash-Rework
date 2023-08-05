@@ -9,34 +9,28 @@ import java.util.stream.Collectors;
 
 public enum WeaponTypes {
 
-    none("none", 0, PlayStyle.melee, WeaponRange.MELEE, false, 0F, 0),
-    axe("axe", 15, PlayStyle.melee, WeaponRange.MELEE, false, 1.25F, 1.5F),
-    staff("staff", 0, PlayStyle.magic, WeaponRange.MELEE, false, 1F, 1.2F),
-    trident("trident", 0, PlayStyle.melee, WeaponRange.OPTIONALLY_RANGED, false, 1.2F, 1F),
-    sword("sword", 15, PlayStyle.melee, WeaponRange.MELEE, false, 0.9F, 1.6F),
-    bow("bow", 0, PlayStyle.ranged, WeaponRange.RANGED, true, 0.8F, 1F),
-    crossbow("crossbow", 0, PlayStyle.ranged, WeaponRange.RANGED, true, 0.9F, 1F),
-    scepter("scepter", 0, PlayStyle.magic, WeaponRange.MELEE, false, 0.9F, 1.2F);
+    none("none", PlayStyle.melee, WeaponRange.MELEE, false),
+    axe("axe", PlayStyle.melee, WeaponRange.MELEE, false),
+    staff("staff", PlayStyle.magic, WeaponRange.MELEE, false),
+    trident("trident", PlayStyle.melee, WeaponRange.OPTIONALLY_RANGED, false),
+    sword("sword", PlayStyle.melee, WeaponRange.MELEE, false),
+    bow("bow", PlayStyle.ranged, WeaponRange.RANGED, true),
+    crossbow("crossbow", PlayStyle.ranged, WeaponRange.RANGED, true),
+    scepter("scepter", PlayStyle.magic, WeaponRange.MELEE, false);
 
-    WeaponTypes(String id, int weapon_offhand_stat_util, PlayStyle style, WeaponRange range, boolean isProjectile, float statMulti, float atkPerSec) {
+    WeaponTypes(String id, PlayStyle style, WeaponRange range, boolean isProjectile) {
         this.id = id;
         this.style = style;
         this.range = range;
         this.isProjectile = isProjectile;
-        this.statMulti = statMulti;
-        this.weapon_offhand_stat_util = weapon_offhand_stat_util;
-        this.atkPerSec = atkPerSec;
 
         ErrorUtils.ifFalse(this.id.equals(this.name()));
     }
 
-    public int weapon_offhand_stat_util;
     public PlayStyle style;
     WeaponRange range;
     public String id;
     public boolean isProjectile;
-    public float statMulti;
-    public float atkPerSec;
 
     public String locName() {
         return StringUtils.capitalize(id);
@@ -49,12 +43,8 @@ public enum WeaponTypes {
     public static List<WeaponTypes> getAll() {
 
         return Arrays.stream(WeaponTypes.values())
-            .filter(x -> x != none)
-            .collect(Collectors.toList());
+                .filter(x -> x != none)
+                .collect(Collectors.toList());
 
-    }
-
-    public float getVanillaItemAttackSpeedModifier() {
-        return -4 + atkPerSec; // 4 is the base atk speed
     }
 }

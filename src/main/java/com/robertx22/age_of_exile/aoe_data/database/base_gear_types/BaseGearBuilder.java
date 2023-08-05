@@ -7,7 +7,6 @@ import com.robertx22.age_of_exile.database.data.gear_types.bases.TagList;
 import com.robertx22.age_of_exile.database.data.level_ranges.LevelRange;
 import com.robertx22.age_of_exile.database.registrators.LevelRanges;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequirement;
-import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.library_of_exile.registry.DataGenKey;
@@ -27,8 +26,6 @@ public class BaseGearBuilder implements GearDataHelper {
     private List<StatModifier> implicitstats = new ArrayList<>();
     private StatRequirement req = new StatRequirement();
     private WeaponTypes wep = WeaponTypes.none;
-    private int weapon_offhand_stat_util = 0;
-    private float atkspeed = 1F;
     private int weight = 1000;
 
     public static BaseGearBuilder of(DataGenKey<BaseGearType> id, String slot, String locnamesuffix) {
@@ -44,11 +41,9 @@ public class BaseGearBuilder implements GearDataHelper {
         b.locnamesuffix = type.locName();
         b.id = id.GUID();
         b.slot = slot;
-        b.atkspeed = type.atkPerSec;
         b.weaponType(type);
         b.attackStyle(type.style);
-        b.weapon_offhand_stat_util = type.weapon_offhand_stat_util;
-        b.baseStat(b.getAttackDamageStat(type, Elements.Physical));
+        b.baseStat(b.getAttackDamageStat(type));
 
         return b;
     }
@@ -73,10 +68,6 @@ public class BaseGearBuilder implements GearDataHelper {
         return this;
     }
 
-    public BaseGearBuilder attackSpeed(float speed) {
-        this.atkspeed = speed;
-        return this;
-    }
 
     public BaseGearBuilder baseStat(StatModifier... mod) {
         this.basestats.addAll(Arrays.asList(mod));
@@ -99,10 +90,8 @@ public class BaseGearBuilder implements GearDataHelper {
         type.tags = tags;
         type.implicit_stats = implicitstats;
         type.base_stats = basestats;
-        type.attacksPerSecond = atkspeed;
         type.weight = weight;
         type.style = style;
-        type.weapon_offhand_stat_util = weapon_offhand_stat_util;
         type.addToSerializables();
 
         return new DataGenKey<>(type.GUID());

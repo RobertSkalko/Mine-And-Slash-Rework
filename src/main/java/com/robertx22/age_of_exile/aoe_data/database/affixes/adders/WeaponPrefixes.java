@@ -5,7 +5,7 @@ import com.robertx22.age_of_exile.aoe_data.database.affixes.ElementalAffixBuilde
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.database.data.StatModifier;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType.SlotTag;
-import com.robertx22.age_of_exile.database.data.stats.types.generated.AttackDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -15,6 +15,26 @@ import java.util.Arrays;
 public class WeaponPrefixes implements ExileRegistryInit {
     @Override
     public void registerAll() {
+
+        AffixBuilder.Normal("wep_item_flat")
+                .Named("Deadly")
+                .stats(new StatModifier(1, 8, WeaponDamage.getInstance(), ModType.ITEM_FLAT))
+                .includesTags(SlotTag.weapon_family)
+                .Prefix()
+                .Build();
+        AffixBuilder.Normal("wep_item_perc")
+                .Named("Cruel")
+                .stats(new StatModifier(10, 150, WeaponDamage.getInstance(), ModType.ITEM_PERCENT))
+                .includesTags(SlotTag.weapon_family)
+                .Prefix()
+                .Build();
+        AffixBuilder.Normal("wep_item_both")
+                .Named("Miserable")
+                .stats(new StatModifier(1, 4, WeaponDamage.getInstance(), ModType.ITEM_FLAT),
+                        new StatModifier(10, 50, WeaponDamage.getInstance(), ModType.ITEM_PERCENT))
+                .includesTags(SlotTag.weapon_family)
+                .Prefix()
+                .Build();
 
         ElementalAffixBuilder.start()
                 .guid(x -> x.guidName + "_wep_dmg")
@@ -46,12 +66,6 @@ public class WeaponPrefixes implements ExileRegistryInit {
                 .Prefix()
                 .Build();
 
-        AffixBuilder.Normal("cruel")
-                .Named("Cruel")
-                .stats(new StatModifier(5, 15, new AttackDamage(Elements.Physical), ModType.PERCENT))
-                .includesTags(SlotTag.weapon_family)
-                .Prefix()
-                .Build();
 
         AffixBuilder.Normal("true_hit")
                 .Named("True Hit")

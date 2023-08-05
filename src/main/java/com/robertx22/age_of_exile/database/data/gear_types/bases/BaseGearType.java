@@ -26,13 +26,11 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
 
     public static BaseGearType SERIALIZER = new BaseGearType();
 
-    public float attacksPerSecond = 1;
     protected String guid;
     protected LevelRange level_range;
     public String gear_slot = "";
 
     public int weight = 1000;
-    public int weapon_offhand_stat_util = 0;
     public PlayStyle style = PlayStyle.melee;
 
     public List<StatModifier> implicit_stats = new ArrayList<>();
@@ -127,7 +125,7 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
         float multi = stat
                 .getMultiplier();
 
-        float f = multi * attacksPerSecond;
+        float f = multi;
 
         return f;
     }

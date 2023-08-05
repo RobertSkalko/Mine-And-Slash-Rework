@@ -14,7 +14,6 @@ public abstract class ModWeapon extends SingleTargetWeapon {
     public ModWeapon(ItemTier mat, Properties settings, WeaponTypes type) {
         super(mat, settings, type.locName());
 
-        this.attackSpeed = type.getVanillaItemAttackSpeedModifier();
     }
 
     @Override
