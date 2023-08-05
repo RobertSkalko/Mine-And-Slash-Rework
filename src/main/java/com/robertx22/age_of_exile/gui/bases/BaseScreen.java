@@ -27,13 +27,14 @@ public class BaseScreen extends Screen {
     public int sizeY = 0;
 
     public void renderBackground(MatrixStack matrix, ResourceLocation id) {
+
         mc.getTextureManager()
-            .bind(id);
+                .bind(id);
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         blit(matrix, mc.getWindow()
-                .getGuiScaledWidth() / 2 - sizeX / 2,
-            mc.getWindow()
-                .getGuiScaledHeight() / 2 - sizeY / 2, 0, 0, sizeX, sizeY
+                        .getGuiScaledWidth() / 2 - sizeX / 2,
+                mc.getWindow()
+                        .getGuiScaledHeight() / 2 - sizeY / 2, 0, 0, sizeX, sizeY
         );
     }
 
@@ -41,7 +42,7 @@ public class BaseScreen extends Screen {
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         if (KeybindsRegister.HUB_SCREEN_KEY.matches(keyCode, scanCode)) {
             Minecraft.getInstance()
-                .setScreen(null);
+                    .setScreen(null);
             OnKeyPress.cooldown = 5;
             return false;
         }

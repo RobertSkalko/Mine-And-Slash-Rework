@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
-import com.robertx22.age_of_exile.mixin_ducks.FallingBlockAccessor;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
@@ -51,7 +50,7 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
 
         try {
             return Registry.BLOCK.get(new ResourceLocation(this.entityData.get(BLOCK)))
-                .defaultBlockState();
+                    .defaultBlockState();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -101,7 +100,7 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
                 speed *= 1 + 0.03F * tickCount;
 
                 this.setDeltaMovement(this.getDeltaMovement()
-                    .add(0.0D, speed, 0.0D));
+                        .add(0.0D, speed, 0.0D));
             }
             this.move(MoverType.SELF, this.getDeltaMovement());
 
@@ -113,9 +112,9 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
 
         try {
             this.getSpellData()
-                .getSpell()
-                .getAttached()
-                .tryActivate(getScoreboardName(), SpellCtx.onTick(getSpellData().getCaster(level), this, getSpellData()));
+                    .getSpell()
+                    .getAttached()
+                    .tryActivate(getScoreboardName(), SpellCtx.onTick(getSpellData().getCaster(level), this, getSpellData()));
         } catch (Exception e) {
             e.printStackTrace();
             this.remove();
@@ -135,9 +134,9 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
 
                 if (caster != null) {
                     this.getSpellData()
-                        .getSpell()
-                        .getAttached()
-                        .tryActivate(getScoreboardName(), SpellCtx.onExpire(caster, this, getSpellData()));
+                            .getSpell()
+                            .getAttached()
+                            .tryActivate(getScoreboardName(), SpellCtx.onExpire(caster, this, getSpellData()));
                 }
             }
         } catch (Exception e) {
@@ -180,7 +179,7 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
         this.spellData = data;
 
         this.lifespan = holder.get(MapField.LIFESPAN_TICKS)
-            .intValue();
+                .intValue();
 
         data.item_id = holder.get(MapField.ITEM);
         CompoundNBT nbt = new CompoundNBT();
@@ -189,7 +188,7 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
         entityData.set(ENTITY_NAME, holder.get(MapField.ENTITY_NAME));
         entityData.set(BLOCK, holder.get(MapField.BLOCK));
         entityData.set(FALL_SPEED, holder.getOrDefault(MapField.BLOCK_FALL_SPEED, -0.04D)
-            .floatValue());
+                .floatValue());
 
     }
 }
