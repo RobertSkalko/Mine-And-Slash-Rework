@@ -5,7 +5,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ITooltipList;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.library_of_exile.registry.serialization.ISerializablePart;
 import com.robertx22.library_of_exile.wrappers.ExileText;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,8 +46,8 @@ public class Requirements implements ITooltipList {
             new SlotRequirement(), new TagRequirement());
 
     @Override
-    public List<Component> GetTooltipString(TooltipInfo info) {
-        List<Component> list = new ArrayList<>();
+    public List<MutableComponent> GetTooltipString(TooltipInfo info) {
+        List<MutableComponent> list = new ArrayList<>();
         this.tag_requirements.forEach(x -> {
             list.add(ExileText.ofText("").get());
             list.addAll(x.GetTooltipString(info));

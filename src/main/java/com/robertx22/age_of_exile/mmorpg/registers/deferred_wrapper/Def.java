@@ -2,17 +2,17 @@ package com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper;
 
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.library_of_exile.registry.IGUID;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.core.particles.ParticleType;
-import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 
@@ -26,7 +26,7 @@ public class Def {
 
     public static <T extends Item & IGUID> RegObj<T> item(Supplier<T> object) {
         return item(object.get()
-            .GUID(), object);
+                .GUID(), object);
     }
     // todo not lazy
 

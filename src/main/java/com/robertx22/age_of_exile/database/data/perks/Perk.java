@@ -18,6 +18,7 @@ import com.robertx22.library_of_exile.registry.serialization.IByteBuf;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
@@ -99,8 +100,8 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipL
     }
 
     @Override
-    public List<Component> GetTooltipString(TooltipInfo info) {
-        List<Component> list = new ArrayList<>();
+    public List<MutableComponent> GetTooltipString(TooltipInfo info) {
+        List<MutableComponent> list = new ArrayList<>();
 
         try {
 

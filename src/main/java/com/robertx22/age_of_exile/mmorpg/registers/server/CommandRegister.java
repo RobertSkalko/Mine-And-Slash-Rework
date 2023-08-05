@@ -16,7 +16,6 @@ import com.robertx22.age_of_exile.vanilla_mc.commands.stats.ClearStats;
 import com.robertx22.age_of_exile.vanilla_mc.commands.stats.GiveStat;
 import com.robertx22.age_of_exile.vanilla_mc.commands.stats.ListStats;
 import com.robertx22.age_of_exile.vanilla_mc.commands.stats.RemoveStat;
-import com.robertx22.age_of_exile.vanilla_mc.commands.test_build.TestBuild;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.MinecraftServer;
 
@@ -38,7 +37,7 @@ public class CommandRegister {
 
         ResetSpellCooldowns.register(dispatcher);
         SyncDatapacks.register(dispatcher);
-    
+
         GiveStat.register(dispatcher);
         RemoveStat.register(dispatcher);
         ClearStats.register(dispatcher);

@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.gui.screens.skill_tree.buttons;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.SkillTreeScreen;
@@ -8,6 +7,7 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.resources.ResourceLocation;
 
@@ -34,7 +34,7 @@ public class ConnectionButton extends ImageButton {
         this.screen = screen;
 
         connection = Load.playerRPGData(mc.player).talents
-            .getConnection(school, one, two);
+                .getConnection(school, one, two);
 
     }
 
@@ -42,13 +42,13 @@ public class ConnectionButton extends ImageButton {
     Perk.Connection connection;
 
     @Override
-    public void renderButton(PoseStack matrices, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics gui, int mouseX, int mouseY, float delta) {
         // do nothing. use the custom method
     }
 
     // render here so the bind texture is only called once
     // because there are thousands of connector buttons
-    public void renderButtonForReal(PoseStack matrices, int mouseX, int mouseY, float delta) {
+    public void renderButtonForReal(GuiGraphics gui, int mouseX, int mouseY, float delta) {
 
         ticks++;
 
@@ -56,19 +56,20 @@ public class ConnectionButton extends ImageButton {
             if (ticks % 10 == 0) {
                 if (screen.pointClicked.equals(this.one) || screen.pointClicked.equals(this.two)) {
                     connection = Load.playerRPGData(mc.player).talents
-                        .getConnection(school, one, two);
+                            .getConnection(school, one, two);
                 }
+
             }
         }
 
         //RenderSystem.enableDepthTest();
 
         if (connection == Perk.Connection.POSSIBLE) {
-            blit(matrices, this.x, this.y, 0, 0, 6, 6);
+            gui.blit(ConnectionButton.ID, this.getX(), this.getY(), 0, 0, 6, 6);
         } else if (connection == Perk.Connection.LINKED) {
-            blit(matrices, this.x, this.y, 6, 0, 6, 6);
+            gui.blit(ConnectionButton.ID, this.getX(), this.getY(), 6, 0, 6, 6);
         } else if (connection == Perk.Connection.BLOCKED) {
-            blit(matrices, this.x, this.y, 12, 0, 6, 6);
+            gui.blit(ConnectionButton.ID, this.getX(), this.getY(), 12, 0, 6, 6);
         }
 
     }

@@ -9,10 +9,10 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.library_of_exile.utils.CLOC;
+import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ public class TooltipUtils {
 
     public static List<String> compsToStrings(List<Component> list) {
         return list.stream()
-                .map(x -> x.getContents())
+                .map(x -> x.getString()) // todo does this work ?
                 .collect(Collectors.toList());
     }
 
@@ -69,7 +69,7 @@ public class TooltipUtils {
     public static List<Component> cutIfTooLong(MutableComponent comp) {
         List<String> stringList = cutIfTooLong(CLOC.translate(comp));
         return stringList.stream()
-                .map(x -> ExileText.ofText(x))
+                .map(x -> ExileText.ofText(x).get())
                 .collect(Collectors.toList());
 
     }
@@ -77,7 +77,7 @@ public class TooltipUtils {
     public static List<MutableComponent> cutIfTooLong(MutableComponent comp, ChatFormatting format) {
         List<String> stringList = cutIfTooLong(CLOC.translate(comp));
         return stringList.stream()
-                .map(x -> ExileText.ofText(x).withStyle(format))
+                .map(x -> ExileText.ofText(x).format(format).get())
                 .collect(Collectors.toList());
 
     }

@@ -13,11 +13,11 @@ import java.util.List;
 public class NormalStatTooltip implements IStatTooltipType {
 
     @Override
-    public List<Component> getTooltipList(ChatFormatting format, TooltipStatWithContext ctx) {
+    public List<MutableComponent> getTooltipList(ChatFormatting format, TooltipStatWithContext ctx) {
 
         TooltipStatInfo info = ctx.statinfo;
 
-        List<Component> list = new ArrayList<>();
+        List<MutableComponent> list = new ArrayList<>();
 
         MutableComponent txt = Component.literal(ChatFormatting.BLUE + info.stat.getStatNameRegex()
                 .translate(format, ctx, info.type, info.firstValue, info.stat));

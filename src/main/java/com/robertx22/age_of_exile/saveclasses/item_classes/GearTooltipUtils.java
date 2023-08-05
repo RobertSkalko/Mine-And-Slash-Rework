@@ -10,13 +10,11 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.MergedStats;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
+import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraft.util.text.*;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -48,7 +46,7 @@ public class GearTooltipUtils {
             tip.addAll(gear.baseStats.GetTooltipString(info, gear));
         }
 
-        tip.add(ExileText.ofText(""));
+        tip.add(ExileText.ofText("").get());
 
         if (gear.imp != null) {
             tip.addAll(gear.imp.GetTooltipString(info, gear));
@@ -150,9 +148,9 @@ public class GearTooltipUtils {
 
         if (ClientConfigs.getConfig().SHOW_DURABILITY.get()) {
             if (stack.isDamageableItem()) {
-                tip.add(ExileText.ofText(ChatFormatting.WHITE + "Durability: " + (stack.getMaxDamage() - stack.getDamageValue()) + "/" + stack.getMaxDamage()));
+                tip.add(ExileText.ofText(ChatFormatting.WHITE + "Durability: " + (stack.getMaxDamage() - stack.getDamageValue()) + "/" + stack.getMaxDamage()).get());
             } else {
-                tip.add(ExileText.ofText(ChatFormatting.WHITE + "Unbreakable"));
+                tip.add(ExileText.ofText(ChatFormatting.WHITE + "Unbreakable").get());
             }
         }
 

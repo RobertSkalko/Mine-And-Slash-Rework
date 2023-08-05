@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.gui.screens.skill_tree.buttons;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.IMarkOnTop;
@@ -8,6 +7,7 @@ import com.robertx22.age_of_exile.gui.screens.skill_tree.SkillTreeScreen;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.library_of_exile.utils.GuiUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.resources.ResourceLocation;
 
@@ -38,22 +38,20 @@ public class TalentTreeButton extends ImageButton implements IMarkOnTop {
         return GuiUtils.isInRect(this.x, this.y, XSIZE, YSIZE, x, y);
     }
 
-    @Override
-    public void renderToolTip(PoseStack matrices, int mouseX, int mouseY) {
+
+    public void renderToolTip(GuiGraphics matrices, int mouseX, int mouseY) {
         if (this.isInside(mouseX, mouseY)) {
             //GuiUtils.renderTooltip(matrices, this.tooltip, mouseX, mouseY);
         }
     }
 
     @Override
-    public void renderButton(PoseStack matrices, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics gui, int mouseX, int mouseY, float delta) {
         // super.renderButton(matrices, mouseX, mouseY, delta);
 
         Minecraft mc = Minecraft.getInstance();
-        mc.getTextureManager()
-            .bind(new ResourceLocation(school.icon));
         RenderSystem.enableDepthTest();
-        blit(matrices, this.x, this.y, 0, 0, XSIZE, XSIZE, XSIZE, XSIZE);
+        gui.blit(new ResourceLocation(school.icon), this.getX(), this.getY(), 0, 0, XSIZE, XSIZE, XSIZE, XSIZE);
     }
 
 }

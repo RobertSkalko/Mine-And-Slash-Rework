@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.serialization.IByteBuf;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +61,7 @@ public class OptScaleExactStat implements IByteBuf<OptScaleExactStat> {
         return new ArrayList<>(stat.getTooltipList(new TooltipStatWithContext(statInfo, null, null)));
     }
 
-    public List<Component> GetTooltipString(TooltipInfo info) {
+    public List<MutableComponent> GetTooltipString(TooltipInfo info) {
         Stat stat = getStat();
         TooltipStatInfo statInfo = new TooltipStatInfo(this.toExactStat(this.scale_to_lvl ? info.unitdata.getLevel() : 1), -99, info);
         return new ArrayList<>(stat.getTooltipList(new TooltipStatWithContext(statInfo, null, null)));

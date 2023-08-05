@@ -14,10 +14,10 @@ import java.util.List;
 public class BaseLocalStatTooltip implements IStatTooltipType {
 
     @Override
-    public List<Component> getTooltipList(ChatFormatting format, TooltipStatWithContext ctx) {
+    public List<MutableComponent> getTooltipList(ChatFormatting format, TooltipStatWithContext ctx) {
         TooltipStatInfo info = ctx.statinfo;
 
-        List<Component> list = new ArrayList<Component>();
+        List<MutableComponent> list = new ArrayList<MutableComponent>();
         if (true) {
             String icon = "\u25CF";
             list.add(Component.literal(icon + " ")

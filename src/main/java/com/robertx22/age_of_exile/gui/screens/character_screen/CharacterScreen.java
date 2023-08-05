@@ -39,6 +39,7 @@ import com.robertx22.age_of_exile.vanilla_mc.packets.AllocateStatPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.GuiUtils;
 import com.robertx22.library_of_exile.utils.RenderUtils;
+import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.ImageButton;

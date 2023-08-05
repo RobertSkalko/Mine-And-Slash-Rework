@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.gui.screens.skill_tree.buttons;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.capability.player.RPGPlayerData;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
@@ -15,9 +14,10 @@ import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.GuiUtils;
 import com.robertx22.library_of_exile.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.network.chat.Component;
 
 import java.util.List;
 
@@ -62,19 +62,19 @@ public class PerkButton extends ImageButton {
 
         float scale = 2 - screen.zoom;
 
-        return GuiUtils.isInRect((int) (this.x), (int) (this.y), (int) (width * scale), (int) (height * scale), x, y);
+        return GuiUtils.isInRect((int) (this.getX()), (int) (this.getY()), (int) (width * scale), (int) (height * scale), x, y);
     }
 
-    @Override
-    public void renderToolTip(PoseStack matrices, int mouseX, int mouseY) {
+
+    public void renderToolTip(GuiGraphics gui, int mouseX, int mouseY) {
 
         int MmouseX = (int) (1F / screen.zoom * mouseX);
         int MmouseY = (int) (1F / screen.zoom * mouseY);
 
         if (this.isInside(MmouseX, MmouseY)) {
 
-            List<Component> tooltip = perk.GetTooltipString(new TooltipInfo(Minecraft.getInstance().player));
-            GuiUtils.renderTooltip(matrices, tooltip, mouseX, mouseY);
+            List<MutableComponent> tooltip = perk.GetTooltipString(new TooltipInfo(Minecraft.getInstance().player));
+            GuiUtils.renderTooltip(gui, tooltip, mouseX, mouseY);
         }
     }
 
@@ -93,7 +93,7 @@ public class PerkButton extends ImageButton {
             boolean bl = this.clicked(mouseX, mouseY);
             if (bl) {
                 this.playDownSound(Minecraft.getInstance()
-                    .getSoundManager());
+                        .getSoundManager());
 
                 if (button == 0) {
                     Packets.sendToServer(new PerkChangePacket(school, point, PerkChangePacket.ACTION.ALLOCATE));
@@ -113,16 +113,15 @@ public class PerkButton extends ImageButton {
     }
 
     int xPos(int offset, float multi) {
-        return (int) ((this.x) * multi) + offset;
+        return (int) ((this.getX()) * multi) + offset;
     }
 
     int yPos(int offset, float multi) {
-        return (int) ((this.y) * multi) + offset;
+        return (int) ((this.getY()) * multi) + offset;
     }
 
     @Override
-
-    public void renderButton(PoseStack matrices, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics gui, int mouseX, int mouseY, float delta) {
 
         float scale = 2 - screen.zoom;
 
@@ -132,46 +131,38 @@ public class PerkButton extends ImageButton {
             posMulti = 1.5F;
         }
 
-        matrices.scale(scale, scale, scale);
+        gui.pose().scale(scale, scale, scale);
 
         PerkStatus status = playerData.talents.getStatus(Minecraft.getInstance().player, school, point);
 
-        mc.getTextureManager()
-            .bind(ID);
 
         int offset = 4;
 
         // background
         RenderSystem.enableDepthTest();
-        blit(matrices, xPos(0, posMulti), yPos(0, posMulti), perk.getType()
-            .getXOffset(), status
-            .getYOffset(), this.width, this.height);
+        gui.blit(ID, xPos(0, posMulti), yPos(0, posMulti), perk.getType()
+                .getXOffset(), status
+                .getYOffset(), this.width, this.height);
 
         if (this.perk.getType() == Perk.PerkType.STAT) {
             // icon
-            mc.getTextureManager()
-                .bind(this.perk.getIcon());
-            blit(matrices, xPos(offset, posMulti), yPos(offset, posMulti), 0, 0, 16, 16, 16, 16);
+            gui.blit(perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti), 0, 0, 16, 16, 16, 16);
         } else if (this.perk.getType() == Perk.PerkType.MAJOR) {
             // icon
-            mc.getTextureManager()
-                .bind(this.perk.getIcon());
             offset = 9;
-            RenderUtils.render16Icon(matrices, perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti));
+            RenderUtils.render16Icon(gui, perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti));
         } else if (perk.getType() == Perk.PerkType.START) {
             offset = 9;
             if (perk.icon == null || perk.icon.isEmpty()) {
-                RenderUtils.render16Icon(matrices, new ResourceLocation(school.icon), xPos(offset, posMulti), yPos(offset, posMulti));
+                RenderUtils.render16Icon(gui, new ResourceLocation(school.icon), xPos(offset, posMulti), yPos(offset, posMulti));
             } else {
-                RenderUtils.render16Icon(matrices, perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti));
+                RenderUtils.render16Icon(gui, perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti));
             }
         } else if (perk.getType() == Perk.PerkType.SPECIAL) {
 
             // icon
             offset = 6;
-            mc.getTextureManager()
-                .bind(this.perk.getIcon());
-            blit(matrices, xPos(offset, posMulti), yPos(offset, posMulti), 0, 0, 16, 16, 16, 16);
+            gui.blit(perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti), 0, 0, 16, 16, 16, 16);
         }
 
         if (this.perk.isLockedToPlayer(mc.player)) {
@@ -184,7 +175,7 @@ public class PerkButton extends ImageButton {
             }
         }
 
-        matrices.scale(1F / scale, 1F / scale, 1F / scale);
+        gui.pose().scale(1F / scale, 1F / scale, 1F / scale);
 
     }
 

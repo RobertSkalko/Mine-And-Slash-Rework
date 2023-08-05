@@ -1,14 +1,15 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
-import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.resources.ResourceLocation;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LeavesBlock;
 
 import java.util.Arrays;
 
@@ -73,8 +74,7 @@ public class WorldUtils {
         BlockPos surface = getSurface(world, pos);
 
         for (BlockPos x : Arrays.asList(surface.above(), surface.above(2), surface.below(), surface.below(2), surface)) {
-            if (world.getBlockState(x)
-                    .getMaterial() == Material.WATER) {
+            if (world.getBlockState(x).is(Blocks.WATER)) {
                 return true;
             }
         }
@@ -117,13 +117,12 @@ public class WorldUtils {
 
     }
 
-    static boolean isId(LevelReader world, ResourceLocation dimid) {
+    static boolean isId(Level world, ResourceLocation dimid) {
 
         if (MMORPG.server == null) {
             return false;
         }
-        ResourceLocation id = MMORPG.server.registryAccess()
-                .dimensionTypes()
+        ResourceLocation id = VanillaUTIL.REGISTRY.dimensionTypes((Level) world)
                 .getKey(world.dimensionType());
 
         if (id != null) {

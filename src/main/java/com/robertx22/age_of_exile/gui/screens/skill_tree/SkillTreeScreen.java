@@ -1,8 +1,9 @@
 package com.robertx22.age_of_exile.gui.screens.skill_tree;
 
 import com.google.common.collect.Sets;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.Tesselator;
 import com.robertx22.age_of_exile.capability.player.RPGPlayerData;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
@@ -19,15 +20,15 @@ import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.utils.GuiUtils;
 import com.robertx22.library_of_exile.utils.GuiUtils.PointF;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.ChatFormatting;
 
 import java.awt.*;
 import java.util.List;
@@ -41,10 +42,10 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     public SkillTreeScreen(SchoolType type) {
         super(Minecraft.getInstance()
-            .getWindow()
-            .getGuiScaledWidth(), Minecraft.getInstance()
-            .getWindow()
-            .getGuiScaledHeight());
+                .getWindow()
+                .getGuiScaledWidth(), Minecraft.getInstance()
+                .getWindow()
+                .getGuiScaledHeight());
         this.schoolType = type;
 
     }
@@ -104,9 +105,9 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         try {
 
             schoolsInOrder = ExileDB.TalentTrees()
-                .getFiltered(x -> {
-                    return x.getSchool_type() == this.schoolType;
-                });
+                    .getFiltered(x -> {
+                        return x.getSchool_type() == this.schoolType;
+                    });
             schoolsInOrder.sort(Comparator.comparingInt(x -> x.order));
 
             this.school = schoolsInOrder.get(0);
@@ -121,7 +122,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
     }
 
     public void addButtonPublic(AbstractWidget b) {
-        this.addButton(b);
+        this.addWidget(b);
     }
 
     private void addConnections() {
@@ -130,14 +131,14 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
         Set<Set<PointData>> cons = new HashSet<>();
 
-        new ArrayList<>(buttons).forEach(b -> {
+        new ArrayList<>(children()).forEach(b -> {
             if (b instanceof PerkButton) {
                 PerkButton pb = (PerkButton) b;
 
                 Set<PointData> connections = this.school.calcData.connections.getOrDefault(pb.point, def);
 
-                int x1 = pb.x + pb.getWidth() / 2;
-                int y1 = pb.y + pb.getHeight() / 2;
+                int x1 = pb.getX() + pb.getWidth() / 2;
+                int y1 = pb.getY() + pb.getHeight() / 2;
 
                 int size = 6;
                 float spacing = size + size / 2F;
@@ -145,7 +146,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                 for (PointData p : connections) {
 
                     if (cons.stream()
-                        .anyMatch(x -> x.contains(p) && x.contains(pb.point))) {
+                            .anyMatch(x -> x.contains(p) && x.contains(pb.point))) {
                         continue;
                     }
 
@@ -158,8 +159,8 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
                     }
 
-                    int x2 = sb.x + sb.getWidth() / 2;
-                    int y2 = sb.y + sb.getHeight() / 2;
+                    int x2 = sb.getX() + sb.getWidth() / 2;
+                    int y2 = sb.getY() + sb.getHeight() / 2;
 
                     List<PointF> points = GuiUtils.generateCurve(new PointF(x1, y1), new PointF(x2, y2), 360f, spacing + 2, true);
 
@@ -185,15 +186,16 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
         originalButtonLocMap.clear();
         pointPerkButtonMap.clear();
-        this.buttons.clear();
-        this.children.clear();
+
+        // this.buttons.clear();
+        this.children().clear();
 
         this.scrollX = 0;
         this.scrollY = 0;
 
         for (Map.Entry<PointData, String> e : school.calcData.perks.entrySet()) {
             Perk perk = ExileDB.Perks()
-                .get(e.getValue());
+                    .get(e.getValue());
 
             if (perk == null) {
                 continue;
@@ -202,9 +204,9 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
             try {
                 // centers them if they are smaller than the biggest one
                 int addx = (PerkButton.BIGGEST) / 2 - perk
-                    .getType().width / 2;
+                        .getType().width / 2;
                 int addy = (PerkButton.BIGGEST) / 2 - perk
-                    .getType().height / 2;
+                        .getType().height / 2;
 
                 int subx = PerkButton.BIGGEST / 2;
                 int suby = PerkButton.BIGGEST / 2;
@@ -219,12 +221,12 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         }
 
         int sx = mc.getWindow()
-            .getGuiScaledWidth() / 2 - TalentTreeButton.XSIZE / 2;
+                .getGuiScaledWidth() / 2 - TalentTreeButton.XSIZE / 2;
         int sy = 0;
 
         if (this.schoolsInOrder.size() > 1) {
 
-            this.addButton(new TalentTreeButton(this, school, sx, sy));
+            this.addButtonPublic(new TalentTreeButton(this, school, sx, sy));
 
             int place = this.schoolsInOrder.indexOf(school);
 
@@ -237,12 +239,12 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                 TalentTree school1 = getSchoolByIndexAllowsOutOfBounds(place + index1);
                 TalentTree school2 = getSchoolByIndexAllowsOutOfBounds(place + index2);
 
-                this.addButton(new TalentTreeButton(this, school1, sx + xadd, sy));
-                this.addButton(new TalentTreeButton(this, school2, sx - xadd, sy));
+                this.addButtonPublic(new TalentTreeButton(this, school1, sx + xadd, sy));
+                this.addButtonPublic(new TalentTreeButton(this, school2, sx - xadd, sy));
 
                 if (i == 1) {
-                    this.addButton(new SelectTreeButton(this, SelectTreeButton.LeftOrRight.LEFT, sx - xadd - 15, sy + TalentTreeButton.YSIZE / 2 - SelectTreeButton.YSIZE / 2));
-                    this.addButton(new SelectTreeButton(this, SelectTreeButton.LeftOrRight.RIGHT, sx + xadd + TalentTreeButton.XSIZE + 1, sy + TalentTreeButton.YSIZE / 2 - SelectTreeButton.YSIZE / 2));
+                    this.addButtonPublic(new SelectTreeButton(this, SelectTreeButton.LeftOrRight.LEFT, sx - xadd - 15, sy + TalentTreeButton.YSIZE / 2 - SelectTreeButton.YSIZE / 2));
+                    this.addButtonPublic(new SelectTreeButton(this, SelectTreeButton.LeftOrRight.RIGHT, sx + xadd + TalentTreeButton.XSIZE + 1, sy + TalentTreeButton.YSIZE / 2 - SelectTreeButton.YSIZE / 2));
                 }
             }
         }
@@ -256,10 +258,10 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
     private Point getPosForPoint(PointData point) {
 
         float halfx = mc.getWindow()
-            .getGuiScaledWidth() / 2F;
+                .getGuiScaledWidth() / 2F;
 
         float halfy = mc.getWindow()
-            .getGuiScaledHeight() / 2F;
+                .getGuiScaledHeight() / 2F;
 
         float x = (point.x - school.calcData.center.x) * PerkButton.SPACING + 2;
         float y = (point.y - school.calcData.center.y) * PerkButton.SPACING + 2;
@@ -280,8 +282,8 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
     }
 
     private void newButton(AbstractWidget b) {
-        this.addButton(b);
-        originalButtonLocMap.put(b, new PointData(b.x, b.y));
+        this.addButtonPublic(b);
+        originalButtonLocMap.put(b, new PointData(b.getX(), b.getY()));
         if (b instanceof PerkButton) {
             this.pointPerkButtonMap.put(((PerkButton) b).point, (PerkButton) b);
         }
@@ -342,78 +344,77 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     private void renderButton(AbstractWidget b) {
         if (originalButtonLocMap.containsKey(b)) {
-            b.x = (this.originalButtonLocMap.get(b).
-                x);
-            b.y = (this.originalButtonLocMap.get(b)
-                .y);
+
+            b.setX(this.originalButtonLocMap.get(b).x);
+            b.setY(this.originalButtonLocMap.get(b).y);
 
             float addx = (1F / zoom - 1) * this.width / 2F;
             float addy = (1F / zoom - 1) * this.height / 2F;
 
-            b.x += addx;
-            b.y += addy;
+            b.setX((int) (b.getX() + addx));
+            b.setY((int) (b.getY() + addy));
 
-            b.x += scrollX;
-            b.y += scrollY;
+            b.setX(b.getX() + scrollX);
+            b.setY(b.getY() + scrollY);
 
         }
     }
 
     @Override
-    public void render(PoseStack matrix, int x, int y, float ticks) {
+    public void render(GuiGraphics gui, int x, int y, float ticks) {
 
         // Watch watch = new Watch();
         mouseRecentlyClickedTicks--;
 
-        matrix.scale(zoom, zoom, zoom);
+        gui.pose().scale(zoom, zoom, zoom);
 
         try {
 
-            this.buttons.forEach(b -> {
+            for (GuiEventListener e : this.children()) {
+                if (e instanceof ImageButton b)
+                    if (originalButtonLocMap.containsKey(b)) {
+                        b.setX((this.originalButtonLocMap.get(b).
+                                x));
+                        b.setY((this.originalButtonLocMap.get(b)
+                                .y));
 
-                if (originalButtonLocMap.containsKey(b)) {
-                    b.x = (this.originalButtonLocMap.get(b).
-                        x);
-                    b.y = (this.originalButtonLocMap.get(b)
-                        .y);
+                        float addx = (1F / zoom - 1) * this.width / 2F;
+                        float addy = (1F / zoom - 1) * this.height / 2F;
 
-                    float addx = (1F / zoom - 1) * this.width / 2F;
-                    float addy = (1F / zoom - 1) * this.height / 2F;
+                        b.setX((int) (b.getX() + addx));
+                        b.setY((int) (b.getY() + addy));
 
-                    b.x += addx;
-                    b.y += addy;
+                        b.setX(b.getX() + scrollX);
+                        b.setY(b.getY() + scrollY);
 
-                    b.x += scrollX;
-                    b.y += scrollY;
+                    }
+            }
 
+
+            renderBackgroundDirt(gui, this, 0);
+
+            for (GuiEventListener e : this.children()) {
+                if (e instanceof ConnectionButton c) {
+                    c.renderButtonForReal(gui, x, y, ticks);
                 }
-            });
 
-            renderBackgroundDirt(this, 0);
+            }
 
-            mc.getTextureManager()
-                .bind(ConnectionButton.ID);
-            buttons.forEach(b -> {
-                if (b instanceof ConnectionButton) {
-                    ConnectionButton c = (ConnectionButton) b;
-                    ((ConnectionButton) b).renderButtonForReal(matrix, x, y, ticks);
-                }
-            });
 
-            super.render(matrix, x, y, ticks);
+            super.render(gui, x, y, ticks);
 
-            for (AbstractWidget abstractButtonWidget : buttons) {
-                if (abstractButtonWidget instanceof PerkButton) {
-                    abstractButtonWidget.render(matrix, x, y, ticks);
+            for (GuiEventListener abstractButtonWidget : children()) {
+                if (abstractButtonWidget instanceof PerkButton p) {
+                    p.render(gui, x, y, ticks);
                 }
             }
 
             // we order them here so school buttons are on top, and perks are on top of connection buttons..
             // probably a better way to do it exists?
 
-            for (AbstractWidget button : buttons) {
-                if (button instanceof IMarkOnTop) {
-                    button.render(matrix, x, y, ticks);
+            for (GuiEventListener button : children()) {
+                if (button instanceof IMarkOnTop t && button instanceof ImageButton b) {
+                    b.render(gui, x, y, ticks);
                 }
 
             }
@@ -424,35 +425,39 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
             e.printStackTrace();
         }
 
-        matrix.scale(1F / zoom, 1F / zoom, 1F / zoom);
+        gui.pose().scale(1F / zoom, 1F / zoom, 1F / zoom);
 
-        renderPanels(matrix);
-        for (AbstractWidget b : buttons) {
-            b.renderToolTip(matrix, x, y);
+        renderPanels(gui);
+
+        for (GuiEventListener e : children()) {
+            if (e instanceof PerkButton p) { // todo
+                p.renderToolTip(gui, x, y);
+            }
+            if (e instanceof TalentTreeButton p) { // todo
+                p.renderToolTip(gui, x, y);
+            }
         }
         //watch.print(" rendering ");
     }
 
-    private void renderPanels(PoseStack matrix) {
+    private void renderPanels(GuiGraphics gui) {
 
         int BG_HEIGHT = 38;
         Minecraft mc = Minecraft.getInstance();
-        mc.getTextureManager()
-            .bind(BIG_PANEL);
 
         RenderSystem.enableDepthTest();
 
         int BG_WIDTH = 237;
         int xp = mc.getWindow()
-            .getGuiScaledWidth() / 2 - BG_WIDTH / 2;
+                .getGuiScaledWidth() / 2 - BG_WIDTH / 2;
         int yp = 0;
 
         if (this.schoolsInOrder.size() > 1) {
-            blit(matrix, xp, yp, 0, 0, BG_WIDTH, 39);
+            gui.blit(BIG_PANEL, xp, yp, 0, 0, BG_WIDTH, 39);
         }
 
-        mc.getTextureManager()
-            .bind(SMALL_PANEL);
+        //  mc.getTextureManager()
+        //        .bind(SMALL_PANEL);
         RenderSystem.enableDepthTest();
 
         int savedx = xp;
@@ -467,46 +472,59 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         int tx = xp - mc.font.width(text) - 10;
         int yx = yp + BG_HEIGHT / 2 - mc.font.lineHeight / 2;
 
-        Minecraft.getInstance().font.drawShadow(matrix, text, tx, yx, ChatFormatting.GREEN.getColor());
+
+        gui.drawString(mc.font, text, tx, yx, ChatFormatting.GREEN.getColor());
 
         text = "Reset Points: " + playerData.talents.reset_points;
 
         tx = savedx + 10 + BG_WIDTH;
 
-        Minecraft.getInstance().font.drawShadow(matrix, text, tx, yx, ChatFormatting.GREEN.getColor());
+        gui.drawString(mc.font, text, tx, yx, ChatFormatting.GREEN.getColor());
 
     }
 
     static ResourceLocation BACKGROUND = SlashRef.guiId("skill_tree/background");
 
-    public static void renderBackgroundDirt(Screen screen, int vOffset) {
+    public static void renderBackgroundDirt(GuiGraphics gui, Screen screen, int vOffset) {
         //copied from Scree
+
 
         Tesselator tessellator = Tesselator.getInstance();
         BufferBuilder bufferBuilder = tessellator.getBuilder();
-        Minecraft.getInstance()
-            .getTextureManager()
-            .bind(BACKGROUND);
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+
+        RenderSystem.setShaderTexture(0, BACKGROUND);
+
+        Minecraft mc = Minecraft.getInstance();
+
+        // todo test
+        gui.setColor(0.25F, 0.25F, 0.25F, 1.0F);
+        int i = 32;
+        gui.blit(BACKGROUND, 0, 0, 0, 0.0F, 0.0F, mc.screen.width, mc.screen.height, 32, 32);
+        gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+
+/*
+        gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
         float f = 32.0F;
         bufferBuilder.begin(7, DefaultVertexFormat.POSITION_TEX_COLOR);
         bufferBuilder.vertex(0.0D, (double) screen.height, 0.0D)
-            .uv(0.0F, (float) screen.height / 32.0F + (float) vOffset)
-            .color(64, 64, 64, 255)
-            .endVertex();
+                .uv(0.0F, (float) screen.height / 32.0F + (float) vOffset)
+                .color(64, 64, 64, 255)
+                .endVertex();
         bufferBuilder.vertex((double) screen.width, (double) screen.height, 0.0D)
-            .uv((float) screen.width / 32.0F, (float) screen.height / 32.0F + (float) vOffset)
-            .color(64, 64, 64, 255)
-            .endVertex();
+                .uv((float) screen.width / 32.0F, (float) screen.height / 32.0F + (float) vOffset)
+                .color(64, 64, 64, 255)
+                .endVertex();
         bufferBuilder.vertex((double) screen.width, 0.0D, 0.0D)
-            .uv((float) screen.width / 32.0F, (float) vOffset)
-            .color(64, 64, 64, 255)
-            .endVertex();
+                .uv((float) screen.width / 32.0F, (float) vOffset)
+                .color(64, 64, 64, 255)
+                .endVertex();
         bufferBuilder.vertex(0.0D, 0.0D, 0.0D)
-            .uv(0.0F, (float) vOffset)
-            .color(64, 64, 64, 255)
-            .endVertex();
+                .uv(0.0F, (float) vOffset)
+                .color(64, 64, 64, 255)
+                .endVertex();
         tessellator.end();
+
+ */
     }
 
 }

@@ -4,17 +4,16 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatW
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public interface IStatTooltipType {
-    List<Component> getTooltipList(ChatFormatting format, TooltipStatWithContext info);
+    List<MutableComponent> getTooltipList(ChatFormatting format, TooltipStatWithContext info);
 
-    default List<Component> longStat(TooltipStatWithContext ctx, MutableComponent txt) {
-        List<Component> list = new ArrayList<>();
+    default List<MutableComponent> longStat(TooltipStatWithContext ctx, MutableComponent txt) {
+        List<MutableComponent> list = new ArrayList<>();
 
         int i = 0;
         for (MutableComponent x : TooltipUtils.cutIfTooLong(txt, ChatFormatting.GRAY)) {
