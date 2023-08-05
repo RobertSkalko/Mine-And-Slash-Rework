@@ -6,12 +6,12 @@ import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.core.Registry;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -47,20 +47,20 @@ public class SummonProjectileAction extends SpellAction {
 
         ProjectileCastHelper builder = new ProjectileCastHelper(pos, data, ctx.caster, projectile.get(), ctx.calculatedSpellData);
         builder.projectilesAmount = data.get(MapField.PROJECTILE_COUNT)
-            .intValue() + ctx.calculatedSpellData.extra_proj;
+                .intValue() + ctx.calculatedSpellData.extra_proj;
         builder.silent = silent;
 
         builder.shootSpeed = data.get(MapField.PROJECTILE_SPEED)
-            .floatValue();
+                .floatValue();
 
         builder.shootSpeed *= ctx.calculatedSpellData.proj_speed_multi;
 
         builder.apart = data.getOrDefault(MapField.PROJECTILES_APART, 75D)
-            .floatValue();
+                .floatValue();
 
         if (posSource == PositionSource.SOURCE_ENTITY) {
-            builder.pitch = ctx.sourceEntity.xRot;
-            builder.yaw = ctx.sourceEntity.yRot;
+            builder.pitch = ctx.sourceEntity.getXRot();
+            builder.yaw = ctx.sourceEntity.getYRot();
         }
         if (shootWay == ShootWay.DOWN) {
             builder.fallDown = true;
@@ -76,10 +76,10 @@ public class SummonProjectileAction extends SpellAction {
         c.put(MapField.PROJECTILE_SPEED, speed);
         c.put(MapField.LIFESPAN_TICKS, lifespan);
         c.put(MapField.ITEM, VanillaUTIL.REGISTRY.items().getKey(item)
-            .toString());
+                .toString());
         c.put(MapField.GRAVITY, gravity);
         c.put(MapField.PROJECTILE_ENTITY, EntityType.getKey(type)
-            .toString());
+                .toString());
         c.type = GUID();
         return c;
     }
@@ -91,10 +91,10 @@ public class SummonProjectileAction extends SpellAction {
         c.put(MapField.PROJECTILE_SPEED, speed);
         c.put(MapField.LIFESPAN_TICKS, lifespan);
         c.put(MapField.ITEM, VanillaUTIL.REGISTRY.items().getKey(item)
-            .toString());
+                .toString());
         c.put(MapField.GRAVITY, true);
         c.put(MapField.PROJECTILE_ENTITY, EntityType.getKey(type)
-            .toString());
+                .toString());
         c.type = GUID();
         return c;
     }
@@ -102,14 +102,14 @@ public class SummonProjectileAction extends SpellAction {
     public MapHolder createArrow(Double projCount) {
         MapHolder c = createBase(projCount, 3D, 80D, true);
         c.put(MapField.PROJECTILE_ENTITY, EntityType.getKey(SlashEntities.SIMPLE_ARROW.get())
-            .toString());
+                .toString());
         return c;
     }
 
     public MapHolder createFallingArrow(Double speed) {
         MapHolder c = createBase(1D, speed, 60D, true);
         c.put(MapField.PROJECTILE_ENTITY, EntityType.getKey(SlashEntities.SIMPLE_ARROW.get())
-            .toString());
+                .toString());
         c.put(MapField.POS_SOURCE, PositionSource.SOURCE_ENTITY.name());
         c.put(MapField.SHOOT_DIRECTION, ShootWay.DOWN.name());
         return c;
@@ -118,7 +118,7 @@ public class SummonProjectileAction extends SpellAction {
     public MapHolder createTrident(Double projCount, Double speed, Double lifespan) {
         MapHolder c = createBase(projCount, speed, lifespan, true);
         c.put(MapField.PROJECTILE_ENTITY, EntityType.getKey(SlashEntities.SIMPLE_TRIDENT.get())
-            .toString());
+                .toString());
         return c;
     }
 
@@ -129,7 +129,7 @@ public class SummonProjectileAction extends SpellAction {
         c.put(MapField.PROJECTILE_SPEED, speed);
         c.put(MapField.LIFESPAN_TICKS, lifespan);
         c.put(MapField.ITEM, VanillaUTIL.REGISTRY.items().getKey(Items.AIR)
-            .toString());
+                .toString());
         c.put(MapField.GRAVITY, gravity);
         c.type = GUID();
         return c;

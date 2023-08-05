@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.vanilla_mc.items;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -16,8 +15,7 @@ import java.util.List;
 public class SocketExtractorItem extends AutoItem {
 
     public SocketExtractorItem() {
-        super(new Item.Properties().tab(CreativeTabs.MyModTab)
-                .stacksTo(1));
+        super(new Item.Properties().stacksTo(1));
     }
 
     @Override

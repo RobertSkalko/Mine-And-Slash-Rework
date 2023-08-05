@@ -4,7 +4,7 @@ import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RuneItems;
 import com.robertx22.age_of_exile.vanilla_mc.items.gemrunes.RuneItem;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
-import net.minecraft.core.Registry;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 
 public class Runes implements ExileRegistryInit {
     @Override
@@ -12,9 +12,10 @@ public class Runes implements ExileRegistryInit {
         RuneItems.ALL.forEach(obj -> {
             RuneItem x = obj.get();
 
+            
             Rune rune = new Rune();
             rune.item_id = VanillaUTIL.REGISTRY.items().getKey(x)
-                .toString();
+                    .toString();
             rune.identifier = x.type.id;
 
             rune.tier = x.type.tier;

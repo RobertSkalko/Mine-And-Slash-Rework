@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.vanilla_mc.items;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -15,8 +14,7 @@ import java.util.List;
 public class SalvageHammerItem extends AutoItem {
 
     public SalvageHammerItem() {
-        super(new Properties().tab(CreativeTabs.MyModTab)
-                .stacksTo(1));
+        super(new Properties().stacksTo(1));
     }
 
     @Override

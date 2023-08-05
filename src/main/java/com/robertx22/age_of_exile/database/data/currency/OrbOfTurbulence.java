@@ -2,26 +2,21 @@ package com.robertx22.age_of_exile.database.data.currency;
 
 import com.robertx22.age_of_exile.database.data.currency.base.CurrencyItem;
 import com.robertx22.age_of_exile.database.data.currency.base.ICurrencyItemEffect;
-import com.robertx22.age_of_exile.database.data.currency.base.IShapedRecipe;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.BaseLocRequirement;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.GearEnumLocReq;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.SimpleGearLocReq;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.item_types.GearReq;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import com.robertx22.age_of_exile.mmorpg.registers.common.items.CurrencyItems;
-import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class OrbOfTurbulence extends CurrencyItem implements ICurrencyItemEffect, IShapedRecipe {
+public class OrbOfTurbulence extends CurrencyItem implements ICurrencyItemEffect {
     @Override
     public String GUID() {
         return "currency/reroll_affix_numbers";
@@ -63,7 +58,7 @@ public class OrbOfTurbulence extends CurrencyItem implements ICurrencyItemEffect
         return Arrays.asList(GearReq.INSTANCE, SimpleGearLocReq.IS_NOT_UNIQUE, GearEnumLocReq.AFFIXES);
     }
 
-   
+
     @Override
     public String getRarityRank() {
         return IRarity.EPIC_ID;
@@ -79,17 +74,5 @@ public class OrbOfTurbulence extends CurrencyItem implements ICurrencyItemEffect
         return "Re-rolls all affix numbers.";
     }
 
-    @Override
-    public ShapedRecipeBuilder getRecipe() {
-        return shaped(CurrencyItems.ORB_OF_TURBULENCE.get())
-                .define('#', SlashItems.CRYSTALLIZED_ESSENCE.get())
-                .define('t', CurrencyItems.ORB_OF_TRANSMUTATION.get())
-                .define('v', Items.GLISTERING_MELON_SLICE)
-                .define('o', SlashItems.T4_DUST())
-                .pattern("v#v")
-                .pattern("vtv")
-                .pattern("ooo")
-                .unlockedBy("player_level", trigger());
-    }
-
+    
 }

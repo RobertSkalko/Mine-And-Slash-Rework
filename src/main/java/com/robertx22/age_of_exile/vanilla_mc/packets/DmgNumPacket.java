@@ -54,7 +54,7 @@ public class DmgNumPacket extends MyPacket<DmgNumPacket> {
     @Override
     public void onReceived(ExilePacketContext ctx) {
         if (ClientConfigs.getConfig().ENABLE_FLOATING_DMG.get()) {
-            DamageParticleAdder.displayParticle(ctx.getPlayer().level.getEntity(id), this);
+            DamageParticleAdder.displayParticle(ctx.getPlayer().level().getEntity(id), this);
         }
     }
 

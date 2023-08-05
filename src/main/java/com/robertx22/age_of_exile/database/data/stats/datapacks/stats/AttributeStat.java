@@ -3,11 +3,11 @@ package com.robertx22.age_of_exile.database.data.stats.datapacks.stats;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.base.BaseDatapackStat;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
-import net.minecraft.core.Registry;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 
 import java.util.UUID;
 
@@ -26,8 +26,8 @@ public class AttributeStat extends BaseDatapackStat {
         this.id = id;
         this.locname = locname;
         this.uuid = uuid;
-        this.attributeId = Registry.ATTRIBUTE.getKey(attribute)
-            .toString();
+        this.attributeId = BuiltInRegistries.ATTRIBUTE.getKey(attribute)
+                .toString();
         this.attribute = attribute;
         this.is_perc = perc;
         this.scaling = StatScaling.NONE;
@@ -56,10 +56,10 @@ public class AttributeStat extends BaseDatapackStat {
         }
 
         AttributeModifier mod = new AttributeModifier(
-            uuid,
-            attributeId,
-            val,
-            operation
+                uuid,
+                attributeId,
+                val,
+                operation
         );
 
         AttributeInstance atri = en.getAttribute(attribute);

@@ -1,28 +1,24 @@
 package com.robertx22.age_of_exile.vanilla_mc.blocks;
 
 import com.robertx22.age_of_exile.vanilla_mc.blocks.bases.OpaqueBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
-
-import java.util.Random;
-
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class BlackHoleBlock extends OpaqueBlock {
 
     public BlackHoleBlock() {
-        super(Properties.of(Material.STONE)
-            .noCollission()
-            .strength(5F, 2));
+        super(Properties.of()
+                .noCollission()
+                .strength(5F, 2));
     }
 
     @Override
-    public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
+    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         if (random.nextInt(100) == 0) {
             world.playLocalSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.PORTAL_AMBIENT, SoundSource.BLOCKS, 0.5F, random.nextFloat() * 0.4F + 0.8F, false);
         }
@@ -36,8 +32,8 @@ public class BlackHoleBlock extends OpaqueBlock {
             double j = ((double) random.nextFloat() - 0.5D) * 0.5D;
             int k = random.nextInt(2) * 2 - 1;
             if (!world.getBlockState(pos.west())
-                .is(this) && !world.getBlockState(pos.east())
-                .is(this)) {
+                    .is(this) && !world.getBlockState(pos.east())
+                    .is(this)) {
                 d = (double) pos.getX() + 0.5D + 0.25D * (double) k;
                 g = (double) (random.nextFloat() * 2.0F * (float) k);
             } else {

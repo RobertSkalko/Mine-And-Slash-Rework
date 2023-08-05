@@ -5,12 +5,12 @@ import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellUtils;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.core.Registry;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -32,10 +32,10 @@ public class SummonAtTargetFeet extends SpellAction {
         targets.forEach(x -> {
             Vec3 pos = x.position();
             Entity en = projectile.get()
-                .create(ctx.world);
+                    .create(ctx.world);
             SpellUtils.initSpellEntity(en, ctx.caster, ctx.calculatedSpellData, data);
             en.setPos(pos.x, pos.y + height, pos.z);
-            ctx.caster.level.addFreshEntity(en);
+            ctx.caster.level().addFreshEntity(en);
         });
 
     }
@@ -47,10 +47,10 @@ public class SummonAtTargetFeet extends SpellAction {
         c.put(MapField.PROJECTILE_SPEED, 0D);
         c.put(MapField.LIFESPAN_TICKS, lifespan);
         c.put(MapField.ITEM, VanillaUTIL.REGISTRY.items().getKey(item)
-            .toString());
+                .toString());
         c.put(MapField.GRAVITY, false);
         c.put(MapField.PROJECTILE_ENTITY, EntityType.getKey(type)
-            .toString());
+                .toString());
         c.type = GUID();
         return c;
     }

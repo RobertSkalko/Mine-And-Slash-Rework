@@ -9,8 +9,8 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityTypeUtils;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.library_of_exile.registry.serialization.ISerializable;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.core.Registry;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,8 +30,8 @@ public class EntityConfig implements JsonExileRegistry<EntityConfig>, ISerializa
     }
 
     public EntityConfig(EntityType type, float loot) {
-        this.identifier = Registry.ENTITY_TYPE.getKey(type)
-            .toString();
+        this.identifier = BuiltInRegistries.ENTITY_TYPE.getKey(type)
+                .toString();
         this.loot_multi = loot;
         this.exp_multi = loot;
     }
@@ -75,7 +75,7 @@ public class EntityConfig implements JsonExileRegistry<EntityConfig>, ISerializa
     @Override
     public JsonObject toJson() {
         return new JsonParser().parse(GSON.toJson(this))
-            .getAsJsonObject();
+                .getAsJsonObject();
     }
 
     @Override

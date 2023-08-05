@@ -15,9 +15,9 @@ public class ProfessionItems {
 
         for (SkillItemTier tier : SkillItemTier.values()) {
 
-            SALVAGED_ESSENCE_MAP.put(tier, Def.item(() -> new SalvagedDustItem("Tier " + tier.tier + " Purified Essence", tier, tier.levelRange, tier.repairDurab)));
+            SALVAGED_ESSENCE_MAP.put(tier, Def.item(() -> new SalvagedDustItem("Tier " + tier.tier + " Purified Essence", tier, tier.levelRange, tier.repairDurab), "mat/salvage/salvage" + tier.tier));
 
-      
+
         }
 
     }

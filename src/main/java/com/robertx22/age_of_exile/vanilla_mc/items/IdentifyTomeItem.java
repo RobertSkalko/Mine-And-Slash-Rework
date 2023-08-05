@@ -17,7 +17,7 @@ import java.util.List;
 public class IdentifyTomeItem extends AutoItem {
 
     public IdentifyTomeItem() {
-        super(new Properties().tab(CreativeTabs.MyModTab));
+        super(new Properties());
     }
 
     @Override
@@ -25,7 +25,7 @@ public class IdentifyTomeItem extends AutoItem {
         ItemStack tomeStack = player.getItemInHand(handIn);
         List<ItemStack> list = new ArrayList<>();
 
-        for (ItemStack stack : player.inventory.items) {
+        for (ItemStack stack : player.getInventory().items) {
 
             if (tomeStack.getCount() > 0) {
                 StatSoulData data = StackSaving.STAT_SOULS.loadFrom(stack);

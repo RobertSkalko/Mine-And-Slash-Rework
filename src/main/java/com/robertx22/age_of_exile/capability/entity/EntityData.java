@@ -16,6 +16,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Hea
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.event_hooks.my_events.CollectGearEvent;
 import com.robertx22.age_of_exile.event_hooks.player.OnLogin;
+import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.CustomExactStatsData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.unit.*;
@@ -38,7 +39,6 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.OnScreenMessageUtils;
 import com.robertx22.age_of_exile.vanilla_mc.potion_effects.EntityStatusEffectsData;
 import com.robertx22.library_of_exile.components.ICap;
 import com.robertx22.library_of_exile.main.Packets;
-import com.robertx22.library_of_exile.main.Ref;
 import com.robertx22.library_of_exile.utils.CLOC;
 import com.robertx22.library_of_exile.utils.LoadSave;
 import com.robertx22.library_of_exile.wrappers.ExileText;
@@ -50,16 +50,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -68,10 +64,9 @@ import java.util.List;
 import java.util.UUID;
 
 
-@Mod.EventBusSubscriber
 public class EntityData implements ICap, INeededForClient {
 
-    public static final ResourceLocation RESOURCE = new ResourceLocation(Ref.MODID, "entity_data");
+    public static final ResourceLocation RESOURCE = new ResourceLocation(SlashRef.MODID, "entity_data");
     public static Capability<EntityData> INSTANCE = CapabilityManager.get(new CapabilityToken<>() {
     });
 
@@ -88,10 +83,10 @@ public class EntityData implements ICap, INeededForClient {
             return supp.cast();
         }
         return LazyOptional.empty();
-       
+
     }
 
-
+/*
     @Mod.EventBusSubscriber
     public static class EventHandler {
         @SubscribeEvent
@@ -101,6 +96,8 @@ public class EntityData implements ICap, INeededForClient {
             }
         }
     }
+
+ */
 
     public EntityData(LivingEntity entity) {
         this.entity = entity;

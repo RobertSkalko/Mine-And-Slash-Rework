@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceC
 import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IApplyableStats;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellCastingData;
@@ -12,7 +13,6 @@ import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.components.ICap;
-import com.robertx22.library_of_exile.main.Ref;
 import com.robertx22.library_of_exile.utils.LoadSave;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -23,9 +23,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,12 +31,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-@Mod.EventBusSubscriber
+
 public class EntitySpellCap {
 
-    public static final ResourceLocation RESOURCE = new ResourceLocation(Ref.MODID, "spells");
+    public static final ResourceLocation RESOURCE = new ResourceLocation(SlashRef.MODID, "spells");
     public static Capability<SpellCap> INSTANCE = CapabilityManager.get(new CapabilityToken<>() {
     });
+    
 
     public static SpellCap get(LivingEntity entity) {
         return entity.getCapability(INSTANCE)
@@ -50,6 +48,7 @@ public class EntitySpellCap {
     private static final String PLAYER_SPELL_DATA = "player_spells_data";
     private static final String GEMS = "gems";
 
+    /*
     @Mod.EventBusSubscriber
     public static class EventHandler {
         @SubscribeEvent
@@ -59,6 +58,8 @@ public class EntitySpellCap {
             }
         }
     }
+
+     */
 
 
     public abstract static class ISpellsCap implements ICap, IApplyableStats {

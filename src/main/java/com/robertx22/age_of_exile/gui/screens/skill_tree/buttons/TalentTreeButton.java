@@ -35,7 +35,7 @@ public class TalentTreeButton extends ImageButton implements IMarkOnTop {
     }
 
     public boolean isInside(int x, int y) {
-        return GuiUtils.isInRect(this.x, this.y, XSIZE, YSIZE, x, y);
+        return GuiUtils.isInRect(this.getX(), this.getY(), XSIZE, YSIZE, x, y);
     }
 
 

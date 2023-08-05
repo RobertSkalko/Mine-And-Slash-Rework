@@ -12,6 +12,7 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.VanillaMaterial;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -34,7 +35,7 @@ import java.util.stream.Collectors;
 public class ItemNewbieGearBag extends Item {
 
     public ItemNewbieGearBag() {
-        super(new Properties().tab(CreativeTabs.MyModTab));
+        super(new Properties());
 
     }
 

@@ -11,7 +11,7 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatI
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.serialization.ISerializable;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -134,7 +134,7 @@ public class ExactStatData implements ISerializable<ExactStatData>, ITooltipList
     }
 
     @Override
-    public List<Component> GetTooltipString(TooltipInfo info) {
+    public List<MutableComponent> GetTooltipString(TooltipInfo info) {
 
         Stat stat = getStat();
         TooltipStatInfo statInfo = new TooltipStatInfo(this, 100, info);

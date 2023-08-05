@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.aoe_data.datapacks.models;
 
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.DirUtils;
-import net.minecraft.core.Registry;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.world.item.Item;
 
 import java.io.File;
@@ -49,6 +49,7 @@ public class ModelHelper {
         filecontent = filecontent.replace("[TEXTURE]", tex);
 
         Path path = DirUtils.generatedResourcesDir();
+        
 
         String reg = "assets/" + SlashRef.MODID + "/models/item/" + VanillaUTIL.REGISTRY.items().getKey(item)
                 .getPath()

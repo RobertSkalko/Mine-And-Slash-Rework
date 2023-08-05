@@ -1,13 +1,11 @@
 package com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper;
 
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import com.robertx22.library_of_exile.registry.IGUID;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
@@ -24,12 +22,13 @@ public class Def {
         return obj;
     }
 
+    /*
     public static <T extends Item & IGUID> RegObj<T> item(Supplier<T> object) {
         return item(object.get()
                 .GUID(), object);
     }
     // todo not lazy
-
+     */
     public static <T extends Item> RegObj<T> item(Supplier<T> object, String id) {
         return item(id, object);
     }
@@ -70,14 +69,17 @@ public class Def {
         return wrapper;
     }
 
+    /*
     public static <T extends MenuType<?>> RegObj<T> container(String id, Supplier<T> object) {
         RegistryObject<T> reg = SlashDeferred.CONTAINERS.register(id, object);
         RegObj<T> wrapper = new RegObj<T>(reg);
         return wrapper;
     }
 
+     */
+
     public static RegObj<SoundEvent> sound(String id) {
-        Supplier<SoundEvent> sup = () -> new SoundEvent(new ResourceLocation(SlashRef.MODID, id));
+        Supplier<SoundEvent> sup = () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(SlashRef.MODID, id), 16); // todo idk?
         RegistryObject<SoundEvent> reg = SlashDeferred.SOUNDS.register(id, sup);
         RegObj<SoundEvent> wrapper = new RegObj<SoundEvent>(reg);
         return wrapper;

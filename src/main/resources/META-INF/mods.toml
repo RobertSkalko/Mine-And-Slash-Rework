@@ -27,7 +27,7 @@ Turns Minecraft into a hack and slash RPG!
 [[dependencies.mmorpg]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.5,1.17)"
+    versionRange="[1.20,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.mmorpg]]

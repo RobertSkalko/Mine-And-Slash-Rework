@@ -12,7 +12,7 @@ public class Load {
     // todo give a blank one for mobs
 
     public static EntitySpellCap.ISpellsCap spells(LivingEntity provider) {
-        return provider.getCapability(EntitySpellCap.Data)
+        return provider.getCapability(EntitySpellCap.INSTANCE)
                 .orElse(null);
     }
 

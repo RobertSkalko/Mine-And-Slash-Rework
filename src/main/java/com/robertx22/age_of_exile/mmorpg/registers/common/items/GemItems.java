@@ -18,16 +18,15 @@ public class GemItems {
         for (GemItem.GemType type : GemItem.GemType.values()) {
             for (GemItem.GemRank rank : GemItem.GemRank.values()) {
 
-                GemItem item = new GemItem(type, rank);
-
-                RegObj<GemItem> def = Def.item(() -> item);
+               
+                RegObj<GemItem> def = Def.item(() -> new GemItem(type, rank), "gems/" + type.id + "/" + rank.tier);
 
                 if (!MAP.containsKey(type)) {
                     MAP.put(type, new HashMap<>());
                 }
 
                 MAP.get(type)
-                    .put(rank, def);
+                        .put(rank, def);
 
                 ALL.add(def);
 

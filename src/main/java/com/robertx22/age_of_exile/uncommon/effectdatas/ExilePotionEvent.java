@@ -41,7 +41,7 @@ public class ExilePotionEvent extends EffectEvent {
     @Override
     protected void activate() {
 
-        if (source.level.isClientSide) {
+        if (source.level().isClientSide) {
             return;
         }
         if (this.data.isCanceled()) {

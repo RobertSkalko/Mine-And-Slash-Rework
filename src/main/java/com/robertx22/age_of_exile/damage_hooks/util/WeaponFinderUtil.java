@@ -3,13 +3,13 @@ package com.robertx22.age_of_exile.damage_hooks.util;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 
 public class WeaponFinderUtil {
 
@@ -26,9 +26,9 @@ public class WeaponFinderUtil {
 
             try {
                 Entity sourceEntity = source
-                    .getDirectEntity();
+                        .getDirectEntity();
                 Entity attacker = source
-                    .getEntity();
+                        .getEntity();
 
                 if (sourceEntity != null && !(sourceEntity instanceof LivingEntity)) {
                     if (attacker instanceof LivingEntity) {
@@ -40,7 +40,7 @@ public class WeaponFinderUtil {
                             stack = ItemStack.EMPTY;
                         } else {
                             Load.Unit(attacker)
-                                .setEquipsChanged(true);
+                                    .setEquipsChanged(true);
                         }
 
                     }
@@ -79,12 +79,12 @@ public class WeaponFinderUtil {
          */
 
         try {
-            for (SynchedEntityData.DataItem<?> entry : en.getEntityData()
-                .getAll()) {
-                if (entry.getValue() instanceof ItemStack) {
-                    GearItemData gear = Gear.Load((ItemStack) entry.getValue());
+            for (SynchedEntityData.DataValue<?> entry : en.getEntityData().getNonDefaultValues()
+            ) {
+                if (entry.value() instanceof ItemStack) {
+                    GearItemData gear = Gear.Load((ItemStack) entry.value());
                     if (gear != null) {
-                        return (ItemStack) entry.getValue();
+                        return (ItemStack) entry.value();
                     }
                 }
             }

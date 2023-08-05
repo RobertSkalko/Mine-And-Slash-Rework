@@ -6,6 +6,7 @@ import com.mojang.math.Axis;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import org.lwjgl.opengl.GL11;
@@ -18,16 +19,16 @@ public class DamageParticleRenderer {
 
     public static Set<DamageParticle> PARTICLES = new HashSet<>();
 
-    public static void renderParticles(PoseStack matrix, Camera camera) {
+    public static void renderParticles(GuiGraphics gui, PoseStack matrix, Camera camera) {
         for (DamageParticle p : PARTICLES) {
-            renderParticle(matrix, p, camera);
+            renderParticle(gui, matrix, p, camera);
             p.tick();
         }
 
         PARTICLES.removeIf(x -> x.age > 50);
     }
 
-    private static void renderParticle(PoseStack matrix, DamageParticle particle, Camera camera) {
+    private static void renderParticle(GuiGraphics gui, PoseStack matrix, DamageParticle particle, Camera camera) {
         float scaleToGui = 0.025f;
 
         if (particle.packet.iscrit) {
@@ -52,28 +53,32 @@ public class DamageParticleRenderer {
         matrix.mulPose(Axis.XP.rotationDegrees(camera.getXRot()));
         matrix.scale(-scaleToGui, -scaleToGui, scaleToGui);
 
-        RenderSystem.disableLighting();
+
+        // todo i just removed these, might stop working
+
+        //   RenderSystem.disableLighting();
         RenderSystem.enableDepthTest();
-        RenderSystem.disableAlphaTest();
+        //  RenderSystem.disableAlphaTest();
         RenderSystem.enableBlend();
         RenderSystem.blendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE,
                 GL11.GL_ZERO);
-        RenderSystem.shadeModel(7425);
+        // RenderSystem.shadeModel(7425);
 
-        drawDamageNumber(matrix, particle.renderString, 0, 0, 10);
+        drawDamageNumber(gui, matrix, particle.renderString, 0, 0, 10);
 
-        RenderSystem.shadeModel(7424);
+        // RenderSystem.shadeModel(7424);
         RenderSystem.disableBlend();
-        RenderSystem.enableAlphaTest();
+        // RenderSystem.enableAlphaTest();
 
         matrix.popPose();
     }
 
-    public static void drawDamageNumber(PoseStack matrix, String s, double x, double y,
+    public static void drawDamageNumber(GuiGraphics gui, PoseStack matrix, String s, double x, double y,
                                         float width) {
 
         Minecraft minecraft = Minecraft.getInstance();
         int sw = minecraft.font.width(s);
-        minecraft.font.drawShadow(matrix, s, (int) (x + (width / 2) - sw), (int) y + 5, ChatFormatting.RED.getColor());
+
+        gui.drawString(minecraft.font, s, (int) (x + (width / 2) - sw), (int) y + 5, ChatFormatting.RED.getColor());
     }
 }

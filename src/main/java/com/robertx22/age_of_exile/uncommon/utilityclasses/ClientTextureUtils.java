@@ -7,8 +7,8 @@ public class ClientTextureUtils {
 
     public static boolean textureExists(ResourceLocation id) {
         return Minecraft.getInstance()
-            .getResourceManager()
-            .hasResource(id);
+                .getResourceManager().getResource(id).isPresent();
+        //       .hasResource(id);
     }
 
 }

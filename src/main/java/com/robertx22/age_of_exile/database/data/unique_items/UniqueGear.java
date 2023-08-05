@@ -6,7 +6,6 @@ import com.robertx22.age_of_exile.database.data.StatModifier;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
-import com.robertx22.age_of_exile.database.data.unique_items.drop_filters.DropFiltersGroupData;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -18,8 +17,6 @@ import com.robertx22.library_of_exile.registry.serialization.ISerializable;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
 
 public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, ISerializable<UniqueGear> {
 
@@ -33,7 +30,6 @@ public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, 
 
     public String base_gear = "";
 
-    public DropFiltersGroupData filters = new DropFiltersGroupData();
 
     public transient String langName;
 
@@ -49,7 +45,6 @@ public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, 
 
         json.addProperty("base_gear", base_gear);
 
-        json.add("filters", filters.toJson());
         return json;
     }
 
@@ -62,7 +57,7 @@ public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, 
         uniq.weight = getWeightFromJson(json);
 
         uniq.uniqueStats = JsonUtils.getStats(json, "unique_stats");
-  
+
         uniq.base_gear = json.get("base_gear")
                 .getAsString();
         uniq.uniqueRarity = json.get("rarity")
@@ -72,8 +67,7 @@ public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, 
             uniq.replaces_name = json.get("replaces_name")
                     .getAsBoolean();
         }
-        uniq.filters = DropFiltersGroupData.fromJson(json.get("filters"));
-
+    
         return uniq;
     }
 

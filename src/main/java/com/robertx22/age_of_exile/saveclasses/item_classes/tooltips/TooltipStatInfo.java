@@ -6,7 +6,7 @@ import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ITooltipList;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class TooltipStatInfo implements ITooltipList {
     public int affix_tier = -1;
 
     public TooltipStatInfo(ExactStatData data, int percent, TooltipInfo info) {
-        
+
         this.stat = data.getStat();
         this.firstValue = data.getFirstValue();
         this.type = data.getType();
@@ -61,7 +61,7 @@ public class TooltipStatInfo implements ITooltipList {
     }
 
     @Override
-    public List<Component> GetTooltipString(TooltipInfo info) {
+    public List<MutableComponent> GetTooltipString(TooltipInfo info) {
         return stat.getTooltipList(new TooltipStatWithContext(this, null, null));
     }
 

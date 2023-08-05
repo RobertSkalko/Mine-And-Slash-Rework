@@ -9,8 +9,9 @@ import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.registry.IWeighted;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.temp.SkillItemTier;
-import net.minecraft.core.Registry;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -31,8 +32,7 @@ public class SalvagedDustItem extends Item implements IAutoLocName, IWeighted, I
     public int durabilityRepair;
 
     public SalvagedDustItem(String name, SkillItemTier tier, LevelRange range, int durabilityRepair) {
-        super(new Properties().stacksTo(64)
-                .tab(CreativeTabs.MyModTab));
+        super(new Properties().stacksTo(64));
         this.name = name;
         this.tier = tier;
         this.range = range;
@@ -101,7 +101,7 @@ public class SalvagedDustItem extends Item implements IAutoLocName, IWeighted, I
                 .get()
                 .get();
 
-        return ShapelessRecipeBuilder.shapeless(output, 3)
+        return ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, output, 3)
                 .requires(this, 1)
                 .unlockedBy("player_level", trigger());
 

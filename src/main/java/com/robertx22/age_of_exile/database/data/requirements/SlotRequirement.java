@@ -10,8 +10,8 @@ import com.robertx22.age_of_exile.database.data.requirements.bases.GearRequested
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
 import java.util.ArrayList;
@@ -125,15 +125,16 @@ public class SlotRequirement extends BaseRequirement<SlotRequirement> {
     }
 
     @Override
-    public List<Component> GetTooltipString(TooltipInfo info) {
+    public List<MutableComponent> GetTooltipString(TooltipInfo info) {
 
-        List<Component> list = new ArrayList<>();
+        List<MutableComponent> list = new ArrayList<>();
 
-        list.add(ExileText.ofText(ChatFormatting.GREEN + "Allowed on: "));
+
+        list.add(ExileText.ofText(ChatFormatting.GREEN + "Allowed on: ").get());
 
         List<BaseGearType> copy = new ArrayList<>(this.slots);
 
-        MutableComponent comp = ExileText.ofText(ChatFormatting.RED + "");
+        MutableComponent comp = ExileText.ofText(ChatFormatting.RED + "").get();
 
         List<BaseGearType> armors = ExileDB.GearTypes()
                 .getFiltered(x -> x.family()
@@ -142,7 +143,7 @@ public class SlotRequirement extends BaseRequirement<SlotRequirement> {
             copy.removeIf(x -> x.family()
                     .equals(SlotFamily.Armor));
             comp.append(" ")
-                    .append(ExileText.ofText("All Armors"));
+                    .append(ExileText.ofText("All Armors").get());
         }
 
         List<BaseGearType> weapons = ExileDB.GearTypes()
@@ -152,7 +153,7 @@ public class SlotRequirement extends BaseRequirement<SlotRequirement> {
             copy.removeIf(x -> x.family()
                     .equals(SlotFamily.Weapon));
             comp.append(" ")
-                    .append(ExileText.ofText("All Weapons"));
+                    .append(ExileText.ofText("All Weapons").get());
         }
 
         List<BaseGearType> jewerly = ExileDB.GearTypes()
@@ -162,7 +163,7 @@ public class SlotRequirement extends BaseRequirement<SlotRequirement> {
             copy.removeIf(x -> x.family()
                     .equals(SlotFamily.Jewelry));
             comp.append(" ")
-                    .append(ExileText.ofText("All Jewerly"));
+                    .append(ExileText.ofText("All Jewerly").get());
         }
         copy.forEach(x -> {
             comp.append(" ")

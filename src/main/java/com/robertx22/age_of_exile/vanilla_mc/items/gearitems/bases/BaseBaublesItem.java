@@ -3,17 +3,14 @@ package com.robertx22.age_of_exile.vanilla_mc.items.gearitems.bases;
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.IAutoModel;
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.ItemModelManager;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.core.Registry;
 import net.minecraft.world.level.Level;
-
-import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
-import net.minecraft.world.item.Item.Properties;
 
 public abstract class BaseBaublesItem extends Item implements IAutoLocName, IAutoModel {
 
@@ -43,9 +40,10 @@ public abstract class BaseBaublesItem extends Item implements IAutoLocName, IAut
     @Override
     public String locNameLangFileGUID() {
         return getFormatedForLangFile(VanillaUTIL.REGISTRY.items().getKey(this)
-            .toString());
+                .toString());
     }
 
+    
     @Override
     public void generateModel(ItemModelManager manager) {
         manager.generated(this);

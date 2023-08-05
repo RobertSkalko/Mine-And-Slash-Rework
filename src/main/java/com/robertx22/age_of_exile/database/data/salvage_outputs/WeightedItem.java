@@ -1,9 +1,9 @@
 package com.robertx22.age_of_exile.database.data.salvage_outputs;
 
 import com.robertx22.library_of_exile.registry.IWeighted;
-import net.minecraft.world.item.Item;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.core.Registry;
+import net.minecraft.world.item.Item;
 
 public class WeightedItem implements IWeighted {
 
@@ -12,9 +12,10 @@ public class WeightedItem implements IWeighted {
 
     public WeightedItem(Item item, int weight) {
         this.item = VanillaUTIL.REGISTRY.items().getKey(item)
-            .toString();
+                .toString();
         this.weight = weight;
     }
+    
 
     public Item getItem() {
         return VanillaUTIL.REGISTRY.items().get(new ResourceLocation(item));

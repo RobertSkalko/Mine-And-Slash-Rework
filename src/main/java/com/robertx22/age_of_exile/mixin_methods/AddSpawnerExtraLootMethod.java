@@ -2,15 +2,15 @@ package com.robertx22.age_of_exile.mixin_methods;
 
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.MasterLootGen;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -53,9 +53,9 @@ public class AddSpawnerExtraLootMethod {
                 return;
             }
 
-         
+
             Vec3 p = context.getParamOrNull(LootContextParams.ORIGIN);
-            BlockPos pos = new BlockPos(p.x, p.y, p.z);
+            BlockPos pos = new BlockPos((int) p.x, (int) p.y, (int) p.z);
 
             LootInfo info = LootInfo.ofSpawner(player, context.getLevel(), pos);
             info.multi += 2;

@@ -14,12 +14,13 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.DashUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
-import net.minecraft.world.level.block.Block;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.world.effect.MobEffect;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.core.Registry;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
@@ -49,14 +50,14 @@ public class MapHolder {
     public <T> T get(MapField<T> field) {
         if (field == MapField.VALUE_CALCULATION) {
             return (T) ExileDB.ValueCalculations()
-                .get((String) map.get(field.GUID()));
+                    .get((String) map.get(field.GUID()));
         }
         return (T) map.get(field.GUID());
     }
 
     public ExileEffect getExileEffect() {
         return ExileDB.ExileEffects()
-            .get(get(EXILE_POTION_ID));
+                .get(get(EXILE_POTION_ID));
     }
 
     public AttackType getDmgEffectType() {
@@ -64,7 +65,7 @@ public class MapHolder {
     }
 
     public MobEffect getPotion() {
-        return Registry.MOB_EFFECT.get(new ResourceLocation(get(POTION_ID)));
+        return BuiltInRegistries.MOB_EFFECT.get(new ResourceLocation(get(POTION_ID)));
     }
 
     public Elements getElement() {
@@ -102,7 +103,7 @@ public class MapHolder {
     }
 
     public SimpleParticleType getParticle() {
-        return (SimpleParticleType) Registry.PARTICLE_TYPE.get(new ResourceLocation(get(MapField.PARTICLE_TYPE)));
+        return (SimpleParticleType) BuiltInRegistries.PARTICLE_TYPE.get(new ResourceLocation(get(MapField.PARTICLE_TYPE)));
     }
 
     public Block getBlock() {

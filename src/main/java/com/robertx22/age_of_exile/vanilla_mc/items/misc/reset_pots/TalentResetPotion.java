@@ -17,7 +17,7 @@ import net.minecraft.world.level.Level;
 public class TalentResetPotion extends AutoItem implements IShapedRecipe {
 
     public TalentResetPotion() {
-        super(new Properties().tab(CreativeTabs.MyModTab)
+        super(new Properties()
                 .stacksTo(10));
     }
 

@@ -3,7 +3,7 @@ package com.robertx22.age_of_exile.vanilla_mc.items.gearitems.bases;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
-import net.minecraft.core.Registry;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -48,6 +48,7 @@ public abstract class SingleTargetWeapon extends Item implements IAutoLocName {
                 .toString();
     }
 
+    
     @Override
     public String GUID() {
         return "";

@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.mixin_ducks.LivingEntityAccesor;
 import com.robertx22.age_of_exile.mixin_methods.CanEntityHavePotionMixin;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.HealthUtils;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -60,7 +61,7 @@ public abstract class LivingEntityMixin implements LivingEntityAccesor {
     public void hookenchreturn(DamageSource source, float amount, CallbackInfoReturnable<Float> ci) {
         LivingEntity en = (LivingEntity) (Object) this;
 
-        if (!source.isBypassMagic()) {
+        if (!source.is(DamageTypeTags.BYPASSES_ARMOR)) {
             LivingHurtUtils.damageCurioItems(en, amount);
         }
         if (source instanceof MyDamageSource) {

@@ -122,7 +122,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
     }
 
     public void addButtonPublic(AbstractWidget b) {
-        this.addWidget(b);
+        this.addRenderableWidget(b);
     }
 
     private void addConnections() {
@@ -365,6 +365,8 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
         // Watch watch = new Watch();
         mouseRecentlyClickedTicks--;
+        
+        renderBackgroundDirt(gui, this, 0);
 
         gui.pose().scale(zoom, zoom, zoom);
 
@@ -391,7 +393,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
             }
 
 
-            renderBackgroundDirt(gui, this, 0);
+            //   renderBackgroundDirt(gui, this, 0);
 
             for (GuiEventListener e : this.children()) {
                 if (e instanceof ConnectionButton c) {

@@ -3,7 +3,7 @@ package com.robertx22.age_of_exile.vanilla_mc.items.misc;
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.IAutoModel;
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.ItemModelManager;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
-import net.minecraft.core.Registry;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.world.item.Item;
 
 public abstract class AutoItem extends Item implements IAutoLocName, IAutoModel {

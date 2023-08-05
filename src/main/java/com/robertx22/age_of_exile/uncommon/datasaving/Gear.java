@@ -2,9 +2,9 @@ package com.robertx22.age_of_exile.uncommon.datasaving;
 
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.library_of_exile.utils.LoadSave;
-import net.minecraft.world.item.ItemStack;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.core.Registry;
+import net.minecraft.world.item.ItemStack;
 
 public class Gear {
 
@@ -27,6 +27,7 @@ public class Gear {
         GearItemData gear = LoadSave.Load(GearItemData.class, new GearItemData(), stack.getTag(), LOC);
 
         if (gear != null) {
+            
 
             String id = VanillaUTIL.REGISTRY.items().getKey(stack.getItem())
                     .toString();

@@ -6,6 +6,7 @@ import com.robertx22.library_of_exile.utils.CommandUtils;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -33,10 +34,16 @@ public class CasterCommandAction extends SpellAction {
 
             CommandSourceStack source = CommandUtils.getCommandSource(entity);
 
+            if (entity instanceof Player p) {
+                CommandUtils.execute(p, command);
+            }
+            /*
             ctx.caster
                 .getServer()
                 .getCommands()
                 .performCommand(source, command);
+
+             */
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -25,7 +25,7 @@ public class OnLootChestEvent extends EventConsumer<ExileEvents.OnChestLooted> {
 
         LootInfo info = LootInfo.ofChestLoot(player, event.pos);
 
-        if (WorldUtils.isMapWorldClass(player.level)) {
+        if (WorldUtils.isMapWorldClass(player.level())) {
 
             info.multi += 10;
         }

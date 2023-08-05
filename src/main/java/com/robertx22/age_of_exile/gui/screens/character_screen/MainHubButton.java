@@ -1,23 +1,23 @@
 package com.robertx22.age_of_exile.gui.screens.character_screen;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.robertx22.age_of_exile.gui.bases.IAlertScreen;
 import com.robertx22.age_of_exile.gui.bases.IContainerNamedScreen;
 import com.robertx22.age_of_exile.gui.bases.INamedScreen;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.library_of_exile.utils.RenderUtils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.resources.ResourceLocation;
 
 public class MainHubButton extends ImageButton {
 
     public static int xSize = 105;
     public static int ySize = 28;
     public static ResourceLocation EXLAMATION_MARK_TEX = new ResourceLocation(
-        SlashRef.MODID, "textures/gui/main_hub/exclamation_mark.png");
+            SlashRef.MODID, "textures/gui/main_hub/exclamation_mark.png");
 
     boolean shouldAlert = false;
 
@@ -32,7 +32,7 @@ public class MainHubButton extends ImageButton {
                 con.openContainer();
             } else {
                 Minecraft.getInstance()
-                    .setScreen((Screen) screen);
+                        .setScreen((Screen) screen);
             }
         });
 
@@ -46,21 +46,20 @@ public class MainHubButton extends ImageButton {
     }
 
     @Override
-    public void renderButton(PoseStack matrix, int x, int y, float ticks) {
-        super.renderButton(matrix, x, y, ticks);
+    public void render(GuiGraphics gui, int x, int y, float ticks) {
+        super.render(gui, x, y, ticks);
 
-        RenderUtils.render16Icon(matrix, screen.iconLocation(), this.x + 9, this.y + 6);
+        RenderUtils.render16Icon(gui, screen.iconLocation(), this.getX() + 9, this.getY() + 6);
 
         if (shouldAlert) {
-            RenderUtils.render16Icon(matrix, EXLAMATION_MARK_TEX, this.x + 5, this.y + 6);
+            RenderUtils.render16Icon(gui, EXLAMATION_MARK_TEX, this.getX() + 5, this.getY() + 6);
         }
 
         String str = screen.screenName()
-            .translate();
+                .translate();
 
         if (isHovered()) {
-            Minecraft.getInstance().font.drawShadow(matrix,
-                str, this.x + 32, this.y + 9, ChatFormatting.GREEN.getColor());
+            gui.drawString(Minecraft.getInstance().font, str, this.getX() + 32, this.getY() + 9, ChatFormatting.GREEN.getColor());
         }
     }
 

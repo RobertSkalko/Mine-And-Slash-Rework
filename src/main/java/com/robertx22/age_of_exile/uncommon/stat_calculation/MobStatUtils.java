@@ -31,7 +31,7 @@ public class MobStatUtils {
     public static void addMapStats(LivingEntity en, EntityData mobdata, Unit unit) {
 
 
-        if (WorldUtils.isMapWorldClass(en.level)) {
+        if (WorldUtils.isMapWorldClass(en.level())) {
 
 
         }
@@ -54,7 +54,7 @@ public class MobStatUtils {
 
         List<ExactStatData> stats = new ArrayList<>();
 
-        float val = (-1F + ExileDB.getDimensionConfig(en.level).mob_strength_multi) * 100F;
+        float val = (-1F + ExileDB.getDimensionConfig(en.level()).mob_strength_multi) * 100F;
 
         stats.add(ExactStatData.noScaling(val, ModType.MORE, Health.getInstance()
                 .GUID()));

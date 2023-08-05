@@ -44,4 +44,11 @@ public enum ParticleMotion {
     };
 
     public abstract Vec3 getMotion(Vec3 particlePos, SpellCtx ctx);
+
+    public Vec3 getMotion2(Vec3 particlePos, SpellCtx ctx) {
+        var c = getMotion(particlePos, ctx);
+        return new Vec3(c.x, c.y, c.z);
+
+    }
+
 }

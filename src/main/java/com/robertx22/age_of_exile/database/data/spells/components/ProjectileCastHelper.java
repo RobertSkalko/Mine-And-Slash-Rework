@@ -5,8 +5,8 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellUtils;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public class ProjectileCastHelper {
 
@@ -41,12 +41,12 @@ public class ProjectileCastHelper {
         this.holder = holder;
         this.pos = pos;
 
-        this.pitch = caster.xRot;
-        this.yaw = caster.yRot;
+        this.pitch = caster.getXRot();
+        this.yaw = caster.getYRot();
     }
 
     public void cast() {
-        Level world = caster.level;
+        Level world = caster.level();
 
         float addYaw = 0;
 
@@ -86,7 +86,7 @@ public class ProjectileCastHelper {
             }
             en.setSilent(silent);
 
-            caster.level.addFreshEntity(en);
+            caster.level().addFreshEntity(en);
         }
 
     }

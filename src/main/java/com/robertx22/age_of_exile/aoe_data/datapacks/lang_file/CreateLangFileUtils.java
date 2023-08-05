@@ -4,7 +4,8 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc;
-import net.minecraft.core.Registry;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
@@ -44,19 +45,20 @@ public class CreateLangFileUtils {
 
         List<T> list = new ArrayList<>();
 
-        for (Item item : Registry.ITEM) {
+        for (Item item : BuiltInRegistries.ITEM) {
             if (matches(VanillaUTIL.REGISTRY.items().getKey(item)) && theclass.isAssignableFrom(item.getClass())) {
                 list.add((T) item);
             }
         }
 
-        for (Block item : VanillaUTIL.REGISTRY.blocks()) {
+
+        for (Block item : BuiltInRegistries.BLOCK) {
             if (matches(VanillaUTIL.REGISTRY.blocks().getKey(item)) && theclass.isAssignableFrom(item.getClass())) {
                 list.add((T) item);
             }
         }
-        for (MobEffect item : Registry.MOB_EFFECT) {
-            if (matches(Registry.MOB_EFFECT.getKey(item)) && theclass.isAssignableFrom(item.getClass())) {
+        for (MobEffect item : BuiltInRegistries.MOB_EFFECT) {
+            if (matches(BuiltInRegistries.MOB_EFFECT.getKey(item)) && theclass.isAssignableFrom(item.getClass())) {
                 list.add((T) item);
             }
         }

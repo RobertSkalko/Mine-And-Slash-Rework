@@ -4,7 +4,7 @@ import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
 
 public class SourceOfStrengthItem extends AutoItem {
     public SourceOfStrengthItem() {
-        super(new Properties().tab(CreativeTabs.MyModTab));
+        super(new Properties());
     }
 
     @Override

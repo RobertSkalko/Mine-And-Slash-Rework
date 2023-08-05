@@ -2,12 +2,12 @@ package com.robertx22.age_of_exile.vanilla_mc.potion_effects.types.compat_food_e
 
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class ManaRegenFoodEffect extends FoodEffectPotion {
 

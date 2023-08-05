@@ -2,32 +2,28 @@ package com.robertx22.age_of_exile.capability.player;
 
 import com.robertx22.age_of_exile.capability.player.data.StatPointsData;
 import com.robertx22.age_of_exile.capability.player.data.TeamData;
+import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.DeathStatsData;
 import com.robertx22.age_of_exile.saveclasses.perks.TalentsData;
 import com.robertx22.library_of_exile.components.ICap;
-import com.robertx22.library_of_exile.main.Ref;
 import com.robertx22.library_of_exile.utils.LoadSave;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@Mod.EventBusSubscriber
+
 public class RPGPlayerData implements ICap {
 
 
-    public static final ResourceLocation RESOURCE = new ResourceLocation(Ref.MODID, "player_data");
+    public static final ResourceLocation RESOURCE = new ResourceLocation(SlashRef.MODID, "player_data");
     public static Capability<RPGPlayerData> INSTANCE = CapabilityManager.get(new CapabilityToken<>() {
     });
 
@@ -47,7 +43,7 @@ public class RPGPlayerData implements ICap {
 
     }
 
-
+/*
     @Mod.EventBusSubscriber
     public static class EventHandler {
         @SubscribeEvent
@@ -57,6 +53,8 @@ public class RPGPlayerData implements ICap {
             }
         }
     }
+
+ */
 
 
     private static final String TEAM_DATA = "teams";

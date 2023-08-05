@@ -7,7 +7,6 @@ public class ItemDefault extends Properties {
     public ItemDefault() {
         this.stacksTo(64);
         // this.defaultMaxDamage(0); max dmg sets stakc size to 1!!!
-        this.tab(CreativeTabs.MyModTab);
-
+     
     }
 }

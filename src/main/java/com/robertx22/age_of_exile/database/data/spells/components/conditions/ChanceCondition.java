@@ -16,7 +16,7 @@ public class ChanceCondition extends EffectCondition {
     @Override
     public boolean canActivate(SpellCtx ctx, MapHolder data) {
         Double chance = data.get(MapField.CHANCE);
-        return RandomUtils.roll(chance, ctx.world.random);
+        return RandomUtils.roll(chance);
     }
 
     public MapHolder create(Double chance) {

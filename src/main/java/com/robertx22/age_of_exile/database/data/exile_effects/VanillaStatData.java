@@ -1,11 +1,11 @@
 package com.robertx22.age_of_exile.database.data.exile_effects;
 
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.core.Registry;
 
 import java.util.UUID;
 
@@ -18,8 +18,8 @@ public class VanillaStatData {
 
     public static VanillaStatData create(Attribute attri, float val, ModType type, UUID uuid) {
         VanillaStatData data = new VanillaStatData();
-        data.id = Registry.ATTRIBUTE.getKey(attri)
-            .toString();
+        data.id = BuiltInRegistries.ATTRIBUTE.getKey(attri)
+                .toString();
         data.uuid = uuid.toString();
         data.type = type;
         data.val = val;
@@ -27,7 +27,7 @@ public class VanillaStatData {
     }
 
     public Attribute getAttribute() {
-        return Registry.ATTRIBUTE.get(new ResourceLocation(id));
+        return BuiltInRegistries.ATTRIBUTE.get(new ResourceLocation(id));
     }
 
     public void applyVanillaStats(LivingEntity en, int stacks) {
@@ -39,9 +39,9 @@ public class VanillaStatData {
 
         if (en.getAttribute(attri) != null) {
             if (!en.getAttribute(attri)
-                .hasModifier(mod)) {
+                    .hasModifier(mod)) {
                 en.getAttribute(attri)
-                    .addTransientModifier(mod);
+                        .addTransientModifier(mod);
             }
         }
 
@@ -53,9 +53,9 @@ public class VanillaStatData {
 
         if (en.getAttribute(attri) != null) {
             if (en.getAttribute(attri)
-                .hasModifier(mod)) {
+                    .hasModifier(mod)) {
                 en.getAttribute(attri)
-                    .removeModifier(mod);
+                        .removeModifier(mod);
             }
         }
     }

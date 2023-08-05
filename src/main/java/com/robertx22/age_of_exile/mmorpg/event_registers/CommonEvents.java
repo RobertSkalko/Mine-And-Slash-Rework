@@ -51,7 +51,7 @@ public class CommonEvents {
                 OnServerTick.onEndTick(ServerLifecycleHooks.getCurrentServer());
             }
         });
-
+        
         ForgeEvents.registerForgeEvent(TickEvent.LevelTickEvent.class, event -> {
             if (event.phase == TickEvent.Phase.END && event.level instanceof ServerLevel) {
                 OnTickDungeonWorld.onEndTick((ServerLevel) event.level);

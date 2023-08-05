@@ -8,7 +8,6 @@ import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.enumclasses.LootType;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TierColors;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
@@ -16,15 +15,12 @@ import com.robertx22.age_of_exile.vanilla_mc.items.gemrunes.GemItem;
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -37,7 +33,7 @@ import java.util.List;
 
 public class LootCrateItem extends Item implements IGUID {
     public LootCrateItem() {
-        super(new Properties().tab(CreativeTabs.GemRuneCurrency));
+        super(new Properties());
     }
 
     public static List<LootType> LOOT_TYPES = Arrays.asList(LootType.Gem, LootType.Rune, LootType.Currency);
@@ -94,7 +90,7 @@ public class LootCrateItem extends Item implements IGUID {
 
                 stack.shrink(1);
 
-                SoundUtils.ding(player.level, player.blockPosition());
+                SoundUtils.ding(player.level(), player.blockPosition());
                 PlayerUtils.giveItem(reward, player);
 
             } catch (Exception e) {
@@ -104,6 +100,9 @@ public class LootCrateItem extends Item implements IGUID {
         return new InteractionResultHolder<ItemStack>(InteractionResult.PASS, player.getItemInHand(hand));
     }
 
+
+    // todo
+    /*
     @Override
     public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> stacks) {
         if (this.allowdedIn(group)) {
@@ -126,6 +125,8 @@ public class LootCrateItem extends Item implements IGUID {
             }
         }
     }
+
+     */
 
     @OnlyIn(Dist.CLIENT)
     @Override

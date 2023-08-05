@@ -43,7 +43,7 @@ public class TellClientToCastSpellPacket extends MyPacket<TellClientToCastSpellP
     @Override
     public void onReceived(ExilePacketContext ctx) {
 
-        LivingEntity en = (LivingEntity) ctx.getPlayer().level.getEntity(enid);
+        LivingEntity en = (LivingEntity) ctx.getPlayer().level().getEntity(enid);
 
         Spell spell = ExileDB.Spells()
             .get(spellid);

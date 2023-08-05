@@ -58,7 +58,7 @@ public class BaseScreen extends Screen {
     }
 
     public <T extends AbstractWidget> T publicAddButton(T w) {
-        return this.addWidget(w);
+        return this.addRenderableWidget(w);
     }
 
 }

@@ -12,11 +12,11 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.registry.Database;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.TooltipFlag;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
@@ -33,7 +33,7 @@ public class TooltipMethod {
 
         try {
 
-           
+
             if (Screen.hasControlDown()) {
                 GearItemData gear = Gear.Load(stack);
                 if (gear != null) {
@@ -41,7 +41,7 @@ public class TooltipMethod {
                 }
             }
 
-            if (player == null || player.level == null) {
+            if (player == null || player.level() == null) {
                 return;
             }
 
@@ -56,7 +56,7 @@ public class TooltipMethod {
             if (unit == null) {
                 return;
             }
-            if (!Database.areDatapacksLoaded(player.level)) {
+            if (!Database.areDatapacksLoaded(player.level())) {
                 return;
             }
 

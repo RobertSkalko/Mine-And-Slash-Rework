@@ -16,8 +16,8 @@ import com.robertx22.age_of_exile.vanilla_mc.items.ItemDefault;
 import com.robertx22.library_of_exile.registry.ExileRegistry;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IWeighted;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -37,8 +37,7 @@ public abstract class CurrencyItem extends Item implements ExileRegistry<Currenc
     public abstract String GUID();
 
     public CurrencyItem(String name) {
-        super(new ItemDefault().stacksTo(64)
-                .tab(CreativeTabs.GemRuneCurrency));
+        super(new ItemDefault().stacksTo(64));
 
     }
 

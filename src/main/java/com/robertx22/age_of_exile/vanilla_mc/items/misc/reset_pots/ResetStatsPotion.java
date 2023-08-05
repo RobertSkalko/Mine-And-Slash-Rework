@@ -18,7 +18,7 @@ import net.minecraft.world.level.Level;
 public class ResetStatsPotion extends AutoItem implements IShapedRecipe {
 
     public ResetStatsPotion() {
-        super(new Item.Properties().tab(CreativeTabs.MyModTab)
+        super(new Item.Properties()
                 .stacksTo(10));
     }
 

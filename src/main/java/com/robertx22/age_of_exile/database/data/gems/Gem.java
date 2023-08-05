@@ -6,10 +6,10 @@ import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
-import net.minecraft.world.item.Item;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.core.Registry;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.ChatFormatting;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class Gem extends BaseRuneGem implements IAutoGson<Gem>, JsonExileRegistr
 
     public Gem getHigherTierGem() {
         List<Gem> list = ExileDB.Gems()
-            .getFiltered(x -> x.tier == tier + 1 && x.gem_type.equals(gem_type));
+                .getFiltered(x -> x.tier == tier + 1 && x.gem_type.equals(gem_type));
 
         if (!list.isEmpty()) {
             return list.get(0);

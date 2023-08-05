@@ -27,10 +27,10 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.rework.condition.StatCond
 import com.robertx22.age_of_exile.uncommon.utilityclasses.MapManager;
 import com.robertx22.library_of_exile.registry.Database;
 import com.robertx22.library_of_exile.registry.ExileRegistryContainer;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.core.Registry;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 
 public class ExileDB {
 
@@ -43,9 +43,9 @@ public class ExileDB {
 
     public static EntityConfig getEntityConfig(LivingEntity entity, EntityData data) {
 
-        String monster_id = Registry.ENTITY_TYPE.getKey(entity.getType())
+        String monster_id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType())
                 .toString();
-        String mod_id = Registry.ENTITY_TYPE.getKey(entity.getType())
+        String mod_id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType())
                 .getNamespace();
 
         EntityConfig config = null;
@@ -84,7 +84,7 @@ public class ExileDB {
         return Database.getRegistry(ExileRegistryTypes.UNIQUE_GEAR);
     }
 
-   
+
     public static ExileRegistryContainer<CurrencyItem> CurrencyItems() {
         return Database.getRegistry(ExileRegistryTypes.CURRENCY_ITEMS);
     }

@@ -4,8 +4,9 @@ import com.google.common.base.Joiner;
 import com.robertx22.age_of_exile.a_libraries.curios.interfaces.ICuriosType;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.DirUtils;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
-import net.minecraft.core.Registry;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,11 +23,11 @@ public class GenerateCurioDataJsons {
 
         HashMap<String, List<String>> map = new HashMap();
 
-        for (Item item : Registry.ITEM) {
+        for (Item item : BuiltInRegistries.ITEM) {
 
             if (VanillaUTIL.REGISTRY.items().getKey(item)
-                .getNamespace()
-                .equals(SlashRef.MODID) && item instanceof ICuriosType) {
+                    .getNamespace()
+                    .equals(SlashRef.MODID) && item instanceof ICuriosType) {
 
                 ICuriosType type = (ICuriosType) item;
                 String slot = type.curioTypeName();
@@ -38,7 +39,7 @@ public class GenerateCurioDataJsons {
                 }
 
                 list.add("\"" + VanillaUTIL.REGISTRY.items().getKey(item)
-                    .toString() + "\"");
+                        .toString() + "\"");
 
                 map.put(slot, list);
 

@@ -13,14 +13,14 @@ public class GearSoulOnInvTick {
 
         try {
 
-            if (player.level.isClientSide) {
+            if (player.level().isClientSide) {
                 return;
             }
 
-            for (ItemStack stack : player.inventory.items) {
+            for (ItemStack stack : player.getInventory().items) {
                 tryStack(player, stack);
             }
-            for (ItemStack stack : player.inventory.armor) {
+            for (ItemStack stack : player.getInventory().armor) {
                 tryStack(player, stack);
             }
 

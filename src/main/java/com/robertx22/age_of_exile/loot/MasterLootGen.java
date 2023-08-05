@@ -103,7 +103,7 @@ public class MasterLootGen {
                 GearRarity rar = Gear.Load(stack)
                         .getRarity();
                 if (rar.is_unique_item) {
-                    SoundUtils.ding(victim.level, victim.blockPosition());
+                    SoundUtils.ding(victim.level(), victim.blockPosition());
                 }
             }
 

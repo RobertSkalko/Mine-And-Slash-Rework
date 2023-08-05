@@ -6,10 +6,10 @@ import com.robertx22.age_of_exile.database.data.spells.components.actions.ExileE
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.mixin_ducks.StatusEffectAccesor;
 import com.robertx22.age_of_exile.vanilla_mc.potion_effects.types.ExileStatusEffect;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.core.Registry;
+import net.minecraft.world.entity.LivingEntity;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -35,9 +35,9 @@ public class PotionAction extends SpellAction {
                     MobEffect potion = data.getPotion();
 
                     int dura = data.get(POTION_DURATION)
-                        .intValue();
+                            .intValue();
                     int str = data.getOrDefault(POTION_STRENGTH, 1D)
-                        .intValue();
+                            .intValue();
                     t.addEffect(new MobEffectInstance(potion, dura, str));
                 } else if (action == GiveOrTake.REMOVE_STACKS) {
                     MobEffect potion = data.getPotion();
@@ -45,29 +45,29 @@ public class PotionAction extends SpellAction {
                     t.removeEffect(potion);
                 } else if (action == GiveOrTake.REMOVE_NEGATIVE) {
                     int count = data.getOrDefault(COUNT, 1D)
-                        .intValue();
+                            .intValue();
 
                     for (int i = 0; i < count; i++) {
 
                         List<MobEffectInstance> opt = t.getActiveEffects()
-                            .stream()
-                            .filter(x -> {
-                                if (x.getEffect() instanceof StatusEffectAccesor) {
-                                    StatusEffectAccesor acc = (StatusEffectAccesor) x.getEffect();
-                                    return acc.my$getstatusEffectType() == net.minecraft.world.effect.MobEffectCategory.HARMFUL;
-                                } else {
-                                    if (x.getEffect() instanceof ExileStatusEffect) {
-                                        ExileStatusEffect es = (ExileStatusEffect) x.getEffect();
-                                        return es.type == EffectType.negative;
+                                .stream()
+                                .filter(x -> {
+                                    if (x.getEffect() instanceof StatusEffectAccesor) {
+                                        StatusEffectAccesor acc = (StatusEffectAccesor) x.getEffect();
+                                        return acc.my$getstatusEffectType() == net.minecraft.world.effect.MobEffectCategory.HARMFUL;
+                                    } else {
+                                        if (x.getEffect() instanceof ExileStatusEffect) {
+                                            ExileStatusEffect es = (ExileStatusEffect) x.getEffect();
+                                            return es.type == EffectType.negative;
+                                        }
                                     }
-                                }
-                                return false;
-                            })
-                            .collect(Collectors.toList());
+                                    return false;
+                                })
+                                .collect(Collectors.toList());
 
                         if (!opt.isEmpty()) {
                             t.removeEffect(opt.get(0)
-                                .getEffect());
+                                    .getEffect());
                         }
                     }
 
@@ -85,8 +85,8 @@ public class PotionAction extends SpellAction {
         dmg.put(COUNT, 1D);
         dmg.put(POTION_DURATION, duration);
         dmg.put(POTION_ACTION, GiveOrTake.GIVE_STACKS.name());
-        dmg.put(POTION_ID, Registry.MOB_EFFECT.getKey(effect)
-            .toString());
+        dmg.put(POTION_ID, BuiltInRegistries.MOB_EFFECT.getKey(effect)
+                .toString());
         return dmg;
     }
 
@@ -103,8 +103,8 @@ public class PotionAction extends SpellAction {
         dmg.type = GUID();
         dmg.put(COUNT, 1D);
         dmg.put(POTION_ACTION, GiveOrTake.REMOVE_STACKS.name());
-        dmg.put(POTION_ID, Registry.MOB_EFFECT.getKey(effect)
-            .toString());
+        dmg.put(POTION_ID, BuiltInRegistries.MOB_EFFECT.getKey(effect)
+                .toString());
         return dmg;
     }
 

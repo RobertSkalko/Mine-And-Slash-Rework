@@ -15,7 +15,7 @@ public class StaffWeapon extends ModWeapon implements IAutoModel {
 
     public StaffWeapon(VanillaMaterial mat) {
         super(mat.toolmat, new Properties().durability(mat.toolmat.getUses())
-                .tab(CreativeTabs.MyModTab), WeaponTypes.staff);
+                , WeaponTypes.staff);
         this.mat = mat;
 
         this.attackSpeed = -3;

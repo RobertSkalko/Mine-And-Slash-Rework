@@ -18,7 +18,7 @@ import net.minecraft.world.level.Level;
 public class SpellResetPotion extends AutoItem implements IShapedRecipe {
 
     public SpellResetPotion() {
-        super(new Item.Properties().tab(CreativeTabs.MyModTab)
+        super(new Item.Properties()
                 .stacksTo(10));
     }
 

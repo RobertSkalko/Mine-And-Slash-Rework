@@ -15,7 +15,6 @@ import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -36,8 +35,7 @@ import java.util.List;
 public class RarityGearCrateItem extends Item implements IAutoModel {
 
     public RarityGearCrateItem() {
-        super(new Properties().stacksTo(16)
-                .tab(CreativeTabs.MyModTab));
+        super(new Properties().stacksTo(16));
 
     }
 

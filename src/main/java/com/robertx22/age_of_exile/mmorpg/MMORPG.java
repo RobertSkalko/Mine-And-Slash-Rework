@@ -28,8 +28,7 @@ import com.robertx22.library_of_exile.events.base.ExileEvents;
 import com.robertx22.library_of_exile.main.ForgeEvents;
 import com.robertx22.library_of_exile.utils.Watch;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.CreativeModeTab;
@@ -49,6 +48,7 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
+import net.minecraftforge.registries.RegisterEvent;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 
 @Mod(SlashRef.MODID)
@@ -65,10 +65,10 @@ public class MMORPG {
             PROTOCOL_VERSION::equals
     );
 
-    public static CreativeModeTab CREATIVE_TAB = Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, SlashRef.id("tab"),
+    public static CreativeModeTab CREATIVE_TAB =
             new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 10)
                     .icon(() -> SlashItems.IDENTIFY_TOME.get().getDefaultInstance())
-                    .build());
+                    .build();
 
     public MMORPG() {
 
@@ -123,6 +123,14 @@ public class MMORPG {
         S2CPacketRegister.register();
 
         LifeCycleEvents.register();
+
+        // hmm
+        ForgeEvents.registerForgeEvent(RegisterEvent.class, x -> {
+
+            x.register(Registries.CREATIVE_MODE_TAB, e -> {
+                e.register(SlashRef.id("tab"), CREATIVE_TAB);
+            });
+        });
 
 
         ForgeEvents.registerForgeEvent(GatherDataEvent.class, x -> {

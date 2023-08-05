@@ -17,8 +17,8 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.DashUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.effect.MobEffect;
 
 public class PartBuilder {
 
@@ -37,8 +37,8 @@ public class PartBuilder {
     public static ComponentPart dotDamageOnTick(String effect, ValueCalculation calc, Elements ele) {
         ComponentPart c = new ComponentPart();
         c.acts.add(SpellAction.DEAL_DAMAGE.create(calc, ele)
-            .put(MapField.EXILE_POTION_ID, effect)
-            .put(MapField.DMG_EFFECT_TYPE, AttackType.dot.name()));
+                .put(MapField.EXILE_POTION_ID, effect)
+                .put(MapField.DMG_EFFECT_TYPE, AttackType.dot.name()));
 
         c.targets.add(BaseTargetSelector.TARGET.create());
         return c;
@@ -200,8 +200,8 @@ public class PartBuilder {
     public static ComponentPart cloudParticles(SimpleParticleType particle, Double count, Double radius, Double randomY) {
         ComponentPart c = new ComponentPart();
         c.acts.add(SpellAction.PARTICLES_IN_RADIUS.create(particle, count, radius)
-            .put(MapField.PARTICLE_SHAPE, ParticleInRadiusAction.Shape.HORIZONTAL_CIRCLE.name())
-            .put(MapField.Y_RANDOM, randomY));
+                .put(MapField.PARTICLE_SHAPE, ParticleInRadiusAction.Shape.CIRCLE_2D.name())
+                .put(MapField.Y_RANDOM, randomY));
         return c;
     }
 
@@ -249,32 +249,32 @@ public class PartBuilder {
     public static ComponentPart nova(SimpleParticleType particle, Double count, Double radius, Double motionMulti) {
         ComponentPart c = new ComponentPart();
         c.acts.add(SpellAction.PARTICLES_IN_RADIUS.create(particle, count, radius)
-            .put(MapField.PARTICLE_SHAPE, ParticleInRadiusAction.Shape.HORIZONTAL_CIRCLE.name())
-            .put(MapField.Y_RANDOM, 0.2D)
-            .put(MapField.HEIGHT, 0.5D)
-            .put(MapField.MOTION, ParticleMotion.OutwardMotion.name())
-            .put(MapField.MOTION_MULTI, motionMulti)
-            .put(MapField.PARTICLE_SHAPE, ParticleInRadiusAction.Shape.HORIZONTAL_CIRCLE_EDGE.name()));
+                .put(MapField.PARTICLE_SHAPE, ParticleInRadiusAction.Shape.CIRCLE_2D.name())
+                .put(MapField.Y_RANDOM, 0.2D)
+                .put(MapField.HEIGHT, 0.5D)
+                .put(MapField.MOTION, ParticleMotion.OutwardMotion.name())
+                .put(MapField.MOTION_MULTI, motionMulti)
+                .put(MapField.PARTICLE_SHAPE, ParticleInRadiusAction.Shape.CIRCLE_2D_EDGE.name()));
         return c;
     }
 
     public static ComponentPart groundEdgeParticles(SimpleParticleType particle, Double count, Double radius, Double randomY, ParticleMotion motion) {
         ComponentPart c = new ComponentPart();
         c.acts.add(SpellAction.PARTICLES_IN_RADIUS.create(particle, count, radius)
-            .put(MapField.PARTICLE_SHAPE, ParticleInRadiusAction.Shape.HORIZONTAL_CIRCLE.name())
-            .put(MapField.Y_RANDOM, randomY)
-            .put(MapField.HEIGHT, 0.5D)
-            .put(MapField.MOTION, motion.name())
-            .put(MapField.PARTICLE_SHAPE, ParticleInRadiusAction.Shape.HORIZONTAL_CIRCLE_EDGE.name()));
+                .put(MapField.PARTICLE_SHAPE, ParticleInRadiusAction.Shape.CIRCLE_2D.name())
+                .put(MapField.Y_RANDOM, randomY)
+                .put(MapField.HEIGHT, 0.5D)
+                .put(MapField.MOTION, motion.name())
+                .put(MapField.PARTICLE_SHAPE, ParticleInRadiusAction.Shape.CIRCLE_2D_EDGE.name()));
         return c;
     }
 
     public static ComponentPart groundParticles(SimpleParticleType particle, Double count, Double radius, Double randomY) {
         ComponentPart c = new ComponentPart();
         c.acts.add(SpellAction.PARTICLES_IN_RADIUS.create(particle, count, radius)
-            .put(MapField.PARTICLE_SHAPE, ParticleInRadiusAction.Shape.HORIZONTAL_CIRCLE.name())
-            .put(MapField.Y_RANDOM, randomY)
-            .put(MapField.HEIGHT, 0.5D));
+                .put(MapField.PARTICLE_SHAPE, ParticleInRadiusAction.Shape.CIRCLE_2D.name())
+                .put(MapField.Y_RANDOM, randomY)
+                .put(MapField.HEIGHT, 0.5D));
         return c;
     }
 
@@ -342,7 +342,7 @@ public class PartBuilder {
     public static ComponentPart giveSelfEffect(MobEffect effect, Double dura, Double str) {
         ComponentPart c = new ComponentPart();
         c.acts.add(SpellAction.POTION.createGive(effect, dura)
-            .put(MapField.POTION_STRENGTH, str));
+                .put(MapField.POTION_STRENGTH, str));
         c.targets.add(BaseTargetSelector.CASTER.create());
         return c;
     }

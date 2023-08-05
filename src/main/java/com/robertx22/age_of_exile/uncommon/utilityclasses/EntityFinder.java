@@ -1,12 +1,12 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 import java.util.Objects;
@@ -87,14 +87,14 @@ public class EntityFinder {
                 double maxZ = Math.max(z, l.z);
 
                 AABB aabb = new AABB(minX - horizontal, minY - vertical, minZ - horizontal,
-                    maxX + horizontal, maxY + vertical, maxZ + horizontal
+                        maxX + horizontal, maxY + vertical, maxZ + horizontal
                 );
 
                 if (setup.addTestParticles) {
                     Utilities.spawnParticlesForTesting(aabb, setup.world);
                 }
 
-                List<T> entityList = entity.level.getEntitiesOfClass(setup.entityType, aabb);
+                List<T> entityList = entity.level().getEntitiesOfClass(setup.entityType, aabb);
                 entityList.removeIf(e -> e == entity);
 
                 return entityList;
@@ -134,7 +134,7 @@ public class EntityFinder {
             Objects.requireNonNull(caster);
             this.entityType = entityType;
             this.caster = caster;
-            this.world = caster.level;
+            this.world = caster.level();
             this.pos = pos;
         }
 

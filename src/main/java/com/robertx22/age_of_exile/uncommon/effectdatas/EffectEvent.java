@@ -87,7 +87,7 @@ public abstract class EffectEvent implements IGUID {
     }
 
     public void calculateEffects() {
-        if (source.level.isClientSide) {
+        if (source.level().isClientSide) {
             return; // todo is this fine? spell calc seems to be called on client every tick!
         }
         if (!effectsCalculated) {

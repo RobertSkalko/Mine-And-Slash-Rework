@@ -6,10 +6,10 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.server.level.ServerLevel;
 
 public class OnMobSpawn {
 
@@ -28,7 +28,7 @@ public class OnMobSpawn {
 
     public static void setupNewMobOnSpawn(LivingEntity entity) {
 
-        if (entity.level.isClientSide) {
+        if (entity.level().isClientSide) {
             return;
         }
 
@@ -40,7 +40,7 @@ public class OnMobSpawn {
 
             Player nearestPlayer = null;
 
-            nearestPlayer = PlayerUtils.nearestPlayer((ServerLevel) entity.level, entity);
+            nearestPlayer = PlayerUtils.nearestPlayer((ServerLevel) entity.level(), entity);
 
             if (endata.needsToBeGivenStats()) {
                 setupNewMob(entity, endata, nearestPlayer);
@@ -51,7 +51,7 @@ public class OnMobSpawn {
                 }
 
                 endata.getUnit()
-                    .initStats(); // give new stats to mob on spawn
+                        .initStats(); // give new stats to mob on spawn
                 endata.forceRecalculateStats();
             }
 
@@ -73,9 +73,9 @@ public class OnMobSpawn {
         endata.setRarity(rar);
 
         MobRarity rarity = ExileDB.MobRarities()
-            .get(rar);
+                .get(rar);
         endata.getAffixData()
-            .randomizeAffixes(rarity);
+                .randomizeAffixes(rarity);
 
         endata.setUnit(mob);
 

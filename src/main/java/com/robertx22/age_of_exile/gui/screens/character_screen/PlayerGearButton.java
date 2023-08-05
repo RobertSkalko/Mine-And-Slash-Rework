@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.gui.screens.character_screen;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.robertx22.age_of_exile.a_libraries.curios.MyCurioUtils;
 import com.robertx22.age_of_exile.a_libraries.curios.RefCurio;
 import com.robertx22.age_of_exile.gui.bases.BaseScreen;
@@ -8,14 +7,16 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.gui.ItemSlotButton;
 import com.robertx22.library_of_exile.utils.GuiUtils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.inventory.InventoryScreen;
-import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import org.joml.Quaternionf;
 
 public class PlayerGearButton extends ImageButton {
 
@@ -47,22 +48,24 @@ public class PlayerGearButton extends ImageButton {
     }
 
     @Override
-    public void renderButton(PoseStack matrix, int x, int y, float ticks) {
-        super.renderButton(matrix, x, y, ticks);
+    public void render(GuiGraphics gui, int x, int y, float ticks) {
+        super.render(gui, x, y, ticks);
 
         String str = "Level: " + Load.Unit(player)
-            .getLevel();
+                .getLevel();
 
         Minecraft mc = Minecraft.getInstance();
 
+        Quaternionf ARMOR_STAND_ANGLE = (new Quaternionf()).rotationXYZ(0.43633232F, 0.0F, (float) Math.PI);
+
         // player 3d view
-        InventoryScreen.renderEntityInInventory(this.x + 50, this.y + 77, 30, this.x - x, this.y - y, player);
-        mc.font.draw(matrix, str, this.x + xSize / 2 - mc.font.width(str) / 2, this.y + 3, ChatFormatting.YELLOW.getColor());
+        InventoryScreen.renderEntityInInventory(gui, this.getX() + 50, this.getY() + 77, 30, ARMOR_STAND_ANGLE, null, player);
+        gui.drawString(mc.font, str, this.getX() + xSize / 2 - mc.font.width(str) / 2, this.getY() + 3, ChatFormatting.YELLOW.getColor());
 
         str = "Avg ILVL: " + Load.Unit(mc.player)
-            .getAverageILVL();
+                .getAverageILVL();
 
-        GuiUtils.renderScaledText(matrix, this.x + xSize / 2, this.y + 17, 0.8F, str, ChatFormatting.GREEN);
+        GuiUtils.renderScaledText(gui, this.getX() + xSize / 2, this.getY() + 17, 0.8F, str, ChatFormatting.GREEN);
 
         // mc.font.draw(matrix, str, this.x + xSize / 2 - mc.font.width(str) / 2, this.y + 5, TextFormatting.GREEN.getColor());
 
@@ -71,7 +74,7 @@ public class PlayerGearButton extends ImageButton {
     }
 
     private void addItemButton(ItemStack stack, int x, int y) {
-        screen.publicAddButton(new ItemSlotButton(stack, this.x + x, this.y + y));
+        screen.publicAddButton(new ItemSlotButton(stack, this.getX() + x, this.getY() + y));
     }
 
 }

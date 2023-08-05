@@ -3,7 +3,7 @@ package com.robertx22.age_of_exile.saveclasses.item_classes.tooltips;
 import com.robertx22.age_of_exile.database.data.StatModifier;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ITooltipList;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class TooltipStatWithContext implements ITooltipList {
     }
 
     @Override
-    public List<Component> GetTooltipString(TooltipInfo info) {
+    public List<MutableComponent> GetTooltipString(TooltipInfo info) {
         return statinfo.stat.getTooltipList(this);
     }
 

@@ -37,7 +37,7 @@ public class SpellCtx {
         this.target = target;
         this.pos = pos;
         this.calculatedSpellData = calculatedSpellData;
-        this.world = caster.level;
+        this.world = caster.level();
         this.vecPos = vec;
         this.activation = act;
 

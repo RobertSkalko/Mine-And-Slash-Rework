@@ -2,27 +2,22 @@ package com.robertx22.age_of_exile.database.data.currency;
 
 import com.robertx22.age_of_exile.database.data.currency.base.CurrencyItem;
 import com.robertx22.age_of_exile.database.data.currency.base.ICurrencyItemEffect;
-import com.robertx22.age_of_exile.database.data.currency.base.IShapedRecipe;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.BaseLocRequirement;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.GearEnumLocReq;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.SimpleGearLocReq;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.item_types.GearReq;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import com.robertx22.age_of_exile.mmorpg.registers.common.items.CurrencyItems;
-import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.BaseStatsData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class OrbOfBlessingItem extends CurrencyItem implements ICurrencyItemEffect, IShapedRecipe {
+public class OrbOfBlessingItem extends CurrencyItem implements ICurrencyItemEffect {
     @Override
     public String GUID() {
         return "currency/number_reroll";
@@ -81,17 +76,5 @@ public class OrbOfBlessingItem extends CurrencyItem implements ICurrencyItemEffe
         return "Re-rolls explicit numbers on a gear.";
     }
 
-    @Override
-    public ShapedRecipeBuilder getRecipe() {
-        return shaped(CurrencyItems.ORB_OF_BLESSING.get())
-                .define('#', SlashItems.CRYSTALLIZED_ESSENCE.get())
-                .define('t', CurrencyItems.ORB_OF_TURBULENCE.get())
-                .define('v', Items.COAL)
-                .define('o', SlashItems.T4_DUST())
-                .pattern("v#v")
-                .pattern("vtv")
-                .pattern("ovo")
-                .unlockedBy("player_level", trigger());
-    }
 
 }

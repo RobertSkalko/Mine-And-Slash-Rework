@@ -10,9 +10,9 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 
 public class LootInfo {
@@ -57,7 +57,7 @@ public class LootInfo {
         LootInfo info = new LootInfo(LootOrigin.MOB);
 
         try {
-            info.world = mob.level;
+            info.world = mob.level();
             info.mobData = Load.Unit(mob);
             info.playerData = Load.Unit(player);
             info.mobKilled = mob;
@@ -76,7 +76,7 @@ public class LootInfo {
 
     public static LootInfo ofPlayer(Player player) {
         LootInfo info = new LootInfo(LootOrigin.PLAYER);
-        info.world = player.level;
+        info.world = player.level();
         info.pos = player.blockPosition();
         info.setupAllFields();
         return info;
@@ -85,7 +85,7 @@ public class LootInfo {
     public static LootInfo ofChestLoot(Player player, BlockPos pos) {
         LootInfo info = new LootInfo(LootOrigin.CHEST);
         info.player = player;
-        info.world = player.level;
+        info.world = player.level();
         info.pos = pos;
         info.multi = 1.5F;
         info.maxItems = 7;
@@ -112,7 +112,7 @@ public class LootInfo {
     public static LootInfo ofLockedChestItem(Player player, int level) {
         LootInfo info = new LootInfo(LootOrigin.LOOT_CRATE);
         info.player = player;
-        info.world = player.level;
+        info.world = player.level();
         info.pos = player.blockPosition();
         info.level = level;
         info.multi = 5;

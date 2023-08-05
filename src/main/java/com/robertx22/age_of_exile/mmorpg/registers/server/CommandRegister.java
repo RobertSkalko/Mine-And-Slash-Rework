@@ -33,8 +33,7 @@ public class CommandRegister {
         SetLevel.register(dispatcher);
         GiveExp.register(dispatcher);
 
-        TestBuild.register(dispatcher);
-
+      
         ResetSpellCooldowns.register(dispatcher);
         SyncDatapacks.register(dispatcher);
 

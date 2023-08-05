@@ -7,8 +7,8 @@ import com.robertx22.age_of_exile.database.data.spells.entities.StationaryFallin
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 
 public class SlashEntities {
 
@@ -29,13 +29,11 @@ public class SlashEntities {
     private static <T extends Entity> RegObj<EntityType<T>> projectile(EntityType.EntityFactory<T> factory,
                                                                        String id, boolean itemRender) {
 
-        EntityType<T> type = EntityType.Builder.of(factory, MobCategory.MISC)
+        RegObj<EntityType<T>> def = Def.entity(id, () -> EntityType.Builder.of(factory, MobCategory.MISC)
                 .sized(0.5F, 0.5F)
                 .setUpdateInterval(20)
                 .setTrackingRange(4)
-                .build(id);
-
-        RegObj<EntityType<T>> def = Def.entity(id, () -> type);
+                .build(id));
 
         return def;
     }

@@ -37,7 +37,7 @@ public class SummonAtSightAction extends SpellAction {
         SpellUtils.initSpellEntity(en, ctx.caster, ctx.calculatedSpellData, data);
         en.setPos(pos.x, pos.y + height, pos.z);
 
-        ctx.caster.level.addFreshEntity(en);
+        ctx.caster.level().addFreshEntity(en);
 
     }
 

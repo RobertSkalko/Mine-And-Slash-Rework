@@ -17,9 +17,7 @@ public class RuneItems {
 
         for (RuneItem.RuneType type : RuneItem.RuneType.values()) {
 
-            RuneItem item = new RuneItem(type);
-
-            RegObj<RuneItem> def = Def.item(() -> item);
+            RegObj<RuneItem> def = Def.item(() -> new RuneItem(type), "runes/" + type.id);
 
             MAP.put(type.id, def);
             ALL.add(def);

@@ -11,7 +11,7 @@ public class ScaleVanillaMobDamage extends EventConsumer<ExileEvents.OnDamageEnt
 
     @Override
     public void accept(ExileEvents.OnDamageEntity event) {
-        if (event.mob.level.isClientSide) {
+        if (event.mob.level().isClientSide) {
             return;
         }
         if (LivingHurtUtils.isEnviromentalDmg(event.source)) {

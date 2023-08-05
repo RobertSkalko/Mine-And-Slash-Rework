@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatsContaine
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
+import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 
@@ -46,13 +47,13 @@ public class GearSocketsData implements IStatsContainer, IGearPartTooltip {
             if (sockets.size() > i) {
                 SocketData data = sockets.get(i);
                 Gem gem = data.getGem();
-                list.add(ExileText.ofText(gem.getFormat() + "[" + TooltipUtils.STAR + "] ").append(data.GetTooltipString(info, gear)
+                list.add(ExileText.ofText(gem.getFormat() + "[" + TooltipUtils.STAR + "] ").get().append(data.GetTooltipString(info, gear)
                         .get(0)));
             }
         }
 
         for (int i = 0; i < gear.getEmptySockets(); i++) {
-            list.add(ExileText.ofText(ChatFormatting.YELLOW + "[Socket]"));
+            list.add(ExileText.ofText(ChatFormatting.YELLOW + "[Socket]").get());
         }
 
         return list;

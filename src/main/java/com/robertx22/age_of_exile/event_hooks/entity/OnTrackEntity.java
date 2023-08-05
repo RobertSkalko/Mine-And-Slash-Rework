@@ -13,7 +13,7 @@ public class OnTrackEntity {
 
         try {
 
-            if (entity.level.isClientSide) {
+            if (entity.level().isClientSide) {
                 return;
             }
 

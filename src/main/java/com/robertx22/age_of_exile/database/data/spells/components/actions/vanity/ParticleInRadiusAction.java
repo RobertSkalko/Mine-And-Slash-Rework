@@ -3,13 +3,15 @@ package com.robertx22.age_of_exile.database.data.spells.components.actions.vanit
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.ParticleUtils;
-import com.robertx22.library_of_exile.utils.GeometryUtils;
 import com.robertx22.library_of_exile.utils.RandomUtils;
-import net.minecraft.world.entity.LivingEntity;
+import com.robertx22.library_of_exile.utils.geometry.Circle2d;
+import com.robertx22.library_of_exile.utils.geometry.Circle3d;
+import com.robertx22.library_of_exile.utils.geometry.MyPosition;
+import com.robertx22.library_of_exile.utils.geometry.ShapeHelper;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.core.Registry;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,7 +21,8 @@ import static com.robertx22.age_of_exile.database.data.spells.map_fields.MapFiel
 public class ParticleInRadiusAction extends SpellAction {
 
     public enum Shape {
-        CIRCLE, HORIZONTAL_CIRCLE, HORIZONTAL_CIRCLE_EDGE
+        CIRCLE, CIRCLE_EDGE, CIRCLE_2D, CIRCLE_2D_EDGE;
+
     }
 
     public ParticleInRadiusAction() {
@@ -36,14 +39,14 @@ public class ParticleInRadiusAction extends SpellAction {
             SimpleParticleType particle = data.getParticle();
 
             float radius = data.get(RADIUS)
-                .floatValue();
+                    .floatValue();
 
             radius *= ctx.calculatedSpellData.area_multi;
 
             float height = data.getOrDefault(HEIGHT, 0D)
-                .floatValue();
+                    .floatValue();
             int amount = data.get(PARTICLE_COUNT)
-                .intValue();
+                    .intValue();
 
             amount *= ctx.calculatedSpellData.area_multi;
 
@@ -57,49 +60,48 @@ public class ParticleInRadiusAction extends SpellAction {
             }
 
             float yrand = data.getOrDefault(Y_RANDOM, 0D)
-                .floatValue();
+                    .floatValue();
 
             float motionMulti = data.getOrDefault(MOTION_MULTI, 1D)
-                .floatValue();
+                    .floatValue();
 
-            if (shape == Shape.CIRCLE) {
-                if (ctx.sourceEntity.tickCount > 1) {
-                    for (int i = 0; i < amount; i++) {
+            Vec3 pos = ctx.vecPos;
+            Vec3 vel = ctx.sourceEntity.getDeltaMovement();
 
-                        // todo unsure if this helps
-                        Vec3 pos = ctx.vecPos;
-                        Vec3 vel = ctx.sourceEntity.getDeltaMovement();
-                        pos = new Vec3(pos.x - vel.x / 2F, pos.y - vel.y / 2 + height, pos.z - vel.z / 2);
+            ShapeHelper c = new Circle3d(new MyPosition(pos), radius);
 
-                        Vec3 p = GeometryUtils.getRandomPosInRadiusCircle(pos, radius);
-                        ParticleUtils.spawn(particle, ctx.world, p, motion.getMotion(p, ctx)
-                            .scale(motionMulti));
-                    }
+            float finalRadius = radius;
+            ParticleMotion finalMotion1 = motion;
+            c.doXTimes(amount, x -> {
+                MyPosition sp = null;
+                float yRandom = (int) RandomUtils.RandomRange(0, yrand);
+
+                if (shape == Shape.CIRCLE) {
+                    sp = new MyPosition(new Circle3d(new MyPosition(pos), finalRadius).getRandomPos());
                 }
-            } else if (shape == Shape.HORIZONTAL_CIRCLE) {
-                for (int i = 0; i < amount; i++) {
-                    float yRandom = (int) RandomUtils.RandomRange(0, yrand);
-                    Vec3 p = GeometryUtils.getRandomHorizontalPosInRadiusCircle(ctx.vecPos.x(), ctx.vecPos.y() + height + yRandom, ctx.vecPos.z(), radius);
-                    ParticleUtils.spawn(particle, ctx.world, p, motion.getMotion(p, ctx)
-                        .scale(motionMulti));
+                if (shape == Shape.CIRCLE_EDGE) {
+                    sp = new MyPosition(new Circle3d(new MyPosition(pos), finalRadius).getRandomEdgePos());
                 }
-            } else if (shape == Shape.HORIZONTAL_CIRCLE_EDGE) {
-                for (int i = 0; i < amount; i++) {
-                    float yRandom = (int) RandomUtils.RandomRange(0, yrand);
-                    Vec3 p = randomEdgeCirclePos(ctx.vecPos.x(), ctx.vecPos.y() + height + yRandom, ctx.vecPos.z(), radius);
-                    ParticleUtils.spawn(particle, ctx.world, p, motion.getMotion(p, ctx)
-                        .scale(motionMulti));
+                if (shape == Shape.CIRCLE_2D) {
+                    sp = new MyPosition(new Circle2d(new MyPosition(pos), finalRadius).getRandomPos());
                 }
-            }
+                if (shape == Shape.CIRCLE_2D_EDGE) {
+                    sp = new MyPosition(new Circle2d(new MyPosition(pos), finalRadius).getEdgePos(x.multi));
+                }
+
+                sp = new MyPosition(sp.x - vel.x / 2F, sp.y - vel.y / 2 + height, sp.z - vel.z / 2);
+
+                Vec3 v = finalMotion1.getMotion(new Vec3(sp.x, sp.y + yRandom, sp.z), ctx).multiply(motionMulti, motionMulti, motionMulti);
+
+                // todo this could be buggy
+
+                c.spawnParticle(ctx.world, sp.asVector3D(), particle, new MyPosition(v).asVector3D());
+            });
+
+
         }
     }
 
-    public static Vec3 randomEdgeCirclePos(double x, double y, double z, float radius) {
-        double angle = Math.random() * Math.PI * 2;
-        double xpos = x + Math.cos(angle) * radius;
-        double zpos = z + Math.sin(angle) * radius;
-        return new Vec3(xpos, y, zpos);
-    }
 
     public MapHolder create(SimpleParticleType particle, Double count, Double radius) {
         return create(particle, count, radius, ParticleMotion.None);
@@ -110,8 +112,8 @@ public class ParticleInRadiusAction extends SpellAction {
         dmg.type = GUID();
         dmg.put(RADIUS, radius);
         dmg.put(PARTICLE_COUNT, count);
-        dmg.put(PARTICLE_TYPE, Registry.PARTICLE_TYPE.getKey(particle)
-            .toString());
+        dmg.put(PARTICLE_TYPE, BuiltInRegistries.PARTICLE_TYPE.getKey(particle)
+                .toString());
         dmg.put(MOTION, motion.name());
         return dmg;
     }

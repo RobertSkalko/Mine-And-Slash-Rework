@@ -14,10 +14,10 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.components.EntityInfoComponent;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.level.ServerLevel;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
 
         try {
 
-            if (mobKilled.level.isClientSide) {
+            if (mobKilled.level().isClientSide) {
                 return;
             }
 
@@ -39,7 +39,7 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
 
                 LivingEntity killerEntity = EntityInfoComponent.get(mobKilled)
                         .getDamageStats()
-                        .getHighestDamager((ServerLevel) mobKilled.level);
+                        .getHighestDamager((ServerLevel) mobKilled.level());
 
                 if (killerEntity == null) {
                     try {
@@ -77,7 +77,7 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
                         GiveExp(mobKilled, player, playerData, mobKilledData, exp_multi);
                     }
 
-                    if (WorldUtils.isDungeonWorld(mobKilled.level)) {
+                    if (WorldUtils.isDungeonWorld(mobKilled.level())) {
 
                     }
 
@@ -109,7 +109,7 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
                 .get(mobData.getRarity())
                 .expMulti();
 
-        if (WorldUtils.isMapWorldClass(victim.level)) {
+        if (WorldUtils.isMapWorldClass(victim.level())) {
 
         }
 
@@ -119,8 +119,8 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
 
         exp += (-1F + ServerContainer.get().EXP_GAIN_MULTI.get()) * baseexp;
 
-    
-        exp += (-1F + ExileDB.getDimensionConfig(victim.level).exp_multi) * baseexp;
+
+        exp += (-1F + ExileDB.getDimensionConfig(victim.level()).exp_multi) * baseexp;
 
 
         exp += (-1F + killerData.getUnit()

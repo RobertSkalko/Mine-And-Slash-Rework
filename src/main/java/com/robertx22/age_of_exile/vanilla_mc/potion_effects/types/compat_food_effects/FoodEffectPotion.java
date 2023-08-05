@@ -45,7 +45,7 @@ public abstract class FoodEffectPotion extends MobEffect {
         try {
             if (en.tickCount % 20 == 0) {
 
-                if (en.level.isClientSide) {
+                if (en.level().isClientSide) {
                     return;
                 }
 

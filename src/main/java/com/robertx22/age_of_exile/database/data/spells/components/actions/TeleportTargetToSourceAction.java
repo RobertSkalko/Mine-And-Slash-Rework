@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.spells.components.actions;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.library_of_exile.utils.EntityUtils;
+import com.robertx22.library_of_exile.utils.geometry.MyPosition;
 import net.minecraft.world.entity.LivingEntity;
 
 import java.util.Arrays;
@@ -18,7 +19,7 @@ public class TeleportTargetToSourceAction extends SpellAction {
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
 
         targets.forEach(x -> {
-            EntityUtils.setLoc(x, ctx.sourceEntity.position(), x.yRot, x.xRot);
+            EntityUtils.setLoc(x, new MyPosition(ctx.sourceEntity.position()).asVector3D(), x.getYRot(), x.getXRot());
         });
 
     }

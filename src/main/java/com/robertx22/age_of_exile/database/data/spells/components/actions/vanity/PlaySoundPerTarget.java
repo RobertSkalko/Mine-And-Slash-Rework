@@ -4,9 +4,9 @@ import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.library_of_exile.utils.SoundUtils;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.core.Registry;
+import net.minecraft.world.entity.LivingEntity;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -25,9 +25,9 @@ public class PlaySoundPerTarget extends SpellAction {
 
             targets.forEach(x -> {
                 float pitch = data.get(PITCH)
-                    .floatValue();
+                        .floatValue();
                 float volume = data.get(VOLUME)
-                    .floatValue();
+                        .floatValue();
                 SoundEvent sound = data.getSound();
 
                 SoundUtils.playSound(x, sound, volume, pitch);
@@ -41,8 +41,8 @@ public class PlaySoundPerTarget extends SpellAction {
         d.type = GUID();
         d.put(VOLUME, volume);
         d.put(PITCH, pitch);
-        d.put(SOUND, Registry.SOUND_EVENT.getKey(sound)
-            .toString());
+        d.put(SOUND, BuiltInRegistries.SOUND_EVENT.getKey(sound)
+                .toString());
         return d;
     }
 

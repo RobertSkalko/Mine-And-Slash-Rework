@@ -1,7 +1,5 @@
 package com.robertx22.age_of_exile.gui.screens.spell;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -13,9 +11,10 @@ import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.library_of_exile.utils.GuiUtils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
 
@@ -61,11 +60,10 @@ public class SpellScreen extends BaseScreen implements INamedScreen, ILeftRight 
         super.init();
 
         try {
-            this.buttons.clear();
-            this.children.clear();
+            this.children().clear();
 
-            addButton(new LeftRightButton(this, guiLeft + 100 - LeftRightButton.xSize - 5, guiTop + 25 - LeftRightButton.ySize / 2, true));
-            addButton(new LeftRightButton(this, guiLeft + 150 + 5, guiTop + 25 - LeftRightButton.ySize / 2, false));
+            addRenderableWidget(new LeftRightButton(this, guiLeft + 100 - LeftRightButton.xSize - 5, guiTop + 25 - LeftRightButton.ySize / 2, true));
+            addRenderableWidget(new LeftRightButton(this, guiLeft + 150 + 5, guiTop + 25 - LeftRightButton.ySize / 2, false));
 
             currentSchool().spells.entrySet()
                     .forEach(e -> {
@@ -78,11 +76,11 @@ public class SpellScreen extends BaseScreen implements INamedScreen, ILeftRight 
                             int x = this.guiLeft + 12 + (point.x * SLOT_SPACING);
                             int y = this.guiTop + 177 - (point.y * SLOT_SPACING);
 
-                            this.addButton(new LearnSpellButton(this, spell, x, y));
+                            this.addRenderableWidget(new LearnSpellButton(this, spell, x, y));
                         }
                     });
 
-          
+
             for (int i = 0; i < 8; i++) {
 
                 int x = guiLeft + 10 + (PickHotbarButton.BUTTON_SIZE_X * i);
@@ -92,7 +90,7 @@ public class SpellScreen extends BaseScreen implements INamedScreen, ILeftRight 
                 }
                 int y = guiTop + 204;
 
-                this.addButton(new PickHotbarButton(this, i, x, y));
+                this.addRenderableWidget(new PickHotbarButton(this, i, x, y));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -106,38 +104,32 @@ public class SpellScreen extends BaseScreen implements INamedScreen, ILeftRight 
     }
 
     @Override
-    public void render(PoseStack matrix, int x, int y, float ticks) {
+    public void render(GuiGraphics gui, int x, int y, float ticks) {
 
         try {
-            mc.getTextureManager()
-                    .bind(BACKGROUND);
-            RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-            blit(matrix, mc.getWindow()
+            gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+            gui.blit(BACKGROUND, mc.getWindow()
                             .getGuiScaledWidth() / 2 - sizeX / 2,
                     mc.getWindow()
                             .getGuiScaledHeight() / 2 - sizeY / 2, 0, 0, sizeX, sizeY
             );
 
-            mc.getTextureManager()
-                    .bind(currentSchool().getIconLoc());
-            RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-            blit(matrix, guiLeft + 108, guiTop + 8, 34, 34, 34, 34, 34, 34);
+            gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+            gui.blit(currentSchool().getIconLoc(), guiLeft + 108, guiTop + 8, 34, 34, 34, 34, 34, 34);
 
             // background
-            mc.getTextureManager()
-                    .bind(currentSchool().getBackgroundLoc());
-            RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+            gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 
-            blit(matrix, guiLeft + 7, guiTop + 7, 93, 36, 93, 36, 93, 36);
-            blit(matrix, guiLeft + 150, guiTop + 7, 93, 36, 93, 36, 93, 36);
+            gui.blit(currentSchool().getBackgroundLoc(), guiLeft + 7, guiTop + 7, 93, 36, 93, 36, 93, 36);
+            gui.blit(currentSchool().getBackgroundLoc(), guiLeft + 150, guiTop + 7, 93, 36, 93, 36, 93, 36);
 
-            super.render(matrix, x, y, ticks);
+            super.render(gui, x, y, ticks);
 
             String txt = "Points: " + Load.spells(mc.player)
                     .getFreeSpellPoints();
-            GuiUtils.renderScaledText(matrix, guiLeft + 125, guiTop + 215, 1D, txt, ChatFormatting.GREEN);
+            GuiUtils.renderScaledText(gui, guiLeft + 125, guiTop + 215, 1, txt, ChatFormatting.GREEN);
 
-            buttons.forEach(b -> b.renderToolTip(matrix, x, y));
+            //buttons.forEach(b -> b.renderToolTip(matrix, x, y));
         } catch (Exception e) {
             e.printStackTrace();
         }

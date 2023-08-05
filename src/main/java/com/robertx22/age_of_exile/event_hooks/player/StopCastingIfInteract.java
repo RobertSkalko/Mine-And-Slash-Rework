@@ -7,7 +7,7 @@ import net.minecraft.world.entity.player.Player;
 public class StopCastingIfInteract {
 
     private static void stop(Player player) {
-        if (player.level.isClientSide) {
+        if (player.level().isClientSide) {
             return;
         }
         EntitySpellCap.ISpellsCap data = Load.spells(player);

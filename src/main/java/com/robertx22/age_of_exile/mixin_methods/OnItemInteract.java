@@ -28,7 +28,7 @@ public class OnItemInteract {
             return;
         }
 
-        ItemStack cursor = player.inventory.getCarried();
+        ItemStack cursor = player.getInventory().getSelected(); // this was getcarried, test
 
         if (!cursor.isEmpty()) {
 
