@@ -1,12 +1,12 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.world.World;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.Level;
 
 import java.util.UUID;
 
@@ -19,10 +19,10 @@ public class ClientOnly {
         Minecraft.getInstance().gameRenderer.displayItemActivation(stack);
     }
 
-    public static Entity getEntityByUUID(World world, UUID id) {
+    public static Entity getEntityByUUID(Level world, UUID id) {
 
-        if (world instanceof ClientWorld) {
-            for (Entity entity : ((ClientWorld) world).entitiesForRendering()) {
+        if (world instanceof ClientLevel) {
+            for (Entity entity : ((ClientLevel) world).entitiesForRendering()) {
                 if (entity.getUUID()
                         .equals(id)) {
 
@@ -34,7 +34,7 @@ public class ClientOnly {
 
     }
 
-    public static PlayerEntity getPlayerById(UUID id) {
+    public static Player getPlayerById(UUID id) {
 
         try {
             return Minecraft.getInstance().level.getPlayerByUUID(id);
@@ -44,7 +44,7 @@ public class ClientOnly {
         return null;
     }
 
-    public static PlayerEntity getPlayer() {
+    public static Player getPlayer() {
         return Minecraft.getInstance().player;
     }
 

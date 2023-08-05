@@ -2,16 +2,16 @@ package com.robertx22.age_of_exile.mixin_methods;
 
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.MasterLootGen;
-import net.minecraft.block.Blocks;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.LootParameters;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
@@ -21,40 +21,40 @@ public class AddSpawnerExtraLootMethod {
     public static void hookLoot(LootContext context, CallbackInfoReturnable<List<ItemStack>> ci) {
 
         try {
-            if (!context.hasParam(LootParameters.BLOCK_STATE)) {
+            if (!context.hasParam(LootContextParams.BLOCK_STATE)) {
                 return;
             }
-            if (!context.hasParam(LootParameters.TOOL)) {
+            if (!context.hasParam(LootContextParams.TOOL)) {
                 return;
             }
-            if (!context.hasParam(LootParameters.ORIGIN)) {
+            if (!context.hasParam(LootContextParams.ORIGIN)) {
                 return;
             }
-            if (!context.hasParam(LootParameters.THIS_ENTITY)) {
+            if (!context.hasParam(LootContextParams.THIS_ENTITY)) {
                 return;
             }
-            if (context.getParamOrNull(LootParameters.BLOCK_STATE)
+            if (context.getParamOrNull(LootContextParams.BLOCK_STATE)
                     .getBlock() != Blocks.SPAWNER) {
                 return;
             }
 
-            Entity en = context.getParamOrNull(LootParameters.THIS_ENTITY);
+            Entity en = context.getParamOrNull(LootContextParams.THIS_ENTITY);
 
-            PlayerEntity player = null;
-            if (en instanceof PlayerEntity) {
-                player = (PlayerEntity) en;
+            Player player = null;
+            if (en instanceof Player) {
+                player = (Player) en;
             }
             if (player == null) {
                 return;
             }
 
-            ItemStack stack = context.getParamOrNull(LootParameters.TOOL);
+            ItemStack stack = context.getParamOrNull(LootContextParams.TOOL);
             if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.SILK_TOUCH, stack) != 0) {
                 return;
             }
 
          
-            Vector3d p = context.getParamOrNull(LootParameters.ORIGIN);
+            Vec3 p = context.getParamOrNull(LootContextParams.ORIGIN);
             BlockPos pos = new BlockPos(p.x, p.y, p.z);
 
             LootInfo info = LootInfo.ofSpawner(player, context.getLevel(), pos);

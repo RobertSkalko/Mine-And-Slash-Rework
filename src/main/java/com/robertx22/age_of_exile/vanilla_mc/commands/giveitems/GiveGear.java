@@ -8,18 +8,18 @@ import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.vanilla_mc.commands.CommandRefs;
 import com.robertx22.age_of_exile.vanilla_mc.commands.suggestions.DatabaseSuggestions;
 import com.robertx22.age_of_exile.vanilla_mc.commands.suggestions.GearRaritySuggestions;
-import net.minecraft.command.CommandSource;
-import net.minecraft.command.arguments.EntityArgument;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.Objects;
 
 import static net.minecraft.command.Commands.argument;
-import static net.minecraft.command.Commands.literal;
+import staticnet.minecraft.commands.Commandss.literal;
 
 public class GiveGear {
 
-    public static void register(CommandDispatcher<CommandSource> commandDispatcher) {
+    public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
 
         commandDispatcher.register(
             literal(CommandRefs.ID)
@@ -75,7 +75,7 @@ public class GiveGear {
                                                 ))))))))));
     }
 
-    private static int execute(CommandSource commandSource, PlayerEntity player, String type, int lvl,
+    private static int execute(CommandSourceStack commandSource, Player player, String type, int lvl,
                                String rarity, int amount) {
 
         if (Objects.isNull(player)) {

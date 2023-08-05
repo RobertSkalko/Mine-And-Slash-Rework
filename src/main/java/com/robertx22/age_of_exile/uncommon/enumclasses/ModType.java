@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.uncommon.enumclasses;
 
-import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 
 import java.util.Locale;
 

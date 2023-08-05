@@ -10,11 +10,11 @@ import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import info.loenwind.autosave.annotations.Factory;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.ChatFormatting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,8 +82,8 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
 
     }
 
-    public ITextComponent getShortTooltip(LevelProvider provider) {
-        IFormattableTextComponent text = new StringTextComponent("");
+    public Component getShortTooltip(LevelProvider provider) {
+        MutableComponent text = new TextComponent("");
 
         int val = getCalculatedValue(provider);
 
@@ -98,7 +98,7 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
 
             if (val < 1 || Screen.hasShiftDown()) {
                 text.append(" (" + (int) (attack_scaling.getValue(provider) * 100) + "% Weapon Damage)")
-                        .withStyle(TextFormatting.YELLOW);
+                        .withStyle(ChatFormatting.YELLOW);
             }
         }
 

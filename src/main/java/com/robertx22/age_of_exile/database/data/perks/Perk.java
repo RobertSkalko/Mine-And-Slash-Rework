@@ -15,17 +15,19 @@ import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.library_of_exile.registry.serialization.IByteBuf;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.TranslatableComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
+import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
 
 public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipList, IByteBuf<Perk>, IAutoLocName {
     public static Perk SERIALIZER = new Perk();
@@ -43,7 +45,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipL
     public List<OptScaleExactStat> stats = new ArrayList<>();
 
     @Override
-    public Perk getFromBuf(PacketBuffer buf) {
+    public Perk getFromBuf(FriendlyByteBuf buf) {
         Perk data = new Perk();
 
         data.type = PerkType.valueOf(buf.readUtf(50));
@@ -67,7 +69,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipL
     }
 
     @Override
-    public void toBuf(PacketBuffer buf) {
+    public void toBuf(FriendlyByteBuf buf) {
         buf.writeUtf(type.name(), 100);
         buf.writeUtf(identifier, 100);
         buf.writeUtf(icon, 150);
@@ -102,8 +104,8 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipL
     }
 
     @Override
-    public List<ITextComponent> GetTooltipString(TooltipInfo info) {
-        List<ITextComponent> list = new ArrayList<>();
+    public List<Component> GetTooltipString(TooltipInfo info) {
+        List<Component> list = new ArrayList<>();
 
         try {
 
@@ -117,24 +119,24 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipL
 
 
             if (this.one_of_a_kind != null) {
-                list.add(new StringTextComponent("Can only have one Perk of this type: ").withStyle(TextFormatting.GREEN));
+                list.add(new TextComponent("Can only have one Perk of this type: ").withStyle(ChatFormatting.GREEN));
 
-                list.add(new TranslationTextComponent(SlashRef.MODID + ".one_of_a_kind." + one_of_a_kind).withStyle(TextFormatting.GREEN));
+                list.add(new TranslatableComponent(SlashRef.MODID + ".one_of_a_kind." + one_of_a_kind).withStyle(ChatFormatting.GREEN));
             }
 
             if (lvl_req > 1) {
                 list.add(Words.RequiresLevel.locName()
                         .append(": " + lvl_req)
-                        .withStyle(TextFormatting.YELLOW));
+                        .withStyle(ChatFormatting.YELLOW));
             }
 
             if (this.type == PerkType.MAJOR) {
 
-                list.add(new StringTextComponent("Game changer talent.").withStyle(TextFormatting.RED));
+                list.add(new TextComponent("Game changer talent.").withStyle(ChatFormatting.RED));
             }
 
             list.add(Words.PressAltForStatInfo.locName()
-                    .withStyle(TextFormatting.BLUE));
+                    .withStyle(ChatFormatting.BLUE));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -163,20 +165,20 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipL
     }
 
     public enum PerkType {
-        STAT(2, 24, 24, 39, TextFormatting.WHITE),
-        SPECIAL(3, 28, 28, 77, TextFormatting.LIGHT_PURPLE),
-        MAJOR(1, 33, 33, 1, TextFormatting.RED),
-        START(4, 35, 35, 115, TextFormatting.YELLOW),
-        SPELL_MOD(5, 26, 26, 153, TextFormatting.BLACK);
+        STAT(2, 24, 24, 39, ChatFormatting.WHITE),
+        SPECIAL(3, 28, 28, 77, ChatFormatting.LIGHT_PURPLE),
+        MAJOR(1, 33, 33, 1, ChatFormatting.RED),
+        START(4, 35, 35, 115, ChatFormatting.YELLOW),
+        SPELL_MOD(5, 26, 26, 153, ChatFormatting.BLACK);
 
         int order;
 
         public int width;
         public int height;
         private int xoff;
-        public TextFormatting format;
+        public ChatFormatting format;
 
-        PerkType(int order, int width, int height, int xoff, TextFormatting format) {
+        PerkType(int order, int width, int height, int xoff, ChatFormatting format) {
             this.order = order;
             this.width = width;
             this.height = height;
@@ -195,7 +197,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipL
         return type;
     }
 
-    public boolean isLockedToPlayer(PlayerEntity player) {
+    public boolean isLockedToPlayer(Player player) {
 
         if (Load.Unit(player)
                 .getLevel() < lvl_req) {

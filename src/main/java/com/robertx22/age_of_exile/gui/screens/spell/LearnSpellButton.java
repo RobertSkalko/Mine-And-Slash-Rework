@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.gui.screens.spell;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.gui.TextUtils;
@@ -12,11 +12,11 @@ import com.robertx22.age_of_exile.vanilla_mc.packets.spells.SetupHotbarPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.GuiUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.widget.button.ImageButton;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.ChatFormatting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +49,7 @@ public class LearnSpellButton extends ImageButton {
     }
 
     @Override
-    public void render(MatrixStack matrix, int mouseX, int mouseY, float delta) {
+    public void render(PoseStack matrix, int mouseX, int mouseY, float delta) {
         Minecraft mc = Minecraft.getInstance();
 
         mc.getTextureManager()
@@ -66,15 +66,15 @@ public class LearnSpellButton extends ImageButton {
             .getLevelOf(spell.GUID());
         int maxlvl = spell.getMaxLevel();
         String lvltext = currentlvl + "/" + maxlvl;
-        TextUtils.renderText(matrix, 0.8F, lvltext, x + BUTTON_SIZE_X / 2, (int) (y + BUTTON_SIZE_Y * 0.85F), TextFormatting.GREEN);
+        TextUtils.renderText(matrix, 0.8F, lvltext, x + BUTTON_SIZE_X / 2, (int) (y + BUTTON_SIZE_Y * 0.85F), ChatFormatting.GREEN);
 
     }
 
     @Override
-    public void renderToolTip(MatrixStack matrix, int x, int y) {
+    public void renderToolTip(PoseStack matrix, int x, int y) {
         if (isInside(x, y)) {
 
-            List<ITextComponent> tooltip = new ArrayList<>();
+            List<Component> tooltip = new ArrayList<>();
 
             TooltipInfo info = new TooltipInfo(mc.player);
 
@@ -83,7 +83,7 @@ public class LearnSpellButton extends ImageButton {
             int reqlvl = screen.currentSchool()
                 .getLevelNeededToAllocate(screen.currentSchool().spells.get(spell.GUID()));
 
-            tooltip.add(new StringTextComponent("Required Level: " + reqlvl).withStyle(TextFormatting.RED));
+            tooltip.add(new TextComponent("Required Level: " + reqlvl).withStyle(ChatFormatting.RED));
 
             GuiUtils.renderTooltip(matrix, tooltip, x, y);
 

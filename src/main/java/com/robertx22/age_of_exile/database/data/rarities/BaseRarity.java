@@ -3,7 +3,7 @@ package com.robertx22.age_of_exile.database.data.rarities;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.Rarity;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
 
 public abstract class BaseRarity implements Rarity {
 
@@ -45,13 +45,13 @@ public abstract class BaseRarity implements Rarity {
     }
 
     @Override
-    public TextFormatting textFormatting() {
+    public ChatFormatting textFormatting() {
         try {
-            return TextFormatting.valueOf(text_format);
+            return ChatFormatting.valueOf(text_format);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return TextFormatting.GRAY;
+        return ChatFormatting.GRAY;
     }
 
     @Override
@@ -62,14 +62,14 @@ public abstract class BaseRarity implements Rarity {
     public void setCommonFields() {
         this.guid = IRarity.COMMON_ID;
         this.loc_name = "Common";
-        this.text_format = TextFormatting.GRAY.name();
+        this.text_format = ChatFormatting.GRAY.name();
         onSetFields();
     }
 
     public void setUncommonFields() {
         this.guid = IRarity.UNCOMMON;
         this.loc_name = "Uncommon";
-        this.text_format = TextFormatting.GREEN.name();
+        this.text_format = ChatFormatting.GREEN.name();
 
         onSetFields();
     }
@@ -77,7 +77,7 @@ public abstract class BaseRarity implements Rarity {
     public void setRareFields() {
         this.guid = IRarity.RARE_ID;
         this.loc_name = "Rare";
-        this.text_format = TextFormatting.AQUA.name();
+        this.text_format = ChatFormatting.AQUA.name();
 
         onSetFields();
     }
@@ -85,7 +85,7 @@ public abstract class BaseRarity implements Rarity {
     public void setEpicFields() {
         this.guid = IRarity.EPIC_ID;
         this.loc_name = "Epic";
-        this.text_format = TextFormatting.LIGHT_PURPLE.name();
+        this.text_format = ChatFormatting.LIGHT_PURPLE.name();
 
         onSetFields();
     }
@@ -93,7 +93,7 @@ public abstract class BaseRarity implements Rarity {
     public void setLegendFields() {
         this.guid = IRarity.LEGENDARY_ID;
         this.loc_name = "Legendary";
-        this.text_format = TextFormatting.GOLD.name();
+        this.text_format = ChatFormatting.GOLD.name();
 
         onSetFields();
     }
@@ -101,7 +101,7 @@ public abstract class BaseRarity implements Rarity {
     public void setMythicFields() {
         this.guid = IRarity.MYTHIC_ID;
         this.loc_name = "Mythic";
-        this.text_format = TextFormatting.DARK_PURPLE.name();
+        this.text_format = ChatFormatting.DARK_PURPLE.name();
 
         onSetFields();
     }
@@ -109,7 +109,7 @@ public abstract class BaseRarity implements Rarity {
     public void setBossFields() {
         this.guid = IRarity.BOSS_ID;
         this.loc_name = "Boss";
-        this.text_format = TextFormatting.RED.name();
+        this.text_format = ChatFormatting.RED.name();
 
         onSetFields();
     }
@@ -117,7 +117,7 @@ public abstract class BaseRarity implements Rarity {
     public void setUniqueFields() {
         this.guid = IRarity.UNIQUE_ID;
         this.loc_name = "Unique";
-        this.text_format = TextFormatting.RED.name();
+        this.text_format = ChatFormatting.RED.name();
 
         onSetFields();
     }
@@ -125,7 +125,7 @@ public abstract class BaseRarity implements Rarity {
     public void setRunewordFields() {
         this.guid = IRarity.RUNEWORD_ID;
         this.loc_name = "Rune Word";
-        this.text_format = TextFormatting.YELLOW.name();
+        this.text_format = ChatFormatting.YELLOW.name();
         onSetFields();
     }
 

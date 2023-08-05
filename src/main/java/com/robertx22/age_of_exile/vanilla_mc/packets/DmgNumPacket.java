@@ -5,23 +5,23 @@ import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.ChatFormatting;
 
 public class DmgNumPacket extends MyPacket<DmgNumPacket> {
 
     public String string;
     public int id;
     public boolean iscrit = false;
-    public TextFormatting format = TextFormatting.RED;
+    public ChatFormatting format = ChatFormatting.RED;
 
     public DmgNumPacket() {
 
     }
 
-    public DmgNumPacket(LivingEntity entity, String str, boolean iscrit, TextFormatting format) {
+    public DmgNumPacket(LivingEntity entity, String str, boolean iscrit, ChatFormatting format) {
         string = str;
         this.id = entity.getId();
         this.iscrit = iscrit;
@@ -34,16 +34,16 @@ public class DmgNumPacket extends MyPacket<DmgNumPacket> {
     }
 
     @Override
-    public void loadFromData(PacketBuffer tag) {
+    public void loadFromData(FriendlyByteBuf tag) {
         string = tag.readUtf(500);
         id = tag.readInt();
         this.iscrit = tag.readBoolean();
-        this.format = TextFormatting.getByName(tag.readUtf(100));
+        this.format = ChatFormatting.getByName(tag.readUtf(100));
 
     }
 
     @Override
-    public void saveToData(PacketBuffer tag) {
+    public void saveToData(FriendlyByteBuf tag) {
         tag.writeUtf(string);
         tag.writeInt(id);
         tag.writeBoolean(iscrit);

@@ -9,12 +9,14 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import info.loenwind.autosave.annotations.Storable;
 import info.loenwind.autosave.annotations.Store;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPart.Part;
 
 @Storable
 public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartTooltip {
@@ -40,7 +42,7 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
     }
 
     @Override
-    public List<ITextComponent> GetTooltipString(TooltipInfo info, GearItemData gear) {
+    public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {
 
 
         List<ExactStatData> all = getBaseItemStats(gear);
@@ -48,8 +50,8 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
 
         info.statTooltipType = StatTooltipType.BASE_LOCAL_STATS;
 
-        List<ITextComponent> list = new ArrayList<>();
-        list.add(new StringTextComponent(" "));
+        List<Component> list = new ArrayList<>();
+        list.add(new TextComponent(" "));
 
         for (ExactStatData stat : all) {
             list.addAll(stat.GetTooltipString(info));

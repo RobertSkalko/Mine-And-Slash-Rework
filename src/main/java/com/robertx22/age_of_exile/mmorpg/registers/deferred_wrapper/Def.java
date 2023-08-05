@@ -2,16 +2,16 @@ package com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper;
 
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.library_of_exile.registry.IGUID;
-import net.minecraft.block.Block;
-import net.minecraft.entity.EntityType;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.item.Item;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.particles.ParticleType;
-import net.minecraft.potion.Effect;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraftforge.fml.RegistryObject;
 
 import java.util.function.Supplier;
@@ -46,13 +46,13 @@ public class Def {
         return wrapper;
     }
 
-    public static <T extends Effect> RegObj<T> potion(String id, Supplier<T> object) {
+    public static <T extends MobEffect> RegObj<T> potion(String id, Supplier<T> object) {
         RegistryObject<T> reg = SlashDeferred.POTIONS.register(id, object);
         RegObj<T> wrapper = new RegObj<T>(reg);
         return wrapper;
     }
 
-    public static <T extends TileEntityType<?>> RegObj<T> blockEntity(String id, Supplier<T> object) {
+    public static <T extends BlockEntityType<?>> RegObj<T> blockEntity(String id, Supplier<T> object) {
         RegistryObject<T> reg = SlashDeferred.BLOCK_ENTITIES.register(id, object);
         RegObj<T> wrapper = new RegObj<T>(reg);
         return wrapper;
@@ -64,13 +64,13 @@ public class Def {
         return wrapper;
     }
 
-    public static <T extends IRecipeSerializer<?>> RegObj<T> recipeSer(String id, Supplier<T> object) {
+    public static <T extends RecipeSerializer<?>> RegObj<T> recipeSer(String id, Supplier<T> object) {
         RegistryObject<T> reg = SlashDeferred.RECIPE_SERIALIZERS.register(id, object);
         RegObj<T> wrapper = new RegObj<T>(reg);
         return wrapper;
     }
 
-    public static <T extends ContainerType<?>> RegObj<T> container(String id, Supplier<T> object) {
+    public static <T extends MenuType<?>> RegObj<T> container(String id, Supplier<T> object) {
         RegistryObject<T> reg = SlashDeferred.CONTAINERS.register(id, object);
         RegObj<T> wrapper = new RegObj<T>(reg);
         return wrapper;

@@ -12,13 +12,15 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.unit.InCalcStatData;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.wrappers.SText;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.ChatFormatting;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
 
 public class CoreStat extends BaseDatapackStat implements ICoreStat {
 
@@ -61,22 +63,22 @@ public class CoreStat extends BaseDatapackStat implements ICoreStat {
         return data.getValue();
     }
 
-    public List<ITextComponent> getCoreStatTooltip(EntityData unitdata, StatData data) {
+    public List<Component> getCoreStatTooltip(EntityData unitdata, StatData data) {
 
         TooltipInfo info = new TooltipInfo(unitdata, null);
 
         int val = (int) getValue(data);
 
-        List<ITextComponent> list = new ArrayList<>();
+        List<Component> list = new ArrayList<>();
 
         list.add(
-                new StringTextComponent("For each point: ").withStyle(TextFormatting.GREEN));
+                new TextComponent("For each point: ").withStyle(ChatFormatting.GREEN));
         getMods(1).forEach(x -> list.addAll(x.GetTooltipString(info)));
 
         list.add(new SText(""));
 
         list.add(
-                new StringTextComponent("Total: ").withStyle(TextFormatting.GREEN));
+                new TextComponent("Total: ").withStyle(ChatFormatting.GREEN));
         getMods(val).forEach(x -> list.addAll(x.GetTooltipString(info)));
 
         return list;

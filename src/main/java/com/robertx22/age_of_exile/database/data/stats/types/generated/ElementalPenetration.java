@@ -13,6 +13,9 @@ import com.robertx22.age_of_exile.uncommon.wrappers.MapWrapper;
 
 import java.util.List;
 
+import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
+import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect.Priority;
+
 public class ElementalPenetration extends ElementalStat {
     public static MapWrapper<Elements, ElementalPenetration> MAP = new MapWrapper();
 

@@ -2,9 +2,9 @@ package com.robertx22.age_of_exile.uncommon.datasaving;
 
 import com.robertx22.age_of_exile.uncommon.item_filters.bases.ItemFilterGroup;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.ChatFormatting;
 
 public enum ItemType {
 
@@ -26,13 +26,13 @@ public enum ItemType {
     private ItemFilterGroup filter;
     public Words word;
 
-    public static IFormattableTextComponent getTooltipString(ItemType types) {
+    public static MutableComponent getTooltipString(ItemType types) {
 
-        IFormattableTextComponent comp = Words.UsableOn.locName()
+        MutableComponent comp = Words.UsableOn.locName()
             .append(": ")
             .append(types.word.locName());
 
-        comp.withStyle(TextFormatting.LIGHT_PURPLE);
+        comp.withStyle(ChatFormatting.LIGHT_PURPLE);
 
         return comp;
 

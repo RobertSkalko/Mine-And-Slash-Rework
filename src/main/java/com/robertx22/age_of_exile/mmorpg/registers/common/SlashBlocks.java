@@ -4,11 +4,11 @@ import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
 import com.robertx22.age_of_exile.vanilla_mc.blocks.BlackHoleBlock;
 import com.robertx22.age_of_exile.vanilla_mc.blocks.TotemBlock;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.BeetrootBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.BeetrootBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.material.Material;
 
 public class SlashBlocks {
 
@@ -26,7 +26,7 @@ public class SlashBlocks {
     public static RegObj<TotemBlock> GLYPH = Def.block("glyph", () -> new TotemBlock());
 
     static RegObj<Block> plant(String id) {
-        return Def.block(id, () -> new BeetrootBlock(AbstractBlock.Properties.of(Material.PLANT)
+        return Def.block(id, () -> new BeetrootBlock(BlockBehaviour.Properties.of(Material.PLANT)
                 .noCollission()
                 .randomTicks()
                 .instabreak()

@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.uncommon.item_filters.bases;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 public abstract class ItemFilter {
 

@@ -12,11 +12,11 @@ import com.robertx22.library_of_exile.registry.serialization.ISerializable;
 import info.loenwind.autosave.annotations.Factory;
 import info.loenwind.autosave.annotations.Storable;
 import info.loenwind.autosave.annotations.Store;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.ChatFormatting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +42,7 @@ public class StatModifier implements ISerializable<StatModifier>, IByteBuf<StatM
     }
 
     @Override
-    public StatModifier getFromBuf(PacketBuffer buf) {
+    public StatModifier getFromBuf(FriendlyByteBuf buf) {
         StatModifier mod = new StatModifier();
         mod.min = buf.readFloat();
         mod.max = buf.readFloat();
@@ -53,7 +53,7 @@ public class StatModifier implements ISerializable<StatModifier>, IByteBuf<StatM
     }
 
     @Override
-    public void toBuf(PacketBuffer buf) {
+    public void toBuf(FriendlyByteBuf buf) {
         buf.writeFloat(min);
         buf.writeFloat(max);
 
@@ -110,7 +110,7 @@ public class StatModifier implements ISerializable<StatModifier>, IByteBuf<StatM
                 .get(stat);
     }
 
-    public IFormattableTextComponent getRangeToShow(int lvl) {
+    public MutableComponent getRangeToShow(int lvl) {
 
         int fmin = (int) min;
         int fmax = (int) max;
@@ -126,7 +126,7 @@ public class StatModifier implements ISerializable<StatModifier>, IByteBuf<StatM
             text = text + " More";
         }
 
-        return new StringTextComponent("(").withStyle(TextFormatting.GREEN)
+        return new TextComponent("(").withStyle(ChatFormatting.GREEN)
                 .append(text)
                 .append(")");
 
@@ -168,17 +168,17 @@ public class StatModifier implements ISerializable<StatModifier>, IByteBuf<StatM
 
     }
 
-    public List<ITextComponent> getEstimationTooltip(int lvl) {
+    public List<Component> getEstimationTooltip(int lvl) {
 
-        List<ITextComponent> list = new ArrayList<>();
+        List<Component> list = new ArrayList<>();
 
         if (GetStat().is_long) {
-            return TooltipUtils.cutIfTooLong(new StringTextComponent(
-                    StatNameRegex.JUST_NAME.translate(TextFormatting.GREEN, null, getModType(), min, GetStat())
+            return TooltipUtils.cutIfTooLong(new TextComponent(
+                    StatNameRegex.JUST_NAME.translate(ChatFormatting.GREEN, null, getModType(), min, GetStat())
             ));
         }
 
-        ITextComponent txt = getRangeToShow(lvl).append(" ")
+        Component txt = getRangeToShow(lvl).append(" ")
                 .append(GetStat().locName());
 
         list.add(txt);

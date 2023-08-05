@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.library_of_exile.registry.serialization.ISerializable;
 import com.robertx22.library_of_exile.utils.RandomUtils;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
 
 public class LevelRange implements ISerializable<LevelRange> {
     public static LevelRange SERIALIZER = new LevelRange(0, 0);
@@ -33,7 +33,7 @@ public class LevelRange implements ISerializable<LevelRange> {
     }
 
     public int getMinLevel() {
-        return MathHelper.clamp((int) (start * GameBalanceConfig.get().MAX_LEVEL), 1, Integer.MAX_VALUE);
+        return Mth.clamp((int) (start * GameBalanceConfig.get().MAX_LEVEL), 1, Integer.MAX_VALUE);
     }
 
     public int getMaxLevel() {

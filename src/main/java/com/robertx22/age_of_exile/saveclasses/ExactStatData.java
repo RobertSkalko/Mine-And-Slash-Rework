@@ -14,7 +14,7 @@ import com.robertx22.library_of_exile.registry.serialization.ISerializable;
 import info.loenwind.autosave.annotations.Factory;
 import info.loenwind.autosave.annotations.Storable;
 import info.loenwind.autosave.annotations.Store;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -143,7 +143,7 @@ public class ExactStatData implements ISerializable<ExactStatData>, ITooltipList
     }
 
     @Override
-    public List<ITextComponent> GetTooltipString(TooltipInfo info) {
+    public List<Component> GetTooltipString(TooltipInfo info) {
 
         Stat stat = getStat();
         TooltipStatInfo statInfo = new TooltipStatInfo(this, 100, info);

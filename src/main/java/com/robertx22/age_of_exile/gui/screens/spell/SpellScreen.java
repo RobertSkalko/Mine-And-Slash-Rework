@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.gui.screens.spell;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
@@ -14,8 +14,8 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.library_of_exile.utils.GuiUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.ChatFormatting;
 
 import java.util.List;
 
@@ -106,7 +106,7 @@ public class SpellScreen extends BaseScreen implements INamedScreen, ILeftRight 
     }
 
     @Override
-    public void render(MatrixStack matrix, int x, int y, float ticks) {
+    public void render(PoseStack matrix, int x, int y, float ticks) {
 
         try {
             mc.getTextureManager()
@@ -135,7 +135,7 @@ public class SpellScreen extends BaseScreen implements INamedScreen, ILeftRight 
 
             String txt = "Points: " + Load.spells(mc.player)
                     .getFreeSpellPoints();
-            GuiUtils.renderScaledText(matrix, guiLeft + 125, guiTop + 215, 1D, txt, TextFormatting.GREEN);
+            GuiUtils.renderScaledText(matrix, guiLeft + 125, guiTop + 215, 1D, txt, ChatFormatting.GREEN);
 
             buttons.forEach(b -> b.renderToolTip(matrix, x, y));
         } catch (Exception e) {

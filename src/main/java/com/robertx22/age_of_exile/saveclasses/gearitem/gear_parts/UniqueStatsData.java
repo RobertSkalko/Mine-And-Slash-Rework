@@ -13,10 +13,12 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatI
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import info.loenwind.autosave.annotations.Storable;
 import info.loenwind.autosave.annotations.Store;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPart.Part;
 
 @Storable
 public class UniqueStatsData implements IGearPartTooltip, IRerollable, IStatsContainer {
@@ -48,11 +50,11 @@ public class UniqueStatsData implements IGearPartTooltip, IRerollable, IStatsCon
     }
 
     @Override
-    public List<ITextComponent> GetTooltipString(TooltipInfo info, GearItemData gear) {
+    public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {
 
         info.minmax = getMinMax(gear);
 
-        List<ITextComponent> list = new ArrayList<ITextComponent>();
+        List<Component> list = new ArrayList<Component>();
 
         getAllStatsWithCtx(gear, info).forEach(x -> {
             if (!x.mod.GetStat().is_long) {

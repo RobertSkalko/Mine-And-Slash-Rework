@@ -6,20 +6,20 @@ import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.vanilla_mc.commands.CommandRefs;
 import joptsimple.internal.Strings;
-import net.minecraft.command.CommandSource;
-import net.minecraft.command.arguments.EntityArgument;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.network.chat.TextComponent;
 
 import java.util.stream.Collectors;
 
 import static net.minecraft.command.Commands.argument;
-import static net.minecraft.command.Commands.literal;
+import staticnet.minecraft.commands.Commandss.literal;
 
 public class ListStats {
 
-    public static void register(CommandDispatcher<CommandSource> commandDispatcher) {
+    public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
         commandDispatcher.register(
             literal(CommandRefs.ID)
                 .then(literal("stat").requires(e -> e.hasPermission(2))
@@ -39,9 +39,9 @@ public class ListStats {
 
         try {
 
-            if (en instanceof PlayerEntity) {
+            if (en instanceof Player) {
                 EntityData data = Load.Unit(en);
-                PlayerEntity player = (PlayerEntity) en;
+                Player player = (Player) en;
 
                 String str = "";
 
@@ -56,7 +56,7 @@ public class ListStats {
                         .map(x -> x.stat)
                         .collect(Collectors.toList()), ",");
                 }
-                player.displayClientMessage(new StringTextComponent(str), false);
+                player.displayClientMessage(new TextComponent(str), false);
 
             }
 

@@ -9,10 +9,10 @@ import com.robertx22.age_of_exile.saveclasses.perks.TalentsData;
 import com.robertx22.library_of_exile.components.forge.BaseProvider;
 import com.robertx22.library_of_exile.components.forge.BaseStorage;
 import com.robertx22.library_of_exile.utils.LoadSave;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -28,8 +28,8 @@ public class RPGPlayerData implements ICommonPlayerCap {
     public static class EventHandler {
         @SubscribeEvent
         public static void onEntityConstruct(AttachCapabilitiesEvent<Entity> event) {
-            if (event.getObject() instanceof PlayerEntity) {
-                event.addCapability(RESOURCE, new Provider((PlayerEntity) event.getObject()));
+            if (event.getObject() instanceof Player) {
+                event.addCapability(RESOURCE, new Provider((Player) event.getObject()));
             }
         }
     }
@@ -38,13 +38,13 @@ public class RPGPlayerData implements ICommonPlayerCap {
 
     }
 
-    public static class Provider extends BaseProvider<RPGPlayerData, PlayerEntity> {
-        public Provider(PlayerEntity owner) {
+    public static class Provider extends BaseProvider<RPGPlayerData, Player> {
+        public Provider(Player owner) {
             super(owner);
         }
 
         @Override
-        public RPGPlayerData newDefaultImpl(PlayerEntity owner) {
+        public RPGPlayerData newDefaultImpl(Player owner) {
             return new RPGPlayerData(owner);
         }
 
@@ -63,22 +63,22 @@ public class RPGPlayerData implements ICommonPlayerCap {
     private static final String STAT_POINTS = "stat_points";
     private static final String DEATH_STATS = "death_stats";
   
-    PlayerEntity player;
+    Player player;
 
     public TeamData team = new TeamData();
     public TalentsData talents = new TalentsData();
     public StatPointsData statPoints = new StatPointsData();
     public DeathStatsData deathStats = new DeathStatsData();
 
-    public RPGPlayerData(PlayerEntity player) {
+    public RPGPlayerData(Player player) {
         this.player = player;
     }
 
 
     @Override
-    public CompoundNBT saveToNBT() {
+    public CompoundTag saveToNBT() {
 
-        CompoundNBT nbt = new CompoundNBT();
+        CompoundTag nbt = new CompoundTag();
 
         LoadSave.Save(team, nbt, TEAM_DATA);
         LoadSave.Save(talents, nbt, TALENTS_DATA);
@@ -89,7 +89,7 @@ public class RPGPlayerData implements ICommonPlayerCap {
     }
 
     @Override
-    public void loadFromNBT(CompoundNBT nbt) {
+    public void loadFromNBT(CompoundTag nbt) {
 
         this.team = loadOrBlank(TeamData.class, new TeamData(), nbt, TEAM_DATA, new TeamData());
         this.talents = loadOrBlank(TalentsData.class, new TalentsData(), nbt, TALENTS_DATA, new TalentsData());
@@ -98,7 +98,7 @@ public class RPGPlayerData implements ICommonPlayerCap {
 
     }
 
-    public static <OBJ> OBJ loadOrBlank(Class theclass, OBJ newobj, CompoundNBT nbt, String loc, OBJ blank) {
+    public static <OBJ> OBJ loadOrBlank(Class theclass, OBJ newobj, CompoundTag nbt, String loc, OBJ blank) {
         try {
             OBJ data = LoadSave.Load(theclass, newobj, nbt, loc);
             if (data == null) {

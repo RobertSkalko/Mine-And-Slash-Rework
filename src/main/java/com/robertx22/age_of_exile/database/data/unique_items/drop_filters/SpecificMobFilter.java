@@ -1,10 +1,10 @@
 package com.robertx22.age_of_exile.database.data.unique_items.drop_filters;
 
 import com.robertx22.age_of_exile.loot.LootInfo;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Registry;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +25,10 @@ public class SpecificMobFilter extends DropFilter {
         return ID;
     }
 
-    public List<ITextComponent> getTooltip(DropFilterData data) {
+    public List<Component> getTooltip(DropFilterData data) {
 
-        List<ITextComponent> list = new ArrayList<>();
-        list.add(new StringTextComponent("This mobs can drop:"));
+        List<Component> list = new ArrayList<>();
+        list.add(new TextComponent("This mobs can drop:"));
         list.add(Registry.ENTITY_TYPE.get(new ResourceLocation(data.id))
             .getDescription());
         return list;

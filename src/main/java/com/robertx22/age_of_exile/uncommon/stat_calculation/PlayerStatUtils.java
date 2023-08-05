@@ -4,7 +4,7 @@ import com.robertx22.age_of_exile.aoe_data.database.base_stats.BaseStatsAdder;
 import com.robertx22.age_of_exile.database.data.base_stats.BaseStatsConfig;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.world.entity.LivingEntity;
 
 import java.util.Arrays;
 import java.util.List;

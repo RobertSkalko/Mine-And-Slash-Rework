@@ -4,8 +4,8 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.vanilla_mc.packets.proxies.OpenGuiWrapper;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 
 public class OpenGuiPacket extends MyPacket<OpenGuiPacket> {
 
@@ -27,12 +27,12 @@ public class OpenGuiPacket extends MyPacket<OpenGuiPacket> {
     }
 
     @Override
-    public void loadFromData(PacketBuffer buf) {
+    public void loadFromData(FriendlyByteBuf buf) {
         type = GuiType.valueOf(buf.readUtf(44));
     }
 
     @Override
-    public void saveToData(PacketBuffer buf) {
+    public void saveToData(FriendlyByteBuf buf) {
         buf.writeUtf(type.name(), 44);
     }
 

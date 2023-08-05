@@ -4,8 +4,8 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.potion.Effect;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.effect.MobEffect;
 
 import java.util.Arrays;
 
@@ -27,7 +27,7 @@ public class HasEffect extends SpellEntityPredicate {
     @Override
     public boolean is(SpellCtx ctx, LivingEntity target, MapHolder data) {
         try {
-            Effect effect = data.getPotion();
+            MobEffect effect = data.getPotion();
 
             return target.hasEffect(effect);
         } catch (Exception e) {

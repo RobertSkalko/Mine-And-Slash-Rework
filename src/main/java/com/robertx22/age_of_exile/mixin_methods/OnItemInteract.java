@@ -12,17 +12,17 @@ import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.SalvagedDustItem;
 import com.robertx22.library_of_exile.utils.SoundUtils;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.container.ClickType;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.sounds.SoundEvents;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 public class OnItemInteract {
 
-    public static void on(Container screen, int i, int j, ClickType slotActionType, PlayerEntity player, CallbackInfoReturnable<ItemStack> ci) {
+    public static void on(AbstractContainerMenu screen, int i, int j, ClickType slotActionType, Player player, CallbackInfoReturnable<ItemStack> ci) {
 
         if (slotActionType != ClickType.PICKUP) {
             return;

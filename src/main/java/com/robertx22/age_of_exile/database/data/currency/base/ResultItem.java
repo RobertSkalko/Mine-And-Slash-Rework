@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.database.data.currency.base;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 public class ResultItem {
 

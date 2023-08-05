@@ -6,7 +6,10 @@ import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
+
+import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
+import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect.Priority;
 
 public class SpellDamage extends Stat {
 
@@ -14,7 +17,7 @@ public class SpellDamage extends Stat {
         this.group = StatGroup.MAIN;
 
         this.statEffect = new Effect();
-        this.format = TextFormatting.LIGHT_PURPLE.getName();
+        this.format = ChatFormatting.LIGHT_PURPLE.getName();
 
 
     }

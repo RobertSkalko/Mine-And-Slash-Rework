@@ -3,19 +3,22 @@ package com.robertx22.age_of_exile.vanilla_mc.items.gearitems.bases;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tiers;
+import net.minecraft.core.Registry;
+
+import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
+import net.minecraft.world.item.Item.Properties;
 
 public abstract class SingleTargetWeapon extends Item implements IAutoLocName {
 
-    public SingleTargetWeapon(ItemTier mat, Properties settings, String locname) {
+    public SingleTargetWeapon(Tiers mat, Properties settings, String locname) {
 
         super(settings);
         this.locname = locname;
@@ -27,7 +30,7 @@ public abstract class SingleTargetWeapon extends Item implements IAutoLocName {
     @Override
     public boolean hurtEnemy(ItemStack p_77644_1_, LivingEntity p_77644_2_, LivingEntity p_77644_3_) {
         p_77644_1_.hurtAndBreak(1, p_77644_3_, (p_220045_0_) -> {
-            p_220045_0_.broadcastBreakEvent(EquipmentSlotType.MAINHAND);
+            p_220045_0_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
         });
         return true;
     }
@@ -54,9 +57,9 @@ public abstract class SingleTargetWeapon extends Item implements IAutoLocName {
     }
 
     @Override
-    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlotType slot) {
+    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
         Multimap<Attribute, AttributeModifier> map = HashMultimap.create();
-        if (slot == EquipmentSlotType.MAINHAND) {
+        if (slot == EquipmentSlot.MAINHAND) {
             map.put(
                 Attributes.ATTACK_DAMAGE,
                 new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", 6,

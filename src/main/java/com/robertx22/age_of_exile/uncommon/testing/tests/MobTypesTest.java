@@ -1,15 +1,15 @@
 package com.robertx22.age_of_exile.uncommon.testing.tests;
 
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityTypeUtils;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.core.Registry;
+import net.minecraft.server.level.ServerLevel;
 
 public class MobTypesTest {
 
-    public static void run(ServerWorld world) {
+    public static void run(ServerLevel world) {
 
         for (EntityType<?> type : Registry.ENTITY_TYPE) {
 

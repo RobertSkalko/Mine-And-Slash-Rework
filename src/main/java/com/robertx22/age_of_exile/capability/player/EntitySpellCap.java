@@ -16,10 +16,10 @@ import com.robertx22.library_of_exile.components.forge.BaseProvider;
 import com.robertx22.library_of_exile.components.forge.BaseStorage;
 import com.robertx22.library_of_exile.main.Ref;
 import com.robertx22.library_of_exile.utils.LoadSave;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -110,9 +110,9 @@ public class EntitySpellCap {
         }
 
         @Override
-        public CompoundNBT saveToNBT() {
+        public CompoundTag saveToNBT() {
 
-            CompoundNBT nbt = new CompoundNBT();
+            CompoundTag nbt = new CompoundTag();
 
             try {
                 LoadSave.Save(spellCastingData, nbt, PLAYER_SPELL_DATA);
@@ -126,7 +126,7 @@ public class EntitySpellCap {
         }
 
         @Override
-        public void loadFromNBT(CompoundNBT nbt) {
+        public void loadFromNBT(CompoundTag nbt) {
 
             try {
                 this.spellCastingData = LoadSave.Load(SpellCastingData.class, new SpellCastingData(), nbt, PLAYER_SPELL_DATA);

@@ -10,16 +10,16 @@ import com.robertx22.age_of_exile.vanilla_mc.commands.CommandRefs;
 import com.robertx22.age_of_exile.vanilla_mc.commands.suggestions.CommandSuggestions;
 import com.robertx22.age_of_exile.vanilla_mc.commands.suggestions.StatSuggestions;
 import com.robertx22.age_of_exile.vanilla_mc.commands.suggestions.StatTypeSuggestions;
-import net.minecraft.command.CommandSource;
-import net.minecraft.command.arguments.EntityArgument;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static net.minecraft.command.Commands.argument;
-import static net.minecraft.command.Commands.literal;
+import staticnet.minecraft.commands.Commandss.literal;
 
 public class GiveStat {
 
@@ -30,7 +30,7 @@ public class GiveStat {
         }
     }
 
-    public static void register(CommandDispatcher<CommandSource> commandDispatcher) {
+    public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
         commandDispatcher.register(
             literal(CommandRefs.ID)
                 .then(literal("stat").requires(e -> e.hasPermission(2))

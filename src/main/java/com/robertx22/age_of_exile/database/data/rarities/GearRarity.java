@@ -4,7 +4,7 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientTextureUtils;
 import com.robertx22.library_of_exile.registry.IAutoGson;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
 public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGson<GearRarity> {
     public static GearRarity SERIALIZER = new GearRarity();

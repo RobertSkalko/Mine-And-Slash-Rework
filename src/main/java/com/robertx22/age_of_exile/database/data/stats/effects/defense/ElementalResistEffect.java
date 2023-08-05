@@ -8,6 +8,8 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 
+import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect.Priority;
+
 public class ElementalResistEffect extends BaseDamageEffect {
 
     @Override

@@ -35,11 +35,11 @@ import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import info.loenwind.autosave.annotations.Storable;
 import info.loenwind.autosave.annotations.Store;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.util.Mth;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -245,11 +245,11 @@ public class Unit {
             statContexts.addAll(CommonStatUtils.addPotionStats(entity));
             statContexts.addAll(CommonStatUtils.addExactCustomStats(entity));
 
-            if (entity instanceof PlayerEntity) {
+            if (entity instanceof Player) {
 
-                Load.playerRPGData((PlayerEntity) entity).statPoints.addStats(data);
+                Load.playerRPGData((Player) entity).statPoints.addStats(data);
                 statContexts.addAll(PlayerStatUtils.AddPlayerBaseStats(entity));
-                statContexts.addAll(Load.playerRPGData((PlayerEntity) entity).talents
+                statContexts.addAll(Load.playerRPGData((Player) entity).talents
                         .getStatAndContext(entity));
                 statContexts.addAll(Load.spells(entity)
                         .getStatAndContext(entity));
@@ -329,7 +329,7 @@ public class Unit {
             DirtyCheck aftercalc = getDirtyCheck();
 
             Cached.VANILLA_STAT_UIDS_TO_CLEAR_EVERY_STAT_CALC.forEach(x -> {
-                ModifiableAttributeInstance in = entity.getAttribute(x.left);
+                AttributeInstance in = entity.getAttribute(x.left);
                 if (in.getModifier(x.right) != null) {
                     in.removeModifier(x.right);
                 }
@@ -344,7 +344,7 @@ public class Unit {
 
                     });
 
-            if (entity instanceof PlayerEntity) {
+            if (entity instanceof Player) {
 
                 Load.spells(entity)
                         .getSpellsData().extra_lvls.clear();
@@ -367,8 +367,8 @@ public class Unit {
                 Packets.sendToTracking(getUpdatePacketFor(entity, data), entity);
             }
 
-            if (entity instanceof PlayerEntity) {
-                Packets.sendToClient((PlayerEntity) entity, new EntityUnitPacket(entity));
+            if (entity instanceof Player) {
+                Packets.sendToClient((Player) entity, new EntityUnitPacket(entity));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -377,9 +377,9 @@ public class Unit {
     }
 
     private void addVanillaHpToStats(LivingEntity entity, EntityData data) {
-        if (entity instanceof PlayerEntity) {
+        if (entity instanceof Player) {
 
-            float maxhp = MathHelper.clamp(entity.getMaxHealth(), 0, 500);
+            float maxhp = Mth.clamp(entity.getMaxHealth(), 0, 500);
             // all increases after this would just reduce enviro damage
 
             getStats().getStatInCalculation(Health.getInstance())
@@ -412,8 +412,8 @@ public class Unit {
     public static boolean shouldSendUpdatePackets(LivingEntity en) {
         if (ServerContainer.get().DONT_SYNC_DATA_OF_AMBIENT_MOBS.get()) {
             return en.getType()
-                    .getCategory() != EntityClassification.AMBIENT && en.getType()
-                    .getCategory() != EntityClassification.WATER_AMBIENT;
+                    .getCategory() != MobCategory.AMBIENT && en.getType()
+                    .getCategory() != MobCategory.WATER_AMBIENT;
         }
         return true;
     }

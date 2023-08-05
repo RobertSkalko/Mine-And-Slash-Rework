@@ -17,22 +17,24 @@ import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.ChatFormatting;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
+
 public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDesc, JsonExileRegistry<BaseDatapackStat> {
 
     public static String VAL1 = "[VAL1]";
-    static TextFormatting FORMAT = TextFormatting.GRAY;
-    static TextFormatting NUMBER = TextFormatting.GREEN;
+    static ChatFormatting FORMAT = ChatFormatting.GRAY;
+    static ChatFormatting NUMBER = ChatFormatting.GREEN;
 
     public static String format(String str) {
 
@@ -60,11 +62,11 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     public boolean is_long = false;
     public String icon = "\u2741";
     public int order = 100;
-    public String format = TextFormatting.AQUA.getName();
+    public String format = ChatFormatting.AQUA.getName();
     public StatGroup group = StatGroup.Misc;
 
-    public TextFormatting getFormat() {
-        return TextFormatting.getByName(format);
+    public ChatFormatting getFormat() {
+        return ChatFormatting.getByName(format);
     }
 
     public String getIconNameFormat() {
@@ -76,7 +78,7 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     }
 
     public String getIconNameFormat(String str) {
-        return this.getFormat() + this.icon + " " + str + TextFormatting.GRAY;
+        return this.getFormat() + this.icon + " " + str + ChatFormatting.GRAY;
     }
 
     @Override
@@ -104,14 +106,14 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
         return stat;
     }
     
-    public List<IFormattableTextComponent> getCutDescTooltip() {
-        List<IFormattableTextComponent> list = new ArrayList<>();
+    public List<MutableComponent> getCutDescTooltip() {
+        List<MutableComponent> list = new ArrayList<>();
 
-        List<ITextComponent> cut = TooltipUtils.cutIfTooLong(locDesc());
+        List<Component> cut = TooltipUtils.cutIfTooLong(locDesc());
 
         for (int i = 0; i < cut.size(); i++) {
 
-            IFormattableTextComponent comp = new StringTextComponent("");
+            MutableComponent comp = new TextComponent("");
             if (i == 0) {
                 comp.append(" [");
             }
@@ -123,7 +125,7 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
 
             list.add(comp);
 
-            comp.withStyle(TextFormatting.BLUE);
+            comp.withStyle(ChatFormatting.BLUE);
 
         }
         return list;
@@ -187,7 +189,7 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     public abstract Elements getElement();
 
     @OnlyIn(Dist.CLIENT)
-    public List<ITextComponent> getTooltipList(TooltipStatWithContext info) {
+    public List<Component> getTooltipList(TooltipStatWithContext info) {
         return info.statinfo.tooltipInfo.statTooltipType.impl.getTooltipList(null, info);
     }
 

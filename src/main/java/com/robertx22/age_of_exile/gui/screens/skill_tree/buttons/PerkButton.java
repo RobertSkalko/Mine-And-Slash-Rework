@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.gui.screens.skill_tree.buttons;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.capability.player.RPGPlayerData;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
@@ -15,9 +15,9 @@ import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.GuiUtils;
 import com.robertx22.library_of_exile.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.widget.button.ImageButton;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
 
 import java.util.List;
 
@@ -66,14 +66,14 @@ public class PerkButton extends ImageButton {
     }
 
     @Override
-    public void renderToolTip(MatrixStack matrices, int mouseX, int mouseY) {
+    public void renderToolTip(PoseStack matrices, int mouseX, int mouseY) {
 
         int MmouseX = (int) (1F / screen.zoom * mouseX);
         int MmouseY = (int) (1F / screen.zoom * mouseY);
 
         if (this.isInside(MmouseX, MmouseY)) {
 
-            List<ITextComponent> tooltip = perk.GetTooltipString(new TooltipInfo(Minecraft.getInstance().player));
+            List<Component> tooltip = perk.GetTooltipString(new TooltipInfo(Minecraft.getInstance().player));
             GuiUtils.renderTooltip(matrices, tooltip, mouseX, mouseY);
         }
     }
@@ -122,7 +122,7 @@ public class PerkButton extends ImageButton {
 
     @Override
 
-    public void renderButton(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+    public void renderButton(PoseStack matrices, int mouseX, int mouseY, float delta) {
 
         float scale = 2 - screen.zoom;
 

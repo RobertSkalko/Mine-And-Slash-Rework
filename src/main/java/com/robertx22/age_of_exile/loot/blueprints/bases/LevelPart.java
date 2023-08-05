@@ -4,7 +4,7 @@ import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceC
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 import com.robertx22.age_of_exile.loot.blueprints.ItemBlueprint;
 import com.robertx22.library_of_exile.utils.RandomUtils;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
 
 public class LevelPart extends BlueprintPart<Integer, ItemBlueprint> {
 
@@ -43,9 +43,9 @@ public class LevelPart extends BlueprintPart<Integer, ItemBlueprint> {
             finalLvl = RandomUtils.RandomRange(number - LevelVariance, number + LevelVariance);
         }
 
-        finalLvl = MathHelper.clamp(finalLvl, minLevel, maxLevel);
+        finalLvl = Mth.clamp(finalLvl, minLevel, maxLevel);
 
-        return MathHelper.clamp(finalLvl, this.minLevel, GameBalanceConfig.get().MAX_LEVEL);
+        return Mth.clamp(finalLvl, this.minLevel, GameBalanceConfig.get().MAX_LEVEL);
     }
 
 }

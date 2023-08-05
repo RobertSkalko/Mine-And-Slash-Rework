@@ -8,7 +8,7 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import com.robertx22.library_of_exile.utils.RandomUtils;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
 
 public class SpellDodgeEffect extends BaseDamageEffect {
 
@@ -33,7 +33,7 @@ public class SpellDodgeEffect extends BaseDamageEffect {
     public DamageEvent activate(DamageEvent effect, StatData data, Stat stat) {
         SpellDodge dodge = (SpellDodge) stat;
 
-        float totalDodge = MathHelper.clamp(data.getValue() - effect.data.getNumber(EventData.ACCURACY).number, 0, Integer.MAX_VALUE);
+        float totalDodge = Mth.clamp(data.getValue() - effect.data.getNumber(EventData.ACCURACY).number, 0, Integer.MAX_VALUE);
 
         float chance = dodge.getUsableValue((int) totalDodge, effect.sourceData.getLevel()) * 100;
 

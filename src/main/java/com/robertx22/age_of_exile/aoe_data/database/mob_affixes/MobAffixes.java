@@ -11,7 +11,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Hea
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
 
 import static com.robertx22.age_of_exile.uncommon.enumclasses.Elements.*;
 
@@ -74,7 +74,7 @@ public class MobAffixes implements ExileRegistryInit {
                 .setWeight(250)
                 .addToSerializables();
 
-        new MobAffix("phys_lord", new BonusAttackDamage(Physical).getFormatAndIcon(), TextFormatting.GRAY)
+        new MobAffix("phys_lord", new BonusAttackDamage(Physical).getFormatAndIcon(), ChatFormatting.GRAY)
                 .setMods(
                         new StatModifier(15, 15, Health.getInstance()),
                         new StatModifier(2, 2, new BonusAttackDamage(Physical)),
@@ -83,7 +83,7 @@ public class MobAffixes implements ExileRegistryInit {
                 .addToSerializables();
 
         new MobAffix("vampire", Stats.LIFESTEAL.get()
-                .getFormatAndIcon(), TextFormatting.RED)
+                .getFormatAndIcon(), ChatFormatting.RED)
                 .setMods(new StatModifier(25, 25, Health.getInstance()),
                         new StatModifier(15, 15, Stats.LIFESTEAL.get()),
                         new StatModifier(15, 15, ExtraMobDropsStat.getInstance()))

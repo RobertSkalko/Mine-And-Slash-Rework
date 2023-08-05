@@ -11,8 +11,8 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.vanilla_mc.potion_effects.types.ExileStatusEffect;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.potion.Effect;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.effect.MobEffect;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -45,7 +45,7 @@ public class DamageAction extends SpellAction {
                 try {
                     if (data.has(MapField.EXILE_POTION_ID)) {
                         // if damage done by effect, multiple dmg by effect stacks.
-                        Effect effect = SlashPotions.getExileEffect(data.get(MapField.EXILE_POTION_ID));
+                        MobEffect effect = SlashPotions.getExileEffect(data.get(MapField.EXILE_POTION_ID));
                         if (t.hasEffect(effect)) {
                             stacks = Load.Unit(t)
                                 .getStatusEffectsData()

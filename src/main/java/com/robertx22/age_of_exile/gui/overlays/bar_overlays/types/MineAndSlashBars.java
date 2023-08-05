@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.gui.overlays.bar_overlays.types;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.config.GuiPartConfig;
 import com.robertx22.age_of_exile.gui.overlays.BarGuiType;
@@ -8,11 +8,11 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.ChatFormatting;
 
-public class MineAndSlashBars extends AbstractGui {
+public class MineAndSlashBars extends GuiComponent {
     static ResourceLocation BASETEX = new ResourceLocation(SlashRef.MODID, "textures/gui/overlay/base.png");
 
     static int BAR_HEIGHT = 11;
@@ -22,7 +22,7 @@ public class MineAndSlashBars extends AbstractGui {
 
     static Minecraft mc = Minecraft.getInstance();
 
-    public static void renderMineAndSlashBar(GuiPartConfig config, BarGuiType type, MatrixStack matrix, PointData point, String text, boolean drawText) {
+    public static void renderMineAndSlashBar(GuiPartConfig config, BarGuiType type, PoseStack matrix, PointData point, String text, boolean drawText) {
 
         if (!drawText) {
             mc.getTextureManager()
@@ -64,7 +64,7 @@ public class MineAndSlashBars extends AbstractGui {
             float xf = (float) ((double) xp * antiScale);
             float yf = (float) ((double) yp * antiScale);
 
-            mc.font.drawShadow(matrix, text, xf, yf, TextFormatting.WHITE.getColor());
+            mc.font.drawShadow(matrix, text, xf, yf, ChatFormatting.WHITE.getColor());
             RenderSystem.scaled(antiScale, antiScale, antiScale);
         }
     }

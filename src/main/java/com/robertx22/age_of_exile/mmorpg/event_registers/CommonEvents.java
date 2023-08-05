@@ -23,9 +23,9 @@ import com.robertx22.age_of_exile.uncommon.interfaces.data_items.Cached;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
 import com.robertx22.library_of_exile.main.ForgeEvents;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -53,20 +53,20 @@ public class CommonEvents {
         });
 
         ForgeEvents.registerForgeEvent(TickEvent.WorldTickEvent.class, event -> {
-            if (event.phase == TickEvent.Phase.END && event.world instanceof ServerWorld) {
-                OnTickDungeonWorld.onEndTick((ServerWorld) event.world);
+            if (event.phase == TickEvent.Phase.END && event.world instanceof ServerLevel) {
+                OnTickDungeonWorld.onEndTick((ServerLevel) event.world);
             }
         });
 
         ForgeEvents.registerForgeEvent(AttackEntityEvent.class, event -> {
-            if (event.getEntityLiving() instanceof ServerPlayerEntity) {
+            if (event.getEntityLiving() instanceof ServerPlayer) {
                 StopCastingIfInteract.interact(event.getPlayer());
             }
         });
 
         ForgeEvents.registerForgeEvent(PlayerEvent.StartTracking.class, event -> {
-            if (event.getPlayer() instanceof ServerPlayerEntity) {
-                OnTrackEntity.onPlayerStartTracking((ServerPlayerEntity) event.getPlayer(), event.getTarget());
+            if (event.getPlayer() instanceof ServerPlayer) {
+                OnTrackEntity.onPlayerStartTracking((ServerPlayer) event.getPlayer(), event.getTarget());
             }
         });
 
@@ -86,7 +86,7 @@ public class CommonEvents {
         ForgeEvents.registerForgeEvent(LivingHurtEvent.class, event -> {
             // reduce enviro dmg based on total hp from formula
             try {
-                if (event.getEntityLiving() instanceof PlayerEntity) {
+                if (event.getEntityLiving() instanceof Player) {
                     if (LivingHurtUtils.isEnviromentalDmg(event.getSource())) {
                         EntityData data = Load.Unit(event.getEntityLiving());
                         float reduction = Health.getInstance()
@@ -109,7 +109,7 @@ public class CommonEvents {
         ExileEvents.PLAYER_DEATH.register(new EventConsumer<ExileEvents.OnPlayerDeath>() {
             @Override
             public void accept(ExileEvents.OnPlayerDeath event) {
-                if (event.player instanceof ServerPlayerEntity) {
+                if (event.player instanceof ServerPlayer) {
                     try {
                         RPGPlayerData data = Load.playerRPGData(event.player);
 

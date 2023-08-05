@@ -27,16 +27,16 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.rework.condition.StatCond
 import com.robertx22.age_of_exile.uncommon.utilityclasses.MapManager;
 import com.robertx22.library_of_exile.registry.Database;
 import com.robertx22.library_of_exile.registry.ExileRegistryContainer;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
 
 public class ExileDB {
 
 
-    public static DimensionConfig getDimensionConfig(IWorld world) {
-        String id = MapManager.getResourceLocation((World) world)
+    public static DimensionConfig getDimensionConfig(LevelAccessor world) {
+        String id = MapManager.getResourceLocation((Level) world)
                 .toString();
         return DimensionConfigs().get(id);
     }

@@ -5,13 +5,13 @@ import com.robertx22.age_of_exile.database.base.CreativeTabs;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.ChatFormatting;
 
 public class ItemUtils {
     public static Item.Properties getDefaultGearProperties() {
@@ -21,7 +21,7 @@ public class ItemUtils {
         return prop;
     }
 
-    public static void tryAnnounceItem(ItemStack stack, PlayerEntity player) {
+    public static void tryAnnounceItem(ItemStack stack, Player player) {
 
         try {
             if (player == null) {
@@ -39,15 +39,15 @@ public class ItemUtils {
 
                 if (rar.announce_in_chat) {
 
-                    IFormattableTextComponent name = new StringTextComponent("").append(player.getName())
-                        .withStyle(TextFormatting.BOLD)
-                        .withStyle(TextFormatting.LIGHT_PURPLE);
+                    MutableComponent name = new TextComponent("").append(player.getName())
+                        .withStyle(ChatFormatting.BOLD)
+                        .withStyle(ChatFormatting.LIGHT_PURPLE);
 
-                    ITextComponent txt = name
+                    Component txt = name
                         .append(" found a ")
                         .append(rar.locName()
                             .withStyle(rar.textFormatting())
-                            .withStyle(TextFormatting.BOLD))
+                            .withStyle(ChatFormatting.BOLD))
                         .append(" item!");
 
                     player.getServer()

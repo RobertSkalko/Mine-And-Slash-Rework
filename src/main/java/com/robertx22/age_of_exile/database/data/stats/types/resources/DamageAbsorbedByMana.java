@@ -7,8 +7,10 @@ import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.util.Mth;
+
+import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
 
 public class DamageAbsorbedByMana extends Stat {
     public static String GUID = "mana_shield";
@@ -69,12 +71,12 @@ public class DamageAbsorbedByMana extends Stat {
                 .manaData()
                 .getValue();
 
-            float dmgReduced = MathHelper.clamp(dmg * data.getValue() / 100F, 0, currentMana - (maxMana * 0.5F));
+            float dmgReduced = Mth.clamp(dmg * data.getValue() / 100F, 0, currentMana - (maxMana * 0.5F));
 
             if (dmgReduced > 0) {
 
-                if (effect.target instanceof PlayerEntity) {
-                    DeathStatsData.record((PlayerEntity) effect.target, effect.getElement(), dmgReduced);
+                if (effect.target instanceof Player) {
+                    DeathStatsData.record((Player) effect.target, effect.getElement(), dmgReduced);
                 }
 
                 effect.targetData.getResources()

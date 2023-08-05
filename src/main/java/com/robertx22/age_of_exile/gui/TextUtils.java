@@ -1,13 +1,13 @@
 package com.robertx22.age_of_exile.gui;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
 
 public class TextUtils {
 
-    public static void renderText(MatrixStack matrix, double scale, String text, int x, int y, TextFormatting color) {
+    public static void renderText(PoseStack matrix, double scale, String text, int x, int y, ChatFormatting color) {
         Minecraft mc = Minecraft.getInstance();
 
         int width = mc.font.width(text);

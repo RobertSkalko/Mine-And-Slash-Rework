@@ -14,10 +14,12 @@ import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.world.entity.EquipmentSlot;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
 
 public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseGearType>, IAutoGson<BaseGearType> {
 
@@ -84,25 +86,25 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
         return level_range;
     }
 
-    public final EquipmentSlotType getVanillaSlotType() {
+    public final EquipmentSlot getVanillaSlotType() {
 
         if (tags.contains(SlotTag.shield)) {
-            return EquipmentSlotType.OFFHAND;
+            return EquipmentSlot.OFFHAND;
         }
         if (tags.contains(SlotTag.boots)) {
-            return EquipmentSlotType.FEET;
+            return EquipmentSlot.FEET;
         }
         if (tags.contains(SlotTag.chest)) {
-            return EquipmentSlotType.CHEST;
+            return EquipmentSlot.CHEST;
         }
         if (tags.contains(SlotTag.pants)) {
-            return EquipmentSlotType.LEGS;
+            return EquipmentSlot.LEGS;
         }
         if (tags.contains(SlotTag.helmet)) {
-            return EquipmentSlotType.HEAD;
+            return EquipmentSlot.HEAD;
         }
         if (isWeapon()) {
-            return EquipmentSlotType.MAINHAND;
+            return EquipmentSlot.MAINHAND;
         }
 
         return null;

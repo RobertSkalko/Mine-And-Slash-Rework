@@ -2,8 +2,8 @@ package com.robertx22.age_of_exile.a_libraries.dmg_number_particle;
 
 import com.robertx22.age_of_exile.vanilla_mc.packets.DmgNumPacket;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.Vec3;
 
 public class DamageParticle {
 
@@ -37,15 +37,15 @@ public class DamageParticle {
         }
 
         Minecraft mc = Minecraft.getInstance();
-        Vector3d entityLocation = entity.position()
+        Vec3 entityLocation = entity.position()
             .add(0, entity.getBbHeight(), 0);
-        Vector3d cameraLocation = mc.gameRenderer.getMainCamera()
+        Vec3 cameraLocation = mc.gameRenderer.getMainCamera()
             .getPosition();
         double offsetBy = entity.getBbWidth();
-        Vector3d offset = cameraLocation.subtract(entityLocation)
+        Vec3 offset = cameraLocation.subtract(entityLocation)
             .normalize()
             .scale(offsetBy);
-        Vector3d pos = entityLocation.add(offset);
+        Vec3 pos = entityLocation.add(offset);
 
         age = 0;
 

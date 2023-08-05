@@ -6,9 +6,9 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttributes;
 import com.robertx22.library_of_exile.registry.IAutoGson;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.ChatFormatting;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -103,8 +103,8 @@ public class StatRequirement implements IAutoGson<StatRequirement> {
         return this;
     }
 
-    public List<ITextComponent> GetTooltipString(int lvl, EntityData data) {
-        List<ITextComponent> list = new ArrayList<>();
+    public List<Component> GetTooltipString(int lvl, EntityData data) {
+        List<Component> list = new ArrayList<>();
 
         for (Stat x : AllAttributes.getInstance()
                 .coreStatsThatBenefit()) {
@@ -125,19 +125,19 @@ public class StatRequirement implements IAutoGson<StatRequirement> {
         return this.base_req.isEmpty() && this.scaling_req.isEmpty();
     }
 
-    static ITextComponent getTooltip(int req, Stat stat, EntityData data) {
+    static Component getTooltip(int req, Stat stat, EntityData data) {
 
         if (data.getUnit()
                 .getCalculatedStat(stat)
                 .getValue() >= req) {
-            return new StringTextComponent(TextFormatting.GREEN + "" + TextFormatting.BOLD + CHECK_YES_ICON + " ").append(stat.locName()
-                            .withStyle(TextFormatting.GRAY))
-                    .append(" " + TextFormatting.GRAY + "Min: " + req + " ");
+            return new TextComponent(ChatFormatting.GREEN + "" + ChatFormatting.BOLD + CHECK_YES_ICON + " ").append(stat.locName()
+                            .withStyle(ChatFormatting.GRAY))
+                    .append(" " + ChatFormatting.GRAY + "Min: " + req + " ");
         } else {
 
-            return new StringTextComponent(TextFormatting.RED + "" + TextFormatting.BOLD + NO_ICON + " ").append(stat.locName()
-                            .withStyle(TextFormatting.GRAY))
-                    .append(" " + TextFormatting.GRAY + "Min: " + req + " ");
+            return new TextComponent(ChatFormatting.RED + "" + ChatFormatting.BOLD + NO_ICON + " ").append(stat.locName()
+                            .withStyle(ChatFormatting.GRAY))
+                    .append(" " + ChatFormatting.GRAY + "Min: " + req + " ");
 
         }
 

@@ -1,8 +1,8 @@
 package com.robertx22.age_of_exile.mixin_ducks;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.sounds.SoundEvent;
 
 public interface LivingEntityAccesor {
 

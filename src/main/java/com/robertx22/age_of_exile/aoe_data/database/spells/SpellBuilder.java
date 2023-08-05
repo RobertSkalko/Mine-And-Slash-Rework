@@ -16,10 +16,10 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeap
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.Items;
-import net.minecraft.particles.BasicParticleType;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.item.Items;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,7 +29,7 @@ import java.util.Objects;
 public class SpellBuilder {
     Spell spell;
 
-    public static SpellBuilder breath(String id, String name, Elements ele, BasicParticleType particle) {
+    public static SpellBuilder breath(String id, String name, Elements ele, SimpleParticleType particle) {
 
         return SpellBuilder.of(id, SpellConfiguration.Builder.instant(2, 1), name,
                 Arrays.asList(SpellTag.damage))

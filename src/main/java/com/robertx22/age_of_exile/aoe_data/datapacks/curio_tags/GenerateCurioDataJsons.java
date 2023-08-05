@@ -4,8 +4,8 @@ import com.google.common.base.Joiner;
 import com.robertx22.age_of_exile.a_libraries.curios.interfaces.ICuriosType;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.DirUtils;
-import net.minecraft.item.Item;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.world.item.Item;
+import net.minecraft.core.Registry;
 
 import java.io.IOException;
 import java.nio.file.Files;

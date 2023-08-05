@@ -5,7 +5,7 @@ import com.robertx22.age_of_exile.database.data.gems.Gem;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.GemItems;
 import com.robertx22.age_of_exile.vanilla_mc.items.gemrunes.GemItem;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.Registry;
 
 public class Gems implements ExileRegistryInit {
 

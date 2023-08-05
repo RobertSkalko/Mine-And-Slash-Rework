@@ -6,7 +6,7 @@ import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.bases.LevelPart;
 import com.robertx22.age_of_exile.loot.generators.stack_changers.IStackAction;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.Rarity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;

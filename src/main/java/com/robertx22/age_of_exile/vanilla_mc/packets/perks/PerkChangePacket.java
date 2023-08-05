@@ -9,8 +9,8 @@ import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 
 public class PerkChangePacket extends MyPacket<PerkChangePacket> {
 
@@ -40,7 +40,7 @@ public class PerkChangePacket extends MyPacket<PerkChangePacket> {
     }
 
     @Override
-    public void loadFromData(PacketBuffer tag) {
+    public void loadFromData(FriendlyByteBuf tag) {
         school = tag.readUtf(30);
         x = tag.readInt();
         y = tag.readInt();
@@ -49,7 +49,7 @@ public class PerkChangePacket extends MyPacket<PerkChangePacket> {
     }
 
     @Override
-    public void saveToData(PacketBuffer tag) {
+    public void saveToData(FriendlyByteBuf tag) {
         tag.writeUtf(school, 30);
         tag.writeInt(x);
         tag.writeInt(y);

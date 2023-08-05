@@ -20,10 +20,10 @@ import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
-import net.minecraft.block.Blocks;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.sounds.SoundEvents;
 
 import java.util.Arrays;
 
@@ -146,7 +146,7 @@ public class WaterSpells implements ExileRegistryInit {
                 .attackStyle(PlayStyle.magic)
                 .onCast(PartBuilder.playSound(SoundEvents.PLAYER_SPLASH, 1D, 1D))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.FALLING_WATER, 100D, 3D))
-                .onCast(PartBuilder.giveEffectToAlliesInRadius(Effects.WATER_BREATHING, 20D * 60D * 3, 5D))
+                .onCast(PartBuilder.giveEffectToAlliesInRadius(MobEffects.WATER_BREATHING, 20D * 60D * 3, 5D))
                 .build();
 
         SpellBuilder.of(MAGE_CIRCLE, SpellConfiguration.Builder.instant(10, 20 * 45)

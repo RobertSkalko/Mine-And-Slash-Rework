@@ -1,11 +1,11 @@
 package com.robertx22.age_of_exile.gui.screens;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.robertx22.age_of_exile.gui.bases.BaseScreen;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.SkillTreeScreen;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.widget.Widget;
+import net.minecraft.client.gui.components.AbstractWidget;
 
 import java.util.HashMap;
 
@@ -50,17 +50,17 @@ public class BaseSelectionScreen extends BaseScreen {
 
     }
 
-    HashMap<Widget, PointData> originalButtonLocMap = new HashMap<>();
+    HashMap<AbstractWidget, PointData> originalButtonLocMap = new HashMap<>();
 
     @Override
-    protected <T extends Widget> T addButton(T b) {
+    protected <T extends AbstractWidget> T addButton(T b) {
         super.addButton(b);
         originalButtonLocMap.put(b, new PointData(b.x, b.y));
         return b;
     }
 
     @Override
-    public void render(MatrixStack matrix, int x, int y, float ticks) {
+    public void render(PoseStack matrix, int x, int y, float ticks) {
 
         this.buttons.forEach(b -> {
             if (originalButtonLocMap.containsKey(b)) {

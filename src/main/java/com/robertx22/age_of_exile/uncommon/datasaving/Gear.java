@@ -2,9 +2,9 @@ package com.robertx22.age_of_exile.uncommon.datasaving;
 
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.library_of_exile.utils.LoadSave;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.Registry;
 
 public class Gear {
 
@@ -54,7 +54,7 @@ public class Gear {
             return;
         }
         if (!stack.hasTag()) {
-            stack.setTag(new CompoundNBT());
+            stack.setTag(new CompoundTag());
         }
         if (gear != null) {
 

@@ -1,15 +1,15 @@
 package com.robertx22.library_of_exile.utils;
 
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.World;
+import net.minecraft.world.item.Item;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.Level;
 
 
 
 public class VanillaReg {
 
-    public static ResourceLocation getId(World world) {
+    public static ResourceLocation getId(Level world) {
 
         return world.dimension()
             .location();

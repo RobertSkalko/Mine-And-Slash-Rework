@@ -4,7 +4,7 @@ import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RuneItems;
 import com.robertx22.age_of_exile.vanilla_mc.items.gemrunes.RuneItem;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.Registry;
 
 public class Runes implements ExileRegistryInit {
     @Override

@@ -5,10 +5,10 @@ import com.robertx22.age_of_exile.event_hooks.ontick.OnClientTick;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 
 public class NoManaPacket extends MyPacket<NoManaPacket> {
 
@@ -18,12 +18,12 @@ public class NoManaPacket extends MyPacket<NoManaPacket> {
     }
 
     @Override
-    public void loadFromData(PacketBuffer tag) {
+    public void loadFromData(FriendlyByteBuf tag) {
 
     }
 
     @Override
-    public void saveToData(PacketBuffer tag) {
+    public void saveToData(FriendlyByteBuf tag) {
 
     }
 
@@ -32,7 +32,7 @@ public class NoManaPacket extends MyPacket<NoManaPacket> {
         if (ClientConfigs.getConfig().SHOW_LOW_ENERGY_MANA_WARNING.get()) {
             if (OnClientTick.canSoundNoMana()) {
                 OnClientTick.setNoManaSoundCooldown();
-                PlayerEntity player = ctx.getPlayer();
+                Player player = ctx.getPlayer();
                 player.playSound(SoundEvents.REDSTONE_TORCH_BURNOUT, 0.5F, 0);
             }
         }

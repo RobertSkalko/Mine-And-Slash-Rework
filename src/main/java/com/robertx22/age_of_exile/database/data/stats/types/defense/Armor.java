@@ -5,7 +5,9 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.ArmorEffect;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
+
+import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
 
 public class Armor extends Stat implements IUsableStat {
 
@@ -27,7 +29,7 @@ public class Armor extends Stat implements IUsableStat {
         this.group = StatGroup.MAIN;
 
         this.icon = "\u2748";
-        this.format = TextFormatting.BLUE.getName();
+        this.format = ChatFormatting.BLUE.getName();
 
         this.statEffect = new ArmorEffect();
 

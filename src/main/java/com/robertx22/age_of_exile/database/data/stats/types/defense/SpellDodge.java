@@ -6,6 +6,8 @@ import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.SpellDodgeEffect;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 
+import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
+
 public class SpellDodge extends Stat implements IUsableStat {
 
     public static String GUID = "spell_dodge";

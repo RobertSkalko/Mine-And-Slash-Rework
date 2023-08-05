@@ -4,21 +4,21 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
-import net.minecraft.command.CommandSource;
-import net.minecraft.command.ISuggestionProvider;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.SharedSuggestionProvider;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public abstract class CommandSuggestions implements SuggestionProvider<CommandSource> {
+public abstract class CommandSuggestions implements SuggestionProvider<CommandSourceStack> {
 
     public abstract List<String> suggestions();
 
     @Override
-    public CompletableFuture<Suggestions> getSuggestions(CommandContext<CommandSource> context,
+    public CompletableFuture<Suggestions> getSuggestions(CommandContext<CommandSourceStack> context,
 
                                                          SuggestionsBuilder builder) {
-        ISuggestionProvider.suggest(this.suggestions(), builder);
+        SharedSuggestionProvider.suggest(this.suggestions(), builder);
         return builder.buildFuture();
     }
 }

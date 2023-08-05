@@ -12,6 +12,9 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
+import com.robertx22.age_of_exile.aoe_data.database.GearDataHelper.ArmorSlot;
+import com.robertx22.age_of_exile.aoe_data.database.GearDataHelper.ArmorStat;
+
 public class BaseGearsAdder implements ExileRegistryInit, GearDataHelper {
 
     @Override

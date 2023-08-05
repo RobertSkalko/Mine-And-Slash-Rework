@@ -2,13 +2,13 @@ package com.robertx22.age_of_exile.mixins;
 
 import com.robertx22.age_of_exile.mixin_methods.OnItemStoppedUsingCastImbuedSpell;
 import com.robertx22.age_of_exile.mixin_methods.TooltipMethod;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -24,14 +24,14 @@ public abstract class ItemStackMixin {
 
     // copied from TooltipCallback fabric event
     @Inject(method = {"getTooltipLines"}, at = {@At("RETURN")})
-    private void getTooltip(PlayerEntity entity, ITooltipFlag tooltipContext, CallbackInfoReturnable<List<ITextComponent>> list) {
+    private void getTooltip(Player entity, TooltipFlag tooltipContext, CallbackInfoReturnable<List<Component>> list) {
         ItemStack stack = (ItemStack) (Object) this;
         TooltipMethod.getTooltip(stack, entity, tooltipContext, list);
     }
 
 
     @Inject(method = {"use"}, cancellable = true, at = {@At("HEAD")})
-    public void onUseItemstackmethod(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<ActionResult<ItemStack>> ci) {
+    public void onUseItemstackmethod(Level world, Player user, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> ci) {
         ItemStack stack = (ItemStack) (Object) this;
 
         OnItemStoppedUsingCastImbuedSpell.crossbow(stack, world, user, hand, ci);

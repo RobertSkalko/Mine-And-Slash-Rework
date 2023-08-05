@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.saveclasses.unit;
 
 import info.loenwind.autosave.annotations.Storable;
 import info.loenwind.autosave.annotations.Store;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class AllShieldsData {
 
             float leftToReduce = dmg - reduced;
 
-            float spent = MathHelper.clamp(x.amount, 0, leftToReduce);
+            float spent = Mth.clamp(x.amount, 0, leftToReduce);
             x.amount -= spent;
             reduced += spent;
 

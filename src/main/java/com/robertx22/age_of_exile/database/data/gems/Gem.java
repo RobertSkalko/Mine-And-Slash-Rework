@@ -6,10 +6,10 @@ import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.item.Item;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Registry;
+import net.minecraft.ChatFormatting;
 
 import java.util.List;
 
@@ -22,13 +22,13 @@ public class Gem extends BaseRuneGem implements IAutoGson<Gem>, JsonExileRegistr
 
     public int perc_upgrade_chance = 0;
 
-    public TextFormatting getFormat() {
+    public ChatFormatting getFormat() {
         try {
-            return TextFormatting.valueOf(text_format);
+            return ChatFormatting.valueOf(text_format);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
-        return TextFormatting.GRAY;
+        return ChatFormatting.GRAY;
     }
 
     public Gem getHigherTierGem() {

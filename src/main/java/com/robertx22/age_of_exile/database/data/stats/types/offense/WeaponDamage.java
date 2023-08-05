@@ -3,7 +3,9 @@ package com.robertx22.age_of_exile.database.data.stats.types.offense;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
+
+import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
 
 public class WeaponDamage extends Stat {
 
@@ -25,7 +27,7 @@ public class WeaponDamage extends Stat {
         this.group = StatGroup.MAIN;
 
         this.icon = "\u2748";
-        this.format = TextFormatting.RED.getName();
+        this.format = ChatFormatting.RED.getName();
 
     }
 

@@ -1,10 +1,10 @@
 package com.robertx22.age_of_exile.mmorpg.registers.common;
 
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Registry;
 
 public class SlashRecipeTypes {
 
@@ -12,8 +12,8 @@ public class SlashRecipeTypes {
 
     }
 
-    static <T extends IRecipe<?>> IRecipeType<T> register(final String string) {
-        return Registry.register(Registry.RECIPE_TYPE, (ResourceLocation) SlashRef.id(string), new IRecipeType<T>() {
+    static <T extends Recipe<?>> RecipeType<T> register(final String string) {
+        return Registry.register(Registry.RECIPE_TYPE, (ResourceLocation) SlashRef.id(string), new RecipeType<T>() {
             @Override
             public String toString() {
                 return string;

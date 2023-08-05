@@ -10,8 +10,10 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import com.robertx22.library_of_exile.utils.RandomUtils;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.Mth;
+import net.minecraft.ChatFormatting;
+
+import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
 
 public class DodgeRating extends Stat implements IUsableStat {
 
@@ -34,7 +36,7 @@ public class DodgeRating extends Stat implements IUsableStat {
         this.statEffect = new Effect();
 
         this.icon = "\u2748";
-        this.format = TextFormatting.DARK_GREEN.getName();
+        this.format = ChatFormatting.DARK_GREEN.getName();
 
     }
 
@@ -84,7 +86,7 @@ public class DodgeRating extends Stat implements IUsableStat {
         public DamageEvent activate(DamageEvent effect, StatData data, Stat stat) {
             DodgeRating dodge = (DodgeRating) stat;
 
-            float totalDodge = MathHelper.clamp(data.getValue() - effect.data.getNumber(EventData.ACCURACY).number, 0, Integer.MAX_VALUE);
+            float totalDodge = Mth.clamp(data.getValue() - effect.data.getNumber(EventData.ACCURACY).number, 0, Integer.MAX_VALUE);
 
             float chance = dodge.getUsableValue((int) totalDodge, effect.sourceData.getLevel()) * 100;
 

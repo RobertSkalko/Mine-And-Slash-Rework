@@ -8,8 +8,8 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 
 public class AllocateSpellPacket extends MyPacket<AllocateSpellPacket> {
 
@@ -37,7 +37,7 @@ public class AllocateSpellPacket extends MyPacket<AllocateSpellPacket> {
     }
 
     @Override
-    public void loadFromData(PacketBuffer tag) {
+    public void loadFromData(FriendlyByteBuf tag) {
         spellid = tag.readUtf(100);
         schoolid = tag.readUtf(100);
         action = tag.readEnum(AllocateSpellPacket.ACTION.class);
@@ -45,7 +45,7 @@ public class AllocateSpellPacket extends MyPacket<AllocateSpellPacket> {
     }
 
     @Override
-    public void saveToData(PacketBuffer tag) {
+    public void saveToData(FriendlyByteBuf tag) {
         tag.writeUtf(spellid, 100);
         tag.writeUtf(schoolid, 100);
         tag.writeEnum(action);

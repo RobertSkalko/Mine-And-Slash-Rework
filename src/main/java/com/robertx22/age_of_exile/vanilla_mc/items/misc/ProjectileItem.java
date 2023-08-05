@@ -1,5 +1,7 @@
 package com.robertx22.age_of_exile.vanilla_mc.items.misc;
 
+import net.minecraft.world.item.Item.Properties;
+
 public class ProjectileItem extends AutoItem {
     String id;
 

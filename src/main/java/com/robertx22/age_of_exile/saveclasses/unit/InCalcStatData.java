@@ -8,7 +8,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import info.loenwind.autosave.annotations.Factory;
 import info.loenwind.autosave.annotations.Storable;
 import info.loenwind.autosave.annotations.Store;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
 
 @Storable
 public class InCalcStatData {
@@ -49,7 +49,7 @@ public class InCalcStatData {
 
         this.calc = true;
 
-        return MathHelper.clamp(finalValue, stat.min, stat.max);
+        return Mth.clamp(finalValue, stat.min, stat.max);
 
     }
 

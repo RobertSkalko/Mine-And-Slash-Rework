@@ -25,11 +25,11 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.DashUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
-import net.minecraft.item.Items;
-import net.minecraft.particles.BasicParticleType;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.world.item.Items;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.sounds.SoundEvents;
 
 import java.util.Arrays;
 
@@ -93,7 +93,7 @@ public class RangerSpells implements ExileRegistryInit {
                 .attackStyle(PlayStyle.ranged)
                 .onCast(PartBuilder.playSound(SoundEvents.LINGERING_POTION_THROW, 1D, 1D))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.WITCH, 100D, 3D))
-                .onCast(PartBuilder.giveEffectToAlliesInRadius(Effects.NIGHT_VISION, 20D * 60D * 3, 5D))
+                .onCast(PartBuilder.giveEffectToAlliesInRadius(MobEffects.NIGHT_VISION, 20D * 60D * 3, 5D))
                 .build();
 
         SpellBuilder.of(DASH_ID, SpellConfiguration.Builder.instant(10, 15)
@@ -132,7 +132,7 @@ public class RangerSpells implements ExileRegistryInit {
                 .onHit(PartBuilder.aoeParticles(ParticleTypes.CRIT, 100D, 1D))
                 .onHit(PartBuilder.playSound(SoundEvents.ARROW_HIT, 1D, 1D))
                 .onHit(PartBuilder.damageInAoe(SpellCalcs.CHARGED_BOLT, Elements.Physical, 2D)
-                        .addPerEntityHit(PartBuilder.justAction(SpellAction.POTION.createGive(Effects.MOVEMENT_SLOWDOWN, 40D))))
+                        .addPerEntityHit(PartBuilder.justAction(SpellAction.POTION.createGive(MobEffects.MOVEMENT_SLOWDOWN, 40D))))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.CRIT, 4D, 0.1D))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.ENCHANTED_HIT, 4D, 0.1D))
                 .build();
@@ -146,9 +146,9 @@ public class RangerSpells implements ExileRegistryInit {
                 )
                 .attackStyle(PlayStyle.ranged)
                 .onCast(PartBuilder.playSound(SoundEvents.WOLF_HOWL, 1D, 1D))
-                .onCast(PartBuilder.giveSelfEffect(Effects.NIGHT_VISION, 20D * 30))
-                .onCast(PartBuilder.giveSelfEffect(Effects.MOVEMENT_SPEED, 20D * 30))
-                .onCast(PartBuilder.addEffectToEnemiesInAoe(Effects.GLOWING, 20D, 20D * 20))
+                .onCast(PartBuilder.giveSelfEffect(MobEffects.NIGHT_VISION, 20D * 30))
+                .onCast(PartBuilder.giveSelfEffect(MobEffects.MOVEMENT_SPEED, 20D * 30))
+                .onCast(PartBuilder.addEffectToEnemiesInAoe(MobEffects.GLOWING, 20D, 20D * 20))
 
                 .build();
 
@@ -195,7 +195,7 @@ public class RangerSpells implements ExileRegistryInit {
                 .onExpire(PartBuilder.playSound(SoundEvents.ARROW_HIT, 1D, 1D))
                 .onExpire(PartBuilder.playSound(SoundEvents.SPLASH_POTION_BREAK, 1D, 1D))
                 .onExpire(PartBuilder.damageInAoe(SpellCalcs.POISON_ARROW, Elements.Chaos, 2D)
-                        .addPerEntityHit(PartBuilder.justAction(SpellAction.POTION.createGive(Effects.MOVEMENT_SLOWDOWN, 40D))))
+                        .addPerEntityHit(PartBuilder.justAction(SpellAction.POTION.createGive(MobEffects.MOVEMENT_SLOWDOWN, 40D))))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.CRIT, 4D, 0.1D))
                 .build();
 
@@ -210,7 +210,7 @@ public class RangerSpells implements ExileRegistryInit {
                 .onExpire(PartBuilder.playSound(SoundEvents.ARROW_HIT, 1D, 1D))
                 .onExpire(PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
                 .onExpire(PartBuilder.damageInAoe(SpellCalcs.EXPLOSIVE_ARROW, Elements.Physical, 2D)
-                        .addPerEntityHit(PartBuilder.justAction(SpellAction.POTION.createGive(Effects.MOVEMENT_SLOWDOWN, 40D))))
+                        .addPerEntityHit(PartBuilder.justAction(SpellAction.POTION.createGive(MobEffects.MOVEMENT_SLOWDOWN, 40D))))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.CRIT, 4D, 0.1D))
                 .build();
 
@@ -240,7 +240,7 @@ public class RangerSpells implements ExileRegistryInit {
 
     }
 
-    static SpellBuilder trap(String id, String name, BasicParticleType particle, ValueCalculation dmg, Elements element) {
+    static SpellBuilder trap(String id, String name, SimpleParticleType particle, ValueCalculation dmg, Elements element) {
 
         return SpellBuilder.of(id, SpellConfiguration.Builder.instant(7, 20)
                                 .setChargesAndRegen("trap", 3, 20 * 30)

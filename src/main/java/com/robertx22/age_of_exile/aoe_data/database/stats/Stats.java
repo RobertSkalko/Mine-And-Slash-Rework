@@ -21,7 +21,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
 
 import java.util.Arrays;
 
@@ -426,7 +426,7 @@ public class Stats implements ExileRegistryInit {
                 x.min = 0;
                 x.group = StatGroup.MAIN;
                 x.icon = "\u2694";
-                x.format = TextFormatting.YELLOW.getName();
+                x.format = ChatFormatting.YELLOW.getName();
             })
             .build();
 
@@ -448,7 +448,7 @@ public class Stats implements ExileRegistryInit {
                 x.min = 0;
                 x.group = StatGroup.MAIN;
                 x.icon = "\u2739";
-                x.format = TextFormatting.LIGHT_PURPLE.getName();
+                x.format = ChatFormatting.LIGHT_PURPLE.getName();
             })
             .build();
 
@@ -471,7 +471,7 @@ public class Stats implements ExileRegistryInit {
                 x.max = 100;
                 x.group = StatGroup.MAIN;
                 x.icon = "\u2694";
-                x.format = TextFormatting.YELLOW.getName();
+                x.format = ChatFormatting.YELLOW.getName();
             })
             .build();
 
@@ -493,7 +493,7 @@ public class Stats implements ExileRegistryInit {
                 x.group = StatGroup.MAIN;
 
                 x.icon = "\u2694";
-                x.format = TextFormatting.RED.getName();
+                x.format = ChatFormatting.RED.getName();
 
             })
             .build();
@@ -515,7 +515,7 @@ public class Stats implements ExileRegistryInit {
                 x.max = 500;
                 x.group = StatGroup.MAIN;
                 x.icon = "\u2739";
-                x.format = TextFormatting.DARK_PURPLE.getName();
+                x.format = ChatFormatting.DARK_PURPLE.getName();
 
             })
             .build();
@@ -539,7 +539,7 @@ public class Stats implements ExileRegistryInit {
                 x.max = 500;
                 x.group = StatGroup.MAIN;
                 x.icon = "\u2694";
-                x.format = TextFormatting.GOLD.getName();
+                x.format = ChatFormatting.GOLD.getName();
             })
             .build();
 
@@ -558,7 +558,7 @@ public class Stats implements ExileRegistryInit {
                 x.max = 500;
                 x.group = StatGroup.MAIN;
                 x.icon = "\u2694";
-                x.format = TextFormatting.RED.getName();
+                x.format = ChatFormatting.RED.getName();
             })
             .build();
 
@@ -609,7 +609,7 @@ public class Stats implements ExileRegistryInit {
                 x.is_perc = true;
                 x.base = 0;
                 x.icon = "\u27B9";
-                x.format = TextFormatting.RED.getName();
+                x.format = ChatFormatting.RED.getName();
             })
             .build();
 
@@ -640,7 +640,7 @@ public class Stats implements ExileRegistryInit {
             .modifyAfterDone(x -> {
                 x.is_perc = true;
                 x.base = 0;
-                x.format = TextFormatting.BLUE.getName();
+                x.format = ChatFormatting.BLUE.getName();
             })
             .build();
 
@@ -656,7 +656,7 @@ public class Stats implements ExileRegistryInit {
             .modifyAfterDone(x -> {
                 x.is_perc = true;
                 x.base = 0;
-                x.format = TextFormatting.DARK_PURPLE.getName();
+                x.format = ChatFormatting.DARK_PURPLE.getName();
             })
             .build();
 
@@ -672,7 +672,7 @@ public class Stats implements ExileRegistryInit {
             .modifyAfterDone(x -> {
                 x.is_perc = true;
                 x.base = 0;
-                x.format = TextFormatting.YELLOW.getName();
+                x.format = ChatFormatting.YELLOW.getName();
             })
             .build();
 
@@ -688,7 +688,7 @@ public class Stats implements ExileRegistryInit {
             .modifyAfterDone(x -> {
                 x.is_perc = true;
                 x.base = 0;
-                x.format = TextFormatting.RED.getName();
+                x.format = ChatFormatting.RED.getName();
             })
             .build();
 
@@ -704,7 +704,7 @@ public class Stats implements ExileRegistryInit {
                 x.scaling = StatScaling.NONE;
                 x.is_perc = true;
                 x.base = 0;
-                x.format = TextFormatting.RED.getName();
+                x.format = ChatFormatting.RED.getName();
             })
             .build();
 
@@ -721,7 +721,7 @@ public class Stats implements ExileRegistryInit {
                 x.is_long = true;
                 x.is_perc = true;
                 x.base = 0;
-                x.format = TextFormatting.RED.getName();
+                x.format = ChatFormatting.RED.getName();
             })
             .build();
 
@@ -739,7 +739,7 @@ public class Stats implements ExileRegistryInit {
             .modifyAfterDone(x -> {
                 x.is_perc = true;
                 x.base = 0;
-                x.format = TextFormatting.RED.getName();
+                x.format = ChatFormatting.RED.getName();
                 x.group = StatGroup.Misc;
             })
             .build();
@@ -760,7 +760,7 @@ public class Stats implements ExileRegistryInit {
                 x.is_perc = false;
                 x.scaling = StatScaling.NORMAL;
                 x.base = 0;
-                x.format = TextFormatting.YELLOW.getName();
+                x.format = ChatFormatting.YELLOW.getName();
                 x.group = StatGroup.RESTORATION;
             })
             .build();
@@ -779,7 +779,7 @@ public class Stats implements ExileRegistryInit {
             .modifyAfterDone(x -> {
                 x.is_perc = true;
                 x.base = 0;
-                x.format = TextFormatting.YELLOW.getName();
+                x.format = ChatFormatting.YELLOW.getName();
                 x.group = StatGroup.RESTORATION;
             })
             .build();
@@ -799,7 +799,7 @@ public class Stats implements ExileRegistryInit {
                 x.is_long = true;
                 x.scaling = StatScaling.NONE;
                 x.base = 0;
-                x.format = TextFormatting.YELLOW.getName();
+                x.format = ChatFormatting.YELLOW.getName();
                 x.group = StatGroup.RESTORATION;
             })
             .build();
@@ -818,7 +818,7 @@ public class Stats implements ExileRegistryInit {
                 x.is_long = true;
                 x.scaling = StatScaling.NONE;
                 x.base = 0;
-                x.format = TextFormatting.YELLOW.getName();
+                x.format = ChatFormatting.YELLOW.getName();
                 x.group = StatGroup.RESTORATION;
             })
             .build();
@@ -839,7 +839,7 @@ public class Stats implements ExileRegistryInit {
                 x.is_perc = true;
                 x.base = 0;
                 x.is_long = true;
-                x.format = TextFormatting.YELLOW.getName();
+                x.format = ChatFormatting.YELLOW.getName();
                 x.group = StatGroup.RESTORATION;
             })
             .build();
@@ -856,7 +856,7 @@ public class Stats implements ExileRegistryInit {
             .modifyAfterDone(x -> {
                 x.is_perc = true;
                 x.base = 0;
-                x.format = TextFormatting.GREEN.getName();
+                x.format = ChatFormatting.GREEN.getName();
                 x.group = StatGroup.RESTORATION;
             })
             .build();
@@ -876,7 +876,7 @@ public class Stats implements ExileRegistryInit {
                 x.is_perc = true;
                 x.base = 0;
                 x.min = -100;
-                x.format = TextFormatting.YELLOW.getName();
+                x.format = ChatFormatting.YELLOW.getName();
                 x.group = StatGroup.RESTORATION;
             })
             .build();
@@ -895,7 +895,7 @@ public class Stats implements ExileRegistryInit {
                 x.base = 0;
                 x.min = 0;
                 x.scaling = StatScaling.NONE;
-                x.format = TextFormatting.RED.getName();
+                x.format = ChatFormatting.RED.getName();
                 x.group = StatGroup.RESTORATION;
             })
             .build();
@@ -914,7 +914,7 @@ public class Stats implements ExileRegistryInit {
                 x.base = 0;
                 x.min = 0;
                 x.scaling = StatScaling.NONE;
-                x.format = TextFormatting.RED.getName();
+                x.format = ChatFormatting.RED.getName();
                 x.group = StatGroup.RESTORATION;
             })
             .build();
@@ -933,7 +933,7 @@ public class Stats implements ExileRegistryInit {
                 x.base = 0;
                 x.min = 0;
                 x.scaling = StatScaling.NONE;
-                x.format = TextFormatting.RED.getName();
+                x.format = ChatFormatting.RED.getName();
                 x.group = StatGroup.RESTORATION;
             })
             .build();
@@ -950,7 +950,7 @@ public class Stats implements ExileRegistryInit {
                 x.is_perc = true;
                 x.base = 0;
                 x.icon = "\u2748";
-                x.format = TextFormatting.RED.getName();
+                x.format = ChatFormatting.RED.getName();
             })
             .build();
 
@@ -966,7 +966,7 @@ public class Stats implements ExileRegistryInit {
                 x.is_perc = true;
                 x.base = 0;
                 x.icon = "\u2748";
-                x.format = TextFormatting.GREEN.getName();
+                x.format = ChatFormatting.GREEN.getName();
             })
             .build();
 
@@ -1091,7 +1091,7 @@ public class Stats implements ExileRegistryInit {
             .modifyAfterDone(x -> {
                 x.is_perc = true;
                 x.icon = "\u27B9";
-                x.format = TextFormatting.GREEN.getName();
+                x.format = ChatFormatting.GREEN.getName();
             })
             .build();
 

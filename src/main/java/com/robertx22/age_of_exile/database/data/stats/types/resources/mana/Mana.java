@@ -3,7 +3,9 @@ package com.robertx22.age_of_exile.database.data.stats.types.resources.mana;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
+
+import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
 
 public class Mana extends Stat {
     public static String GUID = "mana";
@@ -22,7 +24,7 @@ public class Mana extends Stat {
         this.scaling = StatScaling.NORMAL;
         this.group = StatGroup.MAIN;
 
-        this.format = TextFormatting.BLUE.getName();
+        this.format = ChatFormatting.BLUE.getName();
         this.icon = "\u262F";
     }
 

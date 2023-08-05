@@ -9,19 +9,19 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 import com.robertx22.age_of_exile.vanilla_mc.commands.CommandRefs;
 import com.robertx22.age_of_exile.vanilla_mc.commands.suggestions.GearRaritySuggestions;
-import net.minecraft.command.CommandSource;
-import net.minecraft.command.arguments.EntityArgument;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.EquipmentSlot;
 
 import java.util.Map;
 import java.util.Objects;
 
 import static net.minecraft.command.Commands.argument;
-import static net.minecraft.command.Commands.literal;
+import staticnet.minecraft.commands.Commandss.literal;
 
 public class TestBuild {
-    public static void register(CommandDispatcher<CommandSource> commandDispatcher) {
+    public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
 
         commandDispatcher.register(
             literal(CommandRefs.ID)
@@ -42,7 +42,7 @@ public class TestBuild {
                                     ))))))));
     }
 
-    private static int execute(CommandSource commandSource, PlayerEntity player,
+    private static int execute(CommandSourceStack commandSource, Player player,
                                String tag, int lvl, String rarity) {
 
         if (Objects.isNull(player)) {
@@ -54,7 +54,7 @@ public class TestBuild {
             }
         }
 
-        for (Map.Entry<EquipmentSlotType, BaseGearType> entry : TestBuilds.getGearsFor(BaseGearType.SlotTag.valueOf(tag), player)
+        for (Map.Entry<EquipmentSlot, BaseGearType> entry : TestBuilds.getGearsFor(BaseGearType.SlotTag.valueOf(tag), player)
             .entrySet()) {
 
             GearBlueprint blueprint = new GearBlueprint(lvl, 0);

@@ -18,7 +18,7 @@ import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.SingleTalentR
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.SpellResetPotion;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.TalentResetPotion;
 import com.robertx22.temp.SkillItemTier;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 
 import java.util.Arrays;
 import java.util.HashMap;

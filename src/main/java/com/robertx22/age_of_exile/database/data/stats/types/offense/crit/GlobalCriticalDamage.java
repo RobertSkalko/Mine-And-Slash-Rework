@@ -7,6 +7,8 @@ import com.robertx22.age_of_exile.database.data.stats.types.core_stats.base.ITra
 import com.robertx22.age_of_exile.saveclasses.unit.InCalcStatData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 
+import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
+
 public class GlobalCriticalDamage extends Stat implements ITransferToOtherStats {
 
     public static String GUID = "global_critical_damage";

@@ -14,10 +14,10 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.components.EntityInfoComponent;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerLevel;
 
 import java.util.List;
 
@@ -33,18 +33,18 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
                 return;
             }
 
-            if (!(mobKilled instanceof PlayerEntity)) {
+            if (!(mobKilled instanceof Player)) {
 
                 EntityData mobKilledData = Load.Unit(mobKilled);
 
                 LivingEntity killerEntity = EntityInfoComponent.get(mobKilled)
                         .getDamageStats()
-                        .getHighestDamager((ServerWorld) mobKilled.level);
+                        .getHighestDamager((ServerLevel) mobKilled.level);
 
                 if (killerEntity == null) {
                     try {
                         if (mobKilled.getLastDamageSource()
-                                .getEntity() instanceof PlayerEntity) {
+                                .getEntity() instanceof Player) {
                             killerEntity = (LivingEntity) mobKilled.getLastDamageSource()
                                     .getEntity();
                         }
@@ -60,9 +60,9 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
                     }
                 }
 
-                if (killerEntity instanceof ServerPlayerEntity) {
+                if (killerEntity instanceof ServerPlayer) {
 
-                    ServerPlayerEntity player = (ServerPlayerEntity) killerEntity;
+                    ServerPlayer player = (ServerPlayer) killerEntity;
                     EntityData playerData = Load.Unit(player);
 
                     EntityConfig config = ExileDB.getEntityConfig(mobKilled, mobKilledData);
@@ -93,7 +93,7 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
 
     }
 
-    private static void GiveExp(LivingEntity victim, PlayerEntity killer, EntityData killerData, EntityData mobData, float multi) {
+    private static void GiveExp(LivingEntity victim, Player killer, EntityData killerData, EntityData mobData, float multi) {
 
         float exp = LevelUtils.getBaseExpMobReward(mobData.getLevel());
 
@@ -131,7 +131,7 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
 
         if ((int) exp > 0) {
 
-            List<PlayerEntity> list = TeamUtils.getOnlineTeamMembersInRange(killer);
+            List<Player> list = TeamUtils.getOnlineTeamMembersInRange(killer);
 
             int members = list.size() - 1;
             if (members > 5) {
@@ -146,7 +146,7 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
 
             if (exp > 0) {
 
-                for (PlayerEntity x : list) {
+                for (Player x : list) {
                     Load.Unit(x)
                             .GiveExp(x, (int) exp);
                 }

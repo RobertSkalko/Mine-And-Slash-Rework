@@ -5,7 +5,9 @@ import com.robertx22.age_of_exile.database.data.stats.IUsableStat;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
+
+import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
 
 public class Health extends Stat implements IUsableStat {
     public static String GUID = "health";
@@ -17,7 +19,7 @@ public class Health extends Stat implements IUsableStat {
 
         this.order = 0;
         this.icon = "\u2764";
-        this.format = TextFormatting.RED.getName();
+        this.format = ChatFormatting.RED.getName();
 
     }
 

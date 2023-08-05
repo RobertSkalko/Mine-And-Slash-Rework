@@ -4,7 +4,7 @@ import com.robertx22.age_of_exile.database.data.affixes.Affix;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
-import net.minecraft.util.text.IFormattableTextComponent;
+import net.minecraft.network.chat.MutableComponent;
 
 import java.util.function.Predicate;
 
@@ -38,16 +38,16 @@ public class SimpleGearLocReq extends BaseLocRequirement {
     public static final BaseLocRequirement HAS_UNIQUE_STATS = new SimpleGearLocReq(
             x -> x.uniqueStats != null, Words.hasUniqueStats.locName());
 
-    public SimpleGearLocReq(Predicate<GearItemData> pred, IFormattableTextComponent text) {
+    public SimpleGearLocReq(Predicate<GearItemData> pred, MutableComponent text) {
         this.text = text;
         this.gearsThatCanDoThis = pred;
     }
 
     Predicate<GearItemData> gearsThatCanDoThis;
-    IFormattableTextComponent text;
+    MutableComponent text;
 
     @Override
-    public IFormattableTextComponent getText() {
+    public MutableComponent getText() {
 
         return text;
     }

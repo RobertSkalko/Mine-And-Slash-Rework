@@ -4,9 +4,9 @@ import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.library_of_exile.utils.EntityUtils;
 import com.robertx22.library_of_exile.utils.RandomUtils;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.monster.SlimeEntity;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Slime;
+import net.minecraft.util.Mth;
 
 public class LootUtils {
 
@@ -26,7 +26,7 @@ public class LootUtils {
 
         float multi = (float) (1F - num * ServerContainer.get().LEVEL_DISTANCE_PENALTY_PER_LVL.get());
 
-        return (float) MathHelper.clamp(multi, ServerContainer.get().LEVEL_DISTANCE_PENALTY_MIN_MULTI.get(), 1F);
+        return (float) Mth.clamp(multi, ServerContainer.get().LEVEL_DISTANCE_PENALTY_MIN_MULTI.get(), 1F);
     }
 
     public static float getMobHealthBasedLootMulti(EntityData mob, LivingEntity entity) {
@@ -37,7 +37,7 @@ public class LootUtils {
 
         multi += (1 + hp / 40F) - 1;
 
-        if (entity instanceof SlimeEntity) {
+        if (entity instanceof Slime) {
             multi *= 0.05F;
         }
 

@@ -6,10 +6,10 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ParticleUtils;
 import com.robertx22.library_of_exile.utils.GeometryUtils;
 import com.robertx22.library_of_exile.utils.RandomUtils;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.particles.BasicParticleType;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.core.Registry;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -33,7 +33,7 @@ public class ParticleInRadiusAction extends SpellAction {
 
             Shape shape = data.getParticleShape();
 
-            BasicParticleType particle = data.getParticle();
+            SimpleParticleType particle = data.getParticle();
 
             float radius = data.get(RADIUS)
                 .floatValue();
@@ -67,11 +67,11 @@ public class ParticleInRadiusAction extends SpellAction {
                     for (int i = 0; i < amount; i++) {
 
                         // todo unsure if this helps
-                        Vector3d pos = ctx.vecPos;
-                        Vector3d vel = ctx.sourceEntity.getDeltaMovement();
-                        pos = new Vector3d(pos.x - vel.x / 2F, pos.y - vel.y / 2 + height, pos.z - vel.z / 2);
+                        Vec3 pos = ctx.vecPos;
+                        Vec3 vel = ctx.sourceEntity.getDeltaMovement();
+                        pos = new Vec3(pos.x - vel.x / 2F, pos.y - vel.y / 2 + height, pos.z - vel.z / 2);
 
-                        Vector3d p = GeometryUtils.getRandomPosInRadiusCircle(pos, radius);
+                        Vec3 p = GeometryUtils.getRandomPosInRadiusCircle(pos, radius);
                         ParticleUtils.spawn(particle, ctx.world, p, motion.getMotion(p, ctx)
                             .scale(motionMulti));
                     }
@@ -79,14 +79,14 @@ public class ParticleInRadiusAction extends SpellAction {
             } else if (shape == Shape.HORIZONTAL_CIRCLE) {
                 for (int i = 0; i < amount; i++) {
                     float yRandom = (int) RandomUtils.RandomRange(0, yrand);
-                    Vector3d p = GeometryUtils.getRandomHorizontalPosInRadiusCircle(ctx.vecPos.x(), ctx.vecPos.y() + height + yRandom, ctx.vecPos.z(), radius);
+                    Vec3 p = GeometryUtils.getRandomHorizontalPosInRadiusCircle(ctx.vecPos.x(), ctx.vecPos.y() + height + yRandom, ctx.vecPos.z(), radius);
                     ParticleUtils.spawn(particle, ctx.world, p, motion.getMotion(p, ctx)
                         .scale(motionMulti));
                 }
             } else if (shape == Shape.HORIZONTAL_CIRCLE_EDGE) {
                 for (int i = 0; i < amount; i++) {
                     float yRandom = (int) RandomUtils.RandomRange(0, yrand);
-                    Vector3d p = randomEdgeCirclePos(ctx.vecPos.x(), ctx.vecPos.y() + height + yRandom, ctx.vecPos.z(), radius);
+                    Vec3 p = randomEdgeCirclePos(ctx.vecPos.x(), ctx.vecPos.y() + height + yRandom, ctx.vecPos.z(), radius);
                     ParticleUtils.spawn(particle, ctx.world, p, motion.getMotion(p, ctx)
                         .scale(motionMulti));
                 }
@@ -94,18 +94,18 @@ public class ParticleInRadiusAction extends SpellAction {
         }
     }
 
-    public static Vector3d randomEdgeCirclePos(double x, double y, double z, float radius) {
+    public static Vec3 randomEdgeCirclePos(double x, double y, double z, float radius) {
         double angle = Math.random() * Math.PI * 2;
         double xpos = x + Math.cos(angle) * radius;
         double zpos = z + Math.sin(angle) * radius;
-        return new Vector3d(xpos, y, zpos);
+        return new Vec3(xpos, y, zpos);
     }
 
-    public MapHolder create(BasicParticleType particle, Double count, Double radius) {
+    public MapHolder create(SimpleParticleType particle, Double count, Double radius) {
         return create(particle, count, radius, ParticleMotion.None);
     }
 
-    public MapHolder create(BasicParticleType particle, Double count, Double radius, ParticleMotion motion) {
+    public MapHolder create(SimpleParticleType particle, Double count, Double radius, ParticleMotion motion) {
         MapHolder dmg = new MapHolder();
         dmg.type = GUID();
         dmg.put(RADIUS, radius);

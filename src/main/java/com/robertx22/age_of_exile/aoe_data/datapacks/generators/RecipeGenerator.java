@@ -15,9 +15,9 @@ import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.VanillaMaterial;
 import joptsimple.internal.Strings;
 import net.minecraft.advancements.criterion.*;
 import net.minecraft.data.*;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.util.IItemProvider;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -27,16 +27,25 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.function.Consumer;
 
+import net.minecraft.advancements.critereon.EnchantedItemTrigger;
+import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.MinMaxBounds;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+
 public class RecipeGenerator {
 
     public static final Gson GSON = (new GsonBuilder()).setPrettyPrinting()
             .create();
-    protected DirectoryCache cache;
+    protected HashCache cache;
 
     public RecipeGenerator() {
 
         try {
-            cache = new DirectoryCache(FMLPaths.GAMEDIR.get()
+            cache = new HashCache(FMLPaths.GAMEDIR.get()
                     , "datagencache");
         } catch (IOException e) {
             e.printStackTrace();
@@ -64,7 +73,7 @@ public class RecipeGenerator {
         generateAll(cache);
     }
 
-    protected void generateAll(DirectoryCache cache) {
+    protected void generateAll(HashCache cache) {
 
         Path path = getBasePath();
 
@@ -74,7 +83,7 @@ public class RecipeGenerator {
                     .getPath()));
 
             try {
-                IDataProvider.save(GSON, cache, x.serializeRecipe(), target);
+                DataProvider.save(GSON, cache, x.serializeRecipe(), target);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -83,7 +92,7 @@ public class RecipeGenerator {
 
     }
 
-    private void generate(Consumer<IFinishedRecipe> consumer) {
+    private void generate(Consumer<FinishedRecipe> consumer) {
         for (Item item : ForgeRegistries.ITEMS) {
             if (item instanceof IShapedRecipe) {
                 IShapedRecipe ir = (IShapedRecipe) item;
@@ -114,7 +123,7 @@ public class RecipeGenerator {
                         ShapelessRecipeBuilder fac = ShapelessRecipeBuilder.shapeless(x.get(), 1);
                         fac.requires(ProfessionItems.SALVAGED_ESSENCE_MAP.get(x.get().tier.lowerTier())
                                 .get(), 4);
-                        fac.unlockedBy("player_level", EnchantedItemTrigger.Instance.enchantedItem())
+                        fac.unlockedBy("player_level", EnchantedItemTrigger.TriggerInstance.enchantedItem())
                                 .save(consumer);
                     }
                 });
@@ -125,7 +134,7 @@ public class RecipeGenerator {
 
     }
 
-    public static void gearRecipe(Consumer<IFinishedRecipe> cons, HashMap<VanillaMaterial, RegObj<Item>> map, String slot) {
+    public static void gearRecipe(Consumer<FinishedRecipe> cons, HashMap<VanillaMaterial, RegObj<Item>> map, String slot) {
 
         map.entrySet()
                 .forEach(x -> {
@@ -160,7 +169,7 @@ public class RecipeGenerator {
                         }
                     }
 
-                    fac.unlockedBy("player_level", EnchantedItemTrigger.Instance.enchantedItem());
+                    fac.unlockedBy("player_level", EnchantedItemTrigger.TriggerInstance.enchantedItem());
 
                     fac.save(cons);
                 });
@@ -264,14 +273,14 @@ public class RecipeGenerator {
         return null;
     }
 
-    static InventoryChangeTrigger.Instance conditionsFromItem(IItemProvider itemConvertible) {
+    static InventoryChangeTrigger.TriggerInstance conditionsFromItem(ItemLike itemConvertible) {
         return conditionsFromItemPredicates(ItemPredicate.Builder.item()
                 .of(itemConvertible)
                 .build());
     }
 
-    private static InventoryChangeTrigger.Instance conditionsFromItemPredicates(ItemPredicate... itemPredicates) {
-        return new InventoryChangeTrigger.Instance(EntityPredicate.AndPredicate.ANY, MinMaxBounds.IntBound.ANY, MinMaxBounds.IntBound.ANY, MinMaxBounds.IntBound.ANY, itemPredicates);
+    private static InventoryChangeTrigger.TriggerInstance conditionsFromItemPredicates(ItemPredicate... itemPredicates) {
+        return new InventoryChangeTrigger.TriggerInstance(EntityPredicate.Composite.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, MinMaxBounds.Ints.ANY, itemPredicates);
     }
 
 }

@@ -13,6 +13,9 @@ import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
+import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect.Priority;
+
 public class BonusAttackDamage extends ElementalStat {
 
     @Override

@@ -2,8 +2,8 @@ package com.robertx22.age_of_exile.aoe_data.datapacks.models;
 
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.DirUtils;
-import net.minecraft.item.Item;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.world.item.Item;
+import net.minecraft.core.Registry;
 
 import java.io.File;
 import java.io.FileWriter;

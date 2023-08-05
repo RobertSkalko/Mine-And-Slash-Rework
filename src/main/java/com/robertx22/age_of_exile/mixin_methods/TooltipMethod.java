@@ -11,25 +11,25 @@ import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.registry.Database;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
 public class TooltipMethod {
-    public static void getTooltip(ItemStack stack, PlayerEntity entity, ITooltipFlag tooltipContext, CallbackInfoReturnable<List<ITextComponent>> list) {
+    public static void getTooltip(ItemStack stack, Player entity, TooltipFlag tooltipContext, CallbackInfoReturnable<List<Component>> list) {
 
-        List<ITextComponent> tooltip = list.getReturnValue();
+        List<Component> tooltip = list.getReturnValue();
 
         boolean addCurrencyTooltip = stack
                 .getItem() instanceof ICurrencyItemEffect;
 
-        PlayerEntity player = Minecraft.getInstance().player;
+        Player player = Minecraft.getInstance().player;
 
         try {
 
@@ -73,7 +73,7 @@ public class TooltipMethod {
                     hasdata = true;
                 }
 
-                IFormattableTextComponent broken = TooltipUtils.itemBrokenText(stack, data);
+                MutableComponent broken = TooltipUtils.itemBrokenText(stack, data);
                 if (broken != null) {
                     tooltip.add(broken);
                 }

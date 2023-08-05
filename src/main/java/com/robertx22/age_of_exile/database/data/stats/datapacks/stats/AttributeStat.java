@@ -3,11 +3,11 @@ package com.robertx22.age_of_exile.database.data.stats.datapacks.stats;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.base.BaseDatapackStat;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.core.Registry;
 
 import java.util.UUID;
 
@@ -62,7 +62,7 @@ public class AttributeStat extends BaseDatapackStat {
             operation
         );
 
-        ModifiableAttributeInstance atri = en.getAttribute(attribute);
+        AttributeInstance atri = en.getAttribute(attribute);
 
         if (atri.hasModifier(mod)) {
             atri.removeModifier(mod); // KEEP THIS OR UPDATE WONT MAKE HP CORRECT!!!

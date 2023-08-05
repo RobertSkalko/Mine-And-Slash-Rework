@@ -10,9 +10,9 @@ import com.robertx22.age_of_exile.loot.blueprints.bases.UniqueGearPart;
 import com.robertx22.age_of_exile.loot.generators.GearSoulLootGen;
 import com.robertx22.age_of_exile.loot.generators.util.GearCreationUtils;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 public class GearBlueprint extends ItemBlueprint {
 

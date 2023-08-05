@@ -5,6 +5,8 @@ import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 
 import java.util.Locale;
 
+import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
+
 public enum Words implements IAutoLocName {
 
     DestroyProtect("Destruction Guard"),

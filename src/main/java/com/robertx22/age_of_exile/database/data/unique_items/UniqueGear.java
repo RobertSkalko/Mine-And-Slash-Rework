@@ -19,6 +19,8 @@ import com.robertx22.library_of_exile.registry.serialization.ISerializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
+
 public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, ISerializable<UniqueGear> {
 
     public static UniqueGear SERIALIZER = new UniqueGear();

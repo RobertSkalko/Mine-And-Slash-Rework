@@ -8,7 +8,7 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import info.loenwind.autosave.annotations.Storable;
 import info.loenwind.autosave.annotations.Store;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +34,7 @@ public class StatPointsData {
 
     }
 
-    public int getFreePoints(PlayerEntity player) {
+    public int getFreePoints(Player player) {
         int total = (int) (Load.Unit(player)
                 .getLevel() * GameBalanceConfig.get().STAT_POINTS_PER_LEVEL);
 

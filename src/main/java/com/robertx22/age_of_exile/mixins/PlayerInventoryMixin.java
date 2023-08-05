@@ -1,17 +1,17 @@
 package com.robertx22.age_of_exile.mixins;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(PlayerInventory.class)
+@Mixin(Inventory.class)
 public class PlayerInventoryMixin {
 
     @Shadow
     @Final
-    public PlayerEntity player;
+    public Player player;
 
     // TODO ADD NEW BACKPACK SYSTEM!!!
 

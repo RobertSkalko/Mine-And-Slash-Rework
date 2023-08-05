@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.uncommon.interfaces.data_items;
 
-import net.minecraft.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.ArrayList;

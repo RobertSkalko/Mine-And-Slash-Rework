@@ -24,9 +24,9 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import com.robertx22.library_of_exile.utils.RandomUtils;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.EffectType;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.ChatFormatting;
 
 import java.util.ArrayList;
 
@@ -80,14 +80,14 @@ public class SpecialStats {
 
     public static SpecialStat HEAL_CLEANSE = new SpecialStat("heal_cleanse",
             format("Your " + Stats.HEAL_STRENGTH.get()
-                    .getFormat() + Stats.HEAL_STRENGTH.get().icon + " Heal Spells " + TextFormatting.GRAY + "have a " + VAL1 + "%" + " chance to cleanse a negative effect."),
+                    .getFormat() + Stats.HEAL_STRENGTH.get().icon + " Heal Spells " + ChatFormatting.GRAY + "have a " + VAL1 + "%" + " chance to cleanse a negative effect."),
 
             new BaseHealEffect() {
                 @Override
                 public RestoreResourceEvent activate(RestoreResourceEvent effect, StatData data, Stat stat) {
-                    for (EffectInstance x : new ArrayList<>(effect.target.getActiveEffects())) {
+                    for (MobEffectInstance x : new ArrayList<>(effect.target.getActiveEffects())) {
                         if (x.getEffect()
-                                .getCategory() == EffectType.HARMFUL) {
+                                .getCategory() == MobEffectCategory.HARMFUL) {
                             effect.target.removeEffect(x.getEffect());
                         }
                     }

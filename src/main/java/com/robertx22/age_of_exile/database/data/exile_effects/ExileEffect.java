@@ -15,16 +15,18 @@ import com.robertx22.age_of_exile.vanilla_mc.potion_effects.types.ExileStatusEff
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
+import net.minecraft.core.Registry;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.ChatFormatting;
+import net.minecraft.world.level.Level;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
 
 public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<ExileEffect>, IAutoLocName {
 
@@ -88,7 +90,7 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
         return this.locName;
     }
 
-    public List<ExactStatData> getExactStats(World world, EntitySavedSpellData data) {
+    public List<ExactStatData> getExactStats(Level world, EntitySavedSpellData data) {
 
         if (data.getCaster(world) == null) {
             return Arrays.asList();
@@ -107,22 +109,22 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
 
     }
 
-    public List<ITextComponent> GetTooltipString(TooltipInfo info, EntitySavedSpellData data) {
-        List<ITextComponent> list = new ArrayList<>();
+    public List<Component> GetTooltipString(TooltipInfo info, EntitySavedSpellData data) {
+        List<Component> list = new ArrayList<>();
 
-        list.add(new StringTextComponent("Status Effect: ").append(this.locName())
-            .withStyle(TextFormatting.YELLOW));
+        list.add(new TextComponent("Status Effect: ").append(this.locName())
+            .withStyle(ChatFormatting.YELLOW));
         if (!stats.isEmpty()) {
             list.add(Words.Stats.locName()
                 .append(": ")
-                .withStyle(TextFormatting.GREEN));
+                .withStyle(ChatFormatting.GREEN));
             getExactStats(info.player.level, data).forEach(x -> {
                 list.addAll(x.GetTooltipString(info));
             });
         }
 
         if (max_stacks > 1) {
-            list.add(new StringTextComponent("Maximum Stacks: " + max_stacks));
+            list.add(new TextComponent("Maximum Stacks: " + max_stacks));
         }
 
         List<EffectTags> tags = this.tags.stream()
@@ -135,7 +137,7 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
             string += x.name + " ";
         }
 
-        list.add(new StringTextComponent(TextFormatting.YELLOW + string));
+        list.add(new TextComponent(ChatFormatting.YELLOW + string));
 
         return list;
 

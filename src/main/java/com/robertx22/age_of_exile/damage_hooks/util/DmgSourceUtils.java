@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.damage_hooks.util;
 
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.MyDamageSource;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
-import net.minecraft.util.DamageSource;
+import net.minecraft.world.damagesource.DamageSource;
 
 public class DmgSourceUtils {
 

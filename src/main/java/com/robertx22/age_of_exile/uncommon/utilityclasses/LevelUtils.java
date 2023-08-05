@@ -9,11 +9,11 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.temp.SkillItemTier;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.Level;
+import net.minecraft.server.level.ServerLevel;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -152,7 +152,7 @@ public class LevelUtils {
 
     public static int getExpNeededForSkillLevel(int level) {
         float exponent = 0.1F * (float) level / (float) GameBalanceConfig.get().MAX_LEVEL;
-        exponent = MathHelper.clamp(exponent, 0, 0.15F);
+        exponent = Mth.clamp(exponent, 0, 0.15F);
         return (int) Math.pow(25 + (level * 20), 1 + exponent);
     }
 
@@ -170,11 +170,11 @@ public class LevelUtils {
 
     }
 
-    public static LevelDetermInfo determineLevel(World world, BlockPos pos, PlayerEntity nearestPlayer) {
+    public static LevelDetermInfo determineLevel(Level world, BlockPos pos, Player nearestPlayer) {
 
         LevelDetermInfo info = new LevelDetermInfo();
 
-        ServerWorld sw = (ServerWorld) world;
+        ServerLevel sw = (ServerLevel) world;
 
         DimensionConfig dimConfig = ExileDB.getDimensionConfig(world);
 
@@ -196,8 +196,8 @@ public class LevelUtils {
             lvl = determineLevelPerDistanceFromSpawn(sw, pos, dimConfig);
         }
 
-        lvl = MathHelper.clamp(lvl, dimConfig.min_lvl, dimConfig.max_lvl);
-        lvl = MathHelper.clamp(lvl, 1, GameBalanceConfig.get().MAX_LEVEL);
+        lvl = Mth.clamp(lvl, dimConfig.min_lvl, dimConfig.max_lvl);
+        lvl = Mth.clamp(lvl, 1, GameBalanceConfig.get().MAX_LEVEL);
 
 
         if (nearestPlayer != null) {
@@ -221,19 +221,19 @@ public class LevelUtils {
              */
         }
 
-        lvl = MathHelper.clamp(lvl, dimConfig.min_lvl, dimConfig.max_lvl);
-        lvl = MathHelper.clamp(lvl, 1, GameBalanceConfig.get().MAX_LEVEL);
+        lvl = Mth.clamp(lvl, dimConfig.min_lvl, dimConfig.max_lvl);
+        lvl = Mth.clamp(lvl, 1, GameBalanceConfig.get().MAX_LEVEL);
 
         info.level = lvl;
 
         return info;
     }
 
-    public static boolean isInMinLevelArea(ServerWorld world, BlockPos pos, DimensionConfig config) {
+    public static boolean isInMinLevelArea(ServerLevel world, BlockPos pos, DimensionConfig config) {
         double distance = world.getSharedSpawnPos()
                 .distManhattan(pos);
 
-        double scale = MathHelper.clamp(world.dimensionType()
+        double scale = Mth.clamp(world.dimensionType()
                 .coordinateScale() / 3F, 1, Integer.MAX_VALUE);
 
         distance *= scale;
@@ -244,12 +244,12 @@ public class LevelUtils {
         return false;
     }
 
-    public static int determineLevelPerDistanceFromSpawn(ServerWorld world, BlockPos pos, DimensionConfig config) {
+    public static int determineLevelPerDistanceFromSpawn(ServerLevel world, BlockPos pos, DimensionConfig config) {
 
         double distance = world.getSharedSpawnPos()
                 .distManhattan(pos);
 
-        double scale = MathHelper.clamp(world.dimensionType()
+        double scale = Mth.clamp(world.dimensionType()
                 .coordinateScale() / 3F, 1, Integer.MAX_VALUE);
 
         distance *= scale;
@@ -262,14 +262,14 @@ public class LevelUtils {
 
         lvl = (int) (config.min_lvl + ((distance - config.min_lvl_area) / (config.mob_lvl_per_distance)));
 
-        return MathHelper.clamp(lvl, config.min_lvl, config.max_lvl);
+        return Mth.clamp(lvl, config.min_lvl, config.max_lvl);
 
     }
 
-    public static double getBlocksForEachLevelDistance(ServerWorld world) {
+    public static double getBlocksForEachLevelDistance(ServerLevel world) {
         DimensionConfig config = ExileDB.getDimensionConfig(world);
 
-        double scale = MathHelper.clamp(world.dimensionType()
+        double scale = Mth.clamp(world.dimensionType()
                 .coordinateScale() / 3F, 1, Integer.MAX_VALUE);
 
         return config.mob_lvl_per_distance / scale;

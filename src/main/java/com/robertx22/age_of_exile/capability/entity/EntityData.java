@@ -43,17 +43,17 @@ import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.main.Ref;
 import com.robertx22.library_of_exile.utils.CLOC;
 import com.robertx22.library_of_exile.utils.LoadSave;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.play.server.STitlePacket;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.game.ClientboundSetTitlesPacket;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.ChatFormatting;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -152,7 +152,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
     CustomExactStatsData customExactStats = new CustomExactStatsData();
 
     @Override
-    public void addClientNBT(CompoundNBT nbt) {
+    public void addClientNBT(CompoundTag nbt) {
 
         nbt.putInt(LEVEL, level);
         nbt.putString(RARITY, rarity);
@@ -167,7 +167,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
     }
 
     @Override
-    public void loadFromClientNBT(CompoundNBT nbt) {
+    public void loadFromClientNBT(CompoundTag nbt) {
 
         this.rarity = nbt.getString(RARITY);
         this.level = nbt.getInt(LEVEL);
@@ -196,8 +196,8 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
     }
 
     @Override
-    public CompoundNBT saveToNBT() {
-        CompoundNBT nbt = new CompoundNBT();
+    public CompoundTag saveToNBT() {
+        CompoundTag nbt = new CompoundTag();
 
         addClientNBT(nbt);
 
@@ -231,7 +231,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
     }
 
     @Override
-    public void loadFromNBT(CompoundNBT nbt) {
+    public void loadFromNBT(CompoundTag nbt) {
 
         loadFromClientNBT(nbt);
 
@@ -310,13 +310,13 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
 
     public void onDeath() {
 
-        if (entity instanceof PlayerEntity) {
-            PlayerEntity player = (PlayerEntity) entity;
+        if (entity instanceof Player) {
+            Player player = (Player) entity;
 
             int expLoss = (int) (exp * ServerContainer.get().EXP_LOSS_ON_DEATH.get());
 
             if (expLoss > 0) {
-                this.exp = MathHelper.clamp(exp - expLoss, 0, Integer.MAX_VALUE);
+                this.exp = Mth.clamp(exp - expLoss, 0, Integer.MAX_VALUE);
             }
 
         }
@@ -383,10 +383,10 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
         uuid = id.toString();
     }
 
-    public IFormattableTextComponent getName() {
+    public MutableComponent getName() {
 
-        if (entity instanceof PlayerEntity) {
-            return new StringTextComponent("")
+        if (entity instanceof Player) {
+            return new TextComponent("")
                     .append(entity.getDisplayName());
 
         } else {
@@ -394,9 +394,9 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
             MobRarity rarity = ExileDB.MobRarities()
                     .get(getRarity());
 
-            TextFormatting rarformat = rarity.textFormatting();
+            ChatFormatting rarformat = rarity.textFormatting();
 
-            IFormattableTextComponent name = new StringTextComponent("").append(entity.getDisplayName())
+            MutableComponent name = new TextComponent("").append(entity.getDisplayName())
                     .withStyle(rarformat);
 
             String icons = "";
@@ -408,14 +408,14 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
                 icons += " ";
             }
 
-            IFormattableTextComponent finalName = new StringTextComponent(icons).append(
+            MutableComponent finalName = new TextComponent(icons).append(
                     name);
 
-            IFormattableTextComponent part = new StringTextComponent("")
+            MutableComponent part = new TextComponent("")
                     .append(finalName)
                     .withStyle(rarformat);
 
-            IFormattableTextComponent tx = (part);
+            MutableComponent tx = (part);
 
             return tx;
 
@@ -465,7 +465,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
         return weaponData != null;
     }
 
-    public void onLogin(PlayerEntity player) {
+    public void onLogin(Player player) {
 
         try {
 
@@ -615,7 +615,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
     }
 
 
-    public void SetMobLevelAtSpawn(PlayerEntity nearestPlayer) {
+    public void SetMobLevelAtSpawn(Player nearestPlayer) {
         this.setMobStats = true;
 
 
@@ -642,7 +642,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
 
     }
 
-    private void setMobLvlNormally(LivingEntity entity, PlayerEntity nearestPlayer) {
+    private void setMobLvlNormally(LivingEntity entity, Player nearestPlayer) {
         EntityConfig entityConfig = ExileDB.getEntityConfig(entity, this);
 
         LevelUtils.LevelDetermInfo lvl = LevelUtils.determineLevel(entity.level, entity.blockPosition(),
@@ -650,13 +650,13 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
         );
 
 
-        setLevel(MathHelper.clamp(lvl.level, entityConfig.min_lvl, entityConfig.max_lvl));
+        setLevel(Mth.clamp(lvl.level, entityConfig.min_lvl, entityConfig.max_lvl));
     }
 
-    public int GiveExp(PlayerEntity player, int i) {
+    public int GiveExp(Player player, int i) {
 
-        IFormattableTextComponent txt = new StringTextComponent("+" + (int) i + " Experience").withStyle(TextFormatting.GREEN);
-        OnScreenMessageUtils.sendMessage((ServerPlayerEntity) player, txt, STitlePacket.Type.ACTIONBAR);
+        MutableComponent txt = new TextComponent("+" + (int) i + " Experience").withStyle(ChatFormatting.GREEN);
+        OnScreenMessageUtils.sendMessage((ServerPlayer) player, txt, ClientboundSetTitlesPacket.Type.ACTIONBAR);
 
         setExp(exp + i);
 
@@ -690,7 +690,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
         return getLevel() + 1 <= GameBalanceConfig.get().MAX_LEVEL;
     }
 
-    public boolean LevelUp(PlayerEntity player) {
+    public boolean LevelUp(Player player) {
 
         if (!CheckIfCanLevelUp()) {
             player.displayClientMessage(Chats.Not_enough_experience.locName(), false);
@@ -700,7 +700,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
 
         if (CheckIfCanLevelUp() && CheckLevelCap()) {
 
-            if (player instanceof ServerPlayerEntity) {
+            if (player instanceof ServerPlayer) {
                 //ModCriteria.PLAYER_LEVEL.trigger((ServerPlayerEntity) player);
             }
 
@@ -715,7 +715,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
             this.setLevel(level + 1);
             setExp(getRemainingExp());
 
-            OnScreenMessageUtils.sendLevelUpMessage(player, new StringTextComponent("Player"), level - 1, level);
+            OnScreenMessageUtils.sendLevelUpMessage(player, new TextComponent("Player"), level - 1, level);
 
             return true;
         }
@@ -757,7 +757,7 @@ public class EntityData implements ICommonPlayerCap, INeededForClient {
 
     public void setLevel(int lvl) {
 
-        level = MathHelper.clamp(lvl, 1, GameBalanceConfig.get().MAX_LEVEL);
+        level = Mth.clamp(lvl, 1, GameBalanceConfig.get().MAX_LEVEL);
 
         this.equipsChanged = true;
         this.shouldSync = true;

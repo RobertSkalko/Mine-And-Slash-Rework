@@ -4,7 +4,7 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import info.loenwind.autosave.annotations.Storable;
 import info.loenwind.autosave.annotations.Store;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
 
 @Storable
 public class StatData {
@@ -55,7 +55,7 @@ public class StatData {
 
     public float getValue() {
         Stat stat = GetStat();
-        return MathHelper.clamp(v1, stat.min, stat.max);
+        return Mth.clamp(v1, stat.min, stat.max);
     }
 
     public boolean isNotZero() {

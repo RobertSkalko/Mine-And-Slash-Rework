@@ -8,8 +8,8 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatI
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.serialization.IByteBuf;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class OptScaleExactStat implements IByteBuf<OptScaleExactStat> {
     }
 
     @Override
-    public OptScaleExactStat getFromBuf(PacketBuffer buf) {
+    public OptScaleExactStat getFromBuf(FriendlyByteBuf buf) {
         OptScaleExactStat data = new OptScaleExactStat();
         data.v1 = buf.readFloat();
         data.stat = buf.readUtf(100);
@@ -36,7 +36,7 @@ public class OptScaleExactStat implements IByteBuf<OptScaleExactStat> {
     }
 
     @Override
-    public void toBuf(PacketBuffer buf) {
+    public void toBuf(FriendlyByteBuf buf) {
         buf.writeFloat(v1);
         buf.writeUtf(stat, 100);
         buf.writeUtf(type, 50);
@@ -54,13 +54,13 @@ public class OptScaleExactStat implements IByteBuf<OptScaleExactStat> {
 
     }
 
-    public List<ITextComponent> GetTooltipString(TooltipInfo info, int lvl) {
+    public List<Component> GetTooltipString(TooltipInfo info, int lvl) {
         Stat stat = getStat();
         TooltipStatInfo statInfo = new TooltipStatInfo(this.toExactStat(this.scale_to_lvl ? lvl : 1), -99, info);
         return new ArrayList<>(stat.getTooltipList(new TooltipStatWithContext(statInfo, null, null)));
     }
 
-    public List<ITextComponent> GetTooltipString(TooltipInfo info) {
+    public List<Component> GetTooltipString(TooltipInfo info) {
         Stat stat = getStat();
         TooltipStatInfo statInfo = new TooltipStatInfo(this.toExactStat(this.scale_to_lvl ? info.unitdata.getLevel() : 1), -99, info);
         return new ArrayList<>(stat.getTooltipList(new TooltipStatWithContext(statInfo, null, null)));

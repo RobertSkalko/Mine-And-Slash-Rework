@@ -3,7 +3,9 @@ package com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
+
+import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
 
 public interface Rarity extends IWeighted, IAutoLocName, JsonExileRegistry<Rarity> {
 
@@ -15,7 +17,7 @@ public interface Rarity extends IWeighted, IAutoLocName, JsonExileRegistry<Rarit
 
     int Weight();
 
-    TextFormatting textFormatting();
+    ChatFormatting textFormatting();
 
     @Override
     public default AutoLocGroup locNameGroup() {

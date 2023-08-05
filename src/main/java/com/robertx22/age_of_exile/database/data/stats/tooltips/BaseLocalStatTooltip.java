@@ -3,10 +3,10 @@ package com.robertx22.age_of_exile.database.data.stats.tooltips;
 import com.robertx22.age_of_exile.database.data.stats.name_regex.StatNameRegex;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.ChatFormatting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,29 +14,29 @@ import java.util.List;
 public class BaseLocalStatTooltip implements IStatTooltipType {
 
     @Override
-    public List<ITextComponent> getTooltipList(TextFormatting format, TooltipStatWithContext ctx) {
+    public List<Component> getTooltipList(ChatFormatting format, TooltipStatWithContext ctx) {
         TooltipStatInfo info = ctx.statinfo;
 
-        List<ITextComponent> list = new ArrayList<ITextComponent>();
+        List<Component> list = new ArrayList<Component>();
         if (true) {
             String icon = "\u25CF";
-            list.add(new StringTextComponent(icon + " ")
+            list.add(new TextComponent(icon + " ")
                     .append(info.stat.locName())
                     .append(": ")
-                    .withStyle(format != null ? format : TextFormatting.WHITE)
-                    .append(new StringTextComponent((int) info.firstValue + "")
-                            .withStyle(TextFormatting.GRAY)));
+                    .withStyle(format != null ? format : ChatFormatting.WHITE)
+                    .append(new TextComponent((int) info.firstValue + "")
+                            .withStyle(ChatFormatting.GRAY)));
 
             return list;
 
         }
-        String icon = TextFormatting.RED + info.stat.icon + " ";
+        String icon = ChatFormatting.RED + info.stat.icon + " ";
 
         if (ctx.statinfo.stat.is_long) {
             icon = "";
         }
 
-        IFormattableTextComponent txt = new StringTextComponent(StatNameRegex.BASIC_LOCAL
+        MutableComponent txt = new TextComponent(StatNameRegex.BASIC_LOCAL
                 .translate(format, ctx, info.type, info.firstValue, info.stat));
 
         if (ctx.statinfo.stat.is_long) {

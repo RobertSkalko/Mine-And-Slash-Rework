@@ -6,8 +6,8 @@ import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.CLOC;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.ChatFormatting;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,7 +30,7 @@ public class SpellDesc {
         List<String> list = TooltipUtils.cutIfTooLong(tip);
 
         list = list.stream()
-            .map(x -> TextFormatting.GRAY + x)
+            .map(x -> ChatFormatting.GRAY + x)
             .collect(Collectors.toList());
 
         return list;

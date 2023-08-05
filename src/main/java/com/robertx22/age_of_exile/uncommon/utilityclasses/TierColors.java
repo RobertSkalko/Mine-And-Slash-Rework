@@ -1,28 +1,28 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
 
 public class TierColors {
 
-    public static TextFormatting get(int tier) {
+    public static ChatFormatting get(int tier) {
 
         if (tier == 0) {
-            return TextFormatting.GREEN;
+            return ChatFormatting.GREEN;
         }
         if (tier == 1) {
-            return TextFormatting.BLUE;
+            return ChatFormatting.BLUE;
         }
         if (tier == 2) {
-            return TextFormatting.LIGHT_PURPLE;
+            return ChatFormatting.LIGHT_PURPLE;
         }
         if (tier == 3) {
-            return TextFormatting.DARK_PURPLE;
+            return ChatFormatting.DARK_PURPLE;
         }
         if (tier > 3) {
-            return TextFormatting.DARK_PURPLE;
+            return ChatFormatting.DARK_PURPLE;
         }
 
-        return TextFormatting.GRAY;
+        return ChatFormatting.GRAY;
     }
 
 }

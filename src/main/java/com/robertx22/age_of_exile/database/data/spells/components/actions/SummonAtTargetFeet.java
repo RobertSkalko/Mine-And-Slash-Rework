@@ -5,12 +5,12 @@ import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellUtils;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.Item;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.core.Registry;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -30,7 +30,7 @@ public class SummonAtTargetFeet extends SpellAction {
         Double height = data.getOrDefault(MapField.HEIGHT, 0D);
 
         targets.forEach(x -> {
-            Vector3d pos = x.position();
+            Vec3 pos = x.position();
             Entity en = projectile.get()
                 .create(ctx.world);
             SpellUtils.initSpellEntity(en, ctx.caster, ctx.calculatedSpellData, data);

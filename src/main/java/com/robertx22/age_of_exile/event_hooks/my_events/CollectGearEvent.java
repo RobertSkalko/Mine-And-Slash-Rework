@@ -5,10 +5,10 @@ import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.saveclasses.unit.GearData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,11 +42,11 @@ public class CollectGearEvent {
 
         Boolean hasWeapon = false;
 
-        for (EquipmentSlotType slot : EquipmentSlotType.values()) {
+        for (EquipmentSlot slot : EquipmentSlot.values()) {
             GearData data = getDataFor(slot, entity, unitdata);
             list.add(data);
 
-            if (data.slot == EquipmentSlotType.MAINHAND) {
+            if (data.slot == EquipmentSlot.MAINHAND) {
                 if (data.gear != null) {
                     if (data.gear.GetBaseGearType()
                         .isWeapon()) {
@@ -58,12 +58,12 @@ public class CollectGearEvent {
         if (!hasWeapon) {
             if (event != null && event.weaponData != null) {
                 // add weapon damage of throw weapons
-                list.add(new GearData(event.weapon, EquipmentSlotType.MAINHAND, unitdata));
+                list.add(new GearData(event.weapon, EquipmentSlot.MAINHAND, unitdata));
                 hasWeapon = true;
             }
         }
-        if (entity instanceof PlayerEntity) {
-            MyCurioUtils.getAllSlots((PlayerEntity) entity)
+        if (entity instanceof Player) {
+            MyCurioUtils.getAllSlots((Player) entity)
                 .forEach(x -> {
                     GearData data = new GearData(x, null, unitdata);
                     list.add(data);
@@ -73,7 +73,7 @@ public class CollectGearEvent {
 
     }
 
-    static GearData getDataFor(EquipmentSlotType slot, LivingEntity en, EntityData data) {
+    static GearData getDataFor(EquipmentSlot slot, LivingEntity en, EntityData data) {
         ItemStack stack = en.getItemBySlot(slot);
         return new GearData(stack, slot, data);
     }

@@ -1,9 +1,9 @@
 package com.robertx22.age_of_exile.capability.bases;
 
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 
 public interface INeededForClient {
-    void addClientNBT(CompoundNBT nbt);
+    void addClientNBT(CompoundTag nbt);
 
-    void loadFromClientNBT(CompoundNBT nbt);
+    void loadFromClientNBT(CompoundTag nbt);
 }

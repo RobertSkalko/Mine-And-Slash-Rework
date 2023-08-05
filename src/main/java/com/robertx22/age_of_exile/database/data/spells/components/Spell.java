@@ -30,20 +30,22 @@ import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.ChatFormatting;
+import net.minecraft.world.level.Level;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
 
 public final class Spell implements IGUID, IAutoGson<Spell>, JsonExileRegistry<Spell>, IAutoLocName, IAutoLocDesc, MaxLevelProvider {
     public static Spell SERIALIZER = new Spell();
@@ -66,7 +68,7 @@ public final class Spell implements IGUID, IAutoGson<Spell>, JsonExileRegistry<S
     public transient String locDesc = "";
     public transient List<StatModifier> statsForSkillGem = new ArrayList<>();
 
-    public boolean isAllowedInDimension(World world) {
+    public boolean isAllowedInDimension(Level world) {
         if (disabled_dims.isEmpty()) {
             return true;
         }
@@ -161,7 +163,7 @@ public final class Spell implements IGUID, IAutoGson<Spell>, JsonExileRegistry<S
 
         if (this.config.swing_arm) {
             caster.swingTime = -1; // this makes sure hand swings
-            caster.swing(Hand.MAIN_HAND);
+            caster.swing(InteractionHand.MAIN_HAND);
         }
 
         if (imbue && this.config.cast_type == SpellCastType.USE_ITEM) {
@@ -200,41 +202,41 @@ public final class Spell implements IGUID, IAutoGson<Spell>, JsonExileRegistry<S
         return (int) ctx.event.data.getNumber(EventData.MANA_COST).number;
     }
 
-    public final List<ITextComponent> GetTooltipString(TooltipInfo info) {
+    public final List<Component> GetTooltipString(TooltipInfo info) {
 
         SpellCastContext ctx = new SpellCastContext(info.player, 0, this);
 
-        List<ITextComponent> list = new ArrayList<>();
+        List<Component> list = new ArrayList<>();
 
-        list.add(locName().withStyle(TextFormatting.RED, TextFormatting.BOLD));
+        list.add(locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
 
         TooltipUtils.addEmpty(list);
 
         if (true || Screen.hasShiftDown()) {
 
             SpellDesc.getTooltip(ctx.caster, this)
-                .forEach(x -> list.add(new StringTextComponent(x)));
+                .forEach(x -> list.add(new TextComponent(x)));
 
         }
 
         TooltipUtils.addEmpty(list);
 
-        list.add(new StringTextComponent(TextFormatting.BLUE + "Mana Cost: " + getCalculatedManaCost(ctx)));
+        list.add(new TextComponent(ChatFormatting.BLUE + "Mana Cost: " + getCalculatedManaCost(ctx)));
         if (config.usesCharges()) {
-            list.add(new StringTextComponent(TextFormatting.YELLOW + "Max Charges: " + config.charges));
-            list.add(new StringTextComponent(TextFormatting.YELLOW + "Charge Regen: " + config.charge_regen / 20 + "s"));
+            list.add(new TextComponent(ChatFormatting.YELLOW + "Max Charges: " + config.charges));
+            list.add(new TextComponent(ChatFormatting.YELLOW + "Charge Regen: " + config.charge_regen / 20 + "s"));
 
         } else {
-            list.add(new StringTextComponent(TextFormatting.YELLOW + "Cooldown: " + (getCooldownTicks(ctx) / 20) + "s"));
+            list.add(new TextComponent(ChatFormatting.YELLOW + "Cooldown: " + (getCooldownTicks(ctx) / 20) + "s"));
         }
 
         int casttime = getCastTimeTicks(ctx);
 
         if (casttime == 0) {
-            list.add(new StringTextComponent(TextFormatting.GREEN + "Cast time: " + "Instant"));
+            list.add(new TextComponent(ChatFormatting.GREEN + "Cast time: " + "Instant"));
 
         } else {
-            list.add(new StringTextComponent(TextFormatting.GREEN + "Cast time: " + casttime / 20 + "s"));
+            list.add(new TextComponent(ChatFormatting.GREEN + "Cast time: " + casttime / 20 + "s"));
 
         }
 
@@ -246,7 +248,7 @@ public final class Spell implements IGUID, IAutoGson<Spell>, JsonExileRegistry<S
 
         if (this.config.times_to_cast > 1) {
             TooltipUtils.addEmpty(list);
-            list.add(new StringTextComponent("Casted " + config.times_to_cast + " times during channel.").withStyle(TextFormatting.RED));
+            list.add(new TextComponent("Casted " + config.times_to_cast + " times during channel.").withStyle(ChatFormatting.RED));
 
         }
 
@@ -284,7 +286,7 @@ public final class Spell implements IGUID, IAutoGson<Spell>, JsonExileRegistry<S
             .getLevelOf(GUID());
         int maxlvl = getMaxLevel();
 
-        list.add(new StringTextComponent("Level: " + currentlvl + "/" + maxlvl).withStyle(TextFormatting.YELLOW));
+        list.add(new TextComponent("Level: " + currentlvl + "/" + maxlvl).withStyle(ChatFormatting.YELLOW));
 
         TooltipUtils.removeDoubleBlankLines(list);
 

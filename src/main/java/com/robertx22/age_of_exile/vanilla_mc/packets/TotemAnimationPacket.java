@@ -4,9 +4,9 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 
 public class TotemAnimationPacket extends MyPacket<TotemAnimationPacket> {
     ItemStack stack;
@@ -21,7 +21,7 @@ public class TotemAnimationPacket extends MyPacket<TotemAnimationPacket> {
     }
 
     @Override
-    public void loadFromData(PacketBuffer tag) {
+    public void loadFromData(FriendlyByteBuf tag) {
         stack = tag.readItem();
 
         if (stack == null) {
@@ -30,7 +30,7 @@ public class TotemAnimationPacket extends MyPacket<TotemAnimationPacket> {
     }
 
     @Override
-    public void saveToData(PacketBuffer tag) {
+    public void saveToData(FriendlyByteBuf tag) {
         if (stack != null) {
             tag.writeItem(stack);
         }

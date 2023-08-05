@@ -14,12 +14,14 @@ import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.library_of_exile.registry.serialization.ISerializable;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.ChatFormatting;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
 
 public class MobAffix implements JsonExileRegistry<MobAffix>, ISerializable<MobAffix>, IAutoLocName, IApplyableStats {
 
@@ -27,10 +29,10 @@ public class MobAffix implements JsonExileRegistry<MobAffix>, ISerializable<MobA
     String id = "";
     int weight = 1000;
     public String icon = "";
-    public TextFormatting format;
+    public ChatFormatting format;
     transient String locName;
 
-    public MobAffix(String id, String locName, TextFormatting format) {
+    public MobAffix(String id, String locName, ChatFormatting format) {
         this.id = id;
         this.locName = locName;
         this.format = format;
@@ -67,7 +69,7 @@ public class MobAffix implements JsonExileRegistry<MobAffix>, ISerializable<MobA
         MobAffix affix = new MobAffix(
             getGUIDFromJson(json),
             "",
-            TextFormatting.valueOf(json.get("format")
+            ChatFormatting.valueOf(json.get("format")
                 .getAsString()));
 
         try {

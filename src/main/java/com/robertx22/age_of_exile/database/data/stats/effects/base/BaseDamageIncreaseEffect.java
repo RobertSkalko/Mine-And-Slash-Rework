@@ -5,6 +5,8 @@ import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 
+import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect.Priority;
+
 public abstract class BaseDamageIncreaseEffect extends BaseDamageEffect {
 
     protected BaseDamageIncreaseEffect() {

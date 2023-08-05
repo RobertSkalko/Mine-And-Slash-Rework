@@ -7,15 +7,15 @@ import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.library_of_exile.utils.Watch;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.ChatFormatting;
 
 public class OnLogin {
 
-    public static void onLoad(ServerPlayerEntity player) {
+    public static void onLoad(ServerPlayer player) {
 
         Watch total = null;
         if (MMORPG.RUN_DEV_TOOLS) {
@@ -26,8 +26,8 @@ public class OnLogin {
 
             if (!player.getServer()
                 .isCommandBlockEnabled()) {
-                player.displayClientMessage(new StringTextComponent("Command blocks are disabled, this will stop you from playing Age of Exile Dungeons!").withStyle(TextFormatting.RED), false);
-                player.displayClientMessage(new StringTextComponent("To enable go to your server.properties file and put enable-command-block as true.").withStyle(TextFormatting.GREEN), false);
+                player.displayClientMessage(new TextComponent("Command blocks are disabled, this will stop you from playing Age of Exile Dungeons!").withStyle(ChatFormatting.RED), false);
+                player.displayClientMessage(new TextComponent("To enable go to your server.properties file and put enable-command-block as true.").withStyle(ChatFormatting.GREEN), false);
             }
 
             CapSyncUtil.syncAll(player);
@@ -52,7 +52,7 @@ public class OnLogin {
         }
     }
 
-    public static void GiveStarterItems(PlayerEntity player) {
+    public static void GiveStarterItems(Player player) {
 
         if (player.level.isClientSide) {
             return;

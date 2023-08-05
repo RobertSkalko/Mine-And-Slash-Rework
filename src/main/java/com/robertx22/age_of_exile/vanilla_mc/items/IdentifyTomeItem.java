@@ -6,14 +6,16 @@ import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.level.Level;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import net.minecraft.world.item.Item.Properties;
 
 public class IdentifyTomeItem extends AutoItem {
 
@@ -22,7 +24,7 @@ public class IdentifyTomeItem extends AutoItem {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand handIn) {
+    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand handIn) {
         ItemStack tomeStack = player.getItemInHand(handIn);
         List<ItemStack> list = new ArrayList<>();
 
@@ -71,7 +73,7 @@ public class IdentifyTomeItem extends AutoItem {
             PlayerUtils.giveItem(x, player);
         });
 
-        return ActionResult.success(tomeStack);
+        return InteractionResultHolder.success(tomeStack);
     }
 
     @Override

@@ -10,10 +10,10 @@ import com.robertx22.age_of_exile.vanilla_mc.packets.EntityUnitPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import info.loenwind.autosave.annotations.Storable;
 import info.loenwind.autosave.annotations.Store;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 
 @Storable
 public class ResourcesData {
@@ -55,7 +55,7 @@ public class ResourcesData {
         return magic_shield;
     }
 
-    public void onTickBlock(PlayerEntity player) {
+    public void onTickBlock(Player player) {
         if (player.isBlocking()) {
             float cost = Energy.getInstance()
                     .scale(ModType.FLAT, 0.25F, Load.Unit(player)
@@ -164,24 +164,24 @@ public class ResourcesData {
 
     private void cap(LivingEntity en, ResourceType type) {
         if (type == ResourceType.mana) {
-            mana = MathHelper.clamp(mana, 0, Load.Unit(en)
+            mana = Mth.clamp(mana, 0, Load.Unit(en)
                     .getMaximumResource(type));
         } else if (type == ResourceType.energy) {
-            energy = MathHelper.clamp(energy, 0, Load.Unit(en)
+            energy = Mth.clamp(energy, 0, Load.Unit(en)
                     .getMaximumResource(type));
         } else if (type == ResourceType.magic_shield) {
-            magic_shield = MathHelper.clamp(magic_shield, 0, Load.Unit(en)
+            magic_shield = Mth.clamp(magic_shield, 0, Load.Unit(en)
                     .getMaximumResource(type));
         } else if (type == ResourceType.blood) {
-            blood = MathHelper.clamp(blood, 0, Load.Unit(en)
+            blood = Mth.clamp(blood, 0, Load.Unit(en)
                     .getMaximumResource(type));
         }
 
     }
 
     private void sync(LivingEntity en) {
-        if (en instanceof ServerPlayerEntity) {
-            Packets.sendToClient((PlayerEntity) en, new EntityUnitPacket(en));
+        if (en instanceof ServerPlayer) {
+            Packets.sendToClient((Player) en, new EntityUnitPacket(en));
         }
     }
 

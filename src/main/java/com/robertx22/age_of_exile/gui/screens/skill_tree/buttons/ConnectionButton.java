@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.gui.screens.skill_tree.buttons;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.SkillTreeScreen;
@@ -8,8 +8,8 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.widget.button.ImageButton;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.resources.ResourceLocation;
 
 public class ConnectionButton extends ImageButton {
 
@@ -42,13 +42,13 @@ public class ConnectionButton extends ImageButton {
     Perk.Connection connection;
 
     @Override
-    public void renderButton(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+    public void renderButton(PoseStack matrices, int mouseX, int mouseY, float delta) {
         // do nothing. use the custom method
     }
 
     // render here so the bind texture is only called once
     // because there are thousands of connector buttons
-    public void renderButtonForReal(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+    public void renderButtonForReal(PoseStack matrices, int mouseX, int mouseY, float delta) {
 
         ticks++;
 

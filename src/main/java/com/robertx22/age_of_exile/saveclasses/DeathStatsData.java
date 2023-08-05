@@ -5,8 +5,8 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import info.loenwind.autosave.annotations.Storable;
 import info.loenwind.autosave.annotations.Store;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.core.BlockPos;
 
 import java.util.HashMap;
 
@@ -23,7 +23,7 @@ public class DeathStatsData {
     @Store
     public boolean died = false;
 
-    public static void record(PlayerEntity player, Elements ele, float amount) {
+    public static void record(Player player, Elements ele, float amount) {
         RPGPlayerData stats = Load.playerRPGData(player);
         Elements element = ele == null ? Elements.Physical : ele;
         stats.deathStats.record(element, amount);

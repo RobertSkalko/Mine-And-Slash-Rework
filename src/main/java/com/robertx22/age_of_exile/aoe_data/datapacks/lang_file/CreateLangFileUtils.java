@@ -4,11 +4,11 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.potion.Effect;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Registry;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -55,7 +55,7 @@ public class CreateLangFileUtils {
                 list.add((T) item);
             }
         }
-        for (Effect item : Registry.MOB_EFFECT) {
+        for (MobEffect item : Registry.MOB_EFFECT) {
             if (matches(Registry.MOB_EFFECT.getKey(item)) && theclass.isAssignableFrom(item.getClass())) {
                 list.add((T) item);
             }

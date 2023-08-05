@@ -5,8 +5,8 @@ import com.robertx22.age_of_exile.database.data.MinMax;
 import com.robertx22.age_of_exile.database.data.stats.tooltips.StatTooltipType;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.world.entity.player.Player;
 
 public class TooltipInfo implements Cloneable {
 
@@ -39,7 +39,7 @@ public class TooltipInfo implements Cloneable {
         this.unitdata = Load.Unit(player);
     }
 
-    public TooltipInfo(PlayerEntity player) {
+    public TooltipInfo(Player player) {
         this.player = player;
         this.unitdata = Load.Unit(player);
 
@@ -56,7 +56,7 @@ public class TooltipInfo implements Cloneable {
 
     public boolean showAbilityExtraInfo = true;
 
-    public PlayerEntity player;
+    public Player player;
     public EntityData unitdata;
     public MinMax minmax = new MinMax(0, 100);
     public boolean isSet = false;

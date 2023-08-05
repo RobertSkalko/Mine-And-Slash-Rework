@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.uncommon.item_filters.bases;
 
 import com.robertx22.age_of_exile.uncommon.item_filters.*;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;

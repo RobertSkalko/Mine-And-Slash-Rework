@@ -16,25 +16,27 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.gemrunes.GemItem;
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.utils.SoundUtils;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.World;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.ChatFormatting;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Arrays;
 import java.util.List;
+
+import net.minecraft.world.item.Item.Properties;
 
 public class LootCrateItem extends Item implements IGUID {
     public LootCrateItem() {
@@ -61,7 +63,7 @@ public class LootCrateItem extends Item implements IGUID {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
         if (!world.isClientSide) {
@@ -102,11 +104,11 @@ public class LootCrateItem extends Item implements IGUID {
                 e.printStackTrace();
             }
         }
-        return new ActionResult<ItemStack>(ActionResultType.PASS, player.getItemInHand(hand));
+        return new InteractionResultHolder<ItemStack>(InteractionResult.PASS, player.getItemInHand(hand));
     }
 
     @Override
-    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> stacks) {
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> stacks) {
         if (this.allowdedIn(group)) {
 
             for (int tier : LevelUtils.getAllTiers()) {
@@ -130,8 +132,8 @@ public class LootCrateItem extends Item implements IGUID {
 
     @OnlyIn(Dist.CLIENT)
     @Override
-    public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip,
-                                ITooltipFlag flagIn) {
+    public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip,
+                                TooltipFlag flagIn) {
         LootCrateData data = getData(stack);
 
         if (data != null) {
@@ -141,11 +143,11 @@ public class LootCrateItem extends Item implements IGUID {
     }
 
     @Override
-    public ITextComponent getName(ItemStack stack) {
+    public Component getName(ItemStack stack) {
 
         LootCrateData data = getData(stack);
 
-        IFormattableTextComponent comp = new StringTextComponent("");
+        MutableComponent comp = new TextComponent("");
 
         if (data != null) {
 
@@ -163,13 +165,13 @@ public class LootCrateItem extends Item implements IGUID {
                 .append(" ")
                 .append(Words.Crate.locName())
                 .withStyle(TierColors.get(data.tier))
-                .withStyle(TextFormatting.BOLD);
+                .withStyle(ChatFormatting.BOLD);
 
             return comp;
 
         }
 
-        return new StringTextComponent("Box");
+        return new TextComponent("Box");
 
     }
 

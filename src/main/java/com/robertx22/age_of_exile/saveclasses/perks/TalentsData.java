@@ -15,8 +15,8 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import info.loenwind.autosave.annotations.Storable;
 import info.loenwind.autosave.annotations.Store;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.*;
 
@@ -60,7 +60,7 @@ public class TalentsData implements IApplyableStats {
         return getPerks(school.getSchool_type()).get(school.GUID());
     }
 
-    public void allocate(PlayerEntity player, TalentTree school, PointData point) {
+    public void allocate(Player player, TalentTree school, PointData point) {
         getSchool(school).map.put(point, true);
     }
 
@@ -72,7 +72,7 @@ public class TalentsData implements IApplyableStats {
         return getFreePoints(data, type) > 0;
     }
 
-    public boolean canAllocate(TalentTree school, PointData point, EntityData data, PlayerEntity player) {
+    public boolean canAllocate(TalentTree school, PointData point, EntityData data, Player player) {
 
         if (!hasFreePoints(data, school.getSchool_type())) {
             return false;
@@ -187,7 +187,7 @@ public class TalentsData implements IApplyableStats {
         return perks;
     }
 
-    public PerkStatus getStatus(PlayerEntity player, TalentTree school, PointData point) {
+    public PerkStatus getStatus(Player player, TalentTree school, PointData point) {
 
         if (isAllocated(school, point)) {
             return PerkStatus.CONNECTED;

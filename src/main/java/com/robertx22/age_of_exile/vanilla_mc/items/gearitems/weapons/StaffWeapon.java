@@ -5,11 +5,13 @@ import com.robertx22.age_of_exile.aoe_data.datapacks.models.ItemModelManager;
 import com.robertx22.age_of_exile.database.base.CreativeTabs;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.VanillaMaterial;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.level.Level;
+
+import net.minecraft.world.item.Item.Properties;
 
 public class StaffWeapon extends ModWeapon implements IAutoModel {
     VanillaMaterial mat;
@@ -29,7 +31,7 @@ public class StaffWeapon extends ModWeapon implements IAutoModel {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
         try {
@@ -57,7 +59,7 @@ public class StaffWeapon extends ModWeapon implements IAutoModel {
             e.printStackTrace();
         }
 
-        return ActionResult.pass(stack);
+        return InteractionResultHolder.pass(stack);
 
     }
 }

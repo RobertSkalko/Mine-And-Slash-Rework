@@ -4,7 +4,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ITooltip;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.Rarity;
 import com.robertx22.library_of_exile.utils.AllItemStackSavers;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 public interface ICommonDataItem<R extends Rarity> extends ISalvagable, ITooltip, IRarity {
 

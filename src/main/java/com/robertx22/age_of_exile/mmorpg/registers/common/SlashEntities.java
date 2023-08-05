@@ -6,9 +6,9 @@ import com.robertx22.age_of_exile.database.data.spells.entities.SimpleTridentEnt
 import com.robertx22.age_of_exile.database.data.spells.entities.StationaryFallingBlockEntity;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntityType;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.EntityType;
 
 public class SlashEntities {
 
@@ -21,15 +21,15 @@ public class SlashEntities {
     public static RegObj<EntityType<StationaryFallingBlockEntity>> SIMPLE_BLOCK_ENTITY = projectile(StationaryFallingBlockEntity::new, "spell_block_entity", false);
     public static RegObj<EntityType<SimpleTridentEntity>> SIMPLE_TRIDENT = projectile(SimpleTridentEntity::new, "spell_trident", false);
 
-    private static <T extends Entity> RegObj<EntityType<T>> projectile(EntityType.IFactory<T> factory, String id) {
+    private static <T extends Entity> RegObj<EntityType<T>> projectile(EntityType.EntityFactory<T> factory, String id) {
         return projectile(factory, id, true);
 
     }
 
-    private static <T extends Entity> RegObj<EntityType<T>> projectile(EntityType.IFactory<T> factory,
+    private static <T extends Entity> RegObj<EntityType<T>> projectile(EntityType.EntityFactory<T> factory,
                                                                        String id, boolean itemRender) {
 
-        EntityType<T> type = EntityType.Builder.of(factory, EntityClassification.MISC)
+        EntityType<T> type = EntityType.Builder.of(factory, MobCategory.MISC)
                 .sized(0.5F, 0.5F)
                 .setUpdateInterval(20)
                 .setTrackingRange(4)

@@ -3,20 +3,20 @@ package com.robertx22.temp;
 
 import com.robertx22.age_of_exile.database.data.level_ranges.LevelRange;
 import com.robertx22.age_of_exile.database.registrators.LevelRanges;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
 
 import java.util.Arrays;
 import java.util.Comparator;
 
 public enum SkillItemTier {
 
-    TIER0("Spiritual", LevelRanges.STARTER, 0, 0, 1, TextFormatting.YELLOW, 60 * 5, 20, 50),
-    TIER1("Celestial", LevelRanges.LOW, 0.2F, 1, 1.25F, TextFormatting.AQUA, 60 * 6, 25, 100),
-    TIER2("Empyrean", LevelRanges.MIDDLE, 0.4F, 2, 1.5F, TextFormatting.GOLD, 60 * 7, 30, 200),
-    TIER3("Angelic", LevelRanges.HIGH, 0.6F, 3, 1.75F, TextFormatting.LIGHT_PURPLE, 60 * 8, 40, 300),
-    TIER4("Divine", LevelRanges.ENDGAME, 0.8F, 4, 2, TextFormatting.DARK_PURPLE, 60 * 10, 50, 500);
+    TIER0("Spiritual", LevelRanges.STARTER, 0, 0, 1, ChatFormatting.YELLOW, 60 * 5, 20, 50),
+    TIER1("Celestial", LevelRanges.LOW, 0.2F, 1, 1.25F, ChatFormatting.AQUA, 60 * 6, 25, 100),
+    TIER2("Empyrean", LevelRanges.MIDDLE, 0.4F, 2, 1.5F, ChatFormatting.GOLD, 60 * 7, 30, 200),
+    TIER3("Angelic", LevelRanges.HIGH, 0.6F, 3, 1.75F, ChatFormatting.LIGHT_PURPLE, 60 * 8, 40, 300),
+    TIER4("Divine", LevelRanges.ENDGAME, 0.8F, 4, 2, ChatFormatting.DARK_PURPLE, 60 * 10, 50, 500);
 
-    SkillItemTier(String word, LevelRange levelRange, float lvl_req, int tier, float statMulti, TextFormatting format, int durationseconds, float percent_healed, int repairDurab) {
+    SkillItemTier(String word, LevelRange levelRange, float lvl_req, int tier, float statMulti, ChatFormatting format, int durationseconds, float percent_healed, int repairDurab) {
         this.word = word;
         this.tier = tier;
         this.statMulti = statMulti;
@@ -97,7 +97,7 @@ public enum SkillItemTier {
     public String word;
     public int tier;
     public float statMulti;
-    public TextFormatting format;
+    public ChatFormatting format;
     public int durationSeconds;
     public int repairDurab;
     public float percent_healed;

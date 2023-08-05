@@ -16,10 +16,12 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.library_of_exile.utils.LoadSave;
 import info.loenwind.autosave.annotations.Storable;
 import info.loenwind.autosave.annotations.Store;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
 import java.util.List;
+
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable.SalvageContext;
 
 @Storable
 public class StatSoulData implements ISalvagable, IRarity, ISettableLevelTier {

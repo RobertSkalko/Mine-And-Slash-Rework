@@ -1,8 +1,8 @@
 package com.robertx22.age_of_exile.uncommon.interfaces;
 
 import com.robertx22.library_of_exile.utils.CLOC;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 
 public interface IAutoLocName extends IBaseAutoLoc {
 
@@ -30,11 +30,11 @@ public interface IAutoLocName extends IBaseAutoLoc {
 
     public String locNameForLangFile();
 
-    public default IFormattableTextComponent locName(Object[] args) {
-        return new TranslationTextComponent(locNameLangFileGUID(), args);
+    public default MutableComponent locName(Object[] args) {
+        return new TranslatableComponent(locNameLangFileGUID(), args);
     }
 
-    public default IFormattableTextComponent locName() {
+    public default MutableComponent locName() {
         return CLOC.blank(getFormatedForLangFile(locNameLangFileGUID()));
     }
 

@@ -3,13 +3,13 @@ package com.robertx22.age_of_exile.uncommon.testing;
 import com.robertx22.age_of_exile.uncommon.testing.tests.GivePlayerCapNbt;
 import com.robertx22.age_of_exile.uncommon.testing.tests.PlayerLevelTest;
 import com.robertx22.age_of_exile.uncommon.testing.tests.SkillLevelTest;
-import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.server.level.ServerPlayer;
 
 import java.util.HashMap;
 
 public class CommandTests {
 
-    public static void run(String id, ServerPlayerEntity p) {
+    public static void run(String id, ServerPlayer p) {
         try {
 
             System.out.print("\n");

@@ -3,9 +3,9 @@ package com.robertx22.age_of_exile.database.data.stats.datapacks.serializers;
 import com.google.gson.JsonObject;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.base.IStatSerializer;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.AttributeStat;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Registry;
 
 import java.util.UUID;
 

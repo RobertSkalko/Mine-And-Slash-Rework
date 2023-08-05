@@ -4,9 +4,9 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.library_of_exile.components.forge.BaseProvider;
 import com.robertx22.library_of_exile.components.forge.BaseStorage;
 import com.robertx22.library_of_exile.components.forge.ICommonCap;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.chunk.Chunk;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
@@ -20,7 +20,7 @@ public class ChunkPopulatedCap implements ICommonCap {
     @Mod.EventBusSubscriber
     public static class EventHandler {
         @SubscribeEvent
-        public static void onEntityConstruct(AttachCapabilitiesEvent<Chunk> event) {
+        public static void onEntityConstruct(AttachCapabilitiesEvent<LevelChunk> event) {
             event.addCapability(RESOURCE, new Provider());
         }
     }
@@ -53,13 +53,13 @@ public class ChunkPopulatedCap implements ICommonCap {
     public boolean populated = false;
 
     @Override
-    public void loadFromNBT(CompoundNBT tag) {
+    public void loadFromNBT(CompoundTag tag) {
         this.populated = tag.getBoolean(LOC);
     }
 
     @Override
-    public CompoundNBT saveToNBT() {
-        CompoundNBT tag = new CompoundNBT();
+    public CompoundTag saveToNBT() {
+        CompoundTag tag = new CompoundTag();
         tag.putBoolean(LOC, populated);
         return tag;
     }

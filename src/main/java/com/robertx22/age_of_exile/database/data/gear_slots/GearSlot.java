@@ -11,11 +11,21 @@ import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.weapons.StaffWeapon
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.item.*;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.HashMap;
+
+import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.item.BowItem;
+import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.SwordItem;
 
 public class GearSlot implements JsonExileRegistry<GearSlot>, IAutoGson<GearSlot>, IAutoLocName {
 
@@ -108,14 +118,14 @@ public class GearSlot implements JsonExileRegistry<GearSlot>, IAutoGson<GearSlot
             } else {
 
                 if (item instanceof ArmorItem) {
-                    EquipmentSlotType eqslot = ((ArmorItem) item).getSlot();
-                    if (eqslot == EquipmentSlotType.CHEST && id.equals(GearSlots.CHEST)) {
+                    EquipmentSlot eqslot = ((ArmorItem) item).getSlot();
+                    if (eqslot == EquipmentSlot.CHEST && id.equals(GearSlots.CHEST)) {
                         bool = true;
-                    } else if (eqslot == EquipmentSlotType.LEGS && id.equals(GearSlots.PANTS)) {
+                    } else if (eqslot == EquipmentSlot.LEGS && id.equals(GearSlots.PANTS)) {
                         bool = true;
-                    } else if (eqslot == EquipmentSlotType.HEAD && id.equals(GearSlots.HELMET)) {
+                    } else if (eqslot == EquipmentSlot.HEAD && id.equals(GearSlots.HELMET)) {
                         bool = true;
-                    } else if (eqslot == EquipmentSlotType.FEET && id.equals(GearSlots.BOOTS)) {
+                    } else if (eqslot == EquipmentSlot.FEET && id.equals(GearSlots.BOOTS)) {
                         bool = true;
                     }
 

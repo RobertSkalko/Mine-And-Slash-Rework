@@ -1,13 +1,13 @@
 package com.robertx22.age_of_exile.vanilla_mc.items.gearitems.bases.armor_materials;
 
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.IArmorMaterial;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 
-public class ModArmorMaterial implements IArmorMaterial {
+public class ModArmorMaterial implements ArmorMaterial {
 
     ArmorTier tier;
     ArmorType type;
@@ -20,12 +20,12 @@ public class ModArmorMaterial implements IArmorMaterial {
     }
 
     @Override
-    public int getDurabilityForSlot(EquipmentSlotType slotIn) {
+    public int getDurabilityForSlot(EquipmentSlot slotIn) {
         return 100 + (int) (this.tier.vanillaMat.getDurabilityForSlot(slotIn) * getExtraMulti());
     }
 
     @Override
-    public int getDefenseForSlot(EquipmentSlotType slotIn) {
+    public int getDefenseForSlot(EquipmentSlot slotIn) {
         return tier.vanillaMat.getDefenseForSlot(slotIn);
     }
 

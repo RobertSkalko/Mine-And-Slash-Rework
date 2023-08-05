@@ -3,8 +3,8 @@ package com.robertx22.age_of_exile.a_libraries.curios;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.main.ForgeEvents;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.server.level.ServerPlayer;
 import top.theillusivec4.curios.api.event.CurioChangeEvent;
 
 public class CurioEvents {
@@ -20,8 +20,8 @@ public class CurioEvents {
                         data.setEquipsChanged(true);
                         data.tryRecalculateStats();
 
-                        if (entity instanceof ServerPlayerEntity) {
-                            data.syncToClient((ServerPlayerEntity) entity);
+                        if (entity instanceof ServerPlayer) {
+                            data.syncToClient((ServerPlayer) entity);
                         }
                     }
                 }

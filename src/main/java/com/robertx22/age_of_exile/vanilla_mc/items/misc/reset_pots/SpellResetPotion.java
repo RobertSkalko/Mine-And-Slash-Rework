@@ -5,16 +5,16 @@ import com.robertx22.age_of_exile.database.data.currency.base.IShapedRecipe;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
-import net.minecraft.data.ShapedRecipeBuilder;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.UseAction;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.world.World;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.level.Level;
 
 public class SpellResetPotion extends AutoItem implements IShapedRecipe {
 
@@ -29,12 +29,12 @@ public class SpellResetPotion extends AutoItem implements IShapedRecipe {
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, World world, LivingEntity player) {
+    public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity player) {
 
         stack.shrink(1);
 
-        if (player instanceof PlayerEntity) {
-            PlayerEntity p = (PlayerEntity) player;
+        if (player instanceof Player) {
+            Player p = (Player) player;
             Load.spells(p)
                 .reset();
             p.addItem(new ItemStack(Items.GLASS_BOTTLE));
@@ -44,15 +44,15 @@ public class SpellResetPotion extends AutoItem implements IShapedRecipe {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity player, Hand handIn) {
+    public InteractionResultHolder<ItemStack> use(Level worldIn, Player player, InteractionHand handIn) {
         ItemStack itemStack = player.getItemInHand(handIn);
         player.startUsingItem(handIn);
-        return ActionResult.success(itemStack);
+        return InteractionResultHolder.success(itemStack);
     }
 
     @Override
-    public UseAction getUseAnimation(ItemStack stack) {
-        return UseAction.DRINK;
+    public UseAnim getUseAnimation(ItemStack stack) {
+        return UseAnim.DRINK;
     }
 
     @Override

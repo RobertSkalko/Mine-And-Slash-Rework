@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.gui.screens.character_screen;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
@@ -41,10 +41,10 @@ import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.GuiUtils;
 import com.robertx22.library_of_exile.utils.RenderUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.widget.button.ImageButton;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -239,7 +239,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
     private static final ResourceLocation WIDE_BACKGROUND = new ResourceLocation(SlashRef.MODID, "textures/gui/full_stats_panel.png");
 
     @Override
-    public void render(MatrixStack matrix, int x, int y, float ticks) {
+    public void render(PoseStack matrix, int x, int y, float ticks) {
 
         if (isMainScreen()) {
             mc.getTextureManager()
@@ -265,7 +265,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
                 .getFreePoints(mc.player);
         if (p > 0) {
             String points = "Points: " + p;
-            mc.font.drawShadow(matrix, points, guiLeft + sizeX / 2 - mc.font.width(points) / 2, guiTop + sizeY + 25, TextFormatting.GREEN.getColor());
+            mc.font.drawShadow(matrix, points, guiLeft + sizeX / 2 - mc.font.width(points) / 2, guiTop + sizeY + 25, ChatFormatting.GREEN.getColor());
         }
 
     }
@@ -292,16 +292,16 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         }
 
         @Override
-        public void renderToolTip(MatrixStack matrix, int x, int y) {
+        public void renderToolTip(PoseStack matrix, int x, int y) {
             if (isInside(x, y)) {
 
                 Minecraft mc = Minecraft.getInstance();
 
-                List<ITextComponent> tooltip = new ArrayList<>();
+                List<Component> tooltip = new ArrayList<>();
 
                 tooltip.add(stat
                         .locName()
-                        .withStyle(TextFormatting.GREEN));
+                        .withStyle(ChatFormatting.GREEN));
 
                 tooltip.add(new SText(""));
 
@@ -320,7 +320,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         }
 
         @Override
-        public void renderButton(MatrixStack matrix, int x, int y, float f) {
+        public void renderButton(PoseStack matrix, int x, int y, float f) {
 
             super.renderButton(matrix, x, y, f);
 
@@ -333,7 +333,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
 
             RenderUtils.render16Icon(matrix, stat.getIconForRendering(), this.x - 20, this.y + 1);
 
-            mc.font.drawShadow(matrix, txt, this.x + SIZEX + 4, this.y + 4, TextFormatting.YELLOW.getColor());
+            mc.font.drawShadow(matrix, txt, this.x + SIZEX + 4, this.y + 4, ChatFormatting.YELLOW.getColor());
 
         }
 
@@ -356,13 +356,13 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         }
 
         @Override
-        public void renderToolTip(MatrixStack matrix, int x, int y) {
+        public void renderToolTip(PoseStack matrix, int x, int y) {
             if (isInside(x, y)) {
-                List<ITextComponent> tooltip = new ArrayList<>();
+                List<Component> tooltip = new ArrayList<>();
 
                 tooltip.add(stat
                         .locName()
-                        .withStyle(TextFormatting.GREEN));
+                        .withStyle(ChatFormatting.GREEN));
 
                 tooltip.addAll(stat
                         .getCutDescTooltip());
@@ -378,7 +378,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         }
 
         @Override
-        public void renderButton(MatrixStack matrix, int x, int y, float f) {
+        public void renderButton(PoseStack matrix, int x, int y, float f) {
             if (!(stat instanceof UnknownStat)) {
                 Minecraft mc = Minecraft.getInstance();
                 String str = getStatString(Load.Unit(mc.player)
@@ -394,7 +394,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
 
                 RenderUtils.render16Icon(matrix, res, this.x, this.y);
 
-                mc.font.drawShadow(matrix, str, this.x + STAT_BUTTON_SIZE_X, this.y + 2, TextFormatting.GOLD.getColor());
+                mc.font.drawShadow(matrix, str, this.x + STAT_BUTTON_SIZE_X, this.y + 2, ChatFormatting.GOLD.getColor());
 
             }
         }
@@ -445,7 +445,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         }
 
         @Override
-        public void renderButton(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+        public void renderButton(PoseStack matrices, int mouseX, int mouseY, float delta) {
             Minecraft mc = Minecraft.getInstance();
 
             super.renderButton(matrices, x, y, delta);
@@ -455,16 +455,16 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
             if (isHovered()) {
                 String txt = page.id;
                 Minecraft.getInstance().font.drawShadow(matrices,
-                        txt, this.x + SIZEX - 30 - mc.font.width(txt), this.y + 9, TextFormatting.YELLOW.getColor());
+                        txt, this.x + SIZEX - 30 - mc.font.width(txt), this.y + 9, ChatFormatting.YELLOW.getColor());
             }
 
         }
 
         @Override
-        public void renderToolTip(MatrixStack matrix, int x, int y) {
+        public void renderToolTip(PoseStack matrix, int x, int y) {
             if (isInside(x, y)) {
 
-                List<ITextComponent> tooltip = new ArrayList<>();
+                List<Component> tooltip = new ArrayList<>();
                 GuiUtils.renderTooltip(matrix, tooltip, x, y);
 
             }

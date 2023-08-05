@@ -1,10 +1,10 @@
 package com.robertx22.age_of_exile.gui.screens.spell;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.robertx22.age_of_exile.gui.screens.ILeftRight;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import net.minecraft.client.gui.widget.button.ImageButton;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.resources.ResourceLocation;
 
 public class LeftRightButton extends ImageButton {
 
@@ -28,7 +28,7 @@ public class LeftRightButton extends ImageButton {
     }
 
     @Override
-    public void renderButton(MatrixStack matrix, int x, int y, float ticks) {
+    public void renderButton(PoseStack matrix, int x, int y, float ticks) {
         super.renderButton(matrix, x, y, ticks);
     }
 

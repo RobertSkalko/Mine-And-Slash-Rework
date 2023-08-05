@@ -8,9 +8,9 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,7 +21,7 @@ public class OnLootChestEvent extends EventConsumer<ExileEvents.OnChestLooted> {
     @Override
     public void accept(ExileEvents.OnChestLooted event) {
 
-        PlayerEntity player = event.player;
+        Player player = event.player;
 
         LootInfo info = LootInfo.ofChestLoot(player, event.pos);
 
@@ -53,7 +53,7 @@ public class OnLootChestEvent extends EventConsumer<ExileEvents.OnChestLooted> {
         }
     }
 
-    private static List<Integer> mygetEmptySlotsRandomized(IInventory inventory, Random rand) {
+    private static List<Integer> mygetEmptySlotsRandomized(Container inventory, Random rand) {
         List<Integer> list = Lists.newArrayList();
 
         for (int i = 0; i < inventory.getContainerSize(); ++i) {

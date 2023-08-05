@@ -12,10 +12,12 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import info.loenwind.autosave.annotations.Factory;
 import info.loenwind.autosave.annotations.Storable;
 import info.loenwind.autosave.annotations.Store;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPart.Part;
 
 @Storable
 public class SocketData implements IGearPartTooltip, IStatsContainer {
@@ -57,8 +59,8 @@ public class SocketData implements IGearPartTooltip, IStatsContainer {
     }
 
     @Override
-    public List<ITextComponent> GetTooltipString(TooltipInfo info, GearItemData gear) {
-        List<ITextComponent> list = new ArrayList<ITextComponent>();
+    public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {
+        List<Component> list = new ArrayList<Component>();
         GetAllStats(gear).forEach(x -> list.addAll(x.GetTooltipString(info)));
         return list;
     }

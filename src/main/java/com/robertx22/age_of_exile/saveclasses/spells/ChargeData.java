@@ -5,8 +5,8 @@ import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import info.loenwind.autosave.annotations.Storable;
 import info.loenwind.autosave.annotations.Store;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.util.Mth;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,13 +28,13 @@ public class ChargeData {
         return charges.getOrDefault(id, 0) > 0;
     }
 
-    public void spendCharge(PlayerEntity player, String id) {
+    public void spendCharge(Player player, String id) {
 
         if (player.level.isClientSide) {
             return;
         }
 
-        charges.put(id, MathHelper.clamp(charges.getOrDefault(id, 0) - 1, 0, 100000));
+        charges.put(id, Mth.clamp(charges.getOrDefault(id, 0) - 1, 0, 100000));
 
         Load.spells(player)
             .syncToClient(player);
@@ -46,11 +46,11 @@ public class ChargeData {
     }
 
     public void addCharge(String id, Spell spell) {
-        int charge = MathHelper.clamp(charges.getOrDefault(id, 0) + 1, 0, spell.config.charges);
+        int charge = Mth.clamp(charges.getOrDefault(id, 0) + 1, 0, spell.config.charges);
         charges.put(id, charge);
     }
 
-    public void onTicks(PlayerEntity player, int ticks) {
+    public void onTicks(Player player, int ticks) {
 
         if (player.level.isClientSide) {
             return;

@@ -5,6 +5,8 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.BaseRegenC
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 
+import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
+
 public class MagicShieldRegen extends BaseRegenClass {
     public static String GUID = "magic_shield_regen";
 

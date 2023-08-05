@@ -5,34 +5,34 @@ import com.robertx22.age_of_exile.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.damage_hooks.util.DmgSourceUtils;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.OnScreenMessageUtils;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.play.server.STitlePacket;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.protocol.game.ClientboundSetTitlesPacket;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.util.Mth;
+import net.minecraft.network.chat.TextComponent;
 
 import java.util.List;
 
 public class LivingHurtUtils {
 
     public static int getItemDamage(float dmg) {
-        return (int) MathHelper.clamp(dmg / 10F, 1, 4);
+        return (int) Mth.clamp(dmg / 10F, 1, 4);
     }
 
     public static void damageCurioItems(LivingEntity en, float dmg) {
 
-        if (en instanceof PlayerEntity) {
+        if (en instanceof Player) {
 
-            PlayerEntity player = (PlayerEntity) en;
+            Player player = (Player) en;
 
             List<ItemStack> curios = MyCurioUtils.getAllSlots(player);
 
             curios.forEach(x -> x.hurtAndBreak(getItemDamage(dmg), player, (entity) -> {
-                entity.broadcastBreakEvent(EquipmentSlotType.MAINHAND);
+                entity.broadcastBreakEvent(EquipmentSlot.MAINHAND);
             }));
 
         }
@@ -79,14 +79,14 @@ public class LivingHurtUtils {
             data.getAttackerEntityData()
                 .tryRecalculateStats();
 
-            if (data.getAttackerEntity() instanceof PlayerEntity) {
+            if (data.getAttackerEntity() instanceof Player) {
 
                 if (weapondata == null) {
                     return;
                 }
 
                 if (!weapondata.canPlayerWear(data.getAttackerEntityData())) {
-                    OnScreenMessageUtils.sendMessage((ServerPlayerEntity) data.getAttackerEntity(), new StringTextComponent("Weapon requirements not met"), STitlePacket.Type.ACTIONBAR);
+                    OnScreenMessageUtils.sendMessage((ServerPlayer) data.getAttackerEntity(), new TextComponent("Weapon requirements not met"), ClientboundSetTitlesPacket.Type.ACTIONBAR);
                     return;
                 }
 

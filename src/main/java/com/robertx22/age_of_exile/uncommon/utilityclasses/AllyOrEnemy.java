@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,22 +29,22 @@ public enum AllyOrEnemy {
         @Override
         public boolean is(LivingEntity caster, LivingEntity target) {
 
-            if (caster instanceof PlayerEntity) {
+            if (caster instanceof Player) {
                 if (EntityFinder.isTamed(target)) {
                     return false;
                 }
-                if (target instanceof PlayerEntity) {
+                if (target instanceof Player) {
                     if (target == caster) {
                         return false;
                     }
-                    if (TeamUtils.areOnSameTeam((PlayerEntity) caster, (PlayerEntity) target)) {
+                    if (TeamUtils.areOnSameTeam((Player) caster, (Player) target)) {
                         return false;
                     } else {
                         return true;
                     }
                 }
             } else {
-                if (target instanceof PlayerEntity) {
+                if (target instanceof Player) {
                     return true;
                 } else {
                     return false;

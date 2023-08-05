@@ -2,11 +2,11 @@ package com.robertx22.age_of_exile.event_hooks.player;
 
 import com.robertx22.age_of_exile.capability.player.EntitySpellCap;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.player.Player;
 
 public class StopCastingIfInteract {
 
-    private static void stop(PlayerEntity player) {
+    private static void stop(Player player) {
         if (player.level.isClientSide) {
             return;
         }
@@ -21,7 +21,7 @@ public class StopCastingIfInteract {
     }
 
 
-    public static void interact(PlayerEntity playerEntity) {
+    public static void interact(Player playerEntity) {
         stop(playerEntity);
     }
 }

@@ -4,12 +4,12 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulData;
 import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulItem;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 public class GearSoulOnInvTick {
 
-    public static void checkAndGenerate(PlayerEntity player) {
+    public static void checkAndGenerate(Player player) {
 
         try {
 
@@ -30,7 +30,7 @@ public class GearSoulOnInvTick {
 
     }
 
-    static void tryStack(PlayerEntity player, ItemStack stack) {
+    static void tryStack(Player player, ItemStack stack) {
         if (stack.isEmpty()) {
             return;
         }

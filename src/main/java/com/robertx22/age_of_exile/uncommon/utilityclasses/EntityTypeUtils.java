@@ -2,9 +2,15 @@ package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import net.minecraft.entity.*;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.player.Player;
+
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.NeutralMob;
+import net.minecraft.world.entity.npc.Npc;
 
 public class EntityTypeUtils {
 
@@ -31,7 +37,7 @@ public class EntityTypeUtils {
             return EntityClassification.ANIMAL;
         } else if (isNPC(entity)) {
             return EntityClassification.NPC;
-        } else if (entity instanceof PlayerEntity) {
+        } else if (entity instanceof Player) {
             return EntityClassification.PLAYER;
         } else {
             return EntityClassification.OTHER;
@@ -40,10 +46,10 @@ public class EntityTypeUtils {
     }
 
     public static boolean isMob(Entity en) {
-        if (en instanceof IMob) {
+        if (en instanceof Enemy) {
             return true;
         }
-        if (en instanceof IAngerable) {
+        if (en instanceof NeutralMob) {
             return true;
         }
         if (!en.getType()
@@ -61,7 +67,7 @@ public class EntityTypeUtils {
     }
 
     public static boolean isAnimal(Entity en) {
-        return en instanceof AnimalEntity;
+        return en instanceof Animal;
     }
 
     /**
@@ -72,7 +78,7 @@ public class EntityTypeUtils {
      */
     public static boolean isNPC(Entity en) {
 
-        return en instanceof INPC;
+        return en instanceof Npc;
 
     }
 }

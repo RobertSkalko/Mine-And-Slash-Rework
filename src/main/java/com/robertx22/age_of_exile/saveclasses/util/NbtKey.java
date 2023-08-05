@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.saveclasses.util;
 
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
 
 public class NbtKey<T> {
 
@@ -21,19 +21,19 @@ public class NbtKey<T> {
         this.key = key;
     }
 
-    public void set(CompoundNBT nbt, T obj) {
+    public void set(CompoundTag nbt, T obj) {
         saving.set(nbt, key, obj);
     }
 
-    public T get(CompoundNBT nbt) {
+    public T get(CompoundTag nbt) {
         return saving.get(nbt, key);
     }
 
 
     interface INbtSaving<T> {
-        public abstract void set(CompoundNBT nbt, String key, T obj);
+        public abstract void set(CompoundTag nbt, String key, T obj);
 
-        public abstract T get(CompoundNBT nbt, String key);
+        public abstract T get(CompoundTag nbt, String key);
     }
 
     private static class Savings {
@@ -41,12 +41,12 @@ public class NbtKey<T> {
 
 
             @Override
-            public void set(CompoundNBT nbt, String key, String obj) {
+            public void set(CompoundTag nbt, String key, String obj) {
                 nbt.putString(key, obj);
             }
 
             @Override
-            public String get(CompoundNBT nbt, String key) {
+            public String get(CompoundTag nbt, String key) {
                 return nbt.getString(key);
             }
         }

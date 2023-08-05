@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.gui.overlays.spell_hotbar;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.capability.entity.CooldownsData;
 import com.robertx22.age_of_exile.capability.player.EntitySpellCap;
@@ -12,15 +12,15 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.ChatUtils;
 import com.robertx22.library_of_exile.utils.CLOC;
 import com.robertx22.library_of_exile.utils.GuiUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.ChatFormatting;
 
 import java.util.Locale;
 
-public class SpellHotbarOverlay extends AbstractGui {
+public class SpellHotbarOverlay extends GuiComponent {
 
     private static final ResourceLocation HOTBAR_TEX = new ResourceLocation(SlashRef.MODID,
         "textures/gui/spells/hotbar.png"
@@ -52,7 +52,7 @@ public class SpellHotbarOverlay extends AbstractGui {
 
     EntitySpellCap.ISpellsCap data;
 
-    public void onHudRender(MatrixStack matrix, float v) {
+    public void onHudRender(PoseStack matrix, float v) {
 
         try {
             if (mc.options.renderDebug || mc.player.isSpectator()) {
@@ -99,7 +99,7 @@ public class SpellHotbarOverlay extends AbstractGui {
 
     }
 
-    private void renderCurrentSpell(int place, int num, MatrixStack matrix) {
+    private void renderCurrentSpell(int place, int num, PoseStack matrix) {
 
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 
@@ -160,7 +160,7 @@ public class SpellHotbarOverlay extends AbstractGui {
                         float ticksleft = needed - currentticks;
 
                         float percent = ticksleft / needed;
-                        percent = MathHelper.clamp(percent, 0, 1F);
+                        percent = Mth.clamp(percent, 0, 1F);
                         drawCooldown(percent, matrix, xs, ys);
 
                     }
@@ -181,14 +181,14 @@ public class SpellHotbarOverlay extends AbstractGui {
 
                     float percent = (float) cds.getCooldownTicks(spell.GUID()) / (float) cds.getNeededTicks(spell.GUID());
                     if (cds.getCooldownTicks(spell.GUID()) > 1) {
-                        percent = MathHelper.clamp(percent, 0, 1F);
+                        percent = Mth.clamp(percent, 0, 1F);
                         drawCooldown(percent, matrix, xs, ys);
                     }
 
                     int cdsec = cds.getCooldownTicks(spell.GUID()) / 20;
                     if (cdsec > 1) {
                         String stext = cdsec + "s";
-                        GuiUtils.renderScaledText(matrix, xs + 27, ys + 10, 0.75F, stext, TextFormatting.YELLOW);
+                        GuiUtils.renderScaledText(matrix, xs + 27, ys + 10, 0.75F, stext, ChatFormatting.YELLOW);
                     }
                 }
 
@@ -200,7 +200,7 @@ public class SpellHotbarOverlay extends AbstractGui {
                     txt = txt.substring(0, 2);
                 }
                 GuiUtils.renderScaledText(matrix,
-                    xs + 14, ys + 12, 1, txt, TextFormatting.GREEN);
+                    xs + 14, ys + 12, 1, txt, ChatFormatting.GREEN);
 
             }
         } catch (Exception e) {
@@ -209,14 +209,14 @@ public class SpellHotbarOverlay extends AbstractGui {
 
     }
 
-    private void drawCooldown(float percent, MatrixStack matrix, int x, int y) {
+    private void drawCooldown(float percent, PoseStack matrix, int x, int y) {
 
         mc.getTextureManager()
             .bind(COOLDOWN_TEX);
         this.blit(matrix, x, y, 0, 0, 16, (int) (16 * percent), 16, 16);
     }
 
-    private void renderHotbar(MatrixStack matrix, int x, int y) {
+    private void renderHotbar(PoseStack matrix, int x, int y) {
 
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         mc.getTextureManager()

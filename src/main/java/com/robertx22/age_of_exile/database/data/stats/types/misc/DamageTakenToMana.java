@@ -11,6 +11,8 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 
+import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect.Priority;
+
 public class DamageTakenToMana extends Stat {
 
     private DamageTakenToMana() {

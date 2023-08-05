@@ -14,15 +14,15 @@ import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.vanilla_mc.potion_effects.IOneOfATypePotion;
 import com.robertx22.library_of_exile.registry.IGUID;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifierManager;
-import net.minecraft.potion.Effect;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeMap;
+import net.minecraft.world.effect.MobEffect;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ExileStatusEffect extends Effect implements IGUID, IApplyableStats, IOneOfATypePotion {
+public class ExileStatusEffect extends MobEffect implements IGUID, IApplyableStats, IOneOfATypePotion {
 
     String exileEffectId;
 
@@ -65,7 +65,7 @@ public class ExileStatusEffect extends Effect implements IGUID, IApplyableStats,
     }
 
     @Override
-    public void addAttributeModifiers(LivingEntity entity, AttributeModifierManager attributes, int amplifier) {
+    public void addAttributeModifiers(LivingEntity entity, AttributeMap attributes, int amplifier) {
 
         try {
             ExileEffect exect = getExileEffect();
@@ -88,7 +88,7 @@ public class ExileStatusEffect extends Effect implements IGUID, IApplyableStats,
     }
 
     @Override
-    public void removeAttributeModifiers(LivingEntity target, AttributeModifierManager attributes,
+    public void removeAttributeModifiers(LivingEntity target, AttributeMap attributes,
                                          int amplifier) {
 
         try {

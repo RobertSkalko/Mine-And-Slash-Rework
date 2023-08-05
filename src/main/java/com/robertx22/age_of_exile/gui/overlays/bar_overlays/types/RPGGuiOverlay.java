@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.gui.overlays.bar_overlays.types;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -8,11 +8,11 @@ import com.robertx22.age_of_exile.mmorpg.SyncedToClientValues;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayerGUIs;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.AbstractGui;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.resources.ResourceLocation;
 
-public class RPGGuiOverlay extends AbstractGui {
+public class RPGGuiOverlay extends GuiComponent {
 
     static ResourceLocation BASETEX = new ResourceLocation(SlashRef.MODID, "textures/gui/overlay/base.png");
     static ResourceLocation MANA_RESERVE = new ResourceLocation(SlashRef.MODID, "textures/gui/overlay/mana_reserve.png");
@@ -38,7 +38,7 @@ public class RPGGuiOverlay extends AbstractGui {
     }
 
 
-    public void onHudRender(MatrixStack matrix, float v) {
+    public void onHudRender(PoseStack matrix, float v) {
 
         try {
 
@@ -54,7 +54,7 @@ public class RPGGuiOverlay extends AbstractGui {
             }
 
 
-            PlayerEntity en = mc.player;
+            Player en = mc.player;
             EntityData data = Load.Unit(en);
 
             if (data == null) {

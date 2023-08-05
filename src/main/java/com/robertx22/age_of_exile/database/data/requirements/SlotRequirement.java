@@ -11,9 +11,9 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.wrappers.SText;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,15 +126,15 @@ public class SlotRequirement extends BaseRequirement<SlotRequirement> {
     }
 
     @Override
-    public List<ITextComponent> GetTooltipString(TooltipInfo info) {
+    public List<Component> GetTooltipString(TooltipInfo info) {
 
-        List<ITextComponent> list = new ArrayList<>();
+        List<Component> list = new ArrayList<>();
 
-        list.add(new SText(TextFormatting.GREEN + "Allowed on: "));
+        list.add(new SText(ChatFormatting.GREEN + "Allowed on: "));
 
         List<BaseGearType> copy = new ArrayList<>(this.slots);
 
-        IFormattableTextComponent comp = new SText(TextFormatting.RED + "");
+        MutableComponent comp = new SText(ChatFormatting.RED + "");
 
         List<BaseGearType> armors = ExileDB.GearTypes()
             .getFiltered(x -> x.family()

@@ -9,23 +9,23 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
 import com.robertx22.age_of_exile.uncommon.effectdatas.RestoreResourceEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.EffectType;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.network.chat.Component;
 
 import java.util.List;
 
-public abstract class FoodEffectPotion extends Effect {
+public abstract class FoodEffectPotion extends MobEffect {
 
     protected FoodEffectPotion(int color) {
-        super(EffectType.BENEFICIAL, color);
+        super(MobEffectCategory.BENEFICIAL, color);
     }
 
     public abstract ResourceType resourceType();
 
-    public abstract List<ITextComponent> GetTooltipString(TooltipInfo info, int duration, int amplifier);
+    public abstract List<Component> GetTooltipString(TooltipInfo info, int duration, int amplifier);
 
     public float getTotalRestored(EntityData data, int amplifier) {
         return Health.getInstance()
@@ -49,7 +49,7 @@ public abstract class FoodEffectPotion extends Effect {
                     return;
                 }
 
-                EffectInstance instance = en.getEffect(this);
+                MobEffectInstance instance = en.getEffect(this);
 
                 EntityData data = Load.Unit(en);
 

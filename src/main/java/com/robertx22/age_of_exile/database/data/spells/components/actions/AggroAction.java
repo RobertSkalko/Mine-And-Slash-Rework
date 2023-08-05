@@ -7,9 +7,9 @@ import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.GenerateThreatEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.ThreatGenType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -27,7 +27,7 @@ public class AggroAction extends SpellAction {
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
 
-        if (ctx.caster instanceof PlayerEntity) {
+        if (ctx.caster instanceof Player) {
             ValueCalculation calc = data.get(MapField.VALUE_CALCULATION);
             int num = calc.getCalculatedValue(ctx.levelProvider);
 
@@ -35,17 +35,17 @@ public class AggroAction extends SpellAction {
 
             targets.forEach(x -> {
 
-                if (x instanceof MobEntity) {
-                    MobEntity mob = (MobEntity) x;
+                if (x instanceof Mob) {
+                    Mob mob = (Mob) x;
 
                     if (aggro == Type.AGGRO) {
-                        GenerateThreatEvent event = new GenerateThreatEvent((PlayerEntity) ctx.caster, mob, ThreatGenType.spell, num);
+                        GenerateThreatEvent event = new GenerateThreatEvent((Player) ctx.caster, mob, ThreatGenType.spell, num);
                         event.Activate();
 
                     } else {
                         Load.Unit(mob)
                             .getThreat()
-                            .addThreat((PlayerEntity) ctx.caster, mob, -num);
+                            .addThreat((Player) ctx.caster, mob, -num);
                     }
                 }
             });

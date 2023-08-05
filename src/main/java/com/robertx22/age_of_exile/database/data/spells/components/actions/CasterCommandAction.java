@@ -3,9 +3,9 @@ package com.robertx22.age_of_exile.database.data.spells.components.actions;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.library_of_exile.utils.CommandUtils;
-import net.minecraft.command.CommandSource;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -31,7 +31,7 @@ public class CasterCommandAction extends SpellAction {
 
             Entity entity = ctx.caster;
 
-            CommandSource source = CommandUtils.getCommandSource(entity);
+            CommandSourceStack source = CommandUtils.getCommandSource(entity);
 
             ctx.caster
                 .getServer()

@@ -3,7 +3,9 @@ package com.robertx22.age_of_exile.database.data.stats.types.crafting;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
+
+import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
 
 public class IncreaseMinRarityStat extends Stat implements DoNotTransferToCraftedMarker {
 
@@ -24,7 +26,7 @@ public class IncreaseMinRarityStat extends Stat implements DoNotTransferToCrafte
         this.scaling = StatScaling.NONE;
         this.group = StatGroup.Misc;
         this.icon = "\u2748";
-        this.format = TextFormatting.BLUE.getName();
+        this.format = ChatFormatting.BLUE.getName();
 
     }
 

@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.gui.screens.spell;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -8,10 +8,10 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.utils.GuiUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.widget.button.ImageButton;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class PickHotbarButton extends ImageButton {
     }
 
     @Override
-    public void render(MatrixStack matrix, int mouseX, int mouseY, float delta) {
+    public void render(PoseStack matrix, int mouseX, int mouseY, float delta) {
         Minecraft mc = Minecraft.getInstance();
 
         Spell spell = Load.spells(mc.player)
@@ -60,10 +60,10 @@ public class PickHotbarButton extends ImageButton {
     }
 
     @Override
-    public void renderToolTip(MatrixStack matrix, int x, int y) {
+    public void renderToolTip(PoseStack matrix, int x, int y) {
         if (isInside(x, y)) {
 
-            List<ITextComponent> tooltip = new ArrayList<>();
+            List<Component> tooltip = new ArrayList<>();
 
             TooltipInfo info = new TooltipInfo(mc.player);
 
@@ -73,8 +73,8 @@ public class PickHotbarButton extends ImageButton {
             if (spell != null) {
                 tooltip.addAll(spell.GetTooltipString(info));
             } else {
-                tooltip.add(new StringTextComponent("Click to start selecting a spell to place on hotbar."));
-                tooltip.add(new StringTextComponent("Click again on desired spell to confirm"));
+                tooltip.add(new TextComponent("Click to start selecting a spell to place on hotbar."));
+                tooltip.add(new TextComponent("Click again on desired spell to confirm"));
             }
             GuiUtils.renderTooltip(matrix, tooltip, x, y);
 

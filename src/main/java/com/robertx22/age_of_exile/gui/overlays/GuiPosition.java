@@ -4,7 +4,7 @@ import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.GuiPartConfig;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public enum GuiPosition {
 
     BOTTOM_CENTER {
         @Override
-        public List<GuiPartConfig> getGuiConfig(EntityData data, PlayerEntity p) {
+        public List<GuiPartConfig> getGuiConfig(EntityData data, Player p) {
             List<GuiPartConfig> middle = new ArrayList<>();
             middle.add(new GuiPartConfig(BarGuiType.HEALTH, new PointData(-198, -22)));
             middle.add(new GuiPartConfig(BarGuiType.EXP, new PointData(-198, -11)));
@@ -39,7 +39,7 @@ public enum GuiPosition {
     },
     TOP_LEFT {
         @Override
-        public List<GuiPartConfig> getGuiConfig(EntityData data, PlayerEntity p) {
+        public List<GuiPartConfig> getGuiConfig(EntityData data, Player p) {
             List<GuiPartConfig> topleft = new ArrayList<>();
             int x = 12;
             int y = 5;
@@ -66,7 +66,7 @@ public enum GuiPosition {
     };
 
 
-    public abstract List<GuiPartConfig> getGuiConfig(EntityData data, PlayerEntity p);
+    public abstract List<GuiPartConfig> getGuiConfig(EntityData data, Player p);
 
     public abstract PointData getPos();
 

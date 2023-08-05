@@ -1,19 +1,19 @@
 package com.robertx22.age_of_exile.gui.bases;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.event_hooks.player.OnKeyPress;
 import com.robertx22.age_of_exile.mmorpg.registers.client.KeybindsRegister;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.TextComponent;
 
 public class BaseScreen extends Screen {
 
     protected BaseScreen(int width, int height) {
-        super(new StringTextComponent(""));
+        super(new TextComponent(""));
         this.sizeX = width;
         this.sizeY = height;
     }
@@ -26,7 +26,7 @@ public class BaseScreen extends Screen {
     public int sizeX = 0;
     public int sizeY = 0;
 
-    public void renderBackground(MatrixStack matrix, ResourceLocation id) {
+    public void renderBackground(PoseStack matrix, ResourceLocation id) {
 
         mc.getTextureManager()
                 .bind(id);
@@ -57,7 +57,7 @@ public class BaseScreen extends Screen {
         this.guiTop = (this.height - this.sizeY) / 2;
     }
 
-    public <T extends Widget> T publicAddButton(T w) {
+    public <T extends AbstractWidget> T publicAddButton(T w) {
         return this.addButton(w);
     }
 

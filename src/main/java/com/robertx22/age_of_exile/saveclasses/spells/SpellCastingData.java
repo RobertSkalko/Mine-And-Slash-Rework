@@ -16,12 +16,12 @@ import com.robertx22.age_of_exile.vanilla_mc.packets.NoManaPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import info.loenwind.autosave.annotations.Storable;
 import info.loenwind.autosave.annotations.Store;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.play.server.STitlePacket;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.network.protocol.game.ClientboundSetTitlesPacket;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.chat.TextComponent;
 
 import java.util.List;
 
@@ -205,7 +205,7 @@ public class SpellCastingData {
             .get(spellBeingCast);
     }
 
-    public boolean canCast(Spell spell, PlayerEntity player) {
+    public boolean canCast(Spell spell, Player player) {
 
         if (player.level.isClientSide) {
             return false;
@@ -246,11 +246,11 @@ public class SpellCastingData {
 
         LivingEntity caster = ctx.caster;
 
-        if (caster instanceof PlayerEntity == false) {
+        if (caster instanceof Player == false) {
             return true;
         }
 
-        if (((PlayerEntity) caster).isCreative()) {
+        if (((Player) caster).isCreative()) {
             return true;
         }
 
@@ -270,8 +270,8 @@ public class SpellCastingData {
         if (data != null) {
 
             if (!spell.isAllowedInDimension(caster.level)) {
-                if (caster instanceof PlayerEntity) {
-                    ((PlayerEntity) caster).displayClientMessage(new StringTextComponent("You feel an entity watching you. [Spell can not be casted in this dimension]"), false);
+                if (caster instanceof Player) {
+                    ((Player) caster).displayClientMessage(new TextComponent("You feel an entity watching you. [Spell can not be casted in this dimension]"), false);
                 }
                 return false;
             }
@@ -292,16 +292,16 @@ public class SpellCastingData {
                 }
 
                 if (!wep.canPlayerWear(ctx.data)) {
-                    if (ctx.caster instanceof PlayerEntity) {
-                        OnScreenMessageUtils.sendMessage((ServerPlayerEntity) ctx.caster, new StringTextComponent("Weapon requirements not met"), STitlePacket.Type.ACTIONBAR);
+                    if (ctx.caster instanceof Player) {
+                        OnScreenMessageUtils.sendMessage((ServerPlayer) ctx.caster, new TextComponent("Weapon requirements not met"), ClientboundSetTitlesPacket.Type.ACTIONBAR);
                     }
                     return false;
                 }
 
                 return true;
             } else {
-                if (caster instanceof ServerPlayerEntity) {
-                    Packets.sendToClient((PlayerEntity) caster, new NoManaPacket());
+                if (caster instanceof ServerPlayer) {
+                    Packets.sendToClient((Player) caster, new NoManaPacket());
                 }
             }
         }
@@ -318,13 +318,13 @@ public class SpellCastingData {
             .setOnCooldown(ctx.spell.GUID(), cd);
 
         if (ctx.spell.config.charges > 0) {
-            if (ctx.caster instanceof PlayerEntity) {
-                this.charges.spendCharge((PlayerEntity) ctx.caster, ctx.spell.config.charge_name);
+            if (ctx.caster instanceof Player) {
+                this.charges.spendCharge((Player) ctx.caster, ctx.spell.config.charge_name);
             }
         }
 
-        if (ctx.caster instanceof PlayerEntity) {
-            PlayerEntity p = (PlayerEntity) ctx.caster;
+        if (ctx.caster instanceof Player) {
+            Player p = (Player) ctx.caster;
             if (p.isCreative()) {
                 if (cd > 20) {
                     ctx.data.getCooldowns()
@@ -336,9 +336,9 @@ public class SpellCastingData {
 
         this.casting = false;
 
-        if (ctx.caster instanceof ServerPlayerEntity) {
+        if (ctx.caster instanceof ServerPlayer) {
             Load.Unit(ctx.caster)
-                .syncToClient((PlayerEntity) ctx.caster);
+                .syncToClient((Player) ctx.caster);
         }
     }
 

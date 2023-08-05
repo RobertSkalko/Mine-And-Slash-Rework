@@ -5,9 +5,11 @@ import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.types.crafting.DoNotTransferToCraftedMarker;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
 
 import java.util.List;
+
+import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
 
 public abstract class BaseCraftGridStat extends Stat implements DoNotTransferToCraftedMarker {
 
@@ -16,7 +18,7 @@ public abstract class BaseCraftGridStat extends Stat implements DoNotTransferToC
         this.scaling = StatScaling.NONE;
         this.group = StatGroup.Misc;
         this.icon = "\u2748";
-        this.format = TextFormatting.BLUE.getName();
+        this.format = ChatFormatting.BLUE.getName();
 
         this.is_long = true;
     }

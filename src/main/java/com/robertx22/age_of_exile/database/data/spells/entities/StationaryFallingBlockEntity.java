@@ -4,41 +4,43 @@ import com.google.gson.Gson;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
+import com.robertx22.age_of_exile.mixin_ducks.FallingBlockAccessor;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MoverType;
-import net.minecraft.entity.item.FallingBlockEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.IPacket;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import java.util.ArrayList;
 
 public class StationaryFallingBlockEntity extends FallingBlockEntity implements IDatapackSpellEntity {
 
-    public StationaryFallingBlockEntity(EntityType<? extends FallingBlockEntity> entityType, World world) {
+    public StationaryFallingBlockEntity(EntityType<? extends FallingBlockEntity> entityType, Level world) {
         super(SlashEntities.SIMPLE_BLOCK_ENTITY.get(), world);
     }
 
-    public StationaryFallingBlockEntity(World world, BlockPos pos, BlockState block) {
+    
+    public StationaryFallingBlockEntity(Level world, BlockPos pos, BlockState block) {
         this(SlashEntities.SIMPLE_BLOCK_ENTITY.get(), world);
         FallingBlockAccessor acc = (FallingBlockAccessor) this;
         acc.setBlockState(block);
         acc.setDestroyedOnLanding(false);
         this.blocksBuilding = true;
         this.setPos(pos.getX() + 0.5D, pos.getY() + (double) ((1.0F - this.getBbHeight()) / 2.0F), pos.getZ() + 0.5D);
-        this.setDeltaMovement(Vector3d.ZERO);
+        this.setDeltaMovement(Vec3.ZERO);
         this.xo = pos.getX();
         this.yo = pos.getY();
         this.zo = pos.getZ();
@@ -61,11 +63,11 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
 
     EntitySavedSpellData spellData;
 
-    private static final DataParameter<CompoundNBT> SPELL_DATA = EntityDataManager.defineId(StationaryFallingBlockEntity.class, DataSerializers.COMPOUND_TAG);
-    private static final DataParameter<String> ENTITY_NAME = EntityDataManager.defineId(StationaryFallingBlockEntity.class, DataSerializers.STRING);
-    private static final DataParameter<String> BLOCK = EntityDataManager.defineId(StationaryFallingBlockEntity.class, DataSerializers.STRING);
-    public static final DataParameter<Boolean> IS_FALLING = EntityDataManager.defineId(StationaryFallingBlockEntity.class, DataSerializers.BOOLEAN);
-    public static final DataParameter<Float> FALL_SPEED = EntityDataManager.defineId(StationaryFallingBlockEntity.class, DataSerializers.FLOAT);
+    private static final EntityDataAccessor<CompoundTag> SPELL_DATA = SynchedEntityData.defineId(StationaryFallingBlockEntity.class, EntityDataSerializers.COMPOUND_TAG);
+    private static final EntityDataAccessor<String> ENTITY_NAME = SynchedEntityData.defineId(StationaryFallingBlockEntity.class, EntityDataSerializers.STRING);
+    private static final EntityDataAccessor<String> BLOCK = SynchedEntityData.defineId(StationaryFallingBlockEntity.class, EntityDataSerializers.STRING);
+    public static final EntityDataAccessor<Boolean> IS_FALLING = SynchedEntityData.defineId(StationaryFallingBlockEntity.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Float> FALL_SPEED = SynchedEntityData.defineId(StationaryFallingBlockEntity.class, EntityDataSerializers.FLOAT);
 
     @Override
     public Iterable<ItemStack> getArmorSlots() {
@@ -79,7 +81,7 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
     }
 
     @Override
-    public IPacket<?> getAddEntityPacket() {
+    public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
@@ -151,7 +153,7 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
     public EntitySavedSpellData getSpellData() {
         if (level.isClientSide) {
             if (spellData == null) {
-                CompoundNBT nbt = entityData.get(SPELL_DATA);
+                CompoundTag nbt = entityData.get(SPELL_DATA);
                 if (nbt != null) {
                     this.spellData = GSON.fromJson(nbt.getString("spell"), EntitySavedSpellData.class);
                 }
@@ -162,7 +164,7 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
 
     @Override
     protected void defineSynchedData() {
-        this.entityData.define(SPELL_DATA, new CompoundNBT());
+        this.entityData.define(SPELL_DATA, new CompoundTag());
         this.entityData.define(ENTITY_NAME, "");
         this.entityData.define(BLOCK, "");
         this.entityData.define(IS_FALLING, false);
@@ -182,7 +184,7 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
                 .intValue();
 
         data.item_id = holder.get(MapField.ITEM);
-        CompoundNBT nbt = new CompoundNBT();
+        CompoundTag nbt = new CompoundTag();
         nbt.putString("spell", GSON.toJson(spellData));
         entityData.set(SPELL_DATA, nbt);
         entityData.set(ENTITY_NAME, holder.get(MapField.ENTITY_NAME));

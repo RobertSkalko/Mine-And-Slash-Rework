@@ -6,8 +6,8 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.Utilities;
 import info.loenwind.autosave.annotations.Storable;
 import info.loenwind.autosave.annotations.Store;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -37,7 +37,7 @@ public class EntitySavedSpellData {
     // this is buggy in dev because the player's UUID changes (random name each time game is started)
     // so after restart of game, the caster is null
     // but works fine outside of dev
-    public LivingEntity getCaster(World world) {
+    public LivingEntity getCaster(Level world) {
         try {
             return Utilities.getLivingEntityByUUID(world, UUID.fromString(caster_uuid));
         } catch (Exception e) {

@@ -16,10 +16,10 @@ import com.robertx22.age_of_exile.mmorpg.registers.common.SlashPotions;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
-import net.minecraft.item.Items;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.world.item.Items;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.sounds.SoundEvents;
 
 import java.util.Arrays;
 
@@ -56,7 +56,7 @@ public class DexSpells implements ExileRegistryInit {
             .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.AIR, 1D, 2D, SlashEntities.SIMPLE_PROJECTILE.get(), 20D, false)
                 .put(MapField.IS_SILENT, true)
             ))
-            .onHit(PartBuilder.justAction(SpellAction.POTION.createGive(Effects.GLOWING, 20 * 10D))
+            .onHit(PartBuilder.justAction(SpellAction.POTION.createGive(MobEffects.GLOWING, 20 * 10D))
                 .addActions(SpellAction.POTION.createGive(SlashPotions.KNOCKBACK_RESISTANCE.get(), 20 * 10D))
                 .addActions(SpellAction.EXILE_EFFECT.giveSeconds(NegativeEffects.MARK_OF_DEATH, 10))
                 .addTarget(TargetSelector.TARGET.create()))

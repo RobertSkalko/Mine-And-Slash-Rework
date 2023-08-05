@@ -7,12 +7,12 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.vanilla_mc.potion_effects.types.ExileStatusEffect;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.play.server.SPlayEntityEffectPacket;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.util.Mth;
 
 public class ExilePotionEvent extends EffectEvent {
 
@@ -55,7 +55,7 @@ public class ExilePotionEvent extends EffectEvent {
         int duration = (int) data.getNumber(EventData.EFFECT_DURATION_TICKS).number;
 
         if (effect.id.contains("35")) {
-            byte effectId = (byte) (Effect.getId(effect.getStatusEffect()) & 255);
+            byte effectId = (byte) (MobEffect.getId(effect.getStatusEffect()) & 255);
 
             System.out.print(effectId);
         }
@@ -68,7 +68,7 @@ public class ExilePotionEvent extends EffectEvent {
                 .get(status);
 
             extraData.stacks -= stacks;
-            extraData.stacks = MathHelper.clamp(extraData.stacks, 0, 1000);
+            extraData.stacks = Mth.clamp(extraData.stacks, 0, 1000);
             extraData.str_multi = data.getNumber();
 
             if (extraData.stacks < 1) {
@@ -83,7 +83,7 @@ public class ExilePotionEvent extends EffectEvent {
                 .trySync();
         } else {
 
-            EffectInstance instance = target.getEffect(status);
+            MobEffectInstance instance = target.getEffect(status);
             ExileEffectInstanceData extraData;
 
             if (instance != null) {
@@ -94,7 +94,7 @@ public class ExilePotionEvent extends EffectEvent {
                     extraData = new ExileEffectInstanceData();
                 } else {
                     extraData.stacks++;
-                    extraData.stacks = MathHelper.clamp(extraData.stacks, 1, effect.max_stacks);
+                    extraData.stacks = Mth.clamp(extraData.stacks, 1, effect.max_stacks);
                 }
             } else {
                 extraData = new ExileEffectInstanceData();
@@ -106,7 +106,7 @@ public class ExilePotionEvent extends EffectEvent {
 
             extraData.str_multi = data.getNumber();
 
-            EffectInstance newInstance = new EffectInstance(status, duration, extraData.stacks, false, false, true);
+            MobEffectInstance newInstance = new MobEffectInstance(status, duration, extraData.stacks, false, false, true);
 
             Load.Unit(target)
                 .getStatusEffectsData()
@@ -120,11 +120,11 @@ public class ExilePotionEvent extends EffectEvent {
             }
 
             // sync packets to client
-            SPlayEntityEffectPacket packet = new SPlayEntityEffectPacket(target.getId(), newInstance);
+            ClientboundUpdateMobEffectPacket packet = new ClientboundUpdateMobEffectPacket(target.getId(), newInstance);
 
             PlayerUtils.getNearbyPlayers(target, 50D)
                 .forEach((x) -> {
-                    ServerPlayerEntity server = (ServerPlayerEntity) x;
+                    ServerPlayer server = (ServerPlayer) x;
                     server.connection.send(packet);
                 });
 

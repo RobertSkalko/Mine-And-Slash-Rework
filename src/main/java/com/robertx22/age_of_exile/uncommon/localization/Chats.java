@@ -5,6 +5,8 @@ import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 
 import java.util.Locale;
 
+import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
+
 public enum Chats implements IAutoLocName {
 
     Dev_tools_enabled_contact_the_author("Devs tools enabled, if you see this please contact the author of Age of Exile [robertx22], he forgot to disable them!"),

@@ -5,10 +5,10 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.MyDam
 import com.robertx22.age_of_exile.mixin_ducks.LivingEntityAccesor;
 import com.robertx22.age_of_exile.mixin_methods.CanEntityHavePotionMixin;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.HealthUtils;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.sounds.SoundEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.gen.Invoker;
@@ -80,7 +80,7 @@ public abstract class LivingEntityMixin implements LivingEntityAccesor {
     // ENSURE MY SPECIAL DAMAGE ISNT LOWERED BY ARMOR, ENCHANTS ETC
 
     @Inject(method = "canBeAffected(Lnet/minecraft/potion/EffectInstance;)Z", at = @At(value = "HEAD"), cancellable = true)
-    public void hook(EffectInstance effect, CallbackInfoReturnable<Boolean> ci) {
+    public void hook(MobEffectInstance effect, CallbackInfoReturnable<Boolean> ci) {
         try {
             LivingEntity en = (LivingEntity) (Object) this;
             CanEntityHavePotionMixin.hook(en, effect, ci);

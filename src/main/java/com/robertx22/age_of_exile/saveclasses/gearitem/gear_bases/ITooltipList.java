@@ -1,19 +1,19 @@
 package com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases;
 
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.network.chat.Component;
 
 import java.util.List;
 
 public interface ITooltipList {
 
-    public default List<ITextComponent> GetTooltipStringWithNoExtraSpellInfo(TooltipInfo info) {
+    public default List<Component> GetTooltipStringWithNoExtraSpellInfo(TooltipInfo info) {
         info.showAbilityExtraInfo = false;
-        List<ITextComponent> list = GetTooltipString(info);
+        List<Component> list = GetTooltipString(info);
         info.showAbilityExtraInfo = true;
         return list;
     }
 
-    public abstract List<ITextComponent> GetTooltipString(TooltipInfo info);
+    public abstract List<Component> GetTooltipString(TooltipInfo info);
 }
 
 

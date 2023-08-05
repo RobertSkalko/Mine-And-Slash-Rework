@@ -4,11 +4,11 @@ import com.robertx22.age_of_exile.database.data.currency.loc_reqs.BaseLocRequire
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.ChatFormatting;
 
 import java.util.List;
 
@@ -30,19 +30,19 @@ public interface ICurrencyItemEffect {
         return true;
     }
 
-    public default void addToTooltip(List<ITextComponent> tooltip) {
+    public default void addToTooltip(List<Component> tooltip) {
 
         if (Screen.hasShiftDown()) {
-            tooltip.add(TooltipUtils.color(TextFormatting.RED, Words.Requirements.locName()
+            tooltip.add(TooltipUtils.color(ChatFormatting.RED, Words.Requirements.locName()
                     .append(": ")));
 
             for (BaseLocRequirement req : requirements()) {
-                tooltip.add(TooltipUtils.color(TextFormatting.RED,
-                        new StringTextComponent(" * ").append(req.getText())
+                tooltip.add(TooltipUtils.color(ChatFormatting.RED,
+                        new TextComponent(" * ").append(req.getText())
                 ));
             }
         } else {
-            tooltip.add(TooltipUtils.color(TextFormatting.GREEN, Words.PressShiftForRequirements.locName()));
+            tooltip.add(TooltipUtils.color(ChatFormatting.GREEN, Words.PressShiftForRequirements.locName()));
 
         }
     }

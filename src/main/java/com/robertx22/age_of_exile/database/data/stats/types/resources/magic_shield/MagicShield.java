@@ -6,9 +6,11 @@ import com.robertx22.age_of_exile.saveclasses.DeathStatsData;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.util.Mth;
+import net.minecraft.ChatFormatting;
+
+import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
 
 public class MagicShield extends Stat {
     public static String GUID = "magic_shield";
@@ -20,7 +22,7 @@ public class MagicShield extends Stat {
 
         this.order = 0;
         this.icon = "\u2764";
-        this.format = TextFormatting.LIGHT_PURPLE.getName();
+        this.format = ChatFormatting.LIGHT_PURPLE.getName();
 
     }
 
@@ -63,12 +65,12 @@ public class MagicShield extends Stat {
         if (current > 0) {
 
 
-            float dmgReduced = MathHelper.clamp(dmg, 0, current);
+            float dmgReduced = Mth.clamp(dmg, 0, current);
 
             if (dmgReduced > 0) {
 
-                if (effect.target instanceof PlayerEntity) {
-                    DeathStatsData.record((PlayerEntity) effect.target, effect.getElement(), dmgReduced);
+                if (effect.target instanceof Player) {
+                    DeathStatsData.record((Player) effect.target, effect.getElement(), dmgReduced);
                 }
 
                 effect.targetData.getResources()

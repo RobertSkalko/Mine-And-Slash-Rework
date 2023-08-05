@@ -15,13 +15,13 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.*;
 import com.robertx22.age_of_exile.vanilla_mc.packets.SyncAreaLevelPacket;
 import com.robertx22.age_of_exile.vanilla_mc.packets.spells.TellClientEntityIsCastingSpellPacket;
 import com.robertx22.library_of_exile.main.Packets;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.ChatFormatting;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,7 +59,7 @@ public class OnServerTick {
                     .getUnit()
                     .energyData()
                     .getValue() / 10) {
-                player.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 20 * 3, 1));
+                player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 3, 1));
             }
 
             UnequipGear.onTick(player);
@@ -185,10 +185,10 @@ public class OnServerTick {
                     if (wasnt && data.isInHighLvlZone) {
                         OnScreenMessageUtils.sendMessage(
                                 player,
-                                new StringTextComponent("YOU ARE ENTERING").withStyle(TextFormatting.RED)
-                                        .withStyle(TextFormatting.BOLD),
-                                new StringTextComponent("A HIGH LEVEL ZONE").withStyle(TextFormatting.RED)
-                                        .withStyle(TextFormatting.BOLD));
+                                new TextComponent("YOU ARE ENTERING").withStyle(ChatFormatting.RED)
+                                        .withStyle(ChatFormatting.BOLD),
+                                new TextComponent("A HIGH LEVEL ZONE").withStyle(ChatFormatting.RED)
+                                        .withStyle(ChatFormatting.BOLD));
                     }
                 }
             }
@@ -200,7 +200,7 @@ public class OnServerTick {
 
     public static void onEndTick(MinecraftServer server) {
 
-        for (ServerPlayerEntity player : server.getPlayerList()
+        for (ServerPlayer player : server.getPlayerList()
                 .getPlayers()) {
 
             try {
@@ -228,7 +228,7 @@ public class OnServerTick {
 
         public boolean isInHighLvlZone = false;
 
-        public void tick(ServerPlayerEntity player) {
+        public void tick(ServerPlayer player) {
             TICK_ACTIONS.forEach(x -> {
                 x.tick(player, this);
             });
@@ -239,15 +239,15 @@ public class OnServerTick {
 
         public final String name;
         public final int ticksNeeded;
-        private final BiConsumer<ServerPlayerEntity, PlayerTickData> action;
+        private final BiConsumer<ServerPlayer, PlayerTickData> action;
 
-        public PlayerTickAction(String name, int ticksNeeded, BiConsumer<ServerPlayerEntity, PlayerTickData> action) {
+        public PlayerTickAction(String name, int ticksNeeded, BiConsumer<ServerPlayer, PlayerTickData> action) {
             this.ticksNeeded = ticksNeeded;
             this.name = name;
             this.action = action;
         }
 
-        public void tick(ServerPlayerEntity player, PlayerTickData data) {
+        public void tick(ServerPlayer player, PlayerTickData data) {
             int ticks = data.ticks.getOrDefault(name, 0);
             ticks++;
 

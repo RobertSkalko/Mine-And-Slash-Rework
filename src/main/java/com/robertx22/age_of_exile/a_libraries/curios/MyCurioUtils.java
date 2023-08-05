@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.a_libraries.curios;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.capability.ICuriosItemHandler;
 import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
@@ -15,11 +15,11 @@ public class MyCurioUtils {
 
     public static List<String> SLOTS = Arrays.asList("ring", "necklace");
 
-    public static List<ICurioStacksHandler> getHandlers(PlayerEntity player) {
+    public static List<ICurioStacksHandler> getHandlers(Player player) {
         return getHandlers(SLOTS, player);
     }
 
-    public static List<ICurioStacksHandler> getHandlers(List<String> slots, PlayerEntity player) {
+    public static List<ICurioStacksHandler> getHandlers(List<String> slots, Player player) {
 
         List<ICurioStacksHandler> list = new ArrayList<>();
 
@@ -41,12 +41,12 @@ public class MyCurioUtils {
         return list;
     }
 
-    public static List<ItemStack> getAllSlots(PlayerEntity player) {
+    public static List<ItemStack> getAllSlots(Player player) {
         return getAllSlots(SLOTS, player);
 
     }
 
-    public static ItemStack get(String slot, PlayerEntity player, int num) {
+    public static ItemStack get(String slot, Player player, int num) {
 
         List<ItemStack> list = getAllSlots(Arrays.asList(slot), player);
 
@@ -57,7 +57,7 @@ public class MyCurioUtils {
         }
     }
 
-    public static List<ItemStack> getAllSlots(List<String> slots, PlayerEntity player) {
+    public static List<ItemStack> getAllSlots(List<String> slots, Player player) {
 
         List<ItemStack> list = new ArrayList<>();
 

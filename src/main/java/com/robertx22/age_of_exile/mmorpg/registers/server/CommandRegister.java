@@ -17,7 +17,7 @@ import com.robertx22.age_of_exile.vanilla_mc.commands.stats.GiveStat;
 import com.robertx22.age_of_exile.vanilla_mc.commands.stats.ListStats;
 import com.robertx22.age_of_exile.vanilla_mc.commands.stats.RemoveStat;
 import com.robertx22.age_of_exile.vanilla_mc.commands.test_build.TestBuild;
-import net.minecraft.command.CommandSource;
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.MinecraftServer;
 
 public class CommandRegister {
@@ -25,7 +25,7 @@ public class CommandRegister {
     public static void Register(MinecraftServer server) {
         System.out.println("Registering Age of Exile Commands.");
 
-        CommandDispatcher<CommandSource> dispatcher = server.getCommands()
+        CommandDispatcher<CommandSourceStack> dispatcher = server.getCommands()
                 .getDispatcher();
 
         GiveExactUnique.register(dispatcher);

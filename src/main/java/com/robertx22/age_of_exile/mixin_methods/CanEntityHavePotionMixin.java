@@ -1,20 +1,20 @@
 package com.robertx22.age_of_exile.mixin_methods;
 
 import com.robertx22.age_of_exile.vanilla_mc.potion_effects.IOneOfATypePotion;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectInstance;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 public class CanEntityHavePotionMixin {
 
-    public static void hook(LivingEntity en, EffectInstance effect, CallbackInfoReturnable<Boolean> ci) {
+    public static void hook(LivingEntity en, MobEffectInstance effect, CallbackInfoReturnable<Boolean> ci) {
         if (!canAddPotion(en, effect.getEffect())) {
             ci.setReturnValue(false);
         }
     }
 
-    public static boolean canAddPotion(LivingEntity en, Effect effect) {
+    public static boolean canAddPotion(LivingEntity en, MobEffect effect) {
 
         try {
 

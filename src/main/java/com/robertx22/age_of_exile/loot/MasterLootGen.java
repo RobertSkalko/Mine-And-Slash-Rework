@@ -9,9 +9,9 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ItemUtils;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.utils.SoundUtils;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +87,7 @@ public class MasterLootGen {
                 .collect(Collectors.toList());
     }
 
-    public static List<ItemStack> generateLoot(LivingEntity victim, PlayerEntity killer) {
+    public static List<ItemStack> generateLoot(LivingEntity victim, Player killer) {
 
         LootInfo info = LootInfo.ofMobKilled(killer, victim);
         List<ItemStack> items = generateLoot(info);
@@ -95,7 +95,7 @@ public class MasterLootGen {
         return items;
     }
 
-    public static void genAndDrop(LivingEntity victim, PlayerEntity killer) {
+    public static void genAndDrop(LivingEntity victim, Player killer) {
         List<ItemStack> items = generateLoot(victim, killer);
         for (ItemStack stack : items) {
 

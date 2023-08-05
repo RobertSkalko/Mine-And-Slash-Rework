@@ -10,10 +10,10 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 
 public class LootInfo {
 
@@ -33,8 +33,8 @@ public class LootInfo {
     public EntityData mobData;
     public EntityData playerData;
     public LivingEntity mobKilled;
-    public PlayerEntity player;
-    public World world;
+    public Player player;
+    public Level world;
     public float multi = 1;
     private int minItems = 0;
     private int maxItems = 50;
@@ -52,7 +52,7 @@ public class LootInfo {
         return maxItems;
     }
 
-    public static LootInfo ofMobKilled(PlayerEntity player, LivingEntity mob) {
+    public static LootInfo ofMobKilled(Player player, LivingEntity mob) {
 
         LootInfo info = new LootInfo(LootOrigin.MOB);
 
@@ -74,7 +74,7 @@ public class LootInfo {
         return info;
     }
 
-    public static LootInfo ofPlayer(PlayerEntity player) {
+    public static LootInfo ofPlayer(Player player) {
         LootInfo info = new LootInfo(LootOrigin.PLAYER);
         info.world = player.level;
         info.pos = player.blockPosition();
@@ -82,7 +82,7 @@ public class LootInfo {
         return info;
     }
 
-    public static LootInfo ofChestLoot(PlayerEntity player, BlockPos pos) {
+    public static LootInfo ofChestLoot(Player player, BlockPos pos) {
         LootInfo info = new LootInfo(LootOrigin.CHEST);
         info.player = player;
         info.world = player.level;
@@ -109,7 +109,7 @@ public class LootInfo {
         return info;
     }
 
-    public static LootInfo ofLockedChestItem(PlayerEntity player, int level) {
+    public static LootInfo ofLockedChestItem(Player player, int level) {
         LootInfo info = new LootInfo(LootOrigin.LOOT_CRATE);
         info.player = player;
         info.world = player.level;
@@ -124,7 +124,7 @@ public class LootInfo {
         return info;
     }
 
-    public static LootInfo ofSpawner(PlayerEntity player, World world, BlockPos pos) {
+    public static LootInfo ofSpawner(Player player, Level world, BlockPos pos) {
         LootInfo info = new LootInfo(LootOrigin.OTHER);
         info.world = world;
         info.pos = pos;

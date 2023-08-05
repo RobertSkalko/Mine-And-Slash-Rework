@@ -13,17 +13,17 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.VanillaMaterial;
-import net.minecraft.enchantment.EnchantmentData;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.EnchantedBookItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.EnchantedBookItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.ModList;
 
 import java.util.ArrayList;
@@ -32,6 +32,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+
+import net.minecraft.world.item.Item.Properties;
 
 public class ItemNewbieGearBag extends Item {
 
@@ -47,7 +49,7 @@ public class ItemNewbieGearBag extends Item {
     static {
     }
 
-    static void giveNewbieItemsFor(PlayerEntity player, Perk perk) {
+    static void giveNewbieItemsFor(Player player, Perk perk) {
 
         NewbieContent c = defaultContent;
 
@@ -77,7 +79,7 @@ public class ItemNewbieGearBag extends Item {
             return this;
         }
 
-        public void give(PlayerEntity player) {
+        public void give(Player player) {
 
             items.forEach(x -> PlayerUtils.giveItem(new ItemStack(x.get()), player));
 
@@ -97,7 +99,7 @@ public class ItemNewbieGearBag extends Item {
 
                 ItemStack stack = GearSoulLootGen.createSoulBasedOnGear(b);
 
-                EnchantedBookItem.addEnchantment(stack, new EnchantmentData(Enchantments.UNBREAKING, 3));
+                EnchantedBookItem.addEnchantment(stack, new EnchantmentInstance(Enchantments.UNBREAKING, 3));
 
                 PlayerUtils.giveItem(stack, player);
 
@@ -108,7 +110,7 @@ public class ItemNewbieGearBag extends Item {
     }
 
     @Override
-    public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+    public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
 
         if (!worldIn.isClientSide) {
             try {
@@ -143,16 +145,16 @@ public class ItemNewbieGearBag extends Item {
                             .shrink(1);
 
                 } else {
-                    playerIn.displayClientMessage(new StringTextComponent("Choose your path to open this. (Press [H] and then open Talent Tree scren"), false);
+                    playerIn.displayClientMessage(new TextComponent("Choose your path to open this. (Press [H] and then open Talent Tree scren"), false);
                 }
 
-                return new ActionResult<ItemStack>(ActionResultType.PASS, playerIn.getItemInHand(handIn));
+                return new InteractionResultHolder<ItemStack>(InteractionResult.PASS, playerIn.getItemInHand(handIn));
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return new ActionResult<ItemStack>(ActionResultType.PASS, playerIn.getItemInHand(handIn));
+        return new InteractionResultHolder<ItemStack>(InteractionResult.PASS, playerIn.getItemInHand(handIn));
     }
 
     private static GearBlueprint getBlueprint(BaseGearType type) {

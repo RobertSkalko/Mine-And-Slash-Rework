@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.database.data.value_calc;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.world.entity.LivingEntity;
 
 public class LevelProvider {
 

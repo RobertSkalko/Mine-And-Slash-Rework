@@ -21,11 +21,11 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import info.loenwind.autosave.annotations.Storable;
 import info.loenwind.autosave.annotations.Store;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.ChatFormatting;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -33,6 +33,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable.SalvageContext;
 
 @Storable
 public class GearItemData implements ICommonDataItem<GearRarity> {
@@ -184,7 +186,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
                 .get(this.rarity);
     }
 
-    public ITextComponent name(ItemStack stack) {
+    public Component name(ItemStack stack) {
         return stack.getHoverName();
     }
 
@@ -199,10 +201,10 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
                 .get(gear_type);
     }
 
-    public List<IFormattableTextComponent> GetDisplayName(ItemStack stack) {
+    public List<MutableComponent> GetDisplayName(ItemStack stack) {
 
         try {
-            TextFormatting format = this.getRarity()
+            ChatFormatting format = this.getRarity()
                     .textFormatting();
 
             if (useFullAffixedName()) {
@@ -221,12 +223,12 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     }
 
 
-    private List<IFormattableTextComponent> getFullAffixedName() {
-        List<IFormattableTextComponent> list = new ArrayList<>();
-        TextFormatting format = this.getRarity()
+    private List<MutableComponent> getFullAffixedName() {
+        List<MutableComponent> list = new ArrayList<>();
+        ChatFormatting format = this.getRarity()
                 .textFormatting();
 
-        IFormattableTextComponent text = new StringTextComponent("");
+        MutableComponent text = new TextComponent("");
 
         if (affixes.hasPrefix()) {
 
@@ -260,18 +262,18 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
     }
 
-    private List<IFormattableTextComponent> getUniqueName() {
-        List<IFormattableTextComponent> list = new ArrayList<>();
-        TextFormatting format = this.getRarity()
+    private List<MutableComponent> getUniqueName() {
+        List<MutableComponent> list = new ArrayList<>();
+        ChatFormatting format = this.getRarity()
                 .textFormatting();
 
         UniqueGear uniq = this.uniqueStats.getUnique(this);
 
-        IFormattableTextComponent txt = new StringTextComponent("").append(uniq.locName()
+        MutableComponent txt = new TextComponent("").append(uniq.locName()
                 .withStyle(format));
 
         if (!uniq.replaces_name) {
-            txt.append(new StringTextComponent(format + " ").append(GetBaseGearType().locName()
+            txt.append(new TextComponent(format + " ").append(GetBaseGearType().locName()
                     .withStyle(format)));
         }
 
@@ -280,9 +282,9 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         return list;
     }
 
-    private List<IFormattableTextComponent> getTooManyAffixesName() {
-        List<IFormattableTextComponent> list = new ArrayList<>();
-        TextFormatting format = this.getRarity()
+    private List<MutableComponent> getTooManyAffixesName() {
+        List<MutableComponent> list = new ArrayList<>();
+        ChatFormatting format = this.getRarity()
                 .textFormatting();
 
         Words prefix = RareItemAffixNames.getPrefix(this);
@@ -290,15 +292,15 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
         if (prefix != null && suffix != null) {
 
-            IFormattableTextComponent txt = new StringTextComponent("");
+            MutableComponent txt = new TextComponent("");
 
-            txt.append(new StringTextComponent("").append(prefix.locName())
+            txt.append(new TextComponent("").append(prefix.locName())
                     .append(" "));
 
-            txt.append(new StringTextComponent("").append(suffix.locName())
+            txt.append(new TextComponent("").append(suffix.locName())
                     .withStyle(format));
 
-            txt.append(new StringTextComponent(" ").append(GetBaseGearType().locName()));
+            txt.append(new TextComponent(" ").append(GetBaseGearType().locName()));
 
             txt.withStyle(format);
 

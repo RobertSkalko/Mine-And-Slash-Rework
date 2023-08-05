@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.uncommon.enumclasses;
 
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,19 +8,19 @@ import java.util.stream.Collectors;
 
 public enum Elements {
 
-    Physical(false, true, "Physical", TextFormatting.GOLD, "physical", "\u2726"),
-    Fire(true, true, "Fire", TextFormatting.RED, "fire", "\u2600"),
-    Cold(true, true, "Cold", TextFormatting.AQUA, "water", "\u2749"),
-    Lightning(true, true, "Lightning", TextFormatting.YELLOW, "lightning", "\u2749"),
-    Chaos(false, true, "Chaos", TextFormatting.DARK_PURPLE, "chaos", "\u273F"),
+    Physical(false, true, "Physical", ChatFormatting.GOLD, "physical", "\u2726"),
+    Fire(true, true, "Fire", ChatFormatting.RED, "fire", "\u2600"),
+    Cold(true, true, "Cold", ChatFormatting.AQUA, "water", "\u2749"),
+    Lightning(true, true, "Lightning", ChatFormatting.YELLOW, "lightning", "\u2749"),
+    Chaos(false, true, "Chaos", ChatFormatting.DARK_PURPLE, "chaos", "\u273F"),
 
-    Elemental(true, false, "Elemental", TextFormatting.LIGHT_PURPLE, "elemental", "\u269C"),
-    All(false, false, "All", TextFormatting.LIGHT_PURPLE, "all", "\u273F");
+    Elemental(true, false, "Elemental", ChatFormatting.LIGHT_PURPLE, "elemental", "\u269C"),
+    All(false, false, "All", ChatFormatting.LIGHT_PURPLE, "all", "\u273F");
 
     public boolean isSingle = true;
     public boolean isElemental = false;
 
-    Elements(boolean isElemental, boolean isSingle, String dmgname, TextFormatting format, String guidname, String icon) {
+    Elements(boolean isElemental, boolean isSingle, String dmgname, ChatFormatting format, String guidname, String icon) {
 
         this.isElemental = isElemental;
         this.isSingle = isSingle;
@@ -34,7 +34,7 @@ public enum Elements {
     public String guidName;
     public String icon;
 
-    public TextFormatting format;
+    public ChatFormatting format;
 
     public String getIconNameDmg() {
         return getIconNameFormat(dmgName) + " Damage";
@@ -45,7 +45,7 @@ public enum Elements {
     }
 
     public String getIconNameFormat(String str) {
-        return this.format + this.icon + " " + str + TextFormatting.GRAY;
+        return this.format + this.icon + " " + str + ChatFormatting.GRAY;
     }
 
     public boolean isPhysical() {

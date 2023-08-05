@@ -14,12 +14,12 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.DashUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
-import net.minecraft.block.Block;
-import net.minecraft.particles.BasicParticleType;
-import net.minecraft.potion.Effect;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.core.Registry;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
@@ -63,7 +63,7 @@ public class MapHolder {
         return AttackType.valueOf(get(MapField.DMG_EFFECT_TYPE));
     }
 
-    public Effect getPotion() {
+    public MobEffect getPotion() {
         return Registry.MOB_EFFECT.get(new ResourceLocation(get(POTION_ID)));
     }
 
@@ -101,8 +101,8 @@ public class MapHolder {
         }
     }
 
-    public BasicParticleType getParticle() {
-        return (BasicParticleType) Registry.PARTICLE_TYPE.get(new ResourceLocation(get(MapField.PARTICLE_TYPE)));
+    public SimpleParticleType getParticle() {
+        return (SimpleParticleType) Registry.PARTICLE_TYPE.get(new ResourceLocation(get(MapField.PARTICLE_TYPE)));
     }
 
     public Block getBlock() {

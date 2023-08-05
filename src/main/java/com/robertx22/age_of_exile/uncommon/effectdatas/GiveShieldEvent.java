@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.uncommon.effectdatas;
 
 import com.robertx22.age_of_exile.saveclasses.unit.AllShieldsData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.world.entity.LivingEntity;
 
 public class GiveShieldEvent extends EffectEvent {
 

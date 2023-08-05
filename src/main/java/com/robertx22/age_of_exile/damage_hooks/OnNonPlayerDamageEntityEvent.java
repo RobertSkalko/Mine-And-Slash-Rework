@@ -5,7 +5,7 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.MyDam
 import com.robertx22.age_of_exile.mixin_methods.OnHurtEvent;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.player.Player;
 
 public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDamageEntity> {
 
@@ -21,7 +21,7 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
             //     OnDmgDisableEnviroDmg.accept(event);
             return;
         }
-        if (!(event.source.getEntity() instanceof PlayerEntity)) {
+        if (!(event.source.getEntity() instanceof Player)) {
             // todo, i'm not sure if i want to override vanila damage or keep using both...
             OnHurtEvent.onHurtEvent(new AttackInformation(event, AttackInformation.Mitigation.PRE, event.mob, event.source, event.damage));
         }

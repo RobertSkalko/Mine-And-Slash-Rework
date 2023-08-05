@@ -11,39 +11,41 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.Utilities;
 import com.robertx22.library_of_exile.utils.SoundUtils;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.boss.dragon.EnderDragonPartEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.entity.projectile.ProjectileHelper;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.IPacket;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.boss.EnderDragonPart;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRenderAsItem, IDatapackSpellEntity {
+import net.minecraft.world.entity.projectile.AbstractArrow.Pickup;
+
+public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAsItem, IDatapackSpellEntity {
 
     EntitySavedSpellData spellData;
 
@@ -55,13 +57,13 @@ public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRe
 
     private int ticksInGround = 0;
 
-    private static final DataParameter<CompoundNBT> SPELL_DATA = EntityDataManager.defineId(SimpleProjectileEntity.class, DataSerializers.COMPOUND_TAG);
-    private static final DataParameter<String> ENTITY_NAME = EntityDataManager.defineId(SimpleProjectileEntity.class, DataSerializers.STRING);
-    private static final DataParameter<Boolean> EXPIRE_ON_ENTITY_HIT = EntityDataManager.defineId(SimpleProjectileEntity.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> HIT_ALLIES = EntityDataManager.defineId(SimpleProjectileEntity.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> PIERCE = EntityDataManager.defineId(SimpleProjectileEntity.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Integer> DEATH_TIME = EntityDataManager.defineId(SimpleProjectileEntity.class, DataSerializers.INT);
-    private static final DataParameter<Boolean> EXPIRE_ON_BLOCK_HIT = EntityDataManager.defineId(SimpleProjectileEntity.class, DataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<CompoundTag> SPELL_DATA = SynchedEntityData.defineId(SimpleProjectileEntity.class, EntityDataSerializers.COMPOUND_TAG);
+    private static final EntityDataAccessor<String> ENTITY_NAME = SynchedEntityData.defineId(SimpleProjectileEntity.class, EntityDataSerializers.STRING);
+    private static final EntityDataAccessor<Boolean> EXPIRE_ON_ENTITY_HIT = SynchedEntityData.defineId(SimpleProjectileEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> HIT_ALLIES = SynchedEntityData.defineId(SimpleProjectileEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> PIERCE = SynchedEntityData.defineId(SimpleProjectileEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> DEATH_TIME = SynchedEntityData.defineId(SimpleProjectileEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> EXPIRE_ON_BLOCK_HIT = SynchedEntityData.defineId(SimpleProjectileEntity.class, EntityDataSerializers.BOOLEAN);
 
     public Entity ignoreEntity;
 
@@ -82,12 +84,12 @@ public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRe
     }
 
     @Override
-    public void setItemSlot(EquipmentSlotType slotIn, ItemStack stack) {
+    public void setItemSlot(EquipmentSlot slotIn, ItemStack stack) {
 
     }
 
     @Override
-    public IPacket<?> getAddEntityPacket() {
+    public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
@@ -108,19 +110,19 @@ public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRe
         this.entityData.set(DEATH_TIME, newVal);
     }
 
-    public SimpleProjectileEntity(EntityType<? extends Entity> type, World worldIn) {
-        super((EntityType<? extends AbstractArrowEntity>) type, worldIn);
+    public SimpleProjectileEntity(EntityType<? extends Entity> type, Level worldIn) {
+        super((EntityType<? extends AbstractArrow>) type, worldIn);
         this.xTile = -1;
         this.yTile = -1;
         this.zTile = -1;
     }
 
-    public Entity getEntityHit(RayTraceResult result, double radius) {
+    public Entity getEntityHit(HitResult result, double radius) {
 
-        EntityRayTraceResult enres = null;
+        EntityHitResult enres = null;
 
-        if (result instanceof EntityRayTraceResult) {
-            enres = (EntityRayTraceResult) result;
+        if (result instanceof EntityHitResult) {
+            enres = (EntityHitResult) result;
         }
 
         if (enres == null) {
@@ -231,9 +233,9 @@ public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRe
     }
 
     @Override
-    protected EntityRayTraceResult findHitEntity(Vector3d pos, Vector3d posPlusMotion) {
+    protected EntityHitResult findHitEntity(Vec3 pos, Vec3 posPlusMotion) {
 
-        EntityRayTraceResult res = ProjectileHelper.getEntityHitResult(
+        EntityHitResult res = ProjectileUtil.getEntityHitResult(
                 this.level, this, pos, posPlusMotion, this.getBoundingBox()
                         .expandTowards(this.getDeltaMovement())
                         .inflate(1D), (e) -> {
@@ -251,24 +253,24 @@ public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRe
     }
 
     @Override
-    protected void onHit(RayTraceResult raytraceResultIn) {
+    protected void onHit(HitResult raytraceResultIn) {
 
-        RayTraceResult.Type raytraceresult$type = raytraceResultIn.getType();
-        if (raytraceresult$type == RayTraceResult.Type.ENTITY) {
+        HitResult.Type raytraceresult$type = raytraceResultIn.getType();
+        if (raytraceresult$type == HitResult.Type.ENTITY) {
             this.onImpact(raytraceResultIn);
             this.playSound(SoundEvents.SHULKER_BULLET_HIT, 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
 
-        } else if (raytraceresult$type == RayTraceResult.Type.BLOCK) {
+        } else if (raytraceresult$type == HitResult.Type.BLOCK) {
 
             if (collidedAlready) {
                 return;
             }
             collidedAlready = true;
 
-            BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult) raytraceResultIn;
+            BlockHitResult blockraytraceresult = (BlockHitResult) raytraceResultIn;
             BlockState blockstate = this.level.getBlockState(blockraytraceresult.getBlockPos());
 
-            Vector3d vec3d = blockraytraceresult.getLocation()
+            Vec3 vec3d = blockraytraceresult.getLocation()
                     .subtract(this.getX(), this.getY(), this.getZ());
             this.setDeltaMovement(vec3d);
 
@@ -281,7 +283,7 @@ public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRe
 
     }
 
-    protected void onImpact(RayTraceResult result) {
+    protected void onImpact(HitResult result) {
 
         Entity entityHit = getEntityHit(result, 0.3D);
 
@@ -296,8 +298,8 @@ public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRe
 
             if (entityHit instanceof LivingEntity == false) {
                 // HARDCODED support for dumb ender dragon non living entity dragon parts
-                if (entityHit instanceof EnderDragonPartEntity) {
-                    EnderDragonPartEntity part = (EnderDragonPartEntity) entityHit;
+                if (entityHit instanceof EnderDragonPart) {
+                    EnderDragonPart part = (EnderDragonPart) entityHit;
                     if (!part.isInvulnerableTo(DamageSource.mobAttack(caster))) {
                         en = part.parentMob;
                     }
@@ -345,7 +347,7 @@ public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRe
             }
         }
 
-        if (result instanceof BlockRayTraceResult && entityData.get(EXPIRE_ON_BLOCK_HIT)) {
+        if (result instanceof BlockHitResult && entityData.get(EXPIRE_ON_BLOCK_HIT)) {
             scheduleRemoval();
         }
 
@@ -360,7 +362,7 @@ public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRe
     static Gson GSON = new Gson();
 
     @Override
-    public void addAdditionalSaveData(CompoundNBT nbt) {
+    public void addAdditionalSaveData(CompoundTag nbt) {
 
         try {
 
@@ -382,7 +384,7 @@ public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRe
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundNBT nbt) {
+    public void readAdditionalSaveData(CompoundTag nbt) {
 
         try {
 
@@ -418,7 +420,7 @@ public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRe
 
     @Override
     protected void defineSynchedData() {
-        this.entityData.define(SPELL_DATA, new CompoundNBT());
+        this.entityData.define(SPELL_DATA, new CompoundTag());
         this.entityData.define(ENTITY_NAME, "");
         this.entityData.define(EXPIRE_ON_ENTITY_HIT, true);
         this.entityData.define(EXPIRE_ON_BLOCK_HIT, true);
@@ -442,7 +444,7 @@ public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRe
         try {
             if (level.isClientSide) {
                 if (spellData == null) {
-                    CompoundNBT nbt = entityData.get(SPELL_DATA);
+                    CompoundTag nbt = entityData.get(SPELL_DATA);
                     if (nbt != null) {
                         this.spellData = GSON.fromJson(nbt.getString("spell"), EntitySavedSpellData.class);
                     }
@@ -473,7 +475,7 @@ public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRe
     }
 
     @Override
-    public void playerTouch(PlayerEntity player) {
+    public void playerTouch(Player player) {
         // don't allow player to pickup lol
     }
 
@@ -481,7 +483,7 @@ public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRe
     public void init(LivingEntity caster, EntitySavedSpellData data, MapHolder holder) {
         this.spellData = data;
 
-        this.pickup = PickupStatus.DISALLOWED;
+        this.pickup = Pickup.DISALLOWED;
 
         this.setNoGravity(!holder.getOrDefault(MapField.GRAVITY, true));
         this.setDeathTime(holder.get(MapField.LIFESPAN_TICKS)
@@ -498,7 +500,7 @@ public class SimpleProjectileEntity extends AbstractArrowEntity implements IMyRe
         }
 
         data.item_id = holder.get(MapField.ITEM);
-        CompoundNBT nbt = new CompoundNBT();
+        CompoundTag nbt = new CompoundTag();
         nbt.putString("spell", GSON.toJson(spellData));
         entityData.set(SPELL_DATA, nbt);
         this.setOwner(caster);

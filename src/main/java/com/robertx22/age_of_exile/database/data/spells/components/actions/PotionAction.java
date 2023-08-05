@@ -6,10 +6,10 @@ import com.robertx22.age_of_exile.database.data.spells.components.actions.ExileE
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.mixin_ducks.StatusEffectAccesor;
 import com.robertx22.age_of_exile.vanilla_mc.potion_effects.types.ExileStatusEffect;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.core.Registry;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -32,15 +32,15 @@ public class PotionAction extends SpellAction {
 
             for (LivingEntity t : targets) {
                 if (action == GiveOrTake.GIVE_STACKS) {
-                    Effect potion = data.getPotion();
+                    MobEffect potion = data.getPotion();
 
                     int dura = data.get(POTION_DURATION)
                         .intValue();
                     int str = data.getOrDefault(POTION_STRENGTH, 1D)
                         .intValue();
-                    t.addEffect(new EffectInstance(potion, dura, str));
+                    t.addEffect(new MobEffectInstance(potion, dura, str));
                 } else if (action == GiveOrTake.REMOVE_STACKS) {
-                    Effect potion = data.getPotion();
+                    MobEffect potion = data.getPotion();
 
                     t.removeEffect(potion);
                 } else if (action == GiveOrTake.REMOVE_NEGATIVE) {
@@ -49,12 +49,12 @@ public class PotionAction extends SpellAction {
 
                     for (int i = 0; i < count; i++) {
 
-                        List<EffectInstance> opt = t.getActiveEffects()
+                        List<MobEffectInstance> opt = t.getActiveEffects()
                             .stream()
                             .filter(x -> {
                                 if (x.getEffect() instanceof StatusEffectAccesor) {
                                     StatusEffectAccesor acc = (StatusEffectAccesor) x.getEffect();
-                                    return acc.my$getstatusEffectType() == net.minecraft.potion.EffectType.HARMFUL;
+                                    return acc.my$getstatusEffectType() == net.minecraft.world.effect.MobEffectCategory.HARMFUL;
                                 } else {
                                     if (x.getEffect() instanceof ExileStatusEffect) {
                                         ExileStatusEffect es = (ExileStatusEffect) x.getEffect();
@@ -79,7 +79,7 @@ public class PotionAction extends SpellAction {
         }
     }
 
-    public MapHolder createGive(Effect effect, Double duration) {
+    public MapHolder createGive(MobEffect effect, Double duration) {
         MapHolder dmg = new MapHolder();
         dmg.type = GUID();
         dmg.put(COUNT, 1D);
@@ -98,7 +98,7 @@ public class PotionAction extends SpellAction {
         return dmg;
     }
 
-    public MapHolder createRemove(Effect effect) {
+    public MapHolder createRemove(MobEffect effect) {
         MapHolder dmg = new MapHolder();
         dmg.type = GUID();
         dmg.put(COUNT, 1D);

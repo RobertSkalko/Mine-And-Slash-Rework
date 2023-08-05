@@ -25,22 +25,22 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.TeamUtils;
 import com.robertx22.age_of_exile.vanilla_mc.packets.DmgNumPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.SoundUtils;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.minecraft.entity.boss.dragon.EnderDragonPartEntity;
-import net.minecraft.entity.passive.TameableEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.boss.EnderDragonPart;
+import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.ChatFormatting;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -90,13 +90,13 @@ public class DamageEvent extends EffectEvent {
 
         // blocking check
         if (target.isBlocking() && attackInfo != null) {
-            Vector3d vec3d = attackInfo.getSource()
+            Vec3 vec3d = attackInfo.getSource()
                     .getSourcePosition();
             if (vec3d != null) {
-                Vector3d vec3d2 = target.getViewVector(1.0F);
-                Vector3d vec3d3 = vec3d.vectorTo(target.position())
+                Vec3 vec3d2 = target.getViewVector(1.0F);
+                Vec3 vec3d3 = vec3d.vectorTo(target.position())
                         .normalize();
-                vec3d3 = new Vector3d(vec3d3.x, 0.0D, vec3d3.z);
+                vec3d3 = new Vec3(vec3d3.x, 0.0D, vec3d3.z);
                 if (vec3d3.dot(vec3d2) < 0.0D) {
                     this.data.setBoolean(EventData.IS_BLOCKED, true);
                 }
@@ -111,7 +111,7 @@ public class DamageEvent extends EffectEvent {
             return 0;
         }
 
-        if (source instanceof PlayerEntity) {
+        if (source instanceof Player) {
             if (data.isBasicAttack()) {
                 dmg = modifyByAttackSpeedIfMelee(dmg);
                 dmg = modifyIfArrowDamage(dmg);
@@ -122,7 +122,7 @@ public class DamageEvent extends EffectEvent {
             dmg *= ServerContainer.get().PVP_DMG_MULTI.get();
         }
 
-        if (!data.isDodged() && target instanceof PlayerEntity) { // todo this code sucks
+        if (!data.isDodged() && target instanceof Player) { // todo this code sucks
             // a getter should not modify anything
             dmg = MagicShield.modifyEntityDamage(this, dmg);
             dmg = DamageAbsorbedByMana.modifyEntityDamage(this, dmg);
@@ -145,7 +145,7 @@ public class DamageEvent extends EffectEvent {
 
         if (weaponType.isMelee()) {
 
-            if (this.source instanceof PlayerEntity) {
+            if (this.source instanceof Player) {
 
                 GearItemData gear = Gear.Load(source.getMainHandItem());
 
@@ -158,7 +158,7 @@ public class DamageEvent extends EffectEvent {
 
                     cool = secWaited / secNeededToWaitForFull;
 
-                    cool = MathHelper.clamp(cool, 0F, 1F);
+                    cool = Mth.clamp(cool, 0F, 1F);
 
                 }
             }
@@ -211,7 +211,7 @@ public class DamageEvent extends EffectEvent {
     }
 
     public boolean areBothPlayers() {
-        if (source instanceof ServerPlayerEntity && target instanceof ServerPlayerEntity) {
+        if (source instanceof ServerPlayer && target instanceof ServerPlayer) {
             return true;
         }
         return false;
@@ -234,18 +234,18 @@ public class DamageEvent extends EffectEvent {
             if (source.equals(target)) {
                 return false; // it's the same player, let him hit himself
             }
-            if (TeamUtils.areOnSameTeam((ServerPlayerEntity) source, (ServerPlayerEntity) target)) {
+            if (TeamUtils.areOnSameTeam((ServerPlayer) source, (ServerPlayer) target)) {
                 return true;
             }
-            PlayerEntity sp = (PlayerEntity) this.source;
-            if (!sp.canHarmPlayer((PlayerEntity) target)) {
+            Player sp = (Player) this.source;
+            if (!sp.canHarmPlayer((Player) target)) {
                 return true;
             }
         } else {
             if (this.data.isSpellEffect()) {
-                if (target instanceof TameableEntity) {
-                    if (source instanceof PlayerEntity) {
-                        TameableEntity tame = (TameableEntity) target;
+                if (target instanceof TamableAnimal) {
+                    if (source instanceof Player) {
+                        TamableAnimal tame = (TamableAnimal) target;
                         if (tame.isOwnedBy(source)) {
                             cancelDamage();
                             return true;
@@ -310,9 +310,9 @@ public class DamageEvent extends EffectEvent {
             ds = DamageSource.GENERIC; // todo unsure.
         }
 
-        if (target instanceof PlayerEntity) {
+        if (target instanceof Player) {
             info.dmgmap.forEach((key, value) -> {
-                DeathStatsData.record((PlayerEntity) target, key, value);
+                DeathStatsData.record((Player) target, key, value);
             });
         }
 
@@ -320,7 +320,7 @@ public class DamageEvent extends EffectEvent {
 
         if (attackInfo == null || !(attackInfo.getSource() instanceof MyDamageSource)) { // todo wtf
 
-            ModifiableAttributeInstance attri = target.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
+            AttributeInstance attri = target.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
 
             if (data.getBoolean(EventData.DISABLE_KNOCKBACK) || this.getAttackType() == AttackType.dot) {
                 if (!attri.hasModifier(NO_KNOCKBACK)) {
@@ -328,7 +328,7 @@ public class DamageEvent extends EffectEvent {
                 }
             }
 
-            if (target instanceof PlayerEntity == false) {
+            if (target instanceof Player == false) {
                 target.invulnerableTime = 0; // disable iframes hopefully
                 target.hurtTime = 0;
             }
@@ -348,11 +348,11 @@ public class DamageEvent extends EffectEvent {
                 SoundUtils.playSound(target, sound, volume, pitch);
             }
 
-            if (target instanceof EnderDragonEntity) {
+            if (target instanceof EnderDragon) {
                 try {
                     // Dumb vanilla hardcodings require dumb workarounds
-                    EnderDragonEntity dragon = (EnderDragonEntity) target;
-                    EnderDragonPartEntity part = Arrays.stream(dragon.getSubEntities())
+                    EnderDragon dragon = (EnderDragon) target;
+                    EnderDragonPart part = Arrays.stream(dragon.getSubEntities())
                             .filter(x -> x.name.equals("body"))
                             .findFirst()
                             .get();
@@ -364,7 +364,7 @@ public class DamageEvent extends EffectEvent {
             } else {
 
                 if (attackInfo != null && attackInfo.event != null) {
-                    if (source instanceof PlayerEntity) {
+                    if (source instanceof Player) {
                         attackInfo.event.damage *= ServerContainer.get().PLAYER_VANILLA_DMG_MULTI.get();
                     } else {
                         attackInfo.event.damage = 0;// todo test this
@@ -376,7 +376,7 @@ public class DamageEvent extends EffectEvent {
                 target.invulnerableTime = inv;
             }
 
-            if (target instanceof PlayerEntity == false) {
+            if (target instanceof Player == false) {
 
 
                 if (getAttackType() == AttackType.dot) {
@@ -399,22 +399,22 @@ public class DamageEvent extends EffectEvent {
         }
 
         if (dmg > 0) {
-            if (source instanceof PlayerEntity) {
+            if (source instanceof Player) {
                 sourceData.getCooldowns()
                         .setOnCooldown(CooldownsData.IN_COMBAT, 20 * 10);
 
-                if (target instanceof MobEntity) {
-                    PlayerDamageChart.onDamage((PlayerEntity) source, dmg);
+                if (target instanceof Mob) {
+                    PlayerDamageChart.onDamage((Player) source, dmg);
 
-                    GenerateThreatEvent threatEvent = new GenerateThreatEvent((PlayerEntity) source, (MobEntity) target, ThreatGenType.deal_dmg, dmg);
+                    GenerateThreatEvent threatEvent = new GenerateThreatEvent((Player) source, (Mob) target, ThreatGenType.deal_dmg, dmg);
                     threatEvent.Activate();
                 }
-            } else if (source instanceof MobEntity) {
-                if (target instanceof PlayerEntity) {
+            } else if (source instanceof Mob) {
+                if (target instanceof Player) {
                     targetData.getCooldowns()
                             .setOnCooldown(CooldownsData.IN_COMBAT, 20 * 10);
 
-                    GenerateThreatEvent threatEvent = new GenerateThreatEvent((PlayerEntity) target, (MobEntity) source, ThreatGenType.take_dmg, dmg);
+                    GenerateThreatEvent threatEvent = new GenerateThreatEvent((Player) target, (Mob) source, ThreatGenType.take_dmg, dmg);
                     threatEvent.Activate();
                 }
             }
@@ -429,8 +429,8 @@ public class DamageEvent extends EffectEvent {
 
         String text = "";
 
-        if (source instanceof ServerPlayerEntity) {
-            ServerPlayerEntity player = (ServerPlayerEntity) source;
+        if (source instanceof ServerPlayer) {
+            ServerPlayer player = (ServerPlayer) source;
 
             if (data.isDodged()) {
                 if (getAttackType().isAttack()) {
@@ -439,7 +439,7 @@ public class DamageEvent extends EffectEvent {
                     text = "Resist";
                 }
 
-                DmgNumPacket packet = new DmgNumPacket(target, text, false, TextFormatting.GOLD);
+                DmgNumPacket packet = new DmgNumPacket(target, text, false, ChatFormatting.GOLD);
                 Packets.sendToClient(player, packet);
                 return;
             }

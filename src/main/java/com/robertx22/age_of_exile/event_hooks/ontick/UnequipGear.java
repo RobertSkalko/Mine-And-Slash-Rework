@@ -5,12 +5,12 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.ChatFormatting;
 import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 
 import java.util.Arrays;
@@ -20,9 +20,9 @@ public class UnequipGear {
 
     // dont drop weapons becasuse then newbies can't use stuff like axes at low level!
 
-    public static List<EquipmentSlotType> SLOTS = Arrays.asList(EquipmentSlotType.FEET, EquipmentSlotType.LEGS, EquipmentSlotType.CHEST, EquipmentSlotType.HEAD, EquipmentSlotType.OFFHAND);
+    public static List<EquipmentSlot> SLOTS = Arrays.asList(EquipmentSlot.FEET, EquipmentSlot.LEGS, EquipmentSlot.CHEST, EquipmentSlot.HEAD, EquipmentSlot.OFFHAND);
 
-    static void drop(PlayerEntity player, EquipmentSlotType slot, ItemStack stack, IFormattableTextComponent txt) {
+    static void drop(Player player, EquipmentSlot slot, ItemStack stack, MutableComponent txt) {
         ItemStack copy = stack.copy();
 
         player.setItemSlot(slot, ItemStack.EMPTY); // todo is this good?
@@ -38,7 +38,7 @@ public class UnequipGear {
         }
     }
 
-    static void drop(PlayerEntity player, ICurioStacksHandler handler, int number, ItemStack stack, IFormattableTextComponent txt) {
+    static void drop(Player player, ICurioStacksHandler handler, int number, ItemStack stack, MutableComponent txt) {
 
         ItemStack copy = stack.copy();
         handler.getStacks()
@@ -47,10 +47,10 @@ public class UnequipGear {
         player.displayClientMessage(txt, false);
     }
 
-    public static void onTick(PlayerEntity player) {
+    public static void onTick(Player player) {
 
 
-        for (EquipmentSlotType slot : SLOTS) {
+        for (EquipmentSlot slot : SLOTS) {
 
             ItemStack stack = player.getItemBySlot(slot);
 
@@ -58,7 +58,7 @@ public class UnequipGear {
 
             if (gear != null) {
                 if (!gear.canPlayerWear(Load.Unit(player))) {
-                    drop(player, slot, stack, new StringTextComponent("You do not meet the requirements of that item.").withStyle(TextFormatting.RED));
+                    drop(player, slot, stack, new TextComponent("You do not meet the requirements of that item.").withStyle(ChatFormatting.RED));
                 }
             }
         }
@@ -77,7 +77,7 @@ public class UnequipGear {
 
                     if (gear != null) {
                         if (!gear.canPlayerWear(Load.Unit(player))) {
-                            drop(player, handler, i, stack, new StringTextComponent("You do not meet the requirements of that item.").withStyle(TextFormatting.RED));
+                            drop(player, handler, i, stack, new TextComponent("You do not meet the requirements of that item.").withStyle(ChatFormatting.RED));
                         }
                     }
                 }

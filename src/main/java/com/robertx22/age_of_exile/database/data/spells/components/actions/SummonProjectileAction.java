@@ -6,12 +6,12 @@ import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.core.Registry;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -39,7 +39,7 @@ public class SummonProjectileAction extends SpellAction {
         PositionSource posSource = data.getOrDefault(PositionSource.CASTER);
         ShootWay shootWay = data.getOrDefault(ShootWay.FROM_PLAYER_VIEW);
 
-        Vector3d pos = ctx.caster.position();
+        Vec3 pos = ctx.caster.position();
         if (posSource == PositionSource.SOURCE_ENTITY) {
             pos = ctx.sourceEntity.position();
         }

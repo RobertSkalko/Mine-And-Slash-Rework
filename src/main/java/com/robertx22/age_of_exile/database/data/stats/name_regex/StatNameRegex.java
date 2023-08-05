@@ -5,7 +5,7 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatW
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.NumberUtils;
 import com.robertx22.library_of_exile.utils.CLOC;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.ChatFormatting;
 
 public abstract class StatNameRegex {
 
@@ -28,26 +28,26 @@ public abstract class StatNameRegex {
 
     }
 
-    public TextFormatting statColor(Stat stat) {
-        return TextFormatting.GRAY;
+    public ChatFormatting statColor(Stat stat) {
+        return ChatFormatting.GRAY;
     }
 
-    public TextFormatting numberColor(TextFormatting format, Stat stat, float val) {
+    public ChatFormatting numberColor(ChatFormatting format, Stat stat, float val) {
 
         if (format != null) {
             return format;
         }
 
         if (val > 0) {
-            return TextFormatting.GREEN;
+            return ChatFormatting.GREEN;
         } else {
-            return TextFormatting.RED;
+            return ChatFormatting.RED;
         }
     }
 
-    public abstract String getStatNameRegex(TextFormatting format, ModType type, Stat stat, float v1);
+    public abstract String getStatNameRegex(ChatFormatting format, ModType type, Stat stat, float v1);
 
-    public String translate(TextFormatting format, TooltipStatWithContext ctx, ModType type, float v1, Stat stat) {
+    public String translate(ChatFormatting format, TooltipStatWithContext ctx, ModType type, float v1, Stat stat) {
 
         String plusminus = v1 > 0 && addPlus ? "+" : "";
 
@@ -77,7 +77,7 @@ public abstract class StatNameRegex {
 
         String str = statColor(stat) + getStatNameRegex(format, type, stat, v1);
 
-        str = str.replace(VALUE, numberColor(format, stat, v1) + "" + plusminus + v1s + perc + TextFormatting.RESET + statColor(stat));
+        str = str.replace(VALUE, numberColor(format, stat, v1) + "" + plusminus + v1s + perc + ChatFormatting.RESET + statColor(stat));
 
         str = str.replace(NAME, add + "" + CLOC.translate(stat.locName()));
 

@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.database.data.salvage_recipes;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;

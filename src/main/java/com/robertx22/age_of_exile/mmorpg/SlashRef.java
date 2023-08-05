@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.mmorpg;
 
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 
 public class SlashRef {
 

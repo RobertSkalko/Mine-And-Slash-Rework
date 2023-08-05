@@ -5,17 +5,17 @@ import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.RepairUtils;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
 
 public class GearData {
 
     public ItemStack stack;
     public GearItemData gear;
-    public EquipmentSlotType slot;
+    public EquipmentSlot slot;
     public int percentStatUtilization = 100; // todo if stats change stat utilization, they need special handling..
 
-    public GearData(ItemStack stack, EquipmentSlotType slot, EntityData data) {
+    public GearData(ItemStack stack, EquipmentSlot slot, EntityData data) {
         this.stack = stack;
         if (stack != null) {
             this.gear = Gear.Load(stack);
@@ -37,7 +37,7 @@ public class GearData {
 
     private void calcStatUtilization(EntityData data) {
 
-        if (slot == EquipmentSlotType.OFFHAND) {
+        if (slot == EquipmentSlot.OFFHAND) {
             if (gear != null && !gear.GetBaseGearType().getTags().contains(BaseGearType.SlotTag.offhand_family)) {
                 percentStatUtilization = 0;
                 return;
@@ -71,30 +71,30 @@ public class GearData {
         if (type.isWeapon()) {
 
             if (type.isMeleeWeapon()) {
-                if (slot == EquipmentSlotType.OFFHAND) {
+                if (slot == EquipmentSlot.OFFHAND) {
                     return true;
                 }
             }
 
-            return slot == EquipmentSlotType.MAINHAND; // ranged weapon
+            return slot == EquipmentSlot.MAINHAND; // ranged weapon
         }
         if (type.tags.contains(BaseGearType.SlotTag.chest)) {
-            return slot == EquipmentSlotType.CHEST;
+            return slot == EquipmentSlot.CHEST;
         }
         if (type.tags.contains(BaseGearType.SlotTag.pants)) {
-            return slot == EquipmentSlotType.LEGS;
+            return slot == EquipmentSlot.LEGS;
         }
         if (type.tags.contains(BaseGearType.SlotTag.boots)) {
-            return slot == EquipmentSlotType.FEET;
+            return slot == EquipmentSlot.FEET;
         }
         if (type.tags.contains(BaseGearType.SlotTag.helmet)) {
-            return slot == EquipmentSlotType.HEAD;
+            return slot == EquipmentSlot.HEAD;
         }
         if (type.tags.contains(BaseGearType.SlotTag.jewelry_family)) {
             return slot == null;
         }
         if (type.tags.contains(BaseGearType.SlotTag.offhand_family)) {
-            return slot == EquipmentSlotType.OFFHAND;
+            return slot == EquipmentSlot.OFFHAND;
         }
 
         return false;

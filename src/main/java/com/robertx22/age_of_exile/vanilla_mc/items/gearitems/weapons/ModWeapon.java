@@ -2,16 +2,18 @@ package com.robertx22.age_of_exile.vanilla_mc.items.gearitems.weapons;
 
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.bases.SingleTargetWeapon;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTier;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tiers;
+
+import net.minecraft.world.item.Item.Properties;
 
 public abstract class ModWeapon extends SingleTargetWeapon {
 
-    public ModWeapon(ItemTier mat, Properties settings, WeaponTypes type) {
+    public ModWeapon(Tiers mat, Properties settings, WeaponTypes type) {
         super(mat, settings, type.locName());
 
     }

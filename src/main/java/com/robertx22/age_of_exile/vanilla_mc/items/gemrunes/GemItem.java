@@ -37,27 +37,30 @@ import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.utils.SoundUtils;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.UseAction;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.core.Registry;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+
+import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
+import net.minecraft.world.item.Item.Properties;
 
 public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAutoLocName, ICurrencyItemEffect {
 
@@ -67,8 +70,8 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
     }
 
     @Override
-    public ITextComponent getName(ItemStack stack) {
-        return new TranslationTextComponent(this.getDescriptionId()).withStyle(gemType.format);
+    public Component getName(ItemStack stack) {
+        return new TranslatableComponent(this.getDescriptionId()).withStyle(gemType.format);
     }
 
     @Override
@@ -88,33 +91,33 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
     }
 
     @Override
-    public ActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+    public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
         ItemStack itemStack = user.getItemInHand(hand);
         user.startUsingItem(hand);
-        return ActionResult.success(itemStack);
+        return InteractionResultHolder.success(itemStack);
     }
 
     @Override
-    public UseAction getUseAnimation(ItemStack p_77661_1_) {
-        return UseAction.BOW;
+    public UseAnim getUseAnimation(ItemStack p_77661_1_) {
+        return UseAnim.BOW;
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, World world, LivingEntity en) {
+    public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity en) {
 
         if (world.isClientSide) {
             return stack;
         }
 
-        if (en instanceof PlayerEntity) {
-            PlayerEntity p = (PlayerEntity) en;
+        if (en instanceof Player) {
+            Player p = (Player) en;
 
             if (!getGem().hasHigherTierGem()) {
-                p.displayClientMessage(new StringTextComponent(TextFormatting.RED + "These gems are already maximum rank."), false);
+                p.displayClientMessage(new TextComponent(ChatFormatting.RED + "These gems are already maximum rank."), false);
                 return stack;
             }
             if (stack.getCount() < 3) {
-                p.displayClientMessage(new StringTextComponent(TextFormatting.RED + "You need 3 gems to attempt upgrade."), false);
+                p.displayClientMessage(new TextComponent(ChatFormatting.RED + "You need 3 gems to attempt upgrade."), false);
                 return stack;
             }
 
@@ -132,7 +135,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
                         ItemStack newstack = new ItemStack(getGem().getHigherTierGem()
                                 .getItem());
                         Packets.sendToClient(p, new TotemAnimationPacket(newstack));
-                        p.displayClientMessage(new StringTextComponent(TextFormatting.GREEN + "").append(old.getName(new ItemStack(old)))
+                        p.displayClientMessage(new TextComponent(ChatFormatting.GREEN + "").append(old.getName(new ItemStack(old)))
                                 .append(" has been upgraded to ")
                                 .append(newstack.getDisplayName()), false);
                         PlayerUtils.giveItem(newstack, p);
@@ -140,7 +143,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
                     } else {
                         SoundUtils.playSound(p, SoundEvents.VILLAGER_NO, 1, 1);
 
-                        p.displayClientMessage(new StringTextComponent(TextFormatting.RED + "").append(old.getName(new ItemStack(old)))
+                        p.displayClientMessage(new TextComponent(ChatFormatting.RED + "").append(old.getName(new ItemStack(old)))
                                 .append(" has failed the upgrade and was destroyed."), false);
                     }
                 }
@@ -174,7 +177,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
 
         gear.sockets.sockets.add(socket);
 
-        ctx.player.displayClientMessage(new StringTextComponent("Gem Socketed"), false);
+        ctx.player.displayClientMessage(new TextComponent("Gem Socketed"), false);
 
         Gear.Save(stack, gear);
 
@@ -226,7 +229,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
 
     public enum GemType {
 
-        TOURMALINE("tourmaline", "Tourmaline", TextFormatting.LIGHT_PURPLE, new GemStatPerTypes() {
+        TOURMALINE("tourmaline", "Tourmaline", ChatFormatting.LIGHT_PURPLE, new GemStatPerTypes() {
             @Override
             public List<StatModifier> onArmor() {
                 return Arrays.asList(new StatModifier(1, 5, DatapackStats.STR));
@@ -242,7 +245,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
                 return Arrays.asList(new StatModifier(1, 5, Stats.LIFESTEAL.get()));
             }
         }),
-        AZURITE("azurite", "Azurite", TextFormatting.AQUA, new GemStatPerTypes() {
+        AZURITE("azurite", "Azurite", ChatFormatting.AQUA, new GemStatPerTypes() {
             @Override
             public List<StatModifier> onArmor() {
                 return Arrays.asList(new StatModifier(1, 5, DatapackStats.INT));
@@ -259,7 +262,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
             }
         }),
 
-        GARNET("garnet", "Garnet", TextFormatting.GREEN, new GemStatPerTypes() {
+        GARNET("garnet", "Garnet", ChatFormatting.GREEN, new GemStatPerTypes() {
             @Override
             public List<StatModifier> onArmor() {
                 return Arrays.asList(new StatModifier(1, 5, DatapackStats.DEX));
@@ -275,7 +278,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
                 return Arrays.asList(new StatModifier(2, 8, Stats.CRIT_CHANCE.get()));
             }
         }),
-        OPAL("opal", "Opal", TextFormatting.GOLD, new GemStatPerTypes() {
+        OPAL("opal", "Opal", ChatFormatting.GOLD, new GemStatPerTypes() {
             @Override
             public List<StatModifier> onArmor() {
                 return Arrays.asList(new StatModifier(1, 5, DatapackStats.STR));
@@ -291,7 +294,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
                 return Arrays.asList(new StatModifier(3, 12, Stats.CRIT_DAMAGE.get()));
             }
         }),
-        TOPAZ("topaz", "Topaz", TextFormatting.YELLOW, new GemStatPerTypes() {
+        TOPAZ("topaz", "Topaz", ChatFormatting.YELLOW, new GemStatPerTypes() {
             @Override
             public List<StatModifier> onArmor() {
                 return Arrays.asList(new StatModifier(MIN_RES, MAX_RES, new ElementalResist(Elements.Lightning)));
@@ -307,7 +310,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
                 return Arrays.asList(new StatModifier(1, 3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.energy, AttackType.all))));
             }
         }),
-        AMETHYST("amethyst", "Amethyst", TextFormatting.DARK_PURPLE, new GemStatPerTypes() {
+        AMETHYST("amethyst", "Amethyst", ChatFormatting.DARK_PURPLE, new GemStatPerTypes() {
             @Override
             public List<StatModifier> onArmor() {
                 return Arrays.asList(new StatModifier(1, 5, DatapackStats.INT));
@@ -323,16 +326,16 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
                 return Arrays.asList(new StatModifier(2, 10, Stats.SPELL_CRIT_DAMAGE.get()));
             }
         }),
-        RUBY("ruby", "Ruby", TextFormatting.RED, new EleGem(Elements.Fire)),
-        EMERALD("emerald", "Emerald", TextFormatting.GREEN, new EleGem(Elements.Chaos)),
-        SAPPHIRE("sapphire", "Sapphire", TextFormatting.BLUE, new EleGem(Elements.Cold));
+        RUBY("ruby", "Ruby", ChatFormatting.RED, new EleGem(Elements.Fire)),
+        EMERALD("emerald", "Emerald", ChatFormatting.GREEN, new EleGem(Elements.Chaos)),
+        SAPPHIRE("sapphire", "Sapphire", ChatFormatting.BLUE, new EleGem(Elements.Cold));
 
         public String locName;
         public String id;
-        public TextFormatting format;
+        public ChatFormatting format;
         public GemStatPerTypes stats;
 
-        GemType(String id, String locName, TextFormatting format, GemStatPerTypes stats) {
+        GemType(String id, String locName, ChatFormatting format, GemStatPerTypes stats) {
             this.locName = locName;
             this.id = id;
             this.format = format;
@@ -414,17 +417,17 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag context) {
+    public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {
 
         try {
 
             tooltip.addAll(getBaseTooltip());
 
-            tooltip.add(new StringTextComponent(""));
+            tooltip.add(new TextComponent(""));
 
             if (getGem().hasHigherTierGem()) {
-                tooltip.add(new StringTextComponent("Hold 3 gems to attempt upgrade"));
-                tooltip.add(new StringTextComponent("Upgrade chance: " + getGem().perc_upgrade_chance + "%"));
+                tooltip.add(new TextComponent("Hold 3 gems to attempt upgrade"));
+                tooltip.add(new TextComponent("Upgrade chance: " + getGem().perc_upgrade_chance + "%"));
             }
         } catch (Exception e) {
             e.printStackTrace();

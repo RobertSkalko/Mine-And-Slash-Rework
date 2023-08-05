@@ -11,18 +11,21 @@ import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.temp.SkillItemTier;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.data.ShapelessRecipeBuilder;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.Registry;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
+
+import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
+import net.minecraft.world.item.Item.Properties;
 
 public class SalvagedDustItem extends Item implements IAutoLocName, IWeighted, IAutoModel, IShapelessRecipe {
 
@@ -43,16 +46,16 @@ public class SalvagedDustItem extends Item implements IAutoLocName, IWeighted, I
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag context) {
+    public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {
 
         tooltip.add(Words.CreatedInSalvageStation.locName());
 
         tooltip.add(TooltipUtils.gearTier(tier.getDisplayTierNumber()));
 
-        tooltip.add(new StringTextComponent(""));
+        tooltip.add(new TextComponent(""));
 
-        tooltip.add(new StringTextComponent("Repairs " + durabilityRepair + " durability."));
-        tooltip.add(new StringTextComponent("Less effective on higher tier gear."));
+        tooltip.add(new TextComponent("Repairs " + durabilityRepair + " durability."));
+        tooltip.add(new TextComponent("Less effective on higher tier gear."));
 
         tooltip.add(TooltipUtils.dragOntoGearToUse());
 

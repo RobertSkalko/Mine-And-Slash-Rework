@@ -9,6 +9,8 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.RestoreResourceEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 
+import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect.Priority;
+
 public class HealthRestorationToBloodEffect extends InCodeStatEffect<RestoreResourceEvent> {
 
     private HealthRestorationToBloodEffect() {

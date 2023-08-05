@@ -14,17 +14,24 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.utils.LoadSave;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.NonNullList;
 import net.minecraft.util.text.*;
-import net.minecraft.world.World;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
+
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.item.Item.Properties;
 
 public class StatSoulItem extends Item implements IGUID {
 
@@ -41,7 +48,7 @@ public class StatSoulItem extends Item implements IGUID {
         return stack;
     }
 
-    public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> stacks) {
+    public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> stacks) {
         if (this.allowdedIn(group)) {
 
             for (GearRarity rarity : ExileDB.GearRarities()
@@ -65,9 +72,9 @@ public class StatSoulItem extends Item implements IGUID {
     }
 
     @Override
-    public ITextComponent getName(ItemStack stack) {
+    public Component getName(ItemStack stack) {
 
-        IFormattableTextComponent txt = new TranslationTextComponent(this.getDescriptionId());
+        MutableComponent txt = new TranslatableComponent(this.getDescriptionId());
 
         try {
             StatSoulData data = getSoul(stack);
@@ -81,7 +88,7 @@ public class StatSoulItem extends Item implements IGUID {
                 GearSlot slot = ExileDB.GearSlots()
                     .get(data.slot);
 
-                IFormattableTextComponent t = rar.locName();
+                MutableComponent t = rar.locName();
                 if (!data.canBeOnAnySlot()) {
                     t.append(" ")
                         .append(slot.locName());
@@ -111,7 +118,7 @@ public class StatSoulItem extends Item implements IGUID {
 
     @Override
     @OnlyIn(Dist.CLIENT)
-    public void appendHoverText(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag context) {
+    public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {
 
         StatSoulData data = StackSaving.STAT_SOULS.loadFrom(stack);
 
@@ -123,11 +130,11 @@ public class StatSoulItem extends Item implements IGUID {
                 if (data.canBeOnAnySlot()) {
 
                 } else {
-                    tooltip.add(new StringTextComponent("Item Type: ").withStyle(TextFormatting.WHITE)
+                    tooltip.add(new TextComponent("Item Type: ").withStyle(ChatFormatting.WHITE)
                         .append(ExileDB.GearSlots()
                             .get(data.slot)
                             .locName()
-                            .withStyle(TextFormatting.BLUE)));
+                            .withStyle(ChatFormatting.BLUE)));
                 }
                 tooltip.add(TooltipUtils.gearRarity(ExileDB.GearRarities()
                     .get(data.rar)));
@@ -135,9 +142,9 @@ public class StatSoulItem extends Item implements IGUID {
             }
         }
 
-        tooltip.add(new StringTextComponent(""));
+        tooltip.add(new TextComponent(""));
 
-        tooltip.add(new StringTextComponent("Infuses stats into empty gear").withStyle(TextFormatting.AQUA));
+        tooltip.add(new TextComponent("Infuses stats into empty gear").withStyle(ChatFormatting.AQUA));
         tooltip.add(TooltipUtils.dragOntoGearToUse());
 
     }

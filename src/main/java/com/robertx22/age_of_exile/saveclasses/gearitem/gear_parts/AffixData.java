@@ -14,8 +14,8 @@ import com.robertx22.library_of_exile.utils.RandomUtils;
 import info.loenwind.autosave.annotations.Factory;
 import info.loenwind.autosave.annotations.Storable;
 import info.loenwind.autosave.annotations.Store;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.Mth;
+import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,8 +63,8 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
     }
 
     @Override
-    public List<ITextComponent> GetTooltipString(TooltipInfo info, GearItemData gear) {
-        List<ITextComponent> list = new ArrayList<ITextComponent>();
+    public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {
+        List<Component> list = new ArrayList<Component>();
         getAllStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
         return list;
     }
@@ -175,7 +175,7 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
 
         int num = (int) (gear.getILVL() / (float) GameBalanceConfig.get().MAX_LEVEL * 10);
 
-        num = MathHelper.clamp(num, 1, 10);
+        num = Mth.clamp(num, 1, 10);
 
         this.t = RandomUtils.RandomRange(1, num);
 

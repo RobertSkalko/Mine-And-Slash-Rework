@@ -4,11 +4,11 @@ import com.robertx22.age_of_exile.database.data.spells.components.EntityActivati
 import com.robertx22.age_of_exile.database.data.spells.entities.EntitySavedSpellData;
 import com.robertx22.age_of_exile.database.data.value_calc.LevelProvider;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.Level;
 
 import java.util.Objects;
 
@@ -17,13 +17,13 @@ public class SpellCtx {
     // the entity the effect came from, player summons fireball. fireball hits enemy, dmg comes from fireball
     public Entity sourceEntity;
 
-    public World world;
+    public Level world;
     public LivingEntity caster;
 
     public LivingEntity target;
 
     public BlockPos pos;
-    public Vector3d vecPos;
+    public Vec3 vecPos;
 
     public final EntityActivation activation;
 
@@ -31,7 +31,7 @@ public class SpellCtx {
 
     public EntitySavedSpellData calculatedSpellData;
 
-    private SpellCtx(EntityActivation act, Entity sourceEntity, LivingEntity caster, LivingEntity target, BlockPos pos, Vector3d vec, EntitySavedSpellData calculatedSpellData) {
+    private SpellCtx(EntityActivation act, Entity sourceEntity, LivingEntity caster, LivingEntity target, BlockPos pos, Vec3 vec, EntitySavedSpellData calculatedSpellData) {
         this.sourceEntity = sourceEntity;
         this.caster = caster;
         this.target = target;

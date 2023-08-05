@@ -1,13 +1,13 @@
 package com.robertx22.age_of_exile.event_hooks.ontick;
 
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.core.BlockPos;
 
 import java.util.function.Consumer;
 
 public class EnsureTeleportData {
 
-    ServerPlayerEntity player;
+    ServerPlayer player;
     Consumer<EnsureTeleportData> action;
     int ticksLeft;
     int ticks = 0;
@@ -16,7 +16,7 @@ public class EnsureTeleportData {
 
     int origTicksLeft;
 
-    public EnsureTeleportData(ServerPlayerEntity player, Consumer<EnsureTeleportData> action, int ticksLeft, BlockPos whereShouldTeleport) {
+    public EnsureTeleportData(ServerPlayer player, Consumer<EnsureTeleportData> action, int ticksLeft, BlockPos whereShouldTeleport) {
         this.player = player;
         this.action = action;
         this.ticksLeft = ticksLeft;

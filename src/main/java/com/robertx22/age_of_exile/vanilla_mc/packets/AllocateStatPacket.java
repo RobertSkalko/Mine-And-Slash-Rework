@@ -8,8 +8,8 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 
 public class AllocateStatPacket extends MyPacket<AllocateStatPacket> {
 
@@ -35,14 +35,14 @@ public class AllocateStatPacket extends MyPacket<AllocateStatPacket> {
     }
 
     @Override
-    public void loadFromData(PacketBuffer tag) {
+    public void loadFromData(FriendlyByteBuf tag) {
         stat = tag.readUtf(30);
         action = tag.readEnum(AllocateStatPacket.ACTION.class);
 
     }
 
     @Override
-    public void saveToData(PacketBuffer tag) {
+    public void saveToData(FriendlyByteBuf tag) {
         tag.writeUtf(stat, 30);
         tag.writeEnum(action);
 
