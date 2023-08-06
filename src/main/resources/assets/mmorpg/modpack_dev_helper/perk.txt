@@ -50,7 +50,6 @@ dodge
 spell_elemental_damage_and_dot
 refined_taste
 health
-more_dualwield_dmg
 staff_damage
 mana
 spell_lightning_damage

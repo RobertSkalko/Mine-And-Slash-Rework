@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.capability.player;
 
 import com.robertx22.age_of_exile.capability.player.data.StatPointsData;
 import com.robertx22.age_of_exile.capability.player.data.TeamData;
+import com.robertx22.age_of_exile.capability.player.helper.GemInventoryHelper;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.DeathStatsData;
 import com.robertx22.age_of_exile.saveclasses.perks.TalentsData;
@@ -10,6 +11,7 @@ import com.robertx22.library_of_exile.utils.LoadSave;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.Capability;
@@ -43,24 +45,13 @@ public class RPGPlayerData implements ICap {
 
     }
 
-/*
-    @Mod.EventBusSubscriber
-    public static class EventHandler {
-        @SubscribeEvent
-        public static void onEntityConstruct(AttachCapabilitiesEvent<Entity> event) {
-            if (event.getObject() instanceof Player p) {
-                event.addCapability(RESOURCE, new RPGPlayerData(p));
-            }
-        }
-    }
-
- */
-
 
     private static final String TEAM_DATA = "teams";
     private static final String TALENTS_DATA = "talents";
     private static final String STAT_POINTS = "stat_points";
     private static final String DEATH_STATS = "death_stats";
+    private static final String GEMS = "gems";
+    private static final String AURAS = "auras";
 
     transient Player player;
 
@@ -68,6 +59,9 @@ public class RPGPlayerData implements ICap {
     public TalentsData talents = new TalentsData();
     public StatPointsData statPoints = new StatPointsData();
     public DeathStatsData deathStats = new DeathStatsData();
+
+    private SimpleContainer skillGemInv = new SimpleContainer(GemInventoryHelper.TOTAL_SLOTS);
+    private SimpleContainer auraInv = new SimpleContainer(GemInventoryHelper.TOTAL_AURAS);
 
     public RPGPlayerData(Player player) {
         this.player = player;
@@ -84,6 +78,9 @@ public class RPGPlayerData implements ICap {
         LoadSave.Save(statPoints, nbt, STAT_POINTS);
         LoadSave.Save(deathStats, nbt, DEATH_STATS);
 
+        nbt.put(GEMS, skillGemInv.createTag());
+        nbt.put(AURAS, auraInv.createTag());
+
         return nbt;
     }
 
@@ -95,6 +92,13 @@ public class RPGPlayerData implements ICap {
         this.statPoints = loadOrBlank(StatPointsData.class, new StatPointsData(), nbt, STAT_POINTS, new StatPointsData());
         this.deathStats = loadOrBlank(DeathStatsData.class, new DeathStatsData(), nbt, DEATH_STATS, new DeathStatsData());
 
+        skillGemInv.fromTag(nbt.getList(GEMS, 10)); // todo
+        auraInv.fromTag(nbt.getList(AURAS, 10)); // todo
+
+    }
+
+    public GemInventoryHelper getSkillGemInventory() {
+        return new GemInventoryHelper(skillGemInv, auraInv);
     }
 
     public static <OBJ> OBJ loadOrBlank(Class theclass, OBJ newobj, CompoundTag nbt, String loc, OBJ blank) {

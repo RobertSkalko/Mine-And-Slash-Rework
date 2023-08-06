@@ -48,19 +48,6 @@ public class EntitySpellCap {
     private static final String PLAYER_SPELL_DATA = "player_spells_data";
     private static final String GEMS = "gems";
 
-    /*
-    @Mod.EventBusSubscriber
-    public static class EventHandler {
-        @SubscribeEvent
-        public static void onEntityConstruct(AttachCapabilitiesEvent<Entity> event) {
-            if (event.getObject() instanceof LivingEntity en) {
-                event.addCapability(RESOURCE, new SpellCap(en));
-            }
-        }
-    }
-
-     */
-
 
     public abstract static class ISpellsCap implements ICap, IApplyableStats {
 

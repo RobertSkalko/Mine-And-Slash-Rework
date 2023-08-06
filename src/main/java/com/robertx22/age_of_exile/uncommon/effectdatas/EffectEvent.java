@@ -55,7 +55,7 @@ public abstract class EffectEvent implements IGUID {
 
     public Spell getSpell() {
         return ExileDB.Spells()
-            .get(data.getString(EventData.SPELL));
+                .get(data.getString(EventData.SPELL));
     }
 
     public void initBeforeActivating() {
@@ -105,6 +105,7 @@ public abstract class EffectEvent implements IGUID {
 
     protected void TryApplyEffects(LivingEntity en, EntityData data, EffectSides side) {
 
+        
         if (this.data.isCanceled()) {
             return;
         }
@@ -118,7 +119,7 @@ public abstract class EffectEvent implements IGUID {
         for (EffectWithCtx item : effectsWithCtx) {
             if (item.stat.isNotZero()) {
                 if (item.effect.Side()
-                    .equals(side)) {
+                        .equals(side)) {
                     item.effect.TryModifyEffect(this, item.statSource, item.stat, item.stat.GetStat());
                 } else {
                     System.out.print("ERORR Stat at wrong side should never be added in the first place! ");
@@ -142,30 +143,30 @@ public abstract class EffectEvent implements IGUID {
 
         if (unit != null) {
             unit.getUnit()
-                .getStats().stats
-                .values()
-                .forEach(data -> {
-                    if (data.isNotZero()) {
-                        Stat stat = data.GetStat();
+                    .getStats().stats
+                    .values()
+                    .forEach(data -> {
+                        if (data.isNotZero()) {
+                            Stat stat = data.GetStat();
 
-                        if (stat.statEffect != null) {
-                            if (stat.statEffect.Side()
-                                .equals(side)) {
-                                effects.add(new EffectWithCtx(stat.statEffect, side, data));
+                            if (stat.statEffect != null) {
+                                if (stat.statEffect.Side()
+                                        .equals(side)) {
+                                    effects.add(new EffectWithCtx(stat.statEffect, side, data));
+                                }
                             }
-                        }
 
-                        if (stat instanceof DatapackStat) {
-                            DatapackStat d = (DatapackStat) stat;
-                            if (d.effect != null) {
-                                if (d.effect.Side()
-                                    .equals(side)) {
-                                    effects.add(new EffectWithCtx(d.effect, side, data));
+                            if (stat instanceof DatapackStat) {
+                                DatapackStat d = (DatapackStat) stat;
+                                if (d.effect != null) {
+                                    if (d.effect.Side()
+                                            .equals(side)) {
+                                        effects.add(new EffectWithCtx(d.effect, side, data));
+                                    }
                                 }
                             }
                         }
-                    }
-                });
+                    });
         }
 
         return effects;

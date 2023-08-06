@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -76,15 +77,14 @@ public class Def {
         return wrapper;
     }
 
-    /*
+
     public static <T extends MenuType<?>> RegObj<T> container(String id, Supplier<T> object) {
         RegistryObject<T> reg = SlashDeferred.CONTAINERS.register(id, object);
         RegObj<T> wrapper = new RegObj<T>(reg);
         return wrapper;
     }
 
-     */
-
+     
     public static RegObj<SoundEvent> sound(String id) {
         Supplier<SoundEvent> sup = () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(SlashRef.MODID, id), 16); // todo idk?
         RegistryObject<SoundEvent> reg = SlashDeferred.SOUNDS.register(id, sup);

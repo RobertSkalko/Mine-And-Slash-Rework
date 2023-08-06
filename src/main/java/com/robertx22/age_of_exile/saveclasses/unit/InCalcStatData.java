@@ -42,7 +42,7 @@ public class InCalcStatData {
 
         finalValue *= 1 + Percent / 100;
 
-        if (stat.multiUseType == Stat.MultiUseType.MULTIPLY_STAT) {
+        if (stat.getMultiUseType() == Stat.MultiUseType.MULTIPLY_STAT) {
             finalValue *= Multi;
         }
 
@@ -91,6 +91,7 @@ public class InCalcStatData {
     public void add(ExactStatData modData, EntityData data) {
         ModType type = modData.getType();
 
+
         float v1 = modData.getFirstValue();
 
         float v = v1;
@@ -111,7 +112,7 @@ public class InCalcStatData {
 
     public StatData getCalculated() {
         float mu = 0;
-        if (GetStat().multiUseType == Stat.MultiUseType.MULTIPLICATIVE_DAMAGE) {
+        if (GetStat().getMultiUseType() == Stat.MultiUseType.MULTIPLICATIVE_DAMAGE) {
             mu = Multi;
         }
         return new StatData(this.id, calcValue(), mu);

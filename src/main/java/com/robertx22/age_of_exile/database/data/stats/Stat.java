@@ -47,13 +47,7 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     }
 
     public Stat() {
-        if (multiUseType == null) {
-            if (this.statEffect instanceof BaseDamageIncreaseEffect || (this instanceof DatapackStat st && st.effect.effects.contains(IncreaseNumberByPercentEffect.ID))) {
-                multiUseType = MultiUseType.MULTIPLICATIVE_DAMAGE;
-            } else {
-                multiUseType = MultiUseType.MULTIPLY_STAT;
-            }
-        }
+
     }
 
     public boolean show = true;
@@ -74,7 +68,18 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     public StatGroup group = StatGroup.Misc;
 
 
-    public transient MultiUseType multiUseType = null;
+    private transient MultiUseType multiUseType = null;
+
+    public MultiUseType getMultiUseType() {
+        if (multiUseType == null) {
+            if (this.statEffect instanceof BaseDamageIncreaseEffect || (this instanceof DatapackStat st && st.effect != null && st.effect.effects.contains(IncreaseNumberByPercentEffect.ID))) {
+                multiUseType = MultiUseType.MULTIPLICATIVE_DAMAGE;
+            } else {
+                multiUseType = MultiUseType.MULTIPLY_STAT;
+            }
+        }
+        return multiUseType;
+    }
 
     public enum MultiUseType {
         MULTIPLY_STAT, MULTIPLICATIVE_DAMAGE
