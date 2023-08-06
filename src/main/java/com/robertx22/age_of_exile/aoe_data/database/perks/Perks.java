@@ -11,7 +11,6 @@ import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalPenetration;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.DualWieldDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SpellDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
@@ -94,8 +93,7 @@ public class Perks implements ExileRegistryInit {
         PerkBuilder.stat("mana_on_hit", new OptScaleExactStat(3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.mana, AttackType.attack)), ModType.FLAT));
         PerkBuilder.stat("health_on_hit", new OptScaleExactStat(3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.health, AttackType.attack)), ModType.FLAT));
 
-        PerkBuilder.stat("more_dualwield_dmg", new OptScaleExactStat(3, DualWieldDamage.getInstance()));
-
+      
         Stats.ELEMENTAL_SPELL_DAMAGE.getAll()
                 .forEach(x -> {
                     PerkBuilder.stat(x.GUID(), new OptScaleExactStat(3, x, ModType.FLAT));

@@ -1,11 +1,14 @@
 package com.robertx22.age_of_exile.database.data.stats;
 
 import com.robertx22.age_of_exile.database.data.stats.datapacks.base.BaseDatapackStat;
+import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DatapackStat;
+import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageIncreaseEffect;
 import com.robertx22.age_of_exile.database.data.stats.name_regex.StatNameRegex;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.modify.IStatCtxModifier;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.action.IncreaseNumberByPercentEffect;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
@@ -44,6 +47,13 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     }
 
     public Stat() {
+        if (multiUseType == null) {
+            if (this.statEffect instanceof BaseDamageIncreaseEffect || (this instanceof DatapackStat st && st.effect.effects.contains(IncreaseNumberByPercentEffect.ID))) {
+                multiUseType = MultiUseType.MULTIPLICATIVE_DAMAGE;
+            } else {
+                multiUseType = MultiUseType.MULTIPLY_STAT;
+            }
+        }
     }
 
     public boolean show = true;
@@ -62,6 +72,28 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     public int order = 100;
     public String format = ChatFormatting.AQUA.getName();
     public StatGroup group = StatGroup.Misc;
+
+
+    public transient MultiUseType multiUseType = null;
+
+    public enum MultiUseType {
+        MULTIPLY_STAT, MULTIPLICATIVE_DAMAGE
+    }
+
+/*
+    public MultiUseType isDamageStatAndUsesMoreMultiplier() {
+
+        if (multiUseType == null) {
+            if (this.statEffect instanceof BaseDamageIncreaseEffect || (this instanceof DatapackStat st && st.effect.effects.contains(IncreaseNumberByPercentEffect.ID))) {
+                multiUseType = MultiUseType.MULTIPLICATIVE_DAMAGE;
+            } else {
+                multiUseType = MultiUseType.MULTIPLY_STAT;
+            }
+        }
+        return multiUseType;
+    }
+
+ */
 
     public ChatFormatting getFormat() {
         return ChatFormatting.getByName(format);

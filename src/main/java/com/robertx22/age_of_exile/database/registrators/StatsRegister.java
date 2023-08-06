@@ -12,7 +12,9 @@ import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuantit
 import com.robertx22.age_of_exile.database.data.stats.types.misc.BonusExp;
 import com.robertx22.age_of_exile.database.data.stats.types.misc.DamageTakenToMana;
 import com.robertx22.age_of_exile.database.data.stats.types.misc.ExtraMobDropsStat;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.*;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.FullSwingDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.SpellDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.crit.GlobalCriticalDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.crit.GlobalCriticalHit;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.DamageAbsorbedByMana;
@@ -51,6 +53,7 @@ public class StatsRegister implements ExileRegistryInit {
 
                     for (Ailment ailment : ExileDB.Ailments().getList()) {
                         add(new AilmentChance(ailment));
+                        add(new AilmentDamage(ailment));
                         add(new AilmentDuration(ailment));
                         add(new AilmentEffectStat(ailment));
                         add(new AilmentResistance(ailment));
@@ -62,7 +65,6 @@ public class StatsRegister implements ExileRegistryInit {
                     add(RegeneratePercentStat.MANA);
                     add(ArmorPenetration.getInstance());
 
-                    add(DarknessDamage.getInstance());
 
                     add(WeaponDamage.getInstance());
 
@@ -99,7 +101,6 @@ public class StatsRegister implements ExileRegistryInit {
                     add(Health.getInstance());
                     add(HealthRegen.getInstance());
 
-                    add(DualWieldDamage.getInstance());
                     add(Mana.getInstance());
                     add(ManaRegen.getInstance());
 

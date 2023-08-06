@@ -13,6 +13,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import java.util.HashMap;
 
 public class EventData {
+    public static String AILMENT = "ailment";
 
     public static String NUMBER = "number";
     public static String CANCELED = "canceled";
@@ -121,7 +122,6 @@ public class EventData {
     }
 
     public void setElement(Elements ele) {
-
         setString(ELEMENT, ele.name());
     }
 
@@ -139,12 +139,12 @@ public class EventData {
 
     public ExileEffect getExileEffect() {
         return ExileDB.ExileEffects()
-            .get(getString(EXILE_EFFECT));
+                .get(getString(EXILE_EFFECT));
     }
 
     public boolean hasExileEffect() {
         return ExileDB.ExileEffects()
-            .isRegistered(getString(EXILE_EFFECT));
+                .isRegistered(getString(EXILE_EFFECT));
     }
 
     public GiveOrTake getGiveOrTake() {
@@ -161,7 +161,7 @@ public class EventData {
 
     public boolean isSpellEffect() {
         return ExileDB.Spells()
-            .isRegistered(getString(SPELL));
+                .isRegistered(getString(SPELL));
     }
 
     public boolean isBasicAttack() {

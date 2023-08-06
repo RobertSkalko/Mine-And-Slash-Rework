@@ -12,9 +12,10 @@ public class StatData {
         return empty;
     }
 
-    public StatData(String id, float v1) {
+    public StatData(String id, float v1, float more) {
         this.id = id;
         this.v1 = v1;
+        this.m = more;
     }
 
     public StatData() {
@@ -32,7 +33,9 @@ public class StatData {
 
     private String id = "";
     private float v1 = 0;
+    private float m = 0;
 
+    /*
     public String toSerializationString() {
         return id + ":" + v1;
     }
@@ -43,6 +46,8 @@ public class StatData {
         float v1 = Float.parseFloat(parts[1]);
         return new StatData(id, v1);
     }
+
+     */
 
     public String getId() {
         return id;
@@ -59,6 +64,10 @@ public class StatData {
 
     public float getMultiplier() {
         return 1F + getValue() / 100F;
+    }
+
+    public float getMoreStatTypeMulti() {
+        return m;
     }
 
     public float getReverseMultiplier() {

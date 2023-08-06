@@ -20,7 +20,9 @@ public class IncreaseNumberByPercentEffect extends StatEffect {
 
     @Override
     public void activate(EffectEvent event, EffectSides statSource, StatData data, Stat stat) {
-        event.data.getNumber(num_id).number += event.data.getOriginalNumber(num_id).number * data.getValue() / 100F;
+        event.increaseByPercent(data.getValue());
+        event.increaseByPercent(100 + (data.getMoreStatTypeMulti() * 100F));
+        //event.in.data.getNumber(num_id).number += event.data.getOriginalNumber(num_id).number * data.getValue() / 100F;
     }
 
     @Override

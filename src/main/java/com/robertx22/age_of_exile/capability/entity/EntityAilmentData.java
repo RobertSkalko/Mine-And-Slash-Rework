@@ -9,7 +9,6 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
-import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -23,7 +22,7 @@ public class EntityAilmentData {
 
     // todo freeze and electrify
 
-    public HashMap<Elements, List<DotData>> dotMap = new HashMap<Elements, List<DotData>>();
+    public HashMap<String, List<DotData>> dotMap = new HashMap<String, List<DotData>>();
     public HashMap<String, Float> strMap = new HashMap<String, Float>();
     public HashMap<String, Float> dmgMap = new HashMap<String, Float>();
 
@@ -35,10 +34,12 @@ public class EntityAilmentData {
 
         float dmg = dmgMap.getOrDefault(ailment.GUID(), 0F);
         dmgMap.put(ailment.GUID(), 0F);
+        
 
         if (dmg > 0) {
             EventBuilder.ofDamage(caster, target, dmg).setupDamage(AttackType.dot, WeaponTypes.none, PlayStyle.magic).set(x -> {
                         x.setElement(ailment.element);
+                        x.setisAilmentDamage(ailment);
                     }).build()
                     .Activate();
         }
@@ -61,10 +62,10 @@ public class EntityAilmentData {
             int ticks = ailment.durationTicks;
             ticks *= Load.Unit(caster).getUnit().getCalculatedStat(dur).getMultiplier();
 
-            if (!dotMap.containsKey(ailment.element)) {
-                dotMap.put(ailment.element, new ArrayList<>());
+            if (!dotMap.containsKey(ailment.GUID())) {
+                dotMap.put(ailment.GUID(), new ArrayList<>());
             }
-            dotMap.get(ailment.element).add(new DotData(ticks, dmg));
+            dotMap.get(ailment.GUID()).add(new DotData(ticks, dmg));
         } else {
 
 
@@ -95,7 +96,7 @@ public class EntityAilmentData {
 
     public void onTick(LivingEntity en) {
 
-        for (Map.Entry<Elements, List<DotData>> e : dotMap.entrySet()) {
+        for (Map.Entry<String, List<DotData>> e : dotMap.entrySet()) {
             for (DotData d : e.getValue()) {
                 d.ticks--;
             }
@@ -118,8 +119,8 @@ public class EntityAilmentData {
 
 
         if (en.tickCount % 20 == 0) {
-            float freeze = strMap.getOrDefault(Elements.Cold, 0F);
-            
+            float freeze = strMap.getOrDefault(Ailments.FREEZE.GUID(), 0F);
+
             if (freeze > 0) {
                 en.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20, Ailments.FREEZE.getSlowTier(freeze)));
             }
@@ -136,17 +137,20 @@ public class EntityAilmentData {
 
 
                 if (caster != null) {
-                    for (Map.Entry<Elements, List<DotData>> e : dotMap.entrySet()) {
+                    for (Map.Entry<String, List<DotData>> e : dotMap.entrySet()) {
                         float dmg = 0;
 
                         for (DotData d : e.getValue()) {
                             dmg += d.dmg;
                         }
+
                         // todo why is this sometimes 0?
                         if (dmg > 1) {
+                            Ailment ailment = ExileDB.Ailments().get(e.getKey());
                             // todo will probably have to tweak this
                             EventBuilder.ofDamage(caster, en, dmg).setupDamage(AttackType.dot, WeaponTypes.none, PlayStyle.magic).set(x -> {
-                                        x.setElement(e.getKey());
+                                        x.setElement(ailment.element);
+                                        x.setisAilmentDamage(ailment);
                                     }).build()
                                     .Activate();
                         }

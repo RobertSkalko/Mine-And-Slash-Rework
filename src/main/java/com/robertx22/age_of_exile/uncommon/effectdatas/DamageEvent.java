@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.uncommon.effectdatas;
 
+import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
 import com.robertx22.age_of_exile.capability.entity.CooldownsData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.damage_hooks.util.AttackInformation;
@@ -522,6 +523,10 @@ public class DamageEvent extends EffectEvent {
 
     public void setElement(Elements ele) {
         this.data.setElement(ele);
+    }
+
+    public void setisAilmentDamage(Ailment al) {
+        this.data.setString(EventData.AILMENT, al.GUID());
     }
 
     public void setPenetration(float val) {

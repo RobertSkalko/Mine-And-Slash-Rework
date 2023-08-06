@@ -8,9 +8,6 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import net.minecraft.ChatFormatting;
 
-import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
-import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect.Priority;
-
 public class SpellDamage extends Stat {
 
     private SpellDamage() {
@@ -77,8 +74,7 @@ public class SpellDamage extends Stat {
 
         @Override
         public boolean canActivate(DamageEvent effect, StatData data, Stat stat) {
-            return effect.getAttackType()
-                    .isSpell() && effect.isSpell();
+            return effect.getAttackType().isSpell() && effect.isSpell();
         }
     }
 

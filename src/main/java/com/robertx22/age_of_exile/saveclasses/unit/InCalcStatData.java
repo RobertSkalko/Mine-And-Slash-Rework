@@ -16,9 +16,9 @@ public class InCalcStatData {
     private float Flat = 0;
     private float Percent = 0;
     private float Multi = 1;
-    private boolean calc = false;
+    //private boolean calc = false;
 
-    
+
     private InCalcStatData() {
 
     }
@@ -42,9 +42,9 @@ public class InCalcStatData {
 
         finalValue *= 1 + Percent / 100;
 
-        finalValue *= Multi;
-
-        this.calc = true;
+        if (stat.multiUseType == Stat.MultiUseType.MULTIPLY_STAT) {
+            finalValue *= Multi;
+        }
 
         return Mth.clamp(finalValue, stat.min, stat.max);
 
@@ -54,16 +54,6 @@ public class InCalcStatData {
         return ExileDB.Stats()
                 .get(id);
     }
-/*
-    public void addMulti(float multi) {
-        this.Multi += multi;
-    }
-
-    public void addPercent(float percent) {
-        this.Percent += percent;
-    }
-
- */
 
     public void addAlreadyScaledFlat(float val1) {
         this.Flat += val1;
@@ -120,7 +110,10 @@ public class InCalcStatData {
     }
 
     public StatData getCalculated() {
-
-        return new StatData(this.id, calcValue());
+        float mu = 0;
+        if (GetStat().multiUseType == Stat.MultiUseType.MULTIPLICATIVE_DAMAGE) {
+            mu = Multi;
+        }
+        return new StatData(this.id, calcValue(), mu);
     }
 }
