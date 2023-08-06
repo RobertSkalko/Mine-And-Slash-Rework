@@ -16,9 +16,9 @@ import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
-import net.minecraft.world.item.Items;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.Items;
 
 import java.util.Arrays;
 
@@ -67,7 +67,7 @@ public class NatureSpells implements ExileRegistryInit {
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.SNEEZE, 25D, 1D))
 
                 .build();
-        
+
         SpellBuilder.of(THORN_ARMOR, SpellConfiguration.Builder.instant(15, 200 * 20), "Thorn Armor",
                         Arrays.asList(SpellTag.damage))
                 .manualDesc("Gives buff to self:")
@@ -102,7 +102,7 @@ public class NatureSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, BeneficialEffects.POISON_WEAPONS.resourcePath, 20 * 30D))
                 .build();
 
-        SpellBuilder.of(NATURE_BALM, SpellConfiguration.Builder.nonInstant(15, 60 * 20, 30)
+        SpellBuilder.of(NATURE_BALM, SpellConfiguration.Builder.instant(15, 60 * 20)
                                 .setScaleManaToPlayer(), "Nature's Balm",
                         Arrays.asList(SpellTag.heal))
                 .manualDesc("Gives buff to allies nearby:")

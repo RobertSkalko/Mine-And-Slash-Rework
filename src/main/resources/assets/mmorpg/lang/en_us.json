@@ -366,7 +366,7 @@
 	"mmorpg.spell.healing_aura": "Healing Aura",
 	"mmorpg.spell.heart_of_ice": "Heart of Ice",
 	"mmorpg.spell.hunter_potion": "Hunter's Potion",
-	"mmorpg.spell.ice_comet": "Meteor",
+	"mmorpg.spell.ice_comet": "Ice Comet",
 	"mmorpg.spell.ice_weapon": "Icy Weapon",
 	"mmorpg.spell.jump_field": "Jump Field",
 	"mmorpg.spell.levitation": "Levitation",
@@ -446,7 +446,7 @@
 	"mmorpg.one_of_a_kind.healing_aura_mod": "Healing Aura Modifier",
 	"mmorpg.one_of_a_kind.heart_of_ice_mod": "Heart of Ice Modifier",
 	"mmorpg.one_of_a_kind.hunter_potion_mod": "Hunter's Potion Modifier",
-	"mmorpg.one_of_a_kind.ice_comet_mod": "Meteor Modifier",
+	"mmorpg.one_of_a_kind.ice_comet_mod": "Ice Comet Modifier",
 	"mmorpg.one_of_a_kind.ice_weapon_mod": "Icy Weapon Modifier",
 	"mmorpg.one_of_a_kind.jump_field_mod": "Jump Field Modifier",
 	"mmorpg.one_of_a_kind.levitation_mod": "Levitation Modifier",
@@ -1220,28 +1220,6 @@
 "_comment": " [CATEGORY]: STATS - NAMES",
 
 
-"_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
-
-	"mmorpg.unique_gear.air_disaster.name": "Aria of Disaster",
-	"mmorpg.unique_gear.autumn_harvest.name": "Autumn Harvest",
-	"mmorpg.unique_gear.azuna_ring.name": "Azuna's Eternal Decree",
-	"mmorpg.unique_gear.bone_shatterer.name": "Bone Shatterer",
-	"mmorpg.unique_gear.ghast_necklace.name": "Ghast Tear",
-	"mmorpg.unique_gear.ghostly_shores.name": "Ghostly Shores",
-	"mmorpg.unique_gear.heavenly_tear.name": "Heavenly Tear",
-	"mmorpg.unique_gear.insight.name": "Insight",
-	"mmorpg.unique_gear.mana_dominion.name": "Dominion of Mana",
-	"mmorpg.unique_gear.playful_hope.name": "Playful Hope",
-	"mmorpg.unique_gear.rabbit_paw.name": "Rabbit's Paw",
-	"mmorpg.unique_gear.skull_of_spirits.name": "Skull of Spirits",
-	"mmorpg.unique_gear.spring_blossoms.name": "Spring Blossoms",
-	"mmorpg.unique_gear.summer_heat.name": "Summer Heat",
-	"mmorpg.unique_gear.winter_chill.name": "Winter Chill",
-	"mmorpg.unique_gear.witch_brew.name": "Witch's Brew",
-
-"_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
-
-
 "_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
 
 	"mmorpg.gear_type.axe": "Axe",
@@ -1280,6 +1258,28 @@
 	"mmorpg.gearslot.sword": "Sword",
 
 "_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
+
+
+"_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
+
+	"mmorpg.unique_gear.air_disaster.name": "Aria of Disaster",
+	"mmorpg.unique_gear.autumn_harvest.name": "Autumn Harvest",
+	"mmorpg.unique_gear.azuna_ring.name": "Azuna's Eternal Decree",
+	"mmorpg.unique_gear.bone_shatterer.name": "Bone Shatterer",
+	"mmorpg.unique_gear.ghast_necklace.name": "Ghast Tear",
+	"mmorpg.unique_gear.ghostly_shores.name": "Ghostly Shores",
+	"mmorpg.unique_gear.heavenly_tear.name": "Heavenly Tear",
+	"mmorpg.unique_gear.insight.name": "Insight",
+	"mmorpg.unique_gear.mana_dominion.name": "Dominion of Mana",
+	"mmorpg.unique_gear.playful_hope.name": "Playful Hope",
+	"mmorpg.unique_gear.rabbit_paw.name": "Rabbit's Paw",
+	"mmorpg.unique_gear.skull_of_spirits.name": "Skull of Spirits",
+	"mmorpg.unique_gear.spring_blossoms.name": "Spring Blossoms",
+	"mmorpg.unique_gear.summer_heat.name": "Summer Heat",
+	"mmorpg.unique_gear.winter_chill.name": "Winter Chill",
+	"mmorpg.unique_gear.witch_brew.name": "Witch's Brew",
+
+"_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
 
 
 "_comment": " [CATEGORY]: GEAR ITEMS - NAMES",

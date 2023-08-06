@@ -41,6 +41,7 @@ public class UtilitySpells implements ExileRegistryInit {
                 //.disableInDimension(DimensionIds.DUNGEON_DIMENSION)
                 .build();
 
+      
         SpellBuilder.of("jump_field", SpellConfiguration.Builder.instant(10, 20 * 45)
                         .setScaleManaToPlayer(), "Jump Field", Arrays.asList(SpellTag.movement))
                 .manualDesc(

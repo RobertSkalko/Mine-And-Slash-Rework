@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.mixins;
 
 import com.robertx22.age_of_exile.damage_hooks.LivingHurtUtils;
-import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.MyDamageSource;
+import com.robertx22.age_of_exile.damage_hooks.util.DmgSourceUtils;
 import com.robertx22.age_of_exile.mixin_ducks.LivingEntityAccesor;
 import com.robertx22.age_of_exile.mixin_methods.CanEntityHavePotionMixin;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.HealthUtils;
@@ -51,7 +51,7 @@ public abstract class LivingEntityMixin implements LivingEntityAccesor {
     @Inject(method = "getDamageAfterMagicAbsorb", at = @At(value = "HEAD"), cancellable = true)
     public void hookench(DamageSource source, float amount, CallbackInfoReturnable<Float> ci) {
         LivingEntity en = (LivingEntity) (Object) this;
-        if (source instanceof MyDamageSource) {
+        if (DmgSourceUtils.isMyDmgSource(source)) {
             ci.setReturnValue(amount);
         }
 
@@ -64,7 +64,7 @@ public abstract class LivingEntityMixin implements LivingEntityAccesor {
         if (!source.is(DamageTypeTags.BYPASSES_ARMOR)) {
             LivingHurtUtils.damageCurioItems(en, amount);
         }
-        if (source instanceof MyDamageSource) {
+        if (DmgSourceUtils.isMyDmgSource(source)) {
             ci.setReturnValue(amount);
         }
 
@@ -73,7 +73,7 @@ public abstract class LivingEntityMixin implements LivingEntityAccesor {
     @Inject(method = "getDamageAfterArmorAbsorb", at = @At(value = "HEAD"), cancellable = true)
     public void hookarmortodmg(DamageSource source, float amount, CallbackInfoReturnable<Float> ci) {
         LivingEntity en = (LivingEntity) (Object) this;
-        if (source instanceof MyDamageSource) {
+        if (DmgSourceUtils.isMyDmgSource(source)) {
             //damageArmor(source, MathHelper.clamp(amount, 2, 10));
             ci.setReturnValue(amount);
         }

@@ -3,7 +3,7 @@ package com.robertx22.age_of_exile.uncommon.effectdatas;
 import com.robertx22.age_of_exile.capability.entity.CooldownsData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.damage_hooks.util.AttackInformation;
-import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.MyDamageSource;
+import com.robertx22.age_of_exile.damage_hooks.util.DmgSourceUtils;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.FullSwingDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.DamageAbsorbedByMana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
@@ -305,28 +305,18 @@ public class DamageEvent extends EffectEvent {
         }
 
 
-        // DamageSource ds = null;
-
-        /*
-        if (attackInfo != null) {
-            ds = attackInfo.getSource();
-        } else {
-            ds = DamageTypes.GENERIC; // todo unsure.
-        }
-
-         */
-
         if (target instanceof Player) {
             info.dmgmap.forEach((key, value) -> {
                 DeathStatsData.record((Player) target, key, value);
             });
         }
 
-        DamageSource dmgsource = new DamageSource(source.level().registryAccess().registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(DamageTypes.FELL_OUT_OF_WORLD), source, target);
+        DamageSource dmgsource = new DamageSource(source.level().registryAccess().registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(DamageTypes.FELL_OUT_OF_WORLD),
+                source);
 
         // todo MyDamageSource dmgsource = new MyDamageSource(ds, source, getElement(), dmg);
 
-        if (attackInfo == null || !(attackInfo.getSource() instanceof MyDamageSource)) { // todo wtf
+        if (attackInfo == null || !(DmgSourceUtils.isMyDmgSource(attackInfo.getSource()))) { // todo wtf
 
             AttributeInstance attri = target.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
 
@@ -412,7 +402,7 @@ public class DamageEvent extends EffectEvent {
                         .setOnCooldown(CooldownsData.IN_COMBAT, 20 * 10);
 
                 if (target instanceof Mob) {
-                   
+
                     GenerateThreatEvent threatEvent = new GenerateThreatEvent((Player) source, (Mob) target, ThreatGenType.deal_dmg, dmg);
                     threatEvent.Activate();
                 }

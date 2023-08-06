@@ -258,7 +258,7 @@ public class HolySpells implements ExileRegistryInit {
 
     static void song(String id, String name, EffectCtx effect) {
 
-        SpellBuilder.of(id, SpellConfiguration.Builder.nonInstant(10, 20 * 10, 30)
+        SpellBuilder.of(id, SpellConfiguration.Builder.nonInstant(10, 20 * 10, 10)
                         , name,
                         Arrays.asList(SpellTag.area, SpellTag.song))
                 .manualDesc(

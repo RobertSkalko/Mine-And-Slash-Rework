@@ -37,6 +37,8 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
 
                 EntityData mobKilledData = Load.Unit(mobKilled);
 
+                
+                // todo doesnt work
                 LivingEntity killerEntity = EntityInfoComponent.get(mobKilled)
                         .getDamageStats()
                         .getHighestDamager((ServerLevel) mobKilled.level());

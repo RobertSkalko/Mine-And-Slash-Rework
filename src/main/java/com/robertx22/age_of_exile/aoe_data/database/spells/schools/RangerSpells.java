@@ -25,11 +25,11 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.DashUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
-import net.minecraft.world.item.Items;
-import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.effect.MobEffects;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.item.Items;
 
 import java.util.Arrays;
 
@@ -84,7 +84,7 @@ public class RangerSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.EFFECT, 50D, 3D))
                 .build();
 
-        SpellBuilder.of(NIGHT_VISION, SpellConfiguration.Builder.nonInstant(10, 60 * 20 * 5, 40)
+        SpellBuilder.of(NIGHT_VISION, SpellConfiguration.Builder.instant(10, 60 * 20 * 5)
                                 .setScaleManaToPlayer(),
                         "Night Vision",
                         Arrays.asList())
@@ -137,7 +137,7 @@ public class RangerSpells implements ExileRegistryInit {
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.ENCHANTED_HIT, 4D, 0.1D))
                 .build();
 
-        SpellBuilder.of(THE_HUNT, SpellConfiguration.Builder.nonInstant(5, 60 * 20 * 2, 20)
+        SpellBuilder.of(THE_HUNT, SpellConfiguration.Builder.instant(5, 60 * 20 * 2)
                                 .setScaleManaToPlayer(),
                         "The Hunt",
                         Arrays.asList())
@@ -228,7 +228,7 @@ public class RangerSpells implements ExileRegistryInit {
                 )
                 .build();
 
-        SpellBuilder.of(MAKE_ARROWS, SpellConfiguration.Builder.nonInstant(10, 20 * 60 * 5, 80)
+        SpellBuilder.of(MAKE_ARROWS, SpellConfiguration.Builder.nonInstant(10, 20 * 60 * 5, 40)
                                 .setScaleManaToPlayer(), "Produce Arrows",
                         Arrays.asList())
                 .manualDesc("Produce a stack of arrows.")

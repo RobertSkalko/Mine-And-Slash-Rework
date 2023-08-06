@@ -20,10 +20,10 @@ import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.Arrays;
 
@@ -66,30 +66,33 @@ public class WaterSpells implements ExileRegistryInit {
 
                 .build();
 
-        SpellBuilder.of(ICE_COMET, SpellConfiguration.Builder.instant(18, 20 * 1)
-                                .setChargesAndRegen(ICE_COMET, 3, 20 * 20), "Meteor",
+        SpellBuilder.of(ICE_COMET, SpellConfiguration.Builder.instant(18, 20).setChargesAndRegen(ICE_COMET, 3, 20 * 20),
+                        "Ice Comet",
                         Arrays.asList(SpellTag.area, SpellTag.damage)
                 )
                 .manualDesc("Summon a meteor that falls from the sky, dealing " +
                         SpellCalcs.ICE_COMET.getLocDmgTooltip(Elements.Cold))
 
+
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
-                .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 5D)))
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 7D)))
                 .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(Blocks.PACKED_ICE, 200D)
                         .put(MapField.ENTITY_NAME, "block")
                         .put(MapField.BLOCK_FALL_SPEED, -0.03D)
                         .put(MapField.FIND_NEAREST_SURFACE, false)
                         .put(MapField.IS_BLOCK_FALLING, true)))
-                .onTick("block", PartBuilder.particleOnTick(2D, ParticleTypes.ITEM_SNOWBALL, 2D, 0.5D))
+                .onTick("block", PartBuilder.particleOnTick(1D, ParticleTypes.ITEM_SNOWBALL, 20D, 0.5D))
+                .onTick("block", PartBuilder.particleOnTick(2D, ParticleTypes.SNOWFLAKE, 20D, 1D))
                 .onExpire("block", PartBuilder.damageInAoe(SpellCalcs.ICE_COMET, Elements.Cold, 3D))
-                .onExpire("block", PartBuilder.aoeParticles(ParticleTypes.ITEM_SNOWBALL, 150D, 3D))
+                .onExpire("block", PartBuilder.aoeParticles(ParticleTypes.ITEM_SNOWBALL, 300D, 3D))
+                .onExpire("block", PartBuilder.aoeParticles(ParticleTypes.SNOWFLAKE, 300D, 3D))
                 .onExpire("block", PartBuilder.aoeParticles(ParticleTypes.ASH, 25D, 3D))
-                .onExpire("block", PartBuilder.aoeParticles(ParticleTypes.EXPLOSION, 1D, 1D))
+                .onExpire("block", PartBuilder.aoeParticles(ParticleTypes.EXPLOSION, 15D, 3D))
                 .onExpire("block", PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
                 .build();
 
-        SpellBuilder.of(CHILLING_FIELD, SpellConfiguration.Builder.nonInstant(30, 20 * 60, 30)
+        SpellBuilder.of(CHILLING_FIELD, SpellConfiguration.Builder.instant(30, 20 * 60)
                                 .setSwingArm(), "Chilling Field",
                         Arrays.asList(SpellTag.damage, SpellTag.area))
                 .weaponReq(CastingWeapon.ANY_WEAPON)
@@ -107,12 +110,13 @@ public class WaterSpells implements ExileRegistryInit {
                         .put(MapField.FIND_NEAREST_SURFACE, true)
                         .put(MapField.IS_BLOCK_FALLING, false)))
 
-                .onTick("block", PartBuilder.groundParticles(ParticleTypes.CLOUD, 20D, 2D, 0.2D))
+                .onTick("block", PartBuilder.groundParticles(ParticleTypes.CLOUD, 5D, 3D, 0.2D))
+                .onTick("block", PartBuilder.groundParticles(ParticleTypes.SNOWFLAKE, 30D, 3D, 0.2D))
                 .onTick("block", PartBuilder.playSound(SoundEvents.HORSE_BREATHE, 1.1D, 1.5D)
                         .onTick(20D))
-                .onTick("block", PartBuilder.damageInAoe(SpellCalcs.CHILLING_FIELD, Elements.Cold, 2D)
+                .onTick("block", PartBuilder.damageInAoe(SpellCalcs.CHILLING_FIELD, Elements.Cold, 3D)
                         .onTick(20D))
-                .onTick("block", PartBuilder.addExileEffectToEnemiesInAoe(NegativeEffects.CHILL.resourcePath, 2D, 20 * 4D)
+                .onTick("block", PartBuilder.addExileEffectToEnemiesInAoe(NegativeEffects.CHILL.resourcePath, 3D, 20 * 4D)
                         .onTick(20D))
                 .build();
 
@@ -136,7 +140,7 @@ public class WaterSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.healInAoe(SpellCalcs.HEART_OF_ICE, 5D))
                 .build();
 
-        SpellBuilder.of(WATER_BREATH, SpellConfiguration.Builder.nonInstant(10, 60 * 20 * 5, 40)
+        SpellBuilder.of(WATER_BREATH, SpellConfiguration.Builder.instant(10, 60 * 20 * 5)
                                 .setScaleManaToPlayer(),
                         "Water Breathing",
                         Arrays.asList())
@@ -210,8 +214,10 @@ public class WaterSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(SlashItems.SNOWBALL.get(), 1D, 2.5D, SlashEntities.SIMPLE_PROJECTILE.get(), 8D, false)
                 ))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.ITEM_SNOWBALL, 2D, 0.15D))
-                .onHit(PartBuilder.damageInAoe(SpellCalcs.ICEBALL, Elements.Cold, 2D))
-                .onHit(PartBuilder.aoeParticles(ParticleTypes.ITEM_SNOWBALL, 10D, 1D))
+                .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.SNOWFLAKE, 7D, 0.3D))
+                .onExpire(PartBuilder.damageInAoe(SpellCalcs.ICEBALL, Elements.Cold, 2D))
+                .onExpire(PartBuilder.aoeParticles(ParticleTypes.ITEM_SNOWBALL, 5D, 1D))
+                .onExpire(PartBuilder.aoeParticles(ParticleTypes.SNOWFLAKE, 15D, 0.5D))
                 .build();
 
         SpellBuilder.of(FROST_NOVA_AOE, SpellConfiguration.Builder.instant(30, 25 * 20), "Frost Nova",
@@ -222,14 +228,15 @@ public class WaterSpells implements ExileRegistryInit {
 
                 .weaponReq(CastingWeapon.ANY_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, 1D, 1D))
-                .onCast(PartBuilder.groundParticles(ParticleTypes.ITEM_SNOWBALL, 400D, 3.5D, 0.5D))
-                .onCast(PartBuilder.groundParticles(ParticleTypes.BUBBLE_POP, 250D, 3.5D, 0.5D))
+                .onCast(PartBuilder.groundParticles(ParticleTypes.ITEM_SNOWBALL, 200D, 3.5D, 0.5D))
+                .onCast(PartBuilder.groundParticles(ParticleTypes.ITEM_SNOWBALL, 300D, 3.5D, 0.5D))
+                .onCast(PartBuilder.groundParticles(ParticleTypes.BUBBLE_POP, 250D, 4D, 0.5D))
                 .onCast(PartBuilder.playSound(SoundEvents.DROWNED_HURT, 0.5D, 1D))
-                .onCast(PartBuilder.damageInAoe(SpellCalcs.FROST_NOVA, Elements.Cold, 3.5D)
+                .onCast(PartBuilder.damageInAoe(SpellCalcs.FROST_NOVA, Elements.Cold, 4D)
                         .addPerEntityHit(PartBuilder.playSoundPerTarget(SoundEvents.DROWNED_HURT, 1D, 1D)))
                 .build();
 
-        SpellBuilder.of(NOURISHMENT, SpellConfiguration.Builder.nonInstant(15, 20 * 30, 60), "Nourishment",
+        SpellBuilder.of(NOURISHMENT, SpellConfiguration.Builder.instant(15, 20 * 30), "Nourishment",
                         Arrays.asList(SpellTag.heal))
                 .manualDesc(
                         "Apply buff to allies nearby ")

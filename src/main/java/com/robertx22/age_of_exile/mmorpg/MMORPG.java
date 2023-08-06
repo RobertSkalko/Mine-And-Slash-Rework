@@ -124,16 +124,15 @@ public class MMORPG {
 
         ExileDBInit.registerAllItems(); // after config registerAll
 
+        
         CommonEvents.register();
 
         C2SPacketRegister.register();
         S2CPacketRegister.register();
 
         LifeCycleEvents.register();
-        
-        if (MMORPG.RUN_DEV_TOOLS) {
-            GeneratedData.addAllObjectsToGenerate();
-        }
+
+
         FMLJavaModLoadingContext.get().getModEventBus().addListener(EventPriority.LOW, new Consumer<GatherDataEvent>() {
             @Override
             public void accept(GatherDataEvent x) {
@@ -168,6 +167,11 @@ public class MMORPG {
     public void commonSetupEvent(FMLCommonSetupEvent event) {
 
         new CurrencyItems().registerAll();
+
+        if (MMORPG.RUN_DEV_TOOLS) {
+            GeneratedData.addAllObjectsToGenerate();
+        }
+
         // need to happen after curerrency items are registered
 /*
         if (MMORPG.RUN_DEV_TOOLS) {

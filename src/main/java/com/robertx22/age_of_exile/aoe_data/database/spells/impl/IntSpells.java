@@ -25,43 +25,43 @@ public class IntSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        SpellBuilder.of("black_hole", SpellConfiguration.Builder.nonInstant(30, 20 * 60, 30)
-                    .setSwingArm(), "Black Hole",
-                Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.area))
-            .weaponReq(CastingWeapon.MAGE_WEAPON)
+        SpellBuilder.of("black_hole", SpellConfiguration.Builder.instant(30, 20 * 60)
+                                .setSwingArm(), "Black Hole",
+                        Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.area))
+                .weaponReq(CastingWeapon.MAGE_WEAPON)
 
-            .manualDesc("Summon a dark sphere that attracts nearby enemies to it, dealing "
-                + SpellCalcs.BLACK_HOLE.getLocDmgTooltip()
-                + Elements.Elemental.getIconNameDmg() + " when it expires.")
+                .manualDesc("Summon a dark sphere that attracts nearby enemies to it, dealing "
+                        + SpellCalcs.BLACK_HOLE.getLocDmgTooltip()
+                        + Elements.Elemental.getIconNameDmg() + " when it expires.")
 
-            .onCast(PartBuilder.playSound(SoundEvents.END_PORTAL_SPAWN, 1D, 1D))
+                .onCast(PartBuilder.playSound(SoundEvents.END_PORTAL_SPAWN, 1D, 1D))
 
-            .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 0D)))
-            .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(SlashBlocks.BLACK_HOLE.get(), 20D * 5)
-                .put(MapField.ENTITY_NAME, "block")
-                .put(MapField.BLOCK_FALL_SPEED, 0D)
-                .put(MapField.FIND_NEAREST_SURFACE, true)
-                .put(MapField.IS_BLOCK_FALLING, false)))
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 0D)))
+                .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(SlashBlocks.BLACK_HOLE.get(), 20D * 5)
+                        .put(MapField.ENTITY_NAME, "block")
+                        .put(MapField.BLOCK_FALL_SPEED, 0D)
+                        .put(MapField.FIND_NEAREST_SURFACE, true)
+                        .put(MapField.IS_BLOCK_FALLING, false)))
 
-            .onTick("block", PartBuilder.particleOnTick(1D, ParticleTypes.PORTAL, 40D, 1D))
-            .onTick("block", PartBuilder.particleOnTick(1D, ParticleTypes.WITCH, 8D, 1D))
-            .onTick("block", PartBuilder.justAction(SpellAction.TP_TARGET_TO_SELF.create())
-                .addTarget(TargetSelector.AOE.create(3D, EntityFinder.SelectionType.RADIUS, AllyOrEnemy.enemies)))
-            .onExpire("block", PartBuilder.damageInAoe(SpellCalcs.BLACK_HOLE, Elements.Elemental, 2D))
-            .build();
+                .onTick("block", PartBuilder.particleOnTick(1D, ParticleTypes.PORTAL, 40D, 1D))
+                .onTick("block", PartBuilder.particleOnTick(1D, ParticleTypes.WITCH, 8D, 1D))
+                .onTick("block", PartBuilder.justAction(SpellAction.TP_TARGET_TO_SELF.create())
+                        .addTarget(TargetSelector.AOE.create(3D, EntityFinder.SelectionType.RADIUS, AllyOrEnemy.enemies)))
+                .onExpire("block", PartBuilder.damageInAoe(SpellCalcs.BLACK_HOLE, Elements.Elemental, 2D))
+                .build();
 
         SpellBuilder.of("teleport", SpellConfiguration.Builder.instant(20, 20 * 30)
-                    .setScaleManaToPlayer(), "Teleport",
-                Arrays.asList(SpellTag.damage, SpellTag.movement)
-            )
-            .manualDesc("Teleport yourself in the direction you're looking at.")
+                                .setScaleManaToPlayer(), "Teleport",
+                        Arrays.asList(SpellTag.damage, SpellTag.movement)
+                )
+                .manualDesc("Teleport yourself in the direction you're looking at.")
 
-            .teleportForward()
+                .teleportForward()
 
-            .onCast(PartBuilder.playSound(SoundEvents.CHORUS_FRUIT_TELEPORT, 1D, 1D))
-            .onCast(PartBuilder.aoeParticles(ParticleTypes.WITCH, 30D, 2D))
+                .onCast(PartBuilder.playSound(SoundEvents.CHORUS_FRUIT_TELEPORT, 1D, 1D))
+                .onCast(PartBuilder.aoeParticles(ParticleTypes.WITCH, 30D, 2D))
 
-            .build();
+                .build();
 
     }
 }
