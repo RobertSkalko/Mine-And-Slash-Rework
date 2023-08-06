@@ -248,7 +248,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
                 .textFormatting();
 
         UniqueGear uniq = this.uniqueStats.getUnique(this);
-
+        
         MutableComponent txt = ExileText.emptyLine().get().append(uniq.locName()
                 .withStyle(format));
 

@@ -100,24 +100,7 @@ public class MMORPG {
                 x.registerEntityRenderer(SlashEntities.SIMPLE_TRIDENT.get(), m -> new ModTridentRenderer(m));
             });
         });
-        /*
-        // todo test if works
-        ForgeEvents.registerForgeEvent(BuildCreativeModeTabContentsEvent.class, x -> {
-            if (x.getTab() == SlashTabs.CREATIVE.get()) {
 
-                for (Item item : VanillaUTIL.REGISTRY.items().getAll()) {
-                    if (item instanceof ICreativeTabNbt nbt) {
-                        for (ItemStack stack : nbt.createAllVariationsForCreativeTabs()) {
-                            x.accept(stack);
-                        }
-                    } else {
-                        x.accept(() -> item);
-                    }
-                }
-            }
-        });
-
-         */
 
         bus.addListener(this::commonSetupEvent);
         bus.addListener(this::interMod);
