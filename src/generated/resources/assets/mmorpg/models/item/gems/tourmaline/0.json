@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "mmorpg:items/gems/tourmaline/0"
+    "layer0": "mmorpg:item/gems/tourmaline/0"
   }
 }

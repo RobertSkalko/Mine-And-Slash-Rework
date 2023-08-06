@@ -18,6 +18,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Tooltip;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 
@@ -77,7 +78,10 @@ public class PerkButton extends ImageButton {
             List<MutableComponent> tooltip = perk.GetTooltipString(new TooltipInfo(Minecraft.getInstance().player));
             setTooltip(Tooltip.create(TextUTIL.mergeList(tooltip)));
 
-
+            Screen screen = Minecraft.getInstance().screen;
+            if (screen != null) {
+                screen.setTooltipForNextRenderPass(this.getTooltip(), this.createTooltipPositioner(), true);
+            }
             //GuiUtils.renderTooltip(gui, tooltip, mouseX, mouseY);
         } else {
             setTooltip(null);
@@ -127,10 +131,9 @@ public class PerkButton extends ImageButton {
     }
 
     @Override
-    public void render(GuiGraphics gui, int mouseX, int mouseY, float delta) {
-
+    public void renderWidget(GuiGraphics gui, int mouseX, int mouseY, float pPartialTick) {
         setTooltipMOD(gui, mouseX, mouseY);
-        
+
         float scale = 2 - screen.zoom;
 
         float posMulti = 1F / scale;
@@ -184,7 +187,7 @@ public class PerkButton extends ImageButton {
         }
 
         gui.pose().scale(1F / scale, 1F / scale, 1F / scale);
-
     }
+
 
 }

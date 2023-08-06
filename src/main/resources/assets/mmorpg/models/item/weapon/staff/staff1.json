@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"15": "mmorpg:items/weapon/staff/staff1",
+		"15": "mmorpg:item/weapon/staff/staff1",
 		"particle": "staff/metal"
 	},
 	"elements": [

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "mmorpg:items/potions/add_reset_perk_points"
+    "layer0": "mmorpg:item/potions/add_reset_perk_points"
   }
 }

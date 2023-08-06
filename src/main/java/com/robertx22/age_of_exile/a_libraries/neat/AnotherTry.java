@@ -14,7 +14,7 @@ public class AnotherTry {
             Minecraft mc = Minecraft.getInstance();
 
 
-            RenderMobInfo.renderLivingEntityLabelIfPresent(mc.font, mc.getEntityRenderDispatcher(), event.getEntity(), event.getPoseStack(),
+            RenderMobInfo.renderLivingEntityLabelIfPresent(event.getRenderer().getFont(), mc.getEntityRenderDispatcher(), event.getEntity(), event.getPoseStack(),
                     event.getMultiBufferSource(), event.getPackedLight());
 
         });

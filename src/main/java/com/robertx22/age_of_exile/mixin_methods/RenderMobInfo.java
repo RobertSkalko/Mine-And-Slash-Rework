@@ -49,11 +49,11 @@ public class RenderMobInfo {
                 if (entity instanceof ArmorStand) {
                     return;
                 }
-                if (entity.hasPassenger(Minecraft.getInstance().player)) {
+                if (entity.hasPassenger(x -> true)) {
                     return; // dont display horse's bar if the player is riding it
                 }
 
-                float yOffset = entity.getBbHeight() + 0.5F;
+                float yOffset = entity.getNameTagOffsetY();
 
                 EntityData data = Load.Unit(entity);
 
@@ -117,11 +117,11 @@ public class RenderMobInfo {
                 try {
 
                     textRenderer.drawInBatch(hpText, -textRenderer.width(text) / 2.0f, (float) i, 553648127, false,
-                            matrix4f, vertex, Font.DisplayMode.NORMAL, bgColor, i);
+                            matrix4f, vertex, Font.DisplayMode.SEE_THROUGH, bgColor, i);
 
 
                     textRenderer.drawInBatch(hpText, -textRenderer.width(hpText) / 2.0f, (float) i, 553648127, false,
-                            matrix4f, vertex, Font.DisplayMode.NORMAL, bgColor, i);
+                            matrix4f, vertex, Font.DisplayMode.SEE_THROUGH, bgColor, i);
 
 
                     MobRarity rar = ExileDB.MobRarities()
@@ -135,7 +135,7 @@ public class RenderMobInfo {
 
 
                         textRenderer.drawInBatch(icon, -textRenderer.width(icon) / 2.0f, (float) i, 553648127, false,
-                                matrix4f, vertex, Font.DisplayMode.NORMAL, ChatFormatting.YELLOW.getId(), i);
+                                matrix4f, vertex, Font.DisplayMode.SEE_THROUGH, ChatFormatting.YELLOW.getId(), i);
 
 
                         matrixStack.scale(0.5F, 0.5F, 0.5F);

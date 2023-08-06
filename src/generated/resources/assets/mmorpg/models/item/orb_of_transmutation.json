@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "mmorpg:items/orb_of_transmutation"
+    "layer0": "mmorpg:item/orb_of_transmutation"
   }
 }

@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"8": "mmorpg:items/weapon/scepter/scepter1",
+		"8": "mmorpg:item/weapon/scepter/scepter1",
 		"particle": "hammer/hilt"
 	},
 	"elements": [

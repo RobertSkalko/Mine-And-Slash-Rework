@@ -1,7 +1,7 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "mmorpg:items/stat_soul/stat_soul"
+		"layer0": "mmorpg:item/stat_soul/stat_soul"
 	},
 	"overrides": [
 		{ "predicate": {  "custom_model_data": 2 }, "model": "mmorpg:item/rarity/essence/uncommon"},

@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "mmorpg:items/mat/mythic_essence"
+        "layer0": "mmorpg:item/mat/mythic_essence"
     }
 }

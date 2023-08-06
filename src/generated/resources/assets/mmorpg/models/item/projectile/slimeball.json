@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "mmorpg:items/projectile/slimeball"
+    "layer0": "mmorpg:item/projectile/slimeball"
   }
 }

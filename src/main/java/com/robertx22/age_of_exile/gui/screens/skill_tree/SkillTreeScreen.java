@@ -164,7 +164,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                     int x2 = sb.getX() + sb.getWidth() / 2;
                     int y2 = sb.getY() + sb.getHeight() / 2;
 
-                    List<PointF> points = GuiUtils.generateCurve(new PointF(x1, y1), new PointF(x2, y2), 360f, spacing + 2, true);
+                    List<PointF> points = GuiUtils.generateCurve(new PointF(x1, y1), new PointF(x2, y2), 360f, spacing + 2 + 5, true);
 
                     for (PointF point : points) {
 

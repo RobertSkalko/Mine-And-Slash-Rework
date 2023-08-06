@@ -49,7 +49,7 @@ public class ModelHelper {
         filecontent = filecontent.replace("[TEXTURE]", tex);
 
         Path path = DirUtils.generatedResourcesDir();
-        
+
 
         String reg = "assets/" + SlashRef.MODID + "/models/item/" + VanillaUTIL.REGISTRY.items().getKey(item)
                 .getPath()
@@ -87,7 +87,7 @@ public class ModelHelper {
         }
 
         String tex = id
-                .replace(SlashRef.MODID + ":", SlashRef.MODID + ":items/");
+                .replace(SlashRef.MODID + ":", SlashRef.MODID + ":item/");
 
         return tex;
     }

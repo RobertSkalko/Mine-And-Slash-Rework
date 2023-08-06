@@ -1,7 +1,7 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "mmorpg:items/stat_soul/boots",
-        "layer1": "mmorpg:items/stat_soul/question"
+        "layer0": "mmorpg:item/stat_soul/boots",
+        "layer1": "mmorpg:item/stat_soul/question"
     }
 }

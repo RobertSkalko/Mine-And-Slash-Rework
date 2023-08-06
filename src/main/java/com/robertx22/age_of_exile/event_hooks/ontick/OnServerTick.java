@@ -36,35 +36,41 @@ public class OnServerTick {
     static {
 
         TICK_ACTIONS.add(new PlayerTickAction("spawn_bow_cast_particles", 1, (player, data) -> {
-            if (OnItemStoppedUsingCastImbuedSpell.canCastImbuedSpell(player)) {
-                if (Load.spells(player)
-                        .getCastingData().imbued_spell_stacks > 0) {
-                    ParticleUtils.spawnParticles(ParticleTypes.WITCH, player.level(), player.blockPosition(), 2);
+            if (player.isAlive()) {
+                if (OnItemStoppedUsingCastImbuedSpell.canCastImbuedSpell(player)) {
+                    if (Load.spells(player)
+                            .getCastingData().imbued_spell_stacks > 0) {
+                        ParticleUtils.spawnParticles(ParticleTypes.WITCH, player.level(), player.blockPosition(), 2);
+                    }
                 }
             }
         }));
 
         TICK_ACTIONS.add(new PlayerTickAction("update_caps", 20, (player, data) -> {
-            CapSyncUtil.syncPerSecond(player);
-            Packets.sendToClient(player, new SyncAreaLevelPacket(LevelUtils.determineLevel(player.level(), player.blockPosition(), player).level));
+            if (player.isAlive()) {
+                CapSyncUtil.syncPerSecond(player);
+                Packets.sendToClient(player, new SyncAreaLevelPacket(LevelUtils.determineLevel(player.level(), player.blockPosition(), player).level));
+            }
         }));
 
         TICK_ACTIONS.add(new
                 PlayerTickAction("second_pass", 20, (player, data) ->
         {
+            if (player.isAlive()) {
 
-            if (Load.Unit(player)
-                    .getResources()
-                    .getEnergy() < Load.Unit(player)
-                    .getUnit()
-                    .energyData()
-                    .getValue() / 10) {
-                player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 3, 1));
+                if (Load.Unit(player)
+                        .getResources()
+                        .getEnergy() < Load.Unit(player)
+                        .getUnit()
+                        .energyData()
+                        .getValue() / 10) {
+                    player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 3, 1));
+                }
+
+                UnequipGear.onTick(player);
+                Load.spells(player)
+                        .getCastingData().charges.onTicks(player, 20);
             }
-
-            UnequipGear.onTick(player);
-            Load.spells(player)
-                    .getCastingData().charges.onTicks(player, 20);
         }));
 
         TICK_ACTIONS.add(new
@@ -128,6 +134,11 @@ public class OnServerTick {
         TICK_ACTIONS.add(new
                 PlayerTickAction("every_tick", 1, (player, data) ->
         {
+            if (player == null || player.isDeadOrDying()) {
+                return;
+            }
+
+
             if (player.isBlocking()) {
                 if (Load.spells(player)
                         .getCastingData()
@@ -203,17 +214,21 @@ public class OnServerTick {
         for (ServerPlayer player : server.getPlayerList()
                 .getPlayers()) {
 
+
             try {
 
-                PlayerTickData data = PlayerTickDatas.get(player.getUUID());
+                if (player.isAlive()) {
 
-                if (data == null) {
-                    data = new PlayerTickData();
+                    PlayerTickData data = PlayerTickDatas.get(player.getUUID());
+
+                    if (data == null) {
+                        data = new PlayerTickData();
+                    }
+
+                    data.tick(player);
+
+                    PlayerTickDatas.put(player.getUUID(), data);
                 }
-
-                data.tick(player);
-
-                PlayerTickDatas.put(player.getUUID(), data);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -231,6 +246,7 @@ public class OnServerTick {
         public void tick(ServerPlayer player) {
             TICK_ACTIONS.forEach(x -> {
                 x.tick(player, this);
+                
             });
         }
     }

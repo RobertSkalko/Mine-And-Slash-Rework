@@ -75,29 +75,18 @@ public class EntityData implements ICap, INeededForClient {
                 .orElse(null);
     }
 
-    final LazyOptional<EntityData> supp = LazyOptional.of(() -> this);
+    transient final LazyOptional<EntityData> supp = LazyOptional.of(() -> this);
 
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (cap == INSTANCE) {
             return supp.cast();
         }
+
         return LazyOptional.empty();
 
     }
 
-/*
-    @Mod.EventBusSubscriber
-    public static class EventHandler {
-        @SubscribeEvent
-        public static void onEntityConstruct(AttachCapabilitiesEvent<Entity> event) {
-            if (event.getObject() instanceof LivingEntity en) {
-                event.addCapability(RESOURCE, new EntityData(en));
-            }
-        }
-    }
-
- */
 
     public EntityData(LivingEntity entity) {
         this.entity = entity;
@@ -120,7 +109,7 @@ public class EntityData implements ICap, INeededForClient {
     private static final String COOLDOWNS = "cds";
     private static final String THREAT = "th";
 
-    LivingEntity entity;
+    transient LivingEntity entity;
 
     transient EntityGears gears = new EntityGears();
 

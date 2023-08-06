@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "mmorpg:items/potions/reset_spells"
+    "layer0": "mmorpg:item/potions/reset_spells"
   }
 }

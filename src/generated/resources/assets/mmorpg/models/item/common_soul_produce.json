@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "mmorpg:items/common_soul_produce"
+    "layer0": "mmorpg:item/common_soul_produce"
   }
 }

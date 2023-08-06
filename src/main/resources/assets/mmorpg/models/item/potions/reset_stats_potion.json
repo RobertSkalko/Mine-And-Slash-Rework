@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "mmorpg:items/potions/reset_stats_potion"
+        "layer0": "mmorpg:item/potions/reset_stats_potion"
     }
 }

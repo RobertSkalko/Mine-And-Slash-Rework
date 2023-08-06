@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "mmorpg:items/loot_table_chest"
+    "layer0": "mmorpg:item/loot_table_chest"
   }
 }

@@ -37,7 +37,7 @@ public class EntitySpellCap {
     public static final ResourceLocation RESOURCE = new ResourceLocation(SlashRef.MODID, "spells");
     public static Capability<SpellCap> INSTANCE = CapabilityManager.get(new CapabilityToken<>() {
     });
-    
+
 
     public static SpellCap get(LivingEntity entity) {
         return entity.getCapability(INSTANCE)
@@ -90,7 +90,7 @@ public class EntitySpellCap {
 
     public static class SpellCap extends ISpellsCap {
 
-        final LazyOptional<SpellCap> supp = LazyOptional.of(() -> this);
+        final transient LazyOptional<SpellCap> supp = LazyOptional.of(() -> this);
 
         @Override
         public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
@@ -105,7 +105,7 @@ public class EntitySpellCap {
 
         SpellsData spellData = new SpellsData();
 
-        LivingEntity entity;
+        transient LivingEntity entity;
 
         public SpellCap(LivingEntity entity) {
             this.entity = entity;

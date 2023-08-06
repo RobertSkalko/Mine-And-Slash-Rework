@@ -32,7 +32,7 @@ public class RPGPlayerData implements ICap {
                 .orElse(null);
     }
 
-    final LazyOptional<RPGPlayerData> supp = LazyOptional.of(() -> this);
+    transient final LazyOptional<RPGPlayerData> supp = LazyOptional.of(() -> this);
 
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
@@ -62,7 +62,7 @@ public class RPGPlayerData implements ICap {
     private static final String STAT_POINTS = "stat_points";
     private static final String DEATH_STATS = "death_stats";
 
-    Player player;
+    transient Player player;
 
     public TeamData team = new TeamData();
     public TalentsData talents = new TalentsData();

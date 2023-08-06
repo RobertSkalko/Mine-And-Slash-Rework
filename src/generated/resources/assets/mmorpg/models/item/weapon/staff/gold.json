@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "mmorpg:items/weapon/staff/gold"
+    "layer0": "mmorpg:item/weapon/staff/gold"
   }
 }

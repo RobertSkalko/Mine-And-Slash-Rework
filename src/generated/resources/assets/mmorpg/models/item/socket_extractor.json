@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "mmorpg:items/socket_extractor"
+    "layer0": "mmorpg:item/socket_extractor"
   }
 }

@@ -220,7 +220,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
                             .append(" "));
         }
         if (this.uniqueStats == null) {
-            text.append(GetBaseGearType().locName());
+            text.append(" ").append(GetBaseGearType().locName());
         } else {
             text.append(uniqueStats.getUnique(this)
                     .locName()

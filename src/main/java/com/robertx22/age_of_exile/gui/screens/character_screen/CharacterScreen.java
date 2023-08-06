@@ -149,7 +149,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
 
 
         this.clearWidgets();
-    
+
         //this.children.clear();
 
         // CORE STATS
@@ -265,6 +265,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         children().forEach(b -> {
             //  b.renderToolTip(matrix, x, y);
         });
+        
 
         int p = Load.playerRPGData(mc.player).statPoints
                 .getFreePoints(mc.player);

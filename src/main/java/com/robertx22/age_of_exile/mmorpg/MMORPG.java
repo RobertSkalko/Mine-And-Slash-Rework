@@ -19,25 +19,23 @@ import com.robertx22.age_of_exile.database.registry.ExileDBInit;
 import com.robertx22.age_of_exile.mmorpg.event_registers.CommonEvents;
 import com.robertx22.age_of_exile.mmorpg.init.ClientInit;
 import com.robertx22.age_of_exile.mmorpg.registers.client.S2CPacketRegister;
-import com.robertx22.age_of_exile.mmorpg.registers.common.*;
+import com.robertx22.age_of_exile.mmorpg.registers.common.C2SPacketRegister;
+import com.robertx22.age_of_exile.mmorpg.registers.common.SlashCapabilities;
+import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
+import com.robertx22.age_of_exile.mmorpg.registers.common.SlashItemTags;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.SlashDeferred;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
-import com.robertx22.age_of_exile.vanilla_mc.items.misc.ICreativeTabNbt;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
 import com.robertx22.library_of_exile.main.ForgeEvents;
 import com.robertx22.library_of_exile.utils.Watch;
-import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.FallingBlockRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
@@ -102,6 +100,24 @@ public class MMORPG {
                 x.registerEntityRenderer(SlashEntities.SIMPLE_TRIDENT.get(), m -> new ModTridentRenderer(m));
             });
         });
+        /*
+        // todo test if works
+        ForgeEvents.registerForgeEvent(BuildCreativeModeTabContentsEvent.class, x -> {
+            if (x.getTab() == SlashTabs.CREATIVE.get()) {
+
+                for (Item item : VanillaUTIL.REGISTRY.items().getAll()) {
+                    if (item instanceof ICreativeTabNbt nbt) {
+                        for (ItemStack stack : nbt.createAllVariationsForCreativeTabs()) {
+                            x.accept(stack);
+                        }
+                    } else {
+                        x.accept(() -> item);
+                    }
+                }
+            }
+        });
+
+         */
 
         bus.addListener(this::commonSetupEvent);
         bus.addListener(this::interMod);
@@ -162,21 +178,6 @@ public class MMORPG {
 
         SlashCapabilities.register();
 
-        // todo test if works
-        ForgeEvents.registerForgeEvent(BuildCreativeModeTabContentsEvent.class, x -> {
-            if (x.getTab() == SlashTabs.CREATIVE.get()) {
-
-                for (Item item : VanillaUTIL.REGISTRY.items().getAll()) {
-                    if (item instanceof ICreativeTabNbt nbt) {
-                        for (ItemStack stack : nbt.createAllVariationsForCreativeTabs()) {
-                            x.accept(stack);
-                        }
-                    } else {
-                        x.accept(() -> item);
-                    }
-                }
-            }
-        });
 
     }
 

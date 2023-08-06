@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "mmorpg:items/currency/newbie_gear_bag"
+        "layer0": "mmorpg:item/currency/newbie_gear_bag"
     }
 }
