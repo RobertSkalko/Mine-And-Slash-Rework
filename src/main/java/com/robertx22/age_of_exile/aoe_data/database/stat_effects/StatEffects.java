@@ -20,65 +20,51 @@ import java.util.Arrays;
 public class StatEffects implements ExileRegistryInit {
 
     public static DataHolder<EffectCtx, StatEffect> GIVE_SELF_EFFECT = new DataHolder<>(
-        Arrays.asList(
-            BeneficialEffects.TAUNT_STANCE
-        ),
-        x -> new GiveExileStatusEffect(x.resourcePath, EffectSides.Source, 10)
-    );
-    public static DataHolder<EffectCtx, StatEffect> REMOVE_EFFECT_FROM_TARGET = new DataHolder<>(
-        Arrays.asList(
-            NegativeEffects.BURN,
-            NegativeEffects.POISON,
-            NegativeEffects.CHILL,
-            NegativeEffects.BLEED,
-            NegativeEffects.BLIND
-        ),
-        x -> new RemoveExileEffectAction(x.resourcePath, EffectSides.Source)
+            Arrays.asList(
+                    BeneficialEffects.TAUNT_STANCE
+            ),
+            x -> new GiveExileStatusEffect(x.resourcePath, EffectSides.Source, 10)
     );
 
+
     public static DataHolder<EffectCtx, StatEffect> GIVE_EFFECT_IN_AOE = new DataHolder<>(
-        Arrays.asList(BeneficialEffects.REGENERATE
-        ),
-        x -> new GiveExileStatusInRadius("give_" + x.id + "_to_allies_in_radius", AllyOrEnemy.allies, 10, x.resourcePath)
+            Arrays.asList(BeneficialEffects.REGENERATE
+            ),
+            x -> new GiveExileStatusInRadius("give_" + x.id + "_to_allies_in_radius", AllyOrEnemy.allies, 10, x.resourcePath)
     );
 
     public static DataHolder<ResourceType, StatEffect> LEECH_RESTORE_RESOURCE_BASED_ON_STAT_DATA = new DataHolder<>(
-        Arrays.asList(
-            ResourceType.mana,
-            ResourceType.energy,
-            ResourceType.health
-        )
-        , x -> new RestoreResourceAction("restore_" + x.id + "_per_stat_data", NumberProvider.ofStatData(), x, RestoreType.leech)
+            Arrays.asList(
+                    ResourceType.mana,
+                    ResourceType.energy,
+                    ResourceType.health
+            )
+            , x -> new RestoreResourceAction("restore_" + x.id + "_per_stat_data", NumberProvider.ofStatData(), x, RestoreType.leech)
     );
 
     public static DataHolder<ResourceType, StatEffect> LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE = new DataHolder<>(
-        Arrays.asList(
-            ResourceType.mana,
-            ResourceType.energy,
-            ResourceType.health
-        )
-        , x -> new RestoreResourceAction("leech_" + x.id, NumberProvider.ofPercentOfDataNumber(EventData.NUMBER), x, RestoreType.leech)
+            Arrays.asList(
+                    ResourceType.mana,
+                    ResourceType.energy,
+                    ResourceType.health
+            )
+            , x -> new RestoreResourceAction("leech_" + x.id, NumberProvider.ofPercentOfDataNumber(EventData.NUMBER), x, RestoreType.leech)
     );
 
     public static DataHolder<EffectCtx, StatEffect> GIVE_EFFECT_TO_SOURCE = new DataHolder<>(
-        Arrays.asList(
-            NegativeEffects.POISON
-        )
-        , x -> new GiveExileStatusEffect(x.resourcePath, EffectSides.Source, 5));
+            Arrays.asList(
+            )
+            , x -> new GiveExileStatusEffect(x.resourcePath, EffectSides.Source, 5));
 
     public static DataHolder<EffectCtx, StatEffect> GIVE_EFFECT_TO_TARGET = new DataHolder<>(
-        Arrays.asList(
-            NegativeEffects.BURN,
-            NegativeEffects.SLOW,
-            NegativeEffects.STUN,
+            Arrays.asList(
+                    NegativeEffects.SLOW,
+                    NegativeEffects.STUN,
 
-            NegativeEffects.CHILL,
-            NegativeEffects.BLEED,
-            NegativeEffects.POISON,
-            NegativeEffects.BLIND,
-            NegativeEffects.TORMENT
-        )
-        , x -> new GiveExileStatusEffect(x.resourcePath, EffectSides.Target, 5));
+                    NegativeEffects.BLIND,
+                    NegativeEffects.TORMENT
+            )
+            , x -> new GiveExileStatusEffect(x.resourcePath, EffectSides.Target, 5));
 
     public static StatEffect SET_IS_CRIT = new SetBooleanEffect(EventData.CRIT);
     public static StatEffect INC_VALUE_PER_CURSE_ON_TARGET = new IncreaseNumberPerCurseOnTarget();
@@ -102,13 +88,13 @@ public class StatEffects implements ExileRegistryInit {
     public static StatEffect APPLY_CAST_SPEED_TO_CD = new ApplyCooldownAsCastTimeEffect();
 
     public static DataHolder<String, StatEffect> ADD_PERC_OF_STAT_TO_NUMBER = new DataHolder<>(
-        Arrays.asList(
-            Health.getInstance()
-                .GUID(),
-            Mana.getInstance()
-                .GUID()
-        )
-        , x -> new AddToNumberEffect("add_perc_of_" + x + "_to_num", EventData.NUMBER, NumberProvider.ofPercentOfStat(x)));
+            Arrays.asList(
+                    Health.getInstance()
+                            .GUID(),
+                    Mana.getInstance()
+                            .GUID()
+            )
+            , x -> new AddToNumberEffect("add_perc_of_" + x + "_to_num", EventData.NUMBER, NumberProvider.ofPercentOfStat(x)));
 
     public static void loadClass() {
     }
@@ -119,7 +105,6 @@ public class StatEffects implements ExileRegistryInit {
         GIVE_SELF_EFFECT.addToSerializables();
         APPLY_CAST_SPEED_TO_CD.addToSerializables();
         DOUBLE_DAMAGE.addToSerializables();
-        REMOVE_EFFECT_FROM_TARGET.addToSerializables();
         MULTIPLY_VALUE.addToSerializables();
         GIVE_EFFECT_TO_TARGET.addToSerializables();
         SET_IS_CRIT.addToSerializables();

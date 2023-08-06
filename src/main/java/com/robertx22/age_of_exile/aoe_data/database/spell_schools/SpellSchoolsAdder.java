@@ -111,8 +111,7 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
 
                 .addSpell(WaterSpells.NOURISHMENT, new PointData(7, 3))
                 .addSpell(WaterSpells.ICE_COMET, new PointData(1, 3))
-                .addSpell(WaterSpells.CHILL_ERUPTION, new PointData(2, 3))
-
+            
                 .addSpell(WaterSpells.MAGE_CIRCLE, new PointData(10, 4))
 
                 .build();

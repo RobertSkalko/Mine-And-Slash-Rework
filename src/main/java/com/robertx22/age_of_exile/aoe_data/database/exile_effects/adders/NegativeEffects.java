@@ -32,12 +32,8 @@ public class NegativeEffects implements ExileRegistryInit {
 
     public static EffectCtx ELE_WEAKNESS = new EffectCtx("ele_weakness", "Ele Weakness", 0, Elements.Elemental, EffectType.negative);
     public static EffectCtx PETRIFY = new EffectCtx("petrify", "Petrify", 1, Elements.Chaos, EffectType.negative);
-    public static EffectCtx CHILL = new EffectCtx("chill", "Chill", 2, Elements.Cold, EffectType.negative);
-    public static EffectCtx POISON = new EffectCtx("poison", "Poison", 3, Elements.Chaos, EffectType.negative);
     public static EffectCtx WOUNDS = new EffectCtx("wounds", "Wounds", 4, Elements.Physical, EffectType.negative);
-    public static EffectCtx BURN = new EffectCtx("burn", "Burn", 5, Elements.Fire, EffectType.negative);
     public static EffectCtx TORMENT = new EffectCtx("torment", "Torment", 7, Elements.Elemental, EffectType.negative);
-    public static EffectCtx BLEED = new EffectCtx("bleed", "Bleed", 8, Elements.Physical, EffectType.negative);
     public static EffectCtx BLIND = new EffectCtx("blind", "Blind", 10, Elements.Chaos, EffectType.negative);
     public static EffectCtx STUN = new EffectCtx("stun", "Stun", 11, Elements.Physical, EffectType.negative);
     public static EffectCtx SLOW = new EffectCtx("slow", "Slow", 12, Elements.Physical, EffectType.negative);
@@ -148,50 +144,6 @@ public class NegativeEffects implements ExileRegistryInit {
                         .buildForEffect())
                 .build();
 
-        ExileEffectBuilder.of(CHILL)
-
-                .maxStacks(5)
-                .vanillaStat(VanillaStatData.create(MOVEMENT_SPEED, -0.1F, ModType.MORE, UUID.fromString("bd9d32fa-c8c2-455c-92aa-4a94c2a70cd8")))
-                .spell(SpellBuilder.forEffect()
-                        .onTick(PartBuilder.aoeParticles(ParticleTypes.ITEM_SNOWBALL, 10D, 1D)
-                                .onTick(10D))
-                        .buildForEffect())
-                .build();
-
-        ExileEffectBuilder.of(POISON)
-                .maxStacks(5)
-                .stat(-5, -5, new ElementalResist(Elements.Elemental), ModType.FLAT)
-                .spell(SpellBuilder.forEffect()
-                        .onTick(PartBuilder.dotDamageOnTick(POISON.resourcePath, SpellCalcs.POISON, Elements.Chaos)
-                                .onTick(20D))
-                        .onTick(PartBuilder.aoeParticles(ParticleTypes.SNEEZE, 1D, 1D)
-                                .onTick(2D))
-                        .buildForEffect())
-                .build();
-
-        ExileEffectBuilder.of(BURN)
-                .maxStacks(5)
-                .spell(SpellBuilder.forEffect()
-
-                        .onTick(PartBuilder.dotDamageOnTick(BURN.resourcePath, SpellCalcs.BURN, Elements.Fire)
-                                .onTick(20D))
-
-                        .onTick(PartBuilder.aoeParticles(ParticleTypes.FLAME, 10D, 1D)
-                                .onTick(20D))
-                        .onTick(PartBuilder.playSound(SoundEvents.CAMPFIRE_CRACKLE, 0.5D, 1D)
-                                .onTick(20D))
-                        .buildForEffect())
-                .build();
-
-        ExileEffectBuilder.of(BLEED)
-                .maxStacks(5)
-                .spell(SpellBuilder.forEffect()
-
-                        .onTick(PartBuilder.dotDamageOnTick(BLEED.resourcePath, SpellCalcs.BLEED, Elements.Physical)
-                                .onTick(20D))
-
-                        .buildForEffect())
-                .build();
 
         ExileEffectBuilder.of(ELE_WEAKNESS)
                 .stat(-15, -15, new ElementalResist(Elements.Elemental), ModType.FLAT)

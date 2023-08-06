@@ -11,10 +11,8 @@ import com.robertx22.library_of_exile.registry.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
-
 public class Affix implements IWeighted, IGUID, IAutoLocName, IhasRequirements,
-    JsonExileRegistry<Affix>, IAutoGson<Affix> {
+        JsonExileRegistry<Affix>, IAutoGson<Affix> {
 
     public enum Type {
         prefix,

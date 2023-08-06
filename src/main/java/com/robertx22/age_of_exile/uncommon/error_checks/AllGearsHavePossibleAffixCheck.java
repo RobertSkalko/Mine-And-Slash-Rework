@@ -13,8 +13,8 @@ public class AllGearsHavePossibleAffixCheck implements IErrorCheck {
     public void check() {
 
         for (BaseGearType slot : ExileDB.GearTypes()
-            .getAll()
-            .values()) {
+                .getAll()
+                .values()) {
 
             Affix prefix = Prefixes.INSTANCE.random(new GearRequestedFor(slot));
             Affix suffix = Suffixes.INSTANCE.random(new GearRequestedFor(slot));

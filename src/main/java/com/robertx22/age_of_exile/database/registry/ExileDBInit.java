@@ -32,10 +32,8 @@ public class ExileDBInit {
     }
 
     private static void registerAllNonDatapackEntries() {
-        new StatsRegister().registerAll();// STATS MUST BE INIT FIRST
         Ailments.init();
-        
-        // should be at least
+        new StatsRegister().registerAll();
     }
 
     public static void initRegistries() {
@@ -70,6 +68,7 @@ public class ExileDBInit {
                 .setIsDatapack());
 
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.STAT, EmptyStat.getInstance()));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.AILMENT, null));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.CURRENCY_ITEMS, null));
     }
 }

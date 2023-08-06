@@ -39,7 +39,6 @@ nourishment
 recoil_shot
 poison_ball
 teleport
-chill_eruption
 banish
 guard_totem
 mark_for_death

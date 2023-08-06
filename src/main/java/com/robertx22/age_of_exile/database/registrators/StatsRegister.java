@@ -1,15 +1,10 @@
 package com.robertx22.age_of_exile.database.registrators;
 
+import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
+import com.robertx22.age_of_exile.database.data.stats.types.ailment.*;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttributes;
-import com.robertx22.age_of_exile.database.data.stats.types.crafting.CraftingSuccessChance;
-import com.robertx22.age_of_exile.database.data.stats.types.crafting.IncreaseMinRarityStat;
-import com.robertx22.age_of_exile.database.data.stats.types.crafting.MaxUsesStat;
-import com.robertx22.age_of_exile.database.data.stats.types.crafting.RandomCraftingStat;
-import com.robertx22.age_of_exile.database.data.stats.types.crafting.craft_grid.IngNotTouchThis;
-import com.robertx22.age_of_exile.database.data.stats.types.crafting.craft_grid.IngToLeft;
-import com.robertx22.age_of_exile.database.data.stats.types.crafting.craft_grid.IngTouchThis;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.*;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.*;
 import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuality;
@@ -33,6 +28,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shie
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShieldRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.IGenerated;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -52,6 +48,15 @@ public class StatsRegister implements ExileRegistryInit {
         List<Stat> generated = new ArrayList<Stat>() {
             {
                 {
+
+                    for (Ailment ailment : ExileDB.Ailments().getList()) {
+                        add(new AilmentChance(ailment));
+                        add(new AilmentDuration(ailment));
+                        add(new AilmentEffectStat(ailment));
+                        add(new AilmentResistance(ailment));
+                        add(new AilmentProcStat(ailment));
+                    }
+
 
                     add(RegeneratePercentStat.HEALTH);
                     add(RegeneratePercentStat.MANA);
@@ -108,14 +113,6 @@ public class StatsRegister implements ExileRegistryInit {
                     add(DodgeRating.getInstance());
                     add(DamageShield.getInstance());
 
-                    add(IngTouchThis.getInstance());
-                    add(IngNotTouchThis.getInstance());
-                    add(IngToLeft.getInstance());
-
-                    add(RandomCraftingStat.getInstance());
-                    add(IncreaseMinRarityStat.getInstance());
-                    add(MaxUsesStat.getInstance());
-                    add(CraftingSuccessChance.getInstance());
 
                 }
             }

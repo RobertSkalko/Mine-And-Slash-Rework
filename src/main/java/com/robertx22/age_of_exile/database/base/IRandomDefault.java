@@ -32,11 +32,11 @@ public interface IRandomDefault<T extends IhasRequirements & IWeighted> extends 
 
     public default List<T> allThatMeetRequirement(List<T> list, GearRequestedFor gearRequestedFor) {
         return list.stream()
-            .filter(x -> {
-                return x.requirements()
-                    .satisfiesAllRequirements(gearRequestedFor);
-            })
-            .collect(Collectors.toList());
+                .filter(x -> {
+                    return x.requirements()
+                            .satisfiesAllRequirements(gearRequestedFor);
+                })
+                .collect(Collectors.toList());
     }
 
 }

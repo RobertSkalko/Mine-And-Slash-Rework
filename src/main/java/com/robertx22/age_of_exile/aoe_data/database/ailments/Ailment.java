@@ -23,7 +23,9 @@ public class Ailment implements ExileRegistry<Ailment>, IAutoLocName, IAutoLocDe
 
     public float damageEffectivenessMulti;
 
-    public float mobHealthPercentLostPerSecond;
+    public int lostOccursEverySeconds = 3;
+
+    public float percentLostEveryXSeconds;
 
     public int durationTicks;
 
@@ -39,16 +41,17 @@ public class Ailment implements ExileRegistry<Ailment>, IAutoLocName, IAutoLocDe
         return (int) (damageEffectivenessMulti * 100F);
     }
 
-    public Ailment(String id, Elements element, boolean isDot, boolean isStrengthEffect, float damageEffectivenessMulti, float mobHealthPercentLostPerSecond, int durationTicks, Function<Ailment, String> desc) {
+    public Ailment(String id, Elements element, boolean isDot, boolean isStrengthEffect, float damageEffectivenessMulti, float percentLostEveryXSeconds, int durationTicks, Function<Ailment, String> desc) {
         this.id = id;
         this.isStrengthEffect = isStrengthEffect;
         this.element = element;
         this.isDot = isDot;
         this.desc = desc;
         this.damageEffectivenessMulti = damageEffectivenessMulti;
-        this.mobHealthPercentLostPerSecond = mobHealthPercentLostPerSecond;
+        this.percentLostEveryXSeconds = percentLostEveryXSeconds;
         this.durationTicks = durationTicks;
     }
+    
 
     @Override
     public ExileRegistryType getExileRegistryType() {

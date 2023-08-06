@@ -41,15 +41,15 @@ public class AffixBuilder {
 
     public AffixBuilder includesTags(BaseGearType.SlotTag... tags) {
         this.tagRequirement.included.addAll(Arrays.stream(tags)
-            .map(x -> x.name())
-            .collect(Collectors.toList()));
+                .map(x -> x.name())
+                .collect(Collectors.toList()));
         return this;
     }
 
     public AffixBuilder excludesTags(BaseGearType.SlotTag... tags) {
         this.tagRequirement.excluded.addAll(Arrays.stream(tags)
-            .map(x -> x.name())
-            .collect(Collectors.toList()));
+                .map(x -> x.name())
+                .collect(Collectors.toList()));
         return this;
     }
 
@@ -70,9 +70,9 @@ public class AffixBuilder {
 
     public AffixBuilder Tags(AffixTag... tags) {
         this.tags = Arrays.asList(tags)
-            .stream()
-            .map(x -> x.name())
-            .collect(Collectors.toList());
+                .stream()
+                .map(x -> x.name())
+                .collect(Collectors.toList());
         return this;
     }
 

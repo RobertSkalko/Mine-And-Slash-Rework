@@ -49,6 +49,7 @@ import java.util.stream.Collectors;
 
 public class Unit {
 
+    
     private StatContainer stats = new StatContainer();
 
     public String GUID = UUID.randomUUID().toString();

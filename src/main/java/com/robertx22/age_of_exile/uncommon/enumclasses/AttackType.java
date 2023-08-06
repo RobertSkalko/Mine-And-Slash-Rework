@@ -36,6 +36,11 @@ public enum AttackType {
         ErrorUtils.ifFalse(id.equals(this.name()));
     }
 
+
+    public boolean isHit() {
+        return this == attack || this == spell;
+    }
+
     public boolean isAttack() {
         return this == attack;
     }

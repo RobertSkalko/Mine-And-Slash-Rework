@@ -1,9 +1,10 @@
 package com.robertx22.age_of_exile.aoe_data.database.mob_affixes;
 
-import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.NegativeEffects;
+import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.database.data.StatModifier;
 import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
+import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.PhysConvertToEle;
 import com.robertx22.age_of_exile.database.data.stats.types.misc.ExtraMobDropsStat;
@@ -44,7 +45,7 @@ public class MobAffixes implements ExileRegistryInit {
         new MobAffix("winter", new BonusAttackDamage(Cold).getFormatAndIcon(), Cold.format)
                 .setMods(
                         new StatModifier(15, 15, Health.getInstance()),
-                        new StatModifier(5, 5, Stats.CHANCE_OF_APPLYING_EFFECT.get(NegativeEffects.CHILL)),
+                        new StatModifier(5, 5, new AilmentChance(Ailments.FREEZE)),
                         new StatModifier(75, 75, new PhysConvertToEle(Cold)),
                         new StatModifier(1, 1, new BonusAttackDamage(Cold), ModType.FLAT),
                         new StatModifier(20, 20, ExtraMobDropsStat.getInstance()))
@@ -55,7 +56,7 @@ public class MobAffixes implements ExileRegistryInit {
         new MobAffix("fire_lord", new BonusAttackDamage(Fire).getFormatAndIcon(), Fire.format)
                 .setMods(
                         new StatModifier(15, 15, Health.getInstance()),
-                        new StatModifier(5, 5, Stats.CHANCE_OF_APPLYING_EFFECT.get(NegativeEffects.BURN)),
+                        new StatModifier(5, 5, new AilmentChance(Ailments.BURN)),
                         new StatModifier(75, 75, new PhysConvertToEle(Fire)),
                         new StatModifier(1, 1, new BonusAttackDamage(Fire), ModType.FLAT),
                         new StatModifier(20, 20, ExtraMobDropsStat.getInstance()))
@@ -66,7 +67,7 @@ public class MobAffixes implements ExileRegistryInit {
         new MobAffix("nature_lord", new BonusAttackDamage(Chaos).getFormatAndIcon(), Chaos.format)
                 .setMods(
                         new StatModifier(15, 15, Health.getInstance()),
-                        new StatModifier(5, 5, Stats.CHANCE_OF_APPLYING_EFFECT.get(NegativeEffects.POISON)),
+                        new StatModifier(5, 5, new AilmentChance(Ailments.POISON)),
                         new StatModifier(75, 75, new PhysConvertToEle(Chaos)),
                         new StatModifier(1, 1, new BonusAttackDamage(Chaos), ModType.FLAT),
                         new StatModifier(20, 20, ExtraMobDropsStat.getInstance()))

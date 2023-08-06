@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders;
 
+import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.ExileEffectBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
@@ -10,9 +11,9 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
 import com.robertx22.age_of_exile.database.data.exile_effects.EffectType;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.AggroAction;
-import com.robertx22.age_of_exile.database.data.spells.components.actions.ExileEffectAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
+import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
@@ -178,15 +179,8 @@ public class BeneficialEffects implements ExileRegistryInit {
         ExileEffectBuilder.of(THORN_ARMOR)
                 .stat(10, 25, new ElementalResist(Elements.Chaos), ModType.FLAT)
                 .stat(5, 10, Armor.getInstance(), ModType.FLAT)
+                .stat(5, 10, new AilmentChance(Ailments.POISON), ModType.FLAT)
                 .stat(5, 10, DodgeRating.getInstance(), ModType.FLAT)
-                .spell(SpellBuilder.forEffect()
-                        .onTick(PartBuilder.justAction(SpellAction.EXILE_EFFECT.create(NegativeEffects.POISON.resourcePath, ExileEffectAction.GiveOrTake.GIVE_STACKS, 80D))
-                                .setTarget(TargetSelector.AOE.create(2D, EntityFinder.SelectionType.RADIUS, AllyOrEnemy.enemies))
-                                .onTick(40D))
-                        .onTick(PartBuilder.aoeParticles(ParticleTypes.ITEM_SLIME, 5D, 1D)
-                                .onTick(40D))
-
-                        .buildForEffect())
                 .addTags(EffectTags.defensive)
 
                 .build();
@@ -208,7 +202,7 @@ public class BeneficialEffects implements ExileRegistryInit {
 
         ExileEffectBuilder.of(POISON_WEAPONS)
                 .stat(1, 2, new BonusAttackDamage(Elements.Chaos), ModType.FLAT)
-                .stat(5, 15, Stats.CHANCE_OF_APPLYING_EFFECT.get(NegativeEffects.POISON), ModType.FLAT)
+                .stat(5, 15, new AilmentChance(Ailments.POISON), ModType.FLAT)
                 .addTags(EffectTags.offensive)
                 .build();
 

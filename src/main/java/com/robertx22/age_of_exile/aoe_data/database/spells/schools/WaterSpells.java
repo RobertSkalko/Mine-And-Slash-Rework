@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.spells.schools;
 
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.BeneficialEffects;
-import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.NegativeEffects;
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
@@ -9,7 +8,6 @@ import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.components.conditions.EffectCondition;
-import com.robertx22.age_of_exile.database.data.spells.components.entity_predicates.SpellEntityPredicate;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeapon;
@@ -40,31 +38,10 @@ public class WaterSpells implements ExileRegistryInit {
     public static String ICY_WEAPON = "ice_weapon";
     public static String CHILLING_FIELD = "chilling_field";
     public static String ICE_COMET = "ice_comet";
-    public static String CHILL_ERUPTION = "chill_eruption";
 
     @Override
     public void registerAll() {
 
-        SpellBuilder.of(CHILL_ERUPTION, SpellConfiguration.Builder.instant(30, 25 * 20), "Chill Eruption",
-                        Arrays.asList(SpellTag.area, SpellTag.damage))
-                .manualDesc(
-                        "Detonate every enemy affected by Chill to deal " + SpellCalcs.FROST_NOVA.getLocDmgTooltip()
-                                + " " + Elements.Cold.getIconNameDmg() + "")
-
-                .weaponReq(CastingWeapon.ANY_WEAPON)
-                .onCast(PartBuilder.playSound(SoundEvents.GLASS_BREAK, 1D, 1D))
-
-                .onCast(PartBuilder.groundEdgeParticles(ParticleTypes.ITEM_SNOWBALL, 250D, 5D, 0.5D))
-
-                .onCast(PartBuilder.damageInAoe(SpellCalcs.CHILL_ERUPTION, Elements.Cold, 5D)
-                        .addEntityPredicate(SpellEntityPredicate.HAS_EFFECT.create(NegativeEffects.CHILL))
-                        .addPerEntityHit(PartBuilder.playSoundPerTarget(SoundEvents.GLASS_HIT, 1D, 1D))
-                        .addPerEntityHit(PartBuilder.playSoundPerTarget(SoundEvents.GLASS_BREAK, 1D, 1D))
-                        .addPerEntityHit(PartBuilder.aoeParticles(ParticleTypes.ITEM_SNOWBALL, 100D, 1D))
-                        .addPerEntityHit(PartBuilder.aoeParticles(ParticleTypes.ENCHANTED_HIT, 50D, 1D))
-                )
-
-                .build();
 
         SpellBuilder.of(ICE_COMET, SpellConfiguration.Builder.instant(18, 20).setChargesAndRegen(ICE_COMET, 3, 20 * 20),
                         "Ice Comet",
@@ -115,8 +92,6 @@ public class WaterSpells implements ExileRegistryInit {
                 .onTick("block", PartBuilder.playSound(SoundEvents.HORSE_BREATHE, 1.1D, 1.5D)
                         .onTick(20D))
                 .onTick("block", PartBuilder.damageInAoe(SpellCalcs.CHILLING_FIELD, Elements.Cold, 3D)
-                        .onTick(20D))
-                .onTick("block", PartBuilder.addExileEffectToEnemiesInAoe(NegativeEffects.CHILL.resourcePath, 3D, 20 * 4D)
                         .onTick(20D))
                 .build();
 

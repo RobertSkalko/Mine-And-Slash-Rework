@@ -7,11 +7,7 @@ beneficial/20
 negative/17
 negative/18
 negative/7
-negative/8
-negative/2
-negative/3
 negative/4
-negative/5
 beneficial/19
 beneficial/18
 beneficial/33

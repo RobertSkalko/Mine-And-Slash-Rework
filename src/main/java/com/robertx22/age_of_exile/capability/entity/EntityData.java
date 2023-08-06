@@ -106,6 +106,7 @@ public class EntityData implements ICap, INeededForClient {
     private static final String ENTITY_TYPE = "ENTITY_TYPE";
     private static final String RESOURCES_LOC = "res_loc";
     private static final String STATUSES = "statuses";
+    private static final String AILMENTS = "ailments";
     private static final String COOLDOWNS = "cds";
     private static final String THREAT = "th";
 
@@ -122,6 +123,7 @@ public class EntityData implements ICap, INeededForClient {
     MobData affixes = new MobData();
 
     public EntityStatusEffectsData statusEffects = new EntityStatusEffectsData();
+    public EntityAilmentData ailments = new EntityAilmentData();
 
     CooldownsData cooldowns = new CooldownsData();
     ThreatData threat = new ThreatData();
@@ -151,6 +153,7 @@ public class EntityData implements ICap, INeededForClient {
             LoadSave.Save(affixes, nbt, AFFIXES);
         }
         LoadSave.Save(statusEffects, nbt, STATUSES);
+        LoadSave.Save(ailments, nbt, AILMENTS);
     }
 
     @Override
@@ -178,6 +181,10 @@ public class EntityData implements ICap, INeededForClient {
         this.statusEffects = LoadSave.Load(EntityStatusEffectsData.class, new EntityStatusEffectsData(), nbt, STATUSES);
         if (statusEffects == null) {
             statusEffects = new EntityStatusEffectsData();
+        }
+        this.ailments = LoadSave.Load(EntityAilmentData.class, new EntityAilmentData(), nbt, AILMENTS);
+        if (ailments == null) {
+            ailments = new EntityAilmentData();
         }
 
     }

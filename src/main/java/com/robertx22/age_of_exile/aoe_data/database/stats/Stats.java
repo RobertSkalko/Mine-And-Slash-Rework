@@ -326,10 +326,10 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
+    /*
     public static DataPackStatAccessor<EffectCtx> CHANCE_TO_APPLY_EFFECT_WHEN_HIT = DatapackStatBuilder
             .<EffectCtx>of(x -> "chance_of_" + x.id + "_when_hit", x -> x.element)
             .addAllOfType(Arrays.asList(
-                            NegativeEffects.POISON
                     )
             )
             .worksWithEvent(DamageEvent.ID)
@@ -350,15 +350,13 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
+     */
+
     public static DataPackStatAccessor<EffectCtx> CHANCE_OF_APPLYING_EFFECT = DatapackStatBuilder
             .<EffectCtx>of(x -> "chance_of_" + x.id, x -> x.element)
             .addAllOfType(Arrays.asList(
-                            NegativeEffects.BURN,
-                            NegativeEffects.CHILL,
-                            NegativeEffects.BLEED,
                             NegativeEffects.TORMENT,
                             NegativeEffects.BLIND,
-                            NegativeEffects.POISON,
                             NegativeEffects.SLOW
                     )
             )
@@ -382,10 +380,10 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
+    /*
     public static DataPackStatAccessor<EffectCtx> CHANCE_OF_APPLYING_EFFECT_ON_CRIT = DatapackStatBuilder
             .<EffectCtx>of(x -> "chance_of_" + x.id + "_on_crit", x -> x.element)
             .addAllOfType(Arrays.asList(
-                            NegativeEffects.BURN
                     )
             )
             .worksWithEvent(DamageEvent.ID)
@@ -408,6 +406,8 @@ public class Stats implements ExileRegistryInit {
                 x.scaling = StatScaling.NONE;
             })
             .build();
+
+     */
 
     public static DataPackStatAccessor<EmptyAccessor> CRIT_CHANCE = DatapackStatBuilder
             .ofSingle("critical_hit", Elements.Physical)
