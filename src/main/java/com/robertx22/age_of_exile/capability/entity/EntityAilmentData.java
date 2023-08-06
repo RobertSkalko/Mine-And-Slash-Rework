@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.capability.entity;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
+import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDuration;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentEffectStat;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentResistance;
@@ -11,6 +12,8 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import org.joml.Math;
 
@@ -115,6 +118,11 @@ public class EntityAilmentData {
 
 
         if (en.tickCount % 20 == 0) {
+            float freeze = strMap.getOrDefault(Elements.Cold, 0F);
+            
+            if (freeze > 0) {
+                en.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20, Ailments.FREEZE.getSlowTier(freeze)));
+            }
 
             UUID id = null;
             try {
@@ -122,7 +130,7 @@ public class EntityAilmentData {
             } catch (Exception e) {
                 //throw new RuntimeException(e);
             }
-            
+
             if (id != null) {
                 LivingEntity caster = en.level().getPlayerByUUID(id);
 

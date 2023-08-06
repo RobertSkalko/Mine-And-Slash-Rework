@@ -51,7 +51,21 @@ public class Ailment implements ExileRegistry<Ailment>, IAutoLocName, IAutoLocDe
         this.percentLostEveryXSeconds = percentLostEveryXSeconds;
         this.durationTicks = durationTicks;
     }
-    
+
+    public int getSlowTier(float multi) {
+
+        if (multi == 0) {
+            return -1;
+        }
+
+        int tier = (int) (multi * 10D);
+
+        if (multi >= 1) {
+            tier = 50;
+        }
+        return tier;
+    }
+
 
     @Override
     public ExileRegistryType getExileRegistryType() {
