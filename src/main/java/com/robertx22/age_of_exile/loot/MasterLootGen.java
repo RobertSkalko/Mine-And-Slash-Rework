@@ -55,7 +55,7 @@ public class MasterLootGen {
                 items.remove(RandomUtils.RandomRange(0, items.size() - 1));
             }
 
-        
+
             items.forEach(x -> {
                 ItemUtils.tryAnnounceItem(x, info.player);
             });
@@ -82,6 +82,7 @@ public class MasterLootGen {
             e.printStackTrace();
         }
 
+        
         return items.stream()
                 .filter(x -> x != null && !x.isEmpty())
                 .collect(Collectors.toList());

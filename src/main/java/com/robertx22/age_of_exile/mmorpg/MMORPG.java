@@ -124,7 +124,7 @@ public class MMORPG {
 
         ExileDBInit.registerAllItems(); // after config registerAll
 
-        
+
         CommonEvents.register();
 
         C2SPacketRegister.register();
@@ -168,9 +168,9 @@ public class MMORPG {
 
         new CurrencyItems().registerAll();
 
-        if (MMORPG.RUN_DEV_TOOLS) {
-            GeneratedData.addAllObjectsToGenerate();
-        }
+        // if (MMORPG.RUN_DEV_TOOLS) {
+        GeneratedData.addAllObjectsToGenerate();
+        //}
 
         // need to happen after curerrency items are registered
 /*

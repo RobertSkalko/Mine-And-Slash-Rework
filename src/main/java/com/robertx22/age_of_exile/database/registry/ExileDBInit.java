@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.registry;
 
+import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.database.data.DimensionConfig;
 import com.robertx22.age_of_exile.database.data.EntityConfig;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
@@ -32,6 +33,8 @@ public class ExileDBInit {
 
     private static void registerAllNonDatapackEntries() {
         new StatsRegister().registerAll();// STATS MUST BE INIT FIRST
+        Ailments.init();
+        
         // should be at least
     }
 

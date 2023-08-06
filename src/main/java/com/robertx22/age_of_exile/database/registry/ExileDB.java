@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.registry;
 
+import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.DimensionConfig;
 import com.robertx22.age_of_exile.database.data.EntityConfig;
@@ -152,6 +153,10 @@ public class ExileDB {
 
     public static ExileRegistryContainer<MobAffix> MobAffixes() {
         return Database.getRegistry(ExileRegistryTypes.MOB_AFFIX);
+    }
+
+    public static ExileRegistryContainer<Ailment> Ailments() {
+        return Database.getRegistry(ExileRegistryTypes.AILMENT);
     }
 
     public static ExileRegistryContainer<ValueCalculation> ValueCalculations() {
