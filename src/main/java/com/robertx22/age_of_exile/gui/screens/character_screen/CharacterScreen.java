@@ -147,8 +147,9 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
     public void init() {
         super.init();
 
+
+        this.clearWidgets();
     
-        this.children().clear();
         //this.children.clear();
 
         // CORE STATS

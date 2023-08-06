@@ -45,6 +45,7 @@ public class BaseScreen extends Screen {
                     .setScreen(null);
             OnKeyPress.cooldown = 5;
             return false;
+           
         }
         return super.keyPressed(keyCode, scanCode, modifiers);
     }

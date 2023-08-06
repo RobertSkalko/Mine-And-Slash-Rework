@@ -8,14 +8,15 @@ import java.util.stream.Collectors;
 
 public enum Elements {
 
-    Physical(false, true, "Physical", ChatFormatting.GOLD, "physical", "\u2726"),
+    
+    Physical(false, true, "Physical", ChatFormatting.GOLD, "physical", "\u2600"),
     Fire(true, true, "Fire", ChatFormatting.RED, "fire", "\u2600"),
-    Cold(true, true, "Cold", ChatFormatting.AQUA, "water", "\u2749"),
-    Lightning(true, true, "Lightning", ChatFormatting.YELLOW, "lightning", "\u2749"),
-    Chaos(false, true, "Chaos", ChatFormatting.DARK_PURPLE, "chaos", "\u273F"),
+    Cold(true, true, "Cold", ChatFormatting.AQUA, "water", "\u2600"),
+    Lightning(true, true, "Lightning", ChatFormatting.YELLOW, "lightning", "\u2600"),
+    Chaos(false, true, "Chaos", ChatFormatting.DARK_PURPLE, "chaos", "\u2600"),
 
-    Elemental(true, false, "Elemental", ChatFormatting.LIGHT_PURPLE, "elemental", "\u269C"),
-    All(false, false, "All", ChatFormatting.LIGHT_PURPLE, "all", "\u273F");
+    Elemental(true, false, "Elemental", ChatFormatting.LIGHT_PURPLE, "elemental", "\u2600"),
+    All(false, false, "All", ChatFormatting.LIGHT_PURPLE, "all", "\u2600");
 
     public boolean isSingle = true;
     public boolean isElemental = false;

@@ -13,9 +13,11 @@ import com.robertx22.age_of_exile.vanilla_mc.packets.perks.PerkChangePacket;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.GuiUtils;
 import com.robertx22.library_of_exile.utils.RenderUtils;
+import com.robertx22.library_of_exile.utils.TextUTIL;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 
@@ -66,15 +68,19 @@ public class PerkButton extends ImageButton {
     }
 
 
-    public void renderToolTip(GuiGraphics gui, int mouseX, int mouseY) {
+    private void setTooltipMOD(GuiGraphics gui, int mouseX, int mouseY) {
 
         int MmouseX = (int) (1F / screen.zoom * mouseX);
         int MmouseY = (int) (1F / screen.zoom * mouseY);
 
         if (this.isInside(MmouseX, MmouseY)) {
-
             List<MutableComponent> tooltip = perk.GetTooltipString(new TooltipInfo(Minecraft.getInstance().player));
-            GuiUtils.renderTooltip(gui, tooltip, mouseX, mouseY);
+            setTooltip(Tooltip.create(TextUTIL.mergeList(tooltip)));
+
+
+            //GuiUtils.renderTooltip(gui, tooltip, mouseX, mouseY);
+        } else {
+            setTooltip(null);
         }
     }
 
@@ -123,6 +129,8 @@ public class PerkButton extends ImageButton {
     @Override
     public void render(GuiGraphics gui, int mouseX, int mouseY, float delta) {
 
+        setTooltipMOD(gui, mouseX, mouseY);
+        
         float scale = 2 - screen.zoom;
 
         float posMulti = 1F / scale;

@@ -60,7 +60,7 @@ public class SpellScreen extends BaseScreen implements INamedScreen, ILeftRight 
         super.init();
 
         try {
-            this.children().clear();
+            this.clearWidgets();
 
             addRenderableWidget(new LeftRightButton(this, guiLeft + 100 - LeftRightButton.xSize - 5, guiTop + 25 - LeftRightButton.ySize / 2, true));
             addRenderableWidget(new LeftRightButton(this, guiLeft + 150 + 5, guiTop + 25 - LeftRightButton.ySize / 2, false));

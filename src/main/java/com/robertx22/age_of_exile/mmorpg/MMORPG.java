@@ -9,6 +9,9 @@ import com.robertx22.age_of_exile.aoe_data.datapacks.generators.DataGenHook;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.spells.components.conditions.EffectCondition;
+import com.robertx22.age_of_exile.database.data.spells.entities.renders.ModTridentRenderer;
+import com.robertx22.age_of_exile.database.data.spells.entities.renders.MySpriteRenderer;
+import com.robertx22.age_of_exile.database.data.spells.entities.renders.RangerArrowRenderer;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.stats.types.special.SpecialStats;
 import com.robertx22.age_of_exile.database.registrators.CurrencyItems;
@@ -16,10 +19,7 @@ import com.robertx22.age_of_exile.database.registry.ExileDBInit;
 import com.robertx22.age_of_exile.mmorpg.event_registers.CommonEvents;
 import com.robertx22.age_of_exile.mmorpg.init.ClientInit;
 import com.robertx22.age_of_exile.mmorpg.registers.client.S2CPacketRegister;
-import com.robertx22.age_of_exile.mmorpg.registers.common.C2SPacketRegister;
-import com.robertx22.age_of_exile.mmorpg.registers.common.SlashCapabilities;
-import com.robertx22.age_of_exile.mmorpg.registers.common.SlashItemTags;
-import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
+import com.robertx22.age_of_exile.mmorpg.registers.common.*;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.SlashDeferred;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.ICreativeTabNbt;
@@ -28,13 +28,14 @@ import com.robertx22.library_of_exile.events.base.ExileEvents;
 import com.robertx22.library_of_exile.main.ForgeEvents;
 import com.robertx22.library_of_exile.utils.Watch;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.FallingBlockRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -48,8 +49,9 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
-import net.minecraftforge.registries.RegisterEvent;
 import top.theillusivec4.curios.api.SlotTypeMessage;
+
+import java.util.function.Consumer;
 
 @Mod(SlashRef.MODID)
 public class MMORPG {
@@ -65,10 +67,6 @@ public class MMORPG {
             PROTOCOL_VERSION::equals
     );
 
-    public static CreativeModeTab CREATIVE_TAB =
-            new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 10)
-                    .icon(() -> SlashItems.IDENTIFY_TOME.get().getDefaultInstance())
-                    .build();
 
     public MMORPG() {
 
@@ -94,6 +92,15 @@ public class MMORPG {
             ModLoadingContext.get()
                     .registerConfig(ModConfig.Type.CLIENT, ClientConfigs.clientSpec);
             bus.addListener(ClientInit::onInitializeClient);
+
+            FMLJavaModLoadingContext.get().getModEventBus().addListener((Consumer<EntityRenderersEvent.RegisterRenderers>) x -> {
+                x.registerEntityRenderer(SlashEntities.SIMPLE_PROJECTILE.get(), (d) -> new MySpriteRenderer<>(d, Minecraft.getInstance()
+                        .getItemRenderer()));
+
+                x.registerEntityRenderer(SlashEntities.SIMPLE_ARROW.get(), m -> new RangerArrowRenderer(m));
+                x.registerEntityRenderer(SlashEntities.SIMPLE_BLOCK_ENTITY.get(), m -> new FallingBlockRenderer(m));
+                x.registerEntityRenderer(SlashEntities.SIMPLE_TRIDENT.get(), m -> new ModTridentRenderer(m));
+            });
         });
 
         bus.addListener(this::commonSetupEvent);
@@ -123,14 +130,6 @@ public class MMORPG {
         S2CPacketRegister.register();
 
         LifeCycleEvents.register();
-
-        // hmm
-        ForgeEvents.registerForgeEvent(RegisterEvent.class, x -> {
-
-            x.register(Registries.CREATIVE_MODE_TAB, e -> {
-                e.register(SlashRef.id("tab"), CREATIVE_TAB);
-            });
-        });
 
 
         ForgeEvents.registerForgeEvent(GatherDataEvent.class, x -> {
@@ -165,7 +164,7 @@ public class MMORPG {
 
         // todo test if works
         ForgeEvents.registerForgeEvent(BuildCreativeModeTabContentsEvent.class, x -> {
-            if (x.getTab() == CREATIVE_TAB) {
+            if (x.getTab() == SlashTabs.CREATIVE.get()) {
 
                 for (Item item : VanillaUTIL.REGISTRY.items().getAll()) {
                     if (item instanceof ICreativeTabNbt nbt) {

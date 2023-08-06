@@ -37,7 +37,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     public static NbtKey.Stringkey RARITY = new NbtKey.Stringkey(IRarity.COMMON_ID, "rar");
 
 
-    public ItemStack stack = ItemStack.EMPTY;
+    public transient ItemStack stack = ItemStack.EMPTY;
 
     // Stats
     public BaseStatsData baseStats = new BaseStatsData();

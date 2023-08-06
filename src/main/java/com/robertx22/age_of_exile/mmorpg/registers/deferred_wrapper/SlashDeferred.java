@@ -4,9 +4,11 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.registers.common.*;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.*;
 import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
@@ -27,6 +29,7 @@ public class SlashDeferred {
     public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, SlashRef.MODID);
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, SlashRef.MODID);
     public static final DeferredRegister<MobEffect> POTIONS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, SlashRef.MODID);
+    public static final DeferredRegister<CreativeModeTab> TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, SlashRef.MODID);
 
 
     public static void registerDefferedAtStartOfModLoading() {
@@ -42,7 +45,9 @@ public class SlashDeferred {
         PARTICLES.register(bus);
         POTIONS.register(bus);
         RECIPE_SERIALIZERS.register(bus);
+        TAB.register(bus);
 
+        SlashTabs.init();
         SlashPotions.init();
         SlashRecipeTypes.init();
         SlashSounds.init();
@@ -61,6 +66,7 @@ public class SlashDeferred {
         SlashItems.GearItems.init();
         RuneItems.init();
         GemItems.init();
+
 
     }
 

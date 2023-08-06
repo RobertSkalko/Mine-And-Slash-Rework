@@ -43,6 +43,7 @@ public class ConnectionButton extends ImageButton {
 
     @Override
     public void render(GuiGraphics gui, int mouseX, int mouseY, float delta) {
+        
         // do nothing. use the custom method
     }
 
@@ -58,7 +59,6 @@ public class ConnectionButton extends ImageButton {
                     connection = Load.playerRPGData(mc.player).talents
                             .getConnection(school, one, two);
                 }
-
             }
         }
 

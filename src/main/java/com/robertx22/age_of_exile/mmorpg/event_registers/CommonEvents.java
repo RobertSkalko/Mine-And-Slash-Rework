@@ -16,6 +16,7 @@ import com.robertx22.age_of_exile.event_hooks.ontick.OnServerTick;
 import com.robertx22.age_of_exile.event_hooks.ontick.OnTickDungeonWorld;
 import com.robertx22.age_of_exile.event_hooks.player.OnLogin;
 import com.robertx22.age_of_exile.event_hooks.player.StopCastingIfInteract;
+import com.robertx22.age_of_exile.mixin_methods.OnItemInteract;
 import com.robertx22.age_of_exile.mixin_methods.OnItemStoppedUsingCastImbuedSpell;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.error_checks.base.ErrorChecks;
@@ -42,6 +43,8 @@ public class CommonEvents {
 
         OnItemStoppedUsingCastImbuedSpell.register();
 
+        OnItemInteract.register();
+        
         ForgeEvents.registerForgeEvent(EntityJoinLevelEvent.class, event -> {
             OnMobSpawn.onLoad(event.getEntity());
         });
@@ -51,7 +54,7 @@ public class CommonEvents {
                 OnServerTick.onEndTick(ServerLifecycleHooks.getCurrentServer());
             }
         });
-        
+
         ForgeEvents.registerForgeEvent(TickEvent.LevelTickEvent.class, event -> {
             if (event.phase == TickEvent.Phase.END && event.level instanceof ServerLevel) {
                 OnTickDungeonWorld.onEndTick((ServerLevel) event.level);

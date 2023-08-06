@@ -11,37 +11,22 @@ import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.SalvagedDustItem;
+import com.robertx22.library_of_exile.main.ForgeEvents;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ClickType;
-import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import net.minecraftforge.event.ItemStackedOnOtherEvent;
 
 public class OnItemInteract {
 
-    public static void on(AbstractContainerMenu screen, int i, int j, ClickType slotActionType, Player player, CallbackInfo ci) {
+    public static void register() {
 
-        if (slotActionType != ClickType.PICKUP) {
-            return;
-        }
+        ForgeEvents.registerForgeEvent(ItemStackedOnOtherEvent.class, x -> {
+            ItemStack cursor = x.getStackedOnItem();
+            ItemStack stack = x.getCarriedItem();
+            Player player = x.getPlayer();
 
-        ItemStack cursor = player.getInventory().getSelected(); // this was getcarried, test
-
-        if (!cursor.isEmpty()) {
-
-            Slot slot = null;
-            try {
-                slot = screen.slots.get(i);
-            } catch (Exception e) {
-            }
-            if (slot == null) {
-                return;
-            }
-
-            ItemStack stack = slot.getItem();
 
             boolean success = false;
 
@@ -76,7 +61,9 @@ public class OnItemInteract {
                 if (ctx.effect.canItemBeModified(ctx)) {
                     ItemStack result = ctx.effect.modifyItem(ctx).stack;
                     stack.shrink(1);
-                    slot.set(result);
+
+                    PlayerUtils.giveItem(result, player);
+                    //slot.set(result);
                     success = true;
                 }
             } else if (cursor.getItem() == SlashItems.SALVAGE_HAMMER.get()) {
@@ -91,10 +78,10 @@ public class OnItemInteract {
 
                     stack.shrink(1);
                     data.getSalvageResult(stack)
-                            .forEach(x -> PlayerUtils.giveItem(x, player));
+                            .forEach(e -> PlayerUtils.giveItem(e, player));
                     //ci.setReturnValue(ItemStack.EMPTY);
-                    stack.shrink(1000);
-                    ci.cancel();
+                    //stack.shrink(1000);
+                    //ci.cancel();
                     return;
                 }
             } else if (cursor.getItem() == SlashItems.SOCKET_EXTRACTOR.get()) {
@@ -113,9 +100,9 @@ public class OnItemInteract {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        stack.shrink(1000);
+                        //stack.shrink(1000);
                         // ci.setReturnValue(ItemStack.EMPTY);
-                        ci.cancel();
+                        //ci.cancel();
                         return;
                     }
                 }
@@ -125,12 +112,16 @@ public class OnItemInteract {
                 SoundUtils.ding(player.level(), player.blockPosition());
                 SoundUtils.playSound(player.level(), player.blockPosition(), SoundEvents.ANVIL_USE, 1, 1);
 
+                x.setCanceled(true);
                 cursor.shrink(1);
-                stack.shrink(1000);
+                //stack.shrink(1000);
                 //ci.setReturnValue(ItemStack.EMPTY);
-                ci.cancel();
+                //ci.cancel();
             }
 
-        }
+
+        });
     }
+
+
 }

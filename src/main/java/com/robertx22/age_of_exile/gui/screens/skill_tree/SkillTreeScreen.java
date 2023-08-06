@@ -25,6 +25,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.resources.ResourceLocation;
@@ -91,6 +92,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         return schoolsInOrder.get(i);
 
     }
+
 
     public Minecraft mc = Minecraft.getInstance();
 
@@ -180,6 +182,33 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     }
 
+    public void drawConnectivity(int x, int y, int xx, int yy, GuiGraphics pGuiGraphics, int scrollx, int scrolly, boolean pDropShadow) {
+
+        int i = scrollx + x + 13;
+        int j = scrollx + x + 26 + 4;
+        int k = scrolly + y + 13;
+        int l = scrollx + xx + 13;
+        int i1 = scrolly + yy + 13;
+        int j1 = pDropShadow ? -16777216 : -1;
+        if (pDropShadow) {
+            pGuiGraphics.hLine(j, i, k - 1, j1);
+            pGuiGraphics.hLine(j + 1, i, k, j1);
+            pGuiGraphics.hLine(j, i, k + 1, j1);
+            pGuiGraphics.hLine(l, j - 1, i1 - 1, j1);
+            pGuiGraphics.hLine(l, j - 1, i1, j1);
+            pGuiGraphics.hLine(l, j - 1, i1 + 1, j1);
+            pGuiGraphics.vLine(j - 1, i1, k, j1);
+            pGuiGraphics.vLine(j + 1, i1, k, j1);
+        } else {
+            pGuiGraphics.hLine(j, i, k, j1);
+            pGuiGraphics.hLine(l, j, i1, j1);
+            pGuiGraphics.vLine(j, i1, k, j1);
+        }
+
+
+    }
+
+
     public void refreshButtons() {
 
         //Watch watch = new Watch();
@@ -188,7 +217,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         pointPerkButtonMap.clear();
 
         // this.buttons.clear();
-        this.children().clear();
+        this.clearWidgets();
 
         this.scrollX = 0;
         this.scrollY = 0;
@@ -282,12 +311,15 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
     }
 
     private void newButton(AbstractWidget b) {
+
         this.addButtonPublic(b);
+
         originalButtonLocMap.put(b, new PointData(b.getX(), b.getY()));
         if (b instanceof PerkButton) {
             this.pointPerkButtonMap.put(((PerkButton) b).point, (PerkButton) b);
         }
     }
+
 
     public float zoom = 0.3F;
 
@@ -329,7 +361,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
     }
 
     public PointData getZoomedPosition(PointData pos) {
-        return new PointData((int) this.zoom / pos.x, (int) this.zoom / pos.y);
+        return new PointData((int) (this.zoom / (float) pos.x), (int) (this.zoom / (float) pos.y));
     }
 
     @Override
@@ -365,14 +397,14 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
         // Watch watch = new Watch();
         mouseRecentlyClickedTicks--;
-        
+
         renderBackgroundDirt(gui, this, 0);
 
         gui.pose().scale(zoom, zoom, zoom);
 
         try {
 
-            for (GuiEventListener e : this.children()) {
+            for (Renderable e : this.renderables) {
                 if (e instanceof ImageButton b)
                     if (originalButtonLocMap.containsKey(b)) {
                         b.setX((this.originalButtonLocMap.get(b).
@@ -395,11 +427,29 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
             //   renderBackgroundDirt(gui, this, 0);
 
-            for (GuiEventListener e : this.children()) {
-                if (e instanceof ConnectionButton c) {
-                    c.renderButtonForReal(gui, x, y, ticks);
+
+            for (Renderable r : this.renderables) {
+
+                /*
+                // todo
+                if (r instanceof PerkButton p) {
+                    for (PointData o : this.school.calcData.connections.get(p.point)) {
+                        PerkButton ot = this.pointPerkButtonMap.get(o);
+                        if (ot != null) {
+                            var p1 = getZoomedPosition(o);
+                            var p2 = getZoomedPosition(p.point);
+                            drawConnectivity(p1.x, p1.y, p2.x, p2.y, gui, 0, 0, false);
+                        }
+                    }
                 }
 
+                 */
+
+                if (r instanceof ConnectionButton c) {
+
+                    c.renderButtonForReal(gui, x, y, ticks);
+
+                }
             }
 
 
@@ -433,7 +483,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
         for (GuiEventListener e : children()) {
             if (e instanceof PerkButton p) { // todo
-                p.renderToolTip(gui, x, y);
+                //    p.renderToolTip(gui, x, y);
             }
             if (e instanceof TalentTreeButton p) { // todo
                 p.renderToolTip(gui, x, y);
@@ -458,8 +508,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
             gui.blit(BIG_PANEL, xp, yp, 0, 0, BG_WIDTH, 39);
         }
 
-        //  mc.getTextureManager()
-        //        .bind(SMALL_PANEL);
         RenderSystem.enableDepthTest();
 
         int savedx = xp;
@@ -488,8 +536,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
     static ResourceLocation BACKGROUND = SlashRef.guiId("skill_tree/background");
 
     public static void renderBackgroundDirt(GuiGraphics gui, Screen screen, int vOffset) {
-        //copied from Scree
-
+        //copied from Screen
 
         Tesselator tessellator = Tesselator.getInstance();
         BufferBuilder bufferBuilder = tessellator.getBuilder();
@@ -504,29 +551,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         gui.blit(BACKGROUND, 0, 0, 0, 0.0F, 0.0F, mc.screen.width, mc.screen.height, 32, 32);
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 
-/*
-        gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-        float f = 32.0F;
-        bufferBuilder.begin(7, DefaultVertexFormat.POSITION_TEX_COLOR);
-        bufferBuilder.vertex(0.0D, (double) screen.height, 0.0D)
-                .uv(0.0F, (float) screen.height / 32.0F + (float) vOffset)
-                .color(64, 64, 64, 255)
-                .endVertex();
-        bufferBuilder.vertex((double) screen.width, (double) screen.height, 0.0D)
-                .uv((float) screen.width / 32.0F, (float) screen.height / 32.0F + (float) vOffset)
-                .color(64, 64, 64, 255)
-                .endVertex();
-        bufferBuilder.vertex((double) screen.width, 0.0D, 0.0D)
-                .uv((float) screen.width / 32.0F, (float) vOffset)
-                .color(64, 64, 64, 255)
-                .endVertex();
-        bufferBuilder.vertex(0.0D, 0.0D, 0.0D)
-                .uv(0.0F, (float) vOffset)
-                .color(64, 64, 64, 255)
-                .endVertex();
-        tessellator.end();
-
- */
     }
 
 }

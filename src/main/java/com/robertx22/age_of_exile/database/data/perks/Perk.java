@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.database.data.perks;
 
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
-import com.robertx22.age_of_exile.database.data.stats.tooltips.StatTooltipType;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ITooltipList;
@@ -109,7 +108,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipL
                 list.add(locName().withStyle(type.format));
             }
 
-            info.statTooltipType = StatTooltipType.NORMAL;
+            //   info.statTooltipType = StatTooltipType.NORMAL;
 
             stats.forEach(x -> list.addAll(x.GetTooltipString(info)));
 
@@ -130,6 +129,8 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipL
 
                 list.add(Component.literal("Game changer talent.").withStyle(ChatFormatting.RED));
             }
+
+            //list.add(ExileText.newLine().get());
 
             list.add(Words.PressAltForStatInfo.locName()
                     .withStyle(ChatFormatting.BLUE));

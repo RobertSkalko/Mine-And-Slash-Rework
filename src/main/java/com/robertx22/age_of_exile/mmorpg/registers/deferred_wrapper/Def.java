@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
@@ -18,6 +19,12 @@ public class Def {
 
     public static <T extends Block> RegObj<T> block(String id, Supplier<T> block) {
         RegistryObject<T> reg = SlashDeferred.BLOCKS.register(id, block);
+        RegObj<T> obj = new RegObj<T>(reg);
+        return obj;
+    }
+
+    public static <T extends CreativeModeTab> RegObj<T> creativeTab(String id, Supplier<T> block) {
+        RegistryObject<T> reg = SlashDeferred.TAB.register(id, block);
         RegObj<T> obj = new RegObj<T>(reg);
         return obj;
     }
