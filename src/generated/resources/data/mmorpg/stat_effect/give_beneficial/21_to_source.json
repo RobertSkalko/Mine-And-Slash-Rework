@@ -1,7 +1,0 @@
-{
-  "give_to": "Source",
-  "seconds": 10,
-  "effect": "beneficial/21",
-  "id": "give_beneficial/21_to_source",
-  "ser": "give_exile_effect"
-}

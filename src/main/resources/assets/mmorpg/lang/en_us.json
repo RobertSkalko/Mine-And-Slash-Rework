@@ -508,6 +508,13 @@
 "_comment": " [CATEGORY]: RARITIES - NAMES",
 
 
+"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
+
+	"item.mmorpg.orb_of_transmutation": "§cOrb Of Transmutation",
+
+"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
+
+
 "_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
 
 	"effect.mmorpg.beneficial.1": "Antidote",
@@ -550,13 +557,6 @@
 	"effect.mmorpg.negative.8": "Bleed",
 
 "_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
-
-
-"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
-
-	"item.mmorpg.orb_of_transmutation": "§cOrb Of Transmutation",
-
-"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
 
 
 "_comment": " [CATEGORY]: TALENTS - NAMES",

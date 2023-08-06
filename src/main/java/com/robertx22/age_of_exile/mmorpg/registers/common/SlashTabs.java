@@ -32,6 +32,6 @@ public class SlashTabs {
 
     public static void init() {
 
-
+        
     }
 }

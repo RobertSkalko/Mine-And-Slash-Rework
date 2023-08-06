@@ -6,9 +6,9 @@ cloth_boots
 crossbow
 ring
 scepter
-staff
-necklace
 cloth_pants
+necklace
+staff
 bow
 leather_pants
 plate_chest

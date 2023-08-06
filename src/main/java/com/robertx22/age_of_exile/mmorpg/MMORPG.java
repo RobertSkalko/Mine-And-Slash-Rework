@@ -27,7 +27,7 @@ import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.SlashDeferre
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
-import com.robertx22.library_of_exile.main.ForgeEvents;
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.utils.Watch;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.FallingBlockRenderer;
@@ -36,6 +36,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.InterModComms;
@@ -129,11 +130,26 @@ public class MMORPG {
         S2CPacketRegister.register();
 
         LifeCycleEvents.register();
+        
+        if (MMORPG.RUN_DEV_TOOLS) {
+            GeneratedData.addAllObjectsToGenerate();
+        }
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(EventPriority.LOW, new Consumer<GatherDataEvent>() {
+            @Override
+            public void accept(GatherDataEvent x) {
+                x.getGenerator().addProvider(true, new DataGenHook(x.getGenerator().getPackOutput()));
 
-
-        ForgeEvents.registerForgeEvent(GatherDataEvent.class, x -> {
-            x.getGenerator().addProvider(true, new DataGenHook(x.getGenerator().getPackOutput()));
+            }
         });
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(EventPriority.LOW, new Consumer<GatherDataEvent>() {
+            @Override
+            public void accept(GatherDataEvent x) {
+                for (ExileRegistryType type : ExileRegistryType.getAllInRegisterOrder()) {
+                    x.getGenerator().addProvider(true, type.getDatapackGenerator());
+                }
+            }
+        });
+
 
         watch.print("Age of Exile mod initialization ");
 
@@ -153,10 +169,12 @@ public class MMORPG {
 
         new CurrencyItems().registerAll();
         // need to happen after curerrency items are registered
-
+/*
         if (MMORPG.RUN_DEV_TOOLS) {
             GeneratedData.addAllObjectsToGenerate();
         }
+        
+ */
 
 
         SlashCapabilities.register();
