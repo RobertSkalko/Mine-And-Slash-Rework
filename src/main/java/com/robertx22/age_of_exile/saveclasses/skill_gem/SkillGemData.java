@@ -181,7 +181,7 @@ public class SkillGemData {
 
             list.add(ExileText.emptyLine().get());
 
-            list.add(ExileText.ofText("Mana Cost Multiplier: " + (int) (supp.manaMulti * 100)).get());
+            list.add(ExileText.ofText("Mana Cost Multiplier: " + (int) (supp.manaMulti * 100) + "%").get());
 
         }
 

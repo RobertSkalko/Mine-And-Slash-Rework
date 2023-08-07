@@ -31,15 +31,14 @@ public class CurrencyItem extends Item implements IItemAsCurrency, IAutoLocName,
     public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip,
                                 TooltipFlag flagIn) {
 
-        tooltip.add(
-                effect.locDesc()
-                        .withStyle(ChatFormatting.YELLOW));
+        tooltip.add(locDesc().withStyle(ChatFormatting.YELLOW));
 
         if (effect instanceof GearCurrency g) {
             for (GearOutcome o : g.getOutcomes()) {
                 tooltip.add(o.getTooltip());
             }
         }
+        
 
         TooltipUtils.addEmpty(tooltip);
 

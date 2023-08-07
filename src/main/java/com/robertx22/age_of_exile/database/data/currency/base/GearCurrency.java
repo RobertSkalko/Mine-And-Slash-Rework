@@ -20,7 +20,6 @@ public abstract class GearCurrency extends Currency {
 
     public abstract int getPotentialLoss();
 
-
     @Override
     public ItemStack internalModifyMethod(LocReqContext ctx, ItemStack stack, ItemStack currency) {
         GearItemData data = StackSaving.GEARS.loadFrom(stack);

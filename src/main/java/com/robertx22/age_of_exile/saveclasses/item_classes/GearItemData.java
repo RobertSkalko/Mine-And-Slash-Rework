@@ -230,10 +230,8 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
             AffixData prefix = affixes.pre.get(0);
 
-            text
-                    .append(prefix.BaseAffix()
-                            .locName()
-                            .append(" "));
+            text.append(prefix.BaseAffix()
+                    .locName());
         }
         if (this.uniqueStats == null) {
             text.append(" ").append(GetBaseGearType().locName());
@@ -282,7 +280,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         List<MutableComponent> list = new ArrayList<>();
         ChatFormatting format = this.getRarity()
                 .textFormatting();
-        
+
 
         Words prefix = RareItemAffixNames.getPrefix(this);
         Words suffix = RareItemAffixNames.getSuffix(this);
@@ -291,13 +289,11 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
             MutableComponent txt = ExileText.emptyLine().get();
 
-            txt.append(ExileText.emptyLine().get().append(prefix.locName())
-                    .append(" "));
+            txt.append("").append(prefix.locName());
 
-            txt.append(ExileText.emptyLine().get().append(suffix.locName())
-                    .withStyle(format));
+            txt.append(" ").append(suffix.locName()).withStyle(format);
 
-            txt.append((ExileText.emptyLine().get().append(GetBaseGearType().locName())));
+            txt.append(" ").append(GetBaseGearType().locName());
 
             txt.withStyle(format);
 

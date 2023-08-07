@@ -26,20 +26,20 @@ public class GearSlots implements ExileRegistryInit {
     public void registerAll() {
 
         new GearSlot(SWORD, "Sword", SlotFamily.Weapon, 4, 1, 1000).addToSerializables();
-        new GearSlot(SCEPTER, "Scepter", SlotFamily.Weapon, 3, 2, 1000).addToSerializables();
+        new GearSlot(SCEPTER, "Staff", SlotFamily.Weapon, 3, 2, 1000).addToSerializables();
         new GearSlot(STAFF, "Staff", SlotFamily.Weapon, 3, 3, 1500).addToSerializables();
-        new GearSlot(BOW, "Bow", SlotFamily.Weapon, 8, 5, 750).addToSerializables();
-        new GearSlot(CROSBOW, "Crossbow", SlotFamily.Weapon, 7, 6, 750).addToSerializables();
+        new GearSlot(BOW, "Bow", SlotFamily.Weapon, 8, 5, 1000).addToSerializables();
+        new GearSlot(CROSBOW, "Crossbow", SlotFamily.Weapon, 7, 6, 500).addToSerializables();
 
         new GearSlot(BOOTS, "Boots", SlotFamily.Armor, 0, 7, 1000).addToSerializables();
         new GearSlot(PANTS, "Pants", SlotFamily.Armor, 0, 8, 1000).addToSerializables();
         new GearSlot(CHEST, "Chest", SlotFamily.Armor, 0, 9, 1000).addToSerializables();
         new GearSlot(HELMET, "Helmet", SlotFamily.Armor, 0, 10, 1000).addToSerializables();
 
-        new GearSlot(SHIELD, "Shield", SlotFamily.OffHand, 0, 11, 1000).addToSerializables();
+        new GearSlot(SHIELD, "Shield", SlotFamily.OffHand, 0, 11, 500).addToSerializables();
 
-        new GearSlot(RING, "Ring", SlotFamily.Jewelry, 0, 12, 750).addToSerializables();
-        new GearSlot(NECKLACE, "Necklace", SlotFamily.Jewelry, 0, 13, 750).addToSerializables();
+        new GearSlot(RING, "Ring", SlotFamily.Jewelry, 0, 12, 500).addToSerializables();
+        new GearSlot(NECKLACE, "Necklace", SlotFamily.Jewelry, 0, 13, 500).addToSerializables();
 
     }
 }

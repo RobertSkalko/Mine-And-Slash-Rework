@@ -52,7 +52,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
         GearRarity epic = new GearRarity();
         epic.lootable_gear_tier = GearRarity.LootableGearTier.MID;
-        epic.potential = 300;
+        epic.potential = 250;
         epic.min_affixes = 4;
         epic.weight = 100;
         epic.item_tier = 3;
@@ -66,7 +66,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
         GearRarity legendary = new GearRarity();
         legendary.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
-        legendary.potential = 400;
+        legendary.potential = 300;
         legendary.min_affixes = 5;
         legendary.weight = 50;
         legendary.item_tier = 4;
@@ -82,7 +82,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
         GearRarity mythic = new GearRarity();
         mythic.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
-        mythic.potential = 500;
+        mythic.potential = 350;
         mythic.min_affixes = 6;
         mythic.weight = 25;
         mythic.item_tier = 5;

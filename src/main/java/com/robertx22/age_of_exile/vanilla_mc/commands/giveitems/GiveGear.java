@@ -4,7 +4,10 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
+import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.vanilla_mc.commands.CommandRefs;
 import com.robertx22.age_of_exile.vanilla_mc.commands.suggestions.DatabaseSuggestions;
 import com.robertx22.age_of_exile.vanilla_mc.commands.suggestions.GearRaritySuggestions;
@@ -79,6 +82,7 @@ public class GiveGear {
     private static int execute(CommandSourceStack commandSource, Player player, String type, int lvl,
                                String rarity, int amount) {
 
+        
         if (Objects.isNull(player)) {
             try {
                 player = commandSource.getPlayerOrException();
@@ -88,25 +92,19 @@ public class GiveGear {
             }
         }
         for (int i = 0; i < amount; i++) {
-
-            /* TODO
             GearBlueprint blueprint = new GearBlueprint(lvl);
-            blueprint.unidentifiedPart.set(false);
             blueprint.level.set(lvl);
 
             if (ExileDB.GearRarities()
-                .isRegistered(rarity)) {
+                    .isRegistered(rarity)) {
                 blueprint.rarity.set(ExileDB.GearRarities()
-                    .get(rarity));
+                        .get(rarity));
             }
             if (!type.equals("random")) {
                 blueprint.gearItemSlot.set(type);
             }
 
-            player.giveItemStack(blueprint.createStack());
-
-
-             */
+            PlayerUtils.giveItem(blueprint.createStack(), player);
         }
 
         return 0;

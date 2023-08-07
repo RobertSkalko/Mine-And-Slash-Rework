@@ -39,7 +39,7 @@ public class OrbAffixUpgrade extends GearCurrency {
 
                     @Override
                     public int Weight() {
-                        return 500;
+                        return 1000;
                     }
                 },
                 new GearOutcome() {
@@ -67,13 +67,14 @@ public class OrbAffixUpgrade extends GearCurrency {
                         return 1000;
                     }
                 }
+
         );
     }
 
-    
+
     @Override
     public int getPotentialLoss() {
-        return 25;
+        return 20;
     }
 
     @Override

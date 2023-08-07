@@ -31,7 +31,7 @@ public class BaseStatsAdder implements ExileRegistryInit {
 
         c.scaled(WeaponDamage.getInstance(), 2);
 
-        c.scaled(Health.getInstance(), 10);
+        c.scaled(Health.getInstance(), 30);
         c.scaled(Mana.getInstance(), 30);
         c.scaled(Energy.getInstance(), 30);
         c.scaled(HealthRegen.getInstance(), 1);
