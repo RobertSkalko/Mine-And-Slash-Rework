@@ -5,12 +5,14 @@ import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DatapackStat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.base.EffectWithCtx;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import com.robertx22.library_of_exile.registry.IGUID;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,6 +97,8 @@ public abstract class EffectEvent implements IGUID {
             if (target == null || data.isCanceled() || sourceData == null || targetData == null) {
                 return;
             }
+
+
             TryApplyEffects(source, sourceData, EffectSides.Source);
             TryApplyEffects(target, targetData, EffectSides.Target);
         }
@@ -139,35 +143,47 @@ public abstract class EffectEvent implements IGUID {
         }
     }
 
-    private List<EffectWithCtx> AddEffects(List<EffectWithCtx> effects, EntityData unit, LivingEntity en, EffectSides side) {
+    private List<EffectWithCtx> AddEffects(List<EffectWithCtx> effects, EntityData enData, LivingEntity en, EffectSides side) {
 
-        if (unit != null) {
-            unit.getUnit()
-                    .getStats().stats
-                    .values()
-                    .forEach(data -> {
-                        if (data.isNotZero()) {
-                            Stat stat = data.GetStat();
+        if (enData == null) {
+            return effects;
+        }
 
-                            if (stat.statEffect != null) {
-                                if (stat.statEffect.Side()
-                                        .equals(side)) {
-                                    effects.add(new EffectWithCtx(stat.statEffect, side, data));
-                                }
+        Unit un = enData.getUnit();
+
+        if (isSpell()) {
+            if (en instanceof Player p) {
+                int slot = Load.playerRPGData(p).getSkillGemInventory().getSpellGem(getSpell()).getHotbarSlot();
+                un = new Unit(); // todo test if this works
+                un.recalculateStats(en, enData, null, slot);
+            }
+        }
+
+        un.getStats().stats
+                .values()
+                .forEach(data -> {
+                    if (data.isNotZero()) {
+                        Stat stat = data.GetStat();
+
+                        if (stat.statEffect != null) {
+                            if (stat.statEffect.Side()
+                                    .equals(side)) {
+                                effects.add(new EffectWithCtx(stat.statEffect, side, data));
                             }
+                        }
 
-                            if (stat instanceof DatapackStat) {
-                                DatapackStat d = (DatapackStat) stat;
-                                if (d.effect != null) {
-                                    if (d.effect.Side()
-                                            .equals(side)) {
-                                        effects.add(new EffectWithCtx(d.effect, side, data));
-                                    }
+                        if (stat instanceof DatapackStat) {
+                            DatapackStat d = (DatapackStat) stat;
+                            if (d.effect != null) {
+                                if (d.effect.Side()
+                                        .equals(side)) {
+                                    effects.add(new EffectWithCtx(d.effect, side, data));
                                 }
                             }
                         }
-                    });
-        }
+                    }
+                });
+
 
         return effects;
     }

@@ -7,8 +7,9 @@ import com.robertx22.age_of_exile.database.data.value_calc.LevelProvider;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 
 public class SpellStatsCalculationEvent extends EffectEvent {
     public static String ID = "on_spell_stat_calc";
@@ -27,10 +28,10 @@ public class SpellStatsCalculationEvent extends EffectEvent {
 
         this.savedData = savedData;
         this.lvl = Load.Unit(caster)
-            .getLevel();
+                .getLevel();
 
         Spell spell = ExileDB.Spells()
-            .get(spellid);
+                .get(spellid);
         if (spell.config.scale_mana_cost_to_player_lvl) {
             lvl = this.sourceData.getLevel();
         }
@@ -40,7 +41,12 @@ public class SpellStatsCalculationEvent extends EffectEvent {
         this.data.setString(EventData.SPELL, spellid);
 
         float manamultilvl = GameBalanceConfig.get().MANA_COST_SCALING.getMultiFor(lvl);
-
+        if (caster instanceof Player p) {
+            var gem = Load.playerRPGData(p).getSkillGemInventory().getSpellGem(spell);
+            if (gem != null) {
+                manamultilvl *= gem.getManaCostMulti();
+            }
+        }
         this.data.setupNumber(EventData.CAST_TICKS, spell.config.getCastTimeTicks());
         this.data.setupNumber(EventData.MANA_COST, manamultilvl * spell.config.mana_cost.getValue(new LevelProvider(caster, spell)));
         this.data.setupNumber(EventData.COOLDOWN_TICKS, spell.config.cooldown_ticks);

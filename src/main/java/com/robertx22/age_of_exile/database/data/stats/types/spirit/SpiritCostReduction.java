@@ -4,15 +4,18 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import net.minecraft.ChatFormatting;
 
-public class SpiritReservation extends Stat {
+// todo this might need an event or a method to calc total spirit use
+public class SpiritCostReduction extends Stat {
 
-    private SpiritReservation() {
+    private SpiritCostReduction() {
         this.icon = "\u2663";
         this.format = ChatFormatting.AQUA.getName();
+
+        this.max = 75;
     }
 
-    public static SpiritReservation getInstance() {
-        return SpiritReservation.SingletonHolder.INSTANCE;
+    public static SpiritCostReduction getInstance() {
+        return SpiritCostReduction.SingletonHolder.INSTANCE;
     }
 
     @Override
@@ -41,6 +44,6 @@ public class SpiritReservation extends Stat {
     }
 
     private static class SingletonHolder {
-        private static final SpiritReservation INSTANCE = new SpiritReservation();
+        private static final SpiritCostReduction INSTANCE = new SpiritCostReduction();
     }
 }

@@ -424,14 +424,14 @@ public class EntityData implements ICap, INeededForClient {
 
         if (needsToRecalcStats()) {
             //Watch watch = new Watch();
-            unit.recalculateStats(entity, this, null);
+            unit.recalculateStats(entity, this, null, -1);
             //watch.print("stat calc for " + (entity instanceof PlayerEntity ? "player " : "mob "));
         }
 
     }
 
     public void forceRecalculateStats(AttackInformation data) {
-        unit.recalculateStats(entity, this, data);
+        unit.recalculateStats(entity, this, data, -1);
     }
 
     public void forceRecalculateStats() {
@@ -439,7 +439,7 @@ public class EntityData implements ICap, INeededForClient {
         if (unit == null) {
             unit = new Unit();
         }
-        unit.recalculateStats(entity, this, null);
+        unit.recalculateStats(entity, this, null, -1);
     }
 
     // This reduces stat calculation by about 4 TIMES!

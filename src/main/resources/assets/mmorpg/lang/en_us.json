@@ -1519,7 +1519,7 @@
 	"spell.desc.black_hole": "Summon a dark sphere that attracts nearby enemies to it, dealing [calc:black_hole]§d☀ Elemental§7 Damage when it expires.",
 	"spell.desc.charge": "Charge in a direction, stopping upon first enemy hit to deal [calc:charge] §6☀ Physical§7 Damage in radius.",
 	"spell.desc.charged_bolt": "Shoot a charged arrow that goes through enemies and deals [calc:charged_bolt] §6☀ Physical§7 Damage in radius and slows.",
-	"spell.desc.chilling_field": "Freeze area of sight, applying chill and damaging enemies for [calc:chilling_field]§b☀ Cold§7 Damage every second.",
+	"spell.desc.chilling_field": "Freeze area of sight, damaging enemies for [calc:chilling_field]§b☀ Cold§7 Damage every second.",
 	"spell.desc.curse_of_agony": "Curse enemies with Curse of Agony and deal [calc:curse] §d☀ Elemental§7 Damage",
 	"spell.desc.curse_of_despair": "Curse enemies with Curse of Despair and deal [calc:curse] §d☀ Elemental§7 Damage",
 	"spell.desc.curse_of_weak": "Curse enemies with Curse of Weakness and deal [calc:curse] §d☀ Elemental§7 Damage",

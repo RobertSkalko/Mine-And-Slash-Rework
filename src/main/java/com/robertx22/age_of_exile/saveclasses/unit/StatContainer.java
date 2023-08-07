@@ -4,30 +4,16 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 
 public class StatContainer {
-    
+
 
     public HashMap<String, StatData> stats = new HashMap<>();
 
     public transient HashMap<String, InCalcStatData> statsInCalc = new HashMap<>();
 
-
-    public transient List<MoreMultiplier> moreMultipliers = new ArrayList<>();
-
-    static class MoreMultiplier {
-        Stat stat;
-        float multi;
-
-        public MoreMultiplier(Stat stat, float multi) {
-            this.stat = stat;
-            this.multi = multi;
-        }
-    }
 
     public boolean isCalculating() {
         return !this.statsInCalc.isEmpty();

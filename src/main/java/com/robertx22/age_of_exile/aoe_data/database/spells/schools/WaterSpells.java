@@ -74,7 +74,7 @@ public class WaterSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTag.damage, SpellTag.area))
                 .weaponReq(CastingWeapon.ANY_WEAPON)
 
-                .manualDesc("Freeze area of sight, applying chill and damaging enemies for "
+                .manualDesc("Freeze area of sight, damaging enemies for "
                         + SpellCalcs.CHILLING_FIELD.getLocDmgTooltip()
                         + Elements.Cold.getIconNameDmg() + " every second.")
 

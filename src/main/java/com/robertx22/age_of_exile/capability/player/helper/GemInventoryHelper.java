@@ -1,7 +1,8 @@
 package com.robertx22.age_of_exile.capability.player.helper;
 
 import com.robertx22.age_of_exile.database.data.aura.AuraGem;
-import com.robertx22.age_of_exile.database.data.stats.types.spirit.SpiritReservation;
+import com.robertx22.age_of_exile.database.data.spells.components.Spell;
+import com.robertx22.age_of_exile.database.data.stats.types.spirit.SpiritCostReduction;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+
 public class GemInventoryHelper {
     public static int TOTAL_AURAS = 9;
 
@@ -33,8 +35,23 @@ public class GemInventoryHelper {
     public GemInventoryHelper(MyInventory inv, MyInventory auras) {
         this.inv = inv;
         this.auras = auras;
+    }
 
 
+    public List<SkillGemData> getAllSkillGems() {
+        List<SkillGemData> list = new ArrayList<>();
+        for (int i = 0; i < MAX_SKILL_GEMS; i++) {
+            list.add(this.getHotbarGem(i).getSkillData());
+        }
+        list.removeIf(x -> x == null);
+        return list;
+
+    }
+
+    public void removeSupportGemsIfTooMany(Player p) {
+        for (int i = 0; i < MAX_SKILL_GEMS; i++) {
+            this.getHotbarGem(i).removeSupportGemsIfTooMany(p);
+        }
     }
 
     public MyInventory getGemsInv() {
@@ -45,39 +62,38 @@ public class GemInventoryHelper {
         return auras;
     }
 
-    public ItemStack getSkillGem(int num) {
-        int index = num * (SUPPORT_GEMS_PER_SKILL + 1);
-        return inv.getItem(index);
+
+    public SocketedGem getHotbarGem(int hotbar) {
+        try {
+            int index = hotbar * (SUPPORT_GEMS_PER_SKILL + 1);
+            return new SocketedGem(this.getGemsInv(), index);
+        } catch (Exception e) {
+            // throw new RuntimeException(e);
+        }
+        return null;
     }
 
+    public SocketedGem getIndexGem(int index) {
+        try {
+            return new SocketedGem(this.getGemsInv(), index);
+        } catch (Exception e) {
+            // throw new RuntimeException(e);
+        }
+        return null;
+    }
 
-    public List<SkillGemData> getSkillGems() {
-        var list = new ArrayList<SkillGemData>();
-
-
+    public SocketedGem getSpellGem(Spell spell) {
         for (int i = 0; i < MAX_SKILL_GEMS; i++) {
-            ItemStack stack = getSkillGem(i);
-            SkillGemData data = StackSaving.SKILL_GEM.loadFrom(stack);
+            int index = i * (SUPPORT_GEMS_PER_SKILL + 1);
 
-            if (data != null) {
-                list.add(data);
+            var gem = getIndexGem(index);
+            if (gem != null && gem.getSkillData() != null && gem.getSkillData().getSpell() != null && gem.getSkillData().getSpell().GUID().equals(spell.GUID())) {
+                return new SocketedGem(this.getGemsInv(), index);
             }
         }
-        return list;
+        return null;
     }
 
-    public List<ItemStack> getSupportGems(int num) {
-
-        int index = num * (SUPPORT_GEMS_PER_SKILL + 1);
-
-        var list = new ArrayList<ItemStack>();
-
-        for (int i = index; i < SUPPORT_GEMS_PER_SKILL; i++) {
-            list.add(inv.getItem(i));
-        }
-        return list;
-
-    }
 
     public List<ItemStack> getAuras() {
         var list = new ArrayList<ItemStack>();
@@ -115,7 +131,7 @@ public class GemInventoryHelper {
 
     public void removeAurasIfCantWear(Player p) {
 
-        float multi = Load.Unit(p).getUnit().getCalculatedStat(SpiritReservation.getInstance()).getReverseMultiplier();
+        float multi = Load.Unit(p).getUnit().getCalculatedStat(SpiritCostReduction.getInstance()).getReverseMultiplier();
 
 
         if (getSpiritReserved(p, multi) > 1) {
@@ -161,5 +177,6 @@ public class GemInventoryHelper {
 
         return ctx;
     }
+
 
 }

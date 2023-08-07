@@ -140,7 +140,7 @@ public class EntitySpellCap {
 
 
             if (this.entity instanceof Player p) {
-                ItemStack stack = Load.playerRPGData(p).getSkillGemInventory().getSkillGem(key);
+                ItemStack stack = Load.playerRPGData(p).getSkillGemInventory().getHotbarGem(key).getSkill();
                 // todo eventually remove this
                 SkillGemData data = StackSaving.SKILL_GEM.loadFrom(stack);
                 if (data != null) {
@@ -194,7 +194,7 @@ public class EntitySpellCap {
         @Override
         public List<Spell> getSpells() {
             if (entity instanceof Player p) {
-                return Load.playerRPGData(p).getSkillGemInventory().getSkillGems().stream().map(x -> x.getSpell()).collect(Collectors.toList());
+                return Load.playerRPGData(p).getSkillGemInventory().getAllSkillGems().stream().map(x -> x.getSpell()).collect(Collectors.toList());
             }
             return Arrays.asList();
         }

@@ -4,7 +4,6 @@ petrify
 ice_comet
 torment
 healing_aura
-chill_eruption
 chilling_field
 whirlwind
 breath

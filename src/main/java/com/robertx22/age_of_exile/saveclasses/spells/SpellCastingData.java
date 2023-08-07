@@ -113,16 +113,6 @@ public class SpellCastingData {
                 if (spell != null && spells != null && ExileDB.Spells()
                         .isRegistered(spell)) {
                     spell.onCastingTick(ctx);
-
-                    /*
-                    // slow down player when casting spells
-                    Vector3d v = entity.getDeltaMovement();
-                    entity.setDeltaMovement(new Vector3d(0.25D * v.x, v.y, 0.25D * v.z));
-                    // slow down player when casting spells
-
-
-                     */
-
                 }
 
                 tryCast(ctx);
@@ -273,7 +263,7 @@ public class SpellCastingData {
                     return false;
                 }
 
-                
+
                 GearItemData wep = StackSaving.GEARS.loadFrom(ctx.caster.getMainHandItem());
 
                 if (wep == null) {

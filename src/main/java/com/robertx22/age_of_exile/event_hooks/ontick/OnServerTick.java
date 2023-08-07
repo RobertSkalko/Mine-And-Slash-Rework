@@ -68,6 +68,9 @@ public class OnServerTick {
                 }
 
                 UnequipGear.onTick(player);
+
+                Load.playerRPGData(player).getSkillGemInventory().removeSupportGemsIfTooMany(player);
+
                 Load.spells(player)
                         .getCastingData().charges.onTicks(player, 20);
             }

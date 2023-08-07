@@ -27,7 +27,6 @@ import com.robertx22.age_of_exile.gui.bases.BaseScreen;
 import com.robertx22.age_of_exile.gui.bases.INamedScreen;
 import com.robertx22.age_of_exile.gui.screens.OpenSkillGems;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.TalentsScreen;
-import com.robertx22.age_of_exile.gui.screens.spell.SpellScreen;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -218,7 +217,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
 
             screens.add(new TalentsScreen());
 
-            screens.add(new SpellScreen());
+            // screens.add(new SpellScreen());
 
 
             int x = guiLeft + sizeX - 1;

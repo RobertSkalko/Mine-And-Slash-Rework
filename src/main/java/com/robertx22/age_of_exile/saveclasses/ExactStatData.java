@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.saveclasses;
 
 import com.google.gson.JsonObject;
-import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.StatModifier;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -9,6 +8,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ITooltipList;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
+import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.serialization.ISerializable;
 import net.minecraft.network.chat.MutableComponent;
@@ -126,11 +126,10 @@ public class ExactStatData implements ISerializable<ExactStatData>, ITooltipList
                 .get(stat);
     }
 
-    public void applyStats(EntityData data) {
-        data.getUnit()
-                .getStats()
+    public void applyStats(Unit unit) {
+        unit.getStats()
                 .getStatInCalculation(stat)
-                .add(this, data);
+                .add(this);
     }
 
     @Override

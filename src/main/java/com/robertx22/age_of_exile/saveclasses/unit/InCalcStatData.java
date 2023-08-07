@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.saveclasses.unit;
 
-import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
@@ -88,7 +87,7 @@ public class InCalcStatData {
 
  */
 
-    public void add(ExactStatData modData, EntityData data) {
+    public void add(ExactStatData modData) {
         ModType type = modData.getType();
 
 

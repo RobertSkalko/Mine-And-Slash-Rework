@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.saveclasses.unit;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
+import com.robertx22.age_of_exile.capability.player.helper.GemInventoryHelper;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
@@ -19,7 +20,9 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.event_hooks.my_events.CollectGearEvent;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
+import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.GearStatCtx;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAffectsStats;
@@ -51,6 +54,7 @@ public class Unit {
 
 
     private StatContainer stats = new StatContainer();
+
 
     public String GUID = UUID.randomUUID().toString();
 
@@ -215,7 +219,7 @@ public class Unit {
     }
 
 
-    public void recalculateStats(LivingEntity entity, EntityData data, AttackInformation dmgData) {
+    public void recalculateStats(LivingEntity entity, EntityData data, AttackInformation dmgData, int skillGem) {
 
         try {
             if (entity.level().isClientSide) {
@@ -246,13 +250,21 @@ public class Unit {
 
                 statContexts.addAll(Load.playerRPGData((Player) entity).getSkillGemInventory().getAuraStats(entity));
 
-                Load.playerRPGData((Player) entity).statPoints.addStats(data);
+                Load.playerRPGData((Player) entity).statPoints.addStats(this);
 
                 statContexts.addAll(PlayerStatUtils.AddPlayerBaseStats(entity));
                 statContexts.addAll(Load.playerRPGData((Player) entity).talents
                         .getStatAndContext(entity));
                 statContexts.addAll(Load.spells(entity)
                         .getStatAndContext(entity));
+
+                if (skillGem > -1 && skillGem <= GemInventoryHelper.MAX_SKILL_GEMS) {
+                    for (SkillGemData d : Load.playerRPGData((Player) entity).getSkillGemInventory().getHotbarGem(skillGem).getSupportDatas()) {
+                        if (d.getSupport() != null) {
+                            statContexts.add(new MiscStatCtx(d.getSupport().GetAllStats(data, d)));
+                        }
+                    }
+                }
 
             } else {
                 statContexts.addAll(MobStatUtils.getMobBaseStats(data, entity));
@@ -287,7 +299,7 @@ public class Unit {
                         });
                     }));
 
-            statContexts.forEach(x -> x.stats.forEach(s -> s.applyStats(data)));
+            statContexts.forEach(x -> x.stats.forEach(s -> s.applyStats(this)));
 
             addVanillaHpToStats(entity, data);
 
