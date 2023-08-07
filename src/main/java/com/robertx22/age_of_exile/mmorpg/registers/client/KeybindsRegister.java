@@ -1,21 +1,24 @@
 package com.robertx22.age_of_exile.mmorpg.registers.client;
 
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import com.robertx22.library_of_exile.main.ForgeEvents;
 import net.minecraft.client.KeyMapping;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import org.lwjgl.glfw.GLFW;
 
 public class KeybindsRegister {
 
-    public static KeyMapping HUB_SCREEN_KEY = new KeyMapping("hub_screen", GLFW.GLFW_KEY_H, SlashRef.MOD_NAME);
+    static String CATEGORY = "key." + SlashRef.MODID;
 
-    public static KeyMapping SPELL_HOTBAR_1 = new KeyMapping("spell_1", GLFW.GLFW_KEY_R, SlashRef.MOD_NAME);
-    public static KeyMapping SPELL_HOTBAR_2 = new KeyMapping("spell_2", GLFW.GLFW_KEY_V, SlashRef.MOD_NAME);
-    public static KeyMapping SPELL_HOTBAR_3 = new KeyMapping("spell_3", GLFW.GLFW_KEY_C, SlashRef.MOD_NAME);
-    public static KeyMapping SPELL_HOTBAR_4 = new KeyMapping("spell_4", GLFW.GLFW_KEY_G, SlashRef.MOD_NAME);
+    public static KeyMapping HUB_SCREEN_KEY = new KeyMapping("hub_screen", GLFW.GLFW_KEY_H, CATEGORY);
+
+    public static KeyMapping SPELL_HOTBAR_1 = new KeyMapping("spell_1", GLFW.GLFW_KEY_R, CATEGORY);
+    public static KeyMapping SPELL_HOTBAR_2 = new KeyMapping("spell_2", GLFW.GLFW_KEY_V, CATEGORY);
+    public static KeyMapping SPELL_HOTBAR_3 = new KeyMapping("spell_3", GLFW.GLFW_KEY_C, CATEGORY);
+    public static KeyMapping SPELL_HOTBAR_4 = new KeyMapping("spell_4", GLFW.GLFW_KEY_G, CATEGORY);
 
     public static KeyMapping getSpellHotbar(int num) {
+
+
         int n = num;
         if (num > 3) {
             n -= 4;
@@ -34,16 +37,14 @@ public class KeybindsRegister {
 
     }
 
-    public static void register() {
+    public static void register(RegisterKeyMappingsEvent x) {
 
-        ForgeEvents.registerForgeEvent(RegisterKeyMappingsEvent.class, x -> {
-            x.register(HUB_SCREEN_KEY);
+        x.register(HUB_SCREEN_KEY);
 
-            x.register(SPELL_HOTBAR_1);
-            x.register(SPELL_HOTBAR_2);
-            x.register(SPELL_HOTBAR_3);
-            x.register(SPELL_HOTBAR_4);
-        });
+        x.register(SPELL_HOTBAR_1);
+        x.register(SPELL_HOTBAR_2);
+        x.register(SPELL_HOTBAR_3);
+        x.register(SPELL_HOTBAR_4);
 
     }
 

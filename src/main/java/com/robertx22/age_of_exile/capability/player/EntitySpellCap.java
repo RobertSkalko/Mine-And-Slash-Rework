@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.capability.player;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
-import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IApplyableStats;
@@ -30,10 +29,8 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class EntitySpellCap {
@@ -64,7 +61,7 @@ public class EntitySpellCap {
         public abstract boolean canLearn(SpellSchool school, Spell spell);
 
 
-        public abstract List<Spell> getLearnedSpells();
+        public abstract List<Spell> getSpells();
 
         public abstract SpellCastingData getCastingData();
 
@@ -195,9 +192,11 @@ public class EntitySpellCap {
 
 
         @Override
-        public List<Spell> getLearnedSpells() {
-            return ExileDB.Spells()
-                    .getFilterWrapped(x -> getLevelOf(x.GUID()) > 0).list;
+        public List<Spell> getSpells() {
+            if (entity instanceof Player p) {
+                return Load.playerRPGData(p).getSkillGemInventory().getSkillGems().stream().map(x -> x.getSpell()).collect(Collectors.toList());
+            }
+            return Arrays.asList();
         }
 
         @Override

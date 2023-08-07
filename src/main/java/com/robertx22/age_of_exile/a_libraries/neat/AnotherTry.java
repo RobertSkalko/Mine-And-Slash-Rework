@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.a_libraries.neat;
 
 import com.robertx22.age_of_exile.mixin_methods.RenderMobInfo;
-import com.robertx22.library_of_exile.main.ForgeEvents;
+import com.robertx22.age_of_exile.mmorpg.ForgeEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RenderLivingEvent;
 

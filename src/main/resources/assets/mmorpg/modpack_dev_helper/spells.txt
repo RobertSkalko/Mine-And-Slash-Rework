@@ -45,7 +45,6 @@ water_breath
 explosive_arrow
 heart_of_ice
 charge
-poison_arrow
 curse_of_agony
 frost_trap
 fire_trap

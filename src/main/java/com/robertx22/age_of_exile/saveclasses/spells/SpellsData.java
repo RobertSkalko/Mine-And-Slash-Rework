@@ -32,6 +32,13 @@ public class SpellsData {
 
 
     public int getLevelOf(String id) {
+        // todo
+        MaxLevelProvider provider = MaxLevelProvider.get(id);
+        return provider.getMaxLevel();
+
+        // todo
+
+        /*
 
         int level = allocated_lvls.getOrDefault(id, 0) + extra_lvls.getOrDefault(id, 0);
 
@@ -44,6 +51,8 @@ public class SpellsData {
         }
 
         return level;
+
+         */
     }
 
 }

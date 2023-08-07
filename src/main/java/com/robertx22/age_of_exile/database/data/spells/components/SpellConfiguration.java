@@ -78,7 +78,7 @@ public class SpellConfiguration {
 
         public static SpellConfiguration arrowSpell(int mana, int cd) {
             SpellConfiguration c = new SpellConfiguration();
-            c.cast_time_ticks = 20;
+            c.cast_time_ticks = 0;
             c.mana_cost = new LeveledValue(0.5F * mana, 1F * mana);
             c.cooldown_ticks = cd;
             c.swing_arm = false;

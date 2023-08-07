@@ -6,9 +6,9 @@ import com.robertx22.age_of_exile.database.data.spells.components.actions.vanity
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.Arrays;
@@ -29,13 +29,13 @@ public class SpellMotionAction extends SpellAction {
             if (!ctx.world.isClientSide) {
 
                 float str = data.get(PUSH_STRENGTH)
-                    .floatValue();
+                        .floatValue();
 
                 ParticleMotion pm = ParticleMotion.valueOf(data.get(MapField.MOTION));
 
                 Vec3 motion = pm
-                    .getMotion(ctx.vecPos, ctx)
-                    .scale(str);
+                        .getMotion(ctx.vecPos, ctx)
+                        .scale(str);
 
                 SetAdd setAdd = data.getSetAdd();
 
@@ -46,11 +46,12 @@ public class SpellMotionAction extends SpellAction {
                 }
 
                 for (LivingEntity x : targets) {
+                    
 
-                    Vec3 motionWithoutY = (new Vec3(motion.x, 0.0D, motion.z)).normalize()
-                        .scale(str);
-                    Vec3 motionWithY = (new Vec3(motion.x, motion.y, motion.z)).normalize()
-                        .scale(str);
+                    Vec3 motionWithoutY = (new Vec3(motion.x, 0.0D, motion.z))
+                            .scale(str);
+                    Vec3 motionWithY = (new Vec3(motion.x, motion.y, motion.z))
+                            .scale(str);
                     // this.setDeltaMovement(vector3d.x / 2.0D - vector3d1.x, this.onGround ? Math.min(0.4D, vector3d.y / 2.0D + (double)p_233627_1_) : vector3d.y, vector3d.z / 2.0D - vector3d1.z);
 
                     if (setAdd == SetAdd.SET) {
@@ -61,14 +62,14 @@ public class SpellMotionAction extends SpellAction {
                         }
                     } else {
                         x.setDeltaMovement(x.getDeltaMovement()
-                            .add(motionWithY));
+                                .add(motionWithY));
                     }
 
                     PlayerUtils.getNearbyPlayers(ctx.world, ctx.pos, 100)
-                        .forEach(p -> {
-                            ((ServerPlayer) p).connection.send(new ClientboundSetEntityMotionPacket(x));
-                            x.hurtMarked = false;
-                        });
+                            .forEach(p -> {
+                                ((ServerPlayer) p).connection.send(new ClientboundSetEntityMotionPacket(x));
+                                x.hurtMarked = false;
+                            });
 
                 }
             }

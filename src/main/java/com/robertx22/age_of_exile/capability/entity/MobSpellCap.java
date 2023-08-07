@@ -16,7 +16,7 @@ public class MobSpellCap extends EntitySpellCap.SpellCap {
     List<Spell> list;
 
     @Override
-    public List<Spell> getLearnedSpells() {
+    public List<Spell> getSpells() {
         if (list.isEmpty()) {
             list = ExileDB.Spells().getList();
         }

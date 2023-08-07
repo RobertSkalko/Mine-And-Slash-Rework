@@ -163,23 +163,6 @@ public class RangerSpells implements ExileRegistryInit {
                 .onTick(PartBuilder.particleOnTick(5D, ParticleTypes.CRIT, 5D, 0.1D))
                 .build();
 
-        SpellBuilder.of(POISON_ARROW, PlayStyle.DEX, SpellConfiguration.Builder.arrowSpell(10, 20 * 10), "Poison Arrow",
-                        Arrays.asList(SpellTag.projectile, SpellTag.damage))
-                .manualDesc("Shoot an arrow, dealing "
-                        + SpellCalcs.POISON_ARROW.getLocDmgTooltip(Elements.Physical) + " around it and poisoning enemies.")
-
-                .weaponReq(CastingWeapon.RANGED)
-                .onCast(PartBuilder.playSound(SoundEvents.ARROW_SHOOT, 1D, 1D))
-                .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.createArrow(1D)))
-
-                // todo .onExpire(PartBuilder.addExileEffectToEnemiesInAoe(NegativeEffects.POISON.resourcePath, 2D, 20 * 8D))
-                .onExpire(PartBuilder.aoeParticles(ParticleTypes.ITEM_SLIME, 100D, 2D))
-                .onExpire(PartBuilder.playSound(SoundEvents.ARROW_HIT, 1D, 1D))
-                .onExpire(PartBuilder.playSound(SoundEvents.SPLASH_POTION_BREAK, 1D, 1D))
-                .onExpire(PartBuilder.damageInAoe(SpellCalcs.POISON_ARROW, Elements.Chaos, 2D)
-                        .addPerEntityHit(PartBuilder.justAction(SpellAction.POTION.createGive(MobEffects.MOVEMENT_SLOWDOWN, 40D))))
-                .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.CRIT, 4D, 0.1D))
-                .build();
 
         SpellBuilder.of(EXPLOSIVE_ARROW_ID, PlayStyle.DEX, SpellConfiguration.Builder.arrowSpell(10, 20 * 10), "Explosive Arrow",
                         Arrays.asList(SpellTag.projectile, SpellTag.damage))

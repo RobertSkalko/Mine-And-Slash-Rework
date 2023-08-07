@@ -51,6 +51,21 @@ public class GemInventoryHelper {
     }
 
 
+    public List<SkillGemData> getSkillGems() {
+        var list = new ArrayList<SkillGemData>();
+
+
+        for (int i = 0; i < MAX_SKILL_GEMS; i++) {
+            ItemStack stack = getSkillGem(i);
+            SkillGemData data = StackSaving.SKILL_GEM.loadFrom(stack);
+
+            if (data != null) {
+                list.add(data);
+            }
+        }
+        return list;
+    }
+
     public List<ItemStack> getSupportGems(int num) {
 
         int index = num * (SUPPORT_GEMS_PER_SKILL + 1);

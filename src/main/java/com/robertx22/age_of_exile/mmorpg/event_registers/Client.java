@@ -6,7 +6,7 @@ import com.robertx22.age_of_exile.event_hooks.player.OnKeyPress;
 import com.robertx22.age_of_exile.gui.overlays.bar_overlays.types.RPGGuiOverlay;
 import com.robertx22.age_of_exile.gui.overlays.spell_cast_bar.SpellCastBarOverlay;
 import com.robertx22.age_of_exile.gui.overlays.spell_hotbar.SpellHotbarOverlay;
-import com.robertx22.library_of_exile.main.ForgeEvents;
+import com.robertx22.age_of_exile.mmorpg.ForgeEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.event.TickEvent;

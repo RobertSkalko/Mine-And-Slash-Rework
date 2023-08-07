@@ -65,12 +65,12 @@ public class SupportGem implements ISkillGem, ExileRegistry<SupportGem> {
 
     @Override
     public String locNameLangFileGUID() {
-        return locname;
+        return SlashRef.MODID + ".support_gem." + GUID();
     }
 
     @Override
     public String locNameForLangFile() {
-        return SlashRef.MODID + ".support_gem." + GUID();
+        return locname;
     }
 
     public List<ExactStatData> GetAllStats(EntityData en, SkillGemData data) {

@@ -57,7 +57,7 @@ public class ChargeData {
 
         List<String> chargesadded = new ArrayList<>(); // no duplicate charge regen
 
-        for (Spell s : sdata.getLearnedSpells()) {
+        for (Spell s : sdata.getSpells()) {
 
             String id = s.config.charge_name;
 

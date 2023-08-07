@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.mmorpg;
 import com.robertx22.age_of_exile.mmorpg.registers.server.CommandRegister;
 import com.robertx22.age_of_exile.uncommon.testing.TestManager;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
-import com.robertx22.library_of_exile.main.ForgeEvents;
 import net.minecraft.world.level.GameRules;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;

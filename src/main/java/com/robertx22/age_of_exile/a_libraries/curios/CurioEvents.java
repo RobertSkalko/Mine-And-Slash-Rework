@@ -1,8 +1,8 @@
 package com.robertx22.age_of_exile.a_libraries.curios;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
+import com.robertx22.age_of_exile.mmorpg.ForgeEvents;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import com.robertx22.library_of_exile.main.ForgeEvents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import top.theillusivec4.curios.api.event.CurioChangeEvent;
