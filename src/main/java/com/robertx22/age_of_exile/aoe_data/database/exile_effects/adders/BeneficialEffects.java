@@ -18,7 +18,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.SpellDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -87,8 +87,8 @@ public class BeneficialEffects implements ExileRegistryInit {
                 .build();
 
         ExileEffectBuilder.of(MAGE_CIRCLE)
-                .stat(10, 25, Stats.SPELL_CRIT_DAMAGE.get(), ModType.FLAT)
-                .stat(5, 20, SpellDamage.getInstance(), ModType.FLAT)
+                .stat(10, 25, Stats.CRIT_DAMAGE.get(), ModType.FLAT)
+                .stat(5, 20, SkillDamage.getInstance(), ModType.FLAT)
                 .maxStacks(1)
                 .addTags(EffectTags.offensive)
                 .build();
@@ -136,9 +136,9 @@ public class BeneficialEffects implements ExileRegistryInit {
                 .build();
 
         ExileEffectBuilder.of(PERSEVERANCE)
-                .stat(-3, -6, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.melee))
-                .stat(-3, -6, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.ranged))
-                .stat(-3, -6, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.magic))
+                .stat(-3, -6, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.STR))
+                .stat(-3, -6, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.DEX))
+                .stat(-3, -6, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.INT))
                 .maxStacks(3)
                 .addTags(EffectTags.song, EffectTags.defensive)
                 .build();

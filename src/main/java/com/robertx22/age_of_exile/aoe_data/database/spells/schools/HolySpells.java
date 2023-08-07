@@ -66,7 +66,7 @@ public class HolySpells implements ExileRegistryInit {
                 .manualDesc("Strike enemies around you for " +
                         SpellCalcs.WHIRLWIND.getLocDmgTooltip(Elements.Fire) + ". Scales with attack speed.")
 
-                .attackStyle(PlayStyle.melee)
+                .attackStyle(PlayStyle.STR)
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
                 .onCast(PartBuilder.giveSelfEffect(SlashPotions.KNOCKBACK_RESISTANCE.get(), 100D))
                 .onCast(PartBuilder.playSound(SoundEvents.PLAYER_ATTACK_SWEEP, 1D, 1D))
@@ -84,7 +84,7 @@ public class HolySpells implements ExileRegistryInit {
                                 + SpellCalcs.CHARGE.getLocDmgTooltip() + " " + Elements.Physical.getIconNameDmg() + " in radius."
 
                 )
-                .attackStyle(PlayStyle.melee)
+                .attackStyle(PlayStyle.STR)
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.ANCIENT_DEBRIS_STEP, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.SET_ADD_MOTION.create(SetAdd.ADD, 0.2D, ParticleMotion.CasterLook)
@@ -107,7 +107,7 @@ public class HolySpells implements ExileRegistryInit {
                         "Shout, making enemies nearby want to attack you. " +
                                 "Generates " + SpellCalcs.TAUNT.getLocDmgTooltip() + " threat."
                 )
-                .attackStyle(PlayStyle.melee)
+                .attackStyle(PlayStyle.STR)
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.SHIELD_BLOCK, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.AGGRO.create(SpellCalcs.TAUNT, AggroAction.Type.AGGRO))
@@ -122,7 +122,7 @@ public class HolySpells implements ExileRegistryInit {
                         "Let out a warning shout, giving a "
                                 + SpellCalcs.SHOUT_WARN.getLocDmgTooltip() + " Shield to all nearby allies.")
 
-                .attackStyle(PlayStyle.melee)
+                .attackStyle(PlayStyle.STR)
                 .onCast(PartBuilder.playSound(SoundEvents.WOLF_HOWL, 1D, 1D))
                 .onCast(PartBuilder.giveShieldInRadius(10D, SpellCalcs.SHOUT_WARN, 10D))
                 .build();
@@ -134,7 +134,7 @@ public class HolySpells implements ExileRegistryInit {
                                 SpellCalcs.PULL.getLocDmgTooltip() + " " +
                                 Elements.Physical.getIconNameDmg() + " and slowing them."
                 )
-                .attackStyle(PlayStyle.melee)
+                .attackStyle(PlayStyle.STR)
                 .onCast(PartBuilder.playSound(SoundEvents.ANVIL_HIT, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.TP_TARGET_TO_SELF.create())
                         .addActions(SpellAction.POTION.createGive(MobEffects.MOVEMENT_SLOWDOWN, 20D * 5))
@@ -150,7 +150,7 @@ public class HolySpells implements ExileRegistryInit {
                 .manualDesc("Bash enemies around you for " +
                         SpellCalcs.GONG_STRIKE.getLocDmgTooltip(Elements.Physical))
 
-                .attackStyle(PlayStyle.melee)
+                .attackStyle(PlayStyle.STR)
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
 
                 .onCast(PartBuilder.playSound(SoundEvents.ANVIL_PLACE, 1D, 1D))
@@ -168,7 +168,7 @@ public class HolySpells implements ExileRegistryInit {
                                 .setScaleManaToPlayer(), "Undying Will",
                         Arrays.asList())
                 .manualDesc("Gives buff to self.")
-                .attackStyle(PlayStyle.melee)
+                .attackStyle(PlayStyle.STR)
                 .weaponReq(CastingWeapon.ANY_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.RAVAGER_ROAR, 1D, 1D))
                 .onCast(PartBuilder.giveSelfExileEffect(BeneficialEffects.UNDYING_WILL, 20D * 10))

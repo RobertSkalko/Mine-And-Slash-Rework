@@ -34,14 +34,14 @@ public class UtilitySpells implements ExileRegistryInit {
                 .manualDesc(
                         "Allows you to access your Ender Chest from any place.")
 
-                .attackStyle(PlayStyle.magic)
+                .attackStyle(PlayStyle.INT)
                 .onCast(PartBuilder.playSound(SoundEvents.ENDER_CHEST_OPEN, 1D, 1D))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.PORTAL, 100D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.OPEN_ENDER_CHEST.create()))
                 //.disableInDimension(DimensionIds.DUNGEON_DIMENSION)
                 .build();
 
-      
+
         SpellBuilder.of("jump_field", SpellConfiguration.Builder.instant(10, 20 * 45)
                         .setScaleManaToPlayer(), "Jump Field", Arrays.asList(SpellTag.movement))
                 .manualDesc(

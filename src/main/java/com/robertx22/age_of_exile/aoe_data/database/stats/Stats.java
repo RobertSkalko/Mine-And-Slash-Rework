@@ -380,34 +380,6 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
-    /*
-    public static DataPackStatAccessor<EffectCtx> CHANCE_OF_APPLYING_EFFECT_ON_CRIT = DatapackStatBuilder
-            .<EffectCtx>of(x -> "chance_of_" + x.id + "_on_crit", x -> x.element)
-            .addAllOfType(Arrays.asList(
-                    )
-            )
-            .worksWithEvent(DamageEvent.ID)
-            .setPriority(100)
-            .setSide(EffectSides.Source)
-            .addCondition(StatConditions.IF_CRIT)
-            .addCondition(StatConditions.IF_RANDOM_ROLL)
-            .addCondition(StatConditions.ELEMENT_MATCH_STAT)
-            .addCondition(StatConditions.IS_ATTACK_OR_SPELL_ATTACK)
-            .addEffect(x -> StatEffects.GIVE_EFFECT_TO_TARGET.get(x))
-            .setLocName(x -> Stat.format(
-                    "Your " + x.element.getIconNameFormat() + " Criticals have " + Stat.VAL1 + "% chance of applying " + x.locname
-            ))
-            .setLocDesc(x -> "Chance to give effect")
-            .modifyAfterDone(x -> {
-                x.min = 0;
-                x.max = 100;
-                x.is_long = true;
-                x.is_perc = true;
-                x.scaling = StatScaling.NONE;
-            })
-            .build();
-
-     */
 
     public static DataPackStatAccessor<EmptyAccessor> CRIT_CHANCE = DatapackStatBuilder
             .ofSingle("critical_hit", Elements.Physical)
@@ -415,7 +387,7 @@ public class Stats implements ExileRegistryInit {
             .setPriority(0)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IF_RANDOM_ROLL)
-            .addCondition(StatConditions.ATTACK_TYPE_MATCHES.get(AttackType.attack))
+            .addCondition(StatConditions.IS_ATTACK_OR_SPELL_ATTACK)
             .addEffect(StatEffects.SET_IS_CRIT)
             .setLocName(x -> "Crit Chance")
             .setLocDesc(x -> "Chance to multiply attack damage by critical damage")
@@ -430,50 +402,6 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
-    public static DataPackStatAccessor<EmptyAccessor> SPELL_CRIT_CHANCE = DatapackStatBuilder
-            .ofSingle("spell_critical_hit", Elements.Physical)
-            .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
-            .setSide(EffectSides.Source)
-            .addCondition(StatConditions.IF_RANDOM_ROLL)
-            .addCondition(StatConditions.IS_SPELL)
-            .addCondition(StatConditions.ATTACK_TYPE_MATCHES.get(AttackType.spell))
-            .addEffect(StatEffects.SET_IS_CRIT)
-            .setLocName(x -> "Spell Crit Chance")
-            .setLocDesc(x -> "Chance to multiply attack damage by critical damage")
-            .modifyAfterDone(x -> {
-                x.is_perc = true;
-                x.base = 1;
-                x.max = 100;
-                x.min = 0;
-                x.group = StatGroup.MAIN;
-                x.icon = "\u2739";
-                x.format = ChatFormatting.LIGHT_PURPLE.getName();
-            })
-            .build();
-
-    public static DataPackStatAccessor<EmptyAccessor> HEAL_CRIT_CHANCE = DatapackStatBuilder
-            .ofSingle("crit_heal_chance", Elements.Physical)
-            .worksWithEvent(RestoreResourceEvent.ID)
-            .setPriority(0)
-            .setSide(EffectSides.Source)
-            .addCondition(StatConditions.IF_RANDOM_ROLL)
-            .addCondition(StatConditions.IS_SPELL)
-            .addCondition(StatConditions.IS_RESTORE_TYPE.get(RestoreType.heal))
-            .addCondition(StatConditions.IS_RESOURCE.get(ResourceType.health))
-            .addEffect(StatEffects.SET_IS_CRIT)
-            .setLocName(x -> "Heal Crit Chance")
-            .setLocDesc(x -> "")
-            .modifyAfterDone(x -> {
-                x.is_perc = true;
-                x.base = 0;
-                x.min = 0;
-                x.max = 100;
-                x.group = StatGroup.MAIN;
-                x.icon = "\u2694";
-                x.format = ChatFormatting.YELLOW.getName();
-            })
-            .build();
 
     public static DataPackStatAccessor<EmptyAccessor> CRIT_DAMAGE = DatapackStatBuilder
             .ofSingle("critical_damage", Elements.Physical)
@@ -481,7 +409,7 @@ public class Stats implements ExileRegistryInit {
             .setPriority(100)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IF_CRIT)
-            .addCondition(StatConditions.ATTACK_TYPE_MATCHES.get(AttackType.attack))
+            .addCondition(StatConditions.IS_ATTACK_OR_SPELL_ATTACK)
             .addEffect(StatEffects.MULTIPLY_VALUE)
             .setLocName(x -> "Crit Damage")
             .setLocDesc(x -> "If Critical, multiply by x")
@@ -498,50 +426,6 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
-    public static DataPackStatAccessor<EmptyAccessor> SPELL_CRIT_DAMAGE = DatapackStatBuilder
-            .ofSingle("spell_critical_damage", Elements.Physical)
-            .worksWithEvent(DamageEvent.ID)
-            .setPriority(100)
-            .setSide(EffectSides.Source)
-            .addCondition(StatConditions.IF_CRIT)
-            .addCondition(StatConditions.ATTACK_TYPE_MATCHES.get(AttackType.spell))
-            .addEffect(StatEffects.MULTIPLY_VALUE)
-            .setLocName(x -> "Spell Crit Damage")
-            .setLocDesc(x -> "If Critical, multiply by x")
-            .modifyAfterDone(x -> {
-                x.is_perc = true;
-                x.base = 50;
-                x.min = 0;
-                x.max = 500;
-                x.group = StatGroup.MAIN;
-                x.icon = "\u2739";
-                x.format = ChatFormatting.DARK_PURPLE.getName();
-
-            })
-            .build();
-
-    public static DataPackStatAccessor<EmptyAccessor> HEAL_CRIT_DAMAGE = DatapackStatBuilder
-            .ofSingle("heal_crit_dmg", Elements.Physical)
-            .worksWithEvent(RestoreResourceEvent.ID)
-            .setPriority(100)
-            .setSide(EffectSides.Source)
-            .addCondition(StatConditions.IF_CRIT)
-            .addCondition(StatConditions.IS_SPELL)
-            .addCondition(StatConditions.IS_RESTORE_TYPE.get(RestoreType.heal))
-            .addCondition(StatConditions.IS_RESOURCE.get(ResourceType.health))
-            .addEffect(StatEffects.MULTIPLY_VALUE)
-            .setLocName(x -> "Crit Heal Damage")
-            .setLocDesc(x -> "If Critical, multiply by x")
-            .modifyAfterDone(x -> {
-                x.is_perc = true;
-                x.base = 50;
-                x.min = 0;
-                x.max = 500;
-                x.group = StatGroup.MAIN;
-                x.icon = "\u2694";
-                x.format = ChatFormatting.GOLD.getName();
-            })
-            .build();
 
     public static DataPackStatAccessor<EmptyAccessor> NON_CRIT_DAMAGE = DatapackStatBuilder
             .ofSingle("non_crit_damage", Elements.Physical)
@@ -989,7 +873,7 @@ public class Stats implements ExileRegistryInit {
             .worksWithEvent(SpellStatsCalculationEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)
-            .addCondition(StatConditions.IS_STYLE.get(PlayStyle.magic))
+            .addCondition(StatConditions.IS_STYLE.get(PlayStyle.INT))
             .addEffect(StatEffects.DECREASE_CAST_TIME)
             .addEffect(StatEffects.APPLY_CAST_SPEED_TO_CD)
             .setLocName(x -> "Cast Speed")

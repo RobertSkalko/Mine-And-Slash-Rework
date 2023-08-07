@@ -17,7 +17,7 @@ import java.util.List;
 
 public class BaseGearBuilder implements GearDataHelper {
 
-    private PlayStyle style = PlayStyle.melee;
+    private PlayStyle style = PlayStyle.STR;
     private String locnamesuffix;
     private String id;
     private String slot;

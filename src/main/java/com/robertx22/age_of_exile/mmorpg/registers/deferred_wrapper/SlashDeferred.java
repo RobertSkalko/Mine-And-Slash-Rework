@@ -63,6 +63,7 @@ public class SlashDeferred {
         //items
         CurrencyItems.init();
         ProfessionItems.init();
+        SkillGemsItems.init();
         SlashItems.init();
         SlashItems.GearItems.init();
         RuneItems.init();

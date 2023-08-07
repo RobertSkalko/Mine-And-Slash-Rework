@@ -16,7 +16,7 @@ import com.robertx22.age_of_exile.database.data.currency.loc_reqs.item_types.Gea
 import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.data.gems.Gem;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.SpellDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.EnergyRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
@@ -312,12 +312,12 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
 
             @Override
             public List<StatModifier> onJewelry() {
-                return Arrays.asList(new StatModifier(1, 6, SpellDamage.getInstance(), ModType.FLAT));
+                return Arrays.asList(new StatModifier(1, 6, SkillDamage.getInstance(), ModType.FLAT));
             }
 
             @Override
             public List<StatModifier> onWeapons() {
-                return Arrays.asList(new StatModifier(2, 10, Stats.SPELL_CRIT_DAMAGE.get()));
+                return Arrays.asList(new StatModifier(2, 10, Stats.CRIT_DAMAGE.get()));
             }
         }),
         RUBY("ruby", "Ruby", ChatFormatting.RED, new EleGem(Elements.Fire)),

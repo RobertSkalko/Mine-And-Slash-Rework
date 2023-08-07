@@ -60,7 +60,7 @@ public class WeaponPrefixes implements ExileRegistryInit {
 
         AffixBuilder.Normal("desolation")
                 .Named("Desolation")
-                .stats(new StatModifier(2, 6, Stats.SPELL_CRIT_CHANCE.get()), new StatModifier(3, 10, Stats.SPELL_CRIT_DAMAGE.get()))
+                .stats(new StatModifier(2, 6, Stats.CRIT_CHANCE.get()), new StatModifier(3, 10, Stats.CRIT_DAMAGE.get()))
                 .includesTags(SlotTag.mage_weapon)
                 .Weight(100)
                 .Prefix()
@@ -83,14 +83,14 @@ public class WeaponPrefixes implements ExileRegistryInit {
 
         AffixBuilder.Normal("heal_crit_prefix")
                 .Named("Truthful")
-                .stats(new StatModifier(3, 12, Stats.HEAL_CRIT_CHANCE.get(), ModType.FLAT))
+                .stats(new StatModifier(3, 12, Stats.CRIT_CHANCE.get(), ModType.FLAT))
                 .includesTags(SlotTag.scepter)
                 .Prefix()
                 .Build();
 
         AffixBuilder.Normal("heal_crit_dmg_prefix")
                 .Named("Inspiring")
-                .stats(new StatModifier(5, 20, Stats.HEAL_CRIT_DAMAGE.get(), ModType.FLAT))
+                .stats(new StatModifier(5, 20, Stats.CRIT_DAMAGE.get(), ModType.FLAT))
                 .includesTags(SlotTag.scepter)
                 .Prefix()
                 .Build();

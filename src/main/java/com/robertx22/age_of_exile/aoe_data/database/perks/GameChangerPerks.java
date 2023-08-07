@@ -29,13 +29,13 @@ public class GameChangerPerks implements ExileRegistryInit {
         );
 
         PerkBuilder.gameChanger("sniper", "Sniper",
-                new OptScaleExactStat(-50, Stats.STYLE_DAMAGE.get(PlayStyle.melee)),
+                new OptScaleExactStat(-50, Stats.STYLE_DAMAGE.get(PlayStyle.STR)),
                 new OptScaleExactStat(-25, Stats.COOLDOWN_REDUCTION.get()),
                 new OptScaleExactStat(25, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.arrow))
         );
 
         PerkBuilder.gameChanger("nightcrawler", "Night Crawler",
-                new OptScaleExactStat(-100, Stats.STYLE_DAMAGE.get(PlayStyle.magic)),
+                new OptScaleExactStat(-100, Stats.STYLE_DAMAGE.get(PlayStyle.INT)),
                 new OptScaleExactStat(50, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTag.movement))
         );
 
@@ -49,7 +49,7 @@ public class GameChangerPerks implements ExileRegistryInit {
         PerkBuilder.gameChanger("songbird", "Songbird",
                 new OptScaleExactStat(-50, Stats.TOTAL_DAMAGE.get(), ModType.FLAT),
                 new OptScaleExactStat(25, Stats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.song)),
-                new OptScaleExactStat(25, Stats.HEAL_CRIT_CHANCE.get()),
+                new OptScaleExactStat(25, Stats.CRIT_CHANCE.get()),
                 new OptScaleExactStat(20, Stats.COOLDOWN_REDUCTION.get())
         );
 
@@ -78,7 +78,7 @@ public class GameChangerPerks implements ExileRegistryInit {
 
         PerkBuilder.gameChanger("steady_hand", "Steady Hand",
                 new OptScaleExactStat(-100, Stats.CRIT_DAMAGE.get(), ModType.MORE),
-                new OptScaleExactStat(-100, Stats.SPELL_CRIT_DAMAGE.get(), ModType.MORE),
+                new OptScaleExactStat(-100, Stats.CRIT_DAMAGE.get(), ModType.MORE),
                 new OptScaleExactStat(20, Stats.TOTAL_DAMAGE.get(), ModType.FLAT)
         );
 
@@ -102,7 +102,7 @@ public class GameChangerPerks implements ExileRegistryInit {
         PerkBuilder.gameChanger("divinity", "Divinity",
                 new OptScaleExactStat(25, DatapackStats.HEAL_TO_SPELL_DMG, ModType.FLAT),
                 new OptScaleExactStat(-50, Stats.CRIT_DAMAGE.get(), ModType.MORE),
-                new OptScaleExactStat(-50, Stats.SPELL_CRIT_DAMAGE.get(), ModType.MORE)
+                new OptScaleExactStat(-50, Stats.CRIT_DAMAGE.get(), ModType.MORE)
         );
 
         PerkBuilder.gameChanger("tormentor", "Tormentor",

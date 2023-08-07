@@ -81,9 +81,9 @@ public class NegativeEffects implements ExileRegistryInit {
 
         ExileEffectBuilder.of(AGONY)
                 .maxStacks(1)
-                .stat(-10, 20, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.melee))
-                .stat(-10, 20, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.magic))
-                .stat(-10, 20, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.ranged))
+                .stat(-10, 20, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.STR))
+                .stat(-10, 20, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.INT))
+                .stat(-10, 20, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.DEX))
                 .stat(-5, -10, DatapackStats.MOVE_SPEED)
 
                 .spell(SpellBuilder.forEffect()

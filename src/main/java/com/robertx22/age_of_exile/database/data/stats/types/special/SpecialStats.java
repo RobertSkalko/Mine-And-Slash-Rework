@@ -24,9 +24,9 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import com.robertx22.library_of_exile.utils.RandomUtils;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.ChatFormatting;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
 
 import java.util.ArrayList;
 
@@ -51,7 +51,7 @@ public class SpecialStats {
 
                     float val = maxhp * data.getValue() / 100F;
                     DamageEvent dmg = EventBuilder.ofDamage(effect.source, effect.target, val)
-                            .setupDamage(AttackType.spell, WeaponTypes.none, PlayStyle.magic)
+                            .setupDamage(AttackType.spell, WeaponTypes.none, PlayStyle.INT)
                             .set(x -> x.setElement(Elements.Chaos))
                             .build();
 

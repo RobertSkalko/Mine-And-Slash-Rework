@@ -96,7 +96,7 @@ public class NatureSpells implements ExileRegistryInit {
         SpellBuilder.of(POISON_WEAPONS, SpellConfiguration.Builder.instant(15, 160 * 20), "Poison Weapons",
                         Arrays.asList(SpellTag.damage))
                 .manualDesc("Gives effect to nearby allies.")
-                .attackStyle(PlayStyle.ranged)
+                .attackStyle(PlayStyle.DEX)
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
                 .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, BeneficialEffects.POISON_WEAPONS.resourcePath, 20 * 30D))
                 .build();

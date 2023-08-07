@@ -568,10 +568,10 @@ public class EntityData implements ICap, INeededForClient {
 
         num = WeaponDamage.getInstance().scale(ModType.FLAT, num, getLevel());
 
-        PlayStyle style = PlayStyle.melee;
+        PlayStyle style = PlayStyle.STR;
 
         if (data.getSource() != null && data.getSource().is(DamageTypeTags.IS_PROJECTILE)) {
-            style = PlayStyle.ranged;
+            style = PlayStyle.DEX;
         }
 
         DamageEvent dmg = EventBuilder.ofDamage(data, entity, data.getTargetEntity(), num)

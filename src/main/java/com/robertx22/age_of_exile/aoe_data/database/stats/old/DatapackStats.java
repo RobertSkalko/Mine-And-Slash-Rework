@@ -8,7 +8,7 @@ import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.*;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.SpellDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.blood.Blood;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
@@ -47,7 +47,7 @@ public class DatapackStats implements ExileRegistryInit {
     )));
 
 
-    public static Stat HEAL_TO_SPELL_DMG = new AddPerPercentOfOther(Stats.HEAL_STRENGTH.get(), SpellDamage.getInstance());
+    public static Stat HEAL_TO_SPELL_DMG = new AddPerPercentOfOther(Stats.HEAL_STRENGTH.get(), SkillDamage.getInstance());
     public static Stat PHYS_DMG_PER_MANA = new AddPerPercentOfOther(Mana.getInstance(), new BonusAttackDamage(Elements.Physical));
 
     public static Stat BLOOD_PER_10STR = new MoreXPerYOf(DatapackStats.STR, Blood.getInstance(), 10);

@@ -7,7 +7,7 @@ import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuild
 import com.robertx22.age_of_exile.database.data.StatModifier;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.SpellDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.special.SpecialStats;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
@@ -30,7 +30,7 @@ public class UniqueRings implements ExileRegistryInit {
                 .stats(Arrays.asList(
                         new StatModifier(15, 25, new ElementalResist(Elements.Chaos), ModType.PERCENT),
                         new StatModifier(25, 50, SpecialStats.BETTER_FOOD_BUFFS, ModType.FLAT),
-                        new StatModifier(10, 15, SpellDamage.getInstance(), ModType.FLAT),
+                        new StatModifier(10, 15, SkillDamage.getInstance(), ModType.FLAT),
                         new StatModifier(5, 10, ManaRegen.getInstance(), ModType.PERCENT)
 
                 ))

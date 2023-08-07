@@ -41,80 +41,80 @@ public class StatConditions implements ExileRegistryInit {
     public static StatCondition IS_SOURCE_LOW_HP = new IsHealthBellowPercentCondition("is_source_low_hp", 30, EffectSides.Source);
     public static StatCondition IS_TARGET_NEAR_FULL_HP = new IsHealthAbovePercentCondition("is_target_near_full_hp", 70, EffectSides.Target);
     public static StatCondition IS_ELEMENTAL = new StringMatchesCondition(EventData.ELEMENT, Elements.Physical.name()).flipCondition();
-    public static StatCondition IS_NON_MAGIC_STYLE = new StringMatchesCondition(EventData.STYLE, PlayStyle.magic.name()).flipCondition();
+    public static StatCondition IS_NON_MAGIC_STYLE = new StringMatchesCondition(EventData.STYLE, PlayStyle.INT.name()).flipCondition();
 
     public static DataHolder<EffectTags, StatCondition> EFFECT_HAS_TAG = new DataHolder<>(
-        EffectTags.values()
-        , x -> new EffectHasTagCondition(x));
+            EffectTags.values()
+            , x -> new EffectHasTagCondition(x));
 
     public static DataHolder<ResourceType, StatCondition> IS_RESOURCE = new DataHolder<>(
-        ResourceType.values()
-        , x -> new StringMatchesCondition(EventData.RESOURCE_TYPE, x.name()));
+            ResourceType.values()
+            , x -> new StringMatchesCondition(EventData.RESOURCE_TYPE, x.name()));
 
     public static DataHolder<ThreatGenType, StatCondition> IS_THREAT_GEN_TYPE = new DataHolder<>(
-        ThreatGenType.values()
-        , x -> new StringMatchesCondition(EventData.THREAT_GEN_TYPE, x.name()));
+            ThreatGenType.values()
+            , x -> new StringMatchesCondition(EventData.THREAT_GEN_TYPE, x.name()));
 
     public static DataHolder<SpellTag, StatCondition> SPELL_HAS_TAG = new DataHolder<>(
-        SpellTag.values()
-        , x -> new SpellHasTagCondition(x));
+            SpellTag.values()
+            , x -> new SpellHasTagCondition(x));
 
     public static DataHolder<PlayStyle, StatCondition> IS_STYLE = new DataHolder<>(
-        PlayStyle.values()
-        , x -> new StringMatchesCondition(EventData.STYLE, x.name()));
+            PlayStyle.values()
+            , x -> new StringMatchesCondition(EventData.STYLE, x.name()));
 
     public static DataHolder<RestoreType, StatCondition> IS_RESTORE_TYPE = new DataHolder<>(
-        RestoreType.values()
-        , x -> new StringMatchesCondition(EventData.RESTORE_TYPE, x.name()));
+            RestoreType.values()
+            , x -> new StringMatchesCondition(EventData.RESTORE_TYPE, x.name()));
 
     public static StatCondition IS_MELEE_WEAPON = new EitherIsTrueCondition("is_melee_weapon",
-        Arrays.stream(WeaponTypes.values())
-            .filter(x -> x.isMelee())
-            .map(x -> new WeaponTypeMatches(x).GUID())
-            .collect(Collectors.toList())
+            Arrays.stream(WeaponTypes.values())
+                    .filter(x -> x.isMelee())
+                    .map(x -> new WeaponTypeMatches(x).GUID())
+                    .collect(Collectors.toList())
     );
 
     public static StatCondition IS_MAGIC_WEAPON = new EitherIsTrueCondition("is_magic_weapon",
-        Arrays.stream(WeaponTypes.values())
-            .filter(x -> x.style == PlayStyle.magic)
-            .map(x -> new WeaponTypeMatches(x).GUID())
-            .collect(Collectors.toList())
+            Arrays.stream(WeaponTypes.values())
+                    .filter(x -> x.style == PlayStyle.INT)
+                    .map(x -> new WeaponTypeMatches(x).GUID())
+                    .collect(Collectors.toList())
     );
 
     public static StatCondition IS_RANGED_WEAPON = new EitherIsTrueCondition("is_ranged_weapon",
-        Arrays.asList(
-            new WeaponTypeMatches(WeaponTypes.crossbow).GUID(),
-            new WeaponTypeMatches(WeaponTypes.bow).GUID()
-        ));
+            Arrays.asList(
+                    new WeaponTypeMatches(WeaponTypes.crossbow).GUID(),
+                    new WeaponTypeMatches(WeaponTypes.bow).GUID()
+            ));
 
     public static StatCondition IS_ANY_PROJECTILE = new EitherIsTrueCondition("is_projectile",
-        Arrays.asList(
-            SPELL_HAS_TAG.get(SpellTag.projectile)
-                .GUID(),
-            IS_RANGED_WEAPON.GUID()
-        ));
+            Arrays.asList(
+                    SPELL_HAS_TAG.get(SpellTag.projectile)
+                            .GUID(),
+                    IS_RANGED_WEAPON.GUID()
+            ));
 
     public static DataHolder<AttackType, StatCondition> ATTACK_TYPE_MATCHES = new DataHolder<>(
-        AttackType.values()
-        , x -> new StringMatchesCondition(EventData.ATTACK_TYPE, x.name()));
+            AttackType.values()
+            , x -> new StringMatchesCondition(EventData.ATTACK_TYPE, x.name()));
 
     public static DataHolder<WeaponTypes, StatCondition> WEAPON_TYPE_MATCHES = new DataHolder<>(
-        WeaponTypes.values()
-        , x -> new WeaponTypeMatches(x));
+            WeaponTypes.values()
+            , x -> new WeaponTypeMatches(x));
 
     public static StatCondition IS_ATTACK_OR_SPELL_ATTACK = new EitherIsTrueCondition(
-        "is_attack_or_spell_attack",
-        Arrays.asList(ATTACK_TYPE_MATCHES.get(AttackType.attack)
-            .GUID(), ATTACK_TYPE_MATCHES.get(AttackType.spell)
-            .GUID())
+            "is_attack_or_spell_attack",
+            Arrays.asList(ATTACK_TYPE_MATCHES.get(AttackType.attack)
+                    .GUID(), ATTACK_TYPE_MATCHES.get(AttackType.spell)
+                    .GUID())
     );
     public static DataHolder<String, StatCondition> IS_SPECIFIC_SPELL = new DataHolder<>(
-        Arrays.asList(
-            WaterSpells.FROSTBALL_ID,
-            FireSpells.FIREBALL_ID,
-            NatureSpells.POISONBALL_ID
-        )
-        , x -> new StringMatchesCondition(EventData.SPELL, x));
+            Arrays.asList(
+                    WaterSpells.FROSTBALL_ID,
+                    FireSpells.FIREBALL_ID,
+                    NatureSpells.POISONBALL_ID
+            )
+            , x -> new StringMatchesCondition(EventData.SPELL, x));
 
     public static void loadClass() {
     }

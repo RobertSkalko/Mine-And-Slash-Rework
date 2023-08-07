@@ -4,7 +4,7 @@ import com.robertx22.age_of_exile.aoe_data.database.affixes.AffixBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.database.data.StatModifier;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType.SlotTag;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.SpellDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -21,7 +21,7 @@ public class WeaponSuffixes implements ExileRegistryInit {
                 .Suffix()
                 .Build();
 
-        
+
         AffixBuilder.Normal("of_gluttony")
                 .Named("Of Gluttony")
                 .stats(new StatModifier(1, 6, Stats.RESOURCE_ON_KILL.get(ResourceType.health), ModType.FLAT))
@@ -52,7 +52,7 @@ public class WeaponSuffixes implements ExileRegistryInit {
 
         AffixBuilder.Normal("of_spell_dmg")
                 .Named("Of Spell Damage")
-                .stats(new StatModifier(6, 15, SpellDamage.getInstance(), ModType.FLAT))
+                .stats(new StatModifier(6, 15, SkillDamage.getInstance(), ModType.FLAT))
                 .includesTags(SlotTag.mage_weapon, SlotTag.jewelry_family)
                 .Suffix()
                 .Build();

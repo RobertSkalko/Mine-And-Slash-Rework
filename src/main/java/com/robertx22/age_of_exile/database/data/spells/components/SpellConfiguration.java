@@ -22,7 +22,7 @@ public class SpellConfiguration {
     public String charge_name = "";
     private int cast_time_ticks = 0;
     public int cooldown_ticks = 20;
-    public PlayStyle style = PlayStyle.magic;
+    public PlayStyle style = PlayStyle.INT;
     public List<SpellTag> tags = new ArrayList<>();
     public SpellCastType cast_type = SpellCastType.NORMAL;
     public boolean scale_mana_cost_to_player_lvl = false;

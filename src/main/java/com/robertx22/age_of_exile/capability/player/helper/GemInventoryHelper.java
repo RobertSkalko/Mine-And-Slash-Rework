@@ -11,7 +11,7 @@ public class GemInventoryHelper {
 
     public static int MAX_SKILL_GEMS = 8;
     public static int SUPPORT_GEMS_PER_SKILL = 5;
-    public static int TOTAL_SLOTS = MAX_SKILL_GEMS * SUPPORT_GEMS_PER_SKILL;
+    public static int TOTAL_SLOTS = MAX_SKILL_GEMS * (1 + SUPPORT_GEMS_PER_SKILL);
 
 
     SimpleContainer inv;

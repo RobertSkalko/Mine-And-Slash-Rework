@@ -34,10 +34,10 @@ public class EntityAilmentData {
 
         float dmg = dmgMap.getOrDefault(ailment.GUID(), 0F);
         dmgMap.put(ailment.GUID(), 0F);
-        
+
 
         if (dmg > 0) {
-            EventBuilder.ofDamage(caster, target, dmg).setupDamage(AttackType.dot, WeaponTypes.none, PlayStyle.magic).set(x -> {
+            EventBuilder.ofDamage(caster, target, dmg).setupDamage(AttackType.dot, WeaponTypes.none, PlayStyle.INT).set(x -> {
                         x.setElement(ailment.element);
                         x.setisAilmentDamage(ailment);
                     }).build()
@@ -148,7 +148,7 @@ public class EntityAilmentData {
                         if (dmg > 1) {
                             Ailment ailment = ExileDB.Ailments().get(e.getKey());
                             // todo will probably have to tweak this
-                            EventBuilder.ofDamage(caster, en, dmg).setupDamage(AttackType.dot, WeaponTypes.none, PlayStyle.magic).set(x -> {
+                            EventBuilder.ofDamage(caster, en, dmg).setupDamage(AttackType.dot, WeaponTypes.none, PlayStyle.INT).set(x -> {
                                         x.setElement(ailment.element);
                                         x.setisAilmentDamage(ailment);
                                     }).build()

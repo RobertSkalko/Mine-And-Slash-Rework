@@ -61,5 +61,7 @@ public class ExileRegistryTypes {
     public static ExileRegistryType GAME_BALANCE = ExileRegistryType.register(SlashRef.MODID, "game_balance", 26, GameBalanceConfig.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType SPELL_SCHOOL = ExileRegistryType.register(SlashRef.MODID, "spell_school", 26, SpellSchool.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType AILMENT = ExileRegistryType.register(SlashRef.MODID, "ailment", 27, null, SyncTime.NEVER);
+    public static ExileRegistryType AURA = ExileRegistryType.register(SlashRef.MODID, "aura", 28, null, SyncTime.NEVER);
+    public static ExileRegistryType SUPPORT_GEM = ExileRegistryType.register(SlashRef.MODID, "support_gem", 29, null, SyncTime.NEVER);
 
 }

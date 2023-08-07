@@ -40,7 +40,7 @@ public class FireSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTag.technique, SpellTag.area, SpellTag.damage))
                 .manualDesc("Strike enemies in front for " +
                         SpellCalcs.FLAME_STRIKE.getLocDmgTooltip(Elements.Fire))
-                .attackStyle(PlayStyle.melee)
+                .attackStyle(PlayStyle.STR)
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.FIRE_EXTINGUISH, 1D, 1D))
                 .onCast(PartBuilder.swordSweepParticles())

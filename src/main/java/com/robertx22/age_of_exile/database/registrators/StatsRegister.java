@@ -13,7 +13,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.misc.BonusExp;
 import com.robertx22.age_of_exile.database.data.stats.types.misc.DamageTakenToMana;
 import com.robertx22.age_of_exile.database.data.stats.types.misc.ExtraMobDropsStat;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.FullSwingDamage;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.SpellDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.crit.GlobalCriticalDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.crit.GlobalCriticalHit;
@@ -66,6 +66,9 @@ public class StatsRegister implements ExileRegistryInit {
                     add(ArmorPenetration.getInstance());
 
 
+                    add(AllAilmentDamage.getInstance());
+                    add(HitDamage.getInstance());
+
                     add(WeaponDamage.getInstance());
 
                     add(FullSwingDamage.getInstance());
@@ -85,7 +88,7 @@ public class StatsRegister implements ExileRegistryInit {
                     add(new PhysConvertToEle(Elements.Physical));
 
                     add(AllAttributes.getInstance());
-                    add(SpellDamage.getInstance());
+                    add(SkillDamage.getInstance());
 
                     add(ExtraMobDropsStat.getInstance());
                     add(BonusExp.getInstance());

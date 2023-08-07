@@ -9,14 +9,14 @@ import java.util.stream.Collectors;
 
 public enum WeaponTypes {
 
-    none("none", PlayStyle.melee, WeaponRange.MELEE, false),
-    axe("axe", PlayStyle.melee, WeaponRange.MELEE, false),
-    staff("staff", PlayStyle.magic, WeaponRange.MELEE, false),
-    trident("trident", PlayStyle.melee, WeaponRange.OPTIONALLY_RANGED, false),
-    sword("sword", PlayStyle.melee, WeaponRange.MELEE, false),
-    bow("bow", PlayStyle.ranged, WeaponRange.RANGED, true),
-    crossbow("crossbow", PlayStyle.ranged, WeaponRange.RANGED, true),
-    scepter("scepter", PlayStyle.magic, WeaponRange.MELEE, false);
+    none("none", PlayStyle.STR, WeaponRange.MELEE, false),
+    axe("axe", PlayStyle.STR, WeaponRange.MELEE, false),
+    staff("staff", PlayStyle.INT, WeaponRange.MELEE, false),
+    trident("trident", PlayStyle.STR, WeaponRange.OPTIONALLY_RANGED, false),
+    sword("sword", PlayStyle.STR, WeaponRange.MELEE, false),
+    bow("bow", PlayStyle.DEX, WeaponRange.RANGED, true),
+    crossbow("crossbow", PlayStyle.DEX, WeaponRange.RANGED, true),
+    scepter("scepter", PlayStyle.INT, WeaponRange.MELEE, false);
 
     WeaponTypes(String id, PlayStyle style, WeaponRange range, boolean isProjectile) {
         this.id = id;

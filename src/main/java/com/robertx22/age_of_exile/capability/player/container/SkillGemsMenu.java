@@ -41,13 +41,33 @@ public class SkillGemsMenu extends AbstractContainerMenu {
             this.addSlot(new Slot(pContainer, i1, x + i1 * 18, 232));
         }
 
-        var data = rpg.getSkillGemInventory();
-        int gems = 0;
+        try {
+            var data = rpg.getSkillGemInventory();
+            int index = 0;
 
-        // todo gem slots
 
-        for (int i = 0; i < GemInventoryHelper.TOTAL_AURAS; i++) {
-            this.addSlot(new Slot(data.getAuraInv(), i, 36 + (i * 18), 148));
+            for (int i = 0; i < GemInventoryHelper.MAX_SKILL_GEMS; i++) {
+
+                int xp = 16 + (i * 25);
+                if (i > 3) {
+                    xp += 9;
+                }
+                this.addSlot(new Slot(data.getGemsInv(), index, xp, 16));
+                index++;
+
+                for (int s = 0; s < GemInventoryHelper.SUPPORT_GEMS_PER_SKILL; s++) {
+                    this.addSlot(new Slot(data.getGemsInv(), index, xp, 38 + (s * 18)));
+                    index++;
+                }
+
+            }
+
+
+            for (int i = 0; i < GemInventoryHelper.TOTAL_AURAS; i++) {
+                this.addSlot(new Slot(data.getAuraInv(), i, 36 + (i * 18), 148));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
 

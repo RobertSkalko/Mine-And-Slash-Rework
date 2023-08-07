@@ -34,6 +34,8 @@ public class ExileDBInit {
     private static void registerAllNonDatapackEntries() {
         Ailments.init();
         new StatsRegister().registerAll();
+
+      
     }
 
     public static void initRegistries() {

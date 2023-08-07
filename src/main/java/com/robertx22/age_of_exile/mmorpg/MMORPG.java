@@ -14,6 +14,7 @@ import com.robertx22.age_of_exile.database.data.spells.entities.renders.MySprite
 import com.robertx22.age_of_exile.database.data.spells.entities.renders.RangerArrowRenderer;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.stats.types.special.SpecialStats;
+import com.robertx22.age_of_exile.database.data.support_gem.SupportGems;
 import com.robertx22.age_of_exile.database.registrators.CurrencyItems;
 import com.robertx22.age_of_exile.database.registry.ExileDBInit;
 import com.robertx22.age_of_exile.mmorpg.event_registers.CommonEvents;
@@ -170,6 +171,10 @@ public class MMORPG {
 
         // if (MMORPG.RUN_DEV_TOOLS) {
         GeneratedData.addAllObjectsToGenerate();
+
+
+        SupportGems.init();
+
         //}
 
         // need to happen after curerrency items are registered

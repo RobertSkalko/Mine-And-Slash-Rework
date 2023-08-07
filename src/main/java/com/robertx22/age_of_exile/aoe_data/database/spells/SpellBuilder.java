@@ -8,47 +8,45 @@ import com.robertx22.age_of_exile.database.data.spells.components.EntityActivati
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
-import com.robertx22.age_of_exile.database.data.spells.components.actions.vanity.ParticleMotion;
-import com.robertx22.age_of_exile.database.data.spells.components.conditions.EffectCondition;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeapon;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
-import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.item.Items;
-import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class SpellBuilder {
     Spell spell;
 
+    /*
     public static SpellBuilder breath(String id, String name, Elements ele, SimpleParticleType particle) {
 
         return SpellBuilder.of(id, SpellConfiguration.Builder.instant(2, 1), name,
-                Arrays.asList(SpellTag.damage))
+                        Arrays.asList(SpellTag.damage))
 
-            .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.AIR, 1D, 2D, SlashEntities.SIMPLE_PROJECTILE.get(), 20D, false)
-                .put(MapField.IS_SILENT, true)))
-            .onHit(PartBuilder.damageInAoe(SpellCalcs.BREATH, ele, 1.5D)
-                .addCondition(EffectCondition.IS_NOT_ON_COOLDOWN.create("breath"))
-                .addActions(SpellAction.SET_ON_COOLDOWN.create("breath", 20D)))
-            .onCast(PartBuilder.Particle.builder(particle, 50D, 0.3D)
-                .set(MapField.MOTION, ParticleMotion.CasterLook.name())
-                .set(MapField.HEIGHT, 1D)
-                .build());
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.AIR, 1D, 2D, SlashEntities.SIMPLE_PROJECTILE.get(), 20D, false)
+                        .put(MapField.IS_SILENT, true)))
+                .onHit(PartBuilder.damageInAoe(SpellCalcs.BREATH, ele, 1.5D)
+                        .addCondition(EffectCondition.IS_NOT_ON_COOLDOWN.create("breath"))
+                        .addActions(SpellAction.SET_ON_COOLDOWN.create("breath", 20D)))
+                .onCast(PartBuilder.Particle.builder(particle, 50D, 0.3D)
+                        .set(MapField.MOTION, ParticleMotion.CasterLook.name())
+                        .set(MapField.HEIGHT, 1D)
+                        .build());
     }
 
-    public static SpellBuilder of(String id, SpellConfiguration config, String name, List<SpellTag> tags) {
+     */
+
+    public static SpellBuilder of(String id, PlayStyle style, SpellConfiguration config, String name, List<SpellTag> tags) {
         SpellBuilder builder = new SpellBuilder();
 
         builder.spell = new Spell();
+        builder.spell.config.style = style;
         builder.spell.identifier = id;
         builder.spell.config = config;
         builder.spell.locName = name;
@@ -68,10 +66,6 @@ public class SpellBuilder {
         return builder;
     }
 
-    public SpellBuilder attackStyle(PlayStyle style) {
-        this.spell.config.style = style;
-        return this;
-    }
 
     public SpellBuilder weaponReq(CastingWeapon wep) {
         this.spell.config.castingWeapon = wep;
@@ -101,13 +95,13 @@ public class SpellBuilder {
 
     public SpellBuilder teleportForward() {
         this.onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 0D)))
-            .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(Blocks.AIR, 1D)
-                .put(MapField.ENTITY_NAME, "block")
-                .put(MapField.BLOCK_FALL_SPEED, 0D)
-                .put(MapField.FIND_NEAREST_SURFACE, false)
-                .put(MapField.IS_BLOCK_FALLING, false)))
-            .onExpire("block", PartBuilder.justAction(SpellAction.TP_TARGET_TO_SELF.create())
-                .addTarget(TargetSelector.CASTER.create()));
+                .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(Blocks.AIR, 1D)
+                        .put(MapField.ENTITY_NAME, "block")
+                        .put(MapField.BLOCK_FALL_SPEED, 0D)
+                        .put(MapField.FIND_NEAREST_SURFACE, false)
+                        .put(MapField.IS_BLOCK_FALLING, false)))
+                .onExpire("block", PartBuilder.justAction(SpellAction.TP_TARGET_TO_SELF.create())
+                        .addTarget(TargetSelector.CASTER.create()));
         return this;
     }
 
@@ -169,7 +163,7 @@ public class SpellBuilder {
         }
 
         this.spell.attached.getDataForEntity(entity)
-            .add(comp);
+                .add(comp);
 
         return this;
     }

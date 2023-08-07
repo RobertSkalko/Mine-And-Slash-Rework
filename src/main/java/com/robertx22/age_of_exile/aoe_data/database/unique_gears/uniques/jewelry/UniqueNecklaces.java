@@ -7,7 +7,7 @@ import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuild
 import com.robertx22.age_of_exile.database.data.StatModifier;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttributes;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.SpellDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.EnergyRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -41,7 +41,7 @@ public class UniqueNecklaces implements ExileRegistryInit {
                 .stats(Arrays.asList(
                         new StatModifier(1, 2, PlusSkillsInSchoolStats.PLUS_OCEAN),
                         new StatModifier(25, 25, DatapackStats.MANA_PER_10_INT, ModType.FLAT),
-                        new StatModifier(3, 5, SpellDamage.getInstance(), ModType.FLAT),
+                        new StatModifier(3, 5, SkillDamage.getInstance(), ModType.FLAT),
                         new StatModifier(1, 3, DatapackStats.STR, ModType.FLAT),
                         new StatModifier(2, 6, DatapackStats.DEX, ModType.FLAT)
                 ))

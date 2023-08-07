@@ -19,8 +19,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
-
 public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseGearType>, IAutoGson<BaseGearType> {
 
     public static BaseGearType SERIALIZER = new BaseGearType();
@@ -30,7 +28,7 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
     public String gear_slot = "";
 
     public int weight = 1000;
-    public PlayStyle style = PlayStyle.melee;
+    public PlayStyle style = PlayStyle.STR;
 
     public List<StatModifier> implicit_stats = new ArrayList<>();
     public List<StatModifier> base_stats = new ArrayList<>();
@@ -114,7 +112,7 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
         return weight;
     }
 
-    
+
     public final boolean isArmor() {
         return family() == SlotFamily.Armor;
     }

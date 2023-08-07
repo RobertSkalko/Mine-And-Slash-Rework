@@ -8,7 +8,7 @@ import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.SpellDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -131,7 +131,7 @@ public class MobStatUtils {
         stats.add(ExactStatData.scaleTo(5 * rar.DamageMultiplier(), ModType.FLAT, Stats.CRIT_CHANCE.get()
                 .GUID(), lvl));
 
-        stats.add(ExactStatData.scaleTo(-25, ModType.FLAT, SpellDamage.getInstance()
+        stats.add(ExactStatData.scaleTo(-25, ModType.FLAT, SkillDamage.getInstance()
                 .GUID(), lvl));
 
         list.add(new MiscStatCtx(stats));

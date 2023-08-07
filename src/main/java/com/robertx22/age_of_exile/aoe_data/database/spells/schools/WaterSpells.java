@@ -122,7 +122,7 @@ public class WaterSpells implements ExileRegistryInit {
                 .manualDesc(
                         "Give Water Breathing to allies around you.")
 
-                .attackStyle(PlayStyle.magic)
+                .attackStyle(PlayStyle.INT)
                 .onCast(PartBuilder.playSound(SoundEvents.PLAYER_SPLASH, 1D, 1D))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.FALLING_WATER, 100D, 3D))
                 .onCast(PartBuilder.giveEffectToAlliesInRadius(MobEffects.WATER_BREATHING, 20D * 60D * 3, 5D))
@@ -165,7 +165,7 @@ public class WaterSpells implements ExileRegistryInit {
                                 .setSwingArm(), "Tidal Strike",
                         Arrays.asList(SpellTag.technique, SpellTag.area, SpellTag.damage))
                 .manualDesc("Strike enemies in front of you for " + SpellCalcs.TIDAL_STRIKE.getLocDmgTooltip(Elements.Cold))
-                .attackStyle(PlayStyle.melee)
+                .attackStyle(PlayStyle.STR)
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.TRIDENT_THROW, 1D, 1D))
                 .onCast(PartBuilder.swordSweepParticles())

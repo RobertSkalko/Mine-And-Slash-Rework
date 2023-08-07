@@ -52,20 +52,21 @@ public class OrbOfTransmutationItem extends CurrencyItem implements ICurrencyIte
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pUsedHand);
 
-        // todo this is just for testing
-        pPlayer.openMenu(new MenuProvider() {
-            @Override
-            public Component getDisplayName() {
-                return Component.empty();
-            }
+        if (!pLevel.isClientSide()) {
+            // todo this is just for testing
+            pPlayer.openMenu(new MenuProvider() {
+                @Override
+                public Component getDisplayName() {
+                    return Component.empty();
+                }
 
-            @Nullable
-            @Override
-            public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-                return new SkillGemsMenu(Load.playerRPGData(pPlayer), pContainerId, pPlayerInventory);
-            }
-        });
-
+                @Nullable
+                @Override
+                public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
+                    return new SkillGemsMenu(Load.playerRPGData(pPlayer), pContainerId, pPlayerInventory);
+                }
+            });
+        }
         return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
 
     }
