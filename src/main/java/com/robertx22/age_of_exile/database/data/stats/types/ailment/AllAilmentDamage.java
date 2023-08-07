@@ -14,6 +14,8 @@ public class AllAilmentDamage extends Stat {
     public AllAilmentDamage() {
 
         this.statEffect = new Effect();
+        this.is_perc = true;
+
     }
 
     public static AllAilmentDamage getInstance() {
@@ -38,7 +40,7 @@ public class AllAilmentDamage extends Stat {
 
         @Override
         public boolean canActivate(DamageEvent effect, StatData data, Stat stat) {
-            return !effect.data.getString(EventData.AILMENT).isEmpty());
+            return !effect.data.getString(EventData.AILMENT).isEmpty();
         }
 
     }

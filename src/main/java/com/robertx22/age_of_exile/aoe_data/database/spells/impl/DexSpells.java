@@ -28,10 +28,9 @@ public class DexSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        SpellBuilder.of("execute", SpellConfiguration.Builder.instant(10, 20 * 60)
+        SpellBuilder.of("execute", PlayStyle.DEX, SpellConfiguration.Builder.instant(10, 20 * 60)
                                 .setSwingArm(), "Execute",
                         Arrays.asList(SpellTag.area, SpellTag.damage, SpellTag.technique))
-                .attackStyle(PlayStyle.DEX)
                 .manualDesc(
                         "Slash enemies in front of you for " + SpellCalcs.EXECUTE.getLocDmgTooltip()
                                 + " " + Elements.Physical.getIconNameDmg()
@@ -45,11 +44,10 @@ public class DexSpells implements ExileRegistryInit {
                         .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.SMOKE, 45D, 1D, 0.1D)))
                 .build();
 
-        SpellBuilder.of("mark_for_death", SpellConfiguration.Builder.instant(5, 60 * 20 * 2)
+        SpellBuilder.of("mark_for_death", PlayStyle.DEX, SpellConfiguration.Builder.instant(5, 60 * 20 * 2)
                                 .setScaleManaToPlayer(),
                         "Marked for Death",
                         Arrays.asList())
-                .attackStyle(PlayStyle.DEX)
                 .manualDesc("Mark your target for death, making them more vulnerable to damage.")
                 .onCast(PartBuilder.giveSelfEffect(SlashPotions.KNOCKBACK_RESISTANCE.get(), 20D * 10))
                 .onCast(PartBuilder.giveSelfExileEffect(BeneficialEffects.MURDER_INSTINCT, 20D * 10))

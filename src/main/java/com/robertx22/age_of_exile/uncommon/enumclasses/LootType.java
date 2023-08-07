@@ -12,6 +12,7 @@ public enum LootType implements IGUID {
     Rune("Rune", "rune", Words.Rune, 2),
     Currency("Currency", "currency", Words.Currency, 3),
     Ingredient("Ingredient", "ingredient", Words.Ingredient, 4),
+    SkillGem("Skill Gem", "skill_gem", Words.SkillGem, 5),
     All("All", "all", Words.All, 0);
 
     public int custommodeldata;

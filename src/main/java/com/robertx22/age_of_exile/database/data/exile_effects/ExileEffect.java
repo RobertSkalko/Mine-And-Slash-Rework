@@ -18,6 +18,7 @@ import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.level.Level;
 
 import java.util.ArrayList;
@@ -106,8 +107,8 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
 
     }
 
-    public List<Component> GetTooltipString(TooltipInfo info, EntitySavedSpellData data) {
-        List<Component> list = new ArrayList<>();
+    public List<MutableComponent> GetTooltipString(TooltipInfo info, EntitySavedSpellData data) {
+        List<MutableComponent> list = new ArrayList<>();
 
         list.add(Component.literal("Status Effect: ").append(this.locName())
                 .withStyle(ChatFormatting.YELLOW));

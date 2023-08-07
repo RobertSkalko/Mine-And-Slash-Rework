@@ -13,11 +13,10 @@ public class SpellsData {
 
     public HashMap<String, Integer> extra_lvls = new HashMap<>();
     public HashMap<String, Integer> allocated_lvls = new HashMap<>();
-    public HashMap<Integer, String> hotbars = new HashMap<>();
     public Set<String> schools = new HashSet<>();
 
     public void addToLevelsFromStat(String id, int num) {
-        
+
 
         this.extra_lvls.put(id, extra_lvls.getOrDefault(id, 0) + num);
     }

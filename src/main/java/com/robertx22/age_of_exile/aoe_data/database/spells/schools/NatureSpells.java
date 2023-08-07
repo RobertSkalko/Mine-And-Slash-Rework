@@ -35,7 +35,7 @@ public class NatureSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        SpellBuilder.of(POISON_CLOUD, SpellConfiguration.Builder.instant(30, 25 * 20), "Poison Cloud",
+        SpellBuilder.of(POISON_CLOUD, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 25 * 20), "Poison Cloud",
                         Arrays.asList(SpellTag.area, SpellTag.damage))
                 .manualDesc(
                         "Erupt with poisonous gas, dealing " + SpellCalcs.POISON_CLOUD.getLocDmgTooltip()
@@ -48,7 +48,7 @@ public class NatureSpells implements ExileRegistryInit {
                         .addPerEntityHit(PartBuilder.playSoundPerTarget(SoundEvents.GENERIC_HURT, 1D, 1D)))
                 .build();
 
-        SpellBuilder.of(POISONBALL_ID, SpellConfiguration.Builder.instant(5, 20)
+        SpellBuilder.of(POISONBALL_ID, PlayStyle.INT, SpellConfiguration.Builder.instant(5, 20)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Poison Ball",
                         Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.staff_spell))
@@ -67,15 +67,8 @@ public class NatureSpells implements ExileRegistryInit {
 
                 .build();
 
-        SpellBuilder.of(THORN_ARMOR, SpellConfiguration.Builder.instant(15, 200 * 20), "Thorn Armor",
-                        Arrays.asList(SpellTag.damage))
-                .manualDesc("Gives buff to self:")
-
-                .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
-                .onCast(PartBuilder.giveSelfExileEffect(BeneficialEffects.THORN_ARMOR.resourcePath, 20 * 45D))
-                .build();
-
-        SpellBuilder.of(REFRESH, SpellConfiguration.Builder.nonInstant(40, 20 * 60 * 3, 20)
+        
+        SpellBuilder.of(REFRESH, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(40, 20 * 60 * 3, 20)
                                 .setScaleManaToPlayer(), "Refresh",
                         Arrays.asList())
 
@@ -93,15 +86,8 @@ public class NatureSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.EFFECT, 50D, 1.5D))
                 .build();
 
-        SpellBuilder.of(POISON_WEAPONS, SpellConfiguration.Builder.instant(15, 160 * 20), "Poison Weapons",
-                        Arrays.asList(SpellTag.damage))
-                .manualDesc("Gives effect to nearby allies.")
-                .attackStyle(PlayStyle.DEX)
-                .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
-                .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, BeneficialEffects.POISON_WEAPONS.resourcePath, 20 * 30D))
-                .build();
 
-        SpellBuilder.of(NATURE_BALM, SpellConfiguration.Builder.instant(15, 60 * 20)
+        SpellBuilder.of(NATURE_BALM, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 60 * 20)
                                 .setScaleManaToPlayer(), "Nature's Balm",
                         Arrays.asList(SpellTag.heal))
                 .manualDesc("Gives buff to allies nearby:")
@@ -109,7 +95,7 @@ public class NatureSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.giveExileEffectToAlliesInRadius(3D, BeneficialEffects.REGENERATE.resourcePath, 20 * 15D))
                 .build();
 
-        SpellBuilder.of(ENTANGLE_SEED, SpellConfiguration.Builder.instant(15, 60 * 20)
+        SpellBuilder.of(ENTANGLE_SEED, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 60 * 20)
                                 .setSwingArm(), "Entangling Seed",
                         Arrays.asList(SpellTag.area))
                 .manualDesc("Throw out a seed that explodes and petrifies enemies.")

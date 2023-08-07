@@ -3,6 +3,8 @@ package com.robertx22.age_of_exile.capability.player.container;
 import com.robertx22.age_of_exile.capability.player.RPGPlayerData;
 import com.robertx22.age_of_exile.capability.player.helper.GemInventoryHelper;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashContainers;
+import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
+import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -50,13 +52,13 @@ public class SkillGemsMenu extends AbstractContainerMenu {
 
                 int xp = 16 + (i * 25);
                 if (i > 3) {
-                    xp += 9;
+                    xp += 7;
                 }
-                this.addSlot(new Slot(data.getGemsInv(), index, xp, 16));
+                this.addSlot(new SkillSlot(data.getGemsInv(), index, xp, 16));
                 index++;
 
                 for (int s = 0; s < GemInventoryHelper.SUPPORT_GEMS_PER_SKILL; s++) {
-                    this.addSlot(new Slot(data.getGemsInv(), index, xp, 38 + (s * 18)));
+                    this.addSlot(new SuppSlot(data.getGemsInv(), index, xp, 38 + (s * 18)));
                     index++;
                 }
 
@@ -64,7 +66,7 @@ public class SkillGemsMenu extends AbstractContainerMenu {
 
 
             for (int i = 0; i < GemInventoryHelper.TOTAL_AURAS; i++) {
-                this.addSlot(new Slot(data.getAuraInv(), i, 36 + (i * 18), 148));
+                this.addSlot(new AuraSlot(data.getAuraInv(), i, 36 + (i * 18), 148));
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -73,6 +75,45 @@ public class SkillGemsMenu extends AbstractContainerMenu {
 
     }
 
+
+    public class SkillSlot extends Slot {
+
+        public SkillSlot(Container pContainer, int pSlot, int pX, int pY) {
+            super(pContainer, pSlot, pX, pY);
+
+        }
+
+        @Override
+        public boolean mayPlace(ItemStack pStack) {
+            return StackSaving.SKILL_GEM.loadFrom(pStack) != null && StackSaving.SKILL_GEM.loadFrom(pStack).type == SkillGemData.SkillGemType.SKILL;
+        }
+    }
+
+    public class AuraSlot extends Slot {
+
+        public AuraSlot(Container pContainer, int pSlot, int pX, int pY) {
+            super(pContainer, pSlot, pX, pY);
+
+        }
+
+        @Override
+        public boolean mayPlace(ItemStack pStack) {
+            return StackSaving.SKILL_GEM.loadFrom(pStack) != null && StackSaving.SKILL_GEM.loadFrom(pStack).type == SkillGemData.SkillGemType.AURA;
+        }
+    }
+
+    public class SuppSlot extends Slot {
+
+        public SuppSlot(Container pContainer, int pSlot, int pX, int pY) {
+            super(pContainer, pSlot, pX, pY);
+
+        }
+
+        @Override
+        public boolean mayPlace(ItemStack pStack) {
+            return StackSaving.SKILL_GEM.loadFrom(pStack) != null && StackSaving.SKILL_GEM.loadFrom(pStack).type == SkillGemData.SkillGemType.SUPPORT;
+        }
+    }
 
     @Override
     public ItemStack quickMoveStack(Player pPlayer, int pIndex) {

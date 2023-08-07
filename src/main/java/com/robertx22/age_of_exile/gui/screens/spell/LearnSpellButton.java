@@ -6,7 +6,6 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.vanilla_mc.packets.AllocateSpellPacket;
-import com.robertx22.age_of_exile.vanilla_mc.packets.spells.SetupHotbarPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.TextUTIL;
 import net.minecraft.ChatFormatting;
@@ -38,7 +37,7 @@ public class LearnSpellButton extends ImageButton {
 
             if (SpellScreen.IS_PICKING_HOTBAR_SPELL) {
                 SpellScreen.IS_PICKING_HOTBAR_SPELL = false;
-                Packets.sendToServer(new SetupHotbarPacket(spell, SpellScreen.NUMBER_OF_HOTBAR_FOR_PICKING));
+                //Packets.sendToServer(new SetupHotbarPacket(spell, SpellScreen.NUMBER_OF_HOTBAR_FOR_PICKING));
             } else {
                 Packets.sendToServer(new AllocateSpellPacket(screen.currentSchool(), spell, AllocateSpellPacket.ACTION.ALLOCATE));
             }

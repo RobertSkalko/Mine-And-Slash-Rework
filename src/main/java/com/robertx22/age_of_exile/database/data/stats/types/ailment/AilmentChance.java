@@ -17,7 +17,7 @@ public class AilmentChance extends Stat {
 
     public AilmentChance(Ailment ailment) {
         this.ailment = ailment;
-
+        this.is_perc = true;
         this.statEffect = new Effect();
     }
 

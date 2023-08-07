@@ -1,8 +1,5 @@
 package com.robertx22.age_of_exile.loot.blueprints;
 
-import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
-import com.robertx22.age_of_exile.database.registry.ExileDB;
-import com.robertx22.age_of_exile.database.registry.RarityRegistryContainer;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.bases.GearItemSlotPart;
 import com.robertx22.age_of_exile.loot.blueprints.bases.GearRarityPart;
@@ -38,11 +35,7 @@ public class GearBlueprint extends ItemBlueprint {
     public GearRarityPart rarity = new GearRarityPart(this);
     public UniqueGearPart uniquePart = new UniqueGearPart(this);
 
-    @Override
-    public RarityRegistryContainer<GearRarity> getRarityContainer() {
-        return ExileDB.GearRarities();
-    }
-
+ 
     public GearItemData createData() {
         return GearCreationUtils.CreateData(this);
     }

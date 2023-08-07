@@ -25,7 +25,7 @@ public class GearTooltipUtils {
 
     public static void BuildTooltip(GearItemData gear, ItemStack stack, List<Component> tooltip, EntityData data) {
 
-        List<Component> tip = tooltip;
+        List<Component> tip = new ArrayList<>();
 
         if (gear.GetBaseGearType() == null) {
             return;

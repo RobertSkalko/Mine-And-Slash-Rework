@@ -14,6 +14,9 @@ public class HitDamage extends Stat {
     public HitDamage() {
 
         this.statEffect = new Effect();
+        this.is_perc = true;
+        
+
     }
 
     public static HitDamage getInstance() {

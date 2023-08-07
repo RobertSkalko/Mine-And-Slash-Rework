@@ -169,14 +169,14 @@ public class Stats implements ExileRegistryInit {
             .build();
 
     public static DataPackStatAccessor<PlayStyle> STYLE_DAMAGE = DatapackStatBuilder
-            .<PlayStyle>of(x -> x.name() + "_dmg", x -> Elements.Physical)
+            .<PlayStyle>of(x -> x.id + "_dmg", x -> Elements.Physical)
             .addAllOfType(PlayStyle.values())
             .worksWithEvent(DamageEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.IS_STYLE.get(x))
             .addEffect(StatEffects.INCREASE_VALUE)
-            .setLocName(x -> x.getLocName() + " Damage")
+            .setLocName(x -> x.name + " Damage")
             .setLocDesc(x -> "Magic damage are mage spells, like fireball.")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
@@ -208,7 +208,7 @@ public class Stats implements ExileRegistryInit {
             .setSide(EffectSides.Target)
             .addCondition(x -> StatConditions.IS_STYLE.get(x))
             .addEffect(StatEffects.INCREASE_VALUE)
-            .setLocName(x -> x.getLocName() + " Damage Received")
+            .setLocName(x -> x.name + " Damage Received")
             .setLocDesc(x -> "Magic damage are mage spells, like fireball.")
             .modifyAfterDone(x -> {
                 x.is_perc = true;

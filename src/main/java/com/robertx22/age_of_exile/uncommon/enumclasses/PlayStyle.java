@@ -1,22 +1,20 @@
 package com.robertx22.age_of_exile.uncommon.enumclasses;
 
-import org.apache.commons.lang3.StringUtils;
-
 public enum PlayStyle {
 
-    STR() {
+    STR("str", "Melee") {
         @Override
         public AttackType getAttackType() {
             return AttackType.attack;
         }
     },
-    DEX() {
+    DEX("dex", "Ranged") {
         @Override
         public AttackType getAttackType() {
             return AttackType.attack;
         }
     },
-    INT() {
+    INT("int", "Spell") {
         @Override
         public AttackType getAttackType() {
             return AttackType.spell;
@@ -24,12 +22,12 @@ public enum PlayStyle {
     };
 
 
-    public String getLocName() {
-        return StringUtils.capitalize(name());
-    }
+    public String id;
+    public String name;
 
-    PlayStyle() {
-
+    PlayStyle(String id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public abstract AttackType getAttackType();

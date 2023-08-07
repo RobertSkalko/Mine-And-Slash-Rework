@@ -12,6 +12,7 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeap
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
+import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -25,7 +26,7 @@ public class IntSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        SpellBuilder.of("black_hole", SpellConfiguration.Builder.instant(30, 20 * 60)
+        SpellBuilder.of("black_hole", PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 60)
                                 .setSwingArm(), "Black Hole",
                         Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.area))
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
@@ -50,7 +51,7 @@ public class IntSpells implements ExileRegistryInit {
                 .onExpire("block", PartBuilder.damageInAoe(SpellCalcs.BLACK_HOLE, Elements.Elemental, 2D))
                 .build();
 
-        SpellBuilder.of("teleport", SpellConfiguration.Builder.instant(20, 20 * 30)
+        SpellBuilder.of("teleport", PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 30)
                                 .setScaleManaToPlayer(), "Teleport",
                         Arrays.asList(SpellTag.damage, SpellTag.movement)
                 )

@@ -20,11 +20,10 @@ public class StrSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        SpellBuilder.of("shred", SpellConfiguration.Builder.instant(10, 20 * 1)
+        SpellBuilder.of("shred", PlayStyle.STR, SpellConfiguration.Builder.instant(10, 20 * 1)
                                 .setSwingArm()
                                 .setChargesAndRegen("shred", 3, 20 * 15), "Shred",
                         Arrays.asList(SpellTag.technique, SpellTag.area, SpellTag.damage))
-                .attackStyle(PlayStyle.STR)
                 .manualDesc(
                         "Slash all nearby enemies, dealing "
                                 + SpellCalcs.SHRED.getLocDmgTooltip() + " " + Elements.Physical.getIconNameDmg()

@@ -150,6 +150,10 @@ public class TooltipUtils {
         return null;
     }
 
+    public static List<Component> mutableToComp(List<MutableComponent> list) {
+        return new ArrayList<Component>(list);
+    }
+
     public static List<Component> removeDoubleBlankLines(List<Component> list) {
         return removeDoubleBlankLines(list, 5000);
     }

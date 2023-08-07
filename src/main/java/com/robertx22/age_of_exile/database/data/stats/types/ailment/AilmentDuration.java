@@ -10,6 +10,8 @@ public class AilmentDuration extends Stat {
 
     public AilmentDuration(Ailment ailment) {
         this.ailment = ailment;
+        this.is_perc = true;
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.rarities;
 
+import com.robertx22.age_of_exile.database.data.MinMax;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientTextureUtils;
@@ -19,6 +20,8 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     }
 
     public int item_model_data_num = -1;
+
+    public MinMax skill_gem_percents = new MinMax(0, 0);
 
 
     public int potential = 100;

@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.capability.player;
 import com.robertx22.age_of_exile.capability.player.data.StatPointsData;
 import com.robertx22.age_of_exile.capability.player.data.TeamData;
 import com.robertx22.age_of_exile.capability.player.helper.GemInventoryHelper;
+import com.robertx22.age_of_exile.capability.player.helper.MyInventory;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.DeathStatsData;
 import com.robertx22.age_of_exile.saveclasses.perks.TalentsData;
@@ -11,7 +12,6 @@ import com.robertx22.library_of_exile.utils.LoadSave;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.Capability;
@@ -60,8 +60,9 @@ public class RPGPlayerData implements ICap {
     public StatPointsData statPoints = new StatPointsData();
     public DeathStatsData deathStats = new DeathStatsData();
 
-    private SimpleContainer skillGemInv = new SimpleContainer(GemInventoryHelper.TOTAL_SLOTS);
-    private SimpleContainer auraInv = new SimpleContainer(GemInventoryHelper.TOTAL_AURAS);
+    
+    private MyInventory skillGemInv = new MyInventory(GemInventoryHelper.TOTAL_SLOTS);
+    private MyInventory auraInv = new MyInventory(GemInventoryHelper.TOTAL_AURAS);
 
     public RPGPlayerData(Player player) {
         this.player = player;

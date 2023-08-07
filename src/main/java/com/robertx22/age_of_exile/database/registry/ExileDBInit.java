@@ -35,7 +35,7 @@ public class ExileDBInit {
         Ailments.init();
         new StatsRegister().registerAll();
 
-      
+
     }
 
     public static void initRegistries() {
@@ -72,5 +72,7 @@ public class ExileDBInit {
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.STAT, EmptyStat.getInstance()));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.AILMENT, null));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.CURRENCY_ITEMS, null));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.SUPPORT_GEM, null));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.AURA, null));
     }
 }

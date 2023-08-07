@@ -43,7 +43,7 @@ public class WaterSpells implements ExileRegistryInit {
     public void registerAll() {
 
 
-        SpellBuilder.of(ICE_COMET, SpellConfiguration.Builder.instant(18, 20).setChargesAndRegen(ICE_COMET, 3, 20 * 20),
+        SpellBuilder.of(ICE_COMET, PlayStyle.INT, SpellConfiguration.Builder.instant(18, 20).setChargesAndRegen(ICE_COMET, 3, 20 * 20),
                         "Ice Comet",
                         Arrays.asList(SpellTag.area, SpellTag.damage)
                 )
@@ -69,7 +69,7 @@ public class WaterSpells implements ExileRegistryInit {
                 .onExpire("block", PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
                 .build();
 
-        SpellBuilder.of(CHILLING_FIELD, SpellConfiguration.Builder.instant(30, 20 * 60)
+        SpellBuilder.of(CHILLING_FIELD, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 60)
                                 .setSwingArm(), "Chilling Field",
                         Arrays.asList(SpellTag.damage, SpellTag.area))
                 .weaponReq(CastingWeapon.ANY_WEAPON)
@@ -95,14 +95,8 @@ public class WaterSpells implements ExileRegistryInit {
                         .onTick(20D))
                 .build();
 
-        SpellBuilder.of(ICY_WEAPON, SpellConfiguration.Builder.instant(10, 20 * 30), "Icy Weapon",
-                        Arrays.asList())
-                .manualDesc("Gives effect to nearby allies.")
-                .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
-                .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, BeneficialEffects.ICY_WEAPON.resourcePath, 20 * 10D))
-                .build();
 
-        SpellBuilder.of(HEART_OF_ICE, SpellConfiguration.Builder.instant(20, 20 * 30), "Heart of Ice",
+        SpellBuilder.of(HEART_OF_ICE, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 30), "Heart of Ice",
                         Arrays.asList(SpellTag.heal))
                 .manualDesc(
                         "Heal allies around you for " + SpellCalcs.HEART_OF_ICE.getLocDmgTooltip() +
@@ -115,20 +109,19 @@ public class WaterSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.healInAoe(SpellCalcs.HEART_OF_ICE, 5D))
                 .build();
 
-        SpellBuilder.of(WATER_BREATH, SpellConfiguration.Builder.instant(10, 60 * 20 * 5)
+        SpellBuilder.of(WATER_BREATH, PlayStyle.INT, SpellConfiguration.Builder.instant(10, 60 * 20 * 5)
                                 .setScaleManaToPlayer(),
                         "Water Breathing",
                         Arrays.asList())
                 .manualDesc(
                         "Give Water Breathing to allies around you.")
 
-                .attackStyle(PlayStyle.INT)
                 .onCast(PartBuilder.playSound(SoundEvents.PLAYER_SPLASH, 1D, 1D))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.FALLING_WATER, 100D, 3D))
                 .onCast(PartBuilder.giveEffectToAlliesInRadius(MobEffects.WATER_BREATHING, 20D * 60D * 3, 5D))
                 .build();
 
-        SpellBuilder.of(MAGE_CIRCLE, SpellConfiguration.Builder.instant(10, 20 * 45)
+        SpellBuilder.of(MAGE_CIRCLE, PlayStyle.INT, SpellConfiguration.Builder.instant(10, 20 * 45)
                         .setScaleManaToPlayer(), "Mage Circle", Arrays.asList(SpellTag.movement))
 
                 .manualDesc(
@@ -154,18 +147,11 @@ public class WaterSpells implements ExileRegistryInit {
                         .addCondition(EffectCondition.EVERY_X_TICKS.create(3D)))
                 .build();
 
-        SpellBuilder.of(FROST_ARMOR, SpellConfiguration.Builder.instant(15, 120 * 20), "Frost Armor",
-                        Arrays.asList())
-                .manualDesc("Give self effect:")
-                .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
-                .onCast(PartBuilder.giveSelfExileEffect(BeneficialEffects.FROST_ARMOR, 20 * 120D))
-                .build();
 
-        SpellBuilder.of(TIDAL_STRIKE, SpellConfiguration.Builder.instant(8, 12)
+        SpellBuilder.of(TIDAL_STRIKE, PlayStyle.STR, SpellConfiguration.Builder.instant(8, 12)
                                 .setSwingArm(), "Tidal Strike",
                         Arrays.asList(SpellTag.technique, SpellTag.area, SpellTag.damage))
                 .manualDesc("Strike enemies in front of you for " + SpellCalcs.TIDAL_STRIKE.getLocDmgTooltip(Elements.Cold))
-                .attackStyle(PlayStyle.STR)
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.TRIDENT_THROW, 1D, 1D))
                 .onCast(PartBuilder.swordSweepParticles())
@@ -176,7 +162,7 @@ public class WaterSpells implements ExileRegistryInit {
                 )
                 .build();
 
-        SpellBuilder.of(FROSTBALL_ID, SpellConfiguration.Builder.instant(5, 20)
+        SpellBuilder.of(FROSTBALL_ID, PlayStyle.INT, SpellConfiguration.Builder.instant(5, 20)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Ice Ball",
                         Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.staff_spell))
@@ -195,7 +181,7 @@ public class WaterSpells implements ExileRegistryInit {
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.SNOWFLAKE, 15D, 0.5D))
                 .build();
 
-        SpellBuilder.of(FROST_NOVA_AOE, SpellConfiguration.Builder.instant(30, 25 * 20), "Frost Nova",
+        SpellBuilder.of(FROST_NOVA_AOE, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 25 * 20), "Frost Nova",
                         Arrays.asList(SpellTag.area, SpellTag.damage))
                 .manualDesc(
                         "Explode with frost around you, dealing " + SpellCalcs.FROST_NOVA.getLocDmgTooltip()
@@ -211,15 +197,6 @@ public class WaterSpells implements ExileRegistryInit {
                         .addPerEntityHit(PartBuilder.playSoundPerTarget(SoundEvents.DROWNED_HURT, 1D, 1D)))
                 .build();
 
-        SpellBuilder.of(NOURISHMENT, SpellConfiguration.Builder.instant(15, 20 * 30), "Nourishment",
-                        Arrays.asList(SpellTag.heal))
-                .manualDesc(
-                        "Apply buff to allies nearby ")
-                .weaponReq(CastingWeapon.ANY_WEAPON)
-                .onCast(PartBuilder.playSound(SlashSounds.BUFF.get(), 1D, 1D))
-                .onCast(PartBuilder.groundParticles(ParticleTypes.COMPOSTER, 50D, 2D, 0.2D))
-                .onCast(PartBuilder.groundParticles(ParticleTypes.HEART, 20D, 2D, 0.2D))
-                .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, BeneficialEffects.NOURISHMENT.resourcePath, 20D * 25))
-                .build();
+
     }
 }

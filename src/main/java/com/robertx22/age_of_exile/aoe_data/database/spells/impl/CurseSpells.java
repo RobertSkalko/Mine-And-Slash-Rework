@@ -11,6 +11,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellA
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
+import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -21,7 +22,7 @@ import java.util.Arrays;
 public class CurseSpells implements ExileRegistryInit {
 
     static void curse(String id, String name, EffectCtx effect) {
-        SpellBuilder.of(id, SpellConfiguration.Builder.instant(10, 20 * 30)
+        SpellBuilder.of(id, PlayStyle.INT, SpellConfiguration.Builder.instant(10, 20 * 30)
                                 .setSwingArm()
                         , name,
                         Arrays.asList(SpellTag.area, SpellTag.curse))

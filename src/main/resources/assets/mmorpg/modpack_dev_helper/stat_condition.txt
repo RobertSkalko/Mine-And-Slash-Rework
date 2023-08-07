@@ -4,11 +4,9 @@ spell_has_tag_song
 spell_is_fireball
 is_sword_wep_type
 spell_has_tag_area
-style_is_magic_is_false
 spell_is_poison_ball
 resource_type_is_shield
 spell_is_frostball
-style_is_melee
 effect_has_tag_defensive
 is_source_low_hp
 effect_has_tag_positive
@@ -26,12 +24,14 @@ is_in_combat_is_false
 ele_match_stat
 is_day
 spell_has_tag_staff_spell
+style_is_INT_is_false
 spell_has_tag_movement
 is_crossbow_wep_type
 spell_has_tag_technique
 is_target_low_hp
 is_undead_is_false
 threat_gen_type_is_spell
+style_is_STR
 is_target_shielded
 spell_has_tag_damage
 restore_type_is_potion
@@ -46,10 +46,9 @@ is_undead
 threat_gen_type_is_deal_dmg
 is_attack_or_spell_attack
 is_bow_wep_type
-style_is_magic
+style_is_DEX
 resource_type_is_blood
 is_scepter_wep_type
-style_is_ranged
 attack_type_is_attack
 attack_type_is_dot
 is_axe_wep_type
@@ -79,4 +78,5 @@ spell_has_tag_heal
 spell_has_tag_curse
 resource_type_is_mana
 resource_type_is_block
+style_is_INT
 effect_has_tag_negative

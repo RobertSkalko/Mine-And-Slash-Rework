@@ -23,7 +23,7 @@ public class BasicStatRegex extends StatNameRegex {
 
         }
         if (type.isPercent()) {
-            String s = v1 > 0 && stat.IsPercent() ? " Extra" : " ";
+            String s = v1 > 0 && (stat.IsPercent() && type != ModType.MORE) ? " Extra" : " ";
             return VALUE + s + NAME;
         }
         if (type == ModType.MORE) {

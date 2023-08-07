@@ -35,12 +35,11 @@ public class FireSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        SpellBuilder.of(FLAME_STRIKE_ID, SpellConfiguration.Builder.instant(8, 15)
+        SpellBuilder.of(FLAME_STRIKE_ID, PlayStyle.STR, SpellConfiguration.Builder.instant(8, 15)
                                 .setSwingArm(), "Flame Strike",
                         Arrays.asList(SpellTag.technique, SpellTag.area, SpellTag.damage))
                 .manualDesc("Strike enemies in front for " +
                         SpellCalcs.FLAME_STRIKE.getLocDmgTooltip(Elements.Fire))
-                .attackStyle(PlayStyle.STR)
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.FIRE_EXTINGUISH, 1D, 1D))
                 .onCast(PartBuilder.swordSweepParticles())
@@ -48,35 +47,29 @@ public class FireSpells implements ExileRegistryInit {
                         .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.FLAME, 45D, 1D, 0.1D)))
                 .build();
 
-        SpellBuilder.of(OVERLOAD, SpellConfiguration.Builder.nonInstant(10, 60 * 20 * 3, 30), "Overload",
+        SpellBuilder.of(OVERLOAD, PlayStyle.STR, SpellConfiguration.Builder.nonInstant(10, 60 * 20 * 3, 30), "Overload",
                         Arrays.asList())
                 .manualDesc("Gives effect to self.")
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
                 .onCast(PartBuilder.giveSelfExileEffect(BeneficialEffects.OVERLOAD.resourcePath, 20 * 10D))
                 .build();
 
-        SpellBuilder.of(VAMP_BLOOD, SpellConfiguration.Builder.nonInstant(10, 60 * 20 * 3, 30), "Vampiric BLood",
+        SpellBuilder.of(VAMP_BLOOD, PlayStyle.STR, SpellConfiguration.Builder.nonInstant(10, 60 * 20 * 3, 30), "Vampiric Blood",
                         Arrays.asList())
                 .manualDesc("Gives effect to nearby allies.")
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
                 .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, BeneficialEffects.VAMPIRIC_BLOOD.resourcePath, 20 * 60D))
                 .build();
 
-        SpellBuilder.of(DRACONIC_BLOOD, SpellConfiguration.Builder.nonInstant(10, 60 * 20 * 3, 30), "Draconic BLood",
+        SpellBuilder.of(DRACONIC_BLOOD, PlayStyle.STR, SpellConfiguration.Builder.nonInstant(10, 60 * 20 * 3, 30), "Draconic Blood",
                         Arrays.asList())
                 .manualDesc("Gives effect to nearby allies.")
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
                 .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, BeneficialEffects.DRACONIC_BLOOD.resourcePath, 20 * 60D))
                 .build();
 
-        SpellBuilder.of(FLAME_WEAPON, SpellConfiguration.Builder.instant(10, 20 * 30), "Flame Weapon",
-                        Arrays.asList())
-                .manualDesc("Gives effect to nearby allies.")
-                .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
-                .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, BeneficialEffects.FIRE_WEAPON.resourcePath, 20 * 10D))
-                .build();
 
-        SpellBuilder.of(METEOR, SpellConfiguration.Builder.instant(18, 20).setChargesAndRegen(METEOR, 3, 20 * 20), "Meteor",
+        SpellBuilder.of(METEOR, PlayStyle.INT, SpellConfiguration.Builder.instant(18, 20).setChargesAndRegen(METEOR, 3, 20 * 20), "Meteor",
                         Arrays.asList(SpellTag.area, SpellTag.damage)
                 )
                 .manualDesc("Summon a meteor that falls from the sky, dealing " +
@@ -98,7 +91,7 @@ public class FireSpells implements ExileRegistryInit {
                 .onExpire("block", PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
                 .build();
 
-        SpellBuilder.of(FIRE_NOVA_ID, SpellConfiguration.Builder.instant(20, 20 * 25), "Fire Nova",
+        SpellBuilder.of(FIRE_NOVA_ID, PlayStyle.STR, SpellConfiguration.Builder.instant(20, 20 * 25), "Fire Nova",
                         Arrays.asList(SpellTag.area, SpellTag.damage))
                 .onCast(PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
 
@@ -111,7 +104,7 @@ public class FireSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.damageInAoe(SpellCalcs.FIRE_NOVA, Elements.Fire, 3D))
                 .build();
 
-        SpellBuilder.of(FIREBALL_ID, SpellConfiguration.Builder.instant(5, 20)
+        SpellBuilder.of(FIREBALL_ID, PlayStyle.INT, SpellConfiguration.Builder.instant(5, 20)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Fire Ball",
                         Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.staff_spell))

@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.database.data.spells.components;
 
-import com.google.gson.Gson;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellDesc;
 import com.robertx22.age_of_exile.database.data.StatModifier;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
@@ -15,12 +14,14 @@ import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
+import com.robertx22.age_of_exile.saveclasses.skill_gem.ISkillGem;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.SpendResourceEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
+import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
@@ -30,9 +31,11 @@ import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
+import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
@@ -44,13 +47,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public final class Spell implements IGUID, IAutoGson<Spell>, JsonExileRegistry<Spell>, IAutoLocName, IAutoLocDesc, MaxLevelProvider {
+public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExileRegistry<Spell>, IAutoLocName, IAutoLocDesc, MaxLevelProvider {
     public static Spell SERIALIZER = new Spell();
 
     public static String DEFAULT_EN_NAME = "default_entity_name";
     public static String CASTER_NAME = "caster";
-
-    public static Gson GSON = new Gson();
 
     public int max_lvl = 16;
     public int weight = 1000;
@@ -199,15 +200,15 @@ public final class Spell implements IGUID, IAutoGson<Spell>, JsonExileRegistry<S
         return (int) ctx.event.data.getNumber(EventData.MANA_COST).number;
     }
 
-    public final List<Component> GetTooltipString(TooltipInfo info) {
+    public final List<MutableComponent> GetTooltipString(TooltipInfo info) {
 
         SpellCastContext ctx = new SpellCastContext(info.player, 0, this);
 
-        List<Component> list = new ArrayList<>();
+        List<MutableComponent> list = new ArrayList<>();
 
         list.add(locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
 
-        TooltipUtils.addEmpty(list);
+        list.add(ExileText.emptyLine().get());
 
         if (true || Screen.hasShiftDown()) {
 
@@ -216,7 +217,8 @@ public final class Spell implements IGUID, IAutoGson<Spell>, JsonExileRegistry<S
 
         }
 
-        TooltipUtils.addEmpty(list);
+        list.add(ExileText.emptyLine().get());
+
 
         list.add(Component.literal(ChatFormatting.BLUE + "Mana Cost: " + getCalculatedManaCost(ctx)));
         if (config.usesCharges()) {
@@ -237,14 +239,14 @@ public final class Spell implements IGUID, IAutoGson<Spell>, JsonExileRegistry<S
 
         }
 
-        TooltipUtils.addEmpty(list);
+        list.add(ExileText.emptyLine().get());
 
         list.add(getConfig().castingWeapon.predicate.text);
 
-        TooltipUtils.addEmpty(list);
+        list.add(ExileText.emptyLine().get());
 
         if (this.config.times_to_cast > 1) {
-            TooltipUtils.addEmpty(list);
+            list.add(ExileText.emptyLine().get());
             list.add(Component.literal("Casted " + config.times_to_cast + " times during channel.").withStyle(ChatFormatting.RED));
 
         }
@@ -285,7 +287,7 @@ public final class Spell implements IGUID, IAutoGson<Spell>, JsonExileRegistry<S
 
         list.add(Component.literal("Level: " + currentlvl + "/" + maxlvl).withStyle(ChatFormatting.YELLOW));
 
-        TooltipUtils.removeDoubleBlankLines(list);
+        TooltipUtils.removeDoubleBlankLines(TooltipUtils.mutableToComp(list));
 
         return list;
 
@@ -346,5 +348,10 @@ public final class Spell implements IGUID, IAutoGson<Spell>, JsonExileRegistry<S
     @Override
     public int getMaxLevelWithBonuses() {
         return getMaxLevel() + 4;
+    }
+
+    @Override
+    public PlayStyle getStyle() {
+        return this.config.style;
     }
 }

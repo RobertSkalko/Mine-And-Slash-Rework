@@ -1,0 +1,19 @@
+These are all default registry entries of this type.
+This registry can't be modified or added to.
+dodge
+physical_damage
+lightning_damage
+mana_reg
+energy_reg
+magic_shield
+magic_shield_reg
+chaos_damage
+health_reg
+chaos_ailment
+armor
+fire_damage
+cold_damage
+cold_ailment
+lightning_ailment
+physical_ailment
+fire_ailment

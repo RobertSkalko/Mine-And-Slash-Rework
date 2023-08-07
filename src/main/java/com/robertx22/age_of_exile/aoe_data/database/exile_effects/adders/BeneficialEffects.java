@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders;
 
-import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.ExileEffectBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
@@ -13,10 +12,8 @@ import com.robertx22.age_of_exile.database.data.exile_effects.EffectType;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.AggroAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
-import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
-import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
@@ -37,12 +34,7 @@ public class BeneficialEffects implements ExileRegistryInit {
     public static EffectCtx VAMPIRIC_BLOOD = new EffectCtx("vamp_blood", "Vamp Blood", 3, Elements.Fire, EffectType.beneficial);
     public static EffectCtx DRACONIC_BLOOD = new EffectCtx("draconic_blood", "Dragon Blood", 4, Elements.Fire, EffectType.beneficial);
     public static EffectCtx REGENERATE = new EffectCtx("regenerate", "Nature Balm", 5, Elements.Chaos, EffectType.beneficial);
-    public static EffectCtx THORN_ARMOR = new EffectCtx("thorn_armor", "Thorn Armor", 6, Elements.Chaos, EffectType.beneficial);
-    public static EffectCtx FIRE_WEAPON = new EffectCtx("fire_weapon", "Flame Weapon", 7, Elements.Fire, EffectType.beneficial);
     public static EffectCtx DIVINE_SHIELD = new EffectCtx("divine_shield", "Divine Shield", 8, Elements.Elemental, EffectType.beneficial);
-    public static EffectCtx POISON_WEAPONS = new EffectCtx("poison_weapons", "Poison Wep", 9, Elements.Chaos, EffectType.beneficial);
-    public static EffectCtx ICY_WEAPON = new EffectCtx("ice_weapon", "Icy Weapon", 10, Elements.Cold, EffectType.beneficial);
-    public static EffectCtx FROST_ARMOR = new EffectCtx("frost_armor", "Frost Armor", 14, Elements.Cold, EffectType.beneficial);
     public static EffectCtx OVERLOAD = new EffectCtx("overload", "Overload", 17, Elements.Physical, EffectType.beneficial);
     public static EffectCtx VALOR = new EffectCtx("valor", "Valor", 18, Elements.Physical, EffectType.beneficial);
     public static EffectCtx PERSEVERANCE = new EffectCtx("perseverance", "Perseverance", 19, Elements.Physical, EffectType.beneficial);
@@ -56,17 +48,6 @@ public class BeneficialEffects implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        ExileEffectBuilder.of(ICY_WEAPON)
-                .stat(1, 3, new BonusAttackDamage(Elements.Cold), ModType.FLAT)
-                .maxStacks(1)
-                .addTags(EffectTags.positive)
-                .build();
-
-        ExileEffectBuilder.of(FIRE_WEAPON)
-                .stat(1, 3, new BonusAttackDamage(Elements.Fire), ModType.FLAT)
-                .maxStacks(1)
-                .addTags(EffectTags.positive)
-                .build();
 
         ExileEffectBuilder.of(DRACONIC_BLOOD)
                 .stat(2, 4, Stats.SPELL_LIFESTEAL.get(), ModType.FLAT)
@@ -176,23 +157,6 @@ public class BeneficialEffects implements ExileRegistryInit {
                         .buildForEffect())
                 .build();
 
-        ExileEffectBuilder.of(THORN_ARMOR)
-                .stat(10, 25, new ElementalResist(Elements.Chaos), ModType.FLAT)
-                .stat(5, 10, Armor.getInstance(), ModType.FLAT)
-                .stat(5, 10, new AilmentChance(Ailments.POISON), ModType.FLAT)
-                .stat(5, 10, DodgeRating.getInstance(), ModType.FLAT)
-                .addTags(EffectTags.defensive)
-
-                .build();
-
-        ExileEffectBuilder.of(FROST_ARMOR)
-                .stat(10, 20, new ElementalResist(Elements.Cold), ModType.FLAT)
-                .stat(15, 25, Armor.getInstance(), ModType.FLAT)
-                .spell(SpellBuilder.forEffect()
-                        .buildForEffect())
-                .addTags(EffectTags.defensive)
-
-                .build();
 
         ExileEffectBuilder.of(DIVINE_SHIELD)
                 .stat(10, 15, new ElementalResist(Elements.Elemental), ModType.FLAT)
@@ -200,11 +164,6 @@ public class BeneficialEffects implements ExileRegistryInit {
                 .addTags(EffectTags.defensive)
                 .build();
 
-        ExileEffectBuilder.of(POISON_WEAPONS)
-                .stat(1, 2, new BonusAttackDamage(Elements.Chaos), ModType.FLAT)
-                .stat(5, 15, new AilmentChance(Ailments.POISON), ModType.FLAT)
-                .addTags(EffectTags.offensive)
-                .build();
 
     }
 }

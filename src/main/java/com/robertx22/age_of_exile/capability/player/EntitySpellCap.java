@@ -7,11 +7,13 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IApplyableStats;
+import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellCastingData;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellsData;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.library_of_exile.components.ICap;
 import com.robertx22.library_of_exile.utils.LoadSave;
 import net.minecraft.core.Direction;
@@ -19,6 +21,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
@@ -136,11 +140,15 @@ public class EntitySpellCap {
 
         @Override
         public Spell getSpellByNumber(int key) {
-            String spellid = this.spellData.hotbars.get(key);
-            if (spellid != null && !spellid.isEmpty()) {
-                return ExileDB.Spells()
-                        .get(spellid);
 
+
+            if (this.entity instanceof Player p) {
+                ItemStack stack = Load.playerRPGData(p).getSkillGemInventory().getSkillGem(key);
+                // todo eventually remove this
+                SkillGemData data = StackSaving.SKILL_GEM.loadFrom(stack);
+                if (data != null) {
+                    return data.getSpell();
+                }
             }
 
             return null;

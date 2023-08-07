@@ -2,8 +2,8 @@ package com.robertx22.age_of_exile.mmorpg.registers.common.items;
 
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
+import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemItem;
-import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillLGemData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -23,9 +23,9 @@ public class SkillGemsItems {
     public static RegObj<SkillGemItem> AURA_DEX = Def.item(() -> new SkillGemItem(), "skill_gems/aura/dex");
     public static RegObj<SkillGemItem> AURA_INT = Def.item(() -> new SkillGemItem(), "skill_gems/aura/int");
 
-    public static Item get(SkillLGemData data) {
+    public static Item get(SkillGemData data) {
 
-        if (data.type == SkillLGemData.SkillGemType.AURA) {
+        if (data.type == SkillGemData.SkillGemType.AURA) {
             if (data.getStyle() == PlayStyle.INT) {
                 return AURA_INT.get();
             }
@@ -36,7 +36,7 @@ public class SkillGemsItems {
                 return AURA_DEX.get();
             }
         }
-        if (data.type == SkillLGemData.SkillGemType.SKILL) {
+        if (data.type == SkillGemData.SkillGemType.SKILL) {
             if (data.getStyle() == PlayStyle.INT) {
                 return SKILL_INT.get();
             }
@@ -47,7 +47,7 @@ public class SkillGemsItems {
                 return SKILL_DEX.get();
             }
         }
-        if (data.type == SkillLGemData.SkillGemType.SUPPORT) {
+        if (data.type == SkillGemData.SkillGemType.SUPPORT) {
             if (data.getStyle() == PlayStyle.INT) {
                 return SUPP_INT.get();
             }

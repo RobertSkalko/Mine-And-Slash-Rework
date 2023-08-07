@@ -13,9 +13,10 @@ dex
 ele_axe_damage
 all_water_damage
 small_positive_effect_increase
+int_dmg
 healing_strength
 water_weapon_damage
-heal_crit_dmg
+str_dmg
 dot_damage
 all_resist
 spell_all_damage
@@ -38,7 +39,6 @@ physical_damage
 warrior
 critical_hit
 faster_projectiles
-spell_critical_damage
 steady_hand
 nightcrawler
 all_all_damage
@@ -53,20 +53,16 @@ health
 staff_damage
 mana
 spell_lightning_damage
-spell_critical_hit
 spell_all_damage_and_dot
 harmony
 shield_strength
-melee_dmg
 mantra
 ele_scepter_damage
 mana_regen
 lightning_weapon_damage
 chaos_resist
-ranged_dmg
 mana_on_kill
 mana_battery
-magic_dmg
 damage_shield
 overflowing_vitality
 sniper
@@ -92,6 +88,7 @@ chaos_penetration
 crit_chance
 spell_water_damage
 divinity
+dex_dmg
 songbird
 duelist
 battle_mage
@@ -111,6 +108,5 @@ int
 all_fire_damage
 fire_penetration
 sword_damage
-crit_heal_chance
 health_on_hit
 shield_duration

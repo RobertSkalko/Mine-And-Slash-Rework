@@ -49,7 +49,7 @@ import java.util.stream.Collectors;
 
 public class Unit {
 
-    
+
     private StatContainer stats = new StatContainer();
 
     public String GUID = UUID.randomUUID().toString();
@@ -244,7 +244,10 @@ public class Unit {
 
             if (entity instanceof Player) {
 
+                statContexts.addAll(Load.playerRPGData((Player) entity).getSkillGemInventory().getAuraStats(entity));
+
                 Load.playerRPGData((Player) entity).statPoints.addStats(data);
+
                 statContexts.addAll(PlayerStatUtils.AddPlayerBaseStats(entity));
                 statContexts.addAll(Load.playerRPGData((Player) entity).talents
                         .getStatAndContext(entity));
@@ -364,7 +367,10 @@ public class Unit {
                 Packets.sendToTracking(getUpdatePacketFor(entity, data), entity);
             }
 
-            if (entity instanceof Player) {
+            if (entity instanceof Player p) {
+
+                Load.playerRPGData(p).getSkillGemInventory().removeAurasIfCantWear(p);
+
                 Packets.sendToClient((Player) entity, new EntityUnitPacket(entity));
             }
         } catch (Exception e) {

@@ -15,6 +15,8 @@ public class AilmentProcStat extends Stat {
 
     public AilmentProcStat(Ailment ailment) {
         this.ailment = ailment;
+        this.is_perc = true;
+
 
         this.statEffect = new Effect();
     }

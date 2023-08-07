@@ -116,6 +116,10 @@ public class CreateLangFile {
                 .getSerializable());
         list.addAll(ExileDB.Ailments()
                 .getList());
+        list.addAll(ExileDB.AuraGems()
+                .getList());
+        list.addAll(ExileDB.SupportGems()
+                .getList());
         list.addAll(ExileDB.GearSlots()
                 .getSerializable());
         list.addAll(ExileDB.Perks()

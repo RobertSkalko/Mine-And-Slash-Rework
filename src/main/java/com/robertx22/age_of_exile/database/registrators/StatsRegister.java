@@ -15,8 +15,6 @@ import com.robertx22.age_of_exile.database.data.stats.types.misc.ExtraMobDropsSt
 import com.robertx22.age_of_exile.database.data.stats.types.offense.FullSwingDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.crit.GlobalCriticalDamage;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.crit.GlobalCriticalHit;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.DamageAbsorbedByMana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.RegeneratePercentStat;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.blood.Blood;
@@ -112,8 +110,6 @@ public class StatsRegister implements ExileRegistryInit {
                     // Resources
 
                     add(Armor.getInstance());
-                    add(GlobalCriticalDamage.getInstance());
-                    add(GlobalCriticalHit.getInstance());
                     add(DodgeRating.getInstance());
                     add(DamageShield.getInstance());
 

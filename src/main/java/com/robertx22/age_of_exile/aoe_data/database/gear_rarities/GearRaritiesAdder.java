@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.gear_rarities;
 
+import com.robertx22.age_of_exile.database.data.MinMax;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -17,7 +18,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         common.item_value_multi = 1;
         common.item_model_data_num = 1;
         common.higher_rar = IRarity.UNCOMMON;
-
+        common.skill_gem_percents = new MinMax(0, 10);
         common.setCommonFields();
         common.addToSerializables();
 
@@ -30,6 +31,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         uncommon.item_tier_power = 1.25F;
         uncommon.item_value_multi = 1.25F;
         uncommon.higher_rar = IRarity.RARE_ID;
+        common.skill_gem_percents = new MinMax(10, 20);
         uncommon.setUncommonFields();
         uncommon.addToSerializables();
 
@@ -42,6 +44,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         rare.item_tier_power = 1.5F;
         rare.item_value_multi = 1.5F;
         rare.higher_rar = IRarity.EPIC_ID;
+        common.skill_gem_percents = new MinMax(20, 40);
         rare.setRareFields();
         rare.addToSerializables();
 
@@ -54,6 +57,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         epic.item_tier_power = 1.7F;
         epic.item_value_multi = 1.7F;
         epic.higher_rar = IRarity.LEGENDARY_ID;
+        common.skill_gem_percents = new MinMax(40, 60);
         epic.setEpicFields();
         epic.addToSerializables();
 
@@ -67,6 +71,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         legendary.item_value_multi = 2;
         legendary.announce_in_chat = true;
         legendary.higher_rar = IRarity.MYTHIC_ID;
+        common.skill_gem_percents = new MinMax(60, 80);
         legendary.setLegendFields();
         legendary.addToSerializables();
 
@@ -80,6 +85,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         mythic.item_tier_power = 3;
         mythic.item_value_multi = 3;
         mythic.announce_in_chat = true;
+        common.skill_gem_percents = new MinMax(80, 100);
         mythic.setMythicFields();
         mythic.addToSerializables();
 

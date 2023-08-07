@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.datapacks.generators.DataGenHook;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
+import com.robertx22.age_of_exile.database.data.aura.AuraGems;
 import com.robertx22.age_of_exile.database.data.spells.components.conditions.EffectCondition;
 import com.robertx22.age_of_exile.database.data.spells.entities.renders.ModTridentRenderer;
 import com.robertx22.age_of_exile.database.data.spells.entities.renders.MySpriteRenderer;
@@ -169,22 +170,10 @@ public class MMORPG {
 
         new CurrencyItems().registerAll();
 
-        // if (MMORPG.RUN_DEV_TOOLS) {
         GeneratedData.addAllObjectsToGenerate();
 
-
         SupportGems.init();
-
-        //}
-
-        // need to happen after curerrency items are registered
-/*
-        if (MMORPG.RUN_DEV_TOOLS) {
-            GeneratedData.addAllObjectsToGenerate();
-        }
-        
- */
-
+        AuraGems.init();
 
         SlashCapabilities.register();
 

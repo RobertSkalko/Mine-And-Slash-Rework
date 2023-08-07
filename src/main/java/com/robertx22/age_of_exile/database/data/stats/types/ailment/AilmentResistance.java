@@ -10,6 +10,8 @@ public class AilmentResistance extends Stat {
 
     public AilmentResistance(Ailment ailment) {
         this.ailment = ailment;
+        this.is_perc = true;
+
     }
 
     @Override

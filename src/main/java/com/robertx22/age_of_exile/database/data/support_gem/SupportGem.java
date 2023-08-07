@@ -5,9 +5,9 @@ import com.robertx22.age_of_exile.database.data.StatModifier;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
-import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillLGemData;
+import com.robertx22.age_of_exile.saveclasses.skill_gem.ISkillGem;
+import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
-import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.library_of_exile.registry.ExileRegistry;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 
@@ -16,13 +16,13 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public class SupportGem implements ExileRegistry<SupportGem>, IAutoLocName {
+public class SupportGem implements ISkillGem, ExileRegistry<SupportGem> {
 
 
     public String id = "";
     public String locname = "";
 
-    public PlayStyle style = PlayStyle.INT;
+    public PlayStyle style = PlayStyle.DEX;
 
     public float manaMulti = 0.25F;
 
@@ -73,11 +73,16 @@ public class SupportGem implements ExileRegistry<SupportGem>, IAutoLocName {
         return SlashRef.MODID + ".support_gem." + GUID();
     }
 
-    public List<ExactStatData> GetAllStats(EntityData en, SkillLGemData data) {
+    public List<ExactStatData> GetAllStats(EntityData en, SkillGemData data) {
         return this.stats
                 .stream()
                 .map(x -> x.ToExactStat(data.getStatPercent(), en.getLevel()))
                 .collect(Collectors.toList());
 
+    }
+
+    @Override
+    public PlayStyle getStyle() {
+        return style;
     }
 }
