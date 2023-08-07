@@ -136,7 +136,7 @@ public class GearTooltipUtils {
                     .withStyle(ChatFormatting.RED));
         }
 
-        int socketed = gear.sockets.sockets.size();
+        int socketed = gear.sockets.getSocketedGems().size();
         if (socketed > 0) {
             TooltipUtils.addSocketNamesLine(tip, gear);
         }

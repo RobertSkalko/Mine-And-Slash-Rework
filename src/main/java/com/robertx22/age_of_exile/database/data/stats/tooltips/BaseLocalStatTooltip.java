@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.database.data.stats.tooltips;
 
-import com.robertx22.age_of_exile.database.data.stats.name_regex.StatNameRegex;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import net.minecraft.ChatFormatting;
@@ -18,18 +17,26 @@ public class BaseLocalStatTooltip implements IStatTooltipType {
         TooltipStatInfo info = ctx.statinfo;
 
         List<MutableComponent> list = new ArrayList<MutableComponent>();
-        if (true) {
-            String icon = "\u25CF";
-            list.add(Component.literal(icon + " ")
-                    .append(info.stat.locName())
-                    .append(": ")
-                    .withStyle(format != null ? format : ChatFormatting.WHITE)
-                    .append(Component.literal((int) info.firstValue + "")
-                            .withStyle(ChatFormatting.GRAY)));
 
-            return list;
+        String perc = "";
 
+        if (info.stat.IsPercent() || info.type.isPercent()) {
+            perc = "%";
         }
+
+        String icon = "\u25CF";
+        list.add(Component.literal(icon + " ")
+                .append(info.stat.locName())
+                .append(perc) // todo check
+                .append(": ")
+                .withStyle(format != null ? format : ChatFormatting.WHITE)
+                .append(Component.literal((int) info.firstValue + "")
+                        .withStyle(ChatFormatting.GRAY)));
+
+        return list;
+
+        
+        /*
         String icon = ChatFormatting.RED + info.stat.icon + " ";
 
         if (ctx.statinfo.stat.is_long) {
@@ -56,6 +63,8 @@ public class BaseLocalStatTooltip implements IStatTooltipType {
         }
 
         return list;
+        
+         */
 
     }
 }

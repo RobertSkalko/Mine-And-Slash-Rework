@@ -18,32 +18,13 @@ import java.util.List;
 public class SocketData implements IGearPartTooltip, IStatsContainer {
 
 
-    public String gem = "";
+    // gem id
+    public String g = "";
 
 
     public SocketData() {
     }
 
-    /*
-    public List<TooltipStatWithContext> getAllStatsWithCtx(GearItemData gear, TooltipInfo info) {
-        List<TooltipStatWithContext> list = new ArrayList<>();
-
-        SlotFamily fam = gear.GetBaseGearType()
-            .family();
-
-        if (isGem()) {
-            getGem()
-                .getFor(fam)
-                .forEach(x -> {
-                    ExactStatData exact = x.toExactStat((int) gear.getEffectiveLevel());
-                    list.add(new TooltipStatWithContext(new TooltipStatInfo(exact, 100, info), x, (int) gear.getEffectiveLevel()));
-                });
-        }
-
-        return list;
-    }
-
-     */
 
     public boolean isEmpty() {
         return getGem() == null;
@@ -67,9 +48,9 @@ public class SocketData implements IGearPartTooltip, IStatsContainer {
 
     public Gem getGem() {
         if (ExileDB.Gems()
-                .isRegistered(gem)) {
+                .isRegistered(g)) {
             return ExileDB.Gems()
-                    .get(gem);
+                    .get(g);
 
         }
         return null;

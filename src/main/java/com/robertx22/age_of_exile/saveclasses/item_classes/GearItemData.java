@@ -48,25 +48,18 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
     // i added rename ideas to comments. As tiny as possible while still allowing people to understand kinda what it is
     // apparently people had big issues with many storage mods, So i should try minimize the nbt.
-    public String uniq_id = ""; // uniq_id
-
-    public String rarity = IRarity.COMMON_ID; // rar
-
-    public String item_id = ""; // item registry name
+    public String uniq = ""; // uniq_id
+    public String rar = IRarity.COMMON_ID; // rar
 
     public int rp = -1; // pre_name rare prefix
     public int rs = -1; // suf_name rare suffix
 
     public int lvl = 1; // lvl
-
-    public String gear_type = "";
-
+    public String gtype = "";
     // potential
     private int pot = 0;
-
     // salvagable
     public boolean sal = true;
-
     public boolean c = false; // corrupted
 
 
@@ -100,24 +93,13 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     public boolean isValidItem() {
 
         return ExileDB.GearTypes()
-                .isRegistered(gear_type);
+                .isRegistered(gtype);
     }
 
-
-    public int getTotalSockets() {
-        int sockets = 0;
-
-        // sockets += getRarity().max_sockets;
-
-
-        // todo make new socket system..
-
-        return sockets;
-    }
 
     public int getEmptySockets() {
 
-        return getTotalSockets() - this.sockets.getSocketedGemsCount();
+        return sockets.getTotalSockets() - this.sockets.getSocketedGemsCount();
     }
 
     public boolean canGetAffix(Affix affix) {
@@ -173,13 +155,13 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
     @Override
     public String getRarityRank() {
-        return rarity;
+        return rar;
     }
 
     @Override
     public GearRarity getRarity() {
         return ExileDB.GearRarities()
-                .get(this.rarity);
+                .get(this.rar);
     }
 
     public Component name(ItemStack stack) {
@@ -194,7 +176,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
     public BaseGearType GetBaseGearType() {
         return ExileDB.GearTypes()
-                .get(gear_type);
+                .get(gtype);
     }
 
     public List<MutableComponent> GetDisplayName(ItemStack stack) {

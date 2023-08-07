@@ -144,7 +144,7 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
                     .getFilterWrapped(x -> x.type == getAffixType() && gear.canGetAffix(x));
 
             if (list.list.isEmpty()) {
-                System.out.print("Gear Type: " + gear.gear_type + " affixtype: " + this.ty.name());
+                System.out.print("Gear Type: " + gear.gtype + " affixtype: " + this.ty.name());
             }
 
             affix = list
@@ -153,7 +153,7 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
             this.randomizeTier(gear);
 
         } catch (Exception e) {
-            System.out.print("Gear Type: " + gear.gear_type + " affixtype: " + this.ty.name());
+            System.out.print("Gear Type: " + gear.gtype + " affixtype: " + this.ty.name());
             e.printStackTrace();
         }
 

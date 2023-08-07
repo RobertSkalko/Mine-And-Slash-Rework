@@ -34,12 +34,12 @@ public class GearSoulLootGen extends BaseLootGen<GearBlueprint> {
 
         StatSoulData soul = new StatSoulData();
 
-        soul.rar = gear.rarity;
+        soul.rar = gear.rar;
         soul.slot = gear.GetBaseGearType().gear_slot;
         soul.tier = gear.getTier();
 
         if (gear.isUnique()) {
-            soul.uniq = gear.uniq_id;
+            soul.uniq = gear.uniq;
         }
 
         ItemStack stack = soul.toStack();

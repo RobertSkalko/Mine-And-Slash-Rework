@@ -89,12 +89,12 @@ public class OnItemInteract {
                 GearItemData gear = StackSaving.GEARS.loadFrom(stack);
 
                 if (gear != null) {
-                    if (gear.sockets != null && gear.sockets.sockets.size() > 0) {
+                    if (gear.sockets != null && gear.sockets.getSocketedGems().size() > 0) {
                         try {
-                            ItemStack gem = new ItemStack(gear.sockets.sockets.get(0)
+                            ItemStack gem = new ItemStack(gear.sockets.getSocketedGems().get(0)
                                     .getGem()
                                     .getItem());
-                            gear.sockets.sockets.remove(0);
+                            gear.sockets.getSocketedGems().remove(0);
                             StackSaving.GEARS.saveTo(stack, gear);
                             PlayerUtils.giveItem(gem, player);
                             x.setCanceled(true);

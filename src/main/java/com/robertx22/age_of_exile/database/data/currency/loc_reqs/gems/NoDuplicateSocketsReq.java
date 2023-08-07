@@ -25,9 +25,9 @@ public class NoDuplicateSocketsReq extends BaseLocRequirement {
 
             GearItemData gear = (GearItemData) ctx.data;
 
-            return gear.sockets.sockets.stream()
-                .noneMatch(x -> x.getGem() != null && x.getGem().gem_type
-                    .equals(gem.gem_type));
+            return gear.sockets.getSocketedGems().stream()
+                    .noneMatch(x -> x.getGem() != null && x.getGem().gem_type
+                            .equals(gem.gem_type));
 
         }
 

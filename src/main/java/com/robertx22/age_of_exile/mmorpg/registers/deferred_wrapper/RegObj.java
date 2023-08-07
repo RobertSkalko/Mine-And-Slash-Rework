@@ -5,6 +5,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class RegObj<T> {
     public RegObj(RegistryObject<T> obj) {
         this.obj = obj;
+        
     }
 
     private final RegistryObject<T> obj;

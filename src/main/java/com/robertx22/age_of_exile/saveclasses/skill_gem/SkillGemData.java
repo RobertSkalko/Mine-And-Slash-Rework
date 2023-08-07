@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.support_gem.SupportGem;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.mmorpg.UNICODE;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SkillGemsItems;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
@@ -128,8 +129,6 @@ public class SkillGemData {
         return getGeneric().getStyle();
     }
 
-    static String STAR = "\u2605";
-
 
     private MutableComponent stars() {
 
@@ -137,7 +136,7 @@ public class SkillGemData {
 
         for (int i = 0; i < links; i++) {
             //txt += up.format;
-            txt += STAR;
+            txt += UNICODE.STAR;
         }
 
         txt += "]";

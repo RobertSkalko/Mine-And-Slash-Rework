@@ -26,7 +26,7 @@ public class SimpleGearLocReq extends BaseLocRequirement {
             x -> x.affixes.canGetMore(Affix.Type.prefix, x) || x.affixes.canGetMore(Affix.Type.suffix, x), Words.CantGetMoreAffixes.locName());
 
     public static final SimpleGearLocReq IS_COMMON = new SimpleGearLocReq(
-            x -> x.rarity.equals(IRarity.COMMON_ID), Words.IsCommon.locName());
+            x -> x.rar.equals(IRarity.COMMON_ID), Words.IsCommon.locName());
 
 
     public static final SimpleGearLocReq IS_NOT_UNIQUE = new SimpleGearLocReq(

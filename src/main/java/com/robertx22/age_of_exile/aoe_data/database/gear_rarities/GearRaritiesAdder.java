@@ -18,12 +18,16 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         common.item_tier = 0;
         common.item_value_multi = 1;
         common.item_model_data_num = 1;
+        common.max_sockets = 0;
+        common.socket_chance = 0;
         common.higher_rar = IRarity.UNCOMMON;
         common.skill_gem_percents = new MinMax(0, 10);
         common.setCommonFields();
         common.addToSerializables();
 
         GearRarity uncommon = new GearRarity();
+        uncommon.max_sockets = 1;
+        uncommon.socket_chance = 5;
         uncommon.potential = 150;
         uncommon.min_affixes = 1;
         uncommon.weight = 2000;
@@ -37,6 +41,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         uncommon.addToSerializables();
 
         GearRarity rare = new GearRarity();
+        rare.max_sockets = 2;
+        rare.socket_chance = 10;
         rare.lootable_gear_tier = GearRarity.LootableGearTier.MID;
         rare.potential = 200;
         rare.item_tier = 2;
@@ -51,6 +57,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         rare.addToSerializables();
 
         GearRarity epic = new GearRarity();
+        epic.max_sockets = 3;
+        epic.socket_chance = 15;
         epic.lootable_gear_tier = GearRarity.LootableGearTier.MID;
         epic.potential = 250;
         epic.min_affixes = 4;
@@ -65,6 +73,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         epic.addToSerializables();
 
         GearRarity legendary = new GearRarity();
+        legendary.max_sockets = 3;
+        legendary.socket_chance = 20;
         legendary.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
         legendary.potential = 300;
         legendary.min_affixes = 5;
@@ -81,6 +91,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
 
         GearRarity mythic = new GearRarity();
+        mythic.max_sockets = 3;
+        mythic.socket_chance = 30;
         mythic.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
         mythic.potential = 350;
         mythic.min_affixes = 6;
@@ -95,6 +107,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         mythic.addToSerializables();
 
         GearRarity unique = new GearRarity();
+        unique.max_sockets = 3;
+        unique.socket_chance = 20;
         unique.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
         unique.min_affixes = 0;
         unique.weight = 25;
@@ -107,6 +121,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         unique.is_unique_item = true;
 
         GearRarity runeword = new GearRarity();
+        runeword.max_sockets = 3;
+        runeword.socket_chance = 50;
         runeword.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
         runeword.min_affixes = 0;
         runeword.weight = 0;

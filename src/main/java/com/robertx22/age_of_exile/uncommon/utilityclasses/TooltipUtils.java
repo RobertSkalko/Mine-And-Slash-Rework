@@ -44,7 +44,7 @@ public class TooltipUtils {
     }
 
     public static void addSocketNamesLine(List<Component> tip, GearItemData gear) {
-        if (gear.sockets.sockets.size() > 0) {
+        if (gear.sockets.getSocketedGems().size() > 0) {
             tip.add(Component.literal("Gemmed").withStyle(ChatFormatting.LIGHT_PURPLE));
         }
     }
@@ -233,8 +233,6 @@ public class TooltipUtils {
                 .append(Component.literal(lvl + "")
                         .withStyle(ChatFormatting.YELLOW));
     }
-
-    public static String STAR = "\u272B";
 
 
     public static MutableComponent dragOntoGearToUse() {

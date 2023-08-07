@@ -106,6 +106,8 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
 
     public int max_sockets = 3;
 
+    public int socket_chance = 25;
+
     public int item_tier = -1;
 
 

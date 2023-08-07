@@ -43,12 +43,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -91,34 +89,21 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player user, InteractionHand hand) {
-        ItemStack itemStack = user.getItemInHand(hand);
-        user.startUsingItem(hand);
-        return InteractionResultHolder.success(itemStack);
-    }
+    public InteractionResultHolder<ItemStack> use(Level world, Player p, InteractionHand hand) {
 
-    @Override
-    public UseAnim getUseAnimation(ItemStack p_77661_1_) {
-        return UseAnim.BOW;
-    }
 
-    @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level world, LivingEntity en) {
+        ItemStack stack = p.getItemInHand(hand);
 
-        if (world.isClientSide) {
-            return stack;
-        }
+        if (!world.isClientSide) {
 
-        if (en instanceof Player) {
-            Player p = (Player) en;
 
             if (!getGem().hasHigherTierGem()) {
                 p.displayClientMessage(Component.literal(ChatFormatting.RED + "These gems are already maximum rank."), false);
-                return stack;
+                return InteractionResultHolder.success(stack);
             }
             if (stack.getCount() < 3) {
                 p.displayClientMessage(Component.literal(ChatFormatting.RED + "You need 3 gems to attempt upgrade."), false);
-                return stack;
+                return InteractionResultHolder.success(stack);
             }
 
             Gem gem = getGem();
@@ -148,15 +133,11 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
                     }
                 }
             }
+
         }
-
-        return stack;
+        return InteractionResultHolder.success(stack);
     }
 
-    @Override
-    public int getUseDuration(ItemStack stack) {
-        return 40;
-    }
 
     static float MIN_WEP_DMG = 2;
     static float MAX_WEP_DMG = 15;
@@ -200,13 +181,13 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
 
                             @Override
                             public ItemStack modify(LocReqContext ctx, GearItemData gear, ItemStack stack) {
-                                GemItem gitem = (GemItem) stack.getItem();
+                                GemItem gitem = (GemItem) ctx.Currency.getItem();
                                 Gem gem = gitem.getGem();
 
                                 SocketData socket = new SocketData();
-                                socket.gem = gem.identifier;
+                                socket.g = gem.identifier;
 
-                                gear.sockets.sockets.add(socket);
+                                gear.sockets.getSocketedGems().add(socket);
 
                                 ctx.player.displayClientMessage(Component.literal("Gem Socketed"), false);
 
@@ -470,6 +451,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
         return opt.orElse(new Gem());
     }
 
+    
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {
@@ -481,7 +463,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
             tooltip.add(Component.literal(""));
 
             if (getGem().hasHigherTierGem()) {
-                tooltip.add(Component.literal("Hold 3 gems to attempt upgrade"));
+                tooltip.add(Component.literal("Click with 3 gems to attempt upgrade"));
                 tooltip.add(Component.literal("Upgrade chance: " + getGem().perc_upgrade_chance + "%"));
             }
         } catch (Exception e) {

@@ -1,12 +1,12 @@
 package com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts;
 
 import com.robertx22.age_of_exile.database.data.gems.Gem;
+import com.robertx22.age_of_exile.mmorpg.UNICODE;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPartTooltip;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatsContainer;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -18,23 +18,37 @@ import java.util.List;
 public class GearSocketsData implements IStatsContainer, IGearPartTooltip {
 
 
-    public List<SocketData> sockets = new ArrayList<>();
+    // socketed gems
+    private List<SocketData> so = new ArrayList<>();
+    // socket count
+    private int sl = 0;
+
+    public List<SocketData> getSocketedGems() {
+        return so;
+    }
 
 
-    private int slots = 1;
+    public void addSocket() {
+        sl++;
+    }
+
+    public boolean canAddSocket(GearItemData gear) {
+        return sl < gear.getRarity().max_sockets;
+    }
+
+    public int getTotalSockets() {
+        return sl;
+    }
 
     public int getSocketedGemsCount() {
-        return sockets.size();
+        return so.size();
     }
 
     @Override
     public List<ExactStatData> GetAllStats(GearItemData gear) {
         List<ExactStatData> list = new ArrayList<>();
-        for (int i = 0; i < gear.getTotalSockets(); i++) {
-            if (sockets.size() > i) {
-                list.addAll(sockets.get(i)
-                        .GetAllStats(gear));
-            }
+        for (SocketData s : this.getSocketedGems()) {
+            list.addAll(s.GetAllStats(gear));
         }
         return list;
     }
@@ -43,13 +57,11 @@ public class GearSocketsData implements IStatsContainer, IGearPartTooltip {
     public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {
         List<Component> list = new ArrayList<Component>();
 
-        for (int i = 0; i < gear.getTotalSockets(); i++) {
-            if (sockets.size() > i) {
-                SocketData data = sockets.get(i);
-                Gem gem = data.getGem();
-                list.add(ExileText.ofText(gem.getFormat() + "[" + TooltipUtils.STAR + "] ").get().append(data.GetTooltipString(info, gear)
-                        .get(0)));
-            }
+        for (int i = 0; i < getSocketedGemsCount(); i++) {
+            SocketData data = so.get(i);
+            Gem gem = data.getGem();
+            list.add(ExileText.ofText(gem.getFormat() + "[" + UNICODE.STAR + "] ").get().append(data.GetTooltipString(info, gear)
+                    .get(0)));
         }
 
         for (int i = 0; i < gear.getEmptySockets(); i++) {

@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.database.registrators;
 
 import com.robertx22.age_of_exile.database.data.currency.base.Currency;
 import com.robertx22.age_of_exile.database.data.currency.gear.OrbAffixUpgrade;
+import com.robertx22.age_of_exile.database.data.currency.gear.OrbSocketAdder;
 import com.robertx22.age_of_exile.database.data.currency.skill_gem.OrbOfLinking;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
@@ -16,6 +17,7 @@ public class Currencies implements ExileRegistryInit {
     static {
         ALL.add(new OrbOfLinking());
         ALL.add(new OrbAffixUpgrade());
+        ALL.add(new OrbSocketAdder());
     }
 
     @Override
