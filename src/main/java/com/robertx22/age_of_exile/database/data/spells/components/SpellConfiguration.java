@@ -82,7 +82,6 @@ public class SpellConfiguration {
             c.mana_cost = new LeveledValue(0.5F * mana, 1F * mana);
             c.cooldown_ticks = cd;
             c.swing_arm = false;
-            c.cast_type = SpellCastType.USE_ITEM;
             return c;
         }
 
