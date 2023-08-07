@@ -4,7 +4,7 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 
 public class UnknownStat extends Stat {
-    public static String GUID = "renamed_or_deleted_stat";
+    public static String GUID = "unknown";
 
     public UnknownStat() {
 
@@ -32,6 +32,6 @@ public class UnknownStat extends Stat {
 
     @Override
     public String locNameForLangFile() {
-        return "Unknown";
+        return "Unknown Stat";
     }
 }

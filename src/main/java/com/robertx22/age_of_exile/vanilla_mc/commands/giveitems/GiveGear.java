@@ -24,7 +24,7 @@ import static net.minecraft.commands.Commands.literal;
 public class GiveGear {
 
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
-
+        
         commandDispatcher.register(
                 literal(CommandRefs.ID)
                         .then(literal("give").requires(e -> e.hasPermission(2))
@@ -82,7 +82,7 @@ public class GiveGear {
     private static int execute(CommandSourceStack commandSource, Player player, String type, int lvl,
                                String rarity, int amount) {
 
-        
+
         if (Objects.isNull(player)) {
             try {
                 player = commandSource.getPlayerOrException();

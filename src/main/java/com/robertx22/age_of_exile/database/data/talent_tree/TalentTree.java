@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.database.data.talent_tree;
 
 import com.robertx22.age_of_exile.database.data.perks.Perk;
+import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.data.talent_tree.parser.TalentGrid;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
@@ -78,24 +79,24 @@ public class TalentTree implements JsonExileRegistry<TalentTree>, IAutoGson<Tale
         if (false && MMORPG.RUN_DEV_TOOLS) {
             for (Map.Entry<PointData, String> x : this.calcData.perks.entrySet()) {
                 if (!ExileDB.Perks()
-                    .isRegistered(x.getValue())) {
+                        .isRegistered(x.getValue())) {
 
                     System.out.print("\n Perk of id: " + x.getValue()
-                        .replaceAll("\r", "[NEWLINE]") + " doesn't exist, used in spell school: " + this.identifier + " at point: " + x.getKey()
-                        .toString());
+                            .replaceAll("\r", "[NEWLINE]") + " doesn't exist, used in spell school: " + this.identifier + " at point: " + x.getKey()
+                            .toString());
 
                 }
             }
 
             ExileDB.Perks()
-                .getFilterWrapped(x -> x.type == Perk.PerkType.SPECIAL).list.forEach(x -> {
-                    if (this.calcData.perks.values()
-                        .stream()
-                        .noneMatch(e -> x.GUID()
-                            .equals(e))) {
-                        System.out.print("\n" + x.GUID() + " is registered but not used in the tree \n");
-                    }
-                });
+                    .getFilterWrapped(x -> x.type == Perk.PerkType.SPECIAL).list.forEach(x -> {
+                        if (this.calcData.perks.values()
+                                .stream()
+                                .noneMatch(e -> x.GUID()
+                                        .equals(e))) {
+                            System.out.print("\n" + x.GUID() + " is registered but not used in the tree \n");
+                        }
+                    });
         }
         return true;
     }
@@ -113,8 +114,11 @@ public class TalentTree implements JsonExileRegistry<TalentTree>, IAutoGson<Tale
         public transient HashMap<PointData, String> perks = new HashMap<>();
 
         public Perk getPerk(PointData point) {
-            return ExileDB.Perks()
-                .get(perks.get(point));
+            if (ExileDB.Perks().isRegistered(perks.get(point))) {
+                return ExileDB.Perks().get(perks.get(point));
+            } else {
+                return ExileDB.Perks().get(new UnknownStat().GUID());
+            }
         }
 
         public boolean isConnected(PointData one, PointData two) {
@@ -123,7 +127,7 @@ public class TalentTree implements JsonExileRegistry<TalentTree>, IAutoGson<Tale
                 return false;
             }
             return connections.get(one)
-                .contains(two);
+                    .contains(two);
         }
 
         public void addPerk(PointData point, String perk) {
@@ -143,9 +147,9 @@ public class TalentTree implements JsonExileRegistry<TalentTree>, IAutoGson<Tale
                 connections.put(to, new HashSet<>());
             }
             connections.get(from)
-                .add(to);
+                    .add(to);
             connections.get(to)
-                .add(from);
+                    .add(from);
 
         }
 

@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.capability.player;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IApplyableStats;
@@ -246,7 +247,15 @@ public class EntitySpellCap {
 
         @Override
         public int getLevelOf(String id) {
-            return spellData.getLevelOf(id);
+
+            if (entity instanceof Player p) {
+                var gem = Load.playerRPGData(p).getSkillGemInventory().getSpellGem(ExileDB.Spells().get(id));
+                if (gem != null && gem.getSkillData() != null) {
+                    return (int) (gem.getSkillData().perc / 10F); // todo make sure this works
+                }
+            }
+
+            return 1;
         }
 
         @Override
@@ -255,7 +264,6 @@ public class EntitySpellCap {
             List<StatContext> ctxs = new ArrayList<>();
 
             List<ExactStatData> stats = new ArrayList<>();
-
 
             ctxs.add(new MiscStatCtx(stats));
 

@@ -52,7 +52,6 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     public static String DEFAULT_EN_NAME = "default_entity_name";
     public static String CASTER_NAME = "caster";
 
-    public int max_lvl = 16;
     public int weight = 1000;
     public String identifier = "";
     public AttachedSpell attached = new AttachedSpell();
@@ -337,7 +336,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
     @Override
     public int getMaxLevel() {
-        return max_lvl;
+        return 6;
     }
 
     @Override

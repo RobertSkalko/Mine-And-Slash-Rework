@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.robertx22.age_of_exile.capability.player.RPGPlayerData;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
+import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree.SchoolType;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -223,11 +224,11 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         this.scrollY = 0;
 
         for (Map.Entry<PointData, String> e : school.calcData.perks.entrySet()) {
-            Perk perk = ExileDB.Perks()
-                    .get(e.getValue());
+            Perk perk = ExileDB.Perks().get(e.getValue());
 
             if (perk == null) {
-                continue;
+                perk = ExileDB.Perks().get(new UnknownStat().GUID()); // we show unknown stat so its visible ingame that something is wrong on the GUI
+                //continue;
             }
 
             try {

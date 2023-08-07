@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.saveclasses.spells;
 
 import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
-import com.robertx22.age_of_exile.database.data.value_calc.MaxLevelProvider;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -31,8 +30,11 @@ public class SpellsData {
     }
 
 
+    /*
     public int getLevelOf(String id) {
         // todo
+
+
         MaxLevelProvider provider = MaxLevelProvider.get(id);
         return provider.getMaxLevel();
 
@@ -52,7 +54,7 @@ public class SpellsData {
 
         return level;
 
-         */
-    }
 
+    }
+    */
 }

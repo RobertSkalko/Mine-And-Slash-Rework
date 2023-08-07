@@ -12,8 +12,7 @@ public class TalentGrid {
     List<List<GridPoint>> grid = new ArrayList<>();
 
     public GridPoint get(int x, int y) {
-        return grid.get(x)
-            .get(y);
+        return grid.get(x).get(y);
     }
 
     public TalentGrid(TalentTree school, String str) {
@@ -29,7 +28,7 @@ public class TalentGrid {
                 }
 
                 grid.get(x)
-                    .add(new GridPoint(x, y, s));
+                        .add(new GridPoint(x, y, s));
 
                 x++;
 
@@ -63,20 +62,20 @@ public class TalentGrid {
         Watch fast2 = new Watch().min(1);
         // this can take a long time if the "hasPath" checks aren't minimized
         perks
-            .forEach(one -> {
-                Set<String> connectorTypes = getConnectorTypes(one);
-                perks
-                    .forEach(two -> {
-                        if (!school.calcData.isConnected(one.getPoint(), two.getPoint())) {
-                            if (one.isInDistanceOf(two)) {
-                                if (hasPath(one, two, connectorTypes)) {
-                                    this.school.calcData.addConnection(one.getPoint(), two.getPoint());
+                .forEach(one -> {
+                    Set<String> connectorTypes = getConnectorTypes(one);
+                    perks
+                            .forEach(two -> {
+                                if (!school.calcData.isConnected(one.getPoint(), two.getPoint())) {
+                                    if (one.isInDistanceOf(two)) {
+                                        if (hasPath(one, two, connectorTypes)) {
+                                            this.school.calcData.addConnection(one.getPoint(), two.getPoint());
+                                        }
+                                    }
                                 }
-                            }
-                        }
-                    });
+                            });
 
-            });
+                });
 
         fast2.print(" Connecting talent tree ");
 
@@ -152,7 +151,7 @@ public class TalentGrid {
                     set.add(point);
                 } else if (point.isConnector) {
                     if (point.getId()
-                        .equals(connector)) {
+                            .equals(connector)) {
                         set.add(point);
                     }
                 }

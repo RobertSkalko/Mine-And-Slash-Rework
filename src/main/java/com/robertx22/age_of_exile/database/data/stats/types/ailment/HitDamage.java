@@ -15,7 +15,7 @@ public class HitDamage extends Stat {
 
         this.statEffect = new Effect();
         this.is_perc = true;
-        
+
 
     }
 
@@ -31,7 +31,7 @@ public class HitDamage extends Stat {
 
         @Override
         public int GetPriority() {
-            return Priority.First.priority;
+            return Priority.Second.priority;
         }
 
         @Override

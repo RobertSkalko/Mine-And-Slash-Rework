@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.base.ResourceAndAttack
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
 import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
+import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DamageShield;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
@@ -12,8 +13,13 @@ import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttac
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalPenetration;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.EnergyRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShieldHeal;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShieldRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
@@ -27,6 +33,8 @@ public class Perks implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
+        PerkBuilder.stat(new OptScaleExactStat(1, new UnknownStat(), ModType.FLAT));
+
 
         PerkBuilder.stat("int", new OptScaleExactStat(1, DatapackStats.INT, ModType.FLAT));
         PerkBuilder.stat("dex", new OptScaleExactStat(1, DatapackStats.DEX, ModType.FLAT));
@@ -76,19 +84,26 @@ public class Perks implements ExileRegistryInit {
         PerkBuilder.stat(new OptScaleExactStat(3, Stats.COOLDOWN_REDUCTION.get()));
 
         PerkBuilder.stat(new OptScaleExactStat(5, HealthRegen.getInstance(), ModType.PERCENT));
+        PerkBuilder.stat(new OptScaleExactStat(5, EnergyRegen.getInstance(), ModType.PERCENT));
+        PerkBuilder.stat(new OptScaleExactStat(5, MagicShieldRegen.getInstance(), ModType.PERCENT));
 
         PerkBuilder.stat("less_aggro", new OptScaleExactStat(-2, Stats.THREAT_GENERATED.get(), ModType.FLAT));
 
         PerkBuilder.stat(new OptScaleExactStat(3, DodgeRating.getInstance(), ModType.PERCENT));
         PerkBuilder.stat(new OptScaleExactStat(3, Armor.getInstance(), ModType.PERCENT));
         PerkBuilder.stat(new OptScaleExactStat(2, Health.getInstance(), ModType.PERCENT));
+        PerkBuilder.stat(new OptScaleExactStat(2, MagicShield.getInstance(), ModType.PERCENT));
         PerkBuilder.stat(new OptScaleExactStat(3, Mana.getInstance(), ModType.PERCENT));
+        PerkBuilder.stat(new OptScaleExactStat(3, Energy.getInstance(), ModType.PERCENT));
+
+        PerkBuilder.stat(new OptScaleExactStat(5, MagicShieldHeal.getInstance(), ModType.FLAT));
+
 
         PerkBuilder.stat(new OptScaleExactStat(3, Stats.PROJECTILE_SPEED.get()));
 
-        PerkBuilder.stat(new OptScaleExactStat(1, Stats.STYLE_DAMAGE.get(PlayStyle.STR), ModType.FLAT));
-        PerkBuilder.stat(new OptScaleExactStat(1, Stats.STYLE_DAMAGE.get(PlayStyle.DEX), ModType.FLAT));
-        PerkBuilder.stat(new OptScaleExactStat(1, Stats.STYLE_DAMAGE.get(PlayStyle.INT), ModType.FLAT));
+        PerkBuilder.stat(new OptScaleExactStat(2, Stats.STYLE_DAMAGE.get(PlayStyle.STR), ModType.FLAT));
+        PerkBuilder.stat(new OptScaleExactStat(2, Stats.STYLE_DAMAGE.get(PlayStyle.DEX), ModType.FLAT));
+        PerkBuilder.stat(new OptScaleExactStat(2, Stats.STYLE_DAMAGE.get(PlayStyle.INT), ModType.FLAT));
 
         PerkBuilder.stat("mana_on_hit", new OptScaleExactStat(3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.mana, AttackType.attack)), ModType.FLAT));
         PerkBuilder.stat("health_on_hit", new OptScaleExactStat(3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.health, AttackType.attack)), ModType.FLAT));
