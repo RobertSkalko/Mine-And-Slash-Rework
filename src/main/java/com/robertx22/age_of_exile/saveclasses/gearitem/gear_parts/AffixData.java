@@ -13,6 +13,7 @@ import com.robertx22.library_of_exile.registry.FilterListWrap;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
+import org.joml.Math;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,33 +23,26 @@ import java.util.stream.Collectors;
 
 public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer {
 
-    // MAJOR NBT PROBLEM. RENAME ALL THESE
 
-
-    public Integer perc = 0;
-
-
-    public String affix;
-
-
+    // perc
+    public Integer p = -1;
+    public String id;
+    // tier
     public int t;
-
-
-    public Affix.Type type;
+    public Affix.Type ty;
 
     public void setTier(int t) {
-        this.t = t;
+        this.t = Math.clamp(t, 0, 10); // todo if i rework tiers
     }
 
 
     @Override
     public MinMax getMinMax(GearItemData gear) {
-        int tier = t;
         return new MinMax((t * 10) - 10, t * 10); // todo temporary
     }
 
     public AffixData(Affix.Type type) {
-        this.type = type;
+        this.ty = type;
     }
 
 
@@ -56,11 +50,11 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
     }
 
     public boolean isEmpty() {
-        return perc < 1;
+        return p < 0;
     }
 
     public Affix.Type getAffixType() {
-        return type;
+        return ty;
     }
 
     @Override
@@ -72,7 +66,7 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
 
     public Affix getAffix() {
         return ExileDB.Affixes()
-                .get(this.affix);
+                .get(this.id);
     }
 
     @Override
@@ -82,9 +76,7 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
 
     @Override
     public void RerollNumbers(GearItemData gear) {
-
-        perc = getMinMax(gear)
-                .random();
+        p = getMinMax(gear).random();
     }
 
 
@@ -94,7 +86,7 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
 
     public final Affix BaseAffix() {
         return ExileDB.Affixes()
-                .get(affix);
+                .get(id);
     }
 
     public List<TooltipStatWithContext> getAllStatsWithCtx(GearItemData gear, TooltipInfo info) {
@@ -102,8 +94,8 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
         this.BaseAffix()
                 .getStats()
                 .forEach(x -> {
-                    ExactStatData exact = x.ToExactStat(perc, gear.getILVL());
-                    TooltipStatInfo confo = new TooltipStatInfo(exact, perc, info);
+                    ExactStatData exact = x.ToExactStat(p, gear.getILVL());
+                    TooltipStatInfo confo = new TooltipStatInfo(exact, p, info);
                     confo.affix_tier = getAffixTier();
                     list.add(new TooltipStatWithContext(confo, x, (int) gear.getILVL()));
                 });
@@ -112,7 +104,7 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
 
     public boolean isValid() {
         if (!ExileDB.Affixes()
-                .isRegistered(this.affix)) {
+                .isRegistered(this.id)) {
             return false;
         }
         if (this.isEmpty()) {
@@ -132,13 +124,13 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
         return this.BaseAffix()
                 .getStats()
                 .stream()
-                .map(x -> x.ToExactStat(perc, gear.getILVL()))
+                .map(x -> x.ToExactStat(p, gear.getILVL()))
                 .collect(Collectors.toList());
 
     }
 
     public void create(GearItemData gear, Affix suffix) {
-        affix = suffix.GUID();
+        id = suffix.GUID();
         RerollNumbers(gear);
     }
 
@@ -152,7 +144,7 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
                     .getFilterWrapped(x -> x.type == getAffixType() && gear.canGetAffix(x));
 
             if (list.list.isEmpty()) {
-                System.out.print("Gear Type: " + gear.gear_type + " affixtype: " + this.type.name());
+                System.out.print("Gear Type: " + gear.gear_type + " affixtype: " + this.ty.name());
             }
 
             affix = list
@@ -161,7 +153,7 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
             this.randomizeTier(gear);
 
         } catch (Exception e) {
-            System.out.print("Gear Type: " + gear.gear_type + " affixtype: " + this.type.name());
+            System.out.print("Gear Type: " + gear.gear_type + " affixtype: " + this.ty.name());
             e.printStackTrace();
         }
 

@@ -18,7 +18,7 @@ public class SkillGemLootGen extends BaseLootGen<GearBlueprint> {
     public float baseDropChance() {
 
         if (true) {
-            return 10000;
+            //   return 10000;
         }
 
         return (float) (ServerContainer.get().SKILL_GEM_DROPRATE.get()

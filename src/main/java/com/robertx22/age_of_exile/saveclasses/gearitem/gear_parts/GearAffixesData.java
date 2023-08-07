@@ -64,7 +64,7 @@ public class GearAffixesData implements IGearPartTooltip {
     }
 
     public void add(AffixData affix) {
-        if (affix.type.isSuffix()) {
+        if (affix.ty.isSuffix()) {
             suf.add(affix);
         } else {
             pre.add(affix);
@@ -160,7 +160,7 @@ public class GearAffixesData implements IGearPartTooltip {
 
     public boolean containsAffix(String id) {
         return getAllAffixesAndSockets().stream()
-                .anyMatch(x -> x.affix.equals(id));
+                .anyMatch(x -> x.id.equals(id));
     }
 
     public int getNumberOfAffixes() {

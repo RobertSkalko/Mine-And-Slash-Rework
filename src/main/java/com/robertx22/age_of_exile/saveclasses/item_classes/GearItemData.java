@@ -282,6 +282,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         List<MutableComponent> list = new ArrayList<>();
         ChatFormatting format = this.getRarity()
                 .textFormatting();
+        
 
         Words prefix = RareItemAffixNames.getPrefix(this);
         Words suffix = RareItemAffixNames.getSuffix(this);

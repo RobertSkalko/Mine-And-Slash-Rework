@@ -34,6 +34,6 @@ public abstract class ItemStackMixin {
         OnItemStoppedUsingCastImbuedSpell.crossbow(stack, world, user, hand, ci);
 
     }
-    
+
      */
 }

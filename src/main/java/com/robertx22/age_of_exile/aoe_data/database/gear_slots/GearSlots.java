@@ -7,7 +7,6 @@ import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 public class GearSlots implements ExileRegistryInit {
 
     public static String SWORD = new String("sword");
-    public static String AXE = new String("axe");
     public static String SCEPTER = new String("scepter");
     public static String BOW = new String("bow");
     public static String CROSBOW = new String("crossbow");
@@ -29,7 +28,6 @@ public class GearSlots implements ExileRegistryInit {
         new GearSlot(SWORD, "Sword", SlotFamily.Weapon, 4, 1, 1000).addToSerializables();
         new GearSlot(SCEPTER, "Scepter", SlotFamily.Weapon, 3, 2, 1000).addToSerializables();
         new GearSlot(STAFF, "Staff", SlotFamily.Weapon, 3, 3, 1500).addToSerializables();
-        new GearSlot(AXE, "Axe", SlotFamily.Weapon, 5, 4, 1000).addToSerializables();
         new GearSlot(BOW, "Bow", SlotFamily.Weapon, 8, 5, 750).addToSerializables();
         new GearSlot(CROSBOW, "Crossbow", SlotFamily.Weapon, 7, 6, 750).addToSerializables();
 

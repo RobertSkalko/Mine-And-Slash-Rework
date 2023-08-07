@@ -17,31 +17,15 @@ public abstract class GearCurrency extends Currency {
 
 
     public abstract List<GearOutcome> getOutcomes();
-/*
-    public class ChancedOutcomes implements IWeighted {
-        public int perc;
-        int weight;
-        public GearOutcome outcome;
 
-        public ChancedOutcomes(int perc, int weight, GearOutcome outcome) {
-            this.perc = perc;
-            this.weight = weight;
-            this.outcome = outcome;
-        }
+    public abstract int getPotentialLoss();
 
-
-        @Override
-        public int Weight() {
-            return weight;
-        }
-    }
-
- */
 
     @Override
     public ItemStack internalModifyMethod(LocReqContext ctx, ItemStack stack, ItemStack currency) {
         GearItemData data = StackSaving.GEARS.loadFrom(stack);
         GearOutcome outcome = getOutcome(data.getPotential());
+        data.setPotential(data.getPotential() - getPotentialLoss());
         return outcome.modify(ctx, data, stack);
     }
 

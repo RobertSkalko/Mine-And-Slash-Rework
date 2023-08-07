@@ -43,6 +43,8 @@ public class GearBlueprint extends ItemBlueprint {
     @Override
     ItemStack generate() {
 
+        this.item = rarity.get().getLootableItem(this.gearItemSlot.get().getGearSlot());
+
         // todo need to make this drop normal items not souls, or make souls rare?
 
         if (item == Items.AIR) {

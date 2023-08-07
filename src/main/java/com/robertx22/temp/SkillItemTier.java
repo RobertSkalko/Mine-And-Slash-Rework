@@ -10,11 +10,11 @@ import java.util.Comparator;
 
 public enum SkillItemTier {
 
-    TIER0("Spiritual", LevelRanges.STARTER, 0, 0, 1, ChatFormatting.YELLOW, 60 * 5, 20, 50),
-    TIER1("Celestial", LevelRanges.LOW, 0.2F, 1, 1.25F, ChatFormatting.AQUA, 60 * 6, 25, 100),
-    TIER2("Empyrean", LevelRanges.MIDDLE, 0.4F, 2, 1.5F, ChatFormatting.GOLD, 60 * 7, 30, 200),
-    TIER3("Angelic", LevelRanges.HIGH, 0.6F, 3, 1.75F, ChatFormatting.LIGHT_PURPLE, 60 * 8, 40, 300),
-    TIER4("Divine", LevelRanges.ENDGAME, 0.8F, 4, 2, ChatFormatting.DARK_PURPLE, 60 * 10, 50, 500);
+    TIER0("Spiritual", LevelRanges.STARTER_0, 0, 0, 1, ChatFormatting.YELLOW, 60 * 5, 20, 50),
+    TIER1("Celestial", LevelRanges.LOW_1, 0.2F, 1, 1.25F, ChatFormatting.AQUA, 60 * 6, 25, 100),
+    TIER2("Empyrean", LevelRanges.MIDDLE_2, 0.4F, 2, 1.5F, ChatFormatting.GOLD, 60 * 7, 30, 200),
+    TIER3("Angelic", LevelRanges.HIGH_3, 0.6F, 3, 1.75F, ChatFormatting.LIGHT_PURPLE, 60 * 8, 40, 300),
+    TIER4("Divine", LevelRanges.ENDGAME_4, 0.8F, 4, 2, ChatFormatting.DARK_PURPLE, 60 * 10, 50, 500);
 
     SkillItemTier(String word, LevelRange levelRange, float lvl_req, int tier, float statMulti, ChatFormatting format, int durationseconds, float percent_healed, int repairDurab) {
         this.word = word;

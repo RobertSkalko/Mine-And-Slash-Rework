@@ -56,6 +56,7 @@ public class StatSoulData implements ISalvagable, IRarity, ISettableLevelTier {
 
     public ItemStack toStack() {
 
+        
         ItemStack stack = new ItemStack(SlashItems.STAT_SOUL.get());
 
         StackSaving.STAT_SOULS.saveTo(stack, this);
@@ -114,7 +115,7 @@ public class StatSoulData implements ISalvagable, IRarity, ISettableLevelTier {
         }
 
         GearItemData gear = b.createData();
-        
+
         gear.sal = this.can_sal;
         return gear;
     }

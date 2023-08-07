@@ -12,7 +12,6 @@ staff
 bow
 leather_pants
 plate_chest
-axe
 sword
 plate_boots
 cloth_chest

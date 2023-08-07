@@ -178,6 +178,7 @@ public class ExileDB {
         return Database.getRegistry(ExileRegistryTypes.SUPPORT_GEM);
     }
 
+   
     public static ExileRegistryContainer<AuraGem> AuraGems() {
         return Database.getRegistry(ExileRegistryTypes.AURA);
     }

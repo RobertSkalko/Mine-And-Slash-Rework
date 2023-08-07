@@ -17,7 +17,9 @@ public class GearSoulLootGen extends BaseLootGen<GearBlueprint> {
     @Override
     public float baseDropChance() {
         float chance = (float) ServerContainer.get().GEAR_DROPRATE.get()
-            .floatValue();
+                .floatValue();
+
+        chance = 2000; // todo
 
         return chance;
     }
@@ -47,7 +49,7 @@ public class GearSoulLootGen extends BaseLootGen<GearBlueprint> {
     @Override
     public ItemStack generateOne() {
         GearBlueprint blueprint = new GearBlueprint(info);
-        return createSoulBasedOnGear(blueprint);
+        return blueprint.createStack();
     }
 
 }

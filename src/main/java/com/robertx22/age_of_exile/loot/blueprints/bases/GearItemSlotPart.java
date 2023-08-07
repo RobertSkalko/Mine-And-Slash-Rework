@@ -5,9 +5,6 @@ import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class GearItemSlotPart extends BlueprintPart<BaseGearType, GearBlueprint> {
 
     public GearItemSlotPart(GearBlueprint blueprint) {
@@ -18,10 +15,12 @@ public class GearItemSlotPart extends BlueprintPart<BaseGearType, GearBlueprint>
     protected BaseGearType generateIfNull() {
 
         GearSlot slot = ExileDB.GearSlots()
-            .random();
+                .random();
 
+        /*
         List<BaseGearType> all = ExileDB.GearTypes()
-            .getList();
+                .getList();
+
 
         List<BaseGearType> filt = all.stream()
             .filter(x -> x.getGearSlot()
@@ -29,17 +28,19 @@ public class GearItemSlotPart extends BlueprintPart<BaseGearType, GearBlueprint>
                 .equals(slot.id))
             .collect(Collectors.toList());
 
+         */
+
         return ExileDB.GearTypes()
-            .getFilterWrapped(x -> x.getGearSlot()
-                .GUID()
-                .equals(slot.GUID()) && x.getLevelRange()
-                .isLevelInRange(blueprint.level.number))
-            .random();
+                .getFilterWrapped(x -> x.getGearSlot()
+                        .GUID()
+                        .equals(slot.GUID()) && x.getLevelRange()
+                        .isLevelInRange(blueprint.level.number))
+                .random();
     }
 
     public void set(String id) {
         super.set(ExileDB.GearTypes()
-            .get(id));
+                .get(id));
     }
 
 }

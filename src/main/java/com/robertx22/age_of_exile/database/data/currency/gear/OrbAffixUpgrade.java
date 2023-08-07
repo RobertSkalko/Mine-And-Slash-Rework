@@ -70,6 +70,12 @@ public class OrbAffixUpgrade extends GearCurrency {
         );
     }
 
+    
+    @Override
+    public int getPotentialLoss() {
+        return 25;
+    }
+
     @Override
     public boolean canBeModified(GearItemData data) {
         return data.affixes.getNumberOfAffixes() > 0;

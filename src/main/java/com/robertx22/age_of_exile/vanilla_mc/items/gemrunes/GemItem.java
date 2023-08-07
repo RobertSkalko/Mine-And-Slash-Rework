@@ -210,7 +210,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
 
                                 ctx.player.displayClientMessage(Component.literal("Gem Socketed"), false);
 
-                                
+
                                 StackSaving.GEARS.saveTo(stack, gear);
 
 
@@ -223,6 +223,11 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
                             }
                         }
                 );
+            }
+
+            @Override
+            public int getPotentialLoss() {
+                return 0;
             }
 
             @Override

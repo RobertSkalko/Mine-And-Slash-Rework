@@ -1,7 +1,5 @@
 package com.robertx22.age_of_exile.mmorpg.registers.common.items;
 
-import com.robertx22.age_of_exile.database.data.level_ranges.LevelRange;
-import com.robertx22.age_of_exile.database.registrators.LevelRanges;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
 import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulItem;
@@ -27,7 +25,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class SlashItems {
 
@@ -119,15 +116,7 @@ public class SlashItems {
             return map;
         }
 
-        private static HashMap<LevelRange, RegObj<Item>> of(String idprefix, Supplier<Item> item) {
-            HashMap<LevelRange, RegObj<Item>> map = new HashMap<LevelRange, RegObj<Item>>();
-            LevelRanges.allNormal()
-                    .forEach(x -> {
-                        map.put(x, Def.item(idprefix + x.id_suffix, () -> item.get()));
-                    });
-            return map;
-        }
-
+    
     }
 
 }

@@ -9,8 +9,6 @@ import net.minecraft.network.chat.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPart.Part;
-
 public class MergedStats implements IGearPartTooltip {
 
     public List<TooltipStatInfo> mergedList;

@@ -170,14 +170,7 @@ public class RecipeGenerator {
             };
         }
 
-        if (id.equals(GearSlots.AXE)) {
-            return new String[]{
-                    "MM ",
-                    " S ",
-                    " S "
-            };
-        }
-
+    
         if (id.equals(GearSlots.SCEPTER)) {
             return new String[]{
                     "M  ",

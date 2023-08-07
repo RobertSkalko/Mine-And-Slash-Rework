@@ -123,8 +123,6 @@ public class GearSlot implements JsonExileRegistry<GearSlot>, IAutoGson<GearSlot
                     bool = item instanceof SwordItem;
                 } else if (id.equals(GearSlots.BOW)) {
                     bool = item instanceof BowItem;
-                } else if (id.equals(GearSlots.AXE)) {
-                    bool = item instanceof AxeItem;
                 } else if (id.equals(GearSlots.SHIELD)) {
                     bool = item instanceof ShieldItem;
                 } else if (id.equals(GearSlots.CROSBOW)) {

@@ -81,6 +81,7 @@ public class OnItemInteract {
                     //ci.setReturnValue(ItemStack.EMPTY);
                     //stack.shrink(1000);
                     //ci.cancel();
+                    x.setCanceled(true);
                     return;
                 }
             } else if (cursor.getItem() == SlashItems.SOCKET_EXTRACTOR.get()) {
@@ -96,6 +97,7 @@ public class OnItemInteract {
                             gear.sockets.sockets.remove(0);
                             StackSaving.GEARS.saveTo(stack, gear);
                             PlayerUtils.giveItem(gem, player);
+                            x.setCanceled(true);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
