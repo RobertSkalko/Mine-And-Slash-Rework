@@ -8,8 +8,8 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.Spell
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.effectdatas.SpendResourceEvent;
 import com.robertx22.age_of_exile.vanilla_mc.packets.NoManaPacket;
 import com.robertx22.library_of_exile.main.Packets;
@@ -273,7 +273,8 @@ public class SpellCastingData {
                     return false;
                 }
 
-                GearItemData wep = Gear.Load(ctx.caster.getMainHandItem());
+                
+                GearItemData wep = StackSaving.GEARS.loadFrom(ctx.caster.getMainHandItem());
 
                 if (wep == null) {
                     return false;

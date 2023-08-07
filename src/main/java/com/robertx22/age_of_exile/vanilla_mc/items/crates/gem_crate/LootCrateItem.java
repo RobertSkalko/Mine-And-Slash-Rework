@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.vanilla_mc.items.crates.gem_crate;
 
-import com.robertx22.age_of_exile.database.data.currency.base.CurrencyItem;
+import com.robertx22.age_of_exile.database.data.currency.base.Currency;
 import com.robertx22.age_of_exile.database.data.gems.Gem;
 import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -78,14 +78,14 @@ public class LootCrateItem extends Item implements IGUID {
                             .random();
                     reward = new ItemStack(rune.getItem());
                 } else if (data.type == LootType.Currency) {
-                    CurrencyItem currency = ExileDB.CurrencyItems()
-                            .getFilterWrapped(x -> data.tier >= x.getTier())
+                    Currency currency = ExileDB.CurrencyItems()
+                            .getFilterWrapped(x -> true)
                             .random();
                     if (currency == null) {
                         currency = ExileDB.CurrencyItems()
                                 .random();
                     }
-                    reward = new ItemStack(currency);
+                    reward = new ItemStack(currency.getCurrencyItem());
                 }
 
                 stack.shrink(1);

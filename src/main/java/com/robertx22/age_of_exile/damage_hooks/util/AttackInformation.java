@@ -3,12 +3,12 @@ package com.robertx22.age_of_exile.damage_hooks.util;
 import com.google.common.base.Preconditions;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.damagesource.DamageSource;
 
 public class AttackInformation {
 
@@ -30,7 +30,7 @@ public class AttackInformation {
         this.mitigation = miti;
         this.event = event;
         this.weapon = WeaponFinderUtil.getWeapon(source);
-        this.weaponData = Gear.Load(weapon);
+        this.weaponData = StackSaving.GEARS.loadFrom(weapon);
 
         Preconditions.checkArgument(source.getEntity() instanceof LivingEntity);
         this.attackerEntity = (LivingEntity) source.getEntity();

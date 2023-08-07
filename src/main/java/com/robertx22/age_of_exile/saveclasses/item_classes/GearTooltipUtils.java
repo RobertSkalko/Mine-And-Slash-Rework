@@ -25,6 +25,7 @@ public class GearTooltipUtils {
 
     public static void BuildTooltip(GearItemData gear, ItemStack stack, List<Component> tooltip, EntityData data) {
 
+
         List<Component> tip = new ArrayList<>();
 
         if (gear.GetBaseGearType() == null) {
@@ -33,7 +34,7 @@ public class GearTooltipUtils {
 
         TooltipInfo info = new TooltipInfo(data, new MinMax(0, 100));
 
-        tip.clear();
+        tooltip.clear();
 
         List<MutableComponent> name = gear.GetDisplayName(stack);
 
@@ -121,14 +122,11 @@ public class GearTooltipUtils {
 
         MutableComponent lvl = TooltipUtils.gearLevel(gear.lvl);
 
-        if (Screen.hasShiftDown()) {
-            lvl.append(Component.literal(ChatFormatting.YELLOW + " [ILvl:" + (int) gear.getILVL() + "]"));
-        }
-
 
         tip.add(lvl);
-        //tip.add(TooltipUtils.gearTier(gear.getTier()));
         tip.add(TooltipUtils.gearRarity(gear.getRarity()));
+
+        tip.add(ExileText.ofText("Potential: " + gear.getPotential() + "%").format(gear.getPotentialColor()).get());
 
         tip.add(Component.literal(""));
 
@@ -144,7 +142,7 @@ public class GearTooltipUtils {
         }
         tip.add(Component.literal(""));
 
-        ItemStack.appendEnchantmentNames(tip, stack.getEnchantmentTags());
+        //  ItemStack.appendEnchantmentNames(tip, stack.getEnchantmentTags());
 
         if (ClientConfigs.getConfig().SHOW_DURABILITY.get()) {
             if (stack.isDamageableItem()) {
@@ -156,19 +154,17 @@ public class GearTooltipUtils {
 
 
         if (Screen.hasShiftDown() == false) {
-            tooltip.add(Component.literal(ChatFormatting.BLUE + "").append(Component.translatable(SlashRef.MODID + ".tooltip." + "press_shift_more_info")
+            tip.add(Component.literal(ChatFormatting.BLUE + "").append(Component.translatable(SlashRef.MODID + ".tooltip." + "press_shift_more_info")
                     )
                     .withStyle(ChatFormatting.BLUE));
-        } else {
-
         }
-
 
         List<Component> tool = TooltipUtils.removeDoubleBlankLines(tip,
                 ClientConfigs.getConfig().REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES);
 
         tip.clear();
-        tip.addAll(tool);
+
+        tooltip.addAll(tool);
 
     }
 

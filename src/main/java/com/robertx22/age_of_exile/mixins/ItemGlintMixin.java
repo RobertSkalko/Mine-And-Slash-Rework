@@ -5,7 +5,6 @@ import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -31,9 +30,10 @@ public class ItemGlintMixin {
 
                 GearRarity rar = null;
 
-                if (Gear.has(stack)) {
+                if (StackSaving.GEARS.has(stack)) {
 
-                    GearItemData gear = Gear.Load(stack);
+
+                    GearItemData gear = StackSaving.GEARS.loadFrom(stack);
 
                     rar = gear.getRarity();
                 }

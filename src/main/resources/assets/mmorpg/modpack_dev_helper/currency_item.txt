@@ -1,3 +1,4 @@
 These are all default registry entries of this type.
 This registry can't be modified or added to.
-currency/orb_of_transmutation
+affix_tier_up_down
+orb_of_linking

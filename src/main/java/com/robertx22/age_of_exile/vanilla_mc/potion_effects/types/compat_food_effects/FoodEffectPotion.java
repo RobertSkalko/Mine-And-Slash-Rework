@@ -9,11 +9,11 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
 import com.robertx22.age_of_exile.uncommon.effectdatas.RestoreResourceEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public abstract class FoodEffectPotion extends MobEffect {
 
     public float getTotalRestored(EntityData data, int amplifier) {
         return Health.getInstance()
-            .scale(ModType.FLAT, amplifier, data.getLevel());
+                .scale(ModType.FLAT, amplifier, data.getLevel());
     }
 
     public float getValueRestoredPerRegen(EntityData data, int amplifier, int duration) {
@@ -56,7 +56,7 @@ public abstract class FoodEffectPotion extends MobEffect {
                 float heal = getValueRestoredPerRegen(data, amplifier, instance.getDuration());
 
                 RestoreResourceEvent restore = EventBuilder.ofRestore(en, en, resourceType(), RestoreType.food, heal)
-                    .build();
+                        .build();
 
                 restore.Activate();
 

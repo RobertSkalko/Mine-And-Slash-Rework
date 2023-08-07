@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.database.data.currency.loc_reqs;
 
-import com.robertx22.age_of_exile.database.data.currency.base.ICurrencyItemEffect;
+import com.robertx22.age_of_exile.database.data.currency.IItemAsCurrency;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import net.minecraft.world.entity.player.Player;
@@ -14,9 +14,10 @@ public class LocReqContext {
         this.data = ICommonDataItem.load(stack);
         this.player = player;
 
-        if (currency.getItem() instanceof ICurrencyItemEffect) {
-            effect = (ICurrencyItemEffect) currency.getItem();
+        if (currency.getItem() instanceof IItemAsCurrency cur) {
+            effect = cur.currencyEffect();
         }
+
 
     }
 
@@ -26,7 +27,7 @@ public class LocReqContext {
     public ItemStack Currency;
 
     public ICommonDataItem data;
-    public ICurrencyItemEffect effect;
+    public com.robertx22.age_of_exile.database.data.currency.base.Currency effect;
 
     public boolean isValid() {
         return !stack.isEmpty() && !Currency.isEmpty();

@@ -14,7 +14,7 @@ public class CooldownsData {
 
     public static class Data {
         public int ticks = 0;
-    
+
         public int need = 0;
 
         public Data() {

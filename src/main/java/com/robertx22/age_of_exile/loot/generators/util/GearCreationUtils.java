@@ -8,7 +8,7 @@ import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.BaseStatsData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.UniqueStatsData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
+import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -19,13 +19,16 @@ public class GearCreationUtils {
 
         ItemStack stack = new ItemStack(item);
 
-        Gear.Save(stack, data);
+        StackSaving.GEARS.saveTo(stack, data);
+
 
         return stack;
 
     }
+    
 
     public static GearItemData CreateData(GearBlueprint blueprint) {
+
 
         GearRarity rarity = blueprint.rarity.get();
         GearItemData data = new GearItemData();
@@ -34,6 +37,8 @@ public class GearCreationUtils {
                 .GUID();
         data.lvl = blueprint.level.get();
         data.rarity = rarity.GUID();
+
+        data.setPotential(rarity.potential);
 
         if (rarity.is_unique_item && blueprint.uniquePart.get() != null) {
 
@@ -61,7 +66,7 @@ public class GearCreationUtils {
         data.imp.RerollFully(data);
         data.affixes.randomize(data);
 
-  
+
         return data;
     }
 }

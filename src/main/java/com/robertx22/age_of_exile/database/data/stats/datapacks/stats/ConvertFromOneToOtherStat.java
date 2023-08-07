@@ -31,10 +31,10 @@ public class ConvertFromOneToOtherStat extends BaseDatapackStat implements IAffe
         this.is_long = true;
 
         this.locname = ChatFormatting.GRAY + "Transfer " + ChatFormatting.GREEN +
-            Stat.VAL1 + "%" + ChatFormatting.GRAY + " of your "
-            + adder_stat.getIconNameFormat()
-            + ChatFormatting.GRAY + " towards your "
-            + stat_to_add_to.getIconNameFormat();
+                Stat.VAL1 + "%" + ChatFormatting.GRAY + " of your "
+                + adder_stat.getIconNameFormat()
+                + ChatFormatting.GRAY + " towards your "
+                + stat_to_add_to.getIconNameFormat();
     }
 
     public ConvertFromOneToOtherStat(String adder_stat, String stat_to_add_to) {
@@ -53,11 +53,11 @@ public class ConvertFromOneToOtherStat extends BaseDatapackStat implements IAffe
     public void affectStats(EntityData data, InCalcStatData statData) {
 
         InCalcStatData add_to = data.getUnit()
-            .getStatInCalculation(stat_to_add_to);
+                .getStatInCalculation(stat_to_add_to);
         InCalcStatData adder = data.getUnit()
-            .getStatInCalculation(adder_stat);
+                .getStatInCalculation(adder_stat);
         InCalcStatData thisstat = data.getUnit()
-            .getStatInCalculation(this.GUID());
+                .getStatInCalculation(this.GUID());
 
         float multi = thisstat.getValue() / 100F;
         float val = adder.getValue() * multi;

@@ -7,7 +7,6 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable;
@@ -73,7 +72,7 @@ public class StatSoulData implements ISalvagable, IRarity, ISettableLevelTier {
 
     public void insertAsUnidentifiedOn(ItemStack stack) {
         if (gear != null) {
-            Gear.Save(stack, gear);
+            StackSaving.GEARS.saveTo(stack, gear);
         } else {
             LoadSave.Save(this, stack.getOrCreateTag(), StatSoulItem.TAG);
         }
@@ -87,6 +86,7 @@ public class StatSoulData implements ISalvagable, IRarity, ISettableLevelTier {
         b.level.set(lvl);
         b.rarity.set(ExileDB.GearRarities()
                 .get(rar));
+
 
         UniqueGear uniq = ExileDB.UniqueGears()
                 .get(this.uniq);
@@ -114,6 +114,7 @@ public class StatSoulData implements ISalvagable, IRarity, ISettableLevelTier {
         }
 
         GearItemData gear = b.createData();
+        
         gear.sal = this.can_sal;
         return gear;
     }
@@ -124,7 +125,7 @@ public class StatSoulData implements ISalvagable, IRarity, ISettableLevelTier {
             return false;
         }
 
-        if (Gear.has(stack)) {
+        if (StackSaving.GEARS.has(stack)) {
             return false;
         }
 

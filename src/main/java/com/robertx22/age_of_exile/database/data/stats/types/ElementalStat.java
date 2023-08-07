@@ -36,7 +36,7 @@ public abstract class ElementalStat extends Stat implements IElementalGenerated<
     public List<Stat> generateAllPossibleStatVariations() {
         List<Stat> list = new ArrayList<>();
         Elements.getEverythingBesidesPhysical()
-            .forEach(x -> list.add(newGeneratedInstance(x)));
+                .forEach(x -> list.add(newGeneratedInstance(x)));
         return list;
 
     }
@@ -46,7 +46,7 @@ public abstract class ElementalStat extends Stat implements IElementalGenerated<
         if (this.element == Elements.Elemental) {
             for (Elements ele : Elements.getAllSingleElementals()) {
                 thisstat.addFullyTo(unit.getUnit()
-                    .getStatInCalculation(newGeneratedInstance(ele)));
+                        .getStatInCalculation(newGeneratedInstance(ele)));
             }
             thisstat.clear();
         }

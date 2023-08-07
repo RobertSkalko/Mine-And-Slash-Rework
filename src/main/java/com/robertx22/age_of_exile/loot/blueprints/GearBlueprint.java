@@ -35,7 +35,7 @@ public class GearBlueprint extends ItemBlueprint {
     public GearRarityPart rarity = new GearRarityPart(this);
     public UniqueGearPart uniquePart = new UniqueGearPart(this);
 
- 
+
     public GearItemData createData() {
         return GearCreationUtils.CreateData(this);
     }
@@ -48,7 +48,7 @@ public class GearBlueprint extends ItemBlueprint {
         if (item == Items.AIR) {
             return GearSoulLootGen.createSoulBasedOnGear(this);
         } else {
-            return GearCreationUtils.CreateStack(createData(), item);
+            return GearCreationUtils.CreateStack(createData(), item); // todo need to find item
         }
     }
 

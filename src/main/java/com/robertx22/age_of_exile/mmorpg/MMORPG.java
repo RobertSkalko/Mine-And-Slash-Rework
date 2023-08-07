@@ -16,7 +16,7 @@ import com.robertx22.age_of_exile.database.data.spells.entities.renders.RangerAr
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.stats.types.special.SpecialStats;
 import com.robertx22.age_of_exile.database.data.support_gem.SupportGems;
-import com.robertx22.age_of_exile.database.registrators.CurrencyItems;
+import com.robertx22.age_of_exile.database.registrators.Currencies;
 import com.robertx22.age_of_exile.database.registry.ExileDBInit;
 import com.robertx22.age_of_exile.mmorpg.event_registers.CommonEvents;
 import com.robertx22.age_of_exile.mmorpg.init.ClientInit;
@@ -96,7 +96,7 @@ public class MMORPG {
             ModLoadingContext.get()
                     .registerConfig(ModConfig.Type.CLIENT, ClientConfigs.clientSpec);
             bus.addListener(ClientInit::onInitializeClient);
-            
+
             ForgeEvents.registerForgeEvent(RegisterKeyMappingsEvent.class, x -> {
                 KeybindsRegister.register(x);
             });
@@ -176,7 +176,7 @@ public class MMORPG {
 
     public void commonSetupEvent(FMLCommonSetupEvent event) {
 
-        new CurrencyItems().registerAll();
+        new Currencies().registerAll();
 
         GeneratedData.addAllObjectsToGenerate();
 

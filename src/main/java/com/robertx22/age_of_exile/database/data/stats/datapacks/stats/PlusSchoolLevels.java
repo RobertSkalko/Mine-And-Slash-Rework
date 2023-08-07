@@ -45,7 +45,7 @@ public class PlusSchoolLevels extends BaseDatapackStat implements IAfterStatCalc
                             .getSpellsData()
                             .addToLevelsFromStat(x, (int) statdata.getValue());
                 });
-       
+
     }
 
     @Override

@@ -13,7 +13,7 @@ import com.robertx22.age_of_exile.mixin_ducks.ProjectileEntityDuck;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.DeathStatsData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
+import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -149,7 +149,8 @@ public class DamageEvent extends EffectEvent {
 
             if (this.source instanceof Player) {
 
-                GearItemData gear = Gear.Load(source.getMainHandItem());
+                
+                GearItemData gear = StackSaving.GEARS.loadFrom(source.getMainHandItem());
 
                 if (gear != null) {
                     float atkpersec = 1;

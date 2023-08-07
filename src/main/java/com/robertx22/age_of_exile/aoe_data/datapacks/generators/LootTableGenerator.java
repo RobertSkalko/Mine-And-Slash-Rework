@@ -1,8 +1,9 @@
 package com.robertx22.age_of_exile.aoe_data.datapacks.generators;
 
 import com.google.gson.Gson;
+import com.robertx22.age_of_exile.database.data.currency.base.Currency;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import com.robertx22.age_of_exile.mmorpg.registers.common.items.CurrencyItems;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.GemItems;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RuneItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
@@ -97,12 +98,12 @@ public class LootTableGenerator {
         LootTable.Builder currencies = LootTable.lootTable();
         LootPool.Builder curLoot = LootPool.lootPool();
         curLoot.setRolls(UniformGenerator.between(1, 3));
-        CurrencyItems.getAllCurrenciesFromRegistry()
-                .forEach(x -> {
-                    curLoot.add(LootItem.lootTableItem(x)
-                            .setWeight(x
-                                    .Weight()));
-                });
+
+        for (Currency x : ExileDB.CurrencyItems().getList()) {
+            curLoot.add(LootItem.lootTableItem(x.getCurrencyItem())
+                    .setWeight(x
+                            .Weight()));
+        }
         currencies.withPool(curLoot);
 
         map.put(RUNE_SALVAGE_RECIPE, runes.build());

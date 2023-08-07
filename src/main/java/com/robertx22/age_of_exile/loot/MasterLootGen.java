@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.loot;
 
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.loot.generators.*;
-import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
+import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ItemUtils;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.utils.SoundUtils;
@@ -77,7 +77,7 @@ public class MasterLootGen {
             items.addAll(new CurrencyLootGen(info).tryGenerate());
             items.addAll(new GemLootGen(info).tryGenerate());
             items.addAll(new RuneLootGen(info).tryGenerate());
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -100,8 +100,9 @@ public class MasterLootGen {
         List<ItemStack> items = generateLoot(victim, killer);
         for (ItemStack stack : items) {
 
-            if (Gear.has(stack)) {
-                GearRarity rar = Gear.Load(stack)
+
+            if (StackSaving.GEARS.has(stack)) {
+                GearRarity rar = StackSaving.GEARS.loadFrom(stack)
                         .getRarity();
                 if (rar.is_unique_item) {
                     SoundUtils.ding(victim.level(), victim.blockPosition());

@@ -7,7 +7,7 @@ import com.robertx22.age_of_exile.database.data.EntityConfig;
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
 import com.robertx22.age_of_exile.database.data.aura.AuraGem;
 import com.robertx22.age_of_exile.database.data.base_stats.BaseStatsConfig;
-import com.robertx22.age_of_exile.database.data.currency.base.CurrencyItem;
+import com.robertx22.age_of_exile.database.data.currency.base.Currency;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
@@ -88,7 +88,7 @@ public class ExileDB {
     }
 
 
-    public static ExileRegistryContainer<CurrencyItem> CurrencyItems() {
+    public static ExileRegistryContainer<Currency> CurrencyItems() {
         return Database.getRegistry(ExileRegistryTypes.CURRENCY_ITEMS);
     }
 

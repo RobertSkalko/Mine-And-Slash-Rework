@@ -11,7 +11,6 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.*;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.*;
-import com.robertx22.age_of_exile.saveclasses.util.NbtKey;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
@@ -34,10 +33,8 @@ import java.util.stream.Collectors;
 
 public class GearItemData implements ICommonDataItem<GearRarity> {
 
-    public static NbtKey.Stringkey RARITY = new NbtKey.Stringkey(IRarity.COMMON_ID, "rar");
+    //public static NbtKey.Stringkey RARITY = new NbtKey.Stringkey(IRarity.COMMON_ID, "rar");
 
-
-    public transient ItemStack stack = ItemStack.EMPTY;
 
     // Stats
     public BaseStatsData baseStats = new BaseStatsData();
@@ -138,9 +135,28 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         return pot;
     }
 
-    public void setPotential(int potential) {
-        this.pot = pot;
+    public ChatFormatting getPotentialColor() {
+        if (pot > 800) {
+            return ChatFormatting.LIGHT_PURPLE;
+        }
+        if (pot > 600) {
+            return ChatFormatting.GOLD;
+        }
+        if (pot > 400) {
+            return ChatFormatting.AQUA;
+        }
+        if (pot > 150) {
+            return ChatFormatting.GREEN;
+        }
+        if (pot > 100) {
+            return ChatFormatting.YELLOW;
+        } else {
+            return ChatFormatting.RED;
+        }
+    }
 
+    public void setPotential(int potential) {
+        this.pot = potential;
         if (pot < 0) {
             pot = 0;
         }

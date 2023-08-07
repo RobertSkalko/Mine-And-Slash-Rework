@@ -105,7 +105,7 @@ public abstract class EffectEvent implements IGUID {
 
     protected void TryApplyEffects(LivingEntity en, EntityData data, EffectSides side) {
 
-        
+
         if (this.data.isCanceled()) {
             return;
         }

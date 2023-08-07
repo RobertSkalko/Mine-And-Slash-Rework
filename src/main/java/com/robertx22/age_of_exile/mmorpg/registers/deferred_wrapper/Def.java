@@ -30,13 +30,7 @@ public class Def {
         return obj;
     }
 
-    /*
-    public static <T extends Item & IGUID> RegObj<T> item(Supplier<T> object) {
-        return item(object.get()
-                .GUID(), object);
-    }
-    // todo not lazy
-     */
+
     public static <T extends Item> RegObj<T> item(Supplier<T> object, String id) {
         return item(id, object);
     }
@@ -84,7 +78,7 @@ public class Def {
         return wrapper;
     }
 
-     
+
     public static RegObj<SoundEvent> sound(String id) {
         Supplier<SoundEvent> sup = () -> SoundEvent.createFixedRangeEvent(new ResourceLocation(SlashRef.MODID, id), 16); // todo idk?
         RegistryObject<SoundEvent> reg = SlashDeferred.SOUNDS.register(id, sup);

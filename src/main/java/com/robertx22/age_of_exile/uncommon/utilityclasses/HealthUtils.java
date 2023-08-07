@@ -15,8 +15,8 @@ public class HealthUtils {
     public static float vanillaToReal(LivingEntity en, float dmg) {
 
         return Health.getInstance()
-            .scale(ModType.FLAT, dmg, Load.Unit(en)
-                .getLevel());
+                .scale(ModType.FLAT, dmg, Load.Unit(en)
+                        .getLevel());
     }
 
     public static float realToVanilla(LivingEntity en, float dmg) {
@@ -38,8 +38,8 @@ public class HealthUtils {
 
         try {
             return data.getUnit()
-                .healthData()
-                .getValue();
+                    .healthData()
+                    .getValue();
         } catch (Exception e) {
             return 1;
         }

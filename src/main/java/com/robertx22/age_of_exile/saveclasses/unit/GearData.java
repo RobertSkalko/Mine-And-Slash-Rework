@@ -3,7 +3,7 @@ package com.robertx22.age_of_exile.saveclasses.unit;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
+import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.RepairUtils;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
@@ -18,9 +18,10 @@ public class GearData {
     public GearData(ItemStack stack, EquipmentSlot slot, EntityData data) {
         this.stack = stack;
         if (stack != null) {
-            this.gear = Gear.Load(stack);
+            this.gear = StackSaving.GEARS.loadFrom(stack);
         }
         this.slot = slot;
+        
 
         calcStatUtilization(data);
     }

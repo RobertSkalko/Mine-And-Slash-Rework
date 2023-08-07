@@ -36,6 +36,10 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
 
     public Affix.Type type;
 
+    public void setTier(int t) {
+        this.t = t;
+    }
+
 
     @Override
     public MinMax getMinMax(GearItemData gear) {

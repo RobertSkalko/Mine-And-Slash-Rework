@@ -34,8 +34,8 @@ public class MoreXPerYOf extends BaseDatapackStat implements IAffectsStats {
         this.is_long = true;
 
         this.locname = ChatFormatting.GRAY + "Gain " + ChatFormatting.GREEN +
-            Stat.VAL1 + " " + stat_to_add_to.getIconNameFormat() + " for each " + perEach + " "
-            + adder_stat.getIconNameFormat();
+                Stat.VAL1 + " " + stat_to_add_to.getIconNameFormat() + " for each " + perEach + " "
+                + adder_stat.getIconNameFormat();
     }
 
     public MoreXPerYOf(String adder_stat, String stat_to_add_to) {
@@ -52,9 +52,9 @@ public class MoreXPerYOf extends BaseDatapackStat implements IAffectsStats {
     @Override
     public void affectStats(EntityData data, InCalcStatData statData) {
         InCalcStatData add_to = data.getUnit()
-            .getStatInCalculation(stat_to_add_to);
+                .getStatInCalculation(stat_to_add_to);
         InCalcStatData adder = data.getUnit()
-            .getStatInCalculation(adder_stat);
+                .getStatInCalculation(adder_stat);
 
         float val = (int) (adder.getValue() / perEach) * statData.getValue();
 

@@ -246,7 +246,7 @@ public class OnServerTick {
         public void tick(ServerPlayer player) {
             TICK_ACTIONS.forEach(x -> {
                 x.tick(player, this);
-                
+
             });
         }
     }

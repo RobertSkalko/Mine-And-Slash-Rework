@@ -1,13 +1,12 @@
 package com.robertx22.age_of_exile.mixin_methods;
 
-import com.robertx22.age_of_exile.database.data.currency.base.ICurrencyItemEffect;
+import com.robertx22.age_of_exile.database.data.currency.IItemAsCurrency;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.age_of_exile.mmorpg.ForgeEvents;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulData;
 import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulItem;
-import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
@@ -32,7 +31,7 @@ public class OnItemInteract {
 
             if (stack.isDamaged() && cursor.getItem() instanceof SalvagedDustItem) {
 
-                GearItemData gear = Gear.Load(stack);
+                GearItemData gear = StackSaving.GEARS.loadFrom(stack);
 
                 if (gear == null) {
                     return;
@@ -56,7 +55,7 @@ public class OnItemInteract {
                         success = true;
                     }
                 }
-            } else if (cursor.getItem() instanceof ICurrencyItemEffect) {
+            } else if (cursor.getItem() instanceof IItemAsCurrency) {
                 LocReqContext ctx = new LocReqContext(player, stack, cursor);
                 if (ctx.effect.canItemBeModified(ctx)) {
                     ItemStack result = ctx.effect.modifyItem(ctx).stack;
@@ -86,7 +85,7 @@ public class OnItemInteract {
                 }
             } else if (cursor.getItem() == SlashItems.SOCKET_EXTRACTOR.get()) {
 
-                GearItemData gear = Gear.Load(stack);
+                GearItemData gear = StackSaving.GEARS.loadFrom(stack);
 
                 if (gear != null) {
                     if (gear.sockets != null && gear.sockets.sockets.size() > 0) {
@@ -95,7 +94,7 @@ public class OnItemInteract {
                                     .getGem()
                                     .getItem());
                             gear.sockets.sockets.remove(0);
-                            Gear.Save(stack, gear);
+                            StackSaving.GEARS.saveTo(stack, gear);
                             PlayerUtils.giveItem(gem, player);
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -105,6 +104,8 @@ public class OnItemInteract {
                         //ci.cancel();
                         return;
                     }
+
+
                 }
             }
 

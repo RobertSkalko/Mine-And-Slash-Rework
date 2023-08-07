@@ -22,7 +22,7 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.unit.*;
 import com.robertx22.age_of_exile.threat_aggro.ThreatData;
 import com.robertx22.age_of_exile.uncommon.datasaving.CustomExactStats;
-import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
+import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.datasaving.UnitNbt;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
@@ -452,7 +452,7 @@ public class EntityData implements ICap, INeededForClient {
     }
 
     public GearItemData setupWeaponData() {
-        return Gear.Load(entity.getMainHandItem());
+        return StackSaving.GEARS.loadFrom(entity.getMainHandItem());
     }
 
     public boolean canUseWeapon(GearItemData weaponData) {

@@ -38,7 +38,7 @@ public class StaffWeapon extends ModWeapon implements IAutoModel {
             if (!world.isClientSide) {
 
                 /*
-                GearItemData gear = Gear.Load(stack);
+                GearItemData gear = StackSaving.GEARS.loadFrom(stack);
 
                 if (gear != null && gear.hasSpell()) {
                     Spell spell = gear.getSpell();

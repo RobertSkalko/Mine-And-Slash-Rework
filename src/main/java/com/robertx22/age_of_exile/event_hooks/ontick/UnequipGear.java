@@ -2,8 +2,8 @@ package com.robertx22.age_of_exile.event_hooks.ontick;
 
 import com.robertx22.age_of_exile.a_libraries.curios.MyCurioUtils;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -18,7 +18,7 @@ import java.util.List;
 
 public class UnequipGear {
 
-    
+
     // dont drop weapons becasuse then newbies can't use stuff like axes at low level!
 
     public static List<EquipmentSlot> SLOTS = Arrays.asList(EquipmentSlot.FEET, EquipmentSlot.LEGS, EquipmentSlot.CHEST, EquipmentSlot.HEAD, EquipmentSlot.OFFHAND);
@@ -55,8 +55,9 @@ public class UnequipGear {
 
             ItemStack stack = player.getItemBySlot(slot);
 
-            GearItemData gear = Gear.Load(stack);
+            GearItemData gear = StackSaving.GEARS.loadFrom(stack);
 
+            
             if (gear != null) {
                 if (!gear.canPlayerWear(Load.Unit(player))) {
                     drop(player, slot, stack, Component.literal("You do not meet the requirements of that item.").withStyle(ChatFormatting.RED));
@@ -74,7 +75,7 @@ public class UnequipGear {
                         .getStackInSlot(i);
 
                 if (!stack.isEmpty()) {
-                    GearItemData gear = Gear.Load(stack);
+                    GearItemData gear = StackSaving.GEARS.loadFrom(stack);
 
                     if (gear != null) {
                         if (!gear.canPlayerWear(Load.Unit(player))) {

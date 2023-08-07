@@ -16,16 +16,14 @@ import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 
 import java.util.function.Function;
 
-import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
-
 public class RegeneratePercentStat extends Stat {
 
     public static RegeneratePercentStat HEALTH = new RegeneratePercentStat(Health.getInstance(), ResourceType.health, x -> x.getUnit()
-        .healthData()
-        .getValue());
+            .healthData()
+            .getValue());
     public static RegeneratePercentStat MANA = new RegeneratePercentStat(Mana.getInstance(), ResourceType.mana, x -> x.getUnit()
-        .manaData()
-        .getValue());
+            .manaData()
+            .getValue());
 
     Stat statRestored;
     ResourceType type;

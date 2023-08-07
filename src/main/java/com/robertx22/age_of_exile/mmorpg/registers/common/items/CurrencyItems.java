@@ -1,40 +1,32 @@
 package com.robertx22.age_of_exile.mmorpg.registers.common.items;
 
-import com.robertx22.age_of_exile.database.data.currency.OrbOfTransmutationItem;
-import com.robertx22.age_of_exile.database.data.currency.base.CurrencyItem;
+import com.robertx22.age_of_exile.database.data.currency.CurrencyItem;
+import com.robertx22.age_of_exile.database.data.currency.base.Currency;
+import com.robertx22.age_of_exile.database.registrators.Currencies;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
-import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.function.Supplier;
 
 public class CurrencyItems {
 
     public static void init() {
 
+        for (Currency cur : Currencies.ALL) {
+            currency(() -> new CurrencyItem(cur), cur.GUID());
+        }
     }
 
-    public static List<CurrencyItem> getAllCurrenciesFromRegistry() {
-        return ForgeRegistries.ITEMS.getValues()
-                .stream()
-                .filter(x -> x instanceof CurrencyItem)
-                .map(x -> (CurrencyItem) x)
-                .collect(Collectors.toList());
+
+    public static HashMap<String, RegObj<CurrencyItem>> map = new HashMap<>();
+
+
+    public static RegObj<CurrencyItem> currency(Supplier<CurrencyItem> object, String id) {
+        var b = Def.item("currency/" + id, object);
+        map.put(id, b);
+        return b;
     }
 
-    public static RegObj<CurrencyItem> ORB_OF_TRANSMUTATION = Def.item(() -> new OrbOfTransmutationItem(), "orb_of_transmutation");
-
-
-/*
-     public static RegObj<CurrencyItem> ORB_OF_DISORDER = Def.item(() -> new OrbOfDisorder());
-    public static RegObj<CurrencyItem> ORB_OF_TURBULENCE = Def.item(() -> new OrbOfTurbulence());
-    public static RegObj<CurrencyItem> LEAF_OF_CHANGE = Def.item(() -> new LeafOfChangeItem());
-    public static RegObj<CurrencyItem> ORB_OF_BLESSING = Def.item(() -> new OrbOfBlessingItem());
-    public static RegObj<CurrencyItem> ORB_OF_UNIQUE_BLESSING = Def.item(() -> new OrbOfUniqueBlessingItem());
-    public static RegObj<CurrencyItem> ORB_OF_CORRUPTION = Def.item(() -> new OrbOfCorruption());
-
-
- */
 
 }

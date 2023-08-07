@@ -1,8 +1,8 @@
 package com.robertx22.age_of_exile.damage_hooks.util;
 
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -19,8 +19,9 @@ public class WeaponFinderUtil {
             return ItemStack.EMPTY;
         }
 
+
         ItemStack stack = ((LivingEntity) source.getEntity()).getMainHandItem();
-        GearItemData gear = Gear.Load(stack);
+        GearItemData gear = StackSaving.GEARS.loadFrom(stack);
 
         if (gear == null) {
 
@@ -34,7 +35,7 @@ public class WeaponFinderUtil {
                     if (attacker instanceof LivingEntity) {
 
                         stack = getWeaponStackFromThrownEntity(sourceEntity);
-                        gear = Gear.Load(stack);
+                        gear = StackSaving.GEARS.loadFrom(stack);
 
                         if (gear == null) {
                             stack = ItemStack.EMPTY;
@@ -66,7 +67,7 @@ public class WeaponFinderUtil {
                 .isAssignableFrom(ItemStack.class)) {
                 try {
                     ItemStack stack = (ItemStack) field.get(en);
-                    GearItemData gear = Gear.Load(stack);
+                    GearItemData gear = StackSaving.GEARS.loadFrom(stack);
                     if (gear != null) {
                         return stack;
                     }
@@ -82,7 +83,7 @@ public class WeaponFinderUtil {
             for (SynchedEntityData.DataValue<?> entry : en.getEntityData().getNonDefaultValues()
             ) {
                 if (entry.value() instanceof ItemStack) {
-                    GearItemData gear = Gear.Load((ItemStack) entry.value());
+                    GearItemData gear = StackSaving.GEARS.loadFrom((ItemStack) entry.value());
                     if (gear != null) {
                         return (ItemStack) entry.value();
                     }
@@ -103,7 +104,7 @@ public class WeaponFinderUtil {
                         if (nbt.get(key) instanceof CompoundTag) {
                             ItemStack s = tryGetStackFromNbt(nbt.get(key));
 
-                            if (!s.isEmpty() && Gear.has(s)) {
+                            if (!s.isEmpty() && StackSaving.GEARS.has(s)) {
                                 return s;
                             }
 
@@ -114,7 +115,7 @@ public class WeaponFinderUtil {
                             for (String key2 : nbt2.getAllKeys()) {
                                 if (nbt.get(key) instanceof CompoundTag) {
                                     ItemStack s2 = tryGetStackFromNbt(nbt2.get(key2));
-                                    if (!s2.isEmpty() && Gear.has(s2)) {
+                                    if (!s2.isEmpty() && StackSaving.GEARS.has(s2)) {
                                         return s2;
                                     }
 
@@ -131,7 +132,7 @@ public class WeaponFinderUtil {
             ItemStack tryWholeNbt = ItemStack.of(nbt);
 
             if (tryWholeNbt != null) {
-                GearItemData gear = Gear.Load(tryWholeNbt);
+                GearItemData gear = StackSaving.GEARS.loadFrom(tryWholeNbt);
                 if (gear != null) {
                     return tryWholeNbt;
                 }

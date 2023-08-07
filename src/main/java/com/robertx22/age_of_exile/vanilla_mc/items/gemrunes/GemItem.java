@@ -7,12 +7,11 @@ import com.robertx22.age_of_exile.aoe_data.datapacks.models.IAutoModel;
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.ItemModelManager;
 import com.robertx22.age_of_exile.database.data.BaseRuneGem;
 import com.robertx22.age_of_exile.database.data.StatModifier;
-import com.robertx22.age_of_exile.database.data.currency.base.ICurrencyItemEffect;
-import com.robertx22.age_of_exile.database.data.currency.loc_reqs.BaseLocRequirement;
+import com.robertx22.age_of_exile.database.data.currency.IItemAsCurrency;
+import com.robertx22.age_of_exile.database.data.currency.base.Currency;
+import com.robertx22.age_of_exile.database.data.currency.base.GearCurrency;
+import com.robertx22.age_of_exile.database.data.currency.base.GearOutcome;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
-import com.robertx22.age_of_exile.database.data.currency.loc_reqs.SimpleGearLocReq;
-import com.robertx22.age_of_exile.database.data.currency.loc_reqs.gems.NoDuplicateSocketsReq;
-import com.robertx22.age_of_exile.database.data.currency.loc_reqs.item_types.GearReq;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.data.gems.Gem;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
@@ -25,15 +24,17 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.SocketData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
-import com.robertx22.age_of_exile.uncommon.datasaving.Gear;
+import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
+import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.vanilla_mc.packets.TotemAnimationPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.registry.IGUID;
+import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
@@ -56,7 +57,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAutoLocName, ICurrencyItemEffect {
+public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAutoLocName, IItemAsCurrency, IWeighted {
 
     @Override
     public AutoLocGroup locNameGroup() {
@@ -66,6 +67,11 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
     @Override
     public Component getName(ItemStack stack) {
         return Component.translatable(this.getDescriptionId()).withStyle(gemType.format);
+    }
+
+    @Override
+    public int Weight() {
+        return this.weight;
     }
 
     @Override
@@ -159,29 +165,6 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
     static float MIN_ELE_DMG = 2;
     static float MAX_ELE_DMG = 10;
 
-    @Override
-    public ItemStack internalModifyMethod(LocReqContext ctx, ItemStack stack, ItemStack currency) {
-
-        GemItem gitem = (GemItem) currency.getItem();
-        Gem gem = gitem.getGem();
-        GearItemData gear = Gear.Load(stack);
-
-        SocketData socket = new SocketData();
-        socket.gem = gem.identifier;
-
-        gear.sockets.sockets.add(socket);
-
-        ctx.player.displayClientMessage(Component.literal("Gem Socketed"), false);
-
-        Gear.Save(stack, gear);
-
-        return stack;
-    }
-
-    @Override
-    public List<BaseLocRequirement> requirements() {
-        return Arrays.asList(GearReq.INSTANCE, SimpleGearLocReq.HAS_EMPTY_SOCKETS, new NoDuplicateSocketsReq());
-    }
 
     @Override
     public BaseRuneGem getBaseRuneGem() {
@@ -197,6 +180,79 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
     public List<StatModifier> getStatModsForSerialization(SlotFamily family) {
         return gemType.stats.getFor(family);
     }
+
+    @Override
+    public Currency currencyEffect() {
+        return new GearCurrency() {
+            @Override
+            public List<GearOutcome> getOutcomes() {
+                return Arrays.asList(
+                        new GearOutcome() {
+                            @Override
+                            public Words getName() {
+                                return Words.None;
+                            }
+
+                            @Override
+                            public OutcomeType getOutcomeType() {
+                                return OutcomeType.GOOD;
+                            }
+
+                            @Override
+                            public ItemStack modify(LocReqContext ctx, GearItemData gear, ItemStack stack) {
+                                GemItem gitem = (GemItem) stack.getItem();
+                                Gem gem = gitem.getGem();
+
+                                SocketData socket = new SocketData();
+                                socket.gem = gem.identifier;
+
+                                gear.sockets.sockets.add(socket);
+
+                                ctx.player.displayClientMessage(Component.literal("Gem Socketed"), false);
+
+                                
+                                StackSaving.GEARS.saveTo(stack, gear);
+
+
+                                return stack;
+                            }
+
+                            @Override
+                            public int Weight() {
+                                return 1000;
+                            }
+                        }
+                );
+            }
+
+            @Override
+            public boolean canBeModified(GearItemData data) {
+                return data.getEmptySockets() > 0;
+            }
+
+
+            @Override
+            public String locDescForLangFile() {
+                return "Sockets the gem";
+            }
+
+            @Override
+            public String locNameForLangFile() {
+                return locNameForLangFile();
+            }
+
+            @Override
+            public String GUID() {
+                return GUID();
+            }
+
+            @Override
+            public int Weight() {
+                return weight;
+            }
+        };
+    }
+
 
     public static class EleGem extends GemStatPerTypes {
         public Elements ele;

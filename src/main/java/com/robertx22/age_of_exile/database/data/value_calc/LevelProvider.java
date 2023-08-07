@@ -26,14 +26,14 @@ public class LevelProvider {
 
     public int getCurrentLevel() {
         int lvl = Load.spells(caster)
-            .getLevelOf(maxLevelProvider.GUID());
+                .getLevelOf(maxLevelProvider.GUID());
 
         return lvl;
     }
 
     public int getCasterLevel() {
         return Load.Unit(caster)
-            .getLevel();
+                .getLevel();
     }
 
     public EntityData getCasterData() {

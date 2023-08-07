@@ -30,10 +30,10 @@ public class AddPerPercentOfOther extends BaseDatapackStat implements IAffectsSt
         this.is_long = true;
 
         this.locname = ChatFormatting.GRAY + "Gain " + ChatFormatting.GREEN +
-            Stat.VAL1 + "%" + ChatFormatting.GRAY + " of your "
-            + adder_stat.getIconNameFormat()
-            + ChatFormatting.GRAY + " as extra "
-            + stat_to_add_to.getIconNameFormat();
+                Stat.VAL1 + "%" + ChatFormatting.GRAY + " of your "
+                + adder_stat.getIconNameFormat()
+                + ChatFormatting.GRAY + " as extra "
+                + stat_to_add_to.getIconNameFormat();
     }
 
     public AddPerPercentOfOther(String adder_stat, String stat_to_add_to) {
@@ -50,11 +50,11 @@ public class AddPerPercentOfOther extends BaseDatapackStat implements IAffectsSt
     @Override
     public void affectStats(EntityData data, InCalcStatData statData) {
         InCalcStatData add_to = data.getUnit()
-            .getStatInCalculation(stat_to_add_to);
+                .getStatInCalculation(stat_to_add_to);
         InCalcStatData adder = data.getUnit()
-            .getStatInCalculation(adder_stat);
+                .getStatInCalculation(adder_stat);
         InCalcStatData thisstat = data.getUnit()
-            .getStatInCalculation(this.GUID());
+                .getStatInCalculation(this.GUID());
 
         float multi = thisstat.getValue() / 100F;
         float val = adder.getValue() * multi;

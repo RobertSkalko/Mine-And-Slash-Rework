@@ -37,7 +37,7 @@ public class PlayerInventoryMixin {
 
                     BackpackInfo info = BackpackContainer.getInfo(this.player, bagstack);
 
-                    GearItemData gear = Gear.Load(stack);
+                    GearItemData gear = StackSaving.GEARS.loadFrom(stack);
                     if (gear != null) {
 
                         if (info.canSalvage(stack)) {
