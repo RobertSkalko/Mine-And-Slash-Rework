@@ -49,6 +49,7 @@ public class SocketedGem {
     }
 
     public ItemStack getSkill() {
+        
         return inv.getItem(skillGem);
     }
 
