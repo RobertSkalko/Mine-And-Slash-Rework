@@ -36,36 +36,6 @@ public class SpellCastingData {
 
     public ChargeData charges = new ChargeData();
 
-    public String imbued_spell = "";
-
-    public int imbued_spell_stacks = 0;
-
-    public void imbueSpell(Spell spell, int amount) {
-        this.imbued_spell = spell.GUID();
-        this.imbued_spell_stacks = amount;
-    }
-
-    public void consumeImbuedSpell() {
-        this.imbued_spell_stacks--;
-        if (imbued_spell_stacks < 1) {
-            imbued_spell = "";
-        }
-    }
-
-    public boolean tryCastImbuedSpell(LivingEntity en) {
-        if (imbued_spell_stacks > 0) {
-
-            Spell spell = ExileDB.Spells()
-                    .get(imbued_spell);
-
-            if (spell != null) {
-                spell.cast(new SpellCastContext(en, 0, spell), false);
-                consumeImbuedSpell();
-                return true;
-            }
-        }
-        return false;
-    }
 
     public void cancelCast(LivingEntity entity) {
         try {
@@ -162,7 +132,7 @@ public class SpellCastingData {
                 int timesToCast = ctx.spell.getConfig().times_to_cast;
 
                 if (timesToCast == 1) {
-                    spell.cast(ctx, true);
+                    spell.cast(ctx);
                 }
 
                 onSpellCast(ctx);

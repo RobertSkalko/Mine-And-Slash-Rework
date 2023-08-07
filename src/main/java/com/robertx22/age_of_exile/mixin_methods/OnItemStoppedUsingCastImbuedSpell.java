@@ -1,30 +1,20 @@
 package com.robertx22.age_of_exile.mixin_methods;
 
-import com.robertx22.age_of_exile.mmorpg.ForgeEvents;
-import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BowItem;
-import net.minecraft.world.item.CrossbowItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
 public class OnItemStoppedUsingCastImbuedSpell {
 
     public static void register() {
 
+        /*
         ForgeEvents.registerForgeEvent(LivingEntityUseItemEvent.Stop.class, event -> {
             if (!event.getEntity().level().isClientSide) {
-                onStoppedUsing(event.getItem(), event.getEntity(), event.getDuration());
+                //onStoppedUsing(event.getItem(), event.getEntity(), event.getDuration());
             }
         });
+         */
 
     }
 
+    /*
     public static boolean canCastImbuedSpell(LivingEntity user) {
 
         ItemStack stack = user.getUseItem();
@@ -52,6 +42,9 @@ public class OnItemStoppedUsingCastImbuedSpell {
 
     }
 
+
+     */
+    /*
     public static void onStoppedUsing(ItemStack stack, LivingEntity user, int remainingUseTicks) {
 
         if (canCastImbuedSpell(user)) {
@@ -63,6 +56,9 @@ public class OnItemStoppedUsingCastImbuedSpell {
 
     }
 
+     */
+
+    /*
     public static void crossbow(ItemStack stack, Level world, Player user, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> ci) {
 
         try {
@@ -83,4 +79,6 @@ public class OnItemStoppedUsingCastImbuedSpell {
         }
 
     }
+
+     */
 }

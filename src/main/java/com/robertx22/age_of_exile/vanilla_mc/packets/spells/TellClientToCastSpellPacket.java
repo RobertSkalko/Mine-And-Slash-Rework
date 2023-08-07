@@ -6,9 +6,9 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
 
 public class TellClientToCastSpellPacket extends MyPacket<TellClientToCastSpellPacket> {
 
@@ -46,10 +46,10 @@ public class TellClientToCastSpellPacket extends MyPacket<TellClientToCastSpellP
         LivingEntity en = (LivingEntity) ctx.getPlayer().level().getEntity(enid);
 
         Spell spell = ExileDB.Spells()
-            .get(spellid);
+                .get(spellid);
         SpellCastContext c = new SpellCastContext(en, 0, spell);
 
-        spell.cast(c, true);
+        spell.cast(c);
 
     }
 

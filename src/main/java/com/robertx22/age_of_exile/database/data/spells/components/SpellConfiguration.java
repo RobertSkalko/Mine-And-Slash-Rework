@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.database.data.spells.components;
 
-import com.robertx22.age_of_exile.database.data.spells.SpellCastType;
 import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeapon;
 import com.robertx22.age_of_exile.database.data.value_calc.LeveledValue;
@@ -18,13 +17,12 @@ public class SpellConfiguration {
     public int times_to_cast = 1;
     public int charges = 0;
     public int charge_regen = 0;
-    public int imbues = 1;
+    public int imbues = 0;
     public String charge_name = "";
     private int cast_time_ticks = 0;
     public int cooldown_ticks = 20;
     public PlayStyle style = PlayStyle.INT;
     public List<SpellTag> tags = new ArrayList<>();
-    public SpellCastType cast_type = SpellCastType.NORMAL;
     public boolean scale_mana_cost_to_player_lvl = false;
 
     public int getCastTimeTicks() {
@@ -47,10 +45,6 @@ public class SpellConfiguration {
         return this;
     }
 
-    public SpellConfiguration setCastType(SpellCastType type) {
-        this.cast_type = type;
-        return this;
-    }
 
     public boolean isProjectile() {
         return tags.contains(SpellTag.projectile);
@@ -58,6 +52,11 @@ public class SpellConfiguration {
 
     public SpellConfiguration setSwingArm() {
         this.swing_arm = true;
+        return this;
+    }
+
+    public SpellConfiguration setImbue(int times) {
+        this.imbues = times;
         return this;
     }
 

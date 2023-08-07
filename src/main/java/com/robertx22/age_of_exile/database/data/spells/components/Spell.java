@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.database.data.spells.components;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellDesc;
 import com.robertx22.age_of_exile.database.data.StatModifier;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
-import com.robertx22.age_of_exile.database.data.spells.SpellCastType;
 import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
@@ -110,7 +109,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
                 GearItemData gear = StackSaving.GEARS.loadFrom(stack);
 
-                
+
                 if (gear != null) {
                     return gear.GetBaseGearType().weapon_type;
                 }
@@ -141,10 +140,10 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
             }
 
             if (ctx.isLastCastTick) {
-                this.cast(ctx, true);
+                this.cast(ctx);
             } else {
                 if (ctx.ticksInUse > 0 && ctx.ticksInUse % castEveryXTicks == 0) {
-                    this.cast(ctx, true);
+                    this.cast(ctx);
                 }
             }
 
@@ -154,7 +153,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
     }
 
-    public void cast(SpellCastContext ctx, boolean imbue) {
+    public void cast(SpellCastContext ctx) {
 
         LivingEntity caster = ctx.caster;
 
@@ -164,13 +163,8 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
             caster.swingTime = -1; // this makes sure hand swings
             caster.swing(InteractionHand.MAIN_HAND);
         }
+        attached.onCast(SpellCtx.onCast(caster, ctx.calcData));
 
-        if (imbue && this.config.cast_type == SpellCastType.USE_ITEM) {
-            ctx.spellsCap.getCastingData()
-                    .imbueSpell(this, config.imbues);
-        } else {
-            attached.onCast(SpellCtx.onCast(caster, ctx.calcData));
-        }
     }
 
     public final int getCooldownTicks(SpellCastContext ctx) {
