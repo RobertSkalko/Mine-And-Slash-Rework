@@ -36,12 +36,15 @@ public class MySpriteRenderer<T extends Entity & IMyRenderAsItem> extends Entity
 
     @Override
     public void render(T entity, float yaw, float tickDelta, PoseStack matrices, MultiBufferSource vertexConsumers, int light) {
-        if (entity.tickCount >= 3) {
+        if (entity.tickCount >= 2 || !(this.entityRenderDispatcher.camera.getEntity().distanceToSqr(entity) < 12.25D)) {
             matrices.pushPose();
-            matrices.scale(this.scale, this.scale, this.scale);
+
+            float scale = 1; // todo
+
+            matrices.scale(scale, scale, scale);
             matrices.mulPose(this.entityRenderDispatcher.cameraOrientation());
             matrices.mulPose(Axis.YP.rotationDegrees(180.0F));
-         
+
             this.itemRenderer.renderStatic(entity.getItem(), ItemDisplayContext.GROUND, light, OverlayTexture.NO_OVERLAY, matrices, vertexConsumers, entity.level(), entity.getId());
 
 

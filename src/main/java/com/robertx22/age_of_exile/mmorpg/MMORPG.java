@@ -10,9 +10,6 @@ import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.aura.AuraGems;
 import com.robertx22.age_of_exile.database.data.spells.components.conditions.EffectCondition;
-import com.robertx22.age_of_exile.database.data.spells.entities.renders.ModTridentRenderer;
-import com.robertx22.age_of_exile.database.data.spells.entities.renders.MySpriteRenderer;
-import com.robertx22.age_of_exile.database.data.spells.entities.renders.RangerArrowRenderer;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.stats.types.special.SpecialStats;
 import com.robertx22.age_of_exile.database.data.support_gem.SupportGems;
@@ -21,10 +18,10 @@ import com.robertx22.age_of_exile.database.registry.ExileDBInit;
 import com.robertx22.age_of_exile.mmorpg.event_registers.CommonEvents;
 import com.robertx22.age_of_exile.mmorpg.init.ClientInit;
 import com.robertx22.age_of_exile.mmorpg.registers.client.KeybindsRegister;
+import com.robertx22.age_of_exile.mmorpg.registers.client.RenderRegister;
 import com.robertx22.age_of_exile.mmorpg.registers.client.S2CPacketRegister;
 import com.robertx22.age_of_exile.mmorpg.registers.common.C2SPacketRegister;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashCapabilities;
-import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashItemTags;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.SlashDeferred;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
@@ -32,8 +29,6 @@ import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.utils.Watch;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.FallingBlockRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.api.distmarker.Dist;
@@ -100,16 +95,12 @@ public class MMORPG {
             ForgeEvents.registerForgeEvent(RegisterKeyMappingsEvent.class, x -> {
                 KeybindsRegister.register(x);
             });
+            
             //bus.addListener(KeybindsRegister::register);
-
             FMLJavaModLoadingContext.get().getModEventBus().addListener((Consumer<EntityRenderersEvent.RegisterRenderers>) x -> {
-                x.registerEntityRenderer(SlashEntities.SIMPLE_PROJECTILE.get(), (d) -> new MySpriteRenderer<>(d, Minecraft.getInstance()
-                        .getItemRenderer()));
-
-                x.registerEntityRenderer(SlashEntities.SIMPLE_ARROW.get(), m -> new RangerArrowRenderer(m));
-                x.registerEntityRenderer(SlashEntities.SIMPLE_BLOCK_ENTITY.get(), m -> new FallingBlockRenderer(m));
-                x.registerEntityRenderer(SlashEntities.SIMPLE_TRIDENT.get(), m -> new ModTridentRenderer(m));
+                RenderRegister.regRenders(x);
             });
+
         });
 
 

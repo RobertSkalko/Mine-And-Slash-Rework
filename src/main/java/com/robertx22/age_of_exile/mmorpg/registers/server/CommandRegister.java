@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.vanilla_mc.commands.entity.SetEntityRarity;
 import com.robertx22.age_of_exile.vanilla_mc.commands.entity.SetLevel;
 import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GiveExactUnique;
 import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GiveGear;
+import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GiveSpell;
 import com.robertx22.age_of_exile.vanilla_mc.commands.open_gui.OpenHub;
 import com.robertx22.age_of_exile.vanilla_mc.commands.reset.ResetSpellCooldowns;
 import com.robertx22.age_of_exile.vanilla_mc.commands.stats.ClearStats;
@@ -29,11 +30,12 @@ public class CommandRegister {
 
         GiveExactUnique.register(dispatcher);
         GiveGear.register(dispatcher);
+        GiveSpell.register(dispatcher);
         SetEntityRarity.register(dispatcher);
         SetLevel.register(dispatcher);
         GiveExp.register(dispatcher);
 
-      
+
         ResetSpellCooldowns.register(dispatcher);
         SyncDatapacks.register(dispatcher);
 

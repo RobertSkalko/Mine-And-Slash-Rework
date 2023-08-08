@@ -173,8 +173,8 @@ all_fire_damage_big
 int
 all_fire_damage
 fire_penetration
-trident_damage_big
 sword_damage
+trident_damage_big
 spell_lightning_damage_big
 dodge_percent
 health_on_hit
