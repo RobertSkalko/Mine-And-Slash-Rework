@@ -15,7 +15,7 @@ public class DataGenHook implements DataProvider {
 
     @Override
     public CompletableFuture<?> run(CachedOutput pOutput) {
-        
+
         new LootTableGenerator().generateAll(pOutput);
         new RecipeGenerator().generateAll(pOutput);
 
@@ -26,6 +26,6 @@ public class DataGenHook implements DataProvider {
 
     @Override
     public String getName() {
-        return null;
+        return "hookdata";
     }
 }

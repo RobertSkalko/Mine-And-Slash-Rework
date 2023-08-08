@@ -1,12 +1,9 @@
 package com.robertx22.age_of_exile.gui.screens.character_screen;
 
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
-import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.capability.player.data.Backpacks;
-import com.robertx22.age_of_exile.database.data.stats.IUsableStat;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.CoreStat;
-import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttributes;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
@@ -30,11 +27,9 @@ import com.robertx22.age_of_exile.gui.screens.OpenBackpack;
 import com.robertx22.age_of_exile.gui.screens.OpenSkillGems;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.TalentsScreen;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.NumberUtils;
 import com.robertx22.age_of_exile.vanilla_mc.packets.AllocateStatPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.RenderUtils;
@@ -64,6 +59,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
 
     Minecraft mc = Minecraft.getInstance();
 
+    
     public enum StatType {
         HUB("hub"),
         MAIN("main"),
@@ -82,12 +78,8 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         }
     }
 
-    boolean isMainScreen() {
-        return this.statToShow == StatType.HUB;
-    }
 
-    public StatType statToShow = StatType.HUB;
-
+    // todo implement this elsewhere
     static HashMap<StatType, List<List<Stat>>> STAT_MAP = new HashMap<>();
 
     static <T extends Stat> void addTo(StatType type, List<T> stats) {
@@ -159,97 +151,61 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         int xpos = guiLeft + 75;
         int ypos = guiTop + 25;
 
-        if (this.isMainScreen()) {
+
+        xpos = guiLeft + 78;
+        ypos = guiTop + 105;
+
+        int YSEP = 20;
+
+        // TODO MAKE STATIC IDS
+        xpos = guiLeft + 35;
+        ypos = guiTop + 25;
+
+        publicAddButton(new AllocateStatButton(AllAttributes.STR_ID, xpos, ypos));
+        ypos += YSEP;
+        publicAddButton(new AllocateStatButton(AllAttributes.INT_ID, xpos, ypos));
+        ypos += YSEP;
+        publicAddButton(new AllocateStatButton(AllAttributes.DEX_ID, xpos, ypos));
 
 
-            if (true) {
+        xpos = guiLeft + 12;
+        ypos = guiTop + 90;
 
-                xpos = guiLeft + 78;
-                ypos = guiTop + 105;
 
-                int YSEP = 20;
+        // hub buttons
 
-                // TODO MAKE STATIC IDS
-                xpos = guiLeft + 35;
-                ypos = guiTop + 25;
+        List<INamedScreen> rightButtons = new ArrayList<>();
+        rightButtons.add(new OpenSkillGems());
+        rightButtons.add(new TalentsScreen());
 
-                publicAddButton(new AllocateStatButton(AllAttributes.STR_ID, xpos, ypos));
-                ypos += YSEP;
-                publicAddButton(new AllocateStatButton(AllAttributes.INT_ID, xpos, ypos));
-                ypos += YSEP;
-                publicAddButton(new AllocateStatButton(AllAttributes.DEX_ID, xpos, ypos));
+        List<INamedScreen> leftButtons = new ArrayList<>();
 
-            }
+        for (Backpacks.BackpackType type : Backpacks.BackpackType.values()) {
+            leftButtons.add(new OpenBackpack(type));
         }
 
-        if (isMainScreen()) {
-            xpos = guiLeft + 12;
-            ypos = guiTop + 90;
-        } else {
-            xpos = guiLeft + 12;
-            ypos = guiTop + 12;
-        }
-
-        if (!isMainScreen()) {
-
-            int XSPACING = 240 / STAT_MAP.get(statToShow)
-                    .size();
-            int YSPACING = 19;
-
-            int ynum = 0;
-            for (List<Stat> list : STAT_MAP.get(statToShow)) {
-                for (Stat stat : list) {
-                    if (stat.show) {
-                        publicAddButton(new StatButton(stat, xpos, ypos + (YSPACING * ynum)));
-
-                        ynum++;
-                    }
-                }
-                ynum = 0;
-                xpos += XSPACING;
-            }
-        }
-
-        if (this.isMainScreen()) {
+        // screens.add(new SpellScreen());
 
 
-            // hub buttons
+        int x = guiLeft + sizeX - 1;
+        int y = guiTop + 20;
 
-            List<INamedScreen> rightButtons = new ArrayList<>();
-            rightButtons.add(new OpenSkillGems());
-            rightButtons.add(new TalentsScreen());
-
-            List<INamedScreen> leftButtons = new ArrayList<>();
-
-            for (Backpacks.BackpackType type : Backpacks.BackpackType.values()) {
-                leftButtons.add(new OpenBackpack(type));
-            }
-
-            // screens.add(new SpellScreen());
-
-
-            int x = guiLeft + sizeX - 1;
-            int y = guiTop + 20;
-
-            for (INamedScreen screen : rightButtons) {
-                publicAddButton(new MainHubButton(true, RIGHT, screen, x, y));
-                y += MainHubButton.ySize + 0;
-            }
-
-
-            x = guiLeft - MainHubButton.xSize;
-            y = guiTop + 20;
-            for (INamedScreen screen : leftButtons) {
-                this.publicAddButton(new MainHubButton(false, LEFT, screen, x, y));
-                y += MainHubButton.ySize + 0;
-            }
-
+        for (INamedScreen screen : rightButtons) {
+            publicAddButton(new MainHubButton(true, RIGHT, screen, x, y));
+            y += MainHubButton.ySize + 0;
         }
 
 
-        if (isMainScreen()) {
-            publicAddButton(new PlayerGearButton(mc.player, this, this.guiLeft + CharacterScreen.sizeX / 2 - PlayerGearButton.xSize / 2, this.guiTop + 10));
+        x = guiLeft - MainHubButton.xSize;
+        y = guiTop + 20;
+        for (INamedScreen screen : leftButtons) {
+            this.publicAddButton(new MainHubButton(false, LEFT, screen, x, y));
+            y += MainHubButton.ySize + 0;
         }
+
+
+        publicAddButton(new PlayerGearButton(mc.player, this, this.guiLeft + CharacterScreen.sizeX / 2 - PlayerGearButton.xSize / 2, this.guiTop + 10));
+
     }
 
     private static final ResourceLocation BACKGROUND = new ResourceLocation(SlashRef.MODID, "textures/gui/stats.png");
@@ -260,11 +216,8 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
 
         ResourceLocation loc;
 
-        if (isMainScreen()) {
-            loc = BACKGROUND;
-        } else {
-            loc = WIDE_BACKGROUND;
-        }
+        loc = BACKGROUND;
+
 
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 
@@ -351,95 +304,6 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
             gui.drawString(mc.font, txt, this.getX() + SIZEX + 4, this.getY() + 4, ChatFormatting.YELLOW.getColor());
 
         }
-
-    }
-
-    private static final ResourceLocation BUTTON_TEX = new ResourceLocation(SlashRef.MODID, "textures/gui/button.png");
-    static int STAT_BUTTON_SIZE_X = 18;
-    static int STAT_BUTTON_SIZE_Y = 18;
-
-    public static class StatButton extends ImageButton {
-
-        Stat stat;
-        public String presetValue = "";
-
-        public StatButton(Stat stat, int xPos, int yPos) {
-            super(xPos, yPos, STAT_BUTTON_SIZE_X, STAT_BUTTON_SIZE_Y, 0, 0, STAT_BUTTON_SIZE_Y, BUTTON_TEX, (button) -> {
-            });
-
-            this.stat = stat;
-        }
-
-
-        public void setModTooltip() {
-            List<Component> tooltip = new ArrayList<>();
-
-            tooltip.add(stat
-                    .locName()
-                    .withStyle(ChatFormatting.GREEN));
-
-            tooltip.addAll(stat
-                    .getCutDescTooltip());
-
-            setTooltip(Tooltip.create(TextUTIL.mergeList(tooltip)));
-
-        }
-
-
-        @Override
-        public void render(GuiGraphics gui, int x, int y, float f) {
-
-
-            if (!(stat instanceof UnknownStat)) {
-
-                setModTooltip();
-
-                Minecraft mc = Minecraft.getInstance();
-                String str = getStatString(Load.Unit(mc.player)
-                        .getUnit()
-                        .getCalculatedStat(stat), Load.Unit(mc.player));
-
-                if (!presetValue.isEmpty()) {
-                    str = presetValue;
-                }
-
-                ResourceLocation res = stat
-                        .getIconForRendering();
-
-                RenderUtils.render16Icon(gui, res, this.getX(), this.getY());
-
-                gui.drawString(mc.font, str, this.getX() + STAT_BUTTON_SIZE_X, this.getY() + 2, ChatFormatting.GOLD.getColor());
-
-            }
-        }
-
-    }
-
-    public static String getStatString(StatData data, EntityData unitdata) {
-        Stat stat = data.GetStat();
-
-        String v1 = NumberUtils.formatForTooltip(data
-                .getValue());
-
-        String str = "";
-
-        str = v1;
-
-        if (stat.IsPercent()) {
-            str += '%';
-        }
-
-        if (stat instanceof IUsableStat && stat instanceof Health == false) {
-            IUsableStat usable = (IUsableStat) stat;
-
-            String value = NumberUtils.format(
-                    usable.getUsableValue((int) data
-                            .getValue(), unitdata.getLevel()) * 100);
-
-            str = "" + value + "%";
-
-        }
-        return str;
 
     }
 

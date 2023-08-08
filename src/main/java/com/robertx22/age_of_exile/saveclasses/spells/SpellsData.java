@@ -16,7 +16,6 @@ public class SpellsData {
 
     public void addToLevelsFromStat(String id, int num) {
 
-
         this.extra_lvls.put(id, extra_lvls.getOrDefault(id, 0) + num);
     }
 
@@ -30,31 +29,9 @@ public class SpellsData {
     }
 
 
-    /*
-    public int getLevelOf(String id) {
-        // todo
-
-
-        MaxLevelProvider provider = MaxLevelProvider.get(id);
-        return provider.getMaxLevel();
-
-        // todo
-
-        /*
-
-        int level = allocated_lvls.getOrDefault(id, 0) + extra_lvls.getOrDefault(id, 0);
-
-        MaxLevelProvider provider = MaxLevelProvider.get(id);
-
-        if (provider != null) {
-            if (level > provider.getMaxLevelWithBonuses()) {
-                level = provider.getMaxLevelWithBonuses();
-            }
-        }
-
-        return level;
-
-
+    public int getExtraLevels(String id) {
+        return this.extra_lvls.getOrDefault(id, 0);
     }
-    */
+
+
 }

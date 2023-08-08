@@ -251,7 +251,7 @@ public class EntitySpellData {
             if (entity instanceof Player p) {
                 var gem = Load.playerRPGData(p).getSkillGemInventory().getSpellGem(ExileDB.Spells().get(id));
                 if (gem != null && gem.getSkillData() != null) {
-                    return (int) (gem.getSkillData().perc / 10F); // todo make sure this works
+                    return (int) (gem.getSkillData().perc / 10F) + this.spellData.getExtraLevels(id); // todo make sure this works
                 }
             }
 

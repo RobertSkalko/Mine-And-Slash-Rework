@@ -8,6 +8,8 @@ import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
 public class PlusSkillsInSchoolStats implements ExileRegistryInit {
 
+    // todo transfer this from schools to other things like elements
+
     public static PlusSchoolLevels PLUS_OCEAN = new PlusSchoolLevels(of(SpellSchoolsAdder.WATER));
     public static PlusSchoolLevels PLUS_FIRE = new PlusSchoolLevels(of(SpellSchoolsAdder.FIRE));
     public static PlusSchoolLevels PLUS_NATURE = new PlusSchoolLevels(of(SpellSchoolsAdder.NATURE));
@@ -16,7 +18,7 @@ public class PlusSkillsInSchoolStats implements ExileRegistryInit {
 
     static SpellSchool of(String id) {
         return ExileDB.SpellSchools()
-            .get(id);
+                .get(id);
     }
 
     @Override
