@@ -1,17 +1,14 @@
 package com.robertx22.age_of_exile.aoe_data.database.spells.schools;
 
-import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.BeneficialEffects;
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.NegativeEffects;
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
-import com.robertx22.age_of_exile.database.data.spells.SetAdd;
 import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.AggroAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.ExileEffectAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
-import com.robertx22.age_of_exile.database.data.spells.components.actions.vanity.ParticleMotion;
 import com.robertx22.age_of_exile.database.data.spells.components.conditions.EffectCondition;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
@@ -137,19 +134,6 @@ public class RangerSpells implements ExileRegistryInit {
 
                 .build();
 
-        SpellBuilder.of(BACKFLIP, PlayStyle.DEX, SpellConfiguration.Builder.instant(3, 20 * 25), "Backflip",
-                        Arrays.asList(SpellTag.technique))
-                .weaponReq(CastingWeapon.ANY_WEAPON)
-                .manualDesc("Jump back and gain Cleanse for a short time.")
-                .onCast(PartBuilder.justAction(SpellAction.SET_ADD_MOTION.create(SetAdd.SET, -1.5D, ParticleMotion.CasterLook)
-                                .put(MapField.IGNORE_Y, true))
-                        .addTarget(TargetSelector.CASTER.create()))
-                .onCast(PartBuilder.justAction(SpellAction.SET_ADD_MOTION.create(SetAdd.ADD, 0.5D, ParticleMotion.Upwards))
-                        .addTarget(TargetSelector.CASTER.create()))
-
-                .onCast(PartBuilder.giveSelfExileEffect(BeneficialEffects.CLEANSE, 20D * 3))
-
-                .build();
 
         SpellBuilder.of(ARROW_STORM, PlayStyle.DEX, SpellConfiguration.Builder.arrowSpell(20, 20 * 25), "Arrow Storm",
                         Arrays.asList(SpellTag.projectile, SpellTag.damage))

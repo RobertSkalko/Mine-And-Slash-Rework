@@ -13,7 +13,6 @@ import com.robertx22.age_of_exile.database.data.spells.components.actions.AggroA
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
-import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
@@ -34,16 +33,14 @@ public class BeneficialEffects implements ExileRegistryInit {
     public static EffectCtx VAMPIRIC_BLOOD = new EffectCtx("vamp_blood", "Vamp Blood", 3, Elements.Fire, EffectType.beneficial);
     public static EffectCtx DRACONIC_BLOOD = new EffectCtx("draconic_blood", "Dragon Blood", 4, Elements.Fire, EffectType.beneficial);
     public static EffectCtx REGENERATE = new EffectCtx("regenerate", "Nature Balm", 5, Elements.Chaos, EffectType.beneficial);
-    public static EffectCtx DIVINE_SHIELD = new EffectCtx("divine_shield", "Divine Shield", 8, Elements.Elemental, EffectType.beneficial);
-    public static EffectCtx OVERLOAD = new EffectCtx("overload", "Overload", 17, Elements.Physical, EffectType.beneficial);
-    public static EffectCtx VALOR = new EffectCtx("valor", "Valor", 18, Elements.Physical, EffectType.beneficial);
-    public static EffectCtx PERSEVERANCE = new EffectCtx("perseverance", "Perseverance", 19, Elements.Physical, EffectType.beneficial);
-    public static EffectCtx VIGOR = new EffectCtx("vigor", "Vigor", 20, Elements.Physical, EffectType.beneficial);
-    public static EffectCtx TAUNT_STANCE = new EffectCtx("taunt_stance", "Taunt Stance", 21, Elements.Physical, EffectType.beneficial);
-    public static EffectCtx UNDYING_WILL = new EffectCtx("undying_will", "Undying Will", 24, Elements.Physical, EffectType.beneficial);
-    public static EffectCtx CLEANSE = new EffectCtx("cleanse", "Cleanse", 30, Elements.Elemental, EffectType.beneficial);
-    public static EffectCtx MURDER_INSTINCT = new EffectCtx("murder_instinct", "Murder Instinct", 31, Elements.Physical, EffectType.beneficial);
-    public static EffectCtx MAGE_CIRCLE = new EffectCtx("mage_circle", "Mage Circle", 33, Elements.Elemental, EffectType.beneficial);
+    public static EffectCtx DIVINE_SHIELD = new EffectCtx("divine_shield", "Divine Shield", 6, Elements.Elemental, EffectType.beneficial);
+    public static EffectCtx OVERLOAD = new EffectCtx("overload", "Overload", 7, Elements.Physical, EffectType.beneficial);
+    public static EffectCtx VALOR = new EffectCtx("valor", "Valor", 8, Elements.Physical, EffectType.beneficial);
+    public static EffectCtx PERSEVERANCE = new EffectCtx("perseverance", "Perseverance", 9, Elements.Physical, EffectType.beneficial);
+    public static EffectCtx VIGOR = new EffectCtx("vigor", "Vigor", 10, Elements.Physical, EffectType.beneficial);
+    public static EffectCtx TAUNT_STANCE = new EffectCtx("taunt_stance", "Taunt Stance", 11, Elements.Physical, EffectType.beneficial);
+    public static EffectCtx UNDYING_WILL = new EffectCtx("undying_will", "Undying Will", 11, Elements.Physical, EffectType.beneficial);
+    public static EffectCtx MAGE_CIRCLE = new EffectCtx("mage_circle", "Mage Circle", 12, Elements.Elemental, EffectType.beneficial);
 
     @Override
     public void registerAll() {
@@ -74,22 +71,6 @@ public class BeneficialEffects implements ExileRegistryInit {
                 .addTags(EffectTags.offensive)
                 .build();
 
-
-        ExileEffectBuilder.of(MURDER_INSTINCT)
-                .stat(3, 5, Stats.TOTAL_DAMAGE.get(), ModType.FLAT)
-                .stat(5, 25, DodgeRating.getInstance(), ModType.PERCENT)
-                .stat(3, 10, Stats.CRIT_DAMAGE.get(), ModType.FLAT)
-                .maxStacks(1)
-                .addTags(EffectTags.offensive)
-                .build();
-
-        ExileEffectBuilder.of(CLEANSE)
-                .spell(SpellBuilder.forEffect()
-                        .onTick(PartBuilder.justAction(SpellAction.POTION.removeNegative(1D))
-                                .addTarget(TargetSelector.CASTER.create())
-                                .onTick(1D))
-                        .buildForEffect())
-                .build();
 
         ExileEffectBuilder.of(TAUNT_STANCE)
                 .stat(10, 25, Stats.THREAT_GENERATED.get())

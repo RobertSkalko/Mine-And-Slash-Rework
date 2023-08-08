@@ -5,18 +5,19 @@ import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.DimensionConfig;
 import com.robertx22.age_of_exile.database.data.MinMax;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
+import com.robertx22.age_of_exile.database.data.level_ranges.LevelRange;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.temp.SkillItemTier;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
-import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 
-import java.util.*;
-import java.util.stream.Stream;
+import java.util.HashSet;
+import java.util.Set;
 
 public class LevelUtils {
 
@@ -50,10 +51,11 @@ public class LevelUtils {
 
     public static void runTests() {
         if (MMORPG.RUN_DEV_TOOLS) {
-            Preconditions.checkArgument(levelToTierToLevel(1) == 1);
-            Preconditions.checkArgument(levelToTierToLevel(10) == 10);
-            Preconditions.checkArgument(levelToTierToLevel(20) == 20);
-            Preconditions.checkArgument(levelToTierToLevel(50) == 50);
+
+            Preconditions.checkArgument(levelToTier(15) == 0);
+            Preconditions.checkArgument(levelToTier(25) == 1);
+
+            Preconditions.checkArgument(tierToLevel(1).isLevelInRange(25));
         }
     }
 
@@ -61,70 +63,12 @@ public class LevelUtils {
         return RomanNumber.toRoman(tier);
     }
 
-    public static int levelToTierToLevel(int level) {
-
-        int tier = levelToTier(level);
-
-        int lvl = tierToLevel(tier);
-
-        return lvl;
-
-    }
-
-    public static int tierToLevel(int tier) {
-        int lvl = 1;
-        try {
-            Optional<Map.Entry<MinMax, Integer>> opt = GameBalanceConfig.get()
-                    .getTierMap()
-                    .entrySet()
-                    .stream()
-                    .filter(e -> e.getValue() == tier)
-                    .findAny();
-
-            if (opt.isPresent()) {
-                lvl = opt.get()
-                        .getKey().min;
-            } else {
-                if (tier > 0) {
-                    return GameBalanceConfig.get().MAX_LEVEL;
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 1;
-        }
-
-        if (lvl < 1) {
-            lvl = 1;
-        }
-
-        return lvl;
+    public static LevelRange tierToLevel(int tier) {
+        return GameBalanceConfig.get().getLevelsOfTier(tier);
     }
 
     public static int levelToTier(int level) {
-        int tier = 0;
-        try {
-            Stream<Map.Entry<MinMax, Integer>> opt = GameBalanceConfig.get()
-                    .getTierMap()
-                    .entrySet()
-                    .stream()
-                    .filter(e -> isTier(e.getKey(), level));
-
-            OptionalInt biggest = opt.mapToInt(x -> x.getValue())
-                    .sorted()
-                    .max();
-
-            if (biggest.isPresent()) {
-                tier = biggest.getAsInt();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return 0;
-        }
-        return tier;
-
+        return GameBalanceConfig.get().getTier(level);
     }
 
     public static SkillItemTier levelToSkillTier(int lvl) {

@@ -127,9 +127,7 @@ public class ExactStatData implements ISerializable<ExactStatData>, ITooltipList
     }
 
     public void applyStats(Unit unit) {
-        unit.getStats()
-                .getStatInCalculation(stat)
-                .add(this);
+        unit.getStats().getStatInCalculation(stat).add(this);
     }
 
     @Override

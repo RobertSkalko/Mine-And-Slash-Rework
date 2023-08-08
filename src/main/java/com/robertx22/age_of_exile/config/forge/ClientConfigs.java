@@ -18,7 +18,7 @@ public class ClientConfigs {
 
     ClientConfigs(ForgeConfigSpec.Builder b) {
         b.comment("Client Configs")
-            .push("general");
+                .push("general");
 
         SHOW_LOW_ENERGY_MANA_WARNING = b.define("show_low_mana_warning", true);
         RENDER_SIMPLE_MOB_BAR = b.define("render_mob_bar", true);
@@ -26,7 +26,7 @@ public class ClientConfigs {
         RENDER_ITEM_RARITY_BACKGROUND = b.define("render_item_rarity_background", true);
         SHOW_DURABILITY = b.define("show_durability", true);
         RENDER_MOB_HEALTH_GUI = b.define("render_mob_hp_gui", true);
-        ONLY_RENDER_MOB_LOOKED_AT = b.define("only_render_mob_looked_at", true);
+        ONLY_RENDER_MOB_LOOKED_AT = b.define("only_render_mob_looked_at", false);
         SHOW_DURABILITY = b.define("show_durability", true);
         ENABLE_FLOATING_DMG = b.define("render_floating_damage", true);
 

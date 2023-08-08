@@ -32,18 +32,18 @@ public class NegativeEffects implements ExileRegistryInit {
 
     public static EffectCtx ELE_WEAKNESS = new EffectCtx("ele_weakness", "Ele Weakness", 0, Elements.Elemental, EffectType.negative);
     public static EffectCtx PETRIFY = new EffectCtx("petrify", "Petrify", 1, Elements.Chaos, EffectType.negative);
-    public static EffectCtx WOUNDS = new EffectCtx("wounds", "Wounds", 4, Elements.Physical, EffectType.negative);
-    public static EffectCtx TORMENT = new EffectCtx("torment", "Torment", 7, Elements.Elemental, EffectType.negative);
-    public static EffectCtx BLIND = new EffectCtx("blind", "Blind", 10, Elements.Chaos, EffectType.negative);
-    public static EffectCtx STUN = new EffectCtx("stun", "Stun", 11, Elements.Physical, EffectType.negative);
-    public static EffectCtx SLOW = new EffectCtx("slow", "Slow", 12, Elements.Physical, EffectType.negative);
-    public static EffectCtx AGONY = new EffectCtx("agony", "Curse of Agony", 13, Elements.Elemental, EffectType.negative);
-    public static EffectCtx WEAKNESS = new EffectCtx("weak", "Curse of Weakness", 14, Elements.Elemental, EffectType.negative);
-    public static EffectCtx DESPAIR = new EffectCtx("despair", "Curse of Despair", 15, Elements.Elemental, EffectType.negative);
-    public static EffectCtx CHARM = new EffectCtx("charm", "Charm", 16, Elements.Elemental, EffectType.negative);
-    public static EffectCtx GROUNDING = new EffectCtx("ground", "Grounding", 17, Elements.Physical, EffectType.negative);
-    public static EffectCtx MARK_OF_DEATH = new EffectCtx("mark_of_death", "Mark of Death", 18, Elements.Physical, EffectType.negative);
-    public static EffectCtx SHRED = new EffectCtx("shred", "Shred", 19, Elements.Physical, EffectType.negative);
+    public static EffectCtx WOUNDS = new EffectCtx("wounds", "Wounds", 2, Elements.Physical, EffectType.negative);
+    public static EffectCtx TORMENT = new EffectCtx("torment", "Torment", 3, Elements.Elemental, EffectType.negative);
+    public static EffectCtx BLIND = new EffectCtx("blind", "Blind", 4, Elements.Chaos, EffectType.negative);
+    public static EffectCtx STUN = new EffectCtx("stun", "Stun", 5, Elements.Physical, EffectType.negative);
+    public static EffectCtx SLOW = new EffectCtx("slow", "Slow", 6, Elements.Physical, EffectType.negative);
+    public static EffectCtx AGONY = new EffectCtx("agony", "Curse of Agony", 7, Elements.Elemental, EffectType.negative);
+    public static EffectCtx WEAKNESS = new EffectCtx("weak", "Curse of Weakness", 8, Elements.Elemental, EffectType.negative);
+    public static EffectCtx DESPAIR = new EffectCtx("despair", "Curse of Despair", 9, Elements.Elemental, EffectType.negative);
+    public static EffectCtx CHARM = new EffectCtx("charm", "Charm", 10, Elements.Elemental, EffectType.negative);
+    public static EffectCtx GROUNDING = new EffectCtx("ground", "Grounding", 11, Elements.Physical, EffectType.negative);
+    public static EffectCtx MARK_OF_DEATH = new EffectCtx("mark_of_death", "Mark of Death", 12, Elements.Physical, EffectType.negative);
+    public static EffectCtx SHRED = new EffectCtx("shred", "Shred", 13, Elements.Physical, EffectType.negative);
 
     @Override
     public void registerAll() {

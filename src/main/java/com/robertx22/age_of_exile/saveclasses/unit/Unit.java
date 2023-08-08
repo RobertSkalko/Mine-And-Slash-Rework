@@ -285,8 +285,7 @@ public class Unit {
                 map.put(type, new ArrayList<>());
             }
             statContexts.forEach(x -> {
-                map.get(x.type)
-                        .add(x);
+                map.get(x.type).add(x);
             });
 
             map.forEach((key, value) -> value

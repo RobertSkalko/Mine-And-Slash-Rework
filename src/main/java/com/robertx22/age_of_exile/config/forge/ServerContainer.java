@@ -36,7 +36,7 @@ public class ServerContainer {
         ALL_PLAYERS_ARE_TEAMED_PVE_MODE = b.define("all_players_are_allied", false);
         TURN_REQ_ILVL_INTO_RECCOMENDATION = b.define("TURN_REQ_ILVL_INTO_RECCOMENDATION", false);
         GET_STARTER_ITEMS = b.define("start_items", true);
-        ALWAYS_SCALE_MOB_LEVEL_TO_PLAYER = b.define("scale_mob_to_nearby_player_lvl", false);
+        ALWAYS_SCALE_MOB_LEVEL_TO_PLAYER = b.define("scale_mob_to_nearby_player_lvl", true);
         ENABLE_LOOT_ANNOUNCEMENTS = b.define("loot_announcements", true);
         REQUIRE_TEAM_FOR_TEAM_DUNGEONS = b.define("require_team_for_dungeons", true);
         DONT_SYNC_DATA_OF_AMBIENT_MOBS = b.define("dont_sync_ambient_mob_data", true);

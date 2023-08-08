@@ -12,7 +12,6 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IApplyableStat
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.TalentStatCtx;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
@@ -37,7 +36,7 @@ public class TalentsData implements IApplyableStats {
         int num = 0;
 
         num = (int) GameBalanceConfig.get().STARTING_TALENT_POINTS;
-        num += GameBalanceConfig.get().TALENT_POINTS_AT_MAX_LEVEL * LevelUtils.getMaxLevelMultiplier(data.getLevel());
+        num += GameBalanceConfig.get().TALENT_POINTS_PER_LVL * data.getLevel();
 
         num -= this.getAllocatedPoints(type);
         return num;

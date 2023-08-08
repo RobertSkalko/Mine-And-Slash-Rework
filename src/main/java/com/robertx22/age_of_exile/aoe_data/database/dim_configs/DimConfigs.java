@@ -8,14 +8,10 @@ public class DimConfigs implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        DimensionConfig c = DimensionConfig.Overworld();
+        DimensionConfig.Overworld().addToSerializables();
+        DimensionConfig.Nether().addToSerializables();
+        DimensionConfig.End().addToSerializables();
 
-        c.addToSerializables();
-        DimensionConfig.Nether()
-                .addToSerializables();
-        DimensionConfig.End()
-                .addToSerializables();
 
-       
     }
 }

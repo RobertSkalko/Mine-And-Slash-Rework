@@ -27,20 +27,20 @@ public class DimensionConfig implements JsonExileRegistry<DimensionConfig>, ISer
     public static DimensionConfig Overworld() {
         DimensionConfig c = new DimensionConfig(1, "minecraft:overworld");
         c.min_lvl = 1;
-        c.max_lvl = 50;
+        c.max_lvl = 25;
         return c;
     }
 
     public static DimensionConfig Nether() {
         DimensionConfig d = new DimensionConfig(10, "minecraft:the_nether").setMobTier(2);
-        d.min_lvl = 10;
+        d.min_lvl = 15;
         d.max_lvl = 50;
         return d;
     }
 
     public static DimensionConfig End() {
         DimensionConfig d = new DimensionConfig(10, "minecraft:the_end").setMobTier(3);
-        d.min_lvl = 20;
+        d.min_lvl = 45;
         d.max_lvl = 50;
         return d;
     }
@@ -120,27 +120,27 @@ public class DimensionConfig implements JsonExileRegistry<DimensionConfig>, ISer
             DimensionConfig config = new DimensionConfig();
 
             config.dimension_id = json.get("dimension_id")
-                .getAsString();
+                    .getAsString();
             config.mob_tier = json.get("mob_tier")
-                .getAsInt();
+                    .getAsInt();
             config.all_drop_multi = json.get("all_drop_multi")
-                .getAsFloat();
+                    .getAsFloat();
             if (json.has("exp_multi")) {
                 config.exp_multi = json.get("exp_multi")
-                    .getAsFloat();
+                        .getAsFloat();
             }
             config.unique_gear_drop_multi = json.get("unique_gear_drop_multi")
-                .getAsFloat();
+                    .getAsFloat();
             config.mob_lvl_per_distance = json.get("mob_lvl_per_distance")
-                .getAsInt();
+                    .getAsInt();
             config.mob_strength_multi = json.get("mob_strength_multi")
-                .getAsFloat();
+                    .getAsFloat();
             config.min_lvl = json.get("min_lvl")
-                .getAsInt();
+                    .getAsInt();
             config.max_lvl = json.get("max_lvl")
-                .getAsInt();
+                    .getAsInt();
             config.scale_to_nearest_player = json.get("scale_to_nearest_player")
-                .getAsBoolean();
+                    .getAsBoolean();
 
             return config;
         } catch (IllegalArgumentException e) {

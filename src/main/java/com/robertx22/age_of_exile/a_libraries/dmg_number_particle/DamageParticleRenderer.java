@@ -7,9 +7,9 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
-import org.lwjgl.opengl.GL11;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -55,21 +55,11 @@ public class DamageParticleRenderer {
 
 
         // todo i just removed these, might stop working
-
-        //   RenderSystem.disableLighting();
-        RenderSystem.enableDepthTest();
-        //  RenderSystem.disableAlphaTest();
-        RenderSystem.enableBlend();
-        RenderSystem.blendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE,
-                GL11.GL_ZERO);
-        // RenderSystem.shadeModel(7425);
+        RenderSystem.setShader(GameRenderer::getPositionColorShader);
 
         drawDamageNumber(gui, matrix, particle.renderString, 0, 0, 10);
 
-        // RenderSystem.shadeModel(7424);
-        RenderSystem.disableBlend();
-        // RenderSystem.enableAlphaTest();
-
+     
         matrix.popPose();
     }
 
@@ -79,6 +69,22 @@ public class DamageParticleRenderer {
         Minecraft minecraft = Minecraft.getInstance();
         int sw = minecraft.font.width(s);
 
+
         gui.drawString(minecraft.font, s, (int) (x + (width / 2) - sw), (int) y + 5, ChatFormatting.RED.getColor());
     }
+
+
+    /*
+    public static void drawDamageNumber(GuiGraphics gui,PoseStack matrix, String s, double x, double y,
+                                        float width) {
+
+           Minecraft minecraft = Minecraft.getInstance();
+        int sw = minecraft.tex.getWidth(s);
+         minecraft.font.drawInBatch(matrix, s, (int) (x + (width / 2) - sw), (int) y + 5, ChatFormatting.WHITE.getColor());
+    }
+
+
+
+     */
+
 }

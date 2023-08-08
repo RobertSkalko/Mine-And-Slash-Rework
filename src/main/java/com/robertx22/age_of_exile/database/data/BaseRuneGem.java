@@ -25,7 +25,7 @@ public class BaseRuneGem implements IGUID, IWeighted {
     public int weight = 1000;
 
     public int getReqLevelToDrop() {
-        return LevelUtils.tierToLevel(tier);
+        return LevelUtils.tierToLevel(tier).getMinLevel();
     }
 
     public final List<OptScaleExactStat> getFor(SlotFamily sfor) {

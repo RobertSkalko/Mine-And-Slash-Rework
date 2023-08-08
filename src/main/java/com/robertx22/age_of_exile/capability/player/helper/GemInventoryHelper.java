@@ -2,9 +2,9 @@ package com.robertx22.age_of_exile.capability.player.helper;
 
 import com.robertx22.age_of_exile.database.data.aura.AuraGem;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
-import com.robertx22.age_of_exile.database.data.stats.types.spirit.SpiritCostReduction;
+import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCostReduction;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
-import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.AuraStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
@@ -131,7 +131,7 @@ public class GemInventoryHelper {
 
     public void removeAurasIfCantWear(Player p) {
 
-        float multi = Load.Unit(p).getUnit().getCalculatedStat(SpiritCostReduction.getInstance()).getReverseMultiplier();
+        float multi = Load.Unit(p).getUnit().getCalculatedStat(AuraCostReduction.getInstance()).getReverseMultiplier();
 
 
         if (getSpiritReserved(p, multi) > 1) {
@@ -169,9 +169,7 @@ public class GemInventoryHelper {
             SkillGemData data = StackSaving.SKILL_GEM.loadFrom(stack);
             if (data != null) {
                 AuraGem aura = data.getAura();
-
-                ctx.add(new MiscStatCtx(aura.GetAllStats(Load.Unit(en), data)));
-
+                ctx.add(new AuraStatCtx(aura.GetAllStats(Load.Unit(en), data)));
             }
         }
 

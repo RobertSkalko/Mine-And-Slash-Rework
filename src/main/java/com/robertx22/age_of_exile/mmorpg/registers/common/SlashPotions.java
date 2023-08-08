@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 public class SlashPotions {
 
-   
+
     public static RegObj<MobEffect> KNOCKBACK_RESISTANCE = Def.potion("knockback_resist", () -> new ModStatusEffect(net.minecraft.world.effect.MobEffectCategory.BENEFICIAL, 1)
             .addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, "648D7564-6A60-4F59-8ABE-C2C27A6DD7A9", 0.75F, AttributeModifier.Operation.ADDITION));
 
@@ -28,14 +28,16 @@ public class SlashPotions {
 
     public static void init() {
 
+        // todo make my own potions so i'm not screwed by vanilla's 255 registry limit
+        // todo check if this version still has that limit or not
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 15; i++) {
             String key = ExileStatusEffect.getIdPath(EffectType.negative, i);
             ExileStatusEffect eff = new ExileStatusEffect(EffectType.negative, i);
 
             exileEffectsMap.put(key, Def.potion(key, () -> eff));
         }
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < 15; i++) {
             String key = ExileStatusEffect.getIdPath(EffectType.beneficial, i);
             ExileStatusEffect eff = new ExileStatusEffect(EffectType.beneficial, i);
 

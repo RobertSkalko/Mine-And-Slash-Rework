@@ -638,9 +638,7 @@ public class EntityData implements ICap, INeededForClient {
     private void setMobLvlNormally(LivingEntity entity, Player nearestPlayer) {
         EntityConfig entityConfig = ExileDB.getEntityConfig(entity, this);
 
-        LevelUtils.LevelDetermInfo lvl = LevelUtils.determineLevel(entity.level(), entity.blockPosition(),
-                nearestPlayer
-        );
+        LevelUtils.LevelDetermInfo lvl = LevelUtils.determineLevel(entity.level(), entity.blockPosition(), nearestPlayer);
 
 
         setLevel(Mth.clamp(lvl.level, entityConfig.min_lvl, entityConfig.max_lvl));
@@ -734,7 +732,7 @@ public class EntityData implements ICap, INeededForClient {
             if (x.gear != null) {
                 if (!x.gear.GetBaseGearType()
                         .isWeapon() && !x.gear.GetBaseGearType().tags.contains(BaseGearType.SlotTag.offhand_family)) {
-                    totalILVL += x.gear.getILVL();
+                    totalILVL += x.gear.getLevel();
                 }
             }
         }

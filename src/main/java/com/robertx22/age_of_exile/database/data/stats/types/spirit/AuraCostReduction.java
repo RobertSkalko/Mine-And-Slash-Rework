@@ -5,17 +5,17 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import net.minecraft.ChatFormatting;
 
 // todo this might need an event or a method to calc total spirit use
-public class SpiritCostReduction extends Stat {
+public class AuraCostReduction extends Stat {
 
-    private SpiritCostReduction() {
+    private AuraCostReduction() {
         this.icon = "\u2663";
         this.format = ChatFormatting.AQUA.getName();
 
         this.max = 75;
     }
 
-    public static SpiritCostReduction getInstance() {
-        return SpiritCostReduction.SingletonHolder.INSTANCE;
+    public static AuraCostReduction getInstance() {
+        return AuraCostReduction.SingletonHolder.INSTANCE;
     }
 
     @Override
@@ -40,10 +40,10 @@ public class SpiritCostReduction extends Stat {
 
     @Override
     public String locNameForLangFile() {
-        return "Spirit Cost Reduction";
+        return "Aura Cost Reduction";
     }
 
     private static class SingletonHolder {
-        private static final SpiritCostReduction INSTANCE = new SpiritCostReduction();
+        private static final AuraCostReduction INSTANCE = new AuraCostReduction();
     }
 }

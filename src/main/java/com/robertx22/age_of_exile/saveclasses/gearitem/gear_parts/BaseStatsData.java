@@ -109,7 +109,7 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
 
             for (StatModifier mod : gear.GetBaseGearType()
                     .baseStats()) {
-                local.add(mod.ToExactStat(perc, gear.getILVL()));
+                local.add(mod.ToExactStat(perc, gear.getLevel()));
 
             }
 

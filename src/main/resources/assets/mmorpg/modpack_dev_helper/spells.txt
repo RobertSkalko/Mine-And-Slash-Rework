@@ -16,7 +16,6 @@ charged_bolt
 curse_of_weak
 shout_warn
 song_of_perseverance
-backflip
 shooting_star
 hunter_potion
 execute
@@ -33,7 +32,6 @@ recoil_shot
 poison_ball
 teleport
 guard_totem
-mark_for_death
 mage_circle
 entangling_seed
 nature_balm

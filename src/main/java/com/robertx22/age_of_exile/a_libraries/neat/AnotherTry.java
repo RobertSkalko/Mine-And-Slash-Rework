@@ -16,6 +16,11 @@ public class AnotherTry {
 
 
             if (event.getEntity() instanceof LivingEntity en) {
+
+
+                // event.setResult(Event.Result.ALLOW);
+                //event.setContent(Component.literal("TEST").append("\n").append("test2"));
+                // todo
                 RenderMobInfo.renderLivingEntityLabelIfPresent(mc.font, mc.getEntityRenderDispatcher(), en, event.getPoseStack(),
                         event.getMultiBufferSource(), event.getPackedLight());
             }

@@ -18,9 +18,6 @@ public class GearSoulLootGen extends BaseLootGen<GearBlueprint> {
     public float baseDropChance() {
         float chance = (float) ServerContainer.get().GEAR_DROPRATE.get()
                 .floatValue();
-
-        chance = 2000; // todo
-
         return chance;
     }
 

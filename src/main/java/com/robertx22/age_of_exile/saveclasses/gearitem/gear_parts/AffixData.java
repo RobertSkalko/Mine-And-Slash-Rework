@@ -94,10 +94,10 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
         this.BaseAffix()
                 .getStats()
                 .forEach(x -> {
-                    ExactStatData exact = x.ToExactStat(p, gear.getILVL());
+                    ExactStatData exact = x.ToExactStat(p, gear.getLevel());
                     TooltipStatInfo confo = new TooltipStatInfo(exact, p, info);
                     confo.affix_tier = getAffixTier();
-                    list.add(new TooltipStatWithContext(confo, x, (int) gear.getILVL()));
+                    list.add(new TooltipStatWithContext(confo, x, (int) gear.getLevel()));
                 });
         return list;
     }
@@ -124,7 +124,7 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
         return this.BaseAffix()
                 .getStats()
                 .stream()
-                .map(x -> x.ToExactStat(p, gear.getILVL()))
+                .map(x -> x.ToExactStat(p, gear.getLevel()))
                 .collect(Collectors.toList());
 
     }
@@ -166,7 +166,7 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
 
     public void randomizeTier(GearItemData gear) {
 
-        int num = (int) (gear.getILVL() / (float) GameBalanceConfig.get().MAX_LEVEL * 10);
+        int num = (int) (gear.getLevel() / (float) GameBalanceConfig.get().MAX_LEVEL * 10);
 
         num = Mth.clamp(num, 1, 10);
 

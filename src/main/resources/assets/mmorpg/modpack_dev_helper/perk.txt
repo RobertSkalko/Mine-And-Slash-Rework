@@ -84,6 +84,7 @@ refined_taste
 chaos_resist_big
 staff_damage
 spell_lightning_damage
+aura_effect
 magic_shield_heal
 all_elemental_damage_big
 energy_regen_percent_big
@@ -173,8 +174,8 @@ all_fire_damage_big
 int
 all_fire_damage
 fire_penetration
-sword_damage
 trident_damage_big
+sword_damage
 spell_lightning_damage_big
 dodge_percent
 health_on_hit
@@ -186,4 +187,5 @@ spell_lifesteal_big
 critical_hit_big
 health_regen_percent
 mana_ms_percent_small
+aura_effect_big
 staff_damage_big
