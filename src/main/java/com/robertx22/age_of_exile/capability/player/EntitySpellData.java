@@ -34,7 +34,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
-public class EntitySpellCap {
+public class EntitySpellData {
 
     public static final ResourceLocation RESOURCE = new ResourceLocation(SlashRef.MODID, "spells");
     public static Capability<SpellCap> INSTANCE = CapabilityManager.get(new CapabilityToken<>() {

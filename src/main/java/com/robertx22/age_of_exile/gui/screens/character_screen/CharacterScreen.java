@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.gui.screens.character_screen;
 
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
+import com.robertx22.age_of_exile.capability.player.data.Backpacks;
 import com.robertx22.age_of_exile.database.data.stats.IUsableStat;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.CoreStat;
@@ -25,6 +26,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaR
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.bases.BaseScreen;
 import com.robertx22.age_of_exile.gui.bases.INamedScreen;
+import com.robertx22.age_of_exile.gui.screens.OpenBackpack;
 import com.robertx22.age_of_exile.gui.screens.OpenSkillGems;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.TalentsScreen;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -35,7 +37,6 @@ import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.NumberUtils;
 import com.robertx22.age_of_exile.vanilla_mc.packets.AllocateStatPacket;
 import com.robertx22.library_of_exile.main.Packets;
-import com.robertx22.library_of_exile.utils.GuiUtils;
 import com.robertx22.library_of_exile.utils.RenderUtils;
 import com.robertx22.library_of_exile.utils.TextUTIL;
 import com.robertx22.library_of_exile.wrappers.ExileText;
@@ -55,6 +56,8 @@ import java.util.stream.Collectors;
 
 
 public class CharacterScreen extends BaseScreen implements INamedScreen {
+    private static final ResourceLocation LEFT = new ResourceLocation(SlashRef.MODID, "textures/gui/main_hub/buttons_backwards.png");
+    static ResourceLocation RIGHT = new ResourceLocation(SlashRef.MODID, "textures/gui/main_hub/buttons.png");
 
     static int sizeX = 256;
     static int sizeY = 178;
@@ -167,8 +170,8 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
                 int YSEP = 20;
 
                 // TODO MAKE STATIC IDS
-                xpos = guiLeft + 159;
-                ypos = guiTop + 105;
+                xpos = guiLeft + 35;
+                ypos = guiTop + 25;
 
                 publicAddButton(new AllocateStatButton(AllAttributes.STR_ID, xpos, ypos));
                 ypos += YSEP;
@@ -212,10 +215,15 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
 
             // hub buttons
 
-            List<INamedScreen> screens = new ArrayList<>();
-            screens.add(new OpenSkillGems());
+            List<INamedScreen> rightButtons = new ArrayList<>();
+            rightButtons.add(new OpenSkillGems());
+            rightButtons.add(new TalentsScreen());
 
-            screens.add(new TalentsScreen());
+            List<INamedScreen> leftButtons = new ArrayList<>();
+
+            for (Backpacks.BackpackType type : Backpacks.BackpackType.values()) {
+                leftButtons.add(new OpenBackpack(type));
+            }
 
             // screens.add(new SpellScreen());
 
@@ -223,17 +231,21 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
             int x = guiLeft + sizeX - 1;
             int y = guiTop + 20;
 
-            for (INamedScreen screen : screens) {
-                publicAddButton(new MainHubButton(screen, x, y));
+            for (INamedScreen screen : rightButtons) {
+                publicAddButton(new MainHubButton(true, RIGHT, screen, x, y));
                 y += MainHubButton.ySize + 0;
             }
+
+
+            x = guiLeft - MainHubButton.xSize;
+            y = guiTop + 20;
+            for (INamedScreen screen : leftButtons) {
+                this.publicAddButton(new MainHubButton(false, LEFT, screen, x, y));
+                y += MainHubButton.ySize + 0;
+            }
+
         }
 
-        int i = 0;
-        for (StatType group : StatType.values()) {
-            this.publicAddButton(new StatPageButton(this, group, guiLeft - StatPageButton.SIZEX, guiTop + 15 + (i * (StatPageButton.SIZEY + 1))));
-            i++;
-        }
 
         if (isMainScreen()) {
             publicAddButton(new PlayerGearButton(mc.player, this, this.guiLeft + CharacterScreen.sizeX / 2 - PlayerGearButton.xSize / 2, this.guiTop + 10));
@@ -273,12 +285,11 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
                 .getFreePoints(mc.player);
         if (p > 0) {
             String points = "Points: " + p;
-            gui.drawString(mc.font, points, guiLeft + sizeX / 2 - mc.font.width(points) / 2, guiTop + sizeY + 25, ChatFormatting.GREEN.getColor());
+            gui.drawString(mc.font, points, guiLeft + sizeX / 2 - mc.font.width(points) / 2, guiTop + sizeY + 15, ChatFormatting.GREEN.getColor());
         }
 
     }
 
-    private static final ResourceLocation STAT_PAGE_BUTTON_TEXT = new ResourceLocation(SlashRef.MODID, "textures/gui/main_hub/buttons_backwards.png");
 
     static int PLUS_BUTTON_SIZE_X = 13;
     static int PLUS_BUTTON_SIZE_Y = 13;
@@ -432,54 +443,6 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
 
     }
 
-    static class StatPageButton extends ImageButton {
-
-        public static int SIZEX = 105;
-        public static int SIZEY = 28;
-
-        StatType page;
-
-        public StatPageButton(CharacterScreen screen, StatType page, int xPos, int yPos) {
-            super(xPos + 1, yPos, SIZEX, SIZEY, 0, 0, SIZEY, STAT_PAGE_BUTTON_TEXT, (button) -> {
-                screen.statToShow = page;
-                screen.init();
-            });
-            this.page = page;
-        }
-
-        @Override
-        public void render(GuiGraphics gui, int mouseX, int mouseY, float delta) {
-            Minecraft mc = Minecraft.getInstance();
-
-            super.render(gui, mouseX, mouseY, delta);
-
-            RenderUtils.render16Icon(gui, page.getIcon(), this.getX() + 80, this.getY() + 6);
-
-            if (isHovered()) {
-                String txt = page.id;
-
-                gui.drawString(Minecraft.getInstance().font, txt, this.getX() + SIZEX - 30 - mc.font.width(txt), this.getY() + 9, ChatFormatting.YELLOW.getColor());
-            }
-
-        }
-
-        /*
-        public void renderToolTip(PoseStack matrix, int x, int y) {
-            if (isInside(x, y)) {
-
-                List<Component> tooltip = new ArrayList<>();
-                GuiUtils.renderTooltip(matrix, tooltip, x, y);
-
-            }
-        }
-
-         */
-
-        public boolean isInside(int x, int y) {
-            return GuiUtils.isInRect(this.getX(), this.getY(), PLUS_BUTTON_SIZE_X, PLUS_BUTTON_SIZE_Y, x, y);
-        }
-
-    }
 
 }
 

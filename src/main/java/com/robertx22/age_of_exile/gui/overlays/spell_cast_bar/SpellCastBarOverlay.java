@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.gui.overlays.spell_cast_bar;
 
-import com.robertx22.age_of_exile.capability.player.EntitySpellCap;
+import com.robertx22.age_of_exile.capability.player.EntitySpellData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -18,7 +18,7 @@ public class SpellCastBarOverlay {
 
     public void onHudRender(GuiGraphics gui) {
 
-        EntitySpellCap.ISpellsCap data = Load.spells(mc.player);
+        EntitySpellData.ISpellsCap data = Load.spells(mc.player);
 
         if (data == null) {
             return;

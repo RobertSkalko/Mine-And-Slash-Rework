@@ -1,8 +1,10 @@
 package com.robertx22.age_of_exile.mmorpg.registers.common;
 
+import com.robertx22.age_of_exile.capability.player.data.Backpacks;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.vanilla_mc.packets.AllocateSpellPacket;
 import com.robertx22.age_of_exile.vanilla_mc.packets.AllocateStatPacket;
+import com.robertx22.age_of_exile.vanilla_mc.packets.OpenBackpackPacket;
 import com.robertx22.age_of_exile.vanilla_mc.packets.OpenContainerPacket;
 import com.robertx22.age_of_exile.vanilla_mc.packets.perks.PerkChangePacket;
 import com.robertx22.age_of_exile.vanilla_mc.packets.spells.TellServerToCancelSpellCast;
@@ -20,6 +22,7 @@ public class C2SPacketRegister {
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new AllocateStatPacket(), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new TellServerToCancelSpellCast(), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new OpenContainerPacket(OpenContainerPacket.GuiType.SKILL_GEMS), i++);
+        Packets.registerClientToServerPacket(MMORPG.NETWORK, new OpenBackpackPacket(Backpacks.BackpackType.GEARS), i++);
         // Packets.registerClientToServerPacket(MMORPG.NETWORK, new SetupHotbarPacket(), i++);
     }
 

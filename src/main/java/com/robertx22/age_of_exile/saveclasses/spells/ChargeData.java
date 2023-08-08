@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.saveclasses.spells;
 
-import com.robertx22.age_of_exile.capability.player.EntitySpellCap;
+import com.robertx22.age_of_exile.capability.player.EntitySpellData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.util.Mth;
@@ -53,7 +53,7 @@ public class ChargeData {
 
         boolean sync = false;
 
-        EntitySpellCap.ISpellsCap sdata = Load.spells(player);
+        EntitySpellData.ISpellsCap sdata = Load.spells(player);
 
         List<String> chargesadded = new ArrayList<>(); // no duplicate charge regen
 

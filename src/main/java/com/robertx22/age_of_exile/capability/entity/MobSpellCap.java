@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.capability.entity;
 
-import com.robertx22.age_of_exile.capability.player.EntitySpellCap;
+import com.robertx22.age_of_exile.capability.player.EntitySpellData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellsData;
@@ -8,7 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 import java.util.List;
 
-public class MobSpellCap extends EntitySpellCap.SpellCap {
+public class MobSpellCap extends EntitySpellData.SpellCap {
     public MobSpellCap(LivingEntity entity) {
         super(entity);
     }

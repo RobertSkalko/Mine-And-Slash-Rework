@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.vanilla_mc.packets;
 
-import com.robertx22.age_of_exile.capability.player.EntitySpellCap;
+import com.robertx22.age_of_exile.capability.player.EntitySpellData;
 import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -55,16 +55,16 @@ public class AllocateSpellPacket extends MyPacket<AllocateSpellPacket> {
     @Override
     public void onReceived(ExilePacketContext ctx) {
 
-        EntitySpellCap.ISpellsCap spells = Load.spells(ctx.getPlayer());
+        EntitySpellData.ISpellsCap spells = Load.spells(ctx.getPlayer());
 
         Spell spell = ExileDB.Spells()
-            .get(this.spellid);
+                .get(this.spellid);
         SpellSchool school = ExileDB.SpellSchools()
-            .get(this.schoolid);
+                .get(this.schoolid);
 
         if (spells.canLearn(school, spell)) {
             spells.getSpellsData()
-                .learnSpell(spell, school);
+                    .learnSpell(spell, school);
         }
 
         spells.syncToClient(ctx.getPlayer());

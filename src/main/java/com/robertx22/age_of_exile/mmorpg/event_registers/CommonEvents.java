@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.mmorpg.event_registers;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.capability.player.RPGPlayerData;
+import com.robertx22.age_of_exile.capability.player.PlayerData;
 import com.robertx22.age_of_exile.damage_hooks.*;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.AttributeStat;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
@@ -114,7 +114,7 @@ public class CommonEvents {
             public void accept(ExileEvents.OnPlayerDeath event) {
                 if (event.player instanceof ServerPlayer) {
                     try {
-                        RPGPlayerData data = Load.playerRPGData(event.player);
+                        PlayerData data = Load.playerRPGData(event.player);
 
                         data.deathStats.deathPos = event.player.blockPosition();
                         data.deathStats.deathDim = event.player.level().dimension()

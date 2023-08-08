@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.event_hooks.ontick;
 
-import com.robertx22.age_of_exile.capability.player.EntitySpellCap;
+import com.robertx22.age_of_exile.capability.player.EntitySpellData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ChatUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
@@ -53,30 +53,30 @@ public class OnClientTick {
             if (player.is(player)) {
 
                 Load.Unit(player)
-                    .getResources()
-                    .onTickBlock(player);
+                        .getResources()
+                        .onTickBlock(player);
 
                 NO_MANA_SOUND_COOLDOWN--;
 
-                EntitySpellCap.ISpellsCap spells = Load.spells(player);
+                EntitySpellData.ISpellsCap spells = Load.spells(player);
 
                 List<String> onCooldown = spells.getCastingData()
-                    .getSpellsOnCooldown(player);
+                        .getSpellsOnCooldown(player);
 
                 Load.Unit(player)
-                    .getCooldowns()
-                    .onTicksPass(1);
+                        .getCooldowns()
+                        .onTicksPass(1);
 
                 spells.getCastingData()
-                    .onTimePass(player, spells, 1); // ticks spells on client
+                        .onTimePass(player, spells, 1); // ticks spells on client
 
                 List<String> onCooldownAfter = spells.getCastingData()
-                    .getSpellsOnCooldown(player);
+                        .getSpellsOnCooldown(player);
 
                 onCooldown.removeAll(onCooldownAfter);
 
                 COOLDOWN_READY_MAP.entrySet()
-                    .forEach(x -> x.setValue(x.getValue() - 1));
+                        .forEach(x -> x.setValue(x.getValue() - 1));
 
                 onCooldown.forEach(x -> {
                     COOLDOWN_READY_MAP.put(x, TICKS_TO_SHOW);

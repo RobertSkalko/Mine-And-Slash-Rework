@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.saveclasses;
 
-import com.robertx22.age_of_exile.capability.player.RPGPlayerData;
+import com.robertx22.age_of_exile.capability.player.PlayerData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import net.minecraft.core.BlockPos;
@@ -22,7 +22,7 @@ public class DeathStatsData {
     public boolean died = false;
 
     public static void record(Player player, Elements ele, float amount) {
-        RPGPlayerData stats = Load.playerRPGData(player);
+        PlayerData stats = Load.playerRPGData(player);
         Elements element = ele == null ? Elements.Physical : ele;
         stats.deathStats.record(element, amount);
     }

@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.vanilla_mc.packets;
 
-import com.robertx22.age_of_exile.capability.player.RPGPlayerData;
+import com.robertx22.age_of_exile.capability.player.PlayerData;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.CoreStat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -56,7 +56,7 @@ public class AllocateStatPacket extends MyPacket<AllocateStatPacket> {
         Load.Unit(ctx.getPlayer())
             .tryRecalculateStats();
 
-        RPGPlayerData cap = Load.playerRPGData(ctx.getPlayer());
+        PlayerData cap = Load.playerRPGData(ctx.getPlayer());
 
         if (cap.statPoints.getFreePoints(ctx.getPlayer()) > 0) {
             if (ExileDB.Stats()

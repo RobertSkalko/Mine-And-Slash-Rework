@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.gui.screens.skill_tree.buttons;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.robertx22.age_of_exile.capability.player.RPGPlayerData;
+import com.robertx22.age_of_exile.capability.player.PlayerData;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.perks.PerkStatus;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
@@ -35,7 +35,7 @@ public class PerkButton extends ImageButton {
     public Perk perk;
     public PointData point;
     public TalentTree school;
-    public RPGPlayerData playerData;
+    public PlayerData playerData;
 
     public int originalWidth;
     public int originalHeight;
@@ -45,7 +45,7 @@ public class PerkButton extends ImageButton {
     Minecraft mc = Minecraft.getInstance();
     SkillTreeScreen screen;
 
-    public PerkButton(SkillTreeScreen screen, RPGPlayerData playerData, TalentTree school, PointData point, Perk perk, int x, int y) {
+    public PerkButton(SkillTreeScreen screen, PlayerData playerData, TalentTree school, PointData point, Perk perk, int x, int y) {
         super(x, y, perk.getType().width, perk.getType().height, 0, 0, 1, ID, (action) -> {
         });
         this.perk = perk;

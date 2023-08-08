@@ -1,14 +1,14 @@
 package com.robertx22.age_of_exile.vanilla_mc.packets.spells;
 
-import com.robertx22.age_of_exile.capability.player.EntitySpellCap;
+import com.robertx22.age_of_exile.capability.player.EntitySpellData;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.SpellCastContext;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 
 public class TellServerToCancelSpellCast extends MyPacket<TellServerToCancelSpellCast> {
 
@@ -31,18 +31,18 @@ public class TellServerToCancelSpellCast extends MyPacket<TellServerToCancelSpel
     public void onReceived(ExilePacketContext ctx) {
         Player player = ctx.getPlayer();
 
-        EntitySpellCap.ISpellsCap spells = Load.spells(player);
+        EntitySpellData.ISpellsCap spells = Load.spells(player);
 
         if (spells.getCastingData()
-            .getSpellBeingCast() != null) {
+                .getSpellBeingCast() != null) {
 
             SpellCastContext sctx = new SpellCastContext(player, spells.getCastingData().castingTicksDone, spells.getCastingData()
-                .getSpellBeingCast());
+                    .getSpellBeingCast());
 
             spells.getCastingData()
-                .tryCast(sctx);
+                    .tryCast(sctx);
             spells.getCastingData()
-                .cancelCast(player);
+                    .cancelCast(player);
 
             spells.syncToClient(player);
         }

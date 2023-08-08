@@ -21,12 +21,12 @@ public class MainHubButton extends ImageButton {
 
     boolean shouldAlert = false;
 
-    static ResourceLocation buttonLoc = new ResourceLocation(SlashRef.MODID, "textures/gui/main_hub/buttons.png");
 
     INamedScreen screen;
+    boolean right;
 
-    public MainHubButton(INamedScreen screen, int xPos, int yPos) {
-        super(xPos, yPos, xSize, ySize, 0, 0, ySize + 1, buttonLoc, (button) -> {
+    public MainHubButton(boolean isright, ResourceLocation loc, INamedScreen screen, int xPos, int yPos) {
+        super(xPos, yPos, xSize, ySize, 0, 0, ySize + 1, loc, (button) -> {
             if (screen instanceof IContainerNamedScreen) {
                 IContainerNamedScreen con = (IContainerNamedScreen) screen;
                 con.openContainer();
@@ -36,6 +36,7 @@ public class MainHubButton extends ImageButton {
             }
         });
 
+        this.right = isright;
         this.screen = screen;
 
         if (screen instanceof IAlertScreen) {
@@ -49,17 +50,26 @@ public class MainHubButton extends ImageButton {
     public void render(GuiGraphics gui, int x, int y, float ticks) {
         super.render(gui, x, y, ticks);
 
-        RenderUtils.render16Icon(gui, screen.iconLocation(), this.getX() + 9, this.getY() + 6);
 
+        if (right) {
+            RenderUtils.render16Icon(gui, screen.iconLocation(), this.getX() + 9, this.getY() + 6);
+        } else {
+            RenderUtils.render16Icon(gui, screen.iconLocation(), this.getX() + 80, this.getY() + 6);
+        }
         if (shouldAlert) {
             RenderUtils.render16Icon(gui, EXLAMATION_MARK_TEX, this.getX() + 5, this.getY() + 6);
         }
 
-        String str = screen.screenName()
-                .translate();
+        String str = screen.screenName().translate();
+        
 
         if (isHovered()) {
-            gui.drawString(Minecraft.getInstance().font, str, this.getX() + 32, this.getY() + 9, ChatFormatting.GREEN.getColor());
+            if (right) {
+                gui.drawString(Minecraft.getInstance().font, str, this.getX() + 32, this.getY() + 9, ChatFormatting.GREEN.getColor());
+            } else {
+                gui.drawString(Minecraft.getInstance().font, str, this.getX() + 6, this.getY() + 9, ChatFormatting.GREEN.getColor());
+
+            }
         }
     }
 

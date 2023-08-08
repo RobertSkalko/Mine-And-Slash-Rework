@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.vanilla_mc.packets.perks;
 
-import com.robertx22.age_of_exile.capability.player.RPGPlayerData;
+import com.robertx22.age_of_exile.capability.player.PlayerData;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
@@ -59,9 +59,9 @@ public class PerkChangePacket extends MyPacket<PerkChangePacket> {
 
     @Override
     public void onReceived(ExilePacketContext ctx) {
-        RPGPlayerData playerData = Load.playerRPGData(ctx.getPlayer());
+        PlayerData playerData = Load.playerRPGData(ctx.getPlayer());
         TalentTree sc = ExileDB.TalentTrees()
-            .get(school);
+                .get(school);
 
         if (sc == null) {
             MMORPG.logError("school is null: " + this.school);
@@ -81,9 +81,9 @@ public class PerkChangePacket extends MyPacket<PerkChangePacket> {
         }
 
         Load.Unit(ctx.getPlayer())
-            .setEquipsChanged(true);
+                .setEquipsChanged(true);
         Load.Unit(ctx.getPlayer())
-            .tryRecalculateStats();
+                .tryRecalculateStats();
 
         playerData.syncToClient(ctx.getPlayer());
 

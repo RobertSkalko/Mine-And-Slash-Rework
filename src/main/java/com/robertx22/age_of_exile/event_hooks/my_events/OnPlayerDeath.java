@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.event_hooks.my_events;
 
-import com.robertx22.age_of_exile.capability.player.RPGPlayerData;
+import com.robertx22.age_of_exile.capability.player.PlayerData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
@@ -18,7 +18,7 @@ public class OnPlayerDeath extends EventConsumer<ExileEvents.OnPlayerDeath> {
             Load.Unit(event.player)
                     .setEquipsChanged(true);
 
-            RPGPlayerData data = Load.playerRPGData(event.player);
+            PlayerData data = Load.playerRPGData(event.player);
             data.deathStats.died = true;
 
             data.syncToClient(event.player);
@@ -28,7 +28,7 @@ public class OnPlayerDeath extends EventConsumer<ExileEvents.OnPlayerDeath> {
 
             if (WorldUtils.isMapWorldClass(event.player.level())) {
 
-             
+
             }
 
         } catch (Exception e) {

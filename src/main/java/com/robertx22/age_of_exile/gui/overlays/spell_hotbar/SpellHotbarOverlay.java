@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.gui.overlays.spell_hotbar;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.capability.entity.CooldownsData;
-import com.robertx22.age_of_exile.capability.player.EntitySpellCap;
+import com.robertx22.age_of_exile.capability.player.EntitySpellData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.registers.client.KeybindsRegister;
@@ -49,7 +49,7 @@ public class SpellHotbarOverlay {
 
     Minecraft mc = Minecraft.getInstance();
 
-    EntitySpellCap.ISpellsCap data;
+    EntitySpellData.ISpellsCap data;
 
     public void onHudRender(GuiGraphics gui) {
 

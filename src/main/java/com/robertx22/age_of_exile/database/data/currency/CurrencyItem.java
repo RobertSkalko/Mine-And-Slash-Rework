@@ -24,8 +24,25 @@ public class CurrencyItem extends Item implements IItemAsCurrency, IAutoLocName,
     public CurrencyItem(Currency effect) {
         super(new Item.Properties());
         this.effect = effect;
+        
 
     }
+
+    /*
+    // todo test
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+        ItemStack itemstack = pPlayer.getItemInHand(pUsedHand);
+
+        if (!pPlayer.level().isClientSide) {
+            Load.backpacks(pPlayer).getBackpacks().openBackpack(Backpacks.BackpackType.GEARS, pPlayer);
+        }
+        return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
+
+    }
+    
+     */
+
 
     @Override
     public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip,
@@ -38,7 +55,7 @@ public class CurrencyItem extends Item implements IItemAsCurrency, IAutoLocName,
                 tooltip.add(o.getTooltip());
             }
         }
-        
+
 
         TooltipUtils.addEmpty(tooltip);
 

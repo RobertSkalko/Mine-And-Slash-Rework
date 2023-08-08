@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.capability.player.container;
 
-import com.robertx22.age_of_exile.capability.player.RPGPlayerData;
+import com.robertx22.age_of_exile.capability.player.PlayerData;
 import com.robertx22.age_of_exile.capability.player.helper.GemInventoryHelper;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashContainers;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
@@ -22,11 +22,11 @@ public class SkillGemsMenu extends AbstractContainerMenu {
 
 
     public SkillGemsMenu(int pContainerId, Container pContainer) {
-        this(new RPGPlayerData(null), pContainerId, pContainer);
+        this(new PlayerData(null), pContainerId, pContainer);
     }
 
 
-    public SkillGemsMenu(RPGPlayerData rpg, int pContainerId, Container pContainer) {
+    public SkillGemsMenu(PlayerData rpg, int pContainerId, Container pContainer) {
         super(SlashContainers.SKILL_GEMS.get(), pContainerId);
 
 

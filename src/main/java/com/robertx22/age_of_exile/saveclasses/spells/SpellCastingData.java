@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.saveclasses.spells;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.capability.player.EntitySpellCap;
+import com.robertx22.age_of_exile.capability.player.EntitySpellData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.SpellCastContext;
@@ -70,7 +70,7 @@ public class SpellCastingData {
 
     transient static Spell lastSpell = null;
 
-    public void onTimePass(LivingEntity entity, EntitySpellCap.ISpellsCap spells, int ticks) {
+    public void onTimePass(LivingEntity entity, EntitySpellData.ISpellsCap spells, int ticks) {
 
         try {
 

@@ -22,19 +22,19 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 
-public class RPGPlayerData implements ICap {
+public class PlayerData implements ICap {
 
 
     public static final ResourceLocation RESOURCE = new ResourceLocation(SlashRef.MODID, "player_data");
-    public static Capability<RPGPlayerData> INSTANCE = CapabilityManager.get(new CapabilityToken<>() {
+    public static Capability<PlayerData> INSTANCE = CapabilityManager.get(new CapabilityToken<>() {
     });
 
-    public static RPGPlayerData get(LivingEntity entity) {
+    public static PlayerData get(LivingEntity entity) {
         return entity.getCapability(INSTANCE)
                 .orElse(null);
     }
 
-    transient final LazyOptional<RPGPlayerData> supp = LazyOptional.of(() -> this);
+    transient final LazyOptional<PlayerData> supp = LazyOptional.of(() -> this);
 
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
@@ -64,7 +64,7 @@ public class RPGPlayerData implements ICap {
     private MyInventory skillGemInv = new MyInventory(GemInventoryHelper.TOTAL_SLOTS);
     private MyInventory auraInv = new MyInventory(GemInventoryHelper.TOTAL_AURAS);
 
-    public RPGPlayerData(Player player) {
+    public PlayerData(Player player) {
         this.player = player;
     }
 

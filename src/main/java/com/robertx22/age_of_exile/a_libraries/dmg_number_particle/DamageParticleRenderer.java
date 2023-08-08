@@ -17,6 +17,8 @@ import java.util.Set;
 
 public class DamageParticleRenderer {
 
+    // todo might need to do without dmg particles for a while.
+
     public static Set<DamageParticle> PARTICLES = new HashSet<>();
 
     public static void renderParticles(GuiGraphics gui, PoseStack matrix, Camera camera) {
@@ -59,7 +61,7 @@ public class DamageParticleRenderer {
 
         drawDamageNumber(gui, matrix, particle.renderString, 0, 0, 10);
 
-     
+
         matrix.popPose();
     }
 

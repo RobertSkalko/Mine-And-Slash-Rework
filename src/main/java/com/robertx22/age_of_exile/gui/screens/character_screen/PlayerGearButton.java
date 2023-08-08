@@ -6,7 +6,6 @@ import com.robertx22.age_of_exile.gui.bases.BaseScreen;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.gui.ItemSlotButton;
-import com.robertx22.library_of_exile.utils.GuiUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -16,7 +15,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import org.joml.Quaternionf;
 
 public class PlayerGearButton extends ImageButton {
 
@@ -56,20 +54,12 @@ public class PlayerGearButton extends ImageButton {
 
         Minecraft mc = Minecraft.getInstance();
 
-        Quaternionf ARMOR_STAND_ANGLE = (new Quaternionf()).rotationXYZ(0.43633232F, 0.0F, (float) Math.PI);
 
         // player 3d view
-        InventoryScreen.renderEntityInInventory(gui, this.getX() + 50, this.getY() + 77, 30, ARMOR_STAND_ANGLE, null, player);
-        gui.drawString(mc.font, str, this.getX() + xSize / 2 - mc.font.width(str) / 2, this.getY() + 3, ChatFormatting.YELLOW.getColor());
+        InventoryScreen.renderEntityInInventoryFollowsMouse(gui, this.getX() + 50, this.getY() + 77, 30, (float) (getX() + 51) - x, (float) (getY() + 75 - 50) - y, player);
 
-        str = "Avg ILVL: " + Load.Unit(mc.player)
-                .getAverageILVL();
+        gui.drawString(mc.font, str, this.getX() + xSize / 2 - mc.font.width(str) / 2, this.getY() + 6, ChatFormatting.YELLOW.getColor());
 
-        GuiUtils.renderScaledText(gui, this.getX() + xSize / 2, this.getY() + 17, 0.8F, str, ChatFormatting.GREEN);
-
-        // mc.font.draw(matrix, str, this.x + xSize / 2 - mc.font.width(str) / 2, this.y + 5, TextFormatting.GREEN.getColor());
-
-        // player 3d view
 
     }
 

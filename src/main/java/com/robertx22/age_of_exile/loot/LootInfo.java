@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.loot;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.capability.player.RPGPlayerData;
+import com.robertx22.age_of_exile.capability.player.PlayerData;
 import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuantity;
 import com.robertx22.age_of_exile.database.data.stats.types.misc.ExtraMobDropsStat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -39,7 +39,7 @@ public class LootInfo {
     private int minItems = 0;
     private int maxItems = 50;
     public boolean isMapWorld = false;
-    public RPGPlayerData rpgData;
+    public PlayerData rpgData;
     public BlockPos pos;
 
     public int getMinItems() {

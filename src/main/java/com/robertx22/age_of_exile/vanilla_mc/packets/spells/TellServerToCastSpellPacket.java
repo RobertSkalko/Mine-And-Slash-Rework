@@ -1,15 +1,15 @@
 package com.robertx22.age_of_exile.vanilla_mc.packets.spells;
 
-import com.robertx22.age_of_exile.capability.player.EntitySpellCap;
+import com.robertx22.age_of_exile.capability.player.EntitySpellData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.SpellCastContext;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 
 public class TellServerToCastSpellPacket extends MyPacket<TellServerToCastSpellPacket> {
 
@@ -39,7 +39,7 @@ public class TellServerToCastSpellPacket extends MyPacket<TellServerToCastSpellP
 
     public static boolean tryCastSpell(Player player, Spell spell) {
 
-        EntitySpellCap.ISpellsCap spells = Load.spells(player);
+        EntitySpellData.ISpellsCap spells = Load.spells(player);
 
         if (player.isBlocking() || player.swinging) {
             return false;
@@ -48,10 +48,10 @@ public class TellServerToCastSpellPacket extends MyPacket<TellServerToCastSpellP
         if (spell != null) {
 
             if (spells.getCastingData()
-                .canCast(spell, player)) {
+                    .canCast(spell, player)) {
 
                 spells.getCastingData()
-                    .setToCast(spell, player);
+                        .setToCast(spell, player);
                 SpellCastContext c = new SpellCastContext(player, 0, spell);
 
                 spell.spendResources(c);
@@ -68,7 +68,7 @@ public class TellServerToCastSpellPacket extends MyPacket<TellServerToCastSpellP
     public void onReceived(ExilePacketContext ctx) {
         Player player = ctx.getPlayer();
 
-        EntitySpellCap.ISpellsCap spells = Load.spells(player);
+        EntitySpellData.ISpellsCap spells = Load.spells(player);
 
         Spell spell = spells.getSpellByNumber(number);
 

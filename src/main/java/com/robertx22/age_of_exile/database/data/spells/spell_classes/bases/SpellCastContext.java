@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.database.data.spells.spell_classes.bases;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.capability.player.EntitySpellCap;
+import com.robertx22.age_of_exile.capability.player.EntitySpellData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.entities.EntitySavedSpellData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -17,7 +17,7 @@ public class SpellCastContext {
 
     public final LivingEntity caster;
     public final EntityData data;
-    public final EntitySpellCap.ISpellsCap spellsCap;
+    public final EntitySpellData.ISpellsCap spellsCap;
     public final int ticksInUse;
     public final Spell spell;
     public boolean isLastCastTick;
