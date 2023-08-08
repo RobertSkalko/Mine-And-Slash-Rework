@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.database.OptScaleExactStat;
 import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
 import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
+import com.robertx22.age_of_exile.database.data.stats.types.defense.ArmorPenetration;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DamageShield;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
@@ -50,6 +51,10 @@ public class Perks implements ExileRegistryInit {
         PerkBuilder.stat(new OptScaleExactStat(5, SpiritCostReduction.getInstance(), ModType.FLAT));
         PerkBuilder.bigStat(new OptScaleExactStat(10, SpiritCostReduction.getInstance(), ModType.FLAT));
 
+
+        PerkBuilder.stat(new OptScaleExactStat(5, ArmorPenetration.getInstance(), ModType.PERCENT));
+        PerkBuilder.bigStat(new OptScaleExactStat(10, ArmorPenetration.getInstance(), ModType.PERCENT));
+
         PerkBuilder.stat("cast_speed", new OptScaleExactStat(3, Stats.CAST_SPEED.get(), ModType.FLAT));
 
         PerkBuilder.stat(new OptScaleExactStat(-2, Stats.MANA_COST.get(), ModType.FLAT));
@@ -80,6 +85,12 @@ public class Perks implements ExileRegistryInit {
         PerkBuilder.stat(new OptScaleExactStat(2, Stats.CRIT_DAMAGE.get(), ModType.FLAT));
         PerkBuilder.stat(new OptScaleExactStat(1, Stats.CRIT_CHANCE.get(), ModType.FLAT));
 
+        PerkBuilder.stat(new OptScaleExactStat(3, Stats.AREA_DAMAGE.get(), ModType.FLAT));
+        PerkBuilder.stat(new OptScaleExactStat(3, Stats.INCREASED_AREA.get(), ModType.FLAT));
+        PerkBuilder.bigStat(new OptScaleExactStat(10, Stats.AREA_DAMAGE.get(), ModType.FLAT));
+        PerkBuilder.bigStat(new OptScaleExactStat(10, Stats.INCREASED_AREA.get(), ModType.FLAT));
+
+
         PerkBuilder.stat(new OptScaleExactStat(3, Stats.CRIT_DAMAGE.get(), ModType.FLAT));
         PerkBuilder.stat(new OptScaleExactStat(2, Stats.CRIT_CHANCE.get(), ModType.FLAT));
 
@@ -90,7 +101,7 @@ public class Perks implements ExileRegistryInit {
         PerkBuilder.stat(new OptScaleExactStat(3, SkillDamage.getInstance(), ModType.FLAT));
 
         PerkBuilder.stat(new OptScaleExactStat(4, Stats.HEAL_STRENGTH.get(), ModType.FLAT));
-        PerkBuilder.stat("healing_strength", new OptScaleExactStat(4, Stats.HEAL_STRENGTH.get(), ModType.FLAT));
+        PerkBuilder.bigStat(new OptScaleExactStat(10, Stats.HEAL_STRENGTH.get(), ModType.FLAT));
 
         PerkBuilder.stat(new OptScaleExactStat(3, Stats.DOT_DAMAGE.get(), ModType.FLAT));
         PerkBuilder.bigStat(new OptScaleExactStat(10, Stats.DOT_DAMAGE.get(), ModType.FLAT));
@@ -187,8 +198,10 @@ public class Perks implements ExileRegistryInit {
 
         Stats.WEAPON_DAMAGE.getAll()
                 .forEach(x -> {
-                    PerkBuilder.stat(x.GUID(), new OptScaleExactStat(3, x, ModType.FLAT));
+                    PerkBuilder.stat(new OptScaleExactStat(3, x, ModType.FLAT));
+                    PerkBuilder.bigStat(new OptScaleExactStat(10, x, ModType.FLAT));
                 });
+
 
         Stats.RESOURCE_ON_KILL.getAll()
                 .forEach(x -> {
@@ -209,7 +222,8 @@ public class Perks implements ExileRegistryInit {
 
         new ElementalResist(Elements.Chaos).generateAllPossibleStatVariations()
                 .forEach(x -> {
-                    PerkBuilder.stat(x.GUID(), new OptScaleExactStat(4, x, ModType.FLAT));
+                    PerkBuilder.stat(new OptScaleExactStat(4, x, ModType.FLAT));
+                    PerkBuilder.bigStat(new OptScaleExactStat(10, x, ModType.FLAT));
 
                 });
 

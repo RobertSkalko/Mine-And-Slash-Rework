@@ -2,6 +2,7 @@ These are all default registry entries of this type.
 This registry is modify-able through datapacks.
 of_devastation
 item_flat_armor
+of_pene
 heal_suff
 water_spell_ele_dmg
 fire_ele_dmg_jewelry

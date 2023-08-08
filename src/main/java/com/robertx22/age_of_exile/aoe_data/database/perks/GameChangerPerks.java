@@ -45,7 +45,7 @@ public class GameChangerPerks implements ExileRegistryInit {
         PerkBuilder.gameChanger("sniper", "Sniper",
                 new OptScaleExactStat(-50, Stats.STYLE_DAMAGE.get(PlayStyle.STR)),
                 new OptScaleExactStat(-25, Stats.COOLDOWN_REDUCTION.get()),
-                new OptScaleExactStat(25, Stats.STYLE_DAMAGE.get(PlayStyle.DEX))
+                new OptScaleExactStat(25, Stats.STYLE_DAMAGE.get(PlayStyle.DEX), ModType.MORE)
         );
 
 
@@ -80,7 +80,7 @@ public class GameChangerPerks implements ExileRegistryInit {
                 new OptScaleExactStat(-25, Stats.NON_CRIT_DAMAGE.get(), ModType.FLAT)
         );
 
-       
+
         PerkBuilder.gameChanger("harmony", "Harmony",
 
                 new OptScaleExactStat(50, MagicShieldHeal.getInstance(), ModType.FLAT),

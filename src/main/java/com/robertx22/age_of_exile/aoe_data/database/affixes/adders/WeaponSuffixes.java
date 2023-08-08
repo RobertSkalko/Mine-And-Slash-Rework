@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.aoe_data.database.affixes.AffixBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.database.data.StatModifier;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType.SlotTag;
+import com.robertx22.age_of_exile.database.data.stats.types.defense.ArmorPenetration;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
@@ -14,6 +15,13 @@ public class WeaponSuffixes implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
+        AffixBuilder.Normal("of_pene")
+                .Named("Of Penetration")
+                .stats(new StatModifier(1, 5, ArmorPenetration.getInstance(), ModType.FLAT))
+                .includesTags(SlotTag.weapon_family)
+                .Suffix()
+                .Build();
+        
         AffixBuilder.Normal("of_vampirism")
                 .Named("Of Vampirism")
                 .stats(new StatModifier(1, 5, Stats.LIFESTEAL.get(), ModType.FLAT))
