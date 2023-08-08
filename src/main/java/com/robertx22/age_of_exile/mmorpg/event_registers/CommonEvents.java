@@ -45,6 +45,19 @@ public class CommonEvents {
 
         OnItemInteract.register();
 
+
+// forge event gives us stack clone, making this a dupe
+        /*
+        ForgeEvents.registerForgeEvent(PlayerEvent.ItemPickupEvent.class, event -> {
+            ItemStack stack = event.getStack();
+            if (!stack.isEmpty()) {
+                if (!event.getEntity().level().isClientSide) {
+                    Load.backpacks(event.getEntity()).getBackpacks().tryAutoPickup(stack);
+                }
+            }
+        });
+         */
+
         ForgeEvents.registerForgeEvent(EntityJoinLevelEvent.class, event -> {
             OnMobSpawn.onLoad(event.getEntity());
         });

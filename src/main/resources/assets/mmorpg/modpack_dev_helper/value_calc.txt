@@ -17,11 +17,9 @@ totem_heal
 lose_aggro
 fireball
 charged_bolt
-burn
 explosive_arrow
 heart_of_ice
 charge
-poison
 hunter_pot_heal
 poison_arrow
 direct_arrow_hit
@@ -31,7 +29,6 @@ shooting_star
 meteor
 frost_nova
 ranger_trap
-bleed
 execute
 poison_cloud
 totem_guard

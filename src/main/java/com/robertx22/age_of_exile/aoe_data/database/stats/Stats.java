@@ -201,7 +201,7 @@ public class Stats implements ExileRegistryInit {
             .build();
 
     public static DataPackStatAccessor<PlayStyle> STYLE_DAMAGE_RECEIVED = DatapackStatBuilder
-            .<PlayStyle>of(x -> x.name() + "_dmg_received", x -> Elements.Physical)
+            .<PlayStyle>of(x -> x.id + "_dmg_received", x -> Elements.Physical)
             .addAllOfType(PlayStyle.values())
             .worksWithEvent(DamageEvent.ID)
             .setPriority(0)

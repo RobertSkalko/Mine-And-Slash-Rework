@@ -21,30 +21,20 @@ public class SpellCalcs {
             .spellScaling(0.5F, 1F)
             .build();
 
-    public static ValueCalculation POISON = ValueCalcBuilder.of("poison")
-            .baseValue(2, 2)
-            .build();
-
-    public static ValueCalculation BLEED = ValueCalcBuilder.of("bleed")
-            .baseValue(4, 4)
-            .build();
-
-    public static ValueCalculation BURN = ValueCalcBuilder.of("burn")
-            .baseValue(4, 4)
-            .build();
 
     public static ValueCalculation PETRIFY = ValueCalcBuilder.of("petrify")
-            .baseValue(5, 10)
+            .spellScaling(0.5F, 0.75F)
             .build();
 
     public static ValueCalculation TORMENT = ValueCalcBuilder.of("torment")
-            .baseValue(2, 6)
+            .attackScaling(0.2F, 0.5F)
             .build();
+
     public static ValueCalculation DESPAIR = ValueCalcBuilder.of("despair")
-            .baseValue(2, 6)
+            .spellScaling(0.1F, 0.3F)
             .build();
     public static ValueCalculation DIRECT_ARROW_HIT = ValueCalcBuilder.of("direct_arrow_hit")
-            .baseValue(2, 6)
+            .attackScaling(0.5F, 1F)
             .build();
 
     public static ValueCalculation GONG_STRIKE = ValueCalcBuilder.of("gong_strike")
@@ -71,16 +61,16 @@ public class SpellCalcs {
             .attackScaling(0.5F, 1F)
             .build();
     public static ValueCalculation AWAKEN_MANA = ValueCalcBuilder.of("awaken_mana")
-            .baseValue(20, 100)
+            .spellScaling(1, 2)
             .build();
     public static ValueCalculation HUNTER_POTION_HEAL = ValueCalcBuilder.of("hunter_pot_heal")
-            .baseValue(20, 100)
+            .spellScaling(1F, 1.5F)
             .build();
     public static ValueCalculation WISH = ValueCalcBuilder.of("wish")
-            .baseValue(20, 80)
+            .spellScaling(1, 2)
             .build();
     public static ValueCalculation NATURE_BALM = ValueCalcBuilder.of("nature_balm")
-            .baseValue(1, 5)
+            .spellScaling(0.1F, 0.2F)
             .build();
 
     public static ValueCalculation POWER_CHORD = ValueCalcBuilder.of("power_chord")
@@ -108,10 +98,10 @@ public class SpellCalcs {
             .build();
 
     public static ValueCalculation HEALING_AURA = ValueCalcBuilder.of("healing_aura")
-            .baseValue(4, 6)
+            .spellScaling(0.3F, 0.6F)
             .build();
     public static ValueCalculation HEART_OF_ICE = ValueCalcBuilder.of("heart_of_ice")
-            .baseValue(10, 25)
+            .spellScaling(0.5F, 1F)
             .statScaling(MagicShield.getInstance(), 0.1F, 0.2F)
             .build();
     public static ValueCalculation FROST_NOVA = ValueCalcBuilder.of("frost_nova")
@@ -120,7 +110,6 @@ public class SpellCalcs {
 
 
     public static ValueCalculation POISON_CLOUD = ValueCalcBuilder.of("poison_cloud")
-            .baseValue(2, 4)
             .spellScaling(0.2F, 0.4F)
             .build();
 
@@ -146,13 +135,13 @@ public class SpellCalcs {
             .attackScaling(0.3F, 0.6F)
             .build();
     public static ValueCalculation TOTEM_HEAL = ValueCalcBuilder.of("totem_heal")
-            .baseValue(2, 3)
+            .spellScaling(0.2F, 0.5F)
             .build();
     public static ValueCalculation TOTEM_GUARD = ValueCalcBuilder.of("totem_guard")
-            .baseValue(3, 6)
+            .spellScaling(0.2F, 0.5F)
             .build();
     public static ValueCalculation TOTEM_MANA = ValueCalcBuilder.of("totem_mana")
-            .baseValue(3, 6)
+            .spellScaling(0.2F, 0.5F)
             .build();
     public static ValueCalculation CURSE = ValueCalcBuilder.of("curse")
             .spellScaling(0.2F, 0.6F)
@@ -164,7 +153,7 @@ public class SpellCalcs {
             .spellScaling(0.2F, 0.5F)
             .build();
     public static ValueCalculation SMOKE_BOMB = ValueCalcBuilder.of("lose_aggro")
-            .baseValue(20, 40)
+            .spellScaling(2, 4)
             .build();
 
 }

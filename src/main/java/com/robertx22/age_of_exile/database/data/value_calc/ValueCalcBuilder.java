@@ -13,19 +13,27 @@ public class ValueCalcBuilder {
         return b;
     }
 
-    public ValueCalcBuilder baseValue(float min, float max) {
+    private ValueCalcBuilder baseValue(float min, float max) {
         calc.base = new LeveledValue(min, max);
         return this;
     }
 
+    private ValueCalcBuilder defaultBaseValue(float v1, float v2) {
+        float min = 2 * v1;
+        float max = 6 * v2;
+        return this.baseValue(min, max);
+    }
+
     public ValueCalcBuilder attackScaling(float min, float max) {
-        // todo maybe not needed    calc.attack_scaling = new LeveledValue(min, max);
+        defaultBaseValue(min, max);
         return statScaling(WeaponDamage.getInstance(), min, max);
 
     }
 
     public ValueCalcBuilder spellScaling(float min, float max) {
+        defaultBaseValue(min, max);
         return statScaling(WeaponDamage.getInstance(), min, max);
+
     }
 
     public ValueCalcBuilder statScaling(Stat stat, float min, float max) {

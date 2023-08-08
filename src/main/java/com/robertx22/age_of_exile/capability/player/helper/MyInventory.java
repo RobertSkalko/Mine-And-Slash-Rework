@@ -49,4 +49,23 @@ public class MyInventory extends SimpleContainer {
         return listtag;
     }
 
+    public int getTotalSlots() {
+        return this.getContainerSize(); // todo for upgradables maybe limit this
+    }
+
+    public boolean hasFreeSlots() {
+        return getFreeSlots() > 0;
+    }
+
+    public int getFreeSlots() {
+        int free = 0;
+        for (int i = 0; i < this.getTotalSlots(); ++i) {
+            ItemStack stack = this.getItem(i);
+            if (stack.isEmpty()) {
+                free++;
+            }
+        }
+        return free;
+    }
+
 }

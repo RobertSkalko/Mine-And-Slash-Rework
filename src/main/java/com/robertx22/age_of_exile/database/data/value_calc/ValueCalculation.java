@@ -84,26 +84,19 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
 
         int val = getCalculatedValue(provider);
 
-        if (this.base.getValue(provider) > 0) {
-            text.append(val + "");
-        }
+        
+        text.append(val + "");
 
         if (attack_scaling.getValue(provider) > 0) {
-            if (val > 0) {
-                text.append(val + "");
-            }
-
             if (val < 1 || Screen.hasShiftDown()) {
                 text.append(" (" + (int) (attack_scaling.getValue(provider) * 100) + "% Weapon Damage)")
                         .withStyle(ChatFormatting.YELLOW);
             }
         }
 
-        stat_scalings.forEach(x -> {
-            text.append(getCalculatedValue(provider) + "");
 
-            text.append(" ")
-                    .append(x.GetTooltipString(provider));
+        stat_scalings.forEach(x -> {
+            text.append(" ").append(x.GetTooltipString(provider));
         });
 
         return text;
