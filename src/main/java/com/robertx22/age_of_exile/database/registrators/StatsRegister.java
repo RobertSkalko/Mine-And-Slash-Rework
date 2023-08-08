@@ -29,6 +29,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shie
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShieldRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
+import com.robertx22.age_of_exile.database.data.stats.types.spirit.SpiritCostReduction;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.IGenerated;
@@ -67,6 +68,8 @@ public class StatsRegister implements ExileRegistryInit {
 
                     add(AllAilmentDamage.getInstance());
                     add(HitDamage.getInstance());
+                    
+                    add(SpiritCostReduction.getInstance());
 
                     add(WeaponDamage.getInstance());
 

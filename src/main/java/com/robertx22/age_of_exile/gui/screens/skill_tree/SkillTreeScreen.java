@@ -64,6 +64,8 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     }
 
+    int ticks = 0;
+
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         if (keyCode == 32) { // space
@@ -130,6 +132,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     private void addConnections() {
 
+
         HashSet<PointData> def = new HashSet();
 
         Set<Set<PointData>> cons = new HashSet<>();
@@ -144,7 +147,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                 int y1 = pb.getY() + pb.getHeight() / 2;
 
                 int size = 6;
-                float spacing = size + size / 2F;
+                float spacing = 25;
 
                 for (PointData p : connections) {
 
@@ -165,7 +168,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                     int x2 = sb.getX() + sb.getWidth() / 2;
                     int y2 = sb.getY() + sb.getHeight() / 2;
 
-                    List<PointF> points = GuiUtils.generateCurve(new PointF(x1, y1), new PointF(x2, y2), 360f, spacing + 2 + 5, true);
+                    List<PointF> points = GuiUtils.generateCurve(new PointF(x1, y1), new PointF(x2, y2), 360f, spacing, true);
 
                     for (PointF point : points) {
 
@@ -445,9 +448,19 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                 }
 
                  */
+                ticks++;
+
 
                 if (r instanceof ConnectionButton c) {
 
+                    if (mouseRecentlyClickedTicks > 1) {
+                        if (ticks % 20 == 0) {
+                            if (pointClicked.equals(c.one) || pointClicked.equals(c.two)) {
+                                c.connection = Load.playerRPGData(mc.player).talents
+                                        .getConnection(school, c.one, c.two);
+                            }
+                        }
+                    }
                     c.renderButtonForReal(gui, x, y, ticks);
 
                 }

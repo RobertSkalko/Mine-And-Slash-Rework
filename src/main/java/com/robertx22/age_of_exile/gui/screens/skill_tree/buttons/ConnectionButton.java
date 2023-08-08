@@ -6,7 +6,7 @@ import com.robertx22.age_of_exile.gui.screens.skill_tree.SkillTreeScreen;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import net.minecraft.client.Minecraft;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.resources.ResourceLocation;
@@ -17,50 +17,30 @@ public class ConnectionButton extends ImageButton {
 
     public static ResourceLocation ID = new ResourceLocation(SlashRef.MODID, "textures/gui/skill_tree/lines.png");
 
-    TalentTree school;
-    PointData one;
-    PointData two;
+    public PointData one;
+    public PointData two;
 
-    SkillTreeScreen screen;
-    Minecraft mc = Minecraft.getInstance();
-
+ 
     public ConnectionButton(SkillTreeScreen screen, TalentTree school, PointData one, PointData two, int x, int y) {
         super(x, y, SIZE, SIZE, 0, 0, 0, ID, (action) -> {
         });
-        this.school = school;
         this.one = one;
         this.two = two;
 
-        this.screen = screen;
-
-        connection = Load.playerRPGData(mc.player).talents
-                .getConnection(school, one, two);
-
+        connection = Load.playerRPGData(ClientOnly.getPlayer()).talents.getConnection(school, one, two);
     }
 
-    int ticks = 0;
-    Perk.Connection connection;
+    public Perk.Connection connection;
 
     @Override
     public void render(GuiGraphics gui, int mouseX, int mouseY, float delta) {
-        
+
         // do nothing. use the custom method
     }
 
     // render here so the bind texture is only called once
     // because there are thousands of connector buttons
     public void renderButtonForReal(GuiGraphics gui, int mouseX, int mouseY, float delta) {
-
-        ticks++;
-
-        if (screen.mouseRecentlyClickedTicks > 1) {
-            if (ticks % 10 == 0) {
-                if (screen.pointClicked.equals(this.one) || screen.pointClicked.equals(this.two)) {
-                    connection = Load.playerRPGData(mc.player).talents
-                            .getConnection(school, one, two);
-                }
-            }
-        }
 
         //RenderSystem.enableDepthTest();
 

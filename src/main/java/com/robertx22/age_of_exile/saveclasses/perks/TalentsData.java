@@ -82,9 +82,6 @@ public class TalentsData implements IApplyableStats {
             return false;
         }
 
-        if (perk.isLockedToPlayer(player)) {
-            return false;
-        }
 
         if (!perk.is_entry) {
             Set<PointData> con = school.calcData.connections.get(point);
@@ -190,12 +187,6 @@ public class TalentsData implements IApplyableStats {
         if (isAllocated(school, point)) {
             return PerkStatus.CONNECTED;
         }
-        Perk perk = school.calcData.getPerk(point);
-
-        if (perk.isLockedToPlayer(player)) {
-            return PerkStatus.LOCKED_UNDER_ACHIEV;
-        }
-
         if (canAllocate(school, point, Load.Unit(player), player)) {
             return PerkStatus.POSSIBLE;
         } else {

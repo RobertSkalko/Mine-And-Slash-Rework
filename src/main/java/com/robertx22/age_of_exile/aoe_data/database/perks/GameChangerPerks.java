@@ -80,10 +80,10 @@ public class GameChangerPerks implements ExileRegistryInit {
                 new OptScaleExactStat(-25, Stats.NON_CRIT_DAMAGE.get(), ModType.FLAT)
         );
 
-
+       
         PerkBuilder.gameChanger("harmony", "Harmony",
 
-                new OptScaleExactStat(50, MagicShieldHeal.getInstance(), ModType.PERCENT),
+                new OptScaleExactStat(50, MagicShieldHeal.getInstance(), ModType.FLAT),
                 new OptScaleExactStat(-25, Health.getInstance(), ModType.MORE),
                 new OptScaleExactStat(-25, Armor.getInstance(), ModType.MORE)
         );

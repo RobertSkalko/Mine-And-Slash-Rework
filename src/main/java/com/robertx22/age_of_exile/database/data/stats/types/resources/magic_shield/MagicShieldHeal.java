@@ -17,7 +17,8 @@ public class MagicShieldHeal extends Stat {
         this.min = 0;
         this.scaling = StatScaling.NORMAL;
         this.group = StatGroup.Misc;
-        this.is_long = true;
+
+        //this.is_long = true;
 
         this.statEffect = new Effect();
 

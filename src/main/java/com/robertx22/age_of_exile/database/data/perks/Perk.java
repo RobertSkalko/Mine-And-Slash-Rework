@@ -6,7 +6,6 @@ import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ITooltipList;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
-import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientTextureUtils;
@@ -19,7 +18,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -192,34 +190,6 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipL
 
     public PerkType getType() {
         return type;
-    }
-
-    public boolean isLockedToPlayer(Player player) {
-
-        if (Load.Unit(player)
-                .getLevel() < lvl_req) {
-            return true;
-        }
-
-        if (one_of_a_kind != null) {
-            if (!one_of_a_kind.isEmpty()) {
-
-                if (Load.playerRPGData(player).talents
-                        .getAllAllocatedPerks()
-                        .values()
-                        .stream()
-                        .filter(x -> {
-                            return this.one_of_a_kind.equals(x.one_of_a_kind);
-                        })
-                        .count() > 0) {
-                    return true;
-                }
-            }
-        }
-
-
-        return false;
-
     }
 
 

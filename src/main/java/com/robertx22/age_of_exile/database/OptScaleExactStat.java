@@ -53,6 +53,14 @@ public class OptScaleExactStat implements IByteBuf<OptScaleExactStat> {
         this.stat = stat.GUID();
         this.type = type.name();
 
+
+    }
+
+    public String getPerkIdSuffix() {
+        if (getModType().isFlat()) {
+            return "";
+        }
+        return "_" + getModType().id;
     }
 
     public List<Component> GetTooltipString(TooltipInfo info, int lvl) {

@@ -176,16 +176,6 @@ public class PerkButton extends ImageButton {
             gui.blit(perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti), 0, 0, 16, 16, 16, 16);
         }
 
-        if (this.perk.isLockedToPlayer(mc.player)) {
-
-            if (!this.isHovered()) {
-                //    mc.getTextureManager()
-                //       .bindTexture(LOCKED_TEX);
-
-                // drawTexture(matrices, xPos(offset, posMulti), (int) (yPos(offset, posMulti) * 10 * posMulti), 0, 0, 16, 16, 16, 16);
-            }
-        }
-
         gui.pose().scale(1F / scale, 1F / scale, 1F / scale);
     }
 

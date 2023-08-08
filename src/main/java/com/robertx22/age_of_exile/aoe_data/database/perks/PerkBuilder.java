@@ -30,9 +30,9 @@ public class PerkBuilder {
         perk.type = Perk.PerkType.STAT;
         perk.identifier = id;
         perk.icon = list.get(0)
-            .getStat()
-            .getIconLocation()
-            .toString();
+                .getStat()
+                .getIconLocation()
+                .toString();
         perk.addToSerializables();
         return perk;
     }
@@ -49,22 +49,48 @@ public class PerkBuilder {
         perk.type = Perk.PerkType.MAJOR;
         perk.identifier = id;
         perk.icon = new ResourceLocation(SlashRef.MODID, "textures/gui/stat_icons/game_changers/" + id + ".png")
-            .toString();
+                .toString();
         perk.addToSerializables();
         return perk;
     }
 
+
     public static Perk bigStat(String id, String locname, OptScaleExactStat... stat) {
+        List<OptScaleExactStat> list = Arrays.asList(stat);
+
+
         Perk perk = stat(id, stat);
         perk.type = Perk.PerkType.SPECIAL;
         perk.locname = locname;
-        perk.icon = new ResourceLocation(SlashRef.MODID, "textures/gui/talent_icons/" + perk.identifier + ".png")
-            .toString();
+
+        if (true) {
+            perk.icon = list.get(0)
+                    .getStat()
+                    .getIconLocation()
+                    .toString();
+        } else {
+            perk.icon = new ResourceLocation(SlashRef.MODID, "textures/gui/talent_icons/" + perk.identifier + ".png")
+                    .toString();
+        }
         return perk;
     }
 
-    public static Perk stat(OptScaleExactStat stat) {
-        return stat(stat.stat, stat);
+    
+    public static Perk bigStat(OptScaleExactStat... stat) {
+        List<OptScaleExactStat> list = Arrays.asList(stat);
+        var opt = list.get(0);
+        return bigStat(opt.stat + opt.getPerkIdSuffix() + "_big", "Major " + opt.getStat().locNameForLangFile(), stat);
     }
+
+    public static Perk bigStat(String id, OptScaleExactStat... stat) {
+        List<OptScaleExactStat> list = Arrays.asList(stat);
+        return bigStat(id, "Major " + list.get(0).getStat().locNameForLangFile(), stat);
+
+    }
+
+    public static Perk stat(OptScaleExactStat stat) {
+        return stat(stat.stat + stat.getPerkIdSuffix(), stat);
+    }
+
 
 }

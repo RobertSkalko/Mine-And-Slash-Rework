@@ -10,14 +10,13 @@ public class StartPerks implements ExileRegistryInit {
 
     public static String MAGE = "mage";
     public static String WARRIOR = "warrior";
-    public static String HUNTER = "hunter";
-    public static String TEMPLAR = "templar";
-    public static String DUELIST = "duelist";
-    public static String BATTLE_MAGE = "battle_mage";
-    public static String SCION = "scion";
+    public static String RANGER = "ranger";
+    public static String GUARDIAN = "guardian";
+
 
     @Override
     public void registerAll() {
+        
 
         of(MAGE, "Mage",
                 new OptScaleExactStat(10, DatapackStats.INT, ModType.FLAT),
@@ -29,10 +28,15 @@ public class StartPerks implements ExileRegistryInit {
                 new OptScaleExactStat(10, DatapackStats.STR, ModType.FLAT),
                 new OptScaleExactStat(5, DatapackStats.DEX, ModType.FLAT)
         );
-        of(HUNTER, "Hunter",
+        of(RANGER, "Ranger",
                 new OptScaleExactStat(5, DatapackStats.INT, ModType.FLAT),
                 new OptScaleExactStat(5, DatapackStats.STR, ModType.FLAT),
                 new OptScaleExactStat(10, DatapackStats.DEX, ModType.FLAT)
+        );
+        of(GUARDIAN, "Guardian",
+                new OptScaleExactStat(7, DatapackStats.INT, ModType.FLAT),
+                new OptScaleExactStat(8, DatapackStats.STR, ModType.FLAT),
+                new OptScaleExactStat(5, DatapackStats.DEX, ModType.FLAT)
         );
 
         /*
