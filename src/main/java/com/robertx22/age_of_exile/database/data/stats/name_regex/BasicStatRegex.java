@@ -27,7 +27,12 @@ public class BasicStatRegex extends StatNameRegex {
             return VALUE + s + NAME;
         }
         if (type == ModType.MORE) {
-            return VALUE + " More " + NAME;
+            if (v1 > 0) {
+                return VALUE + " More " + NAME;
+            } else {
+                return VALUE + " Less " + NAME;
+
+            }
         }
         if (type.isItemLocal()) {
             return VALUE + " Gear " + NAME;

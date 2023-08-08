@@ -15,21 +15,20 @@ import com.robertx22.age_of_exile.uncommon.wrappers.MapWrapper;
 
 import java.util.List;
 
-import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect.Priority;
+public class PhysicalToElement extends ElementalStat {
 
-public class PhysConvertToEle extends ElementalStat {
-
-    public static MapWrapper<Elements, PhysConvertToEle> MAP = new MapWrapper();
+    public static MapWrapper<Elements, PhysicalToElement> MAP = new MapWrapper();
 
     @Override
     public List<Stat> generateAllPossibleStatVariations() {
-        List<Stat> list = super.generateAllSingleVariations();
-        list.forEach(x -> MAP.put(x.getElement(), (PhysConvertToEle) x));
+        List<Stat> list = super.generateAllPossibleStatVariations();
+        list.forEach(x -> MAP.put(x.getElement(), (PhysicalToElement) x));
         return list;
 
     }
 
-    public PhysConvertToEle(Elements element) {
+
+    public PhysicalToElement(Elements element) {
         super(element);
         this.scaling = StatScaling.NONE;
 
@@ -38,12 +37,12 @@ public class PhysConvertToEle extends ElementalStat {
 
     @Override
     public Stat newGeneratedInstance(Elements element) {
-        return new PhysConvertToEle(element);
+        return new PhysicalToElement(element);
     }
 
     @Override
     public String GUID() {
-        return "convert_" + this.getElement().guidName + "_to_phys";
+        return "phys_to_" + this.getElement().guidName;
     }
 
     @Override
@@ -85,7 +84,7 @@ public class PhysConvertToEle extends ElementalStat {
         @Override
         public boolean canActivate(DamageEvent effect, StatData data, Stat stat) {
             return effect.getAttackType()
-                .equals(AttackType.attack);
+                    .equals(AttackType.attack);
         }
 
     }
@@ -93,7 +92,7 @@ public class PhysConvertToEle extends ElementalStat {
     @Override
     public String locNameForLangFile() {
         return "Physical to " + this.getElement()
-            .dmgName + " Damage";
+                .dmgName + " Damage";
     }
 
 }

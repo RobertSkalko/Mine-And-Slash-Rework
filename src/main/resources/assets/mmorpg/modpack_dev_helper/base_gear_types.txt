@@ -5,7 +5,6 @@ shield
 cloth_boots
 crossbow
 ring
-scepter
 cloth_pants
 necklace
 staff

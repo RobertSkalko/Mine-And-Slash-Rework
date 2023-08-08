@@ -48,7 +48,6 @@ is_attack_or_spell_attack
 is_bow_wep_type
 style_is_DEX
 resource_type_is_blood
-is_scepter_wep_type
 attack_type_is_attack
 attack_type_is_dot
 is_axe_wep_type

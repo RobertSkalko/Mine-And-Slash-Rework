@@ -7,7 +7,7 @@ import java.util.Locale;
 
 public class GridPoint {
 
-    static int MAX_DISTANCE = 10;
+    static int MAX_DISTANCE = 12;
 
     public final int x;
     public final int y;
@@ -51,8 +51,8 @@ public class GridPoint {
     @Override
     public int hashCode() {
         return HashCode.fromInt(x)
-            .hashCode() + HashCode.fromInt(y)
-            .hashCode();
+                .hashCode() + HashCode.fromInt(y)
+                .hashCode();
     }
 
     @Override

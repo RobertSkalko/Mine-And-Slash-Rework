@@ -149,7 +149,7 @@ public class DamageEvent extends EffectEvent {
 
             if (this.source instanceof Player) {
 
-                
+
                 GearItemData gear = StackSaving.GEARS.loadFrom(source.getMainHandItem());
 
                 if (gear != null) {
@@ -494,6 +494,7 @@ public class DamageEvent extends EffectEvent {
         for (Entry<Elements, Integer> entry : bonusElementDamageMap.entrySet()) {
             if (entry.getValue() > 0) {
 
+                // this seems like it could be buggy
                 DamageEvent bonus = EventBuilder.ofDamage(attackInfo, source, target, entry.getValue())
                         .setupDamage(AttackType.attack, data.getWeaponType(), data.getStyle())
                         .set(x -> x.setElement(entry.getKey()))

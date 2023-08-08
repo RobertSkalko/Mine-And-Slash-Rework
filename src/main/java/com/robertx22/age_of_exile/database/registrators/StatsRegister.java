@@ -68,7 +68,7 @@ public class StatsRegister implements ExileRegistryInit {
 
                     add(AllAilmentDamage.getInstance());
                     add(HitDamage.getInstance());
-                    
+
                     add(SpiritCostReduction.getInstance());
 
                     add(WeaponDamage.getInstance());
@@ -88,7 +88,7 @@ public class StatsRegister implements ExileRegistryInit {
                     add(new ElementalResist(Elements.Physical));
                     add(new ElementalPenetration(Elements.Physical));
                     add(new ElementalFocus(Elements.Physical));
-                    add(new PhysConvertToEle(Elements.Physical));
+                    add(new PhysicalToElement(Elements.Physical));
 
                     add(AllAttributes.getInstance());
                     add(SkillDamage.getInstance());

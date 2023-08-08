@@ -28,7 +28,7 @@ public class CurseSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTag.area, SpellTag.curse))
                 .manualDesc(
                         "Curse enemies with " + effect.locname +
-                                " and deal " + SpellCalcs.CURSE.getLocDmgTooltip() + " " + Elements.Elemental.getIconNameDmg())
+                                " and deal " + SpellCalcs.CURSE.getLocDmgTooltip() + " " + Elements.Chaos.getIconNameDmg())
 
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 0D)))
                 .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(Blocks.AIR, 1D)
@@ -38,13 +38,10 @@ public class CurseSpells implements ExileRegistryInit {
                         .put(MapField.IS_BLOCK_FALLING, false)))
 
                 .onExpire("block", PartBuilder.playSound(SoundEvents.WITHER_SKELETON_HURT, 1D, 1D))
-                .onExpire("block", PartBuilder.damageInAoe(SpellCalcs.CURSE, Elements.Elemental, 3D))
-                .onExpire("block", PartBuilder.addExileEffectToEnemiesInAoe(effect.resourcePath, 3D, 20 * 15D)
-                        .addPerEntityHit(
-                                PartBuilder.justAction(SpellAction.PARTICLES_IN_RADIUS.create(ParticleTypes.SMOKE, 50D, 0.3D)
-                                        .put(MapField.HEIGHT, 2.2D)
-                                )))
-
+                .onExpire("block", PartBuilder.aoeParticles(ParticleTypes.SMOKE, 50D, 3D))
+                .onExpire("block", PartBuilder.aoeParticles(ParticleTypes.SQUID_INK, 50D, 3D))
+                .onExpire("block", PartBuilder.damageInAoe(SpellCalcs.CURSE, Elements.Chaos, 3D))
+                .onExpire("block", PartBuilder.addExileEffectToEnemiesInAoe(effect.resourcePath, 3D, 20 * 15D))
                 .build();
     }
 

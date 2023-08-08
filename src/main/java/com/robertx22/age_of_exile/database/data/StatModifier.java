@@ -115,7 +115,12 @@ public class StatModifier implements ISerializable<StatModifier>, IByteBuf<StatM
         if (GetStat().IsPercent() || getModType().isPercent()) {
             text = text + "%";
         } else if (getModType() == ModType.MORE) {
-            text = text + " More";
+            if (fmin > 0) {
+                text = text + " More";
+            } else {
+                text = text + " Less";
+
+            }
         }
 
         return ExileText.ofText("(").get().withStyle(ChatFormatting.GREEN)

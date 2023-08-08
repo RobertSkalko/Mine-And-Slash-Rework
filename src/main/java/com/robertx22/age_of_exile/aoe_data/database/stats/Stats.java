@@ -225,9 +225,9 @@ public class Stats implements ExileRegistryInit {
             .setPriority(0)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
-            .addCondition(StatConditions.ATTACK_TYPE_MATCHES.get(AttackType.spell))
+            .addCondition(StatConditions.IS_STYLE.get(PlayStyle.INT))
             .addEffect(StatEffects.INCREASE_VALUE)
-            .setLocName(x -> x.dmgName + " Skill Damage")
+            .setLocName(x -> x.dmgName + " Spells Damage")
             .setLocDesc(x -> "Increases damage of spells of that element.")
             .modifyAfterDone(x -> {
                 x.min = 0;

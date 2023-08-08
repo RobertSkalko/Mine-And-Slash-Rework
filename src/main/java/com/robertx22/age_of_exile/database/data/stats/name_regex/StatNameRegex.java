@@ -62,7 +62,12 @@ public abstract class StatNameRegex {
             add += "Gear ";
         }
         if (type == ModType.MORE) {
-            add += "More ";
+            if (v1 > 0) {
+                add += "More ";
+            } else {
+                add += "Less ";
+
+            }
         }
 
         String v1s = NumberUtils.formatForTooltip(v1);
