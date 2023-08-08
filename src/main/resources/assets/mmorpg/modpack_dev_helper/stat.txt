@@ -1,7 +1,6 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
 movement_cdr
-mana_on_spell_hit
 fire_mana_leech
 electrify_damage
 chaos_weapon_damage
@@ -9,8 +8,8 @@ STR_dmg_received
 offensive_eff_duration
 accuracy
 dmg_when_low_hp
-DEX_dmg_received
 all_chaos_damage
+DEX_dmg_received
 energy_regen
 trident_damage
 energy_on_attack_hit
@@ -31,8 +30,8 @@ trap_spell_dmg
 arrow_cdr
 burn_proc_chance
 INT_dmg_received
-spell_all_damage
 food_eff_dur_u_cast
+spell_all_damage
 burn_damage
 heal_on_shielded_targets
 all_any_wep_damage
@@ -40,16 +39,15 @@ potion_strength
 inc_effect_of_positive_buff_on_you
 cdr
 projectile_damage
-inc_effect_of_defensive_buff_on_you
-mana_on_attack_hit
 cast_speed
+mana_on_attack_hit
+inc_effect_of_defensive_buff_on_you
 electrify_strength
 all_elemental_damage
 defensive_eff_dur_u_cast
 physical_health_leech
 electrify_resistance
 damage_spell_dmg
-health_on_spell_hit
 all_health_leech
 all_physical_damage
 totem_spell_dmg
@@ -59,13 +57,13 @@ health_on_attack_hit
 lightning_mana_leech
 song_eff_duration
 phys_to_water
+inc_effect_of_immobilizing_buff_on_you
 faster_projectiles
 dmg_when_target_near_full_hp
-inc_effect_of_immobilizing_buff_on_you
 piercing_projectiles
 extra_mob_drops
-water_dot_damage
 inc_effect_of_immobilizing_buff_given
+water_dot_damage
 plus_to_nature
 burn_resistance
 physical_dot_damage
@@ -93,8 +91,8 @@ health_on_all_hit
 phys_to_elemental
 freeze_damage
 phys_to_fire
-chance_of_slow
 inc_effect_of_heal_over_time_buff_on_you
+chance_of_slow
 strength
 inc_effect_of_offensive_buff_on_you
 physical_weapon_damage_per_perc_of_mana
@@ -113,8 +111,8 @@ inc_effect_of_defensive_buff_given
 poison_resistance
 block_ooc_regen
 positive_eff_duration
-axe_damage
 immobilizing_eff_duration
+axe_damage
 magic_find
 inc_effect_of_negative_buff_given
 all_dot_damage
@@ -124,14 +122,14 @@ more_food_stats
 staff_spell_cdr
 physical_mana_leech
 magic_shield
-heal_cdr
 spell_lifesteal
+heal_cdr
 shield_cdr
 mana_ooc_regen
 armor
-lightning_vuln_crit
-ele_staff_damage
 double_attack_chance
+ele_staff_damage
+lightning_vuln_crit
 poison_damage
 plus_to_water
 heal_over_time_eff_dur_u_cast
@@ -157,12 +155,11 @@ dmg_when_target_is_low_hp
 freeze_chance
 mana_shield
 chaos_mana_leech
-spell_accuracy
 mana_per_sec
-mana_on_all_hit
 health_ooc_regen
-shield_ooc_regen
+mana_on_all_hit
 all_fire_damage
+shield_ooc_regen
 curse_eff_duration
 sword_damage
 all_attributes
@@ -175,6 +172,7 @@ fire_health_leech
 ele_bow_damage
 poison_strength
 health_per_10_intelligence
+block_chance
 ele_axe_damage
 water_weapon_damage
 elemental_vuln_crit
@@ -202,12 +200,11 @@ lightning_health_leech
 water_dmg_when_target_low_hp
 increased_quantity
 elemental_dot_damage
-give_taunt_stance_to_self_on_tick
 chaos_dot_damage
+give_taunt_stance_to_self_on_tick
 burn_strength
 damage_cdr
 all_mana_leech
-energy_on_spell_hit
 offensive_eff_dur_u_cast
 dmg_per_curse_on_target
 fire_resist
@@ -235,7 +232,6 @@ chaos_resist
 shout_cdr
 mana_on_kill
 shout_spell_dmg
-perc_self_hp_dmg_when_immo
 song_cdr
 damage_shield
 day_dmg
@@ -259,8 +255,8 @@ energy_on_all_hit
 bleed_resistance
 lightning_penetration
 cd_ticks
-immobilizing_eff_dur_u_cast
 heal_over_time_eff_duration
+immobilizing_eff_dur_u_cast
 total_damage
 staff_spell_spell_dmg
 elemental_resist
@@ -277,9 +273,9 @@ physical_vuln_crit
 health_per_10_dexterity
 spell_chaos_damage
 spell_dodge
-crossbow_damage
-technique_spell_dmg
 inc_effect_of_offensive_buff_given
+technique_spell_dmg
+crossbow_damage
 chaos_health_leech
 fire_focus
 inc_aoe
@@ -301,8 +297,8 @@ dexterity
 totem_resto
 heal_effect_on_self
 shield_duration
-water_any_wep_damage
 negative_eff_dur_u_cast
+water_any_wep_damage
 lightning_dmg_when_target_low_hp
 poison_duration
 dmg_taken_to_mana

@@ -14,14 +14,15 @@ increase_healing
 fire_resist_big
 blood_mage
 dex
+block_chance
 warlock
 magic_shield_percent_big
 ele_axe_damage
 all_water_damage
 health_regen_percent_big
 small_positive_effect_increase
+block_chance_big
 int_dmg
-healing_strength
 spell_chaos_damage_big
 water_weapon_damage
 str_dmg
@@ -139,6 +140,7 @@ divinity
 dex_dmg
 ranger
 dex_big
+mana_cost_big
 spell_chaos_damage
 ele_sword_damage
 elemental_penetration
@@ -156,6 +158,7 @@ spell_lightning_damage_and_dot
 fire_weapon_damage
 armor_percent_big
 phys_to_chaos
+increase_healing_big
 phys_to_lightning_big
 dot_dmg
 spell_water_damage_and_dot

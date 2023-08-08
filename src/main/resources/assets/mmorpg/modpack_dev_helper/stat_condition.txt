@@ -1,12 +1,9 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
 spell_has_tag_song
-spell_is_fireball
 is_sword_wep_type
 spell_has_tag_area
-spell_is_poison_ball
 resource_type_is_shield
-spell_is_frostball
 effect_has_tag_defensive
 is_source_low_hp
 effect_has_tag_positive
@@ -16,7 +13,6 @@ attack_type_is_all
 is_crit_true
 spell_has_tag_arrow
 is_magic_weapon
-attack_type_is_spell
 effect_has_tag_offensive
 is_in_combat
 resource_type_is_health

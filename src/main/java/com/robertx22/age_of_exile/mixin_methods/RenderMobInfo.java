@@ -115,7 +115,7 @@ public class RenderMobInfo {
                 }
 
                 try {
-
+                    
                     textRenderer.drawInBatch(hpText, -textRenderer.width(text) / 2.0f, (float) i, 553648127, false,
                             matrix4f, vertex, Font.DisplayMode.SEE_THROUGH, bgColor, i);
 

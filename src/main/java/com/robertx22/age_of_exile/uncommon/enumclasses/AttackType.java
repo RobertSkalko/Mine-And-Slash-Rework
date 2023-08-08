@@ -10,9 +10,6 @@ public enum AttackType {
     attack("attack", "Attack") {
 
     },
-    spell("spell", "Spell") {
-
-    },
     dot("dot", "DOT") {
 
     },
@@ -24,7 +21,7 @@ public enum AttackType {
     };
 
     public static List<AttackType> getAllUsed() {
-        return Arrays.asList(attack, spell, all);
+        return Arrays.asList(attack, all);
     }
 
     public String id;
@@ -38,16 +35,13 @@ public enum AttackType {
 
 
     public boolean isHit() {
-        return this == attack || this == spell;
+        return this == attack;
     }
 
     public boolean isAttack() {
         return this == attack;
     }
 
-    public boolean isSpell() {
-        return this == spell;
-    }
 
     public boolean isDot() {
         return this == dot;

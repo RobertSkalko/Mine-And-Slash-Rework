@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.defense.SpellDodge;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
+import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.util.Mth;
@@ -47,8 +48,7 @@ public class SpellDodgeEffect extends BaseDamageEffect {
 
     @Override
     public boolean canActivate(DamageEvent effect, StatData data, Stat stat) {
-        if (effect.getAttackType()
-            .isSpell()) {
+        if (effect.data.getStyle() == PlayStyle.INT) {
             return true;
         }
         return false;

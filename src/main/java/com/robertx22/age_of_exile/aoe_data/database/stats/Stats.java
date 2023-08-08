@@ -463,22 +463,6 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
-    public static DataPackStatAccessor<EmptyAccessor> SPELL_ACCURACY = DatapackStatBuilder
-            .ofSingle("spell_accuracy", Elements.Physical)
-            .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
-            .setSide(EffectSides.Source)
-            .addCondition(StatConditions.ATTACK_TYPE_MATCHES.get(AttackType.spell))
-            .addEffect(StatEffects.SET_ACCURACY)
-            .setLocName(x -> "Spell Accuracy")
-            .setLocDesc(x -> "Increases your chance to hit, low accuracy also causes crits to fail. Specifically it decreases opponent's chance to dodge")
-            .modifyAfterDone(x -> {
-                x.base = 0;
-                x.min = 0;
-                x.scaling = StatScaling.NORMAL;
-                x.group = StatGroup.MAIN;
-            })
-            .build();
 
     public static DataPackStatAccessor<EmptyAccessor> PROJECTILE_DAMAGE = DatapackStatBuilder
             .ofSingle("projectile_damage", Elements.Physical)

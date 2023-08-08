@@ -16,7 +16,7 @@ public class StartPerks implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
-        
+
 
         of(MAGE, "Mage",
                 new OptScaleExactStat(10, DatapackStats.INT, ModType.FLAT),
@@ -70,7 +70,6 @@ public class StartPerks implements ExileRegistryInit {
     Perk of(String id, String locname, OptScaleExactStat... stats) {
 
         Perk perk = PerkBuilder.bigStat(id, locname, stats);
-
         perk.is_entry = true;
         perk.type = Perk.PerkType.START;
         perk.one_of_a_kind = "start";

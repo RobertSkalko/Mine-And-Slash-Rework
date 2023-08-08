@@ -6,10 +6,7 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
 import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
 import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
-import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
-import com.robertx22.age_of_exile.database.data.stats.types.defense.ArmorPenetration;
-import com.robertx22.age_of_exile.database.data.stats.types.defense.DamageShield;
-import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
+import com.robertx22.age_of_exile.database.data.stats.types.defense.*;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalPenetration;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
@@ -55,9 +52,14 @@ public class Perks implements ExileRegistryInit {
         PerkBuilder.stat(new OptScaleExactStat(5, ArmorPenetration.getInstance(), ModType.PERCENT));
         PerkBuilder.bigStat(new OptScaleExactStat(10, ArmorPenetration.getInstance(), ModType.PERCENT));
 
-        PerkBuilder.stat("cast_speed", new OptScaleExactStat(3, Stats.CAST_SPEED.get(), ModType.FLAT));
+        PerkBuilder.stat(new OptScaleExactStat(3, BlockChance.getInstance(), ModType.FLAT));
+        PerkBuilder.bigStat(new OptScaleExactStat(6, BlockChance.getInstance(), ModType.FLAT));
+
+
+        PerkBuilder.stat(new OptScaleExactStat(3, Stats.CAST_SPEED.get(), ModType.FLAT));
 
         PerkBuilder.stat(new OptScaleExactStat(-2, Stats.MANA_COST.get(), ModType.FLAT));
+        PerkBuilder.bigStat(new OptScaleExactStat(-5, Stats.MANA_COST.get(), ModType.FLAT));
 
         //  PerkBuilder.stat(new OptScaleExactStat(3, Stats.ATTACK_SPEED.get(), ModType.FLAT));
 

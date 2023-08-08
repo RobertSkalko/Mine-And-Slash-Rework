@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.effectdatas.builders.DamageBuilder;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
+import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import net.minecraft.world.entity.LivingEntity;
 
 import java.util.function.Consumer;
@@ -26,7 +27,7 @@ public class EventBuilder<T extends EffectEvent> {
         DamageEvent event = new DamageEvent(null, source, target, dmg);
         DamageBuilder b = new DamageBuilder();
         b.event = event;
-        b.setupDamage(spell.config.style.getAttackType(), spell.getWeapon(source), spell.getConfig().style);
+        b.setupDamage(AttackType.attack, spell.getWeapon(source), spell.getConfig().style);
         b.setSpell(spell);
         return b;
     }

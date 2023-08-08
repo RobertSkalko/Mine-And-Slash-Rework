@@ -13,10 +13,12 @@ public class PointData {
         this.y = y;
     }
 
+
     @Override
     public String toString() {
         return x + "_" + y;
     }
+
 
     public PointData up() {
         return new PointData(x, y + 1);
@@ -49,4 +51,6 @@ public class PointData {
         }
         return super.equals(obj);
     }
+
+ 
 }

@@ -47,9 +47,9 @@ public class RPGPlayerData implements ICap {
 
 
     private static final String TEAM_DATA = "teams";
-    private static final String TALENTS_DATA = "talents";
-    private static final String STAT_POINTS = "stat_points";
-    private static final String DEATH_STATS = "death_stats";
+    private static final String TALENTS_DATA = "tals";
+    private static final String STAT_POINTS = "stats";
+    private static final String DEATH_STATS = "death";
     private static final String GEMS = "gems";
     private static final String AURAS = "auras";
 
@@ -60,7 +60,7 @@ public class RPGPlayerData implements ICap {
     public StatPointsData statPoints = new StatPointsData();
     public DeathStatsData deathStats = new DeathStatsData();
 
-    
+
     private MyInventory skillGemInv = new MyInventory(GemInventoryHelper.TOTAL_SLOTS);
     private MyInventory auraInv = new MyInventory(GemInventoryHelper.TOTAL_AURAS);
 

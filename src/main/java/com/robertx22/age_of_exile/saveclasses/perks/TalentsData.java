@@ -22,22 +22,14 @@ import java.util.*;
 public class TalentsData implements IApplyableStats {
 
 
-    private HashMap<String, SchoolData> perks = new HashMap<>();
-
+    SchoolData perks = new SchoolData();
 
     public int reset_points = 5;
 
-    public HashMap<String, SchoolData> getPerks(TalentTree.SchoolType type) {
-        return perks;
-    }
 
     public int getAllocatedPoints(TalentTree.SchoolType type) {
-        int points = 0;
-        for (Map.Entry<String, SchoolData> x : getPerks(type).entrySet()) {
-            points += x.getValue()
-                    .getAllocatedPointsInSchool();
-        }
-        return points;
+        return this.perks.getAllocatedPointsInSchool();
+
     }
 
     public int getFreePoints(EntityData data, TalentTree.SchoolType type) {
@@ -51,19 +43,17 @@ public class TalentsData implements IApplyableStats {
         return num;
     }
 
-    public SchoolData getSchool(TalentTree school) {
-        if (!getPerks(school.getSchool_type()).containsKey(school.GUID())) {
-            getPerks(school.getSchool_type()).put(school.GUID(), new SchoolData());
-        }
-        return getPerks(school.getSchool_type()).get(school.GUID());
+    public SchoolData getSchool() {
+        return perks;
+
     }
 
     public void allocate(Player player, TalentTree school, PointData point) {
-        getSchool(school).map.put(point, true);
+        getSchool().allocate(point);
     }
 
     public void remove(TalentTree school, PointData point) {
-        getSchool(school).map.put(point, false);
+        getSchool().unAllocate(point);
     }
 
     public boolean hasFreePoints(EntityData data, TalentTree.SchoolType type) {
@@ -82,12 +72,17 @@ public class TalentsData implements IApplyableStats {
             return false;
         }
 
+        if (perk.one_of_a_kind != null && !perk.one_of_a_kind.isEmpty()) {
+            return getAllAllocatedPerks().values().stream().noneMatch(x -> x.one_of_a_kind != null && x.one_of_a_kind.equals(perk.one_of_a_kind));
+        }
+
+        // todo you can take multiple starts??
 
         if (!perk.is_entry) {
             Set<PointData> con = school.calcData.connections.get(point);
 
             if (con == null || !con.stream()
-                    .anyMatch(x -> getSchool(school)
+                    .anyMatch(x -> getSchool()
                             .isAllocated(x))) {
                 return false;
             }
@@ -99,7 +94,7 @@ public class TalentsData implements IApplyableStats {
 
     public boolean canRemove(TalentTree school, PointData point) {
 
-        if (!getSchool(school).isAllocated(point)) {
+        if (!getSchool().isAllocated(point)) {
             return false;
         }
 
@@ -108,7 +103,7 @@ public class TalentsData implements IApplyableStats {
         }
 
         for (PointData con : school.calcData.connections.get(point)) {
-            if (getSchool(school).isAllocated(con)) {
+            if (getSchool().isAllocated(con)) {
                 Perk perk = school.calcData.getPerk(con);
                 if (perk.is_entry) {
                     continue;
@@ -135,7 +130,7 @@ public class TalentsData implements IApplyableStats {
 
             Perk perk = school.calcData.getPerk(current);
 
-            if (current.equals(toRemove) || !getSchool(school).isAllocated(current)) {
+            if (current.equals(toRemove) || !getSchool().isAllocated(current)) {
                 continue; // skip exploring this path
             }
 
@@ -155,13 +150,25 @@ public class TalentsData implements IApplyableStats {
     }
 
     public void clearAllTalents() {
-        getPerks(TalentTree.SchoolType.TALENTS)
-                .clear();
+
+        this.perks = new SchoolData();
+
 
     }
 
     public HashMap<PointData, Perk> getAllAllocatedPerks() {
+
+
         HashMap<PointData, Perk> perks = new HashMap<>();
+
+        TalentTree school = ExileDB.TalentTrees().get("talents");
+        if (school != null) {
+            for (PointData p : this.perks.getAllocatedPoints(school)) {
+                perks.put(p, school.calcData.getPerk(p));
+            }
+        }
+
+        /*
         for (TalentTree.SchoolType type : TalentTree.SchoolType.values()) {
             for (Map.Entry<String, SchoolData> x : getPerks(type)
                     .entrySet()) {
@@ -179,6 +186,8 @@ public class TalentsData implements IApplyableStats {
                 }
             }
         }
+
+         */
         return perks;
     }
 
@@ -210,8 +219,7 @@ public class TalentsData implements IApplyableStats {
     }
 
     public boolean isAllocated(TalentTree school, PointData point) {
-        return getSchool(school)
-                .isAllocated(point);
+        return getSchool().isAllocated(point);
     }
 
     @Override

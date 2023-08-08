@@ -68,6 +68,7 @@ public class StatsRegister implements ExileRegistryInit {
 
                     add(AllAilmentDamage.getInstance());
                     add(HitDamage.getInstance());
+                    add(BlockChance.getInstance());
 
                     add(SpiritCostReduction.getInstance());
 
