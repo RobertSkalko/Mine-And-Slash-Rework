@@ -24,7 +24,7 @@ public class SummonProjectileAction extends SpellAction {
     }
 
     public enum ShootWay {
-        FROM_PLAYER_VIEW, DOWN
+        FROM_PLAYER_VIEW, DOWN, FIND_ENEMY
     }
 
     public enum PositionSource {
@@ -34,18 +34,19 @@ public class SummonProjectileAction extends SpellAction {
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
 
+
         Optional<EntityType<?>> projectile = EntityType.byString(data.get(MapField.PROJECTILE_ENTITY));
 
         PositionSource posSource = data.getOrDefault(PositionSource.CASTER);
         ShootWay shootWay = data.getOrDefault(ShootWay.FROM_PLAYER_VIEW);
 
         Vec3 pos = ctx.caster.position();
-        if (posSource == PositionSource.SOURCE_ENTITY) {
+        if (ctx.isCastedFromTotem || posSource == PositionSource.SOURCE_ENTITY) {
             pos = ctx.sourceEntity.position();
         }
         boolean silent = data.getOrDefault(MapField.IS_SILENT, false);
 
-        ProjectileCastHelper builder = new ProjectileCastHelper(pos, data, ctx.caster, projectile.get(), ctx.calculatedSpellData);
+        ProjectileCastHelper builder = new ProjectileCastHelper(ctx, pos, data, ctx.caster, projectile.get(), ctx.calculatedSpellData);
         builder.projectilesAmount = data.get(MapField.PROJECTILE_COUNT)
                 .intValue() + ctx.calculatedSpellData.extra_proj;
         builder.silent = silent;
@@ -64,6 +65,9 @@ public class SummonProjectileAction extends SpellAction {
         }
         if (shootWay == ShootWay.DOWN) {
             builder.fallDown = true;
+        }
+        if (shootWay == ShootWay.FIND_ENEMY) {
+            builder.targetEnemy = true;
         }
 
         builder.cast();

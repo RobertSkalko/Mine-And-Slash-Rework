@@ -63,6 +63,7 @@ public class MapField<T> implements IGUID {
     public static MapField<String> POS_SOURCE = make("pos_source");
     public static MapField<String> SHOOT_DIRECTION = make("shoot_way");
     public static MapField<String> SPELL_MODIFIER = make("spell_mod");
+    public static MapField<String> TOTEM_SPELL = make("totem_spell");
     public static MapField<String> DMG_EFFECT_TYPE = make("dmg_effect_type");
     public static MapField<String> SPECIFIC_ACTION = make("specific_action");
     public static MapField<String> EFFECT_TAG = make("effect_tag");

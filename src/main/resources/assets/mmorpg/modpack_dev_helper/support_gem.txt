@@ -12,6 +12,7 @@ ranged_damage
 bleed_chance
 chaos_damage
 mana_saver_dmg
+projectile_totem
 poison_chance
 melee_damage
 fire_damage

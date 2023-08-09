@@ -22,6 +22,7 @@ public class SlashBlocks {
     public static RegObj<TotemBlock> BLUE_TOTEM = Def.block("blue_totem", () -> new TotemBlock());
     public static RegObj<TotemBlock> GREEN_TOTEM = Def.block("green_totem", () -> new TotemBlock());
     public static RegObj<TotemBlock> GUARD_TOTEM = Def.block("guard_totem", () -> new TotemBlock());
+    public static RegObj<TotemBlock> PROJECTILE_TOTEM = Def.block("attack_totem", () -> new TotemBlock());
     public static RegObj<TotemBlock> TRAP = Def.block("trap", () -> new TotemBlock());
     public static RegObj<TotemBlock> GLYPH = Def.block("glyph", () -> new TotemBlock());
     public static RegObj<MapBlock> MAP = Def.block("map", () -> new MapBlock());

@@ -15,6 +15,7 @@ public class EntitySavedSpellData {
     String caster_uuid = "";
     public String spell_id = "";
     String exile_effect_id = "";
+    public String totem_spell = "";
     public String item_id = "";
     public int lvl = 1;
     public float area_multi = 1;

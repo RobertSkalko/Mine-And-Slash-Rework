@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"3": "mmorpg:blocks/trap",
+		"3": "mmorpg:block/trap",
 		"particle": "spells/trap"
 	},
 	"elements": [

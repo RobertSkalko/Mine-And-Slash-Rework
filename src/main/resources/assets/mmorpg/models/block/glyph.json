@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "mmorpg:blocks/glyph_banish"
+		"0": "mmorpg:block/glyph_banish"
 	},
 	"elements": [
 		{

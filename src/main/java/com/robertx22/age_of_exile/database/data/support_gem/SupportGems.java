@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AllAilmentDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.HitDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.totem.ProjectileTotem;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
@@ -16,6 +17,12 @@ public class SupportGems {
 
 
     public static void init() {
+
+        // custom functionality
+        new SupportGem("projectile_totem", "Projectile Totem", PlayStyle.STR, 3,
+                Arrays.asList(new StatMod(1, 1, ProjectileTotem.getInstance(), ModType.FLAT)
+                )).registerToExileRegistry();
+        // todo reduce dmg
 
 
         // damage multipliers

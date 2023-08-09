@@ -14,6 +14,7 @@ public class LifeCycleEvents {
 
     public static void register() {
 
+        
         ForgeEvents.registerForgeEvent(ServerStartingEvent.class, event -> {
             if (MMORPG.RUN_DEV_TOOLS) {
                 DataGeneration.generateAll();

@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
-		"7": "mmorpg:blocks/inscribing_station/inscribing_station"
+		"7": "mmorpg:block/inscribing_station/inscribing_station"
 	},
 	"elements": [
 		{

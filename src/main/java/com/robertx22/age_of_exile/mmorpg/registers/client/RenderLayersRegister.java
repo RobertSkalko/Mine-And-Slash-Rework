@@ -1,8 +1,8 @@
 package com.robertx22.age_of_exile.mmorpg.registers.client;
 
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 
 public class RenderLayersRegister {
     public static void setup() {
@@ -10,6 +10,7 @@ public class RenderLayersRegister {
         ItemBlockRenderTypes.setRenderLayer(SlashBlocks.BLACK_HOLE.get(), RenderType.translucent());
 
         ItemBlockRenderTypes.setRenderLayer(SlashBlocks.BLUE_TOTEM.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(SlashBlocks.PROJECTILE_TOTEM.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(SlashBlocks.GUARD_TOTEM.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(SlashBlocks.TRAP.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(SlashBlocks.GREEN_TOTEM.get(), RenderType.cutout());

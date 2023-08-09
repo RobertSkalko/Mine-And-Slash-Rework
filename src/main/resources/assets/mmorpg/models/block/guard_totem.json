@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [128, 128],
 	"textures": {
-		"5": "mmorpg:blocks/guard_totem"
+		"5": "mmorpg:block/guard_totem"
 	},
 	"elements": [
 		{

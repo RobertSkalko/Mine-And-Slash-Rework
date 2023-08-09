@@ -2,12 +2,12 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [128, 128],
 	"textures": {
-		"4": "mmorpg:blocks/teleporter/empty",
-		"8": "mmorpg:blocks/teleporter/rune_j",
-		"9": "mmorpg:blocks/teleporter/rune_q",
-		"10": "mmorpg:blocks/teleporter/rune_k",
-		"11": "mmorpg:blocks/teleporter/rune_z",
-		"12": "mmorpg:blocks/teleporter/teleporter"
+		"4": "mmorpg:block/teleporter/empty",
+		"8": "mmorpg:block/teleporter/rune_j",
+		"9": "mmorpg:block/teleporter/rune_q",
+		"10": "mmorpg:block/teleporter/rune_k",
+		"11": "mmorpg:block/teleporter/rune_z",
+		"12": "mmorpg:block/teleporter/teleporter"
 	},
 	"elements": [
 		{

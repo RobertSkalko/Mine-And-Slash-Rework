@@ -22,6 +22,7 @@ import com.robertx22.age_of_exile.mmorpg.ForgeEvents;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.error_checks.base.ErrorChecks;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.Cached;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
 import net.minecraft.server.level.ServerLevel;
@@ -114,6 +115,13 @@ public class CommonEvents {
 
                         event.setAmount(event.getAmount() * multi);
 
+                    }
+                } else {
+                    if (LivingHurtUtils.isEnviromentalDmg(event.getSource())) {
+                        if (WorldUtils.isMapWorldClass(event.getEntity().level())) {
+                            event.setAmount(0);
+                            event.setCanceled(true);
+                        }
                     }
                 }
             } catch (Exception e) {
