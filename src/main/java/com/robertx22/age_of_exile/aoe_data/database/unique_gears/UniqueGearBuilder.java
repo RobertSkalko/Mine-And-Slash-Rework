@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.aoe_data.database.unique_gears;
 
 import com.robertx22.age_of_exile.aoe_data.database.runewords.RunewordBuilder;
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
@@ -31,7 +31,7 @@ public class UniqueGearBuilder {
         return of(id, locname, gearType.GUID());
     }
 
-    public UniqueGearBuilder stats(List<StatModifier> stats) {
+    public UniqueGearBuilder stats(List<StatMod> stats) {
         this.uniq.uniqueStats = stats;
         return this;
     }
@@ -56,7 +56,7 @@ public class UniqueGearBuilder {
 
     public UniqueGear build() {
         ErrorUtils.ifFalse(!uniq.uniqueStats.isEmpty());
-    
+
         uniq.addToSerializables();
         return uniq;
     }

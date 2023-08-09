@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.saveclasses;
 
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IApplyableStats;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
@@ -21,7 +21,7 @@ public class CustomExactStatsData implements IApplyableStats {
 
     public HashMap<String, ExactStatData> stats = new HashMap<>();
 
-    public HashMap<String, StatModifier> mods = new HashMap<>();
+    public HashMap<String, StatMod> mods = new HashMap<>();
 
     public void addExactStat(String hashmapGUID, String statGUID, float v1, ModType type) {
         try {
@@ -37,7 +37,7 @@ public class CustomExactStatsData implements IApplyableStats {
 
     public void addMod(String hashmapGUID, String statGUID, float v1, float v2, ModType type) {
         try {
-            mods.put(hashmapGUID, new StatModifier(v1, v2, statGUID, type));
+            mods.put(hashmapGUID, new StatMod(v1, v2, statGUID, type));
         } catch (Exception e) {
             e.printStackTrace();
         }

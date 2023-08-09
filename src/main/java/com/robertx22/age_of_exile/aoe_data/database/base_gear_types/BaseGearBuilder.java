@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.aoe_data.database.base_gear_types;
 
 import com.robertx22.age_of_exile.aoe_data.database.GearDataHelper;
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.TagList;
 import com.robertx22.age_of_exile.database.data.level_ranges.LevelRange;
@@ -22,8 +22,8 @@ public class BaseGearBuilder implements GearDataHelper {
     private String id;
     private String slot;
     private TagList tags;
-    private List<StatModifier> basestats = new ArrayList<>();
-    private List<StatModifier> implicitstats = new ArrayList<>();
+    private List<StatMod> basestats = new ArrayList<>();
+    private List<StatMod> implicitstats = new ArrayList<>();
     private StatRequirement req = new StatRequirement();
     private WeaponTypes wep = WeaponTypes.none;
     private int weight = 1000;
@@ -69,12 +69,12 @@ public class BaseGearBuilder implements GearDataHelper {
     }
 
 
-    public BaseGearBuilder baseStat(StatModifier... mod) {
+    public BaseGearBuilder baseStat(StatMod... mod) {
         this.basestats.addAll(Arrays.asList(mod));
         return this;
     }
 
-    public BaseGearBuilder implicitStat(StatModifier mod) {
+    public BaseGearBuilder implicitStat(StatMod mod) {
         this.implicitstats.add(mod);
         return this;
     }

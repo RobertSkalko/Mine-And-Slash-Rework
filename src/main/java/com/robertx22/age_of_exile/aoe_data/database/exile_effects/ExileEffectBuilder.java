@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.aoe_data.database.exile_effects;
 
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
 import com.robertx22.age_of_exile.database.data.exile_effects.EffectType;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
@@ -50,7 +50,7 @@ public class ExileEffectBuilder {
         return this;
     }
 
-    public ExileEffectBuilder stat(StatModifier stat) {
+    public ExileEffectBuilder stat(StatMod stat) {
         this.effect.stats.add(stat);
         return this;
     }
@@ -71,7 +71,7 @@ public class ExileEffectBuilder {
     }
 
     public ExileEffectBuilder stat(float first, float second, Stat stat, ModType type) {
-        StatModifier data = new StatModifier(first, second, stat, type);
+        StatMod data = new StatMod(first, second, stat, type);
         this.effect.stats.add(data);
         return this;
     }

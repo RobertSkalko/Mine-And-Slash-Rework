@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.affixes;
 
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
 import com.robertx22.age_of_exile.database.data.affixes.AffixTag;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
@@ -25,7 +25,7 @@ public class GenericAffixBuilder<T> {
     TagRequirement tagRequirement = new TagRequirement();
 
     Function<T, String> guid;
-    Function<T, List<StatModifier>> stats;
+    Function<T, List<StatMod>> stats;
 
     HashMap<T, String> nameMap = new HashMap<>();
 
@@ -40,7 +40,7 @@ public class GenericAffixBuilder<T> {
         return this;
     }
 
-    public GenericAffixBuilder<T> stats(Function<T, List<StatModifier>> mods) {
+    public GenericAffixBuilder<T> stats(Function<T, List<StatMod>> mods) {
         this.stats = mods;
         return this;
     }

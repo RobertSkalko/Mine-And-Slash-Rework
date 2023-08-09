@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.database.data.affixes;
 
 import com.robertx22.age_of_exile.database.base.IhasRequirements;
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.requirements.Requirements;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -48,7 +48,7 @@ public class Affix implements IWeighted, IGUID, IAutoLocName, IhasRequirements,
     public List<String> tags = new ArrayList<>();
     public Type type;
 
-    public List<StatModifier> stats = new ArrayList<>();
+    public List<StatMod> stats = new ArrayList<>();
 
     @Override
     public boolean isRegistryEntryValid() {
@@ -93,7 +93,7 @@ public class Affix implements IWeighted, IGUID, IAutoLocName, IhasRequirements,
         return weight;
     }
 
-    public List<StatModifier> getStats() {
+    public List<StatMod> getStats() {
         return stats;
     }
 

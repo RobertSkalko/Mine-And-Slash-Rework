@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.stream.JsonWriter;
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -23,19 +23,19 @@ public class JsonUtils {
         jsonWriter.setLenient(true);
     }
 
-    public static void addStats(List<StatModifier> mods, JsonObject json, String id) {
+    public static void addStats(List<StatMod> mods, JsonObject json, String id) {
         JsonArray array = new JsonArray();
         mods.stream()
-            .map(x -> x.toJson())
-            .collect(Collectors.toList())
-            .forEach(x -> array.add(x));
+                .map(x -> x.toJson())
+                .collect(Collectors.toList())
+                .forEach(x -> array.add(x));
         json.add(id, array);
     }
 
-    public static List<StatModifier> getStats(JsonObject json, String id) {
-        List<StatModifier> mods = new ArrayList<>();
+    public static List<StatMod> getStats(JsonObject json, String id) {
+        List<StatMod> mods = new ArrayList<>();
         json.getAsJsonArray(id)
-            .forEach(x -> mods.add(StatModifier.EMPTY.fromJson(x.getAsJsonObject())));
+                .forEach(x -> mods.add(StatMod.EMPTY.fromJson(x.getAsJsonObject())));
         return mods;
     }
 

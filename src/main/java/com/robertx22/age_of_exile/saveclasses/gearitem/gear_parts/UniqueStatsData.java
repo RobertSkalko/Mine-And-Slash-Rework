@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts;
 
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
@@ -76,7 +76,7 @@ public class UniqueStatsData implements IGearPartTooltip, IRerollable, IStatsCon
     public List<TooltipStatWithContext> getAllStatsWithCtx(GearItemData gear, TooltipInfo info) {
         List<TooltipStatWithContext> list = new ArrayList<>();
         int i = 0;
-        for (StatModifier mod : ExileDB.UniqueGears()
+        for (StatMod mod : ExileDB.UniqueGears()
                 .get(gear.uniq)
                 .uniqueStats()) {
             ExactStatData exact = mod.ToExactStat(perc.get(i), gear.getLevel());
@@ -93,7 +93,7 @@ public class UniqueStatsData implements IGearPartTooltip, IRerollable, IStatsCon
 
         try {
             int i = 0;
-            for (StatModifier mod : ExileDB.UniqueGears()
+            for (StatMod mod : ExileDB.UniqueGears()
                     .get(gear.uniq)
                     .uniqueStats()) {
                 list.add(mod.ToExactStat(perc.get(i), gear.getLevel()));

@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.saveclasses;
 
 import com.google.gson.JsonObject;
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ITooltipList;
@@ -33,7 +33,7 @@ public class ExactStatData implements ISerializable<ExactStatData>, ITooltipList
         return data;
     }
 
-    public static ExactStatData fromStatModifier(StatModifier mod, int percent, float lvl) {
+    public static ExactStatData fromStatModifier(StatMod mod, int percent, float lvl) {
         ExactStatData data = new ExactStatData();
 
         data.v1 = (mod.min + (mod.max - mod.min) * percent / 100F);

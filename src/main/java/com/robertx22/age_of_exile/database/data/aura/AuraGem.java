@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.database.data.aura;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.support_gem.SupportGem;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -25,11 +25,11 @@ public class AuraGem implements ExileRegistry<SupportGem>, ISkillGem {
 
     public float reservation = 0.25F;
 
-    public List<StatModifier> stats = new ArrayList<>();
+    public List<StatMod> stats = new ArrayList<>();
 
     String name;
 
-    public AuraGem(String id, String name, PlayStyle style, float reservation, List<StatModifier> stats) {
+    public AuraGem(String id, String name, PlayStyle style, float reservation, List<StatMod> stats) {
         this.id = id;
         this.name = name + " Aura";
         this.style = style;

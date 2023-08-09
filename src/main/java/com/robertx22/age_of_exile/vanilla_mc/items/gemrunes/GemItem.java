@@ -6,7 +6,7 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.IAutoModel;
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.ItemModelManager;
 import com.robertx22.age_of_exile.database.data.BaseRuneGem;
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.currency.IItemAsCurrency;
 import com.robertx22.age_of_exile.database.data.currency.base.Currency;
 import com.robertx22.age_of_exile.database.data.currency.base.GearCurrency;
@@ -158,7 +158,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
     }
 
     @Override
-    public List<StatModifier> getStatModsForSerialization(SlotFamily family) {
+    public List<StatMod> getStatModsForSerialization(SlotFamily family) {
         return gemType.stats.getFor(family);
     }
 
@@ -248,18 +248,18 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
         }
 
         @Override
-        public List<StatModifier> onArmor() {
-            return Arrays.asList(new StatModifier(MIN_RES, MAX_RES, new ElementalResist(ele), ModType.FLAT));
+        public List<StatMod> onArmor() {
+            return Arrays.asList(new StatMod(MIN_RES, MAX_RES, new ElementalResist(ele), ModType.FLAT));
         }
 
         @Override
-        public List<StatModifier> onJewelry() {
-            return Arrays.asList(new StatModifier(MIN_ELE_DMG, MAX_ELE_DMG, Stats.ELEMENTAL_SPELL_DAMAGE.get(ele)));
+        public List<StatMod> onJewelry() {
+            return Arrays.asList(new StatMod(MIN_ELE_DMG, MAX_ELE_DMG, Stats.ELEMENTAL_SPELL_DAMAGE.get(ele)));
         }
 
         @Override
-        public List<StatModifier> onWeapons() {
-            return Arrays.asList(new StatModifier(MIN_WEP_DMG, MAX_WEP_DMG, Stats.ELEMENTAL_DAMAGE.get(ele), ModType.FLAT));
+        public List<StatMod> onWeapons() {
+            return Arrays.asList(new StatMod(MIN_WEP_DMG, MAX_WEP_DMG, Stats.ELEMENTAL_DAMAGE.get(ele), ModType.FLAT));
         }
     }
 
@@ -267,99 +267,99 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
 
         TOURMALINE("tourmaline", "Tourmaline", ChatFormatting.LIGHT_PURPLE, new GemStatPerTypes() {
             @Override
-            public List<StatModifier> onArmor() {
-                return Arrays.asList(new StatModifier(1, 5, DatapackStats.STR));
+            public List<StatMod> onArmor() {
+                return Arrays.asList(new StatMod(1, 5, DatapackStats.STR));
             }
 
             @Override
-            public List<StatModifier> onJewelry() {
-                return Arrays.asList(new StatModifier(2, 15, HealthRegen.getInstance(), ModType.PERCENT));
+            public List<StatMod> onJewelry() {
+                return Arrays.asList(new StatMod(2, 15, HealthRegen.getInstance(), ModType.PERCENT));
             }
 
             @Override
-            public List<StatModifier> onWeapons() {
-                return Arrays.asList(new StatModifier(1, 5, Stats.LIFESTEAL.get()));
+            public List<StatMod> onWeapons() {
+                return Arrays.asList(new StatMod(1, 5, Stats.LIFESTEAL.get()));
             }
         }),
         AZURITE("azurite", "Azurite", ChatFormatting.AQUA, new GemStatPerTypes() {
             @Override
-            public List<StatModifier> onArmor() {
-                return Arrays.asList(new StatModifier(1, 5, DatapackStats.INT));
+            public List<StatMod> onArmor() {
+                return Arrays.asList(new StatMod(1, 5, DatapackStats.INT));
             }
 
             @Override
-            public List<StatModifier> onJewelry() {
-                return Arrays.asList(new StatModifier(2, 15, ManaRegen.getInstance(), ModType.PERCENT));
+            public List<StatMod> onJewelry() {
+                return Arrays.asList(new StatMod(2, 15, ManaRegen.getInstance(), ModType.PERCENT));
             }
 
             @Override
-            public List<StatModifier> onWeapons() {
-                return Arrays.asList(new StatModifier(1, 3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.mana, AttackType.attack))));
+            public List<StatMod> onWeapons() {
+                return Arrays.asList(new StatMod(1, 3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.mana, AttackType.attack))));
             }
         }),
 
         GARNET("garnet", "Garnet", ChatFormatting.GREEN, new GemStatPerTypes() {
             @Override
-            public List<StatModifier> onArmor() {
-                return Arrays.asList(new StatModifier(1, 5, DatapackStats.DEX));
+            public List<StatMod> onArmor() {
+                return Arrays.asList(new StatMod(1, 5, DatapackStats.DEX));
             }
 
             @Override
-            public List<StatModifier> onJewelry() {
-                return Arrays.asList(new StatModifier(2, 15, EnergyRegen.getInstance(), ModType.PERCENT));
+            public List<StatMod> onJewelry() {
+                return Arrays.asList(new StatMod(2, 15, EnergyRegen.getInstance(), ModType.PERCENT));
             }
 
             @Override
-            public List<StatModifier> onWeapons() {
-                return Arrays.asList(new StatModifier(2, 8, Stats.CRIT_CHANCE.get()));
+            public List<StatMod> onWeapons() {
+                return Arrays.asList(new StatMod(2, 8, Stats.CRIT_CHANCE.get()));
             }
         }),
         OPAL("opal", "Opal", ChatFormatting.GOLD, new GemStatPerTypes() {
             @Override
-            public List<StatModifier> onArmor() {
-                return Arrays.asList(new StatModifier(1, 5, DatapackStats.STR));
+            public List<StatMod> onArmor() {
+                return Arrays.asList(new StatMod(1, 5, DatapackStats.STR));
             }
 
             @Override
-            public List<StatModifier> onJewelry() {
-                return Arrays.asList(new StatModifier(1, 6, Stats.CRIT_CHANCE.get()));
+            public List<StatMod> onJewelry() {
+                return Arrays.asList(new StatMod(1, 6, Stats.CRIT_CHANCE.get()));
             }
 
             @Override
-            public List<StatModifier> onWeapons() {
-                return Arrays.asList(new StatModifier(3, 12, Stats.CRIT_DAMAGE.get()));
+            public List<StatMod> onWeapons() {
+                return Arrays.asList(new StatMod(3, 12, Stats.CRIT_DAMAGE.get()));
             }
         }),
         TOPAZ("topaz", "Topaz", ChatFormatting.YELLOW, new GemStatPerTypes() {
             @Override
-            public List<StatModifier> onArmor() {
-                return Arrays.asList(new StatModifier(MIN_RES, MAX_RES, new ElementalResist(Elements.Lightning)));
+            public List<StatMod> onArmor() {
+                return Arrays.asList(new StatMod(MIN_RES, MAX_RES, new ElementalResist(Elements.Lightning)));
             }
 
             @Override
-            public List<StatModifier> onJewelry() {
-                return Arrays.asList(new StatModifier(2, 15, Energy.getInstance(), ModType.PERCENT));
+            public List<StatMod> onJewelry() {
+                return Arrays.asList(new StatMod(2, 15, Energy.getInstance(), ModType.PERCENT));
             }
 
             @Override
-            public List<StatModifier> onWeapons() {
-                return Arrays.asList(new StatModifier(1, 3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.energy, AttackType.all))));
+            public List<StatMod> onWeapons() {
+                return Arrays.asList(new StatMod(1, 3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.energy, AttackType.all))));
             }
         }),
         AMETHYST("amethyst", "Amethyst", ChatFormatting.DARK_PURPLE, new GemStatPerTypes() {
             @Override
-            public List<StatModifier> onArmor() {
-                return Arrays.asList(new StatModifier(1, 5, DatapackStats.INT));
+            public List<StatMod> onArmor() {
+                return Arrays.asList(new StatMod(1, 5, DatapackStats.INT));
             }
 
             @Override
-            public List<StatModifier> onJewelry() {
-                return Arrays.asList(new StatModifier(1, 6, SkillDamage.getInstance(), ModType.FLAT));
+            public List<StatMod> onJewelry() {
+                return Arrays.asList(new StatMod(1, 6, SkillDamage.getInstance(), ModType.FLAT));
             }
 
             @Override
-            public List<StatModifier> onWeapons() {
-                return Arrays.asList(new StatModifier(2, 10, Stats.CRIT_DAMAGE.get()));
+            public List<StatMod> onWeapons() {
+                return Arrays.asList(new StatMod(2, 10, Stats.CRIT_DAMAGE.get()));
             }
         }),
         RUBY("ruby", "Ruby", ChatFormatting.RED, new EleGem(Elements.Fire)),
@@ -451,7 +451,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
         return opt.orElse(new Gem());
     }
 
-    
+
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {

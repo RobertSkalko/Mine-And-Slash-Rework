@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.database.data.exile_effects;
 
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.spells.components.AttachedSpell;
 import com.robertx22.age_of_exile.database.data.spells.entities.EntitySavedSpellData;
 import com.robertx22.age_of_exile.database.data.value_calc.LevelProvider;
@@ -49,7 +49,7 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
 
     public List<VanillaStatData> mc_stats = new ArrayList<>();
 
-    public List<StatModifier> stats = new ArrayList<>();
+    public List<StatMod> stats = new ArrayList<>();
 
     public AttachedSpell spell;
 

@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts;
 
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.tooltips.StatTooltipType;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.*;
@@ -107,7 +107,7 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
 
         try {
 
-            for (StatModifier mod : gear.GetBaseGearType()
+            for (StatMod mod : gear.GetBaseGearType()
                     .baseStats()) {
                 local.add(mod.ToExactStat(perc, gear.getLevel()));
 

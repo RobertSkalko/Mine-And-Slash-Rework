@@ -1,19 +1,21 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
+import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 
 import java.util.Arrays;
 
 public class WorldUtils {
+
+    public static ResourceLocation DUNGEON_DIM_ID = SlashRef.id("dungeon");
 
     public static void spawnEntity(Level world, Entity entity) {
 
@@ -108,12 +110,12 @@ public class WorldUtils {
 
     }
 
-    public static boolean isDungeonWorld(LevelReader world) {
+    public static boolean isDungeonWorld(Level world) {
         return false;
     }
 
-    public static boolean isMapWorldClass(LevelReader world) {
-        return false; // todo
+    public static boolean isMapWorldClass(Level world) {
+        return VanillaUTIL.REGISTRY.dimensionTypes(world).getKey(world.dimensionType()).equals(DUNGEON_DIM_ID); // todo
 
     }
 

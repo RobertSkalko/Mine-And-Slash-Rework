@@ -15,6 +15,7 @@
     "StopFireInDungeonMixin"
   ],
   "client": [
+    "MixinServerWorldInfo",
     "ItemGlintMixin",
     "ItemStackMixin",
     "WorldRendererMixin"

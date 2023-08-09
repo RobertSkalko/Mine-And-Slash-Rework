@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.database.data.mob_affixes;
 
 import com.google.gson.JsonObject;
 import com.robertx22.age_of_exile.aoe_data.datapacks.JsonUtils;
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
@@ -14,18 +14,16 @@ import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.library_of_exile.registry.serialization.ISerializable;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.ChatFormatting;
+import net.minecraft.world.entity.LivingEntity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
-
 public class MobAffix implements JsonExileRegistry<MobAffix>, ISerializable<MobAffix>, IAutoLocName, IApplyableStats {
 
-    List<StatModifier> stats = new ArrayList<>();
+    List<StatMod> stats = new ArrayList<>();
     String id = "";
     int weight = 1000;
     public String icon = "";
@@ -38,7 +36,7 @@ public class MobAffix implements JsonExileRegistry<MobAffix>, ISerializable<MobA
         this.format = format;
     }
 
-    public MobAffix setMods(StatModifier... mods) {
+    public MobAffix setMods(StatMod... mods) {
         this.stats = Arrays.asList(mods);
         return this;
     }
@@ -67,17 +65,17 @@ public class MobAffix implements JsonExileRegistry<MobAffix>, ISerializable<MobA
     public MobAffix fromJson(JsonObject json) {
 
         MobAffix affix = new MobAffix(
-            getGUIDFromJson(json),
-            "",
-            ChatFormatting.valueOf(json.get("format")
-                .getAsString()));
+                getGUIDFromJson(json),
+                "",
+                ChatFormatting.valueOf(json.get("format")
+                        .getAsString()));
 
         try {
             affix.stats = JsonUtils.getStats(json, "stats");
             affix.icon = json.get("icon")
-                .getAsString();
+                    .getAsString();
             affix.weight = json.get("weight")
-                .getAsInt();
+                    .getAsInt();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -125,7 +123,7 @@ public class MobAffix implements JsonExileRegistry<MobAffix>, ISerializable<MobA
         List<ExactStatData> stats = new ArrayList<>();
         try {
             this.stats.forEach(x -> stats.add(x.ToExactStat(100, Load.Unit(en)
-                .getLevel())));
+                    .getLevel())));
         } catch (Exception e) {
             e.printStackTrace();
         }

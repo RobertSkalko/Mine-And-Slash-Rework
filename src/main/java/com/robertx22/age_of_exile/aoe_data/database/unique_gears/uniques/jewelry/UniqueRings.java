@@ -4,7 +4,7 @@ import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearType
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuilder;
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
@@ -28,10 +28,10 @@ public class UniqueRings implements ExileRegistryInit {
                         BaseGearTypes.RING)
 
                 .stats(Arrays.asList(
-                        new StatModifier(15, 25, new ElementalResist(Elements.Chaos), ModType.PERCENT),
-                        new StatModifier(25, 50, SpecialStats.BETTER_FOOD_BUFFS, ModType.FLAT),
-                        new StatModifier(10, 15, SkillDamage.getInstance(), ModType.FLAT),
-                        new StatModifier(5, 10, ManaRegen.getInstance(), ModType.PERCENT)
+                        new StatMod(15, 25, new ElementalResist(Elements.Chaos), ModType.PERCENT),
+                        new StatMod(25, 50, SpecialStats.BETTER_FOOD_BUFFS, ModType.FLAT),
+                        new StatMod(10, 15, SkillDamage.getInstance(), ModType.FLAT),
+                        new StatMod(5, 10, ManaRegen.getInstance(), ModType.PERCENT)
 
                 ))
 
@@ -44,12 +44,12 @@ public class UniqueRings implements ExileRegistryInit {
                         BaseGearTypes.RING)
                 .setReplacesName()
                 .stats(Arrays.asList(
-                        new StatModifier(5, 15, Stats.ELEMENTAL_DAMAGE.get(Elements.Cold), ModType.FLAT),
-                        new StatModifier(6, 10, DodgeRating.getInstance(), ModType.PERCENT),
-                        new StatModifier(6, 15, Stats.RESOURCE_ON_KILL.get(ResourceType.mana), ModType.FLAT),
-                        new StatModifier(10, 15, Stats.CRIT_DAMAGE.get(), ModType.FLAT),
-                        new StatModifier(5, 10, Stats.COOLDOWN_REDUCTION.get(), ModType.FLAT),
-                        new StatModifier(-3, -6, DatapackStats.STR, ModType.FLAT)
+                        new StatMod(5, 15, Stats.ELEMENTAL_DAMAGE.get(Elements.Cold), ModType.FLAT),
+                        new StatMod(6, 10, DodgeRating.getInstance(), ModType.PERCENT),
+                        new StatMod(6, 15, Stats.RESOURCE_ON_KILL.get(ResourceType.mana), ModType.FLAT),
+                        new StatMod(10, 15, Stats.CRIT_DAMAGE.get(), ModType.FLAT),
+                        new StatMod(5, 10, Stats.COOLDOWN_REDUCTION.get(), ModType.FLAT),
+                        new StatMod(-3, -6, DatapackStats.STR, ModType.FLAT)
                 ))
 
                 .build();

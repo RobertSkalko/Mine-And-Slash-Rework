@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database;
 
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
@@ -41,20 +41,20 @@ public interface GearDataHelper {
         }
     }
 
-    public default StatModifier getStat(ArmorStat stat, ArmorSlot slot) {
+    public default StatMod getStat(ArmorStat stat, ArmorSlot slot) {
 
         float v1min = stat.min * slot.multi;
         float v1max = stat.max * slot.multi;
 
-        return new StatModifier(v1min, v1max, stat.stat, ModType.ITEM_FLAT);
+        return new StatMod(v1min, v1max, stat.stat, ModType.ITEM_FLAT);
     }
 
-    public default StatModifier getAttackDamageStat(WeaponTypes weapon) {
+    public default StatMod getAttackDamageStat(WeaponTypes weapon) {
 
         float v1min = 2;
         float v1max = 6;
 
-        return new StatModifier(v1min, v1max, WeaponDamage.getInstance(), ModType.ITEM_FLAT);
+        return new StatMod(v1min, v1max, WeaponDamage.getInstance(), ModType.ITEM_FLAT);
     }
 
 }

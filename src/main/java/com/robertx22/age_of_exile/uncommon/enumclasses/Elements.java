@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public enum Elements {
 
-    
+
     Physical(false, true, "Physical", ChatFormatting.GOLD, "physical", "\u2600"),
     Fire(true, true, "Fire", ChatFormatting.RED, "fire", "\u2600"),
     Cold(true, true, "Cold", ChatFormatting.AQUA, "water", "\u2600"),
@@ -72,9 +72,14 @@ public enum Elements {
     private static List<Elements> allIncludingPhys = Arrays.stream(Elements.values()).filter(x -> x.isSingle).collect(Collectors.toList());
     private static List<Elements> allExcludingPhys = Arrays.stream(Elements.values()).filter(x -> !x.isPhysical()).collect(Collectors.toList());
     private static List<Elements> allSingleElementals = Arrays.stream(Elements.values()).filter(x -> x.isSingle && x.isElemental).collect(Collectors.toList());
+    private static List<Elements> allSingle = Arrays.stream(Elements.values()).filter(x -> x.isSingle).collect(Collectors.toList());
 
     public static List<Elements> getAllSingleElementals() {
         return allSingleElementals;
+    }
+
+    public static List<Elements> getAllSingle() {
+        return allSingle;
     }
 
     public static List<Elements> getAllSingleIncludingPhysical() {

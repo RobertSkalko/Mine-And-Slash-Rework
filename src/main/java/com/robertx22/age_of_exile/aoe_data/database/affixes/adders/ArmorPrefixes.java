@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.aoe_data.database.affixes.adders;
 
 import com.robertx22.age_of_exile.aoe_data.database.affixes.AffixBuilder;
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType.SlotTag;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
@@ -43,22 +43,22 @@ public class ArmorPrefixes implements ExileRegistryInit {
         for (TYPE type : stats) {
             AffixBuilder.Normal("item_flat_" + type.stat.GUID())
                     .Named(type.name)
-                    .stats(new StatModifier(3, 20, type.stat, ModType.ITEM_FLAT))
+                    .stats(new StatMod(3, 20, type.stat, ModType.ITEM_FLAT))
                     .includesTags(type.tag)
                     .Prefix()
                     .Build();
-            
+
 
             AffixBuilder.Normal("item_perc_" + type.stat.GUID())
                     .Named(type.name)
-                    .stats(new StatModifier(10, 150, type.stat, ModType.ITEM_PERCENT))
+                    .stats(new StatMod(10, 150, type.stat, ModType.ITEM_PERCENT))
                     .includesTags(type.tag)
                     .Prefix()
                     .Build();
 
             AffixBuilder.Normal("item_both_" + type.stat.GUID())
                     .Named(type.name)
-                    .stats(new StatModifier(2, 4, type.stat, ModType.ITEM_FLAT), new StatModifier(5, 30, type.stat, ModType.ITEM_PERCENT))
+                    .stats(new StatMod(2, 4, type.stat, ModType.ITEM_FLAT), new StatMod(5, 30, type.stat, ModType.ITEM_PERCENT))
                     .includesTags(type.tag)
                     .Prefix()
                     .Build();

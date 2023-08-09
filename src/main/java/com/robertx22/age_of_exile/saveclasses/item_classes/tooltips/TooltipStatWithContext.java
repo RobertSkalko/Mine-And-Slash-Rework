@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.saveclasses.item_classes.tooltips;
 
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ITooltipList;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import net.minecraft.network.chat.MutableComponent;
@@ -11,11 +11,11 @@ public class TooltipStatWithContext implements ITooltipList {
 
     public TooltipStatInfo statinfo;
     public
-    StatModifier mod;
+    StatMod mod;
     public
     Integer level;
 
-    public TooltipStatWithContext(TooltipStatInfo statinfo, StatModifier mod, Integer level) {
+    public TooltipStatWithContext(TooltipStatInfo statinfo, StatMod mod, Integer level) {
         this.statinfo = statinfo;
         this.mod = mod;
         this.level = level;

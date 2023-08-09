@@ -18,7 +18,7 @@ public class DisableMobSpawnsInDungeon {
 
     @Inject(method = "checkSpawnRules", at = @At(value = "HEAD"), cancellable = true)
     private static <T extends Entity> void disableCanSpawn(EntityType<T> pEntityType, ServerLevelAccessor pServerLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom, CallbackInfoReturnable<Boolean> cir) {
-        if (WorldUtils.isMapWorldClass(pServerLevel)) {
+        if (WorldUtils.isMapWorldClass(pServerLevel.getLevel())) {
             if (pSpawnType == MobSpawnType.NATURAL) {
                 cir.setReturnValue(false);
             }

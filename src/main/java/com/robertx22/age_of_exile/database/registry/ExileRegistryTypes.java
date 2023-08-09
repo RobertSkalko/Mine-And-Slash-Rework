@@ -63,5 +63,6 @@ public class ExileRegistryTypes {
     public static ExileRegistryType AILMENT = ExileRegistryType.register(SlashRef.MODID, "ailment", 27, null, SyncTime.NEVER);
     public static ExileRegistryType AURA = ExileRegistryType.register(SlashRef.MODID, "aura", 28, null, SyncTime.NEVER);
     public static ExileRegistryType SUPPORT_GEM = ExileRegistryType.register(SlashRef.MODID, "support_gem", 29, null, SyncTime.NEVER);
-   
+    public static ExileRegistryType MAP_AFFIX = ExileRegistryType.register(SlashRef.MODID, "map_affix", 30, null, SyncTime.NEVER);
+
 }

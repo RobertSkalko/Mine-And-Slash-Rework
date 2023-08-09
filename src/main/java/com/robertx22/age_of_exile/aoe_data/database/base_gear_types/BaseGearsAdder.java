@@ -3,7 +3,7 @@ package com.robertx22.age_of_exile.aoe_data.database.base_gear_types;
 import com.robertx22.age_of_exile.aoe_data.database.GearDataHelper;
 import com.robertx22.age_of_exile.aoe_data.database.gear_slots.GearSlots;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType.SlotTag;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.TagList;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
@@ -94,8 +94,8 @@ public class BaseGearsAdder implements ExileRegistryInit, GearDataHelper {
 
         BaseGearBuilder.of(BaseGearTypes.SHIELD, GearSlots.SHIELD, "Tower Shield")
                 .tags(new TagList(SlotTag.shield, SlotTag.offhand_family, SlotTag.armor_stat, SlotTag.strength))
-                .baseStat(new StatModifier(6, 12, Armor.getInstance(), ModType.FLAT))
-                .baseStat(new StatModifier(-25, -25, Stats.STYLE_DAMAGE.get(PlayStyle.INT)))
+                .baseStat(new StatMod(6, 12, Armor.getInstance(), ModType.FLAT))
+                .baseStat(new StatMod(-25, -25, Stats.STYLE_DAMAGE.get(PlayStyle.INT)))
                 .build();
 
         BaseGearBuilder.weapon(BaseGearTypes.BOW, GearSlots.BOW, WeaponTypes.bow)

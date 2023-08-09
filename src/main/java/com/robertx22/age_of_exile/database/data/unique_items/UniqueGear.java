@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.database.data.unique_items;
 
 import com.google.gson.JsonObject;
 import com.robertx22.age_of_exile.aoe_data.datapacks.JsonUtils;
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
@@ -22,7 +22,7 @@ public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, 
 
     public static UniqueGear SERIALIZER = new UniqueGear();
 
-    public List<StatModifier> uniqueStats = new ArrayList<>();
+    public List<StatMod> uniqueStats = new ArrayList<>();
     public int weight = 1000;
     public String guid;
     public String uniqueRarity = IRarity.UNIQUE_ID;
@@ -67,7 +67,7 @@ public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, 
             uniq.replaces_name = json.get("replaces_name")
                     .getAsBoolean();
         }
-    
+
         return uniq;
     }
 
@@ -91,7 +91,7 @@ public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, 
                 .get(uniqueRarity);
     }
 
-    public List<StatModifier> uniqueStats() {
+    public List<StatMod> uniqueStats() {
         return this.uniqueStats;
     }
 

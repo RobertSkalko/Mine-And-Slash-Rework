@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.database.data.spells.components;
 
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellDesc;
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
 import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
@@ -61,7 +61,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     public String effect_tip = "";
 
     public transient String locDesc = "";
-    public transient List<StatModifier> statsForSkillGem = new ArrayList<>();
+    public transient List<StatMod> statsForSkillGem = new ArrayList<>();
 
     public boolean isAllowedInDimension(Level world) {
         if (disabled_dims.isEmpty()) {

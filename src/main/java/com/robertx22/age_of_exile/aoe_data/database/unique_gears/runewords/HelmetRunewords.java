@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.aoe_data.database.unique_gears.runewords;
 
 import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearTypes;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuilder;
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
@@ -24,9 +24,9 @@ public class HelmetRunewords implements ExileRegistryInit {
                         BaseGearTypes.CLOTH_HELMET)
                 .setReplacesName()
                 .stats(Arrays.asList(
-                        new StatModifier(20, 30, ManaRegen.getInstance(), ModType.PERCENT),
-                        new StatModifier(10, 25, Mana.getInstance(), ModType.FLAT),
-                        new StatModifier(10, 25, new ElementalResist(Elements.Fire), ModType.FLAT)
+                        new StatMod(20, 30, ManaRegen.getInstance(), ModType.PERCENT),
+                        new StatMod(10, 25, Mana.getInstance(), ModType.FLAT),
+                        new StatMod(10, 25, new ElementalResist(Elements.Fire), ModType.FLAT)
                 ))
                 .makeRuneWordOnly(Arrays.asList(RuneItem.RuneType.ITA, RuneItem.RuneType.DOS, RuneItem.RuneType.TOQ))
                 .devComment("Mana focused caster helmet")

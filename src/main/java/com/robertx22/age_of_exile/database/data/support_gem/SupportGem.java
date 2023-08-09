@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.database.data.support_gem;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
@@ -26,11 +26,11 @@ public class SupportGem implements ISkillGem, ExileRegistry<SupportGem> {
 
     public float manaMulti = 0.25F;
 
-    public List<StatModifier> stats = new ArrayList<>();
+    public List<StatMod> stats = new ArrayList<>();
 
     public int weight = 1000;
 
-    public SupportGem(String id, String name, PlayStyle style, float manaMulti, List<StatModifier> stats) {
+    public SupportGem(String id, String name, PlayStyle style, float manaMulti, List<StatMod> stats) {
         this.id = id;
         this.locname = name + " Support Gem";
         this.style = style;

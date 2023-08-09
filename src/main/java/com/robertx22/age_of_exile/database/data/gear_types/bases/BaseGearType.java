@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.database.data.gear_types.bases;
 
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gear_types.weapons.mechanics.NormalWeaponMechanic;
 import com.robertx22.age_of_exile.database.data.gear_types.weapons.mechanics.WeaponMechanic;
@@ -30,8 +30,8 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
     public int weight = 1000;
     public PlayStyle style = PlayStyle.STR;
 
-    public List<StatModifier> implicit_stats = new ArrayList<>();
-    public List<StatModifier> base_stats = new ArrayList<>();
+    public List<StatMod> implicit_stats = new ArrayList<>();
+    public List<StatMod> base_stats = new ArrayList<>();
 
     public WeaponTypes weapon_type = WeaponTypes.none;
     public TagList tags = new TagList();
@@ -49,11 +49,11 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
 
     }
 
-    public List<StatModifier> implicitStats() {
+    public List<StatMod> implicitStats() {
         return implicit_stats;
     }
 
-    public List<StatModifier> baseStats() {
+    public List<StatMod> baseStats() {
         return base_stats;
     }
 

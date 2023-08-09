@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.affixes;
 
-import com.robertx22.age_of_exile.database.data.StatModifier;
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
 import com.robertx22.age_of_exile.database.data.affixes.AffixTag;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class AffixBuilder {
 
     String guid;
-    List<StatModifier> stats = new ArrayList<>();
+    List<StatMod> stats = new ArrayList<>();
     String langName;
     boolean allowDupli = false;
     int weight = 1000;
@@ -77,14 +77,14 @@ public class AffixBuilder {
     }
 
     public AffixBuilder coreStat(Stat stat) {
-        return this.stats(new StatModifier(2, 6, stat, ModType.FLAT));
+        return this.stats(new StatMod(2, 6, stat, ModType.FLAT));
     }
 
     public AffixBuilder bigCoreStat(Stat stat) {
-        return this.stats(new StatModifier(4, 8, stat, ModType.FLAT));
+        return this.stats(new StatMod(4, 8, stat, ModType.FLAT));
     }
 
-    public AffixBuilder stats(StatModifier... stats) {
+    public AffixBuilder stats(StatMod... stats) {
         this.stats.addAll(Arrays.asList(stats));
         return this;
     }

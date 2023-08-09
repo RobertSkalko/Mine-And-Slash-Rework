@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class StatModifier implements ISerializable<StatModifier>, IByteBuf<StatModifier> {
+public class StatMod implements ISerializable<StatMod>, IByteBuf<StatMod> {
 
     public float min = 0;
     public float max = 0;
@@ -27,15 +27,15 @@ public class StatModifier implements ISerializable<StatModifier>, IByteBuf<StatM
     public String stat;
     public String type;
 
-    public static StatModifier EMPTY = new StatModifier();
+    public static StatMod EMPTY = new StatMod();
 
-    private StatModifier() {
+    private StatMod() {
 
     }
 
     @Override
-    public StatModifier getFromBuf(FriendlyByteBuf buf) {
-        StatModifier mod = new StatModifier();
+    public StatMod getFromBuf(FriendlyByteBuf buf) {
+        StatMod mod = new StatMod();
         mod.min = buf.readFloat();
         mod.max = buf.readFloat();
 
@@ -54,8 +54,8 @@ public class StatModifier implements ISerializable<StatModifier>, IByteBuf<StatM
 
     }
 
-    public static StatModifier percent(float firstMin, float firstMax, Stat stat) {
-        StatModifier mod = new StatModifier();
+    public static StatMod percent(float firstMin, float firstMax, Stat stat) {
+        StatMod mod = new StatMod();
         mod.min = firstMin;
         mod.max = firstMax;
         mod.stat = stat.GUID();
@@ -67,21 +67,21 @@ public class StatModifier implements ISerializable<StatModifier>, IByteBuf<StatM
         return mod;
     }
 
-    public StatModifier(float firstMin, float firstMax, Stat stat) {
+    public StatMod(float firstMin, float firstMax, Stat stat) {
         this.min = firstMin;
         this.max = firstMax;
         this.stat = stat.GUID();
         this.type = ModType.FLAT.name();
     }
 
-    public StatModifier(float firstMin, float firstMax, String stat, ModType type) {
+    public StatMod(float firstMin, float firstMax, String stat, ModType type) {
         this.min = firstMin;
         this.max = firstMax;
         this.stat = stat;
         this.type = type.name();
     }
 
-    public StatModifier(float firstMin, float firstMax, Stat stat, ModType type) {
+    public StatMod(float firstMin, float firstMax, Stat stat, ModType type) {
 
         this.min = firstMin;
         this.max = firstMax;
@@ -89,7 +89,7 @@ public class StatModifier implements ISerializable<StatModifier>, IByteBuf<StatM
         this.type = type.name();
     }
 
-    public StatModifier(float firstMin, float firstMax, float secondMin, float secondMax, String stat, ModType type) {
+    public StatMod(float firstMin, float firstMax, float secondMin, float secondMax, String stat, ModType type) {
 
         this.min = firstMin;
         this.max = firstMax;
@@ -148,7 +148,7 @@ public class StatModifier implements ISerializable<StatModifier>, IByteBuf<StatM
     }
 
     @Override
-    public StatModifier fromJson(JsonObject json) {
+    public StatMod fromJson(JsonObject json) {
 
         float firstMin = json.get("min")
                 .getAsFloat();
@@ -161,7 +161,7 @@ public class StatModifier implements ISerializable<StatModifier>, IByteBuf<StatM
         ModType type = ModType.fromString(json.get("type")
                 .getAsString());
 
-        return new StatModifier(firstMin, firstMax, stat, type);
+        return new StatMod(firstMin, firstMax, stat, type);
 
     }
 
