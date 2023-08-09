@@ -1,8 +1,0 @@
-{
-  "feature": "mmorpg:dungeon",
-  "placement": [
-    {
-      "type": "minecraft:biome"
-    }
-  ]
-}

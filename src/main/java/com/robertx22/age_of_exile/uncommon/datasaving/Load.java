@@ -6,6 +6,8 @@ import com.robertx22.age_of_exile.capability.player.EntitySpellData;
 import com.robertx22.age_of_exile.capability.player.PlayerBackpackData;
 import com.robertx22.age_of_exile.capability.player.PlayerData;
 import com.robertx22.age_of_exile.capability.world.WorldData;
+import com.robertx22.age_of_exile.maps.MapData;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -39,6 +41,16 @@ public class Load {
 
     public static WorldData worldData(Level l) {
         return l.getServer().overworld().getCapability(WorldData.INSTANCE).orElse(null);
+    }
+
+    public static MapData mapAt(Level l, BlockPos pos) {
+        try {
+            MapData d = l.getServer().overworld().getCapability(WorldData.INSTANCE).orElse(null).map.getMap(pos).get();
+            return d;
+        } catch (Exception e) {
+            // throw new RuntimeException(e);
+        }
+        return null;
     }
 
     public static ChunkData chunkData(LevelChunk c) {

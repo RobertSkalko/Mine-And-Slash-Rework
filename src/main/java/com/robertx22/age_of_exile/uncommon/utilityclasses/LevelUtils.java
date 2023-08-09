@@ -144,27 +144,6 @@ public class LevelUtils {
         lvl = Mth.clamp(lvl, 1, GameBalanceConfig.get().MAX_LEVEL);
 
 
-        if (nearestPlayer != null) {
-            /*
-            int bonusDiffLevel = Load.playerRPGData(nearestPlayer).scalingDifficulty.getBonusLevels();
-
-            int max = Load.Unit(nearestPlayer)
-                    .getLevel() + ServerContainer.get().MAX_MOB_LVL_HIGHER_THAN_PLAYER_FOR_DIFF.get();
-
-            int cangive = max - lvl;
-            if (cangive < 0) {
-                cangive = 0;
-            }
-
-            if (bonusDiffLevel > cangive) {
-                bonusDiffLevel = cangive;
-            }
-
-            lvl += bonusDiffLevel;
-
-             */
-        }
-
         lvl = Mth.clamp(lvl, dimConfig.min_lvl, dimConfig.max_lvl);
         lvl = Mth.clamp(lvl, 1, GameBalanceConfig.get().MAX_LEVEL);
 

@@ -2,9 +2,7 @@ package com.robertx22.age_of_exile.maps;
 
 
 import com.robertx22.age_of_exile.maps.generator.RoomType;
-import com.robertx22.age_of_exile.maps.groups.AllGroup;
-import com.robertx22.age_of_exile.maps.groups.IceTempleGroup;
-import com.robertx22.age_of_exile.maps.groups.MiscGroup;
+import com.robertx22.age_of_exile.maps.groups.*;
 import com.robertx22.age_of_exile.maps.mobs.SpawnedMob;
 import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.library_of_exile.utils.RandomUtils;
@@ -19,8 +17,6 @@ public abstract class RoomGroup implements IWeighted {
     public static MiscGroup MISC = new MiscGroup();
 
 
-    // todo
-    /*
     public static TestGroup TEST = new TestGroup();
 
 
@@ -39,8 +35,6 @@ public abstract class RoomGroup implements IWeighted {
     //public static SpiderNestGroup SPIDER_NEST = new SpiderNestGroup();
 
 
-     */
-
     public static AllGroup ALL = new AllGroup();
 
     private static List<RoomGroup> all = new ArrayList<>();
@@ -48,7 +42,7 @@ public abstract class RoomGroup implements IWeighted {
     public static List<RoomGroup> getAll() {
 
         if (all.isEmpty()) {
-/*
+
             all.add(MOSSY_BRICK);
             all.add(TEST);
             all.add(STONE_BRICK);
@@ -59,15 +53,14 @@ public abstract class RoomGroup implements IWeighted {
             all.add(TENT);
             all.add(STEAMPUNK);
             all.add(NATURE);
-            all.add(MISC);
             all.add(NETHER);
             all.add(SEWERS);
             all.add(WIDE_NATURE);
 
- */
+
             all.add(ICE_TEMPLE);
             all.add(MISC);
-            //all.add(SPIDER_NEST);
+            
             all.add(ALL);
         }
 

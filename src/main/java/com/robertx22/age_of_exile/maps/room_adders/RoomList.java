@@ -1,11 +1,9 @@
-package com.robertx22.age_of_exile.maps.groups;
+package com.robertx22.age_of_exile.maps.room_adders;
 
 
 import com.robertx22.age_of_exile.maps.DungeonRoom;
 import com.robertx22.age_of_exile.maps.RoomGroup;
 import com.robertx22.age_of_exile.maps.generator.RoomType;
-import com.robertx22.age_of_exile.maps.room_adders.AllRoomAdder;
-import com.robertx22.age_of_exile.maps.room_adders.IceTempleRoomAdder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +20,7 @@ public class RoomList {
     public static List<DungeonRoom> getAllRooms() {
 
         if (rooms.isEmpty()) {
-            /*
+
             new NatureRoomAdder().addAllRooms();
             new SteampunkRoomAdder().addAllRooms();
             new TentRoomAdder().addAllRooms();
@@ -34,9 +32,9 @@ public class RoomList {
             new BrickRoomAdder().addAllRooms();
             new SewersRoomAdder().addAllRooms();
             new NetherRoomAdder().addAllRooms();
-                 new WideNatureRoomAdder().addAllRooms();
+            new WideNatureRoomAdder().addAllRooms();
 
-             */
+
             new IceTempleRoomAdder().addAllRooms();
             //new SpiderNestRoomAdder().addAllRooms();
             new AllRoomAdder().addAllRooms();

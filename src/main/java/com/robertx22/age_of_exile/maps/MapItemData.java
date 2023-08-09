@@ -59,10 +59,8 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
 
     public float getBonusLootMulti() {
-        float multi = 1F;
-        float add = 1F;
-
-        return 1 + (bonusFormula() * multi * add);
+        return bonusFormula();
+       
     }
 
     public float bonusFormula() {
@@ -70,10 +68,8 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
     }
 
     public float getBonusExpMulti() {
-        float multi = 0.25F;
-        float add = 1F;
 
-        return 1 + (bonusFormula() * multi * add);
+        return (bonusFormula());
     }
 
 

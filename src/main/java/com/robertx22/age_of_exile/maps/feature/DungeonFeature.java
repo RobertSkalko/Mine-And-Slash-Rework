@@ -4,30 +4,17 @@ import com.robertx22.age_of_exile.maps.generator.BuiltRoom;
 import com.robertx22.age_of_exile.maps.generator.DungeonBuilder;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 
-public class DungeonFeature extends Feature<NoneFeatureConfiguration> {
-    public DungeonFeature() {
-        super(NoneFeatureConfiguration.CODEC);
-    }
+public class DungeonFeature {
 
-    private static <T> Registry<ConfiguredFeature<?, ?>> getRegistry(ServerLevel serverLevel) {
-        return serverLevel.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE);
-    }
 
     /*
     public static int placeFeature(ServerLevel serverlevel, BlockPos pPos) throws CommandSyntaxException {
@@ -56,24 +43,6 @@ public class DungeonFeature extends Feature<NoneFeatureConfiguration> {
     }
 
      */
-
-    @Override
-    public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> ctx) {
-
-        WorldGenLevel level = ctx.level();
-        RandomSource rand = ctx.random();
-        BlockPos pos = ctx.origin();
-
-        // todo
-        if (level.registryAccess().registry(Registries.DIMENSION_TYPE).get().getKey(level.dimensionType()).equals(WorldUtils.DUNGEON_DIM_ID)) {
-
-
-            return generateStructure(level, new ChunkPos(pos), rand);
-        }
-
-
-        return false;
-    }
 
     public static boolean place(LevelAccessor level, RandomSource rand, BlockPos pos) {
 

@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.misc.BonusExp;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.LootUtils;
 import com.robertx22.age_of_exile.loot.MasterLootGen;
+import com.robertx22.age_of_exile.maps.MapData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TeamUtils;
@@ -113,6 +114,10 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
 
         if (WorldUtils.isMapWorldClass(victim.level())) {
 
+            MapData map = Load.worldData(victim.level()).map.getMap(victim.blockPosition()).get();
+            if (map != null) {
+                exp *= map.map.getBonusLootMulti();
+            }
         }
 
         float baseexp = exp;

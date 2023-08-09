@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuantit
 import com.robertx22.age_of_exile.database.data.stats.types.misc.ExtraMobDropsStat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.generators.BaseLootGen;
+import com.robertx22.age_of_exile.maps.MapData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
@@ -40,7 +41,9 @@ public class LootInfo {
     private int maxItems = 50;
     public boolean isMapWorld = false;
     public PlayerData rpgData;
+    public MapData map;
     public BlockPos pos;
+
 
     public int getMinItems() {
         return minItems;
@@ -138,7 +141,7 @@ public class LootInfo {
         // order matters
         errorIfClient();
         setWorld();
-        setDifficulty();
+        setTier();
         setLevel();
 
         if (player != null) {
@@ -146,16 +149,15 @@ public class LootInfo {
         }
     }
 
-
-    private LootInfo setDifficulty() {
-
-        if (world != null && pos != null) {
-            if (WorldUtils.isMapWorldClass(world)) {
-            }
+    private LootInfo setTier() {
+        if (map != null) {
+            this.tier = map.map.tier;
         }
+
         return this;
 
     }
+
 
     private void setLevel() {
 
@@ -170,6 +172,8 @@ public class LootInfo {
 
 
         this.tier = LevelUtils.levelToTier(level);
+
+
     }
 
     private void errorIfClient() {
@@ -180,9 +184,16 @@ public class LootInfo {
 
     private void setWorld() {
         if (world != null) {
-        }
-        if (isMapWorld) {
+            if (WorldUtils.isMapWorldClass(world)) {
 
+                var data = Load.worldData(world).map.getMap(this.pos);
+
+                if (data.get() != null) {
+                    this.isMapWorld = true;
+                    this.map = data.get();
+                }
+
+            }
         }
     }
 

@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.maps.room_adders;
 import com.robertx22.age_of_exile.maps.DungeonRoom;
 import com.robertx22.age_of_exile.maps.RoomGroup;
 import com.robertx22.age_of_exile.maps.generator.RoomType;
-import com.robertx22.age_of_exile.maps.groups.RoomList;
 
 public abstract class BaseRoomAdder {
 

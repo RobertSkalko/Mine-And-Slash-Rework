@@ -22,6 +22,7 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.unit.*;
 import com.robertx22.age_of_exile.threat_aggro.ThreatData;
 import com.robertx22.age_of_exile.uncommon.datasaving.CustomExactStats;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.datasaving.UnitNbt;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
@@ -36,6 +37,7 @@ import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityTypeUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.OnScreenMessageUtils;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.age_of_exile.vanilla_mc.potion_effects.EntityStatusEffectsData;
 import com.robertx22.library_of_exile.components.ICap;
 import com.robertx22.library_of_exile.main.Packets;
@@ -612,13 +614,11 @@ public class EntityData implements ICap, INeededForClient {
         this.setMobStats = true;
 
 
-        /*
-        if (WorldUtils.isMapWorldClass(entity.level)) {
+        if (WorldUtils.isMapWorldClass(entity.level())) {
             try {
-                BlockPos pos = entity.blockPosition();
-                DungeonData data = Load.dungeonData(entity.level).data.get(pos).data;
-                if (!data.isEmpty()) {
-                    this.setLevel(data.lv);
+                var data = Load.mapAt(entity.level(), entity.blockPosition());
+                if (data != null) {
+                    this.setLevel(data.map.getLevel());
                     return;
                 } else {
                     System.out.print("A mob spawned in a dungeon world without a dungeon data nearby!");
@@ -629,7 +629,6 @@ public class EntityData implements ICap, INeededForClient {
             }
         }
 
-         */
 
         setMobLvlNormally(entity, nearestPlayer);
 

@@ -39,24 +39,24 @@ public class MapBlock extends BaseEntityBlock {
             MapItemData data = StackSaving.MAP.loadFrom(p.getItemInHand(pHand));
 
 
-            if (data != null) {
-                Load.worldData(level).map.startNewMap(p, data);
-                SoundUtils.playSound(p, SoundEvents.EXPERIENCE_ORB_PICKUP);
-                MapBlockEntity be = (MapBlockEntity) level.getBlockEntity(pPos);
-                be.mapId = p.getStringUUID();
-                return InteractionResult.SUCCESS;
-            }
-
-            if (p.getItemInHand(pHand).is(SlashItems.MAP_SETTER.get())) {
-                MapBlockEntity be = (MapBlockEntity) level.getBlockEntity(pPos);
-                be.mapId = p.getStringUUID();
-                return InteractionResult.SUCCESS;
-            }
-
             if (WorldUtils.isDungeonWorld(level)) {
                 Load.playerRPGData(p).map.teleportBack(p);
 
             } else {
+
+                if (data != null) {
+                    Load.worldData(level).map.startNewMap(p, data);
+                    SoundUtils.playSound(p, SoundEvents.EXPERIENCE_ORB_PICKUP);
+                    MapBlockEntity be = (MapBlockEntity) level.getBlockEntity(pPos);
+                    be.mapId = p.getStringUUID();
+                    return InteractionResult.SUCCESS;
+                }
+                if (p.getItemInHand(pHand).is(SlashItems.MAP_SETTER.get())) {
+                    MapBlockEntity be = (MapBlockEntity) level.getBlockEntity(pPos);
+                    be.mapId = p.getStringUUID();
+                    return InteractionResult.SUCCESS;
+                }
+
                 MapBlockEntity be = (MapBlockEntity) level.getBlockEntity(pPos);
 
                 var map = Load.worldData(level).map.getMapFromPlayerID(be.mapId);
