@@ -59,6 +59,7 @@ public class ServerContainer {
         PVP_DMG_MULTI = b.defineInRange("pvp_dmg_multi", 1D, 0, 1000);
 
         GEAR_DROPRATE = b.defineInRange("gear_drop_rate", 7D, 0, 1000);
+        MAP_DROPRATE = b.defineInRange("map_drop_rate", 2D, 0, 1000);
         GEM_DROPRATE = b.defineInRange("gem_drop_rate", 0.5D, 0, 1000);
         SKILL_GEM_DROPRATE = b.defineInRange("skill_gem_drop_rate", 6D, 0, 1000);
         RUNE_DROPRATE = b.defineInRange("rune_drop_rate", 0.05D, 0, 1000);
@@ -162,6 +163,7 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue PLAYER_VANILLA_DMG_MULTI;
 
     public ForgeConfigSpec.DoubleValue GEAR_DROPRATE;
+    public ForgeConfigSpec.DoubleValue MAP_DROPRATE;
     public ForgeConfigSpec.DoubleValue GEM_DROPRATE;
     public ForgeConfigSpec.DoubleValue SKILL_GEM_DROPRATE;
     public ForgeConfigSpec.DoubleValue RUNE_DROPRATE;

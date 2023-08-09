@@ -74,5 +74,6 @@ public class ExileDBInit {
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.CURRENCY_ITEMS, null));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.SUPPORT_GEM, null));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.AURA, null));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.MAP_AFFIX, null));
     }
 }

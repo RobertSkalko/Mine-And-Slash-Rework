@@ -12,6 +12,7 @@ import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.gems.Gem;
+import com.robertx22.age_of_exile.database.data.map_affix.MapAffix;
 import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
@@ -173,12 +174,17 @@ public class ExileDB {
     public static ExileRegistryContainer<SpellSchool> SpellSchools() {
         return Database.getRegistry(ExileRegistryTypes.SPELL_SCHOOL);
     }
+    
+
+    public static ExileRegistryContainer<MapAffix> MapAffixes() {
+        return Database.getRegistry(ExileRegistryTypes.MAP_AFFIX);
+    }
 
     public static ExileRegistryContainer<SupportGem> SupportGems() {
         return Database.getRegistry(ExileRegistryTypes.SUPPORT_GEM);
     }
 
-   
+
     public static ExileRegistryContainer<AuraGem> AuraGems() {
         return Database.getRegistry(ExileRegistryTypes.AURA);
     }

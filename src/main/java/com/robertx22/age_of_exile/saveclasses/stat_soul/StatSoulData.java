@@ -12,7 +12,6 @@ import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISettableLevelTier;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
-import com.robertx22.library_of_exile.utils.LoadSave;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
@@ -75,7 +74,8 @@ public class StatSoulData implements ISalvagable, IRarity, ISettableLevelTier {
         if (gear != null) {
             StackSaving.GEARS.saveTo(stack, gear);
         } else {
-            LoadSave.Save(this, stack.getOrCreateTag(), StatSoulItem.TAG);
+            StackSaving.GEARS.saveTo(stack, this.createGearData(null));
+            //LoadSave.Save(this, stack.getOrCreateTag(), StatSoulItem.TAG);
         }
     }
 

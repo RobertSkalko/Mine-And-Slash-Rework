@@ -14,6 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -31,6 +32,7 @@ public class SlashDeferred {
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, SlashRef.MODID);
     public static final DeferredRegister<MobEffect> POTIONS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, SlashRef.MODID);
     public static final DeferredRegister<CreativeModeTab> TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, SlashRef.MODID);
+    public static final DeferredRegister<Feature<?>> FEATURE = DeferredRegister.create(Registries.FEATURE, SlashRef.MODID);
 
 
     public static void registerDefferedAtStartOfModLoading() {
@@ -47,6 +49,7 @@ public class SlashDeferred {
         POTIONS.register(bus);
         RECIPE_SERIALIZERS.register(bus);
         TAB.register(bus);
+        FEATURE.register(bus);
 
         SlashTabs.init();
         SlashPotions.init();
@@ -68,6 +71,8 @@ public class SlashDeferred {
         SlashItems.GearItems.init();
         RuneItems.init();
         GemItems.init();
+
+        SlashFeatures.init();
 
 
     }

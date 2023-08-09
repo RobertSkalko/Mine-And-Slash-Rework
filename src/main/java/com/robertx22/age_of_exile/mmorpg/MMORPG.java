@@ -9,12 +9,14 @@ import com.robertx22.age_of_exile.aoe_data.datapacks.generators.DataGenHook;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.aura.AuraGems;
+import com.robertx22.age_of_exile.database.data.map_affix.MapAffixes;
 import com.robertx22.age_of_exile.database.data.spells.components.conditions.EffectCondition;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.stats.types.special.SpecialStats;
 import com.robertx22.age_of_exile.database.data.support_gem.SupportGems;
 import com.robertx22.age_of_exile.database.registrators.Currencies;
 import com.robertx22.age_of_exile.database.registry.ExileDBInit;
+import com.robertx22.age_of_exile.maps.MapEvents;
 import com.robertx22.age_of_exile.mmorpg.event_registers.CommonEvents;
 import com.robertx22.age_of_exile.mmorpg.init.ClientInit;
 import com.robertx22.age_of_exile.mmorpg.registers.client.KeybindsRegister;
@@ -95,7 +97,7 @@ public class MMORPG {
             ForgeEvents.registerForgeEvent(RegisterKeyMappingsEvent.class, x -> {
                 KeybindsRegister.register(x);
             });
-            
+
             //bus.addListener(KeybindsRegister::register);
             FMLJavaModLoadingContext.get().getModEventBus().addListener((Consumer<EntityRenderersEvent.RegisterRenderers>) x -> {
                 RenderRegister.regRenders(x);
@@ -149,7 +151,8 @@ public class MMORPG {
                 }
             }
         });
-
+        
+        MapEvents.init();
 
         watch.print("Age of Exile mod initialization ");
 
@@ -170,6 +173,8 @@ public class MMORPG {
         new Currencies().registerAll();
 
         GeneratedData.addAllObjectsToGenerate();
+
+        MapAffixes.init(); // todo make this fully data later
 
         SupportGems.init();
         AuraGems.init();

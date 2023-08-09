@@ -34,6 +34,7 @@ public class GearSoulOnInvTick {
         if (stack.isEmpty()) {
             return;
         }
+        // todo why is this neeeded
 
         if (StackSaving.STAT_SOULS.has(stack)) {
             StatSoulData soul = StackSaving.STAT_SOULS.loadFrom(stack);

@@ -3,21 +3,16 @@ package com.robertx22.age_of_exile.database.data.map_affix;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
+import com.robertx22.age_of_exile.maps.AffectedEntities;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IApplyableStats;
-import com.robertx22.age_of_exile.saveclasses.map.AffectedEntities;
-import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
-import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
-import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.registry.ExileRegistry;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
-import net.minecraft.world.entity.LivingEntity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class MapAffix implements ExileRegistry<MobAffix>, IApplyableStats {
+public class MapAffix implements ExileRegistry<MobAffix> {
 
     List<StatMod> stats = new ArrayList<>();
     String id = "";
@@ -43,9 +38,14 @@ public class MapAffix implements ExileRegistry<MobAffix>, IApplyableStats {
         return this;
     }
 
+    // todo
+    public float getLootMulti() {
+        return 1;
+    }
+
     @Override
     public ExileRegistryType getExileRegistryType() {
-        return ExileRegistryTypes.MOB_AFFIX;
+        return ExileRegistryTypes.MAP_AFFIX;
     }
 
     @Override
@@ -59,16 +59,8 @@ public class MapAffix implements ExileRegistry<MobAffix>, IApplyableStats {
     }
 
 
-    @Override
-    public List<StatContext> getStatAndContext(LivingEntity en) {
-        List<ExactStatData> stats = new ArrayList<>();
-        try {
-            this.stats.forEach(x -> stats.add(x.ToExactStat(100, Load.Unit(en)
-                    .getLevel())));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return Arrays.asList(new SimpleStatCtx(StatContext.StatCtxType.MOB_AFFIX, stats));
+    public List<ExactStatData> getStats(int perc, int lvl) {
+        return stats.stream().map(x -> x.ToExactStat(100, lvl)).collect(Collectors.toList());
     }
 
 }

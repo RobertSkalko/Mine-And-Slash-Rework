@@ -64,6 +64,7 @@ public class MobRaritiesAdder implements ExileRegistryInit {
         boss.exp_multi = 10F;
         boss.loot_multi = 6F;
         boss.weight = 2;
+        boss.boss = true;
         boss.loot_lvl_modifier = 1;
         boss.setBossFields();
         boss.addToSerializables();

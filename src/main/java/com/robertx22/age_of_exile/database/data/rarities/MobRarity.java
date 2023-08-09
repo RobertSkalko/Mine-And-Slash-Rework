@@ -19,6 +19,7 @@ public final class MobRarity extends BaseRarity implements Rarity, IAutoGson<Mob
     public float exp_multi;
     public int affixes = 0;
     public String name_add = "";
+    public boolean boss = false;
 
     public MobRarity() {
         super(RarityType.MOB);
@@ -50,12 +51,12 @@ public final class MobRarity extends BaseRarity implements Rarity, IAutoGson<Mob
 
     public boolean hasHigherRarity() {
         return ExileDB.MobRarities()
-            .isRegistered(higher_rar);
+                .isRegistered(higher_rar);
     }
 
     public MobRarity getHigherRarity() {
         return ExileDB.MobRarities()
-            .get(higher_rar);
+                .get(higher_rar);
     }
 
     @Override

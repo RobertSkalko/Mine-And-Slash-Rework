@@ -110,8 +110,9 @@ public class WorldUtils {
 
     }
 
+    // todo clean up
     public static boolean isDungeonWorld(Level world) {
-        return false;
+        return isMapWorldClass(world);
     }
 
     public static boolean isMapWorldClass(Level world) {

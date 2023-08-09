@@ -12,6 +12,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
@@ -74,6 +75,12 @@ public class Def {
 
     public static <T extends MenuType<?>> RegObj<T> container(String id, Supplier<T> object) {
         RegistryObject<T> reg = SlashDeferred.CONTAINERS.register(id, object);
+        RegObj<T> wrapper = new RegObj<T>(reg);
+        return wrapper;
+    }
+
+    public static <T extends Feature<?>> RegObj<T> feature(String id, Supplier<T> object) {
+        RegistryObject<T> reg = SlashDeferred.FEATURE.register(id, object);
         RegObj<T> wrapper = new RegObj<T>(reg);
         return wrapper;
     }

@@ -439,6 +439,7 @@ public enum Words implements IAutoLocName {
     Minutes("Minutes"),
 
     Misc("Misc"),
+    Affixes_Affecting_All("All"),
 
     Mob("Mob"),
 

@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#is_plains",
+  "features": "mmorpg:dungeon",
+  "step": "underground_ores"
+}

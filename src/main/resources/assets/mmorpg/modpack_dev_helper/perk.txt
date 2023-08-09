@@ -90,8 +90,8 @@ all_elemental_damage_big
 energy_regen_percent_big
 phys_to_elemental
 spell_all_damage_and_dot
-phys_to_fire
 phys_to_chaos_big
+phys_to_fire
 harmony
 shield_strength
 mantra
@@ -174,8 +174,8 @@ all_fire_damage_big
 int
 all_fire_damage
 fire_penetration
-sword_damage
 trident_damage_big
+sword_damage
 spell_lightning_damage_big
 dodge_percent
 health_on_hit

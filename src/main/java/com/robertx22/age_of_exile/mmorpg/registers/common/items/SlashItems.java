@@ -1,5 +1,7 @@
 package com.robertx22.age_of_exile.mmorpg.registers.common.items;
 
+import com.robertx22.age_of_exile.maps.MapItem;
+import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
 import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulItem;
@@ -18,6 +20,7 @@ import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.SingleTalentR
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.SpellResetPotion;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.TalentResetPotion;
 import com.robertx22.temp.SkillItemTier;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 
 import java.util.Arrays;
@@ -34,6 +37,9 @@ public class SlashItems {
     public static RegObj<CommonGearProducerItem> COMMON_SOUL_PRODUCE = Def.item(() -> new CommonGearProducerItem(), "common_soul_produce");
 
     public static RegObj<StatSoulItem> STAT_SOUL = Def.item(() -> new StatSoulItem(), "stat_soul");
+    public static RegObj<MapItem> MAP = Def.item(() -> new MapItem(), "map");
+    public static RegObj<Item> MAP_SETTER = Def.item(() -> new Item(new Item.Properties()), "set_map");
+    public static RegObj<Item> MAP_DEVICE = Def.item(() -> new BlockItem(SlashBlocks.MAP.get(), new Item.Properties()), "map_device");
     public static RegObj<IdentifyTomeItem> IDENTIFY_TOME = Def.item(() -> new IdentifyTomeItem(), "identify_tome");
     public static RegObj<LootCrateItem> LOOT_CRATE = Def.item(() -> new LootCrateItem(), "loot_crate/default");
 

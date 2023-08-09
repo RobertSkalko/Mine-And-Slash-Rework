@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.capability.player;
 
+import com.robertx22.age_of_exile.capability.player.data.PlayerMapData;
 import com.robertx22.age_of_exile.capability.player.data.StatPointsData;
 import com.robertx22.age_of_exile.capability.player.data.TeamData;
 import com.robertx22.age_of_exile.capability.player.helper.GemInventoryHelper;
@@ -52,6 +53,7 @@ public class PlayerData implements ICap {
     private static final String DEATH_STATS = "death";
     private static final String GEMS = "gems";
     private static final String AURAS = "auras";
+    private static final String MAP = "map";
 
     transient Player player;
 
@@ -59,7 +61,7 @@ public class PlayerData implements ICap {
     public TalentsData talents = new TalentsData();
     public StatPointsData statPoints = new StatPointsData();
     public DeathStatsData deathStats = new DeathStatsData();
-
+    public PlayerMapData map = new PlayerMapData();
 
     private MyInventory skillGemInv = new MyInventory(GemInventoryHelper.TOTAL_SLOTS);
     private MyInventory auraInv = new MyInventory(GemInventoryHelper.TOTAL_AURAS);
@@ -78,6 +80,7 @@ public class PlayerData implements ICap {
         LoadSave.Save(talents, nbt, TALENTS_DATA);
         LoadSave.Save(statPoints, nbt, STAT_POINTS);
         LoadSave.Save(deathStats, nbt, DEATH_STATS);
+        LoadSave.Save(map, nbt, MAP);
 
         nbt.put(GEMS, skillGemInv.createTag());
         nbt.put(AURAS, auraInv.createTag());
@@ -92,6 +95,7 @@ public class PlayerData implements ICap {
         this.talents = loadOrBlank(TalentsData.class, new TalentsData(), nbt, TALENTS_DATA, new TalentsData());
         this.statPoints = loadOrBlank(StatPointsData.class, new StatPointsData(), nbt, STAT_POINTS, new StatPointsData());
         this.deathStats = loadOrBlank(DeathStatsData.class, new DeathStatsData(), nbt, DEATH_STATS, new DeathStatsData());
+        this.map = loadOrBlank(PlayerMapData.class, new PlayerMapData(), nbt, MAP, new PlayerMapData());
 
         skillGemInv.fromTag(nbt.getList(GEMS, 10)); // todo
         auraInv.fromTag(nbt.getList(AURAS, 10)); // todo
