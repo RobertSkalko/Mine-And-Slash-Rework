@@ -59,8 +59,7 @@ public class OnMobSpawn {
 
     }
 
-    public static Unit setupNewMob(LivingEntity entity, EntityData endata,
-                                   Player nearestPlayer) {
+    public static Unit setupNewMob(LivingEntity entity, EntityData endata, Player nearestPlayer) {
 
         Unit mob = new Unit();
         mob.initStats();

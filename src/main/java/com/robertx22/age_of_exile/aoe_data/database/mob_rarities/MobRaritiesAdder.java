@@ -10,7 +10,7 @@ public class MobRaritiesAdder implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        
+
         MobRarity normal = new MobRarity();
         normal.affixes = 0;
         normal.stat_multi = 1;
@@ -22,7 +22,7 @@ public class MobRaritiesAdder implements ExileRegistryInit {
         normal.weight = 1000;
         normal.higher_rar = IRarity.ELITE_ID;
 
-        normal.guid = IRarity.RARE_ID;
+        normal.guid = IRarity.COMMON_ID;
         normal.loc_name = "";
         normal.text_format = ChatFormatting.GRAY.name();
 
@@ -70,7 +70,7 @@ public class MobRaritiesAdder implements ExileRegistryInit {
         boss.affixes = 2;
         boss.stat_multi = 3.75F;
         boss.min_lvl = 20;
-        boss.dmg_multi = 2.4F;
+        boss.dmg_multi = 3F;
         boss.extra_hp_multi = 10f;
         boss.exp_multi = 10F;
         boss.loot_multi = 6F;

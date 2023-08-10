@@ -6,12 +6,14 @@ magma_flower
 torment
 healing_aura
 chilling_field
+close_nova
 whirlwind
 breath
 wish
 iceball
 nature_balm
 arrow_storm
+minion_explosion
 shred
 black_hole
 totem_heal

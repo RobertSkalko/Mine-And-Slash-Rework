@@ -63,7 +63,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 
@@ -133,8 +132,8 @@ public class EntityData implements ICap, INeededForClient {
     private BossData boss = null;
 
 
-    public Optional<BossData> getBossData() {
-        return Optional.ofNullable(boss);
+    public BossData getBossData() {
+        return boss;
     }
 
     public EntityStatusEffectsData statusEffects = new EntityStatusEffectsData();
@@ -376,6 +375,7 @@ public class EntityData implements ICap, INeededForClient {
     }
 
     public void setRarity(String rarity) {
+
         this.rarity = rarity;
 
         this.equipsChanged = true;

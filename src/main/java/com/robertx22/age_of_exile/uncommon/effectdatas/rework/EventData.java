@@ -39,7 +39,7 @@ public class EventData {
     public static String IS_BLOCKED = "is_blocked";
     public static String DISABLE_KNOCKBACK = "disable_knockback";
     public static String PENETRATION = "penetration";
-    public static String IGNORE_RESIST = "ignore_resist";
+    public static String RESISTED_ALREADY = "resisted_already";
     public static String SECONDS = "seconds";
 
     public static String CAST_TICKS = "cast_ticks";

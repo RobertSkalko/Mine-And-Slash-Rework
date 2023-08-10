@@ -6,10 +6,12 @@ ice_comet
 healing_aura
 song_of_valor
 chilling_field
+close_nova
 whirlwind
 wish
 curse_of_despair
 arrow_storm
+minion_explosion
 shred
 poison_trap
 summon_spirit_wolf

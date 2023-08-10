@@ -7,7 +7,8 @@ import com.robertx22.age_of_exile.database.data.spells.entities.StationaryFallin
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.SkeletonSummon;
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.WolfSummon;
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.ZombieSummon;
-import com.robertx22.age_of_exile.entity.minions.Minion;
+import com.robertx22.age_of_exile.entity.minions.ExplodeMinion;
+import com.robertx22.age_of_exile.entity.minions.ThornyMinion;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
 import net.minecraft.world.entity.Entity;
@@ -30,8 +31,10 @@ public class SlashEntities {
     public static RegObj<EntityType<ZombieSummon>> ZOMBIE = mob(ZombieSummon::new, EntityType.SKELETON, "zombie");
     public static RegObj<EntityType<SkeletonSummon>> SKELETON = mob(SkeletonSummon::new, EntityType.SKELETON, "skeleton");
 
+    
     //minions
-    public static RegObj<EntityType<Minion>> THORNY_MINION = mob(Minion::new, EntityType.SKELETON, "thorny_minion");
+    public static RegObj<EntityType<ThornyMinion>> THORNY_MINION = mob(ThornyMinion::new, EntityType.SKELETON, "thorny_minion");
+    public static RegObj<EntityType<ExplodeMinion>> EXPLODE_MINION = mob(ExplodeMinion::new, EntityType.SKELETON, "explody_minion");
 
 
     private static <T extends Entity> RegObj<EntityType<T>> projectile(EntityType.EntityFactory<T> factory, String id) {

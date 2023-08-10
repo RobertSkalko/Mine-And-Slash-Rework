@@ -52,6 +52,17 @@ public abstract class DataProcessor {
     }
 
     public final boolean process(List<String> list, BlockPos pos, Level world, ChunkProcessData chunkData) {
+
+        /*
+        if (true) {
+            // todotest
+            processImplementation("boss", pos, world, chunkData);
+            return true;
+
+        }
+
+         */
+
         String key = list.get(0);
 
         if (list.size() > 1) {

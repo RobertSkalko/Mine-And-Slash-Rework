@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.aoe_data.database.boss_spell;
 
 import com.robertx22.age_of_exile.aoe_data.database.mob_affixes.MobAffixes;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.event_hooks.entity.OnMobSpawn;
 import com.robertx22.age_of_exile.maps.processors.helpers.MobBuilder;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -16,7 +17,9 @@ public class SummonThornMobs extends BossSummonMobs {
             x.rarity = ExileDB.MobRarities().get(IRarity.ELITE_ID);
             x.amount = 10;
         }).summonMobs(en.level(), en.blockPosition()).forEach(e -> {
+            OnMobSpawn.setupNewMob(e, Load.Unit(e), null);
             Load.Unit(e).getAffixData().affixes.add(MobAffixes.THORNY);
+            Load.Unit(e).forceRecalculateStats();
         });
     }
 

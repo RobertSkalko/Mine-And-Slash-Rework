@@ -32,7 +32,7 @@ public abstract class BossSpell implements ExileRegistry<BossSpell> {
     // todo localize later
     private void speak(String text, LivingEntity en) {
         for (Player p : EntityFinder.start(en, Player.class, en.blockPosition()).radius(50).searchFor(AllyOrEnemy.all).build()) {
-            p.sendSystemMessage(Component.literal(text).withStyle(ChatFormatting.RED));
+            p.sendSystemMessage(Component.literal(text).withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
         }
     }
 

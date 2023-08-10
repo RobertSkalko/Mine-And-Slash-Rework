@@ -70,6 +70,11 @@ public abstract class EffectEvent implements IGUID {
 
     public void Activate() {
         if (!activated) {
+            if (this.source.isDeadOrDying() || target.isDeadOrDying()) {
+                this.activated = true;
+                return;
+            }
+
 
             //Watch watch = new Watch();
             //watch.min = 500;
@@ -149,13 +154,18 @@ public abstract class EffectEvent implements IGUID {
             return effects;
         }
 
+
         Unit un = enData.getUnit();
 
-        if (isSpell()) {
-            if (en instanceof Player p) {
-                int slot = Load.playerRPGData(p).getSkillGemInventory().getSpellGem(getSpell()).getHotbarSlot();
-                un = new Unit(); // todo test if this works
-                un.recalculateStats(en, enData, null, slot);
+        if (side == EffectSides.Source) {
+            if (isSpell()) {
+                if (en instanceof Player p) {
+                    if (getSpell() != null) {
+                        int slot = Load.playerRPGData(p).getSkillGemInventory().getSpellGem(getSpell()).getHotbarSlot();
+                        un = new Unit(); // todo test if this works
+                        un.recalculateStats(en, enData, null, slot);
+                    }
+                }
             }
         }
 

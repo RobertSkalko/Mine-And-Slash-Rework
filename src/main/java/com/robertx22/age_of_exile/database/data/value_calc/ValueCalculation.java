@@ -1,16 +1,12 @@
 package com.robertx22.age_of_exile.database.data.value_calc;
 
-import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
-import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
@@ -33,7 +29,6 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
 
     public String id = "";
     public StatScaling base_scaling_type = StatScaling.NORMAL;
-    public LeveledValue attack_scaling = new LeveledValue(0, 0);
     public LeveledValue base = new LeveledValue(0, 0);
 
     public int getCalculatedBaseValue(LevelProvider provider) {
@@ -57,14 +52,7 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
     private int getCalculatedScalingValue(LevelProvider provider) {
 
         float amount = 0;
-        if (attack_scaling.getValue(provider) > 0) {
-            for (Stat stat : new BonusAttackDamage(Elements.Chaos).generateAllPossibleStatVariations()) {
-                amount += provider.getCasterData()
-                        .getUnit()
-                        .getCalculatedStat(stat.GUID())
-                        .getValue() * attack_scaling.getValue(provider);
-            }
-        }
+
         amount += getAllScalingValues().stream()
                 .mapToInt(x -> x.getCalculatedValue(provider))
                 .sum();
@@ -84,15 +72,8 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
 
         int val = getCalculatedValue(provider);
 
-        
-        text.append(val + "");
 
-        if (attack_scaling.getValue(provider) > 0) {
-            if (val < 1 || Screen.hasShiftDown()) {
-                text.append(" (" + (int) (attack_scaling.getValue(provider) * 100) + "% Weapon Damage)")
-                        .withStyle(ChatFormatting.YELLOW);
-            }
-        }
+        text.append(val + "");
 
 
         stat_scalings.forEach(x -> {

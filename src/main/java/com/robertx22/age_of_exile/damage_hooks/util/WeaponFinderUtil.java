@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.damage_hooks.util;
 
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -29,8 +30,10 @@ public class WeaponFinderUtil {
                         if (StackSaving.GEARS.has(attempt)) {
                             gear = StackSaving.GEARS.loadFrom(attempt);
                             if (gear != null) {
-                                return attempt;
+                                if (Load.Unit(source).getLevel() >= gear.getLevel())
+                                    return attempt;
                             }
+                        
                         }
                     }
                 }
@@ -45,7 +48,7 @@ public class WeaponFinderUtil {
         }
     }
 
-    // maybe not worth it
+// maybe not worth it
     /*
     private static ItemStack getWeaponStackFromThrownEntity(Entity en) {
 

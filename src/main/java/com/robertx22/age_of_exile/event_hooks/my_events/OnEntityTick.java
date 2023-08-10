@@ -31,16 +31,13 @@ public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
             }
 
             Load.Unit(entity).ailments.onTick(entity);
-
             Load.Unit(entity).getCooldowns().onTicksPass(1);
 
-            /*
-            if (entity instanceof Player == false) {
-                if (entity.tickCount % 40 != 0) {
-                    return; // dont check gear of mobs as often as players
-                }
+            var boss = Load.Unit(entity).getBossData();
+            if (boss != null) {
+                boss.tick(entity);
             }
-             */
+
 
             // todo lets see if this works fine, no need to lag if mobs anyway recalculate stats when needed
             if (entity instanceof Player) {

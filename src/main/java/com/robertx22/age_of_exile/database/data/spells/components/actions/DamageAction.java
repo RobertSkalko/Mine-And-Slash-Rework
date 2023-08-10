@@ -4,15 +4,11 @@ import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
-import com.robertx22.age_of_exile.mmorpg.registers.common.SlashPotions;
-import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
-import com.robertx22.age_of_exile.vanilla_mc.potion_effects.types.ExileStatusEffect;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.effect.MobEffect;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -41,26 +37,10 @@ public class DamageAction extends SpellAction {
                     continue;
                 }
 
-                int stacks = 1;
-                try {
-                    if (data.has(MapField.EXILE_POTION_ID)) {
-                        // if damage done by effect, multiple dmg by effect stacks.
-                        MobEffect effect = SlashPotions.getExileEffect(data.get(MapField.EXILE_POTION_ID));
-                        if (t.hasEffect(effect)) {
-                            stacks = Load.Unit(t)
-                                .getStatusEffectsData()
-                                .get((ExileStatusEffect) effect).stacks;
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                DamageEvent dmg = EventBuilder.ofSpellDamage(ctx.caster, t, value * stacks, ctx.calculatedSpellData.getSpell())
-                    .build();
+                DamageEvent dmg = EventBuilder.ofSpellDamage(ctx.caster, t, value, ctx.calculatedSpellData.getSpell())
+                        .build();
                 if (data.has(MapField.DMG_EFFECT_TYPE)) {
-                    dmg.data.setString(EventData.ATTACK_TYPE, data.getDmgEffectType()
-                        .name());
+                    dmg.data.setString(EventData.ATTACK_TYPE, data.getDmgEffectType().name());
                 }
                 dmg.setElement(ele);
                 dmg.Activate();

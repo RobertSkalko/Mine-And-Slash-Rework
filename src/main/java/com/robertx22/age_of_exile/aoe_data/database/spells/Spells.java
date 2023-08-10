@@ -9,9 +9,8 @@ public class Spells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        new BaseSpells().registerAll();
-
-        new UtilitySpells().registerAll();
+        new BossSpells().registerAll();
+        
         new TestSpells().registerAll();
         new CurseSpells().registerAll();
         new SongSpells().registerAll();

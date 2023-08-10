@@ -11,6 +11,13 @@ public class SpellCalcs {
 
     }
 
+    public static ValueCalculation BOSS_CLOSE_NOVA = ValueCalcBuilder.of("close_nova")
+            .spellScaling(5, 5)
+            .build();
+    public static ValueCalculation BOSS_MINION_EXPLOSION = ValueCalcBuilder.of("minion_explosion")
+            .spellScaling(5, 5)
+            .build();
+
     public static ValueCalculation POISON_BALL = ValueCalcBuilder.of("poisonball")
             .spellScaling(0.25F, 0.5F)
             .build();

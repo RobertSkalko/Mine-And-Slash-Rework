@@ -5,6 +5,8 @@ public class BossSpells {
     public static void init() {
 
         new SummonThornMobs().registerToExileRegistry();
+        new BossDealCloseAoe().registerToExileRegistry();
+        new SummonExplodyMobs().registerToExileRegistry();
 
     }
 }

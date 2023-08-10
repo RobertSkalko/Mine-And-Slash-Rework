@@ -9,3 +9,4 @@ water_mob_affix
 winter
 chaos_mob_affix
 nature_lord
+thorny_mobs

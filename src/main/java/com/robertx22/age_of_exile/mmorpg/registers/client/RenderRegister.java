@@ -18,10 +18,11 @@ public class RenderRegister {
 
         x.registerEntityRenderer(SlashEntities.SPIRIT_WOLF.get(), ctx -> new ModWolfRender(SlashRef.id("textures/entity/spirit_wolf.png"), ctx));
         x.registerEntityRenderer(SlashEntities.SKELETON.get(), ctx -> new ModSkeletonRender(SlashRef.id("textures/entity/skeleton.png"), ctx));
-        x.registerEntityRenderer(SlashEntities.ZOMBIE.get(), ctx -> new ModSkeletonRender(SlashRef.id("textures/entity/thorny_minion.png"), ctx));
+        x.registerEntityRenderer(SlashEntities.ZOMBIE.get(), ctx -> new ModSkeletonRender(SlashRef.id("textures/entity/zombie.png"), ctx));
 
         // minions
-        x.registerEntityRenderer(SlashEntities.THORNY_MINION.get(), ctx -> new ModSkeletonRender(SlashRef.id("textures/entity/zombie.png"), ctx));
+        x.registerEntityRenderer(SlashEntities.THORNY_MINION.get(), ctx -> new ModSkeletonRender(SlashRef.id("textures/entity/thorny_minion.png"), ctx));
+        x.registerEntityRenderer(SlashEntities.EXPLODE_MINION.get(), ctx -> new ModSkeletonRender(SlashRef.id("textures/entity/explody_minion.png"), ctx));
 
 
         x.registerEntityRenderer(SlashEntities.SIMPLE_PROJECTILE.get(), (d) -> new MySpriteRenderer<>(d, Minecraft.getInstance()

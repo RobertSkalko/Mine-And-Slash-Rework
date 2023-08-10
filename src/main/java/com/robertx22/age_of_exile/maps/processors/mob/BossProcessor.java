@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.maps.generator.ChunkProcessData;
 import com.robertx22.age_of_exile.maps.mobs.SpawnedMob;
 import com.robertx22.age_of_exile.maps.processors.DataProcessor;
 import com.robertx22.age_of_exile.maps.processors.helpers.MobBuilder;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
@@ -25,11 +26,13 @@ public class BossProcessor extends DataProcessor {
 
         EntityType<? extends Mob> type = SpawnedMob.random(data.getRoom()).type;
 
-        MobBuilder.of(type, x -> {
+        for (Mob en : MobBuilder.of(type, x -> {
             x.rarity = ExileDB.MobRarities().get(IRarity.BOSS_ID);
-        }).summonMobs(world, pos);
+        }).summonMobs(world, pos)) {
+            Load.Unit(en).setupRandomBoss(); // todo
+        }
 
-   
+
         // todo
         // need to make custom bosses with spells etc
 
