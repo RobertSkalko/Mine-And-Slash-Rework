@@ -1,0 +1,17 @@
+{
+  "base": {
+    "max": 2.4,
+    "min": 0.4
+  },
+  "base_scaling_type": "NORMAL",
+  "id": "poison_cloud",
+  "stat_scalings": [
+    {
+      "multi": {
+        "max": 0.4,
+        "min": 0.2
+      },
+      "stat": "weapon_damage"
+    }
+  ]
+}

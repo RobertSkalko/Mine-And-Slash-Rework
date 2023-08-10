@@ -1,0 +1,130 @@
+{
+  "attached": {
+    "entity_components": {},
+    "on_cast": [
+      {
+        "acts": [
+          {
+            "type": "sound",
+            "map": {
+              "pitch": 1.0,
+              "sound": "minecraft:entity.splash_potion.break",
+              "volume": 1.0
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": []
+      },
+      {
+        "acts": [
+          {
+            "type": "aggro",
+            "map": {
+              "aggro": "DE_AGGRO",
+              "value_calculation": "lose_aggro"
+            }
+          },
+          {
+            "type": "exile_effect",
+            "map": {
+              "count": 1.0,
+              "exile_potion_id": "negative/4",
+              "potion_action": "GIVE_STACKS",
+              "potion_dur": 100.0
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": [
+          {
+            "type": "aoe",
+            "map": {
+              "en_predicate": "enemies",
+              "radius": 10.0,
+              "selection_type": "RADIUS"
+            }
+          }
+        ]
+      },
+      {
+        "acts": [
+          {
+            "type": "particles_in_radius",
+            "map": {
+              "motion": "None",
+              "particle_count": 200.0,
+              "particle_type": "minecraft:smoke",
+              "radius": 3.0
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": []
+      },
+      {
+        "acts": [
+          {
+            "type": "particles_in_radius",
+            "map": {
+              "motion": "None",
+              "particle_count": 50.0,
+              "particle_type": "minecraft:effect",
+              "radius": 3.0
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": []
+      }
+    ]
+  },
+  "config": {
+    "apply_cast_speed_to_cd": false,
+    "cast_time_ticks": 0,
+    "castingWeapon": "ANY_WEAPON",
+    "charge_name": "",
+    "charge_regen": 0,
+    "charges": 0,
+    "cooldown_ticks": 1200,
+    "imbues": 0,
+    "mana_cost": {
+      "max": 7.0,
+      "min": 3.5
+    },
+    "scale_mana_cost_to_player_lvl": false,
+    "style": "INT",
+    "swing_arm": true,
+    "tags": [],
+    "times_to_cast": 1
+  },
+  "disabled_dims": [],
+  "effect_tip": "",
+  "identifier": "smoke_bomb",
+  "manual_tip": true,
+  "weight": 1000
+}

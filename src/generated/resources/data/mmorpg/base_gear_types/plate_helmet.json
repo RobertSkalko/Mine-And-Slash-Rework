@@ -1,0 +1,24 @@
+{
+  "base_stats": [
+    {
+      "type": "ITEM_FLAT",
+      "max": 7.5,
+      "min": 3.0,
+      "stat": "armor"
+    }
+  ],
+  "gear_slot": "helmet",
+  "guid": "plate_helmet",
+  "implicit_stats": [],
+  "style": "STR",
+  "tags": {
+    "tags": [
+      "armor_family",
+      "strength",
+      "helmet",
+      "armor_stat"
+    ]
+  },
+  "weapon_type": "none",
+  "weight": 1000
+}

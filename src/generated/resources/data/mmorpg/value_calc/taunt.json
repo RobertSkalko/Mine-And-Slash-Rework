@@ -1,0 +1,17 @@
+{
+  "base": {
+    "max": 0.0,
+    "min": 0.0
+  },
+  "base_scaling_type": "NORMAL",
+  "id": "taunt",
+  "stat_scalings": [
+    {
+      "multi": {
+        "max": 0.1,
+        "min": 0.05
+      },
+      "stat": "health"
+    }
+  ]
+}

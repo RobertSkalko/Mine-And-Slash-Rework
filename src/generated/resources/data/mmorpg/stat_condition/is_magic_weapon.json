@@ -1,0 +1,7 @@
+{
+  "id": "is_magic_weapon",
+  "ifs": [
+    "is_staff_wep_type"
+  ],
+  "ser": "either_is_true"
+}

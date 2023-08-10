@@ -1,0 +1,14 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/stat_icons/weapon/staff_damage.png",
+  "id": "staff_damage",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "staff_damage",
+      "v1": 3.0
+    }
+  ]
+}

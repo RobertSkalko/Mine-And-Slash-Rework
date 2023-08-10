@@ -1,0 +1,14 @@
+{
+  "data": {
+    "add_to": "spell_damage",
+    "adder_stat": "increase_healing",
+    "base": 0.0,
+    "ele": "Physical",
+    "id": "spell_damage_per_perc_of_increase_healing",
+    "max": 2.14748365E9,
+    "min": 0.0,
+    "perc": true,
+    "scale": "NONE"
+  },
+  "ser": "one_to_other"
+}

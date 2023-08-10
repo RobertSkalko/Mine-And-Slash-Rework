@@ -1,0 +1,15 @@
+{
+  "base_stats": [],
+  "gear_slot": "ring",
+  "guid": "ring",
+  "implicit_stats": [],
+  "style": "STR",
+  "tags": {
+    "tags": [
+      "ring",
+      "jewelry_family"
+    ]
+  },
+  "weapon_type": "none",
+  "weight": 1000
+}

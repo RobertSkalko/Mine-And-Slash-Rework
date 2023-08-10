@@ -1,0 +1,27 @@
+{
+  "base": 0.0,
+  "effect": {
+    "effects": [
+      "restore_mana_per_stat_data"
+    ],
+    "events": [
+      "on_mob_kill"
+    ],
+    "ifs": [],
+    "order": 0,
+    "side": "Source"
+  },
+  "ele": "All",
+  "format": "aqua",
+  "group": "Misc",
+  "icon": "❁",
+  "id": "mana_on_kill",
+  "is_long": false,
+  "is_perc": false,
+  "max": 2.14748365E9,
+  "min": 0.0,
+  "order": 100,
+  "scaling": "NORMAL",
+  "ser": "data",
+  "show": true
+}

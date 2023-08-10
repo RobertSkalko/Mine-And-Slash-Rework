@@ -1,0 +1,26 @@
+{
+  "type": "suffix",
+  "guid": "of_pene",
+  "loc_name": "Of Penetration",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "weapon_family"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 5.0,
+      "min": 1.0,
+      "stat": "armor_penetration"
+    }
+  ],
+  "tags": [],
+  "weight": 1000
+}

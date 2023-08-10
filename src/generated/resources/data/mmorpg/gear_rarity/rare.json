@@ -1,0 +1,22 @@
+{
+  "announce_in_chat": false,
+  "guid": "rare",
+  "higher_rar": "epic",
+  "is_unique_item": false,
+  "item_model_data_num": 3,
+  "item_tier": 2,
+  "item_tier_power": 1.5,
+  "item_value_multi": 1.5,
+  "lootable_gear_tier": "MID",
+  "max_sockets": 2,
+  "min_affixes": 3,
+  "potential": 200,
+  "rarity_type": "GEAR",
+  "skill_gem_percents": {
+    "max": 40,
+    "min": 20
+  },
+  "socket_chance": 10,
+  "text_format": "AQUA",
+  "weight": 500
+}

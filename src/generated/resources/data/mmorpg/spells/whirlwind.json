@@ -1,0 +1,154 @@
+{
+  "attached": {
+    "entity_components": {},
+    "on_cast": [
+      {
+        "acts": [
+          {
+            "type": "potion",
+            "map": {
+              "count": 1.0,
+              "potion_action": "GIVE_STACKS",
+              "potion_dur": 100.0,
+              "potion_id": "mmorpg:knockback_resist"
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": [
+          {
+            "type": "self",
+            "map": {}
+          }
+        ]
+      },
+      {
+        "acts": [
+          {
+            "type": "sound",
+            "map": {
+              "pitch": 1.0,
+              "sound": "minecraft:entity.player.attack.sweep",
+              "volume": 1.0
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": []
+      },
+      {
+        "acts": [
+          {
+            "type": "particles_in_radius",
+            "map": {
+              "height": 0.5,
+              "motion": "None",
+              "particle_count": 100.0,
+              "particle_type": "minecraft:effect",
+              "radius": 2.0,
+              "shape": "CIRCLE_2D_EDGE",
+              "y_rand": 0.5
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": []
+      },
+      {
+        "acts": [
+          {
+            "type": "damage",
+            "map": {
+              "element": "Physical",
+              "value_calculation": "whirlwind"
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "per_entity_hit": [
+          {
+            "acts": [
+              {
+                "type": "particles_in_radius",
+                "map": {
+                  "height": 0.5,
+                  "motion": "None",
+                  "particle_count": 50.0,
+                  "particle_type": "minecraft:effect",
+                  "radius": 0.5,
+                  "shape": "CIRCLE_2D_EDGE",
+                  "y_rand": 0.1
+                }
+              }
+            ],
+            "en_preds": [],
+            "ifs": [],
+            "targets": []
+          }
+        ],
+        "targets": [
+          {
+            "type": "aoe",
+            "map": {
+              "en_predicate": "enemies",
+              "radius": 1.5,
+              "selection_type": "RADIUS"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "config": {
+    "apply_cast_speed_to_cd": false,
+    "cast_time_ticks": 100,
+    "castingWeapon": "MELEE_WEAPON",
+    "charge_name": "",
+    "charge_regen": 0,
+    "charges": 0,
+    "cooldown_ticks": 0,
+    "imbues": 0,
+    "mana_cost": {
+      "max": 10.0,
+      "min": 5.0
+    },
+    "scale_mana_cost_to_player_lvl": false,
+    "style": "INT",
+    "swing_arm": true,
+    "tags": [
+      "technique",
+      "area",
+      "damage"
+    ],
+    "times_to_cast": 10
+  },
+  "disabled_dims": [],
+  "effect_tip": "",
+  "identifier": "whirlwind",
+  "manual_tip": true,
+  "weight": 1000
+}

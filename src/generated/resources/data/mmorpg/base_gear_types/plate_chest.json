@@ -1,0 +1,24 @@
+{
+  "base_stats": [
+    {
+      "type": "ITEM_FLAT",
+      "max": 15.0,
+      "min": 6.0,
+      "stat": "armor"
+    }
+  ],
+  "gear_slot": "chest",
+  "guid": "plate_chest",
+  "implicit_stats": [],
+  "style": "STR",
+  "tags": {
+    "tags": [
+      "chest",
+      "armor_family",
+      "strength",
+      "armor_stat"
+    ]
+  },
+  "weapon_type": "none",
+  "weight": 1000
+}

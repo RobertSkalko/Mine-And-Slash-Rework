@@ -31,7 +31,7 @@ public class SlashEntities {
     public static RegObj<EntityType<ZombieSummon>> ZOMBIE = mob(ZombieSummon::new, EntityType.SKELETON, "zombie");
     public static RegObj<EntityType<SkeletonSummon>> SKELETON = mob(SkeletonSummon::new, EntityType.SKELETON, "skeleton");
 
-    
+
     //minions
     public static RegObj<EntityType<ThornyMinion>> THORNY_MINION = mob(ThornyMinion::new, EntityType.SKELETON, "thorny_minion");
     public static RegObj<EntityType<ExplodeMinion>> EXPLODE_MINION = mob(ExplodeMinion::new, EntityType.SKELETON, "explody_minion");
@@ -49,6 +49,7 @@ public class SlashEntities {
                 .setTrackingRange(10)
                 .build(id));
 
+        
         return def;
     }
 

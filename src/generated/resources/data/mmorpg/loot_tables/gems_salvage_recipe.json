@@ -1,0 +1,320 @@
+{
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/tourmaline/0",
+          "weight": 100999
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/tourmaline/1",
+          "weight": 25999
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/tourmaline/2",
+          "weight": 5000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/tourmaline/3",
+          "weight": 1000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/tourmaline/4",
+          "weight": 200
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/tourmaline/5",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/tourmaline/6"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/azurite/0",
+          "weight": 100999
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/azurite/1",
+          "weight": 25999
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/azurite/2",
+          "weight": 5000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/azurite/3",
+          "weight": 1000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/azurite/4",
+          "weight": 200
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/azurite/5",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/azurite/6"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/garnet/0",
+          "weight": 100999
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/garnet/1",
+          "weight": 25999
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/garnet/2",
+          "weight": 5000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/garnet/3",
+          "weight": 1000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/garnet/4",
+          "weight": 200
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/garnet/5",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/garnet/6"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/opal/0",
+          "weight": 100999
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/opal/1",
+          "weight": 25999
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/opal/2",
+          "weight": 5000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/opal/3",
+          "weight": 1000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/opal/4",
+          "weight": 200
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/opal/5",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/opal/6"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/topaz/0",
+          "weight": 100999
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/topaz/1",
+          "weight": 25999
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/topaz/2",
+          "weight": 5000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/topaz/3",
+          "weight": 1000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/topaz/4",
+          "weight": 200
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/topaz/5",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/topaz/6"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/amethyst/0",
+          "weight": 100999
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/amethyst/1",
+          "weight": 25999
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/amethyst/2",
+          "weight": 5000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/amethyst/3",
+          "weight": 1000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/amethyst/4",
+          "weight": 200
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/amethyst/5",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/amethyst/6"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/ruby/0",
+          "weight": 100999
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/ruby/1",
+          "weight": 25999
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/ruby/2",
+          "weight": 5000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/ruby/3",
+          "weight": 1000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/ruby/4",
+          "weight": 200
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/ruby/5",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/ruby/6"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/emerald/0",
+          "weight": 100999
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/emerald/1",
+          "weight": 25999
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/emerald/2",
+          "weight": 5000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/emerald/3",
+          "weight": 1000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/emerald/4",
+          "weight": 200
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/emerald/5",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/emerald/6"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/sapphire/0",
+          "weight": 100999
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/sapphire/1",
+          "weight": 25999
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/sapphire/2",
+          "weight": 5000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/sapphire/3",
+          "weight": 1000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/sapphire/4",
+          "weight": 200
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/sapphire/5",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:gems/sapphire/6"
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 1.0
+      }
+    }
+  ]
+}

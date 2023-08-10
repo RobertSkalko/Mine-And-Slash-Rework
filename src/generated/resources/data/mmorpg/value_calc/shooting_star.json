@@ -1,0 +1,17 @@
+{
+  "base": {
+    "max": 7.5,
+    "min": 1.0
+  },
+  "base_scaling_type": "NORMAL",
+  "id": "shooting_star",
+  "stat_scalings": [
+    {
+      "multi": {
+        "max": 1.25,
+        "min": 0.5
+      },
+      "stat": "weapon_damage"
+    }
+  ]
+}

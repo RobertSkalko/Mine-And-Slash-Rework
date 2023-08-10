@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "item": "minecraft:diamond"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "  M",
+    "SM ",
+    "SS "
+  ],
+  "result": {
+    "item": "mmorpg:weapon/staff/diamond"
+  },
+  "show_notification": true
+}

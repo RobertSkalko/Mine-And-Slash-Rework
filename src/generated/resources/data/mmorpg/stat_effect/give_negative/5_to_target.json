@@ -1,0 +1,7 @@
+{
+  "effect": "negative/5",
+  "give_to": "Target",
+  "id": "give_negative/5_to_target",
+  "seconds": 5,
+  "ser": "give_exile_effect"
+}

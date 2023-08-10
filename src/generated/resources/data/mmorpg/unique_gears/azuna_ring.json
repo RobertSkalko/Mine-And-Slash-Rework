@@ -1,0 +1,33 @@
+{
+  "base_gear": "ring",
+  "id": "azuna_ring",
+  "rarity": "unique",
+  "replaces_name": true,
+  "unique_stats": [
+    {
+      "type": "flat",
+      "max": 50.0,
+      "min": -50.0,
+      "stat": "fire_resist"
+    },
+    {
+      "type": "flat",
+      "max": 50.0,
+      "min": -50.0,
+      "stat": "chaos_resist"
+    },
+    {
+      "type": "flat",
+      "max": 15.0,
+      "min": -50.0,
+      "stat": "magic_find"
+    },
+    {
+      "type": "flat",
+      "max": 15.0,
+      "min": -50.0,
+      "stat": "increased_quantity"
+    }
+  ],
+  "weight": 1000
+}

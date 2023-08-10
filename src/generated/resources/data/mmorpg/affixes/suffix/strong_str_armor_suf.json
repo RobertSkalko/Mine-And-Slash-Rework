@@ -1,0 +1,26 @@
+{
+  "type": "suffix",
+  "guid": "strong_str_armor_suf",
+  "loc_name": "Of the Monster",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "armor_family"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 8.0,
+      "min": 4.0,
+      "stat": "strength"
+    }
+  ],
+  "tags": [],
+  "weight": 1000
+}

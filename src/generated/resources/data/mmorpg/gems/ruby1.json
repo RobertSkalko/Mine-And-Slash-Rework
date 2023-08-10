@@ -1,0 +1,33 @@
+{
+  "gem_type": "ruby",
+  "identifier": "ruby1",
+  "item_id": "mmorpg:gems/ruby/1",
+  "on_armor_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "fire_resist",
+      "v1": 5.0
+    }
+  ],
+  "on_jewelry_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "spell_fire_damage",
+      "v1": 2.0
+    }
+  ],
+  "on_weapons_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "all_fire_damage",
+      "v1": 3.0
+    }
+  ],
+  "perc_upgrade_chance": 75,
+  "text_format": "RED",
+  "tier": 1,
+  "weight": 25999
+}

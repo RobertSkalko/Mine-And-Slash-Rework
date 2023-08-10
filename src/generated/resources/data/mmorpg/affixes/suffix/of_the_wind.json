@@ -1,0 +1,29 @@
+{
+  "type": "suffix",
+  "guid": "of_the_wind",
+  "loc_name": "Of the Wind",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [
+          "weapon_family"
+        ],
+        "included": [
+          "jewelry_family",
+          "armor_family"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 6.0,
+      "min": 2.0,
+      "stat": "dexterity"
+    }
+  ],
+  "tags": [],
+  "weight": 1000
+}

@@ -1,0 +1,29 @@
+{
+  "base": 0.0,
+  "effect": {
+    "effects": [
+      "set_data_num_accuracy"
+    ],
+    "events": [
+      "on_damage"
+    ],
+    "ifs": [
+      "attack_type_is_attack"
+    ],
+    "order": 0,
+    "side": "Source"
+  },
+  "ele": "Physical",
+  "format": "aqua",
+  "group": "MAIN",
+  "icon": "❁",
+  "id": "accuracy",
+  "is_long": false,
+  "is_perc": false,
+  "max": 2.14748365E9,
+  "min": 0.0,
+  "order": 100,
+  "scaling": "NORMAL",
+  "ser": "data",
+  "show": true
+}

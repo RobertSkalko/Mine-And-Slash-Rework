@@ -1,0 +1,27 @@
+{
+  "type": "suffix",
+  "guid": "of_spirit_markings",
+  "loc_name": "Of Spirit Markings",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "jewelry_family",
+          "armor_family"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "PERCENT",
+      "max": 6.0,
+      "min": 3.0,
+      "stat": "mana_regen"
+    }
+  ],
+  "tags": [],
+  "weight": 200
+}

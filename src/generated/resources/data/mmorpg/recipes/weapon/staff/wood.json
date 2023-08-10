@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "tag": "minecraft:planks"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "  M",
+    "SM ",
+    "SS "
+  ],
+  "result": {
+    "item": "mmorpg:weapon/staff/wood"
+  },
+  "show_notification": true
+}

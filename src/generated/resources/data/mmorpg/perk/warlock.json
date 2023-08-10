@@ -1,0 +1,20 @@
+{
+  "type": "MAJOR",
+  "icon": "mmorpg:textures/gui/stat_icons/game_changers/warlock.png",
+  "id": "warlock",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "MORE",
+      "scale_to_lvl": false,
+      "stat": "hit_damage",
+      "v1": -25.0
+    },
+    {
+      "type": "MORE",
+      "scale_to_lvl": false,
+      "stat": "dot_dmg",
+      "v1": 30.0
+    }
+  ]
+}

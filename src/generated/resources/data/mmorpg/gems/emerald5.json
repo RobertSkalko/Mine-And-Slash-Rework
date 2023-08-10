@@ -1,0 +1,33 @@
+{
+  "gem_type": "emerald",
+  "identifier": "emerald5",
+  "item_id": "mmorpg:gems/emerald/5",
+  "on_armor_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "chaos_resist",
+      "v1": 20.0
+    }
+  ],
+  "on_jewelry_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "spell_chaos_damage",
+      "v1": 8.0
+    }
+  ],
+  "on_weapons_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "all_chaos_damage",
+      "v1": 12.0
+    }
+  ],
+  "perc_upgrade_chance": 5,
+  "text_format": "GREEN",
+  "tier": 5,
+  "weight": 25
+}

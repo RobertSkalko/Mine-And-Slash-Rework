@@ -28,7 +28,7 @@ public class PerkBuilder {
         Perk perk = new Perk();
         perk.stats = list;
         perk.type = Perk.PerkType.STAT;
-        perk.identifier = id;
+        perk.id = id;
         perk.icon = list.get(0)
                 .getStat()
                 .getIconLocation()
@@ -47,7 +47,7 @@ public class PerkBuilder {
         }
         perk.locname = locname;
         perk.type = Perk.PerkType.MAJOR;
-        perk.identifier = id;
+        perk.id = id;
         perk.icon = new ResourceLocation(SlashRef.MODID, "textures/gui/stat_icons/game_changers/" + id + ".png")
                 .toString();
         perk.addToSerializables();
@@ -69,13 +69,13 @@ public class PerkBuilder {
                     .getIconLocation()
                     .toString();
         } else {
-            perk.icon = new ResourceLocation(SlashRef.MODID, "textures/gui/talent_icons/" + perk.identifier + ".png")
+            perk.icon = new ResourceLocation(SlashRef.MODID, "textures/gui/talent_icons/" + perk.id + ".png")
                     .toString();
         }
         return perk;
     }
 
-    
+
     public static Perk bigStat(OptScaleExactStat... stat) {
         List<OptScaleExactStat> list = Arrays.asList(stat);
         var opt = list.get(0);

@@ -1,0 +1,5 @@
+{
+  "id": "increase_mana_cost_num",
+  "num_id": "mana_cost",
+  "ser": "increase_number"
+}

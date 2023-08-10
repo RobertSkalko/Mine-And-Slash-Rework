@@ -1,0 +1,20 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/stat_icons/elemental/spell_chaos_damage.png",
+  "id": "spell_chaos_damage_and_dot",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "spell_chaos_damage",
+      "v1": 1.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "chaos_dot_damage",
+      "v1": 3.0
+    }
+  ]
+}

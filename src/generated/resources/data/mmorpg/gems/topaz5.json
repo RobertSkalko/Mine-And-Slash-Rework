@@ -1,0 +1,33 @@
+{
+  "gem_type": "topaz",
+  "identifier": "topaz5",
+  "item_id": "mmorpg:gems/topaz/5",
+  "on_armor_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "lightning_resist",
+      "v1": 20.0
+    }
+  ],
+  "on_jewelry_stats": [
+    {
+      "type": "PERCENT",
+      "scale_to_lvl": true,
+      "stat": "energy",
+      "v1": 12.0
+    }
+  ],
+  "on_weapons_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "energy_on_all_hit",
+      "v1": 2.4
+    }
+  ],
+  "perc_upgrade_chance": 5,
+  "text_format": "YELLOW",
+  "tier": 5,
+  "weight": 25
+}

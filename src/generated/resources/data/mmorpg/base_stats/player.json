@@ -1,0 +1,113 @@
+{
+  "base_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "mana",
+      "v1": 10.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "weapon_damage",
+      "v1": 2.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "health",
+      "v1": 30.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "mana",
+      "v1": 30.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "energy",
+      "v1": 30.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "health_regen",
+      "v1": 1.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "magic_shield_regen",
+      "v1": 1.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "mana_regen",
+      "v1": 1.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "energy_regen",
+      "v1": 1.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "health_regen",
+      "v1": 2.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "mana_regen",
+      "v1": 2.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "energy_regen",
+      "v1": 2.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "critical_hit",
+      "v1": 1.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "critical_damage",
+      "v1": 1.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "critical_damage",
+      "v1": 1.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "critical_damage",
+      "v1": 1.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "critical_hit",
+      "v1": 1.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "critical_damage",
+      "v1": 0.0
+    }
+  ],
+  "id": "player"
+}

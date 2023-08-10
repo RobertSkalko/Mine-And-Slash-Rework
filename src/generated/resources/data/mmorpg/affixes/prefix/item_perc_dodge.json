@@ -1,0 +1,26 @@
+{
+  "type": "prefix",
+  "guid": "item_perc_dodge",
+  "loc_name": "Scaled",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "dodge_stat"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "ITEM_PERCENT",
+      "max": 150.0,
+      "min": 10.0,
+      "stat": "dodge"
+    }
+  ],
+  "tags": [],
+  "weight": 1000
+}

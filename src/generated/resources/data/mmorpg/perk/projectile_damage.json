@@ -1,0 +1,14 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/stat_icons/misc/projectile_damage.png",
+  "id": "projectile_damage",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "projectile_damage",
+      "v1": 2.0
+    }
+  ]
+}

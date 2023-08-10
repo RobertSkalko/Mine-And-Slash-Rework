@@ -1,0 +1,15 @@
+{
+  "data": {
+    "add_to": "health",
+    "adder_stat": "intelligence",
+    "base": 0.0,
+    "ele": "Physical",
+    "id": "health_per_10_intelligence",
+    "max": 2.14748365E9,
+    "min": 0.0,
+    "per_amount": 10,
+    "perc": true,
+    "scale": "NONE"
+  },
+  "ser": "more_x_per_y"
+}

@@ -1,0 +1,172 @@
+{
+  "attached": {
+    "entity_components": {},
+    "on_cast": [
+      {
+        "acts": [
+          {
+            "type": "sound",
+            "map": {
+              "pitch": 1.0,
+              "sound": "minecraft:entity.generic.explode",
+              "volume": 1.0
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": []
+      },
+      {
+        "acts": [
+          {
+            "type": "particles_in_radius",
+            "map": {
+              "motion": "None",
+              "particle_count": 500.0,
+              "particle_type": "minecraft:witch",
+              "radius": 3.0
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": []
+      },
+      {
+        "acts": [
+          {
+            "type": "particles_in_radius",
+            "map": {
+              "motion": "None",
+              "particle_count": 100.0,
+              "particle_type": "minecraft:explosion",
+              "radius": 3.0
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": []
+      },
+      {
+        "acts": [
+          {
+            "type": "particles_in_radius",
+            "map": {
+              "height": 0.5,
+              "motion": "None",
+              "particle_count": 500.0,
+              "particle_type": "minecraft:witch",
+              "radius": 6.0,
+              "shape": "CIRCLE_2D_EDGE",
+              "y_rand": 1.0
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": []
+      },
+      {
+        "acts": [
+          {
+            "type": "particles_in_radius",
+            "map": {
+              "height": 0.5,
+              "motion": "None",
+              "particle_count": 100.0,
+              "particle_type": "minecraft:explosion",
+              "radius": 6.0,
+              "shape": "CIRCLE_2D_EDGE",
+              "y_rand": 1.0
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": []
+      },
+      {
+        "acts": [
+          {
+            "type": "damage",
+            "map": {
+              "element": "Elemental",
+              "value_calculation": "minion_explosion"
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": [
+          {
+            "type": "aoe",
+            "map": {
+              "en_predicate": "enemies",
+              "radius": 10.0,
+              "selection_type": "RADIUS"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "config": {
+    "apply_cast_speed_to_cd": false,
+    "cast_time_ticks": 0,
+    "castingWeapon": "ANY_WEAPON",
+    "charge_name": "",
+    "charge_regen": 0,
+    "charges": 0,
+    "cooldown_ticks": 0,
+    "imbues": 0,
+    "mana_cost": {
+      "max": 0.0,
+      "min": 0.0
+    },
+    "scale_mana_cost_to_player_lvl": false,
+    "style": "INT",
+    "swing_arm": true,
+    "tags": [
+      "area",
+      "damage"
+    ],
+    "times_to_cast": 1
+  },
+  "disabled_dims": [],
+  "effect_tip": "",
+  "identifier": "minion_explosion",
+  "manual_tip": false,
+  "weight": 1000
+}

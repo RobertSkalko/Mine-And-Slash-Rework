@@ -1,0 +1,17 @@
+{
+  "base": {
+    "max": 0.0,
+    "min": 0.0
+  },
+  "base_scaling_type": "NORMAL",
+  "id": "gong_strike",
+  "stat_scalings": [
+    {
+      "multi": {
+        "max": 0.25,
+        "min": 0.1
+      },
+      "stat": "health"
+    }
+  ]
+}

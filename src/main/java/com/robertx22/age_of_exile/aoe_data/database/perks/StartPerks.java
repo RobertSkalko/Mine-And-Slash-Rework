@@ -72,7 +72,7 @@ public class StartPerks implements ExileRegistryInit {
         Perk perk = PerkBuilder.bigStat(id, locname, stats);
         perk.is_entry = true;
         perk.type = Perk.PerkType.START;
-        perk.one_of_a_kind = "start";
+        perk.one_kind = "start";
         return perk;
     }
 }

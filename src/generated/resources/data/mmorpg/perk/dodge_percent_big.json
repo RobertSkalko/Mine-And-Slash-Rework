@@ -1,0 +1,14 @@
+{
+  "type": "SPECIAL",
+  "icon": "mmorpg:textures/gui/stat_icons/main/dodge.png",
+  "id": "dodge_percent_big",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "PERCENT",
+      "scale_to_lvl": false,
+      "stat": "dodge",
+      "v1": 10.0
+    }
+  ]
+}

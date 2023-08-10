@@ -1,0 +1,67 @@
+{
+  "type": "negative",
+  "id": "negative/7",
+  "max_stacks": 1,
+  "mc_stats": [],
+  "one_of_a_kind_id": "",
+  "spell": {
+    "entity_components": {
+      "default_entity_name": [
+        {
+          "acts": [
+            {
+              "type": "particles_in_radius",
+              "map": {
+                "motion": "None",
+                "particle_count": 2.0,
+                "particle_type": "minecraft:witch",
+                "radius": 0.5
+              }
+            }
+          ],
+          "en_preds": [],
+          "ifs": [
+            {
+              "type": "x_ticks_condition",
+              "map": {
+                "tick_rate": 20.0
+              }
+            }
+          ],
+          "targets": []
+        }
+      ]
+    },
+    "on_cast": []
+  },
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 20.0,
+      "min": -10.0,
+      "stat": "str_dmg_received"
+    },
+    {
+      "type": "FLAT",
+      "max": 20.0,
+      "min": -10.0,
+      "stat": "int_dmg_received"
+    },
+    {
+      "type": "FLAT",
+      "max": 20.0,
+      "min": -10.0,
+      "stat": "dex_dmg_received"
+    },
+    {
+      "type": "FLAT",
+      "max": -10.0,
+      "min": -5.0,
+      "stat": "move_speed"
+    }
+  ],
+  "tags": [
+    "negative",
+    "curse"
+  ]
+}

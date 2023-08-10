@@ -1,0 +1,6 @@
+{
+  "id": "restore_type_is_potion",
+  "ser": "string_matches",
+  "string_id": "potion",
+  "string_key": "restore_type"
+}

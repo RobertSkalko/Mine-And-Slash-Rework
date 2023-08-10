@@ -1,0 +1,6 @@
+{
+  "bool": true,
+  "bool_id": "crit",
+  "id": "set_bool_crit",
+  "ser": "set_bool"
+}

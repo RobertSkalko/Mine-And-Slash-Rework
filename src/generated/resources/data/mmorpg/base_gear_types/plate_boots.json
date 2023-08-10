@@ -1,0 +1,24 @@
+{
+  "base_stats": [
+    {
+      "type": "ITEM_FLAT",
+      "max": 7.5,
+      "min": 3.0,
+      "stat": "armor"
+    }
+  ],
+  "gear_slot": "boots",
+  "guid": "plate_boots",
+  "implicit_stats": [],
+  "style": "STR",
+  "tags": {
+    "tags": [
+      "armor_family",
+      "strength",
+      "boots",
+      "armor_stat"
+    ]
+  },
+  "weapon_type": "none",
+  "weight": 1000
+}

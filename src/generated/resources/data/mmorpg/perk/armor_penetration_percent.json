@@ -1,0 +1,14 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/stat_icons/misc/armor_penetration.png",
+  "id": "armor_penetration_percent",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "PERCENT",
+      "scale_to_lvl": false,
+      "stat": "armor_penetration",
+      "v1": 5.0
+    }
+  ]
+}

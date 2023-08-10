@@ -1,0 +1,14 @@
+{
+  "type": "SPECIAL",
+  "icon": "mmorpg:textures/gui/stat_icons/misc/int_dmg.png",
+  "id": "int_dmg_big",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "int_dmg",
+      "v1": 10.0
+    }
+  ]
+}

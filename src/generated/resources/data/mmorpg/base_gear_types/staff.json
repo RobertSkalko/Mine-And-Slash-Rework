@@ -1,0 +1,25 @@
+{
+  "base_stats": [
+    {
+      "type": "ITEM_FLAT",
+      "max": 6.0,
+      "min": 2.0,
+      "stat": "weapon_damage"
+    }
+  ],
+  "gear_slot": "staff",
+  "guid": "staff",
+  "implicit_stats": [],
+  "style": "INT",
+  "tags": {
+    "tags": [
+      "mage_weapon",
+      "staff",
+      "weapon_family",
+      "melee_weapon",
+      "intelligence"
+    ]
+  },
+  "weapon_type": "staff",
+  "weight": 1000
+}

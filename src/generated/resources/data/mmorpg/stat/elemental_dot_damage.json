@@ -1,0 +1,30 @@
+{
+  "base": 0.0,
+  "effect": {
+    "effects": [
+      "increase_number_num"
+    ],
+    "events": [
+      "on_damage"
+    ],
+    "ifs": [
+      "ele_match_stat",
+      "attack_type_is_dot"
+    ],
+    "order": 0,
+    "side": "Source"
+  },
+  "ele": "Elemental",
+  "format": "red",
+  "group": "Misc",
+  "icon": "❁",
+  "id": "elemental_dot_damage",
+  "is_long": false,
+  "is_perc": true,
+  "max": 2.14748365E9,
+  "min": -1000.0,
+  "order": 100,
+  "scaling": "NONE",
+  "ser": "data",
+  "show": true
+}

@@ -1,0 +1,38 @@
+{
+  "format": "RED",
+  "icon": "§c☀",
+  "id": "fire_lord",
+  "stats": [
+    {
+      "type": "flat",
+      "max": 15.0,
+      "min": 15.0,
+      "stat": "health"
+    },
+    {
+      "type": "flat",
+      "max": 5.0,
+      "min": 5.0,
+      "stat": "burn_chance"
+    },
+    {
+      "type": "flat",
+      "max": 75.0,
+      "min": 75.0,
+      "stat": "phys_to_fire"
+    },
+    {
+      "type": "flat",
+      "max": 1.0,
+      "min": 1.0,
+      "stat": "fire_weapon_damage"
+    },
+    {
+      "type": "flat",
+      "max": 20.0,
+      "min": 20.0,
+      "stat": "extra_mob_drops"
+    }
+  ],
+  "weight": 250
+}

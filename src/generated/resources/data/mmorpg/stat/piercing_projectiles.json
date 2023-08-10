@@ -1,0 +1,29 @@
+{
+  "base": 0.0,
+  "effect": {
+    "effects": [
+      "set_bool_pierce"
+    ],
+    "events": [
+      "on_spell_stat_calc"
+    ],
+    "ifs": [
+      "spell_has_tag_projectile"
+    ],
+    "order": 0,
+    "side": "Source"
+  },
+  "ele": "Physical",
+  "format": "aqua",
+  "group": "Misc",
+  "icon": "❁",
+  "id": "piercing_projectiles",
+  "is_long": true,
+  "is_perc": false,
+  "max": 2.14748365E9,
+  "min": -1000.0,
+  "order": 100,
+  "scaling": "NONE",
+  "ser": "data",
+  "show": true
+}

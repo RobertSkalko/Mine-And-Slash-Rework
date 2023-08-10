@@ -1,0 +1,33 @@
+{
+  "base_gear": "ring",
+  "id": "playful_hope",
+  "rarity": "runeword",
+  "replaces_name": true,
+  "unique_stats": [
+    {
+      "type": "flat",
+      "max": 25.0,
+      "min": -75.0,
+      "stat": "critical_damage"
+    },
+    {
+      "type": "flat",
+      "max": 15.0,
+      "min": -50.0,
+      "stat": "water_resist"
+    },
+    {
+      "type": "flat",
+      "max": 15.0,
+      "min": -50.0,
+      "stat": "fire_resist"
+    },
+    {
+      "type": "flat",
+      "max": 15.0,
+      "min": -50.0,
+      "stat": "chaos_resist"
+    }
+  ],
+  "weight": 0
+}

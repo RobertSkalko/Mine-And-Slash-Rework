@@ -1,0 +1,29 @@
+{
+  "base": 0.0,
+  "effect": {
+    "effects": [
+      "increase_number_num"
+    ],
+    "events": [
+      "on_damage"
+    ],
+    "ifs": [
+      "is_source_low_hp"
+    ],
+    "order": 100,
+    "side": "Source"
+  },
+  "ele": "Physical",
+  "format": "aqua",
+  "group": "Misc",
+  "icon": "❁",
+  "id": "dmg_when_low_hp",
+  "is_long": false,
+  "is_perc": true,
+  "max": 2.14748365E9,
+  "min": -1000.0,
+  "order": 100,
+  "scaling": "NONE",
+  "ser": "data",
+  "show": true
+}

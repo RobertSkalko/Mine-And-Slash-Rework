@@ -1,0 +1,27 @@
+{
+  "type": "START",
+  "icon": "mmorpg:textures/gui/stat_icons/core/intelligence.png",
+  "id": "ranger",
+  "is_entry": true,
+  "one_kind": "start",
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "intelligence",
+      "v1": 5.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "strength",
+      "v1": 5.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "dexterity",
+      "v1": 10.0
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/stat_icons/main/magic_shield_regen.png",
+  "id": "magic_shield_regen_percent",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "PERCENT",
+      "scale_to_lvl": false,
+      "stat": "magic_shield_regen",
+      "v1": 5.0
+    }
+  ]
+}

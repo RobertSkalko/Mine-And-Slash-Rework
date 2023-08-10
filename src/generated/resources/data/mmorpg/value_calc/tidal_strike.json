@@ -1,0 +1,17 @@
+{
+  "base": {
+    "max": 4.5,
+    "min": 0.8
+  },
+  "base_scaling_type": "NORMAL",
+  "id": "tidal_strike",
+  "stat_scalings": [
+    {
+      "multi": {
+        "max": 0.75,
+        "min": 0.4
+      },
+      "stat": "weapon_damage"
+    }
+  ]
+}

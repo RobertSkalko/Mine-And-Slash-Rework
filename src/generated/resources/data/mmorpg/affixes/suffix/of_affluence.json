@@ -1,0 +1,26 @@
+{
+  "type": "suffix",
+  "guid": "of_affluence",
+  "loc_name": "Of Affluence",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "jewelry_family"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 10.0,
+      "min": 3.0,
+      "stat": "increased_quantity"
+    }
+  ],
+  "tags": [],
+  "weight": 1000
+}

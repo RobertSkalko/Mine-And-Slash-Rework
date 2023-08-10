@@ -1,0 +1,26 @@
+{
+  "type": "prefix",
+  "guid": "true_hit",
+  "loc_name": "True Hit",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "weapon_family"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 10.0,
+      "min": 2.0,
+      "stat": "critical_hit"
+    }
+  ],
+  "tags": [],
+  "weight": 1000
+}

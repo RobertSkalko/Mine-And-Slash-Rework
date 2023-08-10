@@ -1,0 +1,11 @@
+{
+  "type": "energy",
+  "id": "leech_energy",
+  "num_provider": {
+    "type": "perc_of_num",
+    "calc": "number"
+  },
+  "restore_type": "leech",
+  "ser": "restore_resource",
+  "side": "Source"
+}

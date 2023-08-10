@@ -7,11 +7,9 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
-import com.robertx22.library_of_exile.registry.serialization.IByteBuf;
 import com.robertx22.library_of_exile.registry.serialization.ISerializable;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
@@ -19,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class StatMod implements ISerializable<StatMod>, IByteBuf<StatMod> {
+public class StatMod implements ISerializable<StatMod> {
 
     public float min = 0;
     public float max = 0;
@@ -33,27 +31,7 @@ public class StatMod implements ISerializable<StatMod>, IByteBuf<StatMod> {
 
     }
 
-    @Override
-    public StatMod getFromBuf(FriendlyByteBuf buf) {
-        StatMod mod = new StatMod();
-        mod.min = buf.readFloat();
-        mod.max = buf.readFloat();
-
-        mod.stat = buf.readUtf(100);
-        mod.type = buf.readUtf(100);
-        return mod;
-    }
-
-    @Override
-    public void toBuf(FriendlyByteBuf buf) {
-        buf.writeFloat(min);
-        buf.writeFloat(max);
-
-        buf.writeUtf(stat, 100);
-        buf.writeUtf(type, 100);
-
-    }
-
+   
     public static StatMod percent(float firstMin, float firstMax, Stat stat) {
         StatMod mod = new StatMod();
         mod.min = firstMin;

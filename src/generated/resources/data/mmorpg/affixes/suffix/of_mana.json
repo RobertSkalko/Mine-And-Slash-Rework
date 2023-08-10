@@ -1,0 +1,26 @@
+{
+  "type": "suffix",
+  "guid": "of_mana",
+  "loc_name": "Of Mana",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "ring"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "PERCENT",
+      "max": 15.0,
+      "min": 6.0,
+      "stat": "mana"
+    }
+  ],
+  "tags": [],
+  "weight": 1000
+}

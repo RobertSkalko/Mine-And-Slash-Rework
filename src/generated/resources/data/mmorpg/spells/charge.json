@@ -1,0 +1,223 @@
+{
+  "attached": {
+    "entity_components": {},
+    "on_cast": [
+      {
+        "acts": [
+          {
+            "type": "sound",
+            "map": {
+              "pitch": 1.0,
+              "sound": "minecraft:block.ancient_debris.step",
+              "volume": 1.0
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": []
+      },
+      {
+        "acts": [
+          {
+            "type": "motion",
+            "map": {
+              "ignore_y": true,
+              "motion": "CasterLook",
+              "push_str": 0.2,
+              "set_add": "ADD"
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": [
+          {
+            "type": "self",
+            "map": {}
+          }
+        ]
+      },
+      {
+        "acts": [
+          {
+            "type": "particles_in_radius",
+            "map": {
+              "height": 0.5,
+              "motion": "None",
+              "particle_count": 20.0,
+              "particle_type": "minecraft:cloud",
+              "radius": 1.0,
+              "shape": "CIRCLE_2D_EDGE",
+              "y_rand": 0.5
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": []
+      },
+      {
+        "acts": [
+          {
+            "type": "particles_in_radius",
+            "map": {
+              "height": 0.5,
+              "motion": "None",
+              "particle_count": 1.0,
+              "particle_type": "minecraft:explosion",
+              "radius": 1.0,
+              "shape": "CIRCLE_2D_EDGE",
+              "y_rand": 0.5
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": []
+      },
+      {
+        "acts": [
+          {
+            "type": "damage",
+            "map": {
+              "element": "Physical",
+              "value_calculation": "charge"
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "per_entity_hit": [
+          {
+            "acts": [
+              {
+                "type": "sound",
+                "map": {
+                  "pitch": 1.0,
+                  "sound": "minecraft:block.anvil.land",
+                  "volume": 1.0
+                }
+              }
+            ],
+            "en_preds": [],
+            "ifs": [],
+            "targets": []
+          },
+          {
+            "acts": [
+              {
+                "type": "particles_in_radius",
+                "map": {
+                  "height": 0.5,
+                  "motion": "None",
+                  "particle_count": 100.0,
+                  "particle_type": "minecraft:effect",
+                  "radius": 0.5,
+                  "shape": "CIRCLE_2D_EDGE",
+                  "y_rand": 0.1
+                }
+              }
+            ],
+            "en_preds": [],
+            "ifs": [],
+            "targets": []
+          },
+          {
+            "acts": [
+              {
+                "type": "particles_in_radius",
+                "map": {
+                  "height": 0.5,
+                  "motion": "None",
+                  "particle_count": 100.0,
+                  "particle_type": "minecraft:cloud",
+                  "radius": 0.5,
+                  "shape": "CIRCLE_2D_EDGE",
+                  "y_rand": 0.1
+                }
+              }
+            ],
+            "en_preds": [],
+            "ifs": [],
+            "targets": []
+          },
+          {
+            "acts": [
+              {
+                "type": "cancel_cast",
+                "map": {}
+              }
+            ],
+            "en_preds": [],
+            "ifs": [],
+            "targets": []
+          }
+        ],
+        "targets": [
+          {
+            "type": "aoe",
+            "map": {
+              "en_predicate": "enemies",
+              "radius": 1.75,
+              "selection_type": "RADIUS"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "config": {
+    "apply_cast_speed_to_cd": false,
+    "cast_time_ticks": 60,
+    "castingWeapon": "MELEE_WEAPON",
+    "charge_name": "",
+    "charge_regen": 0,
+    "charges": 0,
+    "cooldown_ticks": 200,
+    "imbues": 0,
+    "mana_cost": {
+      "max": 10.0,
+      "min": 5.0
+    },
+    "scale_mana_cost_to_player_lvl": true,
+    "style": "INT",
+    "swing_arm": true,
+    "tags": [
+      "area",
+      "damage",
+      "movement"
+    ],
+    "times_to_cast": 60
+  },
+  "disabled_dims": [],
+  "effect_tip": "",
+  "identifier": "charge",
+  "manual_tip": true,
+  "weight": 1000
+}

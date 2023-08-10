@@ -1,0 +1,33 @@
+{
+  "gem_type": "emerald",
+  "identifier": "emerald2",
+  "item_id": "mmorpg:gems/emerald/2",
+  "on_armor_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "chaos_resist",
+      "v1": 7.5000005
+    }
+  ],
+  "on_jewelry_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "spell_chaos_damage",
+      "v1": 3.0
+    }
+  ],
+  "on_weapons_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "all_chaos_damage",
+      "v1": 4.5
+    }
+  ],
+  "perc_upgrade_chance": 50,
+  "text_format": "GREEN",
+  "tier": 2,
+  "weight": 5000
+}

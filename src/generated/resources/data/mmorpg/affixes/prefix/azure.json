@@ -1,0 +1,26 @@
+{
+  "type": "prefix",
+  "guid": "azure",
+  "loc_name": "Azure",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "armor_family"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "PERCENT",
+      "max": 14.0,
+      "min": 2.0,
+      "stat": "mana"
+    }
+  ],
+  "tags": [],
+  "weight": 1000
+}

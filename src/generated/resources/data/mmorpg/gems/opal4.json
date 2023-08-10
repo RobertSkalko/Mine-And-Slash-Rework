@@ -1,0 +1,33 @@
+{
+  "gem_type": "opal",
+  "identifier": "opal4",
+  "item_id": "mmorpg:gems/opal/4",
+  "on_armor_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "strength",
+      "v1": 3.0
+    }
+  ],
+  "on_jewelry_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "critical_hit",
+      "v1": 3.6000001
+    }
+  ],
+  "on_weapons_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "critical_damage",
+      "v1": 7.2000003
+    }
+  ],
+  "perc_upgrade_chance": 10,
+  "text_format": "GOLD",
+  "tier": 4,
+  "weight": 200
+}

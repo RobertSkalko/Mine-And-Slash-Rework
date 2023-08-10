@@ -1,0 +1,14 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/stat_icons/misc/str_dmg.png",
+  "id": "str_dmg",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "str_dmg",
+      "v1": 3.0
+    }
+  ]
+}

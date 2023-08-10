@@ -1,0 +1,31 @@
+{
+  "base": 0.0,
+  "effect": {
+    "effects": [
+      "give_negative/3_to_target"
+    ],
+    "events": [
+      "on_damage"
+    ],
+    "ifs": [
+      "random_roll",
+      "ele_match_stat",
+      "is_attack_or_spell_attack"
+    ],
+    "order": 100,
+    "side": "Source"
+  },
+  "ele": "Elemental",
+  "format": "aqua",
+  "group": "Misc",
+  "icon": "❁",
+  "id": "chance_of_torment",
+  "is_long": true,
+  "is_perc": true,
+  "max": 100.0,
+  "min": 0.0,
+  "order": 100,
+  "scaling": "NONE",
+  "ser": "data",
+  "show": true
+}

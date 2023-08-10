@@ -1,0 +1,83 @@
+{
+  "attached": {
+    "entity_components": {},
+    "on_cast": [
+      {
+        "acts": [
+          {
+            "type": "sound",
+            "map": {
+              "pitch": 1.0,
+              "sound": "minecraft:entity.wolf.howl",
+              "volume": 1.0
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": []
+      },
+      {
+        "acts": [
+          {
+            "type": "give_absorb",
+            "map": {
+              "seconds": 10.0,
+              "value_calculation": "shout_warn"
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": [
+          {
+            "type": "aoe",
+            "map": {
+              "en_predicate": "allies",
+              "radius": 10.0,
+              "selection_type": "RADIUS"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "config": {
+    "apply_cast_speed_to_cd": false,
+    "cast_time_ticks": 0,
+    "castingWeapon": "ANY_WEAPON",
+    "charge_name": "",
+    "charge_regen": 0,
+    "charges": 0,
+    "cooldown_ticks": 1200,
+    "imbues": 0,
+    "mana_cost": {
+      "max": 10.0,
+      "min": 5.0
+    },
+    "scale_mana_cost_to_player_lvl": false,
+    "style": "INT",
+    "swing_arm": true,
+    "tags": [
+      "area",
+      "shout",
+      "shield"
+    ],
+    "times_to_cast": 1
+  },
+  "disabled_dims": [],
+  "effect_tip": "",
+  "identifier": "shout_warn",
+  "manual_tip": true,
+  "weight": 1000
+}

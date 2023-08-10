@@ -1,0 +1,20 @@
+{
+  "type": "SPECIAL",
+  "icon": "mmorpg:textures/gui/stat_icons/main/mana.png",
+  "id": "mana_ms_percent_small",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "PERCENT",
+      "scale_to_lvl": false,
+      "stat": "mana",
+      "v1": 2.0
+    },
+    {
+      "type": "PERCENT",
+      "scale_to_lvl": false,
+      "stat": "magic_shield",
+      "v1": 2.0
+    }
+  ]
+}

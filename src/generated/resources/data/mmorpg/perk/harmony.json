@@ -1,0 +1,26 @@
+{
+  "type": "MAJOR",
+  "icon": "mmorpg:textures/gui/stat_icons/game_changers/harmony.png",
+  "id": "harmony",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "magic_shield_heal",
+      "v1": 50.0
+    },
+    {
+      "type": "MORE",
+      "scale_to_lvl": false,
+      "stat": "health",
+      "v1": -25.0
+    },
+    {
+      "type": "MORE",
+      "scale_to_lvl": false,
+      "stat": "armor",
+      "v1": -25.0
+    }
+  ]
+}

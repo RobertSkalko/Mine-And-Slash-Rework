@@ -1,0 +1,14 @@
+{
+  "type": "SPECIAL",
+  "icon": "mmorpg:textures/gui/stat_icons/restoration/increase_healing.png",
+  "id": "increase_healing_big",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "increase_healing",
+      "v1": 10.0
+    }
+  ]
+}

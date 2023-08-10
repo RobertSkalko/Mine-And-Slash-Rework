@@ -1,0 +1,27 @@
+{
+  "type": "suffix",
+  "guid": "of_brutality",
+  "loc_name": "Of Brutality",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "necklace",
+          "weapon_family"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 50.0,
+      "min": 6.0,
+      "stat": "critical_damage"
+    }
+  ],
+  "tags": [],
+  "weight": 1000
+}

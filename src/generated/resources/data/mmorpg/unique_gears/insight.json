@@ -1,0 +1,27 @@
+{
+  "base_gear": "cloth_helmet",
+  "id": "insight",
+  "rarity": "runeword",
+  "replaces_name": true,
+  "unique_stats": [
+    {
+      "type": "percent",
+      "max": 30.0,
+      "min": 20.0,
+      "stat": "mana_regen"
+    },
+    {
+      "type": "flat",
+      "max": 25.0,
+      "min": 10.0,
+      "stat": "mana"
+    },
+    {
+      "type": "flat",
+      "max": 25.0,
+      "min": 10.0,
+      "stat": "fire_resist"
+    }
+  ],
+  "weight": 0
+}

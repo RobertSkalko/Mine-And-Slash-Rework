@@ -1,0 +1,14 @@
+{
+  "data": {
+    "add_to": "physical_weapon_damage",
+    "adder_stat": "mana",
+    "base": 0.0,
+    "ele": "Physical",
+    "id": "physical_weapon_damage_per_perc_of_mana",
+    "max": 2.14748365E9,
+    "min": 0.0,
+    "perc": true,
+    "scale": "NONE"
+  },
+  "ser": "one_to_other"
+}

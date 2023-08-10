@@ -67,12 +67,9 @@ public class TalentsData implements IApplyableStats {
 
         Perk perk = school.calcData.getPerk(point);
 
-        if (perk.lvl_req > data.getLevel()) {
-            return false;
-        }
-
-        if (perk.one_of_a_kind != null && !perk.one_of_a_kind.isEmpty()) {
-            return getAllAllocatedPerks().values().stream().noneMatch(x -> x.one_of_a_kind != null && x.one_of_a_kind.equals(perk.one_of_a_kind));
+        
+        if (perk.one_kind != null && !perk.one_kind.isEmpty()) {
+            return getAllAllocatedPerks().values().stream().noneMatch(x -> x.one_kind != null && x.one_kind.equals(perk.one_kind));
         }
 
         // todo you can take multiple starts??

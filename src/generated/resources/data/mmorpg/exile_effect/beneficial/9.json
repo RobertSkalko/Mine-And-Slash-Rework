@@ -1,0 +1,32 @@
+{
+  "type": "beneficial",
+  "id": "beneficial/9",
+  "max_stacks": 3,
+  "mc_stats": [],
+  "one_of_a_kind_id": "",
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": -6.0,
+      "min": -3.0,
+      "stat": "str_dmg_received"
+    },
+    {
+      "type": "FLAT",
+      "max": -6.0,
+      "min": -3.0,
+      "stat": "dex_dmg_received"
+    },
+    {
+      "type": "FLAT",
+      "max": -6.0,
+      "min": -3.0,
+      "stat": "int_dmg_received"
+    }
+  ],
+  "tags": [
+    "positive",
+    "song",
+    "defensive"
+  ]
+}

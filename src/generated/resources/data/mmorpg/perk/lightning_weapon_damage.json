@@ -1,0 +1,14 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/stat_icons/elemental/lightning_weapon_damage.png",
+  "id": "lightning_weapon_damage",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "PERCENT",
+      "scale_to_lvl": false,
+      "stat": "lightning_weapon_damage",
+      "v1": 2.0
+    }
+  ]
+}

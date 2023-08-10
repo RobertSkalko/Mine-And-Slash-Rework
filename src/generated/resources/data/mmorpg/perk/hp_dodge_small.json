@@ -1,0 +1,20 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/stat_icons/main/dodge.png",
+  "id": "hp_dodge_small",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "PERCENT",
+      "scale_to_lvl": false,
+      "stat": "dodge",
+      "v1": 3.0
+    },
+    {
+      "type": "PERCENT",
+      "scale_to_lvl": false,
+      "stat": "health",
+      "v1": 2.0
+    }
+  ]
+}

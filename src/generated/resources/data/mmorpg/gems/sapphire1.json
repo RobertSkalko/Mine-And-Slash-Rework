@@ -1,0 +1,33 @@
+{
+  "gem_type": "sapphire",
+  "identifier": "sapphire1",
+  "item_id": "mmorpg:gems/sapphire/1",
+  "on_armor_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "water_resist",
+      "v1": 5.0
+    }
+  ],
+  "on_jewelry_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "spell_water_damage",
+      "v1": 2.0
+    }
+  ],
+  "on_weapons_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "all_water_damage",
+      "v1": 3.0
+    }
+  ],
+  "perc_upgrade_chance": 75,
+  "text_format": "BLUE",
+  "tier": 1,
+  "weight": 25999
+}

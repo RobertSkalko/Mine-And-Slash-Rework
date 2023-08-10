@@ -1,0 +1,7 @@
+{
+  "id": "style_is_int_is_false",
+  "is": false,
+  "ser": "string_matches",
+  "string_id": "int",
+  "string_key": "style"
+}

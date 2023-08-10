@@ -1,0 +1,31 @@
+{
+  "data": {
+    "base": 0.0,
+    "core_stat_data": {
+      "stats": [
+        {
+          "type": "FLAT",
+          "stat": "dodge",
+          "v1": 1.0
+        },
+        {
+          "type": "FLAT",
+          "stat": "energy_regen",
+          "v1": 0.1
+        },
+        {
+          "type": "FLAT",
+          "stat": "energy",
+          "v1": 2.0
+        }
+      ]
+    },
+    "ele": "Physical",
+    "id": "dexterity",
+    "max": 2.14748365E9,
+    "min": 0.0,
+    "perc": true,
+    "scale": "NONE"
+  },
+  "ser": "core_stat"
+}

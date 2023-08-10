@@ -1,0 +1,17 @@
+{
+  "base": {
+    "max": 3.0,
+    "min": 0.4
+  },
+  "base_scaling_type": "NORMAL",
+  "id": "torment",
+  "stat_scalings": [
+    {
+      "multi": {
+        "max": 0.5,
+        "min": 0.2
+      },
+      "stat": "weapon_damage"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "base": {
+    "max": 1.2,
+    "min": 0.2
+  },
+  "base_scaling_type": "NORMAL",
+  "id": "nature_balm",
+  "stat_scalings": [
+    {
+      "multi": {
+        "max": 0.2,
+        "min": 0.1
+      },
+      "stat": "weapon_damage"
+    }
+  ]
+}

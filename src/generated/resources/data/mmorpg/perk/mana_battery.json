@@ -1,0 +1,20 @@
+{
+  "type": "MAJOR",
+  "icon": "mmorpg:textures/gui/stat_icons/game_changers/mana_battery.png",
+  "id": "mana_battery",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "mana_shield",
+      "v1": 50.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "lightning_resist",
+      "v1": 25.0
+    }
+  ]
+}

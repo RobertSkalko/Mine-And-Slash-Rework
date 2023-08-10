@@ -1,0 +1,17 @@
+{
+  "base": {
+    "max": 9.0,
+    "min": 1.0
+  },
+  "base_scaling_type": "NORMAL",
+  "id": "explosive_arrow",
+  "stat_scalings": [
+    {
+      "multi": {
+        "max": 1.5,
+        "min": 0.5
+      },
+      "stat": "weapon_damage"
+    }
+  ]
+}

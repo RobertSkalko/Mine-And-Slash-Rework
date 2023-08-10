@@ -1,0 +1,33 @@
+{
+  "gem_type": "garnet",
+  "identifier": "garnet3",
+  "item_id": "mmorpg:gems/garnet/3",
+  "on_armor_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "dexterity",
+      "v1": 2.0
+    }
+  ],
+  "on_jewelry_stats": [
+    {
+      "type": "PERCENT",
+      "scale_to_lvl": true,
+      "stat": "energy_regen",
+      "v1": 6.0
+    }
+  ],
+  "on_weapons_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "critical_hit",
+      "v1": 3.2
+    }
+  ],
+  "perc_upgrade_chance": 25,
+  "text_format": "GREEN",
+  "tier": 3,
+  "weight": 1000
+}

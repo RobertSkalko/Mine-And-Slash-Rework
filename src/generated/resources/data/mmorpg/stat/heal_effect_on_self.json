@@ -1,0 +1,31 @@
+{
+  "base": 0.0,
+  "effect": {
+    "effects": [
+      "increase_number_num"
+    ],
+    "events": [
+      "on_spend_resource"
+    ],
+    "ifs": [
+      "is_spell",
+      "resource_type_is_health",
+      "restore_type_is_heal"
+    ],
+    "order": 100,
+    "side": "Target"
+  },
+  "ele": "All",
+  "format": "yellow",
+  "group": "RESTORATION",
+  "icon": "❁",
+  "id": "heal_effect_on_self",
+  "is_long": false,
+  "is_perc": true,
+  "max": 2.14748365E9,
+  "min": -100.0,
+  "order": 100,
+  "scaling": "NONE",
+  "ser": "data",
+  "show": true
+}

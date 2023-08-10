@@ -1,0 +1,27 @@
+{
+  "base_gear": "necklace",
+  "id": "heavenly_tear",
+  "rarity": "runeword",
+  "replaces_name": true,
+  "unique_stats": [
+    {
+      "type": "flat",
+      "max": 2.0,
+      "min": 1.0,
+      "stat": "plus_to_divine"
+    },
+    {
+      "type": "flat",
+      "max": 20.0,
+      "min": 10.0,
+      "stat": "increase_healing"
+    },
+    {
+      "type": "flat",
+      "max": 15.0,
+      "min": 5.0,
+      "stat": "armor"
+    }
+  ],
+  "weight": 0
+}

@@ -1,0 +1,9 @@
+{
+  "identifier": "cen",
+  "item_id": "mmorpg:runes/cen",
+  "on_armor_stats": [],
+  "on_jewelry_stats": [],
+  "on_weapons_stats": [],
+  "tier": 2,
+  "weight": 1000
+}

@@ -1,0 +1,114 @@
+{
+  "type": "negative",
+  "id": "negative/1",
+  "max_stacks": 1,
+  "mc_stats": [
+    {
+      "type": "MORE",
+      "id": "minecraft:generic.movement_speed",
+      "uuid": "bd9d32fa-c8c2-455c-92aa-4a94c2a70cd5",
+      "val": -1.0
+    }
+  ],
+  "one_of_a_kind_id": "",
+  "spell": {
+    "entity_components": {
+      "default_entity_name": [
+        {
+          "acts": [
+            {
+              "type": "particles_in_radius",
+              "map": {
+                "motion": "None",
+                "particle_count": 10.0,
+                "particle_type": "minecraft:item_slime",
+                "radius": 1.0
+              }
+            }
+          ],
+          "en_preds": [],
+          "ifs": [
+            {
+              "type": "x_ticks_condition",
+              "map": {
+                "tick_rate": 20.0
+              }
+            }
+          ],
+          "targets": []
+        },
+        {
+          "acts": [
+            {
+              "type": "damage",
+              "map": {
+                "element": "Chaos",
+                "value_calculation": "petrify"
+              }
+            }
+          ],
+          "en_preds": [],
+          "ifs": [
+            {
+              "type": "on_entity_expire",
+              "map": {}
+            }
+          ],
+          "targets": [
+            {
+              "type": "target",
+              "map": {}
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "type": "particles_in_radius",
+              "map": {
+                "motion": "None",
+                "particle_count": 15.0,
+                "particle_type": "minecraft:cloud",
+                "radius": 1.0
+              }
+            }
+          ],
+          "en_preds": [],
+          "ifs": [
+            {
+              "type": "on_entity_expire",
+              "map": {}
+            }
+          ],
+          "targets": []
+        },
+        {
+          "acts": [
+            {
+              "type": "sound",
+              "map": {
+                "pitch": 1.0,
+                "sound": "minecraft:entity.sheep.shear",
+                "volume": 1.0
+              }
+            }
+          ],
+          "en_preds": [],
+          "ifs": [
+            {
+              "type": "on_entity_expire",
+              "map": {}
+            }
+          ],
+          "targets": []
+        }
+      ]
+    },
+    "on_cast": []
+  },
+  "stats": [],
+  "tags": [
+    "negative",
+    "immobilizing"
+  ]
+}

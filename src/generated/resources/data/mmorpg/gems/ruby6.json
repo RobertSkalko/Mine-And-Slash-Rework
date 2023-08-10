@@ -1,0 +1,33 @@
+{
+  "gem_type": "ruby",
+  "identifier": "ruby6",
+  "item_id": "mmorpg:gems/ruby/6",
+  "on_armor_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "fire_resist",
+      "v1": 25.0
+    }
+  ],
+  "on_jewelry_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "spell_fire_damage",
+      "v1": 10.0
+    }
+  ],
+  "on_weapons_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "all_fire_damage",
+      "v1": 15.0
+    }
+  ],
+  "perc_upgrade_chance": 0,
+  "text_format": "RED",
+  "tier": 6,
+  "weight": 1
+}

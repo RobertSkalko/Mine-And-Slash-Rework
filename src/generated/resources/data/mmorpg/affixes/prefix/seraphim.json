@@ -1,0 +1,32 @@
+{
+  "type": "prefix",
+  "guid": "seraphim",
+  "loc_name": "Seraphim's",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "armor_family"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "PERCENT",
+      "max": 10.0,
+      "min": 4.0,
+      "stat": "mana"
+    },
+    {
+      "type": "PERCENT",
+      "max": 6.0,
+      "min": 3.0,
+      "stat": "health"
+    }
+  ],
+  "tags": [],
+  "weight": 1000
+}

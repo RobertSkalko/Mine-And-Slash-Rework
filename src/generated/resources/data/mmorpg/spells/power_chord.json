@@ -1,0 +1,158 @@
+{
+  "attached": {
+    "entity_components": {
+      "default_entity_name": [
+        {
+          "acts": [
+            {
+              "type": "particles_in_radius",
+              "map": {
+                "motion": "None",
+                "particle_count": 2.0,
+                "particle_type": "minecraft:note",
+                "radius": 0.15
+              }
+            }
+          ],
+          "en_preds": [],
+          "ifs": [
+            {
+              "type": "x_ticks_condition",
+              "map": {
+                "tick_rate": 1.0
+              }
+            }
+          ],
+          "targets": []
+        },
+        {
+          "acts": [
+            {
+              "type": "damage",
+              "map": {
+                "element": "Elemental",
+                "value_calculation": "power_chord"
+              }
+            },
+            {
+              "type": "exile_effect",
+              "map": {
+                "count": 1.0,
+                "exile_potion_id": "negative/10",
+                "potion_action": "GIVE_STACKS",
+                "potion_dur": 120.0
+              }
+            }
+          ],
+          "en_preds": [],
+          "ifs": [
+            {
+              "type": "on_hit",
+              "map": {}
+            }
+          ],
+          "targets": [
+            {
+              "type": "target",
+              "map": {}
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "type": "particles_in_radius",
+              "map": {
+                "motion": "None",
+                "particle_count": 10.0,
+                "particle_type": "minecraft:enchanted_hit",
+                "radius": 1.0
+              }
+            }
+          ],
+          "en_preds": [],
+          "ifs": [
+            {
+              "type": "on_hit",
+              "map": {}
+            }
+          ],
+          "targets": []
+        }
+      ]
+    },
+    "on_cast": [
+      {
+        "acts": [
+          {
+            "type": "sound",
+            "map": {
+              "pitch": 1.0,
+              "sound": "minecraft:entity.snowball.throw",
+              "volume": 1.0
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": []
+      },
+      {
+        "acts": [
+          {
+            "type": "projectile",
+            "map": {
+              "entity_name": "default_entity_name",
+              "gravity": false,
+              "item": "minecraft:air",
+              "life_ticks": 20.0,
+              "proj_count": 1.0,
+              "proj_en": "mmorpg:spell_projectile",
+              "proj_speed": 1.0
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": []
+      }
+    ]
+  },
+  "config": {
+    "apply_cast_speed_to_cd": true,
+    "cast_time_ticks": 0,
+    "castingWeapon": "MAGE_WEAPON",
+    "charge_name": "",
+    "charge_regen": 0,
+    "charges": 0,
+    "cooldown_ticks": 15,
+    "imbues": 0,
+    "mana_cost": {
+      "max": 7.0,
+      "min": 3.5
+    },
+    "scale_mana_cost_to_player_lvl": false,
+    "style": "INT",
+    "swing_arm": true,
+    "tags": [
+      "projectile",
+      "damage"
+    ],
+    "times_to_cast": 1
+  },
+  "disabled_dims": [],
+  "effect_tip": "",
+  "identifier": "power_chord",
+  "manual_tip": false,
+  "weight": 1000
+}

@@ -1,0 +1,27 @@
+{
+  "base_gear": "ring",
+  "id": "air_disaster",
+  "rarity": "runeword",
+  "replaces_name": true,
+  "unique_stats": [
+    {
+      "type": "flat",
+      "max": 30.0,
+      "min": 15.0,
+      "stat": "inc_effect_of_song_buff_given"
+    },
+    {
+      "type": "flat",
+      "max": 15.0,
+      "min": 5.0,
+      "stat": "area_dmg"
+    },
+    {
+      "type": "flat",
+      "max": 10.0,
+      "min": 3.0,
+      "stat": "mana_regen"
+    }
+  ],
+  "weight": 0
+}

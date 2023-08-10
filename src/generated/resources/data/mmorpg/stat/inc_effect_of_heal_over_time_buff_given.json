@@ -1,0 +1,29 @@
+{
+  "base": 0.0,
+  "effect": {
+    "effects": [
+      "increase_number_num"
+    ],
+    "events": [
+      "on_exile_effect"
+    ],
+    "ifs": [
+      "effect_has_tag_heal_over_time"
+    ],
+    "order": 0,
+    "side": "Source"
+  },
+  "ele": "Physical",
+  "format": "aqua",
+  "group": "Misc",
+  "icon": "❁",
+  "id": "inc_effect_of_heal_over_time_buff_given",
+  "is_long": true,
+  "is_perc": true,
+  "max": 2.14748365E9,
+  "min": -1000.0,
+  "order": 100,
+  "scaling": "NONE",
+  "ser": "data",
+  "show": true
+}

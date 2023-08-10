@@ -1,0 +1,27 @@
+{
+  "type": "prefix",
+  "guid": "focused",
+  "loc_name": "Focused",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "necklace",
+          "mage_weapon"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 30.0,
+      "min": 4.0,
+      "stat": "critical_hit"
+    }
+  ],
+  "tags": [],
+  "weight": 1000
+}

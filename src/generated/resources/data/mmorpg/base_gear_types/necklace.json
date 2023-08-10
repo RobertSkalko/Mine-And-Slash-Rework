@@ -1,0 +1,15 @@
+{
+  "base_stats": [],
+  "gear_slot": "necklace",
+  "guid": "necklace",
+  "implicit_stats": [],
+  "style": "STR",
+  "tags": {
+    "tags": [
+      "jewelry_family",
+      "necklace"
+    ]
+  },
+  "weapon_type": "none",
+  "weight": 1000
+}

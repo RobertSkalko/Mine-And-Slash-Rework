@@ -1,0 +1,22 @@
+{
+  "announce_in_chat": false,
+  "guid": "common",
+  "higher_rar": "uncommon",
+  "is_unique_item": false,
+  "item_model_data_num": 1,
+  "item_tier": 0,
+  "item_tier_power": 1.0,
+  "item_value_multi": 1.0,
+  "lootable_gear_tier": "LOW",
+  "max_sockets": 0,
+  "min_affixes": 0,
+  "potential": 100,
+  "rarity_type": "GEAR",
+  "skill_gem_percents": {
+    "max": 10,
+    "min": 0
+  },
+  "socket_chance": 0,
+  "text_format": "GRAY",
+  "weight": 5000
+}

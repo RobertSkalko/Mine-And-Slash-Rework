@@ -1,0 +1,29 @@
+{
+  "base": 0.0,
+  "effect": {
+    "effects": [
+      "increase_number_num"
+    ],
+    "events": [
+      "on_spend_resource"
+    ],
+    "ifs": [
+      "restore_type_is_leech"
+    ],
+    "order": 100,
+    "side": "Source"
+  },
+  "ele": "All",
+  "format": "red",
+  "group": "RESTORATION",
+  "icon": "❁",
+  "id": "inc_leech",
+  "is_long": false,
+  "is_perc": true,
+  "max": 2.14748365E9,
+  "min": 0.0,
+  "order": 100,
+  "scaling": "NONE",
+  "ser": "data",
+  "show": true
+}

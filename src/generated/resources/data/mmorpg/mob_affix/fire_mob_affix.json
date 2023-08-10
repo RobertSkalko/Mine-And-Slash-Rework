@@ -1,0 +1,26 @@
+{
+  "format": "RED",
+  "icon": "",
+  "id": "fire_mob_affix",
+  "stats": [
+    {
+      "type": "flat",
+      "max": 75.0,
+      "min": 75.0,
+      "stat": "phys_to_fire"
+    },
+    {
+      "type": "flat",
+      "max": 1.0,
+      "min": 1.0,
+      "stat": "fire_weapon_damage"
+    },
+    {
+      "type": "flat",
+      "max": 10.0,
+      "min": 10.0,
+      "stat": "extra_mob_drops"
+    }
+  ],
+  "weight": 2000
+}

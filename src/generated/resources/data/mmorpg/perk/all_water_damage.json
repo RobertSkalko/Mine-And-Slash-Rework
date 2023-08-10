@@ -1,0 +1,14 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/stat_icons/elemental/all_water_damage.png",
+  "id": "all_water_damage",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "all_water_damage",
+      "v1": 2.0
+    }
+  ]
+}

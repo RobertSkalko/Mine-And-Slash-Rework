@@ -1,0 +1,26 @@
+{
+  "type": "prefix",
+  "guid": "heal_crit_dmg_prefix",
+  "loc_name": "Inspiring",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "staff"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 20.0,
+      "min": 5.0,
+      "stat": "critical_damage"
+    }
+  ],
+  "tags": [],
+  "weight": 1000
+}

@@ -1,0 +1,6 @@
+{
+  "id": "style_is_int",
+  "ser": "string_matches",
+  "string_id": "int",
+  "string_key": "style"
+}

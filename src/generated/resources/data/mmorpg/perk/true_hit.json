@@ -1,0 +1,20 @@
+{
+  "type": "MAJOR",
+  "icon": "mmorpg:textures/gui/stat_icons/game_changers/true_hit.png",
+  "id": "true_hit",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "MORE",
+      "scale_to_lvl": false,
+      "stat": "critical_damage",
+      "v1": 25.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "non_crit_damage",
+      "v1": -25.0
+    }
+  ]
+}

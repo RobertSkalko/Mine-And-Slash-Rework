@@ -5,7 +5,6 @@ import com.robertx22.age_of_exile.uncommon.testing.TestManager;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import net.minecraft.world.level.GameRules;
 import net.minecraftforge.event.server.ServerStartedEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 
 public class LifeCycleEvents {
@@ -14,8 +13,8 @@ public class LifeCycleEvents {
 
     public static void register() {
 
-        
-        ForgeEvents.registerForgeEvent(ServerStartingEvent.class, event -> {
+
+        ForgeEvents.registerForgeEvent(ServerStartedEvent.class, event -> {
             if (MMORPG.RUN_DEV_TOOLS) {
                 DataGeneration.generateAll();
             }

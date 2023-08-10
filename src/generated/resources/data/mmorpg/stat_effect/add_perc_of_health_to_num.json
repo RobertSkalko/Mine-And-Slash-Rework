@@ -1,0 +1,9 @@
+{
+  "id": "add_perc_of_health_to_num",
+  "num_provider": {
+    "type": "perc_of_stat",
+    "calc": "health"
+  },
+  "number_id": "number",
+  "ser": "add_to_number"
+}

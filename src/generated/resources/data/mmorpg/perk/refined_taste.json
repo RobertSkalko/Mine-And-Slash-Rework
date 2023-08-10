@@ -1,0 +1,26 @@
+{
+  "type": "MAJOR",
+  "icon": "mmorpg:textures/gui/stat_icons/game_changers/refined_taste.png",
+  "id": "refined_taste",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "inc_leech",
+      "v1": 50.0
+    },
+    {
+      "type": "MORE",
+      "scale_to_lvl": false,
+      "stat": "health_regen",
+      "v1": -75.0
+    },
+    {
+      "type": "MORE",
+      "scale_to_lvl": false,
+      "stat": "mana_regen",
+      "v1": -75.0
+    }
+  ]
+}

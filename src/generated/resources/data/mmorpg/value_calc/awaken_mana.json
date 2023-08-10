@@ -1,0 +1,17 @@
+{
+  "base": {
+    "max": 12.0,
+    "min": 2.0
+  },
+  "base_scaling_type": "NORMAL",
+  "id": "awaken_mana",
+  "stat_scalings": [
+    {
+      "multi": {
+        "max": 2.0,
+        "min": 1.0
+      },
+      "stat": "weapon_damage"
+    }
+  ]
+}

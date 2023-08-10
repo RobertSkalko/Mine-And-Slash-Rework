@@ -34,7 +34,7 @@ public class RarityStoneItem extends Item implements IWeighted, IShapelessRecipe
     }
 
     public static Item of(String rar) {
-        return RarityItems.RARITY_STONE.get(ExileDB.GearRarities().get(rar)).get();
+        return RarityItems.RARITY_STONE.get(ExileDB.GearRarities().get(rar).item_tier).get(); // todo bad
     }
 
     @Override

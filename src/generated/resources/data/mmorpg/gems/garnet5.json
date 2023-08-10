@@ -1,0 +1,33 @@
+{
+  "gem_type": "garnet",
+  "identifier": "garnet5",
+  "item_id": "mmorpg:gems/garnet/5",
+  "on_armor_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "dexterity",
+      "v1": 4.0
+    }
+  ],
+  "on_jewelry_stats": [
+    {
+      "type": "PERCENT",
+      "scale_to_lvl": true,
+      "stat": "energy_regen",
+      "v1": 12.0
+    }
+  ],
+  "on_weapons_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "critical_hit",
+      "v1": 6.4
+    }
+  ],
+  "perc_upgrade_chance": 5,
+  "text_format": "GREEN",
+  "tier": 5,
+  "weight": 25
+}

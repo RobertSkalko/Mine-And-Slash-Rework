@@ -1,0 +1,29 @@
+{
+  "base": 0.0,
+  "effect": {
+    "effects": [
+      "restore_mana_per_stat_data"
+    ],
+    "events": [
+      "on_damage"
+    ],
+    "ifs": [
+      "ele_match_stat"
+    ],
+    "order": 100,
+    "side": "Source"
+  },
+  "ele": "Cold",
+  "format": "aqua",
+  "group": "Misc",
+  "icon": "❁",
+  "id": "water_mana_leech",
+  "is_long": true,
+  "is_perc": true,
+  "max": 2.14748365E9,
+  "min": 0.0,
+  "order": 100,
+  "scaling": "NONE",
+  "ser": "data",
+  "show": true
+}

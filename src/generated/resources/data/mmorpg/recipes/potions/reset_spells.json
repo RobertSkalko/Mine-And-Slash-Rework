@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "minecraft:glass_bottle"
+    },
+    "c": {
+      "item": "minecraft:gold_ingot"
+    },
+    "t": {
+      "item": "mmorpg:stone/0"
+    },
+    "v": {
+      "item": "minecraft:iron_axe"
+    }
+  },
+  "pattern": [
+    "cvc",
+    "vtv",
+    "cbc"
+  ],
+  "result": {
+    "item": "mmorpg:potions/reset_spells"
+  },
+  "show_notification": true
+}

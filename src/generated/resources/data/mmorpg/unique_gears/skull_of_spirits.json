@@ -1,0 +1,33 @@
+{
+  "base_gear": "necklace",
+  "id": "skull_of_spirits",
+  "rarity": "unique",
+  "replaces_name": false,
+  "unique_stats": [
+    {
+      "type": "flat",
+      "max": 2.0,
+      "min": 1.0,
+      "stat": "all_attributes"
+    },
+    {
+      "type": "percent",
+      "max": 20.0,
+      "min": 10.0,
+      "stat": "mana_regen"
+    },
+    {
+      "type": "flat",
+      "max": -15.0,
+      "min": -5.0,
+      "stat": "water_resist"
+    },
+    {
+      "type": "flat",
+      "max": -15.0,
+      "min": -5.0,
+      "stat": "fire_resist"
+    }
+  ],
+  "weight": 1000
+}

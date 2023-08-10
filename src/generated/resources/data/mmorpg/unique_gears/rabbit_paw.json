@@ -1,0 +1,27 @@
+{
+  "base_gear": "necklace",
+  "id": "rabbit_paw",
+  "rarity": "unique",
+  "replaces_name": true,
+  "unique_stats": [
+    {
+      "type": "flat",
+      "max": 10.0,
+      "min": 2.0,
+      "stat": "move_speed"
+    },
+    {
+      "type": "percent",
+      "max": 25.0,
+      "min": 5.0,
+      "stat": "energy_regen"
+    },
+    {
+      "type": "flat",
+      "max": 6.0,
+      "min": 2.0,
+      "stat": "dexterity"
+    }
+  ],
+  "weight": 1000
+}

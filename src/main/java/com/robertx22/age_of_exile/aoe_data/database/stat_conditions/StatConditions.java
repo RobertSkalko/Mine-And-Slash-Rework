@@ -38,7 +38,7 @@ public class StatConditions implements ExileRegistryInit {
     public static StatCondition IS_SOURCE_LOW_HP = new IsHealthBellowPercentCondition("is_source_low_hp", 30, EffectSides.Source);
     public static StatCondition IS_TARGET_NEAR_FULL_HP = new IsHealthAbovePercentCondition("is_target_near_full_hp", 70, EffectSides.Target);
     public static StatCondition IS_ELEMENTAL = new StringMatchesCondition(EventData.ELEMENT, Elements.Physical.name()).flipCondition();
-    public static StatCondition IS_NON_MAGIC_STYLE = new StringMatchesCondition(EventData.STYLE, PlayStyle.INT.name()).flipCondition();
+    public static StatCondition IS_NON_MAGIC_STYLE = new StringMatchesCondition(EventData.STYLE, PlayStyle.INT.id).flipCondition();
 
     public static DataHolder<EffectTags, StatCondition> EFFECT_HAS_TAG = new DataHolder<>(
             EffectTags.values()
@@ -58,7 +58,7 @@ public class StatConditions implements ExileRegistryInit {
 
     public static DataHolder<PlayStyle, StatCondition> IS_STYLE = new DataHolder<>(
             PlayStyle.values()
-            , x -> new StringMatchesCondition(EventData.STYLE, x.name()));
+            , x -> new StringMatchesCondition(EventData.STYLE, x.id));
 
     public static DataHolder<RestoreType, StatCondition> IS_RESTORE_TYPE = new DataHolder<>(
             RestoreType.values()

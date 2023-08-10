@@ -15,6 +15,7 @@ public class AllAilmentDamage extends Stat {
 
         this.statEffect = new Effect();
         this.is_perc = true;
+               
 
     }
 

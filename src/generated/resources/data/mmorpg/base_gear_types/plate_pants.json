@@ -1,0 +1,24 @@
+{
+  "base_stats": [
+    {
+      "type": "ITEM_FLAT",
+      "max": 12.0,
+      "min": 4.8,
+      "stat": "armor"
+    }
+  ],
+  "gear_slot": "pants",
+  "guid": "plate_pants",
+  "implicit_stats": [],
+  "style": "STR",
+  "tags": {
+    "tags": [
+      "armor_family",
+      "pants",
+      "strength",
+      "armor_stat"
+    ]
+  },
+  "weapon_type": "none",
+  "weight": 1000
+}

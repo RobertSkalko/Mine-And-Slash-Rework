@@ -1,0 +1,30 @@
+{
+  "base_stats": [
+    {
+      "type": "FLAT",
+      "max": 12.0,
+      "min": 6.0,
+      "stat": "armor"
+    },
+    {
+      "type": "FLAT",
+      "max": -25.0,
+      "min": -25.0,
+      "stat": "int_dmg"
+    }
+  ],
+  "gear_slot": "shield",
+  "guid": "shield",
+  "implicit_stats": [],
+  "style": "STR",
+  "tags": {
+    "tags": [
+      "shield",
+      "strength",
+      "offhand_family",
+      "armor_stat"
+    ]
+  },
+  "weapon_type": "none",
+  "weight": 1000
+}

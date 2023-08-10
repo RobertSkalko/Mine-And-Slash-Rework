@@ -1,0 +1,24 @@
+{
+  "type": "dungeon_prefix",
+  "guid": "fire_wep_dmg_dun",
+  "loc_name": "Burning",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": []
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 2.0,
+      "min": 1.0,
+      "stat": "fire_weapon_damage"
+    }
+  ],
+  "tags": [],
+  "weight": 1000
+}

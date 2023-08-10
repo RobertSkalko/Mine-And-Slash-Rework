@@ -1,0 +1,31 @@
+{
+  "base": 0.0,
+  "effect": {
+    "effects": [
+      "give_regenerate_to_allies_in_radius"
+    ],
+    "events": [
+      "on_spend_resource"
+    ],
+    "ifs": [
+      "resource_type_is_health",
+      "restore_type_is_regen",
+      "is_in_combat"
+    ],
+    "order": 0,
+    "side": "Source"
+  },
+  "ele": "Chaos",
+  "format": "aqua",
+  "group": "Misc",
+  "icon": "❁",
+  "id": "give_regenerate_to_allies_in_aoe",
+  "is_long": true,
+  "is_perc": false,
+  "max": 1.0,
+  "min": 0.0,
+  "order": 100,
+  "scaling": "NONE",
+  "ser": "data",
+  "show": true
+}

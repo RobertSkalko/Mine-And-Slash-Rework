@@ -1,0 +1,30 @@
+{
+  "base": 50.0,
+  "effect": {
+    "effects": [
+      "multiply_number_num"
+    ],
+    "events": [
+      "on_damage"
+    ],
+    "ifs": [
+      "is_crit_true",
+      "is_attack_or_spell_attack"
+    ],
+    "order": 100,
+    "side": "Source"
+  },
+  "ele": "Physical",
+  "format": "red",
+  "group": "MAIN",
+  "icon": "⚔",
+  "id": "critical_damage",
+  "is_long": false,
+  "is_perc": true,
+  "max": 500.0,
+  "min": 0.0,
+  "order": 100,
+  "scaling": "NONE",
+  "ser": "data",
+  "show": true
+}

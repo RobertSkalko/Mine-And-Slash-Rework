@@ -1,0 +1,200 @@
+{
+  "attached": {
+    "entity_components": {
+      "block": [
+        {
+          "acts": [
+            {
+              "type": "tp_target_to_self",
+              "map": {}
+            }
+          ],
+          "en_preds": [],
+          "ifs": [
+            {
+              "type": "on_entity_expire",
+              "map": {}
+            }
+          ],
+          "targets": [
+            {
+              "type": "self",
+              "map": {}
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "type": "exile_effect",
+              "map": {
+                "count": 1.0,
+                "exile_potion_id": "beneficial/12",
+                "potion_action": "GIVE_STACKS",
+                "potion_dur": 20.0
+              }
+            }
+          ],
+          "en_preds": [],
+          "ifs": [
+            {
+              "type": "is_en_in_radius",
+              "map": {
+                "en_predicate": "allies",
+                "radius": 2.0,
+                "selection_type": "RADIUS"
+              }
+            }
+          ],
+          "targets": [
+            {
+              "type": "self",
+              "map": {}
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "type": "particles_in_radius",
+              "map": {
+                "height": 0.5,
+                "motion": "None",
+                "particle_count": 3.0,
+                "particle_type": "minecraft:witch",
+                "radius": 1.2,
+                "shape": "CIRCLE_2D_EDGE",
+                "y_rand": 0.5
+              }
+            }
+          ],
+          "en_preds": [],
+          "ifs": [
+            {
+              "type": "x_ticks_condition",
+              "map": {
+                "tick_rate": 3.0
+              }
+            }
+          ],
+          "targets": []
+        }
+      ],
+      "default_entity_name": [
+        {
+          "acts": [
+            {
+              "type": "summon_block",
+              "map": {
+                "block": "mmorpg:glyph",
+                "block_fall_speed": 0.0,
+                "entity_name": "block",
+                "find_surface": false,
+                "is_falling_block": false,
+                "life_ticks": 200.0
+              }
+            }
+          ],
+          "en_preds": [],
+          "ifs": [
+            {
+              "type": "on_entity_expire",
+              "map": {}
+            }
+          ],
+          "targets": []
+        },
+        {
+          "acts": [
+            {
+              "type": "sound",
+              "map": {
+                "pitch": 1.0,
+                "sound": "minecraft:item.chorus_fruit.teleport",
+                "volume": 1.0
+              }
+            }
+          ],
+          "en_preds": [],
+          "ifs": [
+            {
+              "type": "on_entity_expire",
+              "map": {}
+            }
+          ],
+          "targets": []
+        }
+      ]
+    },
+    "on_cast": [
+      {
+        "acts": [
+          {
+            "type": "sound",
+            "map": {
+              "pitch": 1.0,
+              "sound": "minecraft:entity.illusioner.cast_spell",
+              "volume": 1.0
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": []
+      },
+      {
+        "acts": [
+          {
+            "type": "summon_at_sight",
+            "map": {
+              "entity_name": "default_entity_name",
+              "gravity": false,
+              "height": 0.0,
+              "life_ticks": 1.0,
+              "proj_en": "mmorpg:spell_projectile"
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": []
+      }
+    ]
+  },
+  "config": {
+    "apply_cast_speed_to_cd": false,
+    "cast_time_ticks": 0,
+    "castingWeapon": "ANY_WEAPON",
+    "charge_name": "",
+    "charge_regen": 0,
+    "charges": 0,
+    "cooldown_ticks": 900,
+    "imbues": 0,
+    "mana_cost": {
+      "max": 10.0,
+      "min": 5.0
+    },
+    "scale_mana_cost_to_player_lvl": true,
+    "style": "INT",
+    "swing_arm": true,
+    "tags": [
+      "movement"
+    ],
+    "times_to_cast": 1
+  },
+  "disabled_dims": [],
+  "effect_tip": "",
+  "identifier": "mage_circle",
+  "manual_tip": true,
+  "weight": 1000
+}

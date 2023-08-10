@@ -1,0 +1,50 @@
+{
+  "id": "nature",
+  "lvl_reqs": [
+    1,
+    5,
+    10,
+    20,
+    30,
+    40,
+    50
+  ],
+  "spells": {
+    "astral_totem": {
+      "x": 7,
+      "y": 2
+    },
+    "entangling_seed": {
+      "x": 4,
+      "y": 2
+    },
+    "guard_totem": {
+      "x": 8,
+      "y": 2
+    },
+    "nature_balm": {
+      "x": 2,
+      "y": 1
+    },
+    "poison_cloud": {
+      "x": 2,
+      "y": 3
+    },
+    "poisoned_weapons": {
+      "x": 7,
+      "y": 0
+    },
+    "refresh": {
+      "x": 10,
+      "y": 6
+    },
+    "rejuv_totem": {
+      "x": 6,
+      "y": 2
+    },
+    "thorn_armor": {
+      "x": 10,
+      "y": 1
+    }
+  }
+}

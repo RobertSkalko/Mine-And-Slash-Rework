@@ -1,0 +1,29 @@
+{
+  "base": 0.0,
+  "effect": {
+    "effects": [
+      "decrease_cd_ticks_num"
+    ],
+    "events": [
+      "on_spell_stat_calc"
+    ],
+    "ifs": [
+      "spell_has_tag_song"
+    ],
+    "order": 0,
+    "side": "Source"
+  },
+  "ele": "Physical",
+  "format": "aqua",
+  "group": "Misc",
+  "icon": "❁",
+  "id": "song_cdr",
+  "is_long": false,
+  "is_perc": true,
+  "max": 50.0,
+  "min": -1000.0,
+  "order": 100,
+  "scaling": "NONE",
+  "ser": "data",
+  "show": true
+}

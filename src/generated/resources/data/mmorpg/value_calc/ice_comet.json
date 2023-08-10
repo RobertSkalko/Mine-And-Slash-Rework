@@ -1,0 +1,17 @@
+{
+  "base": {
+    "max": 9.0,
+    "min": 1.5
+  },
+  "base_scaling_type": "NORMAL",
+  "id": "ice_comet",
+  "stat_scalings": [
+    {
+      "multi": {
+        "max": 1.5,
+        "min": 0.75
+      },
+      "stat": "weapon_damage"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "data": {
+    "base": 0.0,
+    "core_stat_data": {
+      "stats": [
+        {
+          "type": "FLAT",
+          "stat": "mana",
+          "v1": 1.0
+        },
+        {
+          "type": "PERCENT",
+          "stat": "magic_shield",
+          "v1": 1.0
+        },
+        {
+          "type": "FLAT",
+          "stat": "magic_shield_regen",
+          "v1": 0.1
+        }
+      ]
+    },
+    "ele": "Physical",
+    "id": "intelligence",
+    "max": 2.14748365E9,
+    "min": 0.0,
+    "perc": true,
+    "scale": "NONE"
+  },
+  "ser": "core_stat"
+}

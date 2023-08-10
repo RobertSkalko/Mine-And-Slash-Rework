@@ -1,0 +1,14 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/stat_icons/main/spell_damage.png",
+  "id": "spell_damage",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "spell_damage",
+      "v1": 3.0
+    }
+  ]
+}

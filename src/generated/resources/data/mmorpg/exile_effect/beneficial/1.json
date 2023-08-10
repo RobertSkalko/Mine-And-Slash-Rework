@@ -1,0 +1,45 @@
+{
+  "type": "beneficial",
+  "id": "beneficial/1",
+  "max_stacks": 1,
+  "mc_stats": [],
+  "one_of_a_kind_id": "",
+  "spell": {
+    "entity_components": {
+      "default_entity_name": [
+        {
+          "acts": [
+            {
+              "type": "potion",
+              "map": {
+                "count": 1.0,
+                "potion_action": "REMOVE_STACKS",
+                "potion_id": "minecraft:poison"
+              }
+            }
+          ],
+          "en_preds": [],
+          "ifs": [
+            {
+              "type": "x_ticks_condition",
+              "map": {
+                "tick_rate": 10.0
+              }
+            }
+          ],
+          "targets": [
+            {
+              "type": "self",
+              "map": {}
+            }
+          ]
+        }
+      ]
+    },
+    "on_cast": []
+  },
+  "stats": [],
+  "tags": [
+    "positive"
+  ]
+}

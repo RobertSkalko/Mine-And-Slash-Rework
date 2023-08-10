@@ -1,0 +1,28 @@
+{
+  "type": "suffix",
+  "guid": "lightning_res",
+  "loc_name": "Of the Yeti",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "jewelry_family",
+          "armor_family",
+          "offhand_family"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 45.0,
+      "min": 5.0,
+      "stat": "lightning_resist"
+    }
+  ],
+  "tags": [],
+  "weight": 5000
+}

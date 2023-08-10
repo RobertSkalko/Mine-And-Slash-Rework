@@ -1,0 +1,14 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/stat_icons/restoration/spell_lifesteal.png",
+  "id": "spell_lifesteal",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "spell_lifesteal",
+      "v1": 1.0
+    }
+  ]
+}

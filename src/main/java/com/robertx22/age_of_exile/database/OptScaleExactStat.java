@@ -7,15 +7,13 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
-import com.robertx22.library_of_exile.registry.serialization.IByteBuf;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class OptScaleExactStat implements IByteBuf<OptScaleExactStat> {
+public class OptScaleExactStat {
     public static OptScaleExactStat SERIALIZER = new OptScaleExactStat();
 
     public float v1 = 0;
@@ -26,23 +24,6 @@ public class OptScaleExactStat implements IByteBuf<OptScaleExactStat> {
     private OptScaleExactStat() {
     }
 
-    @Override
-    public OptScaleExactStat getFromBuf(FriendlyByteBuf buf) {
-        OptScaleExactStat data = new OptScaleExactStat();
-        data.v1 = buf.readFloat();
-        data.stat = buf.readUtf(100);
-        data.type = buf.readUtf(50);
-        data.scale_to_lvl = buf.readBoolean();
-        return data;
-    }
-
-    @Override
-    public void toBuf(FriendlyByteBuf buf) {
-        buf.writeFloat(v1);
-        buf.writeUtf(stat, 100);
-        buf.writeUtf(type, 50);
-        buf.writeBoolean(scale_to_lvl);
-    }
 
     public OptScaleExactStat(float first, Stat stat) {
         this(first, stat, ModType.FLAT);

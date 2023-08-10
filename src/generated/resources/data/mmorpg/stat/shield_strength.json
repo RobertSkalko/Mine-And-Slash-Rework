@@ -1,0 +1,27 @@
+{
+  "base": 0.0,
+  "effect": {
+    "effects": [
+      "increase_number_num"
+    ],
+    "events": [
+      "on_absorb_damage"
+    ],
+    "ifs": [],
+    "order": 0,
+    "side": "Source"
+  },
+  "ele": "Physical",
+  "format": "red",
+  "group": "Misc",
+  "icon": "❈",
+  "id": "shield_strength",
+  "is_long": false,
+  "is_perc": true,
+  "max": 2.14748365E9,
+  "min": -1000.0,
+  "order": 100,
+  "scaling": "NONE",
+  "ser": "data",
+  "show": true
+}

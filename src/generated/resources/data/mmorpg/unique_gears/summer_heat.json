@@ -1,0 +1,39 @@
+{
+  "base_gear": "ring",
+  "id": "summer_heat",
+  "rarity": "unique",
+  "replaces_name": true,
+  "unique_stats": [
+    {
+      "type": "flat",
+      "max": 10.0,
+      "min": 5.0,
+      "stat": "health"
+    },
+    {
+      "type": "flat",
+      "max": 40.0,
+      "min": 20.0,
+      "stat": "fire_resist"
+    },
+    {
+      "type": "flat",
+      "max": 25.0,
+      "min": 10.0,
+      "stat": "all_fire_damage"
+    },
+    {
+      "type": "percent",
+      "max": 15.0,
+      "min": 5.0,
+      "stat": "mana"
+    },
+    {
+      "type": "flat",
+      "max": 15.0,
+      "min": 5.0,
+      "stat": "critical_damage"
+    }
+  ],
+  "weight": 1000
+}

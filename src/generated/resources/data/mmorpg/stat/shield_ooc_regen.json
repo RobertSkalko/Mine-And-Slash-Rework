@@ -1,0 +1,30 @@
+{
+  "base": 0.0,
+  "effect": {
+    "effects": [
+      "add_stat_data_to_num"
+    ],
+    "events": [
+      "on_spend_resource"
+    ],
+    "ifs": [
+      "restore_type_is_regen",
+      "is_in_combat_is_false"
+    ],
+    "order": 100,
+    "side": "Source"
+  },
+  "ele": "Physical",
+  "format": "yellow",
+  "group": "RESTORATION",
+  "icon": "❁",
+  "id": "shield_ooc_regen",
+  "is_long": false,
+  "is_perc": false,
+  "max": 2.14748365E9,
+  "min": -1000.0,
+  "order": 100,
+  "scaling": "NORMAL",
+  "ser": "data",
+  "show": true
+}

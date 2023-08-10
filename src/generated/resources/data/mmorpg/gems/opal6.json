@@ -1,0 +1,33 @@
+{
+  "gem_type": "opal",
+  "identifier": "opal6",
+  "item_id": "mmorpg:gems/opal/6",
+  "on_armor_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "strength",
+      "v1": 5.0
+    }
+  ],
+  "on_jewelry_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "critical_hit",
+      "v1": 6.0
+    }
+  ],
+  "on_weapons_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "critical_damage",
+      "v1": 12.0
+    }
+  ],
+  "perc_upgrade_chance": 0,
+  "text_format": "GOLD",
+  "tier": 6,
+  "weight": 1
+}

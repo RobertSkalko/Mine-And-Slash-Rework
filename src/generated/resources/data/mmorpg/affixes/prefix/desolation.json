@@ -1,0 +1,32 @@
+{
+  "type": "prefix",
+  "guid": "desolation",
+  "loc_name": "Desolation",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "mage_weapon"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 6.0,
+      "min": 2.0,
+      "stat": "critical_hit"
+    },
+    {
+      "type": "FLAT",
+      "max": 10.0,
+      "min": 3.0,
+      "stat": "critical_damage"
+    }
+  ],
+  "tags": [],
+  "weight": 100
+}

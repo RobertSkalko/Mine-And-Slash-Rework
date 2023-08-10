@@ -1,0 +1,14 @@
+{
+  "type": "SPECIAL",
+  "icon": "mmorpg:textures/gui/stat_icons/misc/phys_to_fire.png",
+  "id": "phys_to_fire_big",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "phys_to_fire",
+      "v1": 25.0
+    }
+  ]
+}

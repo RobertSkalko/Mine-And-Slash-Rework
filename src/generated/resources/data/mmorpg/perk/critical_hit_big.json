@@ -1,0 +1,14 @@
+{
+  "type": "SPECIAL",
+  "icon": "mmorpg:textures/gui/stat_icons/main/critical_hit.png",
+  "id": "critical_hit_big",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "critical_hit",
+      "v1": 5.0
+    }
+  ]
+}

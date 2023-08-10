@@ -1,0 +1,17 @@
+{
+  "base": {
+    "max": 24.0,
+    "min": 4.0
+  },
+  "base_scaling_type": "NORMAL",
+  "id": "lose_aggro",
+  "stat_scalings": [
+    {
+      "multi": {
+        "max": 4.0,
+        "min": 2.0
+      },
+      "stat": "weapon_damage"
+    }
+  ]
+}

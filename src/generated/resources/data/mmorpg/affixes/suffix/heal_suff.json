@@ -1,0 +1,26 @@
+{
+  "type": "suffix",
+  "guid": "heal_suff",
+  "loc_name": "Of Restoration",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "staff"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 20.0,
+      "min": 5.0,
+      "stat": "increase_healing"
+    }
+  ],
+  "tags": [],
+  "weight": 1000
+}

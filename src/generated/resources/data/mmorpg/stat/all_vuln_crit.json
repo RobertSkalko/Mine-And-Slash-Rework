@@ -1,0 +1,29 @@
+{
+  "base": 0.0,
+  "effect": {
+    "effects": [
+      "set_bool_crit"
+    ],
+    "events": [
+      "on_damage"
+    ],
+    "ifs": [
+      "ele_match_stat"
+    ],
+    "order": 0,
+    "side": "Target"
+  },
+  "ele": "All",
+  "format": "aqua",
+  "group": "Misc",
+  "icon": "❁",
+  "id": "all_vuln_crit",
+  "is_long": true,
+  "is_perc": true,
+  "max": 2.14748365E9,
+  "min": -1000.0,
+  "order": 100,
+  "scaling": "NONE",
+  "ser": "data",
+  "show": true
+}

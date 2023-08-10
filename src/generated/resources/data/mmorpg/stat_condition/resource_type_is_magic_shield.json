@@ -1,0 +1,6 @@
+{
+  "id": "resource_type_is_magic_shield",
+  "ser": "string_matches",
+  "string_id": "magic_shield",
+  "string_key": "resource_type"
+}

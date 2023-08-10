@@ -1,0 +1,14 @@
+{
+  "format": "RED",
+  "icon": "",
+  "id": "thorny_mobs",
+  "stats": [
+    {
+      "type": "flat",
+      "max": 50.0,
+      "min": 25.0,
+      "stat": "damage_reflected"
+    }
+  ],
+  "weight": 0
+}

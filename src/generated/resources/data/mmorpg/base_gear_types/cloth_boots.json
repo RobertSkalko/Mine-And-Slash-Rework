@@ -1,0 +1,24 @@
+{
+  "base_stats": [
+    {
+      "type": "ITEM_FLAT",
+      "max": 7.5,
+      "min": 3.0,
+      "stat": "magic_shield"
+    }
+  ],
+  "gear_slot": "boots",
+  "guid": "cloth_boots",
+  "implicit_stats": [],
+  "style": "STR",
+  "tags": {
+    "tags": [
+      "armor_family",
+      "magic_shield_stat",
+      "boots",
+      "intelligence"
+    ]
+  },
+  "weapon_type": "none",
+  "weight": 1000
+}

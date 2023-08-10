@@ -1,0 +1,24 @@
+{
+  "base_stats": [
+    {
+      "type": "ITEM_FLAT",
+      "max": 15.0,
+      "min": 6.0,
+      "stat": "magic_shield"
+    }
+  ],
+  "gear_slot": "chest",
+  "guid": "cloth_chest",
+  "implicit_stats": [],
+  "style": "STR",
+  "tags": {
+    "tags": [
+      "chest",
+      "armor_family",
+      "magic_shield_stat",
+      "intelligence"
+    ]
+  },
+  "weapon_type": "none",
+  "weight": 1000
+}

@@ -1,0 +1,14 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/stat_icons/misc/health_on_kill.png",
+  "id": "health_on_kill",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "health_on_kill",
+      "v1": 10.0
+    }
+  ]
+}

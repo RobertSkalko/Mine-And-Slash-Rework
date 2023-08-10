@@ -1,0 +1,25 @@
+{
+  "base_stats": [
+    {
+      "type": "ITEM_FLAT",
+      "max": 6.0,
+      "min": 2.0,
+      "stat": "weapon_damage"
+    }
+  ],
+  "gear_slot": "bow",
+  "guid": "bow",
+  "implicit_stats": [],
+  "style": "DEX",
+  "tags": {
+    "tags": [
+      "dexterity",
+      "ranger_casting_weapon",
+      "ranged_weapon",
+      "weapon_family",
+      "bow"
+    ]
+  },
+  "weapon_type": "bow",
+  "weight": 1000
+}

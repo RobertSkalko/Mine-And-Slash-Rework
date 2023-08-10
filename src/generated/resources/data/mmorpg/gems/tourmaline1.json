@@ -1,0 +1,33 @@
+{
+  "gem_type": "tourmaline",
+  "identifier": "tourmaline1",
+  "item_id": "mmorpg:gems/tourmaline/1",
+  "on_armor_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "strength",
+      "v1": 1.0
+    }
+  ],
+  "on_jewelry_stats": [
+    {
+      "type": "PERCENT",
+      "scale_to_lvl": true,
+      "stat": "health_regen",
+      "v1": 3.0
+    }
+  ],
+  "on_weapons_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "lifesteal",
+      "v1": 1.0
+    }
+  ],
+  "perc_upgrade_chance": 75,
+  "text_format": "LIGHT_PURPLE",
+  "tier": 1,
+  "weight": 25999
+}

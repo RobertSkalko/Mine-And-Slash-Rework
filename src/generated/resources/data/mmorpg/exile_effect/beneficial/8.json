@@ -1,0 +1,26 @@
+{
+  "type": "beneficial",
+  "id": "beneficial/8",
+  "max_stacks": 3,
+  "mc_stats": [],
+  "one_of_a_kind_id": "",
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 6.0,
+      "min": 3.0,
+      "stat": "total_damage"
+    },
+    {
+      "type": "FLAT",
+      "max": 5.0,
+      "min": 2.0,
+      "stat": "cast_speed"
+    }
+  ],
+  "tags": [
+    "positive",
+    "song",
+    "offensive"
+  ]
+}

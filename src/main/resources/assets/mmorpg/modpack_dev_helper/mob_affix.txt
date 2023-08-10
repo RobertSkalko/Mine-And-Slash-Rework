@@ -1,7 +1,7 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
-reflect
 fire_lord
+reflect
 phys_lord
 fire_mob_affix
 vampire

@@ -1,0 +1,29 @@
+{
+  "base": 0.0,
+  "effect": {
+    "effects": [
+      "double_dmg"
+    ],
+    "events": [
+      "on_damage"
+    ],
+    "ifs": [
+      "attack_type_is_attack"
+    ],
+    "order": 100,
+    "side": "Source"
+  },
+  "ele": "Physical",
+  "format": "aqua",
+  "group": "Misc",
+  "icon": "❁",
+  "id": "double_attack_chance",
+  "is_long": false,
+  "is_perc": true,
+  "max": 100.0,
+  "min": -1000.0,
+  "order": 100,
+  "scaling": "NONE",
+  "ser": "data",
+  "show": true
+}

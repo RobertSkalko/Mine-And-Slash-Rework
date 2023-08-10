@@ -1,0 +1,14 @@
+{
+  "type": "SPECIAL",
+  "icon": "mmorpg:textures/gui/stat_icons/weapon/sword_damage.png",
+  "id": "sword_damage_big",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "sword_damage",
+      "v1": 10.0
+    }
+  ]
+}

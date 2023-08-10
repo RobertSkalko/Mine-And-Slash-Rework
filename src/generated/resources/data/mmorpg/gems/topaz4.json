@@ -1,0 +1,33 @@
+{
+  "gem_type": "topaz",
+  "identifier": "topaz4",
+  "item_id": "mmorpg:gems/topaz/4",
+  "on_armor_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "lightning_resist",
+      "v1": 15.000001
+    }
+  ],
+  "on_jewelry_stats": [
+    {
+      "type": "PERCENT",
+      "scale_to_lvl": true,
+      "stat": "energy",
+      "v1": 9.0
+    }
+  ],
+  "on_weapons_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "energy_on_all_hit",
+      "v1": 1.8000001
+    }
+  ],
+  "perc_upgrade_chance": 10,
+  "text_format": "YELLOW",
+  "tier": 4,
+  "weight": 200
+}

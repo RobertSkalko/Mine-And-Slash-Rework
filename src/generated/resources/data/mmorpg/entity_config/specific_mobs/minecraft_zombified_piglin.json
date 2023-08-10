@@ -1,0 +1,13 @@
+{
+  "dmg_multi": 1.0,
+  "exp_multi": 0.5,
+  "hp_multi": 1.0,
+  "identifier": "minecraft:zombified_piglin",
+  "loot_multi": 0.5,
+  "max_lvl": 1000000,
+  "min_lvl": 1,
+  "stat_multi": 1.0,
+  "stats": {
+    "stats": []
+  }
+}

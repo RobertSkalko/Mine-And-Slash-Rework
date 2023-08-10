@@ -38,6 +38,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -89,6 +90,9 @@ public class MMORPG {
         final IEventBus bus = FMLJavaModLoadingContext.get()
                 .getModEventBus();
 
+        ForgeEvents.registerForgeEvent(AddReloadListenerEvent.class, event -> {
+            ExileRegistryType.registerJsonListeners(event);
+        });
 
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
             ModLoadingContext.get()
@@ -136,14 +140,12 @@ public class MMORPG {
 
         LifeCycleEvents.register();
 
-
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(EventPriority.LOW, new Consumer<GatherDataEvent>() {
-            @Override
-            public void accept(GatherDataEvent x) {
-                x.getGenerator().addProvider(true, new DataGenHook(x.getGenerator().getPackOutput()));
-
-            }
+        ForgeEvents.registerForgeEvent(GatherDataEvent.class, x -> {
+            x.getGenerator().addProvider(true, new DataGenHook());
+            // todo this doesnt run the datagen hook
         });
+
+
         FMLJavaModLoadingContext.get().getModEventBus().addListener(EventPriority.LOW, new Consumer<GatherDataEvent>() {
             @Override
             public void accept(GatherDataEvent x) {
@@ -181,7 +183,7 @@ public class MMORPG {
         AuraGems.init();
 
         BossSpells.init();
-        
+
         SlashCapabilities.register();
 
 

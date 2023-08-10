@@ -1,0 +1,17 @@
+{
+  "base": {
+    "max": 6.0,
+    "min": 1.0
+  },
+  "base_scaling_type": "NORMAL",
+  "id": "poison_arrow",
+  "stat_scalings": [
+    {
+      "multi": {
+        "max": 1.0,
+        "min": 0.5
+      },
+      "stat": "weapon_damage"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "type": "suffix",
+  "guid": "strong_int_armor_suf",
+  "loc_name": "Of the Genius",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "armor_family"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 8.0,
+      "min": 4.0,
+      "stat": "intelligence"
+    }
+  ],
+  "tags": [],
+  "weight": 1000
+}

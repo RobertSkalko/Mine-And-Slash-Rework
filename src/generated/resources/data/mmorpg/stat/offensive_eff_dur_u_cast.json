@@ -1,0 +1,29 @@
+{
+  "base": 0.0,
+  "effect": {
+    "effects": [
+      "increase_effect_duration_ticks_num"
+    ],
+    "events": [
+      "on_exile_effect"
+    ],
+    "ifs": [
+      "effect_has_tag_offensive"
+    ],
+    "order": 0,
+    "side": "Source"
+  },
+  "ele": "Physical",
+  "format": "aqua",
+  "group": "Misc",
+  "icon": "❁",
+  "id": "offensive_eff_dur_u_cast",
+  "is_long": true,
+  "is_perc": false,
+  "max": 2.14748365E9,
+  "min": -1000.0,
+  "order": 100,
+  "scaling": "NONE",
+  "ser": "data",
+  "show": true
+}

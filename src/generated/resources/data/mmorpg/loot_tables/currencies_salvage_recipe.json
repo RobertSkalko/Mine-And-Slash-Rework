@@ -1,0 +1,29 @@
+{
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:currency/affix_tier_up_down",
+          "weight": 1000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:currency/socket_adder",
+          "weight": 1000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:currency/orb_of_linking",
+          "weight": 1000
+        }
+      ],
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 3.0,
+        "min": 1.0
+      }
+    }
+  ]
+}

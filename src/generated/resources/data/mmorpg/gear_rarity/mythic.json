@@ -1,0 +1,22 @@
+{
+  "announce_in_chat": true,
+  "guid": "mythic",
+  "higher_rar": "",
+  "is_unique_item": false,
+  "item_model_data_num": 6,
+  "item_tier": 5,
+  "item_tier_power": 3.0,
+  "item_value_multi": 3.0,
+  "lootable_gear_tier": "HIGH",
+  "max_sockets": 3,
+  "min_affixes": 6,
+  "potential": 350,
+  "rarity_type": "GEAR",
+  "skill_gem_percents": {
+    "max": 100,
+    "min": 80
+  },
+  "socket_chance": 30,
+  "text_format": "DARK_PURPLE",
+  "weight": 25
+}

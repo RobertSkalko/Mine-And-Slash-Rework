@@ -1,0 +1,14 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/stat_icons/main/energy_regen.png",
+  "id": "energy_regen_percent",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "PERCENT",
+      "scale_to_lvl": false,
+      "stat": "energy_regen",
+      "v1": 5.0
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "base_stats": [
+    {
+      "type": "ITEM_FLAT",
+      "max": 12.0,
+      "min": 4.8,
+      "stat": "magic_shield"
+    }
+  ],
+  "gear_slot": "pants",
+  "guid": "cloth_pants",
+  "implicit_stats": [],
+  "style": "STR",
+  "tags": {
+    "tags": [
+      "armor_family",
+      "pants",
+      "magic_shield_stat",
+      "intelligence"
+    ]
+  },
+  "weapon_type": "none",
+  "weight": 1000
+}

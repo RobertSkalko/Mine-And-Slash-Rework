@@ -1,0 +1,33 @@
+{
+  "gem_type": "azurite",
+  "identifier": "azurite6",
+  "item_id": "mmorpg:gems/azurite/6",
+  "on_armor_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "intelligence",
+      "v1": 5.0
+    }
+  ],
+  "on_jewelry_stats": [
+    {
+      "type": "PERCENT",
+      "scale_to_lvl": true,
+      "stat": "mana_regen",
+      "v1": 15.0
+    }
+  ],
+  "on_weapons_stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": true,
+      "stat": "mana_on_attack_hit",
+      "v1": 3.0
+    }
+  ],
+  "perc_upgrade_chance": 0,
+  "text_format": "AQUA",
+  "tier": 6,
+  "weight": 1
+}

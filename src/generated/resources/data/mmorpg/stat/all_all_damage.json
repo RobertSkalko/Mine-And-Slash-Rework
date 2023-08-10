@@ -1,0 +1,29 @@
+{
+  "base": 0.0,
+  "effect": {
+    "effects": [
+      "increase_number_num"
+    ],
+    "events": [
+      "on_damage"
+    ],
+    "ifs": [
+      "ele_match_stat"
+    ],
+    "order": 0,
+    "side": "Source"
+  },
+  "ele": "All",
+  "format": "aqua",
+  "group": "ELEMENTAL",
+  "icon": "❁",
+  "id": "all_all_damage",
+  "is_long": false,
+  "is_perc": true,
+  "max": 2.14748365E9,
+  "min": 0.0,
+  "order": 100,
+  "scaling": "NONE",
+  "ser": "data",
+  "show": true
+}
