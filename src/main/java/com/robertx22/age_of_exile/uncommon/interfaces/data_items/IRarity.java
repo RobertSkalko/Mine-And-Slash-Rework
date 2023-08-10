@@ -21,6 +21,8 @@ public interface IRarity<R extends Rarity> {
     String MYTHIC_ID = "mythic";
 
     String BOSS_ID = "boss";
+    String ELITE_ID = "elite";
+    String CHAMPION_ID = "champ";
 
     String UNIQUE_ID = "unique";
     String RUNEWORD_ID = "runeword";

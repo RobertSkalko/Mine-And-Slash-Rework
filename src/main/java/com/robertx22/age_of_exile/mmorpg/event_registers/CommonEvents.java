@@ -1,10 +1,8 @@
 package com.robertx22.age_of_exile.mmorpg.event_registers;
 
-import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.capability.player.PlayerData;
 import com.robertx22.age_of_exile.damage_hooks.*;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.AttributeStat;
-import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.event_hooks.entity.OnMobSpawn;
 import com.robertx22.age_of_exile.event_hooks.entity.OnTrackEntity;
@@ -100,23 +98,10 @@ public class CommonEvents {
 
         ExileEvents.PLAYER_DEATH.register(new OnPlayerDeath());
 
+        
         ForgeEvents.registerForgeEvent(LivingHurtEvent.class, event -> {
-            // reduce enviro dmg based on total hp from formula
             try {
-                if (event.getEntity() instanceof Player) {
-                    if (LivingHurtUtils.isEnviromentalDmg(event.getSource())) {
-                        EntityData data = Load.Unit(event.getEntity());
-                        float reduction = Health.getInstance()
-                                .getUsableValue((int) data.getUnit()
-                                        .healthData()
-                                        .getValue(), data.getLevel());
-
-                        float multi = 1 - reduction;
-
-                        event.setAmount(event.getAmount() * multi);
-
-                    }
-                } else {
+                if (event.getEntity() instanceof Player == false) {
                     if (LivingHurtUtils.isEnviromentalDmg(event.getSource())) {
                         if (WorldUtils.isMapWorldClass(event.getEntity().level())) {
                             event.setAmount(0);

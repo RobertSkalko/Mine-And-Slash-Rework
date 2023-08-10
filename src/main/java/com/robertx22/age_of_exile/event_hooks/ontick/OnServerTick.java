@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.entities.EntitySavedSpellData;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
+import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
@@ -33,19 +34,6 @@ public class OnServerTick {
 
     static {
 
-        /*
-        TICK_ACTIONS.add(new PlayerTickAction("spawn_bow_cast_particles", 1, (player, data) -> {
-            if (player.isAlive()) {
-                if (OnItemStoppedUsingCastImbuedSpell.canCastImbuedSpell(player)) {
-                    if (Load.spells(player)
-                            .getCastingData().imbued_spell_stacks > 0) {
-                        ParticleUtils.spawnParticles(ParticleTypes.WITCH, player.level(), player.blockPosition(), 2);
-                    }
-                }
-            }
-        }));
-
-         */
 
         TICK_ACTIONS.add(new PlayerTickAction("update_caps", 20, (player, data) -> {
             if (player.isAlive()) {
@@ -58,6 +46,13 @@ public class OnServerTick {
                 PlayerTickAction("second_pass", 20, (player, data) ->
         {
             if (player.isAlive()) {
+
+
+                if (WorldUtils.isMapWorldClass(player.level())) {
+                    if (player.getInventory().countItem(SlashItems.TP_BACK.get()) < 1) {
+                        PlayerUtils.giveItem(SlashItems.TP_BACK.get().getDefaultInstance(), player);
+                    }
+                }
 
                 if (Load.Unit(player)
                         .getResources()

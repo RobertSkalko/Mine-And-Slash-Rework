@@ -18,7 +18,8 @@ public class MapAffixData {
     }
 
     public float getBonusLootMultiplier() {
-        return 0.01F + (((float) p / 1200) * getAffix().getLootMulti());
+        return 0.2F * getAffix().getLootMulti() * (p / 100F);
+
     }
 
     public String id;

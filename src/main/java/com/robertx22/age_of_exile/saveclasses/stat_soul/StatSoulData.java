@@ -74,10 +74,11 @@ public class StatSoulData implements ISalvagable, IRarity, ISettableLevelTier {
         if (gear != null) {
             StackSaving.GEARS.saveTo(stack, gear);
         } else {
-            StackSaving.GEARS.saveTo(stack, this.createGearData(null));
+            StackSaving.GEARS.saveTo(stack, this.createGearData(toStack()));
             //LoadSave.Save(this, stack.getOrCreateTag(), StatSoulItem.TAG);
         }
     }
+
 
     public GearItemData createGearData(@Nullable ItemStack stack) {
 
@@ -109,9 +110,10 @@ public class StatSoulData implements ISalvagable, IRarity, ISettableLevelTier {
                     .getFilterWrapped(x -> x.gear_slot.equals(slotid))
                     .random());
         } else {
-            b.gearItemSlot.set(ExileDB.GearTypes()
+            var t = ExileDB.GearTypes()
                     .getFilterWrapped(x -> x.gear_slot.equals(slot))
-                    .random());
+                    .random();
+            b.gearItemSlot.set(t);
         }
 
         GearItemData gear = b.createData();

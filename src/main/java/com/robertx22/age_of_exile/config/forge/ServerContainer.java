@@ -42,10 +42,6 @@ public class ServerContainer {
         DONT_SYNC_DATA_OF_AMBIENT_MOBS = b.define("dont_sync_ambient_mob_data", true);
 
 
-        HP_VALUE_NEEDED_FOR_MAX_ENVIRO_DMG_PROTECTION = b.defineInRange("HP_VALUE_NEEDED_FOR_MAX_ENVIRO_DMG_PROTECTION", 125, 0, 100000);
-        MAX_ENVIRO_DMG_PROTECTION_FROM_HP_MULTI = b.defineInRange("MAX_ENVIRO_DMG_PROTECTION_FROM_HP_MULTI", 0.75F, 0, 1);
-
-
         REGEN_HUNGER_COST = b.defineInRange("regen_hunger_cost", 10D, 0, 1000);
         EXP_LOSS_ON_DEATH = b.defineInRange("death_exp_penalty", 0.1D, 0, 1);
         EXP_GAIN_MULTI = b.defineInRange("exp_gain_multi", 1D, 0, 1000);
@@ -130,9 +126,7 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue MAX_DIFFICULTY;
     public ForgeConfigSpec.IntValue MAX_MOB_LVL_HIGHER_THAN_PLAYER_FOR_DIFF;
 
-    public ForgeConfigSpec.IntValue HP_VALUE_NEEDED_FOR_MAX_ENVIRO_DMG_PROTECTION;
-    public ForgeConfigSpec.DoubleValue MAX_ENVIRO_DMG_PROTECTION_FROM_HP_MULTI;
-
+    
     public ForgeConfigSpec.DoubleValue MOB_HP_MULTI_PER_DIFFICULTY;
     public ForgeConfigSpec.DoubleValue MOB_DMG_MULTI_PER_DIFFICULTY;
     public ForgeConfigSpec.DoubleValue MOB_LOOT_MULTI_PER_DIFFICULTY;

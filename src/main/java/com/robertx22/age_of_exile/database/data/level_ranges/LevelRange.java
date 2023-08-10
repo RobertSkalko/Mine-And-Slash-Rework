@@ -31,7 +31,7 @@ public class LevelRange {
     }
 
     public int getMinLevel() {
-        return Mth.clamp((int) (start * GameBalanceConfig.get().MAX_LEVEL), 1, Integer.MAX_VALUE);
+        return Mth.clamp((int) (start * GameBalanceConfig.get().MAX_LEVEL), 0, Integer.MAX_VALUE);
     }
 
     public int getMaxLevel() {

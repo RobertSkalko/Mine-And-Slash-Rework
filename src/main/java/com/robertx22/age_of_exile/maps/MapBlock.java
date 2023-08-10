@@ -12,6 +12,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -22,12 +23,18 @@ public class MapBlock extends BaseEntityBlock {
     public MapBlock() {
         super(BlockBehaviour.Properties.of().strength(2));
 
+        
     }
 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new MapBlockEntity(pPos, pState);
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState pState) {
+        return RenderShape.MODEL;
     }
 
     @Override
@@ -49,6 +56,11 @@ public class MapBlock extends BaseEntityBlock {
                     SoundUtils.playSound(p, SoundEvents.EXPERIENCE_ORB_PICKUP);
                     MapBlockEntity be = (MapBlockEntity) level.getBlockEntity(pPos);
                     be.mapId = p.getStringUUID();
+
+                    if (!p.isCreative()) {
+                        p.getItemInHand(pHand).shrink(1);
+                    }
+
                     return InteractionResult.SUCCESS;
                 }
                 if (p.getItemInHand(pHand).is(SlashItems.MAP_SETTER.get())) {

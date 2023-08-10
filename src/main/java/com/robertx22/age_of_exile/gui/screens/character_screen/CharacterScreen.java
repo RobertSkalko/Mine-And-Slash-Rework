@@ -7,22 +7,21 @@ import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.CoreStat;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttributes;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
-import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalPenetration;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
-import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuality;
-import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuantity;
-import com.robertx22.age_of_exile.database.data.stats.types.misc.BonusExp;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.EnergyRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShieldRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.bases.BaseScreen;
 import com.robertx22.age_of_exile.gui.bases.INamedScreen;
+import com.robertx22.age_of_exile.gui.buttons.CharacterStatsButtons;
 import com.robertx22.age_of_exile.gui.screens.OpenBackpack;
 import com.robertx22.age_of_exile.gui.screens.OpenSkillGems;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.TalentsScreen;
@@ -43,10 +42,7 @@ import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -59,12 +55,11 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
 
     Minecraft mc = Minecraft.getInstance();
 
-    
+
     public enum StatType {
-        HUB("hub"),
-        MAIN("main"),
-        ELEMENTAL("elemental"),
-        RESISTS("resists"),
+        RESOURCE("resource"),
+        DAMAGE("damage"),
+        DEFENSE("defense"),
         MISC("misc");
 
         String id;
@@ -73,14 +68,14 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
             this.id = id;
         }
 
-        ResourceLocation getIcon() {
+        public ResourceLocation getIcon() {
             return new ResourceLocation(SlashRef.MODID, "textures/gui/stat_groups/" + id + ".png");
         }
     }
 
 
     // todo implement this elsewhere
-    static HashMap<StatType, List<List<Stat>>> STAT_MAP = new HashMap<>();
+    public static HashMap<StatType, List<List<Stat>>> STAT_MAP = new HashMap<>();
 
     static <T extends Stat> void addTo(StatType type, List<T> stats) {
 
@@ -95,22 +90,44 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
                 .add(list);
     }
 
+    static <T extends Stat> void addRemaining(StatType type) {
+
+        List<Stat> list = new ArrayList<>();
+
+        for (List<List<Stat>> l : STAT_MAP.values()) {
+            for (List<Stat> s : l) {
+                for (Stat st : s) {
+                    list.add(st);
+                }
+            }
+        }
+
+        var v = Load.Unit(Minecraft.getInstance().player).getUnit().getStats().stats.values().stream()
+                .filter(x -> list.stream().noneMatch(e -> e.GUID().equals(x.getId())))
+                .map(t -> t.GetStat()).collect(Collectors.toList());
+
+        if (!STAT_MAP.containsKey(type)) {
+            STAT_MAP.put(type, new ArrayList<>());
+        }
+        STAT_MAP.get(StatType.MISC).add(v);
+
+    }
+
     static {
 
-        addTo(StatType.MAIN, Arrays.asList(Health.getInstance(), Mana.getInstance(), Energy.getInstance()));
-        addTo(StatType.MAIN, Arrays.asList(HealthRegen.getInstance(), ManaRegen.getInstance(), EnergyRegen.getInstance()));
-        addTo(StatType.MAIN, Arrays.asList(Armor.getInstance(), DodgeRating.getInstance()));
-        addTo(StatType.MAIN, Arrays.asList(Stats.CRIT_CHANCE.get(), Stats.CRIT_DAMAGE.get(), Stats.CRIT_CHANCE.get(), Stats.CRIT_DAMAGE.get()));
-        addTo(StatType.MAIN, Arrays.asList(Stats.ACCURACY.get(), SkillDamage.getInstance(), Stats.CAST_SPEED.get(), Stats.COOLDOWN_REDUCTION.get()));
+        addTo(StatType.RESOURCE, Arrays.asList(Health.getInstance(), MagicShield.getInstance(), Mana.getInstance(), Energy.getInstance(), HealthRegen.getInstance(), MagicShieldRegen.getInstance(), ManaRegen.getInstance(), EnergyRegen.getInstance()));
 
-        addTo(StatType.ELEMENTAL, new BonusAttackDamage(Elements.Elemental).generateAllPossibleStatVariations());
-        addTo(StatType.ELEMENTAL, Stats.ELEMENTAL_SPELL_DAMAGE.getAll());
-        addTo(StatType.ELEMENTAL, Stats.ELEMENTAL_DAMAGE.getAll());
+        addTo(StatType.DEFENSE, Arrays.asList(Armor.getInstance(), DodgeRating.getInstance()));
+        addTo(StatType.DEFENSE, new ElementalResist(Elements.Elemental).generateAllPossibleStatVariations());
 
-        addTo(StatType.RESISTS, new ElementalResist(Elements.Elemental).generateAllPossibleStatVariations());
-        addTo(StatType.RESISTS, new ElementalPenetration(Elements.Elemental).generateAllPossibleStatVariations());
+        addTo(StatType.DAMAGE, Arrays.asList(WeaponDamage.getInstance()));
+        addTo(StatType.DAMAGE, Arrays.asList(Stats.CRIT_CHANCE.get(), Stats.CRIT_DAMAGE.get()));
+        addTo(StatType.DAMAGE, Stats.ELEMENTAL_SPELL_DAMAGE.getAll());
+        addTo(StatType.DAMAGE, Stats.ELEMENTAL_DAMAGE.getAll());
+        addTo(StatType.DAMAGE, new ElementalPenetration(Elements.Elemental).generateAllPossibleStatVariations());
 
-        addTo(StatType.MISC, Arrays.asList(BonusExp.getInstance(), TreasureQuality.getInstance(), TreasureQuantity.getInstance()));
+        addRemaining(StatType.MISC);
+
 
     }
 
@@ -201,6 +218,15 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         for (INamedScreen screen : leftButtons) {
             this.publicAddButton(new MainHubButton(false, LEFT, screen, x, y));
             y += MainHubButton.ySize + 0;
+        }
+
+
+        int xp = guiLeft + 30;
+        int yp = guiTop + 120;
+
+        for (Map.Entry<StatType, List<List<Stat>>> en : STAT_MAP.entrySet()) {
+            publicAddButton(new CharacterStatsButtons(en.getKey(), xp, yp));
+            xp += 30;
         }
 
 

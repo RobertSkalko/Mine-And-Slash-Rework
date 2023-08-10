@@ -1,5 +1,10 @@
-package com.robertx22.age_of_exile.maps.generator.processors;
+package com.robertx22.age_of_exile.maps.processors;
 
+
+import com.robertx22.age_of_exile.maps.processors.misc.RemoveAllBesidesOneProcessor;
+import com.robertx22.age_of_exile.maps.processors.mob.*;
+import com.robertx22.age_of_exile.maps.processors.reward.ChanceChestProcessor;
+import com.robertx22.age_of_exile.maps.processors.reward.ChestProcessor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +25,6 @@ public class DataProcessors {
             all.add(new ChanceChestProcessor());
             all.add(new RemoveAllBesidesOneProcessor());
             all.add(new ComplexMobProcessor());
-            all.add(new BossAltSpellingProcessor());
         }
 
         return all;

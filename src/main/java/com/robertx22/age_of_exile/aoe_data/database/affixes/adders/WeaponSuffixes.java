@@ -68,7 +68,7 @@ public class WeaponSuffixes implements ExileRegistryInit {
         AffixBuilder.Normal("heal_suff")
                 .Named("Of Restoration")
                 .stats(new StatMod(5, 20, Stats.HEAL_STRENGTH.get(), ModType.FLAT))
-                .includesTags(SlotTag.scepter)
+                .includesTags(SlotTag.staff)
                 .Suffix()
                 .Build();
     }

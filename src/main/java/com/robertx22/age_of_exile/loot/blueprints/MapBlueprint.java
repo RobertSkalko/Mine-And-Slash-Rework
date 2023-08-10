@@ -18,17 +18,19 @@ import java.util.List;
 public class MapBlueprint extends ItemBlueprint {
 
 
-    public MapBlueprint(int level, int worldTier) {
+    public MapBlueprint(int level) {
         super(level);
-
+        this.rarity.chanceForHigherRarity = 50;
     }
 
     public GearRarityPart rarity = new GearRarityPart(this);
 
     @Override
     public ItemStack generate() {
+
+
         MapItemData data = createData();
-        GearRarity rarity = (GearRarity) this.rarity.get();
+
         ItemStack stack = new ItemStack(SlashItems.MAP.get());
 
         StackSaving.MAP.saveTo(stack, data);

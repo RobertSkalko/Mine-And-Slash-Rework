@@ -34,8 +34,7 @@ public class GearCreationUtils {
         GearRarity rarity = blueprint.rarity.get();
         GearItemData data = new GearItemData();
 
-        data.gtype = blueprint.gearItemSlot.get()
-                .GUID();
+        data.gtype = blueprint.gearItemSlot.get().GUID();
         data.lvl = blueprint.level.get();
         data.rar = rarity.GUID();
 
@@ -44,7 +43,7 @@ public class GearCreationUtils {
         if (RandomUtils.roll(rarity.socket_chance)) {
             data.sockets.addSocket();
         }
-        
+
         if (rarity.is_unique_item && blueprint.uniquePart.get() != null) {
 
             UniqueGear unique = blueprint.uniquePart.get();

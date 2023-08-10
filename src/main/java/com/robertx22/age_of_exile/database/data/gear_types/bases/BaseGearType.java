@@ -4,7 +4,6 @@ import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gear_types.weapons.mechanics.NormalWeaponMechanic;
 import com.robertx22.age_of_exile.database.data.gear_types.weapons.mechanics.WeaponMechanic;
-import com.robertx22.age_of_exile.database.data.level_ranges.LevelRange;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -18,13 +17,13 @@ import net.minecraft.world.entity.EquipmentSlot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseGearType>, IAutoGson<BaseGearType> {
 
     public static BaseGearType SERIALIZER = new BaseGearType();
 
     protected String guid;
-    protected LevelRange level_range;
     public String gear_slot = "";
 
     public int weight = 1000;
@@ -38,9 +37,8 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
 
     protected transient String locname;
 
-    public BaseGearType(String slot, String guid, LevelRange levelRange, String locname) {
+    public BaseGearType(String slot, String guid, String locname) {
         this.guid = guid;
-        this.level_range = levelRange;
         this.locname = locname;
         this.gear_slot = slot;
     }
@@ -80,9 +78,6 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
         return locname;
     }
 
-    public LevelRange getLevelRange() {
-        return level_range;
-    }
 
     public final EquipmentSlot getVanillaSlotType() {
 
@@ -134,10 +129,10 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
         return getTags().contains(SlotTag.shield);
     }
 
-    public enum SlotTag {
+    public enum SlotTag implements TagList.ITagString {
 
         sword(SlotFamily.Weapon),
-        scepter(SlotFamily.Weapon),
+        //staff(SlotFamily.Weapon),
         staff(SlotFamily.Weapon),
         hammer(SlotFamily.Weapon),
         spear(SlotFamily.Weapon),
@@ -176,6 +171,11 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
 
         SlotTag(SlotFamily family) {
             this.family = family;
+        }
+
+        @Override
+        public String getTagId() {
+            return name().toLowerCase(Locale.ROOT);
         }
     }
 

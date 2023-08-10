@@ -4,8 +4,6 @@ import com.robertx22.age_of_exile.aoe_data.database.GearDataHelper;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.TagList;
-import com.robertx22.age_of_exile.database.data.level_ranges.LevelRange;
-import com.robertx22.age_of_exile.database.registrators.LevelRanges;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequirement;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
@@ -81,11 +79,10 @@ public class BaseGearBuilder implements GearDataHelper {
 
     public DataGenKey<BaseGearType> build() {
 
-        LevelRange x = LevelRanges.FULL;
 
         String name = /*namePrefixes.get(x) + " " + */locnamesuffix;
         String id = this.id;
-        BaseGearType type = new BaseGearType(slot, id, x, name);
+        BaseGearType type = new BaseGearType(slot, id, name);
         type.weapon_type = wep;
         type.tags = tags;
         type.implicit_stats = implicitstats;

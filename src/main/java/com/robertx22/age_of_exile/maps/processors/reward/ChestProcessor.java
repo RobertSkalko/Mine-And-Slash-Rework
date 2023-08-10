@@ -1,6 +1,7 @@
-package com.robertx22.age_of_exile.maps.generator.processors;
+package com.robertx22.age_of_exile.maps.processors.reward;
 
 import com.robertx22.age_of_exile.maps.generator.ChunkProcessData;
+import com.robertx22.age_of_exile.maps.processors.DataProcessor;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -14,12 +15,13 @@ public class ChestProcessor extends DataProcessor {
 
     public ChestProcessor() {
         super("chest", Type.CONTAINS);
+        this.detectIds.add("puzzle"); // this is because i removed puzzle block
     }
 
     @Override
     public void processImplementation(String key, BlockPos pos, Level world, ChunkProcessData data) {
 
-        boolean isTrapped = this.data.contains("trap");
+        boolean isTrapped = this.detectIds.contains("trap");
 
         boolean useVanilla = RandomUtils.roll(20);
 
@@ -50,7 +52,7 @@ public class ChestProcessor extends DataProcessor {
             } else {
                 System.out.println("Chest gen failed, tile not instanceof vanilla chest.");
             }
-        
+
 
         }
     }

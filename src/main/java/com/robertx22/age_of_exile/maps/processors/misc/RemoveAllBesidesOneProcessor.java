@@ -1,6 +1,7 @@
-package com.robertx22.age_of_exile.maps.generator.processors;
+package com.robertx22.age_of_exile.maps.processors.misc;
 
 import com.robertx22.age_of_exile.maps.generator.ChunkProcessData;
+import com.robertx22.age_of_exile.maps.processors.DataProcessor;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;

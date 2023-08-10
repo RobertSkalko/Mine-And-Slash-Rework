@@ -74,6 +74,7 @@ public class MapField<T> implements IGUID {
     public static MapField<Boolean> EXPIRE_ON_BLOCK_HIT = make("expire_on_block_hit");
     public static MapField<Boolean> IS_BLOCK_FALLING = make("is_falling_block");
     public static MapField<Boolean> FIND_NEAREST_SURFACE = make("find_surface");
+    //public static MapField<Boolean> FIND_NEAREST_CEILING = make("find_ceiling");
     public static MapField<Boolean> IS_SILENT = make("is_silent");
     public static MapField<Boolean> HITS_ALLIES = make("hits_allies");
     public static MapField<Boolean> IGNORE_Y = make("ignore_y");

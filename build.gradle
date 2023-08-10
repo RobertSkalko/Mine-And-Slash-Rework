@@ -13,6 +13,7 @@ buildscript {
     }
 }
 
+
 plugins {
     id 'java'
     id 'idea'
@@ -22,7 +23,6 @@ plugins {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.spongepowered.mixin'
-apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 

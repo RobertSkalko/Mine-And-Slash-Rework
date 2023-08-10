@@ -26,6 +26,7 @@ public class TpBackItem extends AutoItem {
         ItemStack itemstack = p.getItemInHand(pUsedHand);
 
         if (!pLevel.isClientSide) {
+            itemstack.shrink(1);
             Load.playerRPGData(p).map.teleportBack(p);
         }
         return InteractionResultHolder.pass(p.getItemInHand(pUsedHand));

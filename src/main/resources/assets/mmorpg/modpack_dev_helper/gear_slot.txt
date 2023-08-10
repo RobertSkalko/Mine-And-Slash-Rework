@@ -6,7 +6,6 @@ chest
 crossbow
 pants
 ring
-scepter
 helmet
 boots
 staff

@@ -106,16 +106,18 @@ public class ProjectileCastHelper {
                         .searchFor(AllyOrEnemy.enemies)
                         .radius(15);
 
-                boolean hastarget = false;
-                for (LivingEntity target : finder.build()) {
+
+                LivingEntity target = finder.getClosest();
+
+                if (target != null) {
                     Vec3 vel = positionToVelocity(new MyPosition(en.position()), new MyPosition(target.getEyePosition()));
                     vel = vel.multiply(shootSpeed, shootSpeed, shootSpeed);
                     en.setDeltaMovement(vel);
-                    hastarget = true;
                     caster.level().addFreshEntity(en);
                     break;
                     // todo test this
                 }
+
 
             } else {
                 caster.level().addFreshEntity(en);

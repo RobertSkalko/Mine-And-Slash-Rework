@@ -39,7 +39,7 @@ public class SlashItems {
     public static RegObj<StatSoulItem> STAT_SOUL = Def.item(() -> new StatSoulItem(), "stat_soul");
     public static RegObj<MapItem> MAP = Def.item(() -> new MapItem(), "map");
     public static RegObj<Item> MAP_SETTER = Def.item(() -> new Item(new Item.Properties()), "set_map");
-    public static RegObj<Item> MAP_DEVICE = Def.item(() -> new BlockItem(SlashBlocks.MAP.get(), new Item.Properties()), "map_device");
+    public static RegObj<Item> MAP_DEVICE = Def.item(() -> new BlockItem(SlashBlocks.MAP.get(), new Item.Properties()), "teleporter");
     public static RegObj<IdentifyTomeItem> IDENTIFY_TOME = Def.item(() -> new IdentifyTomeItem(), "identify_tome");
     public static RegObj<Item> TP_BACK = Def.item(() -> new TpBackItem(), "tp_back");
     public static RegObj<LootCrateItem> LOOT_CRATE = Def.item(() -> new LootCrateItem(), "loot_crate/default");
@@ -97,7 +97,6 @@ public class SlashItems {
     public static class GearItems {
 
         public static void init() {
-
         }
 
         public static HashMap<VanillaMaterial, RegObj<Item>> STAFFS = of("weapon/staff/",

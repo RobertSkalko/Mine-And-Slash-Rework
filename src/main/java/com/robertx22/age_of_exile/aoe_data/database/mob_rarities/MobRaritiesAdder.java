@@ -34,7 +34,7 @@ public class MobRaritiesAdder implements ExileRegistryInit {
         elite.exp_multi = 2.5F;
         elite.loot_multi = 2;
         elite.weight = 100;
-        elite.higher_rar = IRarity.RARE_ID;
+        elite.higher_rar = IRarity.ELITE_ID;
         elite.setUncommonFields();
         elite.addToSerializables();
 

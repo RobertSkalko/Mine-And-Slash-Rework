@@ -25,7 +25,7 @@ public class SlashBlocks {
     public static RegObj<TotemBlock> PROJECTILE_TOTEM = Def.block("attack_totem", () -> new TotemBlock());
     public static RegObj<TotemBlock> TRAP = Def.block("trap", () -> new TotemBlock());
     public static RegObj<TotemBlock> GLYPH = Def.block("glyph", () -> new TotemBlock());
-    public static RegObj<MapBlock> MAP = Def.block("map", () -> new MapBlock());
+    public static RegObj<MapBlock> MAP = Def.block("teleporter", () -> new MapBlock());
 
     static RegObj<Block> plant(String id) {
         return Def.block(id, () -> new BeetrootBlock(BlockBehaviour.Properties.of()

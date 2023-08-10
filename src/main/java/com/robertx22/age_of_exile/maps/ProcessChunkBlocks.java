@@ -6,18 +6,16 @@ import com.robertx22.age_of_exile.maps.feature.DungeonFeature;
 import com.robertx22.age_of_exile.maps.generator.BuiltRoom;
 import com.robertx22.age_of_exile.maps.generator.ChunkProcessData;
 import com.robertx22.age_of_exile.maps.generator.DungeonBuilder;
-import com.robertx22.age_of_exile.maps.generator.processors.DataProcessor;
-import com.robertx22.age_of_exile.maps.generator.processors.DataProcessors;
+import com.robertx22.age_of_exile.maps.processors.DataProcessor;
+import com.robertx22.age_of_exile.maps.processors.DataProcessors;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.StructureBlockEntity;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.LevelChunk;
 
@@ -57,13 +55,18 @@ public class ProcessChunkBlocks {
                 if (!mapdata.map.getMap(start).isPresent()) {
                     return;
                 }
-
+                
                 List<ChunkPos> chunks = new ArrayList<>();
                 chunks.add(start);
-                chunks.add(new ChunkPos(start.x + 1, start.z));
-                chunks.add(new ChunkPos(start.x - 1, start.z));
-                chunks.add(new ChunkPos(start.x, start.z + 1));
-                chunks.add(new ChunkPos(start.x, start.z - 1));
+
+                int size = 2;
+
+                for (int i = 1; i < size; i++) {
+                    chunks.add(new ChunkPos(start.x + i, start.z));
+                    chunks.add(new ChunkPos(start.x - i, start.z));
+                    chunks.add(new ChunkPos(start.x, start.z + i));
+                    chunks.add(new ChunkPos(start.x, start.z - i));
+                }
 
 
                 for (ChunkPos cpos : chunks) {
@@ -93,21 +96,23 @@ public class ProcessChunkBlocks {
 
 
                                 BlockEntity tile = level.getBlockEntity(tilePos);
-                                if (tile instanceof StructureBlockEntity) {
+                                var textList = DataProcessor.getData(tile);
+                                if (textList != null) {
 
-                                    StructureBlockEntity struc = (StructureBlockEntity) tile;
-
-                                    CompoundTag nbt = struc.saveWithoutMetadata();
-                                    String metadata = nbt.getString("metadata"); // todo
-                                    // cus getmetadata is clientonly wtf
 
                                     boolean any = false;
 
+                                    // todo make this work on either signs or these blocks
+
                                     for (DataProcessor processor : DataProcessors.getAll()) {
-                                        boolean did = processor.process(metadata, tilePos, level, data);
+                                        boolean did = processor.process(textList, tilePos, level, data);
                                         if (did) {
                                             any = true;
                                         }
+                                    }
+
+                                    if (!any) {
+                                        // todo do i just summon mobs when the tag fails?
                                     }
 
                                     if (any) {
@@ -119,8 +124,12 @@ public class ProcessChunkBlocks {
                                         }
 
                                     } else {
-                                        System.out.println("Data block with tag: " + metadata + " matched no processors! " + tilePos.toString());
-                                        logRoomForPos(level, tilePos);
+
+                                        for (String s : textList) {
+                                            System.out.println("Data block with tag: " + s + " matched no processors! " + tilePos.toString());
+                                            logRoomForPos(level, tilePos);
+                                        }
+
                                     }
                                 }
 

@@ -20,7 +20,9 @@ public class TeleportCasterToSightAction extends SpellAction {
 
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
-
+        if (ctx.world.isClientSide) {
+            return;
+        }
         Double distance = data.getOrDefault(MapField.DISTANCE, 10D);
 
         HitResult ray = ctx.caster.pick(distance, 0.0F, false);

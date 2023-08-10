@@ -84,14 +84,14 @@ public class WeaponPrefixes implements ExileRegistryInit {
         AffixBuilder.Normal("heal_crit_prefix")
                 .Named("Truthful")
                 .stats(new StatMod(3, 12, Stats.CRIT_CHANCE.get(), ModType.FLAT))
-                .includesTags(SlotTag.scepter)
+                .includesTags(SlotTag.staff)
                 .Prefix()
                 .Build();
 
         AffixBuilder.Normal("heal_crit_dmg_prefix")
                 .Named("Inspiring")
                 .stats(new StatMod(5, 20, Stats.CRIT_DAMAGE.get(), ModType.FLAT))
-                .includesTags(SlotTag.scepter)
+                .includesTags(SlotTag.staff)
                 .Prefix()
                 .Build();
 

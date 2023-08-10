@@ -26,59 +26,61 @@ public class SummonBlockAction extends SpellAction {
 
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
-        if (!ctx.world.isClientSide) {
+        if (ctx.world.isClientSide) {
+            return;
+        }
 
-            //HitResult ray = ctx.caster.rayTrace(5D, 0.0F, false);
-            BlockPos pos = ctx.pos;
+        //HitResult ray = ctx.caster.rayTrace(5D, 0.0F, false);
+        BlockPos pos = ctx.pos;
 
-            boolean found = true;
+        boolean found = true;
 
-            if (data.getOrDefault(MapField.FIND_NEAREST_SURFACE, true)) {
+        if (data.getOrDefault(MapField.FIND_NEAREST_SURFACE, true)) {
 
-                found = false;
+            found = false;
 
-                int times = 0;
+            int times = 0;
 
-                while (!found && pos.getY() > 1 && SEARCH > times) {
+            while (!found && pos.getY() > 1 && SEARCH > times) {
+                times++;
+                if (ctx.world.isEmptyBlock(pos) && !ctx.world.isEmptyBlock(pos.below())) {
+                    found = true;
+                } else {
+                    pos = pos.below();
+                }
+            }
+            if (!found) {
+                pos = ctx.pos;
+                times = 0;
+                while (!found && pos.getY() < ctx.world.getMaxBuildHeight() && SEARCH > times) {
                     times++;
                     if (ctx.world.isEmptyBlock(pos) && !ctx.world.isEmptyBlock(pos.below())) {
                         found = true;
                     } else {
-                        pos = pos.below();
-                    }
-                }
-                if (!found) {
-                    pos = ctx.pos;
-                    times = 0;
-                    while (!found && pos.getY() < ctx.world.getMaxBuildHeight() && SEARCH > times) {
-                        times++;
-                        if (ctx.world.isEmptyBlock(pos) && !ctx.world.isEmptyBlock(pos.below())) {
-                            found = true;
-                        } else {
-                            pos = pos.above();
-                        }
+                        pos = pos.above();
                     }
                 }
             }
-            Block block = data.getBlock();
-            Objects.requireNonNull(block);
-            
-
-            if (found) {
-                StationaryFallingBlockEntity be = new StationaryFallingBlockEntity(ctx.world, pos, block.defaultBlockState());
-                be.getEntityData()
-                        .set(StationaryFallingBlockEntity.IS_FALLING, data.getOrDefault(MapField.IS_BLOCK_FALLING, false));
-                SpellUtils.initSpellEntity(be, ctx.caster, ctx.calculatedSpellData, data);
-
-                String spell = data.get(MapField.TOTEM_SPELL);
-                if (ExileDB.Spells().isRegistered(spell)) {
-                    be.getSpellData().totem_spell = spell;
-                }
-
-                ctx.world.addFreshEntity(be);
-            }
-
         }
+        Block block = data.getBlock();
+        Objects.requireNonNull(block);
+
+
+        if (found) {
+            StationaryFallingBlockEntity be = new StationaryFallingBlockEntity(ctx.world, pos, block.defaultBlockState());
+            be.getEntityData()
+                    .set(StationaryFallingBlockEntity.IS_FALLING, data.getOrDefault(MapField.IS_BLOCK_FALLING, false));
+            SpellUtils.initSpellEntity(be, ctx.caster, ctx.calculatedSpellData, data);
+
+            String spell = data.get(MapField.TOTEM_SPELL);
+            if (ExileDB.Spells().isRegistered(spell)) {
+                be.getSpellData().totem_spell = spell;
+            }
+
+            ctx.world.addFreshEntity(be);
+        }
+
+
     }
 
     public MapHolder create(Block block, Double lifespan) {

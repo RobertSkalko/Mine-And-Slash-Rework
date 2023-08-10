@@ -248,6 +248,7 @@
 	"item.mmorpg.runes.yun": "Yun Rune",
 	"item.mmorpg.salvage_hammer": "Salvage Hammer",
 	"item.mmorpg.socket_extractor": "Gem Socket Extractor Tool",
+	"item.mmorpg.tp_back": "Pearl of Home",
 
 "_comment": " [CATEGORY]: MISC - NAMES",
 
@@ -1355,7 +1356,6 @@
 	"mmorpg.gearslot.necklace": "Necklace",
 	"mmorpg.gearslot.pants": "Pants",
 	"mmorpg.gearslot.ring": "Ring",
-	"mmorpg.gearslot.scepter": "Staff",
 	"mmorpg.gearslot.shield": "Shield",
 	"mmorpg.gearslot.staff": "Staff",
 	"mmorpg.gearslot.sword": "Sword",

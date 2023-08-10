@@ -120,10 +120,11 @@ public class RenderMobInfo {
                     renderNameTag(entity, hpText, y, matrixStack, vertex, i);
                     y += yadd;
 
+                    // todo scale
                     if (!rar.name_add.isEmpty()) {
-                        matrixStack.scale(2, 2, 2);
+                        //matrixStack.scale(2, 2, 2);
                         renderNameTag(entity, Component.literal(icon), y, matrixStack, vertex, i);
-                        matrixStack.scale(0.5F, 0.5F, 0.5F);
+                        //matrixStack.scale(0.5F, 0.5F, 0.5F);
                     }
 
                 } catch (Exception e) {

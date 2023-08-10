@@ -17,24 +17,11 @@ public class GearItemSlotPart extends BlueprintPart<BaseGearType, GearBlueprint>
         GearSlot slot = ExileDB.GearSlots()
                 .random();
 
-        /*
-        List<BaseGearType> all = ExileDB.GearTypes()
-                .getList();
-
-
-        List<BaseGearType> filt = all.stream()
-            .filter(x -> x.getGearSlot()
-                .GUID()
-                .equals(slot.id))
-            .collect(Collectors.toList());
-
-         */
-
+   
         return ExileDB.GearTypes()
                 .getFilterWrapped(x -> x.getGearSlot()
                         .GUID()
-                        .equals(slot.GUID()) && x.getLevelRange()
-                        .isLevelInRange(blueprint.level.number))
+                        .equals(slot.GUID()))
                 .random();
     }
 

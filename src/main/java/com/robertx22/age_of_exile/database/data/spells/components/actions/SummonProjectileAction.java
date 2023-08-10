@@ -33,7 +33,9 @@ public class SummonProjectileAction extends SpellAction {
 
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
-
+        if (ctx.world.isClientSide) {
+            return;
+        }
 
         Optional<EntityType<?>> projectile = EntityType.byString(data.get(MapField.PROJECTILE_ENTITY));
 

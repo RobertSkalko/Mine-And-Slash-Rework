@@ -60,7 +60,7 @@ public abstract class RoomGroup implements IWeighted {
 
             all.add(ICE_TEMPLE);
             all.add(MISC);
-            
+
             all.add(ALL);
         }
 
@@ -91,10 +91,9 @@ public abstract class RoomGroup implements IWeighted {
     }
 
     public boolean canSpawnMob(SpawnedMob mob) {
-        if (mob.isFire && !canSpawnFireMobs) {
+        if (mob.tags.contains(SpawnedMob.MobTags.FIRE) && !canSpawnFireMobs) {
             return false;
         }
-
         return true;
     }
 

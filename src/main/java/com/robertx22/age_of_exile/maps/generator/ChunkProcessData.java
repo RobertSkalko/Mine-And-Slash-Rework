@@ -27,7 +27,7 @@ public class ChunkProcessData {
     public void iterateBlocks(Function<BlockPos, BlockPos> function) {
 
         for (int x = 0; x < 16; x++) {
-            for (int y = 0; y < 100; y++) {
+            for (int y = -16; y < 16; y++) {
                 for (int z = 0; z < 16; z++) {
                     function.apply(chunk.getPos().getBlockAt(0, 0, 0).offset(x, y, z));
                 }
@@ -36,16 +36,17 @@ public class ChunkProcessData {
 
     }
 
+    // todo get rid of this maybe, or improve it
     public List<BlockPos> getBlockPosList() {
+
 
         List<BlockPos> list = new ArrayList<>();
 
+        var bpos = chunk.getPos().getBlockAt(0, 0, 0);
         for (int x = 0; x < 16; x++) {
-            for (int y = 0; y < 100; y++) {
+            for (int y = -16; y < 16; y++) {
                 for (int z = 0; z < 16; z++) {
-                    list.add(chunk.getPos()
-                            .getBlockAt(0, 0, 0)
-                            .offset(x, y, z));
+                    list.add(bpos.offset(x, y, z));
                 }
             }
         }

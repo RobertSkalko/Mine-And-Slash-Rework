@@ -8,6 +8,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -158,6 +159,15 @@ public class EntityFinder {
             list.removeIf(x -> !x.isAlive());
 
             return list;
+
+        }
+
+        public LivingEntity getClosest() {
+            var list = build();
+            if (list.isEmpty()) {
+                return null;
+            }
+            return list.stream().min(Comparator.comparingInt(x -> (int) x.distanceTo(caster))).get();
 
         }
 
