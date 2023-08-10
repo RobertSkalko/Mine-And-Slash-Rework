@@ -45,7 +45,7 @@ public class SkillGemItem extends Item {
                 }
             });
         }
-        
+
 
         return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
 
@@ -54,18 +54,22 @@ public class SkillGemItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level pLevel, List<Component> list, TooltipFlag pIsAdvanced) {
 
-        if (pLevel != null && !pLevel.isClientSide()) {
-            return;
-        }
-
-        SkillGemData data = StackSaving.SKILL_GEM.loadFrom(stack);
-        if (data != null) {
-            list.clear();
-            for (MutableComponent m : data.getTooltip(ClientOnly.getPlayer())) {
-                list.add(m);
+        try {
+            if (pLevel != null && !pLevel.isClientSide()) {
+                return;
             }
 
-            list.add(ExileText.ofText("Right Click to Open Gui").get());
+            SkillGemData data = StackSaving.SKILL_GEM.loadFrom(stack);
+            if (data != null) {
+                list.clear();
+                for (MutableComponent m : data.getTooltip(ClientOnly.getPlayer())) {
+                    list.add(m);
+                }
+
+                list.add(ExileText.ofText("Right Click to Open Gui").get());
+            }
+        } catch (Exception e) {
+            //  throw new RuntimeException(e);
         }
 
 

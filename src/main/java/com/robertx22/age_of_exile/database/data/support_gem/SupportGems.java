@@ -18,6 +18,8 @@ public class SupportGems {
 
     public static void init() {
 
+        // todo summon dmg, summon duration etc
+
         // custom functionality
         new SupportGem("projectile_totem", "Projectile Totem", PlayStyle.STR, 3,
                 Arrays.asList(new StatMod(1, 1, ProjectileTotem.getInstance(), ModType.FLAT)
@@ -26,6 +28,11 @@ public class SupportGems {
 
 
         // damage multipliers
+
+        new SupportGem("summon_damage", "Summon Damage", PlayStyle.INT, 1.3F,
+                Arrays.asList(new StatMod(15, 40, Stats.SUMMON_DAMAGE.get(), ModType.MORE)
+                )).registerToExileRegistry();
+
         new SupportGem("dot_damage", "Damage over Time", PlayStyle.DEX, 1.3F,
                 Arrays.asList(new StatMod(15, 30, Stats.DOT_DAMAGE.get(), ModType.MORE)
                 )).registerToExileRegistry();
@@ -113,6 +120,13 @@ public class SupportGems {
 
         new SupportGem("mana_saver_dmg", "Mana Conservation", PlayStyle.STR, 0.75F,
                 Arrays.asList(new StatMod(10, 25, Stats.NON_CRIT_DAMAGE.get(), ModType.MORE)
+                )).registerToExileRegistry();
+
+
+        // durations
+
+        new SupportGem("summon_duration", "Summon Duration", PlayStyle.INT, 1.3F,
+                Arrays.asList(new StatMod(10, 50, Stats.SUMMON_DURATION.get(), ModType.FLAT)
                 )).registerToExileRegistry();
 
 

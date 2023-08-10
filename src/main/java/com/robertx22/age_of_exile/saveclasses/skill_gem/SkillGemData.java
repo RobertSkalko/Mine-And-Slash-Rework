@@ -58,7 +58,7 @@ public class SkillGemData {
     public String rar = IRarity.COMMON_ID;
     public int links = 1;
 
-    
+
     public enum SkillGemType implements IWeighted {
         SKILL(1000), SUPPORT(1000), AURA(500);
 
@@ -154,6 +154,9 @@ public class SkillGemData {
         if (this.type == SkillGemType.SKILL) {
             Spell spell = getSpell();
 
+            if (spell == null) {
+                return list;
+            }
             for (MutableComponent c : spell.GetTooltipString(new TooltipInfo(p))) {
                 list.add(c);
             }

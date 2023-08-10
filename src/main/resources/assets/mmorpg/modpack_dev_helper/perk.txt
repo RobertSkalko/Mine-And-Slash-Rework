@@ -90,8 +90,8 @@ all_elemental_damage_big
 energy_regen_percent_big
 phys_to_elemental
 spell_all_damage_and_dot
-phys_to_chaos_big
 phys_to_fire
+phys_to_chaos_big
 harmony
 shield_strength
 mantra

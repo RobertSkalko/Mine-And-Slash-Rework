@@ -5,7 +5,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.*;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtTargetGoal;
@@ -18,6 +17,7 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class SummonEntity extends TamableAnimal implements RangedAttackMob {
+
     public SummonEntity(EntityType<? extends TamableAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -26,6 +26,7 @@ public abstract class SummonEntity extends TamableAnimal implements RangedAttack
     protected AbstractArrow getArrow(ItemStack pArrowStack, float pVelocity) {
         return ProjectileUtil.getMobArrow(this, pArrowStack, pVelocity);
     }
+
 
     @Override
     public void performRangedAttack(LivingEntity pTarget, float pDistanceFactor) {
@@ -42,24 +43,44 @@ public abstract class SummonEntity extends TamableAnimal implements RangedAttack
         this.level().addFreshEntity(abstractarrow);
     }
 
+    public boolean usesMelee() {
+        return true;
+    }
+
+    public boolean usesRanged() {
+        return false;
+    }
+
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
+
+
+        if (usesMelee()) {
+            this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
+        }
+        if (usesRanged()) {
+            this.goalSelector.addGoal(5, new RangedBowAttackGoal<>(this, 1.0D, 20, 15.0F));
+        }
+
         this.goalSelector.addGoal(6, new RandomSwimmingGoal(this, 1, 1));
         this.goalSelector.addGoal(7, new FollowOwnerGoal(this, 1.0D, 6.0F, 1.0F, false));
         this.goalSelector.addGoal(8, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(10, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(10, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
+        //this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, false));
         this.targetSelector.addGoal(3, new OwnerHurtByTargetGoal(this));
         this.targetSelector.addGoal(4, new OwnerHurtTargetGoal(this));
     }
 
-    
+
     @Override
     public boolean canAttack(LivingEntity pTarget) {
+        if (!pTarget.isAlive()) {
+            return false;
+        }
 
+      
         LivingEntity owner = getOwner();
         if (owner == null) {
             return false;

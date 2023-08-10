@@ -1,13 +1,18 @@
 package com.robertx22.age_of_exile.database.data.spells.components.actions;
 
+import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEntity;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.Arrays;
@@ -36,6 +41,8 @@ public class SummonPetAction extends SpellAction {
 
             SummonEntity en = (SummonEntity) type.get().create(ctx.world);
 
+            en.finalizeSpawn((ServerLevel) ctx.world, ctx.world.getCurrentDifficultyAt(ctx.pos), MobSpawnType.MOB_SUMMONED, null, null);
+
             en.tame((Player) ctx.caster);
 
 
@@ -48,6 +55,17 @@ public class SummonPetAction extends SpellAction {
             duration *= ctx.calculatedSpellData.summon_duration_multi;
 
             Load.Unit(en).summonedPetData.setup(ctx.calculatedSpellData.getSpell(), duration);
+
+
+            MobRarity rar = ExileDB.MobRarities().get(IRarity.ELITE_ID); // todo
+
+            Load.Unit(en).SetMobLevelAtSpawn((Player) ctx.caster);
+
+
+            Load.Unit(en).setLevel(Load.Unit(ctx.caster).getLevel());
+
+            Load.Unit(en).setRarity(rar.GUID());
+
 
             ctx.world.addFreshEntity(en);
         }

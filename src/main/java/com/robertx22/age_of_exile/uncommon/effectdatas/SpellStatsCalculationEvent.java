@@ -51,8 +51,8 @@ public class SpellStatsCalculationEvent extends EffectEvent {
         this.data.setupNumber(EventData.MANA_COST, manamultilvl * spell.config.mana_cost.getValue(new LevelProvider(caster, spell)));
         this.data.setupNumber(EventData.COOLDOWN_TICKS, spell.config.cooldown_ticks);
         this.data.setupNumber(EventData.PROJECTILE_SPEED_MULTI, 1F);
+        this.data.setupNumber(EventData.SUMMON_DURATION_MULTI, 1F);
         this.data.setupNumber(EventData.AREA_MULTI, 1);
-
     }
 
     @Override

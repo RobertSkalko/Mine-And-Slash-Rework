@@ -16,10 +16,16 @@ public class SummonSpells implements ExileRegistryInit {
         SpellBuilder.of("summon_spirit_wolf", PlayStyle.INT, SpellConfiguration.Builder.instant(30, 30 * 20), "Summon Spirit Wolf",
                         Arrays.asList(SpellTag.summon, SpellTag.damage))
                 .manualDesc("Summon a Spirit Wolf to aid you in combat.")
-                .summons(SlashEntities.SPIRIT_WOLF.get(), 20 * 60, 1)
+                .summons(SlashEntities.SPIRIT_WOLF.get(), 20 * 30, 1)
                 .build();
 
-        SpellBuilder.of("summon_skeletons", PlayStyle.INT, SpellConfiguration.Builder.instant(60, 30 * 60), "Summon Skeletons",
+        SpellBuilder.of("summon_zombie", PlayStyle.INT, SpellConfiguration.Builder.instant(30, 30 * 60), "Summon Zombie",
+                        Arrays.asList(SpellTag.summon, SpellTag.damage))
+                .manualDesc("Summon a Pet Zombie, don't worry, it's cute!")
+                .summons(SlashEntities.ZOMBIE.get(), 20 * 60, 1)
+                .build();
+
+        SpellBuilder.of("summon_skeleton_army", PlayStyle.INT, SpellConfiguration.Builder.instant(60, 30 * 60), "Summon Skeletons",
                         Arrays.asList(SpellTag.summon, SpellTag.damage))
                 .manualDesc("Summons many skeletons for a short duration")
                 .summons(SlashEntities.SKELETON.get(), 20 * 20, 3)

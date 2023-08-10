@@ -32,8 +32,10 @@ dash
 recoil_shot
 poison_ball
 teleport
+summon_zombie
 guard_totem
 mage_circle
+summon_skeleton_army
 entangling_seed
 nature_balm
 black_hole

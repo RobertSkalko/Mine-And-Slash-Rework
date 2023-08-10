@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.database.data.spells.entities.SimpleTridentEnt
 import com.robertx22.age_of_exile.database.data.spells.entities.StationaryFallingBlockEntity;
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.SkeletonSummon;
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.WolfSummon;
+import com.robertx22.age_of_exile.database.data.spells.summons.entity.ZombieSummon;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
 import net.minecraft.world.entity.Entity;
@@ -24,6 +25,7 @@ public class SlashEntities {
     public static RegObj<EntityType<SimpleTridentEntity>> SIMPLE_TRIDENT = projectile(SimpleTridentEntity::new, "spell_trident", false);
 
     public static RegObj<EntityType<WolfSummon>> SPIRIT_WOLF = mob(WolfSummon::new, EntityType.WOLF, "spirit_wolf");
+    public static RegObj<EntityType<ZombieSummon>> ZOMBIE = mob(ZombieSummon::new, EntityType.SKELETON, "zombie");
     public static RegObj<EntityType<SkeletonSummon>> SKELETON = mob(SkeletonSummon::new, EntityType.SKELETON, "skeleton");
 
 

@@ -16,8 +16,13 @@ public class SkeletonSummon extends SummonEntity {
     public SkeletonSummon(EntityType<? extends TamableAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
 
-
     }
+
+    @Override
+    public boolean usesRanged() {
+        return true;
+    }
+
 
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
@@ -27,5 +32,10 @@ public class SkeletonSummon extends SummonEntity {
         this.equipItemIfPossible(Items.BOW.getDefaultInstance());
 
         return d;
+    }
+
+    @Override
+    public boolean usesMelee() {
+        return false;
     }
 }

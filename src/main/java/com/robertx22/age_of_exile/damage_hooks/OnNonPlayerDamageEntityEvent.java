@@ -44,6 +44,9 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
                             .getCalculatedStat(WeaponDamage.getInstance())
                             .getValue();
 
+                    num *= 0.5F; // gotta nerf summons a bit i think or they would be op for every build?
+                    // to make them more viable more summoners, ill make summon damage stats bigger
+
                     Spell spell = ExileDB.Spells().get(Load.Unit(summon).summonedPetData.spell);
 
                     if (spell != null) {

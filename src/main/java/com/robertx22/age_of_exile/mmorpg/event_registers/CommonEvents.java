@@ -26,8 +26,10 @@ import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.monster.Skeleton;
+import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -45,8 +47,9 @@ public class CommonEvents {
     public static void register() {
 
         ForgeEvents.registerForgeEvent(EntityAttributeCreationEvent.class, x -> {
-            x.put(SlashEntities.SPIRIT_WOLF.get(), Wolf.createAttributes().build());
-            x.put(SlashEntities.SKELETON.get(), Skeleton.createAttributes().build());
+            x.put(SlashEntities.SPIRIT_WOLF.get(), Wolf.createAttributes().add(Attributes.MOVEMENT_SPEED, 0.4).build());
+            x.put(SlashEntities.SKELETON.get(), Skeleton.createAttributes().add(Attributes.MOVEMENT_SPEED, 0.3).build());
+            x.put(SlashEntities.ZOMBIE.get(), Zombie.createAttributes().add(Attributes.MOVEMENT_SPEED, 0.4).build());
         });
 
         OnItemStoppedUsingCastImbuedSpell.register();

@@ -10,6 +10,7 @@ public class MobRaritiesAdder implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
+        
         MobRarity normal = new MobRarity();
         normal.affixes = 0;
         normal.stat_multi = 1;
@@ -19,9 +20,12 @@ public class MobRaritiesAdder implements ExileRegistryInit {
         normal.exp_multi = 1;
         normal.loot_multi = 1;
         normal.weight = 1000;
-        normal.higher_rar = IRarity.UNCOMMON;
-        normal.setCommonFields();
+        normal.higher_rar = IRarity.ELITE_ID;
+
+        normal.guid = IRarity.RARE_ID;
         normal.loc_name = "";
+        normal.text_format = ChatFormatting.GRAY.name();
+
         normal.addToSerializables();
 
         MobRarity elite = new MobRarity();
@@ -34,8 +38,12 @@ public class MobRaritiesAdder implements ExileRegistryInit {
         elite.exp_multi = 2.5F;
         elite.loot_multi = 2;
         elite.weight = 100;
-        elite.higher_rar = IRarity.ELITE_ID;
-        elite.setUncommonFields();
+        elite.higher_rar = IRarity.CHAMPION_ID;
+
+        elite.guid = IRarity.ELITE_ID;
+        elite.loc_name = "Elite";
+        elite.text_format = ChatFormatting.GREEN.name();
+
         elite.addToSerializables();
 
         MobRarity champ = new MobRarity();
@@ -48,10 +56,13 @@ public class MobRaritiesAdder implements ExileRegistryInit {
         champ.exp_multi = 4F;
         champ.loot_multi = 4F;
         champ.weight = 50;
-        champ.higher_rar = IRarity.BOSS_ID;
-        champ.loot_lvl_modifier = 1;
-        champ.setRareFields();
+
+        champ.guid = IRarity.CHAMPION_ID;
+        champ.loc_name = "Champion";
         champ.text_format = ChatFormatting.GOLD.name();
+
+
+        champ.higher_rar = IRarity.BOSS_ID;
         champ.addToSerializables();
 
         MobRarity boss = new MobRarity();
@@ -64,6 +75,12 @@ public class MobRaritiesAdder implements ExileRegistryInit {
         boss.exp_multi = 10F;
         boss.loot_multi = 6F;
         boss.weight = 2;
+
+        boss.guid = IRarity.BOSS_ID;
+        boss.loc_name = "Boss";
+        boss.text_format = ChatFormatting.RED.name();
+
+
         boss.boss = true;
         boss.loot_lvl_modifier = 1;
         boss.setBossFields();

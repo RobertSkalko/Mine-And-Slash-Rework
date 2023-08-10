@@ -76,40 +76,9 @@
 "mmorpg.tooltip.press_shift_more_info": "[Alt]: Desc, [Ctrl]: Hide",
 "mmorpg.tooltip.affix_rarity_lootbonus": "Affix Rarity Loot Bonus",
 
-
-"entity.mmorpg.nature_slime": "Tera Slime",
-"entity.mmorpg.fire_slime": "Flame Slime",
-"entity.mmorpg.water_slime": "Icy Slime",
-"entity.mmorpg.thunder_slime": "Spark Slime",
-"entity.mmorpg.arcane_slime": "Arcana Slime",
-
-"entity.mmorpg.nature_spider": "Tera Spider",
-"entity.mmorpg.fire_spider": "Flame Spider",
-"entity.mmorpg.water_spider": "Icy Spider",
-"entity.mmorpg.thunder_spider": "Spark Spider",
-"entity.mmorpg.arcane_spider": "Arcana Spider",
-
-"entity.mmorpg.nature_zombie": "Tera Zombie",
-"entity.mmorpg.fire_zombie": "Flame Zombie",
-"entity.mmorpg.water_zombie": "Icy Zombie",
-"entity.mmorpg.thunder_zombie": "Spark Zombie",
-"entity.mmorpg.arcane_zombie": "Arcana Zombie",
-
-"entity.mmorpg.nature_mage": "Poison Magus",
-"entity.mmorpg.fire_mage": "Fire Magus",
-"entity.mmorpg.water_mage": "Frost Magus",
-"entity.mmorpg.thunder_mage": "Lightning Magus",
-"entity.mmorpg.healer_mage": "Healing Magus",
-
-"entity.mmorpg.nature_chicken": "Tera Chicken",
-"entity.mmorpg.fire_chicken": "Flame Chicken",
-"entity.mmorpg.water_chicken": "Icy Chicken",
-"entity.mmorpg.thunder_chicken": "Spark Chicken",
-
-"entity.mmorpg.nature_skeleton": "Tera Skeleton",
-"entity.mmorpg.fire_skeleton": "Flame Skeleton",
-"entity.mmorpg.water_skeleton": "Icy Skeleton",
-"entity.mmorpg.thunder_skeleton": "Spark Skeleton",
+"entity.mmorpg.zombie": "Zombie",
+"entity.mmorpg.spirit_wolf": "Spirit Wolf",
+"entity.mmorpg.skeleton": "Skeleton",
 
 "entity.mmorpg.boss_golem": "Corrupted Golem",
 
@@ -121,8 +90,6 @@
 "effect.mmorpg.anti_poison": "Anti Poison",
 "effect.mmorpg.scroll_buff": "Scroll Buff",
 
-"item.patchouli.age_of_exile_guide.name": "Age of Exile Guidebook",
-"item.patchouli.age_of_exile_guide.landing": "The Adventurer's Guide",
 
 "item.mmorpg.loot_crate.common": "Common Item Loot Crate",
 "item.mmorpg.loot_crate.magic": "Magic Item Loot Crate",
@@ -132,8 +99,6 @@
 "item.mmorpg.loot_crate.gem": "Gem Loot Crate",
 "item.mmorpg.loot_crate.rune": "Rune Loot Crate",
 
-"item.mmorpg.full_favor": "Full Favor Bottle",
-"item.mmorpg.empty_favor": "Empty Favor Bottle",
 
 "item.mmorpg.loot_table_chest": "Level Up Reward Bag",
 
