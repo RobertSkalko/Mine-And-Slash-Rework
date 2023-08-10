@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.database.registry;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
+import com.robertx22.age_of_exile.aoe_data.database.boss_spell.BossSpell;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.DimensionConfig;
 import com.robertx22.age_of_exile.database.data.EntityConfig;
@@ -174,7 +175,11 @@ public class ExileDB {
     public static ExileRegistryContainer<SpellSchool> SpellSchools() {
         return Database.getRegistry(ExileRegistryTypes.SPELL_SCHOOL);
     }
-    
+
+    public static ExileRegistryContainer<BossSpell> BossSpells() {
+        return Database.getRegistry(ExileRegistryTypes.BOSS_SPELL);
+    }
+
 
     public static ExileRegistryContainer<MapAffix> MapAffixes() {
         return Database.getRegistry(ExileRegistryTypes.MAP_AFFIX);

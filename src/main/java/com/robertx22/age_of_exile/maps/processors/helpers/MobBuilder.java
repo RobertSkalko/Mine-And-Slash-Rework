@@ -11,6 +11,8 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class MobBuilder {
@@ -29,10 +31,13 @@ public class MobBuilder {
         return b;
     }
 
-    public <T extends Mob> void summonMobs(Level world, BlockPos p) {
+    public <T extends Mob> List<T> summonMobs(Level world, BlockPos p) {
+        List<T> list = new ArrayList<>();
         for (int i = 0; i < amount; i++) {
-            summon(type, world, p);
+            T mob = (T) summon(type, world, p);
+            list.add(mob);
         }
+        return list;
     }
 
     private <T extends Mob> T summon(EntityType<T> type, Level world, BlockPos p) {

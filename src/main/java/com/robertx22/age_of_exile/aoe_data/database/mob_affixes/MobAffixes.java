@@ -18,6 +18,8 @@ import static com.robertx22.age_of_exile.uncommon.enumclasses.Elements.*;
 
 public class MobAffixes implements ExileRegistryInit {
 
+    public static String THORNY = "thorny_mobs";
+
     static void eleAffix(String name, Elements element) {
         new MobAffix(element.guidName + "_mob_affix", new BonusAttackDamage(element).getFormatAndIcon(), element.format)
                 .setMods(
@@ -89,6 +91,14 @@ public class MobAffixes implements ExileRegistryInit {
                         new StatMod(15, 15, Stats.LIFESTEAL.get()),
                         new StatMod(15, 15, ExtraMobDropsStat.getInstance()))
                 .setWeight(500)
+                .addToSerializables();
+
+
+        // special ones that are only set from boss spells etc
+        new MobAffix(THORNY, Stats.DAMAGE_REFLECTED.get()
+                .getFormatAndIcon(), ChatFormatting.RED)
+                .setMods(new StatMod(25, 50, Stats.DAMAGE_REFLECTED.get()))
+                .setWeight(0)
                 .addToSerializables();
 
     }

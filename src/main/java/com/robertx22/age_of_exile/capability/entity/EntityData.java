@@ -63,6 +63,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -112,6 +113,8 @@ public class EntityData implements ICap, INeededForClient {
     private static final String COOLDOWNS = "cds";
     private static final String THREAT = "th";
     private static final String PET = "pet";
+    private static final String BOSS = "boss";
+    private static final String CUSTOM_STATS = "custom_stats";
 
     transient LivingEntity entity;
 
@@ -126,6 +129,13 @@ public class EntityData implements ICap, INeededForClient {
     int exp = 0;
     int maxHealth = 0;
     MobData affixes = new MobData();
+
+    private BossData boss = null;
+
+
+    public Optional<BossData> getBossData() {
+        return Optional.ofNullable(boss);
+    }
 
     public EntityStatusEffectsData statusEffects = new EntityStatusEffectsData();
     public EntityAilmentData ailments = new EntityAilmentData();
@@ -144,6 +154,12 @@ public class EntityData implements ICap, INeededForClient {
 
     ResourcesData resources = new ResourcesData();
     CustomExactStatsData customExactStats = new CustomExactStatsData();
+
+    public void setupRandomBoss() {
+        this.rarity = IRarity.BOSS_ID;
+        this.boss = new BossData();
+        boss.setupRandomBoss();
+    }
 
     @Override
     public void addClientNBT(CompoundTag nbt) {
@@ -218,11 +234,29 @@ public class EntityData implements ICap, INeededForClient {
             LoadSave.Save(threat, nbt, THREAT);
         }
 
+        if (boss != null) {
+            LoadSave.Save(boss, nbt, BOSS);
+        }
+
+
         return nbt;
 
     }
 
-    // todo use the new loadorEmpty method to clean this up
+    public static <OBJ> OBJ loadOrBlank(Class theclass, OBJ newobj, CompoundTag nbt, String loc, OBJ blank) {
+        try {
+            OBJ data = LoadSave.Load(theclass, newobj, nbt, loc);
+            if (data == null) {
+                return blank;
+            } else {
+                return data;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blank;
+    }
+
     @Override
     public void deserializeNBT(CompoundTag nbt) {
 
@@ -242,41 +276,23 @@ public class EntityData implements ICap, INeededForClient {
             this.unit = new Unit();
         }
 
-        cooldowns = LoadSave.Load(CooldownsData.class, new CooldownsData(), nbt, COOLDOWNS);
-        if (cooldowns == null) {
-            cooldowns = new CooldownsData();
-        }
 
         try {
-            this.resources = LoadSave.Load(ResourcesData.class, new ResourcesData(), nbt, RESOURCES_LOC);
-            if (resources == null) {
-                resources = new ResourcesData();
-            }
+            this.summonedPetData = loadOrBlank(SummonedPetData.class, new SummonedPetData(), nbt, PET, new SummonedPetData());
+            this.ailments = loadOrBlank(EntityAilmentData.class, new EntityAilmentData(), nbt, AILMENTS, new EntityAilmentData());
+            this.statusEffects = loadOrBlank(EntityStatusEffectsData.class, new EntityStatusEffectsData(), nbt, STATUSES, new EntityStatusEffectsData());
+            this.threat = loadOrBlank(ThreatData.class, new ThreatData(), nbt, THREAT, new ThreatData());
+            this.customExactStats = loadOrBlank(CustomExactStatsData.class, new CustomExactStatsData(), nbt, CUSTOM_STATS, new CustomExactStatsData());
+            this.resources = loadOrBlank(ResourcesData.class, new ResourcesData(), nbt, RESOURCES_LOC, new ResourcesData());
+            this.cooldowns = loadOrBlank(CooldownsData.class, new CooldownsData(), nbt, COOLDOWNS, new CooldownsData());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        this.customExactStats = CustomExactStats.Load(nbt);
-        if (this.customExactStats == null) {
-            this.customExactStats = new CustomExactStatsData();
-        }
 
-        this.threat = LoadSave.Load(ThreatData.class, new ThreatData(), nbt, THREAT);
-        if (threat == null) {
-            threat = new ThreatData();
-        }
-        this.statusEffects = LoadSave.Load(EntityStatusEffectsData.class, new EntityStatusEffectsData(), nbt, STATUSES);
-        if (statusEffects == null) {
-            statusEffects = new EntityStatusEffectsData();
-        }
-        this.ailments = LoadSave.Load(EntityAilmentData.class, new EntityAilmentData(), nbt, AILMENTS);
-        if (ailments == null) {
-            ailments = new EntityAilmentData();
-        }
-        this.summonedPetData = LoadSave.Load(SummonedPetData.class, new SummonedPetData(), nbt, PET);
-        if (summonedPetData == null) {
-            summonedPetData = new SummonedPetData();
-        }
+        this.boss = LoadSave.Load(BossData.class, new BossData(), nbt, BOSS); // we want this null if none
+
     }
 
     public void setEquipsChanged(boolean bool) {

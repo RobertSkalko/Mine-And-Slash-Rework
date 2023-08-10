@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.database.registry;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
+import com.robertx22.age_of_exile.aoe_data.database.boss_spell.SummonThornMobs;
 import com.robertx22.age_of_exile.database.data.DimensionConfig;
 import com.robertx22.age_of_exile.database.data.EntityConfig;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
@@ -75,5 +76,6 @@ public class ExileDBInit {
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.SUPPORT_GEM, null));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.AURA, null));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.MAP_AFFIX, null));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.BOSS_SPELL, new SummonThornMobs()));
     }
 }

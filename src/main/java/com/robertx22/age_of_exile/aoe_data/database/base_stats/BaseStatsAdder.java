@@ -19,6 +19,8 @@ public class BaseStatsAdder implements ExileRegistryInit {
     @Override
     public void registerAll() {
         playerStats().addToSerializables();
+
+
     }
 
     public static BaseStatsConfig playerStats() {

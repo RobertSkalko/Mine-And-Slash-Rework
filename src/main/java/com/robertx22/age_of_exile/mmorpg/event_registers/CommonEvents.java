@@ -50,6 +50,7 @@ public class CommonEvents {
             x.put(SlashEntities.SPIRIT_WOLF.get(), Wolf.createAttributes().add(Attributes.MOVEMENT_SPEED, 0.4).build());
             x.put(SlashEntities.SKELETON.get(), Skeleton.createAttributes().add(Attributes.MOVEMENT_SPEED, 0.3).build());
             x.put(SlashEntities.ZOMBIE.get(), Zombie.createAttributes().add(Attributes.MOVEMENT_SPEED, 0.4).build());
+            x.put(SlashEntities.THORNY_MINION.get(), Zombie.createAttributes().add(Attributes.MOVEMENT_SPEED, 0.2).build());
         });
 
         OnItemStoppedUsingCastImbuedSpell.register();
