@@ -29,8 +29,9 @@ public class AttackInformation {
         this.amount = amount;
         this.mitigation = miti;
         this.event = event;
-        this.weapon = WeaponFinderUtil.getWeapon(source);
+        this.weapon = WeaponFinderUtil.getWeapon((LivingEntity) source.getEntity(), source.getDirectEntity());
         this.weaponData = StackSaving.GEARS.loadFrom(weapon);
+
 
         Preconditions.checkArgument(source.getEntity() instanceof LivingEntity);
         this.attackerEntity = (LivingEntity) source.getEntity();

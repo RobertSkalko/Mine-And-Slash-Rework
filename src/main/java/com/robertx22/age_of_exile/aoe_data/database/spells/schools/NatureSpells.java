@@ -9,7 +9,9 @@ import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
+import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeapon;
+import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashSounds;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
@@ -31,9 +33,32 @@ public class NatureSpells implements ExileRegistryInit {
     public static String NATURE_BALM = "nature_balm";
     public static String ENTANGLE_SEED = "entangling_seed";
     public static String POISON_CLOUD = "poison_cloud";
+    public static String THORN_BUSH = "thorn_bush";
 
     @Override
     public void registerAll() {
+
+        SpellBuilder.of(THORN_BUSH, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 20 * 6)
+                                .setSwingArm(), "Thorn Bush",
+                        Arrays.asList(SpellTag.damage, SpellTag.area))
+                .manualDesc("Summon a thorny bush that deals "
+                        + SpellCalcs.THORN_BUSH.getLocDmgTooltip()
+                        + Elements.Chaos.getIconNameDmg() + " every second.")
+
+                .onCast(PartBuilder.playSound(SoundEvents.GRASS_PLACE, 1D, 1D))
+
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 0D)))
+                .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(SlashBlocks.THORN_BUSH.get(), 20D * 5)
+                        .put(MapField.ENTITY_NAME, "block")
+                        .put(MapField.BLOCK_FALL_SPEED, 0D)
+                        .put(MapField.FIND_NEAREST_SURFACE, true)
+                        .put(MapField.IS_BLOCK_FALLING, false)))
+
+                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.SNEEZE, 40D, 3D, 1D))
+                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.ITEM_SLIME, 40D, 3D, 1D))
+                .onTick("block", PartBuilder.damageInAoe(SpellCalcs.THORN_BUSH, Elements.Chaos, 3D).onTick(20D))
+                .onTick("block", PartBuilder.playSound(SoundEvents.GRASS_BREAK, 1D, 1D).onTick(20D))
+                .build();
 
         SpellBuilder.of(POISON_CLOUD, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 25 * 20), "Poison Cloud",
                         Arrays.asList(SpellTag.area, SpellTag.damage))
@@ -67,7 +92,7 @@ public class NatureSpells implements ExileRegistryInit {
 
                 .build();
 
-        
+
         SpellBuilder.of(REFRESH, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(40, 20 * 60 * 3, 20)
                                 .setScaleManaToPlayer(), "Refresh",
                         Arrays.asList())

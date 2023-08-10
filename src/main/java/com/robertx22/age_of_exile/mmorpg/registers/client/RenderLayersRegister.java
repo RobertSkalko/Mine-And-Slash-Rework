@@ -15,6 +15,8 @@ public class RenderLayersRegister {
         ItemBlockRenderTypes.setRenderLayer(SlashBlocks.TRAP.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(SlashBlocks.GREEN_TOTEM.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(SlashBlocks.GLYPH.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(SlashBlocks.MAGMA_FLOWER.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(SlashBlocks.THORN_BUSH.get(), RenderType.cutout());
 
         //  RenderTypeLookup.setRenderLayer(SlashBlocks.RUNEWORD.get(), RenderType.cutout());
 

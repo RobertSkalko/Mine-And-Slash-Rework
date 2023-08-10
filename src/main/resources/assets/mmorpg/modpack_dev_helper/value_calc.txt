@@ -2,6 +2,7 @@ These are all default registry entries of this type.
 This registry is modify-able through datapacks.
 petrify
 ice_comet
+magma_flower
 torment
 healing_aura
 chilling_field
@@ -28,6 +29,7 @@ flame_strike
 shooting_star
 meteor
 frost_nova
+thorn_bush
 ranger_trap
 execute
 poison_cloud

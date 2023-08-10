@@ -149,6 +149,12 @@ public class SpellCalcs {
     public static ValueCalculation BLACK_HOLE = ValueCalcBuilder.of("black_hole")
             .spellScaling(0.2F, 1F)
             .build();
+    public static ValueCalculation THORN_BUSH = ValueCalcBuilder.of("thorn_bush")
+            .spellScaling(0.25F, 0.5F)
+            .build();
+    public static ValueCalculation MAGMA_FLOWER = ValueCalcBuilder.of("magma_flower")
+            .spellScaling(0.5F, 1F)
+            .build();
     public static ValueCalculation CHILLING_FIELD = ValueCalcBuilder.of("chilling_field")
             .spellScaling(0.2F, 0.5F)
             .build();

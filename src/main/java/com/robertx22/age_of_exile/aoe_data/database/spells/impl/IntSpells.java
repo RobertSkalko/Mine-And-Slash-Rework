@@ -33,7 +33,7 @@ public class IntSpells implements ExileRegistryInit {
 
                 .manualDesc("Summon a dark sphere that attracts nearby enemies to it, dealing "
                         + SpellCalcs.BLACK_HOLE.getLocDmgTooltip()
-                        + Elements.Elemental.getIconNameDmg() + " when it expires.")
+                        + Elements.Chaos.getIconNameDmg() + " when it expires.")
 
                 .onCast(PartBuilder.playSound(SoundEvents.END_PORTAL_SPAWN, 1D, 1D))
 
@@ -48,7 +48,7 @@ public class IntSpells implements ExileRegistryInit {
                 .onTick("block", PartBuilder.particleOnTick(1D, ParticleTypes.WITCH, 8D, 1D))
                 .onTick("block", PartBuilder.justAction(SpellAction.TP_TARGET_TO_SELF.create())
                         .addTarget(TargetSelector.AOE.create(3D, EntityFinder.SelectionType.RADIUS, AllyOrEnemy.enemies)))
-                .onExpire("block", PartBuilder.damageInAoe(SpellCalcs.BLACK_HOLE, Elements.Elemental, 2D))
+                .onExpire("block", PartBuilder.damageInAoe(SpellCalcs.BLACK_HOLE, Elements.Chaos, 2D))
                 .build();
 
         SpellBuilder.of("teleport", PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 30)

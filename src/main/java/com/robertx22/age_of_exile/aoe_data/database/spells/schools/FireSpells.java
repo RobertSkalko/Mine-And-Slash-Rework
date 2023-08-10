@@ -9,6 +9,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.SpellConfigura
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeapon;
+import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -31,9 +32,32 @@ public class FireSpells implements ExileRegistryInit {
     public static String VAMP_BLOOD = "vamp_blood";
     public static String DRACONIC_BLOOD = "draconic_blood";
     public static String FLAME_WEAPON = "fire_weapon";
+    public static String MAGMA_FLOWER = "magma_flower";
 
     @Override
     public void registerAll() {
+
+        SpellBuilder.of(MAGMA_FLOWER, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 20 * 30)
+                                .setSwingArm(), "Magma Flower",
+                        Arrays.asList(SpellTag.damage, SpellTag.area))
+                .manualDesc("Summon a flaming flower that deals "
+                        + SpellCalcs.MAGMA_FLOWER.getLocDmgTooltip()
+                        + Elements.Fire.getIconNameDmg() + " every second.")
+
+                .onCast(PartBuilder.playSound(SoundEvents.GRASS_PLACE, 1D, 1D))
+
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 0D)))
+                .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(SlashBlocks.MAGMA_FLOWER.get(), 20D * 7)
+                        .put(MapField.ENTITY_NAME, "block")
+                        .put(MapField.BLOCK_FALL_SPEED, 0D)
+                        .put(MapField.FIND_NEAREST_SURFACE, true)
+                        .put(MapField.IS_BLOCK_FALLING, false)))
+
+                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.FLAME, 40D, 3D, 1D))
+                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.SMOKE, 40D, 3D, 1D))
+                .onTick("block", PartBuilder.damageInAoe(SpellCalcs.MAGMA_FLOWER, Elements.Fire, 3D).onTick(20D))
+                .onTick("block", PartBuilder.playSound(SoundEvents.GENERIC_BURN, 1D, 1D).onTick(20D))
+                .build();
 
         SpellBuilder.of(FLAME_STRIKE_ID, PlayStyle.STR, SpellConfiguration.Builder.instant(8, 15)
                                 .setSwingArm(), "Flame Strike",

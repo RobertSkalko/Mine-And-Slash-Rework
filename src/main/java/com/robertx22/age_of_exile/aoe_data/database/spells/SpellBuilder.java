@@ -15,7 +15,6 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeap
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Blocks;
@@ -27,24 +26,6 @@ import java.util.Objects;
 public class SpellBuilder {
     Spell spell;
 
-    /*
-    public static SpellBuilder breath(String id, String name, Elements ele, SimpleParticleType particle) {
-
-        return SpellBuilder.of(id, SpellConfiguration.Builder.instant(2, 1), name,
-                        Arrays.asList(SpellTag.damage))
-
-                .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.AIR, 1D, 2D, SlashEntities.SIMPLE_PROJECTILE.get(), 20D, false)
-                        .put(MapField.IS_SILENT, true)))
-                .onHit(PartBuilder.damageInAoe(SpellCalcs.BREATH, ele, 1.5D)
-                        .addCondition(EffectCondition.IS_NOT_ON_COOLDOWN.create("breath"))
-                        .addActions(SpellAction.SET_ON_COOLDOWN.create("breath", 20D)))
-                .onCast(PartBuilder.Particle.builder(particle, 50D, 0.3D)
-                        .set(MapField.MOTION, ParticleMotion.CasterLook.name())
-                        .set(MapField.HEIGHT, 1D)
-                        .build());
-    }
-
-     */
 
     public static SpellBuilder of(String id, PlayStyle style, SpellConfiguration config, String name, List<SpellTag> tags) {
         SpellBuilder builder = new SpellBuilder();
@@ -86,16 +67,13 @@ public class SpellBuilder {
         return this;
     }
 
-    public SpellBuilder disableInDimension(ResourceLocation id) {
-        this.spell.disabled_dims.add(id.toString());
-        return this;
-    }
 
     public SpellBuilder onCast(ComponentPart comp) {
         this.spell.attached.on_cast.add(comp);
         comp.addActivationRequirement(EntityActivation.ON_CAST);
         return this;
     }
+
 
     public SpellBuilder summons(EntityType type, int duration, int amount) {
         onCast(PartBuilder.justAction(SummonPetAction.SUMMON_PET.create(type, duration, amount)))

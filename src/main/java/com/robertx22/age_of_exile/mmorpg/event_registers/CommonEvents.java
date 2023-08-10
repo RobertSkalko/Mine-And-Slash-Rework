@@ -85,6 +85,7 @@ public class CommonEvents {
             }
         });
 
+
         ForgeEvents.registerForgeEvent(AttackEntityEvent.class, event -> {
             if (event.getEntity() instanceof ServerPlayer) {
                 StopCastingIfInteract.interact(event.getEntity());

@@ -16,9 +16,6 @@ public class MapLootGen extends BaseLootGen<MapBlueprint> {
     @Override
     public float baseDropChance() {
 
-        if (true) {
-            return 1000;
-        }
         float chance = (float) ServerContainer.get().MAP_DROPRATE.get().floatValue();
 
         return chance;

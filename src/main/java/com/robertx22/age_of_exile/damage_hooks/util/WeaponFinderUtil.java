@@ -1,55 +1,43 @@
 package com.robertx22.age_of_exile.damage_hooks.util;
 
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 public class WeaponFinderUtil {
 
-    public static ItemStack getWeapon(DamageSource source) {
+    public static ItemStack getWeapon(LivingEntity source, Entity sourceEntity) {
 
-        if (source.getEntity() instanceof LivingEntity == false) {
+        if (source instanceof LivingEntity == false) {
             return ItemStack.EMPTY;
         }
 
 
-        ItemStack stack = ((LivingEntity) source.getEntity()).getMainHandItem();
+        ItemStack stack = source.getMainHandItem();
         GearItemData gear = StackSaving.GEARS.loadFrom(stack);
 
         if (gear == null) {
+            if (source instanceof Player p) {
+                for (int i = 0; i < 9; i++) {
+                    if (Inventory.isHotbarSlot(i)) { // just in case it changes
+                        ItemStack attempt = p.getInventory().getItem(i);
 
-            try {
-                Entity sourceEntity = source
-                        .getDirectEntity();
-                Entity attacker = source
-                        .getEntity();
-
-                if (sourceEntity != null && !(sourceEntity instanceof LivingEntity)) {
-                    if (attacker instanceof LivingEntity) {
-
-                        stack = getWeaponStackFromThrownEntity(sourceEntity);
-                        gear = StackSaving.GEARS.loadFrom(stack);
-
-                        if (gear == null) {
-                            stack = ItemStack.EMPTY;
-                        } else {
-                            Load.Unit(attacker)
-                                    .setEquipsChanged(true);
+                        if (StackSaving.GEARS.has(attempt)) {
+                            gear = StackSaving.GEARS.loadFrom(attempt);
+                            if (gear != null) {
+                                return attempt;
+                            }
                         }
-
                     }
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
+
+
         if (gear != null) {
             return stack;
         } else {
@@ -57,27 +45,10 @@ public class WeaponFinderUtil {
         }
     }
 
+    // maybe not worth it
+    /*
     private static ItemStack getWeaponStackFromThrownEntity(Entity en) {
 
-        /*
-        for (Field field : en.getClass()
-            .getFields()) {
-
-            if (field.getType()
-                .isAssignableFrom(ItemStack.class)) {
-                try {
-                    ItemStack stack = (ItemStack) field.get(en);
-                    GearItemData gear = StackSaving.GEARS.loadFrom(stack);
-                    if (gear != null) {
-                        return stack;
-                    }
-                } catch (Exception e) {
-
-                }
-
-            }
-        }
-         */
 
         try {
             for (SynchedEntityData.DataValue<?> entry : en.getEntityData().getNonDefaultValues()
@@ -161,4 +132,6 @@ public class WeaponFinderUtil {
 
         return ItemStack.EMPTY;
     }
+
+     */
 }

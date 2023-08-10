@@ -1,6 +1,7 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
 undying_will
+magma_flower
 ice_comet
 healing_aura
 song_of_valor
@@ -53,6 +54,7 @@ flame_strike
 frostball
 meteor
 refresh
+thorn_bush
 frost_nova
 make_arrows
 test_command

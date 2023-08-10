@@ -10,7 +10,7 @@ import java.util.List;
 
 public class SpellConfiguration {
 
-    public boolean swing_arm = false;
+    public boolean swing_arm = true;
     public boolean apply_cast_speed_to_cd = false;
     public CastingWeapon castingWeapon = CastingWeapon.ANY_WEAPON;
     public LeveledValue mana_cost;
