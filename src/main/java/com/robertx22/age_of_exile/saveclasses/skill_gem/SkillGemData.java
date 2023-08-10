@@ -6,12 +6,14 @@ import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.support_gem.SupportGem;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.UNICODE;
+import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SkillGemsItems;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.library_of_exile.utils.RandomUtils;
@@ -20,12 +22,13 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SkillGemData {
+public class SkillGemData implements ISalvagable {
 
     public static int MAX_LINKS = 5;
 
@@ -42,6 +45,18 @@ public class SkillGemData {
         public int Weight() {
             return weight;
         }
+    }
+
+
+    @Override
+    public List<ItemStack> getSalvageResult(ItemStack stack) {
+        int amount = 1; // todo
+        return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(getRarity()).get(), amount));
+    }
+
+    @Override
+    public boolean isSalvagable() {
+        return true;
     }
 
     static List<LinkChance> linkChances = Arrays.asList(

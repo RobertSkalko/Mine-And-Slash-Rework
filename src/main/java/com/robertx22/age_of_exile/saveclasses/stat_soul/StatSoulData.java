@@ -9,16 +9,14 @@ import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
-import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISettableLevelTier;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
-import java.util.List;
 
 
-public class StatSoulData implements ISalvagable, IRarity, ISettableLevelTier {
+public class StatSoulData implements IRarity, ISettableLevelTier {
 
 
     public int tier = 1;
@@ -164,16 +162,7 @@ public class StatSoulData implements ISalvagable, IRarity, ISettableLevelTier {
                 .get(rar);
     }
 
-    @Override
-    public List<ItemStack> getSalvageResult(ItemStack stack) {
-        return GearItemData.getSalvagedResults(new GearItemData.SalvagedItemInfo(tier, getRarity()));
-    }
-
-    @Override
-    public boolean isSalvagable(SalvageContext context) {
-        return true;
-    }
-
+    
     @Override
     public void setTier(int tier) {
         this.tier = tier;

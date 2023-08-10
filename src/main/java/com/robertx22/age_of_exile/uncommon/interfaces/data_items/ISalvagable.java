@@ -8,14 +8,12 @@ import java.util.List;
 
 public interface ISalvagable {
 
-    enum SalvageContext {
-        SALVAGE_STATION
-
-    }
 
     List<ItemStack> getSalvageResult(ItemStack stack);
 
-    boolean isSalvagable(SalvageContext context);
+    default boolean isSalvagable() {
+        return true;
+    }
 
     static ISalvagable load(ItemStack stack) {
 

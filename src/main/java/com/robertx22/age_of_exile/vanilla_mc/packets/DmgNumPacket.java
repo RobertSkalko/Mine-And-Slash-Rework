@@ -24,6 +24,7 @@ public class DmgNumPacket extends MyPacket<DmgNumPacket> {
 
     }
 
+    
     public DmgNumPacket(LivingEntity entity, String str, boolean iscrit, ChatFormatting format) {
         string = str;
         this.id = entity.getId();
@@ -41,7 +42,6 @@ public class DmgNumPacket extends MyPacket<DmgNumPacket> {
         en.lifespan = 20;
 
         entity.level().addFreshEntity(en);
-
     }
 
     @Override

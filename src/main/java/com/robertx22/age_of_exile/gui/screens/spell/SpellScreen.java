@@ -23,7 +23,6 @@ public class SpellScreen extends BaseScreen implements INamedScreen, ILeftRight 
 
     static int sizeX = 250;
     static int sizeY = 233;
-    public static boolean IS_PICKING_HOTBAR_SPELL = false;
     public static int NUMBER_OF_HOTBAR_FOR_PICKING = 0;
 
     Minecraft mc = Minecraft.getInstance();
@@ -40,7 +39,6 @@ public class SpellScreen extends BaseScreen implements INamedScreen, ILeftRight 
 
     public SpellScreen() {
         super(sizeX, sizeY);
-        IS_PICKING_HOTBAR_SPELL = false;
     }
 
     @Override
@@ -81,17 +79,6 @@ public class SpellScreen extends BaseScreen implements INamedScreen, ILeftRight 
                     });
 
 
-            for (int i = 0; i < 8; i++) {
-
-                int x = guiLeft + 10 + (PickHotbarButton.BUTTON_SIZE_X * i);
-
-                if (i > 3) {
-                    x += 70;
-                }
-                int y = guiTop + 204;
-
-                this.addRenderableWidget(new PickHotbarButton(this, i, x, y));
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }

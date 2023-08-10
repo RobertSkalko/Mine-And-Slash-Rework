@@ -368,41 +368,22 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         }
     }
 
-    public static class SalvagedItemInfo {
-
-        public int tier;
-        public GearRarity rarity;
-
-        public SalvagedItemInfo(int tier, GearRarity rarity) {
-            this.tier = tier;
-            this.rarity = rarity;
-        }
-    }
-
-    
-    public static List<ItemStack> getSalvagedResults(SalvagedItemInfo info) {
-        try {
-            // List<ItemStack> list = new ArrayList<>();
-            int amount = 1; // todo
-            return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(info.rarity.item_tier).get(), amount));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return Arrays.asList(ItemStack.EMPTY);
-    }
 
     @Override
     public List<ItemStack> getSalvageResult(ItemStack stack) {
         if (this.sal) {
-            return getSalvagedResults(new SalvagedItemInfo(getTier(), getRarity()));
+
+            int amount = 1; // todo
+            return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(getRarity()).get(), amount));
+
+
         }
 
         return Arrays.asList(ItemStack.EMPTY);
     }
 
     @Override
-    public boolean isSalvagable(SalvageContext context) {
+    public boolean isSalvagable() {
         return this.sal;
     }
 
