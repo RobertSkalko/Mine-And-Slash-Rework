@@ -14,7 +14,6 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeap
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashSounds;
-import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -25,7 +24,6 @@ import net.minecraft.world.item.Items;
 import java.util.Arrays;
 
 public class NatureSpells implements ExileRegistryInit {
-    public static String POISONBALL_ID = "poison_ball";
 
     public static String THORN_ARMOR = "thorn_armor";
     public static String REFRESH = "refresh";
@@ -71,25 +69,6 @@ public class NatureSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.groundParticles(ParticleTypes.COMPOSTER, 200D, 3.5D, 0.5D))
                 .onCast(PartBuilder.damageInAoe(SpellCalcs.POISON_CLOUD, Elements.Chaos, 3.5D)
                         .addPerEntityHit(PartBuilder.playSoundPerTarget(SoundEvents.GENERIC_HURT, 1D, 1D)))
-                .build();
-
-        SpellBuilder.of(POISONBALL_ID, PlayStyle.INT, SpellConfiguration.Builder.instant(5, 20)
-                                .setSwingArm()
-                                .applyCastSpeedToCooldown(), "Poison Ball",
-                        Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.staff_spell))
-                .manualDesc(
-                        "Throw out a ball of poison, dealing " + SpellCalcs.POISON_BALL.getLocDmgTooltip()
-                                + " " + Elements.Chaos.getIconNameDmg())
-                .weaponReq(CastingWeapon.MAGE_WEAPON)
-                .onCast(PartBuilder.playSound(SoundEvents.SNOWBALL_THROW, 1D, 1D))
-                .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(SlashItems.SLIMEBALL.get(), 1D, 2.5D, SlashEntities.SIMPLE_PROJECTILE.get(), 8D, false)
-                ))
-                .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.SNEEZE, 1D, 0.15D))
-                .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.ITEM_SLIME, 10D, 0.15D))
-                .onExpire(PartBuilder.damageInAoe(SpellCalcs.POISON_BALL, Elements.Chaos, 2D))
-                .onExpire(PartBuilder.aoeParticles(ParticleTypes.ITEM_SLIME, 100D, 1D))
-                .onExpire(PartBuilder.aoeParticles(ParticleTypes.SNEEZE, 25D, 1D))
-
                 .build();
 
 

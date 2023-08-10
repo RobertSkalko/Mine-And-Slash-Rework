@@ -1,9 +1,10 @@
 package com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots;
 
 import com.robertx22.age_of_exile.database.data.currency.base.IShapedRecipe;
-import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
+import com.robertx22.age_of_exile.vanilla_mc.items.misc.RarityStoneItem;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -61,7 +62,7 @@ public class ResetStatsPotion extends AutoItem implements IShapedRecipe {
     @Override
     public ShapedRecipeBuilder getRecipe() {
         return shaped(this)
-                .define('t', SlashItems.T1_DUST())
+                .define('t', RarityStoneItem.of(IRarity.COMMON_ID))
                 .define('v', Items.GOLD_INGOT)
                 .define('b', Items.GLASS_BOTTLE)
                 .define('c', Items.DIAMOND)

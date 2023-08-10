@@ -65,7 +65,6 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
                 .build();
 
         SchoolBuilder.of(NATURE, "Nature")
-                .addSpell(NatureSpells.POISONBALL_ID, new PointData(0, 0))
                 .addSpell(NatureSpells.POISON_WEAPONS, new PointData(7, 0))
 
                 .addSpell(NatureSpells.THORN_ARMOR, new PointData(10, 1))
@@ -84,7 +83,6 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
                 .build();
 
         SchoolBuilder.of(FIRE, "Fire")
-                .addSpell(FireSpells.FIREBALL_ID, new PointData(0, 0))
                 .addSpell(FireSpells.FLAME_STRIKE_ID, new PointData(5, 0))
 
                 .addSpell(FireSpells.FLAME_WEAPON, new PointData(7, 1))
@@ -99,7 +97,6 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
                 .build();
 
         SchoolBuilder.of(WATER, "Water")
-                .addSpell(WaterSpells.FROSTBALL_ID, new PointData(0, 0))
                 .addSpell(WaterSpells.TIDAL_STRIKE, new PointData(4, 0))
 
                 .addSpell(WaterSpells.FROST_NOVA_AOE, new PointData(2, 1))
@@ -111,7 +108,7 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
 
                 .addSpell(WaterSpells.NOURISHMENT, new PointData(7, 3))
                 .addSpell(WaterSpells.ICE_COMET, new PointData(1, 3))
-            
+
                 .addSpell(WaterSpells.MAGE_CIRCLE, new PointData(10, 4))
 
                 .build();

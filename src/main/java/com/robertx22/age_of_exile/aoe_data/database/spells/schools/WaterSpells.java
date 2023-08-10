@@ -14,7 +14,6 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeap
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashSounds;
-import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -27,8 +26,6 @@ import java.util.Arrays;
 
 public class WaterSpells implements ExileRegistryInit {
     public static String FROST_NOVA_AOE = "frost_nova";
-    public static String FROSTBALL_ID = "frostball";
-
     public static String WATER_BREATH = "water_breath";
     public static String MAGE_CIRCLE = "mage_circle";
     public static String FROST_ARMOR = "frost_armor";
@@ -162,25 +159,7 @@ public class WaterSpells implements ExileRegistryInit {
                 )
                 .build();
 
-        SpellBuilder.of(FROSTBALL_ID, PlayStyle.INT, SpellConfiguration.Builder.instant(5, 20)
-                                .setSwingArm()
-                                .applyCastSpeedToCooldown(), "Ice Ball",
-                        Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.staff_spell))
-                .manualDesc(
-                        "Throw out a ball of ice, dealing " + SpellCalcs.ICEBALL.getLocDmgTooltip()
-                                + " " + Elements.Cold.getIconNameDmg())
-
-                .weaponReq(CastingWeapon.MAGE_WEAPON)
-                .onCast(PartBuilder.playSound(SoundEvents.SNOWBALL_THROW, 1D, 1D))
-                .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(SlashItems.SNOWBALL.get(), 1D, 2.5D, SlashEntities.SIMPLE_PROJECTILE.get(), 8D, false)
-                ))
-                .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.ITEM_SNOWBALL, 2D, 0.15D))
-                .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.SNOWFLAKE, 7D, 0.3D))
-                .onExpire(PartBuilder.damageInAoe(SpellCalcs.ICEBALL, Elements.Cold, 2D))
-                .onExpire(PartBuilder.aoeParticles(ParticleTypes.ITEM_SNOWBALL, 5D, 1D))
-                .onExpire(PartBuilder.aoeParticles(ParticleTypes.SNOWFLAKE, 15D, 0.5D))
-                .build();
-
+     
         SpellBuilder.of(FROST_NOVA_AOE, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 25 * 20), "Frost Nova",
                         Arrays.asList(SpellTag.area, SpellTag.damage))
                 .manualDesc(

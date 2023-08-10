@@ -14,12 +14,10 @@ import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.weapons.StaffWeapon
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.ItemNewbieGearBag;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.LootTableItem;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.ProjectileItem;
-import com.robertx22.age_of_exile.vanilla_mc.items.misc.RarityStoneItem;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.ResetStatsPotion;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.SingleTalentResetPotion;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.SpellResetPotion;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.TalentResetPotion;
-import com.robertx22.temp.SkillItemTier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 
@@ -50,31 +48,6 @@ public class SlashItems {
 
     // public static RegObj<EssencePaperItem> ESSENCE_PAPER = Def.item(() -> new EssencePaperItem(), "scroll/paper");
 
-
-    public static RarityStoneItem T0_DUST() {
-        return RarityItems.RARITY_STONE.get(SkillItemTier.TIER0)
-                .get();
-    }
-
-    public static RarityStoneItem T1_DUST() {
-        return RarityItems.RARITY_STONE.get(SkillItemTier.TIER1)
-                .get();
-    }
-
-    public static RarityStoneItem T2_DUST() {
-        return RarityItems.RARITY_STONE.get(SkillItemTier.TIER2)
-                .get();
-    }
-
-    public static RarityStoneItem T3_DUST() {
-        return RarityItems.RARITY_STONE.get(SkillItemTier.TIER3)
-                .get();
-    }
-
-    public static RarityStoneItem T4_DUST() {
-        return RarityItems.RARITY_STONE.get(SkillItemTier.TIER4)
-                .get();
-    }
 
     public static RegObj<LootTableItem> LOOT_TABLE_ITEM = Def.item(() -> new LootTableItem(), "loot_table_chest");
 
