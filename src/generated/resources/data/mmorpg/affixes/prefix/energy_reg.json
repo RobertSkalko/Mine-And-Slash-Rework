@@ -1,7 +1,6 @@
 {
   "type": "prefix",
   "guid": "energy_reg",
-  "loc_name": "Invirogating",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

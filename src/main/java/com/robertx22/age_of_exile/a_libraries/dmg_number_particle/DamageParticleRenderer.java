@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.a_libraries.dmg_number_particle;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Camera;
@@ -21,21 +20,23 @@ public class DamageParticleRenderer {
 
     public static Set<DamageParticle> PARTICLES = new HashSet<>();
 
-    public static void renderParticles(GuiGraphics gui, PoseStack matrix, Camera camera) {
+    public static void renderParticles(GuiGraphics gui, Camera camera) {
         for (DamageParticle p : PARTICLES) {
-            renderParticle(gui, matrix, p, camera);
+            renderParticle(gui, p, camera);
             p.tick();
         }
 
         PARTICLES.removeIf(x -> x.age > 50);
     }
 
-    private static void renderParticle(GuiGraphics gui, PoseStack matrix, DamageParticle particle, Camera camera) {
+    private static void renderParticle(GuiGraphics gui, DamageParticle particle, Camera camera) {
         float scaleToGui = 0.025f;
 
         if (particle.packet.iscrit) {
             scaleToGui *= 2;
         }
+
+        var matrix = gui.pose();
 
         Minecraft client = Minecraft.getInstance();
         float tickDelta = client.getFrameTime();
@@ -50,29 +51,29 @@ public class DamageParticleRenderer {
         double camZ = camPos.z;
 
         matrix.pushPose();
+
         matrix.translate(x - camX, y - camY, z - camZ);
+
         matrix.mulPose(Axis.YP.rotationDegrees(-camera.getYRot()));
         matrix.mulPose(Axis.XP.rotationDegrees(camera.getXRot()));
         matrix.scale(-scaleToGui, -scaleToGui, scaleToGui);
 
-
-        // todo i just removed these, might stop working
         RenderSystem.setShader(GameRenderer::getPositionColorShader);
 
-        drawDamageNumber(gui, matrix, particle.renderString, 0, 0, 10);
-
+        drawDamageNumber(gui, particle.renderString, 0, 0, 10);
 
         matrix.popPose();
     }
 
-    public static void drawDamageNumber(GuiGraphics gui, PoseStack matrix, String s, double x, double y,
+    public static void drawDamageNumber(GuiGraphics gui, String s, double x, double y,
                                         float width) {
 
         Minecraft minecraft = Minecraft.getInstance();
         int sw = minecraft.font.width(s);
 
 
-        gui.drawString(minecraft.font, s, (int) (x + (width / 2) - sw), (int) y + 5, ChatFormatting.RED.getColor());
+        //gui.drawString(minecraft.font, s, (int) (x + (width / 2) - sw), (int) y + 5, ChatFormatting.RED.getColor());
+        gui.drawString(minecraft.font, s, 0, 0, ChatFormatting.RED.getColor());
     }
 
 

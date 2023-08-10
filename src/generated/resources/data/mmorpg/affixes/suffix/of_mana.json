@@ -1,7 +1,6 @@
 {
   "type": "suffix",
   "guid": "of_mana",
-  "loc_name": "Of Mana",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

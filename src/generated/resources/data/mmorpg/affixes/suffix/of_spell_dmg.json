@@ -1,7 +1,6 @@
 {
   "type": "suffix",
   "guid": "of_spell_dmg",
-  "loc_name": "Of Spell Damage",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

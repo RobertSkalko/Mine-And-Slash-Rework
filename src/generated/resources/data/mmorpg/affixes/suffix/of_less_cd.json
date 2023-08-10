@@ -1,7 +1,6 @@
 {
   "type": "suffix",
   "guid": "of_less_cd",
-  "loc_name": "Of Repetition",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

@@ -1,7 +1,6 @@
 {
   "type": "prefix",
   "guid": "scavanger",
-  "loc_name": "Scavanger",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

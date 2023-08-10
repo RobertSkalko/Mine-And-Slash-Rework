@@ -1,7 +1,6 @@
 {
   "type": "prefix",
   "guid": "lightning_spell_ele_dmg",
-  "loc_name": "Poisoned",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

@@ -1,7 +1,6 @@
 {
   "type": "prefix",
   "guid": "azure",
-  "loc_name": "Azure",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

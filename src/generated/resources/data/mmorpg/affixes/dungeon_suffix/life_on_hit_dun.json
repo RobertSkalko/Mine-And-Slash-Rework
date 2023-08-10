@@ -1,7 +1,6 @@
 {
   "type": "dungeon_suffix",
   "guid": "life_on_hit_dun",
-  "loc_name": "Of Vampires",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

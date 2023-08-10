@@ -1,7 +1,6 @@
 {
   "type": "prefix",
   "guid": "precise",
-  "loc_name": "Precise",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

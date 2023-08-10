@@ -1,7 +1,6 @@
 {
   "type": "prefix",
   "guid": "seraphim",
-  "loc_name": "Seraphim's",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

@@ -1,7 +1,6 @@
 {
   "type": "prefix",
   "guid": "glimmering",
-  "loc_name": "Glimmering",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

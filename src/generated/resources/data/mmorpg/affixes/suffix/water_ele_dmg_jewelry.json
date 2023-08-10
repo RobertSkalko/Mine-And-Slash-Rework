@@ -1,7 +1,6 @@
 {
   "type": "suffix",
   "guid": "water_ele_dmg_jewelry",
-  "loc_name": "Of Ice",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

@@ -1,7 +1,6 @@
 {
   "type": "prefix",
   "guid": "wep_item_perc",
-  "loc_name": "Cruel",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

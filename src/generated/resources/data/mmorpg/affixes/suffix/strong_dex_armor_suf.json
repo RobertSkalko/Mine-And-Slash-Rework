@@ -1,7 +1,6 @@
 {
   "type": "suffix",
   "guid": "strong_dex_armor_suf",
-  "loc_name": "Of Skill",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

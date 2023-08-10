@@ -1,7 +1,6 @@
 {
   "type": "prefix",
   "guid": "mana_thief",
-  "loc_name": "Mana Thief's",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

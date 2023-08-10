@@ -1,7 +1,6 @@
 {
   "type": "suffix",
   "guid": "of_spirit_markings",
-  "loc_name": "Of Spirit Markings",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

@@ -1,7 +1,6 @@
 {
   "type": "dungeon_prefix",
   "guid": "water_wep_dmg_dun",
-  "loc_name": "Freezing",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

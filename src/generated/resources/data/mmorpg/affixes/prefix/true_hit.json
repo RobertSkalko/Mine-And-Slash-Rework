@@ -1,7 +1,6 @@
 {
   "type": "prefix",
   "guid": "true_hit",
-  "loc_name": "True Hit",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

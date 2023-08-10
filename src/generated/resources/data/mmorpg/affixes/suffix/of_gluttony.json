@@ -1,7 +1,6 @@
 {
   "type": "suffix",
   "guid": "of_gluttony",
-  "loc_name": "Of Gluttony",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

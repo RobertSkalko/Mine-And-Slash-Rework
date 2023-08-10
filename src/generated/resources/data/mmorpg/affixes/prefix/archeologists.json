@@ -1,7 +1,6 @@
 {
   "type": "prefix",
   "guid": "archeologists",
-  "loc_name": "Archeologist's",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

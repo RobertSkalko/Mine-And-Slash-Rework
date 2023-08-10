@@ -1,7 +1,6 @@
 {
   "type": "prefix",
   "guid": "mana_reg",
-  "loc_name": "Soothing",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

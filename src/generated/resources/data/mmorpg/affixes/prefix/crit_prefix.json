@@ -1,7 +1,6 @@
 {
   "type": "prefix",
   "guid": "crit_prefix",
-  "loc_name": "Critical",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

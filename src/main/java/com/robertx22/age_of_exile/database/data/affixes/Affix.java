@@ -41,7 +41,7 @@ public class Affix implements IWeighted, IGUID, IAutoLocName, IhasRequirements,
     }
 
     public String guid;
-    public String loc_name;
+    public transient String loc_name;
     public boolean only_one_per_item = true;
     public int weight = 1000;
     public Requirements requirements;
@@ -52,7 +52,7 @@ public class Affix implements IWeighted, IGUID, IAutoLocName, IhasRequirements,
 
     @Override
     public boolean isRegistryEntryValid() {
-        if (guid == null || loc_name == null || stats.isEmpty() || requirements == null || type == null || weight < 0) {
+        if (guid == null || stats.isEmpty() || requirements == null || type == null) {
             return false;
         }
 

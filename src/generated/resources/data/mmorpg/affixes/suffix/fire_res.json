@@ -1,7 +1,6 @@
 {
   "type": "suffix",
   "guid": "fire_res",
-  "loc_name": "Of the Drake",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

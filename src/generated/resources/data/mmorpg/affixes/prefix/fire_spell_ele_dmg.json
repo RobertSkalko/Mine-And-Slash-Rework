@@ -1,7 +1,6 @@
 {
   "type": "prefix",
   "guid": "fire_spell_ele_dmg",
-  "loc_name": "Scorched",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

@@ -1,7 +1,6 @@
 {
   "type": "prefix",
   "guid": "item_flat_dodge",
-  "loc_name": "Scaled",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

@@ -1,7 +1,6 @@
 {
   "type": "dungeon_prefix",
   "guid": "fire_wep_dmg_dun",
-  "loc_name": "Burning",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

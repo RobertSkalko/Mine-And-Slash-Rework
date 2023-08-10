@@ -1,7 +1,6 @@
 {
   "type": "dungeon_suffix",
   "guid": "water_ele_mobs",
-  "loc_name": "Of Frost",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

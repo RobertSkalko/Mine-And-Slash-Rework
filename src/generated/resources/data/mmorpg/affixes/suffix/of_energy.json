@@ -1,7 +1,6 @@
 {
   "type": "suffix",
   "guid": "of_energy",
-  "loc_name": "Of Energy",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

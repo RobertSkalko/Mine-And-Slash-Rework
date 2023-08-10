@@ -1,7 +1,6 @@
 {
   "type": "prefix",
   "guid": "item_flat_magic_shield",
-  "loc_name": "Fortified",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [

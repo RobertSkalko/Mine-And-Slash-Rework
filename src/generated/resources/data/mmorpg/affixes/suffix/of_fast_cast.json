@@ -1,7 +1,6 @@
 {
   "type": "suffix",
   "guid": "of_fast_cast",
-  "loc_name": "Of Faster Casting",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [
