@@ -49,6 +49,10 @@ public class IntSpells implements ExileRegistryInit {
                 .onTick("block", PartBuilder.justAction(SpellAction.TP_TARGET_TO_SELF.create())
                         .addTarget(TargetSelector.AOE.create(3D, EntityFinder.SelectionType.RADIUS, AllyOrEnemy.enemies)))
                 .onExpire("block", PartBuilder.damageInAoe(SpellCalcs.BLACK_HOLE, Elements.Chaos, 2D))
+                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.WITCH, 100D, 3D, 3D))
+                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.WITCH, 100D, 3D, 1.5D))
+                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.WITCH, 50D, 1.5D, 3D))
+                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.WITCH, 50D, 1.5D, 1.5D))
                 .build();
 
         SpellBuilder.of("teleport", PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 30)

@@ -21,9 +21,9 @@ import org.jetbrains.annotations.Nullable;
 
 public class MapBlock extends BaseEntityBlock {
     public MapBlock() {
-        super(BlockBehaviour.Properties.of().strength(2));
+        super(BlockBehaviour.Properties.of().strength(2).noOcclusion());
 
-        
+
     }
 
     @Nullable

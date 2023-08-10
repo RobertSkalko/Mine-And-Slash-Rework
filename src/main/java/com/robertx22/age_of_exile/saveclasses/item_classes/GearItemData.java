@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.requirements.bases.GearRequestedFor;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.*;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.*;
@@ -378,28 +379,12 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         }
     }
 
+    
     public static List<ItemStack> getSalvagedResults(SalvagedItemInfo info) {
         try {
-            List<ItemStack> list = new ArrayList<>();
-
-            // todo
-            /*
-            ItemStack dust = new ItemStack(ProfessionItems.SALVAGED_ESSENCE_MAP.get(SkillItemTier.of(info.tier))
-                .get());
-
-            dust.setCount(info.rarity.dust_per_sal.random());
-
-            list.add(dust);
-
-            if (info.rarity.rar_ess_per_sal > 0) {
-                ItemStack essence = info.rarity.getRarityEssenceStack();
-                essence.setCount(info.rarity.rar_ess_per_sal);
-                list.add(essence);
-            }
-
-             */
-
-            return list;
+            // List<ItemStack> list = new ArrayList<>();
+            int amount = 1; // todo
+            return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(info.rarity.item_tier).get(), amount));
 
         } catch (Exception e) {
             e.printStackTrace();

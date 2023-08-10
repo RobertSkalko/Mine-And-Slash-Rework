@@ -10,7 +10,7 @@ import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulItem;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
-import com.robertx22.age_of_exile.vanilla_mc.items.misc.SalvagedDustItem;
+import com.robertx22.age_of_exile.vanilla_mc.items.misc.RarityStoneItem;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
@@ -29,7 +29,7 @@ public class OnItemInteract {
 
             boolean success = false;
 
-            if (stack.isDamaged() && cursor.getItem() instanceof SalvagedDustItem) {
+            if (stack.isDamaged() && cursor.getItem() instanceof RarityStoneItem) {
 
                 GearItemData gear = StackSaving.GEARS.loadFrom(stack);
 
@@ -37,11 +37,11 @@ public class OnItemInteract {
                     return;
                 }
 
-                SalvagedDustItem essence = (SalvagedDustItem) cursor.getItem();
+                RarityStoneItem essence = (RarityStoneItem) cursor.getItem();
 
                 SoundUtils.playSound(player, SoundEvents.ANVIL_USE, 1, 1);
 
-                int repair = essence.durabilityRepair;
+                int repair = essence.getTotalRepair();
 
                 stack.setDamageValue(stack.getDamageValue() - repair);
                 success = true;

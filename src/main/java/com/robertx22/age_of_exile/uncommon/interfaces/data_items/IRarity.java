@@ -4,6 +4,9 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.Rarity;
 
 public interface IRarity<R extends Rarity> {
 
+
+    public static int TOTAL_GEAR_RARITIES = 6;
+
     public String getRarityRank();
 
     public R getRarity();

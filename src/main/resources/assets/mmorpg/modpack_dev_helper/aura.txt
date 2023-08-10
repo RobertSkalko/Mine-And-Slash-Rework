@@ -9,6 +9,7 @@ magic_shield
 magic_shield_reg
 chaos_damage
 health_reg
+summon_dmg
 chaos_ailment
 armor
 fire_damage

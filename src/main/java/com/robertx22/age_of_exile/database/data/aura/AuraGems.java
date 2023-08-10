@@ -97,6 +97,10 @@ public class AuraGems {
                 new StatMod(5, 25, new AilmentChance(Ailments.POISON), ModType.FLAT)
         )).registerToExileRegistry();
 
+        new AuraGem("summon_dmg", "Overlord", PlayStyle.INT, 0.3F, Arrays.asList(
+                new StatMod(10, 40, Stats.SUMMON_DAMAGE.get(), ModType.MORE)
+        )).registerToExileRegistry();
+
 
     }
 }

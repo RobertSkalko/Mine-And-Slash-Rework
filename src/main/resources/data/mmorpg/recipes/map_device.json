@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A",
+    "S"
+  ],
+  "key": {  
+	"A": {
+      "item": "minecraft:diamond"
+    }, 
+	"B": {
+      "item": "minecraft:stone"
+    }
+  },
+  "result": {
+    "item": "mmorpg:teleporter"
+  }
+}

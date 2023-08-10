@@ -8,7 +8,6 @@ import com.robertx22.age_of_exile.database.data.currency.base.IShapelessRecipe;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import com.robertx22.age_of_exile.mmorpg.registers.common.items.ProfessionItems;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
 import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.VanillaMaterial;
@@ -100,17 +99,6 @@ public class RecipeGenerator {
         }
 
 
-        ProfessionItems.SALVAGED_ESSENCE_MAP.values()
-                .forEach(x -> {
-                    if (x.get().tier.lowerTier() != null) {
-                        ShapelessRecipeBuilder fac = ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, x.get(), 1);
-                        fac.requires(ProfessionItems.SALVAGED_ESSENCE_MAP.get(x.get().tier.lowerTier())
-                                .get(), 4);
-                        fac.unlockedBy("player_level", EnchantedItemTrigger.TriggerInstance.enchantedItem())
-                                .save(consumer);
-                    }
-                });
-
         gearRecipe(consumer, SlashItems.GearItems.NECKLACES, GearSlots.NECKLACE);
         gearRecipe(consumer, SlashItems.GearItems.RINGS, GearSlots.RING);
         gearRecipe(consumer, SlashItems.GearItems.STAFFS, GearSlots.STAFF);
@@ -170,7 +158,7 @@ public class RecipeGenerator {
             };
         }
 
-      
+
         if (id.equals(GearSlots.STAFF)) {
             return new String[]{
                     "  M",

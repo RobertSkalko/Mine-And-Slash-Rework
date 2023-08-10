@@ -147,7 +147,7 @@ public class SpellCalcs {
             .spellScaling(0.2F, 0.6F)
             .build();
     public static ValueCalculation BLACK_HOLE = ValueCalcBuilder.of("black_hole")
-            .spellScaling(0.2F, 1F)
+            .spellScaling(0.5F, 1.5F)
             .build();
     public static ValueCalculation THORN_BUSH = ValueCalcBuilder.of("thorn_bush")
             .spellScaling(0.25F, 0.5F)
