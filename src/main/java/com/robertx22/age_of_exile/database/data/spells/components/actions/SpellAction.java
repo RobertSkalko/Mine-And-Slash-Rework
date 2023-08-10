@@ -25,7 +25,9 @@ public abstract class SpellAction extends BaseFieldNeeder implements IGUID {
 
     //  public static CastProjectileAtEnemy CAST_SPELL_TOTEM = of(new CastProjectileAtEnemy());
 
+
     public static SummonEvokerFangsAction SUMMON_EVOKER_FANG_AT_TARGET = of(new SummonEvokerFangsAction());
+    public static SummonPetAction SUMMON_PET = of(new SummonPetAction());
     public static RefreshCooldownsAction REFRESH_COOLDOWNS_BY_X_TICKS = of(new RefreshCooldownsAction());
     public static SetOnCooldownAction SET_ON_COOLDOWN = of(new SetOnCooldownAction());
     public static ExpireAction EXPIRE = of(new ExpireAction());

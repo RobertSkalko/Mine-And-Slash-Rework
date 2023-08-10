@@ -17,6 +17,7 @@ import com.robertx22.age_of_exile.event_hooks.player.StopCastingIfInteract;
 import com.robertx22.age_of_exile.mixin_methods.OnItemInteract;
 import com.robertx22.age_of_exile.mixin_methods.OnItemStoppedUsingCastImbuedSpell;
 import com.robertx22.age_of_exile.mmorpg.ForgeEvents;
+import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.error_checks.base.ErrorChecks;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.Cached;
@@ -25,8 +26,11 @@ import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.animal.Wolf;
+import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
@@ -39,6 +43,11 @@ import java.util.ArrayList;
 public class CommonEvents {
 
     public static void register() {
+
+        ForgeEvents.registerForgeEvent(EntityAttributeCreationEvent.class, x -> {
+            x.put(SlashEntities.SPIRIT_WOLF.get(), Wolf.createAttributes().build());
+            x.put(SlashEntities.SKELETON.get(), Skeleton.createAttributes().build());
+        });
 
         OnItemStoppedUsingCastImbuedSpell.register();
 
@@ -98,7 +107,7 @@ public class CommonEvents {
 
         ExileEvents.PLAYER_DEATH.register(new OnPlayerDeath());
 
-        
+
         ForgeEvents.registerForgeEvent(LivingHurtEvent.class, event -> {
             try {
                 if (event.getEntity() instanceof Player == false) {

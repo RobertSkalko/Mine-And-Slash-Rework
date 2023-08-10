@@ -19,6 +19,7 @@ public class EntitySavedSpellData {
     public String item_id = "";
     public int lvl = 1;
     public float area_multi = 1;
+    public float summon_duration_multi = 1;
     public float proj_speed_multi = 1;
     public int extra_proj = 0;
     public boolean pierce = false;

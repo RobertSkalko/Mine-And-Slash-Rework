@@ -62,6 +62,7 @@ public class SpellStatsCalculationEvent extends EffectEvent {
         this.data.getNumber(EventData.COOLDOWN_TICKS).number = cd; // cap it to 80% cooldown
 
         savedData.proj_speed_multi = data.getNumber(EventData.PROJECTILE_SPEED_MULTI).number;
+        savedData.summon_duration_multi = data.getNumber(EventData.SUMMON_DURATION_MULTI).number;
         savedData.pierce = data.getBoolean(EventData.PIERCE);
         savedData.area_multi = data.getNumber(EventData.AREA_MULTI).number;
         savedData.lvl = lvl;

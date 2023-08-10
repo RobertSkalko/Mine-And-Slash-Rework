@@ -9,6 +9,7 @@ is_source_low_hp
 effect_has_tag_positive
 is_day_is_false
 is_melee_weapon
+spell_has_tag_summon
 attack_type_is_all
 is_crit_true
 spell_has_tag_arrow

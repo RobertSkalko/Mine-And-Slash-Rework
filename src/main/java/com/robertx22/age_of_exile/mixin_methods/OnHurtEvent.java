@@ -11,8 +11,10 @@ public class OnHurtEvent {
             return event.getAmount();
         }
 
- 
+
         try {
+            
+
             // order matters here
             LivingHurtUtils.tryAttack(event);
             // order matters here

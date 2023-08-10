@@ -24,6 +24,7 @@ public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
                 return; // it shouldnt be though
             }
 
+         
             Load.Unit(entity).ailments.onTick(entity);
 
             Load.Unit(entity).getCooldowns().onTicksPass(1);

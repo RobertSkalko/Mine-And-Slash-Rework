@@ -62,7 +62,7 @@ public class StatsRegister implements ExileRegistryInit {
                         add(new AilmentProcStat(ailment));
                     }
 
-
+                  
                     add(RegeneratePercentStat.HEALTH);
                     add(RegeneratePercentStat.MANA);
                     add(ArmorPenetration.getInstance());
@@ -76,7 +76,7 @@ public class StatsRegister implements ExileRegistryInit {
                     add(AuraEffect.getInstance());
 
                     add(ProjectileTotem.getInstance());
-                    
+
                     add(WeaponDamage.getInstance());
 
                     add(FullSwingDamage.getInstance());

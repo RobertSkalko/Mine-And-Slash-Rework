@@ -11,6 +11,7 @@ curse_of_despair
 arrow_storm
 shred
 poison_trap
+summon_spirit_wolf
 vamp_blood
 charged_bolt
 curse_of_weak

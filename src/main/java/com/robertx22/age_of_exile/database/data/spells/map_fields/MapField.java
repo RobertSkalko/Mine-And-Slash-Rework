@@ -44,6 +44,7 @@ public class MapField<T> implements IGUID {
 
     // string
     public static MapField<String> PROJECTILE_ENTITY = make("proj_en");
+    public static MapField<String> SUMMONED_PET_ID = make("summon_id");
     public static MapField<String> ITEM = make("item");
     public static MapField<String> ELEMENT = make(new MapField<String>("element"));
     public static MapField<String> SELECTION_TYPE = make("selection_type");

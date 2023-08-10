@@ -111,10 +111,13 @@ public class EntityData implements ICap, INeededForClient {
     private static final String AILMENTS = "ailments";
     private static final String COOLDOWNS = "cds";
     private static final String THREAT = "th";
+    private static final String PET = "pet";
 
     transient LivingEntity entity;
 
     transient EntityGears gears = new EntityGears();
+
+    public SummonedPetData summonedPetData = new SummonedPetData();
 
     // sync these for mobs
     Unit unit = new Unit();
@@ -154,8 +157,6 @@ public class EntityData implements ICap, INeededForClient {
         if (affixes != null) {
             LoadSave.Save(affixes, nbt, AFFIXES);
         }
-        LoadSave.Save(statusEffects, nbt, STATUSES);
-        LoadSave.Save(ailments, nbt, AILMENTS);
     }
 
     @Override
@@ -180,14 +181,6 @@ public class EntityData implements ICap, INeededForClient {
             affixes = new MobData();
         }
 
-        this.statusEffects = LoadSave.Load(EntityStatusEffectsData.class, new EntityStatusEffectsData(), nbt, STATUSES);
-        if (statusEffects == null) {
-            statusEffects = new EntityStatusEffectsData();
-        }
-        this.ailments = LoadSave.Load(EntityAilmentData.class, new EntityAilmentData(), nbt, AILMENTS);
-        if (ailments == null) {
-            ailments = new EntityAilmentData();
-        }
 
     }
 
@@ -205,6 +198,9 @@ public class EntityData implements ICap, INeededForClient {
         nbt.putBoolean(SHOULD_SYNC, shouldSync);
 
         LoadSave.Save(cooldowns, nbt, COOLDOWNS);
+        LoadSave.Save(statusEffects, nbt, STATUSES);
+        LoadSave.Save(ailments, nbt, AILMENTS);
+        LoadSave.Save(summonedPetData, nbt, PET);
 
         if (unit != null) {
             UnitNbt.Save(nbt, unit);
@@ -226,6 +222,7 @@ public class EntityData implements ICap, INeededForClient {
 
     }
 
+    // todo use the new loadorEmpty method to clean this up
     @Override
     public void deserializeNBT(CompoundTag nbt) {
 
@@ -267,6 +264,18 @@ public class EntityData implements ICap, INeededForClient {
         this.threat = LoadSave.Load(ThreatData.class, new ThreatData(), nbt, THREAT);
         if (threat == null) {
             threat = new ThreatData();
+        }
+        this.statusEffects = LoadSave.Load(EntityStatusEffectsData.class, new EntityStatusEffectsData(), nbt, STATUSES);
+        if (statusEffects == null) {
+            statusEffects = new EntityStatusEffectsData();
+        }
+        this.ailments = LoadSave.Load(EntityAilmentData.class, new EntityAilmentData(), nbt, AILMENTS);
+        if (ailments == null) {
+            ailments = new EntityAilmentData();
+        }
+        this.summonedPetData = LoadSave.Load(SummonedPetData.class, new SummonedPetData(), nbt, PET);
+        if (summonedPetData == null) {
+            summonedPetData = new SummonedPetData();
         }
     }
 

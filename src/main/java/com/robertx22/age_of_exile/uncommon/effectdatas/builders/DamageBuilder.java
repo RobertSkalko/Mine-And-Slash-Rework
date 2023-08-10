@@ -25,6 +25,7 @@ public class DamageBuilder extends EventBuilder<DamageEvent> {
         return this;
     }
 
+
     @Override
     protected void buildCheck() {
         ErrorUtils.ifFalse(isSetup);

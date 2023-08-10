@@ -4,6 +4,7 @@ public enum SpellTag {
     projectile("Projectile"),
     movement("Movement"),
     damage("Damage"),
+    summon("Summon"),
     heal("Heal"),
     arrow("Arrow"),
     technique("Technique"),

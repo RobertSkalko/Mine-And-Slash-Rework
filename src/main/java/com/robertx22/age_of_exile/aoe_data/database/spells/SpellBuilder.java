@@ -8,12 +8,16 @@ import com.robertx22.age_of_exile.database.data.spells.components.EntityActivati
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
+import com.robertx22.age_of_exile.database.data.spells.components.actions.SummonPetAction;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeapon;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.ArrayList;
@@ -90,6 +94,14 @@ public class SpellBuilder {
     public SpellBuilder onCast(ComponentPart comp) {
         this.spell.attached.on_cast.add(comp);
         comp.addActivationRequirement(EntityActivation.ON_CAST);
+        return this;
+    }
+
+    public SpellBuilder summons(EntityType type, int duration, int amount) {
+        onCast(PartBuilder.justAction(SummonPetAction.SUMMON_PET.create(type, duration, amount)))
+                .onCast(PartBuilder.aoeParticles(ParticleTypes.WITCH, 200D, 3.5D))
+                .onCast(PartBuilder.aoeParticles(ParticleTypes.SOUL, 200D, 3.5D))
+                .onCast(PartBuilder.playSound(SoundEvents.EVOKER_PREPARE_SUMMON, 0.5D, 1D));
         return this;
     }
 

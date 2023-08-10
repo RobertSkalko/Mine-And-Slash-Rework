@@ -168,6 +168,7 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
+
     public static DataPackStatAccessor<PlayStyle> STYLE_DAMAGE = DatapackStatBuilder
             .<PlayStyle>of(x -> x.id + "_dmg", x -> Elements.Physical)
             .addAllOfType(PlayStyle.values())
@@ -960,6 +961,41 @@ public class Stats implements ExileRegistryInit {
                 x.is_perc = true;
                 x.icon = "\u27B9";
                 x.format = ChatFormatting.GREEN.getName();
+            })
+            .build();
+
+    public static DataPackStatAccessor<EmptyAccessor> SUMMON_DURATION = DatapackStatBuilder
+            .ofSingle("summon_duration", Elements.Physical)
+            .worksWithEvent(SpellStatsCalculationEvent.ID)
+            .setPriority(0)
+            .setSide(EffectSides.Source)
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.summon))
+            .addEffect(StatEffects.SUMMON_DURATION)
+            .setLocName(x -> "Summon Duration")
+            .setLocDesc(x -> "")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+                x.icon = "\u27B9";
+                x.format = ChatFormatting.GREEN.getName();
+            })
+
+            .build();
+
+
+    // todo test these out later
+    public static DataPackStatAccessor<EmptyAccessor> SUMMON_DAMAGE = DatapackStatBuilder
+            .ofSingle("summon_damage", Elements.Physical)
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(0)
+            .setSide(EffectSides.Source)
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.summon))
+            .addEffect(StatEffects.INCREASE_VALUE)
+            .setLocName(x -> "Summon Damage")
+            .setLocDesc(x -> "")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+                x.icon = "\u27B9";
+                x.format = ChatFormatting.RED.getName();
             })
             .build();
 
