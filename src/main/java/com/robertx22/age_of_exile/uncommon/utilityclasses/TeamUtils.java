@@ -2,10 +2,10 @@ package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,15 +20,15 @@ public class TeamUtils {
 
         if (player != null) {
             TeamUtils.getOnlineMembers(player)
-                .forEach(x -> action.accept(x));
+                    .forEach(x -> action.accept(x));
         }
 
     }
 
     public static List<Player> getOnlineTeamMembersInRange(Player player, double range) {
         return getOnlineMembers(player).stream()
-            .filter(x -> player.distanceTo(x) < range)
-            .collect(Collectors.toList());
+                .filter(x -> player.distanceTo(x) < range)
+                .collect(Collectors.toList());
 
     }
 
@@ -43,14 +43,14 @@ public class TeamUtils {
 
         try {
             player.getServer()
-                .getPlayerList()
-                .getPlayers()
-                .forEach(x -> {
-                    if (areOnSameTeam(player, x)) {
-                        players.add(x);
-                    }
+                    .getPlayerList()
+                    .getPlayers()
+                    .forEach(x -> {
+                        if (areOnSameTeam(player, x)) {
+                            players.add(x);
+                        }
 
-                });
+                    });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -63,12 +63,14 @@ public class TeamUtils {
     }
 
     public static boolean areOnSameTeam(Player p1, Player p2) {
+        if (p1.distanceTo(p2) > ServerContainer.get().MAX_TEAM_DISTANCE.get()) {
+            return false;
+        }
         if (ServerContainer.get().ALL_PLAYERS_ARE_TEAMED_PVE_MODE.get()) {
             return true;
         }
 
-        if (Load.playerRPGData(p1).team
-            .isOnSameTeam(p2)) {
+        if (Load.playerRPGData(p1).team.isOnSameTeam(p2)) {
             return true;
         }
 

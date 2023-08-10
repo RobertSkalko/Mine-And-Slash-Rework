@@ -18,10 +18,10 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.DashUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.HealthUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.NumberUtils;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.TeamUtils;
 import com.robertx22.age_of_exile.vanilla_mc.packets.DmgNumPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.SoundUtils;
@@ -35,7 +35,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -231,8 +230,17 @@ public class DamageEvent extends EffectEvent {
         return;
     }
 
-    public boolean ifPlayersShouldNotDamageEachOther() {
+    public boolean stopFriendlyFire() {
 
+        if (this.data.isSpellEffect()) {
+
+            if (AllyOrEnemy.allies.is(source, target)) {
+                cancelDamage();
+                return true;
+            }
+        }
+
+        /*
         if (areBothPlayers()) {
             if (source.equals(target)) {
                 return false; // it's the same player, let him hit himself
@@ -246,17 +254,15 @@ public class DamageEvent extends EffectEvent {
             }
         } else {
             if (this.data.isSpellEffect()) {
-                if (target instanceof TamableAnimal) {
-                    if (source instanceof Player) {
-                        TamableAnimal tame = (TamableAnimal) target;
-                        if (tame.isOwnedBy(source)) {
-                            cancelDamage();
-                            return true;
-                        }
-                    }
+
+                if (AllyOrEnemy.allies.is(source, target)) {
+                    cancelDamage();
+                    return true;
                 }
             }
         }
+
+         */
 
         return false;
     }
@@ -280,7 +286,7 @@ public class DamageEvent extends EffectEvent {
             return;
         }
 
-        if (ifPlayersShouldNotDamageEachOther()) {
+        if (stopFriendlyFire()) {
             return;
         }
 

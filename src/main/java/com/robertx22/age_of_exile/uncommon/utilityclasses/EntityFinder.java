@@ -3,7 +3,8 @@ package com.robertx22.age_of_exile.uncommon.utilityclasses;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.OwnableEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -15,9 +16,9 @@ import java.util.Objects;
 public class EntityFinder {
 
     public static boolean isTamed(LivingEntity x) {
-        if (x instanceof TamableAnimal) {
-            TamableAnimal tame = (TamableAnimal) x;
-            return tame.isTame();
+        if (x instanceof OwnableEntity) {
+            OwnableEntity tame = (OwnableEntity) x;
+            return tame.getOwner() instanceof Player; // we dont want players killing pets of others either
         }
         return false;
     }
@@ -43,21 +44,6 @@ public class EntityFinder {
 
                 List<T> entityList = setup.world.getEntitiesOfClass(setup.entityType, aabb);
 
-                /* // TODO raycast remove wall cheese, experimental
-                entityList.removeIf(e -> {
-
-                    BlockHitResult result = e.world.raycast(new RaycastContext(e.getPos(), setup.caster.getPos(), RaycastContext.ShapeType.OUTLINE, RaycastContext.FluidHandling.NONE, e));
-
-                    if (result.getPos()
-                        .distanceTo(setup.caster.getPos()) < 2) {
-                        return false;
-                    }
-
-                    return true;
-
-                });
-
-                 */
 
                 return entityList;
             }

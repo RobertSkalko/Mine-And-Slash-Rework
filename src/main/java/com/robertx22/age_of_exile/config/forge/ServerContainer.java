@@ -33,8 +33,7 @@ public class ServerContainer {
         b.comment("General Configs")
                 .push("general");
 
-        ALL_PLAYERS_ARE_TEAMED_PVE_MODE = b.define("all_players_are_allied", false);
-        TURN_REQ_ILVL_INTO_RECCOMENDATION = b.define("TURN_REQ_ILVL_INTO_RECCOMENDATION", false);
+        ALL_PLAYERS_ARE_TEAMED_PVE_MODE = b.define("all_players_are_allied", true);
         GET_STARTER_ITEMS = b.define("start_items", true);
         ALWAYS_SCALE_MOB_LEVEL_TO_PLAYER = b.define("scale_mob_to_nearby_player_lvl", true);
         ENABLE_LOOT_ANNOUNCEMENTS = b.define("loot_announcements", true);
@@ -53,6 +52,7 @@ public class ServerContainer {
         VANILLA_MOB_DMG_AS_EXILE_DMG_AT_MAX_LVL = b.defineInRange("vanilla_mob_dmg_as_exile_dmg_at_max_lvl", 1D, 0, 1000);
         PLAYER_VANILLA_DMG_MULTI = b.defineInRange("PLAYER_VANILLA_DMG_MULTI", 0D, 0, 1000);
         PVP_DMG_MULTI = b.defineInRange("pvp_dmg_multi", 1D, 0, 1000);
+        MAX_TEAM_DISTANCE = b.defineInRange("max_team_distance", 150D, 0, 100000);
 
         GEAR_DROPRATE = b.defineInRange("gear_drop_rate", 7D, 0, 1000);
         MAP_DROPRATE = b.defineInRange("map_drop_rate", 2D, 0, 1000);
@@ -61,17 +61,6 @@ public class ServerContainer {
         RUNE_DROPRATE = b.defineInRange("rune_drop_rate", 0.05D, 0, 1000);
         CURRENCY_DROPRATE = b.defineInRange("currency_drop_rate", 0.2D, 0, 1000);
 
-        DIFFICULTY_PER_SECOND = b.defineInRange("DIFFICULTY_PER_SECOND", 0.0005D, -1000, 1000);
-        DIFFICULTY_PER_HOSTILE_KILL = b.defineInRange("DIFFICULTY_PER_HOSTILE_KILL", 0.005D, -1000, 1000);
-        DIFFICULTY_PER_DEATH = b.defineInRange("DIFFICULTY_PER_DEATH", -1D, -1000, 1000);
-        DIFFICULTY_PER_INCREASE_ITEM = b.defineInRange("DIFFICULTY_PER_INCREASE_ITEM", 10D, -1000, 1000);
-        DIFFICULTY_PER_DECREASE_ITEM = b.defineInRange("DIFFICULTY_PER_DECREASE_ITEM", 10D, -1000, 1000);
-        MAX_DIFFICULTY = b.defineInRange("MAX_DIFFICULTY", 100D, -1000, 1000);
-        MAX_MOB_LVL_HIGHER_THAN_PLAYER_FOR_DIFF = b.defineInRange("MAX_MOB_LVL_HIGHER_THAN_PLAYER_FOR_DIFF", 0, -1000, 1000);
-        DEATH_DIFFICULTY_COOLDOWN = b.defineInRange("DEATH_DIFFICULTY_COOLDOWN", 20 * 60 * 60D, 0, 100000);
-        MOB_HP_MULTI_PER_DIFFICULTY = b.defineInRange("MOB_HP_MULTI_PER_DIFFICULTY", 0.01D, 0, 100000);
-        MOB_DMG_MULTI_PER_DIFFICULTY = b.defineInRange("MOB_DMG_MULTI_PER_DIFFICULTY", 0.01D, 0, 100000);
-        MOB_LOOT_MULTI_PER_DIFFICULTY = b.defineInRange("MOB_LOOT_MULTI_PER_DIFFICULTY", 0.01D, 0, 100000);
 
         List<String> list = new ArrayList<>();
 
@@ -117,19 +106,6 @@ public class ServerContainer {
 
     }
 
-    public ForgeConfigSpec.DoubleValue DIFFICULTY_PER_SECOND;
-    public ForgeConfigSpec.DoubleValue DIFFICULTY_PER_HOSTILE_KILL;
-    public ForgeConfigSpec.DoubleValue DIFFICULTY_PER_DEATH;
-    public ForgeConfigSpec.DoubleValue DEATH_DIFFICULTY_COOLDOWN;
-    public ForgeConfigSpec.DoubleValue DIFFICULTY_PER_INCREASE_ITEM;
-    public ForgeConfigSpec.DoubleValue DIFFICULTY_PER_DECREASE_ITEM;
-    public ForgeConfigSpec.DoubleValue MAX_DIFFICULTY;
-    public ForgeConfigSpec.IntValue MAX_MOB_LVL_HIGHER_THAN_PLAYER_FOR_DIFF;
-
-    
-    public ForgeConfigSpec.DoubleValue MOB_HP_MULTI_PER_DIFFICULTY;
-    public ForgeConfigSpec.DoubleValue MOB_DMG_MULTI_PER_DIFFICULTY;
-    public ForgeConfigSpec.DoubleValue MOB_LOOT_MULTI_PER_DIFFICULTY;
 
     // at max difficulty, lvl 1 mobs are lvl 50. And lvl 50 mobs are increased in strength
 
@@ -141,7 +117,6 @@ public class ServerContainer {
     public ForgeConfigSpec.BooleanValue ENABLE_LOOT_ANNOUNCEMENTS;
     public ForgeConfigSpec.BooleanValue REQUIRE_TEAM_FOR_TEAM_DUNGEONS;
     public ForgeConfigSpec.BooleanValue DONT_SYNC_DATA_OF_AMBIENT_MOBS;
-    public ForgeConfigSpec.BooleanValue TURN_REQ_ILVL_INTO_RECCOMENDATION;
 
 
     public ForgeConfigSpec.DoubleValue REGEN_HUNGER_COST;
@@ -155,6 +130,7 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue VANILLA_MOB_DMG_AS_EXILE_DMG_AT_MAX_LVL;
     public ForgeConfigSpec.DoubleValue PVP_DMG_MULTI;
     public ForgeConfigSpec.DoubleValue PLAYER_VANILLA_DMG_MULTI;
+    public ForgeConfigSpec.DoubleValue MAX_TEAM_DISTANCE;
 
     public ForgeConfigSpec.DoubleValue GEAR_DROPRATE;
     public ForgeConfigSpec.DoubleValue MAP_DROPRATE;

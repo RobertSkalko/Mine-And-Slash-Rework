@@ -69,6 +69,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         }
 
         public ResourceLocation getIcon() {
+            
             return new ResourceLocation(SlashRef.MODID, "textures/gui/stat_groups/" + id + ".png");
         }
     }
