@@ -40,6 +40,7 @@ public class SlashItems {
     public static RegObj<Item> MAP_DEVICE = Def.item(() -> new BlockItem(SlashBlocks.MAP.get(), new Item.Properties()), "teleporter");
     public static RegObj<IdentifyTomeItem> IDENTIFY_TOME = Def.item(() -> new IdentifyTomeItem(), "identify_tome");
     public static RegObj<Item> TP_BACK = Def.item(() -> new TpBackItem(), "tp_back");
+    public static RegObj<Item> INVISIBLE_ICON = Def.item(() -> new Item(new Item.Properties()), "invisible_item");
     public static RegObj<LootCrateItem> LOOT_CRATE = Def.item(() -> new LootCrateItem(), "loot_crate/default");
 
     public static RegObj<ProjectileItem> FIREBALL = Def.item(() -> new ProjectileItem("fireball"), "projectile/" + "fireball");

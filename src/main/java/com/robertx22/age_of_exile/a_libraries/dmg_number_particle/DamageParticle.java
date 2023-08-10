@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.a_libraries.dmg_number_particle;
 import com.robertx22.age_of_exile.vanilla_mc.packets.DmgNumPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.phys.Vec3;
 
 public class DamageParticle {
 
@@ -36,16 +35,20 @@ public class DamageParticle {
             this.renderString += "!";
         }
 
+
         Minecraft mc = Minecraft.getInstance();
+        /*
         Vec3 entityLocation = entity.position()
-            .add(0, entity.getBbHeight(), 0);
+                .add(0, entity.getBbHeight(), 0);
         Vec3 cameraLocation = mc.gameRenderer.getMainCamera()
-            .getPosition();
+                .getPosition();
         double offsetBy = entity.getBbWidth();
         Vec3 offset = cameraLocation.subtract(entityLocation)
-            .normalize()
-            .scale(offsetBy);
+                .normalize()
+                .scale(offsetBy);
         Vec3 pos = entityLocation.add(offset);
+
+         */
 
         age = 0;
 
@@ -53,9 +56,12 @@ public class DamageParticle {
         vy = 0.05 + (mc.level.random.nextGaussian() * 0.01);
         vz = mc.level.random.nextGaussian() * 0.01;
 
+        /*
         x = pos.x;
         y = pos.y;
         z = pos.z;
+
+         */
 
         xPrev = x;
         yPrev = y;
@@ -63,10 +69,13 @@ public class DamageParticle {
     }
 
     public void tick() {
+
+        age++;
+
+
         xPrev = x;
         yPrev = y;
         zPrev = z;
-        age++;
         x += vx;
         y += vy;
         z += vz;
