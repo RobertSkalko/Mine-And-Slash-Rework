@@ -45,7 +45,7 @@ public class GearCreationUtils {
         }
 
         if (rarity.is_unique_item && blueprint.uniquePart.get() != null) {
-
+           
             UniqueGear unique = blueprint.uniquePart.get();
 
             Preconditions.checkNotNull(unique);

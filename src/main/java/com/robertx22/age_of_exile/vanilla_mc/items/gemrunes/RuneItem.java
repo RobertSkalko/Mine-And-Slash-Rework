@@ -5,11 +5,15 @@ import com.robertx22.age_of_exile.aoe_data.datapacks.models.ItemModelManager;
 import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -27,6 +31,16 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
     @Override
     public AutoLocGroup locNameGroup() {
         return AutoLocGroup.Misc;
+    }
+
+    
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+        if (pLevel.isClientSide) {
+            ClientOnly.runewordsScreen(pPlayer);
+        }
+        return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
+
     }
 
     @Override
@@ -110,6 +124,9 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {
 
         try {
+
+            tooltip.add(Component.literal("Click to Open RuneWord Crafting"));
+            tooltip.add(Component.literal("It will show you Runewords you can craft."));
 
         } catch (Exception e) {
             e.printStackTrace();

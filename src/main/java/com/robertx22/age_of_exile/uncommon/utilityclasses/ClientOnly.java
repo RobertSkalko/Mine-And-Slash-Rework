@@ -1,5 +1,7 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
+import com.robertx22.age_of_exile.inv_gui.GuiInventoryGrids;
+import com.robertx22.age_of_exile.inv_gui.InvGuiScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -11,12 +13,16 @@ import net.minecraft.world.level.Level;
 import java.util.UUID;
 
 public class ClientOnly {
- 
+
     public static int ticksSinceChatWasOpened = 0;
 
     public static void totemAnimWithItem(ItemStack stack) {
         Minecraft.getInstance().player.playSound(SoundEvents.TOTEM_USE, 1, 1);
         Minecraft.getInstance().gameRenderer.displayItemActivation(stack);
+    }
+
+    public static void runewordsScreen(Player p) {
+        Minecraft.getInstance().setScreen(new InvGuiScreen(GuiInventoryGrids.ofCratableRuneWords(p)));
     }
 
     public static Entity getEntityByUUID(Level world, UUID id) {

@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.inv_gui.actions;
 
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
+import com.robertx22.age_of_exile.database.data.runewords.RuneWord;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -16,10 +17,13 @@ import java.util.List;
 public abstract class GuiAction implements IGUID {
 
 
-    static HashMap<String, GuiAction> map = new HashMap<>();
-
+    private static HashMap<String, GuiAction> map = new HashMap<>();
 
     public static GuiAction get(String id) {
+        if (!map.containsKey(id)) {
+            regenActionMap();
+        }
+
         return map.getOrDefault(id, new GuiAction() {
             @Override
             public List<Component> getTooltip(Player p) {
@@ -38,6 +42,12 @@ public abstract class GuiAction implements IGUID {
         });
     }
 
+    private static void of(GuiAction a) {
+        if (!map.containsKey(a.GUID())) {
+            map.put(a.GUID(), a);
+        }
+    }
+
     // do every time before constructing the gui, because we want to use datapack stuff and not care about when its loaded
     public static void regenActionMap() {
 
@@ -46,6 +56,10 @@ public abstract class GuiAction implements IGUID {
                 of(new ToggleAutoSalvageRarity(type, rar));
             }
         }
+        for (RuneWord rw : ExileDB.RuneWords().getList()) {
+            of(new CraftRunewordAction(rw));
+        }
+
     }
 
 
@@ -57,10 +71,6 @@ public abstract class GuiAction implements IGUID {
         return null;
     }
 
-
-    static void of(GuiAction a) {
-        map.put(a.GUID(), a);
-    }
 
     public abstract List<Component> getTooltip(Player p);
 

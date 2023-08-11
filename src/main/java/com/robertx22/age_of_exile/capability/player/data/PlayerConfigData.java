@@ -24,12 +24,13 @@ public class PlayerConfigData {
             ICommonDataItem<GearRarity> data = ICommonDataItem.load(stack);
 
             if (data != null) {
-                if (salvages(data.getSalvageType(), data.getRarityId()))
+                if (salvages(data.getSalvageType(), data.getRarityId())) {
                     SoundUtils.playSound(player, SoundEvents.ANVIL_USE, 1, 1);
-                stack.shrink(100);
-                data.getSalvageResult(stack).forEach(e -> PlayerUtils.giveItem(e, player));
+                    stack.shrink(100);
+                    data.getSalvageResult(stack).forEach(e -> PlayerUtils.giveItem(e, player));
 
-                return true;
+                    return true;
+                }
             }
 
             return false;

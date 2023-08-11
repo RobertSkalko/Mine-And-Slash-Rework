@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.capability.player.helper.MyInventory;
 import com.robertx22.age_of_exile.database.data.currency.IItemAsCurrency;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
+import com.robertx22.age_of_exile.vanilla_mc.items.gemrunes.RuneItem;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -28,7 +29,7 @@ public class Backpacks {
         CURRENCY("currency", Words.Currency) {
             @Override
             public boolean isValid(ItemStack stack) {
-                return stack.getItem() instanceof IItemAsCurrency;
+                return stack.getItem() instanceof IItemAsCurrency || stack.getItem() instanceof RuneItem;
             }
         },
         SKILL_GEMS("skill_gem", Words.SkillGem) {
