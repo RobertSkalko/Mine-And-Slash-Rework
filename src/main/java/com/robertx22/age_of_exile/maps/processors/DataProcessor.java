@@ -4,14 +4,12 @@ package com.robertx22.age_of_exile.maps.processors;
 import com.robertx22.age_of_exile.maps.generator.ChunkProcessData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.SignBlockEntity;
+import net.minecraft.world.level.block.entity.CommandBlockEntity;
 import net.minecraft.world.level.block.entity.StructureBlockEntity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public abstract class DataProcessor {
@@ -35,42 +33,20 @@ public abstract class DataProcessor {
     // ways to detect
     public List<String> detectIds = new ArrayList<>();
 
-    public static List<String> getData(BlockEntity be) {
+    public static String getData(BlockEntity be) {
 
         if (be instanceof StructureBlockEntity struc) {
             CompoundTag nbt = struc.saveWithoutMetadata();
-            return Arrays.asList(nbt.getString("metadata"));
+            return nbt.getString("metadata");
         }
-        if (be instanceof SignBlockEntity sign) {
-            List<String> list = new ArrayList<>();
-            for (Component msg : sign.getFrontText().getMessages(false)) {
-                list.add(msg.getString()); // todo make sure this works
-            }
+        if (be instanceof CommandBlockEntity cb) {
+            return cb.getCommandBlock().getCommand();
         }
 
-        return null;
+        return "";
     }
 
-    public final boolean process(List<String> list, BlockPos pos, Level world, ChunkProcessData chunkData) {
-
-        /*
-        if (true) {
-            // todotest
-            processImplementation("boss", pos, world, chunkData);
-            return true;
-
-        }
-
-         */
-
-        String key = list.get(0);
-
-        if (list.size() > 1) {
-            key = "";
-            for (String s : list) {
-                key += s + ";"; // todo this might be temporary until i get rid of all data blocks and turn all into sings, then it will all be split by sign row
-            }
-        }
+    public final boolean process(String key, BlockPos pos, Level world, ChunkProcessData chunkData) {
 
         if (type == Type.EQUALS && detectIds.contains(key)) {
             processImplementation(key, pos, world, chunkData);

@@ -6,9 +6,9 @@
   "unique_stats": [
     {
       "type": "flat",
-      "max": 2.0,
-      "min": 1.0,
-      "stat": "plus_to_divine"
+      "max": 25.0,
+      "min": 10.0,
+      "stat": "all_lightning_damage"
     },
     {
       "type": "flat",

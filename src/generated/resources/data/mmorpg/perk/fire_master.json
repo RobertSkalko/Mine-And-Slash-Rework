@@ -1,0 +1,14 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/asc_classes/perk/fire_master.png",
+  "id": "fire_master",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "MORE",
+      "scale_to_lvl": false,
+      "stat": "all_fire_damage",
+      "v1": 25.0
+    }
+  ]
+}

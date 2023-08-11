@@ -6,20 +6,14 @@
   "unique_stats": [
     {
       "type": "flat",
-      "max": 2.0,
-      "min": 1.0,
-      "stat": "plus_to_water"
-    },
-    {
-      "type": "flat",
       "max": 25.0,
       "min": 25.0,
       "stat": "mana_per_10_intelligence"
     },
     {
       "type": "flat",
-      "max": 5.0,
-      "min": 3.0,
+      "max": 25.0,
+      "min": 15.0,
       "stat": "spell_damage"
     },
     {

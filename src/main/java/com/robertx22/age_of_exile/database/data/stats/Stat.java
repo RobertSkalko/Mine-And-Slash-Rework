@@ -1,14 +1,12 @@
 package com.robertx22.age_of_exile.database.data.stats;
 
 import com.robertx22.age_of_exile.database.data.stats.datapacks.base.BaseDatapackStat;
-import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DatapackStat;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageIncreaseEffect;
 import com.robertx22.age_of_exile.database.data.stats.name_regex.StatNameRegex;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.modify.IStatCtxModifier;
-import com.robertx22.age_of_exile.uncommon.effectdatas.rework.action.IncreaseNumberByPercentEffect;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
@@ -50,6 +48,7 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
 
     }
 
+
     public boolean show = true;
 
     // can't serialize
@@ -66,23 +65,33 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     public int order = 100;
     public String format = ChatFormatting.AQUA.getName();
     public StatGroup group = StatGroup.Misc;
+    private MultiUseType multiUseType = MultiUseType.MULTIPLY_STAT;
 
 
-    private transient MultiUseType multiUseType = null;
+    public void setMultipliesDamage() {
+        this.multiUseType = MultiUseType.MULTIPLICATIVE_DAMAGE;
+    }
 
     public MultiUseType getMultiUseType() {
-        if (multiUseType == null) {
-            if (this.statEffect instanceof BaseDamageIncreaseEffect || (this instanceof DatapackStat st && st.effect != null && st.effect.effects.contains(IncreaseNumberByPercentEffect.ID))) {
-                multiUseType = MultiUseType.MULTIPLICATIVE_DAMAGE;
-            } else {
-                multiUseType = MultiUseType.MULTIPLY_STAT;
-            }
+        if (this.statEffect instanceof BaseDamageIncreaseEffect) {
+            this.multiUseType = MultiUseType.MULTIPLICATIVE_DAMAGE;
+            return MultiUseType.MULTIPLICATIVE_DAMAGE;
         }
         return multiUseType;
     }
 
     public enum MultiUseType {
-        MULTIPLY_STAT, MULTIPLICATIVE_DAMAGE
+        // todo will this still be confusing
+        MULTIPLY_STAT("Increased", "Reduced"),
+        MULTIPLICATIVE_DAMAGE("More", "Less");
+
+        public String tooltipPrefix;
+        public String tooltipPrefixLess;
+
+        MultiUseType(String tooltipPrefix, String tooltipPrefixLess) {
+            this.tooltipPrefix = tooltipPrefix;
+            this.tooltipPrefixLess = tooltipPrefixLess;
+        }
     }
 
 /*

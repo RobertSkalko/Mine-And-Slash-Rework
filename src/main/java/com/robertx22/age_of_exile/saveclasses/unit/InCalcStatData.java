@@ -61,7 +61,7 @@ public class InCalcStatData {
     public void addFullyTo(InCalcStatData other) {
         other.Flat += Flat;
         other.Percent += Percent;
-        other.Multi += Multi;
+        other.Multi += Multi; // todo might be buggy
 
     }
 /*
@@ -93,14 +93,12 @@ public class InCalcStatData {
 
         float v1 = modData.getFirstValue();
 
-        float v = v1;
-
         if (type == ModType.FLAT) {
             Flat += v1;
         } else if (type == ModType.PERCENT) {
-            Percent += v;
+            Percent += v1;
         } else if (type == ModType.MORE) {
-            Multi *= 1 + (v / 100F);
+            Multi *= 1 + (v1 / 100F);
         }
 
     }
@@ -110,7 +108,7 @@ public class InCalcStatData {
     }
 
     public StatData getCalculated() {
-        float mu = 0;
+        float mu = 1;
         if (GetStat().getMultiUseType() == Stat.MultiUseType.MULTIPLICATIVE_DAMAGE) {
             mu = Multi;
         }

@@ -1,16 +1,25 @@
 package com.robertx22.age_of_exile.saveclasses.spells;
 
+import com.robertx22.age_of_exile.database.OptScaleExactStat;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.spell_school.AscendancyClass;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.saveclasses.ExactStatData;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IApplyableStats;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import net.minecraft.world.entity.LivingEntity;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 
-public class AscendancyClassesData {
+public class AscendancyClassesData implements IApplyableStats {
 
     public HashMap<String, Integer> allocated_lvls = new HashMap<>();
     public String school = "";
@@ -20,6 +29,7 @@ public class AscendancyClassesData {
         this.allocated_lvls = new HashMap<>();
         this.school = "";
     }
+
 
     public int getLevel(String id) {
         return allocated_lvls.getOrDefault(id, 0);
@@ -44,10 +54,10 @@ public class AscendancyClassesData {
         if (!school.isLevelEnoughFor(en, perk)) {
             return false;
         }
-        if (!this.school.isEmpty() && !perk.equals(school)) {
+        if (!this.school.isEmpty() && !this.school.equals(school.GUID())) {
             return false;
         }
-        if (allocated_lvls.getOrDefault(perk, 0) >= perk.getMaxLevel()) {
+        if (allocated_lvls.getOrDefault(perk.GUID(), 0) >= perk.getMaxLevel()) {
             return false;
         }
 
@@ -64,5 +74,17 @@ public class AscendancyClassesData {
 
     }
 
+
+    @Override
+    public List<StatContext> getStatAndContext(LivingEntity en) {
+        List<ExactStatData> stats = new ArrayList<>();
+        for (String s : this.allocated_lvls.keySet()) {
+            for (OptScaleExactStat stat : ExileDB.Perks().get(s).stats) {
+                stats.add(stat.toExactStat(Load.Unit(en).getLevel()));
+            }
+
+        }
+        return Arrays.asList(new SimpleStatCtx(StatContext.StatCtxType.TALENT, stats));
+    }
 
 }

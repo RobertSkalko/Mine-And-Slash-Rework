@@ -12,43 +12,45 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
     public static String WATER = "water";
     public static String UNHOLY = "unholy";
 
+    public static String ELEMENTALIST = "elementalist";
+
+    public enum AscRow {
+        ONE(0),
+        TWO(2),
+        THREE(4),
+        FOUR(6);
+
+        public int y;
+
+        AscRow(int y) {
+            this.y = y;
+        }
+    }
+
     @Override
     public void registerAll() {
+        // todo
 
+        SchoolBuilder.of(ELEMENTALIST, "Elementalist")
+
+                .addFor(AscRow.ONE, AscPerks.FIRE_NOVICE, AscPerks.COLD_NOVICE, AscPerks.LIGHTNING_NOVICE)
+                .addFor(AscRow.TWO, AscPerks.FIRE_APPRENTICE, AscPerks.COLD_APPRENTICE, AscPerks.LIGHTNING_APPRENTICE)
+                .addFor(AscRow.THREE, AscPerks.FIRE_EXPERT, AscPerks.COLD_EXPERT, AscPerks.LIGHTNING_EXPERT)
+                .addFor(AscRow.FOUR, AscPerks.FIRE_MASTER, AscPerks.COLD_MASTER, AscPerks.LIGHTNING_MASTER)
+
+                .build();
+
+
+        /*
         SchoolBuilder.of(DIVINE, "Divine")
 
-                .addFor(0, AscPerks.TEST, AscPerks.TEST, AscPerks.TEST)
+                .addFor(AscRow.ONE, AscPerks.TEST, AscPerks.TEST, AscPerks.TEST)
 
 
                 .build();
 
-        SchoolBuilder.of(HUNTING, "Hunting")
 
-                .addFor(0, AscPerks.TEST, AscPerks.TEST, AscPerks.TEST)
-
-                .build();
-
-        SchoolBuilder.of(NATURE, "Nature")
-
-                .addFor(0, AscPerks.TEST, AscPerks.TEST, AscPerks.TEST)
-
-
-                .build();
-
-        SchoolBuilder.of(FIRE, "Fire")
-                .addFor(0, AscPerks.TEST, AscPerks.TEST, AscPerks.TEST)
-
-                .build();
-
-        SchoolBuilder.of(WATER, "Water")
-                .addFor(0, AscPerks.TEST, AscPerks.TEST, AscPerks.TEST)
-
-                .build();
-
-        SchoolBuilder.of(UNHOLY, "Unholy")
-                .addFor(0, AscPerks.TEST, AscPerks.TEST, AscPerks.TEST)
-
-                .build();
+         */
 
     }
 }

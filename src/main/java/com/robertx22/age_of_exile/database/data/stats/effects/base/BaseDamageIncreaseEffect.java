@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.stats.effects.base;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 
 public abstract class BaseDamageIncreaseEffect extends BaseDamageEffect {
@@ -24,7 +25,9 @@ public abstract class BaseDamageIncreaseEffect extends BaseDamageEffect {
     @Override
     public DamageEvent activate(DamageEvent effect, StatData data, Stat stat) {
         effect.increaseByPercent(data.getValue());
-        effect.increaseByPercent(100 + (data.getMoreStatTypeMulti() * 100F));
+
+        effect.data.getNumber(EventData.NUMBER).number = effect.data.getNumber() * data.getMoreStatTypeMulti();
+
         return effect;
     }
 

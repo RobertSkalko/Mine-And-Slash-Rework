@@ -59,7 +59,6 @@ inc_effect_of_immobilizing_buff_on_you
 faster_projectiles
 piercing_projectiles
 extra_mob_drops
-plus_to_nature
 inc_effect_of_immobilizing_buff_given
 water_dot_damage
 burn_resistance
@@ -130,7 +129,6 @@ ele_staff_damage
 lightning_vuln_crit
 double_attack_chance
 poison_damage
-plus_to_water
 heal_over_time_eff_dur_u_cast
 movement_spell_dmg
 water_focus
@@ -211,7 +209,6 @@ dmg_per_curse_on_target
 fire_resist
 lightning_resist
 electrify_chance
-plus_to_hunting
 curse_eff_dur_u_cast
 lightning_dot_damage
 electrify_duration
@@ -267,7 +264,6 @@ staff_spell_spell_dmg
 elemental_resist
 health_regen_per_10_intelligence
 chaos_penetration
-plus_to_divine
 heal_cleanse
 all_vuln_crit
 totem_shield
@@ -295,7 +291,6 @@ curse_cdr
 arrow_spell_dmg
 lightning_any_wep_damage
 health_on_kill
-plus_to_fire
 int_dmg_received
 fire_penetration
 freeze_strength

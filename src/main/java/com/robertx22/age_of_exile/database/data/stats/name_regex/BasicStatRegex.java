@@ -28,7 +28,7 @@ public class BasicStatRegex extends StatNameRegex {
         }
         if (type == ModType.MORE) {
             if (v1 > 0) {
-                return VALUE + " More " + NAME;
+                return VALUE + " " + stat.getMultiUseType().tooltipPrefix + " " + NAME;
             } else {
                 return VALUE + " Less " + NAME;
 

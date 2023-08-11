@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.jewelry;
 
 import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearTypes;
-import com.robertx22.age_of_exile.aoe_data.database.stats.PlusSkillsInSchoolStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuilder;
 import com.robertx22.age_of_exile.database.data.StatMod;
@@ -39,9 +38,8 @@ public class UniqueNecklaces implements ExileRegistryInit {
                         BaseGearTypes.NECKLACE)
 
                 .stats(Arrays.asList(
-                        new StatMod(1, 2, PlusSkillsInSchoolStats.PLUS_OCEAN),
                         new StatMod(25, 25, DatapackStats.MANA_PER_10_INT, ModType.FLAT),
-                        new StatMod(3, 5, SkillDamage.getInstance(), ModType.FLAT),
+                        new StatMod(15, 25, SkillDamage.getInstance(), ModType.FLAT),
                         new StatMod(1, 3, DatapackStats.STR, ModType.FLAT),
                         new StatMod(2, 6, DatapackStats.DEX, ModType.FLAT)
                 ))

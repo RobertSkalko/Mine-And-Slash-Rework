@@ -1,0 +1,62 @@
+{
+  "id": "elementalist",
+  "lvl_reqs": [
+    1,
+    5,
+    10,
+    20,
+    30,
+    40,
+    50
+  ],
+  "perks": {
+    "cold_apprentice": {
+      "x": 5,
+      "y": 2
+    },
+    "cold_expert": {
+      "x": 5,
+      "y": 4
+    },
+    "cold_master": {
+      "x": 5,
+      "y": 6
+    },
+    "cold_novice": {
+      "x": 5,
+      "y": 0
+    },
+    "fire_apprentice": {
+      "x": 2,
+      "y": 2
+    },
+    "fire_expert": {
+      "x": 2,
+      "y": 4
+    },
+    "fire_master": {
+      "x": 2,
+      "y": 6
+    },
+    "fire_novice": {
+      "x": 2,
+      "y": 0
+    },
+    "lightning_apprentice": {
+      "x": 8,
+      "y": 2
+    },
+    "lightning_expert": {
+      "x": 8,
+      "y": 4
+    },
+    "lightning_master": {
+      "x": 8,
+      "y": 6
+    },
+    "lightning_novice": {
+      "x": 8,
+      "y": 0
+    }
+  }
+}

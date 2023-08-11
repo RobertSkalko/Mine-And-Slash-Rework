@@ -1,11 +1,11 @@
 package com.robertx22.age_of_exile.aoe_data.database.unique_gears.runewords;
 
 import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearTypes;
-import com.robertx22.age_of_exile.aoe_data.database.stats.PlusSkillsInSchoolStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuilder;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
+import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.vanilla_mc.items.gemrunes.RuneItem;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
@@ -21,7 +21,7 @@ public class NecklaceRunewords implements ExileRegistryInit {
                         BaseGearTypes.NECKLACE)
                 .setReplacesName()
                 .stats(Arrays.asList(
-                        new StatMod(1, 2, PlusSkillsInSchoolStats.PLUS_DIVINE),
+                        new StatMod(10, 25, Stats.ELEMENTAL_DAMAGE.get(Elements.Lightning)),
                         new StatMod(10, 20, Stats.HEAL_STRENGTH.get()),
                         new StatMod(5, 15, Armor.getInstance())
                 ))

@@ -20,7 +20,6 @@ import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
 import com.robertx22.age_of_exile.aoe_data.database.spells.Spells;
 import com.robertx22.age_of_exile.aoe_data.database.stat_conditions.StatConditions;
 import com.robertx22.age_of_exile.aoe_data.database.stat_effects.StatEffects;
-import com.robertx22.age_of_exile.aoe_data.database.stats.PlusSkillsInSchoolStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.AutoDatapackStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
@@ -46,8 +45,7 @@ public class GeneratedData {
         new Spells().registerAll();
         new SpellSchoolsAdder().registerAll();
 
-        new PlusSkillsInSchoolStats().registerAll();
-
+    
         new GearSlots().registerAll();
         new BaseGearsAdder().registerAll();
         new UniqueGearReg().registerAll();

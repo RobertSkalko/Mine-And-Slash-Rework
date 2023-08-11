@@ -250,11 +250,12 @@ public class Unit {
 
                 statContexts.addAll(Load.playerRPGData((Player) entity).getSkillGemInventory().getAuraStats(entity));
 
+                
                 Load.playerRPGData((Player) entity).statPoints.addStats(this);
 
                 statContexts.addAll(PlayerStatUtils.AddPlayerBaseStats(entity));
-                statContexts.addAll(Load.playerRPGData((Player) entity).talents
-                        .getStatAndContext(entity));
+                statContexts.addAll(Load.playerRPGData((Player) entity).talents.getStatAndContext(entity));
+                statContexts.addAll(Load.playerRPGData((Player) entity).ascClass.getStatAndContext(entity));
 
                 if (skillGem > -1 && skillGem <= GemInventoryHelper.MAX_SKILL_GEMS) {
                     for (SkillGemData d : Load.playerRPGData((Player) entity).getSkillGemInventory().getHotbarGem(skillGem).getSupportDatas()) {
@@ -355,7 +356,7 @@ public class Unit {
 
             if (entity instanceof Player) {
 
-                
+
                 this.getStats().stats.values()
                         .forEach(x -> {
 

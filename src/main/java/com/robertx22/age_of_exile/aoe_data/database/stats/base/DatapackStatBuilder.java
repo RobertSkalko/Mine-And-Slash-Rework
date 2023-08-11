@@ -34,6 +34,7 @@ public class DatapackStatBuilder<T> {
     private Function<T, StatCondition> conditionMaker;
     private Consumer<DatapackStat> modifyAfterDone;
 
+    public boolean multiDmg = false;
     private List<StatCondition> conditions = new ArrayList<>();
     private List<StatEffect> effects = new ArrayList<>();
 
@@ -114,6 +115,11 @@ public class DatapackStatBuilder<T> {
         return this;
     }
 
+    public DatapackStatBuilder<T> setMultipliesDamage() {
+        this.multiDmg = true;
+        return this;
+    }
+
     public DatapackStatBuilder<T> setPriority(int priority) {
         this.priority = priority;
         return this;
@@ -148,48 +154,51 @@ public class DatapackStatBuilder<T> {
         ErrorUtils.ifFalse(!events.isEmpty());
 
         stats.entrySet()
-            .forEach(x -> {
+                .forEach(x -> {
 
-                DatapackStat stat = x.getValue();
-                stat.id = idMaker.apply(x.getKey());
-                stat.ele = elementMaker.apply(x.getKey());
-                stat.locdesc = locDescMaker.apply(x.getKey());
-                stat.locname = locNameMaker.apply(x.getKey());
+                    DatapackStat stat = x.getValue();
+                    stat.id = idMaker.apply(x.getKey());
+                    stat.ele = elementMaker.apply(x.getKey());
+                    stat.locdesc = locDescMaker.apply(x.getKey());
+                    stat.locname = locNameMaker.apply(x.getKey());
 
-                if (modify.containsKey(x.getKey())) {
-                    modify.get(x.getKey())
-                        .accept(stat);
-                }
-                if (modifyAfterDone != null) {
-                    modifyAfterDone.accept(stat);
-                }
-
-                stat.effect.order = priority;
-                stat.effect.events = events;
-                stat.effect.side = side;
-                this.conditions.forEach(c -> stat.effect.ifs.add(c.GUID()));
-                this.effects.forEach(c -> {
-                    stat.effect.effects.add(c.GUID());
-                });
-                if (this.effectMaker != null) {
-                    T key = x.getKey();
-
-                    StatEffect effect = effectMaker.apply(key);
-                    if (effect == null) {
-                        System.out.print("Can't make effect for key: " + key.toString());
+                    if (multiDmg) {
+                        stat.setMultipliesDamage();
                     }
-                    stat.effect.effects.add(effect.GUID());
+                    if (modify.containsKey(x.getKey())) {
+                        modify.get(x.getKey())
+                                .accept(stat);
+                    }
+                    if (modifyAfterDone != null) {
+                        modifyAfterDone.accept(stat);
+                    }
 
-                }
-                if (this.conditionMaker != null) {
-                    stat.effect.ifs.add(this.conditionMaker.apply(x.getKey())
-                        .GUID());
-                }
+                    stat.effect.order = priority;
+                    stat.effect.events = events;
+                    stat.effect.side = side;
+                    this.conditions.forEach(c -> stat.effect.ifs.add(c.GUID()));
+                    this.effects.forEach(c -> {
+                        stat.effect.effects.add(c.GUID());
+                    });
+                    if (this.effectMaker != null) {
+                        T key = x.getKey();
 
-                accessor.add(x.getKey(), stat);
+                        StatEffect effect = effectMaker.apply(key);
+                        if (effect == null) {
+                            System.out.print("Can't make effect for key: " + key.toString());
+                        }
+                        stat.effect.effects.add(effect.GUID());
 
-                STATS_TO_ADD_TO_SERIALIZATION.add(stat);
-            });
+                    }
+                    if (this.conditionMaker != null) {
+                        stat.effect.ifs.add(this.conditionMaker.apply(x.getKey())
+                                .GUID());
+                    }
+
+                    accessor.add(x.getKey(), stat);
+
+                    STATS_TO_ADD_TO_SERIALIZATION.add(stat);
+                });
 
         return this.accessor;
     }

@@ -55,7 +55,7 @@ public class ProcessChunkBlocks {
                 if (!mapdata.map.getMap(start).isPresent()) {
                     return;
                 }
-                
+
                 List<ChunkPos> chunks = new ArrayList<>();
                 chunks.add(start);
 
@@ -94,10 +94,9 @@ public class ProcessChunkBlocks {
 
                             for (BlockPos tilePos : chunk.getBlockEntitiesPos()) {
 
-
                                 BlockEntity tile = level.getBlockEntity(tilePos);
-                                var textList = DataProcessor.getData(tile);
-                                if (textList != null) {
+                                var text = DataProcessor.getData(tile);
+                                if (!text.isEmpty()) {
 
 
                                     boolean any = false;
@@ -105,7 +104,7 @@ public class ProcessChunkBlocks {
                                     // todo make this work on either signs or these blocks
 
                                     for (DataProcessor processor : DataProcessors.getAll()) {
-                                        boolean did = processor.process(textList, tilePos, level, data);
+                                        boolean did = processor.process(text, tilePos, level, data);
                                         if (did) {
                                             any = true;
                                         }
@@ -125,10 +124,9 @@ public class ProcessChunkBlocks {
 
                                     } else {
 
-                                        for (String s : textList) {
-                                            System.out.println("Data block with tag: " + s + " matched no processors! " + tilePos.toString());
-                                            logRoomForPos(level, tilePos);
-                                        }
+                                        System.out.println("Data block with tag: " + text + " matched no processors! " + tilePos.toString());
+                                        logRoomForPos(level, tilePos);
+
 
                                     }
                                 }

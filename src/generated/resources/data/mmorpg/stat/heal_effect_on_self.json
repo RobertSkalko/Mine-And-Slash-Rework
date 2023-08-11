@@ -24,6 +24,7 @@
   "is_perc": true,
   "max": 2.14748365E9,
   "min": -100.0,
+  "multiUseType": "MULTIPLY_STAT",
   "order": 100,
   "scaling": "NONE",
   "ser": "data",

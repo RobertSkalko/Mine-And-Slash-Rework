@@ -17,10 +17,10 @@ public class SchoolBuilder {
     }
 
 
-    public SchoolBuilder addFor(int y, String p1, String p2, String p3) {
-        add(p1, new PointData(2, y));
-        add(p2, new PointData(5, y));
-        add(p3, new PointData(8, y));
+    public SchoolBuilder addFor(SpellSchoolsAdder.AscRow row, String p1, String p2, String p3) {
+        add(p1, new PointData(2, row.y));
+        add(p2, new PointData(5, row.y));
+        add(p3, new PointData(8, row.y));
         return this;
     }
 

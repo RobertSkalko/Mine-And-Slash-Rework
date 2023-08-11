@@ -19,11 +19,10 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.List;
 
 public class AscendancyClassScreen extends BaseScreen implements INamedScreen, ILeftRight {
-    private static final ResourceLocation BACKGROUND = new ResourceLocation(SlashRef.MODID, "textures/gui/spells/spell_school_background.png");
+    private static final ResourceLocation BACKGROUND = new ResourceLocation(SlashRef.MODID, "textures/gui/asc_classes/background.png");
 
     static int sizeX = 250;
     static int sizeY = 233;
-    public static int NUMBER_OF_HOTBAR_FOR_PICKING = 0;
 
     Minecraft mc = Minecraft.getInstance();
 
@@ -48,7 +47,7 @@ public class AscendancyClassScreen extends BaseScreen implements INamedScreen, I
 
     @Override
     public Words screenName() {
-        return Words.Skills;
+        return Words.AscClasses;
     }
 
     static int SLOT_SPACING = 21;
