@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEntity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
@@ -52,7 +53,7 @@ public class SummonPetAction extends SpellAction {
 
             int duration = data.get(MapField.LIFESPAN_TICKS).intValue();
 
-            duration *= ctx.calculatedSpellData.summon_duration_multi;
+            duration *= ctx.calculatedSpellData.data.getNumber(EventData.SUMMON_DURATION_MULTI, 1).number;
 
             Load.Unit(en).summonedPetData.setup(ctx.calculatedSpellData.getSpell(), duration);
 

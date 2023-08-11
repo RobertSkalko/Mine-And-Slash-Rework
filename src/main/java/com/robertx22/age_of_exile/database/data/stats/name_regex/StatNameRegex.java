@@ -63,10 +63,9 @@ public abstract class StatNameRegex {
         }
         if (type == ModType.MORE) {
             if (v1 > 0) {
-                add += "More ";
+                add += stat.getMultiUseType().tooltipPrefix + " ";
             } else {
-                add += "Less ";
-
+                add += stat.getMultiUseType().tooltipPrefixLess + " ";
             }
         }
 

@@ -1,24 +1,24 @@
-package com.robertx22.age_of_exile.aoe_data.database.perks;
+package com.robertx22.age_of_exile.aoe_data.database.perks.asc;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
+import com.robertx22.age_of_exile.aoe_data.database.perks.PerkBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
-import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
-import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalPenetration;
+import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDamage;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
-public class AscPerks implements ExileRegistryInit {
-    public static String TEST = "test";
+public class WarlockPerks implements ExileRegistryInit {
 
-    public static String FIRE_NOVICE = "fire_novice";
-    public static String COLD_NOVICE = "cold_novice";
-    public static String LIGHTNING_NOVICE = "lightning_novice";
 
-    public static String FIRE_APPRENTICE = "fire_apprentice";
-    public static String COLD_APPRENTICE = "cold_apprentice";
+    public static String POISON_1 = "poison1";
+    public static String CHAOS_1 = "chaos1";
+// todo do curses later    public static String CURSE1 = "curse1";
+
+    public static String POISON_2 = "poison2";
+    public static String CHAOS_2 = "chaos2";
     public static String LIGHTNING_APPRENTICE = "lightning_apprentice";
 
     public static String FIRE_EXPERT = "fire_expert";
@@ -32,12 +32,12 @@ public class AscPerks implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
-
-        PerkBuilder.stat(TEST, new OptScaleExactStat(100, DatapackStats.STR, ModType.FLAT));
-
-        PerkBuilder.ascPoint(FIRE_NOVICE, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Fire), ModType.FLAT));
-        PerkBuilder.ascPoint(COLD_NOVICE, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Cold), ModType.FLAT));
-        PerkBuilder.ascPoint(LIGHTNING_NOVICE, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Lightning), ModType.FLAT));
+  
+        PerkBuilder.ascPoint(POISON_1, new OptScaleExactStat(25, new AilmentDamage(Ailments.POISON), ModType.FLAT), new OptScaleExactStat(10, new AilmentChance(Ailments.POISON), ModType.FLAT));
+        PerkBuilder.ascPoint(CHAOS_1, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Chaos), ModType.FLAT));
+        
+        /*
+        PerkBuilder.ascPoint(CURSE1, new OptScaleExactStat(10, Stats.ELEMENTAL_DAMAGE.get(Elements.Chaos), ModType.FLAT)); // todo curse stats
 
         PerkBuilder.ascPoint(FIRE_APPRENTICE, new OptScaleExactStat(10, new AilmentChance(Ailments.BURN), ModType.FLAT));
         PerkBuilder.ascPoint(COLD_APPRENTICE, new OptScaleExactStat(10, new AilmentChance(Ailments.FREEZE), ModType.FLAT));
@@ -50,6 +50,8 @@ public class AscPerks implements ExileRegistryInit {
         PerkBuilder.ascPoint(FIRE_MASTER, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Fire), ModType.MORE));
         PerkBuilder.ascPoint(COLD_MASTER, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Cold), ModType.MORE));
         PerkBuilder.ascPoint(LIGHTNING_MASTER, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Lightning), ModType.MORE));
+        
+         */
 
     }
 }

@@ -19,6 +19,7 @@ import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -160,9 +161,9 @@ public class SkillGemData implements ISalvagable {
         return ExileText.ofText(txt).get();
     }
 
-    public List<MutableComponent> getTooltip(Player p) {
+    public List<Component> getTooltip(Player p) {
 
-        List<MutableComponent> list = new ArrayList<>();
+        List<Component> list = new ArrayList<>();
 
         GearRarity rar = getRarity();
 
@@ -172,7 +173,7 @@ public class SkillGemData implements ISalvagable {
             if (spell == null) {
                 return list;
             }
-            for (MutableComponent c : spell.GetTooltipString(new TooltipInfo(p))) {
+            for (Component c : spell.GetTooltipString(new TooltipInfo(p))) {
                 list.add(c);
             }
             list.add(ExileText.emptyLine().get());

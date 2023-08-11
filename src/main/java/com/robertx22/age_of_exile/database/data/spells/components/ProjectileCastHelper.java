@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.database.data.spells.components;
 
-import com.robertx22.age_of_exile.database.data.spells.entities.EntitySavedSpellData;
+import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
@@ -23,7 +23,7 @@ public class ProjectileCastHelper {
     public int projectilesAmount = 1;
     public boolean gravity = true;
     EntityType projectile;
-    EntitySavedSpellData data;
+    CalculatedSpellData data;
     MapHolder holder;
     Vec3 pos;
 
@@ -42,7 +42,7 @@ public class ProjectileCastHelper {
 
     SpellCtx ctx;
 
-    public ProjectileCastHelper(SpellCtx ctx, Vec3 pos, MapHolder holder, LivingEntity caster, EntityType projectile, EntitySavedSpellData data) {
+    public ProjectileCastHelper(SpellCtx ctx, Vec3 pos, MapHolder holder, LivingEntity caster, EntityType projectile, CalculatedSpellData data) {
         this.ctx = ctx;
         this.projectile = projectile;
         this.caster = caster;

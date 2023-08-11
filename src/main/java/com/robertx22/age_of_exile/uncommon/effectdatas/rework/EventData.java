@@ -16,6 +16,7 @@ public class EventData {
     public static String AILMENT = "ailment";
 
     public static String NUMBER = "number";
+    public static String ITEM_ID = "item_id";
     public static String IS_SUMMON_ATTACK = "is_summon_attack";
     public static String CANCELED = "canceled";
     public static String CRIT = "crit";
@@ -49,6 +50,7 @@ public class EventData {
     public static String AREA_MULTI = "area";
     public static String PIERCE = "pierce";
     public static String PROJECTILE_SPEED_MULTI = "proj_speed";
+    public static String BONUS_PROJECTILES = "bonus_proj";
     public static String SUMMON_DURATION_MULTI = "summon_duration";
 
     private boolean isFrozen = false;
@@ -77,10 +79,16 @@ public class EventData {
         this.getOriginalNumber(id).number = num;
     }
 
-    // todo if this doesnt create new one, all getters just modify the empty, woops.
     public WrappedFloat getNumber(String id) {
         if (!floats.containsKey(id)) {
             floats.put(id, new WrappedFloat(0));
+        }
+        return floats.get(id);
+    }
+
+    public WrappedFloat getNumber(String id, float defNum) {
+        if (!floats.containsKey(id)) {
+            floats.put(id, new WrappedFloat(defNum));
         }
         return floats.get(id);
     }

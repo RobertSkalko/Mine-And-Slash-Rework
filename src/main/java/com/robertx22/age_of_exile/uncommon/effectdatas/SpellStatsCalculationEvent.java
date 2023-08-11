@@ -2,13 +2,15 @@ package com.robertx22.age_of_exile.uncommon.effectdatas;
 
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
-import com.robertx22.age_of_exile.database.data.spells.entities.EntitySavedSpellData;
+import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+
+import java.util.Objects;
 
 public class SpellStatsCalculationEvent extends EffectEvent {
     public static String ID = "on_spell_stat_calc";
@@ -20,17 +22,19 @@ public class SpellStatsCalculationEvent extends EffectEvent {
 
     int lvl;
 
-    public EntitySavedSpellData savedData;
+    public CalculatedSpellData savedData;
 
-    public SpellStatsCalculationEvent(EntitySavedSpellData savedData, LivingEntity caster, String spellid) {
+    public SpellStatsCalculationEvent(LivingEntity caster, String spellid) {
         super(caster, caster);
-
-        this.savedData = savedData;
-        this.lvl = Load.Unit(caster)
-                .getLevel();
 
         Spell spell = ExileDB.Spells()
                 .get(spellid);
+
+
+        this.savedData = create(Load.Unit(caster).getLevel(), caster, spell);
+        this.lvl = Load.Unit(caster)
+                .getLevel();
+
         if (spell.config.scale_mana_cost_to_player_lvl) {
             lvl = this.sourceData.getLevel();
         }
@@ -52,20 +56,30 @@ public class SpellStatsCalculationEvent extends EffectEvent {
         this.data.setupNumber(EventData.PROJECTILE_SPEED_MULTI, 1F);
         this.data.setupNumber(EventData.SUMMON_DURATION_MULTI, 1F);
         this.data.setupNumber(EventData.AREA_MULTI, 1);
+
+        // todo test spells like summon duration multi etc
     }
 
+    
     @Override
     protected void activate() {
 
         int cd = (int) Mth.clamp(data.getNumber(EventData.COOLDOWN_TICKS).number, getSpell().config.cooldown_ticks * 0.2D, 1000000);
         this.data.getNumber(EventData.COOLDOWN_TICKS).number = cd; // cap it to 80% cooldown
 
-        savedData.proj_speed_multi = data.getNumber(EventData.PROJECTILE_SPEED_MULTI).number;
-        savedData.summon_duration_multi = data.getNumber(EventData.SUMMON_DURATION_MULTI).number;
-        savedData.pierce = data.getBoolean(EventData.PIERCE);
-        savedData.area_multi = data.getNumber(EventData.AREA_MULTI).number;
-        savedData.lvl = lvl;
-
+        this.savedData.data = data;
     }
+
+    private CalculatedSpellData create(int lvl, LivingEntity caster, Spell spell) {
+        Objects.requireNonNull(caster);
+
+        CalculatedSpellData data = new CalculatedSpellData(this);
+        data.spell_id = spell.GUID();
+        data.lvl = lvl;
+        data.caster_uuid = caster.getUUID().toString();
+
+        return data;
+    }
+
 
 }

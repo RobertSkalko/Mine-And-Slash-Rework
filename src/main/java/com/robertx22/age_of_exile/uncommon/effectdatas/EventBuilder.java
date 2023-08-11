@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.uncommon.effectdatas;
 import com.robertx22.age_of_exile.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
+import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.effectdatas.builders.DamageBuilder;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
@@ -16,8 +17,8 @@ public class EventBuilder<T extends EffectEvent> {
 
     protected T event;
 
-    public static EventBuilder<ExilePotionEvent> ofEffect(LivingEntity caster, LivingEntity target, int lvl, ExileEffect effect, GiveOrTake giveOrTake, int ticks) {
-        ExilePotionEvent event = new ExilePotionEvent(lvl, effect, giveOrTake, caster, target, ticks);
+    public static EventBuilder<ExilePotionEvent> ofEffect(CalculatedSpellData calc, LivingEntity caster, LivingEntity target, int lvl, ExileEffect effect, GiveOrTake giveOrTake, int ticks) {
+        ExilePotionEvent event = new ExilePotionEvent(calc, lvl, effect, giveOrTake, caster, target, ticks);
         EventBuilder<ExilePotionEvent> b = new EventBuilder();
         b.event = event;
         return b;

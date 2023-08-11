@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -49,14 +50,14 @@ public class SummonProjectileAction extends SpellAction {
         boolean silent = data.getOrDefault(MapField.IS_SILENT, false);
 
         ProjectileCastHelper builder = new ProjectileCastHelper(ctx, pos, data, ctx.caster, projectile.get(), ctx.calculatedSpellData);
-        builder.projectilesAmount = data.get(MapField.PROJECTILE_COUNT)
-                .intValue() + ctx.calculatedSpellData.extra_proj;
+        builder.projectilesAmount = (int) (data.get(MapField.PROJECTILE_COUNT) + ctx.calculatedSpellData.data.getNumber(EventData.BONUS_PROJECTILES, 0).number);
+        ;
         builder.silent = silent;
 
         builder.shootSpeed = data.get(MapField.PROJECTILE_SPEED)
                 .floatValue();
 
-        builder.shootSpeed *= ctx.calculatedSpellData.proj_speed_multi;
+        builder.shootSpeed *= ctx.calculatedSpellData.data.getNumber(EventData.PROJECTILE_SPEED_MULTI, 1).number;
 
         builder.apart = data.getOrDefault(MapField.PROJECTILES_APART, 75D)
                 .floatValue();

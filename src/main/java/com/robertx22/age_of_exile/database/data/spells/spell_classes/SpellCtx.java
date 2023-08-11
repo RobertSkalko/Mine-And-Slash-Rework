@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.database.data.spells.spell_classes;
 
 import com.robertx22.age_of_exile.database.data.spells.components.EntityActivation;
-import com.robertx22.age_of_exile.database.data.spells.entities.EntitySavedSpellData;
+import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
@@ -26,12 +26,11 @@ public class SpellCtx {
 
     public final EntityActivation activation;
 
-
-    public EntitySavedSpellData calculatedSpellData;
+    public CalculatedSpellData calculatedSpellData;
 
     public boolean isCastedFromTotem = false;
 
-    private SpellCtx(EntityActivation act, Entity sourceEntity, LivingEntity caster, LivingEntity target, BlockPos pos, Vec3 vec, EntitySavedSpellData calculatedSpellData) {
+    private SpellCtx(EntityActivation act, Entity sourceEntity, LivingEntity caster, LivingEntity target, BlockPos pos, Vec3 vec, CalculatedSpellData calculatedSpellData) {
         this.sourceEntity = sourceEntity;
         this.caster = caster;
         this.target = target;
@@ -44,13 +43,13 @@ public class SpellCtx {
 
     }
 
-    public static SpellCtx onCast(LivingEntity caster, EntitySavedSpellData data) {
+    public static SpellCtx onCast(LivingEntity caster, CalculatedSpellData data) {
         Objects.requireNonNull(caster);
         Objects.requireNonNull(data);
         return new SpellCtx(EntityActivation.ON_CAST, caster, caster, caster, caster.blockPosition(), caster.position(), data);
     }
 
-    public static SpellCtx onHit(LivingEntity caster, Entity sourceEntity, LivingEntity target, EntitySavedSpellData data) {
+    public static SpellCtx onHit(LivingEntity caster, Entity sourceEntity, LivingEntity target, CalculatedSpellData data) {
         Objects.requireNonNull(caster);
         Objects.requireNonNull(sourceEntity);
         Objects.requireNonNull(data);
@@ -59,7 +58,7 @@ public class SpellCtx {
         return new SpellCtx(EntityActivation.ON_HIT, sourceEntity, caster, target, target.blockPosition(), target.position(), data);
     }
 
-    public static SpellCtx onTotemCastSpell(LivingEntity caster, Entity sourceEntity, EntitySavedSpellData data) {
+    public static SpellCtx onTotemCastSpell(LivingEntity caster, Entity sourceEntity, CalculatedSpellData data) {
         Objects.requireNonNull(caster);
         Objects.requireNonNull(sourceEntity);
         Objects.requireNonNull(data);
@@ -75,7 +74,7 @@ public class SpellCtx {
         return new SpellCtx(EntityActivation.PER_ENTITY_HIT, ctx.sourceEntity, ctx.caster, target, target.blockPosition(), target.position(), ctx.calculatedSpellData);
     }
 
-    public static SpellCtx onExpire(LivingEntity caster, Entity sourceEntity, EntitySavedSpellData data) {
+    public static SpellCtx onExpire(LivingEntity caster, Entity sourceEntity, CalculatedSpellData data) {
         Objects.requireNonNull(caster);
         Objects.requireNonNull(sourceEntity);
         Objects.requireNonNull(data);
@@ -83,7 +82,7 @@ public class SpellCtx {
         return new SpellCtx(EntityActivation.ON_EXPIRE, sourceEntity, caster, target, sourceEntity.blockPosition(), sourceEntity.position(), data);
     }
 
-    public static SpellCtx onTick(LivingEntity caster, Entity sourceEntity, EntitySavedSpellData data) {
+    public static SpellCtx onTick(LivingEntity caster, Entity sourceEntity, CalculatedSpellData data) {
         Objects.requireNonNull(caster);
         Objects.requireNonNull(sourceEntity);
         Objects.requireNonNull(data);

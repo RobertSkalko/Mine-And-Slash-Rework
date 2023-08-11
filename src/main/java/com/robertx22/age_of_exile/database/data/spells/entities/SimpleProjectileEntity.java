@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.database.data.spells.entities.renders.IMyRende
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.Utilities;
@@ -45,7 +46,7 @@ import java.util.UUID;
 
 public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAsItem, IDatapackSpellEntity {
 
-    EntitySavedSpellData spellData;
+    CalculatedSpellData spellData;
 
     private int xTile;
     private int yTile;
@@ -396,7 +397,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
 
             this.setDeathTime(nbt.getInt("deathTime"));
 
-            this.spellData = GSON.fromJson(nbt.getString("data"), EntitySavedSpellData.class);
+            this.spellData = GSON.fromJson(nbt.getString("data"), CalculatedSpellData.class);
         } catch (JsonSyntaxException e) {
             e.printStackTrace();
         }
@@ -438,13 +439,13 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
         return false;
     }
 
-    public EntitySavedSpellData getSpellData() {
+    public CalculatedSpellData getSpellData() {
         try {
             if (level().isClientSide) {
                 if (spellData == null) {
                     CompoundTag nbt = entityData.get(SPELL_DATA);
                     if (nbt != null) {
-                        this.spellData = GSON.fromJson(nbt.getString("spell"), EntitySavedSpellData.class);
+                        this.spellData = GSON.fromJson(nbt.getString("spell"), CalculatedSpellData.class);
                     }
                 }
             }
@@ -457,7 +458,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
     @Override
     public ItemStack getItem() {
         try {
-            Item item = VanillaUTIL.REGISTRY.items().get(new ResourceLocation(getSpellData().item_id));
+            Item item = VanillaUTIL.REGISTRY.items().get(new ResourceLocation(getSpellData().data.getString(EventData.ITEM_ID)));
             if (item != null) {
                 return new ItemStack(item);
             }
@@ -478,7 +479,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
     }
 
     @Override
-    public void init(LivingEntity caster, EntitySavedSpellData data, MapHolder holder) {
+    public void init(LivingEntity caster, CalculatedSpellData data, MapHolder holder) {
         this.spellData = data;
 
         this.pickup = Pickup.DISALLOWED;
@@ -493,11 +494,11 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
 
         this.checkInsideBlocks();
 
-        if (data.pierce) {
+        if (data.data.getBoolean(EventData.PIERCE)) {
             this.entityData.set(EXPIRE_ON_ENTITY_HIT, false);
         }
 
-        data.item_id = holder.get(MapField.ITEM);
+        data.data.setString(EventData.ITEM_ID, holder.get(MapField.ITEM));
         CompoundTag nbt = new CompoundTag();
         nbt.putString("spell", GSON.toJson(spellData));
         entityData.set(SPELL_DATA, nbt);

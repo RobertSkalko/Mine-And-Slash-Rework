@@ -37,7 +37,6 @@ import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
@@ -211,11 +210,11 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         return (int) ctx.event.data.getNumber(EventData.MANA_COST).number;
     }
 
-    public final List<MutableComponent> GetTooltipString(TooltipInfo info) {
+    public final List<Component> GetTooltipString(TooltipInfo info) {
 
         SpellCastContext ctx = new SpellCastContext(info.player, 0, this);
 
-        List<MutableComponent> list = new ArrayList<>();
+        List<Component> list = new ArrayList<>();
 
         list.add(locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
 
@@ -297,7 +296,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
         list.add(Component.literal("Level: " + currentlvl + "/" + maxlvl).withStyle(ChatFormatting.YELLOW));
 
-        TooltipUtils.removeDoubleBlankLines(TooltipUtils.mutableToComp(list));
+        TooltipUtils.removeDoubleBlankLines(list);
 
         return list;
 

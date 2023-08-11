@@ -5,6 +5,6 @@ import net.minecraft.world.entity.LivingEntity;
 
 public interface IDatapackSpellEntity {
 
-    public void init(LivingEntity caster, EntitySavedSpellData data, MapHolder holder);
+    public void init(LivingEntity caster, CalculatedSpellData data, MapHolder holder);
 
 }

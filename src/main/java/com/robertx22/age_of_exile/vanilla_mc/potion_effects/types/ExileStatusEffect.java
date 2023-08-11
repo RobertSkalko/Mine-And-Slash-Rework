@@ -7,10 +7,6 @@ import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffectInstanc
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import com.robertx22.age_of_exile.saveclasses.ExactStatData;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IApplyableStats;
-import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
-import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.vanilla_mc.potion_effects.IOneOfATypePotion;
 import com.robertx22.library_of_exile.registry.IGUID;
@@ -18,11 +14,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-public class ExileStatusEffect extends MobEffect implements IGUID, IApplyableStats, IOneOfATypePotion {
+public class ExileStatusEffect extends MobEffect implements IGUID, IOneOfATypePotion {
 
     String exileEffectId;
 
@@ -93,17 +85,16 @@ public class ExileStatusEffect extends MobEffect implements IGUID, IApplyableSta
 
         try {
 
-            ExileEffect exect = getExileEffect();
-            exect.mc_stats.forEach(x -> x.removeVanillaStats(target));
+            ExileEffect exileEffect = getExileEffect();
+            exileEffect.mc_stats.forEach(x -> x.removeVanillaStats(target));
 
             ExileEffectInstanceData data = getSavedData(target);
 
-            if (data != null && data.spellData != null) {
-                LivingEntity caster = data.spellData.getCaster(target.level());
-                if (caster != null && exect.spell != null) {
-                    SpellCtx ctx = SpellCtx.onExpire(caster, target, data.spellData);
-
-                    exect.spell.tryActivate(Spell.DEFAULT_EN_NAME, ctx); // source is default name at all times
+            if (data != null) {
+                LivingEntity caster = data.getCaster(target.level());
+                if (caster != null && exileEffect.spell != null) {
+                    SpellCtx ctx = SpellCtx.onExpire(caster, target, data.calcSpell);
+                    exileEffect.spell.tryActivate(Spell.DEFAULT_EN_NAME, ctx); // source is default name at all times
                 }
             }
 
@@ -139,16 +130,16 @@ public class ExileStatusEffect extends MobEffect implements IGUID, IApplyableSta
 
             ExileEffectInstanceData data = getSavedData(entity);
 
-            if (data == null || data.spellData == null) {
+            if (data == null) {
                 return;
             }
 
-            LivingEntity caster = data.spellData.getCaster(entity.level());
+            LivingEntity caster = data.getCaster(entity.level());
             if (caster == null) {
                 return;
             }
 
-            SpellCtx ctx = SpellCtx.onTick(caster, entity, data.spellData);
+            SpellCtx ctx = SpellCtx.onTick(caster, entity, data.calcSpell);
             exect.spell.tryActivate(Spell.DEFAULT_EN_NAME, ctx); // source is default name at all times
         } catch (Exception e) {
             e.printStackTrace();
@@ -160,26 +151,6 @@ public class ExileStatusEffect extends MobEffect implements IGUID, IApplyableSta
         return exileEffectId;
     }
 
-    @Override
-    public List<StatContext> getStatAndContext(LivingEntity en) {
-
-        List<ExactStatData> stats = new ArrayList<>();
-
-        ExileEffectInstanceData data = getSavedData(en);
-        if (data != null) {
-            int stacks = data.stacks;
-
-            if (data.spellData != null) {
-                int casterlvl = data.spellData.lvl;
-
-                getExileEffect().getExactStats(en.level(), data.spellData)
-                        .stream()
-                        .forEach(x -> stats.add(x));
-            }
-        }
-
-        return Arrays.asList(new SimpleStatCtx(StatContext.StatCtxType.POTION_EFFECT, stats));
-    }
 
     @Override
     public String getOneOfATypeType() {

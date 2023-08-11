@@ -49,9 +49,8 @@ public class TellServerToCastSpellPacket extends MyPacket<TellServerToCastSpellP
             if (spells.spellCastingData
                     .canCast(spell, player)) {
 
-                spells.spellCastingData
-                        .setToCast(spell, player);
                 SpellCastContext c = new SpellCastContext(player, 0, spell);
+                spells.spellCastingData.setToCast(c);
 
                 spell.spendResources(c);
                 spells.syncToClient(player);

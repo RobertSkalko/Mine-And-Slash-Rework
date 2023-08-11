@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.database.data.spells.spell_classes;
 
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
-import com.robertx22.age_of_exile.database.data.spells.entities.EntitySavedSpellData;
+import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.database.data.spells.entities.IDatapackSpellEntity;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
@@ -49,7 +49,7 @@ public class SpellUtils {
 
     }
 
-    public static void initSpellEntity(Entity spellEntity, LivingEntity caster, EntitySavedSpellData data, MapHolder holder) {
+    public static void initSpellEntity(Entity spellEntity, LivingEntity caster, CalculatedSpellData data, MapHolder holder) {
 
         IDatapackSpellEntity se = (IDatapackSpellEntity) spellEntity;
         se.init(caster, data, holder);

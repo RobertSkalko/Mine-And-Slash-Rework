@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.database.data.spells.components.conditions;
 
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,16 +22,16 @@ public class EntityInRadiusCondition extends EffectCondition {
         AllyOrEnemy predicate = data.getEntityPredicate();
         Double radius = data.get(RADIUS);
 
-        radius *= ctx.calculatedSpellData.area_multi;
+        radius *= ctx.calculatedSpellData.data.getNumber(EventData.AREA_MULTI, 1).number;
 
         EntityFinder.Setup<LivingEntity> finder = EntityFinder.start(ctx.caster, LivingEntity.class, ctx.sourceEntity.position())
-            .finder(EntityFinder.SelectionType.RADIUS)
-            .searchFor(predicate)
-            .height(data.getOrDefault(HEIGHT, radius))
-            .radius(radius);
+                .finder(EntityFinder.SelectionType.RADIUS)
+                .searchFor(predicate)
+                .height(data.getOrDefault(HEIGHT, radius))
+                .radius(radius);
 
         return !finder.build()
-            .isEmpty();
+                .isEmpty();
     }
 
     public MapHolder enemiesInRadius(Double radius) {

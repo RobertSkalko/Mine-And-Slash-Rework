@@ -1,8 +1,10 @@
 package com.robertx22.age_of_exile.vanilla_mc.potion_effects;
 
+import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffectInstanceData;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
-import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.EffectStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.vanilla_mc.potion_effects.types.ExileStatusEffect;
 import net.minecraft.world.entity.LivingEntity;
@@ -10,6 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EntityStatusEffectsData {
 
@@ -26,27 +29,16 @@ public class EntityStatusEffectsData {
     }
 
 
-    /*
-    public void expireConsumableEffect(PlayerSkillEnum skill) {
-        cons.remove(skill.GUID());
-    }
-
-
-     */
     public StatContext getStats(LivingEntity en) {
 
         List<ExactStatData> stats = new ArrayList<>();
 
-        // todo effects need stats
-
-        /*
         for (Map.Entry<String, ExileEffectInstanceData> e : exileMap.entrySet()) {
-            stats.addAll(e.getValue().)
+            ExileEffect eff = ExileDB.ExileEffects().get(e.getKey());
+            stats.addAll(eff.getExactStats(e.getValue().getCaster(en.level()), e.getValue()));
         }
 
-         */
-
-        return new MiscStatCtx(stats);
+        return new EffectStatCtx(stats);
 
     }
 }

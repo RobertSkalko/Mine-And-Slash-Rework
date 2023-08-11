@@ -2,11 +2,12 @@ package com.robertx22.age_of_exile.database.data.spells.components.selectors;
 
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.library_of_exile.utils.RandomUtils;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.LivingEntity;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,21 +26,21 @@ public class AoeSelector extends BaseTargetSelector {
         AllyOrEnemy predicate = data.getEntityPredicate();
         Double radius = data.get(RADIUS);
 
-        radius *= ctx.calculatedSpellData.area_multi;
+        radius *= ctx.calculatedSpellData.data.getNumber(EventData.AREA_MULTI, 1).number;
 
         Double chance = data.getOrDefault(SELECTION_CHANCE, 100D);
 
         EntityFinder.Setup<LivingEntity> finder = EntityFinder.start(caster, LivingEntity.class, pos)
-            .finder(EntityFinder.SelectionType.RADIUS)
-            .searchFor(predicate)
-            .height(data.getOrDefault(HEIGHT, radius))
-            .radius(radius);
+                .finder(EntityFinder.SelectionType.RADIUS)
+                .searchFor(predicate)
+                .height(data.getOrDefault(HEIGHT, radius))
+                .radius(radius);
 
         if (chance < 100) {
             return finder.build()
-                .stream()
-                .filter(x -> RandomUtils.roll(chance))
-                .collect(Collectors.toList());
+                    .stream()
+                    .filter(x -> RandomUtils.roll(chance))
+                    .collect(Collectors.toList());
         } else {
             return finder.build();
         }

@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.uncommon.effectdatas.rework.action;
 
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
+import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
@@ -38,21 +39,21 @@ public class GiveExileStatusInRadius extends StatEffect {
         LivingEntity en = event.getSide(statSource);
 
         ExileEffect eff = ExileDB.ExileEffects()
-            .get(effect);
+                .get(effect);
 
         EntityFinder.start(en, LivingEntity.class, en.blockPosition())
-            .finder(EntityFinder.SelectionType.RADIUS)
-            .searchFor(ally_or_enemy)
-            .radius(radius)
-            .build()
-            .forEach(x -> {
+                .finder(EntityFinder.SelectionType.RADIUS)
+                .searchFor(ally_or_enemy)
+                .radius(radius)
+                .build()
+                .forEach(x -> {
 
-                ExilePotionEvent potionEvent = EventBuilder.ofEffect(en, x, Load.Unit(en)
-                        .getLevel(), eff, GiveOrTake.give, seconds * 20)
-                    .build();
-                potionEvent.Activate();
+                    ExilePotionEvent potionEvent = EventBuilder.ofEffect(new CalculatedSpellData(null), en, x, Load.Unit(en)
+                                    .getLevel(), eff, GiveOrTake.give, seconds * 20)
+                            .build();
+                    potionEvent.Activate();
 
-            });
+                });
 
     }
 

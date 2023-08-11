@@ -32,20 +32,20 @@ public class ExileEffectAction extends SpellAction {
             ExileEffect potion = data.getExileEffect();
             GiveOrTake action = data.getPotionAction();
             int count = data.get(COUNT)
-                .intValue();
+                    .intValue();
             int duration = data.get(POTION_DURATION)
-                .intValue();
+                    .intValue();
 
             targets.forEach(t -> {
 
-                ExilePotionEvent potionEvent = EventBuilder.ofEffect(ctx.caster, t, Load.Unit(ctx.caster)
-                        .getLevel(), potion, com.robertx22.age_of_exile.uncommon.effectdatas.GiveOrTake.give, duration)
-                    .setSpell(ctx.calculatedSpellData.getSpell())
-                    .set(x -> x.data.getNumber(EventData.STACKS).number = count)
-                    .build();
+                ExilePotionEvent potionEvent = EventBuilder.ofEffect(ctx.calculatedSpellData, ctx.caster, t, Load.Unit(ctx.caster)
+                                .getLevel(), potion, com.robertx22.age_of_exile.uncommon.effectdatas.GiveOrTake.give, duration)
+                        .setSpell(ctx.calculatedSpellData.getSpell())
+                        .set(x -> x.data.getNumber(EventData.STACKS).number = count)
+                        .build();
 
                 potionEvent.spellid = ctx.calculatedSpellData.getSpell()
-                    .GUID();
+                        .GUID();
 
                 potionEvent.Activate();
 

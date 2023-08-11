@@ -2,12 +2,13 @@ package com.robertx22.age_of_exile.database.data.exile_effects;
 
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.spells.components.AttachedSpell;
-import com.robertx22.age_of_exile.database.data.spells.entities.EntitySavedSpellData;
+import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.database.data.value_calc.LeveledValue;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashPotions;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.vanilla_mc.potion_effects.types.ExileStatusEffect;
@@ -17,8 +18,7 @@ import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.entity.LivingEntity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -87,27 +87,24 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
         return this.locName;
     }
 
-    public List<ExactStatData> getExactStats(Level world, EntitySavedSpellData data) {
+    public List<ExactStatData> getExactStats(LivingEntity caster, ExileEffectInstanceData data) {
 
-        if (data.getCaster(world) == null) {
+        if (caster == null) {
             return Arrays.asList();
         }
 
         return this.stats.stream()
                 .map(x -> {
-
                     LeveledValue lvlval = new LeveledValue(0, 100);
-
-                    int perc = (int) lvlval.getValue(data.getCaster(world), data.getSpell());
-
-                    return x.ToExactStat(perc, data.lvl);
+                    int perc = (int) lvlval.getValue(caster, data.getSpell());
+                    return x.ToExactStat((int) (perc * data.str_multi * data.stacks), Load.Unit(caster).getLevel());
                 })
                 .collect(Collectors.toList());
 
     }
 
-    public List<MutableComponent> GetTooltipString(TooltipInfo info, EntitySavedSpellData data) {
-        List<MutableComponent> list = new ArrayList<>();
+    public List<Component> GetTooltipString(TooltipInfo info, CalculatedSpellData data) {
+        List<Component> list = new ArrayList<>();
 
         list.add(Component.literal("Status Effect: ").append(this.locName())
                 .withStyle(ChatFormatting.YELLOW));
@@ -115,9 +112,13 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
             list.add(Words.Stats.locName()
                     .append(": ")
                     .withStyle(ChatFormatting.GREEN));
-            getExactStats(info.player.level(), data).forEach(x -> {
-                list.addAll(x.GetTooltipString(info));
-            });
+
+            for (StatMod stat : this.stats) {
+                for (Component comp : stat.getEstimationTooltip(Load.Unit(info.player).getLevel())) {
+                    list.add(comp);
+                }
+            }
+            
         }
 
         if (max_stacks > 1) {

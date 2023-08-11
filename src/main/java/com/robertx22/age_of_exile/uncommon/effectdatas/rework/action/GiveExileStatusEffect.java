@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.uncommon.effectdatas.rework.action;
 
+import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
@@ -30,10 +31,11 @@ public class GiveExileStatusEffect extends StatEffect {
     @Override
     public void activate(EffectEvent event, EffectSides statSource, StatData data, Stat stat) {
 
-        ExilePotionEvent potionEvent = EventBuilder.ofEffect(event.getSide(statSource), event.getSide(give_to), Load.Unit(event.getSide(statSource))
-                .getLevel(), ExileDB.ExileEffects()
-                .get(effect), GiveOrTake.give, seconds * 20)
-            .build();
+
+        ExilePotionEvent potionEvent = EventBuilder.ofEffect(new CalculatedSpellData(null), event.getSide(statSource), event.getSide(give_to), Load.Unit(event.getSide(statSource))
+                        .getLevel(), ExileDB.ExileEffects()
+                        .get(effect), GiveOrTake.give, seconds * 20)
+                .build();
         potionEvent.Activate();
 
     }

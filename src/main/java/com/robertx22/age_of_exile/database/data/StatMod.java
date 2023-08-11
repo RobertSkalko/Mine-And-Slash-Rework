@@ -31,7 +31,7 @@ public class StatMod implements ISerializable<StatMod> {
 
     }
 
-   
+
     public static StatMod percent(float firstMin, float firstMax, Stat stat) {
         StatMod mod = new StatMod();
         mod.min = firstMin;
@@ -94,9 +94,9 @@ public class StatMod implements ISerializable<StatMod> {
             text = text + "%";
         } else if (getModType() == ModType.MORE) {
             if (fmin > 0) {
-                text = text + " More";
+                text = text + " " + GetStat().getMultiUseType().tooltipPrefix;
             } else {
-                text = text + " Less";
+                text = text + " " + GetStat().getMultiUseType().tooltipPrefixLess;
 
             }
         }

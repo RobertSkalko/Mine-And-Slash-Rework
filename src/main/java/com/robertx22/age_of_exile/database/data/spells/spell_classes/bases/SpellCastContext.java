@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.database.data.spells.spell_classes.bases;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
-import com.robertx22.age_of_exile.database.data.spells.entities.EntitySavedSpellData;
+import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.SpellStatsCalculationEvent;
@@ -23,7 +23,7 @@ public class SpellCastContext {
     public boolean isLastCastTick;
     public boolean castedThisTick = false;
     public SpellStatsCalculationEvent event;
-    public EntitySavedSpellData calcData;
+    public CalculatedSpellData calcData;
     public Unit unit;
 
     public SpellCastContext(LivingEntity caster, int ticksInUse, Spell spell) {
@@ -34,11 +34,13 @@ public class SpellCastContext {
 
         Objects.requireNonNull(spell);
 
-     
-        this.calcData = EntitySavedSpellData.create(data.getLevel(), caster, spell);
 
-        this.event = new SpellStatsCalculationEvent(this.calcData, caster, spell.GUID());
+        this.event = new SpellStatsCalculationEvent(caster, spell.GUID());
+
         event.Activate();
+
+
+        this.calcData = event.savedData;
 
         int castTicks = (int) event.data.getNumber(EventData.CAST_TICKS).number;
         this.isLastCastTick = castTicks == ticksInUse;

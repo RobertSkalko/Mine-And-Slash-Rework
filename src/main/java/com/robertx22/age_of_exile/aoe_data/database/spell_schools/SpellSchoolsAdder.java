@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.spell_schools;
 
-import com.robertx22.age_of_exile.aoe_data.database.perks.AscPerks;
+import com.robertx22.age_of_exile.aoe_data.database.perks.asc.ElementalistPerks;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
 public class SpellSchoolsAdder implements ExileRegistryInit {
@@ -33,10 +33,10 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
 
         SchoolBuilder.of(ELEMENTALIST, "Elementalist")
 
-                .addFor(AscRow.ONE, AscPerks.FIRE_NOVICE, AscPerks.COLD_NOVICE, AscPerks.LIGHTNING_NOVICE)
-                .addFor(AscRow.TWO, AscPerks.FIRE_APPRENTICE, AscPerks.COLD_APPRENTICE, AscPerks.LIGHTNING_APPRENTICE)
-                .addFor(AscRow.THREE, AscPerks.FIRE_EXPERT, AscPerks.COLD_EXPERT, AscPerks.LIGHTNING_EXPERT)
-                .addFor(AscRow.FOUR, AscPerks.FIRE_MASTER, AscPerks.COLD_MASTER, AscPerks.LIGHTNING_MASTER)
+                .addFor(AscRow.ONE, ElementalistPerks.FIRE_NOVICE, ElementalistPerks.COLD_NOVICE, ElementalistPerks.LIGHTNING_NOVICE)
+                .addFor(AscRow.TWO, ElementalistPerks.FIRE_APPRENTICE, ElementalistPerks.COLD_APPRENTICE, ElementalistPerks.LIGHTNING_APPRENTICE)
+                .addFor(AscRow.THREE, ElementalistPerks.FIRE_EXPERT, ElementalistPerks.COLD_EXPERT, ElementalistPerks.LIGHTNING_EXPERT)
+                .addFor(AscRow.FOUR, ElementalistPerks.FIRE_MASTER, ElementalistPerks.COLD_MASTER, ElementalistPerks.LIGHTNING_MASTER)
 
                 .build();
 

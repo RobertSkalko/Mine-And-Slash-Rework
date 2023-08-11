@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mixin_ducks.FallingBlockAccessor;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -65,7 +66,7 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
 
     int lifespan = 1000;
 
-    EntitySavedSpellData spellData;
+    CalculatedSpellData spellData;
 
     private static final EntityDataAccessor<CompoundTag> SPELL_DATA = SynchedEntityData.defineId(StationaryFallingBlockEntity.class, EntityDataSerializers.COMPOUND_TAG);
     private static final EntityDataAccessor<String> ENTITY_NAME = SynchedEntityData.defineId(StationaryFallingBlockEntity.class, EntityDataSerializers.STRING);
@@ -168,12 +169,12 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
 
     static Gson GSON = new Gson();
 
-    public EntitySavedSpellData getSpellData() {
+    public CalculatedSpellData getSpellData() {
         if (level().isClientSide) {
             if (spellData == null) {
                 CompoundTag nbt = entityData.get(SPELL_DATA);
                 if (nbt != null) {
-                    this.spellData = GSON.fromJson(nbt.getString("spell"), EntitySavedSpellData.class);
+                    this.spellData = GSON.fromJson(nbt.getString("spell"), CalculatedSpellData.class);
                 }
             }
         }
@@ -195,13 +196,13 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
     }
 
     @Override
-    public void init(LivingEntity caster, EntitySavedSpellData data, MapHolder holder) {
+    public void init(LivingEntity caster, CalculatedSpellData data, MapHolder holder) {
         this.spellData = data;
 
         this.lifespan = holder.get(MapField.LIFESPAN_TICKS)
                 .intValue();
 
-        data.item_id = holder.get(MapField.ITEM);
+        data.data.setString(EventData.ITEM_ID, holder.get(MapField.ITEM));
         CompoundTag nbt = new CompoundTag();
         nbt.putString("spell", GSON.toJson(spellData));
         entityData.set(SPELL_DATA, nbt);

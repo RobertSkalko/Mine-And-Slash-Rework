@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.event_hooks.ontick;
 import com.robertx22.age_of_exile.capability.bases.CapSyncUtil;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
-import com.robertx22.age_of_exile.database.data.spells.entities.EntitySavedSpellData;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
@@ -162,8 +161,7 @@ public class OnServerTick {
 
             if (spell != null) {
                 spell.getAttached()
-                        .tryActivate(Spell.CASTER_NAME, SpellCtx.onTick(player, player, EntitySavedSpellData.create(Load.Unit(player)
-                                .getLevel(), player, spell)));
+                        .tryActivate(Spell.CASTER_NAME, SpellCtx.onTick(player, player, Load.playerRPGData(player).spellCastingData.calcSpell));
 
                 PlayerUtils.getNearbyPlayers(player, 50)
                         .forEach(x -> {
