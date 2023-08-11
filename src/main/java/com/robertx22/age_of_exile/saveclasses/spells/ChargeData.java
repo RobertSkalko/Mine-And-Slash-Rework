@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.saveclasses.spells;
 
-import com.robertx22.age_of_exile.capability.player.EntitySpellData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.util.Mth;
@@ -9,6 +8,7 @@ import net.minecraft.world.entity.player.Player;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ChargeData {
     private HashMap<String, Integer> charges = new HashMap<>();
@@ -31,8 +31,7 @@ public class ChargeData {
 
         charges.put(id, Mth.clamp(charges.getOrDefault(id, 0) - 1, 0, 100000));
 
-        Load.spells(player)
-                .syncToClient(player);
+        Load.playerRPGData(player).syncToClient(player);
 
     }
 
@@ -53,11 +52,10 @@ public class ChargeData {
 
         boolean sync = false;
 
-        EntitySpellData.ISpellsCap sdata = Load.spells(player);
 
         List<String> chargesadded = new ArrayList<>(); // no duplicate charge regen
 
-        for (Spell s : sdata.getSpells()) {
+        for (Spell s : Load.playerRPGData(player).getSkillGemInventory().getAllSkillGems().stream().map(x -> x.getSpell()).collect(Collectors.toList())) {
 
             String id = s.config.charge_name;
 
@@ -88,8 +86,8 @@ public class ChargeData {
         }
 
         if (sync) {
-            Load.spells(player)
-                    .syncToClient(player);
+
+            Load.playerRPGData(player).syncToClient(player);
         }
     }
 }

@@ -1,4 +1,5 @@
 {
+  "CLASS_POINTS_AT_MAX_LEVEL": 10,
   "CORE_STAT_SCALING": {
     "base_scaling": 1.0,
     "cap_to_max_lvl": true,
@@ -20,7 +21,6 @@
     "cap_to_max_lvl": true,
     "per_level_scaling": 0.01
   },
-  "SPELL_POINTS_PER_LEVEL": 2.0,
   "STARTING_TALENT_POINTS": 1.0,
   "STAT_POINTS_PER_LEVEL": 2.0,
   "STAT_REQ_SCALING": {

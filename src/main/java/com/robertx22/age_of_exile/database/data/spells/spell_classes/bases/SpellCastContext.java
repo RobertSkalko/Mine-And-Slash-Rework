@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.database.data.spells.spell_classes.bases;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.capability.player.EntitySpellData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.entities.EntitySavedSpellData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
@@ -19,7 +18,6 @@ public class SpellCastContext {
 
     public final LivingEntity caster;
     public final EntityData data;
-    public final EntitySpellData.ISpellsCap spellsCap;
     public final int ticksInUse;
     public final Spell spell;
     public boolean isLastCastTick;
@@ -36,8 +34,7 @@ public class SpellCastContext {
 
         Objects.requireNonNull(spell);
 
-        this.spellsCap = Load.spells(caster);
-
+     
         this.calcData = EntitySavedSpellData.create(data.getLevel(), caster, spell);
 
         this.event = new SpellStatsCalculationEvent(this.calcData, caster, spell.GUID());

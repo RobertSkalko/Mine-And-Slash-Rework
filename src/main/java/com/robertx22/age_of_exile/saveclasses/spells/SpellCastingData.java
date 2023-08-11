@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.saveclasses.spells;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.capability.player.EntitySpellData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.SpellCastContext;
@@ -24,16 +23,11 @@ import java.util.List;
 
 public class SpellCastingData {
 
-    public int castingTicksLeft = 0;
-
-    public int castingTicksDone = 0;
-
-    public int lastSpellCastTimeInTicks = 0;
-
-    public String spellBeingCast = "";
-
+    public int castTickLeft = 0;
+    public int castTicksDone = 0;
+    public int spellTotalCastTicks = 0;
+    public String spell = "";
     public Boolean casting = false;
-
     public ChargeData charges = new ChargeData();
 
 
@@ -51,10 +45,10 @@ public class SpellCastingData {
 
                 }
 
-                spellBeingCast = "";
-                castingTicksLeft = 0;
-                lastSpellCastTimeInTicks = 0;
-                castingTicksDone = 0;
+                this.spell = "";
+                castTickLeft = 0;
+                spellTotalCastTicks = 0;
+                castTicksDone = 0;
                 this.casting = false;
             }
         } catch (Exception e) {
@@ -64,23 +58,23 @@ public class SpellCastingData {
     }
 
     public boolean isCasting() {
-        return spellBeingCast != null && casting && ExileDB.Spells()
-                .isRegistered(spellBeingCast);
+        return spell != null && casting && ExileDB.Spells()
+                .isRegistered(spell);
     }
 
     transient static Spell lastSpell = null;
 
-    public void onTimePass(LivingEntity entity, EntitySpellData.ISpellsCap spells, int ticks) {
+    public void onTimePass(LivingEntity entity, int ticks) {
 
         try {
 
             if (isCasting()) {
                 Spell spell = ExileDB.Spells()
-                        .get(spellBeingCast);
+                        .get(this.spell);
 
-                SpellCastContext ctx = new SpellCastContext(entity, castingTicksDone, spell);
+                SpellCastContext ctx = new SpellCastContext(entity, castTicksDone, spell);
 
-                if (spell != null && spells != null && ExileDB.Spells()
+                if (spell != null && ExileDB.Spells()
                         .isRegistered(spell)) {
                     spell.onCastingTick(ctx);
                 }
@@ -89,11 +83,11 @@ public class SpellCastingData {
 
                 lastSpell = spell;
 
-                castingTicksLeft--;
-                castingTicksDone++;
+                castTickLeft--;
+                castTicksDone++;
 
-                if (castingTicksLeft < 0) {
-                    this.spellBeingCast = "";
+                if (castTickLeft < 0) {
+                    this.spell = "";
                 }
             } else {
 
@@ -116,17 +110,17 @@ public class SpellCastingData {
     public void setToCast(Spell spell, LivingEntity entity) {
         SpellCastContext ctx = new SpellCastContext(entity, 0, spell);
 
-        this.spellBeingCast = spell.GUID();
-        this.castingTicksLeft = ctx.spell.getCastTimeTicks(ctx);
-        this.lastSpellCastTimeInTicks = this.castingTicksLeft;
-        this.castingTicksDone = 0;
+        this.spell = spell.GUID();
+        this.castTickLeft = ctx.spell.getCastTimeTicks(ctx);
+        this.spellTotalCastTicks = this.castTickLeft;
+        this.castTicksDone = 0;
         this.casting = true;
     }
 
     public void tryCast(SpellCastContext ctx) {
 
         if (getSpellBeingCast() != null) {
-            if (castingTicksLeft <= 0) {
+            if (castTickLeft <= 0) {
                 Spell spell = getSpellBeingCast();
 
                 int timesToCast = ctx.spell.getConfig().times_to_cast;
@@ -136,7 +130,7 @@ public class SpellCastingData {
                 }
 
                 onSpellCast(ctx);
-                spellBeingCast = "";
+                this.spell = "";
 
             }
         }
@@ -146,12 +140,12 @@ public class SpellCastingData {
     public Spell getSpellBeingCast() {
 
         if (!ExileDB.Spells()
-                .isRegistered(spellBeingCast)) {
+                .isRegistered(spell)) {
             return null;
         }
 
         return ExileDB.Spells()
-                .get(spellBeingCast);
+                .get(spell);
     }
 
     public boolean canCast(Spell spell, Player player) {

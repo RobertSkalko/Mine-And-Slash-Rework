@@ -2,10 +2,12 @@ package com.robertx22.age_of_exile.database.data.value_calc;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.entity.LivingEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,12 +36,12 @@ public class ScalingCalc {
         return multi;
     }
 
-    public int getMultiAsPercent(LevelProvider provider) {
-        return (int) (multi.getValue(provider) * 100);
+    public int getMultiAsPercent(LivingEntity en, MaxLevelProvider provider) {
+        return (int) (multi.getValue(en, provider) * 100);
     }
 
-    public Component GetTooltipString(LevelProvider provider) {
-        return Component.literal("(" + getMultiAsPercent(provider) + "% of " + getStat().getIconNameFormat() + ")");
+    public Component GetTooltipString(LivingEntity en, MaxLevelProvider provider) {
+        return Component.literal("(" + getMultiAsPercent(en, provider) + "% of " + getStat().getIconNameFormat() + ")");
     }
 
     public List<Component> getTooltipFor(float multi, float value, MutableComponent statname, Elements el) {
@@ -61,9 +63,9 @@ public class ScalingCalc {
         return list;
     }
 
-    public int getCalculatedValue(LevelProvider provider) {
+    public int getCalculatedValue(LivingEntity en, MaxLevelProvider provider) {
 
-        return (int) (getMulti().getValue(provider) * provider.getCasterData()
+        return (int) (getMulti().getValue(en, provider) * Load.Unit(en)
                 .getUnit()
                 .getCalculatedStat(stat)
                 .getValue());

@@ -3,12 +3,14 @@ package com.robertx22.age_of_exile.database.data.value_calc;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.entity.LivingEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,14 +33,14 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
     public StatScaling base_scaling_type = StatScaling.NORMAL;
     public LeveledValue base = new LeveledValue(0, 0);
 
-    public int getCalculatedBaseValue(LevelProvider provider) {
+    public int getCalculatedBaseValue(LivingEntity en, MaxLevelProvider provider) {
 
         if (base_scaling_type == null) {
             MMORPG.logError("base scaling type null");
             return 0;
         }
 
-        return (int) base_scaling_type.scale(base.getValue(provider), provider.getCasterLevel());
+        return (int) base_scaling_type.scale(base.getValue(en, provider), Load.Unit(en).getLevel());
     }
 
     public String getLocDmgTooltip(Elements element) {
@@ -49,35 +51,35 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
         return "[calc:" + id + "]";
     }
 
-    private int getCalculatedScalingValue(LevelProvider provider) {
+    private int getCalculatedScalingValue(LivingEntity en, MaxLevelProvider provider) {
 
         float amount = 0;
 
         amount += getAllScalingValues().stream()
-                .mapToInt(x -> x.getCalculatedValue(provider))
+                .mapToInt(x -> x.getCalculatedValue(en, provider))
                 .sum();
 
         return (int) amount;
     }
 
-    public int getCalculatedValue(LevelProvider provider) {
-        int val = getCalculatedScalingValue(provider);
-        val += getCalculatedBaseValue(provider);
+    public int getCalculatedValue(LivingEntity en, MaxLevelProvider provider) {
+        int val = getCalculatedScalingValue(en, provider);
+        val += getCalculatedBaseValue(en, provider);
         return val;
 
     }
 
-    public Component getShortTooltip(LevelProvider provider) {
+    public Component getShortTooltip(LivingEntity en, MaxLevelProvider provider) {
         MutableComponent text = Component.literal("");
 
-        int val = getCalculatedValue(provider);
+        int val = getCalculatedValue(en, provider);
 
 
         text.append(val + "");
 
 
         stat_scalings.forEach(x -> {
-            text.append(" ").append(x.GetTooltipString(provider));
+            text.append(" ").append(x.GetTooltipString(en, provider));
         });
 
         return text;

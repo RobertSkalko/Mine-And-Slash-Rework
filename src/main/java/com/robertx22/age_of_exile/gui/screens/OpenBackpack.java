@@ -23,7 +23,7 @@ public class OpenBackpack implements IContainerNamedScreen {
 
     @Override
     public ResourceLocation iconLocation() {
-        return new ResourceLocation(SlashRef.MODID, "textures/gui/main_hub/icons/" + type.id + ".png");
+        return new ResourceLocation(SlashRef.MODID, "textures/gui/main_hub/icons/" + type.id + "_bag.png");
     }
 
     @Override

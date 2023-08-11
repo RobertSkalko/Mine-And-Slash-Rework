@@ -41,6 +41,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
@@ -291,8 +292,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
             }
         }
 
-        int currentlvl = Load.spells(info.player)
-                .getLevelOf(GUID());
+        int currentlvl = getLevelOf(info.player);
         int maxlvl = getMaxLevel();
 
         list.add(Component.literal("Level: " + currentlvl + "/" + maxlvl).withStyle(ChatFormatting.YELLOW));
@@ -302,6 +302,17 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         return list;
 
     }
+
+    public int getLevelOf(LivingEntity en) {
+        if (en instanceof Player p) {
+            var gem = Load.playerRPGData(p).getSkillGemInventory().getSpellGem(ExileDB.Spells().get(this.GUID()));
+            if (gem != null && gem.getSkillData() != null) {
+                return (int) (gem.getSkillData().perc / 10F); // todo make sure this works
+            }
+        }
+        return 1;
+    }
+
 
     @Override
     public Class<Spell> getClassForSerialization() {
@@ -348,6 +359,11 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     @Override
     public String locDescForLangFile() {
         return locDesc;
+    }
+
+    @Override
+    public int getCurrentLevel(LivingEntity en) {
+        return getLevelOf(en);
     }
 
     @Override

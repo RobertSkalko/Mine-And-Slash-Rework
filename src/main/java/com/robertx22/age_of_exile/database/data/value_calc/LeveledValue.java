@@ -1,5 +1,7 @@
 package com.robertx22.age_of_exile.database.data.value_calc;
 
+import net.minecraft.world.entity.LivingEntity;
+
 public class LeveledValue {
     public final float min;
     public final float max;
@@ -9,13 +11,13 @@ public class LeveledValue {
         this.max = max;
     }
 
-    public float getValue(LevelProvider provider) {
+    public float getValue(LivingEntity en, MaxLevelProvider provider) {
         if (min == max) {
             return min;
         }
 
         int maxlevel = provider.getMaxLevel();
-        int level = provider.getCurrentLevel();
+        int level = provider.getCurrentLevel(en);
 
         float perlevel = (max - min) / maxlevel;
         return min + (perlevel * level);

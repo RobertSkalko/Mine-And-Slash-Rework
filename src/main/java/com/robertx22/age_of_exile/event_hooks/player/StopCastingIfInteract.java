@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.event_hooks.player;
 
-import com.robertx22.age_of_exile.capability.player.EntitySpellData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.world.entity.player.Player;
 
@@ -10,12 +9,11 @@ public class StopCastingIfInteract {
         if (player.level().isClientSide) {
             return;
         }
-        EntitySpellData.ISpellsCap data = Load.spells(player);
+        var data = Load.playerRPGData(player);
 
-        if (data.getCastingData()
+        if (data.spellCastingData
                 .isCasting()) {
-            data.getCastingData()
-                    .cancelCast(player);
+            data.spellCastingData.cancelCast(player);
             data.syncToClient(player);
         }
     }

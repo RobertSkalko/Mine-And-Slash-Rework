@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.gui.overlays.spell_hotbar;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.capability.entity.CooldownsData;
-import com.robertx22.age_of_exile.capability.player.EntitySpellData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.registers.client.KeybindsRegister;
@@ -49,7 +48,6 @@ public class SpellHotbarOverlay {
 
     Minecraft mc = Minecraft.getInstance();
 
-    EntitySpellData.ISpellsCap data;
 
     public void onHudRender(GuiGraphics gui) {
 
@@ -60,13 +58,11 @@ public class SpellHotbarOverlay {
             if (mc.player.isSpectator()) {
                 return;
             }
-            if (data == null) {
-                data = Load.spells(mc.player);
-            }
+
             if (ChatUtils.isChatOpen()) {
                 return;
             }
-            if (Load.spells(mc.player) == null) {
+            if (Load.playerRPGData(mc.player) == null) {
                 return;
             }
 
@@ -106,8 +102,7 @@ public class SpellHotbarOverlay {
 
         Spell spell = null;
         try {
-            spell = Load.spells(this.mc.player)
-                    .getSpellByNumber(place);
+            spell = Load.playerRPGData(mc.player).getSkillGemInventory().getHotbarGem(place).getSpell();
 
             if (spell == null) {
                 return;
@@ -147,11 +142,13 @@ public class SpellHotbarOverlay {
                 gui.blit(spell.getIconLoc(), xs, ys, 0, 0, 16, 16, 16, 16);
 
                 if (spell.config.charges > 0) {
-                    int charges = data.getCastingData().charges.getCharges(spell.config.charge_name);
+                    int charges = Load.playerRPGData(mc.player)
+                            .spellCastingData.charges.getCharges(spell.config.charge_name);
 
                     if (charges == 0) {
                         float needed = (float) spell.config.charge_regen;
-                        float currentticks = (float) data.getCastingData().charges.getCurrentTicksChargingOf(spell.config.charge_name);
+                        float currentticks = (float) Load.playerRPGData(mc.player)
+                                .spellCastingData.charges.getCurrentTicksChargingOf(spell.config.charge_name);
 
                         float ticksleft = needed - currentticks;
 

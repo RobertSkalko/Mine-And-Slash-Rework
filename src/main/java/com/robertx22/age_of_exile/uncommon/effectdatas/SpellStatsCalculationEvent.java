@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.uncommon.effectdatas;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.entities.EntitySavedSpellData;
-import com.robertx22.age_of_exile.database.data.value_calc.LevelProvider;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
@@ -48,7 +47,7 @@ public class SpellStatsCalculationEvent extends EffectEvent {
             }
         }
         this.data.setupNumber(EventData.CAST_TICKS, spell.config.getCastTimeTicks());
-        this.data.setupNumber(EventData.MANA_COST, manamultilvl * spell.config.mana_cost.getValue(new LevelProvider(caster, spell)));
+        this.data.setupNumber(EventData.MANA_COST, manamultilvl * spell.config.mana_cost.getValue(caster, spell));
         this.data.setupNumber(EventData.COOLDOWN_TICKS, spell.config.cooldown_ticks);
         this.data.setupNumber(EventData.PROJECTILE_SPEED_MULTI, 1F);
         this.data.setupNumber(EventData.SUMMON_DURATION_MULTI, 1F);

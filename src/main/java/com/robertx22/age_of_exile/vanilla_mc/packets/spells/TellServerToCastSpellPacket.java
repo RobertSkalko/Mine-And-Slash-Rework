@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.vanilla_mc.packets.spells;
 
-import com.robertx22.age_of_exile.capability.player.EntitySpellData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.SpellCastContext;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -39,7 +38,7 @@ public class TellServerToCastSpellPacket extends MyPacket<TellServerToCastSpellP
 
     public static boolean tryCastSpell(Player player, Spell spell) {
 
-        EntitySpellData.ISpellsCap spells = Load.spells(player);
+        var spells = Load.playerRPGData(player);
 
         if (player.isBlocking() || player.swinging) {
             return false;
@@ -47,10 +46,10 @@ public class TellServerToCastSpellPacket extends MyPacket<TellServerToCastSpellP
 
         if (spell != null) {
 
-            if (spells.getCastingData()
+            if (spells.spellCastingData
                     .canCast(spell, player)) {
 
-                spells.getCastingData()
+                spells.spellCastingData
                         .setToCast(spell, player);
                 SpellCastContext c = new SpellCastContext(player, 0, spell);
 
@@ -68,9 +67,7 @@ public class TellServerToCastSpellPacket extends MyPacket<TellServerToCastSpellP
     public void onReceived(ExilePacketContext ctx) {
         Player player = ctx.getPlayer();
 
-        EntitySpellData.ISpellsCap spells = Load.spells(player);
-
-        Spell spell = spells.getSpellByNumber(number);
+        Spell spell = Load.playerRPGData(ctx.getPlayer()).getSkillGemInventory().getHotbarGem(number).getSpell();
 
         tryCastSpell(player, spell);
 

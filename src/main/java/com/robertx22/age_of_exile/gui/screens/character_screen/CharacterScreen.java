@@ -25,6 +25,7 @@ import com.robertx22.age_of_exile.gui.buttons.CharacterStatsButtons;
 import com.robertx22.age_of_exile.gui.screens.OpenBackpack;
 import com.robertx22.age_of_exile.gui.screens.OpenSkillGems;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.TalentsScreen;
+import com.robertx22.age_of_exile.gui.screens.spell.AscendancyClassScreen;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -69,7 +70,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         }
 
         public ResourceLocation getIcon() {
-            
+
             return new ResourceLocation(SlashRef.MODID, "textures/gui/stat_groups/" + id + ".png");
         }
     }
@@ -195,6 +196,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         List<INamedScreen> rightButtons = new ArrayList<>();
         rightButtons.add(new OpenSkillGems());
         rightButtons.add(new TalentsScreen());
+        rightButtons.add(new AscendancyClassScreen());
 
         List<INamedScreen> leftButtons = new ArrayList<>();
 

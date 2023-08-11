@@ -29,7 +29,7 @@ public class AggroAction extends SpellAction {
 
         if (ctx.caster instanceof Player) {
             ValueCalculation calc = data.get(MapField.VALUE_CALCULATION);
-            int num = calc.getCalculatedValue(ctx.levelProvider);
+            int num = calc.getCalculatedValue(ctx.caster, ctx.calculatedSpellData.getSpell());
 
             Type aggro = data.getAggro();
 
@@ -44,8 +44,8 @@ public class AggroAction extends SpellAction {
 
                     } else {
                         Load.Unit(mob)
-                            .getThreat()
-                            .addThreat((Player) ctx.caster, mob, -num);
+                                .getThreat()
+                                .addThreat((Player) ctx.caster, mob, -num);
                     }
                 }
             });

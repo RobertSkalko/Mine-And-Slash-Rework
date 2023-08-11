@@ -22,6 +22,19 @@ public class PerkBuilder {
         return perk;
     }
 
+    public static Perk ascPoint(String id, OptScaleExactStat... stat) {
+        List<OptScaleExactStat> list = Arrays.asList(stat);
+
+        Perk perk = new Perk();
+        perk.stats = list;
+        perk.type = Perk.PerkType.STAT;
+        perk.id = id;
+        perk.icon = new ResourceLocation(SlashRef.MODID, "textures/gui/asc_classes/perk/" + id + ".png").toString();
+
+        perk.addToSerializables();
+        return perk;
+    }
+
     public static Perk stat(String id, OptScaleExactStat... stat) {
         List<OptScaleExactStat> list = Arrays.asList(stat);
 

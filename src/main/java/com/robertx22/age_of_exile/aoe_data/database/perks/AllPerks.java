@@ -6,6 +6,7 @@ public class AllPerks implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
+        new AscPerks().registerAll();
         new Perks().registerAll();
         new GameChangerPerks().registerAll();
         new StartPerks().registerAll();

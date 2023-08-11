@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.database.data.spell_school;
 
-import com.robertx22.age_of_exile.database.data.spells.components.Spell;
+import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.PointData;
@@ -9,17 +9,15 @@ import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import com.robertx22.age_of_exile.uncommon.interfaces.IBaseAutoLoc.AutoLocGroup;
-
-public class SpellSchool implements JsonExileRegistry<SpellSchool>, IAutoGson<SpellSchool>, IAutoLocName {
-    public static SpellSchool SERIALIZER = new SpellSchool();
+public class AscendancyClass implements JsonExileRegistry<AscendancyClass>, IAutoGson<AscendancyClass>, IAutoLocName {
+    public static AscendancyClass SERIALIZER = new AscendancyClass();
 
     public String id = "";
     public transient String locname = "";
@@ -27,7 +25,7 @@ public class SpellSchool implements JsonExileRegistry<SpellSchool>, IAutoGson<Sp
     public static int MAX_Y_ROWS = 6;
     public static int MAX_X_ROWS = 10;
 
-    public HashMap<String, PointData> spells = new HashMap<>();
+    public HashMap<String, PointData> perks = new HashMap<>();
 
     public List<Integer> lvl_reqs = Arrays.asList(1, 5, 10, 20, 30, 40, 50);
 
@@ -40,18 +38,17 @@ public class SpellSchool implements JsonExileRegistry<SpellSchool>, IAutoGson<Sp
         return req;
     }
 
-    public boolean isLevelEnoughForSpell(LivingEntity en, Spell spell) {
-        return Load.Unit(en)
-                .getLevel() >= getLevelNeededToAllocate(spells.get(spell.GUID()));
+    public boolean isLevelEnoughFor(LivingEntity en, Perk perk) {
+        return Load.Unit(en).getLevel() >= getLevelNeededToAllocate(perks.get(perk.GUID()));
     }
 
-   
+
     public ResourceLocation getIconLoc() {
-        return SlashRef.guiId("spells/schools/" + id);
+        return SlashRef.guiId("asc_classes/class/" + id);
     }
 
     public ResourceLocation getBackgroundLoc() {
-        return SlashRef.guiId("spells/school_backgrounds/" + id);
+        return SlashRef.guiId("asc_classes/background/" + id);
     }
 
     @Override
@@ -60,8 +57,8 @@ public class SpellSchool implements JsonExileRegistry<SpellSchool>, IAutoGson<Sp
     }
 
     @Override
-    public Class<SpellSchool> getClassForSerialization() {
-        return SpellSchool.class;
+    public Class<AscendancyClass> getClassForSerialization() {
+        return AscendancyClass.class;
     }
 
     @Override
@@ -86,6 +83,6 @@ public class SpellSchool implements JsonExileRegistry<SpellSchool>, IAutoGson<Sp
 
     @Override
     public String locNameForLangFile() {
-        return SlashRef.MODID + ".spell_school." + id;
+        return SlashRef.MODID + ".asc_class." + id;
     }
 }

@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.event_hooks.ontick;
 
-import com.robertx22.age_of_exile.capability.player.EntitySpellData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ChatUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
@@ -58,19 +57,20 @@ public class OnClientTick {
 
                 NO_MANA_SOUND_COOLDOWN--;
 
-                EntitySpellData.ISpellsCap spells = Load.spells(player);
 
-                List<String> onCooldown = spells.getCastingData()
+                List<String> onCooldown = Load.playerRPGData(player)
+                        .spellCastingData
                         .getSpellsOnCooldown(player);
 
                 Load.Unit(player)
                         .getCooldowns()
                         .onTicksPass(1);
 
-                spells.getCastingData()
-                        .onTimePass(player, spells, 1); // ticks spells on client
+                Load.playerRPGData(player).spellCastingData
+                        .onTimePass(player, 1); // ticks spells on client
 
-                List<String> onCooldownAfter = spells.getCastingData()
+                List<String> onCooldownAfter = Load.playerRPGData(player)
+                        .spellCastingData
                         .getSpellsOnCooldown(player);
 
                 onCooldown.removeAll(onCooldownAfter);

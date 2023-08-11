@@ -311,7 +311,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
             }
 
             if (caster != null) {
-                if (!Load.spells(caster)
+                if (!Load.Unit(caster)
                         .alreadyHit(this, en)) {
                     this.getSpellData()
                             .getSpell()

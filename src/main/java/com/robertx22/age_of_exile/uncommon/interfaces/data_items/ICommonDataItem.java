@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 public interface ICommonDataItem<R extends Rarity> extends ISalvagable, ITooltip, IRarity {
 
     @Override
-    default boolean isSalvagable(SalvageContext context) {
+    default boolean isSalvagable() {
         return true;
     }
 

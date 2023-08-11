@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.gui.screens.spell;
 
-import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
-import com.robertx22.age_of_exile.database.data.spells.components.Spell;
+import com.robertx22.age_of_exile.database.data.perks.Perk;
+import com.robertx22.age_of_exile.database.data.spell_school.AscendancyClass;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.bases.BaseScreen;
 import com.robertx22.age_of_exile.gui.bases.INamedScreen;
@@ -18,7 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
 
-public class SpellScreen extends BaseScreen implements INamedScreen, ILeftRight {
+public class AscendancyClassScreen extends BaseScreen implements INamedScreen, ILeftRight {
     private static final ResourceLocation BACKGROUND = new ResourceLocation(SlashRef.MODID, "textures/gui/spells/spell_school_background.png");
 
     static int sizeX = 250;
@@ -27,17 +27,17 @@ public class SpellScreen extends BaseScreen implements INamedScreen, ILeftRight 
 
     Minecraft mc = Minecraft.getInstance();
 
-    public List<SpellSchool> schoolsInOrder = ExileDB.SpellSchools()
+    public List<AscendancyClass> schoolsInOrder = ExileDB.SpellSchools()
             .getList();
     public int currentIndex = 0;
     public int maxIndex = ExileDB.SpellSchools()
             .getSize() - 1;
 
-    public SpellSchool currentSchool() {
+    public AscendancyClass currentSchool() {
         return schoolsInOrder.get(currentIndex);
     }
 
-    public SpellScreen() {
+    public AscendancyClassScreen() {
         super(sizeX, sizeY);
     }
 
@@ -63,18 +63,18 @@ public class SpellScreen extends BaseScreen implements INamedScreen, ILeftRight 
             addRenderableWidget(new LeftRightButton(this, guiLeft + 100 - LeftRightButton.xSize - 5, guiTop + 25 - LeftRightButton.ySize / 2, true));
             addRenderableWidget(new LeftRightButton(this, guiLeft + 150 + 5, guiTop + 25 - LeftRightButton.ySize / 2, false));
 
-            currentSchool().spells.entrySet()
+            currentSchool().perks.entrySet()
                     .forEach(e -> {
 
                         PointData point = e.getValue();
-                        Spell spell = ExileDB.Spells()
+                        Perk perk = ExileDB.Perks()
                                 .get(e.getKey());
 
-                        if (spell != null) {
+                        if (perk != null) {
                             int x = this.guiLeft + 12 + (point.x * SLOT_SPACING);
                             int y = this.guiTop + 177 - (point.y * SLOT_SPACING);
 
-                            this.addRenderableWidget(new LearnSpellButton(this, spell, x, y));
+                            this.addRenderableWidget(new LearnClassPointButton(this, perk, x, y));
                         }
                     });
 
@@ -112,8 +112,7 @@ public class SpellScreen extends BaseScreen implements INamedScreen, ILeftRight 
 
             super.render(gui, x, y, ticks);
 
-            String txt = "Points: " + Load.spells(mc.player)
-                    .getFreeSpellPoints();
+            String txt = "Points: " + Load.playerRPGData(mc.player).ascClass.getFreeSpellPoints(mc.player);
             GuiUtils.renderScaledText(gui, guiLeft + 125, guiTop + 215, 1, txt, ChatFormatting.GREEN);
 
             //buttons.forEach(b -> b.renderToolTip(matrix, x, y));

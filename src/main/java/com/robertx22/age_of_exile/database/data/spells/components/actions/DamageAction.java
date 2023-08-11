@@ -29,7 +29,7 @@ public class DamageAction extends SpellAction {
             Elements ele = data.getElement();
             ValueCalculation calc = data.get(VALUE_CALCULATION);
 
-            int value = calc.getCalculatedValue(ctx.levelProvider);
+            int value = calc.getCalculatedValue(ctx.caster, ctx.calculatedSpellData.getSpell());
 
             for (LivingEntity t : targets) {
 

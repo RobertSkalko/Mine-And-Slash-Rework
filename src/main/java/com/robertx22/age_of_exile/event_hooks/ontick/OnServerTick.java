@@ -67,8 +67,8 @@ public class OnServerTick {
 
                 Load.playerRPGData(player).getSkillGemInventory().removeSupportGemsIfTooMany(player);
 
-                Load.spells(player)
-                        .getCastingData().charges.onTicks(player, 20);
+                Load.playerRPGData(player)
+                        .spellCastingData.charges.onTicks(player, 20);
             }
         }));
 
@@ -139,25 +139,25 @@ public class OnServerTick {
 
 
             if (player.isBlocking()) {
-                if (Load.spells(player)
-                        .getCastingData()
+                if (Load.playerRPGData(player)
+                        .spellCastingData
                         .isCasting()) {
-                    Load.spells(player)
-                            .getCastingData()
+                    Load.playerRPGData(player)
+                            .spellCastingData
                             .cancelCast(player);
                 }
             }
 
-            Load.spells(player)
-                    .getCastingData()
-                    .onTimePass(player, Load.spells(player), 1);
+            Load.playerRPGData(player)
+                    .spellCastingData
+                    .onTimePass(player, 1);
 
             Load.Unit(player)
                     .getResources()
                     .onTickBlock(player);
 
-            Spell spell = Load.spells(player)
-                    .getCastingData()
+            Spell spell = Load.playerRPGData(player)
+                    .spellCastingData
                     .getSpellBeingCast();
 
             if (spell != null) {

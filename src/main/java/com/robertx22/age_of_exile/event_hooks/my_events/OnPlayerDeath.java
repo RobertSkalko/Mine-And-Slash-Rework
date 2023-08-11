@@ -23,9 +23,7 @@ public class OnPlayerDeath extends EventConsumer<ExileEvents.OnPlayerDeath> {
 
             data.syncToClient(event.player);
 
-            Load.spells(event.player)
-                    .syncToClient(event.player);
-
+        
             if (WorldUtils.isMapWorldClass(event.player.level())) {
 
 

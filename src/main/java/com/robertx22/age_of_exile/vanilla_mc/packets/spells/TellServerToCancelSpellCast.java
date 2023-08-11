@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.vanilla_mc.packets.spells;
 
-import com.robertx22.age_of_exile.capability.player.EntitySpellData;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.SpellCastContext;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -31,17 +30,17 @@ public class TellServerToCancelSpellCast extends MyPacket<TellServerToCancelSpel
     public void onReceived(ExilePacketContext ctx) {
         Player player = ctx.getPlayer();
 
-        EntitySpellData.ISpellsCap spells = Load.spells(player);
+        var spells = Load.playerRPGData(player);
 
-        if (spells.getCastingData()
+        if (spells.spellCastingData
                 .getSpellBeingCast() != null) {
 
-            SpellCastContext sctx = new SpellCastContext(player, spells.getCastingData().castingTicksDone, spells.getCastingData()
+            SpellCastContext sctx = new SpellCastContext(player, spells.spellCastingData.castTicksDone, spells.spellCastingData
                     .getSpellBeingCast());
 
-            spells.getCastingData()
+            spells.spellCastingData
                     .tryCast(sctx);
-            spells.getCastingData()
+            spells.spellCastingData
                     .cancelCast(player);
 
             spells.syncToClient(player);

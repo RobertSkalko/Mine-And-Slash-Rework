@@ -27,13 +27,13 @@ public class RestoreHealthAction extends SpellAction {
             if (!ctx.world.isClientSide) {
                 ValueCalculation calc = data.get(VALUE_CALCULATION);
 
-                int value = calc.getCalculatedValue(ctx.levelProvider);
+                int value = calc.getCalculatedValue(ctx.caster, ctx.calculatedSpellData.getSpell());
 
                 for (LivingEntity t : targets) {
 
                     RestoreResourceEvent restore = EventBuilder.ofRestore(ctx.caster, t, ResourceType.health, RestoreType.heal, value)
-                        .setSpell(ctx.calculatedSpellData.getSpell())
-                        .build();
+                            .setSpell(ctx.calculatedSpellData.getSpell())
+                            .build();
 
                     restore.Activate();
 

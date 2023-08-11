@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.capability.player.helper;
 
+import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
@@ -48,8 +49,16 @@ public class SocketedGem {
         return skillGem / (GemInventoryHelper.SUPPORT_GEMS_PER_SKILL + 1); // todo is this correct
     }
 
+    public Spell getSpell() {
+        var data = getSkillData();
+        if (data != null) {
+            return data.getSpell();
+        }
+        return null;
+    }
+
     public ItemStack getSkill() {
-        
+
         return inv.getItem(skillGem);
     }
 

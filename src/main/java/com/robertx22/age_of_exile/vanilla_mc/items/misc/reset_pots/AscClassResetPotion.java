@@ -16,9 +16,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
-public class SpellResetPotion extends AutoItem implements IShapedRecipe {
+public class AscClassResetPotion extends AutoItem implements IShapedRecipe {
 
-    public SpellResetPotion() {
+    public AscClassResetPotion() {
         super(new Item.Properties()
                 .stacksTo(10));
     }
@@ -35,8 +35,7 @@ public class SpellResetPotion extends AutoItem implements IShapedRecipe {
 
         if (player instanceof Player) {
             Player p = (Player) player;
-            Load.spells(p)
-                    .reset();
+            Load.playerRPGData(p).ascClass.reset();
             p.addItem(new ItemStack(Items.GLASS_BOTTLE));
         }
 
@@ -75,6 +74,6 @@ public class SpellResetPotion extends AutoItem implements IShapedRecipe {
 
     @Override
     public String locNameForLangFile() {
-        return "Spells Reset Potion";
+        return "Class Reset Potion";
     }
 }

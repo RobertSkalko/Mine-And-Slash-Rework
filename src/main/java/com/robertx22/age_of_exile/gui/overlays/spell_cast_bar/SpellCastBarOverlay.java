@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.gui.overlays.spell_cast_bar;
 
-import com.robertx22.age_of_exile.capability.player.EntitySpellData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -18,14 +17,14 @@ public class SpellCastBarOverlay {
 
     public void onHudRender(GuiGraphics gui) {
 
-        EntitySpellData.ISpellsCap data = Load.spells(mc.player);
+        var data = Load.playerRPGData(mc.player);
 
         if (data == null) {
             return;
         }
 
-        if (data.getCastingData()
-                .isCasting() && data.getCastingData().castingTicksLeft > 0) {
+        if (data.spellCastingData
+                .isCasting() && data.spellCastingData.castTickLeft > 0) {
 
             int x = mc.getWindow()
                     .getGuiScaledWidth() / 2 - WIDTH / 2;
@@ -33,8 +32,8 @@ public class SpellCastBarOverlay {
                     .getGuiScaledHeight() / 1.25F - HEIGHT / 2);
 
             float percent =
-                    ((float) data.getCastingData().lastSpellCastTimeInTicks - (float) data.getCastingData().castingTicksLeft) / (float) data
-                            .getCastingData().lastSpellCastTimeInTicks;
+                    ((float) data.spellCastingData.spellTotalCastTicks - (float) data.spellCastingData.castTickLeft) / (float) data
+                            .spellCastingData.spellTotalCastTicks;
 
             render(gui, x, y, BossEvent.BossBarColor.PURPLE, BossEvent.BossBarOverlay.NOTCHED_20, percent);
         }

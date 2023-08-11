@@ -1,11 +1,11 @@
 package com.robertx22.age_of_exile.gui.screens.spell;
 
-import com.robertx22.age_of_exile.database.data.spells.components.Spell;
+import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.gui.TextUtils;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import com.robertx22.age_of_exile.vanilla_mc.packets.AllocateSpellPacket;
+import com.robertx22.age_of_exile.vanilla_mc.packets.AllocateClassPointPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.TextUTIL;
 import net.minecraft.ChatFormatting;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class LearnSpellButton extends ImageButton {
+public class LearnClassPointButton extends ImageButton {
 
     static ResourceLocation SPELL_SLOT = SlashRef.guiId("spells/slots/spell");
 
@@ -28,22 +28,18 @@ public class LearnSpellButton extends ImageButton {
     public static int BUTTON_SIZE_Y = 18;
 
     Minecraft mc = Minecraft.getInstance();
-    SpellScreen screen;
+    AscendancyClassScreen screen;
 
-    Spell spell;
+    Perk perk;
 
-    public LearnSpellButton(SpellScreen screen, Spell spell, int xPos, int yPos) {
+
+    public LearnClassPointButton(AscendancyClassScreen screen, Perk perk, int xPos, int yPos) {
         super(xPos, yPos, BUTTON_SIZE_X, BUTTON_SIZE_Y, 0, 0, BUTTON_SIZE_Y, SPELL_SLOT, (button) -> {
+            Packets.sendToServer(new AllocateClassPointPacket(screen.currentSchool(), perk, AllocateClassPointPacket.ACTION.ALLOCATE));
 
-            if (SpellScreen.IS_PICKING_HOTBAR_SPELL) {
-                SpellScreen.IS_PICKING_HOTBAR_SPELL = false;
-                //Packets.sendToServer(new SetupHotbarPacket(spell, SpellScreen.NUMBER_OF_HOTBAR_FOR_PICKING));
-            } else {
-                Packets.sendToServer(new AllocateSpellPacket(screen.currentSchool(), spell, AllocateSpellPacket.ACTION.ALLOCATE));
-            }
         });
         this.screen = screen;
-        this.spell = spell;
+        this.perk = perk;
 
     }
 
@@ -57,11 +53,10 @@ public class LearnSpellButton extends ImageButton {
         gui.blit(SPELL_SLOT, getX(), getY(), BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X);
 
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-        gui.blit(spell.getIconLoc(), getX() + 1, getY() + 1, 16, 16, 16, 16, 16, 16);
+        gui.blit(perk.getIcon(), getX() + 1, getY() + 1, 16, 16, 16, 16, 16, 16);
 
-        int currentlvl = Load.spells(mc.player)
-                .getLevelOf(spell.GUID());
-        int maxlvl = spell.getMaxLevel();
+        int currentlvl = Load.playerRPGData(mc.player).ascClass.getLevel(perk.GUID());
+        int maxlvl = perk.getMaxLevel();
         String lvltext = currentlvl + "/" + maxlvl;
         TextUtils.renderText(gui, 0.8F, lvltext, getX() + BUTTON_SIZE_X / 2, (int) (getY() + BUTTON_SIZE_Y * 0.85F), ChatFormatting.GREEN);
 
@@ -80,10 +75,10 @@ public class LearnSpellButton extends ImageButton {
 
         TooltipInfo info = new TooltipInfo(mc.player);
 
-        tooltip.addAll(spell.GetTooltipString(info));
+        tooltip.addAll(perk.GetTooltipString(info));
 
         int reqlvl = screen.currentSchool()
-                .getLevelNeededToAllocate(screen.currentSchool().spells.get(spell.GUID()));
+                .getLevelNeededToAllocate(screen.currentSchool().perks.get(perk.GUID()));
 
         tooltip.add(Component.literal("Required Level: " + reqlvl).withStyle(ChatFormatting.RED));
 

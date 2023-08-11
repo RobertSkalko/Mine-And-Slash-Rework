@@ -24,10 +24,10 @@ public class GiveShieldAction extends SpellAction {
         if (!ctx.world.isClientSide) {
             ValueCalculation calc = data.get(VALUE_CALCULATION);
 
-            int value = calc.getCalculatedValue(ctx.levelProvider);
+            int value = calc.getCalculatedValue(ctx.caster, ctx.calculatedSpellData.getSpell());
 
             int seconds = data.get(SECONDS)
-                .intValue();
+                    .intValue();
 
             targets.forEach(x -> {
                 GiveShieldEvent effect = new GiveShieldEvent(value, seconds, ctx.caster, x);

@@ -9,62 +9,10 @@
     40,
     50
   ],
-  "spells": {
-    "awaken_mana": {
-      "x": 7,
-      "y": 4
-    },
-    "banish": {
-      "x": 10,
-      "y": 5
-    },
-    "charge": {
-      "x": 4,
-      "y": 1
-    },
-    "gong_strike": {
-      "x": 2,
-      "y": 0
-    },
-    "healing_aura": {
-      "x": 0,
-      "y": 0
-    },
-    "pull": {
+  "perks": {
+    "test": {
       "x": 8,
-      "y": 3
-    },
-    "shooting_star": {
-      "x": 1,
-      "y": 2
-    },
-    "song_of_perseverance": {
-      "x": 1,
-      "y": 4
-    },
-    "song_of_valor": {
-      "x": 2,
-      "y": 4
-    },
-    "song_of_vigor": {
-      "x": 3,
-      "y": 4
-    },
-    "taunt": {
-      "x": 5,
-      "y": 5
-    },
-    "undying_will": {
-      "x": 3,
-      "y": 2
-    },
-    "whirlwind": {
-      "x": 6,
-      "y": 1
-    },
-    "wish": {
-      "x": 3,
-      "y": 6
+      "y": 0
     }
   }
 }

@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.database.data.spells.spell_classes;
 
 import com.robertx22.age_of_exile.database.data.spells.components.EntityActivation;
 import com.robertx22.age_of_exile.database.data.spells.entities.EntitySavedSpellData;
-import com.robertx22.age_of_exile.database.data.value_calc.LevelProvider;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
@@ -27,7 +26,6 @@ public class SpellCtx {
 
     public final EntityActivation activation;
 
-    public final LevelProvider levelProvider;
 
     public EntitySavedSpellData calculatedSpellData;
 
@@ -43,7 +41,6 @@ public class SpellCtx {
         this.vecPos = vec;
         this.activation = act;
 
-        this.levelProvider = new LevelProvider(caster, calculatedSpellData.getSpell());
 
     }
 
@@ -58,8 +55,7 @@ public class SpellCtx {
         Objects.requireNonNull(sourceEntity);
         Objects.requireNonNull(data);
 
-        Load.spells(caster)
-                .onSpellHitTarget(sourceEntity, target);
+        Load.Unit(caster).onSpellHitTarget(sourceEntity, target);
         return new SpellCtx(EntityActivation.ON_HIT, sourceEntity, caster, target, target.blockPosition(), target.position(), data);
     }
 

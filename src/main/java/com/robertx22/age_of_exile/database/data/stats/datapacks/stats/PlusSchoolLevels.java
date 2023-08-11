@@ -1,13 +1,12 @@
 package com.robertx22.age_of_exile.database.data.stats.datapacks.stats;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
+import com.robertx22.age_of_exile.database.data.spell_school.AscendancyClass;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.base.BaseDatapackStat;
 import com.robertx22.age_of_exile.database.data.stats.name_regex.StatNameRegex;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
-import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 
 public class PlusSchoolLevels extends BaseDatapackStat implements IAfterStatCalc {
 
@@ -17,7 +16,7 @@ public class PlusSchoolLevels extends BaseDatapackStat implements IAfterStatCalc
 
     transient String locname;
 
-    public PlusSchoolLevels(SpellSchool school) {
+    public PlusSchoolLevels(AscendancyClass school) {
         this(school.GUID());
         this.locname = "To All " + school.locname + " Skills";
     }
@@ -33,18 +32,23 @@ public class PlusSchoolLevels extends BaseDatapackStat implements IAfterStatCalc
         this.scaling = StatScaling.NONE;
     }
 
+    // todo redo this
+
     @Override
     public void affectUnit(EntityData unitdata, StatData statdata) {
 
-        SpellSchool sc = ExileDB.SpellSchools()
+        AscendancyClass sc = ExileDB.SpellSchools()
                 .get(school);
 
+        /*
         sc.spells.keySet()
                 .forEach(x -> {
                     Load.spells(unitdata.getEntity())
                             .getSpellsData()
                             .addToLevelsFromStat(x, (int) statdata.getValue());
                 });
+
+         */
 
     }
 

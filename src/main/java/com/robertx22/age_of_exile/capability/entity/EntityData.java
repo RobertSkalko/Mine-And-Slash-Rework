@@ -52,6 +52,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.Capability;
@@ -62,6 +63,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -118,8 +120,10 @@ public class EntityData implements ICap, INeededForClient {
     transient LivingEntity entity;
 
     transient EntityGears gears = new EntityGears();
+    public transient HashMap<UUID, List<UUID>> mobsHit = new HashMap<>();
 
     public SummonedPetData summonedPetData = new SummonedPetData();
+
 
     // sync these for mobs
     Unit unit = new Unit();
@@ -217,6 +221,7 @@ public class EntityData implements ICap, INeededForClient {
         LoadSave.Save(ailments, nbt, AILMENTS);
         LoadSave.Save(summonedPetData, nbt, PET);
 
+
         if (unit != null) {
             UnitNbt.Save(nbt, unit);
         }
@@ -284,7 +289,7 @@ public class EntityData implements ICap, INeededForClient {
             this.customExactStats = loadOrBlank(CustomExactStatsData.class, new CustomExactStatsData(), nbt, CUSTOM_STATS, new CustomExactStatsData());
             this.resources = loadOrBlank(ResourcesData.class, new ResourcesData(), nbt, RESOURCES_LOC, new ResourcesData());
             this.cooldowns = loadOrBlank(CooldownsData.class, new CooldownsData(), nbt, COOLDOWNS, new CooldownsData());
-
+         
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -790,6 +795,40 @@ public class EntityData implements ICap, INeededForClient {
     public LivingEntity getEntity() {
         return entity;
     }
+
+
+    public void onSpellHitTarget(Entity spellEntity, LivingEntity target) {
+
+        UUID id = target.getUUID();
+
+        UUID key = spellEntity.getUUID();
+
+        if (!mobsHit.containsKey(key)) {
+            mobsHit.put(key, new ArrayList<>());
+        }
+        mobsHit.get(key)
+                .add(id);
+
+        if (mobsHit.size() > 1000) {
+            mobsHit.clear();
+        }
+
+    }
+
+
+    public boolean alreadyHit(Entity spellEntity, LivingEntity target) {
+        // this makes sure piercing projectiles hit target only once and then pass through
+        // i can replace this with an effect that tags them too
+
+        UUID key = spellEntity.getUUID();
+
+        if (!mobsHit.containsKey(key)) {
+            return false;
+        }
+        return mobsHit.get(key)
+                .contains(target.getUUID());
+    }
+
 
     @Override
     public String getCapIdForSyncing() {

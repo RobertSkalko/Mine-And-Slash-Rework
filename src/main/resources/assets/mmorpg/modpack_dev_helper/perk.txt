@@ -118,6 +118,7 @@ health_percent
 physical_weapon_damage
 axe_damage_big
 spell_fire_damage
+test
 phys_to_all
 spirit_cost
 bow_damage_big

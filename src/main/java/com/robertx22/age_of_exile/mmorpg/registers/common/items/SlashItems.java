@@ -14,9 +14,9 @@ import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.weapons.StaffWeapon
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.ItemNewbieGearBag;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.LootTableItem;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.ProjectileItem;
+import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.AscClassResetPotion;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.ResetStatsPotion;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.SingleTalentResetPotion;
-import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.SpellResetPotion;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.TalentResetPotion;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -64,7 +64,7 @@ public class SlashItems {
 
     public static RegObj<TalentResetPotion> RESET_ALL_PERKS = Def.item(() -> new TalentResetPotion(), "potions/reset_all_perks");
     public static RegObj<SingleTalentResetPotion> ADD_RESET_PERK_POINTS = Def.item(() -> new SingleTalentResetPotion(), "potions/add_reset_perk_points");
-    public static RegObj<SpellResetPotion> RESET_SPELLS = Def.item(() -> new SpellResetPotion(), "potions/reset_spells");
+    public static RegObj<AscClassResetPotion> RESET_SPELLS = Def.item(() -> new AscClassResetPotion(), "potions/reset_spells");
     public static RegObj<ResetStatsPotion> RESET_STATS = Def.item(() -> new ResetStatsPotion(), "potions/reset_stats");
 
 

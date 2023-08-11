@@ -26,15 +26,15 @@ public class RestoreManaAction extends SpellAction {
         if (!ctx.world.isClientSide) {
             ValueCalculation calc = data.get(VALUE_CALCULATION);
 
-            int value = calc.getCalculatedValue(ctx.levelProvider);
+            int value = calc.getCalculatedValue(ctx.caster, ctx.calculatedSpellData.getSpell());
 
             for (LivingEntity x : targets) {
 
                 RestoreResourceEvent restore = EventBuilder.ofRestore(
-                        ctx.caster, x, ResourceType.mana, RestoreType.heal, value
-                    )
-                    .setSpell(ctx.calculatedSpellData.getSpell())
-                    .build();
+                                ctx.caster, x, ResourceType.mana, RestoreType.heal, value
+                        )
+                        .setSpell(ctx.calculatedSpellData.getSpell())
+                        .build();
 
                 restore.Activate();
 

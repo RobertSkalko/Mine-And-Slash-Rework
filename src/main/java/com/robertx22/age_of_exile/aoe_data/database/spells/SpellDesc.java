@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.spells;
 
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
-import com.robertx22.age_of_exile.database.data.value_calc.LevelProvider;
 import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
@@ -24,7 +23,7 @@ public class SpellDesc {
         for (ValueCalculation calc : ExileDB.ValueCalculations()
                 .getList()) {
             String id = "[calc:" + calc.id + "]";
-            tip = tip.replace(id, CLOC.translate(calc.getShortTooltip(new LevelProvider(caster, spell))));
+            tip = tip.replace(id, CLOC.translate(calc.getShortTooltip(caster, spell)));
             if (!tip.equals(copy)) {
                 break;
             }

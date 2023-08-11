@@ -11,13 +11,13 @@ public class OpenSkillGems implements IContainerNamedScreen {
 
     @Override
     public void openContainer() {
-        
+
         Packets.sendToServer(new OpenContainerPacket(OpenContainerPacket.GuiType.SKILL_GEMS));
     }
 
     @Override
     public ResourceLocation iconLocation() {
-        return new ResourceLocation(SlashRef.MODID, "textures/gui/main_hub/icons/gems.png");
+        return new ResourceLocation(SlashRef.MODID, "textures/gui/main_hub/icons/skill_gems.png");
     }
 
     @Override

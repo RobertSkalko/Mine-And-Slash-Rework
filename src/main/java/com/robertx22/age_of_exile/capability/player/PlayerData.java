@@ -8,6 +8,8 @@ import com.robertx22.age_of_exile.capability.player.helper.MyInventory;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.DeathStatsData;
 import com.robertx22.age_of_exile.saveclasses.perks.TalentsData;
+import com.robertx22.age_of_exile.saveclasses.spells.AscendancyClassesData;
+import com.robertx22.age_of_exile.saveclasses.spells.SpellCastingData;
 import com.robertx22.library_of_exile.components.ICap;
 import com.robertx22.library_of_exile.utils.LoadSave;
 import net.minecraft.core.Direction;
@@ -54,6 +56,8 @@ public class PlayerData implements ICap {
     private static final String GEMS = "gems";
     private static final String AURAS = "auras";
     private static final String MAP = "map";
+    private static final String ASC = "asc";
+    private static final String CAST = "casting";
 
     transient Player player;
 
@@ -62,9 +66,13 @@ public class PlayerData implements ICap {
     public StatPointsData statPoints = new StatPointsData();
     public DeathStatsData deathStats = new DeathStatsData();
     public PlayerMapData map = new PlayerMapData();
+    public AscendancyClassesData ascClass = new AscendancyClassesData();
+    public SpellCastingData spellCastingData = new SpellCastingData();
+
 
     private MyInventory skillGemInv = new MyInventory(GemInventoryHelper.TOTAL_SLOTS);
     private MyInventory auraInv = new MyInventory(GemInventoryHelper.TOTAL_AURAS);
+
 
     public PlayerData(Player player) {
         this.player = player;
@@ -81,6 +89,8 @@ public class PlayerData implements ICap {
         LoadSave.Save(statPoints, nbt, STAT_POINTS);
         LoadSave.Save(deathStats, nbt, DEATH_STATS);
         LoadSave.Save(map, nbt, MAP);
+        LoadSave.Save(ascClass, nbt, ASC);
+        LoadSave.Save(spellCastingData, nbt, CAST);
 
         nbt.put(GEMS, skillGemInv.createTag());
         nbt.put(AURAS, auraInv.createTag());
@@ -96,6 +106,8 @@ public class PlayerData implements ICap {
         this.statPoints = loadOrBlank(StatPointsData.class, new StatPointsData(), nbt, STAT_POINTS, new StatPointsData());
         this.deathStats = loadOrBlank(DeathStatsData.class, new DeathStatsData(), nbt, DEATH_STATS, new DeathStatsData());
         this.map = loadOrBlank(PlayerMapData.class, new PlayerMapData(), nbt, MAP, new PlayerMapData());
+        this.ascClass = loadOrBlank(AscendancyClassesData.class, new AscendancyClassesData(), nbt, ASC, new AscendancyClassesData());
+        this.spellCastingData = loadOrBlank(SpellCastingData.class, new SpellCastingData(), nbt, CAST, new SpellCastingData());
 
         skillGemInv.fromTag(nbt.getList(GEMS, 10)); // todo
         auraInv.fromTag(nbt.getList(AURAS, 10)); // todo

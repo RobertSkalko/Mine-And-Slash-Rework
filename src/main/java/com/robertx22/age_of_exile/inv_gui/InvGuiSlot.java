@@ -1,24 +1,11 @@
 package com.robertx22.age_of_exile.inv_gui;
 
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
-import com.robertx22.age_of_exile.gui.TextUtils;
-import com.robertx22.age_of_exile.gui.screens.spell.SpellScreen;
+import com.robertx22.age_of_exile.gui.screens.spell.AscendancyClassScreen;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
-import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import com.robertx22.age_of_exile.vanilla_mc.packets.AllocateSpellPacket;
-import com.robertx22.library_of_exile.main.Packets;
-import com.robertx22.library_of_exile.utils.TextUTIL;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.gui.components.Tooltip;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class InvGuiSlot extends ImageButton {
 
@@ -28,14 +15,19 @@ public class InvGuiSlot extends ImageButton {
     public static int BUTTON_SIZE_Y = 18;
 
     Minecraft mc = Minecraft.getInstance();
-    SpellScreen screen;
+    AscendancyClassScreen screen;
 
     Spell spell;
 
-    public InvGuiSlot(SpellScreen screen, Spell spell, int xPos, int yPos) {
+    public InvGuiSlot(int pX, int pY, int pWidth, int pHeight, int pXTexStart, int pYTexStart, ResourceLocation pResourceLocation, OnPress pOnPress) {
+        super(pX, pY, pWidth, pHeight, pXTexStart, pYTexStart, pResourceLocation, pOnPress);
+    }
+    /*
+
+    public InvGuiSlot(AscendancyClassScreen screen, Spell spell, int xPos, int yPos) {
         super(xPos, yPos, BUTTON_SIZE_X, BUTTON_SIZE_Y, 0, 0, BUTTON_SIZE_Y, TEX, (button) -> {
 
-            Packets.sendToServer(new AllocateSpellPacket(screen.currentSchool(), spell, AllocateSpellPacket.ACTION.ALLOCATE));
+            Packets.sendToServer(new AllocateClassPointPacket(screen.currentSchool(), spell, AllocateClassPointPacket.ACTION.ALLOCATE));
 
         });
         this.screen = screen;
@@ -79,7 +71,7 @@ public class InvGuiSlot extends ImageButton {
         tooltip.addAll(spell.GetTooltipString(info));
 
         int reqlvl = screen.currentSchool()
-                .getLevelNeededToAllocate(screen.currentSchool().spells.get(spell.GUID()));
+                .getLevelNeededToAllocate(screen.currentSchool().perks.get(spell.GUID()));
 
         tooltip.add(Component.literal("Required Level: " + reqlvl).withStyle(ChatFormatting.RED));
 
@@ -89,5 +81,7 @@ public class InvGuiSlot extends ImageButton {
 
     }
 
+
+     */
 
 }

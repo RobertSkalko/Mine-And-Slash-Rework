@@ -20,7 +20,7 @@ import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.database.data.runewords.RuneWord;
-import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
+import com.robertx22.age_of_exile.database.data.spell_school.AscendancyClass;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.support_gem.SupportGem;
@@ -172,7 +172,7 @@ public class ExileDB {
     }
 
 
-    public static ExileRegistryContainer<SpellSchool> SpellSchools() {
+    public static ExileRegistryContainer<AscendancyClass> SpellSchools() {
         return Database.getRegistry(ExileRegistryTypes.SPELL_SCHOOL);
     }
 

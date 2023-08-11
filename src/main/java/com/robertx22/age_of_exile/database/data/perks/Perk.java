@@ -35,6 +35,12 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipL
 
     transient ResourceLocation cachedIcon = null;
 
+
+    // todo
+    public int getMaxLevel() {
+        return 1;
+    }
+
     public ResourceLocation getIcon() {
         if (cachedIcon == null) {
             ResourceLocation id = new ResourceLocation(icon);
@@ -73,7 +79,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipL
                 list.add(Component.translatable(SlashRef.MODID + ".one_of_a_kind." + one_kind).withStyle(ChatFormatting.GREEN));
             }
 
-         
+
             if (this.type == PerkType.MAJOR) {
 
                 list.add(Component.literal("Game changer talent.").withStyle(ChatFormatting.RED));
