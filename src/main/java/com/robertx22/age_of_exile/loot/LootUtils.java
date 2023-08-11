@@ -10,11 +10,7 @@ import net.minecraft.world.entity.monster.Slime;
 
 public class LootUtils {
 
-    public static boolean preventLootDueToLevelPenalty(int level, int playerLevel) {
-        return ServerContainer.get().LEVEL_DISTANCE_PENALTY_MIN_MULTI.get() >= getLevelDistancePunishmentMulti(level, playerLevel);
-
-    }
-
+  
     // prevents lvl 50 players farming lvl 1 mobs
     public static float getLevelDistancePunishmentMulti(int level, int playerLevel) {
 

@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.List;
@@ -10,9 +11,10 @@ public enum AllyOrEnemy {
     allies() {
         @Override
         public <T extends LivingEntity> List<T> getMatchingEntities(List<T> list, LivingEntity caster) {
+
             return list.stream()
-                .filter(x -> is(caster, x))
-                .collect(Collectors.toList());
+                    .filter(x -> is(caster, x))
+                    .collect(Collectors.toList());
         }
 
         @Override
@@ -23,6 +25,29 @@ public enum AllyOrEnemy {
         @Override
         public boolean includesCaster() {
             return true;
+        }
+    },
+    pets() {
+        @Override
+        public <T extends LivingEntity> List<T> getMatchingEntities(List<T> list, LivingEntity caster) {
+            return list.stream()
+                    .filter(x -> is(caster, x))
+                    .collect(Collectors.toList());
+        }
+
+        @Override
+        public boolean is(LivingEntity caster, LivingEntity target) {
+            if (caster instanceof Player) {
+                if (EntityFinder.isTamed(target) && target instanceof OwnableEntity pet && pet.getOwner() == caster) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        @Override
+        public boolean includesCaster() {
+            return false;
         }
     },
     enemies {
@@ -57,8 +82,8 @@ public enum AllyOrEnemy {
         @Override
         public <T extends LivingEntity> List<T> getMatchingEntities(List<T> list, LivingEntity caster) {
             return list.stream()
-                .filter(x -> is(caster, x))
-                .collect(Collectors.toList());
+                    .filter(x -> is(caster, x))
+                    .collect(Collectors.toList());
         }
 
         @Override

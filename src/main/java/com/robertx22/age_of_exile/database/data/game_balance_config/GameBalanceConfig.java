@@ -51,7 +51,13 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     public LevelRange getLevelsOfTier(int tier) {
         float multi = tier / 5F;
         int testlvl = (int) (MAX_LEVEL * multi + 1);
-        return LevelRanges.allNormal().stream().filter(x -> x.isLevelInRange(testlvl)).findFirst().get();
+        var opt = LevelRanges.allNormal().stream().filter(x -> x.isLevelInRange(testlvl)).findFirst();
+
+        
+        if (!opt.isPresent()) {
+            System.out.println("tier " + tier + " cant be found");
+        }
+        return opt.get();
 
     }
 

@@ -100,6 +100,7 @@ public class ProcessChunkBlocks {
 
 
                                     boolean any = false;
+                                    
 
                                     // todo make this work on either signs or these blocks
 
@@ -116,8 +117,7 @@ public class ProcessChunkBlocks {
 
                                     if (any) {
                                         // only set to air if the processor didnt turn it into another block
-                                        if (level.getBlockState(tilePos)
-                                                .getBlock() == Blocks.STRUCTURE_BLOCK) {
+                                        if (level.getBlockState(tilePos).getBlock() == Blocks.STRUCTURE_BLOCK || level.getBlockState(tilePos).getBlock() == Blocks.COMMAND_BLOCK) {
                                             level.setBlock(tilePos, Blocks.AIR.defaultBlockState(), 2); // delete data block
                                             level.removeBlockEntity(tilePos);
                                         }

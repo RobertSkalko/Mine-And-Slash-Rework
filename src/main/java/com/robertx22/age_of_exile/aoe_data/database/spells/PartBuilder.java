@@ -114,6 +114,7 @@ public class PartBuilder {
         return c;
     }
 
+
     public static ComponentPart healCaster(ValueCalculation calc) {
         ComponentPart c = new ComponentPart();
         c.acts.add(SpellAction.RESTORE_HEALTH.create(calc));

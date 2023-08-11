@@ -2,14 +2,12 @@ package com.robertx22.age_of_exile.event_hooks.my_events;
 
 import com.google.common.collect.Lists;
 import com.robertx22.age_of_exile.loot.LootInfo;
-import com.robertx22.age_of_exile.loot.LootUtils;
 import com.robertx22.age_of_exile.loot.MasterLootGen;
-import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Collections;
@@ -30,13 +28,15 @@ public class OnLootChestEvent extends EventConsumer<ExileEvents.OnChestLooted> {
             info.multi += 10;
         }
 
+        /*
         if (LootUtils.preventLootDueToLevelPenalty(info.level, Load.Unit(player)
                 .getLevel())) {
             event.canceled = true;
             return;
         }
+         */
 
-      
+
         List<ItemStack> items = MasterLootGen.generateLoot(info);
 
         List<Integer> list1 = mygetEmptySlotsRandomized(event.inventory, new Random());
