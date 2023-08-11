@@ -2,7 +2,7 @@
   "base": 0.0,
   "effect": {
     "effects": [
-      "increase_summon_duration_num"
+      "increase__duration_num"
     ],
     "events": [
       "on_spell_stat_calc"

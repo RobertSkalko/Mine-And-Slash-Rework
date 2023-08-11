@@ -140,7 +140,6 @@ ele_sword_damage
 totem_cdr
 dmg_to_undead
 freeze_resistance
-absorb_ele_dmg_to_hp
 projectile_cdr
 area_spell_dmg
 fire_weapon_damage
@@ -252,6 +251,7 @@ spell_fire_damage
 freeze_duration
 spirit_cost
 phys_to_all
+totem_duration
 energy_on_all_hit
 bleed_resistance
 lightning_penetration

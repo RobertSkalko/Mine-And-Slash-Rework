@@ -60,7 +60,11 @@ public class AscendancyClassesData implements IApplyableStats {
         if (allocated_lvls.getOrDefault(perk.GUID(), 0) >= perk.getMaxLevel()) {
             return false;
         }
+        var point = school.perks.get(perk.GUID());
 
+        if (this.allocated_lvls.entrySet().stream().anyMatch(x -> school.perks.get(x.getKey()).y == point.y)) {
+            return false; // only allow 1 point per row, if i want to not hardcode this, use Oneofakind types
+        }
         return true;
     }
 

@@ -54,13 +54,13 @@ public class SpellStatsCalculationEvent extends EffectEvent {
         this.data.setupNumber(EventData.MANA_COST, manamultilvl * spell.config.mana_cost.getValue(caster, spell));
         this.data.setupNumber(EventData.COOLDOWN_TICKS, spell.config.cooldown_ticks);
         this.data.setupNumber(EventData.PROJECTILE_SPEED_MULTI, 1F);
-        this.data.setupNumber(EventData.SUMMON_DURATION_MULTI, 1F);
+        this.data.setupNumber(EventData.DURATION_MULTI, 1F);
         this.data.setupNumber(EventData.AREA_MULTI, 1);
 
         // todo test spells like summon duration multi etc
     }
 
-    
+
     @Override
     protected void activate() {
 

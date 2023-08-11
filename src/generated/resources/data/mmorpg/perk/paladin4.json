@@ -1,0 +1,20 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/asc_classes/perk/paladin4.png",
+  "id": "paladin4",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "PERCENT",
+      "scale_to_lvl": false,
+      "stat": "increase_healing",
+      "v1": 30.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "spell_damage_per_perc_of_increase_healing",
+      "v1": 30.0
+    }
+  ]
+}

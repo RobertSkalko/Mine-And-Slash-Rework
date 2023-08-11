@@ -53,7 +53,7 @@ public class SummonPetAction extends SpellAction {
 
             int duration = data.get(MapField.LIFESPAN_TICKS).intValue();
 
-            duration *= ctx.calculatedSpellData.data.getNumber(EventData.SUMMON_DURATION_MULTI, 1).number;
+            duration *= ctx.calculatedSpellData.data.getNumber(EventData.DURATION_MULTI, 1).number;
 
             Load.Unit(en).summonedPetData.setup(ctx.calculatedSpellData.getSpell(), duration);
 

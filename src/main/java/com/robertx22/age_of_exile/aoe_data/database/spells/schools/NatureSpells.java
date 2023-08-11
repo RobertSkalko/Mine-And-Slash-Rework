@@ -38,7 +38,7 @@ public class NatureSpells implements ExileRegistryInit {
 
         SpellBuilder.of(THORN_BUSH, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 20 * 6)
                                 .setSwingArm(), "Thorn Bush",
-                        Arrays.asList(SpellTag.damage, SpellTag.area))
+                        Arrays.asList(SpellTag.damage, SpellTag.area, SpellTag.totem))
                 .manualDesc("Summon a thorny bush that deals "
                         + SpellCalcs.THORN_BUSH.getLocDmgTooltip()
                         + Elements.Chaos.getIconNameDmg() + " every second.")

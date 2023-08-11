@@ -66,35 +66,6 @@ public class SpecialStats {
             }
     );
 
-    public static SpecialStat ABSORB_ELE_DMG_INTO_HP = new SpecialStat("absorb_ele_dmg_to_hp",
-            format("You have " + VAL1 + "% chance to absorb " + Elements.Elemental
-                    .getIconNameFormat() + " damage and heal you instead."),
-            new BaseSpecialStatDamageEffect() {
-                @Override
-                public DamageEvent activate(DamageEvent effect, StatData data, Stat stat) {
-
-                    float val = effect.data.getNumber();
-
-                    RestoreResourceEvent restore = EventBuilder.ofRestore(effect.source, effect.target, ResourceType.health, RestoreType.heal, val)
-                            .build();
-                    restore.Activate();
-
-                    effect.cancelDamage();
-                    return effect;
-                }
-
-                @Override
-                public boolean canActivate(DamageEvent effect, StatData data, Stat stat) {
-                    return effect.getElement()
-                            .isElemental() && RandomUtils.roll(data.getValue());
-                }
-
-                @Override
-                public EffectSides Side() {
-                    return EffectSides.Target;
-                }
-            }
-    );
 
     public static SpecialStat BETTER_FOOD_BUFFS = new SpecialStat("more_food_stats",
             format("You gain " + VAL1 + "% more stats through Food buffs."),

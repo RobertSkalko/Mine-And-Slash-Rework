@@ -4,7 +4,6 @@ public enum ResourceType {
     health("health", "Health"),
     magic_shield("magic_shield", "Magic Shield"),
     mana("mana", "Mana"),
-    shield("shield", "Shield"),
     block("block", "Block"),
     energy("energy", "Energy"),
     blood("blood", "Blood");

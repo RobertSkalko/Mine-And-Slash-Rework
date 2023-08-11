@@ -1,0 +1,30 @@
+{
+  "base": 0.0,
+  "effect": {
+    "effects": [
+      "increase__duration_num"
+    ],
+    "events": [
+      "on_spell_stat_calc"
+    ],
+    "ifs": [
+      "spell_has_tag_totem"
+    ],
+    "order": 0,
+    "side": "Source"
+  },
+  "ele": "Physical",
+  "format": "green",
+  "group": "Misc",
+  "icon": "❁",
+  "id": "totem_duration",
+  "is_long": false,
+  "is_perc": true,
+  "max": 2.14748365E9,
+  "min": -1000.0,
+  "multiUseType": "MULTIPLY_STAT",
+  "order": 100,
+  "scaling": "NONE",
+  "ser": "data",
+  "show": true
+}

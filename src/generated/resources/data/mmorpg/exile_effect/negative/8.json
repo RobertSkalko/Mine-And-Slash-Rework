@@ -37,20 +37,8 @@
   "stats": [
     {
       "type": "FLAT",
-      "max": -30.0,
+      "max": -20.0,
       "min": -10.0,
-      "stat": "armor"
-    },
-    {
-      "type": "FLAT",
-      "max": -30.0,
-      "min": -10.0,
-      "stat": "dodge"
-    },
-    {
-      "type": "FLAT",
-      "max": -15.0,
-      "min": -5.0,
       "stat": "elemental_resist"
     }
   ],

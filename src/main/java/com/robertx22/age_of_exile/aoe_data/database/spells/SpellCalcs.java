@@ -150,9 +150,11 @@ public class SpellCalcs {
     public static ValueCalculation TOTEM_MANA = ValueCalcBuilder.of("totem_mana")
             .spellScaling(0.2F, 0.5F)
             .build();
+
     public static ValueCalculation CURSE = ValueCalcBuilder.of("curse")
-            .spellScaling(0.2F, 0.6F)
+            .spellScaling(0.5F, 1F)
             .build();
+    
     public static ValueCalculation BLACK_HOLE = ValueCalcBuilder.of("black_hole")
             .spellScaling(0.5F, 1.5F)
             .build();

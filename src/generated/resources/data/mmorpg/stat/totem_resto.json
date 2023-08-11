@@ -5,8 +5,7 @@
       "increase_number_num"
     ],
     "events": [
-      "on_spend_resource",
-      "on_absorb_damage"
+      "on_spend_resource"
     ],
     "ifs": [
       "spell_has_tag_totem"

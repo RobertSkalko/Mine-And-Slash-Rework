@@ -19,6 +19,7 @@ import java.util.Arrays;
 
 public class CurseSpells implements ExileRegistryInit {
 
+    
     static void curse(String id, String name, EffectCtx effect) {
         SpellBuilder.of(id, PlayStyle.INT, SpellConfiguration.Builder.instant(10, 20 * 30)
                                 .setSwingArm()
@@ -40,8 +41,8 @@ public class CurseSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        curse("curse_of_agony", "Curse of Agony", NegativeEffects.AGONY);
-        curse("curse_of_weak", "Curse of Weakness", NegativeEffects.WEAKNESS);
+        curse("curse_of_agony", "Curse of Agony", NegativeEffects.CURSE_AGONY);
+        curse("curse_of_weak", "Curse of Weakness", NegativeEffects.CURSE_WEAKNESS);
         curse("curse_of_despair", "Curse of Despair", NegativeEffects.DESPAIR);
 
     }

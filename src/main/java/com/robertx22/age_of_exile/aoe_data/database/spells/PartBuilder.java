@@ -325,12 +325,6 @@ public class PartBuilder {
         return c;
     }
 
-    public static ComponentPart giveShieldInRadius(Double radius, ValueCalculation calc, double duration) {
-        ComponentPart c = new ComponentPart();
-        c.acts.add(SpellAction.GIVE_SHIELD.create(calc, duration));
-        c.targets.add(BaseTargetSelector.AOE.create(radius, EntityFinder.SelectionType.RADIUS, AllyOrEnemy.allies));
-        return c;
-    }
 
     public static ComponentPart giveExileEffectToAlliesInRadius(Double radius, String effect, Double dura) {
         ComponentPart c = new ComponentPart();

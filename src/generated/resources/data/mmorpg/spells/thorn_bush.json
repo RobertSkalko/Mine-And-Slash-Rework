@@ -182,7 +182,8 @@
     "swing_arm": true,
     "tags": [
       "damage",
-      "area"
+      "area",
+      "totem"
     ],
     "times_to_cast": 1
   },

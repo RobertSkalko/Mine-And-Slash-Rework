@@ -202,6 +202,9 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
         this.lifespan = holder.get(MapField.LIFESPAN_TICKS)
                 .intValue();
 
+        lifespan *= data.data.getNumber(EventData.DURATION_MULTI, 1).number;
+
+
         data.data.setString(EventData.ITEM_ID, holder.get(MapField.ITEM));
         CompoundTag nbt = new CompoundTag();
         nbt.putString("spell", GSON.toJson(spellData));

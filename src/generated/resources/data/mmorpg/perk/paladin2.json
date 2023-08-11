@@ -1,0 +1,20 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/asc_classes/perk/paladin2.png",
+  "id": "paladin2",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "PERCENT",
+      "scale_to_lvl": false,
+      "stat": "health",
+      "v1": 10.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "spell_damage_per_perc_of_increase_healing",
+      "v1": 15.0
+    }
+  ]
+}

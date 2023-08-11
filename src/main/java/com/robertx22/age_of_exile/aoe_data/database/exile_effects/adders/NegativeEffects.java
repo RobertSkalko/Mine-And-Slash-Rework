@@ -37,8 +37,8 @@ public class NegativeEffects implements ExileRegistryInit {
     public static EffectCtx BLIND = new EffectCtx("blind", "Blind", 4, Elements.Chaos, EffectType.negative);
     public static EffectCtx STUN = new EffectCtx("stun", "Stun", 5, Elements.Physical, EffectType.negative);
     public static EffectCtx SLOW = new EffectCtx("slow", "Slow", 6, Elements.Physical, EffectType.negative);
-    public static EffectCtx AGONY = new EffectCtx("agony", "Curse of Agony", 7, Elements.Elemental, EffectType.negative);
-    public static EffectCtx WEAKNESS = new EffectCtx("weak", "Curse of Weakness", 8, Elements.Elemental, EffectType.negative);
+    public static EffectCtx CURSE_AGONY = new EffectCtx("agony", "Curse of Agony", 7, Elements.Elemental, EffectType.negative);
+    public static EffectCtx CURSE_WEAKNESS = new EffectCtx("weak", "Curse of Weakness", 8, Elements.Elemental, EffectType.negative);
     public static EffectCtx DESPAIR = new EffectCtx("despair", "Curse of Despair", 9, Elements.Elemental, EffectType.negative);
     public static EffectCtx CHARM = new EffectCtx("charm", "Charm", 10, Elements.Elemental, EffectType.negative);
     public static EffectCtx GROUNDING = new EffectCtx("ground", "Grounding", 11, Elements.Physical, EffectType.negative);
@@ -79,12 +79,11 @@ public class NegativeEffects implements ExileRegistryInit {
                 .stat(-1, -3, new ElementalResist(Elements.Elemental), ModType.FLAT)
                 .build();
 
-        ExileEffectBuilder.of(AGONY)
+        ExileEffectBuilder.of(CURSE_AGONY)
                 .maxStacks(1)
                 .stat(-10, 20, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.STR))
-                .stat(-10, 20, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.INT))
                 .stat(-10, 20, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.DEX))
-                .stat(-5, -10, DatapackStats.MOVE_SPEED)
+                .stat(5, 10, DatapackStats.MOVE_SPEED)
 
                 .spell(SpellBuilder.forEffect()
                         .onTick(PartBuilder.aoeParticles(ParticleTypes.WITCH, 2D, 0.5D)
@@ -94,11 +93,9 @@ public class NegativeEffects implements ExileRegistryInit {
                 .addTags(EffectTags.curse, EffectTags.negative)
                 .build();
 
-        ExileEffectBuilder.of(WEAKNESS)
+        ExileEffectBuilder.of(CURSE_WEAKNESS)
                 .maxStacks(1)
-                .stat(-10, -30, Armor.getInstance())
-                .stat(-10, -30, DodgeRating.getInstance())
-                .stat(-5, -15, new ElementalResist(Elements.Elemental))
+                .stat(-10, -20, new ElementalResist(Elements.Elemental))
 
                 .spell(SpellBuilder.forEffect()
                         .onTick(PartBuilder.aoeParticles(ParticleTypes.WITCH, 2D, 0.5D)
@@ -110,12 +107,13 @@ public class NegativeEffects implements ExileRegistryInit {
 
         ExileEffectBuilder.of(DESPAIR)
                 .maxStacks(1)
-                .stat(-10, -20, Stats.TOTAL_DAMAGE.get())
+                .stat(-15, -25, new ElementalResist(Elements.Chaos))
+                
                 .spell(SpellBuilder.forEffect()
-                        .onExpire(PartBuilder.damage(SpellCalcs.DESPAIR, Elements.Elemental))
                         .onTick(PartBuilder.aoeParticles(ParticleTypes.WITCH, 2D, 0.5D)
                                 .onTick(20D))
                         .buildForEffect())
+
                 .addTags(EffectTags.curse, EffectTags.negative)
                 .build();
 

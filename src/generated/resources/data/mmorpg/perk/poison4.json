@@ -1,0 +1,14 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/asc_classes/perk/poison4.png",
+  "id": "poison4",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "MORE",
+      "scale_to_lvl": false,
+      "stat": "poison_damage",
+      "v1": 25.0
+    }
+  ]
+}

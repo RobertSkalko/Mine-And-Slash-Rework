@@ -577,7 +577,6 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> TOTEM_RESTORATION_STRENGTH = DatapackStatBuilder
             .ofSingle("totem_resto", Elements.All)
             .worksWithEvent(RestoreResourceEvent.ID)
-            .worksWithEvent(GiveShieldEvent.ID)
             .setPriority(100)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.totem))
@@ -672,37 +671,6 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
-    public static DataPackStatAccessor<EmptyAccessor> SHIELD_STRENGTH = DatapackStatBuilder
-            .ofSingle("shield_strength", Elements.Physical)
-            .worksWithEvent(GiveShieldEvent.ID)
-            .setPriority(0)
-            .setSide(EffectSides.Source)
-            .addEffect(StatEffects.INCREASE_VALUE)
-            .setLocName(x -> "Shield Strength")
-            .setLocDesc(x -> "Boosts the shield amount you get from spells and other sources.")
-            .modifyAfterDone(x -> {
-                x.is_perc = true;
-                x.base = 0;
-                x.icon = "\u2748";
-                x.format = ChatFormatting.RED.getName();
-            })
-            .build();
-
-    public static DataPackStatAccessor<EmptyAccessor> SHIELD_DURATION = DatapackStatBuilder
-            .ofSingle("shield_duration", Elements.Physical)
-            .worksWithEvent(GiveShieldEvent.ID)
-            .setPriority(0)
-            .setSide(EffectSides.Source)
-            .addEffect(StatEffects.INCREASE_SECONDS)
-            .setLocName(x -> "Shield Strength")
-            .setLocDesc(x -> "Boosts the shield amount from spells and other sources.")
-            .modifyAfterDone(x -> {
-                x.is_perc = true;
-                x.base = 0;
-                x.icon = "\u2748";
-                x.format = ChatFormatting.GREEN.getName();
-            })
-            .build();
 
     public static DataPackStatAccessor<EmptyAccessor> MANA_COST = DatapackStatBuilder
             .ofSingle("mana_cost", Elements.Physical)
@@ -836,12 +804,28 @@ public class Stats implements ExileRegistryInit {
             .setPriority(0)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.summon))
-            .addEffect(StatEffects.SUMMON_DURATION)
+            .addEffect(StatEffects.DURATION_INCREASE)
             .setLocName(x -> "Summon Duration")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
                 x.icon = "\u27B9";
+                x.format = ChatFormatting.GREEN.getName();
+            })
+
+            .build();
+
+    public static DataPackStatAccessor<EmptyAccessor> TOTEM_DURATION = DatapackStatBuilder
+            .ofSingle("totem_duration", Elements.Physical)
+            .worksWithEvent(SpellStatsCalculationEvent.ID)
+            .setPriority(0)
+            .setSide(EffectSides.Source)
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.totem))
+            .addEffect(StatEffects.DURATION_INCREASE)
+            .setLocName(x -> "Totem Duration")
+            .setLocDesc(x -> "")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
                 x.format = ChatFormatting.GREEN.getName();
             })
 

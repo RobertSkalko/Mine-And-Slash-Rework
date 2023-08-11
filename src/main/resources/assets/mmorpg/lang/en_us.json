@@ -340,7 +340,6 @@
 	"mmorpg.spell.frost_trap": "Frost Trap",
 	"mmorpg.spell.frostball": "Ice Ball",
 	"mmorpg.spell.gong_strike": "Gong Strike",
-	"mmorpg.spell.guard_totem": "Guarding Totem",
 	"mmorpg.spell.healing_aura": "Healing Aura",
 	"mmorpg.spell.heart_of_ice": "Heart of Ice",
 	"mmorpg.spell.hunter_potion": "Hunter's Potion",
@@ -361,7 +360,6 @@
 	"mmorpg.spell.refresh": "Refresh",
 	"mmorpg.spell.rejuv_totem": "Rejuvenating Totem",
 	"mmorpg.spell.shooting_star": "Shooting Star",
-	"mmorpg.spell.shout_warn": "Warning Shout",
 	"mmorpg.spell.shred": "Shred",
 	"mmorpg.spell.smoke_bomb": "Smoke Bomb",
 	"mmorpg.spell.song_of_perseverance": "Hymn of Perseverance",
@@ -437,7 +435,6 @@
 	"mmorpg.one_of_a_kind.frost_trap_mod": "Frost Trap Modifier",
 	"mmorpg.one_of_a_kind.frostball_mod": "Ice Ball Modifier",
 	"mmorpg.one_of_a_kind.gong_strike_mod": "Gong Strike Modifier",
-	"mmorpg.one_of_a_kind.guard_totem_mod": "Guarding Totem Modifier",
 	"mmorpg.one_of_a_kind.healing_aura_mod": "Healing Aura Modifier",
 	"mmorpg.one_of_a_kind.heart_of_ice_mod": "Heart of Ice Modifier",
 	"mmorpg.one_of_a_kind.hunter_potion_mod": "Hunter's Potion Modifier",
@@ -458,7 +455,6 @@
 	"mmorpg.one_of_a_kind.refresh_mod": "Refresh Modifier",
 	"mmorpg.one_of_a_kind.rejuv_totem_mod": "Rejuvenating Totem Modifier",
 	"mmorpg.one_of_a_kind.shooting_star_mod": "Shooting Star Modifier",
-	"mmorpg.one_of_a_kind.shout_warn_mod": "Warning Shout Modifier",
 	"mmorpg.one_of_a_kind.shred_mod": "Shred Modifier",
 	"mmorpg.one_of_a_kind.smoke_bomb_mod": "Smoke Bomb Modifier",
 	"mmorpg.one_of_a_kind.song_of_perseverance_mod": "Hymn of Perseverance Modifier",
@@ -500,6 +496,15 @@
 "_comment": " [CATEGORY]: RARITIES - NAMES",
 
 
+"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
+
+	"item.mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
+	"item.mmorpg.currency.orb_of_linking": "Orb of Linking",
+	"item.mmorpg.currency.socket_adder": "Orb of Digging",
+
+"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
+
+
 "_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
 
 	"effect.mmorpg.beneficial.1": "Antidote",
@@ -535,15 +540,6 @@
 	"mmorpg.ailment.poison": "Poison",
 
 "_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
-
-
-"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
-
-	"item.mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
-	"item.mmorpg.currency.orb_of_linking": "Orb of Linking",
-	"item.mmorpg.currency.socket_adder": "Orb of Digging",
-
-"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
 
 
 "_comment": " [CATEGORY]: TALENTS - NAMES",
@@ -976,7 +972,6 @@
 
 "_comment": " [CATEGORY]: STATS - NAMES",
 
-	"mmorpg.stat.absorb_ele_dmg_to_hp": "§7You have §a[VAL1]§7% chance to absorb §d☀ Elemental§7 damage and heal you instead.",
 	"mmorpg.stat.accuracy": "Accuracy",
 	"mmorpg.stat.ailment_damage": "Ailment Damage",
 	"mmorpg.stat.all_all_damage": "All Damage",
@@ -1215,9 +1210,7 @@
 	"mmorpg.stat.projectile_spell_dmg": "Projectile Spell Damage",
 	"mmorpg.stat.projectile_totem": "Projectile Totem",
 	"mmorpg.stat.shield_cdr": "Shield Spell Cooldown Reduction",
-	"mmorpg.stat.shield_duration": "Shield Strength",
 	"mmorpg.stat.shield_spell_dmg": "Shield Spell Damage",
-	"mmorpg.stat.shield_strength": "Shield Strength",
 	"mmorpg.stat.shout_cdr": "Shout Spell Cooldown Reduction",
 	"mmorpg.stat.shout_spell_dmg": "Shout Spell Damage",
 	"mmorpg.stat.song_cdr": "Song Spell Cooldown Reduction",
@@ -1251,6 +1244,7 @@
 	"mmorpg.stat.threat_generated": "Threat Generated",
 	"mmorpg.stat.total_damage": "Total Damage",
 	"mmorpg.stat.totem_cdr": "Totem Spell Cooldown Reduction",
+	"mmorpg.stat.totem_duration": "Totem Duration",
 	"mmorpg.stat.totem_resto": "Your Totem restoration effects are [VAL1]% stronger.",
 	"mmorpg.stat.totem_spell_dmg": "Totem Spell Damage",
 	"mmorpg.stat.trap_cdr": "Trap Spell Cooldown Reduction",
@@ -1501,8 +1495,6 @@
 	"mmorpg.stat_desc.projectile_damage": "Affects projectile damage, includes projectile spells like fireballs, and ranged basic attacks.",
 	"mmorpg.stat_desc.projectile_totem": "Instead of casting the spell yourself, you summon a totem that uses the spell",
 	"mmorpg.stat_desc.shield_cdr": "Reduces spell cooldown of spells with the tag.",
-	"mmorpg.stat_desc.shield_duration": "Boosts the shield amount from spells and other sources.",
-	"mmorpg.stat_desc.shield_strength": "Boosts the shield amount you get from spells and other sources.",
 	"mmorpg.stat_desc.shout_cdr": "Reduces spell cooldown of spells with the tag.",
 	"mmorpg.stat_desc.song_cdr": "Reduces spell cooldown of spells with the tag.",
 	"mmorpg.stat_desc.spell_all_damage": "Increases damage of spells of that element.",
@@ -1560,7 +1552,6 @@
 	"spell.desc.frost_trap": "Throw out a trap that stays on the ground and activates when an enemy approaches to deal [calc:ranger_trap]§b☀ Cold§7 Damage damage in area around itself.",
 	"spell.desc.frostball": "Throw out a ball of ice, dealing [calc:iceball] §b☀ Cold§7 Damage",
 	"spell.desc.gong_strike": "Bash enemies around you for [calc:gong_strike] §6☀ Physical§7 Damage",
-	"spell.desc.guard_totem": "Summon a totem which gives [calc:totem_guard] shield to allies around it.",
 	"spell.desc.healing_aura": "Heal allies around you for [calc:healing_aura] health",
 	"spell.desc.heart_of_ice": "Heal allies around you for [calc:heart_of_ice] health",
 	"spell.desc.hunter_potion": "Drink a potion, healing you for [calc:hunter_pot_heal] health",
@@ -1578,7 +1569,6 @@
 	"spell.desc.refresh": "Refreshes all your spell cooldowns by 1 minute.",
 	"spell.desc.rejuv_totem": "Summon a totem which restores [calc:totem_heal] health to allies around it.",
 	"spell.desc.shooting_star": "Shoots a star that heals allies for [calc:shooting_star] health on hit.",
-	"spell.desc.shout_warn": "Let out a warning shout, giving a [calc:shout_warn] Shield to all nearby allies.",
 	"spell.desc.shred": "Slash all nearby enemies, dealing [calc:shred] §6☀ Physical§7 Damage damage and reducing their defenses.",
 	"spell.desc.smoke_bomb": "Throw out a smoke bomb, blinding enemies and reducing threat.",
 	"spell.desc.song_of_perseverance": "Give a stack of Perseverance to all allies around you.",

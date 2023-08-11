@@ -45,18 +45,12 @@
       "type": "FLAT",
       "max": 20.0,
       "min": -10.0,
-      "stat": "int_dmg_received"
-    },
-    {
-      "type": "FLAT",
-      "max": 20.0,
-      "min": -10.0,
       "stat": "dex_dmg_received"
     },
     {
       "type": "FLAT",
-      "max": -10.0,
-      "min": -5.0,
+      "max": 10.0,
+      "min": 5.0,
       "stat": "move_speed"
     }
   ],

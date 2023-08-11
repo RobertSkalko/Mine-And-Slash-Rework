@@ -82,9 +82,7 @@ public class OnServerTick {
 
                 EntityData unitdata = Load.Unit(player);
 
-                unitdata.getResources()
-                        .shields.onTicksPassed(20);
-
+            
                 unitdata.tryRecalculateStats();
 
                 RestoreResourceEvent mana = EventBuilder.ofRestore(player, player, ResourceType.mana, RestoreType.regen, 0)

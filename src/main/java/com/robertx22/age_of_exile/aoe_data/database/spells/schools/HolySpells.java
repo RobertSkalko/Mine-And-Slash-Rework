@@ -110,16 +110,7 @@ public class HolySpells implements ExileRegistryInit {
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.CLOUD, 20D, 3D))
 
                 .build();
-        SpellBuilder.of(SHOUT_WARN, PlayStyle.STR, SpellConfiguration.Builder.instant(10, 60 * 20), "Warning Shout",
-                        Arrays.asList(SpellTag.area, SpellTag.shout, SpellTag.shield))
 
-                .manualDesc(
-                        "Let out a warning shout, giving a "
-                                + SpellCalcs.SHOUT_WARN.getLocDmgTooltip() + " Shield to all nearby allies.")
-
-                .onCast(PartBuilder.playSound(SoundEvents.WOLF_HOWL, 1D, 1D))
-                .onCast(PartBuilder.giveShieldInRadius(10D, SpellCalcs.SHOUT_WARN, 10D))
-                .build();
 
         SpellBuilder.of(PULL, PlayStyle.STR, SpellConfiguration.Builder.instant(5, 60 * 20), "Pull",
                         Arrays.asList(SpellTag.technique, SpellTag.area, SpellTag.damage))

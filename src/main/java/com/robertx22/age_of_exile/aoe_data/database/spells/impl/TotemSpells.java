@@ -7,7 +7,6 @@ import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.components.conditions.EffectCondition;
-import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
@@ -53,7 +52,7 @@ public class TotemSpells implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
-
+/*
         of(SlashBlocks.GUARD_TOTEM.get(), GUARD_TOTEM_ID, SpellConfiguration.Builder.instant(18, 20 * 30), "Guarding Totem",
                 Arrays.asList(SpellTag.totem, SpellTag.area), ParticleTypes.EFFECT)
                 .manualDesc(
@@ -63,6 +62,8 @@ public class TotemSpells implements ExileRegistryInit {
                         .addTarget(TargetSelector.AOE.alliesInRadius(3D))
                         .onTick(20D))
                 .build();
+
+ */
 
         of(SlashBlocks.BLUE_TOTEM.get(), MANA_TOTEM_ID, SpellConfiguration.Builder.instant(18, 20 * 30), "Astral Totem",
                 Arrays.asList(SpellTag.totem, SpellTag.area), ParticleTypes.WITCH)

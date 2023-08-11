@@ -74,10 +74,11 @@ public abstract class StatNameRegex {
         if (stat.is_long) {
             String txt = CLOC.translate(stat.locName());
 
-            txt = txt.replace(Stat.VAL1, plusminus + v1s + perc);
+            txt = txt.replace(Stat.VAL1, plusminus + v1s); // todo dont think i need to add % here because i add it whenever needed in the manual long tooltip
 
             return txt;
         }
+
 
         String str = statColor(stat) + getStatNameRegex(format, type, stat, v1);
 

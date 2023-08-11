@@ -19,6 +19,9 @@ import static com.robertx22.age_of_exile.uncommon.enumclasses.Elements.*;
 public class MobAffixes implements ExileRegistryInit {
 
     public static String THORNY = "thorny_mobs";
+    public static String FULL_COLD = "full_cold";
+    public static String FULL_FIRE = "full_fire";
+    public static String FULL_LIGHTNING = "full_fire";
 
     static void eleAffix(String name, Elements element) {
         new MobAffix(element.guidName + "_mob_affix", new BonusAttackDamage(element).getFormatAndIcon(), element.format)
@@ -100,6 +103,7 @@ public class MobAffixes implements ExileRegistryInit {
                 .setMods(new StatMod(25, 50, Stats.DAMAGE_REFLECTED.get()))
                 .setWeight(0)
                 .addToSerializables();
+
 
     }
 }

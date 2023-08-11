@@ -10,30 +10,6 @@
         {
           "acts": [
             {
-              "type": "damage",
-              "map": {
-                "element": "Elemental",
-                "value_calculation": "despair"
-              }
-            }
-          ],
-          "en_preds": [],
-          "ifs": [
-            {
-              "type": "on_entity_expire",
-              "map": {}
-            }
-          ],
-          "targets": [
-            {
-              "type": "target",
-              "map": {}
-            }
-          ]
-        },
-        {
-          "acts": [
-            {
               "type": "particles_in_radius",
               "map": {
                 "motion": "None",
@@ -61,9 +37,9 @@
   "stats": [
     {
       "type": "FLAT",
-      "max": -20.0,
-      "min": -10.0,
-      "stat": "total_damage"
+      "max": -25.0,
+      "min": -15.0,
+      "stat": "chaos_resist"
     }
   ],
   "tags": [

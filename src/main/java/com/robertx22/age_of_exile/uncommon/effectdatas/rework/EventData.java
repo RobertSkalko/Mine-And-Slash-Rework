@@ -51,7 +51,7 @@ public class EventData {
     public static String PIERCE = "pierce";
     public static String PROJECTILE_SPEED_MULTI = "proj_speed";
     public static String BONUS_PROJECTILES = "bonus_proj";
-    public static String SUMMON_DURATION_MULTI = "summon_duration";
+    public static String DURATION_MULTI = "_duration";
 
     private boolean isFrozen = false;
 

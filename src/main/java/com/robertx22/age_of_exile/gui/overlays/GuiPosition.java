@@ -21,7 +21,6 @@ public enum GuiPosition {
             if (BarGuiType.MAGIC_SHIELD.shouldRender(data, p)) {
                 middle.add(new GuiPartConfig(BarGuiType.MAGIC_SHIELD, new PointData(-198, -33)));
             }
-            middle.add(new GuiPartConfig(BarGuiType.SHIELD, new PointData(90, -33)));
             middle.add(new GuiPartConfig(BarGuiType.MANA, new PointData(90, -22)));
             middle.add(new GuiPartConfig(BarGuiType.ENERGY, new PointData(90, -11)));
 
@@ -53,9 +52,7 @@ public enum GuiPosition {
             topleft.add(new GuiPartConfig(BarGuiType.MANA, new PointData(x, y += yHeight)));
             topleft.add(new GuiPartConfig(BarGuiType.ENERGY, new PointData(x, y += yHeight)));
             topleft.add(new GuiPartConfig(BarGuiType.EXP, new PointData(x, y += yHeight)));
-            if (BarGuiType.SHIELD.shouldRender(data, p)) {
-                topleft.add(new GuiPartConfig(BarGuiType.SHIELD, new PointData(x, y += yHeight)));
-            }
+           
             return topleft;
         }
 

@@ -19,7 +19,6 @@ public abstract class StatCondition implements JsonExileRegistry<StatCondition>,
 
     static {
         addSer(new RequireChargedAttack());
-        addSer(new IsTargetShieldedCondition());
         addSer(new IsHealthAbovePercentCondition());
         addSer(new IsUndeadCondition());
         addSer(new IsHealthBellowPercentCondition());
@@ -67,10 +66,10 @@ public abstract class StatCondition implements JsonExileRegistry<StatCondition>,
     @Override
     public final StatCondition fromJson(JsonObject json) {
         String ser = json.get("ser")
-            .getAsString();
+                .getAsString();
 
         StatCondition t = GSON.fromJson(json, SERIALIZERS.get(ser)
-            .getSerClass());
+                .getSerClass());
 
         t.onLoadedFromJson();
         return t;
