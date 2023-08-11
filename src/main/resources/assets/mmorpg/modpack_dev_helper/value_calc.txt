@@ -17,6 +17,7 @@ black_hole
 minion_explosion
 shred
 totem_heal
+lightning_nova
 lose_aggro
 fireball
 charged_bolt

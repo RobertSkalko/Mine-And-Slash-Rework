@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.aoe_data.database.stats;
 
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.BeneficialEffects;
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.NegativeEffects;
+import com.robertx22.age_of_exile.aoe_data.database.spells.SummonType;
 import com.robertx22.age_of_exile.aoe_data.database.stat_conditions.StatConditions;
 import com.robertx22.age_of_exile.aoe_data.database.stat_effects.StatEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.*;
@@ -169,6 +170,25 @@ public class Stats implements ExileRegistryInit {
                 x.group = StatGroup.ELEMENTAL;
             })
             .build();
+
+    public static DataPackStatAccessor<SummonType> MAX_SUMMONS = DatapackStatBuilder
+            .<SummonType>of(x -> "max_" + x.id + "_summons", x -> Elements.All)
+            .addAllOfType(SummonType.values())
+            .worksWithEvent(SpellStatsCalculationEvent.ID)
+            .setPriority(0)
+            .setSide(EffectSides.Source)
+            .addCondition(x -> StatConditions.IS_SUMMON_TYPE.get(x))
+            .addEffect(StatEffects.ADD_TO_MAX_SUMMONS)
+            .setLocName(x -> "Maximum " + x.name + " Summons")
+            .setLocDesc(x -> "You can summon more types of that summon.")
+            .modifyAfterDone(x ->
+            {
+                x.is_perc = false;
+                x.base = 0;
+                x.min = -100;
+                x.max = 10;
+            }).
+            build();
 
 
     public static DataPackStatAccessor<PlayStyle> STYLE_DAMAGE = DatapackStatBuilder
@@ -842,6 +862,23 @@ public class Stats implements ExileRegistryInit {
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.summon))
             .addEffect(StatEffects.INCREASE_VALUE)
             .setLocName(x -> "Summon Damage")
+            .setLocDesc(x -> "")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+                x.icon = "\u27B9";
+                x.format = ChatFormatting.RED.getName();
+            })
+            .build();
+
+    public static DataPackStatAccessor<EmptyAccessor> GOLEM_DAMAGE = DatapackStatBuilder
+            .ofSingle("golem_damage", Elements.Physical)
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(0)
+            .setSide(EffectSides.Source)
+            .setMultipliesDamage()
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.golem))
+            .addEffect(StatEffects.INCREASE_VALUE)
+            .setLocName(x -> "Golem Damage")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
                 x.is_perc = true;

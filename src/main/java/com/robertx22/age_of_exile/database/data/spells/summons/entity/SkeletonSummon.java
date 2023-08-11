@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.spells.summons.entity;
 
+import com.robertx22.age_of_exile.aoe_data.database.spells.SummonType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
@@ -16,6 +17,11 @@ public class SkeletonSummon extends SummonEntity {
     public SkeletonSummon(EntityType<? extends TamableAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
 
+    }
+
+    @Override
+    public SummonType summonType() {
+        return SummonType.SKELETON;
     }
 
     @Override

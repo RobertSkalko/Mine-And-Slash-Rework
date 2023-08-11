@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.spells.components;
 
+import com.robertx22.age_of_exile.aoe_data.database.spells.SummonType;
 import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeapon;
 import com.robertx22.age_of_exile.database.data.value_calc.LeveledValue;
@@ -18,6 +19,7 @@ public class SpellConfiguration {
     public int charges = 0;
     public int charge_regen = 0;
     public int imbues = 0;
+    public SummonType summonType = SummonType.NONE;
     public String charge_name = "";
     private int cast_time_ticks = 0;
     public int cooldown_ticks = 20;
@@ -59,6 +61,12 @@ public class SpellConfiguration {
         this.imbues = times;
         return this;
     }
+
+    public SpellConfiguration setSummonType(SummonType type) {
+        this.summonType = type;
+        return this;
+    }
+
 
     public SpellConfiguration setScaleManaToPlayer() {
         this.scale_mana_cost_to_player_lvl = true;

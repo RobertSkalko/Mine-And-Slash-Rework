@@ -15,6 +15,7 @@ public class MapField<T> implements IGUID {
     // double
     public static MapField<Double> RADIUS = make("radius");
     public static MapField<Double> COUNT = make("count");
+    //public static MapField<Double> MAX_SUMMONS = make("max_summons");
     public static MapField<Double> HEIGHT = make("height");
     public static MapField<Double> TICK_RATE = make("tick_rate");
     public static MapField<Double> PARTICLE_COUNT = make("particle_count");

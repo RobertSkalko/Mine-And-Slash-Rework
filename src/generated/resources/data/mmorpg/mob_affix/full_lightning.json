@@ -1,0 +1,14 @@
+{
+  "format": "YELLOW",
+  "icon": "",
+  "id": "full_lightning",
+  "stats": [
+    {
+      "type": "flat",
+      "max": 100.0,
+      "min": 100.0,
+      "stat": "phys_to_lightning"
+    }
+  ],
+  "weight": 0
+}

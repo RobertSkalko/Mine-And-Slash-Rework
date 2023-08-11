@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.aoe_data.database.spells;
 
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.value_calc.ValueCalcBuilder;
 import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
 
@@ -115,6 +116,10 @@ public class SpellCalcs {
             .spellScaling(1F, 1.5F)
             .build();
 
+    public static ValueCalculation LIGHNING_NOVA = ValueCalcBuilder.of("lightning_nova")
+            .spellScaling(1F, 1.5F)
+            .statScaling(Mana.getInstance(), 0.1F, 0.2F)
+            .build();
 
     public static ValueCalculation POISON_CLOUD = ValueCalcBuilder.of("poison_cloud")
             .spellScaling(0.2F, 0.4F)
@@ -154,7 +159,7 @@ public class SpellCalcs {
     public static ValueCalculation CURSE = ValueCalcBuilder.of("curse")
             .spellScaling(0.5F, 1F)
             .build();
-    
+
     public static ValueCalculation BLACK_HOLE = ValueCalcBuilder.of("black_hole")
             .spellScaling(0.5F, 1.5F)
             .build();

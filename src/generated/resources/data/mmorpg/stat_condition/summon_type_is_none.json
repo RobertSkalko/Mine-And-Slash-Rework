@@ -1,0 +1,6 @@
+{
+  "id": "summon_type_is_none",
+  "ser": "string_matches",
+  "string_id": "none",
+  "string_key": "summon_type"
+}

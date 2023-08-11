@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.aoe_data.database.stat_conditions;
 
 import com.robertx22.age_of_exile.aoe_data.DataHolder;
+import com.robertx22.age_of_exile.aoe_data.database.spells.SummonType;
 import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
 import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
@@ -59,6 +60,10 @@ public class StatConditions implements ExileRegistryInit {
             PlayStyle.values()
             , x -> new StringMatchesCondition(EventData.STYLE, x.id));
 
+    public static DataHolder<SummonType, StatCondition> IS_SUMMON_TYPE = new DataHolder<>(
+            SummonType.values()
+            , x -> new StringMatchesCondition(EventData.SUMMON_TYPE, x.id));
+
     public static DataHolder<RestoreType, StatCondition> IS_RESTORE_TYPE = new DataHolder<>(
             RestoreType.values()
             , x -> new StringMatchesCondition(EventData.RESTORE_TYPE, x.name()));
@@ -112,6 +117,7 @@ public class StatConditions implements ExileRegistryInit {
     public void registerAll() {
 
         ATTACK_TYPE_MATCHES.addToSerializables();
+        IS_SUMMON_TYPE.addToSerializables();
         REQUIRE_CHARGED_ATTACK.addToSerializables();
         IS_NOT_IN_COMBAT.addToSerializables();
         IF_CRIT.addToSerializables();

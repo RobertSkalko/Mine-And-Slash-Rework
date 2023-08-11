@@ -82,6 +82,10 @@
 "entity.mmorpg.thorny_minion": "Thorn Minion",
 "entity.mmorpg.explody_minion": "TNT Minion",
 
+"entity.mmorpg.fire_golem": "Fire Golem",
+"entity.mmorpg.cold_golem": "Frost Golem",
+"entity.mmorpg.lightning_golem": "Lightning Golem",
+
 "entity.mmorpg.boss_golem": "Corrupted Golem",
 
 "effect.mmorpg.food_health_regen": "Health Regen",

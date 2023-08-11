@@ -60,7 +60,7 @@ public class MapAffix implements ExileRegistry<MobAffix> {
 
 
     public List<ExactStatData> getStats(int perc, int lvl) {
-        return stats.stream().map(x -> x.ToExactStat(100, lvl)).collect(Collectors.toList());
+        return stats.stream().map(x -> x.ToExactStat(perc, lvl)).collect(Collectors.toList());
     }
 
 }

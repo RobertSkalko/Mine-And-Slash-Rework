@@ -52,6 +52,11 @@ public class CommonEvents {
             x.put(SlashEntities.ZOMBIE.get(), Zombie.createAttributes().add(Attributes.MOVEMENT_SPEED, 0.4).build());
             x.put(SlashEntities.THORNY_MINION.get(), Zombie.createAttributes().add(Attributes.MOVEMENT_SPEED, 0.2).build());
             x.put(SlashEntities.EXPLODE_MINION.get(), Zombie.createAttributes().add(Attributes.MOVEMENT_SPEED, 0.3).build());
+
+            x.put(SlashEntities.FIRE_GOLEM.get(), Zombie.createAttributes().add(Attributes.MOVEMENT_SPEED, 0.45).build());
+            x.put(SlashEntities.COLD_GOLEM.get(), Zombie.createAttributes().add(Attributes.MOVEMENT_SPEED, 0.45).build());
+            x.put(SlashEntities.LIGHTNING_GOLEM.get(), Zombie.createAttributes().add(Attributes.MOVEMENT_SPEED, 0.45).build());
+
         });
 
         OnItemStoppedUsingCastImbuedSpell.register();

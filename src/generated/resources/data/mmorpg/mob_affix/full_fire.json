@@ -1,0 +1,14 @@
+{
+  "format": "RED",
+  "icon": "",
+  "id": "full_fire",
+  "stats": [
+    {
+      "type": "flat",
+      "max": 100.0,
+      "min": 100.0,
+      "stat": "phys_to_fire"
+    }
+  ],
+  "weight": 0
+}

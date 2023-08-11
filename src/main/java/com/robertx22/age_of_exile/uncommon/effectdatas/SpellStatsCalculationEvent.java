@@ -41,6 +41,8 @@ public class SpellStatsCalculationEvent extends EffectEvent {
 
         this.data.setString(EventData.STYLE, spell.config.style.name());
 
+        this.data.setString(EventData.SUMMON_TYPE, spell.config.summonType.id);
+
         this.data.setString(EventData.SPELL, spellid);
 
         float manamultilvl = GameBalanceConfig.get().MANA_COST_SCALING.getMultiFor(lvl);

@@ -1,0 +1,9 @@
+{
+  "id": "add_max_summons",
+  "num_provider": {
+    "type": "stat_data",
+    "calc": ""
+  },
+  "number_id": "bonus_max_summons",
+  "ser": "add_to_number"
+}

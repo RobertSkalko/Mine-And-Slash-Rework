@@ -157,13 +157,18 @@ public abstract class EffectEvent implements IGUID {
 
         Unit un = enData.getUnit();
 
+        
         if (side == EffectSides.Source) {
             if (isSpell()) {
                 if (en instanceof Player p) {
                     if (getSpell() != null) {
-                        int slot = Load.playerRPGData(p).getSkillGemInventory().getSpellGem(getSpell()).getHotbarSlot();
-                        un = new Unit(); // todo test if this works
-                        un.recalculateStats(en, enData, null, slot);
+                        var gem = Load.playerRPGData(p).getSkillGemInventory().getSpellGem(getSpell());
+                        if (gem != null) {
+                            // its null if its casted by a summon
+                            int slot = gem.getHotbarSlot();
+                            un = new Unit(); // todo test if this works
+                            un.recalculateStats(en, enData, null, slot);
+                        }
                     }
                 }
             }

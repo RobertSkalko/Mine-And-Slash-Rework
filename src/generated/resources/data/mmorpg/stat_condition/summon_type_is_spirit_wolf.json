@@ -1,0 +1,6 @@
+{
+  "id": "summon_type_is_spirit_wolf",
+  "ser": "string_matches",
+  "string_id": "spirit_wolf",
+  "string_key": "summon_type"
+}

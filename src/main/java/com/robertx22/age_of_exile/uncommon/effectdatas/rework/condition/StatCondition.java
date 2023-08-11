@@ -68,10 +68,16 @@ public abstract class StatCondition implements JsonExileRegistry<StatCondition>,
         String ser = json.get("ser")
                 .getAsString();
 
-        StatCondition t = GSON.fromJson(json, SERIALIZERS.get(ser)
-                .getSerClass());
+        if (!SERIALIZERS.containsKey(ser)) {
+            System.out.println(this.id + " has no serializer!");
+        }
 
+        StatCondition t = null;
+
+        t = GSON.fromJson(json, SERIALIZERS.get(ser).getSerClass());
         t.onLoadedFromJson();
+
+
         return t;
     }
 

@@ -1,9 +1,9 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
+summon_type_is_golem
 spell_has_tag_song
 is_sword_wep_type
 spell_has_tag_area
-resource_type_is_shield
 style_is_int_is_false
 effect_has_tag_defensive
 is_source_low_hp
@@ -43,14 +43,17 @@ is_undead
 threat_gen_type_is_deal_dmg
 is_attack_or_spell_attack
 is_bow_wep_type
+spell_has_tag_golem
 resource_type_is_blood
 attack_type_is_attack
 is_axe_wep_type
 restore_type_is_leech
 attack_type_is_dot
+summon_type_is_none
 style_is_int
 spell_has_tag_shout
 effect_has_tag_curse
+summon_type_is_skeleton
 resource_type_is_energy
 restore_type_is_heal
 spell_has_tag_shield
@@ -64,8 +67,10 @@ effect_has_tag_immobilizing
 restore_type_is_food
 is_staff_wep_type
 effect_has_tag_food
+summon_type_is_spirit_wolf
 resource_type_is_magic_shield
 is_is_basic_atk_true
+summon_type_is_zombie
 threat_gen_type_is_heal
 restore_type_is_regen
 is_none_wep_type

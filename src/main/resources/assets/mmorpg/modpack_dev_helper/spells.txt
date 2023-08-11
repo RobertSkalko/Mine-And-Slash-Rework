@@ -17,7 +17,6 @@ poison_trap
 summon_spirit_wolf
 vamp_blood
 charged_bolt
-shout_warn
 curse_of_weak
 song_of_perseverance
 shooting_star
@@ -32,17 +31,19 @@ gong_strike
 tidal_strike
 song_of_vigor
 dash
+summon_fire_golem
+summon_lightning_golem
 recoil_shot
 poison_ball
 teleport
 summon_zombie
-guard_totem
 mage_circle
 summon_skeleton_army
 entangling_seed
 nature_balm
 black_hole
 rejuv_totem
+lightning_nova
 test_spell
 fireball
 water_breath
@@ -65,4 +66,5 @@ test_command
 awaken_mana
 the_hunt
 fire_nova
+summon_cold_golem
 taunt

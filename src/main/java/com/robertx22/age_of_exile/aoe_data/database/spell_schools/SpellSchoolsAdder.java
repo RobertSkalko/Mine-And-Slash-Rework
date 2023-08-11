@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.aoe_data.database.spell_schools;
 
 import com.robertx22.age_of_exile.aoe_data.database.perks.asc.ElementalistPerks;
 import com.robertx22.age_of_exile.aoe_data.database.perks.asc.PaladinPerks;
+import com.robertx22.age_of_exile.aoe_data.database.perks.asc.SummonerPerks;
 import com.robertx22.age_of_exile.aoe_data.database.perks.asc.WarlockPerks;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
@@ -51,6 +52,13 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
                 .addFor(AscRow.TWO, PaladinPerks.PALADIN_2, PaladinPerks.GUARDIAN_2, PaladinPerks.WARRIOR_2)
                 .addFor(AscRow.THREE, PaladinPerks.PALADIN_3, PaladinPerks.GUARDIAN_3, PaladinPerks.WARRIOR_3)
                 .addFor(AscRow.FOUR, PaladinPerks.PALADIN_4, PaladinPerks.GUARDIAN_4, PaladinPerks.WARRIOR_4)
+                .build();
+
+        SchoolBuilder.of(SUMMONER, "Summoner")
+                .addFor(AscRow.ONE, SummonerPerks.SUMMON_1, SummonerPerks.GOLEM_1, SummonerPerks.TOTEM_1)
+                .addFor(AscRow.TWO, SummonerPerks.SUMMON_2, SummonerPerks.GOLEM_2, SummonerPerks.TOTEM_2)
+                .addFor(AscRow.THREE, SummonerPerks.SUMMON_3, SummonerPerks.GOLEM_3, SummonerPerks.TOTEM_3)
+                .addFor(AscRow.FOUR, SummonerPerks.SUMMON_4, SummonerPerks.GOLEM_4, SummonerPerks.TOTEM_4)
                 .build();
 
 

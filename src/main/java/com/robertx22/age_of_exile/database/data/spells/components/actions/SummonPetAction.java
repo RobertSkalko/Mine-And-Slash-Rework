@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.spells.components.actions;
 
+import com.robertx22.age_of_exile.aoe_data.database.spells.SummonType;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
@@ -10,15 +11,15 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Optional;
+import java.util.*;
 
 public class SummonPetAction extends SpellAction {
     public SummonPetAction() {
@@ -55,6 +56,7 @@ public class SummonPetAction extends SpellAction {
 
             duration *= ctx.calculatedSpellData.data.getNumber(EventData.DURATION_MULTI, 1).number;
 
+
             Load.Unit(en).summonedPetData.setup(ctx.calculatedSpellData.getSpell(), duration);
 
 
@@ -69,6 +71,37 @@ public class SummonPetAction extends SpellAction {
 
 
             ctx.world.addFreshEntity(en);
+
+            SummonType summonType = en.summonType();
+            int maxSummons = (int) (summonType.maxSummons + ctx.calculatedSpellData.data.getNumber(EventData.BONUS_MAX_SUMMONS, 0).number);
+
+
+            despawnIfExceededMaximumSummons(ctx.caster, maxSummons, summonType);
+
+        }
+    }
+
+    private void despawnIfExceededMaximumSummons(LivingEntity caster, int max, SummonType type) {
+
+        int current = 0;
+
+        List<SummonEntity> list = new ArrayList<>();
+
+        for (SummonEntity en : EntityFinder.start(caster, SummonEntity.class, caster.blockPosition()).searchFor(AllyOrEnemy.all).radius(40).build()) {
+            if (en.summonType() == type) {
+                if (en.getOwner() == caster) {
+                    current++;
+                    list.add(en);
+                }
+            }
+        }
+
+        list.sort(Comparator.comparingInt(x -> -x.tickCount)); // todo this needs to be from highest to lowest age
+
+        int excess = current - max;
+
+        for (int i = 0; i < excess; i++) {
+            list.get(i).discard();
         }
     }
 

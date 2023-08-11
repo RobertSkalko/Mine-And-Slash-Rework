@@ -15,17 +15,15 @@ public class ChanceChestProcessor extends DataProcessor {
     @Override
     public void processImplementation(String key, BlockPos pos, Level world, ChunkProcessData data) {
 
-        int chestChance = RandomUtils.RandomRange(1, 4);
 
-        if (chestChance > 1) {
-            if (!data.chanceChest && RandomUtils.roll(25)) {
-                data.chanceChest = true;
-                new ChestProcessor().processImplementation(key, pos, world, data);
-            } else {
-                world.removeBlockEntity((pos)); // dont drop chest loot. this is a big problem if u remove this line
-                world.removeBlock(pos, false);   // don't drop loot
-                world.removeBlockEntity(pos);
-            }
+        if (!data.chanceChest && RandomUtils.roll(25)) {
+            data.chanceChest = true;
+            new ChestProcessor().processImplementation(key, pos, world, data);
+        } else {
+            world.removeBlockEntity((pos)); // dont drop chest loot. this is a big problem if u remove this line
+            world.removeBlock(pos, false);   // don't drop loot
+            world.removeBlockEntity(pos);
         }
+
     }
 }

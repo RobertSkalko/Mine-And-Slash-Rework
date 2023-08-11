@@ -1,0 +1,14 @@
+{
+  "format": "AQUA",
+  "icon": "",
+  "id": "full_water",
+  "stats": [
+    {
+      "type": "flat",
+      "max": 100.0,
+      "min": 100.0,
+      "stat": "phys_to_water"
+    }
+  ],
+  "weight": 0
+}

@@ -13,6 +13,7 @@ public enum SpellTag {
     shout("Shout"),
     trap("Trap"),
     song("Song"),
+    golem("Golem"),
     area("Area"),
     staff_spell("Staff Spell"),
     totem("Totem");

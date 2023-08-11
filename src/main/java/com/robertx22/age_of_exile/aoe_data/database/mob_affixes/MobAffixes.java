@@ -33,6 +33,14 @@ public class MobAffixes implements ExileRegistryInit {
                 .addToSerializables();
     }
 
+    static void fullEle(Elements element) {
+        new MobAffix("full_" + element.guidName, new PhysicalToElement(element).getFormatAndIcon(), element.format)
+                .setMods(
+                        new StatMod(100, 100, new PhysicalToElement(element)))
+                .setWeight(0)
+                .addToSerializables();
+    }
+
     @Override
     public void registerAll() {
 
@@ -103,6 +111,10 @@ public class MobAffixes implements ExileRegistryInit {
                 .setMods(new StatMod(25, 50, Stats.DAMAGE_REFLECTED.get()))
                 .setWeight(0)
                 .addToSerializables();
+
+        fullEle(Cold);
+        fullEle(Lightning);
+        fullEle(Fire);
 
 
     }

@@ -20,6 +20,10 @@ public class RenderRegister {
         x.registerEntityRenderer(SlashEntities.SKELETON.get(), ctx -> new ModSkeletonRender(SlashRef.id("textures/entity/skeleton.png"), ctx));
         x.registerEntityRenderer(SlashEntities.ZOMBIE.get(), ctx -> new ModSkeletonRender(SlashRef.id("textures/entity/zombie.png"), ctx));
 
+        x.registerEntityRenderer(SlashEntities.FIRE_GOLEM.get(), ctx -> new ModSkeletonRender(SlashRef.id("textures/entity/fire_golem.png"), ctx));
+        x.registerEntityRenderer(SlashEntities.COLD_GOLEM.get(), ctx -> new ModSkeletonRender(SlashRef.id("textures/entity/cold_golem.png"), ctx));
+        x.registerEntityRenderer(SlashEntities.LIGHTNING_GOLEM.get(), ctx -> new ModSkeletonRender(SlashRef.id("textures/entity/lightning_golem.png"), ctx));
+
         // minions
         x.registerEntityRenderer(SlashEntities.THORNY_MINION.get(), ctx -> new ModSkeletonRender(SlashRef.id("textures/entity/thorny_minion.png"), ctx));
         x.registerEntityRenderer(SlashEntities.EXPLODE_MINION.get(), ctx -> new ModSkeletonRender(SlashRef.id("textures/entity/explody_minion.png"), ctx));

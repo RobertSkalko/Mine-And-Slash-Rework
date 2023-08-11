@@ -159,7 +159,7 @@ public class WaterSpells implements ExileRegistryInit {
                 )
                 .build();
 
-     
+
         SpellBuilder.of(FROST_NOVA_AOE, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 25 * 20), "Frost Nova",
                         Arrays.asList(SpellTag.area, SpellTag.damage))
                 .manualDesc(

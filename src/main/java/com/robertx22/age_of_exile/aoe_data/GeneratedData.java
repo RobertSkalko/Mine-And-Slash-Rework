@@ -28,6 +28,7 @@ import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceC
 
 public class GeneratedData {
 
+    
     // as these only add serizables.
     // They shouldn't be needed at all to play the game.
     // If it errors without them, then that means i hardcoded something i shouldn't have
@@ -45,7 +46,7 @@ public class GeneratedData {
         new Spells().registerAll();
         new SpellSchoolsAdder().registerAll();
 
-    
+
         new GearSlots().registerAll();
         new BaseGearsAdder().registerAll();
         new UniqueGearReg().registerAll();

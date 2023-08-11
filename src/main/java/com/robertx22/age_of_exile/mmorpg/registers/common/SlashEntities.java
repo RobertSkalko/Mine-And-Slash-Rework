@@ -7,6 +7,9 @@ import com.robertx22.age_of_exile.database.data.spells.entities.StationaryFallin
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.SkeletonSummon;
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.WolfSummon;
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.ZombieSummon;
+import com.robertx22.age_of_exile.database.data.spells.summons.entity.golems.ColdGolem;
+import com.robertx22.age_of_exile.database.data.spells.summons.entity.golems.FireGolem;
+import com.robertx22.age_of_exile.database.data.spells.summons.entity.golems.LightningGolem;
 import com.robertx22.age_of_exile.entity.minions.ExplodeMinion;
 import com.robertx22.age_of_exile.entity.minions.ThornyMinion;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
@@ -31,6 +34,10 @@ public class SlashEntities {
     public static RegObj<EntityType<ZombieSummon>> ZOMBIE = mob(ZombieSummon::new, EntityType.SKELETON, "zombie");
     public static RegObj<EntityType<SkeletonSummon>> SKELETON = mob(SkeletonSummon::new, EntityType.SKELETON, "skeleton");
 
+    public static RegObj<EntityType<FireGolem>> FIRE_GOLEM = mob(FireGolem::new, EntityType.ZOMBIE, "fire_golem");
+    public static RegObj<EntityType<ColdGolem>> COLD_GOLEM = mob(ColdGolem::new, EntityType.ZOMBIE, "cold_golem");
+    public static RegObj<EntityType<LightningGolem>> LIGHTNING_GOLEM = mob(LightningGolem::new, EntityType.ZOMBIE, "lightning_golem");
+
 
     //minions
     public static RegObj<EntityType<ThornyMinion>> THORNY_MINION = mob(ThornyMinion::new, EntityType.SKELETON, "thorny_minion");
@@ -49,7 +56,7 @@ public class SlashEntities {
                 .setTrackingRange(10)
                 .build(id));
 
-        
+
         return def;
     }
 

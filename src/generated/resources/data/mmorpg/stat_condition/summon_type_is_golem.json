@@ -1,0 +1,6 @@
+{
+  "id": "summon_type_is_golem",
+  "ser": "string_matches",
+  "string_id": "golem",
+  "string_key": "summon_type"
+}

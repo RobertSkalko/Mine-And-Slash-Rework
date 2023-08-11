@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.spells.summons.entity;
 
+import com.robertx22.age_of_exile.aoe_data.database.spells.SummonType;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -27,6 +28,7 @@ public abstract class SummonEntity extends TamableAnimal implements RangedAttack
         return ProjectileUtil.getMobArrow(this, pArrowStack, pVelocity);
     }
 
+    public abstract SummonType summonType();
 
     @Override
     public void performRangedAttack(LivingEntity pTarget, float pDistanceFactor) {
@@ -42,6 +44,7 @@ public abstract class SummonEntity extends TamableAnimal implements RangedAttack
         this.playSound(SoundEvents.SKELETON_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         this.level().addFreshEntity(abstractarrow);
     }
+
 
     public boolean usesMelee() {
         return true;
@@ -80,7 +83,7 @@ public abstract class SummonEntity extends TamableAnimal implements RangedAttack
             return false;
         }
 
-      
+
         LivingEntity owner = getOwner();
         if (owner == null) {
             return false;

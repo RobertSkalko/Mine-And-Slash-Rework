@@ -102,6 +102,7 @@
     },
     "scale_mana_cost_to_player_lvl": false,
     "style": "INT",
+    "summonType": "SKELETON",
     "swing_arm": true,
     "tags": [
       "summon",

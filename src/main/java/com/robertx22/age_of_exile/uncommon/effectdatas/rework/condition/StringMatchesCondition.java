@@ -14,7 +14,7 @@ public class StringMatchesCondition extends StatCondition {
         super(key + "_is_" + id, "string_matches");
         this.string_id = id;
         this.string_key = key;
-        
+
 
     }
 
@@ -22,6 +22,7 @@ public class StringMatchesCondition extends StatCondition {
         super("", "string_matches");
     }
 
+    
     @Override
     public boolean can(EffectEvent event, EffectSides statSource, StatData data, Stat stat) {
         return event.data.getString(string_key)

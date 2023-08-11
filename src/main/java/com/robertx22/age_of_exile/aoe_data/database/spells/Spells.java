@@ -10,7 +10,7 @@ public class Spells implements ExileRegistryInit {
     public void registerAll() {
 
         new BossSpells().registerAll();
-        
+
         new TestSpells().registerAll();
         new CurseSpells().registerAll();
         new SongSpells().registerAll();
@@ -19,6 +19,7 @@ public class Spells implements ExileRegistryInit {
         new StrSpells().registerAll();
         new TotemSpells().registerAll();
 
+        new LightningSpells().registerAll();
         new FireSpells().registerAll();
         new NatureSpells().registerAll();
         new WaterSpells().registerAll();
