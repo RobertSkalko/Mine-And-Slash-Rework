@@ -1,0 +1,14 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/asc_classes/perk/trap1.png",
+  "id": "trap1",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "trap_spell_dmg",
+      "v1": 25.0
+    }
+  ]
+}

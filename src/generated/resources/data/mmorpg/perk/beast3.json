@@ -1,0 +1,20 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/asc_classes/perk/beast3.png",
+  "id": "beast3",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "max_spirit_wolf_summons",
+      "v1": 1.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "summon_duration",
+      "v1": 25.0
+    }
+  ]
+}

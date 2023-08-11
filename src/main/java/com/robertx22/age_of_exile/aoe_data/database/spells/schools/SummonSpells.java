@@ -36,7 +36,7 @@ public class SummonSpells implements ExileRegistryInit {
 
 
         SpellBuilder.of("summon_spirit_wolf", PlayStyle.INT, SpellConfiguration.Builder.instant(30, 30 * 20).setSummonType(SummonType.SPIRIT_WOLF), "Summon Spirit Wolf",
-                        Arrays.asList(SpellTag.summon, SpellTag.damage))
+                        Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.beast))
                 .manualDesc("Summon a Spirit Wolf to aid you in combat.")
                 .summons(SlashEntities.SPIRIT_WOLF.get(), 20 * 30, 1)
                 .build();

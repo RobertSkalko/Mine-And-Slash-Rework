@@ -748,7 +748,7 @@ public class Stats implements ExileRegistryInit {
             .setMultipliesDamage()
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x))
             .addEffect(StatEffects.INCREASE_VALUE)
-            .setLocName(x -> x.locname + " Spell Damage")
+            .setLocName(x -> x.locname + " Damage")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
                 x.is_perc = true;

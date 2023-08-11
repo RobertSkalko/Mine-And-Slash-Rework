@@ -22,14 +22,13 @@ public abstract class GolemSummon extends SummonEntity {
 
     public GolemSummon(EntityType<? extends TamableAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
-
     }
 
     @Override
     public boolean doHurtTarget(Entity pEntity) {
         if (super.doHurtTarget(pEntity)) {
 
-            if (RandomUtils.roll(10)) {
+            if (RandomUtils.roll(5)) {
                 if (!this.level().isClientSide) {
                     if (getOwner() instanceof Player en) {
                         var spell = ExileDB.Spells().get(this.aoeSpell());

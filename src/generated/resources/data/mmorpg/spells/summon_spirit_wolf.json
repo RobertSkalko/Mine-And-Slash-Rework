@@ -106,7 +106,8 @@
     "swing_arm": true,
     "tags": [
       "summon",
-      "damage"
+      "damage",
+      "beast"
     ],
     "times_to_cast": 1
   },

@@ -1,0 +1,14 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/asc_classes/perk/beast1.png",
+  "id": "beast1",
+  "is_entry": false,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "max_spirit_wolf_summons",
+      "v1": 1.0
+    }
+  ]
+}
