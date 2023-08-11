@@ -152,7 +152,7 @@ public class StatSoulData implements IRarity, ISettableLevelTier {
     }
 
     @Override
-    public String getRarityRank() {
+    public String getRarityId() {
         return rar;
     }
 
@@ -162,7 +162,7 @@ public class StatSoulData implements IRarity, ISettableLevelTier {
                 .get(rar);
     }
 
-    
+
     @Override
     public void setTier(int tier) {
         this.tier = tier;

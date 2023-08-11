@@ -45,7 +45,7 @@ public class InvGuiPacket extends MyPacket<OpenGuiPacket> {
 
     @Override
     public MyPacket<OpenGuiPacket> newInstance() {
-        return new OpenGuiPacket();
+        return new InvGuiPacket();
     }
 
     @Override

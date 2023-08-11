@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.maps;
 
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
@@ -218,7 +219,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
     }
 
     @Override
-    public String getRarityRank() {
+    public String getRarityId() {
         return null;
     }
 
@@ -250,5 +251,10 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
     @Override
     public List<ItemStack> getSalvageResult(ItemStack stack) {
         return Arrays.asList();
+    }
+
+    @Override
+    public ToggleAutoSalvageRarity.SalvageType getSalvageType() {
+        return null; // todo
     }
 }

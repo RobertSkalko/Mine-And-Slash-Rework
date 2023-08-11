@@ -7,18 +7,27 @@ public class GuiItemData {
 
     public String action = "";
 
-    private GuiAction getAction() {
+    public GuiItemData(GuiAction action) {
+        this.action = action.GUID();
+    }
+
+    public GuiItemData() {
+
+    }
+
+
+    public boolean isEmpty() {
+        return action.isEmpty();
+    }
+
+
+    public GuiAction getAction() {
         return GuiAction.get(action);
     }
 
     public void onServer(Player p) {
-
-
         GuiAction ac = getAction();
-
-        // todo do this tomorrow
-
-
+        ac.doAction(p);
     }
 
 }

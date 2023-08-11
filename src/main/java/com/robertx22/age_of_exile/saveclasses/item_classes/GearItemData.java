@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.requirements.bases.GearRequestedFor;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.*;
@@ -79,6 +80,11 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
 
         return ilvl;
+    }
+
+    @Override
+    public ToggleAutoSalvageRarity.SalvageType getSalvageType() {
+        return ToggleAutoSalvageRarity.SalvageType.GEAR;
     }
 
     public boolean canPlayerWear(EntityData data) {
@@ -155,7 +161,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     }
 
     @Override
-    public String getRarityRank() {
+    public String getRarityId() {
         return rar;
     }
 
@@ -374,7 +380,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         if (this.sal) {
 
             int amount = 1; // todo
-            return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(getRarity()).get(), amount));
+            return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(getRarity().item_tier).get(), amount)); // todo fix this
 
 
         }

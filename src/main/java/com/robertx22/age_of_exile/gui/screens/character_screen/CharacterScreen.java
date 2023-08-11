@@ -23,9 +23,11 @@ import com.robertx22.age_of_exile.gui.bases.BaseScreen;
 import com.robertx22.age_of_exile.gui.bases.INamedScreen;
 import com.robertx22.age_of_exile.gui.buttons.CharacterStatsButtons;
 import com.robertx22.age_of_exile.gui.screens.OpenBackpack;
+import com.robertx22.age_of_exile.gui.screens.OpenInvGuiScreen;
 import com.robertx22.age_of_exile.gui.screens.OpenSkillGems;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.TalentsScreen;
 import com.robertx22.age_of_exile.gui.screens.spell.AscendancyClassScreen;
+import com.robertx22.age_of_exile.inv_gui.GuiInventoryGrids;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -198,11 +200,14 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         rightButtons.add(new TalentsScreen());
         rightButtons.add(new AscendancyClassScreen());
 
+
         List<INamedScreen> leftButtons = new ArrayList<>();
 
         for (Backpacks.BackpackType type : Backpacks.BackpackType.values()) {
             leftButtons.add(new OpenBackpack(type));
         }
+
+        leftButtons.add(new OpenInvGuiScreen(Words.Salvaging, "salvage", GuiInventoryGrids.ofSalvageConfig()));
 
         // screens.add(new SpellScreen());
 

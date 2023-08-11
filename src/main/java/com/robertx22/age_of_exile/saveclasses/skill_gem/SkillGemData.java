@@ -5,17 +5,21 @@ import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.support_gem.SupportGem;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import com.robertx22.age_of_exile.mmorpg.UNICODE;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SkillGemsItems;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
-import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.registry.IWeighted;
+import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
@@ -29,9 +33,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SkillGemData implements ISalvagable {
+public class SkillGemData implements ICommonDataItem<GearRarity> {
 
     public static int MAX_LINKS = 5;
+
+    @Override
+    public void BuildTooltip(TooltipContext ctx) {
+
+    }
 
     static class LinkChance implements IWeighted {
         int weight;
@@ -52,12 +61,27 @@ public class SkillGemData implements ISalvagable {
     @Override
     public List<ItemStack> getSalvageResult(ItemStack stack) {
         int amount = 1; // todo
-        return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(getRarity()).get(), amount));
+        return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(getRarity().item_tier).get(), amount));
+    }
+
+    @Override
+    public ToggleAutoSalvageRarity.SalvageType getSalvageType() {
+        return ToggleAutoSalvageRarity.SalvageType.SPELL;
     }
 
     @Override
     public boolean isSalvagable() {
         return true;
+    }
+
+    @Override
+    public ItemstackDataSaver<SkillGemData> getStackSaver() {
+        return StackSaving.SKILL_GEM;
+    }
+
+    @Override
+    public void saveToStack(ItemStack stack) {
+        getStackSaver().saveTo(stack, this);
     }
 
     static List<LinkChance> linkChances = Arrays.asList(
@@ -98,6 +122,11 @@ public class SkillGemData implements ISalvagable {
         this.links = random;
     }
 
+
+    @Override
+    public String getRarityId() {
+        return null;
+    }
 
     public GearRarity getRarity() {
         return ExileDB.GearRarities().get(rar);

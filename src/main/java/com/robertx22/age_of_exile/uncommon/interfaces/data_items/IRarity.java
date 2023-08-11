@@ -7,12 +7,12 @@ public interface IRarity<R extends Rarity> {
 
     public static int TOTAL_GEAR_RARITIES = 6;
 
-    public String getRarityRank();
+    public String getRarityId();
 
     public R getRarity();
 
     public default boolean isUnique() {
-        return this.getRarityRank()
+        return this.getRarityId()
                 .equals(UNIQUE_ID);
     }
 
