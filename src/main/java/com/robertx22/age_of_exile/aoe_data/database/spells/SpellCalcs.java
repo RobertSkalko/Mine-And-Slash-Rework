@@ -104,6 +104,9 @@ public class SpellCalcs {
     public static ValueCalculation FLAME_STRIKE = ValueCalcBuilder.of("flame_strike")
             .attackScaling(0.4F, 0.75F)
             .build();
+    public static ValueCalculation CHILLING_TOUCH = ValueCalcBuilder.of("chilling_touch")
+            .attackScaling(0.4F, 0.75F)
+            .build();
 
     public static ValueCalculation HEALING_AURA = ValueCalcBuilder.of("healing_aura")
             .spellScaling(0.3F, 0.6F)

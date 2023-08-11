@@ -3,6 +3,7 @@ This registry is modify-able through datapacks.
 undying_will
 magma_flower
 ice_comet
+chilling_touch
 healing_aura
 song_of_valor
 chilling_field
