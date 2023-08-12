@@ -250,7 +250,7 @@ public class Unit {
 
                 statContexts.addAll(Load.playerRPGData((Player) entity).getSkillGemInventory().getAuraStats(entity));
 
-                
+
                 Load.playerRPGData((Player) entity).statPoints.addStats(this);
 
                 statContexts.addAll(PlayerStatUtils.AddPlayerBaseStats(entity));
@@ -269,9 +269,9 @@ public class Unit {
                 statContexts.addAll(MobStatUtils.getMobBaseStats(data, entity));
                 statContexts.addAll(MobStatUtils.getAffixStats(entity));
                 statContexts.addAll(MobStatUtils.getWorldMultiplierStats(entity));
-                MobStatUtils.addMapStats(entity, data, this);
+                MobStatUtils.addMapAffixStats(entity, data, this);
+                MobStatUtils.addMapTierStats(entity);
                 statContexts.addAll(MobStatUtils.getMobConfigStats(entity, data));
-                //ExtraMobRarityAttributes.add(entity, data);
             }
 
             statContexts.add(data.getStatusEffectsData()

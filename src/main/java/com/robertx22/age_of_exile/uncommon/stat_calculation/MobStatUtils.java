@@ -5,13 +5,17 @@ import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.EntityConfig;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
+import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.maps.MapData;
+import com.robertx22.age_of_exile.maps.MapItemData;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
@@ -28,13 +32,53 @@ import java.util.List;
 
 public class MobStatUtils {
 
-    public static void addMapStats(LivingEntity en, EntityData mobdata, Unit unit) {
+    public static List<StatContext> addMapAffixStats(LivingEntity en, EntityData mobdata, Unit unit) {
 
+        var list = new ArrayList<StatContext>();
 
         if (WorldUtils.isMapWorldClass(en.level())) {
 
+            MapData map = Load.mapAt(en.level(), en.blockPosition());
+            if (map != null) {
+                MapItemData data = map.map;
 
+                for (StatContext stat : data.getStatAndContext(en)) {
+                    list.add(stat);
+                }
+            }
         }
+
+        return list;
+
+    }
+
+    // todo test this
+    public static List<StatContext> addMapTierStats(LivingEntity en) {
+        List<StatContext> list = new ArrayList<>();
+
+        MapData map = Load.mapAt(en.level(), en.blockPosition());
+        if (map != null) {
+            MapItemData data = map.map;
+
+            float mob_stat_multi = (0.3F * data.tier);
+
+            // todo should mobs have dodge at all?
+            List<Stat> to = new ArrayList<>();
+            to.add(Health.getInstance());
+            to.add(MagicShield.getInstance());
+            to.add(Armor.getInstance());
+            to.add(Stats.TOTAL_DAMAGE.get());
+
+            List<ExactStatData> stats = new ArrayList<>();
+
+            for (Stat stat : to) {
+                stats.add(ExactStatData.noScaling(mob_stat_multi * 100F, ModType.MORE, stat.GUID()));
+            }
+
+            list.add(new MiscStatCtx(stats));
+        }
+
+        return list;
 
     }
 

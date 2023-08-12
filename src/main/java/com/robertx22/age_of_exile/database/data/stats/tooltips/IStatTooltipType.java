@@ -9,6 +9,7 @@ import net.minecraft.network.chat.MutableComponent;
 import java.util.ArrayList;
 import java.util.List;
 
+// todo why are things split across more lines than needed
 public interface IStatTooltipType {
     List<MutableComponent> getTooltipList(ChatFormatting format, TooltipStatWithContext info);
 
