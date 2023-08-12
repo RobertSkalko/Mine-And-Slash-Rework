@@ -44,7 +44,7 @@ public class RPGGuiOverlay {
             if (mc.player == null) {
                 return;
             }
-            if (mc.options.renderDebug || mc.player.isCreative() || mc.player.isSpectator()) {
+            if (mc.options.renderDebug || mc.player.isSpectator()) {
                 return;
             }
 

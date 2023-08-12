@@ -9,6 +9,7 @@ import com.robertx22.age_of_exile.gui.overlays.spell_hotbar.SpellHotbarOverlay;
 import com.robertx22.age_of_exile.mmorpg.ForgeEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
+import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.event.TickEvent;
 
 public class Client {
@@ -28,20 +29,16 @@ public class Client {
             }
         });
 
-        // todo does this work?
-        ForgeEvents.registerForgeEvent(RenderGuiOverlayEvent.class, event -> {
+        ForgeEvents.registerForgeEvent(RenderGuiOverlayEvent.Post.class, event -> {
+            if (event.getOverlay().id() == VanillaGuiOverlay.HOTBAR.id()) {
+                event.getGuiGraphics().drawManaged(() -> {
+                    spellHotbarOverlay.onHudRender(event.getGuiGraphics());
+                    castbar.onHudRender(event.getGuiGraphics());
+                    rpggui.onHudRender(event.getGuiGraphics());
+                });
 
-               /*
-            if (event.isCancelable() || event.getOverlay().overlay().getType() != RenderGameOverlayEvent.ElementType.ALL) {
-                return;
             }
-
-             */
-
-            spellHotbarOverlay.onHudRender(event.getGuiGraphics());
-            castbar.onHudRender(event.getGuiGraphics());
-            rpggui.onHudRender(event.getGuiGraphics());
-
+            //RenderSystem.enableDepthTest();
         });
     }
 }

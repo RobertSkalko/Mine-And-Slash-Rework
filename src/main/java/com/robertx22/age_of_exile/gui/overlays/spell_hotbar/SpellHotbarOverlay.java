@@ -52,19 +52,19 @@ public class SpellHotbarOverlay {
     public void onHudRender(GuiGraphics gui) {
 
         try {
-            if (mc.options.renderDebug || mc.player.isSpectator()) {
+            if (mc.options.renderDebug) {
                 return;
             }
             if (mc.player.isSpectator()) {
                 return;
             }
-
             if (ChatUtils.isChatOpen()) {
                 return;
             }
             if (Load.playerRPGData(mc.player) == null) {
                 return;
             }
+            
 
             RenderSystem.enableBlend(); // enables transparency
 
@@ -82,9 +82,7 @@ public class SpellHotbarOverlay {
                     place += 4;
                 }
 
-                RenderSystem.enableBlend(); // enables transparency
                 renderCurrentSpell(place, i, gui);
-                RenderSystem.disableBlend(); // enables transparency
 
             }
             RenderSystem.disableBlend(); // enables transparency
@@ -190,8 +188,7 @@ public class SpellHotbarOverlay {
                 if (txt.length() > 3) {
                     txt = txt.substring(0, 2);
                 }
-                GuiUtils.renderScaledText(gui,
-                        xs + 14, ys + 12, 1, txt, ChatFormatting.GREEN);
+                GuiUtils.renderScaledText(gui, xs + 14, ys + 12, 1, txt, ChatFormatting.GREEN);
 
             }
         } catch (Exception e) {
