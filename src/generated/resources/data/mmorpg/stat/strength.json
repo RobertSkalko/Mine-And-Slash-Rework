@@ -11,12 +11,12 @@
         {
           "type": "FLAT",
           "stat": "health_regen",
-          "v1": 0.1
+          "v1": 0.2
         },
         {
           "type": "FLAT",
           "stat": "health",
-          "v1": 1.0
+          "v1": 2.0
         }
       ]
     },

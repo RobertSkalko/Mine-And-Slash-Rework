@@ -74,9 +74,6 @@ public class Perks implements ExileRegistryInit {
         PerkBuilder.stat(new OptScaleExactStat(1, Stats.CRIT_CHANCE.get(), ModType.FLAT));
 
 
-        PerkBuilder.stat(new OptScaleExactStat(2, Stats.CRIT_DAMAGE.get(), ModType.FLAT));
-        PerkBuilder.stat(new OptScaleExactStat(1, Stats.CRIT_CHANCE.get(), ModType.FLAT));
-
         PerkBuilder.bigStat(new OptScaleExactStat(10, Stats.CRIT_DAMAGE.get(), ModType.FLAT));
         PerkBuilder.bigStat(new OptScaleExactStat(5, Stats.CRIT_CHANCE.get(), ModType.FLAT));
 
@@ -89,9 +86,7 @@ public class Perks implements ExileRegistryInit {
         PerkBuilder.bigStat(new OptScaleExactStat(4, Stats.LIFESTEAL.get(), ModType.FLAT));
         PerkBuilder.bigStat(new OptScaleExactStat(4, Stats.SPELL_LIFESTEAL.get(), ModType.FLAT));
 
-        PerkBuilder.stat(new OptScaleExactStat(2, Stats.CRIT_DAMAGE.get(), ModType.FLAT));
-        PerkBuilder.stat(new OptScaleExactStat(1, Stats.CRIT_CHANCE.get(), ModType.FLAT));
-
+   
         PerkBuilder.stat(new OptScaleExactStat(3, Stats.AREA_DAMAGE.get(), ModType.FLAT));
         PerkBuilder.stat(new OptScaleExactStat(3, Stats.INCREASED_AREA.get(), ModType.FLAT));
         PerkBuilder.bigStat(new OptScaleExactStat(10, Stats.AREA_DAMAGE.get(), ModType.FLAT));

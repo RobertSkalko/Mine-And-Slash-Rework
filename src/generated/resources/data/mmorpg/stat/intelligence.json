@@ -6,17 +6,17 @@
         {
           "type": "FLAT",
           "stat": "mana",
-          "v1": 1.0
+          "v1": 2.0
         },
         {
           "type": "PERCENT",
           "stat": "magic_shield",
-          "v1": 1.0
+          "v1": 0.5
         },
         {
           "type": "FLAT",
           "stat": "magic_shield_regen",
-          "v1": 0.1
+          "v1": 0.2
         }
       ]
     },

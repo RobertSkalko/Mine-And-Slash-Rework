@@ -16,7 +16,11 @@ public class OrbOfLinking extends SkillGemCurrency {
 
     @Override
     public ItemStack modify(LocReqContext ctx, ItemStack stack, SkillGemData data) {
+        int old = data.links;
         data.reRollLinks();
+        if (data.links < old) {
+            data.links = old; // we don't want to punish players for attempting to reroll
+        }
         StackSaving.SKILL_GEM.saveTo(stack, data);
         return stack;
     }

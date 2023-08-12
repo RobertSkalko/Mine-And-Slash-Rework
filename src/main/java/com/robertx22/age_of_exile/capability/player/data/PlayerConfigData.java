@@ -21,6 +21,11 @@ public class PlayerConfigData {
         // todo test this
         public boolean trySalvageOnPickup(Player player, ItemStack stack) {
 
+            if (stack.isEnchanted()) {
+                return false; // we don't want to auto salvage gear that is likely to have been worn or important
+            }
+
+
             ICommonDataItem<GearRarity> data = ICommonDataItem.load(stack);
 
             if (data != null) {
