@@ -3,6 +3,9 @@
   "gear_slot": "ring",
   "guid": "ring",
   "implicit_stats": [],
+  "req": {
+    "scaling_req": {}
+  },
   "style": "STR",
   "tags": {
     "tags": [

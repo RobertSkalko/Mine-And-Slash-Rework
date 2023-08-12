@@ -10,6 +10,11 @@
   "gear_slot": "boots",
   "guid": "leather_boots",
   "implicit_stats": [],
+  "req": {
+    "scaling_req": {
+      "dexterity": 0.75
+    }
+  },
   "style": "STR",
   "tags": {
     "tags": [

@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPartTooltip;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.MergedStats;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.wrappers.ExileText;
@@ -122,9 +123,13 @@ public class GearTooltipUtils {
 
         MutableComponent lvl = TooltipUtils.gearLevel(gear.lvl);
 
-
         tip.add(lvl);
+        TooltipUtils.addRequirements(tip, gear.getLevel(), gear.getRequirement(), Load.Unit(info.player));
+
+        tip.add(Component.literal(""));
+
         tip.add(TooltipUtils.gearRarity(gear.getRarity()));
+
 
         tip.add(ExileText.ofText("Potential: " + gear.getPotential() + "%").format(gear.getPotentialColor()).get());
 
@@ -141,6 +146,7 @@ public class GearTooltipUtils {
             TooltipUtils.addSocketNamesLine(tip, gear);
         }
         tip.add(Component.literal(""));
+
 
         //  ItemStack.appendEnchantmentNames(tip, stack.getEnchantmentTags());
 

@@ -10,6 +10,11 @@
   "gear_slot": "helmet",
   "guid": "leather_helmet",
   "implicit_stats": [],
+  "req": {
+    "scaling_req": {
+      "dexterity": 0.75
+    }
+  },
   "style": "STR",
   "tags": {
     "tags": [

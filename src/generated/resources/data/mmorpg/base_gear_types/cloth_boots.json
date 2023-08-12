@@ -2,14 +2,19 @@
   "base_stats": [
     {
       "type": "ITEM_FLAT",
-      "max": 7.5,
-      "min": 3.0,
+      "max": 3.0,
+      "min": 0.5,
       "stat": "magic_shield"
     }
   ],
   "gear_slot": "boots",
   "guid": "cloth_boots",
   "implicit_stats": [],
+  "req": {
+    "scaling_req": {
+      "intelligence": 0.75
+    }
+  },
   "style": "STR",
   "tags": {
     "tags": [

@@ -15,8 +15,8 @@
   "stats": [
     {
       "type": "ITEM_FLAT",
-      "max": 4.0,
-      "min": 2.0,
+      "max": 1.0,
+      "min": 0.5,
       "stat": "magic_shield"
     },
     {

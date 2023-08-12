@@ -30,7 +30,7 @@ public class BasicStatRegex extends StatNameRegex {
             if (v1 > 0) {
                 return VALUE + " " + stat.getMultiUseType().tooltipPrefix + " " + NAME;
             } else {
-                return VALUE + " Less " + NAME;
+                return VALUE + " " + stat.getMultiUseType().tooltipPrefixLess + " " + NAME;
 
             }
         }

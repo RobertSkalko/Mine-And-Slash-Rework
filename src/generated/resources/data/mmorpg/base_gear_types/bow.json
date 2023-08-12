@@ -10,6 +10,11 @@
   "gear_slot": "bow",
   "guid": "bow",
   "implicit_stats": [],
+  "req": {
+    "scaling_req": {
+      "dexterity": 0.75
+    }
+  },
   "style": "DEX",
   "tags": {
     "tags": [

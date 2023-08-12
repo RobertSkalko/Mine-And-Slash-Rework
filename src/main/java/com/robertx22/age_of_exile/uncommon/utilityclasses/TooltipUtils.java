@@ -29,18 +29,19 @@ public class TooltipUtils {
     }
 
     public static void addRequirements(List<Component> tip, int lvl, StatRequirement req, EntityData data) {
-
+/*
         if (data.getLevel() >= lvl) {
             tip.add(Component.literal(ChatFormatting.GREEN + "" + ChatFormatting.BOLD + StatRequirement.CHECK_YES_ICON + ChatFormatting.GRAY)
-                    .append(ChatFormatting.GRAY + " Level Min: " + lvl + " "));
+                    .append(ChatFormatting.GRAY + " Level: " + lvl + " "));
 
         } else {
             tip.add(Component.literal(ChatFormatting.RED + "" + ChatFormatting.BOLD + StatRequirement.NO_ICON + ChatFormatting.GRAY)
-                    .append(ChatFormatting.GRAY + " Level Min: " + lvl + " ")
+                    .append(ChatFormatting.GRAY + " Level: " + lvl + " ")
             );
         }
-        tip.addAll(req
-                .GetTooltipString(lvl, data));
+
+ */
+        tip.addAll(req.GetTooltipString(lvl, data));
     }
 
     public static void addSocketNamesLine(List<Component> tip, GearItemData gear) {
@@ -228,8 +229,8 @@ public class TooltipUtils {
     }
 
     public static MutableComponent gearLevel(int lvl) {
-        return Component.literal("Level Req: ")
-                .withStyle(ChatFormatting.WHITE)
+        return Component.literal("Level: ")
+                .withStyle(ChatFormatting.YELLOW)
                 .append(Component.literal(lvl + "")
                         .withStyle(ChatFormatting.YELLOW));
     }

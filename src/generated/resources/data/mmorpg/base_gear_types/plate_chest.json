@@ -10,6 +10,11 @@
   "gear_slot": "chest",
   "guid": "plate_chest",
   "implicit_stats": [],
+  "req": {
+    "scaling_req": {
+      "strength": 0.75
+    }
+  },
   "style": "STR",
   "tags": {
     "tags": [

@@ -49,7 +49,7 @@ public class AllAttributes extends Stat implements ITransferToOtherStats {
 
     @Override
     public String locDescForLangFile() {
-        return "Adds to DEX, INT STR, VIT, WIL, AGI.";
+        return "Adds to DEX, INT STR";
     }
 
     @Override

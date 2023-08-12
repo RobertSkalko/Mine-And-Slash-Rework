@@ -2,14 +2,19 @@
   "base_stats": [
     {
       "type": "ITEM_FLAT",
-      "max": 12.0,
-      "min": 4.8,
+      "max": 4.8,
+      "min": 0.8,
       "stat": "magic_shield"
     }
   ],
   "gear_slot": "pants",
   "guid": "cloth_pants",
   "implicit_stats": [],
+  "req": {
+    "scaling_req": {
+      "intelligence": 0.75
+    }
+  },
   "style": "STR",
   "tags": {
     "tags": [

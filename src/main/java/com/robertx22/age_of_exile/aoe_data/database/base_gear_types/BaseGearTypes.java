@@ -9,7 +9,6 @@ public class BaseGearTypes {
     public final static DataGenKey<BaseGearType> NECKLACE = of("necklace");
     public final static DataGenKey<BaseGearType> SHIELD = of("shield");
     public final static DataGenKey<BaseGearType> SWORD = of("sword");
-    public final static DataGenKey<BaseGearType> SCEPTER = of("scepter");
     public final static DataGenKey<BaseGearType> BOW = of("bow");
     public final static DataGenKey<BaseGearType> CROSSBOW = of("crossbow");
     public final static DataGenKey<BaseGearType> STAFF = of("staff");

@@ -15,7 +15,7 @@
   "stats": [
     {
       "type": "ITEM_FLAT",
-      "max": 20.0,
+      "max": 8.0,
       "min": 3.0,
       "stat": "armor"
     }

@@ -20,30 +20,31 @@ public class ArmorPrefixes implements ExileRegistryInit {
         String name;
         SlotTag tag;
 
-        public TYPE(Stat stat, String name, SlotTag tag) {
+        public float flatMulti = 1;
+
+        public TYPE(Stat stat, String name, SlotTag tag, float flatMulti) {
             this.stat = stat;
             this.name = name;
             this.tag = tag;
+            this.flatMulti = flatMulti;
         }
     }
 
     @Override
     public void registerAll() {
 
-        // todo add actual local stats
-
 
         List<TYPE> stats = new ArrayList<>();
 
-        stats.add(new TYPE(Armor.getInstance(), "Reinforced", SlotTag.armor_stat));
-        stats.add(new TYPE(MagicShield.getInstance(), "Fortified", SlotTag.magic_shield_stat));
-        stats.add(new TYPE(DodgeRating.getInstance(), "Scaled", SlotTag.dodge_stat));
+        stats.add(new TYPE(Armor.getInstance(), "Reinforced", SlotTag.armor_stat, 1));
+        stats.add(new TYPE(MagicShield.getInstance(), "Fortified", SlotTag.magic_shield_stat, 0.25f));
+        stats.add(new TYPE(DodgeRating.getInstance(), "Scaled", SlotTag.dodge_stat, 1));
 
 
         for (TYPE type : stats) {
             AffixBuilder.Normal("item_flat_" + type.stat.GUID())
                     .Named(type.name)
-                    .stats(new StatMod(3, 20, type.stat, ModType.ITEM_FLAT))
+                    .stats(new StatMod(3 * type.flatMulti, 8 * type.flatMulti, type.stat, ModType.ITEM_FLAT))
                     .includesTags(type.tag)
                     .Prefix()
                     .Build();
@@ -58,7 +59,7 @@ public class ArmorPrefixes implements ExileRegistryInit {
 
             AffixBuilder.Normal("item_both_" + type.stat.GUID())
                     .Named(type.name)
-                    .stats(new StatMod(2, 4, type.stat, ModType.ITEM_FLAT), new StatMod(5, 30, type.stat, ModType.ITEM_PERCENT))
+                    .stats(new StatMod(2 * type.flatMulti, 4 * type.flatMulti, type.stat, ModType.ITEM_FLAT), new StatMod(5, 30, type.stat, ModType.ITEM_PERCENT))
                     .includesTags(type.tag)
                     .Prefix()
                     .Build();

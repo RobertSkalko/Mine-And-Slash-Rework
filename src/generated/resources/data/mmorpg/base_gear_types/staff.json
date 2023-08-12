@@ -10,6 +10,11 @@
   "gear_slot": "staff",
   "guid": "staff",
   "implicit_stats": [],
+  "req": {
+    "scaling_req": {
+      "intelligence": 0.75
+    }
+  },
   "style": "INT",
   "tags": {
     "tags": [

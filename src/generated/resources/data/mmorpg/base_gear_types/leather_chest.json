@@ -10,6 +10,11 @@
   "gear_slot": "chest",
   "guid": "leather_chest",
   "implicit_stats": [],
+  "req": {
+    "scaling_req": {
+      "dexterity": 0.75
+    }
+  },
   "style": "STR",
   "tags": {
     "tags": [

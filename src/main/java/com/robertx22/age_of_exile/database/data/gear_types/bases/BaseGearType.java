@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.database.data.gear_types.weapons.mechanics.Wea
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequirement;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
@@ -29,6 +30,8 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
     public int weight = 1000;
     public PlayStyle style = PlayStyle.STR;
 
+    public StatRequirement req = new StatRequirement();
+
     public List<StatMod> implicit_stats = new ArrayList<>();
     public List<StatMod> base_stats = new ArrayList<>();
 
@@ -41,6 +44,7 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
         this.guid = guid;
         this.locname = locname;
         this.gear_slot = slot;
+        
     }
 
     private BaseGearType() {

@@ -10,6 +10,11 @@
   "gear_slot": "boots",
   "guid": "plate_boots",
   "implicit_stats": [],
+  "req": {
+    "scaling_req": {
+      "strength": 0.75
+    }
+  },
   "style": "STR",
   "tags": {
     "tags": [

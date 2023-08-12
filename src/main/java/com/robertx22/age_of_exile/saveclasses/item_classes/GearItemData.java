@@ -74,12 +74,8 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         return LevelUtils.levelToTier(lvl);
     }
 
-    public float getLevel() {
-
-        float ilvl = lvl;
-
-
-        return ilvl;
+    public int getLevel() {
+        return this.lvl;
     }
 
     @Override
@@ -87,11 +83,20 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         return ToggleAutoSalvageRarity.SalvageType.GEAR;
     }
 
+    public StatRequirement getRequirement() {
+        return GetBaseGearType().req;
+    }
+
     public boolean canPlayerWear(EntityData data) {
 
         if (this.getLevel() > data.getLevel()) {
             return false;
         }
+
+        if (!getRequirement().meetsReq(this.getLevel(), data)) {
+            return false;
+        }
+
 
         return true;
 

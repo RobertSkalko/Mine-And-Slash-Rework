@@ -27,7 +27,7 @@ public interface GearDataHelper {
 
     public enum ArmorStat {
         ARMOR(6, 15, Armor.getInstance()),
-        MAGIC_SHIELD(6, 15, MagicShield.getInstance()),
+        MAGIC_SHIELD(1, 6, MagicShield.getInstance()),
         DODGE(6, 15, DodgeRating.getInstance());
 
         public float min;

@@ -26,15 +26,16 @@ public class BaseGearBuilder implements GearDataHelper {
     private WeaponTypes wep = WeaponTypes.none;
     private int weight = 1000;
 
-    public static BaseGearBuilder of(DataGenKey<BaseGearType> id, String slot, String locnamesuffix) {
+    public static BaseGearBuilder of(DataGenKey<BaseGearType> id, String slot, String locnamesuffix, StatRequirement req) {
         BaseGearBuilder b = new BaseGearBuilder();
         b.locnamesuffix = locnamesuffix;
         b.id = id.GUID();
+        b.req = req;
         b.slot = slot;
         return b;
     }
 
-    public static BaseGearBuilder weapon(DataGenKey<BaseGearType> id, String slot, WeaponTypes type) {
+    public static BaseGearBuilder weapon(DataGenKey<BaseGearType> id, String slot, WeaponTypes type, StatRequirement req) {
         BaseGearBuilder b = new BaseGearBuilder();
         b.locnamesuffix = type.locName();
         b.id = id.GUID();
@@ -42,6 +43,7 @@ public class BaseGearBuilder implements GearDataHelper {
         b.weaponType(type);
         b.attackStyle(type.style);
         b.baseStat(b.getAttackDamageStat(type));
+        b.req = req;
 
         return b;
     }
@@ -89,7 +91,9 @@ public class BaseGearBuilder implements GearDataHelper {
         type.base_stats = basestats;
         type.weight = weight;
         type.style = style;
+        type.req = req;
         type.addToSerializables();
+
 
         return new DataGenKey<>(type.GUID());
 

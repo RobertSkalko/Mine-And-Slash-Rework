@@ -10,6 +10,11 @@
   "gear_slot": "pants",
   "guid": "plate_pants",
   "implicit_stats": [],
+  "req": {
+    "scaling_req": {
+      "strength": 0.75
+    }
+  },
   "style": "STR",
   "tags": {
     "tags": [

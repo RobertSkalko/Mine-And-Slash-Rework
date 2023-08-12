@@ -5,7 +5,7 @@ import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttributes;
-import com.robertx22.library_of_exile.registry.IAutoGson;
+import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 
@@ -14,21 +14,31 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class StatRequirement implements IAutoGson<StatRequirement> {
+public class StatRequirement {
 
-    public static String CHECK_YES_ICON = "\u2713";
-    public static String NO_ICON = "\u2715";
+
+    public static String CHECK_YES_ICON = "\u2714"; // they removed the damn icons..
+    public static String NO_ICON = "\u274C";
 
     public static StatRequirement EMPTY = new StatRequirement();
 
-    public HashMap<String, Float> base_req = new HashMap<>();
+    //public HashMap<String, Float> base_req = new HashMap<>();
     public HashMap<String, Float> scaling_req = new HashMap<>();
 
     public StatRequirement(StatRequirement r) {
-
-        this.base_req = new HashMap<>(r.base_req);
+        //this.base_req = new HashMap<>(r.base_req);
         this.scaling_req = new HashMap<>(r.scaling_req);
+    }
 
+    public static StatRequirement of(PlayStyle... styles) {
+        StatRequirement r = new StatRequirement();
+        float multi = 0.75F / (float) styles.length;
+
+        for (PlayStyle style : styles) {
+            r.setStyleReq(style, multi);
+        }
+
+        return r;
     }
 
     public static StatRequirement combine(StatRequirement one, StatRequirement two) {
@@ -37,10 +47,6 @@ public class StatRequirement implements IAutoGson<StatRequirement> {
         two.scaling_req.entrySet()
                 .forEach(x -> {
                     req.scaling_req.put(x.getKey(), req.scaling_req.getOrDefault(x.getKey(), 0F) + x.getValue());
-                });
-        two.base_req.entrySet()
-                .forEach(x -> {
-                    req.base_req.put(x.getKey(), req.base_req.getOrDefault(x.getKey(), 0F) + x.getValue());
                 });
 
         return req;
@@ -69,9 +75,13 @@ public class StatRequirement implements IAutoGson<StatRequirement> {
     }
 
     private int getReq(Stat stat, int lvl) {
-        return (int) (base_req.getOrDefault(stat.GUID(), 0F) + StatScaling.STAT_REQ.scale(scaling_req.getOrDefault(stat.GUID(), 0F), lvl));
+        return (int) StatScaling.STAT_REQ.scale(scaling_req.getOrDefault(stat.GUID(), 0F), lvl);
     }
 
+    public StatRequirement setStyleReq(PlayStyle style, float req) {
+        this.scaling_req.put(style.getStat().GUID(), req);
+        return this;
+    }
 
     public StatRequirement setDex(float req) {
         this.scaling_req.put(DatapackStats.DEX.GUID(), req);
@@ -88,20 +98,6 @@ public class StatRequirement implements IAutoGson<StatRequirement> {
         return this;
     }
 
-    public StatRequirement setBaseDex(int req) {
-        this.base_req.put(DatapackStats.DEX.GUID(), (float) req);
-        return this;
-    }
-
-    public StatRequirement setBaseInt(int req) {
-        this.base_req.put(DatapackStats.INT.GUID(), (float) req);
-        return this;
-    }
-
-    public StatRequirement setBaseStr(int req) {
-        this.base_req.put(DatapackStats.STR.GUID(), (float) req);
-        return this;
-    }
 
     public List<Component> GetTooltipString(int lvl, EntityData data) {
         List<Component> list = new ArrayList<>();
@@ -113,7 +109,6 @@ public class StatRequirement implements IAutoGson<StatRequirement> {
 
             if (num > 0) {
                 list.add(getTooltip(num, x, data));
-
             }
 
         }
@@ -122,8 +117,9 @@ public class StatRequirement implements IAutoGson<StatRequirement> {
     }
 
     public boolean isEmpty() {
-        return this.base_req.isEmpty() && this.scaling_req.isEmpty();
+        return this.scaling_req.isEmpty();
     }
+
 
     static Component getTooltip(int req, Stat stat, EntityData data) {
 
@@ -143,8 +139,5 @@ public class StatRequirement implements IAutoGson<StatRequirement> {
 
     }
 
-    @Override
-    public Class<StatRequirement> getClassForSerialization() {
-        return StatRequirement.class;
-    }
+
 }
