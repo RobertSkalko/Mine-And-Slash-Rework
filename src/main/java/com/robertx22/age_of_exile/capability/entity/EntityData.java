@@ -10,7 +10,7 @@ import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
+import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -289,7 +289,7 @@ public class EntityData implements ICap, INeededForClient {
             this.customExactStats = loadOrBlank(CustomExactStatsData.class, new CustomExactStatsData(), nbt, CUSTOM_STATS, new CustomExactStatsData());
             this.resources = loadOrBlank(ResourcesData.class, new ResourcesData(), nbt, RESOURCES_LOC, new ResourcesData());
             this.cooldowns = loadOrBlank(CooldownsData.class, new CooldownsData(), nbt, COOLDOWNS, new CooldownsData());
-         
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -590,7 +590,7 @@ public class EntityData implements ICap, INeededForClient {
                 .get(data.getAttackerEntityData()
                         .getRarity());
 
-        float multi = (float) (ServerContainer.get().VANILLA_MOB_DMG_AS_EXILE_DMG.get() + (LevelUtils.getMaxLevelMultiplier(getLevel()) * (ServerContainer.get().VANILLA_MOB_DMG_AS_EXILE_DMG_AT_MAX_LVL.get() - ServerContainer.get().VANILLA_MOB_DMG_AS_EXILE_DMG.get())));
+        float multi = (float) (ServerContainer.get().VANILLA_MOB_DMG_AS_EXILE_DMG.get().floatValue());
 
         float vanilla = data.getAmount() * multi;
 
@@ -598,7 +598,7 @@ public class EntityData implements ICap, INeededForClient {
 
         num *= ExileDB.getEntityConfig(entity, this).dmg_multi;
 
-        num = WeaponDamage.getInstance().scale(ModType.FLAT, num, getLevel());
+        num = StatScaling.MOB_DAMAGE.scale(num, getLevel());
 
         PlayStyle style = PlayStyle.STR;
 

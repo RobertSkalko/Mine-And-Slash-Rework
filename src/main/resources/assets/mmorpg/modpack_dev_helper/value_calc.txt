@@ -1,14 +1,14 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
-magma_flower
 ice_comet
+magma_flower
 torment
 chilling_touch
 healing_aura
 chilling_field
 close_nova
-wish
 whirlwind
+wish
 iceball
 arrow_storm
 minion_explosion
@@ -35,14 +35,14 @@ black_hole
 lightning_nova
 fireball
 explosive_arrow
-charge
 heart_of_ice
+charge
 poison_arrow
 direct_arrow_hit
 flame_strike
 meteor
-thorn_bush
 frost_nova
+thorn_bush
 totem_guard
 power_chord
 pull

@@ -23,11 +23,29 @@ public class BaseGearTypes {
     public final static DataGenKey<BaseGearType> LEATHER_CHEST = of("leather_chest");
     public final static DataGenKey<BaseGearType> LEATHER_HELMET = of("leather_helmet");
 
-
     public final static DataGenKey<BaseGearType> PLATE_BOOTS = of("plate_boots");
     public final static DataGenKey<BaseGearType> PLATE_PANTS = of("plate_pants");
     public final static DataGenKey<BaseGearType> PLATE_CHEST = of("plate_chest");
     public final static DataGenKey<BaseGearType> PLATE_HELMET = of("plate_helmet");
+
+    /*
+    public final static DataGenKey<BaseGearType> DODGE_ARMOR_BOOTS = of("dodge_armor_boots");
+    public final static DataGenKey<BaseGearType> DODGE_ARMOR_PANTS = of("dodge_armor_pants");
+    public final static DataGenKey<BaseGearType> DODGE_ARMOR_CHEST = of("dodge_armor_chest");
+    public final static DataGenKey<BaseGearType> DODGE_ARMOR_HELMET = of("dodge_armor_helmet");
+
+    public final static DataGenKey<BaseGearType> DODGE_MS_BOOTS = of("dodge_ms_boots");
+    public final static DataGenKey<BaseGearType> DODGE_MS_PANTS = of("dodge_ms_pants");
+    public final static DataGenKey<BaseGearType> DODGE_MS_CHEST = of("dodge_ms_chest");
+    public final static DataGenKey<BaseGearType> DODGE_MS_HELMET = of("dodge_ms_helmet");
+
+    public final static DataGenKey<BaseGearType> ARMOR_MS_BOOTS = of("armor_ms_boots");
+    public final static DataGenKey<BaseGearType> ARMOR_MS_PANTS = of("armor_ms_pants");
+    public final static DataGenKey<BaseGearType> ARMOR_MS_CHEST = of("armor_ms_chest");
+    public final static DataGenKey<BaseGearType> ARMOR_MS_HELMET = of("armor_ms_helmet");
+
+
+     */
 
     static DataGenKey<BaseGearType> of(String id) {
         return new DataGenKey<>(id);

@@ -28,7 +28,7 @@ public class DataGenHook implements DataProvider {
 
         return CompletableFuture.completedFuture(null); // todo this is bad, but would it work?
     }
-    
+
 
     @Override
     public String getName() {

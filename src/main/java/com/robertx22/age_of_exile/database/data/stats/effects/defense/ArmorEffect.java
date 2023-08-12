@@ -10,8 +10,6 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import net.minecraft.util.Mth;
 
-import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect.Priority;
-
 public class ArmorEffect extends InCodeStatEffect<DamageEvent> {
 
     public ArmorEffect() {
@@ -36,7 +34,7 @@ public class ArmorEffect extends InCodeStatEffect<DamageEvent> {
 
         float EffectiveArmor = armor.getUsableValue((int) (data.getValue() - pene), effect.sourceData.getLevel());
 
-        EffectiveArmor = Mth.clamp(EffectiveArmor, 0, 1);
+        EffectiveArmor = Mth.clamp(EffectiveArmor, 0, armor.getMaxMulti());
 
         effect.data.getNumber(EventData.NUMBER).number -= EffectiveArmor * effect.data.getNumber();
 

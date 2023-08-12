@@ -29,6 +29,7 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     public LevelScalingConfig MANA_COST_SCALING = new LevelScalingConfig(1, 0.2F, true);
     public LevelScalingConfig CORE_STAT_SCALING = new LevelScalingConfig(1, 0.05F, true);
     public LevelScalingConfig STAT_REQ_SCALING = new LevelScalingConfig(2, 2, true);
+    public LevelScalingConfig MOB_DAMAGE_SCALING = new LevelScalingConfig(1, 0.5F, false);
 
     public double TALENT_POINTS_PER_LVL = 1;
     public double STAT_POINTS_PER_LEVEL = 2;

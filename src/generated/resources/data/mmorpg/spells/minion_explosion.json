@@ -169,5 +169,5 @@
   "effect_tip": "",
   "identifier": "minion_explosion",
   "manual_tip": false,
-  "weight": 1000
+  "weight": 0
 }

@@ -13,7 +13,9 @@ import java.util.List;
 
 public class ArmorPrefixes implements ExileRegistryInit {
 
+
     static class TYPE {
+
         Stat stat;
         String name;
         SlotTag tag;
@@ -30,17 +32,22 @@ public class ArmorPrefixes implements ExileRegistryInit {
         }
     }
 
+
     @Override
     public void registerAll() {
 
 
         List<TYPE> stats = new ArrayList<>();
 
-        stats.add(new TYPE("armor", GearDefense.getInstance(), "Reinforced", SlotTag.armor_stat, 1));
-        stats.add(new TYPE("ms", GearDefense.getInstance(), "Fortified", SlotTag.magic_shield_stat, 0.25f));
-        stats.add(new TYPE("dodge", GearDefense.getInstance(), "Scaled", SlotTag.dodge_stat, 1));
+        var ARMOR = new TYPE("armor", GearDefense.getInstance(), "Reinforced", SlotTag.armor_stat, 1);
+        var MS = new TYPE("ms", GearDefense.getInstance(), "Fortified", SlotTag.magic_shield_stat, 0.25f);
+        var DODGE = new TYPE("dodge", GearDefense.getInstance(), "Scaled", SlotTag.dodge_stat, 1);
 
+        stats.add(ARMOR);
+        stats.add(MS);
+        stats.add(DODGE);
 
+      
         for (TYPE type : stats) {
             AffixBuilder.Normal("item_flat_" + type.suffix)
                     .Named(type.name)

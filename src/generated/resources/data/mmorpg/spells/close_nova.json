@@ -278,5 +278,5 @@
   "effect_tip": "",
   "identifier": "close_nova",
   "manual_tip": false,
-  "weight": 1000
+  "weight": 0
 }

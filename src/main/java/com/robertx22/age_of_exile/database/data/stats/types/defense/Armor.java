@@ -7,8 +7,6 @@ import com.robertx22.age_of_exile.database.data.stats.effects.defense.ArmorEffec
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import net.minecraft.ChatFormatting;
 
-import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
-
 public class Armor extends Stat implements IUsableStat {
 
     public static Armor getInstance() {
@@ -23,7 +21,7 @@ public class Armor extends Stat implements IUsableStat {
     public static String GUID = "armor";
 
     private Armor() {
-    
+
         this.min = 0;
         this.scaling = StatScaling.NORMAL;
         this.group = StatGroup.MAIN;
@@ -52,7 +50,7 @@ public class Armor extends Stat implements IUsableStat {
 
     @Override
     public float getMaxMulti() {
-        return 0.8F;
+        return 0.9F;
     }
 
     @Override

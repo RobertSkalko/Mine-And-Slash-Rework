@@ -49,6 +49,14 @@ public interface GearDataHelper {
         return new StatMod(v1min, v1max, stat.stat, ModType.FLAT);
     }
 
+    public default StatMod halfStat(ArmorStat stat, ArmorSlot slot) {
+
+        float v1min = stat.min * slot.multi * 0.5F;
+        float v1max = stat.max * slot.multi * 0.5F;
+
+        return new StatMod(v1min, v1max, stat.stat, ModType.FLAT);
+    }
+
     public default StatMod getAttackDamageStat(WeaponTypes weapon) {
 
         float v1min = 2;

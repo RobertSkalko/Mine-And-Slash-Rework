@@ -48,7 +48,6 @@ public class ServerContainer {
         LEVEL_DISTANCE_PENALTY_MIN_MULTI = b.defineInRange("min_loot_chance", 0.25D, 0, 1);
         EXTRA_MOB_STATS_PER_LEVEL = b.defineInRange("extra_mob_stats_per_lvl", 0.02D, 0, 1000);
         VANILLA_MOB_DMG_AS_EXILE_DMG = b.defineInRange("vanilla_mob_dmg_as_exile_dmg", 1D, 0, 1000);
-        VANILLA_MOB_DMG_AS_EXILE_DMG_AT_MAX_LVL = b.defineInRange("vanilla_mob_dmg_as_exile_dmg_at_max_lvl", 1D, 0, 1000);
         PLAYER_VANILLA_DMG_MULTI = b.defineInRange("PLAYER_VANILLA_DMG_MULTI", 0D, 0, 1000);
         PVP_DMG_MULTI = b.defineInRange("pvp_dmg_multi", 1D, 0, 1000);
         MAX_TEAM_DISTANCE = b.defineInRange("max_team_distance", 150D, 0, 100000);
@@ -128,7 +127,6 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue LEVEL_DISTANCE_PENALTY_MIN_MULTI;
     public ForgeConfigSpec.DoubleValue EXTRA_MOB_STATS_PER_LEVEL;
     public ForgeConfigSpec.DoubleValue VANILLA_MOB_DMG_AS_EXILE_DMG;
-    public ForgeConfigSpec.DoubleValue VANILLA_MOB_DMG_AS_EXILE_DMG_AT_MAX_LVL;
     public ForgeConfigSpec.DoubleValue PVP_DMG_MULTI;
     public ForgeConfigSpec.DoubleValue PLAYER_VANILLA_DMG_MULTI;
     public ForgeConfigSpec.DoubleValue MAX_TEAM_DISTANCE;

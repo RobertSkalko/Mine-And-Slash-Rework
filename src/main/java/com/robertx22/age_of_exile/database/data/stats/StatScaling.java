@@ -23,6 +23,12 @@ public enum StatScaling {
             return val * GameBalanceConfig.get().STAT_REQ_SCALING.getMultiFor(lvl);
         }
     },
+    MOB_DAMAGE {
+        @Override
+        public float scale(float val, float lvl) {
+            return val * GameBalanceConfig.get().MOB_DAMAGE_SCALING.getMultiFor(lvl);
+        }
+    },
 
     SLOW {
         @Override
