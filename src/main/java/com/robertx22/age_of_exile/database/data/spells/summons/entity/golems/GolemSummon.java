@@ -27,6 +27,7 @@ public abstract class GolemSummon extends SummonEntity {
     @Override
     public boolean doHurtTarget(Entity pEntity) {
         if (super.doHurtTarget(pEntity)) {
+            
 
             if (RandomUtils.roll(5)) {
                 if (!this.level().isClientSide) {

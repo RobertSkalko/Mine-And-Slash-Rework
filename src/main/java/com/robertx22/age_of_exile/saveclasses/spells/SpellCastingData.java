@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.saveclasses.spells;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.SpellCastContext;
@@ -13,9 +12,7 @@ import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.effectdatas.SpendResourceEvent;
 import com.robertx22.age_of_exile.vanilla_mc.packets.NoManaPacket;
 import com.robertx22.library_of_exile.main.Packets;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -195,6 +192,7 @@ public class SpellCastingData {
             return true;
         }
 
+        /*
         if (!ServerContainer.get().BLACKLIST_SPELLS_IN_DIMENSIONS.isEmpty()) {
             ResourceLocation id = ctx.caster.level().registryAccess().registry(Registries.DIMENSION_TYPE).get()
                     .getKey(ctx.caster.level().dimensionType());
@@ -204,6 +202,8 @@ public class SpellCastingData {
                 return false;
             }
         }
+
+         */
 
         EntityData data = Load.Unit(caster);
 

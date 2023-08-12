@@ -33,7 +33,7 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
         return AutoLocGroup.Misc;
     }
 
-    
+
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         if (pLevel.isClientSide) {
@@ -84,14 +84,14 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
     }
 
     public enum RuneType {
-        YUN(100, "yun", "Yun", 5),
-        VEN(100, "ven", "Ven", 5),
-        NOS(1000, "nos", "Nos", 1),
-        MOS(1000, "mos", "Mos", 1),
-        ITA(1000, "ita", "Ita", 1),
-        CEN(1000, "cen", "Cen", 2),
-        FEY(1000, "fey", "Fey", 2),
-        DOS(1000, "dos", "Dos", 2),
+        YUN(100, "yun", "Yun", 4),
+        VEN(100, "ven", "Ven", 4),
+        NOS(1000, "nos", "Nos", 0),
+        MOS(1000, "mos", "Mos", 0),
+        ITA(1000, "ita", "Ita", 0),
+        CEN(1000, "cen", "Cen", 1),
+        FEY(1000, "fey", "Fey", 1),
+        DOS(1000, "dos", "Dos", 1),
         ANO(1000, "ano", "Ano", 2),
         TOQ(1000, "toq", "Toq", 2),
         ORU(500, "oru", "Oru", 4),

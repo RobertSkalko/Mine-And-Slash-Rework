@@ -68,6 +68,9 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     public transient List<StatMod> statsForSkillGem = new ArrayList<>();
 
     public boolean isAllowedInDimension(Level world) {
+        if (true) { // todo not sure if neeeded
+            return true;
+        }
         if (disabled_dims.isEmpty()) {
             return true;
         }

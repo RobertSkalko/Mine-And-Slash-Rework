@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.database.data.game_balance_config;
 
-import com.robertx22.age_of_exile.database.data.MinMax;
 import com.robertx22.age_of_exile.database.data.level_ranges.LevelRange;
 import com.robertx22.age_of_exile.database.registrators.LevelRanges;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
@@ -8,8 +7,7 @@ import com.robertx22.library_of_exile.registry.Database;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
-
-import java.util.HashMap;
+import org.joml.Math;
 
 public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, IAutoGson<GameBalanceConfig> {
 
@@ -19,8 +17,7 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     public static String ID = "game_balance";
 
     public static GameBalanceConfig get() {
-        return (GameBalanceConfig) Database.getRegistry(ExileRegistryTypes.GAME_BALANCE)
-                .get(ID);
+        return (GameBalanceConfig) Database.getRegistry(ExileRegistryTypes.GAME_BALANCE).get(ID);
     }
 
 
@@ -42,7 +39,7 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     // this is kinda cursed but will probably work
     public int getTier(int lvl) {
         if (lvl == MAX_LEVEL) {
-            return (lvl - 1) / levels_per_tier; // we dont want to add a new tier just for max lvl
+            return (Math.clamp(lvl - 1, 1, MAX_LEVEL)) / levels_per_tier; // we dont want to add a new tier just for max lvl
         }
         return lvl / levels_per_tier;
 
@@ -51,9 +48,12 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     public LevelRange getLevelsOfTier(int tier) {
         float multi = tier / 5F;
         int testlvl = (int) (MAX_LEVEL * multi + 1);
-        var opt = LevelRanges.allNormal().stream().filter(x -> x.isLevelInRange(testlvl)).findFirst();
 
-        
+        testlvl = Math.clamp(testlvl, 1, MAX_LEVEL);
+
+        int finalTestlvl = testlvl;
+        var opt = LevelRanges.allNormal().stream().filter(x -> x.isLevelInRange(finalTestlvl)).findFirst();
+
         if (!opt.isPresent()) {
             System.out.println("tier " + tier + " cant be found");
         }
@@ -61,29 +61,6 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
 
     }
 
-    public HashMap<MinMax, Integer> getTierMap() {
-
-        HashMap<MinMax, Integer> tiermap = new HashMap<>();
-
-        int tier = 0;
-
-        int min = 0;
-        int max = levels_per_tier;
-
-        while (min <= MAX_LEVEL) {
-
-            int addlast = min + levels_per_tier >= MAX_LEVEL ? 1000 : 0;
-
-            tiermap.put(new MinMax(min, max + addlast), tier);
-            min += levels_per_tier;
-            max += levels_per_tier;
-            tier++;
-
-        }
-
-        return tiermap;
-
-    }
 
     @Override
     public ExileRegistryType getExileRegistryType() {

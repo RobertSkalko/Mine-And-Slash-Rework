@@ -37,6 +37,10 @@ public class BaseScreen extends Screen {
     }
 
      */
+    @Override
+    public boolean isPauseScreen() {
+        return false;
+    }
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
@@ -45,7 +49,8 @@ public class BaseScreen extends Screen {
                     .setScreen(null);
             OnKeyPress.cooldown = 5;
             return false;
-           
+
+
         }
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
