@@ -5,7 +5,6 @@ import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
-import com.robertx22.age_of_exile.loot.generators.SoulLootGen;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -94,7 +93,7 @@ public class ItemNewbieGearBag extends Item {
                         .get(IRarity.COMMON_ID));
                 b.gearItemSlot.set(gear);
 
-                ItemStack stack = SoulLootGen.createSoulBasedOnGear(b);
+                ItemStack stack = b.createStack();
 
                 EnchantedBookItem.addEnchantment(stack, new EnchantmentInstance(Enchantments.UNBREAKING, 3));
 

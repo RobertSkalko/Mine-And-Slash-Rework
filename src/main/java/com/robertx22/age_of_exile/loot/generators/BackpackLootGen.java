@@ -21,9 +21,6 @@ public class BackpackLootGen extends BaseLootGen<ItemBlueprint> {
     @Override
     public float baseDropChance() {
 
-        if (true) {
-            return 500;
-        }
         float chance = (float) ServerContainer.get().BACKPACK_DROPRATE.get().floatValue();
         return chance;
     }

@@ -31,6 +31,9 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
+    maven {
+        url = "https://maven.theillusivec4.top/"
+    }
     maven { url '"https://maven.theillusivec4.top/' }
 }
 
@@ -85,52 +88,6 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 
-///////////////////////////////////////////////
-// LOCAL JAR DEPENDENCIES
-def getModVersion(filename) {
-    println(filename);
-    def pattern = /^(?<modid>[^-]+)(?:-(?<mcversion>[0-9.]+))?(?:-(?<modver>[0-9.\-]+))\.jar$/;
-    def matcher = filename =~ pattern
-    def found = matcher.find()
-    if (found) {
-        def mod = matcher.group("modid");
-        // Extract MC version or default
-        def mcVersion = matcher.group("mcversion");
-        // Extract mod version
-        def version = matcher.group("modver");
-        // println("> mod: ${mod}; mc: ${mcVersion}; version: ${version}");
-        if (mcVersion == null)
-            return "${mod}:${mod}:${version}";
-        else
-            return "${mod}:${mod}-${mcVersion}:${version}";
-
-    } else {
-        println("> not a mod filename")
-        return filename;
-    }
-}
-
-def dev_mods_dir = "libs"
-def dev_mods = fileTree(dev_mods_dir).matching {
-    include "**/*.jar"
-}.filter { it -> it.isFile() }.files.name.collect({ getModVersion(it) })
-
-repositories {
-    maven {
-        url = "https://maven.theillusivec4.top/"
-    }
-    flatDir {
-        dirs dev_mods_dir
-    }
-}
-dependencies {
-    dev_mods.each {
-        implementation fg.deobf(it)
-    }
-}
-// LOCAL JAR DEPENDENCIES
-///////////////////////////////////////////////
-
 dependencies {
 
     minecraft([
@@ -144,6 +101,7 @@ dependencies {
         annotationProcessor 'org.spongepowered:mixin:0.8.3:processor'
     }
 
+    implementation fg.deobf(files("libs/Library_of_Exile-1.20.1-1.2.3.jar"))
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
 
 }

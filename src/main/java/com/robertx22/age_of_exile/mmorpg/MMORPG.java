@@ -6,7 +6,6 @@ import com.robertx22.age_of_exile.aoe_data.database.boss_spell.BossSpells;
 import com.robertx22.age_of_exile.aoe_data.database.stat_conditions.StatConditions;
 import com.robertx22.age_of_exile.aoe_data.database.stat_effects.StatEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
-import com.robertx22.age_of_exile.aoe_data.datapacks.generators.DataGenHook;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.aura.AuraGems;
@@ -59,7 +58,7 @@ import java.util.function.Consumer;
 public class MMORPG {
 
     // DISABLE WHEN PUBLIC BUILD
-    public static boolean RUN_DEV_TOOLS = true;
+    public static boolean RUN_DEV_TOOLS = false;
 
     private static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel NETWORK = NetworkRegistry.newSimpleChannel(
@@ -140,10 +139,13 @@ public class MMORPG {
 
         LifeCycleEvents.register();
 
+        /*
         ForgeEvents.registerForgeEvent(GatherDataEvent.class, x -> {
             x.getGenerator().addProvider(true, new DataGenHook());
             // todo this doesnt run the datagen hook
         });
+
+         */
 
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(EventPriority.LOW, new Consumer<GatherDataEvent>() {

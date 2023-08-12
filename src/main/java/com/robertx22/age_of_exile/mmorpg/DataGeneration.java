@@ -15,6 +15,7 @@ public class DataGeneration {
 
             new DataGenHook().run(CachedOutput.NO_CACHE);
 
+            
             ModpackerHelperLists.generate();
 
             CreateLangFile.create();

@@ -21,10 +21,11 @@ public class BossSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        
+
         SpellBuilder.of(MINION_EXPLOSION, PlayStyle.STR, SpellConfiguration.Builder.instant(0, 0), "Minion Explosion",
                         Arrays.asList(SpellTag.area, SpellTag.damage))
 
+                .weight(0)
                 .onCast(PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
 
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.WITCH, 500D, 3D))
@@ -39,6 +40,7 @@ public class BossSpells implements ExileRegistryInit {
         SpellBuilder.of(CLOSE_NOVA, PlayStyle.STR, SpellConfiguration.Builder.instant(0, 0), "Close Nova",
                         Arrays.asList(SpellTag.area, SpellTag.damage))
 
+                .weight(0)
                 .onCast(PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
 
                 .onCast(PartBuilder.nova(ParticleTypes.WITCH, 200D, 3D, 0.05D))
