@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.maps.generator.ChunkProcessData;
 import com.robertx22.age_of_exile.maps.mobs.SpawnedMob;
 import com.robertx22.age_of_exile.maps.processors.DataProcessor;
 import com.robertx22.age_of_exile.maps.processors.helpers.MobBuilder;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +14,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.codehaus.plexus.util.StringUtils;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -29,7 +29,8 @@ public class ComplexMobProcessor extends DataProcessor {
     public void processImplementation(String key, BlockPos pos, Level world, ChunkProcessData data) {
 
         try {
-            String[] parts = StringUtils.split(key, ";");
+
+            String[] parts = StringUTIL.split(key, ";");
 
             MobRarity rarity = null;
             boolean isBoss = false;

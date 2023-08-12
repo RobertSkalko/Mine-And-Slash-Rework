@@ -45,7 +45,6 @@ import net.minecraft.world.entity.player.Player;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 // this stores data that can be lost without issue, stats that are recalculated all the time
@@ -55,8 +54,6 @@ public class Unit {
 
     private StatContainer stats = new StatContainer();
 
-
-    public String GUID = UUID.randomUUID().toString();
 
     public InCalcStatData getStatInCalculation(Stat stat) {
         return getStats().getStatInCalculation(stat);
@@ -100,21 +97,6 @@ public class Unit {
         getStats().stats = new HashMap<String, StatData>();
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (obj instanceof Unit) {
-            return ((Unit) obj).GUID.equals(this.GUID);
-        }
-        return false;
-    }
-
-    @Override
-    public int hashCode() {
-        return GUID.hashCode();
-    }
 
     // Stat shortcuts
     public Health health() {

@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.uncommon.enumclasses;
 
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ErrorUtils;
-import org.apache.commons.lang3.StringUtils;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,8 +33,9 @@ public enum WeaponTypes {
     public String id;
     public boolean isProjectile;
 
+
     public String locName() {
-        return StringUtils.capitalize(id);
+        return StringUTIL.capitalise(id);
     }
 
     public boolean isMelee() {

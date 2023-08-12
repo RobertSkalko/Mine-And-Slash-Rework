@@ -5,9 +5,9 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.library_of_exile.registry.ExileRegistry;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
-import org.codehaus.plexus.util.StringUtils;
 
 import java.util.function.Function;
 
@@ -94,9 +94,10 @@ public class Ailment implements ExileRegistry<Ailment>, IAutoLocName, IAutoLocDe
 
     @Override
     public String locNameForLangFile() {
-        return StringUtils.capitalise(id);
+        return StringUTIL.capitalise(id);
     }
 
+    
     @Override
     public AutoLocGroup locDescGroup() {
         return AutoLocGroup.StatusEffects;
