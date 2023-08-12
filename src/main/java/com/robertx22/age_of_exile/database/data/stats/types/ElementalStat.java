@@ -45,8 +45,7 @@ public abstract class ElementalStat extends Stat implements IElementalGenerated<
     public void transferStats(EntityData unit, InCalcStatData thisstat) {
         if (this.element == Elements.Elemental) {
             for (Elements ele : Elements.getAllSingleElementals()) {
-                thisstat.addFullyTo(unit.getUnit()
-                        .getStatInCalculation(newGeneratedInstance(ele)));
+                thisstat.addFullyTo(unit.getUnit().getStatInCalculation(newGeneratedInstance(ele)));
             }
             thisstat.clear();
         }

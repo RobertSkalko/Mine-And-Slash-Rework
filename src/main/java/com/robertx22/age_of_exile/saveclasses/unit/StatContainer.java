@@ -5,6 +5,8 @@ import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Consumer;
 
 
 public class StatContainer {
@@ -26,6 +28,12 @@ public class StatContainer {
                     stats.put(x.id, x.getCalculated());
                 });
         statsInCalc.clear();
+    }
+
+    public void modifyInCalc(Consumer<InCalcStatData> co) {
+        for (Map.Entry<String, InCalcStatData> en : statsInCalc.entrySet()) {
+            co.accept(en.getValue());
+        }
     }
 
     public InCalcStatData getStatInCalculation(Stat stat) {

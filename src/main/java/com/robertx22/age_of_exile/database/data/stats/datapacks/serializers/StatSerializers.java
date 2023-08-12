@@ -16,7 +16,6 @@ public class StatSerializers {
 
         map.put(AddPerPercentOfOther.SER_ID, new OneAppliesToOtherSer());
         map.put(MoreXPerYOf.SER_ID, new MoreXPerYOfSer());
-        map.put(ConvertFromOneToOtherStat.SER_ID, new TransferStatSer());
         map.put(MarkerStat.SER_ID, new MarkerSer());
         map.put(AttributeStat.SER_ID, new AttributeStatSer());
         map.put(CoreStat.SER_ID, new CoreStatSer());

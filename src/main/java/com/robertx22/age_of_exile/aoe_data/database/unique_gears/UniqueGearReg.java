@@ -1,10 +1,20 @@
 package com.robertx22.age_of_exile.aoe_data.database.unique_gears;
 
-import com.robertx22.age_of_exile.aoe_data.database.unique_gears.fabled.FabledUniques;
-import com.robertx22.age_of_exile.aoe_data.database.unique_gears.runewords.*;
-import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.UniqueArmors;
-import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.UniqueJewelry;
-import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.UniqueWeapons;
+import com.robertx22.age_of_exile.aoe_data.database.unique_gears.runewords.armor.HelmetRunewords;
+import com.robertx22.age_of_exile.aoe_data.database.unique_gears.runewords.jewelry.NecklaceRunewords;
+import com.robertx22.age_of_exile.aoe_data.database.unique_gears.runewords.jewelry.RingRuneWords;
+import com.robertx22.age_of_exile.aoe_data.database.unique_gears.runewords.weapon.BowRuneWords;
+import com.robertx22.age_of_exile.aoe_data.database.unique_gears.runewords.weapon.StaffRuneWords;
+import com.robertx22.age_of_exile.aoe_data.database.unique_gears.runewords.weapon.SwordRunewords;
+import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.armor.BootsUniques;
+import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.armor.ChestUniques;
+import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.armor.HelmetUniques;
+import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.armor.PantsUniques;
+import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.jewelry.UniqueNecklaces;
+import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.jewelry.UniqueRings;
+import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.weapon.BowUniques;
+import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.weapon.StaffUniques;
+import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.weapon.SwordUniques;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
 public class UniqueGearReg implements ExileRegistryInit {
@@ -12,18 +22,27 @@ public class UniqueGearReg implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        new FabledUniques().registerAll();
+        new HelmetUniques().registerAll();
+        new ChestUniques().registerAll();
+        new PantsUniques().registerAll();
+        new BootsUniques().registerAll();
 
-        new UniqueArmors().registerAll();
-        new UniqueJewelry().registerAll();
-        new UniqueWeapons().registerAll();
+        new UniqueRings().registerAll();
+        new UniqueNecklaces().registerAll();
+
+        new StaffUniques().registerAll();
+        new BowUniques().registerAll();
+        new SwordUniques().registerAll();
 
         new NecklaceRunewords().registerAll();
-        new HelmetRunewords().registerAll();
-        new SwordRunewords().registerAll();
         new RingRuneWords().registerAll();
+
+        new SwordRunewords().registerAll();
         new StaffRuneWords().registerAll();
         new BowRuneWords().registerAll();
+
+        new HelmetRunewords().registerAll();
+
 
     }
 }

@@ -25,7 +25,7 @@ import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.GearStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import com.robertx22.age_of_exile.uncommon.interfaces.IAffectsStats;
+import com.robertx22.age_of_exile.uncommon.interfaces.IAffectsStatsInCalc;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.Cached;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.stat_calculation.CommonStatUtils;
@@ -225,14 +225,12 @@ public class Unit {
 
             List<StatContext> statContexts = new ArrayList<>();
 
-            statContexts.addAll(CommonStatUtils.addPotionStats(entity));
             statContexts.addAll(CommonStatUtils.addExactCustomStats(entity));
+            statContexts.add(data.getStatusEffectsData().getStats(entity));
+            statContexts.addAll(addGearStats(gears));
 
             if (entity instanceof Player) {
-
                 statContexts.addAll(Load.playerRPGData((Player) entity).getSkillGemInventory().getAuraStats(entity));
-
-
                 Load.playerRPGData((Player) entity).statPoints.addStats(this);
 
                 statContexts.addAll(PlayerStatUtils.AddPlayerBaseStats(entity));
@@ -246,7 +244,6 @@ public class Unit {
                         }
                     }
                 }
-
             } else {
                 statContexts.addAll(MobStatUtils.getMobBaseStats(data, entity));
                 statContexts.addAll(MobStatUtils.getAffixStats(entity));
@@ -256,65 +253,50 @@ public class Unit {
                 statContexts.addAll(MobStatUtils.getMobConfigStats(entity, data));
             }
 
-            statContexts.add(data.getStatusEffectsData()
-                    .getStats(entity));
-
-            statContexts.addAll(addGearStats(gears, entity, data));
 
             HashMap<StatContext.StatCtxType, List<StatContext>> map = new HashMap<>();
             for (StatContext.StatCtxType type : StatContext.StatCtxType.values()) {
                 map.put(type, new ArrayList<>());
             }
+            // create map
             statContexts.forEach(x -> {
                 map.get(x.type).add(x);
             });
-
+            // apply ctx modifier stats
             map.forEach((key, value) -> value
                     .forEach(v -> {
                         v.stats.forEach(s -> {
                             if (s.getStat().statContextModifier != null) {
-                                map.get(s.getStat().statContextModifier.getCtxTypeNeeded())
-                                        .forEach(c -> s.getStat().statContextModifier.modify(s, c));
+                                map.get(s.getStat().statContextModifier.getCtxTypeNeeded()).forEach(c -> s.getStat().statContextModifier.modify(s, c));
                             }
                         });
                     }));
 
-            statContexts.forEach(x -> x.stats.forEach(s -> s.applyStats(this)));
+            //apply all ctx stats to in-calc
+            statContexts.forEach(x -> x.stats.forEach(s -> s.applyToStatInCalc(this)));
 
             addVanillaHpToStats(entity, data);
 
-            new HashMap<>(getStats().statsInCalc).entrySet()
-                    .forEach(x -> {
-                        InCalcStatData statdata = x.getValue();
-                        Stat stat = x.getValue()
-                                .GetStat();
-                        if (stat instanceof IAffectsStats) {
-                            IAffectsStats add = (IAffectsStats) stat;
-                            add.affectStats(data, statdata);
-                        }
-                    });
+            // apply stats that add to others
+            getStats().modifyInCalc(calcStat -> {
+                if (calcStat.GetStat() instanceof IAffectsStatsInCalc aff) {
+                    aff.affectStats(data, calcStat);
+                }
+            });
+            // todo these should probably be after stats are out of calculation..? or they should be another phase
+            // apply transfer stats
+            getStats().modifyInCalc(calcStat -> {
+                if (calcStat.GetStat() instanceof ITransferToOtherStats transfer) {
+                    transfer.transferStats(data, calcStat);
+                }
+            });
 
-            new HashMap<>(getStats().statsInCalc).entrySet()
-                    .forEach(x -> {
-                        InCalcStatData statdata = x.getValue();
-                        Stat stat = x.getValue()
-                                .GetStat();
-                        if (stat instanceof ITransferToOtherStats) {
-                            ITransferToOtherStats add = (ITransferToOtherStats) stat;
-                            add.transferStats(data, statdata);
-                        }
-                    });
-
-            new HashMap<>(getStats().statsInCalc).entrySet()
-                    .forEach(x -> {
-                        InCalcStatData statdata = x.getValue();
-                        Stat stat = x.getValue()
-                                .GetStat();
-                        if (stat instanceof ICoreStat) {
-                            ICoreStat add = (ICoreStat) stat;
-                            add.addToOtherStats(data, statdata);
-                        }
-                    });
+            // apply core stats
+            getStats().modifyInCalc(calcStat -> {
+                if (calcStat.GetStat() instanceof ICoreStat core) {
+                    core.addToOtherStats(data, calcStat);
+                }
+            });
 
             stats.calculate();
 
@@ -381,7 +363,7 @@ public class Unit {
         }
     }
 
-    private List<StatContext> addGearStats(List<GearData> gears, LivingEntity entity, EntityData data) {
+    private List<StatContext> addGearStats(List<GearData> gears) {
 
         List<StatContext> ctxs = new ArrayList<>();
 

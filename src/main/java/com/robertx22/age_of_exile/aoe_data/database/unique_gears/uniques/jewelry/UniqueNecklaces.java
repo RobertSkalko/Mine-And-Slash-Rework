@@ -1,9 +1,12 @@
 package com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.jewelry;
 
+import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearTypes;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuilder;
 import com.robertx22.age_of_exile.database.data.StatMod;
+import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
+import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDuration;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttributes;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
@@ -55,6 +58,15 @@ public class UniqueNecklaces implements ExileRegistryInit {
                         new StatMod(10, 20, ManaRegen.getInstance(), ModType.PERCENT),
                         new StatMod(-5, -15, new ElementalResist(Elements.Cold), ModType.FLAT),
                         new StatMod(-5, -15, new ElementalResist(Elements.Fire), ModType.FLAT)
+                ))
+                .build();
+
+        UniqueGearBuilder.of("futility_of_suffering", "Futility of Suffering", BaseGearTypes.NECKLACE)
+                .stats(Arrays.asList(
+                        new StatMod(50, 100, new AilmentChance(Ailments.POISON), ModType.FLAT),
+                        new StatMod(50, 50, new AilmentDuration(Ailments.POISON), ModType.FLAT),
+                        new StatMod(-100, -100, ManaRegen.getInstance(), ModType.MORE),
+                        new StatMod(-100, -100, EnergyRegen.getInstance(), ModType.MORE)
                 ))
                 .build();
 

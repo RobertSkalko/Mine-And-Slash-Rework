@@ -1,4 +1,4 @@
-package com.robertx22.age_of_exile.aoe_data.database.unique_gears.runewords;
+package com.robertx22.age_of_exile.aoe_data.database.unique_gears.runewords.jewelry;
 
 import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearTypes;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
@@ -19,6 +19,7 @@ public class RingRuneWords implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
+       
         UniqueGearBuilder.of(
                         "air_disaster",
                         "Aria of Disaster",

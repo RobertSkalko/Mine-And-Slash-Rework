@@ -112,7 +112,7 @@ public class ExactStatData implements ISerializable<ExactStatData>, ITooltipList
 
         percentIncrease = 0;
     }
-    
+
 
     public float getFirstValue() {
         return v1;
@@ -127,7 +127,7 @@ public class ExactStatData implements ISerializable<ExactStatData>, ITooltipList
                 .get(stat);
     }
 
-    public void applyStats(Unit unit) {
+    public void applyToStatInCalc(Unit unit) {
         unit.getStats().getStatInCalculation(stat).add(this);
     }
 

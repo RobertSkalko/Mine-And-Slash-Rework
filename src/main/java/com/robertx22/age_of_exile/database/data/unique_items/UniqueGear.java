@@ -26,7 +26,7 @@ public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, 
     public int weight = 1000;
     public String guid;
     public String uniqueRarity = IRarity.UNIQUE_ID;
-    public boolean replaces_name = false;
+    public boolean replaces_name = true;
 
     public String base_gear = "";
 

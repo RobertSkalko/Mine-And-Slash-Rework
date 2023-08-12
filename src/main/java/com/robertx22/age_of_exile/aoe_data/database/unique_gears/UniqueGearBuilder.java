@@ -36,6 +36,7 @@ public class UniqueGearBuilder {
         return this;
     }
 
+    // delete this not needed
     public UniqueGearBuilder setReplacesName() {
         this.uniq.replaces_name = true;
         return this;

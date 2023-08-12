@@ -1,4 +1,4 @@
-package com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.armors;
+package com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.armor;
 
 import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearTypes;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
@@ -16,10 +16,7 @@ public class HelmetUniques implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        UniqueGearBuilder.of(
-                        "mana_dominion",
-                        "Dominion of Mana",
-                        BaseGearTypes.CLOTH_HELMET)
+        UniqueGearBuilder.of("mana_dominion", "Dominion of Mana", BaseGearTypes.CLOTH_HELMET)
                 .setReplacesName()
                 .stats(Arrays.asList(
                         new StatMod(25, 50, Mana.getInstance(), ModType.PERCENT),

@@ -6,10 +6,10 @@ import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.base.BaseDatapackStat;
 import com.robertx22.age_of_exile.database.data.stats.name_regex.StatNameRegex;
 import com.robertx22.age_of_exile.saveclasses.unit.InCalcStatData;
-import com.robertx22.age_of_exile.uncommon.interfaces.IAffectsStats;
+import com.robertx22.age_of_exile.uncommon.interfaces.IAffectsStatsInCalc;
 import net.minecraft.ChatFormatting;
 
-public class MoreXPerYOf extends BaseDatapackStat implements IAffectsStats {
+public class MoreXPerYOf extends BaseDatapackStat implements IAffectsStatsInCalc {
 
     public static String SER_ID = "more_x_per_y";
 

@@ -34,7 +34,7 @@ public class BossSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.groundEdgeParticles(ParticleTypes.WITCH, 500D, 6D, 1D))
                 .onCast(PartBuilder.groundEdgeParticles(ParticleTypes.EXPLOSION, 100D, 6D, 1D))
 
-                .onCast(PartBuilder.damageInAoe(SpellCalcs.BOSS_MINION_EXPLOSION, Elements.Elemental, 10D))
+                .onCast(PartBuilder.damageInAoe(SpellCalcs.BOSS_MINION_EXPLOSION, Elements.Cold, 10D))
                 .build();
 
         SpellBuilder.of(CLOSE_NOVA, PlayStyle.STR, SpellConfiguration.Builder.instant(0, 0), "Close Nova",
@@ -55,7 +55,7 @@ public class BossSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.nova(ParticleTypes.SMOKE, 200D, 1D, 0.05D))
                 .onCast(PartBuilder.groundEdgeParticles(ParticleTypes.EXPLOSION, 1D, 0D, 0.2D))
 
-                .onCast(PartBuilder.damageInAoe(SpellCalcs.BOSS_CLOSE_NOVA, Elements.Elemental, 3D))
+                .onCast(PartBuilder.damageInAoe(SpellCalcs.BOSS_CLOSE_NOVA, Elements.Fire, 3D))
                 .build();
 
     }

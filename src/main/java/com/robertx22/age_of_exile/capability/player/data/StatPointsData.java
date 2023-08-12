@@ -27,7 +27,7 @@ public class StatPointsData {
                     float val = x.getValue();
                     ExactStatData stat = ExactStatData.levelScaled(val, ExileDB.Stats()
                             .get(x.getKey()), ModType.FLAT, 1);
-                    stat.applyStats(unit);
+                    stat.applyToStatInCalc(unit);
                 });
 
     }
