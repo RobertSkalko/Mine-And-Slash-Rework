@@ -26,6 +26,10 @@ public class OnItemInteract {
             ItemStack stack = x.getCarriedItem();
             Player player = x.getPlayer();
 
+            if (player.level().isClientSide) {
+                return;
+            }
+
 
             boolean success = false;
 

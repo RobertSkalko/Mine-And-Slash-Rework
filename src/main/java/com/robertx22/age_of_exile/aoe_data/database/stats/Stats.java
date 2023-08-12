@@ -189,7 +189,23 @@ public class Stats implements ExileRegistryInit {
                 x.max = 10;
             }).
             build();
-
+    public static DataPackStatAccessor<SummonType> MAX_TOTAL_SUMMONS = DatapackStatBuilder
+            .<SummonType>of(x -> "max_total_summons", x -> Elements.All)
+            .addAllOfType(SummonType.values())
+            .worksWithEvent(SpellStatsCalculationEvent.ID)
+            .setPriority(0)
+            .setSide(EffectSides.Source)
+            .addEffect(StatEffects.ADD_TOTAL_SUMMONS)
+            .setLocName(x -> "Maximum Total Summons")
+            .setLocDesc(x -> "This is your cap for all types of summons, if your total is say 5, you can have say 2 zombies and 3 skeleton pets.")
+            .modifyAfterDone(x ->
+            {
+                x.is_perc = false;
+                x.base = 0;
+                x.min = -100;
+                x.max = 10;
+            }).
+            build();
 
     public static DataPackStatAccessor<PlayStyle> STYLE_DAMAGE = DatapackStatBuilder
             .<PlayStyle>of(x -> x.id + "_dmg", x -> Elements.Physical)

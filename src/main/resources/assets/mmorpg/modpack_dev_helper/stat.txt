@@ -53,6 +53,7 @@ lightning_mana_leech
 health_on_attack_hit
 song_eff_duration
 phys_to_water
+max_total_summons
 golem_cdr
 dmg_when_target_near_full_hp
 inc_effect_of_immobilizing_buff_on_you

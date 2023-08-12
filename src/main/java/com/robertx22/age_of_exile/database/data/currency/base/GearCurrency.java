@@ -23,15 +23,14 @@ public abstract class GearCurrency extends Currency {
     @Override
     public ItemStack internalModifyMethod(LocReqContext ctx, ItemStack stack, ItemStack currency) {
         GearItemData data = StackSaving.GEARS.loadFrom(stack);
-        GearOutcome outcome = getOutcome(data.getPotential());
-        data.setPotential(data.getPotential() - getPotentialLoss());
+        GearOutcome outcome = getOutcome(data.getPotential().multi);
+        data.setPotential(data.getPotentialNumber() - getPotentialLoss());
         return outcome.modify(ctx, data, stack);
     }
 
 
-    private GearOutcome getOutcome(int potential) {
+    private GearOutcome getOutcome(float multi) {
 
-        float multi = potential / 100F;
         List<Weighted<GearOutcome>> list = new ArrayList<>();
 
         for (GearOutcome o : getOutcomes()) {

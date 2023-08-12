@@ -100,8 +100,9 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     public MinMax skill_gem_percents = new MinMax(0, 0);
 
 
-    public int potential = 100;
+    public Potential pot = new Potential(100, 1);
 
+    
     public int min_affixes = 0;
 
     public int max_sockets = 3;
@@ -120,6 +121,16 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     transient ResourceLocation glintFull;
     transient ResourceLocation glintTexBorder;
 
+
+    public static class Potential {
+        public int total;
+        public float multi;
+
+        public Potential(int total, float multi) {
+            this.total = total;
+            this.multi = multi;
+        }
+    }
 
     public ResourceLocation getGlintTextureFull() {
 

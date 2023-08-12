@@ -28,6 +28,7 @@ add_perc_of_health_to_num
 give_negative/4_to_target
 restore_health_per_stat_data
 increase_seconds_num
+add_total_summons
 reflect_perc_dmg
 increase_area_num
 set_data_num_accuracy

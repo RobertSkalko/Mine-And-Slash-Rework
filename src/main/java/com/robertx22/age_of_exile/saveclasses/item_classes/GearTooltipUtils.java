@@ -130,8 +130,7 @@ public class GearTooltipUtils {
 
         tip.add(TooltipUtils.gearRarity(gear.getRarity()));
 
-
-        tip.add(ExileText.ofText("Potential: " + gear.getPotential() + "%").format(gear.getPotentialColor()).get());
+        tip.add(ExileText.ofText("Potential: " + (int) (gear.getPotential().multi * 100F) + "%").format(gear.getPotentialColor()).get());
 
         tip.add(Component.literal(""));
 

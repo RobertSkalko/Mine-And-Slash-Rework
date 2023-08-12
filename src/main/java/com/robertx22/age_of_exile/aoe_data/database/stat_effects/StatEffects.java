@@ -78,6 +78,7 @@ public class StatEffects implements ExileRegistryInit {
     public static StatEffect SET_ACCURACY = new SetDataNumberAction(EventData.ACCURACY);
     public static StatEffect ADD_STAT_DATA_TO_NUMBER = new AddToNumberEffect("add_stat_data_to_num", EventData.NUMBER, NumberProvider.ofStatData());
     public static StatEffect ADD_TO_MAX_SUMMONS = new AddToNumberEffect("add_max_summons", EventData.BONUS_MAX_SUMMONS, NumberProvider.ofStatData());
+    public static StatEffect ADD_TOTAL_SUMMONS = new AddToNumberEffect("add_total_summons", EventData.BONUS_TOTAL_SUMMONS, NumberProvider.ofStatData());
 
     public static StatEffect DECREASE_COOLDOWN = new DecreaseNumberByPercentEffect(EventData.COOLDOWN_TICKS);
     public static StatEffect DECREASE_COOLDOWN_BY_X_TICKS = new AddToNumberEffect("reduce_cd_by_ticks", EventData.COOLDOWN_TICKS, NumberProvider.ofStatData());
@@ -105,6 +106,7 @@ public class StatEffects implements ExileRegistryInit {
     public void registerAll() {
 
         ADD_TO_MAX_SUMMONS.addToSerializables();
+        ADD_TOTAL_SUMMONS.addToSerializables();
         GIVE_SELF_EFFECT.addToSerializables();
         APPLY_CAST_SPEED_TO_CD.addToSerializables();
         DOUBLE_DAMAGE.addToSerializables();

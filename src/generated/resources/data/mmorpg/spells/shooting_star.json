@@ -8,8 +8,31 @@
               "type": "particles_in_radius",
               "map": {
                 "motion": "None",
-                "particle_count": 1.0,
+                "particle_count": 3.0,
                 "particle_type": "minecraft:crit",
+                "radius": 0.5
+              }
+            }
+          ],
+          "en_preds": [],
+          "ifs": [
+            {
+              "type": "x_ticks_condition",
+              "map": {
+                "tick_rate": 1.0
+              }
+            }
+          ],
+          "targets": []
+        },
+        {
+          "acts": [
+            {
+              "type": "particles_in_radius",
+              "map": {
+                "motion": "None",
+                "particle_count": 5.0,
+                "particle_type": "minecraft:soul_fire_flame",
                 "radius": 0.5
               }
             }

@@ -67,6 +67,7 @@ is_ranged_weapon
 effect_has_tag_immobilizing
 restore_type_is_food
 is_staff_wep_type
+summon_type_is_total
 effect_has_tag_food
 summon_type_is_spirit_wolf
 resource_type_is_magic_shield

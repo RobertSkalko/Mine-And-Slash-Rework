@@ -71,10 +71,15 @@ public class SummonPetAction extends SpellAction {
 
 
             ctx.world.addFreshEntity(en);
-
+            
             SummonType summonType = en.summonType();
             int maxSummons = (int) (summonType.maxSummons + ctx.calculatedSpellData.data.getNumber(EventData.BONUS_MAX_SUMMONS, 0).number);
 
+            int maxTotal = (int) (SummonType.TOTAL.maxSummons + ctx.calculatedSpellData.data.getNumber(EventData.BONUS_TOTAL_SUMMONS, 0).number);
+
+            if (maxSummons > maxTotal) {
+                maxSummons = maxTotal;
+            }
 
             despawnIfExceededMaximumSummons(ctx.caster, maxSummons, summonType);
 

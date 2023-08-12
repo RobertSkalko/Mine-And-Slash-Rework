@@ -8,16 +8,15 @@ import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.LootType;
 import net.minecraft.world.item.ItemStack;
 
-public class GearSoulLootGen extends BaseLootGen<GearBlueprint> {
+public class SoulLootGen extends BaseLootGen<GearBlueprint> {
 
-    public GearSoulLootGen(LootInfo info) {
+    public SoulLootGen(LootInfo info) {
         super(info);
     }
 
     @Override
     public float baseDropChance() {
-        float chance = (float) ServerContainer.get().GEAR_DROPRATE.get()
-                .floatValue();
+        float chance = (float) ServerContainer.get().SOUl_DROPRATE.get().floatValue();
         return chance;
     }
 
@@ -46,7 +45,7 @@ public class GearSoulLootGen extends BaseLootGen<GearBlueprint> {
     @Override
     public ItemStack generateOne() {
         GearBlueprint blueprint = new GearBlueprint(info);
-        return blueprint.createStack();
+        return createSoulBasedOnGear(blueprint);
     }
 
 }

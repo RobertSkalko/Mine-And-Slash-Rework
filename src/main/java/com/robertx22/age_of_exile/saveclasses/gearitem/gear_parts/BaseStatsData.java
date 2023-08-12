@@ -17,12 +17,12 @@ import java.util.stream.Collectors;
 public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartTooltip {
 
 
-    public Integer perc = 0;
+    public Integer p = 0;
 
     @Override
     public void RerollFully(GearItemData gear) {
 
-        perc = getMinMax(gear).random();
+        p = getMinMax(gear).random();
 
         gear.rp = RandomUtils.randomFromList(new ArrayList<>(RareItemAffixNames.prefixAny
                 .keySet()));
@@ -109,7 +109,7 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
 
             for (StatMod mod : gear.GetBaseGearType()
                     .baseStats()) {
-                local.add(mod.ToExactStat(perc, gear.getLevel()));
+                local.add(mod.ToExactStat(p, gear.getLevel()));
 
             }
 

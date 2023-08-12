@@ -19,6 +19,7 @@ public class EventData {
     public static String ITEM_ID = "item_id";
     public static String IS_SUMMON_ATTACK = "is_summon_attack";
     public static String BONUS_MAX_SUMMONS = "bonus_max_summons";
+    public static String BONUS_TOTAL_SUMMONS = "bonus_total_summons";
     public static String SUMMON_TYPE = "summon_type";
     public static String CANCELED = "canceled";
     public static String CRIT = "crit";

@@ -1,0 +1,6 @@
+{
+  "id": "summon_type_is_total",
+  "ser": "string_matches",
+  "string_id": "total",
+  "string_key": "summon_type"
+}

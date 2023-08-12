@@ -10,7 +10,10 @@
   "lootable_gear_tier": "LOW",
   "max_sockets": 0,
   "min_affixes": 0,
-  "potential": 100,
+  "pot": {
+    "multi": 1.0,
+    "total": 100
+  },
   "rarity_type": "GEAR",
   "skill_gem_percents": {
     "max": 10,

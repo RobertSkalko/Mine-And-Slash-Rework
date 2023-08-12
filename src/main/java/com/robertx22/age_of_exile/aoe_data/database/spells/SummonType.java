@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.aoe_data.database.spells;
 
 public enum SummonType {
+    TOTAL("total", "Total", 5),
     GOLEM("golem", "Golem", 3),
     ZOMBIE("zombie", "Zombie", 3),
     SKELETON("skeleton", "Skeleton", 3),

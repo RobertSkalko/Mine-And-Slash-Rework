@@ -35,8 +35,6 @@ import java.util.stream.Collectors;
 
 public class GearItemData implements ICommonDataItem<GearRarity> {
 
-    //public static NbtKey.Stringkey RARITY = new NbtKey.Stringkey(IRarity.COMMON_ID, "rar");
-
 
     // Stats
     public BaseStatsData baseStats = new BaseStatsData();
@@ -59,7 +57,8 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     public int lvl = 1; // lvl
     public String gtype = "";
     // potential
-    private int pot = 0;
+    private String pot = IRarity.COMMON_ID;
+    private int pn = 0;
     // salvagable
     public boolean sal = true;
     public boolean c = false; // corrupted
@@ -124,35 +123,33 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
     }
 
+    public int getPotentialNumber() {
+        return pn;
+    }
 
-    public int getPotential() {
-        return pot;
+    public GearRarity.Potential getPotential() {
+        return ExileDB.GearRarities().get(pot).pot;
     }
 
     public ChatFormatting getPotentialColor() {
-        if (pot > 800) {
-            return ChatFormatting.LIGHT_PURPLE;
-        }
-        if (pot > 600) {
-            return ChatFormatting.GOLD;
-        }
-        if (pot > 400) {
-            return ChatFormatting.AQUA;
-        }
-        if (pot > 150) {
-            return ChatFormatting.GREEN;
-        }
-        if (pot > 100) {
-            return ChatFormatting.YELLOW;
-        } else {
-            return ChatFormatting.RED;
-        }
+        return ExileDB.GearRarities().get(pot).textFormatting();
+    }
+
+    public void setPotentialRarity(GearRarity rar) {
+        this.pot = rar.GUID();
     }
 
     public void setPotential(int potential) {
-        this.pot = potential;
-        if (pot < 0) {
-            pot = 0;
+        this.pn = potential;
+        if (pn < 0) {
+            var lower = ExileDB.GearRarities().getFilterWrapped(x -> x.getHigherRarity() == ExileDB.GearRarities().get(pot)).list;
+            if (!lower.isEmpty()) {
+                GearRarity newrar = lower.get(0);
+                this.pn = newrar.pot.total;
+                this.pot = newrar.GUID();
+            } else {
+                pn = 0;
+            }
         }
     }
 

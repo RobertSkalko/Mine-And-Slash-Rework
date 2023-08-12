@@ -19,12 +19,12 @@ import java.util.stream.Collectors;
 public class ImplicitStatsData implements IGearPartTooltip, IRerollable, IStatsContainer {
 
 
-    public Integer perc = 0;
+    public Integer p = 0;
 
     @Override
     public void RerollFully(GearItemData gear) {
 
-        perc = getMinMax(gear).random();
+        p = getMinMax(gear).random();
 
     }
 
@@ -60,8 +60,8 @@ public class ImplicitStatsData implements IGearPartTooltip, IRerollable, IStatsC
         gear.GetBaseGearType()
                 .implicitStats()
                 .forEach(x -> {
-                    ExactStatData exact = x.ToExactStat(perc, gear.getLevel());
-                    list.add(new TooltipStatWithContext(new TooltipStatInfo(exact, perc, info), x, (int) gear.getLevel()));
+                    ExactStatData exact = x.ToExactStat(p, gear.getLevel());
+                    list.add(new TooltipStatWithContext(new TooltipStatInfo(exact, p, info), x, (int) gear.getLevel()));
                 });
         return list;
     }
@@ -71,7 +71,7 @@ public class ImplicitStatsData implements IGearPartTooltip, IRerollable, IStatsC
         return gear.GetBaseGearType()
                 .implicitStats()
                 .stream()
-                .map(x -> x.ToExactStat(perc, gear.lvl))
+                .map(x -> x.ToExactStat(p, gear.lvl))
                 .collect(Collectors.toList());
     }
 }

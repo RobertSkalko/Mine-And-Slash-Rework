@@ -54,6 +54,7 @@ public class ServerContainer {
         MAX_TEAM_DISTANCE = b.defineInRange("max_team_distance", 150D, 0, 100000);
 
         GEAR_DROPRATE = b.defineInRange("gear_drop_rate", 7D, 0, 1000);
+        SOUl_DROPRATE = b.defineInRange("soul_drop_rate", 1D, 0, 1000);
         MAP_DROPRATE = b.defineInRange("map_drop_rate", 1D, 0, 1000);
         GEM_DROPRATE = b.defineInRange("gem_drop_rate", 1D, 0, 1000);
         SKILL_GEM_DROPRATE = b.defineInRange("skill_gem_drop_rate", 6D, 0, 1000);
@@ -132,7 +133,7 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue MAX_TEAM_DISTANCE;
 
     public ForgeConfigSpec.DoubleValue GEAR_DROPRATE;
-    public ForgeConfigSpec.DoubleValue UNIQUE_GEAR_DROPRATE;
+    public ForgeConfigSpec.DoubleValue SOUl_DROPRATE;
     public ForgeConfigSpec.DoubleValue MAP_DROPRATE;
     public ForgeConfigSpec.DoubleValue GEM_DROPRATE;
     public ForgeConfigSpec.DoubleValue SKILL_GEM_DROPRATE;
