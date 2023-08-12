@@ -7,8 +7,6 @@ import java.util.Locale;
 public enum ModType {
 
     FLAT(false, "flat", AttributeModifier.Operation.ADDITION),
-    ITEM_FLAT(false, "item", AttributeModifier.Operation.ADDITION),
-    ITEM_PERCENT(true, "item_percent", AttributeModifier.Operation.MULTIPLY_TOTAL),
     PERCENT(true, "percent", AttributeModifier.Operation.MULTIPLY_BASE),
     MORE(true, "more", AttributeModifier.Operation.MULTIPLY_TOTAL);
 
@@ -31,21 +29,7 @@ public enum ModType {
         return isPercent;
     }
 
-    public boolean isItemLocal() {
-        return this == ITEM_FLAT || this == ITEM_PERCENT;
-    }
-
-    public ModType toNonItemType() {
-        if (this == ModType.ITEM_FLAT) {
-            return ModType.FLAT;
-        }
-        if (this == ModType.ITEM_PERCENT) {
-            return ModType.PERCENT;
-        }
-        return this;
-    }
-
-
+  
     public static ModType fromString(String str) {
 
         for (ModType type : ModType.values()) {

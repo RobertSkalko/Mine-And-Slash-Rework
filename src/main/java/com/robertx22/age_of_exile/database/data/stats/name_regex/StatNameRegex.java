@@ -58,9 +58,7 @@ public abstract class StatNameRegex {
         }
         String add = "";
 
-        if (type.isItemLocal()) {
-            add += "Gear ";
-        }
+      
         if (type == ModType.MORE) {
             if (v1 > 0) {
                 add += stat.getMultiUseType().tooltipPrefix + " ";

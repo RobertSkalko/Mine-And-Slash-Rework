@@ -45,7 +45,10 @@ import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -232,8 +235,8 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         int xp = guiLeft + 30;
         int yp = guiTop + 120;
 
-        for (Map.Entry<StatType, List<List<Stat>>> en : STAT_MAP.entrySet()) {
-            publicAddButton(new CharacterStatsButtons(en.getKey(), xp, yp));
+        for (StatType type : StatType.values()) {
+            publicAddButton(new CharacterStatsButtons(type, xp, yp));
             xp += 30;
         }
 

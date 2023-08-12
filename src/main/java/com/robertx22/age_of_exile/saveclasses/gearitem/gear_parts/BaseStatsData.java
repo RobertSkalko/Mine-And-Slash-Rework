@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts;
 
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.tooltips.StatTooltipType;
+import com.robertx22.age_of_exile.database.data.stats.types.gear_base.IBaseStatModifier;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.*;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
@@ -101,26 +102,25 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
         return true;
     }
 
-    public List<ExactStatData> getBaseItemStats(GearItemData gear) {
+    public List<ExactStatData> getBaseItemStats(GearItemData affixStats) {
 
-        List<ExactStatData> local = new ArrayList<>();
+        List<ExactStatData> baseStats = new ArrayList<>();
 
         try {
 
-            for (StatMod mod : gear.GetBaseGearType()
+            for (StatMod mod : affixStats.GetBaseGearType()
                     .baseStats()) {
-                local.add(mod.ToExactStat(p, gear.getLevel()));
+                baseStats.add(mod.ToExactStat(p, affixStats.getLevel()));
 
             }
 
-            for (IStatsContainer co : gear.GetAllStatContainersExceptBase()) {
-                for (ExactStatData stat : co.GetAllStats(gear)) {
-                    if (stat.getType().isItemLocal()) {
-
-                        for (ExactStatData l : local) {
-                            if (l.getStat().GUID().equals(stat.getStatId())) {
-                                if (l.getType().isFlat() && l.getType() == stat.getType()) {
-                                    l.add(stat);
+            for (IStatsContainer affixStat : affixStats.GetAllStatContainersExceptBase()) {
+                for (ExactStatData affixStatData : affixStat.GetAllStats(affixStats)) {
+                    if (affixStatData.getStat() instanceof IBaseStatModifier mod) {
+                        for (ExactStatData baseStat : baseStats) {
+                            if (mod.canModifyBaseStat(baseStat.getStat())) {
+                                if (baseStat.getType() == ModType.FLAT) {
+                                    baseStat.add(ExactStatData.noScaling(affixStatData.getAverageValue(), ModType.FLAT, baseStat.getStatId()));
                                 }
                             }
                         }
@@ -129,16 +129,15 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
                 }
             }
 
-
-            for (IStatsContainer co : gear.GetAllStatContainersExceptBase()) {
-                for (ExactStatData stat : co.GetAllStats(gear)) {
-                    if (stat.getType().isItemLocal()) {
-
-                        for (ExactStatData l : local) {
-                            if (l.getStat().GUID().equals(stat.getStatId())) {
-                                if (stat.getType() == ModType.ITEM_PERCENT) {
-                                    l.percentIncrease = stat.getAverageValue();
-                                    l.increaseByAddedPercent();
+            for (IStatsContainer affixStat : affixStats.GetAllStatContainersExceptBase()) {
+                for (ExactStatData affixStatData : affixStat.GetAllStats(affixStats)) {
+                    if (affixStatData.getStat() instanceof IBaseStatModifier mod) {
+                        for (ExactStatData baseStat : baseStats) {
+                            if (mod.canModifyBaseStat(baseStat.getStat())) {
+                                if (affixStatData.getType() == ModType.PERCENT) {
+                                    //baseStat.add(ExactStatData.noScaling(affixStatData.getAverageValue(), ModType.PERCENT, baseStat.getStatId()));
+                                    baseStat.percentIncrease = affixStatData.getAverageValue();
+                                    baseStat.increaseByAddedPercent();
                                 }
                             }
                         }
@@ -152,13 +151,12 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
         }
 
 
-        return local;
+        return baseStats;
     }
 
     @Override
     public List<ExactStatData> GetAllStats(GearItemData gear) {
-        return getBaseItemStats(gear).stream()
-                .map(x -> ExactStatData.noScaling(x.getFirstValue(), x.getType().toNonItemType(), x.getStatId())).collect(Collectors.toList());
+        return getBaseItemStats(gear).stream().map(x -> ExactStatData.noScaling(x.getFirstValue(), x.getType(), x.getStatId())).collect(Collectors.toList());
 
     }
 

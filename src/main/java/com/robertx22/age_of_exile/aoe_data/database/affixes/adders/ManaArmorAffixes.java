@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.aoe_data.database.affixes.adders;
 import com.robertx22.age_of_exile.aoe_data.database.affixes.AffixBuilder;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType.SlotTag;
-import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
@@ -16,8 +15,7 @@ public class ManaArmorAffixes implements ExileRegistryInit {
 
         AffixBuilder.Normal("glimmering")
                 .Named("Glimmering")
-                .stats(new StatMod(4, 15, Mana.getInstance(), ModType.PERCENT),
-                        new StatMod(4, 6, Armor.getInstance(), ModType.ITEM_FLAT))
+                .stats(new StatMod(4, 15, Mana.getInstance(), ModType.PERCENT))
                 .includesTags(SlotTag.armor_family)
                 .Prefix()
                 .Build();

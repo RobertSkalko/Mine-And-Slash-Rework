@@ -54,6 +54,10 @@ public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
             return;
         }
 
+        if (entity.isDeadOrDying()) {
+            return;
+        }
+
         EntityData data = Load.Unit(entity);
 
         EntityGears gears = data.getCurrentGears();

@@ -46,7 +46,7 @@ public interface GearDataHelper {
         float v1min = stat.min * slot.multi;
         float v1max = stat.max * slot.multi;
 
-        return new StatMod(v1min, v1max, stat.stat, ModType.ITEM_FLAT);
+        return new StatMod(v1min, v1max, stat.stat, ModType.FLAT);
     }
 
     public default StatMod getAttackDamageStat(WeaponTypes weapon) {
@@ -54,7 +54,7 @@ public interface GearDataHelper {
         float v1min = 2;
         float v1max = 6;
 
-        return new StatMod(v1min, v1max, WeaponDamage.getInstance(), ModType.ITEM_FLAT);
+        return new StatMod(v1min, v1max, WeaponDamage.getInstance(), ModType.FLAT);
     }
 
 }

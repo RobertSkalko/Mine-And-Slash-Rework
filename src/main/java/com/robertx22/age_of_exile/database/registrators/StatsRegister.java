@@ -6,6 +6,8 @@ import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.*;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttributes;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.*;
+import com.robertx22.age_of_exile.database.data.stats.types.gear_base.GearDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.gear_base.GearDefense;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.*;
 import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuality;
 import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuantity;
@@ -62,7 +64,9 @@ public class StatsRegister implements ExileRegistryInit {
                         add(new AilmentProcStat(ailment));
                     }
 
-                  
+                    add(GearDefense.getInstance());
+                    add(GearDamage.getInstance());
+
                     add(RegeneratePercentStat.HEALTH);
                     add(RegeneratePercentStat.MANA);
                     add(ArmorPenetration.getInstance());

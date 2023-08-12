@@ -14,16 +14,16 @@
   },
   "stats": [
     {
-      "type": "ITEM_FLAT",
+      "type": "FLAT",
       "max": 3.0,
       "min": 1.0,
-      "stat": "weapon_damage"
+      "stat": "gear_weapon_damage"
     },
     {
-      "type": "ITEM_PERCENT",
+      "type": "PERCENT",
       "max": 50.0,
       "min": 10.0,
-      "stat": "weapon_damage"
+      "stat": "gear_weapon_damage"
     }
   ],
   "tags": [],

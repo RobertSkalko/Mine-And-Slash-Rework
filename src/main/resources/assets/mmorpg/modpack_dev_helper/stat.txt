@@ -38,6 +38,7 @@ cast_speed
 inc_effect_of_defensive_buff_on_you
 mana_on_attack_hit
 electrify_strength
+gear_defense
 all_elemental_damage
 max_zombie_summons
 defensive_eff_dur_u_cast
@@ -234,6 +235,7 @@ dex_dmg_received
 mana_on_kill
 shout_spell_dmg
 song_cdr
+gear_weapon_damage
 damage_shield
 inc_effect_of_positive_buff_given
 physical_any_wep_damage

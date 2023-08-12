@@ -14,10 +14,10 @@
   },
   "stats": [
     {
-      "type": "ITEM_FLAT",
+      "type": "FLAT",
       "max": 8.0,
       "min": 3.0,
-      "stat": "dodge"
+      "stat": "gear_defense"
     }
   ],
   "tags": [],

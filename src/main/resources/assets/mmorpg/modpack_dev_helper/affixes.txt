@@ -24,8 +24,10 @@ of_energy
 item_both_armor
 azure
 of_fast_cast
+item_both_gear_defense
 chaos_ele_dmg_jewelry
 wep_item_flat
+item_both_ms
 armored_mobs
 physical_wep_dmg_dun
 wep_item_both
@@ -35,9 +37,11 @@ of_affluence
 chaos_wep_dmg_dun
 water_res
 chaos_wep_dmg
+item_flat_gear_defense
+item_flat_ms
 mana_thief
 of_the_titan
-item_both_magic_shield
+item_perc_ms
 glimmering
 fire_spell_ele_dmg
 chaos_ele_mobs
@@ -47,9 +51,9 @@ water_ele_mobs
 of_the_wind
 of_treasure
 life_on_hit_dun
+item_perc_gear_defense
 crit_prefix
 physical_wep_dmg
-item_flat_magic_shield
 of_the_troll
 scavanger
 of_the_sky
@@ -69,7 +73,6 @@ vampiric
 of_spirit_markings
 of_the_philosopher
 item_flat_dodge
-item_perc_magic_shield
 of_gluttony
 chaos_res
 fire_res

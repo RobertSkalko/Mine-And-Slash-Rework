@@ -14,10 +14,10 @@
   },
   "stats": [
     {
-      "type": "ITEM_PERCENT",
+      "type": "PERCENT",
       "max": 150.0,
       "min": 10.0,
-      "stat": "armor"
+      "stat": "gear_defense"
     }
   ],
   "tags": [],

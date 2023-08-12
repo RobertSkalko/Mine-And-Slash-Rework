@@ -5,7 +5,7 @@ import com.robertx22.age_of_exile.aoe_data.database.affixes.ElementalAffixBuilde
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType.SlotTag;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.gear_base.GearDamage;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -18,20 +18,20 @@ public class WeaponPrefixes implements ExileRegistryInit {
 
         AffixBuilder.Normal("wep_item_flat")
                 .Named("Deadly")
-                .stats(new StatMod(1, 6, WeaponDamage.getInstance(), ModType.ITEM_FLAT))
+                .stats(new StatMod(1, 6, GearDamage.getInstance(), ModType.FLAT))
                 .includesTags(SlotTag.weapon_family)
                 .Prefix()
                 .Build();
         AffixBuilder.Normal("wep_item_perc")
                 .Named("Cruel")
-                .stats(new StatMod(10, 150, WeaponDamage.getInstance(), ModType.ITEM_PERCENT))
+                .stats(new StatMod(10, 150, GearDamage.getInstance(), ModType.PERCENT))
                 .includesTags(SlotTag.weapon_family)
                 .Prefix()
                 .Build();
         AffixBuilder.Normal("wep_item_both")
                 .Named("Miserable")
-                .stats(new StatMod(1, 3, WeaponDamage.getInstance(), ModType.ITEM_FLAT),
-                        new StatMod(10, 50, WeaponDamage.getInstance(), ModType.ITEM_PERCENT))
+                .stats(new StatMod(1, 3, GearDamage.getInstance(), ModType.FLAT),
+                        new StatMod(10, 50, GearDamage.getInstance(), ModType.PERCENT))
                 .includesTags(SlotTag.weapon_family)
                 .Prefix()
                 .Build();

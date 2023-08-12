@@ -1,22 +1,22 @@
 {
   "type": "prefix",
-  "guid": "item_flat_armor",
+  "guid": "item_perc_ms",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [
       {
         "excluded": [],
         "included": [
-          "armor_stat"
+          "magic_shield_stat"
         ]
       }
     ]
   },
   "stats": [
     {
-      "type": "FLAT",
-      "max": 8.0,
-      "min": 3.0,
+      "type": "PERCENT",
+      "max": 150.0,
+      "min": 10.0,
       "stat": "gear_defense"
     }
   ],

@@ -1,6 +1,6 @@
 {
   "type": "prefix",
-  "guid": "item_both_magic_shield",
+  "guid": "item_both_ms",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [
@@ -14,16 +14,16 @@
   },
   "stats": [
     {
-      "type": "ITEM_FLAT",
+      "type": "FLAT",
       "max": 1.0,
       "min": 0.5,
-      "stat": "magic_shield"
+      "stat": "gear_defense"
     },
     {
-      "type": "ITEM_PERCENT",
+      "type": "PERCENT",
       "max": 30.0,
       "min": 5.0,
-      "stat": "magic_shield"
+      "stat": "gear_defense"
     }
   ],
   "tags": [],

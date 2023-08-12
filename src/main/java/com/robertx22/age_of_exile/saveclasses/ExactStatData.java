@@ -112,6 +112,7 @@ public class ExactStatData implements ISerializable<ExactStatData>, ITooltipList
 
         percentIncrease = 0;
     }
+    
 
     public float getFirstValue() {
         return v1;

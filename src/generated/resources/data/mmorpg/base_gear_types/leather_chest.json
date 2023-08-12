@@ -1,7 +1,7 @@
 {
   "base_stats": [
     {
-      "type": "ITEM_FLAT",
+      "type": "FLAT",
       "max": 15.0,
       "min": 6.0,
       "stat": "dodge"

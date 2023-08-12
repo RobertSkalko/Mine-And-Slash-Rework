@@ -1,13 +1,13 @@
 {
   "type": "prefix",
-  "guid": "item_flat_armor",
+  "guid": "item_both_gear_defense",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [
       {
         "excluded": [],
         "included": [
-          "armor_stat"
+          "dodge_stat"
         ]
       }
     ]
@@ -15,8 +15,14 @@
   "stats": [
     {
       "type": "FLAT",
-      "max": 8.0,
-      "min": 3.0,
+      "max": 4.0,
+      "min": 2.0,
+      "stat": "gear_defense"
+    },
+    {
+      "type": "PERCENT",
+      "max": 30.0,
+      "min": 5.0,
       "stat": "gear_defense"
     }
   ],

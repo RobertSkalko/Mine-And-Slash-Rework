@@ -34,10 +34,7 @@ public class BasicStatRegex extends StatNameRegex {
 
             }
         }
-        if (type.isItemLocal()) {
-            return VALUE + " Gear " + NAME;
-        }
-
+     
 
         return null;
 
