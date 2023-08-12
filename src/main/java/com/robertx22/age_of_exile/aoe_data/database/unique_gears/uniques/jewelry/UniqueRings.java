@@ -17,6 +17,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Hea
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.special.SpecialStats;
+import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
@@ -107,11 +108,10 @@ public class UniqueRings implements ExileRegistryInit {
                         BaseGearTypes.RING)
 
                 .stats(Arrays.asList(
-                        new StatMod(15, 25, new ElementalResist(Elements.Chaos), ModType.PERCENT),
-                        new StatMod(25, 50, SpecialStats.BETTER_FOOD_BUFFS, ModType.FLAT),
+                        new StatMod(15, 25, new ElementalResist(Elements.Chaos), ModType.FLAT),
+                        new StatMod(-20, 20, AuraEffect.getInstance(), ModType.FLAT),
                         new StatMod(10, 15, SkillDamage.getInstance(), ModType.FLAT),
                         new StatMod(5, 10, ManaRegen.getInstance(), ModType.PERCENT)
-
                 ))
 
                 .devComment("Food buff mage ring")
@@ -129,6 +129,18 @@ public class UniqueRings implements ExileRegistryInit {
                         new StatMod(10, 15, Stats.CRIT_DAMAGE.get(), ModType.FLAT),
                         new StatMod(5, 10, Stats.COOLDOWN_REDUCTION.get(), ModType.FLAT),
                         new StatMod(-3, -6, DatapackStats.STR, ModType.FLAT)
+                ))
+
+                .build();
+
+
+        UniqueGearBuilder.of("ele_gamble", "Gamble of the Elements",
+                        BaseGearTypes.RING)
+                .setReplacesName()
+                .stats(Arrays.asList(
+                        new StatMod(-50, 35, Stats.ELEMENTAL_DAMAGE.get(Elements.Cold), ModType.FLAT),
+                        new StatMod(-50, 35, Stats.ELEMENTAL_DAMAGE.get(Elements.Fire), ModType.FLAT),
+                        new StatMod(-50, 35, Stats.ELEMENTAL_DAMAGE.get(Elements.Lightning), ModType.FLAT)
                 ))
 
                 .build();

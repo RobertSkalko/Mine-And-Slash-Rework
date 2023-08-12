@@ -14,6 +14,6 @@ public class WolfSummon extends SummonEntity {
 
     @Override
     public SummonType summonType() {
-        return SummonType.SPIRIT_WOLF;
+        return SummonType.BEAST;
     }
 }

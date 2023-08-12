@@ -7,7 +7,7 @@
     {
       "type": "FLAT",
       "scale_to_lvl": false,
-      "stat": "max_spirit_wolf_summons",
+      "stat": "max_beast_summons",
       "v1": 1.0
     },
     {

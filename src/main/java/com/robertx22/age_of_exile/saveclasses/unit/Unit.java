@@ -290,16 +290,15 @@ public class Unit {
                     transfer.transferStats(data, calcStat);
                 }
             });
-
             // apply core stats
             getStats().modifyInCalc(calcStat -> {
                 if (calcStat.GetStat() instanceof ICoreStat core) {
                     core.addToOtherStats(data, calcStat);
                 }
             });
-
             stats.calculate();
 
+            
             DirtyCheck aftercalc = getDirtyCheck();
 
             Cached.VANILLA_STAT_UIDS_TO_CLEAR_EVERY_STAT_CALC.forEach(x -> {

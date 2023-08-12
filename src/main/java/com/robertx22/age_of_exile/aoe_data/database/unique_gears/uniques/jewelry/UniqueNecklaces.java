@@ -2,12 +2,12 @@ package com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.jewelr
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearTypes;
+import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuilder;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDuration;
-import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttributes;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.EnergyRegen;
@@ -54,10 +54,10 @@ public class UniqueNecklaces implements ExileRegistryInit {
                         "Skull of Spirits",
                         BaseGearTypes.NECKLACE)
                 .stats(Arrays.asList(
-                        new StatMod(1, 2, AllAttributes.getInstance(), ModType.FLAT),
-                        new StatMod(10, 20, ManaRegen.getInstance(), ModType.PERCENT),
-                        new StatMod(-5, -15, new ElementalResist(Elements.Cold), ModType.FLAT),
-                        new StatMod(-5, -15, new ElementalResist(Elements.Fire), ModType.FLAT)
+                        new StatMod(15, 50, Stats.SUMMON_DAMAGE.get(), ModType.FLAT),
+                        new StatMod(10, 30, ManaRegen.getInstance(), ModType.PERCENT),
+                        new StatMod(-25, -25, new ElementalResist(Elements.Cold), ModType.FLAT),
+                        new StatMod(-25, -25, new ElementalResist(Elements.Fire), ModType.FLAT)
                 ))
                 .build();
 

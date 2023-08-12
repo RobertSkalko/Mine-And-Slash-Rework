@@ -7,18 +7,10 @@ import java.util.List;
 
 public enum AttackType {
 
-    attack("attack", "Attack") {
-
-    },
-    dot("dot", "DOT") {
-
-    },
-    reflect("reflect", "Reflect") {
-
-    },
-    all("all", "Any") {
-
-    };
+    attack("attack", "Attack") {},
+    dot("dot", "DOT") {},
+    reflect("reflect", "Reflect") {},
+    all("all", "Any") {};
 
     public static List<AttackType> getAllUsed() {
         return Arrays.asList(attack, all);

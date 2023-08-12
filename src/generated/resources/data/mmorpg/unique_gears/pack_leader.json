@@ -1,0 +1,27 @@
+{
+  "base_gear": "leather_helmet",
+  "id": "pack_leader",
+  "rarity": "unique",
+  "replaces_name": true,
+  "unique_stats": [
+    {
+      "type": "percent",
+      "max": 25.0,
+      "min": 10.0,
+      "stat": "spirit_cost"
+    },
+    {
+      "type": "percent",
+      "max": 10.0,
+      "min": 10.0,
+      "stat": "aura_effect"
+    },
+    {
+      "type": "flat",
+      "max": 10.0,
+      "min": 3.0,
+      "stat": "max_beast_summons"
+    }
+  ],
+  "weight": 1000
+}

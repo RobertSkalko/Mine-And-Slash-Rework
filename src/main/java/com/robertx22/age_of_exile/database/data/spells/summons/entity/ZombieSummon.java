@@ -11,6 +11,6 @@ public class ZombieSummon extends SummonEntity {
 
     @Override
     public SummonType summonType() {
-        return SummonType.ZOMBIE;
+        return SummonType.UNDEAD;
     }
 }

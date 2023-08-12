@@ -1,18 +1,30 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
+pack_leader
 ghostly_shores
+ele_gamble
+futility_of_suffering
+bone_shatterer
+critical_impossibility
+bulwark
+Pursuit of Madness
+air_disaster
+crystalized_capacitor
+new_dawn_flame
+divine_frost
+summer_heat
+witch_brew
+azuna_ring
 mana_dominion
 winter_chill
-bone_shatterer
+omni_vamp
 spring_blossoms
 insight
-air_disaster
+burning_desire
 rabbit_paw
-skull_of_spirits
 autumn_harvest
-summer_heat
+skull_of_spirits
 heavenly_tear
 playful_hope
-azuna_ring
-witch_brew
+arch_gamble
 ghast_necklace

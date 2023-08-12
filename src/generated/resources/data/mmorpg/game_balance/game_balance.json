@@ -11,6 +11,11 @@
     "per_level_scaling": 0.2
   },
   "MAX_LEVEL": 100,
+  "MOB_DAMAGE_SCALING": {
+    "base_scaling": 1.0,
+    "cap_to_max_lvl": false,
+    "per_level_scaling": 0.5
+  },
   "NORMAL_STAT_SCALING": {
     "base_scaling": 1.0,
     "cap_to_max_lvl": false,

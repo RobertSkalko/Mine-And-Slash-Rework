@@ -189,15 +189,15 @@ public class Stats implements ExileRegistryInit {
                 x.max = 10;
             }).
             build();
-    public static DataPackStatAccessor<SummonType> MAX_TOTAL_SUMMONS = DatapackStatBuilder
-            .<SummonType>of(x -> "max_total_summons", x -> Elements.All)
-            .addAllOfType(SummonType.values())
+
+    public static DataPackStatAccessor MAX_SUMMON_CAPACITY = DatapackStatBuilder
+            .ofSingle("max_total_summons", Elements.All)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)
             .addEffect(StatEffects.ADD_TOTAL_SUMMONS)
-            .setLocName(x -> "Maximum Total Summons")
-            .setLocDesc(x -> "This is your cap for all types of summons, if your total is say 5, you can have say 2 zombies and 3 skeleton pets.")
+            .setLocName(x -> "Maximum Summon Capacity")
+            .setLocDesc(x -> "Say you have 3 max zombies, and 3 total max summons. +1 Total summons wouldn't allow you to summon an extra zombie until you got a +1 Max zombie summons. But you could summon an extra wolf or other type of summon.")
             .modifyAfterDone(x ->
             {
                 x.is_perc = false;

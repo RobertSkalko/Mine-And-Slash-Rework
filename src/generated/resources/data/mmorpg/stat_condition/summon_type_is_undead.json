@@ -1,0 +1,6 @@
+{
+  "id": "summon_type_is_undead",
+  "ser": "string_matches",
+  "string_id": "undead",
+  "string_key": "summon_type"
+}

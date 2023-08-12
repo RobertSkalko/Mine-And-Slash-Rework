@@ -1,0 +1,27 @@
+{
+  "base_gear": "bow",
+  "id": "critical_impossibility",
+  "rarity": "unique",
+  "replaces_name": true,
+  "unique_stats": [
+    {
+      "type": "percent",
+      "max": 150.0,
+      "min": -150.0,
+      "stat": "gear_weapon_damage"
+    },
+    {
+      "type": "flat",
+      "max": -100.0,
+      "min": -100.0,
+      "stat": "critical_hit"
+    },
+    {
+      "type": "flat",
+      "max": 250.0,
+      "min": 100.0,
+      "stat": "critical_damage"
+    }
+  ],
+  "weight": 1000
+}

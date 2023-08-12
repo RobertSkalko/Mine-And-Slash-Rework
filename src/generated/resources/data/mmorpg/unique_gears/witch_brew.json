@@ -2,19 +2,19 @@
   "base_gear": "ring",
   "id": "witch_brew",
   "rarity": "unique",
-  "replaces_name": false,
+  "replaces_name": true,
   "unique_stats": [
     {
-      "type": "percent",
+      "type": "flat",
       "max": 25.0,
       "min": 15.0,
       "stat": "chaos_resist"
     },
     {
       "type": "flat",
-      "max": 50.0,
-      "min": 25.0,
-      "stat": "more_food_stats"
+      "max": 20.0,
+      "min": -20.0,
+      "stat": "aura_effect"
     },
     {
       "type": "flat",

@@ -32,20 +32,20 @@ import java.util.UUID;
 public class DatapackStats implements ExileRegistryInit {
 
     public static Stat INT = new CoreStat("intelligence", "Intelligence", CoreStatData.of(Arrays.asList(
-            new OptScaleExactStat(1, Mana.getInstance(), ModType.PERCENT),
+            new OptScaleExactStat(5, Mana.getInstance(), ModType.FLAT),
             new OptScaleExactStat(0.5F, MagicShield.getInstance(), ModType.PERCENT),
             new OptScaleExactStat(0.2F, MagicShieldRegen.getInstance(), ModType.FLAT)
     )));
 
     public static Stat STR = new CoreStat("strength", "Strength", CoreStatData.of(Arrays.asList(
             new OptScaleExactStat(0.1F, WeaponDamage.getInstance(), ModType.FLAT),
-            new OptScaleExactStat(0.5F, Health.getInstance(), ModType.PERCENT),
+            new OptScaleExactStat(5, Health.getInstance(), ModType.FLAT),
             new OptScaleExactStat(0.2F, HealthRegen.getInstance(), ModType.FLAT)
     )));
 
     public static Stat DEX = new CoreStat("dexterity", "Dexterity", CoreStatData.of(Arrays.asList(
             new OptScaleExactStat(1, DodgeRating.getInstance(), ModType.PERCENT),
-            new OptScaleExactStat(2, Energy.getInstance(), ModType.PERCENT),
+            new OptScaleExactStat(5, Energy.getInstance(), ModType.FLAT),
             new OptScaleExactStat(0.3F, EnergyRegen.getInstance(), ModType.FLAT)
     )));
 

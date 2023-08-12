@@ -1,0 +1,33 @@
+{
+  "base_gear": "plate_chest",
+  "id": "bulwark",
+  "rarity": "unique",
+  "replaces_name": false,
+  "unique_stats": [
+    {
+      "type": "percent",
+      "max": 250.0,
+      "min": 100.0,
+      "stat": "gear_defense"
+    },
+    {
+      "type": "percent",
+      "max": 100.0,
+      "min": 100.0,
+      "stat": "bleed_resistance"
+    },
+    {
+      "type": "percent",
+      "max": -25.0,
+      "min": -25.0,
+      "stat": "energy"
+    },
+    {
+      "type": "percent",
+      "max": -25.0,
+      "min": -25.0,
+      "stat": "energy_regen"
+    }
+  ],
+  "weight": 1000
+}

@@ -66,8 +66,7 @@ public class Perks implements ExileRegistryInit {
         PerkBuilder.stat(new OptScaleExactStat(-2, Stats.MANA_COST.get(), ModType.FLAT));
         PerkBuilder.bigStat(new OptScaleExactStat(-5, Stats.MANA_COST.get(), ModType.FLAT));
 
-        //  PerkBuilder.stat(new OptScaleExactStat(3, Stats.ATTACK_SPEED.get(), ModType.FLAT));
-
+      
         PerkBuilder.stat(new OptScaleExactStat(2, Stats.PROJECTILE_DAMAGE.get(), ModType.FLAT));
 
         PerkBuilder.stat(new OptScaleExactStat(2, Stats.CRIT_DAMAGE.get(), ModType.FLAT));
@@ -80,13 +79,16 @@ public class Perks implements ExileRegistryInit {
         PerkBuilder.stat(new OptScaleExactStat(2, Stats.ELEMENTAL_DAMAGE.get(Elements.Physical), ModType.FLAT));
         PerkBuilder.bigStat(new OptScaleExactStat(10, Stats.ELEMENTAL_DAMAGE.get(Elements.Physical), ModType.FLAT));
 
+        PerkBuilder.stat(new OptScaleExactStat(2, Stats.SUMMON_DAMAGE.get(), ModType.FLAT));
+        PerkBuilder.bigStat(new OptScaleExactStat(10, Stats.SUMMON_DAMAGE.get(), ModType.FLAT));
+
         PerkBuilder.stat(new OptScaleExactStat(1, Stats.LIFESTEAL.get(), ModType.FLAT));
         PerkBuilder.stat(new OptScaleExactStat(1, Stats.SPELL_LIFESTEAL.get(), ModType.FLAT));
 
         PerkBuilder.bigStat(new OptScaleExactStat(4, Stats.LIFESTEAL.get(), ModType.FLAT));
         PerkBuilder.bigStat(new OptScaleExactStat(4, Stats.SPELL_LIFESTEAL.get(), ModType.FLAT));
 
-   
+
         PerkBuilder.stat(new OptScaleExactStat(3, Stats.AREA_DAMAGE.get(), ModType.FLAT));
         PerkBuilder.stat(new OptScaleExactStat(3, Stats.INCREASED_AREA.get(), ModType.FLAT));
         PerkBuilder.bigStat(new OptScaleExactStat(10, Stats.AREA_DAMAGE.get(), ModType.FLAT));

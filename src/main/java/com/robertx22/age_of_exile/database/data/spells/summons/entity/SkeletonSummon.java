@@ -21,7 +21,7 @@ public class SkeletonSummon extends SummonEntity {
 
     @Override
     public SummonType summonType() {
-        return SummonType.SKELETON;
+        return SummonType.UNDEAD;
     }
 
     @Override

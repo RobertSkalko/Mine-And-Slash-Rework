@@ -25,6 +25,12 @@ public class GameChangerPerks implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
+        
+        PerkBuilder.gameChanger("summoner", "Summoner",
+                new OptScaleExactStat(+3, Stats.MAX_SUMMON_CAPACITY.get(), ModType.FLAT),
+                new OptScaleExactStat(50, Stats.SUMMON_DAMAGE.get(), ModType.MORE),
+                new OptScaleExactStat(-25, Stats.TOTAL_DAMAGE.get(), ModType.MORE)
+        );
 
         PerkBuilder.gameChanger("ms_all_in", "Stare of Abyss",
                 new OptScaleExactStat(-100, Health.getInstance(), ModType.MORE),

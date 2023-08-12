@@ -41,9 +41,9 @@ public class RangerPerks implements ExileRegistryInit {
         PerkBuilder.ascPoint(TRAP_3, new OptScaleExactStat(25, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTag.trap), ModType.FLAT));
         PerkBuilder.ascPoint(TRAP_4, new OptScaleExactStat(25, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.trap), ModType.MORE));
 
-        PerkBuilder.ascPoint(BEAST_1, new OptScaleExactStat(1, Stats.MAX_SUMMONS.get(SummonType.SPIRIT_WOLF), ModType.FLAT));
+        PerkBuilder.ascPoint(BEAST_1, new OptScaleExactStat(1, Stats.MAX_SUMMONS.get(SummonType.BEAST), ModType.FLAT));
         PerkBuilder.ascPoint(BEAST_2, new OptScaleExactStat(30, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.beast), ModType.FLAT));
-        PerkBuilder.ascPoint(BEAST_3, new OptScaleExactStat(1, Stats.MAX_SUMMONS.get(SummonType.SPIRIT_WOLF), ModType.FLAT), new OptScaleExactStat(25, Stats.SUMMON_DURATION.get(), ModType.FLAT));
+        PerkBuilder.ascPoint(BEAST_3, new OptScaleExactStat(1, Stats.MAX_SUMMONS.get(SummonType.BEAST), ModType.FLAT), new OptScaleExactStat(25, Stats.SUMMON_DURATION.get(), ModType.FLAT));
         PerkBuilder.ascPoint(BEAST_4, new OptScaleExactStat(30, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.beast), ModType.MORE));
 
     }

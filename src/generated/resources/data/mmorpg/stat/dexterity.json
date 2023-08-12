@@ -4,19 +4,19 @@
     "core_stat_data": {
       "stats": [
         {
-          "type": "FLAT",
+          "type": "PERCENT",
           "stat": "dodge",
           "v1": 1.0
         },
         {
           "type": "FLAT",
-          "stat": "energy_regen",
-          "v1": 0.2
+          "stat": "energy",
+          "v1": 5.0
         },
         {
           "type": "FLAT",
-          "stat": "energy",
-          "v1": 2.0
+          "stat": "energy_regen",
+          "v1": 0.3
         }
       ]
     },

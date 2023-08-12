@@ -117,7 +117,7 @@
           {
             "type": "damage",
             "map": {
-              "element": "Elemental",
+              "element": "Cold",
               "value_calculation": "minion_explosion"
             }
           }

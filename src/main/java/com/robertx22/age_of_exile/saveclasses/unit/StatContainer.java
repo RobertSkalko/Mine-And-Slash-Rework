@@ -31,7 +31,7 @@ public class StatContainer {
     }
 
     public void modifyInCalc(Consumer<InCalcStatData> co) {
-        for (Map.Entry<String, InCalcStatData> en : statsInCalc.entrySet()) {
+        for (Map.Entry<String, InCalcStatData> en : new HashMap<>(statsInCalc).entrySet()) {
             co.accept(en.getValue());
         }
     }

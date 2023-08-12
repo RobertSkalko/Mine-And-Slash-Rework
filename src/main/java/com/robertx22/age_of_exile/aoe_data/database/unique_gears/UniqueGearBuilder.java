@@ -42,6 +42,11 @@ public class UniqueGearBuilder {
         return this;
     }
 
+    public UniqueGearBuilder keepsBaseName() {
+        this.uniq.replaces_name = false;
+        return this;
+    }
+
     public UniqueGearBuilder makeRuneWordOnly(List<RuneItem.RuneType> runes) {
         RunewordBuilder.of(uniq.guid, uniq.guid, runes, uniq.getBaseGear().gear_slot);
         this.uniq.uniqueRarity = IRarity.RUNEWORD_ID;

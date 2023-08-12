@@ -226,7 +226,7 @@
           {
             "type": "damage",
             "map": {
-              "element": "Elemental",
+              "element": "Fire",
               "value_calculation": "close_nova"
             }
           }

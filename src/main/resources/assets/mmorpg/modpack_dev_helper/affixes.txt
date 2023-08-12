@@ -1,9 +1,9 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
 of_devastation
-item_flat_armor
-of_pene
 heal_suff
+of_pene
+item_flat_armor
 water_spell_ele_dmg
 fire_ele_dmg_jewelry
 energy_reg
@@ -13,11 +13,11 @@ heal_crit_dmg_prefix
 water_ele_dmg_jewelry
 true_hit
 heal_crit_prefix
-fire_wep_dmg
 lightning_res
-item_perc_armor
+fire_wep_dmg
 item_perc_dodge
 of_spell_dmg
+item_perc_armor
 item_both_dodge
 strong_int_armor_suf
 of_energy
@@ -26,15 +26,15 @@ azure
 of_fast_cast
 chaos_ele_dmg_jewelry
 wep_item_flat
-armored_mobs
 item_both_ms
+armored_mobs
 physical_wep_dmg_dun
 wep_item_both
 of_brutality
 focused
+of_affluence
 chaos_wep_dmg_dun
 water_res
-of_affluence
 chaos_wep_dmg
 item_flat_ms
 mana_thief
@@ -47,15 +47,15 @@ mana_reg
 water_wep_dmg_dun
 water_ele_mobs
 of_the_wind
-life_on_hit_dun
 of_treasure
-physical_wep_dmg
+life_on_hit_dun
 crit_prefix
-scavanger
+physical_wep_dmg
 of_the_troll
-fire_wep_dmg_dun
-wep_item_perc
+scavanger
 of_the_sky
+wep_item_perc
+fire_wep_dmg_dun
 strong_str_armor_suf
 fire_ele_mobs
 precise
@@ -68,8 +68,8 @@ strong_dex_armor_suf
 of_less_cd
 vampiric
 of_spirit_markings
-item_flat_dodge
 of_the_philosopher
+item_flat_dodge
 of_gluttony
 chaos_res
 fire_res
