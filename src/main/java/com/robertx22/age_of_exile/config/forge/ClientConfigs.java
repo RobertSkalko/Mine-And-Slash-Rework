@@ -26,7 +26,7 @@ public class ClientConfigs {
         RENDER_ITEM_RARITY_BACKGROUND = b.define("render_item_rarity_background", true);
         SHOW_DURABILITY = b.define("show_durability", true);
         RENDER_MOB_HEALTH_GUI = b.define("render_mob_hp_gui", true);
-        ONLY_RENDER_MOB_LOOKED_AT = b.define("only_render_mob_looked_at", false);
+        ONLY_RENDER_MOB_LOOKED_AT = b.define("only_render_mob_looked_at", true);
         SHOW_DURABILITY = b.define("show_durability", true);
         ENABLE_FLOATING_DMG = b.define("render_floating_damage", true);
 

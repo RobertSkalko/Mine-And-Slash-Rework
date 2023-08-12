@@ -39,7 +39,6 @@ public class RenderMobInfo {
                     dispatcher.distanceToSqr(entity);
             if (squaredDistance <= 300) {
 
-                // todo
                 if (ClientConfigs.getConfig().ONLY_RENDER_MOB_LOOKED_AT.get()) {
                     if (LookUtils.getEntityLookedAt(Minecraft.getInstance().player) != entity) {
                         if (lastLooked != entity) {

@@ -41,6 +41,7 @@ public class RPGGuiOverlay {
 
         try {
 
+            
             if (mc.player == null) {
                 return;
             }
