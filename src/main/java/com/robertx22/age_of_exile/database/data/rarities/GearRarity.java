@@ -102,7 +102,7 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
 
     public Potential pot = new Potential(100, 1);
 
-    
+
     public int min_affixes = 0;
 
     public int max_sockets = 3;
@@ -111,7 +111,7 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
 
     public int item_tier = -1;
 
-
+    
     public float item_tier_power;
     public float item_value_multi;
     public boolean announce_in_chat = false;

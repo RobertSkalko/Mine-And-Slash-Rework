@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.uncommon.datasaving;
 
+import com.robertx22.age_of_exile.capability.player.BackpackItemData;
 import com.robertx22.age_of_exile.maps.MapItemData;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
@@ -15,6 +16,7 @@ public class StackSaving {
     public static ItemstackDataSaver<StatSoulData> STAT_SOULS = of(new ItemstackDataSaver<>(SlashRef.MODID + "_stat_soul", StatSoulData.class, () -> new StatSoulData()));
     public static ItemstackDataSaver<LootCrateData> GEM_CRATE = of(new ItemstackDataSaver<>(SlashRef.MODID + "_loot_crate", LootCrateData.class, () -> new LootCrateData()));
     public static ItemstackDataSaver<MapItemData> MAP = of(new ItemstackDataSaver<>(SlashRef.MODID + "_map", MapItemData.class, () -> new MapItemData()));
+    public static ItemstackDataSaver<BackpackItemData> BACKPACK = of(new ItemstackDataSaver<>(SlashRef.MODID + "_backpack", BackpackItemData.class, () -> new BackpackItemData()));
 
     static ItemstackDataSaver of(ItemstackDataSaver t) {
         return t;

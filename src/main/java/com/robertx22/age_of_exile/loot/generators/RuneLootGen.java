@@ -16,9 +16,6 @@ public class RuneLootGen extends BaseLootGen<GearBlueprint> {
 
     @Override
     public float baseDropChance() {
-        if (true) {
-            return 2000;
-        }
         return (float) (ServerContainer.get().RUNE_DROPRATE.get()
                 .floatValue());
     }
@@ -36,7 +33,7 @@ public class RuneLootGen extends BaseLootGen<GearBlueprint> {
     @Override
     public ItemStack generateOne() {
         RuneBlueprint b = new RuneBlueprint(info.level);
-        
+
         return b.createStack();
 
     }

@@ -406,6 +406,7 @@ public enum Words implements IAutoLocName {
     Chaos_Stats("Chaos Stats"),
 
     Currency("Currency"),
+    Backpack("Backpack"),
 
     Dealt("Dealt"),
 

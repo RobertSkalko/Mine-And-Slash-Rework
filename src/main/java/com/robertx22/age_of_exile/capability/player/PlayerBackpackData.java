@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.capability.player;
 import com.robertx22.age_of_exile.capability.player.data.Backpacks;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.library_of_exile.components.ICap;
-import com.robertx22.library_of_exile.utils.LoadSave;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -38,7 +37,6 @@ public class PlayerBackpackData implements ICap {
 
     }
 
-    private static final String GEARS = "gears";
 
     transient Player player;
     private Backpacks data;
@@ -79,19 +77,6 @@ public class PlayerBackpackData implements ICap {
         //  Packets.sendToClient(player, new SyncPlayerCapToClient(player, this.getCapIdForSyncing()));
     }
 
-    public static <OBJ> OBJ loadOrBlank(Class theclass, OBJ newobj, CompoundTag nbt, String loc, OBJ blank) {
-        try {
-            OBJ data = LoadSave.Load(theclass, newobj, nbt, loc);
-            if (data == null) {
-                return blank;
-            } else {
-                return data;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return blank;
-    }
 
     @Override
     public String getCapIdForSyncing() {

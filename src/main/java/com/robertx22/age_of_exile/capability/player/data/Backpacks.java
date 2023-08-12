@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.capability.player.data;
 
-import com.robertx22.age_of_exile.capability.player.helper.MyInventory;
+import com.robertx22.age_of_exile.capability.player.helper.BackpackInventory;
 import com.robertx22.age_of_exile.database.data.currency.IItemAsCurrency;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
@@ -16,7 +16,13 @@ import net.minecraft.world.item.ItemStack;
 public class Backpacks {
 
     public Backpacks(Player player) {
+
         this.player = player;
+
+        gears = new BackpackInventory(player, BackpackType.GEARS, MAX_SIZE);
+        currencies = new BackpackInventory(player, BackpackType.CURRENCY, MAX_SIZE);
+        skillGems = new BackpackInventory(player, BackpackType.SKILL_GEMS, MAX_SIZE);
+
     }
 
     public enum BackpackType {
@@ -55,24 +61,25 @@ public class Backpacks {
 
     public static int MAX_SIZE = 6 * 9;
 
-    private MyInventory gears = new MyInventory(MAX_SIZE);
-    private MyInventory currencies = new MyInventory(MAX_SIZE);
-    private MyInventory skillGems = new MyInventory(MAX_SIZE);
+    private BackpackInventory gears;
+    private BackpackInventory currencies;
+    private BackpackInventory skillGems;
 
 
-    public MyInventory getInv(BackpackType type) {
-
+    public BackpackInventory getInv(BackpackType type) {
+        BackpackInventory inv = null;
         if (type == BackpackType.CURRENCY) {
-            return currencies;
+            inv = currencies;
         }
         if (type == BackpackType.GEARS) {
-            return gears;
+            inv = gears;
         }
         if (type == BackpackType.SKILL_GEMS) {
-            return skillGems;
+            inv = skillGems;
         }
 
-        return null;
+
+        return inv;
     }
 
 
@@ -97,7 +104,10 @@ public class Backpacks {
 
     public void openBackpack(BackpackType type, Player p) {
         if (!p.level().isClientSide) {
-            MyInventory inv = getInv(type);
+            BackpackInventory inv = getInv(type);
+
+            inv.throwOutBlockedSlotItems();
+
             p.openMenu(new SimpleMenuProvider((i, playerInventory, playerEntity) -> {
                 return ChestMenu.sixRows(i, playerInventory, inv);
             }, Component.literal("")));

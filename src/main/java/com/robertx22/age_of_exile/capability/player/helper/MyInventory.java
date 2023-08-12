@@ -8,13 +8,12 @@ import net.minecraft.world.item.ItemStack;
 // had to override tag methods because the simplecontainer doesn't save place in inventory, just autosorts items..
 public class MyInventory extends SimpleContainer {
 
+
     public MyInventory(int pSize) {
         super(pSize);
+
     }
 
-    public MyInventory(ItemStack... pItems) {
-        super(pItems);
-    }
 
     @Override
     public void fromTag(ListTag pContainerNbt) {
@@ -56,6 +55,7 @@ public class MyInventory extends SimpleContainer {
     public boolean hasFreeSlots() {
         return getFreeSlots() > 0;
     }
+
 
     public int getFreeSlots() {
         int free = 0;

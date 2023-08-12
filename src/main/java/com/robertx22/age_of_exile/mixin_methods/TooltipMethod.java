@@ -1,8 +1,11 @@
 package com.robertx22.age_of_exile.mixin_methods;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
+import com.robertx22.age_of_exile.capability.player.BackpackItem;
+import com.robertx22.age_of_exile.capability.player.BackpackItemData;
 import com.robertx22.age_of_exile.database.data.currency.IItemAsCurrency;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -61,7 +64,16 @@ public class TooltipMethod {
                 return tooltip;
             }
 
-            com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext ctx = new com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext(stack, tooltip, unitdata);
+            if (stack.getItem() instanceof BackpackItem) {
+                tooltip.clear();
+                BackpackItemData data = StackSaving.BACKPACK.loadFrom(stack);
+                if (data != null) {
+                    tooltip.addAll(data.getTooltip(stack));
+                }
+                return tooltip;
+            }
+
+            TooltipContext ctx = new TooltipContext(stack, tooltip, unitdata);
 
             boolean hasdata = false;
 
