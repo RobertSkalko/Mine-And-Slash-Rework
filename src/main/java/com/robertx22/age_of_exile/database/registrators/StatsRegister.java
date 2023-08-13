@@ -33,7 +33,6 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCostReduction;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
-import com.robertx22.age_of_exile.database.data.stats.types.totem.ProjectileTotem;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.IGenerated;
@@ -79,8 +78,7 @@ public class StatsRegister implements ExileRegistryInit {
                     add(AuraCostReduction.getInstance());
                     add(AuraEffect.getInstance());
 
-                    add(ProjectileTotem.getInstance());
-
+                
                     add(WeaponDamage.getInstance());
 
                     add(FullSwingDamage.getInstance());

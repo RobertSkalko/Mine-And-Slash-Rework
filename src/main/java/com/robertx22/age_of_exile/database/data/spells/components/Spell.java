@@ -1,20 +1,16 @@
 package com.robertx22.age_of_exile.database.data.spells.components;
 
-import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellDesc;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
 import com.robertx22.age_of_exile.database.data.spells.SpellTag;
-import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.SpellCastContext;
-import com.robertx22.age_of_exile.database.data.stats.types.totem.ProjectileTotem;
 import com.robertx22.age_of_exile.database.data.value_calc.MaxLevelProvider;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.ISkillGem;
@@ -170,18 +166,8 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         }
 
 
-        if (ProjectileTotem.shouldUse(ctx.unit, this)) {
-            // summon a totem instead that casts this spell
-            PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(SlashBlocks.PROJECTILE_TOTEM.get(), 20D * 5)
-                    //.put(MapField.ENTITY_NAME, "block")
-                    .put(MapField.BLOCK_FALL_SPEED, 0D)
-                    .put(MapField.TOTEM_SPELL, this.GUID())
-                    .put(MapField.FIND_NEAREST_SURFACE, true)
-                    .put(MapField.IS_BLOCK_FALLING, false)).tryActivate(SpellCtx.onCast(caster, ctx.calcData));
-
-        } else {
-            attached.onCast(SpellCtx.onCast(caster, ctx.calcData));
-        }
+        attached.onCast(SpellCtx.onCast(caster, ctx.calcData));
+        
 
     }
 
