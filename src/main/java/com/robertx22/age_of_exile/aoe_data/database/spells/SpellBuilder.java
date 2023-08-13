@@ -31,10 +31,10 @@ public class SpellBuilder {
         SpellBuilder builder = new SpellBuilder();
 
         builder.spell = new Spell();
-        builder.spell.config.style = style;
         builder.spell.identifier = id;
         builder.spell.config = config;
         builder.spell.locName = name;
+        builder.spell.config.setStyle(style);
 
         builder.spell.getConfig().tags = tags;
 

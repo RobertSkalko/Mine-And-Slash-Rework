@@ -33,8 +33,7 @@ public class SpellMotionAction extends SpellAction {
 
                 ParticleMotion pm = ParticleMotion.valueOf(data.get(MapField.MOTION));
 
-                Vec3 motion = pm
-                        .getMotion(ctx.vecPos, ctx)
+                Vec3 motion = pm.getMotion(ctx.getPos(), ctx)
                         .scale(str);
 
                 SetAdd setAdd = data.getSetAdd();
@@ -46,7 +45,7 @@ public class SpellMotionAction extends SpellAction {
                 }
 
                 for (LivingEntity x : targets) {
-                    
+
 
                     Vec3 motionWithoutY = (new Vec3(motion.x, 0.0D, motion.z))
                             .scale(str);
@@ -65,7 +64,7 @@ public class SpellMotionAction extends SpellAction {
                                 .add(motionWithY));
                     }
 
-                    PlayerUtils.getNearbyPlayers(ctx.world, ctx.pos, 100)
+                    PlayerUtils.getNearbyPlayers(ctx.world, ctx.getBlockPos(), 100)
                             .forEach(p -> {
                                 ((ServerPlayer) p).connection.send(new ClientboundSetEntityMotionPacket(x));
                                 x.hurtMarked = false;

@@ -7,8 +7,8 @@
     {
       "type": "FLAT",
       "scale_to_lvl": false,
-      "stat": "max_golem_summons",
-      "v1": 2.0
+      "stat": "max_total_summons",
+      "v1": 1.0
     }
   ]
 }

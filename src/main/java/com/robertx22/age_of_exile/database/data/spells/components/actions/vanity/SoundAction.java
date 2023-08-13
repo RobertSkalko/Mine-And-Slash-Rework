@@ -29,7 +29,7 @@ public class SoundAction extends SpellAction {
                     .floatValue();
             SoundEvent sound = data.getSound();
 
-            SoundUtils.playSound(ctx.world, ctx.pos, sound, volume, pitch);
+            SoundUtils.playSound(ctx.world, ctx.getBlockPos(), sound, volume, pitch);
         }
     }
 

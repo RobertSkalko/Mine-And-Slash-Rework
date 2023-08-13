@@ -203,7 +203,7 @@ public class Stats implements ExileRegistryInit {
             .modifyAfterDone(x ->
             {
                 x.is_perc = false;
-                x.base = 3;
+                x.base = 0;
                 x.min = -100;
                 x.max = 10;
             }).

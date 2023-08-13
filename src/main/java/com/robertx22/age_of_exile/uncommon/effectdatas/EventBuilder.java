@@ -28,7 +28,7 @@ public class EventBuilder<T extends EffectEvent> {
         DamageEvent event = new DamageEvent(null, source, target, dmg);
         DamageBuilder b = new DamageBuilder();
         b.event = event;
-        b.setupDamage(AttackType.attack, spell.getWeapon(source), spell.getConfig().style);
+        b.setupDamage(AttackType.attack, spell.getWeapon(source), spell.getConfig().getStyle());
         b.setSpell(spell);
         return b;
     }

@@ -24,7 +24,7 @@ public class EntityInRadiusCondition extends EffectCondition {
 
         radius *= ctx.calculatedSpellData.data.getNumber(EventData.AREA_MULTI, 1).number;
 
-        EntityFinder.Setup<LivingEntity> finder = EntityFinder.start(ctx.caster, LivingEntity.class, ctx.sourceEntity.position())
+        EntityFinder.Setup<LivingEntity> finder = EntityFinder.start(ctx.caster, LivingEntity.class, ctx.getBlockPos())
                 .finder(EntityFinder.SelectionType.RADIUS)
                 .searchFor(predicate)
                 .height(data.getOrDefault(HEIGHT, radius))

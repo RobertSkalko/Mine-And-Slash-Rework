@@ -1,6 +1,0 @@
-{
-  "id": "summon_type_is_zombie",
-  "ser": "string_matches",
-  "string_id": "zombie",
-  "string_key": "summon_type"
-}

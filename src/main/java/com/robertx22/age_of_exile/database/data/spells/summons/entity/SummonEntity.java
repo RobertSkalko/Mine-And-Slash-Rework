@@ -30,6 +30,10 @@ public abstract class SummonEntity extends TamableAnimal implements RangedAttack
 
     public abstract SummonType summonType();
 
+    public boolean countsTowardsMaxSummons() {
+        return true;
+    }
+
     @Override
     public void performRangedAttack(LivingEntity pTarget, float pDistanceFactor) {
         ItemStack itemstack = this.getProjectile(this.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this, item -> item instanceof net.minecraft.world.item.BowItem)));

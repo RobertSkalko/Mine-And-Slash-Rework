@@ -108,7 +108,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
     public WeaponTypes getWeapon(LivingEntity en) {
         try {
-            if (getConfig().style != PlayStyle.INT) {
+            if (getStyle() != PlayStyle.INT) {
 
                 ItemStack stack = en.getMainHandItem();
 
@@ -380,6 +380,6 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
     @Override
     public PlayStyle getStyle() {
-        return this.config.style;
+        return this.config.getStyle();
     }
 }

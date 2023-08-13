@@ -65,11 +65,6 @@ public class PartBuilder {
         return c;
     }
 
-    public static ComponentPart onTickDamageInAoe(Double ticks, ValueCalculation calc, Elements ele, Double radius) {
-        ComponentPart c = damageInAoe(calc, ele, radius);
-        c.ifs.add(EffectCondition.EVERY_X_TICKS.create(ticks));
-        return c;
-    }
 
     public static ComponentPart damageInAoe(ValueCalculation calc, Elements ele, Double radius) {
         ComponentPart c = new ComponentPart();

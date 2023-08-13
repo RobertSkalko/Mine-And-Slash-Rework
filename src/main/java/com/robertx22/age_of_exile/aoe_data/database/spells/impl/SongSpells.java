@@ -31,7 +31,7 @@ public class SongSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.playSound(SoundEvents.SNOWBALL_THROW, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.AIR, 1D, 1D, SlashEntities.SIMPLE_PROJECTILE.get(), 20D, false)))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.NOTE, 2D, 0.15D))
-                .onHit(PartBuilder.damage(SpellCalcs.POWER_CHORD, Elements.Elemental)
+                .onExpire(PartBuilder.damageInAoe(SpellCalcs.POWER_CHORD, Elements.Elemental, 1.5D)
                         .addActions(SpellAction.EXILE_EFFECT.giveSeconds(NegativeEffects.CHARM, 6)))
                 .onHit(PartBuilder.aoeParticles(ParticleTypes.ENCHANTED_HIT, 10D, 1D))
                 .build();

@@ -43,7 +43,7 @@ public class SummonPetAction extends SpellAction {
 
             SummonEntity en = (SummonEntity) type.get().create(ctx.world);
 
-            en.finalizeSpawn((ServerLevel) ctx.world, ctx.world.getCurrentDifficultyAt(ctx.pos), MobSpawnType.MOB_SUMMONED, null, null);
+            en.finalizeSpawn((ServerLevel) ctx.world, ctx.world.getCurrentDifficultyAt(ctx.getBlockPos()), MobSpawnType.MOB_SUMMONED, null, null);
 
             en.tame((Player) ctx.caster);
 
@@ -74,10 +74,10 @@ public class SummonPetAction extends SpellAction {
 
             SummonType summonType = en.summonType();
 
-            int maxTotal = (int) ctx.calculatedSpellData.data.getNumber(EventData.BONUS_TOTAL_SUMMONS, 0).number;
-
-            despawnIfExceededMaximumSummons(ctx.caster, maxTotal, summonType);
-
+            if (en.countsTowardsMaxSummons()) {
+                int maxTotal = (int) ctx.calculatedSpellData.data.getNumber(EventData.BONUS_TOTAL_SUMMONS, 0).number;
+                despawnIfExceededMaximumSummons(ctx.caster, maxTotal, summonType);
+            }
         }
     }
 
@@ -88,12 +88,12 @@ public class SummonPetAction extends SpellAction {
         List<SummonEntity> list = new ArrayList<>();
 
         for (SummonEntity en : EntityFinder.start(caster, SummonEntity.class, caster.blockPosition()).searchFor(AllyOrEnemy.all).radius(40).build()) {
-            if (en.summonType() == type) {
-                if (en.getOwner() == caster) {
-                    current++;
-                    list.add(en);
-                }
+            // if (en.summonType() == type) {
+            if (en.getOwner() == caster) {
+                current++;
+                list.add(en);
             }
+            //}
         }
 
         list.sort(Comparator.comparingInt(x -> -x.tickCount)); // todo this needs to be from highest to lowest age

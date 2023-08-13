@@ -7,7 +7,7 @@
     {
       "type": "FLAT",
       "scale_to_lvl": false,
-      "stat": "max_beast_summons",
+      "stat": "max_total_summons",
       "v1": 1.0
     }
   ]

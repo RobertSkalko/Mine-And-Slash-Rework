@@ -73,7 +73,7 @@ public class NatureSpells implements ExileRegistryInit {
 
 
         SpellBuilder.of(REFRESH, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(40, 20 * 60 * 3, 20)
-                                .setScaleManaToPlayer(), "Refresh",
+                        , "Refresh",
                         Arrays.asList())
 
                 .manualDesc(
@@ -92,7 +92,7 @@ public class NatureSpells implements ExileRegistryInit {
 
 
         SpellBuilder.of(NATURE_BALM, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 60 * 20)
-                                .setScaleManaToPlayer(), "Nature's Balm",
+                        , "Nature's Balm",
                         Arrays.asList(SpellTag.heal))
                 .manualDesc("Gives buff to allies nearby:")
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))

@@ -31,7 +31,7 @@ public class SummonBlockAction extends SpellAction {
         }
 
         //HitResult ray = ctx.caster.rayTrace(5D, 0.0F, false);
-        BlockPos pos = ctx.pos;
+        BlockPos pos = ctx.getBlockPos();
 
         boolean found = true;
 
@@ -50,7 +50,7 @@ public class SummonBlockAction extends SpellAction {
                 }
             }
             if (!found) {
-                pos = ctx.pos;
+                pos = ctx.getBlockPos();
                 times = 0;
                 while (!found && pos.getY() < ctx.world.getMaxBuildHeight() && SEARCH > times) {
                     times++;

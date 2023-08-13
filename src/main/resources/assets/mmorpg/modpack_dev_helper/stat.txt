@@ -40,7 +40,6 @@ mana_on_attack_hit
 electrify_strength
 gear_defense
 all_elemental_damage
-max_zombie_summons
 defensive_eff_dur_u_cast
 physical_health_leech
 electrify_resistance
@@ -94,7 +93,6 @@ strength
 inc_effect_of_offensive_buff_on_you
 physical_weapon_damage_per_perc_of_mana
 lightning_weapon_damage
-max_skeleton_summons
 poison_proc_chance
 non_crit_damage
 health_per_sec
@@ -154,7 +152,6 @@ mana_shield
 golem_spell_dmg
 chaos_mana_leech
 mana_per_sec
-max_golem_summons
 mana_on_all_hit
 all_fire_damage
 curse_eff_duration
@@ -173,7 +170,6 @@ poison_strength
 health_per_10_intelligence
 block_chance
 ele_axe_damage
-max_none_summons
 water_weapon_damage
 elemental_vuln_crit
 all_resist
@@ -193,7 +189,6 @@ beast_cdr
 projectile_spell_dmg
 chance_of_blind
 spell_damage_per_perc_of_increase_healing
-max_beast_summons
 positive_eff_dur_u_cast
 shield_spell_dmg
 phys_to_lightning
@@ -225,7 +220,6 @@ aura_effect
 blood_user
 fire_dot_damage
 dmg_received
-max_spirit_wolf_summons
 mana_regen
 heal_spell_dmg
 str_dmg_received
@@ -284,7 +278,6 @@ inc_aoe
 water_health_leech
 ele_crossbow_damage
 magic_shield_regen
-max_undead_summons
 crit_water_dmg_mana
 negative_eff_duration
 armor_per_10_mana

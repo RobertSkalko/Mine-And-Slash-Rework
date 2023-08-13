@@ -32,14 +32,10 @@ public class SpellStatsCalculationEvent extends EffectEvent {
 
 
         this.savedData = create(Load.Unit(caster).getLevel(), caster, spell);
-        this.lvl = Load.Unit(caster)
-                .getLevel();
+        this.lvl = Load.Unit(caster).getLevel();
 
-        if (spell.config.scale_mana_cost_to_player_lvl) {
-            lvl = this.sourceData.getLevel();
-        }
-
-        this.data.setString(EventData.STYLE, spell.config.style.name());
+        
+        this.data.setString(EventData.STYLE, spell.config.getStyle().name());
 
         this.data.setString(EventData.SUMMON_TYPE, spell.config.summonType.id);
 

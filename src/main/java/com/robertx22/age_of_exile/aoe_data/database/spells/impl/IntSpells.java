@@ -56,7 +56,7 @@ public class IntSpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of("teleport", PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 30)
-                                .setScaleManaToPlayer(), "Teleport",
+                        , "Teleport",
                         Arrays.asList(SpellTag.damage, SpellTag.movement)
                 )
                 .manualDesc("Teleport yourself in the direction you're looking at.")

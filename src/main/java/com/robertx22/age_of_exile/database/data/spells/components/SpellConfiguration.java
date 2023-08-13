@@ -23,9 +23,8 @@ public class SpellConfiguration {
     public String charge_name = "";
     private int cast_time_ticks = 0;
     public int cooldown_ticks = 20;
-    public PlayStyle style = PlayStyle.INT;
+    private String style = PlayStyle.STR.id;
     public List<SpellTag> tags = new ArrayList<>();
-    public boolean scale_mana_cost_to_player_lvl = false;
 
     public int getCastTimeTicks() {
         return cast_time_ticks;
@@ -33,6 +32,15 @@ public class SpellConfiguration {
 
     public SpellConfiguration applyCastSpeedToCooldown() {
         this.apply_cast_speed_to_cd = true;
+        return this;
+    }
+
+    public PlayStyle getStyle() {
+        return PlayStyle.fromID(style);
+    }
+
+    public SpellConfiguration setStyle(PlayStyle s) {
+        this.style = s.id;
         return this;
     }
 
@@ -67,11 +75,6 @@ public class SpellConfiguration {
         return this;
     }
 
-
-    public SpellConfiguration setScaleManaToPlayer() {
-        this.scale_mana_cost_to_player_lvl = true;
-        return this;
-    }
 
     public static class Builder {
 

@@ -64,22 +64,22 @@ public class GiveSpell {
                 blueprint.rarity.set(ExileDB.GearRarities()
                         .get(rarity));
             }
-            ItemStack stack = blueprint.createStack();
+            
 
             if (!type.equals("random")) {
 
-
-                var data = StackSaving.SKILL_GEM.loadFrom(stack);
+                var data = StackSaving.SKILL_GEM.loadFrom(blueprint.createStack());
                 data.id = type;
                 data.type = SkillGemData.SkillGemType.SKILL;
 
-                stack = data.getItem().getDefaultInstance();
+                ItemStack stack = data.getItem().getDefaultInstance();
 
                 StackSaving.SKILL_GEM.saveTo(stack, data);
+                PlayerUtils.giveItem(stack, player);
 
+            } else {
+                PlayerUtils.giveItem(blueprint.createStack(), player);
             }
-
-            PlayerUtils.giveItem(stack, player);
         }
 
         return 0;

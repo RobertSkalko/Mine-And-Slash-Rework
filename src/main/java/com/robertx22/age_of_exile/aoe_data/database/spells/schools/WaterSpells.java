@@ -107,7 +107,7 @@ public class WaterSpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(WATER_BREATH, PlayStyle.INT, SpellConfiguration.Builder.instant(10, 60 * 20 * 5)
-                                .setScaleManaToPlayer(),
+                        ,
                         "Water Breathing",
                         Arrays.asList())
                 .manualDesc(
@@ -119,7 +119,7 @@ public class WaterSpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(MAGE_CIRCLE, PlayStyle.INT, SpellConfiguration.Builder.instant(10, 20 * 45)
-                        .setScaleManaToPlayer(), "Mage Circle", Arrays.asList(SpellTag.movement))
+                        , "Mage Circle", Arrays.asList(SpellTag.movement))
 
                 .manualDesc(
                         "Summon a Magic Circle. Standing in it provides you a buff." +

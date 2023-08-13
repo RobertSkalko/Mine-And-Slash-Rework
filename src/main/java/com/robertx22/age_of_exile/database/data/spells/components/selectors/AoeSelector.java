@@ -30,6 +30,7 @@ public class AoeSelector extends BaseTargetSelector {
 
         Double chance = data.getOrDefault(SELECTION_CHANCE, 100D);
 
+     
         EntityFinder.Setup<LivingEntity> finder = EntityFinder.start(caster, LivingEntity.class, pos)
                 .finder(EntityFinder.SelectionType.RADIUS)
                 .searchFor(predicate)

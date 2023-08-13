@@ -53,7 +53,7 @@ public class EntityFinder {
             @Override
             public <T extends Entity> List<T> getEntities(Setup setup) {
 
-                LivingEntity entity = setup.caster;
+                Entity entity = setup.caster;
 
                 double distance = setup.distanceToSearch;
 
@@ -93,12 +93,12 @@ public class EntityFinder {
 
     }
 
-    public static <T extends LivingEntity> Setup<T> start(LivingEntity caster, Class<T> entityType, Vec3 pos) {
+    public static <T extends LivingEntity> Setup<T> start(Entity caster, Class<T> entityType, Vec3 pos) {
         Setup<T> setup = new Setup<T>(caster, entityType, pos);
         return setup;
     }
 
-    public static <T extends LivingEntity> Setup<T> start(LivingEntity caster, Class<T> entityType, BlockPos p) {
+    public static <T extends LivingEntity> Setup<T> start(Entity caster, Class<T> entityType, BlockPos p) {
         return start(caster, entityType, new Vec3(p.getX(), p.getY(), p.getZ()));
     }
 
@@ -107,7 +107,7 @@ public class EntityFinder {
         Class<T> entityType;
         SelectionType selectionType = SelectionType.RADIUS;
         AllyOrEnemy entityPredicate = AllyOrEnemy.enemies;
-        LivingEntity caster;
+        Entity caster;
         boolean forceExcludeCaster = false;
         Level world;
         Vec3 pos;
@@ -118,7 +118,7 @@ public class EntityFinder {
 
         double distanceToSearch = 10;
 
-        public Setup(LivingEntity caster, Class<T> entityType, Vec3 pos) {
+        public Setup(Entity caster, Class<T> entityType, Vec3 pos) {
             Objects.requireNonNull(caster);
             this.entityType = entityType;
             this.caster = caster;

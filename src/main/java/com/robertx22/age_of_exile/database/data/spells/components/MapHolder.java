@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
 import com.robertx22.age_of_exile.database.data.spells.SetAdd;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.AggroAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.ExileEffectAction.GiveOrTake;
+import com.robertx22.age_of_exile.database.data.spells.components.actions.PositionSource;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SummonProjectileAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.vanity.ParticleInRadiusAction;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
@@ -93,10 +94,10 @@ public class MapHolder {
         }
     }
 
-    public SummonProjectileAction.PositionSource getOrDefault(SummonProjectileAction.PositionSource way) {
+    public PositionSource getOrDefault(PositionSource way) {
         String f = getOrDefault(MapField.POS_SOURCE, "");
-        if (!f.isEmpty() && SummonProjectileAction.PositionSource.valueOf(f) != null) {
-            return SummonProjectileAction.PositionSource.valueOf(f);
+        if (!f.isEmpty() && PositionSource.valueOf(f) != null) {
+            return PositionSource.valueOf(f);
         } else {
             return way;
         }

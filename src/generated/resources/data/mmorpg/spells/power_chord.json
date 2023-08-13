@@ -47,14 +47,18 @@
           "en_preds": [],
           "ifs": [
             {
-              "type": "on_hit",
+              "type": "on_entity_expire",
               "map": {}
             }
           ],
           "targets": [
             {
-              "type": "target",
-              "map": {}
+              "type": "aoe",
+              "map": {
+                "en_predicate": "enemies",
+                "radius": 1.5,
+                "selection_type": "RADIUS"
+              }
             }
           ]
         },
@@ -141,8 +145,7 @@
       "max": 7.0,
       "min": 3.5
     },
-    "scale_mana_cost_to_player_lvl": false,
-    "style": "INT",
+    "style": "int",
     "summonType": "NONE",
     "swing_arm": true,
     "tags": [

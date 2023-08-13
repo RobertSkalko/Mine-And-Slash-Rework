@@ -28,10 +28,6 @@ public class SummonProjectileAction extends SpellAction {
         FROM_PLAYER_VIEW, DOWN, FIND_ENEMY
     }
 
-    public enum PositionSource {
-        CASTER, SOURCE_ENTITY
-    }
-
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
         if (ctx.world.isClientSide) {

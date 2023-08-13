@@ -29,6 +29,11 @@ public class SkeletonSummon extends SummonEntity {
         return true;
     }
 
+    // todo maybe better way
+    @Override
+    public boolean countsTowardsMaxSummons() {
+        return false;
+    }
 
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {

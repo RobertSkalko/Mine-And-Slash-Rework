@@ -66,8 +66,8 @@ public class ParticleInRadiusAction extends SpellAction {
             float motionMulti = data.getOrDefault(MOTION_MULTI, 1D)
                     .floatValue();
 
-            Vec3 pos = ctx.vecPos;
-            Vec3 vel = ctx.sourceEntity.getDeltaMovement();
+            Vec3 pos = ctx.getPos();
+            Vec3 vel = ctx.getPositionEntity().getDeltaMovement();
 
             ShapeHelper c = new Circle3d(new MyPosition(pos), radius);
 

@@ -1,6 +1,0 @@
-{
-  "id": "summon_type_is_skeleton",
-  "ser": "string_matches",
-  "string_id": "skeleton",
-  "string_key": "summon_type"
-}

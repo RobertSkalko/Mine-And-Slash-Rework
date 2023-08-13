@@ -61,9 +61,9 @@ public class BasicAttackSpells implements ExileRegistryInit {
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.FLAME, 1D, 0.1D))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.FALLING_LAVA, 1D, 0.5D))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.SMOKE, 1D, 0.01D))
-                .onHit(PartBuilder.damageInAoe(SpellCalcs.FIREBALL, Elements.Fire, 2D))
-                .onHit(PartBuilder.playSound(SoundEvents.GENERIC_BURN, 1D, 2D))
-                .onHit(PartBuilder.aoeParticles(ParticleTypes.SMOKE, 3D, 1D))
+                .onExpire(PartBuilder.damageInAoe(SpellCalcs.FIREBALL, Elements.Fire, 2D))
+                .onExpire(PartBuilder.playSound(SoundEvents.GENERIC_BURN, 1D, 2D))
+                .onExpire(PartBuilder.aoeParticles(ParticleTypes.SMOKE, 3D, 1D))
                 .build();
 
 

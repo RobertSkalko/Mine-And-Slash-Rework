@@ -4,7 +4,6 @@ decrease_number_num
 set_bool_crit
 decrease_cast_ticks_num
 restore_mana_per_stat_data
-add_max_summons
 leech_energy
 multiply_number_num
 give_negative/5_to_target

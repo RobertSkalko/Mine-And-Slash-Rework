@@ -26,7 +26,7 @@ public class CommandSummonsAction extends SpellAction {
         }
 
 
-        for (LivingEntity en : EntityFinder.start(ctx.caster, LivingEntity.class, ctx.pos)
+        for (LivingEntity en : EntityFinder.start(ctx.caster, LivingEntity.class, ctx.getBlockPos())
                 .finder(EntityFinder.SelectionType.RADIUS)
                 .searchFor(AllyOrEnemy.pets)
                 .radius(radius).build()) {

@@ -30,6 +30,15 @@ public enum PlayStyle {
 
     public abstract Stat getStat();
 
+    public static PlayStyle fromID(String id) {
+        for (PlayStyle value : values()) {
+            if (value.id.equals(id)) {
+                return value;
+            }
+        }
+        return PlayStyle.STR;
+    }
+
     PlayStyle(String id, String name) {
         this.id = id;
         this.name = name;

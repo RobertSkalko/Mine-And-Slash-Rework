@@ -116,8 +116,7 @@
       "max": 7.0,
       "min": 3.5
     },
-    "scale_mana_cost_to_player_lvl": false,
-    "style": "INT",
+    "style": "dex",
     "summonType": "NONE",
     "swing_arm": true,
     "tags": [],

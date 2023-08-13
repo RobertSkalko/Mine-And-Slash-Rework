@@ -75,6 +75,12 @@
     {
       "type": "FLAT",
       "scale_to_lvl": false,
+      "stat": "max_total_summons",
+      "v1": 3.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
       "stat": "critical_hit",
       "v1": 1.0
     },

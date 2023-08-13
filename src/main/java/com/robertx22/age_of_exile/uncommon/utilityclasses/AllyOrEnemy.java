@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.player.Player;
@@ -10,7 +11,7 @@ import java.util.stream.Collectors;
 public enum AllyOrEnemy {
     allies() {
         @Override
-        public <T extends LivingEntity> List<T> getMatchingEntities(List<T> list, LivingEntity caster) {
+        public <T extends LivingEntity> List<T> getMatchingEntities(List<T> list, Entity caster) {
 
             return list.stream()
                     .filter(x -> is(caster, x))
@@ -18,7 +19,7 @@ public enum AllyOrEnemy {
         }
 
         @Override
-        public boolean is(LivingEntity caster, LivingEntity target) {
+        public boolean is(Entity caster, LivingEntity target) {
             return enemies.is(caster, target) == false;
         }
 
@@ -29,14 +30,14 @@ public enum AllyOrEnemy {
     },
     pets() {
         @Override
-        public <T extends LivingEntity> List<T> getMatchingEntities(List<T> list, LivingEntity caster) {
+        public <T extends LivingEntity> List<T> getMatchingEntities(List<T> list, Entity caster) {
             return list.stream()
                     .filter(x -> is(caster, x))
                     .collect(Collectors.toList());
         }
 
         @Override
-        public boolean is(LivingEntity caster, LivingEntity target) {
+        public boolean is(Entity caster, LivingEntity target) {
             if (caster instanceof Player) {
                 if (EntityFinder.isTamed(target) && target instanceof OwnableEntity pet && pet.getOwner() == caster) {
                     return true;
@@ -52,7 +53,7 @@ public enum AllyOrEnemy {
     },
     enemies {
         @Override
-        public boolean is(LivingEntity caster, LivingEntity target) {
+        public boolean is(Entity caster, LivingEntity target) {
 
             if (caster instanceof Player) {
                 if (EntityFinder.isTamed(target)) {
@@ -80,7 +81,7 @@ public enum AllyOrEnemy {
         }
 
         @Override
-        public <T extends LivingEntity> List<T> getMatchingEntities(List<T> list, LivingEntity caster) {
+        public <T extends LivingEntity> List<T> getMatchingEntities(List<T> list, Entity caster) {
             return list.stream()
                     .filter(x -> is(caster, x))
                     .collect(Collectors.toList());
@@ -93,12 +94,12 @@ public enum AllyOrEnemy {
     },
     all {
         @Override
-        public <T extends LivingEntity> List<T> getMatchingEntities(List<T> list, LivingEntity caster) {
+        public <T extends LivingEntity> List<T> getMatchingEntities(List<T> list, Entity caster) {
             return list;
         }
 
         @Override
-        public boolean is(LivingEntity caster, LivingEntity target) {
+        public boolean is(Entity caster, LivingEntity target) {
             return true;
         }
 
@@ -108,9 +109,9 @@ public enum AllyOrEnemy {
         }
     };
 
-    public abstract <T extends LivingEntity> List<T> getMatchingEntities(List<T> list, LivingEntity caster);
+    public abstract <T extends LivingEntity> List<T> getMatchingEntities(List<T> list, Entity caster);
 
-    public abstract boolean is(LivingEntity caster, LivingEntity target);
+    public abstract boolean is(Entity caster, LivingEntity target);
 
     public abstract boolean includesCaster();
 }

@@ -15,7 +15,7 @@ public class BootsUniques implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        UniqueGearBuilder.of("Pursuit of Madness", "Pursuit of Madness", BaseGearTypes.CLOTH_BOOTS)
+        UniqueGearBuilder.of("madness_pursuit", "Pursuit of Madness", BaseGearTypes.CLOTH_BOOTS)
                 .setReplacesName()
                 .stats(Arrays.asList(
                         new StatMod(25, 100, GearDefense.getInstance(), ModType.PERCENT),

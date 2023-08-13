@@ -27,7 +27,7 @@ public enum ParticleMotion {
         @Override
         public Vec3 getMotion(Vec3 particlePos, SpellCtx ctx) {
 
-            Vec3 c = ctx.vecPos;
+            Vec3 c = ctx.getPos();
             c = new Vec3(c.x, 0, c.z);
 
             Vec3 p = particlePos;

@@ -48,15 +48,14 @@ spell_has_tag_beast
 spell_has_tag_golem
 resource_type_is_blood
 attack_type_is_attack
-summon_type_is_undead
 is_axe_wep_type
+summon_type_is_undead
 restore_type_is_leech
 attack_type_is_dot
 summon_type_is_none
 style_is_int
 spell_has_tag_shout
 effect_has_tag_curse
-summon_type_is_skeleton
 resource_type_is_energy
 restore_type_is_heal
 spell_has_tag_shield
@@ -71,10 +70,8 @@ restore_type_is_food
 is_staff_wep_type
 summon_type_is_total
 effect_has_tag_food
-summon_type_is_spirit_wolf
 resource_type_is_magic_shield
 is_is_basic_atk_true
-summon_type_is_zombie
 threat_gen_type_is_heal
 restore_type_is_regen
 is_none_wep_type

@@ -1,12 +1,12 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.level.Level;
-import net.minecraft.server.level.ServerLevel;
 
 import java.util.UUID;
 
@@ -37,10 +37,10 @@ public final class Utilities {
 
     }
 
-    public static Vec3 getEndOfLook(LivingEntity entity, double distance) {
+    public static Vec3 getEndOfLook(Entity entity, double distance) {
         return entity.getEyePosition(0.5F)
-            .add(entity.getLookAngle()
-                .scale(distance));
+                .add(entity.getLookAngle()
+                        .scale(distance));
     }
 
     public static void spawnParticlesForTesting(AABB aabb, Level world) {
@@ -51,7 +51,7 @@ public final class Utilities {
 
                         for (int i = 0; i < 1; i++) {
                             ((ServerLevel) world).sendParticles(
-                                ParticleTypes.HAPPY_VILLAGER, x, y, z, 0, 0.0D, 0.0D, 0.0D, 0F);
+                                    ParticleTypes.HAPPY_VILLAGER, x, y, z, 0, 0.0D, 0.0D, 0.0D, 0F);
                         }
                     }
                 }

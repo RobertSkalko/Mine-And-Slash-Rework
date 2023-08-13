@@ -82,7 +82,7 @@ public class RangerSpells implements ExileRegistryInit {
 
 
         SpellBuilder.of(DASH_ID, PlayStyle.DEX, SpellConfiguration.Builder.instant(10, 15)
-                                .setScaleManaToPlayer()
+
                                 .setChargesAndRegen("dash", 3, 20 * 30)
                         , "Dash",
                         Arrays.asList(SpellTag.movement, SpellTag.technique))
@@ -121,7 +121,7 @@ public class RangerSpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(THE_HUNT, PlayStyle.DEX, SpellConfiguration.Builder.instant(5, 60 * 20 * 2)
-                                .setScaleManaToPlayer(),
+                        ,
                         "The Hunt",
                         Arrays.asList())
                 .manualDesc(
@@ -176,7 +176,7 @@ public class RangerSpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(MAKE_ARROWS, PlayStyle.DEX, SpellConfiguration.Builder.nonInstant(10, 20 * 60 * 5, 40)
-                                .setScaleManaToPlayer(), "Produce Arrows",
+                        , "Produce Arrows",
                         Arrays.asList())
                 .manualDesc("Produce a stack of arrows.")
                 .weaponReq(CastingWeapon.ANY_WEAPON)
@@ -189,7 +189,7 @@ public class RangerSpells implements ExileRegistryInit {
     static SpellBuilder trap(String id, String name, SimpleParticleType particle, ValueCalculation dmg, Elements element) {
 
         return SpellBuilder.of(id, PlayStyle.DEX, SpellConfiguration.Builder.instant(7, 20)
-                                .setChargesAndRegen("trap", 3, 20 * 30)
+                                .setChargesAndRegen(id, 3, 20 * 30)
                                 .setSwingArm(), name,
                         Arrays.asList(SpellTag.damage, SpellTag.area, SpellTag.trap))
                 .manualDesc(

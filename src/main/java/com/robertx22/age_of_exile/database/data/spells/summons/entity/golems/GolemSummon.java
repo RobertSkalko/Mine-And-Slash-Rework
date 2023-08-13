@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.spells.summons.entity.golems;
 
+import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.SpellCastContext;
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEntity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -27,14 +28,16 @@ public abstract class GolemSummon extends SummonEntity {
     @Override
     public boolean doHurtTarget(Entity pEntity) {
         if (super.doHurtTarget(pEntity)) {
-            
+
 
             if (RandomUtils.roll(5)) {
                 if (!this.level().isClientSide) {
                     if (getOwner() instanceof Player en) {
                         var spell = ExileDB.Spells().get(this.aoeSpell());
                         // todo this doesnt affect summon damage.. hm
-                        spell.cast(new SpellCastContext(en, 0, spell));
+
+                        var c = (new SpellCastContext(en, 0, spell));
+                        spell.getAttached().onCast(SpellCtx.onCast(en, c.calcData).setSourceEntity(this));
                     }
                 }
             }

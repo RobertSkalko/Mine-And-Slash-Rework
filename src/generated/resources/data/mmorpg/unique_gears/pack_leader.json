@@ -17,10 +17,16 @@
       "stat": "aura_effect"
     },
     {
+      "type": "percent",
+      "max": 15.0,
+      "min": 5.0,
+      "stat": "beast_spell_dmg"
+    },
+    {
       "type": "flat",
-      "max": 10.0,
-      "min": 3.0,
-      "stat": "max_beast_summons"
+      "max": 1.0,
+      "min": 1.0,
+      "stat": "max_total_summons"
     }
   ],
   "weight": 1000

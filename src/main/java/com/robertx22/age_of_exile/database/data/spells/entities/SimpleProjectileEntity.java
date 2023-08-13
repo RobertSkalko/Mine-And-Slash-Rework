@@ -325,17 +325,8 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
 
             if (level().isClientSide) {
                 SoundUtils.playSound(this, SoundEvents.STONE_HIT, 0.7F, 0.9F);
-            } else {
-/*
-                if (caster != null) {
-                    this.getSpellData()
-                            .getSpell()
-                            .getAttached()
-                            .tryActivate(getScoreboardName(), SpellCtx.onHit(caster, this, en, getSpellData()));
-                }
-                */
-
             }
+
         }
 
         if (entityHit != null) {

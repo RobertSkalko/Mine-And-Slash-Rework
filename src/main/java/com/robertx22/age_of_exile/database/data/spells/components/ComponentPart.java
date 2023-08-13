@@ -21,13 +21,14 @@ public class ComponentPart {
     List<ComponentPart> per_entity_hit = null;
 
     public ComponentPart addPerEntityHit(ComponentPart add) {
+
         if (per_entity_hit == null) {
             per_entity_hit = new ArrayList<>();
         }
-        this.per_entity_hit
-            .add(add);
+        this.per_entity_hit.add(add);
         return this;
     }
+
 
     public ComponentPart enemiesInRadius(Double radius) {
         targets.add(TargetSelector.AOE.enemiesInRadius(radius));
@@ -93,15 +94,15 @@ public class ComponentPart {
 
         for (MapHolder part : targets) {
             BaseTargetSelector selector = BaseTargetSelector.MAP.get(part.type);
-            List<LivingEntity> selected = selector.get(ctx, ctx.caster, ctx.target, ctx.pos, part);
+            List<LivingEntity> selected = selector.get(ctx, ctx.caster, ctx.target, ctx.getBlockPos(), part);
 
             for (MapHolder entityPredicate : en_preds) {
                 SpellEntityPredicate pred = SpellEntityPredicate.MAP.get(entityPredicate.type);
 
                 if (pred != null) {
                     selected = selected.stream()
-                        .filter(x -> pred.is(ctx, x, entityPredicate))
-                        .collect(Collectors.toList());
+                            .filter(x -> pred.is(ctx, x, entityPredicate))
+                            .collect(Collectors.toList());
                 }
             }
             list.addAll(selected);

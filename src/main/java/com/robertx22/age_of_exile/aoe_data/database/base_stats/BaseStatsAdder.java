@@ -45,6 +45,8 @@ public class BaseStatsAdder implements ExileRegistryInit {
         c.nonScaled(ManaRegen.getInstance(), 2);
         c.nonScaled(EnergyRegen.getInstance(), 2);
 
+        c.nonScaled(Stats.MAX_SUMMON_CAPACITY.get(), 3);
+
         // why did i add this again? I think its a must
         c.nonScaled(Stats.CRIT_CHANCE.get(), 1);
         c.nonScaled(Stats.CRIT_DAMAGE.get(), 1);
