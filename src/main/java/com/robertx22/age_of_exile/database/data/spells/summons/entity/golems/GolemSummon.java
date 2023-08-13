@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.spells.summons.entity.golems;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.SpellCastContext;
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEntity;
+import com.robertx22.age_of_exile.database.data.stats.types.summon.GolemSpellChance;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -25,17 +26,16 @@ public abstract class GolemSummon extends SummonEntity {
         super(pEntityType, pLevel);
     }
 
+
     @Override
     public boolean doHurtTarget(Entity pEntity) {
         if (super.doHurtTarget(pEntity)) {
-
-
-            if (RandomUtils.roll(5)) {
-                if (!this.level().isClientSide) {
-                    if (getOwner() instanceof Player en) {
+            if (!this.level().isClientSide) {
+                if (getOwner() instanceof Player en) {
+                    int chance = (int) (5 + Load.Unit(en).getUnit().getCalculatedStat(GolemSpellChance.getInstance()).getValue());
+                    if (RandomUtils.roll(chance)) {
                         var spell = ExileDB.Spells().get(this.aoeSpell());
                         // todo this doesnt affect summon damage.. hm
-
                         var c = (new SpellCastContext(en, 0, spell));
                         spell.getAttached().onCast(SpellCtx.onCast(en, c.calcData).setSourceEntity(this));
                     }

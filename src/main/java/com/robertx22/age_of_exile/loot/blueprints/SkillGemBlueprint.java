@@ -19,9 +19,7 @@ public class SkillGemBlueprint extends ItemBlueprint {
     SkillGemData.SkillGemType type;
 
 
-    @Override
-    ItemStack generate() {
-
+    public SkillGemData createData() {
         GearRarity rar = rarity.get();
 
 
@@ -42,7 +40,14 @@ public class SkillGemBlueprint extends ItemBlueprint {
         data.type = type;
         data.rar = rar.GUID();
         data.perc = rar.skill_gem_percents.random();
+        
+        return data;
+    }
 
+    @Override
+    ItemStack generate() {
+
+        var data = createData();
 
         ItemStack stack = data.getItem().getDefaultInstance();
 

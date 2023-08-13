@@ -36,6 +36,7 @@ public class RoomList {
 
 
             new IceTempleRoomAdder().addAllRooms();
+            new WarpedRoomAdder().addAllRooms();
             //new SpiderNestRoomAdder().addAllRooms();
             new AllRoomAdder().addAllRooms();
 

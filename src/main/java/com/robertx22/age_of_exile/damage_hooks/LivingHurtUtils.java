@@ -4,7 +4,6 @@ import com.robertx22.age_of_exile.a_libraries.curios.MyCurioUtils;
 import com.robertx22.age_of_exile.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.damage_hooks.util.DmgSourceUtils;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,7 +16,7 @@ public class LivingHurtUtils {
 
 
     public static int getItemDamage(float dmg) {
-        return (int) Mth.clamp(dmg / 10F, 1, 4);
+        return 1; // todo lets reduce the dmg jewelry takes(int) Mth.clamp(dmg / 10F, 1, 4);
     }
 
     public static void damageCurioItems(LivingEntity en, float dmg) {

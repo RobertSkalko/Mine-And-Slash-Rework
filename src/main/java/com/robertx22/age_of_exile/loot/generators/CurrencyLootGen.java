@@ -37,6 +37,7 @@ public class CurrencyLootGen extends BaseLootGen<ItemBlueprint> {
     @Override
     public ItemStack generateOne() {
 
+        
         LootCrateData data = new LootCrateData();
         data.type = LootType.Currency;
         data.tier = info.tier;

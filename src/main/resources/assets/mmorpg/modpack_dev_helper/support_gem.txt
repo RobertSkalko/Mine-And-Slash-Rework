@@ -1,27 +1,26 @@
 These are all default registry entries of this type.
 This registry can't be modified or added to.
-physical_damage
-ailment_damage_less_hit_dmg
-lightning_damage
-summon_duration
-mana_saver_dmg
-poison_chance
-melee_damage
-cold_damage
-rare_mana_eff
 electrify_chance
 spell_damage_no_crit
 freeze_chance
+physical_damage
+ailment_damage_less_hit_dmg
+lightning_damage
 dot_damage
 crit_damage
 ranged_damage
 bleed_chance
+summon_duration
 chaos_damage
 summon_damage
-projectile_totem
+mana_saver_dmg
+poison_chance
+melee_damage
 fire_damage
+cold_damage
 spell_damage
 burn_chance
 rare_cooldown
+rare_mana_eff
 crit_dmg_less_non_crit_dmg
 crit_chance

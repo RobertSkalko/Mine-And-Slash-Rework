@@ -135,6 +135,7 @@ public class RangerSpells implements ExileRegistryInit {
                 .build();
 
 
+        // todo does this do anything?
         SpellBuilder.of(ARROW_STORM, PlayStyle.DEX, SpellConfiguration.Builder.arrowSpell(20, 20 * 25), "Arrow Storm",
                         Arrays.asList(SpellTag.projectile, SpellTag.damage))
                 .weaponReq(CastingWeapon.RANGED)

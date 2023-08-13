@@ -19,7 +19,6 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.Arrays;
@@ -66,7 +65,7 @@ public class WaterSpells implements ExileRegistryInit {
                 .onExpire("block", PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
                 .build();
 
-        SpellBuilder.of(CHILLING_FIELD, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 60)
+        SpellBuilder.of(CHILLING_FIELD, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 30)
                                 .setSwingArm(), "Chilling Field",
                         Arrays.asList(SpellTag.damage, SpellTag.area))
                 .weaponReq(CastingWeapon.ANY_WEAPON)
@@ -106,17 +105,6 @@ public class WaterSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.healInAoe(SpellCalcs.HEART_OF_ICE, 5D))
                 .build();
 
-        SpellBuilder.of(WATER_BREATH, PlayStyle.INT, SpellConfiguration.Builder.instant(10, 60 * 20 * 5)
-                        ,
-                        "Water Breathing",
-                        Arrays.asList())
-                .manualDesc(
-                        "Give Water Breathing to allies around you.")
-
-                .onCast(PartBuilder.playSound(SoundEvents.PLAYER_SPLASH, 1D, 1D))
-                .onCast(PartBuilder.aoeParticles(ParticleTypes.FALLING_WATER, 100D, 3D))
-                .onCast(PartBuilder.giveEffectToAlliesInRadius(MobEffects.WATER_BREATHING, 20D * 60D * 3, 5D))
-                .build();
 
         SpellBuilder.of(MAGE_CIRCLE, PlayStyle.INT, SpellConfiguration.Builder.instant(10, 20 * 45)
                         , "Mage Circle", Arrays.asList(SpellTag.movement))

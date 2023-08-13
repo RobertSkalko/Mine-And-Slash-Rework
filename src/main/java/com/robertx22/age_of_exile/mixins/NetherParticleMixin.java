@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.mixins;
 
+import com.robertx22.age_of_exile.uncommon.STATICS;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.level.biome.AmbientParticleSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
@@ -18,10 +19,9 @@ public class NetherParticleMixin {
     @Inject(method = "getAmbientParticleSettings", at = @At(value = "HEAD"), cancellable = true)
     private void hookonStackInserted(CallbackInfoReturnable<Optional<AmbientParticleSettings>> cir) {
         try {
-            if (true) {
+            if (STATICS.NETHER_PARTICLES) {
                 cir.setReturnValue(OPT);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }

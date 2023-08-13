@@ -29,7 +29,7 @@ public class SpellCalcs {
             .spellScaling(0.25F, 0.5F)
             .build();
     public static ValueCalculation LIGHTNING_SPEAR = ValueCalcBuilder.of("lightning_spear")
-            .spellScaling(0.5F, 1F)
+            .spellScaling(0.75F, 1.25F)
             .build();
 
 

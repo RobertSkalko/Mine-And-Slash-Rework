@@ -83,7 +83,7 @@
               "map": {
                 "motion": "None",
                 "particle_count": 100.0,
-                "particle_type": "minecraft:item_slime",
+                "particle_type": "minecraft:electric_spark",
                 "radius": 1.0
               }
             }
@@ -124,7 +124,7 @@
               "map": {
                 "motion": "None",
                 "particle_count": 25.0,
-                "particle_type": "minecraft:sneeze",
+                "particle_type": "minecraft:electric_spark",
                 "radius": 1.0
               }
             }

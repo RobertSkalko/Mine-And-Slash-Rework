@@ -32,6 +32,8 @@ public abstract class RoomGroup implements IWeighted {
     public static NetherGroup NETHER = new NetherGroup();
     public static SewersGroup SEWERS = new SewersGroup();
     public static WideNatureRoom WIDE_NATURE = new WideNatureRoom();
+    public static WarpedGroup WARPED = new WarpedGroup();
+
     //public static SpiderNestGroup SPIDER_NEST = new SpiderNestGroup();
 
 
@@ -56,6 +58,7 @@ public abstract class RoomGroup implements IWeighted {
             all.add(NETHER);
             all.add(SEWERS);
             all.add(WIDE_NATURE);
+            all.add(WARPED);
 
 
             all.add(ICE_TEMPLE);

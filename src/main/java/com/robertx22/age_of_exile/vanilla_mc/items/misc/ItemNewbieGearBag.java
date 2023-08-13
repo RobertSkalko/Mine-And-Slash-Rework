@@ -1,12 +1,19 @@
 package com.robertx22.age_of_exile.vanilla_mc.items.misc;
 
 import com.robertx22.age_of_exile.aoe_data.database.gear_slots.GearSlots;
+import com.robertx22.age_of_exile.aoe_data.database.spells.schools.BasicAttackSpells;
+import com.robertx22.age_of_exile.aoe_data.database.spells.schools.RangerSpells;
+import com.robertx22.age_of_exile.aoe_data.database.spells.schools.WaterSpells;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
+import com.robertx22.age_of_exile.loot.blueprints.SkillGemBlueprint;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
+import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import net.minecraft.network.chat.Component;
@@ -38,6 +45,7 @@ public class ItemNewbieGearBag extends Item {
 
     static HashMap<String, NewbieContent> MAP = new HashMap<>();
     static NewbieContent defaultContent = new NewbieContent(Arrays.asList(GearSlots.STAFF, GearSlots.SWORD, GearSlots.BOW));
+    static List<String> spells = Arrays.asList(BasicAttackSpells.FIREBALL_ID, WaterSpells.TIDAL_STRIKE, RangerSpells.CHARGED_BOLT);
 
     static {
     }
@@ -70,9 +78,24 @@ public class ItemNewbieGearBag extends Item {
             return this;
         }
 
+        
         public void give(Player player) {
 
+            // todo if i create a choose gui, give players a choice of 1 spell
             // items.forEach(x -> PlayerUtils.giveItem(new ItemStack(x.get()), player));
+            for (String s : spells) {
+                SkillGemBlueprint b = new SkillGemBlueprint(LootInfo.ofLevel(1), SkillGemData.SkillGemType.SKILL);
+                b.level.set(1);
+
+                var data = b.createData();
+                data.id = s;
+
+                ItemStack stack = data.getItem().getDefaultInstance();
+                StackSaving.SKILL_GEM.saveTo(stack, data);
+
+                PlayerUtils.giveItem(stack, player);
+            }
+
 
             gearslots.forEach(x -> {
                 BaseGearType gear = ExileDB.GearTypes()

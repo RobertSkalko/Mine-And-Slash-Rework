@@ -24,8 +24,7 @@ public class MobHordeProcessor extends DataProcessor {
 
         EntityType<? extends Mob> type = SpawnedMob.random(data.getRoom()).type;
 
-        int amount = RandomUtils.RandomRange(4, 7); // add variability
-
+        int amount = RandomUtils.RandomRange(4, 8); // add variability
 
         MobBuilder.of(type, x -> {
             x.amount = amount;

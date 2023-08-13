@@ -171,7 +171,7 @@
     "charge_name": "",
     "charge_regen": 0,
     "charges": 0,
-    "cooldown_ticks": 1200,
+    "cooldown_ticks": 600,
     "imbues": 0,
     "mana_cost": {
       "max": 30.0,

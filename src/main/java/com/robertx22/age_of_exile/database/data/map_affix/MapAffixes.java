@@ -24,7 +24,7 @@ public class MapAffixes {
         for (Elements element : elements) {
 
             // mobs
-            new MapAffix(element.guidName + "_atk").addMod(new StatMod(2, 6, new BonusAttackDamage(element))).registerToExileRegistry();
+            new MapAffix(element.guidName + "_atk").addMod(new StatMod(1, 3, new BonusAttackDamage(element))).registerToExileRegistry();
             new MapAffix(element.guidName + "_res").addMod(new StatMod(20, 60, new ElementalResist(element))).registerToExileRegistry();
 
             // players

@@ -136,7 +136,7 @@ public class MapData {
 
     public static BlockPos getDungeonStartTeleportPos(ChunkPos pos) {
         BlockPos p = getStartChunk(pos).getBlockAt(0, 0, 0);
-        p = new BlockPos(p.getX() + 8, 60, p.getZ() + 8);
+        p = new BlockPos(p.getX() + 8, 57, p.getZ() + 8);
         return p;
 
     }

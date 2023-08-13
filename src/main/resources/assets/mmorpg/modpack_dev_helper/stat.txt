@@ -25,6 +25,7 @@ bleed_duration
 weapon_damage
 str_dmg
 trap_spell_dmg
+golem_spell_chance
 arrow_cdr
 burn_proc_chance
 spell_all_damage
@@ -255,7 +256,6 @@ cd_ticks
 total_damage
 immobilizing_eff_dur_u_cast
 heal_over_time_eff_duration
-projectile_totem
 staff_spell_spell_dmg
 elemental_resist
 health_regen_per_10_intelligence

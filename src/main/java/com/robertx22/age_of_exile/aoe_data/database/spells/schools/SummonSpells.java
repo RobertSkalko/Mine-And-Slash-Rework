@@ -68,7 +68,7 @@ public class SummonSpells implements ExileRegistryInit {
 
         SpellBuilder.of("return_summons", PlayStyle.STR, SpellConfiguration.Builder.instant(15, 20 * 30), "Return Summons",
                         Arrays.asList(SpellTag.area, SpellTag.heal))
-                .manualDesc("Summons your pets and heals them for " + SpellCalcs.HEALING_AURA + " health")
+                .manualDesc("Summons your pets and heals them for " + SpellCalcs.HEALING_AURA.getLocDmgTooltip() + " health")
                 .onCast(PartBuilder.playSound(SoundEvents.ANVIL_HIT, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.TP_TARGET_TO_SELF.create())
                         .addActions(SpellAction.POTION.createGive(MobEffects.MOVEMENT_SLOWDOWN, 20D * 5))

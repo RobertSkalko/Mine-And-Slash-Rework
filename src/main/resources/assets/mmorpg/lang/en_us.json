@@ -311,7 +311,6 @@
 	"mmorpg.spell.tidal_strike": "Tidal Strike",
 	"mmorpg.spell.undying_will": "Undying Will",
 	"mmorpg.spell.vamp_blood": "Vampiric Blood",
-	"mmorpg.spell.water_breath": "Water Breathing",
 	"mmorpg.spell.whirlwind": "Whirlwind",
 	"mmorpg.spell.wish": "Wish",
 	"mmorpg.support_gem.ailment_damage_less_hit_dmg": "Ailment Damage Support Gem",
@@ -331,7 +330,6 @@
 	"mmorpg.support_gem.melee_damage": "Melee Damage Support Gem",
 	"mmorpg.support_gem.physical_damage": "Physical Damage Support Gem",
 	"mmorpg.support_gem.poison_chance": "Poison Chance Support Gem",
-	"mmorpg.support_gem.projectile_totem": "Projectile Totem Support Gem",
 	"mmorpg.support_gem.ranged_damage": "Ranged Damage Support Gem",
 	"mmorpg.support_gem.rare_cooldown": "Greater Cooldown Support Gem",
 	"mmorpg.support_gem.rare_mana_eff": "Greater Mana Cost Support Gem",
@@ -493,7 +491,6 @@
 	"mmorpg.one_of_a_kind.tidal_strike_mod": "Tidal Strike Modifier",
 	"mmorpg.one_of_a_kind.undying_will_mod": "Undying Will Modifier",
 	"mmorpg.one_of_a_kind.vamp_blood_mod": "Vampiric Blood Modifier",
-	"mmorpg.one_of_a_kind.water_breath_mod": "Water Breathing Modifier",
 	"mmorpg.one_of_a_kind.whirlwind_mod": "Whirlwind Modifier",
 	"mmorpg.one_of_a_kind.wish_mod": "Wish Modifier",
 
@@ -515,6 +512,15 @@
 	"mmorpg.rarity.gear.unique": "Unique",
 
 "_comment": " [CATEGORY]: RARITIES - NAMES",
+
+
+"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
+
+	"item.mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
+	"item.mmorpg.currency.orb_of_linking": "Orb of Linking",
+	"item.mmorpg.currency.socket_adder": "Orb of Digging",
+
+"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
 
 
 "_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
@@ -552,15 +558,6 @@
 	"mmorpg.ailment.poison": "Poison",
 
 "_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
-
-
-"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
-
-	"item.mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
-	"item.mmorpg.currency.orb_of_linking": "Orb of Linking",
-	"item.mmorpg.currency.socket_adder": "Orb of Digging",
-
-"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
 
 
 "_comment": " [CATEGORY]: TALENTS - NAMES",
@@ -1134,6 +1131,7 @@
 	"mmorpg.stat.give_taunt_stance_to_self_on_tick": "§7Give Taunt Stance to self",
 	"mmorpg.stat.golem_cdr": "Golem Spell Cooldown Reduction",
 	"mmorpg.stat.golem_damage": "Golem Damage",
+	"mmorpg.stat.golem_spell_chance": "Golem Spell Chance",
 	"mmorpg.stat.golem_spell_dmg": "Golem Damage",
 	"mmorpg.stat.heal_cdr": "Heal Spell Cooldown Reduction",
 	"mmorpg.stat.heal_cleanse": "§7Your §e❁ Heal Spells §7have a §a[VAL1]§7% chance to cleanse a negative effect.",
@@ -1240,7 +1238,6 @@
 	"mmorpg.stat.projectile_cdr": "Projectile Spell Cooldown Reduction",
 	"mmorpg.stat.projectile_damage": "Projectile Damage",
 	"mmorpg.stat.projectile_spell_dmg": "Projectile Damage",
-	"mmorpg.stat.projectile_totem": "Projectile Totem",
 	"mmorpg.stat.shield_cdr": "Shield Spell Cooldown Reduction",
 	"mmorpg.stat.shield_spell_dmg": "Shield Damage",
 	"mmorpg.stat.shout_cdr": "Shout Spell Cooldown Reduction",
@@ -1298,6 +1295,41 @@
 "_comment": " [CATEGORY]: STATS - NAMES",
 
 
+"_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
+
+	"mmorpg.unique_gear.air_disaster.name": "Aria of Disaster",
+	"mmorpg.unique_gear.arch_gamble.name": "The Arch-Gamble",
+	"mmorpg.unique_gear.autumn_harvest.name": "Autumn Harvest",
+	"mmorpg.unique_gear.azuna_ring.name": "Azuna's Eternal Decree",
+	"mmorpg.unique_gear.bone_shatterer.name": "Bone Shatterer",
+	"mmorpg.unique_gear.bulwark.name": "Bulwark",
+	"mmorpg.unique_gear.burning_desire.name": "Burning Desire",
+	"mmorpg.unique_gear.critical_impossibility.name": "Critical Impossibility",
+	"mmorpg.unique_gear.crystalized_capacitor.name": "Crystalized Capacitor",
+	"mmorpg.unique_gear.divine_frost.name": "Divine Frost",
+	"mmorpg.unique_gear.ele_gamble.name": "Gamble of the Elements",
+	"mmorpg.unique_gear.futility_of_suffering.name": "Futility of Suffering",
+	"mmorpg.unique_gear.ghast_necklace.name": "Ghast Tear",
+	"mmorpg.unique_gear.ghostly_shores.name": "Ghostly Shores",
+	"mmorpg.unique_gear.golemancer.name": "Golemancer",
+	"mmorpg.unique_gear.heavenly_tear.name": "Heavenly Tear",
+	"mmorpg.unique_gear.insight.name": "Insight",
+	"mmorpg.unique_gear.madness_pursuit.name": "Pursuit of Madness",
+	"mmorpg.unique_gear.mana_dominion.name": "Dominion of Mana",
+	"mmorpg.unique_gear.new_dawn_flame.name": "Flame of new Dawn",
+	"mmorpg.unique_gear.omni_vamp.name": "Omnidirectional Vampire",
+	"mmorpg.unique_gear.pack_leader.name": "Leader of the Pack",
+	"mmorpg.unique_gear.playful_hope.name": "Playful Hope",
+	"mmorpg.unique_gear.rabbit_paw.name": "Rabbit's Paw",
+	"mmorpg.unique_gear.skull_of_spirits.name": "Skull of Spirits",
+	"mmorpg.unique_gear.spring_blossoms.name": "Spring Blossoms",
+	"mmorpg.unique_gear.summer_heat.name": "Summer Heat",
+	"mmorpg.unique_gear.winter_chill.name": "Winter Chill",
+	"mmorpg.unique_gear.witch_brew.name": "Witch's Brew",
+
+"_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
+
+
 "_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
 
 	"mmorpg.gear_type.bow": "Bow",
@@ -1332,40 +1364,6 @@
 	"mmorpg.gearslot.sword": "Sword",
 
 "_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
-
-
-"_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
-
-	"mmorpg.unique_gear.air_disaster.name": "Aria of Disaster",
-	"mmorpg.unique_gear.arch_gamble.name": "The Arch-Gamble",
-	"mmorpg.unique_gear.autumn_harvest.name": "Autumn Harvest",
-	"mmorpg.unique_gear.azuna_ring.name": "Azuna's Eternal Decree",
-	"mmorpg.unique_gear.bone_shatterer.name": "Bone Shatterer",
-	"mmorpg.unique_gear.bulwark.name": "Bulwark",
-	"mmorpg.unique_gear.burning_desire.name": "Burning Desire",
-	"mmorpg.unique_gear.critical_impossibility.name": "Critical Impossibility",
-	"mmorpg.unique_gear.crystalized_capacitor.name": "Crystalized Capacitor",
-	"mmorpg.unique_gear.divine_frost.name": "Divine Frost",
-	"mmorpg.unique_gear.ele_gamble.name": "Gamble of the Elements",
-	"mmorpg.unique_gear.futility_of_suffering.name": "Futility of Suffering",
-	"mmorpg.unique_gear.ghast_necklace.name": "Ghast Tear",
-	"mmorpg.unique_gear.ghostly_shores.name": "Ghostly Shores",
-	"mmorpg.unique_gear.heavenly_tear.name": "Heavenly Tear",
-	"mmorpg.unique_gear.insight.name": "Insight",
-	"mmorpg.unique_gear.madness_pursuit.name": "Pursuit of Madness",
-	"mmorpg.unique_gear.mana_dominion.name": "Dominion of Mana",
-	"mmorpg.unique_gear.new_dawn_flame.name": "Flame of new Dawn",
-	"mmorpg.unique_gear.omni_vamp.name": "Omnidirectional Vampire",
-	"mmorpg.unique_gear.pack_leader.name": "Leader of the Pack",
-	"mmorpg.unique_gear.playful_hope.name": "Playful Hope",
-	"mmorpg.unique_gear.rabbit_paw.name": "Rabbit's Paw",
-	"mmorpg.unique_gear.skull_of_spirits.name": "Skull of Spirits",
-	"mmorpg.unique_gear.spring_blossoms.name": "Spring Blossoms",
-	"mmorpg.unique_gear.summer_heat.name": "Summer Heat",
-	"mmorpg.unique_gear.winter_chill.name": "Winter Chill",
-	"mmorpg.unique_gear.witch_brew.name": "Witch's Brew",
-
-"_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
 
 
 "_comment": " [CATEGORY]: GEAR ITEMS - NAMES",
@@ -1454,7 +1452,7 @@
 	"spell.desc.pull": "Pull enemies in area to you, dealing [calc:pull] §6☀ Physical§7 Damage and slowing them.",
 	"spell.desc.refresh": "Refreshes all your spell cooldowns by 1 minute.",
 	"spell.desc.rejuv_totem": "Summon a totem which restores [calc:totem_heal] health to allies around it.",
-	"spell.desc.return_summons": "Summons your pets and heals them for com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation@6ed7d67 health",
+	"spell.desc.return_summons": "Summons your pets and heals them for [calc:healing_aura] health",
 	"spell.desc.shooting_star": "Shoots a star that heals allies for [calc:shooting_star] health on hit.",
 	"spell.desc.shred": "Slash all nearby enemies, dealing [calc:shred] §6☀ Physical§7 Damage damage and reducing their defenses.",
 	"spell.desc.smoke_bomb": "Throw out a smoke bomb, blinding enemies and reducing threat.",
@@ -1474,7 +1472,6 @@
 	"spell.desc.tidal_strike": "Strike enemies in front of you for [calc:tidal_strike] §b☀ Cold§7 Damage",
 	"spell.desc.undying_will": "Gives buff to self.",
 	"spell.desc.vamp_blood": "Gives effect to nearby allies.",
-	"spell.desc.water_breath": "Give Water Breathing to allies around you.",
 	"spell.desc.whirlwind": "Strike enemies around you for [calc:whirlwind] §c☀ Fire§7 Damage. Scales with attack speed.",
 	"spell.desc.wish": "Heal allies around you for [calc:healing_aura] health",
 
@@ -1574,6 +1571,7 @@
 	"mmorpg.stat_desc.gear_defense": "Modifies the gear's base stat",
 	"mmorpg.stat_desc.gear_weapon_damage": "Modifies the gear's base stat",
 	"mmorpg.stat_desc.golem_cdr": "Reduces spell cooldown of spells with the tag.",
+	"mmorpg.stat_desc.golem_spell_chance": "Bonus Chance for golems to cast their AOE nova spells",
 	"mmorpg.stat_desc.heal_cdr": "Reduces spell cooldown of spells with the tag.",
 	"mmorpg.stat_desc.heal_effect_on_self": "Increases spell related heals on you.",
 	"mmorpg.stat_desc.health": "Increases your total hearts amount.",
@@ -1613,7 +1611,6 @@
 	"mmorpg.stat_desc.proj_dmg_received": "Affects projectile damage, includes projectile spells like fireballs, and ranged basic attacks.",
 	"mmorpg.stat_desc.projectile_cdr": "Reduces spell cooldown of spells with the tag.",
 	"mmorpg.stat_desc.projectile_damage": "Affects projectile damage, includes projectile spells like fireballs, and ranged basic attacks.",
-	"mmorpg.stat_desc.projectile_totem": "Instead of casting the spell yourself, you summon a totem that uses the spell",
 	"mmorpg.stat_desc.shield_cdr": "Reduces spell cooldown of spells with the tag.",
 	"mmorpg.stat_desc.shout_cdr": "Reduces spell cooldown of spells with the tag.",
 	"mmorpg.stat_desc.song_cdr": "Reduces spell cooldown of spells with the tag.",

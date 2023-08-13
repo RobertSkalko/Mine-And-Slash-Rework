@@ -10,22 +10,20 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
 import com.robertx22.age_of_exile.uncommon.effectdatas.RestoreResourceEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.*;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.GearSoulOnInvTick;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.age_of_exile.vanilla_mc.packets.SyncAreaLevelPacket;
 import com.robertx22.age_of_exile.vanilla_mc.packets.spells.TellClientEntityIsCastingSpellPacket;
 import com.robertx22.library_of_exile.main.Packets;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
-import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public class OnServerTick {
 
@@ -34,7 +32,7 @@ public class OnServerTick {
     static {
 
 
-        TICK_ACTIONS.add(new PlayerTickAction("update_caps", 20, (player, data) -> {
+        TICK_ACTIONS.add(new PlayerTickAction("update_caps", 20, (player) -> {
             if (player.isAlive()) {
                 CapSyncUtil.syncPerSecond(player);
                 Packets.sendToClient(player, new SyncAreaLevelPacket(LevelUtils.determineLevel(player.level(), player.blockPosition(), player).level));
@@ -42,12 +40,13 @@ public class OnServerTick {
         }));
 
         TICK_ACTIONS.add(new
-                PlayerTickAction("second_pass", 20, (player, data) ->
+                PlayerTickAction("second_pass", 20, (player) ->
         {
             if (player.isAlive()) {
 
 
                 if (WorldUtils.isMapWorldClass(player.level())) {
+                   
                     if (player.tickCount % 40 == 0) {
                         if (player.getInventory().countItem(SlashItems.TP_BACK.get()) < 1) {
                             PlayerUtils.giveItem(SlashItems.TP_BACK.get().getDefaultInstance(), player);
@@ -75,7 +74,7 @@ public class OnServerTick {
 
         TICK_ACTIONS.add(new
 
-                PlayerTickAction("regen", 20, (player, data) ->
+                PlayerTickAction("regen", 20, (player) ->
 
         {
 
@@ -124,13 +123,13 @@ public class OnServerTick {
             }
         }));
 
-        TICK_ACTIONS.add(new PlayerTickAction("gear_soul_gen_in_inventory", 20, (player, data) ->
+        TICK_ACTIONS.add(new PlayerTickAction("gear_soul_gen_in_inventory", 20, (player) ->
         {
             GearSoulOnInvTick.checkAndGenerate(player);
         }));
 
         TICK_ACTIONS.add(new
-                PlayerTickAction("every_tick", 1, (player, data) ->
+                PlayerTickAction("every_tick", 1, (player) ->
         {
             if (player == null || player.isDeadOrDying()) {
                 return;
@@ -171,105 +170,44 @@ public class OnServerTick {
             }
         }));
 
-        TICK_ACTIONS.add(new
-
-                PlayerTickAction("level_warning", 200, (player, data) ->
-
-        {
-
-            if (!WorldUtils.isMapWorldClass(player.level())) {
-
-                boolean wasnt = false;
-                if (!data.isInHighLvlZone) {
-                    wasnt = true;
-                }
-
-                int lvl = Load.Unit(player)
-                        .getLevel();
-
-                if (lvl < 20) {
-                    data.isInHighLvlZone = LevelUtils.determineLevel(player.level(), player.blockPosition(), player).level - lvl > 10;
-
-                    if (wasnt && data.isInHighLvlZone) {
-                        OnScreenMessageUtils.sendMessage(
-                                player,
-                                Component.literal("YOU ARE ENTERING").withStyle(ChatFormatting.RED)
-                                        .withStyle(ChatFormatting.BOLD),
-                                Component.literal("A HIGH LEVEL ZONE").withStyle(ChatFormatting.RED)
-                                        .withStyle(ChatFormatting.BOLD));
-                    }
-                }
-            }
-        }));
 
     }
 
-    public static HashMap<UUID, PlayerTickData> PlayerTickDatas = new HashMap<UUID, PlayerTickData>();
 
-    public static void onEndTick(MinecraftServer server) {
+    public static void onEndTick(ServerPlayer player) {
+        try {
 
-        for (ServerPlayer player : server.getPlayerList()
-                .getPlayers()) {
-
-
-            try {
-
-                if (player.isAlive()) {
-
-                    PlayerTickData data = PlayerTickDatas.get(player.getUUID());
-
-                    if (data == null) {
-                        data = new PlayerTickData();
-                    }
-
-                    data.tick(player);
-
-                    PlayerTickDatas.put(player.getUUID(), data);
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (player.isAlive()) {
+                TICK_ACTIONS.forEach(x -> {
+                    x.tick(player);
+                });
             }
 
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+
     }
 
-    public static class PlayerTickData {
-
-        HashMap<String, Integer> ticks = new HashMap<>();
-
-        public boolean isInHighLvlZone = false;
-
-        public void tick(ServerPlayer player) {
-            TICK_ACTIONS.forEach(x -> {
-                x.tick(player, this);
-
-            });
-        }
-    }
 
     public static class PlayerTickAction {
 
         public final String name;
         public final int ticksNeeded;
-        private final BiConsumer<ServerPlayer, PlayerTickData> action;
+        private final Consumer<ServerPlayer> action;
 
-        public PlayerTickAction(String name, int ticksNeeded, BiConsumer<ServerPlayer, PlayerTickData> action) {
+        public PlayerTickAction(String name, int ticksNeeded, Consumer<ServerPlayer> action) {
             this.ticksNeeded = ticksNeeded;
             this.name = name;
             this.action = action;
         }
 
-        public void tick(ServerPlayer player, PlayerTickData data) {
-            int ticks = data.ticks.getOrDefault(name, 0);
-            ticks++;
-
+        public void tick(ServerPlayer player) {
+            int ticks = player.tickCount;
             if (ticks % ticksNeeded == 0) {
-                ticks = 0;
-                action.accept(player, data);
+                action.accept(player);
             }
-            data.ticks.put(name, ticks);
-
         }
 
     }

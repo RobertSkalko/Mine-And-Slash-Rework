@@ -40,9 +40,9 @@ public class ElementalistPerks implements ExileRegistryInit {
         PerkBuilder.ascPoint(COLD_NOVICE, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Cold), ModType.FLAT));
         PerkBuilder.ascPoint(LIGHTNING_NOVICE, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Lightning), ModType.FLAT));
 
-        PerkBuilder.ascPoint(FIRE_APPRENTICE, new OptScaleExactStat(10, new AilmentChance(Ailments.BURN), ModType.FLAT));
-        PerkBuilder.ascPoint(COLD_APPRENTICE, new OptScaleExactStat(10, new AilmentChance(Ailments.FREEZE), ModType.FLAT));
-        PerkBuilder.ascPoint(LIGHTNING_APPRENTICE, new OptScaleExactStat(10, new AilmentChance(Ailments.ELECTRIFY), ModType.FLAT));
+        PerkBuilder.ascPoint(FIRE_APPRENTICE, new OptScaleExactStat(20, new AilmentChance(Ailments.BURN), ModType.FLAT));
+        PerkBuilder.ascPoint(COLD_APPRENTICE, new OptScaleExactStat(20, new AilmentChance(Ailments.FREEZE), ModType.FLAT));
+        PerkBuilder.ascPoint(LIGHTNING_APPRENTICE, new OptScaleExactStat(20, new AilmentChance(Ailments.ELECTRIFY), ModType.FLAT));
 
         PerkBuilder.ascPoint(FIRE_EXPERT, new OptScaleExactStat(15, new ElementalPenetration(Elements.Fire), ModType.FLAT));
         PerkBuilder.ascPoint(COLD_EXPERT, new OptScaleExactStat(15, new ElementalPenetration(Elements.Cold), ModType.FLAT));

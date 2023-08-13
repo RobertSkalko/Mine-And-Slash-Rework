@@ -18,6 +18,7 @@ import com.robertx22.age_of_exile.mixin_methods.OnItemInteract;
 import com.robertx22.age_of_exile.mixin_methods.OnItemStoppedUsingCastImbuedSpell;
 import com.robertx22.age_of_exile.mmorpg.ForgeEvents;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
+import com.robertx22.age_of_exile.uncommon.STATICS;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.error_checks.base.ErrorChecks;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.Cached;
@@ -31,13 +32,15 @@ import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.server.ServerLifecycleHooks;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.ArrayList;
@@ -80,9 +83,49 @@ public class CommonEvents {
             OnMobSpawn.onLoad(event.getEntity());
         });
 
-        ForgeEvents.registerForgeEvent(TickEvent.ServerTickEvent.class, event -> {
-            if (event.phase == TickEvent.Phase.END) {
-                OnServerTick.onEndTick(ServerLifecycleHooks.getCurrentServer());
+
+        ForgeEvents.registerForgeEvent(LivingEvent.LivingTickEvent.class, event -> {
+            if (event.getEntity() instanceof Player player) {
+                if (player.level().isClientSide) {
+                    if (player.tickCount % 100 == 0) {
+
+                        boolean bool = false;
+                        if (WorldUtils.isMapWorldClass(player.level())) {
+                            var map = Load.mapAt(player.level(), player.blockPosition());
+
+                            if (map != null && map.netherParticles) {
+                                bool = true;
+                            }
+                        }
+                        STATICS.NETHER_PARTICLES = bool;
+
+                    }
+                }
+            }
+        });
+
+        ForgeEvents.registerForgeEvent(EntityItemPickupEvent.class, event -> {
+            if (event.getEntity() instanceof ServerPlayer player) {
+                if (!player.level().isClientSide) {
+                    ItemStack stack = event.getItem().getItem();
+                    if (!stack.isEmpty()) {
+
+                        if (!player.level().isClientSide) {
+                            if (Load.playerRPGData(player).config.salvage.trySalvageOnPickup(player, stack)) {
+                                stack.shrink(100);
+                            } else {
+                                Load.backpacks(player).getBackpacks().tryAutoPickup(stack);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        ForgeEvents.registerForgeEvent(LivingEvent.LivingTickEvent.class, event -> {
+            if (event.getEntity() instanceof ServerPlayer p) {
+                if (!p.level().isClientSide) {
+                    OnServerTick.onEndTick(p);
+                }
             }
         });
 

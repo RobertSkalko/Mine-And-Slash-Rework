@@ -33,6 +33,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCostReduction;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
+import com.robertx22.age_of_exile.database.data.stats.types.summon.GolemSpellChance;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.IGenerated;
@@ -63,6 +64,8 @@ public class StatsRegister implements ExileRegistryInit {
                         add(new AilmentProcStat(ailment));
                     }
 
+                    add(GolemSpellChance.getInstance());
+                    
                     add(GearDefense.getInstance());
                     add(GearDamage.getInstance());
 
@@ -78,7 +81,7 @@ public class StatsRegister implements ExileRegistryInit {
                     add(AuraCostReduction.getInstance());
                     add(AuraEffect.getInstance());
 
-                
+
                     add(WeaponDamage.getInstance());
 
                     add(FullSwingDamage.getInstance());

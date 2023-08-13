@@ -24,9 +24,9 @@ public class LightningSpells implements ExileRegistryInit {
     public void registerAll() {
 
 
-        SpellBuilder.of("lightning_spear", PlayStyle.INT, SpellConfiguration.Builder.instant(5, 20 * 10)
+        SpellBuilder.of("lightning_spear", PlayStyle.INT, SpellConfiguration.Builder.instant(5, 20 * 5)
                                 .setSwingArm()
-                                .setChargesAndRegen("lightning_spear", 3, 20 * 10)
+                                .setChargesAndRegen("lightning_spear", 3, 20 * 5)
                                 .applyCastSpeedToCooldown(), "Lightning Spear",
                         Arrays.asList(SpellTag.projectile, SpellTag.damage))
                 .manualDesc(
