@@ -228,11 +228,16 @@ public class TooltipUtils {
                         .withStyle(rarity.textFormatting()));
     }
 
-    public static MutableComponent gearLevel(int lvl) {
+    public static MutableComponent gearLevel(int lvl, int playerlvl) {
+
+        ChatFormatting color = ChatFormatting.YELLOW;
+        if (lvl > playerlvl) {
+            color = ChatFormatting.RED;
+        }
         return Component.literal("Level: ")
-                .withStyle(ChatFormatting.YELLOW)
+                .withStyle(color)
                 .append(Component.literal(lvl + "")
-                        .withStyle(ChatFormatting.YELLOW));
+                        .withStyle(color));
     }
 
 

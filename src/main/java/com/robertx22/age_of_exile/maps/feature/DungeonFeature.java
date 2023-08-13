@@ -1,10 +1,9 @@
 package com.robertx22.age_of_exile.maps.feature;
 
+import com.robertx22.age_of_exile.maps.MapData;
 import com.robertx22.age_of_exile.maps.generator.BuiltRoom;
 import com.robertx22.age_of_exile.maps.generator.DungeonBuilder;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelAccessor;
@@ -15,47 +14,11 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlac
 
 public class DungeonFeature {
 
-
-    /*
-    public static int placeFeature(ServerLevel serverlevel, BlockPos pPos) throws CommandSyntaxException {
-
-        ResourceKey<ConfiguredFeature<?, ?>> resourcekey = ResourceKey.create(Registries.CONFIGURED_FEATURE, WorldUtils.DUNGEON_DIM_ID);
-        var key = getRegistry(serverlevel).getHolder(resourcekey).orElseThrow(() -> {
-            return null;
-        });
-        ConfiguredFeature<?, ?> configuredfeature = key.value();
-        ChunkPos chunkpos = new ChunkPos(pPos);
-        checkLoaded(serverlevel, new ChunkPos(chunkpos.x - 1, chunkpos.z - 1), new ChunkPos(chunkpos.x + 1, chunkpos.z + 1));
-        if (!configuredfeature.place(serverlevel, serverlevel.getChunkSource().getGenerator(), serverlevel.getRandom(), pPos)) {
-            //throw ERROR_FEATURE_FAILED.create();
-        } else {
-            return 1;
-        }
-        return 0;
+    public static boolean place(MapData mapData, LevelAccessor level, RandomSource rand, BlockPos pos) {
+        return generateStructure(mapData, level, new ChunkPos(pos), rand);
     }
 
-    private static void checkLoaded(ServerLevel pLevel, ChunkPos pStart, ChunkPos pEnd) throws CommandSyntaxException {
-        if (ChunkPos.rangeClosed(pStart, pEnd).filter((p_214542_) -> {
-            return !pLevel.isLoaded(p_214542_.getWorldPosition());
-        }).findAny().isPresent()) {
-            throw BlockPosArgument.ERROR_NOT_LOADED.create();
-        }
-    }
-
-     */
-
-    public static boolean place(LevelAccessor level, RandomSource rand, BlockPos pos) {
-
-        // todo
-        if (level.registryAccess().registry(Registries.DIMENSION_TYPE).get().getKey(level.dimensionType()).equals(WorldUtils.DUNGEON_DIM_ID)) {
-            return generateStructure(level, new ChunkPos(pos), rand);
-        }
-
-
-        return false;
-    }
-
-    private static boolean generateStructure(LevelAccessor world, ChunkPos cpos, RandomSource random) {
+    private static boolean generateStructure(MapData mapData, LevelAccessor world, ChunkPos cpos, RandomSource random) {
 
 
         DungeonBuilder builder = new DungeonBuilder(0, cpos);
@@ -63,6 +26,17 @@ public class DungeonFeature {
 
         if (!builder.dungeon.hasRoomForChunk(cpos)) {
             return false;
+        }
+
+        var bpos = cpos.getMiddleBlockPosition(50);
+
+        ChunkPos start = MapData.getStartChunk(bpos);
+
+        // if its the start of the dungeon, we init some stuff
+        if (cpos.equals(start)) {
+            if (builder.group.netherParticles) {
+                mapData.netherParticles = true;
+            }
         }
 
         BuiltRoom room = builder.dungeon.getRoomForChunk(cpos);

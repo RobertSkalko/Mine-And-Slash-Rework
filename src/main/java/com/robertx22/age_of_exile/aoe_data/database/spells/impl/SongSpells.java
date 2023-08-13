@@ -26,14 +26,18 @@ public class SongSpells implements ExileRegistryInit {
         SpellBuilder.of("power_chord", PlayStyle.INT, SpellConfiguration.Builder.instant(7, 15)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Power Chord",
-                        Arrays.asList(SpellTag.projectile, SpellTag.damage))
+                        Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.song))
+                .manualDesc(
+                        "Throw out a ball of music, dealing " + SpellCalcs.POWER_CHORD.getLocDmgTooltip()
+                                + " " + Elements.Physical.getIconNameDmg())
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.SNOWBALL_THROW, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.AIR, 1D, 1D, SlashEntities.SIMPLE_PROJECTILE.get(), 20D, false)))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.NOTE, 2D, 0.15D))
-                .onExpire(PartBuilder.damageInAoe(SpellCalcs.POWER_CHORD, Elements.Elemental, 1.5D)
+                .onExpire(PartBuilder.damageInAoe(SpellCalcs.POWER_CHORD, Elements.Physical, 1.5D)
                         .addActions(SpellAction.EXILE_EFFECT.giveSeconds(NegativeEffects.CHARM, 6)))
-                .onHit(PartBuilder.aoeParticles(ParticleTypes.ENCHANTED_HIT, 10D, 1D))
+                .onExpire(PartBuilder.aoeParticles(ParticleTypes.ENCHANTED_HIT, 10D, 1D))
+                .onExpire(PartBuilder.aoeParticles(ParticleTypes.NOTE, 20D, 1D))
                 .build();
     }
 }

@@ -1,7 +1,7 @@
 {
   "affixes": 2,
   "boss": false,
-  "dmg_multi": 2.0,
+  "dmg_multi": 3.0,
   "exp_multi": 4.0,
   "extra_hp_multi": 5.0,
   "guid": "champ",

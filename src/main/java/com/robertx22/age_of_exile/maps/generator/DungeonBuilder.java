@@ -43,7 +43,7 @@ public class DungeonBuilder {
     public final Random rand;
     public int size;
     public boolean isTesting = false;
-    RoomGroup group;
+    public RoomGroup group;
     public int maxBossRooms = 1;
 
     public void build() {

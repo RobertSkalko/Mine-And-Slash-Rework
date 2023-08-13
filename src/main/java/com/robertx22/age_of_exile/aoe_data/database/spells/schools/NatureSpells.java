@@ -96,7 +96,7 @@ public class NatureSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTag.heal))
                 .manualDesc("Gives buff to allies nearby:")
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
-                .onCast(PartBuilder.giveExileEffectToAlliesInRadius(3D, BeneficialEffects.REGENERATE.resourcePath, 20 * 15D))
+                .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, BeneficialEffects.REGENERATE.resourcePath, 20 * 15D))
                 .build();
 
         SpellBuilder.of(ENTANGLE_SEED, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 60 * 20)

@@ -28,6 +28,9 @@ public class SpellCalcs {
     public static ValueCalculation FIREBALL = ValueCalcBuilder.of("fireball")
             .spellScaling(0.25F, 0.5F)
             .build();
+    public static ValueCalculation LIGHTNING_SPEAR = ValueCalcBuilder.of("lightning_spear")
+            .spellScaling(0.5F, 1F)
+            .build();
 
 
     public static ValueCalculation PETRIFY = ValueCalcBuilder.of("petrify")
@@ -125,7 +128,7 @@ public class SpellCalcs {
             .build();
 
     public static ValueCalculation POISON_CLOUD = ValueCalcBuilder.of("poison_cloud")
-            .spellScaling(0.2F, 0.4F)
+            .spellScaling(1, 2)
             .build();
 
     public static ValueCalculation SHOUT_WARN = ValueCalcBuilder.of("shout_warn")

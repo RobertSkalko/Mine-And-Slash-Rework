@@ -20,11 +20,14 @@ public class MapData {
     public MapItemData map = new MapItemData();
     public String playerUuid = "";
 
+    public boolean netherParticles = false;
+
     public int chunkX = 0;
     public int chunkZ = 0;
 
 
     public static MapData newMap(Player p, MapItemData map, MapsData maps) {
+
 
         maps.deleteOldMap(p);
 

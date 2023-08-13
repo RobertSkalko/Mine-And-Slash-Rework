@@ -8,17 +8,16 @@ import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.LootType;
 import net.minecraft.world.item.ItemStack;
 
-public class SkillGemLootGen extends BaseLootGen<GearBlueprint> {
+public class SuppGemLootGen extends BaseLootGen<GearBlueprint> {
 
-    public SkillGemLootGen(LootInfo info) {
+    public SuppGemLootGen(LootInfo info) {
         super(info);
 
     }
 
     @Override
     public float baseDropChance() {
-        return (float) (ServerContainer.get().SKILL_GEM_DROPRATE.get()
-                .floatValue());
+        return (float) (ServerContainer.get().SUPP_GEM_DROPRATE.get().floatValue());
     }
 
     @Override
@@ -28,12 +27,12 @@ public class SkillGemLootGen extends BaseLootGen<GearBlueprint> {
 
     @Override
     public boolean condition() {
-        return true;
+        return info.level > 5;
     }
 
     @Override
     public ItemStack generateOne() {
-        SkillGemBlueprint blueprint = new SkillGemBlueprint(info, SkillGemData.SkillGemType.SKILL);
+        SkillGemBlueprint blueprint = new SkillGemBlueprint(info, SkillGemData.SkillGemType.SUPPORT);
         return blueprint.createStack();
     }
 

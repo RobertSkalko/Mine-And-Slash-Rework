@@ -46,7 +46,7 @@
             "type": "aoe",
             "map": {
               "en_predicate": "allies",
-              "radius": 3.0,
+              "radius": 5.0,
               "selection_type": "RADIUS"
             }
           }

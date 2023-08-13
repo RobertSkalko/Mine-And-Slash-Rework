@@ -56,7 +56,7 @@ public class GiveSupport {
             }
         }
         for (int i = 0; i < amount; i++) {
-            SkillGemBlueprint blueprint = new SkillGemBlueprint(LootInfo.ofLevel(lvl));
+            SkillGemBlueprint blueprint = new SkillGemBlueprint(LootInfo.ofLevel(lvl), SkillGemData.SkillGemType.SUPPORT);
             blueprint.level.set(lvl);
 
             if (ExileDB.GearRarities()

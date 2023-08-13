@@ -121,7 +121,7 @@ public class GearTooltipUtils {
 
         tip.add(Component.literal(""));
 
-        MutableComponent lvl = TooltipUtils.gearLevel(gear.lvl);
+        MutableComponent lvl = TooltipUtils.gearLevel(gear.lvl, Load.Unit(info.player).getLevel());
 
         tip.add(lvl);
         TooltipUtils.addRequirements(tip, gear.getLevel(), gear.getRequirement(), Load.Unit(info.player));

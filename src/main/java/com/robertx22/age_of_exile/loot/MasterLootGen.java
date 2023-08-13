@@ -75,6 +75,9 @@ public class MasterLootGen {
             items.addAll(new SoulLootGen(info).tryGenerate());
 
             items.addAll(new SkillGemLootGen(info).tryGenerate());
+            items.addAll(new AuraGemLootGen(info).tryGenerate());
+            items.addAll(new SuppGemLootGen(info).tryGenerate());
+
             items.addAll(new BackpackLootGen(info).tryGenerate());
             items.addAll(new CurrencyLootGen(info).tryGenerate());
             items.addAll(new MapLootGen(info).tryGenerate());

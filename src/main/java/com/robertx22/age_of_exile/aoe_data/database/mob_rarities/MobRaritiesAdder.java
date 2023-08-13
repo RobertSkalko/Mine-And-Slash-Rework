@@ -51,7 +51,7 @@ public class MobRaritiesAdder implements ExileRegistryInit {
         champ.affixes = 2;
         champ.stat_multi = 3.5F;
         champ.min_lvl = 15;
-        champ.dmg_multi = 2;
+        champ.dmg_multi = 3;
         champ.extra_hp_multi = 5f;
         champ.exp_multi = 4F;
         champ.loot_multi = 4F;
@@ -70,7 +70,7 @@ public class MobRaritiesAdder implements ExileRegistryInit {
         boss.affixes = 2;
         boss.stat_multi = 3.75F;
         boss.min_lvl = 20;
-        boss.dmg_multi = 3F;
+        boss.dmg_multi = 5F;
         boss.extra_hp_multi = 10f;
         boss.exp_multi = 10F;
         boss.loot_multi = 6F;

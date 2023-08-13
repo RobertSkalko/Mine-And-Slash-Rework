@@ -32,7 +32,7 @@
 "block.mmorpg.modify_station": "Gear Modify Station",
 "block.mmorpg.repair_station": "Gear Repair Station",
 "block.mmorpg.socket_station": "Socketing Station",
-"block.mmorpg.salvage_station": "Salvaging Station",
+"block.mmorpg.teleporter": "Map Device",
 
 "_comment": "ITEM TOOLTIPS",
 "mmorpg.tooltip.item_modifiable_in_station": "Can be used inside Gear Modify Station",

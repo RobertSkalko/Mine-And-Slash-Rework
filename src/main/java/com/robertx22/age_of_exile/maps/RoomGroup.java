@@ -75,8 +75,12 @@ public abstract class RoomGroup implements IWeighted {
     public String folder;
     int weight;
     public boolean canBeMainTheme = true;
+
     public boolean canSpawnFireMobs = false;
     public int chanceForOtherGroups = 20;
+
+
+    public boolean netherParticles = false;
 
     public final boolean hasRoomFor(RoomType type) {
         return type.getAllOfThisTypeRooms()

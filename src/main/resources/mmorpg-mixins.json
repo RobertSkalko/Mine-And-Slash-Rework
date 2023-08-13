@@ -16,6 +16,7 @@
     "StopFireInDungeonMixin"
   ],
   "client": [
+    "NetherParticleMixin",
     "MixinServerWorldInfo",
     "ItemGlintMixin",
     "ItemStackMixin",

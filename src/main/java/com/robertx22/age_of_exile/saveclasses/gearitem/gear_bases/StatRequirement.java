@@ -62,9 +62,7 @@ public class StatRequirement {
 
             int num = getReq(x, lvl);
 
-            if (num > data.getUnit()
-                    .getCalculatedStat(x)
-                    .getValue()) {
+            if (num > data.getUnit().getCalculatedStat(x).getValue()) {
                 return false;
             }
 

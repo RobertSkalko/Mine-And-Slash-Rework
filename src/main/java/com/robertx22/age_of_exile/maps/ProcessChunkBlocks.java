@@ -52,7 +52,9 @@ public class ProcessChunkBlocks {
 
                 ChunkPos start = new ChunkPos(pos);
 
-                if (!mapdata.map.getMap(start).isPresent()) {
+                var opt = mapdata.map.getMap(start);
+
+                if (!opt.isPresent()) {
                     return;
                 }
 
@@ -82,7 +84,7 @@ public class ProcessChunkBlocks {
                         if (!chunkdata.generated) {
                             chunkdata.generated = true;
 
-                            DungeonFeature.place(level, level.getRandom(), cpos.getBlockAt(0, 0, 0));
+                            DungeonFeature.place(opt.get(), level, level.getRandom(), cpos.getBlockAt(0, 0, 0));
 
                             DungeonBuilder builder = new DungeonBuilder(0, cpos);
                             builder.build();
@@ -100,7 +102,7 @@ public class ProcessChunkBlocks {
 
 
                                     boolean any = false;
-                                    
+
 
                                     // todo make this work on either signs or these blocks
 

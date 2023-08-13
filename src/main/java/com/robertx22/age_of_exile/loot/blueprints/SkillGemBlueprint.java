@@ -6,27 +6,23 @@ import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.bases.GearRarityPart;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.Arrays;
-
 public class SkillGemBlueprint extends ItemBlueprint {
-    public SkillGemBlueprint(LootInfo info) {
+    public SkillGemBlueprint(LootInfo info, SkillGemData.SkillGemType type) {
         super(info);
         this.rarity.setupChances(info);
+        this.type = type;
     }
 
     public GearRarityPart rarity = new GearRarityPart(this);
+    SkillGemData.SkillGemType type;
 
 
     @Override
     ItemStack generate() {
 
         GearRarity rar = rarity.get();
-
-
-        SkillGemData.SkillGemType type = RandomUtils.weightedRandom(Arrays.stream(SkillGemData.SkillGemType.values()).toList());
 
 
         String id = "";

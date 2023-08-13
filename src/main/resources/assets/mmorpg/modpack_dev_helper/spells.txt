@@ -8,6 +8,7 @@ healing_aura
 song_of_valor
 chilling_field
 close_nova
+lightning_spear
 wish
 whirlwind
 curse_of_despair

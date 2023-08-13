@@ -56,7 +56,7 @@ public class GiveSpell {
             }
         }
         for (int i = 0; i < amount; i++) {
-            SkillGemBlueprint blueprint = new SkillGemBlueprint(LootInfo.ofLevel(lvl));
+            SkillGemBlueprint blueprint = new SkillGemBlueprint(LootInfo.ofLevel(lvl), SkillGemData.SkillGemType.SKILL);
             blueprint.level.set(lvl);
 
             if (ExileDB.GearRarities()
@@ -64,7 +64,7 @@ public class GiveSpell {
                 blueprint.rarity.set(ExileDB.GearRarities()
                         .get(rarity));
             }
-            
+
 
             if (!type.equals("random")) {
 

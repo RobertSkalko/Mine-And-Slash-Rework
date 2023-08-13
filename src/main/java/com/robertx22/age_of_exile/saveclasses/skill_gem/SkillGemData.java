@@ -99,19 +99,10 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
     public int links = 1;
 
 
-    public enum SkillGemType implements IWeighted {
-        SKILL(1000), SUPPORT(1000), AURA(500);
+    public enum SkillGemType {
+        SKILL(), SUPPORT(), AURA();
 
-        int w;
 
-        SkillGemType(int w) {
-            this.w = w;
-        }
-
-        @Override
-        public int Weight() {
-            return w;
-        }
     }
 
 

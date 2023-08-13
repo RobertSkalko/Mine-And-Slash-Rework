@@ -48,8 +48,10 @@ public class OnServerTick {
 
 
                 if (WorldUtils.isMapWorldClass(player.level())) {
-                    if (player.getInventory().countItem(SlashItems.TP_BACK.get()) < 1) {
-                        PlayerUtils.giveItem(SlashItems.TP_BACK.get().getDefaultInstance(), player);
+                    if (player.tickCount % 40 == 0) {
+                        if (player.getInventory().countItem(SlashItems.TP_BACK.get()) < 1) {
+                            PlayerUtils.giveItem(SlashItems.TP_BACK.get().getDefaultInstance(), player);
+                        }
                     }
                 }
 
@@ -82,7 +84,7 @@ public class OnServerTick {
 
                 EntityData unitdata = Load.Unit(player);
 
-            
+
                 unitdata.tryRecalculateStats();
 
                 RestoreResourceEvent mana = EventBuilder.ofRestore(player, player, ResourceType.mana, RestoreType.regen, 0)
