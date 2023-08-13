@@ -38,13 +38,13 @@
     {
       "type": "FLAT",
       "max": 20.0,
-      "min": -10.0,
+      "min": 10.0,
       "stat": "str_dmg_received"
     },
     {
       "type": "FLAT",
       "max": 20.0,
-      "min": -10.0,
+      "min": 10.0,
       "stat": "dex_dmg_received"
     },
     {

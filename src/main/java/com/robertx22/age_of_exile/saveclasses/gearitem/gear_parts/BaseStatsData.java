@@ -12,7 +12,6 @@ import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartTooltip {
@@ -41,7 +40,7 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
     public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {
 
 
-        List<ExactStatData> all = getBaseItemStats(gear);
+        List<ExactStatData> all = GetAllStats(gear);
 
 
         info.statTooltipType = StatTooltipType.BASE_LOCAL_STATS;
@@ -102,7 +101,8 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
         return true;
     }
 
-    public List<ExactStatData> getBaseItemStats(GearItemData affixStats) {
+    @Override
+    public List<ExactStatData> GetAllStats(GearItemData affixStats) {
 
         List<ExactStatData> baseStats = new ArrayList<>();
 
@@ -114,12 +114,13 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
 
             }
 
+
             for (IStatsContainer affixStat : affixStats.GetAllStatContainersExceptBase()) {
                 for (ExactStatData affixStatData : affixStat.GetAllStats(affixStats)) {
                     if (affixStatData.getStat() instanceof IBaseStatModifier mod) {
                         for (ExactStatData baseStat : baseStats) {
                             if (mod.canModifyBaseStat(baseStat.getStat())) {
-                                if (baseStat.getType() == ModType.FLAT) {
+                                if (affixStatData.getType() == ModType.FLAT) {
                                     baseStat.add(ExactStatData.noScaling(affixStatData.getAverageValue(), ModType.FLAT, baseStat.getStatId()));
                                 }
                             }
@@ -154,12 +155,16 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
         return baseStats;
     }
 
+    /*
     @Override
     public List<ExactStatData> GetAllStats(GearItemData gear) {
+
         return getBaseItemStats(gear).stream().map(x -> ExactStatData.noScaling(x.getFirstValue(), x.getType(), x.getStatId())).collect(Collectors.toList());
 
     }
 
+
+     */
     @Override
     public Part getPart() {
         return Part.BASE_STATS;

@@ -125,16 +125,15 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         addTo(StatType.RESOURCE, Arrays.asList(Health.getInstance(), MagicShield.getInstance(), Mana.getInstance(), Energy.getInstance(), HealthRegen.getInstance(), MagicShieldRegen.getInstance(), ManaRegen.getInstance(), EnergyRegen.getInstance()));
 
         addTo(StatType.DEFENSE, Arrays.asList(Armor.getInstance(), DodgeRating.getInstance()));
-        addTo(StatType.DEFENSE, new ElementalResist(Elements.Elemental).generateAllPossibleStatVariations());
+        addTo(StatType.DEFENSE, new ElementalResist(Elements.Elemental).generateAllSingleVariations());
 
         addTo(StatType.DAMAGE, Arrays.asList(WeaponDamage.getInstance()));
         addTo(StatType.DAMAGE, Arrays.asList(Stats.CRIT_CHANCE.get(), Stats.CRIT_DAMAGE.get()));
         addTo(StatType.DAMAGE, Stats.ELEMENTAL_SPELL_DAMAGE.getAll());
         addTo(StatType.DAMAGE, Stats.ELEMENTAL_DAMAGE.getAll());
-        addTo(StatType.DAMAGE, new ElementalPenetration(Elements.Elemental).generateAllPossibleStatVariations());
+        addTo(StatType.DAMAGE, new ElementalPenetration(Elements.Elemental).generateAllSingleVariations());
 
         addRemaining(StatType.MISC);
-
 
     }
 

@@ -15,6 +15,7 @@ public class MobHordeProcessor extends DataProcessor {
     public MobHordeProcessor() {
         super("mob_horde");
         this.detectIds.add("pack");
+        this.detectIds.add("trader"); // todo for old unused trader stuff
     }
 
 

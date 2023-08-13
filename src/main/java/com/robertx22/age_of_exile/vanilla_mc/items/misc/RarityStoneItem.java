@@ -1,13 +1,10 @@
 package com.robertx22.age_of_exile.vanilla_mc.items.misc;
 
-import com.robertx22.age_of_exile.database.data.currency.base.IShapelessRecipe;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.registry.IWeighted;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -18,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
-public class RarityStoneItem extends Item implements IWeighted, IShapelessRecipe {
+public class RarityStoneItem extends Item implements IWeighted {
 
     String name;
     public int rarTier;
@@ -58,23 +55,4 @@ public class RarityStoneItem extends Item implements IWeighted, IShapelessRecipe
     }
 
 
-    @Override
-    public ShapelessRecipeBuilder getRecipe() {
-        // de-craft recipe into lower tiers
-        if (rarTier < 1) {
-            return null;
-        }
-
-        Item output = RarityItems.RARITY_STONE.values()
-                .stream()
-                .filter(x -> x.get().rarTier == rarTier - 1)
-                .findAny()
-                .get()
-                .get();
-
-        return ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, output, 3)
-                .requires(this, 1)
-                .unlockedBy("player_level", trigger());
-
-    }
 }

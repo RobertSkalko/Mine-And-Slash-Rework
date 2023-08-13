@@ -31,8 +31,9 @@ public class WeaponFinderUtil {
                             gear = StackSaving.GEARS.loadFrom(attempt);
                             if (gear != null) {
                                 if (gear.GetBaseGearType().isWeapon()) {
-                                    if (Load.Unit(source).getLevel() >= gear.getLevel())
+                                    if (Load.Unit(source).getLevel() >= gear.getLevel()) {
                                         return attempt;
+                                    }
                                 }
                             }
 

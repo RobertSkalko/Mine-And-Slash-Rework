@@ -13,8 +13,7 @@ public class ElementMatchesStat extends StatCondition {
 
     @Override
     public boolean can(EffectEvent event, EffectSides statSource, StatData data, Stat stat) {
-        return event.data.getElement()
-            .elementsMatch(stat.getElement());
+        return event.data.getElement().elementsMatch(stat.getElement());
     }
 
     @Override

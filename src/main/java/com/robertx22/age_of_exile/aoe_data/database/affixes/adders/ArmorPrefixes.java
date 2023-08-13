@@ -47,11 +47,11 @@ public class ArmorPrefixes implements ExileRegistryInit {
         stats.add(MS);
         stats.add(DODGE);
 
-      
+
         for (TYPE type : stats) {
             AffixBuilder.Normal("item_flat_" + type.suffix)
                     .Named(type.name)
-                    .stats(new StatMod(3 * type.flatMulti, 8 * type.flatMulti, type.stat, ModType.FLAT))
+                    .stats(new StatMod(10, 50, type.stat, ModType.FLAT))
                     .includesTags(type.tag)
                     .Prefix()
                     .Build();
@@ -66,8 +66,7 @@ public class ArmorPrefixes implements ExileRegistryInit {
 
             AffixBuilder.Normal("item_both_" + type.suffix)
                     .Named(type.name)
-                    .stats(new StatMod(2 * type.flatMulti, 4 * type.flatMulti, type.stat, ModType.FLAT),
-                            new StatMod(5, 30, type.stat, ModType.PERCENT))
+                    .stats(new StatMod(10, 50, type.stat, ModType.PERCENT))
                     .includesTags(type.tag)
                     .Prefix()
                     .Build();

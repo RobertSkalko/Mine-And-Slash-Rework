@@ -224,6 +224,7 @@ public class Unit {
             DirtyCheck old = getDirtyCheck();
 
             List<StatContext> statContexts = new ArrayList<>();
+            
 
             statContexts.addAll(CommonStatUtils.addExactCustomStats(entity));
             statContexts.add(data.getStatusEffectsData().getStats(entity));
@@ -298,7 +299,7 @@ public class Unit {
             });
             stats.calculate();
 
-            
+
             DirtyCheck aftercalc = getDirtyCheck();
 
             Cached.VANILLA_STAT_UIDS_TO_CLEAR_EVERY_STAT_CALC.forEach(x -> {

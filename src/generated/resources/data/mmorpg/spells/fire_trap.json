@@ -176,7 +176,7 @@
     "apply_cast_speed_to_cd": false,
     "cast_time_ticks": 0,
     "castingWeapon": "ANY_WEAPON",
-    "charge_name": "trap",
+    "charge_name": "fire_trap",
     "charge_regen": 600,
     "charges": 3,
     "cooldown_ticks": 20,

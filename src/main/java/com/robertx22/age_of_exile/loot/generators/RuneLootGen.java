@@ -27,7 +27,7 @@ public class RuneLootGen extends BaseLootGen<GearBlueprint> {
 
     @Override
     public boolean condition() {
-        return true;
+        return this.info.level > 10;
     }
 
     @Override

@@ -18,7 +18,7 @@ public class WeaponPrefixes implements ExileRegistryInit {
 
         AffixBuilder.Normal("wep_item_flat")
                 .Named("Deadly")
-                .stats(new StatMod(1, 6, GearDamage.getInstance(), ModType.FLAT))
+                .stats(new StatMod(10, 50, GearDamage.getInstance(), ModType.PERCENT))
                 .includesTags(SlotTag.weapon_family)
                 .Prefix()
                 .Build();

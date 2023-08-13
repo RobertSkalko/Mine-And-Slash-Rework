@@ -108,7 +108,7 @@ public class ExactStatData implements ISerializable<ExactStatData>, ITooltipList
 
     public void increaseByAddedPercent() {
 
-        v1 += v1 * (1 + percentIncrease / 100F);
+        v1 *= (1 + percentIncrease / 100F);
 
         percentIncrease = 0;
     }

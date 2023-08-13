@@ -26,7 +26,7 @@ public class BasicAttackSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
         int cd = 10;
-        int mana = 0;
+        int mana = 3;
         SpellBuilder.of(FROSTBALL_ID, PlayStyle.INT, SpellConfiguration.Builder.instant(mana, cd)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Ice Ball",

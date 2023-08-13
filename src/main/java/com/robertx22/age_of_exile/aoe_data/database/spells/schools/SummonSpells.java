@@ -86,7 +86,7 @@ public class SummonSpells implements ExileRegistryInit {
                                 .setSwingArm(), "Chilling Touch",
                         Arrays.asList(SpellTag.area, SpellTag.damage))
                 .manualDesc("Strike enemies in front for " +
-                        SpellCalcs.CHILLING_TOUCH.getLocDmgTooltip(Elements.Cold))
+                        SpellCalcs.CHILLING_TOUCH.getLocDmgTooltip(Elements.Cold) + " and command your summons to attack them.")
                 .onCast(PartBuilder.playSound(SoundEvents.FIRE_EXTINGUISH, 1D, 1D))
                 .onCast(PartBuilder.swordSweepParticles())
                 .onCast(PartBuilder.damageInFront(SpellCalcs.CHILLING_TOUCH, Elements.Cold, 2D, 3D)

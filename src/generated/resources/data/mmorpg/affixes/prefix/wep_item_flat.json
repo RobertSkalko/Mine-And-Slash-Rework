@@ -14,9 +14,9 @@
   },
   "stats": [
     {
-      "type": "FLAT",
-      "max": 6.0,
-      "min": 1.0,
+      "type": "PERCENT",
+      "max": 50.0,
+      "min": 10.0,
       "stat": "gear_weapon_damage"
     }
   ],

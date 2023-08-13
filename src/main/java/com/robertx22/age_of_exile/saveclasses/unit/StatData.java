@@ -33,7 +33,7 @@ public class StatData {
 
     private String id = "";
     private float v1 = 0;
-    private float m = 0;
+    private float m = 1;
 
     /*
     public String toSerializationString() {
@@ -54,12 +54,14 @@ public class StatData {
     }
 
     public float getValue() {
+        
         Stat stat = GetStat();
         return Mth.clamp(v1, stat.min, stat.max);
     }
 
+
     public boolean isNotZero() {
-        return v1 != 0;
+        return v1 != 0 || this.m != 1;
     }
 
     public float getMultiplier() {

@@ -5,12 +5,10 @@ import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
-import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
-import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.VanillaMaterial;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -28,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class ItemNewbieGearBag extends Item {
@@ -38,9 +35,9 @@ public class ItemNewbieGearBag extends Item {
 
     }
 
+
     static HashMap<String, NewbieContent> MAP = new HashMap<>();
-    static NewbieContent defaultContent = new NewbieContent(Arrays.asList(() -> SlashItems.GearItems.STAFFS.get(VanillaMaterial.IRON)
-            .get()), Arrays.asList(GearSlots.STAFF));
+    static NewbieContent defaultContent = new NewbieContent(Arrays.asList(GearSlots.STAFF, GearSlots.SWORD, GearSlots.BOW));
 
     static {
     }
@@ -60,13 +57,11 @@ public class ItemNewbieGearBag extends Item {
     static class NewbieContent {
 
         public List<String> gearslots;
-        public List<Supplier<Item>> items;
 
         public List<ItemStack> stacks = new ArrayList<>();
 
-        public NewbieContent(List<Supplier<Item>> items, List<String> gearslots) {
+        public NewbieContent(List<String> gearslots) {
             this.gearslots = gearslots;
-            this.items = items;
 
         }
 
@@ -77,7 +72,7 @@ public class ItemNewbieGearBag extends Item {
 
         public void give(Player player) {
 
-            items.forEach(x -> PlayerUtils.giveItem(new ItemStack(x.get()), player));
+            // items.forEach(x -> PlayerUtils.giveItem(new ItemStack(x.get()), player));
 
             gearslots.forEach(x -> {
                 BaseGearType gear = ExileDB.GearTypes()

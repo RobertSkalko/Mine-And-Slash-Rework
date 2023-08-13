@@ -81,8 +81,8 @@ public class NegativeEffects implements ExileRegistryInit {
 
         ExileEffectBuilder.of(CURSE_AGONY)
                 .maxStacks(1)
-                .stat(-10, 20, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.STR))
-                .stat(-10, 20, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.DEX))
+                .stat(10, 20, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.STR))
+                .stat(10, 20, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.DEX))
                 .stat(5, 10, DatapackStats.MOVE_SPEED)
 
                 .spell(SpellBuilder.forEffect()
@@ -108,7 +108,7 @@ public class NegativeEffects implements ExileRegistryInit {
         ExileEffectBuilder.of(DESPAIR)
                 .maxStacks(1)
                 .stat(-15, -25, new ElementalResist(Elements.Chaos))
-                
+
                 .spell(SpellBuilder.forEffect()
                         .onTick(PartBuilder.aoeParticles(ParticleTypes.WITCH, 2D, 0.5D)
                                 .onTick(20D))

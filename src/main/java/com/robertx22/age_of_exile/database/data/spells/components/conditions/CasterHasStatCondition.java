@@ -20,12 +20,11 @@ public class CasterHasStatCondition extends EffectCondition {
     public boolean canActivate(SpellCtx ctx, MapHolder data) {
 
         MarkerStat mod = (MarkerStat) ExileDB.Stats()
-            .get(data.get(MapField.SPELL_MODIFIER));
+                .get(data.get(MapField.SPELL_MODIFIER));
 
         return Load.Unit(ctx.caster)
-            .getUnit()
-            .getCalculatedStat(mod)
-            .isNotZero();
+                .getUnit()
+                .getCalculatedStat(mod).getValue() > 0;
 
     }
 

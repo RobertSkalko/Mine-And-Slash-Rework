@@ -15,8 +15,8 @@
   "stats": [
     {
       "type": "FLAT",
-      "max": 2.0,
-      "min": 0.75,
+      "max": 50.0,
+      "min": 10.0,
       "stat": "gear_defense"
     }
   ],
