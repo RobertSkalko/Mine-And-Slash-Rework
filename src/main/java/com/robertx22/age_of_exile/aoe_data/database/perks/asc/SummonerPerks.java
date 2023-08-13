@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.perks.asc;
 
 import com.robertx22.age_of_exile.aoe_data.database.perks.PerkBuilder;
-import com.robertx22.age_of_exile.aoe_data.database.spells.SummonType;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
 import com.robertx22.age_of_exile.database.data.spells.SpellTag;
@@ -41,7 +40,7 @@ public class SummonerPerks implements ExileRegistryInit {
         PerkBuilder.ascPoint(TOTEM_4, new OptScaleExactStat(25, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.totem), ModType.MORE));
 
         PerkBuilder.ascPoint(GOLEM_1, new OptScaleExactStat(25, Stats.GOLEM_DAMAGE.get(), ModType.FLAT));
-        PerkBuilder.ascPoint(GOLEM_2, new OptScaleExactStat(2, Stats.MAX_SUMMONS.get(SummonType.GOLEM), ModType.FLAT));
+        PerkBuilder.ascPoint(GOLEM_2, new OptScaleExactStat(1, Stats.MAX_SUMMON_CAPACITY.get(), ModType.FLAT));
         PerkBuilder.ascPoint(GOLEM_3, new OptScaleExactStat(50, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTag.golem), ModType.FLAT));
         PerkBuilder.ascPoint(GOLEM_4, new OptScaleExactStat(25, Stats.GOLEM_DAMAGE.get(), ModType.MORE));
 

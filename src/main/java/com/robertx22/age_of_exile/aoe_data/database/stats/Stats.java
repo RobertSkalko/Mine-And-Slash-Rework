@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.aoe_data.database.stats;
 
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.BeneficialEffects;
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.NegativeEffects;
-import com.robertx22.age_of_exile.aoe_data.database.spells.SummonType;
 import com.robertx22.age_of_exile.aoe_data.database.stat_conditions.StatConditions;
 import com.robertx22.age_of_exile.aoe_data.database.stat_effects.StatEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.*;
@@ -171,6 +170,7 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
+    /*
     public static DataPackStatAccessor<SummonType> MAX_SUMMONS = DatapackStatBuilder
             .<SummonType>of(x -> "max_" + x.id + "_summons", x -> Elements.All)
             .addAllOfType(SummonType.values())
@@ -190,18 +190,20 @@ public class Stats implements ExileRegistryInit {
             }).
             build();
 
+     */
+
     public static DataPackStatAccessor MAX_SUMMON_CAPACITY = DatapackStatBuilder
             .ofSingle("max_total_summons", Elements.All)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)
             .addEffect(StatEffects.ADD_TOTAL_SUMMONS)
-            .setLocName(x -> "Maximum Summon Capacity")
-            .setLocDesc(x -> "Say you have 3 max zombies, and 3 total max summons. +1 Total summons wouldn't allow you to summon an extra zombie until you got a +1 Max zombie summons. But you could summon an extra wolf or other type of summon.")
+            .setLocName(x -> "Maximum Summons")
+            .setLocDesc(x -> "You can summon more minions.")
             .modifyAfterDone(x ->
             {
                 x.is_perc = false;
-                x.base = 0;
+                x.base = 3;
                 x.min = -100;
                 x.max = 10;
             }).

@@ -105,7 +105,7 @@ public class SpellCalcs {
             .attackScaling(0.4F, 0.75F)
             .build();
     public static ValueCalculation CHILLING_TOUCH = ValueCalcBuilder.of("chilling_touch")
-            .attackScaling(0.4F, 0.75F)
+            .attackScaling(0.5F, 0.75F)
             .build();
 
     public static ValueCalculation HEALING_AURA = ValueCalcBuilder.of("healing_aura")
