@@ -1295,41 +1295,6 @@
 "_comment": " [CATEGORY]: STATS - NAMES",
 
 
-"_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
-
-	"mmorpg.unique_gear.air_disaster.name": "Aria of Disaster",
-	"mmorpg.unique_gear.arch_gamble.name": "The Arch-Gamble",
-	"mmorpg.unique_gear.autumn_harvest.name": "Autumn Harvest",
-	"mmorpg.unique_gear.azuna_ring.name": "Azuna's Eternal Decree",
-	"mmorpg.unique_gear.bone_shatterer.name": "Bone Shatterer",
-	"mmorpg.unique_gear.bulwark.name": "Bulwark",
-	"mmorpg.unique_gear.burning_desire.name": "Burning Desire",
-	"mmorpg.unique_gear.critical_impossibility.name": "Critical Impossibility",
-	"mmorpg.unique_gear.crystalized_capacitor.name": "Crystalized Capacitor",
-	"mmorpg.unique_gear.divine_frost.name": "Divine Frost",
-	"mmorpg.unique_gear.ele_gamble.name": "Gamble of the Elements",
-	"mmorpg.unique_gear.futility_of_suffering.name": "Futility of Suffering",
-	"mmorpg.unique_gear.ghast_necklace.name": "Ghast Tear",
-	"mmorpg.unique_gear.ghostly_shores.name": "Ghostly Shores",
-	"mmorpg.unique_gear.golemancer.name": "Golemancer",
-	"mmorpg.unique_gear.heavenly_tear.name": "Heavenly Tear",
-	"mmorpg.unique_gear.insight.name": "Insight",
-	"mmorpg.unique_gear.madness_pursuit.name": "Pursuit of Madness",
-	"mmorpg.unique_gear.mana_dominion.name": "Dominion of Mana",
-	"mmorpg.unique_gear.new_dawn_flame.name": "Flame of new Dawn",
-	"mmorpg.unique_gear.omni_vamp.name": "Omnidirectional Vampire",
-	"mmorpg.unique_gear.pack_leader.name": "Leader of the Pack",
-	"mmorpg.unique_gear.playful_hope.name": "Playful Hope",
-	"mmorpg.unique_gear.rabbit_paw.name": "Rabbit's Paw",
-	"mmorpg.unique_gear.skull_of_spirits.name": "Skull of Spirits",
-	"mmorpg.unique_gear.spring_blossoms.name": "Spring Blossoms",
-	"mmorpg.unique_gear.summer_heat.name": "Summer Heat",
-	"mmorpg.unique_gear.winter_chill.name": "Winter Chill",
-	"mmorpg.unique_gear.witch_brew.name": "Witch's Brew",
-
-"_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
-
-
 "_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
 
 	"mmorpg.gear_type.bow": "Bow",
@@ -1364,6 +1329,41 @@
 	"mmorpg.gearslot.sword": "Sword",
 
 "_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
+
+
+"_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
+
+	"mmorpg.unique_gear.air_disaster.name": "Aria of Disaster",
+	"mmorpg.unique_gear.arch_gamble.name": "The Arch-Gamble",
+	"mmorpg.unique_gear.autumn_harvest.name": "Autumn Harvest",
+	"mmorpg.unique_gear.azuna_ring.name": "Azuna's Eternal Decree",
+	"mmorpg.unique_gear.bone_shatterer.name": "Bone Shatterer",
+	"mmorpg.unique_gear.bulwark.name": "Bulwark",
+	"mmorpg.unique_gear.burning_desire.name": "Burning Desire",
+	"mmorpg.unique_gear.critical_impossibility.name": "Critical Impossibility",
+	"mmorpg.unique_gear.crystalized_capacitor.name": "Crystalized Capacitor",
+	"mmorpg.unique_gear.divine_frost.name": "Divine Frost",
+	"mmorpg.unique_gear.ele_gamble.name": "Gamble of the Elements",
+	"mmorpg.unique_gear.futility_of_suffering.name": "Futility of Suffering",
+	"mmorpg.unique_gear.ghast_necklace.name": "Ghast Tear",
+	"mmorpg.unique_gear.ghostly_shores.name": "Ghostly Shores",
+	"mmorpg.unique_gear.golemancer.name": "Golemancer",
+	"mmorpg.unique_gear.heavenly_tear.name": "Heavenly Tear",
+	"mmorpg.unique_gear.insight.name": "Insight",
+	"mmorpg.unique_gear.madness_pursuit.name": "Pursuit of Madness",
+	"mmorpg.unique_gear.mana_dominion.name": "Dominion of Mana",
+	"mmorpg.unique_gear.new_dawn_flame.name": "Flame of new Dawn",
+	"mmorpg.unique_gear.omni_vamp.name": "Omnidirectional Vampire",
+	"mmorpg.unique_gear.pack_leader.name": "Leader of the Pack",
+	"mmorpg.unique_gear.playful_hope.name": "Playful Hope",
+	"mmorpg.unique_gear.rabbit_paw.name": "Rabbit's Paw",
+	"mmorpg.unique_gear.skull_of_spirits.name": "Skull of Spirits",
+	"mmorpg.unique_gear.spring_blossoms.name": "Spring Blossoms",
+	"mmorpg.unique_gear.summer_heat.name": "Summer Heat",
+	"mmorpg.unique_gear.winter_chill.name": "Winter Chill",
+	"mmorpg.unique_gear.witch_brew.name": "Witch's Brew",
+
+"_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
 
 
 "_comment": " [CATEGORY]: GEAR ITEMS - NAMES",

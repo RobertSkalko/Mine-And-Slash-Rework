@@ -22,11 +22,6 @@ public class DungeonRoom implements IWeighted {
         this.group = group;
     }
 
-    public DungeonRoom(ResourceLocation loc) {
-        this.loc = loc;
-        this.type = RoomType.ENTRANCE;
-        this.group = RoomGroup.MISC;
-    }
 
     public boolean canSpawnMob(SpawnedMob mob) {
         return group.canSpawnMob(mob);

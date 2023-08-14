@@ -256,7 +256,8 @@ public class Dungeon {
             });
 
         } else {
-            //System.out.println("Error, setting room that already exists!");
+            // i think the problem is when adding rooms, its not taking into account unbuilts!
+            System.out.println("Error, setting room that already exists!");
         }
     }
 

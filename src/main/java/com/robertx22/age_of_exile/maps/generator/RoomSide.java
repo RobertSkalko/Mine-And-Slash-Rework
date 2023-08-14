@@ -11,7 +11,7 @@ public enum RoomSide {
     public String debugString;
 
     public boolean canBeLinked(RoomSide side) {
-        return this == NONE || side == NONE || side == this;
+        return this == NONE || side == NONE || this == side;
     }
 
 }

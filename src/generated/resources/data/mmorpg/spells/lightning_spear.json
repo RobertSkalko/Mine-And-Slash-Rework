@@ -192,9 +192,9 @@
     "cast_time_ticks": 0,
     "castingWeapon": "MAGE_WEAPON",
     "charge_name": "lightning_spear",
-    "charge_regen": 200,
+    "charge_regen": 100,
     "charges": 3,
-    "cooldown_ticks": 200,
+    "cooldown_ticks": 100,
     "imbues": 0,
     "mana_cost": {
       "max": 5.0,

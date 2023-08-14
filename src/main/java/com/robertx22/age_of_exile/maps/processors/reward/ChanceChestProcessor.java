@@ -10,6 +10,7 @@ public class ChanceChestProcessor extends DataProcessor {
 
     public ChanceChestProcessor() {
         super("chance_chest", Type.CONTAINS);
+        this.detectIds.add("chest_chance");
     }
 
     @Override

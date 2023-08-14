@@ -176,6 +176,7 @@ public enum RoomType implements IWeighted {
 
     }
 
+    //todo i think if i let this one check all side rooms including unbuilts, it will fix the weird build bugs.
     public List<RoomRotation> getPossibleFor(UnbuiltRoom room) {
         return getRotations().stream().filter(x -> x.sides.matches(room.sides)).collect(Collectors.toList());
     }
