@@ -147,7 +147,7 @@ public class EventData {
     }
 
     public PlayStyle getStyle() {
-        return PlayStyle.valueOf(strings.getOrDefault(STYLE, PlayStyle.STR.name()));
+        return PlayStyle.fromID(strings.getOrDefault(STYLE, PlayStyle.STR.id));
     }
 
     public ExileEffect getExileEffect() {

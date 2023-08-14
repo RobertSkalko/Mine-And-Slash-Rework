@@ -24,7 +24,6 @@ song_of_perseverance
 shooting_star
 hunter_potion
 execute
-overload
 poison_cloud
 astral_totem
 draconic_blood
@@ -43,13 +42,13 @@ mage_circle
 return_summons
 summon_skeleton_army
 entangling_seed
+frost_flower
 nature_balm
 black_hole
 rejuv_totem
 lightning_nova
 test_spell
 fireball
-water_breath
 explosive_arrow
 charge
 heart_of_ice

@@ -53,9 +53,16 @@ public class EntityAilmentData {
 
         lastAttacker = caster.getStringUUID();
 
+
         dmg = dmg * ailment.damageEffectivenessMulti; // make sure this isnt done multiple times
         dmg *= Load.Unit(caster).getUnit().getCalculatedStat(eff).getMultiplier();
         dmg *= Load.Unit(target).getUnit().getCalculatedStat(res).getMultiplier();
+
+        if (ailment.isDot) {
+            // otherwise dots will add whole damage EVERY tick
+            float secmulti = 1F / ((float) ailment.durationTicks / 20F);
+            dmg *= secmulti;
+        }
 
 
         if (ailment.isDot) {

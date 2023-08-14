@@ -11,7 +11,7 @@
                 "entity_name": "trap",
                 "find_surface": true,
                 "is_falling_block": false,
-                "life_ticks": 300.0
+                "life_ticks": 600.0
               }
             }
           ],
@@ -179,7 +179,7 @@
     "charge_name": "fire_trap",
     "charge_regen": 600,
     "charges": 3,
-    "cooldown_ticks": 20,
+    "cooldown_ticks": 5,
     "imbues": 0,
     "mana_cost": {
       "max": 7.0,

@@ -69,7 +69,7 @@ public class SpellCalcs {
             .attackScaling(0.5F, 1F)
             .build();
     public static ValueCalculation RANGER_TRAP = ValueCalcBuilder.of("ranger_trap")
-            .attackScaling(0.5F, 1F)
+            .attackScaling(1, 1.5F)
             .build();
     public static ValueCalculation AWAKEN_MANA = ValueCalcBuilder.of("awaken_mana")
             .spellScaling(1, 2)
@@ -92,6 +92,9 @@ public class SpellCalcs {
             .build();
     public static ValueCalculation TIDAL_STRIKE = ValueCalcBuilder.of("tidal_strike")
             .attackScaling(0.4F, 0.75F)
+            .build();
+    public static ValueCalculation FROST_FLOWER = ValueCalcBuilder.of("flower_flower")
+            .attackScaling(0.5F, 1)
             .build();
     public static ValueCalculation FIRE_NOVA = ValueCalcBuilder.of("fire_nova")
             .spellScaling(1F, 1.5F)

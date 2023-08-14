@@ -35,9 +35,38 @@ public class WaterSpells implements ExileRegistryInit {
     public static String CHILLING_FIELD = "chilling_field";
     public static String ICE_COMET = "ice_comet";
 
+    public static String FROST_FLOWER = "frost_flower";
+
     @Override
     public void registerAll() {
 
+
+        SpellBuilder.of(FROST_FLOWER, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 60)
+                                .setSwingArm(), "Frost Flower",
+                        Arrays.asList(SpellTag.damage, SpellTag.area, SpellTag.totem))
+                .manualDesc("Summon a freezing flower that deals "
+                        + SpellCalcs.FROST_FLOWER.getLocDmgTooltip(Elements.Cold) + " every second.")
+
+                .onCast(PartBuilder.playSound(SoundEvents.GRASS_PLACE, 1D, 1D))
+
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 0D)))
+                .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(SlashBlocks.FROST_FLOWER.get(), 20D * 8)
+                        .put(MapField.ENTITY_NAME, "block")
+                        .put(MapField.BLOCK_FALL_SPEED, 0D)
+                        .put(MapField.FIND_NEAREST_SURFACE, true)
+                        .put(MapField.IS_BLOCK_FALLING, false)))
+
+                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.RAIN, 20D, 1.5D, 0.2D))
+                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.SNOWFLAKE, 5D, 1.5D, 0.2D))
+                .onTick("block", PartBuilder.playSound(SoundEvents.PLAYER_HURT_FREEZE, 1D, 1D).onTick(20D))
+
+                .onTick("block", PartBuilder.damageInAoe(SpellCalcs.TIDAL_STRIKE, Elements.Cold, 6D).onTick(20D)
+                        .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.RAIN, 75D, 1D, 0.1D))
+                        .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.SPLASH, 50D, 1D, 0.1D))
+                        .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.SNOWFLAKE, 100D, 1D, 0.1D))
+                )
+
+                .build();
 
         SpellBuilder.of(ICE_COMET, PlayStyle.INT, SpellConfiguration.Builder.instant(18, 20).setChargesAndRegen(ICE_COMET, 3, 20 * 20),
                         "Ice Comet",

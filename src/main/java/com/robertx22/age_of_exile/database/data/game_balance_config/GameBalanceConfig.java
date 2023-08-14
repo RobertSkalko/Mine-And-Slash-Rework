@@ -1,13 +1,15 @@
 package com.robertx22.age_of_exile.database.data.game_balance_config;
 
-import com.robertx22.age_of_exile.database.data.level_ranges.LevelRange;
-import com.robertx22.age_of_exile.database.registrators.LevelRanges;
+import com.robertx22.age_of_exile.database.data.game_balance_config.lvltiers.LevelTier;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.library_of_exile.registry.Database;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import org.joml.Math;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, IAutoGson<GameBalanceConfig> {
 
@@ -40,13 +42,15 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     // this is kinda cursed but will probably work
     public int getTier(int lvl) {
         if (lvl == MAX_LEVEL) {
-            return (Math.clamp(lvl - 1, 1, MAX_LEVEL)) / levels_per_tier; // we dont want to add a new tier just for max lvl
+            return (Math.clamp(lvl - 1, 0, 5)) / levels_per_tier; // we dont want to add a new tier just for max lvl
         }
         return lvl / levels_per_tier;
 
     }
 
-    public LevelRange getLevelsOfTier(int tier) {
+    public LevelTier getLevelsOfTier(int tier) {
+        return getTiers().stream().filter(x -> x.tier == tier).findFirst().get();
+/*
         float multi = tier / 5F;
         int testlvl = (int) (MAX_LEVEL * multi + 1);
 
@@ -59,9 +63,24 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
             System.out.println("tier " + tier + " cant be found");
         }
         return opt.get();
+        
+ */
 
     }
 
+
+    public List<LevelTier> getTiers() {
+        List<LevelTier> list = new ArrayList<>();
+
+        int min = 0;
+        int max = levels_per_tier;
+        for (int i = 0; i < 5; i++) {
+            list.add(new LevelTier(i, Math.clamp(min, 1, max), Math.clamp(max, 0, MAX_LEVEL)));
+        }
+
+        return list;
+
+    }
 
     @Override
     public ExileRegistryType getExileRegistryType() {

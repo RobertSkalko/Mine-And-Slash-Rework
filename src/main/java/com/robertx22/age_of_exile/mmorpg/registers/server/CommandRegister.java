@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.vanilla_mc.commands.TeamCommand;
 import com.robertx22.age_of_exile.vanilla_mc.commands.entity.GiveExp;
 import com.robertx22.age_of_exile.vanilla_mc.commands.entity.SetEntityRarity;
 import com.robertx22.age_of_exile.vanilla_mc.commands.entity.SetLevel;
+import com.robertx22.age_of_exile.vanilla_mc.commands.entity.SpawnBoss;
 import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.*;
 import com.robertx22.age_of_exile.vanilla_mc.commands.open_gui.OpenHub;
 import com.robertx22.age_of_exile.vanilla_mc.commands.reset.ResetSpellCooldowns;
@@ -32,6 +33,7 @@ public class CommandRegister {
         GiveSpell.register(dispatcher);
         GiveSupport.register(dispatcher);
         SetEntityRarity.register(dispatcher);
+        SpawnBoss.register(dispatcher);
         SetLevel.register(dispatcher);
         GiveExp.register(dispatcher);
 

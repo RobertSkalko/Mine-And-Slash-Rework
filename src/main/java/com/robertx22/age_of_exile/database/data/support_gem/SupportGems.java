@@ -122,7 +122,7 @@ public class SupportGems {
                 Arrays.asList(new StatMod(10, 25, Stats.NON_CRIT_DAMAGE.get(), ModType.MORE)
                 )).registerToExileRegistry();
 
-
+        
         // durations
 
         new SupportGem("summon_duration", "Summon Duration", PlayStyle.INT, 1.3F,

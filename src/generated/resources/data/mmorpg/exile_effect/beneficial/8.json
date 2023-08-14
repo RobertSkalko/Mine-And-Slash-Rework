@@ -7,15 +7,15 @@
   "stats": [
     {
       "type": "FLAT",
-      "max": 6.0,
-      "min": 3.0,
+      "max": 10.0,
+      "min": 5.0,
       "stat": "total_damage"
     },
     {
       "type": "FLAT",
       "max": 5.0,
       "min": 2.0,
-      "stat": "cast_speed"
+      "stat": "critical_hit"
     }
   ],
   "tags": [

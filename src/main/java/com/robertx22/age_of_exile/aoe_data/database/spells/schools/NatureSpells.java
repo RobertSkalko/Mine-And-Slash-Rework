@@ -25,9 +25,7 @@ import java.util.Arrays;
 
 public class NatureSpells implements ExileRegistryInit {
 
-    public static String THORN_ARMOR = "thorn_armor";
     public static String REFRESH = "refresh";
-    public static String POISON_WEAPONS = "poisoned_weapons";
     public static String NATURE_BALM = "nature_balm";
     public static String ENTANGLE_SEED = "entangling_seed";
     public static String POISON_CLOUD = "poison_cloud";
@@ -58,16 +56,16 @@ public class NatureSpells implements ExileRegistryInit {
                 .onTick("block", PartBuilder.playSound(SoundEvents.GRASS_BREAK, 1D, 1D).onTick(20D))
                 .build();
 
-        SpellBuilder.of(POISON_CLOUD, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 25 * 20), "Poison Cloud",
+        SpellBuilder.of(POISON_CLOUD, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 45), "Poison Cloud",
                         Arrays.asList(SpellTag.area, SpellTag.damage))
                 .manualDesc(
                         "Erupt with poisonous gas, dealing " + SpellCalcs.POISON_CLOUD.getLocDmgTooltip()
                                 + " " + Elements.Chaos.getIconNameDmg() + " to nearby enemies.")
                 .weaponReq(CastingWeapon.ANY_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.PLAYER_SPLASH_HIGH_SPEED, 0.5D, 1D))
-                .onCast(PartBuilder.groundParticles(ParticleTypes.SNEEZE, 300D, 3.5D, 0.5D))
-                .onCast(PartBuilder.groundParticles(ParticleTypes.COMPOSTER, 200D, 3.5D, 0.5D))
-                .onCast(PartBuilder.damageInAoe(SpellCalcs.POISON_CLOUD, Elements.Chaos, 3.5D)
+                .onCast(PartBuilder.groundParticles(ParticleTypes.SNEEZE, 300D, 5D, 0.2D))
+                .onCast(PartBuilder.groundParticles(ParticleTypes.COMPOSTER, 200D, 5D, 0.2D))
+                .onCast(PartBuilder.damageInAoe(SpellCalcs.POISON_CLOUD, Elements.Chaos, 5D)
                         .addPerEntityHit(PartBuilder.playSoundPerTarget(SoundEvents.GENERIC_HURT, 1D, 1D)))
                 .build();
 

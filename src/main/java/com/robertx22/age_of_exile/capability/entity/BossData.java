@@ -30,10 +30,11 @@ public class BossData {
 
         if (!spellBeingCast.isEmpty()) {
 
-            spellBeingCast = "";
             BossSpell spell = ExileDB.BossSpells().get(spellBeingCast);
+
             if (spell != null) {
                 if (castTicks < 0) {
+                    spellBeingCast = "";
                     spell.onFinish(en);
                 } else {
                     en.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 10));
@@ -57,8 +58,10 @@ public class BossData {
 
     private void starCasting(LivingEntity en) {
         this.origPos = en.blockPosition().asLong();
-        var spell = ExileDB.BossSpells().get(spellBeingCast);
-        this.spellBeingCast = RandomUtils.randomFromList(this.spells);
+
+        var id = RandomUtils.randomFromList(this.spells);
+        var spell = ExileDB.BossSpells().get(id);
+        this.spellBeingCast = id;
         this.castTicks = spell.castTicks();
         spell.onStart(en);
 

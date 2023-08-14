@@ -6,14 +6,11 @@ import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
-import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
 import com.robertx22.age_of_exile.database.data.exile_effects.EffectType;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.AggroAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
-import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
-import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
@@ -24,17 +21,12 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.effect.MobEffects;
 
 public class BeneficialEffects implements ExileRegistryInit {
 
-    public static EffectCtx ANTIDOTE = new EffectCtx("antidote", "Antidote", 1, Elements.All, EffectType.beneficial);
-    public static EffectCtx NOURISHMENT = new EffectCtx("nourishment", "Nourishment", 2, Elements.Cold, EffectType.beneficial);
     public static EffectCtx VAMPIRIC_BLOOD = new EffectCtx("vamp_blood", "Vamp Blood", 3, Elements.Fire, EffectType.beneficial);
     public static EffectCtx DRACONIC_BLOOD = new EffectCtx("draconic_blood", "Dragon Blood", 4, Elements.Fire, EffectType.beneficial);
     public static EffectCtx REGENERATE = new EffectCtx("regenerate", "Nature Balm", 5, Elements.Chaos, EffectType.beneficial);
-    public static EffectCtx DIVINE_SHIELD = new EffectCtx("divine_shield", "Divine Shield", 6, Elements.Elemental, EffectType.beneficial);
-    public static EffectCtx OVERLOAD = new EffectCtx("overload", "Overload", 7, Elements.Physical, EffectType.beneficial);
     public static EffectCtx VALOR = new EffectCtx("valor", "Valor", 8, Elements.Physical, EffectType.beneficial);
     public static EffectCtx PERSEVERANCE = new EffectCtx("perseverance", "Perseverance", 9, Elements.Physical, EffectType.beneficial);
     public static EffectCtx VIGOR = new EffectCtx("vigor", "Vigor", 10, Elements.Physical, EffectType.beneficial);
@@ -54,12 +46,6 @@ public class BeneficialEffects implements ExileRegistryInit {
 
         ExileEffectBuilder.of(VAMPIRIC_BLOOD)
                 .stat(2, 5, Stats.LIFESTEAL.get(), ModType.FLAT)
-                .maxStacks(1)
-                .addTags(EffectTags.positive)
-                .build();
-
-        ExileEffectBuilder.of(NOURISHMENT)
-                .stat(0.5F, 1, HealthRegen.getInstance(), ModType.FLAT)
                 .maxStacks(1)
                 .addTags(EffectTags.positive)
                 .build();
@@ -106,25 +92,12 @@ public class BeneficialEffects implements ExileRegistryInit {
                 .build();
 
         ExileEffectBuilder.of(VALOR)
-                .stat(3, 6, Stats.TOTAL_DAMAGE.get(), ModType.FLAT)
-                .stat(2, 5, Stats.CAST_SPEED.get(), ModType.FLAT)
+                .stat(5, 10, Stats.TOTAL_DAMAGE.get(), ModType.FLAT)
+                .stat(2, 5, Stats.CRIT_CHANCE.get(), ModType.FLAT)
                 .maxStacks(3)
                 .addTags(EffectTags.song, EffectTags.offensive)
                 .build();
 
-        ExileEffectBuilder.of(OVERLOAD)
-                .stat(-5, -10, Stats.COOLDOWN_TICKS.get(), ModType.FLAT)
-                .stat(10, 25, Stats.MANA_COST.get(), ModType.FLAT)
-                .stat(-25, -25, DatapackStats.MOVE_SPEED, ModType.FLAT)
-                .maxStacks(1)
-                .build();
-
-        ExileEffectBuilder.of(ANTIDOTE)
-                .spell(SpellBuilder.forEffect()
-                        .onTick(PartBuilder.removeSelfEffect(MobEffects.POISON)
-                                .onTick(10D))
-                        .buildForEffect())
-                .build();
 
         ExileEffectBuilder.of(REGENERATE)
                 .maxStacks(3)
@@ -136,13 +109,6 @@ public class BeneficialEffects implements ExileRegistryInit {
                         .onTick(PartBuilder.aoeParticles(ParticleTypes.HEART, 5D, 1D)
                                 .onTick(20D))
                         .buildForEffect())
-                .build();
-
-
-        ExileEffectBuilder.of(DIVINE_SHIELD)
-                .stat(10, 15, new ElementalResist(Elements.Elemental), ModType.FLAT)
-                .stat(5, 15, Armor.getInstance(), ModType.FLAT)
-                .addTags(EffectTags.defensive)
                 .build();
 
 

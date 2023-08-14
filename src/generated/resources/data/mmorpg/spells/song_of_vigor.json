@@ -8,7 +8,7 @@
             "type": "sound",
             "map": {
               "pitch": 1.0,
-              "sound": "minecraft:block.amethyst_block.chime",
+              "sound": "minecraft:entity.experience_orb.pickup",
               "volume": 1.0
             }
           }
@@ -67,7 +67,7 @@
             "type": "aoe",
             "map": {
               "en_predicate": "allies",
-              "radius": 5.0,
+              "radius": 7.0,
               "selection_type": "RADIUS"
             }
           }

@@ -24,12 +24,10 @@ public class FireSpells implements ExileRegistryInit {
     public static String FIRE_NOVA_ID = "fire_nova";
     public static String FLAME_STRIKE_ID = "flame_strike";
 
-    public static String OVERLOAD = "overload";
     public static String METEOR = "meteor";
 
     public static String VAMP_BLOOD = "vamp_blood";
     public static String DRACONIC_BLOOD = "draconic_blood";
-    public static String FLAME_WEAPON = "fire_weapon";
     public static String MAGMA_FLOWER = "magma_flower";
 
     @Override
@@ -69,12 +67,6 @@ public class FireSpells implements ExileRegistryInit {
                         .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.FLAME, 45D, 1D, 0.1D)))
                 .build();
 
-        SpellBuilder.of(OVERLOAD, PlayStyle.STR, SpellConfiguration.Builder.nonInstant(10, 60 * 20 * 3, 30), "Overload",
-                        Arrays.asList())
-                .manualDesc("Gives effect to self.")
-                .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
-                .onCast(PartBuilder.giveSelfExileEffect(BeneficialEffects.OVERLOAD.resourcePath, 20 * 10D))
-                .build();
 
         SpellBuilder.of(VAMP_BLOOD, PlayStyle.STR, SpellConfiguration.Builder.nonInstant(10, 60 * 20 * 3, 30), "Vampiric Blood",
                         Arrays.asList())

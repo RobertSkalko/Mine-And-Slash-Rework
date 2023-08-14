@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
 import java.util.Arrays;
@@ -23,6 +24,12 @@ public class SummonBlockAction extends SpellAction {
     }
 
     static int SEARCH = 10;
+
+
+    static boolean isSolid(Level level, BlockPos pos) {
+        return level.getBlockState(pos).isSolid();
+    }
+
 
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
@@ -43,7 +50,7 @@ public class SummonBlockAction extends SpellAction {
 
             while (!found && pos.getY() > 1 && SEARCH > times) {
                 times++;
-                if (ctx.world.isEmptyBlock(pos) && !ctx.world.isEmptyBlock(pos.below())) {
+                if (!isSolid(ctx.world, pos) && isSolid(ctx.world, pos.below())) {
                     found = true;
                 } else {
                     pos = pos.below();
@@ -54,7 +61,7 @@ public class SummonBlockAction extends SpellAction {
                 times = 0;
                 while (!found && pos.getY() < ctx.world.getMaxBuildHeight() && SEARCH > times) {
                     times++;
-                    if (ctx.world.isEmptyBlock(pos) && !ctx.world.isEmptyBlock(pos.below())) {
+                    if (!isSolid(ctx.world, pos) && isSolid(ctx.world, pos.below())) {
                         found = true;
                     } else {
                         pos = pos.above();

@@ -31,9 +31,9 @@
               "motion": "None",
               "particle_count": 300.0,
               "particle_type": "minecraft:sneeze",
-              "radius": 3.5,
+              "radius": 5.0,
               "shape": "CIRCLE_2D",
-              "y_rand": 0.5
+              "y_rand": 0.2
             }
           }
         ],
@@ -55,9 +55,9 @@
               "motion": "None",
               "particle_count": 200.0,
               "particle_type": "minecraft:composter",
-              "radius": 3.5,
+              "radius": 5.0,
               "shape": "CIRCLE_2D",
-              "y_rand": 0.5
+              "y_rand": 0.2
             }
           }
         ],
@@ -109,7 +109,7 @@
             "type": "aoe",
             "map": {
               "en_predicate": "enemies",
-              "radius": 3.5,
+              "radius": 5.0,
               "selection_type": "RADIUS"
             }
           }
@@ -124,7 +124,7 @@
     "charge_name": "",
     "charge_regen": 0,
     "charges": 0,
-    "cooldown_ticks": 500,
+    "cooldown_ticks": 900,
     "imbues": 0,
     "mana_cost": {
       "max": 30.0,

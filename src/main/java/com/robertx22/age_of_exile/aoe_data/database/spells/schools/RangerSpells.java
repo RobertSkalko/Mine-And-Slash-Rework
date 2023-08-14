@@ -189,18 +189,18 @@ public class RangerSpells implements ExileRegistryInit {
 
     static SpellBuilder trap(String id, String name, SimpleParticleType particle, ValueCalculation dmg, Elements element) {
 
-        return SpellBuilder.of(id, PlayStyle.DEX, SpellConfiguration.Builder.instant(7, 20)
+        return SpellBuilder.of(id, PlayStyle.DEX, SpellConfiguration.Builder.instant(7, 5)
                                 .setChargesAndRegen(id, 3, 20 * 30)
                                 .setSwingArm(), name,
                         Arrays.asList(SpellTag.damage, SpellTag.area, SpellTag.trap))
                 .manualDesc(
                         "Throw out a trap that stays on the ground and activates when an enemy approaches to deal "
-                                + dmg.getLocDmgTooltip() + element.getIconNameDmg() + " damage in area around itself."
+                                + dmg.getLocDmgTooltip() + element.getIconNameDmg() + " in area around itself."
                 )
                 .weaponReq(CastingWeapon.ANY_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.SNOWBALL_THROW, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.IRON_INGOT, 1D, 0.5D, SlashEntities.SIMPLE_PROJECTILE.get(), 100D, true)))
-                .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(SlashBlocks.TRAP.get(), 20 * 15D)
+                .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(SlashBlocks.TRAP.get(), 30 * 20D)
                         .put(MapField.ENTITY_NAME, "trap")
                         .put(MapField.FIND_NEAREST_SURFACE, true)
                         .put(MapField.IS_BLOCK_FALLING, false)))

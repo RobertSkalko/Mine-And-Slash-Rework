@@ -36,6 +36,7 @@ black_hole
 lightning_nova
 fireball
 explosive_arrow
+flower_flower
 charge
 heart_of_ice
 poison_arrow

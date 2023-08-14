@@ -221,9 +221,9 @@ public class HolySpells implements ExileRegistryInit {
                 .manualDesc(
                         "Give a stack of " + effect.locname + " to all allies around you."
                 )
-                .onCast(PartBuilder.playSound(SoundEvents.AMETHYST_BLOCK_CHIME, 1D, 1D))
+                .onCast(PartBuilder.playSound(SoundEvents.EXPERIENCE_ORB_PICKUP, 1D, 1D))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.NOTE, 50D, 3D))
-                .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, effect.resourcePath, 20 * 30D))
+                .onCast(PartBuilder.giveExileEffectToAlliesInRadius(7D, effect.resourcePath, 20 * 30D))
                 .build();
     }
 }
