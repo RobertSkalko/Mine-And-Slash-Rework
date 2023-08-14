@@ -111,7 +111,7 @@ public class EntityAilmentData {
                     int ticks = ail.lostOccursEverySeconds;
 
                     if (en.tickCount % ticks == 0) {
-                        e.setValue(e.getValue() - ail.percentLostEveryXSeconds);
+                        e.setValue(e.getValue() - (e.getValue() * ail.percentLostEveryXSeconds));
                     }
                 }
             }

@@ -26,6 +26,18 @@ public class GuiInventoryGrids {
 
     }
 
+    public static InvGuiGrid ofAllRuneWords(Player p) {
+        GuiAction.regenActionMap(); //  todo find better way of ensuring
+
+        List<GuiItemData> list = new ArrayList<>();
+
+        for (RuneWord rw : ExileDB.RuneWords().getList()) {
+            list.add(new GuiItemData(new CraftRunewordAction(rw)));
+        }
+        return InvGuiGrid.ofList(list);
+
+    }
+
     public static InvGuiGrid ofSalvageConfig() {
         GuiAction.regenActionMap(); //  todo find better way of ensuring
 

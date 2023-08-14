@@ -25,6 +25,10 @@ public class ClientOnly {
         Minecraft.getInstance().setScreen(new InvGuiScreen(GuiInventoryGrids.ofCratableRuneWords(p)));
     }
 
+    public static void ALLrunewordsScreen(Player p) {
+        Minecraft.getInstance().setScreen(new InvGuiScreen(GuiInventoryGrids.ofAllRuneWords(p)));
+    }
+
     public static Entity getEntityByUUID(Level world, UUID id) {
 
         if (world instanceof ClientLevel) {

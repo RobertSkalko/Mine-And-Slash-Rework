@@ -121,6 +121,7 @@ public class ExilePotionEvent extends EffectEvent {
                 target.addEffect(newInstance);
             }
 
+            MobE
             // sync packets to client
             ClientboundUpdateMobEffectPacket packet = new ClientboundUpdateMobEffectPacket(target.getId(), newInstance);
 
@@ -130,12 +131,9 @@ public class ExilePotionEvent extends EffectEvent {
                         server.connection.send(packet);
                     });
 
-            Load.Unit(target)
-                    .setEquipsChanged(true);
-            Load.Unit(target)
-                    .tryRecalculateStats();
-            Load.Unit(target)
-                    .trySync();
+            Load.Unit(target).setEquipsChanged(true);
+            Load.Unit(target).tryRecalculateStats();
+            Load.Unit(target).trySync();
         }
     }
 

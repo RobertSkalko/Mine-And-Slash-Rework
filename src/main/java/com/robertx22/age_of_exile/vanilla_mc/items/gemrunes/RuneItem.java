@@ -37,7 +37,11 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         if (pLevel.isClientSide) {
-            ClientOnly.runewordsScreen(pPlayer);
+            if (pPlayer.isDiscrete()) {
+                ClientOnly.ALLrunewordsScreen(pPlayer);
+            } else {
+                ClientOnly.runewordsScreen(pPlayer);
+            }
         }
         return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
 
@@ -127,6 +131,7 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
 
             tooltip.add(Component.literal("Click to Open RuneWord Crafting"));
             tooltip.add(Component.literal("It will show you Runewords you can craft."));
+            tooltip.add(Component.literal("If you Sneak+Click, it will show uncraftable too."));
 
         } catch (Exception e) {
             e.printStackTrace();

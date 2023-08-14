@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
+import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentProcStat;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AllAilmentDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.HitDamage;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -17,8 +18,16 @@ public class SupportGems {
 
     public static void init() {
 
-       
+        new SupportGem("proc_freeze", "Ice Breaker", PlayStyle.DEX, 1.3F,
+                Arrays.asList(new StatMod(25, 100, new AilmentProcStat(Ailments.FREEZE), ModType.FLAT)
+                )).registerToExileRegistry();
+
+        new SupportGem("proc_shock", "Shock", PlayStyle.INT, 1.3F,
+                Arrays.asList(new StatMod(25, 100, new AilmentProcStat(Ailments.ELECTRIFY), ModType.FLAT)
+                )).registerToExileRegistry();
+
         // damage multipliers
+
 
         new SupportGem("summon_damage", "Summon Damage", PlayStyle.INT, 1.3F,
                 Arrays.asList(new StatMod(15, 40, Stats.SUMMON_DAMAGE.get(), ModType.MORE)

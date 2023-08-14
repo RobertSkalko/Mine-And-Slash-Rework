@@ -16,9 +16,9 @@ public class BowRuneWords implements ExileRegistryInit {
 
         UniqueGearBuilder.of("bone_shatterer", "Bone Shatterer", BaseGearTypes.BOW)
                 .stats(Arrays.asList(
-                        new StatMod(10, 30, Stats.CRIT_DAMAGE.get()),
-                        new StatMod(10, 20, Stats.DAMAGE_TO_UNDEAD.get()),
-                        new StatMod(-6, -3, Stats.LIFESTEAL.get())
+                        new StatMod(25, 50, Stats.CRIT_DAMAGE.get()),
+                        new StatMod(20, 40, Stats.DAMAGE_TO_UNDEAD.get()),
+                        new StatMod(5, 5, Stats.LIFESTEAL.get())
                 ))
                 .makeRuneWordOnly(Arrays.asList(RuneItem.RuneType.CEN, RuneItem.RuneType.DOS, RuneItem.RuneType.YUN))
                 .devComment("crit dmg to undead bow")

@@ -6,20 +6,20 @@
   "unique_stats": [
     {
       "type": "flat",
-      "max": 30.0,
-      "min": 10.0,
+      "max": 50.0,
+      "min": 25.0,
       "stat": "critical_damage"
     },
     {
       "type": "flat",
-      "max": 20.0,
-      "min": 10.0,
+      "max": 40.0,
+      "min": 20.0,
       "stat": "dmg_to_undead"
     },
     {
       "type": "flat",
-      "max": -3.0,
-      "min": -6.0,
+      "max": 5.0,
+      "min": 5.0,
       "stat": "lifesteal"
     }
   ],

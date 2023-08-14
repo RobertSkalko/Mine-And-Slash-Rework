@@ -27,6 +27,7 @@ public class CraftRunewordAction extends GuiAction {
 
     ItemStack stack;
 
+
     public CraftRunewordAction(RuneWord runeWord) {
 
         this.runeWord = runeWord;
@@ -56,7 +57,7 @@ public class CraftRunewordAction extends GuiAction {
 
     // todo replace this with actual icons if i ever add actual runeword items
     public ResourceLocation getIcon() {
-        return SlashRef.id("textures/gui/inv_gui/icons/runeword.png");
+        return SlashRef.id("textures/gui/inv_gui/icons/runeword_can.png");
     }
 
     @Override
