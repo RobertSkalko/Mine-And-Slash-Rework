@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.maps;
 
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.utils.RandomUtils;
@@ -13,7 +14,6 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.border.WorldBorder;
-import org.joml.Math;
 
 public class MapData {
 
@@ -83,7 +83,7 @@ public class MapData {
 
         int max = (int) (border.getSize() / 16 / 2);
 
-        max = Math.clamp(max, 0, 299999 / 2); // don't be higher than normal mc border
+        max = MathHelper.clamp(max, 0, 299999 / 2); // don't be higher than normal mc border
 
         while (pos == null || maps.getMap(pos).isPresent()) {
             if (tries > 200) {

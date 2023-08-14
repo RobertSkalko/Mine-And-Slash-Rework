@@ -224,7 +224,7 @@ public class Unit {
             DirtyCheck old = getDirtyCheck();
 
             List<StatContext> statContexts = new ArrayList<>();
-            
+
 
             statContexts.addAll(CommonStatUtils.addExactCustomStats(entity));
             statContexts.add(data.getStatusEffectsData().getStats(entity));
@@ -250,6 +250,7 @@ public class Unit {
                 statContexts.addAll(MobStatUtils.getAffixStats(entity));
                 statContexts.addAll(MobStatUtils.getWorldMultiplierStats(entity));
                 MobStatUtils.addMapAffixStats(entity, data, this);
+                MobStatUtils.addMobBaseElementalBonusDamages(entity, data);
                 MobStatUtils.addMapTierStats(entity);
                 statContexts.addAll(MobStatUtils.getMobConfigStats(entity, data));
             }

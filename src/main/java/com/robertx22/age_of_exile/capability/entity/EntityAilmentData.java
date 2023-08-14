@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDurat
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentEffectStat;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentResistance;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
@@ -14,7 +15,6 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import org.joml.Math;
 
 import java.util.*;
 
@@ -90,8 +90,9 @@ public class EntityAilmentData {
             }
             dmgMap.put(ailment.GUID(), dmgMap.get(ailment.GUID()) + dmg);
 
+            
             float add = dmg / forFull;
-            strength = Math.clamp(strMap.get(ailment.GUID()) + (add), 0, 1);
+            strength = MathHelper.clamp(strMap.get(ailment.GUID()) + (add), 0, 1);
             strength *= Load.Unit(caster).getUnit().getCalculatedStat(eff).getMultiplier();
             strength *= Load.Unit(target).getUnit().getCalculatedStat(res).getMultiplier();
 

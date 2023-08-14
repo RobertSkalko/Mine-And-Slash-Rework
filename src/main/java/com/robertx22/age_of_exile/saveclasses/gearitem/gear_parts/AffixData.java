@@ -9,11 +9,11 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.*;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.library_of_exile.registry.FilterListWrap;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
-import org.joml.Math;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,8 +31,9 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
     public int t;
     public Affix.Type ty;
 
+    
     public void setTier(int t) {
-        this.t = Math.clamp(t, 0, 10); // todo if i rework tiers
+        this.t = MathHelper.clamp(t, 0, 10); // todo if i rework tiers
     }
 
 
@@ -167,10 +168,12 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
     public void randomizeTier(GearItemData gear) {
 
         int num = (int) (gear.getLevel() / (float) GameBalanceConfig.get().MAX_LEVEL * 10);
-
         num = Mth.clamp(num, 1, 10);
 
-        this.t = RandomUtils.RandomRange(1, num);
+        num += 1; // we want t10 to be availble a bit earlier
+
+
+        setTier(RandomUtils.RandomRange(1, num));
 
     }
 }

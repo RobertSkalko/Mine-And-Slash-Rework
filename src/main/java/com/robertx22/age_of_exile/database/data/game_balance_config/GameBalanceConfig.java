@@ -2,11 +2,11 @@ package com.robertx22.age_of_exile.database.data.game_balance_config;
 
 import com.robertx22.age_of_exile.database.data.game_balance_config.lvltiers.LevelTier;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.library_of_exile.registry.Database;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
-import org.joml.Math;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,12 +42,13 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     // this is kinda cursed but will probably work
     public int getTier(int lvl) {
         if (lvl == MAX_LEVEL) {
-            return (Math.clamp(lvl - 1, 0, 5)) / levels_per_tier; // we dont want to add a new tier just for max lvl
+            return (MathHelper.clamp(lvl - 1, 0, 5)) / levels_per_tier; // we dont want to add a new tier just for max lvl
         }
         return lvl / levels_per_tier;
 
     }
 
+    
     public LevelTier getLevelsOfTier(int tier) {
         try {
             return getTiers().stream().filter(x -> x.tier == tier).findFirst().get();
@@ -64,7 +65,7 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
         float multi = tier / 5F;
         int testlvl = (int) (MAX_LEVEL * multi + 1);
 
-        testlvl = Math.clamp(testlvl, 1, MAX_LEVEL);
+        testlvl = MathHelper.clamp(testlvl, 1, MAX_LEVEL);
 
         int finalTestlvl = testlvl;
         var opt = LevelRanges.allNormal().stream().filter(x -> x.isLevelInRange(finalTestlvl)).findFirst();
@@ -85,8 +86,8 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
         int min = 0;
         int max = levels_per_tier;
         for (int i = 0; i < 6; i++) {
-            var fmin = Math.clamp(min + 1, 1, MAX_LEVEL);
-            var fmax = Math.clamp(max, 0, MAX_LEVEL);
+            var fmin = MathHelper.clamp(min + 1, 1, MAX_LEVEL);
+            var fmax = MathHelper.clamp(max, 0, MAX_LEVEL);
 
             if (fmin > MAX_LEVEL) {
                 fmin = MAX_LEVEL;

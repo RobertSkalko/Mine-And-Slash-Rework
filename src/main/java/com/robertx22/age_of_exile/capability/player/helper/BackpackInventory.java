@@ -4,11 +4,11 @@ import com.robertx22.age_of_exile.a_libraries.curios.MyCurioUtils;
 import com.robertx22.age_of_exile.a_libraries.curios.RefCurio;
 import com.robertx22.age_of_exile.capability.player.BackpackItemData;
 import com.robertx22.age_of_exile.capability.player.data.Backpacks;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import org.joml.Math;
 
 public class BackpackInventory extends MyInventory {
 
@@ -31,9 +31,10 @@ public class BackpackInventory extends MyInventory {
         if (data != null) {
             slots += data.getSlots(type);
         }
-        return Math.clamp(slots, 0, getContainerSize());
+        return MathHelper.clamp(slots, 0, getContainerSize());
     }
 
+    
     // todo must test this
     public void throwOutBlockedSlotItems() {
 

@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
+import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
@@ -28,9 +29,23 @@ import com.robertx22.library_of_exile.utils.EntityUtils;
 import net.minecraft.world.entity.LivingEntity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+
 public class MobStatUtils {
+
+    public static List<StatContext> addMobBaseElementalBonusDamages(LivingEntity en, EntityData data) {
+
+        List<ExactStatData> stats = new ArrayList<>();
+
+        for (Elements ele : Elements.getAllSingle()) {
+            stats.add(ExactStatData.scaleTo(0.5F, ModType.FLAT, new BonusAttackDamage(ele).GUID(), data.getLevel()));
+        }
+
+        return Arrays.asList(new MiscStatCtx(stats));
+
+    }
 
     public static List<StatContext> addMapAffixStats(LivingEntity en, EntityData mobdata, Unit unit) {
 

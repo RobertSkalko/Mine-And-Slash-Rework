@@ -99,8 +99,7 @@ public class LivingHurtUtils {
                 }
 
             } else { // if its a mob
-                data.getAttackerEntityData()
-                        .mobBasicAttack(data);
+                data.getAttackerEntityData().mobBasicAttack(data);
             }
 
         } catch (Exception e) {
