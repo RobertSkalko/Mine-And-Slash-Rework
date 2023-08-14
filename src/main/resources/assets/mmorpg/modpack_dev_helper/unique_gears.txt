@@ -1,22 +1,33 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
+spark_aura
 ghostly_shores
 golemancer
 pack_leader
 ele_gamble
+fire_step
+piercing_touch
+sculpted_perfection
 futility_of_suffering
 bone_shatterer
 critical_impossibility
 bulwark
+master_torture
 air_disaster
 crystalized_capacitor
 new_dawn_flame
+thread_of_hope
+sparkfinder
 divine_frost
 summer_heat
+frostburn_prot
 witch_brew
 azuna_ring
 madness_pursuit
+doombolt
 mana_dominion
+curse_effect_ring
+the_unseen_eye
 winter_chill
 omni_vamp
 spring_blossoms
@@ -26,6 +37,9 @@ burning_desire
 autumn_harvest
 skull_of_spirits
 heavenly_tear
+ele_aegis
 playful_hope
 arch_gamble
+ice_stomper
+towering_physique
 ghast_necklace

@@ -1,10 +1,13 @@
 package com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.jewelry;
 
+import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearTypes;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuilder;
 import com.robertx22.age_of_exile.database.data.StatMod;
+import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
+import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttributes;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
@@ -157,5 +160,26 @@ public class UniqueRings implements ExileRegistryInit {
                 .build();
 
 
+        UniqueGearBuilder.of("piercing_touch", "Piercing Touch", BaseGearTypes.RING)
+                .keepsBaseName()
+                .stat(Stats.ELEMENTAL_DAMAGE.get(Elements.Fire).mod(10, 25))
+                .stat(Stats.ELEMENTAL_DAMAGE.get(Elements.Cold).mod(10, 25))
+                .stat(Stats.ELEMENTAL_DAMAGE.get(Elements.Chaos).mod(10, 20))
+                .build();
+
+
+        UniqueGearBuilder.of("spark_aura", "Aura of Sparks", BaseGearTypes.RING)
+                .keepsBaseName()
+                .stat(new AilmentChance(Ailments.BURN).mod(10, 20))
+                .stat(AuraEffect.getInstance().mod(5, 15))
+                .stat(new ElementalResist(Elements.Fire).mod(10, 25))
+                .build();
+
+        UniqueGearBuilder.of("curse_effect_ring", "Eternal Suffering", BaseGearTypes.RING)
+                .keepsBaseName()
+                .stat(Stats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.curse).mod(10, 25))
+                .stat(Stats.EFFECT_DURATION_YOU_CAST_PER_TAG.get(EffectTags.curse).mod(50, 50))
+                .stat(new ElementalResist(Elements.Chaos).mod(10, 25))
+                .build();
     }
 }

@@ -10,8 +10,6 @@ import com.robertx22.age_of_exile.uncommon.wrappers.MapWrapper;
 
 import java.util.List;
 
-import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
-
 public class ElementalResist extends ElementalStat {
 
     public static MapWrapper<Elements, ElementalResist> MAP = new MapWrapper();

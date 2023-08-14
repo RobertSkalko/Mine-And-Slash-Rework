@@ -1,0 +1,39 @@
+{
+  "base_gear": "cloth_helmet",
+  "id": "frostburn_prot",
+  "rarity": "runeword",
+  "replaces_name": true,
+  "unique_stats": [
+    {
+      "type": "flat",
+      "max": 50.0,
+      "min": 25.0,
+      "stat": "gear_defense"
+    },
+    {
+      "type": "flat",
+      "max": 50.0,
+      "min": 25.0,
+      "stat": "freeze_resistance"
+    },
+    {
+      "type": "flat",
+      "max": 50.0,
+      "min": 25.0,
+      "stat": "burn_resistance"
+    },
+    {
+      "type": "flat",
+      "max": 25.0,
+      "min": 15.0,
+      "stat": "fire_resist"
+    },
+    {
+      "type": "flat",
+      "max": 25.0,
+      "min": 15.0,
+      "stat": "water_resist"
+    }
+  ],
+  "weight": 0
+}

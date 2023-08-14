@@ -1,6 +1,7 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
 movement_cdr
+physical_penetration
 fire_mana_leech
 electrify_damage
 chaos_weapon_damage
@@ -12,6 +13,8 @@ energy_regen
 trident_damage
 energy_on_attack_hit
 increase_healing
+plus_phys_to_all
+phys_to_physical
 hit_damage
 give_regenerate_to_allies_in_aoe
 blood_per_10_strength
@@ -34,6 +37,7 @@ burn_damage
 all_any_wep_damage
 inc_effect_of_positive_buff_on_you
 cdr
+max_physical_resist
 projectile_damage
 cast_speed
 inc_effect_of_defensive_buff_on_you
@@ -50,6 +54,7 @@ all_physical_damage
 totem_spell_dmg
 elemental_mana_leech
 critical_hit
+plus_phys_to_water
 lightning_mana_leech
 health_on_attack_hit
 song_eff_duration
@@ -114,9 +119,11 @@ immobilizing_eff_duration
 magic_find
 inc_effect_of_negative_buff_given
 all_dot_damage
+max_fire_resist
 chaos_any_wep_damage
 curse_spell_dmg
 more_food_stats
+max_all_resist
 staff_spell_cdr
 physical_mana_leech
 magic_shield
@@ -129,6 +136,7 @@ lightning_vuln_crit
 double_attack_chance
 poison_damage
 heal_over_time_eff_dur_u_cast
+plus_phys_to_elemental
 movement_spell_dmg
 water_focus
 spell_water_damage
@@ -136,6 +144,7 @@ proj_dmg_received
 fire_dmg_when_target_low_hp
 elemental_penetration
 ele_sword_damage
+energy_per_sec
 totem_cdr
 dmg_to_undead
 freeze_resistance
@@ -158,9 +167,11 @@ all_fire_damage
 curse_eff_duration
 sword_damage
 all_attributes
+max_lightning_resist
 water_vuln_crit
 area_dmg
 defensive_eff_duration
+plus_phys_to_chaos
 golem_damage
 hp_resto_to_blood
 summon_cdr
@@ -185,6 +196,7 @@ burn_chance
 all_penetration
 bleed_proc_chance
 water_penetration
+magic_shield_per_sec
 technique_cdr
 beast_cdr
 projectile_spell_dmg
@@ -194,10 +206,13 @@ positive_eff_dur_u_cast
 shield_spell_dmg
 phys_to_lightning
 unknown
+max_chaos_resist
 lightning_health_leech
 water_dmg_when_target_low_hp
 increased_quantity
+damage_to_cursed
 elemental_dot_damage
+max_water_resist
 give_taunt_stance_to_self_on_tick
 chaos_dot_damage
 burn_strength
@@ -214,6 +229,7 @@ health
 bleed_chance
 elemental_health_leech
 inc_effect_of_curse_buff_given
+plus_phys_to_physical
 damage_reflected
 staff_damage
 spell_lightning_damage
@@ -246,6 +262,7 @@ health_regen
 inc_effect_of_negative_buff_on_you
 spell_fire_damage
 freeze_duration
+plus_phys_to_lightning
 spirit_cost
 phys_to_all
 energy_on_all_hit
@@ -279,10 +296,12 @@ water_health_leech
 ele_crossbow_damage
 magic_shield_regen
 crit_water_dmg_mana
+physical_resist
 negative_eff_duration
 armor_per_10_mana
 curse_cdr
 arrow_spell_dmg
+max_elemental_resist
 lightning_any_wep_damage
 health_on_kill
 int_dmg_received
@@ -293,6 +312,7 @@ totem_resto
 heal_effect_on_self
 negative_eff_dur_u_cast
 water_any_wep_damage
+plus_phys_to_fire
 lightning_dmg_when_target_low_hp
 poison_duration
 dmg_taken_to_mana

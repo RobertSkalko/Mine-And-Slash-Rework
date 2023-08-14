@@ -1,0 +1,39 @@
+{
+  "base_gear": "shield",
+  "id": "ele_aegis",
+  "rarity": "unique",
+  "replaces_name": false,
+  "unique_stats": [
+    {
+      "type": "percent",
+      "max": 150.0,
+      "min": 50.0,
+      "stat": "gear_defense"
+    },
+    {
+      "type": "flat",
+      "max": 5.0,
+      "min": 5.0,
+      "stat": "aura_effect"
+    },
+    {
+      "type": "flat",
+      "max": 3.0,
+      "min": 1.0,
+      "stat": "max_fire_resist"
+    },
+    {
+      "type": "flat",
+      "max": 3.0,
+      "min": 1.0,
+      "stat": "max_water_resist"
+    },
+    {
+      "type": "flat",
+      "max": 3.0,
+      "min": 1.0,
+      "stat": "max_chaos_resist"
+    }
+  ],
+  "weight": 50
+}

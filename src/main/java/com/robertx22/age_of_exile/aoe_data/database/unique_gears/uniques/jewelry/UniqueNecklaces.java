@@ -83,6 +83,14 @@ public class UniqueNecklaces implements ExileRegistryInit {
                         new ElementalResist(Elements.Chaos).mod(25, 25)
                 ))
                 .build();
+       
+        UniqueGearBuilder.of("master_torture", "Master of Torture", BaseGearTypes.NECKLACE)
+                .keepsBaseName()
+                .stat(Stats.DAMAGE_TO_CURSED.get().mod(25, 50))
+                .stat(new ElementalResist(Elements.Chaos).mod(10, 25))
+                .stat(new ElementalResist(Elements.Cold).mod(10, 25))
+                .stat(new ElementalResist(Elements.Fire).mod(10, 25))
+                .build();
 
     }
 }

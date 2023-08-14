@@ -1,0 +1,33 @@
+{
+  "base_gear": "bow",
+  "id": "doombolt",
+  "rarity": "runeword",
+  "replaces_name": true,
+  "unique_stats": [
+    {
+      "type": "flat",
+      "max": 100.0,
+      "min": 0.0,
+      "stat": "gear_weapon_damage"
+    },
+    {
+      "type": "flat",
+      "max": 30.0,
+      "min": 15.0,
+      "stat": "all_chaos_damage"
+    },
+    {
+      "type": "flat",
+      "max": 1.0,
+      "min": 1.0,
+      "stat": "spell_lifesteal"
+    },
+    {
+      "type": "flat",
+      "max": 25.0,
+      "min": 10.0,
+      "stat": "dot_dmg"
+    }
+  ],
+  "weight": 0
+}

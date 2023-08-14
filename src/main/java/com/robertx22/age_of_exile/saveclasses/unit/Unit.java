@@ -235,6 +235,7 @@ public class Unit {
                 Load.playerRPGData((Player) entity).statPoints.addStats(this);
 
                 statContexts.addAll(PlayerStatUtils.AddPlayerBaseStats(entity));
+                statContexts.addAll(PlayerStatUtils.addNewbieElementalResists(data));
                 statContexts.addAll(Load.playerRPGData((Player) entity).talents.getStatAndContext(entity));
                 statContexts.addAll(Load.playerRPGData((Player) entity).ascClass.getStatAndContext(entity));
 
@@ -357,8 +358,7 @@ public class Unit {
             float maxhp = Mth.clamp(entity.getMaxHealth(), 0, 500);
             // all increases after this would just reduce enviro damage
 
-            getStats().getStatInCalculation(Health.getInstance())
-                    .addAlreadyScaledFlat(maxhp);
+            getStats().getStatInCalculation(Health.getInstance()).addAlreadyScaledFlat(maxhp);
 
             // add vanila hp to extra hp
         }

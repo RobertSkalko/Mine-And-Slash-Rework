@@ -2,6 +2,7 @@ These are all default registry entries of this type.
 This registry is modify-able through datapacks.
 fire_master
 int_big
+physical_penetration
 chaos_weapon_damage
 cold_master
 fire_apprentice
@@ -11,8 +12,10 @@ all_chaos_damage
 poison2
 poison4
 trident_damage
+phys_to_physical_big
 increase_healing
 fire_resist_big
+phys_to_physical
 dex
 all_water_damage
 health_regen_percent_big
@@ -194,6 +197,7 @@ spell_lightning_damage
 aura_effect
 all_elemental_damage_big
 energy_regen_percent_big
+physical_resist_big
 paladin2
 paladin1
 mantra
@@ -238,6 +242,7 @@ ele_crossbow_damage
 spell_lightning_damage_and_dot
 armor_percent_big
 phys_to_lightning_big
+physical_resist
 lightning_penetration_big
 spell_elemental_damage_big
 less_aggro
@@ -246,6 +251,7 @@ health_on_kill
 int
 fire_penetration
 lightning_novice
+physical_penetration_big
 health_on_hit
 crossbow_damage_big
 spell_lifesteal_big

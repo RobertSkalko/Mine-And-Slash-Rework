@@ -51,6 +51,7 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
+    
     public static DataPackStatAccessor<EffectTags> EFFECT_DURATION_YOU_CAST_PER_TAG = DatapackStatBuilder
             .<EffectTags>of(x -> x.name() + "_eff_dur_u_cast", x -> Elements.Physical)
             .addAllOfType(EffectTags.values())
@@ -59,12 +60,10 @@ public class Stats implements ExileRegistryInit {
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.EFFECT_HAS_TAG.get(x))
             .addEffect(e -> StatEffects.INCREASE_EFFECT_DURATION)
-            .setLocName(x -> Stat.format(
-                    Stat.VAL1 + "% to duration of " + x.getLocName() + " effects you cast."
-            ))
+            .setLocName(x -> x.getLocName() + " Effect Duration")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
-                x.is_long = true;
+                x.is_perc = true;
             })
             .build();
 
@@ -361,7 +360,6 @@ public class Stats implements ExileRegistryInit {
             .setPriority(100)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.ATTACK_TYPE_MATCHES.get(x.attackType))
-            .addCondition(StatConditions.REQUIRE_CHARGED_ATTACK)
             .addEffect(e -> StatEffects.LEECH_RESTORE_RESOURCE_BASED_ON_STAT_DATA.get(e.resource))
             .setLocName(x -> x.resource.locname + " on " + x.attackType.locname + " Hit")
             .setLocDesc(x -> "")
@@ -869,8 +867,21 @@ public class Stats implements ExileRegistryInit {
 
             .build();
 
+    public static DataPackStatAccessor<EmptyAccessor> DAMAGE_TO_CURSED = DatapackStatBuilder
+            .ofSingle("damage_to_cursed", Elements.Physical)
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(0)
+            .setSide(EffectSides.Source)
+            .setMultipliesDamage()
+            .addCondition(StatConditions.IS_TARGET_CURSED)
+            .addEffect(StatEffects.INCREASE_VALUE)
+            .setLocName(x -> "Damage to Cursed Enemies")
+            .setLocDesc(x -> "")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+            })
+            .build();
 
-    // todo test these out later
     public static DataPackStatAccessor<EmptyAccessor> SUMMON_DAMAGE = DatapackStatBuilder
             .ofSingle("summon_damage", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
@@ -971,10 +982,10 @@ public class Stats implements ExileRegistryInit {
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.EFFECT_HAS_TAG.get(x))
             .addEffect(e -> StatEffects.INCREASE_VALUE)
-            .setLocName(x -> Stat.VAL1 + "% to effectiveness of " + x.getLocName() + " effects you cast.")
+            .setLocName(x -> x.getLocName() + " Effect Strength")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
-                x.is_long = true;
+                //  x.is_long = true;
                 x.is_perc = true;
                 x.scaling = StatScaling.NONE;
             })

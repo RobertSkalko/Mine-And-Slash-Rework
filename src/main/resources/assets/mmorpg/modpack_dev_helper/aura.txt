@@ -1,7 +1,9 @@
 These are all default registry entries of this type.
 This registry can't be modified or added to.
 dodge
+ele_res
 physical_damage
+cold_res
 lightning_damage
 mana_reg
 energy_reg
@@ -12,9 +14,12 @@ health_reg
 summon_dmg
 chaos_ailment
 armor
+light_res
 fire_damage
 cold_damage
 cold_ailment
 lightning_ailment
 physical_ailment
+chaos_res
+fire_res
 fire_ailment

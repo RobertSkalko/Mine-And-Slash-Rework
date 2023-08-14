@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.database.registrators;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
+import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.*;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttributes;
@@ -64,13 +65,20 @@ public class StatsRegister implements ExileRegistryInit {
                         add(new AilmentProcStat(ailment));
                     }
 
+                    add(new BonusPhysicalAsElemental(Elements.Elemental));
+                    add(new MaxElementalResist(Elements.Elemental));
+
+
                     add(GolemSpellChance.getInstance());
-                    
+
                     add(GearDefense.getInstance());
                     add(GearDamage.getInstance());
 
                     add(RegeneratePercentStat.HEALTH);
                     add(RegeneratePercentStat.MANA);
+                    add(RegeneratePercentStat.ENERGY);
+                    add(RegeneratePercentStat.MAGIC_SHIELD);
+
                     add(ArmorPenetration.getInstance());
 
 

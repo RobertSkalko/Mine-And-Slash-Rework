@@ -590,6 +590,7 @@ public class EntityData implements ICap, INeededForClient {
                 .get(data.getAttackerEntityData()
                         .getRarity());
 
+        
         float multi = (float) (ServerContainer.get().VANILLA_MOB_DMG_AS_EXILE_DMG.get().floatValue());
 
         float vanilla = data.getAmount() * multi;

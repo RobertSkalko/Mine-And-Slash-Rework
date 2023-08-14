@@ -3,9 +3,11 @@ package com.robertx22.age_of_exile.database.data.aura;
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.database.data.StatMod;
+import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
+import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.EnergyRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
@@ -101,6 +103,33 @@ public class AuraGems {
                 new StatMod(10, 40, Stats.SUMMON_DAMAGE.get(), ModType.MORE)
         )).registerToExileRegistry();
 
+
+        // resist
+        new AuraGem("ele_res", "Elemental Barrier", PlayStyle.INT, 0.4F, Arrays.asList(
+                new StatMod(15, 30, new ElementalResist(Elements.Fire), ModType.FLAT),
+                new StatMod(15, 30, new ElementalResist(Elements.Cold), ModType.FLAT),
+                new StatMod(15, 30, new ElementalResist(Elements.Lightning), ModType.FLAT)
+        )).registerToExileRegistry();
+
+        new AuraGem("cold_res", "Frost Barrier", PlayStyle.DEX, 0.3F, Arrays.asList(
+                new StatMod(25, 50, new ElementalResist(Elements.Cold), ModType.FLAT),
+                new StatMod(1, 5, new MaxElementalResist(Elements.Cold), ModType.FLAT)
+        )).registerToExileRegistry();
+
+        new AuraGem("fire_res", "Flame Barrier", PlayStyle.STR, 0.3F, Arrays.asList(
+                new StatMod(25, 50, new ElementalResist(Elements.Fire), ModType.FLAT),
+                new StatMod(1, 5, new MaxElementalResist(Elements.Fire), ModType.FLAT)
+        )).registerToExileRegistry();
+
+        new AuraGem("light_res", "Thunder Barrier", PlayStyle.INT, 0.3F, Arrays.asList(
+                new StatMod(25, 50, new ElementalResist(Elements.Lightning), ModType.FLAT),
+                new StatMod(1, 5, new MaxElementalResist(Elements.Lightning), ModType.FLAT)
+        )).registerToExileRegistry();
+
+        new AuraGem("chaos_res", "Chaos Barrier", PlayStyle.INT, 0.3F, Arrays.asList(
+                new StatMod(25, 50, new ElementalResist(Elements.Chaos), ModType.FLAT),
+                new StatMod(1, 5, new MaxElementalResist(Elements.Chaos), ModType.FLAT)
+        )).registerToExileRegistry();
 
     }
 }

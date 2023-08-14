@@ -37,6 +37,7 @@ public class StatEffects implements ExileRegistryInit {
             Arrays.asList(
                     ResourceType.mana,
                     ResourceType.energy,
+                    ResourceType.magic_shield,
                     ResourceType.health
             )
             , x -> new RestoreResourceAction("restore_" + x.id + "_per_stat_data", NumberProvider.ofStatData(), x, RestoreType.leech)

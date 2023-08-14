@@ -4,7 +4,9 @@ import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseRegenEffect;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
@@ -23,6 +25,12 @@ public class RegeneratePercentStat extends Stat {
             .getValue());
     public static RegeneratePercentStat MANA = new RegeneratePercentStat(Mana.getInstance(), ResourceType.mana, x -> x.getUnit()
             .manaData()
+            .getValue());
+    public static RegeneratePercentStat ENERGY = new RegeneratePercentStat(Energy.getInstance(), ResourceType.energy, x -> x.getUnit()
+            .energyData()
+            .getValue());
+    public static RegeneratePercentStat MAGIC_SHIELD = new RegeneratePercentStat(MagicShield.getInstance(), ResourceType.magic_shield, x -> x.getUnit()
+            .magicShieldData()
             .getValue());
 
     Stat statRestored;

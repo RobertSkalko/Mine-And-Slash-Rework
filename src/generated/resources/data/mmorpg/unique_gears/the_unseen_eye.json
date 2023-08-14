@@ -1,0 +1,33 @@
+{
+  "base_gear": "necklace",
+  "id": "the_unseen_eye",
+  "rarity": "unique",
+  "replaces_name": false,
+  "unique_stats": [
+    {
+      "type": "flat",
+      "max": 10.0,
+      "min": 5.0,
+      "stat": "spirit_cost"
+    },
+    {
+      "type": "flat",
+      "max": 10.0,
+      "min": -10.0,
+      "stat": "aura_effect"
+    },
+    {
+      "type": "percent",
+      "max": 25.0,
+      "min": 5.0,
+      "stat": "dodge"
+    },
+    {
+      "type": "flat",
+      "max": 25.0,
+      "min": 25.0,
+      "stat": "chaos_resist"
+    }
+  ],
+  "weight": 1000
+}

@@ -24,12 +24,12 @@ public class StatConditions implements ExileRegistryInit {
     public static StatCondition IF_CRIT = new IsBooleanTrueCondition(EventData.CRIT);
     public static StatCondition IF_NOT_CRIT = new IsBooleanTrueCondition(EventData.CRIT).flipCondition();
     public static StatCondition IF_RANDOM_ROLL = new RandomRollCondition();
-    public static StatCondition REQUIRE_CHARGED_ATTACK = new RequireChargedAttack();
     public static StatCondition IS_SPELL = new IsSpellCondition();
     public static StatCondition ELEMENT_MATCH_STAT = new ElementMatchesStat();
     public static StatCondition IS_DAY = new IsDayCondition();
     public static StatCondition IS_NIGHT = new IsDayCondition().flipCondition();
     public static StatCondition IS_TARGET_UNDEAD = new IsUndeadCondition();
+    public static StatCondition IS_TARGET_CURSED = new IsTargetCursed();
     public static StatCondition IS_TARGET_NOT_UNDEAD = new IsUndeadCondition().flipCondition();
     public static StatCondition IS_IN_COMBAT = new IsInCombatCondition();
     public static StatCondition IS_NOT_IN_COMBAT = new IsInCombatCondition().flipCondition();
@@ -117,8 +117,8 @@ public class StatConditions implements ExileRegistryInit {
     public void registerAll() {
 
         ATTACK_TYPE_MATCHES.addToSerializables();
+        IS_TARGET_CURSED.addToSerializables();
         IS_SUMMON_TYPE.addToSerializables();
-        REQUIRE_CHARGED_ATTACK.addToSerializables();
         IS_NOT_IN_COMBAT.addToSerializables();
         IF_CRIT.addToSerializables();
         IF_RANDOM_ROLL.addToSerializables();

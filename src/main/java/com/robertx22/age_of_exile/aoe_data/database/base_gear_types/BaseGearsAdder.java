@@ -17,7 +17,7 @@ public class BaseGearsAdder implements ExileRegistryInit, GearDataHelper {
 
     @Override
     public void registerAll() {
-       
+
         // todo cant do this with a gear defense stat, i need to make it work differently
 
         /*
@@ -176,7 +176,7 @@ public class BaseGearsAdder implements ExileRegistryInit, GearDataHelper {
                 .tags(new TagList(SlotTag.necklace, SlotTag.jewelry_family))
                 .build();
 
-        BaseGearBuilder.of(BaseGearTypes.SHIELD, GearSlots.SHIELD, "Tower Shield", StatRequirement.of(PlayStyle.STR))
+        BaseGearBuilder.of(BaseGearTypes.ARMOR_SHIELD, GearSlots.SHIELD, "Tower Shield", StatRequirement.of(PlayStyle.STR))
                 .tags(new TagList(SlotTag.shield, SlotTag.offhand_family, SlotTag.armor_stat, SlotTag.strength))
                 .baseStat(new StatMod(6, 12, Armor.getInstance(), ModType.FLAT))
                 .baseStat(new StatMod(-25, -25, Stats.STYLE_DAMAGE.get(PlayStyle.INT)))

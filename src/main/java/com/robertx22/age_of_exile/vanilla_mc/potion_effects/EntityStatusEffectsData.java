@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class EntityStatusEffectsData {
 
@@ -28,6 +29,10 @@ public class EntityStatusEffectsData {
         exileMap.put(eff.GUID(), data);
     }
 
+
+    public List<ExileEffect> getEffects() {
+        return exileMap.keySet().stream().map(x -> ExileDB.ExileEffects().get(x)).collect(Collectors.toList());
+    }
 
     public StatContext getStats(LivingEntity en) {
 

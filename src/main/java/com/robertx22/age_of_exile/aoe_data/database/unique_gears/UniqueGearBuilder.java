@@ -13,6 +13,7 @@ import java.util.List;
 
 public class UniqueGearBuilder {
 
+
     UniqueGear uniq = new UniqueGear();
 
     public static UniqueGearBuilder of(String id, String locname, String basegear) {
@@ -27,6 +28,7 @@ public class UniqueGearBuilder {
 
     }
 
+
     public static UniqueGearBuilder of(String id, String locname, DataGenKey<BaseGearType> gearType) {
         return of(id, locname, gearType.GUID());
     }
@@ -38,6 +40,11 @@ public class UniqueGearBuilder {
 
     public UniqueGearBuilder stat(StatMod stat) {
         this.uniq.uniqueStats.add(stat);
+        return this;
+    }
+
+    public UniqueGearBuilder rarityWeight(UniqueRarityTier rar) {
+        this.uniq.weight = rar.weight;
         return this;
     }
 

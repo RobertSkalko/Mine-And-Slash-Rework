@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EffectEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
 import com.robertx22.age_of_exile.uncommon.effectdatas.RestoreResourceEvent;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.number_provider.NumberProvider;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
@@ -33,12 +34,14 @@ public class RestoreResourceAction extends StatEffect {
 
         float val = num_provider.getValue(event, event.getSide(statSource), data);
 
+        val *= event.data.getNumber(EventData.ATTACK_COOLDOWN).number; // todo test
+
         EventBuilder<RestoreResourceEvent> restore = EventBuilder.ofRestore(event.source, event.getSide(side), type, restore_type, val);
         if (event.data.isSpellEffect()) {
             restore.setSpell(event.getSpell());
         }
         restore.build()
-            .Activate();
+                .Activate();
     }
 
     @Override

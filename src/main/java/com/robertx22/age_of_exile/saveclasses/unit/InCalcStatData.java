@@ -64,29 +64,8 @@ public class InCalcStatData {
         other.Multi += Multi; // todo might be buggy
 
     }
-/*
-    public void addFlat(float val1, int lvl) {
-        this.Flat += GetStat().scale(ModType.FLAT, val1, lvl);
-    }
 
-    public boolean isMoreThanZero() {
-        return Flat > 0;
-    }
-
-    public boolean isNotEmpty() {
-        return Flat != 0 || Percent != 0 || Multi != 0;
-    }
-
-    public void multiplyFlat(float multi) {
-        this.Flat *= multi;
-    }
-
-    public void multiplyFlat(double multi) {
-        this.Flat *= multi;
-    }
-
- */
-
+ 
     public void add(ExactStatData modData) {
         ModType type = modData.getType();
 

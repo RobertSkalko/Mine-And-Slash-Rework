@@ -75,7 +75,7 @@ is_is_basic_atk_true
 threat_gen_type_is_heal
 restore_type_is_regen
 is_none_wep_type
-req_charged_atk
+is_target_cursed
 spell_has_tag_heal
 spell_has_tag_curse
 resource_type_is_mana

@@ -8,7 +8,7 @@ import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
-import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusPhysicalAsElemental;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
@@ -36,15 +36,13 @@ import java.util.List;
 public class MobStatUtils {
 
     public static List<StatContext> addMobBaseElementalBonusDamages(LivingEntity en, EntityData data) {
-
         List<ExactStatData> stats = new ArrayList<>();
 
         for (Elements ele : Elements.getAllSingle()) {
             if (ele != Elements.Physical) {
-                stats.add(ExactStatData.scaleTo(0.5F, ModType.FLAT, new BonusAttackDamage(ele).GUID(), data.getLevel()));
+                stats.add(ExactStatData.noScaling(20, ModType.FLAT, new BonusPhysicalAsElemental(ele).GUID()));
             }
         }
-
         return Arrays.asList(new MiscStatCtx(stats));
 
     }

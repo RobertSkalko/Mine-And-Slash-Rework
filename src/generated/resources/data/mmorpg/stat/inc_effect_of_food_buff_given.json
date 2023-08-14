@@ -18,7 +18,7 @@
   "group": "Misc",
   "icon": "❁",
   "id": "inc_effect_of_food_buff_given",
-  "is_long": true,
+  "is_long": false,
   "is_perc": true,
   "max": 2.14748365E9,
   "min": -1000.0,
