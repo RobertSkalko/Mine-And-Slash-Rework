@@ -45,6 +45,7 @@ public class Dungeon {
         return new ArrayList<>(unbuiltRooms);
     }
 
+
     public void printDungeonAsSymbolsForDebug() {
 
         String all = "";
@@ -191,17 +192,24 @@ public class Dungeon {
         return unbuilt;
     }
 
+
+    // todo i think this is the problem
     private void addUnbuilts(int x, int z, BuiltRoom room) {
 
-        List<Direction> dirs = new ArrayList<>();
+
+        List<Direction> dirs = room.data.sides.getDoorSides();
+       
+        /*
         dirs.add(Direction.SOUTH);
         dirs.add(Direction.NORTH);
         dirs.add(Direction.WEST);
         dirs.add(Direction.EAST);
+         */
+
 
         dirs.forEach(dir -> {
             PointData coord = getCoordsOfRoomFacing(dir, x, z);
-            if (getRoom(coord.x, coord.y) == null) { // todo test this
+            if (getRoom(coord.x, coord.y) == null) {
                 if (room.data.sides.getSideOfDirection(dir) == RoomSide.DOOR) {
                     this.unbuiltRooms.add(coord);
                 }
@@ -239,7 +247,9 @@ public class Dungeon {
 
             this.started = true;
 
-            addUnbuilts(x, z, room);
+            if (room.data.type != RoomType.END) {
+                addUnbuilts(x, z, room);
+            }
 
             unbuiltRooms.removeIf(cord -> {
                 return cord.x == x && cord.y == z;

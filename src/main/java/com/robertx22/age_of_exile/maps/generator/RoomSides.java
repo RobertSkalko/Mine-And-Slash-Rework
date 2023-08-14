@@ -2,12 +2,38 @@ package com.robertx22.age_of_exile.maps.generator;
 
 import net.minecraft.core.Direction;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RoomSides {
 
     public RoomSide SOUTH;
     public RoomSide NORTH;
     public RoomSide EAST;
     public RoomSide WEST;
+
+
+    public List<Direction> getDoorSides() {
+
+        List<Direction> list = new ArrayList<>();
+
+        if (SOUTH == RoomSide.DOOR) {
+            list.add(Direction.SOUTH);
+        }
+
+        if (NORTH == RoomSide.DOOR) {
+            list.add(Direction.NORTH);
+        }
+
+        if (EAST == RoomSide.DOOR) {
+            list.add(Direction.EAST);
+        }
+
+        if (WEST == RoomSide.DOOR) {
+            list.add(Direction.WEST);
+        }
+        return list;
+    }
 
     public RoomSides(RoomSide SOUTH, RoomSide NORTH, RoomSide EAST, RoomSide WEST) {
         this.SOUTH = SOUTH;

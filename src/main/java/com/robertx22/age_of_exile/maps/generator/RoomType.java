@@ -14,11 +14,16 @@ import java.util.stream.Collectors;
 
 public enum RoomType implements IWeighted {
 
+
     FOUR_WAY("four_way") {
         @Override
         public List<RoomRotation> getRotations() {
             List<RoomRotation> all = new ArrayList<>();
             all.add(new RoomRotation(this, new RoomSides(RoomSide.DOOR, RoomSide.DOOR, RoomSide.DOOR, RoomSide.DOOR), Rotation.NONE));
+            all.add(new RoomRotation(this, new RoomSides(RoomSide.DOOR, RoomSide.DOOR, RoomSide.DOOR, RoomSide.DOOR), Rotation.NONE));
+            // we double the four way rooms with this
+            // all.add(new RoomRotation(this, new RoomSides(RoomSide.DOOR, RoomSide.DOOR, RoomSide.DOOR, RoomSide.DOOR), Rotation.NONE));
+            //  all.add(new RoomRotation(this, new RoomSides(RoomSide.DOOR, RoomSide.DOOR, RoomSide.DOOR, RoomSide.DOOR), Rotation.NONE));
             return all;
         }
 
@@ -172,9 +177,7 @@ public enum RoomType implements IWeighted {
     }
 
     public List<RoomRotation> getPossibleFor(UnbuiltRoom room) {
-        return getRotations().stream()
-                .filter(x -> x.sides.matches(room.sides))
-                .collect(Collectors.toList());
+        return getRotations().stream().filter(x -> x.sides.matches(room.sides)).collect(Collectors.toList());
     }
 
     @Override

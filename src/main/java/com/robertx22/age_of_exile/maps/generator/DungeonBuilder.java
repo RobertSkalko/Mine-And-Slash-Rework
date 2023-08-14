@@ -9,6 +9,7 @@ import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.world.level.ChunkPos;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -29,7 +30,8 @@ public class DungeonBuilder {
                 .filter(x -> x.canBeMainTheme)
                 .collect(Collectors.toList()), rand.nextDouble());
 
-        this.size = RandomUtils.RandomRange(15, 25); // todo this needs the same random if i'll use at world gen async, if i do it myself, it doesnt
+        this.size = RandomUtils.RandomRange(12, 18); // todo for testing
+        // todo this needs the same random if i'll use at world gen async, if i do it myself, it doesnt
 
         if (RandomUtils.roll(5, rand)) {
             this.maxBossRooms++;
@@ -46,6 +48,7 @@ public class DungeonBuilder {
     public RoomGroup group;
     public int maxBossRooms = 1;
 
+
     public void build() {
         dungeon = new Dungeon(size);
 
@@ -56,9 +59,15 @@ public class DungeonBuilder {
 
         int tries = 0;
 
-        while (!dungeon.isFinished() || tries < 500) {
+
+        while (!dungeon.isFinished()) {
 
             tries++;
+
+            if (tries > 2000) {
+                System.out.println("Room taking too long to build");
+                break;
+            }
 
             dungeon.getUnbuiltCopy()
                     .forEach(x -> {
@@ -88,26 +97,50 @@ public class DungeonBuilder {
                         }
 
                     });
+
+
         }
 
         dungeon.fillWithBarriers();
-
 
     }
 
     public RoomRotation randomDungeonRoom(UnbuiltRoom unbuilt) {
 
         if (dungeon.shouldStartFinishing()) {
-            List<RoomRotation> pos = RoomType.END.getPossibleFor(unbuilt);
-            if (pos.isEmpty()) { //its not possible to set end for all of them
-                return randomRoom(unbuilt);
+
+            var possible = tryEndRoom(unbuilt);
+            if (!possible.isEmpty()) {
+                return random(possible);
             } else {
-                return random(pos);
+                return randomRoom(unbuilt);
             }
         } else {
             return randomRoom(unbuilt);
         }
     }
+
+    public List<RoomRotation> tryEndRoom(UnbuiltRoom unbuilt) {
+        List<RoomType> types = new ArrayList<>();
+
+        types.add(RoomType.END);
+        types.add(RoomType.CURVED_HALLWAY);
+        types.add(RoomType.STRAIGHT_HALLWAY);
+        types.add(RoomType.TRIPLE_HALLWAY);
+
+        for (RoomType type : types) {
+
+            var possible = type.getPossibleFor(unbuilt);
+
+            if (!possible.isEmpty()) {
+                return possible;
+            }
+        }
+
+        return Arrays.asList();
+
+    }
+
 
     public RoomRotation randomRoom(UnbuiltRoom unbuilt) {
         List<RoomType> types = new ArrayList<>();
@@ -123,7 +156,6 @@ public class DungeonBuilder {
         });
 
         if (possible.isEmpty()) {
-
             // we dont want to end things fast, but if there's nothing else that matches, add an end.
             possible.addAll(RoomType.END.getPossibleFor(unbuilt));
 
