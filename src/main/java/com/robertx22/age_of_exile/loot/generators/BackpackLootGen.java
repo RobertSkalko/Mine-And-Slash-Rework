@@ -44,8 +44,8 @@ public class BackpackLootGen extends BaseLootGen<ItemBlueprint> {
         data.rar = ExileDB.GearRarities().random().GUID();
 
 
-        int min = (int) ((data.getRarity().skill_gem_percents.min / 100F) * Backpacks.MAX_SIZE);
-        int max = (int) ((data.getRarity().skill_gem_percents.max / 100F) * Backpacks.MAX_SIZE);
+        int min = (int) ((data.getRarity().skill_gem_percents.min / 100F) * Backpacks.MAX_SIZE * 0.5);
+        int max = (int) ((data.getRarity().skill_gem_percents.max / 100F) * Backpacks.MAX_SIZE * 0.5);
 
         for (Backpacks.BackpackType type : Backpacks.BackpackType.values()) {
 

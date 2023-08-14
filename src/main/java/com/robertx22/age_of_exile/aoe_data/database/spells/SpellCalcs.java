@@ -97,7 +97,7 @@ public class SpellCalcs {
             .attackScaling(0.5F, 1)
             .build();
     public static ValueCalculation FIRE_NOVA = ValueCalcBuilder.of("fire_nova")
-            .spellScaling(1F, 1.5F)
+            .spellScaling(1F, 2)
             .build();
     public static ValueCalculation METEOR = ValueCalcBuilder.of("meteor")
             .spellScaling(1F, 2F)
@@ -122,7 +122,7 @@ public class SpellCalcs {
             .statScaling(MagicShield.getInstance(), 0.1F, 0.2F)
             .build();
     public static ValueCalculation FROST_NOVA = ValueCalcBuilder.of("frost_nova")
-            .spellScaling(1F, 1.5F)
+            .spellScaling(1F, 2)
             .build();
 
     public static ValueCalculation LIGHNING_NOVA = ValueCalcBuilder.of("lightning_nova")

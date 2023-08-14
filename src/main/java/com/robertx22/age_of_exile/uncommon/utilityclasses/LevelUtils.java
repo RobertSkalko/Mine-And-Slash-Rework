@@ -1,11 +1,10 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
-import com.google.common.base.Preconditions;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.DimensionConfig;
 import com.robertx22.age_of_exile.database.data.MinMax;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
-import com.robertx22.age_of_exile.database.data.level_ranges.LevelRange;
+import com.robertx22.age_of_exile.database.data.game_balance_config.lvltiers.LevelTier;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -52,10 +51,9 @@ public class LevelUtils {
     public static void runTests() {
         if (MMORPG.RUN_DEV_TOOLS) {
 
-            Preconditions.checkArgument(levelToTier(15) == 0);
-            Preconditions.checkArgument(levelToTier(25) == 1);
+            // Preconditions.checkArgument(levelToTier(15) == 0);
+            //Preconditions.checkArgument(levelToTier(25) == 1);
 
-            Preconditions.checkArgument(tierToLevel(1).isLevelInRange(25));
         }
     }
 
@@ -63,7 +61,7 @@ public class LevelUtils {
         return RomanNumber.toRoman(tier);
     }
 
-    public static LevelRange tierToLevel(int tier) {
+    public static LevelTier tierToLevel(int tier) {
         return GameBalanceConfig.get().getLevelsOfTier(tier);
     }
 

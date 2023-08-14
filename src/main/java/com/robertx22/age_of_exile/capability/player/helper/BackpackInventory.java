@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import org.joml.Math;
 
 public class BackpackInventory extends MyInventory {
 
@@ -23,15 +24,14 @@ public class BackpackInventory extends MyInventory {
 
     @Override
     public int getTotalSlots() {
+        int slots = 9 * 3;
 
         ItemStack stack = MyCurioUtils.get(RefCurio.BACKPACK, p, 0);
-
         BackpackItemData data = StackSaving.BACKPACK.loadFrom(stack);
-
         if (data != null) {
-            return data.getSlots(type);
+            slots += data.getSlots(type);
         }
-        return 0;
+        return Math.clamp(slots, 0, getContainerSize());
     }
 
     // todo must test this

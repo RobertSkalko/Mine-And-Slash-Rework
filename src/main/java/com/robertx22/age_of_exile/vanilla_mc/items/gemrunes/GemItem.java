@@ -378,6 +378,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
             this.stats = stats;
         }
     }
+    
 
     public enum GemRank {
         CRACKED("Cracked", 0, 0.1F, 100, 100999, 0F),
@@ -393,12 +394,12 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
         public float statmulti;
         public int upgradeChance;
         public int weight;
-        public float lvlToDrop;
+        public float lvlToDropmulti;
 
-        GemRank(String locName, int tier, float statmulti, int upgradeChance, int weight, float lvlToDrop) {
+        GemRank(String locName, int tier, float statmulti, int upgradeChance, int weight, float lvlToDropmulti) {
             this.locName = locName;
             this.weight = weight;
-            this.lvlToDrop = lvlToDrop;
+            this.lvlToDropmulti = lvlToDropmulti;
             this.tier = tier;
             this.statmulti = statmulti;
             this.upgradeChance = upgradeChance;
@@ -425,7 +426,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
         this.gemRank = gemRank;
 
         this.weight = gemRank.weight;
-        this.levelToStartDrop = gemRank.lvlToDrop;
+        this.levelToStartDrop = gemRank.lvlToDropmulti;
 
     }
 

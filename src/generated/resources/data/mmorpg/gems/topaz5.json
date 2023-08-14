@@ -2,6 +2,7 @@
   "gem_type": "topaz",
   "identifier": "topaz5",
   "item_id": "mmorpg:gems/topaz/5",
+  "min_lvl_multi": 0.9,
   "on_armor_stats": [
     {
       "type": "FLAT",

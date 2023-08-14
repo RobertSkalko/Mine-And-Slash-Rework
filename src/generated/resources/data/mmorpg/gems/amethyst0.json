@@ -2,6 +2,7 @@
   "gem_type": "amethyst",
   "identifier": "amethyst0",
   "item_id": "mmorpg:gems/amethyst/0",
+  "min_lvl_multi": 0.0,
   "on_armor_stats": [
     {
       "type": "FLAT",

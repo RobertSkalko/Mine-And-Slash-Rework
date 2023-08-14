@@ -1,6 +1,7 @@
 {
   "identifier": "ano",
   "item_id": "mmorpg:runes/ano",
+  "min_lvl_multi": 0.0,
   "on_armor_stats": [],
   "on_jewelry_stats": [],
   "on_weapons_stats": [],

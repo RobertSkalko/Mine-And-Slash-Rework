@@ -49,7 +49,17 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     }
 
     public LevelTier getLevelsOfTier(int tier) {
-        return getTiers().stream().filter(x -> x.tier == tier).findFirst().get();
+        try {
+            return getTiers().stream().filter(x -> x.tier == tier).findFirst().get();
+        } catch (Exception e) {
+            if (tier < 2) {
+                return getTiers().get(0);
+            } else {
+                return getTiers().get(getTiers().size() - 1);
+            }
+        }
+
+
 /*
         float multi = tier / 5F;
         int testlvl = (int) (MAX_LEVEL * multi + 1);
@@ -63,7 +73,7 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
             System.out.println("tier " + tier + " cant be found");
         }
         return opt.get();
-        
+
  */
 
     }
@@ -74,8 +84,19 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
 
         int min = 0;
         int max = levels_per_tier;
-        for (int i = 0; i < 5; i++) {
-            list.add(new LevelTier(i, Math.clamp(min, 1, max), Math.clamp(max, 0, MAX_LEVEL)));
+        for (int i = 0; i < 6; i++) {
+            var fmin = Math.clamp(min + 1, 1, MAX_LEVEL);
+            var fmax = Math.clamp(max, 0, MAX_LEVEL);
+
+            if (fmin > MAX_LEVEL) {
+                fmin = MAX_LEVEL;
+            }
+            if (fmax > MAX_LEVEL) {
+                fmax = MAX_LEVEL;
+            }
+            list.add(new LevelTier(i, fmin, fmax));
+            min += levels_per_tier;
+            max += levels_per_tier;
         }
 
         return list;

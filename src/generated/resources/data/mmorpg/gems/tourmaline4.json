@@ -2,6 +2,7 @@
   "gem_type": "tourmaline",
   "identifier": "tourmaline4",
   "item_id": "mmorpg:gems/tourmaline/4",
+  "min_lvl_multi": 0.75,
   "on_armor_stats": [
     {
       "type": "FLAT",

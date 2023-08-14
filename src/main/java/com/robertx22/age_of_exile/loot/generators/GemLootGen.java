@@ -5,7 +5,6 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 import com.robertx22.age_of_exile.uncommon.enumclasses.LootType;
-import com.robertx22.age_of_exile.vanilla_mc.items.crates.gem_crate.LootCrateData;
 import net.minecraft.world.item.ItemStack;
 
 public class GemLootGen extends BaseLootGen<GearBlueprint> {
@@ -17,8 +16,7 @@ public class GemLootGen extends BaseLootGen<GearBlueprint> {
 
     @Override
     public float baseDropChance() {
-        return (float) (ServerContainer.get().GEM_DROPRATE.get()
-                .floatValue());
+        return (float) (ServerContainer.get().GEM_DROPRATE.get().floatValue());
     }
 
     @Override
@@ -28,23 +26,12 @@ public class GemLootGen extends BaseLootGen<GearBlueprint> {
 
     @Override
     public boolean condition() {
-
-       
-        return !ExileDB.Gems()
-                .getFilterWrapped(x -> this.info.level >= x.getReqLevelToDrop()).list.isEmpty();
+        return !ExileDB.Gems().getFilterWrapped(x -> this.info.level >= x.getReqLevelToDrop()).list.isEmpty();
     }
 
     @Override
     public ItemStack generateOne() {
-
-        LootCrateData data = new LootCrateData();
-        data.type = LootType.Gem;
-        data.tier = ExileDB.Gems()
-                .getFilterWrapped(x -> info.level >= x.getReqLevelToDrop())
-                .random().tier;
-
-        return data.createStack();
-
+        return ExileDB.Gems().getFilterWrapped(x -> this.info.level >= x.getReqLevelToDrop()).random().getItem().getDefaultInstance();
     }
 
 }

@@ -80,7 +80,7 @@ public class StatSoulData implements IRarity, ISettableLevelTier {
 
     public GearItemData createGearData(@Nullable ItemStack stack) {
 
-        int lvl = LevelUtils.tierToLevel(tier).getMaxLevel();
+        int lvl = LevelUtils.tierToLevel(tier).min;
 
         GearBlueprint b = new GearBlueprint(lvl);
         b.level.set(lvl);

@@ -2,6 +2,7 @@
   "gem_type": "emerald",
   "identifier": "emerald6",
   "item_id": "mmorpg:gems/emerald/6",
+  "min_lvl_multi": 0.95,
   "on_armor_stats": [
     {
       "type": "FLAT",

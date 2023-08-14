@@ -14,11 +14,13 @@ public class Gems implements ExileRegistryInit {
         GemItems.ALL.forEach(g -> {
             GemItem x = g.get();
 
-            
+
             Gem gem = new Gem();
             gem.item_id = VanillaUTIL.REGISTRY.items().getKey(x)
                     .toString();
             gem.identifier = x.gemType.id + x.gemRank.tier;
+
+            gem.min_lvl_multi = x.gemRank.lvlToDropmulti;
 
             gem.on_armor_stats = x.getStatsForSerialization(SlotFamily.Armor);
             gem.on_weapons_stats = x.getStatsForSerialization(SlotFamily.Weapon);

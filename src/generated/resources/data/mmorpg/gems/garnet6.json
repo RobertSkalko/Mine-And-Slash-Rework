@@ -2,6 +2,7 @@
   "gem_type": "garnet",
   "identifier": "garnet6",
   "item_id": "mmorpg:gems/garnet/6",
+  "min_lvl_multi": 0.95,
   "on_armor_stats": [
     {
       "type": "FLAT",

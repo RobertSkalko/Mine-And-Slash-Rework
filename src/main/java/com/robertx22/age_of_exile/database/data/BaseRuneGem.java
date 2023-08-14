@@ -1,8 +1,8 @@
 package com.robertx22.age_of_exile.database.data;
 
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
+import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.registry.IWeighted;
 
@@ -24,8 +24,10 @@ public class BaseRuneGem implements IGUID, IWeighted {
     public int tier = 1;
     public int weight = 1000;
 
+    public float min_lvl_multi = 0;
+
     public int getReqLevelToDrop() {
-        return LevelUtils.tierToLevel(tier).getMinLevel();
+        return (int) (GameBalanceConfig.get().MAX_LEVEL * min_lvl_multi);
     }
 
     public final List<OptScaleExactStat> getFor(SlotFamily sfor) {

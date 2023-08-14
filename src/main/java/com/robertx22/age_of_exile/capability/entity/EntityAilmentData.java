@@ -96,6 +96,15 @@ public class EntityAilmentData {
             strength *= Load.Unit(target).getUnit().getCalculatedStat(res).getMultiplier();
 
             strMap.put(ailment.GUID(), strength);
+
+
+        }
+
+        if (ailment.GUID().equals(Ailments.FREEZE.GUID())) {
+            float freeze = strMap.getOrDefault(Ailments.FREEZE.GUID(), 0F);
+            if (freeze > 0) {
+                target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 5, Ailments.FREEZE.getSlowTier(freeze)));
+            }
         }
 
     }
@@ -126,11 +135,14 @@ public class EntityAilmentData {
 
 
         if (en.tickCount % 20 == 0) {
+            /*
             float freeze = strMap.getOrDefault(Ailments.FREEZE.GUID(), 0F);
 
             if (freeze > 0) {
-                en.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20, Ailments.FREEZE.getSlowTier(freeze)));
+                en.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, Ailments.FREEZE.getSlowTier(freeze)));
             }
+
+             */
 
             UUID id = null;
             try {

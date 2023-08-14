@@ -2,6 +2,7 @@
   "gem_type": "azurite",
   "identifier": "azurite1",
   "item_id": "mmorpg:gems/azurite/1",
+  "min_lvl_multi": 0.1,
   "on_armor_stats": [
     {
       "type": "FLAT",

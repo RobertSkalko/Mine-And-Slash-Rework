@@ -32,7 +32,7 @@
               "motion_multiplier": 0.05,
               "particle_count": 200.0,
               "particle_type": "minecraft:flame",
-              "radius": 2.8,
+              "radius": 5.0,
               "shape": "CIRCLE_2D_EDGE",
               "y_rand": 0.2
             }
@@ -57,7 +57,7 @@
               "motion_multiplier": 0.05,
               "particle_count": 100.0,
               "particle_type": "minecraft:flame",
-              "radius": 2.0,
+              "radius": 3.5,
               "shape": "CIRCLE_2D_EDGE",
               "y_rand": 0.2
             }
@@ -82,7 +82,7 @@
               "motion_multiplier": 0.05,
               "particle_count": 100.0,
               "particle_type": "minecraft:flame",
-              "radius": 1.0,
+              "radius": 1.5,
               "shape": "CIRCLE_2D_EDGE",
               "y_rand": 0.2
             }
@@ -168,7 +168,7 @@
             "type": "aoe",
             "map": {
               "en_predicate": "enemies",
-              "radius": 3.0,
+              "radius": 5.0,
               "selection_type": "RADIUS"
             }
           }
@@ -201,6 +201,6 @@
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "fire_nova",
-  "manual_tip": false,
+  "manual_tip": true,
   "weight": 1000
 }

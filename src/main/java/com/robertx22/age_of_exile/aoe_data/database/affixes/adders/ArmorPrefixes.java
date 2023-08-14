@@ -51,7 +51,7 @@ public class ArmorPrefixes implements ExileRegistryInit {
         for (TYPE type : stats) {
             AffixBuilder.Normal("item_flat_" + type.suffix)
                     .Named(type.name)
-                    .stats(new StatMod(10, 50, type.stat, ModType.FLAT))
+                    .stats(new StatMod(10, 50, type.stat, ModType.PERCENT))
                     .includesTags(type.tag)
                     .Prefix()
                     .Build();

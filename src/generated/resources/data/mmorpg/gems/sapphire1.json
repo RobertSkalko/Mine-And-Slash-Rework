@@ -2,6 +2,7 @@
   "gem_type": "sapphire",
   "identifier": "sapphire1",
   "item_id": "mmorpg:gems/sapphire/1",
+  "min_lvl_multi": 0.1,
   "on_armor_stats": [
     {
       "type": "FLAT",

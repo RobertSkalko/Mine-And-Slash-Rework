@@ -130,7 +130,7 @@ public class DamageEvent extends EffectEvent {
 
             if (dmg > 0) {
 
-            
+
             }
 
         }
@@ -333,9 +333,10 @@ public class DamageEvent extends EffectEvent {
                 }
             }
 
+            // todo test how different inv speeds feel
             if (target instanceof Player == false) {
-                target.invulnerableTime = 0; // disable iframes hopefully
-                target.hurtTime = 0;
+                target.invulnerableTime = 3; // disable iframes hopefully
+                target.hurtTime = 3;
             }
 
 

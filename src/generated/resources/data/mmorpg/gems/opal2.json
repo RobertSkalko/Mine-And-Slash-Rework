@@ -2,6 +2,7 @@
   "gem_type": "opal",
   "identifier": "opal2",
   "item_id": "mmorpg:gems/opal/2",
+  "min_lvl_multi": 0.2,
   "on_armor_stats": [
     {
       "type": "FLAT",

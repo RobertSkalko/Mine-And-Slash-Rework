@@ -14,7 +14,7 @@
   },
   "stats": [
     {
-      "type": "FLAT",
+      "type": "PERCENT",
       "max": 50.0,
       "min": 10.0,
       "stat": "gear_defense"
