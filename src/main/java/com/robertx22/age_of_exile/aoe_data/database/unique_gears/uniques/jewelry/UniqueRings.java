@@ -12,11 +12,13 @@ import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalR
 import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuality;
 import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuantity;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.special.SpecialStats;
+import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCostReduction;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -144,6 +146,16 @@ public class UniqueRings implements ExileRegistryInit {
                 ))
 
                 .build();
+
+
+        UniqueGearBuilder.of("thread_of_hope", "Thread of Hope", BaseGearTypes.RING)
+                .keepsBaseName()
+                .stat(AuraCostReduction.getInstance().mod(-25, 25))
+                .stat(Health.getInstance().mod(5, 10))
+                .stat(Mana.getInstance().mod(5, 10))
+                .stat(Energy.getInstance().mod(5, 10))
+                .build();
+
 
     }
 }

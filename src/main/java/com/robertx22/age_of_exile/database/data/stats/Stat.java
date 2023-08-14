@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.stats;
 
+import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.base.BaseDatapackStat;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageIncreaseEffect;
 import com.robertx22.age_of_exile.database.data.stats.name_regex.StatNameRegex;
@@ -235,6 +236,10 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     @OnlyIn(Dist.CLIENT)
     public List<MutableComponent> getTooltipList(TooltipStatWithContext info) {
         return info.statinfo.tooltipInfo.statTooltipType.impl.getTooltipList(null, info);
+    }
+
+    public StatMod mod(float v1, float v2) {
+        return new StatMod(v1, v2, this);
     }
 
     public enum StatGroup {

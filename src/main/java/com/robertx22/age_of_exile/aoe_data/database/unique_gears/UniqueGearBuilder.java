@@ -36,6 +36,12 @@ public class UniqueGearBuilder {
         return this;
     }
 
+    public UniqueGearBuilder stat(StatMod stat) {
+        this.uniq.uniqueStats.add(stat);
+        return this;
+    }
+
+
     // delete this not needed
     public UniqueGearBuilder setReplacesName() {
         this.uniq.replaces_name = true;

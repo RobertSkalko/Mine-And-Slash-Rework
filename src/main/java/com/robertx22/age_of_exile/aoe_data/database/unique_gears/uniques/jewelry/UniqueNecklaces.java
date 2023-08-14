@@ -8,10 +8,13 @@ import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuild
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDuration;
+import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.EnergyRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
+import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCostReduction;
+import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -67,6 +70,17 @@ public class UniqueNecklaces implements ExileRegistryInit {
                         new StatMod(50, 50, new AilmentDuration(Ailments.POISON), ModType.FLAT),
                         new StatMod(-100, -100, ManaRegen.getInstance(), ModType.MORE),
                         new StatMod(-100, -100, EnergyRegen.getInstance(), ModType.MORE)
+                ))
+
+                .build();
+
+        UniqueGearBuilder.of("the_unseen_eye", "Unseen Eye", BaseGearTypes.NECKLACE)
+                .keepsBaseName()
+                .stats(Arrays.asList(
+                        AuraCostReduction.getInstance().mod(5, 10),
+                        AuraEffect.getInstance().mod(-10, 10),
+                        DodgeRating.getInstance().mod(5, 25).percent(),
+                        new ElementalResist(Elements.Chaos).mod(25, 25)
                 ))
                 .build();
 

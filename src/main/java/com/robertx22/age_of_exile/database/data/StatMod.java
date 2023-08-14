@@ -111,6 +111,18 @@ public class StatMod implements ISerializable<StatMod> {
         return ModType.fromString(type);
     }
 
+    public StatMod percent() {
+        if (!this.GetStat().IsPercent()) {
+            this.type = ModType.PERCENT.name();
+        }
+        return this;
+    }
+
+    public StatMod more() {
+        this.type = ModType.MORE.name();
+        return this;
+    }
+
     @Override
     public JsonObject toJson() {
 

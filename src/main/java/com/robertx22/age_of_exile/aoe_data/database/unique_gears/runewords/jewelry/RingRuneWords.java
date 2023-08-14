@@ -19,10 +19,8 @@ public class RingRuneWords implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-       
-        UniqueGearBuilder.of(
-                        "air_disaster",
-                        "Aria of Disaster",
+
+        UniqueGearBuilder.of("air_disaster", "Aria of Disaster",
                         BaseGearTypes.RING)
                 .setReplacesName()
                 .stats(Arrays.asList(

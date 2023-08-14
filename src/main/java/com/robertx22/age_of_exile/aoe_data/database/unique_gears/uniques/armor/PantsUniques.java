@@ -7,6 +7,8 @@ import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuild
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.gear_base.GearDefense;
+import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
+import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -26,5 +28,15 @@ public class PantsUniques implements ExileRegistryInit {
                         new StatMod(-25, -25, Stats.COOLDOWN_REDUCTION.get(), ModType.PERCENT)
                 ))
                 .build();
+
+        UniqueGearBuilder.of("sculpted_perfection", "Sculpted Perfection", BaseGearTypes.CLOTH_PANTS)
+                .keepsBaseName()
+                .stat(GearDefense.getInstance().mod(50, 150).percent())
+                .stat(AuraEffect.getInstance().mod(5, 15))
+                .stat(new ElementalResist(Elements.Fire).mod(10, 10))
+                .stat(new ElementalResist(Elements.Cold).mod(10, 10))
+                .stat(new ElementalResist(Elements.Chaos).mod(10, 10))
+                .build();
+
     }
 }

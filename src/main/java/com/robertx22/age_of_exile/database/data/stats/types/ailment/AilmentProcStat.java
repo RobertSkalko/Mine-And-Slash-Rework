@@ -65,6 +65,7 @@ public class AilmentProcStat extends Stat {
         return name + " Chance";
     }
 
+    
     @Override
     public String GUID() {
         return ailment.GUID() + "_proc_chance";

@@ -9,16 +9,18 @@ import java.util.stream.Collectors;
 
 public class RunewordBuilder {
 
+
     //call this from a special unique builder for runeword uniques
     public static void of(String id, String uniqueid, List<RuneItem.RuneType> runes, String... gear_slots) {
         RuneWord word = new RuneWord();
         word.id = id;
         word.uniq_id = uniqueid;
         word.runes = runes.stream()
-            .map(x -> x.id)
-            .collect(Collectors.toList());
-        word.addToSerializables();
+                .map(x -> x.id)
+                .collect(Collectors.toList());
         word.slots.addAll(Arrays.asList(gear_slots));
+        word.addToSerializables();
+
     }
 
 }

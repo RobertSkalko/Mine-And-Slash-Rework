@@ -40,7 +40,9 @@ public class MobStatUtils {
         List<ExactStatData> stats = new ArrayList<>();
 
         for (Elements ele : Elements.getAllSingle()) {
-            stats.add(ExactStatData.scaleTo(0.5F, ModType.FLAT, new BonusAttackDamage(ele).GUID(), data.getLevel()));
+            if (ele != Elements.Physical) {
+                stats.add(ExactStatData.scaleTo(0.5F, ModType.FLAT, new BonusAttackDamage(ele).GUID(), data.getLevel()));
+            }
         }
 
         return Arrays.asList(new MiscStatCtx(stats));

@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.saveclasses.unit;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import net.minecraft.util.Mth;
 
 public class StatData {
 
@@ -54,9 +53,9 @@ public class StatData {
     }
 
     public float getValue() {
-        
-        Stat stat = GetStat();
-        return Mth.clamp(v1, stat.min, stat.max);
+        //  Stat stat = GetStat();
+        return v1;
+        // todo this shouldnt be needed return Mth.clamp(v1, stat.min, stat.max);
     }
 
 

@@ -24,6 +24,8 @@ public class ElementalResistEffect extends BaseDamageEffect {
     public DamageEvent activate(DamageEvent effect, StatData data, Stat stat) {
 
 
+        // todo how do i do max ele resist
+
         float pene = effect.getPenetration();
 
         int resist = (int) data.getValue();
