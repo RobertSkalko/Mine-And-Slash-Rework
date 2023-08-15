@@ -23,7 +23,7 @@
     {
       "type": "FLAT",
       "scale_to_lvl": true,
-      "stat": "energy_on_all_hit",
+      "stat": "energy_on_hit_hit",
       "v1": 1.2
     }
   ],

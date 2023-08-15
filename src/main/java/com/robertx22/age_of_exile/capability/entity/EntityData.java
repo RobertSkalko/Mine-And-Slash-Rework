@@ -564,7 +564,7 @@ public class EntityData implements ICap, INeededForClient {
                     .getGearSlot();
 
             float cost = Energy.getInstance().scale(ModType.FLAT, slot.energy_cost, getLevel());
-            
+
             SpendResourceEvent event = new SpendResourceEvent(entity, ResourceType.energy, cost);
             event.calculateEffects();
 
@@ -612,7 +612,7 @@ public class EntityData implements ICap, INeededForClient {
         }
 
         DamageEvent dmg = EventBuilder.ofDamage(data, entity, data.getTargetEntity(), num)
-                .setupDamage(AttackType.attack, WeaponTypes.none, style)
+                .setupDamage(AttackType.hit, WeaponTypes.none, style)
                 .setIsBasicAttack()
                 .build();
 

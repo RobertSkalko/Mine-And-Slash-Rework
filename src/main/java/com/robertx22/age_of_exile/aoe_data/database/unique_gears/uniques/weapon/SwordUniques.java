@@ -21,9 +21,9 @@ public class SwordUniques implements ExileRegistryInit {
                 .setReplacesName()
                 .stats(Arrays.asList(
                         new StatMod(25, 150, GearDamage.getInstance(), ModType.PERCENT),
-                        new StatMod(3, 3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.energy, AttackType.attack)), ModType.FLAT),
-                        new StatMod(3, 3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.mana, AttackType.attack)), ModType.FLAT),
-                        new StatMod(3, 3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.health, AttackType.attack)), ModType.FLAT)
+                        new StatMod(3, 3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.energy, AttackType.hit)), ModType.FLAT),
+                        new StatMod(3, 3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.mana, AttackType.hit)), ModType.FLAT),
+                        new StatMod(3, 3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.health, AttackType.hit)), ModType.FLAT)
                 ))
                 .build();
     }

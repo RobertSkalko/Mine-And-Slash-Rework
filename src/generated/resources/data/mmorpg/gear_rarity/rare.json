@@ -19,7 +19,7 @@
     "max": 40,
     "min": 20
   },
-  "socket_chance": 10,
+  "socket_chance": 15,
   "text_format": "AQUA",
   "weight": 500
 }

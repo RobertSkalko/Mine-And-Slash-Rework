@@ -143,7 +143,7 @@ public class EventData {
     }
 
     public AttackType getAttackType() {
-        return AttackType.valueOf(strings.getOrDefault(ATTACK_TYPE, AttackType.attack.name()));
+        return AttackType.valueOf(strings.getOrDefault(ATTACK_TYPE, AttackType.hit.name()));
     }
 
     public PlayStyle getStyle() {

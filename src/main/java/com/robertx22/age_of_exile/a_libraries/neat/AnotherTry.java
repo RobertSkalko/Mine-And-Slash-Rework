@@ -12,12 +12,17 @@ public class AnotherTry {
 
         ForgeEvents.registerForgeEvent(RenderNameTagEvent.class, event -> {
 
-            Minecraft mc = Minecraft.getInstance();
+            try {
+                Minecraft mc = Minecraft.getInstance();
 
-            if (event.getEntity() instanceof LivingEntity en) {
-                RenderMobInfo.renderLivingEntityLabelIfPresent(mc.font, mc.getEntityRenderDispatcher(), en, event.getPoseStack(),
-                        event.getMultiBufferSource(), event.getPackedLight());
+                if (event.getEntity() instanceof LivingEntity en) {
+                    RenderMobInfo.renderLivingEntityLabelIfPresent(mc.font, mc.getEntityRenderDispatcher(), en, event.getPoseStack(),
+                            event.getMultiBufferSource(), event.getPackedLight());
+                }
+            } catch (Exception e) {
+                // throw new RuntimeException(e);
             }
+
         });
 
 

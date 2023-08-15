@@ -78,7 +78,7 @@ public class ItemNewbieGearBag extends Item {
             return this;
         }
 
-        
+
         public void give(Player player) {
 
             // todo if i create a choose gui, give players a choice of 1 spell
@@ -89,8 +89,10 @@ public class ItemNewbieGearBag extends Item {
 
                 var data = b.createData();
                 data.id = s;
+                data.sal = false;
 
                 ItemStack stack = data.getItem().getDefaultInstance();
+
                 StackSaving.SKILL_GEM.saveTo(stack, data);
 
                 PlayerUtils.giveItem(stack, player);
@@ -101,9 +103,6 @@ public class ItemNewbieGearBag extends Item {
                 BaseGearType gear = ExileDB.GearTypes()
                         .getFilterWrapped(e -> e.gear_slot.equals(x))
                         .random();
-                GearItemData data = getBlueprint(gear).createData();
-                data.lvl = 1;
-                data.sal = false;
 
                 GearBlueprint b = new GearBlueprint(1);
                 b.level.set(1);
@@ -111,7 +110,13 @@ public class ItemNewbieGearBag extends Item {
                         .get(IRarity.COMMON_ID));
                 b.gearItemSlot.set(gear);
 
-                ItemStack stack = b.createStack();
+
+                GearItemData data = b.createData();
+                data.sal = false;
+
+                ItemStack stack = data.getRarity().getLootableItem(data.GetBaseGearType().getGearSlot()).getDefaultInstance();
+
+                data.saveToStack(stack);
 
                 EnchantedBookItem.addEnchantment(stack, new EnchantmentInstance(Enchantments.UNBREAKING, 3));
 

@@ -2,7 +2,7 @@
   "base": 0.0,
   "effect": {
     "effects": [
-      "restore_energy_per_stat_data"
+      "restore_mana_per_stat_data"
     ],
     "events": [
       "on_damage"
@@ -17,7 +17,7 @@
   "format": "aqua",
   "group": "Misc",
   "icon": "❁",
-  "id": "energy_on_attack_hit",
+  "id": "mana_on_hit_hit",
   "is_long": false,
   "is_perc": false,
   "max": 2.14748365E9,

@@ -510,7 +510,7 @@ public class DamageEvent extends EffectEvent {
 
                 // this seems like it could be buggy
                 DamageEvent bonus = EventBuilder.ofDamage(attackInfo, source, target, entry.getValue())
-                        .setupDamage(AttackType.attack, data.getWeaponType(), data.getStyle())
+                        .setupDamage(AttackType.hit, data.getWeaponType(), data.getStyle())
                         .set(x -> x.setElement(entry.getKey()))
                         .build();
 

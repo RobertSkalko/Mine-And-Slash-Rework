@@ -60,6 +60,9 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
     @Override
     public List<ItemStack> getSalvageResult(ItemStack stack) {
+        if (!isSalvagable()) {
+            return Arrays.asList();
+        }
         int amount = 1; // todo
         return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(getRarity().GUID()).get(), amount));
     }
@@ -71,7 +74,7 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
     @Override
     public boolean isSalvagable() {
-        return true;
+        return sal;
     }
 
     @Override
@@ -97,6 +100,7 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
     public int perc = 0;
     public String rar = IRarity.COMMON_ID;
     public int links = 1;
+    public boolean sal = true;
 
 
     public enum SkillGemType {

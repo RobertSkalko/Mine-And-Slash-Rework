@@ -7,13 +7,13 @@ import java.util.List;
 
 public enum AttackType {
 
-    attack("attack", "Attack") {},
+    hit("hit", "Hit") {},
     dot("dot", "DOT") {},
-    reflect("reflect", "Reflect") {},
-    all("all", "Any") {};
+    reflect("reflect", "Reflect") {};
+    // all("all", "Any") {};
 
     public static List<AttackType> getAllUsed() {
-        return Arrays.asList(attack, all);
+        return Arrays.asList(hit);
     }
 
     public String id;
@@ -27,13 +27,14 @@ public enum AttackType {
 
 
     public boolean isHit() {
-        return this == attack;
+        return this == hit;
     }
 
     public boolean isAttack() {
-        return this == attack;
+        return this == hit;
     }
 
+    /*
 
     public boolean isDot() {
         return this == dot;
@@ -48,6 +49,8 @@ public enum AttackType {
         return this == other;
     }
 
+
+     */
     public String locname;
 
 }

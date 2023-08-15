@@ -5,7 +5,7 @@
   "replaces_name": true,
   "unique_stats": [
     {
-      "type": "flat",
+      "type": "percent",
       "max": 50.0,
       "min": 25.0,
       "stat": "gear_defense"

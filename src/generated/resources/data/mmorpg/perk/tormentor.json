@@ -7,7 +7,7 @@
     {
       "type": "MORE",
       "scale_to_lvl": false,
-      "stat": "dot_dmg",
+      "stat": "ailment_damage",
       "v1": 35.0
     },
     {

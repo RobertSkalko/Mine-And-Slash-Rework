@@ -68,7 +68,7 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
                             spendEnergy.Activate();
 
                             DamageEvent dmg = EventBuilder.ofSpellDamage(caster, event.mob, num, spell)
-                                    .setupDamage(AttackType.attack, WeaponTypes.none, PlayStyle.INT)
+                                    .setupDamage(AttackType.hit, WeaponTypes.none, PlayStyle.INT)
                                     .setIsBasicAttack()
                                     .set(x -> x.data.setBoolean(EventData.IS_SUMMON_ATTACK, true))
                                     .build();

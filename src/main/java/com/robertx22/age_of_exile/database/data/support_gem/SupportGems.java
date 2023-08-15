@@ -2,11 +2,15 @@ package com.robertx22.age_of_exile.database.data.support_gem;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.base.ResourceAndAttack;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentProcStat;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AllAilmentDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.HitDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalPenetration;
+import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
+import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
@@ -17,6 +21,19 @@ public class SupportGems {
 
 
     public static void init() {
+
+
+        for (ResourceType res : ResourceType.getUsed()) {
+            new SupportGem(res.id + "_on_hit", res.locname + " On Hit", PlayStyle.DEX, 1.2F,
+                    Arrays.asList(new StatMod(1, 3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(res, AttackType.hit)), ModType.FLAT)
+                    )).registerToExileRegistry();
+        }
+
+        for (Elements ele : Elements.getAllSingle()) {
+            new SupportGem(ele.guidName + "_pene", ele.dmgName + " Penetration", PlayStyle.STR, 1.25F,
+                    Arrays.asList(new StatMod(15, 30, new ElementalPenetration(ele), ModType.FLAT)
+                    )).registerToExileRegistry();
+        }
 
         new SupportGem("proc_freeze", "Ice Breaker", PlayStyle.DEX, 1.3F,
                 Arrays.asList(new StatMod(25, 100, new AilmentProcStat(Ailments.FREEZE), ModType.FLAT)
@@ -49,6 +66,17 @@ public class SupportGems {
                 Arrays.asList(new StatMod(15, 35, Stats.STYLE_DAMAGE.get(PlayStyle.DEX), ModType.MORE)
                 )).registerToExileRegistry();
 
+        new SupportGem("aoe_dmg", "Area Focus", PlayStyle.INT, 1.3F,
+                Arrays.asList(
+                        new StatMod(15, 35, Stats.AREA_DAMAGE.get(), ModType.MORE),
+                        new StatMod(-20, -50, Stats.INCREASED_AREA.get(), ModType.FLAT)
+                )).registerToExileRegistry();
+
+        new SupportGem("plus_aoe", "Expanded Area", PlayStyle.STR, 1.2F,
+                Arrays.asList(
+                        new StatMod(-10, -25, Stats.AREA_DAMAGE.get(), ModType.MORE),
+                        new StatMod(20, 40, Stats.INCREASED_AREA.get(), ModType.FLAT)
+                )).registerToExileRegistry();
 
         new SupportGem("cold_damage", "Cold Damage", PlayStyle.DEX, 1.3F,
                 Arrays.asList(new StatMod(15, 30, Stats.ELEMENTAL_DAMAGE.get(Elements.Cold), ModType.MORE)
@@ -122,7 +150,7 @@ public class SupportGems {
                 Arrays.asList(new StatMod(10, 25, Stats.NON_CRIT_DAMAGE.get(), ModType.MORE)
                 )).registerToExileRegistry();
 
-        
+
         // durations
 
         new SupportGem("summon_duration", "Summon Duration", PlayStyle.INT, 1.3F,

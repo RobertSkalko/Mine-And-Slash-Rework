@@ -107,7 +107,7 @@ public class StatConditions implements ExileRegistryInit {
     // todo
     public static StatCondition IS_ATTACK_OR_SPELL_ATTACK = new EitherIsTrueCondition(
             "is_attack_or_spell_attack",
-            Arrays.asList(ATTACK_TYPE_MATCHES.get(AttackType.attack).GUID())
+            Arrays.asList(ATTACK_TYPE_MATCHES.get(AttackType.hit).GUID())
     );
 
 

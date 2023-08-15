@@ -19,7 +19,7 @@
     "max": 80,
     "min": 60
   },
-  "socket_chance": 20,
+  "socket_chance": 30,
   "text_format": "GOLD",
   "weight": 50
 }

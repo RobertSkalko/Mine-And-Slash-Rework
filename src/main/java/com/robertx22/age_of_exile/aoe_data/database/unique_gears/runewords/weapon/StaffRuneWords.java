@@ -19,7 +19,7 @@ public class StaffRuneWords implements ExileRegistryInit, GearDataHelper {
 
         UniqueGearBuilder.of("doombolt", "Touch of Doom", BaseGearTypes.BOW)
                 .stats(Arrays.asList(
-                        new StatMod(0, 100, GearDamage.getInstance()),
+                        new StatMod(0, 100, GearDamage.getInstance()).percent(),
                         new StatMod(15, 30, Stats.ELEMENTAL_DAMAGE.get(Elements.Chaos)),
                         new StatMod(1, 1, Stats.SPELL_LIFESTEAL.get()),
                         new StatMod(10, 25, Stats.DOT_DAMAGE.get())

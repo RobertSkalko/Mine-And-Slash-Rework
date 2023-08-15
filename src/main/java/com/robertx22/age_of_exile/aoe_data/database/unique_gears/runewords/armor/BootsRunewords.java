@@ -21,7 +21,7 @@ public class BootsRunewords implements ExileRegistryInit {
 
         UniqueGearBuilder.of("ice_stomper", "Ice Stomper", BaseGearTypes.PLATE_BOOTS)
                 .stats(Arrays.asList(
-                        new StatMod(25, 150, GearDefense.getInstance(), ModType.FLAT),
+                        new StatMod(25, 150, GearDefense.getInstance(), ModType.PERCENT),
                         new StatMod(25, 50, new AilmentProcStat(Ailments.FREEZE), ModType.FLAT),
                         new StatMod(25, 50, new AilmentProcStat(Ailments.ELECTRIFY), ModType.FLAT),
                         new StatMod(-25, -25, new ElementalResist(Elements.Chaos), ModType.FLAT)

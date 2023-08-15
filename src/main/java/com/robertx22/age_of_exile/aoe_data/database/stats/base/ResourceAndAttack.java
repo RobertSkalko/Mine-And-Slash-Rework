@@ -26,6 +26,7 @@ public class ResourceAndAttack extends AutoHashClass {
         List<ResourceAndAttack> list = new ArrayList<>();
 
         for (AttackType type : AttackType.getAllUsed()) {
+            list.add(new ResourceAndAttack(ResourceType.magic_shield, type));
             list.add(new ResourceAndAttack(ResourceType.health, type));
             list.add(new ResourceAndAttack(ResourceType.mana, type));
             list.add(new ResourceAndAttack(ResourceType.energy, type));

@@ -1,13 +1,13 @@
 {
   "type": "STAT",
-  "icon": "mmorpg:textures/gui/stat_icons/misc/health_on_attack_hit.png",
+  "icon": "mmorpg:textures/gui/stat_icons/misc/health_on_hit_hit.png",
   "id": "health_on_hit",
   "is_entry": false,
   "stats": [
     {
       "type": "FLAT",
       "scale_to_lvl": false,
-      "stat": "health_on_attack_hit",
+      "stat": "health_on_hit_hit",
       "v1": 3.0
     }
   ]

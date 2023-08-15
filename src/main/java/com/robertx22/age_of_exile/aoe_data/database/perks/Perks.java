@@ -187,8 +187,8 @@ public class Perks implements ExileRegistryInit {
         PerkBuilder.bigStat(new OptScaleExactStat(10, Stats.STYLE_DAMAGE.get(PlayStyle.INT), ModType.FLAT));
 
 
-        PerkBuilder.stat("mana_on_hit", new OptScaleExactStat(3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.mana, AttackType.attack)), ModType.FLAT));
-        PerkBuilder.stat("health_on_hit", new OptScaleExactStat(3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.health, AttackType.attack)), ModType.FLAT));
+        PerkBuilder.stat("mana_on_hit", new OptScaleExactStat(3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.mana, AttackType.hit)), ModType.FLAT));
+        PerkBuilder.stat("health_on_hit", new OptScaleExactStat(3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.health, AttackType.hit)), ModType.FLAT));
 
 
         for (PhysicalToElement x : PhysicalToElement.MAP.MAP.values()) {

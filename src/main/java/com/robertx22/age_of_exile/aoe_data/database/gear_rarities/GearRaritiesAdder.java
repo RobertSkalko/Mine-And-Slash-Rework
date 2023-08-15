@@ -42,7 +42,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
         GearRarity rare = new GearRarity();
         rare.max_sockets = 2;
-        rare.socket_chance = 10;
+        rare.socket_chance = 15;
         rare.lootable_gear_tier = GearRarity.LootableGearTier.MID;
         rare.pot = new GearRarity.Potential(200, 1.5F);
         rare.item_tier = 2;
@@ -58,7 +58,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
         GearRarity epic = new GearRarity();
         epic.max_sockets = 3;
-        epic.socket_chance = 15;
+        epic.socket_chance = 20;
         epic.lootable_gear_tier = GearRarity.LootableGearTier.MID;
         epic.pot = new GearRarity.Potential(250, 1.5F);
         epic.min_affixes = 4;
@@ -74,7 +74,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
         GearRarity legendary = new GearRarity();
         legendary.max_sockets = 3;
-        legendary.socket_chance = 20;
+        legendary.socket_chance = 30;
         legendary.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
         legendary.pot = new GearRarity.Potential(300, 1.75F);
         legendary.min_affixes = 5;
@@ -92,7 +92,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
         GearRarity mythic = new GearRarity();
         mythic.max_sockets = 3;
-        mythic.socket_chance = 30;
+        mythic.socket_chance = 50;
         mythic.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
         mythic.pot = new GearRarity.Potential(350, 2F);
         mythic.min_affixes = 6;

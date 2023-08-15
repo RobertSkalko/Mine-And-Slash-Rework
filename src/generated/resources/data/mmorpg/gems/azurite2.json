@@ -23,7 +23,7 @@
     {
       "type": "FLAT",
       "scale_to_lvl": true,
-      "stat": "mana_on_attack_hit",
+      "stat": "mana_on_hit_hit",
       "v1": 0.90000004
     }
   ],

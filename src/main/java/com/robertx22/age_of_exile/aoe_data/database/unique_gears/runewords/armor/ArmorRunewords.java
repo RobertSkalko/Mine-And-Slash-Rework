@@ -20,7 +20,7 @@ public class ArmorRunewords implements ExileRegistryInit {
 
         UniqueGearBuilder.of("frostburn_prot", "Frostburn Ward", BaseGearTypes.CLOTH_HELMET)
                 .stats(Arrays.asList(
-                        new StatMod(25, 50, GearDefense.getInstance(), ModType.FLAT),
+                        new StatMod(25, 50, GearDefense.getInstance(), ModType.PERCENT),
                         new StatMod(25, 50, new AilmentResistance(Ailments.FREEZE), ModType.FLAT),
                         new StatMod(25, 50, new AilmentResistance(Ailments.BURN), ModType.FLAT),
                         new StatMod(15, 25, new ElementalResist(Elements.Fire), ModType.FLAT),
@@ -28,7 +28,7 @@ public class ArmorRunewords implements ExileRegistryInit {
                 ))
                 .makeRuneWordOnly(Arrays.asList(RuneItem.RuneType.ITA, RuneItem.RuneType.DOS, RuneItem.RuneType.NOS))
                 .build();
-        
+
     }
 
 }

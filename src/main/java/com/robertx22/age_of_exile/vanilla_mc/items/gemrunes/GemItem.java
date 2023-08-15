@@ -294,7 +294,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
 
             @Override
             public List<StatMod> onWeapons() {
-                return Arrays.asList(new StatMod(1, 3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.mana, AttackType.attack))));
+                return Arrays.asList(new StatMod(1, 3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.mana, AttackType.hit))));
             }
         }),
 
@@ -343,7 +343,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
 
             @Override
             public List<StatMod> onWeapons() {
-                return Arrays.asList(new StatMod(1, 3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.energy, AttackType.all))));
+                return Arrays.asList(new StatMod(1, 3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.energy, AttackType.hit))));
             }
         }),
         AMETHYST("amethyst", "Amethyst", ChatFormatting.DARK_PURPLE, new GemStatPerTypes() {
@@ -378,7 +378,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
             this.stats = stats;
         }
     }
-    
+
 
     public enum GemRank {
         CRACKED("Cracked", 0, 0.1F, 100, 100999, 0F),

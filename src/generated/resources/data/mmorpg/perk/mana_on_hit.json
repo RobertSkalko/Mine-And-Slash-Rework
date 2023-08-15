@@ -1,13 +1,13 @@
 {
   "type": "STAT",
-  "icon": "mmorpg:textures/gui/stat_icons/misc/mana_on_attack_hit.png",
+  "icon": "mmorpg:textures/gui/stat_icons/misc/mana_on_hit_hit.png",
   "id": "mana_on_hit",
   "is_entry": false,
   "stats": [
     {
       "type": "FLAT",
       "scale_to_lvl": false,
-      "stat": "mana_on_attack_hit",
+      "stat": "mana_on_hit_hit",
       "v1": 3.0
     }
   ]
