@@ -87,7 +87,11 @@ minecraft {
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
 dependencies {
 
     minecraft([
@@ -101,13 +105,10 @@ dependencies {
         annotationProcessor 'org.spongepowered:mixin:0.8.3:processor'
     }
 
-    implementation fg.deobf(files("libs/Library_of_Exile-1.20.1-1.2.3.jar"))
+    implementation fg.deobf("blank:Library_of_Exile-1.20.1:1.3.0")
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
 
 }
-
-
-// CURSEFORGE STUFF
 
 
 jar {
@@ -117,49 +118,35 @@ jar {
                 "MixinConfigs"  : "mmorpg-mixins.json"
         ])
     }
+    finalizedBy 'reobfJar'
 }
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
-/*
-curseforge {
-
-    def curseProp = new Properties()
-    File secretPropsFile = file("key.properties")
-    curseProp.load(secretPropsFile.newInputStream())
-
-    project {
-        apiKey = curseProp.getProperty('curseKey')
-        id = "${curse_id}"
-        releaseType = "${curse_release}"
-        changelogType = 'text'
-        changelog = file('CHANGELOG.md')
-        addGameVersion("${project.minecraft_version}")
-        addGameVersion("Forge")
-        addGameVersion("Java 8")
-
-        relations {          
-            requiredDependency 'library-of-exile'
-            requiredDependency 'curios'
-            requiredDependency 'dungeons-of-exile'
-			requiredDependency 'divine-missions'
-        }
-        mainArtifact(jar)
-
-        afterEvaluate {
-            uploadTask.dependsOn("jar")
-        }
-    }
-    options {
-        forgeGradleIntegration = true
-    }
-}
-
- */
 
 apply plugin: 'org.spongepowered.mixin'
 mixin {
     add sourceSets.main, "mmorpg.refmap.json"
+}
+
+
+publishMods {
+
+    file = jar.archiveFile
+    changelog = file("CHANGELOG.txt").text
+    type = BETA
+    modLoaders.add("forge")
+
+    curseforge {
+        accessToken = file("key.properties").text
+        projectId = $ { curse_id }
+        displayName = "${mod_archive_name}-${minecraft_version}-v${mod_version}"
+        minecraftVersions.add("${minecraft_version}")
+        minecraftVersions.add("1.20")
+
+        requires(slug = "library-of-exile")
+        requires(slug = "curios")
+    }
 }

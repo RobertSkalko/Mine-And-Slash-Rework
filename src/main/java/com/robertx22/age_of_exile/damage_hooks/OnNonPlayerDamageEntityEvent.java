@@ -65,6 +65,9 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
 
                         if (spendEnergy.data.getNumber() <= Load.Unit(caster).getResources().getEnergy()) {
 
+                            event.damage = 0;
+                            event.canceled = true;
+
                             spendEnergy.Activate();
 
                             DamageEvent dmg = EventBuilder.ofSpellDamage(caster, event.mob, num, spell)

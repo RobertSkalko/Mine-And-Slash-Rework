@@ -1,0 +1,66 @@
+V5.0.0 (1.20.1 Port and back on Forge!)
+
+TALENTS UPDATE:
+- are back!
+
+DUNGEON UPDATE:
+- are back!
+- PLUS new dungeons made by @Eclipse/@Serphentin!
+
+GEAR UPDATE:
+- gear now has local stats. These stats directly add to the base stat of the gear, meaning a good affix combination is way more important to maximize defenses and damage.
+- elemental resistances are now way more important but also easier to get. As a rule of thumb, you should be dying a lot if you aren't res capped
+- gear now drops as actual items again! Although gear souls will still ocasionally drop so you can stick them into any modded items you want, as long as the auto compatibility code detects it (should work with most armor)
+
+COMBAT UPDATE:
+ - No more basic attack cooldown, you are now only limited by your energy (there's a super tiny cooldown actually, just so you can't instant kill things!)
+ - Added new stat: Full Swing Damage, if you want to spec into vanilla type slower hitting combat
+ 
+SKILL GEM SYSTEM:
+ - we're back to no class restrictions!
+ - each spell can be supported by up to 5 support gems depending on amount of gem links
+ - "classes" will still exist as Ascendancy classes
+ 
+QOL CHANGES:
+- backpacks are now innate to characters
+- most spells are instant cast now
+- most stations removed, they are now items
+- you can click rarity stones to repair your gear
+- you can click currencies to craft gear
+- you can click a salvage hammer to salvage gear
+ 
+SUMMONS:
+ - summoned pet spells implemented
+ - you can now be a summoner of: golems, undead or beasts! 
+ - summoned pets spend your energy to attack, but their damage scales with you too 
+ 
+JEWELS
+- new feature, talent tree gives you jewel socket slots, which you can socket the jewels in
+- remember you can use jewels to help you cap your resistances
+- you might want to figure out how to get all the unique jewels that exist, some are very powerful
+  
+AURAS:
+ - most "boring" buff spells will now be auras instead, permanently activate on you if you have enough spirit
+ - you can socket more auras by having high enough aura cost reduction stat (look for it on talent tree or some unique items)
+
+BALANCE:
+- mobs will now all have some of their phys dmg as bonus elemental damage
+- newbies will now get 50% > 25% > 0% bonus elemental resists (lvl 1 > lvl 25> lvl 50 >)
+- players will be expected to cap their elemental resists to survive
+
+AILMENTS:
+ - several effects like chill, burn etc have been replaced with Ailments.
+ - ailments are special stackable effects that are the main focus of each specific elements
+ - Those are: Burn, Freeze, Electrify, Poison, Bleed.
+ - DOT Ailments can now be stacked infinitely and each have separate duration
+ - Ailment damage is based on base damage of the hit now and scales damage on its own
+
+MISC STUFF:
+ - % stats no longer scale with levels, now they use the tiered affix system: higher tier affixes require a higher item level 
+ - stats were simplified. Multi is now "More" and it's multiplicative with every modifier. Increased is now Extra (this is for giving % increase to % stats.. i try not to use this if not needed).
+ - mob level now always scales to nearest player, and modpacks are encouraged to make valuable dimensions higher levels
+ - max level will be 100 again
+ - backacks are no longer items, but also they are! Ahem, you can now access backpacks with your main hub, but you can also socket in backpack items (think of MNS gear items) that decide how many slots your backpacks have.
+ - meteor spells should now no longer be useless in tight spaces
+ - players are now teamed by default and all friendly spells should work and pvp damage should be off
+ - weapon types now have a dmg multiplier that only really affects basic attacks. So bows will deal way more damage (and cost way more energy), because they attack so slow

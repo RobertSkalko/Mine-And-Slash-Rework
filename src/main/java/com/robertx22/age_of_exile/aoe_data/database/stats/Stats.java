@@ -846,7 +846,7 @@ public class Stats implements ExileRegistryInit {
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.summon))
             .addEffect(StatEffects.DURATION_INCREASE)
             .setLocName(x -> "Summon Duration")
-            .setLocDesc(x -> "")
+            .setLocDesc(x -> "Your summons last longer (mobs like zombie, wolf etc summons)")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
                 x.icon = "\u27B9";

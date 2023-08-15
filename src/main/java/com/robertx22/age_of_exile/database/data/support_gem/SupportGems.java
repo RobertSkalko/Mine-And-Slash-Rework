@@ -98,7 +98,7 @@ public class SupportGems {
         new SupportGem("ailment_damage_less_hit_dmg", "Ailment Damage", PlayStyle.DEX, 1.3F,
                 Arrays.asList(
                         new StatMod(20, 45, AllAilmentDamage.getInstance(), ModType.MORE),
-                        new StatMod(-75, -75, HitDamage.getInstance(), ModType.MORE)
+                        new StatMod(-10, -10, HitDamage.getInstance(), ModType.MORE)
                 )).registerToExileRegistry();
 
         new SupportGem("spell_damage_no_crit", "Restrained Destruction", PlayStyle.DEX, 1.3F,
