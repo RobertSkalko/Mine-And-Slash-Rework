@@ -25,9 +25,9 @@ public class GearSlots implements ExileRegistryInit {
     public void registerAll() {
 
         new GearSlot(SWORD, "Sword", SlotFamily.Weapon, 4, 1, 1000).addToSerializables();
-        new GearSlot(STAFF, "Staff", SlotFamily.Weapon, 3, 3, 1500).addToSerializables();
-        new GearSlot(BOW, "Bow", SlotFamily.Weapon, 8, 5, 1000).addToSerializables();
-        new GearSlot(CROSBOW, "Crossbow", SlotFamily.Weapon, 7, 6, 500).addToSerializables();
+        new GearSlot(STAFF, "Staff", SlotFamily.Weapon, 4, 3, 1500).addToSerializables();
+        new GearSlot(BOW, "Bow", SlotFamily.Weapon, 10, 5, 1000).addToSerializables();
+        new GearSlot(CROSBOW, "Crossbow", SlotFamily.Weapon, 10, 6, 500).addToSerializables();
 
         new GearSlot(BOOTS, "Boots", SlotFamily.Armor, 0, 7, 1000).addToSerializables();
         new GearSlot(PANTS, "Pants", SlotFamily.Armor, 0, 8, 1000).addToSerializables();

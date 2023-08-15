@@ -39,7 +39,6 @@ public class SlashItems {
     public static RegObj<MapItem> MAP = Def.item(() -> new MapItem(), "map");
     public static RegObj<Item> MAP_SETTER = Def.item(() -> new Item(new Item.Properties()), "set_map");
     public static RegObj<Item> MAP_DEVICE = Def.item(() -> new BlockItem(SlashBlocks.MAP.get(), new Item.Properties()), "teleporter");
-    public static RegObj<IdentifyTomeItem> IDENTIFY_TOME = Def.item(() -> new IdentifyTomeItem(), "identify_tome");
     public static RegObj<Item> TP_BACK = Def.item(() -> new TpBackItem(), "tp_back");
     public static RegObj<Item> INVISIBLE_ICON = Def.item(() -> new Item(new Item.Properties()), "invisible_item");
     public static RegObj<LootCrateItem> LOOT_CRATE = Def.item(() -> new LootCrateItem(), "loot_crate/default");
@@ -49,11 +48,7 @@ public class SlashItems {
     public static RegObj<ProjectileItem> SNOWBALL = Def.item(() -> new ProjectileItem("snowball"), "projectile/" + "snowball");
     public static RegObj<ProjectileItem> SLIMEBALL = Def.item(() -> new ProjectileItem("slimeball"), "projectile/" + "slimeball");
 
-    // public static RegObj<EssencePaperItem> ESSENCE_PAPER = Def.item(() -> new EssencePaperItem(), "scroll/paper");
-
-
     public static RegObj<LootTableItem> LOOT_TABLE_ITEM = Def.item(() -> new LootTableItem(), "loot_table_chest");
-
 
     public static RegObj<Item> NEWBIE_GEAR_BAG = Def.item(() -> new ItemNewbieGearBag(), "newbie_gear_bag");
     public static RegObj<Item> SALVAGE_HAMMER = Def.item(() -> new SalvageHammerItem(), "salvage_hammer");

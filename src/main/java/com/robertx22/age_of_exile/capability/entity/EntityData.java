@@ -563,8 +563,8 @@ public class EntityData implements ICap, INeededForClient {
             GearSlot slot = data.weaponData.GetBaseGearType()
                     .getGearSlot();
 
-            float cost = Energy.getInstance()
-                    .scale(ModType.FLAT, slot.energy_cost, getLevel());
+            float cost = Energy.getInstance().scale(ModType.FLAT, slot.energy_cost, getLevel());
+            
             SpendResourceEvent event = new SpendResourceEvent(entity, ResourceType.energy, cost);
             event.calculateEffects();
 

@@ -1,7 +1,5 @@
 package com.robertx22.age_of_exile.gui.screens.character_screen;
 
-import com.robertx22.age_of_exile.a_libraries.curios.MyCurioUtils;
-import com.robertx22.age_of_exile.a_libraries.curios.RefCurio;
 import com.robertx22.age_of_exile.gui.bases.BaseScreen;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -12,7 +10,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
@@ -31,15 +28,20 @@ public class PlayerGearButton extends ImageButton {
         this.player = player;
         this.screen = screen;
 
-        addItemButton(MyCurioUtils.get(RefCurio.NECKLACE, player, 0), 0, 4);
-        addItemButton(MyCurioUtils.get(RefCurio.RING, player, 0), 0, 22);
-        addItemButton(MyCurioUtils.get(RefCurio.RING, player, 1), 0, 40);
+        // todo why is this broken
 
-        addItemButton(player.getItemBySlot(EquipmentSlot.HEAD), 81, 4);
-        addItemButton(player.getItemBySlot(EquipmentSlot.CHEST), 81, 22);
-        addItemButton(player.getItemBySlot(EquipmentSlot.LEGS), 81, 40);
-        addItemButton(player.getItemBySlot(EquipmentSlot.FEET), 81, 58);
+/*
+        addItemButton(MyCurioUtils.get(RefCurio.NECKLACE, player, 0), this.getX() + 0, this.getY() + 4);
+        addItemButton(MyCurioUtils.get(RefCurio.RING, player, 0), this.getX() + 0, this.getY() + 22);
+        addItemButton(MyCurioUtils.get(RefCurio.RING, player, 1), this.getX() + 0, this.getY() + 40);
 
+        addItemButton(player.getItemBySlot(EquipmentSlot.HEAD), this.getX() + 81, this.getY() + 4);
+        addItemButton(player.getItemBySlot(EquipmentSlot.CHEST), this.getX() + 81, this.getY() + 22);
+        addItemButton(player.getItemBySlot(EquipmentSlot.LEGS), this.getX() + 81, this.getY() + 40);
+        addItemButton(player.getItemBySlot(EquipmentSlot.FEET), this.getX() + 81, this.getY() + 58);
+
+
+ */
         // addItemButton(player.getEquippedStack(EquipmentSlot.MAINHAND), 58, 69);
         //addItemButton(player.getEquippedStack(EquipmentSlot.OFFHAND), 179, 69);
 

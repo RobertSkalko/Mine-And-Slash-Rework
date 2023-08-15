@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.maps.generator.ChunkProcessData;
 import com.robertx22.age_of_exile.maps.mobs.SpawnedMob;
 import com.robertx22.age_of_exile.maps.processors.DataProcessor;
 import com.robertx22.age_of_exile.maps.processors.helpers.MobBuilder;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.core.BlockPos;
@@ -92,6 +93,7 @@ public class ComplexMobProcessor extends DataProcessor {
 
             if (type == null) {
                 if (isBoss) {
+
                     filter = filter.filter(m -> m.canBeBoss);
                 }
                 type = RandomUtils.weightedRandom(filter.collect(Collectors.toList())).type;
@@ -100,12 +102,16 @@ public class ComplexMobProcessor extends DataProcessor {
             // temps
             int finalAmount = amount;
             MobRarity finalRarity = rarity;
-            MobBuilder.of(type, x -> {
+            for (Mob mob : MobBuilder.of(type, x -> {
                 x.amount = finalAmount;
                 if (finalRarity != null) {
                     x.rarity = finalRarity;
                 }
-            }).summonMobs(world, pos);
+            }).summonMobs(world, pos)) {
+                if (isBoss) {
+                    Load.Unit(mob).setupRandomBoss();
+                }
+            }
 
 
         } catch (Exception e) {

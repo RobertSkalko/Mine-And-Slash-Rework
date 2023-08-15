@@ -380,9 +380,8 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     @Override
     public List<ItemStack> getSalvageResult(ItemStack stack) {
         if (this.sal) {
-
-            int amount = 1; // todo
-            return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(getRarity().GUID()).get(), amount)); // todo fix this
+            int amount = 1;
+            return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(getRarity().GUID()).get(), amount));
         }
 
         return Arrays.asList(ItemStack.EMPTY);

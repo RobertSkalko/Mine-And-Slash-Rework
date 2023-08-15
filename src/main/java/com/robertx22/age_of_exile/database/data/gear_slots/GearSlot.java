@@ -39,6 +39,10 @@ public class GearSlot implements JsonExileRegistry<GearSlot>, IAutoGson<GearSlot
         this.weight = weight;
     }
 
+    public float getBasicDamageMulti() {
+        return energy_cost / 5F;
+    }
+
     public static GearSlot getSlotOf(Item item) {
 
         if (CACHED.containsKey(item)) {

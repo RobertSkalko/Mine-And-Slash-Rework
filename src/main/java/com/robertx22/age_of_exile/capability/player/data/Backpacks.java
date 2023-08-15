@@ -29,7 +29,7 @@ public class Backpacks {
         GEARS("gear", Words.Gear) {
             @Override
             public boolean isValid(ItemStack stack) {
-                return StackSaving.GEARS.has(stack);
+                return StackSaving.GEARS.has(stack) || StackSaving.JEWEL.has(stack);
             }
         },
         CURRENCY("currency", Words.Currency) {

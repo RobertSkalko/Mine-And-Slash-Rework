@@ -5,13 +5,17 @@ import com.robertx22.age_of_exile.damage_hooks.util.DmgSourceUtils;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEntity;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mixin_methods.OnHurtEvent;
+import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
+import com.robertx22.age_of_exile.uncommon.effectdatas.SpendResourceEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
+import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
@@ -35,7 +39,7 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
             return;
         }
         if (!(event.source.getEntity() instanceof Player)) {
-           
+
             if (event.source.getEntity() instanceof SummonEntity summon) {
                 LivingEntity caster = summon.getOwner();
                 if (caster != null) {
@@ -44,19 +48,33 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
                             .getCalculatedStat(WeaponDamage.getInstance())
                             .getValue();
 
-                    num *= 0.5F; // gotta nerf summons a bit i think or they would be op for every build?
+                    float dmgMulti = 0.5F;
+
+                    num *= dmgMulti; // gotta nerf summons a bit i think or they would be op for every build?
                     // to make them more viable more summoners, ill make summon damage stats bigger
+
 
                     Spell spell = ExileDB.Spells().get(Load.Unit(summon).summonedPetData.spell);
 
                     if (spell != null) {
-                        DamageEvent dmg = EventBuilder.ofSpellDamage(caster, event.mob, num, spell)
-                                .setupDamage(AttackType.attack, WeaponTypes.none, PlayStyle.INT)
-                                .setIsBasicAttack()
-                                .set(x -> x.data.setBoolean(EventData.IS_SUMMON_ATTACK, true))
-                                .build();
 
-                        dmg.Activate();
+                        float cost = Energy.getInstance().scale(ModType.FLAT, 5, Load.Unit(caster).getLevel()) * dmgMulti;
+
+                        SpendResourceEvent spendEnergy = new SpendResourceEvent(caster, ResourceType.energy, cost);
+                        spendEnergy.calculateEffects();
+
+                        if (spendEnergy.data.getNumber() <= Load.Unit(caster).getResources().getEnergy()) {
+
+                            spendEnergy.Activate();
+
+                            DamageEvent dmg = EventBuilder.ofSpellDamage(caster, event.mob, num, spell)
+                                    .setupDamage(AttackType.attack, WeaponTypes.none, PlayStyle.INT)
+                                    .setIsBasicAttack()
+                                    .set(x -> x.data.setBoolean(EventData.IS_SUMMON_ATTACK, true))
+                                    .build();
+
+                            dmg.Activate();
+                        }
                     }
                 }
             } else {

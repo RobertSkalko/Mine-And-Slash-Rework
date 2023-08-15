@@ -235,8 +235,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
             y += MainHubButton.ySize + 0;
         }
 
-
-        int xp = guiLeft + 30;
+        int xp = guiLeft + 77;
         int yp = guiTop + 120;
 
         for (StatType type : StatType.values()) {

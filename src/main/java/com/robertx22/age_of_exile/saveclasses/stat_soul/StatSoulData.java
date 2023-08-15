@@ -4,19 +4,25 @@ import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
+import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
-import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISettableLevelTier;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
+import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.List;
 
 
-public class StatSoulData implements IRarity, ISettableLevelTier {
+public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevelTier {
 
 
     public int tier = 1;
@@ -158,13 +164,39 @@ public class StatSoulData implements IRarity, ISettableLevelTier {
 
     @Override
     public GearRarity getRarity() {
-        return ExileDB.GearRarities()
-                .get(rar);
+        return ExileDB.GearRarities().get(rar);
     }
 
 
     @Override
     public void setTier(int tier) {
         this.tier = tier;
+    }
+
+    @Override
+    public void BuildTooltip(TooltipContext ctx) {
+
+    }
+
+    @Override
+    public ItemstackDataSaver<? extends ICommonDataItem> getStackSaver() {
+        return StackSaving.STAT_SOULS;
+    }
+
+    @Override
+    public void saveToStack(ItemStack stack) {
+        StackSaving.STAT_SOULS.saveTo(stack, this);
+    }
+
+    @Override
+    public List<ItemStack> getSalvageResult(ItemStack stack) {
+        int amount = 1;
+        return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(getRarity().GUID()).get(), amount));
+    }
+
+
+    @Override
+    public ToggleAutoSalvageRarity.SalvageType getSalvageType() {
+        return ToggleAutoSalvageRarity.SalvageType.GEAR;
     }
 }

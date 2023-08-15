@@ -108,7 +108,8 @@ public class MobAffixes implements ExileRegistryInit {
         // special ones that are only set from boss spells etc
         new MobAffix(THORNY, Stats.DAMAGE_REFLECTED.get()
                 .getFormatAndIcon(), ChatFormatting.RED)
-                .setMods(new StatMod(25, 50, Stats.DAMAGE_REFLECTED.get()))
+                .setMods(new StatMod(10, 25, Stats.DAMAGE_REFLECTED.get()))
+                .setMods(new StatMod(100, 250, Health.getInstance()))
                 .setWeight(0)
                 .addToSerializables();
 

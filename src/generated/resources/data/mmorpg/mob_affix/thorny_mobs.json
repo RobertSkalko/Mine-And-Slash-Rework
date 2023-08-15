@@ -5,9 +5,9 @@
   "stats": [
     {
       "type": "flat",
-      "max": 50.0,
-      "min": 25.0,
-      "stat": "damage_reflected"
+      "max": 250.0,
+      "min": 100.0,
+      "stat": "health"
     }
   ],
   "weight": 0

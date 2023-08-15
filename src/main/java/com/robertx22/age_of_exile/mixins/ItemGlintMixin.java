@@ -3,9 +3,7 @@ package com.robertx22.age_of_exile.mixins;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
-import com.robertx22.age_of_exile.database.registry.ExileDB;
-import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.resources.ResourceLocation;
@@ -30,23 +28,16 @@ public class ItemGlintMixin {
 
                 GearRarity rar = null;
 
-                if (StackSaving.GEARS.has(stack)) {
 
+                var data = ICommonDataItem.load(stack);
 
-                    GearItemData gear = StackSaving.GEARS.loadFrom(stack);
-
-                    rar = gear.getRarity();
-                }
-
-                if (StackSaving.STAT_SOULS.has(stack)) {
-                    try {
-                        rar = ExileDB.GearRarities()
-                                .get(StackSaving.STAT_SOULS.loadFrom(stack).rar);
-                    } catch (Exception e) {
-
+                if (data != null) {
+                    if (data.getRarity() instanceof GearRarity gr) {
+                        rar = gr;
                     }
                 }
 
+              
                 if (rar == null) {
                     return;
                 }

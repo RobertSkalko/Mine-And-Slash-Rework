@@ -51,7 +51,7 @@ public class OnItemInteract {
                                 SoundUtils.ding(player.level(), player.blockPosition());
                                 SoundUtils.playSound(player.level(), player.blockPosition(), SoundEvents.ANVIL_USE, 1, 1);
                                 x.setCanceled(true);
-
+                                
                                 return;
                             }
                         }
