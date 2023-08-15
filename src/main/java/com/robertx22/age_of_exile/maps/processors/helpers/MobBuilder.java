@@ -43,7 +43,9 @@ public class MobBuilder {
     private <T extends Mob> T summon(EntityType<T> type, Level world, BlockPos p) {
         MyPosition vec = new MyPosition(p);
 
+        
         T mob = (T) type.create(world);
+
         mob.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(p), MobSpawnType.REINFORCEMENT, null, null);
         mob.setPos(vec.x(), vec.y(), vec.z());
 

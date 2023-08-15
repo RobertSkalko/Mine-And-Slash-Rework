@@ -22,14 +22,22 @@ public class Backpacks {
         gears = new BackpackInventory(player, BackpackType.GEARS, MAX_SIZE);
         currencies = new BackpackInventory(player, BackpackType.CURRENCY, MAX_SIZE);
         skillGems = new BackpackInventory(player, BackpackType.SKILL_GEMS, MAX_SIZE);
+        maps = new BackpackInventory(player, BackpackType.MAPS, MAX_SIZE);
 
     }
+    
 
     public enum BackpackType {
         GEARS("gear", Words.Gear) {
             @Override
             public boolean isValid(ItemStack stack) {
                 return StackSaving.GEARS.has(stack) || StackSaving.JEWEL.has(stack);
+            }
+        },
+        MAPS("map", Words.Maps) {
+            @Override
+            public boolean isValid(ItemStack stack) {
+                return StackSaving.MAP.has(stack);
             }
         },
         CURRENCY("currency", Words.Currency) {
@@ -64,6 +72,7 @@ public class Backpacks {
     private BackpackInventory gears;
     private BackpackInventory currencies;
     private BackpackInventory skillGems;
+    private BackpackInventory maps;
 
 
     public BackpackInventory getInv(BackpackType type) {
@@ -77,8 +86,9 @@ public class Backpacks {
         if (type == BackpackType.SKILL_GEMS) {
             inv = skillGems;
         }
-
-
+        if (type == BackpackType.MAPS) {
+            inv = maps;
+        }
         return inv;
     }
 

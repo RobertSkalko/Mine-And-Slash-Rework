@@ -57,7 +57,11 @@ public class PlayerBackpackData implements ICap {
         CompoundTag nbt = new CompoundTag();
 
         for (Backpacks.BackpackType type : Backpacks.BackpackType.values()) {
-            nbt.put(type.id, data.getInv(type).createTag());
+            try {
+                nbt.put(type.id, data.getInv(type).createTag());
+            } catch (Exception e) {
+                // throw new RuntimeException(e);
+            }
         }
 
         return nbt;
@@ -67,7 +71,14 @@ public class PlayerBackpackData implements ICap {
     public void deserializeNBT(CompoundTag nbt) {
 
         for (Backpacks.BackpackType type : Backpacks.BackpackType.values()) {
-            data.getInv(type).fromTag(nbt.getList(type.id, 10)); // todo
+            try {
+                if (nbt.contains(type.id)) {
+                    data.getInv(type).fromTag(nbt.getList(type.id, 10)); // todo
+                }
+
+            } catch (Exception e) {
+                //throw new RuntimeException(e);
+            }
         }
     }
 

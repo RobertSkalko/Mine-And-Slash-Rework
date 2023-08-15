@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.aoe_data.database.perks;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
+import com.robertx22.age_of_exile.database.data.stats.types.ailment.AllAilmentDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.HitDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
@@ -105,7 +106,7 @@ public class GameChangerPerks implements ExileRegistryInit {
         );
 
         PerkBuilder.gameChanger("tormentor", "Tormentor",
-                new OptScaleExactStat(35, Stats.DOT_DAMAGE.get(), ModType.MORE),
+                new OptScaleExactStat(35, AllAilmentDamage.getInstance(), ModType.MORE),
                 new OptScaleExactStat(-10, Stats.TOTAL_DAMAGE.get(), ModType.MORE)
         );
 
