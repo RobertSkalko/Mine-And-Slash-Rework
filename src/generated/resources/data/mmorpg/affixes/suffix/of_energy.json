@@ -7,7 +7,8 @@
       {
         "excluded": [],
         "included": [
-          "ring"
+          "ring",
+          "jewel_dex"
         ]
       }
     ]
@@ -20,6 +21,5 @@
       "stat": "energy"
     }
   ],
-  "tags": [],
   "weight": 1000
 }

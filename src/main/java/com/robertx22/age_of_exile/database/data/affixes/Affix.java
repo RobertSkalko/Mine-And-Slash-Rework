@@ -17,6 +17,7 @@ public class Affix implements IWeighted, IGUID, IAutoLocName, IhasRequirements,
     public enum Type {
         prefix,
         suffix,
+        jewel,
         dungeon_prefix,
         dungeon_suffix,
         implicit;
@@ -45,10 +46,15 @@ public class Affix implements IWeighted, IGUID, IAutoLocName, IhasRequirements,
     public boolean only_one_per_item = true;
     public int weight = 1000;
     public Requirements requirements;
-    public List<String> tags = new ArrayList<>();
     public Type type;
 
     public List<StatMod> stats = new ArrayList<>();
+
+    public List<String> getAllTagReq() {
+        List<String> list = new ArrayList<>();
+        requirements.tag_requirements.forEach(x -> list.addAll(x.included));
+        return list;
+    }
 
     @Override
     public boolean isRegistryEntryValid() {

@@ -359,6 +359,7 @@ public enum Words implements IAutoLocName {
     WeaponOffhand("Weapon/Offhand"),
 
     Jewerly("Jewerly"),
+    Jewel("Jewel"),
 
     Offhand("Offhand"),
 

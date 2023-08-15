@@ -7,7 +7,8 @@
       {
         "excluded": [],
         "included": [
-          "mage_weapon"
+          "mage_weapon",
+          "jewel_str"
         ]
       }
     ]
@@ -15,17 +16,16 @@
   "stats": [
     {
       "type": "FLAT",
-      "max": 6.0,
-      "min": 2.0,
+      "max": 15.0,
+      "min": 3.0,
       "stat": "critical_hit"
     },
     {
       "type": "FLAT",
-      "max": 10.0,
+      "max": 15.0,
       "min": 3.0,
       "stat": "critical_damage"
     }
   ],
-  "tags": [],
   "weight": 100
 }

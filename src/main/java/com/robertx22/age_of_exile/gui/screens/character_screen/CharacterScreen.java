@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.capability.player.data.Backpacks;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.CoreStat;
+import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttributes;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
@@ -19,6 +20,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shie
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.gui.OpenJewelsScreen;
 import com.robertx22.age_of_exile.gui.bases.BaseScreen;
 import com.robertx22.age_of_exile.gui.bases.INamedScreen;
 import com.robertx22.age_of_exile.gui.buttons.CharacterStatsButtons;
@@ -125,7 +127,8 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         addTo(StatType.RESOURCE, Arrays.asList(Health.getInstance(), MagicShield.getInstance(), Mana.getInstance(), Energy.getInstance(), HealthRegen.getInstance(), MagicShieldRegen.getInstance(), ManaRegen.getInstance(), EnergyRegen.getInstance()));
 
         addTo(StatType.DEFENSE, Arrays.asList(Armor.getInstance(), DodgeRating.getInstance()));
-        addTo(StatType.DEFENSE, new ElementalResist(Elements.Elemental).generateAllPossibleStatVariations());
+        addTo(StatType.DEFENSE, new ElementalResist(Elements.Elemental).generateAllSingleVariations());
+        addTo(StatType.DEFENSE, new MaxElementalResist(Elements.Elemental).generateAllSingleVariations());
 
         addTo(StatType.DAMAGE, Arrays.asList(WeaponDamage.getInstance()));
         addTo(StatType.DAMAGE, Arrays.asList(Stats.CRIT_CHANCE.get(), Stats.CRIT_DAMAGE.get()));
@@ -201,6 +204,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         rightButtons.add(new OpenSkillGems());
         rightButtons.add(new TalentsScreen());
         rightButtons.add(new AscendancyClassScreen());
+        rightButtons.add(new OpenJewelsScreen());
 
 
         List<INamedScreen> leftButtons = new ArrayList<>();
@@ -210,6 +214,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         }
 
         leftButtons.add(new OpenInvGuiScreen(Words.Salvaging, "salvage", GuiInventoryGrids.ofSalvageConfig()));
+
 
         // screens.add(new SpellScreen());
 

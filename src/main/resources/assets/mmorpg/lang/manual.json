@@ -43,6 +43,10 @@
 "mmorpg.tooltip.socketable_item": "This Gem can be inserted into a Socket slot",
 "_comment": "RARITY ITEM NAMES",
 "_comment": "MISC ITEMS",
+"item.mmorpg.jewel.dex": "Viridian Jewel",
+"item.mmorpg.jewel.str": "Stardust Jewel",
+"item.mmorpg.jewel.int": "Meteorite Jewel",
+
 "item.mmorpg.map": "Adventure Map",
 "item.mmorpg.loot_bag": "Gear Loot Bag",
 "item.mmorpg.map_bag": "Map Bag",

@@ -8,7 +8,8 @@
       "on_damage"
     ],
     "ifs": [
-      "style_is_int_is_false"
+      "style_is_int_is_false",
+      "is_is_summon_attack_true_is_false"
     ],
     "order": 100,
     "side": "Source"

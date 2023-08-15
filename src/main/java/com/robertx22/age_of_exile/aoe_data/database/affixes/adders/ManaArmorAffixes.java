@@ -16,7 +16,7 @@ public class ManaArmorAffixes implements ExileRegistryInit {
         AffixBuilder.Normal("glimmering")
                 .Named("Glimmering")
                 .stats(new StatMod(4, 15, Mana.getInstance(), ModType.PERCENT))
-                .includesTags(SlotTag.armor_family)
+                .includesTags(SlotTag.armor_family, SlotTag.jewel_int)
                 .Prefix()
                 .Build();
 
@@ -24,14 +24,14 @@ public class ManaArmorAffixes implements ExileRegistryInit {
                 .Named("Seraphim's")
                 .stats(new StatMod(4, 10, Mana.getInstance(), ModType.PERCENT),
                         new StatMod(3, 6, Health.getInstance(), ModType.PERCENT))
-                .includesTags(SlotTag.armor_family)
+                .includesTags(SlotTag.armor_family, SlotTag.jewel_int)
                 .Prefix()
                 .Build();
 
         AffixBuilder.Normal("azure")
                 .Named("Azure")
                 .stats(new StatMod(2, 14, Mana.getInstance(), ModType.PERCENT))
-                .includesTags(SlotTag.armor_family)
+                .includesTags(SlotTag.armor_family, SlotTag.jewel_int)
                 .Prefix()
                 .Build();
 

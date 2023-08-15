@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.aoe_data.database.affixes;
 
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
-import com.robertx22.age_of_exile.database.data.affixes.AffixTag;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.requirements.Requirements;
 import com.robertx22.age_of_exile.database.data.requirements.TagRequirement;
@@ -19,7 +18,6 @@ public class GenericAffixBuilder<T> {
     List<T> elements = new ArrayList<>();
 
     int weight = 1000;
-    List<String> tags = new ArrayList<>();
     Affix.Type type;
 
     TagRequirement tagRequirement = new TagRequirement();
@@ -64,14 +62,7 @@ public class GenericAffixBuilder<T> {
         return this;
     }
 
-    public GenericAffixBuilder<T> Tags(AffixTag... tags) {
-        this.tags = Arrays.asList(tags)
-                .stream()
-                .map(x -> x.name())
-                .collect(Collectors.toList());
-        return this;
-    }
-
+    
     public GenericAffixBuilder<T> Prefix() {
         type = Affix.Type.prefix;
         return this;
@@ -110,7 +101,6 @@ public class GenericAffixBuilder<T> {
             affix.type = type;
             affix.weight = weight;
             affix.loc_name = nameMap.get(element);
-            affix.tags = tags;
 
             affix.addToSerializables();
         }

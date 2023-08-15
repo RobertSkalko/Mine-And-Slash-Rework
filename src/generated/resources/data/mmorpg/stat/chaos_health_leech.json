@@ -8,7 +8,8 @@
       "on_damage"
     ],
     "ifs": [
-      "ele_match_stat"
+      "ele_match_stat",
+      "is_is_summon_attack_true_is_false"
     ],
     "order": 100,
     "side": "Source"

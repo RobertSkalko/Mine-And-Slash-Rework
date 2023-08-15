@@ -7,7 +7,8 @@
       {
         "excluded": [],
         "included": [
-          "armor_family"
+          "armor_family",
+          "jewel_int"
         ]
       }
     ]
@@ -26,6 +27,5 @@
       "stat": "health"
     }
   ],
-  "tags": [],
   "weight": 1000
 }

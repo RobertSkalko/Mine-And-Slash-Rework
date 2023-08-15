@@ -383,8 +383,6 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
             int amount = 1; // todo
             return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(getRarity().item_tier).get(), amount)); // todo fix this
-
-
         }
 
         return Arrays.asList(ItemStack.EMPTY);

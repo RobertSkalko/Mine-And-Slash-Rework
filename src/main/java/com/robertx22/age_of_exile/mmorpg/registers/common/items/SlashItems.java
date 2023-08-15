@@ -69,6 +69,9 @@ public class SlashItems {
     public static RegObj<AscClassResetPotion> RESET_SPELLS = Def.item(() -> new AscClassResetPotion(), "potions/reset_spells");
     public static RegObj<ResetStatsPotion> RESET_STATS = Def.item(() -> new ResetStatsPotion(), "potions/reset_stats");
 
+    public static RegObj<Item> DEX_JEWEL = Def.item(() -> new Item(new Item.Properties().stacksTo(1)), "jewel/dex");
+    public static RegObj<Item> STR_JEWEL = Def.item(() -> new Item(new Item.Properties().stacksTo(1)), "jewel/str");
+    public static RegObj<Item> INT_JEWEL = Def.item(() -> new Item(new Item.Properties().stacksTo(1)), "jewel/int");
 
     public static class GearItems {
 

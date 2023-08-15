@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.aoe_data.database.affixes;
 
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
-import com.robertx22.age_of_exile.database.data.affixes.AffixTag;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.requirements.Requirements;
 import com.robertx22.age_of_exile.database.data.requirements.TagRequirement;
@@ -68,20 +67,13 @@ public class AffixBuilder {
         return this;
     }
 
-    public AffixBuilder Tags(AffixTag... tags) {
-        this.tags = Arrays.asList(tags)
-                .stream()
-                .map(x -> x.name())
-                .collect(Collectors.toList());
-        return this;
-    }
 
     public AffixBuilder coreStat(Stat stat) {
-        return this.stats(new StatMod(2, 6, stat, ModType.FLAT));
+        return this.stats(new StatMod(2, 15, stat, ModType.FLAT));
     }
 
     public AffixBuilder bigCoreStat(Stat stat) {
-        return this.stats(new StatMod(4, 8, stat, ModType.FLAT));
+        return this.stats(new StatMod(3, 25, stat, ModType.FLAT));
     }
 
     public AffixBuilder stats(StatMod... stats) {
@@ -122,8 +114,8 @@ public class AffixBuilder {
         affix.type = type;
         affix.weight = weight;
         affix.loc_name = langName;
-        affix.tags = tags;
 
+       
         affix.addToSerializables();
 
     }

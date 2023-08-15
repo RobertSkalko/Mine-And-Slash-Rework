@@ -8,7 +8,7 @@ import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.PointData;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IApplyableStats;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.TalentStatCtx;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -18,7 +18,7 @@ import net.minecraft.world.entity.player.Player;
 import java.util.*;
 
 
-public class TalentsData implements IApplyableStats {
+public class TalentsData implements IStatCtx {
 
 
     SchoolData perks = new SchoolData();
@@ -67,7 +67,7 @@ public class TalentsData implements IApplyableStats {
 
         Perk perk = school.calcData.getPerk(point);
 
-        
+
         if (perk.one_kind != null && !perk.one_kind.isEmpty()) {
             return getAllAllocatedPerks().values().stream().noneMatch(x -> x.one_kind != null && x.one_kind.equals(perk.one_kind));
         }

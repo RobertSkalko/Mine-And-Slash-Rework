@@ -34,6 +34,11 @@ public class Perks implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
+
+        // todo place on talents
+        PerkBuilder.socket();
+
+
         PerkBuilder.stat(new OptScaleExactStat(1, new UnknownStat(), ModType.FLAT));
 
 
@@ -66,7 +71,7 @@ public class Perks implements ExileRegistryInit {
         PerkBuilder.stat(new OptScaleExactStat(-2, Stats.MANA_COST.get(), ModType.FLAT));
         PerkBuilder.bigStat(new OptScaleExactStat(-5, Stats.MANA_COST.get(), ModType.FLAT));
 
-      
+
         PerkBuilder.stat(new OptScaleExactStat(2, Stats.PROJECTILE_DAMAGE.get(), ModType.FLAT));
 
         PerkBuilder.stat(new OptScaleExactStat(2, Stats.CRIT_DAMAGE.get(), ModType.FLAT));

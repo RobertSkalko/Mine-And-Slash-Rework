@@ -46,7 +46,7 @@ public class OnServerTick {
 
 
                 if (WorldUtils.isMapWorldClass(player.level())) {
-                   
+
                     if (player.tickCount % 40 == 0) {
                         if (player.getInventory().countItem(SlashItems.TP_BACK.get()) < 1) {
                             PlayerUtils.giveItem(SlashItems.TP_BACK.get().getDefaultInstance(), player);
@@ -67,8 +67,9 @@ public class OnServerTick {
 
                 Load.playerRPGData(player).getSkillGemInventory().removeSupportGemsIfTooMany(player);
 
-                Load.playerRPGData(player)
-                        .spellCastingData.charges.onTicks(player, 20);
+                Load.playerRPGData(player).getJewels().checkRemoveJewels(player);
+
+                Load.playerRPGData(player).spellCastingData.charges.onTicks(player, 20);
             }
         }));
 

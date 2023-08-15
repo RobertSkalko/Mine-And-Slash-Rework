@@ -2,11 +2,8 @@ package com.robertx22.age_of_exile.aoe_data.database.affixes.adders.slot_specifi
 
 import com.robertx22.age_of_exile.aoe_data.database.affixes.AffixBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
-
-import static com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType.SlotTag;
-
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType.SlotTag;
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
 public class ArmorSpecific implements ExileRegistryInit {
     @Override
@@ -17,7 +14,7 @@ public class ArmorSpecific implements ExileRegistryInit {
                 .bigCoreStat(DatapackStats.INT)
                 .includesTags(SlotTag.armor_family)
                 .Suffix()
-                .Weight(1000)
+                .Weight(500)
                 .Build();
 
         AffixBuilder.Normal("strong_str_armor_suf")
@@ -25,7 +22,7 @@ public class ArmorSpecific implements ExileRegistryInit {
                 .bigCoreStat(DatapackStats.STR)
                 .includesTags(SlotTag.armor_family)
                 .Suffix()
-                .Weight(1000)
+                .Weight(500)
                 .Build();
 
         AffixBuilder.Normal("strong_dex_armor_suf")
@@ -33,7 +30,7 @@ public class ArmorSpecific implements ExileRegistryInit {
                 .bigCoreStat(DatapackStats.DEX)
                 .includesTags(SlotTag.armor_family)
                 .Suffix()
-                .Weight(1000)
+                .Weight(500)
                 .Build();
 
 

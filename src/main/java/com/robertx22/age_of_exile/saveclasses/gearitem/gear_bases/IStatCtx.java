@@ -5,7 +5,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 import java.util.List;
 
-public interface IApplyableStats {
+public interface IStatCtx {
 
     List<StatContext> getStatAndContext(LivingEntity en);
 

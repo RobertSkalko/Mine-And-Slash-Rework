@@ -7,7 +7,8 @@
       {
         "excluded": [],
         "included": [
-          "weapon_family"
+          "weapon_family",
+          "jewel_dex"
         ]
       }
     ]
@@ -15,11 +16,10 @@
   "stats": [
     {
       "type": "FLAT",
-      "max": 10.0,
-      "min": 3.0,
+      "max": 15.0,
+      "min": 5.0,
       "stat": "all_fire_damage"
     }
   ],
-  "tags": [],
   "weight": 1000
 }

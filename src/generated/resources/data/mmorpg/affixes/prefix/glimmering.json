@@ -7,7 +7,8 @@
       {
         "excluded": [],
         "included": [
-          "armor_family"
+          "armor_family",
+          "jewel_int"
         ]
       }
     ]
@@ -20,6 +21,5 @@
       "stat": "mana"
     }
   ],
-  "tags": [],
   "weight": 1000
 }

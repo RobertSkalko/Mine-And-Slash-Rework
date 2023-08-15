@@ -42,7 +42,7 @@ public class ToggleAutoSalvageRarity extends GuiAction {
         return list;
     }
 
-    
+
     @Override
     public void doAction(Player p) {
         Load.playerRPGData(p).config.salvage.toggle(type, rarity.GUID());
@@ -65,6 +65,7 @@ public class ToggleAutoSalvageRarity extends GuiAction {
 
     public enum SalvageType {
         GEAR(Words.Gear),
+        JEWEL(Words.Jewel),
         SPELL(Words.SkillGem);
 
         public Words word;

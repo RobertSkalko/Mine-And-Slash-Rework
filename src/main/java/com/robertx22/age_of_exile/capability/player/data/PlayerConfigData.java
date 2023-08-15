@@ -25,7 +25,6 @@ public class PlayerConfigData {
                 return false; // we don't want to auto salvage gear that is likely to have been worn or important
             }
 
-
             ICommonDataItem<GearRarity> data = ICommonDataItem.load(stack);
 
             if (data != null) {

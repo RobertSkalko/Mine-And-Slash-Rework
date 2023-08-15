@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.aoe_data.database.affixes;
 
 import com.robertx22.age_of_exile.aoe_data.database.affixes.adders.ArmorPrefixes;
+import com.robertx22.age_of_exile.aoe_data.database.affixes.adders.JewelAffixes;
 import com.robertx22.age_of_exile.aoe_data.database.affixes.adders.ManaArmorAffixes;
 import com.robertx22.age_of_exile.aoe_data.database.affixes.adders.WeaponPrefixes;
 import com.robertx22.age_of_exile.aoe_data.database.affixes.adders.jewelry.JewelryPrefixes;
@@ -17,6 +18,8 @@ public class Prefixes implements IRandomDefault<Affix>, ExileRegistryInit {
     @Override
     public void registerAll() {
 
+        new JewelAffixes().registerAll();
+
         new WeaponPrefixes().registerAll();
         new ArmorPrefixes().registerAll();
         new JewelryPrefixes().registerAll();
@@ -29,9 +32,9 @@ public class Prefixes implements IRandomDefault<Affix>, ExileRegistryInit {
     @Override
     public List<Affix> All() {
         return ExileDB.Affixes()
-            .getWrapped()
-            .of(ExileFilters.ofAffixType(Affix.Type.prefix))
-            .list;
+                .getWrapped()
+                .of(ExileFilters.ofAffixType(Affix.Type.prefix))
+                .list;
     }
 
 }

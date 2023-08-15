@@ -25,8 +25,6 @@ public class OpenBackpackPacket extends MyPacket<OpenBackpackPacket> {
     @Override
     public void loadFromData(FriendlyByteBuf buf) {
         this.type = buf.readEnum(Backpacks.BackpackType.class);
-
-
     }
 
     @Override

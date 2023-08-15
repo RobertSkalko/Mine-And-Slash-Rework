@@ -42,8 +42,8 @@ public class WeaponPrefixes implements ExileRegistryInit {
                 .add(Elements.Cold, "Chilled")
                 .add(Elements.Chaos, "Poisoned")
                 .add(Elements.Physical, "Tyrannical")
-                .stats(x -> Arrays.asList(new StatMod(3, 10, Stats.ELEMENTAL_DAMAGE.get(x), ModType.FLAT)))
-                .includesTags(SlotTag.weapon_family)
+                .stats(x -> Arrays.asList(new StatMod(5, 15, Stats.ELEMENTAL_DAMAGE.get(x), ModType.FLAT)))
+                .includesTags(SlotTag.weapon_family, SlotTag.jewel_dex)
                 .Prefix()
                 .Build();
 
@@ -54,14 +54,14 @@ public class WeaponPrefixes implements ExileRegistryInit {
                 .add(Elements.Lightning, "Poisoned")
                 .stats(x -> Arrays.asList(new StatMod(5, 15, Stats.ELEMENTAL_SPELL_DAMAGE.get(x))))
                 .Weight(500)
-                .includesTags(SlotTag.mage_weapon)
+                .includesTags(SlotTag.mage_weapon, SlotTag.jewel_int)
                 .Prefix()
                 .Build();
 
         AffixBuilder.Normal("desolation")
                 .Named("Desolation")
-                .stats(new StatMod(2, 6, Stats.CRIT_CHANCE.get()), new StatMod(3, 10, Stats.CRIT_DAMAGE.get()))
-                .includesTags(SlotTag.mage_weapon)
+                .stats(new StatMod(3, 15, Stats.CRIT_CHANCE.get()), new StatMod(3, 15, Stats.CRIT_DAMAGE.get()))
+                .includesTags(SlotTag.mage_weapon, SlotTag.jewel_str)
                 .Weight(100)
                 .Prefix()
                 .Build();
@@ -69,14 +69,14 @@ public class WeaponPrefixes implements ExileRegistryInit {
 
         AffixBuilder.Normal("true_hit")
                 .Named("True Hit")
-                .stats(new StatMod(2, 10, Stats.CRIT_CHANCE.get(), ModType.FLAT))
+                .stats(new StatMod(3, 25, Stats.CRIT_CHANCE.get(), ModType.FLAT))
                 .includesTags(SlotTag.weapon_family)
                 .Prefix()
                 .Build();
 
         AffixBuilder.Normal("crit_prefix")
                 .Named("Critical")
-                .stats(new StatMod(4, 12, Stats.CRIT_DAMAGE.get(), ModType.FLAT))
+                .stats(new StatMod(6, 30, Stats.CRIT_DAMAGE.get(), ModType.FLAT))
                 .includesTags(SlotTag.weapon_family)
                 .Prefix()
                 .Build();

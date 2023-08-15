@@ -5,13 +5,13 @@
   "is_entry": false,
   "stats": [
     {
-      "type": "FLAT",
+      "type": "MORE",
       "scale_to_lvl": false,
       "stat": "dot_dmg",
       "v1": 35.0
     },
     {
-      "type": "FLAT",
+      "type": "MORE",
       "scale_to_lvl": false,
       "stat": "total_damage",
       "v1": -10.0

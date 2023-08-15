@@ -15,11 +15,10 @@
   "stats": [
     {
       "type": "FLAT",
-      "max": 8.0,
-      "min": 4.0,
+      "max": 25.0,
+      "min": 3.0,
       "stat": "strength"
     }
   ],
-  "tags": [],
-  "weight": 1000
+  "weight": 500
 }

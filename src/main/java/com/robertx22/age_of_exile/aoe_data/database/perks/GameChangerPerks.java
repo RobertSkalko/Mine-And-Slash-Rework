@@ -25,7 +25,7 @@ public class GameChangerPerks implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        
+
         PerkBuilder.gameChanger("summoner", "Summoner",
                 new OptScaleExactStat(+3, Stats.MAX_SUMMON_CAPACITY.get(), ModType.FLAT),
                 new OptScaleExactStat(50, Stats.SUMMON_DAMAGE.get(), ModType.MORE),
@@ -100,13 +100,13 @@ public class GameChangerPerks implements ExileRegistryInit {
         );
 
         PerkBuilder.gameChanger("divinity", "Divinity",
-                new OptScaleExactStat(100, DatapackStats.HEAL_TO_SPELL_DMG, ModType.FLAT),
+                new OptScaleExactStat(50, DatapackStats.HEAL_TO_SPELL_DMG, ModType.FLAT),
                 new OptScaleExactStat(-50, Stats.CRIT_DAMAGE.get(), ModType.MORE)
         );
 
         PerkBuilder.gameChanger("tormentor", "Tormentor",
-                new OptScaleExactStat(35, Stats.DOT_DAMAGE.get(), ModType.FLAT),
-                new OptScaleExactStat(-10, Stats.TOTAL_DAMAGE.get(), ModType.FLAT)
+                new OptScaleExactStat(35, Stats.DOT_DAMAGE.get(), ModType.MORE),
+                new OptScaleExactStat(-10, Stats.TOTAL_DAMAGE.get(), ModType.MORE)
         );
 
     }

@@ -5,7 +5,9 @@ import com.robertx22.age_of_exile.database.data.affixes.Affix;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.*;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IRerollable;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatsContainer;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
@@ -21,7 +23,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer {
+public class AffixData implements IRerollable, IStatsContainer {
 
 
     // perc
@@ -31,14 +33,13 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
     public int t;
     public Affix.Type ty;
 
-    
+
     public void setTier(int t) {
         this.t = MathHelper.clamp(t, 0, 10); // todo if i rework tiers
     }
 
 
-    @Override
-    public MinMax getMinMax(GearItemData gear) {
+    public MinMax getMinMax() {
         return new MinMax((t * 10) - 10, t * 10); // todo temporary
     }
 
@@ -58,10 +59,10 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
         return ty;
     }
 
-    @Override
-    public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {
+
+    public List<Component> GetTooltipString(TooltipInfo info, int lvl) {
         List<Component> list = new ArrayList<Component>();
-        getAllStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
+        getAllStatsWithCtx(lvl, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
         return list;
     }
 
@@ -70,14 +71,10 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
                 .get(this.id);
     }
 
-    @Override
-    public IGearPart.Part getPart() {
-        return IGearPart.Part.AFFIX;
-    }
 
     @Override
     public void RerollNumbers(GearItemData gear) {
-        p = getMinMax(gear).random();
+        p = getMinMax().random();
     }
 
 
@@ -90,15 +87,15 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
                 .get(id);
     }
 
-    public List<TooltipStatWithContext> getAllStatsWithCtx(GearItemData gear, TooltipInfo info) {
+    public List<TooltipStatWithContext> getAllStatsWithCtx(int lvl, TooltipInfo info) {
         List<TooltipStatWithContext> list = new ArrayList<>();
         this.BaseAffix()
                 .getStats()
                 .forEach(x -> {
-                    ExactStatData exact = x.ToExactStat(p, gear.getLevel());
+                    ExactStatData exact = x.ToExactStat(p, lvl);
                     TooltipStatInfo confo = new TooltipStatInfo(exact, p, info);
                     confo.affix_tier = getAffixTier();
-                    list.add(new TooltipStatWithContext(confo, x, (int) gear.getLevel()));
+                    list.add(new TooltipStatWithContext(confo, x, (int) lvl));
                 });
         return list;
     }
@@ -118,6 +115,12 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
     @Override
     public List<ExactStatData> GetAllStats(GearItemData gear) {
 
+        return GetAllStats(gear.getLevel());
+
+    }
+
+    public List<ExactStatData> GetAllStats(int lvl) {
+
         if (!isValid()) {
             return Arrays.asList();
         }
@@ -125,7 +128,7 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
         return this.BaseAffix()
                 .getStats()
                 .stream()
-                .map(x -> x.ToExactStat(p, gear.getLevel()))
+                .map(x -> x.ToExactStat(p, lvl))
                 .collect(Collectors.toList());
 
     }
@@ -151,7 +154,7 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
             affix = list
                     .random();
 
-            this.randomizeTier(gear);
+            this.randomizeTier(gear.getLevel());
 
         } catch (Exception e) {
             System.out.print("Gear Type: " + gear.gtype + " affixtype: " + this.ty.name());
@@ -165,9 +168,9 @@ public class AffixData implements IRerollable, IGearPartTooltip, IStatsContainer
 
     // this is kinda simplified.. but might be fine
 
-    public void randomizeTier(GearItemData gear) {
+    public void randomizeTier(int lvl) {
 
-        int num = (int) (gear.getLevel() / (float) GameBalanceConfig.get().MAX_LEVEL * 10);
+        int num = (int) (lvl / (float) GameBalanceConfig.get().MAX_LEVEL * 10);
         num = Mth.clamp(num, 1, 10);
 
         num += 1; // we want t10 to be availble a bit earlier

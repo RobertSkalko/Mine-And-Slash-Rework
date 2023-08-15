@@ -2,7 +2,9 @@ package com.robertx22.age_of_exile.aoe_data.database.perks;
 
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
+import com.robertx22.age_of_exile.database.data.stats.types.JewelSocketStat;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
@@ -75,6 +77,29 @@ public class PerkBuilder {
         Perk perk = stat(id, stat);
         perk.type = Perk.PerkType.SPECIAL;
         perk.locname = locname;
+
+        if (true) {
+            perk.icon = list.get(0)
+                    .getStat()
+                    .getIconLocation()
+                    .toString();
+        } else {
+            perk.icon = new ResourceLocation(SlashRef.MODID, "textures/gui/talent_icons/" + perk.id + ".png")
+                    .toString();
+        }
+        return perk;
+    }
+
+    public static Perk socket() {
+
+        String id = JewelSocketStat.getInstance().GUID();
+
+        List<OptScaleExactStat> list = Arrays.asList(new OptScaleExactStat(1, JewelSocketStat.getInstance(), ModType.FLAT));
+
+
+        Perk perk = stat(id, list.get(0));
+        perk.type = Perk.PerkType.SPECIAL;
+        perk.locname = JewelSocketStat.getInstance().locNameForLangFile();
 
         if (true) {
             perk.icon = list.get(0)

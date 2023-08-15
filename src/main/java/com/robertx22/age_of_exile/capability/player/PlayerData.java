@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.capability.player.data.PlayerMapData;
 import com.robertx22.age_of_exile.capability.player.data.StatPointsData;
 import com.robertx22.age_of_exile.capability.player.data.TeamData;
 import com.robertx22.age_of_exile.capability.player.helper.GemInventoryHelper;
+import com.robertx22.age_of_exile.capability.player.helper.JewelInvHelper;
 import com.robertx22.age_of_exile.capability.player.helper.MyInventory;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.DeathStatsData;
@@ -60,6 +61,7 @@ public class PlayerData implements ICap {
     private static final String ASC = "asc";
     private static final String CAST = "casting";
     private static final String CONFIG = "config";
+    private static final String JEWELS = "jewels";
 
     transient Player player;
 
@@ -74,13 +76,17 @@ public class PlayerData implements ICap {
 
     private MyInventory skillGemInv = new MyInventory(GemInventoryHelper.TOTAL_SLOTS);
     private MyInventory auraInv = new MyInventory(GemInventoryHelper.TOTAL_AURAS);
-    private MyInventory jewelsInv = new MyInventory(GemInventoryHelper.TOTAL_AURAS);
+    private MyInventory jewelsInv = new MyInventory(9);
 
 
     public PlayerData(Player player) {
         this.player = player;
     }
 
+
+    public JewelInvHelper getJewels() {
+        return new JewelInvHelper(jewelsInv);
+    }
 
     @Override
     public CompoundTag serializeNBT() {
@@ -98,6 +104,7 @@ public class PlayerData implements ICap {
 
         nbt.put(GEMS, skillGemInv.createTag());
         nbt.put(AURAS, auraInv.createTag());
+        nbt.put(JEWELS, jewelsInv.createTag());
 
         return nbt;
     }
@@ -116,6 +123,7 @@ public class PlayerData implements ICap {
 
         skillGemInv.fromTag(nbt.getList(GEMS, 10)); // todo
         auraInv.fromTag(nbt.getList(AURAS, 10)); // todo
+        jewelsInv.fromTag(nbt.getList(JEWELS, 10)); // todo
 
     }
 

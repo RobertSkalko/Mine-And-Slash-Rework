@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.registrators;
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
+import com.robertx22.age_of_exile.database.data.stats.types.JewelSocketStat;
 import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.*;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttributes;
@@ -65,6 +66,8 @@ public class StatsRegister implements ExileRegistryInit {
                         add(new AilmentProcStat(ailment));
                     }
 
+                    add(JewelSocketStat.getInstance());
+                    
                     add(new BonusPhysicalAsElemental(Elements.Elemental));
                     add(new MaxElementalResist(Elements.Elemental));
 

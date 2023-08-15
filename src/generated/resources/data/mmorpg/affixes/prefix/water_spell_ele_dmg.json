@@ -7,7 +7,8 @@
       {
         "excluded": [],
         "included": [
-          "mage_weapon"
+          "mage_weapon",
+          "jewel_int"
         ]
       }
     ]
@@ -20,6 +21,5 @@
       "stat": "spell_water_damage"
     }
   ],
-  "tags": [],
   "weight": 500
 }

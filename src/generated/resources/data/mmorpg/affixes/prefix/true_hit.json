@@ -15,11 +15,10 @@
   "stats": [
     {
       "type": "FLAT",
-      "max": 10.0,
-      "min": 2.0,
+      "max": 25.0,
+      "min": 3.0,
       "stat": "critical_hit"
     }
   ],
-  "tags": [],
   "weight": 1000
 }

@@ -62,6 +62,7 @@ public class ServerContainer {
         RUNE_DROPRATE = b.defineInRange("rune_drop_rate", 1D, 0, 1000);
         CURRENCY_DROPRATE = b.defineInRange("currency_drop_rate", 0.5D, 0, 1000);
         BACKPACK_DROPRATE = b.defineInRange("backpack_drop_rate", 0.5D, 0, 1000);
+        JEWEL_DROPRATE = b.defineInRange("jewel_drop_rate", 0.25D, 0, 1000);
 
 
         List<String> list = new ArrayList<>();
@@ -143,6 +144,7 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue RUNE_DROPRATE;
     public ForgeConfigSpec.DoubleValue CURRENCY_DROPRATE;
     public ForgeConfigSpec.DoubleValue BACKPACK_DROPRATE;
+    public ForgeConfigSpec.DoubleValue JEWEL_DROPRATE;
 
 
 }

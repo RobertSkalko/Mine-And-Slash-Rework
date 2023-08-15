@@ -21,6 +21,7 @@ public class C2SPacketRegister {
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new OpenContainerPacket(OpenContainerPacket.GuiType.SKILL_GEMS), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new OpenBackpackPacket(Backpacks.BackpackType.GEARS), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new InvGuiPacket(), i++);
+        Packets.registerClientToServerPacket(MMORPG.NETWORK, new OpenJewelsPacket(), i++);
 
 
         // Packets.registerClientToServerPacket(MMORPG.NETWORK, new SetupHotbarPacket(), i++);

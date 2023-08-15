@@ -229,9 +229,11 @@ public class Unit {
             statContexts.addAll(CommonStatUtils.addExactCustomStats(entity));
             statContexts.add(data.getStatusEffectsData().getStats(entity));
             statContexts.addAll(addGearStats(gears));
+            
 
             if (entity instanceof Player) {
                 statContexts.addAll(Load.playerRPGData((Player) entity).getSkillGemInventory().getAuraStats(entity));
+                statContexts.addAll(Load.playerRPGData((Player) entity).getJewels().getStatAndContext(entity));
                 Load.playerRPGData((Player) entity).statPoints.addStats(this);
 
                 statContexts.addAll(PlayerStatUtils.AddPlayerBaseStats(entity));

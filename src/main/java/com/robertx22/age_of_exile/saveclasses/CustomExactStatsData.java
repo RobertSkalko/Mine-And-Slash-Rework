@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.saveclasses;
 
 import com.robertx22.age_of_exile.database.data.StatMod;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IApplyableStats;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class CustomExactStatsData implements IApplyableStats {
+public class CustomExactStatsData implements IStatCtx {
 
     public CustomExactStatsData() {
 

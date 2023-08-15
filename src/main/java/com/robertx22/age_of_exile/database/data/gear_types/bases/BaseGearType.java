@@ -44,7 +44,7 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
         this.guid = guid;
         this.locname = locname;
         this.gear_slot = slot;
-        
+
     }
 
     private BaseGearType() {
@@ -166,6 +166,11 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
         armor_family(SlotFamily.NONE),
         jewelry_family(SlotFamily.NONE),
         offhand_family(SlotFamily.NONE),
+
+        any_jewel(SlotFamily.NONE),
+        jewel_str(SlotFamily.NONE),
+        jewel_dex(SlotFamily.NONE),
+        jewel_int(SlotFamily.NONE),
 
         intelligence(SlotFamily.NONE),
         dexterity(SlotFamily.NONE),

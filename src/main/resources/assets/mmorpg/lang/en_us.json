@@ -44,6 +44,10 @@
 "mmorpg.tooltip.socketable_item": "This Gem can be inserted into a Socket slot",
 "_comment": "RARITY ITEM NAMES",
 "_comment": "MISC ITEMS",
+"item.mmorpg.jewel.dex": "Viridian Jewel",
+"item.mmorpg.jewel.str": "Stardust Jewel",
+"item.mmorpg.jewel.int": "Meteorite Jewel",
+
 "item.mmorpg.map": "Adventure Map",
 "item.mmorpg.loot_bag": "Gear Loot Bag",
 "item.mmorpg.map_bag": "Map Bag",
@@ -387,6 +391,7 @@
 	"mmorpg.affix.lightning_spell_ele_dmg": "Poisoned",
 	"mmorpg.affix.mana_reg": "Soothing",
 	"mmorpg.affix.mana_thief": "Mana Thief's",
+	"mmorpg.affix.ms_reg": "Stabilizing",
 	"mmorpg.affix.of_affluence": "Of Affluence",
 	"mmorpg.affix.of_brutality": "Of Brutality",
 	"mmorpg.affix.of_consumption": "Of Consumption",
@@ -522,6 +527,15 @@
 "_comment": " [CATEGORY]: RARITIES - NAMES",
 
 
+"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
+
+	"item.mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
+	"item.mmorpg.currency.orb_of_linking": "Orb of Linking",
+	"item.mmorpg.currency.socket_adder": "Orb of Digging",
+
+"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
+
+
 "_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
 
 	"effect.mmorpg.beneficial.10": "Vigor",
@@ -553,15 +567,6 @@
 	"mmorpg.ailment.poison": "Poison",
 
 "_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
-
-
-"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
-
-	"item.mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
-	"item.mmorpg.currency.orb_of_linking": "Orb of Linking",
-	"item.mmorpg.currency.socket_adder": "Orb of Digging",
-
-"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
 
 
 "_comment": " [CATEGORY]: TALENTS - NAMES",
@@ -611,6 +616,7 @@
 	"mmorpg.talent.increase_healing_big": "Major Heal Strength",
 	"mmorpg.talent.int_big": "Major Intelligence",
 	"mmorpg.talent.int_dmg_big": "Major Spell Damage",
+	"mmorpg.talent.jewel_socket": "Jewel Sockets",
 	"mmorpg.talent.lifesteal_big": "Major Lifesteal",
 	"mmorpg.talent.lightning_penetration_big": "Major Lightning Penetration",
 	"mmorpg.talent.lightning_resist_big": "Major Lightning Resistance",
@@ -814,6 +820,7 @@
 	"mmorpg.word.issealed": "Is sealed",
 	"mmorpg.word.isunique": "Is Unique",
 	"mmorpg.word.item": "Item",
+	"mmorpg.word.jewel": "Jewel",
 	"mmorpg.word.jewelcrafting": "Jewel Crafting",
 	"mmorpg.word.jewelcraftingdesc": "Combine a Jeweler's Tool with a ring or necklace and some materials to enchant that item with stats.",
 	"mmorpg.word.jewerly": "Jewerly",
@@ -1022,7 +1029,7 @@
 	"mmorpg.stat.area_spell_dmg": "Area Damage",
 	"mmorpg.stat.armor": "Armor",
 	"mmorpg.stat.armor_penetration": "Armor Penetration",
-	"mmorpg.stat.armor_per_10_mana": "§7Gain §a[VAL1] §9❈ Armor§7 for each 10 §9☯ Mana§7",
+	"mmorpg.stat.armor_per_10_mana": "§a[VAL1] §9❈ Armor§7 per 10 §9☯ Mana§7",
 	"mmorpg.stat.arrow_cdr": "Arrow Spell Cooldown Reduction",
 	"mmorpg.stat.arrow_spell_dmg": "Arrow Damage",
 	"mmorpg.stat.aura_effect": "Aura Effect",
@@ -1037,7 +1044,7 @@
 	"mmorpg.stat.bleed_strength": "Bleed Strength",
 	"mmorpg.stat.block_chance": "Block Chance",
 	"mmorpg.stat.blood": "Blood",
-	"mmorpg.stat.blood_per_10_strength": "§7Gain §a[VAL1] §4❤ Blood§7 for each 10 §b❁ Strength§7",
+	"mmorpg.stat.blood_per_10_strength": "§a[VAL1] §4❤ Blood§7 per 10 §b❁ Strength§7",
 	"mmorpg.stat.blood_user": "§7You now use §4❤ Blood§7 instead of §9☯ Mana§7",
 	"mmorpg.stat.bonus_exp": "Bonus Experience",
 	"mmorpg.stat.bow_damage": "Bow Damage",
@@ -1152,11 +1159,11 @@
 	"mmorpg.stat.health_on_all_hit": "Health on Any Hit",
 	"mmorpg.stat.health_on_attack_hit": "Health on Attack Hit",
 	"mmorpg.stat.health_on_kill": "Health on Kill",
-	"mmorpg.stat.health_per_10_dexterity": "§7Gain §a[VAL1] §c❤ Health§7 for each 10 §b❁ Dexterity§7",
-	"mmorpg.stat.health_per_10_intelligence": "§7Gain §a[VAL1] §c❤ Health§7 for each 10 §b❁ Intelligence§7",
+	"mmorpg.stat.health_per_10_dexterity": "§a[VAL1] §c❤ Health§7 per 10 §b❁ Dexterity§7",
+	"mmorpg.stat.health_per_10_intelligence": "§a[VAL1] §c❤ Health§7 per 10 §b❁ Intelligence§7",
 	"mmorpg.stat.health_per_sec": "Health Per Regen",
 	"mmorpg.stat.health_regen": "Health Regen",
-	"mmorpg.stat.health_regen_per_10_intelligence": "§7Gain §a[VAL1] §b❁ Health Regen§7 for each 10 §b❁ Intelligence§7",
+	"mmorpg.stat.health_regen_per_10_intelligence": "§a[VAL1] §b❁ Health Regen§7 per 10 §b❁ Intelligence§7",
 	"mmorpg.stat.hit_damage": "Direct Hit Damage",
 	"mmorpg.stat.hp_resto_to_blood": "§7You refill your §4❤ Blood§7 by §a[VAL1]§7% of your non-spell health restoration effects.",
 	"mmorpg.stat.immobilizing_eff_dur_u_cast": "Immobilizing Effect Duration",
@@ -1186,6 +1193,7 @@
 	"mmorpg.stat.int_dmg": "Spell Damage",
 	"mmorpg.stat.int_dmg_received": "Spell Damage Received",
 	"mmorpg.stat.intelligence": "Intelligence",
+	"mmorpg.stat.jewel_socket": "Jewel Sockets",
 	"mmorpg.stat.lifesteal": "Lifesteal",
 	"mmorpg.stat.lightning_any_wep_damage": "Lightning Weapon Damage",
 	"mmorpg.stat.lightning_dmg_when_target_low_hp": "§7Execute targets bellow 30% health, dealing §a[VAL1]§7% increased  §e☀ Lightning§7",
@@ -1207,7 +1215,7 @@
 	"mmorpg.stat.mana_on_all_hit": "Mana on Any Hit",
 	"mmorpg.stat.mana_on_attack_hit": "Mana on Attack Hit",
 	"mmorpg.stat.mana_on_kill": "Mana on Kill",
-	"mmorpg.stat.mana_per_10_intelligence": "§7Gain §a[VAL1] §9☯ Mana§7 for each 10 §b❁ Intelligence§7",
+	"mmorpg.stat.mana_per_10_intelligence": "§a[VAL1] §9☯ Mana§7 per 10 §b❁ Intelligence§7",
 	"mmorpg.stat.mana_per_sec": "Mana Per Regen",
 	"mmorpg.stat.mana_regen": "Mana Regen",
 	"mmorpg.stat.mana_shield": "Of Damage Absorbed By Mana",
@@ -1344,6 +1352,7 @@
 	"mmorpg.unique_gear.ghast_necklace.name": "Ghast Tear",
 	"mmorpg.unique_gear.ghostly_shores.name": "Ghostly Shores",
 	"mmorpg.unique_gear.golemancer.name": "Golemancer",
+	"mmorpg.unique_gear.haste_price.name": "Price of Haste",
 	"mmorpg.unique_gear.heavenly_tear.name": "Heavenly Tear",
 	"mmorpg.unique_gear.ice_stomper.name": "Ice Stomper",
 	"mmorpg.unique_gear.insight.name": "Insight",
@@ -1629,6 +1638,7 @@
 	"mmorpg.stat_desc.int_dmg": "Magic damage are mage spells, like fireball.",
 	"mmorpg.stat_desc.int_dmg_received": "Magic damage are mage spells, like fireball.",
 	"mmorpg.stat_desc.intelligence": "Determines your total: Mana, Magic Shield, Magic Shield Regen",
+	"mmorpg.stat_desc.jewel_socket": "Allows you to socket more jewels",
 	"mmorpg.stat_desc.lifesteal": "Restore % of damage as health.",
 	"mmorpg.stat_desc.lightning_dmg_when_target_low_hp": "Low hp is 30% or less.",
 	"mmorpg.stat_desc.lightning_dot_damage": "Fire damage over time increases damage of burn, for example.",

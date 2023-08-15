@@ -43,9 +43,9 @@ public class GearAffixesData implements IGearPartTooltip {
 
     public List<TooltipStatWithContext> getAllStatsWithCtx(GearItemData gear, TooltipInfo info) {
         List<TooltipStatWithContext> list = new ArrayList<>();
-        this.suf.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear, info)));
-        this.pre.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear, info)));
-        this.cor.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear, info)));
+        this.suf.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), info)));
+        this.pre.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), info)));
+        this.cor.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), info)));
         return list;
     }
 
