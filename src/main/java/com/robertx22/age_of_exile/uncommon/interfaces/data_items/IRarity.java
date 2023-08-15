@@ -2,6 +2,9 @@ package com.robertx22.age_of_exile.uncommon.interfaces.data_items;
 
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.Rarity;
 
+import java.util.Arrays;
+import java.util.List;
+
 public interface IRarity<R extends Rarity> {
 
 
@@ -22,6 +25,9 @@ public interface IRarity<R extends Rarity> {
     String EPIC_ID = "epic";
     String LEGENDARY_ID = "legendary";
     String MYTHIC_ID = "mythic";
+
+    public static List<String> NORMAL_GEAR_RARITIES = Arrays.asList(COMMON_ID, UNCOMMON, RARE_ID, EPIC_ID, LEGENDARY_ID, MYTHIC_ID);
+
 
     String BOSS_ID = "boss";
     String ELITE_ID = "elite";

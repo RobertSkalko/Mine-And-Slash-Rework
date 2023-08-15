@@ -1,4 +1,4 @@
-package com.robertx22.age_of_exile.aoe_data.database.affixes.adders;
+package com.robertx22.age_of_exile.aoe_data.database.affixes.adders.jewels;
 
 import com.robertx22.age_of_exile.aoe_data.database.affixes.ElementalAffixBuilder;
 import com.robertx22.age_of_exile.database.data.StatMod;

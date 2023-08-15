@@ -36,6 +36,8 @@ public abstract class StatCondition implements JsonExileRegistry<StatCondition>,
         addSer(new StringMatchesCondition());
         addSer(new WeaponTypeMatches());
         addSer(new LightLevelCondition());
+        addSer(new IsTargetCursed());
+        
     }
 
     static void addSer(StatCondition eff) {

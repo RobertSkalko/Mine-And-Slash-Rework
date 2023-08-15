@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "mmorpg:runes/ano"
+    },
+    {
+      "item": "mmorpg:runes/dos"
+    },
+    {
+      "item": "mmorpg:runes/toq"
+    },
+    {
+      "item": "mmorpg:runes/cen"
+    },
+    {
+      "item": "mmorpg:runes/eno"
+    },
+    {
+      "item": "mmorpg:runes/ita"
+    },
+    {
+      "item": "mmorpg:runes/xer"
+    },
+    {
+      "item": "mmorpg:runes/wir"
+    },
+    {
+      "item": "mmorpg:runes/har"
+    }
+  ],
+  "result": {
+    "item": "mmorpg:jewel/unique_crafted"
+  }
+}

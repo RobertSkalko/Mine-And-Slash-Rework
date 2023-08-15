@@ -16,10 +16,12 @@ public class StopMobDropWornGearInMapsMixin {
     public void hookLoot(DamageSource pDamageSource, CallbackInfo ci) {
 
         try {
-            Mob mob = (Mob) (Object) this;
-            if (WorldUtils.isMapWorldClass(mob.level())) {
-                for (EquipmentSlot slot : EquipmentSlot.values()) {
-                    mob.setDropChance(slot, 0);
+            LivingEntity en = (LivingEntity) (Object) this;
+            if (WorldUtils.isMapWorldClass(en.level())) {
+                if (en instanceof Mob mob) {
+                    for (EquipmentSlot slot : EquipmentSlot.values()) {
+                        mob.setDropChance(slot, 0);
+                    }
                 }
             }
         } catch (Exception e) {

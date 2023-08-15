@@ -258,8 +258,8 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
                 .withStyle(format));
 
         if (!uniq.replaces_name) {
-            txt.append(ExileText.ofText(format + " ").append(GetBaseGearType().locName())
-                    .format(format).get());
+            txt.append(ExileText.ofText(format + " ").append(GetBaseGearType().locName().withStyle(ChatFormatting.BOLD))
+                    .format(format).format(ChatFormatting.BOLD).get());
         }
 
         list.addAll(TooltipUtils.cutIfTooLong(txt, format));
@@ -382,7 +382,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         if (this.sal) {
 
             int amount = 1; // todo
-            return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(getRarity().item_tier).get(), amount)); // todo fix this
+            return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(getRarity().GUID()).get(), amount)); // todo fix this
         }
 
         return Arrays.asList(ItemStack.EMPTY);

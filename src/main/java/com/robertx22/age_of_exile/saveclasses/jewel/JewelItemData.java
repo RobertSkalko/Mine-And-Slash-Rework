@@ -33,9 +33,11 @@ import java.util.List;
 public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
 
 
+    public UniqueJewelData uniq = new UniqueJewelData();
+
     public List<AffixData> affixes = new ArrayList<>();
 
-    public String type = PlayStyle.STR.id;
+    public String style = PlayStyle.STR.id;
 
     public int lvl = 1;
 
@@ -48,7 +50,6 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
 
         affixes.clear();
 
-        
         for (int i = 0; i < num; i++) {
             Affix affix = ExileDB.Affixes().getFilterWrapped(x -> {
                 return x.getAllTagReq().contains(BaseGearType.SlotTag.any_jewel.getTagId()) || x.getAllTagReq().contains(getStyle().getJewelAffixTag().getTagId());
@@ -59,15 +60,18 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
             data.p = data.getMinMax().random();
             data.id = affix.guid;
             affixes.add(data);
-
         }
 
 
     }
 
-    // todo
+
     @Override
     public void BuildTooltip(TooltipContext ctx) {
+
+        ctx.tooltip.clear();
+
+        ctx.tooltip.add(Component.literal("").append(ctx.stack.getDisplayName()).withStyle(getRarity().textFormatting()));
 
         TooltipInfo info = new TooltipInfo(ctx.data);
 
@@ -81,6 +85,17 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
 
         ctx.tooltip.add(TooltipUtils.gearRarity(getRarity()));
 
+        if (uniq.isUnique()) {
+            if (uniq.isCraftableUnique()) {
+                if (uniq.getCraftedTier().canUpgradeMore()) {
+                    var up = uniq.getCraftedTier().upgradeStack.get();
+                    ctx.tooltip.add(Component.literal("To Upgrade needs: " + up.getCount() + "x ").append(up.getDisplayName()));
+                    ctx.tooltip.add(Component.literal("[Click the Jewel with the Stone]"));
+                }
+
+            }
+        }
+
 
         ctx.tooltip.add(TooltipUtils.level(lvl));
     }
@@ -90,13 +105,13 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
     }
 
     @Override
-    public ItemstackDataSaver<? extends ICommonDataItem> getStackSaver() {
+    public ItemstackDataSaver<JewelItemData> getStackSaver() {
         return StackSaving.JEWEL;
     }
 
     @Override
     public void saveToStack(ItemStack stack) {
-
+        getStackSaver().saveTo(stack, this);
     }
 
     @Override
@@ -125,7 +140,7 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
     }
 
     public PlayStyle getStyle() {
-        return PlayStyle.fromID(this.type);
+        return PlayStyle.fromID(this.style);
     }
 
     @Override

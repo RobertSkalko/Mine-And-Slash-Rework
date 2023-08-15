@@ -72,6 +72,7 @@ public class SlashItems {
     public static RegObj<Item> DEX_JEWEL = Def.item(() -> new Item(new Item.Properties().stacksTo(1)), "jewel/dex");
     public static RegObj<Item> STR_JEWEL = Def.item(() -> new Item(new Item.Properties().stacksTo(1)), "jewel/str");
     public static RegObj<Item> INT_JEWEL = Def.item(() -> new Item(new Item.Properties().stacksTo(1)), "jewel/int");
+    public static RegObj<Item> CRAFTED_UNIQUE_JEWEL = Def.item(() -> new CraftedUniqueJewelItem(), "jewel/unique_crafted");
 
     public static class GearItems {
 

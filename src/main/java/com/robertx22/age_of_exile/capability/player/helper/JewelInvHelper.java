@@ -45,12 +45,23 @@ public class JewelInvHelper implements IStatCtx {
 
         int total = 0;
 
+        List<String> uniques = new ArrayList<>();
+
         for (int i = 0; i < inv.getTotalSlots(); i++) {
             var stack = inv.getItem(i);
             JewelItemData data = StackSaving.JEWEL.loadFrom(stack);
 
             if (data != null) {
                 total++;
+
+                if (!data.uniq.id.isEmpty()) {
+                    if (uniques.contains(data.uniq.id)) {
+                        unequip(p, i);
+                    } else {
+                        uniques.add(data.uniq.id);
+                    }
+
+                }
                 if (total > max) {
                     unequip(p, i);
                 }

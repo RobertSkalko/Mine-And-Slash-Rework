@@ -9,16 +9,19 @@ import java.util.HashMap;
 
 public class RarityItems {
 
-    public static HashMap<Integer, RegObj<RarityStoneItem>> RARITY_STONE = new HashMap<>();
+    public static HashMap<String, RegObj<RarityStoneItem>> RARITY_STONE = new HashMap<>();
 
     public static void init() {
 
 
-        for (int rar = 0; rar < IRarity.TOTAL_GEAR_RARITIES; rar++) {
+        int tier = 0;
+        for (String rar : IRarity.NORMAL_GEAR_RARITIES) {
 
-            int finalRar = rar;
-            RARITY_STONE.put(rar, Def.item(() -> new RarityStoneItem("Stone", finalRar), "stone/" + finalRar));
+            int finalTier = tier;
+            RARITY_STONE.put(rar, Def.item(() -> new RarityStoneItem("Stone", finalTier), "stone/" + tier));
+            tier++;
         }
+
 
     }
 }

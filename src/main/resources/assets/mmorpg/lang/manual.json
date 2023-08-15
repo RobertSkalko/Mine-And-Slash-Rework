@@ -1,4 +1,6 @@
 
+ "death.attack.mmorpg": "%1$s was slain by %2$s",
+
 "infinite_dungeons.reward_list.gem_box": "Lucky Gem Bag",
 "infinite_dungeons.reward_list.gear_crate": "Lucky Gear Bag",
 "infinite_dungeons.reward_list.upgrade_box": "Upgrade Material Bag",
@@ -9,29 +11,14 @@
 "item.mmorpg.loot_crate": "Loot Crate",
 "item.mmorpg.custom_crate": "Gear Crate",
 
-"block.mmorpg.ore_block0": "Common Ore Block",
-"block.mmorpg.ore_block1": "Uncommon Ore Block",
-"block.mmorpg.ore_block2": "Rare Ore Block",
-"block.mmorpg.ore_block3": "Epic Ore Block",
-"block.mmorpg.ore_block4": "Legendary Ore Block",
-"block.mmorpg.ore_block5": "Mythical Ore Block",
 "_comment": "# CREATIVE TAB",
-"itemGroup.mmorpg.main_group": "Age of Exile",
-"itemGroup.mmorpg.gem_group": "Age of Exile Gems",
-"itemGroup.mmorpg.runes_group": "Age of Exile Runes",
-"itemGroup.mmorpg.runeword_group": "Age of Exile Runewords",
-"itemGroup.mmorpg_uniques": "Unique Gear",
-"itemGroup.mmorpg_currency": "Crafting Items",
-"itemGroup.mmorpg_lootboxes": "LootBoxes",
-"itemGroup.mmorpg_alchemy": "Alchemy",
+"itemGroup.mmorpg.tab": "Mine and Slash",
 
 "death.attack.mmorpg.custom_damage": "Tons of Damage!",
 "death.attack.death_potion": "%1$s thought it was a great idea to drink a potion with 'Death' in the name.",
 
 "_comment": "STATIONS",
-"block.mmorpg.modify_station": "Gear Modify Station",
-"block.mmorpg.repair_station": "Gear Repair Station",
-"block.mmorpg.socket_station": "Socketing Station",
+
 "block.mmorpg.teleporter": "Map Device",
 
 "_comment": "ITEM TOOLTIPS",
@@ -46,6 +33,14 @@
 "item.mmorpg.jewel.dex": "Viridian Jewel",
 "item.mmorpg.jewel.str": "Stardust Jewel",
 "item.mmorpg.jewel.int": "Meteorite Jewel",
+"item.mmorpg.jewel.unique_crafted": "Runed Craftmanship Unique Jewel",
+
+"item.mmorpg.stone.0": "Common Stone",
+"item.mmorpg.stone.1": "Uncommon Stone",
+"item.mmorpg.stone.2": "Rare Stone",
+"item.mmorpg.stone.3": "Epic Stone",
+"item.mmorpg.stone.4": "Legendary Stone",
+"item.mmorpg.stone.5": "Mythic Stone",
 
 "item.mmorpg.map": "Adventure Map",
 "item.mmorpg.loot_bag": "Gear Loot Bag",
@@ -65,14 +60,6 @@
 "item.mmorpg.teleport_scroll": "Teleport Back Scroll",
 "item.mmorpg.prefix": "Prefix",
 "item.mmorpg.suffix": "Suffix",
-"_comment": "SPELL TOOLTIPS",
-"mmorpg.tooltip.aoe_spell_explosion": "Casts an elemental projectile that does AOE dmg on hit.",
-"mmorpg.tooltip.single_target_spell_bolt": "Casts a Single Target elemental projectile.",
-"mmorpg.tooltip.spell_instant_heal": "Instantly Heals the caster.",
-"mmorpg.tooltip.aoe_bomb_spell": "Leaves out a bomb that explodes later for Aoe Damage.",
-"mmorpg.tooltip.spell_self_regen": "Heals the caster over time.",
-"mmorpg.tooltip.aoe_spell_nova": "Damages everyone around you.",
-"mmorpg.tooltip.ele_bonus_atk_dmg_spell": "Gives buff, deal bonus dmg at cost of mana.",
 
 "_comment": "ITEM TOOLTIPS",
 "_comment": "MAPS",

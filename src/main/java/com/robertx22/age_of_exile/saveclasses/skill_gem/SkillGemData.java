@@ -61,7 +61,7 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
     @Override
     public List<ItemStack> getSalvageResult(ItemStack stack) {
         int amount = 1; // todo
-        return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(getRarity().item_tier).get(), amount));
+        return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(getRarity().GUID()).get(), amount));
     }
 
     @Override

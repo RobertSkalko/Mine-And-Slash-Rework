@@ -171,6 +171,7 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
         jewel_str(SlotFamily.NONE),
         jewel_dex(SlotFamily.NONE),
         jewel_int(SlotFamily.NONE),
+        crafted_jewel_unique(SlotFamily.NONE),
 
         intelligence(SlotFamily.NONE),
         dexterity(SlotFamily.NONE),

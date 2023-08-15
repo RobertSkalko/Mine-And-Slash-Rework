@@ -33,6 +33,32 @@ public class OnItemInteract {
 
             boolean success = false;
 
+
+            if (StackSaving.JEWEL.has(stack)) {
+                var data = StackSaving.JEWEL.loadFrom(stack);
+
+                if (data.uniq.isCraftableUnique()) {
+                    ItemStack cost = data.uniq.getStackNeededForUpgrade();
+
+                    if (cost.getItem() == cursor.getItem()) {
+                        if (cursor.getCount() >= cost.getCount()) {
+                            if (data.uniq.getCraftedTier().canUpgradeMore()) {
+                                data.uniq.upgradeUnique(data);
+
+                                StackSaving.JEWEL.saveTo(stack, data);
+                                cursor.shrink(cost.getCount());
+
+                                SoundUtils.ding(player.level(), player.blockPosition());
+                                SoundUtils.playSound(player.level(), player.blockPosition(), SoundEvents.ANVIL_USE, 1, 1);
+                                x.setCanceled(true);
+
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+
             if (stack.isDamaged() && cursor.getItem() instanceof RarityStoneItem) {
 
                 GearItemData gear = StackSaving.GEARS.loadFrom(stack);

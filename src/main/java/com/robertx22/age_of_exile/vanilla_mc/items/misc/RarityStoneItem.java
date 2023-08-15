@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.vanilla_mc.items.misc;
 
-import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
@@ -31,7 +30,7 @@ public class RarityStoneItem extends Item implements IWeighted {
     }
 
     public static Item of(String rar) {
-        return RarityItems.RARITY_STONE.get(ExileDB.GearRarities().get(rar).item_tier).get(); // todo bad
+        return RarityItems.RARITY_STONE.get(rar).get(); // todo bad
     }
 
     @Override

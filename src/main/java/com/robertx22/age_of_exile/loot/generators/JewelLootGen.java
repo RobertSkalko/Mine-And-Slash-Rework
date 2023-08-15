@@ -51,7 +51,7 @@ public class JewelLootGen extends BaseLootGen<MapBlueprint> {
 
         data.rar = ExileDB.GearRarities().random().GUID();
 
-        data.type = style.id;
+        data.style = style.id;
 
         data.lvl = info.level;
 

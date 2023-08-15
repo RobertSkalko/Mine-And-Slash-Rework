@@ -17,7 +17,7 @@ public class AffixBuilder {
 
     String guid;
     List<StatMod> stats = new ArrayList<>();
-    String langName;
+    String langName = "";
     boolean allowDupli = false;
     int weight = 1000;
     public List<String> tags = new ArrayList<>();
@@ -81,6 +81,11 @@ public class AffixBuilder {
         return this;
     }
 
+    public AffixBuilder stat(StatMod stat) {
+        this.stats.add(stat);
+        return this;
+    }
+
     public AffixBuilder AllowDuplicatesOnSameItem() {
         allowDupli = true;
         return this;
@@ -115,7 +120,7 @@ public class AffixBuilder {
         affix.weight = weight;
         affix.loc_name = langName;
 
-       
+
         affix.addToSerializables();
 
     }
