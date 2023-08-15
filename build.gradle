@@ -18,6 +18,7 @@ plugins {
     id 'java'
     id 'idea'
     id 'maven-publish'
+    id "me.modmuss50.mod-publish-plugin" version "0.3.3"
 }
 
 apply plugin: 'net.minecraftforge.gradle'
@@ -141,12 +142,13 @@ publishMods {
 
     curseforge {
         accessToken = file("key.properties").text
-        projectId = $ { curse_id }
+        projectId = "${curse_id}"
         displayName = "${mod_archive_name}-${minecraft_version}-v${mod_version}"
         minecraftVersions.add("${minecraft_version}")
         minecraftVersions.add("1.20")
 
-        requires(slug = "library-of-exile")
-        requires(slug = "curios")
+        requires { slug = "library-of-exile" }
+        requires { slug = "curios" }
+
     }
 }
