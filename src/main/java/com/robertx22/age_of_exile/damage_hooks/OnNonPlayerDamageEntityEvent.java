@@ -35,6 +35,7 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
             return;
         }
         if (!(event.source.getEntity() instanceof Player)) {
+            Stats.reso
 
             if (event.source.getEntity() instanceof SummonEntity summon) {
                 LivingEntity caster = summon.getOwner();

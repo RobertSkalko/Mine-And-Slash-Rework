@@ -585,21 +585,25 @@ public class EntityData implements ICap, INeededForClient {
         }
     }
 
-    public void mobBasicAttack(AttackInformation data) {
-        MobRarity rar = ExileDB.MobRarities()
-                .get(data.getAttackerEntityData()
-                        .getRarity());
+    public float getMobBaseDamage() {
+        MobRarity rar = ExileDB.MobRarities().get(getRarity());
 
-        
         float multi = (float) (ServerContainer.get().VANILLA_MOB_DMG_AS_EXILE_DMG.get().floatValue());
 
-        float vanilla = data.getAmount() * multi;
-
-        float num = vanilla * rar.DamageMultiplier();
+        float num = multi * rar.DamageMultiplier();
 
         num *= ExileDB.getEntityConfig(entity, this).dmg_multi;
 
         num = StatScaling.MOB_DAMAGE.scale(num, getLevel());
+
+        return num;
+    }
+
+    public void mobBasicAttack(AttackInformation data) {
+
+        float num = getMobBaseDamage();
+
+        num *= data.getAmount();
 
         PlayStyle style = PlayStyle.STR;
 

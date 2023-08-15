@@ -14,6 +14,7 @@
     "PlayerInventoryMixin",
     "StopMapMobDropsMixin",
     "FeatureMixin",
+    "StopMobDropWornGearInMapsMixin",
     "StopFireInDungeonMixin"
   ],
   "client": [

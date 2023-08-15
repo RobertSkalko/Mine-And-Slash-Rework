@@ -13,7 +13,7 @@ public class OnHurtEvent {
 
 
         try {
-            
+
 
             // order matters here
             LivingHurtUtils.tryAttack(event);

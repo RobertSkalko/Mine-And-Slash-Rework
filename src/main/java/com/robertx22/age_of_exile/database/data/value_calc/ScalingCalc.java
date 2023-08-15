@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.database.data.value_calc;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -8,6 +9,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,11 +66,17 @@ public class ScalingCalc {
     }
 
     public int getCalculatedValue(LivingEntity en, MaxLevelProvider provider) {
+        float multi = (getMulti().getValue(en, provider));
 
-        return (int) (getMulti().getValue(en, provider) * Load.Unit(en)
+        int val = (int) (multi * Load.Unit(en)
                 .getUnit()
                 .getCalculatedStat(stat)
                 .getValue());
+
+        if (getStat() == WeaponDamage.getInstance() && en instanceof Player == false) {
+            val += Load.Unit(en).getMobBaseDamage();
+        }
+        return val;
 
     }
 }

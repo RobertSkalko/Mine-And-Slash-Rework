@@ -17,6 +17,7 @@ public class StopMapMobDropsMixin {
 
         try {
             Mob mob = (Mob) (Object) this;
+
             if (WorldUtils.isMapWorldClass(mob.level())) {
                 cir.setReturnValue(null);
             }
@@ -24,4 +25,6 @@ public class StopMapMobDropsMixin {
             e.printStackTrace();
         }
     }
+
+
 }

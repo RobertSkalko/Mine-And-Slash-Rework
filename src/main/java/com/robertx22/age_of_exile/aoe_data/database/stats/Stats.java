@@ -51,7 +51,7 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
-    
+
     public static DataPackStatAccessor<EffectTags> EFFECT_DURATION_YOU_CAST_PER_TAG = DatapackStatBuilder
             .<EffectTags>of(x -> x.name() + "_eff_dur_u_cast", x -> Elements.Physical)
             .addAllOfType(EffectTags.values())
@@ -119,6 +119,7 @@ public class Stats implements ExileRegistryInit {
             .setPriority(100)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
+            .addCondition(x -> StatConditions.IS_NOT_SUMMON_ATTACK)
             .addEffect(e -> StatEffects.LEECH_RESTORE_RESOURCE_BASED_ON_STAT_DATA.get(e.resourceType))
             .setLocName(x ->
                     Stat.format(
@@ -360,6 +361,7 @@ public class Stats implements ExileRegistryInit {
             .setPriority(100)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.ATTACK_TYPE_MATCHES.get(x.attackType))
+            .addCondition(x -> StatConditions.IS_NOT_SUMMON_ATTACK)
             .addEffect(e -> StatEffects.LEECH_RESTORE_RESOURCE_BASED_ON_STAT_DATA.get(e.resource))
             .setLocName(x -> x.resource.locname + " on " + x.attackType.locname + " Hit")
             .setLocDesc(x -> "")
@@ -656,6 +658,7 @@ public class Stats implements ExileRegistryInit {
             .setPriority(100)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_NON_MAGIC_STYLE)
+            .addCondition(x -> StatConditions.IS_NOT_SUMMON_ATTACK)
             .addEffect(StatEffects.LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.get(ResourceType.health))
             .setLocName(x -> "Lifesteal")
             .setLocDesc(x -> "Restore % of damage as health.")
@@ -675,6 +678,7 @@ public class Stats implements ExileRegistryInit {
             .setPriority(100)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_STYLE.get(PlayStyle.INT))
+            .addCondition(x -> StatConditions.IS_NOT_SUMMON_ATTACK)
             .addEffect(StatEffects.LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.get(ResourceType.health))
             .setLocName(x -> "Spell Lifesteal")
             .setLocDesc(x -> "Restore % of spell damage as health.")

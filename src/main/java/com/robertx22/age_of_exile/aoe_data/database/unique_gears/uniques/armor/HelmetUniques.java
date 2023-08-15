@@ -7,11 +7,14 @@ import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuild
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueRarityTier;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.spells.SpellTag;
+import com.robertx22.age_of_exile.database.data.stats.types.gear_base.GearDefense;
+import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCostReduction;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
+import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
@@ -41,6 +44,15 @@ public class HelmetUniques implements ExileRegistryInit {
                         new StatMod(5, 15, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.beast), ModType.FLAT),
                         new StatMod(1, 1, Stats.MAX_SUMMON_CAPACITY.get(), ModType.FLAT)
                 ))
+                .build();
+
+
+        UniqueGearBuilder.of("haste_price", "Price of Haste", BaseGearTypes.PLATE_BOOTS)
+                .keepsBaseName()
+                .stat(GearDefense.getInstance().mod(50, 100).percent())
+                .stat(Stats.COOLDOWN_REDUCTION.get().mod(15, 30))
+                .stat(Stats.MANA_COST.get().mod(15, 30))
+                .stat(new ElementalResist(Elements.Physical).mod(5, 10))
                 .build();
     }
 }

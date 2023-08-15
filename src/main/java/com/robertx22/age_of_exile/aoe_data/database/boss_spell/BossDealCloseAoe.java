@@ -5,7 +5,7 @@ import com.robertx22.age_of_exile.aoe_data.database.spells.schools.BossSpells;
 public class BossDealCloseAoe extends BossCastSpell {
     @Override
     public int castTicks() {
-        return 60;
+        return 80;
     }
 
     @Override

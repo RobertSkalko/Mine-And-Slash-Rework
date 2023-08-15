@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.effectdatas.SpendResourceEvent;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.OnScreenMessageUtils;
 import com.robertx22.age_of_exile.vanilla_mc.packets.NoManaPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import net.minecraft.network.chat.Component;
@@ -234,7 +235,7 @@ public class SpellCastingData {
 
                 if (!wep.canPlayerWear(ctx.data)) {
                     if (ctx.caster instanceof Player) {
-                        // todo  OnScreenMessageUtils.sendMessage((ServerPlayer) ctx.caster, Component.literal("Weapon requirements not met"), ClientboundSetTitlesPacket.Type.ACTIONBAR);
+                        OnScreenMessageUtils.sendMessage((ServerPlayer) ctx.caster, Component.literal(""), Component.literal("Weapon requirements not met"));
                     }
                     return false;
                 }

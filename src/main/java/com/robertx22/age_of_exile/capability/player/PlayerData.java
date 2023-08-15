@@ -74,6 +74,7 @@ public class PlayerData implements ICap {
 
     private MyInventory skillGemInv = new MyInventory(GemInventoryHelper.TOTAL_SLOTS);
     private MyInventory auraInv = new MyInventory(GemInventoryHelper.TOTAL_AURAS);
+    private MyInventory jewelsInv = new MyInventory(GemInventoryHelper.TOTAL_AURAS);
 
 
     public PlayerData(Player player) {
