@@ -89,17 +89,12 @@ public class LevelUtils {
     }
 
     public static int getExpRequiredForLevel(int level) {
-        return (int) (Math.pow(10F * GameBalanceConfig.get().NORMAL_STAT_SCALING.getMultiFor(level), 2.1F));
+        return (int) (Math.pow(10F * GameBalanceConfig.get().NORMAL_STAT_SCALING.getMultiFor(level), 2.4F));
     }
 
-    public static int getExpNeededForSkillLevel(int level) {
-        float exponent = 0.1F * (float) level / (float) GameBalanceConfig.get().MAX_LEVEL;
-        exponent = Mth.clamp(exponent, 0, 0.15F);
-        return (int) Math.pow(25 + (level * 20), 1 + exponent);
-    }
 
     public static int getBaseExpMobReward(int level) {
-        return 10 + scaleExpReward(3, level);
+        return 200 + scaleExpReward(4, level);
     }
 
     public static int scaleExpReward(int exp, int level) {
@@ -170,8 +165,7 @@ public class LevelUtils {
         double distance = world.getSharedSpawnPos()
                 .distManhattan(pos);
 
-        double scale = Mth.clamp(world.dimensionType()
-                .coordinateScale() / 3F, 1, Integer.MAX_VALUE);
+        double scale = Mth.clamp(world.dimensionType().coordinateScale() / 3F, 1, Integer.MAX_VALUE);
 
         distance *= scale;
 

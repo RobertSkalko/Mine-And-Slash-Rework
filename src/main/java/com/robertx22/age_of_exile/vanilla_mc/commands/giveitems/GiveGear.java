@@ -65,8 +65,12 @@ public class GiveGear {
             if (!type.equals("random")) {
                 blueprint.gearItemSlot.set(type);
             }
+            var stack = blueprint.createStack();
+
           
-            PlayerUtils.giveItem(blueprint.createStack(), player);
+            PlayerUtils.giveItem(stack, player);
+
+
         }
 
         return 0;

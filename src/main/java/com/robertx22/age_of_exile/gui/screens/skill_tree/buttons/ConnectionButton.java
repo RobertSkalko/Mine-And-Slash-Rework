@@ -20,7 +20,7 @@ public class ConnectionButton extends ImageButton {
     public PointData one;
     public PointData two;
 
- 
+
     public ConnectionButton(SkillTreeScreen screen, TalentTree school, PointData one, PointData two, int x, int y) {
         super(x, y, SIZE, SIZE, 0, 0, 0, ID, (action) -> {
         });
@@ -34,15 +34,11 @@ public class ConnectionButton extends ImageButton {
 
     @Override
     public void render(GuiGraphics gui, int mouseX, int mouseY, float delta) {
-
         // do nothing. use the custom method
     }
 
-    // render here so the bind texture is only called once
-    // because there are thousands of connector buttons
-    public void renderButtonForReal(GuiGraphics gui, int mouseX, int mouseY, float delta) {
 
-        //RenderSystem.enableDepthTest();
+    public void renderButtonForReal(GuiGraphics gui) {
 
         if (connection == Perk.Connection.POSSIBLE) {
             gui.blit(ConnectionButton.ID, this.getX(), this.getY(), 0, 0, 6, 6);
@@ -52,5 +48,7 @@ public class ConnectionButton extends ImageButton {
             gui.blit(ConnectionButton.ID, this.getX(), this.getY(), 12, 0, 6, 6);
         }
 
+
     }
+
 }

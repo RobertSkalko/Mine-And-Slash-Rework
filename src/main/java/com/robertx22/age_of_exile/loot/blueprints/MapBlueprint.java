@@ -45,7 +45,7 @@ public class MapBlueprint extends ItemBlueprint {
 
         data.rar = rarity.GUID();
 
-        data.tier = RandomUtils.RandomRange(0, MapItemData.MAX_TIER);
+        data.tier = RandomUtils.RandomRange(0, 3);
 
         data.lvl = level.get();
 

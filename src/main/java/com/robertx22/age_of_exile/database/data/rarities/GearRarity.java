@@ -15,6 +15,7 @@ import net.minecraft.world.item.Items;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGson<GearRarity> {
     public static GearRarity SERIALIZER = new GearRarity();
@@ -22,6 +23,36 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     public GearRarity() {
         super(RarityType.GEAR);
     }
+
+    public LootableGearTier lootable_gear_tier = LootableGearTier.LOW;
+
+    public int item_model_data_num = -1;
+
+    public int backpack_slots = 10;
+
+    public MinMax skill_gem_percents = new MinMax(0, 0);
+
+
+    public Potential pot = new Potential(100, 1);
+
+
+    public int min_affixes = 0;
+
+    public int max_sockets = 3;
+
+    public int socket_chance = 25;
+
+    public int item_tier = -1;
+
+
+    public float item_tier_power;
+    public float item_value_multi;
+    public boolean announce_in_chat = false;
+
+    public boolean is_unique_item = false;
+
+    transient ResourceLocation glintFull;
+    transient ResourceLocation glintTexBorder;
 
     public enum LootableGearTier {
         LOW(0), MID(1), HIGH(2);
@@ -93,34 +124,6 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
         return GearRarity.class;
     }
 
-    public LootableGearTier lootable_gear_tier = LootableGearTier.LOW;
-
-    public int item_model_data_num = -1;
-
-    public MinMax skill_gem_percents = new MinMax(0, 0);
-
-
-    public Potential pot = new Potential(100, 1);
-
-
-    public int min_affixes = 0;
-
-    public int max_sockets = 3;
-
-    public int socket_chance = 25;
-
-    public int item_tier = -1;
-
-    
-    public float item_tier_power;
-    public float item_value_multi;
-    public boolean announce_in_chat = false;
-
-    public boolean is_unique_item = false;
-
-    transient ResourceLocation glintFull;
-    transient ResourceLocation glintTexBorder;
-
 
     public static class Potential {
         public int total;
@@ -188,9 +191,16 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     }
 
     public GearRarity getHigherRarity() {
-        return ExileDB.GearRarities()
-                .get(higher_rar);
+        return ExileDB.GearRarities().get(higher_rar);
     }
 
+    public Optional<GearRarity> getLowerRarity() {
+        var lower = ExileDB.GearRarities().getFilterWrapped(x -> x.getHigherRarity() == this).list;
+
+        if (!lower.isEmpty()) {
+            return Optional.of(lower.get(0));
+        }
+        return Optional.ofNullable(null);
+    }
 
 }

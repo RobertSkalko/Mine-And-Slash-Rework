@@ -77,10 +77,13 @@ public class LearnClassPointButton extends ImageButton {
 
         tooltip.addAll(perk.GetTooltipString(info));
 
+        /*
         int reqlvl = screen.currentSchool()
                 .getLevelNeededToAllocate(screen.currentSchool().perks.get(perk.GUID()));
 
         tooltip.add(Component.literal("Required Level: " + reqlvl).withStyle(ChatFormatting.RED));
+        
+         */
 
 
         this.setTooltip(Tooltip.create(TextUTIL.mergeList(tooltip)));

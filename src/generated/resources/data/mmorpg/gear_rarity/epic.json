@@ -1,5 +1,6 @@
 {
   "announce_in_chat": false,
+  "backpack_slots": 36,
   "guid": "epic",
   "higher_rar": "legendary",
   "is_unique_item": false,

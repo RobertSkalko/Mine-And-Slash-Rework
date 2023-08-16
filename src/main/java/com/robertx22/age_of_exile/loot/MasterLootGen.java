@@ -62,7 +62,7 @@ public class MasterLootGen {
 
         return items;
     }
-    
+
 
     private static List<ItemStack> populateOnce(LootInfo info) {
         List<ItemStack> items = new ArrayList<ItemStack>();
@@ -81,7 +81,6 @@ public class MasterLootGen {
 
             items.addAll(new JewelLootGen(info).tryGenerate());
 
-            items.addAll(new BackpackLootGen(info).tryGenerate());
             items.addAll(new CurrencyLootGen(info).tryGenerate());
             items.addAll(new MapLootGen(info).tryGenerate());
             items.addAll(new GemLootGen(info).tryGenerate());

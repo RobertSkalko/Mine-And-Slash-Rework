@@ -21,6 +21,7 @@ public abstract class BaseRarity implements Rarity {
         }
     }
 
+  
     public RarityType rarity_type;
     public int weight;
     public String text_format;

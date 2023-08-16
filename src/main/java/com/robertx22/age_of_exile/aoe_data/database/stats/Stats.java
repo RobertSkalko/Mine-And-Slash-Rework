@@ -436,7 +436,7 @@ public class Stats implements ExileRegistryInit {
             .setLocDesc(x -> "If Critical, multiply by x")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
-                x.base = 50;
+                x.base = 100;
                 x.min = 0;
                 x.max = 500;
                 x.group = StatGroup.MAIN;

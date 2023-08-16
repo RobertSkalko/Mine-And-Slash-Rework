@@ -343,8 +343,8 @@ public class DamageEvent extends EffectEvent {
 
             // todo test how different inv speeds feel
             if (target instanceof Player == false) {
-                target.invulnerableTime = 3; // disable iframes hopefully
-                target.hurtTime = 3;
+                target.invulnerableTime = 20; // disable iframes hopefully
+                target.hurtTime = 20;
             }
 
 
@@ -424,8 +424,7 @@ public class DamageEvent extends EffectEvent {
                 }
             } else if (source instanceof Mob) {
                 if (target instanceof Player) {
-                    targetData.getCooldowns()
-                            .setOnCooldown(CooldownsData.IN_COMBAT, 20 * 10);
+                    targetData.getCooldowns().setOnCooldown(CooldownsData.IN_COMBAT, 20 * 10);
 
                     GenerateThreatEvent threatEvent = new GenerateThreatEvent((Player) target, (Mob) source, ThreatGenType.take_dmg, dmg);
                     threatEvent.Activate();

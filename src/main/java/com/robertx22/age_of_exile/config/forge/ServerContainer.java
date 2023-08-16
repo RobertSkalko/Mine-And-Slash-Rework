@@ -50,18 +50,18 @@ public class ServerContainer {
         VANILLA_MOB_DMG_AS_EXILE_DMG = b.defineInRange("vanilla_mob_dmg_as_exile_dmg", 1D, 0, 1000);
         PLAYER_VANILLA_DMG_MULTI = b.defineInRange("PLAYER_VANILLA_DMG_MULTI", 0D, 0, 1000);
         PVP_DMG_MULTI = b.defineInRange("pvp_dmg_multi", 1D, 0, 1000);
+        MOB_WEAPON_DMG_USEFULNESS = b.defineInRange("mob_weapon_dmg_usefulness", 0.5D, 0, 1000);
         MAX_TEAM_DISTANCE = b.defineInRange("max_team_distance", 150D, 0, 100000);
 
         GEAR_DROPRATE = b.defineInRange("gear_drop_rate", 7D, 0, 1000);
         SOUl_DROPRATE = b.defineInRange("soul_drop_rate", 0.3D, 0, 1000);
-        MAP_DROPRATE = b.defineInRange("map_drop_rate", 1D, 0, 1000);
+        MAP_DROPRATE = b.defineInRange("map_drop_rate", 0.5D, 0, 1000);
         GEM_DROPRATE = b.defineInRange("gem_drop_rate", 1D, 0, 1000);
         SKILL_GEM_DROPRATE = b.defineInRange("skill_gem_drop_rate", 3D, 0, 1000);
         SUPP_GEM_DROPRATE = b.defineInRange("support_gem_drop_rate", 2D, 0, 1000);
         AURA_GEM_DROPRATE = b.defineInRange("aura_gem_drop_rate", 1D, 0, 1000);
         RUNE_DROPRATE = b.defineInRange("rune_drop_rate", 1D, 0, 1000);
         CURRENCY_DROPRATE = b.defineInRange("currency_drop_rate", 0.5D, 0, 1000);
-        BACKPACK_DROPRATE = b.defineInRange("backpack_drop_rate", 0.5D, 0, 1000);
         JEWEL_DROPRATE = b.defineInRange("jewel_drop_rate", 0.25D, 0, 1000);
 
 
@@ -129,6 +129,7 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue LEVEL_DISTANCE_PENALTY_PER_LVL;
     public ForgeConfigSpec.DoubleValue LEVEL_DISTANCE_PENALTY_MIN_MULTI;
     public ForgeConfigSpec.DoubleValue EXTRA_MOB_STATS_PER_LEVEL;
+    public ForgeConfigSpec.DoubleValue MOB_WEAPON_DMG_USEFULNESS;
     public ForgeConfigSpec.DoubleValue VANILLA_MOB_DMG_AS_EXILE_DMG;
     public ForgeConfigSpec.DoubleValue PVP_DMG_MULTI;
     public ForgeConfigSpec.DoubleValue PLAYER_VANILLA_DMG_MULTI;
@@ -143,7 +144,6 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue AURA_GEM_DROPRATE;
     public ForgeConfigSpec.DoubleValue RUNE_DROPRATE;
     public ForgeConfigSpec.DoubleValue CURRENCY_DROPRATE;
-    public ForgeConfigSpec.DoubleValue BACKPACK_DROPRATE;
     public ForgeConfigSpec.DoubleValue JEWEL_DROPRATE;
 
 

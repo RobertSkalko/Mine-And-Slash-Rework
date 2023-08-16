@@ -15,6 +15,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         common.min_affixes = 0;
         common.weight = 5000;
         common.item_tier_power = 1;
+        common.backpack_slots = 9;
         common.item_tier = 0;
         common.item_value_multi = 1;
         common.item_model_data_num = 1;
@@ -28,6 +29,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         GearRarity uncommon = new GearRarity();
         uncommon.max_sockets = 1;
         uncommon.socket_chance = 5;
+        uncommon.backpack_slots = 2 * 9;
         uncommon.pot = new GearRarity.Potential(100, 1.25F);
         uncommon.min_affixes = 1;
         uncommon.weight = 2000;
@@ -43,6 +45,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         GearRarity rare = new GearRarity();
         rare.max_sockets = 2;
         rare.socket_chance = 15;
+        rare.backpack_slots = 3 * 9;
         rare.lootable_gear_tier = GearRarity.LootableGearTier.MID;
         rare.pot = new GearRarity.Potential(200, 1.5F);
         rare.item_tier = 2;
@@ -59,6 +62,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         GearRarity epic = new GearRarity();
         epic.max_sockets = 3;
         epic.socket_chance = 20;
+        epic.backpack_slots = 4 * 9;
         epic.lootable_gear_tier = GearRarity.LootableGearTier.MID;
         epic.pot = new GearRarity.Potential(250, 1.5F);
         epic.min_affixes = 4;
@@ -75,6 +79,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         GearRarity legendary = new GearRarity();
         legendary.max_sockets = 3;
         legendary.socket_chance = 30;
+        legendary.backpack_slots = 5 * 9;
         legendary.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
         legendary.pot = new GearRarity.Potential(300, 1.75F);
         legendary.min_affixes = 5;
@@ -92,6 +97,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
         GearRarity mythic = new GearRarity();
         mythic.max_sockets = 3;
+        mythic.backpack_slots = 6 * 9;
         mythic.socket_chance = 50;
         mythic.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
         mythic.pot = new GearRarity.Potential(350, 2F);

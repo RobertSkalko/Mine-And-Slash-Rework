@@ -1,5 +1,5 @@
 {
-  "base": 50.0,
+  "base": 100.0,
   "effect": {
     "effects": [
       "multiply_number_num"

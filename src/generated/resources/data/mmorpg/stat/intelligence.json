@@ -9,14 +9,14 @@
           "v1": 5.0
         },
         {
+          "type": "FLAT",
+          "stat": "mana_regen",
+          "v1": 0.1
+        },
+        {
           "type": "PERCENT",
           "stat": "magic_shield",
           "v1": 0.5
-        },
-        {
-          "type": "FLAT",
-          "stat": "magic_shield_regen",
-          "v1": 0.2
         }
       ]
     },

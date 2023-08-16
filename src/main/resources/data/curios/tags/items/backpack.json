@@ -1,4 +1,4 @@
 {
   "replace": "false",
-  "values": ["mmorpg:backpack"]
+  "values": ["mmorpg:backpack/0","mmorpg:backpack/1","mmorpg:backpack/2","mmorpg:backpack/3","mmorpg:backpack/4","mmorpg:backpack/5"]
 }

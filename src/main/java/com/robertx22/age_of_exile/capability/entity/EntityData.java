@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.capability.entity;
 
+import com.google.common.collect.Multimap;
 import com.robertx22.age_of_exile.capability.bases.EntityGears;
 import com.robertx22.age_of_exile.capability.bases.INeededForClient;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
@@ -53,8 +54,13 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
@@ -62,10 +68,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 
 public class EntityData implements ICap, INeededForClient {
@@ -116,6 +119,8 @@ public class EntityData implements ICap, INeededForClient {
     private static final String PET = "pet";
     private static final String BOSS = "boss";
     private static final String CUSTOM_STATS = "custom_stats";
+    private static final String LEECH = "leech";
+
 
     transient LivingEntity entity;
 
@@ -143,8 +148,10 @@ public class EntityData implements ICap, INeededForClient {
     public EntityStatusEffectsData statusEffects = new EntityStatusEffectsData();
     public EntityAilmentData ailments = new EntityAilmentData();
 
+
     CooldownsData cooldowns = new CooldownsData();
     ThreatData threat = new ThreatData();
+    public EntityLeechData leech = new EntityLeechData();
 
     EntityTypeUtils.EntityClassification type = EntityTypeUtils.EntityClassification.PLAYER;
     // sync these for mobs
@@ -220,6 +227,7 @@ public class EntityData implements ICap, INeededForClient {
         LoadSave.Save(statusEffects, nbt, STATUSES);
         LoadSave.Save(ailments, nbt, AILMENTS);
         LoadSave.Save(summonedPetData, nbt, PET);
+        LoadSave.Save(leech, nbt, LEECH);
 
 
         if (unit != null) {
@@ -289,6 +297,8 @@ public class EntityData implements ICap, INeededForClient {
             this.customExactStats = loadOrBlank(CustomExactStatsData.class, new CustomExactStatsData(), nbt, CUSTOM_STATS, new CustomExactStatsData());
             this.resources = loadOrBlank(ResourcesData.class, new ResourcesData(), nbt, RESOURCES_LOC, new ResourcesData());
             this.cooldowns = loadOrBlank(CooldownsData.class, new CooldownsData(), nbt, COOLDOWNS, new CooldownsData());
+            this.leech = loadOrBlank(EntityLeechData.class, new EntityLeechData(), nbt, LEECH, new EntityLeechData());
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -585,6 +595,7 @@ public class EntityData implements ICap, INeededForClient {
         }
     }
 
+
     public float getMobBaseDamage() {
         MobRarity rar = ExileDB.MobRarities().get(getRarity());
 
@@ -603,7 +614,19 @@ public class EntityData implements ICap, INeededForClient {
 
         float num = getMobBaseDamage();
 
-        num *= data.getAmount();
+        // we get the mob's dmg without the weapon, then add back the weapon damage based on the config,
+        // i set it to 50% by default so mobs with swords don't instakill players but still hurt more
+        ItemStack wep = entity.getMainHandItem();
+        double wepdmg = 0;
+        Multimap<Attribute, AttributeModifier> mods = wep.getAttributeModifiers(EquipmentSlot.MAINHAND);
+        for (Map.Entry<Attribute, AttributeModifier> en : mods.entries()) {
+            if (en.getKey() == Attributes.ATTACK_DAMAGE) {
+                wepdmg = en.getValue().getAmount();
+            }
+        }
+        double total = this.entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue() - wepdmg + (wepdmg * ServerContainer.get().MOB_WEAPON_DMG_USEFULNESS.get());
+
+        num *= total;
 
         PlayStyle style = PlayStyle.STR;
 

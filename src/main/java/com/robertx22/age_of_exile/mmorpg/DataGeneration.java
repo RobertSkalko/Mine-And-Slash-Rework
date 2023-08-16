@@ -15,12 +15,11 @@ public class DataGeneration {
 
             new DataGenHook().run(CachedOutput.NO_CACHE);
 
-            
             ModpackerHelperLists.generate();
-
             CreateLangFile.create();
             GenerateCurioDataJsons.generate();
             ItemModelManager.INSTANCE.generateModels();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

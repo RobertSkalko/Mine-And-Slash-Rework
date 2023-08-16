@@ -27,6 +27,8 @@ public class BasicAttackSpells implements ExileRegistryInit {
     public void registerAll() {
         int cd = 10;
         int mana = 3;
+        double RADIUS = 1.5D;
+
         SpellBuilder.of(FROSTBALL_ID, PlayStyle.INT, SpellConfiguration.Builder.instant(mana, cd)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Ice Ball",
@@ -41,7 +43,7 @@ public class BasicAttackSpells implements ExileRegistryInit {
                 ))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.ITEM_SNOWBALL, 2D, 0.15D))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.SNOWFLAKE, 7D, 0.3D))
-                .onExpire(PartBuilder.damageInAoe(SpellCalcs.ICEBALL, Elements.Cold, 2D))
+                .onExpire(PartBuilder.damageInAoe(SpellCalcs.ICEBALL, Elements.Cold, RADIUS))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.ITEM_SNOWBALL, 5D, 1D))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.SNOWFLAKE, 15D, 0.5D))
                 .build();
@@ -61,7 +63,7 @@ public class BasicAttackSpells implements ExileRegistryInit {
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.FLAME, 1D, 0.1D))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.FALLING_LAVA, 1D, 0.5D))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.SMOKE, 1D, 0.01D))
-                .onExpire(PartBuilder.damageInAoe(SpellCalcs.FIREBALL, Elements.Fire, 2D))
+                .onExpire(PartBuilder.damageInAoe(SpellCalcs.FIREBALL, Elements.Fire, RADIUS))
                 .onExpire(PartBuilder.playSound(SoundEvents.GENERIC_BURN, 1D, 2D))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.SMOKE, 3D, 1D))
                 .build();
@@ -80,7 +82,7 @@ public class BasicAttackSpells implements ExileRegistryInit {
                 ))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.SNEEZE, 1D, 0.15D))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.ITEM_SLIME, 10D, 0.15D))
-                .onExpire(PartBuilder.damageInAoe(SpellCalcs.POISON_BALL, Elements.Chaos, 2D))
+                .onExpire(PartBuilder.damageInAoe(SpellCalcs.POISON_BALL, Elements.Chaos, RADIUS))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.ITEM_SLIME, 100D, 1D))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.SNEEZE, 25D, 1D))
 

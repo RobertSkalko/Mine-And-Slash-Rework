@@ -10,13 +10,13 @@
         },
         {
           "type": "FLAT",
-          "stat": "energy",
-          "v1": 5.0
+          "stat": "energy_regen",
+          "v1": 0.2
         },
         {
           "type": "FLAT",
-          "stat": "energy_regen",
-          "v1": 0.3
+          "stat": "energy",
+          "v1": 5.0
         }
       ]
     },

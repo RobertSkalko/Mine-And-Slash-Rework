@@ -1,16 +1,12 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
-import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulData;
-import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulItem;
-import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 public class GearSoulOnInvTick {
 
     public static void checkAndGenerate(Player player) {
-
+/*
         try {
 
             if (player.level().isClientSide) {
@@ -28,9 +24,12 @@ public class GearSoulOnInvTick {
             e.printStackTrace();
         }
 
+
+ */
     }
 
     static void tryStack(Player player, ItemStack stack) {
+        /*
         if (stack.isEmpty()) {
             return;
         }
@@ -49,6 +48,8 @@ public class GearSoulOnInvTick {
                 }
             }
         }
+
+         */
 
     }
 

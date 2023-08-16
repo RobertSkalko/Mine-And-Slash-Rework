@@ -45,8 +45,8 @@ public class SpawnedMob implements IWeighted {
             all.add(new SpawnedMob(EntityType.WITCH, 200).setRanged().setCanBeBoss(true));
             all.add(new SpawnedMob(EntityType.VINDICATOR, 100).setCanBeBoss(true));
             all.add(new SpawnedMob(EntityType.SLIME, 5));
-            all.add(new SpawnedMob(EntityType.EVOKER, 50).setCanBeBoss(true));
-            all.add(new SpawnedMob(EntityType.ILLUSIONER, 50).setCanBeBoss(true));
+            all.add(new SpawnedMob(EntityType.EVOKER, 25).setCanBeBoss(true));
+            all.add(new SpawnedMob(EntityType.ILLUSIONER, 25));
             all.add(new SpawnedMob(EntityType.HUSK, 500).setUndead());
             all.add(new SpawnedMob(EntityType.RAVAGER, 5));
             all.add(new SpawnedMob(EntityType.STRAY, 300).setRanged().setUndead());

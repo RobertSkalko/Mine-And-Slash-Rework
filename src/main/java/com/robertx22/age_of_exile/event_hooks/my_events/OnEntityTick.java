@@ -25,20 +25,23 @@ public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
                 return; // it shouldnt be though
             }
 
+            var data = Load.Unit(entity);
 
             if (entity instanceof SummonEntity s) {
-                Load.Unit(entity).summonedPetData.tick(s);
+                data.summonedPetData.tick(s);
             }
 
-            Load.Unit(entity).ailments.onTick(entity);
-            Load.Unit(entity).getCooldowns().onTicksPass(1);
+            data.ailments.onTick(entity);
+            data.getCooldowns().onTicksPass(1);
 
-            var boss = Load.Unit(entity).getBossData();
+            if (entity.tickCount % 20 == 0) {
+                data.leech.onSecondUseLeeches(data);
+            }
+
+            var boss = data.getBossData();
             if (boss != null) {
                 boss.tick(entity);
             }
-
-
             // todo lets see if this works fine, no need to lag if mobs anyway recalculate stats when needed
             if (entity instanceof Player) {
                 checkGearChanged(entity);

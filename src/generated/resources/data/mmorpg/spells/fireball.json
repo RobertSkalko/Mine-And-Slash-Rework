@@ -93,7 +93,7 @@
               "type": "aoe",
               "map": {
                 "en_predicate": "enemies",
-                "radius": 2.0,
+                "radius": 1.5,
                 "selection_type": "RADIUS"
               }
             }

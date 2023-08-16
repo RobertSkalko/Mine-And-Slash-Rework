@@ -25,8 +25,8 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Renderable;
-import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
@@ -64,6 +64,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     int ticks = 0;
 
+
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         if (keyCode == 32) { // space
@@ -82,17 +83,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
     HashMap<PointData, PerkButton> pointPerkButtonMap = new HashMap<>();
 
     public List<TalentTree> schoolsInOrder;
-
-    public TalentTree getSchoolByIndexAllowsOutOfBounds(int i) {
-        if (i >= schoolsInOrder.size()) {
-            return schoolsInOrder.get(i - schoolsInOrder.size());
-        }
-        if (i < 0) {
-            return schoolsInOrder.get(schoolsInOrder.size() + i);
-        }
-        return schoolsInOrder.get(i);
-
-    }
 
 
     public Minecraft mc = Minecraft.getInstance();
@@ -160,11 +150,11 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
                     if (sb == null) {
                         continue;
-
                     }
 
                     int x2 = sb.getX() + sb.getWidth() / 2;
                     int y2 = sb.getY() + sb.getHeight() / 2;
+
 
                     List<PointF> points = GuiUtils.generateCurve(new PointF(x1, y1), new PointF(x2, y2), 360f, spacing, true);
 
@@ -176,37 +166,10 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                         newButton(new ConnectionButton(this, school, p, pb.point, x, y));
 
                     }
-
                 }
             }
 
         });
-
-    }
-
-    public void drawConnectivity(int x, int y, int xx, int yy, GuiGraphics pGuiGraphics, int scrollx, int scrolly, boolean pDropShadow) {
-
-        int i = scrollx + x + 13;
-        int j = scrollx + x + 26 + 4;
-        int k = scrolly + y + 13;
-        int l = scrollx + xx + 13;
-        int i1 = scrolly + yy + 13;
-        int j1 = pDropShadow ? -16777216 : -1;
-        if (pDropShadow) {
-            pGuiGraphics.hLine(j, i, k - 1, j1);
-            pGuiGraphics.hLine(j + 1, i, k, j1);
-            pGuiGraphics.hLine(j, i, k + 1, j1);
-            pGuiGraphics.hLine(l, j - 1, i1 - 1, j1);
-            pGuiGraphics.hLine(l, j - 1, i1, j1);
-            pGuiGraphics.hLine(l, j - 1, i1 + 1, j1);
-            pGuiGraphics.vLine(j - 1, i1, k, j1);
-            pGuiGraphics.vLine(j + 1, i1, k, j1);
-        } else {
-            pGuiGraphics.hLine(j, i, k, j1);
-            pGuiGraphics.hLine(l, j, i1, j1);
-            pGuiGraphics.vLine(j, i1, k, j1);
-        }
-
 
     }
 
@@ -399,76 +362,49 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
             //   renderBackgroundDirt(gui, this, 0);
 
 
-            for (Renderable r : this.renderables) {
+            RenderSystem.setShaderTexture(0, ConnectionButton.ID);
+            RenderSystem.setShader(GameRenderer::getPositionTexShader);
 
-                /*
-                // todo
-                if (r instanceof PerkButton p) {
-                    for (PointData o : this.school.calcData.connections.get(p.point)) {
-                        PerkButton ot = this.pointPerkButtonMap.get(o);
-                        if (ot != null) {
-                            var p1 = getZoomedPosition(o);
-                            var p2 = getZoomedPosition(p.point);
-                            drawConnectivity(p1.x, p1.y, p2.x, p2.y, gui, 0, 0, false);
-                        }
-                    }
-                }
+            var rpg = Load.playerRPGData(mc.player);
 
-                 */
-                ticks++;
+            ticks++;
 
+            if (ticks % 40 == 0) {
+                for (Renderable r : this.renderables) {
 
-                if (r instanceof ConnectionButton c) {
-
-                    if (mouseRecentlyClickedTicks > 1) {
-                        if (ticks % 20 == 0) {
+                    if (r instanceof ConnectionButton c) {
+                        if (mouseRecentlyClickedTicks > 1) {
                             if (pointClicked.equals(c.one) || pointClicked.equals(c.two)) {
-                                c.connection = Load.playerRPGData(mc.player).talents
-                                        .getConnection(school, c.one, c.two);
+                                c.connection = rpg.talents.getConnection(school, c.one, c.two);
                             }
                         }
                     }
-                    c.renderButtonForReal(gui, x, y, ticks);
 
                 }
             }
 
+            gui.drawManaged(() -> {
+                for (Renderable r : this.renderables) {
+                    if (r instanceof ConnectionButton c) {
+                        c.renderButtonForReal(gui);
+                    }
+                }
+            });
 
             super.render(gui, x, y, ticks);
 
-            for (GuiEventListener abstractButtonWidget : children()) {
-                if (abstractButtonWidget instanceof PerkButton p) {
-                    p.render(gui, x, y, ticks);
-                }
-            }
-
-            // we order them here so school buttons are on top, and perks are on top of connection buttons..
-            // probably a better way to do it exists?
-
-            for (GuiEventListener button : children()) {
-                if (button instanceof IMarkOnTop t && button instanceof ImageButton b) {
-                    b.render(gui, x, y, ticks);
-                }
-
-            }
-
             this.tick_count++;
 
-        } catch (Exception e) {
+        } catch (
+                Exception e) {
             e.printStackTrace();
         }
 
-        
+
         gui.pose().scale(1F / zoom, 1F / zoom, 1F / zoom);
 
         renderPanels(gui);
 
-
-        for (GuiEventListener e : children()) {
-            if (e instanceof PerkButton p) { // todo
-                //    p.renderToolTip(gui, x, y);
-            }
-        }
         //watch.print(" rendering ");
     }
 

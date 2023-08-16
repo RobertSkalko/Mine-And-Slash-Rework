@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.ICreativeTabNbt;
 import com.robertx22.library_of_exile.registry.IGUID;
@@ -17,6 +18,9 @@ import com.robertx22.library_of_exile.utils.LoadSave;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -39,7 +43,34 @@ public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt {
         ItemStack stack = new ItemStack(SlashItems.STAT_SOUL.get());
         StatSoulData data = StatSoulData.anySlotOfRarity(rar);
         StackSaving.STAT_SOULS.saveTo(stack, data);
+
         return stack;
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+        ItemStack itemstack = pPlayer.getItemInHand(pUsedHand);
+
+        if (!pLevel.isClientSide) {
+
+            if (StackSaving.STAT_SOULS.has(itemstack)) {
+
+                StatSoulData data = StackSaving.STAT_SOULS.loadFrom(itemstack);
+
+                Item item = data.getRarity().getLootableItem(ExileDB.GearSlots().get(data.slot));
+
+                ItemStack stack = item.getDefaultInstance();
+
+                StackSaving.GEARS.saveTo(stack, data.createGearData(stack));
+
+                PlayerUtils.giveItem(stack, pPlayer);
+                itemstack.shrink(1);
+            }
+
+        }
+
+        return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
+
     }
 
 
@@ -141,6 +172,7 @@ public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt {
 
         tooltip.add(Component.literal("Infuses stats into empty gear").withStyle(ChatFormatting.AQUA));
         tooltip.add(TooltipUtils.dragOntoGearToUse());
+        tooltip.add(Component.literal("You can also right click to generate an item.").withStyle(ChatFormatting.AQUA));
 
     }
 

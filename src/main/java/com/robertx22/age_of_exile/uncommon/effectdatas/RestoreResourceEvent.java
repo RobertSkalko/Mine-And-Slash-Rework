@@ -6,10 +6,10 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.NumberUtils;
 import com.robertx22.age_of_exile.vanilla_mc.packets.DmgNumPacket;
 import com.robertx22.library_of_exile.main.Packets;
+import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.ChatFormatting;
 
 import java.util.List;
 
@@ -33,8 +33,8 @@ public class RestoreResourceEvent extends EffectEvent {
             return;
         }
 
-        this.targetData.getResources()
-            .restore(target, data.getResourceType(), data.getNumber());
+     
+        this.targetData.getResources().restore(target, data.getResourceType(), data.getNumber());
 
         if (this.data.getResourceType() == ResourceType.health) {
             if (data.getRestoreType() == RestoreType.heal) {
@@ -49,8 +49,8 @@ public class RestoreResourceEvent extends EffectEvent {
 
                     float threat = (int) (data.getNumber() * 0.1F);
                     List<Mob> mobs = EntityFinder.start(source, Mob.class, source.blockPosition())
-                        .radius(10)
-                        .build();
+                            .radius(10)
+                            .build();
                     for (Mob x : mobs) {
                         GenerateThreatEvent threatEvent = new GenerateThreatEvent((Player) source, x, ThreatGenType.heal, threat);
                         threatEvent.Activate();

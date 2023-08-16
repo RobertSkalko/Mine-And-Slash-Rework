@@ -65,6 +65,8 @@ public class JewelInvHelper implements IStatCtx {
                 if (total > max) {
                     unequip(p, i);
                 }
+            } else {
+                unequip(p, i);
             }
         }
     }

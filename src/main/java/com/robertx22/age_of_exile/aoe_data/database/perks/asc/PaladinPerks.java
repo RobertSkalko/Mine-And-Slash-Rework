@@ -35,7 +35,7 @@ public class PaladinPerks implements ExileRegistryInit {
         PerkBuilder.ascPoint(PALADIN_1, new OptScaleExactStat(25, Stats.HEAL_STRENGTH.get(), ModType.FLAT), new OptScaleExactStat(10, DatapackStats.HEAL_TO_SPELL_DMG, ModType.FLAT));
         PerkBuilder.ascPoint(PALADIN_2, new OptScaleExactStat(10, Health.getInstance(), ModType.PERCENT), new OptScaleExactStat(15, DatapackStats.HEAL_TO_SPELL_DMG, ModType.FLAT));
         PerkBuilder.ascPoint(PALADIN_3, new OptScaleExactStat(10, Stats.HEALING_RECEIVED.get(), ModType.PERCENT), new OptScaleExactStat(20, DatapackStats.HEAL_TO_SPELL_DMG, ModType.FLAT));
-        PerkBuilder.ascPoint(PALADIN_4, new OptScaleExactStat(30, Stats.HEAL_STRENGTH.get(), ModType.PERCENT), new OptScaleExactStat(30, DatapackStats.HEAL_TO_SPELL_DMG, ModType.FLAT));
+        PerkBuilder.ascPoint(PALADIN_4, new OptScaleExactStat(30, Stats.HEAL_STRENGTH.get(), ModType.FLAT), new OptScaleExactStat(30, DatapackStats.HEAL_TO_SPELL_DMG, ModType.FLAT));
 
         PerkBuilder.ascPoint(GUARDIAN_1, new OptScaleExactStat(15, Health.getInstance(), ModType.PERCENT));
         PerkBuilder.ascPoint(GUARDIAN_2, new OptScaleExactStat(20, Armor.getInstance(), ModType.PERCENT));

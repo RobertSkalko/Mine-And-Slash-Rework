@@ -1,5 +1,6 @@
 {
   "announce_in_chat": true,
+  "backpack_slots": 45,
   "guid": "legendary",
   "higher_rar": "mythic",
   "is_unique_item": false,

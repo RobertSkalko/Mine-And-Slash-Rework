@@ -31,8 +31,8 @@
 "_comment": "RARITY ITEM NAMES",
 "_comment": "MISC ITEMS",
 "item.mmorpg.jewel.dex": "Viridian Jewel",
-"item.mmorpg.jewel.str": "Stardust Jewel",
-"item.mmorpg.jewel.int": "Meteorite Jewel",
+"item.mmorpg.jewel.str": "Meteorite Jewel",
+"item.mmorpg.jewel.int": "Stardust Jewel",
 "item.mmorpg.jewel.unique_crafted": "Runed Craftmanship Unique Jewel",
 
 "item.mmorpg.stone.0": "Common Stone",

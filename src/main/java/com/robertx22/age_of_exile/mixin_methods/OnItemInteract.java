@@ -51,7 +51,7 @@ public class OnItemInteract {
                                 SoundUtils.ding(player.level(), player.blockPosition());
                                 SoundUtils.playSound(player.level(), player.blockPosition(), SoundEvents.ANVIL_USE, 1, 1);
                                 x.setCanceled(true);
-                                
+
                                 return;
                             }
                         }
@@ -103,16 +103,18 @@ public class OnItemInteract {
                 }
 
                 if (data != null) {
-                    SoundUtils.playSound(player, SoundEvents.ANVIL_USE, 1, 1);
+                    if (data.isSalvagable()) {
+                        SoundUtils.playSound(player, SoundEvents.ANVIL_USE, 1, 1);
 
-                    stack.shrink(1);
-                    data.getSalvageResult(stack)
-                            .forEach(e -> PlayerUtils.giveItem(e, player));
-                    //ci.setReturnValue(ItemStack.EMPTY);
-                    //stack.shrink(1000);
-                    //ci.cancel();
-                    x.setCanceled(true);
-                    return;
+                        stack.shrink(1);
+                        data.getSalvageResult(stack)
+                                .forEach(e -> PlayerUtils.giveItem(e, player));
+                        //ci.setReturnValue(ItemStack.EMPTY);
+                        //stack.shrink(1000);
+                        //ci.cancel();
+                        x.setCanceled(true);
+                        return;
+                    }
                 }
             } else if (cursor.getItem() == SlashItems.SOCKET_EXTRACTOR.get()) {
 

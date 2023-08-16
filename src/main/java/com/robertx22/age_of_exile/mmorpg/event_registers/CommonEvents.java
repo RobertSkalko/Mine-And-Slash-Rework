@@ -18,6 +18,7 @@ import com.robertx22.age_of_exile.mixin_methods.OnItemInteract;
 import com.robertx22.age_of_exile.mixin_methods.OnItemStoppedUsingCastImbuedSpell;
 import com.robertx22.age_of_exile.mmorpg.ForgeEvents;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
+import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.STATICS;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.error_checks.base.ErrorChecks;
@@ -170,6 +171,16 @@ public class CommonEvents {
                             event.setAmount(0);
                             event.setCanceled(true);
                         }
+                    }
+                } else {
+                    if (LivingHurtUtils.isEnviromentalDmg(event.getSource())) {
+
+                        // spend magic shield on envi dmg
+                        float dmg = event.getAmount();
+                        float multi = dmg / event.getEntity().getMaxHealth();
+                        float spend = Load.Unit(event.getEntity()).getUnit().magicShieldData().getValue() * multi;
+                        Load.Unit(event.getEntity()).getResources().spend(event.getEntity(), ResourceType.magic_shield, spend);
+
                     }
                 }
             } catch (Exception e) {

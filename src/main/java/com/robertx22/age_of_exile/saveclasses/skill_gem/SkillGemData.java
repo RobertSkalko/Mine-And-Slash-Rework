@@ -120,7 +120,7 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
     @Override
     public String getRarityId() {
-        return null;
+        return rar;
     }
 
     public GearRarity getRarity() {

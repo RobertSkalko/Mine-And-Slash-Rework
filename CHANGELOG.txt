@@ -12,10 +12,6 @@ GEAR UPDATE:
 - elemental resistances are now way more important but also easier to get. As a rule of thumb, you should be dying a lot if you aren't res capped
 - gear now drops as actual items again! Although gear souls will still ocasionally drop so you can stick them into any modded items you want, as long as the auto compatibility code detects it (should work with most armor)
 
-COMBAT UPDATE:
- - No more basic attack cooldown, you are now only limited by your energy (there's a super tiny cooldown actually, just so you can't instant kill things!)
- - Added new stat: Full Swing Damage, if you want to spec into vanilla type slower hitting combat
- 
 SKILL GEM SYSTEM:
  - we're back to no class restrictions!
  - each spell can be supported by up to 5 support gems depending on amount of gem links
@@ -64,3 +60,15 @@ MISC STUFF:
  - meteor spells should now no longer be useless in tight spaces
  - players are now teamed by default and all friendly spells should work and pvp damage should be off
  - weapon types now have a dmg multiplier that only really affects basic attacks. So bows will deal way more damage (and cost way more energy), because they attack so slow
+ 
+v5.0.1
+ - fixed talent infinite allocate bug
+ - mobs with weapons now only have 50% of their weapon damage added by default (you shouldn't be getting 1 shotted by iron sword mobs now)
+ - fixed skill gems auto salvage not working 
+ - magic shield should take enviromental dmg now
+ - tweaked regens
+ - fixed uniques not being able to drop ever
+ - leech is now capped to 10% of max hp/mana etc per second
+ - backpacks are now crafted instead of dropped
+ - gear souls can now be right clicked to create a default item with stats, if you dont have anything to apply it on
+ - backpacks wont hold invalid items anymore

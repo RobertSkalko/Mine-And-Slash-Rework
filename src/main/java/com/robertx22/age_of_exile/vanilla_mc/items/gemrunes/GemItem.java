@@ -142,10 +142,9 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
     static float MIN_WEP_DMG = 2;
     static float MAX_WEP_DMG = 15;
     static float MIN_RES = 5;
-    static float MAX_RES = 25;
+    static float MAX_RES = 15;
     static float MIN_ELE_DMG = 2;
     static float MAX_ELE_DMG = 10;
-
 
     @Override
     public BaseRuneGem getBaseRuneGem() {

@@ -1,5 +1,6 @@
 {
   "announce_in_chat": true,
+  "backpack_slots": 10,
   "guid": "runeword",
   "higher_rar": "",
   "is_unique_item": true,

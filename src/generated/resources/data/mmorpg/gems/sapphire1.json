@@ -8,7 +8,7 @@
       "type": "FLAT",
       "scale_to_lvl": true,
       "stat": "water_resist",
-      "v1": 5.0
+      "v1": 3.0
     }
   ],
   "on_jewelry_stats": [

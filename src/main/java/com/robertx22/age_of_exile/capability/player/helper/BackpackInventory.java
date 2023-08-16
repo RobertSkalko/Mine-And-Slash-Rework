@@ -2,10 +2,9 @@ package com.robertx22.age_of_exile.capability.player.helper;
 
 import com.robertx22.age_of_exile.a_libraries.curios.MyCurioUtils;
 import com.robertx22.age_of_exile.a_libraries.curios.RefCurio;
-import com.robertx22.age_of_exile.capability.player.BackpackItemData;
+import com.robertx22.age_of_exile.capability.player.BackpackItem;
 import com.robertx22.age_of_exile.capability.player.data.Backpacks;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
-import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -24,24 +23,23 @@ public class BackpackInventory extends MyInventory {
 
     @Override
     public int getTotalSlots() {
-        int slots = 9 * 3;
+        int slots = 0;
 
         ItemStack stack = MyCurioUtils.get(RefCurio.BACKPACK, p, 0);
-        BackpackItemData data = StackSaving.BACKPACK.loadFrom(stack);
-        if (data != null) {
-            slots += data.getSlots(type);
+        if (stack.getItem() instanceof BackpackItem bag) {
+            slots += bag.getSlots();
         }
         return MathHelper.clamp(slots, 0, getContainerSize());
     }
 
-    
+
     // todo must test this
     public void throwOutBlockedSlotItems() {
 
         int open = getTotalSlots();
 
         for (int i = 0; i < getContainerSize(); i++) {
-            if (i > open) {
+            if (i >= open || !this.type.isValid(getItem(i))) {
                 ItemStack stack = getItem(i);
                 PlayerUtils.giveItem(stack.copy(), p);
                 stack.shrink(100);

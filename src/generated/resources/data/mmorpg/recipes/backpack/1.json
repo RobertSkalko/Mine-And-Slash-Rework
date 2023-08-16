@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "mmorpg:stone/1"
+    },
+    {
+      "item": "mmorpg:stone/1"
+    },
+    {
+      "item": "mmorpg:stone/1"
+    },
+    {
+      "item": "mmorpg:stone/1"
+    },
+    {
+      "item": "mmorpg:stone/1"
+    },
+    {
+      "item": "mmorpg:stone/1"
+    },
+    {
+      "item": "mmorpg:stone/1"
+    },
+    {
+      "item": "mmorpg:stone/1"
+    },
+    {
+      "item": "mmorpg:backpack/0"
+    }
+  ],
+  "result": {
+    "item": "mmorpg:backpack/1"
+  }
+}

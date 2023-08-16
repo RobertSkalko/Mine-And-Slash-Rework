@@ -19,8 +19,8 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Ene
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
-import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShieldRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -30,23 +30,23 @@ import java.util.Arrays;
 import java.util.UUID;
 
 public class DatapackStats implements ExileRegistryInit {
-
+       
     public static Stat INT = new CoreStat("intelligence", "Intelligence", CoreStatData.of(Arrays.asList(
             new OptScaleExactStat(5, Mana.getInstance(), ModType.FLAT),
-            new OptScaleExactStat(0.5F, MagicShield.getInstance(), ModType.PERCENT),
-            new OptScaleExactStat(0.2F, MagicShieldRegen.getInstance(), ModType.FLAT)
+            new OptScaleExactStat(0.1F, ManaRegen.getInstance(), ModType.FLAT),
+            new OptScaleExactStat(0.5F, MagicShield.getInstance(), ModType.PERCENT)
     )));
 
     public static Stat STR = new CoreStat("strength", "Strength", CoreStatData.of(Arrays.asList(
             new OptScaleExactStat(0.1F, WeaponDamage.getInstance(), ModType.FLAT),
-            new OptScaleExactStat(5, Health.getInstance(), ModType.FLAT),
-            new OptScaleExactStat(0.2F, HealthRegen.getInstance(), ModType.FLAT)
+            new OptScaleExactStat(0.1F, HealthRegen.getInstance(), ModType.FLAT),
+            new OptScaleExactStat(5, Health.getInstance(), ModType.FLAT)
     )));
 
     public static Stat DEX = new CoreStat("dexterity", "Dexterity", CoreStatData.of(Arrays.asList(
             new OptScaleExactStat(1, DodgeRating.getInstance(), ModType.PERCENT),
-            new OptScaleExactStat(5, Energy.getInstance(), ModType.FLAT),
-            new OptScaleExactStat(0.3F, EnergyRegen.getInstance(), ModType.FLAT)
+            new OptScaleExactStat(0.2F, EnergyRegen.getInstance(), ModType.FLAT),
+            new OptScaleExactStat(5, Energy.getInstance(), ModType.FLAT)
     )));
 
 

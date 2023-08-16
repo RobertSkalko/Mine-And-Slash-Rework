@@ -8,7 +8,7 @@
       "type": "FLAT",
       "scale_to_lvl": true,
       "stat": "chaos_resist",
-      "v1": 10.0
+      "v1": 6.0
     }
   ],
   "on_jewelry_stats": [

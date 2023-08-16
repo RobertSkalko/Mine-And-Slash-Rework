@@ -62,7 +62,7 @@ public class ProcessChunkBlocks {
                 List<ChunkPos> chunks = new ArrayList<>();
                 chunks.add(start);
 
-                int size = 3;
+                int size = 2;
 
                 if (MMORPG.RUN_DEV_TOOLS) {
                     size = 5;
@@ -73,6 +73,11 @@ public class ProcessChunkBlocks {
                     chunks.add(new ChunkPos(start.x - i, start.z));
                     chunks.add(new ChunkPos(start.x, start.z + i));
                     chunks.add(new ChunkPos(start.x, start.z - i));
+
+                    chunks.add(new ChunkPos(start.x + i, start.z + i));
+                    chunks.add(new ChunkPos(start.x - i, start.z - i));
+                    chunks.add(new ChunkPos(start.x - i, start.z + i));
+                    chunks.add(new ChunkPos(start.x + i, start.z - i));
                 }
 
                 for (ChunkPos cpos : chunks) {

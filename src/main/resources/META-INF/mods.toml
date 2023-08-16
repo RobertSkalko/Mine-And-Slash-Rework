@@ -1,10 +1,10 @@
 modLoader="javafml" #mandatory
 loaderVersion="[36,)"
 license="All rights reserved"
-issueTrackerURL="https://github.com/RobertSkalko/Mine-and-Slash/issues"
+issueTrackerURL="https://github.com/RobertSkalko/Mine-And-Slash-Rework"
 [[mods]]
 modId="mmorpg"
-version="${file.jarVersion}"
+version="5.0.1"
 displayName="Mine and Slash"
 # A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
@@ -12,7 +12,7 @@ displayName="Mine and Slash"
 #displayURL="https://www.curseforge.com/minecraft/mc-mods/mine-and-slash-reloaded" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="icon.png" #
-credits="Thanks for this example mod goes to Java"
+credits=""
 authors="mcrobertx22"
 description='''
 Turns Minecraft into a hack and slash RPG!
@@ -33,7 +33,7 @@ Turns Minecraft into a hack and slash RPG!
 [[dependencies.mmorpg]]
     modId="library_of_exile"
     mandatory=true
-    versionRange="[1.2.3,)"
+    versionRange="[1.3.0,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.mmorpg]]

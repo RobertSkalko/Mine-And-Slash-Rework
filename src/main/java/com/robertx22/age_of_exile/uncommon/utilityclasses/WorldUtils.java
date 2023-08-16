@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
-import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.core.BlockPos;
@@ -122,9 +121,6 @@ public class WorldUtils {
 
     static boolean isId(Level world, ResourceLocation dimid) {
 
-        if (MMORPG.server == null) {
-            return false;
-        }
         ResourceLocation id = VanillaUTIL.REGISTRY.dimensionTypes((Level) world)
                 .getKey(world.dimensionType());
 
