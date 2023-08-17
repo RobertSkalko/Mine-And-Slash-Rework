@@ -97,8 +97,8 @@
     "cooldown_ticks": 1200,
     "imbues": 0,
     "mana_cost": {
-      "max": 60.0,
-      "min": 30.0
+      "max": 45.0,
+      "min": 60.0
     },
     "style": "int",
     "summonType": "UNDEAD",

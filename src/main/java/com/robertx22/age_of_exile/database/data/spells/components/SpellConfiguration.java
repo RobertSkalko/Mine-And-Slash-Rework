@@ -81,7 +81,7 @@ public class SpellConfiguration {
         public static SpellConfiguration instant(int mana, int cd) {
             SpellConfiguration c = new SpellConfiguration();
             c.cast_time_ticks = 0;
-            c.mana_cost = new LeveledValue(0.5F * mana, 1F * mana);
+            c.mana_cost = new LeveledValue(1F * mana, 0.75F * mana);
             c.cooldown_ticks = cd;
             return c;
         }
@@ -89,7 +89,7 @@ public class SpellConfiguration {
         public static SpellConfiguration arrowSpell(int mana, int cd) {
             SpellConfiguration c = new SpellConfiguration();
             c.cast_time_ticks = 0;
-            c.mana_cost = new LeveledValue(0.5F * mana, 1F * mana);
+            c.mana_cost = new LeveledValue(1F * mana, 0.75F * mana);
             c.cooldown_ticks = cd;
             c.swing_arm = false;
             return c;
@@ -98,7 +98,7 @@ public class SpellConfiguration {
         public static SpellConfiguration nonInstant(int mana, int cd, int casttime) {
             SpellConfiguration c = new SpellConfiguration();
             c.cast_time_ticks = casttime;
-            c.mana_cost = new LeveledValue(0.5F * mana, 1F * mana);
+            c.mana_cost = new LeveledValue(1F * mana, 0.75F * mana);
             c.cooldown_ticks = cd;
             return c;
         }
@@ -107,7 +107,7 @@ public class SpellConfiguration {
             SpellConfiguration c = new SpellConfiguration();
             c.times_to_cast = times;
             c.cast_time_ticks = casttime;
-            c.mana_cost = new LeveledValue(0.5F * mana, 1F * mana);
+            c.mana_cost = new LeveledValue(1F * mana, 0.75F * mana);
             c.cooldown_ticks = cd;
             return c;
         }

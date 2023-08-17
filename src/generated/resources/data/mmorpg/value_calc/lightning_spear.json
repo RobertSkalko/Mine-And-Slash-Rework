@@ -1,6 +1,6 @@
 {
   "base": {
-    "max": 7.5,
+    "max": 6.0,
     "min": 1.5
   },
   "base_scaling_type": "NORMAL",
@@ -8,10 +8,17 @@
   "stat_scalings": [
     {
       "multi": {
-        "max": 1.25,
+        "max": 1.0,
         "min": 0.75
       },
       "stat": "weapon_damage"
+    },
+    {
+      "multi": {
+        "max": 0.2,
+        "min": 0.1
+      },
+      "stat": "mana"
     }
   ]
 }

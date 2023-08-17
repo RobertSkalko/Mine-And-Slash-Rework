@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.vanilla_mc.items.misc;
 
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
-import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.registry.IWeighted;
 import net.minecraft.network.chat.Component;
@@ -37,7 +36,7 @@ public class RarityStoneItem extends Item implements IWeighted {
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {
 
-        tooltip.add(Words.CreatedInSalvageStation.locName());
+        //  tooltip.add(Words.CreatedInSalvageStation.locName());
 
         tooltip.add(Component.literal(""));
 

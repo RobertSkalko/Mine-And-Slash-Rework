@@ -28,10 +28,14 @@ public class SpellCalcs {
     public static ValueCalculation FIREBALL = ValueCalcBuilder.of("fireball")
             .spellScaling(0.25F, 0.5F)
             .build();
-    public static ValueCalculation LIGHTNING_SPEAR = ValueCalcBuilder.of("lightning_spear")
-            .spellScaling(0.75F, 1.25F)
-            .build();
 
+    public static ValueCalculation LIGHTNING_SPEAR = ValueCalcBuilder.of("lightning_spear")
+            .spellScaling(0.75F, 1F)
+            .statScaling(Mana.getInstance(), 0.1F, 0.2F)
+            .build();
+    public static ValueCalculation BOOMERANG = ValueCalcBuilder.of("boomerang")
+            .spellScaling(0.75F, 1.5F)
+            .build();
 
     public static ValueCalculation PETRIFY = ValueCalcBuilder.of("petrify")
             .spellScaling(0.5F, 0.75F)

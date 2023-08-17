@@ -19,6 +19,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.Arrays;
@@ -40,6 +41,30 @@ public class WaterSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
+        
+        SpellBuilder.of("frozen_orb", PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 30)
+                                .setSwingArm()
+                                .applyCastSpeedToCooldown(), "Frozen orb",
+                        Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.area))
+                .manualDesc(
+                        "Throw out a frozen orb, slowly moving towards enemies and  dealing " + SpellCalcs.ICEBALL.getLocDmgTooltip()
+                                + " " + Elements.Cold.getIconNameDmg())
+
+                .weaponReq(CastingWeapon.MAGE_WEAPON)
+                .onCast(PartBuilder.playSound(SoundEvents.SNOWBALL_THROW, 1D, 1D))
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.SNOWBALL, 1D, 0.5D, SlashEntities.SIMPLE_PROJECTILE.get(), 20 * 10D, false)
+                        .put(MapField.TRACKS_ENEMIES, true)
+                        .put(MapField.EXPIRE_ON_ENTITY_HIT, false)
+                ))
+
+                .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.ITEM_SNOWBALL, 2D, 0.15D))
+                .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.SNOWFLAKE, 7D, 0.15D))
+
+                .onTick(PartBuilder.damageInAoe(SpellCalcs.ICEBALL, Elements.Cold, 3D).onTick(20D))
+                .onTick(PartBuilder.aoeParticles(ParticleTypes.ITEM_SNOWBALL, 5D, 3D).onTick(20D))
+                .onTick(PartBuilder.aoeParticles(ParticleTypes.SNOWFLAKE, 15D, 3D).onTick(20D))
+
+                .build();
 
         SpellBuilder.of(FROST_FLOWER, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 60)
                                 .setSwingArm(), "Frost Flower",

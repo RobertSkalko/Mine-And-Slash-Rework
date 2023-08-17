@@ -82,38 +82,41 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
         return "runes/" + type.id;
     }
 
+    
     @Override
     public int Weight() {
         return weight;
     }
 
     public enum RuneType {
-        YUN(100, "yun", "Yun", 4),
-        VEN(100, "ven", "Ven", 4),
-        NOS(1000, "nos", "Nos", 0),
-        MOS(1000, "mos", "Mos", 0),
-        ITA(1000, "ita", "Ita", 0),
-        CEN(1000, "cen", "Cen", 1),
-        FEY(1000, "fey", "Fey", 1),
-        DOS(1000, "dos", "Dos", 1),
-        ANO(1000, "ano", "Ano", 2),
-        TOQ(1000, "toq", "Toq", 2),
-        ORU(500, "oru", "Oru", 4),
-        WIR(200, "wir", "Wir", 4),
-        ENO(1000, "eno", "Eno", 3),
-        HAR(1000, "har", "Har", 3),
-        XER(1000, "xer", "Xer", 3);
+        YUN(100, "yun", "Yun", 4, 0.8F),
+        VEN(100, "ven", "Ven", 4, 0.8F),
+        NOS(1000, "nos", "Nos", 0, 0F),
+        MOS(1000, "mos", "Mos", 0, 0f),
+        ITA(1000, "ita", "Ita", 0, 0f),
+        CEN(1000, "cen", "Cen", 1, 0.1F),
+        FEY(1000, "fey", "Fey", 1, 0.2F),
+        DOS(1000, "dos", "Dos", 1, 0.1F),
+        ANO(1000, "ano", "Ano", 2, 0.3F),
+        TOQ(1000, "toq", "Toq", 2, 0.4F),
+        ORU(500, "oru", "Oru", 4, 0.6F),
+        WIR(200, "wir", "Wir", 4, 0.7F),
+        ENO(1000, "eno", "Eno", 3, 0.5F),
+        HAR(1000, "har", "Har", 3, 0.4f),
+        XER(1000, "xer", "Xer", 3, 0.5f);
 
         public String id;
         public String locName;
         public int tier;
         public int weight;
+        public float lvlmin;
 
-        RuneType(int weight, String id, String locName, int tier) {
+        RuneType(int weight, String id, String locName, int tier, float lvl) {
             this.id = id;
             this.locName = locName;
             this.tier = tier;
             this.weight = weight;
+            this.lvlmin = lvl;
         }
 
     }

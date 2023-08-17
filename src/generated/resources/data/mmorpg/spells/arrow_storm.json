@@ -155,8 +155,8 @@
     "cooldown_ticks": 500,
     "imbues": 0,
     "mana_cost": {
-      "max": 20.0,
-      "min": 10.0
+      "max": 15.0,
+      "min": 20.0
     },
     "style": "dex",
     "summonType": "NONE",

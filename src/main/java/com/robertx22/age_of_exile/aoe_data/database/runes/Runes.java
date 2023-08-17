@@ -12,13 +12,15 @@ public class Runes implements ExileRegistryInit {
         RuneItems.ALL.forEach(obj -> {
             RuneItem x = obj.get();
 
-            
+
             Rune rune = new Rune();
             rune.item_id = VanillaUTIL.REGISTRY.items().getKey(x)
                     .toString();
             rune.identifier = x.type.id;
 
             rune.tier = x.type.tier;
+
+            rune.min_lvl_multi = x.type.lvlmin;
 
             rune.weight = x.type.weight;
 

@@ -84,7 +84,7 @@
                 "motion": "None",
                 "particle_count": 100.0,
                 "particle_type": "minecraft:electric_spark",
-                "radius": 1.0
+                "radius": 2.0
               }
             }
           ],
@@ -197,8 +197,8 @@
     "cooldown_ticks": 100,
     "imbues": 0,
     "mana_cost": {
-      "max": 5.0,
-      "min": 2.5
+      "max": 3.75,
+      "min": 5.0
     },
     "style": "int",
     "summonType": "NONE",

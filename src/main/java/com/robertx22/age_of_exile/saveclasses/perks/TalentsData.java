@@ -214,6 +214,7 @@ public class TalentsData implements IStatCtx {
         return Perk.Connection.BLOCKED;
     }
 
+ 
     public boolean isAllocated(TalentTree school, PointData point) {
         return getSchool().isAllocated(point);
     }

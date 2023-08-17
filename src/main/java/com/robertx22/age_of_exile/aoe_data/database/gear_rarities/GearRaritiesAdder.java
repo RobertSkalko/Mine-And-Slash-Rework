@@ -12,7 +12,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
 
         GearRarity common = new GearRarity();
-        common.min_affixes = 0;
+        common.min_affixes = 1;
         common.weight = 5000;
         common.item_tier_power = 1;
         common.backpack_slots = 9;
@@ -31,7 +31,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         uncommon.socket_chance = 5;
         uncommon.backpack_slots = 2 * 9;
         uncommon.pot = new GearRarity.Potential(100, 1.25F);
-        uncommon.min_affixes = 1;
+        uncommon.min_affixes = 2;
         uncommon.weight = 2000;
         uncommon.item_tier = 1;
         uncommon.item_model_data_num = 2;

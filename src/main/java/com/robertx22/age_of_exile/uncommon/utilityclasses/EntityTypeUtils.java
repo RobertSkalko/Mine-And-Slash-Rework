@@ -5,6 +5,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.NeutralMob;
+import net.minecraft.world.entity.ambient.AmbientCreature;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.npc.Npc;
@@ -17,6 +18,7 @@ public class EntityTypeUtils {
         PLAYER("player"),
         ANIMAL("animal"),
         NPC("npc"),
+        AMBIENT("ambient"),
         OTHER("other");
 
         EntityClassification(String id) {
@@ -29,6 +31,7 @@ public class EntityTypeUtils {
 
     public static EntityClassification getType(LivingEntity entity) {
 
+
         if (isMob(entity)) {
             return EntityClassification.MOB;
         } else if (isAnimal(entity)) {
@@ -37,6 +40,8 @@ public class EntityTypeUtils {
             return EntityClassification.NPC;
         } else if (entity instanceof Player) {
             return EntityClassification.PLAYER;
+        } else if (entity instanceof AmbientCreature) {
+            return EntityClassification.AMBIENT;
         } else {
             return EntityClassification.OTHER;
         }

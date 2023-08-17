@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.spells.components.actions;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
+import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEntity;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import net.minecraft.world.entity.LivingEntity;
@@ -33,6 +34,9 @@ public class CommandSummonsAction extends SpellAction {
 
             if (en instanceof Mob mob) {
                 mob.setTarget(ctx.target);
+            }
+            if (en instanceof SummonEntity sum) {
+                sum.canAttack = ctx.target;
             }
         }
 

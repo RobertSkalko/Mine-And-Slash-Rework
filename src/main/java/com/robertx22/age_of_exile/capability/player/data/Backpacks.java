@@ -25,13 +25,13 @@ public class Backpacks {
         maps = new BackpackInventory(player, BackpackType.MAPS, MAX_SIZE);
 
     }
-    
+
 
     public enum BackpackType {
         GEARS("gear", Words.Gear) {
             @Override
             public boolean isValid(ItemStack stack) {
-                return StackSaving.GEARS.has(stack) || StackSaving.JEWEL.has(stack);
+                return StackSaving.GEARS.has(stack) || StackSaving.JEWEL.has(stack) || StackSaving.STAT_SOULS.has(stack);
             }
         },
         MAPS("map", Words.Maps) {

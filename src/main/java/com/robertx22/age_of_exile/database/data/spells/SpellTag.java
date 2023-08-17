@@ -14,6 +14,7 @@ public enum SpellTag {
     trap("Trap"),
     beast("Beast"),
     song("Song"),
+    chaining("Chaining"),
     golem("Golem"),
     area("Area"),
     staff_spell("Staff Spell"),

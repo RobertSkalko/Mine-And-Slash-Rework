@@ -197,7 +197,9 @@
 	"item.mmorpg.potions.reset_all_perks": "Talent Reset Potion",
 	"item.mmorpg.potions.reset_spells": "Class Reset Potion",
 	"item.mmorpg.potions.reset_stats": "Stat Reset Potion",
+	"item.mmorpg.projectile.boomerang": "Projectile",
 	"item.mmorpg.projectile.fireball": "Projectile",
+	"item.mmorpg.projectile.lightning": "Projectile",
 	"item.mmorpg.projectile.slimeball": "Projectile",
 	"item.mmorpg.projectile.snowball": "Projectile",
 	"item.mmorpg.runes.ano": "Ano Rune",
@@ -247,10 +249,13 @@
 	"mmorpg.aura.physical_ailment": "Decree of Pain Aura",
 	"mmorpg.aura.physical_damage": "Physical Damage Aura",
 	"mmorpg.aura.summon_dmg": "Overlord Aura",
+	"mmorpg.spell.arrow_barrage": "Arrow Barrage",
 	"mmorpg.spell.arrow_storm": "Arrow Storm",
 	"mmorpg.spell.astral_totem": "Astral Totem",
 	"mmorpg.spell.awaken_mana": "Inspiration",
 	"mmorpg.spell.black_hole": "Black Hole",
+	"mmorpg.spell.boomerang": "Boomerang",
+	"mmorpg.spell.chain_lightning": "Chain Lightning",
 	"mmorpg.spell.charge": "Charge",
 	"mmorpg.spell.charged_bolt": "Charged Bolt",
 	"mmorpg.spell.chilling_field": "Chilling Field",
@@ -272,6 +277,7 @@
 	"mmorpg.spell.frost_nova": "Frost Nova",
 	"mmorpg.spell.frost_trap": "Frost Trap",
 	"mmorpg.spell.frostball": "Ice Ball",
+	"mmorpg.spell.frozen_orb": "Frozen orb",
 	"mmorpg.spell.gong_strike": "Gong Strike",
 	"mmorpg.spell.healing_aura": "Healing Aura",
 	"mmorpg.spell.heart_of_ice": "Heart of Ice",
@@ -441,10 +447,13 @@
 
 "_comment": " [CATEGORY]: ONEOFAKIND - NAMES",
 
+	"mmorpg.one_of_a_kind.arrow_barrage_mod": "Arrow Barrage Modifier",
 	"mmorpg.one_of_a_kind.arrow_storm_mod": "Arrow Storm Modifier",
 	"mmorpg.one_of_a_kind.astral_totem_mod": "Astral Totem Modifier",
 	"mmorpg.one_of_a_kind.awaken_mana_mod": "Inspiration Modifier",
 	"mmorpg.one_of_a_kind.black_hole_mod": "Black Hole Modifier",
+	"mmorpg.one_of_a_kind.boomerang_mod": "Boomerang Modifier",
+	"mmorpg.one_of_a_kind.chain_lightning_mod": "Chain Lightning Modifier",
 	"mmorpg.one_of_a_kind.charge_mod": "Charge Modifier",
 	"mmorpg.one_of_a_kind.charged_bolt_mod": "Charged Bolt Modifier",
 	"mmorpg.one_of_a_kind.chilling_field_mod": "Chilling Field Modifier",
@@ -466,6 +475,7 @@
 	"mmorpg.one_of_a_kind.frost_nova_mod": "Frost Nova Modifier",
 	"mmorpg.one_of_a_kind.frost_trap_mod": "Frost Trap Modifier",
 	"mmorpg.one_of_a_kind.frostball_mod": "Ice Ball Modifier",
+	"mmorpg.one_of_a_kind.frozen_orb_mod": "Frozen orb Modifier",
 	"mmorpg.one_of_a_kind.gong_strike_mod": "Gong Strike Modifier",
 	"mmorpg.one_of_a_kind.healing_aura_mod": "Healing Aura Modifier",
 	"mmorpg.one_of_a_kind.heart_of_ice_mod": "Heart of Ice Modifier",
@@ -532,15 +542,6 @@
 "_comment": " [CATEGORY]: RARITIES - NAMES",
 
 
-"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
-
-	"item.mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
-	"item.mmorpg.currency.orb_of_linking": "Orb of Linking",
-	"item.mmorpg.currency.socket_adder": "Orb of Digging",
-
-"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
-
-
 "_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
 
 	"effect.mmorpg.beneficial.10": "Vigor",
@@ -572,6 +573,15 @@
 	"mmorpg.ailment.poison": "Poison",
 
 "_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
+
+
+"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
+
+	"item.mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
+	"item.mmorpg.currency.orb_of_linking": "Orb of Linking",
+	"item.mmorpg.currency.socket_adder": "Orb of Digging",
+
+"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
 
 
 "_comment": " [CATEGORY]: TALENTS - NAMES",
@@ -1062,6 +1072,8 @@
 	"mmorpg.stat.cast_speed": "Cast Speed",
 	"mmorpg.stat.cd_ticks": "Cooldown Ticks",
 	"mmorpg.stat.cdr": "Cooldown Reduction",
+	"mmorpg.stat.chaining_cdr": "Chaining Spell Cooldown Reduction",
+	"mmorpg.stat.chaining_spell_dmg": "Chaining Damage",
 	"mmorpg.stat.chance_of_blind": "§7Your §5☀ Chaos§7 Attacks have §a[VAL1]§7% chance of applying Blind",
 	"mmorpg.stat.chance_of_slow": "§7Your §6☀ Physical§7 Attacks have §a[VAL1]§7% chance of applying Slow",
 	"mmorpg.stat.chance_of_torment": "§7Your §d☀ Elemental§7 Attacks have §a[VAL1]§7% chance of applying Torment",
@@ -1377,6 +1389,7 @@
 	"mmorpg.unique_gear.the_unseen_eye.name": "Unseen Eye",
 	"mmorpg.unique_gear.thread_of_hope.name": "Thread of Hope",
 	"mmorpg.unique_gear.towering_physique.name": "Towering Physique",
+	"mmorpg.unique_gear.weight_of_leadership.name": "Weight of Leadership",
 	"mmorpg.unique_gear.winter_chill.name": "Winter Chill",
 	"mmorpg.unique_gear.witch_brew.name": "Witch's Brew",
 
@@ -1463,10 +1476,13 @@
 
 "_comment": " [CATEGORY]: SPELLS - DESCRIPTIONS",
 
+	"spell.desc.arrow_barrage": "Shoot out many arrows in a single line, dealing [calc:arrow_storm] §6☀ Physical§7 Damage",
 	"spell.desc.arrow_storm": "Shoot out arrows in an arc, dealing [calc:arrow_storm] §6☀ Physical§7 Damage",
 	"spell.desc.astral_totem": "Summon a totem which restores [calc:totem_mana] mana to allies around it.",
 	"spell.desc.awaken_mana": "Restores [calc:awaken_mana] mana.",
 	"spell.desc.black_hole": "Summon a dark sphere that attracts nearby enemies to it, dealing [calc:black_hole]§5☀ Chaos§7 Damage when it expires.",
+	"spell.desc.boomerang": "Strike enemies with a projectile that deals [calc:boomerang] §6☀ Physical§7 Damage",
+	"spell.desc.chain_lightning": "Strike enemies with chaining lightning that deals [calc:lightning_spear] §e☀ Lightning§7 Damage",
 	"spell.desc.charge": "Charge in a direction, stopping upon first enemy hit to deal [calc:charge] §6☀ Physical§7 Damage in radius.",
 	"spell.desc.charged_bolt": "Shoot a charged arrow that goes through enemies and deals [calc:charged_bolt] §6☀ Physical§7 Damage in radius and slows.",
 	"spell.desc.chilling_field": "Freeze area of sight, damaging enemies for [calc:chilling_field]§b☀ Cold§7 Damage every second.",
@@ -1487,6 +1503,7 @@
 	"spell.desc.frost_nova": "Explode with frost around you, dealing [calc:frost_nova] §b☀ Cold§7 Damage to nearby enemies.",
 	"spell.desc.frost_trap": "Throw out a trap that stays on the ground and activates when an enemy approaches to deal [calc:ranger_trap]§b☀ Cold§7 Damage in area around itself.",
 	"spell.desc.frostball": "Throw out a ball of ice, dealing [calc:iceball] §b☀ Cold§7 Damage",
+	"spell.desc.frozen_orb": "Throw out a frozen orb, slowly moving towards enemies and  dealing [calc:iceball] §b☀ Cold§7 Damage",
 	"spell.desc.gong_strike": "Bash enemies around you for [calc:gong_strike] §6☀ Physical§7 Damage",
 	"spell.desc.healing_aura": "Heal allies around you for [calc:healing_aura] health",
 	"spell.desc.heart_of_ice": "Heal allies around you for [calc:heart_of_ice] health",
@@ -1573,6 +1590,7 @@
 	"mmorpg.stat_desc.cast_speed": "Affects amount of time needed to cast spells. If the spell is instant, it reduces the cooldown",
 	"mmorpg.stat_desc.cd_ticks": "Reduces spell cooldown by x ticks",
 	"mmorpg.stat_desc.cdr": "Reduces spell cooldown.",
+	"mmorpg.stat_desc.chaining_cdr": "Reduces spell cooldown of spells with the tag.",
 	"mmorpg.stat_desc.chance_of_blind": "Chance to give effect",
 	"mmorpg.stat_desc.chance_of_slow": "Chance to give effect",
 	"mmorpg.stat_desc.chance_of_torment": "Chance to give effect",

@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.spells.entities;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
+import com.robertx22.age_of_exile.database.data.spells.components.ProjectileCastHelper;
 import com.robertx22.age_of_exile.database.data.spells.entities.renders.IMyRenderAsItem;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
@@ -10,16 +11,20 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.Utilities;
 import com.robertx22.library_of_exile.utils.SoundUtils;
+import com.robertx22.library_of_exile.utils.geometry.MyPosition;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -56,12 +61,15 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
 
     private int ticksInGround = 0;
 
+    public boolean moveTowardsEnemies = false;
+
     private static final EntityDataAccessor<CompoundTag> SPELL_DATA = SynchedEntityData.defineId(SimpleProjectileEntity.class, EntityDataSerializers.COMPOUND_TAG);
     private static final EntityDataAccessor<String> ENTITY_NAME = SynchedEntityData.defineId(SimpleProjectileEntity.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Boolean> EXPIRE_ON_ENTITY_HIT = SynchedEntityData.defineId(SimpleProjectileEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> HIT_ALLIES = SynchedEntityData.defineId(SimpleProjectileEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> PIERCE = SynchedEntityData.defineId(SimpleProjectileEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> DEATH_TIME = SynchedEntityData.defineId(SimpleProjectileEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Integer> CHAINS = SynchedEntityData.defineId(SimpleProjectileEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> EXPIRE_ON_BLOCK_HIT = SynchedEntityData.defineId(SimpleProjectileEntity.class, EntityDataSerializers.BOOLEAN);
 
     public Entity ignoreEntity;
@@ -162,6 +170,9 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
     public void onTick() {
 
         if (getCaster() != null) {
+
+            tryMoveTowardsEnemies();
+
             this.getSpellData()
                     .getSpell()
                     .getAttached()
@@ -219,6 +230,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
                 ticksInGround++;
             }
 
+
             if (this.tickCount >= this.getDeathTime()) {
                 onExpireProc(this.getCaster());
                 this.scheduleRemoval();
@@ -229,6 +241,28 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
             this.scheduleRemoval();
         }
 
+    }
+
+    public void tryMoveTowardsEnemies() {
+        if (moveTowardsEnemies) {
+            var b = EntityFinder.start(getCaster(), LivingEntity.class, position())
+                    .finder(EntityFinder.SelectionType.RADIUS)
+                    .searchFor(AllyOrEnemy.enemies)
+                    .radius(8);
+
+            var target = b.getClosest();
+
+            if (target != null) {
+                var vel = ProjectileCastHelper.positionToVelocity(new MyPosition(position()), new MyPosition(target.getEyePosition()));
+                vel = vel.normalize().multiply(speed, speed, speed); // todo this doesnt fix the speed problem
+                setDeltaMovement(vel);
+                
+                PlayerUtils.getNearbyPlayers(level(), blockPosition(), 40)
+                        .forEach(p -> {
+                            ((ServerPlayer) p).connection.send(new ClientboundSetEntityMotionPacket(this));
+                        });
+            }
+        }
     }
 
     @Override
@@ -341,6 +375,39 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
             scheduleRemoval();
         }
 
+
+        if (!level().isClientSide) {
+            int chains = this.entityData.get(CHAINS).intValue();
+
+            if (chains > 0) {
+                chains--;
+
+                var b = EntityFinder.start(caster, LivingEntity.class, position())
+                        .finder(EntityFinder.SelectionType.RADIUS)
+                        .searchFor(AllyOrEnemy.enemies)
+                        .radius(8);
+
+                if (entityHit instanceof LivingEntity hit) {
+                    b.excludeEntity(hit);
+                }
+                var target = b.getClosest();
+
+                if (target != null) {
+
+                    SimpleProjectileEntity en = (SimpleProjectileEntity) getType().create(level());
+                    en.setPos(position());
+                    en.init(caster, this.getSpellData(), holder);
+                    en.entityData.set(CHAINS, chains);
+                    var vel = ProjectileCastHelper.positionToVelocity(new MyPosition(position()), new MyPosition(target.getEyePosition()));
+                    en.setDeltaMovement(vel.normalize().multiply(speed, speed, speed));
+
+                    level().addFreshEntity(en);
+
+                }
+            }
+        }
+
+
     }
 
     boolean removeNextTick = false;
@@ -417,6 +484,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
         this.entityData.define(HIT_ALLIES, false);
         this.entityData.define(PIERCE, false);
         this.entityData.define(DEATH_TIME, 100);
+        this.entityData.define(CHAINS, 0);
         super.defineSynchedData();
     }
 
@@ -469,8 +537,12 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
         // don't allow player to pickup lol
     }
 
+    MapHolder holder;
+    float speed = 0;
+
     @Override
     public void init(LivingEntity caster, CalculatedSpellData data, MapHolder holder) {
+        this.holder = holder;
         this.spellData = data;
 
         this.pickup = Pickup.DISALLOWED;
@@ -482,12 +554,17 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
         this.entityData.set(EXPIRE_ON_ENTITY_HIT, holder.getOrDefault(MapField.EXPIRE_ON_ENTITY_HIT, true));
         this.entityData.set(EXPIRE_ON_BLOCK_HIT, holder.getOrDefault(MapField.EXPIRE_ON_BLOCK_HIT, true));
         this.entityData.set(HIT_ALLIES, holder.getOrDefault(MapField.HITS_ALLIES, false));
+        this.entityData.set(CHAINS, holder.getOrDefault(MapField.CHAIN_COUNT, 0D).intValue());
 
         this.checkInsideBlocks();
+
 
         if (data.data.getBoolean(EventData.PIERCE)) {
             this.entityData.set(EXPIRE_ON_ENTITY_HIT, false);
         }
+
+        this.moveTowardsEnemies = holder.getOrDefault(MapField.TRACKS_ENEMIES, false);
+        this.speed = holder.getOrDefault(MapField.PROJECTILE_SPEED, 1D).floatValue();
 
         data.data.setString(EventData.ITEM_ID, holder.get(MapField.ITEM));
         CompoundTag nbt = new CompoundTag();

@@ -10,7 +10,7 @@
   "item_value_multi": 1.25,
   "lootable_gear_tier": "LOW",
   "max_sockets": 1,
-  "min_affixes": 1,
+  "min_affixes": 2,
   "pot": {
     "multi": 1.25,
     "total": 100

@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.OwnableEntity;
@@ -9,6 +10,41 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum AllyOrEnemy {
+
+
+    summonShouldAttack() {
+        @Override
+        public <T extends LivingEntity> List<T> getMatchingEntities(List<T> list, Entity caster) {
+            return list.stream()
+                    .filter(x -> is(caster, x))
+                    .collect(Collectors.toList());
+        }
+
+        @Override
+        public boolean is(Entity caster, LivingEntity target) {
+
+            var type = Load.Unit(target).getType();
+
+            if (type == EntityTypeUtils.EntityClassification.AMBIENT) {
+                return false;
+            }
+            if (type == EntityTypeUtils.EntityClassification.ANIMAL) {
+                return false;
+            }
+            if (type == EntityTypeUtils.EntityClassification.NPC) {
+                return false;
+            }
+
+            return true;
+        }
+
+        @Override
+        public boolean includesCaster() {
+            return false;
+        }
+    },
+
+
     allies() {
         @Override
         public <T extends LivingEntity> List<T> getMatchingEntities(List<T> list, Entity caster) {
@@ -60,15 +96,13 @@ public enum AllyOrEnemy {
                     return false;
                 }
                 if (target instanceof Player) {
-                    if (target == caster) {
-                        return false;
-                    }
-                    if (TeamUtils.areOnSameTeam((Player) caster, (Player) target)) {
+                    if (target == caster || TeamUtils.areOnSameTeam((Player) caster, (Player) target)) {
                         return false;
                     } else {
                         return true;
                     }
                 }
+
             } else {
                 if (target instanceof Player) {
                     return true;

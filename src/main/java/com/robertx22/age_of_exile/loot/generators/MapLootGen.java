@@ -29,7 +29,12 @@ public class MapLootGen extends BaseLootGen<MapBlueprint> {
 
     @Override
     public boolean condition() {
-        return true; // todo maybe restrict maps to above lvl x
+        if (ServerContainer.get().MAPS_DONT_DROP_IN_MAPS.get()) {
+            if (info.isMapWorld) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

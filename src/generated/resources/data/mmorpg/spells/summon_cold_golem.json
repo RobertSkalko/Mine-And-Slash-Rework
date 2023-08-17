@@ -97,8 +97,8 @@
     "cooldown_ticks": 1200,
     "imbues": 0,
     "mana_cost": {
-      "max": 40.0,
-      "min": 20.0
+      "max": 30.0,
+      "min": 40.0
     },
     "style": "int",
     "summonType": "GOLEM",

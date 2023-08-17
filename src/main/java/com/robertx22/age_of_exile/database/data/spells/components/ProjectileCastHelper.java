@@ -126,7 +126,7 @@ public class ProjectileCastHelper {
 
     }
 
-    public Vec3 positionToVelocity(MyPosition current, MyPosition destination) {
+    public static Vec3 positionToVelocity(MyPosition current, MyPosition destination) {
         return destination.subtract(current).normalize();
     }
 

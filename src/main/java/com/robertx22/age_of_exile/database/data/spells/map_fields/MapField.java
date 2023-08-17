@@ -14,6 +14,7 @@ public class MapField<T> implements IGUID {
 
     // double
     public static MapField<Double> RADIUS = make("radius");
+    public static MapField<Double> CHAIN_COUNT = make("chain_count");
     public static MapField<Double> COUNT = make("count");
     //public static MapField<Double> MAX_SUMMONS = make("max_summons");
     public static MapField<Double> HEIGHT = make("height");
@@ -80,6 +81,7 @@ public class MapField<T> implements IGUID {
     public static MapField<Boolean> IS_SILENT = make("is_silent");
     public static MapField<Boolean> HITS_ALLIES = make("hits_allies");
     public static MapField<Boolean> IGNORE_Y = make("ignore_y");
+    public static MapField<Boolean> TRACKS_ENEMIES = make("tracks_enemies");
 
     public static MapField<List<String>> ENTITY_PREDICATES = make("entity_predicates");
 

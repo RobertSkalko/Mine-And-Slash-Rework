@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.aoe_data.database.unique_gears;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.runewords.armor.ArmorRunewords;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.runewords.armor.BootsRunewords;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.runewords.armor.HelmetRunewords;
+import com.robertx22.age_of_exile.aoe_data.database.unique_gears.runewords.armor.PantRunewords;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.runewords.jewelry.NecklaceRunewords;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.runewords.jewelry.RingRuneWords;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.runewords.weapon.BowRuneWords;
@@ -49,6 +50,7 @@ public class UniqueGearReg implements ExileRegistryInit {
         new HelmetRunewords().registerAll();
         new ArmorRunewords().registerAll();
         new BootsRunewords().registerAll();
+        new PantRunewords().registerAll();
 
 
     }

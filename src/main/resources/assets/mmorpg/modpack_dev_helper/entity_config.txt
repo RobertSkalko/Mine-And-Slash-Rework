@@ -5,14 +5,15 @@ mob
 minecraft:polar_bear
 other
 minecraft:zombified_piglin
+ambient
 minecraft:iron_golem
 minecraft:ender_dragon
 minecraft:enderman
 minecraft:zombie
-minecraft:drowned
 animal
+minecraft:drowned
 minecraft:wolf
-lycanite_mobs
 minecraft:wither
+lycanite_mobs
 minecraft:bee
 player

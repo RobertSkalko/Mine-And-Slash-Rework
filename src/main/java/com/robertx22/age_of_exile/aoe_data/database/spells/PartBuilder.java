@@ -287,6 +287,7 @@ public class PartBuilder {
         return c;
     }
 
+ 
     public static ComponentPart swordSweepParticles() {
         ComponentPart c = new ComponentPart();
         c.acts.add(SpellAction.SWORD_SWEEP_PARTICLES.create());

@@ -72,3 +72,16 @@ v5.0.1
  - backpacks are now crafted instead of dropped
  - gear souls can now be right clicked to create a default item with stats, if you dont have anything to apply it on
  - backpacks wont hold invalid items anymore
+ 
+v5.0.2
+ - fixed level of loot in map chests
+ 
+ - stat souls can now be put into gear backpacks
+ 
+ - spells now get lower mana cost if they are higher rarity, instead of higher mana cost.
+ 
+ - summons shouldnt attack bats etc now, if they aren't attacking something you want them to attack, remember the chilling touch spell
+ 
+ - lowered map droprate, maps now cant drop from other maps by default. This should hopefully encourage some overworld exploration
+ 
+ - new spells: chain lightning, boomerang, arrow barrage, frozen orb

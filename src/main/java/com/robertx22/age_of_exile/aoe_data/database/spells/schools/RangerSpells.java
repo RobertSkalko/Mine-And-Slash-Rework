@@ -16,6 +16,7 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeap
 import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
+import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
@@ -52,6 +53,23 @@ public class RangerSpells implements ExileRegistryInit {
     @Override
 
     public void registerAll() {
+
+        SpellBuilder.of("boomerang", PlayStyle.DEX, SpellConfiguration.Builder.instant(15, 20 * 5)
+                                .setChargesAndRegen("boomerang", 3, 20 * 10)
+                                .applyCastSpeedToCooldown(), "Boomerang",
+                        Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.chaining))
+                .manualDesc("Strike enemies with a projectile that deals " + SpellCalcs.BOOMERANG.getLocDmgTooltip(Elements.Physical))
+
+                .onCast(PartBuilder.playSound(SoundEvents.ALLAY_THROW, 1D, 1D))
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(SlashItems.BOOMERANG.get(), 1D, 1D, SlashEntities.SIMPLE_PROJECTILE.get(), 50D, false)
+                        .put(MapField.CHAIN_COUNT, 5D)
+                ))
+                .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.CRIT, 10D, 0.01D))
+                .onExpire(PartBuilder.damageInAoe(SpellCalcs.BOOMERANG, Elements.Physical, 1D))
+                .onExpire(PartBuilder.aoeParticles(ParticleTypes.CRIT, 50D, 0.5D))
+                .onExpire(PartBuilder.playSound(SoundEvents.TRIDENT_HIT, 1D, 1D))
+                .build();
+
 
         SpellBuilder.of(HUNTER_POTION, PlayStyle.DEX, SpellConfiguration.Builder.instant(0, 60 * 20 * 3), "Hunter's Potion",
                         Arrays.asList(SpellTag.heal)
@@ -142,6 +160,21 @@ public class RangerSpells implements ExileRegistryInit {
                 .manualDesc("Shoot out arrows in an arc, dealing " + SpellCalcs.ARROW_STORM.getLocDmgTooltip(Elements.Physical))
                 .onCast(PartBuilder.playSound(SoundEvents.ARROW_SHOOT, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.createArrow(5D)))
+                .onHit(PartBuilder.particleOnTick(3D, ParticleTypes.CLOUD, 3D, 0.1D))
+                .onHit(PartBuilder.playSound(SoundEvents.ARROW_HIT, 1D, 1D))
+                .onHit(PartBuilder.damage(SpellCalcs.ARROW_STORM, Elements.Physical))
+                .onTick(PartBuilder.particleOnTick(5D, ParticleTypes.CRIT, 5D, 0.1D))
+                .build();
+
+
+        SpellBuilder.of("arrow_barrage", PlayStyle.DEX, SpellConfiguration.Builder.multiCast(20, 20, 20, 5)
+                                .setChargesAndRegen("arrow_barrage", 3, 20 * 10), "Arrow Barrage",
+                        Arrays.asList(SpellTag.projectile, SpellTag.damage))
+
+                .weaponReq(CastingWeapon.RANGED)
+                .manualDesc("Shoot out many arrows in a single line, dealing " + SpellCalcs.ARROW_STORM.getLocDmgTooltip(Elements.Physical))
+                .onCast(PartBuilder.playSound(SoundEvents.ARROW_SHOOT, 1D, 1D))
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.createArrow(1D)))
                 .onHit(PartBuilder.particleOnTick(3D, ParticleTypes.CLOUD, 3D, 0.1D))
                 .onHit(PartBuilder.playSound(SoundEvents.ARROW_HIT, 1D, 1D))
                 .onHit(PartBuilder.damage(SpellCalcs.ARROW_STORM, Elements.Physical))

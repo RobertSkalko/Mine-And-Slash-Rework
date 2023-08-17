@@ -160,13 +160,27 @@ public class LootInfo {
 
 
     private void setLevel() {
-
-
+        
         if (level <= 0) {
             if (mobData != null) {
                 level = mobData.getLevel();
             } else {
-                level = LevelUtils.determineLevel(world, pos, player).level;
+                if (WorldUtils.isMapWorldClass(world)) {
+                    try {
+                        var data = Load.mapAt(world, pos);
+                        if (data != null) {
+                            level = data.map.getLevel();
+                            return;
+                        } else {
+                            System.out.print("A mob spawned in a dungeon world without a dungeon data nearby!");
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    level = LevelUtils.determineLevel(world, pos, player).level;
+                }
             }
         }
 

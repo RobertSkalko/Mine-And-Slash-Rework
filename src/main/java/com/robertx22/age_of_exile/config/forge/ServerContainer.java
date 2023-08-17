@@ -38,6 +38,7 @@ public class ServerContainer {
         ENABLE_LOOT_ANNOUNCEMENTS = b.define("loot_announcements", true);
         REQUIRE_TEAM_FOR_TEAM_DUNGEONS = b.define("require_team_for_dungeons", true);
         DONT_SYNC_DATA_OF_AMBIENT_MOBS = b.define("dont_sync_ambient_mob_data", true);
+        MAPS_DONT_DROP_IN_MAPS = b.define("maps_dont_drop_in_maps", true);
 
 
         REGEN_HUNGER_COST = b.defineInRange("regen_hunger_cost", 10D, 0, 1000);
@@ -60,7 +61,7 @@ public class ServerContainer {
         SKILL_GEM_DROPRATE = b.defineInRange("skill_gem_drop_rate", 3D, 0, 1000);
         SUPP_GEM_DROPRATE = b.defineInRange("support_gem_drop_rate", 2D, 0, 1000);
         AURA_GEM_DROPRATE = b.defineInRange("aura_gem_drop_rate", 1D, 0, 1000);
-        RUNE_DROPRATE = b.defineInRange("rune_drop_rate", 1D, 0, 1000);
+        RUNE_DROPRATE = b.defineInRange("rune_drop_rate", 0.5D, 0, 1000);
         CURRENCY_DROPRATE = b.defineInRange("currency_drop_rate", 0.5D, 0, 1000);
         JEWEL_DROPRATE = b.defineInRange("jewel_drop_rate", 0.25D, 0, 1000);
 
@@ -120,6 +121,7 @@ public class ServerContainer {
     public ForgeConfigSpec.BooleanValue ENABLE_LOOT_ANNOUNCEMENTS;
     public ForgeConfigSpec.BooleanValue REQUIRE_TEAM_FOR_TEAM_DUNGEONS;
     public ForgeConfigSpec.BooleanValue DONT_SYNC_DATA_OF_AMBIENT_MOBS;
+    public ForgeConfigSpec.BooleanValue MAPS_DONT_DROP_IN_MAPS;
 
 
     public ForgeConfigSpec.DoubleValue REGEN_HUNGER_COST;

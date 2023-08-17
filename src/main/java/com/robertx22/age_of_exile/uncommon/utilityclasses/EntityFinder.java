@@ -9,6 +9,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -104,6 +105,7 @@ public class EntityFinder {
 
     public static class Setup<T extends LivingEntity> {
 
+        List<T> excluded = new ArrayList<>();
         Class<T> entityType;
         SelectionType selectionType = SelectionType.RADIUS;
         AllyOrEnemy entityPredicate = AllyOrEnemy.enemies;
@@ -143,6 +145,7 @@ public class EntityFinder {
             }
 
             list.removeIf(x -> !x.isAlive());
+            list.removeIf(x -> excluded.contains(x));
 
             return list;
 
@@ -182,6 +185,11 @@ public class EntityFinder {
             this.radius = rad;
             this.horizontal = rad;
             this.vertical = rad;
+            return this;
+        }
+
+        public Setup<T> excludeEntity(T en) {
+            this.excluded.add(en);
             return this;
         }
 
