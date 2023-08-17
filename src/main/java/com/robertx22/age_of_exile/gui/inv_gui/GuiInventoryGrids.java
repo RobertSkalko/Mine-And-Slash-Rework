@@ -1,11 +1,11 @@
-package com.robertx22.age_of_exile.inv_gui;
+package com.robertx22.age_of_exile.gui.inv_gui;
 
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.runewords.RuneWord;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import com.robertx22.age_of_exile.inv_gui.actions.CraftRunewordAction;
-import com.robertx22.age_of_exile.inv_gui.actions.GuiAction;
-import com.robertx22.age_of_exile.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
+import com.robertx22.age_of_exile.gui.inv_gui.actions.CraftRunewordAction;
+import com.robertx22.age_of_exile.gui.inv_gui.actions.GuiAction;
+import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.*;

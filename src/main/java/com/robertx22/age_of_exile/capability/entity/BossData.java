@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.capability.entity;
 
 import com.robertx22.age_of_exile.aoe_data.database.boss_spell.BossSpell;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.mmorpg.registers.common.SlashPotions;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -24,6 +25,10 @@ public class BossData {
     public void tick(LivingEntity en) {
         if (en.level().isClientSide) {
             return;
+        }
+
+        if (en.tickCount % 20 == 0) {
+            en.addEffect(new MobEffectInstance(SlashPotions.KNOCKBACK_RESISTANCE.get(), 200, 10));
         }
 
         castTicks--;

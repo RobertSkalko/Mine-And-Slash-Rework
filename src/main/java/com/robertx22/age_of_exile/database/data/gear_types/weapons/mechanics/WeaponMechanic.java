@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.database.data.gear_types.weapons.mechanics;
 
-import com.robertx22.age_of_exile.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
+import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;

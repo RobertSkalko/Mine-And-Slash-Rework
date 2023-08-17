@@ -1,12 +1,12 @@
-package com.robertx22.age_of_exile.damage_hooks;
+package com.robertx22.age_of_exile.event_hooks.damage_hooks;
 
-import com.robertx22.age_of_exile.damage_hooks.util.AttackInformation;
-import com.robertx22.age_of_exile.damage_hooks.util.DmgSourceUtils;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEntity;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
+import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.DmgSourceUtils;
 import com.robertx22.age_of_exile.mixin_methods.OnHurtEvent;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;

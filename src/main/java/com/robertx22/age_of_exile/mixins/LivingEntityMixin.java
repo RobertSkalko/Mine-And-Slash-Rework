@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.mixins;
 
-import com.robertx22.age_of_exile.damage_hooks.LivingHurtUtils;
-import com.robertx22.age_of_exile.damage_hooks.util.DmgSourceUtils;
+import com.robertx22.age_of_exile.event_hooks.damage_hooks.LivingHurtUtils;
+import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.DmgSourceUtils;
 import com.robertx22.age_of_exile.mixin_ducks.LivingEntityAccesor;
 import com.robertx22.age_of_exile.mixin_methods.CanEntityHavePotionMixin;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.HealthUtils;

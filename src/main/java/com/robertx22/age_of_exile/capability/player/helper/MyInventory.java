@@ -59,7 +59,7 @@ public class MyInventory extends SimpleContainer {
 
     public int getFreeSlots() {
         int free = 0;
-        for (int i = 0; i < this.getTotalSlots(); ++i) {
+        for (int i = 0; i < this.getTotalSlots(); i++) {
             ItemStack stack = this.getItem(i);
             if (stack.isEmpty()) {
                 free++;

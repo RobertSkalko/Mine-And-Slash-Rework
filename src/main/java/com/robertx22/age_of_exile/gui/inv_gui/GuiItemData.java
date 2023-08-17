@@ -1,6 +1,6 @@
-package com.robertx22.age_of_exile.inv_gui;
+package com.robertx22.age_of_exile.gui.inv_gui;
 
-import com.robertx22.age_of_exile.inv_gui.actions.GuiAction;
+import com.robertx22.age_of_exile.gui.inv_gui.actions.GuiAction;
 import net.minecraft.world.entity.player.Player;
 
 public class GuiItemData {

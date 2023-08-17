@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.saveclasses.unit;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.capability.player.helper.GemInventoryHelper;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
-import com.robertx22.age_of_exile.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
@@ -18,6 +17,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Hea
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.event_hooks.my_events.CollectGearEvent;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
@@ -229,7 +229,7 @@ public class Unit {
             statContexts.addAll(CommonStatUtils.addExactCustomStats(entity));
             statContexts.add(data.getStatusEffectsData().getStats(entity));
             statContexts.addAll(addGearStats(gears));
-            
+
 
             if (entity instanceof Player) {
                 statContexts.addAll(Load.playerRPGData((Player) entity).getSkillGemInventory().getAuraStats(entity));

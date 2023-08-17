@@ -87,7 +87,7 @@ public class SummonPetAction extends SpellAction {
 
         List<SummonEntity> list = new ArrayList<>();
 
-        for (SummonEntity en : EntityFinder.start(caster, SummonEntity.class, caster.blockPosition()).searchFor(AllyOrEnemy.all).radius(40).build()) {
+        for (SummonEntity en : EntityFinder.start(caster, SummonEntity.class, caster.blockPosition()).searchFor(AllyOrEnemy.all).radius(400).build()) {
             // if (en.summonType() == type) {
             if (en.getOwner() == caster) {
                 current++;

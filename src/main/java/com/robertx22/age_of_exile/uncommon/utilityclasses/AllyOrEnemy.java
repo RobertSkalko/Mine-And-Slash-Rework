@@ -23,6 +23,10 @@ public enum AllyOrEnemy {
         @Override
         public boolean is(Entity caster, LivingEntity target) {
 
+            if (!enemies.is(caster, target)) {
+                return false;
+            }
+
             var type = Load.Unit(target).getType();
 
             if (type == EntityTypeUtils.EntityClassification.AMBIENT) {

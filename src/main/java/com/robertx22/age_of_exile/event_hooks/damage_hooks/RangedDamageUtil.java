@@ -1,6 +1,6 @@
-package com.robertx22.age_of_exile.damage_hooks;
+package com.robertx22.age_of_exile.event_hooks.damage_hooks;
 
-import com.robertx22.age_of_exile.damage_hooks.util.AttackInformation;
+import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import net.minecraft.world.damagesource.DamageSource;
@@ -28,7 +28,7 @@ public class RangedDamageUtil {
                 .getItem();
         GearItemData gear = StackSaving.GEARS.loadFrom(en.getMainHandItem());
 
-        
+
         if (gear != null && gear.GetBaseGearType()
                 .weaponType().isProjectile) {
             if (!VALID_PROJECTILE_NAMES.stream()

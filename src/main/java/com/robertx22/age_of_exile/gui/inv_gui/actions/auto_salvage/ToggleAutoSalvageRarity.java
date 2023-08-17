@@ -1,7 +1,7 @@
-package com.robertx22.age_of_exile.inv_gui.actions.auto_salvage;
+package com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage;
 
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
-import com.robertx22.age_of_exile.inv_gui.actions.GuiAction;
+import com.robertx22.age_of_exile.gui.inv_gui.actions.GuiAction;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Words;

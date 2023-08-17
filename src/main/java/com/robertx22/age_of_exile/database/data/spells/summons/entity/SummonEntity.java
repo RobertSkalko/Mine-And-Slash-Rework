@@ -95,7 +95,7 @@ public abstract class SummonEntity extends TamableAnimal implements RangedAttack
         if (owner == null) {
             return false;
         }
-        return AllyOrEnemy.enemies.is(owner, pTarget) && AllyOrEnemy.summonShouldAttack.is(owner, pTarget);
+        return AllyOrEnemy.summonShouldAttack.is(owner, pTarget);
 
     }
 

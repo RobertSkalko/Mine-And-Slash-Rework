@@ -1,4 +1,4 @@
-package com.robertx22.age_of_exile.inv_gui;
+package com.robertx22.age_of_exile.gui.inv_gui;
 
 import java.util.ArrayList;
 import java.util.List;

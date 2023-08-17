@@ -1,8 +1,8 @@
-package com.robertx22.age_of_exile.damage_hooks;
+package com.robertx22.age_of_exile.event_hooks.damage_hooks;
 
 import com.robertx22.age_of_exile.a_libraries.curios.MyCurioUtils;
-import com.robertx22.age_of_exile.damage_hooks.util.AttackInformation;
-import com.robertx22.age_of_exile.damage_hooks.util.DmgSourceUtils;
+import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
+import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.DmgSourceUtils;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;

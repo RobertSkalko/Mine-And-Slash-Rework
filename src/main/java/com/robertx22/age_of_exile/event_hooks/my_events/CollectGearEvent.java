@@ -2,8 +2,8 @@ package com.robertx22.age_of_exile.event_hooks.my_events;
 
 import com.robertx22.age_of_exile.a_libraries.curios.MyCurioUtils;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.damage_hooks.util.AttackInformation;
-import com.robertx22.age_of_exile.damage_hooks.util.WeaponFinderUtil;
+import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
+import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.WeaponFinderUtil;
 import com.robertx22.age_of_exile.saveclasses.unit.GearData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;

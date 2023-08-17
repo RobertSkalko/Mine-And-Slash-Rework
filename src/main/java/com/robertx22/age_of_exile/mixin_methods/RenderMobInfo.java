@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.mmorpg.ForgeEvents;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.HealthUtils;
@@ -19,9 +20,29 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
+import net.minecraftforge.client.event.RenderNameTagEvent;
 import org.joml.Matrix4f;
 
 public class RenderMobInfo {
+
+    public static void register() {
+
+        ForgeEvents.registerForgeEvent(RenderNameTagEvent.class, event -> {
+            try {
+                Minecraft mc = Minecraft.getInstance();
+
+                if (event.getEntity() instanceof LivingEntity en) {
+                    RenderMobInfo.renderLivingEntityLabelIfPresent(mc.font, mc.getEntityRenderDispatcher(), en, event.getPoseStack(),
+                            event.getMultiBufferSource(), event.getPackedLight());
+                }
+            } catch (Exception e) {
+                // throw new RuntimeException(e);
+            }
+
+        });
+
+
+    }
 
     static Entity lastLooked;
 

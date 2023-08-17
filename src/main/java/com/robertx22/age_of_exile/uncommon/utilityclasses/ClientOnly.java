@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
-import com.robertx22.age_of_exile.inv_gui.GuiInventoryGrids;
-import com.robertx22.age_of_exile.inv_gui.InvGuiScreen;
+import com.robertx22.age_of_exile.gui.inv_gui.GuiInventoryGrids;
+import com.robertx22.age_of_exile.gui.inv_gui.InvGuiScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.sounds.SoundEvents;

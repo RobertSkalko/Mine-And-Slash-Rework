@@ -16,7 +16,7 @@ public class SlashPotions {
 
 
     public static RegObj<MobEffect> KNOCKBACK_RESISTANCE = Def.potion("knockback_resist", () -> new ModStatusEffect(net.minecraft.world.effect.MobEffectCategory.BENEFICIAL, 1)
-            .addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, "648D7564-6A60-4F59-8ABE-C2C27A6DD7A9", 0.75F, AttributeModifier.Operation.ADDITION));
+            .addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, "648D7564-6A60-4F59-8ABE-C2C27A6DD7A9", 0.1F, AttributeModifier.Operation.ADDITION));
 
     static HashMap<String, RegObj<ExileStatusEffect>> exileEffectsMap = new HashMap<>();
 

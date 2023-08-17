@@ -42,11 +42,11 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     public SchoolType schoolType;
 
-    public HashMap<Integer, PerkConnectionRender> buttonConnections;
+    public HashSet<PerkConnectionRender> buttonConnections = new HashSet<>();
 
+    /*
     public void refreshConnections() {
-        buttonConnections = new HashMap<>();
-
+        buttonConnections = new HashSet<>();
 
         var data = Load.playerRPGData(ClientOnly.getPlayer());
         var def = new HashSet<PointData>();
@@ -61,14 +61,16 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                 for (PointData p : connections) {
                     PerkButton sb = this.pointPerkButtonMap.get(p);
                     var con = data.talents.getConnection(school, sb.point, pb.point);
-                    var result = new PerkConnectionRender(pb, sb, con);
-                    buttonConnections.put(result.hashCode(), result);
+                    var result = new PerkConnectionRender(pb.point, sb.point, con);
+                    buttonConnections.add(result);
                 }
             }
 
         });
 
     }
+
+     */
 
 
     public SkillTreeScreen(SchoolType type) {
@@ -107,15 +109,17 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
         PerkScreenContext ctx = new PerkScreenContext(this);
 
-        for (PerkConnectionRender con : this.buttonConnections.values()) {
+        for (PerkConnectionRender con : this.buttonConnections) {
             this.renderConnection(gui, con.perk1, con.perk2, con.connection, ctx);
         }
 
     }
 
 
-    private void renderConnection(GuiGraphics gui, PerkButton one, PerkButton two, Perk.Connection connection, PerkScreenContext ctx) {
+    private void renderConnection(GuiGraphics gui, PointData o, PointData t, Perk.Connection connection, PerkScreenContext ctx) {
 
+        var one = this.pointPerkButtonMap.get(o);
+        var two = pointPerkButtonMap.get(t);
 
         float addone = one.perk.getType().width / 2F;
         float addtwo = two.perk.getType().width / 2F;
@@ -221,10 +225,13 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     private void addConnections() {
 
+        buttonConnections = new HashSet<>();
 
         HashSet<PointData> def = new HashSet();
 
         Set<Set<PointData>> cons = new HashSet<>();
+        var data = Load.playerRPGData(ClientOnly.getPlayer());
+
 
         new ArrayList<>(children()).forEach(b -> {
             if (b instanceof PerkButton) {
@@ -240,8 +247,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
                 for (PointData p : connections) {
 
-                    if (cons.stream()
-                            .anyMatch(x -> x.contains(p) && x.contains(pb.point))) {
+                    if (cons.stream().anyMatch(x -> x.contains(p) && x.contains(pb.point))) {
                         continue;
                     }
 
@@ -253,19 +259,11 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                         continue;
                     }
 
-                    int x2 = sb.getX() + sb.getWidth() / 2;
-                    int y2 = sb.getY() + sb.getHeight() / 2;
+                    // todo
+                    var con = data.talents.getConnection(school, sb.point, pb.point);
+                    var result = new PerkConnectionRender(pb.point, sb.point, con);
+                    buttonConnections.add(result);
 
-
-                    List<PointF> points = GuiUtils.generateCurve(new PointF(x1, y1), new PointF(x2, y2), 360f, spacing, true);
-
-                    for (PointF point : points) {
-
-                        int x = (int) (point.x - ((float) size / 2));
-                        int y = (int) (point.y - ((float) size / 2));
-
-                        newButton(new ConnectionButton(this, school, p, pb.point, x, y));
-                    }
                 }
             }
 
@@ -313,7 +311,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                 exception.printStackTrace();
             }
         }
-        refreshConnections();
+        addConnections();
 
 
         //   addConnections();

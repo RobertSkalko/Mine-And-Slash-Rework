@@ -1,4 +1,4 @@
-package com.robertx22.age_of_exile.inv_gui.actions;
+package com.robertx22.age_of_exile.gui.inv_gui.actions;
 
 import com.robertx22.age_of_exile.database.data.runewords.RuneWord;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;

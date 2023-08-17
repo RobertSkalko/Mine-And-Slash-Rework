@@ -1,9 +1,9 @@
 package com.robertx22.age_of_exile.mmorpg.event_registers;
 
 import com.robertx22.age_of_exile.capability.player.PlayerData;
-import com.robertx22.age_of_exile.damage_hooks.*;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.AttributeStat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.event_hooks.damage_hooks.*;
 import com.robertx22.age_of_exile.event_hooks.entity.OnMobSpawn;
 import com.robertx22.age_of_exile.event_hooks.entity.OnTrackEntity;
 import com.robertx22.age_of_exile.event_hooks.my_events.OnEntityTick;
@@ -15,7 +15,6 @@ import com.robertx22.age_of_exile.event_hooks.ontick.OnTickDungeonWorld;
 import com.robertx22.age_of_exile.event_hooks.player.OnLogin;
 import com.robertx22.age_of_exile.event_hooks.player.StopCastingIfInteract;
 import com.robertx22.age_of_exile.mixin_methods.OnItemInteract;
-import com.robertx22.age_of_exile.mixin_methods.OnItemStoppedUsingCastImbuedSpell;
 import com.robertx22.age_of_exile.mmorpg.ForgeEvents;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
@@ -63,22 +62,9 @@ public class CommonEvents {
 
         });
 
-        OnItemStoppedUsingCastImbuedSpell.register();
 
         OnItemInteract.register();
 
-
-// forge event gives us stack clone, making this a dupe
-        /*
-        ForgeEvents.registerForgeEvent(PlayerEvent.ItemPickupEvent.class, event -> {
-            ItemStack stack = event.getStack();
-            if (!stack.isEmpty()) {
-                if (!event.getEntity().level().isClientSide) {
-                    Load.backpacks(event.getEntity()).getBackpacks().tryAutoPickup(stack);
-                }
-            }
-        });
-         */
 
         ForgeEvents.registerForgeEvent(EntityJoinLevelEvent.class, event -> {
             OnMobSpawn.onLoad(event.getEntity());
@@ -122,6 +108,7 @@ public class CommonEvents {
                 }
             }
         });
+        
         ForgeEvents.registerForgeEvent(LivingEvent.LivingTickEvent.class, event -> {
             if (event.getEntity() instanceof ServerPlayer p) {
                 if (!p.level().isClientSide) {

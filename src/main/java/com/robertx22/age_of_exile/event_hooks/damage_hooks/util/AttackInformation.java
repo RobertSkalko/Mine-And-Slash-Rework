@@ -1,4 +1,4 @@
-package com.robertx22.age_of_exile.damage_hooks.util;
+package com.robertx22.age_of_exile.event_hooks.damage_hooks.util;
 
 import com.google.common.base.Preconditions;
 import com.robertx22.age_of_exile.capability.entity.EntityData;

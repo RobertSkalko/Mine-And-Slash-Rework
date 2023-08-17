@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.vanilla_mc.packets;
 
-import com.robertx22.age_of_exile.inv_gui.GuiItemData;
+import com.robertx22.age_of_exile.gui.inv_gui.GuiItemData;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;

@@ -49,8 +49,8 @@ public class PointData {
             PointData pt = (PointData) obj;
             return (x == pt.x) && (y == pt.y);
         }
-        return super.equals(obj);
+        return false;
     }
 
- 
+
 }

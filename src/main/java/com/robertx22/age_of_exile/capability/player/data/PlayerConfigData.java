@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.capability.player.data;
 
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
-import com.robertx22.age_of_exile.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
+import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.library_of_exile.utils.SoundUtils;

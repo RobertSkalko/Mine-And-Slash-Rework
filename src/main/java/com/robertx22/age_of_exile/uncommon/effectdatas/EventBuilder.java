@@ -1,9 +1,9 @@
 package com.robertx22.age_of_exile.uncommon.effectdatas;
 
-import com.robertx22.age_of_exile.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
+import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.effectdatas.builders.DamageBuilder;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
