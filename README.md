@@ -1,34 +1,11 @@
-![Project icon](https://i.ibb.co/m6kgPw1/125icon.png)
+![Project icon](https://i.ibb.co/n6RVgvz/636940180462085154.png)
 
-# Age of Exile 
+# Mine and Slash 
 
-[![Discord chat](https://img.shields.io/discord/736508692182073355?color=blue&label=Discord)](https://discord.gg/34qaNje)
-![GitHub issues](https://img.shields.io/github/issues/RobertSkalko/Age-of-Exile)
-[![CurseForge downloads](http://cf.way2muchnoise.eu/full_397698_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/age-of-exile)
+<p><a href="https://discord.gg/KnqNhVu"><img src="https://image.ibb.co/cHrwcq/0-lq-C3-g-Iu-W9-L9xxn.png" alt="" width="116" height="37" /></a></p>
 
-Age of Exile is a mod inspired by Diablo and Path of Exile, and aims to provide a new gear progression system that's more fun and interesting than the vanilla enchantments system.
+![GitHub issues](https://github.com/RobertSkalko/Mine-And-Slash-Rework/issues)
 
- 
+[![CurseForge downloads](http://cf.way2muchnoise.eu/full_306575_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/mine-and-slash-reloaded)
 
-This is a Fabric port of a reworked Mine and Slash, but the rework made it compatible with other mods.
-
- 
-
-Current features:
-
-* A Diablo like gear progression system with RNG stats, Unique gears, sockets and more!
-
-* A leveling system for both players and mobs.
-
-* A stat system with many different hack and slash stats, like: Critical Damage, Lifesteal, Dodge Rating etc.
-
-* A Spell system with 20+ spells.
-
-* Nearly all features are datapacks, meaning fully configurable! Make new Unique gears, change affixes and so on.
-
- 
-
-Big compatibility changes from Mine and Slash:
-
-* Damage is no longer overrided. This means other mod's gear and spells should ALL be compatible now!
-* There's no magical mine and slash hp anymore, instead your normal hearts are increased.
+Github Repo for Mine and Slash for MC 1.20.1 and up
