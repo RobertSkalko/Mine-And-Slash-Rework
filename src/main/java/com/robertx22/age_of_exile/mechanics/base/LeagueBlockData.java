@@ -10,6 +10,7 @@ public class LeagueBlockData {
     public StructureRadius size = new StructureRadius(0, 0, 0);
 
     public int ticks = 0;
+    public int kills = 0;
 
     public boolean finished = false;
 

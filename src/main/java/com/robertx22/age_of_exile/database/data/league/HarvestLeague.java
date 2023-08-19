@@ -16,6 +16,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
@@ -27,18 +29,21 @@ import java.util.List;
 
 public class HarvestLeague extends LeagueMechanic {
 
-    // todo make a timer, maybe a kill count..?
-
-    public int ticksLast = 20 * 60 * 3;
+    public int ticksLast = 20 * 60 * 1;
+    int maxKills = 200;
+    int maximumBonusLootTimes = 5;
 
     @Override
-    public void onKillMob(LootInfo info) {
-        if (RandomUtils.roll(1)) { // todo test
+    public void onKillMob(MapData map, LootInfo info) {
+        float lootChance = (maximumBonusLootTimes * (100F / maxKills)); // i hope this formula isn't wrong
+
+        if (RandomUtils.roll(lootChance)) { // todo test
             for (ItemStack stack : generateMobLoot(info)) {
                 info.mobKilled.spawnAtLocation(stack, 1);
             }
         }
     }
+
 
     private List<ItemStack> generateMobLoot(LootInfo info) {
 
@@ -66,32 +71,30 @@ public class HarvestLeague extends LeagueMechanic {
     }
 
     @Override
-    public void onTick(ServerLevel level, BlockPos pos, LeagueControlBlockEntity be, LeagueBlockData data) {
+    public void onTick(MapData map, ServerLevel level, BlockPos pos, LeagueControlBlockEntity be, LeagueBlockData data) {
 
         data.ticks++;
 
-        if (data.ticks > ticksLast) {
+        if (data.ticks > ticksLast || map.getLeagueData(this).kills > maxKills) {
             data.finished = true;
-
             for (Player p : be.getPlayers()) {
                 p.sendSystemMessage(Component.literal("The Vines appear to shrink, for now...").withStyle(ChatFormatting.GREEN));
             }
-
             return;
         } else {
 
             int secleft = (ticksLast - data.ticks) / 20;
-
+            int maxsec = ticksLast / 20;
 
             for (Player p : be.getPlayers()) {
-                OnScreenMessageUtils.actionBar((ServerPlayer) p, Component.literal("Seconds Left: " + secleft).withStyle(ChatFormatting.RED));
+                OnScreenMessageUtils.actionBar((ServerPlayer) p, Component.literal(secleft + "/" + maxsec + "s Remaining").withStyle(ChatFormatting.RED));
             }
 
             if (data.ticks % 20 == 0) {
 
                 int mobs = be.getMobs().size();
 
-                if (mobs < 30) {
+                if (mobs < 50) {
 
                     int tospawn = 5;
 
@@ -105,6 +108,9 @@ public class HarvestLeague extends LeagueMechanic {
                                 x.amount = 1;
                             }).summonMobs(level, spawnpos)) {
 
+                                if (RandomUtils.roll(25)) {
+                                    mob.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20 * 60, RandomUtils.RandomRange(1, 4)));
+                                }
                             }
                         }
 

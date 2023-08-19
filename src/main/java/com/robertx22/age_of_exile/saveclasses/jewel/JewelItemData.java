@@ -89,7 +89,7 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
             if (uniq.isCraftableUnique()) {
                 if (uniq.getCraftedTier().canUpgradeMore()) {
                     var up = uniq.getCraftedTier().upgradeStack.get();
-                    ctx.tooltip.add(Component.literal("To Upgrade needs: " + up.getCount() + "x ").append(up.getDisplayName()));
+                    ctx.tooltip.add(Component.literal("To Upgrade needs: " + up.getCount() + "x ").append(up.getHoverName()));
                     ctx.tooltip.add(Component.literal("[Click the Jewel with the Stone]"));
                 }
 

@@ -80,7 +80,7 @@ public class LeagueControlBlockEntity extends BlockEntity {
     }
 
     public AABB getBox(BlockPos pos) {
-        return createBoxOfRadius(pos, 1).inflate(data.size.xRadius, data.size.yHeight / 2F, data.size.zRadius).move(0, data.size.yHeight / 2F, 0);
+        return createBoxOfRadius(pos, 1).inflate(data.size.xRadius, (data.size.yHeight - 4) / 2F, data.size.zRadius).move(0, data.size.yHeight / 2F, 0);
     }
 
     public AABB createBoxOfRadius(BlockPos pos, int radius) {

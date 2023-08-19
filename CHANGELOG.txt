@@ -100,3 +100,6 @@ Those chests can be opened with a key, but who knows how to open it??
  - fixed players not being able to teleport correctly outside map in multiplayer
  
  - attacking with nothing now uses basic attacks
+ 
+ - dungeon dimension now uses a dungeon biome
+ 

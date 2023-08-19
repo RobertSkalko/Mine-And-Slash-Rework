@@ -78,7 +78,6 @@ public class EntangledAffixUpgrade extends GearCurrency {
         return DropRequirement.Builder.of().setOnlyDropsInLeague(LeagueMechanics.HARVEST.GUID()).build();
     }
 
-
     @Override
     public int getPotentialLoss() {
         return 0;
@@ -106,6 +105,6 @@ public class EntangledAffixUpgrade extends GearCurrency {
 
     @Override
     public int Weight() {
-        return 1000;
+        return 250;
     }
 }

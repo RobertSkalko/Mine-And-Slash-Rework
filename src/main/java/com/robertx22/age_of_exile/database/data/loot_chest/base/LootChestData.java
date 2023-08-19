@@ -79,7 +79,7 @@ public class LootChestData implements ICommonDataItem<GearRarity> {
         tip.add(Component.literal("Right Click to Open Loot Chest!"));
 
         if (getLootChest().isLocked()) {
-            tip.add(Component.literal("Needs Key: ").append(getLootChest().getKey().getDefaultInstance().getDisplayName()));
+            tip.add(Component.literal("Needs Key: ").append(getLootChest().getKey().getDefaultInstance().getHoverName()));
         }
 
         tip.add(Component.empty());

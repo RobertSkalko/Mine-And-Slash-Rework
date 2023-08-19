@@ -3,7 +3,7 @@
   "generator": {
     "type": "minecraft:flat",
     "settings": {
-      "biome": "minecraft:plains",
+      "biome": "mmorpg:dungeon_biome",
       "lakes": false,
       "features": false,
       "layers": [

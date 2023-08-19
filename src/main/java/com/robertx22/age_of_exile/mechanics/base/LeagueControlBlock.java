@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.mechanics.base;
 
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlockEntities;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
@@ -43,7 +44,11 @@ public class LeagueControlBlock extends BaseEntityBlock {
                 return;
             }
             if (!be.getPlayers().isEmpty()) {
-                be.data.getMechanic((ServerLevel) pLevel, pPos).onTick((ServerLevel) pLevel, pPos, be, be.data);
+                var map = Load.mapAt(pLevel, pPos);
+
+                if (map != null) {
+                    be.data.getMechanic((ServerLevel) pLevel, pPos).onTick(map, (ServerLevel) pLevel, pPos, be, be.data);
+                }
             }
         } catch (Exception e) {
             throw new RuntimeException(e);

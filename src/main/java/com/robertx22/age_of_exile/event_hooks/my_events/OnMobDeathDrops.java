@@ -78,24 +78,27 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
                     if (loot_multi > 0) {
                         MasterLootGen.genAndDrop(mobKilled, player);
 
-                        if (WorldUtils.isMapWorldClass(player.level())) {
-                            var mech = LeagueMechanic.getMechanicFromPosition((ServerLevel) player.level(), mobKilled.blockPosition());
-                            if (!mech.isEmpty()) {
-                                var info = LootInfo.ofMobKilled(player, mobKilled);
-                                mech.onKillMob(info);
+                        if (WorldUtils.isDungeonWorld(mobKilled.level())) {
+                            var map = Load.mapAt(mobKilled.level(), mobKilled.blockPosition());
+                            if (map != null) {
+                                map.trySpawnMechanic(mobKilled.level(), mobKilled.blockPosition());
+
+                                var mech = LeagueMechanic.getMechanicFromPosition((ServerLevel) player.level(), mobKilled.blockPosition());
+                                if (!mech.isEmpty()) {
+                                    var info = LootInfo.ofMobKilled(player, mobKilled);
+                                    mech.onKillMob(map, info);
+                                    map.getLeagueData(mech).kills++;
+
+                                }
+
                             }
                         }
+
                     }
                     if (exp_multi > 0) {
                         GiveExp(mobKilled, player, playerData, mobKilledData, exp_multi);
                     }
 
-                    if (WorldUtils.isDungeonWorld(mobKilled.level())) {
-                        var map = Load.mapAt(mobKilled.level(), mobKilled.blockPosition());
-                        if (map != null) {
-                            map.trySpawnMechanic(mobKilled.level(), mobKilled.blockPosition());
-                        }
-                    }
 
                 }
 

@@ -28,7 +28,7 @@ public class HarvestPurpleChest extends LootChest {
 
     @Override
     public Item getKey() {
-        return HarvestItems.PURPLE_CHEST.get();
+        return HarvestItems.PURPLE_KEY.get();
     }
 
     @Override

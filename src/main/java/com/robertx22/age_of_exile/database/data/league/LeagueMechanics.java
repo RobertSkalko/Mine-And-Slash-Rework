@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.database.data.league;
 
 import com.robertx22.age_of_exile.loot.LootInfo;
+import com.robertx22.age_of_exile.maps.MapData;
 import com.robertx22.age_of_exile.mechanics.base.LeagueBlockData;
 import com.robertx22.age_of_exile.mechanics.base.LeagueControlBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -11,15 +12,11 @@ public class LeagueMechanics {
     public static String HARVEST_ID = "harvest";
 
     public static LeagueMechanic NONE = new LeagueMechanic() {
-        @Override
-        public void onTick(ServerLevel level, BlockPos pos, LeagueControlBlockEntity be, LeagueBlockData data) {
-
-        }
 
 
         @Override
-        public void onKillMob(LootInfo info) {
-            
+        public void onKillMob(MapData map, LootInfo info) {
+
         }
 
         @Override
@@ -36,6 +33,11 @@ public class LeagueMechanics {
         @Override
         public boolean isEmpty() {
             return true;
+        }
+
+        @Override
+        public void onTick(MapData map, ServerLevel level, BlockPos pos, LeagueControlBlockEntity be, LeagueBlockData data) {
+            
         }
 
         @Override

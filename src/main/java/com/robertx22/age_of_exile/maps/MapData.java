@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.maps;
 
 import com.robertx22.age_of_exile.database.data.league.LeagueMechanic;
+import com.robertx22.age_of_exile.mechanics.base.LeagueMapData;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
@@ -18,6 +19,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.border.WorldBorder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MapData {
@@ -33,6 +35,14 @@ public class MapData {
     public int chunkX = 0;
     public int chunkZ = 0;
 
+    private HashMap<String, LeagueMapData> leagueDatas = new HashMap<>();
+
+    public LeagueMapData getLeagueData(LeagueMechanic l) {
+        if (!leagueDatas.containsKey(l.GUID())) {
+            leagueDatas.put(l.GUID(), new LeagueMapData());
+        }
+        return leagueDatas.get(l.GUID());
+    }
 
     public static MapData newMap(Player p, MapItemData map, MapsData maps) {
 

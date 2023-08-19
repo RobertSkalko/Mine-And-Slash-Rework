@@ -638,7 +638,13 @@ public class EntityData implements ICap, INeededForClient {
 
     public void mobBasicAttack(AttackInformation data) {
 
-        float num = getMobBaseDamage();
+        MobRarity rar = ExileDB.MobRarities().get(getRarity());
+
+        float multi = (float) (ServerContainer.get().VANILLA_MOB_DMG_AS_EXILE_DMG.get().floatValue());
+
+        float num = multi * rar.DamageMultiplier();
+
+        num *= ExileDB.getEntityConfig(entity, this).dmg_multi;
 
         // we get the mob's dmg without the weapon, then add back the weapon damage based on the config,
         // i set it to 50% by default so mobs with swords don't instakill players but still hurt more
@@ -664,6 +670,8 @@ public class EntityData implements ICap, INeededForClient {
         if (data.getSource() != null && data.getSource().is(DamageTypeTags.IS_PROJECTILE)) {
             style = PlayStyle.DEX;
         }
+
+        num = StatScaling.MOB_DAMAGE.scale(num, getLevel()); // this should be scaled last
 
         DamageEvent dmg = EventBuilder.ofDamage(data, entity, data.getTargetEntity(), num)
                 .setupDamage(AttackType.hit, WeaponTypes.none, style)

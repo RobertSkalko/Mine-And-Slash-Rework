@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.math.Axis;
 import com.robertx22.age_of_exile.capability.player.PlayerData;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
@@ -20,8 +21,6 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
-import com.robertx22.library_of_exile.utils.GuiUtils;
-import com.robertx22.library_of_exile.utils.GuiUtils.PointF;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -29,7 +28,6 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
@@ -44,34 +42,76 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     public HashSet<PerkConnectionRender> buttonConnections = new HashSet<>();
 
-    /*
-    public void refreshConnections() {
-        buttonConnections = new HashSet<>();
-
-        var data = Load.playerRPGData(ClientOnly.getPlayer());
-        var def = new HashSet<PointData>();
+    static ResourceLocation CON = SlashRef.id("textures/gui/skill_tree/skill_connection.png");
 
 
-        new ArrayList<>(children()).forEach(b -> {
-            if (b instanceof PerkButton) {
-                PerkButton pb = (PerkButton) b;
+    private void renderConnection(GuiGraphics graphics, PerkConnectionRender connection) {
 
-                Set<PointData> connections = this.school.calcData.connections.getOrDefault(pb.point, def);
+        graphics.pose().pushPose();
 
-                for (PointData p : connections) {
-                    PerkButton sb = this.pointPerkButtonMap.get(p);
-                    var con = data.talents.getConnection(school, sb.point, pb.point);
-                    var result = new PerkConnectionRender(pb.point, sb.point, con);
-                    buttonConnections.add(result);
-                }
-            }
+        PerkButton button1 = pointPerkButtonMap.get(connection.perk1);
+        PerkButton button2 = pointPerkButtonMap.get(connection.perk2);
 
-        });
+        PerkScreenContext ctx = new PerkScreenContext(this);
 
+        double xadd = (button1.getWidth() / 2F); // todo idk if this is the problem or
+        double yadd = button1.getHeight() / 2F;
+
+        double connectionX = button1.getX() + xadd;
+        double connectionY = button1.getY() + yadd;
+
+        connectionX -= ctx.scrollX;
+        connectionY -= ctx.scrollY;
+
+
+        graphics.pose().translate(connectionX + scrollX, connectionY + scrollY, 0);
+        float rotation = getAngleBetweenButtons(button1, button2);
+        graphics.pose().mulPose(Axis.ZP.rotation(rotation));
+        int length = (int) getDistanceBetweenButtons(button1, button2);
+
+        graphics.pose().scale(1F, 1.5F, 1F); // thicken it a bit
+
+        int off = 0;
+
+        if (connection.connection == Perk.Connection.LINKED) {
+            off = 0;
+        }
+        if (connection.connection == Perk.Connection.POSSIBLE) {
+            off = 6;
+        }
+        if (connection.connection == Perk.Connection.BLOCKED) {
+            off = 6 + 5;
+        }
+
+        graphics.blit(CON, 0, -3, length, 6, 0, off, length, 6, 50, 16);
+
+        graphics.pose().popPose();
     }
 
-     */
+    protected float getDistanceBetweenButtons(PerkButton button1, PerkButton button2) {
+        float x1 = button1.getX() + button1.getWidth() / 2F;
+        float y1 = button1.getY() + button1.getHeight() / 2F;
+        float x2 = button2.getX() + button2.getWidth() / 2F;
+        float y2 = button2.getY() + button2.getHeight() / 2F;
+        return getDistanceBetweenPoints(x1, y1, x2, y2);
+    }
 
+    protected float getDistanceBetweenPoints(float x1, float y1, float x2, float y2) {
+        return Mth.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+    }
+
+
+    protected float getAngleBetweenButtons(PerkButton button1, PerkButton button2) {
+        float x1 = button1.getX() + button1.getWidth() / 2F;
+        float y1 = button1.getY() + button1.getHeight() / 2F;
+        float x2 = button2.getX() + button2.getWidth() / 2F;
+        float y2 = button2.getY() + button2.getHeight() / 2F;
+        return getAngleBetweenPoints(x1, y1, x2, y2);
+    }
+
+    protected float getAngleBetweenPoints(float x1, float y1, float x2, float y2) {
+        return (float) Mth.atan2(y2 - y1, x2 - x1);
+    }
 
     public SkillTreeScreen(SchoolType type) {
         super(Minecraft.getInstance()
@@ -105,53 +145,13 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     int ticks = 0;
 
+
     private void renderConnections(GuiGraphics gui) {
 
         PerkScreenContext ctx = new PerkScreenContext(this);
 
         for (PerkConnectionRender con : this.buttonConnections) {
-            this.renderConnection(gui, con.perk1, con.perk2, con.connection, ctx);
-        }
-
-    }
-
-
-    private void renderConnection(GuiGraphics gui, PointData o, PointData t, Perk.Connection connection, PerkScreenContext ctx) {
-
-        var one = this.pointPerkButtonMap.get(o);
-        var two = pointPerkButtonMap.get(t);
-
-        float addone = one.perk.getType().width / 2F;
-        float addtwo = two.perk.getType().width / 2F;
-
-        int x1 = (int) (one.getX() + addone);
-        int y1 = (int) (one.getY() + addone);
-
-        int x2 = (int) (two.getX() + addtwo);
-        int y2 = (int) (two.getY() + addtwo);
-
-        int size = 6;
-
-        float spacing = 22;
-
-        List<PointF> points = GuiUtils.generateCurve(new PointF(x1, y1), new PointF(x2, y2), 360f, spacing, true);
-
-        for (PointF point : points) {
-
-            int x = (int) (point.x - ((float) size / 2F));
-            int y = (int) (point.y - ((float) size / 2F));
-
-
-            if (shouldRender(x, y, ctx)) {
-                if (connection == Perk.Connection.POSSIBLE) {
-                    gui.blit(ConnectionButton.ID, x, y, 0, 0, 6, 6);
-                } else if (connection == Perk.Connection.LINKED) {
-                    gui.blit(ConnectionButton.ID, x, y, 6, 0, 6, 6);
-                } else if (connection == Perk.Connection.BLOCKED) {
-                    gui.blit(ConnectionButton.ID, x, y, 12, 0, 6, 6);
-                }
-
-            }
+            this.renderConnection(gui, con);
         }
 
     }
@@ -239,12 +239,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
                 Set<PointData> connections = this.school.calcData.connections.getOrDefault(pb.point, def);
 
-                int x1 = pb.getX() + pb.getWidth() / 2;
-                int y1 = pb.getY() + pb.getHeight() / 2;
-
-                int size = 6;
-                float spacing = 25;
-
                 for (PointData p : connections) {
 
                     if (cons.stream().anyMatch(x -> x.contains(p) && x.contains(pb.point))) {
@@ -259,11 +253,9 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                         continue;
                     }
 
-                    // todo
                     var con = data.talents.getConnection(school, sb.point, pb.point);
                     var result = new PerkConnectionRender(pb.point, sb.point, con);
                     buttonConnections.add(result);
-
                 }
             }
 
@@ -303,8 +295,8 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                 int subx = PerkButton.BIGGEST / 2;
                 int suby = PerkButton.BIGGEST / 2;
 
-                int x = getPosForPoint(e.getKey()).x + addx - subx;
-                int y = getPosForPoint(e.getKey()).y + addy - suby;
+                int x = getPosForPoint(e.getKey()).x; //+ addx - subx;
+                int y = getPosForPoint(e.getKey()).y;//+ addy - suby;
 
                 this.newButton(new PerkButton(this, playerData, school, e.getKey(), perk, x, y));
             } catch (Exception exception) {
@@ -312,9 +304,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
             }
         }
         addConnections();
-
-
-        //   addConnections();
 
 
     }
@@ -356,7 +345,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     public float zoom = 0.3F;
 
-    public static boolean RETURN_ZOOM = false;
 
     @Override
     public void onClose() {
@@ -407,23 +395,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
     }
 
-    private void renderButton(AbstractWidget b) {
-        if (originalButtonLocMap.containsKey(b)) {
-
-            b.setX(this.originalButtonLocMap.get(b).x);
-            b.setY(this.originalButtonLocMap.get(b).y);
-
-            float addx = (1F / zoom - 1) * this.width / 2F;
-            float addy = (1F / zoom - 1) * this.height / 2F;
-
-            b.setX((int) (b.getX() + addx));
-            b.setY((int) (b.getY() + addy));
-
-            b.setX(b.getX() + scrollX);
-            b.setY(b.getY() + scrollY);
-
-        }
-    }
 
     @Override
     public void render(GuiGraphics gui, int x, int y, float ticks) {
@@ -465,26 +436,13 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
             this.renderConnections(gui);
 
 
-            RenderSystem.setShaderTexture(0, ConnectionButton.ID);
-            RenderSystem.setShader(GameRenderer::getPositionTexShader);
-
-            var rpg = Load.playerRPGData(mc.player);
-
             ticks++;
 
-            if (ticks % 40 == 0) {
-                for (Renderable r : this.renderables) {
-
-                    if (r instanceof ConnectionButton c) {
-                        if (mouseRecentlyClickedTicks > 1) {
-                            if (pointClicked.equals(c.one) || pointClicked.equals(c.two)) {
-                                c.connection = rpg.talents.getConnection(school, c.one, c.two);
-                            }
-                        }
-                    }
-
-                }
+            if (mouseRecentlyClickedTicks > 1) {
+                addConnections();
+                mouseRecentlyClickedTicks = 0;
             }
+
 
             gui.drawManaged(() -> {
                 for (Renderable r : this.renderables) {

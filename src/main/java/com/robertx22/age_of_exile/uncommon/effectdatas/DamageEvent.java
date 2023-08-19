@@ -350,6 +350,7 @@ public class DamageEvent extends EffectEvent {
 
                 if (attackInfo != null && attackInfo.event != null) {
                     attackInfo.event.damage = 0;
+                    attackInfo.event.canceled = true;
                 }
                 int inv = target.invulnerableTime;
                 target.invulnerableTime = 0;

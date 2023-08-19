@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.league;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.loot.LootInfo;
+import com.robertx22.age_of_exile.maps.MapData;
 import com.robertx22.age_of_exile.mechanics.base.LeagueBlockData;
 import com.robertx22.age_of_exile.mechanics.base.LeagueControlBlockEntity;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -38,7 +39,7 @@ public abstract class LeagueMechanic implements ExileRegistry<LeagueMechanic> {
     }
 
 
-    public abstract void onKillMob(LootInfo info);
+    public abstract void onKillMob(MapData map, LootInfo info);
 
     public final void teleportToStartOfLeague(Player p) {
 
@@ -64,7 +65,7 @@ public abstract class LeagueMechanic implements ExileRegistry<LeagueMechanic> {
         return false;
     }
 
-    public abstract void onTick(ServerLevel level, BlockPos pos, LeagueControlBlockEntity be, LeagueBlockData data);
+    public abstract void onTick(MapData map, ServerLevel level, BlockPos pos, LeagueControlBlockEntity be, LeagueBlockData data);
 
     public abstract BlockPos getTeleportPos(BlockPos pos);
 
