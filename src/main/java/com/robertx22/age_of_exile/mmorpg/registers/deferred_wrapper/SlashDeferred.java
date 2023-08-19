@@ -1,5 +1,7 @@
 package com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper;
 
+import com.robertx22.age_of_exile.mechanics.harvest.HarvestBlocks;
+import com.robertx22.age_of_exile.mechanics.harvest.HarvestItems;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.registers.common.*;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.*;
@@ -60,6 +62,7 @@ public class SlashDeferred {
         SlashParticles.init();
         SlashEntities.init();
         SlashBlocks.init();
+        HarvestBlocks.init();
         SlashBlockEntities.init();
         SlashContainers.init();
 
@@ -71,6 +74,7 @@ public class SlashDeferred {
         SlashItems.GearItems.init();
         RuneItems.init();
         GemItems.init();
+        HarvestItems.init();
 
         SlashFeatures.init();
 

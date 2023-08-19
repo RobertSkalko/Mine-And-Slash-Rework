@@ -24,24 +24,9 @@ public class CurrencyItem extends Item implements IItemAsCurrency, IAutoLocName,
     public CurrencyItem(Currency effect) {
         super(new Item.Properties());
         this.effect = effect;
-        
+
 
     }
-
-    /*
-    // todo test
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-        ItemStack itemstack = pPlayer.getItemInHand(pUsedHand);
-
-        if (!pPlayer.level().isClientSide) {
-            Load.backpacks(pPlayer).getBackpacks().openBackpack(Backpacks.BackpackType.GEARS, pPlayer);
-        }
-        return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
-
-    }
-    
-     */
 
 
     @Override
@@ -63,6 +48,17 @@ public class CurrencyItem extends Item implements IItemAsCurrency, IAutoLocName,
         tooltip.add(TooltipUtils.dragOntoGearToUse());
 
         TooltipUtils.addEmpty(tooltip);
+
+
+        if (effect instanceof GearCurrency gc) {
+            if (gc.isAffectedByPotential()) {
+                String txt = "Potential Cost: " + gc.getPotentialLoss();
+                tooltip.add(Component.literal(txt));
+            } else {
+                tooltip.add(Component.literal("Not affected by potential."));
+            }
+        }
+
 
     }
 

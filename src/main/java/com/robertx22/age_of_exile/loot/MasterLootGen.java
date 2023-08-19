@@ -85,6 +85,8 @@ public class MasterLootGen {
             items.addAll(new MapLootGen(info).tryGenerate());
             items.addAll(new GemLootGen(info).tryGenerate());
             items.addAll(new RuneLootGen(info).tryGenerate());
+            items.addAll(new LootChestGen(info).tryGenerate());
+
 
         } catch (Exception e) {
             e.printStackTrace();

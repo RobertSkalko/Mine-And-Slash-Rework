@@ -15,6 +15,21 @@
         },
         {
           "type": "minecraft:item",
+          "name": "mmorpg:currency/entangled_quality",
+          "weight": 1000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:currency/orb_of_quality",
+          "weight": 1000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:currency/entangled_affix_upgrade",
+          "weight": 1000
+        },
+        {
+          "type": "minecraft:item",
           "name": "mmorpg:currency/orb_of_linking",
           "weight": 1000
         }

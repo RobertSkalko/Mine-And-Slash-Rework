@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.maps;
 
 
 import com.robertx22.age_of_exile.capability.world.WorldData;
+import com.robertx22.age_of_exile.database.data.league.LeagueMechanic;
 import com.robertx22.age_of_exile.maps.feature.DungeonFeature;
 import com.robertx22.age_of_exile.maps.generator.BuiltRoom;
 import com.robertx22.age_of_exile.maps.generator.ChunkProcessData;
@@ -91,6 +92,7 @@ public class ProcessChunkBlocks {
                         var chunkdata = Load.chunkData(chunk);
 
                         if (!chunkdata.generated) {
+
                             chunkdata.generated = true;
 
                             DungeonFeature.place(opt.get(), level, level.getRandom(), cpos.getBlockAt(0, 0, 0));
@@ -99,51 +101,15 @@ public class ProcessChunkBlocks {
                             builder.build();
                             BuiltRoom room = builder.dungeon.getRoomForChunk(cpos);
 
+                            var ran = DungeonBuilder.createRandom(0l, cpos);
 
-                            ChunkProcessData data = new ChunkProcessData(chunk, room);
-
-
-                            for (BlockPos tilePos : chunk.getBlockEntitiesPos()) {
-
-                                BlockEntity tile = level.getBlockEntity(tilePos);
-                                var text = DataProcessor.getData(tile);
-                                if (!text.isEmpty()) {
-
-
-                                    boolean any = false;
-
-
-                                    // todo make this work on either signs or these blocks
-
-                                    for (DataProcessor processor : DataProcessors.getAll()) {
-                                        boolean did = processor.process(text, tilePos, level, data);
-                                        if (did) {
-                                            any = true;
-                                        }
-                                    }
-
-                                    if (!any) {
-                                        // todo do i just summon mobs when the tag fails?
-                                    }
-
-                                    if (any) {
-                                        // only set to air if the processor didnt turn it into another block
-                                        if (level.getBlockState(tilePos).getBlock() == Blocks.STRUCTURE_BLOCK || level.getBlockState(tilePos).getBlock() == Blocks.COMMAND_BLOCK) {
-                                            level.setBlock(tilePos, Blocks.AIR.defaultBlockState(), 2); // delete data block
-                                            level.removeBlockEntity(tilePos);
-                                        }
-
-                                    } else {
-
-                                        System.out.println("Data block with tag: " + text + " matched no processors! " + tilePos.toString());
-                                        logRoomForPos(level, tilePos);
-
-
-                                    }
-                                }
-
-
+                            for (LeagueMechanic mech : opt.get().map.getLeagueMechanics()) {
+                                mech.tryGenerate(level, cpos, ran);
                             }
+                            // this will gen both the league mechs and the dungeon if it runs after the league mechs gen
+                            generateData(level, chunk, room);
+
+
                         }
 
 
@@ -155,6 +121,55 @@ public class ProcessChunkBlocks {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    static void generateData(ServerLevel level, LevelChunk chunk, BuiltRoom room) {
+
+
+        ChunkProcessData data = new ChunkProcessData(chunk, room);
+
+
+        for (BlockPos tilePos : chunk.getBlockEntitiesPos()) {
+
+            BlockEntity tile = level.getBlockEntity(tilePos);
+            var text = DataProcessor.getData(tile);
+            if (!text.isEmpty()) {
+
+
+                boolean any = false;
+
+
+                // todo make this work on either signs or these blocks
+
+                for (DataProcessor processor : DataProcessors.getAll()) {
+                    boolean did = processor.process(text, tilePos, level, data);
+                    if (did) {
+                        any = true;
+                    }
+                }
+
+                if (!any) {
+                    // todo do i just summon mobs when the tag fails?
+                }
+
+                if (any) {
+                    // only set to air if the processor didnt turn it into another block
+                    if (level.getBlockState(tilePos).getBlock() == Blocks.STRUCTURE_BLOCK || level.getBlockState(tilePos).getBlock() == Blocks.COMMAND_BLOCK) {
+                        level.setBlock(tilePos, Blocks.AIR.defaultBlockState(), 2); // delete data block
+                        level.removeBlockEntity(tilePos);
+                    }
+
+                } else {
+
+                    System.out.println("Data block with tag: " + text + " matched no processors! " + tilePos.toString());
+                    logRoomForPos(level, tilePos);
+
+
+                }
+            }
+
+
         }
     }
 }

@@ -49,6 +49,7 @@ public class RangerSpells implements ExileRegistryInit {
     public static String HUNTER_POTION = "hunter_potion";
     public static String NIGHT_VISION = "night_vision";
     public static String SMOKE_BOMB = "smoke_bomb";
+    public static String BARRAGE = "arrow_barrage";
 
     @Override
 
@@ -167,8 +168,8 @@ public class RangerSpells implements ExileRegistryInit {
                 .build();
 
 
-        SpellBuilder.of("arrow_barrage", PlayStyle.DEX, SpellConfiguration.Builder.multiCast(20, 20, 20, 5)
-                                .setChargesAndRegen("arrow_barrage", 3, 20 * 10), "Arrow Barrage",
+        SpellBuilder.of(BARRAGE, PlayStyle.DEX, SpellConfiguration.Builder.multiCast(20, 20, 20, 5)
+                                .setChargesAndRegen(BARRAGE, 3, 20 * 10), "Arrow Barrage",
                         Arrays.asList(SpellTag.projectile, SpellTag.damage))
 
                 .weaponReq(CastingWeapon.RANGED)

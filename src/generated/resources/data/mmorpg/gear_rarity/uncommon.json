@@ -12,7 +12,7 @@
   "max_sockets": 1,
   "min_affixes": 2,
   "pot": {
-    "multi": 1.25,
+    "multi": 1.0,
     "total": 100
   },
   "rarity_type": "GEAR",

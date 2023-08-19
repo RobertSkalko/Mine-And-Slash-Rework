@@ -130,14 +130,16 @@ public class GearTooltipUtils {
 
         tip.add(TooltipUtils.gearRarity(gear.getRarity()));
 
-        tip.add(ExileText.ofText("Potential: " + (int) (gear.getPotential().multi * 100F) + "%").format(gear.getPotentialColor()).get());
+        tip.add(ExileText.ofText("Potential: " + (int) ((gear.getPotential().multi + gear.getAdditionalPotentialMultiFromQuality()) * 100F) + "%").format(gear.getPotentialColor()).get());
+
+        if (gear.getQuality() > 0) {
+            tip.add(ExileText.ofText("Quality: " + gear.getQuality() + "%").format(gear.getQualityType().color).get());
+        }
 
         tip.add(Component.literal(""));
 
         if (gear.isCorrupted()) {
-            tip.add(Component.literal(ChatFormatting.RED + "").append(
-                            Words.Corrupted.locName())
-                    .withStyle(ChatFormatting.RED));
+            tip.add(Component.literal(ChatFormatting.RED + "").append(Words.Corrupted.locName()).withStyle(ChatFormatting.RED));
         }
 
         int socketed = gear.sockets.getSocketedGems().size();

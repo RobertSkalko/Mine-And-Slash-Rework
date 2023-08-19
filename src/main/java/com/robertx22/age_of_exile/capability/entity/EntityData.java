@@ -11,6 +11,7 @@ import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -21,7 +22,6 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.CustomExactStatsData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.unit.*;
-import com.robertx22.age_of_exile.threat_aggro.ThreatData;
 import com.robertx22.age_of_exile.uncommon.datasaving.CustomExactStats;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
@@ -35,6 +35,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
+import com.robertx22.age_of_exile.uncommon.threat_aggro.ThreatData;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityTypeUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.OnScreenMessageUtils;
@@ -385,6 +386,37 @@ public class EntityData implements ICap, INeededForClient {
         return unit;
     }
 
+    public void unarmedAttack(AttackInformation data) {
+        float cost = 2;
+
+        cost = Energy.getInstance().scale(ModType.FLAT, cost, getLevel());
+
+
+        SpendResourceEvent event = new SpendResourceEvent(entity, ResourceType.energy, cost);
+        event.calculateEffects();
+
+        if (event.data.getNumber() > resources.getEnergy()) {
+            return;
+        }
+
+        event.Activate();
+
+        WeaponTypes weptype = WeaponTypes.none;
+
+        int num = (int) data.getAttackerEntityData()
+                .getUnit()
+                .getCalculatedStat(WeaponDamage.getInstance())
+                .getValue();
+
+        DamageEvent dmg = EventBuilder.ofDamage(data, data.getAttackerEntity(), data.getTargetEntity(), num)
+                .setupDamage(AttackType.hit, weptype, PlayStyle.STR)
+                .setIsBasicAttack()
+                .build();
+
+        dmg.Activate();
+
+    }
+
     public void setUnit(Unit unit) {
         this.unit = unit;
     }
@@ -584,13 +616,7 @@ public class EntityData implements ICap, INeededForClient {
 
             event.Activate();
 
-            if (data.weapon != null) {
-                //data.weapon.hurt(1, new Random(), null);
-            }
-
-            data.weaponData.GetBaseGearType()
-                    .getWeaponMechanic()
-                    .attack(data);
+            data.weaponData.GetBaseGearType().getWeaponMechanic().attack(data);
 
         }
     }

@@ -21,7 +21,7 @@ import net.minecraft.server.MinecraftServer;
 public class CommandRegister {
 
     public static void Register(MinecraftServer server) {
-        System.out.println("Registering Age of Exile Commands.");
+        System.out.println("Registering Mine and slash Commands.");
 
         CommandDispatcher<CommandSourceStack> dispatcher = server.getCommands()
                 .getDispatcher();
@@ -38,7 +38,7 @@ public class CommandRegister {
 
 
         ResetSpellCooldowns.register(dispatcher);
-     
+
         GiveStat.register(dispatcher);
         RemoveStat.register(dispatcher);
         ClearStats.register(dispatcher);

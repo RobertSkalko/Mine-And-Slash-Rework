@@ -12,6 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
 
 public class DmgNumPacket extends MyPacket<DmgNumPacket> {
 
@@ -24,7 +25,7 @@ public class DmgNumPacket extends MyPacket<DmgNumPacket> {
 
     }
 
-    
+
     public DmgNumPacket(LivingEntity entity, String str, boolean iscrit, ChatFormatting format) {
         string = str;
         this.id = entity.getId();
@@ -34,7 +35,7 @@ public class DmgNumPacket extends MyPacket<DmgNumPacket> {
 
         // todo this is horrible but i'll need to wait for damage indicator mods to be ported
 
-        ItemEntity en = new ItemEntity(entity.level(), entity.getX(), entity.getEyeY(), entity.getZ(), SlashItems.INVISIBLE_ICON.get().getDefaultInstance());
+        ItemEntity en = new ItemEntity(entity.level(), entity.getX(), entity.getEyeY(), entity.getZ(), new ItemStack(SlashItems.INVISIBLE_ICON.get(), 1));
         en.setNeverPickUp();
         en.setCustomName(Component.literal(format + this.string));
         en.setInvisible(true);

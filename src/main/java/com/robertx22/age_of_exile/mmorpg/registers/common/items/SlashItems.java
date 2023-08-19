@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.mmorpg.registers.common.items;
 
+import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChestItem;
 import com.robertx22.age_of_exile.maps.MapItem;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
@@ -63,6 +64,8 @@ public class SlashItems {
     public static RegObj<SingleTalentResetPotion> ADD_RESET_PERK_POINTS = Def.item(() -> new SingleTalentResetPotion(), "potions/add_reset_perk_points");
     public static RegObj<AscClassResetPotion> RESET_SPELLS = Def.item(() -> new AscClassResetPotion(), "potions/reset_spells");
     public static RegObj<ResetStatsPotion> RESET_STATS = Def.item(() -> new ResetStatsPotion(), "potions/reset_stats");
+
+    public static RegObj<LootChestItem> CURRENCY_CHEST = Def.item(() -> new LootChestItem(), "chest/currency");
 
     public static RegObj<Item> DEX_JEWEL = Def.item(() -> new Item(new Item.Properties().stacksTo(1)), "jewel/dex");
     public static RegObj<Item> STR_JEWEL = Def.item(() -> new Item(new Item.Properties().stacksTo(1)), "jewel/str");

@@ -4,6 +4,10 @@ import com.robertx22.age_of_exile.a_libraries.curios.MyCurioUtils;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.DmgSourceUtils;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.OnScreenMessageUtils;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -75,14 +79,16 @@ public class LivingHurtUtils {
             data.getAttackerEntityData()
                     .tryRecalculateStats();
 
-            if (data.getAttackerEntity() instanceof Player) {
+            if (data.getAttackerEntity() instanceof Player p) {
 
                 if (weapondata == null) {
+                    Load.Unit(p).unarmedAttack(data);
                     return;
                 }
 
                 if (!weapondata.canPlayerWear(data.getAttackerEntityData())) {
-                    // todo    OnScreenMessageUtils.sendMessage((ServerPlayer) data.getAttackerEntity(), Component.literal("Weapon requirements not met"), ClientboundSetTitlesPacket.Type.ACTIONBAR);
+                    OnScreenMessageUtils.sendMessage((ServerPlayer) data.getAttackerEntity(), Component.literal(""), Component.literal("Weapon requirements not met"));
+                    Load.Unit(p).unarmedAttack(data);
                     return;
                 }
 
@@ -94,8 +100,7 @@ public class LivingHurtUtils {
                     }
 
                 } else {
-                    // data.getAttackerEntityData()
-                    //   .unarmedAttack(data);
+                    Load.Unit(p).unarmedAttack(data);
                 }
 
             } else { // if its a mob

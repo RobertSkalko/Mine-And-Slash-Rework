@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.mmorpg.init;
 
 import com.robertx22.age_of_exile.a_libraries.dmg_number_particle.DamageParticle;
 import com.robertx22.age_of_exile.a_libraries.dmg_number_particle.DamageParticleRenderer;
+import com.robertx22.age_of_exile.mixin_methods.RenderMobInfo;
 import com.robertx22.age_of_exile.mmorpg.ForgeEvents;
 import com.robertx22.age_of_exile.mmorpg.event_registers.Client;
 import com.robertx22.age_of_exile.mmorpg.registers.client.ClientSetup;
@@ -22,6 +23,8 @@ public class ClientInit {
 
             DamageParticleRenderer.PARTICLES.removeIf(e -> e.age > 50);
         });
+
+        RenderMobInfo.register();
 
         ClientSetup.setup();
         Client.register();

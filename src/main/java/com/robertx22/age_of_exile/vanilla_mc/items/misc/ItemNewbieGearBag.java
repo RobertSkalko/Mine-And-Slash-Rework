@@ -39,13 +39,12 @@ public class ItemNewbieGearBag extends Item {
 
     public ItemNewbieGearBag() {
         super(new Properties());
-
     }
 
-
+    
     static HashMap<String, NewbieContent> MAP = new HashMap<>();
     static NewbieContent defaultContent = new NewbieContent(Arrays.asList(GearSlots.STAFF, GearSlots.SWORD, GearSlots.BOW));
-    static List<String> spells = Arrays.asList(BasicAttackSpells.FIREBALL_ID, WaterSpells.TIDAL_STRIKE, RangerSpells.CHARGED_BOLT);
+    static List<String> spells = Arrays.asList(BasicAttackSpells.FIREBALL_ID, WaterSpells.TIDAL_STRIKE, RangerSpells.BARRAGE);
 
     static {
     }

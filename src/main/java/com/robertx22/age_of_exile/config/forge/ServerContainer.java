@@ -52,7 +52,7 @@ public class ServerContainer {
         PLAYER_VANILLA_DMG_MULTI = b.defineInRange("PLAYER_VANILLA_DMG_MULTI", 0D, 0, 1000);
         PVP_DMG_MULTI = b.defineInRange("pvp_dmg_multi", 1D, 0, 1000);
         MOB_WEAPON_DMG_USEFULNESS = b.defineInRange("mob_weapon_dmg_usefulness", 0.5D, 0, 1000);
-        MAX_TEAM_DISTANCE = b.defineInRange("max_team_distance", 150D, 0, 100000);
+        MAX_TEAM_DISTANCE = b.defineInRange("max_team_distance", 75D, 0, 100000);
 
         GEAR_DROPRATE = b.defineInRange("gear_drop_rate", 7D, 0, 1000);
         SOUl_DROPRATE = b.defineInRange("soul_drop_rate", 0.3D, 0, 1000);
@@ -64,6 +64,7 @@ public class ServerContainer {
         RUNE_DROPRATE = b.defineInRange("rune_drop_rate", 0.5D, 0, 1000);
         CURRENCY_DROPRATE = b.defineInRange("currency_drop_rate", 0.5D, 0, 1000);
         JEWEL_DROPRATE = b.defineInRange("jewel_drop_rate", 0.25D, 0, 1000);
+        LOOT_CHEST_DROPRATE = b.defineInRange("loot_chest_drop_rate", 0.1D, 0, 1000);
 
 
         List<String> list = new ArrayList<>();
@@ -142,6 +143,7 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue MAP_DROPRATE;
     public ForgeConfigSpec.DoubleValue GEM_DROPRATE;
     public ForgeConfigSpec.DoubleValue SKILL_GEM_DROPRATE;
+    public ForgeConfigSpec.DoubleValue LOOT_CHEST_DROPRATE;
     public ForgeConfigSpec.DoubleValue SUPP_GEM_DROPRATE;
     public ForgeConfigSpec.DoubleValue AURA_GEM_DROPRATE;
     public ForgeConfigSpec.DoubleValue RUNE_DROPRATE;

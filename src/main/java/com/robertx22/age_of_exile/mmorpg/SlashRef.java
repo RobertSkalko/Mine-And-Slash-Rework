@@ -13,7 +13,6 @@ public class SlashRef {
     }
 
     public static final String MODID = "mmorpg";
-    public static final String MOD_NAME = "Age of Exile";
+    public static final String MOD_NAME = "Mine and Slash";
 
-    public static String WORLD_OF_EXILE_ID = "world_of_exile";
 }

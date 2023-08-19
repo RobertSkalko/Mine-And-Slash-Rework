@@ -239,43 +239,14 @@ public class DamageEvent extends EffectEvent {
     }
 
     public boolean stopFriendlyFire() {
-
-        if (this.data.isSpellEffect()) {
-
-            if (AllyOrEnemy.allies.is(source, target)) {
-                cancelDamage();
-                return true;
-            }
+        if (AllyOrEnemy.allies.is(source, target)) {
+            cancelDamage();
+            return true;
         }
-
-        /*
-        if (areBothPlayers()) {
-            if (source.equals(target)) {
-                return false; // it's the same player, let him hit himself
-            }
-            if (TeamUtils.areOnSameTeam((ServerPlayer) source, (ServerPlayer) target)) {
-                return true;
-            }
-            Player sp = (Player) this.source;
-            if (!sp.canHarmPlayer((Player) target)) {
-                return true;
-            }
-        } else {
-            if (this.data.isSpellEffect()) {
-
-                if (AllyOrEnemy.allies.is(source, target)) {
-                    cancelDamage();
-                    return true;
-                }
-            }
-        }
-
-         */
-
         return false;
     }
 
-    AttributeModifier NO_KNOCKBACK = new AttributeModifier(
+    static AttributeModifier NO_KNOCKBACK = new AttributeModifier(
             UUID.fromString("e926df30-c376-11ea-87d0-0242ac131053"),
             Attributes.KNOCKBACK_RESISTANCE.getDescriptionId(),
             100,
@@ -378,11 +349,7 @@ public class DamageEvent extends EffectEvent {
             } else {
 
                 if (attackInfo != null && attackInfo.event != null) {
-                    if (source instanceof Player) {
-                        attackInfo.event.damage *= ServerContainer.get().PLAYER_VANILLA_DMG_MULTI.get();
-                    } else {
-                        attackInfo.event.damage = 0;// todo test this
-                    }
+                    attackInfo.event.damage = 0;
                 }
                 int inv = target.invulnerableTime;
                 target.invulnerableTime = 0;

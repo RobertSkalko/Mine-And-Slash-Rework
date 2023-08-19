@@ -10,7 +10,9 @@ public enum Words implements IAutoLocName {
     Nothing("Nothing"),
 
     UpgradeAffix("Upgrades an affix"),
+    UpgradeQuality("Upgrade Quality"),
     DowngradeAffix("Downgrades an affix"),
+    DeletesAllAffixes("Deletes all affixes"),
 
     DestroyProtect("Destruction Guard"),
     WipeUpgradeProtect("Upgrade Guard"),

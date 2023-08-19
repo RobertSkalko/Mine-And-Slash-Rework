@@ -256,7 +256,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
                 var vel = ProjectileCastHelper.positionToVelocity(new MyPosition(position()), new MyPosition(target.getEyePosition()));
                 vel = vel.normalize().multiply(speed, speed, speed); // todo this doesnt fix the speed problem
                 setDeltaMovement(vel);
-                
+
                 PlayerUtils.getNearbyPlayers(level(), blockPosition(), 40)
                         .forEach(p -> {
                             ((ServerPlayer) p).connection.send(new ClientboundSetEntityMotionPacket(this));
@@ -377,36 +377,41 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
 
 
         if (!level().isClientSide) {
-            int chains = this.entityData.get(CHAINS).intValue();
 
-            if (chains > 0) {
-                chains--;
 
-                var b = EntityFinder.start(caster, LivingEntity.class, position())
-                        .finder(EntityFinder.SelectionType.RADIUS)
-                        .searchFor(AllyOrEnemy.enemies)
-                        .radius(8);
+            if (getCaster() != null) {
 
-                if (entityHit instanceof LivingEntity hit) {
-                    b.excludeEntity(hit);
-                }
-                var target = b.getClosest();
 
-                if (target != null) {
+                int chains = this.entityData.get(CHAINS).intValue();
 
-                    SimpleProjectileEntity en = (SimpleProjectileEntity) getType().create(level());
-                    en.setPos(position());
-                    en.init(caster, this.getSpellData(), holder);
-                    en.entityData.set(CHAINS, chains);
-                    var vel = ProjectileCastHelper.positionToVelocity(new MyPosition(position()), new MyPosition(target.getEyePosition()));
-                    en.setDeltaMovement(vel.normalize().multiply(speed, speed, speed));
+                if (chains > 0) {
+                    chains--;
 
-                    level().addFreshEntity(en);
+                    var b = EntityFinder.start(getCaster(), LivingEntity.class, position())
+                            .finder(EntityFinder.SelectionType.RADIUS)
+                            .searchFor(AllyOrEnemy.enemies)
+                            .radius(8);
 
+                    if (entityHit instanceof LivingEntity hit) {
+                        b.excludeEntity(hit);
+                    }
+                    var target = b.getClosest();
+
+                    if (target != null) {
+
+                        SimpleProjectileEntity en = (SimpleProjectileEntity) getType().create(level());
+                        en.setPos(position());
+                        en.init(caster, this.getSpellData(), holder);
+                        en.entityData.set(CHAINS, chains);
+                        var vel = ProjectileCastHelper.positionToVelocity(new MyPosition(position()), new MyPosition(target.getEyePosition()));
+                        en.setDeltaMovement(vel.normalize().multiply(speed, speed, speed));
+
+                        level().addFreshEntity(en);
+
+                    }
                 }
             }
         }
-
 
     }
 

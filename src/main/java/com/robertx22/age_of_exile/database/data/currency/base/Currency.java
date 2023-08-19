@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.currency.base;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.BaseLocRequirement;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
+import com.robertx22.age_of_exile.loot.req.DropRequirement;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.CurrencyItems;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
@@ -37,6 +38,10 @@ public abstract class Currency implements IWeighted, IAutoLocName, IAutoLocDesc,
     @Override
     public String locDescLangFileGUID() {
         return SlashRef.MODID + ".currency.desc." + GUID();
+    }
+
+    public DropRequirement getDropReq() {
+        return DropRequirement.Builder.of().build();
     }
 
 

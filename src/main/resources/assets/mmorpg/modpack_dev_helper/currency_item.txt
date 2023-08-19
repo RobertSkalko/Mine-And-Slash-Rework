@@ -2,4 +2,7 @@ These are all default registry entries of this type.
 This registry can't be modified or added to.
 affix_tier_up_down
 socket_adder
+entangled_quality
+orb_of_quality
+entangled_affix_upgrade
 orb_of_linking

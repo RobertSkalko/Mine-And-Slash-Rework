@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.7,
+  "group": "iron_ingot",
+  "ingredient": {
+    "item": "mmorpg:harvest/green_plant"
+  },
+  "result": "mmorpg:harvest/green_ingot"
+}

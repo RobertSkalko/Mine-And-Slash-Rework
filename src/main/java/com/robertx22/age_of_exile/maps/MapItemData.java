@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.maps;
 
 
+import com.robertx22.age_of_exile.database.data.league.LeagueMechanic;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
@@ -35,13 +36,18 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
     public static int MAX_TIER = 10;
 
-    // todo minify these
     public int lvl = 1;
     public int tier = 0;
     public String rar = IRarity.COMMON_ID;
-    //public String mapUUID = UUID.randomUUID().toString();
 
     public List<MapAffixData> affixes = new ArrayList<MapAffixData>();
+
+    public List<String> mechs = new ArrayList<>();
+
+
+    public List<LeagueMechanic> getLeagueMechanics() {
+        return mechs.stream().map(x -> ExileDB.LeagueMechanics().get(x)).collect(Collectors.toList());
+    }
 
 
     private static MapItemData empty;

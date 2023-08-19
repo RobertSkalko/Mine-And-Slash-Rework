@@ -66,4 +66,17 @@ public class ExileRegistryTypes {
     public static ExileRegistryType MAP_AFFIX = ExileRegistryType.register(SlashRef.MODID, "map_affix", 30, null, SyncTime.NEVER);
     public static ExileRegistryType BOSS_SPELL = ExileRegistryType.register(SlashRef.MODID, "boss", 31, null, SyncTime.NEVER);
 
+    public static ExileRegistryType LEAGUE_MECHANIC = ExileRegistryType.register(new ExileRegistryType(SlashRef.MODID, "league_mechanic", 32, null, SyncTime.NEVER) {
+        @Override
+        public BaseDataPackLoader getLoader() {
+            return null;
+        }
+    });
+    public static ExileRegistryType LOOT_CHEST = ExileRegistryType.register(new ExileRegistryType(SlashRef.MODID, "loot_chest", 33, null, SyncTime.NEVER) {
+        @Override
+        public BaseDataPackLoader getLoader() {
+            return null;
+        }
+    });
+
 }

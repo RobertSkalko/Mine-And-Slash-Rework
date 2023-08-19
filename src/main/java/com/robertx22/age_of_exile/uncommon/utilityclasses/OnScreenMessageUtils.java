@@ -28,6 +28,11 @@ public class OnScreenMessageUtils {
 
     }
 
+    public static void title(ServerPlayer p, MutableComponent title) {
+        p.connection.send(new ClientboundSetTitleTextPacket(title));
+
+    }
+
     /*
     public static void sendMessage(ServerPlayer p, MutableComponent title, ClientboundSetTitlesPacket.Type act) {
         p.connection.send(new ClientboundSetTitlesPacket(act, title

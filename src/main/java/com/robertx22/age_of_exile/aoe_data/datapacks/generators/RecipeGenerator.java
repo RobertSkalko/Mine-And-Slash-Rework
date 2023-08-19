@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.database.data.currency.base.IShapedRecipe;
 import com.robertx22.age_of_exile.database.data.currency.base.IShapelessRecipe;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.mechanics.harvest.HarvestItems;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
@@ -98,10 +99,28 @@ public class RecipeGenerator {
 
         }
 
+        harvest(consumer);
 
         gearRecipe(consumer, SlashItems.GearItems.NECKLACES, GearSlots.NECKLACE);
         gearRecipe(consumer, SlashItems.GearItems.RINGS, GearSlots.RING);
         gearRecipe(consumer, SlashItems.GearItems.STAFFS, GearSlots.STAFF);
+
+
+    }
+
+    static void harvest(Consumer<FinishedRecipe> con) {
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, HarvestItems.BLUE_KEY.get())
+                .unlockedBy("player_level", EnchantedItemTrigger.TriggerInstance.enchantedItem())
+                .requires(HarvestItems.BLUE_INGOT.get(), 9).save(con);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, HarvestItems.GREEN_KEY.get())
+                .unlockedBy("player_level", EnchantedItemTrigger.TriggerInstance.enchantedItem())
+                .requires(HarvestItems.GREEN_INGOT.get(), 9).save(con);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, HarvestItems.PURPLE_KEY.get())
+                .unlockedBy("player_level", EnchantedItemTrigger.TriggerInstance.enchantedItem())
+                .requires(HarvestItems.PURPLE_INGOT.get(), 9).save(con);
 
     }
 

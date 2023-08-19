@@ -33,11 +33,10 @@ public class RoomList {
             new SewersRoomAdder().addAllRooms();
             new NetherRoomAdder().addAllRooms();
             new WideNatureRoomAdder().addAllRooms();
-
-
+            new BastionRoomAdder().addAllRooms();
+            new SpiderNestAdder().addAllRooms();
             new IceTempleRoomAdder().addAllRooms();
             new WarpedRoomAdder().addAllRooms();
-            //new SpiderNestRoomAdder().addAllRooms();
             new AllRoomAdder().addAllRooms();
 
             rooms.add(new DungeonRoom("simple_prismarine", RoomType.FOUR_WAY, RoomGroup.MISC));

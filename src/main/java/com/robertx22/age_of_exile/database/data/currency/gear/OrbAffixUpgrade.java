@@ -16,6 +16,7 @@ import java.util.List;
 public class OrbAffixUpgrade extends GearCurrency {
     @Override
     public List<GearOutcome> getOutcomes() {
+        
         return Arrays.asList(
                 new GearOutcome() {
                     @Override

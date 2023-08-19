@@ -20,14 +20,17 @@ public abstract class GearCurrency extends Currency {
 
     public abstract int getPotentialLoss();
 
+    public boolean isAffectedByPotential() {
+        return getPotentialLoss() > 0;
+    }
+
     @Override
     public ItemStack internalModifyMethod(LocReqContext ctx, ItemStack stack, ItemStack currency) {
         GearItemData data = StackSaving.GEARS.loadFrom(stack);
-        GearOutcome outcome = getOutcome(data.getPotential().multi);
+        GearOutcome outcome = getOutcome(data.getPotential().multi + data.getAdditionalPotentialMultiFromQuality());
         data.setPotential(data.getPotentialNumber() - getPotentialLoss());
         return outcome.modify(ctx, data, stack);
     }
-
 
     private GearOutcome getOutcome(float multi) {
 
@@ -36,8 +39,10 @@ public abstract class GearCurrency extends Currency {
         for (GearOutcome o : getOutcomes()) {
             int w = o.Weight();
 
-            if (o.getOutcomeType() == GearOutcome.OutcomeType.GOOD) {
-                w *= multi;
+            if (isAffectedByPotential()) {
+                if (o.getOutcomeType() == GearOutcome.OutcomeType.GOOD) {
+                    w *= multi;
+                }
             }
             list.add(new Weighted<>(o, w));
         }

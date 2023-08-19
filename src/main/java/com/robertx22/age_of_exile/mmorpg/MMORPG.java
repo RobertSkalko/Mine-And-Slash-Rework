@@ -9,6 +9,8 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.aura.AuraGems;
+import com.robertx22.age_of_exile.database.data.league.LeagueMechanics;
+import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChests;
 import com.robertx22.age_of_exile.database.data.map_affix.MapAffixes;
 import com.robertx22.age_of_exile.database.data.spells.components.conditions.EffectCondition;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
@@ -158,7 +160,7 @@ public class MMORPG {
 
         MapEvents.init();
 
-        watch.print("Age of Exile mod initialization ");
+        watch.print("Mine and slash mod initialization ");
 
     }
 
@@ -181,11 +183,11 @@ public class MMORPG {
         GeneratedData.addAllObjectsToGenerate();
 
         MapAffixes.init(); // todo make this fully data later
-
         SupportGems.init();
         AuraGems.init();
-
         BossSpells.init();
+        LeagueMechanics.init();
+        LootChests.init();
 
         SlashCapabilities.register();
 

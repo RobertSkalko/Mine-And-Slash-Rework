@@ -28,7 +28,7 @@ public class OnLogin {
 
             if (!player.getServer()
                     .isCommandBlockEnabled()) {
-                player.displayClientMessage(Component.literal("Command blocks are disabled, this will stop you from playing Age of Exile Dungeons!").withStyle(ChatFormatting.RED), false);
+                player.displayClientMessage(Component.literal("Command blocks are disabled, this will stop you from playing Mine and slash Dungeons!").withStyle(ChatFormatting.RED), false);
                 player.displayClientMessage(Component.literal("To enable go to your server.properties file and put enable-command-block as true.").withStyle(ChatFormatting.GREEN), false);
             }
 

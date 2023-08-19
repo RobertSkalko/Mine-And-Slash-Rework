@@ -69,7 +69,7 @@ public class TeamCommand {
 
                                                     other.displayClientMessage(ExileText.emptyLine().get().append(player.getDisplayName())
                                                             .append(" has invited you to a team."), false);
-                                                    other.displayClientMessage(ExileText.ofText("Do /age_of_exile teams join ").get().append(player.getDisplayName())
+                                                    other.displayClientMessage(ExileText.ofText("Do /mine_and_slash teams join ").get().append(player.getDisplayName())
                                                             .append(" to accept"), false);
 
                                                     Load.playerRPGData(other).team.invitedToTeam = Load.playerRPGData(player).team.team_id;

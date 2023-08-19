@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.vanilla_mc.items;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -30,13 +31,15 @@ public class TpBackItem extends AutoItem {
 
         if (!pLevel.isClientSide) {
 
-            if (!EntityFinder.start(p, Mob.class, p.blockPosition()).radius(5).searchFor(AllyOrEnemy.enemies).build().isEmpty()) {
-                p.sendSystemMessage(Component.literal("You can't teleport when enemies are nearby."));
-                return InteractionResultHolder.pass(p.getItemInHand(pUsedHand));
-            }
+            if (WorldUtils.isMapWorldClass(pLevel)) {
+                if (!EntityFinder.start(p, Mob.class, p.blockPosition()).radius(5).searchFor(AllyOrEnemy.enemies).build().isEmpty()) {
+                    p.sendSystemMessage(Component.literal("You can't teleport when enemies are nearby."));
+                    return InteractionResultHolder.pass(p.getItemInHand(pUsedHand));
+                }
 
-            itemstack.shrink(1);
-            Load.playerRPGData(p).map.teleportBack(p);
+                itemstack.shrink(1);
+                Load.playerRPGData(p).map.teleportBack(p);
+            }
         }
         return InteractionResultHolder.pass(p.getItemInHand(pUsedHand));
 

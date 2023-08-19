@@ -49,6 +49,8 @@ public class MapBlueprint extends ItemBlueprint {
 
         data.lvl = level.get();
 
+        data.mechs.add(ExileDB.LeagueMechanics().random().GUID());
+
         genAffixes(data, rarity);
 
 

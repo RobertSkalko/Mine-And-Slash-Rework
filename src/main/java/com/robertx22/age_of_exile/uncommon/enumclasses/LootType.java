@@ -15,6 +15,7 @@ public enum LootType implements IGUID {
     SkillGem("Skill Gem", "skill_gem", Words.SkillGem, 5),
     Map("Map", "map", Words.Map, 6),
     Jewel("Jewel", "jewel", Words.Jewel, 7),
+    LootChest("Loot Chest", "loot_chest", Words.Loot, 8),
     All("All", "all", Words.All, 0);
 
     public int custommodeldata;

@@ -85,3 +85,15 @@ v5.0.2
  - lowered map droprate, maps now cant drop from other maps by default. This should hopefully encourage some overworld exploration
  
  - new spells: chain lightning, boomerang, arrow barrage, frozen orb
+
+v5.0.3
+
+ - New dungeon tileset by @Eclipse/@Serphentin: bastion!
+ 
+ - new currency: orb of quality, increases base stat of gears by up to 20%
+ 
+ - fixed vanilla attacks doing damage
+ 
+ - fixed players not being able to teleport correctly outside map in multiplayer
+ 
+ - attacking with nothing now uses basic attacks

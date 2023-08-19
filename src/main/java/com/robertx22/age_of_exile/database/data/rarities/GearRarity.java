@@ -33,7 +33,7 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     public MinMax skill_gem_percents = new MinMax(0, 0);
 
 
-    public Potential pot = new Potential(100, 1);
+    public Potential pot = new Potential(100, 0.5F);
 
 
     public int min_affixes = 0;

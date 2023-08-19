@@ -13,6 +13,8 @@ import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.gems.Gem;
+import com.robertx22.age_of_exile.database.data.league.LeagueMechanic;
+import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChest;
 import com.robertx22.age_of_exile.database.data.map_affix.MapAffix;
 import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
@@ -184,6 +186,15 @@ public class ExileDB {
     public static ExileRegistryContainer<MapAffix> MapAffixes() {
         return Database.getRegistry(ExileRegistryTypes.MAP_AFFIX);
     }
+
+    public static ExileRegistryContainer<LeagueMechanic> LeagueMechanics() {
+        return Database.getRegistry(ExileRegistryTypes.LEAGUE_MECHANIC);
+    }
+
+    public static ExileRegistryContainer<LootChest> LootChests() {
+        return Database.getRegistry(ExileRegistryTypes.LOOT_CHEST);
+    }
+
 
     public static ExileRegistryContainer<SupportGem> SupportGems() {
         return Database.getRegistry(ExileRegistryTypes.SUPPORT_GEM);

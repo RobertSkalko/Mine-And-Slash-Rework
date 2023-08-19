@@ -58,11 +58,45 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     public String gtype = "";
     // potential
     private String pot = IRarity.COMMON_ID;
+    // potential number
     private int pn = 0;
     // salvagable
     public boolean sal = true;
     public boolean c = false; // corrupted
 
+    private int qual = 0;
+    private GearQualityType qt = GearQualityType.BASE;
+
+    public int getQuality() {
+        return qual;
+    }
+
+    public float getQualityBaseStatsMulti() {
+        if (getQualityType() == GearQualityType.BASE) {
+            return 1F + (getQuality() / 100F);
+        }
+        return 1;
+    }
+
+    public GearQualityType getQualityType() {
+        return qt;
+    }
+
+    public enum GearQualityType {
+        BASE(ChatFormatting.GOLD),
+        POT(ChatFormatting.RED);
+
+        public ChatFormatting color;
+
+        GearQualityType(ChatFormatting color) {
+            this.color = color;
+        }
+    }
+
+    public void setQuality(int a, GearQualityType type) {
+        this.qual = a;
+        this.qt = type;
+    }
 
     public boolean isCorrupted() {
         return c;
@@ -130,6 +164,15 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     public GearRarity.Potential getPotential() {
         return ExileDB.GearRarities().get(pot).pot;
     }
+
+
+    public float getAdditionalPotentialMultiFromQuality() {
+        if (getQualityType() != GearQualityType.POT) {
+            return 0;
+        }
+        return getQuality() / 100F;
+    }
+
 
     public ChatFormatting getPotentialColor() {
         return ExileDB.GearRarities().get(pot).textFormatting();

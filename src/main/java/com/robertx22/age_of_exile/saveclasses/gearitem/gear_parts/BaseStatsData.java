@@ -36,6 +36,7 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
         RerollFully(gear);
     }
 
+    
     @Override
     public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {
 
@@ -56,44 +57,7 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
 
         return list;
 
-        /*
-        List<Tuple<Stat, List<ITextComponent>>> pairs = new ArrayList<>();
 
-        List<StatModifier> stats = gear.GetBaseGearType().base_stats;
-
-
-        if (!info.useInDepthStats()) {
-
-        }
-        ExactStatData.combine(all);
-
-        for (int i = 0; i < this.perc.size(); i++) {
-            if (all.size() > i) {
-                int perc = this.perc.get(i);
-                if (all.size() > i) {
-
-                    TooltipStatInfo ctx = new TooltipStatInfo(all.get(i), perc, info);
-
-                    pairs.add(new Tuple(all.get(i)
-                            .getStat()
-                            , info.statTooltipType.impl.getTooltipList(gear.getRarity()
-                            .textFormatting(), new TooltipStatWithContext(ctx, stats.size() > i ? stats.get(i) : null, (int) gear.getILVL()))));
-                }
-            }
-        }
-
-        pairs.sort(Comparator.comparingInt(x -> x.getA().order));
-
-        pairs.forEach(x -> {
-            list.addAll(x.getB());
-        });
-
-        info.statTooltipType = StatTooltipType.NORMAL;
-
-        return list;
-
-
-         */
     }
 
     @Override
@@ -108,10 +72,12 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
 
         try {
 
+            int perc = (int) (p * affixStats.getQualityBaseStatsMulti());
+
+
             for (StatMod mod : affixStats.GetBaseGearType()
                     .baseStats()) {
-                baseStats.add(mod.ToExactStat(p, affixStats.getLevel()));
-
+                baseStats.add(mod.ToExactStat(perc, affixStats.getLevel()));
             }
 
 

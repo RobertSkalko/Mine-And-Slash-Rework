@@ -2,6 +2,8 @@ package com.robertx22.age_of_exile.loot;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.capability.player.PlayerData;
+import com.robertx22.age_of_exile.database.data.league.LeagueMechanic;
+import com.robertx22.age_of_exile.database.data.league.LeagueMechanics;
 import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuantity;
 import com.robertx22.age_of_exile.database.data.stats.types.misc.ExtraMobDropsStat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -12,6 +14,7 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -43,6 +46,8 @@ public class LootInfo {
     public PlayerData rpgData;
     public MapData map;
     public BlockPos pos;
+
+    public LeagueMechanic league = LeagueMechanics.NONE;
 
 
     public int getMinItems() {
@@ -160,7 +165,7 @@ public class LootInfo {
 
 
     private void setLevel() {
-        
+
         if (level <= 0) {
             if (mobData != null) {
                 level = mobData.getLevel();
@@ -205,6 +210,7 @@ public class LootInfo {
                 if (data.get() != null) {
                     this.isMapWorld = true;
                     this.map = data.get();
+                    this.league = LeagueMechanic.getMechanicFromPosition((ServerLevel) world, pos);
                 }
 
             }

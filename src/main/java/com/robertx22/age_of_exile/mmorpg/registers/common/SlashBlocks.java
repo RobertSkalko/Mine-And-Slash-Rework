@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.mmorpg.registers.common;
 
 import com.robertx22.age_of_exile.maps.MapBlock;
+import com.robertx22.age_of_exile.mechanics.base.LeagueBlock;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
 import com.robertx22.age_of_exile.vanilla_mc.blocks.BlackHoleBlock;
@@ -29,6 +30,8 @@ public class SlashBlocks {
     public static RegObj<TotemBlock> TRAP = Def.block("trap", () -> new TotemBlock());
     public static RegObj<TotemBlock> GLYPH = Def.block("glyph", () -> new TotemBlock());
     public static RegObj<MapBlock> MAP = Def.block("teleporter", () -> new MapBlock());
+    public static RegObj<LeagueBlock> LEAGUE = Def.block("league", () -> new LeagueBlock());
+
 
     static RegObj<Block> plant(String id) {
         return Def.block(id, () -> new BeetrootBlock(BlockBehaviour.Properties.of()

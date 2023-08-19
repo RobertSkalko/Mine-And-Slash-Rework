@@ -15,9 +15,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.border.WorldBorder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MapData {
 
     public MapItemData map = new MapItemData();
+
+    public List<String> spawnedMechs = new ArrayList<>();
+
     public String playerUuid = "";
 
     public boolean netherParticles = false;
@@ -41,22 +47,19 @@ public class MapData {
         data.chunkZ = cp.z;
 
 
-        //Load.playerRPGData(p).map.currentMapId = p.getStringUUID();
-        Load.playerRPGData(p).map.tpbackdim = p.level().dimensionTypeId().location().toString();
-        Load.playerRPGData(p).map.tp_back_pos = p.blockPosition().asLong();
-
-        // todo seems impossible to do this outside worldgen, it just freezes game,welp   generateStructure(p, map, data);
-
         return data;
 
     }
 
 
     public void teleportToMap(Player p) {
-
         if (p.level().isClientSide) {
             return;
         }
+        Load.playerRPGData(p).map.tpbackdim = p.level().dimensionTypeId().location().toString();
+        Load.playerRPGData(p).map.tp_back_pos = p.blockPosition().asLong();
+
+
         BlockPos pos = getDungeonStartTeleportPos(new ChunkPos(this.chunkX, this.chunkZ));
 
         Level world = p.level().getServer().getLevel(ResourceKey.create(Registries.DIMENSION, WorldUtils.DUNGEON_DIM_ID));
@@ -69,6 +72,13 @@ public class MapData {
 
         TeleportUtils.teleport((ServerPlayer) p, pos, WorldUtils.DUNGEON_DIM_ID);
 
+    }
+
+
+    public static BlockPos getDungeonStartTeleportPos(ChunkPos pos) {
+        BlockPos p = getStartChunk(pos).getBlockAt(0, 0, 0);
+        p = new BlockPos(p.getX() + 8, 57, p.getZ() + 8);
+        return p;
     }
 
 
@@ -134,10 +144,4 @@ public class MapData {
         return new ChunkPos(chunkX, chunkZ);
     }
 
-    public static BlockPos getDungeonStartTeleportPos(ChunkPos pos) {
-        BlockPos p = getStartChunk(pos).getBlockAt(0, 0, 0);
-        p = new BlockPos(p.getX() + 8, 57, p.getZ() + 8);
-        return p;
-
-    }
 }

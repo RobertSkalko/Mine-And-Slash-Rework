@@ -1,4 +1,4 @@
-package com.robertx22.age_of_exile.threat_aggro;
+package com.robertx22.age_of_exile.uncommon.threat_aggro;
 
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;

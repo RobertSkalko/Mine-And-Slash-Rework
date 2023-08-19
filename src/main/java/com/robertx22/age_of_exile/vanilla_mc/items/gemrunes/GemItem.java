@@ -112,18 +112,19 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
                 if (getGem().hasHigherTierGem()) {
                     boolean success = RandomUtils.roll(gem.perc_upgrade_chance);
 
+                    ItemStack newstack = new ItemStack(getGem().getHigherTierGem()
+                            .getItem());
+
                     stack.shrink(3);
 
                     Item old = stack.getItem();
 
                     if (success) {
-                        ItemStack newstack = new ItemStack(getGem().getHigherTierGem()
-                                .getItem());
+                        PlayerUtils.giveItem(newstack, p);
                         Packets.sendToClient(p, new TotemAnimationPacket(newstack));
                         p.displayClientMessage(Component.literal(ChatFormatting.GREEN + "").append(old.getName(new ItemStack(old)))
                                 .append(" has been upgraded to ")
                                 .append(newstack.getDisplayName()), false);
-                        PlayerUtils.giveItem(newstack, p);
 
                     } else {
                         SoundUtils.playSound(p, SoundEvents.VILLAGER_NO, 1, 1);

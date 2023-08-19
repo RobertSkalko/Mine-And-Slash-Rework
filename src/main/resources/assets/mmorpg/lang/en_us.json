@@ -193,6 +193,15 @@
 	"item.mmorpg.gems.tourmaline.4": "Grand Tourmaline",
 	"item.mmorpg.gems.tourmaline.5": "Glorious Tourmaline",
 	"item.mmorpg.gems.tourmaline.6": "Divine Tourmaline",
+	"item.mmorpg.harvest.blue_ingot": "Lucid Ingot",
+	"item.mmorpg.harvest.blue_key": "Lucid Key",
+	"item.mmorpg.harvest.blue_plant": "Lucid Extract",
+	"item.mmorpg.harvest.green_ingot": "Primal Ingot",
+	"item.mmorpg.harvest.green_key": "Primal Key",
+	"item.mmorpg.harvest.green_plant": "Primal Extract",
+	"item.mmorpg.harvest.purple_ingot": "Chaotic Ingot",
+	"item.mmorpg.harvest.purple_key": "Chaotic Key",
+	"item.mmorpg.harvest.purple_plant": "Chaotic Extract",
 	"item.mmorpg.potions.add_reset_perk_points": "Single Talent Reset Potion",
 	"item.mmorpg.potions.reset_all_perks": "Talent Reset Potion",
 	"item.mmorpg.potions.reset_spells": "Class Reset Potion",
@@ -542,15 +551,6 @@
 "_comment": " [CATEGORY]: RARITIES - NAMES",
 
 
-"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
-
-	"item.mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
-	"item.mmorpg.currency.orb_of_linking": "Orb of Linking",
-	"item.mmorpg.currency.socket_adder": "Orb of Digging",
-
-"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
-
-
 "_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
 
 	"effect.mmorpg.beneficial.10": "Vigor",
@@ -582,6 +582,18 @@
 	"mmorpg.ailment.poison": "Poison",
 
 "_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
+
+
+"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
+
+	"item.mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
+	"item.mmorpg.currency.entangled_affix_upgrade": "Entangled Orb of Imbalance",
+	"item.mmorpg.currency.entangled_quality": "Entangled Orb of Quality",
+	"item.mmorpg.currency.orb_of_linking": "Orb of Linking",
+	"item.mmorpg.currency.orb_of_quality": "Orb of Quality",
+	"item.mmorpg.currency.socket_adder": "Orb of Digging",
+
+"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
 
 
 "_comment": " [CATEGORY]: TALENTS - NAMES",
@@ -773,6 +785,7 @@
 	"mmorpg.word.dealt": "Dealt",
 	"mmorpg.word.decreased": "Decreased",
 	"mmorpg.word.defenses": "Defenses",
+	"mmorpg.word.deletesallaffixes": "Deletes all affixes",
 	"mmorpg.word.destroyprotect": "Destruction Guard",
 	"mmorpg.word.distance": "Distance",
 	"mmorpg.word.divine": "Divine",
@@ -999,6 +1012,7 @@
 	"mmorpg.word.upgradelvlto10": "Upgrade Level must be 5-9",
 	"mmorpg.word.upgradelvlto15": "Upgrade Level must be 10-14",
 	"mmorpg.word.upgradelvlto5": "Upgrade Level must be 0-4",
+	"mmorpg.word.upgradequality": "Upgrade Quality",
 	"mmorpg.word.upgradestone": "Upgrade Stone",
 	"mmorpg.word.usableon": "Usable on",
 	"mmorpg.word.use_time": "Use Time",
@@ -1452,7 +1466,7 @@
 
 	"mmorpg.chat.can_not_go_over_maximum_level": "Can not go over maximum level",
 	"mmorpg.chat.cooldown_not_met": "Cooldown not met",
-	"mmorpg.chat.dev_tools_enabled_contact_the_author": "Devs tools enabled, if you see this please contact the author of Age of Exile [robertx22], he forgot to disable them!",
+	"mmorpg.chat.dev_tools_enabled_contact_the_author": "Devs tools enabled, if you see this please contact the author of Mine and Slash [robertx22], he forgot to disable them!",
 	"mmorpg.chat.no_targets_found": "No targets found",
 	"mmorpg.chat.not_enough_experience": "Not enough experience",
 	"mmorpg.chat.not_enough_time": "Not enough time",
@@ -1468,7 +1482,10 @@
 "_comment": " [CATEGORY]: CURRENCY ITEMS - DESCRIPTIONS",
 
 	"item.mmorpg.currency.desc.affix_tier_up_down": "Unpredictably Adds or removes a tier from a random affix.",
+	"item.mmorpg.currency.desc.entangled_affix_upgrade": "Either Upgrades a random affix to maximum tier, or removes all affixes on an item.",
+	"item.mmorpg.currency.desc.entangled_quality": "Upgrades Quality of An Item, boosting gear potential",
 	"item.mmorpg.currency.desc.orb_of_linking": "Re-rolls gem links, min is 1, max is 5 links.",
+	"item.mmorpg.currency.desc.orb_of_quality": "Upgrades Quality of An Item, quality boosts defenses.",
 	"item.mmorpg.currency.desc.socket_adder": "Has a chance to add a socket or do nothing",
 
 "_comment": " [CATEGORY]: CURRENCY ITEMS - DESCRIPTIONS",

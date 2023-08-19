@@ -38,7 +38,7 @@ public class CurrencyLootGen extends BaseLootGen<ItemBlueprint> {
     public ItemStack generateOne() {
 
         Currency currency = ExileDB.CurrencyItems()
-                .getFilterWrapped(x -> true)
+                .getFilterWrapped(x -> x.getDropReq().canDropInLeague(info.league))
                 .random();
 
         return currency.getCurrencyItem().getDefaultInstance();
