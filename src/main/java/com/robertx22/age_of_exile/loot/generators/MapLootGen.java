@@ -44,7 +44,7 @@ public class MapLootGen extends BaseLootGen<MapBlueprint> {
 
     @Override
     public ItemStack generateOne() {
-        MapBlueprint blueprint = new MapBlueprint(info.level);
+        MapBlueprint blueprint = new MapBlueprint(info);
 
         return blueprint.createStack();
     }

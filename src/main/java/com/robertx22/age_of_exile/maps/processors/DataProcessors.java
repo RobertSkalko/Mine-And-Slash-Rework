@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.maps.processors;
 
 
 import com.robertx22.age_of_exile.maps.processors.league.LeagueControlBlockProcessor;
+import com.robertx22.age_of_exile.maps.processors.league.LeagueTpBackProcessor;
 import com.robertx22.age_of_exile.maps.processors.misc.RemoveAllBesidesOneProcessor;
 import com.robertx22.age_of_exile.maps.processors.mob.*;
 import com.robertx22.age_of_exile.maps.processors.reward.ChanceChestProcessor;
@@ -15,6 +16,7 @@ public class DataProcessors {
     static List<DataProcessor> all = new ArrayList<>();
 
     public static List<DataProcessor> getAll() {
+        
 
         if (all.isEmpty()) {
             all.add(new BossProcessor());
@@ -27,8 +29,8 @@ public class DataProcessors {
             all.add(new RemoveAllBesidesOneProcessor());
             all.add(new ComplexMobProcessor());
             all.add(new LeagueControlBlockProcessor());
+            all.add(new LeagueTpBackProcessor());
         }
-
 
         return all;
 

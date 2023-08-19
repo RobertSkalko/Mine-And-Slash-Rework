@@ -12,11 +12,20 @@ public class PlayerMapData {
     //public String currentMapId = "";
 
     public String tpbackdim = "";
-
     public long tp_back_pos = 0;
+
+    public long tp_back_from_league_pos = 0;
 
     private BlockPos getTeleportBackPos() {
         return BlockPos.of(tp_back_pos);
+    }
+
+    public void teleportBackFromLeagueToDungeon(Player p) {
+        if (p.level().isClientSide) {
+            return;
+        }
+        BlockPos pos = BlockPos.of(tp_back_from_league_pos);
+        TeleportUtils.teleport((ServerPlayer) p, pos);
     }
 
     public void teleportBack(Player p) {

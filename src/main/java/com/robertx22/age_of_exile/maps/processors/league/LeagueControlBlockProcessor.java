@@ -3,7 +3,7 @@ package com.robertx22.age_of_exile.maps.processors.league;
 import com.robertx22.age_of_exile.maps.generator.ChunkProcessData;
 import com.robertx22.age_of_exile.maps.processors.DataProcessor;
 import com.robertx22.age_of_exile.mechanics.base.LeagueBlockData;
-import com.robertx22.age_of_exile.mechanics.base.LeagueBlockEntity;
+import com.robertx22.age_of_exile.mechanics.base.LeagueControlBlockEntity;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
@@ -28,9 +28,9 @@ public class LeagueControlBlockProcessor extends DataProcessor {
             int z = Integer.parseInt(nums[2]);
 
 
-            world.setBlock(pos, SlashBlocks.LEAGUE.get().defaultBlockState(), 2);
+            world.setBlock(pos, SlashBlocks.LEAGUE_CONTROL.get().defaultBlockState(), 2);
 
-            if (world.getBlockEntity(pos) instanceof LeagueBlockEntity lb) {
+            if (world.getBlockEntity(pos) instanceof LeagueControlBlockEntity lb) {
                 lb.data.size = new LeagueBlockData.StructureRadius(x, z, y);
             }
 

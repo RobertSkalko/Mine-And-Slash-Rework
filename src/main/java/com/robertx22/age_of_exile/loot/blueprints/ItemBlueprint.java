@@ -16,12 +16,9 @@ public abstract class ItemBlueprint {
 
     public int extraLevelModifier = 0;
 
-    public ItemBlueprint(int lvl) {
-        this.level.number = lvl;
-        this.onConstruct();
-    }
 
     public ItemBlueprint(LootInfo info) {
+        this.info = info;
         this.level.number = info.level;
 
         if (info.mobData != null) {
@@ -32,10 +29,6 @@ public abstract class ItemBlueprint {
         this.onConstruct();
     }
 
-    public ItemBlueprint(int lvl, int tier) {
-        this.level.number = lvl;
-        this.onConstruct();
-    }
 
     public List<IStackAction> actionsAfterGeneration = new ArrayList<>();
 
@@ -49,7 +42,7 @@ public abstract class ItemBlueprint {
 
     abstract ItemStack generate();
 
-  
+
     final public ItemStack createStack() {
         checkAndSetGeneratedBoolean();
         ItemStack stack = generate();

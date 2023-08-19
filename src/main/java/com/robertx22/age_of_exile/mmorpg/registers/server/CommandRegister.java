@@ -35,6 +35,7 @@ public class CommandRegister {
         SpawnBoss.register(dispatcher);
         SetLevel.register(dispatcher);
         GiveExp.register(dispatcher);
+        GiveLootChest.register(dispatcher);
 
 
         ResetSpellCooldowns.register(dispatcher);

@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.mechanics.base;
 
 import com.robertx22.age_of_exile.capability.player.PlayerData;
-import com.robertx22.age_of_exile.capability.player.data.TeamData;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlockEntities;
 import com.robertx22.library_of_exile.utils.LoadSave;
 import com.robertx22.library_of_exile.utils.RandomUtils;
@@ -17,13 +16,13 @@ import net.minecraft.world.phys.AABB;
 
 import java.util.List;
 
-public class LeagueBlockEntity extends BlockEntity {
+public class LeagueControlBlockEntity extends BlockEntity {
 
     public LeagueBlockData data = new LeagueBlockData();
 
 
-    public LeagueBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(SlashBlockEntities.MAP.get(), pPos, pBlockState);
+    public LeagueControlBlockEntity(BlockPos pPos, BlockState pBlockState) {
+        super(SlashBlockEntities.LEAGUE.get(), pPos, pBlockState);
 
     }
 
@@ -37,7 +36,7 @@ public class LeagueBlockEntity extends BlockEntity {
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
-        this.data = PlayerData.loadOrBlank(TeamData.class, new LeagueBlockData(), pTag, "league_data", new LeagueBlockData());
+        this.data = PlayerData.loadOrBlank(LeagueBlockData.class, new LeagueBlockData(), pTag, "league_data", new LeagueBlockData());
     }
 
 
@@ -55,9 +54,10 @@ public class LeagueBlockEntity extends BlockEntity {
 
             // var pos = new BlockPos(x, y, z);
 
-            if (getLevel().noCollision(type.getDimensions().makeBoundingBox(new MyPosition(x, y, z)))) {
-
-                return new BlockPos(x, y, z);
+            if (getLevel().noCollision(type.getDimensions().makeBoundingBox(new MyPosition(x, y, z)).inflate(1, 0, 1))) {
+                if (level.getBlockState(new BlockPos(x, y - 1, z)).isSolid()) {
+                    return new BlockPos(x, y, z);
+                }
             }
         }
 
@@ -67,7 +67,8 @@ public class LeagueBlockEntity extends BlockEntity {
     }
 
     public List<Player> getPlayers() {
-        return this.getLevel().getEntitiesOfClass(Player.class, getBox(getBlockPos()), x -> x.isAlive());
+        var box = getBox(getBlockPos());
+        return this.getLevel().getEntitiesOfClass(Player.class, box, x -> x.isAlive());
     }
 
     public List<LivingEntity> getEntitiesInside() {
@@ -79,7 +80,7 @@ public class LeagueBlockEntity extends BlockEntity {
     }
 
     public AABB getBox(BlockPos pos) {
-        return createBoxOfRadius(pos, 1).expandTowards(data.size.xRadius, data.size.yHeight / 2F, data.size.zRadius).move(0, data.size.yHeight, 0);
+        return createBoxOfRadius(pos, 1).inflate(data.size.xRadius, data.size.yHeight / 2F, data.size.zRadius).move(0, data.size.yHeight / 2F, 0);
     }
 
     public AABB createBoxOfRadius(BlockPos pos, int radius) {

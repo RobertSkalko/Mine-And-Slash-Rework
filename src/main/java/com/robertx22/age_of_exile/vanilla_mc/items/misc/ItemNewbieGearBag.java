@@ -27,7 +27,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.fml.ModList;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,7 +40,7 @@ public class ItemNewbieGearBag extends Item {
         super(new Properties());
     }
 
-    
+
     static HashMap<String, NewbieContent> MAP = new HashMap<>();
     static NewbieContent defaultContent = new NewbieContent(Arrays.asList(GearSlots.STAFF, GearSlots.SWORD, GearSlots.BOW));
     static List<String> spells = Arrays.asList(BasicAttackSpells.FIREBALL_ID, WaterSpells.TIDAL_STRIKE, RangerSpells.BARRAGE);
@@ -103,7 +102,7 @@ public class ItemNewbieGearBag extends Item {
                         .getFilterWrapped(e -> e.gear_slot.equals(x))
                         .random();
 
-                GearBlueprint b = new GearBlueprint(1);
+                GearBlueprint b = new GearBlueprint(LootInfo.ofLevel(1));
                 b.level.set(1);
                 b.rarity.set(ExileDB.GearRarities()
                         .get(IRarity.COMMON_ID));
@@ -145,19 +144,6 @@ public class ItemNewbieGearBag extends Item {
                     defaultContent.give(playerIn);
                     // ItemNewbieGearBag.giveNewbieItemsFor(playerIn, starts.get(0));
 
-                    if (ModList.get()
-                            .isLoaded("patchouli")) {
-                        /*
-                        // dont give till i update it
-                        // guide book
-                        ItemStack book = new ItemStack(VanillaUTIL.REGISTRY.items().get(new Identifier("patchouli", "guide_book")));
-                        CompoundTag tag = new CompoundTag();
-                        tag.putString("patchouli:book", "mmorpg:age_of_exile_guide");
-                        book.setTag(tag);
-                        PlayerUtils.giveItem(book, playerIn);
-
-                         */
-                    }
 
                     playerIn.getItemInHand(handIn)
                             .shrink(1);
@@ -175,12 +161,5 @@ public class ItemNewbieGearBag extends Item {
         return new InteractionResultHolder<ItemStack>(InteractionResult.PASS, playerIn.getItemInHand(handIn));
     }
 
-    private static GearBlueprint getBlueprint(BaseGearType type) {
-        GearBlueprint print = new GearBlueprint(1);        //TODO
-        print.gearItemSlot.set(type);
-        print.rarity.set(ExileDB.GearRarities()
-                .get(IRarity.COMMON_ID));
-        return print;
-    }
 
 }

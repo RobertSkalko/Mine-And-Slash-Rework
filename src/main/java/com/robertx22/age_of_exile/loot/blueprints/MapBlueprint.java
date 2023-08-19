@@ -4,6 +4,7 @@ package com.robertx22.age_of_exile.loot.blueprints;
 import com.robertx22.age_of_exile.database.data.map_affix.MapAffix;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.bases.GearRarityPart;
 import com.robertx22.age_of_exile.maps.MapAffixData;
 import com.robertx22.age_of_exile.maps.MapItemData;
@@ -18,12 +19,11 @@ import java.util.List;
 public class MapBlueprint extends ItemBlueprint {
 
 
-    public MapBlueprint(int level) {
-        super(level);
-        this.rarity.chanceForHigherRarity = 50;
-    }
-
     public GearRarityPart rarity = new GearRarityPart(this);
+
+    public MapBlueprint(LootInfo info) {
+        super(info);
+    }
 
     @Override
     public ItemStack generate() {

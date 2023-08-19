@@ -650,7 +650,12 @@ public class EntityData implements ICap, INeededForClient {
                 wepdmg = en.getValue().getAmount();
             }
         }
-        double total = this.entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue() - wepdmg + (wepdmg * ServerContainer.get().MOB_WEAPON_DMG_USEFULNESS.get());
+        var attri = this.entity.getAttribute(Attributes.ATTACK_DAMAGE);
+        float atkdmg = 0;
+        if (attri != null) {
+            atkdmg = (float) attri.getValue();
+        }
+        double total = atkdmg - wepdmg + (wepdmg * ServerContainer.get().MOB_WEAPON_DMG_USEFULNESS.get());
 
         num *= total;
 

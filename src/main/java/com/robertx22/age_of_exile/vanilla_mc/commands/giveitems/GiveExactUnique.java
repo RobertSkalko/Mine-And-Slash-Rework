@@ -6,6 +6,7 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
+import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 import com.robertx22.age_of_exile.vanilla_mc.commands.CommandRefs;
 import com.robertx22.age_of_exile.vanilla_mc.commands.suggestions.DatabaseSuggestions;
@@ -55,7 +56,7 @@ public class GiveExactUnique {
         }
 
         for (int i = 0; i < amount; i++) {
-            GearBlueprint blueprint = new GearBlueprint(lvl, 0);
+            GearBlueprint blueprint = new GearBlueprint(LootInfo.ofLevel(lvl));
             blueprint.level.set(lvl);
 
             if (!id.equals("random")) {

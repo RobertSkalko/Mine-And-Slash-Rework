@@ -45,6 +45,8 @@ public class DungeonFeature {
             return false;
         }
 
+        //world.getServer().getStructureManager().listTemplates();
+        // todo  this could allow me to auto register dungeon rooms
 
         var template = world.getServer().getStructureManager().get(room.getStructure()).get();
         StructurePlaceSettings settings = new StructurePlaceSettings().setMirror(Mirror.NONE)

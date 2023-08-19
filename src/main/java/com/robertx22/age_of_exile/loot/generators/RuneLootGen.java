@@ -31,7 +31,7 @@ public class RuneLootGen extends BaseLootGen<GearBlueprint> {
 
     @Override
     public ItemStack generateOne() {
-        RuneBlueprint b = new RuneBlueprint(info.level);
+        RuneBlueprint b = new RuneBlueprint(info);
 
         return b.createStack();
 

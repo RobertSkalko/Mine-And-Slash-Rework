@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
+import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 import com.robertx22.age_of_exile.vanilla_mc.items.gemrunes.RuneItem;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
@@ -47,7 +48,7 @@ public class RuneWord implements IAutoGson<RuneWord>, JsonExileRegistry<RuneWord
 
     public ItemStack createGearItem(int lvl) {
 
-        GearBlueprint b = new GearBlueprint(lvl);
+        GearBlueprint b = new GearBlueprint(LootInfo.ofLevel(lvl));
         UniqueGear uniq = ExileDB.UniqueGears().get(uniq_id);
         b.uniquePart.set(uniq);
         b.level.set(lvl);

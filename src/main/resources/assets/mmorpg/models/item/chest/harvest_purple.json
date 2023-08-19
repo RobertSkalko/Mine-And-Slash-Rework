@@ -1,0 +1,6 @@
+{
+  "parent": "mmorpg:item/chest",
+  "textures": {
+    "chest": "mmorpg:item/chest/harvest_purple"
+  }
+}

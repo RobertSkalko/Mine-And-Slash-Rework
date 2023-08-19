@@ -15,22 +15,14 @@ public class GearBlueprint extends ItemBlueprint {
 
     public Item item = Items.AIR;
 
-    public GearBlueprint(int lvl) {
-        super(lvl);
-    }
 
     public GearBlueprint(LootInfo info) {
         super(info);
 
-        this.info = info;
         this.rarity.setupChances(info);
     }
 
-    public GearBlueprint(int lvl, int tier) {
-        super(lvl, tier);
-
-    }
-
+ 
     public GearItemSlotPart gearItemSlot = new GearItemSlotPart(this);
     public GearRarityPart rarity = new GearRarityPart(this);
     public UniqueGearPart uniquePart = new UniqueGearPart(this);

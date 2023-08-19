@@ -16,9 +16,7 @@ public abstract class RoomGroup implements IWeighted {
     public static IceTempleGroup ICE_TEMPLE = new IceTempleGroup();
     public static MiscGroup MISC = new MiscGroup();
 
-
     public static TestGroup TEST = new TestGroup();
-
 
     public static MossyBrickGroup MOSSY_BRICK = new MossyBrickGroup();
     public static StoneBrickGroup STONE_BRICK = new StoneBrickGroup();
@@ -80,10 +78,8 @@ public abstract class RoomGroup implements IWeighted {
     public String folder;
     int weight;
     public boolean canBeMainTheme = true;
-
     public boolean canSpawnFireMobs = false;
     public int chanceForOtherGroups = 20;
-
 
     public boolean netherParticles = false;
 

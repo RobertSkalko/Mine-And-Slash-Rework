@@ -18,13 +18,17 @@ public abstract class LootChest implements ExileRegistry<LootChest> {
 
     public abstract Item getKey();
 
-   
+
     public List<ItemStack> generateAll(LootChestData data) {
         List<ItemStack> list = new ArrayList<>();
         for (int i = 0; i < data.num; i++) {
             list.add(generateOne(data));
         }
         return list;
+    }
+
+    public boolean isLocked() {
+        return getKey() != null;
     }
 
     public abstract Item getChestItem(LootChestData data);

@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
+import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
@@ -88,7 +89,7 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
 
         int lvl = LevelUtils.tierToLevel(tier).min;
 
-        GearBlueprint b = new GearBlueprint(lvl);
+        GearBlueprint b = new GearBlueprint(LootInfo.ofLevel(lvl));
         b.level.set(lvl);
         b.rarity.set(ExileDB.GearRarities()
                 .get(rar));

@@ -3,8 +3,10 @@ package com.robertx22.age_of_exile.event_hooks.my_events;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.EntityConfig;
+import com.robertx22.age_of_exile.database.data.league.LeagueMechanic;
 import com.robertx22.age_of_exile.database.data.stats.types.misc.BonusExp;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.LootUtils;
 import com.robertx22.age_of_exile.loot.MasterLootGen;
 import com.robertx22.age_of_exile.maps.MapData;
@@ -75,13 +77,24 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
 
                     if (loot_multi > 0) {
                         MasterLootGen.genAndDrop(mobKilled, player);
+
+                        if (WorldUtils.isMapWorldClass(player.level())) {
+                            var mech = LeagueMechanic.getMechanicFromPosition((ServerLevel) player.level(), mobKilled.blockPosition());
+                            if (!mech.isEmpty()) {
+                                var info = LootInfo.ofMobKilled(player, mobKilled);
+                                mech.onKillMob(info);
+                            }
+                        }
                     }
                     if (exp_multi > 0) {
                         GiveExp(mobKilled, player, playerData, mobKilledData, exp_multi);
                     }
 
                     if (WorldUtils.isDungeonWorld(mobKilled.level())) {
-
+                        var map = Load.mapAt(mobKilled.level(), mobKilled.blockPosition());
+                        if (map != null) {
+                            map.trySpawnMechanic(mobKilled.level(), mobKilled.blockPosition());
+                        }
                     }
 
                 }

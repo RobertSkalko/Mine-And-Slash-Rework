@@ -1,19 +1,19 @@
 package com.robertx22.age_of_exile.loot.blueprints;
 
 import com.robertx22.age_of_exile.database.data.runes.Rune;
+import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.bases.RunePart;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 public class RuneBlueprint extends ItemBlueprint {
 
-    public RuneBlueprint(int level) {
-        super(level);
-
-    }
-
 
     public RunePart runePart = new RunePart(this);
+
+    public RuneBlueprint(LootInfo info) {
+        super(info);
+    }
 
     // maybe you can socket a rune only in x part instead of any, and it gives big stats, but you can only socket 1 rune per item?
     @Override

@@ -71,7 +71,7 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
 
         ctx.tooltip.clear();
 
-        ctx.tooltip.add(Component.literal("").append(ctx.stack.getDisplayName()).withStyle(getRarity().textFormatting()));
+        ctx.tooltip.add(Component.literal("").append(ctx.stack.getHoverName()).withStyle(getRarity().textFormatting()));
 
         TooltipInfo info = new TooltipInfo(ctx.data);
 

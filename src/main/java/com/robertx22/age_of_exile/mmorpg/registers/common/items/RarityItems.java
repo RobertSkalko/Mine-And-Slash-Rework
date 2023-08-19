@@ -25,7 +25,7 @@ public class RarityItems {
 
             RARITY_STONE.put(rar, Def.item(() -> new RarityStoneItem("Stone", finalTier), "stone/" + tier));
             BACKPACKS.put(rar, Def.item(() -> new BackpackItem(rar), "backpack/" + tier));
-            GEAR_CHESTS.put(rar, Def.item(() -> new LootChestItem(), "chest/" + rar + "_gear"));
+            GEAR_CHESTS.put(rar, Def.item(() -> new LootChestItem("Gear"), "chest/" + rar + "_gear"));
 
             tier++;
         }

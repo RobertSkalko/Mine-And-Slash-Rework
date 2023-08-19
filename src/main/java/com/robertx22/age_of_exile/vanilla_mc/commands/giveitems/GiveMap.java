@@ -5,6 +5,7 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.MapBlueprint;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.vanilla_mc.commands.CommandRefs;
@@ -47,7 +48,7 @@ public class GiveMap {
             }
         }
         for (int i = 0; i < amount; i++) {
-            MapBlueprint blueprint = new MapBlueprint(lvl);
+            MapBlueprint blueprint = new MapBlueprint(LootInfo.ofLevel(lvl));
             blueprint.level.set(lvl);
 
             if (ExileDB.GearRarities()

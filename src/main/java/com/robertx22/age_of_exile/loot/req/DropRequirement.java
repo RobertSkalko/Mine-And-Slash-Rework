@@ -7,7 +7,7 @@ public class DropRequirement {
     private String league = "";
 
     private DropRequirement() {
-    
+
     }
 
     public boolean canDropInLeague(LeagueMechanic m) {
@@ -16,6 +16,10 @@ public class DropRequirement {
         } else {
             return m.GUID().equals(league);
         }
+    }
+
+    public boolean isFromLeague(LeagueMechanic m) {
+        return m.GUID().equals(league);
     }
 
 

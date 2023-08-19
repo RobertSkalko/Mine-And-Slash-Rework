@@ -2,13 +2,18 @@ package com.robertx22.age_of_exile.database.data.league;
 
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
+import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.mechanics.base.LeagueBlockData;
-import com.robertx22.age_of_exile.mechanics.base.LeagueBlockEntity;
+import com.robertx22.age_of_exile.mechanics.base.LeagueControlBlockEntity;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.registry.ExileRegistry;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.utils.TeleportUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -32,7 +37,34 @@ public abstract class LeagueMechanic implements ExileRegistry<LeagueMechanic> {
         return LeagueMechanics.NONE;
     }
 
-    public abstract void onTick(ServerLevel level, BlockPos pos, LeagueBlockEntity be, LeagueBlockData data);
+
+    public abstract void onKillMob(LootInfo info);
+
+    public final void teleportToStartOfLeague(Player p) {
+
+        BlockPos tp = getTeleportPos(p.blockPosition());
+
+        Load.playerRPGData(p).map.tp_back_from_league_pos = p.blockPosition().asLong();
+
+        TeleportUtils.teleport((ServerPlayer) p, tp);
+    }
+
+    public final void teleportBackToDungeon(Player p) {
+
+        Load.playerRPGData(p).map.teleportBackFromLeagueToDungeon(p);
+    }
+
+
+    public abstract void spawnTeleportInMap(ServerLevel level, BlockPos pos);
+
+
+    public abstract float chanceToSpawnMechanicAfterKillingMob();
+
+    public boolean isEmpty() {
+        return false;
+    }
+
+    public abstract void onTick(ServerLevel level, BlockPos pos, LeagueControlBlockEntity be, LeagueBlockData data);
 
     public abstract BlockPos getTeleportPos(BlockPos pos);
 

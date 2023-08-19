@@ -1,10 +1,9 @@
 
  "death.attack.mmorpg": "%1$s was slain by %2$s",
 
-"infinite_dungeons.reward_list.gem_box": "Lucky Gem Bag",
-"infinite_dungeons.reward_list.gear_crate": "Lucky Gear Bag",
-"infinite_dungeons.reward_list.upgrade_box": "Upgrade Material Bag",
-"infinite_dungeons.reward_list.any_slot_gear_crate": "Tailor Made Gear Bag",
+"block.mmorpg.harvest.purple": "Chaotic Seeds",
+"block.mmorpg.harvest.green": "Primal Seeds",
+"block.mmorpg.harvest.blue": "Lucid Seeds",
 
 
 "item.mmorpg.custom_loot_crate": "Loot Crate",

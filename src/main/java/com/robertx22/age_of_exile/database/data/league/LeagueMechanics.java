@@ -1,16 +1,41 @@
 package com.robertx22.age_of_exile.database.data.league;
 
+import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.mechanics.base.LeagueBlockData;
-import com.robertx22.age_of_exile.mechanics.base.LeagueBlockEntity;
+import com.robertx22.age_of_exile.mechanics.base.LeagueControlBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 
 public class LeagueMechanics {
 
+    public static String HARVEST_ID = "harvest";
+
     public static LeagueMechanic NONE = new LeagueMechanic() {
         @Override
-        public void onTick(ServerLevel level, BlockPos pos, LeagueBlockEntity be, LeagueBlockData data) {
+        public void onTick(ServerLevel level, BlockPos pos, LeagueControlBlockEntity be, LeagueBlockData data) {
 
+        }
+
+
+        @Override
+        public void onKillMob(LootInfo info) {
+            
+        }
+
+        @Override
+        public void spawnTeleportInMap(ServerLevel level, BlockPos pos) {
+
+
+        }
+
+        @Override
+        public float chanceToSpawnMechanicAfterKillingMob() {
+            return 0;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return true;
         }
 
         @Override

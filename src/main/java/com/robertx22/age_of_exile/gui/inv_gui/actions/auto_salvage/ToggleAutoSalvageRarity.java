@@ -68,6 +68,7 @@ public class ToggleAutoSalvageRarity extends GuiAction {
         JEWEL(Words.Jewel),
         SPELL(Words.SkillGem);
 
+
         public Words word;
 
         SalvageType(Words word) {

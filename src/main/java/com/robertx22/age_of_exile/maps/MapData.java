@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.maps;
 
+import com.robertx22.age_of_exile.database.data.league.LeagueMechanic;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
@@ -8,6 +9,7 @@ import com.robertx22.library_of_exile.utils.TeleportUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
@@ -48,6 +50,19 @@ public class MapData {
 
 
         return data;
+
+    }
+
+    public void trySpawnMechanic(Level level, BlockPos pos) {
+
+        for (LeagueMechanic league : this.map.getLeagueMechanics()) {
+            if (!this.spawnedMechs.contains(league.GUID())) {
+                if (RandomUtils.roll(league.chanceToSpawnMechanicAfterKillingMob())) {
+                    this.spawnedMechs.add(league.GUID());
+                    league.spawnTeleportInMap((ServerLevel) level, pos);
+                }
+            }
+        }
 
     }
 

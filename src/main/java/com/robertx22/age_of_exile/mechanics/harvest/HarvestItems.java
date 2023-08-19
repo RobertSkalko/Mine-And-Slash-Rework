@@ -1,9 +1,9 @@
 package com.robertx22.age_of_exile.mechanics.harvest;
 
+import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChestItem;
 import com.robertx22.age_of_exile.mechanics.harvest.vanilla.HarvestMaterialItem;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
-import com.robertx22.age_of_exile.vanilla_mc.items.SimpleMatItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 
@@ -29,7 +29,9 @@ public class HarvestItems {
     public static RegObj<BlockItem> BLUE_PLANT_SEED = Def.item(() -> new BlockItem(HarvestBlocks.BLUE.get(), new Item.Properties()), "harvest/blue_seed");
     public static RegObj<BlockItem> GREEN_PLANT_SEED = Def.item(() -> new BlockItem(HarvestBlocks.GREEN.get(), new Item.Properties()), "harvest/green_seed");
 
-    public static RegObj<Item> CHEST_TEST = Def.item(() -> new SimpleMatItem(), "chest/harvest_blue");
+    public static RegObj<Item> BLUE_CHEST = Def.item(() -> new LootChestItem(BLUE_NAME), "chest/harvest_blue");
+    public static RegObj<Item> GREEN_CHEST = Def.item(() -> new LootChestItem(GREEN_NAME), "chest/harvest_green");
+    public static RegObj<Item> PURPLE_CHEST = Def.item(() -> new LootChestItem(PURPLE_NAME), "chest/harvest_purple");
 
     public static void init() {
 
