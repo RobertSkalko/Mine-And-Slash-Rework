@@ -88,6 +88,9 @@ v5.0.2
 
 v5.0.3
 
+- New Mechanic: Harvest! Dungeons can sometimes spawn a portal leading to the harvest, where you will kill mobs that sometimes drop locked chests.
+Those chests can be opened with a key, but who knows how to open it?? 
+
  - New dungeon tileset by @Eclipse/@Serphentin: bastion!
  
  - new currency: orb of quality, increases base stat of gears by up to 20%

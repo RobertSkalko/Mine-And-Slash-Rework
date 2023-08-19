@@ -49,7 +49,16 @@ public class MapBlueprint extends ItemBlueprint {
 
         data.lvl = level.get();
 
-        data.mechs.add(ExileDB.LeagueMechanics().random().GUID());
+        int mechs = 0;
+
+        if (RandomUtils.roll(33)) {
+            mechs++;
+        }
+        // todo add more when more league mechanics are added!
+
+        for (int i = 0; i < mechs; i++) {
+            data.mechs.add(ExileDB.LeagueMechanics().random().GUID());
+        }
 
         genAffixes(data, rarity);
 

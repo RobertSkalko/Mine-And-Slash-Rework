@@ -4,6 +4,7 @@ import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.protocol.game.ClientboundSetActionBarTextPacket;
 import net.minecraft.network.protocol.game.ClientboundSetSubtitleTextPacket;
 import net.minecraft.network.protocol.game.ClientboundSetTitleTextPacket;
 import net.minecraft.server.level.ServerPlayer;
@@ -30,6 +31,11 @@ public class OnScreenMessageUtils {
 
     public static void title(ServerPlayer p, MutableComponent title) {
         p.connection.send(new ClientboundSetTitleTextPacket(title));
+
+    }
+
+    public static void actionBar(ServerPlayer p, MutableComponent title) {
+        p.connection.send(new ClientboundSetActionBarTextPacket(title));
 
     }
 
