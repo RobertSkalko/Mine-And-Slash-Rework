@@ -1,19 +1,25 @@
 package com.robertx22.age_of_exile.maps.generator;
 
 
+import com.google.common.base.Preconditions;
+import com.robertx22.age_of_exile.maps.DungeonRoom;
 import com.robertx22.age_of_exile.maps.MapData;
 import com.robertx22.age_of_exile.saveclasses.PointData;
+import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.ChunkPos;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class Dungeon {
+    public DungeonBuilder b;
 
-    public Dungeon(int size) {
+    public Dungeon(int size, DungeonBuilder b) {
         this(size, 20);
+        this.b = b;
     }
 
     public Dungeon(int size, int capacity) {
@@ -46,31 +52,6 @@ public class Dungeon {
     }
 
 
-    public void printDungeonAsSymbolsForDebug() {
-
-        String all = "";
-
-        for (int x = 0; x < capacity; x++) {
-
-            String line = "";
-
-            for (int z = 0; z < capacity; z++) {
-                if (getRoom(x, z) != null) {
-
-                    line += getRoom(x, z).data.type.id + ";";
-
-                } else {
-                    line += "empty;";
-                }
-            }
-
-            all += line + "\n";
-        }
-
-        System.out.println(all);
-
-    }
-
     public boolean isFinished() {
         return (started && unbuiltRooms.isEmpty());
     }
@@ -96,11 +77,19 @@ public class Dungeon {
 
     public BuiltRoom getRoom(int x, int z) {
 
-        if (x > capacity || z > capacity || x < 0 || z < 0) {
+        if (!isWithinBounds(x, z)) {
             return null;
         }
 
         return rooms[x][z];
+    }
+
+    public boolean isWithinBounds(int x, int z) {
+        if (x + 1 > capacity || z + 1 > capacity || x < 0 || z < 0) {
+            return false;
+        }
+
+        return true;
     }
 
     public int getMiddle() {
@@ -194,27 +183,107 @@ public class Dungeon {
 
 
     // todo i think this is the problem
-    private void addUnbuilts(int x, int z, BuiltRoom room) {
+    private void buildConnectedRooms(int x, int z, BuiltRoom room) {
 
 
         List<Direction> dirs = room.data.sides.getDoorSides();
-       
-        /*
-        dirs.add(Direction.SOUTH);
-        dirs.add(Direction.NORTH);
-        dirs.add(Direction.WEST);
-        dirs.add(Direction.EAST);
-         */
 
 
         dirs.forEach(dir -> {
             PointData coord = getCoordsOfRoomFacing(dir, x, z);
             if (getRoom(coord.x, coord.y) == null) {
-                if (room.data.sides.getSideOfDirection(dir) == RoomSide.DOOR) {
-                    this.unbuiltRooms.add(coord);
+                if (isWithinBounds(coord.x, coord.y)) {
+
+                    if (room.data.sides.getSideOfDirection(dir) == RoomSide.DOOR) {
+
+                        UnbuiltRoom unbuilt = getUnbuiltFor(coord.x, coord.y);
+
+                        Preconditions.checkNotNull(unbuilt);
+
+                        RoomRotation rot = randomDungeonRoom(unbuilt);
+
+                        Preconditions.checkNotNull(rot);
+
+                        DungeonRoom dRoom = rot.type.getRandomRoom(b.group, b);
+
+                        Preconditions.checkNotNull(dRoom);
+
+                        BuiltRoom theroom = new BuiltRoom(rot, dRoom);
+
+                        Preconditions.checkNotNull(theroom);
+
+                        addRoom(coord.x, coord.y, theroom);
+
+                    }
                 }
             }
         });
+    }
+
+    public RoomRotation randomDungeonRoom(UnbuiltRoom unbuilt) {
+
+        if (shouldStartFinishing()) {
+
+            var possible = tryEndRoom(unbuilt);
+            if (!possible.isEmpty()) {
+                return random(possible);
+            } else {
+                return randomRoom(unbuilt);
+            }
+        } else {
+            return randomRoom(unbuilt);
+        }
+    }
+
+    public List<RoomRotation> tryEndRoom(UnbuiltRoom unbuilt) {
+        List<RoomType> types = new ArrayList<>();
+
+        types.add(RoomType.END);
+        types.add(RoomType.CURVED_HALLWAY);
+        types.add(RoomType.STRAIGHT_HALLWAY);
+        types.add(RoomType.TRIPLE_HALLWAY);
+
+        for (RoomType type : types) {
+
+            var possible = type.getPossibleFor(unbuilt);
+
+            if (!possible.isEmpty()) {
+                return possible;
+            }
+        }
+
+        return Arrays.asList();
+
+    }
+
+
+    public RoomRotation randomRoom(UnbuiltRoom unbuilt) {
+        List<RoomType> types = new ArrayList<>();
+        types.add(RoomType.CURVED_HALLWAY);
+        types.add(RoomType.STRAIGHT_HALLWAY);
+        types.add(RoomType.FOUR_WAY);
+        types.add(RoomType.TRIPLE_HALLWAY);
+
+        List<RoomRotation> possible = new ArrayList<>();
+
+        types.forEach(x -> {
+            possible.addAll(x.getPossibleFor(unbuilt));
+        });
+
+        if (possible.isEmpty()) {
+            // we dont want to end things fast, but if there's nothing else that matches, add an end.
+            possible.addAll(RoomType.END.getPossibleFor(unbuilt));
+
+            if (possible.isEmpty()) {
+                throw new RuntimeException("No possible rooms at all for unbuilt room, this is horrible.");
+            }
+        }
+
+        return random(possible);
+    }
+
+    public RoomRotation random(List<RoomRotation> list) {
+        return RandomUtils.weightedRandom(list, b.rand.nextDouble());
     }
 
     public void addBarrier(int x, int z, BuiltRoom room) {
@@ -231,7 +300,7 @@ public class Dungeon {
             return;
         }
 
-        if (rooms[x][z] == null) {
+        if (getRoom(x, z) == null) {
             rooms[x][z] = room;
             amount++;
 
@@ -248,7 +317,7 @@ public class Dungeon {
             this.started = true;
 
             if (room.data.type != RoomType.END) {
-                addUnbuilts(x, z, room);
+                buildConnectedRooms(x, z, room);
             }
 
             unbuiltRooms.removeIf(cord -> {

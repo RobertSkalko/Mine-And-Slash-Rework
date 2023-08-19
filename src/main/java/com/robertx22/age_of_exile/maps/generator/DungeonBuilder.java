@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.maps.generator;
 
 
-import com.google.common.base.Preconditions;
 import com.robertx22.age_of_exile.maps.DungeonRoom;
 import com.robertx22.age_of_exile.maps.MapData;
 import com.robertx22.age_of_exile.maps.RoomGroup;
@@ -17,13 +16,16 @@ import java.util.stream.Collectors;
 public class DungeonBuilder {
 
 
-    public DungeonBuilder(long worldSeed, ChunkPos cpos) {
-
+    public static Random createRandom(long worldSeed, ChunkPos cpos) {
         int chunkX = MapData.getStartChunk(cpos.getMiddleBlockPosition(55)).x;
         int chunkZ = MapData.getStartChunk(cpos.getMiddleBlockPosition(55)).z;
-
         long newSeed = (worldSeed + (long) (chunkX * chunkX * 4987142) + (long) (chunkX * 5947611) + (long) (chunkZ * chunkZ) * 4392871L + (long) (chunkZ * 389711) ^ worldSeed);
-        rand = new Random(newSeed);
+        return new Random(newSeed);
+    }
+
+    public DungeonBuilder(long worldSeed, ChunkPos cpos) {
+
+        rand = createRandom(worldSeed, cpos);
 
         this.group = RandomUtils.weightedRandom(RoomGroup.getAll()
                 .stream()
@@ -50,7 +52,7 @@ public class DungeonBuilder {
 
 
     public void build() {
-        dungeon = new Dungeon(size);
+        dungeon = new Dungeon(size, this);
 
         setupEntrance();
 
@@ -69,6 +71,8 @@ public class DungeonBuilder {
                 break;
             }
 
+            // todo
+            /*
             dungeon.getUnbuiltCopy()
                     .forEach(x -> {
 
@@ -98,6 +102,8 @@ public class DungeonBuilder {
 
                     });
 
+
+             */
 
         }
 
