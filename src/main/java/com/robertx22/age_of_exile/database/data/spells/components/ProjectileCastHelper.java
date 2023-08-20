@@ -112,7 +112,8 @@ public class ProjectileCastHelper {
                 if (target != null) {
                     Vec3 vel = positionToVelocity(new MyPosition(en.position()), new MyPosition(target.getEyePosition()));
                     vel = vel.multiply(shootSpeed, shootSpeed, shootSpeed);
-                    en.setDeltaMovement(vel);
+                    //en.setDeltaMovement(vel);
+                    en.shoot(vel.x, vel.y, vel.z, 1, 0);
                     caster.level().addFreshEntity(en);
                     break;
                 }

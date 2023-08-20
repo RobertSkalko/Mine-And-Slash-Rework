@@ -138,15 +138,6 @@ public class MMORPG {
 
         LifeCycleEvents.register();
 
-        /*
-        ForgeEvents.registerForgeEvent(GatherDataEvent.class, x -> {
-            x.getGenerator().addProvider(true, new DataGenHook());
-            // todo this doesnt run the datagen hook
-        });
-
-         */
-
-
         FMLJavaModLoadingContext.get().getModEventBus().addListener(EventPriority.LOW, new Consumer<GatherDataEvent>() {
             @Override
             public void accept(GatherDataEvent x) {
