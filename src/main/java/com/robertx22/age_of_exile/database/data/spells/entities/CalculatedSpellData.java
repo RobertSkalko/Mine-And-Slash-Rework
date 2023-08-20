@@ -16,7 +16,6 @@ public class CalculatedSpellData {
 
     public String caster_uuid = "";
     public String spell_id = "";
-    public String totem_spell = "";
     public int lvl = 1;
 
     public CalculatedSpellData(SpellStatsCalculationEvent event) {

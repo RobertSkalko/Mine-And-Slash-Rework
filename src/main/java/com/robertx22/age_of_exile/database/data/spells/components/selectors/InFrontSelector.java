@@ -5,7 +5,7 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,18 +19,18 @@ public class InFrontSelector extends BaseTargetSelector {
     }
 
     @Override
-    public List<LivingEntity> get(SpellCtx ctx, LivingEntity caster, LivingEntity target, BlockPos pos, MapHolder data) {
+    public List<LivingEntity> get(SpellCtx ctx, LivingEntity caster, LivingEntity target, Vec3 pos, MapHolder data) {
         AllyOrEnemy predicate = data.getEntityPredicate();
         float distance = data.get(DISTANCE)
-            .floatValue();
+                .floatValue();
         float width = data.get(WIDTH)
-            .floatValue();
+                .floatValue();
 
         EntityFinder.Setup<LivingEntity> finder = EntityFinder.start(caster, LivingEntity.class, pos)
-            .finder(EntityFinder.SelectionType.IN_FRONT)
-            .searchFor(predicate)
-            .radius(Math.min(width, distance))
-            .distance(distance);
+                .finder(EntityFinder.SelectionType.IN_FRONT)
+                .searchFor(predicate)
+                .radius(Math.min(width, distance))
+                .distance(distance);
 
         return finder.build();
     }

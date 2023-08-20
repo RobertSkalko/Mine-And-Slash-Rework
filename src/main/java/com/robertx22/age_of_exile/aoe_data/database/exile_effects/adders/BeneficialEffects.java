@@ -65,7 +65,7 @@ public class BeneficialEffects implements ExileRegistryInit {
                 .spell(SpellBuilder.forEffect()
                         .onTick(PartBuilder.justAction(SpellAction.AGGRO.create(SpellCalcs.TAUNT, AggroAction.Type.AGGRO))
                                 .setTarget(TargetSelector.AOE.create(10D, EntityFinder.SelectionType.RADIUS, AllyOrEnemy.enemies))
-                                .onTick(60D))
+                                .tickRequirement(60D))
                         .buildForEffect())
                 .maxStacks(1)
                 .build();
@@ -105,9 +105,9 @@ public class BeneficialEffects implements ExileRegistryInit {
                 .spell(SpellBuilder.forEffect()
                         .onTick(PartBuilder.justAction(SpellAction.RESTORE_HEALTH.create(SpellCalcs.NATURE_BALM))
                                 .setTarget(TargetSelector.TARGET.create())
-                                .onTick(20D))
+                                .tickRequirement(20D))
                         .onTick(PartBuilder.aoeParticles(ParticleTypes.HEART, 5D, 1D)
-                                .onTick(20D))
+                                .tickRequirement(20D))
                         .buildForEffect())
                 .build();
 

@@ -39,10 +39,8 @@ public class SummonProjectileAction extends SpellAction {
         PositionSource posSource = data.getOrDefault(PositionSource.CASTER);
         ShootWay shootWay = data.getOrDefault(ShootWay.FROM_PLAYER_VIEW);
 
-        Vec3 pos = ctx.caster.position();
-        if (ctx.isCastedFromTotem || posSource == PositionSource.SOURCE_ENTITY) {
-            pos = ctx.sourceEntity.position();
-        }
+        Vec3 pos = ctx.getPos();
+
         boolean silent = data.getOrDefault(MapField.IS_SILENT, false);
 
         ProjectileCastHelper builder = new ProjectileCastHelper(ctx, pos, data, ctx.caster, projectile.get(), ctx.calculatedSpellData);

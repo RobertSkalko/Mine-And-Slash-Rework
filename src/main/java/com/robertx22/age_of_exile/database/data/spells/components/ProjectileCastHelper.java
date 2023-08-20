@@ -97,7 +97,7 @@ public class ProjectileCastHelper {
 
             en.setSilent(silent);
 
-            if (ctx.isCastedFromTotem) {
+            if (targetEnemy) {
 
                 BlockPos pos = en.blockPosition();
 
@@ -115,7 +115,6 @@ public class ProjectileCastHelper {
                     en.setDeltaMovement(vel);
                     caster.level().addFreshEntity(en);
                     break;
-                    // todo test this
                 }
 
 

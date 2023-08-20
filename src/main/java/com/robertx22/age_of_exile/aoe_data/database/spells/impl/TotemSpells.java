@@ -71,7 +71,7 @@ public class TotemSpells implements ExileRegistryInit {
                         "Summon a totem which restores " + SpellCalcs.TOTEM_MANA.getLocDmgTooltip() + " mana to allies around it."
                 )
                 .onTick("block", PartBuilder.restoreManaInRadius(SpellCalcs.TOTEM_MANA, RADIUS)
-                        .onTick(20D))
+                        .tickRequirement(20D))
                 .build();
 
         of(SlashBlocks.GREEN_TOTEM.get(), HEAL_TOTEM_ID, SpellConfiguration.Builder.instant(18, 20 * 30), "Rejuvenating Totem",
@@ -81,7 +81,7 @@ public class TotemSpells implements ExileRegistryInit {
                         "Summon a totem which restores " + SpellCalcs.TOTEM_HEAL.getLocDmgTooltip() + " health to allies around it."
                 )
                 .onTick("block", PartBuilder.healInAoe(SpellCalcs.TOTEM_HEAL, RADIUS)
-                        .onTick(20D))
+                        .tickRequirement(20D))
                 .build();
 
     }

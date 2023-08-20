@@ -179,9 +179,9 @@ public class HolySpells implements ExileRegistryInit {
                 .onCast(PartBuilder.playSound(SoundEvents.BEACON_ACTIVATE, 1D, 1.7D))
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.NETHER_STAR, 1D, 1D, SlashEntities.SIMPLE_PROJECTILE.get(), 20D, false)
                         .put(MapField.HITS_ALLIES, true)))
-                .onTick(PartBuilder.aoeParticles(ParticleTypes.CRIT, 3D, 0.5D).onTick(1D))
-                .onTick(PartBuilder.aoeParticles(ParticleTypes.SOUL_FIRE_FLAME, 5D, 0.5D).onTick(1D))
-                .onTick(PartBuilder.aoeParticles(ParticleTypes.ENCHANT, 1D, 0.7D).onTick(1D))
+                .onTick(PartBuilder.aoeParticles(ParticleTypes.CRIT, 3D, 0.5D).tickRequirement(1D))
+                .onTick(PartBuilder.aoeParticles(ParticleTypes.SOUL_FIRE_FLAME, 5D, 0.5D).tickRequirement(1D))
+                .onTick(PartBuilder.aoeParticles(ParticleTypes.ENCHANT, 1D, 0.7D).tickRequirement(1D))
                 .onExpire(PartBuilder.healInAoe(SpellCalcs.SHOOTING_STAR, 2D))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.SOUL_FIRE_FLAME, 10D, 1D))
                 .build();

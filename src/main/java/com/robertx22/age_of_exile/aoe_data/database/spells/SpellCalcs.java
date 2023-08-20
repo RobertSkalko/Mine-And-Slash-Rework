@@ -12,6 +12,15 @@ public class SpellCalcs {
 
     }
 
+    public static ValueCalculation CHAOS_TOTEM = ValueCalcBuilder.of("chaos_totem")
+            .spellScaling(0.5F, 0.1F)
+            .build();
+
+
+    public static ValueCalculation ARROW_TOTEM = ValueCalcBuilder.of("arrow_totem")
+            .spellScaling(0.2F, 0.5F)
+            .build();
+
     public static ValueCalculation BOSS_CLOSE_NOVA = ValueCalcBuilder.of("close_nova")
             .spellScaling(5, 5)
             .build();

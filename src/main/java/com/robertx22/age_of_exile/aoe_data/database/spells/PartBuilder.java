@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.aoe_data.database.spells;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
 import com.robertx22.age_of_exile.database.data.spells.components.ComponentPart;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
+import com.robertx22.age_of_exile.database.data.spells.components.actions.AggroAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.ExileEffectAction.GiveOrTake;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.vanity.ParticleInRadiusAction;
@@ -65,6 +66,12 @@ public class PartBuilder {
         return c;
     }
 
+    public static ComponentPart aoeSelectEnemies(Double radius, Double chance) {
+        ComponentPart c = new ComponentPart();
+        c.acts.add(SpellAction.AGGRO.create(SpellCalcs.CHAOS_TOTEM, AggroAction.Type.AGGRO)); // todo
+        c.targets.add(BaseTargetSelector.AOE.create(radius, EntityFinder.SelectionType.RADIUS, AllyOrEnemy.enemies).put(MapField.SELECTION_CHANCE, chance));
+        return c;
+    }
 
     public static ComponentPart damageInAoe(ValueCalculation calc, Elements ele, Double radius) {
         ComponentPart c = new ComponentPart();
@@ -287,7 +294,7 @@ public class PartBuilder {
         return c;
     }
 
- 
+
     public static ComponentPart swordSweepParticles() {
         ComponentPart c = new ComponentPart();
         c.acts.add(SpellAction.SWORD_SWEEP_PARTICLES.create());

@@ -40,7 +40,7 @@ public class ComponentPart {
         return this;
     }
 
-    public ComponentPart onTick(Double ticks) {
+    public ComponentPart tickRequirement(Double ticks) {
         ifs.add(EffectCondition.EVERY_X_TICKS.create(ticks));
         return this;
     }
@@ -94,7 +94,7 @@ public class ComponentPart {
 
         for (MapHolder part : targets) {
             BaseTargetSelector selector = BaseTargetSelector.MAP.get(part.type);
-            List<LivingEntity> selected = selector.get(ctx, ctx.caster, ctx.target, ctx.getBlockPos(), part);
+            List<LivingEntity> selected = selector.get(ctx, ctx.caster, ctx.target, ctx.getPos(), part);
 
             for (MapHolder entityPredicate : en_preds) {
                 SpellEntityPredicate pred = SpellEntityPredicate.MAP.get(entityPredicate.type);

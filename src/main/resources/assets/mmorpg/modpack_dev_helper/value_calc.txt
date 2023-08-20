@@ -24,9 +24,11 @@ ranger_trap
 execute
 poison_cloud
 gong_strike
+chaos_totem
 curse
 tidal_strike
 totem_mana
+arrow_totem
 poisonball
 despair
 petrify

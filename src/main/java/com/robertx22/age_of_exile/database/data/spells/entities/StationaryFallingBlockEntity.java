@@ -2,10 +2,8 @@ package com.robertx22.age_of_exile.database.data.spells.entities;
 
 import com.google.gson.Gson;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
-import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
-import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mixin_ducks.FallingBlockAccessor;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
@@ -119,20 +117,12 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
 
         try {
 
-            if (!getSpellData().totem_spell.isEmpty()) {
-                // todo give totems cast speed maybe
-                if (tickCount % 20 == 0) {
-                    Spell spell = ExileDB.Spells().get(getSpellData().totem_spell);
-                    spell.getAttached().onCast(SpellCtx.onTotemCastSpell(spellData.getCaster(level()), this, this.getSpellData()));
 
-                }
-            } else {
-                this.getSpellData()
-                        .getSpell()
-                        .getAttached()
-                        .tryActivate(getScoreboardName(), SpellCtx.onTick(getSpellData().getCaster(level()), this, getSpellData()));
-            }
-
+            this.getSpellData()
+                    .getSpell()
+                    .getAttached()
+                    .tryActivate(getScoreboardName(), SpellCtx.onTick(getSpellData().getCaster(level()), this, getSpellData()));
+            
 
         } catch (Exception e) {
             e.printStackTrace();

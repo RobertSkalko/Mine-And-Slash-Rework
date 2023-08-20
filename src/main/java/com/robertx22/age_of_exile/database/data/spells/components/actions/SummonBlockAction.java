@@ -6,7 +6,6 @@ import com.robertx22.age_of_exile.database.data.spells.entities.StationaryFallin
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellUtils;
-import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
@@ -39,6 +38,8 @@ public class SummonBlockAction extends SpellAction {
 
         //HitResult ray = ctx.caster.rayTrace(5D, 0.0F, false);
         BlockPos pos = ctx.getBlockPos();
+
+        pos = new BlockPos(pos.getX(), pos.getY() + data.getOrDefault(MapField.HEIGHT, 0D).intValue(), pos.getZ());
 
         boolean found = true;
 
@@ -78,11 +79,6 @@ public class SummonBlockAction extends SpellAction {
             be.getEntityData()
                     .set(StationaryFallingBlockEntity.IS_FALLING, data.getOrDefault(MapField.IS_BLOCK_FALLING, false));
             SpellUtils.initSpellEntity(be, ctx.caster, ctx.calculatedSpellData, data);
-
-            String spell = data.get(MapField.TOTEM_SPELL);
-            if (ExileDB.Spells().isRegistered(spell)) {
-                be.getSpellData().totem_spell = spell;
-            }
 
             ctx.world.addFreshEntity(be);
         }

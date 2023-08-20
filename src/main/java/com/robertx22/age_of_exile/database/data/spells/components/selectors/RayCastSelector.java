@@ -5,7 +5,7 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LookUtils;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,10 +19,10 @@ public class RayCastSelector extends BaseTargetSelector {
     }
 
     @Override
-    public List<LivingEntity> get(SpellCtx ctx, LivingEntity caster, LivingEntity target, BlockPos pos, MapHolder data) {
+    public List<LivingEntity> get(SpellCtx ctx, LivingEntity caster, LivingEntity target, Vec3 pos, MapHolder data) {
         AllyOrEnemy predicate = data.getEntityPredicate();
         float distance = data.get(DISTANCE)
-            .floatValue();
+                .floatValue();
 
         List<LivingEntity> list = LookUtils.getLivingEntityLookedAt(caster, distance, false);
         list = predicate.getMatchingEntities(list, caster);

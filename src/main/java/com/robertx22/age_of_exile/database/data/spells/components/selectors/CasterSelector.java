@@ -3,7 +3,7 @@ package com.robertx22.age_of_exile.database.data.spells.components.selectors;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +15,7 @@ public class CasterSelector extends BaseTargetSelector {
     }
 
     @Override
-    public List<LivingEntity> get(SpellCtx ctx, LivingEntity caster, LivingEntity target, BlockPos pos, MapHolder data) {
+    public List<LivingEntity> get(SpellCtx ctx, LivingEntity caster, LivingEntity target, Vec3 pos, MapHolder data) {
         return Arrays.asList(caster);
     }
 

@@ -6,9 +6,7 @@ import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
 import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
-import com.robertx22.age_of_exile.database.data.spells.components.actions.AggroAction;
-import com.robertx22.age_of_exile.database.data.spells.components.actions.ExileEffectAction;
-import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
+import com.robertx22.age_of_exile.database.data.spells.components.actions.*;
 import com.robertx22.age_of_exile.database.data.spells.components.conditions.EffectCondition;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
@@ -55,7 +53,37 @@ public class RangerSpells implements ExileRegistryInit {
 
     public void registerAll() {
 
-        SpellBuilder.of("boomerang", PlayStyle.DEX, SpellConfiguration.Builder.instant(15, 20 * 5)
+        SpellBuilder.of("arrow_totem", PlayStyle.DEX, SpellConfiguration.Builder.instant(25, 10)
+                                .setChargesAndRegen("arrow_totem", 3, 20 * 30)
+                                .applyCastSpeedToCooldown(), "Arrow Totem",
+                        Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.totem))
+
+                .manualDesc("Summons a totem that rapidly shoots arrows dealing " + SpellCalcs.ARROW_TOTEM.getLocDmgTooltip(Elements.Physical))
+
+                .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 0D)))
+                .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(SlashBlocks.PROJECTILE_TOTEM.get(), 20D * 7.5D)
+                        .put(MapField.ENTITY_NAME, "block")
+                        .put(MapField.BLOCK_FALL_SPEED, 0D)
+                        .put(MapField.FIND_NEAREST_SURFACE, false)
+                        .put(MapField.IS_BLOCK_FALLING, false)))
+
+                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.CRIT, 100D, 3D, 0.5D).tickRequirement(2D))
+
+                .onTick("block", PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.AIR,
+                                1D, 2.5D, SlashEntities.SIMPLE_ARROW.get(), 40D, false)
+                        .put(MapField.ENTITY_NAME, "arrow")
+                        .put(MapField.POS_SOURCE, PositionSource.SOURCE_ENTITY.name())
+                        .put(MapField.SHOOT_DIRECTION, SummonProjectileAction.ShootWay.FIND_ENEMY.name())
+                ).tickRequirement(5D))
+                .onTick("block", PartBuilder.playSound(SoundEvents.ARROW_SHOOT, 1D, 1D).tickRequirement(5D))
+
+                .onExpire("arrow", PartBuilder.damageInAoe(SpellCalcs.ARROW_TOTEM, Elements.Physical, 1.5D))
+
+                .build();
+
+
+        SpellBuilder.of("boomerang", PlayStyle.DEX, SpellConfiguration.Builder.instant(10, 20 * 5)
                                 .setChargesAndRegen("boomerang", 3, 20 * 10)
                                 .applyCastSpeedToCooldown(), "Boomerang",
                         Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.chaining))
@@ -243,7 +271,7 @@ public class RangerSpells implements ExileRegistryInit {
                         .addCondition(EffectCondition.IS_ENTITY_IN_RADIUS.enemiesInRadius(1D))
                         .addActions(SpellAction.EXPIRE.create())
                         .addActions(SpellAction.SPECIFIC_ACTION.create("expire"))
-                        .onTick(2D))
+                        .tickRequirement(2D))
 
                 .addSpecificAction("expire", PartBuilder.damageInAoe(dmg, element, 3D))
                 .addSpecificAction("expire", PartBuilder.aoeParticles(particle, 30D, 3D))

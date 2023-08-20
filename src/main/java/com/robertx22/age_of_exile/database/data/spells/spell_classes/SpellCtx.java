@@ -25,8 +25,6 @@ public class SpellCtx {
 
     public CalculatedSpellData calculatedSpellData;
 
-    public boolean isCastedFromTotem = false;
-
 
     public SpellCtx setSourceEntity(Entity en) {
         this.sourceEntity = en;
@@ -77,16 +75,6 @@ public class SpellCtx {
 
         Load.Unit(caster).onSpellHitTarget(sourceEntity, target);
         return new SpellCtx(EntityActivation.ON_HIT, sourceEntity, caster, target, data).setPositionSource(PositionSource.TARGET);
-    }
-
-    public static SpellCtx onTotemCastSpell(LivingEntity caster, Entity sourceEntity, CalculatedSpellData data) {
-        Objects.requireNonNull(caster);
-        Objects.requireNonNull(sourceEntity);
-        Objects.requireNonNull(data);
-
-        var c = new SpellCtx(EntityActivation.ON_CAST, sourceEntity, caster, caster, data);
-        c.isCastedFromTotem = true;
-        return c;
     }
 
     public static SpellCtx onEntityHit(SpellCtx ctx, LivingEntity target) {

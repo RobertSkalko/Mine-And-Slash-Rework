@@ -20,6 +20,7 @@ import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.Arrays;
 
@@ -33,6 +34,39 @@ public class NatureSpells implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
+
+        SpellBuilder.of("chaos_totem", PlayStyle.INT, SpellConfiguration.Builder.instant(40, 20 * 60), "Chaos Totem",
+                        Arrays.asList(SpellTag.area, SpellTag.damage, SpellTag.totem))
+
+                .manualDesc("Summons a totem creates meteors dealing " + SpellCalcs.CHAOS_TOTEM.getLocDmgTooltip(Elements.Chaos))
+
+                .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 0D)))
+                .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(SlashBlocks.PROJECTILE_TOTEM.get(), 20D * 7.5D)
+                        .put(MapField.ENTITY_NAME, "totem")
+                        .put(MapField.BLOCK_FALL_SPEED, 0D)
+                        .put(MapField.FIND_NEAREST_SURFACE, false)
+                        .put(MapField.IS_BLOCK_FALLING, false)))
+
+
+                .onTick("totem", PartBuilder.groundEdgeParticles(ParticleTypes.WITCH, 100D, 3D, 0.5D).tickRequirement(2D))
+
+                .onTick("totem", PartBuilder.aoeSelectEnemies(10D, 50D).tickRequirement(20D)
+                        .addPerEntityHit(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(Blocks.PURPLE_GLAZED_TERRACOTTA, 200D)
+                                .put(MapField.ENTITY_NAME, "meteor")
+                                .put(MapField.BLOCK_FALL_SPEED, -0.03D)
+                                .put(MapField.HEIGHT, 5D)
+                                .put(MapField.FIND_NEAREST_SURFACE, false)
+                                .put(MapField.IS_BLOCK_FALLING, true))))
+
+                .onTick("meteor", PartBuilder.particleOnTick(1D, ParticleTypes.WITCH, 20D, 0.5D))
+                .onExpire("meteor", PartBuilder.damageInAoe(SpellCalcs.CHAOS_TOTEM, Elements.Chaos, 2D))
+
+                .onExpire("meteor", PartBuilder.aoeParticles(ParticleTypes.WITCH, 100D, 2D))
+                .onExpire("meteor", PartBuilder.aoeParticles(ParticleTypes.EXPLOSION, 15D, 3D))
+                .onExpire("meteor", PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
+
+                .build();
 
         SpellBuilder.of(THORN_BUSH, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 20 * 6)
                                 .setSwingArm(), "Thorn Bush",
@@ -52,8 +86,8 @@ public class NatureSpells implements ExileRegistryInit {
 
                 .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.SNEEZE, 40D, 3D, 1D))
                 .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.ITEM_SLIME, 40D, 3D, 1D))
-                .onTick("block", PartBuilder.damageInAoe(SpellCalcs.THORN_BUSH, Elements.Chaos, 3D).onTick(20D))
-                .onTick("block", PartBuilder.playSound(SoundEvents.GRASS_BREAK, 1D, 1D).onTick(20D))
+                .onTick("block", PartBuilder.damageInAoe(SpellCalcs.THORN_BUSH, Elements.Chaos, 3D).tickRequirement(20D))
+                .onTick("block", PartBuilder.playSound(SoundEvents.GRASS_BREAK, 1D, 1D).tickRequirement(20D))
                 .build();
 
         SpellBuilder.of(POISON_CLOUD, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 45), "Poison Cloud",
@@ -65,6 +99,7 @@ public class NatureSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.playSound(SoundEvents.PLAYER_SPLASH_HIGH_SPEED, 0.5D, 1D))
                 .onCast(PartBuilder.groundParticles(ParticleTypes.SNEEZE, 300D, 5D, 0.2D))
                 .onCast(PartBuilder.groundParticles(ParticleTypes.COMPOSTER, 200D, 5D, 0.2D))
+
                 .onCast(PartBuilder.damageInAoe(SpellCalcs.POISON_CLOUD, Elements.Chaos, 5D)
                         .addPerEntityHit(PartBuilder.playSoundPerTarget(SoundEvents.GENERIC_HURT, 1D, 1D)))
                 .build();

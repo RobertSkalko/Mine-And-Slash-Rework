@@ -41,7 +41,7 @@ public class WaterSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        
+
         SpellBuilder.of("frozen_orb", PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 30)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Frozen orb",
@@ -60,9 +60,9 @@ public class WaterSpells implements ExileRegistryInit {
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.ITEM_SNOWBALL, 2D, 0.15D))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.SNOWFLAKE, 7D, 0.15D))
 
-                .onTick(PartBuilder.damageInAoe(SpellCalcs.ICEBALL, Elements.Cold, 3D).onTick(20D))
-                .onTick(PartBuilder.aoeParticles(ParticleTypes.ITEM_SNOWBALL, 5D, 3D).onTick(20D))
-                .onTick(PartBuilder.aoeParticles(ParticleTypes.SNOWFLAKE, 15D, 3D).onTick(20D))
+                .onTick(PartBuilder.damageInAoe(SpellCalcs.ICEBALL, Elements.Cold, 3D).tickRequirement(20D))
+                .onTick(PartBuilder.aoeParticles(ParticleTypes.ITEM_SNOWBALL, 5D, 3D).tickRequirement(20D))
+                .onTick(PartBuilder.aoeParticles(ParticleTypes.SNOWFLAKE, 15D, 3D).tickRequirement(20D))
 
                 .build();
 
@@ -83,9 +83,9 @@ public class WaterSpells implements ExileRegistryInit {
 
                 .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.RAIN, 20D, 1.5D, 0.2D))
                 .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.SNOWFLAKE, 5D, 1.5D, 0.2D))
-                .onTick("block", PartBuilder.playSound(SoundEvents.PLAYER_HURT_FREEZE, 1D, 1D).onTick(20D))
+                .onTick("block", PartBuilder.playSound(SoundEvents.PLAYER_HURT_FREEZE, 1D, 1D).tickRequirement(20D))
 
-                .onTick("block", PartBuilder.damageInAoe(SpellCalcs.TIDAL_STRIKE, Elements.Cold, 6D).onTick(20D)
+                .onTick("block", PartBuilder.damageInAoe(SpellCalcs.TIDAL_STRIKE, Elements.Cold, 6D).tickRequirement(20D)
                         .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.RAIN, 75D, 1D, 0.1D))
                         .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.SPLASH, 50D, 1D, 0.1D))
                         .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.SNOWFLAKE, 100D, 1D, 0.1D))
@@ -140,9 +140,9 @@ public class WaterSpells implements ExileRegistryInit {
                 .onTick("block", PartBuilder.groundParticles(ParticleTypes.CLOUD, 5D, 3D, 0.2D))
                 .onTick("block", PartBuilder.groundParticles(ParticleTypes.SNOWFLAKE, 30D, 3D, 0.2D))
                 .onTick("block", PartBuilder.playSound(SoundEvents.HORSE_BREATHE, 1.1D, 1.5D)
-                        .onTick(20D))
+                        .tickRequirement(20D))
                 .onTick("block", PartBuilder.damageInAoe(SpellCalcs.CHILLING_FIELD, Elements.Cold, 3D)
-                        .onTick(20D))
+                        .tickRequirement(20D))
                 .build();
 
 

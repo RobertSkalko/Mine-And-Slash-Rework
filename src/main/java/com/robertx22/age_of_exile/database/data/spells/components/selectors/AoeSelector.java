@@ -6,8 +6,8 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.library_of_exile.utils.RandomUtils;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,15 +22,16 @@ public class AoeSelector extends BaseTargetSelector {
     }
 
     @Override
-    public List<LivingEntity> get(SpellCtx ctx, LivingEntity caster, LivingEntity target, BlockPos pos, MapHolder data) {
+    public List<LivingEntity> get(SpellCtx ctx, LivingEntity caster, LivingEntity target, Vec3 pos, MapHolder data) {
         AllyOrEnemy predicate = data.getEntityPredicate();
         Double radius = data.get(RADIUS);
 
+    
         radius *= ctx.calculatedSpellData.data.getNumber(EventData.AREA_MULTI, 1).number;
 
         Double chance = data.getOrDefault(SELECTION_CHANCE, 100D);
 
-     
+
         EntityFinder.Setup<LivingEntity> finder = EntityFinder.start(caster, LivingEntity.class, pos)
                 .finder(EntityFinder.SelectionType.RADIUS)
                 .searchFor(predicate)

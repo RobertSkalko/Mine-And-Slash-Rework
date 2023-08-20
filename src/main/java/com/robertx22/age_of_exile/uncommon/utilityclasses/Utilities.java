@@ -45,13 +45,15 @@ public final class Utilities {
 
     public static void spawnParticlesForTesting(AABB aabb, Level world) {
         if (!world.isClientSide) {
-            for (double x = aabb.minX; x < aabb.maxX; x += 0.3F) {
-                for (double y = aabb.minY; y < aabb.maxY; y += 1F) {
-                    for (double z = aabb.minZ; z < aabb.maxZ; z += 0.3F) {
+            if (aabb.getSize() < 10) {
+                for (double x = aabb.minX; x < aabb.maxX; x += 0.3F) {
+                    for (double y = aabb.minY; y < aabb.maxY; y += 1F) {
+                        for (double z = aabb.minZ; z < aabb.maxZ; z += 0.3F) {
 
-                        for (int i = 0; i < 1; i++) {
-                            ((ServerLevel) world).sendParticles(
-                                    ParticleTypes.HAPPY_VILLAGER, x, y, z, 0, 0.0D, 0.0D, 0.0D, 0F);
+                            for (int i = 0; i < 1; i++) {
+                                ((ServerLevel) world).sendParticles(
+                                        ParticleTypes.HAPPY_VILLAGER, x, y, z, 0, 0.0D, 0.0D, 0.0D, 0F);
+                            }
                         }
                     }
                 }

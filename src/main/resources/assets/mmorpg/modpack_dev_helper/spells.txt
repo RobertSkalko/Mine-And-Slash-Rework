@@ -30,8 +30,10 @@ astral_totem
 draconic_blood
 smoke_bomb
 gong_strike
+chaos_totem
 tidal_strike
 song_of_vigor
+arrow_totem
 dash
 summon_fire_golem
 summon_lightning_golem

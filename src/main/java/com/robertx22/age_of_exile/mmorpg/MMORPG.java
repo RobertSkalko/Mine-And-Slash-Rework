@@ -69,11 +69,9 @@ public class MMORPG {
             PROTOCOL_VERSION::equals
     );
 
-
     public MMORPG() {
 
         Watch watch = new Watch();
-
 
         ModLoadingContext.get()
                 .registerConfig(ModConfig.Type.SERVER, ServerContainer.spec);

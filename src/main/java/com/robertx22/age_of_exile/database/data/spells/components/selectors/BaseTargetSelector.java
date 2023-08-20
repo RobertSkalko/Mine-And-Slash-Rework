@@ -6,7 +6,7 @@ import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.library_of_exile.registry.IGUID;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +17,7 @@ public abstract class BaseTargetSelector extends BaseFieldNeeder implements IGUI
         super(requiredPieces);
     }
 
-    public abstract List<LivingEntity> get(SpellCtx ctx, LivingEntity caster, LivingEntity target, BlockPos pos, MapHolder data);
+    public abstract List<LivingEntity> get(SpellCtx ctx, LivingEntity caster, LivingEntity target, Vec3 pos, MapHolder data);
 
     public static HashMap<String, BaseTargetSelector> MAP = new HashMap<>();
 
