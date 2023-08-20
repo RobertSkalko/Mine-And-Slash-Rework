@@ -34,7 +34,7 @@ public class DatapackStatBuilder<T> {
     private Function<T, StatCondition> conditionMaker;
     private Consumer<DatapackStat> modifyAfterDone;
 
-    public boolean multiDmg = false;
+    public boolean usesMoreMulti = false;
     private List<StatCondition> conditions = new ArrayList<>();
     private List<StatEffect> effects = new ArrayList<>();
 
@@ -115,8 +115,8 @@ public class DatapackStatBuilder<T> {
         return this;
     }
 
-    public DatapackStatBuilder<T> setMultipliesDamage() {
-        this.multiDmg = true;
+    public DatapackStatBuilder<T> setUsesMoreMultiplier() {
+        this.usesMoreMulti = true;
         return this;
     }
 
@@ -162,8 +162,8 @@ public class DatapackStatBuilder<T> {
                     stat.locdesc = locDescMaker.apply(x.getKey());
                     stat.locname = locNameMaker.apply(x.getKey());
 
-                    if (multiDmg) {
-                        stat.setMultipliesDamage();
+                    if (usesMoreMulti) {
+                        stat.setUsesMoreMultiplier();
                     }
                     if (modify.containsKey(x.getKey())) {
                         modify.get(x.getKey())

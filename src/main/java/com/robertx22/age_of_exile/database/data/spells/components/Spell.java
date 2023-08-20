@@ -167,7 +167,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
 
         attached.onCast(SpellCtx.onCast(caster, ctx.calcData));
-        
+
 
     }
 
@@ -283,7 +283,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         int currentlvl = getLevelOf(info.player);
         int maxlvl = getMaxLevel();
 
-        list.add(Component.literal("Level: " + currentlvl + "/" + maxlvl).withStyle(ChatFormatting.YELLOW));
+        list.add(Component.literal("Power: " + currentlvl + "/" + maxlvl).withStyle(ChatFormatting.YELLOW));
 
         TooltipUtils.removeDoubleBlankLines(list);
 
@@ -293,9 +293,9 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
     public int getLevelOf(LivingEntity en) {
         if (en instanceof Player p) {
-            var gem = Load.playerRPGData(p).getSkillGemInventory().getSpellGem(ExileDB.Spells().get(this.GUID()));
+            var gem = Load.playerRPGData(p).getSkillGemInventory().getSpellGem(this);
             if (gem != null && gem.getSkillData() != null) {
-                return (int) (gem.getSkillData().perc / 10F); // todo make sure this works
+                return (int) (gem.getSkillData().perc); // todo make sure this works
             }
         }
         return 1;
@@ -356,12 +356,12 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
     @Override
     public int getMaxLevel() {
-        return 6;
+        return 100;
     }
 
     @Override
     public int getMaxLevelWithBonuses() {
-        return getMaxLevel() + 4;
+        return getMaxLevel();
     }
 
     @Override

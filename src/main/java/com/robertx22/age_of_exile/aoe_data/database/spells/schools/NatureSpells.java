@@ -34,7 +34,7 @@ public class NatureSpells implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
-
+   
         SpellBuilder.of("chaos_totem", PlayStyle.INT, SpellConfiguration.Builder.instant(40, 20 * 60), "Chaos Totem",
                         Arrays.asList(SpellTag.area, SpellTag.damage, SpellTag.totem))
 

@@ -146,7 +146,9 @@ public class WaterSpells implements ExileRegistryInit {
                 .build();
 
 
-        SpellBuilder.of(HEART_OF_ICE, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 30), "Heart of Ice",
+        SpellBuilder.of(HEART_OF_ICE, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 10)
+                                .setChargesAndRegen(HEART_OF_ICE, 3, 20 * 30)
+                        , "Heart of Ice",
                         Arrays.asList(SpellTag.heal))
                 .manualDesc(
                         "Heal allies around you for " + SpellCalcs.HEART_OF_ICE.getLocDmgTooltip() +

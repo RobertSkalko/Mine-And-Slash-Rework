@@ -35,11 +35,14 @@ public class StatConditions implements ExileRegistryInit {
     public static StatCondition IS_NOT_IN_COMBAT = new IsInCombatCondition().flipCondition();
     public static StatCondition IS_BASIC_ATTACK = new IsBooleanTrueCondition(EventData.IS_BASIC_ATTACK);
     public static StatCondition IS_TARGET_LOW_HP = new IsHealthBellowPercentCondition("is_target_low_hp", 30, EffectSides.Target);
+    public static StatCondition IS_TARGET_LOW_MAGIC_SHIELD = new IsMSBellowPercentCondition("is_target_low_magic_shield", 30, EffectSides.Target);
+    public static StatCondition IS_TARGET_LOW = new IsTargetLow("is_target_low", 30, EffectSides.Target);
     public static StatCondition IS_SOURCE_LOW_HP = new IsHealthBellowPercentCondition("is_source_low_hp", 30, EffectSides.Source);
     public static StatCondition IS_TARGET_NEAR_FULL_HP = new IsHealthAbovePercentCondition("is_target_near_full_hp", 70, EffectSides.Target);
     public static StatCondition IS_ELEMENTAL = new StringMatchesCondition(EventData.ELEMENT, Elements.Physical.name()).flipCondition();
     public static StatCondition IS_NON_MAGIC_STYLE = new StringMatchesCondition(EventData.STYLE, PlayStyle.INT.id).flipCondition();
     public static StatCondition IS_NOT_SUMMON_ATTACK = new IsBooleanTrueCondition(EventData.IS_SUMMON_ATTACK).flipCondition();
+
 
     public static DataHolder<EffectTags, StatCondition> EFFECT_HAS_TAG = new DataHolder<>(
             EffectTags.values()
@@ -89,6 +92,7 @@ public class StatConditions implements ExileRegistryInit {
                     new WeaponTypeMatches(WeaponTypes.bow).GUID()
             ));
 
+
     public static StatCondition IS_ANY_PROJECTILE = new EitherIsTrueCondition("is_projectile",
             Arrays.asList(
                     SPELL_HAS_TAG.get(SpellTag.projectile)
@@ -118,6 +122,8 @@ public class StatConditions implements ExileRegistryInit {
     public void registerAll() {
 
         ATTACK_TYPE_MATCHES.addToSerializables();
+        IS_TARGET_LOW.addToSerializables();
+        IS_TARGET_LOW_MAGIC_SHIELD.addToSerializables();
         IS_NOT_SUMMON_ATTACK.addToSerializables();
         IS_TARGET_CURSED.addToSerializables();
         IS_SUMMON_TYPE.addToSerializables();

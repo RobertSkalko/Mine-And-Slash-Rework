@@ -69,7 +69,7 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     private MultiUseType multiUseType = MultiUseType.MULTIPLY_STAT;
 
 
-    public void setMultipliesDamage() {
+    public void setUsesMoreMultiplier() {
         this.multiUseType = MultiUseType.MULTIPLICATIVE_DAMAGE;
     }
 

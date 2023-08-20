@@ -89,7 +89,7 @@ v5.0.2
 v5.0.3
 
 - New Mechanic: Harvest! Dungeons can sometimes spawn a portal leading to the harvest, where you will kill mobs that sometimes drop locked chests.
-Those chests can be opened with a key, but who knows how to get it?? 
+Those chests can be opened with a key, but how do you actually get the key? Maybe these weird seeds have something to do with it..
 
  - New dungeon tileset by @Eclipse/@Serphentin: bastion!
  
@@ -108,3 +108,6 @@ Those chests can be opened with a key, but who knows how to get it??
  - new spell: chaos totem
  
  - spells should now hit more consistently (used an int in aoe selector instead of float)
+ 
+ - new support gems: increased healing, totem damage, minor cooldown, primed totems, immediate care
+ 

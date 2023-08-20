@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.ResourceAndAttack;
 import com.robertx22.age_of_exile.database.data.StatMod;
+import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentProcStat;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AllAilmentDamage;
@@ -22,6 +23,26 @@ public class SupportGems {
 
     public static void init() {
 
+        new SupportGem("small_cdr", "Minor Cooldown", PlayStyle.INT, 1.3F,
+                Arrays.asList(new StatMod(5, 15, Stats.COOLDOWN_REDUCTION.get(), ModType.FLAT)
+                )).registerToExileRegistry();
+
+        new SupportGem("inc_heal", "Increased Healing", PlayStyle.STR, 1.3F,
+                Arrays.asList(new StatMod(20, 40, Stats.HEAL_STRENGTH.get(), ModType.MORE)
+                )).registerToExileRegistry();
+
+        new SupportGem("heal_at_low", "Immediate Care", PlayStyle.STR, 1.3F,
+                Arrays.asList(new StatMod(25, 50, Stats.LOW_HP_HEALING.get(), ModType.MORE)
+                )).registerToExileRegistry();
+
+        new SupportGem("totem_dmg_cdr", "Primed Totems", PlayStyle.STR, 1.3F,
+                Arrays.asList(new StatMod(5, 10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.totem), ModType.MORE),
+                        new StatMod(10, 20, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTag.totem), ModType.FLAT)
+                )).registerToExileRegistry();
+
+        new SupportGem("totem_damage", "Totem Damage", PlayStyle.STR, 1.3F,
+                Arrays.asList(new StatMod(15, 30, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.totem), ModType.MORE)
+                )).registerToExileRegistry();
 
         for (ResourceType res : ResourceType.getUsed()) {
             new SupportGem(res.id + "_on_hit", res.locname + " On Hit", PlayStyle.DEX, 1.2F,
@@ -146,7 +167,7 @@ public class SupportGems {
                 Arrays.asList(new StatMod(15, 100, Stats.CRIT_DAMAGE.get(), ModType.FLAT)
                 )).registerToExileRegistry();
 
-        new SupportGem("mana_saver_dmg", "Mana Conservation", PlayStyle.STR, 0.75F,
+        new SupportGem("mana_saver_dmg", "Mana Conservation", PlayStyle.STR, 0.8F,
                 Arrays.asList(new StatMod(10, 25, Stats.NON_CRIT_DAMAGE.get(), ModType.MORE)
                 )).registerToExileRegistry();
 
