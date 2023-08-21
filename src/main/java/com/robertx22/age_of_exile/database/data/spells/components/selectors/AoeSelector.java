@@ -6,7 +6,9 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.library_of_exile.utils.RandomUtils;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.Arrays;
@@ -26,7 +28,7 @@ public class AoeSelector extends BaseTargetSelector {
         AllyOrEnemy predicate = data.getEntityPredicate();
         Double radius = data.get(RADIUS);
 
-    
+
         radius *= ctx.calculatedSpellData.data.getNumber(EventData.AREA_MULTI, 1).number;
 
         Double chance = data.getOrDefault(SELECTION_CHANCE, 100D);
@@ -41,12 +43,23 @@ public class AoeSelector extends BaseTargetSelector {
         if (chance < 100) {
             return finder.build()
                     .stream()
-                    .filter(x -> RandomUtils.roll(chance))
+                    .filter(x -> canHit(ctx.getPos(), x) && RandomUtils.roll(chance))
                     .collect(Collectors.toList());
         } else {
-            return finder.build();
+            var list = finder.build();
+            list.removeIf(x -> !canHit(ctx.getPos(), x));
+            return list;
         }
 
+    }
+
+    public static boolean canHit(Vec3 pos, Entity en) {
+        for (int i = -1; i < 2; i++) {
+            if (Explosion.getSeenPercent(pos.add(0, i, 0), en) >= 0.4) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public MapHolder enemiesInRadius(Double radius) {
