@@ -13,6 +13,9 @@ public enum Words implements IAutoLocName {
     UpgradeQuality("Upgrade Quality"),
     DowngradeAffix("Downgrades an affix"),
     DeletesAllAffixes("Deletes all affixes"),
+    RerollsStatNumbers("Re-rolls stat numbers"),
+    DestroysItem("DESTROYS the Item"),
+    UpgradesUniqueStats("Adds 10% to unique stats"),
 
     DestroyProtect("Destruction Guard"),
     WipeUpgradeProtect("Upgrade Guard"),

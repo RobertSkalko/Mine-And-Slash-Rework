@@ -35,6 +35,7 @@ threat_gen_type_is_spell
 restore_type_is_potion
 effect_has_tag_heal_over_time
 spell_has_tag_damage
+is_target_low
 random_roll
 effect_has_tag_song
 spell_has_tag_trap
@@ -42,6 +43,7 @@ is_crit_true_is_false
 spell_has_tag_projectile
 is_spell
 is_undead
+is_target_low_magic_shield
 threat_gen_type_is_deal_dmg
 is_attack_or_spell_attack
 is_bow_wep_type

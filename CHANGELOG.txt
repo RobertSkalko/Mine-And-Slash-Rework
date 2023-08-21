@@ -111,3 +111,4 @@ Those chests can be opened with a key, but how do you actually get the key? Mayb
  
  - new support gems: increased healing, totem damage, minor cooldown, primed totems, immediate care
  
+ - new currency items

@@ -1,0 +1,6 @@
+{
+  "id": "is_target_low_magic_shield",
+  "perc": 30,
+  "ser": "is_ms_under",
+  "side": "Target"
+}

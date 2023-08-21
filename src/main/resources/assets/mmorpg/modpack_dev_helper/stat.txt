@@ -19,6 +19,7 @@ give_regenerate_to_allies_in_aoe
 blood_per_10_strength
 bonus_exp
 all_water_damage
+low_hp_healing
 int_dmg
 bleed_damage
 energy

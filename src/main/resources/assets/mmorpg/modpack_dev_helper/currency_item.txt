@@ -3,6 +3,8 @@ This registry can't be modified or added to.
 affix_tier_up_down
 socket_adder
 entangled_quality
+unique_reroll
 orb_of_quality
 entangled_affix_upgrade
 orb_of_linking
+entangled_unique_reroll

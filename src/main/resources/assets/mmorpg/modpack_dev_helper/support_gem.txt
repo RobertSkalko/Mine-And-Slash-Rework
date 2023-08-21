@@ -1,9 +1,12 @@
 These are all default registry entries of this type.
 This registry can't be modified or added to.
+totem_damage
 physical_damage
 ailment_damage_less_hit_dmg
 lightning_damage
+totem_dmg_cdr
 energy_on_hit
+inc_heal
 chaos_pene
 summon_duration
 proc_shock
@@ -25,6 +28,7 @@ mana_on_hit
 crit_damage
 magic_shield_on_hit
 ranged_damage
+heal_at_low
 bleed_chance
 chaos_damage
 summon_damage
@@ -35,5 +39,6 @@ spell_damage
 burn_chance
 rare_cooldown
 fire_pene
+small_cdr
 crit_dmg_less_non_crit_dmg
 crit_chance

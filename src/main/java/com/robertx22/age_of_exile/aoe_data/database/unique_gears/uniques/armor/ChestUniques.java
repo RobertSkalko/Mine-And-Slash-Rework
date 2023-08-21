@@ -29,7 +29,7 @@ public class ChestUniques implements ExileRegistryInit {
                 .keepsBaseName()
                 .stats(Arrays.asList(
                         new StatMod(100, 250, GearDefense.getInstance(), ModType.PERCENT),
-                        new StatMod(100, 100, new AilmentResistance(Ailments.BLEED), ModType.PERCENT),
+                        new StatMod(100, 100, new AilmentResistance(Ailments.BLEED), ModType.FLAT),
                         new StatMod(-25, -25, Energy.getInstance(), ModType.PERCENT),
                         new StatMod(-25, -25, EnergyRegen.getInstance(), ModType.PERCENT)
                 ))

@@ -24,6 +24,14 @@ import java.util.List;
 
 public abstract class Currency implements IWeighted, IAutoLocName, IAutoLocDesc, IGUID, ExileRegistry<Currency> {
 
+    public static class Weights {
+
+        public static int COMMON = 1000;
+        public static int RARE = 250;
+        public static int UBER = 50;
+
+    }
+
 
     public Item getCurrencyItem() {
 

@@ -11,6 +11,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
@@ -31,19 +32,33 @@ public class UniqueStatsData implements IGearPartTooltip, IRerollable, IStatsCon
         this.RerollNumbers(gear);
     }
 
-    public static int MAX_STATS = 12;
+    public static int MAX_STATS = 10;
 
     @Override
     public void RerollNumbers(GearItemData gear) {
-
         perc.clear();
-        // wont ever have more than 12 unique stats.
+        // wont ever have more than 10 unique stats.
         for (int i = 0; i < MAX_STATS; i++) {
-            perc.add(getMinMax(gear)
-                    .random());
+            perc.add(getMinMax(gear).random());
         }
 
     }
+
+    public void increaseAllBy(GearItemData gear, int add) {
+
+        int max = getMinMax(gear).max;
+
+        // wont ever have more than 10 unique stats.
+        for (int i = 0; i < perc.size(); i++) {
+
+            int num = MathHelper.clamp(perc.get(i) + add, 0, max);
+
+            perc.set(i, num);
+
+        }
+
+    }
+
 
     @Override
     public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {

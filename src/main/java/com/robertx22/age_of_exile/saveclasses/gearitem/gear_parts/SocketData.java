@@ -64,11 +64,9 @@ public class SocketData implements IGearPartTooltip, IStatsContainer {
         List<ExactStatData> stats = new ArrayList<>();
         try {
             if (isGem()) {
-                getGem()
-                        .getFor(fam)
-                        .forEach(x -> {
-                            stats.add(x.toExactStat((int) gear.getLevel()));
-                        });
+                getGem().getFor(fam).forEach(x -> {
+                    stats.add(x.toExactStat((int) gear.getLevel()));
+                });
             }
 
         } catch (Exception e) {

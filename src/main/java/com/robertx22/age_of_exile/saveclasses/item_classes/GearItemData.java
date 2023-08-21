@@ -186,6 +186,11 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         this.pn = potential;
         if (pn < 0) {
             var lower = ExileDB.GearRarities().getFilterWrapped(x -> x.getHigherRarity() == ExileDB.GearRarities().get(pot)).list;
+            if (this.isUnique()) {
+                if (lower.isEmpty()) {
+                    lower = Arrays.asList(ExileDB.GearRarities().get(IRarity.COMMON_ID));
+                }
+            }
             if (!lower.isEmpty()) {
                 GearRarity newrar = lower.get(0);
                 this.pn = newrar.pot.total;

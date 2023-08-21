@@ -9,6 +9,7 @@
     ],
     "ifs": [
       "is_spell",
+      "is_target_low",
       "resource_type_is_health",
       "restore_type_is_heal"
     ],
@@ -19,7 +20,7 @@
   "format": "yellow",
   "group": "RESTORATION",
   "icon": "❁",
-  "id": "increase_healing",
+  "id": "low_hp_healing",
   "is_long": false,
   "is_perc": true,
   "max": 2.14748365E9,
