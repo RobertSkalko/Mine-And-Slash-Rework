@@ -1,13 +1,11 @@
 package com.robertx22.age_of_exile.vanilla_mc.items.gemrunes;
 
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
-import com.robertx22.age_of_exile.database.data.BaseRuneGem;
+import com.robertx22.age_of_exile.database.data.BaseGem;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
-import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -16,14 +14,14 @@ import net.minecraft.world.item.Item;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseGemRuneItem extends Item {
-    public BaseGemRuneItem(Properties settings) {
+public abstract class BaseGemItem extends Item {
+    public BaseGemItem(Properties settings) {
         super(settings);
     }
 
     public int weight;
 
-    public abstract BaseRuneGem getBaseRuneGem();
+    public abstract BaseGem getBaseRuneGem();
 
     public abstract float getStatValueMulti();
 
@@ -55,10 +53,8 @@ public abstract class BaseGemRuneItem extends Item {
             return tooltip; // datapacks didnt register yet
         }
 
-        BaseRuneGem gem = getBaseRuneGem();
+        BaseGem gem = getBaseRuneGem();
 
-        int efflvl = Load.Unit(ClientOnly.getPlayer())
-                .getLevel();
 
         TooltipInfo info = new TooltipInfo();
 

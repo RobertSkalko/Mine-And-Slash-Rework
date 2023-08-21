@@ -1,10 +1,17 @@
 {
-  "identifier": "wir",
+  "id": "wir",
   "item_id": "mmorpg:runes/wir",
   "min_lvl_multi": 0.7,
   "on_armor_stats": [],
   "on_jewelry_stats": [],
-  "on_weapons_stats": [],
+  "on_weapons_stats": [
+    {
+      "type": "FLAT",
+      "max": 20.0,
+      "min": 5.0,
+      "stat": "total_damage"
+    }
+  ],
   "tier": 4,
   "weight": 200
 }

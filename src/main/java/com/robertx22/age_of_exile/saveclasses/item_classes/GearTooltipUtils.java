@@ -142,7 +142,7 @@ public class GearTooltipUtils {
             tip.add(Component.literal(ChatFormatting.RED + "").append(Words.Corrupted.locName()).withStyle(ChatFormatting.RED));
         }
 
-        int socketed = gear.sockets.getSocketedGems().size();
+        int socketed = gear.sockets.getSocketed().size();
         if (socketed > 0) {
             TooltipUtils.addSocketNamesLine(tip, gear);
         }

@@ -5,7 +5,7 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.base.ResourceAndAttack
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.IAutoModel;
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.ItemModelManager;
-import com.robertx22.age_of_exile.database.data.BaseRuneGem;
+import com.robertx22.age_of_exile.database.data.BaseGem;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.currency.IItemAsCurrency;
 import com.robertx22.age_of_exile.database.data.currency.base.Currency;
@@ -55,7 +55,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAutoLocName, IItemAsCurrency, IWeighted {
+public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocName, IItemAsCurrency, IWeighted {
 
     @Override
     public AutoLocGroup locNameGroup() {
@@ -148,7 +148,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
     static float MAX_ELE_DMG = 10;
 
     @Override
-    public BaseRuneGem getBaseRuneGem() {
+    public BaseGem getBaseRuneGem() {
         return getGem();
     }
 
@@ -187,7 +187,7 @@ public class GemItem extends BaseGemRuneItem implements IGUID, IAutoModel, IAuto
                                 SocketData socket = new SocketData();
                                 socket.g = gem.identifier;
 
-                                gear.sockets.getSocketedGems().add(socket);
+                                gear.sockets.getSocketed().add(socket);
 
                                 ctx.player.displayClientMessage(Component.literal("Gem Socketed"), false);
 

@@ -11,7 +11,7 @@
       "stat": "gear_defense"
     },
     {
-      "type": "percent",
+      "type": "flat",
       "max": 100.0,
       "min": 100.0,
       "stat": "bleed_resistance"

@@ -1,9 +1,16 @@
 {
-  "identifier": "ven",
+  "id": "ven",
   "item_id": "mmorpg:runes/ven",
   "min_lvl_multi": 0.8,
   "on_armor_stats": [],
-  "on_jewelry_stats": [],
+  "on_jewelry_stats": [
+    {
+      "type": "FLAT",
+      "max": 10.0,
+      "min": 1.0,
+      "stat": "spirit_cost"
+    }
+  ],
   "on_weapons_stats": [],
   "tier": 4,
   "weight": 100

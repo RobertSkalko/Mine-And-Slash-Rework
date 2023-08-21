@@ -13,7 +13,7 @@
   "min_affixes": 4,
   "pot": {
     "multi": 1.5,
-    "total": 250
+    "total": 100
   },
   "rarity_type": "GEAR",
   "skill_gem_percents": {

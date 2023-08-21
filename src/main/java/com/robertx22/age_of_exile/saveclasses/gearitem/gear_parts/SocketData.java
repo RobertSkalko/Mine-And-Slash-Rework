@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts;
 
 import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.data.gems.Gem;
+import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPart;
@@ -20,6 +21,7 @@ public class SocketData implements IGearPartTooltip, IStatsContainer {
 
     // gem id
     public String g = "";
+    public int p = 0;
 
 
     public SocketData() {
@@ -32,6 +34,10 @@ public class SocketData implements IGearPartTooltip, IStatsContainer {
 
     public boolean isGem() {
         return getGem() != null;
+    }
+
+    public boolean isRune() {
+        return getRune() != null;
     }
 
     @Override
@@ -47,11 +53,15 @@ public class SocketData implements IGearPartTooltip, IStatsContainer {
     }
 
     public Gem getGem() {
-        if (ExileDB.Gems()
-                .isRegistered(g)) {
-            return ExileDB.Gems()
-                    .get(g);
+        if (ExileDB.Gems().isRegistered(g)) {
+            return ExileDB.Gems().get(g);
+        }
+        return null;
+    }
 
+    public Rune getRune() {
+        if (ExileDB.Runes().isRegistered(g)) {
+            return ExileDB.Runes().get(g);
         }
         return null;
     }
@@ -62,10 +72,16 @@ public class SocketData implements IGearPartTooltip, IStatsContainer {
                 .family();
 
         List<ExactStatData> stats = new ArrayList<>();
+
         try {
             if (isGem()) {
                 getGem().getFor(fam).forEach(x -> {
                     stats.add(x.toExactStat((int) gear.getLevel()));
+                });
+            }
+            if (isRune()) {
+                getRune().getFor(fam).forEach(x -> {
+                    stats.add(x.ToExactStat(p, (int) gear.getLevel()));
                 });
             }
 

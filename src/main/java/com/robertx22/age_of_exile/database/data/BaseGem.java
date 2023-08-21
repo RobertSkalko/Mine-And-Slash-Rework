@@ -9,7 +9,7 @@ import com.robertx22.library_of_exile.registry.IWeighted;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseRuneGem implements IGUID, IWeighted {
+public class BaseGem implements IGUID, IWeighted {
 
     public List<OptScaleExactStat> on_armor_stats = new ArrayList<>();
 

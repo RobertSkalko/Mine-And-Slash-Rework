@@ -1,9 +1,16 @@
 {
-  "identifier": "ita",
+  "id": "ita",
   "item_id": "mmorpg:runes/ita",
   "min_lvl_multi": 0.0,
   "on_armor_stats": [],
-  "on_jewelry_stats": [],
+  "on_jewelry_stats": [
+    {
+      "type": "PERCENT",
+      "max": 10.0,
+      "min": 1.0,
+      "stat": "mana_regen"
+    }
+  ],
   "on_weapons_stats": [],
   "tier": 0,
   "weight": 1000

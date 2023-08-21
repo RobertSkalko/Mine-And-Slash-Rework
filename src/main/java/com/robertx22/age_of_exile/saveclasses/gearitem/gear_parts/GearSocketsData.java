@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts;
 
 import com.robertx22.age_of_exile.database.data.gems.Gem;
+import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.mmorpg.UNICODE;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPartTooltip;
@@ -23,13 +24,17 @@ public class GearSocketsData implements IStatsContainer, IGearPartTooltip {
     // socket count
     private int sl = 0;
 
-    public List<SocketData> getSocketedGems() {
+    public List<SocketData> getSocketed() {
         return so;
     }
 
 
     public void addSocket() {
         sl++;
+    }
+
+    public void removeRune() {
+        so.removeIf(x -> x.isRune());
     }
 
     public boolean canAddSocket(GearItemData gear) {
@@ -47,11 +52,12 @@ public class GearSocketsData implements IStatsContainer, IGearPartTooltip {
     @Override
     public List<ExactStatData> GetAllStats(GearItemData gear) {
         List<ExactStatData> list = new ArrayList<>();
-        for (SocketData s : this.getSocketedGems()) {
+        for (SocketData s : this.getSocketed()) {
             list.addAll(s.GetAllStats(gear));
         }
         return list;
     }
+
 
     @Override
     public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {
@@ -59,9 +65,17 @@ public class GearSocketsData implements IStatsContainer, IGearPartTooltip {
 
         for (int i = 0; i < getSocketedGemsCount(); i++) {
             SocketData data = so.get(i);
-            Gem gem = data.getGem();
-            list.add(ExileText.ofText(gem.getFormat() + "[" + UNICODE.STAR + "] ").get().append(data.GetTooltipString(info, gear)
-                    .get(0)));
+            if (data.isGem()) {
+                Gem gem = data.getGem();
+                list.add(ExileText.ofText(gem.getFormat() + "[" + UNICODE.STAR + "] ").get().append(data.GetTooltipString(info, gear)
+                        .get(0)));
+            }
+
+            if (data.isRune()) {
+                Rune gem = data.getRune();
+                list.add(ExileText.ofText(gem.getFormat(data) + "[" + UNICODE.CUBE + "] ").get().append(data.GetTooltipString(info, gear)
+                        .get(0)));
+            }
         }
 
         for (int i = 0; i < gear.getEmptySockets(); i++) {

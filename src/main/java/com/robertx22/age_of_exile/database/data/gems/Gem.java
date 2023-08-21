@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.database.data.gems;
 
-import com.robertx22.age_of_exile.database.data.BaseRuneGem;
+import com.robertx22.age_of_exile.database.data.BaseGem;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
@@ -13,7 +13,7 @@ import net.minecraft.world.item.Item;
 
 import java.util.List;
 
-public class Gem extends BaseRuneGem implements IAutoGson<Gem>, JsonExileRegistry<Gem> {
+public class Gem extends BaseGem implements IAutoGson<Gem>, JsonExileRegistry<Gem> {
 
     public static Gem SERIALIZER = new Gem();
 

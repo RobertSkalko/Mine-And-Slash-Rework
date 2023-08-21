@@ -112,3 +112,7 @@ Those chests can be opened with a key, but how do you actually get the key? Mayb
  - new support gems: increased healing, totem damage, minor cooldown, primed totems, immediate care
  
  - new currency items
+ 
+ - runes now have stats again and can be inserted into sockets! (max 1 per item)
+ Runes when inserted have a random stat value, higher values are very rare
+ You can insert rune many times to try hit a high value.
