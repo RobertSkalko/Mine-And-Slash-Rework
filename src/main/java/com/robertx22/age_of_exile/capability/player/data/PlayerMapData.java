@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.capability.player.data;
 
+import com.robertx22.age_of_exile.maps.MapData;
 import com.robertx22.library_of_exile.utils.TeleportUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -24,7 +25,11 @@ public class PlayerMapData {
         if (p.level().isClientSide) {
             return;
         }
+
         BlockPos pos = BlockPos.of(tp_back_from_league_pos);
+        if (tp_back_from_league_pos == 0) {
+            pos = MapData.getDungeonStartTeleportPos(p.blockPosition());
+        }
         TeleportUtils.teleport((ServerPlayer) p, pos);
     }
 

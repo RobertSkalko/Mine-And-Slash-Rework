@@ -3,8 +3,8 @@ This registry is modify-able through datapacks.
 sword
 shield
 chest
-crossbow
 pants
+crossbow
 ring
 helmet
 boots

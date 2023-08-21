@@ -124,8 +124,11 @@ public class HarvestLeague extends LeagueMechanic {
     }
 
     public EntityType getRandomMobToSpawn() {
-        if (RandomUtils.roll(5)) {
+        if (RandomUtils.roll(10)) {
             return EntityType.CAVE_SPIDER;
+        }
+        if (RandomUtils.roll(5)) {
+            return EntityType.WITCH;
         }
         return EntityType.SPIDER;
     }
@@ -134,14 +137,17 @@ public class HarvestLeague extends LeagueMechanic {
     @Override
     public BlockPos getTeleportPos(BlockPos pos) {
         BlockPos p = MapData.getStartChunk(pos).getBlockAt(0, 0, 0);
-        p = new BlockPos(p.getX() + 20, startY() + 5 + 3, p.getZ() + 20);
+        p = new BlockPos(p.getX() + 10, startY() + 5 + 3, p.getZ() + 22);
         return p;
     }
 
 
     @Override
-    public LeagueStructurePieces getPieces() {
-        return new LeagueStructurePieces(1, "harvest");
+    public LeaguePiecesList getPieces() {
+        return new LeaguePiecesList(Arrays.asList(
+                new LeagueStructurePieces(2, "harvest/river"),
+                new LeagueStructurePieces(2, "harvest/circle")
+        ));
     }
 
     @Override

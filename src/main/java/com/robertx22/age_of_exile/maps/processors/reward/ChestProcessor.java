@@ -38,7 +38,7 @@ public class ChestProcessor extends DataProcessor {
         }
 
         BlockEntity tile = world.getBlockEntity(pos);
-
+        
         if (tile instanceof ChestBlockEntity) {
             ChestBlockEntity chest = (ChestBlockEntity) tile;
 

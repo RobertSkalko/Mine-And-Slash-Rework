@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.maps;
 
 import com.robertx22.age_of_exile.database.data.league.LeagueMechanic;
+import com.robertx22.age_of_exile.database.data.league.LeagueMechanics;
 import com.robertx22.age_of_exile.mechanics.base.LeagueMapData;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -65,11 +66,13 @@ public class MapData {
 
     public void trySpawnMechanic(Level level, BlockPos pos) {
 
-        for (LeagueMechanic league : this.map.getLeagueMechanics()) {
-            if (!this.spawnedMechs.contains(league.GUID())) {
-                if (RandomUtils.roll(league.chanceToSpawnMechanicAfterKillingMob())) {
-                    this.spawnedMechs.add(league.GUID());
-                    league.spawnTeleportInMap((ServerLevel) level, pos);
+        if (LeagueMechanics.NONE.isInsideLeague((ServerLevel) level, pos)) {
+            for (LeagueMechanic league : this.map.getLeagueMechanics()) {
+                if (!this.spawnedMechs.contains(league.GUID())) {
+                    if (RandomUtils.roll(league.chanceToSpawnMechanicAfterKillingMob())) {
+                        this.spawnedMechs.add(league.GUID());
+                        league.spawnTeleportInMap((ServerLevel) level, pos);
+                    }
                 }
             }
         }
@@ -89,9 +92,6 @@ public class MapData {
 
         Level world = p.level().getServer().getLevel(ResourceKey.create(Registries.DIMENSION, WorldUtils.DUNGEON_DIM_ID));
 
-        // todo check how buggy this is
-
-        // ProcessChunkBlocks.process((ServerLevel) world, pos);
 
         world.setBlock(new BlockPos(pos.getX(), 54, pos.getZ()), Blocks.BEDROCK.defaultBlockState(), 2);
 

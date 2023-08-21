@@ -18,6 +18,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
@@ -42,19 +43,26 @@ public abstract class LeagueMechanic implements ExileRegistry<LeagueMechanic> {
     public abstract void onKillMob(MapData map, LootInfo info);
 
     public final void teleportToStartOfLeague(Player p) {
+        var map = Load.mapAt(p.level(), p.blockPosition());
 
-        BlockPos tp = getTeleportPos(p.blockPosition());
+        if (map != null) {
+            var lo = map.getLeagueData(this).spawn_pos;
+            var tp = BlockPos.of(lo);
 
-        Load.playerRPGData(p).map.tp_back_from_league_pos = p.blockPosition().asLong();
+            if (lo != 0L) {
+                Load.playerRPGData(p).map.tp_back_from_league_pos = p.blockPosition().asLong();
+                TeleportUtils.teleport((ServerPlayer) p, tp);
+            }
+        }
 
-        TeleportUtils.teleport((ServerPlayer) p, tp);
+        // BlockPos tp = getTeleportPos(p.blockPosition());
+        //Load.playerRPGData(p).map.tp_back_from_league_pos = p.blockPosition().asLong();
+        //TeleportUtils.teleport((ServerPlayer) p, tp);
     }
 
     public final void teleportBackToDungeon(Player p) {
-
         Load.playerRPGData(p).map.teleportBackFromLeagueToDungeon(p);
     }
-
 
     public abstract void spawnTeleportInMap(ServerLevel level, BlockPos pos);
 
@@ -70,7 +78,7 @@ public abstract class LeagueMechanic implements ExileRegistry<LeagueMechanic> {
     public abstract BlockPos getTeleportPos(BlockPos pos);
 
 
-    public abstract LeagueStructurePieces getPieces();
+    public abstract LeaguePiecesList getPieces();
 
 
     public abstract int startY();
@@ -81,7 +89,15 @@ public abstract class LeagueMechanic implements ExileRegistry<LeagueMechanic> {
 
     public final void tryGenerate(ServerLevel level, ChunkPos pos, Random ran) {
         try {
-            LeagueStructurePieces pieces = getPieces();
+
+            var list = getPieces();
+
+            var map = Load.mapAt(level, pos.getBlockAt(0, 0, 0));
+
+            var s = map.getLeagueData(this).getStructure(this);
+
+            LeagueStructurePieces pieces = list.get(s);
+
             var room = pieces.getRoomForChunk(pos);
             if (room != null) {
                 generateStructure(level, room, pos);
@@ -109,7 +125,7 @@ public abstract class LeagueMechanic implements ExileRegistry<LeagueMechanic> {
         }
         settings.setRotation(Rotation.NONE);
 
-        template.placeInWorld((ServerLevelAccessor) world, position, position, settings, world.getRandom(), 2);
+        template.placeInWorld((ServerLevelAccessor) world, position, position, settings, world.getRandom(), Block.UPDATE_CLIENTS);
 
         return true;
     }

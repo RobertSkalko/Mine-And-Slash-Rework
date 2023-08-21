@@ -37,7 +37,7 @@ public class LeagueMechanics {
 
         @Override
         public void onTick(MapData map, ServerLevel level, BlockPos pos, LeagueControlBlockEntity be, LeagueBlockData data) {
-            
+
         }
 
         @Override
@@ -46,7 +46,7 @@ public class LeagueMechanics {
         }
 
         @Override
-        public LeagueStructurePieces getPieces() {
+        public LeaguePiecesList getPieces() {
             return null;
         }
 
@@ -57,7 +57,7 @@ public class LeagueMechanics {
 
         @Override
         public boolean isInsideLeague(ServerLevel level, BlockPos pos) {
-            return false;
+            return pos.getY() < 67;
         }
 
         @Override

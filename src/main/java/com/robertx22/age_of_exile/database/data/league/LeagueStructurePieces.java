@@ -2,10 +2,11 @@ package com.robertx22.age_of_exile.database.data.league;
 
 import com.robertx22.age_of_exile.maps.MapData;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.library_of_exile.registry.IWeighted;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ChunkPos;
 
-public class LeagueStructurePieces {
+public class LeagueStructurePieces implements IWeighted {
 
     public int size;
     public String folder;
@@ -36,4 +37,8 @@ public class LeagueStructurePieces {
         return ax <= size && az <= size;
     }
 
+    @Override
+    public int Weight() {
+        return 1000;
+    }
 }

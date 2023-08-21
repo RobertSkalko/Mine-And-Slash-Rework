@@ -10,10 +10,10 @@ minecraft:iron_golem
 minecraft:ender_dragon
 minecraft:enderman
 minecraft:zombie
-animal
 minecraft:drowned
+animal
 minecraft:wolf
-minecraft:wither
 lycanite_mobs
+minecraft:wither
 minecraft:bee
 player

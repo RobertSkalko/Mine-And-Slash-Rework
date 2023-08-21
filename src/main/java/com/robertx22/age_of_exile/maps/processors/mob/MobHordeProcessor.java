@@ -18,7 +18,6 @@ public class MobHordeProcessor extends DataProcessor {
         this.detectIds.add("trader"); // todo for old unused trader stuff
     }
 
-
     @Override
     public void processImplementation(String key, BlockPos pos, Level world, ChunkProcessData data) {
 
