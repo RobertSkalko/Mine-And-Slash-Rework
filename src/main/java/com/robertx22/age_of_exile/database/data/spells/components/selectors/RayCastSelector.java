@@ -24,6 +24,7 @@ public class RayCastSelector extends BaseTargetSelector {
         float distance = data.get(DISTANCE)
                 .floatValue();
 
+       
         List<LivingEntity> list = LookUtils.getLivingEntityLookedAt(caster, distance, false);
         list = predicate.getMatchingEntities(list, caster);
         return list;

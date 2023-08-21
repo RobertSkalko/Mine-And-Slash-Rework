@@ -116,3 +116,9 @@ Those chests can be opened with a key, but how do you actually get the key? Mayb
  - runes now have stats again and can be inserted into sockets! (max 1 per item)
  Runes when inserted have a random stat value, higher values are very rare
  You can insert rune many times to try hit a high value.
+ 
+ - added experimental way of removing the wall-spell cheese strategy with aoe
+ 
+ - mob damage balanced
+ 
+ - fixed aoe stats not working

@@ -9,6 +9,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.robertx22.age_of_exile.database.data.spells.map_fields.MapField.*;
 
@@ -32,7 +33,8 @@ public class InFrontSelector extends BaseTargetSelector {
                 .radius(Math.min(width, distance))
                 .distance(distance);
 
-        return finder.build();
+
+        return finder.build().stream().filter(x -> AoeSelector.canHit(ctx.getPos(), x)).collect(Collectors.toList());
     }
 
     public MapHolder create(Double distance, Double width, AllyOrEnemy pred) {

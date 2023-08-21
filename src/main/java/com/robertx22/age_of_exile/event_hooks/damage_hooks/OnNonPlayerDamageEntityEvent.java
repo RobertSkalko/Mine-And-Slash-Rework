@@ -20,6 +20,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
@@ -28,6 +29,9 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
     @Override
     public void accept(ExileEvents.OnDamageEntity event) {
         if (event.mob.level().isClientSide) {
+            return;
+        }
+        if (event.source.is(DamageTypes.FELL_OUT_OF_WORLD)) {
             return;
         }
 

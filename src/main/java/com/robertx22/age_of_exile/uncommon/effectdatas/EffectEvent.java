@@ -65,7 +65,11 @@ public abstract class EffectEvent implements IGUID {
     }
 
     public void increaseByPercent(float perc) {
-        data.getNumber(EventData.NUMBER).number += data.getOriginalNumber(EventData.NUMBER).number * perc / 100F;
+        increaseByPercent(EventData.NUMBER, perc);
+    }
+
+    public void increaseByPercent(String num, float perc) {
+        data.getNumber(num).number += data.getOriginalNumber(num).number * perc / 100F;
     }
 
     public void Activate() {
@@ -157,7 +161,7 @@ public abstract class EffectEvent implements IGUID {
 
         Unit un = enData.getUnit();
 
-        
+
         if (side == EffectSides.Source) {
             if (isSpell()) {
                 if (en instanceof Player p) {

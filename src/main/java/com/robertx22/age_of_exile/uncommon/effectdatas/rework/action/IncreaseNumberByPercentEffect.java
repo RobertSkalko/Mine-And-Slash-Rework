@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.uncommon.effectdatas.rework.action;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EffectEvent;
-import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 
 public class IncreaseNumberByPercentEffect extends StatEffect {
@@ -21,8 +20,8 @@ public class IncreaseNumberByPercentEffect extends StatEffect {
 
     @Override
     public void activate(EffectEvent event, EffectSides statSource, StatData data, Stat stat) {
-        event.increaseByPercent(data.getValue());
-        event.data.getNumber(EventData.NUMBER).number = event.data.getNumber() * data.getMoreStatTypeMulti();
+        event.increaseByPercent(num_id, data.getValue());
+        event.data.getNumber(num_id).number = event.data.getNumber(num_id, 0).number * data.getMoreStatTypeMulti();
 
     }
 

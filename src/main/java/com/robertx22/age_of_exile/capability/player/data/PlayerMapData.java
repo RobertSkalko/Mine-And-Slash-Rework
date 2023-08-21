@@ -14,7 +14,6 @@ public class PlayerMapData {
 
     public String tpbackdim = "";
     public long tp_back_pos = 0;
-
     public long tp_back_from_league_pos = 0;
 
     private BlockPos getTeleportBackPos() {

@@ -214,6 +214,7 @@ public class WaterSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.playSound(SoundEvents.BUBBLE_COLUMN_BUBBLE_POP, 1D, 1D))
                 .onCast(PartBuilder.groundParticles(ParticleTypes.ITEM_SNOWBALL, 200D, 5D, 0.5D))
                 .onCast(PartBuilder.groundParticles(ParticleTypes.ITEM_SNOWBALL, 300D, 3.5D, 0.5D))
+                .onCast(PartBuilder.groundParticles(ParticleTypes.SNOWFLAKE, 300D, 3.5D, 0.5D))
                 .onCast(PartBuilder.groundParticles(ParticleTypes.BUBBLE_POP, 250D, 5D, 0.5D))
                 .onCast(PartBuilder.playSound(SoundEvents.DROWNED_HURT, 0.5D, 1D))
                 .onCast(PartBuilder.damageInAoe(SpellCalcs.FROST_NOVA, Elements.Cold, 5D)

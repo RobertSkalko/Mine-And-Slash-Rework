@@ -55,7 +55,7 @@ public class MapBlock extends BaseEntityBlock {
                     Load.worldData(level).map.startNewMap(p, data);
                     SoundUtils.playSound(p, SoundEvents.EXPERIENCE_ORB_PICKUP);
                     MapBlockEntity be = (MapBlockEntity) level.getBlockEntity(pPos);
-                    be.mapId = p.getStringUUID();
+                    be.setMap(p.getStringUUID());
 
                     if (!p.isCreative()) {
                         p.getItemInHand(pHand).shrink(1);
@@ -65,13 +65,13 @@ public class MapBlock extends BaseEntityBlock {
                 }
                 if (p.getItemInHand(pHand).is(SlashItems.MAP_SETTER.get())) {
                     MapBlockEntity be = (MapBlockEntity) level.getBlockEntity(pPos);
-                    be.mapId = p.getStringUUID();
+                    be.setMap(p.getStringUUID());
                     return InteractionResult.SUCCESS;
                 }
 
                 MapBlockEntity be = (MapBlockEntity) level.getBlockEntity(pPos);
 
-                var map = Load.worldData(level).map.getMapFromPlayerID(be.mapId);
+                var map = Load.worldData(level).map.getMapFromPlayerID(be.getMapId());
 
                 map.ifPresent(x -> {
                     x.teleportToMap(p);

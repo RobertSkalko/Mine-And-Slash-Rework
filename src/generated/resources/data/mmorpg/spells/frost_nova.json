@@ -77,6 +77,30 @@
             "map": {
               "height": 0.5,
               "motion": "None",
+              "particle_count": 300.0,
+              "particle_type": "minecraft:snowflake",
+              "radius": 3.5,
+              "shape": "CIRCLE_2D",
+              "y_rand": 0.5
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": []
+      },
+      {
+        "acts": [
+          {
+            "type": "particles_in_radius",
+            "map": {
+              "height": 0.5,
+              "motion": "None",
               "particle_count": 250.0,
               "particle_type": "minecraft:bubble_pop",
               "radius": 5.0,
