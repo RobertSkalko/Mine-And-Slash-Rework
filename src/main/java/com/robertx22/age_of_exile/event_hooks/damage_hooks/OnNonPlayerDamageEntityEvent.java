@@ -30,7 +30,7 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
 
     @Override
     public void accept(ExileEvents.OnDamageEntity event) {
-
+      
         if (event.mob.level().isClientSide) {
             return;
         }

@@ -31,7 +31,7 @@
               "potion_action": "GIVE_STACKS",
               "potion_dur": 200.0,
               "potion_id": "mmorpg:instant_arrows",
-              "potion_str": 15.0
+              "potion_str": 16.0
             }
           }
         ],

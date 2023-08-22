@@ -33,8 +33,8 @@ import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -87,7 +87,7 @@ public class CommonEvents {
         ForgeEvents.registerForgeEvent(TickEvent.PlayerTickEvent.class, event -> {
             if (!event.player.level().isClientSide) {
                 if (event.player.hasEffect(SlashPotions.INSTANT_ARROWS.get())) {
-                    if (event.player.getMainHandItem().is(Items.BOW)) {
+                    if (event.player.getMainHandItem().getItem() instanceof BowItem) {
                         event.player.getMainHandItem().getOrCreateTag().putBoolean("instant", true);
                     }
                 }

@@ -36,7 +36,6 @@ public class TpBackItem extends AutoItem {
                     p.sendSystemMessage(Component.literal("You can't teleport when enemies are nearby."));
                     return InteractionResultHolder.pass(p.getItemInHand(pUsedHand));
                 }
-
                 itemstack.shrink(1);
                 Load.playerRPGData(p).map.teleportBack(p);
             }

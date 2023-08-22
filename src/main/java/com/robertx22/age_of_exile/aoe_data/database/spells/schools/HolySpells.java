@@ -200,7 +200,7 @@ public class HolySpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(WISH, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 10)
-                                .setChargesAndRegen(WISH, 20 * 30, 3), "Wish",
+                                .setChargesAndRegen(WISH, 3, 20 * 30), "Wish",
                         Arrays.asList(SpellTag.heal))
                 .manualDesc(
                         "Heal allies around you for " + SpellCalcs.HEALING_AURA.getLocDmgTooltip() +
