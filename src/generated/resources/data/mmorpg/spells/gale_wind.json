@@ -165,7 +165,7 @@
   "config": {
     "apply_cast_speed_to_cd": false,
     "cast_time_ticks": 10,
-    "castingWeapon": "RANGED",
+    "castingWeapon": "ANY_WEAPON",
     "charge_name": "",
     "charge_regen": 0,
     "charges": 0,

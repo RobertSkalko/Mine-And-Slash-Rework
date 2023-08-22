@@ -37,6 +37,7 @@ tidal_strike
 song_of_vigor
 arrow_totem
 dash
+quickdraw
 meteor_arrow
 summon_fire_golem
 recoil_shot
@@ -69,13 +70,11 @@ refresh
 thorn_bush
 frozen_orb
 frost_nova
-make_arrows
 boomerang
 test_command
 power_chord
 pull
 awaken_mana
-the_hunt
 fire_nova
 summon_cold_golem
 taunt

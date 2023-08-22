@@ -12,6 +12,7 @@
     "LivingEntityMixin",
     "LootTableMixin",
     "PlayerInventoryMixin",
+    "BowMixin",
     "StopMapMobDropsMixin",
     "EntityMixin",
     "StopMobDropWornGearInMapsMixin",

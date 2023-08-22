@@ -17,6 +17,7 @@ import com.robertx22.age_of_exile.event_hooks.player.StopCastingIfInteract;
 import com.robertx22.age_of_exile.mixin_methods.OnItemInteract;
 import com.robertx22.age_of_exile.mmorpg.ForgeEvents;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
+import com.robertx22.age_of_exile.mmorpg.registers.common.SlashPotions;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.error_checks.base.ErrorChecks;
@@ -26,20 +27,20 @@ import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.*;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.ArrayList;
@@ -64,6 +65,35 @@ public class CommonEvents {
 
         OnItemInteract.register();
 
+
+        // instant bows
+        ForgeEvents.registerForgeEvent(ArrowLooseEvent.class, event -> {
+            if (event.getEntity().hasEffect(SlashPotions.INSTANT_ARROWS.get())) {
+                event.setCharge(100);
+            }
+        });
+        ForgeEvents.registerForgeEvent(ArrowNockEvent.class, event -> {
+            if (event.getEntity().hasEffect(SlashPotions.INSTANT_ARROWS.get())) {
+                event.setAction(InteractionResultHolder.pass(event.getBow()));
+                event.getBow().releaseUsing(event.getLevel(), event.getEntity(), 2000);
+                int cd = 20 - event.getEntity().getEffect(SlashPotions.INSTANT_ARROWS.get()).getAmplifier();
+
+                if (cd < 3) {
+                    cd = 3;
+                }
+                event.getEntity().getCooldowns().addCooldown(event.getBow().getItem(), cd); // todo
+            }
+        });
+        ForgeEvents.registerForgeEvent(TickEvent.PlayerTickEvent.class, event -> {
+            if (!event.player.level().isClientSide) {
+                if (event.player.hasEffect(SlashPotions.INSTANT_ARROWS.get())) {
+                    if (event.player.getMainHandItem().is(Items.BOW)) {
+                        event.player.getMainHandItem().getOrCreateTag().putBoolean("instant", true);
+                    }
+                }
+            }
+        });
+        // instant bows
 
         ForgeEvents.registerForgeEvent(EntityJoinLevelEvent.class, event -> {
             OnMobSpawn.onLoad(event.getEntity());

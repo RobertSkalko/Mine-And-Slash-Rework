@@ -49,7 +49,7 @@ public class ChargeData {
         if (player.level().isClientSide) {
             return;
         }
-
+        
         boolean sync = false;
 
 

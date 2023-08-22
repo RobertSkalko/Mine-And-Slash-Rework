@@ -24,6 +24,7 @@ public class LightningSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
+        
         SpellBuilder.of("chain_lightning", PlayStyle.INT, SpellConfiguration.Builder.instant(15, 20 * 5)
                                 .setChargesAndRegen("chain_lightning", 3, 20 * 10)
                                 .applyCastSpeedToCooldown(), "Chain Lightning",

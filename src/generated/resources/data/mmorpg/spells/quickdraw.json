@@ -29,8 +29,9 @@
             "map": {
               "count": 1.0,
               "potion_action": "GIVE_STACKS",
-              "potion_dur": 600.0,
-              "potion_id": "minecraft:night_vision"
+              "potion_dur": 200.0,
+              "potion_id": "mmorpg:instant_arrows",
+              "potion_str": 15.0
             }
           }
         ],
@@ -55,7 +56,7 @@
             "map": {
               "count": 1.0,
               "potion_action": "GIVE_STACKS",
-              "potion_dur": 600.0,
+              "potion_dur": 60.0,
               "potion_id": "minecraft:speed"
             }
           }
@@ -77,13 +78,8 @@
       {
         "acts": [
           {
-            "type": "potion",
-            "map": {
-              "count": 1.0,
-              "potion_action": "GIVE_STACKS",
-              "potion_dur": 400.0,
-              "potion_id": "minecraft:glowing"
-            }
+            "type": "give_arrows_if_no_infi",
+            "map": {}
           }
         ],
         "en_preds": [],
@@ -93,16 +89,7 @@
             "map": {}
           }
         ],
-        "targets": [
-          {
-            "type": "aoe",
-            "map": {
-              "en_predicate": "enemies",
-              "radius": 20.0,
-              "selection_type": "RADIUS"
-            }
-          }
-        ]
+        "targets": []
       }
     ]
   },
@@ -110,10 +97,10 @@
     "apply_cast_speed_to_cd": false,
     "cast_time_ticks": 0,
     "castingWeapon": "ANY_WEAPON",
-    "charge_name": "",
-    "charge_regen": 0,
-    "charges": 0,
-    "cooldown_ticks": 2400,
+    "charge_name": "quickdraw",
+    "charge_regen": 1200,
+    "charges": 3,
+    "cooldown_ticks": 1200,
     "imbues": 0,
     "mana_cost": {
       "max": 3.75,
@@ -127,7 +114,7 @@
   },
   "disabled_dims": [],
   "effect_tip": "",
-  "identifier": "the_hunt",
+  "identifier": "quickdraw",
   "manual_tip": true,
   "weight": 1000
 }

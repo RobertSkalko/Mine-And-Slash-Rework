@@ -134,3 +134,5 @@ Those chests can be opened with a key, but how do you actually get the key? Mayb
  - new spell: meteor arrow
  
  - new spell: gale wind
+ 
+ - new spell: quickdraw! This one will probably be a staple of every ranger, as it allows you to instantly fire off bows!

@@ -14,6 +14,7 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeap
 import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
+import com.robertx22.age_of_exile.mmorpg.registers.common.SlashPotions;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
@@ -33,12 +34,8 @@ import java.util.Arrays;
 public class RangerSpells implements ExileRegistryInit {
 
     public static String EXPLOSIVE_ARROW_ID = "explosive_arrow";
-    public static String MAKE_ARROWS = "make_arrows";
     public static String CHARGED_BOLT = "charged_bolt";
-    public static String THE_HUNT = "the_hunt";
-    public static String BACKFLIP = "backflip";
     public static String ARROW_STORM = "arrow_storm";
-    public static String POISON_ARROW = "poison_arrow";
     public static String RECOIL_SHOT = "recoil_shot";
     public static String DASH_ID = "dash";
 
@@ -46,7 +43,6 @@ public class RangerSpells implements ExileRegistryInit {
     public static String POISON_TRAP = "poison_trap";
     public static String FIRE_TRAP = "fire_trap";
     public static String HUNTER_POTION = "hunter_potion";
-    public static String NIGHT_VISION = "night_vision";
     public static String SMOKE_BOMB = "smoke_bomb";
     public static String BARRAGE = "arrow_barrage";
 
@@ -168,18 +164,15 @@ public class RangerSpells implements ExileRegistryInit {
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.ENCHANTED_HIT, 4D, 0.1D))
                 .build();
 
-        SpellBuilder.of(THE_HUNT, PlayStyle.DEX, SpellConfiguration.Builder.instant(5, 60 * 20 * 2)
-                        ,
-                        "The Hunt",
-                        Arrays.asList())
-                .manualDesc(
-                        "Gain Night vision and set all enemies around you to glow."
-                )
-                .onCast(PartBuilder.playSound(SoundEvents.WOLF_HOWL, 1D, 1D))
-                .onCast(PartBuilder.giveSelfEffect(MobEffects.NIGHT_VISION, 20D * 30))
-                .onCast(PartBuilder.giveSelfEffect(MobEffects.MOVEMENT_SPEED, 20D * 30))
-                .onCast(PartBuilder.addEffectToEnemiesInAoe(MobEffects.GLOWING, 20D, 20D * 20))
 
+        SpellBuilder.of("quickdraw", PlayStyle.DEX, SpellConfiguration.Builder.instant(5, 60 * 20)
+                        .setChargesAndRegen("quickdraw", 3, 20 * 60), "Quickdraw", Arrays.asList())
+                .manualDesc("Your bow now fires instantly, and you gain a stack of arrows if you don't have infinity.")
+
+                .onCast(PartBuilder.playSound(SoundEvents.WOLF_HOWL, 1D, 1D))
+                .onCast(PartBuilder.giveSelfEffect(SlashPotions.INSTANT_ARROWS.get(), 20D * 10, 16D))
+                .onCast(PartBuilder.giveSelfEffect(MobEffects.MOVEMENT_SPEED, 20D * 3))
+                .onCast(PartBuilder.justAction(SpellAction.GIVE_ARROWS.create()))
                 .build();
 
 
@@ -284,15 +277,6 @@ public class RangerSpells implements ExileRegistryInit {
 
                 .build();
 
-
-        SpellBuilder.of(MAKE_ARROWS, PlayStyle.DEX, SpellConfiguration.Builder.nonInstant(10, 20 * 60 * 5, 40)
-                        , "Produce Arrows",
-                        Arrays.asList())
-                .manualDesc("Produce a stack of arrows.")
-                .weaponReq(CastingWeapon.ANY_WEAPON)
-                .onCast(PartBuilder.playSound(SoundEvents.ARROW_SHOOT, 1D, 1D))
-                .onCast(PartBuilder.justAction(SpellAction.CASTER_USE_COMMAND.create("/give @s minecraft:arrow 64")))
-                .build();
 
     }
 
