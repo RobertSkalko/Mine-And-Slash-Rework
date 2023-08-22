@@ -196,6 +196,22 @@ public class RangerSpells implements ExileRegistryInit {
                 .onTick(PartBuilder.particleOnTick(5D, ParticleTypes.CRIT, 5D, 0.1D))
                 .build();
 
+        SpellBuilder.of("gale_wind", PlayStyle.DEX, SpellConfiguration.Builder.multiCast(20, 20 * 10, 10, 3), "Gale Wind",
+                        Arrays.asList(SpellTag.projectile, SpellTag.damage))
+
+                .manualDesc("Summons multiple clouds, knocking back and dealing " + SpellCalcs.GALE_WIND.getLocDmgTooltip(Elements.Physical))
+                .onCast(PartBuilder.playSound(SoundEvents.EGG_THROW, 1D, 0.5D))
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.AIR, 5D, 0.5D, SlashEntities.SIMPLE_PROJECTILE.get(), 40D, false)))
+
+                .onTick(PartBuilder.particleOnTick(2D, ParticleTypes.CLOUD, 3D, 0.1D))
+
+                .onHit(PartBuilder.playSound(SoundEvents.ANVIL_HIT, 1D, 2D))
+                .onHit(PartBuilder.knockback(5D))
+                .onHit(PartBuilder.damage(SpellCalcs.GALE_WIND, Elements.Physical))
+
+                .onExpire(PartBuilder.aoeParticles(ParticleTypes.CLOUD, 5D, 1D))
+
+                .build();
 
         SpellBuilder.of(BARRAGE, PlayStyle.DEX, SpellConfiguration.Builder.multiCast(20, 20, 20, 5)
                                 .setChargesAndRegen(BARRAGE, 3, 20 * 10), "Arrow Barrage",

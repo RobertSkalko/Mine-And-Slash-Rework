@@ -24,6 +24,7 @@ ranger_trap
 execute
 poison_cloud
 gong_strike
+gale_wind
 chaos_totem
 curse
 tidal_strike

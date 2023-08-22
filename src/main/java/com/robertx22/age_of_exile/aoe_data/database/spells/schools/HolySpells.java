@@ -199,7 +199,8 @@ public class HolySpells implements ExileRegistryInit {
                 .onCast(PartBuilder.healInAoe(SpellCalcs.HEALING_AURA, 2D))
                 .build();
 
-        SpellBuilder.of(WISH, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 60), "Wish",
+        SpellBuilder.of(WISH, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 10)
+                                .setChargesAndRegen(WISH, 20 * 30, 3), "Wish",
                         Arrays.asList(SpellTag.heal))
                 .manualDesc(
                         "Heal allies around you for " + SpellCalcs.HEALING_AURA.getLocDmgTooltip() +
@@ -223,7 +224,7 @@ public class HolySpells implements ExileRegistryInit {
                 )
                 .onCast(PartBuilder.playSound(SoundEvents.EXPERIENCE_ORB_PICKUP, 1D, 1D))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.NOTE, 50D, 3D))
-                .onCast(PartBuilder.giveExileEffectToAlliesInRadius(7D, effect.resourcePath, 20 * 30D))
+                .onCast(PartBuilder.giveExileEffectToAlliesInRadius(10D, effect.resourcePath, 20 * 30D))
                 .build();
     }
 }

@@ -5,10 +5,10 @@
   "is_entry": false,
   "stats": [
     {
-      "type": "FLAT",
+      "type": "MORE",
       "scale_to_lvl": false,
-      "stat": "str_dmg",
-      "v1": -50.0
+      "stat": "total_damage",
+      "v1": -25.0
     },
     {
       "type": "FLAT",
@@ -19,8 +19,8 @@
     {
       "type": "MORE",
       "scale_to_lvl": false,
-      "stat": "dex_dmg",
-      "v1": 25.0
+      "stat": "projectile_damage",
+      "v1": 50.0
     }
   ]
 }

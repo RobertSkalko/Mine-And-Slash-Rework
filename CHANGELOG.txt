@@ -132,3 +132,5 @@ Those chests can be opened with a key, but how do you actually get the key? Mayb
  - added experimental way to unstuck mobs from walls in maps
  
  - new spell: meteor arrow
+ 
+ - new spell: gale wind

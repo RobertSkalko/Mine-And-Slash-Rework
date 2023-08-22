@@ -14,7 +14,7 @@
               "map": {
                 "motion": "None",
                 "particle_count": 2.0,
-                "particle_type": "minecraft:witch",
+                "particle_type": "minecraft:crit",
                 "radius": 0.5
               }
             }
@@ -36,16 +36,10 @@
   },
   "stats": [
     {
-      "type": "FLAT",
-      "max": 20.0,
-      "min": 10.0,
-      "stat": "str_dmg_received"
-    },
-    {
-      "type": "FLAT",
-      "max": 20.0,
-      "min": 10.0,
-      "stat": "dex_dmg_received"
+      "type": "MORE",
+      "max": -20.0,
+      "min": -10.0,
+      "stat": "armor"
     },
     {
       "type": "FLAT",

@@ -19,7 +19,6 @@ import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
-import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -81,12 +80,11 @@ public class NegativeEffects implements ExileRegistryInit {
 
         ExileEffectBuilder.of(CURSE_AGONY)
                 .maxStacks(1)
-                .stat(10, 20, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.STR))
-                .stat(10, 20, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.DEX))
+                .stat(-10, -20, Armor.getInstance(), ModType.MORE)
                 .stat(5, 10, DatapackStats.MOVE_SPEED)
 
                 .spell(SpellBuilder.forEffect()
-                        .onTick(PartBuilder.aoeParticles(ParticleTypes.WITCH, 2D, 0.5D)
+                        .onTick(PartBuilder.aoeParticles(ParticleTypes.CRIT, 2D, 0.5D)
                                 .tickRequirement(20D))
                         .buildForEffect())
 
@@ -110,7 +108,7 @@ public class NegativeEffects implements ExileRegistryInit {
                 .stat(-15, -25, new ElementalResist(Elements.Chaos))
 
                 .spell(SpellBuilder.forEffect()
-                        .onTick(PartBuilder.aoeParticles(ParticleTypes.WITCH, 2D, 0.5D)
+                        .onTick(PartBuilder.aoeParticles(ParticleTypes.ITEM_SLIME, 2D, 0.5D)
                                 .tickRequirement(20D))
                         .buildForEffect())
 

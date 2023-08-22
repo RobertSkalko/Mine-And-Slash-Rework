@@ -57,6 +57,8 @@ public abstract class SpellAction extends BaseFieldNeeder implements IGUID {
     public static SummonAtTargetFeet SUMMON_AT_FEET = of(new SummonAtTargetFeet());
     public static TeleportTargetToSourceAction TP_TARGET_TO_SELF = of(new TeleportTargetToSourceAction());
     public static CommandSummonsAction COMMAND_SUMMONS_ATTACK = of(new CommandSummonsAction());
+    public static KnockbackAction KNOCKBACK = of(new KnockbackAction());
+
 
     private static <T extends SpellAction> T of(T s) {
         MAP.put(s.GUID(), s);

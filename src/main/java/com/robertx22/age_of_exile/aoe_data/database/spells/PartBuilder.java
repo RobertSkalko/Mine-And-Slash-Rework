@@ -134,10 +134,10 @@ public class PartBuilder {
         return c;
     }
 
-    public static ComponentPart pushCaster(DashUtils.Way way, Double str) {
+    public static ComponentPart knockback(Double str) {
         ComponentPart c = new ComponentPart();
-        c.acts.add(SpellAction.PUSH.create(str, way));
-        c.targets.add(BaseTargetSelector.CASTER.create());
+        c.acts.add(SpellAction.KNOCKBACK.create(str));
+        c.targets.add(BaseTargetSelector.TARGET.create());
         return c;
     }
 

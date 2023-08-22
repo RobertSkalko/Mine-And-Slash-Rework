@@ -570,7 +570,24 @@ public class Stats implements ExileRegistryInit {
                 x.format = ChatFormatting.RED.getName();
             })
             .build();
-
+    
+    public static DataPackStatAccessor<EmptyAccessor> ATTACK_DAMAGE = DatapackStatBuilder
+            .ofSingle("attack_damage", Elements.All)
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(0)
+            .setUsesMoreMultiplier()
+            .setSide(EffectSides.Source)
+            .addCondition(StatConditions.IS_ATTACK_DAMAGE)
+            .addEffect(StatEffects.INCREASE_VALUE)
+            .setLocName(x -> "Attack Damage")
+            .setLocDesc(x -> "Increases all attack damage.")
+            .modifyAfterDone(x -> {
+                x.scaling = StatScaling.NONE;
+                x.is_perc = true;
+                x.base = 0;
+                x.format = ChatFormatting.RED.getName();
+            })
+            .build();
 
     public static DataPackStatAccessor<Elements> ELE_DOT_DAMAGE = DatapackStatBuilder
             .<Elements>of(x -> x.guidName + "_dot_damage", x -> x)
@@ -679,7 +696,7 @@ public class Stats implements ExileRegistryInit {
             .worksWithEvent(DamageEvent.ID)
             .setPriority(100)
             .setSide(EffectSides.Source)
-            .addCondition(StatConditions.IS_NON_MAGIC_STYLE)
+            .addCondition(StatConditions.IS_ATTACK_DAMAGE)
             .addCondition(x -> StatConditions.IS_NOT_SUMMON_ATTACK)
             .addEffect(StatEffects.LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.get(ResourceType.health))
             .setLocName(x -> "Lifesteal")

@@ -46,6 +46,7 @@ public class DashUtils {
         }
     }
 
+
     public static void dash(LivingEntity entity, float str, Way way) {
 
         double x;

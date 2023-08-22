@@ -143,8 +143,8 @@ str_dmg_big
 lifesteal_big
 all_fire_damage_big
 all_fire_damage
-sword_damage
 trident_damage_big
+sword_damage
 spell_lightning_damage_big
 dodge_percent
 armor_penetration_percent_big

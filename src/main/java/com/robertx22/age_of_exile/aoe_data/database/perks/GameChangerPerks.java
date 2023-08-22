@@ -18,7 +18,6 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
-import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
 public class GameChangerPerks implements ExileRegistryInit {
@@ -50,11 +49,10 @@ public class GameChangerPerks implements ExileRegistryInit {
         );
 
         PerkBuilder.gameChanger("sniper", "Sniper",
-                new OptScaleExactStat(-50, Stats.STYLE_DAMAGE.get(PlayStyle.STR)),
+                new OptScaleExactStat(-25, Stats.TOTAL_DAMAGE.get(), ModType.MORE),
                 new OptScaleExactStat(-25, Stats.COOLDOWN_REDUCTION.get()),
-                new OptScaleExactStat(25, Stats.STYLE_DAMAGE.get(PlayStyle.DEX), ModType.MORE)
+                new OptScaleExactStat(50, Stats.PROJECTILE_DAMAGE.get(), ModType.MORE)
         );
-
 
         PerkBuilder.gameChanger("blood_mage", "Blood Mage",
                 new OptScaleExactStat(1, BloodUser.getInstance(), ModType.FLAT),

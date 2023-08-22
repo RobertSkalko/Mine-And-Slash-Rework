@@ -40,7 +40,7 @@ public class StatConditions implements ExileRegistryInit {
     public static StatCondition IS_SOURCE_LOW_HP = new IsHealthBellowPercentCondition("is_source_low_hp", 30, EffectSides.Source);
     public static StatCondition IS_TARGET_NEAR_FULL_HP = new IsHealthAbovePercentCondition("is_target_near_full_hp", 70, EffectSides.Target);
     public static StatCondition IS_ELEMENTAL = new StringMatchesCondition(EventData.ELEMENT, Elements.Physical.name()).flipCondition();
-    public static StatCondition IS_NON_MAGIC_STYLE = new StringMatchesCondition(EventData.STYLE, PlayStyle.INT.id).flipCondition();
+    public static StatCondition IS_ATTACK_DAMAGE = new StringMatchesCondition(EventData.STYLE, PlayStyle.INT.id).flipCondition();
     public static StatCondition IS_NOT_SUMMON_ATTACK = new IsBooleanTrueCondition(EventData.IS_SUMMON_ATTACK).flipCondition();
 
 
@@ -94,11 +94,7 @@ public class StatConditions implements ExileRegistryInit {
 
 
     public static StatCondition IS_ANY_PROJECTILE = new EitherIsTrueCondition("is_projectile",
-            Arrays.asList(
-                    SPELL_HAS_TAG.get(SpellTag.projectile)
-                            .GUID(),
-                    IS_RANGED_WEAPON.GUID()
-            ));
+            Arrays.asList(SPELL_HAS_TAG.get(SpellTag.projectile).GUID(), IS_RANGED_WEAPON.GUID()));
 
     public static DataHolder<AttackType, StatCondition> ATTACK_TYPE_MATCHES = new DataHolder<>(
             AttackType.values()
@@ -144,7 +140,7 @@ public class StatConditions implements ExileRegistryInit {
         IS_MELEE_WEAPON.addToSerializables();
         SPELL_HAS_TAG.addToSerializables();
         IS_STYLE.addToSerializables();
-        IS_NON_MAGIC_STYLE.addToSerializables();
+        IS_ATTACK_DAMAGE.addToSerializables();
         IS_RESOURCE.addToSerializables();
         IS_IN_COMBAT.addToSerializables();
         IS_RESTORE_TYPE.addToSerializables();

@@ -14,7 +14,7 @@
               "map": {
                 "motion": "None",
                 "particle_count": 2.0,
-                "particle_type": "minecraft:witch",
+                "particle_type": "minecraft:item_slime",
                 "radius": 0.5
               }
             }

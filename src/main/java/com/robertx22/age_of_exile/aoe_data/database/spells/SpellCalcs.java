@@ -40,7 +40,7 @@ public class SpellCalcs {
 
     public static ValueCalculation LIGHTNING_SPEAR = ValueCalcBuilder.of("lightning_spear")
             .spellScaling(0.75F, 1F)
-            .statScaling(Mana.getInstance(), 0.05F, 0.1F)
+            .statScaling(Mana.getInstance(), 0.02F, 0.05F)
             .build();
     public static ValueCalculation BOOMERANG = ValueCalcBuilder.of("boomerang")
             .spellScaling(0.75F, 1.5F)
@@ -75,6 +75,11 @@ public class SpellCalcs {
     public static ValueCalculation ARROW_STORM = ValueCalcBuilder.of("arrow_storm")
             .attackScaling(0.3F, 0.6F)
             .build();
+
+    public static ValueCalculation GALE_WIND = ValueCalcBuilder.of("gale_wind")
+            .attackScaling(0.5F, 1)
+            .build();
+
     public static ValueCalculation EXPLOSIVE_ARROW = ValueCalcBuilder.of("explosive_arrow")
             .attackScaling(0.5F, 1.5F)
             .build();
@@ -140,7 +145,7 @@ public class SpellCalcs {
 
     public static ValueCalculation LIGHNING_NOVA = ValueCalcBuilder.of("lightning_nova")
             .spellScaling(1F, 1.5F)
-            .statScaling(Mana.getInstance(), 0.05F, 0.1F)
+            .statScaling(Mana.getInstance(), 0.02F, 0.05F)
             .build();
 
     public static ValueCalculation POISON_CLOUD = ValueCalcBuilder.of("poison_cloud")
