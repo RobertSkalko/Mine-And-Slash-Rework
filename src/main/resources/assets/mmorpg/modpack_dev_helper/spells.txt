@@ -24,6 +24,7 @@ song_of_perseverance
 shooting_star
 chain_lightning
 hunter_potion
+resonance
 execute
 poison_cloud
 astral_totem

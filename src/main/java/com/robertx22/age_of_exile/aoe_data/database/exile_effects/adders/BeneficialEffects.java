@@ -8,15 +8,16 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
 import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
 import com.robertx22.age_of_exile.database.data.exile_effects.EffectType;
+import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.AggroAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
+import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
-import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -79,14 +80,18 @@ public class BeneficialEffects implements ExileRegistryInit {
         ExileEffectBuilder.of(VIGOR)
                 .stat(0.25F, 0.5F, HealthRegen.getInstance())
                 .stat(0.25F, 0.5F, ManaRegen.getInstance())
+                .stat(10, 10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.song), ModType.MORE)
                 .maxStacks(3)
                 .addTags(EffectTags.song)
                 .build();
 
         ExileEffectBuilder.of(PERSEVERANCE)
-                .stat(-3, -6, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.STR))
-                .stat(-3, -6, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.DEX))
-                .stat(-3, -6, Stats.STYLE_DAMAGE_RECEIVED.get(PlayStyle.INT))
+                .stat(5, 10, new ElementalResist(Elements.Physical))
+                .stat(5, 10, new ElementalResist(Elements.Chaos))
+                .stat(5, 10, new ElementalResist(Elements.Fire))
+                .stat(5, 10, new ElementalResist(Elements.Cold))
+                .stat(5, 10, new ElementalResist(Elements.Lightning))
+                .stat(10, 10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.song), ModType.MORE)
                 .maxStacks(3)
                 .addTags(EffectTags.song, EffectTags.defensive)
                 .build();
@@ -94,6 +99,7 @@ public class BeneficialEffects implements ExileRegistryInit {
         ExileEffectBuilder.of(VALOR)
                 .stat(5, 10, Stats.TOTAL_DAMAGE.get(), ModType.FLAT)
                 .stat(2, 5, Stats.CRIT_CHANCE.get(), ModType.FLAT)
+                .stat(10, 10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.song), ModType.MORE)
                 .maxStacks(3)
                 .addTags(EffectTags.song, EffectTags.offensive)
                 .build();

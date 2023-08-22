@@ -122,3 +122,7 @@ Those chests can be opened with a key, but how do you actually get the key? Mayb
  - mob damage balanced
  
  - fixed aoe stats not working
+ 
+ - new spell: resonance
+ 
+ - hymns/songs now boost song damage, and with the additional spell, a physical/bard caster might be possible to play as!

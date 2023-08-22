@@ -39,5 +39,30 @@ public class SongSpells implements ExileRegistryInit {
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.ENCHANTED_HIT, 10D, 1D))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.NOTE, 20D, 1D))
                 .build();
+
+        SpellBuilder.of("resonance", PlayStyle.INT, SpellConfiguration.Builder.multiCast(7, 20, 10, 3)
+                                .setSwingArm().setChargesAndRegen("resonance", 3, 20 * 30)
+                                .applyCastSpeedToCooldown(), "Resonance",
+                        Arrays.asList(SpellTag.projectile, SpellTag.area, SpellTag.damage, SpellTag.song))
+                .manualDesc(
+                        "Throw out a ball of music, dealing " + SpellCalcs.POWER_CHORD.getLocDmgTooltip()
+                                + " " + Elements.Physical.getIconNameDmg() + " and causing an explosion if the 2nd projectile hits too.")
+                .weaponReq(CastingWeapon.MAGE_WEAPON)
+                .onCast(PartBuilder.playSound(SoundEvents.SNOWBALL_THROW, 1D, 1D))
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.AIR, 1D, 1D, SlashEntities.SIMPLE_PROJECTILE.get(), 20D, false)))
+                .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.NOTE, 2D, 0.15D))
+
+                .onExpire(PartBuilder.damageInAoe(SpellCalcs.POWER_CHORD, Elements.Physical, 1.5D)
+                        .addActions(SpellAction.EXILE_EFFECT.giveSeconds(NegativeEffects.CHARM, 6)))
+
+                .onExpire(PartBuilder.damageInAoeIfCharmed(SpellCalcs.POWER_CHORD, Elements.Physical, 3D)
+                        .addPerEntityHit(PartBuilder.aoeParticles(ParticleTypes.NOTE, 100D, 1D))
+                        .addPerEntityHit(PartBuilder.aoeParticles(ParticleTypes.EXPLOSION, 1D, 0.1D))
+                        .addPerEntityHit(PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1d))
+                )
+
+                .onExpire(PartBuilder.aoeParticles(ParticleTypes.ENCHANTED_HIT, 10D, 1D))
+                .onExpire(PartBuilder.aoeParticles(ParticleTypes.NOTE, 20D, 1D))
+                .build();
     }
 }

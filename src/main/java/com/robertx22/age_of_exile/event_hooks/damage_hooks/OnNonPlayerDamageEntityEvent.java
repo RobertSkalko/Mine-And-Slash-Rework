@@ -28,13 +28,13 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
 
     @Override
     public void accept(ExileEvents.OnDamageEntity event) {
+
         if (event.mob.level().isClientSide) {
             return;
         }
         if (event.source.is(DamageTypes.FELL_OUT_OF_WORLD)) {
             return;
         }
-
         if (DmgSourceUtils.isMyDmgSource(event.source)) {
             return;
         }
@@ -42,6 +42,7 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
             //     OnDmgDisableEnviroDmg.accept(event);
             return;
         }
+      
         if (!(event.source.getEntity() instanceof Player)) {
 
             if (event.source.getEntity() instanceof SummonEntity summon) {
@@ -85,8 +86,6 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
                     }
                 }
             } else {
-
-                // todo, i'm not sure if i want to override vanila damage or keep using both...
                 OnHurtEvent.onHurtEvent(new AttackInformation(event, AttackInformation.Mitigation.PRE, event.mob, event.source, event.damage));
             }
         }

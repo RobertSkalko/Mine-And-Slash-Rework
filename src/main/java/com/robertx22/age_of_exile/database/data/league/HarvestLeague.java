@@ -130,6 +130,12 @@ public class HarvestLeague extends LeagueMechanic {
         if (RandomUtils.roll(5)) {
             return EntityType.WITCH;
         }
+        if (RandomUtils.roll(5)) {
+            return EntityType.PIGLIN_BRUTE;
+        }
+        if (RandomUtils.roll(2)) {
+            return EntityType.STRAY;
+        }
         return EntityType.SPIDER;
     }
 

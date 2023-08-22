@@ -16,6 +16,12 @@
       "max": 5.0,
       "min": 2.0,
       "stat": "critical_hit"
+    },
+    {
+      "type": "MORE",
+      "max": 10.0,
+      "min": 10.0,
+      "stat": "song_spell_dmg"
     }
   ],
   "tags": [

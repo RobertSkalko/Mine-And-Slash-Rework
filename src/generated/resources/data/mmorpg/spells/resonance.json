@@ -1,0 +1,269 @@
+{
+  "attached": {
+    "entity_components": {
+      "default_entity_name": [
+        {
+          "acts": [
+            {
+              "type": "particles_in_radius",
+              "map": {
+                "motion": "None",
+                "particle_count": 2.0,
+                "particle_type": "minecraft:note",
+                "radius": 0.15
+              }
+            }
+          ],
+          "en_preds": [],
+          "ifs": [
+            {
+              "type": "x_ticks_condition",
+              "map": {
+                "tick_rate": 1.0
+              }
+            }
+          ],
+          "targets": []
+        },
+        {
+          "acts": [
+            {
+              "type": "damage",
+              "map": {
+                "element": "Physical",
+                "value_calculation": "power_chord"
+              }
+            },
+            {
+              "type": "exile_effect",
+              "map": {
+                "count": 1.0,
+                "exile_potion_id": "negative/10",
+                "potion_action": "GIVE_STACKS",
+                "potion_dur": 120.0
+              }
+            }
+          ],
+          "en_preds": [],
+          "ifs": [
+            {
+              "type": "on_entity_expire",
+              "map": {}
+            }
+          ],
+          "targets": [
+            {
+              "type": "aoe",
+              "map": {
+                "en_predicate": "enemies",
+                "radius": 1.5,
+                "selection_type": "RADIUS"
+              }
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "type": "damage",
+              "map": {
+                "element": "Physical",
+                "value_calculation": "power_chord"
+              }
+            }
+          ],
+          "en_preds": [
+            {
+              "type": "has_effect",
+              "map": {
+                "potion_id": "mmorpg:negative/10"
+              }
+            }
+          ],
+          "ifs": [
+            {
+              "type": "on_entity_expire",
+              "map": {}
+            }
+          ],
+          "per_entity_hit": [
+            {
+              "acts": [
+                {
+                  "type": "particles_in_radius",
+                  "map": {
+                    "motion": "None",
+                    "particle_count": 100.0,
+                    "particle_type": "minecraft:note",
+                    "radius": 1.0
+                  }
+                }
+              ],
+              "en_preds": [],
+              "ifs": [],
+              "targets": []
+            },
+            {
+              "acts": [
+                {
+                  "type": "particles_in_radius",
+                  "map": {
+                    "motion": "None",
+                    "particle_count": 1.0,
+                    "particle_type": "minecraft:explosion",
+                    "radius": 0.1
+                  }
+                }
+              ],
+              "en_preds": [],
+              "ifs": [],
+              "targets": []
+            },
+            {
+              "acts": [
+                {
+                  "type": "sound",
+                  "map": {
+                    "pitch": 1.0,
+                    "sound": "minecraft:entity.generic.explode",
+                    "volume": 1.0
+                  }
+                }
+              ],
+              "en_preds": [],
+              "ifs": [],
+              "targets": []
+            }
+          ],
+          "targets": [
+            {
+              "type": "aoe",
+              "map": {
+                "en_predicate": "enemies",
+                "radius": 3.0,
+                "selection_type": "RADIUS"
+              }
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "type": "particles_in_radius",
+              "map": {
+                "motion": "None",
+                "particle_count": 10.0,
+                "particle_type": "minecraft:enchanted_hit",
+                "radius": 1.0
+              }
+            }
+          ],
+          "en_preds": [],
+          "ifs": [
+            {
+              "type": "on_entity_expire",
+              "map": {}
+            }
+          ],
+          "targets": []
+        },
+        {
+          "acts": [
+            {
+              "type": "particles_in_radius",
+              "map": {
+                "motion": "None",
+                "particle_count": 20.0,
+                "particle_type": "minecraft:note",
+                "radius": 1.0
+              }
+            }
+          ],
+          "en_preds": [],
+          "ifs": [
+            {
+              "type": "on_entity_expire",
+              "map": {}
+            }
+          ],
+          "targets": []
+        }
+      ]
+    },
+    "on_cast": [
+      {
+        "acts": [
+          {
+            "type": "sound",
+            "map": {
+              "pitch": 1.0,
+              "sound": "minecraft:entity.snowball.throw",
+              "volume": 1.0
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": []
+      },
+      {
+        "acts": [
+          {
+            "type": "projectile",
+            "map": {
+              "entity_name": "default_entity_name",
+              "gravity": false,
+              "item": "minecraft:air",
+              "life_ticks": 20.0,
+              "proj_count": 1.0,
+              "proj_en": "mmorpg:spell_projectile",
+              "proj_speed": 1.0
+            }
+          }
+        ],
+        "en_preds": [],
+        "ifs": [
+          {
+            "type": "on_spell_cast",
+            "map": {}
+          }
+        ],
+        "targets": []
+      }
+    ]
+  },
+  "config": {
+    "apply_cast_speed_to_cd": true,
+    "cast_time_ticks": 10,
+    "castingWeapon": "MAGE_WEAPON",
+    "charge_name": "resonance",
+    "charge_regen": 600,
+    "charges": 3,
+    "cooldown_ticks": 20,
+    "imbues": 0,
+    "mana_cost": {
+      "max": 5.25,
+      "min": 7.0
+    },
+    "style": "int",
+    "summonType": "NONE",
+    "swing_arm": true,
+    "tags": [
+      "projectile",
+      "area",
+      "damage",
+      "song"
+    ],
+    "times_to_cast": 3
+  },
+  "disabled_dims": [],
+  "effect_tip": "",
+  "identifier": "resonance",
+  "manual_tip": true,
+  "weight": 1000
+}

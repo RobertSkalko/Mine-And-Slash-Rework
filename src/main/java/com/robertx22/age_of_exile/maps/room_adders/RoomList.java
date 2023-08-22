@@ -20,7 +20,7 @@ public class RoomList {
     public static List<DungeonRoom> getAllRooms() {
 
         if (rooms.isEmpty()) {
-            
+
             new NatureRoomAdder().addAllRooms();
             new SteampunkRoomAdder().addAllRooms();
             new TentRoomAdder().addAllRooms();
@@ -38,6 +38,8 @@ public class RoomList {
             new IceTempleRoomAdder().addAllRooms();
             new WarpedRoomAdder().addAllRooms();
             new AllRoomAdder().addAllRooms();
+            new Sewer2RoomAdder().addAllRooms();
+
 
             rooms.add(new DungeonRoom("simple_prismarine", RoomType.FOUR_WAY, RoomGroup.MISC));
             rooms.add(new DungeonRoom("prismarine", RoomType.ENTRANCE, RoomGroup.MISC));

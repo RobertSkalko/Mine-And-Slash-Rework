@@ -7,21 +7,39 @@
   "stats": [
     {
       "type": "FLAT",
-      "max": -6.0,
-      "min": -3.0,
-      "stat": "str_dmg_received"
+      "max": 10.0,
+      "min": 5.0,
+      "stat": "physical_resist"
     },
     {
       "type": "FLAT",
-      "max": -6.0,
-      "min": -3.0,
-      "stat": "dex_dmg_received"
+      "max": 10.0,
+      "min": 5.0,
+      "stat": "chaos_resist"
     },
     {
       "type": "FLAT",
-      "max": -6.0,
-      "min": -3.0,
-      "stat": "int_dmg_received"
+      "max": 10.0,
+      "min": 5.0,
+      "stat": "fire_resist"
+    },
+    {
+      "type": "FLAT",
+      "max": 10.0,
+      "min": 5.0,
+      "stat": "water_resist"
+    },
+    {
+      "type": "FLAT",
+      "max": 10.0,
+      "min": 5.0,
+      "stat": "lightning_resist"
+    },
+    {
+      "type": "MORE",
+      "max": 10.0,
+      "min": 10.0,
+      "stat": "song_spell_dmg"
     }
   ],
   "tags": [

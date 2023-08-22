@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.mixin_methods.OnHurtEvent;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.player.Player;
 
 public class OnPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDamageEntity> {
@@ -21,6 +22,9 @@ public class OnPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDamag
         }
         if (DmgSourceUtils.isMyDmgSource(event.source)) {
             return;
+        }
+        if (event.mob instanceof EnderDragon) {
+            return; // todo temp fix
         }
         if (event.source.getEntity() instanceof Player) {
             OnHurtEvent.onHurtEvent(new AttackInformation(event, AttackInformation.Mitigation.POST, event.mob, event.source, event.damage));

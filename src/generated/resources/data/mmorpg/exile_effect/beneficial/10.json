@@ -16,6 +16,12 @@
       "max": 0.5,
       "min": 0.25,
       "stat": "mana_regen"
+    },
+    {
+      "type": "MORE",
+      "max": 10.0,
+      "min": 10.0,
+      "stat": "song_spell_dmg"
     }
   ],
   "tags": [

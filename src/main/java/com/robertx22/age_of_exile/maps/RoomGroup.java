@@ -33,6 +33,7 @@ public abstract class RoomGroup implements IWeighted {
     public static WarpedGroup WARPED = new WarpedGroup();
     public static BastionGroup BASTION = new BastionGroup();
     public static SpiderNestGroup SPIDER_NEST = new SpiderNestGroup();
+    public static Sewer2Group SEWER2 = new Sewer2Group();
 
 
     public static AllGroup ALL = new AllGroup();
@@ -63,6 +64,7 @@ public abstract class RoomGroup implements IWeighted {
 
             all.add(ICE_TEMPLE);
             all.add(MISC);
+            all.add(SEWER2);
 
             all.add(ALL);
         }
