@@ -35,6 +35,7 @@ public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
             data.getCooldowns().onTicksPass(1);
 
             if (entity.tickCount % 20 == 0) {
+             
                 data.leech.onSecondUseLeeches(data);
             }
 

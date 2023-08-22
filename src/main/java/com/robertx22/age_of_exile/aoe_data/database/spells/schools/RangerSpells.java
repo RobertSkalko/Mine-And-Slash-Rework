@@ -26,6 +26,7 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.Arrays;
 
@@ -237,6 +238,36 @@ public class RangerSpells implements ExileRegistryInit {
                 .onTick(PartBuilder.particleOnTick(5D, ParticleTypes.CRIT, 5D, 0.1D)
                 )
                 .build();
+
+        SpellBuilder.of("meteor_arrow", PlayStyle.DEX, SpellConfiguration.Builder.arrowSpell(15, 10)
+                                .setChargesAndRegen("meteor_arrow", 3, 20 * 10), "Meteor Arrow",
+                        Arrays.asList(SpellTag.projectile, SpellTag.area, SpellTag.damage))
+                .weaponReq(CastingWeapon.RANGED)
+                .onCast(PartBuilder.playSound(SoundEvents.ARROW_SHOOT, 1D, 1D))
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.createArrow(1D).put(MapField.ENTITY_NAME, "arrow")))
+
+                .onHit("arrow", PartBuilder.damage(SpellCalcs.METEOR, Elements.Physical))
+                .onHit("arrow", PartBuilder.playSound(SoundEvents.ARROW_HIT, 1D, 1D))
+                .onTick("arrow", PartBuilder.particleOnTick(5D, ParticleTypes.LAVA, 5D, 0.1D))
+
+                .onExpire("arrow", PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 0D, 7D)
+                        .put(MapField.ENTITY_NAME, "height_en")))
+
+                .onExpire("height_en", PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(Blocks.MAGMA_BLOCK, 200D)
+                        .put(MapField.ENTITY_NAME, "meteor")
+                        .put(MapField.FIND_NEAREST_SURFACE, false)
+                        .put(MapField.BLOCK_FALL_SPEED, -0.03D)
+                        .put(MapField.IS_BLOCK_FALLING, true)))
+
+                .onTick("meteor", PartBuilder.particleOnTick(2D, ParticleTypes.LAVA, 2D, 0.5D))
+                .onExpire("meteor", PartBuilder.damageInAoe(SpellCalcs.METEOR, Elements.Fire, 3D))
+                .onExpire("meteor", PartBuilder.aoeParticles(ParticleTypes.LAVA, 150D, 3D))
+                .onExpire("meteor", PartBuilder.aoeParticles(ParticleTypes.ASH, 25D, 3D))
+                .onExpire("meteor", PartBuilder.aoeParticles(ParticleTypes.EXPLOSION, 15D, 3D))
+                .onExpire("meteor", PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
+
+                .build();
+
 
         SpellBuilder.of(MAKE_ARROWS, PlayStyle.DEX, SpellConfiguration.Builder.nonInstant(10, 20 * 60 * 5, 40)
                         , "Produce Arrows",

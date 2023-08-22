@@ -37,7 +37,7 @@ public class HarvestLeague extends LeagueMechanic {
     public void onKillMob(MapData map, LootInfo info) {
         float lootChance = (maximumBonusLootTimes * (100F / maxKills)); // i hope this formula isn't wrong
 
-        if (RandomUtils.roll(lootChance)) { // todo test
+        if (RandomUtils.roll(lootChance)) {
             for (ItemStack stack : generateMobLoot(info)) {
                 info.mobKilled.spawnAtLocation(stack, 1);
             }
@@ -158,13 +158,13 @@ public class HarvestLeague extends LeagueMechanic {
 
     @Override
     public int startY() {
-        return 70;
+        return 85;
     }
 
 
     @Override
     public boolean isInsideLeague(ServerLevel level, BlockPos pos) {
-        return pos.getY() >= startY() && pos.getY() <= (startY() + 20);
+        return pos.getY() >= startY() && pos.getY() <= (startY() + 30);
     }
 
     @Override

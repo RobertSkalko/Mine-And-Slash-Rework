@@ -57,7 +57,7 @@ public class LeagueMechanics {
 
         @Override
         public boolean isInsideLeague(ServerLevel level, BlockPos pos) {
-            return pos.getY() < 67;
+            return pos.getY() < 77;
         }
 
         @Override

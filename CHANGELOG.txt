@@ -93,6 +93,8 @@ Those chests can be opened with a key, but how do you actually get the key? Mayb
 
  - New dungeon tileset by @Eclipse/@Serphentin: bastion!
  
+ - New dungeon tileset by @TheMichu: sewers!
+ 
  - new currency: orb of quality, increases base stat of gears by up to 20%
  
  - fixed vanilla attacks doing damage
@@ -126,3 +128,7 @@ Those chests can be opened with a key, but how do you actually get the key? Mayb
  - new spell: resonance
  
  - hymns/songs now boost song damage, and with the additional spell, a physical/bard caster might be possible to play as!
+ 
+ - added experimental way to unstuck mobs from walls in maps
+ 
+ - new spell: meteor arrow

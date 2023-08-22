@@ -32,8 +32,6 @@ public class BossProcessor extends DataProcessor {
             Load.Unit(en).setupRandomBoss(); // todo
         }
 
-        // todo
-        // need to make custom bosses with spells etc
 
     }
 

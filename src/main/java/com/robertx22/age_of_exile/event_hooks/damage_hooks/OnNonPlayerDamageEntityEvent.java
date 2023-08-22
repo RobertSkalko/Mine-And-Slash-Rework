@@ -9,6 +9,7 @@ import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformatio
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.DmgSourceUtils;
 import com.robertx22.age_of_exile.mixin_methods.OnHurtEvent;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
+import com.robertx22.age_of_exile.uncommon.UnstuckMobs;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
@@ -18,6 +19,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -35,14 +37,26 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
         if (event.source.is(DamageTypes.FELL_OUT_OF_WORLD)) {
             return;
         }
+        if (event.mob instanceof Player == false) {
+            if (WorldUtils.isMapWorldClass(event.mob.level())) {
+                if (event.source.is(DamageTypes.IN_WALL)) {
+                    UnstuckMobs.unstuckFromWalls(event.mob);
+                    return;
+                }
+            }
+        }
+
         if (DmgSourceUtils.isMyDmgSource(event.source)) {
             return;
         }
         if (LivingHurtUtils.isEnviromentalDmg(event.source)) {
-            //     OnDmgDisableEnviroDmg.accept(event);
-            return;
+            if (event.mob instanceof Player == false) {
+                event.damage = 0;
+                event.canceled = true;
+                return;
+            }
         }
-      
+
         if (!(event.source.getEntity() instanceof Player)) {
 
             if (event.source.getEntity() instanceof SummonEntity summon) {
