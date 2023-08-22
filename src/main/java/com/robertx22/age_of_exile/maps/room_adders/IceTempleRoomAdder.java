@@ -1,12 +1,11 @@
 package com.robertx22.age_of_exile.maps.room_adders;
 
-import com.robertx22.age_of_exile.maps.RoomGroup;
 import com.robertx22.age_of_exile.maps.generator.RoomType;
 
 public class IceTempleRoomAdder extends BaseRoomAdder {
 
     public IceTempleRoomAdder() {
-        super(RoomGroup.ICE_TEMPLE);
+        super();
     }
 
     @Override
@@ -17,8 +16,8 @@ public class IceTempleRoomAdder extends BaseRoomAdder {
         add("ice_rooms", RoomType.CURVED_HALLWAY);
         add("prayer_room", RoomType.CURVED_HALLWAY);
 
-        add("boss_pool", RoomType.END).setBoss();
-        add("evoker_boss", RoomType.END).setBoss();
+        add("boss_pool", RoomType.END);
+        add("evoker_boss", RoomType.END);
         add("prison", RoomType.END);
 
         add("pit", RoomType.ENTRANCE);

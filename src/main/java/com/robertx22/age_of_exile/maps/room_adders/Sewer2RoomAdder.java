@@ -1,12 +1,11 @@
 package com.robertx22.age_of_exile.maps.room_adders;
 
-import com.robertx22.age_of_exile.maps.RoomGroup;
 import com.robertx22.age_of_exile.maps.generator.RoomType;
 
 public class Sewer2RoomAdder extends BaseRoomAdder {
 
     public Sewer2RoomAdder() {
-        super(RoomGroup.SEWER2);
+        super();
     }
 
     @Override
@@ -19,12 +18,12 @@ public class Sewer2RoomAdder extends BaseRoomAdder {
         add("sewers_corner_03vcf", RoomType.CURVED_HALLWAY);
         add("sewers_corner_03vf", RoomType.CURVED_HALLWAY);
 
-        add("sewers_bossroom_01", RoomType.END).setBoss();
-        add("sewers_bossroom_02", RoomType.END).setBoss();
-        add("sewers_bossroom_03", RoomType.END).setBoss();
-        add("sewers_bossroom_04", RoomType.END).setBoss();
-        add("sewers_bossroom_05", RoomType.END).setBoss();
-        add("sewers_bossroom_06", RoomType.END).setBoss();
+        add("sewers_bossroom_01", RoomType.END);
+        add("sewers_bossroom_02", RoomType.END);
+        add("sewers_bossroom_03", RoomType.END);
+        add("sewers_bossroom_04", RoomType.END);
+        add("sewers_bossroom_05", RoomType.END);
+        add("sewers_bossroom_06", RoomType.END);
 
         add("sewers_beginroom_base", RoomType.ENTRANCE);
 

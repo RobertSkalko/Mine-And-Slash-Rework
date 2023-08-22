@@ -1,20 +1,20 @@
 package com.robertx22.age_of_exile.maps.room_adders;
 
 
-import com.robertx22.age_of_exile.maps.RoomGroup;
 import com.robertx22.age_of_exile.maps.generator.RoomType;
 
 public class BrickRoomAdder extends BaseRoomAdder {
 
     public BrickRoomAdder() {
-        super(RoomGroup.BRICK);
+        super();
     }
+
 
     @Override
     public void addAllRooms() {
 
-        add("boss_exit_hidden_lever", RoomType.END).setBoss();
-        add("trader0", RoomType.END).setTrader();
+        add("boss_exit_hidden_lever", RoomType.END);
+        add("trader0", RoomType.END);
 
         add("0", RoomType.ENTRANCE);
         add("2", RoomType.ENTRANCE);
@@ -26,7 +26,7 @@ public class BrickRoomAdder extends BaseRoomAdder {
         add("lava_spiders", RoomType.STRAIGHT_HALLWAY);
         add("simple1", RoomType.STRAIGHT_HALLWAY);
 
-        add("boss0", RoomType.TRIPLE_HALLWAY).setBoss();
+        add("boss0", RoomType.TRIPLE_HALLWAY);
 
     }
 }

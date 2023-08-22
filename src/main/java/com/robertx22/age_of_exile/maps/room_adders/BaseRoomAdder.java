@@ -1,26 +1,25 @@
 package com.robertx22.age_of_exile.maps.room_adders;
 
-import com.robertx22.age_of_exile.maps.DungeonRoom;
-import com.robertx22.age_of_exile.maps.RoomGroup;
+import com.robertx22.age_of_exile.maps.dungeon_reg.Dungeon;
 import com.robertx22.age_of_exile.maps.generator.RoomType;
 
 public abstract class BaseRoomAdder {
 
-    final RoomGroup group;
+    Dungeon dun;
 
-    public BaseRoomAdder(RoomGroup group) {
-        this.group = group;
+    public BaseRoomAdder() {
+
     }
 
-    public DungeonRoom add(String id, RoomType type) {
-        DungeonRoom room = new DungeonRoom(id, type, group);
-
-        RoomList.getRoomsINTERNAL()
-                .add(room);
-
-        return room;
+    public void add(String id, RoomType type) {
+        dun.getRoomList(type).add(id);
     }
 
     public abstract void addAllRooms();
+
+    public final void addRoomsToDungeon(Dungeon dun) {
+        this.dun = dun;
+        addAllRooms();
+    }
 
 }

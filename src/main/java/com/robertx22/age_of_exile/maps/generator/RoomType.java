@@ -1,8 +1,7 @@
 package com.robertx22.age_of_exile.maps.generator;
 
 import com.robertx22.age_of_exile.maps.DungeonRoom;
-import com.robertx22.age_of_exile.maps.RoomGroup;
-import com.robertx22.age_of_exile.maps.room_adders.RoomList;
+import com.robertx22.age_of_exile.maps.dungeon_reg.Dungeon;
 import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.world.level.block.Rotation;
@@ -96,71 +95,57 @@ public enum RoomType implements IWeighted {
         this.id = id;
     }
 
-    public final DungeonRoom getTestRoom() {
-        return new DungeonRoom("test", this, RoomGroup.MISC).setTest();
-    }
 
     public abstract List<RoomRotation> getRotations();
 
-    public final List<DungeonRoom> getAllOfThisTypeRooms() {
-        return RoomList.getAllRooms()
+    public final List<DungeonRoom> getAllOfThisTypeRooms(Dungeon dun) {
+        return dun.getRooms()
                 .stream()
                 .filter(x -> x.type.equals(this))
                 .collect(Collectors.toList());
 
     }
 
-    public DungeonRoom getRandomRoom(final RoomGroup group, DungeonBuilder builder) {
-        if (builder.debug) {
-            return this.getTestRoom();
-        } else {
-            RoomGroup g = group;
+    public DungeonRoom getRandomRoom(Dungeon dun, DungeonBuilder builder) {
 
-            if (g.allowsOtherTypes()) {
-                if (RandomUtils.roll(group.chanceForOtherGroups, builder.rand)) {
-                    RoomGroup tryGroup = RandomUtils.weightedRandom(group.possibleOtherTypes(), builder.rand.nextDouble());
 
-                    if (tryGroup.hasRoomFor(this)) {
-                        g = tryGroup;
-                        // only accept the other type if it has a room for this.
-                        // if not, it'll use the fallback group and possibly look ugly for this one.
-                    }
+        Dungeon d = dun;
+
+        if (dun.allowsOtherTilesets()) {
+            if (RandomUtils.roll(dun.other_tileset_chance, builder.rand)) {
+                Dungeon tryGroup = RandomUtils.weightedRandom(dun.getPossibleOtherTilesets(), builder.rand.nextDouble());
+                if (tryGroup.hasRoomFor(this)) {
+                    d = tryGroup;
+                    // only accept the other type if it has a room for this.
+                    // if not, it'll use the fallback group and possibly look ugly for this one.
                 }
             }
+        }
 
-            List<DungeonRoom> possible = new ArrayList<>();
-            for (DungeonRoom x : getAllOfThisTypeRooms()) {
-                if (x.group.equals(g)) {
-                    possible.add(x);
-                }
-            }
+        List<DungeonRoom> possible = d.getRoomsOfType(this);
 
-            if (possible.isEmpty()) {
 
-                RoomGroup fallback = group.getFallbackGroup(builder.rand);
+        if (possible.isEmpty()) {
 
-                // fallback to misc if no possible
-                possible.addAll(RoomList.getAllRooms()
-                        .stream()
-                        .filter(x -> x.type.equals(this) && x.group.equals(fallback))
-                        .collect(Collectors.toList()));
+            Dungeon fallback = dun.getFallbackGroup(builder.rand);
 
-            }
+            // fallback to misc if no possible
 
-            if (possible.isEmpty()) {
-                System.out.println("No possible rooms?");
-            }
-
-            if (builder.dungeon.bossRooms >= builder.maxBossRooms) {
-                possible = tryFilter(possible, r -> !r.isBoss);
-            }
-            if (builder.dungeon.puzzleBlockRooms >= builder.maxPuzzleBlockRooms) {
-                possible = tryFilter(possible, r -> !r.isPuzzleBlock);
-            }
-
-            return RandomUtils.weightedRandom(possible, builder.rand.nextDouble());
+            possible.addAll(fallback.getRoomsOfType(this));
 
         }
+
+        if (possible.isEmpty()) {
+            System.out.println("No possible rooms?");
+        }
+
+        if (builder.builtDungeon.bossRooms >= builder.maxBossRooms) {
+            possible = tryFilter(possible, r -> !r.isBoss);
+        }
+
+        return RandomUtils.weightedRandom(possible, builder.rand.nextDouble());
+
+
     }
 
     // if filtering returns nothing, dont filter

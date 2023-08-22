@@ -1,13 +1,12 @@
 package com.robertx22.age_of_exile.maps.room_adders;
 
 
-import com.robertx22.age_of_exile.maps.RoomGroup;
 import com.robertx22.age_of_exile.maps.generator.RoomType;
 
 public class StoneBrickRoomAdder extends BaseRoomAdder {
 
     public StoneBrickRoomAdder() {
-        super(RoomGroup.STONE_BRICK);
+        super();
     }
 
     @Override
@@ -27,18 +26,18 @@ public class StoneBrickRoomAdder extends BaseRoomAdder {
         add("blocked_spiders", RoomType.STRAIGHT_HALLWAY);
 
         add("hidden_button2", RoomType.TRIPLE_HALLWAY);
-        add("boss_trap", RoomType.STRAIGHT_HALLWAY).setBoss();
-        add("trader", RoomType.END).setTrader();
+        add("boss_trap", RoomType.STRAIGHT_HALLWAY);
+        add("trader", RoomType.END);
 
         add("slime_puzzle", RoomType.CURVED_HALLWAY);
         add("hidden_lever0", RoomType.END);
         add("simple1", RoomType.FOUR_WAY);
         add("simple2", RoomType.STRAIGHT_HALLWAY);
-        add("puzzle_plus_web", RoomType.TRIPLE_HALLWAY).setPuzzleBlock();
+        add("puzzle_plus_web", RoomType.TRIPLE_HALLWAY);
 
         add("basic", RoomType.FOUR_WAY);
         add("basic", RoomType.ENTRANCE);
-        add("boss", RoomType.END).setBoss();
+        add("boss", RoomType.END);
         add("parkour", RoomType.TRIPLE_HALLWAY);
         add("basic", RoomType.CURVED_HALLWAY);
         add("basic", RoomType.STRAIGHT_HALLWAY);
@@ -46,8 +45,8 @@ public class StoneBrickRoomAdder extends BaseRoomAdder {
         add("simple_trap0", RoomType.CURVED_HALLWAY);
         add("simple_prison0", RoomType.END);
         add("simple0", RoomType.FOUR_WAY);
-        add("simple0", RoomType.STRAIGHT_HALLWAY).weight(2000);
-        add("simple_maze0", RoomType.TRIPLE_HALLWAY).weight(200);
+        add("simple0", RoomType.STRAIGHT_HALLWAY);
+        add("simple_maze0", RoomType.TRIPLE_HALLWAY);
 
     }
 }

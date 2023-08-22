@@ -33,7 +33,7 @@ public class ProcessChunkBlocks {
 
             DungeonBuilder builder = new DungeonBuilder(0, cpos); // todo
             builder.build();
-            BuiltRoom room = builder.dungeon.getRoomForChunk(cpos);
+            BuiltRoom room = builder.builtDungeon.getRoomForChunk(cpos);
 
             System.out.println("Room affected: " + room.getStructure()
                     .toString());
@@ -99,7 +99,7 @@ public class ProcessChunkBlocks {
 
                             DungeonBuilder builder = new DungeonBuilder(0, cpos);
                             builder.build();
-                            BuiltRoom room = builder.dungeon.getRoomForChunk(cpos);
+                            BuiltRoom room = builder.builtDungeon.getRoomForChunk(cpos);
 
                             var ran = DungeonBuilder.createRandom(0l, cpos);
 

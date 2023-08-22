@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.maps.generator;
 
 
-import com.robertx22.age_of_exile.maps.DungeonRoom;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.chunk.ChunkAccess;
 
@@ -20,8 +19,8 @@ public class ChunkProcessData {
     private BuiltRoom room;
     public boolean chanceChest = false;
 
-    public DungeonRoom getRoom() {
-        return room.room;
+    public BuiltRoom getRoom() {
+        return room;
     }
 
     public void iterateBlocks(Function<BlockPos, BlockPos> function) {

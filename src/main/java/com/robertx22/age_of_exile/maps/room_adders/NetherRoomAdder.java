@@ -1,13 +1,12 @@
 package com.robertx22.age_of_exile.maps.room_adders;
 
 
-import com.robertx22.age_of_exile.maps.RoomGroup;
 import com.robertx22.age_of_exile.maps.generator.RoomType;
 
 public class NetherRoomAdder extends BaseRoomAdder {
 
     public NetherRoomAdder() {
-        super(RoomGroup.NETHER);
+        super();
     }
 
     @Override
@@ -16,9 +15,9 @@ public class NetherRoomAdder extends BaseRoomAdder {
         add("climb_to_treasure", RoomType.CURVED_HALLWAY);
         add("the_witch", RoomType.CURVED_HALLWAY);
 
-        add("boss2", RoomType.END).setBoss();
+        add("boss2", RoomType.END);
         add("nether0", RoomType.END);
-        add("hidden_lever_boss", RoomType.END).setBoss();
+        add("hidden_lever_boss", RoomType.END);
 
         add("0", RoomType.ENTRANCE);
         add("hidden_chest_lava", RoomType.ENTRANCE);

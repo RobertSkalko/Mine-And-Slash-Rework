@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.maps.mobs;
 
 
 import com.robertx22.age_of_exile.database.data.gear_types.bases.TagList;
-import com.robertx22.age_of_exile.maps.DungeonRoom;
+import com.robertx22.age_of_exile.maps.generator.BuiltRoom;
 import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.world.entity.EntityType;
@@ -10,7 +10,6 @@ import net.minecraft.world.entity.Mob;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SpawnedMob implements IWeighted {
 
@@ -22,12 +21,21 @@ public class SpawnedMob implements IWeighted {
         this.weight = weight;
     }
 
-    public static SpawnedMob random(DungeonRoom room) {
-        return RandomUtils.weightedRandom(getAll().stream()
-                .filter(x -> room.canSpawnMob(x))
-                .collect(Collectors.toList()));
-    }
+    public static SpawnedMob random(BuiltRoom room) {
 
+        return RandomUtils.weightedRandom(getAll());
+
+        // todo mobs per dungeon..
+        /*
+        return RandomUtils.weightedRandom(getAll().stream()
+                .filter(x -> room.getDungeon()..canSpawnMob(x))
+                .collect(Collectors.toList()));
+
+         */
+    }
+    
+
+    // todo make this into data
     public static List<SpawnedMob> getAll() {
 
         if (all.isEmpty()) {

@@ -1,0 +1,35 @@
+{
+  "can_be_main": true,
+  "curved_hallways": [
+    "2",
+    "parkour0"
+  ],
+  "ends": [
+    "6",
+    "7",
+    "boss0"
+  ],
+  "entrances": [],
+  "four_ways": [
+    "0",
+    "double_level_chest"
+  ],
+  "id": "mossy_brick",
+  "mob_list": "",
+  "other_tileset": [],
+  "other_tileset_chance": 5.0,
+  "straight_hallways": [
+    "4",
+    "5",
+    "8",
+    "parkour_maze",
+    "safe_room",
+    "underwater_chest"
+  ],
+  "triple_hallway": [
+    "1",
+    "3",
+    "camo_chest"
+  ],
+  "weight": 750
+}

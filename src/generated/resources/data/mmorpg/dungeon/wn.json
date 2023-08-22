@@ -1,0 +1,36 @@
+{
+  "can_be_main": true,
+  "curved_hallways": [
+    "pond",
+    "basement_boss",
+    "hanging_platforms"
+  ],
+  "ends": [
+    "cave0",
+    "zombie_boss_shrooms"
+  ],
+  "entrances": [
+    "roses",
+    "camp_site"
+  ],
+  "four_ways": [
+    "crossroad0",
+    "big_tree"
+  ],
+  "id": "wn",
+  "mob_list": "",
+  "other_tileset": [],
+  "other_tileset_chance": 5.0,
+  "straight_hallways": [
+    "tunnel",
+    "ambush_cave",
+    "winding_road"
+  ],
+  "triple_hallway": [
+    "webhouse",
+    "webhouse",
+    "log",
+    "spider_cave"
+  ],
+  "weight": 2000
+}

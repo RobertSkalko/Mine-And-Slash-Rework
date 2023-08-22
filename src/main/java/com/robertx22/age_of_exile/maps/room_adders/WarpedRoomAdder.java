@@ -1,18 +1,17 @@
 package com.robertx22.age_of_exile.maps.room_adders;
 
-import com.robertx22.age_of_exile.maps.RoomGroup;
 import com.robertx22.age_of_exile.maps.generator.RoomType;
 
 public class WarpedRoomAdder extends BaseRoomAdder {
 
     public WarpedRoomAdder() {
-        super(RoomGroup.WARPED);
+        super();
     }
 
     @Override
     public void addAllRooms() {
 
-        
+
         add("basic", RoomType.CURVED_HALLWAY);
         add("bastion", RoomType.CURVED_HALLWAY);
         add("blocked", RoomType.CURVED_HALLWAY);

@@ -1,0 +1,28 @@
+{
+  "can_be_main": true,
+  "curved_hallways": [
+    "4"
+  ],
+  "ends": [
+    "6"
+  ],
+  "entrances": [
+    "0"
+  ],
+  "four_ways": [
+    "3"
+  ],
+  "id": "tent",
+  "mob_list": "",
+  "other_tileset": [],
+  "other_tileset_chance": 5.0,
+  "straight_hallways": [
+    "1",
+    "trader0"
+  ],
+  "triple_hallway": [
+    "boss1",
+    "2"
+  ],
+  "weight": 600
+}

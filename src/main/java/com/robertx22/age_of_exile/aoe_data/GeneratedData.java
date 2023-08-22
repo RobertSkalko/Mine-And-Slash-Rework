@@ -25,10 +25,11 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.old.AutoDatapackStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearReg;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
+import com.robertx22.age_of_exile.maps.dungeon_reg.Dungeons;
 
 public class GeneratedData {
 
-    
+
     // as these only add serizables.
     // They shouldn't be needed at all to play the game.
     // If it errors without them, then that means i hardcoded something i shouldn't have
@@ -69,6 +70,8 @@ public class GeneratedData {
         new AutoDatapackStats().registerAll();
 
         new BaseStatsAdder().registerAll();
+
+        Dungeons.init();
 
         GameBalanceConfig c = new GameBalanceConfig();
         c.addToSerializables();

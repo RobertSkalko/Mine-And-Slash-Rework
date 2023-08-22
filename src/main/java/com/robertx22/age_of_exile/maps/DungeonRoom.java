@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.maps;
 
+import com.robertx22.age_of_exile.maps.dungeon_reg.Dungeon;
 import com.robertx22.age_of_exile.maps.generator.RoomType;
-import com.robertx22.age_of_exile.maps.mobs.SpawnedMob;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.library_of_exile.registry.IWeighted;
 import net.minecraft.resources.ResourceLocation;
@@ -9,50 +9,26 @@ import net.minecraft.resources.ResourceLocation;
 public class DungeonRoom implements IWeighted {
 
     public ResourceLocation loc;
-    public RoomGroup group;
     public RoomType type;
     int weight = 1000;
     public boolean isBoss = false;
-    public boolean isPuzzleBlock = false;
-    public boolean isTrader = false;
 
-    public DungeonRoom(String id, RoomType type, RoomGroup group) {
-        this.loc = new ResourceLocation(SlashRef.MODID, "dun/" + group.folder + "/" + type.id + "/" + id);
+    public DungeonRoom(Dungeon dun, String id, RoomType type) {
+        this.loc = new ResourceLocation(SlashRef.MODID, "dun/" + dun.id + "/" + type.id + "/" + id);
         this.type = type;
-        this.group = group;
     }
 
-
-    public boolean canSpawnMob(SpawnedMob mob) {
-        return group.canSpawnMob(mob);
-    }
-
-    public DungeonRoom setTest() {
-        isTest = true;
-        return this;
-    }
-
-    public DungeonRoom setPuzzleBlock() {
-        isPuzzleBlock = true;
-        return this;
-    }
 
     public DungeonRoom setBoss() {
         this.isBoss = true;
         return this;
     }
 
-    public DungeonRoom setTrader() {
-        this.isTrader = true;
-        return this;
-    }
 
     public DungeonRoom weight(int weight) {
         this.weight = weight;
         return this;
     }
-
-    boolean isTest = false;
 
     @Override
     public int Weight() {

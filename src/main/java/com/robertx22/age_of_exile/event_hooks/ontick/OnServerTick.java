@@ -65,7 +65,7 @@ public class OnServerTick {
                 }
 
                 UnequipGear.onTick(player);
-                
+
                 if (player.tickCount % 60 == 0) {
                     Load.playerRPGData(player).getSkillGemInventory().removeSupportGemsIfTooMany(player);
                     Load.playerRPGData(player).getJewels().checkRemoveJewels(player);

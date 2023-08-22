@@ -51,10 +51,12 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
         }
         if (LivingHurtUtils.isEnviromentalDmg(event.source)) {
             if (event.mob instanceof Player == false) {
-                event.damage = 0;
-                event.canceled = true;
-                return;
+                if (WorldUtils.isMapWorldClass(event.mob.level())) {
+                    event.damage = 0;
+                    event.canceled = true;
+                }
             }
+            return;
         }
 
         if (!(event.source.getEntity() instanceof Player)) {

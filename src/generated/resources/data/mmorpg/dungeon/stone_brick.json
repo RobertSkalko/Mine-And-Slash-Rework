@@ -1,0 +1,48 @@
+{
+  "can_be_main": true,
+  "curved_hallways": [
+    "drowned_puzzle",
+    "shooting_gallery",
+    "slime_puzzle",
+    "basic",
+    "simple_trap0"
+  ],
+  "ends": [
+    "throne_boss",
+    "trader",
+    "hidden_lever0",
+    "boss",
+    "simple_prison0"
+  ],
+  "entrances": [
+    "loot_behind_portal",
+    "basic"
+  ],
+  "four_ways": [
+    "dark_lever",
+    "hidden_ceiling",
+    "simple1",
+    "basic",
+    "simple0"
+  ],
+  "id": "stone_brick",
+  "mob_list": "",
+  "other_tileset": [],
+  "other_tileset_chance": 5.0,
+  "straight_hallways": [
+    "crypt",
+    "fast_or_slow",
+    "blocked_spiders",
+    "boss_trap",
+    "simple2",
+    "basic",
+    "simple0"
+  ],
+  "triple_hallway": [
+    "hidden_button2",
+    "puzzle_plus_web",
+    "parkour",
+    "simple_maze0"
+  ],
+  "weight": 1000
+}

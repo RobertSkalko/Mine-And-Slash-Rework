@@ -21,6 +21,7 @@ import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
 import com.robertx22.age_of_exile.database.empty_entries.EmptyAffix;
+import com.robertx22.age_of_exile.maps.dungeon_reg.Dungeon;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.action.StatEffect;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.condition.StatCondition;
@@ -78,5 +79,8 @@ public class ExileRegistryTypes {
             return null;
         }
     });
+
+    public static ExileRegistryType DUNGEON = ExileRegistryType.register(SlashRef.MODID, "dungeon", 34, Dungeon.SERIALIZER, SyncTime.ON_LOGIN); // todo does the client need this?
+
 
 }

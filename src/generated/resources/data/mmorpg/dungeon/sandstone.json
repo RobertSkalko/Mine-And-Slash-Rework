@@ -1,0 +1,39 @@
+{
+  "can_be_main": true,
+  "curved_hallways": [
+    "prison",
+    "trap_puzzle0",
+    "hidden_button0"
+  ],
+  "ends": [
+    "boss_and_skellies",
+    "boss",
+    "trap_prison0",
+    "tnt_pyramid"
+  ],
+  "entrances": [
+    "basic"
+  ],
+  "four_ways": [
+    "treasure0",
+    "trap",
+    "simple1"
+  ],
+  "id": "sandstone",
+  "mob_list": "",
+  "other_tileset": [],
+  "other_tileset_chance": 5.0,
+  "straight_hallways": [
+    "treasure_lava_pyramid",
+    "puzzle0",
+    "simple0",
+    "simple_magma0"
+  ],
+  "triple_hallway": [
+    "dorm0",
+    "cactus",
+    "simple_maze0",
+    "parkour_puzzle_magma"
+  ],
+  "weight": 800
+}

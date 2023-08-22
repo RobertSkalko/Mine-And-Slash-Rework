@@ -25,7 +25,7 @@ public class DungeonFeature {
         DungeonBuilder builder = new DungeonBuilder(0, cpos);
         builder.build();
 
-        if (!builder.dungeon.hasRoomForChunk(cpos)) {
+        if (!builder.builtDungeon.hasRoomForChunk(cpos)) {
             return false;
         }
 
@@ -35,12 +35,10 @@ public class DungeonFeature {
 
         // if its the start of the dungeon, we init some stuff
         if (cpos.equals(start)) {
-            if (builder.group.netherParticles) {
-                mapData.netherParticles = true;
-            }
+            // todo
         }
 
-        BuiltRoom room = builder.dungeon.getRoomForChunk(cpos);
+        BuiltRoom room = builder.builtDungeon.getRoomForChunk(cpos);
 
         if (room == null) {
             return false;

@@ -81,6 +81,8 @@ public class ExileDBInit {
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.BOSS_SPELL, new SummonThornMobs()));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.LEAGUE_MECHANIC, new HarvestLeague()));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.LOOT_CHEST, new GearLootChest()));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.DUNGEON, null));
+
 
     }
 }

@@ -88,7 +88,7 @@ public class ComplexMobProcessor extends DataProcessor {
             }
 
             if (filter == null) {
-                filter = SpawnedMob.getAll().stream().filter(x -> data.getRoom().canSpawnMob(x));
+                filter = SpawnedMob.getAll().stream().filter(x -> true); // todo..
             }
 
             if (type == null) {

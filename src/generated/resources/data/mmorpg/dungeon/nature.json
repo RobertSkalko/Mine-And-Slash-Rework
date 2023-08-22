@@ -1,0 +1,30 @@
+{
+  "can_be_main": true,
+  "curved_hallways": [
+    "trader",
+    "0"
+  ],
+  "ends": [
+    "boss_evoker",
+    "mythic_mob_house"
+  ],
+  "entrances": [
+    "simple"
+  ],
+  "four_ways": [
+    "simple2"
+  ],
+  "id": "nature",
+  "mob_list": "",
+  "other_tileset": [],
+  "other_tileset_chance": 5.0,
+  "straight_hallways": [
+    "hard_to_find_mobs",
+    "tent_treasure"
+  ],
+  "triple_hallway": [
+    "simple4",
+    "simple5"
+  ],
+  "weight": 300
+}

@@ -1,13 +1,12 @@
 package com.robertx22.age_of_exile.maps.room_adders;
 
 
-import com.robertx22.age_of_exile.maps.RoomGroup;
 import com.robertx22.age_of_exile.maps.generator.RoomType;
 
 public class NatureRoomAdder extends BaseRoomAdder {
 
     public NatureRoomAdder() {
-        super(RoomGroup.NATURE);
+        super();
     }
 
 

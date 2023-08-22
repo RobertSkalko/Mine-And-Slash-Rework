@@ -1,0 +1,27 @@
+{
+  "can_be_main": true,
+  "curved_hallways": [
+    "sewers"
+  ],
+  "ends": [
+    "sewers_treasure"
+  ],
+  "entrances": [
+    "sewers"
+  ],
+  "four_ways": [
+    "sewers",
+    "sewers_flow"
+  ],
+  "id": "sewers",
+  "mob_list": "",
+  "other_tileset": [],
+  "other_tileset_chance": 5.0,
+  "straight_hallways": [
+    "sewers"
+  ],
+  "triple_hallway": [
+    "sewers_puzzle_easy"
+  ],
+  "weight": 200
+}

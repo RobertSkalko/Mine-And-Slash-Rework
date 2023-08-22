@@ -1,0 +1,27 @@
+{
+  "can_be_main": true,
+  "curved_hallways": [],
+  "ends": [
+    "royal_plus_sewer"
+  ],
+  "entrances": [
+    "0",
+    "royal"
+  ],
+  "four_ways": [
+    "lava_pit",
+    "slow_cooker_parkour"
+  ],
+  "id": "steampunk",
+  "mob_list": "",
+  "other_tileset": [],
+  "other_tileset_chance": 5.0,
+  "straight_hallways": [
+    "flower_lever_combo"
+  ],
+  "triple_hallway": [
+    "no_puzzle_trick",
+    "royal_dwarves"
+  ],
+  "weight": 50
+}

@@ -1,9 +1,10 @@
 package com.robertx22.age_of_exile.maps.generator;
 
 
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.maps.DungeonRoom;
 import com.robertx22.age_of_exile.maps.MapData;
-import com.robertx22.age_of_exile.maps.RoomGroup;
+import com.robertx22.age_of_exile.maps.dungeon_reg.Dungeon;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.world.level.ChunkPos;
 
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class DungeonBuilder {
 
@@ -27,10 +27,7 @@ public class DungeonBuilder {
 
         rand = createRandom(worldSeed, cpos);
 
-        this.group = RandomUtils.weightedRandom(RoomGroup.getAll()
-                .stream()
-                .filter(x -> x.canBeMainTheme)
-                .collect(Collectors.toList()), rand.nextDouble());
+        this.dungeon = RandomUtils.weightedRandom(ExileDB.Dungeons().getFilterWrapped(x -> x.can_be_main).list, rand.nextDouble());
 
         this.size = RandomUtils.RandomRange(12, 18); // todo for testing
         // todo this needs the same random if i'll use at world gen async, if i do it myself, it doesnt
@@ -40,29 +37,28 @@ public class DungeonBuilder {
         }
     }
 
-    public int maxPuzzleBlockRooms = 3;
 
-    public boolean debug = false;
     public Dungeon dungeon;
+    public BuiltDungeon builtDungeon;
     public final Random rand;
     public int size;
     public boolean isTesting = false;
-    public RoomGroup group;
     public int maxBossRooms = 1;
 
 
     public void build() {
-        dungeon = new Dungeon(size, this);
+        builtDungeon = new BuiltDungeon(size, this);
+
 
         setupEntrance();
 
-        dungeon.setupBarriers();
+        builtDungeon.setupBarriers();
 
 
         int tries = 0;
 
 
-        while (!dungeon.isFinished()) {
+        while (!builtDungeon.isFinished()) {
 
             tries++;
 
@@ -71,49 +67,16 @@ public class DungeonBuilder {
                 break;
             }
 
-            // todo
-            /*
-            dungeon.getUnbuiltCopy()
-                    .forEach(x -> {
-
-                        try {
-                            UnbuiltRoom unbuilt = dungeon.getUnbuiltFor(x.x, x.y);
-
-                            Preconditions.checkNotNull(unbuilt);
-
-                            RoomRotation rot = randomDungeonRoom(unbuilt);
-
-                            Preconditions.checkNotNull(rot);
-
-                            DungeonRoom dRoom = rot.type.getRandomRoom(group, this);
-
-                            Preconditions.checkNotNull(dRoom);
-
-                            BuiltRoom room = new BuiltRoom(rot, dRoom);
-
-                            Preconditions.checkNotNull(room);
-
-                            dungeon.addRoom(x.x, x.y, room);
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-
-                        }
-
-                    });
-
-
-             */
 
         }
 
-        dungeon.fillWithBarriers();
+        builtDungeon.fillWithBarriers();
 
     }
 
     public RoomRotation randomDungeonRoom(UnbuiltRoom unbuilt) {
 
-        if (dungeon.shouldStartFinishing()) {
+        if (builtDungeon.shouldStartFinishing()) {
 
             var possible = tryEndRoom(unbuilt);
             if (!possible.isEmpty()) {
@@ -178,16 +141,16 @@ public class DungeonBuilder {
     }
 
     private void setupEntrance() {
-        DungeonRoom entranceRoom = RoomType.ENTRANCE.getRandomRoom(group, this);
+        DungeonRoom entranceRoom = RoomType.ENTRANCE.getRandomRoom(dungeon, this);
 
         List<RoomRotation> possible = new ArrayList<>();
         possible.addAll(RoomType.ENTRANCE.getRotations());
         RoomRotation rotation = random(possible);
 
-        BuiltRoom entrance = new BuiltRoom(rotation, entranceRoom);
+        BuiltRoom entrance = new BuiltRoom(this.dungeon, rotation, entranceRoom);
 
-        int mid = dungeon.getMiddle();
-        dungeon.addRoom(mid, mid, entrance);
+        int mid = builtDungeon.getMiddle();
+        builtDungeon.addRoom(mid, mid, entrance);
     }
 
 }

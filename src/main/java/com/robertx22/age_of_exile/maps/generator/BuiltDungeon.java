@@ -14,15 +14,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class Dungeon {
+public class BuiltDungeon {
     public DungeonBuilder b;
 
-    public Dungeon(int size, DungeonBuilder b) {
+    public BuiltDungeon(int size, DungeonBuilder b) {
         this(size, 20);
         this.b = b;
     }
 
-    public Dungeon(int size, int capacity) {
+    public BuiltDungeon(int size, int capacity) {
         this.size = size;
         this.capacity = capacity;
 
@@ -36,7 +36,6 @@ public class Dungeon {
     int amount = 0;
     int ends = 0;
     public int bossRooms = 0;
-    public int puzzleBlockRooms = 0;
 
     private BuiltRoom[][] rooms;
 
@@ -204,11 +203,11 @@ public class Dungeon {
 
                         Preconditions.checkNotNull(rot);
 
-                        DungeonRoom dRoom = rot.type.getRandomRoom(b.group, b);
+                        DungeonRoom dRoom = rot.type.getRandomRoom(b.dungeon, b);
 
                         Preconditions.checkNotNull(dRoom);
 
-                        BuiltRoom theroom = new BuiltRoom(rot, dRoom);
+                        BuiltRoom theroom = new BuiltRoom(b.dungeon, rot, dRoom);
 
                         Preconditions.checkNotNull(theroom);
 
@@ -310,9 +309,7 @@ public class Dungeon {
             if (room.room.isBoss) {
                 bossRooms++;
             }
-            if (room.room.isPuzzleBlock) {
-                puzzleBlockRooms++;
-            }
+
 
             this.started = true;
 
@@ -334,7 +331,7 @@ public class Dungeon {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Dungeon d = (Dungeon) o;
+        BuiltDungeon d = (BuiltDungeon) o;
 
         return d.amount == amount && d.ends == ends;
 

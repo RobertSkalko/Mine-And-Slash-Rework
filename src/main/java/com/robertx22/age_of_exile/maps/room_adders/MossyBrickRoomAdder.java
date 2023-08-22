@@ -1,13 +1,12 @@
 package com.robertx22.age_of_exile.maps.room_adders;
 
 
-import com.robertx22.age_of_exile.maps.RoomGroup;
 import com.robertx22.age_of_exile.maps.generator.RoomType;
 
 public class MossyBrickRoomAdder extends BaseRoomAdder {
 
     public MossyBrickRoomAdder() {
-        super(RoomGroup.MOSSY_BRICK);
+        super();
     }
 
     @Override
@@ -18,7 +17,7 @@ public class MossyBrickRoomAdder extends BaseRoomAdder {
 
         add("6", RoomType.END);
         add("7", RoomType.END);
-        add("boss0", RoomType.END).setBoss();
+        add("boss0", RoomType.END);
 
         add("0", RoomType.FOUR_WAY);
         add("double_level_chest", RoomType.FOUR_WAY);

@@ -1,0 +1,39 @@
+{
+  "can_be_main": true,
+  "curved_hallways": [
+    "2"
+  ],
+  "ends": [
+    "boss_bedroom",
+    "boss_chest_behind_throne",
+    "boss0",
+    "parkour_hidden_slime",
+    "slime_parkour_hidden",
+    "under_snow_room"
+  ],
+  "entrances": [
+    "0"
+  ],
+  "four_ways": [
+    "ice_pillar",
+    "redstone_ore_secret"
+  ],
+  "id": "spruce_mansion",
+  "mob_list": "",
+  "other_tileset": [],
+  "other_tileset_chance": 5.0,
+  "straight_hallways": [
+    "1",
+    "blocked_but_under_snow",
+    "crouching",
+    "dangerous_underground",
+    "peek_secret_ice",
+    "simple3"
+  ],
+  "triple_hallway": [
+    "hidden_trapdoor_room",
+    "simple",
+    "2"
+  ],
+  "weight": 700
+}

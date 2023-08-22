@@ -23,7 +23,9 @@ public class UnstuckMobs {
             }
         }
         if (en.isInWall()) {
-            en.hurt(en.damageSources().fellOutOfWorld(), 200000);
+            en.invulnerableTime = 0;
+            en.hurt(en.damageSources().fellOutOfWorld(), 999999);
+            en.discard();
         }
     }
 }

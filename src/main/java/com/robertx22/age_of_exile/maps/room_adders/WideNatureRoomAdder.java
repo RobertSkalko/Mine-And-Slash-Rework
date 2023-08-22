@@ -1,13 +1,12 @@
 package com.robertx22.age_of_exile.maps.room_adders;
 
 
-import com.robertx22.age_of_exile.maps.RoomGroup;
 import com.robertx22.age_of_exile.maps.generator.RoomType;
 
 public class WideNatureRoomAdder extends BaseRoomAdder {
 
     public WideNatureRoomAdder() {
-        super(RoomGroup.WIDE_NATURE);
+        super();
     }
 
     @Override
@@ -20,9 +19,9 @@ public class WideNatureRoomAdder extends BaseRoomAdder {
         add("tunnel", RoomType.STRAIGHT_HALLWAY);
         add("webhouse", RoomType.TRIPLE_HALLWAY);
 
-        add("basement_boss", RoomType.CURVED_HALLWAY).setBoss();
+        add("basement_boss", RoomType.CURVED_HALLWAY);
         add("hanging_platforms", RoomType.CURVED_HALLWAY);
-        add("zombie_boss_shrooms", RoomType.END).setBoss();
+        add("zombie_boss_shrooms", RoomType.END);
         add("camp_site", RoomType.ENTRANCE);
         add("big_tree", RoomType.FOUR_WAY);
         add("ambush_cave", RoomType.STRAIGHT_HALLWAY);

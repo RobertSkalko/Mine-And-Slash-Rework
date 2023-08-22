@@ -1,8 +1,9 @@
 package com.robertx22.age_of_exile.maps.generator;
 
 
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.maps.DungeonRoom;
-import com.robertx22.age_of_exile.maps.RoomGroup;
+import com.robertx22.age_of_exile.maps.dungeon_reg.Dungeon;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Rotation;
@@ -11,13 +12,19 @@ import java.util.Objects;
 
 public class BuiltRoom {
 
+    private String dungeon;
     public RoomRotation data;
     public DungeonRoom room;
 
-    public BuiltRoom(RoomRotation data, DungeonRoom room) {
+    public BuiltRoom(Dungeon dun, RoomRotation data, DungeonRoom room) {
         this.data = data;
         this.room = room;
+        this.dungeon = dun.GUID();
 
+    }
+
+    public Dungeon getDungeon() {
+        return ExileDB.Dungeons().get(dungeon);
     }
 
     public ResourceLocation getStructure() {
@@ -25,10 +32,10 @@ public class BuiltRoom {
     }
 
     public static BuiltRoom getBarrier() {
-        DungeonRoom barrier = new DungeonRoom("", RoomType.END, RoomGroup.MISC);
+        DungeonRoom barrier = new DungeonRoom(Dungeon.SERIALIZER, "", RoomType.END); // todo what
         barrier.loc = new ResourceLocation(SlashRef.MODID, "dun/barrier");
         RoomRotation rot = new RoomRotation(RoomType.END, new RoomSides(RoomSide.BLOCKED, RoomSide.BLOCKED, RoomSide.BLOCKED, RoomSide.BLOCKED), Rotation.NONE);
-        BuiltRoom built = new BuiltRoom(rot, barrier);
+        BuiltRoom built = new BuiltRoom(Dungeon.SERIALIZER, rot, barrier);
         return built;
     }
 

@@ -1,12 +1,11 @@
 package com.robertx22.age_of_exile.maps.room_adders;
 
-import com.robertx22.age_of_exile.maps.RoomGroup;
 import com.robertx22.age_of_exile.maps.generator.RoomType;
 
 public class BastionRoomAdder extends BaseRoomAdder {
 
     public BastionRoomAdder() {
-        super(RoomGroup.BASTION);
+        super();
     }
 
     @Override

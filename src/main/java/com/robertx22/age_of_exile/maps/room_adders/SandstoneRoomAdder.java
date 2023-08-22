@@ -1,34 +1,33 @@
 package com.robertx22.age_of_exile.maps.room_adders;
 
 
-import com.robertx22.age_of_exile.maps.RoomGroup;
 import com.robertx22.age_of_exile.maps.generator.RoomType;
 
 public class SandstoneRoomAdder extends BaseRoomAdder {
 
     public SandstoneRoomAdder() {
-        super(RoomGroup.SANDSTONE);
+        super();
     }
 
     @Override
     public void addAllRooms() {
 
         add("boss_and_skellies", RoomType.END);
-        add("treasure0", RoomType.FOUR_WAY).weight(200);
+        add("treasure0", RoomType.FOUR_WAY);
         add("treasure_lava_pyramid", RoomType.STRAIGHT_HALLWAY);
         add("dorm0", RoomType.TRIPLE_HALLWAY);
 
         add("trap", RoomType.FOUR_WAY);
         add("basic", RoomType.ENTRANCE);
-        add("boss", RoomType.END).setBoss();
+        add("boss", RoomType.END);
         add("cactus", RoomType.TRIPLE_HALLWAY);
         add("prison", RoomType.CURVED_HALLWAY);
         add("puzzle0", RoomType.STRAIGHT_HALLWAY);
 
         add("trap_puzzle0", RoomType.CURVED_HALLWAY);
         add("trap_prison0", RoomType.END);
-        add("simple0", RoomType.STRAIGHT_HALLWAY).weight(1500);
-        add("simple_maze0", RoomType.TRIPLE_HALLWAY).weight(200);
+        add("simple0", RoomType.STRAIGHT_HALLWAY);
+        add("simple_maze0", RoomType.TRIPLE_HALLWAY);
 
         add("hidden_button0", RoomType.CURVED_HALLWAY);
         add("tnt_pyramid", RoomType.END);

@@ -31,8 +31,7 @@ public class MapData {
 
     public String playerUuid = "";
 
-    public boolean netherParticles = false;
-
+   
     public int chunkX = 0;
     public int chunkZ = 0;
 

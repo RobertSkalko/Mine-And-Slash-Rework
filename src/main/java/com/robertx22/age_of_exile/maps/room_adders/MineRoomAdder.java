@@ -1,19 +1,18 @@
 package com.robertx22.age_of_exile.maps.room_adders;
 
 
-import com.robertx22.age_of_exile.maps.RoomGroup;
 import com.robertx22.age_of_exile.maps.generator.RoomType;
 
 public class MineRoomAdder extends BaseRoomAdder {
 
     public MineRoomAdder() {
-        super(RoomGroup.MINESHAFT);
+        super();
     }
 
     @Override
     public void addAllRooms() {
 
-        add("boss1", RoomType.END).setBoss();
+        add("boss1", RoomType.END);
         add("lava_boss_room", RoomType.END);
 
         add("nasty_lava_parkour", RoomType.CURVED_HALLWAY);
@@ -24,7 +23,7 @@ public class MineRoomAdder extends BaseRoomAdder {
 
         add("shaft0", RoomType.FOUR_WAY);
         add("huge_pit", RoomType.FOUR_WAY);
-        add("trader", RoomType.FOUR_WAY).setTrader();
+        add("trader", RoomType.FOUR_WAY);
 
         add("parkour0", RoomType.STRAIGHT_HALLWAY);
         add("chest_down_pit", RoomType.STRAIGHT_HALLWAY);
