@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.event_hooks.player;
 
+import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.gui.screens.character_screen.CharacterScreen;
 import com.robertx22.age_of_exile.mmorpg.registers.client.KeybindsRegister;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ChatUtils;
@@ -11,6 +12,9 @@ import net.minecraft.client.gui.screens.Screen;
 public class OnKeyPress {
 
     public static int cooldown = 0;
+
+
+    public static boolean SECOND_HOTBAR = false;
 
 
     public static void onEndTick(Minecraft mc) {
@@ -26,6 +30,16 @@ public class OnKeyPress {
 
         if (ChatUtils.wasChatOpenRecently()) {
             return;
+        }
+
+        if (KeybindsRegister.TOGGLE_HOTBAR.isDown()) {
+            SECOND_HOTBAR = !SECOND_HOTBAR;
+            cooldown = 5;
+        }
+        if (!ClientConfigs.getConfig().USE_HOTBAR_TOGGLE.get()) {
+            if (Screen.hasShiftDown()) {
+                SECOND_HOTBAR = true;
+            }
         }
 
         if (KeybindsRegister.HUB_SCREEN_KEY.isDown()) {
@@ -47,9 +61,16 @@ public class OnKeyPress {
                 number -= 500; // dont cast
             }
 
-            if (Screen.hasShiftDown()) {
-                number += 4;
+            if (ClientConfigs.getConfig().USE_HOTBAR_TOGGLE.get()) {
+                if (SECOND_HOTBAR) {
+                    number += 4;
+                }
+            } else {
+                if (Screen.hasShiftDown()) {
+                    number += 4;
+                }
             }
+
             if (number > -1) {
                 // todo make sure its not lagging servers
                 Packets.sendToServer(new TellServerToCastSpellPacket(number));

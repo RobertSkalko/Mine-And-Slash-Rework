@@ -146,3 +146,7 @@ Those chests can be opened with a key, but how do you actually get the key? Mayb
 v5.0.4
 
 - added craftable potions!
+
+- add hotbar toggle config and keybind 
+
+- tweaked gui

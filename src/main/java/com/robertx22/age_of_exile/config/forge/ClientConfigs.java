@@ -32,6 +32,7 @@ public class ClientConfigs {
         ENABLE_FLOATING_DMG = b.define("render_floating_damage", true);
 
         ITEM_RARITY_OPACITY = b.defineInRange("ITEM_RARITY_OPACITY", 0.75F, 0, 1F);
+        HEALTH_BAR_GUI_SCALE = b.defineInRange("health_bar_gui_scale", 1.25F, 0, 10F);
 
         GUI_POSITION = b.defineEnum("GUI_POSITION", GuiPosition.TOP_LEFT);
         ITEM_RARITY_BACKGROUND_TYPE = b.defineEnum("ITEM_RARITY_BACKGROUND_TYPE", GlintType.FULL);
@@ -54,6 +55,7 @@ public class ClientConfigs {
     public ForgeConfigSpec.EnumValue<GuiPosition> GUI_POSITION;
     public ForgeConfigSpec.EnumValue<PlayerGUIs> PLAYER_GUI_TYPE;
     public ForgeConfigSpec.DoubleValue ITEM_RARITY_OPACITY;
+    public ForgeConfigSpec.DoubleValue HEALTH_BAR_GUI_SCALE;
 
     public int REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES = 35;
 

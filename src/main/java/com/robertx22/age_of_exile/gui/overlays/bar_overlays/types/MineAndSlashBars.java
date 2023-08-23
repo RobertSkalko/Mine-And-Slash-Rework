@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.gui.overlays.bar_overlays.types;
 
 import com.robertx22.age_of_exile.config.GuiPartConfig;
+import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.gui.overlays.BarGuiType;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.PointData;
@@ -15,12 +16,16 @@ public class MineAndSlashBars {
 
     static int BAR_HEIGHT = 11;
     static int BAR_WIDTH = 107;
-    public static int INNER_BAR_WIDTH = 101;
-    static int INNER_BAR_HEIGHT = 5;
+    public static int INNER_BAR_WIDTH = 103;
+    static int INNER_BAR_HEIGHT = 7;
 
     static Minecraft mc = Minecraft.getInstance();
 
     public static void renderMineAndSlashBar(GuiPartConfig config, BarGuiType type, GuiGraphics gui, PointData point, String text, boolean drawText) {
+
+        float s = ClientConfigs.getConfig().HEALTH_BAR_GUI_SCALE.get().floatValue();
+
+        gui.pose().scale(s, s, s);
 
         if (!drawText) {
             gui.blit(BASETEX, point.x, point.y, BAR_WIDTH, BAR_HEIGHT, 0, 0, BAR_WIDTH, BAR_HEIGHT, BAR_WIDTH, BAR_HEIGHT);
@@ -38,11 +43,11 @@ public class MineAndSlashBars {
 
         if (drawText) {
 
-            float scale = 0.9F;
+            float scale = 0.8F;
 
             int width = mc.font.width(text);
             int textX = (int) (point.x - width / 2F + BAR_WIDTH / 2F);
-            int textY = point.y + 2 + 3;
+            int textY = point.y + 2 + 4;
 
             float antiScale = 1.0F / scale;
 
@@ -55,9 +60,12 @@ public class MineAndSlashBars {
             float yf = (float) ((double) yp * antiScale);
 
 
-            gui.drawString(mc.font, text, (int) xf, (int) yf, ChatFormatting.WHITE.getColor());
+            gui.drawString(mc.font, text, (int) xf, (int) yf, ChatFormatting.WHITE.getColor(), true);
 
             gui.pose().scale(antiScale, antiScale, antiScale);
+
         }
+        gui.pose().scale(1F / s, 1F / s, 1F / s);
+
     }
 }

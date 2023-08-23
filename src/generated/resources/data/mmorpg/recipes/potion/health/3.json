@@ -5,12 +5,15 @@
     "b": {
       "item": "minecraft:glass_bottle"
     },
+    "c": {
+      "item": "minecraft:potato"
+    },
     "r": {
       "item": "mmorpg:stone/3"
     }
   },
   "pattern": [
-    "rrr",
+    "rcr",
     "rbr",
     "rrr"
   ],

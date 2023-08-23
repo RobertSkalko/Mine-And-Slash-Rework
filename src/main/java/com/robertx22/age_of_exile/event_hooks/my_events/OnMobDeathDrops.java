@@ -133,7 +133,7 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
                 exp *= map.map.getBonusLootMulti();
             }
         }
-
+        
         float baseexp = exp;
 
         exp += (-1F + multi) * baseexp;
@@ -168,8 +168,7 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
             if (exp > 0) {
 
                 for (Player x : list) {
-                    Load.Unit(x)
-                            .GiveExp(x, (int) exp);
+                    Load.Unit(x).GiveExp(x, (int) exp);
                 }
             }
 

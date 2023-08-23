@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.gui.overlays.spell_hotbar;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.capability.entity.CooldownsData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
+import com.robertx22.age_of_exile.event_hooks.player.OnKeyPress;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.registers.client.KeybindsRegister;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -12,7 +13,6 @@ import com.robertx22.library_of_exile.utils.GuiUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
@@ -64,7 +64,7 @@ public class SpellHotbarOverlay {
             if (Load.playerRPGData(mc.player) == null) {
                 return;
             }
-            
+
 
             RenderSystem.enableBlend(); // enables transparency
 
@@ -78,7 +78,7 @@ public class SpellHotbarOverlay {
             for (int i = 0; i < 4; i++) {
 
                 int place = i;
-                if (Screen.hasShiftDown()) {
+                if (OnKeyPress.SECOND_HOTBAR) {
                     place += 4;
                 }
 
