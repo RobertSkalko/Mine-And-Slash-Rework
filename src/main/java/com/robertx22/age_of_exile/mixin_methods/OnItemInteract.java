@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulItem;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
+import com.robertx22.age_of_exile.vanilla_mc.items.SoulMakerItem;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.RarityStoneItem;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.sounds.SoundEvents;
@@ -133,11 +134,37 @@ public class OnItemInteract {
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        //stack.shrink(1000);
-                        // ci.setReturnValue(ItemStack.EMPTY);
-                        //ci.cancel();
                         return;
                     }
+
+
+                }
+            } else if (cursor.getItem() instanceof SoulMakerItem se) {
+
+                GearItemData gear = StackSaving.GEARS.loadFrom(stack);
+
+                if (gear != null) {
+                    try {
+
+                        if (se.canExtract(gear)) {
+                            StatSoulData soul = new StatSoulData();
+                            soul.slot = gear.GetBaseGearType().getGearSlot().GUID();
+                            soul.gear = gear;
+
+                            ItemStack soulstack = soul.toStack();
+
+                            SoundUtils.playSound(player, SoundEvents.EXPERIENCE_ORB_PICKUP);
+
+                            stack.shrink(1);
+                            cursor.shrink(1);
+                            PlayerUtils.giveItem(soulstack, player);
+                            x.setCanceled(true);
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return;
 
 
                 }
