@@ -57,7 +57,7 @@ public class NeatForgeConfig {
         public ForgeNeatConfig(ForgeConfigSpec.Builder builder) {
             builder.push("general");
 
-            maxDistance = builder.define("Max Distance", 24);
+            maxDistance = builder.define("Max Distance", 12);
             renderInF1 = builder.define("Render with Interface Disabled (F1)", false);
             heightAbove = builder.define("Height Above Mob", 0.6);
             drawBackground = builder.define("Draw Background", true);
@@ -76,7 +76,7 @@ public class NeatForgeConfig {
             showPercentage = builder.define("Show HP Percentage", true);
             showOnPlayers = builder.define("Display on Players", true);
             showOnBosses = builder.define("Display on Bosses", true);
-            showOnlyFocused = builder.define("Only show the health bar for the entity looked at", true);
+            showOnlyFocused = builder.define("Only show the health bar for the entity looked at", false);
             showFullHealth = builder.define("Show entities with full health", true);
             enableDebugInfo = builder.define("Show Debug Info with F3", true);
             blacklist = builder.comment("Blacklist uses entity IDs, not their display names. Use F3 to see them in the Neat bar.")

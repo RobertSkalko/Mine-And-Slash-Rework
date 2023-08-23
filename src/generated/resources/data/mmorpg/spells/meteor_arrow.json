@@ -52,7 +52,7 @@
               "type": "particles_in_radius",
               "map": {
                 "motion": "None",
-                "particle_count": 5.0,
+                "particle_count": 1.0,
                 "particle_type": "minecraft:lava",
                 "radius": 0.1
               }
@@ -63,7 +63,30 @@
             {
               "type": "x_ticks_condition",
               "map": {
-                "tick_rate": 5.0
+                "tick_rate": 1.0
+              }
+            }
+          ],
+          "targets": []
+        },
+        {
+          "acts": [
+            {
+              "type": "particles_in_radius",
+              "map": {
+                "motion": "None",
+                "particle_count": 1.0,
+                "particle_type": "minecraft:flame",
+                "radius": 0.1
+              }
+            }
+          ],
+          "en_preds": [],
+          "ifs": [
+            {
+              "type": "x_ticks_condition",
+              "map": {
+                "tick_rate": 1.0
               }
             }
           ],
@@ -74,10 +97,12 @@
             {
               "type": "summon_at_sight",
               "map": {
+                "distance": 0.0,
                 "entity_name": "height_en",
                 "gravity": false,
                 "height": 7.0,
                 "life_ticks": 0.0,
+                "pos_source": "SOURCE_ENTITY",
                 "proj_en": "mmorpg:spell_projectile"
               }
             }

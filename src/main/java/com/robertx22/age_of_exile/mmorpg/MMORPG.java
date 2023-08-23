@@ -60,7 +60,7 @@ import java.util.function.Consumer;
 public class MMORPG {
 
     // DISABLE WHEN PUBLIC BUILD
-    public static boolean RUN_DEV_TOOLS = true;
+    public static boolean RUN_DEV_TOOLS = false;
 
     private static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel NETWORK = NetworkRegistry.newSimpleChannel(

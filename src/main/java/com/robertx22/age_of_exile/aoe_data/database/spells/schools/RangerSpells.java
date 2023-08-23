@@ -257,10 +257,14 @@ public class RangerSpells implements ExileRegistryInit {
 
                 .onHit("arrow", PartBuilder.damage(SpellCalcs.METEOR, Elements.Physical))
                 .onHit("arrow", PartBuilder.playSound(SoundEvents.ARROW_HIT, 1D, 1D))
-                .onTick("arrow", PartBuilder.particleOnTick(5D, ParticleTypes.LAVA, 5D, 0.1D))
+                .onTick("arrow", PartBuilder.particleOnTick(1D, ParticleTypes.LAVA, 1D, 0.1D))
+                .onTick("arrow", PartBuilder.particleOnTick(1D, ParticleTypes.FLAME, 1D, 0.1D))
 
                 .onExpire("arrow", PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 0D, 7D)
-                        .put(MapField.ENTITY_NAME, "height_en")))
+                        .put(MapField.ENTITY_NAME, "height_en")
+                        .put(MapField.DISTANCE, 0D)
+                        .put(MapField.POS_SOURCE, PositionSource.SOURCE_ENTITY.name())
+                ))
 
                 .onExpire("height_en", PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(Blocks.MAGMA_BLOCK, 200D)
                         .put(MapField.ENTITY_NAME, "meteor")

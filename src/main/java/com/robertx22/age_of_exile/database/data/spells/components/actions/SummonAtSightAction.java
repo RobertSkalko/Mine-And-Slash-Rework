@@ -35,7 +35,7 @@ public class SummonAtSightAction extends SpellAction {
         Double distance = data.getOrDefault(MapField.DISTANCE, 10D);
         Double height = data.getOrDefault(MapField.HEIGHT, 10D);
 
-        HitResult ray = ctx.caster.pick(distance, 0.0F, false);
+        HitResult ray = ctx.getPositionEntity().pick(distance, 0.0F, false);
         Vec3 pos = ray.getLocation();
 
         Entity en = projectile.get()
