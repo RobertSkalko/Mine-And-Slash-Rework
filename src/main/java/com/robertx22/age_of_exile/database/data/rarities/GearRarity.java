@@ -22,7 +22,7 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     public static GearRarity SERIALIZER = new GearRarity();
 
     public GearRarity() {
-        super(RarityType.GEAR);
+        super();
     }
 
     public GearRarity edit(Consumer<GearRarity> co) {

@@ -152,7 +152,7 @@
     "charge_name": "arrow_barrage",
     "charge_regen": 200,
     "charges": 3,
-    "cooldown_ticks": 20,
+    "cooldown_ticks": 10,
     "imbues": 0,
     "mana_cost": {
       "max": 15.0,

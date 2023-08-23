@@ -222,6 +222,11 @@ public class HealthBarRenderer {
 
         ChatFormatting color = Load.Unit(living).getMobRarity().textFormatting();
 
+        if (living instanceof Player) {
+            rar = "";
+            color = ChatFormatting.RED;
+        }
+
         name = ChatFormatting.YELLOW + lvl + " " + color + rar + " " + living.getDisplayName().getString();
 
         final float nameLen = mc.font.width(name) * textScale;

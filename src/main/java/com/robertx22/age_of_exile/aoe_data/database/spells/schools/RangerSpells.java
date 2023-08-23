@@ -165,7 +165,7 @@ public class RangerSpells implements ExileRegistryInit {
                 .build();
 
 
-        SpellBuilder.of("quickdraw", PlayStyle.DEX, SpellConfiguration.Builder.instant(5, 60 * 20)
+        SpellBuilder.of("quickdraw", PlayStyle.DEX, SpellConfiguration.Builder.instant(5, 20 * 5)
                         .setChargesAndRegen("quickdraw", 3, 20 * 60), "Quickdraw", Arrays.asList())
                 .manualDesc("Your bow now fires instantly, and you gain a stack of arrows if you don't have infinity.")
 

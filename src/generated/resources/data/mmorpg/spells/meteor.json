@@ -215,7 +215,7 @@
     "charge_name": "meteor",
     "charge_regen": 400,
     "charges": 3,
-    "cooldown_ticks": 20,
+    "cooldown_ticks": 10,
     "imbues": 0,
     "mana_cost": {
       "max": 13.5,

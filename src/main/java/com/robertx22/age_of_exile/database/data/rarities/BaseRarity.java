@@ -7,22 +7,10 @@ import net.minecraft.ChatFormatting;
 
 public abstract class BaseRarity implements Rarity {
 
-    public BaseRarity(RarityType rarity_type) {
-        this.rarity_type = rarity_type;
-    }
-
-    public enum RarityType {
-        GEAR("gear"), MOB("mob"), SKILL_GEM("skill_gem");
-
-        public String id;
-
-        RarityType(String id) {
-            this.id = id;
-        }
+    public BaseRarity() {
     }
 
 
-    public RarityType rarity_type;
     public int weight;
     public String text_format;
     public String higher_rar = "";
@@ -32,7 +20,7 @@ public abstract class BaseRarity implements Rarity {
 
     @Override
     public String locNameLangFileGUID() {
-        return SlashRef.MODID + ".rarity." + rarity_type.id + "." + GUID();
+        return SlashRef.MODID + ".rarity." + "." + GUID();
     }
 
     @Override

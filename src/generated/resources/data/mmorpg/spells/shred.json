@@ -222,7 +222,7 @@
     "charge_name": "shred",
     "charge_regen": 300,
     "charges": 3,
-    "cooldown_ticks": 20,
+    "cooldown_ticks": 10,
     "imbues": 0,
     "mana_cost": {
       "max": 7.5,

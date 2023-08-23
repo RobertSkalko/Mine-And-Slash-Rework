@@ -194,7 +194,7 @@
     "charge_name": "lightning_spear",
     "charge_regen": 100,
     "charges": 3,
-    "cooldown_ticks": 100,
+    "cooldown_ticks": 10,
     "imbues": 0,
     "mana_cost": {
       "max": 3.75,

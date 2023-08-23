@@ -244,7 +244,7 @@
     "charge_name": "resonance",
     "charge_regen": 600,
     "charges": 3,
-    "cooldown_ticks": 20,
+    "cooldown_ticks": 10,
     "imbues": 0,
     "mana_cost": {
       "max": 5.25,

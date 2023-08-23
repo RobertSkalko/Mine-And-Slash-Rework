@@ -151,7 +151,7 @@
     "charge_name": "boomerang",
     "charge_regen": 200,
     "charges": 3,
-    "cooldown_ticks": 100,
+    "cooldown_ticks": 10,
     "imbues": 0,
     "mana_cost": {
       "max": 7.5,

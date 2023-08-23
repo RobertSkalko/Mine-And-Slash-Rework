@@ -142,3 +142,7 @@ Those chests can be opened with a key, but how do you actually get the key? Mayb
  - re-introduced mob rarities
  
  - re implemented neat gui with MNS values
+ 
+v5.0.4
+
+- added craftable potions!

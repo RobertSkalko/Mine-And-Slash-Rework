@@ -128,7 +128,7 @@
     "charge_name": "dash",
     "charge_regen": 600,
     "charges": 3,
-    "cooldown_ticks": 15,
+    "cooldown_ticks": 10,
     "imbues": 0,
     "mana_cost": {
       "max": 7.5,

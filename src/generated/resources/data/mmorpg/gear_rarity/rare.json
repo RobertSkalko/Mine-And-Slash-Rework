@@ -24,7 +24,6 @@
     "multi": 1.5,
     "total": 100
   },
-  "rarity_type": "GEAR",
   "socket_chance": 15,
   "stat_percents": {
     "max": 40,

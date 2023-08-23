@@ -100,7 +100,7 @@
     "charge_name": "quickdraw",
     "charge_regen": 1200,
     "charges": 3,
-    "cooldown_ticks": 1200,
+    "cooldown_ticks": 20,
     "imbues": 0,
     "mana_cost": {
       "max": 3.75,

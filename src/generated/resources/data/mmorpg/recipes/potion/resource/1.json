@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "minecraft:glass_bottle"
+    },
+    "r": {
+      "item": "mmorpg:stone/1"
+    }
+  },
+  "pattern": [
+    "rrr",
+    "rbr",
+    "rrr"
+  ],
+  "result": {
+    "count": 16,
+    "item": "mmorpg:potion/resource/1"
+  },
+  "show_notification": true
+}
