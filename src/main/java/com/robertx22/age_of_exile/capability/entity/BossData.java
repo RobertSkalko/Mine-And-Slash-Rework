@@ -15,6 +15,7 @@ import java.util.List;
 
 public class BossData {
 
+    public boolean isBoss = false;
     private int castTicks = 0;
     private String spellBeingCast = "";
     private List<String> spells = new ArrayList<>();
@@ -76,6 +77,7 @@ public class BossData {
 
     // todo probably better
     public void setupRandomBoss() {
+        this.isBoss = true;
 
         hpTreshs = new ArrayList<>();
         hpTreshs.addAll(Arrays.asList(0.25F, 0.5F, 0.75F));

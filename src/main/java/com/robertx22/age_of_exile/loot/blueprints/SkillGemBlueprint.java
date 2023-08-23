@@ -39,8 +39,8 @@ public class SkillGemBlueprint extends ItemBlueprint {
         data.id = id;
         data.type = type;
         data.rar = rar.GUID();
-        data.perc = rar.skill_gem_percents.random();
-        
+        data.perc = rar.stat_percents.random();
+
         return data;
     }
 

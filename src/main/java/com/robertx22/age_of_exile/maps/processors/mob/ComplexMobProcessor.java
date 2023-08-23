@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.maps.processors.mob;
 
-import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
+import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.maps.generator.ChunkProcessData;
 import com.robertx22.age_of_exile.maps.mobs.SpawnedMob;
@@ -33,7 +33,7 @@ public class ComplexMobProcessor extends DataProcessor {
 
             String[] parts = StringUTIL.split(key, ";");
 
-            MobRarity rarity = null;
+            GearRarity rarity = null;
             boolean isBoss = false;
             EntityType<? extends Mob> type = null;
 
@@ -54,18 +54,22 @@ public class ComplexMobProcessor extends DataProcessor {
 
 
             for (String x : parts) {
-                if (ExileDB.MobRarities().isRegistered(x)) {
-                    rarity = ExileDB.MobRarities().get(x);
-
-                    if (rarity.boss) {
-                        isBoss = true;
-                    }
+                if (ExileDB.GearRarities().isRegistered(x)) {
+                    rarity = ExileDB.GearRarities().get(x);
                 }
 
             }
 
+            for (String x : parts) {
+
+                if (x.equals("boss")) {
+                    isBoss = true;
+                }
+
+
+            }
             if (rarity == null) {
-                rarity = ExileDB.MobRarities().random();
+                rarity = ExileDB.GearRarities().random();
             }
 
             for (String x : parts) {
@@ -101,7 +105,7 @@ public class ComplexMobProcessor extends DataProcessor {
 
             // temps
             int finalAmount = amount;
-            MobRarity finalRarity = rarity;
+            GearRarity finalRarity = rarity;
             for (Mob mob : MobBuilder.of(type, x -> {
                 x.amount = finalAmount;
                 if (finalRarity != null) {
@@ -114,7 +118,8 @@ public class ComplexMobProcessor extends DataProcessor {
             }
 
 
-        } catch (Exception e) {
+        } catch (
+                Exception e) {
             e.printStackTrace();
         }
 

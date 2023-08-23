@@ -11,16 +11,25 @@
   "lootable_gear_tier": "HIGH",
   "max_sockets": 3,
   "min_affixes": 6,
+  "mob": {
+    "affixes": 3,
+    "dmg_multi": 8.5,
+    "exp_multi": 6.0,
+    "extra_hp_multi": 16.0,
+    "loot_multi": 6.0,
+    "min_lvl": 25,
+    "stat_multi": 11.0
+  },
   "pot": {
     "multi": 2.0,
     "total": 100
   },
   "rarity_type": "GEAR",
-  "skill_gem_percents": {
+  "socket_chance": 50,
+  "stat_percents": {
     "max": 100,
     "min": 80
   },
-  "socket_chance": 50,
   "text_format": "DARK_PURPLE",
   "weight": 25
 }

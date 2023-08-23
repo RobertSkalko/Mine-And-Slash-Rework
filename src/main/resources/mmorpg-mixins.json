@@ -21,6 +21,8 @@
   "client": [
     "NetherParticleMixin",
     "MixinServerWorldInfo",
+    "NeatRenderMixin",
+    "AccessorRenderType",
     "ItemGlintMixin",
     "ItemStackMixin",
     "WorldRendererMixin"

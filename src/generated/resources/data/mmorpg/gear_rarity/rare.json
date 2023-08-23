@@ -11,16 +11,25 @@
   "lootable_gear_tier": "MID",
   "max_sockets": 2,
   "min_affixes": 3,
+  "mob": {
+    "affixes": 1,
+    "dmg_multi": 2.5,
+    "exp_multi": 2.0,
+    "extra_hp_multi": 4.0,
+    "loot_multi": 2.0,
+    "min_lvl": 3,
+    "stat_multi": 3.0
+  },
   "pot": {
     "multi": 1.5,
     "total": 100
   },
   "rarity_type": "GEAR",
-  "skill_gem_percents": {
+  "socket_chance": 15,
+  "stat_percents": {
     "max": 40,
     "min": 20
   },
-  "socket_chance": 15,
   "text_format": "AQUA",
   "weight": 500
 }

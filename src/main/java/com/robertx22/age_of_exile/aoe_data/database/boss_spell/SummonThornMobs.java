@@ -14,7 +14,7 @@ public class SummonThornMobs extends BossSummonMobs {
     @Override
     public void onStartOverride(LivingEntity en) {
         MobBuilder.of(SlashEntities.THORNY_MINION.get(), x -> {
-            x.rarity = ExileDB.MobRarities().get(IRarity.ELITE_ID);
+            x.rarity = ExileDB.GearRarities().get(IRarity.RARE_ID);
             x.amount = 10;
         }).summonMobs(en.level(), en.blockPosition()).forEach(e -> {
             OnMobSpawn.setupNewMob(e, Load.Unit(e), null);

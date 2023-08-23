@@ -11,7 +11,7 @@ public class SummonExplodyMobs extends BossSummonMobs {
     @Override
     public void onStartOverride(LivingEntity en) {
         MobBuilder.of(SlashEntities.EXPLODE_MINION.get(), x -> {
-            x.rarity = ExileDB.MobRarities().get(IRarity.CHAMPION_ID);
+            x.rarity = ExileDB.GearRarities().get(IRarity.UNCOMMON);
             x.amount = 5;
         }).summonMobs(en.level(), en.blockPosition()).forEach(e -> {
 

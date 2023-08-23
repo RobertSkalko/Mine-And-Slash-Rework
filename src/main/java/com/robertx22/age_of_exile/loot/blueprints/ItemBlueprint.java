@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.loot.blueprints;
 
-import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.bases.LevelPart;
 import com.robertx22.age_of_exile.loot.generators.stack_changers.IStackAction;
@@ -14,17 +13,11 @@ public abstract class ItemBlueprint {
 
     public LootInfo info = null;
 
-    public int extraLevelModifier = 0;
-
-
+ 
     public ItemBlueprint(LootInfo info) {
         this.info = info;
         this.level.number = info.level;
 
-        if (info.mobData != null) {
-            extraLevelModifier = ExileDB.MobRarities()
-                    .get(info.mobData.getRarity()).loot_lvl_modifier;
-        }
 
         this.onConstruct();
     }

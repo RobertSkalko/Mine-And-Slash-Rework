@@ -236,10 +236,7 @@ public class LootInfo {
             modifier += mobData.getUnit()
                     .getCalculatedStat(ExtraMobDropsStat.getInstance())
                     .getMultiplier() - 1;
-            modifier += ExileDB.MobRarities()
-                    .get(mobData.getRarity())
-                    .LootMultiplier() - 1;
-
+            modifier += mobData.getMobRarity().mob.LootMultiplier() - 1;
         }
 
         if (this.playerData != null) {

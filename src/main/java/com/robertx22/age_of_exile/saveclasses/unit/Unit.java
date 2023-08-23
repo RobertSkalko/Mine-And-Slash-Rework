@@ -4,7 +4,7 @@ import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.capability.player.helper.GemInventoryHelper;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
-import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
+import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.AttributeStat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.IAfterStatCalc;
@@ -150,20 +150,29 @@ public class Unit {
         return StatData.empty();
     }
 
-    public String randomRarity(LivingEntity entity, EntityData data) {
+    public String randomRarity(int lvl, EntityData data) {
 
-        List<MobRarity> rarities = ExileDB.MobRarities()
+        List<GearRarity> rarities = ExileDB.GearRarities()
                 .getList()
                 .stream()
-                .filter(x -> data.getLevel() >= x.minMobLevelForRandomSpawns() || data.getLevel() >= GameBalanceConfig.get().MAX_LEVEL)
+                .filter(x -> data.getLevel() >= x.mob.minMobLevelForRandomSpawns() || data.getLevel() >= GameBalanceConfig.get().MAX_LEVEL)
                 .collect(Collectors.toList());
 
+
+        int chanceforhigher = lvl;
+
         if (rarities.isEmpty()) {
-            rarities.add(ExileDB.MobRarities()
-                    .get(IRarity.COMMON_ID));
+            rarities.add(ExileDB.GearRarities().get(IRarity.COMMON_ID));
         }
 
-        MobRarity finalRarity = RandomUtils.weightedRandom(rarities);
+
+        GearRarity finalRarity = RandomUtils.weightedRandom(rarities);
+
+        if (RandomUtils.roll(chanceforhigher)) {
+            if (finalRarity.hasHigherRarity()) {
+                finalRarity = finalRarity.getHigherRarity();
+            }
+        }
 
         return finalRarity.GUID();
 

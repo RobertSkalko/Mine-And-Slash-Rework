@@ -21,7 +21,7 @@ public abstract class BaseRarity implements Rarity {
         }
     }
 
-  
+
     public RarityType rarity_type;
     public int weight;
     public String text_format;
@@ -107,13 +107,6 @@ public abstract class BaseRarity implements Rarity {
         onSetFields();
     }
 
-    public void setBossFields() {
-        this.guid = IRarity.BOSS_ID;
-        this.loc_name = "Boss";
-        this.text_format = ChatFormatting.RED.name();
-
-        onSetFields();
-    }
 
     public void setUniqueFields() {
         this.guid = IRarity.UNIQUE_ID;

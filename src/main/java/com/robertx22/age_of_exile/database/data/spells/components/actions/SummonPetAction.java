@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.database.data.spells.components.actions;
 
 import com.robertx22.age_of_exile.aoe_data.database.spells.SummonType;
-import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
+import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
@@ -60,7 +60,7 @@ public class SummonPetAction extends SpellAction {
             Load.Unit(en).summonedPetData.setup(ctx.calculatedSpellData.getSpell(), duration);
 
 
-            MobRarity rar = ExileDB.MobRarities().get(IRarity.ELITE_ID); // todo
+            GearRarity rar = ExileDB.GearRarities().get(IRarity.RARE_ID);
 
             Load.Unit(en).SetMobLevelAtSpawn((Player) ctx.caster);
 

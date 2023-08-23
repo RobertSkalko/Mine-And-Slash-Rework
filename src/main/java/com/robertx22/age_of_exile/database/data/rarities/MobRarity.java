@@ -1,29 +1,36 @@
 package com.robertx22.age_of_exile.database.data.rarities;
 
-import com.robertx22.age_of_exile.database.registry.ExileDB;
-import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
-import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.Rarity;
-import com.robertx22.library_of_exile.registry.ExileRegistryType;
-import com.robertx22.library_of_exile.registry.IAutoGson;
+public final class MobRarity {
 
-public final class MobRarity extends BaseRarity implements Rarity, IAutoGson<MobRarity> {
-    public static MobRarity SERIALIZER = new MobRarity();
+
+    public static MobRarity of(int minlvl, float bonusstatmulti, int affixes) {
+
+        float lootmulti = 1 + (bonusstatmulti * 0.5F);
+
+        MobRarity r = new MobRarity();
+
+        r.min_lvl = minlvl;
+        r.stat_multi = 1 + bonusstatmulti * 1F;
+        r.extra_hp_multi = 1 + bonusstatmulti * 1.5F;
+        r.dmg_multi = 1 + bonusstatmulti * 0.75F;
+
+        r.loot_multi = lootmulti;
+        r.exp_multi = lootmulti;
+
+        r.affixes = affixes;
+
+        return r;
+    }
 
     public int min_lvl;
-    public int loot_lvl_modifier = 0;
+
     public float dmg_multi;
     public float extra_hp_multi;
     public float stat_multi;
     public float loot_multi;
     public float exp_multi;
     public int affixes = 0;
-    public String name_add = "";
-    public boolean boss = false;
 
-    public MobRarity() {
-        super(RarityType.MOB);
-    }
 
     public int minMobLevelForRandomSpawns() {
         return min_lvl;
@@ -49,28 +56,5 @@ public final class MobRarity extends BaseRarity implements Rarity, IAutoGson<Mob
         return exp_multi;
     }
 
-    public boolean hasHigherRarity() {
-        return ExileDB.MobRarities()
-                .isRegistered(higher_rar);
-    }
 
-    public MobRarity getHigherRarity() {
-        return ExileDB.MobRarities()
-                .get(higher_rar);
-    }
-
-    @Override
-    public ExileRegistryType getExileRegistryType() {
-        return ExileRegistryTypes.MOB_RARITY;
-    }
-
-    @Override
-    public String locNameLangFileGUID() {
-        return SlashRef.MODID + ".mob_rarity." + GUID();
-    }
-
-    @Override
-    public Class<MobRarity> getClassForSerialization() {
-        return MobRarity.class;
-    }
 }

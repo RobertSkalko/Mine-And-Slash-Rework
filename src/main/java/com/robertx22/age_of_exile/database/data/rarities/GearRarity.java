@@ -16,6 +16,7 @@ import net.minecraft.world.item.Items;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGson<GearRarity> {
     public static GearRarity SERIALIZER = new GearRarity();
@@ -24,31 +25,25 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
         super(RarityType.GEAR);
     }
 
+    public GearRarity edit(Consumer<GearRarity> co) {
+        co.accept(this);
+        return this;
+    }
+
+
     public LootableGearTier lootable_gear_tier = LootableGearTier.LOW;
-
     public int item_model_data_num = -1;
-
     public int backpack_slots = 10;
-
-    public MinMax skill_gem_percents = new MinMax(0, 0);
-
-
+    public MinMax stat_percents = new MinMax(0, 0);
     public Potential pot = new Potential(100, 0.5F);
-
-
+    public MobRarity mob = new MobRarity();
     public int min_affixes = 0;
-
     public int max_sockets = 3;
-
     public int socket_chance = 25;
-
     public int item_tier = -1;
-
-
     public float item_tier_power;
     public float item_value_multi;
     public boolean announce_in_chat = false;
-
     public boolean is_unique_item = false;
 
     transient ResourceLocation glintFull;

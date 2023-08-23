@@ -5,7 +5,6 @@ import com.robertx22.age_of_exile.maps.generator.ChunkProcessData;
 import com.robertx22.age_of_exile.maps.mobs.SpawnedMob;
 import com.robertx22.age_of_exile.maps.processors.DataProcessor;
 import com.robertx22.age_of_exile.maps.processors.helpers.MobBuilder;
-import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
@@ -28,7 +27,7 @@ public class EliteMobHorde extends DataProcessor {
 
         MobBuilder.of(type, x -> {
             x.amount = amount;
-            x.rarity = ExileDB.MobRarities().get(IRarity.CHAMPION_ID);
+            x.rarity = ExileDB.GearRarities().getFilterWrapped(e -> e.item_tier > 3).random();
         }).summonMobs(world, pos);
 
     }

@@ -29,10 +29,6 @@ public interface IRarity<R extends Rarity> {
     public static List<String> NORMAL_GEAR_RARITIES = Arrays.asList(COMMON_ID, UNCOMMON, RARE_ID, EPIC_ID, LEGENDARY_ID, MYTHIC_ID);
 
 
-    String BOSS_ID = "boss";
-    String ELITE_ID = "elite";
-    String CHAMPION_ID = "champ";
-
     String UNIQUE_ID = "unique";
     String RUNEWORD_ID = "runeword";
 

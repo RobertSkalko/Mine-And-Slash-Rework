@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.event_hooks.entity;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
+import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -68,10 +68,10 @@ public class OnMobSpawn {
 
         String rar = endata.getRarity();
 
-        rar = mob.randomRarity(entity, endata);
+        rar = mob.randomRarity(endata.getLevel(), endata);
         endata.setRarity(rar);
 
-        MobRarity rarity = ExileDB.MobRarities()
+        GearRarity rarity = ExileDB.GearRarities()
                 .get(rar);
         endata.getAffixData()
                 .randomizeAffixes(rarity);

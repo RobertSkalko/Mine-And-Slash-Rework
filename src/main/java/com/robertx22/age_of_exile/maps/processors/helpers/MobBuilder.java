@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.maps.processors.helpers;
 
-import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
+import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.event_hooks.entity.OnMobSpawn;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.utils.geometry.MyPosition;
@@ -18,7 +18,7 @@ import java.util.function.Consumer;
 public class MobBuilder {
 
     private EntityType type;
-    public MobRarity rarity;
+    public GearRarity rarity;
     public int amount = 1;
 
     private MobBuilder() {
@@ -43,7 +43,7 @@ public class MobBuilder {
     private <T extends Mob> T summon(EntityType<T> type, Level world, BlockPos p) {
         MyPosition vec = new MyPosition(p);
 
-        
+
         T mob = (T) type.create(world);
 
         mob.finalizeSpawn((ServerLevelAccessor) world, world.getCurrentDifficultyAt(p), MobSpawnType.REINFORCEMENT, null, null);

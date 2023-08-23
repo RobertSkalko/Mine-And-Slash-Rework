@@ -1,30 +1,8 @@
 package com.robertx22.age_of_exile.mixin_methods;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.config.forge.ClientConfigs;
-import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
-import com.robertx22.age_of_exile.database.registry.ExileDB;
-import com.robertx22.age_of_exile.mmorpg.ForgeEvents;
-import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.HealthUtils;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.LookUtils;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.decoration.ArmorStand;
-import net.minecraftforge.client.event.RenderNameTagEvent;
-import org.joml.Matrix4f;
-
 public class RenderMobInfo {
 
+    /*
     public static void register() {
 
         ForgeEvents.registerForgeEvent(RenderNameTagEvent.class, event -> {
@@ -51,6 +29,10 @@ public class RenderMobInfo {
                                                         MultiBufferSource vertex, int i) {
         try {
 
+
+            if (true) {
+                return;
+            }
 
             if (!ClientConfigs.getConfig().RENDER_MOB_HEALTH_GUI.get()) {
                 return;
@@ -122,8 +104,7 @@ public class RenderMobInfo {
 
                 hpText.append(Component.literal("]").withStyle(ChatFormatting.DARK_RED));
 
-                MobRarity rar = ExileDB.MobRarities()
-                        .get(data.getRarity());
+                GearRarity rar = data.getMobRarity();
 
                 String icon = rar.textFormatting() + rar.name_add;
 
@@ -183,4 +164,6 @@ public class RenderMobInfo {
             matrix.popPose();
         }
     }
+
+     */
 }

@@ -138,3 +138,7 @@ Those chests can be opened with a key, but how do you actually get the key? Mayb
  - new spell: quickdraw! This one will probably be a staple of every ranger, as it allows you to instantly fire off bows!
  
  - you can now craft soul extracting items that extract the stats from gear, and then you can place it on another empty gear piece (modded gear, expensive gear etc)
+ 
+ - re-introduced mob rarities
+ 
+ - re implemented neat gui with MNS values

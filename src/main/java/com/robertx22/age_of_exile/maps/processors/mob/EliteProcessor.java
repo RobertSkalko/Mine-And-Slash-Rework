@@ -5,7 +5,6 @@ import com.robertx22.age_of_exile.maps.generator.ChunkProcessData;
 import com.robertx22.age_of_exile.maps.mobs.SpawnedMob;
 import com.robertx22.age_of_exile.maps.processors.DataProcessor;
 import com.robertx22.age_of_exile.maps.processors.helpers.MobBuilder;
-import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -25,7 +24,7 @@ public class EliteProcessor extends DataProcessor {
 
         MobBuilder.of(type, x -> {
             x.amount = 1;
-            x.rarity = ExileDB.MobRarities().get(IRarity.CHAMPION_ID);
+            x.rarity = ExileDB.GearRarities().getFilterWrapped(e -> e.item_tier > 3).random();
         }).summonMobs(world, pos);
 
     }

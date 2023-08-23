@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.mmorpg;
 
 import com.robertx22.age_of_exile.a_libraries.curios.CurioEvents;
+import com.robertx22.age_of_exile.a_libraries.neat.NeatForgeConfig;
 import com.robertx22.age_of_exile.aoe_data.GeneratedData;
 import com.robertx22.age_of_exile.aoe_data.database.boss_spell.BossSpells;
 import com.robertx22.age_of_exile.aoe_data.database.stat_conditions.StatConditions;
@@ -73,6 +74,7 @@ public class MMORPG {
 
         Watch watch = new Watch();
 
+
         ModLoadingContext.get()
                 .registerConfig(ModConfig.Type.SERVER, ServerContainer.spec);
 
@@ -93,8 +95,10 @@ public class MMORPG {
         });
 
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
-            ModLoadingContext.get()
-                    .registerConfig(ModConfig.Type.CLIENT, ClientConfigs.clientSpec);
+
+            NeatForgeConfig.register();
+
+            ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfigs.clientSpec);
             bus.addListener(ClientInit::onInitializeClient);
 
             ForgeEvents.registerForgeEvent(RegisterKeyMappingsEvent.class, x -> {

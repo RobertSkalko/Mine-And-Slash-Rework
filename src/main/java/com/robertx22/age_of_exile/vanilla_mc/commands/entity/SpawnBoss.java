@@ -14,6 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import static net.minecraft.commands.Commands.literal;
 
 public class SpawnBoss {
+    
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
         commandDispatcher.register(
                 literal(CommandRefs.ID)
@@ -29,9 +30,9 @@ public class SpawnBoss {
             EntityType<? extends Mob> type = EntityType.ZOMBIE;
 
             for (Mob en : MobBuilder.of(type, x -> {
-                x.rarity = ExileDB.MobRarities().get(IRarity.BOSS_ID);
+                x.rarity = ExileDB.GearRarities().get(IRarity.MYTHIC_ID);
             }).summonMobs(p.level(), p.blockPosition())) {
-                Load.Unit(en).setupRandomBoss(); // todo
+                Load.Unit(en).setupRandomBoss();
             }
 
 

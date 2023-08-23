@@ -50,7 +50,7 @@ public class Rune implements IAutoGson<Rune>, JsonExileRegistry<Rune> {
     public ChatFormatting getFormat(SocketData data) {
         try {
             // todo not the best heh, i should probably create a general stat perc or just rename it
-            return ExileDB.GearRarities().getFilterWrapped(x -> x.skill_gem_percents.isInRange(data.p)).list.get(0).textFormatting();
+            return ExileDB.GearRarities().getFilterWrapped(x -> x.stat_percents.isInRange(data.p)).list.get(0).textFormatting();
 
         } catch (IllegalArgumentException e) {
             //  e.printStackTrace();

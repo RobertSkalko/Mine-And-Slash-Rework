@@ -147,8 +147,6 @@ public class CreateLangFile {
         list.addAll(Arrays.asList(Words.values()));
         list.addAll(ExileDB.GearRarities()
                 .getSerializable());
-        list.addAll(ExileDB.MobRarities()
-                .getSerializable());
         list.addAll(Arrays.asList(Chats.values()));
 
         ExileDB.Spells()
