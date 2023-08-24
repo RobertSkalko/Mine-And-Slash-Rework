@@ -9,6 +9,8 @@ import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulItem;
 import com.robertx22.age_of_exile.vanilla_mc.items.*;
 import com.robertx22.age_of_exile.vanilla_mc.items.crates.gem_crate.LootCrateItem;
 import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.VanillaMaterial;
+import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.bases.DodgeOffhandItem;
+import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.bases.TomeItem;
 import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.baubles.ItemNecklace;
 import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.baubles.ItemRing;
 import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.weapons.StaffWeapon;
@@ -54,7 +56,7 @@ public class SlashItems {
     public static RegObj<Item> NEWBIE_GEAR_BAG = Def.item(() -> new ItemNewbieGearBag(), "newbie_gear_bag");
     public static RegObj<Item> SALVAGE_HAMMER = Def.item(() -> new SalvageHammerItem(), "salvage_hammer");
     public static RegObj<Item> SOCKET_EXTRACTOR = Def.item(() -> new SocketExtractorItem(), "socket_extractor");
-  
+
 
     public static RegObj<Item> INFUSED_IRON = Def.item(() -> new SimpleMatItem(), "mat/infused_iron");
     public static RegObj<Item> CRYSTALLIZED_ESSENCE = Def.item(() -> new SimpleMatItem(), "mat/crystallized_essence");
@@ -79,15 +81,24 @@ public class SlashItems {
         }
 
         public static HashMap<VanillaMaterial, RegObj<Item>> STAFFS = of("weapon/staff/",
-                Arrays.asList(VanillaMaterial.DIAMOND, VanillaMaterial.GOLD, VanillaMaterial.IRON, VanillaMaterial.WOOD),
+                Arrays.asList(VanillaMaterial.DIAMOND, VanillaMaterial.IRON, VanillaMaterial.WOOD),
                 x -> new StaffWeapon(x));
 
         public static HashMap<VanillaMaterial, RegObj<Item>> RINGS = of("jewelry/ring/", Arrays.asList(
                 VanillaMaterial.DIAMOND, VanillaMaterial.GOLD, VanillaMaterial.IRON
         ), x -> new ItemRing(x));
+
         public static HashMap<VanillaMaterial, RegObj<Item>> NECKLACES = of("jewelry/necklace/", Arrays.asList(
                 VanillaMaterial.DIAMOND, VanillaMaterial.GOLD, VanillaMaterial.IRON
         ), x -> new ItemNecklace(x));
+
+        public static HashMap<VanillaMaterial, RegObj<Item>> TOMES = of("offhand/tome/", Arrays.asList(
+                VanillaMaterial.DIAMOND, VanillaMaterial.WOOD, VanillaMaterial.IRON
+        ), x -> new TomeItem());
+
+        public static HashMap<VanillaMaterial, RegObj<Item>> ENERGY_DODGE_OFFHAND = of("offhand/dodge/", Arrays.asList(
+                VanillaMaterial.DIAMOND, VanillaMaterial.WOOD, VanillaMaterial.IRON
+        ), x -> new DodgeOffhandItem());
 
         private static HashMap<VanillaMaterial, RegObj<Item>> of(String idprefix, List<VanillaMaterial> list, Function<VanillaMaterial, Item> item) {
             HashMap<VanillaMaterial, RegObj<Item>> map = new HashMap<VanillaMaterial, RegObj<Item>>();

@@ -1,0 +1,12 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "mmorpg:item/offhand/dodge/iron"
+	},
+	"display": {
+		"firstperson_lefthand": {
+			"scale": [0, 0, 0]
+		}
+	}
+}

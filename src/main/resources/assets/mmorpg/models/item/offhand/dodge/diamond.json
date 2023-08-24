@@ -1,0 +1,12 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "mmorpg:item/offhand/dodge/diamond"
+	},
+	"display": {
+		"firstperson_lefthand": {
+			"scale": [0, 0, 0]
+		}
+	}
+}
