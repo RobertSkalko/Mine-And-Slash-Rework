@@ -1,0 +1,29 @@
+{
+  "base_stats": [
+    {
+      "type": "FLAT",
+      "max": 6.0,
+      "min": 3.0,
+      "stat": "magic_shield"
+    }
+  ],
+  "gear_slot": "tome",
+  "guid": "tome",
+  "implicit_stats": [],
+  "req": {
+    "scaling_req": {
+      "intelligence": 0.75
+    }
+  },
+  "style": "STR",
+  "tags": {
+    "tags": [
+      "tome",
+      "magic_shield_stat",
+      "offhand_family",
+      "intelligence"
+    ]
+  },
+  "weapon_type": "none",
+  "weight": 1000
+}

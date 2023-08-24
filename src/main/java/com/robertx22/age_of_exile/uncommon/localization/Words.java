@@ -126,6 +126,10 @@ public enum Words implements IAutoLocName {
     Legwraps("Legwraps"),
     //
     Creation("Creation"),
+    Crest("Crest"),
+    Keep("Keep"),
+    Ward("Ward"),
+    Refuge("Refuge"),
 
     // name2
 

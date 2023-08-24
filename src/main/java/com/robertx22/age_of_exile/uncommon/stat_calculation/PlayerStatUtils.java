@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class PlayerStatUtils {
-    
+
     public static List<StatContext> addNewbieElementalResists(EntityData data) {
         List<ExactStatData> stats = new ArrayList<>();
 
@@ -28,7 +28,10 @@ public class PlayerStatUtils {
             value = 25;
         }
         if (data.getLevel() > 49) {
-            return Arrays.asList(new MiscStatCtx(stats));
+            value = 0;
+        }
+        if (data.getLevel() > 74) {
+            value = -25;
         }
         for (Elements ele : Elements.getAllSingle()) {
             if (ele != Elements.Physical) {

@@ -15,7 +15,7 @@
   "stats": [
     {
       "type": "FLAT",
-      "max": 6.0,
+      "max": 10.0,
       "min": 3.0,
       "stat": "all_water_damage"
     }

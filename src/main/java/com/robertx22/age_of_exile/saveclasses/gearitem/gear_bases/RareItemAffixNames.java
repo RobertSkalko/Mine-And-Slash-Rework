@@ -20,7 +20,7 @@ public class RareItemAffixNames {
     public static Words getSuffix(GearItemData gear) {
 
         if (getSuffixMap(gear.GetBaseGearType())
-            .containsKey(gear.rs)) {
+                .containsKey(gear.rs)) {
             return getSuffixMap(gear.GetBaseGearType()).get(gear.rs);
         }
 
@@ -76,6 +76,7 @@ public class RareItemAffixNames {
         put(3, Words.Star);
         put(4, Words.Splitter);
     }};
+    
     private static HashMap<Integer, Words> pants = new HashMap<Integer, Words>() {{
         put(0, Words.Leggings);
         put(1, Words.Legguards);
@@ -87,7 +88,10 @@ public class RareItemAffixNames {
     private static HashMap<Integer, Words> defaults = new HashMap<Integer, Words>() {
         {
             put(0, Words.Creation);
-
+            put(1, Words.Crest);
+            put(2, Words.Keep);
+            put(3, Words.Ward);
+            put(4, Words.Refuge);
         }
     };
 
@@ -97,31 +101,31 @@ public class RareItemAffixNames {
             return weapons;
         }
         if (slot.getTags()
-            .contains(BaseGearType.SlotTag.boots)) {
+                .contains(BaseGearType.SlotTag.boots)) {
             return boots;
         }
         if (slot.getTags()
-            .contains(BaseGearType.SlotTag.chest)) {
+                .contains(BaseGearType.SlotTag.chest)) {
             return chest;
         }
         if (slot.getTags()
-            .contains(BaseGearType.SlotTag.helmet)) {
+                .contains(BaseGearType.SlotTag.helmet)) {
             return helmet;
         }
         if (slot.getTags()
-            .contains(BaseGearType.SlotTag.ring)) {
+                .contains(BaseGearType.SlotTag.ring)) {
             return ring;
         }
         if (slot.getTags()
-            .contains(BaseGearType.SlotTag.necklace)) {
+                .contains(BaseGearType.SlotTag.necklace)) {
             return necklace;
         }
         if (slot.getTags()
-            .contains(BaseGearType.SlotTag.shield)) {
+                .contains(BaseGearType.SlotTag.shield)) {
             return shield;
         }
         if (slot.getTags()
-            .contains(BaseGearType.SlotTag.pants)) {
+                .contains(BaseGearType.SlotTag.pants)) {
             return pants;
         }
 

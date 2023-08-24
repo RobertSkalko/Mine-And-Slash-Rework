@@ -8,7 +8,9 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Explosion;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.Arrays;
@@ -54,11 +56,29 @@ public class AoeSelector extends BaseTargetSelector {
     }
 
     public static boolean canHit(Vec3 pos, Entity en) {
-        for (int i = -1; i < 2; i++) {
-            if (Explosion.getSeenPercent(pos.add(0, i, 0), en) >= 0.4) {
-                return true;
+
+        if (Explosion.getSeenPercent(pos, en) >= 0.4) {
+            return true;
+        }
+        int height = 2;
+
+        // we check if there's a ceiling
+        if (en.level().clip(new ClipContext(pos, pos.add(0, height, 0), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, null)).getType() == HitResult.Type.MISS) {
+            for (int i = 1; i <= height; i++) {
+                if (Explosion.getSeenPercent(pos.add(0, i, 0), en) >= 0.4) {
+                    return true;
+                }
             }
         }
+        // check if there's floor
+        if (en.level().clip(new ClipContext(pos, pos.add(0, -height, 0), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, null)).getType() == HitResult.Type.MISS) {
+            for (int i = -1; i >= -height; i--) {
+                if (Explosion.getSeenPercent(pos.add(0, i, 0), en) >= 0.4) {
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 

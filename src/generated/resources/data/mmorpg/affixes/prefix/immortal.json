@@ -1,0 +1,24 @@
+{
+  "type": "prefix",
+  "guid": "immortal",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "shield"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 3.0,
+      "min": 0.5,
+      "stat": "health_regen"
+    }
+  ],
+  "weight": 500
+}

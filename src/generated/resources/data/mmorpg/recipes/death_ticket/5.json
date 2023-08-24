@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "minecraft:paper"
+    },
+    "c": {
+      "item": "minecraft:diamond"
+    },
+    "r": {
+      "item": "mmorpg:stone/5"
+    }
+  },
+  "pattern": [
+    "rcr",
+    "rbr",
+    "rrr"
+  ],
+  "result": {
+    "count": 3,
+    "item": "mmorpg:death_ticket/5"
+  },
+  "show_notification": true
+}

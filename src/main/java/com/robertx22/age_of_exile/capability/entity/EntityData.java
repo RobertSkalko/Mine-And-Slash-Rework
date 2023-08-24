@@ -22,6 +22,7 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.CustomExactStatsData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.unit.*;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.CustomExactStats;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
@@ -136,6 +137,11 @@ public class EntityData implements ICap, INeededForClient {
     int exp = 0;
     int maxHealth = 0;
     MobData affixes = new MobData();
+    public EntityStatusEffectsData statusEffects = new EntityStatusEffectsData();
+    public EntityAilmentData ailments = new EntityAilmentData();
+    CooldownsData cooldowns = new CooldownsData();
+    ThreatData threat = new ThreatData();
+    public EntityLeechData leech = new EntityLeechData();
 
     private BossData boss = null;
 
@@ -143,14 +149,6 @@ public class EntityData implements ICap, INeededForClient {
     public BossData getBossData() {
         return boss;
     }
-
-    public EntityStatusEffectsData statusEffects = new EntityStatusEffectsData();
-    public EntityAilmentData ailments = new EntityAilmentData();
-
-
-    CooldownsData cooldowns = new CooldownsData();
-    ThreatData threat = new ThreatData();
-    public EntityLeechData leech = new EntityLeechData();
 
     EntityTypeUtils.EntityClassification type = EntityTypeUtils.EntityClassification.PLAYER;
     // sync these for mobs
@@ -344,12 +342,27 @@ public class EntityData implements ICap, INeededForClient {
     public void onDeath() {
 
         if (entity instanceof Player) {
-            Player player = (Player) entity;
+            int expLoss = (int) (getExpRequiredForLevelUp() * ServerContainer.get().EXP_LOSS_ON_DEATH.get());
 
-            int expLoss = (int) (exp * ServerContainer.get().EXP_LOSS_ON_DEATH.get());
+            expLoss = MathHelper.clamp(expLoss, 0, exp);
 
             if (expLoss > 0) {
                 this.exp = Mth.clamp(exp - expLoss, 0, Integer.MAX_VALUE);
+            }
+
+            if (WorldUtils.isMapWorldClass(this.entity.level())) {
+                int mapcd = ServerContainer.get().MAP_DEATH_COOLDOWN.get();
+
+                int deaths = 0;
+
+                var map = Load.mapAt(entity.level(), entity.blockPosition());
+                if (map != null) {
+                    map.deaths++;
+                    deaths = map.deaths;
+                }
+                mapcd *= (1 + deaths);
+
+                this.cooldowns.setOnCooldown(CooldownsData.MAP_TP, mapcd);
             }
 
         }

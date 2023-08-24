@@ -55,8 +55,18 @@ public class BuiltDungeon {
         return (started && unbuiltRooms.isEmpty());
     }
 
-    public boolean shouldStartFinishing() {
+
+    public boolean shouldStartFinishing(PointData point) {
+        if (isTooCloseToGridEdge(point)) {
+            return true;
+        }
         return amount > size;
+    }
+
+    public boolean isTooCloseToGridEdge(PointData p) {
+        int too = 3;
+        return p.x < too || p.y < too || p.y > capacity - too || p.x > capacity - too;
+
     }
 
     public BuiltRoom getRoomForChunk(ChunkPos pos) {
@@ -87,7 +97,6 @@ public class BuiltDungeon {
         if (x + 1 > capacity || z + 1 > capacity || x < 0 || z < 0) {
             return false;
         }
-
         return true;
     }
 
@@ -137,6 +146,35 @@ public class BuiltDungeon {
         }
 
     }
+/*
+    public void removeUnconnectedRooms() {
+        BuiltRoom built = BuiltRoom.getBarrier();
+
+
+        for (int i = 0; i < rooms.length; i++) {
+            for (int j = 0; j < rooms[i].length; j++) {
+                if (getRoom(i, j) != null) {
+                    var room = getRoom(i, j);
+
+                    UnbuiltRoom unbuilt = getUnbuiltFor(i, j);
+
+                    if (!unbuilt.sides.EAST.isLinked(room.data.sides.EAST)) {
+                        if (!unbuilt.sides.WEST.isLinked(room.data.sides.WEST)) {
+                            if (!unbuilt.sides.NORTH.isLinked(room.data.sides.NORTH)) {
+                                if (!unbuilt.sides.SOUTH.isLinked(room.data.sides.SOUTH)) {
+                                    addBarrier(i, j, built);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+ */
+
 
     public BuiltRoom getRoomFacing(Direction dir, int x, int z) {
         PointData coords = getCoordsOfRoomFacing(dir, x, z);
@@ -184,9 +222,7 @@ public class BuiltDungeon {
     // todo i think this is the problem
     private void buildConnectedRooms(int x, int z, BuiltRoom room) {
 
-
         List<Direction> dirs = room.data.sides.getDoorSides();
-
 
         dirs.forEach(dir -> {
             PointData coord = getCoordsOfRoomFacing(dir, x, z);
@@ -199,7 +235,7 @@ public class BuiltDungeon {
 
                         Preconditions.checkNotNull(unbuilt);
 
-                        RoomRotation rot = randomDungeonRoom(unbuilt);
+                        RoomRotation rot = randomDungeonRoom(unbuilt, coord);
 
                         Preconditions.checkNotNull(rot);
 
@@ -219,10 +255,9 @@ public class BuiltDungeon {
         });
     }
 
-    public RoomRotation randomDungeonRoom(UnbuiltRoom unbuilt) {
+    public RoomRotation randomDungeonRoom(UnbuiltRoom unbuilt, PointData point) {
 
-        if (shouldStartFinishing()) {
-
+        if (shouldStartFinishing(point)) {
             var possible = tryEndRoom(unbuilt);
             if (!possible.isEmpty()) {
                 return random(possible);

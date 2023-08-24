@@ -150,3 +150,14 @@ v5.0.4
 - add hotbar toggle config and keybind 
 
 - tweaked gui
+
+- added tomes and totems as offhand types like shields, these provide magic shield or dodge and some regeneration stats
+
+- reaching lvl 75 now reduces all resists by -25%
+
+- dying in a map now puts a cooldown to the teleportation with the map device (this cd is on you, not the map device itself)
+- map cooldown increases with each death
+
+- you can craft death ticket items to avoid this death cooldown penalty
+
+- every subsequent death increases the rarity of death tickets needed to use to restore penalty

@@ -71,12 +71,19 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
         List<Item> staff = Arrays.asList(SlashItems.GearItems.STAFFS.get(VanillaMaterial.WOOD).get(), SlashItems.GearItems.STAFFS.get(VanillaMaterial.IRON).get(), SlashItems.GearItems.STAFFS.get(VanillaMaterial.DIAMOND).get());
         List<Item> ring = Arrays.asList(SlashItems.GearItems.RINGS.get(VanillaMaterial.IRON).get(), SlashItems.GearItems.RINGS.get(VanillaMaterial.GOLD).get(), SlashItems.GearItems.RINGS.get(VanillaMaterial.DIAMOND).get());
         List<Item> necklace = Arrays.asList(SlashItems.GearItems.NECKLACES.get(VanillaMaterial.IRON).get(), SlashItems.GearItems.NECKLACES.get(VanillaMaterial.GOLD).get(), SlashItems.GearItems.NECKLACES.get(VanillaMaterial.DIAMOND).get());
-
+        List<Item> tomes = Arrays.asList(SlashItems.GearItems.TOMES.get(VanillaMaterial.IRON).get(), SlashItems.GearItems.TOMES.get(VanillaMaterial.IRON).get(), SlashItems.GearItems.TOMES.get(VanillaMaterial.DIAMOND).get());
+        List<Item> flutes = Arrays.asList(SlashItems.GearItems.ENERGY_DODGE_OFFHAND.get(VanillaMaterial.IRON).get(), SlashItems.GearItems.ENERGY_DODGE_OFFHAND.get(VanillaMaterial.IRON).get(), SlashItems.GearItems.ENERGY_DODGE_OFFHAND.get(VanillaMaterial.DIAMOND).get());
 
         String id = slot.id;
 
         if (id.equals(GearSlots.RING)) {
             return ring.get(lootable_gear_tier.tier);
+        }
+        if (id.equals(GearSlots.FLUTE)) {
+            return flutes.get(lootable_gear_tier.tier);
+        }
+        if (id.equals(GearSlots.TOME)) {
+            return tomes.get(lootable_gear_tier.tier);
         }
         if (id.equals(GearSlots.NECKLACE)) {
             return necklace.get(lootable_gear_tier.tier);

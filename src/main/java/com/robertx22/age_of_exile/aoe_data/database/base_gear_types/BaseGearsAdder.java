@@ -6,6 +6,8 @@ import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType.SlotTag;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.TagList;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
+import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequirement;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
@@ -179,6 +181,17 @@ public class BaseGearsAdder implements ExileRegistryInit, GearDataHelper {
                 .tags(new TagList(SlotTag.shield, SlotTag.offhand_family, SlotTag.armor_stat, SlotTag.strength))
                 .baseStat(new StatMod(6, 12, Armor.getInstance(), ModType.FLAT))
                 .build();
+
+        BaseGearBuilder.of(BaseGearTypes.TOME, GearSlots.TOME, "Tome", StatRequirement.of(PlayStyle.INT))
+                .tags(new TagList(SlotTag.tome, SlotTag.offhand_family, SlotTag.magic_shield_stat, SlotTag.intelligence))
+                .baseStat(new StatMod(3, 6, MagicShield.getInstance(), ModType.FLAT))
+                .build();
+
+        BaseGearBuilder.of(BaseGearTypes.FLUTE, GearSlots.FLUTE, "Flute", StatRequirement.of(PlayStyle.DEX))
+                .tags(new TagList(SlotTag.flute, SlotTag.offhand_family, SlotTag.dodge_stat, SlotTag.dexterity))
+                .baseStat(new StatMod(6, 12, DodgeRating.getInstance(), ModType.FLAT))
+                .build();
+
 
         BaseGearBuilder.weapon(BaseGearTypes.BOW, GearSlots.BOW, WeaponTypes.bow, StatRequirement.of(PlayStyle.DEX))
                 .tags(new TagList(SlotTag.ranger_casting_weapon, SlotTag.bow, SlotTag.weapon_family, SlotTag.ranged_weapon, SlotTag.dexterity))

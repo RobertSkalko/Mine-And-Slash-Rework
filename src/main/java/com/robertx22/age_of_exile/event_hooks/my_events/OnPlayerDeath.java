@@ -12,22 +12,19 @@ public class OnPlayerDeath extends EventConsumer<ExileEvents.OnPlayerDeath> {
     public void accept(ExileEvents.OnPlayerDeath event) {
         try {
 
-            Load.Unit(event.player)
-                    .onDeath();
+            Load.Unit(event.player).onDeath();
 
-            Load.Unit(event.player)
-                    .setEquipsChanged(true);
+
+            Load.Unit(event.player).setEquipsChanged(true);
 
             PlayerData data = Load.playerRPGData(event.player);
+            if (WorldUtils.isMapWorldClass(event.player.level())) {
+                data.map.onDeath();
+            }
             data.deathStats.died = true;
 
             data.syncToClient(event.player);
 
-        
-            if (WorldUtils.isMapWorldClass(event.player.level())) {
-
-
-            }
 
         } catch (Exception e) {
             e.printStackTrace();

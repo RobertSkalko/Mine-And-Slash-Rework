@@ -9,7 +9,6 @@ import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.world.level.ChunkPos;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -54,87 +53,24 @@ public class DungeonBuilder {
 
         builtDungeon.setupBarriers();
 
+        // builtDungeon.removeUnconnectedRooms();
 
         int tries = 0;
 
 
         while (!builtDungeon.isFinished()) {
-
             tries++;
 
             if (tries > 2000) {
                 System.out.println("Room taking too long to build");
                 break;
             }
-
-
         }
 
         builtDungeon.fillWithBarriers();
 
     }
 
-    public RoomRotation randomDungeonRoom(UnbuiltRoom unbuilt) {
-
-        if (builtDungeon.shouldStartFinishing()) {
-
-            var possible = tryEndRoom(unbuilt);
-            if (!possible.isEmpty()) {
-                return random(possible);
-            } else {
-                return randomRoom(unbuilt);
-            }
-        } else {
-            return randomRoom(unbuilt);
-        }
-    }
-
-    public List<RoomRotation> tryEndRoom(UnbuiltRoom unbuilt) {
-        List<RoomType> types = new ArrayList<>();
-
-        types.add(RoomType.END);
-        types.add(RoomType.CURVED_HALLWAY);
-        types.add(RoomType.STRAIGHT_HALLWAY);
-        types.add(RoomType.TRIPLE_HALLWAY);
-
-        for (RoomType type : types) {
-
-            var possible = type.getPossibleFor(unbuilt);
-
-            if (!possible.isEmpty()) {
-                return possible;
-            }
-        }
-
-        return Arrays.asList();
-
-    }
-
-
-    public RoomRotation randomRoom(UnbuiltRoom unbuilt) {
-        List<RoomType> types = new ArrayList<>();
-        types.add(RoomType.CURVED_HALLWAY);
-        types.add(RoomType.STRAIGHT_HALLWAY);
-        types.add(RoomType.FOUR_WAY);
-        types.add(RoomType.TRIPLE_HALLWAY);
-
-        List<RoomRotation> possible = new ArrayList<>();
-
-        types.forEach(x -> {
-            possible.addAll(x.getPossibleFor(unbuilt));
-        });
-
-        if (possible.isEmpty()) {
-            // we dont want to end things fast, but if there's nothing else that matches, add an end.
-            possible.addAll(RoomType.END.getPossibleFor(unbuilt));
-
-            if (possible.isEmpty()) {
-                throw new RuntimeException("No possible rooms at all for unbuilt room, this is horrible.");
-            }
-        }
-
-        return random(possible);
-    }
 
     public RoomRotation random(List<RoomRotation> list) {
         return RandomUtils.weightedRandom(list, rand.nextDouble());

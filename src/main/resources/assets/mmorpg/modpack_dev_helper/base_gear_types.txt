@@ -4,6 +4,7 @@ leather_boots
 shield
 cloth_boots
 crossbow
+tome
 ring
 staff
 necklace
@@ -11,6 +12,7 @@ cloth_pants
 bow
 leather_pants
 plate_chest
+flute
 sword
 plate_boots
 cloth_chest

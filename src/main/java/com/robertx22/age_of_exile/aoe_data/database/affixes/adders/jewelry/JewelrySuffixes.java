@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttrib
 import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuality;
 import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuantity;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShieldRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
@@ -21,13 +22,13 @@ public class JewelrySuffixes implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
-
+        
         ElementalAffixBuilder.start()
                 .guid(x -> x.guidName + "_ele_dmg_jewelry")
                 .add(Elements.Fire, "Of Embers")
                 .add(Elements.Cold, "Of Ice")
                 .add(Elements.Chaos, "Of Venom")
-                .stats(x -> Arrays.asList(new StatMod(3, 6, Stats.ELEMENTAL_DAMAGE.get(x), ModType.FLAT)))
+                .stats(x -> Arrays.asList(new StatMod(3, 10, Stats.ELEMENTAL_DAMAGE.get(x), ModType.FLAT)))
                 .includesTags(SlotTag.jewelry_family)
                 .Suffix()
                 .Build();
@@ -67,19 +68,28 @@ public class JewelrySuffixes implements ExileRegistryInit {
 
         AffixBuilder.Normal("of_the_troll")
                 .Named("Of The Troll")
-                .stats(new StatMod(3, 6, HealthRegen.getInstance(), ModType.PERCENT))
-                .includesTags(SlotTag.jewelry_family, SlotTag.armor_family)
+                .stats(new StatMod(3, 15, HealthRegen.getInstance(), ModType.PERCENT))
+                .includesTags(SlotTag.jewelry_family, SlotTag.armor_family, SlotTag.shield)
                 .Weight(200)
                 .Suffix()
                 .Build();
 
         AffixBuilder.Normal("of_spirit_markings")
                 .Named("Of Spirit Markings")
-                .stats(new StatMod(3, 6, ManaRegen.getInstance(), ModType.PERCENT))
-                .includesTags(SlotTag.jewelry_family, SlotTag.armor_family)
+                .stats(new StatMod(3, 15, ManaRegen.getInstance(), ModType.PERCENT))
+                .includesTags(SlotTag.jewelry_family, SlotTag.armor_family, SlotTag.tome)
                 .Weight(200)
                 .Suffix()
                 .Build();
+
+        AffixBuilder.Normal("of_azure_skies")
+                .Named("Of Azure Skies")
+                .stats(new StatMod(3, 15, MagicShieldRegen.getInstance(), ModType.PERCENT))
+                .includesTags(SlotTag.jewelry_family, SlotTag.tome)
+                .Weight(200)
+                .Suffix()
+                .Build();
+
 
         AffixBuilder.Normal("of_treasure")
                 .Named("Of Treasure")

@@ -14,4 +14,8 @@ public enum RoomSide {
         return this == NONE || side == NONE || this == side;
     }
 
+    public boolean isLinked(RoomSide side) {
+        return this == side;
+    }
+
 }

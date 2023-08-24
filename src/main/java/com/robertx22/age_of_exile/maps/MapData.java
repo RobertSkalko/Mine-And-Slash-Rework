@@ -31,7 +31,8 @@ public class MapData {
 
     public String playerUuid = "";
 
-   
+    public int deaths = 0;
+
     public int chunkX = 0;
     public int chunkZ = 0;
 

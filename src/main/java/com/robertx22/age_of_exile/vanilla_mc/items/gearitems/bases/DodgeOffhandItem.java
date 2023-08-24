@@ -10,7 +10,7 @@ public class DodgeOffhandItem extends AutoItem {
 
     @Override
     public String locNameForLangFile() {
-        return "Flute";
+        return "Totem";
     }
 
     @Override
