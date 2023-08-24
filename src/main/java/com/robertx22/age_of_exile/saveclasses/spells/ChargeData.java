@@ -31,7 +31,7 @@ public class ChargeData {
 
         charges.put(id, Mth.clamp(charges.getOrDefault(id, 0) - 1, 0, 100000));
 
-        Load.playerRPGData(player).syncToClient(player);
+        Load.player(player).syncToClient(player);
 
     }
 
@@ -49,13 +49,13 @@ public class ChargeData {
         if (player.level().isClientSide) {
             return;
         }
-        
+
         boolean sync = false;
 
 
         List<String> chargesadded = new ArrayList<>(); // no duplicate charge regen
 
-        for (Spell s : Load.playerRPGData(player).getSkillGemInventory().getAllSkillGems().stream().map(x -> x.getSpell()).collect(Collectors.toList())) {
+        for (Spell s : Load.player(player).getSkillGemInventory().getAllSkillGems().stream().map(x -> x.getSpell()).collect(Collectors.toList())) {
 
             String id = s.config.charge_name;
 
@@ -87,7 +87,7 @@ public class ChargeData {
 
         if (sync) {
 
-            Load.playerRPGData(player).syncToClient(player);
+            Load.player(player).syncToClient(player);
         }
     }
 }

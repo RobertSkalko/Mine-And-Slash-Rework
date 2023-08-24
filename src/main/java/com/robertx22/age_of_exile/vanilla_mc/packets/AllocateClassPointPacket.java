@@ -60,12 +60,12 @@ public class AllocateClassPointPacket extends MyPacket<AllocateClassPointPacket>
         AscendancyClass school = ExileDB.SpellSchools()
                 .get(this.schoolid);
 
-        var data = Load.playerRPGData(ctx.getPlayer()).ascClass;
+        var data = Load.player(ctx.getPlayer()).ascClass;
 
         if (data.canLearn(ctx.getPlayer(), school, perk)) {
             data.learn(perk, school);
         }
-        Load.playerRPGData(ctx.getPlayer()).syncToClient(ctx.getPlayer());
+        Load.player(ctx.getPlayer()).syncToClient(ctx.getPlayer());
 
     }
 

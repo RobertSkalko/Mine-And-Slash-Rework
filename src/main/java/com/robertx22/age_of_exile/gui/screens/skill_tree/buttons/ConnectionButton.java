@@ -27,7 +27,7 @@ public class ConnectionButton extends ImageButton {
         this.one = one;
         this.two = two;
 
-        connection = Load.playerRPGData(ClientOnly.getPlayer()).talents.getConnection(school, one, two);
+        connection = Load.player(ClientOnly.getPlayer()).talents.getConnection(school, one, two);
     }
 
     public Perk.Connection connection;

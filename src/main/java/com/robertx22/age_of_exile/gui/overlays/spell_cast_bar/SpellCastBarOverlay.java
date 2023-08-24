@@ -17,7 +17,7 @@ public class SpellCastBarOverlay {
 
     public void onHudRender(GuiGraphics gui) {
 
-        var data = Load.playerRPGData(mc.player);
+        var data = Load.player(mc.player);
 
         if (data == null) {
             return;

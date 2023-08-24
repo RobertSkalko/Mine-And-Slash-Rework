@@ -22,7 +22,7 @@ public class DeathStatsData {
     public boolean died = false;
 
     public static void record(Player player, Elements ele, float amount) {
-        PlayerData stats = Load.playerRPGData(player);
+        PlayerData stats = Load.player(player);
         Elements element = ele == null ? Elements.Physical : ele;
         stats.deathStats.record(element, amount);
     }

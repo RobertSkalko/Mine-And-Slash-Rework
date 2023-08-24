@@ -23,7 +23,7 @@ public class Load {
                 .orElse(new EntityData((LivingEntity) entity));
     }
 
-    public static PlayerData playerRPGData(Player player) {
+    public static PlayerData player(Player player) {
         return player.getCapability(PlayerData.INSTANCE)
                 .orElse(null);
     }

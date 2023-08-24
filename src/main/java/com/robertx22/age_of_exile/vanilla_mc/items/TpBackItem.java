@@ -37,7 +37,7 @@ public class TpBackItem extends AutoItem {
                     return InteractionResultHolder.pass(p.getItemInHand(pUsedHand));
                 }
                 itemstack.shrink(1);
-                Load.playerRPGData(p).map.teleportBack(p);
+                Load.player(p).map.teleportBack(p);
             }
         }
         return InteractionResultHolder.pass(p.getItemInHand(pUsedHand));

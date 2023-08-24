@@ -192,7 +192,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     public Minecraft mc = Minecraft.getInstance();
 
-    PlayerData playerData = Load.playerRPGData(mc.player);
+    PlayerData playerData = Load.player(mc.player);
 
     public TalentTree school;
 
@@ -230,7 +230,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         HashSet<PointData> def = new HashSet();
 
         Set<Set<PointData>> cons = new HashSet<>();
-        var data = Load.playerRPGData(ClientOnly.getPlayer());
+        var data = Load.player(ClientOnly.getPlayer());
 
 
         new ArrayList<>(children()).forEach(b -> {

@@ -34,7 +34,7 @@ public class SingleTalentResetPotion extends AutoItem implements IShapedRecipe {
 
         if (player instanceof Player) {
             Player p = (Player) player;
-            Load.playerRPGData(p).talents.reset_points += 5;
+            Load.player(p).talents.reset_points += 5;
             p.addItem(new ItemStack(Items.GLASS_BOTTLE));
         }
 

@@ -15,7 +15,7 @@ public class TeamData {
     public boolean isLeader = false;
 
     public void joinTeamOf(Player other) {
-        this.team_id = Load.playerRPGData(other).team.team_id;
+        this.team_id = Load.player(other).team.team_id;
     }
 
     public void leaveTeam() {
@@ -28,11 +28,11 @@ public class TeamData {
 
     public boolean isOnSameTeam(Player other) {
 
-        if (team_id.isEmpty() || Load.playerRPGData(other).team.team_id.isEmpty()) {
+        if (team_id.isEmpty() || Load.player(other).team.team_id.isEmpty()) {
             return false;
         }
 
-        return team_id.equals(Load.playerRPGData(other).team.team_id);
+        return team_id.equals(Load.player(other).team.team_id);
     }
 
     public void createTeam() {

@@ -50,7 +50,7 @@ public abstract class LeagueMechanic implements ExileRegistry<LeagueMechanic> {
             var tp = BlockPos.of(lo);
 
             if (lo != 0L) {
-                Load.playerRPGData(p).map.tp_back_from_league_pos = p.blockPosition().asLong();
+                Load.player(p).map.tp_back_from_league_pos = p.blockPosition().asLong();
                 TeleportUtils.teleport((ServerPlayer) p, tp);
             }
         }
@@ -61,7 +61,7 @@ public abstract class LeagueMechanic implements ExileRegistry<LeagueMechanic> {
     }
 
     public final void teleportBackToDungeon(Player p) {
-        Load.playerRPGData(p).map.teleportBackFromLeagueToDungeon(p);
+        Load.player(p).map.teleportBackFromLeagueToDungeon(p);
     }
 
     public abstract void spawnTeleportInMap(ServerLevel level, BlockPos pos);

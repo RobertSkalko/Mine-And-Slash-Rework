@@ -274,7 +274,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         });
 
 
-        int p = Load.playerRPGData(mc.player).statPoints
+        int p = Load.player(mc.player).statPoints
                 .getFreePoints(mc.player);
         if (p > 0) {
             String points = "Points: " + p;

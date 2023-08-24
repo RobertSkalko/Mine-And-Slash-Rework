@@ -61,7 +61,7 @@ public class SpellHotbarOverlay {
             if (ChatUtils.isChatOpen()) {
                 return;
             }
-            if (Load.playerRPGData(mc.player) == null) {
+            if (Load.player(mc.player) == null) {
                 return;
             }
 
@@ -100,7 +100,7 @@ public class SpellHotbarOverlay {
 
         Spell spell = null;
         try {
-            spell = Load.playerRPGData(mc.player).getSkillGemInventory().getHotbarGem(place).getSpell();
+            spell = Load.player(mc.player).getSkillGemInventory().getHotbarGem(place).getSpell();
 
             if (spell == null) {
                 return;
@@ -140,12 +140,12 @@ public class SpellHotbarOverlay {
                 gui.blit(spell.getIconLoc(), xs, ys, 0, 0, 16, 16, 16, 16);
 
                 if (spell.config.charges > 0) {
-                    int charges = Load.playerRPGData(mc.player)
+                    int charges = Load.player(mc.player)
                             .spellCastingData.charges.getCharges(spell.config.charge_name);
 
                     if (charges == 0) {
                         float needed = (float) spell.config.charge_regen;
-                        float currentticks = (float) Load.playerRPGData(mc.player)
+                        float currentticks = (float) Load.player(mc.player)
                                 .spellCastingData.charges.getCurrentTicksChargingOf(spell.config.charge_name);
 
                         float ticksleft = needed - currentticks;

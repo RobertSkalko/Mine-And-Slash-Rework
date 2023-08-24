@@ -35,7 +35,7 @@ public class ResetStatsPotion extends AutoItem implements IShapedRecipe {
 
         if (player instanceof Player) {
             Player p = (Player) player;
-            Load.playerRPGData(p).statPoints.reset();
+            Load.player(p).statPoints.reset();
             p.addItem(new ItemStack(Items.GLASS_BOTTLE));
         }
 

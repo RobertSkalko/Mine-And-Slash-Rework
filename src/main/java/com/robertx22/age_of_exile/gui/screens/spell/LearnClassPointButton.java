@@ -55,7 +55,7 @@ public class LearnClassPointButton extends ImageButton {
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
         gui.blit(perk.getIcon(), getX() + 1, getY() + 1, 16, 16, 16, 16, 16, 16);
 
-        int currentlvl = Load.playerRPGData(mc.player).ascClass.getLevel(perk.GUID());
+        int currentlvl = Load.player(mc.player).ascClass.getLevel(perk.GUID());
         int maxlvl = perk.getMaxLevel();
         String lvltext = currentlvl + "/" + maxlvl;
         TextUtils.renderText(gui, 0.8F, lvltext, getX() + BUTTON_SIZE_X / 2, (int) (getY() + BUTTON_SIZE_Y * 0.85F), ChatFormatting.GREEN);

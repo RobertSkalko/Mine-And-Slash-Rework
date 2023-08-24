@@ -43,7 +43,7 @@ public class SpellStatsCalculationEvent extends EffectEvent {
 
         float manamultilvl = GameBalanceConfig.get().MANA_COST_SCALING.getMultiFor(lvl);
         if (caster instanceof Player p) {
-            var gem = Load.playerRPGData(p).getSkillGemInventory().getSpellGem(spell);
+            var gem = Load.player(p).getSkillGemInventory().getSpellGem(spell);
             if (gem != null) {
                 manamultilvl *= gem.getManaCostMulti();
             }

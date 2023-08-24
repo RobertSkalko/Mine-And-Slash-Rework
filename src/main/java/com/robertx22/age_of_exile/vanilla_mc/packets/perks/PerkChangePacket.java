@@ -59,7 +59,7 @@ public class PerkChangePacket extends MyPacket<PerkChangePacket> {
 
     @Override
     public void onReceived(ExilePacketContext ctx) {
-        PlayerData playerData = Load.playerRPGData(ctx.getPlayer());
+        PlayerData playerData = Load.player(ctx.getPlayer());
         TalentTree sc = ExileDB.TalentTrees()
                 .get(school);
 

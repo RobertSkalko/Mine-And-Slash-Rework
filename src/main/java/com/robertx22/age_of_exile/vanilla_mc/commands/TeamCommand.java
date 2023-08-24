@@ -34,13 +34,13 @@ public class TeamCommand {
                         .then(literal("teams").requires(e -> e.hasPermission(0))
 
                                 .then(literal("create").executes(x -> {
-                                    Load.playerRPGData(x.getSource()
+                                    Load.player(x.getSource()
                                                     .getPlayerOrException()).team
                                             .createTeam();
                                     return 0;
                                 }))
                                 .then(literal("leave").executes(x -> {
-                                    Load.playerRPGData(x.getSource()
+                                    Load.player(x.getSource()
                                                     .getPlayerOrException()).team
                                             .leaveTeam();
                                     return 0;
@@ -59,7 +59,7 @@ public class TeamCommand {
                                                     Player player = x.getSource()
                                                             .getPlayerOrException();
 
-                                                    if (!Load.playerRPGData(player).team
+                                                    if (!Load.player(player).team
                                                             .isOnTeam()) {
                                                         player.displayClientMessage(ExileText.ofText("You are not in a team.").get(), false);
                                                         return 0;
@@ -72,7 +72,7 @@ public class TeamCommand {
                                                     other.displayClientMessage(ExileText.ofText("Do /mine_and_slash teams join ").get().append(player.getDisplayName())
                                                             .append(" to accept"), false);
 
-                                                    Load.playerRPGData(other).team.invitedToTeam = Load.playerRPGData(player).team.team_id;
+                                                    Load.player(other).team.invitedToTeam = Load.player(player).team.team_id;
 
                                                     player.displayClientMessage(ExileText.ofText("You have invited ").get().append(other.getDisplayName())
                                                             .append(ExileText.ofText(" to join your team.").get()), false);
@@ -89,7 +89,7 @@ public class TeamCommand {
 
                                                     Player other = EntityArgument.getPlayer(x, "player");
 
-                                                    if (!Load.playerRPGData(player).team
+                                                    if (!Load.player(player).team
                                                             .isOnSameTeam(other)) {
                                                         player.displayClientMessage(ExileText.ofText("They aren't on your team").get(), false);
                                                         return 0;
@@ -100,7 +100,7 @@ public class TeamCommand {
 
                                                     player.displayClientMessage(ExileText.ofText("You have been made a team leader.").get(), false);
 
-                                                    Load.playerRPGData(other).team.isLeader = true;
+                                                    Load.player(other).team.isLeader = true;
 
                                                     player.displayClientMessage(ExileText.ofText("You have invited ").get().append(other.getDisplayName())
                                                             .append(ExileText.ofText(" to join your team.").get()), false);
@@ -117,18 +117,18 @@ public class TeamCommand {
 
                                                     Player other = EntityArgument.getPlayer(x, "player");
 
-                                                    if (!Load.playerRPGData(player).team.isLeader) {
+                                                    if (!Load.player(player).team.isLeader) {
                                                         player.
                                                                 displayClientMessage(ExileText.ofText("You can't kick members because you aren't the leader.").get(), false);
                                                         return 0;
                                                     }
-                                                    if (!Load.playerRPGData(player).team
+                                                    if (!Load.player(player).team
                                                             .isOnSameTeam(other)) {
                                                         player.displayClientMessage(ExileText.ofText("They aren't on your team").get(), false);
                                                         return 0;
                                                     }
 
-                                                    Load.playerRPGData(other).team.team_id = "";
+                                                    Load.player(other).team.team_id = "";
 
                                                     other.displayClientMessage(ExileText.ofText("You have been kicked from your team.").get(), false);
 
@@ -147,11 +147,11 @@ public class TeamCommand {
 
                                                     Player other = EntityArgument.getPlayer(x, "player");
 
-                                                    if (Load.playerRPGData(other).team
+                                                    if (Load.player(other).team
                                                             .isOnTeam()) {
 
-                                                        if (Load.playerRPGData(player).team.invitedToTeam.equals(Load.playerRPGData(other).team.team_id)) {
-                                                            Load.playerRPGData(x.getSource()
+                                                        if (Load.player(player).team.invitedToTeam.equals(Load.player(other).team.team_id)) {
+                                                            Load.player(x.getSource()
                                                                             .getPlayerOrException()).team
                                                                     .joinTeamOf(other);
 

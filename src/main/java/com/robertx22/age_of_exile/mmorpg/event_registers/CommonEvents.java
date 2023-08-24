@@ -107,7 +107,7 @@ public class CommonEvents {
                     if (!stack.isEmpty()) {
 
                         if (!player.level().isClientSide) {
-                            if (Load.playerRPGData(player).config.salvage.trySalvageOnPickup(player, stack)) {
+                            if (Load.player(player).config.salvage.trySalvageOnPickup(player, stack)) {
                                 stack.shrink(100);
                             } else {
                                 Load.backpacks(player).getBackpacks().tryAutoPickup(stack);
@@ -190,7 +190,7 @@ public class CommonEvents {
             public void accept(ExileEvents.OnPlayerDeath event) {
                 if (event.player instanceof ServerPlayer) {
                     try {
-                        PlayerData data = Load.playerRPGData(event.player);
+                        PlayerData data = Load.player(event.player);
 
                         data.deathStats.deathPos = event.player.blockPosition();
                         data.deathStats.deathDim = event.player.level().dimension()

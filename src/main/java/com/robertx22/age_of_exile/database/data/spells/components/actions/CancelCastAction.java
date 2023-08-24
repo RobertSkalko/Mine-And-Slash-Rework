@@ -18,7 +18,7 @@ public class CancelCastAction extends SpellAction {
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
         if (ctx.caster instanceof Player) {
-            Load.playerRPGData((Player) ctx.caster).spellCastingData.cancelCast((Player) ctx.caster);
+            Load.player((Player) ctx.caster).spellCastingData.cancelCast((Player) ctx.caster);
         }
     }
 

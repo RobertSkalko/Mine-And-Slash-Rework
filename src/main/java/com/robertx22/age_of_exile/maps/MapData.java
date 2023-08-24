@@ -84,8 +84,8 @@ public class MapData {
         if (p.level().isClientSide) {
             return;
         }
-        Load.playerRPGData(p).map.tpbackdim = p.level().dimensionTypeId().location().toString();
-        Load.playerRPGData(p).map.tp_back_pos = p.blockPosition().asLong();
+        Load.player(p).map.tpbackdim = p.level().dimensionTypeId().location().toString();
+        Load.player(p).map.tp_back_pos = p.blockPosition().asLong();
 
 
         BlockPos pos = getDungeonStartTeleportPos(new ChunkPos(this.chunkX, this.chunkZ));

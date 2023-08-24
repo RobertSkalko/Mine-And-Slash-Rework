@@ -35,7 +35,7 @@ public class AscClassResetPotion extends AutoItem implements IShapedRecipe {
 
         if (player instanceof Player) {
             Player p = (Player) player;
-            Load.playerRPGData(p).ascClass.reset();
+            Load.player(p).ascClass.reset();
             p.addItem(new ItemStack(Items.GLASS_BOTTLE));
         }
 

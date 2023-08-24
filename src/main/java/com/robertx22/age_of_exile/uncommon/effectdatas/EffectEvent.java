@@ -166,7 +166,7 @@ public abstract class EffectEvent implements IGUID {
             if (isSpell()) {
                 if (en instanceof Player p) {
                     if (getSpell() != null) {
-                        var gem = Load.playerRPGData(p).getSkillGemInventory().getSpellGem(getSpell());
+                        var gem = Load.player(p).getSkillGemInventory().getSpellGem(getSpell());
                         if (gem != null) {
                             // its null if its casted by a summon
                             int slot = gem.getHotbarSlot();

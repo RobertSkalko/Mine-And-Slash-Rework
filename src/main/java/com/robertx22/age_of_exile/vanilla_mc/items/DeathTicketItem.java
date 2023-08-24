@@ -29,7 +29,7 @@ public class DeathTicketItem extends AutoItem implements IShapedRecipe {
     }
 
     public static GearRarity getRarityNeeded(Player p) {
-        return ExileDB.GearRarities().get(Load.playerRPGData(p).map.rar);
+        return ExileDB.GearRarities().get(Load.player(p).map.rar);
     }
 
     @Override

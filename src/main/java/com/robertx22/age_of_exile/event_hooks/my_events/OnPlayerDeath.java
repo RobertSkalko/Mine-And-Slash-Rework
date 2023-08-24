@@ -17,7 +17,7 @@ public class OnPlayerDeath extends EventConsumer<ExileEvents.OnPlayerDeath> {
 
             Load.Unit(event.player).setEquipsChanged(true);
 
-            PlayerData data = Load.playerRPGData(event.player);
+            PlayerData data = Load.player(event.player);
             if (WorldUtils.isMapWorldClass(event.player.level())) {
                 data.map.onDeath();
             }

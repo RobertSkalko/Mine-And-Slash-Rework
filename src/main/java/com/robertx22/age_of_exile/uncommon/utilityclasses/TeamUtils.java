@@ -70,7 +70,7 @@ public class TeamUtils {
             return true;
         }
 
-        if (Load.playerRPGData(p1).team.isOnSameTeam(p2)) {
+        if (Load.player(p1).team.isOnSameTeam(p2)) {
             return true;
         }
 

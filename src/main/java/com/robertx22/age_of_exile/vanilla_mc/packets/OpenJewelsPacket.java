@@ -41,7 +41,7 @@ public class OpenJewelsPacket extends MyPacket<OpenJewelsPacket> {
     public void onReceived(ExilePacketContext ctx) {
 
 
-        var inv = Load.playerRPGData(ctx.getPlayer()).getJewels().inv;
+        var inv = Load.player(ctx.getPlayer()).getJewels().inv;
 
         Player p = ctx.getPlayer();
 

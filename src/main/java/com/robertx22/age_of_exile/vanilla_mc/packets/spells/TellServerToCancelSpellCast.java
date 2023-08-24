@@ -30,7 +30,7 @@ public class TellServerToCancelSpellCast extends MyPacket<TellServerToCancelSpel
     public void onReceived(ExilePacketContext ctx) {
         Player player = ctx.getPlayer();
 
-        var spells = Load.playerRPGData(player);
+        var spells = Load.player(player);
 
         if (spells.spellCastingData
                 .getSpellBeingCast() != null) {

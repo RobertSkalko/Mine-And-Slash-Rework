@@ -131,7 +131,7 @@ public class ItemNewbieGearBag extends Item {
         if (!worldIn.isClientSide) {
             try {
 
-                List<Perk> starts = Load.playerRPGData(playerIn).talents
+                List<Perk> starts = Load.player(playerIn).talents
                         .getAllAllocatedPerks()
                         .values()
                         .stream()

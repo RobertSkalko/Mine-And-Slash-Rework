@@ -52,15 +52,15 @@ public class AllocateStatPacket extends MyPacket<AllocateStatPacket> {
     public void onReceived(ExilePacketContext ctx) {
 
         Load.Unit(ctx.getPlayer())
-            .setEquipsChanged(true);
+                .setEquipsChanged(true);
         Load.Unit(ctx.getPlayer())
-            .tryRecalculateStats();
+                .tryRecalculateStats();
 
-        PlayerData cap = Load.playerRPGData(ctx.getPlayer());
+        PlayerData cap = Load.player(ctx.getPlayer());
 
         if (cap.statPoints.getFreePoints(ctx.getPlayer()) > 0) {
             if (ExileDB.Stats()
-                .get(stat) instanceof CoreStat) {
+                    .get(stat) instanceof CoreStat) {
                 cap.statPoints.map.put(stat, 1 + cap.statPoints.map.getOrDefault(stat, 0));
 
                 cap.syncToClient(ctx.getPlayer());

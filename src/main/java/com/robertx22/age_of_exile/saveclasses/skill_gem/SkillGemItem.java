@@ -40,7 +40,7 @@ public class SkillGemItem extends Item {
                 @org.jetbrains.annotations.Nullable
                 @Override
                 public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-                    return new SkillGemsMenu(Load.playerRPGData(pPlayer), pContainerId, pPlayerInventory);
+                    return new SkillGemsMenu(Load.player(pPlayer), pContainerId, pPlayerInventory);
                 }
             });
         }

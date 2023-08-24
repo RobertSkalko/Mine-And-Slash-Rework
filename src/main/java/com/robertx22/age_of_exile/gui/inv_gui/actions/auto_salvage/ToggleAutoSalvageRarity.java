@@ -30,7 +30,7 @@ public class ToggleAutoSalvageRarity extends GuiAction {
 
         var text = Component.literal("Auto Salvage: ").append(rarity.locName()).append(" ").append(type.word.locName());
 
-        if (Load.playerRPGData(p).config.salvage.salvages(type, rarity.GUID())) {
+        if (Load.player(p).config.salvage.salvages(type, rarity.GUID())) {
             text = text.append(": TRUE").withStyle(ChatFormatting.GREEN);
         } else {
             text = text.append(": FALSE").withStyle(ChatFormatting.RED);
@@ -45,8 +45,8 @@ public class ToggleAutoSalvageRarity extends GuiAction {
 
     @Override
     public void doAction(Player p) {
-        Load.playerRPGData(p).config.salvage.toggle(type, rarity.GUID());
-        Load.playerRPGData(p).syncToClient(p);
+        Load.player(p).config.salvage.toggle(type, rarity.GUID());
+        Load.player(p).syncToClient(p);
     }
 
     public ResourceLocation getIcon() {

@@ -9,7 +9,7 @@ public class StopCastingIfInteract {
         if (player.level().isClientSide) {
             return;
         }
-        var data = Load.playerRPGData(player);
+        var data = Load.player(player);
 
         if (data.spellCastingData
                 .isCasting()) {

@@ -67,15 +67,15 @@ public class OnServerTick {
                 UnequipGear.onTick(player);
 
                 if (player.tickCount % 60 == 0) {
-                    Load.playerRPGData(player).getSkillGemInventory().removeSupportGemsIfTooMany(player);
-                    Load.playerRPGData(player).getJewels().checkRemoveJewels(player);
+                    Load.player(player).getSkillGemInventory().removeSupportGemsIfTooMany(player);
+                    Load.player(player).getJewels().checkRemoveJewels(player);
 
                     for (Backpacks.BackpackType type : Backpacks.BackpackType.values()) {
                         Load.backpacks(player).getBackpacks().getInv(type).throwOutBlockedSlotItems();
                     }
                 }
 
-                Load.playerRPGData(player).spellCastingData.charges.onTicks(player, 20);
+                Load.player(player).spellCastingData.charges.onTicks(player, 20);
             }
         }));
 
@@ -144,16 +144,16 @@ public class OnServerTick {
 
 
             if (player.isBlocking()) {
-                if (Load.playerRPGData(player)
+                if (Load.player(player)
                         .spellCastingData
                         .isCasting()) {
-                    Load.playerRPGData(player)
+                    Load.player(player)
                             .spellCastingData
                             .cancelCast(player);
                 }
             }
 
-            Load.playerRPGData(player)
+            Load.player(player)
                     .spellCastingData
                     .onTimePass(player, 1);
 
@@ -161,13 +161,13 @@ public class OnServerTick {
                     .getResources()
                     .onTickBlock(player);
 
-            Spell spell = Load.playerRPGData(player)
+            Spell spell = Load.player(player)
                     .spellCastingData
                     .getSpellBeingCast();
 
             if (spell != null) {
                 spell.getAttached()
-                        .tryActivate(Spell.CASTER_NAME, SpellCtx.onTick(player, player, Load.playerRPGData(player).spellCastingData.calcSpell));
+                        .tryActivate(Spell.CASTER_NAME, SpellCtx.onTick(player, player, Load.player(player).spellCastingData.calcSpell));
 
                 PlayerUtils.getNearbyPlayers(player, 50)
                         .forEach(x -> {

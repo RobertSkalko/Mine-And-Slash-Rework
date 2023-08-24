@@ -58,7 +58,7 @@ public class OnClientTick {
                 NO_MANA_SOUND_COOLDOWN--;
 
 
-                List<String> onCooldown = Load.playerRPGData(player)
+                List<String> onCooldown = Load.player(player)
                         .spellCastingData
                         .getSpellsOnCooldown(player);
 
@@ -66,10 +66,10 @@ public class OnClientTick {
                         .getCooldowns()
                         .onTicksPass(1);
 
-                Load.playerRPGData(player).spellCastingData
+                Load.player(player).spellCastingData
                         .onTimePass(player, 1); // ticks spells on client
 
-                List<String> onCooldownAfter = Load.playerRPGData(player)
+                List<String> onCooldownAfter = Load.player(player)
                         .spellCastingData
                         .getSpellsOnCooldown(player);
 

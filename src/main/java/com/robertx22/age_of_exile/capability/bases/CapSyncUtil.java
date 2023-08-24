@@ -23,7 +23,7 @@ public class CapSyncUtil {
     }
 
     public static void syncRpgStats(Player player) {
-        Load.playerRPGData(player)
+        Load.player(player)
                 .syncToClient(player);
     }
 

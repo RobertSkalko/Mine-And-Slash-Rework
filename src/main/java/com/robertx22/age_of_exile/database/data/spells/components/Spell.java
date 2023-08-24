@@ -293,7 +293,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
     public int getLevelOf(LivingEntity en) {
         if (en instanceof Player p) {
-            var gem = Load.playerRPGData(p).getSkillGemInventory().getSpellGem(this);
+            var gem = Load.player(p).getSkillGemInventory().getSpellGem(this);
             if (gem != null && gem.getSkillData() != null) {
                 return (int) (gem.getSkillData().perc); // todo make sure this works
             }

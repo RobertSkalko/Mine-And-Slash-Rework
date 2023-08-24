@@ -241,17 +241,17 @@ public class Unit {
 
 
             if (entity instanceof Player) {
-                statContexts.addAll(Load.playerRPGData((Player) entity).getSkillGemInventory().getAuraStats(entity));
-                statContexts.addAll(Load.playerRPGData((Player) entity).getJewels().getStatAndContext(entity));
-                Load.playerRPGData((Player) entity).statPoints.addStats(this);
+                statContexts.addAll(Load.player((Player) entity).getSkillGemInventory().getAuraStats(entity));
+                statContexts.addAll(Load.player((Player) entity).getJewels().getStatAndContext(entity));
+                Load.player((Player) entity).statPoints.addStats(this);
 
                 statContexts.addAll(PlayerStatUtils.AddPlayerBaseStats(entity));
                 statContexts.addAll(PlayerStatUtils.addNewbieElementalResists(data));
-                statContexts.addAll(Load.playerRPGData((Player) entity).talents.getStatAndContext(entity));
-                statContexts.addAll(Load.playerRPGData((Player) entity).ascClass.getStatAndContext(entity));
+                statContexts.addAll(Load.player((Player) entity).talents.getStatAndContext(entity));
+                statContexts.addAll(Load.player((Player) entity).ascClass.getStatAndContext(entity));
 
                 if (skillGem > -1 && skillGem <= GemInventoryHelper.MAX_SKILL_GEMS) {
-                    for (SkillGemData d : Load.playerRPGData((Player) entity).getSkillGemInventory().getHotbarGem(skillGem).getSupportDatas()) {
+                    for (SkillGemData d : Load.player((Player) entity).getSkillGemInventory().getHotbarGem(skillGem).getSupportDatas()) {
                         if (d.getSupport() != null) {
                             statContexts.add(new MiscStatCtx(d.getSupport().GetAllStats(data, d)));
                         }
@@ -353,7 +353,7 @@ public class Unit {
 
             if (entity instanceof Player p) {
 
-                Load.playerRPGData(p).getSkillGemInventory().removeAurasIfCantWear(p);
+                Load.player(p).getSkillGemInventory().removeAurasIfCantWear(p);
 
                 Packets.sendToClient((Player) entity, new EntityUnitPacket(entity));
             }

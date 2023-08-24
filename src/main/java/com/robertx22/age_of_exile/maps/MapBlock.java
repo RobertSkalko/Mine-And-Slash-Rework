@@ -101,7 +101,7 @@ public class MapBlock extends BaseEntityBlock {
 
 
             if (WorldUtils.isDungeonWorld(level)) {
-                Load.playerRPGData(p).map.teleportBack(p);
+                Load.player(p).map.teleportBack(p);
 
             } else {
 
@@ -115,7 +115,7 @@ public class MapBlock extends BaseEntityBlock {
                         p.getItemInHand(pHand).shrink(1);
                     }
 
-                    Load.playerRPGData(p).map.clearDeathTicketRarity();
+                    Load.player(p).map.clearDeathTicketRarity();
 
                     return InteractionResult.SUCCESS;
                 }

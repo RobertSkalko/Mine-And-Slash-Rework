@@ -38,7 +38,7 @@ public class TellServerToCastSpellPacket extends MyPacket<TellServerToCastSpellP
 
     public static boolean tryCastSpell(Player player, Spell spell) {
 
-        var spells = Load.playerRPGData(player);
+        var spells = Load.player(player);
 
         if (player.isBlocking() || player.swinging) {
             return false;
@@ -66,7 +66,7 @@ public class TellServerToCastSpellPacket extends MyPacket<TellServerToCastSpellP
     public void onReceived(ExilePacketContext ctx) {
         Player player = ctx.getPlayer();
 
-        Spell spell = Load.playerRPGData(ctx.getPlayer()).getSkillGemInventory().getHotbarGem(number).getSpell();
+        Spell spell = Load.player(ctx.getPlayer()).getSkillGemInventory().getHotbarGem(number).getSpell();
 
         tryCastSpell(player, spell);
 
