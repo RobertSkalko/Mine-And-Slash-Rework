@@ -29,6 +29,8 @@ public class DungeonBuilder {
         this.dungeon = RandomUtils.weightedRandom(ExileDB.Dungeons().getFilterWrapped(x -> x.can_be_main).list, rand.nextDouble());
 
         this.size = RandomUtils.RandomRange(12, 18); // todo for testing
+
+
         // todo this needs the same random if i'll use at world gen async, if i do it myself, it doesnt
 
         if (RandomUtils.roll(5, rand)) {
@@ -48,24 +50,9 @@ public class DungeonBuilder {
     public void build() {
         builtDungeon = new BuiltDungeon(size, this);
 
-
-        setupEntrance();
-
         builtDungeon.setupBarriers();
 
-        // builtDungeon.removeUnconnectedRooms();
-
-        int tries = 0;
-
-
-        while (!builtDungeon.isFinished()) {
-            tries++;
-
-            if (tries > 2000) {
-                System.out.println("Room taking too long to build");
-                break;
-            }
-        }
+        setupEntrance();
 
         builtDungeon.fillWithBarriers();
 

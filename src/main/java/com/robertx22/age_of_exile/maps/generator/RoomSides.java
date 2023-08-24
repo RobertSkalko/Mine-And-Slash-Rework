@@ -42,6 +42,24 @@ public class RoomSides {
         this.WEST = WEST;
     }
 
+
+    public RoomSide getSideOfDirection(Direction dir) {
+        if (dir == Direction.NORTH) {
+            return NORTH;
+        } else if (dir == Direction.SOUTH) {
+            return SOUTH;
+        } else if (dir == Direction.EAST) {
+            return EAST;
+        } else if (dir == Direction.WEST) {
+            return WEST;
+        }
+        return null;
+    }
+
+    public boolean matches(RoomSides data) {
+        return SOUTH.canBeLinked(data.SOUTH) && NORTH.canBeLinked(data.NORTH) && EAST.canBeLinked(data.EAST) && WEST.canBeLinked(data.WEST);
+    }
+
     public String getFirstLineDebug() {
         String s = "";
         s += "X;" + NORTH.debugString + ";X";
@@ -69,22 +87,5 @@ public class RoomSides {
         s += "X" + SOUTH.debugString + "X" + "\n";
         return s;
 
-    }
-
-    public RoomSide getSideOfDirection(Direction dir) {
-        if (dir == Direction.NORTH) {
-            return NORTH;
-        } else if (dir == Direction.SOUTH) {
-            return SOUTH;
-        } else if (dir == Direction.EAST) {
-            return EAST;
-        } else if (dir == Direction.WEST) {
-            return WEST;
-        }
-        return null;
-    }
-
-    public boolean matches(RoomSides data) {
-        return SOUTH.canBeLinked(data.SOUTH) && NORTH.canBeLinked(data.NORTH) && EAST.canBeLinked(data.EAST) && WEST.canBeLinked(data.WEST);
     }
 }

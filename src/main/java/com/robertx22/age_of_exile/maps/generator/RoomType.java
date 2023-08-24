@@ -108,7 +108,6 @@ public enum RoomType implements IWeighted {
 
     public DungeonRoom getRandomRoom(Dungeon dun, DungeonBuilder builder) {
 
-
         Dungeon d = dun;
 
         if (dun.allowsOtherTilesets()) {

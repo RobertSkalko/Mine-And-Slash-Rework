@@ -161,3 +161,5 @@ v5.0.4
 - you can craft death ticket items to avoid this death cooldown penalty
 
 - every subsequent death increases the rarity of death tickets needed to use to restore penalty
+
+- ticket cost resets every time you start a map yourself (can't find a better way right now)

@@ -44,19 +44,12 @@ public class BuiltDungeon {
     }
 
 
-    private List<PointData> unbuiltRooms = new ArrayList<>();
-
-    public List<PointData> getUnbuiltCopy() {
-        return new ArrayList<>(unbuiltRooms);
-    }
-
-
-    public boolean isFinished() {
-        return (started && unbuiltRooms.isEmpty());
-    }
-
+    public boolean startFinishing = false;
 
     public boolean shouldStartFinishing(PointData point) {
+        if (startFinishing) {
+            return startFinishing;
+        }
         if (isTooCloseToGridEdge(point)) {
             return true;
         }
@@ -85,11 +78,9 @@ public class BuiltDungeon {
     }
 
     public BuiltRoom getRoom(int x, int z) {
-
         if (!isWithinBounds(x, z)) {
             return null;
         }
-
         return rooms[x][z];
     }
 
@@ -146,34 +137,46 @@ public class BuiltDungeon {
         }
 
     }
-/*
-    public void removeUnconnectedRooms() {
-        BuiltRoom built = BuiltRoom.getBarrier();
+
+    /*
+    public boolean addMissingRooms() {
+        this.startFinishing = true;
+        boolean did = false;
 
 
-        for (int i = 0; i < rooms.length; i++) {
-            for (int j = 0; j < rooms[i].length; j++) {
-                if (getRoom(i, j) != null) {
-                    var room = getRoom(i, j);
+        List<Direction> dirs = Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST);
 
-                    UnbuiltRoom unbuilt = getUnbuiltFor(i, j);
-
-                    if (!unbuilt.sides.EAST.isLinked(room.data.sides.EAST)) {
-                        if (!unbuilt.sides.WEST.isLinked(room.data.sides.WEST)) {
-                            if (!unbuilt.sides.NORTH.isLinked(room.data.sides.NORTH)) {
-                                if (!unbuilt.sides.SOUTH.isLinked(room.data.sides.SOUTH)) {
-                                    addBarrier(i, j, built);
-                                }
-                            }
+        for (int x = 0; x < rooms.length; x++) {
+            for (int z = 0; z < rooms[x].length; z++) {
+                if (getRoom(x, z) != null) {
+                    for (Direction dir : dirs) {
+                        if (hasDoorButNoRoom(new PointData(x, z), dir)) {
+                            this.addRandomRoom(x, z);
+                            System.out.println("added missing room at " + x + "_" + z);
+                            did = true;
                         }
                     }
                 }
             }
         }
-
+        return did;
     }
 
- */
+
+     */
+
+    /*
+    private boolean hasDoorButNoRoom(PointData p, Direction dir) {
+        if (getSideOfRoomFacing(dir, p.x, p.y) != RoomSide.DOOR && getRoom(p.x, p.y).data.sides.getSideOfDirection(dir) == RoomSide.DOOR) {
+            return true;
+        }
+        if (getSideOfRoomFacing(dir, p.x, p.y) == RoomSide.DOOR && getRoom(p.x, p.y).data.sides.getSideOfDirection(dir) != RoomSide.DOOR) {
+            return true;
+        }
+        return false;
+    }
+
+     */
 
 
     public BuiltRoom getRoomFacing(Direction dir, int x, int z) {
@@ -190,13 +193,13 @@ public class BuiltDungeon {
         BuiltRoom room = getRoomFacing(dir, x, z);
 
         if (dir == Direction.NORTH) {
-            return room != null ? room.data.sides.SOUTH : RoomSide.NONE;
+            return room != null ? room.data.sides.SOUTH : RoomSide.UNBUILT;
         } else if (dir == Direction.SOUTH) {
-            return room != null ? room.data.sides.NORTH : RoomSide.NONE;
+            return room != null ? room.data.sides.NORTH : RoomSide.UNBUILT;
         } else if (dir == Direction.EAST) {
-            return room != null ? room.data.sides.WEST : RoomSide.NONE;
+            return room != null ? room.data.sides.WEST : RoomSide.UNBUILT;
         } else if (dir == Direction.WEST) {
-            return room != null ? room.data.sides.EAST : RoomSide.NONE;
+            return room != null ? room.data.sides.EAST : RoomSide.UNBUILT;
         }
 
         throw new RuntimeException("No room found facing in direction of: " + dir.toString() + ": " + x + " , " + z);
@@ -219,6 +222,24 @@ public class BuiltDungeon {
     }
 
 
+    public void addRandomRoom(int x, int z) {
+
+        UnbuiltRoom unbuilt = getUnbuiltFor(x, z);
+        Preconditions.checkNotNull(unbuilt);
+
+        RoomRotation rot = randomDungeonRoom(unbuilt, new PointData(x, z));
+        Preconditions.checkNotNull(rot);
+
+        DungeonRoom dRoom = rot.type.getRandomRoom(b.dungeon, b);
+        Preconditions.checkNotNull(dRoom);
+
+        BuiltRoom theroom = new BuiltRoom(b.dungeon, rot, dRoom);
+        Preconditions.checkNotNull(theroom);
+
+        addRoom(x, z, theroom);
+
+    }
+
     // todo i think this is the problem
     private void buildConnectedRooms(int x, int z, BuiltRoom room) {
 
@@ -228,9 +249,7 @@ public class BuiltDungeon {
             PointData coord = getCoordsOfRoomFacing(dir, x, z);
             if (getRoom(coord.x, coord.y) == null) {
                 if (isWithinBounds(coord.x, coord.y)) {
-
                     if (room.data.sides.getSideOfDirection(dir) == RoomSide.DOOR) {
-
                         UnbuiltRoom unbuilt = getUnbuiltFor(coord.x, coord.y);
 
                         Preconditions.checkNotNull(unbuilt);
@@ -248,7 +267,6 @@ public class BuiltDungeon {
                         Preconditions.checkNotNull(theroom);
 
                         addRoom(coord.x, coord.y, theroom);
-
                     }
                 }
             }
@@ -278,7 +296,6 @@ public class BuiltDungeon {
         types.add(RoomType.TRIPLE_HALLWAY);
 
         for (RoomType type : types) {
-
             var possible = type.getPossibleFor(unbuilt);
 
             if (!possible.isEmpty()) {
@@ -352,9 +369,6 @@ public class BuiltDungeon {
                 buildConnectedRooms(x, z, room);
             }
 
-            unbuiltRooms.removeIf(cord -> {
-                return cord.x == x && cord.y == z;
-            });
 
         } else {
             // i think the problem is when adding rooms, its not taking into account unbuilts!
