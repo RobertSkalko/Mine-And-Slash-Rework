@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.event_hooks.player;
 
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
-import com.robertx22.age_of_exile.gui.screens.character_screen.CharacterScreen;
+import com.robertx22.age_of_exile.gui.screens.character_screen.MainHubScreen;
 import com.robertx22.age_of_exile.mmorpg.registers.client.KeybindsRegister;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ChatUtils;
 import com.robertx22.age_of_exile.vanilla_mc.packets.spells.TellServerToCastSpellPacket;
@@ -43,7 +43,7 @@ public class OnKeyPress {
         }
 
         if (KeybindsRegister.HUB_SCREEN_KEY.isDown()) {
-            mc.setScreen(new CharacterScreen());
+            mc.setScreen(new MainHubScreen());
             cooldown = 10;
         } else {
 

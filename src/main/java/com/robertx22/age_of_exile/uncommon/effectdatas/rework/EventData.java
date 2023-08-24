@@ -52,6 +52,7 @@ public class EventData {
     public static String MANA_COST = "mana_cost";
     public static String AREA_MULTI = "area";
     public static String PIERCE = "pierce";
+    public static String BARRAGE = "barrage";
     public static String PROJECTILE_SPEED_MULTI = "proj_speed";
     public static String BONUS_PROJECTILES = "bonus_proj";
     public static String DURATION_MULTI = "_duration";

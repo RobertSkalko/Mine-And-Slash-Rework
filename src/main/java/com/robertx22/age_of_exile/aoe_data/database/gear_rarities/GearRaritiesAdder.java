@@ -13,6 +13,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
 
         GearRarity common = new GearRarity().edit(x -> {
+            x.favor_loot_multi = 0.75F;
+            x.favor_needed = 0;
             x.mob = MobRarity.of(0, 0, 0);
             x.min_affixes = 1;
             x.weight = 5000;
@@ -31,6 +33,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity uncommon = new GearRarity().edit(x -> {
+            x.favor_loot_multi = 0.9F;
+            x.favor_needed = 50;
             x.mob = MobRarity.of(0, 0.25F, 0);
             x.max_sockets = 1;
             x.socket_chance = 5;
@@ -49,6 +53,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity rar = new GearRarity().edit(x -> {
+            x.favor_loot_multi = 1;
+            x.favor_needed = 100;
             x.mob = MobRarity.of(3, 2, 1);
             x.max_sockets = 2;
             x.socket_chance = 15;
@@ -68,6 +74,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
         });
         GearRarity epic = new GearRarity().edit(x -> {
+            x.favor_loot_multi = 1.05F;
+            x.favor_needed = 250;
             x.mob = MobRarity.of(10, 3, 1);
             x.max_sockets = 3;
             x.socket_chance = 20;
@@ -87,6 +95,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity legendary = new GearRarity().edit(x -> {
+            x.favor_loot_multi = 1.2F;
+            x.favor_needed = 500;
             x.mob = MobRarity.of(20, 5, 2);
             x.max_sockets = 3;
             x.socket_chance = 30;
@@ -107,6 +117,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity mythic = new GearRarity().edit(x -> {
+            x.favor_loot_multi = 1.25F;
+            x.favor_needed = 1000;
             x.mob = MobRarity.of(25, 10, 3);
             x.max_sockets = 3;
             x.backpack_slots = 6 * 9;

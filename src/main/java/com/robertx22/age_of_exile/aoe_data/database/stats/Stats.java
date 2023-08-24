@@ -570,7 +570,7 @@ public class Stats implements ExileRegistryInit {
                 x.format = ChatFormatting.RED.getName();
             })
             .build();
-    
+
     public static DataPackStatAccessor<EmptyAccessor> ATTACK_DAMAGE = DatapackStatBuilder
             .ofSingle("attack_damage", Elements.All)
             .worksWithEvent(DamageEvent.ID)
@@ -877,6 +877,33 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
+    public static DataPackStatAccessor<EmptyAccessor> PROJECTILE_COUNT = DatapackStatBuilder
+            .ofSingle("projectile_count", Elements.Physical)
+            .worksWithEvent(SpellStatsCalculationEvent.ID)
+            .setPriority(0)
+            .setSide(EffectSides.Source)
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.projectile))
+            .addEffect(StatEffects.PROJECTILE_COUNT)
+            .setLocName(x -> "Projectile Count")
+            .setLocDesc(x -> "")
+            .modifyAfterDone(x -> {
+                x.is_perc = false;
+            })
+            .build();
+
+    public static DataPackStatAccessor<EmptyAccessor> PROJECTILE_BARRAGE = DatapackStatBuilder
+            .ofSingle("projectile_barrage", Elements.Physical)
+            .worksWithEvent(SpellStatsCalculationEvent.ID)
+            .setPriority(0)
+            .setSide(EffectSides.Source)
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.projectile))
+            .addEffect(StatEffects.SET_BARRAGE)
+            .setLocName(x -> "Projectiles Barrage")
+            .setLocDesc(x -> "")
+            .modifyAfterDone(x -> {
+                x.is_perc = false;
+            })
+            .build();
     public static DataPackStatAccessor<EmptyAccessor> SUMMON_DURATION = DatapackStatBuilder
             .ofSingle("summon_duration", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)

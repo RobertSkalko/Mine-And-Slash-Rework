@@ -71,7 +71,10 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
     }
 
     public float bonusFormula() {
-        return (1 + getAffixMulti());
+
+        float tierBonus = tier * 0.05F;
+
+        return (1 + tierBonus + getAffixMulti());
     }
 
     public float getBonusExpMulti() {

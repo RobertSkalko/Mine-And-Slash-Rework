@@ -30,12 +30,23 @@ public class SupportGem implements ISkillGem, ExileRegistry<SupportGem> {
 
     public int weight = 1000;
 
+    public String one_of_a_kind = "";
+
     public SupportGem(String id, String name, PlayStyle style, float manaMulti, List<StatMod> stats) {
         this.id = id;
         this.locname = name + " Support Gem";
         this.style = style;
         this.manaMulti = manaMulti;
         this.stats = stats;
+    }
+
+    public boolean isOneOfAKind() {
+        return !one_of_a_kind.isEmpty();
+    }
+
+    public SupportGem setOneOfAKind(String id) {
+        this.one_of_a_kind = id;
+        return this;
     }
 
     public SupportGem edit(Consumer<SupportGem> s) {

@@ -54,6 +54,11 @@ public class ServerContainer {
         MAX_TEAM_DISTANCE = b.defineInRange("max_team_distance", 75D, 0, 100000);
         MAP_DEATH_COOLDOWN = b.defineInRange("map_death_cooldown", 20 * 60 * 3, 0, 100000);
 
+        FAVOR_DEATH_LOSS = b.defineInRange("favor_death_loss", 50D, 0, 10000);
+        FAVOR_CHEST_GAIN = b.defineInRange("favor_chest_gain", 1D, 0, 10000);
+        FAVOR_GAIN_PER_SECOND = b.defineInRange("favor_per_second", 1D / 60D, 0, 10000);
+
+
         GEAR_DROPRATE = b.defineInRange("gear_drop_rate", 7D, 0, 1000);
         SOUl_DROPRATE = b.defineInRange("soul_drop_rate", 0.3D, 0, 1000);
         MAP_DROPRATE = b.defineInRange("map_drop_rate", 0.5D, 0, 1000);
@@ -137,6 +142,10 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue PLAYER_VANILLA_DMG_MULTI;
     public ForgeConfigSpec.DoubleValue MAX_TEAM_DISTANCE;
     public ForgeConfigSpec.IntValue MAP_DEATH_COOLDOWN;
+
+    public ForgeConfigSpec.DoubleValue FAVOR_DEATH_LOSS;
+    public ForgeConfigSpec.DoubleValue FAVOR_CHEST_GAIN;
+    public ForgeConfigSpec.DoubleValue FAVOR_GAIN_PER_SECOND;
 
     public ForgeConfigSpec.DoubleValue GEAR_DROPRATE;
     public ForgeConfigSpec.DoubleValue SOUl_DROPRATE;

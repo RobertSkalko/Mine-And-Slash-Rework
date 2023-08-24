@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.loot;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.capability.player.PlayerData;
 import com.robertx22.age_of_exile.database.data.league.LeagueMechanic;
 import com.robertx22.age_of_exile.database.data.league.LeagueMechanics;
 import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuantity;
@@ -19,6 +18,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LootInfo {
 
     private LootInfo(LootOrigin lootOrigin) {
@@ -35,7 +37,7 @@ public class LootInfo {
 
     public LootOrigin lootOrigin;
     public EntityData mobData;
-    public EntityData playerData;
+    public EntityData playerEntityData;
     public LivingEntity mobKilled;
     public Player player;
     public Level world;
@@ -43,7 +45,6 @@ public class LootInfo {
     private int minItems = 0;
     private int maxItems = 50;
     public boolean isMapWorld = false;
-    public PlayerData rpgData;
     public MapData map;
     public BlockPos pos;
 
@@ -67,7 +68,7 @@ public class LootInfo {
         try {
             info.world = mob.level();
             info.mobData = Load.Unit(mob);
-            info.playerData = Load.Unit(player);
+            info.playerEntityData = Load.Unit(player);
             info.mobKilled = mob;
             info.player = player;
             info.pos = mob.blockPosition();
@@ -150,7 +151,7 @@ public class LootInfo {
         setLevel();
 
         if (player != null) {
-            playerData = Load.Unit(player);
+            playerEntityData = Load.Unit(player);
         }
     }
 
@@ -219,45 +220,48 @@ public class LootInfo {
 
     public void setup(BaseLootGen gen) {
 
-        float modifier = 1F;
+        float multiplicativeMod = 1F;
 
-        modifier += multi - 1F;
+        List<Float> multis = new ArrayList<>();
+
+        multis.add(multi);
+
 
         if (mobKilled != null && mobData != null) {
-
-
-            if (this.playerData != null) {
-                modifier += LootUtils.getLevelDistancePunishmentMulti(mobData.getLevel(), playerData.getLevel()) - 1F;
+            if (this.playerEntityData != null) {
+                multis.add(LootUtils.getLevelDistancePunishmentMulti(mobData.getLevel(), playerEntityData.getLevel()));
             }
-
-            modifier += LootUtils.getMobHealthBasedLootMulti(mobData, mobKilled) - 1F;
-
-            modifier += ExileDB.getEntityConfig(mobKilled, this.mobData).loot_multi - 1F;
-            modifier += mobData.getUnit()
-                    .getCalculatedStat(ExtraMobDropsStat.getInstance())
-                    .getMultiplier() - 1;
-            modifier += mobData.getMobRarity().mob.LootMultiplier() - 1;
+            multis.add(LootUtils.getMobHealthBasedLootMulti(mobData, mobKilled));
+            multis.add((float) ExileDB.getEntityConfig(mobKilled, this.mobData).loot_multi);
+            multis.add(mobData.getUnit().getCalculatedStat(ExtraMobDropsStat.getInstance()).getMultiplier());
+            multis.add(mobData.getMobRarity().mob.LootMultiplier());
         }
 
-        if (this.playerData != null) {
+        if (this.playerEntityData != null) {
+            multis.add(Load.player(player).favor.getLootExpMulti());
+
             if (lootOrigin != LootOrigin.LOOT_CRATE) {
                 if (this.lootOrigin == LootOrigin.CHEST) {
-                    modifier += playerData.getUnit()
-                            .getCalculatedStat(TreasureQuantity.getInstance())
-                            .getMultiplier() - 1F;
+                    multis.add(playerEntityData.getUnit().getCalculatedStat(TreasureQuantity.getInstance()).getMultiplier());
                 }
             }
         }
-
         if (world != null) {
-            modifier += ExileDB.getDimensionConfig(world).all_drop_multi - 1F;
+            multis.add(ExileDB.getDimensionConfig(world).all_drop_multi);
         }
 
-        if (isMapWorld) {
-
+        if (this.isMapWorld) {
+            multis.add(this.map.map.getBonusLootMulti());
         }
 
-        float chance = gen.baseDropChance() * modifier;
+        float additiveMod = 1;
+
+        for (Float m : multis) {
+            multiplicativeMod *= m;
+            additiveMod += (m - 1F);
+        }
+
+        float chance = gen.baseDropChance() * multiplicativeMod;
 
         chance = ExileEvents.SETUP_LOOT_CHANCE.callEvents(new ExileEvents.OnSetupLootChance(mobKilled, player, chance)).lootChance;
 

@@ -352,6 +352,6 @@
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "meteor_arrow",
-  "manual_tip": false,
+  "manual_tip": true,
   "weight": 1000
 }

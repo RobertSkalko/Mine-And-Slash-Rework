@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.event_hooks.my_events;
 import com.google.common.collect.Lists;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.MasterLootGen;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
@@ -23,19 +24,10 @@ public class OnLootChestEvent extends EventConsumer<ExileEvents.OnChestLooted> {
 
         LootInfo info = LootInfo.ofChestLoot(player, event.pos);
 
-        if (WorldUtils.isMapWorldClass(player.level())) {
 
+        if (WorldUtils.isMapWorldClass(player.level())) {
             info.multi += 10;
         }
-
-        /*
-        if (LootUtils.preventLootDueToLevelPenalty(info.level, Load.Unit(player)
-                .getLevel())) {
-            event.canceled = true;
-            return;
-        }
-         */
-
 
         List<ItemStack> items = MasterLootGen.generateLoot(info);
 
@@ -44,6 +36,8 @@ public class OnLootChestEvent extends EventConsumer<ExileEvents.OnChestLooted> {
         if (list1.isEmpty()) {
             return;
         }
+
+        Load.player(player).favor.onLootChest(player);
 
         for (int i = 0; i < items.size(); i++) {
             if (i < list1.size()) {

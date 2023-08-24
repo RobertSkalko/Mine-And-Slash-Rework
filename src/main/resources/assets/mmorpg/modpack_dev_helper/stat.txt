@@ -64,6 +64,7 @@ inc_effect_of_immobilizing_buff_on_you
 faster_projectiles
 piercing_projectiles
 extra_mob_drops
+projectile_count
 inc_effect_of_immobilizing_buff_given
 water_dot_damage
 burn_resistance
@@ -189,6 +190,7 @@ all_lightning_damage
 intelligence
 summon_damage
 song_spell_dmg
+projectile_barrage
 song_eff_dur_u_cast
 spell_damage
 energy_on_hit_hit

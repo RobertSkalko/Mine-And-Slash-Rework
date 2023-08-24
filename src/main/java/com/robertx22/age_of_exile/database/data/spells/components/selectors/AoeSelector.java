@@ -60,6 +60,8 @@ public class AoeSelector extends BaseTargetSelector {
         if (Explosion.getSeenPercent(pos, en) >= 0.4) {
             return true;
         }
+        // todo this doesnt work all the time..
+        
         int height = 2;
 
         // we check if there's a ceiling

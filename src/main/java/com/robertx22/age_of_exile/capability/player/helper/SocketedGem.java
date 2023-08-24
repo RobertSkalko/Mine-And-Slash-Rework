@@ -9,6 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class SocketedGem {
@@ -29,14 +30,39 @@ public class SocketedGem {
     public void removeSupportGemsIfTooMany(Player p) {
 
         if (getSupportDatas().size() > getMaxLinks()) {
-
             for (ItemStack s : this.getSupports()) {
                 PlayerUtils.giveItem(s.copy(), p);
                 s.shrink(100);
             }
-
             p.sendSystemMessage(ExileText.ofText("You can't equip that many support gems! You can increase the total links with Orb of Linking.").get());
         }
+
+
+        HashMap<String, Integer> map = new HashMap<>();
+
+        boolean toomany = false;
+
+        for (SkillGemData data : this.getSupportDatas()) {
+            if (data.getSupport().isOneOfAKind()) {
+                String id = data.getSupport().one_of_a_kind;
+                map.put(id, map.getOrDefault(id, 0) + 1);
+
+                if (map.get(id) > 1) {
+                    toomany = true;
+                    break;
+                }
+            }
+        }
+
+        if (toomany) {
+            for (ItemStack s : this.getSupports()) {
+                PlayerUtils.giveItem(s.copy(), p);
+                s.shrink(100);
+                p.sendSystemMessage(ExileText.ofText("You can't use multiple of those support gems.").get());
+
+            }
+        }
+
     }
 
     public SocketedGem(MyInventory inv, int skillGem) {

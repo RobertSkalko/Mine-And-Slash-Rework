@@ -7,8 +7,8 @@
       "stat": "dodge"
     }
   ],
-  "gear_slot": "flute",
-  "guid": "flute",
+  "gear_slot": "totem",
+  "guid": "totem",
   "implicit_stats": [],
   "req": {
     "scaling_req": {
@@ -18,9 +18,9 @@
   "style": "STR",
   "tags": {
     "tags": [
-      "flute",
       "dexterity",
       "dodge_stat",
+      "totem",
       "offhand_family"
     ]
   },

@@ -187,8 +187,8 @@ public class BaseGearsAdder implements ExileRegistryInit, GearDataHelper {
                 .baseStat(new StatMod(3, 6, MagicShield.getInstance(), ModType.FLAT))
                 .build();
 
-        BaseGearBuilder.of(BaseGearTypes.FLUTE, GearSlots.FLUTE, "Flute", StatRequirement.of(PlayStyle.DEX))
-                .tags(new TagList(SlotTag.flute, SlotTag.offhand_family, SlotTag.dodge_stat, SlotTag.dexterity))
+        BaseGearBuilder.of(BaseGearTypes.TOTEM, GearSlots.TOTEM, "Totem", StatRequirement.of(PlayStyle.DEX))
+                .tags(new TagList(SlotTag.totem, SlotTag.offhand_family, SlotTag.dodge_stat, SlotTag.dexterity))
                 .baseStat(new StatMod(6, 12, DodgeRating.getInstance(), ModType.FLAT))
                 .build();
 

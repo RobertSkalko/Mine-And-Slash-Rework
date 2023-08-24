@@ -45,7 +45,7 @@ public class SummonProjectileAction extends SpellAction {
 
         ProjectileCastHelper builder = new ProjectileCastHelper(ctx, pos, data, ctx.caster, projectile.get(), ctx.calculatedSpellData);
         builder.projectilesAmount = (int) (data.get(MapField.PROJECTILE_COUNT) + ctx.calculatedSpellData.data.getNumber(EventData.BONUS_PROJECTILES, 0).number);
-        ;
+
         builder.silent = silent;
 
         builder.shootSpeed = data.get(MapField.PROJECTILE_SPEED)

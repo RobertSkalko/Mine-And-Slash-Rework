@@ -1,9 +1,6 @@
 package com.robertx22.age_of_exile.capability.player;
 
-import com.robertx22.age_of_exile.capability.player.data.PlayerConfigData;
-import com.robertx22.age_of_exile.capability.player.data.PlayerMapData;
-import com.robertx22.age_of_exile.capability.player.data.StatPointsData;
-import com.robertx22.age_of_exile.capability.player.data.TeamData;
+import com.robertx22.age_of_exile.capability.player.data.*;
 import com.robertx22.age_of_exile.capability.player.helper.GemInventoryHelper;
 import com.robertx22.age_of_exile.capability.player.helper.JewelInvHelper;
 import com.robertx22.age_of_exile.capability.player.helper.MyInventory;
@@ -62,6 +59,7 @@ public class PlayerData implements ICap {
     private static final String CAST = "casting";
     private static final String CONFIG = "config";
     private static final String JEWELS = "jewels";
+    private static final String FAVOR = "favor";
 
     transient Player player;
 
@@ -73,6 +71,7 @@ public class PlayerData implements ICap {
     public AscendancyClassesData ascClass = new AscendancyClassesData();
     public SpellCastingData spellCastingData = new SpellCastingData();
     public PlayerConfigData config = new PlayerConfigData();
+    public DeathFavorData favor = new DeathFavorData();
 
     private MyInventory skillGemInv = new MyInventory(GemInventoryHelper.TOTAL_SLOTS);
     private MyInventory auraInv = new MyInventory(GemInventoryHelper.TOTAL_AURAS);
@@ -101,6 +100,7 @@ public class PlayerData implements ICap {
         LoadSave.Save(ascClass, nbt, ASC);
         LoadSave.Save(spellCastingData, nbt, CAST);
         LoadSave.Save(config, nbt, CONFIG);
+        LoadSave.Save(favor, nbt, FAVOR);
 
         nbt.put(GEMS, skillGemInv.createTag());
         nbt.put(AURAS, auraInv.createTag());
@@ -120,6 +120,7 @@ public class PlayerData implements ICap {
         this.ascClass = loadOrBlank(AscendancyClassesData.class, new AscendancyClassesData(), nbt, ASC, new AscendancyClassesData());
         this.spellCastingData = loadOrBlank(SpellCastingData.class, new SpellCastingData(), nbt, CAST, new SpellCastingData());
         this.config = loadOrBlank(PlayerConfigData.class, new PlayerConfigData(), nbt, CONFIG, new PlayerConfigData());
+        this.favor = loadOrBlank(DeathFavorData.class, new DeathFavorData(), nbt, FAVOR, new DeathFavorData());
 
         skillGemInv.fromTag(nbt.getList(GEMS, 10)); // todo
         auraInv.fromTag(nbt.getList(AURAS, 10)); // todo

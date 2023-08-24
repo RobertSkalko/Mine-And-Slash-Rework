@@ -20,8 +20,53 @@ import java.util.Arrays;
 
 public class SupportGems {
 
+    static String PROJ_COUNT = "proj_count";
 
     public static void init() {
+
+        new SupportGem("gmp_barrage", "Greater Barrage Projectiles", PlayStyle.DEX, 1.5F,
+                Arrays.asList(
+                        new StatMod(-50, -50, Stats.TOTAL_DAMAGE.get(), ModType.MORE),
+                        new StatMod(10, 30, Stats.PROJECTILE_DAMAGE.get(), ModType.MORE),
+                        new StatMod(4, 4, Stats.PROJECTILE_COUNT.get(), ModType.FLAT),
+                        new StatMod(1, 1, Stats.PROJECTILE_BARRAGE.get(), ModType.FLAT)
+                ))
+                .setOneOfAKind(PROJ_COUNT)
+                .registerToExileRegistry();
+
+        new SupportGem("gmp", "Greater Multiple Projectiles", PlayStyle.DEX, 1.5F,
+                Arrays.asList(
+                        new StatMod(-50, -50, Stats.TOTAL_DAMAGE.get(), ModType.MORE),
+                        new StatMod(10, 30, Stats.PROJECTILE_DAMAGE.get(), ModType.MORE),
+                        new StatMod(4, 4, Stats.PROJECTILE_COUNT.get(), ModType.FLAT)
+                ))
+                .setOneOfAKind(PROJ_COUNT)
+                .registerToExileRegistry();
+
+        new SupportGem("lmp_barrage", "Lesser Barrage Projectiles", PlayStyle.DEX, 1.5F,
+                Arrays.asList(
+                        new StatMod(-30, -30, Stats.TOTAL_DAMAGE.get(), ModType.MORE),
+                        new StatMod(10, 30, Stats.PROJECTILE_DAMAGE.get(), ModType.MORE),
+                        new StatMod(2, 2, Stats.PROJECTILE_COUNT.get(), ModType.FLAT),
+                        new StatMod(1, 1, Stats.PROJECTILE_BARRAGE.get(), ModType.FLAT)
+                ))
+                .setOneOfAKind(PROJ_COUNT).registerToExileRegistry();
+
+        new SupportGem("lmp", "Lesser Multiple Projectiles", PlayStyle.DEX, 1.5F,
+                Arrays.asList(
+                        new StatMod(-30, -30, Stats.TOTAL_DAMAGE.get(), ModType.MORE),
+                        new StatMod(10, 30, Stats.PROJECTILE_DAMAGE.get(), ModType.MORE),
+                        new StatMod(2, 2, Stats.PROJECTILE_COUNT.get(), ModType.FLAT)
+                ))
+                .setOneOfAKind(PROJ_COUNT).registerToExileRegistry();
+        // wacky
+
+        new SupportGem("proj_speed", "Faster Projectiles", PlayStyle.DEX, 1.1F,
+                Arrays.asList(
+                        new StatMod(10, 25, Stats.PROJECTILE_DAMAGE.get(), ModType.MORE),
+                        new StatMod(20, 50, Stats.PROJECTILE_SPEED.get(), ModType.FLAT)
+                )).registerToExileRegistry();
+
 
         new SupportGem("small_cdr", "Minor Cooldown", PlayStyle.INT, 1.3F,
                 Arrays.asList(new StatMod(5, 15, Stats.COOLDOWN_REDUCTION.get(), ModType.FLAT)

@@ -22,7 +22,7 @@ public class GearSlots implements ExileRegistryInit {
     public static String NECKLACE = new String("necklace");
 
     public static String TOME = new String("tome");
-    public static String FLUTE = new String("flute");
+    public static String TOTEM = new String("totem");
 
     @Override
     public void registerAll() {
@@ -39,7 +39,7 @@ public class GearSlots implements ExileRegistryInit {
 
         new GearSlot(SHIELD, "Shield", SlotFamily.OffHand, 0, 11, 500).addToSerializables(); // todo model numbers
         new GearSlot(TOME, "Tome", SlotFamily.OffHand, 0, 11, 500).addToSerializables();
-        new GearSlot(FLUTE, "Flute", SlotFamily.OffHand, 0, 11, 500).addToSerializables();
+        new GearSlot(TOTEM, "Totem", SlotFamily.OffHand, 0, 11, 500).addToSerializables();
 
         new GearSlot(RING, "Ring", SlotFamily.Jewelry, 0, 12, 500).addToSerializables();
         new GearSlot(NECKLACE, "Necklace", SlotFamily.Jewelry, 0, 13, 500).addToSerializables();

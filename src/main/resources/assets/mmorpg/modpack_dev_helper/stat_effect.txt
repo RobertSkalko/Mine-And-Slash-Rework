@@ -4,6 +4,7 @@ decrease_number_num
 restore_magic_shield_per_stat_data
 set_bool_crit
 decrease_cast_ticks_num
+set_bool_barrage
 restore_mana_per_stat_data
 leech_energy
 multiply_number_num
@@ -31,6 +32,7 @@ increase_seconds_num
 add_total_summons
 reflect_perc_dmg
 increase_area_num
+proj_count
 set_data_num_accuracy
 add_stat_data_to_num
 double_dmg

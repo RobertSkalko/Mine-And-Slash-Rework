@@ -71,6 +71,7 @@ public class StatEffects implements ExileRegistryInit {
     public static StatEffect INC_VALUE_PER_CURSE_ON_TARGET = new IncreaseNumberPerCurseOnTarget();
     public static StatEffect DOUBLE_DAMAGE = new DoubleDamageAction();
     public static StatEffect SET_PIERCE = new SetBooleanEffect(EventData.PIERCE);
+    public static StatEffect SET_BARRAGE = new SetBooleanEffect(EventData.BARRAGE);
     public static StatEffect INCREASE_VALUE = new IncreaseNumberByPercentEffect(EventData.NUMBER);
     public static StatEffect MULTIPLY_VALUE = new MultiplyNumberByPercentEffect(EventData.NUMBER);
     public static StatEffect DECREASE_VALUE = new DecreaseNumberByPercentEffect(EventData.NUMBER);
@@ -85,6 +86,7 @@ public class StatEffects implements ExileRegistryInit {
     public static StatEffect DECREASE_COOLDOWN_BY_X_TICKS = new AddToNumberEffect("reduce_cd_by_ticks", EventData.COOLDOWN_TICKS, NumberProvider.ofStatData());
     public static StatEffect INCREASE_MANA_COST = new IncreaseNumberByPercentEffect(EventData.MANA_COST);
     public static StatEffect INCREASE_PROJ_SPEED = new IncreaseNumberByPercentEffect(EventData.PROJECTILE_SPEED_MULTI);
+    public static StatEffect PROJECTILE_COUNT = new AddToNumberEffect("proj_count", EventData.BONUS_PROJECTILES, NumberProvider.ofStatData());
     public static StatEffect DURATION_INCREASE = new IncreaseNumberByPercentEffect(EventData.DURATION_MULTI);
     public static StatEffect DECREASE_CAST_TIME = new DecreaseNumberByPercentEffect(EventData.CAST_TICKS);
     public static StatEffect INCREASE_AREA = new IncreaseNumberByPercentEffect(EventData.AREA_MULTI);
@@ -108,6 +110,8 @@ public class StatEffects implements ExileRegistryInit {
 
         //ADD_TO_MAX_SUMMONS.addToSerializables();
         ADD_TOTAL_SUMMONS.addToSerializables();
+        SET_BARRAGE.addToSerializables();
+        PROJECTILE_COUNT.addToSerializables();
         GIVE_SELF_EFFECT.addToSerializables();
         APPLY_CAST_SPEED_TO_CD.addToSerializables();
         DOUBLE_DAMAGE.addToSerializables();

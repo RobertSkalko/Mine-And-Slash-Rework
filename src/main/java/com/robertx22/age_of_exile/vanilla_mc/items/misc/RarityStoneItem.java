@@ -1,5 +1,7 @@
 package com.robertx22.age_of_exile.vanilla_mc.items.misc;
 
+import com.robertx22.age_of_exile.aoe_data.datapacks.models.IAutoModel;
+import com.robertx22.age_of_exile.aoe_data.datapacks.models.ItemModelManager;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.registry.IWeighted;
@@ -13,7 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
-public class RarityStoneItem extends Item implements IWeighted {
+public class RarityStoneItem extends Item implements IWeighted, IAutoModel {
 
     String name;
     public int rarTier;
@@ -22,6 +24,7 @@ public class RarityStoneItem extends Item implements IWeighted {
         super(new Properties().stacksTo(64));
         this.name = name;
         this.rarTier = rar;
+
     }
 
     public int getTotalRepair() {
@@ -53,4 +56,8 @@ public class RarityStoneItem extends Item implements IWeighted {
     }
 
 
+    @Override
+    public void generateModel(ItemModelManager manager) {
+        manager.generated(this);
+    }
 }

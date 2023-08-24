@@ -29,9 +29,9 @@ public class GearRarityPart extends BlueprintPart<GearRarity, ItemBlueprint> {
 
 
     public void setupChances(LootInfo info) {
-        if (info.playerData != null) {
+        if (info.playerEntityData != null) {
             // if (info.lootOrigin == LootInfo.LootOrigin.CHEST) {
-            chanceForHigherRarity += info.playerData.getUnit().getCalculatedStat(TreasureQuality.getInstance()).getValue();
+            chanceForHigherRarity += info.playerEntityData.getUnit().getCalculatedStat(TreasureQuality.getInstance()).getValue();
             //}
         }
     }

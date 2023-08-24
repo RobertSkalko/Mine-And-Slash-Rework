@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.database.data.rarities;
 
 import com.robertx22.age_of_exile.aoe_data.database.gear_slots.GearSlots;
+import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.MinMax;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -30,6 +31,16 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
         return this;
     }
 
+
+    public int favor_needed = 0;
+    public float favor_loot_multi = 1;
+
+    public float getFavorGainEverySecond() {
+        if (favor_loot_multi < 1) {
+            return ServerContainer.get().FAVOR_GAIN_PER_SECOND.get().floatValue();
+        }
+        return 0;
+    }
 
     public LootableGearTier lootable_gear_tier = LootableGearTier.LOW;
     public int item_model_data_num = -1;
@@ -72,15 +83,15 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
         List<Item> ring = Arrays.asList(SlashItems.GearItems.RINGS.get(VanillaMaterial.IRON).get(), SlashItems.GearItems.RINGS.get(VanillaMaterial.GOLD).get(), SlashItems.GearItems.RINGS.get(VanillaMaterial.DIAMOND).get());
         List<Item> necklace = Arrays.asList(SlashItems.GearItems.NECKLACES.get(VanillaMaterial.IRON).get(), SlashItems.GearItems.NECKLACES.get(VanillaMaterial.GOLD).get(), SlashItems.GearItems.NECKLACES.get(VanillaMaterial.DIAMOND).get());
         List<Item> tomes = Arrays.asList(SlashItems.GearItems.TOMES.get(VanillaMaterial.IRON).get(), SlashItems.GearItems.TOMES.get(VanillaMaterial.IRON).get(), SlashItems.GearItems.TOMES.get(VanillaMaterial.DIAMOND).get());
-        List<Item> flutes = Arrays.asList(SlashItems.GearItems.ENERGY_DODGE_OFFHAND.get(VanillaMaterial.IRON).get(), SlashItems.GearItems.ENERGY_DODGE_OFFHAND.get(VanillaMaterial.IRON).get(), SlashItems.GearItems.ENERGY_DODGE_OFFHAND.get(VanillaMaterial.DIAMOND).get());
+        List<Item> totems = Arrays.asList(SlashItems.GearItems.ENERGY_DODGE_OFFHAND.get(VanillaMaterial.IRON).get(), SlashItems.GearItems.ENERGY_DODGE_OFFHAND.get(VanillaMaterial.IRON).get(), SlashItems.GearItems.ENERGY_DODGE_OFFHAND.get(VanillaMaterial.DIAMOND).get());
 
         String id = slot.id;
 
         if (id.equals(GearSlots.RING)) {
             return ring.get(lootable_gear_tier.tier);
         }
-        if (id.equals(GearSlots.FLUTE)) {
-            return flutes.get(lootable_gear_tier.tier);
+        if (id.equals(GearSlots.TOTEM)) {
+            return totems.get(lootable_gear_tier.tier);
         }
         if (id.equals(GearSlots.TOME)) {
             return tomes.get(lootable_gear_tier.tier);

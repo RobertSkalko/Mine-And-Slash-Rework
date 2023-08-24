@@ -226,6 +226,9 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
             list.add(ExileText.ofText("Mana Cost Multiplier: " + (int) (supp.manaMulti * 100) + "%").get());
 
+            if (supp.isOneOfAKind()) {
+                list.add(Component.literal("Only one allowed: " + supp.one_of_a_kind));
+            }
         }
 
         if (this.type == SkillGemType.AURA) {

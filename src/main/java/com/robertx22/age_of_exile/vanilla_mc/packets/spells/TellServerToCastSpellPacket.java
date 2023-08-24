@@ -38,7 +38,7 @@ public class TellServerToCastSpellPacket extends MyPacket<TellServerToCastSpellP
 
     public static boolean tryCastSpell(Player player, Spell spell) {
 
-        var spells = Load.player(player);
+        var data = Load.player(player);
 
         if (player.isBlocking() || player.swinging) {
             return false;
@@ -46,14 +46,14 @@ public class TellServerToCastSpellPacket extends MyPacket<TellServerToCastSpellP
 
         if (spell != null) {
 
-            if (spells.spellCastingData
+            if (data.spellCastingData
                     .canCast(spell, player)) {
 
                 SpellCastContext c = new SpellCastContext(player, 0, spell);
-                spells.spellCastingData.setToCast(c);
+                data.spellCastingData.setToCast(c);
 
                 spell.spendResources(c);
-                spells.syncToClient(player);
+                data.syncToClient(player);
 
                 return true;
             }

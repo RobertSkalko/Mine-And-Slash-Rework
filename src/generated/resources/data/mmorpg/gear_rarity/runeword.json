@@ -1,6 +1,8 @@
 {
   "announce_in_chat": false,
   "backpack_slots": 10,
+  "favor_loot_multi": 1.0,
+  "favor_needed": 0,
   "guid": "runeword",
   "higher_rar": "",
   "is_unique_item": true,

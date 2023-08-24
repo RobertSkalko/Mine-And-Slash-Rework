@@ -54,7 +54,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class CharacterScreen extends BaseScreen implements INamedScreen {
+public class MainHubScreen extends BaseScreen implements INamedScreen {
     private static final ResourceLocation LEFT = new ResourceLocation(SlashRef.MODID, "textures/gui/main_hub/buttons_backwards.png");
     static ResourceLocation RIGHT = new ResourceLocation(SlashRef.MODID, "textures/gui/main_hub/buttons.png");
 
@@ -140,7 +140,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
 
     }
 
-    public CharacterScreen() {
+    public MainHubScreen() {
         super(sizeX, sizeY);
     }
 
@@ -244,7 +244,7 @@ public class CharacterScreen extends BaseScreen implements INamedScreen {
         }
 
 
-        publicAddButton(new PlayerGearButton(mc.player, this, this.guiLeft + CharacterScreen.sizeX / 2 - PlayerGearButton.xSize / 2, this.guiTop + 10));
+        publicAddButton(new PlayerGearButton(mc.player, this, this.guiLeft + MainHubScreen.sizeX / 2 - PlayerGearButton.xSize / 2, this.guiTop + 10));
 
     }
 

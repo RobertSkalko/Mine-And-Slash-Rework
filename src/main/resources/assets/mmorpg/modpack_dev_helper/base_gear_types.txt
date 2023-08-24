@@ -12,10 +12,10 @@ cloth_pants
 bow
 leather_pants
 plate_chest
-flute
 sword
 plate_boots
 cloth_chest
+totem
 plate_pants
 leather_helmet
 plate_helmet

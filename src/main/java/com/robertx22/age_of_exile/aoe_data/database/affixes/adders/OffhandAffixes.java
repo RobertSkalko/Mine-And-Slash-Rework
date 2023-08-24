@@ -33,7 +33,7 @@ public class OffhandAffixes implements ExileRegistryInit {
         AffixBuilder.Normal("energetic")
                 .Named("Energetic")
                 .stats(new StatMod(0.5F, 3, EnergyRegen.getInstance(), ModType.FLAT))
-                .includesTags(BaseGearType.SlotTag.flute)
+                .includesTags(BaseGearType.SlotTag.totem)
                 .Weight(500)
                 .Prefix()
                 .Build();

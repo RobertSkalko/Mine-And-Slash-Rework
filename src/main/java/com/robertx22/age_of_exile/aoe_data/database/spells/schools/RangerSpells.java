@@ -252,6 +252,10 @@ public class RangerSpells implements ExileRegistryInit {
                                 .setChargesAndRegen("meteor_arrow", 3, 20 * 10), "Meteor Arrow",
                         Arrays.asList(SpellTag.projectile, SpellTag.area, SpellTag.damage))
                 .weaponReq(CastingWeapon.RANGED)
+                .manualDesc("Shoots an arrow that deals "
+                        + SpellCalcs.METEOR.getLocDmgTooltip(Elements.Physical)
+                        + " and summons a meteor that deals "
+                        + SpellCalcs.METEOR.getLocDmgTooltip(Elements.Fire))
                 .onCast(PartBuilder.playSound(SoundEvents.ARROW_SHOOT, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.createArrow(1D).put(MapField.ENTITY_NAME, "arrow")))
 

@@ -3,15 +3,18 @@ package com.robertx22.age_of_exile.database.data.spells.components;
 import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellUtils;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.library_of_exile.utils.geometry.MyPosition;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Math;
 
 public class ProjectileCastHelper {
 
@@ -55,6 +58,11 @@ public class ProjectileCastHelper {
     }
 
     public void cast() {
+
+        if (data.data.getBoolean(EventData.BARRAGE)) {
+            this.castType = CastType.SPREAD_OUT_HORIZONTAL;
+        }
+
         Level world = caster.level();
 
         float addYaw = 0;
@@ -74,14 +82,17 @@ public class ProjectileCastHelper {
                     }
                 }
             }
-            if (this.castType == CastType.SPREAD_OUT_HORIZONTAL) { // TODO
-                if (projectilesAmount > 1) {
-                    if (i < projectilesAmount / 2) {
 
+            if (this.castType == CastType.SPREAD_OUT_HORIZONTAL) { // this seems to work
+                if (projectilesAmount > 1) {
+                    int m = 1 + i;
+                    int off = projectilesAmount / 2;
+                    if (i < projectilesAmount / 2) {
+                        posAdd = getSideVelocity(caster).multiply(m, m, m);
                     } else if (i == projectilesAmount / 2) {
                         posAdd = Vec3.ZERO;
                     } else if (i > projectilesAmount / 2) {
-
+                        posAdd = geOppositeSideVelocity(caster).multiply(i - off, i - off, i - off);
                     }
                 }
             }
@@ -128,6 +139,18 @@ public class ProjectileCastHelper {
 
     public static Vec3 positionToVelocity(MyPosition current, MyPosition destination) {
         return destination.subtract(current).normalize();
+    }
+
+    public Vec3 getSideVelocity(Entity shooter) {
+        float yaw = shooter.getYRot() - 90;
+        float x = -Math.sin(yaw * 0.017453292F) * Math.cos(shooter.getXRot() * 0.017453292F);
+        float y = -Math.sin((shooter.getXRot()) * 0.017453292F);
+        float z = Math.cos(yaw * 0.017453292F) * Math.cos(shooter.getXRot() * 0.017453292F);
+        return (new Vec3(x, y, z)).normalize();
+    }
+
+    public Vec3 geOppositeSideVelocity(Entity shooter) {
+        return getSideVelocity(shooter).multiply(-1, -1, -1);
     }
 
 }

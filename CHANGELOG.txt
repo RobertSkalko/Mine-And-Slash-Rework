@@ -163,3 +163,7 @@ v5.0.4
 - every subsequent death increases the rarity of death tickets needed to use to restore penalty
 
 - ticket cost resets every time you start a map yourself (can't find a better way right now)
+
+- death favor added. If you die you lose favor, if you loot chests you gain favor. You can also regain favor slowly over time if it's below a certain point.
+
+- added new supp gems: LMP, GMP, Barrage versions, faster projectiles

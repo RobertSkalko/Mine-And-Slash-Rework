@@ -151,10 +151,10 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
 
         necklace(SlotFamily.Jewelry),
         ring(SlotFamily.Jewelry),
-        
+
         shield(SlotFamily.OffHand),
         tome(SlotFamily.OffHand),
-        flute(SlotFamily.OffHand),
+        totem(SlotFamily.OffHand),
 
         mage_weapon(SlotFamily.NONE), melee_weapon(SlotFamily.NONE), ranged_weapon(SlotFamily.NONE),
 

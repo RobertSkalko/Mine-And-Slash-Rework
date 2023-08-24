@@ -121,34 +121,24 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
         }
 
         exp *= LootUtils.getMobHealthBasedLootMulti(mobData, killer);
-
         exp *= LootUtils.getLevelDistancePunishmentMulti(mobData.getLevel(), killerData.getLevel());
-
         exp *= mobData.getMobRarity().mob.expMulti();
+        exp *= multi;
+        exp *= ServerContainer.get().EXP_GAIN_MULTI.get();
+        exp *= ExileDB.getDimensionConfig(victim.level()).exp_multi;
+        exp *= killerData.getUnit().getCalculatedStat(BonusExp.getInstance()).getMultiplier();
+        exp *= Load.player(killer).favor.getLootExpMulti();
 
         if (WorldUtils.isMapWorldClass(victim.level())) {
-
             MapData map = Load.mapAt(victim.level(), victim.blockPosition());
             if (map != null) {
                 exp *= map.map.getBonusLootMulti();
             }
         }
-        
-        float baseexp = exp;
 
-        exp += (-1F + multi) * baseexp;
-
-        exp += (-1F + ServerContainer.get().EXP_GAIN_MULTI.get()) * baseexp;
-
-
-        exp += (-1F + ExileDB.getDimensionConfig(victim.level()).exp_multi) * baseexp;
-
-
-        exp += (-1F + killerData.getUnit()
-                .getCalculatedStat(BonusExp.getInstance())
-                .getMultiplier()) * baseexp;
 
         exp = ExileEvents.MOB_EXP_DROP.callEvents(new ExileEvents.OnMobExpDrop(victim, exp)).exp;
+
 
         if ((int) exp > 0) {
 
