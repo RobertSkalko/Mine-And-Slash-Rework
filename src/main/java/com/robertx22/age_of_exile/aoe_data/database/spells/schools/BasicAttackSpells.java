@@ -32,7 +32,7 @@ public class BasicAttackSpells implements ExileRegistryInit {
         SpellBuilder.of(FROSTBALL_ID, PlayStyle.INT, SpellConfiguration.Builder.instant(mana, cd)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Ice Ball",
-                        Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.staff_spell))
+                        Arrays.asList(SpellTag.projectile, SpellTag.damage))
                 .manualDesc(
                         "Throw out a ball of ice, dealing " + SpellCalcs.ICEBALL.getLocDmgTooltip()
                                 + " " + Elements.Cold.getIconNameDmg())
@@ -51,7 +51,7 @@ public class BasicAttackSpells implements ExileRegistryInit {
         SpellBuilder.of(FIREBALL_ID, PlayStyle.INT, SpellConfiguration.Builder.instant(mana, cd)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Fire Ball",
-                        Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.staff_spell))
+                        Arrays.asList(SpellTag.projectile, SpellTag.damage))
                 .manualDesc(
                         "Throw out a ball of fire, dealing " + SpellCalcs.FIREBALL.getLocDmgTooltip()
                                 + " " + Elements.Fire.getIconNameDmg())
@@ -72,7 +72,7 @@ public class BasicAttackSpells implements ExileRegistryInit {
         SpellBuilder.of(POISONBALL_ID, PlayStyle.INT, SpellConfiguration.Builder.instant(mana, cd)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Poison Ball",
-                        Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.staff_spell))
+                        Arrays.asList(SpellTag.projectile, SpellTag.damage))
                 .manualDesc(
                         "Throw out a ball of poison, dealing " + SpellCalcs.POISON_BALL.getLocDmgTooltip()
                                 + " " + Elements.Chaos.getIconNameDmg())

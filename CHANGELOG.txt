@@ -171,3 +171,6 @@ v5.0.4
 - added leech cap stat, and base leech is now 5% total hp etc capped per second
 
 - added remaining spirit tooltip to aura gems
+
+- the spell's tags are now shown on its tooltip, this way you will know if certain stats apply to it.
+For example you can't increase the radius of a spell that isn't tagged as area. Area damage won't work on it either.

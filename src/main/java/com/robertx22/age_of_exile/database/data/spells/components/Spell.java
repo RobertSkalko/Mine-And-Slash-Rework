@@ -24,6 +24,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.MapManager;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
@@ -33,6 +34,7 @@ import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
@@ -280,10 +282,16 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
             }
         }
 
+
         int currentlvl = getLevelOf(info.player);
         int maxlvl = getMaxLevel();
 
         list.add(Component.literal("Power: " + currentlvl + "/" + maxlvl).withStyle(ChatFormatting.YELLOW));
+
+        String taglist = StringUTIL.join(this.config.tags.stream().map(x -> x.locname).iterator(), ", ");
+        MutableComponent tagtext = Component.literal("Tags: ").append(taglist);
+
+        list.add(tagtext);
 
         TooltipUtils.removeDoubleBlankLines(list);
 
