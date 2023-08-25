@@ -242,6 +242,13 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
             list.add(ExileText.ofText("Spirit Reservation: " + (int) (aura.reservation * 100)).get());
 
+
+            int spiritLeft = (int) Load.player(p).getSkillGemInventory().getRemainingSpirit(p);
+            
+            list.add(ExileText.emptyLine().get());
+
+            list.add(Component.literal("Remaining Spirit: " + spiritLeft).withStyle(ChatFormatting.AQUA));
+
         }
         list.add(ExileText.emptyLine().get());
 

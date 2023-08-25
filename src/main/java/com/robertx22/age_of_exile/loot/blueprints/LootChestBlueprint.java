@@ -1,21 +1,20 @@
 package com.robertx22.age_of_exile.loot.blueprints;
 
 import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChestData;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.LootInfo;
-import com.robertx22.age_of_exile.loot.blueprints.bases.GearRarityPart;
 import com.robertx22.age_of_exile.loot.blueprints.bases.LootChestPart;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.world.item.ItemStack;
 
-public class LootChestBlueprint extends ItemBlueprint {
+public class LootChestBlueprint extends RarityItemBlueprint implements ITypeBlueprint {
 
     public LootChestBlueprint(LootInfo info) {
         super(info);
         this.rarity.chanceForHigherRarity = 75;
     }
 
-    public GearRarityPart rarity = new GearRarityPart(this);
     public LootChestPart type = new LootChestPart(this);
 
     @Override
@@ -45,4 +44,8 @@ public class LootChestBlueprint extends ItemBlueprint {
     }
 
 
+    @Override
+    public void setType(String type) {
+        this.type.set(ExileDB.LootChests().get(type));
+    }
 }

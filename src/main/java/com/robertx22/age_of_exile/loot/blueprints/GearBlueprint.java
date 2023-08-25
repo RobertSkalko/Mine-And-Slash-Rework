@@ -1,8 +1,7 @@
 package com.robertx22.age_of_exile.loot.blueprints;
 
 import com.robertx22.age_of_exile.loot.LootInfo;
-import com.robertx22.age_of_exile.loot.blueprints.bases.GearItemSlotPart;
-import com.robertx22.age_of_exile.loot.blueprints.bases.GearRarityPart;
+import com.robertx22.age_of_exile.loot.blueprints.bases.GearTypePart;
 import com.robertx22.age_of_exile.loot.blueprints.bases.UniqueGearPart;
 import com.robertx22.age_of_exile.loot.generators.SoulLootGen;
 import com.robertx22.age_of_exile.loot.generators.util.GearCreationUtils;
@@ -11,7 +10,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
-public class GearBlueprint extends ItemBlueprint {
+public class GearBlueprint extends RarityItemBlueprint implements ITypeBlueprint {
 
     public Item item = Items.AIR;
 
@@ -22,9 +21,8 @@ public class GearBlueprint extends ItemBlueprint {
         this.rarity.setupChances(info);
     }
 
- 
-    public GearItemSlotPart gearItemSlot = new GearItemSlotPart(this);
-    public GearRarityPart rarity = new GearRarityPart(this);
+
+    public GearTypePart gearItemSlot = new GearTypePart(this);
     public UniqueGearPart uniquePart = new UniqueGearPart(this);
 
 
@@ -43,4 +41,8 @@ public class GearBlueprint extends ItemBlueprint {
         }
     }
 
+    @Override
+    public void setType(String type) {
+        this.gearItemSlot.set(type);
+    }
 }

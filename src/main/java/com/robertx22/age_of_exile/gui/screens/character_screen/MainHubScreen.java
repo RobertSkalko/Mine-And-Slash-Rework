@@ -23,6 +23,7 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.bases.BaseScreen;
 import com.robertx22.age_of_exile.gui.bases.INamedScreen;
 import com.robertx22.age_of_exile.gui.buttons.CharacterStatsButtons;
+import com.robertx22.age_of_exile.gui.buttons.FavorButton;
 import com.robertx22.age_of_exile.gui.inv_gui.GuiInventoryGrids;
 import com.robertx22.age_of_exile.gui.screens.OpenBackpack;
 import com.robertx22.age_of_exile.gui.screens.OpenInvGuiScreen;
@@ -217,6 +218,9 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
 
 
         // screens.add(new SpellScreen());
+
+
+        publicAddButton(new FavorButton(guiLeft + sizeX / 2 - FavorButton.FAVOR_BUTTON_SIZE_X / 2, guiTop - FavorButton.FAVOR_BUTTON_SIZE_Y));
 
 
         int x = guiLeft + sizeX - 1;

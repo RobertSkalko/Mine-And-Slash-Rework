@@ -5,7 +5,6 @@ import com.robertx22.age_of_exile.database.data.map_affix.MapAffix;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.LootInfo;
-import com.robertx22.age_of_exile.loot.blueprints.bases.GearRarityPart;
 import com.robertx22.age_of_exile.maps.MapAffixData;
 import com.robertx22.age_of_exile.maps.MapItemData;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
@@ -16,10 +15,8 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapBlueprint extends ItemBlueprint {
+public class MapBlueprint extends RarityItemBlueprint {
 
-
-    public GearRarityPart rarity = new GearRarityPart(this);
 
     public MapBlueprint(LootInfo info) {
         super(info);

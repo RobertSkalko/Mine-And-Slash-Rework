@@ -5,9 +5,9 @@ import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 
-public class GearItemSlotPart extends BlueprintPart<BaseGearType, GearBlueprint> {
+public class GearTypePart extends BlueprintPart<BaseGearType, GearBlueprint> {
 
-    public GearItemSlotPart(GearBlueprint blueprint) {
+    public GearTypePart(GearBlueprint blueprint) {
         super(blueprint);
     }
 
@@ -17,7 +17,7 @@ public class GearItemSlotPart extends BlueprintPart<BaseGearType, GearBlueprint>
         GearSlot slot = ExileDB.GearSlots()
                 .random();
 
-   
+
         return ExileDB.GearTypes()
                 .getFilterWrapped(x -> x.getGearSlot()
                         .GUID()

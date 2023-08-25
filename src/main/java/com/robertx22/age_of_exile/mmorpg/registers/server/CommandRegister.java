@@ -1,6 +1,11 @@
 package com.robertx22.age_of_exile.mmorpg.registers.server;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
+import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
+import com.robertx22.age_of_exile.loot.blueprints.LootChestBlueprint;
+import com.robertx22.age_of_exile.loot.blueprints.SkillGemBlueprint;
+import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.vanilla_mc.commands.RollCommand;
 import com.robertx22.age_of_exile.vanilla_mc.commands.RunTestCommand;
 import com.robertx22.age_of_exile.vanilla_mc.commands.TeamCommand;
@@ -8,7 +13,9 @@ import com.robertx22.age_of_exile.vanilla_mc.commands.entity.GiveExp;
 import com.robertx22.age_of_exile.vanilla_mc.commands.entity.SetEntityRarity;
 import com.robertx22.age_of_exile.vanilla_mc.commands.entity.SetLevel;
 import com.robertx22.age_of_exile.vanilla_mc.commands.entity.SpawnBoss;
-import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.*;
+import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GenericGive;
+import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GiveExactUnique;
+import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GiveMap;
 import com.robertx22.age_of_exile.vanilla_mc.commands.open_gui.OpenHub;
 import com.robertx22.age_of_exile.vanilla_mc.commands.reset.ResetSpellCooldowns;
 import com.robertx22.age_of_exile.vanilla_mc.commands.stats.ClearStats;
@@ -28,14 +35,19 @@ public class CommandRegister {
 
         GiveExactUnique.register(dispatcher);
         GiveMap.register(dispatcher);
-        GiveGear.register(dispatcher);
-        GiveSpell.register(dispatcher);
-        GiveSupport.register(dispatcher);
+
+        new GenericGive("spell", ExileRegistryTypes.SPELL, x -> new SkillGemBlueprint(x, SkillGemData.SkillGemType.SKILL)).register(dispatcher);
+        new GenericGive("aura", ExileRegistryTypes.AURA, x -> new SkillGemBlueprint(x, SkillGemData.SkillGemType.AURA)).register(dispatcher);
+        new GenericGive("support_gem", ExileRegistryTypes.SUPPORT_GEM, x -> new SkillGemBlueprint(x, SkillGemData.SkillGemType.SUPPORT)).register(dispatcher);
+
+        new GenericGive("gear", ExileRegistryTypes.GEAR_TYPE, x -> new GearBlueprint(x)).register(dispatcher);
+        new GenericGive("loot_chest", ExileRegistryTypes.LOOT_CHEST, x -> new LootChestBlueprint(x)).register(dispatcher);
+
+
         SetEntityRarity.register(dispatcher);
         SpawnBoss.register(dispatcher);
         SetLevel.register(dispatcher);
         GiveExp.register(dispatcher);
-        GiveLootChest.register(dispatcher);
 
 
         ResetSpellCooldowns.register(dispatcher);

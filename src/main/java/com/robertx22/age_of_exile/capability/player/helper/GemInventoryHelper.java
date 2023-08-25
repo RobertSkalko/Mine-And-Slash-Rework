@@ -118,7 +118,8 @@ public class GemInventoryHelper {
         return list;
     }
 
-    public float getSpiritReserved(Player p, float multi) {
+    public float getSpiritReserved(Player p) {
+        float multi = getPlayerSpiritReserveMulti(p);
 
         float res = 0;
 
@@ -129,12 +130,24 @@ public class GemInventoryHelper {
         return res;
     }
 
+    public float getRemainingSpirit(Player p) {
+
+        float reserved = getSpiritReserved(p);
+
+        float remaining = 1 - reserved;
+
+        return remaining * 100F;
+    }
+
+    public float getPlayerSpiritReserveMulti(Player p) {
+        float multi = Load.Unit(p).getUnit().getCalculatedStat(AuraCostReduction.getInstance()).getReverseMultiplier();
+        return multi;
+    }
+
+
     public void removeAurasIfCantWear(Player p) {
 
-        float multi = Load.Unit(p).getUnit().getCalculatedStat(AuraCostReduction.getInstance()).getReverseMultiplier();
-
-
-        if (getSpiritReserved(p, multi) > 1) {
+        if (getSpiritReserved(p) > 1) {
             for (ItemStack s : getAuras()) {
                 PlayerUtils.giveItem(s.copy(), p);
                 s.shrink(100);

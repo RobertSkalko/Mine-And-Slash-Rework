@@ -169,3 +169,5 @@ v5.0.4
 - added new supp gems: LMP, GMP, Barrage versions, faster projectiles
 
 - added leech cap stat, and base leech is now 5% total hp etc capped per second
+
+- added remaining spirit tooltip to aura gems

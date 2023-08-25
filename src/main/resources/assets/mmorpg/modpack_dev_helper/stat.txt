@@ -240,6 +240,7 @@ aura_effect
 blood_user
 fire_dot_damage
 mana_on_hit_hit
+leech_per_sec
 dmg_received
 mana_regen
 heal_spell_dmg
