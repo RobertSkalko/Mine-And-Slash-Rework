@@ -8,8 +8,6 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import net.minecraft.ChatFormatting;
 
-import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
-
 public class BloodUser extends Stat {
     public static String GUID = "blood_user";
 
@@ -28,9 +26,6 @@ public class BloodUser extends Stat {
         return StatNameRegex.JUST_NAME;
     }
 
-    public static BloodUser getInstance() {
-        return BloodUser.SingletonHolder.INSTANCE;
-    }
 
     @Override
     public String locDescForLangFile() {
@@ -55,8 +50,12 @@ public class BloodUser extends Stat {
     @Override
     public String locNameForLangFile() {
         return ChatFormatting.GRAY + "You now use " + Blood.getInstance()
-            .getIconNameFormat() + " instead of " + Mana.getInstance()
-            .getIconNameFormat();
+                .getIconNameFormat() + " instead of " + Mana.getInstance()
+                .getIconNameFormat();
+    }
+
+    public static BloodUser getInstance() {
+        return BloodUser.SingletonHolder.INSTANCE;
     }
 
     private static class SingletonHolder {

@@ -80,13 +80,10 @@ public class Unit {
     }
 
     public StatData getCalculatedStat(String guid) {
-
         if (getStats().stats == null) {
             this.initStats();
         }
-
         return getStats().stats.getOrDefault(guid, StatData.empty());
-
     }
 
     public Unit() {

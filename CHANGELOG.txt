@@ -167,3 +167,5 @@ v5.0.4
 - death favor added. If you die you lose favor, if you loot chests you gain favor. You can also regain favor slowly over time if it's below a certain point.
 
 - added new supp gems: LMP, GMP, Barrage versions, faster projectiles
+
+- added leech cap stat, and base leech is now 5% total hp etc capped per second

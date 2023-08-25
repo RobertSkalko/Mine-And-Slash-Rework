@@ -58,6 +58,13 @@ public class StatData {
         // todo this shouldnt be needed return Mth.clamp(v1, stat.min, stat.max);
     }
 
+    public float getValueOrBase(Stat stat) {
+
+        if (this.isNotZero()) {
+            return v1;
+        }
+        return stat.base;
+    }
 
     public boolean isNotZero() {
         return v1 != 0 || this.m != 1;

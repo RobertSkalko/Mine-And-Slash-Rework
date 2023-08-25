@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.capability.entity;
 
+import com.robertx22.age_of_exile.database.data.stats.types.resources.LeechCapStat;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 
 import java.util.HashMap;
@@ -19,15 +20,15 @@ public class EntityLeechData {
         map.put(type, fi);
     }
 
-    static float MAX_LEECH_PERCENT_PER_SECOND = 0.1F; // todo maybe a stat
-
     public void onSecondUseLeeches(EntityData data) {
+
+        float leechMaxPerSec = data.getUnit().getCalculatedStat(LeechCapStat.getInstance()).getValueOrBase(LeechCapStat.getInstance()) / 100F;
 
         for (Map.Entry<ResourceType, Float> entry : map.entrySet()) {
 
             float num = entry.getValue();
 
-            float max = MAX_LEECH_PERCENT_PER_SECOND * data.getResources().get(data.entity, entry.getKey());
+            float max = leechMaxPerSec * data.getResources().getMax(data.entity, entry.getKey());
 
             if (num > max) {
                 num = max;

@@ -20,6 +20,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.offense.FullSwingDam
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.DamageAbsorbedByMana;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.LeechCapStat;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.RegeneratePercentStat;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.blood.Blood;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.blood.BloodUser;
@@ -66,8 +67,10 @@ public class StatsRegister implements ExileRegistryInit {
                         add(new AilmentProcStat(ailment));
                     }
 
-                    add(JewelSocketStat.getInstance());
+                    add(LeechCapStat.getInstance());
                     
+                    add(JewelSocketStat.getInstance());
+
                     add(new BonusPhysicalAsElemental(Elements.Elemental));
                     add(new MaxElementalResist(Elements.Elemental));
 
