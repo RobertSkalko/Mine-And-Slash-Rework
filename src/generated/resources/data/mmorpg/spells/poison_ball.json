@@ -185,8 +185,7 @@
     "swing_arm": true,
     "tags": [
       "projectile",
-      "damage",
-      "staff_spell"
+      "damage"
     ],
     "times_to_cast": 1
   },

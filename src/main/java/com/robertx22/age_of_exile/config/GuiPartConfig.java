@@ -23,6 +23,11 @@ public class GuiPartConfig {
         this.position_offset = position_offset;
     }
 
+    public GuiPartConfig iconOnRight() {
+        this.icon_renderer = IconRenderer.RIGHT;
+        return this;
+    }
+
     public GuiPartConfig() {
     }
 

@@ -96,10 +96,14 @@ public class LootInfo {
         info.player = player;
         info.world = player.level();
         info.pos = pos;
-        info.multi = 1.5F;
         info.maxItems = 7;
         info.setupAllFields();
 
+        if (WorldUtils.isMapWorldClass(player.level())) {
+            info.multi += 10;
+        } else {
+            info.multi += 5;
+        }
 
         return info;
     }

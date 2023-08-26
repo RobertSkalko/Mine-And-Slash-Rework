@@ -40,7 +40,7 @@ public class SpellUtils {
                         , new ClientboundAddEntityPacket(entityIn));
     }
 
-    public static void shootProjectile(Vec3 pos, AbstractArrow projectile, LivingEntity caster, float speed,
+    public static void shootProjectile(Vec3 pos, AbstractArrow projectile, Entity caster, float speed,
                                        float pitch, float yaw) {
 
         ((Entity) projectile).setPos(pos.x, caster.getEyeY() - 0.1F, pos.z);

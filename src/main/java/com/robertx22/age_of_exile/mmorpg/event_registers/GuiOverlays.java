@@ -18,11 +18,12 @@ import net.minecraftforge.fml.common.Mod;
 public class GuiOverlays {
     @SubscribeEvent
     public static void registerOverlay(RegisterGuiOverlaysEvent event) {
-
+  
         event.registerAbove(VanillaGuiOverlay.CHAT_PANEL.id(), SlashRef.MODID + ".gui", new Overlay());
     }
 
     public static class Overlay implements IGuiOverlay {
+
 
         SpellHotbarOverlay spellHotbarOverlay = new SpellHotbarOverlay();
         SpellCastBarOverlay castbar = new SpellCastBarOverlay();

@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.MasterLootGen;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
 import net.minecraft.world.Container;
@@ -24,10 +23,6 @@ public class OnLootChestEvent extends EventConsumer<ExileEvents.OnChestLooted> {
 
         LootInfo info = LootInfo.ofChestLoot(player, event.pos);
 
-
-        if (WorldUtils.isMapWorldClass(player.level())) {
-            info.multi += 10;
-        }
 
         List<ItemStack> items = MasterLootGen.generateLoot(info);
 

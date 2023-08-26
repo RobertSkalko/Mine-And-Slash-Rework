@@ -25,7 +25,6 @@ import com.robertx22.age_of_exile.saveclasses.unit.*;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.CustomExactStats;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.datasaving.UnitNbt;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
@@ -532,13 +531,6 @@ public class EntityData implements ICap, INeededForClient {
         return this.equipsChanged;
     }
 
-    public void forceSetUnit(Unit unit) {
-        this.unit = unit;
-    }
-
-    public GearItemData setupWeaponData() {
-        return StackSaving.GEARS.loadFrom(entity.getMainHandItem());
-    }
 
     public boolean canUseWeapon(GearItemData weaponData) {
         return weaponData != null;

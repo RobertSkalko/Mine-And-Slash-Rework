@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.gui.overlays.bar_overlays.types;
 import com.robertx22.age_of_exile.config.GuiPartConfig;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.gui.overlays.BarGuiType;
+import com.robertx22.age_of_exile.gui.overlays.GuiPosition;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -23,7 +24,22 @@ public class MineAndSlashBars {
 
     public static void renderMineAndSlashBar(GuiPartConfig config, BarGuiType type, GuiGraphics gui, PointData point, String text, boolean drawText) {
 
+        
+        int BAR_HEIGHT = 11;
+        int BAR_WIDTH = 107;
+        int INNER_BAR_WIDTH = 103;
+        int INNER_BAR_HEIGHT = 7;
+
+        if (ClientConfigs.getConfig().GUI_POSITION.get() == GuiPosition.OVER_VANILLA) {
+            BAR_WIDTH = 91;
+            INNER_BAR_WIDTH = BAR_WIDTH - 4;
+        }
+
         float s = ClientConfigs.getConfig().HEALTH_BAR_GUI_SCALE.get().floatValue();
+
+        if (ClientConfigs.getConfig().GUI_POSITION.get() != GuiPosition.TOP_LEFT) {
+            s = 1;
+        }
 
         gui.pose().scale(s, s, s);
 

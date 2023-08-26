@@ -15,25 +15,47 @@ public enum GuiPosition {
         @Override
         public List<GuiPartConfig> getGuiConfig(EntityData data, Player p) {
             List<GuiPartConfig> middle = new ArrayList<>();
-            middle.add(new GuiPartConfig(BarGuiType.HEALTH, new PointData(-198, -22)));
-            middle.add(new GuiPartConfig(BarGuiType.EXP, new PointData(-198, -11)));
+            middle.add(new GuiPartConfig(BarGuiType.HEALTH, new PointData(-198, -11)));
+            //middle.add(new GuiPartConfig(BarGuiType.EXP, new PointData(-198, -11)));
 
             if (BarGuiType.MAGIC_SHIELD.shouldRender(data, p)) {
-                middle.add(new GuiPartConfig(BarGuiType.MAGIC_SHIELD, new PointData(-198, -33)));
+                middle.add(new GuiPartConfig(BarGuiType.MAGIC_SHIELD, new PointData(-198, -22)));
             }
-            middle.add(new GuiPartConfig(BarGuiType.MANA, new PointData(90, -22)));
-            middle.add(new GuiPartConfig(BarGuiType.ENERGY, new PointData(90, -11)));
+            middle.add(new GuiPartConfig(BarGuiType.MANA, new PointData(90, -22)).iconOnRight());
+            middle.add(new GuiPartConfig(BarGuiType.ENERGY, new PointData(90, -11)).iconOnRight());
 
             return middle;
         }
 
         @Override
         public PointData getPos() {
-            return new PointData(
-                    mc().getWindow()
-                            .getGuiScaledWidth() / 2,
-                    mc().getWindow()
-                            .getGuiScaledHeight());
+            return new PointData(mc().getWindow().getGuiScaledWidth() / 2, mc().getWindow().getGuiScaledHeight());
+        }
+    },
+    OVER_VANILLA {
+        @Override
+        public List<GuiPartConfig> getGuiConfig(EntityData data, Player p) {
+            List<GuiPartConfig> middle = new ArrayList<>();
+
+            middle.add(new GuiPartConfig(BarGuiType.HEALTH, new PointData(-91, -33)));
+            // middle.add(new GuiPartConfig(BarGuiType.EXP, new PointData(-115, -41)));
+
+            if (BarGuiType.MAGIC_SHIELD.shouldRender(data, p)) {
+                middle.add(new GuiPartConfig(BarGuiType.MAGIC_SHIELD, new PointData(-91, -43)));
+            }
+            middle.add(new GuiPartConfig(BarGuiType.MANA, new PointData(0, -33)).iconOnRight());
+            middle.add(new GuiPartConfig(BarGuiType.ENERGY, new PointData(0, -43)).iconOnRight());
+
+            for (GuiPartConfig aa : middle) {
+                aa.icon_renderer = GuiPartConfig.IconRenderer.NONE;
+            }
+
+            return middle;
+        }
+
+        @Override
+        public PointData getPos() {
+            return new PointData(mc().getWindow().getGuiScaledWidth() / 2, mc().getWindow().getGuiScaledHeight());
         }
     },
     TOP_LEFT {
@@ -52,7 +74,7 @@ public enum GuiPosition {
             topleft.add(new GuiPartConfig(BarGuiType.MANA, new PointData(x, y += yHeight)));
             topleft.add(new GuiPartConfig(BarGuiType.ENERGY, new PointData(x, y += yHeight)));
             topleft.add(new GuiPartConfig(BarGuiType.EXP, new PointData(x, y += yHeight)));
-           
+
             return topleft;
         }
 

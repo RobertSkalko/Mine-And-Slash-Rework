@@ -98,9 +98,8 @@ public class ProjectileCastHelper {
             }
 
             AbstractArrow en = (AbstractArrow) projectile.create(world);
-            SpellUtils.shootProjectile(pos.add(posAdd), en, caster, shootSpeed, pitch, yaw + addYaw);
+            SpellUtils.shootProjectile(pos.add(posAdd), en, ctx.getPositionEntity(), shootSpeed, pitch, yaw + addYaw);
             SpellUtils.initSpellEntity(en, caster, data, holder);
-
 
             if (fallDown) {
                 en.setDeltaMovement(0, -1, 0);
@@ -124,7 +123,10 @@ public class ProjectileCastHelper {
                     Vec3 vel = positionToVelocity(new MyPosition(en.position()), new MyPosition(target.getEyePosition()));
                     vel = vel.multiply(shootSpeed, shootSpeed, shootSpeed);
                     //en.setDeltaMovement(vel);
+
+
                     en.shoot(vel.x, vel.y, vel.z, 1, 0);
+
                     caster.level().addFreshEntity(en);
                     break;
                 }
