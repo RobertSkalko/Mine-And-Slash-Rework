@@ -149,10 +149,7 @@ public class CreateLangFile {
                 .getSerializable());
         list.addAll(Arrays.asList(Chats.values()));
 
-        ExileDB.Spells()
-                .getSerializable()
-                .forEach(x -> list.add(new OneOfAKindName(x)));
-
+      
         HashMap<IAutoLocName.AutoLocGroup, List<IAutoLocName>> map = new HashMap<>();
 
         for (IAutoLocName.AutoLocGroup autoLocGroup : IAutoLocName.AutoLocGroup.values()) {

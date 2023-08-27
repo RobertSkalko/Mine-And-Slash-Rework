@@ -62,7 +62,7 @@ public class AscClassResetPotion extends AutoItem implements IShapedRecipe {
     @Override
     public ShapedRecipeBuilder getRecipe() {
         return shaped(this)
-                .define('t', RarityStoneItem.of(IRarity.COMMON_ID))
+                .define('t', RarityStoneItem.of(IRarity.UNCOMMON))
                 .define('v', Items.IRON_AXE)
                 .define('b', Items.GLASS_BOTTLE)
                 .define('c', Items.GOLD_INGOT)

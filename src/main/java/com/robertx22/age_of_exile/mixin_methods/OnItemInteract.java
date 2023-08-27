@@ -168,6 +168,23 @@ public class OnItemInteract {
 
 
                 }
+            } else if (cursor.is(SlashItems.SOUL_CLEANER.get())) {
+
+                GearItemData gear = StackSaving.GEARS.loadFrom(stack);
+
+                if (gear != null) {
+                    try {
+                        stack.getOrCreateTag().remove(StackSaving.GEARS.GUID());
+                        cursor.shrink(1);
+                        x.setCanceled(true);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return;
+
+
+                }
             }
 
             if (success) {

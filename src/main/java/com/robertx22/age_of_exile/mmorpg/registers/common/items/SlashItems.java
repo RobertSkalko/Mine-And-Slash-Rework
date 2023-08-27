@@ -17,6 +17,7 @@ import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.weapons.StaffWeapon
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.ItemNewbieGearBag;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.LootTableItem;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.ProjectileItem;
+import com.robertx22.age_of_exile.vanilla_mc.items.misc.SoulCleanerItem;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.AscClassResetPotion;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.ResetStatsPotion;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.SingleTalentResetPotion;
@@ -56,6 +57,7 @@ public class SlashItems {
     public static RegObj<Item> NEWBIE_GEAR_BAG = Def.item(() -> new ItemNewbieGearBag(), "newbie_gear_bag");
     public static RegObj<Item> SALVAGE_HAMMER = Def.item(() -> new SalvageHammerItem(), "salvage_hammer");
     public static RegObj<Item> SOCKET_EXTRACTOR = Def.item(() -> new SocketExtractorItem(), "socket_extractor");
+    public static RegObj<Item> SOUL_CLEANER = Def.item(() -> new SoulCleanerItem(), "soul_cleaner");
 
 
     public static RegObj<Item> INFUSED_IRON = Def.item(() -> new SimpleMatItem(), "mat/infused_iron");

@@ -20,7 +20,6 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-// todo make this per rarity, each crafted with rarity stones and 1 use
 public class SoulMakerItem extends AutoItem implements IShapelessRecipe {
 
     String rar;
@@ -29,7 +28,7 @@ public class SoulMakerItem extends AutoItem implements IShapelessRecipe {
         super(new Properties().stacksTo(64));
         this.rar = rar;
     }
-    
+
     public boolean canExtract(GearItemData gear) {
         if (!IRarity.NORMAL_GEAR_RARITIES.contains(gear.rar)) {
             return rar.equals(IRarity.MYTHIC_ID);
@@ -51,6 +50,7 @@ public class SoulMakerItem extends AutoItem implements IShapelessRecipe {
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {
         tooltip.add(Component.literal("Click on items to extract their soul.").withStyle(ChatFormatting.RED));
         tooltip.add(Component.literal("Works only on that rarity.").withStyle(ChatFormatting.RED));
+        tooltip.add(Component.literal("Deletes the Item in the process.").withStyle(ChatFormatting.RED));
 
     }
 

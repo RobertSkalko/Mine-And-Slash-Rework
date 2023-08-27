@@ -62,7 +62,7 @@ public class TalentResetPotion extends AutoItem implements IShapedRecipe {
     @Override
     public ShapedRecipeBuilder getRecipe() {
         return shaped(this)
-                .define('t', RarityStoneItem.of(IRarity.COMMON_ID))
+                .define('t', RarityStoneItem.of(IRarity.EPIC_ID))
                 .define('v', Items.GOLD_INGOT)
                 .define('b', Items.GLASS_BOTTLE)
                 .define('c', Items.DIAMOND)
