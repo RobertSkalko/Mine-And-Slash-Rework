@@ -178,3 +178,5 @@ For example you can't increase the radius of a spell that isn't tagged as area. 
 - added chinese translation file
 
 - added new item, soul cleaner. This removes the stats on an item but preserves the item, with this and the soul extractor, you can keep using your favourite modded gear.
+
+- tried to optimize lang file a bit, removed some unused words

@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.DirUtils;
+import com.robertx22.age_of_exile.vanilla_mc.items.gemrunes.GemItem;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -147,9 +148,12 @@ public class CreateLangFile {
         list.addAll(Arrays.asList(Words.values()));
         list.addAll(ExileDB.GearRarities()
                 .getSerializable());
-        list.addAll(Arrays.asList(Chats.values()));
 
-      
+        list.addAll(Arrays.asList(Chats.values()));
+        list.addAll(Arrays.asList(GemItem.GemType.values()));
+        list.addAll(Arrays.asList(GemItem.GemRank.values()));
+
+
         HashMap<IAutoLocName.AutoLocGroup, List<IAutoLocName>> map = new HashMap<>();
 
         for (IAutoLocName.AutoLocGroup autoLocGroup : IAutoLocName.AutoLocGroup.values()) {

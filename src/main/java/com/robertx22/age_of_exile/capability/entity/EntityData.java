@@ -730,7 +730,7 @@ public class EntityData implements ICap, INeededForClient {
 
     public int GiveExp(Player player, int i) {
 
-        MutableComponent txt = ExileText.ofText("+" + (int) i + " Experience").format(ChatFormatting.GREEN).get();
+        //MutableComponent txt = ExileText.ofText("+" + (int) i + " Experience").format(ChatFormatting.GREEN).get();
         // todo  OnScreenMessageUtils.sendMessage((ServerPlayer) player, txt, ClientboundSetTitlesPacket.Type.ACTIONBAR);
 
         setExp(exp + i);

@@ -21,6 +21,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Ene
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.SocketData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
@@ -53,6 +54,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocName, IItemAsCurrency, IWeighted {
@@ -62,9 +64,10 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocN
         return AutoLocGroup.Misc;
     }
 
+
     @Override
     public Component getName(ItemStack stack) {
-        return Component.translatable(this.getDescriptionId()).withStyle(gemType.format);
+        return Component.translatable("item." + locNameLangFileGUID(), this.gemRank.locName, this.gemType.locName).withStyle(gemType.format);
     }
 
     @Override
@@ -74,13 +77,12 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocN
 
     @Override
     public String locNameLangFileGUID() {
-        return VanillaUTIL.REGISTRY.items().getKey(this)
-                .toString();
+        return SlashRef.MODID + ".gem_item_name";
     }
 
     @Override
     public String locNameForLangFile() {
-        return gemRank.locName + " " + gemType.locName;
+        return "%1$s" + " " + "%2$s";
     }
 
     @Override
@@ -263,7 +265,7 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocN
         }
     }
 
-    public enum GemType {
+    public enum GemType implements IAutoLocName {
 
         TOURMALINE("tourmaline", "Tourmaline", ChatFormatting.LIGHT_PURPLE, new GemStatPerTypes() {
             @Override
@@ -377,10 +379,30 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocN
             this.format = format;
             this.stats = stats;
         }
+
+        @Override
+        public AutoLocGroup locNameGroup() {
+            return AutoLocGroup.Misc;
+        }
+
+        @Override
+        public String locNameLangFileGUID() {
+            return SlashRef.MODID + ".gem_type." + GUID();
+        }
+
+        @Override
+        public String locNameForLangFile() {
+            return locName;
+        }
+
+        @Override
+        public String GUID() {
+            return id;
+        }
     }
 
 
-    public enum GemRank {
+    public enum GemRank implements IAutoLocName {
         CRACKED("Cracked", 0, 0.1F, 100, 100999, 0F),
         CHIPPED("Chipped", 1, 0.2F, 75, 25999, 0.1F),
         FLAWED("Flawed", 2, 0.3F, 50, 5000, 0.2F),
@@ -415,6 +437,26 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocN
 
             return GemRank.CHIPPED;
 
+        }
+
+        @Override
+        public AutoLocGroup locNameGroup() {
+            return AutoLocGroup.Misc;
+        }
+
+        @Override
+        public String locNameLangFileGUID() {
+            return SlashRef.MODID + ".gem_rank." + GUID();
+        }
+
+        @Override
+        public String locNameForLangFile() {
+            return locName;
+        }
+
+        @Override
+        public String GUID() {
+            return this.locName.toLowerCase(Locale.ROOT);
         }
     }
 
