@@ -145,6 +145,8 @@ Those chests can be opened with a key, but how do you actually get the key? Mayb
  
 v5.0.4
 
+- New dungeon tileset by @TheMichu: Pyramid!
+
 - added craftable potions!
 
 - add hotbar toggle config and keybind 
@@ -180,3 +182,7 @@ For example you can't increase the radius of a spell that isn't tagged as area. 
 - added new item, soul cleaner. This removes the stats on an item but preserves the item, with this and the soul extractor, you can keep using your favourite modded gear.
 
 - tried to optimize lang file a bit, removed some unused words
+
+- attempt to fix mod impcompatibility with mods like apostesis that have similar datapack registry folders like "affixes" by adding a modid prefix to all my datapack json folders
+
+* This update is released a bit early to fix the incompatibility issues, might be more unstable in other areas!

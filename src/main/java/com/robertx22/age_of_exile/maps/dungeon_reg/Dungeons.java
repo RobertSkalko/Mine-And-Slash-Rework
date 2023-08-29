@@ -10,6 +10,7 @@ public class Dungeons {
         Dungeon.Builder.of("wn", new WideNatureRoomAdder()).weight(2000).build();
         Dungeon.Builder.of("bastion", new BastionRoomAdder()).weight(2000).build();
         Dungeon.Builder.of("sewer2", new Sewer2RoomAdder()).weight(2000).build();
+        Dungeon.Builder.of("pyramid", new PyramidRoomAdder()).weight(2000).build();
 
 
         Dungeon.Builder.of("nature", new NatureRoomAdder()).weight(300).build();

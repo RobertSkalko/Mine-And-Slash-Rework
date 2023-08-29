@@ -1,0 +1,19 @@
+These are all default registry entries of this type.
+This registry is modify-able through datapacks.
+npc
+mob
+minecraft:polar_bear
+other
+minecraft:zombified_piglin
+ambient
+minecraft:iron_golem
+minecraft:ender_dragon
+minecraft:enderman
+minecraft:zombie
+animal
+minecraft:drowned
+minecraft:wolf
+minecraft:wither
+lycanite_mobs
+minecraft:bee
+player
