@@ -108,8 +108,8 @@ public class FireSpells implements ExileRegistryInit {
         SpellBuilder.of(FIRE_NOVA_ID, PlayStyle.STR, SpellConfiguration.Builder.instant(20, 20 * 25), "Fire Nova",
                         Arrays.asList(SpellTag.area, SpellTag.damage))
                 .manualDesc(
-                        "Explode with frost around you, dealing " + SpellCalcs.FIRE_NOVA.getLocDmgTooltip()
-                                + " " + Elements.Cold.getIconNameDmg() + " to nearby enemies.")
+                        "Explode with flame around you, dealing " + SpellCalcs.FIRE_NOVA.getLocDmgTooltip()
+                                + " " + Elements.Fire.getIconNameDmg() + " to nearby enemies.")
 
                 .onCast(PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
 

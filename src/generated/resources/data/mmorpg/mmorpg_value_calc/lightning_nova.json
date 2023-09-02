@@ -4,6 +4,7 @@
     "min": 2.0
   },
   "base_scaling_type": "NORMAL",
+  "cap_to_wep_dmg": 1.0,
   "id": "lightning_nova",
   "stat_scalings": [
     {

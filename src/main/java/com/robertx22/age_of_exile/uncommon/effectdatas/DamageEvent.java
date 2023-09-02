@@ -300,6 +300,7 @@ public class DamageEvent extends EffectEvent {
 
         DamageSource dmgsource = new DamageSource(source.level().registryAccess().registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(DAMAGE_TYPE), source);
 
+        
         // todo MyDamageSource dmgsource = new MyDamageSource(ds, source, getElement(), dmg);
 
         if (attackInfo == null || !(DmgSourceUtils.isMyDmgSource(attackInfo.getSource()))) { // todo wtf

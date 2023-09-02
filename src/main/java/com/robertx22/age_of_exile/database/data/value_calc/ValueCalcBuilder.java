@@ -30,6 +30,11 @@ public class ValueCalcBuilder {
 
     }
 
+    public ValueCalcBuilder capScaling(float min) {
+        this.calc.cap_to_wep_dmg = min;
+        return this;
+    }
+
     public ValueCalcBuilder spellScaling(float min, float max) {
         defaultBaseValue(min, max);
         return statScaling(WeaponDamage.getInstance(), min, max);

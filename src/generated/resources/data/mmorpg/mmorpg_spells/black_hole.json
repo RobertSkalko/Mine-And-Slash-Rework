@@ -261,7 +261,6 @@
     "summonType": "NONE",
     "swing_arm": true,
     "tags": [
-      "projectile",
       "damage",
       "area"
     ],

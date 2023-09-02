@@ -4,6 +4,7 @@
     "min": 2.0
   },
   "base_scaling_type": "NORMAL",
+  "cap_to_wep_dmg": 1000.0,
   "id": "meteor",
   "stat_scalings": [
     {

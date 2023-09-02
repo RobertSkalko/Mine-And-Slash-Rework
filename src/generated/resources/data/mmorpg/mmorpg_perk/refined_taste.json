@@ -11,6 +11,12 @@
       "v1": 50.0
     },
     {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "leech_per_sec",
+      "v1": 2.0
+    },
+    {
       "type": "MORE",
       "scale_to_lvl": false,
       "stat": "health_regen",

@@ -5,7 +5,6 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.bases.LootChestPart;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.world.item.ItemStack;
 
 public class LootChestBlueprint extends RarityItemBlueprint implements ITypeBlueprint {
@@ -34,8 +33,8 @@ public class LootChestBlueprint extends RarityItemBlueprint implements ITypeBlue
     public LootChestData createData() {
         LootChestData data = new LootChestData();
 
-
-        data.num = RandomUtils.RandomRange(4, 8);
+        // todo i set this to always same because otherwise you cant stack them, think of other way
+        data.num = 5; // RandomUtils.RandomRange(5, 8);
         data.lvl = info.level;
         data.rar = this.rarity.get().GUID();
         data.id = this.type.get().GUID();

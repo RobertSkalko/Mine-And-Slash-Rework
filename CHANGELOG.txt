@@ -186,3 +186,14 @@ For example you can't increase the radius of a spell that isn't tagged as area. 
 - attempt to fix mod impcompatibility with mods like apostesis that have similar datapack registry folders like "affixes" by adding a modid prefix to all my datapack json folders
 
 * This update is released a bit early to fix the incompatibility issues, might be more unstable in other areas!
+
+v.5.0.5
+
+- added more types of loot chests
+
+- rarities are now gated behind levels
+
+- spell gem max links are now capped behind their rarity
+
+- implemented logic that caps stat scaling of non weapon damage sources of damage to spells, like mana. Now lightning spells scale with say 100% weapon damage, and can only add up to 100% of weapon damage as mana damage.
+This should ensure spells with any type of stat scalings can't become too op, but it also easily allows me to buff them if they are weak.

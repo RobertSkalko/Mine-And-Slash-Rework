@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.database.data.value_calc;
 
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -33,8 +34,9 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
     public StatScaling base_scaling_type = StatScaling.NORMAL;
     public LeveledValue base = new LeveledValue(0, 0);
 
-    public int getCalculatedBaseValue(LivingEntity en, MaxLevelProvider provider) {
+    public float cap_to_wep_dmg = 1000; // by default doesnt cap
 
+    public int getCalculatedBaseValue(LivingEntity en, MaxLevelProvider provider) {
         if (base_scaling_type == null) {
             MMORPG.logError("base scaling type null");
             return 0;
@@ -53,11 +55,28 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
 
     private int getCalculatedScalingValue(LivingEntity en, MaxLevelProvider provider) {
 
-        float amount = 0;
+        var opt = getAllScalingValues().stream().filter(x -> x.getStat() == WeaponDamage.getInstance()).findFirst();
 
-        amount += getAllScalingValues().stream()
+        float dmg = 0;
+        if (opt.isPresent()) {
+            dmg = opt.get().getCalculatedValue(en, provider);
+        }
+
+
+        float other = 0;
+
+        other += getAllScalingValues().stream().filter(x -> x.getStat() != WeaponDamage.getInstance())
                 .mapToInt(x -> x.getCalculatedValue(en, provider))
                 .sum();
+
+        if (this.capsToWeaponDamage()) {
+            float maxotherscaling = dmg * this.cap_to_wep_dmg;
+            if (other > maxotherscaling) {
+                other = maxotherscaling;
+            }
+        }
+
+        float amount = other + dmg;
 
         return (int) amount;
     }
@@ -82,7 +101,16 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
             text.append(" ").append(x.GetTooltipString(en, provider));
         });
 
+        if (capsToWeaponDamage()) {
+            text.append(" (" + ((int) (cap_to_wep_dmg * 100F) + "% Non Wep-Dmg Stat Scaling Cap)"));
+        }
+
         return text;
+
+    }
+
+    public boolean capsToWeaponDamage() {
+        return this.cap_to_wep_dmg < 50;
 
     }
 

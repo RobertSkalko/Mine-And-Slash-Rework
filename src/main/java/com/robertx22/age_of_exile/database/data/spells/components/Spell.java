@@ -281,17 +281,18 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
                 e.printStackTrace();
             }
         }
-
+        
 
         int currentlvl = getLevelOf(info.player);
-        int maxlvl = getMaxLevel();
-
-        list.add(Component.literal("Power: " + currentlvl + "/" + maxlvl).withStyle(ChatFormatting.YELLOW));
 
         String taglist = StringUTIL.join(this.config.tags.stream().map(x -> x.locname).iterator(), ", ");
         MutableComponent tagtext = Component.literal("Tags: ").append(taglist);
 
         list.add(tagtext);
+
+        list.add(ExileText.emptyLine().get());
+
+        list.add(Component.literal("Quality: " + currentlvl + "%").withStyle(ChatFormatting.GOLD));
 
         TooltipUtils.removeDoubleBlankLines(list);
 

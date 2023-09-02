@@ -27,20 +27,17 @@ public class GearRarityPart extends BlueprintPart<GearRarity, ItemBlueprint> {
         }
     }
 
-
     public void setupChances(LootInfo info) {
         if (info.playerEntityData != null) {
-            // if (info.lootOrigin == LootInfo.LootOrigin.CHEST) {
             chanceForHigherRarity += info.playerEntityData.getUnit().getCalculatedStat(TreasureQuality.getInstance()).getValue();
-            //}
         }
     }
 
     public List<GearRarity> getPossibleRarities() {
         if (canRollUnique) {
-            return ExileDB.GearRarities().getFiltered(x -> true);
+            return ExileDB.GearRarities().getFiltered(x -> this.blueprint.info.level >= x.min_lvl);
         }
-        return ExileDB.GearRarities().getFiltered(x -> !x.is_unique_item);
+        return ExileDB.GearRarities().getFiltered(x -> this.blueprint.info.level >= x.min_lvl && !x.is_unique_item);
     }
 
     @Override
@@ -55,7 +52,9 @@ public class GearRarityPart extends BlueprintPart<GearRarity, ItemBlueprint> {
         if (rar.hasHigherRarity()) {
             if (RandomUtils.roll(chanceForHigherRarity)) {
                 if (rar.hasHigherRarity() && getPossibleRarities().contains(rar.getHigherRarity())) {
-                    rar = rar.getHigherRarity();
+                    if (blueprint.info.level >= rar.getHigherRarity().min_lvl) {
+                        rar = rar.getHigherRarity();
+                    }
                 }
             }
         }

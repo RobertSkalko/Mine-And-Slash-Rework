@@ -61,8 +61,7 @@ public class HolySpells implements ExileRegistryInit {
         SpellBuilder.of(WHIRLWIND, PlayStyle.STR, SpellConfiguration.Builder.multiCast(10, 0, 100, 10)
                                 .setSwingArm(), "Whirlwind",
                         Arrays.asList(SpellTag.technique, SpellTag.area, SpellTag.damage))
-                .manualDesc("Strike enemies around you for " +
-                        SpellCalcs.WHIRLWIND.getLocDmgTooltip(Elements.Fire) + ". Scales with attack speed.")
+                .manualDesc("Strike enemies around you for " + SpellCalcs.WHIRLWIND.getLocDmgTooltip(Elements.Physical))
 
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
                 .onCast(PartBuilder.giveSelfEffect(SlashPotions.KNOCKBACK_RESISTANCE.get(), 100D))

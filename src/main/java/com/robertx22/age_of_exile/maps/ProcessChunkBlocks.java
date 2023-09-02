@@ -139,7 +139,6 @@ public class ProcessChunkBlocks {
 
                 boolean any = false;
 
-
                 // todo make this work on either signs or these blocks
 
                 for (DataProcessor processor : DataProcessors.getAll()) {
@@ -161,11 +160,8 @@ public class ProcessChunkBlocks {
                     }
 
                 } else {
-
                     System.out.println("Data block with tag: " + text + " matched no processors! " + tilePos.toString());
                     logRoomForPos(level, tilePos);
-
-
                 }
             }
 

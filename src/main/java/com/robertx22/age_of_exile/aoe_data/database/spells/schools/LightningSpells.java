@@ -24,8 +24,8 @@ public class LightningSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        
-        SpellBuilder.of("chain_lightning", PlayStyle.INT, SpellConfiguration.Builder.instant(15, 20 * 5)
+
+        SpellBuilder.of("chain_lightning", PlayStyle.INT, SpellConfiguration.Builder.instant(25, 20)
                                 .setChargesAndRegen("chain_lightning", 3, 20 * 10)
                                 .applyCastSpeedToCooldown(), "Chain Lightning",
                         Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.chaining))
@@ -34,7 +34,7 @@ public class LightningSpells implements ExileRegistryInit {
                                 + " " + Elements.Lightning.getIconNameDmg())
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.ALLAY_THROW, 1D, 1D))
-                .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(SlashItems.LIGHTNING.get(), 1D, 2D, SlashEntities.SIMPLE_PROJECTILE.get(), 12D, true)
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(SlashItems.LIGHTNING.get(), 1D, 1D, SlashEntities.SIMPLE_PROJECTILE.get(), 12D, true)
                         .put(MapField.CHAIN_COUNT, 5D)
                         .put(MapField.GRAVITY, false)
                 ))

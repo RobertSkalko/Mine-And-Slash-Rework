@@ -12,7 +12,9 @@
   "item_value_multi": 1.7,
   "lootable_gear_tier": "MID",
   "max_sockets": 3,
+  "max_spell_links": 4,
   "min_affixes": 4,
+  "min_lvl": 25,
   "mob": {
     "affixes": 1,
     "dmg_multi": 3.25,

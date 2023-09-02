@@ -109,9 +109,7 @@ public class GearTooltipUtils {
 
         if (Screen.hasShiftDown()) {
             if (!gear.sal) {
-                tip.add(
-                        Words.Unsalvagable.locName()
-                                .withStyle(ChatFormatting.RED));
+                tip.add(Words.Unsalvagable.locName().withStyle(ChatFormatting.RED));
             }
         }
 

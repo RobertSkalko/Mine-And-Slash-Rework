@@ -129,7 +129,7 @@
               "life_ticks": 12.0,
               "proj_count": 1.0,
               "proj_en": "mmorpg:spell_projectile",
-              "proj_speed": 2.0
+              "proj_speed": 1.0
             }
           }
         ],
@@ -154,8 +154,8 @@
     "cooldown_ticks": 10,
     "imbues": 0,
     "mana_cost": {
-      "max": 11.25,
-      "min": 15.0
+      "max": 15.0,
+      "min": 20.0
     },
     "style": "int",
     "summonType": "NONE",

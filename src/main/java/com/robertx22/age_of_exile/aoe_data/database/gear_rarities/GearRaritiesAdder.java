@@ -38,6 +38,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.mob = MobRarity.of(0, 0.25F, 0);
             x.max_sockets = 1;
             x.socket_chance = 5;
+            x.max_spell_links = 2;
             x.backpack_slots = 2 * 9;
             x.pot = new GearRarity.Potential(100, 1);
             x.min_affixes = 2;
@@ -58,6 +59,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.mob = MobRarity.of(3, 2, 1);
             x.max_sockets = 2;
             x.socket_chance = 15;
+            x.max_spell_links = 3;
+            x.min_lvl = 10;
             x.backpack_slots = 3 * 9;
             x.lootable_gear_tier = GearRarity.LootableGearTier.MID;
             x.pot = new GearRarity.Potential(100, 1.5F);
@@ -79,6 +82,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.mob = MobRarity.of(10, 3, 1);
             x.max_sockets = 3;
             x.socket_chance = 20;
+            x.min_lvl = 25;
+            x.max_spell_links = 4;
             x.backpack_slots = 4 * 9;
             x.lootable_gear_tier = GearRarity.LootableGearTier.MID;
             x.pot = new GearRarity.Potential(100, 1.5F);
@@ -100,6 +105,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.mob = MobRarity.of(20, 5, 2);
             x.max_sockets = 3;
             x.socket_chance = 30;
+            x.max_spell_links = 5;
+            x.min_lvl = 50;
             x.backpack_slots = 5 * 9;
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
             x.pot = new GearRarity.Potential(100, 1.75F);
@@ -121,7 +128,9 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.favor_needed = 1000;
             x.mob = MobRarity.of(25, 10, 3);
             x.max_sockets = 3;
+            x.min_lvl = 75;
             x.backpack_slots = 6 * 9;
+            x.max_spell_links = 5;
             x.socket_chance = 50;
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
             x.pot = new GearRarity.Potential(100, 2F);

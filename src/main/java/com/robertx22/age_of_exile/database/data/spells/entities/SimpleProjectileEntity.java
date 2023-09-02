@@ -387,6 +387,10 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
                 if (chains > 0) {
                     chains--;
 
+                    if (entityHit == null) {
+                        chains = 0;
+                    }
+
                     var b = EntityFinder.start(getCaster(), LivingEntity.class, position())
                             .finder(EntityFinder.SelectionType.RADIUS)
                             .searchFor(AllyOrEnemy.enemies)

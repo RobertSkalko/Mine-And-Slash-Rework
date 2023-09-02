@@ -20,6 +20,7 @@ public class EntityLeechData {
         map.put(type, fi);
     }
 
+    // todo implement expiration after 5s
     public void onSecondUseLeeches(EntityData data) {
 
         float leechMaxPerSec = data.getUnit().getCalculatedStat(LeechCapStat.getInstance()).getValueOrBase(LeechCapStat.getInstance()) / 100F;

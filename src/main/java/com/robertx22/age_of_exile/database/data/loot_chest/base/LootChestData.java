@@ -70,9 +70,15 @@ public class LootChestData implements ICommonDataItem<GearRarity> {
 
         tip.clear();
 
+
         GearRarity rar = getRarity();
 
         tip.add(Component.literal(rar.textFormatting() + "").withStyle(rar.textFormatting()).append(ctx.stack.getHoverName()).withStyle(rar.textFormatting()));
+
+
+        tip.add(Component.empty());
+
+        tip.add(Component.literal("Contains: " + getLootChest().GUID())); // todo add loc
 
         tip.add(Component.empty());
 

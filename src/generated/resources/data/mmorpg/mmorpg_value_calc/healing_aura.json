@@ -4,6 +4,7 @@
     "min": 0.6
   },
   "base_scaling_type": "NORMAL",
+  "cap_to_wep_dmg": 1000.0,
   "id": "healing_aura",
   "stat_scalings": [
     {

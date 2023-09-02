@@ -57,7 +57,7 @@ public class LootChestItem extends AutoItem {
 
     @Override
     public String locNameForLangFile() {
-        return name + " Loot Chest";
+        return "Loot Chest";
     }
 
     @Override

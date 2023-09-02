@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.ailment.HitDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.DamageAbsorbedByMana;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.LeechCapStat;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.blood.BloodUser;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.blood.HealthRestorationToBlood;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
@@ -69,10 +70,10 @@ public class GameChangerPerks implements ExileRegistryInit {
 
         PerkBuilder.gameChanger("refined_taste", "Refined Taste",
                 new OptScaleExactStat(50, Stats.INCREASED_LEECH.get(), ModType.FLAT),
+                new OptScaleExactStat(2, LeechCapStat.getInstance(), ModType.FLAT),
                 new OptScaleExactStat(-75, HealthRegen.getInstance(), ModType.MORE),
                 new OptScaleExactStat(-75, ManaRegen.getInstance(), ModType.MORE)
         );
-
 
         PerkBuilder.gameChanger("steady_hand", "Steady Hand",
                 new OptScaleExactStat(-100, Stats.CRIT_DAMAGE.get(), ModType.MORE),

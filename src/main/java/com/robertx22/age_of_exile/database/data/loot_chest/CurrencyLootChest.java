@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.loot_chest;
 
+import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.currency.base.Currency;
 import com.robertx22.age_of_exile.database.data.league.LeagueMechanics;
 import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChest;
@@ -46,6 +47,8 @@ public class CurrencyLootChest extends LootChest {
 
     @Override
     public int Weight() {
-        return 1000;
+        return (int) (ServerContainer.get().CURRENCY_DROPRATE.get() * 100);
     }
+
+
 }

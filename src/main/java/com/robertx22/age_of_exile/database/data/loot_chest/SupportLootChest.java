@@ -4,17 +4,18 @@ import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChest;
 import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChestData;
 import com.robertx22.age_of_exile.loot.LootInfo;
-import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
+import com.robertx22.age_of_exile.loot.blueprints.SkillGemBlueprint;
 import com.robertx22.age_of_exile.loot.req.DropRequirement;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
+import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-public class GearLootChest extends LootChest {
+public class SupportLootChest extends LootChest {
 
     @Override
     public ItemStack generateOne(LootChestData data) {
-        GearBlueprint b = new GearBlueprint(LootInfo.ofLevel(data.lvl));
+        SkillGemBlueprint b = new SkillGemBlueprint(LootInfo.ofLevel(data.lvl), SkillGemData.SkillGemType.SUPPORT);
         b.rarity.set(data.getRarity());
         return b.createStack();
     }
@@ -36,12 +37,13 @@ public class GearLootChest extends LootChest {
 
     @Override
     public String GUID() {
-        return "gear";
+        return "support_gem";
     }
 
     @Override
     public int Weight() {
-        return (int) (ServerContainer.get().GEAR_DROPRATE.get() * 100);
+        return (int) (ServerContainer.get().SUPP_GEM_DROPRATE.get() * 100);
     }
+
 
 }

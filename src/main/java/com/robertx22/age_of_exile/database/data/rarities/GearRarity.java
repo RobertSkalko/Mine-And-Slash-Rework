@@ -53,9 +53,12 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     public int socket_chance = 25;
     public int item_tier = -1;
     public float item_tier_power;
+    public int min_lvl = 0;
     public float item_value_multi;
     public boolean announce_in_chat = false;
     public boolean is_unique_item = false;
+
+    public int max_spell_links = 1;
 
     transient ResourceLocation glintFull;
     transient ResourceLocation glintTexBorder;

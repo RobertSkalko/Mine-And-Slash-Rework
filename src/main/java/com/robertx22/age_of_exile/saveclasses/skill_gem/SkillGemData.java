@@ -6,7 +6,6 @@ import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.support_gem.SupportGem;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
-import com.robertx22.age_of_exile.mmorpg.UNICODE;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SkillGemsItems;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
@@ -114,6 +113,12 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
         int random = RandomUtils.weightedRandom(linkChances).links;
 
+        int max = getRarity().max_spell_links;
+
+        if (random > max) {
+            random = max;
+        }
+
         this.links = random;
     }
 
@@ -173,6 +178,12 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
     private MutableComponent stars() {
 
+        return Component.literal("Support Links: " + links + "/" + getRarity().max_spell_links).withStyle(ChatFormatting.DARK_PURPLE);
+
+    }
+
+        /*
+
         String txt = ChatFormatting.LIGHT_PURPLE + "Links: [";
 
         for (int i = 0; i < links; i++) {
@@ -183,7 +194,8 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
         txt += "]";
 
         return ExileText.ofText(txt).get();
-    }
+            }
+         */
 
     public List<Component> getTooltip(Player p) {
 
@@ -244,7 +256,7 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
 
             int spiritLeft = (int) Load.player(p).getSkillGemInventory().getRemainingSpirit(p);
-            
+
             list.add(ExileText.emptyLine().get());
 
             list.add(Component.literal("Remaining Spirit: " + spiritLeft).withStyle(ChatFormatting.AQUA));
