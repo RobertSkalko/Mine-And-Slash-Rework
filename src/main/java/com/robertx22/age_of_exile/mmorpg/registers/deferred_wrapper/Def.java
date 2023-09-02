@@ -10,6 +10,7 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -68,6 +69,12 @@ public class Def {
 
     public static <T extends RecipeSerializer<?>> RegObj<T> recipeSer(String id, Supplier<T> object) {
         RegistryObject<T> reg = SlashDeferred.RECIPE_SERIALIZERS.register(id, object);
+        RegObj<T> wrapper = new RegObj<T>(reg);
+        return wrapper;
+    }
+
+    public static <T extends RecipeType<?>> RegObj<T> recipeType(String id, Supplier<T> object) {
+        RegistryObject<T> reg = SlashDeferred.RECIPE_TYPES.register(id, object);
         RegObj<T> wrapper = new RegObj<T>(reg);
         return wrapper;
     }

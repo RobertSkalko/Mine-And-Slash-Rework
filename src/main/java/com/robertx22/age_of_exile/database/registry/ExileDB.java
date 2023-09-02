@@ -18,6 +18,7 @@ import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChest;
 import com.robertx22.age_of_exile.database.data.map_affix.MapAffix;
 import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
+import com.robertx22.age_of_exile.database.data.profession.Profession;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.database.data.runewords.RuneWord;
@@ -198,6 +199,10 @@ public class ExileDB {
 
     public static ExileRegistryContainer<SupportGem> SupportGems() {
         return Database.getRegistry(ExileRegistryTypes.SUPPORT_GEM);
+    }
+
+    public static ExileRegistryContainer<Profession> Professions() {
+        return Database.getRegistry(ExileRegistryTypes.PROFESSION);
     }
 
 

@@ -44,6 +44,7 @@ public class ServerContainer {
         REGEN_HUNGER_COST = b.defineInRange("regen_hunger_cost", 10D, 0, 1000);
         EXP_LOSS_ON_DEATH = b.defineInRange("death_exp_penalty", 0.1D, 0, 1);
         EXP_DEBT_ON_DEATH = b.defineInRange("death_exp_debt", 0.1D, 0, 1);
+        MAX_EXP_DEBT_MULTI = b.defineInRange("max_death_exp_debt_multi", 1F, 0, 100);
         EXP_GAIN_MULTI = b.defineInRange("exp_gain_multi", 1D, 0, 1000);
         PARTY_RADIUS = b.defineInRange("party_radius", 200D, 0, 1000);
         LEVEL_DISTANCE_PENALTY_PER_LVL = b.defineInRange("lvl_distance_penalty_per_level", 0.05D, 0, 1D);
@@ -132,6 +133,7 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue REGEN_HUNGER_COST;
     public ForgeConfigSpec.DoubleValue EXP_LOSS_ON_DEATH;
     public ForgeConfigSpec.DoubleValue EXP_DEBT_ON_DEATH;
+    public ForgeConfigSpec.DoubleValue MAX_EXP_DEBT_MULTI;
     public ForgeConfigSpec.DoubleValue EXP_GAIN_MULTI;
     public ForgeConfigSpec.DoubleValue PARTY_RADIUS;
     public ForgeConfigSpec.DoubleValue LEVEL_DISTANCE_PENALTY_PER_LVL;

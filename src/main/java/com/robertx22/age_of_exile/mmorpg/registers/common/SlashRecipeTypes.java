@@ -8,11 +8,15 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 
 public class SlashRecipeTypes {
+    // todo
+    // public static RegObj<RecipeType<?>> COOKING = Def.recipeType("crafting", () -> new CraftingRecipe("cooking"));
+    //public static RegObj<RecipeType<?>> ALCHEMY = Def.recipeType("alchemy", () -> new CraftingRecipe("alchemy"));
+    //public static RegObj<RecipeType<?>> ENCHANTING = Def.recipeType("enchanting", () -> new CraftingRecipe("enchanting"));
+
 
     public static void init() {
 
     }
-
 
     static <T extends Recipe<?>> RecipeType<T> register(final String string) {
         return Registry.register(BuiltInRegistries.RECIPE_TYPE, (ResourceLocation) SlashRef.id(string), new RecipeType<T>() {

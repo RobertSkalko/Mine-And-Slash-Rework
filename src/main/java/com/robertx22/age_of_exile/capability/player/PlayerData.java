@@ -60,6 +60,7 @@ public class PlayerData implements ICap {
     private static final String CONFIG = "config";
     private static final String JEWELS = "jewels";
     private static final String FAVOR = "favor";
+    private static final String PROFESSIONS = "profs";
 
     transient Player player;
 
@@ -72,6 +73,7 @@ public class PlayerData implements ICap {
     public SpellCastingData spellCastingData = new SpellCastingData();
     public PlayerConfigData config = new PlayerConfigData();
     public DeathFavorData favor = new DeathFavorData();
+    public PlayerProfessionsData professions = new PlayerProfessionsData();
 
     private MyInventory skillGemInv = new MyInventory(GemInventoryHelper.TOTAL_SLOTS);
     private MyInventory auraInv = new MyInventory(GemInventoryHelper.TOTAL_AURAS);
@@ -101,6 +103,7 @@ public class PlayerData implements ICap {
         LoadSave.Save(spellCastingData, nbt, CAST);
         LoadSave.Save(config, nbt, CONFIG);
         LoadSave.Save(favor, nbt, FAVOR);
+        LoadSave.Save(professions, nbt, PROFESSIONS);
 
         nbt.put(GEMS, skillGemInv.createTag());
         nbt.put(AURAS, auraInv.createTag());
@@ -121,6 +124,7 @@ public class PlayerData implements ICap {
         this.spellCastingData = loadOrBlank(SpellCastingData.class, new SpellCastingData(), nbt, CAST, new SpellCastingData());
         this.config = loadOrBlank(PlayerConfigData.class, new PlayerConfigData(), nbt, CONFIG, new PlayerConfigData());
         this.favor = loadOrBlank(DeathFavorData.class, new DeathFavorData(), nbt, FAVOR, new DeathFavorData());
+        this.professions = loadOrBlank(PlayerProfessionsData.class, new PlayerProfessionsData(), nbt, PROFESSIONS, new PlayerProfessionsData());
 
         skillGemInv.fromTag(nbt.getList(GEMS, 10)); // todo
         auraInv.fromTag(nbt.getList(AURAS, 10)); // todo

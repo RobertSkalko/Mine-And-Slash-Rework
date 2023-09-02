@@ -1,6 +1,8 @@
 package com.robertx22.age_of_exile.mmorpg.registers.common;
 
 import com.robertx22.age_of_exile.database.data.league.LeagueMechanics;
+import com.robertx22.age_of_exile.database.data.profession.ProfessionBlock;
+import com.robertx22.age_of_exile.database.data.profession.Professions;
 import com.robertx22.age_of_exile.maps.MapBlock;
 import com.robertx22.age_of_exile.mechanics.base.LeagueControlBlock;
 import com.robertx22.age_of_exile.mechanics.base.LeagueTeleportBlock;
@@ -35,6 +37,10 @@ public class SlashBlocks {
     public static RegObj<LeagueControlBlock> LEAGUE_CONTROL = Def.block("league", () -> new LeagueControlBlock());
     public static RegObj<LeagueTeleportBlock> HARVEST_TELEPORT = Def.block("harvest_teleport", () -> new LeagueTeleportBlock(LeagueMechanics.HARVEST_ID));
 
+
+    public static RegObj<ProfessionBlock> COOKING_STATION = Def.block("cooking_station", () -> new ProfessionBlock(Professions.COOKING, () -> SlashRecipeTypes.COOKING.get()));
+    public static RegObj<ProfessionBlock> ALCHEMY_STATION = Def.block("alchemy_station", () -> new ProfessionBlock(Professions.ALCHEMY, () -> SlashRecipeTypes.ALCHEMY.get()));
+    public static RegObj<ProfessionBlock> ENCHANTING_STATION = Def.block("enchanting_station", () -> new ProfessionBlock(Professions.ENCHANTING, () -> SlashRecipeTypes.ENCHANTING.get()));
 
     static RegObj<Block> plant(String id) {
         return Def.block(id, () -> new BeetrootBlock(BlockBehaviour.Properties.of()
