@@ -43,6 +43,7 @@ public class ServerContainer {
 
         REGEN_HUNGER_COST = b.defineInRange("regen_hunger_cost", 10D, 0, 1000);
         EXP_LOSS_ON_DEATH = b.defineInRange("death_exp_penalty", 0.1D, 0, 1);
+        EXP_DEBT_ON_DEATH = b.defineInRange("death_exp_debt", 0.1D, 0, 1);
         EXP_GAIN_MULTI = b.defineInRange("exp_gain_multi", 1D, 0, 1000);
         PARTY_RADIUS = b.defineInRange("party_radius", 200D, 0, 1000);
         LEVEL_DISTANCE_PENALTY_PER_LVL = b.defineInRange("lvl_distance_penalty_per_level", 0.05D, 0, 1D);
@@ -52,12 +53,10 @@ public class ServerContainer {
         PLAYER_VANILLA_DMG_MULTI = b.defineInRange("PLAYER_VANILLA_DMG_MULTI", 0D, 0, 1000);
         PVP_DMG_MULTI = b.defineInRange("pvp_dmg_multi", 1D, 0, 1000);
         MAX_TEAM_DISTANCE = b.defineInRange("max_team_distance", 75D, 0, 100000);
-        MAP_DEATH_COOLDOWN = b.defineInRange("map_death_cooldown", 20 * 60 * 3, 0, 100000);
 
         FAVOR_DEATH_LOSS = b.defineInRange("favor_death_loss", 50D, 0, 10000);
         FAVOR_CHEST_GAIN = b.defineInRange("favor_chest_gain", 1D, 0, 10000);
         FAVOR_GAIN_PER_SECOND = b.defineInRange("favor_per_second", 1D / 60D, 0, 10000);
-
 
         GEAR_DROPRATE = b.defineInRange("gear_drop_rate", 7D, 0, 1000);
         SOUl_DROPRATE = b.defineInRange("soul_drop_rate", 0.3D, 0, 1000);
@@ -132,6 +131,7 @@ public class ServerContainer {
 
     public ForgeConfigSpec.DoubleValue REGEN_HUNGER_COST;
     public ForgeConfigSpec.DoubleValue EXP_LOSS_ON_DEATH;
+    public ForgeConfigSpec.DoubleValue EXP_DEBT_ON_DEATH;
     public ForgeConfigSpec.DoubleValue EXP_GAIN_MULTI;
     public ForgeConfigSpec.DoubleValue PARTY_RADIUS;
     public ForgeConfigSpec.DoubleValue LEVEL_DISTANCE_PENALTY_PER_LVL;
@@ -141,7 +141,6 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue PVP_DMG_MULTI;
     public ForgeConfigSpec.DoubleValue PLAYER_VANILLA_DMG_MULTI;
     public ForgeConfigSpec.DoubleValue MAX_TEAM_DISTANCE;
-    public ForgeConfigSpec.IntValue MAP_DEATH_COOLDOWN;
 
     public ForgeConfigSpec.DoubleValue FAVOR_DEATH_LOSS;
     public ForgeConfigSpec.DoubleValue FAVOR_CHEST_GAIN;

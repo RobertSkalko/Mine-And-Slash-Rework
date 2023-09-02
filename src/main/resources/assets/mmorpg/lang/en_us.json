@@ -157,12 +157,6 @@
 	"item.mmorpg.chest.rare_gear": "Loot Chest",
 	"item.mmorpg.chest.uncommon_gear": "Loot Chest",
 	"item.mmorpg.common_soul_produce": "Common Gear Soul Stone",
-	"item.mmorpg.death_ticket.0": "§7Common Death Ticket",
-	"item.mmorpg.death_ticket.1": "§aUncommon Death Ticket",
-	"item.mmorpg.death_ticket.2": "§bRare Death Ticket",
-	"item.mmorpg.death_ticket.3": "§dEpic Death Ticket",
-	"item.mmorpg.death_ticket.4": "§6Legendary Death Ticket",
-	"item.mmorpg.death_ticket.5": "§5Mythic Death Ticket",
 	"item.mmorpg.harvest.blue_ingot": "Lucid Ingot",
 	"item.mmorpg.harvest.blue_key": "Lucid Key",
 	"item.mmorpg.harvest.blue_plant": "Lucid Extract",
@@ -482,20 +476,6 @@
 "_comment": " [CATEGORY]: RARITIES - NAMES",
 
 
-"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
-
-	"item.mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
-	"item.mmorpg.currency.entangled_affix_upgrade": "Entangled Orb of Imbalance",
-	"item.mmorpg.currency.entangled_quality": "Entangled Orb of Quality",
-	"item.mmorpg.currency.entangled_unique_reroll": "Entangled Orb of Imperfection",
-	"item.mmorpg.currency.orb_of_linking": "Orb of Linking",
-	"item.mmorpg.currency.orb_of_quality": "Orb of Quality",
-	"item.mmorpg.currency.socket_adder": "Orb of Digging",
-	"item.mmorpg.currency.unique_reroll": "Orb of Imperfection",
-
-"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
-
-
 "_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
 
 	"effect.mmorpg.beneficial.10": "Vigor",
@@ -527,6 +507,20 @@
 	"mmorpg.ailment.poison": "Poison",
 
 "_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
+
+
+"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
+
+	"item.mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
+	"item.mmorpg.currency.entangled_affix_upgrade": "Entangled Orb of Imbalance",
+	"item.mmorpg.currency.entangled_quality": "Entangled Orb of Quality",
+	"item.mmorpg.currency.entangled_unique_reroll": "Entangled Orb of Imperfection",
+	"item.mmorpg.currency.orb_of_linking": "Orb of Linking",
+	"item.mmorpg.currency.orb_of_quality": "Orb of Quality",
+	"item.mmorpg.currency.socket_adder": "Orb of Digging",
+	"item.mmorpg.currency.unique_reroll": "Orb of Imperfection",
+
+"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
 
 
 "_comment": " [CATEGORY]: TALENTS - NAMES",
@@ -588,6 +582,9 @@
 	"mmorpg.word.dungeonkey": "Dungeon Key",
 	"mmorpg.word.exp": "Exp",
 	"mmorpg.word.eye": "Eye",
+	"mmorpg.word.favor_per_chest": "§aGain %1$s on Looting a Chest",
+	"mmorpg.word.favor_per_death": "§cYou lose %1$s on Death",
+	"mmorpg.word.favor_regen_per_hour": "§dRegenerates %1$s per Hour",
 	"mmorpg.word.gear": "Gear",
 	"mmorpg.word.gears": "Gears",
 	"mmorpg.word.gem": "Gem",
@@ -986,6 +983,46 @@
 "_comment": " [CATEGORY]: STATS - NAMES",
 
 
+"_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
+
+	"mmorpg.gear_type.bow": "Bow",
+	"mmorpg.gear_type.cloth_boots": "Cloth Boots",
+	"mmorpg.gear_type.cloth_chest": "Cloth Chest",
+	"mmorpg.gear_type.cloth_helmet": "Cloth Helmet",
+	"mmorpg.gear_type.cloth_pants": "Cloth Pants",
+	"mmorpg.gear_type.crossbow": "Crossbow",
+	"mmorpg.gear_type.leather_boots": "Leather Boots",
+	"mmorpg.gear_type.leather_chest": "Leather Chest",
+	"mmorpg.gear_type.leather_helmet": "Leather Helmet",
+	"mmorpg.gear_type.leather_pants": "Leather Pants",
+	"mmorpg.gear_type.necklace": "Necklace",
+	"mmorpg.gear_type.plate_boots": "Plate Boots",
+	"mmorpg.gear_type.plate_chest": "Plate Chest",
+	"mmorpg.gear_type.plate_helmet": "Plate Helmet",
+	"mmorpg.gear_type.plate_pants": "Plate Pants",
+	"mmorpg.gear_type.ring": "Ring",
+	"mmorpg.gear_type.shield": "Tower Shield",
+	"mmorpg.gear_type.staff": "Staff",
+	"mmorpg.gear_type.sword": "Sword",
+	"mmorpg.gear_type.tome": "Tome",
+	"mmorpg.gear_type.totem": "Totem",
+	"mmorpg.gearslot.boots": "Boots",
+	"mmorpg.gearslot.bow": "Bow",
+	"mmorpg.gearslot.chest": "Chest",
+	"mmorpg.gearslot.crossbow": "Crossbow",
+	"mmorpg.gearslot.helmet": "Helmet",
+	"mmorpg.gearslot.necklace": "Necklace",
+	"mmorpg.gearslot.pants": "Pants",
+	"mmorpg.gearslot.ring": "Ring",
+	"mmorpg.gearslot.shield": "Shield",
+	"mmorpg.gearslot.staff": "Staff",
+	"mmorpg.gearslot.sword": "Sword",
+	"mmorpg.gearslot.tome": "Tome",
+	"mmorpg.gearslot.totem": "Totem",
+
+"_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
+
+
 "_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
 
 	"mmorpg.unique_gear.air_disaster.name": "Aria of Disaster",
@@ -1037,46 +1074,6 @@
 "_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
 
 
-"_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
-
-	"mmorpg.gear_type.bow": "Bow",
-	"mmorpg.gear_type.cloth_boots": "Cloth Boots",
-	"mmorpg.gear_type.cloth_chest": "Cloth Chest",
-	"mmorpg.gear_type.cloth_helmet": "Cloth Helmet",
-	"mmorpg.gear_type.cloth_pants": "Cloth Pants",
-	"mmorpg.gear_type.crossbow": "Crossbow",
-	"mmorpg.gear_type.leather_boots": "Leather Boots",
-	"mmorpg.gear_type.leather_chest": "Leather Chest",
-	"mmorpg.gear_type.leather_helmet": "Leather Helmet",
-	"mmorpg.gear_type.leather_pants": "Leather Pants",
-	"mmorpg.gear_type.necklace": "Necklace",
-	"mmorpg.gear_type.plate_boots": "Plate Boots",
-	"mmorpg.gear_type.plate_chest": "Plate Chest",
-	"mmorpg.gear_type.plate_helmet": "Plate Helmet",
-	"mmorpg.gear_type.plate_pants": "Plate Pants",
-	"mmorpg.gear_type.ring": "Ring",
-	"mmorpg.gear_type.shield": "Tower Shield",
-	"mmorpg.gear_type.staff": "Staff",
-	"mmorpg.gear_type.sword": "Sword",
-	"mmorpg.gear_type.tome": "Tome",
-	"mmorpg.gear_type.totem": "Totem",
-	"mmorpg.gearslot.boots": "Boots",
-	"mmorpg.gearslot.bow": "Bow",
-	"mmorpg.gearslot.chest": "Chest",
-	"mmorpg.gearslot.crossbow": "Crossbow",
-	"mmorpg.gearslot.helmet": "Helmet",
-	"mmorpg.gearslot.necklace": "Necklace",
-	"mmorpg.gearslot.pants": "Pants",
-	"mmorpg.gearslot.ring": "Ring",
-	"mmorpg.gearslot.shield": "Shield",
-	"mmorpg.gearslot.staff": "Staff",
-	"mmorpg.gearslot.sword": "Sword",
-	"mmorpg.gearslot.tome": "Tome",
-	"mmorpg.gearslot.totem": "Totem",
-
-"_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
-
-
 "_comment": " [CATEGORY]: GEAR ITEMS - NAMES",
 
 	"item.mmorpg.jewelry.necklace.diamond": "Necklace",
@@ -1095,16 +1092,12 @@
 "_comment": " [CATEGORY]: CHAT MESSAGES - NAMES",
 
 	"mmorpg.chat.can_not_go_over_maximum_level": "Can not go over maximum level",
-	"mmorpg.chat.cooldown_not_met": "Cooldown not met",
+	"mmorpg.chat.death_exp_loss_msg": "As a result of dying, you have lost %1$s Exp and received %2$s Exp debt.",
 	"mmorpg.chat.dev_tools_enabled_contact_the_author": "Devs tools enabled, if you see this please contact the author of Mine and Slash [robertx22], he forgot to disable them!",
-	"mmorpg.chat.no_targets_found": "No targets found",
+	"mmorpg.chat.favor_death_msg": "Your Favor has fallen by %1$s Points.",
+	"mmorpg.chat.favor_down": "As a result of death, your Favor has fallen to %1$s. Remember this disgrace.",
+	"mmorpg.chat.favor_up": "As a result of your achievements, your Favor has risen to %1$s!",
 	"mmorpg.chat.not_enough_experience": "Not enough experience",
-	"mmorpg.chat.not_enough_time": "Not enough time",
-	"mmorpg.chat.remaining_map_time_is": "Remaining Map Time is",
-	"mmorpg.chat.time_ran_out_due_to_permadeath": "Time ran out due to Permadeath",
-	"mmorpg.chat.weapon_durability_is_too_low": "Weapon durability is too low",
-	"mmorpg.chat.you_are_too_low_level": "You are too low level",
-	"mmorpg.chat.you_have_leveled_up": "You have leveled up",
 
 "_comment": " [CATEGORY]: CHAT MESSAGES - NAMES",
 
@@ -1146,7 +1139,7 @@
 	"spell.desc.entangling_seed": "Throw out a seed that explodes and petrifies enemies.",
 	"spell.desc.execute": "Slash enemies in front of you for [calc:execute] §6☀ Physical§7 Damage",
 	"spell.desc.explosive_arrow": "Shoot an arrow that does [calc:explosive_arrow] §6☀ Physical§7 Damage around it",
-	"spell.desc.fire_nova": "Explode with frost around you, dealing [calc:fire_nova] §b☀ Cold§7 Damage to nearby enemies.",
+	"spell.desc.fire_nova": "Explode with flame around you, dealing [calc:fire_nova] §c☀ Fire§7 Damage to nearby enemies.",
 	"spell.desc.fire_trap": "Throw out a trap that stays on the ground and activates when an enemy approaches to deal [calc:ranger_trap]§c☀ Fire§7 Damage in area around itself.",
 	"spell.desc.fireball": "Throw out a ball of fire, dealing [calc:fireball] §c☀ Fire§7 Damage",
 	"spell.desc.flame_strike": "Strike enemies in front for [calc:flame_strike] §c☀ Fire§7 Damage",

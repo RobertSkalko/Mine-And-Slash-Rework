@@ -197,3 +197,5 @@ v.5.0.5
 
 - implemented logic that caps stat scaling of non weapon damage sources of damage to spells, like mana. Now lightning spells scale with say 100% weapon damage, and can only add up to 100% of weapon damage as mana damage.
 This should ensure spells with any type of stat scalings can't become too op, but it also easily allows me to buff them if they are weak.
+
+- added XP debt system. Dying now adds a stacking xp gain penalty that reduces xp gain by 50% until it's exhausted, in the future i will probably add items that remove the xp debt in some other way, like crafting.

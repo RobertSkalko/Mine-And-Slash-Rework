@@ -36,7 +36,7 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     public float favor_loot_multi = 1;
 
     public float getFavorGainEverySecond() {
-        if (favor_loot_multi < 1) {
+        if (favor_loot_multi <= 1) {
             return ServerContainer.get().FAVOR_GAIN_PER_SECOND.get().floatValue();
         }
         return 0;

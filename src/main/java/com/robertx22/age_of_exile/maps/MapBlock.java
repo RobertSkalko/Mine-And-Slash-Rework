@@ -1,19 +1,13 @@
 package com.robertx22.age_of_exile.maps;
 
-import com.robertx22.age_of_exile.capability.entity.CooldownsData;
-import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
-import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
-import com.robertx22.age_of_exile.vanilla_mc.items.DeathTicketItem;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.library_of_exile.utils.geometry.Circle2d;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -42,10 +36,6 @@ public class MapBlock extends BaseEntityBlock {
             if (pLevel.isClientSide) {
 
                 var particle = ParticleTypes.WITCH;
-
-                if (Load.Unit(ClientOnly.getPlayer()).getCooldowns().isOnCooldown(CooldownsData.MAP_TP)) {
-                    particle = ParticleTypes.SQUID_INK;
-                }
 
                 Circle2d c = new Circle2d(pPos, 1.5F);
 
@@ -77,25 +67,6 @@ public class MapBlock extends BaseEntityBlock {
     public InteractionResult use(BlockState pState, Level level, BlockPos pPos, Player p, InteractionHand pHand, BlockHitResult pHit) {
 
         if (!level.isClientSide) {
-            if (Load.Unit(p).getCooldowns().isOnCooldown(CooldownsData.MAP_TP)) {
-                GearRarity need = DeathTicketItem.getRarityNeeded(p);
-
-                if (p.getMainHandItem().getItem() instanceof DeathTicketItem ticket) {
-
-                    if (ticket.getRarity().equals(need)) {
-                        SoundUtils.playSound(p, SoundEvents.EXPERIENCE_ORB_PICKUP);
-                        Load.Unit(p).getCooldowns().tickDownCooldown(CooldownsData.MAP_TP, ticket.getSeconds() * 20);
-                        p.getMainHandItem().shrink(1);
-                        return InteractionResult.SUCCESS;
-                    }
-                }
-
-                int sec = Load.Unit(p).getCooldowns().getCooldownTicks(CooldownsData.MAP_TP) / 20;
-                p.sendSystemMessage(Component.literal("Next teleport allowed in: " + sec + "s"));
-                p.sendSystemMessage(Component.literal("Needs: ").append(RarityItems.DEATH_TICKETS.get(need.GUID()).get().getDefaultInstance().getHoverName()));
-
-                return InteractionResult.SUCCESS;
-            }
 
             MapItemData data = StackSaving.MAP.loadFrom(p.getItemInHand(pHand));
 
@@ -115,8 +86,7 @@ public class MapBlock extends BaseEntityBlock {
                         p.getItemInHand(pHand).shrink(1);
                     }
 
-                    Load.player(p).map.clearDeathTicketRarity();
-
+                  
                     return InteractionResult.SUCCESS;
                 }
                 if (p.getItemInHand(pHand).is(SlashItems.MAP_SETTER.get())) {

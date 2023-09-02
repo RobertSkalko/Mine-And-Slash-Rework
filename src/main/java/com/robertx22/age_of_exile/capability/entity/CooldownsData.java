@@ -9,8 +9,7 @@ import java.util.stream.Collectors;
 public class CooldownsData {
 
     public static String IN_COMBAT = "in_combat";
-    public static String MAP_TP = "map_tp";
-
+   
     private HashMap<String, Data> map = new HashMap<>();
 
     public static class Data {

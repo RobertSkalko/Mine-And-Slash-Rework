@@ -9,10 +9,7 @@ import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.vanilla_mc.commands.RollCommand;
 import com.robertx22.age_of_exile.vanilla_mc.commands.RunTestCommand;
 import com.robertx22.age_of_exile.vanilla_mc.commands.TeamCommand;
-import com.robertx22.age_of_exile.vanilla_mc.commands.entity.GiveExp;
-import com.robertx22.age_of_exile.vanilla_mc.commands.entity.SetEntityRarity;
-import com.robertx22.age_of_exile.vanilla_mc.commands.entity.SetLevel;
-import com.robertx22.age_of_exile.vanilla_mc.commands.entity.SpawnBoss;
+import com.robertx22.age_of_exile.vanilla_mc.commands.entity.*;
 import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GenericGive;
 import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GiveExactUnique;
 import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GiveMap;
@@ -48,6 +45,7 @@ public class CommandRegister {
         SpawnBoss.register(dispatcher);
         SetLevel.register(dispatcher);
         GiveExp.register(dispatcher);
+        SetFavor.register(dispatcher);
 
 
         ResetSpellCooldowns.register(dispatcher);

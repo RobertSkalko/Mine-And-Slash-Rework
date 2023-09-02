@@ -1,7 +1,7 @@
 {
   "base": {
-    "max": 6.0,
-    "min": 1.5
+    "max": 4.5,
+    "min": 1.0
   },
   "base_scaling_type": "NORMAL",
   "cap_to_wep_dmg": 1.0,
@@ -9,8 +9,8 @@
   "stat_scalings": [
     {
       "multi": {
-        "max": 1.0,
-        "min": 0.75
+        "max": 0.75,
+        "min": 0.5
       },
       "stat": "weapon_damage"
     },

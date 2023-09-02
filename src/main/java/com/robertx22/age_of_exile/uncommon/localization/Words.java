@@ -2,10 +2,15 @@ package com.robertx22.age_of_exile.uncommon.localization;
 
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
+import net.minecraft.ChatFormatting;
 
 import java.util.Locale;
 
 public enum Words implements IAutoLocName {
+    FAVOR_REGEN_PER_HOUR(ChatFormatting.LIGHT_PURPLE + "Regenerates %1$s per Hour"),
+    FAVOR_PER_CHEST(ChatFormatting.GREEN + "Gain %1$s on Looting a Chest"),
+    FAVOR_PER_DEATH(ChatFormatting.RED + "You lose %1$s on Death"),
+
     AddSocket("Adds a socket"),
     Nothing("Nothing"),
 

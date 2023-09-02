@@ -6,6 +6,8 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
+import com.robertx22.age_of_exile.uncommon.localization.Words;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -21,10 +23,16 @@ public class DeathFavorData {
     public void set(Player p, float f) {
         GearRarity rar = getRarity();
 
+        boolean upped = f > favor;
+
         this.favor = MathHelper.clamp(f, 0, Integer.MAX_VALUE);
 
         if (rar != getRarity()) {
-            p.sendSystemMessage(Component.literal("Your favor is now ").append(getRarity().locName()));
+            if (upped) {
+                p.sendSystemMessage(Chats.FAVOR_UP.locName(getRarity().locName()));
+            } else {
+                p.sendSystemMessage(Chats.FAVOR_DOWN.locName(getRarity().locName()));
+            }
         }
     }
 
@@ -33,7 +41,10 @@ public class DeathFavorData {
     }
 
     public void onDeath(Player p) {
-        set(p, favor - ServerContainer.get().FAVOR_DEATH_LOSS.get().floatValue());
+        float loss = ServerContainer.get().FAVOR_DEATH_LOSS.get().floatValue();
+        set(p, favor - loss);
+
+        p.sendSystemMessage(Chats.FAVOR_DEATH_MSG.locName((int) loss).withStyle(ChatFormatting.DARK_PURPLE));
     }
 
     public void onLootChest(Player p) {
@@ -42,7 +53,7 @@ public class DeathFavorData {
 
     public GearRarity getRarity() {
         GearRarity rar = ExileDB.GearRarities().get(IRarity.COMMON_ID);
-        if (rar.hasHigherRarity() && favor >= rar.getHigherRarity().favor_needed) {
+        while (rar.hasHigherRarity() && favor >= rar.getHigherRarity().favor_needed) {
             rar = rar.getHigherRarity();
         }
         return rar;
@@ -61,9 +72,16 @@ public class DeathFavorData {
 
         tooltip.add(Component.empty());
 
-
         tooltip.add(Component.literal("Loot/Exp Multiplier: " + getLootExpMulti() + "x").withStyle(rar.textFormatting()));
 
+        tooltip.add(Component.empty());
+
+        if (this.getRarity().getFavorGainEverySecond() > 0) {
+            int perhour = (int) (getRarity().getFavorGainEverySecond() * 60F * 60f);
+            tooltip.add(Words.FAVOR_REGEN_PER_HOUR.locName(perhour));
+        }
+        tooltip.add(Words.FAVOR_PER_CHEST.locName(ServerContainer.get().FAVOR_CHEST_GAIN.get()));
+        tooltip.add(Words.FAVOR_PER_DEATH.locName(ServerContainer.get().FAVOR_DEATH_LOSS.get()));
 
         return tooltip;
     }

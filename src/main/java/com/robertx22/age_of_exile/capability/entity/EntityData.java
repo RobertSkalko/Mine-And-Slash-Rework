@@ -102,6 +102,7 @@ public class EntityData implements ICap, INeededForClient {
     private static final String RARITY = "rarity";
     private static final String LEVEL = "level";
     private static final String EXP = "exp";
+    private static final String EXP_DEBT = "ex_d";
     private static final String HP = "hp";
     private static final String UUID = "uuid";
     private static final String SET_MOB_STATS = "set_mob_stats";
@@ -134,6 +135,7 @@ public class EntityData implements ICap, INeededForClient {
     String rarity = IRarity.COMMON_ID;
     int level = 1;
     int exp = 0;
+    int expDebt = 0;
     int maxHealth = 0;
     MobData affixes = new MobData();
     public EntityStatusEffectsData statusEffects = new EntityStatusEffectsData();
@@ -212,6 +214,7 @@ public class EntityData implements ICap, INeededForClient {
         addClientNBT(nbt);
 
         nbt.putInt(EXP, exp);
+        nbt.putInt(EXP_DEBT, expDebt);
         nbt.putString(UUID, uuid);
         nbt.putBoolean(SET_MOB_STATS, setMobStats);
         nbt.putBoolean(NEWBIE_STATUS, this.isNewbie);
@@ -270,6 +273,7 @@ public class EntityData implements ICap, INeededForClient {
         loadFromClientNBT(nbt);
 
         this.exp = nbt.getInt(EXP);
+        this.expDebt = nbt.getInt(EXP_DEBT);
         this.uuid = nbt.getString(UUID);
         this.setMobStats = nbt.getBoolean(SET_MOB_STATS);
         if (nbt.contains(NEWBIE_STATUS)) {
@@ -340,29 +344,19 @@ public class EntityData implements ICap, INeededForClient {
 
     public void onDeath() {
 
-        if (entity instanceof Player) {
-            int expLoss = (int) (getExpRequiredForLevelUp() * ServerContainer.get().EXP_LOSS_ON_DEATH.get());
+        if (entity instanceof Player p) {
+            int loss = (int) (getExpRequiredForLevelUp() * ServerContainer.get().EXP_LOSS_ON_DEATH.get());
+            int debt = (int) (getExpRequiredForLevelUp() * ServerContainer.get().EXP_DEBT_ON_DEATH.get());
 
-            expLoss = MathHelper.clamp(expLoss, 0, exp);
+            loss = MathHelper.clamp(loss, 0, exp);
 
-            if (expLoss > 0) {
-                this.exp = Mth.clamp(exp - expLoss, 0, Integer.MAX_VALUE);
+            if (loss > 0) {
+                this.exp = MathHelper.clamp(exp - loss, 0, Integer.MAX_VALUE);
             }
 
-            if (WorldUtils.isMapWorldClass(this.entity.level())) {
-                int mapcd = ServerContainer.get().MAP_DEATH_COOLDOWN.get();
+            this.expDebt += debt;
 
-                int deaths = 0;
-
-                var map = Load.mapAt(entity.level(), entity.blockPosition());
-                if (map != null) {
-                    map.deaths++;
-                    deaths = map.deaths;
-                }
-                mapcd *= (1 + deaths);
-
-                this.cooldowns.setOnCooldown(CooldownsData.MAP_TP, mapcd);
-            }
+            p.sendSystemMessage(Chats.DEATH_EXP_LOSS_MSG.locName(loss, debt).withStyle(ChatFormatting.RED));
 
         }
     }
@@ -729,18 +723,21 @@ public class EntityData implements ICap, INeededForClient {
     }
 
     public int GiveExp(Player player, int i) {
-
         //MutableComponent txt = ExileText.ofText("+" + (int) i + " Experience").format(ChatFormatting.GREEN).get();
         // todo  OnScreenMessageUtils.sendMessage((ServerPlayer) player, txt, ClientboundSetTitlesPacket.Type.ACTIONBAR);
+
+        if (expDebt > 0) {
+            int reduced = MathHelper.clamp(i / 2, 0, expDebt);
+            i -= reduced;
+            this.expDebt -= reduced;
+        }
 
         setExp(exp + i);
 
         if (exp > this.getExpRequiredForLevelUp()) {
-
             if (this.CheckIfCanLevelUp() && this.CheckLevelCap()) {
                 this.LevelUp(player);
             }
-
             return i;
         }
         return i;
