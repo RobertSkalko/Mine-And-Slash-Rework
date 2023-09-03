@@ -7,6 +7,8 @@ import net.minecraft.ChatFormatting;
 import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
+    NOT_OWNER(ChatFormatting.RED + "You are not the owner of this Station."),
+
     FAVOR_UP(ChatFormatting.GREEN + "As a result of your achievements, your Favor has risen to %1$s!"),
     FAVOR_DOWN(ChatFormatting.RED + "As a result of death, your Favor has fallen to %1$s. Remember this disgrace."),
 

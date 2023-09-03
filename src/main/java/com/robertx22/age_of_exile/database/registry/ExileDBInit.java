@@ -80,7 +80,8 @@ public class ExileDBInit {
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.LEAGUE_MECHANIC, new HarvestLeague()));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.LOOT_CHEST, new GearLootChest()));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.DUNGEON, null));
-
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.RECIPE, null));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.PROFESSION, null));
 
     }
 }

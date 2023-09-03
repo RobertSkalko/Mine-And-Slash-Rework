@@ -10,10 +10,6 @@ import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
 import com.robertx22.age_of_exile.vanilla_mc.blocks.BlackHoleBlock;
 import com.robertx22.age_of_exile.vanilla_mc.blocks.TotemBlock;
-import net.minecraft.world.level.block.BeetrootBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class SlashBlocks {
 
@@ -38,16 +34,9 @@ public class SlashBlocks {
     public static RegObj<LeagueTeleportBlock> HARVEST_TELEPORT = Def.block("harvest_teleport", () -> new LeagueTeleportBlock(LeagueMechanics.HARVEST_ID));
 
 
-    public static RegObj<ProfessionBlock> COOKING_STATION = Def.block("cooking_station", () -> new ProfessionBlock(Professions.COOKING, () -> SlashRecipeTypes.COOKING.get()));
-    public static RegObj<ProfessionBlock> ALCHEMY_STATION = Def.block("alchemy_station", () -> new ProfessionBlock(Professions.ALCHEMY, () -> SlashRecipeTypes.ALCHEMY.get()));
-    public static RegObj<ProfessionBlock> ENCHANTING_STATION = Def.block("enchanting_station", () -> new ProfessionBlock(Professions.ENCHANTING, () -> SlashRecipeTypes.ENCHANTING.get()));
+    public static RegObj<ProfessionBlock> COOKING_STATION = Def.block("cooking_station", () -> new ProfessionBlock(Professions.COOKING));
+    public static RegObj<ProfessionBlock> ALCHEMY_STATION = Def.block("alchemy_station", () -> new ProfessionBlock(Professions.ALCHEMY));
+    public static RegObj<ProfessionBlock> ENCHANTING_STATION = Def.block("enchanting_station", () -> new ProfessionBlock(Professions.ENCHANTING));
 
-    static RegObj<Block> plant(String id) {
-        return Def.block(id, () -> new BeetrootBlock(BlockBehaviour.Properties.of()
-                .noCollission()
-                .randomTicks()
-                .instabreak()
-                .sound(SoundType.CROP)));
-    }
 
 }

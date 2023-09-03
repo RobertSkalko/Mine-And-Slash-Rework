@@ -1,0 +1,21 @@
+{
+  "type": "OTHER",
+  "id": "farming",
+  "tier_1": {
+    "minecraft:potatoes": 10,
+    "minecraft:wheat": 10
+  },
+  "tier_2": {
+    "minecraft:melon": 12
+  },
+  "tier_3": {
+    "minecraft:beetroots": 15
+  },
+  "tier_4": {
+    "minecraft:carrots": 17
+  },
+  "tier_5": {
+    "minecraft:cocoa": 20,
+    "minecraft:nether_wart": 20
+  }
+}

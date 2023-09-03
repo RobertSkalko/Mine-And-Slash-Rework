@@ -1,0 +1,18 @@
+{
+  "id": "diamond",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "minecraft:iron_ingot",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:coal",
+      "num": 1
+    }
+  ],
+  "profession": "cooking",
+  "result": "minecraft:diamond",
+  "result_num": 1
+}

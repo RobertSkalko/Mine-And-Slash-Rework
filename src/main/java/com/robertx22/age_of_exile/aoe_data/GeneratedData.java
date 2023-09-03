@@ -24,6 +24,8 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.old.AutoDatapackStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearReg;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
+import com.robertx22.age_of_exile.database.data.profession.ProfessionRecipes;
+import com.robertx22.age_of_exile.database.data.profession.Professions;
 import com.robertx22.age_of_exile.maps.dungeon_reg.Dungeons;
 
 public class GeneratedData {
@@ -40,7 +42,7 @@ public class GeneratedData {
         new DatapackStats().registerAll();
 
         new GearRaritiesAdder().registerAll();
-        
+
         SpellCalcs.init();
         new Spells().registerAll();
         new SpellSchoolsAdder().registerAll();
@@ -71,9 +73,11 @@ public class GeneratedData {
 
         Dungeons.init();
 
+        Professions.init();
+        ProfessionRecipes.init();
+
         GameBalanceConfig c = new GameBalanceConfig();
         c.addToSerializables();
-
 
     }
 }

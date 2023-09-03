@@ -10,7 +10,7 @@ public class Professions {
     public static String COOKING = "cooking";
     public static String ALCHEMY = "alchemy";
     public static String ENCHANTING = "enchanting";
-   
+
     public static void init() {
 
         // todo think about whether wheat should have tier/level needed to farm or not
@@ -25,6 +25,18 @@ public class Professions {
                 .three(Blocks.BEETROOTS)
                 .four(Blocks.CARROTS)
                 .five(Blocks.NETHER_WART, Blocks.COCOA)
+                .build();
+
+        Builder.of(COOKING)
+
+                .build();
+
+        Builder.of(ALCHEMY)
+
+                .build();
+
+        Builder.of(ENCHANTING)
+
                 .build();
 
     }
