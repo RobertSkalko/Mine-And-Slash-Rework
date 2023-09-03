@@ -7,6 +7,7 @@ import net.minecraft.ChatFormatting;
 import java.util.Locale;
 
 public enum Words implements IAutoLocName {
+
     Easy("Easy"),
     Medium("Medium"),
     Hard("Hard"),

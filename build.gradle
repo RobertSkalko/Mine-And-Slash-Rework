@@ -36,6 +36,15 @@ repositories {
         url = "https://maven.theillusivec4.top/"
     }
     maven { url '"https://maven.theillusivec4.top/' }
+
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.dev/"
+        content {
+            includeGroup "mezz.jei"
+        }
+    }
 }
 
 minecraft {
@@ -109,6 +118,15 @@ dependencies {
 
     implementation fg.deobf("blank:Library_of_Exile-1.20.1:1.3.3")
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
+
+    compileOnly fg.deobf("mezz.jei:jei-1.20.1-common-api:${project.jei_version}") //API for compile
+    compileOnly fg.deobf("mezz.jei:jei-1.20.1-forge-api:${project.jei_version}") //API for compile
+    runtimeOnly fg.deobf("mezz.jei:jei-1.20.1-forge:${project.jei_version}") //Full for runtime
+
+
+    //  compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
+    // at runtime, use the full JEI jar
+    // runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
 
 }
 

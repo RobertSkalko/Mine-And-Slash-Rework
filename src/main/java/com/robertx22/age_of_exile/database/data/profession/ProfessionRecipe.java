@@ -15,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IAutoGson<ProfessionRecipe> {
     public static ProfessionRecipe SERIALIZER = new ProfessionRecipe();
@@ -23,7 +24,7 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
     public String profession = "";
 
     private List<CraftingMaterial> mats = new ArrayList<>();
-    private String result = "";
+    public String result = "";
     private int result_num = 1;
     private int exp = 10;
 
@@ -34,6 +35,10 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
         RecipeDifficulty diff = RecipeDifficulty.get(skilLvl, req);
 
         return (int) (req * diff.xpMulti * this.exp);
+    }
+
+    public ItemStack toResultStackForJei() {
+        return new ItemStack(VanillaUTIL.REGISTRY.items().get(new ResourceLocation(result)), result_num);
     }
 
     public enum RecipeDifficulty {
@@ -90,6 +95,10 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
             return false;
         }
 
+        public ItemStack toStackForJei() {
+            return new ItemStack(VanillaUTIL.REGISTRY.items().get(new ResourceLocation(id)), num);
+        }
+
 
         public void spend(ItemStack stack) {
             stack.shrink(num);
@@ -136,6 +145,10 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
     public int getAverageTierOfMats(List<ItemStack> stacks) {
         return LevelUtils.levelToTier(getAverageLevelOfMats(stacks));
 
+    }
+
+    public List<ItemStack> getMaterials() {
+        return this.mats.stream().map(x -> x.toStackForJei()).collect(Collectors.toList());
     }
 
     public int getAverageLevelOfMats(List<ItemStack> stacks) {

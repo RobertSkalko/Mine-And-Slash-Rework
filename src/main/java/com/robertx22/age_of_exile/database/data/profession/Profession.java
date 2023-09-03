@@ -1,8 +1,11 @@
 package com.robertx22.age_of_exile.database.data.profession;
 
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
+import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
@@ -18,7 +21,7 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.HashMap;
 
-public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Profession> {
+public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Profession>, IAutoLocName {
     public static Profession SERIALIZER = new Profession();
 
     public String id = "";
@@ -30,6 +33,21 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
     public HashMap<String, Integer> tier_5 = new HashMap<>();
 
     public Type type = Type.OTHER;
+
+    @Override
+    public AutoLocGroup locNameGroup() {
+        return AutoLocGroup.Misc;
+    }
+
+    @Override
+    public String locNameLangFileGUID() {
+        return SlashRef.MODID + ".profession." + GUID();
+    }
+
+    @Override
+    public String locNameForLangFile() {
+        return StringUTIL.capitalise(id);
+    }
 
     public enum Type {
         BLOCK, ENTITY, OTHER
@@ -96,7 +114,7 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
 
     private class Data {
 
-        
+
         public int exp;
         public int tier;
 
