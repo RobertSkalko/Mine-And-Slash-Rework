@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.mmorpg.registers.common.items;
 
 import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChestItem;
+import com.robertx22.age_of_exile.database.data.profession.ProfessionBlock;
 import com.robertx22.age_of_exile.maps.MapItem;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
@@ -28,12 +29,16 @@ import net.minecraft.world.item.Item;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 public class SlashItems {
 
     public static void init() {
 
+        for (Map.Entry<String, RegObj<ProfessionBlock>> en : SlashBlocks.STATIONS.entrySet()) {
+            STATIONS.put(en.getKey(), Def.item(en.getKey() + "_station", () -> new BlockItem(en.getValue().get(), new Item.Properties())));
+        }
     }
 
     public static RegObj<CommonGearProducerItem> COMMON_SOUL_PRODUCE = Def.item(() -> new CommonGearProducerItem(), "common_soul_produce");
@@ -76,6 +81,10 @@ public class SlashItems {
     public static RegObj<Item> STR_JEWEL = Def.item(() -> new Item(new Item.Properties().stacksTo(1)), "jewel/str");
     public static RegObj<Item> INT_JEWEL = Def.item(() -> new Item(new Item.Properties().stacksTo(1)), "jewel/int");
     public static RegObj<Item> CRAFTED_UNIQUE_JEWEL = Def.item(() -> new CraftedUniqueJewelItem(), "jewel/unique_crafted");
+
+
+    public static HashMap<String, RegObj<Item>> STATIONS = new HashMap<>();
+
 
     public static class GearItems {
 

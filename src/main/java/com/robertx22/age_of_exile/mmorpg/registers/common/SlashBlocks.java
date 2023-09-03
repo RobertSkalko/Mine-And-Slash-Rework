@@ -11,13 +11,16 @@ import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
 import com.robertx22.age_of_exile.vanilla_mc.blocks.BlackHoleBlock;
 import com.robertx22.age_of_exile.vanilla_mc.blocks.TotemBlock;
 
+import java.util.HashMap;
+
 public class SlashBlocks {
 
     public static void init() {
 
+        for (String p : Professions.STATION_PROFESSIONS) {
+            STATIONS.put(p, Def.block(p + "_station", () -> new ProfessionBlock(p)));
+        }
     }
-
-    // public static RegObj<RuneWordStationBlock> RUNEWORD = Def.block("runeword_station", () -> new RuneWordStationBlock());
 
     public static RegObj<BlackHoleBlock> BLACK_HOLE = Def.block("black_hole", () -> new BlackHoleBlock());
     public static RegObj<TotemBlock> BLUE_TOTEM = Def.block("blue_totem", () -> new TotemBlock());
@@ -34,9 +37,7 @@ public class SlashBlocks {
     public static RegObj<LeagueTeleportBlock> HARVEST_TELEPORT = Def.block("harvest_teleport", () -> new LeagueTeleportBlock(LeagueMechanics.HARVEST_ID));
 
 
-    public static RegObj<ProfessionBlock> COOKING_STATION = Def.block("cooking_station", () -> new ProfessionBlock(Professions.COOKING));
-    public static RegObj<ProfessionBlock> ALCHEMY_STATION = Def.block("alchemy_station", () -> new ProfessionBlock(Professions.ALCHEMY));
-    public static RegObj<ProfessionBlock> ENCHANTING_STATION = Def.block("enchanting_station", () -> new ProfessionBlock(Professions.ENCHANTING));
+    public static HashMap<String, RegObj<ProfessionBlock>> STATIONS = new HashMap<>();
 
 
 }

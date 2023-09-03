@@ -8,6 +8,9 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CraftingStationMenu extends AbstractContainerMenu {
 
 
@@ -16,18 +19,25 @@ public class CraftingStationMenu extends AbstractContainerMenu {
     }
 
 
+    public List<Slot> matslots = new ArrayList<>();
+    public List<Slot> invslots = new ArrayList<>();
+
     public CraftingStationMenu(int pContainerId, Container pinv, Container mats, Container result) {
         super(SlashContainers.CRAFTING.get(), pContainerId);
 
 
         for (int k = 0; k < 3; ++k) {
             for (int i1 = 0; i1 < 9; ++i1) {
-                this.addSlot(new Slot(pinv, i1 + k * 9 + 9, 8 + i1 * 18, 84 + k * 18));
+                var slot = new Slot(pinv, i1 + k * 9 + 9, 8 + i1 * 18, 84 + k * 18);
+                invslots.add(slot);
+                this.addSlot(slot);
             }
         }
 
         for (int l = 0; l < 9; ++l) {
-            this.addSlot(new Slot(pinv, l, 8 + l * 18, 142));
+            var slot = new Slot(pinv, l, 8 + l * 18, 142);
+            invslots.add(slot);
+            this.addSlot(slot);
         }
 
 
@@ -35,7 +45,9 @@ public class CraftingStationMenu extends AbstractContainerMenu {
 
             for (int i = 0; i < 3; ++i) {
                 for (int j = 0; j < 3; ++j) {
-                    this.addSlot(new Slot(mats, j + i * 3, 30 + j * 18, 17 + i * 18));
+                    var slot = new Slot(mats, j + i * 3, 30 + j * 18, 17 + i * 18);
+                    this.matslots.add(slot);
+                    this.addSlot(slot);
                 }
             }
 

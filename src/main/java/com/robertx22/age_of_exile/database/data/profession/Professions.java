@@ -4,12 +4,22 @@ import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Professions {
 
     public static String FARMING = "farming";
     public static String COOKING = "cooking";
     public static String ALCHEMY = "alchemy";
     public static String ENCHANTING = "enchanting";
+
+    public static List<String> STATION_PROFESSIONS = Arrays.asList(
+
+            COOKING,
+            ALCHEMY,
+            ENCHANTING
+    );
 
     public static void init() {
 
