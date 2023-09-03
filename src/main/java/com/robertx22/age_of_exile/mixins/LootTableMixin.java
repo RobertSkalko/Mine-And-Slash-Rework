@@ -16,7 +16,7 @@ public class LootTableMixin {
 
     @Inject(method = "getRandomItems(Lnet/minecraft/world/level/storage/loot/LootContext;)Lit/unimi/dsi/fastutil/objects/ObjectArrayList;", at = @At(value = "RETURN"))
     public void hookLoot(LootContext context, CallbackInfoReturnable<List<ItemStack>> ci) {
-
+       
         try {
             LootTable lootTable = (LootTable) (Object) this;
 

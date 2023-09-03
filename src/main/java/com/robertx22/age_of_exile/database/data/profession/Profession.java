@@ -6,26 +6,30 @@ import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
+import com.robertx22.library_of_exile.events.base.ExileEvents;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.temp.SkillItemTier;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Profession>, IAutoLocName {
     public static Profession SERIALIZER = new Profession();
 
     public String id = "";
 
+    // blocks/entities that give exp
     public HashMap<String, Integer> tier_1 = new HashMap<>();
     public HashMap<String, Integer> tier_2 = new HashMap<>();
     public HashMap<String, Integer> tier_3 = new HashMap<>();
@@ -33,6 +37,24 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
     public HashMap<String, Integer> tier_5 = new HashMap<>();
 
     public Type type = Type.OTHER;
+
+    public List<ProfessionDrop> drops = new ArrayList<>();
+
+    public static class ProfessionDrop {
+
+        public String item_id = "";
+        public int num = 1;
+        public int weight = 1000;
+        public float min_lvl = 0;
+
+
+        public ProfessionDrop(String item_id, int num, int weight, float min_lvl) {
+            this.item_id = item_id;
+            this.num = num;
+            this.weight = weight;
+            this.min_lvl = min_lvl;
+        }
+    }
 
     @Override
     public AutoLocGroup locNameGroup() {
@@ -84,13 +106,19 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
         }
     }
 
-    public void onMine(Player p, Block block) {
+    public void onMine(Player p, ExileEvents.PlayerMineOreEvent event) {
         if (this.type == Type.BLOCK) {
-            Data data = getData(block);
+            Data data = getData(event.state.getBlock());
 
             if (data.exp > 0) {
                 data.giveExp(p);
+
+                // todo check if this works for farming, mining etc
+                for (ItemStack stack : data.generateLoot(p)) {
+                    event.itemsToAddToDrop.add(stack);
+                }
             }
+
         }
     }
 
@@ -127,11 +155,16 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
             Load.player(p).professions.addExp(GUID(), exp);
         }
 
-        public void giveLoot(Player p, BlockPos pos) {
+        public List<ItemStack> generateLoot(Player p) {
+            List<ItemStack> list = new ArrayList<>();
             if (RandomUtils.roll(getLootChance(p))) {
 
                 // todo random profession loot
             }
+
+
+            return list;
+
         }
 
         public int getLevelOfMastery() {

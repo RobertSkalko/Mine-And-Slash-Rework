@@ -42,7 +42,6 @@ public class CraftingTransfer implements IRecipeTransferInfo<CraftingStationMenu
     @Override
     public List<Slot> getRecipeSlots(CraftingStationMenu container, ProfessionRecipe recipe) {
         return container.matslots;
-
     }
 
     @Override

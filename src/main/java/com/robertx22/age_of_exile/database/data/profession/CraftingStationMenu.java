@@ -19,6 +19,7 @@ public class CraftingStationMenu extends AbstractContainerMenu {
     }
 
 
+    // really only use this for JEI integration
     public List<Slot> matslots = new ArrayList<>();
     public List<Slot> invslots = new ArrayList<>();
 

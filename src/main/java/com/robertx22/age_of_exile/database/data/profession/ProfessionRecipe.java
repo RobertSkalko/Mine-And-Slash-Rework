@@ -203,7 +203,7 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
             return b;
 
         }
-
+        
         public Builder materialItems(Item... items) {
             for (Item item : items) {
                 var id = VanillaUTIL.REGISTRY.items().getKey(item);

@@ -43,7 +43,7 @@ public class LootTableItem extends Item implements IAutoModel {
 
     public static ItemStack of(ResourceLocation loottable) {
 
-
+        
         ItemStack stack = new ItemStack(SlashItems.LOOT_TABLE_ITEM.get());
         stack.setTag(new CompoundTag());
         stack.getTag()
