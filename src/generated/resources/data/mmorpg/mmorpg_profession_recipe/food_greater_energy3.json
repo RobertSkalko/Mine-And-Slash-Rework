@@ -1,0 +1,31 @@
+{
+  "exp": 10,
+  "id": "food_greater_energy3",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/meat/3",
+      "num": 5
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:carrot",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:essence/energy",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:essence/hysteria",
+      "num": 1
+    }
+  ],
+  "power": "greater",
+  "profession": "cooking",
+  "result": "mmorpg:food/greater_energy",
+  "result_num": 2,
+  "tier": 3
+}

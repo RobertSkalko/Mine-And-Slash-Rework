@@ -3,8 +3,6 @@ package com.robertx22.age_of_exile.event_hooks.ontick;
 import com.robertx22.age_of_exile.capability.bases.CapSyncUtil;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.capability.player.data.Backpacks;
-import com.robertx22.age_of_exile.database.data.spells.components.Spell;
-import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -16,7 +14,6 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.age_of_exile.vanilla_mc.packets.SyncAreaLevelPacket;
-import com.robertx22.age_of_exile.vanilla_mc.packets.spells.TellClientEntityIsCastingSpellPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -143,28 +140,21 @@ public class OnServerTick {
                 return;
             }
 
-
             if (player.isBlocking()) {
-                if (Load.player(player)
-                        .spellCastingData
-                        .isCasting()) {
-                    Load.player(player)
-                            .spellCastingData
-                            .cancelCast(player);
+                if (Load.player(player).spellCastingData.isCasting()) {
+                    Load.player(player).spellCastingData.cancelCast(player);
                 }
             }
 
-            Load.player(player)
-                    .spellCastingData
-                    .onTimePass(player, 1);
+            Load.player(player).buff.onTick(player);
 
-            Load.Unit(player)
-                    .getResources()
-                    .onTickBlock(player);
+            Load.player(player).spellCastingData.onTimePass(player, 1);
 
-            Spell spell = Load.player(player)
-                    .spellCastingData
-                    .getSpellBeingCast();
+            Load.Unit(player).getResources().onTickBlock(player);
+
+            // todo is this needed since i stopped using client sided particle spawns in spells?
+            /*
+            Spell spell = Load.player(player).spellCastingData.getSpellBeingCast();
 
             if (spell != null) {
                 spell.getAttached()
@@ -176,6 +166,8 @@ public class OnServerTick {
                         });
 
             }
+                         */
+
         }));
 
 

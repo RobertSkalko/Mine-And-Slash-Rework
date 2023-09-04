@@ -112,9 +112,9 @@ public class StatMod implements ISerializable<StatMod> {
     }
 
     public StatMod percent() {
-        if (!this.GetStat().IsPercent()) {
-            this.type = ModType.PERCENT.name();
-        }
+        //if (!this.GetStat().IsPercent()) {
+        this.type = ModType.PERCENT.name();
+        // }
         return this;
     }
 

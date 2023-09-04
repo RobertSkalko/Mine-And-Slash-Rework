@@ -29,10 +29,8 @@ public class TeamCommand {
 
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
         commandDispatcher.register(
-
-                literal(CommandRefs.ID)
-                        .then(literal("teams").requires(e -> e.hasPermission(0))
-
+                literal(CommandRefs.ID).requires(x -> true)
+                        .then(literal("teams").requires(e -> true)
                                 .then(literal("create").executes(x -> {
                                     Load.player(x.getSource()
                                                     .getPlayerOrException()).team

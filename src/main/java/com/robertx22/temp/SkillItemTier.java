@@ -40,13 +40,14 @@ public enum SkillItemTier {
                 .orElse(SkillItemTier.TIER0);
     }
 
-    public static SkillItemTier of(LevelRange lvl) {
+    public static SkillItemTier fromLevel(int lvl) {
         return Arrays.stream(SkillItemTier.values())
-                .min(Comparator.comparingInt(x -> {
-                    int avg = (x.levelRange.getMaxLevel() + x.levelRange.getMaxLevel()) / 2;
-                    int avg2 = (lvl.getMaxLevel() + lvl.getMaxLevel()) / 2;
-                    int diff = Math.abs(avg - avg2);
-                    return diff;
+                .filter(x -> {
+                    int minlvl = x.levelRange.getMinLevel();
+                    return lvl >= minlvl;
+                })
+                .max(Comparator.comparingInt(x -> {
+                    return x.tier;
                 }))
                 .get();
     }

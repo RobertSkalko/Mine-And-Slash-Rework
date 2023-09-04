@@ -1,0 +1,21 @@
+{
+  "exp": 10,
+  "id": "food_lesser_life4",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/meat/4",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:apple",
+      "num": 1
+    }
+  ],
+  "power": "lesser",
+  "profession": "cooking",
+  "result": "mmorpg:food/lesser_life",
+  "result_num": 2,
+  "tier": 4
+}

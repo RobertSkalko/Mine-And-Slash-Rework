@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "mmorpg:item/material/mining_ore/4"
-  }
-}

@@ -1,0 +1,31 @@
+{
+  "exp": 10,
+  "id": "food_greater_magic1",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/meat/1",
+      "num": 5
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:potato",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:essence/magic",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:essence/hysteria",
+      "num": 1
+    }
+  ],
+  "power": "greater",
+  "profession": "cooking",
+  "result": "mmorpg:food/greater_magic",
+  "result_num": 2,
+  "tier": 1
+}

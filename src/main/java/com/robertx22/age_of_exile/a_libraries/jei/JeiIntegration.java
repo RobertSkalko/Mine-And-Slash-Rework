@@ -14,6 +14,7 @@ import mezz.jei.api.registration.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,7 +78,9 @@ public class JeiIntegration implements IModPlugin {
         init();
 
         for (Map.Entry<String, RecipeType<ProfessionRecipe>> en : map.entrySet()) {
-            registration.addRecipes(en.getValue(), ExileDB.Recipes().getFilterWrapped(x -> x.profession.equals(en.getKey())).list);
+            var list = ExileDB.Recipes().getFilterWrapped(x -> x.profession.equals(en.getKey())).list;
+            list.sort(Comparator.comparingInt(x -> x.tier));
+            registration.addRecipes(en.getValue(), list);
         }
 
     }

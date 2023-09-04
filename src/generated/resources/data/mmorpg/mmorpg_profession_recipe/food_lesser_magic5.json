@@ -1,0 +1,21 @@
+{
+  "exp": 10,
+  "id": "food_lesser_magic5",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/meat/5",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:potato",
+      "num": 1
+    }
+  ],
+  "power": "lesser",
+  "profession": "cooking",
+  "result": "mmorpg:food/lesser_magic",
+  "result_num": 2,
+  "tier": 5
+}

@@ -49,4 +49,9 @@ public class CraftingTransfer implements IRecipeTransferInfo<CraftingStationMenu
         return m.invslots;
 
     }
+
+    @Override
+    public boolean requireCompleteSets(CraftingStationMenu container, ProfessionRecipe recipe) {
+        return false; // put a whole stack if possible of each required item
+    }
 }

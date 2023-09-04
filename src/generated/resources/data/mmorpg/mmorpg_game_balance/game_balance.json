@@ -34,6 +34,5 @@
     "per_level_scaling": 2.0
   },
   "TALENT_POINTS_PER_LVL": 1.0,
-  "id": "game_balance",
-  "levels_per_tier": 20
+  "id": "game_balance"
 }

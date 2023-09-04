@@ -237,18 +237,22 @@ public class Unit {
             statContexts.addAll(addGearStats(gears));
 
 
-            if (entity instanceof Player) {
-                statContexts.addAll(Load.player((Player) entity).getSkillGemInventory().getAuraStats(entity));
-                statContexts.addAll(Load.player((Player) entity).getJewels().getStatAndContext(entity));
-                Load.player((Player) entity).statPoints.addStats(this);
+            if (entity instanceof Player p) {
+                var playerData = Load.player(p);
+
+                statContexts.addAll(playerData.buff.getStatAndContext(p));
+
+                statContexts.addAll(playerData.getSkillGemInventory().getAuraStats(entity));
+                statContexts.addAll(playerData.getJewels().getStatAndContext(entity));
+                playerData.statPoints.addStats(this);
 
                 statContexts.addAll(PlayerStatUtils.AddPlayerBaseStats(entity));
                 statContexts.addAll(PlayerStatUtils.addNewbieElementalResists(data));
-                statContexts.addAll(Load.player((Player) entity).talents.getStatAndContext(entity));
-                statContexts.addAll(Load.player((Player) entity).ascClass.getStatAndContext(entity));
+                statContexts.addAll(playerData.talents.getStatAndContext(entity));
+                statContexts.addAll(playerData.ascClass.getStatAndContext(entity));
 
                 if (skillGem > -1 && skillGem <= GemInventoryHelper.MAX_SKILL_GEMS) {
-                    for (SkillGemData d : Load.player((Player) entity).getSkillGemInventory().getHotbarGem(skillGem).getSupportDatas()) {
+                    for (SkillGemData d : playerData.getSkillGemInventory().getHotbarGem(skillGem).getSupportDatas()) {
                         if (d.getSupport() != null) {
                             statContexts.add(new MiscStatCtx(d.getSupport().GetAllStats(data, d)));
                         }

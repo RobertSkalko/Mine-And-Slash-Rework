@@ -1,0 +1,26 @@
+{
+  "exp": 10,
+  "id": "buff_potion_medium_int2",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/farming/2",
+      "num": 3
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:nether_wart",
+      "num": 3
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:essence/int",
+      "num": 1
+    }
+  ],
+  "power": "medium",
+  "profession": "alchemy",
+  "result": "mmorpg:buff_potion/medium_int",
+  "result_num": 6,
+  "tier": 2
+}

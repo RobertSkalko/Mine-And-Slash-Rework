@@ -1,8 +1,12 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
+magic
 str
+mana
 crit
 dex
 might
 arcane
+life
 int
+energy

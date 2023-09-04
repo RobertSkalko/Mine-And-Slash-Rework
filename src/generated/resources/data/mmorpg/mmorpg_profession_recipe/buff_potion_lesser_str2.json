@@ -1,0 +1,21 @@
+{
+  "exp": 10,
+  "id": "buff_potion_lesser_str2",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/farming/2",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:potato",
+      "num": 3
+    }
+  ],
+  "power": "lesser",
+  "profession": "alchemy",
+  "result": "mmorpg:buff_potion/lesser_str",
+  "result_num": 6,
+  "tier": 2
+}

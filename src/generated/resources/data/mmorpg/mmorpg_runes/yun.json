@@ -4,7 +4,7 @@
   "min_lvl_multi": 0.8,
   "on_armor_stats": [
     {
-      "type": "FLAT",
+      "type": "PERCENT",
       "max": 10.0,
       "min": 1.0,
       "stat": "aura_effect"

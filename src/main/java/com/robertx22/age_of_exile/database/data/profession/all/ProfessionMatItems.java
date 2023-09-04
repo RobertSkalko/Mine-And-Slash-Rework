@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.database.data.profession.all;
 
-import com.robertx22.age_of_exile.database.data.profession.EssenceItem;
-import com.robertx22.age_of_exile.database.data.profession.MaterialItem;
+import com.robertx22.age_of_exile.database.data.profession.items.EssenceItem;
+import com.robertx22.age_of_exile.database.data.profession.items.MaterialItem;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
 import com.robertx22.temp.SkillItemTier;

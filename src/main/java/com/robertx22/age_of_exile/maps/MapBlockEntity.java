@@ -20,7 +20,6 @@ public class MapBlockEntity extends BlockEntity {
     public void setMap(String id) {
         this.mapId = id;
         this.setChanged();
-
     }
 
     public String getMapId() {

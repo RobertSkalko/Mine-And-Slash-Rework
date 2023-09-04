@@ -31,8 +31,10 @@ public class CraftingExtension implements ICraftingCategoryExtension {
 
         int width = getWidth();
         int height = getHeight();
+
         craftingGridHelper.createAndSetOutputs(builder, List.of(resultItem));
         craftingGridHelper.createAndSetInputs(builder, inputs, width, height);
+        
     }
 
     @Nullable

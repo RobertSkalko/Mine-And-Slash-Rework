@@ -26,6 +26,7 @@ import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearReg;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.profession.all.ProfessionRecipes;
 import com.robertx22.age_of_exile.database.data.profession.all.Professions;
+import com.robertx22.age_of_exile.database.data.profession.buffs.StatBuffs;
 import com.robertx22.age_of_exile.maps.dungeon_reg.Dungeons;
 
 public class GeneratedData {
@@ -75,6 +76,7 @@ public class GeneratedData {
 
         Professions.init();
         ProfessionRecipes.init();
+        StatBuffs.init();
 
         GameBalanceConfig c = new GameBalanceConfig();
         c.addToSerializables();

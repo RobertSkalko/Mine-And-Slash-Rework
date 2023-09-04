@@ -4,7 +4,7 @@ import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.DimensionConfig;
 import com.robertx22.age_of_exile.database.data.MinMax;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
-import com.robertx22.age_of_exile.database.data.game_balance_config.lvltiers.LevelTier;
+import com.robertx22.age_of_exile.database.data.level_ranges.LevelRange;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -61,21 +61,16 @@ public class LevelUtils {
         return RomanNumber.toRoman(tier);
     }
 
-    public static LevelTier tierToLevel(int tier) {
-        return GameBalanceConfig.get().getLevelsOfTier(tier);
+    public static LevelRange tierToLevel(int tier) {
+        return SkillItemTier.of(tier).levelRange;
     }
 
     public static int levelToTier(int level) {
-        return GameBalanceConfig.get().getTier(level);
+        return SkillItemTier.fromLevel(level).tier;
     }
 
     public static SkillItemTier levelToSkillTier(int lvl) {
-        for (SkillItemTier tier : SkillItemTier.values()) {
-            if (tier.levelRange.isLevelInRange(lvl)) {
-                return tier;
-            }
-        }
-        return SkillItemTier.TIER4; // if it's neither, it's above max lvl, means we give max tier
+        return SkillItemTier.fromLevel(lvl);
     }
 
     public static int getDistanceFromMaxLevel(int lvl) {

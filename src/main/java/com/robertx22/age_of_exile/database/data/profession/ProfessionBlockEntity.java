@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.profession;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlockEntities;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.SimpleContainer;
@@ -13,6 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -62,13 +64,14 @@ public class ProfessionBlockEntity extends BlockEntity {
 
                 if (recipe != null && this.output.isEmpty()) {
 
-                    this.addExp(recipe.getExpReward(this.ownerLvl, getMats()) * recipe.getAverageLevelOfMats(getMats()));
+                    float successchance = recipe.getCraftChance(ownerLvl);
 
-                    ItemStack resultStack = recipe.craft(getMats());
-
+                    if (RandomUtils.roll(successchance)) {
+                        this.addExp(recipe.getExpReward(this.ownerLvl, getMats()) * recipe.getTier().levelRange.getMinLevel());
+                        ItemStack resultStack = recipe.craft(getMats());
+                        this.output.setItem(0, resultStack.copy());
+                    }
                     recipe.spendMaterials(getMats());
-
-                    this.output.setItem(0, resultStack.copy());
                 }
             }
 
@@ -121,20 +124,25 @@ public class ProfessionBlockEntity extends BlockEntity {
 
     public ProfessionRecipe getCurrentRecipe(Level level) {
 
-        String prof = getProfession().id;
-
         var mats = getMats();
 
-        var list = ExileDB.Recipes().getFilterWrapped(x -> {
-            return x.profession.equals(prof) && x.canCraft(mats);
-        }).list;
 
-        if (list.isEmpty()) {
-            return null;
+        if (mats.stream().anyMatch(x -> !x.isEmpty())) {
+
+            String prof = getProfession().id;
+
+            // this could be a bit laggy
+            var list = ExileDB.Recipes().getFilterWrapped(x -> {
+                return x.profession.equals(prof) && x.canCraft(mats);
+            }).list;
+
+            if (list.isEmpty()) {
+                return null;
+            }
+            // higher power versions usually just require more materials, so to make sure it always uses the highest power recipe, we do this
+            return list.stream().max(Comparator.comparingInt(x -> x.getPower().perc)).get();
         }
-        return list.get(0);
-
-
+        return null;
     }
 
 

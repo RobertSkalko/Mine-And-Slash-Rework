@@ -21,6 +21,7 @@
     "NeatRenderMixin",
     "AccessorRenderType",
     "ItemGlintMixin",
+    "JeiMixin",
     "ItemStackMixin",
     "WorldRendererMixin"
   ],

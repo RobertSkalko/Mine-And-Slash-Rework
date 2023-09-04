@@ -1,0 +1,26 @@
+{
+  "exp": 10,
+  "id": "food_medium_life2",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/meat/2",
+      "num": 3
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:apple",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:essence/life",
+      "num": 1
+    }
+  ],
+  "power": "medium",
+  "profession": "cooking",
+  "result": "mmorpg:food/medium_life",
+  "result_num": 2,
+  "tier": 2
+}

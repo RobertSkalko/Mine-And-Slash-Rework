@@ -7,6 +7,9 @@ import net.minecraft.ChatFormatting;
 import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
+    TOO_MANY_BUFFS("You can't have that many buffs."),
+    TOO_LOW_LEVEL("Your level is too low."),
+    CANT_SAME_BUFF("You already have a buff of that type."),
     NOT_OWNER(ChatFormatting.RED + "You are not the owner of this Station."),
 
     FAVOR_UP(ChatFormatting.GREEN + "As a result of your achievements, your Favor has risen to %1$s!"),

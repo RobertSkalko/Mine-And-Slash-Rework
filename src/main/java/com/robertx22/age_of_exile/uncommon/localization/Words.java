@@ -8,6 +8,7 @@ import java.util.Locale;
 
 public enum Words implements IAutoLocName {
     POTION("Potion"),
+    MEAL("Meal"),
     LESSER("Lesser"),
     MEDIUM("Medium"),
     GREATER("Greater"),

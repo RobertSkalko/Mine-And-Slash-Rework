@@ -11,13 +11,13 @@
       "stat": "gear_defense"
     },
     {
-      "type": "flat",
+      "type": "percent",
       "max": 25.0,
       "min": 5.0,
       "stat": "magic_find"
     },
     {
-      "type": "flat",
+      "type": "percent",
       "max": 100.0,
       "min": -100.0,
       "stat": "fire_resist"

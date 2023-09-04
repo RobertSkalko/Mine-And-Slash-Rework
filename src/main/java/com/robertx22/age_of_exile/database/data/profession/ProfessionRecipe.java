@@ -16,7 +16,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Consumer;
@@ -33,9 +32,25 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
     private int result_num = 1;
     private int exp = 10;
 
+    public String power = "";
+    public int tier = 0;
+
+    public CraftedItemPower getPower() {
+        return CraftedItemPower.ofId(power);
+    }
+
+    public SkillItemTier getTier() {
+        return SkillItemTier.of(tier);
+    }
+
+    public int getCraftChance(int skilLvl) {
+        int req = getTier().levelRange.getMinLevel();
+        RecipeDifficulty diff = RecipeDifficulty.get(skilLvl, req);
+        return diff.successChance;
+    }
 
     public int getExpReward(int skilLvl, List<ItemStack> mats) {
-        int req = this.getMinLevelOfMats(mats);
+        int req = getTier().levelRange.getMinLevel();
 
         RecipeDifficulty diff = RecipeDifficulty.get(skilLvl, req);
 
@@ -43,7 +58,13 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
     }
 
     public ItemStack toResultStackForJei() {
-        return new ItemStack(VanillaUTIL.REGISTRY.items().get(new ResourceLocation(result)), result_num);
+        ItemStack stack = new ItemStack(VanillaUTIL.REGISTRY.items().get(new ResourceLocation(result)), result_num);
+
+        if (true) { // todo not all items might need tiers
+            LeveledItem.setTier(stack, tier);
+        }
+
+        return stack;
     }
 
     public enum RecipeDifficulty {
@@ -138,7 +159,6 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
     }
 
     public ItemStack craft(List<ItemStack> stacks) {
-        int tier = getAverageTierOfMats(stacks);
         // todo need different way for crafting gear
 
         ItemStack stack = new ItemStack(VanillaUTIL.REGISTRY.items().get(new ResourceLocation(result)), result_num);
@@ -148,30 +168,11 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
         return stack;
     }
 
-    public int getAverageTierOfMats(List<ItemStack> stacks) {
-        return LevelUtils.levelToTier(getAverageLevelOfMats(stacks));
-
-    }
 
     public List<ItemStack> getMaterials() {
         return this.mats.stream().map(x -> x.toStackForJei()).collect(Collectors.toList());
     }
 
-    public int getAverageLevelOfMats(List<ItemStack> stacks) {
-        List<Integer> tiers = new ArrayList<>();
-        for (ItemStack mat : stacks) {
-            if (!mat.isEmpty()) {
-                tiers.add(LeveledItem.getLevel(mat));
-            }
-        }
-        return tiers.stream().mapToInt(x -> x.intValue()).sum() / tiers.size();
-
-    }
-
-    public int getMinLevelOfMats(List<ItemStack> stacks) {
-        return LeveledItem.getLevel(stacks.stream().min(Comparator.comparingInt(x -> LeveledItem.getLevel(x))).get());
-
-    }
 
     // public String craftActions todo if i need different craft actions like determine lvl etc
 
@@ -202,7 +203,7 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
         public CraftedItemPower power;
         public ProfessionRecipe recipe;
 
-        
+
         public Data(SkillItemTier tier, CraftedItemPower power, ProfessionRecipe recipe) {
             this.tier = tier;
             this.power = power;
@@ -220,10 +221,11 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
             b.lowest = lowestTier;
             b.actions.add((data) -> {
                 var id = VanillaUTIL.REGISTRY.items().getKey(hold.get(data.tier, data.power).getItem());
-                data.recipe.id = data.power.id + "_" + id.getPath().replaceAll("/", "_") + data.tier.tier; // todo test
+                data.recipe.id = id.getPath().replaceAll("/", "_") + data.tier.tier; // todo test
                 data.recipe.result = id.toString();
                 data.recipe.profession = proff;
                 data.recipe.result_num = num;
+                data.recipe.tier = data.tier.tier;
             });
             return b;
         }
@@ -276,6 +278,7 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
                     for (CraftedItemPower power : CraftedItemPower.values()) {
                         ProfessionRecipe r = new ProfessionRecipe();
                         Data data = new Data(tier, power, r);
+                        r.power = power.id;
                         for (Consumer<Data> action : this.actions) {
                             action.accept(data);
                         }

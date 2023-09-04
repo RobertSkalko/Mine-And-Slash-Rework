@@ -1,0 +1,26 @@
+{
+  "exp": 10,
+  "id": "food_medium_magic4",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/meat/4",
+      "num": 3
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:potato",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:essence/magic",
+      "num": 1
+    }
+  ],
+  "power": "medium",
+  "profession": "cooking",
+  "result": "mmorpg:food/medium_magic",
+  "result_num": 2,
+  "tier": 4
+}

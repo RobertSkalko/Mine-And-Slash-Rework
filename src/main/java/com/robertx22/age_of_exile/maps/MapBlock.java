@@ -26,7 +26,6 @@ public class MapBlock extends BaseEntityBlock {
     public MapBlock() {
         super(BlockBehaviour.Properties.of().strength(2).noOcclusion());
 
-
     }
 
     @Override
@@ -86,7 +85,7 @@ public class MapBlock extends BaseEntityBlock {
                         p.getItemInHand(pHand).shrink(1);
                     }
 
-                  
+
                     return InteractionResult.SUCCESS;
                 }
                 if (p.getItemInHand(pHand).is(SlashItems.MAP_SETTER.get())) {

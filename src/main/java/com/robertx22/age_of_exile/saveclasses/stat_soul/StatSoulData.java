@@ -87,7 +87,7 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
 
     public GearItemData createGearData(@Nullable ItemStack stack) {
 
-        int lvl = LevelUtils.tierToLevel(tier).min;
+        int lvl = LevelUtils.tierToLevel(tier).getMinLevel();
 
         GearBlueprint b = new GearBlueprint(LootInfo.ofLevel(lvl));
         b.level.set(lvl);

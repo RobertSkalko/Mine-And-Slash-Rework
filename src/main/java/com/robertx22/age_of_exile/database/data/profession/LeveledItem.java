@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.profession;
 
+import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.temp.SkillItemTier;
 import net.minecraft.world.item.ItemStack;
 
@@ -34,5 +35,8 @@ public class LeveledItem {
 
     public static void setTier(ItemStack stack, int lvl) {
         stack.getOrCreateTag().putInt("tier", lvl);
+        stack.getOrCreateTag().putInt("level", LevelUtils.tierToLevel(lvl).getMinLevel());
+
+
     }
 }

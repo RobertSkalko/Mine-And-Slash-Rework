@@ -1,8 +1,8 @@
 package com.robertx22.age_of_exile.database.data.level_ranges;
 
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.library_of_exile.utils.RandomUtils;
-import net.minecraft.util.Mth;
 
 public class LevelRange {
     public static LevelRange SERIALIZER = new LevelRange(0, 0);
@@ -31,7 +31,7 @@ public class LevelRange {
     }
 
     public int getMinLevel() {
-        return Mth.clamp((int) (start * GameBalanceConfig.get().MAX_LEVEL), 0, Integer.MAX_VALUE);
+        return MathHelper.clamp((int) (start * GameBalanceConfig.get().MAX_LEVEL), 1, GameBalanceConfig.get().MAX_LEVEL);
     }
 
     public int getMaxLevel() {
