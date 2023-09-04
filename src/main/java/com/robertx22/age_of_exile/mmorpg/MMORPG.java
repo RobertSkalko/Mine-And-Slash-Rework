@@ -14,6 +14,7 @@ import com.robertx22.age_of_exile.database.data.league.LeagueMechanics;
 import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChests;
 import com.robertx22.age_of_exile.database.data.map_affix.MapAffixes;
 import com.robertx22.age_of_exile.database.data.profession.ProfessionEvents;
+import com.robertx22.age_of_exile.database.data.profession.buffs.StatBuffs;
 import com.robertx22.age_of_exile.database.data.spells.components.conditions.EffectCondition;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.stats.types.special.SpecialStats;
@@ -153,8 +154,9 @@ public class MMORPG {
         });
 
         MapEvents.init();
+        StatBuffs.init();
         ProfessionEvents.init();
-        
+
         watch.print("Mine and slash mod initialization ");
 
     }

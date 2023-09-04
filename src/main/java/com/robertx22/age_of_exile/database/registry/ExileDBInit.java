@@ -82,6 +82,7 @@ public class ExileDBInit {
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.DUNGEON, null));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.RECIPE, null));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.PROFESSION, null));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.STAT_BUFF, null));
 
     }
 }

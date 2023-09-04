@@ -3,4 +3,5 @@ This registry is modify-able through datapacks.
 enchanting
 farming
 alchemy
+mining
 cooking

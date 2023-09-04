@@ -20,6 +20,7 @@ import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.profession.Profession;
 import com.robertx22.age_of_exile.database.data.profession.ProfessionRecipe;
+import com.robertx22.age_of_exile.database.data.profession.buffs.StatBuff;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.database.data.runewords.RuneWord;
@@ -204,6 +205,10 @@ public class ExileDB {
 
     public static ExileRegistryContainer<Profession> Professions() {
         return Database.getRegistry(ExileRegistryTypes.PROFESSION);
+    }
+
+    public static ExileRegistryContainer<StatBuff> StatBuffs() {
+        return Database.getRegistry(ExileRegistryTypes.STAT_BUFF);
     }
 
     public static ExileRegistryContainer<ProfessionRecipe> Recipes() {

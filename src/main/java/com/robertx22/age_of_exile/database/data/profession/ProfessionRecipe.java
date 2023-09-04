@@ -1,12 +1,15 @@
 package com.robertx22.age_of_exile.database.data.profession;
 
+import com.robertx22.age_of_exile.database.data.profession.all.ProfessionMatItems;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
+import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
+import com.robertx22.temp.SkillItemTier;
 import net.minecraft.ChatFormatting;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -14,7 +17,9 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IAutoGson<ProfessionRecipe> {
@@ -104,9 +109,10 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
             stack.shrink(num);
         }
 
-        public static CraftingMaterial item(String id) {
+        public static CraftingMaterial item(String id, int num) {
             CraftingMaterial c = new CraftingMaterial();
             c.id = id;
+            c.num = num;
             return c;
         }
 
@@ -190,35 +196,93 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
     }
 
 
-    public static class Builder {
-        ProfessionRecipe r = new ProfessionRecipe();
+    public static class Data {
 
-        public static Builder of(Item result, int num, String proff) {
-            var id = VanillaUTIL.REGISTRY.items().getKey(result);
-            Builder b = new Builder();
-            b.r.id = id.getPath().replaceAll("/", "_"); // todo test
-            b.r.result = id.toString();
-            b.r.profession = proff;
-            b.r.result_num = num;
-            return b;
+        public SkillItemTier tier;
+        public CraftedItemPower power;
+        public ProfessionRecipe recipe;
 
-        }
         
-        public Builder materialItems(Item... items) {
-            for (Item item : items) {
-                var id = VanillaUTIL.REGISTRY.items().getKey(item);
-                this.r.mats.add(CraftingMaterial.item(id.toString()));
-            }
+        public Data(SkillItemTier tier, CraftedItemPower power, ProfessionRecipe recipe) {
+            this.tier = tier;
+            this.power = power;
+            this.recipe = recipe;
+        }
+    }
+
+    public static class Builder {
+        SkillItemTier lowest;
+
+        List<Consumer<Data>> actions = new ArrayList<>();
+
+        public static Builder of(CraftedItemHolder hold, SkillItemTier lowestTier, String proff, int num) {
+            Builder b = new Builder();
+            b.lowest = lowestTier;
+            b.actions.add((data) -> {
+                var id = VanillaUTIL.REGISTRY.items().getKey(hold.get(data.tier, data.power).getItem());
+                data.recipe.id = data.power.id + "_" + id.getPath().replaceAll("/", "_") + data.tier.tier; // todo test
+                data.recipe.result = id.toString();
+                data.recipe.profession = proff;
+                data.recipe.result_num = num;
+            });
+            return b;
+        }
+
+        public Builder coreMaterials(String prof) {
+            materialItems(ProfessionMatItems.TIERED_MAIN_MATS.get(prof));
+            return this;
+        }
+
+        private Builder materialItems(HashMap<SkillItemTier, RegObj<Item>>... items) {
+            this.actions.add(data -> {
+                for (HashMap<SkillItemTier, RegObj<Item>> item : items) {
+                    var id = VanillaUTIL.REGISTRY.items().getKey(item.get(data.tier).get());
+                    data.recipe.mats.add(CraftingMaterial.item(id.toString(), data.power.matItems));
+                }
+            });
+            return this;
+        }
+
+        public Builder lesser(Item item, int num) {
+            return material(CraftedItemPower.LESSER, item, num);
+        }
+
+        public Builder medium(Item item, int num) {
+            return material(CraftedItemPower.MEDIUM, item, num);
+        }
+
+        public Builder greater(Item item, int num) {
+            return material(CraftedItemPower.GREATER, item, num);
+        }
+
+        private Builder material(CraftedItemPower forPower, Item item, int num) {
+            this.actions.add(data -> {
+                if (data.power.perc >= forPower.perc) {
+                    var id = VanillaUTIL.REGISTRY.items().getKey(item);
+                    data.recipe.mats.add(CraftingMaterial.item(id.toString(), num));
+                }
+            });
             return this;
         }
 
         public Builder exp(int xp) {
-            this.r.exp = xp;
+            this.actions.add(x -> x.recipe.exp = xp);
             return this;
         }
 
         public void build() {
-            this.r.addToSerializables();
+            for (SkillItemTier tier : SkillItemTier.values()) {
+                if (tier.tier >= lowest.tier) {
+                    for (CraftedItemPower power : CraftedItemPower.values()) {
+                        ProfessionRecipe r = new ProfessionRecipe();
+                        Data data = new Data(tier, power, r);
+                        for (Consumer<Data> action : this.actions) {
+                            action.accept(data);
+                        }
+                        r.addToSerializables();
+                    }
+                }
+            }
         }
 
     }

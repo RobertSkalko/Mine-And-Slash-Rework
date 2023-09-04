@@ -1,0 +1,11 @@
+{
+  "id": "arcane",
+  "mods": [
+    {
+      "type": "FLAT",
+      "max": 25.0,
+      "min": 5.0,
+      "stat": "int_dmg"
+    }
+  ]
+}

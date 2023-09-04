@@ -1,0 +1,11 @@
+{
+  "id": "might",
+  "mods": [
+    {
+      "type": "FLAT",
+      "max": 25.0,
+      "min": 5.0,
+      "stat": "all_physical_damage"
+    }
+  ]
+}

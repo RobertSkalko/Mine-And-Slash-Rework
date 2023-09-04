@@ -1,0 +1,11 @@
+{
+  "id": "crit",
+  "mods": [
+    {
+      "type": "FLAT",
+      "max": 30.0,
+      "min": 10.0,
+      "stat": "critical_damage"
+    }
+  ]
+}

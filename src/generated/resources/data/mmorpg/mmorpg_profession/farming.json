@@ -1,5 +1,6 @@
 {
   "type": "OTHER",
+  "drops": [],
   "id": "farming",
   "tier_1": {
     "minecraft:potatoes": 10,

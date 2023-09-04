@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.mmorpg.registers.common;
 
 import com.robertx22.age_of_exile.database.data.league.LeagueMechanics;
 import com.robertx22.age_of_exile.database.data.profession.ProfessionBlock;
-import com.robertx22.age_of_exile.database.data.profession.Professions;
+import com.robertx22.age_of_exile.database.data.profession.all.Professions;
 import com.robertx22.age_of_exile.maps.MapBlock;
 import com.robertx22.age_of_exile.mechanics.base.LeagueControlBlock;
 import com.robertx22.age_of_exile.mechanics.base.LeagueTeleportBlock;

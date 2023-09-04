@@ -1,5 +1,7 @@
 package com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper;
 
+import com.robertx22.age_of_exile.database.data.profession.all.ProfessionMatItems;
+import com.robertx22.age_of_exile.database.data.profession.all.ProfessionProductItems;
 import com.robertx22.age_of_exile.mechanics.harvest.HarvestBlocks;
 import com.robertx22.age_of_exile.mechanics.harvest.HarvestItems;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -78,6 +80,10 @@ public class SlashDeferred {
         RuneItems.init();
         GemItems.init();
         HarvestItems.init();
+
+
+        ProfessionMatItems.init();
+        ProfessionProductItems.init();
 
         SlashFeatures.init();
 

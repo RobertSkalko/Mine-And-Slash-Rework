@@ -1,0 +1,19 @@
+{
+  "exp": 10,
+  "id": "lesser_buff_potion_lesser_dex3",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/farming/3",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:carrot",
+      "num": 3
+    }
+  ],
+  "profession": "alchemy",
+  "result": "mmorpg:buff_potion/lesser_dex",
+  "result_num": 3
+}

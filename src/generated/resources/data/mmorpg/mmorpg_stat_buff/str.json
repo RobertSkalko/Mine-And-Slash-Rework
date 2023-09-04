@@ -1,0 +1,11 @@
+{
+  "id": "str",
+  "mods": [
+    {
+      "type": "PERCENT",
+      "max": 15.0,
+      "min": 5.0,
+      "stat": "strength"
+    }
+  ]
+}

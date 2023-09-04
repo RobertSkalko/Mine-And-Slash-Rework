@@ -1,0 +1,24 @@
+{
+  "exp": 10,
+  "id": "medium_buff_potion_medium_arcane1",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/farming/1",
+      "num": 3
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:beetroot",
+      "num": 5
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:essence/magic",
+      "num": 1
+    }
+  ],
+  "profession": "alchemy",
+  "result": "mmorpg:buff_potion/medium_arcane",
+  "result_num": 3
+}

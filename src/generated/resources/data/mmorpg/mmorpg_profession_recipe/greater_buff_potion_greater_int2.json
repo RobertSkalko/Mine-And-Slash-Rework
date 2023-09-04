@@ -1,0 +1,29 @@
+{
+  "exp": 10,
+  "id": "greater_buff_potion_greater_int2",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/farming/2",
+      "num": 5
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:nether_wart",
+      "num": 3
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:essence/int",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:essence/delirium",
+      "num": 1
+    }
+  ],
+  "profession": "alchemy",
+  "result": "mmorpg:buff_potion/greater_int",
+  "result_num": 3
+}

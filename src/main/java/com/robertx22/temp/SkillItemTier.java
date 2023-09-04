@@ -68,6 +68,9 @@ public enum SkillItemTier {
         if (this == TIER4) {
             return TIER3;
         }
+        if (this == TIER5) {
+            return TIER4;
+        }
         return null;
 
     }
@@ -87,7 +90,7 @@ public enum SkillItemTier {
             return TIER4;
         }
         if (this == TIER4) {
-            return null;
+            return TIER5;
         }
         return null;
 
