@@ -15,7 +15,7 @@ public class CraftingStationMenu extends AbstractContainerMenu {
 
 
     public CraftingStationMenu(int pContainerId, Container pContainer) {
-        this(pContainerId, pContainer, new SimpleContainer(9), new SimpleContainer(9));
+        this(pContainerId, pContainer, new SimpleContainer(18));
     }
 
 
@@ -23,7 +23,7 @@ public class CraftingStationMenu extends AbstractContainerMenu {
     public List<Slot> matslots = new ArrayList<>();
     public List<Slot> invslots = new ArrayList<>();
 
-    public CraftingStationMenu(int pContainerId, Container pinv, Container mats, Container results) {
+    public CraftingStationMenu(int pContainerId, Container pinv, Container inv) {
         super(SlashContainers.CRAFTING.get(), pContainerId);
 
 
@@ -44,17 +44,21 @@ public class CraftingStationMenu extends AbstractContainerMenu {
 
         try {
 
+            int index = 0;
+
             for (int i = 0; i < 3; ++i) {
                 for (int j = 0; j < 3; ++j) {
-                    var slot = new Slot(mats, j + i * 3, 30 + j * 18 - 17, 17 + i * 18);
+                    var slot = new Slot(inv, index, 30 + j * 18 - 17, 17 + i * 18);
                     this.matslots.add(slot);
                     this.addSlot(slot);
+                    index++;
                 }
             }
             for (int i = 0; i < 3; ++i) {
                 for (int j = 0; j < 3; ++j) {
-                    var slot = new Slot(results, j + i * 3, 111 + j * 18, 17 + i * 18);
+                    var slot = new Slot(inv, index, 111 + j * 18, 17 + i * 18);
                     this.addSlot(slot);
+                    index++;
                 }
             }
 

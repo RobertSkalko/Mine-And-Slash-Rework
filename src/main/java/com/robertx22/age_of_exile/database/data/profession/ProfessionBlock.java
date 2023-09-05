@@ -5,14 +5,13 @@ import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -23,7 +22,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
-public class ProfessionBlock extends BaseEntityBlock {
+public class ProfessionBlock extends BaseEntityBlock implements WorldlyContainerHolder {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public String profession;
@@ -87,7 +86,7 @@ public class ProfessionBlock extends BaseEntityBlock {
                 @org.jetbrains.annotations.Nullable
                 @Override
                 public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-                    return new CraftingStationMenu(pContainerId, pPlayerInventory, be.mats, be.output);
+                    return new CraftingStationMenu(pContainerId, pPlayerInventory, be.inventory);
                 }
             });
 
@@ -111,4 +110,11 @@ public class ProfessionBlock extends BaseEntityBlock {
         be.tick(level);
     }
 
+    @Override
+    public WorldlyContainer getContainer(BlockState pState, LevelAccessor pLevel, BlockPos pPos) {
+        if (pLevel.getBlockEntity(pPos) instanceof ProfessionBlockEntity be) {
+            return be.inventory;
+        }
+        return null;
+    }
 }

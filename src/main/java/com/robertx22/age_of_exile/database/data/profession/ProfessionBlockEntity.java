@@ -7,24 +7,24 @@ import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
-public class ProfessionBlockEntity extends BlockEntity implements WorldlyContainer {
+public class ProfessionBlockEntity extends BlockEntity {
 
-    SimpleContainer mats = new SimpleContainer(9);
-    SimpleContainer output = new SimpleContainer(9);
+    static MergedContainer.Inventory INPUTS = new MergedContainer.Inventory("INPUTS", 9, Direction.UP);
+    static MergedContainer.Inventory OUTPUTS = new MergedContainer.Inventory("OUTPUTS", 9, Direction.DOWN);
+
+    public MergedContainer inventory = new MergedContainer(Arrays.asList(INPUTS, OUTPUTS));
+
 
     public String owner = "";
 
@@ -66,7 +66,7 @@ public class ProfessionBlockEntity extends BlockEntity implements WorldlyContain
 
                 var recipe = getCurrentRecipe(level);
 
-                if (recipe != null && this.output.isEmpty()) {
+                if (recipe != null && this.inventory.getInventory(OUTPUTS).isEmpty()) {
 
                     craftingTicks += 20;
 
@@ -80,7 +80,7 @@ public class ProfessionBlockEntity extends BlockEntity implements WorldlyContain
 
                             int i = 0;
                             for (ItemStack stack : recipe.craft(getMats())) {
-                                output.setItem(i, stack.copy());
+                                inventory.setStack(stack.copy(), OUTPUTS, i);
                             }
                         }
                         recipe.spendMaterials(getMats());
@@ -127,11 +127,7 @@ public class ProfessionBlockEntity extends BlockEntity implements WorldlyContain
     }
 
     public List<ItemStack> getMats() {
-        List<ItemStack> list = new ArrayList<>();
-        for (int i = 0; i < mats.getContainerSize(); i++) {
-            list.add(mats.getItem(i));
-        }
-        return list;
+        return inventory.getAllStacks(INPUTS);
 
     }
 
@@ -163,8 +159,7 @@ public class ProfessionBlockEntity extends BlockEntity implements WorldlyContain
     public void load(CompoundTag pTag) {
         super.load(pTag);
 
-        this.mats.fromTag(pTag.getList("mats", 10));
-        this.output.fromTag(pTag.getList("result", 10));
+        this.inventory.fromTag(pTag.getList("inv", 10));
 
         this.owner = pTag.getString("owner");
         this.ownerLvl = pTag.getInt("owner_lvl");
@@ -176,8 +171,7 @@ public class ProfessionBlockEntity extends BlockEntity implements WorldlyContain
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
 
-        pTag.put("mats", this.mats.createTag());
-        pTag.put("result", this.output.createTag());
+        pTag.put("inv", this.inventory.createTag());
 
         pTag.putString("owner", owner);
 
@@ -186,92 +180,5 @@ public class ProfessionBlockEntity extends BlockEntity implements WorldlyContain
 
     }
 
-
-    @Override
-    public int[] getSlotsForFace(Direction pSide) {
-        int[] ar = new int[0];
-
-        if (pSide == Direction.UP) {
-            ar = new int[output.getContainerSize()];
-
-            for (int i = 0; i < output.getContainerSize(); i++) {
-                ar[i] = i;
-            }
-        }
-        if (pSide == Direction.DOWN) {
-            ar = new int[output.getContainerSize()];
-            int size = output.getContainerSize();
-
-            for (int i = size; i < size + size; i++) {
-                ar[i] = i;
-            }
-        }
-        return ar;
-    }
-
-
-    // hopper functionality
-    public SimpleContainer getMergedContainer() {
-        SimpleContainer me = new SimpleContainer(18);
-
-        int i = 0;
-
-        for (int x = 0; x < mats.getContainerSize(); x++) {
-            me.setItem(i, mats.getItem(i));
-        }
-        for (int x = 0; x < output.getContainerSize(); x++) {
-            me.setItem(i, output.getItem(i));
-        }
-        return me;
-    }
-
-    @Override
-    public boolean canPlaceItemThroughFace(int pIndex, ItemStack pItemStack, @Nullable Direction pDirection) {
-        return pDirection == Direction.UP && pIndex < 9 && getMergedContainer().getItem(pIndex).isEmpty();
-    }
-
-    @Override
-    public boolean canTakeItemThroughFace(int pIndex, ItemStack pStack, Direction pDirection) {
-        return !pStack.isEmpty() && pDirection == pDirection.DOWN;
-    }
-
-    @Override
-    public int getContainerSize() {
-        return getMergedContainer().getContainerSize();
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return getMergedContainer().isEmpty();
-    }
-
-    @Override
-    public ItemStack getItem(int pSlot) {
-        return getMergedContainer().getItem(pSlot);
-    }
-
-    @Override
-    public ItemStack removeItem(int pSlot, int pAmount) {
-        return getMergedContainer().removeItem(pAmount, pAmount);
-    }
-
-    @Override
-    public ItemStack removeItemNoUpdate(int pSlot) {
-        return getMergedContainer().removeItemNoUpdate(pSlot);
-    }
-
-    @Override
-    public void setItem(int pSlot, ItemStack pStack) {
-        getMergedContainer().setItem(pSlot, pStack);
-    }
-
-    @Override
-    public boolean stillValid(Player pPlayer) {
-        return true;
-    }
-
-    @Override
-    public void clearContent() {
-        getMergedContainer().clearContent();
-    }
 }
+
