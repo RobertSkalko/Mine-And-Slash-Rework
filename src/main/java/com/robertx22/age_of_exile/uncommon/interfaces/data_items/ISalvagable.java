@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface ISalvagable {
 
-
     List<ItemStack> getSalvageResult(ItemStack stack);
 
     public ToggleAutoSalvageRarity.SalvageType getSalvageType();

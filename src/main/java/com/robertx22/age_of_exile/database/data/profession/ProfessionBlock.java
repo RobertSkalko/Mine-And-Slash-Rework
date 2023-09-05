@@ -74,7 +74,7 @@ public class ProfessionBlock extends BaseEntityBlock implements WorldlyContainer
                     return InteractionResult.FAIL;
                 }
             }
-
+        
             be.onOpen(p);
 
             p.openMenu(new MenuProvider() {

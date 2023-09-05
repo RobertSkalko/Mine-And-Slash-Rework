@@ -116,6 +116,11 @@ public class LootChestData implements ICommonDataItem<GearRarity> {
     }
 
     @Override
+    public int getLevel() {
+        return lvl;
+    }
+
+    @Override
     public ToggleAutoSalvageRarity.SalvageType getSalvageType() {
         return ToggleAutoSalvageRarity.SalvageType.GEAR;
     }

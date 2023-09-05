@@ -44,11 +44,6 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
         return SkillItemTier.of(tier);
     }
 
-    public int getCraftChance(int skilLvl) {
-        int req = getTier().levelRange.getMinLevel();
-        RecipeDifficulty diff = RecipeDifficulty.get(skilLvl, req);
-        return diff.successChance;
-    }
 
     public int getExpReward(int skilLvl, List<ItemStack> mats) {
         int req = getTier().levelRange.getMinLevel();
@@ -69,21 +64,21 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
     }
 
     public enum RecipeDifficulty {
-        EASY(ChatFormatting.WHITE, Words.Easy, 0, 1),
-        MEDIUM(ChatFormatting.GREEN, Words.Medium, 0.25F, 90),
-        HARD(ChatFormatting.YELLOW, Words.Hard, 0.75F, 50),
-        VERY_HARD(ChatFormatting.RED, Words.VERY_HARD, 1, 25);
+        EASY(ChatFormatting.WHITE, Words.Easy, 0, 25),
+        MEDIUM(ChatFormatting.GREEN, Words.Medium, 0.25F, 10),
+        HARD(ChatFormatting.YELLOW, Words.Hard, 0.75F, 5),
+        VERY_HARD(ChatFormatting.RED, Words.VERY_HARD, 1, 0);
 
         public ChatFormatting color;
         public Words word;
         public float xpMulti;
-        public int successChance;
+        public int doubleDropChance;
 
-        RecipeDifficulty(ChatFormatting color, Words word, float xpMulti, int successChance) {
+        RecipeDifficulty(ChatFormatting color, Words word, float xpMulti, int doubleDropChance) {
             this.color = color;
             this.word = word;
             this.xpMulti = xpMulti;
-            this.successChance = successChance;
+            this.doubleDropChance = doubleDropChance;
         }
 
         public static RecipeDifficulty get(int skilllvl, int recipelvl) {

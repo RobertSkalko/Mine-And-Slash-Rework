@@ -1,18 +1,18 @@
 package com.robertx22.age_of_exile.uncommon.interfaces.data_items;
 
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.Rarity;
+import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 
 import java.util.Arrays;
 import java.util.List;
 
-public interface IRarity<R extends Rarity> {
+public interface IRarity {
 
 
     public static int TOTAL_GEAR_RARITIES = 6;
 
     public String getRarityId();
 
-    public R getRarity();
+    public GearRarity getRarity();
 
     public default boolean isUnique() {
         return this.getRarityId()

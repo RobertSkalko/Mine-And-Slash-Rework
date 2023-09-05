@@ -1,22 +1,122 @@
 {
-  "type": "OTHER",
-  "drops": [],
-  "id": "farming",
-  "tier_1": {
-    "minecraft:potatoes": 10,
-    "minecraft:wheat": 10
+  "chance_drops": [
+    {
+      "chance": 5.0,
+      "drops": [
+        {
+          "item_id": "mmorpg:material/farming/2",
+          "min_lvl": 0.4,
+          "num": 1,
+          "weight": 1000
+        }
+      ]
+    },
+    {
+      "chance": 5.0,
+      "drops": [
+        {
+          "item_id": "mmorpg:material/farming/5",
+          "min_lvl": 1.0,
+          "num": 1,
+          "weight": 1000
+        }
+      ]
+    },
+    {
+      "chance": 5.0,
+      "drops": [
+        {
+          "item_id": "mmorpg:material/farming/0",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        }
+      ]
+    },
+    {
+      "chance": 5.0,
+      "drops": [
+        {
+          "item_id": "mmorpg:material/farming/1",
+          "min_lvl": 0.2,
+          "num": 1,
+          "weight": 1000
+        }
+      ]
+    },
+    {
+      "chance": 5.0,
+      "drops": [
+        {
+          "item_id": "mmorpg:material/farming/3",
+          "min_lvl": 0.6,
+          "num": 1,
+          "weight": 1000
+        }
+      ]
+    },
+    {
+      "chance": 5.0,
+      "drops": [
+        {
+          "item_id": "mmorpg:material/farming/4",
+          "min_lvl": 0.8,
+          "num": 1,
+          "weight": 1000
+        }
+      ]
+    }
+  ],
+  "exp_sources": {
+    "map": {
+      "0": [
+        {
+          "type": "FARM_ITEM",
+          "exp": 30,
+          "id": "minecraft:wheat"
+        },
+        {
+          "type": "FARM_ITEM",
+          "exp": 30,
+          "id": "minecraft:potato"
+        }
+      ],
+      "1": [
+        {
+          "type": "FARM_ITEM",
+          "exp": 30,
+          "id": "minecraft:melon"
+        }
+      ],
+      "2": [
+        {
+          "type": "FARM_ITEM",
+          "exp": 30,
+          "id": "minecraft:beetroot"
+        }
+      ],
+      "3": [
+        {
+          "type": "FARM_ITEM",
+          "exp": 30,
+          "id": "minecraft:carrot"
+        }
+      ],
+      "4": [
+        {
+          "type": "FARM_ITEM",
+          "exp": 30,
+          "id": "minecraft:nether_wart"
+        }
+      ],
+      "5": [
+        {
+          "type": "FARM_ITEM",
+          "exp": 30,
+          "id": "minecraft:cocoa_beans"
+        }
+      ]
+    }
   },
-  "tier_2": {
-    "minecraft:melon": 12
-  },
-  "tier_3": {
-    "minecraft:beetroots": 15
-  },
-  "tier_4": {
-    "minecraft:carrots": 17
-  },
-  "tier_5": {
-    "minecraft:cocoa": 20,
-    "minecraft:nether_wart": 20
-  }
+  "id": "farming"
 }

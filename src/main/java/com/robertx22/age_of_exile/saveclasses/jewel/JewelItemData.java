@@ -105,6 +105,11 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
     }
 
     @Override
+    public int getLevel() {
+        return lvl;
+    }
+
+    @Override
     public ItemstackDataSaver<JewelItemData> getStackSaver() {
         return StackSaving.JEWEL;
     }

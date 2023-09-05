@@ -1,12 +1,16 @@
 package com.robertx22.age_of_exile.database.data.profession;
 
+import com.robertx22.age_of_exile.database.data.profession.all.Professions;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlockEntities;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import com.robertx22.library_of_exile.utils.RandomUtils;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable;
+import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -64,37 +68,89 @@ public class ProfessionBlockEntity extends BlockEntity {
 
             if (ticks % 20 == 0) {
 
-                var recipe = getCurrentRecipe(level);
+                updateOwner(level);
 
-                if (recipe != null && this.inventory.getInventory(OUTPUTS).isEmpty()) {
-
+                if (tryRecipe(true) || trySalvage(true)) {
                     craftingTicks += 20;
 
                     if (craftingTicks > 60) {
                         craftingTicks = 0;
+                        tryRecipe(false);
+                        trySalvage(false);
 
-                        float successchance = recipe.getCraftChance(ownerLvl);
-
-                        if (RandomUtils.roll(successchance)) {
-                            this.addExp(recipe.getExpReward(this.ownerLvl, getMats()) * recipe.getTier().levelRange.getMinLevel());
-
-                            int i = 0;
-                            for (ItemStack stack : recipe.craft(getMats())) {
-                                inventory.setStack(stack.copy(), OUTPUTS, i);
-                            }
-                        }
-                        recipe.spendMaterials(getMats());
+                        SoundUtils.playSound(level, getBlockPos(), SoundEvents.ANVIL_DESTROY);
                     }
                 }
+
             }
 
         } catch (Exception e) {
-            // throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
         this.setChanged(); // todo will this cause any problems to have it perma on?
     }
 
+    public boolean tryRecipe(boolean justCheck) {
+
+        var recipe = getCurrentRecipe(level);
+
+        if (recipe != null && this.inventory.getInventory(OUTPUTS).isEmpty()) {
+
+            if (justCheck) {
+                return true;
+            }
+
+
+            this.addExp(recipe.getExpReward(this.ownerLvl, getMats()) * recipe.getTier().levelRange.getMinLevel());
+
+            for (ItemStack stack : recipe.craft(getMats())) {
+                inventory.addStack(OUTPUTS, stack);
+            }
+
+            recipe.spendMaterials(getMats());
+            return true;
+        } else {
+            return false;
+        }
+
+
+    }
+
+    public boolean trySalvage(boolean justCheck) {
+
+        if (getProfession().GUID().equals(Professions.SALVAGING)) {
+            if (this.inventory.getInventory(OUTPUTS).isEmpty()) {
+                for (ItemStack stack : this.getMats()) {
+
+                    ICommonDataItem data = ICommonDataItem.load(stack);
+                    ISalvagable sal = ISalvagable.load(stack);
+                    if (data != null && sal != null) {
+                        if (sal.isSalvagable()) {
+
+                            if (justCheck) {
+                                return true;
+                            }
+                            for (ItemStack res : sal.getSalvageResult(stack)) {
+                                this.inventory.addStack(OUTPUTS, res);
+                            }
+
+                            float multi = data.getRarity().item_value_multi;
+
+                            stack.shrink(1);
+                            for (ItemStack randomDrop : getProfession().getAllDrops(ownerLvl, data.getLevel(), multi)) {
+                                this.inventory.addStack(OUTPUTS, randomDrop);
+                            }
+
+                            return true;
+                        }
+                    }
+                }
+
+            }
+        }
+        return false;
+    }
 
     public void addExp(int xp) {
 

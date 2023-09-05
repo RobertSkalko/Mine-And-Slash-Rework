@@ -180,6 +180,11 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
     }
 
     @Override
+    public int getLevel() {
+        return LevelUtils.levelToTier(tier);
+    }
+
+    @Override
     public ItemstackDataSaver<? extends ICommonDataItem> getStackSaver() {
         return StackSaving.STAT_SOULS;
     }

@@ -13,6 +13,8 @@ public interface ICommonDataItem<R extends Rarity> extends ISalvagable, ITooltip
         return true;
     }
 
+    public int getLevel();
+
     ItemstackDataSaver<? extends ICommonDataItem> getStackSaver();
 
     void saveToStack(ItemStack stack);

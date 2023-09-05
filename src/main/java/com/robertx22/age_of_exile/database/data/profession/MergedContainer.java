@@ -24,8 +24,19 @@ public class MergedContainer extends SimpleContainer implements WorldlyContainer
         return inv.stream().mapToInt(x -> x.size).sum();
     }
 
-    public int[] getIndices(String id) {
+    public boolean addStack(Inventory inv, ItemStack stack) {
 
+        for (int index : getIndices(inv.id)) {
+            if (getItem(index).isEmpty()) {
+                setItem(index, stack.copy());
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    public int[] getIndices(String id) {
 
         int i = 0;
 

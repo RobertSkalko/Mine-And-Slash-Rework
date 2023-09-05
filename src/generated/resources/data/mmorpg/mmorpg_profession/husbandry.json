@@ -1,10 +1,74 @@
 {
-  "type": "OTHER",
-  "drops": [],
-  "id": "husbandry",
-  "tier_1": {},
-  "tier_2": {},
-  "tier_3": {},
-  "tier_4": {},
-  "tier_5": {}
+  "chance_drops": [
+    {
+      "chance": 5.0,
+      "drops": [
+        {
+          "item_id": "mmorpg:material/meat/2",
+          "min_lvl": 0.4,
+          "num": 1,
+          "weight": 1000
+        }
+      ]
+    },
+    {
+      "chance": 5.0,
+      "drops": [
+        {
+          "item_id": "mmorpg:material/meat/5",
+          "min_lvl": 1.0,
+          "num": 1,
+          "weight": 1000
+        }
+      ]
+    },
+    {
+      "chance": 5.0,
+      "drops": [
+        {
+          "item_id": "mmorpg:material/meat/0",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        }
+      ]
+    },
+    {
+      "chance": 5.0,
+      "drops": [
+        {
+          "item_id": "mmorpg:material/meat/1",
+          "min_lvl": 0.2,
+          "num": 1,
+          "weight": 1000
+        }
+      ]
+    },
+    {
+      "chance": 5.0,
+      "drops": [
+        {
+          "item_id": "mmorpg:material/meat/3",
+          "min_lvl": 0.6,
+          "num": 1,
+          "weight": 1000
+        }
+      ]
+    },
+    {
+      "chance": 5.0,
+      "drops": [
+        {
+          "item_id": "mmorpg:material/meat/4",
+          "min_lvl": 0.8,
+          "num": 1,
+          "weight": 1000
+        }
+      ]
+    }
+  ],
+  "exp_sources": {
+    "map": {}
+  },
+  "id": "husbandry"
 }

@@ -32,12 +32,12 @@ public class ItemGlintMixin {
                 var data = ICommonDataItem.load(stack);
 
                 if (data != null) {
-                    if (data.getRarity() instanceof GearRarity gr) {
-                        rar = gr;
+                    if (data.getRarity() != null) {
+                        rar = data.getRarity();
                     }
                 }
 
-              
+
                 if (rar == null) {
                     return;
                 }

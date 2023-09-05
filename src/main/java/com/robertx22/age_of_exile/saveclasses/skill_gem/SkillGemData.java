@@ -77,6 +77,11 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
     }
 
     @Override
+    public int getLevel() {
+        return 1; // wait what
+    }
+
+    @Override
     public ItemstackDataSaver<SkillGemData> getStackSaver() {
         return StackSaving.SKILL_GEM;
     }
@@ -182,20 +187,6 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
     }
 
-        /*
-
-        String txt = ChatFormatting.LIGHT_PURPLE + "Links: [";
-
-        for (int i = 0; i < links; i++) {
-            //txt += up.format;
-            txt += UNICODE.STAR;
-        }
-
-        txt += "]";
-
-        return ExileText.ofText(txt).get();
-            }
-         */
 
     public List<Component> getTooltip(Player p) {
 

@@ -5,24 +5,26 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
-import com.robertx22.library_of_exile.events.base.ExileEvents;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
+import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
-import com.robertx22.temp.SkillItemTier;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Profession>, IAutoLocName {
     public static Profession SERIALIZER = new Profession();
@@ -30,17 +32,53 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
     public String id = "";
 
     // blocks/entities that give exp
-    public HashMap<String, Integer> tier_1 = new HashMap<>();
-    public HashMap<String, Integer> tier_2 = new HashMap<>();
-    public HashMap<String, Integer> tier_3 = new HashMap<>();
-    public HashMap<String, Integer> tier_4 = new HashMap<>();
-    public HashMap<String, Integer> tier_5 = new HashMap<>();
 
-    public Type type = Type.OTHER;
+    public ExpSources exp_sources = new ExpSources();
 
-    public List<ProfessionDrop> drops = new ArrayList<>();
+    public List<ChancedDrop> chance_drops = new ArrayList<>();
 
-    public static class ProfessionDrop {
+
+    public List<ItemStack> getAllDrops(int lvl, int recipelvl, float dropChanceMulti) {
+        List<ItemStack> list = new ArrayList<>();
+
+        ProfessionRecipe.RecipeDifficulty diff = ProfessionRecipe.RecipeDifficulty.get(lvl, recipelvl);
+
+        float lvlmulti = LevelUtils.getMaxLevelMultiplier(lvl);
+
+        for (ChancedDrop chancedDrop : this.chance_drops) {
+            float chance = dropChanceMulti * chancedDrop.chance;
+
+            if (RandomUtils.roll(chance)) {
+                ProfessionDrop drop = RandomUtils.weightedRandom(chancedDrop.drops.stream().filter(x -> lvlmulti >= x.min_lvl).collect(Collectors.toList()));
+                if (drop != null) {
+                    ItemStack stack = drop.get();
+                    list.add(stack);
+                }
+            }
+        }
+
+        if (RandomUtils.roll(diff.doubleDropChance)) {
+            for (ItemStack stack : list) {
+                stack.setCount(MathHelper.clamp(stack.getCount() * 2, 1, stack.getMaxStackSize()));
+            }
+        }
+        return list;
+    }
+
+
+    public static class ChancedDrop {
+
+        public List<ProfessionDrop> drops = new ArrayList<>();
+
+        public float chance = 0;
+
+        public ChancedDrop(List<ProfessionDrop> drops, float chance) {
+            this.drops = drops;
+            this.chance = chance;
+        }
+    }
+
+    public static class ProfessionDrop implements IWeighted {
 
         public String item_id = "";
         public int num = 1;
@@ -53,6 +91,15 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
             this.num = num;
             this.weight = weight;
             this.min_lvl = min_lvl;
+        }
+
+        public ItemStack get() {
+            return new ItemStack(VanillaUTIL.REGISTRY.items().get(new ResourceLocation(item_id)), num);
+        }
+
+        @Override
+        public int Weight() {
+            return weight;
         }
     }
 
@@ -75,107 +122,50 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
         BLOCK, ENTITY, OTHER
     }
 
-    public HashMap<String, Integer> getMap(SkillItemTier tier) {
-        if (tier == SkillItemTier.TIER0) {
-            return tier_1;
-        }
-        if (tier == SkillItemTier.TIER1) {
-            return tier_2;
-        }
-        if (tier == SkillItemTier.TIER2) {
-            return tier_3;
-        }
-        if (tier == SkillItemTier.TIER3) {
-            return tier_4;
-        }
-        if (tier == SkillItemTier.TIER4) {
-            return tier_5;
-        }
-        return null;
-    }
 
     public void onKill(Player p, Entity en) {
-        if (this.type == Type.ENTITY) {
 
-            Data data = getData(en.getType());
+        ExpSources.ExpData data = this.exp_sources.getData(en.getType());
 
-            if (data.exp > 0) {
-                data.giveExp(p);
-            }
-
+        if (data.exp > 0) {
+            data.giveExp(p, this);
         }
+
     }
 
-    public void onMine(Player p, ExileEvents.PlayerMineOreEvent event) {
-        if (this.type == Type.BLOCK) {
-            Data data = getData(event.state.getBlock());
 
-            if (data.exp > 0) {
-                data.giveExp(p);
+    public List<ItemStack> onMineGetBonusDrops(Player p, List<ItemStack> drops, BlockState state) {
+        var data = this.exp_sources.getData(state.getBlock());
 
-                // todo check if this works for farming, mining etc
-                for (ItemStack stack : data.generateLoot(p)) {
-                    event.itemsToAddToDrop.add(stack);
+        if (data == null) {
+            for (TagKey<Block> drop : state.getTags().collect(Collectors.toList())) {
+                if (exp_sources.getData(drop) != null) {
+                    data = exp_sources.getData(drop);
+                    break;
                 }
             }
-
         }
-    }
-
-
-    public Data getData(Block block) {
-        return getData(VanillaUTIL.REGISTRY.blocks().getKey(block).toString());
-    }
-
-    public Data getData(EntityType en) {
-        return getData(BuiltInRegistries.ENTITY_TYPE.getKey(en).toString());
-    }
-
-    public Data getData(String id) {
-        for (SkillItemTier value : SkillItemTier.values()) {
-            if (getMap(value).containsKey(id)) {
-                return new Data(getMap(value).get(id), value.tier);
+        if (data == null) {
+            for (ItemStack drop : drops) {
+                if (exp_sources.getData(drop.getItem()) != null) {
+                    data = exp_sources.getData(drop.getItem());
+                    break;
+                }
             }
         }
-        return new Data(0, 0);
-    }
 
-    private class Data {
+        if (data != null) {
+            if (data.exp > 0) {
+                data.giveExp(p, this);
 
-
-        public int exp;
-        public int tier;
-
-        public Data(int exp, int tier) {
-            this.exp = exp;
-            this.tier = tier;
-        }
-
-        public void giveExp(Player p) {
-            Load.player(p).professions.addExp(p, GUID(), exp);
-        }
-
-        public List<ItemStack> generateLoot(Player p) {
-            List<ItemStack> list = new ArrayList<>();
-            if (RandomUtils.roll(getLootChance(p))) {
-
-                // todo random profession loot
+                float chance = data.getLootChanceMulti(p, this);
+                return this.getAllDrops(Load.player(p).professions.getLevel(this.GUID()), data.getLevelOfMastery(), chance);
             }
-
-
-            return list;
-
         }
+        return Arrays.asList();
 
-        public int getLevelOfMastery() {
-            return SkillItemTier.of(tier).levelRange.getMinLevel();
-        }
-
-        public float getLootChance(Player p) {
-            float lvlmulti = MathHelper.clamp((float) Load.player(p).professions.getLevel(GUID()) / (float) getLevelOfMastery(), 0F, 1F);
-            return exp * lvlmulti;
-        }
     }
+
 
     @Override
     public ExileRegistryType getExileRegistryType() {

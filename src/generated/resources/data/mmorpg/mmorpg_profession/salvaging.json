@@ -1,10 +1,120 @@
 {
-  "type": "OTHER",
-  "drops": [],
-  "id": "salvaging",
-  "tier_1": {},
-  "tier_2": {},
-  "tier_3": {},
-  "tier_4": {},
-  "tier_5": {}
+  "chance_drops": [
+    {
+      "chance": 5.0,
+      "drops": [
+        {
+          "item_id": "mmorpg:essence/int",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:essence/str",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:essence/dex",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:essence/fire",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:essence/water",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:essence/lightning",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:essence/chaos",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:essence/might",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:essence/life",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:essence/energy",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:essence/mana",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:essence/magic",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:essence/crit",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        }
+      ]
+    },
+    {
+      "chance": 0.5,
+      "drops": [
+        {
+          "item_id": "mmorpg:essence/insanity",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 50
+        },
+        {
+          "item_id": "mmorpg:essence/horror",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 50
+        },
+        {
+          "item_id": "mmorpg:essence/delirium",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 50
+        },
+        {
+          "item_id": "mmorpg:essence/hysteria",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 50
+        }
+      ]
+    }
+  ],
+  "exp_sources": {
+    "map": {}
+  },
+  "id": "salvaging"
 }
