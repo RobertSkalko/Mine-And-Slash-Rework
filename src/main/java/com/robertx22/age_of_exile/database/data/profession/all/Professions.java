@@ -152,7 +152,10 @@ public class Professions {
                 var id = VanillaUTIL.REGISTRY.items().getKey(item).toString();
                 var drop = new Profession.ProfessionDrop(id, 1, 1000, en.getKey().lvl_req);
 
-                this.p.chance_drops.add(new Profession.ChancedDrop(Arrays.asList(drop), 5F));
+                if (!p.tiered_drops.containsKey(en.getKey())) {
+                    p.tiered_drops.put(en.getKey(), new ArrayList<>());
+                }
+                this.p.tiered_drops.get(en.getKey()).add(new Profession.ChancedDrop(Arrays.asList(drop), 5F));
 
             }
             return this;

@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.profession;
 
+import com.robertx22.age_of_exile.database.Weighted;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
@@ -9,10 +10,10 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
-import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
+import com.robertx22.temp.SkillItemTier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
@@ -23,6 +24,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,23 +37,38 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
 
     public ExpSources exp_sources = new ExpSources();
 
+    // todo add separate for tiered ones, these will be for all tiers
+
+    public HashMap<SkillItemTier, List<ChancedDrop>> tiered_drops = new HashMap<>();
+
     public List<ChancedDrop> chance_drops = new ArrayList<>();
 
 
-    public List<ItemStack> getAllDrops(int lvl, int recipelvl, float dropChanceMulti) {
+    public List<ItemStack> getAllDrops(Player p, int lvl, int recipelvl, float dropChanceMulti) {
         List<ItemStack> list = new ArrayList<>();
 
         ProfessionRecipe.RecipeDifficulty diff = ProfessionRecipe.RecipeDifficulty.get(lvl, recipelvl);
 
         float lvlmulti = LevelUtils.getMaxLevelMultiplier(lvl);
 
-        for (ChancedDrop chancedDrop : this.chance_drops) {
+        SkillItemTier tier = SkillItemTier.fromLevel(lvl);
+
+        List<ChancedDrop> ALLDROPS = new ArrayList<>();
+
+
+        if (tiered_drops.containsKey(tier)) {
+            ALLDROPS.addAll(tiered_drops.get(tier));
+        }
+        ALLDROPS.addAll(chance_drops);
+
+
+        for (ChancedDrop chancedDrop : ALLDROPS) {
             float chance = dropChanceMulti * chancedDrop.chance;
 
             if (RandomUtils.roll(chance)) {
-                ProfessionDrop drop = RandomUtils.weightedRandom(chancedDrop.drops.stream().filter(x -> lvlmulti >= x.min_lvl).collect(Collectors.toList()));
+                Weighted<ProfessionDrop> drop = RandomUtils.weightedRandom(chancedDrop.drops.stream().filter(x -> lvlmulti >= x.min_lvl).map(x -> x.toWeighted(p, this)).collect(Collectors.toList()));
                 if (drop != null) {
-                    ItemStack stack = drop.get();
+                    ItemStack stack = drop.obj.get();
                     list.add(stack);
                 }
             }
@@ -78,13 +95,12 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
         }
     }
 
-    public static class ProfessionDrop implements IWeighted {
+    public static class ProfessionDrop {
 
         public String item_id = "";
         public int num = 1;
-        public int weight = 1000;
+        private int weight = 1000;
         public float min_lvl = 0;
-
 
         public ProfessionDrop(String item_id, int num, int weight, float min_lvl) {
             this.item_id = item_id;
@@ -97,9 +113,12 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
             return new ItemStack(VanillaUTIL.REGISTRY.items().get(new ResourceLocation(item_id)), num);
         }
 
-        @Override
-        public int Weight() {
-            return weight;
+        private int getWeight(Player p, Profession pro) {
+            return (int) (weight * Load.player(p).professions.daily_drop_multis.getMulti(pro, item_id));
+        }
+
+        public Weighted<ProfessionDrop> toWeighted(Player p, Profession pro) {
+            return new Weighted<>(this, getWeight(p, pro));
         }
     }
 
@@ -159,7 +178,7 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
                 data.giveExp(p, this);
 
                 float chance = data.getLootChanceMulti(p, this);
-                return this.getAllDrops(Load.player(p).professions.getLevel(this.GUID()), data.getLevelOfMastery(), chance);
+                return this.getAllDrops(p, Load.player(p).professions.getLevel(this.GUID()), data.getLevelOfMastery(), chance);
             }
         }
         return Arrays.asList();

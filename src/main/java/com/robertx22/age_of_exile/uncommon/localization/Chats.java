@@ -9,6 +9,7 @@ import java.util.Locale;
 public enum Chats implements IAutoLocName {
     PROFESSION_LEVEL_UP("Your %1$s profession has increased to level %2$s!"),
     TOO_MANY_BUFFS("You can't have that many buffs."),
+    NEW_DAY("A new day has arrived! Profession drop rates have been boosted for the following items:"),
     TOO_LOW_LEVEL("Your level is too low."),
     CANT_SAME_BUFF("You already have a buff of that type."),
     NOT_OWNER(ChatFormatting.RED + "You are not the owner of this Station."),

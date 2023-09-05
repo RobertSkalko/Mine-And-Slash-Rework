@@ -3,7 +3,7 @@ This registry is modify-able through datapacks.
 salvaging
 enchanting
 farming
-husbandry
 alchemy
+husbandry
 mining
 cooking

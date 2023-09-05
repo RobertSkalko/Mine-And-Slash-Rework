@@ -32,8 +32,8 @@ public class ProfessionBlockEntity extends BlockEntity {
 
     public String owner = "";
 
+    // todo delete this
     public int ownerLvl = 1;
-
     public int savedXP = 0;
 
 
@@ -70,15 +70,19 @@ public class ProfessionBlockEntity extends BlockEntity {
 
                 updateOwner(level);
 
-                if (tryRecipe(true) || trySalvage(true)) {
-                    craftingTicks += 20;
+                Player p = getOwner(level);
 
-                    if (craftingTicks > 60) {
-                        craftingTicks = 0;
-                        tryRecipe(false);
-                        trySalvage(false);
+                if (p != null) {
+                    if (tryRecipe(p, true) || trySalvage(p, true)) {
+                        craftingTicks += 20;
 
-                        SoundUtils.playSound(level, getBlockPos(), SoundEvents.ANVIL_DESTROY);
+                        if (craftingTicks > 60) {
+                            craftingTicks = 0;
+                            tryRecipe(p, false);
+                            trySalvage(p, false);
+
+                            SoundUtils.playSound(level, getBlockPos(), SoundEvents.ANVIL_DESTROY);
+                        }
                     }
                 }
 
@@ -91,7 +95,7 @@ public class ProfessionBlockEntity extends BlockEntity {
         this.setChanged(); // todo will this cause any problems to have it perma on?
     }
 
-    public boolean tryRecipe(boolean justCheck) {
+    public boolean tryRecipe(Player p, boolean justCheck) {
 
         var recipe = getCurrentRecipe(level);
 
@@ -117,7 +121,7 @@ public class ProfessionBlockEntity extends BlockEntity {
 
     }
 
-    public boolean trySalvage(boolean justCheck) {
+    public boolean trySalvage(Player p, boolean justCheck) {
 
         if (getProfession().GUID().equals(Professions.SALVAGING)) {
             if (this.inventory.getInventory(OUTPUTS).isEmpty()) {
@@ -138,7 +142,7 @@ public class ProfessionBlockEntity extends BlockEntity {
                             float multi = data.getRarity().item_value_multi;
 
                             stack.shrink(1);
-                            for (ItemStack randomDrop : getProfession().getAllDrops(ownerLvl, data.getLevel(), multi)) {
+                            for (ItemStack randomDrop : getProfession().getAllDrops(p, ownerLvl, data.getLevel(), multi)) {
                                 this.inventory.addStack(OUTPUTS, randomDrop);
                             }
 
