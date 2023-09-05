@@ -631,6 +631,25 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
+    public static DataPackStatAccessor<EmptyAccessor> OUT_OF_COMBAT_REGEN = DatapackStatBuilder
+            .ofSingle("out_of_combat_regen", Elements.All)
+            .worksWithEvent(RestoreResourceEvent.ID)
+            .setPriority(100)
+            .setUsesMoreMultiplier()
+            .setSide(EffectSides.Source)
+            .addCondition(StatConditions.IS_RESTORE_TYPE.get(RestoreType.regen))
+            .addCondition(StatConditions.IS_NOT_IN_COMBAT)
+            .addEffect(StatEffects.MULTIPLY_VALUE)
+            .setLocName(x -> "Out of Combat Regen")
+            .setLocDesc(x -> "Increases your out of combat regeneration")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+                x.base = 0;
+                x.format = ChatFormatting.GREEN.getName();
+                x.group = StatGroup.RESTORATION;
+            })
+            .build();
+
     public static DataPackStatAccessor<EmptyAccessor> HEAL_STRENGTH = DatapackStatBuilder
             .ofSingle("increase_healing", Elements.All)
             .worksWithEvent(RestoreResourceEvent.ID)

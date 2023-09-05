@@ -1,6 +1,9 @@
 package com.robertx22.age_of_exile.uncommon.effectdatas;
 
+import com.robertx22.age_of_exile.capability.entity.CooldownsData;
+import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.NumberUtils;
@@ -28,26 +31,35 @@ public class RestoreResourceEvent extends EffectEvent {
 
     @Override
     protected void activate() {
-
         if (data.isCanceled()) {
             return;
         }
+        float num = data.getNumber();
 
-     
-        this.targetData.getResources().restore(target, data.getResourceType(), data.getNumber());
+        // todo will see if this is good or not
+        if (data.getRestoreType() == RestoreType.regen) {
+            if (Load.Unit(target).getCooldowns().isOnCooldown(CooldownsData.IN_COMBAT)) {
+                var type = data.getResourceType();
+                if (type != ResourceType.energy) {
+                    num *= ServerContainer.get().IN_COMBAT_REGEN_MULTI.get();
+                }
+            }
+        }
+
+        this.targetData.getResources().restore(target, data.getResourceType(), num);
 
         if (this.data.getResourceType() == ResourceType.health) {
             if (data.getRestoreType() == RestoreType.heal) {
                 if (source instanceof Player) {
 
                     if (source != target) {
-                        String text = NumberUtils.format(data.getNumber());
+                        String text = NumberUtils.format(num);
 
                         DmgNumPacket packet = new DmgNumPacket(target, text, data.isCrit(), ChatFormatting.GREEN);
                         Packets.sendToClient((Player) source, packet);
                     }
 
-                    float threat = (int) (data.getNumber() * 0.1F);
+                    float threat = (int) (num * 0.1F);
                     List<Mob> mobs = EntityFinder.start(source, Mob.class, source.blockPosition())
                             .radius(10)
                             .build();

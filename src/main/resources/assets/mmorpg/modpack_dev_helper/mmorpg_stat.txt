@@ -315,6 +315,7 @@ freeze_strength
 dexterity
 totem_resto
 heal_effect_on_self
+out_of_combat_regen
 chaining_spell_dmg
 negative_eff_dur_u_cast
 water_any_wep_damage

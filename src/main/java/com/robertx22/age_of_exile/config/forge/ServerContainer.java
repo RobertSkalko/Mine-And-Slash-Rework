@@ -54,6 +54,7 @@ public class ServerContainer {
         PLAYER_VANILLA_DMG_MULTI = b.defineInRange("PLAYER_VANILLA_DMG_MULTI", 0D, 0, 1000);
         PVP_DMG_MULTI = b.defineInRange("pvp_dmg_multi", 1D, 0, 1000);
         MAX_TEAM_DISTANCE = b.defineInRange("max_team_distance", 75D, 0, 100000);
+        IN_COMBAT_REGEN_MULTI = b.defineInRange("in_combat_regen_multi", 0.5, 0, 10);
 
         FAVOR_DEATH_LOSS = b.defineInRange("favor_death_loss", 50D, 0, 10000);
         FAVOR_CHEST_GAIN = b.defineInRange("favor_chest_gain", 1D, 0, 10000);
@@ -116,9 +117,6 @@ public class ServerContainer {
 
     }
 
-
-    // at max difficulty, lvl 1 mobs are lvl 50. And lvl 50 mobs are increased in strength
-
     public ForgeConfigSpec.ConfigValue<List<? extends String>> GEAR_COMPATS;
 
     public ForgeConfigSpec.BooleanValue ALL_PLAYERS_ARE_TEAMED_PVE_MODE;
@@ -143,6 +141,7 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue PVP_DMG_MULTI;
     public ForgeConfigSpec.DoubleValue PLAYER_VANILLA_DMG_MULTI;
     public ForgeConfigSpec.DoubleValue MAX_TEAM_DISTANCE;
+    public ForgeConfigSpec.DoubleValue IN_COMBAT_REGEN_MULTI;
 
     public ForgeConfigSpec.DoubleValue FAVOR_DEATH_LOSS;
     public ForgeConfigSpec.DoubleValue FAVOR_CHEST_GAIN;

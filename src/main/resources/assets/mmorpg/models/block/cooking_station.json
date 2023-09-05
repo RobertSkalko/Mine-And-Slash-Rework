@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "mmorpg:block/station/blast_furnace_front_on",
+    "side": "mmorpg:block/station/blast_furnace_side",
+    "top": "mmorpg:block/station/blast_furnace_top"
+  }
+}

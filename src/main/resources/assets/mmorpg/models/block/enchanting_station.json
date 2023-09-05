@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "minecraft:block/dark_oak_planks",
+    "east": "mmorpg:block/station/cartography_table_side3",
+    "north": "mmorpg:block/station/cartography_table_side3",
+    "particle": "mmorpg:block/station/cartography_table_side3",
+    "south": "mmorpg:block/station/cartography_table_side1",
+    "up": "mmorpg:block/station/cartography_table_top",
+    "west": "mmorpg:block/station/cartography_table_side2"
+  }
+}

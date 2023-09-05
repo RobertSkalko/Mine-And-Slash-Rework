@@ -60,7 +60,7 @@ public class ProfessionMatItems {
 
             TIERED_MAIN_MATS.get(Professions.MINING).put(tier, Def.item("material/mining/" + tier.tier, () -> new MaterialItem(tier, "Ore")));
             TIERED_MAIN_MATS.get(Professions.FARMING).put(tier, Def.item("material/farming/" + tier.tier, () -> new MaterialItem(tier, "Produce")));
-            TIERED_MAIN_MATS.get(Professions.DISENCHANTING).put(tier, Def.item("material/disenchant/" + tier.tier, () -> new MaterialItem(tier, "Dust")));
+            TIERED_MAIN_MATS.get(Professions.SALVAGING).put(tier, Def.item("material/disenchant/" + tier.tier, () -> new MaterialItem(tier, "Dust")));
             TIERED_MAIN_MATS.get(Professions.HUSBANDRY).put(tier, Def.item("material/meat/" + tier.tier, () -> new MaterialItem(tier, "Raw Meat")));
         }
 

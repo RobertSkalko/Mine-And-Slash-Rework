@@ -5,23 +5,26 @@ import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlockEntities;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
-public class ProfessionBlockEntity extends BlockEntity {
+public class ProfessionBlockEntity extends BlockEntity implements WorldlyContainer {
 
     SimpleContainer mats = new SimpleContainer(9);
-    SimpleContainer output = new SimpleContainer(1);
+    SimpleContainer output = new SimpleContainer(9);
 
     public String owner = "";
 
@@ -41,6 +44,7 @@ public class ProfessionBlockEntity extends BlockEntity {
 
 
     int ticks = 0;
+    int craftingTicks = 0;
 
     public Player getOwner(Level l) {
         try {
@@ -64,14 +68,23 @@ public class ProfessionBlockEntity extends BlockEntity {
 
                 if (recipe != null && this.output.isEmpty()) {
 
-                    float successchance = recipe.getCraftChance(ownerLvl);
+                    craftingTicks += 20;
 
-                    if (RandomUtils.roll(successchance)) {
-                        this.addExp(recipe.getExpReward(this.ownerLvl, getMats()) * recipe.getTier().levelRange.getMinLevel());
-                        ItemStack resultStack = recipe.craft(getMats());
-                        this.output.setItem(0, resultStack.copy());
+                    if (craftingTicks > 60) {
+                        craftingTicks = 0;
+
+                        float successchance = recipe.getCraftChance(ownerLvl);
+
+                        if (RandomUtils.roll(successchance)) {
+                            this.addExp(recipe.getExpReward(this.ownerLvl, getMats()) * recipe.getTier().levelRange.getMinLevel());
+
+                            int i = 0;
+                            for (ItemStack stack : recipe.craft(getMats())) {
+                                output.setItem(i, stack.copy());
+                            }
+                        }
+                        recipe.spendMaterials(getMats());
                     }
-                    recipe.spendMaterials(getMats());
                 }
             }
 
@@ -88,7 +101,7 @@ public class ProfessionBlockEntity extends BlockEntity {
         Player p = getOwner(level);
 
         if (p != null) {
-            Load.player(p).professions.addExp(getProfession().GUID(), savedXP);
+            Load.player(p).professions.addExp(p, getProfession().GUID(), savedXP);
         } else {
             this.savedXP += xp;
         }
@@ -108,7 +121,7 @@ public class ProfessionBlockEntity extends BlockEntity {
     public void onOpen(Player p) {
 
         if (savedXP > 0) {
-            Load.player(p).professions.addExp(getProfession().GUID(), savedXP);
+            Load.player(p).professions.addExp(p, getProfession().GUID(), savedXP);
         }
 
     }
@@ -174,4 +187,91 @@ public class ProfessionBlockEntity extends BlockEntity {
     }
 
 
+    @Override
+    public int[] getSlotsForFace(Direction pSide) {
+        int[] ar = new int[0];
+
+        if (pSide == Direction.UP) {
+            ar = new int[output.getContainerSize()];
+
+            for (int i = 0; i < output.getContainerSize(); i++) {
+                ar[i] = i;
+            }
+        }
+        if (pSide == Direction.DOWN) {
+            ar = new int[output.getContainerSize()];
+            int size = output.getContainerSize();
+
+            for (int i = size; i < size + size; i++) {
+                ar[i] = i;
+            }
+        }
+        return ar;
+    }
+
+
+    // hopper functionality
+    public SimpleContainer getMergedContainer() {
+        SimpleContainer me = new SimpleContainer(18);
+
+        int i = 0;
+
+        for (int x = 0; x < mats.getContainerSize(); x++) {
+            me.setItem(i, mats.getItem(i));
+        }
+        for (int x = 0; x < output.getContainerSize(); x++) {
+            me.setItem(i, output.getItem(i));
+        }
+        return me;
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int pIndex, ItemStack pItemStack, @Nullable Direction pDirection) {
+        return pDirection == Direction.UP && pIndex < 9 && getMergedContainer().getItem(pIndex).isEmpty();
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int pIndex, ItemStack pStack, Direction pDirection) {
+        return !pStack.isEmpty() && pDirection == pDirection.DOWN;
+    }
+
+    @Override
+    public int getContainerSize() {
+        return getMergedContainer().getContainerSize();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return getMergedContainer().isEmpty();
+    }
+
+    @Override
+    public ItemStack getItem(int pSlot) {
+        return getMergedContainer().getItem(pSlot);
+    }
+
+    @Override
+    public ItemStack removeItem(int pSlot, int pAmount) {
+        return getMergedContainer().removeItem(pAmount, pAmount);
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int pSlot) {
+        return getMergedContainer().removeItemNoUpdate(pSlot);
+    }
+
+    @Override
+    public void setItem(int pSlot, ItemStack pStack) {
+        getMergedContainer().setItem(pSlot, pStack);
+    }
+
+    @Override
+    public boolean stillValid(Player pPlayer) {
+        return true;
+    }
+
+    @Override
+    public void clearContent() {
+        getMergedContainer().clearContent();
+    }
 }

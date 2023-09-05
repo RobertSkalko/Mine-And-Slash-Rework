@@ -17,9 +17,7 @@ public class IsInCombatCondition extends StatCondition {
     @Override
     public boolean can(EffectEvent event, EffectSides statSource, StatData data, Stat stat) {
         LivingEntity en = event.getSide(statSource);
-        return Load.Unit(en)
-                .getCooldowns()
-                .isOnCooldown(CooldownsData.IN_COMBAT);
+        return Load.Unit(en).getCooldowns().isOnCooldown(CooldownsData.IN_COMBAT);
     }
 
     @Override

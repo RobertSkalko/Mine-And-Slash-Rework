@@ -31,7 +31,6 @@ public interface IAutoLocName extends IBaseAutoLoc {
     public String locNameForLangFile();
 
     public default MutableComponent locName(Object... arg) {
-        
         return ExileText.ofTranslate(locNameLangFileGUID(), arg).get();
     }
 

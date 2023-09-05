@@ -2,6 +2,12 @@
   "id": "mana",
   "mods": [
     {
+      "type": "FLAT",
+      "max": 50.0,
+      "min": 20.0,
+      "stat": "out_of_combat_regen"
+    },
+    {
       "type": "PERCENT",
       "max": 10.0,
       "min": 5.0,

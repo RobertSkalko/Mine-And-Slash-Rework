@@ -16,6 +16,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Consumer;
@@ -158,14 +159,14 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
         return mats.stream().allMatch(x -> stacks.stream().anyMatch(e -> x.matches(e)));
     }
 
-    public ItemStack craft(List<ItemStack> stacks) {
+    public List<ItemStack> craft(List<ItemStack> stacks) {
         // todo need different way for crafting gear
 
         ItemStack stack = new ItemStack(VanillaUTIL.REGISTRY.items().get(new ResourceLocation(result)), result_num);
 
         LeveledItem.setTier(stack, tier);
 
-        return stack;
+        return Arrays.asList(stack);
     }
 
 

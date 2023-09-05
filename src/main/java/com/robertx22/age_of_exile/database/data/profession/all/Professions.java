@@ -15,17 +15,24 @@ import java.util.Map;
 
 public class Professions {
 
+    // gathering
     public static String FARMING = "farming";
-    public static String DISENCHANTING = "disenchanting";
-    public static String COOKING = "cooking";
-    public static String ALCHEMY = "alchemy";
-    public static String ENCHANTING = "enchanting";
     public static String MINING = "mining";
     public static String HUSBANDRY = "husbandry";
 
+
+    // crafting
+    public static String COOKING = "cooking";
+    public static String ALCHEMY = "alchemy";
+    public static String ENCHANTING = "enchanting";
+
+    // misc
+    public static String SALVAGING = "salvaging";
+
+
     public static List<String> STATION_PROFESSIONS = Arrays.asList(
             COOKING,
-            DISENCHANTING,
+            SALVAGING,
             ALCHEMY,
             ENCHANTING
     );
@@ -34,7 +41,7 @@ public class Professions {
     public static List<String> ALL = Arrays.asList(
             FARMING,
             MINING,
-            DISENCHANTING,
+            SALVAGING,
             HUSBANDRY,
             COOKING,
             ALCHEMY,
@@ -58,7 +65,19 @@ public class Professions {
                 .five(Blocks.NETHER_WART, Blocks.COCOA)
                 .build();
 
+        Builder.of(HUSBANDRY)
+
+                .build();
+
+        Builder.of(MINING)
+                .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(MINING))
+                .build();
+
         Builder.of(COOKING)
+
+                .build();
+
+        Builder.of(SALVAGING)
 
                 .build();
 
@@ -70,9 +89,7 @@ public class Professions {
 
                 .build();
 
-        Builder.of(MINING)
-                .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(MINING))
-                .build();
+
     }
 
 

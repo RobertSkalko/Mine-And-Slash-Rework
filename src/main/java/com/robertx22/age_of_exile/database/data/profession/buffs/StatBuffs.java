@@ -72,23 +72,28 @@ public class StatBuffs {
         }
     }
 
+    static StatMod outCombatRegen = Stats.OUT_OF_COMBAT_REGEN.get().mod(20, 50);
 
     public static FoodBuff HEALTH = new FoodBuff("life", "Life's Joy", () -> Arrays.asList(
+            outCombatRegen,
             Health.getInstance().mod(5, 10).percent(),
             HealthRegen.getInstance().mod(5, 15).percent(),
             HealthRegen.getInstance().mod(1, 4)
     ));
     public static FoodBuff MANA = new FoodBuff("mana", "Mana's Inspiration", () -> Arrays.asList(
+            outCombatRegen,
             Mana.getInstance().mod(5, 10).percent(),
             ManaRegen.getInstance().mod(5, 15).percent(),
             ManaRegen.getInstance().mod(1, 4)
     ));
     public static FoodBuff ENERGY = new FoodBuff("energy", "Boundlessness of Energy", () -> Arrays.asList(
+            outCombatRegen,
             Energy.getInstance().mod(5, 10).percent(),
             EnergyRegen.getInstance().mod(5, 15).percent(),
             EnergyRegen.getInstance().mod(1, 4)
     ));
     public static FoodBuff MAGIC = new FoodBuff("magic", "Depth of Magic", () -> Arrays.asList(
+            outCombatRegen,
             MagicShield.getInstance().mod(5, 10).percent(),
             MagicShieldRegen.getInstance().mod(5, 15).percent(),
             MagicShieldRegen.getInstance().mod(1, 4)

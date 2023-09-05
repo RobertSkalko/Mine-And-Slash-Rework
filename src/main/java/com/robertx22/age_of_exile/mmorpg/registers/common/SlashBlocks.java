@@ -18,7 +18,7 @@ public class SlashBlocks {
     public static void init() {
 
         for (String p : Professions.STATION_PROFESSIONS) {
-            STATIONS.put(p, Def.block(p + "_station", () -> new ProfessionBlock(p)));
+            STATIONS.put(p, Def.block("station/" + p, () -> new ProfessionBlock(p)));
         }
     }
 

@@ -7,6 +7,7 @@ import net.minecraft.ChatFormatting;
 import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
+    PROFESSION_LEVEL_UP("Your %1$s profession has increased to level %2$s!"),
     TOO_MANY_BUFFS("You can't have that many buffs."),
     TOO_LOW_LEVEL("Your level is too low."),
     CANT_SAME_BUFF("You already have a buff of that type."),

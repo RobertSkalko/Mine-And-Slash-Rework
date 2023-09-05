@@ -152,7 +152,7 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
         }
 
         public void giveExp(Player p) {
-            Load.player(p).professions.addExp(GUID(), exp);
+            Load.player(p).professions.addExp(p, GUID(), exp);
         }
 
         public List<ItemStack> generateLoot(Player p) {

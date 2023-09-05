@@ -8,6 +8,8 @@ import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.DirUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.gemrunes.GemItem;
+import com.robertx22.library_of_exile.registry.Database;
+import com.robertx22.library_of_exile.registry.ExileRegistryContainer;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -113,43 +115,21 @@ public class CreateLangFile {
     public static HashMap<String, List<IAutoLocName>> getMap() {
         List<IAutoLocName> list = CreateLangFileUtils.getFromRegistries(IAutoLocName.class);
 
-        list.addAll(ExileDB.MobAffixes()
-                .getSerializable());
-        list.addAll(ExileDB.Ailments()
-                .getList());
-        list.addAll(ExileDB.AuraGems()
-                .getList());
-        list.addAll(ExileDB.SupportGems()
-                .getList());
-        list.addAll(ExileDB.GearSlots()
-                .getSerializable());
-        list.addAll(ExileDB.Perks()
-                .getSerializable());
-        list.addAll(ExileDB.Spells()
-                .getSerializable());
-        list.addAll(ExileDB.UniqueGears()
-                .getSerializable());
-        list.addAll(ExileDB.Affixes()
-                .getSerializable());
-
-        List<Stat> stats = ExileDB.Stats()
-                .getList()
-                .stream()
-                .filter(x -> !x.isFromDatapack())
-                .collect(Collectors.toList());
-        list.addAll(ExileDB.Stats()
-                .getSerializable());
-        list.addAll(stats);
-
-        list.addAll(ExileDB.GearTypes()
-                .getSerializable());
-        list.addAll(ExileDB.ExileEffects()
-                .getSerializable());
-        list.addAll(Arrays.asList(Words.values()));
-        list.addAll(ExileDB.GearRarities()
-                .getSerializable());
+        for (ExileRegistryContainer reg : Database.getAllRegistries()) {
+            for (Object o : reg.getList()) {
+                if (o instanceof IAutoLocName loc) {
+                    list.add(loc);
+                }
+            }
+            for (Object o : reg.getSerializable()) {
+                if (o instanceof IAutoLocName loc) {
+                    list.add(loc);
+                }
+            }
+        }
 
         list.addAll(Arrays.asList(Chats.values()));
+        list.addAll(Arrays.asList(Words.values()));
         list.addAll(Arrays.asList(GemItem.GemType.values()));
         list.addAll(Arrays.asList(GemItem.GemRank.values()));
 
@@ -157,12 +137,7 @@ public class CreateLangFile {
         HashMap<IAutoLocName.AutoLocGroup, List<IAutoLocName>> map = new HashMap<>();
 
         for (IAutoLocName.AutoLocGroup autoLocGroup : IAutoLocName.AutoLocGroup.values()) {
-            map.put(
-                    autoLocGroup,
-                    list.stream()
-                            .filter(x -> x.locNameGroup()
-                                    .equals(autoLocGroup))
-                            .collect(Collectors.toList())
+            map.put(autoLocGroup, list.stream().filter(x -> x.locNameGroup().equals(autoLocGroup)).collect(Collectors.toList())
             );
         }
 

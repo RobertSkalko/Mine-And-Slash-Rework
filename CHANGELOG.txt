@@ -199,3 +199,5 @@ v.5.0.5
 This should ensure spells with any type of stat scalings can't become too op, but it also easily allows me to buff them if they are weak.
 
 - added XP debt system. Dying now adds a stacking xp gain penalty that reduces xp gain by 50% until it's exhausted, in the future i will probably add items that remove the xp debt in some other way, like crafting.
+
+- added experimental in combat regeneration decrease, will see how it feels and if it's right for the mod

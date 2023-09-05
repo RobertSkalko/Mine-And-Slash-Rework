@@ -2,14 +2,8 @@
   "type": "OTHER",
   "drops": [
     {
-      "item_id": "mmorpg:material/mining/0",
-      "min_lvl": 0.0,
-      "num": 1,
-      "weight": 1000
-    },
-    {
-      "item_id": "mmorpg:material/mining/4",
-      "min_lvl": 0.8,
+      "item_id": "mmorpg:material/mining/3",
+      "min_lvl": 0.6,
       "num": 1,
       "weight": 1000
     },
@@ -20,20 +14,26 @@
       "weight": 1000
     },
     {
-      "item_id": "mmorpg:material/mining/2",
-      "min_lvl": 0.4,
-      "num": 1,
-      "weight": 1000
-    },
-    {
       "item_id": "mmorpg:material/mining/5",
       "min_lvl": 1.0,
       "num": 1,
       "weight": 1000
     },
     {
-      "item_id": "mmorpg:material/mining/3",
-      "min_lvl": 0.6,
+      "item_id": "mmorpg:material/mining/0",
+      "min_lvl": 0.0,
+      "num": 1,
+      "weight": 1000
+    },
+    {
+      "item_id": "mmorpg:material/mining/2",
+      "min_lvl": 0.4,
+      "num": 1,
+      "weight": 1000
+    },
+    {
+      "item_id": "mmorpg:material/mining/4",
+      "min_lvl": 0.8,
       "num": 1,
       "weight": 1000
     }
