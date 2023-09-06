@@ -5,7 +5,6 @@ import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.Rarity;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequirement;
-import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.library_of_exile.utils.CLOC;
@@ -44,11 +43,6 @@ public class TooltipUtils {
         tip.addAll(req.GetTooltipString(lvl, data));
     }
 
-    public static void addSocketNamesLine(List<Component> tip, GearItemData gear) {
-        if (gear.sockets.getSocketed().size() > 0) {
-            tip.add(Component.literal("Gemmed").withStyle(ChatFormatting.LIGHT_PURPLE));
-        }
-    }
 
     public static void addEmpty(List<Component> tooltip) {
         tooltip.add(CLOC.blank(""));

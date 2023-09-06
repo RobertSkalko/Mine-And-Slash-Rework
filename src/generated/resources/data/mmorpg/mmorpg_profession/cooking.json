@@ -3,5 +3,6 @@
   "exp_sources": {
     "map": {}
   },
-  "id": "cooking"
+  "id": "cooking",
+  "tiered_drops": {}
 }

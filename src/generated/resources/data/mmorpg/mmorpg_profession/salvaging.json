@@ -116,5 +116,6 @@
   "exp_sources": {
     "map": {}
   },
-  "id": "salvaging"
+  "id": "salvaging",
+  "tiered_drops": {}
 }

@@ -3,5 +3,6 @@
   "exp_sources": {
     "map": {}
   },
-  "id": "alchemy"
+  "id": "alchemy",
+  "tiered_drops": {}
 }

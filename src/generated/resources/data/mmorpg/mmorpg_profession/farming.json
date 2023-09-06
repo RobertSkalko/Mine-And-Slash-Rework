@@ -1,72 +1,5 @@
 {
-  "chance_drops": [
-    {
-      "chance": 5.0,
-      "drops": [
-        {
-          "item_id": "mmorpg:material/farming/5",
-          "min_lvl": 1.0,
-          "num": 1,
-          "weight": 1000
-        }
-      ]
-    },
-    {
-      "chance": 5.0,
-      "drops": [
-        {
-          "item_id": "mmorpg:material/farming/2",
-          "min_lvl": 0.4,
-          "num": 1,
-          "weight": 1000
-        }
-      ]
-    },
-    {
-      "chance": 5.0,
-      "drops": [
-        {
-          "item_id": "mmorpg:material/farming/0",
-          "min_lvl": 0.0,
-          "num": 1,
-          "weight": 1000
-        }
-      ]
-    },
-    {
-      "chance": 5.0,
-      "drops": [
-        {
-          "item_id": "mmorpg:material/farming/1",
-          "min_lvl": 0.2,
-          "num": 1,
-          "weight": 1000
-        }
-      ]
-    },
-    {
-      "chance": 5.0,
-      "drops": [
-        {
-          "item_id": "mmorpg:material/farming/4",
-          "min_lvl": 0.8,
-          "num": 1,
-          "weight": 1000
-        }
-      ]
-    },
-    {
-      "chance": 5.0,
-      "drops": [
-        {
-          "item_id": "mmorpg:material/farming/3",
-          "min_lvl": 0.6,
-          "num": 1,
-          "weight": 1000
-        }
-      ]
-    }
-  ],
+  "chance_drops": [],
   "exp_sources": {
     "map": {
       "0": [
@@ -118,5 +51,85 @@
       ]
     }
   },
-  "id": "farming"
+  "id": "farming",
+  "tiered_drops": {
+    "TIER0": [
+      {
+        "chance": 5.0,
+        "drops": [
+          {
+            "item_id": "mmorpg:material/farming/0",
+            "min_lvl": 0.0,
+            "num": 1,
+            "weight": 1000
+          }
+        ]
+      }
+    ],
+    "TIER1": [
+      {
+        "chance": 5.0,
+        "drops": [
+          {
+            "item_id": "mmorpg:material/farming/1",
+            "min_lvl": 0.2,
+            "num": 1,
+            "weight": 1000
+          }
+        ]
+      }
+    ],
+    "TIER2": [
+      {
+        "chance": 5.0,
+        "drops": [
+          {
+            "item_id": "mmorpg:material/farming/2",
+            "min_lvl": 0.4,
+            "num": 1,
+            "weight": 1000
+          }
+        ]
+      }
+    ],
+    "TIER3": [
+      {
+        "chance": 5.0,
+        "drops": [
+          {
+            "item_id": "mmorpg:material/farming/3",
+            "min_lvl": 0.6,
+            "num": 1,
+            "weight": 1000
+          }
+        ]
+      }
+    ],
+    "TIER4": [
+      {
+        "chance": 5.0,
+        "drops": [
+          {
+            "item_id": "mmorpg:material/farming/4",
+            "min_lvl": 0.8,
+            "num": 1,
+            "weight": 1000
+          }
+        ]
+      }
+    ],
+    "TIER5": [
+      {
+        "chance": 5.0,
+        "drops": [
+          {
+            "item_id": "mmorpg:material/farming/5",
+            "min_lvl": 1.0,
+            "num": 1,
+            "weight": 1000
+          }
+        ]
+      }
+    ]
+  }
 }

@@ -3,5 +3,6 @@
   "exp_sources": {
     "map": {}
   },
-  "id": "enchanting"
+  "id": "enchanting",
+  "tiered_drops": {}
 }

@@ -61,6 +61,12 @@ public class MapHolder {
                 .get(get(EXILE_POTION_ID));
     }
 
+    // todo test if this works
+    public <T extends Enum> T getEnum(T en, MapField<String> f) {
+        var o = get(f);
+        return (T) en.valueOf(en.getClass(), o);
+    }
+
     public AttackType getDmgEffectType() {
         return AttackType.valueOf(get(MapField.DMG_EFFECT_TYPE));
     }

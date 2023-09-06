@@ -72,6 +72,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     }
 
     public float getQualityBaseStatsMulti() {
+      
         if (getQualityType() == GearQualityType.BASE) {
             return 1F + (getQuality() / 100F);
         }

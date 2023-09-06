@@ -73,8 +73,7 @@ public class GearSocketsData implements IStatsContainer, IGearPartTooltip {
 
             if (data.isRune()) {
                 Rune gem = data.getRune();
-                list.add(ExileText.ofText(gem.getFormat(data) + "[" + UNICODE.CUBE + "] ").get().append(data.GetTooltipString(info, gear)
-                        .get(0)));
+                list.add(ExileText.ofText(gem.getFormat(data) + "[" + UNICODE.CUBE + "] ").get().append(data.GetTooltipString(info, gear).get(0)));
             }
         }
 

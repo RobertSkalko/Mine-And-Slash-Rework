@@ -106,6 +106,13 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
 
         @Override
         public boolean canBeModified(GearItemData data) {
+
+            Rune rune = ExileDB.Runes().get(RuneItem.this.type.id);
+
+            if (rune.getFor(data.GetBaseGearType().family()).isEmpty()) {
+                return false;
+            }
+
             int runes = (int) data.sockets.getSocketed().stream().filter(x -> x.isRune()).count();
             return data.getEmptySockets() > 0 || runes == 1;
         }
