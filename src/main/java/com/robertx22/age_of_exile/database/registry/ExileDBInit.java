@@ -1,24 +1,20 @@
 package com.robertx22.age_of_exile.database.registry;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
+import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearTypes;
 import com.robertx22.age_of_exile.aoe_data.database.boss_spell.SummonThornMobs;
-import com.robertx22.age_of_exile.database.data.DimensionConfig;
-import com.robertx22.age_of_exile.database.data.EntityConfig;
+import com.robertx22.age_of_exile.aoe_data.database.gear_slots.GearSlots;
+import com.robertx22.age_of_exile.aoe_data.database.mob_affixes.MobAffixes;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
-import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
-import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.data.league.HarvestLeague;
 import com.robertx22.age_of_exile.database.data.loot_chest.GearLootChest;
-import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
-import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
-import com.robertx22.age_of_exile.database.data.spells.components.Spell;
-import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
 import com.robertx22.age_of_exile.database.empty_entries.EmptyAffix;
 import com.robertx22.age_of_exile.database.empty_entries.EmptyStat;
 import com.robertx22.age_of_exile.database.registrators.StatsRegister;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.age_of_exile.vanilla_mc.items.gemrunes.RuneItem;
 import com.robertx22.library_of_exile.registry.Database;
 import com.robertx22.library_of_exile.registry.ExileRegistryContainer;
-import net.minecraft.ChatFormatting;
 
 public class ExileDBInit {
 
@@ -43,46 +39,42 @@ public class ExileDBInit {
     public static void initRegistries() {
         // data pack ones
 
-        Database.addRegistry(new RarityRegistryContainer<>(ExileRegistryTypes.GEAR_RARITY, new GearRarity()).setIsDatapack());
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.GEAR_SLOT, new GearSlot("", "", SlotFamily.NONE, 0, -1, 0)).setIsDatapack());
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.GEAR_TYPE, null).setIsDatapack());
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.RUNEWORDS, null).setIsDatapack());
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.EXILE_EFFECT, null).setIsDatapack());
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.AFFIX, EmptyAffix.getInstance()).setIsDatapack());
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.MOB_AFFIX, new MobAffix("empty", "empty", ChatFormatting.AQUA)).setIsDatapack());
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.UNIQUE_GEAR, null).setIsDatapack());
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.GEM, null).setIsDatapack());
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.RUNE, null).setIsDatapack());
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.SPELL, Spell.SERIALIZER).setIsDatapack());
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.PERK, null).setIsDatapack());
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.TALENT_TREE, null).setIsDatapack());
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.SPELL_SCHOOL, null).setIsDatapack());
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.BASE_STATS, null).setIsDatapack());
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.GAME_BALANCE, new GameBalanceConfig()).setIsDatapack());
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.VALUE_CALC, new ValueCalculation()).setIsDatapack());
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.STAT_EFFECT, null).setIsDatapack());
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.STAT_CONDITION, null).setIsDatapack());
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.DIMENSION_CONFIGS, DimensionConfig.DefaultExtra()
-                ).logAdditions()
-                        .setIsDatapack()
-                        .dontErrorMissingEntriesOnAccess()
-        );
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.ENTITY_CONFIGS, new EntityConfig("", 0)).logAdditions()
+        Database.addRegistry(new RarityRegistryContainer<>(ExileRegistryTypes.GEAR_RARITY, IRarity.COMMON_ID).setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.GEAR_SLOT, GearSlots.SWORD).setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.GEAR_TYPE, BaseGearTypes.SWORD.GUID()).setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.RUNEWORDS, "").setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.EXILE_EFFECT, "").setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.AFFIX, EmptyAffix.getInstance().GUID()).setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.MOB_AFFIX, MobAffixes.FULL_COLD).setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.UNIQUE_GEAR, "").setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.GEM, "").setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.RUNE, RuneItem.RuneType.ANO.id).setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.SPELL, "").setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.PERK, "").setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.TALENT_TREE, "").setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.SPELL_SCHOOL, "").setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.BASE_STATS, "").setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.GAME_BALANCE, GameBalanceConfig.ID).setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.VALUE_CALC, "").setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.STAT_EFFECT, "").setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.STAT_CONDITION, "").setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.DIMENSION_CONFIGS, "").logAdditions().setIsDatapack().dontErrorMissingEntriesOnAccess());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.ENTITY_CONFIGS, "").logAdditions()
                 .setIsDatapack());
 
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.STAT, EmptyStat.getInstance()));
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.AILMENT, null));
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.CURRENCY_ITEMS, null));
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.SUPPORT_GEM, null));
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.AURA, null));
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.MAP_AFFIX, null));
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.BOSS_SPELL, new SummonThornMobs()));
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.LEAGUE_MECHANIC, new HarvestLeague()));
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.LOOT_CHEST, new GearLootChest()));
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.DUNGEON, null));
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.RECIPE, null));
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.PROFESSION, null));
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.STAT_BUFF, null));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.STAT, EmptyStat.getInstance().GUID()));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.AILMENT, ""));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.CURRENCY_ITEMS, ""));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.SUPPORT_GEM, ""));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.AURA, ""));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.MAP_AFFIX, ""));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.BOSS_SPELL, new SummonThornMobs().GUID()));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.LEAGUE_MECHANIC, new HarvestLeague().GUID()));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.LOOT_CHEST, new GearLootChest().GUID()));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.DUNGEON, ""));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.RECIPE, ""));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.PROFESSION, ""));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.STAT_BUFF, ""));
 
     }
 }

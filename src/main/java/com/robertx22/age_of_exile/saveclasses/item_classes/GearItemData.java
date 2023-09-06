@@ -13,6 +13,9 @@ import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.*;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.*;
+import com.robertx22.age_of_exile.saveclasses.item_classes.rework.DataKey;
+import com.robertx22.age_of_exile.saveclasses.item_classes.rework.DataKeyHolder;
+import com.robertx22.age_of_exile.saveclasses.item_classes.rework.GenericDataHolder;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
@@ -35,6 +38,22 @@ import java.util.stream.Collectors;
 
 public class GearItemData implements ICommonDataItem<GearRarity> {
 
+    public static KeyHolderClass KEYS = new KeyHolderClass();
+
+    // with this custom data will be saved only when needed
+    public static class KeyHolderClass extends DataKeyHolder {
+        // public DataKey.RegistryKey<GearRarity> RARITY = of(new DataKey.RegistryKey<>("rar", ExileRegistryTypes.GEAR_RARITY));
+
+        public DataKey.BooleanKey CORRUPT = of(new DataKey.BooleanKey("cr"));
+        public DataKey.BooleanKey SALVAGING_DISABLED = of(new DataKey.BooleanKey("sl"));
+        public DataKey.BooleanKey USED_SHARPENING_STONE = of(new DataKey.BooleanKey("us"));
+
+        public DataKey.StringKey UNIQUE_ID = of(new DataKey.StringKey("uq"));
+
+        public DataKey.IntKey QUALITY = of(new DataKey.IntKey("ql"));
+
+        public DataKey.EnumKey<GearQualityType> QUALITY_TYPE = of(new DataKey.EnumKey(GearQualityType.BASE, "qt"));
+    }
 
     // Stats
     public BaseStatsData baseStats = new BaseStatsData();
@@ -44,11 +63,12 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     public UniqueStatsData uniqueStats;
 
 
+    public GenericDataHolder data = new GenericDataHolder();
+
     // Stats
 
     // i added rename ideas to comments. As tiny as possible while still allowing people to understand kinda what it is
     // apparently people had big issues with many storage mods, So i should try minimize the nbt.
-    public String uniq = ""; // uniq_id
     public String rar = IRarity.COMMON_ID; // rar
 
     public int rp = -1; // pre_name rare prefix
@@ -56,23 +76,19 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
     public int lvl = 1; // lvl
     public String gtype = "";
+
     // potential
     private String pot = IRarity.COMMON_ID;
     // potential number
     private int pn = 0;
     // salvagable
-    public boolean sal = true;
-    public boolean c = false; // corrupted
 
-    private int qual = 0;
-    private GearQualityType qt = GearQualityType.BASE;
 
     public int getQuality() {
-        return qual;
+        return data.get(KEYS.QUALITY);
     }
 
     public float getQualityBaseStatsMulti() {
-      
         if (getQualityType() == GearQualityType.BASE) {
             return 1F + (getQuality() / 100F);
         }
@@ -80,7 +96,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     }
 
     public GearQualityType getQualityType() {
-        return qt;
+        return data.get(KEYS.QUALITY_TYPE);
     }
 
     public enum GearQualityType {
@@ -95,12 +111,12 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     }
 
     public void setQuality(int a, GearQualityType type) {
-        this.qual = a;
-        this.qt = type;
+        this.data.set(KEYS.QUALITY, a);
+        this.data.set(KEYS.QUALITY_TYPE, type);
     }
 
     public boolean isCorrupted() {
-        return c;
+        return data.get(KEYS.CORRUPT);
     }
 
 
@@ -226,11 +242,6 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         return stack.getHoverName();
     }
 
-    public void WriteOverDataThatShouldStay(GearItemData newdata) {
-
-        newdata.sal = this.sal;
-
-    }
 
     public BaseGearType GetBaseGearType() {
         return ExileDB.GearTypes()
@@ -429,7 +440,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     @Override
     public List<ItemStack> getSalvageResult(ItemStack stack) {
 
-        if (this.sal) {
+        if (!data.get(KEYS.SALVAGING_DISABLED)) {
 
             int amount = 1;
             return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(getRarity().GUID()).get(), amount));
@@ -443,7 +454,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         if (this.isUnique()) {
             return false; // todo add salvage for uniques
         }
-        return this.sal;
+        return !data.get(KEYS.SALVAGING_DISABLED);
     }
 
     @Override

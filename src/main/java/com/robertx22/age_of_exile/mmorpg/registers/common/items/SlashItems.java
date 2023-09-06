@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.mmorpg.registers.common.items;
 
 import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChestItem;
-import com.robertx22.age_of_exile.database.data.profession.ProfessionBlock;
+import com.robertx22.age_of_exile.database.data.profession.all.Professions;
 import com.robertx22.age_of_exile.maps.MapItem;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
@@ -29,15 +29,15 @@ import net.minecraft.world.item.Item;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Function;
 
 public class SlashItems {
 
     public static void init() {
 
-        for (Map.Entry<String, RegObj<ProfessionBlock>> en : SlashBlocks.STATIONS.entrySet()) {
-            STATIONS.put(en.getKey(), Def.item(en.getKey() + "_station", () -> new BlockItem(en.getValue().get(), new Item.Properties())));
+        for (String pro : Professions.STATION_PROFESSIONS) {
+            STATIONS.put(pro, Def.item(pro + "_station", () -> new BlockItem(SlashBlocks.STATIONS.get(pro).get(), new Item.Properties())));
+
         }
     }
 

@@ -23,7 +23,7 @@ public class ThornyMinion extends Minion {
 
             }
         } catch (Exception e) {
-            //throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 }

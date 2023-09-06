@@ -24,7 +24,6 @@ public class UniqueStatsData implements IGearPartTooltip, IRerollable, IStatsCon
 
     }
 
-
     public List<Integer> perc = new ArrayList<Integer>();
 
     @Override
@@ -78,8 +77,7 @@ public class UniqueStatsData implements IGearPartTooltip, IRerollable, IStatsCon
     }
 
     public UniqueGear getUnique(GearItemData gear) {
-        return ExileDB.UniqueGears()
-                .get(gear.uniq);
+        return ExileDB.UniqueGears().get(gear.data.get(GearItemData.KEYS.UNIQUE_ID));
 
     }
 
@@ -91,9 +89,7 @@ public class UniqueStatsData implements IGearPartTooltip, IRerollable, IStatsCon
     public List<TooltipStatWithContext> getAllStatsWithCtx(GearItemData gear, TooltipInfo info) {
         List<TooltipStatWithContext> list = new ArrayList<>();
         int i = 0;
-        for (StatMod mod : ExileDB.UniqueGears()
-                .get(gear.uniq)
-                .uniqueStats()) {
+        for (StatMod mod : getUnique(gear).uniqueStats()) {
             ExactStatData exact = mod.ToExactStat(perc.get(i), gear.getLevel());
             list.add(new TooltipStatWithContext(new TooltipStatInfo(exact, perc.get(i), info), mod, (int) gear.getLevel()));
             i++;
@@ -108,9 +104,7 @@ public class UniqueStatsData implements IGearPartTooltip, IRerollable, IStatsCon
 
         try {
             int i = 0;
-            for (StatMod mod : ExileDB.UniqueGears()
-                    .get(gear.uniq)
-                    .uniqueStats()) {
+            for (StatMod mod : getUnique(gear).uniqueStats()) {
                 list.add(mod.ToExactStat(perc.get(i), gear.getLevel()));
                 i++;
             }

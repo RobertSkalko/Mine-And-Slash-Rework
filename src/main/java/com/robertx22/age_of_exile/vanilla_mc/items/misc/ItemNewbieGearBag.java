@@ -109,7 +109,7 @@ public class ItemNewbieGearBag extends Item {
 
 
                 GearItemData data = b.createData();
-                data.sal = false;
+                data.data.set(GearItemData.KEYS.SALVAGING_DISABLED, true);
 
                 ItemStack stack = data.getRarity().getLootableItem(data.GetBaseGearType().getGearSlot()).getDefaultInstance();
 

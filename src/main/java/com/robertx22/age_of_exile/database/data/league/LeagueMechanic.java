@@ -103,7 +103,7 @@ public abstract class LeagueMechanic implements ExileRegistry<LeagueMechanic> {
                 generateStructure(level, room, pos);
             }
         } catch (Exception e) {
-            //    throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 

@@ -10,6 +10,7 @@ import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -73,7 +74,8 @@ public class ProfessionBlockEntity extends BlockEntity {
                 Player p = getOwner(level);
 
                 if (p != null) {
-                    if (tryRecipe(p, true) || trySalvage(p, true)) {
+                    // todo write this somewhere or in chat
+                    if (tryRecipe(p, true).can || trySalvage(p, true).can) {
                         craftingTicks += 20;
 
                         if (craftingTicks > 60) {
@@ -95,33 +97,58 @@ public class ProfessionBlockEntity extends BlockEntity {
         this.setChanged(); // todo will this cause any problems to have it perma on?
     }
 
-    public boolean tryRecipe(Player p, boolean justCheck) {
+    public Result tryRecipe(Player p, boolean justCheck) {
+
 
         var recipe = getCurrentRecipe(level);
 
-        if (recipe != null && this.inventory.getInventory(OUTPUTS).isEmpty()) {
+        if (recipe == null) {
+            return Result.failure(Component.literal("Recipe not found"));
+        }
+        if (!this.inventory.getInventory(OUTPUTS).isEmpty()) {
+            return Result.failure(Component.literal("Output slots are not empty."));
+        }
+        if (recipe.getLevelRequirement() > this.ownerLvl) {
+            return Result.failure(Component.literal("Not high enough level to craft."));
+        }
 
-            if (justCheck) {
-                return true;
-            }
+        if (justCheck) {
+            return Result.success();
+        }
 
+        this.addExp(recipe.getExpReward(this.ownerLvl, getMats()) * recipe.getTier().levelRange.getMinLevel());
 
-            this.addExp(recipe.getExpReward(this.ownerLvl, getMats()) * recipe.getTier().levelRange.getMinLevel());
+        for (ItemStack stack : recipe.craft(getMats())) {
+            inventory.addStack(OUTPUTS, stack);
+        }
 
-            for (ItemStack stack : recipe.craft(getMats())) {
-                inventory.addStack(OUTPUTS, stack);
-            }
+        recipe.spendMaterials(getMats());
+        return Result.success();
 
-            recipe.spendMaterials(getMats());
-            return true;
-        } else {
-            return false;
+    }
+
+    public static class Result {
+
+        public boolean can;
+        public Component answer;
+
+        private Result(boolean can, Component answer) {
+            this.can = can;
+            this.answer = answer;
+        }
+
+        public static Result success() {
+            return new Result(true, Component.empty());
+        }
+
+        public static Result failure(Component txt) {
+            return new Result(false, txt);
         }
 
 
     }
 
-    public boolean trySalvage(Player p, boolean justCheck) {
+    public Result trySalvage(Player p, boolean justCheck) {
 
         if (getProfession().GUID().equals(Professions.SALVAGING)) {
             if (this.inventory.getInventory(OUTPUTS).isEmpty()) {
@@ -133,7 +160,7 @@ public class ProfessionBlockEntity extends BlockEntity {
                         if (sal.isSalvagable()) {
 
                             if (justCheck) {
-                                return true;
+                                return Result.success();
                             }
                             for (ItemStack res : sal.getSalvageResult(stack)) {
                                 this.inventory.addStack(OUTPUTS, res);
@@ -146,14 +173,14 @@ public class ProfessionBlockEntity extends BlockEntity {
                                 this.inventory.addStack(OUTPUTS, randomDrop);
                             }
 
-                            return true;
+                            return Result.success();
                         }
                     }
                 }
 
             }
         }
-        return false;
+        return Result.failure(Component.literal(""));
     }
 
     public void addExp(int xp) {
@@ -161,7 +188,7 @@ public class ProfessionBlockEntity extends BlockEntity {
         Player p = getOwner(level);
 
         if (p != null) {
-            Load.player(p).professions.addExp(p, getProfession().GUID(), savedXP);
+            Load.player(p).professions.addExp(p, getProfession().GUID(), xp);
         } else {
             this.savedXP += xp;
         }
@@ -182,6 +209,7 @@ public class ProfessionBlockEntity extends BlockEntity {
 
         if (savedXP > 0) {
             Load.player(p).professions.addExp(p, getProfession().GUID(), savedXP);
+            savedXP = 0;
         }
 
     }

@@ -1,0 +1,36 @@
+{
+  "exp": 100,
+  "id": "currency_sharpening_stone44",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/mining/4",
+      "num": 15
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:copper_ingot",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:iron_ingot",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:gold_ingot",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:diamond",
+      "num": 1
+    }
+  ],
+  "power": "greater",
+  "profession": "gear_crafting",
+  "result": "mmorpg:currency/sharpening_stone4",
+  "result_num": 1,
+  "tier": 4
+}

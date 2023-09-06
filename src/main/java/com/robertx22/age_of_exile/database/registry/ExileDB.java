@@ -48,8 +48,15 @@ public class ExileDB {
     public static DimensionConfig getDimensionConfig(LevelAccessor world) {
         String id = MapManager.getResourceLocation((Level) world)
                 .toString();
+
+        if (!DimensionConfigs().isRegistered(id)) {
+            return DimensionConfig.DefaultExtra();
+        }
+
         return DimensionConfigs().get(id);
     }
+
+    // todo
 
     public static EntityConfig getEntityConfig(LivingEntity entity, EntityData data) {
 

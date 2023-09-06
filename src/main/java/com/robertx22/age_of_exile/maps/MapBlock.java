@@ -46,7 +46,7 @@ public class MapBlock extends BaseEntityBlock {
 
             }
         } catch (Exception e) {
-            //throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 

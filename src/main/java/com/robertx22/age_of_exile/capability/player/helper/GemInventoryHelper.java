@@ -68,7 +68,7 @@ public class GemInventoryHelper {
             int index = hotbar * (SUPPORT_GEMS_PER_SKILL + 1);
             return new SocketedGem(this.getGemsInv(), index);
         } catch (Exception e) {
-            // throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return null;
     }
@@ -77,7 +77,7 @@ public class GemInventoryHelper {
         try {
             return new SocketedGem(this.getGemsInv(), index);
         } catch (Exception e) {
-            // throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return null;
     }

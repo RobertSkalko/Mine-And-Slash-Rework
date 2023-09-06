@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.saveclasses.stat_soul;
 
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
+import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -16,6 +17,7 @@ import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISettableLevelTier;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
+import com.robertx22.temp.SkillItemTier;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
@@ -34,6 +36,7 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
 
     public String rar = "";
 
+    public SlotFamily fam = SlotFamily.NONE;
 
     public String uniq = "";
 
@@ -43,12 +46,20 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
 
     public GearItemData gear = null;
 
-    public static StatSoulData anySlotOfRarity(String rar) {
+
+    // todo how do i make the result accept nbt.
+    // and how to make jei accept nbt
+
+    // i COULD make each of these an item ? and have profession set the correct tier?
+
+    public static StatSoulData ofFamily(GearRarity rar, SkillItemTier tier, SlotFamily fam) {
         StatSoulData data = new StatSoulData();
-        data.tier = -1; // todo idk
-        data.rar = rar;
+        data.tier = tier.tier;
+        data.fam = fam;
+        data.rar = rar.GUID();
         return data;
     }
+
 
     public boolean canBeOnAnySlot() {
         return slot.isEmpty();
@@ -84,6 +95,36 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
         }
     }
 
+    public GearSlot getSlotFor(ItemStack stack) {
+        GearSlot gearslot = ExileDB.GearSlots().random();
+
+        if (!slot.isEmpty()) {
+            gearslot = ExileDB.GearSlots().get(slot);
+        }
+        if (stack != null) {
+            gearslot = GearSlot.getSlotOf(stack.getItem());
+        }
+        return gearslot;
+    }
+
+    public boolean canApplyTo(ItemStack stack) {
+        GearSlot slot = GearSlot.getSlotOf(stack.getItem());
+
+        if (canBeOnAnySlot()) {
+            return slot != null;
+        }
+        if (fam != SlotFamily.NONE) {
+            if (slot.fam == fam) {
+                return true;
+            }
+        }
+        if (!this.slot.isEmpty()) {
+            return this.slot.equals(slot.GUID());
+        }
+
+        return false;
+    }
+
 
     public GearItemData createGearData(@Nullable ItemStack stack) {
 
@@ -103,27 +144,17 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
             b.rarity.set(uniq.getUniqueRarity());
         }
 
-        if (this.canBeOnAnySlot()) {
-            GearSlot gearslot = ExileDB.GearSlots()
-                    .random();
-            if (stack != null) {
-                gearslot = GearSlot.getSlotOf(stack.getItem());
-            }
-            String slotid = gearslot.GUID();
+        GearSlot gearslot = getSlotFor(stack);
+        String slotid = gearslot.GUID();
 
-            b.gearItemSlot.set(ExileDB.GearTypes()
-                    .getFilterWrapped(x -> x.gear_slot.equals(slotid))
-                    .random());
-        } else {
-            var t = ExileDB.GearTypes()
-                    .getFilterWrapped(x -> x.gear_slot.equals(slot))
-                    .random();
-            b.gearItemSlot.set(t);
-        }
+        b.gearItemSlot.set(ExileDB.GearTypes()
+                .getFilterWrapped(x -> x.gear_slot.equals(slotid))
+                .random());
+
 
         GearItemData gear = b.createData();
 
-        gear.sal = this.can_sal;
+        gear.data.set(GearItemData.KEYS.SALVAGING_DISABLED, !this.can_sal);
         return gear;
     }
 
@@ -138,24 +169,11 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
         }
 
         if (this.gear != null) {
-            return GearSlot.isItemOfThisSlot(gear.GetBaseGearType()
-                    .getGearSlot(), stack.getItem());
+            return GearSlot.isItemOfThisSlot(gear.GetBaseGearType().getGearSlot(), stack.getItem());
         }
 
-        if (this.canBeOnAnySlot()) {
-            GearSlot slot = GearSlot.getSlotOf(stack.getItem());
-            if (slot != null && !slot.GUID()
-                    .isEmpty()) {
-                return true;
-            } else {
-                return false;
-            }
-        }
+        return canApplyTo(stack);
 
-        Boolean can = GearSlot.isItemOfThisSlot(ExileDB.GearSlots()
-                .get(slot), stack.getItem());
-
-        return can;
     }
 
     @Override

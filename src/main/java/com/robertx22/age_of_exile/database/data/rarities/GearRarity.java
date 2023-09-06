@@ -5,10 +5,12 @@ import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.MinMax;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientTextureUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.VanillaMaterial;
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -31,6 +33,10 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
         return this;
     }
 
+    @Override
+    public ExileRegistryType getExileRegistryType() {
+        return ExileRegistryTypes.GEAR_RARITY;
+    }
 
     public int favor_needed = 0;
     public float favor_loot_multi = 1;

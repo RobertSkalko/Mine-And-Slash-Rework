@@ -14,7 +14,11 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     public static String ID = "game_balance";
 
     public static GameBalanceConfig get() {
-        return (GameBalanceConfig) Database.getRegistry(ExileRegistryTypes.GAME_BALANCE).get(ID);
+        var d = Database.getRegistry(ExileRegistryTypes.GAME_BALANCE);
+        if (d.isRegistered(ID)) {
+            return (GameBalanceConfig) d.get(ID);
+        }
+        return SERIALIZER;
     }
 
 

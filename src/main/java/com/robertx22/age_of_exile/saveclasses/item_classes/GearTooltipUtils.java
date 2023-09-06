@@ -108,7 +108,7 @@ public class GearTooltipUtils {
 
 
         if (Screen.hasShiftDown()) {
-            if (!gear.sal) {
+            if (gear.data.get(GearItemData.KEYS.SALVAGING_DISABLED)) {
                 tip.add(Words.Unsalvagable.locName().withStyle(ChatFormatting.RED));
             }
         }

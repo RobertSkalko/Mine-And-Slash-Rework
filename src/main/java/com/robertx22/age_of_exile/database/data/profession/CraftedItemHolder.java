@@ -36,7 +36,7 @@ public class CraftedItemHolder {
             LeveledItem.setTier(stack, tier.tier);
             return stack;
         } catch (Exception e) {
-            // throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return ItemStack.EMPTY;
     }

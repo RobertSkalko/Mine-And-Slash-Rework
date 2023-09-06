@@ -35,7 +35,7 @@ public class SoulLootGen extends BaseLootGen<GearBlueprint> {
         soul.tier = gear.getTier();
 
         if (gear.isUnique()) {
-            soul.uniq = gear.uniq;
+            soul.uniq = gear.data.get(GearItemData.KEYS.UNIQUE_ID);
         }
 
         ItemStack stack = soul.toStack();

@@ -77,7 +77,7 @@ public class PlayerBackpackData implements ICap {
                 }
 
             } catch (Exception e) {
-                //throw new RuntimeException(e);
+                e.printStackTrace();
             }
         }
     }

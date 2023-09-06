@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public abstract class DataKey<T> {
 
-    String key;
+    public final String key;
 
     public DataKey(String key) {
         this.key = key;
@@ -24,8 +24,7 @@ public abstract class DataKey<T> {
                 return finished;
             }
         }
-
-        return null;
+        return getEmpty();
     }
 
     public abstract T getEmpty();
@@ -55,13 +54,11 @@ public abstract class DataKey<T> {
 
     public static class EnumKey<T extends Enum> extends DataKey<T> {
 
-        T en;
         T empty;
 
-        public EnumKey(T en, T empty, String key) {
+        public EnumKey(T empty, String key) {
             super(key);
             this.empty = empty;
-            this.en = en;
         }
 
         @Override
@@ -72,7 +69,7 @@ public abstract class DataKey<T> {
         @Override
         protected T savedObjectToObject(Object o) {
             try {
-                T tried = (T) T.valueOf(en.getClass(), (String) o);
+                T tried = (T) T.valueOf(empty.getClass(), (String) o);
                 return tried;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -87,7 +84,7 @@ public abstract class DataKey<T> {
     }
 
 
-    public static class RegistryKey<T extends ExileRegistry<T>> extends DataKey<T> {
+    public static class RegistryKey<T extends ExileRegistry> extends DataKey<T> {
 
         ExileRegistryType type;
 

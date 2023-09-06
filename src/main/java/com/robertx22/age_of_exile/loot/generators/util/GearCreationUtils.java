@@ -56,7 +56,7 @@ public class GearCreationUtils {
                     .GUID();
 
             data.gtype = unique.base_gear;
-            data.uniq = unique.GUID();
+            data.data.set(GearItemData.KEYS.UNIQUE_ID, unique.GUID());
             data.uniqueStats = new UniqueStatsData();
             data.uniqueStats.RerollFully(data);
 

@@ -27,6 +27,7 @@ public class Professions {
     public static String COOKING = "cooking";
     public static String ALCHEMY = "alchemy";
     public static String ENCHANTING = "enchanting";
+    public static String GEAR_CRAFTING = "gear_crafting";
 
     // misc
     public static String SALVAGING = "salvaging";
@@ -36,6 +37,7 @@ public class Professions {
             COOKING,
             SALVAGING,
             ALCHEMY,
+            GEAR_CRAFTING,
             ENCHANTING
     );
 
@@ -108,6 +110,10 @@ public class Professions {
                 .build();
 
         Builder.of(ENCHANTING)
+
+                .build();
+
+        Builder.of(GEAR_CRAFTING)
 
                 .build();
 

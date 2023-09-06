@@ -1,9 +1,9 @@
 package com.robertx22.age_of_exile.saveclasses.stat_soul;
 
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
+import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
@@ -39,13 +39,6 @@ public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt {
         super(new Properties());
     }
 
-    public static ItemStack ofAnySlotOfRarity(String rar) {
-        ItemStack stack = new ItemStack(SlashItems.STAT_SOUL.get());
-        StatSoulData data = StatSoulData.anySlotOfRarity(rar);
-        StackSaving.STAT_SOULS.saveTo(stack, data);
-
-        return stack;
-    }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
@@ -156,11 +149,17 @@ public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt {
                 if (data.canBeOnAnySlot()) {
 
                 } else {
-                    tooltip.add(Component.literal("Item Type: ").withStyle(ChatFormatting.WHITE)
-                            .append(ExileDB.GearSlots()
-                                    .get(data.slot)
-                                    .locName()
-                                    .withStyle(ChatFormatting.BLUE)));
+                    if (data.fam != SlotFamily.NONE) {
+                        tooltip.add(Component.literal("Item Type: ").withStyle(ChatFormatting.WHITE)
+                                .append(data.fam.name()).withStyle(ChatFormatting.BLUE));
+                    } else {
+
+                        tooltip.add(Component.literal("Item Type: ").withStyle(ChatFormatting.WHITE)
+                                .append(ExileDB.GearSlots()
+                                        .get(data.slot)
+                                        .locName()
+                                        .withStyle(ChatFormatting.BLUE)));
+                    }
                 }
                 tooltip.add(TooltipUtils.gearRarity(ExileDB.GearRarities()
                         .get(data.rar)));

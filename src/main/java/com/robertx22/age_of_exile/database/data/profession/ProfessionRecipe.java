@@ -20,6 +20,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IAutoGson<ProfessionRecipe> {
@@ -31,10 +32,14 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
     private List<CraftingMaterial> mats = new ArrayList<>();
     public String result = "";
     private int result_num = 1;
-    private int exp = 10;
+    private int exp = 100;
 
     public String power = "";
     public int tier = 0;
+
+    public int getLevelRequirement() {
+        return getTier().levelRange.getMinLevel();
+    }
 
     public CraftedItemPower getPower() {
         return CraftedItemPower.ofId(power);
@@ -83,23 +88,22 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
 
         public static RecipeDifficulty get(int skilllvl, int recipelvl) {
 
-            if (skilllvl > recipelvl) {
-                return EASY;
-            } else {
-                int diff = Math.abs(skilllvl - recipelvl);
-                float diffMulti = LevelUtils.getMaxLevelMultiplier(diff);
+            int diff = Math.abs(skilllvl - recipelvl);
+            float diffMulti = LevelUtils.getMaxLevelMultiplier(diff);
 
-                if (diffMulti < 0.1F) {
-                    return MEDIUM;
-                }
-                if (diffMulti < 0.2F) {
-                    return HARD;
-                }
-                if (diffMulti < 0.3F) {
-                    return VERY_HARD;
-                }
+            if (diffMulti < 0.1F) {
+                return VERY_HARD;
             }
-
+            if (diffMulti < 0.2F) {
+                return HARD;
+            }
+            if (diffMulti < 0.3F) {
+                return MEDIUM;
+            }
+            if (diffMulti < 0.5F) {
+                return EASY;
+            }
+     
             return VERY_HARD;
         }
     }
@@ -207,13 +211,72 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
         }
     }
 
-    public static class Builder {
+    public static class TierBuilder {
+
+        List<Consumer<Data>> actions = new ArrayList<>();
+
+        public static TierBuilder of(Function<SkillItemTier, Item> item, String proff, int num) {
+            TierBuilder b = new TierBuilder();
+            b.actions.add((data) -> {
+                var id = VanillaUTIL.REGISTRY.items().getKey(item.apply(data.tier));
+                data.recipe.id = id.getPath().replaceAll("/", "_") + data.tier.tier;
+                data.recipe.result = id.toString();
+                data.recipe.profession = proff;
+                data.recipe.result_num = num;
+                data.recipe.tier = data.tier.tier;
+            });
+            return b;
+        }
+
+        public TierBuilder exp(int xp) {
+            this.actions.add(x -> x.recipe.exp = xp);
+            return this;
+        }
+
+        public TierBuilder onlyOnTier(Function<SkillItemTier, ItemStack> tier) {
+            this.actions.add(data -> {
+
+                ItemStack stack = tier.apply(data.tier);
+                if (!stack.isEmpty()) {
+                    var id = VanillaUTIL.REGISTRY.items().getKey(stack.getItem());
+                    data.recipe.mats.add(CraftingMaterial.item(id.toString(), stack.getCount()));
+
+                }
+            });
+            return this;
+        }
+
+        public TierBuilder onTierOrAbove(SkillItemTier tier, Item item, int num) {
+            this.actions.add(data -> {
+                if (data.tier.tier >= tier.tier) {
+                    var id = VanillaUTIL.REGISTRY.items().getKey(item);
+                    data.recipe.mats.add(CraftingMaterial.item(id.toString(), num));
+                }
+            });
+            return this;
+        }
+
+
+        public void buildEachTier() {
+            for (SkillItemTier tier : SkillItemTier.values()) {
+                ProfessionRecipe r = new ProfessionRecipe();
+                Data data = new Data(tier, CraftedItemPower.GREATER, r);
+                r.power = data.power.id;
+                for (Consumer<Data> action : this.actions) {
+                    action.accept(data);
+                }
+                r.addToSerializables();
+            }
+        }
+    }
+
+    public static class TierPowerBuilder {
         SkillItemTier lowest;
 
         List<Consumer<Data>> actions = new ArrayList<>();
 
-        public static Builder of(CraftedItemHolder hold, SkillItemTier lowestTier, String proff, int num) {
-            Builder b = new Builder();
+        public static TierPowerBuilder of(CraftedItemHolder hold, SkillItemTier lowestTier, String proff, int num) {
+            TierPowerBuilder b = new TierPowerBuilder();
             b.lowest = lowestTier;
             b.actions.add((data) -> {
                 var id = VanillaUTIL.REGISTRY.items().getKey(hold.get(data.tier, data.power).getItem());
@@ -226,12 +289,13 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
             return b;
         }
 
-        public Builder coreMaterials(String prof) {
+
+        public TierPowerBuilder coreMaterials(String prof) {
             materialItems(ProfessionMatItems.TIERED_MAIN_MATS.get(prof));
             return this;
         }
 
-        private Builder materialItems(HashMap<SkillItemTier, RegObj<Item>>... items) {
+        private TierPowerBuilder materialItems(HashMap<SkillItemTier, RegObj<Item>>... items) {
             this.actions.add(data -> {
                 for (HashMap<SkillItemTier, RegObj<Item>> item : items) {
                     var id = VanillaUTIL.REGISTRY.items().getKey(item.get(data.tier).get());
@@ -241,19 +305,19 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
             return this;
         }
 
-        public Builder lesser(Item item, int num) {
+        public TierPowerBuilder lesser(Item item, int num) {
             return material(CraftedItemPower.LESSER, item, num);
         }
 
-        public Builder medium(Item item, int num) {
+        public TierPowerBuilder medium(Item item, int num) {
             return material(CraftedItemPower.MEDIUM, item, num);
         }
 
-        public Builder greater(Item item, int num) {
+        public TierPowerBuilder greater(Item item, int num) {
             return material(CraftedItemPower.GREATER, item, num);
         }
 
-        private Builder material(CraftedItemPower forPower, Item item, int num) {
+        private TierPowerBuilder material(CraftedItemPower forPower, Item item, int num) {
             this.actions.add(data -> {
                 if (data.power.perc >= forPower.perc) {
                     var id = VanillaUTIL.REGISTRY.items().getKey(item);
@@ -263,12 +327,12 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
             return this;
         }
 
-        public Builder exp(int xp) {
+        public TierPowerBuilder exp(int xp) {
             this.actions.add(x -> x.recipe.exp = xp);
             return this;
         }
 
-        public void build() {
+        public void buildEachTierAndPower() {
             for (SkillItemTier tier : SkillItemTier.values()) {
                 if (tier.tier >= lowest.tier) {
                     for (CraftedItemPower power : CraftedItemPower.values()) {
