@@ -63,7 +63,7 @@ public class CurrencyItem extends Item implements IItemAsCurrency, IAutoLocName,
     }
 
     @Override
-    public Currency currencyEffect() {
+    public Currency currencyEffect(ItemStack stack) {
         return effect;
     }
 

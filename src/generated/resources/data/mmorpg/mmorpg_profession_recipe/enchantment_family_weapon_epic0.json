@@ -1,0 +1,46 @@
+{
+  "exp": 100,
+  "id": "enchantment_family_weapon_epic0",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/mining/0",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:stone/3",
+      "num": 6
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:paper",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/corestone_ingot",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/adamantite_ingot",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/ancient_ingot",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/mythril_ingot",
+      "num": 1
+    }
+  ],
+  "power": "greater",
+  "profession": "enchanting",
+  "result": "mmorpg:enchantment/family/weapon/epic",
+  "result_num": 3,
+  "tier": 0
+}

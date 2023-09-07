@@ -165,7 +165,7 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocN
     }
 
     @Override
-    public Currency currencyEffect() {
+    public Currency currencyEffect(ItemStack stack) {
         return new GearCurrency() {
             @Override
             public List<GearOutcome> getOutcomes() {

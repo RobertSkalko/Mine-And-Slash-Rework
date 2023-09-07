@@ -54,7 +54,7 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
     public int weight = 1000;
 
     @Override
-    public Currency currencyEffect() {
+    public Currency currencyEffect(ItemStack stack) {
         return new RuneCurrency();
     }
 

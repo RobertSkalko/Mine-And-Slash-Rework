@@ -1,0 +1,51 @@
+{
+  "exp": 100,
+  "id": "enchantment_family_weapon_legendary5",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/mining/5",
+      "num": 10
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:stone/4",
+      "num": 7
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:paper",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/corestone_ingot",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/adamantite_ingot",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/ancient_ingot",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/mythril_ingot",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/enderyll_ingot",
+      "num": 1
+    }
+  ],
+  "power": "greater",
+  "profession": "enchanting",
+  "result": "mmorpg:enchantment/family/weapon/legendary",
+  "result_num": 3,
+  "tier": 5
+}

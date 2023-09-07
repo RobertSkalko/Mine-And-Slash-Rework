@@ -1,0 +1,51 @@
+{
+  "exp": 100,
+  "id": "enchantment_family_jewelry_legendary2",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/mining/2",
+      "num": 5
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:stone/4",
+      "num": 7
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:paper",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/amethyst",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/emerald",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/ruby",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/topaz",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/tourmaline",
+      "num": 1
+    }
+  ],
+  "power": "greater",
+  "profession": "enchanting",
+  "result": "mmorpg:enchantment/family/jewelry/legendary",
+  "result_num": 3,
+  "tier": 2
+}

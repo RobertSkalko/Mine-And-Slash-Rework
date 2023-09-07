@@ -14,6 +14,16 @@
     },
     {
       "type": "ITEM",
+      "id": "minecraft:melon_slice",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:nether_wart",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
       "id": "mmorpg:farming_drops/red_pepper",
       "num": 1
     },

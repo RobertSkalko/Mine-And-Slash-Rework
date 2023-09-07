@@ -1,0 +1,25 @@
+{
+  "type": "suffix",
+  "guid": "enchantment_jewerly_int",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "enchantment",
+          "jewelry_family"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "PERCENT",
+      "max": 10.0,
+      "min": 1.0,
+      "stat": "intelligence"
+    }
+  ],
+  "weight": 1000
+}

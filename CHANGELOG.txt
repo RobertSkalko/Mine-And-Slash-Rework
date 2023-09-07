@@ -1,5 +1,28 @@
 v.5.1.0
 
+- Added Professions back!
+
+You will gather resources with:
+- Salaving, Mining, Farming, Husbandry
+
+And use them to craft with:
+- Gear crafting, alchemy, cooking, enchanting
+
+When you mine ores you will gain mining exp and sometimes find common or rare drops, these drops will be used in crafting professions.
+Profession drops are split into:
+- Core tiered drop, you get these often and they are the main drop, useful in many ways
+- Misc common drop, these sometimes drop, but are random
+- Misc rare drop, same but way rarer.
+
+Every day (sunrise), one single drop from every gathering profession will get boosted droprates, allowing the patient ones to farm specific materials.
+
+Crafting:
+- Gear crafting: gear souls, sharpening stones
+- Alchemy: buff or restorative potions
+- Cooking: buff food
+- Enchanting: create enchants
+- More to come
+
 - added more types of loot chests
 
 - rarities are now gated behind levels
@@ -14,3 +37,5 @@ This should ensure spells with any type of stat scalings can't become too op, bu
 - added experimental in combat regeneration decrease, will see how it feels and if it's right for the mod
 
 - aura cost reduction > aura capacity, instead of reducing aura cost, you will now gain aura capacity with stats. This is intended to simplify the stat
+
+- restorative potions are now made with alchemy

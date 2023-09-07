@@ -14,6 +14,16 @@
     },
     {
       "type": "ITEM",
+      "id": "minecraft:carrot",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:beetroot",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
       "id": "mmorpg:farming_drops/green_pepper",
       "num": 1
     }

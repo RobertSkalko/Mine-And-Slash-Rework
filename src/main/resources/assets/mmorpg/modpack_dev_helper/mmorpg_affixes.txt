@@ -40,14 +40,17 @@ precise
 crafted_jewel_aura_cost
 energetic
 boundless
+enchantment_jewerly_str
 crafted_jewel_water_max_res
 lightning_jewel_res
 crafted_jewel_critdmg
 desolation
 crafted_jewel_cdr
 item_flat_dodge
+enchantment_off_def
 chaos_res
 fire_res
+enchantment_jewerly_dex
 of_pene
 item_flat_armor
 fire_jewel_res
@@ -62,6 +65,7 @@ item_perc_armor
 strong_int_armor_suf
 item_both_dodge
 of_energy
+enchantment_gear_def
 of_azure_skies
 firejewel_res
 chaos_ele_dmg_jewelry
@@ -75,6 +79,7 @@ waterjewel_res
 chaos_wep_dmg
 item_flat_ms
 item_perc_ms
+enchantment_wep_dmg
 fire_spell_ele_dmg
 chaos_ele_mobs
 mana_reg
@@ -86,6 +91,7 @@ physical_wep_dmg
 crafted_jewel_aura_eff
 fire_wep_dmg_dun
 of_the_sky
+enchantment_jewerly_int
 of_mana
 chaos_jewel_res
 of_vampirism

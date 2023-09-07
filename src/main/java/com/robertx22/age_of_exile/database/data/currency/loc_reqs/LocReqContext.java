@@ -15,7 +15,7 @@ public class LocReqContext {
         this.player = player;
 
         if (currency.getItem() instanceof IItemAsCurrency cur) {
-            effect = cur.currencyEffect();
+            effect = cur.currencyEffect(currency);
         }
 
 

@@ -21,6 +21,48 @@ public class ProfessionRecipes {
         foods();
         potions();
         gearCrafting();
+        enchanting();
+    }
+
+    private static void enchanting() {
+
+
+        for (SlotFamily fam : SlotFamily.values()) {
+            if (fam != SlotFamily.NONE) {
+
+                float rarnumMulti = 1;
+                int rarnum = 1;
+                for (String rar : IRarity.NORMAL_GEAR_RARITIES) {
+                    float finalRarnumMulti = rarnumMulti;
+
+                    var b = ProfessionRecipe.TierBuilder.of(x -> ProfessionProductItems.CRAFTED_ENCHANTS.get(fam).get(rar).get(), Professions.ENCHANTING, 3)
+                            .onlyOnTier(x -> new ItemStack(ProfessionMatItems.TIERED_MAIN_MATS.get(Professions.MINING).get(x).get(), (int) ((x.tier + 1) * finalRarnumMulti)))
+                            .onTierOrAbove(SkillItemTier.TIER0, RarityItems.RARITY_STONE.get(rar).get(), 2 + rarnum)
+                            .onTierOrAbove(SkillItemTier.TIER0, Items.PAPER, 1)
+                            //.onTierOrAbove(SkillItemTier.TIER0, fam.enchantItem.get(), 1)
+                            ;
+
+                    List<RegObj<Item>> list = null;
+
+                    if (fam == SlotFamily.Jewelry) {
+                        list = ProfessionMatItems.RARE_MINING.ALL;
+                    } else {
+                        list = ProfessionMatItems.COMMON_MINING.ALL;
+                    }
+                    for (int i = 0; i < rarnum; i++) {
+                        if (list.size() > i) {
+                            b.onTierOrAbove(SkillItemTier.TIER0, list.get(i).get(), 1);
+                        }
+                    }
+
+                    b.buildEachTier();
+
+                    rarnumMulti += 0.2F;
+                    rarnum++;
+                }
+            }
+
+        }
 
     }
 

@@ -84,19 +84,20 @@ public abstract class Currency implements IWeighted, IAutoLocName, IAutoLocDesc,
     }
 
     public void addToTooltip(List<Component> tooltip) {
+        if (!this.requirements().isEmpty()) {
 
-        if (Screen.hasShiftDown()) {
-            tooltip.add(TooltipUtils.color(ChatFormatting.RED, Words.Requirements.locName()
-                    .append(": ")));
+            if (Screen.hasShiftDown()) {
+                tooltip.add(TooltipUtils.color(ChatFormatting.RED, Words.Requirements.locName()
+                        .append(": ")));
 
-            for (BaseLocRequirement req : requirements()) {
-                tooltip.add(TooltipUtils.color(ChatFormatting.RED,
-                        Component.literal(" * ").append(req.getText())
-                ));
+                for (BaseLocRequirement req : requirements()) {
+                    tooltip.add(TooltipUtils.color(ChatFormatting.RED,
+                            Component.literal(" * ").append(req.getText())
+                    ));
+                }
+            } else {
+                tooltip.add(TooltipUtils.color(ChatFormatting.GREEN, Words.PressShiftForRequirements.locName()));
             }
-        } else {
-            tooltip.add(TooltipUtils.color(ChatFormatting.GREEN, Words.PressShiftForRequirements.locName()));
-
         }
     }
 

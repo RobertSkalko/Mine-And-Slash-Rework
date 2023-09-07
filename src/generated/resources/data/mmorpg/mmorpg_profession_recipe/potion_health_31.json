@@ -11,6 +11,16 @@
       "type": "ITEM",
       "id": "mmorpg:stone/3",
       "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:melon_slice",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:nether_wart",
+      "num": 1
     }
   ],
   "power": "greater",

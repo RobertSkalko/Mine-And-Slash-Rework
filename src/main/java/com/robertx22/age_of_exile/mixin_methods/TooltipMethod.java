@@ -80,7 +80,7 @@ public class TooltipMethod {
                 if (broken != null) {
                     tooltip.add(broken);
                 }
-                
+
 
             }
 
@@ -96,7 +96,7 @@ public class TooltipMethod {
             if (addCurrencyTooltip) {
                 IItemAsCurrency currency = (IItemAsCurrency) stack
                         .getItem();
-                currency.currencyEffect().addToTooltip(tooltip);
+                currency.currencyEffect(stack).addToTooltip(tooltip);
             }
 
 

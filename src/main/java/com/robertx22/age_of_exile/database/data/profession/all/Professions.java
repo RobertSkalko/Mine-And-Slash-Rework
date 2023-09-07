@@ -167,7 +167,7 @@ public class Professions {
                 if (!p.tiered_drops.containsKey(en.getKey())) {
                     p.tiered_drops.put(en.getKey(), new ArrayList<>());
                 }
-                this.p.tiered_drops.get(en.getKey()).add(new Profession.ChancedDrop(Arrays.asList(drop), 5F));
+                this.p.tiered_drops.get(en.getKey()).add(new Profession.ChancedDrop(Arrays.asList(drop), 10F));
 
             }
             return this;

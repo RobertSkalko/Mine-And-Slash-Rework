@@ -11,6 +11,11 @@
       "type": "ITEM",
       "id": "mmorpg:stone/4",
       "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:carrot",
+      "num": 1
     }
   ],
   "power": "greater",

@@ -117,9 +117,14 @@ public class GearTooltipUtils {
         tip.addAll(gear.sockets.GetTooltipString(info, gear));
         tip.add(Component.literal(""));
 
+        if (gear.ench != null) {
+            tip.addAll(gear.ench.GetTooltipString(info, gear));
+        }
+
         tip.add(Component.literal(""));
 
         MutableComponent lvl = TooltipUtils.gearLevel(gear.lvl, Load.Unit(info.player).getLevel());
+
 
         tip.add(lvl);
         TooltipUtils.addRequirements(tip, gear.getLevel(), gear.getRequirement(), Load.Unit(info.player));
@@ -128,11 +133,13 @@ public class GearTooltipUtils {
 
         tip.add(TooltipUtils.gearRarity(gear.getRarity()));
 
+
         tip.add(ExileText.ofText("Potential: " + (int) ((gear.getPotential().multi + gear.getAdditionalPotentialMultiFromQuality()) * 100F) + "%").format(gear.getPotentialColor()).get());
 
         if (gear.getQuality() > 0) {
             tip.add(ExileText.ofText("Quality: " + gear.getQuality() + "%").format(gear.getQualityType().color).get());
         }
+
 
         tip.add(Component.literal(""));
 

@@ -1,0 +1,36 @@
+{
+  "exp": 100,
+  "id": "enchantment_family_offhand_uncommon4",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/mining/4",
+      "num": 6
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:stone/1",
+      "num": 4
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:paper",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/corestone_ingot",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/adamantite_ingot",
+      "num": 1
+    }
+  ],
+  "power": "greater",
+  "profession": "enchanting",
+  "result": "mmorpg:enchantment/family/offhand/uncommon",
+  "result_num": 3,
+  "tier": 4
+}

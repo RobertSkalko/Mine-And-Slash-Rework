@@ -1,0 +1,41 @@
+{
+  "exp": 100,
+  "id": "enchantment_family_armor_rare3",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/mining/3",
+      "num": 5
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:stone/2",
+      "num": 5
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:paper",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/corestone_ingot",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/adamantite_ingot",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/ancient_ingot",
+      "num": 1
+    }
+  ],
+  "power": "greater",
+  "profession": "enchanting",
+  "result": "mmorpg:enchantment/family/armor/rare",
+  "result_num": 3,
+  "tier": 3
+}

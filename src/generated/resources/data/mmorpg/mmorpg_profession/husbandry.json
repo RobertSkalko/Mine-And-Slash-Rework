@@ -7,7 +7,7 @@
   "tiered_drops": {
     "TIER0": [
       {
-        "chance": 5.0,
+        "chance": 10.0,
         "drops": [
           {
             "item_id": "mmorpg:material/meat/0",
@@ -20,7 +20,7 @@
     ],
     "TIER1": [
       {
-        "chance": 5.0,
+        "chance": 10.0,
         "drops": [
           {
             "item_id": "mmorpg:material/meat/1",
@@ -33,7 +33,7 @@
     ],
     "TIER2": [
       {
-        "chance": 5.0,
+        "chance": 10.0,
         "drops": [
           {
             "item_id": "mmorpg:material/meat/2",
@@ -46,7 +46,7 @@
     ],
     "TIER3": [
       {
-        "chance": 5.0,
+        "chance": 10.0,
         "drops": [
           {
             "item_id": "mmorpg:material/meat/3",
@@ -59,7 +59,7 @@
     ],
     "TIER4": [
       {
-        "chance": 5.0,
+        "chance": 10.0,
         "drops": [
           {
             "item_id": "mmorpg:material/meat/4",
@@ -72,7 +72,7 @@
     ],
     "TIER5": [
       {
-        "chance": 5.0,
+        "chance": 10.0,
         "drops": [
           {
             "item_id": "mmorpg:material/meat/5",

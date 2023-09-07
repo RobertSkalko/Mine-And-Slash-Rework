@@ -133,7 +133,7 @@
   "tiered_drops": {
     "TIER0": [
       {
-        "chance": 5.0,
+        "chance": 10.0,
         "drops": [
           {
             "item_id": "mmorpg:material/mining/0",
@@ -146,7 +146,7 @@
     ],
     "TIER1": [
       {
-        "chance": 5.0,
+        "chance": 10.0,
         "drops": [
           {
             "item_id": "mmorpg:material/mining/1",
@@ -159,7 +159,7 @@
     ],
     "TIER2": [
       {
-        "chance": 5.0,
+        "chance": 10.0,
         "drops": [
           {
             "item_id": "mmorpg:material/mining/2",
@@ -172,7 +172,7 @@
     ],
     "TIER3": [
       {
-        "chance": 5.0,
+        "chance": 10.0,
         "drops": [
           {
             "item_id": "mmorpg:material/mining/3",
@@ -185,7 +185,7 @@
     ],
     "TIER4": [
       {
-        "chance": 5.0,
+        "chance": 10.0,
         "drops": [
           {
             "item_id": "mmorpg:material/mining/4",
@@ -198,7 +198,7 @@
     ],
     "TIER5": [
       {
-        "chance": 5.0,
+        "chance": 10.0,
         "drops": [
           {
             "item_id": "mmorpg:material/mining/5",

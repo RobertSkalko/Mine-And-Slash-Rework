@@ -11,7 +11,7 @@ public class LevelRanges {
     public static LevelRange LOW_1 = new LevelRange(1 + "", 0.2F, 0.4F);
     public static LevelRange MIDDLE_2 = new LevelRange(2 + "", 0.4F, 0.6F);
     public static LevelRange HIGH_3 = new LevelRange(3 + "", 0.6F, 0.8F);
-    public static LevelRange ENDGAME_4 = new LevelRange(4 + "", 0.8F, 1F);
+    public static LevelRange ENDGAME_4 = new LevelRange(4 + "", 0.8F, 0.99F);
     public static LevelRange MAX_5 = new LevelRange(5 + "", 1, 1F);
 
 

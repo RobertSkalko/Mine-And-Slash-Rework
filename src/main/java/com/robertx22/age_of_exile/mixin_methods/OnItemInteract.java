@@ -9,7 +9,6 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulData;
 import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulItem;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
-import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.SoulMakerItem;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.RarityStoneItem;
@@ -99,27 +98,6 @@ public class OnItemInteract {
                     PlayerUtils.giveItem(result, player);
                     //slot.set(result);
                     success = true;
-                }
-            } else if (cursor.getItem() == SlashItems.SALVAGE_HAMMER.get()) {
-                ISalvagable data = ISalvagable.load(stack);
-
-                if (data == null && stack.getItem() instanceof ISalvagable) {
-                    data = (ISalvagable) stack.getItem();
-                }
-
-                if (data != null) {
-                    if (data.isSalvagable()) {
-                        SoundUtils.playSound(player, SoundEvents.ANVIL_USE, 1, 1);
-
-                        stack.shrink(1);
-                        data.getSalvageResult(stack)
-                                .forEach(e -> PlayerUtils.giveItem(e, player));
-                        //ci.setReturnValue(ItemStack.EMPTY);
-                        //stack.shrink(1000);
-                        //ci.cancel();
-                        x.setCanceled(true);
-                        return;
-                    }
                 }
             } else if (cursor.getItem() == SlashItems.SOCKET_EXTRACTOR.get()) {
 

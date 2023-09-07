@@ -1,0 +1,31 @@
+{
+  "exp": 100,
+  "id": "enchantment_family_armor_common4",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/mining/4",
+      "num": 5
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:stone/0",
+      "num": 3
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:paper",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/corestone_ingot",
+      "num": 1
+    }
+  ],
+  "power": "greater",
+  "profession": "enchanting",
+  "result": "mmorpg:enchantment/family/armor/common",
+  "result_num": 3,
+  "tier": 4
+}

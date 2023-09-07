@@ -23,8 +23,10 @@ public enum Words implements IAutoLocName {
 
     AddSocket("Adds a socket"),
     Nothing("Nothing"),
+    Enchanted("Enchanted:"),
 
     UpgradeAffix("Upgrades an affix"),
+    UpgradeEnchant("Upgrades or Rerolls the Enchant"),
     UpgradeQuality("Upgrade Quality"),
     DowngradeAffix("Downgrades an affix"),
     DeletesAllAffixes("Deletes all affixes"),

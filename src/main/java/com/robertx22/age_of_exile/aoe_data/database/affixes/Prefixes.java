@@ -20,6 +20,7 @@ public class Prefixes implements IRandomDefault<Affix>, ExileRegistryInit {
     @Override
     public void registerAll() {
 
+        
         new OffhandAffixes().registerAll();
         new JewelAffixes().registerAll();
         new CraftedJewelAffixes().registerAll();

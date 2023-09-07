@@ -200,8 +200,7 @@ public class TooltipUtils {
     }
 
     public static MutableComponent tier(int tier) {
-        return Words.Tier.locName()
-                .append(": " + tier);
+        return Words.Tier.locName().append(": " + tier);
 
     }
 

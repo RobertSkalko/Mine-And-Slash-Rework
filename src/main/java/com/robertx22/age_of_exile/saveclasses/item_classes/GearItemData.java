@@ -51,6 +51,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         public DataKey.StringKey UNIQUE_ID = of(new DataKey.StringKey("uq"));
 
         public DataKey.IntKey QUALITY = of(new DataKey.IntKey("ql"));
+        public DataKey.IntKey ENCHANT_TIMES = of(new DataKey.IntKey("et"));
 
         public DataKey.EnumKey<GearQualityType> QUALITY_TYPE = of(new DataKey.EnumKey(GearQualityType.BASE, "qt"));
     }
@@ -61,7 +62,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     public GearAffixesData affixes = new GearAffixesData();
     public GearSocketsData sockets = new GearSocketsData();
     public UniqueStatsData uniqueStats;
-
+    public GearEnchantData ench;
 
     public GenericDataHolder data = new GenericDataHolder();
 
@@ -385,6 +386,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         IfNotNullAdd(sockets, list);
 
         IfNotNullAdd(uniqueStats, list);
+        IfNotNullAdd(ench, list);
 
         return list;
 
