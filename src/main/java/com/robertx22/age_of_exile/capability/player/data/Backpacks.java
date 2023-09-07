@@ -1,16 +1,20 @@
 package com.robertx22.age_of_exile.capability.player.data;
 
+import com.robertx22.age_of_exile.capability.player.container.BackpackMenu;
 import com.robertx22.age_of_exile.capability.player.helper.BackpackInventory;
 import com.robertx22.age_of_exile.database.data.currency.IItemAsCurrency;
+import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.vanilla_mc.items.gemrunes.RuneItem;
+import com.robertx22.age_of_exile.vanilla_mc.items.misc.RarityStoneItem;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.ItemStack;
 
 public class Backpacks {
@@ -43,7 +47,7 @@ public class Backpacks {
         CURRENCY("currency", Words.Currency) {
             @Override
             public boolean isValid(ItemStack stack) {
-                return stack.getItem() instanceof IItemAsCurrency || stack.getItem() instanceof RuneItem;
+                return stack.getItem() instanceof IItemAsCurrency || stack.getItem() instanceof RuneItem || stack.getItem() instanceof RarityStoneItem;
             }
         },
         SKILL_GEMS("skill_gem", Words.SkillGem) {
@@ -60,6 +64,10 @@ public class Backpacks {
         BackpackType(String id, Words name) {
             this.id = id;
             this.name = name;
+        }
+
+        public ResourceLocation getIcon() {
+            return SlashRef.guiId("backpack/" + id);
         }
 
         public abstract boolean isValid(ItemStack stack);
@@ -93,7 +101,11 @@ public class Backpacks {
     }
 
 
-    public void tryAutoPickup(ItemStack stack) {
+    public void tryAutoPickup(Player p, ItemStack stack) {
+
+        if (p.getInventory().countItem(SlashItems.MASTER_BAG.get()) < 1) {
+            return;
+        }
 
         for (BackpackType type : BackpackType.values()) {
             if (type.isValid(stack)) {
@@ -112,14 +124,12 @@ public class Backpacks {
     }
     // todo every time before you open backpack, it will replace locked slots with blocked slots that cant be clicked on and throw out/give items back
 
-    public void openBackpack(BackpackType type, Player p) {
+    public void openBackpack(BackpackType type, Player p, int rows) {
         if (!p.level().isClientSide) {
             BackpackInventory inv = getInv(type);
-
-            inv.throwOutBlockedSlotItems();
-
+            //inv.throwOutBlockedSlotItems(rows * 9);
             p.openMenu(new SimpleMenuProvider((i, playerInventory, playerEntity) -> {
-                return ChestMenu.sixRows(i, playerInventory, inv);
+                return new BackpackMenu(i, playerInventory, inv, rows);
             }, Component.literal("")));
         }
     }

@@ -19,6 +19,20 @@ public class ClientInit {
 
     public static void onInitializeClient(final FMLClientSetupEvent event) {
 
+        /*
+        ForgeEvents.registerForgeEvent(ScreenEvent.Init.class, x -> {
+            if (x.getScreen() instanceof BackpackScreen) {
+                if (MOUSEPOS.SET_MOUSE) {
+                    MOUSEPOS.SET_MOUSE = false;
+
+                    MouseMixin acc = (MouseMixin) Minecraft.getInstance().mouseHandler;
+                    acc.setXpos(MOUSEPOS.X);
+                    acc.setYpos(MOUSEPOS.Y);
+                }
+            }
+        });
+
+         */
 
         var todisable = Arrays.asList(
                 VanillaGuiOverlay.ARMOR_LEVEL,
@@ -34,7 +48,7 @@ public class ClientInit {
             }
 
         });
-        
+
         ForgeEvents.registerForgeEvent(RenderLivingEvent.class, x -> {
             for (DamageParticle p : DamageParticleRenderer.PARTICLES) {
                 Minecraft mc = Minecraft.getInstance();

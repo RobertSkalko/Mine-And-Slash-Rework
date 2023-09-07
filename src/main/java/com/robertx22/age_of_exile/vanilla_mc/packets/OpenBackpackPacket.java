@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.vanilla_mc.packets;
 
+import com.robertx22.age_of_exile.capability.player.BackpackItem;
 import com.robertx22.age_of_exile.capability.player.data.Backpacks;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -36,7 +37,11 @@ public class OpenBackpackPacket extends MyPacket<OpenBackpackPacket> {
     @Override
     public void onReceived(ExilePacketContext ctx) {
 
-        Load.backpacks(ctx.getPlayer()).getBackpacks().openBackpack(type, ctx.getPlayer());
+        int rows = 0;
+        if (ctx.getPlayer().getMainHandItem().getItem() instanceof BackpackItem i) {
+            rows = i.getSlots() / 9;
+        }
+        Load.backpacks(ctx.getPlayer()).getBackpacks().openBackpack(type, ctx.getPlayer(), rows);
 
     }
 

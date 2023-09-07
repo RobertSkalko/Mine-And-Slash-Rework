@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.gui.screens.character_screen;
 
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
-import com.robertx22.age_of_exile.capability.player.data.Backpacks;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.CoreStat;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
@@ -26,7 +25,6 @@ import com.robertx22.age_of_exile.gui.buttons.CharacterStatsButtons;
 import com.robertx22.age_of_exile.gui.buttons.FavorButton;
 import com.robertx22.age_of_exile.gui.buttons.ProfessionLevelsButton;
 import com.robertx22.age_of_exile.gui.inv_gui.GuiInventoryGrids;
-import com.robertx22.age_of_exile.gui.screens.OpenBackpack;
 import com.robertx22.age_of_exile.gui.screens.OpenInvGuiScreen;
 import com.robertx22.age_of_exile.gui.screens.OpenJewelsScreen;
 import com.robertx22.age_of_exile.gui.screens.OpenSkillGems;
@@ -208,12 +206,8 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
         rightButtons.add(new AscendancyClassScreen());
         rightButtons.add(new OpenJewelsScreen());
 
-
         List<INamedScreen> leftButtons = new ArrayList<>();
 
-        for (Backpacks.BackpackType type : Backpacks.BackpackType.values()) {
-            leftButtons.add(new OpenBackpack(type));
-        }
 
         leftButtons.add(new OpenInvGuiScreen(Words.Salvaging, "salvage", GuiInventoryGrids.ofSalvageConfig()));
 

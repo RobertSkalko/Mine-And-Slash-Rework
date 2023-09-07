@@ -1,10 +1,6 @@
 package com.robertx22.age_of_exile.capability.player.helper;
 
-import com.robertx22.age_of_exile.a_libraries.curios.MyCurioUtils;
-import com.robertx22.age_of_exile.a_libraries.curios.RefCurio;
-import com.robertx22.age_of_exile.capability.player.BackpackItem;
 import com.robertx22.age_of_exile.capability.player.data.Backpacks;
-import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -21,6 +17,7 @@ public class BackpackInventory extends MyInventory {
     }
 
 
+    /*
     @Override
     public int getTotalSlots() {
         int slots = 0;
@@ -31,12 +28,14 @@ public class BackpackInventory extends MyInventory {
         }
         return MathHelper.clamp(slots, 0, getContainerSize());
     }
+     */
 
 
     // todo must test this
-    public void throwOutBlockedSlotItems() {
+    public void throwOutBlockedSlotItems(int slots) {
 
-        int open = getTotalSlots();
+        
+        int open = slots;
 
         for (int i = 0; i < getContainerSize(); i++) {
             if (i >= open || !this.type.isValid(getItem(i))) {

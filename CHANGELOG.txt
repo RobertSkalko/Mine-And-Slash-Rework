@@ -39,3 +39,5 @@ This should ensure spells with any type of stat scalings can't become too op, bu
 - aura cost reduction > aura capacity, instead of reducing aura cost, you will now gain aura capacity with stats. This is intended to simplify the stat
 
 - restorative potions are now made with alchemy
+
+- brought back the beloved master bag instead of the gui backpacks, turns out i completely miscalculated that one, and people hated the gui one

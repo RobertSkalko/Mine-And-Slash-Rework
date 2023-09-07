@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "mmorpg:stone/5"
+    },
+    {
+      "item": "mmorpg:stone/5"
+    },
+    {
+      "item": "mmorpg:stone/5"
+    },
+    {
+      "item": "mmorpg:stone/5"
+    },
+    {
+      "item": "mmorpg:stone/5"
+    },
+    {
+      "item": "mmorpg:stone/5"
+    },
+    {
+      "item": "mmorpg:stone/5"
+    },
+    {
+      "item": "mmorpg:stone/5"
+    },
+    {
+      "item": "minecraft:chest"
+    }
+  ],
+  "result": {
+    "item": "mmorpg:master_bag"
+  }
+}

@@ -110,7 +110,7 @@ public class CommonEvents {
                             if (Load.player(player).config.salvage.trySalvageOnPickup(player, stack)) {
                                 stack.shrink(100);
                             } else {
-                                Load.backpacks(player).getBackpacks().tryAutoPickup(stack);
+                                Load.backpacks(player).getBackpacks().tryAutoPickup(event.getEntity(), stack);
                             }
                         }
                     }

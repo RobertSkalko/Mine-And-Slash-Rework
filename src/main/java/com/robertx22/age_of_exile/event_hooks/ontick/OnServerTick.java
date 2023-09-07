@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.event_hooks.ontick;
 
 import com.robertx22.age_of_exile.capability.bases.CapSyncUtil;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.capability.player.data.Backpacks;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -71,9 +70,6 @@ public class OnServerTick {
                     Load.player(player).getSkillGemInventory().removeSupportGemsIfTooMany(player);
                     Load.player(player).getJewels().checkRemoveJewels(player);
 
-                    for (Backpacks.BackpackType type : Backpacks.BackpackType.values()) {
-                        Load.backpacks(player).getBackpacks().getInv(type).throwOutBlockedSlotItems();
-                    }
                 }
 
                 Load.player(player).spellCastingData.charges.onTicks(player, 20);

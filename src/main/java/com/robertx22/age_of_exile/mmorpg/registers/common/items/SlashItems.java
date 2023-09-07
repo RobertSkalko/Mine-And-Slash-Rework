@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.mmorpg.registers.common.items;
 
+import com.robertx22.age_of_exile.capability.player.BackpackItem;
 import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChestItem;
 import com.robertx22.age_of_exile.database.data.profession.all.Professions;
 import com.robertx22.age_of_exile.maps.MapItem;
@@ -49,6 +50,7 @@ public class SlashItems {
     public static RegObj<Item> MAP_DEVICE = Def.item(() -> new BlockItem(SlashBlocks.MAP.get(), new Item.Properties()), "teleporter");
     public static RegObj<Item> TP_BACK = Def.item(() -> new TpBackItem(), "tp_back");
     public static RegObj<Item> INVISIBLE_ICON = Def.item(() -> new Item(new Item.Properties()), "invisible_item");
+    public static RegObj<Item> MASTER_BAG = Def.item(() -> new BackpackItem(), "master_bag");
     public static RegObj<LootCrateItem> LOOT_CRATE = Def.item(() -> new LootCrateItem(), "loot_crate/default");
 
     public static RegObj<ProjectileItem> FIREBALL = Def.item(() -> new ProjectileItem("fireball"), "projectile/" + "fireball");

@@ -19,6 +19,7 @@
     "StopOffhandRenderMixin",
     "MixinServerWorldInfo",
     "NeatRenderMixin",
+    "MouseMixin",
     "AccessorRenderType",
     "ItemGlintMixin",
     "ItemStackMixin",
