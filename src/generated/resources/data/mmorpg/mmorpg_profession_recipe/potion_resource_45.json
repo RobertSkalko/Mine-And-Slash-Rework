@@ -1,0 +1,41 @@
+{
+  "exp": 100,
+  "id": "potion_resource_45",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/farming/5",
+      "num": 5
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:stone/4",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:farming_drops/green_pepper",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:farming_drops/bolete_mushroom",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:farming_drops/dragonfruit",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:farming_drops/magic_log",
+      "num": 1
+    }
+  ],
+  "power": "greater",
+  "profession": "alchemy",
+  "result": "mmorpg:potion/resource/4",
+  "result_num": 16,
+  "tier": 5
+}

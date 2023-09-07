@@ -1,0 +1,26 @@
+{
+  "exp": 100,
+  "id": "potion_resource_22",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/farming/2",
+      "num": 5
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:stone/2",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:farming_drops/green_pepper",
+      "num": 1
+    }
+  ],
+  "power": "greater",
+  "profession": "alchemy",
+  "result": "mmorpg:potion/resource/2",
+  "result_num": 16,
+  "tier": 2
+}

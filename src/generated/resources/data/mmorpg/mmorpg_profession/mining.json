@@ -1,5 +1,88 @@
 {
-  "chance_drops": [],
+  "chance_drops": [
+    {
+      "chance": 5.0,
+      "drops": [
+        {
+          "item_id": "mmorpg:mining_drops/corestone_ingot",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:mining_drops/adamantite_ingot",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:mining_drops/ancient_ingot",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:mining_drops/mythril_ingot",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:mining_drops/enderyll_ingot",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:mining_drops/magmacyte_ingot",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        }
+      ]
+    },
+    {
+      "chance": 0.5,
+      "drops": [
+        {
+          "item_id": "mmorpg:mining_drops/amethyst",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 50
+        },
+        {
+          "item_id": "mmorpg:mining_drops/emerald",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 50
+        },
+        {
+          "item_id": "mmorpg:mining_drops/ruby",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 50
+        },
+        {
+          "item_id": "mmorpg:mining_drops/topaz",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 50
+        },
+        {
+          "item_id": "mmorpg:mining_drops/tourmaline",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 50
+        },
+        {
+          "item_id": "mmorpg:mining_drops/sapphire",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 50
+        }
+      ]
+    }
+  ],
   "exp_sources": {
     "map": {
       "0": [

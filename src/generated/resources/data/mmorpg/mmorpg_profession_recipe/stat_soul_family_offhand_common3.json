@@ -10,11 +10,16 @@
     {
       "type": "ITEM",
       "id": "mmorpg:stone/0",
-      "num": 2
+      "num": 4
     },
     {
       "type": "ITEM",
       "id": "minecraft:shield",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/corestone_ingot",
       "num": 1
     }
   ],

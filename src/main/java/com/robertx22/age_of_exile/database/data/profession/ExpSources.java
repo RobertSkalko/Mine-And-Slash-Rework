@@ -75,7 +75,6 @@ public class ExpSources {
 
     public ExpData getData(Object obj) {
         for (SkillItemTier value : SkillItemTier.values()) {
-
             if (this.map.containsKey(value.tier)) {
                 var opt = map.get(value.tier).stream().filter(x -> x.matches(obj)).findAny();
                 if (opt.isPresent()) {

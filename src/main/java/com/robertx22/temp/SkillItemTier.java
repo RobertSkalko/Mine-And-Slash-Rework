@@ -43,6 +43,13 @@ public enum SkillItemTier {
                 .orElse(SkillItemTier.TIER0);
     }
 
+    public static SkillItemTier ofRarity(String rar) {
+        return Arrays.stream(SkillItemTier.values())
+                .filter(x -> x.rar.equals(rar))
+                .findAny()
+                .orElse(SkillItemTier.TIER0);
+    }
+
     public static SkillItemTier fromLevel(int lvl) {
         return Arrays.stream(SkillItemTier.values())
                 .filter(x -> {

@@ -1,0 +1,31 @@
+{
+  "exp": 100,
+  "id": "potion_resource_33",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/farming/3",
+      "num": 5
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:stone/3",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:farming_drops/green_pepper",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:farming_drops/bolete_mushroom",
+      "num": 1
+    }
+  ],
+  "power": "greater",
+  "profession": "alchemy",
+  "result": "mmorpg:potion/resource/3",
+  "result_num": 16,
+  "tier": 3
+}

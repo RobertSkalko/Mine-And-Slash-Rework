@@ -10,11 +10,26 @@
     {
       "type": "ITEM",
       "id": "mmorpg:stone/2",
-      "num": 2
+      "num": 6
     },
     {
       "type": "ITEM",
       "id": "minecraft:iron_chestplate",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/corestone_ingot",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/adamantite_ingot",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/ancient_ingot",
       "num": 1
     }
   ],

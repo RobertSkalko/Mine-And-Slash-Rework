@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.vanilla_mc.items;
 
-import com.robertx22.age_of_exile.database.data.currency.base.IShapedRecipe;
+import com.robertx22.age_of_exile.database.data.profession.ICreativeTabTiered;
+import com.robertx22.age_of_exile.database.data.profession.LeveledItem;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
@@ -11,9 +12,9 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.HealthUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
-import com.robertx22.age_of_exile.vanilla_mc.items.misc.RarityStoneItem;
 import com.robertx22.library_of_exile.utils.SoundUtils;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import com.robertx22.temp.SkillItemTier;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -21,12 +22,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SlashPotionItem extends AutoItem implements IShapedRecipe {
+public class SlashPotionItem extends AutoItem implements ICreativeTabTiered {
 
     String rar;
 
@@ -41,17 +44,19 @@ public class SlashPotionItem extends AutoItem implements IShapedRecipe {
     }
 
     @Override
-    public ShapedRecipeBuilder getRecipe() {
-        var type = this.type.craftItem;
+    public Item getThis() {
+        return this;
+    }
 
-        return shaped(this, 16)
-                .define('r', RarityStoneItem.of(rar))
-                .define('b', Items.GLASS_BOTTLE)
-                .define('c', type)
-                .pattern("rcr")
-                .pattern("rbr")
-                .pattern("rrr")
-                .unlockedBy("player_level", trigger());
+    @Override
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+
+        int num = (int) this.getHealPercent(pStack);
+
+
+        pTooltipComponents.add(Component.literal("Restores " + num + "%"));
+        pTooltipComponents.add(Component.literal("Cooldown:  " + getCooldownTicks() / 20 + "s"));
+
     }
 
     public enum Type {
@@ -82,16 +87,16 @@ public class SlashPotionItem extends AutoItem implements IShapedRecipe {
         if (!pLevel.isClientSide) {
 
             if (type == Type.HP) {
-                EventBuilder.ofRestore(p, p, ResourceType.health, RestoreType.potion, HealthUtils.getMaxHealth(p) * getHealPercent() / 100F).build().Activate();
-                EventBuilder.ofRestore(p, p, ResourceType.magic_shield, RestoreType.potion, Load.Unit(p).getUnit().magicShieldData().getValue() * getHealPercent() / 100F).build().Activate();
+                EventBuilder.ofRestore(p, p, ResourceType.health, RestoreType.potion, HealthUtils.getMaxHealth(p) * getHealPercent(stack) / 100F).build().Activate();
+                EventBuilder.ofRestore(p, p, ResourceType.magic_shield, RestoreType.potion, Load.Unit(p).getUnit().magicShieldData().getValue() * getHealPercent(stack) / 100F).build().Activate();
             } else {
-                EventBuilder.ofRestore(p, p, ResourceType.mana, RestoreType.potion, Load.Unit(p).getUnit().manaData().getValue() * getHealPercent() / 100F).build().Activate();
-                EventBuilder.ofRestore(p, p, ResourceType.energy, RestoreType.potion, Load.Unit(p).getUnit().energyData().getValue() * getHealPercent() / 100F).build().Activate();
+                EventBuilder.ofRestore(p, p, ResourceType.mana, RestoreType.potion, Load.Unit(p).getUnit().manaData().getValue() * getHealPercent(stack) / 100F).build().Activate();
+                EventBuilder.ofRestore(p, p, ResourceType.energy, RestoreType.potion, Load.Unit(p).getUnit().energyData().getValue() * getHealPercent(stack) / 100F).build().Activate();
             }
 
 
             for (SlashPotionItem c : getCooldownItems()) {
-                p.getCooldowns().addCooldown(c, 20 * 30);
+                p.getCooldowns().addCooldown(c, getCooldownTicks());
             }
 
             SoundUtils.playSound(p, SoundEvents.GENERIC_DRINK);
@@ -101,6 +106,10 @@ public class SlashPotionItem extends AutoItem implements IShapedRecipe {
 
         return InteractionResultHolder.pass(p.getItemInHand(pUsedHand));
 
+    }
+
+    public int getCooldownTicks() {
+        return 20 * 30;
     }
 
     public List<SlashPotionItem> getCooldownItems() {
@@ -113,10 +122,11 @@ public class SlashPotionItem extends AutoItem implements IShapedRecipe {
         }
     }
 
-    public float getHealPercent() {
-        var r = getRarity();
 
-        return r.stat_percents.max; // todo maybe make separate value
+    public float getHealPercent(ItemStack stack) {
+        var r = getRarity();
+        SkillItemTier tier = LeveledItem.getTier(stack);
+        return 0.25F * r.stat_percents.max * tier.statMulti; // todo maybe make separate value
 
     }
 

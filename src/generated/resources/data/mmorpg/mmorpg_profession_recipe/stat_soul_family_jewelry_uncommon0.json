@@ -10,11 +10,21 @@
     {
       "type": "ITEM",
       "id": "mmorpg:stone/1",
-      "num": 2
+      "num": 5
     },
     {
       "type": "ITEM",
       "id": "mmorpg:jewelry/ring/iron",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/amethyst",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:mining_drops/emerald",
       "num": 1
     }
   ],

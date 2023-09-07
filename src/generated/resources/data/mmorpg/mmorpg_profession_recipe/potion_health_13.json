@@ -1,0 +1,31 @@
+{
+  "exp": 100,
+  "id": "potion_health_13",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/farming/3",
+      "num": 5
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:stone/1",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:farming_drops/red_pepper",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:farming_drops/blootroot",
+      "num": 1
+    }
+  ],
+  "power": "greater",
+  "profession": "alchemy",
+  "result": "mmorpg:potion/health/1",
+  "result_num": 16,
+  "tier": 3
+}

@@ -1,0 +1,41 @@
+{
+  "exp": 100,
+  "id": "potion_health_45",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/farming/5",
+      "num": 5
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:stone/4",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:farming_drops/red_pepper",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:farming_drops/blootroot",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:farming_drops/red_coral",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:farming_drops/bryony_root",
+      "num": 1
+    }
+  ],
+  "power": "greater",
+  "profession": "alchemy",
+  "result": "mmorpg:potion/health/4",
+  "result_num": 16,
+  "tier": 5
+}

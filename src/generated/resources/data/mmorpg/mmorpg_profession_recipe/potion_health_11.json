@@ -1,0 +1,21 @@
+{
+  "exp": 100,
+  "id": "potion_health_11",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/farming/1",
+      "num": 5
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:stone/1",
+      "num": 1
+    }
+  ],
+  "power": "greater",
+  "profession": "alchemy",
+  "result": "mmorpg:potion/health/1",
+  "result_num": 16,
+  "tier": 1
+}

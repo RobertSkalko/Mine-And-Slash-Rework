@@ -1,9 +1,6 @@
 package com.robertx22.age_of_exile.database.data.profession.all;
 
-import com.robertx22.age_of_exile.database.data.profession.all.misc_drops.Essences;
-import com.robertx22.age_of_exile.database.data.profession.all.misc_drops.FarmingCommon;
-import com.robertx22.age_of_exile.database.data.profession.all.misc_drops.RareEssences;
-import com.robertx22.age_of_exile.database.data.profession.all.misc_drops.RareFarming;
+import com.robertx22.age_of_exile.database.data.profession.all.misc_drops.*;
 import com.robertx22.age_of_exile.database.data.profession.items.MaterialItem;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
@@ -20,6 +17,8 @@ public class ProfessionMatItems {
     public static RareEssences RARE_ESSENCES = null;
     public static RareFarming RARE_FARMING = null;
     public static FarmingCommon COMMON_FARMING = null;
+    public static MiningCommon COMMON_MINING = null;
+    public static MiningRare RARE_MINING = null;
 
     public static void init() {
 
@@ -27,6 +26,8 @@ public class ProfessionMatItems {
         RARE_ESSENCES = new RareEssences();
         RARE_FARMING = new RareFarming();
         COMMON_FARMING = new FarmingCommon();
+        COMMON_MINING = new MiningCommon();
+        RARE_MINING = new MiningRare();
 
         for (String prof : Professions.ALL) {
             TIERED_MAIN_MATS.put(prof, new HashMap<>());

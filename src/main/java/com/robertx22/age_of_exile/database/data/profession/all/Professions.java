@@ -90,7 +90,6 @@ public class Professions {
 
                 .build();
 
-
         // todo each should really be separate and have chance for tag..
         Builder.of(MINING)
                 .blockTag(SkillItemTier.TIER0, ORE_EXP, BlockTags.COAL_ORES)
@@ -101,6 +100,10 @@ public class Professions {
                 .blockTag(SkillItemTier.TIER5, ORE_EXP, BlockTags.DIAMOND_ORES)
 
                 .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(MINING))
+
+                .sometimesDrop(ProfessionMatItems.COMMON_MINING.ALL.stream().map(x -> x.get()).collect(Collectors.toList()), 5)
+                .sometimesDrop(ProfessionMatItems.RARE_MINING.ALL.stream().map(x -> x.get()).collect(Collectors.toList()), 0.5F)
+
                 .build();
 
         Builder.of(COOKING)
