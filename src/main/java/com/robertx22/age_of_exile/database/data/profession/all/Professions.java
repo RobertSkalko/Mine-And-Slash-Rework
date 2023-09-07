@@ -102,7 +102,7 @@ public class Professions {
                 .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(MINING))
 
                 .sometimesDrop(ProfessionMatItems.COMMON_MINING.ALL.stream().map(x -> x.get()).collect(Collectors.toList()), 5)
-                .sometimesDrop(ProfessionMatItems.RARE_MINING.ALL.stream().map(x -> x.get()).collect(Collectors.toList()), 0.5F)
+                .sometimesDrop(ProfessionMatItems.RARE_MINING.ALL.stream().map(x -> x.get()).collect(Collectors.toList()), 1)
 
                 .build();
 

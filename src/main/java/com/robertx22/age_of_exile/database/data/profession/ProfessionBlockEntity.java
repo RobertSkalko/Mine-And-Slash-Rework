@@ -33,8 +33,6 @@ public class ProfessionBlockEntity extends BlockEntity {
 
     public String owner = "";
 
-    // todo delete this
-    public int ownerLvl = 1;
     public int savedXP = 0;
 
 
@@ -56,9 +54,8 @@ public class ProfessionBlockEntity extends BlockEntity {
             var id = UUID.fromString(owner);
             return l.getPlayerByUUID(id);
         } catch (Exception e) {
-            //throw new RuntimeException(e);
+            //e.printStackTrace();
         }
-
         return null;
     }
 
@@ -68,8 +65,6 @@ public class ProfessionBlockEntity extends BlockEntity {
             ticks++;
 
             if (ticks % 20 == 0) {
-
-                updateOwner(level);
 
                 Player p = getOwner(level);
 
@@ -100,6 +95,8 @@ public class ProfessionBlockEntity extends BlockEntity {
     public Result tryRecipe(Player p, boolean justCheck) {
 
 
+        int ownerLvl = Load.player(p).professions.getLevel(getProfession().GUID());
+
         var recipe = getCurrentRecipe(level);
 
         if (recipe == null) {
@@ -108,7 +105,7 @@ public class ProfessionBlockEntity extends BlockEntity {
         if (!this.inventory.getInventory(OUTPUTS).isEmpty()) {
             return Result.failure(Component.literal("Output slots are not empty."));
         }
-        if (recipe.getLevelRequirement() > this.ownerLvl) {
+        if (recipe.getLevelRequirement() > ownerLvl) {
             return Result.failure(Component.literal("Not high enough level to craft."));
         }
 
@@ -116,9 +113,9 @@ public class ProfessionBlockEntity extends BlockEntity {
             return Result.success();
         }
 
-        this.addExp(recipe.getExpReward(this.ownerLvl, getMats()) * recipe.getTier().levelRange.getMinLevel());
+        this.addExp(recipe.getExpReward(ownerLvl, getMats()) * recipe.getTier().levelRange.getMinLevel());
 
-        for (ItemStack stack : recipe.craft(getMats())) {
+        for (ItemStack stack : recipe.craft(p, getMats())) {
             inventory.addStack(OUTPUTS, stack);
         }
 
@@ -149,6 +146,7 @@ public class ProfessionBlockEntity extends BlockEntity {
     }
 
     public Result trySalvage(Player p, boolean justCheck) {
+        int ownerLvl = Load.player(p).professions.getLevel(getProfession().GUID());
 
         if (getProfession().GUID().equals(Professions.SALVAGING)) {
             if (this.inventory.getInventory(OUTPUTS).isEmpty()) {
@@ -193,15 +191,6 @@ public class ProfessionBlockEntity extends BlockEntity {
             this.savedXP += xp;
         }
 
-    }
-
-    public void updateOwner(Level level) {
-
-        Player p = getOwner(level);
-
-        if (p != null) {
-            this.ownerLvl = Load.player(p).professions.getLevel(getProfession().GUID());
-        }
     }
 
 
@@ -250,7 +239,6 @@ public class ProfessionBlockEntity extends BlockEntity {
         this.inventory.fromTag(pTag.getList("inv", 10));
 
         this.owner = pTag.getString("owner");
-        this.ownerLvl = pTag.getInt("owner_lvl");
         this.savedXP = pTag.getInt("saved_exp");
 
     }
@@ -263,7 +251,6 @@ public class ProfessionBlockEntity extends BlockEntity {
 
         pTag.putString("owner", owner);
 
-        pTag.putInt("owner_lvl", ownerLvl);
         pTag.putInt("saved_exp", savedXP);
 
     }

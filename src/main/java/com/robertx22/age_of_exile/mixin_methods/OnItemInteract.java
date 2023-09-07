@@ -31,6 +31,7 @@ public class OnItemInteract {
                 return;
             }
 
+            boolean sound = true;
 
             boolean success = false;
 
@@ -93,8 +94,10 @@ public class OnItemInteract {
                 LocReqContext ctx = new LocReqContext(player, stack, cursor);
                 if (ctx.effect.canItemBeModified(ctx)) {
                     ItemStack result = ctx.effect.modifyItem(ctx).stack;
-                    stack.shrink(1);
 
+                    stack.shrink(1); // seems the currency creates a copy of a new item, so we delete the old one
+
+                    sound = false;
                     PlayerUtils.giveItem(result, player);
                     //slot.set(result);
                     success = true;
@@ -170,9 +173,10 @@ public class OnItemInteract {
             }
 
             if (success) {
-                SoundUtils.ding(player.level(), player.blockPosition());
-                SoundUtils.playSound(player.level(), player.blockPosition(), SoundEvents.ANVIL_USE, 1, 1);
-
+                if (sound) {
+                    SoundUtils.ding(player.level(), player.blockPosition());
+                    SoundUtils.playSound(player.level(), player.blockPosition(), SoundEvents.ANVIL_USE, 1, 1);
+                }
                 x.setCanceled(true);
                 cursor.shrink(1);
                 //stack.shrink(1000);

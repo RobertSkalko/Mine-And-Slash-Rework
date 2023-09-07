@@ -118,6 +118,10 @@ public class CraftedEnchantItem extends AutoItem implements IItemAsCurrency, ICr
 
                             @Override
                             public ItemStack modify(LocReqContext ctx, GearItemData gear, ItemStack stack) {
+                                int num = gear.data.get(GearItemData.KEYS.ENCHANT_TIMES) + 1;
+                                gear.data.set(GearItemData.KEYS.ENCHANT_TIMES, num);
+                                StackSaving.GEARS.saveTo(stack, gear);
+
                                 return stack;
                             }
 
@@ -134,6 +138,7 @@ public class CraftedEnchantItem extends AutoItem implements IItemAsCurrency, ICr
                 return 0;
             }
 
+            // todo turn this into a result with chat messages why it doesnt work
             @Override
             public boolean canBeModified(GearItemData data) {
 

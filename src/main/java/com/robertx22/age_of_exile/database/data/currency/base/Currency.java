@@ -104,6 +104,7 @@ public abstract class Currency implements IWeighted, IAutoLocName, IAutoLocDesc,
     public ResultItem modifyItem(LocReqContext context) {
         if (context.effect.canItemBeModified(context)) {
             ItemStack copy = context.stack.copy();
+
             copy = context.effect.internalModifyMethod(context, copy, context.Currency);
 
 

@@ -6,6 +6,9 @@ import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.library_of_exile.utils.RandomUtils;
+import com.robertx22.library_of_exile.utils.SoundUtils;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -29,6 +32,15 @@ public abstract class GearCurrency extends Currency {
         GearItemData data = StackSaving.GEARS.loadFrom(stack);
         GearOutcome outcome = getOutcome(data.getPotential().multi + data.getAdditionalPotentialMultiFromQuality());
         data.setPotential(data.getPotentialNumber() - getPotentialLoss());
+
+        Player player = ctx.player;
+        if (outcome.getOutcomeType() == GearOutcome.OutcomeType.GOOD) {
+            SoundUtils.ding(player.level(), player.blockPosition());
+            SoundUtils.playSound(player.level(), player.blockPosition(), SoundEvents.ANVIL_USE, 1, 1);
+        } else {
+            SoundUtils.playSound(player.level(), player.blockPosition(), SoundEvents.GLASS_BREAK, 1, 1);
+            SoundUtils.playSound(player.level(), player.blockPosition(), SoundEvents.VILLAGER_NO, 1, 1);
+        }
         return outcome.modify(ctx, data, stack);
     }
 

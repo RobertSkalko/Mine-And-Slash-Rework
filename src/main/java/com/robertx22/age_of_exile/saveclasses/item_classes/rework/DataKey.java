@@ -15,12 +15,12 @@ public abstract class DataKey<T> {
     }
 
 
-    protected T get(HashMap<String, Object> map) {
+    protected T get(HashMap<String, String> map) {
         if (map.containsKey(key)) {
-            Object o = map.get(key);
+            String o = map.get(key);
 
             if (o != null) {
-                T finished = savedObjectToObject(o);
+                T finished = stringToObject(o);
                 return finished;
             }
         }
@@ -30,27 +30,10 @@ public abstract class DataKey<T> {
     public abstract T getEmpty();
 
     // could be any generic, ints are saved as ints, while complex objects are saved as strings usually
-    protected abstract T savedObjectToObject(Object o);
+    protected abstract T stringToObject(String o);
 
-    protected abstract Object objectToSavable(T o);
+    protected abstract String objectToString(T o);
 
-    protected static abstract class Generic<T> extends DataKey<T> {
-
-        public Generic(String key) {
-            super(key);
-        }
-
-
-        @Override
-        protected T savedObjectToObject(Object o) {
-            return (T) o;
-        }
-
-        @Override
-        protected Object objectToSavable(T o) {
-            return o;
-        }
-    }
 
     public static class EnumKey<T extends Enum> extends DataKey<T> {
 
@@ -67,9 +50,9 @@ public abstract class DataKey<T> {
         }
 
         @Override
-        protected T savedObjectToObject(Object o) {
+        protected T stringToObject(String o) {
             try {
-                T tried = (T) T.valueOf(empty.getClass(), (String) o);
+                T tried = (T) T.valueOf(empty.getClass(), o);
                 return tried;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -78,7 +61,7 @@ public abstract class DataKey<T> {
         }
 
         @Override
-        protected Object objectToSavable(T o) {
+        protected String objectToString(T o) {
             return o.name();
         }
     }
@@ -100,8 +83,8 @@ public abstract class DataKey<T> {
         }
 
         @Override
-        protected T savedObjectToObject(Object o) {
-            String id = (String) o;
+        protected T stringToObject(String o) {
+            String id = o;
             Object obj = Database.getRegistry(type).get(id);
 
             try {
@@ -113,12 +96,12 @@ public abstract class DataKey<T> {
         }
 
         @Override
-        protected Object objectToSavable(T o) {
+        protected String objectToString(T o) {
             return o.GUID();
         }
     }
 
-    public static class StringKey extends Generic<String> {
+    public static class StringKey extends DataKey<String> {
 
         public StringKey(String key) {
             super(key);
@@ -128,9 +111,19 @@ public abstract class DataKey<T> {
         public String getEmpty() {
             return "";
         }
+
+        @Override
+        protected String stringToObject(String o) {
+            return o;
+        }
+
+        @Override
+        protected String objectToString(String o) {
+            return o;
+        }
     }
 
-    public static class IntKey extends Generic<Integer> {
+    public static class IntKey extends DataKey<Integer> {
 
         public IntKey(String key) {
             super(key);
@@ -140,9 +133,19 @@ public abstract class DataKey<T> {
         public Integer getEmpty() {
             return 0;
         }
+
+        @Override
+        protected Integer stringToObject(String o) {
+            return Integer.valueOf(o);
+        }
+
+        @Override
+        protected String objectToString(Integer o) {
+            return o.toString();
+        }
     }
 
-    public static class FloatKey extends Generic<Float> {
+    public static class FloatKey extends DataKey<Float> {
 
         public FloatKey(String key) {
             super(key);
@@ -152,9 +155,19 @@ public abstract class DataKey<T> {
         public Float getEmpty() {
             return 0F;
         }
+
+        @Override
+        protected Float stringToObject(String o) {
+            return Float.valueOf(o);
+        }
+
+        @Override
+        protected String objectToString(Float o) {
+            return o.toString();
+        }
     }
 
-    public static class BooleanKey extends Generic<Boolean> {
+    public static class BooleanKey extends DataKey<Boolean> {
 
         public BooleanKey(String key) {
             super(key);
@@ -163,6 +176,16 @@ public abstract class DataKey<T> {
         @Override
         public Boolean getEmpty() {
             return false;
+        }
+
+        @Override
+        protected Boolean stringToObject(String o) {
+            return Boolean.valueOf(o);
+        }
+
+        @Override
+        protected String objectToString(Boolean o) {
+            return o.toString();
         }
     }
 

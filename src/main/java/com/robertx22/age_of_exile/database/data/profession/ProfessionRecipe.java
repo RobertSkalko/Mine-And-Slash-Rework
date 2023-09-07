@@ -3,20 +3,22 @@ package com.robertx22.age_of_exile.database.data.profession;
 import com.robertx22.age_of_exile.database.data.profession.all.ProfessionMatItems;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
+import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.temp.SkillItemTier;
 import net.minecraft.ChatFormatting;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Consumer;
@@ -158,14 +160,24 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
         return mats.stream().allMatch(x -> stacks.stream().anyMatch(e -> x.matches(e)));
     }
 
-    public List<ItemStack> craft(List<ItemStack> stacks) {
-        // todo need different way for crafting gear
+    public List<ItemStack> craft(Player p, List<ItemStack> stacks) {
+        List<ItemStack> list = new ArrayList<>();
 
         ItemStack stack = new ItemStack(VanillaUTIL.REGISTRY.items().get(new ResourceLocation(result)), result_num);
-
         LeveledItem.setTier(stack, tier);
+        list.add(stack);
 
-        return Arrays.asList(stack);
+        ProfessionRecipe.RecipeDifficulty diff = ProfessionRecipe.RecipeDifficulty.get(Load.player(p).professions.getLevel(this.profession), getLevelRequirement());
+
+
+        if (RandomUtils.roll(diff.doubleDropChance)) {
+            if (stack.getMaxStackSize() > 1) {
+                stack.setCount(stack.getCount() * 2);
+            } else {
+                list.add(stack.copy());
+            }
+        }
+        return list;
     }
 
 

@@ -4,11 +4,11 @@ import java.util.HashMap;
 
 public class GenericDataHolder {
 
-    private HashMap<String, Object> map = new HashMap<>();
+    private HashMap<String, String> map = new HashMap<>();
 
 
     public <T> void set(DataKey<T> key, T obj) {
-        Object saved = key.objectToSavable(obj);
+        String saved = key.objectToString(obj);
         map.put(key.key, saved);
     }
 

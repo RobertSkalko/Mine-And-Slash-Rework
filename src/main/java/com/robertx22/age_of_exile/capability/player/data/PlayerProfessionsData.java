@@ -3,8 +3,10 @@ package com.robertx22.age_of_exile.capability.player.data;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.profession.Profession;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.OnScreenMessageUtils;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.ChatFormatting;
@@ -38,8 +40,14 @@ public class PlayerProfessionsData {
         if (!map.containsKey(id)) {
             map.put(id, new Data());
         }
+
+
         var data = map.get(id);
         data.exp += exp;
+
+        int perc = MathHelper.clamp((int) (map.get(id).exp / (float) map.get(id).getExpNeeded() * 100F), 0, 100);
+        OnScreenMessageUtils.actionBar((ServerPlayer) p, Component.literal("+" + exp + " ").append(ExileDB.Professions().get(id).locName().append(" Exp (" + perc + "%)")).withStyle(ChatFormatting.GREEN));
+
 
         if (data.canLvl()) {
             data.levelUp();

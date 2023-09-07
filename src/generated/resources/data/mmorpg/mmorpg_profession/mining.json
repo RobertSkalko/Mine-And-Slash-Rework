@@ -42,7 +42,7 @@
       ]
     },
     {
-      "chance": 0.5,
+      "chance": 1.0,
       "drops": [
         {
           "item_id": "mmorpg:mining_drops/amethyst",
