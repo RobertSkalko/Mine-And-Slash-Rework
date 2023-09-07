@@ -21,7 +21,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Hea
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.special.SpecialStats;
-import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCostReduction;
+import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCapacity;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -153,7 +153,7 @@ public class UniqueRings implements ExileRegistryInit {
 
         UniqueGearBuilder.of("thread_of_hope", "Thread of Hope", BaseGearTypes.RING)
                 .keepsBaseName()
-                .stat(AuraCostReduction.getInstance().mod(-25, 25))
+                .stat(AuraCapacity.getInstance().mod(-25, 20))
                 .stat(Health.getInstance().mod(5, 10))
                 .stat(Mana.getInstance().mod(5, 10))
                 .stat(Energy.getInstance().mod(5, 10))

@@ -12,7 +12,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalR
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
-import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCostReduction;
+import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCapacity;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
@@ -39,7 +39,7 @@ public class HelmetUniques implements ExileRegistryInit {
                 .setReplacesName()
                 .rarityWeight(UniqueRarityTier.RARE)
                 .stats(Arrays.asList(
-                        new StatMod(10, 25, AuraCostReduction.getInstance(), ModType.FLAT),
+                        new StatMod(10, 25, AuraCapacity.getInstance(), ModType.FLAT),
                         new StatMod(10, 10, AuraEffect.getInstance(), ModType.FLAT),
                         new StatMod(5, 15, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.beast), ModType.FLAT),
                         new StatMod(1, 1, Stats.MAX_SUMMON_CAPACITY.get(), ModType.FLAT)

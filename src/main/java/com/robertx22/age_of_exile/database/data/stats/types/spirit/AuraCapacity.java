@@ -4,23 +4,26 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import net.minecraft.ChatFormatting;
 
+// turn this into aura capacity, flat stat
 // todo this might need an event or a method to calc total spirit use
-public class AuraCostReduction extends Stat {
+public class AuraCapacity extends Stat {
 
-    private AuraCostReduction() {
+    private AuraCapacity() {
         this.icon = "\u2663";
         this.format = ChatFormatting.AQUA.getName();
 
-        this.max = 75;
+        this.base = 100;
+        this.min = 100;
+        this.max = 250;
     }
 
-    public static AuraCostReduction getInstance() {
-        return AuraCostReduction.SingletonHolder.INSTANCE;
+    public static AuraCapacity getInstance() {
+        return AuraCapacity.SingletonHolder.INSTANCE;
     }
 
     @Override
     public boolean IsPercent() {
-        return true;
+        return false;
     }
 
     @Override
@@ -30,7 +33,7 @@ public class AuraCostReduction extends Stat {
 
     @Override
     public String locDescForLangFile() {
-        return "Reduces spirit cost needed to socket aura gems.";
+        return "The more you have the more auras you can equip.";
     }
 
     @Override
@@ -40,10 +43,10 @@ public class AuraCostReduction extends Stat {
 
     @Override
     public String locNameForLangFile() {
-        return "Aura Cost Reduction";
+        return "Aura Capacity";
     }
 
     private static class SingletonHolder {
-        private static final AuraCostReduction INSTANCE = new AuraCostReduction();
+        private static final AuraCapacity INSTANCE = new AuraCapacity();
     }
 }

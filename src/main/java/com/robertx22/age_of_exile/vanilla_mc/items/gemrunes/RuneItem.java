@@ -18,7 +18,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Hea
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
-import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCostReduction;
+import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCapacity;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.SocketData;
@@ -200,7 +200,7 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
 
     public enum RuneType {
         YUN(100, "yun", "Yun", 4, 0.8F, () -> StatPerType.of().addArmor(AuraEffect.getInstance().mod(1, 10).percent())),
-        VEN(100, "ven", "Ven", 4, 0.8F, () -> StatPerType.of().addJewerly(AuraCostReduction.getInstance().mod(1, 10))),
+        VEN(100, "ven", "Ven", 4, 0.8F, () -> StatPerType.of().addJewerly(AuraCapacity.getInstance().mod(1, 10))),
         NOS(1000, "nos", "Nos", 0, 0F, () -> StatPerType.of().addArmor(Health.getInstance().mod(1, 10).percent())),
         MOS(1000, "mos", "Mos", 0, 0f, () -> StatPerType.of().addArmor(MagicShield.getInstance().mod(1, 10).percent())),
         ITA(1000, "ita", "Ita", 0, 0f, () -> StatPerType.of().addJewerly(ManaRegen.getInstance().mod(1, 10).percent())),

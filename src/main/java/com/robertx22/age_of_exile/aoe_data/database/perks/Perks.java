@@ -21,7 +21,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shie
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShieldRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
-import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCostReduction;
+import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCapacity;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
@@ -51,8 +51,8 @@ public class Perks implements ExileRegistryInit {
         PerkBuilder.bigStat("str_big", new OptScaleExactStat(10, DatapackStats.STR, ModType.FLAT));
 
 
-        PerkBuilder.stat(new OptScaleExactStat(5, AuraCostReduction.getInstance(), ModType.FLAT));
-        PerkBuilder.bigStat(new OptScaleExactStat(10, AuraCostReduction.getInstance(), ModType.FLAT));
+        PerkBuilder.stat(new OptScaleExactStat(5, AuraCapacity.getInstance(), ModType.FLAT));
+        PerkBuilder.bigStat(new OptScaleExactStat(10, AuraCapacity.getInstance(), ModType.FLAT));
 
 
         PerkBuilder.stat(new OptScaleExactStat(5, AuraEffect.getInstance(), ModType.FLAT));

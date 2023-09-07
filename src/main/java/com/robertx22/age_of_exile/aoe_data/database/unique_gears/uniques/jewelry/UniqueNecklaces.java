@@ -13,7 +13,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalR
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.EnergyRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
-import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCostReduction;
+import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCapacity;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
@@ -77,7 +77,7 @@ public class UniqueNecklaces implements ExileRegistryInit {
         UniqueGearBuilder.of("the_unseen_eye", "Unseen Eye", BaseGearTypes.NECKLACE)
                 .keepsBaseName()
                 .stats(Arrays.asList(
-                        AuraCostReduction.getInstance().mod(5, 10),
+                        AuraCapacity.getInstance().mod(5, 10),
                         AuraEffect.getInstance().mod(-10, 10),
                         DodgeRating.getInstance().mod(5, 25).percent(),
                         new ElementalResist(Elements.Chaos).mod(25, 25)
@@ -92,6 +92,6 @@ public class UniqueNecklaces implements ExileRegistryInit {
                 .stat(new ElementalResist(Elements.Fire).mod(10, 25))
                 .build();
 
-        
+
     }
 }

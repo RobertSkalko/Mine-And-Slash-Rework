@@ -11,7 +11,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
-import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCostReduction;
+import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCapacity;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
@@ -38,7 +38,7 @@ public class CraftedJewelAffixes implements ExileRegistryInit {
                 .Build();
 
         AffixBuilder.Normal(PREFIX + "aura_cost")
-                .stat(AuraCostReduction.getInstance().mod(4, 10))
+                .stat(AuraCapacity.getInstance().mod(4, 10))
                 .includesTags(BaseGearType.SlotTag.crafted_jewel_unique)
                 .Weight(1000)
                 .Suffix()

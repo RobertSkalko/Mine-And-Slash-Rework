@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.capability.player.helper;
 
 import com.robertx22.age_of_exile.database.data.aura.AuraGem;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
-import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCostReduction;
+import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCapacity;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.AuraStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
@@ -118,41 +118,41 @@ public class GemInventoryHelper {
         return list;
     }
 
-    public float getSpiritReserved(Player p) {
-        float multi = getPlayerSpiritReserveMulti(p);
-
-        float res = 0;
+    public int getSpiritReserved(Player p) {
+        int res = 0;
 
         for (SkillGemData aura : getAurasGems()) {
-            res += aura.getAura().reservation * multi;
+            res += aura.getAura().reservation * 100F;
         }
 
         return res;
     }
 
-    public float getRemainingSpirit(Player p) {
+    public int getRemainingSpirit(Player p) {
 
-        float reserved = getSpiritReserved(p);
+        int reserved = getSpiritReserved(p);
+        int spirit = getTotalSpirit(p);
 
-        float remaining = 1 - reserved;
-
-        return remaining * 100F;
+        return spirit - reserved;
     }
 
-    public float getPlayerSpiritReserveMulti(Player p) {
-        float multi = Load.Unit(p).getUnit().getCalculatedStat(AuraCostReduction.getInstance()).getReverseMultiplier();
-        return multi;
+    public int getTotalSpirit(Player p) {
+        int num = (int) Load.Unit(p).getUnit().getCalculatedStat(AuraCapacity.getInstance()).getValue();
+        if (num < 1) {
+            num = (int) AuraCapacity.getInstance().base;
+        }
+        return num;
     }
 
 
     public void removeAurasIfCantWear(Player p) {
 
-        if (getSpiritReserved(p) > 1) {
+        if (getRemainingSpirit(p) < 0) {
             for (ItemStack s : getAuras()) {
                 PlayerUtils.giveItem(s.copy(), p);
                 s.shrink(100);
             }
-            p.sendSystemMessage(ExileText.ofText("You lack spirit to equip all these auras.").get());
+            p.sendSystemMessage(ExileText.ofText("You lack the aura capacity to equip all these auras.").get());
         }
 
         if (hasDuplicates()) {
