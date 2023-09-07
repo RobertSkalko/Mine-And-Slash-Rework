@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.mixins;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
+import com.robertx22.age_of_exile.uncommon.interfaces.IRarityItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -28,7 +29,6 @@ public class ItemGlintMixin {
 
                 GearRarity rar = null;
 
-
                 var data = ICommonDataItem.load(stack);
 
                 if (data != null) {
@@ -36,8 +36,11 @@ public class ItemGlintMixin {
                         rar = data.getRarity();
                     }
                 }
-
-
+                if (rar == null) {
+                    if (stack.getItem() instanceof IRarityItem ri) {
+                        rar = ri.getItemRarity(stack);
+                    }
+                }
                 if (rar == null) {
                     return;
                 }

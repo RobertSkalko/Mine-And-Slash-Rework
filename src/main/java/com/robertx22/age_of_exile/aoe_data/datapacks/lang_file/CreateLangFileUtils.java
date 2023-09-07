@@ -11,9 +11,9 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 
 public class CreateLangFileUtils {
@@ -41,9 +41,9 @@ public class CreateLangFileUtils {
         return true;
     }
 
-    public static <T extends IBaseAutoLoc> List<T> getFromRegistries(Class<T> theclass) {
+    public static <T extends IBaseAutoLoc> HashSet<T> getFromRegistries(Class<T> theclass) {
 
-        List<T> list = new ArrayList<>();
+        HashSet<T> list = new HashSet<>();
 
         for (Item item : BuiltInRegistries.ITEM) {
             if (matches(VanillaUTIL.REGISTRY.items().getKey(item)) && theclass.isAssignableFrom(item.getClass())) {

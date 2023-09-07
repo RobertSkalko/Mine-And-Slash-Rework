@@ -103,7 +103,7 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
             if (diffMulti < 0.5F) {
                 return EASY;
             }
-     
+
             return VERY_HARD;
         }
     }
@@ -237,9 +237,17 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
             this.actions.add(data -> {
 
                 ItemStack stack = tier.apply(data.tier);
+
                 if (!stack.isEmpty()) {
+
                     var id = VanillaUTIL.REGISTRY.items().getKey(stack.getItem());
+
+                    if (stack.getCount() > stack.getMaxStackSize()) {
+                        throw new RuntimeException(id.toString() + " has more than max stack size");
+                    }
+
                     data.recipe.mats.add(CraftingMaterial.item(id.toString(), stack.getCount()));
+
 
                 }
             });

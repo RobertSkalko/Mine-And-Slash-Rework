@@ -63,22 +63,26 @@ public class GearSocketsData implements IStatsContainer, IGearPartTooltip {
     public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {
         List<Component> list = new ArrayList<Component>();
 
-        for (int i = 0; i < getSocketedGemsCount(); i++) {
-            SocketData data = so.get(i);
-            if (data.isGem()) {
-                Gem gem = data.getGem();
-                list.add(ExileText.ofText(gem.getFormat() + "[" + UNICODE.STAR + "] ").get().append(data.GetTooltipString(info, gear)
-                        .get(0)));
+        try {
+            for (int i = 0; i < getSocketedGemsCount(); i++) {
+                SocketData data = so.get(i);
+                if (data.isGem()) {
+                    Gem gem = data.getGem();
+                    list.add(ExileText.ofText(gem.getFormat() + "[" + UNICODE.STAR + "] ").get().append(data.GetTooltipString(info, gear)
+                            .get(0)));
+                }
+
+                if (data.isRune()) {
+                    Rune gem = data.getRune();
+                    list.add(ExileText.ofText(gem.getFormat(data) + "[" + UNICODE.CUBE + "] ").get().append(data.GetTooltipString(info, gear).get(0)));
+                }
             }
 
-            if (data.isRune()) {
-                Rune gem = data.getRune();
-                list.add(ExileText.ofText(gem.getFormat(data) + "[" + UNICODE.CUBE + "] ").get().append(data.GetTooltipString(info, gear).get(0)));
+            for (int i = 0; i < gear.getEmptySockets(); i++) {
+                list.add(ExileText.ofText(ChatFormatting.YELLOW + "[Socket]").get());
             }
-        }
-
-        for (int i = 0; i < gear.getEmptySockets(); i++) {
-            list.add(ExileText.ofText(ChatFormatting.YELLOW + "[Socket]").get());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return list;

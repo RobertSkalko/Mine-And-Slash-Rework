@@ -1,5 +1,70 @@
 {
-  "chance_drops": [],
+  "chance_drops": [
+    {
+      "chance": 5.0,
+      "drops": [
+        {
+          "item_id": "mmorpg:farming_drops/green_pepper",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:farming_drops/red_pepper",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:farming_drops/bolete_mushroom",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:farming_drops/blootroot",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:farming_drops/wormed_apple",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        }
+      ]
+    },
+    {
+      "chance": 0.5,
+      "drops": [
+        {
+          "item_id": "mmorpg:farming_drops/dragonfruit",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 50
+        },
+        {
+          "item_id": "mmorpg:farming_drops/bryony_root",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 50
+        },
+        {
+          "item_id": "mmorpg:farming_drops/red_coral",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 50
+        },
+        {
+          "item_id": "mmorpg:farming_drops/magic_log",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 50
+        }
+      ]
+    }
+  ],
   "exp_sources": {
     "map": {
       "0": [

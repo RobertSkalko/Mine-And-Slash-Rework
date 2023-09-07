@@ -1,0 +1,26 @@
+{
+  "exp": 100,
+  "id": "stat_soul_family_jewelry_epic4",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/mining/4",
+      "num": 11
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:stone/3",
+      "num": 3
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:jewelry/ring/iron",
+      "num": 1
+    }
+  ],
+  "power": "greater",
+  "profession": "gear_crafting",
+  "result": "mmorpg:stat_soul/family/jewelry/epic",
+  "result_num": 1,
+  "tier": 4
+}

@@ -1,0 +1,26 @@
+{
+  "exp": 100,
+  "id": "stat_soul_family_offhand_epic0",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/mining/0",
+      "num": 2
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:stone/3",
+      "num": 3
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:shield",
+      "num": 1
+    }
+  ],
+  "power": "greater",
+  "profession": "gear_crafting",
+  "result": "mmorpg:stat_soul/family/offhand/epic",
+  "result_num": 1,
+  "tier": 0
+}

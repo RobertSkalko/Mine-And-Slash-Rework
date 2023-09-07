@@ -19,8 +19,7 @@ public abstract class AutoItem extends Item implements IAutoLocName, IAutoModel 
 
     @Override
     public String locNameLangFileGUID() {
-        return VanillaUTIL.REGISTRY.items().getKey(this)
-                .toString();
+        return VanillaUTIL.REGISTRY.items().getKey(this).toString();
     }
 
     @Override

@@ -1,0 +1,26 @@
+{
+  "exp": 100,
+  "id": "stat_soul_family_offhand_mythic5",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/mining/5",
+      "num": 18
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:stone/5",
+      "num": 4
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:shield",
+      "num": 1
+    }
+  ],
+  "power": "greater",
+  "profession": "gear_crafting",
+  "result": "mmorpg:stat_soul/family/offhand/mythic",
+  "result_num": 1,
+  "tier": 5
+}

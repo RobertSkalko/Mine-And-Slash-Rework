@@ -1,0 +1,26 @@
+{
+  "exp": 100,
+  "id": "stat_soul_family_jewelry_common5",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/mining/5",
+      "num": 6
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:stone/0",
+      "num": 2
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:jewelry/ring/iron",
+      "num": 1
+    }
+  ],
+  "power": "greater",
+  "profession": "gear_crafting",
+  "result": "mmorpg:stat_soul/family/jewelry/common",
+  "result_num": 1,
+  "tier": 5
+}

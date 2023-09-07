@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.mixin_methods;
 
 import com.robertx22.age_of_exile.database.data.currency.IItemAsCurrency;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
+import com.robertx22.age_of_exile.database.data.profession.items.CraftedSoulItem;
 import com.robertx22.age_of_exile.mmorpg.ForgeEvents;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
@@ -77,8 +78,11 @@ public class OnItemInteract {
                 stack.setDamageValue(stack.getDamageValue() - repair);
                 success = true;
 
-            } else if (cursor.getItem() instanceof StatSoulItem) {
+            } else if (cursor.getItem() instanceof StatSoulItem || cursor.getItem() instanceof CraftedSoulItem) {
                 StatSoulData data = StackSaving.STAT_SOULS.loadFrom(cursor);
+                if (cursor.getItem() instanceof CraftedSoulItem cs) {
+                    data = cs.getSoul(cursor);
+                }
 
                 if (data != null) {
                     if (data.canInsertIntoStack(stack)) {

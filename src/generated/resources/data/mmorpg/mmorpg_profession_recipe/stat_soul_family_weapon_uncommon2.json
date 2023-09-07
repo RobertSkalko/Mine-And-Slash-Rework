@@ -1,0 +1,26 @@
+{
+  "exp": 100,
+  "id": "stat_soul_family_weapon_uncommon2",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/mining/2",
+      "num": 4
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:stone/1",
+      "num": 2
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:iron_sword",
+      "num": 1
+    }
+  ],
+  "power": "greater",
+  "profession": "gear_crafting",
+  "result": "mmorpg:stat_soul/family/weapon/uncommon",
+  "result_num": 1,
+  "tier": 2
+}

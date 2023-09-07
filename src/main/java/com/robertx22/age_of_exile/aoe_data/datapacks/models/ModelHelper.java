@@ -78,16 +78,13 @@ public class ModelHelper {
     }
 
     private String getTextureString() {
-
-        String id = VanillaUTIL.REGISTRY.items().getKey(item)
-                .toString();
+        String id = VanillaUTIL.REGISTRY.items().getKey(item).toString();
 
         if (!modelPath.isEmpty()) {
             id = SlashRef.MODID + ":" + modelPath;
         }
 
-        String tex = id
-                .replace(SlashRef.MODID + ":", SlashRef.MODID + ":item/");
+        String tex = id.replace(SlashRef.MODID + ":", SlashRef.MODID + ":item/");
 
         return tex;
     }

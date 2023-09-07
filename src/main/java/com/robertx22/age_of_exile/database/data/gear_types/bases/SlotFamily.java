@@ -1,11 +1,28 @@
 package com.robertx22.age_of_exile.database.data.gear_types.bases;
 
+import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
+import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.VanillaMaterial;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+
+import java.util.function.Supplier;
+
 public enum SlotFamily {
-    Weapon,
-    Armor,
-    Jewelry,
-    OffHand,
-    NONE;
+    Weapon("weapon", () -> Items.IRON_SWORD),
+    Armor("armor", () -> Items.IRON_CHESTPLATE),
+    Jewelry("jewelry", () -> SlashItems.GearItems.RINGS.get(VanillaMaterial.IRON).get()),
+    OffHand("offhand", () -> Items.SHIELD),
+    NONE("none", () -> Items.AIR);
+
+
+    public String id;
+    public Supplier<Item> craftItem;
+
+    SlotFamily(String id, Supplier<Item> craftItem) {
+        this.id = id;
+        this.craftItem = craftItem;
+    }
+
 
     public boolean isJewelry() {
         return this == Jewelry;

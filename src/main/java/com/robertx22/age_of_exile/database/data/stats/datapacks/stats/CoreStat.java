@@ -27,7 +27,7 @@ public class CoreStat extends BaseDatapackStat implements ICoreStat {
 
     transient String locname;
 
-    public CoreStat(String id, String locname, CoreStatData data) {
+    public CoreStat(String id, String name, CoreStatData data) {
         super(SER_ID);
 
         this.id = id;
@@ -40,7 +40,7 @@ public class CoreStat extends BaseDatapackStat implements ICoreStat {
         this.scaling = StatScaling.NONE;
         this.is_long = false;
 
-        this.locname = locname;
+        this.locname = name;
     }
 
     @Override

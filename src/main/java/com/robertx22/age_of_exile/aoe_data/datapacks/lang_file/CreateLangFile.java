@@ -113,19 +113,20 @@ public class CreateLangFile {
     }
 
     public static HashMap<String, List<IAutoLocName>> getMap() {
-        List<IAutoLocName> list = CreateLangFileUtils.getFromRegistries(IAutoLocName.class);
+        HashSet<IAutoLocName> list = CreateLangFileUtils.getFromRegistries(IAutoLocName.class);
 
         for (ExileRegistryContainer reg : Database.getAllRegistries()) {
-            for (Object o : reg.getList()) {
-                if (o instanceof IAutoLocName loc) {
-                    list.add(loc);
-                }
-            }
             for (Object o : reg.getSerializable()) {
                 if (o instanceof IAutoLocName loc) {
                     list.add(loc);
                 }
             }
+            for (Object o : reg.getList()) {
+                if (o instanceof IAutoLocName loc) {
+                    list.add(loc);
+                }
+            }
+
         }
 
         list.addAll(Arrays.asList(Chats.values()));
@@ -157,7 +158,7 @@ public class CreateLangFile {
     }
 
     public static HashMap<String, List<IAutoLocDesc>> getDescMap() {
-        List<IAutoLocDesc> list = CreateLangFileUtils.getFromRegistries(IAutoLocDesc.class);
+        HashSet<IAutoLocDesc> list = CreateLangFileUtils.getFromRegistries(IAutoLocDesc.class);
 
         list.addAll(ExileDB.Spells()
                 .getSerializable());

@@ -62,8 +62,8 @@ public class Professions {
         // this would be a pain to save
 
         Builder.of(SALVAGING)
-                .sometimesDrop(ProfessionMatItems.Essence.ALL_NORMAL.stream().map(x -> x.get()).collect(Collectors.toList()), 5)
-                .sometimesDrop(ProfessionMatItems.Essence.Rare.ALL_RARES.stream().map(x -> x.get()).collect(Collectors.toList()), 0.5F)
+                .sometimesDrop(ProfessionMatItems.ESSENCES.ALL.stream().map(x -> x.get()).collect(Collectors.toList()), 5)
+                .sometimesDrop(ProfessionMatItems.RARE_ESSENCES.ALL.stream().map(x -> x.get()).collect(Collectors.toList()), 0.5F)
                 .build();
 
         var FARM_EXP = 30;
@@ -78,6 +78,9 @@ public class Professions {
                 .item(SkillItemTier.TIER5, FARM_EXP, Items.COCOA_BEANS)
 
                 .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(FARMING))
+
+                .sometimesDrop(ProfessionMatItems.COMMON_FARMING.ALL.stream().map(x -> x.get()).collect(Collectors.toList()), 5)
+                .sometimesDrop(ProfessionMatItems.RARE_FARMING.ALL.stream().map(x -> x.get()).collect(Collectors.toList()), 0.5F)
 
                 .build();
 

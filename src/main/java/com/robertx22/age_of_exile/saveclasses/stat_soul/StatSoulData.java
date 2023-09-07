@@ -12,15 +12,21 @@ import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISettableLevelTier;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.temp.SkillItemTier;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,7 +35,6 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
 
 
     public int tier = 1;
-
 
     public String slot = "";
 
@@ -60,7 +65,6 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
         return data;
     }
 
-
     public boolean canBeOnAnySlot() {
         return slot.isEmpty();
     }
@@ -90,7 +94,7 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
         if (gear != null) {
             StackSaving.GEARS.saveTo(stack, gear);
         } else {
-            StackSaving.GEARS.saveTo(stack, this.createGearData(toStack()));
+            StackSaving.GEARS.saveTo(stack, this.createGearData(stack));
             //LoadSave.Save(this, stack.getOrCreateTag(), StatSoulItem.TAG);
         }
     }
@@ -205,6 +209,42 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
     @Override
     public ItemstackDataSaver<? extends ICommonDataItem> getStackSaver() {
         return StackSaving.STAT_SOULS;
+    }
+
+    public List<Component> getTooltip(ItemStack stack) {
+
+        List<Component> tooltip = new ArrayList<>();
+
+        var data = this;
+
+        if (data.gear != null) {
+            data.gear.BuildTooltip(new TooltipContext(stack, tooltip, Load.Unit(ClientOnly.getPlayer())));
+        } else {
+            tooltip.add(TooltipUtils.gearTier(data.tier));
+            if (data.canBeOnAnySlot()) {
+
+            } else {
+                if (data.fam != SlotFamily.NONE) {
+                    tooltip.add(Component.literal("Item Type: ").withStyle(ChatFormatting.WHITE).append(data.fam.name()).withStyle(ChatFormatting.BLUE));
+                } else {
+                    tooltip.add(Component.literal("Item Type: ").withStyle(ChatFormatting.WHITE)
+                            .append(ExileDB.GearSlots()
+                                    .get(data.slot)
+                                    .locName()
+                                    .withStyle(ChatFormatting.BLUE)));
+                }
+            }
+            tooltip.add(TooltipUtils.gearRarity(ExileDB.GearRarities()
+                    .get(data.rar)));
+
+        }
+        tooltip.add(Component.literal(""));
+
+        tooltip.add(Component.literal("Infuses stats into empty gear").withStyle(ChatFormatting.AQUA));
+        tooltip.add(TooltipUtils.dragOntoGearToUse());
+        tooltip.add(Component.literal("You can also right click to generate an item.").withStyle(ChatFormatting.AQUA));
+
+        return tooltip;
     }
 
     @Override

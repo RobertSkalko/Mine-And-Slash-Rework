@@ -1,21 +1,15 @@
 package com.robertx22.age_of_exile.saveclasses.stat_soul;
 
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
-import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
-import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.ICreativeTabNbt;
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.utils.LoadSave;
-import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.InteractionHand;
@@ -141,37 +135,10 @@ public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt {
 
         StatSoulData data = StackSaving.STAT_SOULS.loadFrom(stack);
 
-        if (data != null) {
-            if (data.gear != null) {
-                data.gear.BuildTooltip(new TooltipContext(stack, tooltip, Load.Unit(ClientOnly.getPlayer())));
-            } else {
-                tooltip.add(TooltipUtils.gearTier(data.tier));
-                if (data.canBeOnAnySlot()) {
-
-                } else {
-                    if (data.fam != SlotFamily.NONE) {
-                        tooltip.add(Component.literal("Item Type: ").withStyle(ChatFormatting.WHITE)
-                                .append(data.fam.name()).withStyle(ChatFormatting.BLUE));
-                    } else {
-
-                        tooltip.add(Component.literal("Item Type: ").withStyle(ChatFormatting.WHITE)
-                                .append(ExileDB.GearSlots()
-                                        .get(data.slot)
-                                        .locName()
-                                        .withStyle(ChatFormatting.BLUE)));
-                    }
-                }
-                tooltip.add(TooltipUtils.gearRarity(ExileDB.GearRarities()
-                        .get(data.rar)));
-
-            }
+        for (Component c : data.getTooltip(stack)) {
+            tooltip.add(c);
         }
 
-        tooltip.add(Component.literal(""));
-
-        tooltip.add(Component.literal("Infuses stats into empty gear").withStyle(ChatFormatting.AQUA));
-        tooltip.add(TooltipUtils.dragOntoGearToUse());
-        tooltip.add(Component.literal("You can also right click to generate an item.").withStyle(ChatFormatting.AQUA));
 
     }
 

@@ -3,6 +3,7 @@ package com.robertx22.temp;
 
 import com.robertx22.age_of_exile.database.data.level_ranges.LevelRange;
 import com.robertx22.age_of_exile.database.registrators.LevelRanges;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import net.minecraft.ChatFormatting;
 
 import java.util.Arrays;
@@ -10,16 +11,17 @@ import java.util.Comparator;
 
 public enum SkillItemTier {
 
-    TIER0("Spiritual", LevelRanges.STARTER_0, 0, 0, 1, ChatFormatting.GRAY, 60 * 5, 20, 50),
-    TIER1("Celestial", LevelRanges.LOW_1, 0.2F, 1, 1.25F, ChatFormatting.GREEN, 60 * 6, 25, 100),
-    TIER2("Empyrean", LevelRanges.MIDDLE_2, 0.4F, 2, 1.5F, ChatFormatting.BLUE, 60 * 7, 30, 200),
-    TIER3("Angelic", LevelRanges.HIGH_3, 0.6F, 3, 1.75F, ChatFormatting.LIGHT_PURPLE, 60 * 8, 40, 300),
-    TIER4("Divine", LevelRanges.ENDGAME_4, 0.8F, 4, 2, ChatFormatting.GOLD, 60 * 10, 50, 500),
-    TIER5("Godly", LevelRanges.MAX_5, 1F, 5, 2.5F, ChatFormatting.DARK_PURPLE, 60 * 15, 50, 1000);
+    TIER0("Spiritual", IRarity.COMMON_ID, LevelRanges.STARTER_0, 0, 0, 1, ChatFormatting.GRAY, 60 * 5, 20, 50),
+    TIER1("Celestial", IRarity.UNCOMMON, LevelRanges.LOW_1, 0.2F, 1, 1.25F, ChatFormatting.GREEN, 60 * 6, 25, 100),
+    TIER2("Empyrean", IRarity.RARE_ID, LevelRanges.MIDDLE_2, 0.4F, 2, 1.5F, ChatFormatting.BLUE, 60 * 7, 30, 200),
+    TIER3("Angelic", IRarity.EPIC_ID, LevelRanges.HIGH_3, 0.6F, 3, 1.75F, ChatFormatting.LIGHT_PURPLE, 60 * 8, 40, 300),
+    TIER4("Divine", IRarity.LEGENDARY_ID, LevelRanges.ENDGAME_4, 0.8F, 4, 2, ChatFormatting.GOLD, 60 * 10, 50, 500),
+    TIER5("Godly", IRarity.MYTHIC_ID, LevelRanges.MAX_5, 1F, 5, 2.5F, ChatFormatting.DARK_PURPLE, 60 * 15, 50, 1000);
 
-    SkillItemTier(String word, LevelRange levelRange, float lvl_req, int tier, float statMulti, ChatFormatting format, int durationseconds, float percent_healed, int repairDurab) {
+    SkillItemTier(String word, String rar, LevelRange levelRange, float lvl_req, int tier, float statMulti, ChatFormatting format, int durationseconds, float percent_healed, int repairDurab) {
         this.word = word;
         this.tier = tier;
+        this.rar = rar;
         this.statMulti = statMulti;
         this.format = format;
         this.repairDurab = repairDurab;
@@ -28,6 +30,7 @@ public enum SkillItemTier {
         this.lvl_req = lvl_req;
         this.levelRange = levelRange;
     }
+
 
     public int getDisplayTierNumber() {
         return tier;
@@ -100,6 +103,7 @@ public enum SkillItemTier {
     public LevelRange levelRange;
     public float lvl_req;
     public String word;
+    public String rar;
     public int tier;
     public float statMulti;
     public ChatFormatting format;
