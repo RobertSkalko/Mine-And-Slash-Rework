@@ -1,11 +1,13 @@
 package com.robertx22.age_of_exile.database.data.profession;
 
 import com.robertx22.age_of_exile.database.data.profession.all.ProfessionMatItems;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
@@ -13,6 +15,7 @@ import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.temp.SkillItemTier;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -41,6 +44,17 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
 
     public int getLevelRequirement() {
         return getTier().levelRange.getMinLevel();
+    }
+
+    public List<Component> getTooltipJEI() {
+
+        List<Component> list = new ArrayList<>();
+
+        var prof = ExileDB.Professions().get(profession);
+        
+        list.add(prof.locName().append(" ").append(TooltipUtils.level(getLevelRequirement())));
+
+        return list;
     }
 
     public CraftedItemPower getPower() {
@@ -266,6 +280,18 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
             return this;
         }
 
+        public TierBuilder forRarityPower(String rar, HashMap<CraftedItemPower, RegObj<Item>> map) {
+            CraftedItemPower power = CraftedItemPower.ofRarity(rar);
+            this.actions.add(data -> {
+                if (data.power.perc >= power.perc) {
+                    var id = VanillaUTIL.REGISTRY.items().getKey(map.get(power).get());
+                    data.recipe.mats.add(CraftingMaterial.item(id.toString(), 1));
+                }
+            });
+            return this;
+        }
+
+
         public TierBuilder onTierOrAbove(SkillItemTier tier, Item item, int num) {
             this.actions.add(data -> {
                 if (data.tier.tier >= tier.tier) {
@@ -335,6 +361,13 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
 
         public TierPowerBuilder greater(Item item, int num) {
             return material(CraftedItemPower.GREATER, item, num);
+        }
+
+        public TierPowerBuilder forPowers(HashMap<CraftedItemPower, RegObj<Item>> map, int num) {
+            for (CraftedItemPower p : CraftedItemPower.values()) {
+                material(CraftedItemPower.MEDIUM, map.get(p).get(), num);
+            }
+            return this;
         }
 
         private TierPowerBuilder material(CraftedItemPower forPower, Item item, int num) {

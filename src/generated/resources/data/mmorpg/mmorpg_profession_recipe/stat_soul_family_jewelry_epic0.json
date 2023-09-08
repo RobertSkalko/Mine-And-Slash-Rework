@@ -19,22 +19,7 @@
     },
     {
       "type": "ITEM",
-      "id": "mmorpg:mining_drops/amethyst",
-      "num": 1
-    },
-    {
-      "type": "ITEM",
-      "id": "mmorpg:mining_drops/emerald",
-      "num": 1
-    },
-    {
-      "type": "ITEM",
-      "id": "mmorpg:mining_drops/ruby",
-      "num": 1
-    },
-    {
-      "type": "ITEM",
-      "id": "mmorpg:mining_drops/topaz",
+      "id": "mmorpg:rare_mats/mining/medium",
       "num": 1
     }
   ],

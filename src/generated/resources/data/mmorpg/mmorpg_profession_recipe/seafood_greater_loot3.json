@@ -1,0 +1,36 @@
+{
+  "exp": 100,
+  "id": "seafood_greater_loot3",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/fishing/3",
+      "num": 5
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:pufferfish",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:rare_mats/fishing/lesser",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:rare_mats/fishing/medium",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:rare_mats/fishing/greater",
+      "num": 1
+    }
+  ],
+  "power": "greater",
+  "profession": "cooking",
+  "result": "mmorpg:seafood/greater_loot",
+  "result_num": 3,
+  "tier": 3
+}

@@ -1,0 +1,88 @@
+{
+  "chance_drops": [],
+  "exp_sources": {
+    "map": {}
+  },
+  "id": "fishing",
+  "tiered_drops": {
+    "TIER0": [
+      {
+        "chance": 10.0,
+        "drops": [
+          {
+            "item_id": "mmorpg:material/fishing/0",
+            "min_lvl": 0.0,
+            "num": 1,
+            "weight": 1000
+          }
+        ]
+      }
+    ],
+    "TIER1": [
+      {
+        "chance": 10.0,
+        "drops": [
+          {
+            "item_id": "mmorpg:material/fishing/1",
+            "min_lvl": 0.2,
+            "num": 1,
+            "weight": 1000
+          }
+        ]
+      }
+    ],
+    "TIER2": [
+      {
+        "chance": 10.0,
+        "drops": [
+          {
+            "item_id": "mmorpg:material/fishing/2",
+            "min_lvl": 0.4,
+            "num": 1,
+            "weight": 1000
+          }
+        ]
+      }
+    ],
+    "TIER3": [
+      {
+        "chance": 10.0,
+        "drops": [
+          {
+            "item_id": "mmorpg:material/fishing/3",
+            "min_lvl": 0.6,
+            "num": 1,
+            "weight": 1000
+          }
+        ]
+      }
+    ],
+    "TIER4": [
+      {
+        "chance": 10.0,
+        "drops": [
+          {
+            "item_id": "mmorpg:material/fishing/4",
+            "min_lvl": 0.8,
+            "num": 1,
+            "weight": 1000
+          }
+        ]
+      }
+    ],
+    "TIER5": [
+      {
+        "chance": 10.0,
+        "drops": [
+          {
+            "item_id": "mmorpg:material/fishing/5",
+            "min_lvl": 1.0,
+            "num": 1,
+            "weight": 1000
+          }
+        ]
+      }
+    ]
+  },
+  "tool_tag": "fishing_tool"
+}

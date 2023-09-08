@@ -19,32 +19,22 @@
     },
     {
       "type": "ITEM",
-      "id": "mmorpg:mining_drops/amethyst",
+      "id": "mmorpg:jewelry/ring/iron",
       "num": 1
     },
     {
       "type": "ITEM",
-      "id": "mmorpg:mining_drops/emerald",
+      "id": "mmorpg:rare_mats/mining/lesser",
       "num": 1
     },
     {
       "type": "ITEM",
-      "id": "mmorpg:mining_drops/ruby",
+      "id": "mmorpg:rare_mats/mining/medium",
       "num": 1
     },
     {
       "type": "ITEM",
-      "id": "mmorpg:mining_drops/topaz",
-      "num": 1
-    },
-    {
-      "type": "ITEM",
-      "id": "mmorpg:mining_drops/tourmaline",
-      "num": 1
-    },
-    {
-      "type": "ITEM",
-      "id": "mmorpg:mining_drops/sapphire",
+      "id": "mmorpg:rare_mats/mining/greater",
       "num": 1
     }
   ],

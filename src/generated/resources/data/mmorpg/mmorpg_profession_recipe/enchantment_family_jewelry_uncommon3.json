@@ -19,12 +19,12 @@
     },
     {
       "type": "ITEM",
-      "id": "mmorpg:mining_drops/amethyst",
+      "id": "mmorpg:jewelry/ring/iron",
       "num": 1
     },
     {
       "type": "ITEM",
-      "id": "mmorpg:mining_drops/emerald",
+      "id": "mmorpg:rare_mats/mining/lesser",
       "num": 1
     }
   ],

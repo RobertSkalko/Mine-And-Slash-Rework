@@ -1,40 +1,22 @@
 {
   "chance_drops": [
     {
-      "chance": 5.0,
+      "chance": 0.5,
       "drops": [
         {
-          "item_id": "mmorpg:mining_drops/corestone_ingot",
+          "item_id": "mmorpg:rare_mats/mining/greater",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
         },
         {
-          "item_id": "mmorpg:mining_drops/adamantite_ingot",
+          "item_id": "mmorpg:rare_mats/mining/medium",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
         },
         {
-          "item_id": "mmorpg:mining_drops/ancient_ingot",
-          "min_lvl": 0.0,
-          "num": 1,
-          "weight": 1000
-        },
-        {
-          "item_id": "mmorpg:mining_drops/mythril_ingot",
-          "min_lvl": 0.0,
-          "num": 1,
-          "weight": 1000
-        },
-        {
-          "item_id": "mmorpg:mining_drops/enderyll_ingot",
-          "min_lvl": 0.0,
-          "num": 1,
-          "weight": 1000
-        },
-        {
-          "item_id": "mmorpg:mining_drops/magmacyte_ingot",
+          "item_id": "mmorpg:rare_mats/mining/lesser",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
@@ -42,43 +24,48 @@
       ]
     },
     {
-      "chance": 1.0,
+      "chance": 2.5,
       "drops": [
         {
-          "item_id": "mmorpg:mining_drops/amethyst",
+          "item_id": "mmorpg:rare_mats/mining/greater",
           "min_lvl": 0.0,
           "num": 1,
-          "weight": 50
+          "weight": 1000
         },
         {
-          "item_id": "mmorpg:mining_drops/emerald",
+          "item_id": "mmorpg:rare_mats/mining/medium",
           "min_lvl": 0.0,
           "num": 1,
-          "weight": 50
+          "weight": 1000
         },
         {
-          "item_id": "mmorpg:mining_drops/ruby",
+          "item_id": "mmorpg:rare_mats/mining/lesser",
           "min_lvl": 0.0,
           "num": 1,
-          "weight": 50
+          "weight": 1000
+        }
+      ]
+    },
+    {
+      "chance": 10.0,
+      "drops": [
+        {
+          "item_id": "mmorpg:rare_mats/mining/greater",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
         },
         {
-          "item_id": "mmorpg:mining_drops/topaz",
+          "item_id": "mmorpg:rare_mats/mining/medium",
           "min_lvl": 0.0,
           "num": 1,
-          "weight": 50
+          "weight": 1000
         },
         {
-          "item_id": "mmorpg:mining_drops/tourmaline",
+          "item_id": "mmorpg:rare_mats/mining/lesser",
           "min_lvl": 0.0,
           "num": 1,
-          "weight": 50
-        },
-        {
-          "item_id": "mmorpg:mining_drops/sapphire",
-          "min_lvl": 0.0,
-          "num": 1,
-          "weight": 50
+          "weight": 1000
         }
       ]
     }
@@ -95,35 +82,35 @@
       "1": [
         {
           "type": "BLOCK_TAG",
-          "exp": 100,
-          "id": "minecraft:coal_ores"
+          "exp": 110,
+          "id": "minecraft:copper_ores"
         }
       ],
       "2": [
         {
           "type": "BLOCK_TAG",
-          "exp": 100,
+          "exp": 120,
           "id": "minecraft:iron_ores"
         }
       ],
       "3": [
         {
           "type": "BLOCK_TAG",
-          "exp": 100,
+          "exp": 135,
           "id": "minecraft:gold_ores"
         }
       ],
       "4": [
         {
           "type": "BLOCK_TAG",
-          "exp": 100,
+          "exp": 150,
           "id": "minecraft:emerald_ores"
         }
       ],
       "5": [
         {
           "type": "BLOCK_TAG",
-          "exp": 100,
+          "exp": 200,
           "id": "minecraft:diamond_ores"
         }
       ]

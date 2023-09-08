@@ -36,7 +36,7 @@ public class ProfessionProductItems {
             FOODS.put(buff, ho);
         }
         for (StatBuffs.SeaFoodBuff buff : StatBuffs.SEAFOOD_BUFFS) {
-            CraftedItemHolder ho = new CraftedItemHolder(buff.id, new CraftedItemHolder.Maker("food",
+            CraftedItemHolder ho = new CraftedItemHolder(buff.id, new CraftedItemHolder.Maker("seafood",
                     x -> new CraftedBuffFoodItem(PlayerBuffData.Type.FISH, buff.id, x)));
             SEAFOOD.put(buff, ho);
         }

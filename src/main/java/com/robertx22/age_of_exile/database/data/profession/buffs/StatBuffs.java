@@ -71,7 +71,7 @@ public class StatBuffs {
         }
 
         public CraftedItemHolder getHolder() {
-            return ProfessionProductItems.FOODS.get(this);
+            return ProfessionProductItems.SEAFOOD.get(this);
         }
     }
 
@@ -122,12 +122,12 @@ public class StatBuffs {
 
     // seafood
     public static SeaFoodBuff EXP = new SeaFoodBuff("exp", "Seeker of Knowledge", () -> Arrays.asList(
-            BonusExp.getInstance().mod(5, 25).percent(),
-            Stats.TOTAL_DAMAGE.get().mod(5, 25).percent()
+            BonusExp.getInstance().mod(3, 15),
+            Stats.TOTAL_DAMAGE.get().mod(5, 25)
     ));
     public static SeaFoodBuff LOOT = new SeaFoodBuff("loot", "Seeker of Wealth", () -> Arrays.asList(
-            TreasureQuantity.getInstance().mod(3, 15).percent(),
-            Stats.TOTAL_DAMAGE.get().mod(5, 25).percent()
+            TreasureQuantity.getInstance().mod(3, 15),
+            Stats.TOTAL_DAMAGE.get().mod(5, 25)
     ));
 
     public static void init() {

@@ -1,34 +1,22 @@
 {
   "chance_drops": [
     {
-      "chance": 5.0,
+      "chance": 0.25,
       "drops": [
         {
-          "item_id": "mmorpg:farming_drops/green_pepper",
+          "item_id": "mmorpg:rare_mats/farming/greater",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
         },
         {
-          "item_id": "mmorpg:farming_drops/red_pepper",
+          "item_id": "mmorpg:rare_mats/farming/medium",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
         },
         {
-          "item_id": "mmorpg:farming_drops/bolete_mushroom",
-          "min_lvl": 0.0,
-          "num": 1,
-          "weight": 1000
-        },
-        {
-          "item_id": "mmorpg:farming_drops/blootroot",
-          "min_lvl": 0.0,
-          "num": 1,
-          "weight": 1000
-        },
-        {
-          "item_id": "mmorpg:farming_drops/wormed_apple",
+          "item_id": "mmorpg:rare_mats/farming/lesser",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
@@ -36,31 +24,48 @@
       ]
     },
     {
-      "chance": 0.5,
+      "chance": 1.25,
       "drops": [
         {
-          "item_id": "mmorpg:farming_drops/dragonfruit",
+          "item_id": "mmorpg:rare_mats/farming/greater",
           "min_lvl": 0.0,
           "num": 1,
-          "weight": 50
+          "weight": 1000
         },
         {
-          "item_id": "mmorpg:farming_drops/bryony_root",
+          "item_id": "mmorpg:rare_mats/farming/medium",
           "min_lvl": 0.0,
           "num": 1,
-          "weight": 50
+          "weight": 1000
         },
         {
-          "item_id": "mmorpg:farming_drops/red_coral",
+          "item_id": "mmorpg:rare_mats/farming/lesser",
           "min_lvl": 0.0,
           "num": 1,
-          "weight": 50
+          "weight": 1000
+        }
+      ]
+    },
+    {
+      "chance": 5.0,
+      "drops": [
+        {
+          "item_id": "mmorpg:rare_mats/farming/greater",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
         },
         {
-          "item_id": "mmorpg:farming_drops/magic_log",
+          "item_id": "mmorpg:rare_mats/farming/medium",
           "min_lvl": 0.0,
           "num": 1,
-          "weight": 50
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:rare_mats/farming/lesser",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
         }
       ]
     }

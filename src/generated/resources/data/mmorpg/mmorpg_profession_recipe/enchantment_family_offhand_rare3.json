@@ -19,17 +19,17 @@
     },
     {
       "type": "ITEM",
-      "id": "mmorpg:mining_drops/corestone_ingot",
+      "id": "minecraft:shield",
       "num": 1
     },
     {
       "type": "ITEM",
-      "id": "mmorpg:mining_drops/adamantite_ingot",
+      "id": "mmorpg:rare_mats/mining/lesser",
       "num": 1
     },
     {
       "type": "ITEM",
-      "id": "mmorpg:mining_drops/ancient_ingot",
+      "id": "mmorpg:rare_mats/mining/medium",
       "num": 1
     }
   ],

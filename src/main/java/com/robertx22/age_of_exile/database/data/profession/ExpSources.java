@@ -90,6 +90,14 @@ public class ExpSources {
         return null;
     }
 
+    public ExpData getDefaultExp() {
+        return new ExpData(50, 0);
+    }
+
+    public ExpData exp(int exp, int tier) {
+        return new ExpData(exp, tier);
+    }
+
     public class ExpData {
 
 

@@ -24,22 +24,7 @@
     },
     {
       "type": "ITEM",
-      "id": "mmorpg:farming_drops/green_pepper",
-      "num": 1
-    },
-    {
-      "type": "ITEM",
-      "id": "mmorpg:farming_drops/bolete_mushroom",
-      "num": 1
-    },
-    {
-      "type": "ITEM",
-      "id": "mmorpg:farming_drops/dragonfruit",
-      "num": 1
-    },
-    {
-      "type": "ITEM",
-      "id": "mmorpg:farming_drops/magic_log",
+      "id": "mmorpg:rare_mats/farming/greater",
       "num": 1
     }
   ],

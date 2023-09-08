@@ -1,0 +1,17 @@
+{
+  "id": "exp",
+  "mods": [
+    {
+      "type": "FLAT",
+      "max": 15.0,
+      "min": 3.0,
+      "stat": "bonus_exp"
+    },
+    {
+      "type": "FLAT",
+      "max": 25.0,
+      "min": 5.0,
+      "stat": "total_damage"
+    }
+  ]
+}

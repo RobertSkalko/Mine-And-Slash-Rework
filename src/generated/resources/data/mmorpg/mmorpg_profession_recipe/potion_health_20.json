@@ -16,6 +16,11 @@
       "type": "ITEM",
       "id": "minecraft:melon_slice",
       "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:rare_mats/farming/lesser",
+      "num": 1
     }
   ],
   "power": "greater",

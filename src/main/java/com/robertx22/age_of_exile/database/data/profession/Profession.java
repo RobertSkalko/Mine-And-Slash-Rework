@@ -157,15 +157,36 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
         BLOCK, ENTITY, OTHER
     }
 
+    public List<ItemStack> onFish(Player p) {
+        var tier = SkillItemTier.fromLevel(Load.player(p).professions.getLevel(this.GUID()));
 
-    public void onKill(Player p, Entity en) {
-
-        ExpSources.ExpData data = this.exp_sources.getData(en.getType());
+        ExpSources.ExpData data = this.exp_sources.exp(250, tier.tier);
 
         if (data.exp > 0) {
             data.giveExp(p, this);
+            float chance = data.getLootChanceMulti(p, this) + 5555;
+            return this.getAllDrops(p, Load.player(p).professions.getLevel(this.GUID()), data.getLevelOfMastery(), chance);
         }
 
+        return Arrays.asList();
+    }
+
+    public List<ItemStack> onBreedAnimal(Player p, Entity en) {
+
+        ExpSources.ExpData data = this.exp_sources.getData(en.getType());
+
+        if (data == null || data.exp == 0) {
+            data = exp_sources.getDefaultExp();
+        }
+
+        if (data.exp > 0) {
+            data.giveExp(p, this);
+            float chance = data.getLootChanceMulti(p, this);
+            return this.getAllDrops(p, Load.player(p).professions.getLevel(this.GUID()), data.getLevelOfMastery(), chance);
+        }
+
+
+        return Arrays.asList();
     }
 
 

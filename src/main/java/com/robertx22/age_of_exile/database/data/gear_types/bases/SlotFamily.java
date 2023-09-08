@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.database.data.gear_types.bases;
 
-import com.robertx22.age_of_exile.database.data.profession.all.ProfessionMatItems;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.VanillaMaterial;
@@ -10,11 +9,11 @@ import net.minecraft.world.item.Items;
 import java.util.function.Supplier;
 
 public enum SlotFamily {
-    Weapon("weapon", () -> Items.IRON_SWORD, () -> ProfessionMatItems.ESSENCES.PHYSICAL.get()),
-    Armor("armor", () -> Items.IRON_CHESTPLATE, () -> ProfessionMatItems.ESSENCES.LIFE.get()),
-    Jewelry("jewelry", () -> SlashItems.GearItems.RINGS.get(VanillaMaterial.IRON).get(), () -> ProfessionMatItems.ESSENCES.MAGIC.get()),
-    OffHand("offhand", () -> Items.SHIELD, () -> ProfessionMatItems.ESSENCES.ENERGY.get()),
-    NONE("none", () -> Items.AIR, () -> Items.AIR);
+    Weapon("weapon", () -> Items.IRON_SWORD),
+    Armor("armor", () -> Items.IRON_CHESTPLATE),
+    Jewelry("jewelry", () -> SlashItems.GearItems.RINGS.get(VanillaMaterial.IRON).get()),
+    OffHand("offhand", () -> Items.SHIELD),
+    NONE("none", () -> Items.AIR);
 
 
     public String id;
@@ -25,10 +24,9 @@ public enum SlotFamily {
         return StringUTIL.capitalise(id);
     }
 
-    SlotFamily(String id, Supplier<Item> craftItem, Supplier<Item> enchantItem) {
+    SlotFamily(String id, Supplier<Item> craftItem) {
         this.id = id;
         this.craftItem = craftItem;
-        this.enchantItem = enchantItem;
     }
 
 

@@ -1,10 +1,10 @@
 package com.robertx22.age_of_exile.database.data.profession.all;
 
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
+import com.robertx22.age_of_exile.database.data.profession.CraftedItemPower;
 import com.robertx22.age_of_exile.database.data.profession.ExpSources;
 import com.robertx22.age_of_exile.database.data.profession.Profession;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
-import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.temp.SkillItemTier;
 import net.minecraft.tags.BlockTags;
@@ -14,7 +14,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Professions {
 
@@ -50,9 +49,19 @@ public class Professions {
     );
 
 
+    public static List<String> DROP_PROFESSIONS = Arrays.asList(
+            FARMING,
+            MINING,
+            HUSBANDRY,
+            SALVAGING,
+            FISHING
+    );
+
+
     public static List<String> ALL = Arrays.asList(
             FARMING,
             MINING,
+            FISHING,
             SALVAGING,
             HUSBANDRY,
             COOKING,
@@ -70,8 +79,7 @@ public class Professions {
         // this would be a pain to save
 
         Builder.of(SALVAGING)
-                .sometimesDrop(ProfessionMatItems.ESSENCES.ALL.stream().map(x -> x.get()).collect(Collectors.toList()), 5)
-                .sometimesDrop(ProfessionMatItems.RARE_ESSENCES.ALL.stream().map(x -> x.get()).collect(Collectors.toList()), 0.5F)
+                .sometimesDrop(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.SALVAGING), 10)
                 .build();
 
         var FARM_EXP = 30;
@@ -89,8 +97,7 @@ public class Professions {
 
                 .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(FARMING))
 
-                .sometimesDrop(ProfessionMatItems.COMMON_FARMING.ALL.stream().map(x -> x.get()).collect(Collectors.toList()), 5)
-                .sometimesDrop(ProfessionMatItems.RARE_FARMING.ALL.stream().map(x -> x.get()).collect(Collectors.toList()), 0.5F)
+                .sometimesDrop(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.FARMING), 5)
 
                 .build();
 
@@ -108,6 +115,8 @@ public class Professions {
 
                 .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(HUSBANDRY))
 
+                .sometimesDrop(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.HUSBANDRY), 10)
+
                 .build();
 
         // todo each should really be separate and have chance for tag..
@@ -123,8 +132,7 @@ public class Professions {
 
                 .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(MINING))
 
-                .sometimesDrop(ProfessionMatItems.COMMON_MINING.ALL.stream().map(x -> x.get()).collect(Collectors.toList()), 5)
-                .sometimesDrop(ProfessionMatItems.RARE_MINING.ALL.stream().map(x -> x.get()).collect(Collectors.toList()), 1)
+                .sometimesDrop(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.MINING), 10)
 
                 .build();
 
@@ -200,20 +208,17 @@ public class Professions {
             return this;
         }
 
-        public Builder sometimesDrop(List<Item> items, float chance) {
+        public Builder sometimesDrop(HashMap<CraftedItemPower, RegObj<Item>> map, float chance) {
             List<Profession.ProfessionDrop> drops = new ArrayList<>();
 
-            for (Item item : items) {
-                var weight = 1000;
-                if (item instanceof IWeighted w) {
-                    weight = w.Weight();
-                }
+            for (Map.Entry<CraftedItemPower, RegObj<Item>> en : map.entrySet()) {
+                Item item = en.getValue().get();
                 var id = VanillaUTIL.REGISTRY.items().getKey(item).toString();
-                var drop = new Profession.ProfessionDrop(id, 1, weight, 0);
+                var drop = new Profession.ProfessionDrop(id, 1, 1000, 0); // all use separate loot tables
                 drops.add(drop);
 
+                this.p.chance_drops.add(new Profession.ChancedDrop(drops, chance * (en.getKey().weight / 1000F)));
             }
-            this.p.chance_drops.add(new Profession.ChancedDrop(drops, chance));
             return this;
         }
 

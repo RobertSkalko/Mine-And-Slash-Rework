@@ -21,6 +21,11 @@
       "type": "ITEM",
       "id": "minecraft:nether_wart",
       "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:rare_mats/farming/greater",
+      "num": 1
     }
   ],
   "power": "greater",

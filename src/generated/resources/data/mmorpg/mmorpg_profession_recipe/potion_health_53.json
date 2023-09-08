@@ -24,12 +24,7 @@
     },
     {
       "type": "ITEM",
-      "id": "mmorpg:farming_drops/red_pepper",
-      "num": 1
-    },
-    {
-      "type": "ITEM",
-      "id": "mmorpg:farming_drops/blootroot",
+      "id": "mmorpg:rare_mats/farming/greater",
       "num": 1
     }
   ],

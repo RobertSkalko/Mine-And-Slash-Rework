@@ -14,7 +14,17 @@
     },
     {
       "type": "ITEM",
-      "id": "mmorpg:essence/magic",
+      "id": "mmorpg:rare_mats/farming/lesser",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:rare_mats/farming/medium",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "mmorpg:rare_mats/farming/greater",
       "num": 1
     }
   ],

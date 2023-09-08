@@ -1,0 +1,17 @@
+{
+  "id": "loot",
+  "mods": [
+    {
+      "type": "FLAT",
+      "max": 15.0,
+      "min": 3.0,
+      "stat": "increased_quantity"
+    },
+    {
+      "type": "FLAT",
+      "max": 25.0,
+      "min": 5.0,
+      "stat": "total_damage"
+    }
+  ]
+}

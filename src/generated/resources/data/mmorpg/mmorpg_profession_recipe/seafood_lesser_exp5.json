@@ -1,0 +1,21 @@
+{
+  "exp": 100,
+  "id": "seafood_lesser_exp5",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:material/fishing/5",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:tropical_fish",
+      "num": 1
+    }
+  ],
+  "power": "lesser",
+  "profession": "cooking",
+  "result": "mmorpg:seafood/lesser_exp",
+  "result_num": 3,
+  "tier": 5
+}

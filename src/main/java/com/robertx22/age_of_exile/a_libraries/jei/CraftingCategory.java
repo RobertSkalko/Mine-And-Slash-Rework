@@ -18,6 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -87,8 +88,14 @@ public class CraftingCategory implements IExtendableRecipeCategory<ProfessionRec
 
     @Override
     public List<Component> getTooltipStrings(ProfessionRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+        
+        List<Component> list = new ArrayList<>();
 
-        return recipeExtension.getTooltipStrings(mouseX, mouseY);
+        list.addAll(recipe.getTooltipJEI());
+
+        list.addAll(recipeExtension.getTooltipStrings(mouseX, mouseY));
+
+        return list;
     }
 
     @Override
