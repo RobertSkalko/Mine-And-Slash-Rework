@@ -22,7 +22,7 @@ public class Professions {
     public static String FARMING = "farming";
     public static String MINING = "mining";
     public static String HUSBANDRY = "husbandry";
-
+    public static String FISHING = "fishing";
 
     // crafting
     public static String COOKING = "cooking";
@@ -45,7 +45,8 @@ public class Professions {
     public static List<String> TOOL_PROFESSIONS = Arrays.asList(
             FARMING,
             MINING,
-            HUSBANDRY
+            HUSBANDRY,
+            FISHING
     );
 
 
@@ -90,6 +91,15 @@ public class Professions {
 
                 .sometimesDrop(ProfessionMatItems.COMMON_FARMING.ALL.stream().map(x -> x.get()).collect(Collectors.toList()), 5)
                 .sometimesDrop(ProfessionMatItems.RARE_FARMING.ALL.stream().map(x -> x.get()).collect(Collectors.toList()), 0.5F)
+
+                .build();
+
+        Builder.of(FISHING)
+                .tool(BaseGearType.SlotTag.fishing_tool)
+
+                // todo locked crates
+
+                .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(FISHING))
 
                 .build();
 

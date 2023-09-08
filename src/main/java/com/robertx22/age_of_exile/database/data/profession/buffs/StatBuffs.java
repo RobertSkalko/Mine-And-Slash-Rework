@@ -5,6 +5,8 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.profession.CraftedItemHolder;
 import com.robertx22.age_of_exile.database.data.profession.all.ProfessionProductItems;
+import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuantity;
+import com.robertx22.age_of_exile.database.data.stats.types.misc.BonusExp;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.EnergyRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
@@ -25,7 +27,8 @@ public class StatBuffs {
 
     // we create these independent of the actual serializables so we can init before vanilla items are registered
     public static HashSet<AlchemyBuff> ALCHEMY = new HashSet<>();
-    public static HashSet<FoodBuff> COOKING = new HashSet<>();
+    public static HashSet<FoodBuff> FOOD_BUFFS = new HashSet<>();
+    public static HashSet<SeaFoodBuff> SEAFOOD_BUFFS = new HashSet<>();
 
     // have to manually then give recipes for each
     public static AlchemyBuff INT = new AlchemyBuff("int", "Intelligence", () -> DatapackStats.INT.mod(5, 15).percent()); // todo test if % more hp gives more hp
@@ -54,6 +57,24 @@ public class StatBuffs {
         }
     }
 
+    public static class SeaFoodBuff {
+        public String id;
+        public String name;
+        public Supplier<List<StatMod>> mod;
+
+        public SeaFoodBuff(String id, String name, Supplier<List<StatMod>> mod) {
+            this.id = id;
+            this.name = name;
+            this.mod = mod;
+
+            SEAFOOD_BUFFS.add(this);
+        }
+
+        public CraftedItemHolder getHolder() {
+            return ProfessionProductItems.FOODS.get(this);
+        }
+    }
+
     public static class FoodBuff {
         public String id;
         public String name;
@@ -64,7 +85,7 @@ public class StatBuffs {
             this.name = name;
             this.mod = mod;
 
-            COOKING.add(this);
+            FOOD_BUFFS.add(this);
         }
 
         public CraftedItemHolder getHolder() {
@@ -99,6 +120,16 @@ public class StatBuffs {
             MagicShieldRegen.getInstance().mod(1, 4)
     ));
 
+    // seafood
+    public static SeaFoodBuff EXP = new SeaFoodBuff("exp", "Seeker of Knowledge", () -> Arrays.asList(
+            BonusExp.getInstance().mod(5, 25).percent(),
+            Stats.TOTAL_DAMAGE.get().mod(5, 25).percent()
+    ));
+    public static SeaFoodBuff LOOT = new SeaFoodBuff("loot", "Seeker of Wealth", () -> Arrays.asList(
+            TreasureQuantity.getInstance().mod(3, 15).percent(),
+            Stats.TOTAL_DAMAGE.get().mod(5, 25).percent()
+    ));
+
     public static void init() {
 
         for (AlchemyBuff al : ALCHEMY) {
@@ -107,7 +138,13 @@ public class StatBuffs {
             buff.mods.add(al.mod.get());
             buff.addToSerializables();
         }
-        for (FoodBuff al : COOKING) {
+        for (FoodBuff al : FOOD_BUFFS) {
+            StatBuff buff = new StatBuff();
+            buff.id = al.id;
+            buff.mods.addAll(al.mod.get());
+            buff.addToSerializables();
+        }
+        for (SeaFoodBuff al : SEAFOOD_BUFFS) {
             StatBuff buff = new StatBuff();
             buff.id = al.id;
             buff.mods.addAll(al.mod.get());

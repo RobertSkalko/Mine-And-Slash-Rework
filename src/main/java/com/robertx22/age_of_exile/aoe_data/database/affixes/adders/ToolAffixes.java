@@ -13,7 +13,7 @@ import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import java.util.HashMap;
 
 public class ToolAffixes implements ExileRegistryInit {
-    
+
     @Override
     public void registerAll() {
 
@@ -22,6 +22,7 @@ public class ToolAffixes implements ExileRegistryInit {
         map.put(Professions.MINING, BaseGearType.SlotTag.mining_tool);
         map.put(Professions.FARMING, BaseGearType.SlotTag.farming_tool);
         map.put(Professions.HUSBANDRY, BaseGearType.SlotTag.husbandry_tool);
+        map.put(Professions.FISHING, BaseGearType.SlotTag.fishing_tool);
 
         for (String prof : Professions.TOOL_PROFESSIONS) {
 

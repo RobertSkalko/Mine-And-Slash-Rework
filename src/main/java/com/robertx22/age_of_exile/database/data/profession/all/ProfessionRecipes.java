@@ -22,6 +22,7 @@ public class ProfessionRecipes {
         potions();
         gearCrafting();
         enchanting();
+        seafoods();
     }
 
     private static void enchanting() {
@@ -228,6 +229,26 @@ public class ProfessionRecipes {
                 .medium(ProfessionMatItems.ESSENCES.MAGIC.get(), 1)
                 .greater(ProfessionMatItems.RARE_FARMING.MAGIC_LOG.get(), 1)
                 .buildEachTierAndPower();
+
+    }
+
+    private static void seafoods() {
+        int foods = 2;
+
+        ProfessionRecipe.TierPowerBuilder.of(StatBuffs.EXP.getHolder(), SkillItemTier.TIER0, Professions.COOKING, foods)
+                .coreMaterials(Professions.FISHING)
+                .lesser(Items.TROPICAL_FISH, 1)
+                .medium(ProfessionMatItems.ESSENCES.LIFE.get(), 1) // todo change these into generic items
+                .greater(ProfessionMatItems.RARE_FARMING.BRYONY_ROOT.get(), 1)
+                .buildEachTierAndPower();
+
+        ProfessionRecipe.TierPowerBuilder.of(StatBuffs.LOOT.getHolder(), SkillItemTier.TIER0, Professions.COOKING, foods)
+                .coreMaterials(Professions.FISHING)
+                .lesser(Items.PUFFERFISH, 1)
+                .medium(ProfessionMatItems.ESSENCES.MANA.get(), 1)
+                .greater(ProfessionMatItems.RARE_FARMING.RED_CORAL.get(), 1)
+                .buildEachTierAndPower();
+
 
     }
 }

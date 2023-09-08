@@ -243,11 +243,8 @@ public class LootInfo {
 
         if (this.playerEntityData != null) {
             multis.add(Load.player(player).favor.getLootExpMulti());
-
             if (lootOrigin != LootOrigin.LOOT_CRATE) {
-                if (this.lootOrigin == LootOrigin.CHEST) {
-                    multis.add(playerEntityData.getUnit().getCalculatedStat(TreasureQuantity.getInstance()).getMultiplier());
-                }
+                multis.add(playerEntityData.getUnit().getCalculatedStat(TreasureQuantity.getInstance()).getMultiplier());
             }
         }
         if (world != null) {

@@ -10,7 +10,6 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
 import net.minecraft.network.chat.Component;
@@ -27,13 +26,23 @@ import java.util.List;
 
 public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered {
 
+    PlayerBuffData.Type type;
     public String buff_id;
     CraftedItemPower power;
 
-    public CraftedBuffFoodItem(String buff_id, CraftedItemPower power) {
-        super(new Properties().food(new FoodProperties.Builder().nutrition(20).saturationMod(5F).meat().build()));
+    public CraftedBuffFoodItem(PlayerBuffData.Type type, String buff_id, CraftedItemPower power) {
+        super(getProp(type));
         this.buff_id = buff_id;
         this.power = power;
+        this.type = type;
+    }
+
+    static Properties getProp(PlayerBuffData.Type type) {
+        if (type.isFood()) {
+            return new Properties().food(new FoodProperties.Builder().nutrition(20).saturationMod(5F).meat().build());
+        } else {
+            return new Properties();
+        }
     }
 
     @Override
@@ -45,7 +54,7 @@ public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered 
     public ItemStack finishUsingItem(ItemStack stack, Level pLevel, LivingEntity pLivingEntity) {
         if (!pLevel.isClientSide) {
             if (pLivingEntity instanceof Player p) {
-                boolean did = Load.player(p).buff.tryAdd(p, getBuff(), LeveledItem.getLevel(stack), power.perc, PlayerBuffData.Type.FOOD, getTicksDuration());
+                boolean did = Load.player(p).buff.tryAdd(p, getBuff(), LeveledItem.getLevel(stack), power.perc, type, getTicksDuration());
                 if (did) {
                     stack.shrink(1);
                     return stack;
@@ -58,18 +67,21 @@ public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered 
     }
 
     public int getTicksDuration() {
-        return 20 * 60 * 60;
+        return type.durationTicks;
     }
 
     @Override
     public UseAnim getUseAnimation(ItemStack pStack) {
-        return UseAnim.EAT;
+        if (type.isFood()) {
+            return UseAnim.EAT;
+        } else {
+            return UseAnim.DRINK;
+        }
     }
 
     @Override
     public int getUseDuration(ItemStack pStack) {
         return 32;
-
     }
 
     public StatBuff getBuff() {
@@ -81,7 +93,7 @@ public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered 
     public Component getName(ItemStack stack) {
         return power.word.locName().append(" ")
                 .append(getBuff().mods.get(0).GetStat().locName()).append(" ")
-                .append(Words.MEAL.locName())
+                .append(type.name)
                 .withStyle(LeveledItem.getTier(stack).format);
     }
 

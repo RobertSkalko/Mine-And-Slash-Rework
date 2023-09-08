@@ -11,75 +11,71 @@ import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class PlayerBuffData implements IStatCtx {
 
-    public List<Buff> potions = new ArrayList<>();
-    public List<Buff> food = new ArrayList<>();
+    public HashMap<Type, Buff> map = new HashMap<>();
+
 
     @Override
     public List<StatContext> getStatAndContext(LivingEntity en) {
         List<ExactStatData> stats = new ArrayList<>();
 
-        for (Buff data : potions) {
-            stats.addAll(data.stats);
+        for (Buff buff : map.values()) {
+            stats.addAll(buff.stats);
         }
-        for (Buff data : food) {
-            stats.addAll(data.stats);
-        }
-        
+
         return Arrays.asList(new MiscStatCtx(stats));
     }
 
     public enum Type {
-        POTION, FOOD;
+        POTION("potion", "Potion", 20 * 60 * 30),
+        ELIXIR("elixir", "Elixir", 20 * 60 * 15),
+        MEAL("meal", "Meal", 20 * 60 * 60),
+        FISH("fish", "Seafood", 20 * 60 * 60);
+
+        public String id;
+        public String name;
+        public int durationTicks;
+
+        Type(String id, String name, int durationTicks) {
+            this.id = id;
+            this.name = name;
+            this.durationTicks = durationTicks;
+        }
+
+        public boolean isFood() {
+            return this == MEAL || this == FISH;
+        }
     }
 
     public void onTick(Player p) {
 
-        for (Buff buff : this.food) {
+
+        for (Buff buff : map.values()) {
             buff.ticks--;
         }
-        for (Buff buff : this.potions) {
-            buff.ticks--;
+
+        for (Map.Entry<Type, Buff> en : new HashMap<>(map).entrySet()) {
+            if (en.getValue().ticks < 1) {
+                map.remove(en.getKey());
+            }
         }
-
-        potions.removeIf(x -> x.ticks < 1);
-
-        food.removeIf(x -> x.ticks < 1);
-
     }
 
     public boolean tryAdd(Player p, StatBuff buff, int lvl, int perc, Type type, int ticks) {
-        var list = potions;
-        int max = 3;
-        if (type == Type.FOOD) {
-            list = food;
-            max = 1;
-        }
 
         if (lvl > Load.Unit(p).getLevel()) {
             p.sendSystemMessage(Chats.TOO_LOW_LEVEL.locName());
             return false;
         }
 
-        if (list.size() >= max) {
-            p.sendSystemMessage(Chats.TOO_MANY_BUFFS.locName());
-            return false;
-        }
-        if (list.stream().allMatch(x -> !x.getBuff().isSameStat(buff))) {
-            List<ExactStatData> stats = buff.getStats(lvl, perc);
-            Buff data = new Buff(buff.GUID(), stats, ticks);
-            list.add(data);
-            return true;
-        } else {
-            p.sendSystemMessage(Chats.CANT_SAME_BUFF.locName());
-        }
+        List<ExactStatData> stats = buff.getStats(lvl, perc);
+        Buff data = new Buff(buff.GUID(), stats, ticks);
+        map.put(type, data);
 
-        return false;
+        return true;
     }
 
     public static class Buff {
