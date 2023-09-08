@@ -1,6 +1,10 @@
 package com.robertx22.age_of_exile.database.registrators;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
+import com.robertx22.age_of_exile.database.data.profession.all.Professions;
+import com.robertx22.age_of_exile.database.data.profession.stat.DoubleDropChance;
+import com.robertx22.age_of_exile.database.data.profession.stat.ProfExp;
+import com.robertx22.age_of_exile.database.data.profession.stat.TripleDropChance;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.JewelSocketStat;
@@ -67,8 +71,14 @@ public class StatsRegister implements ExileRegistryInit {
                         add(new AilmentProcStat(ailment));
                     }
 
+                    for (String p : Professions.ALL) {
+                        add(new DoubleDropChance(p));
+                        add(new TripleDropChance(p));
+                        add(new ProfExp(p));
+                    }
+
                     add(LeechCapStat.getInstance());
-                    
+
                     add(JewelSocketStat.getInstance());
 
                     add(new BonusPhysicalAsElemental(Elements.Elemental));

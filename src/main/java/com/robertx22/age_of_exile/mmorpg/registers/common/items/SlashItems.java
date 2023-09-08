@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.mmorpg.registers.common.items;
 import com.robertx22.age_of_exile.capability.player.BackpackItem;
 import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChestItem;
 import com.robertx22.age_of_exile.database.data.profession.all.Professions;
+import com.robertx22.age_of_exile.database.data.profession.items.StationBlockItem;
 import com.robertx22.age_of_exile.maps.MapItem;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
@@ -26,20 +27,29 @@ import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.SingleTalentR
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots.TalentResetPotion;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class SlashItems {
 
     public static void init() {
 
-        for (String pro : Professions.STATION_PROFESSIONS) {
-            STATIONS.put(pro, Def.item(pro + "_station", () -> new BlockItem(SlashBlocks.STATIONS.get(pro).get(), new Item.Properties())));
+        station(Professions.COOKING, () -> Items.BREAD);
+        station(Professions.SALVAGING, () -> Items.IRON_INGOT);
+        station(Professions.GEAR_CRAFTING, () -> Items.IRON_CHESTPLATE);
+        station(Professions.ALCHEMY, () -> Items.BREWING_STAND);
+        station(Professions.ENCHANTING, () -> Items.PAPER);
 
-        }
+    }
+
+    private static void station(String pro, Supplier<Item> sup) {
+        STATIONS.put(pro, Def.item(pro + "_station", () -> new StationBlockItem(SlashBlocks.STATIONS.get(pro).get(), new Item.Properties(), sup)));
+
     }
 
     public static RegObj<CommonGearProducerItem> COMMON_SOUL_PRODUCE = Def.item(() -> new CommonGearProducerItem(), "common_soul_produce");

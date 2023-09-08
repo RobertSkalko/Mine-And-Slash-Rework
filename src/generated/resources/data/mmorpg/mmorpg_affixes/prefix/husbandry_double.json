@@ -1,0 +1,25 @@
+{
+  "type": "prefix",
+  "guid": "husbandry_double",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "tool",
+          "husbandry_tool"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 10.0,
+      "min": 1.0,
+      "stat": "husbandry_double_drop"
+    }
+  ],
+  "weight": 1000
+}

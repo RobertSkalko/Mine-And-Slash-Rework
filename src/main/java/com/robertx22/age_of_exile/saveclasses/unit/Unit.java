@@ -240,6 +240,8 @@ public class Unit {
             if (entity instanceof Player p) {
                 var playerData = Load.player(p);
 
+                statContexts.addAll(PlayerStatUtils.addToolStats(p));
+
                 statContexts.addAll(playerData.buff.getStatAndContext(p));
 
                 statContexts.addAll(playerData.getSkillGemInventory().getAuraStats(entity));

@@ -4,11 +4,11 @@ leather_boots
 shield
 cloth_boots
 crossbow
-tome
 ring
-staff
-necklace
+tome
 cloth_pants
+necklace
+staff
 bow
 leather_pants
 plate_chest

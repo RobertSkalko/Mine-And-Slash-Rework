@@ -1,0 +1,25 @@
+{
+  "type": "prefix",
+  "guid": "farming_exp",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "tool",
+          "farming_tool"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 15.0,
+      "min": 3.0,
+      "stat": "farming_exp_bonus"
+    }
+  ],
+  "weight": 1000
+}

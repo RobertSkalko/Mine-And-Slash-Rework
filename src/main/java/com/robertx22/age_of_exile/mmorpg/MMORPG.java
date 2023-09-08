@@ -167,8 +167,6 @@ public class MMORPG {
                 .build());
         InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("necklace").size(1)
                 .build());
-        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> new SlotTypeMessage.Builder("backpack").size(1)
-                .build());
     }
 
     public void commonSetupEvent(FMLCommonSetupEvent event) {

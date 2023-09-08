@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceC
 import com.robertx22.age_of_exile.database.data.profession.Profession;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.OnScreenMessageUtils;
@@ -48,8 +49,7 @@ public class PlayerProfessionsData {
         int perc = MathHelper.clamp((int) (map.get(id).exp / (float) map.get(id).getExpNeeded() * 100F), 0, 100);
         OnScreenMessageUtils.actionBar((ServerPlayer) p, Component.literal("+" + exp + " ").append(ExileDB.Professions().get(id).locName().append(" Exp (" + perc + "%)")).withStyle(ChatFormatting.GREEN));
 
-
-        if (data.canLvl()) {
+        if (data.canLvl() && Load.Unit(p).getLevel() > data.lvl) {
             data.levelUp();
 
             Profession pro = ExileDB.Professions().get(id);

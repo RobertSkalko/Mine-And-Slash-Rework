@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:gold_ingot"
+    },
+    "X": {
+      "item": "minecraft:bread"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "XCX",
+    "XXX"
+  ],
+  "result": {
+    "item": "mmorpg:cooking_station"
+  },
+  "show_notification": true
+}

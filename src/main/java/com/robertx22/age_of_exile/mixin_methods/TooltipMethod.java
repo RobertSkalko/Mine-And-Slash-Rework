@@ -82,6 +82,10 @@ public class TooltipMethod {
                 }
 
 
+                if (StackSaving.TOOL.has(stack)) {
+                    StackSaving.TOOL.loadFrom(stack).BuildTooltip(ctx);
+                }
+
             }
 
             if (!hasdata) {

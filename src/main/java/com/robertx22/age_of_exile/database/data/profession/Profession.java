@@ -1,6 +1,8 @@
 package com.robertx22.age_of_exile.database.data.profession;
 
 import com.robertx22.age_of_exile.database.Weighted;
+import com.robertx22.age_of_exile.database.data.profession.stat.DoubleDropChance;
+import com.robertx22.age_of_exile.database.data.profession.stat.TripleDropChance;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
@@ -35,6 +37,8 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
 
     // blocks/entities that give exp
 
+    public String tool_tag = "";
+
     public ExpSources exp_sources = new ExpSources();
 
     // todo add separate for tiered ones, these will be for all tiers
@@ -45,6 +49,8 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
 
 
     public List<ItemStack> getAllDrops(Player p, int lvl, int recipelvl, float dropChanceMulti) {
+
+
         List<ItemStack> list = new ArrayList<>();
 
         ProfessionRecipe.RecipeDifficulty diff = ProfessionRecipe.RecipeDifficulty.get(lvl, recipelvl);
@@ -54,7 +60,6 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
         SkillItemTier tier = SkillItemTier.fromLevel(lvl);
 
         List<ChancedDrop> ALLDROPS = new ArrayList<>();
-
 
         if (tiered_drops.containsKey(tier)) {
             ALLDROPS.addAll(tiered_drops.get(tier));
@@ -74,11 +79,22 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
             }
         }
 
-        if (RandomUtils.roll(diff.doubleDropChance)) {
+
+        float doubleDrop = diff.doubleDropChance + Load.Unit(p).getUnit().getCalculatedStat(new DoubleDropChance(GUID())).getValue();
+        float tripleDrop = Load.Unit(p).getUnit().getCalculatedStat(new TripleDropChance(GUID())).getValue();
+
+        if (RandomUtils.roll(doubleDrop)) {
             for (ItemStack stack : list) {
                 stack.setCount(MathHelper.clamp(stack.getCount() * 2, 1, stack.getMaxStackSize()));
             }
         }
+        if (RandomUtils.roll(tripleDrop)) {
+            for (ItemStack stack : list) {
+                stack.setCount(MathHelper.clamp(stack.getCount() * 3, 1, stack.getMaxStackSize()));
+            }
+        }
+
+
         return list;
     }
 

@@ -1,10 +1,10 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
 salvaging
-gear_crafting
 enchanting
+gear_crafting
 farming
-alchemy
 husbandry
+alchemy
 mining
 cooking

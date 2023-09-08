@@ -4,5 +4,6 @@
     "map": {}
   },
   "id": "cooking",
-  "tiered_drops": {}
+  "tiered_drops": {},
+  "tool_tag": ""
 }

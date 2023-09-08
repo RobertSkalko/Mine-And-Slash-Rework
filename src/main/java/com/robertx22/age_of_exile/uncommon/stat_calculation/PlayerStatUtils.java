@@ -8,9 +8,12 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
+import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +21,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class PlayerStatUtils {
+    public static List<StatContext> addToolStats(Player p) {
+        ItemStack stack = p.getMainHandItem();
+        if (StackSaving.TOOL.has(stack)) {
+            return Arrays.asList(new MiscStatCtx(StackSaving.TOOL.loadFrom(stack).GetAllStats()));
+        } else {
+            return Arrays.asList();
+        }
+    }
 
     public static List<StatContext> addNewbieElementalResists(EntityData data) {
         List<ExactStatData> stats = new ArrayList<>();

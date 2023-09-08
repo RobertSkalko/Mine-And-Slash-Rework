@@ -4,5 +4,6 @@
     "map": {}
   },
   "id": "gear_crafting",
-  "tiered_drops": {}
+  "tiered_drops": {},
+  "tool_tag": ""
 }

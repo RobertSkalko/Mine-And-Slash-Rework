@@ -1,0 +1,25 @@
+{
+  "type": "prefix",
+  "guid": "farming_triple",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "tool",
+          "farming_tool"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 10.0,
+      "min": 1.0,
+      "stat": "farming_triple_drop"
+    }
+  ],
+  "weight": 1000
+}

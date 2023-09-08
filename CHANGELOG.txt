@@ -14,6 +14,8 @@ Profession drops are split into:
 - Misc common drop, these sometimes drop, but are random
 - Misc rare drop, same but way rarer.
 
+* Gathering tools will also level up and gain random bonuses
+
 Every day (sunrise), one single drop from every gathering profession will get boosted droprates, allowing the patient ones to farm specific materials.
 
 Crafting:

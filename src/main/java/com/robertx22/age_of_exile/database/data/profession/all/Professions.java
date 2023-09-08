@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.profession.all;
 
+import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.profession.ExpSources;
 import com.robertx22.age_of_exile.database.data.profession.Profession;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
@@ -41,6 +42,12 @@ public class Professions {
             ENCHANTING
     );
 
+    public static List<String> TOOL_PROFESSIONS = Arrays.asList(
+            FARMING,
+            MINING,
+            HUSBANDRY
+    );
+
 
     public static List<String> ALL = Arrays.asList(
             FARMING,
@@ -70,6 +77,8 @@ public class Professions {
         var ORE_EXP = 100;
 
         Builder.of(FARMING)
+                .tool(BaseGearType.SlotTag.farming_tool)
+
                 .item(SkillItemTier.TIER0, FARM_EXP, Items.WHEAT, Items.POTATO)
                 .item(SkillItemTier.TIER1, FARM_EXP, Items.MELON)
                 .item(SkillItemTier.TIER2, FARM_EXP, Items.BEETROOT)
@@ -85,6 +94,7 @@ public class Professions {
                 .build();
 
         Builder.of(HUSBANDRY)
+                .tool(BaseGearType.SlotTag.husbandry_tool)
 
                 .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(HUSBANDRY))
 
@@ -92,12 +102,14 @@ public class Professions {
 
         // todo each should really be separate and have chance for tag..
         Builder.of(MINING)
+                .tool(BaseGearType.SlotTag.mining_tool)
+
                 .blockTag(SkillItemTier.TIER0, ORE_EXP, BlockTags.COAL_ORES)
-                .blockTag(SkillItemTier.TIER1, ORE_EXP, BlockTags.COAL_ORES)
-                .blockTag(SkillItemTier.TIER2, ORE_EXP, BlockTags.IRON_ORES)
-                .blockTag(SkillItemTier.TIER3, ORE_EXP, BlockTags.GOLD_ORES)
-                .blockTag(SkillItemTier.TIER4, ORE_EXP, BlockTags.EMERALD_ORES)
-                .blockTag(SkillItemTier.TIER5, ORE_EXP, BlockTags.DIAMOND_ORES)
+                .blockTag(SkillItemTier.TIER1, ORE_EXP + 10, BlockTags.COPPER_ORES)
+                .blockTag(SkillItemTier.TIER2, ORE_EXP + 20, BlockTags.IRON_ORES)
+                .blockTag(SkillItemTier.TIER3, ORE_EXP + 35, BlockTags.GOLD_ORES)
+                .blockTag(SkillItemTier.TIER4, ORE_EXP + 50, BlockTags.EMERALD_ORES)
+                .blockTag(SkillItemTier.TIER5, ORE_EXP + 100, BlockTags.DIAMOND_ORES)
 
                 .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(MINING))
 
@@ -134,6 +146,11 @@ public class Professions {
             Builder b = new Builder();
             b.p.id = id;
             return b;
+        }
+
+        public Builder tool(BaseGearType.SlotTag tag) {
+            this.p.tool_tag = tag.getTagId();
+            return this;
         }
 
         public Builder item(SkillItemTier tier, int exp, Item... items) {

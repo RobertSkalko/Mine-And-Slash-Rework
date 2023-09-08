@@ -1,7 +1,11 @@
 package com.robertx22.age_of_exile.database.data.profession;
 
+import com.robertx22.age_of_exile.database.data.profession.stat.ProfExp;
+import com.robertx22.age_of_exile.saveclasses.prof_tool.ProfessionToolData;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.temp.SkillItemTier;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -10,6 +14,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
 import java.util.ArrayList;
@@ -96,8 +101,36 @@ public class ExpSources {
             this.tier = tier;
         }
 
+        public void levelTool(Player p, Profession pro, int xpgiven) {
+            if (!pro.tool_tag.isEmpty()) {
+                ItemStack stack = p.getMainHandItem();
+                if (ProfessionToolData.isCorrectTool(pro, stack)) {
+                    ProfessionToolData data = null;
+
+                    if (StackSaving.TOOL.has(stack)) {
+                        data = StackSaving.TOOL.loadFrom(stack);
+                    } else {
+                        data = new ProfessionToolData();
+                        data.lvl = 1;
+                        data.prof = pro.GUID();
+                    }
+                    data.addExp(p, stack, xpgiven);
+                    StackSaving.TOOL.saveTo(stack, data);
+                }
+            }
+        }
+
         public void giveExp(Player p, Profession pro) {
-            Load.player(p).professions.addExp(p, pro.GUID(), exp);
+            float lvlmulti = MathHelper.clamp((float) Load.player(p).professions.getLevel(pro.GUID()) / (float) getLevelOfMastery(), 0F, 1F);
+
+            var fx = LevelUtils.scaleExpReward(exp, Load.player(p).professions.getLevel(pro.id));
+
+            fx *= Load.Unit(p).getUnit().getCalculatedStat(new ProfExp(pro.id)).getMultiplier();
+            fx *= lvlmulti;
+
+            levelTool(p, pro, fx);
+
+            Load.player(p).professions.addExp(p, pro.GUID(), fx);
         }
 
 

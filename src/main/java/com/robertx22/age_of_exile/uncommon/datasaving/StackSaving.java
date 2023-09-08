@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.maps.MapItemData;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.jewel.JewelItemData;
+import com.robertx22.age_of_exile.saveclasses.prof_tool.ProfessionToolData;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulData;
 import com.robertx22.age_of_exile.vanilla_mc.items.crates.gem_crate.LootCrateData;
@@ -19,6 +20,7 @@ public class StackSaving {
     public static ItemstackDataSaver<MapItemData> MAP = of(new ItemstackDataSaver<>(SlashRef.MODID + "_map", MapItemData.class, () -> new MapItemData()));
     public static ItemstackDataSaver<JewelItemData> JEWEL = of(new ItemstackDataSaver<>(SlashRef.MODID + "_jewel", JewelItemData.class, () -> new JewelItemData()));
     public static ItemstackDataSaver<LootChestData> LOOT_CHEST = of(new ItemstackDataSaver<>(SlashRef.MODID + "_loot_chest", LootChestData.class, () -> new LootChestData()));
+    public static ItemstackDataSaver<ProfessionToolData> TOOL = of(new ItemstackDataSaver<>(SlashRef.MODID + "_tool_stats", ProfessionToolData.class, () -> new ProfessionToolData()));
 
     static ItemstackDataSaver of(ItemstackDataSaver t) {
         return t;

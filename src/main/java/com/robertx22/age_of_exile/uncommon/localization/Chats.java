@@ -7,6 +7,8 @@ import net.minecraft.ChatFormatting;
 import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
+    TOOL_ADD_STAT("%1$s has been Upgraded to %2$s!"),
+    TOOL_LEVEL_UP("%1$s has reached level %2$s!"),
     PROFESSION_LEVEL_UP("Your %1$s profession has increased to level %2$s!"),
     TOO_MANY_BUFFS("You can't have that many buffs."),
     NEW_DAY("A new day has arrived! Profession drop rates have been boosted for the following items:"),
