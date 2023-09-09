@@ -55,6 +55,7 @@ public class ServerContainer {
         PVP_DMG_MULTI = b.defineInRange("pvp_dmg_multi", 1D, 0, 1000);
         MAX_TEAM_DISTANCE = b.defineInRange("max_team_distance", 75D, 0, 100000);
         IN_COMBAT_REGEN_MULTI = b.defineInRange("in_combat_regen_multi", 0.5, 0, 10);
+        COMBAT_PROFESSION_RESTED_XP_GENERATION = b.defineInRange("COMBAT_PROFESSION_RESTED_XP_GENERATION", 0.5, 0, 1);
 
         FAVOR_DEATH_LOSS = b.defineInRange("favor_death_loss", 50D, 0, 10000);
         FAVOR_CHEST_GAIN = b.defineInRange("favor_chest_gain", 1D, 0, 10000);
@@ -142,6 +143,7 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue PLAYER_VANILLA_DMG_MULTI;
     public ForgeConfigSpec.DoubleValue MAX_TEAM_DISTANCE;
     public ForgeConfigSpec.DoubleValue IN_COMBAT_REGEN_MULTI;
+    public ForgeConfigSpec.DoubleValue COMBAT_PROFESSION_RESTED_XP_GENERATION;
 
     public ForgeConfigSpec.DoubleValue FAVOR_DEATH_LOSS;
     public ForgeConfigSpec.DoubleValue FAVOR_CHEST_GAIN;

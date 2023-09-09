@@ -62,6 +62,7 @@ public class PlayerData implements ICap {
     private static final String FAVOR = "favor";
     private static final String PROFESSIONS = "profs";
     private static final String BUFFS = "buffs";
+    private static final String RESTED_XP = "rxp";
 
     transient Player player;
 
@@ -76,6 +77,7 @@ public class PlayerData implements ICap {
     public DeathFavorData favor = new DeathFavorData();
     public PlayerProfessionsData professions = new PlayerProfessionsData();
     public PlayerBuffData buff = new PlayerBuffData();
+    public RestedExpData rested_xp = new RestedExpData();
 
     private MyInventory skillGemInv = new MyInventory(GemInventoryHelper.TOTAL_SLOTS);
     private MyInventory auraInv = new MyInventory(GemInventoryHelper.TOTAL_AURAS);
@@ -107,6 +109,7 @@ public class PlayerData implements ICap {
         LoadSave.Save(favor, nbt, FAVOR);
         LoadSave.Save(professions, nbt, PROFESSIONS);
         LoadSave.Save(buff, nbt, BUFFS);
+        LoadSave.Save(rested_xp, nbt, RESTED_XP);
 
         nbt.put(GEMS, skillGemInv.createTag());
         nbt.put(AURAS, auraInv.createTag());
@@ -129,6 +132,7 @@ public class PlayerData implements ICap {
         this.favor = loadOrBlank(DeathFavorData.class, new DeathFavorData(), nbt, FAVOR, new DeathFavorData());
         this.professions = loadOrBlank(PlayerProfessionsData.class, new PlayerProfessionsData(), nbt, PROFESSIONS, new PlayerProfessionsData());
         this.buff = loadOrBlank(PlayerBuffData.class, new PlayerBuffData(), nbt, BUFFS, new PlayerBuffData());
+        this.rested_xp = loadOrBlank(RestedExpData.class, new RestedExpData(), nbt, RESTED_XP, new RestedExpData());
 
         skillGemInv.fromTag(nbt.getList(GEMS, 10)); // todo
         auraInv.fromTag(nbt.getList(AURAS, 10)); // todo

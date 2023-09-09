@@ -1,8 +1,5 @@
 package com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts;
 
-import com.robertx22.age_of_exile.database.data.gems.Gem;
-import com.robertx22.age_of_exile.database.data.runes.Rune;
-import com.robertx22.age_of_exile.mmorpg.UNICODE;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPartTooltip;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatsContainer;
@@ -66,15 +63,9 @@ public class GearSocketsData implements IStatsContainer, IGearPartTooltip {
         try {
             for (int i = 0; i < getSocketedGemsCount(); i++) {
                 SocketData data = so.get(i);
-                if (data.isGem()) {
-                    Gem gem = data.getGem();
-                    list.add(ExileText.ofText(gem.getFormat() + "[" + UNICODE.STAR + "] ").get().append(data.GetTooltipString(info, gear)
-                            .get(0)));
-                }
-
-                if (data.isRune()) {
-                    Rune gem = data.getRune();
-                    list.add(ExileText.ofText(gem.getFormat(data) + "[" + UNICODE.CUBE + "] ").get().append(data.GetTooltipString(info, gear).get(0)));
+                
+                if (data.isGem() || data.isRune()) {
+                    list.addAll(data.GetTooltipString(info, gear, true));
                 }
             }
 

@@ -5,18 +5,18 @@ import com.robertx22.age_of_exile.database.data.gems.Gem;
 import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPart;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPartTooltip;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatsContainer;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class SocketData implements IGearPartTooltip, IStatsContainer {
+public class SocketData implements IStatsContainer {
 
 
     // gem id
@@ -29,7 +29,7 @@ public class SocketData implements IGearPartTooltip, IStatsContainer {
 
 
     public boolean isEmpty() {
-        return getGem() == null;
+        return getGem() == null && getRune() == null;
     }
 
     public boolean isGem() {
@@ -40,17 +40,18 @@ public class SocketData implements IGearPartTooltip, IStatsContainer {
         return getRune() != null;
     }
 
-    @Override
-    public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {
+    public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear, boolean addplaceholder) {
         List<Component> list = new ArrayList<Component>();
-        GetAllStats(gear).forEach(x -> list.addAll(x.GetTooltipString(info)));
+        GetAllStats(gear).forEach(x -> {
+            String placeholder = addplaceholder ? "[SOCKET_PLACEHOLDER]" : " ";
+            for (MutableComponent m : x.GetTooltipString(info)) {
+                list.add(Component.literal(placeholder).append(m));
+            }
+
+        });
         return list;
     }
 
-    @Override
-    public IGearPart.Part getPart() {
-        return Part.SOCKETS;
-    }
 
     public Gem getGem() {
         if (ExileDB.Gems().isRegistered(g)) {
@@ -64,6 +65,17 @@ public class SocketData implements IGearPartTooltip, IStatsContainer {
             return ExileDB.Runes().get(g);
         }
         return null;
+    }
+
+    public ItemStack getOriginalItemStack() {
+        if (isGem()) {
+            return getGem().getItem().getDefaultInstance();
+        }
+        if (isRune()) {
+            return getRune().getItem().getDefaultInstance();
+        }
+        return ItemStack.EMPTY;
+
     }
 
     @Override

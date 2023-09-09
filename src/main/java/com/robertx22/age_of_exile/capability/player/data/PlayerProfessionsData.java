@@ -41,6 +41,15 @@ public class PlayerProfessionsData {
         if (!map.containsKey(id)) {
             map.put(id, new Data());
         }
+        var rested = Load.player(p).rested_xp;
+
+        rested.onGiveProfExp(exp);
+        
+        if (rested.bonusProfExp > 0) {
+            int added = MathHelper.clamp(rested.bonusProfExp, 0, exp);
+            rested.bonusProfExp -= added;
+            exp += added;
+        }
 
         var data = map.get(id);
         data.exp += exp;

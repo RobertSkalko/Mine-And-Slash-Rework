@@ -15,19 +15,19 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.HashMap;
 
 public class Backpacks {
 
     public Backpacks(Player player) {
-
         this.player = player;
 
-        gears = new BackpackInventory(player, BackpackType.GEARS, MAX_SIZE);
-        currencies = new BackpackInventory(player, BackpackType.CURRENCY, MAX_SIZE);
-        skillGems = new BackpackInventory(player, BackpackType.SKILL_GEMS, MAX_SIZE);
-        maps = new BackpackInventory(player, BackpackType.MAPS, MAX_SIZE);
-
+        for (BackpackType type : BackpackType.values()) {
+            map.put(type, new BackpackInventory(player, type, MAX_SIZE));
+        }
     }
 
 
@@ -55,8 +55,14 @@ public class Backpacks {
             public boolean isValid(ItemStack stack) {
                 return StackSaving.SKILL_GEM.has(stack);
             }
+        },
+        PROFESSION("profession", Words.PROFESSIONS) {
+            @Override
+            public boolean isValid(ItemStack stack) {
+                Item item = stack.getItem();
+                return item instanceof IGoesToBackpack;
+            }
         };
-
 
         public String id;
         public Words name;
@@ -77,27 +83,11 @@ public class Backpacks {
 
     public static int MAX_SIZE = 6 * 9;
 
-    private BackpackInventory gears;
-    private BackpackInventory currencies;
-    private BackpackInventory skillGems;
-    private BackpackInventory maps;
+    private HashMap<BackpackType, BackpackInventory> map = new HashMap<>();
 
 
     public BackpackInventory getInv(BackpackType type) {
-        BackpackInventory inv = null;
-        if (type == BackpackType.CURRENCY) {
-            inv = currencies;
-        }
-        if (type == BackpackType.GEARS) {
-            inv = gears;
-        }
-        if (type == BackpackType.SKILL_GEMS) {
-            inv = skillGems;
-        }
-        if (type == BackpackType.MAPS) {
-            inv = maps;
-        }
-        return inv;
+        return map.get(type);
     }
 
 

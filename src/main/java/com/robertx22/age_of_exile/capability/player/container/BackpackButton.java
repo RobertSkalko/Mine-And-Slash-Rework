@@ -3,10 +3,14 @@ package com.robertx22.age_of_exile.capability.player.container;
 import com.robertx22.age_of_exile.capability.player.data.Backpacks;
 import com.robertx22.age_of_exile.vanilla_mc.packets.OpenBackpackPacket;
 import com.robertx22.library_of_exile.main.Packets;
+import com.robertx22.library_of_exile.utils.TextUTIL;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.resources.ResourceLocation;
+
+import java.util.Arrays;
 
 public class BackpackButton extends ImageButton {
 
@@ -44,7 +48,9 @@ public class BackpackButton extends ImageButton {
     }
 
     public void setModTooltip() {
-        //this.setTooltip(Tooltip.create(TextUTIL.mergeList(Load.player(mc.player).favor.getTooltip())));
+        this.setTooltip(Tooltip.create(TextUTIL.mergeList(Arrays.asList(
+                this.type.name.locName()
+        ))));
 
     }
 

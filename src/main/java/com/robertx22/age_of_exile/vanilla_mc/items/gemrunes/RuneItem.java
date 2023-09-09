@@ -211,7 +211,7 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
         TOQ(1000, "toq", "Toq", 2, 0.4F, () -> StatPerType.of().addWeapon(Stats.CRIT_CHANCE.get().mod(5, 15))),
         ORU(500, "oru", "Oru", 4, 0.6F, () -> StatPerType.of().addWeapon(Stats.CRIT_DAMAGE.get().mod(5, 25))),
         WIR(200, "wir", "Wir", 4, 0.7F, () -> StatPerType.of().addWeapon(Stats.TOTAL_DAMAGE.get().mod(5, 20))),
-        ENO(1000, "eno", "Eno", 3, 0.5F, () -> StatPerType.of().addArmor(Stats.MANA_COST.get().mod(2, 8))),
+        ENO(1000, "eno", "Eno", 3, 0.5F, () -> StatPerType.of().addArmor(Stats.MANA_COST.get().mod(-2, -8))),
         HAR(1000, "har", "Har", 3, 0.4f, () -> StatPerType.of().addArmor(Stats.HEAL_STRENGTH.get().mod(3, 15))),
         XER(1000, "xer", "Xer", 3, 0.5f, () -> StatPerType.of().addArmor(Stats.SUMMON_DAMAGE.get().mod(3, 15)));
 

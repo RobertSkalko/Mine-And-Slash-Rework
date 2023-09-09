@@ -5,8 +5,8 @@
   "on_armor_stats": [
     {
       "type": "FLAT",
-      "max": 8.0,
-      "min": 2.0,
+      "max": -8.0,
+      "min": -2.0,
       "stat": "mana_cost"
     }
   ],

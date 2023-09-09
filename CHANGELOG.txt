@@ -18,6 +18,9 @@ Profession drops are split into:
 
 Every day (sunrise), one single drop from every gathering profession will get boosted droprates, allowing the patient ones to farm specific materials.
 
+Notable feature to help leveling both combat and profession levels is rested XP.
+As you kill mobs you gain rested profession xp, and use it up as you level professions, and the opposite.
+
 Crafting:
 - Gear crafting: gear souls, sharpening stones
 - Alchemy: buff or restorative potions
@@ -26,6 +29,8 @@ Crafting:
 - More to come
 
 - added more types of loot chests
+
+- added profession bag to master bag
 
 - rarities are now gated behind levels
 

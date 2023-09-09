@@ -7,6 +7,7 @@ import net.minecraft.ChatFormatting;
 import java.util.Locale;
 
 public enum Words implements IAutoLocName {
+    PROFESSIONS("Professions"),
     POTION("Potion"),
     MEAL("Meal"),
     LESSER("Lesser"),

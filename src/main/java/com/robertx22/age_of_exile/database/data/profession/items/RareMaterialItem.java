@@ -1,9 +1,11 @@
 package com.robertx22.age_of_exile.database.data.profession.items;
 
+import com.robertx22.age_of_exile.capability.player.data.Backpacks;
+import com.robertx22.age_of_exile.capability.player.data.IGoesToBackpack;
 import com.robertx22.age_of_exile.database.data.profession.CraftedItemPower;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
 
-public class RareMaterialItem extends AutoItem {
+public class RareMaterialItem extends AutoItem implements IGoesToBackpack {
 
     public CraftedItemPower tier;
     String name;
@@ -24,5 +26,10 @@ public class RareMaterialItem extends AutoItem {
     @Override
     public String GUID() {
         return null;
+    }
+
+    @Override
+    public Backpacks.BackpackType getBackpackPickup() {
+        return Backpacks.BackpackType.PROFESSION;
     }
 }

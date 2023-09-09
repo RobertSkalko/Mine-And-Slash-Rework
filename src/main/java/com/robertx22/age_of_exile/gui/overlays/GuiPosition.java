@@ -14,12 +14,13 @@ public enum GuiPosition {
     BOTTOM_CENTER {
         @Override
         public List<GuiPartConfig> getGuiConfig(EntityData data, Player p) {
+            
             List<GuiPartConfig> middle = new ArrayList<>();
-            middle.add(new GuiPartConfig(BarGuiType.HEALTH, new PointData(-198, -11)));
-            //middle.add(new GuiPartConfig(BarGuiType.EXP, new PointData(-198, -11)));
+            middle.add(new GuiPartConfig(BarGuiType.HEALTH, new PointData(-198, -22)));
+            middle.add(new GuiPartConfig(BarGuiType.EXP, new PointData(-198, -11)));
 
             if (BarGuiType.MAGIC_SHIELD.shouldRender(data, p)) {
-                middle.add(new GuiPartConfig(BarGuiType.MAGIC_SHIELD, new PointData(-198, -22)));
+                middle.add(new GuiPartConfig(BarGuiType.MAGIC_SHIELD, new PointData(-198, -33)));
             }
             middle.add(new GuiPartConfig(BarGuiType.MANA, new PointData(90, -22)).iconOnRight());
             middle.add(new GuiPartConfig(BarGuiType.ENERGY, new PointData(90, -11)).iconOnRight());

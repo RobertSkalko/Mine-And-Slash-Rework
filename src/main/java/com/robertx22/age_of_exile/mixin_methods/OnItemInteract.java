@@ -109,9 +109,7 @@ public class OnItemInteract {
                 if (gear != null) {
                     if (gear.sockets != null && gear.sockets.getSocketed().size() > 0) {
                         try {
-                            ItemStack gem = new ItemStack(gear.sockets.getSocketed().get(0)
-                                    .getGem()
-                                    .getItem());
+                            ItemStack gem = gear.sockets.getSocketed().get(0).getOriginalItemStack();
                             gear.sockets.getSocketed().remove(0);
                             StackSaving.GEARS.saveTo(stack, gear);
                             PlayerUtils.giveItem(gem, player);

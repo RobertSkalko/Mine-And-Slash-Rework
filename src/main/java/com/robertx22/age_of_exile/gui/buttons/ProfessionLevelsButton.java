@@ -58,6 +58,11 @@ public class ProfessionLevelsButton extends ImageButton {
             list.add(TooltipUtils.level(lvl).append(" Exp: " + exp + "/" + maxexp).withStyle(ChatFormatting.GREEN));
 
         }
+        list.add(Component.empty());
+
+        list.add(Component.literal("Rested Combat Exp: " + Load.player(mc.player).rested_xp.bonusCombatExp).withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+        list.add(Component.literal("Rested Profession Exp: " + Load.player(mc.player).rested_xp.bonusProfExp).withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD));
+
         this.setTooltip(Tooltip.create(TextUTIL.mergeList(list)));
 
     }

@@ -1,17 +1,17 @@
 {
   "chance_drops": [
     {
-      "type": "MEDIUM",
-      "chance": 1.25,
+      "type": "GREATER",
+      "chance": 0.25,
       "drops": [
         {
-          "item_id": "mmorpg:rare_mats/farming/medium",
+          "item_id": "mmorpg:rare_mats/farming/greater",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
         },
         {
-          "item_id": "mmorpg:rare_mats/farming/greater",
+          "item_id": "mmorpg:rare_mats/farming/medium",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
@@ -25,17 +25,17 @@
       ]
     },
     {
-      "type": "GREATER",
-      "chance": 0.25,
+      "type": "MEDIUM",
+      "chance": 1.25,
       "drops": [
         {
-          "item_id": "mmorpg:rare_mats/farming/medium",
+          "item_id": "mmorpg:rare_mats/farming/greater",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
         },
         {
-          "item_id": "mmorpg:rare_mats/farming/greater",
+          "item_id": "mmorpg:rare_mats/farming/medium",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
@@ -53,13 +53,13 @@
       "chance": 5.0,
       "drops": [
         {
-          "item_id": "mmorpg:rare_mats/farming/medium",
+          "item_id": "mmorpg:rare_mats/farming/greater",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
         },
         {
-          "item_id": "mmorpg:rare_mats/farming/greater",
+          "item_id": "mmorpg:rare_mats/farming/medium",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000

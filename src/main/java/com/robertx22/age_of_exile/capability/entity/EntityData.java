@@ -738,6 +738,16 @@ public class EntityData implements ICap, INeededForClient {
             this.expDebt -= reduced;
         }
 
+        var rested = Load.player(player).rested_xp;
+
+        rested.onGiveCombatExp(i);
+
+        if (rested.bonusCombatExp > 0) {
+            int added = MathHelper.clamp(rested.bonusCombatExp, 0, i);
+            rested.bonusCombatExp -= added;
+            i += added;
+        }
+
         setExp(exp + i);
 
         if (exp > this.getExpRequiredForLevelUp()) {
