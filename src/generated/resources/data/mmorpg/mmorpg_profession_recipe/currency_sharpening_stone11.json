@@ -9,6 +9,11 @@
     },
     {
       "type": "ITEM",
+      "id": "minecraft:coal",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
       "id": "minecraft:copper_ingot",
       "num": 1
     }

@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.profession;
 
+import com.robertx22.age_of_exile.database.data.profession.screen.CraftingStationMenu;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlockEntities;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import net.minecraft.core.BlockPos;
@@ -74,7 +75,7 @@ public class ProfessionBlock extends BaseEntityBlock implements WorldlyContainer
                     return InteractionResult.FAIL;
                 }
             }
-        
+
             be.onOpen(p);
 
             p.openMenu(new MenuProvider() {
@@ -83,10 +84,9 @@ public class ProfessionBlock extends BaseEntityBlock implements WorldlyContainer
                     return Component.empty();
                 }
 
-                @org.jetbrains.annotations.Nullable
                 @Override
                 public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-                    return new CraftingStationMenu(pContainerId, pPlayerInventory, be.inventory);
+                    return new CraftingStationMenu(pContainerId, pPlayerInventory, be.inventory, be.show);
                 }
             });
 

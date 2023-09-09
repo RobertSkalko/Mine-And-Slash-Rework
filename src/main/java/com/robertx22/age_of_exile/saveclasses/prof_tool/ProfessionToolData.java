@@ -18,10 +18,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.HoeItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PickaxeItem;
-import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +50,9 @@ public class ProfessionToolData implements ITooltip {
         }
         if (prof.id.equals(Professions.FARMING)) {
             return stack.is(ItemTags.HOES) || stack.getItem() instanceof HoeItem;
+        }
+        if (prof.id.equals(Professions.FISHING)) {
+            return stack.getItem() instanceof FishingRodItem;
         }
         if (prof.id.equals(Professions.HUSBANDRY)) {
             return stack.is(ItemTags.SWORDS) || stack.getItem() instanceof SwordItem;

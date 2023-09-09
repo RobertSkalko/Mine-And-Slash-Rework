@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.database.data.profession;
 
 import com.robertx22.age_of_exile.database.data.profession.all.Professions;
+import com.robertx22.age_of_exile.database.data.profession.screen.CraftingStationMenu;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlockEntities;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -12,6 +13,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -30,6 +32,7 @@ public class ProfessionBlockEntity extends BlockEntity {
 
     public MergedContainer inventory = new MergedContainer(Arrays.asList(INPUTS, OUTPUTS));
 
+    public SimpleContainer show = new SimpleContainer(1);
 
     public String owner = "";
 
@@ -59,27 +62,44 @@ public class ProfessionBlockEntity extends BlockEntity {
         return null;
     }
 
+    int cooldown = 0;
+
     public void tick(Level level) {
 
         try {
             ticks++;
 
-            if (ticks % 20 == 0) {
+            int tickRate = 5;
+
+            if (ticks % tickRate == 0) {
 
                 Player p = getOwner(level);
 
                 if (p != null) {
-                    // todo write this somewhere or in chat
-                    if (tryRecipe(p, true).can || trySalvage(p, true).can) {
-                        craftingTicks += 20;
 
-                        if (craftingTicks > 60) {
+                    cooldown -= tickRate;
+
+                    var rec = tryRecipe(p, true);
+
+                    if (!rec.can) {
+                        if (cooldown < 1) {
+                            if (p.containerMenu instanceof CraftingStationMenu && p.blockPosition().distManhattan(getBlockPos()) < 5) {
+                                p.sendSystemMessage(rec.answer);
+                                cooldown = 20 * 10;
+                            }
+                        }
+                    }
+                    if (rec.can || trySalvage(p, true).can) {
+                        craftingTicks += tickRate;
+
+                        if (craftingTicks > 100) {
                             craftingTicks = 0;
                             tryRecipe(p, false);
                             trySalvage(p, false);
-
                             SoundUtils.playSound(level, getBlockPos(), SoundEvents.ANVIL_DESTROY);
                         }
+                    } else {
+                        show.clearContent();
                     }
                 }
 
@@ -93,7 +113,6 @@ public class ProfessionBlockEntity extends BlockEntity {
     }
 
     public Result tryRecipe(Player p, boolean justCheck) {
-
 
         int ownerLvl = Load.player(p).professions.getLevel(getProfession().GUID());
 
@@ -110,6 +129,9 @@ public class ProfessionBlockEntity extends BlockEntity {
         }
 
         if (justCheck) {
+            var showstack = recipe.toResultStackForJei();
+            showstack.setCount(1);
+            this.show.setItem(0, showstack);
             return Result.success();
         }
 

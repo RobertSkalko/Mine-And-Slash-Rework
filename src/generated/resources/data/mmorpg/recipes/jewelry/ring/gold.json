@@ -1,15 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "equipment",
+  "category": "misc",
   "key": {
-    "M": {
+    "X": {
       "item": "minecraft:gold_ingot"
     }
   },
   "pattern": [
-    " M ",
-    "M M",
-    " M "
+    " X ",
+    "X X",
+    " X "
   ],
   "result": {
     "item": "mmorpg:jewelry/ring/gold"

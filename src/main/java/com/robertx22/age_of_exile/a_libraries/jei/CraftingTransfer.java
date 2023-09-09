@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.a_libraries.jei;
 
-import com.robertx22.age_of_exile.database.data.profession.CraftingStationMenu;
 import com.robertx22.age_of_exile.database.data.profession.ProfessionRecipe;
+import com.robertx22.age_of_exile.database.data.profession.screen.CraftingStationMenu;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashContainers;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.transfer.IRecipeTransferInfo;

@@ -1,8 +1,9 @@
 package com.robertx22.age_of_exile.a_libraries.jei;
 
-import com.robertx22.age_of_exile.database.data.profession.CraftingStationScreen;
 import com.robertx22.age_of_exile.database.data.profession.Profession;
 import com.robertx22.age_of_exile.database.data.profession.ProfessionRecipe;
+import com.robertx22.age_of_exile.database.data.profession.all.Professions;
+import com.robertx22.age_of_exile.database.data.profession.screen.CraftingStationScreen;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
@@ -36,7 +37,7 @@ public class JeiIntegration implements IModPlugin {
 
         for (Map.Entry<String, RecipeType<ProfessionRecipe>> en : map.entrySet()) {
             Profession pro = ExileDB.Professions().get(en.getKey());
-            registration.addRecipeCategories(new CraftingCategory(helper, en.getValue(), pro.locName()));
+            registration.addRecipeCategories(new CraftingCategory(pro.id, helper, en.getValue(), pro.locName()));
         }
     }
 
@@ -87,9 +88,9 @@ public class JeiIntegration implements IModPlugin {
 
     public void init() {
         if (map.isEmpty()) {
-            for (Profession p : ExileDB.Professions().getList()) {
+            for (String pro : Professions.STATION_PROFESSIONS) {
                 if (true) {
-                    map.put(p.id, RecipeType.create(SlashRef.MODID, p.id, ProfessionRecipe.class));
+                    map.put(pro, RecipeType.create(SlashRef.MODID, pro, ProfessionRecipe.class));
                 }
             }
         }

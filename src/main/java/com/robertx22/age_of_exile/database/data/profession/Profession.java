@@ -68,6 +68,9 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
 
 
         for (ChancedDrop chancedDrop : ALLDROPS) {
+
+            float dailyMulti = Load.player(p).professions.daily_drop_multis.getMulti(this, chancedDrop.type);
+
             float chance = dropChanceMulti * chancedDrop.chance;
 
             if (RandomUtils.roll(chance)) {
@@ -98,15 +101,24 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
         return list;
     }
 
+    public static enum DropCategory {
+        MAIN,
+        LESSER,
+        MEDIUM,
+        GREATER,
+        MISC;
+    }
 
     public static class ChancedDrop {
 
-        public List<ProfessionDrop> drops = new ArrayList<>();
 
+        public List<ProfessionDrop> drops = new ArrayList<>();
+        public DropCategory type;
         public float chance = 0;
 
-        public ChancedDrop(List<ProfessionDrop> drops, float chance) {
+        public ChancedDrop(List<ProfessionDrop> drops, DropCategory type, float chance) {
             this.drops = drops;
+            this.type = type;
             this.chance = chance;
         }
     }
@@ -130,7 +142,7 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
         }
 
         private int getWeight(Player p, Profession pro) {
-            return (int) (weight * Load.player(p).professions.daily_drop_multis.getMulti(pro, item_id));
+            return (int) (weight);
         }
 
         public Weighted<ProfessionDrop> toWeighted(Player p, Profession pro) {
@@ -150,6 +162,10 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
 
     @Override
     public String locNameForLangFile() {
+        if (id.contains("_")) {
+            var list = Arrays.stream(StringUTIL.split(id, "_")).map(x -> StringUTIL.capitalise(x)).iterator();
+            StringUTIL.join(list, " ");
+        }
         return StringUTIL.capitalise(id);
     }
 
@@ -209,6 +225,7 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
                 }
             }
         }
+        // todo add default drop for modded ores
 
         if (data != null) {
             if (data.exp > 0) {

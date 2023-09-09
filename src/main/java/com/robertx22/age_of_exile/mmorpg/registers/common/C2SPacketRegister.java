@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.vanilla_mc.packets.perks.PerkChangePacket;
 import com.robertx22.age_of_exile.vanilla_mc.packets.spells.TellServerToCancelSpellCast;
 import com.robertx22.age_of_exile.vanilla_mc.packets.spells.TellServerToCastSpellPacket;
 import com.robertx22.library_of_exile.main.Packets;
+import net.minecraft.core.BlockPos;
 
 public class C2SPacketRegister {
 
@@ -22,6 +23,7 @@ public class C2SPacketRegister {
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new OpenBackpackPacket(Backpacks.BackpackType.GEARS), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new InvGuiPacket(), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new OpenJewelsPacket(), i++);
+        Packets.registerClientToServerPacket(MMORPG.NETWORK, new CraftPacket("", BlockPos.ZERO), i++);
 
 
         // Packets.registerClientToServerPacket(MMORPG.NETWORK, new SetupHotbarPacket(), i++);

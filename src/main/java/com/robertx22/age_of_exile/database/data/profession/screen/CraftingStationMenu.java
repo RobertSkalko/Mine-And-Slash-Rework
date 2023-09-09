@@ -1,4 +1,4 @@
-package com.robertx22.age_of_exile.database.data.profession;
+package com.robertx22.age_of_exile.database.data.profession.screen;
 
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashContainers;
 import net.minecraft.world.Container;
@@ -15,7 +15,7 @@ public class CraftingStationMenu extends AbstractContainerMenu {
 
 
     public CraftingStationMenu(int pContainerId, Container pContainer) {
-        this(pContainerId, pContainer, new SimpleContainer(18));
+        this(pContainerId, pContainer, new SimpleContainer(18), new SimpleContainer(1));
     }
 
 
@@ -23,9 +23,11 @@ public class CraftingStationMenu extends AbstractContainerMenu {
     public List<Slot> matslots = new ArrayList<>();
     public List<Slot> invslots = new ArrayList<>();
 
-    public CraftingStationMenu(int pContainerId, Container pinv, Container inv) {
+
+    public CraftingStationMenu(int pContainerId, Container pinv, Container inv, Container show) {
         super(SlashContainers.CRAFTING.get(), pContainerId);
 
+        addSlot(new ShowSlot(show, 0, 80, 18));
 
         for (int k = 0; k < 3; ++k) {
             for (int i1 = 0; i1 < 9; ++i1) {
@@ -67,6 +69,24 @@ public class CraftingStationMenu extends AbstractContainerMenu {
         }
 
 
+    }
+
+    static class ShowSlot extends Slot {
+
+        public ShowSlot(Container pContainer, int pSlot, int pX, int pY) {
+            super(pContainer, pSlot, pX, pY);
+
+        }
+
+        @Override
+        public boolean mayPlace(ItemStack pStack) {
+            return false;
+        }
+
+        @Override
+        public boolean mayPickup(Player pPlayer) {
+            return false;
+        }
     }
 
     @Override

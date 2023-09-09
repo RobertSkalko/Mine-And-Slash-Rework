@@ -1,4 +1,4 @@
-package com.robertx22.age_of_exile.database.data.profession;
+package com.robertx22.age_of_exile.database.data.profession.screen;
 
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import net.minecraft.client.gui.GuiGraphics;
@@ -14,6 +14,7 @@ public class CraftingStationScreen extends AbstractContainerScreen<CraftingStati
         super(pMenu, pPlayerInventory, Component.literal(""));
         this.imageWidth = 176;
         this.imageHeight = 166;
+        
 
     }
 

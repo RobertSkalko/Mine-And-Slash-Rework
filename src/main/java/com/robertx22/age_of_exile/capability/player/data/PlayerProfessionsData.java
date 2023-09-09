@@ -9,15 +9,15 @@ import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.OnScreenMessageUtils;
 import com.robertx22.library_of_exile.utils.RandomUtils;
-import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class PlayerProfessionsData {
 
@@ -41,7 +41,6 @@ public class PlayerProfessionsData {
         if (!map.containsKey(id)) {
             map.put(id, new Data());
         }
-
 
         var data = map.get(id);
         data.exp += exp;
@@ -78,15 +77,15 @@ public class PlayerProfessionsData {
 
     public static class DailyDropModifiers {
 
-        private HashMap<String, List<DropModifier>> map = new HashMap<>();
+        private HashMap<String, DropModifier> map = new HashMap<>();
 
         boolean day = false;
 
-        private static DropModifier NONE = new DropModifier("", 1);
+        private static DropModifier NONE = new DropModifier(Profession.DropCategory.MAIN, 1);
 
-        public float getMulti(Profession pro, String id) {
-            if (map.containsKey(pro.id)) {
-                return map.get(pro.id).stream().filter(x -> x.id.equals(id)).findAny().orElse(NONE).multi;
+        public float getMulti(Profession pro, Profession.DropCategory cat) {
+            if (map.containsKey(pro.id) && map.get(pro.id).cat == cat) {
+                return map.get(pro.id).multi;
             }
             return 1;
         }
@@ -95,15 +94,16 @@ public class PlayerProfessionsData {
 
             List<Component> list = new ArrayList<>();
 
-            for (Map.Entry<String, List<DropModifier>> en : map.entrySet()) {
+            for (Map.Entry<String, DropModifier> en : map.entrySet()) {
                 Profession pro = ExileDB.Professions().get(en.getKey());
 
-                for (DropModifier mod : en.getValue()) {
-                    ItemStack item = VanillaUTIL.REGISTRY.items().get(new ResourceLocation(mod.id)).getDefaultInstance();
+                var mod = en.getValue();
 
-                    list.add(pro.locName().append(": ").append(item.getHoverName()).append(": " + mod.multi + "x DROP RATE!")
-                            .withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD));
-                }
+                // todo add loc name for category
+
+                list.add(pro.locName().append(": ").append(mod.cat.name()).append(": " + mod.multi + "x Drop Rate!")
+                        .withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD));
+
             }
 
             return list;
@@ -123,9 +123,9 @@ public class PlayerProfessionsData {
 
                     for (Profession p : ExileDB.Professions().getList()) {
                         if (!p.chance_drops.isEmpty()) {
-                            String id = RandomUtils.randomFromList(RandomUtils.randomFromList(p.chance_drops).drops).item_id;
-                            float multi = 10;
-                            map.put(p.id, Arrays.asList(new DropModifier(id, multi)));
+                            var drop = RandomUtils.randomFromList(p.chance_drops);
+                            float multi = RandomUtils.RandomRange(2, 5);
+                            map.put(p.id, new DropModifier(drop.type, multi));
                         }
                     }
 
@@ -141,11 +141,11 @@ public class PlayerProfessionsData {
     }
 
     private static class DropModifier {
-        public String id;
+        public Profession.DropCategory cat = Profession.DropCategory.MAIN;
         public float multi;
 
-        public DropModifier(String id, float multi) {
-            this.id = id;
+        public DropModifier(Profession.DropCategory id, float multi) {
+            this.cat = id;
             this.multi = multi;
         }
     }

@@ -146,7 +146,7 @@ public class ProfessionRecipes {
                             .onTierOrAbove(SkillItemTier.TIER0, fam.craftItem.get(), 1);
 
                     b.forRarityPower(rar, ProfessionMatItems.POWERED_RARE_MATS.get(Professions.MINING));
-                    
+
                     b.buildEachTier();
 
                     rarnumMulti += 0.4F;
@@ -159,6 +159,7 @@ public class ProfessionRecipes {
 
         ProfessionRecipe.TierBuilder.of(x -> new SharpeningStone(x).getCurrencyItem(), Professions.GEAR_CRAFTING, 1)
                 .onlyOnTier(x -> new ItemStack(ProfessionMatItems.TIERED_MAIN_MATS.get(Professions.MINING).get(x).get(), 3 * (x.tier + 1)))
+                .onTierOrAbove(SkillItemTier.TIER0, Items.COAL, 1)
                 .onTierOrAbove(SkillItemTier.TIER1, Items.COPPER_INGOT, 1)
                 .onTierOrAbove(SkillItemTier.TIER2, Items.IRON_INGOT, 1)
                 .onTierOrAbove(SkillItemTier.TIER3, Items.GOLD_INGOT, 1)

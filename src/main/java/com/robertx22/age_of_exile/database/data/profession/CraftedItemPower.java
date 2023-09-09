@@ -11,9 +11,9 @@ import java.util.Comparator;
 
 public enum CraftedItemPower {
 
-    LESSER(1000, IRarity.UNCOMMON, 1, 0, "lesser", Words.LESSER, ChatFormatting.GREEN),
-    MEDIUM(250, IRarity.EPIC_ID, 3, 50, "medium", Words.MEDIUM, ChatFormatting.BLUE),
-    GREATER(50, IRarity.MYTHIC_ID, 5, 100, "greater", Words.GREATER, ChatFormatting.LIGHT_PURPLE);
+    LESSER(1000, Profession.DropCategory.LESSER, IRarity.UNCOMMON, 1, 0, "lesser", Words.LESSER, ChatFormatting.GREEN),
+    MEDIUM(250, Profession.DropCategory.MEDIUM, IRarity.EPIC_ID, 3, 50, "medium", Words.MEDIUM, ChatFormatting.BLUE),
+    GREATER(50, Profession.DropCategory.GREATER, IRarity.MYTHIC_ID, 5, 100, "greater", Words.GREATER, ChatFormatting.LIGHT_PURPLE);
 
     public int weight;
     public ChatFormatting color;
@@ -24,8 +24,11 @@ public enum CraftedItemPower {
 
     public String rar;
 
-    CraftedItemPower(int we, String rar, int matItems, int perc, String id, Words word, ChatFormatting color) {
+    public Profession.DropCategory category;
+
+    CraftedItemPower(int we, Profession.DropCategory cat, String rar, int matItems, int perc, String id, Words word, ChatFormatting color) {
         this.color = color;
+        this.category = cat;
         this.weight = we;
         this.rar = rar;
         this.perc = perc;

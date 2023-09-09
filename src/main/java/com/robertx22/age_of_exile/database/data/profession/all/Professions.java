@@ -202,7 +202,7 @@ public class Professions {
                 if (!p.tiered_drops.containsKey(en.getKey())) {
                     p.tiered_drops.put(en.getKey(), new ArrayList<>());
                 }
-                this.p.tiered_drops.get(en.getKey()).add(new Profession.ChancedDrop(Arrays.asList(drop), 10F));
+                this.p.tiered_drops.get(en.getKey()).add(new Profession.ChancedDrop(Arrays.asList(drop), Profession.DropCategory.MAIN, 10F));
 
             }
             return this;
@@ -217,7 +217,7 @@ public class Professions {
                 var drop = new Profession.ProfessionDrop(id, 1, 1000, 0); // all use separate loot tables
                 drops.add(drop);
 
-                this.p.chance_drops.add(new Profession.ChancedDrop(drops, chance * (en.getKey().weight / 1000F)));
+                this.p.chance_drops.add(new Profession.ChancedDrop(drops, en.getKey().category, chance * (en.getKey().weight / 1000F)));
             }
             return this;
         }

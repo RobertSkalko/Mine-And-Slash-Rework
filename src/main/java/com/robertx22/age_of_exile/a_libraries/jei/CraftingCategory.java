@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.a_libraries.jei;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import com.robertx22.age_of_exile.database.data.profession.ProfessionRecipe;
+import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import mezz.jei.api.constants.ModIds;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -16,7 +17,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,12 +40,15 @@ public class CraftingCategory implements IExtendableRecipeCategory<ProfessionRec
 
     RecipeType<ProfessionRecipe> type;
     Component word;
+    String prof;
 
-    public CraftingCategory(IGuiHelper guiHelper, RecipeType<ProfessionRecipe> type, Component word) {
+    public CraftingCategory(String prof, IGuiHelper guiHelper, RecipeType<ProfessionRecipe> type, Component word) {
+        this.prof = prof;
 
         ResourceLocation location = RECIPE_GUI_VANILLA;
         background = guiHelper.createDrawable(location, 0, 60, width, height);
-        icon = guiHelper.createDrawableItemStack(new ItemStack(Blocks.CRAFTING_TABLE));
+
+        icon = guiHelper.createDrawableItemStack(new ItemStack(SlashItems.STATIONS.get(prof).get()));
 
         this.word = word;
         this.type = type;
@@ -88,7 +91,7 @@ public class CraftingCategory implements IExtendableRecipeCategory<ProfessionRec
 
     @Override
     public List<Component> getTooltipStrings(ProfessionRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
-        
+
         List<Component> list = new ArrayList<>();
 
         list.addAll(recipe.getTooltipJEI());

@@ -6,6 +6,11 @@
       "type": "ITEM",
       "id": "mmorpg:material/mining/0",
       "num": 3
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:coal",
+      "num": 1
     }
   ],
   "power": "greater",

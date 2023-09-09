@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.mmorpg.registers.common;
 
 import com.robertx22.age_of_exile.capability.player.container.BackpackMenu;
 import com.robertx22.age_of_exile.capability.player.container.SkillGemsMenu;
-import com.robertx22.age_of_exile.database.data.profession.CraftingStationMenu;
+import com.robertx22.age_of_exile.database.data.profession.screen.CraftingStationMenu;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
 import net.minecraft.world.inventory.MenuType;
