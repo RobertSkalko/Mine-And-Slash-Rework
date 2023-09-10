@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.database.data.currency.base.GearOutcome;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
+import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.database.data.profession.ICreativeTabTiered;
 import com.robertx22.age_of_exile.database.data.profession.LeveledItem;
 import com.robertx22.age_of_exile.database.data.requirements.bases.GearRequestedFor;
@@ -16,6 +17,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.GearEnchantDat
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
@@ -140,30 +142,34 @@ public class CraftedEnchantItem extends AutoItem implements IItemAsCurrency, ICr
 
             // todo turn this into a result with chat messages why it doesnt work
             @Override
-            public boolean canBeModified(GearItemData data) {
+            public ExplainedResult canBeModified(GearItemData data) {
 
                 SkillItemTier tier = LeveledItem.getTier(stack);
 
                 if (!tier.levelRange.isLevelInRange(data.lvl)) {
-                    return false;
+                    return ExplainedResult.failure(Chats.NOT_CORRECT_TIER_LEVEL.locName());
                 }
 
                 if (data.GetBaseGearType().family() != fam) {
-                    return false;
+                    return ExplainedResult.failure(Chats.NOT_FAMILY.locName());
                 }
 
                 if (data.ench == null) {
                     if (!IRarity.COMMON_ID.equals(rar)) {
-                        return false;
+                        return ExplainedResult.failure(Chats.ENCHANT_UPGRADE_RARITY.locName());
                     }
                 } else {
                     if (!data.ench.rar.equals(rar) && !data.ench.canUpgradeToRarity(rar)) {
-                        return false;
+                        return ExplainedResult.failure(Chats.ENCHANT_UPGRADE_RARITY.locName());
                     }
                 }
 
 
-                return data.data.get(GearItemData.KEYS.ENCHANT_TIMES) < 10;
+                if (data.data.get(GearItemData.KEYS.ENCHANT_TIMES) > 9) {
+                    return ExplainedResult.failure(Chats.THIS_ITEM_CANT_BE_USED_MORE_THAN_X_TIMES.locName(10));
+                }
+
+                return ExplainedResult.success();
             }
 
             @Override

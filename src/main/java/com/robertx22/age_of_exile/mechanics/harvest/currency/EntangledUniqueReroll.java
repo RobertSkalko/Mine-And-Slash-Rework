@@ -4,9 +4,11 @@ import com.robertx22.age_of_exile.database.data.currency.base.GearCurrency;
 import com.robertx22.age_of_exile.database.data.currency.base.GearOutcome;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.age_of_exile.database.data.league.LeagueMechanics;
+import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.loot.req.DropRequirement;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -78,8 +80,11 @@ public class EntangledUniqueReroll extends GearCurrency {
     }
 
     @Override
-    public boolean canBeModified(GearItemData data) {
-        return data.isUnique() && data.uniqueStats != null;
+    public ExplainedResult canBeModified(GearItemData data) {
+        if (data.isUnique() && data.uniqueStats != null) {
+            return ExplainedResult.success();
+        }
+        return ExplainedResult.failure(Chats.BE_UNIQUE.locName());
     }
 
     @Override

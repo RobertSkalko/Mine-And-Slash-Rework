@@ -4,8 +4,10 @@ import com.robertx22.age_of_exile.database.data.currency.base.GearCurrency;
 import com.robertx22.age_of_exile.database.data.currency.base.GearOutcome;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
+import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import net.minecraft.world.item.ItemStack;
 
@@ -51,8 +53,16 @@ public class LevelGearCurrency extends GearCurrency {
     }
 
     @Override
-    public boolean canBeModified(GearItemData data) {
-        return data.data.get(GearItemData.KEYS.LEVEL_TIMES) < 5 && data.lvl < GameBalanceConfig.get().MAX_LEVEL;
+    public ExplainedResult canBeModified(GearItemData data) {
+
+
+        if (data.data.get(GearItemData.KEYS.LEVEL_TIMES) >= 5) {
+            return ExplainedResult.failure(Chats.THIS_ITEM_CANT_BE_USED_MORE_THAN_X_TIMES.locName(5));
+        }
+        if (data.lvl >= GameBalanceConfig.get().MAX_LEVEL) {
+            return ExplainedResult.failure(Chats.CANT_GO_ABOVE_MAX_LEVEL.locName(GameBalanceConfig.get().MAX_LEVEL));
+        }
+        return ExplainedResult.success();
     }
 
     @Override

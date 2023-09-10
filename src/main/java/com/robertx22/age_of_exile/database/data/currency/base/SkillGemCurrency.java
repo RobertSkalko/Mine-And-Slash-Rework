@@ -2,8 +2,10 @@ package com.robertx22.age_of_exile.database.data.currency.base;
 
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.BaseLocRequirement;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
+import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Arrays;
@@ -18,16 +20,22 @@ public abstract class SkillGemCurrency extends Currency {
     }
 
     @Override
-    public boolean canItemBeModified(LocReqContext context) {
+    public ExplainedResult canItemBeModified(LocReqContext context) {
 
         SkillGemData data = StackSaving.SKILL_GEM.loadFrom(context.stack);
-        if (data == null) {
-            return false;
+        if (data == null || data.type != SkillGemData.SkillGemType.SKILL) {
+            return ExplainedResult.failure(Chats.NOT_SKILLGEM.locName());
         }
-        return data.type == SkillGemData.SkillGemType.SKILL && super.canItemBeModified(context) && canBeModified(data);
+        var can = canBeModified(data);
+        if (!can.can) {
+            return can;
+        }
+
+
+        return super.canItemBeModified(context);
     }
 
-    public abstract boolean canBeModified(SkillGemData data);
+    public abstract ExplainedResult canBeModified(SkillGemData data);
 
     public abstract ItemStack modify(LocReqContext ctx, ItemStack stack, SkillGemData data);
 

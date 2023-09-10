@@ -90,17 +90,24 @@ public class OnItemInteract {
                         success = true;
                     }
                 }
+
             } else if (cursor.getItem() instanceof IItemAsCurrency) {
                 LocReqContext ctx = new LocReqContext(player, stack, cursor);
-                if (ctx.effect.canItemBeModified(ctx)) {
-                    ItemStack result = ctx.effect.modifyItem(ctx).stack;
 
-                    stack.shrink(1); // seems the currency creates a copy of a new item, so we delete the old one
+                if (!stack.isEmpty()) {
+                    var can = ctx.effect.canItemBeModified(ctx);
+                    if (can.can) {
+                        ItemStack result = ctx.effect.modifyItem(ctx).stack;
 
-                    sound = false;
-                    PlayerUtils.giveItem(result, player);
-                    //slot.set(result);
-                    success = true;
+                        stack.shrink(1); // seems the currency creates a copy of a new item, so we delete the old one
+
+                        sound = false;
+                        PlayerUtils.giveItem(result, player);
+                        //slot.set(result);
+                        success = true;
+                    } else {
+                        player.sendSystemMessage(can.answer);
+                    }
                 }
             } else if (cursor.getItem() == SlashItems.SOCKET_EXTRACTOR.get()) {
 

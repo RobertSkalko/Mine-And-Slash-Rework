@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.currency.gear;
 import com.robertx22.age_of_exile.database.data.currency.base.GearCurrency;
 import com.robertx22.age_of_exile.database.data.currency.base.GearOutcome;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
+import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
@@ -12,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class OrbSocketAdder extends GearCurrency {
-    
+
     @Override
     public List<GearOutcome> getOutcomes() {
         return Arrays.asList(
@@ -73,7 +74,7 @@ public class OrbSocketAdder extends GearCurrency {
     }
 
     @Override
-    public boolean canBeModified(GearItemData data) {
+    public ExplainedResult canBeModified(GearItemData data) {
         return data.sockets.canAddSocket(data);
     }
 

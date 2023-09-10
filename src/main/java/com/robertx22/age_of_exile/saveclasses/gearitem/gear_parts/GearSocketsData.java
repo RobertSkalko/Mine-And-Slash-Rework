@@ -1,10 +1,12 @@
 package com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts;
 
+import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPartTooltip;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatsContainer;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -34,8 +36,13 @@ public class GearSocketsData implements IStatsContainer, IGearPartTooltip {
         so.removeIf(x -> x.isRune());
     }
 
-    public boolean canAddSocket(GearItemData gear) {
-        return sl < gear.getRarity().max_sockets;
+    public ExplainedResult canAddSocket(GearItemData gear) {
+
+
+        if (sl < gear.getRarity().max_sockets) {
+            return ExplainedResult.success();
+        }
+        return ExplainedResult.failure(Chats.ALREADY_MAX_SOCKETS.locName());
     }
 
     public int getTotalSockets() {
@@ -63,7 +70,7 @@ public class GearSocketsData implements IStatsContainer, IGearPartTooltip {
         try {
             for (int i = 0; i < getSocketedGemsCount(); i++) {
                 SocketData data = so.get(i);
-                
+
                 if (data.isGem() || data.isRune()) {
                     list.addAll(data.GetTooltipString(info, gear, true));
                 }

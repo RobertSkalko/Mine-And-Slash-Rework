@@ -2,16 +2,21 @@ package com.robertx22.age_of_exile.database.data.currency.skill_gem;
 
 import com.robertx22.age_of_exile.database.data.currency.base.SkillGemCurrency;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
+import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import net.minecraft.world.item.ItemStack;
 
 public class OrbOfLinking extends SkillGemCurrency {
 
 
     @Override
-    public boolean canBeModified(SkillGemData data) {
-        return data.links < SkillGemData.MAX_LINKS;
+    public ExplainedResult canBeModified(SkillGemData data) {
+        if (data.links < data.getRarity().max_spell_links) {
+            return ExplainedResult.success();
+        }
+        return ExplainedResult.failure(Chats.ALREADY_MAX_LINKS.locName());
     }
 
     @Override

@@ -3,8 +3,10 @@ package com.robertx22.age_of_exile.database.data.currency.gear;
 import com.robertx22.age_of_exile.database.data.currency.base.GearCurrency;
 import com.robertx22.age_of_exile.database.data.currency.base.GearOutcome;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
+import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.temp.SkillItemTier;
 import net.minecraft.world.item.ItemStack;
@@ -62,8 +64,11 @@ public class SharpeningStone extends GearCurrency {
     }
 
     @Override
-    public boolean canBeModified(GearItemData data) {
-        return !data.data.get(GearItemData.KEYS.USED_SHARPENING_STONE);
+    public ExplainedResult canBeModified(GearItemData data) {
+        if (!data.data.get(GearItemData.KEYS.USED_SHARPENING_STONE)) {
+            return ExplainedResult.success();
+        }
+        return ExplainedResult.failure(Chats.THIS_ITEM_CANT_BE_USED_MORE_THAN_X_TIMES.locName(1));
     }
 
     @Override

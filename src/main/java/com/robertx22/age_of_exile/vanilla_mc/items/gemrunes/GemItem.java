@@ -14,6 +14,7 @@ import com.robertx22.age_of_exile.database.data.currency.base.GearOutcome;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.data.gems.Gem;
+import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
@@ -30,6 +31,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.vanilla_mc.packets.TotemAnimationPacket;
@@ -214,8 +216,11 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocN
             }
 
             @Override
-            public boolean canBeModified(GearItemData data) {
-                return data.getEmptySockets() > 0;
+            public ExplainedResult canBeModified(GearItemData data) {
+                if (data.getEmptySockets() > 0) {
+                    return ExplainedResult.success();
+                }
+                return ExplainedResult.failure(Chats.NEED_EMPTY_SOCKET.locName());
             }
 
 

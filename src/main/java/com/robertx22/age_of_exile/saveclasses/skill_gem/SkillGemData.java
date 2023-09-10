@@ -34,8 +34,7 @@ import java.util.List;
 
 public class SkillGemData implements ICommonDataItem<GearRarity> {
 
-    public static int MAX_LINKS = 5;
-
+    
     @Override
     public void BuildTooltip(TooltipContext ctx) {
 

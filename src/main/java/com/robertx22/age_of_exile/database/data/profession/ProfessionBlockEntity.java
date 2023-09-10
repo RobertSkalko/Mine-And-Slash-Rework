@@ -112,27 +112,27 @@ public class ProfessionBlockEntity extends BlockEntity {
         this.setChanged(); // todo will this cause any problems to have it perma on?
     }
 
-    public Result tryRecipe(Player p, boolean justCheck) {
+    public ExplainedResult tryRecipe(Player p, boolean justCheck) {
 
         int ownerLvl = Load.player(p).professions.getLevel(getProfession().GUID());
 
         var recipe = getCurrentRecipe(level);
 
         if (recipe == null) {
-            return Result.failure(Component.literal("Recipe not found"));
+            return ExplainedResult.failure(Component.literal("Recipe not found"));
         }
         if (!this.inventory.getInventory(OUTPUTS).isEmpty()) {
-            return Result.failure(Component.literal("Output slots are not empty."));
+            return ExplainedResult.failure(Component.literal("Output slots are not empty."));
         }
         if (recipe.getLevelRequirement() > ownerLvl) {
-            return Result.failure(Component.literal("Not high enough level to craft."));
+            return ExplainedResult.failure(Component.literal("Not high enough level to craft."));
         }
 
         if (justCheck) {
             var showstack = recipe.toResultStackForJei();
             showstack.setCount(1);
             this.show.setItem(0, showstack);
-            return Result.success();
+            return ExplainedResult.success();
         }
 
         this.addExp(recipe.getExpReward(ownerLvl, getMats()) * recipe.getTier().levelRange.getMinLevel());
@@ -141,33 +141,13 @@ public class ProfessionBlockEntity extends BlockEntity {
             inventory.addStack(OUTPUTS, stack);
         }
 
+
         recipe.spendMaterials(getMats());
-        return Result.success();
+        return ExplainedResult.success();
 
     }
 
-    public static class Result {
-
-        public boolean can;
-        public Component answer;
-
-        private Result(boolean can, Component answer) {
-            this.can = can;
-            this.answer = answer;
-        }
-
-        public static Result success() {
-            return new Result(true, Component.empty());
-        }
-
-        public static Result failure(Component txt) {
-            return new Result(false, txt);
-        }
-
-
-    }
-
-    public Result trySalvage(Player p, boolean justCheck) {
+    public ExplainedResult trySalvage(Player p, boolean justCheck) {
         int ownerLvl = Load.player(p).professions.getLevel(getProfession().GUID());
 
         if (getProfession().GUID().equals(Professions.SALVAGING)) {
@@ -180,7 +160,7 @@ public class ProfessionBlockEntity extends BlockEntity {
                         if (sal.isSalvagable()) {
 
                             if (justCheck) {
-                                return Result.success();
+                                return ExplainedResult.success();
                             }
                             for (ItemStack res : sal.getSalvageResult(stack)) {
                                 this.inventory.addStack(OUTPUTS, res);
@@ -193,14 +173,14 @@ public class ProfessionBlockEntity extends BlockEntity {
                                 this.inventory.addStack(OUTPUTS, randomDrop);
                             }
 
-                            return Result.success();
+                            return ExplainedResult.success();
                         }
                     }
                 }
 
             }
         }
-        return Result.failure(Component.literal(""));
+        return ExplainedResult.failure(Component.literal(""));
     }
 
     public void addExp(int xp) {

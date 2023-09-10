@@ -3,9 +3,11 @@ package com.robertx22.age_of_exile.database.data.currency.gear;
 import com.robertx22.age_of_exile.database.data.currency.base.GearCurrency;
 import com.robertx22.age_of_exile.database.data.currency.base.GearOutcome;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
+import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.AffixData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.world.item.ItemStack;
@@ -16,7 +18,7 @@ import java.util.List;
 public class OrbAffixUpgrade extends GearCurrency {
     @Override
     public List<GearOutcome> getOutcomes() {
-        
+
         return Arrays.asList(
                 new GearOutcome() {
                     @Override
@@ -79,8 +81,11 @@ public class OrbAffixUpgrade extends GearCurrency {
     }
 
     @Override
-    public boolean canBeModified(GearItemData data) {
-        return data.affixes.getNumberOfAffixes() > 0;
+    public ExplainedResult canBeModified(GearItemData data) {
+        if (data.affixes.getNumberOfAffixes() < 1) {
+            return ExplainedResult.failure(Chats.NEEDS_AN_AFFIX.locName());
+        }
+        return ExplainedResult.success();
     }
 
     @Override

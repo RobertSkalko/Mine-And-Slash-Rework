@@ -7,6 +7,22 @@ import net.minecraft.ChatFormatting;
 import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
+    NOT_FAMILY("Can't be applied to an item of that slot family."),
+    ENCHANT_UPGRADE_RARITY("Enchants must be applied consecutively. A common enchant has to come before an uncommon enchant may be applied."),
+    THIS_ITEM_CANT_BE_USED_MORE_THAN_X_TIMES("This item has already reached maximum uses: (%1$s)"),
+    NOT_GEAR("This is not a gear item."),
+    NOT_CORRECT_TIER_LEVEL("You are trying to use an in item with a different level range than possible."),
+    CANT_GO_ABOVE_MAX_LEVEL("You can't upgrade an item past maximum level: %1$s"),
+    NEEDS_EMPTY_OR_RUNE("Requires an empty socket, or a rune inside the item. If the item has a rune, it will be re-rolled."),
+    NOT_JEWEL("This is not a jewel item."),
+    NEED_EMPTY_SOCKET("Requires an empty socket"),
+    ALREADY_MAX_SOCKETS("Item already has maximum possible sockets."),
+    ALREADY_MAX_LINKS("Item already has maximum possible links."),
+    NEEDS_AN_AFFIX("Item needs an affix."),
+    NOT_SKILLGEM("This is not a skill gem."),
+    BE_UNIQUE("The item must be of unique rarity."),
+    CANT_GO_ABOVE("Can't upgrade past %1$s"),
+
     NEED_PEARL("You need to have at least one %1$s in your inventory to enter."),
     CAUGHT_SOMETHING("You caught something!"),
     TOOL_ADD_STAT("%1$s has been Upgraded to %2$s!"),

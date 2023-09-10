@@ -13,6 +13,7 @@ import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -64,10 +65,16 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipL
 
         try {
 
-            if (this.type != PerkType.STAT) {
+            if (this.type != PerkType.STAT && type != PerkType.MAJOR) {
                 list.add(locName().withStyle(type.format));
             }
-
+            if (type == PerkType.MAJOR) {
+                // to get rid of like 100 lines of lang file
+                if (stats.size() > 0) {
+                    list.add(Words.MAJOR.locName().append(" ").append(this.stats.get(0).getStat().locName()).withStyle(type.format));
+                }
+            }
+            Minecraft.ge
             //   info.statTooltipType = StatTooltipType.NORMAL;
 
             stats.forEach(x -> list.addAll(x.GetTooltipString(info)));

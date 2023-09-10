@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.database.data.currency.base;
 
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.BaseLocRequirement;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
+import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.loot.req.DropRequirement;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -72,15 +73,15 @@ public abstract class Currency implements IWeighted, IAutoLocName, IAutoLocDesc,
         return SlashRef.MODID + ".currency." + GUID();
     }
 
-    public boolean canItemBeModified(LocReqContext context) {
+    public ExplainedResult canItemBeModified(LocReqContext context) {
 
         for (BaseLocRequirement req : requirements()) {
             if (req.isNotAllowed(context)) {
-                return false;
+                return ExplainedResult.failure(Component.literal(""));
             }
 
         }
-        return true;
+        return ExplainedResult.success();
     }
 
     public void addToTooltip(List<Component> tooltip) {
@@ -102,15 +103,13 @@ public abstract class Currency implements IWeighted, IAutoLocName, IAutoLocDesc,
     }
 
     public ResultItem modifyItem(LocReqContext context) {
-        if (context.effect.canItemBeModified(context)) {
+        var can = context.effect.canItemBeModified(context);
+        if (can.can) {
             ItemStack copy = context.stack.copy();
-
             copy = context.effect.internalModifyMethod(context, copy, context.Currency);
-
-
-            return new ResultItem(copy, ModifyResult.SUCCESS);
+            return new ResultItem(copy, ModifyResult.SUCCESS, can);
         } else {
-            return new ResultItem(ItemStack.EMPTY, ModifyResult.NONE);
+            return new ResultItem(ItemStack.EMPTY, ModifyResult.NONE, can);
         }
 
     }

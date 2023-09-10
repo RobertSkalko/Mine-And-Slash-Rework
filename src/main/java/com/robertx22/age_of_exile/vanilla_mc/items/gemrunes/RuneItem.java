@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.database.data.currency.base.GearCurrency;
 import com.robertx22.age_of_exile.database.data.currency.base.GearOutcome;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
+import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
@@ -25,6 +26,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.SocketData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.vanilla_mc.LuckyRandom;
@@ -105,16 +107,21 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
         }
 
         @Override
-        public boolean canBeModified(GearItemData data) {
+        public ExplainedResult canBeModified(GearItemData data) {
 
             Rune rune = ExileDB.Runes().get(RuneItem.this.type.id);
 
             if (rune.getFor(data.GetBaseGearType().family()).isEmpty()) {
-                return false;
+                return ExplainedResult.failure(Chats.NOT_FAMILY.locName());
             }
 
             int runes = (int) data.sockets.getSocketed().stream().filter(x -> x.isRune()).count();
-            return data.getEmptySockets() > 0 || runes == 1;
+            var can = data.getEmptySockets() > 0 || runes == 1;
+
+            if (!can) {
+                return ExplainedResult.failure(Chats.NEEDS_EMPTY_OR_RUNE.locName());
+            }
+            return ExplainedResult.success();
         }
 
         @Override

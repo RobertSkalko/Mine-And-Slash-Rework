@@ -3,8 +3,10 @@ package com.robertx22.age_of_exile.database.data.currency.base;
 import com.robertx22.age_of_exile.database.Weighted;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.BaseLocRequirement;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
+import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.sounds.SoundEvents;
@@ -64,16 +66,19 @@ public abstract class GearCurrency extends Currency {
 
     }
 
-    public boolean canItemBeModified(LocReqContext context) {
-
+    public ExplainedResult canItemBeModified(LocReqContext context) {
         GearItemData data = StackSaving.GEARS.loadFrom(context.stack);
         if (data == null) {
-            return false;
+            return ExplainedResult.failure(Chats.NOT_GEAR.locName());
         }
-        return super.canItemBeModified(context) && canBeModified(data);
+        var can = canBeModified(data);
+        if (!can.can) {
+            return can;
+        }
+        return super.canItemBeModified(context);
     }
 
-    public abstract boolean canBeModified(GearItemData data);
+    public abstract ExplainedResult canBeModified(GearItemData data);
 
 
     @Override
