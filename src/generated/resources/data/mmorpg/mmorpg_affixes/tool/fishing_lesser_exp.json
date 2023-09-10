@@ -1,0 +1,25 @@
+{
+  "type": "tool",
+  "guid": "fishing_lesser_exp",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "tool",
+          "fishing_tool"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 20.0,
+      "min": 5.0,
+      "stat": "fishing_exp_bonus"
+    }
+  ],
+  "weight": 1000
+}

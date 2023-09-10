@@ -3,8 +3,8 @@ This registry is modify-able through datapacks.
 mine
 tent
 nether
-sewer2
 steampunk
+sewer2
 nature
 sewers
 it
@@ -12,8 +12,8 @@ sandstone
 spruce_mansion
 wn
 pyramid
-warped
 stone_brick
+warped
 bastion
 brick
 mossy_brick

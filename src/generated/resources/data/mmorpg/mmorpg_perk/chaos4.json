@@ -5,7 +5,7 @@
   "is_entry": false,
   "stats": [
     {
-      "type": "FLAT",
+      "type": "MORE",
       "scale_to_lvl": false,
       "stat": "all_chaos_damage",
       "v1": 25.0

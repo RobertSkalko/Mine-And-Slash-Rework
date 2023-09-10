@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.event_hooks.ontick;
 
 import com.robertx22.age_of_exile.capability.bases.CapSyncUtil;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
@@ -10,8 +9,6 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.RestoreResourceEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.GearSoulOnInvTick;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.age_of_exile.vanilla_mc.packets.SyncAreaLevelPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import net.minecraft.server.level.ServerPlayer;
@@ -46,14 +43,15 @@ public class OnServerTick {
 
                 Load.player(player).favor.onSecond(player);
 
+                /*
                 if (WorldUtils.isMapWorldClass(player.level())) {
-
                     if (player.tickCount % 40 == 0) {
                         if (player.getInventory().countItem(SlashItems.TP_BACK.get()) < 1) {
                             PlayerUtils.giveItem(SlashItems.TP_BACK.get().getDefaultInstance(), player);
                         }
                     }
                 }
+                 */
 
                 if (Load.Unit(player)
                         .getResources()

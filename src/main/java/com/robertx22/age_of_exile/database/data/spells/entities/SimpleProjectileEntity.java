@@ -409,7 +409,6 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
                         en.entityData.set(CHAINS, chains);
                         var vel = ProjectileCastHelper.positionToVelocity(new MyPosition(position()), new MyPosition(target.getEyePosition()));
                         en.setDeltaMovement(vel.normalize().multiply(speed, speed, speed));
-
                         level().addFreshEntity(en);
 
                     }

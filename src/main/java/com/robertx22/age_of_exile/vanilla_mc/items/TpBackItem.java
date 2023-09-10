@@ -1,27 +1,31 @@
 package com.robertx22.age_of_exile.vanilla_mc.items;
 
+import com.robertx22.age_of_exile.database.data.currency.base.IShapedRecipe;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
+import com.robertx22.age_of_exile.vanilla_mc.items.misc.RarityStoneItem;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class TpBackItem extends AutoItem {
+public class TpBackItem extends AutoItem implements IShapedRecipe {
 
     public TpBackItem() {
         super(new Properties());
-
 
     }
 
@@ -41,7 +45,6 @@ public class TpBackItem extends AutoItem {
             }
         }
         return InteractionResultHolder.pass(p.getItemInHand(pUsedHand));
-
     }
 
     @Override
@@ -54,6 +57,17 @@ public class TpBackItem extends AutoItem {
     @Override
     public String locNameForLangFile() {
         return "Pearl of Home";
+    }
+
+    @Override
+    public ShapedRecipeBuilder getRecipe() {
+        return shaped(this)
+                .define('X', RarityStoneItem.of(IRarity.COMMON_ID))
+                .define('O', Items.IRON_INGOT)
+                .pattern(" O ")
+                .pattern("XXX")
+                .pattern("X X")
+                .unlockedBy("player_level", trigger());
     }
 
     @Override

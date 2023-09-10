@@ -7,6 +7,7 @@ import net.minecraft.ChatFormatting;
 import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
+    NEED_PEARL("You need to have at least one %1$s in your inventory to enter."),
     CAUGHT_SOMETHING("You caught something!"),
     TOOL_ADD_STAT("%1$s has been Upgraded to %2$s!"),
     TOOL_LEVEL_UP("%1$s has reached level %2$s!"),

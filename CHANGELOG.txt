@@ -47,3 +47,5 @@ This should ensure spells with any type of stat scalings can't become too op, bu
 - restorative potions are now made with alchemy
 
 - brought back the beloved master bag instead of the gui backpacks, turns out i completely miscalculated that one, and people hated the gui one
+
+- added back level up gear currency

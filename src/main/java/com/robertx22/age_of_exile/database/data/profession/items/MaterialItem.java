@@ -6,7 +6,6 @@ import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
 import com.robertx22.temp.SkillItemTier;
 
 
-// todo will items have all variations or get their variation via nbt
 public class MaterialItem extends AutoItem implements IGoesToBackpack {
 
     public SkillItemTier tier;

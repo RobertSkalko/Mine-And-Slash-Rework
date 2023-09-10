@@ -20,6 +20,11 @@
         },
         {
           "type": "minecraft:item",
+          "name": "mmorpg:currency/level_up_orb",
+          "weight": 200
+        },
+        {
+          "type": "minecraft:item",
           "name": "mmorpg:currency/orb_of_quality",
           "weight": 1000
         },

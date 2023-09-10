@@ -52,6 +52,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
         public DataKey.IntKey QUALITY = of(new DataKey.IntKey("ql"));
         public DataKey.IntKey ENCHANT_TIMES = of(new DataKey.IntKey("et"));
+        public DataKey.IntKey LEVEL_TIMES = of(new DataKey.IntKey("lt"));
 
         public DataKey.EnumKey<GearQualityType> QUALITY_TYPE = of(new DataKey.EnumKey(GearQualityType.BASE, "qt"));
     }

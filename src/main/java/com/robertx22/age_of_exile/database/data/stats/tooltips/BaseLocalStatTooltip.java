@@ -29,7 +29,7 @@ public class BaseLocalStatTooltip implements IStatTooltipType {
                 .append(info.stat.locName())
                 .append(perc) // todo check
                 .append(": ")
-                .withStyle(format != null ? format : ChatFormatting.WHITE)
+                .withStyle(format != null ? format : ChatFormatting.GOLD)
                 .append(Component.literal((int) info.firstValue + "")
                         .withStyle(ChatFormatting.GRAY)));
 

@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.maps;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.library_of_exile.utils.geometry.Circle2d;
@@ -84,8 +85,6 @@ public class MapBlock extends BaseEntityBlock {
                     if (!p.isCreative()) {
                         p.getItemInHand(pHand).shrink(1);
                     }
-
-
                     return InteractionResult.SUCCESS;
                 }
                 if (p.getItemInHand(pHand).is(SlashItems.MAP_SETTER.get())) {
@@ -97,6 +96,11 @@ public class MapBlock extends BaseEntityBlock {
                 MapBlockEntity be = (MapBlockEntity) level.getBlockEntity(pPos);
 
                 var map = Load.worldData(level).map.getMapFromPlayerID(be.getMapId());
+
+                if (p.getInventory().countItem(SlashItems.TP_BACK.get()) < 1) {
+                    p.sendSystemMessage(Chats.NEED_PEARL.locName(SlashItems.TP_BACK.get().getDefaultInstance().getHoverName()));
+                    return InteractionResult.SUCCESS;
+                }
 
                 map.ifPresent(x -> {
                     x.teleportToMap(p);
