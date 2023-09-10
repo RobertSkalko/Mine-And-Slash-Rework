@@ -1,8 +1,10 @@
 package com.robertx22.age_of_exile.database.registrators;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
+import com.robertx22.age_of_exile.database.data.profession.Profession;
 import com.robertx22.age_of_exile.database.data.profession.all.Professions;
 import com.robertx22.age_of_exile.database.data.profession.stat.DoubleDropChance;
+import com.robertx22.age_of_exile.database.data.profession.stat.ProfCategoryDropStat;
 import com.robertx22.age_of_exile.database.data.profession.stat.ProfExp;
 import com.robertx22.age_of_exile.database.data.profession.stat.TripleDropChance;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
@@ -71,10 +73,13 @@ public class StatsRegister implements ExileRegistryInit {
                         add(new AilmentProcStat(ailment));
                     }
 
-                    for (String p : Professions.ALL) {
-                        add(new DoubleDropChance(p));
-                        add(new TripleDropChance(p));
-                        add(new ProfExp(p));
+                    for (String prof : Professions.ALL) {
+                        for (Profession.DropCategory cat : Profession.DropCategory.values()) {
+                            add(new ProfCategoryDropStat(cat, prof));
+                        }
+                        add(new DoubleDropChance(prof));
+                        add(new TripleDropChance(prof));
+                        add(new ProfExp(prof));
                     }
 
                     add(LeechCapStat.getInstance());

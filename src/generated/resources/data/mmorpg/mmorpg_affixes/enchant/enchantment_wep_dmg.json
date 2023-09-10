@@ -1,0 +1,25 @@
+{
+  "type": "enchant",
+  "guid": "enchantment_wep_dmg",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "enchantment",
+          "weapon_family"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "PERCENT",
+      "max": 25.0,
+      "min": 2.0,
+      "stat": "gear_weapon_damage"
+    }
+  ],
+  "weight": 1000
+}

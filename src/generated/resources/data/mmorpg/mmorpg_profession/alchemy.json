@@ -4,6 +4,7 @@
     "map": {}
   },
   "id": "alchemy",
+  "misc_chance": 5.0,
   "tiered_drops": {},
   "tool_tag": ""
 }

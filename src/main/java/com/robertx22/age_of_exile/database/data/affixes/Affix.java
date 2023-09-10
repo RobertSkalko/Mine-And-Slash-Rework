@@ -17,6 +17,8 @@ public class Affix implements IWeighted, IGUID, IAutoLocName, IhasRequirements,
     public enum Type {
         prefix,
         suffix,
+        enchant,
+        tool,
         jewel,
         dungeon_prefix,
         dungeon_suffix,

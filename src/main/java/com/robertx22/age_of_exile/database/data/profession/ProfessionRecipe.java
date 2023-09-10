@@ -6,7 +6,6 @@ import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
@@ -21,9 +20,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -51,11 +48,22 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
         List<Component> list = new ArrayList<>();
 
         var prof = ExileDB.Professions().get(profession);
-        
+
         list.add(prof.locName().append(" ").append(TooltipUtils.level(getLevelRequirement())));
 
+        /*
+        list.add(Component.empty());
+        for (RecipeDifficulty diff : RecipeDifficulty.values()) {
+            list.add(diff.word.locName().append(" Mastery level: " + getLevelForMasteringDifficulty(diff)).withStyle(diff.color));
+        }         */
+        
         return list;
     }
+
+    public int getLevelForMasteringDifficulty(RecipeDifficulty diff) {
+        return this.getLevelRequirement() + diff.masteryLvls;
+    }
+
 
     public CraftedItemPower getPower() {
         return CraftedItemPower.ofId(power);
@@ -85,18 +93,20 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
     }
 
     public enum RecipeDifficulty {
-        EASY(ChatFormatting.WHITE, Words.Easy, 0, 25),
-        MEDIUM(ChatFormatting.GREEN, Words.Medium, 0.25F, 10),
-        HARD(ChatFormatting.YELLOW, Words.Hard, 0.75F, 5),
-        VERY_HARD(ChatFormatting.RED, Words.VERY_HARD, 1, 0);
+        EASY(ChatFormatting.WHITE, 30, Words.Easy, 0, 25),
+        MEDIUM(ChatFormatting.GREEN, 20, Words.Medium, 0.25F, 10),
+        HARD(ChatFormatting.YELLOW, 10, Words.Hard, 0.75F, 5),
+        VERY_HARD(ChatFormatting.RED, 0, Words.VERY_HARD, 1, 0);
 
         public ChatFormatting color;
         public Words word;
         public float xpMulti;
         public int doubleDropChance;
+        public int masteryLvls;
 
-        RecipeDifficulty(ChatFormatting color, Words word, float xpMulti, int doubleDropChance) {
+        RecipeDifficulty(ChatFormatting color, int mastery, Words word, float xpMulti, int doubleDropChance) {
             this.color = color;
+            this.masteryLvls = mastery;
             this.word = word;
             this.xpMulti = xpMulti;
             this.doubleDropChance = doubleDropChance;
@@ -104,23 +114,12 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
 
         public static RecipeDifficulty get(int skilllvl, int recipelvl) {
 
-            int diff = Math.abs(skilllvl - recipelvl);
-            float diffMulti = LevelUtils.getMaxLevelMultiplier(diff);
-
-            if (diffMulti < 0.1F) {
+            if (recipelvl > skilllvl) {
                 return VERY_HARD;
+            } else {
+                int diff = Math.abs(skilllvl - recipelvl);
+                return Arrays.stream(RecipeDifficulty.values()).filter(x -> x.masteryLvls >= diff).max(Comparator.comparing(x -> x.doubleDropChance)).orElse(VERY_HARD);
             }
-            if (diffMulti < 0.2F) {
-                return HARD;
-            }
-            if (diffMulti < 0.3F) {
-                return MEDIUM;
-            }
-            if (diffMulti < 0.5F) {
-                return EASY;
-            }
-
-            return VERY_HARD;
         }
     }
 

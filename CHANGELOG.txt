@@ -11,8 +11,7 @@ And use them to craft with:
 When you mine ores you will gain mining exp and sometimes find common or rare drops, these drops will be used in crafting professions.
 Profession drops are split into:
 - Core tiered drop, you get these often and they are the main drop, useful in many ways
-- Misc common drop, these sometimes drop, but are random
-- Misc rare drop, same but way rarer.
+- Greater, medium and lesser drops. These are rarer drops and usually used for better recipes
 
 * Gathering tools will also level up and gain random bonuses
 

@@ -4,6 +4,7 @@
     "map": {}
   },
   "id": "fishing",
+  "misc_chance": 5.0,
   "tiered_drops": {
     "TIER0": [
       {

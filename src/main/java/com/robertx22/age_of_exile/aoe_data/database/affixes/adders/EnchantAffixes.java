@@ -17,7 +17,7 @@ public class EnchantAffixes implements ExileRegistryInit {
                 .stat(GearDamage.getInstance().mod(2, 25).percent())
                 .includesTags(BaseGearType.SlotTag.enchantment, BaseGearType.SlotTag.weapon_family)
                 .Weight(1000)
-                .Suffix()
+                .Enchant()
                 .Build();
 
 
@@ -25,7 +25,7 @@ public class EnchantAffixes implements ExileRegistryInit {
                 .stat(GearDefense.getInstance().mod(2, 25).percent())
                 .includesTags(BaseGearType.SlotTag.enchantment, BaseGearType.SlotTag.armor_family)
                 .Weight(1000)
-                .Suffix()
+                .Enchant()
                 .Build();
 
 
@@ -33,7 +33,7 @@ public class EnchantAffixes implements ExileRegistryInit {
                 .stat(GearDefense.getInstance().mod(2, 25).percent())
                 .includesTags(BaseGearType.SlotTag.enchantment, BaseGearType.SlotTag.offhand_family)
                 .Weight(1000)
-                .Suffix()
+                .Enchant()
                 .Build();
 
 
@@ -42,19 +42,21 @@ public class EnchantAffixes implements ExileRegistryInit {
                 .stat(DatapackStats.INT.mod(1, 10).percent())
                 .includesTags(BaseGearType.SlotTag.enchantment, BaseGearType.SlotTag.jewelry_family)
                 .Weight(1000)
-                .Suffix()
+                .Enchant()
                 .Build();
+        
         AffixBuilder.Normal(PREFIX + "jewerly_dex")
                 .stat(DatapackStats.DEX.mod(1, 10).percent())
                 .includesTags(BaseGearType.SlotTag.enchantment, BaseGearType.SlotTag.jewelry_family)
                 .Weight(1000)
-                .Suffix()
+                .Enchant()
                 .Build();
+
         AffixBuilder.Normal(PREFIX + "jewerly_str")
                 .stat(DatapackStats.STR.mod(1, 10).percent())
                 .includesTags(BaseGearType.SlotTag.enchantment, BaseGearType.SlotTag.jewelry_family)
                 .Weight(1000)
-                .Suffix()
+                .Enchant()
                 .Build();
 
     }

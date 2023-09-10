@@ -34,15 +34,15 @@ public class SummonerPerks implements ExileRegistryInit {
         PerkBuilder.ascPoint(SUMMON_3, new OptScaleExactStat(20, Stats.COOLDOWN_REDUCTION.get(), ModType.FLAT));
         PerkBuilder.ascPoint(SUMMON_4, new OptScaleExactStat(25, Stats.SUMMON_DAMAGE.get(), ModType.MORE));
 
-        PerkBuilder.ascPoint(TOTEM_1, new OptScaleExactStat(25, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.totem), ModType.FLAT));
+        PerkBuilder.ascPoint(TOTEM_1, new OptScaleExactStat(30, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.totem), ModType.FLAT));
         PerkBuilder.ascPoint(TOTEM_2, new OptScaleExactStat(20, Stats.COOLDOWN_REDUCTION.get(), ModType.FLAT));
         PerkBuilder.ascPoint(TOTEM_3, new OptScaleExactStat(20, Stats.TOTEM_DURATION.get(), ModType.FLAT));
         PerkBuilder.ascPoint(TOTEM_4, new OptScaleExactStat(25, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.totem), ModType.MORE));
 
-        PerkBuilder.ascPoint(GOLEM_1, new OptScaleExactStat(25, Stats.GOLEM_DAMAGE.get(), ModType.FLAT));
+        PerkBuilder.ascPoint(GOLEM_1, new OptScaleExactStat(30, Stats.GOLEM_DAMAGE.get(), ModType.FLAT));
         PerkBuilder.ascPoint(GOLEM_2, new OptScaleExactStat(1, Stats.MAX_SUMMON_CAPACITY.get(), ModType.FLAT));
         PerkBuilder.ascPoint(GOLEM_3, new OptScaleExactStat(50, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTag.golem), ModType.FLAT));
-        PerkBuilder.ascPoint(GOLEM_4, new OptScaleExactStat(25, Stats.GOLEM_DAMAGE.get(), ModType.MORE));
+        PerkBuilder.ascPoint(GOLEM_4, new OptScaleExactStat(30, Stats.GOLEM_DAMAGE.get(), ModType.MORE));
 
     }
 }

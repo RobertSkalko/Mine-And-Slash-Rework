@@ -6,6 +6,7 @@ import com.robertx22.library_of_exile.registry.ExileRegistry;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public abstract class LootChest implements ExileRegistry<LootChest> {
     }
 
     public boolean isLocked() {
-        return getKey() != null;
+        return getKey() != null && getKey() != Items.AIR;
     }
 
     public abstract Item getChestItem(LootChestData data);

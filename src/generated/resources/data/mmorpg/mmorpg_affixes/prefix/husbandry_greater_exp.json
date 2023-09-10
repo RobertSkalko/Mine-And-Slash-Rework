@@ -1,0 +1,25 @@
+{
+  "type": "prefix",
+  "guid": "husbandry_greater_exp",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "tool",
+          "husbandry_tool"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 20.0,
+      "min": 5.0,
+      "stat": "husbandry_exp_bonus"
+    }
+  ],
+  "weight": 1000
+}

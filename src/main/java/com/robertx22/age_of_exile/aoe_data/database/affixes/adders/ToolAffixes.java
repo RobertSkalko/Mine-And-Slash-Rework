@@ -3,8 +3,10 @@ package com.robertx22.age_of_exile.aoe_data.database.affixes.adders;
 import com.robertx22.age_of_exile.aoe_data.database.affixes.AffixBuilder;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
+import com.robertx22.age_of_exile.database.data.profession.Profession;
 import com.robertx22.age_of_exile.database.data.profession.all.Professions;
 import com.robertx22.age_of_exile.database.data.profession.stat.DoubleDropChance;
+import com.robertx22.age_of_exile.database.data.profession.stat.ProfCategoryDropStat;
 import com.robertx22.age_of_exile.database.data.profession.stat.ProfExp;
 import com.robertx22.age_of_exile.database.data.profession.stat.TripleDropChance;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
@@ -30,22 +32,32 @@ public class ToolAffixes implements ExileRegistryInit {
                     .Named("")
                     .stats(new StatMod(1, 10, new DoubleDropChance(prof), ModType.FLAT))
                     .includesTags(BaseGearType.SlotTag.tool, map.get(prof))
-                    .Prefix()
+                    .Tool()
                     .Build();
 
             AffixBuilder.Normal(prof + "_triple")
                     .Named("")
                     .stats(new StatMod(1, 10, new TripleDropChance(prof), ModType.FLAT))
                     .includesTags(BaseGearType.SlotTag.tool, map.get(prof))
-                    .Prefix()
+                    .Tool()
                     .Build();
 
             AffixBuilder.Normal(prof + "_exp")
                     .Named("")
                     .stats(new StatMod(3, 15, new ProfExp(prof), ModType.FLAT))
                     .includesTags(BaseGearType.SlotTag.tool, map.get(prof))
-                    .Prefix()
+                    .Tool()
                     .Build();
+
+            for (Profession.DropCategory cat : Profession.DropCategory.values()) {
+                AffixBuilder.Normal(prof + "_" + cat.id + "_exp")
+                        .Named("")
+                        .stats(new StatMod(5, 20, new ProfCategoryDropStat(cat, prof), ModType.FLAT))
+                        .includesTags(BaseGearType.SlotTag.tool, map.get(prof))
+                        .Tool()
+                        .Build();
+            }
+
         }
     }
 }

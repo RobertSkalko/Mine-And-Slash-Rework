@@ -4,6 +4,7 @@
     "map": {}
   },
   "id": "enchanting",
+  "misc_chance": 5.0,
   "tiered_drops": {},
   "tool_tag": ""
 }

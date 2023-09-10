@@ -6,7 +6,9 @@ import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.*;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -32,6 +34,8 @@ public class ProfessionBlock extends BaseEntityBlock implements WorldlyContainer
         super(Properties.copy(Blocks.CRAFTING_TABLE).noOcclusion());
         this.profession = profession;
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+
+
     }
 
     @Override
@@ -52,6 +56,22 @@ public class ProfessionBlock extends BaseEntityBlock implements WorldlyContainer
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(FACING);
+    }
+
+    @Override
+    public void onRemove(BlockState pState, Level level, BlockPos p, BlockState pNewState, boolean pIsMoving) {
+        if (!pState.is(pNewState.getBlock())) {
+            BlockEntity blockentity = level.getBlockEntity(p);
+            if (blockentity instanceof ProfessionBlockEntity be) {
+                if (level instanceof ServerLevel) {
+                    Containers.dropContents(level, p, be.inventory);
+                    ItemEntity en = new ItemEntity(level, p.getX(), p.getY(), p.getZ(), asItem().getDefaultInstance());
+                    level.addFreshEntity(en);
+                }
+                level.updateNeighbourForOutputSignal(p, this);
+            }
+        }
+        super.onRemove(pState, level, p, pNewState, pIsMoving);
     }
 
     // add rotation

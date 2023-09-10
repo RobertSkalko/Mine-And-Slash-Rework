@@ -1,24 +1,24 @@
 {
-  "type": "suffix",
-  "guid": "enchantment_wep_dmg",
+  "type": "prefix",
+  "guid": "fishing_lesser_exp",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [
       {
         "excluded": [],
         "included": [
-          "enchantment",
-          "weapon_family"
+          "tool",
+          "fishing_tool"
         ]
       }
     ]
   },
   "stats": [
     {
-      "type": "PERCENT",
-      "max": 25.0,
-      "min": 2.0,
-      "stat": "gear_weapon_damage"
+      "type": "FLAT",
+      "max": 20.0,
+      "min": 5.0,
+      "stat": "fishing_exp_bonus"
     }
   ],
   "weight": 1000

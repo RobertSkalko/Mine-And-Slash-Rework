@@ -44,7 +44,7 @@ public class PlayerProfessionsData {
         var rested = Load.player(p).rested_xp;
 
         rested.onGiveProfExp(exp);
-        
+
         if (rested.bonusProfExp > 0) {
             int added = MathHelper.clamp(rested.bonusProfExp, 0, exp);
             rested.bonusProfExp -= added;
@@ -120,6 +120,11 @@ public class PlayerProfessionsData {
 
         public void checkDayPass(ServerPlayer player) {
 
+
+            // todo it seems this can be cheesed by going to another dimension..
+            if (true) {
+                return;
+            }
 
             if (!day) {
                 boolean is = player.level().isDay();

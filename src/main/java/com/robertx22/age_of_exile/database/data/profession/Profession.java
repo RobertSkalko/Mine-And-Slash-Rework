@@ -2,8 +2,11 @@ package com.robertx22.age_of_exile.database.data.profession;
 
 import com.robertx22.age_of_exile.database.Weighted;
 import com.robertx22.age_of_exile.database.data.profession.stat.DoubleDropChance;
+import com.robertx22.age_of_exile.database.data.profession.stat.ProfCategoryDropStat;
 import com.robertx22.age_of_exile.database.data.profession.stat.TripleDropChance;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
+import com.robertx22.age_of_exile.loot.LootInfo;
+import com.robertx22.age_of_exile.loot.blueprints.LootChestBlueprint;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -39,6 +42,8 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
 
     public String tool_tag = "";
 
+    public float misc_chance = 5;
+
     public ExpSources exp_sources = new ExpSources();
 
     // todo add separate for tiered ones, these will be for all tiers
@@ -48,8 +53,14 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
     public List<ChancedDrop> chance_drops = new ArrayList<>();
 
 
-    public List<ItemStack> getAllDrops(Player p, int lvl, int recipelvl, float dropChanceMulti) {
+    public ItemStack randomFishingLootCrate(int lvl) {
+        LootChestBlueprint b = new LootChestBlueprint(LootInfo.ofLevel(lvl));
+        b.useRarityKey = true;
+        return b.createStack();
+    }
 
+
+    public List<ItemStack> getAllDrops(Player p, int lvl, int recipelvl, float dropChanceMulti) {
 
         List<ItemStack> list = new ArrayList<>();
 
@@ -70,8 +81,9 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
         for (ChancedDrop chancedDrop : ALLDROPS) {
 
             float dailyMulti = Load.player(p).professions.daily_drop_multis.getMulti(this, chancedDrop.type);
+            float statMuti = Load.Unit(p).getUnit().getCalculatedStat(new ProfCategoryDropStat(chancedDrop.type, GUID())).getMultiplier();
 
-            float chance = dropChanceMulti * chancedDrop.chance;
+            float chance = dropChanceMulti * chancedDrop.chance * statMuti * dailyMulti;
 
             if (RandomUtils.roll(chance)) {
                 Weighted<ProfessionDrop> drop = RandomUtils.weightedRandom(chancedDrop.drops.stream().filter(x -> lvlmulti >= x.min_lvl).map(x -> x.toWeighted(p, this)).collect(Collectors.toList()));
@@ -102,11 +114,19 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
     }
 
     public static enum DropCategory {
-        MAIN,
-        LESSER,
-        MEDIUM,
-        GREATER,
-        MISC;
+        MAIN("core", "Core"),
+        LESSER("lesser", "Common"),
+        MEDIUM("medium", "Rare"),
+        GREATER("greater", "Epic"),
+        MISC("misc", "Misc");
+
+        public String id;
+        public String locname;
+
+        DropCategory(String id, String locname) {
+            this.id = id;
+            this.locname = locname;
+        }
     }
 
     public static class ChancedDrop {
@@ -164,7 +184,7 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
     public String locNameForLangFile() {
         if (id.contains("_")) {
             var list = Arrays.stream(StringUTIL.split(id, "_")).map(x -> StringUTIL.capitalise(x)).iterator();
-            StringUTIL.join(list, " ");
+            return StringUTIL.join(list, " ");
         }
         return StringUTIL.capitalise(id);
     }
@@ -174,14 +194,21 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
     }
 
     public List<ItemStack> onFish(Player p) {
-        var tier = SkillItemTier.fromLevel(Load.player(p).professions.getLevel(this.GUID()));
+        int lvl = Load.player(p).professions.getLevel(this.GUID());
+        var tier = SkillItemTier.fromLevel(lvl);
 
         ExpSources.ExpData data = this.exp_sources.exp(250, tier.tier);
 
         if (data.exp > 0) {
             data.giveExp(p, this);
-            float chance = data.getLootChanceMulti(p, this) + 5555;
-            return this.getAllDrops(p, Load.player(p).professions.getLevel(this.GUID()), data.getLevelOfMastery(), chance);
+            float chance = data.getLootChanceMulti(p, this);
+            var list = this.getAllDrops(p, Load.player(p).professions.getLevel(this.GUID()), data.getLevelOfMastery(), chance);
+
+            if (RandomUtils.roll(misc_chance)) {
+                list.add(this.randomFishingLootCrate(lvl));
+            }
+
+            return list;
         }
 
         return Arrays.asList();

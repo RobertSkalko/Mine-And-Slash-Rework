@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.saveclasses.prof_tool;
 
+import com.robertx22.age_of_exile.database.data.affixes.Affix;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.profession.Profession;
@@ -96,7 +97,7 @@ public class ProfessionToolData implements ITooltip {
         ToolAffix data = new ToolAffix();
         data.rar = rar.GUID();
         data.p = rar.stat_percents.random();
-        data.id = ExileDB.Affixes().getFilterWrapped(x -> x.getAllTagReq().contains(getProfession().tool_tag) && x.getAllTagReq().contains(BaseGearType.SlotTag.tool.getTagId())).random().GUID();
+        data.id = ExileDB.Affixes().getFilterWrapped(x -> x.type == Affix.Type.tool && x.getAllTagReq().contains(getProfession().tool_tag) && x.getAllTagReq().contains(BaseGearType.SlotTag.tool.getTagId())).random().GUID();
 
         this.affixes.add(data);
     }

@@ -84,7 +84,7 @@ public class CraftedEnchantItem extends AutoItem implements IItemAsCurrency, ICr
 
                                 // todo test this
                                 Affix affix = ExileDB.Affixes().getFilterWrapped(x -> {
-                                    return x.requirements.satisfiesAllRequirements(new GearRequestedFor(gear)) && x.getAllTagReq().contains(BaseGearType.SlotTag.enchantment.getTagId());
+                                    return x.type == Affix.Type.enchant && x.requirements.satisfiesAllRequirements(new GearRequestedFor(gear)) && x.getAllTagReq().contains(BaseGearType.SlotTag.enchantment.getTagId());
                                 }).random();
 
                                 en.en = affix.GUID();

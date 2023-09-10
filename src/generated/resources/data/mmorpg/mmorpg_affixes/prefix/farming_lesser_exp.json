@@ -1,24 +1,24 @@
 {
-  "type": "suffix",
-  "guid": "enchantment_gear_def",
+  "type": "prefix",
+  "guid": "farming_lesser_exp",
   "only_one_per_item": true,
   "requirements": {
     "tag_requirements": [
       {
         "excluded": [],
         "included": [
-          "enchantment",
-          "armor_family"
+          "tool",
+          "farming_tool"
         ]
       }
     ]
   },
   "stats": [
     {
-      "type": "PERCENT",
-      "max": 25.0,
-      "min": 2.0,
-      "stat": "gear_defense"
+      "type": "FLAT",
+      "max": 20.0,
+      "min": 5.0,
+      "stat": "farming_exp_bonus"
     }
   ],
   "weight": 1000

@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.mmorpg.registers.common.items;
 
 import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChestItem;
+import com.robertx22.age_of_exile.database.data.profession.items.RarityKeyItem;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
@@ -17,7 +18,7 @@ public class RarityItems {
     public static HashMap<String, RegObj<SoulMakerItem>> SOUL_EXTRACTORS = new HashMap<>();
     public static HashMap<String, RegObj<SlashPotionItem>> HEALTH_POTIONS = new HashMap<>();
     public static HashMap<String, RegObj<SlashPotionItem>> RESOURCE_POTIONS = new HashMap<>();
-    // public static HashMap<String, RegObj<DeathTicketItem>> DEATH_TICKETS = new HashMap<>();
+    public static HashMap<String, RegObj<RarityKeyItem>> RARITY_KEYS = new HashMap<>();
 
     public static void init() {
 
@@ -32,7 +33,7 @@ public class RarityItems {
 
             HEALTH_POTIONS.put(rar, Def.item(() -> new SlashPotionItem(rar, SlashPotionItem.Type.HP), "potion/health/" + finalTier));
             RESOURCE_POTIONS.put(rar, Def.item(() -> new SlashPotionItem(rar, SlashPotionItem.Type.MANA), "potion/resource/" + finalTier));
-            // DEATH_TICKETS.put(rar, Def.item(() -> new DeathTicketItem(rar), "death_ticket/" + finalTier));
+            RARITY_KEYS.put(rar, Def.item(() -> new RarityKeyItem(rar, "Key"), "keys/" + finalTier));
 
             tier++;
         }

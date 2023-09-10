@@ -96,8 +96,18 @@ public class AffixBuilder {
         return this;
     }
 
+    public AffixBuilder Tool() {
+        type = Affix.Type.tool;
+        return this;
+    }
+
     public AffixBuilder Suffix() {
         type = Affix.Type.suffix;
+        return this;
+    }
+
+    public AffixBuilder Enchant() {
+        type = Affix.Type.enchant;
         return this;
     }
 

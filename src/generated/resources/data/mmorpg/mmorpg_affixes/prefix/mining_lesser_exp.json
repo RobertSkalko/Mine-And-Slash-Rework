@@ -1,0 +1,25 @@
+{
+  "type": "prefix",
+  "guid": "mining_lesser_exp",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "tool",
+          "mining_tool"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 20.0,
+      "min": 5.0,
+      "stat": "mining_exp_bonus"
+    }
+  ],
+  "weight": 1000
+}

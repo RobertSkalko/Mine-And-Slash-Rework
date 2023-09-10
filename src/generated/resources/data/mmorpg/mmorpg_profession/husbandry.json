@@ -1,17 +1,17 @@
 {
   "chance_drops": [
     {
-      "type": "GREATER",
-      "chance": 0.5,
+      "type": "MEDIUM",
+      "chance": 2.5,
       "drops": [
         {
-          "item_id": "mmorpg:rare_mats/husbandry/greater",
+          "item_id": "mmorpg:rare_mats/husbandry/medium",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
         },
         {
-          "item_id": "mmorpg:rare_mats/husbandry/medium",
+          "item_id": "mmorpg:rare_mats/husbandry/greater",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
@@ -25,17 +25,17 @@
       ]
     },
     {
-      "type": "MEDIUM",
-      "chance": 2.5,
+      "type": "GREATER",
+      "chance": 0.5,
       "drops": [
         {
-          "item_id": "mmorpg:rare_mats/husbandry/greater",
+          "item_id": "mmorpg:rare_mats/husbandry/medium",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
         },
         {
-          "item_id": "mmorpg:rare_mats/husbandry/medium",
+          "item_id": "mmorpg:rare_mats/husbandry/greater",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
@@ -53,13 +53,13 @@
       "chance": 10.0,
       "drops": [
         {
-          "item_id": "mmorpg:rare_mats/husbandry/greater",
+          "item_id": "mmorpg:rare_mats/husbandry/medium",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
         },
         {
-          "item_id": "mmorpg:rare_mats/husbandry/medium",
+          "item_id": "mmorpg:rare_mats/husbandry/greater",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
@@ -77,6 +77,7 @@
     "map": {}
   },
   "id": "husbandry",
+  "misc_chance": 5.0,
   "tiered_drops": {
     "TIER0": [
       {

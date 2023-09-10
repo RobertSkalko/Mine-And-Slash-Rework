@@ -1,5 +1,5 @@
 {
-  "type": "suffix",
+  "type": "enchant",
   "guid": "enchantment_jewerly_dex",
   "only_one_per_item": true,
   "requirements": {

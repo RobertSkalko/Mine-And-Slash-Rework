@@ -46,7 +46,7 @@ public class WarlockPerks implements ExileRegistryInit {
         PerkBuilder.ascPoint(CHAOS_1, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Chaos), ModType.FLAT));
         PerkBuilder.ascPoint(CHAOS_2, new OptScaleExactStat(15, new ElementalPenetration(Elements.Chaos), ModType.FLAT));
         PerkBuilder.ascPoint(CHAOS_3, new OptScaleExactStat(50, new ElementalResist(Elements.Chaos), ModType.FLAT));
-        PerkBuilder.ascPoint(CHAOS_4, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Chaos), ModType.FLAT));
+        PerkBuilder.ascPoint(CHAOS_4, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Chaos), ModType.MORE));
 
         PerkBuilder.ascPoint(CURSE_1, new OptScaleExactStat(30, Stats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.curse), ModType.FLAT));
         PerkBuilder.ascPoint(CURSE_2, new OptScaleExactStat(50, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTag.curse), ModType.FLAT));

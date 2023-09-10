@@ -11,7 +11,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 public class GearLootChest extends LootChest {
-
     @Override
     public ItemStack generateOne(LootChestData data) {
         GearBlueprint b = new GearBlueprint(LootInfo.ofLevel(data.lvl));

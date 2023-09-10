@@ -1,0 +1,25 @@
+{
+  "type": "enchant",
+  "guid": "enchantment_gear_def",
+  "only_one_per_item": true,
+  "requirements": {
+    "tag_requirements": [
+      {
+        "excluded": [],
+        "included": [
+          "enchantment",
+          "armor_family"
+        ]
+      }
+    ]
+  },
+  "stats": [
+    {
+      "type": "PERCENT",
+      "max": 25.0,
+      "min": 2.0,
+      "stat": "gear_defense"
+    }
+  ],
+  "weight": 1000
+}

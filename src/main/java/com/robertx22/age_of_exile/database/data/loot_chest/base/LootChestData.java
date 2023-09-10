@@ -8,7 +8,9 @@ import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -22,7 +24,7 @@ public class LootChestData implements ICommonDataItem<GearRarity> {
     public String rar = "";
     public int lvl = 1;
     public String id = "";
-
+    public String key = "";
 
     public LootChest getLootChest() {
         return ExileDB.LootChests().get(id);
@@ -37,11 +39,21 @@ public class LootChestData implements ICommonDataItem<GearRarity> {
         return ExileDB.GearRarities().get(rar);
     }
 
+    public Item getDataKey() {
+        if (key.isEmpty()) {
+            return null;
+        }
+        return VanillaUTIL.REGISTRY.items().get(new ResourceLocation(key));
+    }
+
     public boolean isLocked() {
-        return getLootChest().getKey() != null;
+        return getLootChest().getKey() != null || getDataKey() != null;
     }
 
     public Item getKeyItem() {
+        if (getDataKey() != null) {
+            return getDataKey();
+        }
         return getLootChest().getKey();
     }
 
@@ -84,8 +96,8 @@ public class LootChestData implements ICommonDataItem<GearRarity> {
 
         tip.add(Component.literal("Right Click to Open Loot Chest!"));
 
-        if (getLootChest().isLocked()) {
-            tip.add(Component.literal("Needs Key: ").append(getLootChest().getKey().getDefaultInstance().getHoverName()));
+        if (isLocked()) {
+            tip.add(Component.literal("Needs Key: ").append(getKeyItem().getDefaultInstance().getHoverName()));
         }
 
         tip.add(Component.empty());

@@ -4,7 +4,9 @@ import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChestData;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.bases.LootChestPart;
+import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.world.item.ItemStack;
 
 public class LootChestBlueprint extends RarityItemBlueprint implements ITypeBlueprint {
@@ -15,6 +17,8 @@ public class LootChestBlueprint extends RarityItemBlueprint implements ITypeBlue
     }
 
     public LootChestPart type = new LootChestPart(this);
+
+    public boolean useRarityKey = false;
 
     @Override
     public ItemStack generate() {
@@ -38,6 +42,10 @@ public class LootChestBlueprint extends RarityItemBlueprint implements ITypeBlue
         data.lvl = info.level;
         data.rar = this.rarity.get().GUID();
         data.id = this.type.get().GUID();
+
+        if (useRarityKey) {
+            data.key = VanillaUTIL.REGISTRY.items().getKey(RarityItems.RARITY_KEYS.get(data.rar).get()).toString();
+        }
 
         return data;
     }
