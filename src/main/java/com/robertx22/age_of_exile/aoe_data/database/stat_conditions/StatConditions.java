@@ -9,10 +9,7 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.ThreatGenType;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.condition.*;
-import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
-import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
-import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
-import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
+import com.robertx22.age_of_exile.uncommon.enumclasses.*;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
@@ -63,6 +60,11 @@ public class StatConditions implements ExileRegistryInit {
     public static DataHolder<PlayStyle, StatCondition> IS_STYLE = new DataHolder<>(
             PlayStyle.values()
             , x -> new StringMatchesCondition(EventData.STYLE, x.id));
+
+    // todo why arent these called?
+    public static DataHolder<AttackStyle, StatCondition> IS_ATTACK_STYLE = new DataHolder<>(
+            AttackStyle.values()
+            , x -> new StringMatchesCondition(EventData.ATTACK_STYLE, x.id));
 
     public static DataHolder<SummonType, StatCondition> IS_SUMMON_TYPE = new DataHolder<>(
             SummonType.values()
@@ -118,6 +120,7 @@ public class StatConditions implements ExileRegistryInit {
     public void registerAll() {
 
         ATTACK_TYPE_MATCHES.addToSerializables();
+        IS_ATTACK_STYLE.addToSerializables();
         IS_TARGET_LOW.addToSerializables();
         IS_TARGET_LOW_MAGIC_SHIELD.addToSerializables();
         IS_NOT_SUMMON_ATTACK.addToSerializables();

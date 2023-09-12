@@ -1,22 +1,23 @@
 {
+  "type": "prefix",
   "format": "AQUA",
   "icon": "",
   "id": "water_mob_affix",
   "stats": [
     {
-      "type": "flat",
+      "type": "FLAT",
       "max": 75.0,
       "min": 75.0,
       "stat": "phys_to_water"
     },
     {
-      "type": "flat",
+      "type": "FLAT",
       "max": 1.0,
       "min": 1.0,
       "stat": "water_weapon_damage"
     },
     {
-      "type": "flat",
+      "type": "FLAT",
       "max": 10.0,
       "min": 10.0,
       "stat": "extra_mob_drops"

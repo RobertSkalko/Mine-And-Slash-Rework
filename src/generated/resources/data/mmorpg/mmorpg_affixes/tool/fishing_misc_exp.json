@@ -18,7 +18,7 @@
       "type": "FLAT",
       "max": 20.0,
       "min": 5.0,
-      "stat": "fishing_exp_bonus"
+      "stat": "fishing_misc_drop_bonus"
     }
   ],
   "weight": 1000

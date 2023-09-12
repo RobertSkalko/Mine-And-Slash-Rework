@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.loot.blueprints.LootChestBlueprint;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
@@ -61,6 +62,13 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
 
 
     public List<ItemStack> getAllDrops(Player p, int lvl, int recipelvl, float dropChanceMulti) {
+
+        var data = StackSaving.TOOL.loadFrom(p.getMainHandItem());
+        if (data != null) {
+            if (data.force_lvl > -1) {
+                lvl = data.force_lvl;
+            }
+        }
 
         List<ItemStack> list = new ArrayList<>();
 

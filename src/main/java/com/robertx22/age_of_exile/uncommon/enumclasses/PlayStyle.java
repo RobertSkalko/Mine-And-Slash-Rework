@@ -40,6 +40,13 @@ public enum PlayStyle {
         }
     };
 
+    public AttackStyle getAttackStyle() {
+        if (this == INT) {
+            return AttackStyle.SPELL;
+        }
+        return AttackStyle.ATTACK;
+    }
+
 
     public String id;
     public String name;

@@ -9,8 +9,11 @@ import java.util.Locale;
 public enum Words implements IAutoLocName {
     PROFESSIONS("Professions"),
     POTION("Potion"),
+    SUPPGEM("Support Gem"),
+    AURA("Aura"),
     MAJOR("Major"),
     MEAL("Meal"),
+    WIKI("Wiki"),
     LESSER("Lesser"),
     MEDIUM("Medium"),
     GREATER("Greater"),

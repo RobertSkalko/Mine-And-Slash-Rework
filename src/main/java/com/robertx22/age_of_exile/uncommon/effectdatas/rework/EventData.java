@@ -34,6 +34,7 @@ public class EventData {
     public static String IS_ATTACK_FULLY_CHARGED = "is_charged_atk";
     public static String ATTACK_COOLDOWN = "attack_cooldown";
     public static String STYLE = "style";
+    public static String ATTACK_STYLE = "attack_style";
     public static String THREAT_GEN_TYPE = "threat_gen_type";
     public static String EXILE_EFFECT = "exile_effect";
     public static String GIVE_OR_TAKE = "give_or_take";

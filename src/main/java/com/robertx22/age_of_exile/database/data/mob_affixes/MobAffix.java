@@ -1,8 +1,7 @@
 package com.robertx22.age_of_exile.database.data.mob_affixes;
 
-import com.google.gson.JsonObject;
-import com.robertx22.age_of_exile.aoe_data.datapacks.JsonUtils;
 import com.robertx22.age_of_exile.database.data.StatMod;
+import com.robertx22.age_of_exile.database.data.affixes.Affix;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
@@ -12,8 +11,8 @@ import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
-import com.robertx22.library_of_exile.registry.serialization.ISerializable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -21,8 +20,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MobAffix implements JsonExileRegistry<MobAffix>, ISerializable<MobAffix>, IAutoLocName, IStatCtx {
+public class MobAffix implements JsonExileRegistry<MobAffix>, IAutoGson<MobAffix>, IAutoLocName, IStatCtx {
 
+    public Affix.Type type = Affix.Type.prefix;
     List<StatMod> stats = new ArrayList<>();
     String id = "";
     int weight = 1000;
@@ -30,8 +30,9 @@ public class MobAffix implements JsonExileRegistry<MobAffix>, ISerializable<MobA
     public ChatFormatting format;
     transient String locName;
 
-    public MobAffix(String id, String locName, ChatFormatting format) {
+    public MobAffix(String id, String locName, ChatFormatting format, Affix.Type type) {
         this.id = id;
+        this.type = type;
         this.locName = locName;
         this.format = format;
     }
@@ -44,43 +45,6 @@ public class MobAffix implements JsonExileRegistry<MobAffix>, ISerializable<MobA
     public MobAffix icon(String icon) {
         this.icon = icon;
         return this;
-    }
-
-    @Override
-    public JsonObject toJson() {
-        JsonObject json = getDefaultJson();
-
-        json.addProperty("format", format.name());
-
-        json.addProperty("icon", icon);
-
-        if (stats != null) {
-            JsonUtils.addStats(stats, json, "stats");
-        }
-
-        return json;
-    }
-
-    @Override
-    public MobAffix fromJson(JsonObject json) {
-
-        MobAffix affix = new MobAffix(
-                getGUIDFromJson(json),
-                "",
-                ChatFormatting.valueOf(json.get("format")
-                        .getAsString()));
-
-        try {
-            affix.stats = JsonUtils.getStats(json, "stats");
-            affix.icon = json.get("icon")
-                    .getAsString();
-            affix.weight = json.get("weight")
-                    .getAsInt();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return affix;
     }
 
     public MobAffix setWeight(int weight) {
@@ -130,4 +94,8 @@ public class MobAffix implements JsonExileRegistry<MobAffix>, ISerializable<MobA
         return Arrays.asList(new SimpleStatCtx(StatContext.StatCtxType.MOB_AFFIX, stats));
     }
 
+    @Override
+    public Class<MobAffix> getClassForSerialization() {
+        return MobAffix.class;
+    }
 }

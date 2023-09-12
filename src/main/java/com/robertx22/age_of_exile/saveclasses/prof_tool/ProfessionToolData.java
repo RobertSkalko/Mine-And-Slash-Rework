@@ -33,6 +33,8 @@ public class ProfessionToolData implements ITooltip {
 
     public int lvl = 1;
     public int xp = 0;
+    public int force_lvl = -1;
+
 
     public List<ExactStatData> GetAllStats() {
         List<ExactStatData> list = new ArrayList<>();
@@ -129,6 +131,11 @@ public class ProfessionToolData implements ITooltip {
         ctx.tooltip.add(Component.literal("Exp: " + xp + "/" + getExpNeeded()).withStyle(ChatFormatting.GREEN));
         ctx.tooltip.add(TooltipUtils.rarity(getRarity()));
 
+
+        if (this.force_lvl > -1) {
+            ctx.tooltip.add(Component.literal("Capped Drops to LVL " + force_lvl).withStyle(ChatFormatting.RED));
+
+        }
     }
 
     public static class ToolAffix {

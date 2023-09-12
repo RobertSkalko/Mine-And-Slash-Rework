@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.data.profession.CraftedItemPower;
 import com.robertx22.age_of_exile.database.data.profession.ProfessionRecipe;
 import com.robertx22.age_of_exile.database.data.profession.buffs.StatBuffs;
+import com.robertx22.age_of_exile.database.data.profession.items.ProfDropTierPickerCurrency;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.temp.SkillItemTier;
@@ -156,6 +157,13 @@ public class ProfessionRecipes {
 
         }
 
+        ProfessionRecipe.TierBuilder.of(x -> new ProfDropTierPickerCurrency(x).getCurrencyItem(), Professions.GEAR_CRAFTING, 1)
+                .onlyOnTier(x -> new ItemStack(RarityItems.RARITY_STONE.get(x.rar).get(), 1 * (x.tier + 1)))
+                .onTierOrAbove(SkillItemTier.TIER0, Items.PAPER, 1)
+                .onTierOrAbove(SkillItemTier.TIER0, Items.INK_SAC, 1)
+                .exp(5)
+                .custom(x -> x.recipe.tier = SkillItemTier.TIER0.tier)
+                .buildEachTier();
 
         ProfessionRecipe.TierBuilder.of(x -> new SharpeningStone(x).getCurrencyItem(), Professions.GEAR_CRAFTING, 1)
                 .onlyOnTier(x -> new ItemStack(ProfessionMatItems.TIERED_MAIN_MATS.get(Professions.MINING).get(x).get(), 3 * (x.tier + 1)))

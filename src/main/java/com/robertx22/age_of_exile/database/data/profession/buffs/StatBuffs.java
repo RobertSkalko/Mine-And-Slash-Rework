@@ -15,8 +15,8 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shie
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShieldRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
+import com.robertx22.age_of_exile.uncommon.enumclasses.AttackStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
-import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -35,7 +35,7 @@ public class StatBuffs {
     public static AlchemyBuff DEX = new AlchemyBuff("dex", "Dexterity", () -> DatapackStats.DEX.mod(5, 15).percent());
     public static AlchemyBuff STR = new AlchemyBuff("str", "Strength", () -> DatapackStats.STR.mod(5, 15).percent());
 
-    public static AlchemyBuff ARCANE = new AlchemyBuff("arcane", "Arcane", () -> Stats.STYLE_DAMAGE.get(PlayStyle.INT).mod(5, 25));
+    public static AlchemyBuff ARCANE = new AlchemyBuff("arcane", "Arcane", () -> Stats.ATTACK_STYLE_DAMAGE.get(AttackStyle.SPELL).mod(5, 25));
     public static AlchemyBuff MIGHT = new AlchemyBuff("might", "Strength", () -> Stats.ELEMENTAL_DAMAGE.get(Elements.Physical).mod(5, 25));
     public static AlchemyBuff CRIT = new AlchemyBuff("crit", "Criticals", () -> Stats.CRIT_DAMAGE.get().mod(10, 30));
 

@@ -25,6 +25,11 @@
         },
         {
           "type": "minecraft:item",
+          "name": "mmorpg:currency/mastery_seal5",
+          "weight": 0
+        },
+        {
+          "type": "minecraft:item",
           "name": "mmorpg:currency/orb_of_quality",
           "weight": 1000
         },
@@ -75,8 +80,33 @@
         },
         {
           "type": "minecraft:item",
+          "name": "mmorpg:currency/mastery_seal2",
+          "weight": 0
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:currency/mastery_seal1",
+          "weight": 0
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:currency/mastery_seal4",
+          "weight": 0
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:currency/mastery_seal3",
+          "weight": 0
+        },
+        {
+          "type": "minecraft:item",
           "name": "mmorpg:currency/orb_of_linking",
           "weight": 1000
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mmorpg:currency/mastery_seal0",
+          "weight": 0
         }
       ],
       "rolls": {

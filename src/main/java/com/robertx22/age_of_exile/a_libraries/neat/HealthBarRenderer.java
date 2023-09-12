@@ -3,8 +3,10 @@ package com.robertx22.age_of_exile.a_libraries.neat;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.HealthUtils;
+import com.robertx22.library_of_exile.utils.CLOC;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -212,12 +214,23 @@ public class HealthBarRenderer {
         final boolean boss = isBoss(living);
 
 
-        String name = living.hasCustomName()
-                ? ChatFormatting.ITALIC + living.getCustomName().getString()
-                : living.getDisplayName().getString();
-
-
         String lvl = "Lvl " + Load.Unit(living).getLevel();
+
+        String prefix = "";
+        String suffix = "";
+
+        for (MobAffix affix : Load.Unit(entity).getAffixData().getAffixes()) {
+
+            if (affix.type.isPrefix()) {
+
+                prefix += CLOC.translate(affix.locName());
+            } else {
+
+                suffix += CLOC.translate(affix.locName());
+
+            }
+        }
+
         String rar = I18n.get(Load.Unit(living).getMobRarity().locName().getString());
 
         ChatFormatting color = Load.Unit(living).getMobRarity().textFormatting();
@@ -227,7 +240,7 @@ public class HealthBarRenderer {
             color = ChatFormatting.RED;
         }
 
-        name = ChatFormatting.YELLOW + lvl + " " + color + rar + " " + living.getDisplayName().getString();
+        String name = ChatFormatting.YELLOW + lvl + " " + color + rar + " " + prefix + " " + living.getDisplayName().getString() + " " + suffix;
 
         final float nameLen = mc.font.width(name) * textScale;
         final float halfSize = Math.max(NeatConfig.instance.plateSize(), nameLen / 2.0F + 10.0F);

@@ -18,7 +18,7 @@
       "type": "FLAT",
       "max": 20.0,
       "min": 5.0,
-      "stat": "mining_exp_bonus"
+      "stat": "mining_medium_drop_bonus"
     }
   ],
   "weight": 1000

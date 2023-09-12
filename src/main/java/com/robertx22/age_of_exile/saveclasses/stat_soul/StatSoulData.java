@@ -12,6 +12,7 @@ import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
@@ -23,6 +24,7 @@ import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.temp.SkillItemTier;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
@@ -90,11 +92,11 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
 
     }
 
-    public void insertAsUnidentifiedOn(ItemStack stack) {
+    public void insertAsUnidentifiedOn(ItemStack stack, Player p) {
         if (gear != null) {
             StackSaving.GEARS.saveTo(stack, gear);
         } else {
-            StackSaving.GEARS.saveTo(stack, this.createGearData(stack));
+            StackSaving.GEARS.saveTo(stack, this.createGearData(stack, p));
             //LoadSave.Save(this, stack.getOrCreateTag(), StatSoulItem.TAG);
         }
     }
@@ -130,9 +132,9 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
     }
 
 
-    public GearItemData createGearData(@Nullable ItemStack stack) {
+    public GearItemData createGearData(@Nullable ItemStack stack, Player p) {
 
-        int lvl = LevelUtils.tierToLevel(tier).getMinLevel();
+        int lvl = MathHelper.clamp(Load.Unit(p).getLevel(), LevelUtils.tierToLevel(tier).getMinLevel(), LevelUtils.tierToLevel(tier).getMaxLevel());
 
         GearBlueprint b = new GearBlueprint(LootInfo.ofLevel(lvl));
         b.level.set(lvl);

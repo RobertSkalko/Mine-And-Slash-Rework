@@ -123,12 +123,12 @@ public class Professions {
         Builder.of(MINING)
                 .tool(BaseGearType.SlotTag.mining_tool)
 
-                .blockTag(SkillItemTier.TIER0, ORE_EXP, BlockTags.COAL_ORES)
-                .blockTag(SkillItemTier.TIER1, ORE_EXP + 10, BlockTags.COPPER_ORES)
-                .blockTag(SkillItemTier.TIER2, ORE_EXP + 20, BlockTags.IRON_ORES)
-                .blockTag(SkillItemTier.TIER3, ORE_EXP + 35, BlockTags.GOLD_ORES)
-                .blockTag(SkillItemTier.TIER4, ORE_EXP + 50, BlockTags.EMERALD_ORES)
-                .blockTag(SkillItemTier.TIER5, ORE_EXP + 100, BlockTags.DIAMOND_ORES)
+                .blockTag(SkillItemTier.TIER0, 15, BlockTags.COAL_ORES)
+                .blockTag(SkillItemTier.TIER1, 20, BlockTags.COPPER_ORES)
+                .blockTag(SkillItemTier.TIER2, 50, BlockTags.IRON_ORES)
+                .blockTag(SkillItemTier.TIER3, 75, BlockTags.GOLD_ORES)
+                .blockTag(SkillItemTier.TIER4, 100, BlockTags.EMERALD_ORES)
+                .blockTag(SkillItemTier.TIER5, 200, BlockTags.DIAMOND_ORES)
 
                 .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(MINING))
 

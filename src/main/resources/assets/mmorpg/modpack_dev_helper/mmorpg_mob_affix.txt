@@ -11,5 +11,6 @@ fire_lord
 reflect
 fire_mob_affix
 vampire
+full_chaos
 chaos_mob_affix
 nature_lord

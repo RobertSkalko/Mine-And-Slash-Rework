@@ -1,0 +1,26 @@
+{
+  "exp": 5,
+  "id": "currency_mastery_seal00",
+  "mats": [
+    {
+      "type": "ITEM",
+      "id": "mmorpg:stone/0",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:paper",
+      "num": 1
+    },
+    {
+      "type": "ITEM",
+      "id": "minecraft:ink_sac",
+      "num": 1
+    }
+  ],
+  "power": "greater",
+  "profession": "gear_crafting",
+  "result": "mmorpg:currency/mastery_seal0",
+  "result_num": 1,
+  "tier": 0
+}

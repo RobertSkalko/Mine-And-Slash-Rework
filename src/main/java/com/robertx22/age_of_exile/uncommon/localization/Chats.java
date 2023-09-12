@@ -15,6 +15,7 @@ public enum Chats implements IAutoLocName {
     CANT_GO_ABOVE_MAX_LEVEL("You can't upgrade an item past maximum level: %1$s"),
     NEEDS_EMPTY_OR_RUNE("Requires an empty socket, or a rune inside the item. If the item has a rune, it will be re-rolled."),
     NOT_JEWEL("This is not a jewel item."),
+    NOT_TOOL("This is not a tool item, or the tool has no stats yet."),
     NEED_EMPTY_SOCKET("Requires an empty socket"),
     ALREADY_MAX_SOCKETS("Item already has maximum possible sockets."),
     ALREADY_MAX_LINKS("Item already has maximum possible links."),

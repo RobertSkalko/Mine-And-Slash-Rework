@@ -67,11 +67,13 @@ spell_has_tag_totem
 threat_gen_type_is_take_dmg
 is_projectile
 is_ranged_weapon
+attack_style_is_spell
 effect_has_tag_immobilizing
 restore_type_is_food
 is_staff_wep_type
 summon_type_is_total
 effect_has_tag_food
+attack_style_is_attack
 spell_has_tag_chaining
 resource_type_is_magic_shield
 is_is_basic_atk_true

@@ -1,10 +1,11 @@
 {
+  "type": "suffix",
   "format": "YELLOW",
   "icon": "",
   "id": "full_lightning",
   "stats": [
     {
-      "type": "flat",
+      "type": "FLAT",
       "max": 100.0,
       "min": 100.0,
       "stat": "phys_to_lightning"

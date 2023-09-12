@@ -30,7 +30,6 @@ public class AoeSelector extends BaseTargetSelector {
         AllyOrEnemy predicate = data.getEntityPredicate();
         Double radius = data.get(RADIUS);
 
-
         radius *= ctx.calculatedSpellData.data.getNumber(EventData.AREA_MULTI, 1).number;
 
         Double chance = data.getOrDefault(SELECTION_CHANCE, 100D);
@@ -61,7 +60,7 @@ public class AoeSelector extends BaseTargetSelector {
             return true;
         }
         // todo this doesnt work all the time..
-        
+
         int height = 2;
 
         // we check if there's a ceiling

@@ -1,22 +1,23 @@
 {
+  "type": "prefix",
   "format": "DARK_PURPLE",
   "icon": "",
   "id": "chaos_mob_affix",
   "stats": [
     {
-      "type": "flat",
+      "type": "FLAT",
       "max": 75.0,
       "min": 75.0,
       "stat": "phys_to_chaos"
     },
     {
-      "type": "flat",
+      "type": "FLAT",
       "max": 1.0,
       "min": 1.0,
       "stat": "chaos_weapon_damage"
     },
     {
-      "type": "flat",
+      "type": "FLAT",
       "max": 10.0,
       "min": 10.0,
       "stat": "extra_mob_drops"

@@ -13,9 +13,9 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.Regenerate
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.EnergyRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.summon.GolemSpellChance;
+import com.robertx22.age_of_exile.uncommon.enumclasses.AttackStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
-import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
 import java.util.Arrays;
@@ -51,7 +51,7 @@ public class ChestUniques implements ExileRegistryInit {
                 .rarityWeight(UniqueRarityTier.RARE)
                 .stat(GearDefense.getInstance().mod(50, 100).percent())
                 .stat(RegeneratePercentStat.MANA.mod(1, 2))
-                .stat(Stats.STYLE_DAMAGE.get(PlayStyle.INT).mod(20, 20))
+                .stat(Stats.ATTACK_STYLE_DAMAGE.get(AttackStyle.SPELL).mod(20, 20))
                 .stat(new ElementalResist(Elements.Physical).mod(10, 25))
                 .build();
     }

@@ -14,10 +14,7 @@ import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DataPackSta
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.effectdatas.*;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
-import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
-import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
-import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
-import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
+import com.robertx22.age_of_exile.uncommon.enumclasses.*;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -216,6 +213,23 @@ public class Stats implements ExileRegistryInit {
             .setPriority(0)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.IS_STYLE.get(x))
+            .setUsesMoreMultiplier()
+            .addEffect(StatEffects.INCREASE_VALUE)
+            .setLocName(x -> x.name + " Damage")
+            .setLocDesc(x -> "Magic damage are mage spells, like fireball.")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+                x.group = StatGroup.Misc;
+            })
+            .build();
+
+    public static DataPackStatAccessor<AttackStyle> ATTACK_STYLE_DAMAGE = DatapackStatBuilder
+            .<AttackStyle>of(x -> x.id + "_atk_style_dmg", x -> Elements.Physical)
+            .addAllOfType(AttackStyle.values())
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(0)
+            .setSide(EffectSides.Source)
+            .addCondition(x -> StatConditions.IS_ATTACK_STYLE.get(x))
             .setUsesMoreMultiplier()
             .addEffect(StatEffects.INCREASE_VALUE)
             .setLocName(x -> x.name + " Damage")

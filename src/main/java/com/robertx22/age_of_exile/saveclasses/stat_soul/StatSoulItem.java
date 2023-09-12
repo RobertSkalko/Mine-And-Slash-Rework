@@ -35,8 +35,8 @@ public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt {
 
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-        ItemStack itemstack = pPlayer.getItemInHand(pUsedHand);
+    public InteractionResultHolder<ItemStack> use(Level pLevel, Player p, InteractionHand pUsedHand) {
+        ItemStack itemstack = p.getItemInHand(pUsedHand);
 
         if (!pLevel.isClientSide) {
 
@@ -48,15 +48,15 @@ public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt {
 
                 ItemStack stack = item.getDefaultInstance();
 
-                StackSaving.GEARS.saveTo(stack, data.createGearData(stack));
+                StackSaving.GEARS.saveTo(stack, data.createGearData(stack, p));
 
-                PlayerUtils.giveItem(stack, pPlayer);
+                PlayerUtils.giveItem(stack, p);
                 itemstack.shrink(1);
             }
 
         }
 
-        return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
+        return InteractionResultHolder.pass(p.getItemInHand(pUsedHand));
 
     }
 

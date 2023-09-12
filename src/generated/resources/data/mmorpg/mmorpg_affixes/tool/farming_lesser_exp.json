@@ -18,7 +18,7 @@
       "type": "FLAT",
       "max": 20.0,
       "min": 5.0,
-      "stat": "farming_exp_bonus"
+      "stat": "farming_lesser_drop_bonus"
     }
   ],
   "weight": 1000

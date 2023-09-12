@@ -28,7 +28,7 @@ public class ProfCategoryDropStat extends Stat {
 
     @Override
     public String GUID() {
-        return prof + "_exp_bonus";
+        return prof + "_" + cat.id + "_drop_bonus";
     }
 
     @Override

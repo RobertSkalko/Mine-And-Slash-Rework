@@ -4,6 +4,7 @@ affix_tier_up_down
 socket_adder
 entangled_quality
 level_up_orb
+mastery_seal5
 orb_of_quality
 sharpening_stone5
 entangled_unique_reroll
@@ -14,4 +15,9 @@ sharpening_stone1
 unique_reroll
 sharpening_stone2
 entangled_affix_upgrade
+mastery_seal2
+mastery_seal1
+mastery_seal4
+mastery_seal3
 orb_of_linking
+mastery_seal0

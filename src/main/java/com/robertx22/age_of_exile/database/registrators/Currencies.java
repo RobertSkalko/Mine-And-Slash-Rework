@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.registrators;
 import com.robertx22.age_of_exile.database.data.currency.base.Currency;
 import com.robertx22.age_of_exile.database.data.currency.gear.*;
 import com.robertx22.age_of_exile.database.data.currency.skill_gem.OrbOfLinking;
+import com.robertx22.age_of_exile.database.data.profession.items.ProfDropTierPickerCurrency;
 import com.robertx22.age_of_exile.mechanics.harvest.currency.EntangledAffixUpgrade;
 import com.robertx22.age_of_exile.mechanics.harvest.currency.EntangledQuality;
 import com.robertx22.age_of_exile.mechanics.harvest.currency.EntangledUniqueReroll;
@@ -18,6 +19,8 @@ public class Currencies implements ExileRegistryInit {
     public static List<Currency> ALL = new ArrayList<>();
 
     static {
+
+
         ALL.add(new OrbOfLinking());
         ALL.add(new OrbAffixUpgrade());
         ALL.add(new OrbSocketAdder());
@@ -30,6 +33,7 @@ public class Currencies implements ExileRegistryInit {
 
         for (SkillItemTier tier : SkillItemTier.values()) {
             ALL.add(new SharpeningStone(tier));
+            ALL.add(new ProfDropTierPickerCurrency(tier));
         }
 
 

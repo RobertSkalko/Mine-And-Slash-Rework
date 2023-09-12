@@ -86,7 +86,7 @@ public class OnItemInteract {
 
                 if (data != null) {
                     if (data.canInsertIntoStack(stack)) {
-                        data.insertAsUnidentifiedOn(stack);
+                        data.insertAsUnidentifiedOn(stack, player);
                         success = true;
                     }
                 }

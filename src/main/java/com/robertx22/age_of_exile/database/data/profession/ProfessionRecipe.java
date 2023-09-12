@@ -56,7 +56,7 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
         for (RecipeDifficulty diff : RecipeDifficulty.values()) {
             list.add(diff.word.locName().append(" Mastery level: " + getLevelForMasteringDifficulty(diff)).withStyle(diff.color));
         }         */
-        
+
         return list;
     }
 
@@ -298,6 +298,11 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
                     data.recipe.mats.add(CraftingMaterial.item(id.toString(), num));
                 }
             });
+            return this;
+        }
+
+        public TierBuilder custom(Consumer<Data> con) {
+            this.actions.add(con);
             return this;
         }
 

@@ -49,3 +49,9 @@ This should ensure spells with any type of stat scalings can't become too op, bu
 - brought back the beloved master bag instead of the gui backpacks, turns out i completely miscalculated that one, and people hated the gui one
 
 - added back level up gear currency
+
+- gear souls now create gears at your current level, but capped at the level range of the gear soul.
+
+- chaining spells now have less enemy chain range but scale with aoe 
+
+- added back the wiki

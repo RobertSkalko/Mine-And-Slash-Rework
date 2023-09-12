@@ -1,0 +1,15 @@
+{
+  "type": "suffix",
+  "format": "DARK_PURPLE",
+  "icon": "",
+  "id": "full_chaos",
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 100.0,
+      "min": 100.0,
+      "stat": "phys_to_chaos"
+    }
+  ],
+  "weight": 0
+}

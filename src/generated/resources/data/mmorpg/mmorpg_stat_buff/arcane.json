@@ -5,7 +5,7 @@
       "type": "FLAT",
       "max": 25.0,
       "min": 5.0,
-      "stat": "int_dmg"
+      "stat": "spell_atk_style_dmg"
     }
   ]
 }

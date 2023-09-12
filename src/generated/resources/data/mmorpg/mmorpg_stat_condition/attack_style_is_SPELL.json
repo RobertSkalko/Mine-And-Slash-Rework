@@ -1,0 +1,6 @@
+{
+  "id": "attack_style_is_spell",
+  "ser": "string_matches",
+  "string_id": "spell",
+  "string_key": "attack_style"
+}

@@ -30,6 +30,7 @@ import com.robertx22.age_of_exile.gui.screens.OpenJewelsScreen;
 import com.robertx22.age_of_exile.gui.screens.OpenSkillGems;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.TalentsScreen;
 import com.robertx22.age_of_exile.gui.screens.spell.AscendancyClassScreen;
+import com.robertx22.age_of_exile.gui.wiki.BestiaryScreen;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -207,6 +208,8 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
         rightButtons.add(new OpenJewelsScreen());
 
         List<INamedScreen> leftButtons = new ArrayList<>();
+
+        leftButtons.add(new BestiaryScreen());
 
 
         leftButtons.add(new OpenInvGuiScreen(Words.Salvaging, "salvage", GuiInventoryGrids.ofSalvageConfig()));
