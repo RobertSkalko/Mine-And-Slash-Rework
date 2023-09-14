@@ -21,6 +21,7 @@ import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
 import java.util.List;
 
@@ -64,8 +65,7 @@ public class PerkButton extends ImageButton {
     public boolean isInside(int x, int y) {
 
         float scale = 2 - screen.zoom;
-
-        return GuiUtils.isInRect((int) (this.getX()), (int) (this.getY()), (int) (width * scale), (int) (height * scale), x, y);
+        return GuiUtils.isInRect((int) (this.getX() - ((width/4) * scale)), (int) (this.getY() - ((height/4) * scale)), (int) (width * scale), (int) (height * scale), x, y);
     }
 
 
@@ -141,9 +141,9 @@ public class PerkButton extends ImageButton {
         if (posMulti > 1.5F) {
             posMulti = 1.5F;
         }
-
+        float zoomOffset = Mth.lerp(screen.zoom, 0.04f, 0f);
+        gui.pose().translate(-zoomOffset, -zoomOffset, 0);
         gui.pose().scale(scale, scale, scale);
-
         PerkStatus status = playerData.talents.getStatus(Minecraft.getInstance().player, school, point);
 
 
