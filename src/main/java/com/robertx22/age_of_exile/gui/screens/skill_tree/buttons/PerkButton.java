@@ -21,6 +21,7 @@ import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
 import java.util.List;
 
@@ -64,8 +65,7 @@ public class PerkButton extends ImageButton {
     public boolean isInside(int x, int y) {
 
         float scale = 2 - screen.zoom;
-
-        return GuiUtils.isInRect((int) (this.getX()), (int) (this.getY()), (int) (width * scale), (int) (height * scale), x, y);
+        return GuiUtils.isInRect((int) (this.getX() - ((width/4) * scale)), (int) (this.getY() - ((height/4) * scale)), (int) (width * scale), (int) (height * scale), x, y);
     }
 
 
@@ -123,11 +123,13 @@ public class PerkButton extends ImageButton {
     }
 
     int xPos(int offset, float multi) {
-        return (int) ((this.getX()) * multi) + offset;
+        float scale = 2 - screen.zoom;
+        return (int) ((this.getX() - ((width/6) * scale)) * multi) + offset;
     }
 
     int yPos(int offset, float multi) {
-        return (int) ((this.getY()) * multi) + offset;
+        float scale = 2 - screen.zoom;
+        return (int) ((this.getY() - ((height/6) * scale)) * multi) + offset;
     }
 
     @Override
@@ -141,9 +143,11 @@ public class PerkButton extends ImageButton {
         if (posMulti > 1.5F) {
             posMulti = 1.5F;
         }
-
+        float zoomOffset = Mth.lerp(screen.zoom, 0.f, 0.04f);
+        gui.pose().translate(width/2f, height/2f, 0);
         gui.pose().scale(scale, scale, scale);
-
+        float inverse = 1F / scale;
+        gui.pose().translate((-(width - zoomOffset)/2f) * inverse, (-(height - zoomOffset)/2f) * inverse, 0);
         PerkStatus status = playerData.talents.getStatus(Minecraft.getInstance().player, school, point);
 
 

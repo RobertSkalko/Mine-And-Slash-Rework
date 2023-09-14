@@ -37,6 +37,7 @@ public class ClientConfigs {
         GUI_POSITION = b.defineEnum("GUI_POSITION", GuiPosition.TOP_LEFT);
         ITEM_RARITY_BACKGROUND_TYPE = b.defineEnum("ITEM_RARITY_BACKGROUND_TYPE", GlintType.FULL);
         PLAYER_GUI_TYPE = b.defineEnum("PLAYER_GUI_TYPE", PlayerGUIs.RPG);
+        SKILL_TREE_ZOOM_SPEED = b.defineInRange("SKILL_TREE_ZOOM_SPEED", 0.15D, 0.000001D, 1D);
 
         b.pop();
     }
@@ -56,6 +57,7 @@ public class ClientConfigs {
     public ForgeConfigSpec.EnumValue<PlayerGUIs> PLAYER_GUI_TYPE;
     public ForgeConfigSpec.DoubleValue ITEM_RARITY_OPACITY;
     public ForgeConfigSpec.DoubleValue HEALTH_BAR_GUI_SCALE;
+    public ForgeConfigSpec.DoubleValue SKILL_TREE_ZOOM_SPEED;
 
     public int REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES = 35;
 

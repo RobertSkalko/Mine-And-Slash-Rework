@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.math.Axis;
 import com.robertx22.age_of_exile.capability.player.PlayerData;
+import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
@@ -344,6 +345,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
 
     public float zoom = 0.3F;
+    public float targetZoom = zoom;
 
 
     @Override
@@ -365,18 +367,19 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     private void resetZoom() {
         zoom = 1;
+        targetZoom = zoom;
     }
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scroll) {
         if (scroll < 0) {
-            zoom -= 0.1F;
+            targetZoom -= 0.1F;
         }
         if (scroll > 0) {
-            zoom += 0.1F;
+            targetZoom += 0.1F;
         }
 
-        this.zoom = Mth.clamp(zoom, 0.08F, 1);
+        this.targetZoom = Mth.clamp(targetZoom, 0.08F, 1);
 
         return true;
     }
@@ -403,7 +406,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         mouseRecentlyClickedTicks--;
 
         renderBackgroundDirt(gui, this, 0);
-
+        zoom = Mth.lerp(ClientConfigs.getConfig().SKILL_TREE_ZOOM_SPEED.get().floatValue(), zoom, targetZoom);
         gui.pose().scale(zoom, zoom, zoom);
 
         try {
