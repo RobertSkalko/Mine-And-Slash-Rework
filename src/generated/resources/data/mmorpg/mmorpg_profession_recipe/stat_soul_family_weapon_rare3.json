@@ -1,5 +1,5 @@
 {
-  "exp": 100,
+  "exp": 250,
   "id": "stat_soul_family_weapon_rare3",
   "mats": [
     {
@@ -10,7 +10,7 @@
     {
       "type": "ITEM",
       "id": "mmorpg:stone/2",
-      "num": 6
+      "num": 9
     },
     {
       "type": "ITEM",

@@ -55,3 +55,5 @@ This should ensure spells with any type of stat scalings can't become too op, bu
 - chaining spells now have less enemy chain range but scale with aoe 
 
 - added back the wiki
+
+- added new item: Disassembler's Learning Method , when placed in a crafting station, it will destroy the output but give you 3X the EXP. This is intended to help level professions when you don't need the current level's crafts

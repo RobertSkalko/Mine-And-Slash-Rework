@@ -17,12 +17,12 @@
   "min_lvl": 50,
   "mob": {
     "affixes": 2,
-    "dmg_multi": 4.75,
-    "exp_multi": 3.5,
-    "extra_hp_multi": 8.5,
-    "loot_multi": 3.5,
-    "min_lvl": 20,
-    "stat_multi": 6.0
+    "dmg_multi": 4.0,
+    "exp_multi": 3.0,
+    "extra_hp_multi": 7.0,
+    "loot_multi": 3.0,
+    "min_lvl": 40,
+    "stat_multi": 5.0
   },
   "pot": {
     "multi": 1.75,

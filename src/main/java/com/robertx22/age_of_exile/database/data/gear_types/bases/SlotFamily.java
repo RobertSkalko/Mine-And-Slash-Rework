@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 
 public enum SlotFamily {
     Weapon("weapon", () -> Items.IRON_SWORD),
-    Armor("armor", () -> Items.IRON_CHESTPLATE),
+    Armor("armor", () -> Items.IRON_BOOTS),
     Jewelry("jewelry", () -> SlashItems.GearItems.RINGS.get(VanillaMaterial.IRON).get()),
     OffHand("offhand", () -> Items.SHIELD),
     NONE("none", () -> Items.AIR);

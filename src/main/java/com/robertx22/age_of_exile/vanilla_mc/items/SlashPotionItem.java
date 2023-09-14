@@ -126,8 +126,7 @@ public class SlashPotionItem extends AutoItem implements ICreativeTabTiered {
     public float getHealPercent(ItemStack stack) {
         var r = getRarity();
         SkillItemTier tier = LeveledItem.getTier(stack);
-        return 0.25F * r.stat_percents.max * tier.statMulti; // todo maybe make separate value
-
+        return 5 + (0.25F * r.stat_percents.max * tier.statMulti); // todo maybe make separate value
     }
 
     public GearRarity getRarity() {

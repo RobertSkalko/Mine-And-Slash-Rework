@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.mmorpg.registers.common.items;
 import com.robertx22.age_of_exile.capability.player.BackpackItem;
 import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChestItem;
 import com.robertx22.age_of_exile.database.data.profession.all.Professions;
+import com.robertx22.age_of_exile.database.data.profession.items.DestroyOutputMegaExpItem;
 import com.robertx22.age_of_exile.database.data.profession.items.StationBlockItem;
 import com.robertx22.age_of_exile.maps.MapItem;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
@@ -42,7 +43,7 @@ public class SlashItems {
         station(Professions.COOKING, () -> Items.BREAD);
         station(Professions.SALVAGING, () -> Items.IRON_INGOT);
         station(Professions.GEAR_CRAFTING, () -> Items.IRON_CHESTPLATE);
-        station(Professions.ALCHEMY, () -> Items.BREWING_STAND);
+        station(Professions.ALCHEMY, () -> Items.CAULDRON);
         station(Professions.ENCHANTING, () -> Items.PAPER);
 
     }
@@ -69,9 +70,11 @@ public class SlashItems {
     public static RegObj<ProjectileItem> LIGHTNING = Def.item(() -> new ProjectileItem("lightning"), "projectile/" + "lightning");
     public static RegObj<ProjectileItem> BOOMERANG = Def.item(() -> new ProjectileItem("boomerang"), "projectile/" + "boomerang");
 
+
     public static RegObj<LootTableItem> LOOT_TABLE_ITEM = Def.item(() -> new LootTableItem(), "loot_table_chest");
 
     public static RegObj<Item> NEWBIE_GEAR_BAG = Def.item(() -> new ItemNewbieGearBag(), "newbie_gear_bag");
+    public static RegObj<Item> DESTROY_OUTPUT = Def.item(() -> new DestroyOutputMegaExpItem("Disassembler's Learning Method"), "destroy_output_exp");
     //   public static RegObj<Item> SALVAGE_HAMMER = Def.item(() -> new SalvageHammerItem(), "salvage_hammer");
     public static RegObj<Item> SOCKET_EXTRACTOR = Def.item(() -> new SocketExtractorItem(), "socket_extractor");
     public static RegObj<Item> SOUL_CLEANER = Def.item(() -> new SoulCleanerItem(), "soul_cleaner");

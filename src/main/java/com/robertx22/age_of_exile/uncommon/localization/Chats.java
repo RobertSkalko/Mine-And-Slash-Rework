@@ -22,6 +22,7 @@ public enum Chats implements IAutoLocName {
     NEEDS_AN_AFFIX("Item needs an affix."),
     NOT_SKILLGEM("This is not a skill gem."),
     BE_UNIQUE("The item must be of unique rarity."),
+    DESTROYS_OUTPUT("When Placed in a Profession Station with other inputs/materials, it will make all recipes produced give 3X the EXP but it will destroy the output."),
     CANT_GO_ABOVE("Can't upgrade past %1$s"),
 
     NEED_PEARL("You need to have at least one %1$s in your inventory to enter."),

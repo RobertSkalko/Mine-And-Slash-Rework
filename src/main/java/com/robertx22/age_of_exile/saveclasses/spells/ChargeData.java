@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.saveclasses.spells;
 
+import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.util.Mth;
@@ -69,7 +70,9 @@ public class ChargeData {
 
                     chargesadded.add(id);
 
-                    charge_regen.put(s.config.charge_name, ticks + charge_regen.getOrDefault(s.config.charge_name, 0));
+                    float regen = charge_regen.getOrDefault(s.config.charge_name, 0);
+                    regen *= Load.Unit(player).getUnit().getCalculatedStat(Stats.COOLDOWN_REDUCTION.get()).getMultiplier();
+                    charge_regen.put(s.config.charge_name, (int) (ticks + regen));
 
                     if (charge_regen.get(id) >= s.config.charge_regen) {
                         charge_regen.put(id, 0);

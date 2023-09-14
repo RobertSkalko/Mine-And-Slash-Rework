@@ -21,7 +21,7 @@
     "exp_multi": 6.0,
     "extra_hp_multi": 16.0,
     "loot_multi": 6.0,
-    "min_lvl": 25,
+    "min_lvl": 50,
     "stat_multi": 11.0
   },
   "pot": {

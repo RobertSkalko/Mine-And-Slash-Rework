@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.database.data.profession.all.ProfessionMatItem
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
@@ -75,11 +76,13 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
 
 
     public int getExpReward(int skilLvl, List<ItemStack> mats) {
+        int expLvl = MathHelper.clamp(skilLvl, getTier().levelRange.getMinLevel(), getTier().levelRange.getMaxLevel());
+
         int req = getTier().levelRange.getMinLevel();
 
         RecipeDifficulty diff = RecipeDifficulty.get(skilLvl, req);
 
-        return (int) (req * diff.xpMulti * this.exp);
+        return (int) (expLvl * diff.xpMulti * this.exp);
     }
 
     public ItemStack toResultStackForJei() {
@@ -93,8 +96,8 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
     }
 
     public enum RecipeDifficulty {
-        EASY(ChatFormatting.WHITE, 30, Words.Easy, 0, 25),
-        MEDIUM(ChatFormatting.GREEN, 20, Words.Medium, 0.25F, 10),
+        EASY(ChatFormatting.WHITE, 30, Words.Easy, 0.25F, 25),
+        MEDIUM(ChatFormatting.GREEN, 20, Words.Medium, 0.5F, 10),
         HARD(ChatFormatting.YELLOW, 10, Words.Hard, 0.75F, 5),
         VERY_HARD(ChatFormatting.RED, 0, Words.VERY_HARD, 1, 0);
 
@@ -113,12 +116,11 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
         }
 
         public static RecipeDifficulty get(int skilllvl, int recipelvl) {
-
             if (recipelvl > skilllvl) {
                 return VERY_HARD;
             } else {
                 int diff = Math.abs(skilllvl - recipelvl);
-                return Arrays.stream(RecipeDifficulty.values()).filter(x -> x.masteryLvls >= diff).max(Comparator.comparing(x -> x.doubleDropChance)).orElse(VERY_HARD);
+                return Arrays.stream(RecipeDifficulty.values()).filter(x -> x.masteryLvls >= diff).max(Comparator.comparing(x -> -x.doubleDropChance)).orElse(VERY_HARD);
             }
         }
     }

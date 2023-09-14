@@ -1,5 +1,5 @@
 {
-  "exp": 100,
+  "exp": 250,
   "id": "stat_soul_family_weapon_mythic1",
   "mats": [
     {
@@ -10,7 +10,7 @@
     {
       "type": "ITEM",
       "id": "mmorpg:stone/5",
-      "num": 9
+      "num": 15
     },
     {
       "type": "ITEM",

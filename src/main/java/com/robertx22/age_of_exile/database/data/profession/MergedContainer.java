@@ -10,6 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class MergedContainer extends SimpleContainer implements WorldlyContainer {
 
@@ -93,21 +94,21 @@ public class MergedContainer extends SimpleContainer implements WorldlyContainer
 
     @Override
     public int[] getSlotsForFace(Direction pSide) {
-        Inventory inv = invs.stream().filter(x -> x.hopperface == pSide).findAny().get();
-        if (inv != null) {
-            return getIndices(inv.id);
+        Optional<Inventory> inv = invs.stream().filter(x -> x.hopperface == pSide).findAny();
+        if (inv.isPresent() && inv != null) {
+            return getIndices(inv.get().id);
         }
         return new int[0];
     }
 
     @Override
     public boolean canPlaceItemThroughFace(int pIndex, ItemStack pItemStack, @Nullable Direction pDirection) {
-        return this.canPlaceItem(pIndex, pItemStack);
+        return this.canPlaceItem(pIndex, pItemStack) && pDirection == Direction.UP;
     }
 
     @Override
     public boolean canTakeItemThroughFace(int pIndex, ItemStack pStack, Direction pDirection) {
-        return true;
+        return pDirection == Direction.DOWN;
     }
 
     public static class Inventory {

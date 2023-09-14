@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.database.data.profession.all.Professions;
 import com.robertx22.age_of_exile.database.data.profession.screen.CraftingStationMenu;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlockEntities;
+import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable;
@@ -135,10 +136,27 @@ public class ProfessionBlockEntity extends BlockEntity {
             return ExplainedResult.success();
         }
 
-        this.addExp(recipe.getExpReward(ownerLvl, getMats()) * recipe.getTier().levelRange.getMinLevel());
 
-        for (ItemStack stack : recipe.craft(p, getMats())) {
-            inventory.addStack(OUTPUTS, stack);
+        float expMulti = 1;
+
+        boolean destroyOuput = false;
+
+        if (this.inventory.getInventory(INPUTS).countItem(SlashItems.DESTROY_OUTPUT.get()) > 0) {
+            expMulti = 3;
+            destroyOuput = true;
+        }
+
+        int expGive = (int) (recipe.getExpReward(ownerLvl, getMats()) * expMulti);
+
+        this.addExp(expGive);
+
+        if (destroyOuput) {
+            SoundUtils.playSound(level, getBlockPos(), SoundEvents.FIRE_EXTINGUISH);
+            SoundUtils.playSound(level, getBlockPos(), SoundEvents.EXPERIENCE_ORB_PICKUP);
+        } else {
+            for (ItemStack stack : recipe.craft(p, getMats())) {
+                inventory.addStack(OUTPUTS, stack);
+            }
         }
 
 

@@ -1,5 +1,5 @@
 {
-  "exp": 100,
+  "exp": 250,
   "id": "stat_soul_family_armor_rare3",
   "mats": [
     {
@@ -14,7 +14,7 @@
     },
     {
       "type": "ITEM",
-      "id": "minecraft:iron_chestplate",
+      "id": "minecraft:iron_boots",
       "num": 1
     },
     {

@@ -56,7 +56,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         GearRarity rar = new GearRarity().edit(x -> {
             x.favor_loot_multi = 1;
             x.favor_needed = 100;
-            x.mob = MobRarity.of(3, 2, 1);
+            x.mob = MobRarity.of(3, 1, 1);
             x.max_sockets = 2;
             x.socket_chance = 15;
             x.max_spell_links = 3;
@@ -79,7 +79,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         GearRarity epic = new GearRarity().edit(x -> {
             x.favor_loot_multi = 1.05F;
             x.favor_needed = 250;
-            x.mob = MobRarity.of(10, 3, 1);
+            x.mob = MobRarity.of(20, 2, 1);
             x.max_sockets = 3;
             x.socket_chance = 20;
             x.min_lvl = 25;
@@ -102,7 +102,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         GearRarity legendary = new GearRarity().edit(x -> {
             x.favor_loot_multi = 1.2F;
             x.favor_needed = 500;
-            x.mob = MobRarity.of(20, 5, 2);
+            x.mob = MobRarity.of(40, 4, 2);
             x.max_sockets = 3;
             x.socket_chance = 30;
             x.max_spell_links = 5;
@@ -126,7 +126,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         GearRarity mythic = new GearRarity().edit(x -> {
             x.favor_loot_multi = 1.25F;
             x.favor_needed = 1000;
-            x.mob = MobRarity.of(25, 10, 3);
+            x.mob = MobRarity.of(50, 8, 3);
             x.max_sockets = 3;
             x.min_lvl = 75;
             x.backpack_slots = 6 * 9;
@@ -147,7 +147,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity unique = new GearRarity().edit(x -> {
-            x.mob = MobRarity.of(25, 10, 3);
+            x.mob = MobRarity.of(50, 10, 3);
             x.max_sockets = 3;
             x.socket_chance = 20;
             x.pot = new GearRarity.Potential(100, 1);
@@ -164,7 +164,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity runeword = new GearRarity().edit(x -> {
-            x.mob = MobRarity.of(25, 10, 3);
+            x.mob = MobRarity.of(50, 10, 3);
             x.max_sockets = 3;
             x.socket_chance = 50;
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
