@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.math.Axis;
 import com.robertx22.age_of_exile.capability.player.PlayerData;
+import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
@@ -405,7 +406,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         mouseRecentlyClickedTicks--;
 
         renderBackgroundDirt(gui, this, 0);
-        zoom = Mth.lerp(0.2F, zoom, targetZoom);
+        zoom = Mth.lerp(ClientConfigs.getConfig().SKILL_TREE_ZOOM_SPEED.get().floatValue(), zoom, targetZoom);
         gui.pose().scale(zoom, zoom, zoom);
 
         try {
