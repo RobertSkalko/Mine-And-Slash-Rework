@@ -143,11 +143,11 @@ public class PerkButton extends ImageButton {
         if (posMulti > 1.5F) {
             posMulti = 1.5F;
         }
-        float zoomOffset = Mth.lerp(screen.zoom, 0.f, 0.04f);
+        float zoomOffset = Mth.lerp(screen.zoom, 0.0f, -0.04f);
         gui.pose().translate(width/2f, height/2f, 0);
         gui.pose().scale(scale, scale, scale);
         float inverse = 1F / scale;
-        gui.pose().translate((-(width - zoomOffset)/2f) * inverse, (-(height - zoomOffset)/2f) * inverse, 0);
+        gui.pose().translate((-(width/2f) - zoomOffset/4f) * inverse, (-(height/2f) - zoomOffset/4f) * inverse, 0);
         PerkStatus status = playerData.talents.getStatus(Minecraft.getInstance().player, school, point);
 
 
