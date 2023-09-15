@@ -28,8 +28,8 @@ public class DungeonBuilder {
 
         this.dungeon = RandomUtils.weightedRandom(ExileDB.Dungeons().getFilterWrapped(x -> x.can_be_main).list, rand.nextDouble());
 
-        this.size = RandomUtils.RandomRange(12, 18); // todo for testing
 
+        this.size = RandomUtils.RandomRange(12, 20, rand);
 
         // todo this needs the same random if i'll use at world gen async, if i do it myself, it doesnt
 
@@ -55,6 +55,8 @@ public class DungeonBuilder {
         setupEntrance();
 
         builtDungeon.fillWithBarriers();
+
+        // builtDungeon.checkMissing();
 
     }
 
