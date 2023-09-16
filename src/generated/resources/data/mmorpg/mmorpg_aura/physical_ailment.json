@@ -1,0 +1,20 @@
+{
+  "id": "physical_ailment",
+  "min_lvl": 1,
+  "reservation": 0.3,
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 50.0,
+      "min": 10.0,
+      "stat": "all_physical_damage"
+    },
+    {
+      "type": "FLAT",
+      "max": 25.0,
+      "min": 5.0,
+      "stat": "bleed_chance"
+    }
+  ],
+  "style": "STR"
+}

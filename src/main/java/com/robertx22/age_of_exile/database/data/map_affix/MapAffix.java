@@ -5,14 +5,15 @@ import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.maps.AffectedEntities;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
-import com.robertx22.library_of_exile.registry.ExileRegistry;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.IAutoGson;
+import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MapAffix implements ExileRegistry<MobAffix> {
+public class MapAffix implements JsonExileRegistry<MobAffix>, IAutoGson<MapAffix> {
 
     List<StatMod> stats = new ArrayList<>();
     String id = "";
@@ -63,4 +64,8 @@ public class MapAffix implements ExileRegistry<MobAffix> {
         return stats.stream().map(x -> x.ToExactStat(perc, lvl)).collect(Collectors.toList());
     }
 
+    @Override
+    public Class<MapAffix> getClassForSerialization() {
+        return MapAffix.class;
+    }
 }

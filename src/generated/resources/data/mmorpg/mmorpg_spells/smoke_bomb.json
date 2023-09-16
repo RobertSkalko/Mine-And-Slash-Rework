@@ -126,5 +126,6 @@
   "effect_tip": "",
   "identifier": "smoke_bomb",
   "manual_tip": true,
+  "min_lvl": 1,
   "weight": 1000
 }

@@ -114,5 +114,6 @@
   "effect_tip": "",
   "identifier": "summon_spirit_wolf",
   "manual_tip": true,
+  "min_lvl": 1,
   "weight": 1000
 }

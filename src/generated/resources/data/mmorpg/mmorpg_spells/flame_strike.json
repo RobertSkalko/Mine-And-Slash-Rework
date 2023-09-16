@@ -116,5 +116,6 @@
   "effect_tip": "",
   "identifier": "flame_strike",
   "manual_tip": true,
+  "min_lvl": 1,
   "weight": 1000
 }

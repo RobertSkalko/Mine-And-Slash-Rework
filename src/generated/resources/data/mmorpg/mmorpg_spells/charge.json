@@ -219,5 +219,6 @@
   "effect_tip": "",
   "identifier": "charge",
   "manual_tip": true,
+  "min_lvl": 1,
   "weight": 1000
 }

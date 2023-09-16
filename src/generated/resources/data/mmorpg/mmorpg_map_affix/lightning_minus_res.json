@@ -1,0 +1,13 @@
+{
+  "affected": "Players",
+  "id": "lightning_minus_res",
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": -60.0,
+      "min": -20.0,
+      "stat": "lightning_resist"
+    }
+  ],
+  "weight": 1000
+}

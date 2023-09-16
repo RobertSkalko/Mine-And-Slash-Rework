@@ -1,0 +1,13 @@
+{
+  "affected": "Mobs",
+  "id": "crit_dmg",
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 50.0,
+      "min": 20.0,
+      "stat": "critical_damage"
+    }
+  ],
+  "weight": 1000
+}

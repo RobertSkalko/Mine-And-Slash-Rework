@@ -57,3 +57,11 @@ This should ensure spells with any type of stat scalings can't become too op, bu
 - added back the wiki
 
 - added new item: Disassembler's Learning Method , when placed in a crafting station, it will destroy the output but give you 3X the EXP. This is intended to help level professions when you don't need the current level's crafts
+
+- fixed dungeon gen bug, obsidian walls no more!
+
+- negative player affixes now properly apply in maps
+
+- reduced map mob spawns, was causing lags
+
+- mob spawn count is now in server settings

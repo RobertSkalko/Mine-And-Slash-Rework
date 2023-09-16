@@ -78,6 +78,10 @@ public class ProfessionBlockEntity extends BlockEntity {
 
                 if (p != null) {
 
+                    if (this.inventory.getInventory(INPUTS).isEmpty()) {
+                        return;
+                    }
+
                     cooldown -= tickRate;
 
                     var rec = tryRecipe(p, true);

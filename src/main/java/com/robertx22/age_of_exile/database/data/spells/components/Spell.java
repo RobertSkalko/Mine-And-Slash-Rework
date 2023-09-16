@@ -57,6 +57,8 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     public String identifier = "";
     public AttachedSpell attached = new AttachedSpell();
     public SpellConfiguration config = new SpellConfiguration();
+    
+    public int min_lvl = 1;
 
     public boolean manual_tip = false;
     public List<String> disabled_dims = new ArrayList<>();
@@ -281,7 +283,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
                 e.printStackTrace();
             }
         }
-        
+
 
         int currentlvl = getLevelOf(info.player);
 

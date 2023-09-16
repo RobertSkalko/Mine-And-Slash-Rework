@@ -1,0 +1,16 @@
+{
+  "id": "spell_damage",
+  "manaMulti": 1.3,
+  "min_lvl": 1,
+  "one_of_a_kind": "",
+  "stats": [
+    {
+      "type": "MORE",
+      "max": 30.0,
+      "min": 15.0,
+      "stat": "int_dmg"
+    }
+  ],
+  "style": "INT",
+  "weight": 1000
+}

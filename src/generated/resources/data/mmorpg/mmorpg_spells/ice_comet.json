@@ -278,5 +278,6 @@
   "effect_tip": "",
   "identifier": "ice_comet",
   "manual_tip": true,
+  "min_lvl": 1,
   "weight": 1000
 }

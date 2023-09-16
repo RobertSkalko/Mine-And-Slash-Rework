@@ -77,5 +77,6 @@
   "effect_tip": "",
   "identifier": "vamp_blood",
   "manual_tip": true,
+  "min_lvl": 1,
   "weight": 1000
 }

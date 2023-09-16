@@ -191,5 +191,6 @@
   "effect_tip": "",
   "identifier": "thorn_bush",
   "manual_tip": true,
+  "min_lvl": 1,
   "weight": 1000
 }

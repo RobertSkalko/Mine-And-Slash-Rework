@@ -1,0 +1,14 @@
+{
+  "id": "health_reg",
+  "min_lvl": 1,
+  "reservation": 0.2,
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 5.0,
+      "min": 1.0,
+      "stat": "health_regen"
+    }
+  ],
+  "style": "STR"
+}

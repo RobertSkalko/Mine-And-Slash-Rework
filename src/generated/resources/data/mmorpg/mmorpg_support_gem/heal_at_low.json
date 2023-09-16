@@ -1,0 +1,16 @@
+{
+  "id": "heal_at_low",
+  "manaMulti": 1.3,
+  "min_lvl": 1,
+  "one_of_a_kind": "",
+  "stats": [
+    {
+      "type": "MORE",
+      "max": 50.0,
+      "min": 25.0,
+      "stat": "low_hp_healing"
+    }
+  ],
+  "style": "STR",
+  "weight": 1000
+}

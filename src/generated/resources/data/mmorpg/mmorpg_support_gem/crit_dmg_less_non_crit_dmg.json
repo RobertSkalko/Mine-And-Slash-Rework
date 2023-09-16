@@ -1,0 +1,22 @@
+{
+  "id": "crit_dmg_less_non_crit_dmg",
+  "manaMulti": 1.3,
+  "min_lvl": 1,
+  "one_of_a_kind": "",
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 125.0,
+      "min": 25.0,
+      "stat": "critical_damage"
+    },
+    {
+      "type": "MORE",
+      "max": -80.0,
+      "min": -80.0,
+      "stat": "non_crit_damage"
+    }
+  ],
+  "style": "STR",
+  "weight": 1000
+}

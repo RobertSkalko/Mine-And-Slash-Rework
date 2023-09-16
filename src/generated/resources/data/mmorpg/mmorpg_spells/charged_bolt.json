@@ -232,5 +232,6 @@
   "effect_tip": "",
   "identifier": "charged_bolt",
   "manual_tip": true,
+  "min_lvl": 1,
   "weight": 1000
 }

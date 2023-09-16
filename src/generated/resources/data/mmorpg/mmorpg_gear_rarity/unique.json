@@ -1,6 +1,5 @@
 {
   "announce_in_chat": true,
-  "backpack_slots": 10,
   "favor_loot_multi": 1.0,
   "favor_needed": 0,
   "guid": "unique",

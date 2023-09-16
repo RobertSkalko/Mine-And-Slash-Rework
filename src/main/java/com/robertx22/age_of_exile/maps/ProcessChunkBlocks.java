@@ -65,10 +65,17 @@ public class ProcessChunkBlocks {
 
                 int size = 2;
 
-                if (MMORPG.RUN_DEV_TOOLS) {
+                if (false && MMORPG.RUN_DEV_TOOLS) {
                     size = 5;
                 }
 
+                for (int x = -size; x < size; x++) {
+                    for (int z = -size; z < size; z++) {
+                        chunks.add(new ChunkPos(start.x + x, start.z + z));
+                    }
+                }
+
+/*
                 for (int i = 1; i < size; i++) {
                     chunks.add(new ChunkPos(start.x + i, start.z));
                     chunks.add(new ChunkPos(start.x - i, start.z));
@@ -80,7 +87,8 @@ public class ProcessChunkBlocks {
                     chunks.add(new ChunkPos(start.x - i, start.z + i));
                     chunks.add(new ChunkPos(start.x + i, start.z - i));
                 }
-
+ */
+                
                 for (ChunkPos cpos : chunks) {
                     if (!level.hasChunk(cpos.x, cpos.z)) {
                         continue;
@@ -100,6 +108,16 @@ public class ProcessChunkBlocks {
                             DungeonBuilder builder = new DungeonBuilder(0, cpos);
                             builder.build();
                             BuiltRoom room = builder.builtDungeon.getRoomForChunk(cpos);
+
+                            /*
+                            DungeonBuilder test = new DungeonBuilder(0, cpos);
+                            test.build();
+
+                            if (!test.builtDungeon.equals(builder.builtDungeon)) {
+                                System.out.println("sdsdsd");
+                            }
+
+                             */
 
                             var ran = DungeonBuilder.createRandom(0l, cpos);
 

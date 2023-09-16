@@ -1,0 +1,22 @@
+{
+  "id": "plus_aoe",
+  "manaMulti": 1.2,
+  "min_lvl": 1,
+  "one_of_a_kind": "",
+  "stats": [
+    {
+      "type": "MORE",
+      "max": -25.0,
+      "min": -10.0,
+      "stat": "area_dmg"
+    },
+    {
+      "type": "FLAT",
+      "max": 40.0,
+      "min": 20.0,
+      "stat": "inc_aoe"
+    }
+  ],
+  "style": "STR",
+  "weight": 1000
+}

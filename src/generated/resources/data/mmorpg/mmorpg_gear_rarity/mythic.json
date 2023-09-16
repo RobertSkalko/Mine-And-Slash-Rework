@@ -1,6 +1,5 @@
 {
   "announce_in_chat": true,
-  "backpack_slots": 54,
   "favor_loot_multi": 1.25,
   "favor_needed": 1000,
   "guid": "mythic",

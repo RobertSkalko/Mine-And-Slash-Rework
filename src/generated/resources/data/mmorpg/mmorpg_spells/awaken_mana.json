@@ -114,5 +114,6 @@
   "effect_tip": "",
   "identifier": "awaken_mana",
   "manual_tip": true,
+  "min_lvl": 1,
   "weight": 1000
 }

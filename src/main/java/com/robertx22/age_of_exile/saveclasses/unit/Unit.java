@@ -235,7 +235,7 @@ public class Unit {
             statContexts.addAll(CommonStatUtils.addExactCustomStats(entity));
             statContexts.add(data.getStatusEffectsData().getStats(entity));
             statContexts.addAll(addGearStats(gears));
-
+            CommonStatUtils.addMapAffixStats(entity);
 
             if (entity instanceof Player p) {
                 var playerData = Load.player(p);
@@ -264,7 +264,6 @@ public class Unit {
                 statContexts.addAll(MobStatUtils.getMobBaseStats(data, entity));
                 statContexts.addAll(MobStatUtils.getAffixStats(entity));
                 statContexts.addAll(MobStatUtils.getWorldMultiplierStats(entity));
-                MobStatUtils.addMapAffixStats(entity, data, this);
                 MobStatUtils.addMobBaseElementalBonusDamages(entity, data);
                 MobStatUtils.addMapTierStats(entity);
                 statContexts.addAll(MobStatUtils.getMobConfigStats(entity, data));

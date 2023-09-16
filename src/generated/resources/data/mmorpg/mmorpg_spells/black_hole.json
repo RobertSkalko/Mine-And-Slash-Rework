@@ -270,5 +270,6 @@
   "effect_tip": "",
   "identifier": "black_hole",
   "manual_tip": true,
+  "min_lvl": 1,
   "weight": 1000
 }

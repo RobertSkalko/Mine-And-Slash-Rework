@@ -1,6 +1,5 @@
 {
   "announce_in_chat": false,
-  "backpack_slots": 9,
   "favor_loot_multi": 0.75,
   "favor_needed": 0,
   "guid": "common",

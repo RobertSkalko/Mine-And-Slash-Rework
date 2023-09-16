@@ -1,0 +1,16 @@
+{
+  "id": "fire_pene",
+  "manaMulti": 1.25,
+  "min_lvl": 1,
+  "one_of_a_kind": "",
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 30.0,
+      "min": 15.0,
+      "stat": "fire_penetration"
+    }
+  ],
+  "style": "STR",
+  "weight": 1000
+}

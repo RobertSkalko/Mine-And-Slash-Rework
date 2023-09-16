@@ -1,5 +1,5 @@
 These are all default registry entries of this type.
-This registry can't be modified or added to.
+This registry is modify-able through datapacks.
 totem_damage
 physical_damage
 ailment_damage_less_hit_dmg

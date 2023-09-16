@@ -1,0 +1,16 @@
+{
+  "id": "rare_mana_eff",
+  "manaMulti": 1.0,
+  "min_lvl": 1,
+  "one_of_a_kind": "",
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": -50.0,
+      "min": -15.0,
+      "stat": "mana_cost"
+    }
+  ],
+  "style": "STR",
+  "weight": 50
+}

@@ -9,15 +9,12 @@ import com.robertx22.age_of_exile.aoe_data.database.stat_effects.StatEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
-import com.robertx22.age_of_exile.database.data.aura.AuraGems;
 import com.robertx22.age_of_exile.database.data.league.LeagueMechanics;
 import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChests;
-import com.robertx22.age_of_exile.database.data.map_affix.MapAffixes;
 import com.robertx22.age_of_exile.database.data.profession.ProfessionEvents;
 import com.robertx22.age_of_exile.database.data.spells.components.conditions.EffectCondition;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.stats.types.special.SpecialStats;
-import com.robertx22.age_of_exile.database.data.support_gem.SupportGems;
 import com.robertx22.age_of_exile.database.registrators.Currencies;
 import com.robertx22.age_of_exile.database.registry.ExileDBInit;
 import com.robertx22.age_of_exile.gui.SocketTooltip;
@@ -93,7 +90,7 @@ public class MMORPG {
         ForgeEvents.registerForgeEvent(RegisterClientTooltipComponentFactoriesEvent.class, x -> {
             x.register(SocketTooltip.SocketComponent.class, SocketTooltip::new);
         });
-        
+
         final IEventBus bus = FMLJavaModLoadingContext.get()
                 .getModEventBus();
 
@@ -181,9 +178,6 @@ public class MMORPG {
 
         GeneratedData.addAllObjectsToGenerate();
 
-        MapAffixes.init(); // todo make this fully data later
-        SupportGems.init();
-        AuraGems.init();
         BossSpells.init();
         LeagueMechanics.init();
         LootChests.init();

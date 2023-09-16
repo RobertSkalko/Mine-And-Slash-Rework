@@ -19,7 +19,6 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.min_affixes = 1;
             x.weight = 5000;
             x.item_tier_power = 1;
-            x.backpack_slots = 9;
             x.item_tier = 0;
             x.pot = new GearRarity.Potential(100, 0.5F);
             x.item_value_multi = 1;
@@ -39,7 +38,6 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.max_sockets = 1;
             x.socket_chance = 5;
             x.max_spell_links = 2;
-            x.backpack_slots = 2 * 9;
             x.pot = new GearRarity.Potential(100, 1);
             x.min_affixes = 2;
             x.weight = 2000;
@@ -61,7 +59,6 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.socket_chance = 15;
             x.max_spell_links = 3;
             x.min_lvl = 10;
-            x.backpack_slots = 3 * 9;
             x.lootable_gear_tier = GearRarity.LootableGearTier.MID;
             x.pot = new GearRarity.Potential(100, 1.5F);
             x.item_tier = 2;
@@ -84,7 +81,6 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.socket_chance = 20;
             x.min_lvl = 25;
             x.max_spell_links = 4;
-            x.backpack_slots = 4 * 9;
             x.lootable_gear_tier = GearRarity.LootableGearTier.MID;
             x.pot = new GearRarity.Potential(100, 1.5F);
             x.min_affixes = 4;
@@ -107,7 +103,6 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.socket_chance = 30;
             x.max_spell_links = 5;
             x.min_lvl = 50;
-            x.backpack_slots = 5 * 9;
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
             x.pot = new GearRarity.Potential(100, 1.75F);
             x.min_affixes = 5;
@@ -129,7 +124,6 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.mob = MobRarity.of(50, 8, 3);
             x.max_sockets = 3;
             x.min_lvl = 75;
-            x.backpack_slots = 6 * 9;
             x.max_spell_links = 5;
             x.socket_chance = 50;
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;

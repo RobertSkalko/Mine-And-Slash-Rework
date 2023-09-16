@@ -175,5 +175,6 @@
   "effect_tip": "",
   "identifier": "curse_of_weak",
   "manual_tip": true,
+  "min_lvl": 1,
   "weight": 1000
 }

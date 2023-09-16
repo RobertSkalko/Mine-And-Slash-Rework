@@ -13,16 +13,16 @@ import com.robertx22.library_of_exile.registry.ExileRegistry;
 import net.minecraft.world.item.ItemStack;
 
 public class SkillGemBlueprint extends RarityItemBlueprint implements ITypeBlueprint {
+
     public SkillGemBlueprint(LootInfo info, SkillGemData.SkillGemType type) {
         super(info);
         this.rarity.setupChances(info);
         this.type = type;
     }
 
-
-    RegistryPart<SupportGem> SUPP = new RegistryPart<>(this, ExileRegistryTypes.SUPPORT_GEM, x -> true);
-    RegistryPart<AuraGem> AURA = new RegistryPart<>(this, ExileRegistryTypes.AURA, x -> true);
-    RegistryPart<Spell> SPELL = new RegistryPart<>(this, ExileRegistryTypes.SPELL, x -> true);
+    RegistryPart<SupportGem> SUPP = new RegistryPart<>(this, ExileRegistryTypes.SUPPORT_GEM, x -> info.level >= x.min_lvl);
+    RegistryPart<AuraGem> AURA = new RegistryPart<>(this, ExileRegistryTypes.AURA, x -> info.level >= x.min_lvl);
+    RegistryPart<Spell> SPELL = new RegistryPart<>(this, ExileRegistryTypes.SPELL, x -> info.level >= x.min_lvl);
 
     SkillGemData.SkillGemType type;
 
@@ -43,7 +43,6 @@ public class SkillGemBlueprint extends RarityItemBlueprint implements ITypeBluep
 
     @Override
     ItemStack generate() {
-
         var data = createData();
 
         ItemStack stack = data.getItem().getDefaultInstance();

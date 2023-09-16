@@ -320,7 +320,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         float x = (point.x - school.calcData.center.x) * PerkButton.SPACING + 2;
         float y = (point.y - school.calcData.center.y) * PerkButton.SPACING + 2;
 
-
         int tx = (int) (halfx + x);
         int ty = (int) (halfy + y);
 
@@ -407,6 +406,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
         renderBackgroundDirt(gui, this, 0);
         zoom = Mth.lerp(ClientConfigs.getConfig().SKILL_TREE_ZOOM_SPEED.get().floatValue(), zoom, targetZoom);
+
         gui.pose().scale(zoom, zoom, zoom);
 
         try {

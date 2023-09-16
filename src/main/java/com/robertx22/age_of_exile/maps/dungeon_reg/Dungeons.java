@@ -11,7 +11,7 @@ public class Dungeons {
         Dungeon.Builder.of("bastion", new BastionRoomAdder()).weight(2000).build();
         Dungeon.Builder.of("sewer2", new Sewer2RoomAdder()).weight(2000).build();
 
-        Dungeon.Builder.of("pyramid", new PyramidRoomAdder()).weight(250).build(); // let's make it rarer because it's kinda buggy because of the bugged generation
+        Dungeon.Builder.of("pyramid", new PyramidRoomAdder()).weight(500).build();
 
 
         Dungeon.Builder.of("nature", new NatureRoomAdder()).weight(300).build();

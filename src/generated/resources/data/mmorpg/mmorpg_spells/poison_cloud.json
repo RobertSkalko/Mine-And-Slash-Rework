@@ -143,5 +143,6 @@
   "effect_tip": "",
   "identifier": "poison_cloud",
   "manual_tip": true,
+  "min_lvl": 1,
   "weight": 1000
 }

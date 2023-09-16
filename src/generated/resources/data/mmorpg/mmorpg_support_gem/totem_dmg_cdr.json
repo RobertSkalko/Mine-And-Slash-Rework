@@ -1,0 +1,22 @@
+{
+  "id": "totem_dmg_cdr",
+  "manaMulti": 1.3,
+  "min_lvl": 1,
+  "one_of_a_kind": "",
+  "stats": [
+    {
+      "type": "MORE",
+      "max": 10.0,
+      "min": 5.0,
+      "stat": "totem_spell_dmg"
+    },
+    {
+      "type": "FLAT",
+      "max": 20.0,
+      "min": 10.0,
+      "stat": "totem_cdr"
+    }
+  ],
+  "style": "STR",
+  "weight": 1000
+}

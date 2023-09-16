@@ -150,5 +150,6 @@
   "effect_tip": "",
   "identifier": "return_summons",
   "manual_tip": true,
+  "min_lvl": 1,
   "weight": 1000
 }

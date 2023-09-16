@@ -193,5 +193,6 @@
   "effect_tip": "",
   "identifier": "test_command",
   "manual_tip": false,
+  "min_lvl": 1,
   "weight": 0
 }

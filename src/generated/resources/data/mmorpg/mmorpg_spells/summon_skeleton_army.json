@@ -113,5 +113,6 @@
   "effect_tip": "",
   "identifier": "summon_skeleton_army",
   "manual_tip": true,
+  "min_lvl": 1,
   "weight": 1000
 }

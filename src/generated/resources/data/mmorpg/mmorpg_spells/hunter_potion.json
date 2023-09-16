@@ -114,5 +114,6 @@
   "effect_tip": "",
   "identifier": "hunter_potion",
   "manual_tip": true,
+  "min_lvl": 1,
   "weight": 1000
 }

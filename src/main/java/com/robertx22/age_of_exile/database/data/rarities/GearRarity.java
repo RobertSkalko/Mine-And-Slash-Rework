@@ -50,7 +50,6 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
 
     public LootableGearTier lootable_gear_tier = LootableGearTier.LOW;
     public int item_model_data_num = -1;
-    public int backpack_slots = 10;
     public MinMax stat_percents = new MinMax(0, 0);
     public Potential pot = new Potential(100, 0.5F);
     public MobRarity mob = new MobRarity();

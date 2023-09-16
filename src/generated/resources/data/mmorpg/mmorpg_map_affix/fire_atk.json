@@ -1,0 +1,13 @@
+{
+  "affected": "Mobs",
+  "id": "fire_atk",
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 3.0,
+      "min": 1.0,
+      "stat": "fire_weapon_damage"
+    }
+  ],
+  "weight": 1000
+}

@@ -1,0 +1,16 @@
+{
+  "id": "mana_saver_dmg",
+  "manaMulti": 0.8,
+  "min_lvl": 1,
+  "one_of_a_kind": "",
+  "stats": [
+    {
+      "type": "MORE",
+      "max": 25.0,
+      "min": 10.0,
+      "stat": "non_crit_damage"
+    }
+  ],
+  "style": "STR",
+  "weight": 1000
+}

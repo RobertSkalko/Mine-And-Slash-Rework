@@ -8,21 +8,24 @@ import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.ISkillGem;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
-import com.robertx22.library_of_exile.registry.ExileRegistry;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.IAutoGson;
+import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public class SupportGem implements ISkillGem, ExileRegistry<SupportGem> {
+public class SupportGem implements ISkillGem, JsonExileRegistry<SupportGem>, IAutoGson<SupportGem> {
 
 
     public String id = "";
-    public String locname = "";
+    public transient String locname = "";
 
     public PlayStyle style = PlayStyle.DEX;
+
+    public int min_lvl = 1;
 
     public float manaMulti = 0.25F;
 
@@ -95,5 +98,10 @@ public class SupportGem implements ISkillGem, ExileRegistry<SupportGem> {
     @Override
     public PlayStyle getStyle() {
         return style;
+    }
+
+    @Override
+    public Class<SupportGem> getClassForSerialization() {
+        return SupportGem.class;
     }
 }

@@ -9,17 +9,20 @@ import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.ISkillGem;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
-import com.robertx22.library_of_exile.registry.ExileRegistry;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.IAutoGson;
+import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AuraGem implements ExileRegistry<SupportGem>, ISkillGem {
+public class AuraGem implements JsonExileRegistry<SupportGem>, ISkillGem, IAutoGson<AuraGem> {
 
 
     public String id = "";
+
+    public int min_lvl = 1;
 
     public PlayStyle style = PlayStyle.INT;
 
@@ -27,7 +30,7 @@ public class AuraGem implements ExileRegistry<SupportGem>, ISkillGem {
 
     public List<StatMod> stats = new ArrayList<>();
 
-    String name;
+    transient String name;
 
     public AuraGem(String id, String name, PlayStyle style, float reservation, List<StatMod> stats) {
         this.id = id;
@@ -80,4 +83,8 @@ public class AuraGem implements ExileRegistry<SupportGem>, ISkillGem {
 
     }
 
+    @Override
+    public Class<AuraGem> getClassForSerialization() {
+        return AuraGem.class;
+    }
 }

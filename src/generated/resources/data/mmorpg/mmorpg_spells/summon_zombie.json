@@ -113,5 +113,6 @@
   "effect_tip": "",
   "identifier": "summon_zombie",
   "manual_tip": true,
+  "min_lvl": 1,
   "weight": 1000
 }

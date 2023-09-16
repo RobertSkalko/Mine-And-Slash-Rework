@@ -1,0 +1,13 @@
+{
+  "affected": "Players",
+  "id": "water_minus_res",
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": -60.0,
+      "min": -20.0,
+      "stat": "water_resist"
+    }
+  ],
+  "weight": 1000
+}

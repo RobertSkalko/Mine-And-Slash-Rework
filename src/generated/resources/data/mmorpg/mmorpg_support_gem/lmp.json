@@ -1,0 +1,28 @@
+{
+  "id": "lmp",
+  "manaMulti": 1.5,
+  "min_lvl": 1,
+  "one_of_a_kind": "proj_count",
+  "stats": [
+    {
+      "type": "MORE",
+      "max": -50.0,
+      "min": -50.0,
+      "stat": "total_damage"
+    },
+    {
+      "type": "FLAT",
+      "max": 30.0,
+      "min": 10.0,
+      "stat": "projectile_damage"
+    },
+    {
+      "type": "FLAT",
+      "max": 2.0,
+      "min": 2.0,
+      "stat": "projectile_count"
+    }
+  ],
+  "style": "DEX",
+  "weight": 1000
+}

@@ -1,0 +1,16 @@
+{
+  "id": "small_cdr",
+  "manaMulti": 1.3,
+  "min_lvl": 1,
+  "one_of_a_kind": "",
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 15.0,
+      "min": 5.0,
+      "stat": "cdr"
+    }
+  ],
+  "style": "INT",
+  "weight": 1000
+}

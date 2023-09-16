@@ -114,5 +114,6 @@
   "effect_tip": "",
   "identifier": "summon_lightning_golem",
   "manual_tip": true,
+  "min_lvl": 1,
   "weight": 1000
 }

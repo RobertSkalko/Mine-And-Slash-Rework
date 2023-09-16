@@ -1,0 +1,14 @@
+{
+  "id": "lightning_damage",
+  "min_lvl": 1,
+  "reservation": 0.3,
+  "stats": [
+    {
+      "type": "MORE",
+      "max": 35.0,
+      "min": 10.0,
+      "stat": "all_lightning_damage"
+    }
+  ],
+  "style": "INT"
+}

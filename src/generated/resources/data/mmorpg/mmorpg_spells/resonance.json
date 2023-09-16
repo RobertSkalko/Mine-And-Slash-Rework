@@ -265,5 +265,6 @@
   "effect_tip": "",
   "identifier": "resonance",
   "manual_tip": true,
+  "min_lvl": 1,
   "weight": 1000
 }

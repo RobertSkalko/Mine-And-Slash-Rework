@@ -198,5 +198,6 @@
   "effect_tip": "",
   "identifier": "recoil_shot",
   "manual_tip": false,
+  "min_lvl": 1,
   "weight": 1000
 }

@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.maps.processors.mob;
 
+import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.maps.generator.ChunkProcessData;
 import com.robertx22.age_of_exile.maps.mobs.SpawnedMob;
 import com.robertx22.age_of_exile.maps.processors.DataProcessor;
@@ -20,8 +21,7 @@ public class MobProcessor extends DataProcessor {
     public void processImplementation(String key, BlockPos pos, Level world, ChunkProcessData data) {
         EntityType<? extends Mob> type = SpawnedMob.random(data.getRoom()).type;
 
-
-        int amount = RandomUtils.RandomRange(2, 4); // hacky solution
+        int amount = RandomUtils.RandomRange(ServerContainer.get().MOB_MIN.get(), ServerContainer.get().MOB_MAX.get()); // hacky solution
 
         MobBuilder.of(type, x -> {
             x.amount = amount;

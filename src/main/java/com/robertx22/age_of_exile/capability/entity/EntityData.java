@@ -173,8 +173,7 @@ public class EntityData implements ICap, INeededForClient {
 
         nbt.putInt(LEVEL, level);
         nbt.putString(RARITY, rarity);
-        nbt.putInt(HP, (int) getUnit().getCalculatedStat(Health.getInstance())
-                .getValue());
+        nbt.putInt(HP, (int) getUnit().getCalculatedStat(Health.getInstance()).getValue());
         nbt.putString(ENTITY_TYPE, this.type.toString());
 
         if (affixes != null) {
@@ -226,6 +225,7 @@ public class EntityData implements ICap, INeededForClient {
         LoadSave.Save(ailments, nbt, AILMENTS);
         LoadSave.Save(summonedPetData, nbt, PET);
         LoadSave.Save(leech, nbt, LEECH);
+        LoadSave.Save(customExactStats, nbt, CUSTOM_STATS);
 
 
         if (unit != null) {

@@ -1,0 +1,13 @@
+{
+  "affected": "Players",
+  "id": "minus_ms_reg",
+  "stats": [
+    {
+      "type": "MORE",
+      "max": -75.0,
+      "min": -20.0,
+      "stat": "magic_shield_regen"
+    }
+  ],
+  "weight": 1000
+}

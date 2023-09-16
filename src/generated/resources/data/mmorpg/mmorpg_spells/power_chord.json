@@ -180,5 +180,6 @@
   "effect_tip": "",
   "identifier": "power_chord",
   "manual_tip": true,
+  "min_lvl": 1,
   "weight": 1000
 }

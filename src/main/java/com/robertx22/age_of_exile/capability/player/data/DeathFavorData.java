@@ -56,6 +56,7 @@ public class DeathFavorData {
         while (rar.hasHigherRarity() && favor >= rar.getHigherRarity().favor_needed) {
             rar = rar.getHigherRarity();
         }
+        
         return rar;
     }
 

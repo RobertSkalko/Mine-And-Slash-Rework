@@ -1,0 +1,13 @@
+{
+  "affected": "Mobs",
+  "id": "lightning_atk",
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 3.0,
+      "min": 1.0,
+      "stat": "lightning_weapon_damage"
+    }
+  ],
+  "weight": 1000
+}

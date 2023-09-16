@@ -79,5 +79,6 @@
   "effect_tip": "",
   "identifier": "nature_balm",
   "manual_tip": true,
+  "min_lvl": 1,
   "weight": 1000
 }

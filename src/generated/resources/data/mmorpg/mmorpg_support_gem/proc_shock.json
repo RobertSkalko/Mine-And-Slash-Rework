@@ -1,0 +1,16 @@
+{
+  "id": "proc_shock",
+  "manaMulti": 1.3,
+  "min_lvl": 1,
+  "one_of_a_kind": "",
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 100.0,
+      "min": 25.0,
+      "stat": "electrify_proc_chance"
+    }
+  ],
+  "style": "INT",
+  "weight": 1000
+}

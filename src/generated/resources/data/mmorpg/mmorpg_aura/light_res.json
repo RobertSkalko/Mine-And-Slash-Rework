@@ -1,0 +1,20 @@
+{
+  "id": "light_res",
+  "min_lvl": 1,
+  "reservation": 0.3,
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 50.0,
+      "min": 25.0,
+      "stat": "lightning_resist"
+    },
+    {
+      "type": "FLAT",
+      "max": 5.0,
+      "min": 1.0,
+      "stat": "max_lightning_resist"
+    }
+  ],
+  "style": "INT"
+}

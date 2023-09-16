@@ -98,13 +98,6 @@ public enum RoomType implements IWeighted {
 
     public abstract List<RoomRotation> getRotations();
 
-    public final List<DungeonRoom> getAllOfThisTypeRooms(Dungeon dun) {
-        return dun.getRooms()
-                .stream()
-                .filter(x -> x.type.equals(this))
-                .collect(Collectors.toList());
-
-    }
 
     public DungeonRoom getRandomRoom(Dungeon dun, DungeonBuilder builder) {
 
@@ -125,13 +118,9 @@ public enum RoomType implements IWeighted {
 
 
         if (possible.isEmpty()) {
-
             Dungeon fallback = dun.getFallbackGroup(builder.rand);
-
             // fallback to misc if no possible
-
             possible.addAll(fallback.getRoomsOfType(this));
-
         }
 
         if (possible.isEmpty()) {

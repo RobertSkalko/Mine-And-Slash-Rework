@@ -1,0 +1,16 @@
+{
+  "id": "burn_chance",
+  "manaMulti": 1.2,
+  "min_lvl": 1,
+  "one_of_a_kind": "",
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 40.0,
+      "min": 15.0,
+      "stat": "burn_chance"
+    }
+  ],
+  "style": "STR",
+  "weight": 1000
+}

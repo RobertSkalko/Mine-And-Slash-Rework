@@ -124,5 +124,6 @@
   "effect_tip": "",
   "identifier": "healing_aura",
   "manual_tip": true,
+  "min_lvl": 1,
   "weight": 1000
 }

@@ -1,0 +1,28 @@
+{
+  "id": "gmp",
+  "manaMulti": 1.5,
+  "min_lvl": 1,
+  "one_of_a_kind": "proj_count",
+  "stats": [
+    {
+      "type": "MORE",
+      "max": -65.0,
+      "min": -65.0,
+      "stat": "total_damage"
+    },
+    {
+      "type": "FLAT",
+      "max": 50.0,
+      "min": 20.0,
+      "stat": "projectile_damage"
+    },
+    {
+      "type": "FLAT",
+      "max": 4.0,
+      "min": 4.0,
+      "stat": "projectile_count"
+    }
+  ],
+  "style": "DEX",
+  "weight": 1000
+}

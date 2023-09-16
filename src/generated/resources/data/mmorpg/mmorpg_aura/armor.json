@@ -1,0 +1,20 @@
+{
+  "id": "armor",
+  "min_lvl": 1,
+  "reservation": 0.5,
+  "stats": [
+    {
+      "type": "MORE",
+      "max": 30.0,
+      "min": 10.0,
+      "stat": "armor"
+    },
+    {
+      "type": "FLAT",
+      "max": 15.0,
+      "min": 5.0,
+      "stat": "armor"
+    }
+  ],
+  "style": "STR"
+}

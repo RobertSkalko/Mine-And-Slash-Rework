@@ -1,0 +1,16 @@
+{
+  "id": "energy_on_hit",
+  "manaMulti": 1.2,
+  "min_lvl": 1,
+  "one_of_a_kind": "",
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 3.0,
+      "min": 1.0,
+      "stat": "energy_on_hit_hit"
+    }
+  ],
+  "style": "DEX",
+  "weight": 1000
+}

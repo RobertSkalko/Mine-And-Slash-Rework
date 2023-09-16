@@ -138,6 +138,30 @@ public class BuiltDungeon {
 
     }
 
+    public boolean checkMissing() {
+        boolean did = false;
+
+
+        for (int x = 0; x < rooms.length; x++) {
+            for (int z = 0; z < rooms[x].length; z++) {
+                var room = getRoom(x, z);
+                if (room != null) {
+
+                    for (Direction dir : room.data.sides.getDoorSides()) {
+                        var other = getRoomFacing(dir, x, z);
+
+                        if (other.data.sides.getSideOfDirection(dir.getOpposite()) != RoomSide.DOOR) {
+                            System.out.println("Room has no matching door " + x + "_" + z);
+                        }
+                    }
+                }
+            }
+        }
+        return did;
+    }
+
+
+
     /*
     public boolean addMissingRooms() {
         this.startFinishing = true;

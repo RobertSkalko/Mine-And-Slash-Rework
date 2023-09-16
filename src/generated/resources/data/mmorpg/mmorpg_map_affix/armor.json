@@ -1,0 +1,13 @@
+{
+  "affected": "Mobs",
+  "id": "armor",
+  "stats": [
+    {
+      "type": "MORE",
+      "max": 100.0,
+      "min": 20.0,
+      "stat": "armor"
+    }
+  ],
+  "weight": 1000
+}
