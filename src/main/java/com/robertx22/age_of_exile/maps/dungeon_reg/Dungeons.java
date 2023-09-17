@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.maps.room_adders.*;
 public class Dungeons {
 
     public static void init() {
+        Dungeon.Builder.of("cement", new CementeryAdder()).weight(2000).build();
 
         Dungeon.Builder.of("warped", new WarpedRoomAdder()).weight(2000).build();
         Dungeon.Builder.of("wn", new WideNatureRoomAdder()).weight(2000).build();

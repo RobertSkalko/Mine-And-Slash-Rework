@@ -65,3 +65,5 @@ This should ensure spells with any type of stat scalings can't become too op, bu
 - reduced map mob spawns, was causing lags
 
 - mob spawn count is now in server settings
+
+- new dungeon from @Jarky: the cementary!
