@@ -123,6 +123,7 @@ public class PlayerProfessionsData {
 
             // todo it seems this can be cheesed by going to another dimension..
             if (true) {
+                this.map = new HashMap<>();
                 return;
             }
 

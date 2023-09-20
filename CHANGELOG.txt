@@ -67,3 +67,7 @@ This should ensure spells with any type of stat scalings can't become too op, bu
 - mob spawn count is now in server settings
 
 - new dungeon from @Jarky: the cementary!
+
+- fix totems and tome souls
+
+- buffed magic shield values on gear a bit, lower end is doubled, higher end is a tiny bit increased

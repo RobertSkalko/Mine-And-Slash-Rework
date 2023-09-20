@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.saveclasses.skill_gem;
 import com.robertx22.age_of_exile.capability.player.container.SkillGemsMenu;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.interfaces.INeedsNBT;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.network.chat.Component;
@@ -20,10 +21,11 @@ import net.minecraft.world.level.Level;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class SkillGemItem extends Item {
+public class SkillGemItem extends Item implements INeedsNBT {
     public SkillGemItem() {
         super(new Properties().stacksTo(1));
 
+        
     }
 
     @Override

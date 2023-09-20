@@ -15,7 +15,7 @@ public class GearDefense extends Stat implements IBaseStatModifier {
 
     @Override
     public String locDescForLangFile() {
-        return "Modifies the gear's base stat";
+        return "Modifies the gear's base defense value, whether it's armor, magic shield or dodge.";
     }
 
     public static String GUID = "gear_defense";

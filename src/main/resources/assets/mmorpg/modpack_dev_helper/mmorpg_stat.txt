@@ -52,8 +52,8 @@ freeze_proc_chance
 burn_duration
 elemental_any_wep_damage
 blood
-move_speed
 inc_effect_of_heal_over_time_buff_given
+move_speed
 cooking_core_drop_bonus
 trap_cdr
 full_swing_damage
@@ -74,8 +74,8 @@ armor_penetration
 enchanting_medium_drop_bonus
 dmg_to_living
 positive_eff_duration
-axe_damage
 immobilizing_eff_duration
+axe_damage
 magic_find
 chaos_any_wep_damage
 curse_spell_dmg
@@ -114,8 +114,8 @@ defensive_eff_duration
 golem_damage
 hp_resto_to_blood
 cooking_exp_bonus
-fire_health_leech
 lifesteal
+fire_health_leech
 poison_strength
 elemental_vuln_crit
 all_resist
@@ -172,8 +172,8 @@ spell_fire_damage
 spirit_cost
 phys_to_all
 alchemy_greater_drop_bonus
-immobilizing_eff_dur_u_cast
 heal_over_time_eff_duration
+immobilizing_eff_dur_u_cast
 health_regen_per_10_intelligence
 heal_cleanse
 fishing_medium_drop_bonus
@@ -182,8 +182,8 @@ husbandry_double_drop
 area_cdr
 health_per_10_dexterity
 spell_chaos_damage
-technique_spell_dmg
 inc_effect_of_offensive_buff_given
+technique_spell_dmg
 chaos_health_leech
 inc_aoe
 water_health_leech
@@ -198,8 +198,8 @@ farming_triple_drop
 totem_resto
 heal_effect_on_self
 out_of_combat_regen
-chaining_spell_dmg
 negative_eff_dur_u_cast
+chaining_spell_dmg
 plus_phys_to_fire
 poison_duration
 dmg_taken_to_mana
@@ -235,9 +235,9 @@ lightning_mana_leech
 song_eff_duration
 phys_to_water
 max_total_summons
-dmg_when_target_near_full_hp
 inc_effect_of_immobilizing_buff_on_you
 faster_projectiles
+dmg_when_target_near_full_hp
 extra_mob_drops
 projectile_count
 water_dot_damage
@@ -279,8 +279,8 @@ physical_mana_leech
 fishing_double_drop
 husbandry_greater_drop_bonus
 shield_cdr
-lightning_vuln_crit
 double_attack_chance
+lightning_vuln_crit
 mining_lesser_drop_bonus
 fire_dmg_when_target_low_hp
 energy_per_sec
@@ -297,8 +297,8 @@ husbandry_lesser_drop_bonus
 health_on_hit_hit
 all_attributes
 max_lightning_resist
-water_vuln_crit
 area_dmg
+water_vuln_crit
 fishing_triple_drop
 plus_phys_to_chaos
 summon_cdr

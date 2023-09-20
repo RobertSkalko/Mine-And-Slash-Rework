@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.database.data.loot_chest.base;
 
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.ItemModelManager;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.interfaces.INeedsNBT;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
 import net.minecraft.world.InteractionHand;
@@ -10,7 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class LootChestItem extends AutoItem {
+public class LootChestItem extends AutoItem implements INeedsNBT {
     String name;
 
     public LootChestItem(String name) {

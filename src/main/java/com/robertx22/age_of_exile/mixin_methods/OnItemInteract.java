@@ -63,9 +63,7 @@ public class OnItemInteract {
 
             if (stack.isDamaged() && cursor.getItem() instanceof RarityStoneItem) {
 
-                GearItemData gear = StackSaving.GEARS.loadFrom(stack);
-
-                if (gear == null) {
+                if (StackSaving.GEARS.has(stack) || StackSaving.TOOL.has(stack)) {
                     return;
                 }
 
@@ -120,6 +118,7 @@ public class OnItemInteract {
                             gear.sockets.getSocketed().remove(0);
                             StackSaving.GEARS.saveTo(stack, gear);
                             PlayerUtils.giveItem(gem, player);
+                            cursor.shrink(1);
                             x.setCanceled(true);
                         } catch (Exception e) {
                             e.printStackTrace();

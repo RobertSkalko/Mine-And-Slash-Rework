@@ -8,9 +8,12 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.interfaces.INeedsNBT;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.registry.Database;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -89,11 +92,13 @@ public class TooltipMethod {
             }
 
             if (!hasdata) {
-
                 GearSlot slot = GearSlot.getSlotOf(stack.getItem());
-
                 if (slot != null) {
                     tooltip.add(TooltipUtils.gearSlot(slot));
+                }
+
+                if (stack.getItem() instanceof INeedsNBT) {
+                    tooltip.addAll(TooltipUtils.cutIfTooLong(Chats.ITEM_NON_NBT.locName().withStyle(ChatFormatting.RED)));
                 }
             }
 

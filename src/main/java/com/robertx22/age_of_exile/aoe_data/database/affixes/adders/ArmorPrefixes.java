@@ -40,7 +40,7 @@ public class ArmorPrefixes implements ExileRegistryInit {
         List<TYPE> stats = new ArrayList<>();
 
         var ARMOR = new TYPE("armor", GearDefense.getInstance(), "Reinforced", SlotTag.armor_stat, 1);
-        var MS = new TYPE("ms", GearDefense.getInstance(), "Fortified", SlotTag.magic_shield_stat, 0.25f);
+        var MS = new TYPE("ms", GearDefense.getInstance(), "Fortified", SlotTag.magic_shield_stat, 0.33f);
         var DODGE = new TYPE("dodge", GearDefense.getInstance(), "Scaled", SlotTag.dodge_stat, 1);
 
         stats.add(ARMOR);

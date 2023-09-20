@@ -7,6 +7,8 @@ import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
+import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.bases.DodgeOffhandItem;
+import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.bases.TomeItem;
 import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.weapons.StaffWeapon;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
@@ -129,6 +131,10 @@ public class GearSlot implements JsonExileRegistry<GearSlot>, IAutoGson<GearSlot
                     bool = item instanceof BowItem;
                 } else if (id.equals(GearSlots.SHIELD)) {
                     bool = item instanceof ShieldItem;
+                } else if (id.equals(GearSlots.TOTEM)) {
+                    bool = item instanceof DodgeOffhandItem;
+                } else if (id.equals(GearSlots.TOME)) {
+                    bool = item instanceof TomeItem;
                 } else if (id.equals(GearSlots.CROSBOW)) {
                     bool = item instanceof CrossbowItem;
                 } else if (id.equals(GearSlots.STAFF)) {
