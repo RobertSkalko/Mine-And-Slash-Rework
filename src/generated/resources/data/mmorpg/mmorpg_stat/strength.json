@@ -14,9 +14,9 @@
           "v1": 0.1
         },
         {
-          "type": "FLAT",
-          "stat": "health",
-          "v1": 5.0
+          "type": "PERCENT",
+          "stat": "armor",
+          "v1": 1.0
         }
       ]
     },

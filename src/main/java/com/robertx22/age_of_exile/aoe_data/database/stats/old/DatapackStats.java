@@ -30,7 +30,7 @@ import java.util.Arrays;
 import java.util.UUID;
 
 public class DatapackStats implements ExileRegistryInit {
-       
+
     public static Stat INT = new CoreStat("intelligence", "Intelligence", CoreStatData.of(Arrays.asList(
             new OptScaleExactStat(5, Mana.getInstance(), ModType.FLAT),
             new OptScaleExactStat(0.1F, ManaRegen.getInstance(), ModType.FLAT),
@@ -40,7 +40,7 @@ public class DatapackStats implements ExileRegistryInit {
     public static Stat STR = new CoreStat("strength", "Strength", CoreStatData.of(Arrays.asList(
             new OptScaleExactStat(0.1F, WeaponDamage.getInstance(), ModType.FLAT),
             new OptScaleExactStat(0.1F, HealthRegen.getInstance(), ModType.FLAT),
-            new OptScaleExactStat(5, Health.getInstance(), ModType.FLAT)
+            new OptScaleExactStat(1, Armor.getInstance(), ModType.PERCENT)
     )));
 
     public static Stat DEX = new CoreStat("dexterity", "Dexterity", CoreStatData.of(Arrays.asList(

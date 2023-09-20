@@ -71,3 +71,7 @@ This should ensure spells with any type of stat scalings can't become too op, bu
 - fix totems and tome souls
 
 - buffed magic shield values on gear a bit, lower end is doubled, higher end is a tiny bit increased
+
+v5.1.1
+
+- upped base hp per level, STR now gives armor instead of hp, this is a buff.
