@@ -25,10 +25,12 @@ public class SkillGemsMenu extends AbstractContainerMenu {
         this(new PlayerData(null), pContainerId, pContainer);
     }
 
+    Player player;
 
     public SkillGemsMenu(PlayerData rpg, int pContainerId, Container pContainer) {
         super(SlashContainers.SKILL_GEMS.get(), pContainerId);
 
+        this.player = rpg.player;
 
         //this.addDataSlots(pBeaconData);
         int x = 36;
@@ -54,11 +56,11 @@ public class SkillGemsMenu extends AbstractContainerMenu {
                 if (i > 3) {
                     xp += 7;
                 }
-                this.addSlot(new SkillSlot(data.getGemsInv(), index, xp, 16));
+                this.addSlot(new GemSlot(SkillGemData.SkillGemType.SKILL, data.getGemsInv(), index, xp, 16));
                 index++;
 
                 for (int s = 0; s < GemInventoryHelper.SUPPORT_GEMS_PER_SKILL; s++) {
-                    this.addSlot(new SuppSlot(data.getGemsInv(), index, xp, 38 + (s * 18)));
+                    this.addSlot(new GemSlot(SkillGemData.SkillGemType.SUPPORT, data.getGemsInv(), index, xp, 38 + (s * 18)));
                     index++;
                 }
 
@@ -66,7 +68,7 @@ public class SkillGemsMenu extends AbstractContainerMenu {
 
 
             for (int i = 0; i < GemInventoryHelper.TOTAL_AURAS; i++) {
-                this.addSlot(new AuraSlot(data.getAuraInv(), i, 36 + (i * 18), 148));
+                this.addSlot(new GemSlot(SkillGemData.SkillGemType.AURA, data.getAuraInv(), i, 36 + (i * 18), 148));
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -76,44 +78,29 @@ public class SkillGemsMenu extends AbstractContainerMenu {
     }
 
 
-    public class SkillSlot extends Slot {
+    public class GemSlot extends Slot {
+        SkillGemData.SkillGemType type;
 
-        public SkillSlot(Container pContainer, int pSlot, int pX, int pY) {
+        public GemSlot(SkillGemData.SkillGemType type, Container pContainer, int pSlot, int pX, int pY) {
             super(pContainer, pSlot, pX, pY);
-
+            this.type = type;
         }
 
         @Override
         public boolean mayPlace(ItemStack pStack) {
-            return StackSaving.SKILL_GEM.loadFrom(pStack) != null && StackSaving.SKILL_GEM.loadFrom(pStack).type == SkillGemData.SkillGemType.SKILL;
+            SkillGemData data = StackSaving.SKILL_GEM.loadFrom(pStack);
+            if (player != null) {
+                if (data != null && data.canPlayerWear(player)) {
+                    if (data.type == type) {
+                        return true;
+                    }
+
+                }
+            }
+            return false;
         }
     }
 
-    public class AuraSlot extends Slot {
-
-        public AuraSlot(Container pContainer, int pSlot, int pX, int pY) {
-            super(pContainer, pSlot, pX, pY);
-
-        }
-
-        @Override
-        public boolean mayPlace(ItemStack pStack) {
-            return StackSaving.SKILL_GEM.loadFrom(pStack) != null && StackSaving.SKILL_GEM.loadFrom(pStack).type == SkillGemData.SkillGemType.AURA;
-        }
-    }
-
-    public class SuppSlot extends Slot {
-
-        public SuppSlot(Container pContainer, int pSlot, int pX, int pY) {
-            super(pContainer, pSlot, pX, pY);
-
-        }
-
-        @Override
-        public boolean mayPlace(ItemStack pStack) {
-            return StackSaving.SKILL_GEM.loadFrom(pStack) != null && StackSaving.SKILL_GEM.loadFrom(pStack).type == SkillGemData.SkillGemType.SUPPORT;
-        }
-    }
 
     @Override
     public ItemStack quickMoveStack(Player pPlayer, int pIndex) {

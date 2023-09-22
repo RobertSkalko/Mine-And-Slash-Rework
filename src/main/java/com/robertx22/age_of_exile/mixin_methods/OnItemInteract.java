@@ -63,10 +63,9 @@ public class OnItemInteract {
 
             if (stack.isDamaged() && cursor.getItem() instanceof RarityStoneItem) {
 
-                if (StackSaving.GEARS.has(stack) || StackSaving.TOOL.has(stack)) {
+                if (!StackSaving.GEARS.has(stack)) {
                     return;
                 }
-
                 RarityStoneItem essence = (RarityStoneItem) cursor.getItem();
 
                 SoundUtils.playSound(player, SoundEvents.ANVIL_USE, 1, 1);

@@ -64,7 +64,7 @@ public class PlayerData implements ICap {
     private static final String BUFFS = "buffs";
     private static final String RESTED_XP = "rxp";
 
-    transient Player player;
+    public transient Player player;
 
     public TeamData team = new TeamData();
     public TalentsData talents = new TalentsData();

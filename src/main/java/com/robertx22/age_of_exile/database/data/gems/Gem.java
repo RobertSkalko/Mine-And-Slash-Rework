@@ -42,7 +42,7 @@ public class Gem extends BaseGem implements IAutoGson<Gem>, JsonExileRegistry<Ge
     }
 
     public boolean hasHigherTierGem() {
-        return getHigherTierGem() != null;
+        return getHigherTierGem() != null && getHigherTierGem().getItem() != null;
     }
 
     public Item getItem() {

@@ -57,7 +57,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     public String identifier = "";
     public AttachedSpell attached = new AttachedSpell();
     public SpellConfiguration config = new SpellConfiguration();
-    
+
     public int min_lvl = 1;
 
     public boolean manual_tip = false;
@@ -373,6 +373,11 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     @Override
     public int getMaxLevelWithBonuses() {
         return getMaxLevel();
+    }
+
+    @Override
+    public int getRequiredLevel() {
+        return min_lvl;
     }
 
     @Override

@@ -125,6 +125,11 @@ public class SpellBuilder {
         return this;
     }
 
+    public SpellBuilder levelReq(int lvl) {
+        this.spell.min_lvl = lvl;
+        return this;
+    }
+
     public SpellBuilder onTick(String entity, ComponentPart comp) {
         return this.addEntityAction(entity, comp);
     }

@@ -113,27 +113,28 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocN
             Gem gem = getGem();
 
             if (stack.getCount() > 2) {
-                if (getGem().hasHigherTierGem()) {
+                if (gem.hasHigherTierGem()) {
                     boolean success = RandomUtils.roll(gem.perc_upgrade_chance);
 
-                    ItemStack newstack = new ItemStack(getGem().getHigherTierGem()
-                            .getItem());
-
-                    stack.shrink(3);
+                    ItemStack newstack = new ItemStack(gem.getHigherTierGem().getItem());
 
                     Item old = stack.getItem();
 
+                    stack.shrink(3);
+
                     if (success) {
+                        p.displayClientMessage(Component.literal(ChatFormatting.GREEN + "").append(new ItemStack(old).getHoverName())
+                                .append(" has been upgraded to ")
+                                .append(newstack.getHoverName()), false);
+
                         PlayerUtils.giveItem(newstack, p);
                         Packets.sendToClient(p, new TotemAnimationPacket(newstack));
-                        p.displayClientMessage(Component.literal(ChatFormatting.GREEN + "").append(old.getName(new ItemStack(old)))
-                                .append(" has been upgraded to ")
-                                .append(newstack.getDisplayName()), false);
+
 
                     } else {
                         SoundUtils.playSound(p, SoundEvents.VILLAGER_NO, 1, 1);
 
-                        p.displayClientMessage(Component.literal(ChatFormatting.RED + "").append(old.getName(new ItemStack(old)))
+                        p.displayClientMessage(Component.literal(ChatFormatting.RED + "").append(new ItemStack(old).getHoverName())
                                 .append(" has failed the upgrade and was destroyed."), false);
                     }
                 }
@@ -487,8 +488,7 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocN
     }
 
     public Gem getGem() {
-        String id = VanillaUTIL.REGISTRY.items().getKey(this)
-                .toString();
+        String id = VanillaUTIL.REGISTRY.items().getKey(this).toString();
 
         Optional<Gem> opt = ExileDB.Gems()
                 .getList()

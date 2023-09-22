@@ -28,6 +28,7 @@ public class DungeonBuilder {
 
         this.dungeon = RandomUtils.weightedRandom(ExileDB.Dungeons().getFilterWrapped(x -> x.can_be_main).list, rand.nextDouble());
 
+        //       this.dungeon = ExileDB.Dungeons().get("pyramid"); // todo
 
         this.size = RandomUtils.RandomRange(12, 20, rand);
 

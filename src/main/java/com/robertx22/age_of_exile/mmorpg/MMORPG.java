@@ -58,7 +58,7 @@ import java.util.function.Consumer;
 
 @Mod(SlashRef.MODID)
 public class MMORPG {
-
+    
     // DISABLE WHEN PUBLIC BUILD
     public static boolean RUN_DEV_TOOLS = false;
 

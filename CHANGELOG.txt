@@ -75,3 +75,9 @@ This should ensure spells with any type of stat scalings can't become too op, bu
 v5.1.1
 
 - upped base hp per level, STR now gives armor instead of hp, this is a buff.
+
+v5.1.2
+
+- should fix dodge not working
+
+- fix items not being repairable

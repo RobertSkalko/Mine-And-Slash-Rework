@@ -34,7 +34,7 @@ import java.util.List;
 
 public class SkillGemData implements ICommonDataItem<GearRarity> {
 
-    
+
     @Override
     public void BuildTooltip(TooltipContext ctx) {
 
@@ -147,6 +147,17 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
         return null;
     }
 
+    public boolean canPlayerWear(Player p) {
+
+        int req = getGeneric().getRequiredLevel();
+
+        if (Load.Unit(p).getLevel() < req) {
+            return false;
+        }
+
+        return true;
+    }
+
     public AuraGem getAura() {
         if (type == SkillGemType.AURA) {
             return ExileDB.AuraGems().get(id);
@@ -251,7 +262,15 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
             list.add(Component.literal("Remaining Aura Capacity: " + spiritLeft).withStyle(ChatFormatting.AQUA));
 
+
         }
+        int req = getGeneric().getRequiredLevel();
+
+        if (req > 0) {
+            list.add(TooltipUtils.level(req));
+
+        }
+
         list.add(ExileText.emptyLine().get());
 
         list.add(TooltipUtils.rarity(rar));

@@ -52,6 +52,11 @@ public class SupportGem implements ISkillGem, JsonExileRegistry<SupportGem>, IAu
         return this;
     }
 
+    public SupportGem levelReq(int lvl) {
+        this.min_lvl = lvl;
+        return this;
+    }
+
     public SupportGem edit(Consumer<SupportGem> s) {
         s.accept(this);
         return this;
@@ -93,6 +98,11 @@ public class SupportGem implements ISkillGem, JsonExileRegistry<SupportGem>, IAu
                 .map(x -> x.ToExactStat(data.getStatPercent(), en.getLevel()))
                 .collect(Collectors.toList());
 
+    }
+
+    @Override
+    public int getRequiredLevel() {
+        return min_lvl;
     }
 
     @Override

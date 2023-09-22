@@ -40,6 +40,11 @@ public class AuraGem implements JsonExileRegistry<SupportGem>, ISkillGem, IAutoG
         this.stats = stats;
     }
 
+    public AuraGem levelReq(int lvl) {
+        this.min_lvl = lvl;
+        return this;
+    }
+
     @Override
     public ExileRegistryType getExileRegistryType() {
         return ExileRegistryTypes.AURA;
@@ -53,6 +58,11 @@ public class AuraGem implements JsonExileRegistry<SupportGem>, ISkillGem, IAutoG
     @Override
     public int Weight() {
         return 1000;
+    }
+
+    @Override
+    public int getRequiredLevel() {
+        return min_lvl;
     }
 
     @Override
