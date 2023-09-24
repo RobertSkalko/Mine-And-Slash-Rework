@@ -61,7 +61,7 @@ public class HolySpells implements ExileRegistryInit {
         SpellBuilder.of(WHIRLWIND, PlayStyle.STR, SpellConfiguration.Builder.multiCast(10, 0, 100, 10)
                                 .setSwingArm(), "Whirlwind",
                         Arrays.asList(SpellTag.technique, SpellTag.area, SpellTag.damage))
-                .manualDesc("Strike enemies around you for " + SpellCalcs.WHIRLWIND.getLocDmgTooltip(Elements.Physical))
+                .manualDesc("Spin and continuously strike enemies around you for " + SpellCalcs.WHIRLWIND.getLocDmgTooltip(Elements.Physical))
 
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
                 .onCast(PartBuilder.giveSelfEffect(SlashPotions.KNOCKBACK_RESISTANCE.get(), 100D))
@@ -70,6 +70,7 @@ public class HolySpells implements ExileRegistryInit {
                 .onCast(PartBuilder.damageInAoe(SpellCalcs.WHIRLWIND, Elements.Physical, 1.5D)
                         .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.EFFECT, 50D, 0.5D, 0.1D))
                 )
+                .levelReq(30)
                 .build();
 
         SpellBuilder.of(CHARGE_ID, PlayStyle.STR, SpellConfiguration.Builder.multiCast(10, 20 * 10, 60, 60)
@@ -77,12 +78,12 @@ public class HolySpells implements ExileRegistryInit {
                         Arrays.asList(SpellTag.area, SpellTag.damage, SpellTag.movement))
                 .manualDesc(
                         "Charge in a direction, stopping upon first enemy hit to deal "
-                                + SpellCalcs.CHARGE.getLocDmgTooltip() + " " + Elements.Physical.getIconNameDmg() + " in radius."
+                                + SpellCalcs.CHARGE.getLocDmgTooltip() + " " + Elements.Physical.getIconNameDmg() + " in an area."
 
                 )
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.ANCIENT_DEBRIS_STEP, 1D, 1D))
-                .onCast(PartBuilder.justAction(SpellAction.SET_ADD_MOTION.create(SetAdd.ADD, 0.2D, ParticleMotion.CasterLook)
+                .onCast(PartBuilder.justAction(SpellAction.SET_ADD_MOTION.create(SetAdd.ADD, 0.4D, ParticleMotion.CasterLook)
                                 .put(MapField.IGNORE_Y, true))
                         .addTarget(TargetSelector.CASTER.create()))
                 .onCast(PartBuilder.groundEdgeParticles(ParticleTypes.CLOUD, 20D, 1D, 0.5D))
@@ -93,13 +94,14 @@ public class HolySpells implements ExileRegistryInit {
                         .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.CLOUD, 100D, 0.5D, 0.1D))
                         .addPerEntityHit(PartBuilder.cancelSpell())
                 )
+                .levelReq(1)
                 .build();
 
         SpellBuilder.of(TAUNT, PlayStyle.STR, SpellConfiguration.Builder.instant(0, 20 * 30)
                                 .setSwingArm(), "Taunt",
                         Arrays.asList(SpellTag.area))
                 .manualDesc(
-                        "Shout, making enemies nearby want to attack you. " +
+                        "Shout, making nearby enemies want to attack you. " +
                                 "Generates " + SpellCalcs.TAUNT.getLocDmgTooltip() + " threat."
                 )
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
@@ -107,7 +109,7 @@ public class HolySpells implements ExileRegistryInit {
                 .onCast(PartBuilder.justAction(SpellAction.AGGRO.create(SpellCalcs.TAUNT, AggroAction.Type.AGGRO))
                         .addTarget(TargetSelector.AOE.create(3D, EntityFinder.SelectionType.RADIUS, AllyOrEnemy.enemies)))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.CLOUD, 20D, 3D))
-
+                .levelReq(10)
                 .build();
 
 
@@ -125,6 +127,7 @@ public class HolySpells implements ExileRegistryInit {
                         .addActions(SpellAction.EXILE_EFFECT.create(NegativeEffects.STUN.resourcePath, ExileEffectAction.GiveOrTake.GIVE_STACKS, 20D * 2))
                         .addTarget(TargetSelector.AOE.create(8D, EntityFinder.SelectionType.RADIUS, AllyOrEnemy.enemies)))
                 .onCast(PartBuilder.groundEdgeParticles(ParticleTypes.CRIT, 100D, 6D, 0.1D))
+                .levelReq(20)
                 .build();
 
         SpellBuilder.of(GONG_STRIKE_ID, PlayStyle.STR, SpellConfiguration.Builder.instant(8, 20 * 10)
@@ -144,6 +147,7 @@ public class HolySpells implements ExileRegistryInit {
                 .onCast(PartBuilder.groundEdgeParticles(ParticleTypes.CLOUD, 300D, 2D, 0.1D))
                 .onCast(PartBuilder.groundEdgeParticles(ParticleTypes.EXPLOSION, 5D, 2D, 0.1D))
 
+                .levelReq(1)
                 .build();
 
         SpellBuilder.of(UNDYING_WILL, PlayStyle.STR, SpellConfiguration.Builder.instant(7, 20 * 60)
@@ -155,6 +159,7 @@ public class HolySpells implements ExileRegistryInit {
                 .onCast(PartBuilder.giveSelfExileEffect(BeneficialEffects.UNDYING_WILL, 20D * 10))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.ENCHANTED_HIT, 50D, 1D))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.ENCHANT, 50D, 1D))
+                .levelReq(30)
                 .build();
 
         SpellBuilder.of(INSPIRATION, PlayStyle.INT, SpellConfiguration.Builder.instant(0, 300 * 20), "Inspiration",
@@ -166,6 +171,7 @@ public class HolySpells implements ExileRegistryInit {
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.WITCH, 40D, 1.5D))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.HEART, 12D, 1.5D))
                 .onCast(PartBuilder.restoreManaToCaster(SpellCalcs.AWAKEN_MANA))
+                .levelReq(10)
                 .build();
 
         SpellBuilder.of(SHOOTING_STAR, PlayStyle.INT, SpellConfiguration.Builder.instant(10, 20)
@@ -183,6 +189,7 @@ public class HolySpells implements ExileRegistryInit {
                 .onTick(PartBuilder.aoeParticles(ParticleTypes.ENCHANT, 1D, 0.7D).tickRequirement(1D))
                 .onExpire(PartBuilder.healInAoe(SpellCalcs.SHOOTING_STAR, 2D))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.SOUL_FIRE_FLAME, 10D, 1D))
+                .levelReq(10)
                 .build();
 
         SpellBuilder.of(HEALING_AURA_ID, PlayStyle.INT, SpellConfiguration.Builder.multiCast(15, 20 * 30, 60, 3), "Healing Wave",
@@ -196,19 +203,21 @@ public class HolySpells implements ExileRegistryInit {
                 .onCast(PartBuilder.groundParticles(ParticleTypes.COMPOSTER, 50D, 2D, 0.2D))
                 .onCast(PartBuilder.groundParticles(ParticleTypes.HEART, 20D, 2D, 0.2D))
                 .onCast(PartBuilder.healInAoe(SpellCalcs.HEALING_AURA, 2D))
+                .levelReq(1)
                 .build();
 
         SpellBuilder.of(WISH, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 10)
                                 .setChargesAndRegen(WISH, 3, 20 * 30), "Wish",
                         Arrays.asList(SpellTag.heal))
                 .manualDesc(
-                        "Heal allies around you for " + SpellCalcs.HEALING_AURA.getLocDmgTooltip() +
+                        "Heal allies around you for " + SpellCalcs.WISH.getLocDmgTooltip() +
                                 " health")
                 .weaponReq(CastingWeapon.ANY_WEAPON)
                 .onCast(PartBuilder.playSound(SlashSounds.BUFF.get(), 1D, 1D))
                 .onCast(PartBuilder.groundParticles(ParticleTypes.COMPOSTER, 50D, 5D, 0.2D))
                 .onCast(PartBuilder.groundParticles(ParticleTypes.HEART, 50D, 5D, 0.2D))
                 .onCast(PartBuilder.healInAoe(SpellCalcs.WISH, 5D))
+                .levelReq(20)
                 .build();
 
     }
@@ -224,6 +233,7 @@ public class HolySpells implements ExileRegistryInit {
                 .onCast(PartBuilder.playSound(SoundEvents.EXPERIENCE_ORB_PICKUP, 1D, 1D))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.NOTE, 50D, 3D))
                 .onCast(PartBuilder.giveExileEffectToAlliesInRadius(10D, effect.resourcePath, 20 * 30D))
+                .levelReq(10)
                 .build();
     }
 }

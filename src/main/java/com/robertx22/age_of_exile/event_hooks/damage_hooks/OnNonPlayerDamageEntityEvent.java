@@ -97,6 +97,9 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
                                     .set(x -> x.data.setBoolean(EventData.IS_SUMMON_ATTACK, true))
                                     .build();
 
+                            //the knockback makes them op
+                            dmg.data.setBoolean(EventData.DISABLE_KNOCKBACK, true);
+
                             dmg.Activate();
                         }
                     }

@@ -30,7 +30,7 @@ public class PlayerConfigData {
             if (data != null) {
                 if (data.isSalvagable()) {
                     if (salvages(data.getSalvageType(), data.getRarityId())) {
-                        SoundUtils.playSound(player, SoundEvents.ANVIL_USE, 1, 1);
+                        SoundUtils.playSound(player, SoundEvents.EXPERIENCE_ORB_PICKUP, 0.75F, 1.25F);
                         stack.shrink(100);
                         data.getSalvageResult(stack).forEach(e -> PlayerUtils.giveItem(e, player));
 
