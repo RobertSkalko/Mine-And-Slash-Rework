@@ -47,8 +47,8 @@ public class WaterSpells implements ExileRegistryInit {
                                 .applyCastSpeedToCooldown(), "Frozen orb",
                         Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.area))
                 .manualDesc(
-                        "Throw out an orb of ice which slowly moves towards enemies and deals " + SpellCalcs.ICEBALL.getLocDmgTooltip()
-                                + " " + Elements.Cold.getIconNameDmg() + " in an area.")
+                        "Throw out a frozen orb, slowly moving towards enemies and  dealing " + SpellCalcs.ICEBALL.getLocDmgTooltip()
+                                + " " + Elements.Cold.getIconNameDmg())
 
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.SNOWBALL_THROW, 1D, 1D))
@@ -63,14 +63,14 @@ public class WaterSpells implements ExileRegistryInit {
                 .onTick(PartBuilder.damageInAoe(SpellCalcs.ICEBALL, Elements.Cold, 3D).tickRequirement(20D))
                 .onTick(PartBuilder.aoeParticles(ParticleTypes.ITEM_SNOWBALL, 5D, 3D).tickRequirement(20D))
                 .onTick(PartBuilder.aoeParticles(ParticleTypes.SNOWFLAKE, 15D, 3D).tickRequirement(20D))
-                .levelReq(20)
+
                 .build();
 
         SpellBuilder.of(FROST_FLOWER, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 60)
                                 .setSwingArm(), "Frost Flower",
                         Arrays.asList(SpellTag.damage, SpellTag.area, SpellTag.totem))
-                .manualDesc("Summon a frost flower that deals "
-                        + SpellCalcs.FROST_FLOWER.getLocDmgTooltip(Elements.Cold) + " in an area every second.")
+                .manualDesc("Summon a freezing flower that deals "
+                        + SpellCalcs.FROST_FLOWER.getLocDmgTooltip(Elements.Cold) + " every second.")
 
                 .onCast(PartBuilder.playSound(SoundEvents.GRASS_PLACE, 1D, 1D))
 
@@ -91,7 +91,6 @@ public class WaterSpells implements ExileRegistryInit {
                         .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.SNOWFLAKE, 100D, 1D, 0.1D))
                 )
 
-                .levelReq(20)
                 .build();
 
         SpellBuilder.of(ICE_COMET, PlayStyle.INT, SpellConfiguration.Builder.instant(18, 20).setChargesAndRegen(ICE_COMET, 3, 20 * 20),
@@ -118,7 +117,6 @@ public class WaterSpells implements ExileRegistryInit {
                 .onExpire("block", PartBuilder.aoeParticles(ParticleTypes.ASH, 25D, 3D))
                 .onExpire("block", PartBuilder.aoeParticles(ParticleTypes.EXPLOSION, 15D, 3D))
                 .onExpire("block", PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
-                .levelReq(20)
                 .build();
 
         SpellBuilder.of(CHILLING_FIELD, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 30)
@@ -126,7 +124,7 @@ public class WaterSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTag.damage, SpellTag.area))
                 .weaponReq(CastingWeapon.ANY_WEAPON)
 
-                .manualDesc("Spawn a cloud of bone-chilling frost, damaging enemies for "
+                .manualDesc("Freeze area of sight, damaging enemies for "
                         + SpellCalcs.CHILLING_FIELD.getLocDmgTooltip()
                         + Elements.Cold.getIconNameDmg() + " every second.")
 
@@ -145,7 +143,6 @@ public class WaterSpells implements ExileRegistryInit {
                         .tickRequirement(20D))
                 .onTick("block", PartBuilder.damageInAoe(SpellCalcs.CHILLING_FIELD, Elements.Cold, 3D)
                         .tickRequirement(20D))
-                .levelReq(20)
                 .build();
 
 
@@ -155,14 +152,13 @@ public class WaterSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTag.heal))
                 .manualDesc(
                         "Heal allies around you for " + SpellCalcs.HEART_OF_ICE.getLocDmgTooltip() +
-                                " health.")
+                                " health")
                 .weaponReq(CastingWeapon.ANY_WEAPON)
                 .onCast(PartBuilder.playSound(SlashSounds.BUFF.get(), 1D, 1D))
                 .onCast(PartBuilder.groundParticles(ParticleTypes.SPLASH, 50D, 5D, 0.2D))
                 .onCast(PartBuilder.groundParticles(ParticleTypes.DRIPPING_WATER, 50D, 5D, 0.2D))
                 .onCast(PartBuilder.groundParticles(ParticleTypes.HEART, 50D, 5D, 0.2D))
                 .onCast(PartBuilder.healInAoe(SpellCalcs.HEART_OF_ICE, 5D))
-                .levelReq(20)
                 .build();
 
 
@@ -170,7 +166,7 @@ public class WaterSpells implements ExileRegistryInit {
                         , "Mage Circle", Arrays.asList(SpellTag.movement))
 
                 .manualDesc(
-                        "Summon a Magic Circle. Standing in it increases your damage." +
+                        "Summon a Magic Circle. Standing in it provides you a buff." +
                                 " After a certain duration you will be teleported to its location.")
 
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
@@ -190,7 +186,6 @@ public class WaterSpells implements ExileRegistryInit {
 
                 .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.WITCH, 3D, 1.2D, 0.5D)
                         .addCondition(EffectCondition.EVERY_X_TICKS.create(3D)))
-                .levelReq(30)
                 .build();
 
 
@@ -206,7 +201,6 @@ public class WaterSpells implements ExileRegistryInit {
                         .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.SPLASH, 50D, 1D, 0.1D))
                         .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.BUBBLE, 100D, 1D, 0.1D))
                 )
-                .levelReq(10)
                 .build();
 
 
@@ -225,7 +219,6 @@ public class WaterSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.playSound(SoundEvents.DROWNED_HURT, 0.5D, 1D))
                 .onCast(PartBuilder.damageInAoe(SpellCalcs.FROST_NOVA, Elements.Cold, 5D)
                         .addPerEntityHit(PartBuilder.playSoundPerTarget(SoundEvents.DROWNED_HURT, 1D, 1D)))
-                .levelReq(1)
                 .build();
 
 

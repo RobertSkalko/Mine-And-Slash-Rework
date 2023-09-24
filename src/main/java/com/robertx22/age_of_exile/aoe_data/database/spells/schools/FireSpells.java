@@ -38,7 +38,7 @@ public class FireSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTag.damage, SpellTag.area, SpellTag.totem))
                 .manualDesc("Summon a flaming flower that deals "
                         + SpellCalcs.MAGMA_FLOWER.getLocDmgTooltip()
-                        + Elements.Fire.getIconNameDmg() + " in an area every second.")
+                        + Elements.Fire.getIconNameDmg() + " every second.")
 
                 .onCast(PartBuilder.playSound(SoundEvents.GRASS_PLACE, 1D, 1D))
 
@@ -53,7 +53,6 @@ public class FireSpells implements ExileRegistryInit {
                 .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.SMOKE, 40D, 3D, 1D))
                 .onTick("block", PartBuilder.damageInAoe(SpellCalcs.MAGMA_FLOWER, Elements.Fire, 3D).tickRequirement(20D))
                 .onTick("block", PartBuilder.playSound(SoundEvents.GENERIC_BURN, 1D, 1D).tickRequirement(20D))
-                .levelReq(20)
                 .build();
 
         SpellBuilder.of(FLAME_STRIKE_ID, PlayStyle.STR, SpellConfiguration.Builder.instant(8, 15)
@@ -66,7 +65,6 @@ public class FireSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.swordSweepParticles())
                 .onCast(PartBuilder.damageInFront(SpellCalcs.FLAME_STRIKE, Elements.Fire, 2D, 3D)
                         .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.FLAME, 45D, 1D, 0.1D)))
-                .levelReq(10)
                 .build();
 
 
@@ -75,7 +73,6 @@ public class FireSpells implements ExileRegistryInit {
                 .manualDesc("Gives effect to nearby allies.")
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
                 .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, BeneficialEffects.VAMPIRIC_BLOOD.resourcePath, 20 * 60D))
-                .levelReq(30)
                 .build();
 
         SpellBuilder.of(DRACONIC_BLOOD, PlayStyle.STR, SpellConfiguration.Builder.nonInstant(10, 60 * 20 * 3, 30), "Draconic Blood",
@@ -83,7 +80,6 @@ public class FireSpells implements ExileRegistryInit {
                 .manualDesc("Gives effect to nearby allies.")
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
                 .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, BeneficialEffects.DRACONIC_BLOOD.resourcePath, 20 * 60D))
-                .levelReq(30)
                 .build();
 
 
@@ -91,7 +87,7 @@ public class FireSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTag.area, SpellTag.damage)
                 )
                 .manualDesc("Summon a meteor that falls from the sky, dealing " +
-                        SpellCalcs.METEOR.getLocDmgTooltip(Elements.Fire) + " in an area.")
+                        SpellCalcs.METEOR.getLocDmgTooltip(Elements.Fire))
 
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
@@ -107,13 +103,12 @@ public class FireSpells implements ExileRegistryInit {
                 .onExpire("block", PartBuilder.aoeParticles(ParticleTypes.ASH, 25D, 3D))
                 .onExpire("block", PartBuilder.aoeParticles(ParticleTypes.EXPLOSION, 15D, 3D))
                 .onExpire("block", PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
-                .levelReq(20)
                 .build();
 
         SpellBuilder.of(FIRE_NOVA_ID, PlayStyle.STR, SpellConfiguration.Builder.instant(20, 20 * 25), "Fire Nova",
                         Arrays.asList(SpellTag.area, SpellTag.damage))
                 .manualDesc(
-                        "Engulf the area in flames, dealing " + SpellCalcs.FIRE_NOVA.getLocDmgTooltip()
+                        "Explode with flame around you, dealing " + SpellCalcs.FIRE_NOVA.getLocDmgTooltip()
                                 + " " + Elements.Fire.getIconNameDmg() + " to nearby enemies.")
 
                 .onCast(PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
@@ -125,7 +120,6 @@ public class FireSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.groundEdgeParticles(ParticleTypes.EXPLOSION, 1D, 0D, 0.2D))
 
                 .onCast(PartBuilder.damageInAoe(SpellCalcs.FIRE_NOVA, Elements.Fire, 5D))
-                .levelReq(1)
                 .build();
 
 

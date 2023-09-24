@@ -35,11 +35,10 @@ public class NatureSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
    
-        SpellBuilder.of("chaos_totem", PlayStyle.STR, SpellConfiguration.Builder.instant(40, 20 * 60), "Chaos Totem",
+        SpellBuilder.of("chaos_totem", PlayStyle.INT, SpellConfiguration.Builder.instant(40, 20 * 60), "Chaos Totem",
                         Arrays.asList(SpellTag.area, SpellTag.damage, SpellTag.totem))
 
-                .manualDesc("Summons a totem that spawns chaos meteors, dealing " + SpellCalcs.CHAOS_TOTEM.getLocDmgTooltip(Elements.Chaos)
-                        + " in an area.")
+                .manualDesc("Summons a totem creates meteors dealing " + SpellCalcs.CHAOS_TOTEM.getLocDmgTooltip(Elements.Chaos))
 
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 0D)))
@@ -66,7 +65,6 @@ public class NatureSpells implements ExileRegistryInit {
                 .onExpire("meteor", PartBuilder.aoeParticles(ParticleTypes.WITCH, 100D, 2D))
                 .onExpire("meteor", PartBuilder.aoeParticles(ParticleTypes.EXPLOSION, 15D, 3D))
                 .onExpire("meteor", PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
-                .levelReq(20)
 
                 .build();
 
@@ -75,7 +73,7 @@ public class NatureSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTag.damage, SpellTag.area, SpellTag.totem))
                 .manualDesc("Summon a thorny bush that deals "
                         + SpellCalcs.THORN_BUSH.getLocDmgTooltip()
-                        + Elements.Chaos.getIconNameDmg() + " in an area every second.")
+                        + Elements.Chaos.getIconNameDmg() + " every second.")
 
                 .onCast(PartBuilder.playSound(SoundEvents.GRASS_PLACE, 1D, 1D))
 
@@ -90,7 +88,6 @@ public class NatureSpells implements ExileRegistryInit {
                 .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.ITEM_SLIME, 40D, 3D, 1D))
                 .onTick("block", PartBuilder.damageInAoe(SpellCalcs.THORN_BUSH, Elements.Chaos, 3D).tickRequirement(20D))
                 .onTick("block", PartBuilder.playSound(SoundEvents.GRASS_BREAK, 1D, 1D).tickRequirement(20D))
-                .levelReq(20)
                 .build();
 
         SpellBuilder.of(POISON_CLOUD, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 45), "Poison Cloud",
@@ -105,7 +102,6 @@ public class NatureSpells implements ExileRegistryInit {
 
                 .onCast(PartBuilder.damageInAoe(SpellCalcs.POISON_CLOUD, Elements.Chaos, 5D)
                         .addPerEntityHit(PartBuilder.playSoundPerTarget(SoundEvents.GENERIC_HURT, 1D, 1D)))
-                .levelReq(20)
                 .build();
 
 
@@ -114,7 +110,7 @@ public class NatureSpells implements ExileRegistryInit {
                         Arrays.asList())
 
                 .manualDesc(
-                        "Refreshes all your cooldowns by 1 minute.")
+                        "Refreshes all your spell cooldowns by 1 minute.")
 
                 .weaponReq(CastingWeapon.ANY_WEAPON)
                 .onCast(PartBuilder.playSound(SlashSounds.FREEZE.get(), 1D, 1D))
@@ -125,17 +121,15 @@ public class NatureSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.FALLING_WATER, 100D, 1.5D))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.DRIPPING_WATER, 50D, 1.5D))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.EFFECT, 50D, 1.5D))
-                .levelReq(30)
                 .build();
 
 
         SpellBuilder.of(NATURE_BALM, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 60 * 20)
                         , "Nature's Balm",
                         Arrays.asList(SpellTag.heal))
-                .manualDesc("Gives buff to nearby allies.")
+                .manualDesc("Gives buff to allies nearby:")
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
                 .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, BeneficialEffects.REGENERATE.resourcePath, 20 * 15D))
-                .levelReq(1)
                 .build();
 
         SpellBuilder.of(ENTANGLE_SEED, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 60 * 20)
@@ -150,7 +144,6 @@ public class NatureSpells implements ExileRegistryInit {
                 .onExpire(PartBuilder.groundParticles(ParticleTypes.LARGE_SMOKE, 50D, 3D, 0.25D))
                 .onExpire(PartBuilder.groundParticles(ParticleTypes.ITEM_SLIME, 100D, 3D, 0.25D))
                 .onExpire(PartBuilder.playSound(SlashSounds.STONE_CRACK.get(), 1D, 1D))
-                .levelReq(10)
                 .build();
     }
 }

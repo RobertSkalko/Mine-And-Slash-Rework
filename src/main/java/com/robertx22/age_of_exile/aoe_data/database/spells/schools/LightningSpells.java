@@ -42,7 +42,6 @@ public class LightningSpells implements ExileRegistryInit {
                 .onExpire(PartBuilder.damageInAoe(SpellCalcs.LIGHTNING_SPEAR, Elements.Lightning, 1D))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.ELECTRIC_SPARK, 50D, 0.5D))
                 .onExpire(PartBuilder.playSound(SoundEvents.TRIDENT_HIT, 1D, 1D))
-                .levelReq(20)
                 .build();
 
 
@@ -52,7 +51,7 @@ public class LightningSpells implements ExileRegistryInit {
                                 .applyCastSpeedToCooldown(), "Lightning Spear",
                         Arrays.asList(SpellTag.projectile, SpellTag.damage))
                 .manualDesc(
-                        "Throw out an electric spear, dealing " + SpellCalcs.LIGHTNING_SPEAR.getLocDmgTooltip()
+                        "Throw out spear dealing " + SpellCalcs.LIGHTNING_SPEAR.getLocDmgTooltip()
                                 + " " + Elements.Lightning.getIconNameDmg())
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.TRIDENT_THROW, 1D, 1D))
@@ -65,7 +64,6 @@ public class LightningSpells implements ExileRegistryInit {
                 .onExpire(PartBuilder.playSound(SoundEvents.TRIDENT_HIT, 1D, 1D))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.ELECTRIC_SPARK, 25D, 1D))
 
-                .levelReq(1)
                 .build();
 
 
@@ -83,7 +81,6 @@ public class LightningSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.playSound(SoundEvents.GENERIC_HURT, 0.5D, 1D))
                 .onCast(PartBuilder.damageInAoe(SpellCalcs.LIGHNING_NOVA, Elements.Lightning, 4D)
                         .addPerEntityHit(PartBuilder.playSoundPerTarget(SoundEvents.GENERIC_HURT, 1D, 1D)))
-                .levelReq(10)
                 .build();
 
 

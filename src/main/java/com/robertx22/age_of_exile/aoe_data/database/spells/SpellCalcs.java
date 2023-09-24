@@ -96,8 +96,7 @@ public class SpellCalcs {
             .spellScaling(1, 2)
             .build();
     public static ValueCalculation HUNTER_POTION_HEAL = ValueCalcBuilder.of("hunter_pot_heal")
-            .spellScaling(1F, 1F)
-            .statScaling(Health.getInstance(), 0.15F, 0.25F)
+            .spellScaling(1F, 1.5F)
             .build();
     public static ValueCalculation WISH = ValueCalcBuilder.of("wish")
             .spellScaling(1, 2)
