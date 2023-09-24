@@ -34,6 +34,9 @@ public class MapLootGen extends BaseLootGen<MapBlueprint> {
                 return false;
             }
         }
+        if (ServerContainer.get().MIN_LEVEL_MAP_DROPS.get() >= info.level) {
+            return false;
+        }
         return true;
     }
 

@@ -40,7 +40,7 @@ public class TreasureQuantity extends Stat {
 
     @Override
     public String locNameForLangFile() {
-        return "Item Find";
+        return "Chest Find";
     }
 
     private static class SingletonHolder {

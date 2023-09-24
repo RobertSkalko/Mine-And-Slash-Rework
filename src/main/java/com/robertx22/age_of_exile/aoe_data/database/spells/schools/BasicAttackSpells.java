@@ -31,10 +31,10 @@ public class BasicAttackSpells implements ExileRegistryInit {
 
         SpellBuilder.of(FROSTBALL_ID, PlayStyle.INT, SpellConfiguration.Builder.instant(mana, cd)
                                 .setSwingArm()
-                                .applyCastSpeedToCooldown(), "Ice Ball",
+                                .applyCastSpeedToCooldown(), "Ice Shard",
                         Arrays.asList(SpellTag.projectile, SpellTag.damage))
                 .manualDesc(
-                        "Throw out a ball of ice, dealing " + SpellCalcs.ICEBALL.getLocDmgTooltip()
+                        "Throw out a shard of ice, dealing " + SpellCalcs.ICEBALL.getLocDmgTooltip()
                                 + " " + Elements.Cold.getIconNameDmg())
 
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
@@ -46,6 +46,7 @@ public class BasicAttackSpells implements ExileRegistryInit {
                 .onExpire(PartBuilder.damageInAoe(SpellCalcs.ICEBALL, Elements.Cold, RADIUS))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.ITEM_SNOWBALL, 5D, 1D))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.SNOWFLAKE, 15D, 0.5D))
+                .levelReq(1)
                 .build();
 
         SpellBuilder.of(FIREBALL_ID, PlayStyle.INT, SpellConfiguration.Builder.instant(mana, cd)
@@ -66,15 +67,16 @@ public class BasicAttackSpells implements ExileRegistryInit {
                 .onExpire(PartBuilder.damageInAoe(SpellCalcs.FIREBALL, Elements.Fire, RADIUS))
                 .onExpire(PartBuilder.playSound(SoundEvents.GENERIC_BURN, 1D, 2D))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.SMOKE, 3D, 1D))
+                .levelReq(1)
                 .build();
 
 
         SpellBuilder.of(POISONBALL_ID, PlayStyle.INT, SpellConfiguration.Builder.instant(mana, cd)
                                 .setSwingArm()
-                                .applyCastSpeedToCooldown(), "Poison Ball",
+                                .applyCastSpeedToCooldown(), "Poison Blast",
                         Arrays.asList(SpellTag.projectile, SpellTag.damage))
                 .manualDesc(
-                        "Throw out a ball of poison, dealing " + SpellCalcs.POISON_BALL.getLocDmgTooltip()
+                        "Blast out a ball of poison, dealing " + SpellCalcs.POISON_BALL.getLocDmgTooltip()
                                 + " " + Elements.Chaos.getIconNameDmg())
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.SNOWBALL_THROW, 1D, 1D))
@@ -85,6 +87,7 @@ public class BasicAttackSpells implements ExileRegistryInit {
                 .onExpire(PartBuilder.damageInAoe(SpellCalcs.POISON_BALL, Elements.Chaos, RADIUS))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.ITEM_SLIME, 100D, 1D))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.SNEEZE, 25D, 1D))
+                .levelReq(10)
 
                 .build();
     }

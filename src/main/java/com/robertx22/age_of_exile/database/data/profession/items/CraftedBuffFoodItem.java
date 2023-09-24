@@ -39,7 +39,7 @@ public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered 
 
     static Properties getProp(PlayerBuffData.Type type) {
         if (type.isFood()) {
-            return new Properties().food(new FoodProperties.Builder().nutrition(20).saturationMod(5F).meat().build());
+            return new Properties().food(new FoodProperties.Builder().meat().build());
         } else {
             return new Properties();
         }
