@@ -1,0 +1,14 @@
+{
+  "id": "guardian",
+  "min_lvl": 20,
+  "reservation": 0.4,
+  "stats": [
+    {
+      "type": "FLAT",
+      "max": 15.0,
+      "min": 5.0,
+      "stat": "block_chance"
+    }
+  ],
+  "style": "INT"
+}

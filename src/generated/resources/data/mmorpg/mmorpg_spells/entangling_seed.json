@@ -154,6 +154,6 @@
   "effect_tip": "",
   "identifier": "entangling_seed",
   "manual_tip": true,
-  "min_lvl": 1,
+  "min_lvl": 10,
   "weight": 1000
 }

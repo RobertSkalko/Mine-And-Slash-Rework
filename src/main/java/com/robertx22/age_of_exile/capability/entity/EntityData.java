@@ -601,11 +601,9 @@ public class EntityData implements ICap, INeededForClient {
 
     public void attackWithWeapon(AttackInformation data) {
 
-        if (data.weaponData.GetBaseGearType()
-                .getWeaponMechanic() != null) {
+        if (data.weaponData.GetBaseGearType().getWeaponMechanic() != null) {
 
-            GearSlot slot = data.weaponData.GetBaseGearType()
-                    .getGearSlot();
+            GearSlot slot = data.weaponData.GetBaseGearType().getGearSlot();
 
             float cost = Energy.getInstance().scale(ModType.FLAT, slot.energy_cost, getLevel());
 

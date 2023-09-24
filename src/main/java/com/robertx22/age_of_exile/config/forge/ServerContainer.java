@@ -39,7 +39,7 @@ public class ServerContainer {
         REQUIRE_TEAM_FOR_TEAM_DUNGEONS = b.define("require_team_for_dungeons", true);
         DONT_SYNC_DATA_OF_AMBIENT_MOBS = b.define("dont_sync_ambient_mob_data", true);
         MAPS_DONT_DROP_IN_MAPS = b.define("maps_dont_drop_in_maps", true);
-        MIN_LEVEL_MAP_DROPS = b.define("min_level_map_drops", 10);
+        MIN_LEVEL_MAP_DROPS = b.defineInRange("min_level_map_drops", 10, 0, Integer.MAX_VALUE);
 
 
         REGEN_HUNGER_COST = b.defineInRange("regen_hunger_cost", 10D, 0, 1000);

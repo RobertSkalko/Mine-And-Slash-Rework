@@ -196,6 +196,6 @@
   "effect_tip": "",
   "identifier": "mage_circle",
   "manual_tip": true,
-  "min_lvl": 1,
+  "min_lvl": 30,
   "weight": 1000
 }

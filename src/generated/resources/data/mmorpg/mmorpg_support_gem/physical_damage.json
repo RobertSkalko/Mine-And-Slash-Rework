@@ -1,7 +1,7 @@
 {
   "id": "physical_damage",
   "manaMulti": 1.3,
-  "min_lvl": 1,
+  "min_lvl": 20,
   "one_of_a_kind": "",
   "stats": [
     {

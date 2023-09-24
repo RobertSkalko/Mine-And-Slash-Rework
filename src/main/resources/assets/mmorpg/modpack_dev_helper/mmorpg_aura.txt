@@ -21,5 +21,6 @@ cold_ailment
 lightning_ailment
 physical_ailment
 chaos_res
+guardian
 fire_res
 fire_ailment

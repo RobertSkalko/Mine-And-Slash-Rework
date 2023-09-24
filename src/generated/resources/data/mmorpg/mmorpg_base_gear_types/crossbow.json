@@ -25,6 +25,11 @@
       "weapon_family"
     ]
   },
-  "weapon_type": "crossbow",
+  "weapon_type": {
+    "id": "crossbow",
+    "isProjectile": true,
+    "range": "RANGED",
+    "style": "DEX"
+  },
   "weight": 1000
 }

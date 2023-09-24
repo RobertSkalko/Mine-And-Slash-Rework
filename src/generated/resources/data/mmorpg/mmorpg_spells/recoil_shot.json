@@ -197,7 +197,7 @@
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "recoil_shot",
-  "manual_tip": false,
-  "min_lvl": 1,
+  "manual_tip": true,
+  "min_lvl": 10,
   "weight": 1000
 }

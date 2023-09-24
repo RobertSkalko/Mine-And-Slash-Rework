@@ -42,7 +42,7 @@ public class AuraGems {
         )).levelReq(10).addToSerializables();
 
         new AuraGem("guardian", "Guardian", PlayStyle.INT, 0.4F, Arrays.asList(
-                new StatMod(5, 15, BlockChance.getInstance(), ModType.FLAT),
+                new StatMod(5, 15, BlockChance.getInstance(), ModType.FLAT)
         )).levelReq(20).addToSerializables();
 
 

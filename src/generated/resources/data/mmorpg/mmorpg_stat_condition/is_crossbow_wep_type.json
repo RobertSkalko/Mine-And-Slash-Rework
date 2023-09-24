@@ -1,5 +1,10 @@
 {
-  "type": "crossbow",
+  "type": {
+    "id": "crossbow",
+    "isProjectile": true,
+    "range": "RANGED",
+    "style": "DEX"
+  },
   "id": "is_crossbow_wep_type",
   "ser": "wep_type_match"
 }

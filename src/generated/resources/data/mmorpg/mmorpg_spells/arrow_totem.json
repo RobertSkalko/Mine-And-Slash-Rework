@@ -207,6 +207,6 @@
   "effect_tip": "",
   "identifier": "arrow_totem",
   "manual_tip": true,
-  "min_lvl": 1,
+  "min_lvl": 20,
   "weight": 1000
 }

@@ -1,6 +1,6 @@
 {
   "id": "ele_res",
-  "min_lvl": 1,
+  "min_lvl": 20,
   "reservation": 0.4,
   "stats": [
     {

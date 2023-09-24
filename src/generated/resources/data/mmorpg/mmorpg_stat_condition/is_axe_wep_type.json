@@ -1,5 +1,10 @@
 {
-  "type": "axe",
+  "type": {
+    "id": "axe",
+    "isProjectile": false,
+    "range": "MELEE",
+    "style": "STR"
+  },
   "id": "is_axe_wep_type",
   "ser": "wep_type_match"
 }

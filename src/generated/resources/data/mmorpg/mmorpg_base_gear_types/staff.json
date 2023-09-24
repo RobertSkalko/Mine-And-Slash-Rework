@@ -25,6 +25,11 @@
       "intelligence"
     ]
   },
-  "weapon_type": "staff",
+  "weapon_type": {
+    "id": "staff",
+    "isProjectile": false,
+    "range": "MELEE",
+    "style": "INT"
+  },
   "weight": 1000
 }

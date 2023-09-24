@@ -101,6 +101,6 @@
   "effect_tip": "",
   "identifier": "song_of_valor",
   "manual_tip": true,
-  "min_lvl": 1,
+  "min_lvl": 10,
   "weight": 1000
 }
