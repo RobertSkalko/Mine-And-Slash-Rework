@@ -3,12 +3,14 @@ package com.robertx22.age_of_exile.saveclasses.item_classes;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.MinMax;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPartTooltip;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.MergedStats;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.wrappers.ExileText;
@@ -138,6 +140,15 @@ public class GearTooltipUtils {
 
         if (gear.getQuality() > 0) {
             tip.add(ExileText.ofText("Quality: " + gear.getQuality() + "%").format(gear.getQualityType().color).get());
+        }
+
+        if (Screen.hasShiftDown()) {
+            if (gear.GetBaseGearType().getGearSlot().weapon_data.damage_multiplier > 0) {
+                int cost = (int) Energy.getInstance().scale(ModType.FLAT, gear.GetBaseGearType().getGearSlot().weapon_data.energy_cost_per_swing, data.getLevel());
+                int permob = (int) Energy.getInstance().scale(ModType.FLAT, gear.GetBaseGearType().getGearSlot().weapon_data.energy_cost_per_mob_attacked, data.getLevel());
+
+                tip.add(ExileText.ofText("Energy Cost: " + cost + " + " + permob + " Per mob, " + ", x" + (gear.GetBaseGearType().getGearSlot().getBasicDamageMulti() * 100) / 100F + " Dmg").format(ChatFormatting.GREEN).get());
+            }
         }
 
 

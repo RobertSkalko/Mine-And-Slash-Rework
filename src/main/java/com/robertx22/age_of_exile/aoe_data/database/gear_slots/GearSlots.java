@@ -27,22 +27,22 @@ public class GearSlots implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        new GearSlot(SWORD, "Sword", SlotFamily.Weapon, 4, 1, 1000).addToSerializables();
-        new GearSlot(STAFF, "Staff", SlotFamily.Weapon, 4, 3, 1500).addToSerializables();
-        new GearSlot(BOW, "Bow", SlotFamily.Weapon, 10, 5, 1000).addToSerializables();
-        new GearSlot(CROSBOW, "Crossbow", SlotFamily.Weapon, 10, 6, 500).addToSerializables();
+        new GearSlot(SWORD, "Sword", SlotFamily.Weapon, new GearSlot.WeaponData(4, 2, 0.8F), 1, 1000).addToSerializables();
+        new GearSlot(STAFF, "Staff", SlotFamily.Weapon, new GearSlot.WeaponData(4, 2, 0.8F), 3, 1500).addToSerializables();
+        new GearSlot(BOW, "Bow", SlotFamily.Weapon, new GearSlot.WeaponData(0, 8, 2), 5, 1000).addToSerializables();
+        new GearSlot(CROSBOW, "Crossbow", SlotFamily.Weapon, new GearSlot.WeaponData(0, 8, 2), 6, 500).addToSerializables();
 
-        new GearSlot(BOOTS, "Boots", SlotFamily.Armor, 0, 7, 1000).addToSerializables();
-        new GearSlot(PANTS, "Pants", SlotFamily.Armor, 0, 8, 1000).addToSerializables();
-        new GearSlot(CHEST, "Chest", SlotFamily.Armor, 0, 9, 1000).addToSerializables();
-        new GearSlot(HELMET, "Helmet", SlotFamily.Armor, 0, 10, 1000).addToSerializables();
+        new GearSlot(BOOTS, "Boots", SlotFamily.Armor, new GearSlot.WeaponData(0, 0, 0), 7, 1000).addToSerializables();
+        new GearSlot(PANTS, "Pants", SlotFamily.Armor, new GearSlot.WeaponData(0, 0, 0), 8, 1000).addToSerializables();
+        new GearSlot(CHEST, "Chest", SlotFamily.Armor, new GearSlot.WeaponData(0, 0, 0), 9, 1000).addToSerializables();
+        new GearSlot(HELMET, "Helmet", SlotFamily.Armor, new GearSlot.WeaponData(0, 0, 0), 10, 1000).addToSerializables();
 
-        new GearSlot(SHIELD, "Shield", SlotFamily.OffHand, 0, 11, 500).addToSerializables(); // todo model numbers
-        new GearSlot(TOME, "Tome", SlotFamily.OffHand, 0, 11, 500).addToSerializables();
-        new GearSlot(TOTEM, "Totem", SlotFamily.OffHand, 0, 11, 500).addToSerializables();
+        new GearSlot(SHIELD, "Shield", SlotFamily.OffHand, new GearSlot.WeaponData(0, 0, 0), 11, 500).addToSerializables(); // todo model numbers
+        new GearSlot(TOME, "Tome", SlotFamily.OffHand, new GearSlot.WeaponData(0, 0, 0), 11, 500).addToSerializables();
+        new GearSlot(TOTEM, "Totem", SlotFamily.OffHand, new GearSlot.WeaponData(0, 0, 0), 11, 500).addToSerializables();
 
-        new GearSlot(RING, "Ring", SlotFamily.Jewelry, 0, 12, 500).addToSerializables();
-        new GearSlot(NECKLACE, "Necklace", SlotFamily.Jewelry, 0, 13, 500).addToSerializables();
+        new GearSlot(RING, "Ring", SlotFamily.Jewelry, new GearSlot.WeaponData(0, 0, 0), 12, 500).addToSerializables();
+        new GearSlot(NECKLACE, "Necklace", SlotFamily.Jewelry, new GearSlot.WeaponData(0, 0, 0), 13, 500).addToSerializables();
 
 
     }

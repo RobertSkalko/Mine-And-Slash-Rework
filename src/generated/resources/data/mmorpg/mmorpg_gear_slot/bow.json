@@ -1,7 +1,11 @@
 {
-  "energy_cost": 10,
   "fam": "Weapon",
   "id": "bow",
   "model_num": 5,
+  "weapon_data": {
+    "damage_multiplier": 2.0,
+    "energy_cost_per_mob_attacked": 8.0,
+    "energy_cost_per_swing": 0.0
+  },
   "weight": 1000
 }

@@ -1,7 +1,11 @@
 {
-  "energy_cost": 4,
   "fam": "Weapon",
   "id": "sword",
   "model_num": 1,
+  "weapon_data": {
+    "damage_multiplier": 0.8,
+    "energy_cost_per_mob_attacked": 2.0,
+    "energy_cost_per_swing": 4.0
+  },
   "weight": 1000
 }

@@ -89,3 +89,16 @@ v5.1.3
 - weapon_type in base gear is no longer an enum
 
 - added min lvls to supp gems and auras
+
+v.5.1.4
+
+- fix mobs not being able to damage each other
+
+- weapon energy costs now have energy per swing and per mob attacked, to balance weapon's between aoe and single target weapons if modpacks want.
+The per swing is not exactly per swing, but more per hit + with added cooldown, so it won't cost anything when you fire the bow, only when the arrow hits a mob.
+For swords it will work like this:
+You attack 3 zombies. The first zombie you spend energy per swing and it's now set on tiny cooldown,
+for second zombie it's on cd so not spent, etc. For all 3 zombies you spend the "per mob attacked" energy cost.
+Depending on the ratio of per swing vs per mob costs the weapon can be either good at single target or aoe.
+
+- gear base stats should now be per rarity, instead of same for all rarities

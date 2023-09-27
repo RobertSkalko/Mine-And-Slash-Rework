@@ -80,6 +80,8 @@ public class ServerContainer {
         MOB_MIN = b.defineInRange("mob_min", 1, 0, 20);
         MOB_MAX = b.defineInRange("mob_max", 2, 0, 20);
 
+        UNARMED_ENERGY_COST = b.defineInRange("UNARMED_ENERGY_COST", 5D, 0D, 100D);
+
         List<String> list = new ArrayList<>();
 
         list.add("minecraft:iron_sword:sword");
@@ -151,6 +153,7 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue MAX_TEAM_DISTANCE;
     public ForgeConfigSpec.DoubleValue IN_COMBAT_REGEN_MULTI;
     public ForgeConfigSpec.DoubleValue COMBAT_PROFESSION_RESTED_XP_GENERATION;
+    public ForgeConfigSpec.DoubleValue UNARMED_ENERGY_COST;
 
     public ForgeConfigSpec.DoubleValue FAVOR_DEATH_LOSS;
     public ForgeConfigSpec.DoubleValue FAVOR_CHEST_GAIN;

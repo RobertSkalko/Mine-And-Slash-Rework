@@ -22,7 +22,7 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
     @Override
     public void RerollFully(GearItemData gear) {
 
-        p = getMinMax(gear).random();
+        p = gear.getRarity().stat_percents.random();
 
         gear.rp = RandomUtils.randomFromList(new ArrayList<>(RareItemAffixNames.prefixAny
                 .keySet()));
@@ -36,7 +36,7 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
         RerollFully(gear);
     }
 
-    
+
     @Override
     public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {
 

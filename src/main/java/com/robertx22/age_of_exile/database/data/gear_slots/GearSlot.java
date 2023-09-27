@@ -21,28 +21,46 @@ import java.util.HashMap;
 
 public class GearSlot implements JsonExileRegistry<GearSlot>, IAutoGson<GearSlot>, IAutoLocName {
 
-    public static GearSlot SERIALIZER = new GearSlot("", "", SlotFamily.NONE, 1, -1, 0);
+    public static GearSlot SERIALIZER = new GearSlot("", "", SlotFamily.NONE, new GearSlot.WeaponData(0, 0, 0), -1, 0);
     private static HashMap<String, HashMap<Item, Boolean>> CACHED_GEAR_SLOTS = new HashMap<>();
     static HashMap<Item, GearSlot> CACHED = new HashMap<>();
 
     public String id;
     public int weight;
-    public int energy_cost;
+
+    public WeaponData weapon_data = new WeaponData(0, 0, 0);
+
     public int model_num = -1;
     public transient String locname = "";
     public SlotFamily fam = SlotFamily.Armor;
 
-    public GearSlot(String id, String name, SlotFamily fam, int energy_cost, int modelnnum, int weight) {
+    public static class WeaponData {
+
+        public float energy_cost_per_swing = 0;
+        public float energy_cost_per_mob_attacked = 0;
+        public float damage_multiplier = 1;
+
+        public WeaponData(float energy_cost_per_swing, float energy_cost_per_mob_attacked, float damage_multiplier) {
+            this.energy_cost_per_swing = energy_cost_per_swing;
+            this.energy_cost_per_mob_attacked = energy_cost_per_mob_attacked;
+            this.damage_multiplier = damage_multiplier;
+        }
+    }
+
+    public GearSlot(String id, String name, SlotFamily fam, WeaponData energy_cost, int modelnnum, int weight) {
         this.id = id;
         this.fam = fam;
-        this.energy_cost = energy_cost;
+
+        this.weapon_data = energy_cost;
+
         this.locname = name;
         this.model_num = modelnnum;
         this.weight = weight;
+
     }
 
     public float getBasicDamageMulti() {
-        return energy_cost / 5F;
+        return this.weapon_data.damage_multiplier;
     }
 
     public static GearSlot getSlotOf(Item item) {

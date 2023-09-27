@@ -18,10 +18,7 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.DashUtils;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.HealthUtils;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.NumberUtils;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.*;
 import com.robertx22.age_of_exile.vanilla_mc.packets.DmgNumPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.SoundUtils;
@@ -132,9 +129,7 @@ public class DamageEvent extends EffectEvent {
 
             if (dmg > 0) {
 
-
             }
-
         }
 
         if (this.data.isBasicAttack()) {
@@ -200,13 +195,11 @@ public class DamageEvent extends EffectEvent {
 
     private float modifyIfArrowDamage(float dmg) {
         if (attackInfo != null && attackInfo.getSource() != null) {
-            if (attackInfo.getSource()
-                    .getDirectEntity() instanceof ProjectileEntityDuck) {
+            if (attackInfo.getSource().getDirectEntity() instanceof ProjectileEntityDuck) {
                 if (data.getWeaponType() == WeaponTypes.bow) {
                     // don't use this for crossbows, only bows need to be charged fully
 
-                    ProjectileEntityDuck duck = (ProjectileEntityDuck) attackInfo.getSource()
-                            .getDirectEntity();
+                    ProjectileEntityDuck duck = (ProjectileEntityDuck) attackInfo.getSource().getDirectEntity();
 
                     float arrowmulti = duck.my$getDmgMulti();
 
@@ -240,9 +233,20 @@ public class DamageEvent extends EffectEvent {
     }
 
     public boolean stopFriendlyFire() {
-        if (AllyOrEnemy.allies.is(source, target)) {
-            cancelDamage();
-            return true;
+        if (WorldUtils.isMapWorldClass(source.level())) {
+            // in maps, we dont want mobs to damage each other
+            if (AllyOrEnemy.allies.is(source, target)) {
+                cancelDamage();
+                return true;
+            }
+        } else {
+            // outside maps, we want zombies to kill villagers etc
+            if (source instanceof Player) {
+                if (AllyOrEnemy.allies.is(source, target)) {
+                    cancelDamage();
+                    return true;
+                }
+            }
         }
         return false;
     }
