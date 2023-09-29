@@ -20,16 +20,13 @@ import com.robertx22.age_of_exile.vanilla_mc.commands.stats.GiveStat;
 import com.robertx22.age_of_exile.vanilla_mc.commands.stats.ListStats;
 import com.robertx22.age_of_exile.vanilla_mc.commands.stats.RemoveStat;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.server.MinecraftServer;
 
 public class CommandRegister {
 
-    public static void Register(MinecraftServer server) {
+    public static void Register(CommandDispatcher<CommandSourceStack> dispatcher) {
         System.out.println("Registering Mine and slash Commands.");
 
-        CommandDispatcher<CommandSourceStack> dispatcher = server.getCommands()
-                .getDispatcher();
-
+     
         GiveExactUnique.register(dispatcher);
         GiveMap.register(dispatcher);
 

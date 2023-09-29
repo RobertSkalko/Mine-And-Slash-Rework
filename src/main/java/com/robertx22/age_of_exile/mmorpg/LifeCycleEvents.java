@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.mmorpg.registers.server.CommandRegister;
 import com.robertx22.age_of_exile.uncommon.testing.TestManager;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import net.minecraft.world.level.GameRules;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
@@ -21,11 +22,14 @@ public class LifeCycleEvents {
             }
         });
 
+        ForgeEvents.registerForgeEvent(RegisterCommandsEvent.class, event -> {
+            CommandRegister.Register(event.getDispatcher());
+        });
+
         ForgeEvents.registerForgeEvent(ServerStartedEvent.class, event -> {
 
             LevelUtils.runTests();
 
-            CommandRegister.Register(event.getServer());
 
             regenDefault = event.getServer()
                     .getGameRules()
