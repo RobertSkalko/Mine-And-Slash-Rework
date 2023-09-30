@@ -58,11 +58,13 @@ public class ProfessionEvents {
 
         ForgeEvents.registerForgeEvent(BabyEntitySpawnEvent.class, x -> {
             Player p = x.getCausedByPlayer();
-            if (!p.level().isClientSide) {
-                if (x.getChild() != null) {
-                    var drops = ExileDB.Professions().get(Professions.HUSBANDRY).onBreedAnimal(p, x.getChild());
-                    for (ItemStack drop : drops) {
-                        x.getParentA().spawnAtLocation(drop);
+            if (p != null) {
+                if (!p.level().isClientSide) {
+                    if (x.getChild() != null) {
+                        var drops = ExileDB.Professions().get(Professions.HUSBANDRY).onBreedAnimal(p, x.getChild());
+                        for (ItemStack drop : drops) {
+                            x.getParentA().spawnAtLocation(drop);
+                        }
                     }
                 }
             }
