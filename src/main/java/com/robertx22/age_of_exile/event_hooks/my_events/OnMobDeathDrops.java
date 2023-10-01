@@ -121,7 +121,6 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
         }
 
         exp *= LootUtils.getMobHealthBasedLootMulti(mobData, killer);
-        exp *= LootUtils.getLevelDistancePunishmentMulti(mobData.getLevel(), killerData.getLevel());
         exp *= mobData.getMobRarity().mob.expMulti();
         exp *= multi;
         exp *= ServerContainer.get().EXP_GAIN_MULTI.get();
@@ -145,20 +144,21 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
             List<Player> list = TeamUtils.getOnlineTeamMembersInRange(killer);
 
             int members = list.size() - 1;
-            if (members > 5) {
-                members = 5;
+            if (members > 4) {
+                members = 4;
             }
 
-            float teamMulti = 1 + (0.1F * members);
+            float teamMulti = 1 + (0.2F * members);
 
             exp *= teamMulti;
 
             exp /= list.size();
 
-            if (exp > 0) {
+            for (Player player : list) {
+                int splitExp = (int) (exp * LootUtils.getLevelDistancePunishmentMulti(mobData.getLevel(), Load.Unit(player).getLevel()));
 
-                for (Player x : list) {
-                    Load.Unit(x).GiveExp(x, (int) exp);
+                if (splitExp > 0) {
+                    Load.Unit(player).GiveExp(player, (int) splitExp);
                 }
             }
 

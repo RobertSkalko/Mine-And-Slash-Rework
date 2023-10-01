@@ -189,10 +189,9 @@ public class TooltipUtils {
     }
 
     public static MutableComponent rarity(Rarity rarity) {
-
-        return Component.literal(rarity.textFormatting() + "")
-                .append(rarity.locName())
-                .withStyle(rarity.textFormatting());
+        return Component.literal("Rarity: ").withStyle(ChatFormatting.WHITE)
+                .append(rarity.locName()
+                        .withStyle(rarity.textFormatting()));
     }
 
     public static MutableComponent rarityShort(Rarity rarity) {

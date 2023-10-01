@@ -9,6 +9,7 @@ import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -79,6 +80,7 @@ public class LootChestData implements ICommonDataItem<GearRarity> {
     public void BuildTooltip(TooltipContext ctx) {
 
         var tip = ctx.tooltip;
+        String type = getLootChest().GUID().substring(0,1).toUpperCase() + getLootChest().GUID().substring(1);
 
         tip.clear();
 
@@ -90,11 +92,11 @@ public class LootChestData implements ICommonDataItem<GearRarity> {
 
         tip.add(Component.empty());
 
-        tip.add(Component.literal("Contains: " + getLootChest().GUID())); // todo add loc
+        tip.add(Component.literal("Contains: " + type)); // todo add loc
 
         tip.add(Component.empty());
 
-        tip.add(Component.literal("Right Click to Open Loot Chest!"));
+        tip.add(Component.literal("Right-click to open Loot Chest!").withStyle(ChatFormatting.GRAY));
 
         if (isLocked()) {
             tip.add(Component.literal("Needs Key: ").append(getKeyItem().getDefaultInstance().getHoverName()));

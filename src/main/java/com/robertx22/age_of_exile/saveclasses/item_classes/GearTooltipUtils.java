@@ -131,8 +131,6 @@ public class GearTooltipUtils {
 
         tip.add(Component.literal(""));
 
-        tip.add(TooltipUtils.gearRarity(gear.getRarity()));
-
 
         tip.add(ExileText.ofText("Potential: " + (int) ((gear.getPotential().multi + gear.getAdditionalPotentialMultiFromQuality()) * 100F) + "%").format(gear.getPotentialColor()).get());
 
@@ -140,6 +138,20 @@ public class GearTooltipUtils {
             tip.add(ExileText.ofText("Quality: " + gear.getQuality() + "%").format(gear.getQualityType().color).get());
         }
 
+<<<<<<< Updated upstream
+=======
+        tip.add(TooltipUtils.gearRarity(gear.getRarity()));
+
+        if (Screen.hasShiftDown()) {
+            if (gear.GetBaseGearType().getGearSlot().weapon_data.damage_multiplier > 0) {
+                int cost = (int) Energy.getInstance().scale(ModType.FLAT, gear.GetBaseGearType().getGearSlot().weapon_data.energy_cost_per_swing, data.getLevel());
+                int permob = (int) Energy.getInstance().scale(ModType.FLAT, gear.GetBaseGearType().getGearSlot().weapon_data.energy_cost_per_mob_attacked, data.getLevel());
+
+                tip.add(ExileText.ofText("Energy Cost: " + cost + " + " + permob + " Per mob, " + ", x" + (gear.GetBaseGearType().getGearSlot().getBasicDamageMulti() * 100) / 100F + " Dmg").format(ChatFormatting.GREEN).get());
+            }
+        }
+
+>>>>>>> Stashed changes
 
         tip.add(Component.literal(""));
 

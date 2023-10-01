@@ -204,6 +204,8 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
         GearRarity rar = getRarity();
 
+        int req = getGeneric().getRequiredLevel();
+
         if (this.type == SkillGemType.SKILL) {
             Spell spell = getSpell();
 
@@ -213,6 +215,13 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
             for (Component c : spell.GetTooltipString(new TooltipInfo(p))) {
                 list.add(c);
             }
+
+            list.add(ExileText.emptyLine().get());
+            if (req > 0) {
+                list.add(TooltipUtils.level(req));
+
+            }
+
             list.add(ExileText.emptyLine().get());
             list.add(TooltipUtils.rarity(rar));
 
@@ -264,7 +273,6 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
 
         }
-        int req = getGeneric().getRequiredLevel();
 
         if (req > 0) {
             list.add(TooltipUtils.level(req));

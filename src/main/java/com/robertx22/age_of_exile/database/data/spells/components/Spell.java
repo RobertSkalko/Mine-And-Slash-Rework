@@ -292,8 +292,6 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
         list.add(tagtext);
 
-        list.add(ExileText.emptyLine().get());
-
         list.add(Component.literal("Quality: " + currentlvl + "%").withStyle(ChatFormatting.GOLD));
 
         TooltipUtils.removeDoubleBlankLines(list);
