@@ -242,9 +242,9 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
         }
         tooltip.add(Component.literal(""));
 
-        tooltip.add(Component.literal("Infuses stats into empty gear").withStyle(ChatFormatting.AQUA));
+        tooltip.add(Component.literal("Infuses stats into blank gear.").withStyle(ChatFormatting.AQUA));
         tooltip.add(TooltipUtils.dragOntoGearToUse());
-        tooltip.add(Component.literal("You can also right click to generate an item.").withStyle(ChatFormatting.AQUA));
+        tooltip.add(Component.literal("You can also right-click to generate an item.").withStyle(ChatFormatting.AQUA));
 
         return tooltip;
     }

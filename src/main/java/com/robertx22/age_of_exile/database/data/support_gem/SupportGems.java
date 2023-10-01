@@ -128,7 +128,7 @@ public class SupportGems {
                 ))
                 .levelReq(10).addToSerializables();
 
-        new SupportGem("dot_damage", "Damage over Time", PlayStyle.DEX, 1.3F,
+        new SupportGem("dot_damage", "Damage Over Time", PlayStyle.DEX, 1.3F,
                 Arrays.asList(new StatMod(15, 30, Stats.DOT_DAMAGE.get(), ModType.MORE)
                 ))
                 .levelReq(1).addToSerializables();
