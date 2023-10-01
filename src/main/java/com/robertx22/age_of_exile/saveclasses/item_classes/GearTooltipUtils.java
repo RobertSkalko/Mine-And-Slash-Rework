@@ -133,14 +133,14 @@ public class GearTooltipUtils {
 
         tip.add(Component.literal(""));
 
+        tip.add(TooltipUtils.gearRarity(gear.getRarity()));
+
 
         tip.add(ExileText.ofText("Potential: " + (int) ((gear.getPotential().multi + gear.getAdditionalPotentialMultiFromQuality()) * 100F) + "%").format(gear.getPotentialColor()).get());
 
         if (gear.getQuality() > 0) {
             tip.add(ExileText.ofText("Quality: " + gear.getQuality() + "%").format(gear.getQualityType().color).get());
         }
-
-        tip.add(TooltipUtils.gearRarity(gear.getRarity()));
 
         if (Screen.hasShiftDown()) {
             if (gear.GetBaseGearType().getGearSlot().weapon_data.damage_multiplier > 0) {
@@ -150,6 +150,7 @@ public class GearTooltipUtils {
                 tip.add(ExileText.ofText("Energy Cost: " + cost + " + " + permob + " Per mob, " + ", x" + (gear.GetBaseGearType().getGearSlot().getBasicDamageMulti() * 100) / 100F + " Dmg").format(ChatFormatting.GREEN).get());
             }
         }
+
 
         tip.add(Component.literal(""));
 
