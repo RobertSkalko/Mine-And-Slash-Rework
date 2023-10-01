@@ -32,10 +32,8 @@ public class CreateLangFile {
             json += CreateLangFileUtils.comment(entry.getKey());
             for (IAutoLocName iauto : entry.getValue()) {
 
-                if (iauto.GUID() == null) {
-                    continue;
-                }
-                if (!iauto.GUID().isEmpty() && iauto.shouldRegisterLangName() && iauto.locNameForLangFile() != null && !iauto.locNameForLangFile().isEmpty()) {
+
+                if (!iauto.locNameLangFileGUID().isEmpty() && iauto.shouldRegisterLangName() && iauto.locNameForLangFile() != null && !iauto.locNameForLangFile().isEmpty()) {
 
                     if (iauto.locNameForLangFile().contains("\"")) {
                         try {
@@ -50,6 +48,10 @@ public class CreateLangFile {
                     }
                     usedGUIDS.add(iauto.formattedLocNameLangFileGUID());
 
+                    if (iauto.formattedLocNameLangFileGUID().isEmpty()) {
+                        continue;
+                    }
+
                     json += "\t" + "\"" + iauto.formattedLocNameLangFileGUID() + "\": \"" + iauto.locNameForLangFile() + "\",\n";
                 }
             }
@@ -62,7 +64,7 @@ public class CreateLangFile {
 
             json += CreateLangFileUtils.comment(entry.getKey());
             for (IAutoLocDesc iauto : entry.getValue()) {
-                if (!iauto.GUID().isEmpty() && iauto.shouldRegisterLangDesc() && iauto.locDescForLangFile()
+                if (!iauto.locDescLangFileGUID().isEmpty() && iauto.shouldRegisterLangDesc() && iauto.locDescForLangFile()
                         .isEmpty() == false) {
 
                     if (iauto.locDescForLangFile()
