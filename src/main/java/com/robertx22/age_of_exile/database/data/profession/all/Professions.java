@@ -95,7 +95,7 @@ public class Professions {
                 .item(SkillItemTier.TIER4, FARM_EXP, Items.NETHER_WART)
                 .item(SkillItemTier.TIER5, FARM_EXP, Items.COCOA_BEANS)
 
-                .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(FARMING))
+                .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(FARMING), 1)
 
                 .sometimesDrop(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.FARMING), 5)
 
@@ -106,14 +106,14 @@ public class Professions {
 
                 // todo locked crates
 
-                .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(FISHING))
+                .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(FISHING), 3)
 
                 .build();
 
         Builder.of(HUSBANDRY)
                 .tool(BaseGearType.SlotTag.husbandry_tool)
 
-                .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(HUSBANDRY))
+                .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(HUSBANDRY), 1)
 
                 .sometimesDrop(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.HUSBANDRY), 10)
 
@@ -131,7 +131,7 @@ public class Professions {
                 .blockTag(SkillItemTier.TIER4, 100, BlockTags.EMERALD_ORES)
                 .blockTag(SkillItemTier.TIER5, 200, BlockTags.DIAMOND_ORES)
 
-                .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(MINING))
+                .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(MINING), 1)
 
                 .sometimesDrop(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.MINING), 10)
 
@@ -193,7 +193,7 @@ public class Professions {
             return this;
         }
 
-        public Builder dropTiered(HashMap<SkillItemTier, RegObj<Item>> map) {
+        public Builder dropTiered(HashMap<SkillItemTier, RegObj<Item>> map, float chancemulti) {
             for (Map.Entry<SkillItemTier, RegObj<Item>> en : map.entrySet()) {
                 Item item = en.getValue().get();
 
@@ -203,7 +203,7 @@ public class Professions {
                 if (!p.tiered_drops.containsKey(en.getKey())) {
                     p.tiered_drops.put(en.getKey(), new ArrayList<>());
                 }
-                this.p.tiered_drops.get(en.getKey()).add(new Profession.ChancedDrop(Arrays.asList(drop), Profession.DropCategory.MAIN, 10F));
+                this.p.tiered_drops.get(en.getKey()).add(new Profession.ChancedDrop(Arrays.asList(drop), Profession.DropCategory.MAIN, 10F * chancemulti));
 
             }
             return this;

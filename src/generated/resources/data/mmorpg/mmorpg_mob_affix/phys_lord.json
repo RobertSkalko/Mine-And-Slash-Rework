@@ -12,9 +12,9 @@
     },
     {
       "type": "FLAT",
-      "max": 2.0,
-      "min": 2.0,
-      "stat": "physical_weapon_damage"
+      "max": 50.0,
+      "min": 50.0,
+      "stat": "plus_phys_to_physical"
     },
     {
       "type": "FLAT",

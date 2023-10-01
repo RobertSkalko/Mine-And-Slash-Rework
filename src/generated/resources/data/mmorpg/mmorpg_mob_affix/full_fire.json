@@ -9,6 +9,12 @@
       "max": 100.0,
       "min": 100.0,
       "stat": "phys_to_fire"
+    },
+    {
+      "type": "FLAT",
+      "max": 25.0,
+      "min": 25.0,
+      "stat": "fire_resist"
     }
   ],
   "weight": 0

@@ -102,3 +102,9 @@ for second zombie it's on cd so not spent, etc. For all 3 zombies you spend the 
 Depending on the ratio of per swing vs per mob costs the weapon can be either good at single target or aoe.
 
 - gear base stats should now be per rarity, instead of same for all rarities
+
+- fixed commands breaking after /reload
+
+- fixed elemental resists doubling resists
+
+- fix breed event null

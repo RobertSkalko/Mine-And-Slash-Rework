@@ -32,11 +32,12 @@ public class CreateLangFile {
             json += CreateLangFileUtils.comment(entry.getKey());
             for (IAutoLocName iauto : entry.getValue()) {
 
-                if (iauto.shouldRegisterLangName() && iauto.locNameForLangFile() != null && !iauto.locNameForLangFile()
-                        .isEmpty()) {
+                if (iauto.GUID() == null) {
+                    continue;
+                }
+                if (!iauto.GUID().isEmpty() && iauto.shouldRegisterLangName() && iauto.locNameForLangFile() != null && !iauto.locNameForLangFile().isEmpty()) {
 
-                    if (iauto.locNameForLangFile()
-                            .contains("\"")) {
+                    if (iauto.locNameForLangFile().contains("\"")) {
                         try {
                             throw new Exception(iauto.locNameForLangFile() + " contains double \"");
                         } catch (Exception e) {
@@ -61,7 +62,7 @@ public class CreateLangFile {
 
             json += CreateLangFileUtils.comment(entry.getKey());
             for (IAutoLocDesc iauto : entry.getValue()) {
-                if (iauto.shouldRegisterLangDesc() && iauto.locDescForLangFile()
+                if (!iauto.GUID().isEmpty() && iauto.shouldRegisterLangDesc() && iauto.locDescForLangFile()
                         .isEmpty() == false) {
 
                     if (iauto.locDescForLangFile()

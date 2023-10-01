@@ -9,6 +9,12 @@
       "max": 100.0,
       "min": 100.0,
       "stat": "phys_to_lightning"
+    },
+    {
+      "type": "FLAT",
+      "max": 25.0,
+      "min": 25.0,
+      "stat": "lightning_resist"
     }
   ],
   "weight": 0

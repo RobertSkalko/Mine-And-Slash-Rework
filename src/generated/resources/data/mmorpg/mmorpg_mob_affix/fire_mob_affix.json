@@ -6,15 +6,15 @@
   "stats": [
     {
       "type": "FLAT",
-      "max": 75.0,
-      "min": 75.0,
+      "max": 100.0,
+      "min": 100.0,
       "stat": "phys_to_fire"
     },
     {
       "type": "FLAT",
-      "max": 1.0,
-      "min": 1.0,
-      "stat": "fire_weapon_damage"
+      "max": 50.0,
+      "min": 50.0,
+      "stat": "plus_phys_to_fire"
     },
     {
       "type": "FLAT",

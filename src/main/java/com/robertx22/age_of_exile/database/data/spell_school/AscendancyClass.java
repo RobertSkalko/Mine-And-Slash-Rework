@@ -78,11 +78,11 @@ public class AscendancyClass implements JsonExileRegistry<AscendancyClass>, IAut
 
     @Override
     public String locNameLangFileGUID() {
-        return locname;
+        return SlashRef.MODID + ".asc_class." + id;
     }
 
     @Override
     public String locNameForLangFile() {
-        return SlashRef.MODID + ".asc_class." + id;
+        return locname;
     }
 }

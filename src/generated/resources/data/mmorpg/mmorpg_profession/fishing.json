@@ -9,7 +9,7 @@
     "TIER0": [
       {
         "type": "MAIN",
-        "chance": 10.0,
+        "chance": 30.0,
         "drops": [
           {
             "item_id": "mmorpg:material/fishing/0",
@@ -23,7 +23,7 @@
     "TIER1": [
       {
         "type": "MAIN",
-        "chance": 10.0,
+        "chance": 30.0,
         "drops": [
           {
             "item_id": "mmorpg:material/fishing/1",
@@ -37,7 +37,7 @@
     "TIER2": [
       {
         "type": "MAIN",
-        "chance": 10.0,
+        "chance": 30.0,
         "drops": [
           {
             "item_id": "mmorpg:material/fishing/2",
@@ -51,7 +51,7 @@
     "TIER3": [
       {
         "type": "MAIN",
-        "chance": 10.0,
+        "chance": 30.0,
         "drops": [
           {
             "item_id": "mmorpg:material/fishing/3",
@@ -65,7 +65,7 @@
     "TIER4": [
       {
         "type": "MAIN",
-        "chance": 10.0,
+        "chance": 30.0,
         "drops": [
           {
             "item_id": "mmorpg:material/fishing/4",
@@ -79,7 +79,7 @@
     "TIER5": [
       {
         "type": "MAIN",
-        "chance": 10.0,
+        "chance": 30.0,
         "drops": [
           {
             "item_id": "mmorpg:material/fishing/5",

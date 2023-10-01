@@ -24,9 +24,9 @@
     },
     {
       "type": "FLAT",
-      "max": 1.0,
-      "min": 1.0,
-      "stat": "chaos_weapon_damage"
+      "max": 50.0,
+      "min": 50.0,
+      "stat": "plus_phys_to_chaos"
     },
     {
       "type": "FLAT",

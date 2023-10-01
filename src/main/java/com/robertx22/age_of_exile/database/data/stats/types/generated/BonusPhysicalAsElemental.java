@@ -58,7 +58,7 @@ public class BonusPhysicalAsElemental extends ElementalStat {
 
         @Override
         public int GetPriority() {
-            return Priority.AlmostLast.priority;
+            return Priority.Fourth.priority;
         }
 
         @Override
