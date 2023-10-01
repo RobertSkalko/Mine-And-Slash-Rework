@@ -1,7 +1,7 @@
 {
   "id": "health_reg",
   "min_lvl": 1,
-  "reservation": 0.2,
+  "reservation": 0.25,
   "stats": [
     {
       "type": "FLAT",

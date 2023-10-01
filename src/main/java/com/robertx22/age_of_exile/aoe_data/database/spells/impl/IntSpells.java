@@ -60,7 +60,7 @@ public class IntSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTag.damage, SpellTag.movement)
                 )
                 .manualDesc("Teleport yourself in the direction you're looking at.")
-
+                .disableInMapDimension()
                 .teleportForward()
 
                 .onCast(PartBuilder.playSound(SoundEvents.CHORUS_FRUIT_TELEPORT, 1D, 1D))

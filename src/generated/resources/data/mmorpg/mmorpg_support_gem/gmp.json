@@ -1,7 +1,7 @@
 {
   "id": "gmp",
   "manaMulti": 1.5,
-  "min_lvl": 1,
+  "min_lvl": 30,
   "one_of_a_kind": "proj_count",
   "stats": [
     {

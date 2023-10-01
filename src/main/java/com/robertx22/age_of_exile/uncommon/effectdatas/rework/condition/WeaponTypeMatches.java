@@ -11,7 +11,7 @@ public class WeaponTypeMatches extends StatCondition {
     public WeaponTypes type;
 
     public WeaponTypeMatches(WeaponTypes type) {
-        super("is_" + type.name() + "_wep_type", "wep_type_match");
+        super("is_" + type.id + "_wep_type", "wep_type_match");
         this.type = type;
     }
 
@@ -22,7 +22,7 @@ public class WeaponTypeMatches extends StatCondition {
     @Override
     public boolean can(EffectEvent event, EffectSides statSource, StatData data, Stat stat) {
         return event.data.getWeaponType()
-            .equals(type);
+                .equals(type);
     }
 
     @Override

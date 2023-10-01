@@ -138,7 +138,9 @@
     ],
     "times_to_cast": 1
   },
-  "disabled_dims": [],
+  "disabled_dims": [
+    "mmorpg:dungeon"
+  ],
   "effect_tip": "",
   "identifier": "teleport",
   "manual_tip": true,

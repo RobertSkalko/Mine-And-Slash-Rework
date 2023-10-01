@@ -133,7 +133,7 @@ public class EventData {
     }
 
     public WeaponTypes getWeaponType() {
-        return WeaponTypes.valueOf(strings.getOrDefault(WEAPON_TYPE, WeaponTypes.none.name()));
+        return WeaponTypes.getAll().stream().filter(x -> x.id.equals(strings.getOrDefault(WEAPON_TYPE, WeaponTypes.none.id))).findAny().orElse(WeaponTypes.none);
     }
 
     public void setElement(Elements ele) {

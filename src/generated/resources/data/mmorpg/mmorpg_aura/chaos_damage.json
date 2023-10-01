@@ -1,7 +1,7 @@
 {
   "id": "chaos_damage",
-  "min_lvl": 1,
-  "reservation": 0.3,
+  "min_lvl": 30,
+  "reservation": 0.4,
   "stats": [
     {
       "type": "MORE",

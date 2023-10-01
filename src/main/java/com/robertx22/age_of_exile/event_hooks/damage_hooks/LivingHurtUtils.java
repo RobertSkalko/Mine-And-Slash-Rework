@@ -67,8 +67,7 @@ public class LivingHurtUtils {
 
         try {
 
-            if (data.getTargetEntity()
-                    .isAlive() == false) {
+            if (data.getTargetEntity().isAlive() == false) {
                 return; // stops attacking dead mobs
             }
 

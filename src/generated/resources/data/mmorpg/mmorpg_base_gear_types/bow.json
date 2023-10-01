@@ -25,6 +25,11 @@
       "bow"
     ]
   },
-  "weapon_type": "bow",
+  "weapon_type": {
+    "id": "bow",
+    "isProjectile": true,
+    "range": "RANGED",
+    "style": "DEX"
+  },
   "weight": 1000
 }

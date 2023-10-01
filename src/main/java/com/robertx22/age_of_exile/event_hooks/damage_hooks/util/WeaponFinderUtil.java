@@ -1,15 +1,12 @@
 package com.robertx22.age_of_exile.event_hooks.damage_hooks.util;
 
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 public class WeaponFinderUtil {
@@ -23,6 +20,7 @@ public class WeaponFinderUtil {
         ItemStack stack = source.getMainHandItem();
         GearItemData gear = StackSaving.GEARS.loadFrom(stack);
 
+        /*
         if (gear == null) {
             if (source instanceof Player p) {
                 for (int i = 0; i < 9; i++) {
@@ -43,6 +41,7 @@ public class WeaponFinderUtil {
                 }
             }
         }
+         */
 
         if (gear == null) {
             if (sourceEntity != null) {

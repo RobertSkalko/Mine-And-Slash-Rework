@@ -1,19 +1,15 @@
-package com.robertx22.age_of_exile.saveclasses.item_classes;
+package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.config.forge.ClientConfigs;
-import com.robertx22.age_of_exile.database.data.MinMax;
-import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import com.robertx22.age_of_exile.saveclasses.ExactStatData;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPartTooltip;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
-import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.MergedStats;
-import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
+import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.Rarity;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequirement;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
+import com.robertx22.library_of_exile.utils.CLOC;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
@@ -22,170 +18,222 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GearTooltipUtils {
+public class TooltipUtils {
 
-    public static void BuildTooltip(GearItemData gear, ItemStack stack, List<Component> tooltip, EntityData data) {
+    public static String CHECKMARK = ChatFormatting.GREEN + "\u2714";
+    public static String X = ChatFormatting.RED + "\u2716";
 
+    public static MutableComponent color(ChatFormatting format, MutableComponent comp) {
+        return Component.literal(format + "").append(comp);
+    }
 
-        List<Component> tip = new ArrayList<>();
-
-        if (gear.GetBaseGearType() == null) {
-            return;
-        }
-
-        TooltipInfo info = new TooltipInfo(data, new MinMax(0, 100));
-
-        tooltip.clear();
-
-        List<MutableComponent> name = gear.GetDisplayName(stack);
-
-
-        name.forEach(x -> {
-            tip.add(x.withStyle(ChatFormatting.BOLD));
-        });
-
-        if (gear.baseStats != null) {
-            tip.addAll(gear.baseStats.GetTooltipString(info, gear));
-        }
-
-        tip.add(ExileText.ofText("").get());
-
-        if (gear.imp != null) {
-            tip.addAll(gear.imp.GetTooltipString(info, gear));
-        }
-
-        List<IGearPartTooltip> list = new ArrayList<IGearPartTooltip>();
-
-        List<ExactStatData> specialStats = new ArrayList<>();
-
-        //tip.add(new LiteralText(""));
-
-        if (info.useInDepthStats()) {
-            if (gear.uniqueStats != null) {
-                tip.addAll(gear.uniqueStats.GetTooltipString(info, gear));
-            }
-            tip.addAll(gear.affixes.GetTooltipString(info, gear));
-            tip.addAll(gear.imp.GetTooltipString(info, gear));
-
+    public static void addRequirements(List<Component> tip, int lvl, StatRequirement req, EntityData data) {
+/*
+        if (data.getLevel() >= lvl) {
+            tip.add(Component.literal(ChatFormatting.GREEN + "" + ChatFormatting.BOLD + StatRequirement.CHECK_YES_ICON + ChatFormatting.GRAY)
+                    .append(ChatFormatting.GRAY + " Level: " + lvl + " "));
 
         } else {
-            List<ExactStatData> stats = new ArrayList<>();
-            gear.affixes.getAllAffixesAndSockets()
-                    .forEach(x -> stats.addAll(x.GetAllStats(gear)));
-
-            stats.addAll(gear.imp.GetAllStats(gear));
-            if (gear.uniqueStats != null) {
-                stats.addAll(gear.uniqueStats.GetAllStats(gear));
-            }
-            List<ExactStatData> longstats = stats.stream()
-                    .filter(x -> x.getStat().is_long)
-                    .collect(Collectors.toList());
-            specialStats.addAll(longstats);
-
-            MergedStats merged = new MergedStats(stats, info);
-
-            list.add(merged);
-
+            tip.add(Component.literal(ChatFormatting.RED + "" + ChatFormatting.BOLD + StatRequirement.NO_ICON + ChatFormatting.GRAY)
+                    .append(ChatFormatting.GRAY + " Level: " + lvl + " ")
+            );
         }
 
-        int n = 0;
-        for (IGearPartTooltip part : list) {
-            if (part != null) {
-                tip.addAll(part.GetTooltipString(info, gear));
-                tip.add(Component.literal(""));
-            }
-            n++;
-        }
-
-        specialStats.forEach(x -> {
-            x.GetTooltipString(info)
-                    .forEach(e -> {
-                        tip.add(e);
-
-                    });
-        });
-        tip.add(Component.literal(""));
+ */
+        tip.addAll(req.GetTooltipString(lvl, data));
+    }
 
 
-        if (Screen.hasShiftDown()) {
-            if (gear.data.get(GearItemData.KEYS.SALVAGING_DISABLED)) {
-                tip.add(Words.Unsalvagable.locName().withStyle(ChatFormatting.RED));
-            }
-        }
+    public static void addEmpty(List<Component> tooltip) {
+        tooltip.add(CLOC.blank(""));
+    }
 
-        tip.add(Component.literal(""));
-        tip.addAll(gear.sockets.GetTooltipString(info, gear));
-        tip.add(Component.literal(""));
+    public static List<String> compsToStrings(List<Component> list) {
+        return list.stream()
+                .map(x -> x.getString()) // todo does this work ?
+                .collect(Collectors.toList());
+    }
 
-        if (gear.ench != null) {
-            tip.addAll(gear.ench.GetTooltipString(info, gear));
-        }
-
-        tip.add(Component.literal(""));
-
-        MutableComponent lvl = TooltipUtils.gearLevel(gear.lvl, Load.Unit(info.player).getLevel());
-
-
-        tip.add(lvl);
-        TooltipUtils.addRequirements(tip, gear.getLevel(), gear.getRequirement(), Load.Unit(info.player));
-
-        tip.add(Component.literal(""));
-
-
-        tip.add(ExileText.ofText("Potential: " + (int) ((gear.getPotential().multi + gear.getAdditionalPotentialMultiFromQuality()) * 100F) + "%").format(gear.getPotentialColor()).get());
-
-        if (gear.getQuality() > 0) {
-            tip.add(ExileText.ofText("Quality: " + gear.getQuality() + "%").format(gear.getQualityType().color).get());
-        }
-
-<<<<<<< Updated upstream
-=======
-        tip.add(TooltipUtils.gearRarity(gear.getRarity()));
-
-        if (Screen.hasShiftDown()) {
-            if (gear.GetBaseGearType().getGearSlot().weapon_data.damage_multiplier > 0) {
-                int cost = (int) Energy.getInstance().scale(ModType.FLAT, gear.GetBaseGearType().getGearSlot().weapon_data.energy_cost_per_swing, data.getLevel());
-                int permob = (int) Energy.getInstance().scale(ModType.FLAT, gear.GetBaseGearType().getGearSlot().weapon_data.energy_cost_per_mob_attacked, data.getLevel());
-
-                tip.add(ExileText.ofText("Energy Cost: " + cost + " + " + permob + " Per mob, " + ", x" + (gear.GetBaseGearType().getGearSlot().getBasicDamageMulti() * 100) / 100F + " Dmg").format(ChatFormatting.GREEN).get());
-            }
-        }
-
->>>>>>> Stashed changes
-
-        tip.add(Component.literal(""));
-
-        if (gear.isCorrupted()) {
-            tip.add(Component.literal(ChatFormatting.RED + "").append(Words.Corrupted.locName()).withStyle(ChatFormatting.RED));
-        }
-
-        tip.add(Component.literal(""));
-
-
-        //  ItemStack.appendEnchantmentNames(tip, stack.getEnchantmentTags());
-
-        if (ClientConfigs.getConfig().SHOW_DURABILITY.get()) {
-            if (stack.isDamageableItem()) {
-                tip.add(ExileText.ofText(ChatFormatting.WHITE + "Durability: " + (stack.getMaxDamage() - stack.getDamageValue()) + "/" + stack.getMaxDamage()).get());
-            } else {
-                tip.add(ExileText.ofText(ChatFormatting.WHITE + "Unbreakable").get());
-            }
-        }
-
-
-        if (Screen.hasShiftDown() == false) {
-            tip.add(Component.literal(ChatFormatting.BLUE + "").append(Component.translatable(SlashRef.MODID + ".tooltip." + "press_shift_more_info")
-                    )
-                    .withStyle(ChatFormatting.BLUE));
-        }
-
-        List<Component> tool = TooltipUtils.removeDoubleBlankLines(tip,
-                ClientConfigs.getConfig().REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES);
-
-        tip.clear();
-
-        tooltip.addAll(tool);
+    public static MutableComponent level(int lvl) {
+        return Component.literal(ChatFormatting.YELLOW + "").append(Words.Level.locName())
+                .append((": " + lvl))
+                .withStyle(ChatFormatting.YELLOW);
 
     }
 
+    public static List<Component> cutIfTooLong(MutableComponent comp) {
+        List<String> stringList = cutIfTooLong(CLOC.translate(comp));
+        return stringList.stream()
+                .map(x -> ExileText.ofText(x).get())
+                .collect(Collectors.toList());
+
+    }
+
+    public static List<MutableComponent> cutIfTooLong(MutableComponent comp, ChatFormatting format) {
+        List<String> stringList = cutIfTooLong(CLOC.translate(comp));
+        return stringList.stream()
+                .map(x -> ExileText.ofText(x).format(format).get())
+                .collect(Collectors.toList());
+
+    }
+
+    // private static final Pattern PATTERN = Pattern.compile("(?)§[0-9A-FK-OR]");
+
+    static Character CHAR = "§".charAt(0); // TODO WTF INTELIJ
+
+    public static List<String> cutIfTooLong(String str) {
+
+        List<String> list = new ArrayList<>();
+
+        ChatFormatting format = null;
+
+        char[] array = str.toCharArray();
+
+        int start = 0;
+        int i = 0;
+
+        ChatFormatting formattouse = null;
+
+        for (Character c : array) {
+
+            if (c.equals(CHAR)) {
+                format = ChatFormatting.getByCode(array[i + 1]);
+            }
+
+            if (i == str.length() - 1) {
+                String cut = str.substring(start);
+                if (cut.startsWith(" ")) {
+                    cut = cut.substring(1);
+                }
+                if (formattouse != null) {
+                    cut = formattouse + cut;
+                    format = null;
+                    formattouse = null;
+                }
+                list.add(cut);
+            } else if (i - start > 32 && c == ' ') {
+                String cut = str.substring(start, i);
+                if (start > 0) {
+                    cut = cut.substring(1);
+                }
+
+                if (format != null) {
+                    formattouse = format;
+                }
+
+                list.add(cut);
+
+                start = i;
+            }
+            i++;
+        }
+
+        return list;
+    }
+
+    public static MutableComponent itemBrokenText(ItemStack stack, ICommonDataItem data) {
+
+        if (data != null) {
+
+            if (RepairUtils.isItemBroken(stack)) {
+                MutableComponent comp = Component.literal(X + " ").append(Words.Broken.locName());
+                return comp;
+            }
+
+        }
+
+        return null;
+    }
+
+    public static List<Component> mutableToComp(List<MutableComponent> list) {
+        return new ArrayList<Component>(list);
+    }
+
+    public static List<Component> removeDoubleBlankLines(List<Component> list) {
+        return removeDoubleBlankLines(list, 5000);
+    }
+
+    public static List<Component> removeDoubleBlankLines(List<Component> list, int minLinesCutAllBlanks) {
+
+        List<Component> newt = new ArrayList();
+
+        boolean lastIsEmpty = false;
+
+        boolean alwaysRemoveEmpty = list.size() > minLinesCutAllBlanks;
+
+        for (int i = 0; i < list.size(); i++) {
+
+            if (list.get(i)
+                    .getString()
+                    .length() > 2) {
+                lastIsEmpty = false;
+                newt.add(list.get(i));
+            } else {
+
+                if ((lastIsEmpty || alwaysRemoveEmpty)) {
+
+                } else {
+                    newt.add(list.get(i));
+                }
+
+                lastIsEmpty = true;
+
+            }
+        }
+
+        list.clear();
+
+        list.addAll(newt);
+
+        return newt;
+    }
+
+    public static MutableComponent rarity(Rarity rarity) {
+        return Component.literal("Rarity: ").withStyle(ChatFormatting.WHITE)
+                .append(rarity.locName()
+                        .withStyle(rarity.textFormatting()));
+    }
+
+    public static MutableComponent rarityShort(Rarity rarity) {
+        return (Component.literal(rarity.textFormatting() + "").append(rarity.locName()));
+    }
+
+    public static MutableComponent tier(int tier) {
+        return Words.Tier.locName().append(": " + tier);
+
+    }
+
+    public static MutableComponent gearSlot(GearSlot slot) {
+        return Component.literal("Item Type: ").withStyle(ChatFormatting.WHITE)
+                .append(slot.locName()
+                        .withStyle(ChatFormatting.AQUA));
+    }
+
+    public static MutableComponent gearTier(int tier) {
+        return Component.literal("Item Tier: ").withStyle(ChatFormatting.WHITE)
+                .append(Component.literal(tier + "").withStyle(ChatFormatting.AQUA));
+    }
+
+    public static MutableComponent gearRarity(GearRarity rarity) {
+        return Component.literal("Rarity: ").withStyle(ChatFormatting.WHITE)
+                .append(rarity.locName()
+                        .withStyle(rarity.textFormatting()));
+    }
+
+    public static MutableComponent gearLevel(int lvl, int playerlvl) {
+
+        ChatFormatting color = ChatFormatting.YELLOW;
+        if (lvl > playerlvl) {
+            color = ChatFormatting.RED;
+        }
+        return Component.literal("Level: ")
+                .withStyle(color)
+                .append(Component.literal(lvl + "")
+                        .withStyle(color));
+    }
+
+
+    public static MutableComponent dragOntoGearToUse() {
+        return Component.literal("[Drag onto gear to use]").withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD);
+    }
 }

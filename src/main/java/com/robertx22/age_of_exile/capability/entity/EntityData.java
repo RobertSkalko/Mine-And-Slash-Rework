@@ -396,7 +396,7 @@ public class EntityData implements ICap, INeededForClient {
     }
 
     public void unarmedAttack(AttackInformation data) {
-        float cost = 2;
+        float cost = ServerContainer.get().UNARMED_ENERGY_COST.get().floatValue();
 
         cost = Energy.getInstance().scale(ModType.FLAT, cost, getLevel());
 
@@ -601,13 +601,16 @@ public class EntityData implements ICap, INeededForClient {
 
     public void attackWithWeapon(AttackInformation data) {
 
-        if (data.weaponData.GetBaseGearType()
-                .getWeaponMechanic() != null) {
+        if (data.weaponData.GetBaseGearType().getWeaponMechanic() != null) {
 
-            GearSlot slot = data.weaponData.GetBaseGearType()
-                    .getGearSlot();
+            GearSlot slot = data.weaponData.GetBaseGearType().getGearSlot();
 
-            float cost = Energy.getInstance().scale(ModType.FLAT, slot.energy_cost, getLevel());
+            float cost = Energy.getInstance().scale(ModType.FLAT, slot.weapon_data.energy_cost_per_mob_attacked, getLevel());
+
+            if (!Load.Unit(entity).cooldowns.isOnCooldown("swing_cost")) {
+                Load.Unit(entity).cooldowns.setOnCooldown("swing_cost", 3);
+                cost += Energy.getInstance().scale(ModType.FLAT, slot.weapon_data.energy_cost_per_swing, getLevel());
+            }
 
             SpendResourceEvent event = new SpendResourceEvent(entity, ResourceType.energy, cost);
             event.calculateEffects();

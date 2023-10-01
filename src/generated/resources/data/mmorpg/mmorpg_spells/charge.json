@@ -29,7 +29,7 @@
             "map": {
               "ignore_y": true,
               "motion": "CasterLook",
-              "push_str": 0.2,
+              "push_str": 0.4,
               "set_add": "ADD"
             }
           }

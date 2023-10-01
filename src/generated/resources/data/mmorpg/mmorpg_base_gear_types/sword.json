@@ -26,6 +26,11 @@
       "weapon_family"
     ]
   },
-  "weapon_type": "sword",
+  "weapon_type": {
+    "id": "sword",
+    "isProjectile": false,
+    "range": "MELEE",
+    "style": "STR"
+  },
   "weight": 1000
 }

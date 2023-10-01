@@ -79,7 +79,6 @@ resource_type_is_magic_shield
 is_is_basic_atk_true
 threat_gen_type_is_heal
 restore_type_is_regen
-is_none_wep_type
 is_target_cursed
 spell_has_tag_heal
 spell_has_tag_curse

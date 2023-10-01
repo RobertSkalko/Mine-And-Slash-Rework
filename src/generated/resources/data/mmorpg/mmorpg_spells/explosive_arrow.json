@@ -68,7 +68,7 @@
             {
               "type": "damage",
               "map": {
-                "element": "Physical",
+                "element": "Fire",
                 "value_calculation": "explosive_arrow"
               }
             }
@@ -207,6 +207,6 @@
   "effect_tip": "",
   "identifier": "explosive_arrow",
   "manual_tip": true,
-  "min_lvl": 1,
+  "min_lvl": 10,
   "weight": 1000
 }

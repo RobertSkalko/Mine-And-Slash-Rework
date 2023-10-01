@@ -1,7 +1,11 @@
 {
-  "energy_cost": 0,
   "fam": "OffHand",
   "id": "tome",
   "model_num": 11,
+  "weapon_data": {
+    "damage_multiplier": 0.0,
+    "energy_cost_per_mob_attacked": 0.0,
+    "energy_cost_per_swing": 0.0
+  },
   "weight": 500
 }

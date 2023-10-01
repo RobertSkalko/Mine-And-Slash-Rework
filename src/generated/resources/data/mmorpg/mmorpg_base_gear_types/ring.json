@@ -13,6 +13,11 @@
       "jewelry_family"
     ]
   },
-  "weapon_type": "none",
+  "weapon_type": {
+    "id": "none",
+    "isProjectile": false,
+    "range": "MELEE",
+    "style": "STR"
+  },
   "weight": 1000
 }

@@ -94,9 +94,9 @@ public class HarvestLeague extends LeagueMechanic {
 
                 int mobs = be.getMobs().size();
 
-                if (mobs < 50) {
+                if (mobs < 20) {
 
-                    int tospawn = 5;
+                    int tospawn = 4;
 
                     for (int i = 0; i < tospawn; i++) {
 

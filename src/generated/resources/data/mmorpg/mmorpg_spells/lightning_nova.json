@@ -187,6 +187,6 @@
   "effect_tip": "",
   "identifier": "lightning_nova",
   "manual_tip": true,
-  "min_lvl": 1,
+  "min_lvl": 10,
   "weight": 1000
 }

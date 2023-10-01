@@ -15,7 +15,7 @@ public class DamageBuilder extends EventBuilder<DamageEvent> {
     public DamageBuilder setupDamage(AttackType effectType, WeaponTypes weptype, PlayStyle style) {
         this.isSetup = true;
         event.data.setString(EventData.STYLE, style.id);
-        event.data.setString(EventData.WEAPON_TYPE, weptype.name());
+        event.data.setString(EventData.WEAPON_TYPE, weptype.id);
         event.data.setString(EventData.ATTACK_STYLE, style.id);
         event.data.setString(EventData.ATTACK_TYPE, effectType.name());
         return this;

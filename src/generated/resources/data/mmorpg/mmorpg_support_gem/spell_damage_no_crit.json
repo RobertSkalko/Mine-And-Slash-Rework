@@ -1,7 +1,7 @@
 {
   "id": "spell_damage_no_crit",
   "manaMulti": 1.3,
-  "min_lvl": 1,
+  "min_lvl": 10,
   "one_of_a_kind": "",
   "stats": [
     {

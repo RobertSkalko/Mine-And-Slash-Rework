@@ -48,7 +48,7 @@
             {
               "type": "damage",
               "map": {
-                "element": "Physical",
+                "element": "Lightning",
                 "value_calculation": "charged_bolt"
               }
             }

@@ -1,40 +1,10 @@
 {
   "chance_drops": [
     {
-      "type": "GREATER",
-      "chance": 0.5,
-      "drops": [
-        {
-          "item_id": "mmorpg:rare_mats/mining/greater",
-          "min_lvl": 0.0,
-          "num": 1,
-          "weight": 1000
-        },
-        {
-          "item_id": "mmorpg:rare_mats/mining/lesser",
-          "min_lvl": 0.0,
-          "num": 1,
-          "weight": 1000
-        },
-        {
-          "item_id": "mmorpg:rare_mats/mining/medium",
-          "min_lvl": 0.0,
-          "num": 1,
-          "weight": 1000
-        }
-      ]
-    },
-    {
       "type": "LESSER",
       "chance": 10.0,
       "drops": [
         {
-          "item_id": "mmorpg:rare_mats/mining/greater",
-          "min_lvl": 0.0,
-          "num": 1,
-          "weight": 1000
-        },
-        {
           "item_id": "mmorpg:rare_mats/mining/lesser",
           "min_lvl": 0.0,
           "num": 1,
@@ -42,6 +12,12 @@
         },
         {
           "item_id": "mmorpg:rare_mats/mining/medium",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:rare_mats/mining/greater",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
@@ -53,11 +29,29 @@
       "chance": 2.5,
       "drops": [
         {
-          "item_id": "mmorpg:rare_mats/mining/greater",
+          "item_id": "mmorpg:rare_mats/mining/lesser",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
         },
+        {
+          "item_id": "mmorpg:rare_mats/mining/medium",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:rare_mats/mining/greater",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        }
+      ]
+    },
+    {
+      "type": "GREATER",
+      "chance": 0.5,
+      "drops": [
         {
           "item_id": "mmorpg:rare_mats/mining/lesser",
           "min_lvl": 0.0,
@@ -66,6 +60,12 @@
         },
         {
           "item_id": "mmorpg:rare_mats/mining/medium",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:rare_mats/mining/greater",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000

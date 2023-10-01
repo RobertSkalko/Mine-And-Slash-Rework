@@ -1,5 +1,10 @@
 {
-  "type": "staff",
+  "type": {
+    "id": "staff",
+    "isProjectile": false,
+    "range": "MELEE",
+    "style": "INT"
+  },
   "id": "is_staff_wep_type",
   "ser": "wep_type_match"
 }

@@ -75,14 +75,14 @@ public class StatConditions implements ExileRegistryInit {
             , x -> new StringMatchesCondition(EventData.RESTORE_TYPE, x.name()));
 
     public static StatCondition IS_MELEE_WEAPON = new EitherIsTrueCondition("is_melee_weapon",
-            Arrays.stream(WeaponTypes.values())
+            WeaponTypes.getAll().stream()
                     .filter(x -> x.isMelee())
                     .map(x -> new WeaponTypeMatches(x).GUID())
                     .collect(Collectors.toList())
     );
 
     public static StatCondition IS_MAGIC_WEAPON = new EitherIsTrueCondition("is_magic_weapon",
-            Arrays.stream(WeaponTypes.values())
+            WeaponTypes.getAll().stream()
                     .filter(x -> x.style == PlayStyle.INT)
                     .map(x -> new WeaponTypeMatches(x).GUID())
                     .collect(Collectors.toList())
@@ -103,7 +103,7 @@ public class StatConditions implements ExileRegistryInit {
             , x -> new StringMatchesCondition(EventData.ATTACK_TYPE, x.name()));
 
     public static DataHolder<WeaponTypes, StatCondition> WEAPON_TYPE_MATCHES = new DataHolder<>(
-            WeaponTypes.values()
+            WeaponTypes.getAll()
             , x -> new WeaponTypeMatches(x));
 
     // todo

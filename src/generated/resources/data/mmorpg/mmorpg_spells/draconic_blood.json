@@ -77,6 +77,6 @@
   "effect_tip": "",
   "identifier": "draconic_blood",
   "manual_tip": true,
-  "min_lvl": 1,
+  "min_lvl": 30,
   "weight": 1000
 }

@@ -26,8 +26,7 @@ public abstract class WeaponMechanic implements IGUID {
 
     protected void doNormalAttack(AttackInformation data) {
 
-        WeaponTypes weptype = data.weaponData.GetBaseGearType()
-                .weaponType();
+        WeaponTypes weptype = data.weaponData.GetBaseGearType().weaponType();
 
         int num = (int) data.getAttackerEntityData()
                 .getUnit()

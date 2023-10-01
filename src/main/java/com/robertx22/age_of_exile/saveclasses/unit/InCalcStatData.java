@@ -61,11 +61,10 @@ public class InCalcStatData {
     public void addFullyTo(InCalcStatData other) {
         other.Flat += Flat;
         other.Percent += Percent;
-        other.Multi += Multi; // todo might be buggy
-
+        other.Multi += 1F - Multi; // todo might be buggy // should be fixed now
     }
 
- 
+
     public void add(ExactStatData modData) {
         ModType type = modData.getType();
 

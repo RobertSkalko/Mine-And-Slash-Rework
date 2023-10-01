@@ -1,7 +1,7 @@
 {
   "id": "proj_speed",
   "manaMulti": 1.1,
-  "min_lvl": 1,
+  "min_lvl": 10,
   "one_of_a_kind": "",
   "stats": [
     {

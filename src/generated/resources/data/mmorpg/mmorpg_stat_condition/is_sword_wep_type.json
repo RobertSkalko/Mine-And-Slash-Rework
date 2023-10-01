@@ -1,5 +1,10 @@
 {
-  "type": "sword",
+  "type": {
+    "id": "sword",
+    "isProjectile": false,
+    "range": "MELEE",
+    "style": "STR"
+  },
   "id": "is_sword_wep_type",
   "ser": "wep_type_match"
 }

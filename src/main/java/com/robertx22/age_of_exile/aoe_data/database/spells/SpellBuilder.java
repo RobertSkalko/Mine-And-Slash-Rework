@@ -14,6 +14,7 @@ import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeapon;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
@@ -127,6 +128,11 @@ public class SpellBuilder {
 
     public SpellBuilder levelReq(int lvl) {
         this.spell.min_lvl = lvl;
+        return this;
+    }
+
+    public SpellBuilder disableInMapDimension() {
+        this.spell.disabled_dims.add(WorldUtils.DUNGEON_DIM_ID.toString());
         return this;
     }
 

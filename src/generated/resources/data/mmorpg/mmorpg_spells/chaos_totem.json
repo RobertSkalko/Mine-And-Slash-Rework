@@ -280,7 +280,7 @@
       "max": 30.0,
       "min": 40.0
     },
-    "style": "int",
+    "style": "str",
     "summonType": "NONE",
     "swing_arm": true,
     "tags": [
@@ -294,6 +294,6 @@
   "effect_tip": "",
   "identifier": "chaos_totem",
   "manual_tip": true,
-  "min_lvl": 1,
+  "min_lvl": 20,
   "weight": 1000
 }

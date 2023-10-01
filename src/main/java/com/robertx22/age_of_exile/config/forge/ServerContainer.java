@@ -39,7 +39,7 @@ public class ServerContainer {
         REQUIRE_TEAM_FOR_TEAM_DUNGEONS = b.define("require_team_for_dungeons", true);
         DONT_SYNC_DATA_OF_AMBIENT_MOBS = b.define("dont_sync_ambient_mob_data", true);
         MAPS_DONT_DROP_IN_MAPS = b.define("maps_dont_drop_in_maps", true);
-        MIN_LEVEL_MAP_DROPS = b.define("min_level_map_drops", 10);
+        MIN_LEVEL_MAP_DROPS = b.defineInRange("min_level_map_drops", 10, 0, Integer.MAX_VALUE);
 
 
         REGEN_HUNGER_COST = b.defineInRange("regen_hunger_cost", 10D, 0, 1000);
@@ -79,6 +79,8 @@ public class ServerContainer {
 
         MOB_MIN = b.defineInRange("mob_min", 1, 0, 20);
         MOB_MAX = b.defineInRange("mob_max", 2, 0, 20);
+
+        UNARMED_ENERGY_COST = b.defineInRange("UNARMED_ENERGY_COST", 5D, 0D, 100D);
 
         List<String> list = new ArrayList<>();
 
@@ -151,6 +153,7 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue MAX_TEAM_DISTANCE;
     public ForgeConfigSpec.DoubleValue IN_COMBAT_REGEN_MULTI;
     public ForgeConfigSpec.DoubleValue COMBAT_PROFESSION_RESTED_XP_GENERATION;
+    public ForgeConfigSpec.DoubleValue UNARMED_ENERGY_COST;
 
     public ForgeConfigSpec.DoubleValue FAVOR_DEATH_LOSS;
     public ForgeConfigSpec.DoubleValue FAVOR_CHEST_GAIN;

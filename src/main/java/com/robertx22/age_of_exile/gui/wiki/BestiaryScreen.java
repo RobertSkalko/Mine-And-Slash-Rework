@@ -289,7 +289,9 @@ public class BestiaryScreen extends BaseScreen implements INamedScreen {
 
         @Override
         public void render(GuiGraphics gui, int mouseX, int mouseY, float delta) {
-            setModTooltip();
+            if (isHovered()) {
+                setModTooltip();
+            }
             super.render(gui, mouseX, mouseY, delta);
 
             gui.renderFakeItem(item.stack, getStackX(), getStackY());

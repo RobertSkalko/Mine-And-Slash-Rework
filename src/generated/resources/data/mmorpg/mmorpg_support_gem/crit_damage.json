@@ -1,7 +1,7 @@
 {
   "id": "crit_damage",
   "manaMulti": 1.2,
-  "min_lvl": 1,
+  "min_lvl": 10,
   "one_of_a_kind": "",
   "stats": [
     {

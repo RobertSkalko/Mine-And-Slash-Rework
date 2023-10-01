@@ -42,14 +42,17 @@ public abstract class BestiaryGroup<T> {
 
     static BestiaryGroup SPELL = new DBItemEntry<Spell>(ExileRegistryTypes.SPELL, Words.SkillGem, "skill_gem", x -> {
         var b = new SkillGemBlueprint(LootInfo.ofLevel(1), SkillGemData.SkillGemType.SKILL);
+        b.setType(x.GUID());
         return new BestiaryEntry.NamedItem(b.createStack(), CLOC.translate(x.locName()));
     });
     static BestiaryGroup SUPP = new DBItemEntry<SupportGem>(ExileRegistryTypes.SUPPORT_GEM, Words.SUPPGEM, "supp_gem", x -> {
         var b = new SkillGemBlueprint(LootInfo.ofLevel(1), SkillGemData.SkillGemType.SUPPORT);
+        b.setType(x.GUID());
         return new BestiaryEntry.NamedItem(b.createStack(), CLOC.translate(x.locName()));
     });
     static BestiaryGroup AURA = new DBItemEntry<AuraGem>(ExileRegistryTypes.AURA, Words.AURA, "aura", x -> {
         var b = new SkillGemBlueprint(LootInfo.ofLevel(1), SkillGemData.SkillGemType.AURA);
+        b.setType(x.GUID());
         return new BestiaryEntry.NamedItem(b.createStack(), CLOC.translate(x.locName()));
     });
 
