@@ -9,6 +9,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellA
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeapon;
+import com.robertx22.age_of_exile.database.data.stats.types.defense.BlockChance;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -22,11 +23,13 @@ import net.minecraft.sounds.SoundEvents;
 import java.util.Arrays;
 
 public class IntSpells implements ExileRegistryInit {
+    public static String BLACK_HOLE = "black_hole";
+    public static String TELEPORT = "teleport";
 
     @Override
     public void registerAll() {
 
-        SpellBuilder.of("black_hole", PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 60)
+        SpellBuilder.of(BLACK_HOLE, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 60)
                                 .setSwingArm(), "Black Hole",
                         Arrays.asList(SpellTag.damage, SpellTag.area))
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
@@ -55,7 +58,7 @@ public class IntSpells implements ExileRegistryInit {
                 .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.WITCH, 50D, 1.5D, 1.5D))
                 .build();
 
-        SpellBuilder.of("teleport", PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 30)
+        SpellBuilder.of(TELEPORT, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 30)
                         , "Teleport",
                         Arrays.asList(SpellTag.damage, SpellTag.movement)
                 )

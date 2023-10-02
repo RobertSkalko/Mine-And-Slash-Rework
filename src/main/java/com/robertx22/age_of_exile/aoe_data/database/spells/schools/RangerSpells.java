@@ -46,11 +46,17 @@ public class RangerSpells implements ExileRegistryInit {
     public static String SMOKE_BOMB = "smoke_bomb";
     public static String BARRAGE = "arrow_barrage";
 
+    public static String ARROW_TOTEM = "arrow_totem";
+    public static String BOOMERANG = "boomerang";
+    public static String QUICKDRAW = "quickdraw";
+    public static String GALE_WIND = "gale_wind";
+    public static String METEOR_ARROW = "meteor_arrow";
+
     @Override
 
     public void registerAll() {
 
-        SpellBuilder.of("arrow_totem", PlayStyle.DEX, SpellConfiguration.Builder.instant(25, 10)
+        SpellBuilder.of(ARROW_TOTEM, PlayStyle.DEX, SpellConfiguration.Builder.instant(25, 10)
                                 .setChargesAndRegen("arrow_totem", 3, 20 * 30)
                                 .applyCastSpeedToCooldown(), "Arrow Totem",
                         Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.totem))
@@ -81,7 +87,7 @@ public class RangerSpells implements ExileRegistryInit {
                 .build();
 
 
-        SpellBuilder.of("boomerang", PlayStyle.DEX, SpellConfiguration.Builder.instant(10, 20 * 5)
+        SpellBuilder.of(BOOMERANG, PlayStyle.DEX, SpellConfiguration.Builder.instant(10, 20 * 5)
                                 .setChargesAndRegen("boomerang", 3, 20 * 10)
                                 .applyCastSpeedToCooldown(), "Boomerang",
                         Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.chaining))
@@ -171,7 +177,7 @@ public class RangerSpells implements ExileRegistryInit {
                 .build();
 
 
-        SpellBuilder.of("quickdraw", PlayStyle.DEX, SpellConfiguration.Builder.instant(5, 20 * 5)
+        SpellBuilder.of(QUICKDRAW, PlayStyle.DEX, SpellConfiguration.Builder.instant(5, 20 * 5)
                         .setChargesAndRegen("quickdraw", 3, 20 * 60), "Quickdraw", Arrays.asList())
                 .manualDesc("Your bow now fires instantly, and you gain a stack of arrows if you don't have infinity.")
 
@@ -197,7 +203,7 @@ public class RangerSpells implements ExileRegistryInit {
                 .levelReq(30)
                 .build();
 
-        SpellBuilder.of("gale_wind", PlayStyle.DEX, SpellConfiguration.Builder.multiCast(20, 20 * 10, 10, 3), "Gale Wind",
+        SpellBuilder.of(GALE_WIND, PlayStyle.DEX, SpellConfiguration.Builder.multiCast(20, 20 * 10, 10, 3), "Gale Wind",
                         Arrays.asList(SpellTag.projectile, SpellTag.damage))
                 .manualDesc("Summons multiple clouds, knocking back and dealing " + SpellCalcs.GALE_WIND.getLocDmgTooltip(Elements.Physical))
                 .onCast(PartBuilder.playSound(SoundEvents.EGG_THROW, 1D, 0.5D))
@@ -260,7 +266,7 @@ public class RangerSpells implements ExileRegistryInit {
                 .levelReq(10)
                 .build();
 
-        SpellBuilder.of("meteor_arrow", PlayStyle.DEX, SpellConfiguration.Builder.arrowSpell(15, 10)
+        SpellBuilder.of(METEOR_ARROW, PlayStyle.DEX, SpellConfiguration.Builder.arrowSpell(15, 10)
                                 .setChargesAndRegen("meteor_arrow", 3, 20 * 10), "Meteor Arrow",
                         Arrays.asList(SpellTag.projectile, SpellTag.area, SpellTag.damage))
                 .weaponReq(CastingWeapon.RANGED)

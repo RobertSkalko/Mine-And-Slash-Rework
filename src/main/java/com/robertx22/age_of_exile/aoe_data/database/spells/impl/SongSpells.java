@@ -19,11 +19,13 @@ import net.minecraft.world.item.Items;
 import java.util.Arrays;
 
 public class SongSpells implements ExileRegistryInit {
+    public static String POWER_CHORD = "power_chord";
+    public static String RESONANCE = "resonance";
 
     @Override
     public void registerAll() {
 
-        SpellBuilder.of("power_chord", PlayStyle.INT, SpellConfiguration.Builder.instant(7, 15)
+        SpellBuilder.of(POWER_CHORD, PlayStyle.INT, SpellConfiguration.Builder.instant(7, 15)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Power Chord",
                         Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.song))
@@ -40,7 +42,7 @@ public class SongSpells implements ExileRegistryInit {
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.NOTE, 20D, 1D))
                 .build();
 
-        SpellBuilder.of("resonance", PlayStyle.INT, SpellConfiguration.Builder.multiCast(7, 20, 10, 3)
+        SpellBuilder.of(RESONANCE, PlayStyle.INT, SpellConfiguration.Builder.multiCast(7, 20, 10, 3)
                                 .setSwingArm().setChargesAndRegen("resonance", 3, 20 * 30)
                                 .applyCastSpeedToCooldown(), "Resonance",
                         Arrays.asList(SpellTag.projectile, SpellTag.area, SpellTag.damage, SpellTag.song))

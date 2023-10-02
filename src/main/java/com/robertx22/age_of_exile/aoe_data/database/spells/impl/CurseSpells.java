@@ -18,6 +18,9 @@ import net.minecraft.sounds.SoundEvents;
 import java.util.Arrays;
 
 public class CurseSpells implements ExileRegistryInit {
+    public static String CURSE_OF_AGONY = "curse_of_agony";
+    public static String CURSE_OF_WEAK = "curse_of_weak";
+    public static String CURSE_OF_DESPAIR = "curse_of_despair";
 
     
     static void curse(String id, String name, EffectCtx effect) {
@@ -41,9 +44,9 @@ public class CurseSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        curse("curse_of_agony", "Curse of Agony", NegativeEffects.CURSE_AGONY);
-        curse("curse_of_weak", "Curse of Weakness", NegativeEffects.CURSE_WEAKNESS);
-        curse("curse_of_despair", "Curse of Despair", NegativeEffects.DESPAIR);
+        curse(CURSE_OF_AGONY, "Curse of Agony", NegativeEffects.CURSE_AGONY);
+        curse(CURSE_OF_WEAK, "Curse of Weakness", NegativeEffects.CURSE_WEAKNESS);
+        curse(CURSE_OF_DESPAIR, "Curse of Despair", NegativeEffects.DESPAIR);
 
     }
 }

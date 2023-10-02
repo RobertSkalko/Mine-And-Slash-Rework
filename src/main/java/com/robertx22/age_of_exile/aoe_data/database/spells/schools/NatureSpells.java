@@ -31,11 +31,12 @@ public class NatureSpells implements ExileRegistryInit {
     public static String ENTANGLE_SEED = "entangling_seed";
     public static String POISON_CLOUD = "poison_cloud";
     public static String THORN_BUSH = "thorn_bush";
+    public static String CHAOS_TOTEM = "chaos_totem";
 
     @Override
     public void registerAll() {
    
-        SpellBuilder.of("chaos_totem", PlayStyle.STR, SpellConfiguration.Builder.instant(40, 20 * 60), "Chaos Totem",
+        SpellBuilder.of(CHAOS_TOTEM, PlayStyle.STR, SpellConfiguration.Builder.instant(40, 20 * 60), "Chaos Totem",
                         Arrays.asList(SpellTag.area, SpellTag.damage, SpellTag.totem))
 
                 .manualDesc("Summons a totem that spawns chaos meteors, dealing " + SpellCalcs.CHAOS_TOTEM.getLocDmgTooltip(Elements.Chaos)

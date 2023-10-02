@@ -16,11 +16,12 @@ import net.minecraft.sounds.SoundEvents;
 import java.util.Arrays;
 
 public class StrSpells implements ExileRegistryInit {
+    public static String SHRED = "shred";
 
     @Override
     public void registerAll() {
 
-        SpellBuilder.of("shred", PlayStyle.STR, SpellConfiguration.Builder.instant(10, 20 * 1)
+        SpellBuilder.of(SHRED, PlayStyle.STR, SpellConfiguration.Builder.instant(10, 20 * 1)
                                 .setSwingArm()
                                 .setChargesAndRegen("shred", 3, 20 * 15), "Shred",
                         Arrays.asList(SpellTag.technique, SpellTag.area, SpellTag.damage))
