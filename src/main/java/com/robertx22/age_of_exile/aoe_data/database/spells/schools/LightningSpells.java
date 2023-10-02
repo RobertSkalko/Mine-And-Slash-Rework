@@ -20,12 +20,14 @@ import java.util.Arrays;
 
 public class LightningSpells implements ExileRegistryInit {
     public static String LIGHTNING_NOVA = "lightning_nova";
+    public static String LIGHTNING_SPEAR = "lightning_spear";
+    public static String CHAIN_LIGHTNING = "chain_lightning";
 
     @Override
     public void registerAll() {
 
 
-        SpellBuilder.of("chain_lightning", PlayStyle.INT, SpellConfiguration.Builder.instant(25, 20)
+        SpellBuilder.of(CHAIN_LIGHTNING, PlayStyle.INT, SpellConfiguration.Builder.instant(25, 20)
                                 .setChargesAndRegen("chain_lightning", 3, 20 * 10)
                                 .applyCastSpeedToCooldown(), "Chain Lightning",
                         Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.chaining))
@@ -46,7 +48,7 @@ public class LightningSpells implements ExileRegistryInit {
                 .build();
 
 
-        SpellBuilder.of("lightning_spear", PlayStyle.INT, SpellConfiguration.Builder.instant(5, 20 * 5)
+        SpellBuilder.of(LIGHTNING_SPEAR, PlayStyle.INT, SpellConfiguration.Builder.instant(5, 20 * 5)
                                 .setSwingArm()
                                 .setChargesAndRegen("lightning_spear", 3, 20 * 5)
                                 .applyCastSpeedToCooldown(), "Lightning Spear",

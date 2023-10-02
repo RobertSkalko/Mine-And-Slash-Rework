@@ -34,9 +34,9 @@ public class FireSpells implements ExileRegistryInit {
     public void registerAll() {
 
         SpellBuilder.of(MAGMA_FLOWER, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 20 * 30)
-                                .setSwingArm(), "Magma Flower",
+                                .setSwingArm(), "Magma Totem",
                         Arrays.asList(SpellTag.damage, SpellTag.area, SpellTag.totem))
-                .manualDesc("Summon a flaming flower that deals "
+                .manualDesc("Summon a flaming totem that deals "
                         + SpellCalcs.MAGMA_FLOWER.getLocDmgTooltip()
                         + Elements.Fire.getIconNameDmg() + " in an area every second.")
 

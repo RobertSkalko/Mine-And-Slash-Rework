@@ -23,26 +23,33 @@ import net.minecraft.world.effect.MobEffects;
 import java.util.Arrays;
 
 public class SummonSpells implements ExileRegistryInit {
+    public static String SUMMON_FIRE_GOLEM = "summon_fire_golem";
+    public static String SUMMON_COLD_GOLEM = "summon_cold_golem";
+    public static String SUMMON_LIGHTNING_GOLEM = "summon_lightning_golem";
+    public static String SUMMON_SPIRIT_WOLF = "summon_spirit_wolf";
+    public static String SUMMON_ZOMBIE = "summon_zombie";
+    public static String SUMMON_SKELETAL_ARMY = "summon_skeleton_army";
+    public static String RETURN_SUMMONS = "return_summons";
+    public static String CHILLING_TOUCH = "chilling_touch";
 
     @Override
     public void registerAll() {
 
-
-        SpellBuilder.of("summon_fire_golem", PlayStyle.INT, SpellConfiguration.Builder.instant(40, 20 * 60).setSummonType(SummonType.GOLEM), "Summon Fire Golem",
+        SpellBuilder.of(SUMMON_FIRE_GOLEM, PlayStyle.INT, SpellConfiguration.Builder.instant(40, 20 * 60).setSummonType(SummonType.GOLEM), "Summon Fire Golem",
                         Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.golem))
                 .manualDesc("Summon a Golem that can cast Fire Nova to aid you in combat.")
                 .summons(SlashEntities.FIRE_GOLEM.get(), 20 * 60 * 3, 1)
                 .levelReq(20)
                 .build();
 
-        SpellBuilder.of("summon_cold_golem", PlayStyle.INT, SpellConfiguration.Builder.instant(40, 20 * 60).setSummonType(SummonType.GOLEM), "Summon Frost Golem",
+        SpellBuilder.of(SUMMON_COLD_GOLEM, PlayStyle.INT, SpellConfiguration.Builder.instant(40, 20 * 60).setSummonType(SummonType.GOLEM), "Summon Frost Golem",
                         Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.golem))
                 .manualDesc("Summon a Golem that can cast Frost Nova to aid you in combat.")
                 .summons(SlashEntities.COLD_GOLEM.get(), 20 * 60 * 3, 1)
                 .levelReq(20)
                 .build();
 
-        SpellBuilder.of("summon_lightning_golem", PlayStyle.INT, SpellConfiguration.Builder.instant(40, 20 * 60).setSummonType(SummonType.GOLEM), "Summon Lightning Golem",
+        SpellBuilder.of(SUMMON_LIGHTNING_GOLEM, PlayStyle.INT, SpellConfiguration.Builder.instant(40, 20 * 60).setSummonType(SummonType.GOLEM), "Summon Lightning Golem",
                         Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.golem))
                 .manualDesc("Summon a Golem that can cast Lightning Nova to aid you in combat .")
                 .summons(SlashEntities.LIGHTNING_GOLEM.get(), 20 * 60 * 3, 1)
@@ -50,21 +57,21 @@ public class SummonSpells implements ExileRegistryInit {
                 .build();
 
 
-        SpellBuilder.of("summon_spirit_wolf", PlayStyle.INT, SpellConfiguration.Builder.instant(30, 30 * 20).setSummonType(SummonType.BEAST), "Summon Spirit Wolf",
+        SpellBuilder.of(SUMMON_SPIRIT_WOLF, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 30 * 20).setSummonType(SummonType.BEAST), "Summon Spirit Wolf",
                         Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.beast))
                 .manualDesc("Summon a Spirit Wolf to aid you in combat.")
                 .summons(SlashEntities.SPIRIT_WOLF.get(), 20 * 30, 1)
                 .levelReq(1)
                 .build();
 
-        SpellBuilder.of("summon_zombie", PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 60).setSummonType(SummonType.UNDEAD), "Summon Zombie",
+        SpellBuilder.of(SUMMON_ZOMBIE, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 60).setSummonType(SummonType.UNDEAD), "Summon Zombie",
                         Arrays.asList(SpellTag.summon, SpellTag.damage))
                 .manualDesc("Summon a Zombie to aid you in combat.")
                 .summons(SlashEntities.ZOMBIE.get(), 20 * 60 * 2, 1)
                 .levelReq(1)
                 .build();
 
-        SpellBuilder.of("summon_skeleton_army", PlayStyle.INT, SpellConfiguration.Builder.instant(60, 20 * 60).setSummonType(SummonType.UNDEAD), "Summon Skeletons",
+        SpellBuilder.of(SUMMON_SKELETAL_ARMY, PlayStyle.INT, SpellConfiguration.Builder.instant(60, 20 * 60).setSummonType(SummonType.UNDEAD), "Summon Skeletons",
                         Arrays.asList(SpellTag.summon, SpellTag.damage))
                 .manualDesc("Summon a horde of Skeletons to fight for you for a short duration.")
                 .summons(SlashEntities.SKELETON.get(), 20 * 20, 3)
@@ -72,7 +79,7 @@ public class SummonSpells implements ExileRegistryInit {
                 .build();
 
 
-        SpellBuilder.of("return_summons", PlayStyle.STR, SpellConfiguration.Builder.instant(15, 20 * 30), "Return Summons",
+        SpellBuilder.of(RETURN_SUMMONS, PlayStyle.STR, SpellConfiguration.Builder.instant(15, 20 * 30), "Return Summons",
                         Arrays.asList(SpellTag.area, SpellTag.heal))
                 .manualDesc("Regroup your summons and heal them for " + SpellCalcs.HEALING_AURA.getLocDmgTooltip() + " health.")
                 .onCast(PartBuilder.playSound(SoundEvents.ANVIL_HIT, 1D, 1D))
@@ -89,7 +96,7 @@ public class SummonSpells implements ExileRegistryInit {
                 .build();
 
 
-        SpellBuilder.of("chilling_touch", PlayStyle.STR, SpellConfiguration.Builder.instant(8, 20 * 5)
+        SpellBuilder.of(CHILLING_TOUCH, PlayStyle.STR, SpellConfiguration.Builder.instant(8, 20 * 5)
                                 .setSwingArm(), "Chilling Touch",
                         Arrays.asList(SpellTag.area, SpellTag.damage))
                 .manualDesc("Strike enemies in front for " +

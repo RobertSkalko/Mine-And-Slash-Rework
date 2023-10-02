@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.Blocks;
 import java.util.Arrays;
 
 public class WaterSpells implements ExileRegistryInit {
+    public static String FROZEN_ORB = "frozen_orb";
     public static String FROST_NOVA_AOE = "frost_nova";
     public static String WATER_BREATH = "water_breath";
     public static String MAGE_CIRCLE = "mage_circle";
@@ -42,7 +43,7 @@ public class WaterSpells implements ExileRegistryInit {
     public void registerAll() {
 
 
-        SpellBuilder.of("frozen_orb", PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 30)
+        SpellBuilder.of(FROZEN_ORB, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 30)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Frozen orb",
                         Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.area))
@@ -67,9 +68,9 @@ public class WaterSpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(FROST_FLOWER, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 60)
-                                .setSwingArm(), "Frost Flower",
+                                .setSwingArm(), "Frost Totem",
                         Arrays.asList(SpellTag.damage, SpellTag.area, SpellTag.totem))
-                .manualDesc("Summon a frost flower that deals "
+                .manualDesc("Summon a frost totem that deals "
                         + SpellCalcs.FROST_FLOWER.getLocDmgTooltip(Elements.Cold) + " in an area every second.")
 
                 .onCast(PartBuilder.playSound(SoundEvents.GRASS_PLACE, 1D, 1D))

@@ -15,11 +15,12 @@ import net.minecraft.sounds.SoundEvents;
 import java.util.Arrays;
 
 public class DexSpells implements ExileRegistryInit {
+    public static String EXECUTE = "execute";
 
     @Override
     public void registerAll() {
 
-        SpellBuilder.of("execute", PlayStyle.DEX, SpellConfiguration.Builder.instant(10, 20 * 60)
+        SpellBuilder.of(EXECUTE, PlayStyle.DEX, SpellConfiguration.Builder.instant(10, 20 * 60)
                                 .setSwingArm(), "Execute",
                         Arrays.asList(SpellTag.area, SpellTag.damage, SpellTag.technique))
                 .manualDesc(

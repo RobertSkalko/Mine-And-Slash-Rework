@@ -192,8 +192,8 @@ public class HolySpells implements ExileRegistryInit {
                 .levelReq(10)
                 .build();
 
-        SpellBuilder.of(HEALING_AURA_ID, PlayStyle.INT, SpellConfiguration.Builder.multiCast(15, 20 * 30, 60, 3), "Healing Wave",
-                        Arrays.asList(SpellTag.heal))
+        SpellBuilder.of(HEALING_AURA_ID, PlayStyle.INT, SpellConfiguration.Builder.multiCast(15, 20 * 30, 60, 3), "Healing Aria",
+                        Arrays.asList(SpellTag.area, SpellTag.heal, SpellTag.song))
                 .manualDesc(
                         "Heal allies around you for " + SpellCalcs.HEALING_AURA.getLocDmgTooltip() +
                                 " health")
