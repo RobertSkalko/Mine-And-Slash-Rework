@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.uncommon.effectdatas;
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
 import com.robertx22.age_of_exile.capability.entity.CooldownsData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
+import com.robertx22.age_of_exile.database.data.spells.components.actions.KnockbackAction;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.FullSwingDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.DamageAbsorbedByMana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
@@ -222,6 +223,7 @@ public class DamageEvent extends EffectEvent {
 
     public void cancelDamage() {
         this.data.getNumber(EventData.NUMBER).number = 0;
+        this.data.setBoolean(EventData.DISABLE_KNOCKBACK, true);
 
         this.data.setBoolean(EventData.CANCELED, true);
         if (attackInfo != null) {
