@@ -27,7 +27,7 @@ public class AscendancyClass implements JsonExileRegistry<AscendancyClass>, IAut
 
     public HashMap<String, PointData> perks = new HashMap<>();
 
-    public List<Integer> lvl_reqs = Arrays.asList(1, 5, 10, 20, 30, 40, 50);
+    public List<Integer> lvl_reqs = Arrays.asList(1, 5, 10, 15, 20, 25, 30);
 
     // public HashMap<String, PointData> spells = new HashMap<>(); todo synergies
 
