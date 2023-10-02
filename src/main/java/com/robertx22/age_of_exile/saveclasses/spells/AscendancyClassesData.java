@@ -19,12 +19,12 @@ import java.util.*;
 public class AscendancyClassesData implements IStatCtx {
 
     public HashMap<String, Integer> allocated_lvls = new HashMap<>();
-    public String school = "";
+    public List<String> school = new ArrayList<>();
 
 
     public void reset() {
         this.allocated_lvls = new HashMap<>();
-        this.school = "";
+        this.school = new ArrayList<>();
     }
 
 
@@ -51,7 +51,7 @@ public class AscendancyClassesData implements IStatCtx {
         if (!school.isLevelEnoughFor(en, perk)) {
             return false;
         }
-        if (!this.school.isEmpty() && !this.school.equals(school.GUID())) {
+        if (this.school.size() > 1 && !this.school.contains(school.GUID())) {
             return false;
         }
         if (allocated_lvls.getOrDefault(perk.GUID(), 0) >= perk.getMaxLevel()) {
@@ -67,8 +67,8 @@ public class AscendancyClassesData implements IStatCtx {
 
     public void learn(Perk perk, AscendancyClass school) {
 
-        if (this.school.isEmpty()) {
-            this.school = school.GUID();
+        if (!this.school.contains(school.GUID())) {
+            this.school.add(school.GUID());
         }
         int current = allocated_lvls.getOrDefault(perk.GUID(), 0);
         allocated_lvls.put(perk.GUID(), current + 1);

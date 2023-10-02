@@ -1,7 +1,8 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
-ranger
+sorcerer
+warrior
 warlock
-summoner
-paladin
-elementalist
+minstrel
+shaman
+hunter
