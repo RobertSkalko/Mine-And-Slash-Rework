@@ -22,6 +22,7 @@ import net.minecraft.world.entity.player.Player;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SpellCastingData {
 
@@ -42,6 +43,13 @@ public class SpellCastingData {
 
 
     public void setHotbar(int slot, String spell) {
+
+        for (Map.Entry<Integer, String> en : hotbar.entrySet()) {
+            if (en.getValue().equals(spell)) {
+                hotbar.put(en.getKey(), "");
+            }
+        }
+
         hotbar.put(slot, spell);
     }
 
@@ -87,7 +95,7 @@ public class SpellCastingData {
             data.links = 0;
 
             data.perc = (int) ((rank / (float) data.getSpell().max_lvl) * 100);
-          
+
             if (rank > 1) {
 
                 int total = rank - 1;

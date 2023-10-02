@@ -15,7 +15,6 @@ public class LootChests {
         new MapLootChest().registerToExileRegistry();
         new AuraLootChest().registerToExileRegistry();
         new SupportLootChest().registerToExileRegistry();
-        new SpellLootChest().registerToExileRegistry();
         new GemLootChest().registerToExileRegistry();
         new RuneLootChest().registerToExileRegistry();
 

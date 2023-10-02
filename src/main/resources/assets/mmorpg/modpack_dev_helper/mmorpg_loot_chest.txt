@@ -1,7 +1,6 @@
 These are all default registry entries of this type.
 This registry can't be modified or added to.
 harvest_purple_chest
-spell
 support_gem
 harvest_green_chest
 currency

@@ -1,5 +1,5 @@
 {
-  "CLASS_POINTS_AT_MAX_LEVEL": 4,
+  "CLASS_POINTS_AT_MAX_LEVEL": 100,
   "CORE_STAT_SCALING": {
     "base_scaling": 1.0,
     "cap_to_max_lvl": true,

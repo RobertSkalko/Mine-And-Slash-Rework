@@ -26,11 +26,11 @@ public class CommandRegister {
     public static void Register(CommandDispatcher<CommandSourceStack> dispatcher) {
         System.out.println("Registering Mine and slash Commands.");
 
-     
+
         GiveExactUnique.register(dispatcher);
         GiveMap.register(dispatcher);
 
-        new GenericGive("spell", ExileRegistryTypes.SPELL, x -> new SkillGemBlueprint(x, SkillGemData.SkillGemType.SKILL)).register(dispatcher);
+        //new GenericGive("spell", ExileRegistryTypes.SPELL, x -> new SkillGemBlueprint(x, SkillGemData.SkillGemType.SKILL)).register(dispatcher);
         new GenericGive("aura", ExileRegistryTypes.AURA, x -> new SkillGemBlueprint(x, SkillGemData.SkillGemType.AURA)).register(dispatcher);
         new GenericGive("support_gem", ExileRegistryTypes.SUPPORT_GEM, x -> new SkillGemBlueprint(x, SkillGemData.SkillGemType.SUPPORT)).register(dispatcher);
 
