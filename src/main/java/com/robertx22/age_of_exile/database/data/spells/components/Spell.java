@@ -252,7 +252,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
         }
 
-        if (true || Screen.hasShiftDown()) {
+        if (Screen.hasShiftDown()) {
 
             Set<ExileEffect> effect = new HashSet<>();
 
@@ -290,7 +290,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
         list.add(tagtext);
 
-        list.add(Component.literal("Quality: " + currentlvl + "%").withStyle(ChatFormatting.GOLD));
+        // list.add(Component.literal("Quality: " + currentlvl + "%").withStyle(ChatFormatting.GOLD));
 
         TooltipUtils.removeDoubleBlankLines(list);
 

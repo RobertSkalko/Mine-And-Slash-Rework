@@ -41,7 +41,7 @@ public enum Words implements IAutoLocName {
     Soul("Soul"),
     DungeonKey("Dungeon Key"),
     Corrupted("Corrupted"),
-    AscClasses("Ascension"),
+    AscClasses("Classes"),
     Salvaging("Salvaging"),
     SkillGem("Skill Gem"),
     Gear("Gear"),

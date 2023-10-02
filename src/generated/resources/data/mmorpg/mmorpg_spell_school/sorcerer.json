@@ -10,9 +10,57 @@
     50
   ],
   "perks": {
-    "meteor": {
+    "chilling_field": {
+      "x": 8,
+      "y": 2
+    },
+    "fire_nova": {
+      "x": 1,
+      "y": 1
+    },
+    "fireball": {
       "x": 0,
       "y": 0
+    },
+    "frost_nova": {
+      "x": 7,
+      "y": 1
+    },
+    "frostball": {
+      "x": 6,
+      "y": 0
+    },
+    "frozen_orb": {
+      "x": 6,
+      "y": 4
+    },
+    "heart_of_ice": {
+      "x": 10,
+      "y": 3
+    },
+    "ice_comet": {
+      "x": 9,
+      "y": 3
+    },
+    "mage_circle": {
+      "x": 4,
+      "y": 6
+    },
+    "meteor": {
+      "x": 2,
+      "y": 2
+    },
+    "refresh": {
+      "x": 8,
+      "y": 6
+    },
+    "summon_fire_golem": {
+      "x": 7,
+      "y": 5
+    },
+    "teleport": {
+      "x": 5,
+      "y": 4
     }
   }
 }

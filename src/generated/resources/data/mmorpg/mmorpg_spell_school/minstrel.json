@@ -10,9 +10,41 @@
     50
   ],
   "perks": {
-    "meteor": {
+    "awaken_mana": {
+      "x": 7,
+      "y": 5
+    },
+    "healing_aura": {
+      "x": 5,
+      "y": 1
+    },
+    "power_chord": {
       "x": 0,
       "y": 0
+    },
+    "resonance": {
+      "x": 2,
+      "y": 5
+    },
+    "shooting_star": {
+      "x": 6,
+      "y": 4
+    },
+    "song_of_perseverance": {
+      "x": 10,
+      "y": 2
+    },
+    "song_of_valor": {
+      "x": 10,
+      "y": 3
+    },
+    "song_of_vigor": {
+      "x": 10,
+      "y": 0
+    },
+    "wish": {
+      "x": 8,
+      "y": 6
     }
   }
 }

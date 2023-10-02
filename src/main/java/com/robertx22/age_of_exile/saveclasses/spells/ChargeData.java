@@ -9,6 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ChargeData {
     private HashMap<String, Integer> charges = new HashMap<>();
@@ -42,6 +43,14 @@ public class ChargeData {
     public void addCharge(String id, Spell spell) {
         int charge = Mth.clamp(charges.getOrDefault(id, 0) + 1, 0, spell.config.charges);
         charges.put(id, charge);
+    }
+
+    public void addOneCharges() {
+
+        for (Map.Entry<String, Integer> en : charge_regen.entrySet()) {
+            charge_regen.put(en.getKey(), 100000);
+        }
+       
     }
 
     public void onTicks(Player player, int ticks) {

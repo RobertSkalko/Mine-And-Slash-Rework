@@ -59,6 +59,7 @@ public abstract class SpellAction extends BaseFieldNeeder implements IGUID {
     public static CommandSummonsAction COMMAND_SUMMONS_ATTACK = of(new CommandSummonsAction());
     public static KnockbackAction KNOCKBACK = of(new KnockbackAction());
     public static GiveArrowsIfNotInfinity GIVE_ARROWS = of(new GiveArrowsIfNotInfinity());
+    public static AddChargeAction ADD_CHARGE = of(new AddChargeAction());
 
 
     private static <T extends SpellAction> T of(T s) {

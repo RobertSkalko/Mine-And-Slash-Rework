@@ -10,9 +10,53 @@
     50
   ],
   "perks": {
-    "meteor": {
+    "boomerang": {
+      "x": 10,
+      "y": 1
+    },
+    "charge": {
+      "x": 4,
+      "y": 3
+    },
+    "execute": {
+      "x": 2,
+      "y": 5
+    },
+    "flame_strike": {
+      "x": 5,
+      "y": 3
+    },
+    "gong_strike": {
       "x": 0,
       "y": 0
+    },
+    "pull": {
+      "x": 3,
+      "y": 2
+    },
+    "shred": {
+      "x": 5,
+      "y": 2
+    },
+    "taunt": {
+      "x": 1,
+      "y": 1
+    },
+    "tidal_strike": {
+      "x": 6,
+      "y": 3
+    },
+    "undying_will": {
+      "x": 8,
+      "y": 6
+    },
+    "vamp_blood": {
+      "x": 7,
+      "y": 4
+    },
+    "whirlwind": {
+      "x": 1,
+      "y": 4
     }
   }
 }
