@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/elemental/physical_weapon_damage.png",
   "id": "physical_weapon_damage",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "PERCENT",

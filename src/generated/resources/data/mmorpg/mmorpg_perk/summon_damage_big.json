@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/misc/summon_damage.png",
   "id": "summon_damage_big",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

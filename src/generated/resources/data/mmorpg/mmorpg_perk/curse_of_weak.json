@@ -1,0 +1,15 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/spells/icons/curse_of_weak.png",
+  "id": "curse_of_weak",
+  "is_entry": false,
+  "max_lvls": 16,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "learn_curse_of_weak",
+      "v1": 1.0
+    }
+  ]
+}

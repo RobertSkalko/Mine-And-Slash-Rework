@@ -153,7 +153,9 @@
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "execute",
+  "loc_name": "Execute",
   "manual_tip": true,
+  "max_lvl": 16,
   "min_lvl": 1,
   "weight": 1000
 }

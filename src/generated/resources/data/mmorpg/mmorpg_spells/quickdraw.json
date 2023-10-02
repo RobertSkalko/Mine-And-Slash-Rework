@@ -115,7 +115,9 @@
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "quickdraw",
+  "loc_name": "Quickdraw",
   "manual_tip": true,
+  "max_lvl": 16,
   "min_lvl": 10,
   "weight": 1000
 }

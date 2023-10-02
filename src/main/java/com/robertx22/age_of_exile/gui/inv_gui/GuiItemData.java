@@ -25,9 +25,9 @@ public class GuiItemData {
         return GuiAction.get(action);
     }
 
-    public void onServer(Player p) {
+    public void onServer(Player p, Object obj) {
         GuiAction ac = getAction();
-        ac.doAction(p);
+        ac.doAction(p, obj);
     }
 
 }

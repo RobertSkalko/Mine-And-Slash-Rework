@@ -1,0 +1,15 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/spells/icons/recoil_shot.png",
+  "id": "recoil_shot",
+  "is_entry": false,
+  "max_lvls": 16,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "learn_recoil_shot",
+      "v1": 1.0
+    }
+  ]
+}

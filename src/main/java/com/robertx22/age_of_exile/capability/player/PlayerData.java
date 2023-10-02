@@ -141,7 +141,7 @@ public class PlayerData implements ICap {
     }
 
     public GemInventoryHelper getSkillGemInventory() {
-        return new GemInventoryHelper(skillGemInv, auraInv);
+        return new GemInventoryHelper(player, skillGemInv, auraInv);
     }
 
     public static <OBJ> OBJ loadOrBlank(Class theclass, OBJ newobj, CompoundTag nbt, String loc, OBJ blank) {

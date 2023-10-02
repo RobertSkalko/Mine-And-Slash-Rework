@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/asc_classes/perk/lightning_apprentice.png",
   "id": "lightning_apprentice",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

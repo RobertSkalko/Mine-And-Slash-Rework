@@ -2,10 +2,12 @@ package com.robertx22.age_of_exile.gui.inv_gui.actions;
 
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.runewords.RuneWord;
+import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.library_of_exile.registry.IGUID;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -14,7 +16,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public abstract class GuiAction implements IGUID {
+public abstract class GuiAction<T> implements IGUID {
 
 
     private static HashMap<String, GuiAction> map = new HashMap<>();
@@ -26,12 +28,22 @@ public abstract class GuiAction implements IGUID {
 
         return map.getOrDefault(id, new GuiAction() {
             @Override
+            public void saveExtraData(FriendlyByteBuf buf) {
+
+            }
+
+            @Override
+            public Object loadExtraData(FriendlyByteBuf buf) {
+                return null;
+            }
+
+            @Override
             public List<Component> getTooltip(Player p) {
                 return Arrays.asList();
             }
 
             @Override
-            public void doAction(Player p) {
+            public void doAction(Player p, Object d) {
 
             }
 
@@ -59,6 +71,9 @@ public abstract class GuiAction implements IGUID {
         for (RuneWord rw : ExileDB.RuneWords().getList()) {
             of(new CraftRunewordAction(rw));
         }
+        for (Spell rw : ExileDB.Spells().getList()) {
+            of(new PickSpellAction(rw));
+        }
 
     }
 
@@ -71,10 +86,13 @@ public abstract class GuiAction implements IGUID {
         return null;
     }
 
+    public abstract void saveExtraData(FriendlyByteBuf buf);
+
+    public abstract T loadExtraData(FriendlyByteBuf buf);
 
     public abstract List<Component> getTooltip(Player p);
 
-    public abstract void doAction(Player p);
+    public abstract void doAction(Player p, Object obj);
 
 
 }

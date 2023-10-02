@@ -153,7 +153,9 @@
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "tidal_strike",
+  "loc_name": "Tidal Strike",
   "manual_tip": true,
+  "max_lvl": 16,
   "min_lvl": 10,
   "weight": 1000
 }

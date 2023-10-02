@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/misc/threat_generated.png",
   "id": "less_aggro",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

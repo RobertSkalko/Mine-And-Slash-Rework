@@ -249,7 +249,9 @@
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "frost_flower",
+  "loc_name": "Frost Flower",
   "manual_tip": true,
+  "max_lvl": 16,
   "min_lvl": 20,
   "weight": 1000
 }

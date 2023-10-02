@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/main/spell_damage.png",
   "id": "spell_damage",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

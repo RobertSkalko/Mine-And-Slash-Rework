@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.base.ResourceAndAttack
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
 import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
+import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.*;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
@@ -23,6 +24,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCapacity;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -38,6 +40,10 @@ public class Perks implements ExileRegistryInit {
         // todo place on talents
         PerkBuilder.socket();
 
+
+        for (Spell spell : ExileDB.Spells().getSerializable()) {
+            PerkBuilder.spell(spell.GUID());
+        }
 
         PerkBuilder.stat(new OptScaleExactStat(1, new UnknownStat(), ModType.FLAT));
 

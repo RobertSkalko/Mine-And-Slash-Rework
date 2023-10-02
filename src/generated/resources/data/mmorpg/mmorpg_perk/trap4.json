@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/asc_classes/perk/trap4.png",
   "id": "trap4",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "MORE",

@@ -63,7 +63,7 @@ public class StatsRegister implements ExileRegistryInit {
         List<Stat> generated = new ArrayList<Stat>() {
             {
                 {
-
+                    
                     for (Ailment ailment : ExileDB.Ailments().getList()) {
                         add(new AilmentChance(ailment));
                         add(new AilmentDamage(ailment));

@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/misc/faster_projectiles.png",
   "id": "faster_projectiles",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

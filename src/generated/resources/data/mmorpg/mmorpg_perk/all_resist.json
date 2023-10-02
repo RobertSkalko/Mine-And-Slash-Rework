@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/elemental/all_resist.png",
   "id": "all_resist",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

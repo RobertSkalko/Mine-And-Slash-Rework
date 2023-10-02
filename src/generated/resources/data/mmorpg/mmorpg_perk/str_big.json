@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/core/strength.png",
   "id": "str_big",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/elemental/all_lightning_damage.png",
   "id": "all_lightning_damage",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

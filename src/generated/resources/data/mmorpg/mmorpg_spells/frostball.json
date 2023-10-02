@@ -192,7 +192,9 @@
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "frostball",
+  "loc_name": "Ice Shard",
   "manual_tip": true,
+  "max_lvl": 16,
   "min_lvl": 1,
   "weight": 1000
 }

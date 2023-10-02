@@ -56,7 +56,7 @@ public class SkillGemsMenu extends AbstractContainerMenu {
                 if (i > 3) {
                     xp += 7;
                 }
-                this.addSlot(new GemSlot(SkillGemData.SkillGemType.SKILL, data.getGemsInv(), index, xp, 16));
+                //  this.addSlot(new GemSlot(SkillGemData.SkillGemType.SKILL, data.getGemsInv(), index, xp, 16));
                 index++;
 
                 for (int s = 0; s < GemInventoryHelper.SUPPORT_GEMS_PER_SKILL; s++) {

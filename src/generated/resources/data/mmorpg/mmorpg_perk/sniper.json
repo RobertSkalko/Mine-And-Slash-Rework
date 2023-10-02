@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/game_changers/sniper.png",
   "id": "sniper",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "MORE",

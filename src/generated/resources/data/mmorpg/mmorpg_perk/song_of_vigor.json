@@ -1,0 +1,15 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/spells/icons/song_of_vigor.png",
+  "id": "song_of_vigor",
+  "is_entry": false,
+  "max_lvls": 16,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "learn_song_of_vigor",
+      "v1": 1.0
+    }
+  ]
+}

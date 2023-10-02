@@ -113,7 +113,9 @@
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "summon_fire_golem",
+  "loc_name": "Summon Fire Golem",
   "manual_tip": true,
+  "max_lvl": 16,
   "min_lvl": 20,
   "weight": 1000
 }

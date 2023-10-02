@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/restoration/spell_lifesteal.png",
   "id": "spell_lifesteal",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

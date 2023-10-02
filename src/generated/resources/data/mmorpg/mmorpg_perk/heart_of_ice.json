@@ -1,0 +1,15 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/spells/icons/heart_of_ice.png",
+  "id": "heart_of_ice",
+  "is_entry": false,
+  "max_lvls": 16,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "learn_heart_of_ice",
+      "v1": 1.0
+    }
+  ]
+}

@@ -17,6 +17,22 @@ public class SkillGemsScreen extends AbstractContainerScreen<SkillGemsMenu> {
 
     }
 
+    @Override
+    protected void init() {
+        super.init();
+
+        int x = getGuiLeft() + 16;
+        int y = getGuiTop() + 16;
+
+        for (int i = 0; i < 8; i++) {
+            int xadd = 0;
+            if (i > 3) {
+                xadd = 7;
+            }
+            this.addRenderableWidget(new SpellButton(i, x + (i * 25) + xadd, y));
+        }
+    }
+
     public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
         this.renderBackground(pGuiGraphics);
         super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);

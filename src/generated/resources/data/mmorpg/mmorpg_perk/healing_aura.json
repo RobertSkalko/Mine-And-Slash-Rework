@@ -1,0 +1,15 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/spells/icons/healing_aura.png",
+  "id": "healing_aura",
+  "is_entry": false,
+  "max_lvls": 16,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "learn_healing_aura",
+      "v1": 1.0
+    }
+  ]
+}

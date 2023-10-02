@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -61,7 +62,17 @@ public class CraftRunewordAction extends GuiAction {
     }
 
     @Override
-    public void doAction(Player p) {
+    public void saveExtraData(FriendlyByteBuf buf) {
+        
+    }
+
+    @Override
+    public Object loadExtraData(FriendlyByteBuf buf) {
+        return null;
+    }
+
+    @Override
+    public void doAction(Player p, Object data) {
 
 
         if (runeWord.hasRunesToCraft(p)) {

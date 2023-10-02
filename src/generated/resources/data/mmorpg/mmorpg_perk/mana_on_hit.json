@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/misc/mana_on_hit_hit.png",
   "id": "mana_on_hit",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

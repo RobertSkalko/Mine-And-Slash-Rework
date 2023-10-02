@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/weapon/crossbow_damage.png",
   "id": "crossbow_damage",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

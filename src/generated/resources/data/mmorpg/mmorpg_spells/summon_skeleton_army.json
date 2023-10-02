@@ -112,7 +112,9 @@
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "summon_skeleton_army",
+  "loc_name": "Summon Skeletons",
   "manual_tip": true,
+  "max_lvl": 16,
   "min_lvl": 30,
   "weight": 1000
 }

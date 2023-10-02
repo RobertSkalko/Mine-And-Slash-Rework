@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/misc/armor_penetration.png",
   "id": "armor_penetration_percent_big",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "PERCENT",

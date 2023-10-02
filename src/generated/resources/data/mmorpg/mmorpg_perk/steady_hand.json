@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/game_changers/steady_hand.png",
   "id": "steady_hand",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "MORE",

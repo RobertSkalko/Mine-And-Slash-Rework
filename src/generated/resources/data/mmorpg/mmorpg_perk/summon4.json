@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/asc_classes/perk/summon4.png",
   "id": "summon4",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "MORE",

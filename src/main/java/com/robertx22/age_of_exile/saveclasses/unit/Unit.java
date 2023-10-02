@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.AttributeStat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.IAfterStatCalc;
+import com.robertx22.age_of_exile.database.data.stats.types.LearnSpellStat;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.base.ICoreStat;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.base.ITransferToOtherStats;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.blood.Blood;
@@ -21,6 +22,7 @@ import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformatio
 import com.robertx22.age_of_exile.event_hooks.my_events.CollectGearEvent;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
+import com.robertx22.age_of_exile.saveclasses.spells.SpellCastingData;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.GearStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
@@ -354,6 +356,26 @@ public class Unit {
             }
 
             if (entity instanceof Player p) {
+                Load.player(p).spellCastingData.resetSpells();
+
+                this.getStats().stats.values()
+                        .forEach(x -> {
+                            if (x.GetStat() instanceof LearnSpellStat learn) {
+                                Load.player(p).spellCastingData.addSpell(new SpellCastingData.InsertedSpell(learn.spell.GUID(), (int) x.getValue()));
+                            }
+                        });
+
+                /*
+                if (MMORPG.RUN_DEV_TOOLS) {
+                    Load.player(p).spellCastingData.resetSpells();
+
+                    for (Spell spell : ExileDB.Spells().getList()) {
+                        Load.player(p).spellCastingData.addSpell(new SpellCastingData.InsertedSpell(spell.GUID(), 10));
+                    }
+
+                }
+                 */
+
 
                 Load.player(p).getSkillGemInventory().removeAurasIfCantWear(p);
 

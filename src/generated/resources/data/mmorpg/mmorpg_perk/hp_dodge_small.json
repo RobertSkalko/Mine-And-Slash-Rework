@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/main/dodge.png",
   "id": "hp_dodge_small",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "PERCENT",

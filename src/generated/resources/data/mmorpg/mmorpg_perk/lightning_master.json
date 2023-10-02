@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/asc_classes/perk/lightning_master.png",
   "id": "lightning_master",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "MORE",

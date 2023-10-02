@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/asc_classes/perk/beast4.png",
   "id": "beast4",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "MORE",

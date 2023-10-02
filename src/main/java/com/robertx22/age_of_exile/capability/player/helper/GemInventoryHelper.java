@@ -32,21 +32,27 @@ public class GemInventoryHelper {
     MyInventory inv;
     MyInventory auras;
 
-    public GemInventoryHelper(MyInventory inv, MyInventory auras) {
+    Player player;
+
+    public GemInventoryHelper(Player p, MyInventory inv, MyInventory auras) {
+        this.player = p;
         this.inv = inv;
         this.auras = auras;
     }
 
 
+    /*
     public List<SkillGemData> getAllSkillGems() {
         List<SkillGemData> list = new ArrayList<>();
         for (int i = 0; i < MAX_SKILL_GEMS; i++) {
             list.add(this.getHotbarGem(i).getSkillData());
         }
-        list.removeIf(x -> x == null);
+        list.removeIf(x -> x == null || x.getSpell() == null);
         return list;
 
     }
+
+     */
 
     public void removeSupportGemsIfTooMany(Player p) {
         for (int i = 0; i < MAX_SKILL_GEMS; i++) {
@@ -65,8 +71,10 @@ public class GemInventoryHelper {
 
     public SocketedGem getHotbarGem(int hotbar) {
         try {
-            int index = hotbar * (SUPPORT_GEMS_PER_SKILL + 1);
-            return new SocketedGem(this.getGemsInv(), index);
+            int index = hotbar;
+            int invindex = hotbar * (SUPPORT_GEMS_PER_SKILL + 1);
+
+            return new SocketedGem(this.getGemsInv(), Load.player(player).spellCastingData.getSpellData(index), invindex);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -75,7 +83,9 @@ public class GemInventoryHelper {
 
     public SocketedGem getIndexGem(int index) {
         try {
-            return new SocketedGem(this.getGemsInv(), index);
+            int invindex = index * (SUPPORT_GEMS_PER_SKILL + 1);
+
+            return new SocketedGem(this.getGemsInv(), Load.player(player).spellCastingData.getSpellData(index), invindex);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -84,11 +94,12 @@ public class GemInventoryHelper {
 
     public SocketedGem getSpellGem(Spell spell) {
         for (int i = 0; i < MAX_SKILL_GEMS; i++) {
-            int index = i * (SUPPORT_GEMS_PER_SKILL + 1);
+            int index = i;
+            int invindex = index * (SUPPORT_GEMS_PER_SKILL + 1);
 
             var gem = getIndexGem(index);
             if (gem != null && gem.getSkillData() != null && gem.getSkillData().getSpell() != null && gem.getSkillData().getSpell().GUID().equals(spell.GUID())) {
-                return new SocketedGem(this.getGemsInv(), index);
+                return new SocketedGem(this.getGemsInv(), Load.player(player).spellCastingData.getSpellData(index), invindex);
             }
         }
         return null;

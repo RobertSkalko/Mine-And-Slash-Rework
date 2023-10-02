@@ -206,7 +206,9 @@
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "arrow_totem",
+  "loc_name": "Arrow Totem",
   "manual_tip": true,
+  "max_lvl": 16,
   "min_lvl": 20,
   "weight": 1000
 }

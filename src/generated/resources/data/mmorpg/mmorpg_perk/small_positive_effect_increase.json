@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/misc/inc_effect_of_positive_buff_on_you.png",
   "id": "small_positive_effect_increase",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

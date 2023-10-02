@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/restoration/increase_healing.png",
   "id": "increase_healing",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

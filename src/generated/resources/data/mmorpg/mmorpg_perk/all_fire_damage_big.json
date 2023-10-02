@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/elemental/all_fire_damage.png",
   "id": "all_fire_damage_big",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

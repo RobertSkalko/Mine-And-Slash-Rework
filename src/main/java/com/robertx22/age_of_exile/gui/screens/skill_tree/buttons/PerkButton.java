@@ -19,7 +19,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
@@ -75,7 +75,7 @@ public class PerkButton extends ImageButton {
         int MmouseY = (int) (1F / screen.zoom * mouseY);
 
         if (this.isInside(MmouseX, MmouseY)) {
-            List<MutableComponent> tooltip = perk.GetTooltipString(new TooltipInfo(Minecraft.getInstance().player));
+            List<Component> tooltip = perk.GetTooltipString(new TooltipInfo(Minecraft.getInstance().player));
             setTooltip(Tooltip.create(TextUTIL.mergeList(tooltip)));
 
             Screen screen = Minecraft.getInstance().screen;

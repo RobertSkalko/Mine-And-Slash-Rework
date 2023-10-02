@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/core/intelligence.png",
   "id": "mage",
   "is_entry": true,
+  "max_lvls": 1,
   "one_kind": "start",
   "stats": [
     {

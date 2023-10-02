@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/elemental/chaos_penetration.png",
   "id": "chaos_penetration",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

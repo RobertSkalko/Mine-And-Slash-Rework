@@ -53,8 +53,7 @@ public abstract class StatCondition implements JsonExileRegistry<StatCondition>,
 
     @Override
     public final StatCondition fromJson(JsonObject json) {
-        String ser = json.get("ser")
-                .getAsString();
+        String ser = json.get("ser").getAsString();
 
         if (!SERIALIZERS.containsKey(ser)) {
             System.out.println(this.id + " has no serializer!");

@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.aoe_data.database.spell_schools;
 
 import com.robertx22.age_of_exile.aoe_data.database.perks.asc.*;
+import com.robertx22.age_of_exile.aoe_data.database.spells.schools.FireSpells;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
 public class SpellSchoolsAdder implements ExileRegistryInit {
@@ -30,9 +31,9 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
     public void registerAll() {
         // todo
 
-
+// todo
         SchoolBuilder.of(ELEMENTALIST, "Elementalist")
-                .addFor(AscRow.ONE, ElementalistPerks.FIRE_NOVICE, ElementalistPerks.COLD_NOVICE, ElementalistPerks.LIGHTNING_NOVICE)
+                .addFor(AscRow.ONE, FireSpells.FIRE_NOVA_ID, ElementalistPerks.COLD_NOVICE, ElementalistPerks.LIGHTNING_NOVICE)
                 .addFor(AscRow.TWO, ElementalistPerks.FIRE_APPRENTICE, ElementalistPerks.COLD_APPRENTICE, ElementalistPerks.LIGHTNING_APPRENTICE)
                 .addFor(AscRow.THREE, ElementalistPerks.FIRE_EXPERT, ElementalistPerks.COLD_EXPERT, ElementalistPerks.LIGHTNING_EXPERT)
                 .addFor(AscRow.FOUR, ElementalistPerks.FIRE_MASTER, ElementalistPerks.COLD_MASTER, ElementalistPerks.LIGHTNING_MASTER)

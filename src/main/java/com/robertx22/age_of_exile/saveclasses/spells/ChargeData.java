@@ -9,7 +9,6 @@ import net.minecraft.world.entity.player.Player;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ChargeData {
     private HashMap<String, Integer> charges = new HashMap<>();
@@ -56,7 +55,10 @@ public class ChargeData {
 
         List<String> chargesadded = new ArrayList<>(); // no duplicate charge regen
 
-        for (Spell s : Load.player(player).getSkillGemInventory().getAllSkillGems().stream().map(x -> x.getSpell()).collect(Collectors.toList())) {
+        for (SpellCastingData.InsertedSpell data : Load.player(player).spellCastingData.getAllHotbarSpells()) {
+
+
+            Spell s = data.getData().getSpell();
 
             String id = s.config.charge_name;
 

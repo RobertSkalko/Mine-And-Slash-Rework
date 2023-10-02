@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.capability.player.helper;
 
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
+import com.robertx22.age_of_exile.saveclasses.spells.SpellCastingData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.library_of_exile.wrappers.ExileText;
@@ -16,7 +17,15 @@ public class SocketedGem {
 
     MyInventory inv;
 
+    public SpellCastingData.InsertedSpell spell;
+
     public int skillGem = 0;
+
+    public SocketedGem(MyInventory inv, SpellCastingData.InsertedSpell spell, int skillGem) {
+        this.inv = inv;
+        this.spell = spell;
+        this.skillGem = skillGem;
+    }
 
 
     public int getMaxLinks() {
@@ -65,11 +74,6 @@ public class SocketedGem {
 
     }
 
-    public SocketedGem(MyInventory inv, int skillGem) {
-        this.inv = inv;
-        this.skillGem = skillGem;
-    }
-
 
     public int getHotbarSlot() {
         return skillGem / (GemInventoryHelper.SUPPORT_GEMS_PER_SKILL + 1); // todo is this correct
@@ -83,14 +87,9 @@ public class SocketedGem {
         return null;
     }
 
-    public ItemStack getSkill() {
-
-        return inv.getItem(skillGem);
-    }
-
 
     public SkillGemData getSkillData() {
-        return StackSaving.SKILL_GEM.loadFrom(getSkill());
+        return this.spell.getData();
     }
 
     public List<ItemStack> getSupports() {

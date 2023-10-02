@@ -277,7 +277,9 @@
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "ice_comet",
+  "loc_name": "Ice Comet",
   "manual_tip": true,
+  "max_lvl": 16,
   "min_lvl": 20,
   "weight": 1000
 }

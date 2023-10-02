@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/weapon/ele_axe_damage.png",
   "id": "ele_axe_damage",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

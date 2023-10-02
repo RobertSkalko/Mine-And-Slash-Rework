@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/misc/str_dmg.png",
   "id": "str_dmg_big",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

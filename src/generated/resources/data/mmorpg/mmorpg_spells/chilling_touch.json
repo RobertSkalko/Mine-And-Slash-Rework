@@ -125,7 +125,9 @@
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "chilling_touch",
+  "loc_name": "Chilling Touch",
   "manual_tip": true,
+  "max_lvl": 16,
   "min_lvl": 1,
   "weight": 1000
 }

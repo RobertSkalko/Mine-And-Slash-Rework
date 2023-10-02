@@ -14,6 +14,7 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.ISkillGem;
+import com.robertx22.age_of_exile.saveclasses.spells.SpellCastingData;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
@@ -42,10 +43,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExileRegistry<Spell>, IAutoLocName, IAutoLocDesc, MaxLevelProvider {
     public static Spell SERIALIZER = new Spell();
@@ -63,6 +61,8 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     public boolean manual_tip = false;
     public List<String> disabled_dims = new ArrayList<>();
     public String effect_tip = "";
+
+    public int max_lvl = 16; // first lvl unlocks spell, then every 3 lvls unlocks a supp gem slot?
 
     public transient String locDesc = "";
     public transient List<StatMod> statsForSkillGem = new ArrayList<>();
@@ -300,9 +300,9 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
     public int getLevelOf(LivingEntity en) {
         if (en instanceof Player p) {
-            var gem = Load.player(p).getSkillGemInventory().getSpellGem(this);
-            if (gem != null && gem.getSkillData() != null) {
-                return (int) (gem.getSkillData().perc); // todo make sure this works
+            Optional<SpellCastingData.InsertedSpell> opt = Load.player(p).spellCastingData.getAllHotbarSpells().stream().filter(x -> x.id.equals(GUID())).findAny();
+            if (opt.isPresent()) {
+                return opt.get().rank;
             }
         }
         return 1;
@@ -334,11 +334,11 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         return SlashRef.MODID + ".spell." + GUID();
     }
 
-    public transient String locName;
+    public String loc_name;
 
     @Override
     public String locNameForLangFile() {
-        return locName;
+        return loc_name;
     }
 
     @Override
@@ -363,7 +363,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
     @Override
     public int getMaxLevel() {
-        return 100;
+        return max_lvl;
     }
 
     @Override

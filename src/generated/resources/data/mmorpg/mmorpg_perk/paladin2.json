@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/asc_classes/perk/paladin2.png",
   "id": "paladin2",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "PERCENT",

@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/misc/phys_to_fire.png",
   "id": "phys_to_fire",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

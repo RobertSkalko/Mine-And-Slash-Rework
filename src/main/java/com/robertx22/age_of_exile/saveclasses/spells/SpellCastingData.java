@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.Spell
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
+import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.effectdatas.SpendResourceEvent;
@@ -18,9 +19,89 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class SpellCastingData {
+
+    private HashMap<Integer, String> hotbar = new HashMap<>();
+
+    public List<InsertedSpell> getAllHotbarSpells() {
+        List<InsertedSpell> list = new ArrayList<>();
+        for (Integer i : hotbar.keySet()) {
+            list.add(getSpellData(i));
+        }
+
+        list.removeIf(x -> x == null || x.getData() == null);
+        return list;
+
+    }
+
+    public List<InsertedSpell> spells = new ArrayList<>();
+
+
+    public void setHotbar(int slot, String spell) {
+        hotbar.put(slot, spell);
+    }
+
+    public void resetSpells() {
+        spells.clear();
+    }
+
+    public void addSpell(InsertedSpell spell) {
+        spells.add(spell);
+    }
+
+    public InsertedSpell getSpellData(int slot) {
+        String id = getSpellId(slot);
+        return spells.stream().filter(x -> x.id.equals(id)).findAny().orElse(new InsertedSpell("", 0));
+    }
+
+    public String getSpellId(int slot) {
+
+        return hotbar.getOrDefault(slot, "");
+    }
+
+
+    public static class InsertedSpell {
+
+        public String id;
+        public int rank;
+
+        public InsertedSpell(String id, int rank) {
+            this.id = id;
+            this.rank = rank;
+        }
+
+        public SkillGemData getData() {
+
+            if (id.isEmpty()) {
+                return null;
+            }
+
+            SkillGemData data = new SkillGemData();
+            data.id = id;
+            data.type = SkillGemData.SkillGemType.SKILL;
+
+            data.links = 0;
+
+            data.perc = (int) ((rank / (float) data.getSpell().max_lvl) * 100);
+          
+            if (rank > 1) {
+
+                int total = rank - 1;
+
+                while (total > 2) {
+                    total -= 3;
+                    data.links++;
+                }
+
+            }
+
+            return data;
+        }
+    }
 
     public int castTickLeft = 0;
     public int castTicksDone = 0;

@@ -1,0 +1,15 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/spells/icons/summon_spirit_wolf.png",
+  "id": "summon_spirit_wolf",
+  "is_entry": false,
+  "max_lvls": 16,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "learn_summon_spirit_wolf",
+      "v1": 1.0
+    }
+  ]
+}

@@ -115,7 +115,9 @@
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "flame_strike",
+  "loc_name": "Flame Strike",
   "manual_tip": true,
+  "max_lvl": 16,
   "min_lvl": 10,
   "weight": 1000
 }

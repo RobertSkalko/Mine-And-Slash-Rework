@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/misc/projectile_damage.png",
   "id": "projectile_damage",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

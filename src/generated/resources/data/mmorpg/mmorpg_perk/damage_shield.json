@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/misc/damage_shield.png",
   "id": "damage_shield",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

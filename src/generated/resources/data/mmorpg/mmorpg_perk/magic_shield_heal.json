@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/misc/magic_shield_heal.png",
   "id": "magic_shield_heal",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

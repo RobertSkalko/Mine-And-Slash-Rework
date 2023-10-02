@@ -34,7 +34,7 @@ public class SpellBuilder {
         builder.spell = new Spell();
         builder.spell.identifier = id;
         builder.spell.config = config;
-        builder.spell.locName = name;
+        builder.spell.loc_name = name;
         builder.spell.config.setStyle(style);
 
         builder.spell.getConfig().tags = tags;
@@ -47,7 +47,7 @@ public class SpellBuilder {
         builder.spell = new Spell();
         builder.spell.identifier = "";
         builder.spell.config = new SpellConfiguration();
-        builder.spell.locName = "";
+        builder.spell.loc_name = "";
 
         return builder;
     }

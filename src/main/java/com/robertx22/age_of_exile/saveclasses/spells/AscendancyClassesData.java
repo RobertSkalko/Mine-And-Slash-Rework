@@ -13,10 +13,7 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import net.minecraft.world.entity.LivingEntity;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 
 public class AscendancyClassesData implements IStatCtx {
@@ -63,7 +60,7 @@ public class AscendancyClassesData implements IStatCtx {
         var point = school.perks.get(perk.GUID());
 
         if (this.allocated_lvls.entrySet().stream().anyMatch(x -> school.perks.get(x.getKey()).y == point.y)) {
-            return false; // only allow 1 point per row, if i want to not hardcode this, use Oneofakind types
+            // return false; // only allow 1 point per row, if i want to not hardcode this, use Oneofakind types
         }
         return true;
     }
@@ -82,9 +79,12 @@ public class AscendancyClassesData implements IStatCtx {
     @Override
     public List<StatContext> getStatAndContext(LivingEntity en) {
         List<ExactStatData> stats = new ArrayList<>();
-        for (String s : this.allocated_lvls.keySet()) {
-            for (OptScaleExactStat stat : ExileDB.Perks().get(s).stats) {
-                stats.add(stat.toExactStat(Load.Unit(en).getLevel()));
+        for (Map.Entry<String, Integer> s : this.allocated_lvls.entrySet()) {
+            for (OptScaleExactStat stat : ExileDB.Perks().get(s.getKey()).stats) {
+                var data = stat.toExactStat(Load.Unit(en).getLevel());
+                data.percentIncrease = (s.getValue() - 1) * 100;
+                data.increaseByAddedPercent(); // todo test if this works
+                stats.add(data);
             }
 
         }

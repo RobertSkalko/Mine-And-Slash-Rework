@@ -143,7 +143,9 @@
   ],
   "effect_tip": "",
   "identifier": "teleport",
+  "loc_name": "Teleport",
   "manual_tip": true,
+  "max_lvl": 16,
   "min_lvl": 1,
   "weight": 1000
 }

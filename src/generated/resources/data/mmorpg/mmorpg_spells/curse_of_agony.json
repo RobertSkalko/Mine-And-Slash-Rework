@@ -174,7 +174,9 @@
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "curse_of_agony",
+  "loc_name": "Curse of Agony",
   "manual_tip": true,
+  "max_lvl": 16,
   "min_lvl": 1,
   "weight": 1000
 }

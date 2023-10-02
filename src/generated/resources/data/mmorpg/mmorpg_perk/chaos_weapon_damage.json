@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/elemental/chaos_weapon_damage.png",
   "id": "chaos_weapon_damage",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "PERCENT",

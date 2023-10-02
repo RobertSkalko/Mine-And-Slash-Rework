@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/weapon/bow_damage.png",
   "id": "bow_damage",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

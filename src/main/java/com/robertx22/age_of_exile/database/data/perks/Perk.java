@@ -2,9 +2,9 @@ package com.robertx22.age_of_exile.database.data.perks;
 
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
+import com.robertx22.age_of_exile.database.data.stats.types.LearnSpellStat;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ITooltipList;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
@@ -14,13 +14,12 @@ import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipList, IAutoLocName {
+public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocName {
     public static Perk SERIALIZER = new Perk();
 
     public PerkType type;
@@ -29,6 +28,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipL
     public String one_kind = null;
     public transient String locname = "";
     public boolean is_entry = false;
+    public int max_lvls = 1;
 
     public List<OptScaleExactStat> stats = new ArrayList<>();
 
@@ -38,7 +38,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipL
 
     // todo
     public int getMaxLevel() {
-        return 1;
+        return max_lvls;
     }
 
     public ResourceLocation getIcon() {
@@ -58,9 +58,9 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipL
         return 1000;
     }
 
-    @Override
-    public List<MutableComponent> GetTooltipString(TooltipInfo info) {
-        List<MutableComponent> list = new ArrayList<>();
+
+    public List<Component> GetTooltipString(TooltipInfo info) {
+        List<Component> list = new ArrayList<>();
 
         try {
 
@@ -68,7 +68,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipL
                 list.add(locName().withStyle(type.format));
             }
             if (type == PerkType.MAJOR) {
-                // to get rid of like 100 lines of lang file
+                // to get rid of like 100 lines o flang file
                 if (stats.size() > 0) {
                     list.add(Words.MAJOR.locName().append(" ").append(this.stats.get(0).getStat().locName()).withStyle(type.format));
                 }
@@ -88,6 +88,12 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, ITooltipL
             if (this.type == PerkType.MAJOR) {
 
                 list.add(Component.literal("Game changer talent.").withStyle(ChatFormatting.RED));
+            }
+
+            if (stats.size() > 0) {
+                if (stats.get(0).getStat() instanceof LearnSpellStat spell) {
+                    list.addAll(spell.spell.GetTooltipString(new TooltipInfo()));
+                }
             }
 
             //list.add(ExileText.newLine().get());

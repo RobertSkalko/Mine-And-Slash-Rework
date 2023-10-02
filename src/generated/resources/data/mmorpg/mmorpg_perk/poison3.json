@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/asc_classes/perk/poison3.png",
   "id": "poison3",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

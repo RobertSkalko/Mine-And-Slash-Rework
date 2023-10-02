@@ -170,7 +170,9 @@
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "boomerang",
+  "loc_name": "Boomerang",
   "manual_tip": true,
+  "max_lvl": 16,
   "min_lvl": 1,
   "weight": 1000
 }

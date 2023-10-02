@@ -3,6 +3,8 @@ package com.robertx22.age_of_exile.aoe_data.database.perks;
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.stats.types.JewelSocketStat;
+import com.robertx22.age_of_exile.database.data.stats.types.LearnSpellStat;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import net.minecraft.resources.ResourceLocation;
@@ -21,6 +23,22 @@ public class PerkBuilder {
 
     public Perk build() {
         this.perk.addToSerializables();
+        return perk;
+    }
+
+    public static Perk spell(String id) {
+        var spell = ExileDB.Spells().get(id);
+        List<OptScaleExactStat> list = Arrays.asList(new OptScaleExactStat(1, new LearnSpellStat(spell)));
+
+        Perk perk = new Perk();
+        perk.stats = list;
+        perk.type = Perk.PerkType.STAT;
+        perk.id = id;
+        perk.icon = spell.getIconLoc().toString();
+
+        perk.max_lvls = spell.max_lvl;
+        
+        perk.addToSerializables();
         return perk;
     }
 

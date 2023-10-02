@@ -167,7 +167,9 @@
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "minion_explosion",
+  "loc_name": "Minion Explosion",
   "manual_tip": false,
+  "max_lvl": 16,
   "min_lvl": 1,
   "weight": 0
 }

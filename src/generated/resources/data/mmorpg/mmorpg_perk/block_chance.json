@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/main/block_chance.png",
   "id": "block_chance",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

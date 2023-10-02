@@ -195,7 +195,9 @@
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "mage_circle",
+  "loc_name": "Mage Circle",
   "manual_tip": true,
+  "max_lvl": 16,
   "min_lvl": 30,
   "weight": 1000
 }

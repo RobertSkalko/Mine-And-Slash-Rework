@@ -193,7 +193,7 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
     private MutableComponent stars() {
 
-        return Component.literal("Support Slots: " + links + "/" + getRarity().max_spell_links).withStyle(ChatFormatting.DARK_PURPLE);
+        return Component.literal("Support Slots: " + links + "/5").withStyle(ChatFormatting.DARK_PURPLE);
 
     }
 

@@ -149,7 +149,9 @@
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "whirlwind",
+  "loc_name": "Whirlwind",
   "manual_tip": true,
+  "max_lvl": 16,
   "min_lvl": 30,
   "weight": 1000
 }

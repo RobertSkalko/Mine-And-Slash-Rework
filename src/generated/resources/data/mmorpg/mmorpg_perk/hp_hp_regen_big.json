@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/main/health.png",
   "id": "hp_hp_regen_big",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "PERCENT",

@@ -67,8 +67,8 @@ public class InvGuiButton extends ImageButton {
         List<Component> tooltip = new ArrayList<>();
 
 
-        for (Component c : data.getAction().getTooltip(mc.player)) {
-            tooltip.add(c);
+        for (Object c : data.getAction().getTooltip(mc.player)) {
+            tooltip.add((Component) c);
         }
 
 

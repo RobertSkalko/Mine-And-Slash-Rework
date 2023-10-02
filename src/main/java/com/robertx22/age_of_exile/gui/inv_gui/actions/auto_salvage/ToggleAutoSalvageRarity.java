@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -44,7 +45,7 @@ public class ToggleAutoSalvageRarity extends GuiAction {
 
 
     @Override
-    public void doAction(Player p) {
+    public void doAction(Player p, Object data) {
         Load.player(p).config.salvage.toggle(type, rarity.GUID());
         Load.player(p).syncToClient(p);
     }
@@ -56,6 +57,16 @@ public class ToggleAutoSalvageRarity extends GuiAction {
     @Override
     public ResourceLocation getBackGroundIcon() {
         return rarity.getGlintTextureFull();
+    }
+
+    @Override
+    public void saveExtraData(FriendlyByteBuf buf) {
+        
+    }
+
+    @Override
+    public Object loadExtraData(FriendlyByteBuf buf) {
+        return null;
     }
 
     @Override

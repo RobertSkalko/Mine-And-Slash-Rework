@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/game_changers/warlock.png",
   "id": "warlock",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "MORE",

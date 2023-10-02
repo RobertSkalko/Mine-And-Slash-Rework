@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/misc/mana_on_kill.png",
   "id": "mana_on_kill",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/main/energy_regen.png",
   "id": "energy_regen_percent_big",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "PERCENT",

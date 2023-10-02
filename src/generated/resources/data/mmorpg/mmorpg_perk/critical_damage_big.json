@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/main/critical_damage.png",
   "id": "critical_damage_big",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

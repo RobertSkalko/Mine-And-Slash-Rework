@@ -11,12 +11,13 @@ import net.minecraft.resources.ResourceLocation;
 
 public class InvGuiPacket extends MyPacket<OpenGuiPacket> {
 
-
     GuiItemData data;
 
     public InvGuiPacket() {
 
     }
+
+    Object extra;
 
     public InvGuiPacket(GuiItemData data) {
         this.data = data;
@@ -27,6 +28,8 @@ public class InvGuiPacket extends MyPacket<OpenGuiPacket> {
 
         data = LoadSave.Load(GuiItemData.class, new GuiItemData(), buf.readNbt(), "inv");
 
+        this.extra = data.getAction().loadExtraData(buf);
+
     }
 
     @Override
@@ -34,12 +37,14 @@ public class InvGuiPacket extends MyPacket<OpenGuiPacket> {
         CompoundTag nbt = new CompoundTag();
         LoadSave.Save(data, nbt, "inv");
         buf.writeNbt(nbt);
+        data.getAction().saveExtraData(buf);
+
     }
 
     @Override
     public void onReceived(ExilePacketContext ctx) {
 
-        data.onServer(ctx.getPlayer());
+        data.onServer(ctx.getPlayer(), extra);
 
     }
 

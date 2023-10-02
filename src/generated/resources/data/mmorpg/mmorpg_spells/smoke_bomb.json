@@ -125,7 +125,9 @@
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "smoke_bomb",
+  "loc_name": "Smoke Bomb",
   "manual_tip": true,
+  "max_lvl": 16,
   "min_lvl": 20,
   "weight": 1000
 }

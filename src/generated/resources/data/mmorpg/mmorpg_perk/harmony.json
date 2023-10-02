@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/stat_icons/game_changers/harmony.png",
   "id": "harmony",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

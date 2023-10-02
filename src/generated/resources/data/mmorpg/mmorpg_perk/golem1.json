@@ -3,6 +3,7 @@
   "icon": "mmorpg:textures/gui/asc_classes/perk/golem1.png",
   "id": "golem1",
   "is_entry": false,
+  "max_lvls": 1,
   "stats": [
     {
       "type": "FLAT",

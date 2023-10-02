@@ -1,0 +1,15 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/spells/icons/summon_skeleton_army.png",
+  "id": "summon_skeleton_army",
+  "is_entry": false,
+  "max_lvls": 16,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "learn_summon_skeleton_army",
+      "v1": 1.0
+    }
+  ]
+}
