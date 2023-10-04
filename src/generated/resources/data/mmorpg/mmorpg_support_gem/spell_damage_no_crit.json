@@ -17,6 +17,6 @@
       "stat": "critical_damage"
     }
   ],
-  "style": "DEX",
+  "style": "INT",
   "weight": 1000
 }

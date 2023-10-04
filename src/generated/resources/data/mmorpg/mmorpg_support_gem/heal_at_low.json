@@ -11,6 +11,6 @@
       "stat": "low_hp_healing"
     }
   ],
-  "style": "STR",
+  "style": "INT",
   "weight": 1000
 }

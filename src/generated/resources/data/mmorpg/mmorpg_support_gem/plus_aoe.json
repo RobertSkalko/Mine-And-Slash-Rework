@@ -17,6 +17,6 @@
       "stat": "inc_aoe"
     }
   ],
-  "style": "STR",
+  "style": "INT",
   "weight": 1000
 }

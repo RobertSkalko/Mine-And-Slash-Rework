@@ -11,6 +11,6 @@
       "stat": "non_crit_damage"
     }
   ],
-  "style": "STR",
+  "style": "INT",
   "weight": 1000
 }

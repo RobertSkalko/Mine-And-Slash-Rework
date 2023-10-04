@@ -49,8 +49,8 @@ public class DashUtils {
 
     public static void dash(LivingEntity entity, float str, Way way) {
 
-        double x;
-        double z;
+        double x = 0;
+        double z = 0;
 
         final float importantValue = 0.017453292f;
 
@@ -61,10 +61,12 @@ public class DashUtils {
         if (way == Way.UPWARDS) {
             entity.push(0, str, 0);
             return;
-        } else {
+        }
+        if (way == Way.FORWARDS) {
             x = (double) Mth.sin(entity.getYRot() * importantValue);
             z = (double) -(Mth.cos(entity.getYRot() * importantValue));
         }
+
 
         push(entity, str, x, z);
 

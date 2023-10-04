@@ -1,96 +1,10 @@
-v.5.1.0
+v.5.2.0
 
-- Added Professions back!
+CLASS rework BETA:
 
-You will gather resources with:
-- Salaving, Mining, Farming, Husbandry
-
-And use them to craft with:
-- Gear crafting, alchemy, cooking, enchanting
-
-When you mine ores you will gain mining exp and sometimes find common or rare drops, these drops will be used in crafting professions.
-Profession drops are split into:
-- Core tiered drop, you get these often and they are the main drop, useful in many ways
-- Greater, medium and lesser drops. These are rarer drops and usually used for better recipes
-
-* Gathering tools will also level up and gain random bonuses
-
-Every day (sunrise), one single drop from every gathering profession will get boosted droprates, allowing the patient ones to farm specific materials.
-
-Notable feature to help leveling both combat and profession levels is rested XP.
-As you kill mobs you gain rested profession xp, and use it up as you level professions, and the opposite.
-
-Crafting:
-- Gear crafting: gear souls, sharpening stones
-- Alchemy: buff or restorative potions
-- Cooking: buff food
-- Enchanting: create enchants
-- More to come
-
-- added more types of loot chests
-
-- added profession bag to master bag
-
-- rarities are now gated behind levels
-
-- spell gem max links are now capped behind their rarity
-
-- implemented logic that caps stat scaling of non weapon damage sources of damage to spells, like mana. Now lightning spells scale with say 100% weapon damage, and can only add up to 100% of weapon damage as mana damage.
-This should ensure spells with any type of stat scalings can't become too op, but it also easily allows me to buff them if they are weak.
-
-- added XP debt system. Dying now adds a stacking xp gain penalty that reduces xp gain by 50% until it's exhausted, in the future i will probably add items that remove the xp debt in some other way, like crafting.
-
-- added experimental in combat regeneration decrease, will see how it feels and if it's right for the mod
-
-- aura cost reduction > aura capacity, instead of reducing aura cost, you will now gain aura capacity with stats. This is intended to simplify the stat
-
-- restorative potions are now made with alchemy
-
-- brought back the beloved master bag instead of the gui backpacks, turns out i completely miscalculated that one, and people hated the gui one
-
-- added back level up gear currency
-
-- gear souls now create gears at your current level, but capped at the level range of the gear soul.
-
-- chaining spells now have less enemy chain range but scale with aoe 
-
-- added back the wiki
-
-- added new item: Disassembler's Learning Method , when placed in a crafting station, it will destroy the output but give you 3X the EXP. This is intended to help level professions when you don't need the current level's crafts
-
-- fixed dungeon gen bug, obsidian walls no more!
-
-- negative player affixes now properly apply in maps
-
-- reduced map mob spawns, was causing lags
-
-- mob spawn count is now in server settings
-
-- new dungeon from @Jarky: the cementary!
-
-- fix totems and tome souls
-
-- buffed magic shield values on gear a bit, lower end is doubled, higher end is a tiny bit increased
-
-v5.1.1
-
-- upped base hp per level, STR now gives armor instead of hp, this is a buff.
-
-v5.1.2
-
-- should fix dodge not working
-
-- fix items not being repairable
-
-v5.1.3
-
-- fix weird wiki bug
-
-- weapon_type in base gear is no longer an enum
-
-- added min lvls to supp gems and auras
-
-v.5.1.4
+* in short: skill gems no longer drop (support gems and auras do), instead you get spells by allocating points into classes.
+- the class trees will have additional passives later, this is WIP
+- basically class system + support gems + aura gems. Hopefully best of both worlds.
 
 - fix mobs not being able to damage each other
 
@@ -108,3 +22,5 @@ Depending on the ratio of per swing vs per mob costs the weapon can be either go
 - fixed elemental resists doubling resists
 
 - fix breed event null
+
+- fix recoil shot shooting you forward
