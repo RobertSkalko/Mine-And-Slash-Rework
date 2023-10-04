@@ -74,6 +74,8 @@ public class AscendancyClassScreen extends BaseScreen implements INamedScreen, I
                             int y = this.guiTop + 177 - (point.y * SLOT_SPACING);
 
                             this.addRenderableWidget(new LearnClassPointButton(this, perk, x, y));
+
+                            // todo add a differently shaped button for passive stats
                         }
                     });
 

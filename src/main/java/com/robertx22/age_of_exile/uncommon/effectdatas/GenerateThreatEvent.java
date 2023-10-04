@@ -2,8 +2,8 @@ package com.robertx22.age_of_exile.uncommon.effectdatas;
 
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.player.Player;
 
 public class GenerateThreatEvent extends EffectEvent {
 
@@ -14,7 +14,7 @@ public class GenerateThreatEvent extends EffectEvent {
         return ID;
     }
 
-    public GenerateThreatEvent(Player player, Mob mob, ThreatGenType threatGenType, float threat) {
+    public GenerateThreatEvent(LivingEntity player, Mob mob, ThreatGenType threatGenType, float threat) {
         super(threat, player, mob);
         this.data.setString(EventData.THREAT_GEN_TYPE, threatGenType.name());
     }
@@ -36,15 +36,10 @@ public class GenerateThreatEvent extends EffectEvent {
             return;
         }
 
-        Player player = (Player) source;
-
-        if (player.isCreative()) {
-            return;
-        }
 
         Load.Unit(target)
-            .getThreat()
-            .addThreat(player, (Mob) target, threat);
+                .getThreat()
+                .addThreat(source, (Mob) target, threat);
     }
 
 }

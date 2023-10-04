@@ -3,7 +3,7 @@ package com.robertx22.age_of_exile.uncommon.effectdatas;
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
 import com.robertx22.age_of_exile.capability.entity.CooldownsData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
-import com.robertx22.age_of_exile.database.data.spells.components.actions.KnockbackAction;
+import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEntity;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.FullSwingDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.DamageAbsorbedByMana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
@@ -51,6 +51,8 @@ public class DamageEvent extends EffectEvent {
     public static ResourceKey<DamageType> DAMAGE_TYPE = ResourceKey.create(Registries.DAMAGE_TYPE, SlashRef.id("mod"));
 
     public static String ID = "on_damage";
+
+    public LivingEntity petEntity;
 
     @Override
     public String GUID() {
@@ -390,13 +392,16 @@ public class DamageEvent extends EffectEvent {
 
         if (dmg > 0) {
             if (source instanceof Player) {
-                sourceData.getCooldowns()
-                        .setOnCooldown(CooldownsData.IN_COMBAT, 20 * 10);
-
+                sourceData.getCooldowns().setOnCooldown(CooldownsData.IN_COMBAT, 20 * 10);
                 if (target instanceof Mob) {
 
-                    GenerateThreatEvent threatEvent = new GenerateThreatEvent((Player) source, (Mob) target, ThreatGenType.deal_dmg, dmg);
-                    threatEvent.Activate();
+                    if (petEntity instanceof SummonEntity) {
+                        GenerateThreatEvent threatEvent = new GenerateThreatEvent(petEntity, (Mob) target, ThreatGenType.deal_dmg, dmg);
+                        threatEvent.Activate();
+                    } else {
+                        GenerateThreatEvent threatEvent = new GenerateThreatEvent((Player) source, (Mob) target, ThreatGenType.deal_dmg, dmg);
+                        threatEvent.Activate();
+                    }
                 }
             } else if (source instanceof Mob) {
                 if (target instanceof Player) {

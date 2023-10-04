@@ -30,7 +30,7 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
 
     @Override
     public void accept(ExileEvents.OnDamageEntity event) {
-      
+
         if (event.mob.level().isClientSide) {
             return;
         }
@@ -94,7 +94,10 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
                             DamageEvent dmg = EventBuilder.ofSpellDamage(caster, event.mob, num, spell)
                                     .setupDamage(AttackType.hit, WeaponTypes.none, PlayStyle.INT)
                                     .setIsBasicAttack()
-                                    .set(x -> x.data.setBoolean(EventData.IS_SUMMON_ATTACK, true))
+                                    .set(x -> {
+                                        x.petEntity = summon;
+                                        x.data.setBoolean(EventData.IS_SUMMON_ATTACK, true);
+                                    })
                                     .build();
 
                             //the knockback makes them op
