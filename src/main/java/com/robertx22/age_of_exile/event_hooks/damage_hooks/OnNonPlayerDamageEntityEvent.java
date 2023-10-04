@@ -101,11 +101,6 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
                             //the knockback makes them op
                             dmg.data.setBoolean(EventData.DISABLE_KNOCKBACK, true);
 
-                            //makes summons more likely to die, otherwise op because they block mobs
-                            if (event.mob instanceof Mob) {
-                                ((Mob) event.mob).setTarget((LivingEntity)event.source.getEntity());
-                            }
-
                             dmg.Activate();
                         }
                     }
