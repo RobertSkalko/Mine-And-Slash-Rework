@@ -23,8 +23,8 @@ public enum Words implements IAutoLocName {
     VERY_HARD("Very Hard"),
 
     FAVOR_REGEN_PER_HOUR(ChatFormatting.LIGHT_PURPLE + "Regenerates %1$s per Hour"),
-    FAVOR_PER_CHEST(ChatFormatting.GREEN + "Gain %1$s on Looting a Chest"),
-    FAVOR_PER_DEATH(ChatFormatting.RED + "You lose %1$s on Death"),
+    FAVOR_PER_CHEST(ChatFormatting.GREEN + "Gain %1$s per Chest Looted"),
+    FAVOR_PER_DEATH(ChatFormatting.RED + "You Lose %1$s on Death"),
 
     AddSocket("Adds a socket"),
     Nothing("Nothing"),
@@ -43,7 +43,7 @@ public enum Words implements IAutoLocName {
     Corrupted("Corrupted"),
     AscClasses("Classes"),
     Salvaging("Salvaging"),
-    SkillGem("Skill Gem"),
+    SkillGem("Skills"),
     Gear("Gear"),
     All("All"),
     Rune("Rune"),
@@ -131,14 +131,14 @@ public enum Words implements IAutoLocName {
     IsCommon("Is Common Rarity"),
 
     HasHigherRarity("Has higher rarity"),
-    CantGetMoreAffixes("Can't get more affixes."),
+    CantGetMoreAffixes("Can't have more affixes."),
 
     HasEmptySockets("Has Empty Sockets"),
     IsNotCorrupted("Is not corrupted"),
 
     NoDuplicateSockets("No Duplicate Sockets"),
 
-    AllowedOn("Allowed on"),
+    AllowedOn("Allowed On"),
 
     Unique_Gear("Unique Gear"),
 
@@ -148,6 +148,7 @@ public enum Words implements IAutoLocName {
 
 
     Jewel("Jewel"),
+    Jewels("Jewels"),
 
 
     Loot("Loot"), Exp("Exp"),
@@ -176,9 +177,9 @@ public enum Words implements IAutoLocName {
 
     Tier("Tier"),
 
-    Unsalvagable("Unsalvagable"),
+    Unsalvagable("Unsalvageable"),
 
-    UsableOn("Usable on");
+    UsableOn("Usable On");
 
     private String localization = "";
 

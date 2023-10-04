@@ -75,12 +75,12 @@ public class SupportGems {
                 ))
                 .levelReq(1).addToSerializables();
 
-        new SupportGem("inc_heal", "Increased Healing", PlayStyle.STR, 1.3F,
+        new SupportGem("inc_heal", "Increased Healing", PlayStyle.INT, 1.3F,
                 Arrays.asList(new StatMod(20, 40, Stats.HEAL_STRENGTH.get(), ModType.MORE)
                 ))
                 .levelReq(20).addToSerializables();
 
-        new SupportGem("heal_at_low", "Immediate Care", PlayStyle.STR, 1.3F,
+        new SupportGem("heal_at_low", "Immediate Care", PlayStyle.INT, 1.3F,
                 Arrays.asList(new StatMod(25, 50, Stats.LOW_HP_HEALING.get(), ModType.MORE)
                 ))
                 .levelReq(10).addToSerializables();
@@ -128,7 +128,7 @@ public class SupportGems {
                 ))
                 .levelReq(10).addToSerializables();
 
-        new SupportGem("dot_damage", "Damage Over Time", PlayStyle.DEX, 1.3F,
+        new SupportGem("dot_damage", "Damage Over Time", PlayStyle.INT, 1.3F,
                 Arrays.asList(new StatMod(15, 30, Stats.DOT_DAMAGE.get(), ModType.MORE)
                 ))
                 .levelReq(1).addToSerializables();
@@ -155,7 +155,7 @@ public class SupportGems {
                 ))
                 .levelReq(20).addToSerializables();
 
-        new SupportGem("plus_aoe", "Expanded Area", PlayStyle.STR, 1.2F,
+        new SupportGem("plus_aoe", "Expanded Area", PlayStyle.INT, 1.2F,
                 Arrays.asList(
                         new StatMod(-10, -25, Stats.AREA_DAMAGE.get(), ModType.MORE),
                         new StatMod(20, 40, Stats.INCREASED_AREA.get(), ModType.FLAT)
@@ -191,7 +191,7 @@ public class SupportGems {
                 ))
                 .levelReq(20).addToSerializables();
 
-        new SupportGem("spell_damage_no_crit", "Restrained Destruction", PlayStyle.DEX, 1.3F,
+        new SupportGem("spell_damage_no_crit", "Restrained Destruction", PlayStyle.INT, 1.3F,
                 Arrays.asList(
                         new StatMod(20, 45, Stats.STYLE_DAMAGE.get(PlayStyle.INT), ModType.MORE),
                         new StatMod(-100, -100, Stats.CRIT_DAMAGE.get(), ModType.MORE)
@@ -245,7 +245,7 @@ public class SupportGems {
                 ))
                 .levelReq(10).addToSerializables();
 
-        new SupportGem("mana_saver_dmg", "Mana Conservation", PlayStyle.STR, 0.8F,
+        new SupportGem("mana_saver_dmg", "Mana Conservation", PlayStyle.INT, 0.8F,
                 Arrays.asList(new StatMod(10, 25, Stats.NON_CRIT_DAMAGE.get(), ModType.MORE)
                 ))
                 .levelReq(10).addToSerializables();
