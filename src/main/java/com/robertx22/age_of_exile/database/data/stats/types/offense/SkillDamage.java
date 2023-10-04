@@ -27,7 +27,7 @@ public class SkillDamage extends Stat {
 
     @Override
     public String locDescForLangFile() {
-        return "Increases DMG skill gems deal";
+        return "Increases DMG skills deal";
     }
 
     @Override

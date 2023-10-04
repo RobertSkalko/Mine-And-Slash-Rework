@@ -22,6 +22,6 @@ public class OpenJewelsScreen implements IContainerNamedScreen {
 
     @Override
     public Words screenName() {
-        return Words.Jewel;
+        return Words.Jewels;
     }
 }

@@ -43,7 +43,7 @@ public class SocketedGem {
                 PlayerUtils.giveItem(s.copy(), p);
                 s.shrink(100);
             }
-            p.sendSystemMessage(ExileText.ofText("You can't equip that many support gems! You can increase the total links with Orb of Linking.").get());
+            p.sendSystemMessage(ExileText.ofText("You can't equip that many Support Gems! You can increase the number of slots by leveling the skill.").get());
         }
 
 
@@ -67,7 +67,7 @@ public class SocketedGem {
             for (ItemStack s : this.getSupports()) {
                 PlayerUtils.giveItem(s.copy(), p);
                 s.shrink(100);
-                p.sendSystemMessage(ExileText.ofText("You can't use multiple of those support gems.").get());
+                p.sendSystemMessage(ExileText.ofText("You can't use multiple of those Support Gems.").get());
 
             }
         }
