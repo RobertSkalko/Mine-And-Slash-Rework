@@ -194,10 +194,10 @@
                   "type": "summon_block",
                   "map": {
                     "block": "minecraft:purple_glazed_terracotta",
-                    "block_fall_speed": -0.03,
+                    "block_fall_speed": -0.05,
                     "entity_name": "meteor",
                     "find_surface": false,
-                    "height": 5.0,
+                    "height": 4.0,
                     "is_falling_block": true,
                     "life_ticks": 200.0
                   }

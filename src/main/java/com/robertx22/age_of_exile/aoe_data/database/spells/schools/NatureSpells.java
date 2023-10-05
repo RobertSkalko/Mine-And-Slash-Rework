@@ -35,7 +35,7 @@ public class NatureSpells implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
-   
+
         SpellBuilder.of(CHAOS_TOTEM, PlayStyle.STR, SpellConfiguration.Builder.instant(40, 20 * 60), "Chaos Totem",
                         Arrays.asList(SpellTag.area, SpellTag.damage, SpellTag.totem))
 
@@ -56,8 +56,8 @@ public class NatureSpells implements ExileRegistryInit {
                 .onTick("totem", PartBuilder.aoeSelectEnemies(10D, 50D).tickRequirement(20D)
                         .addPerEntityHit(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(Blocks.PURPLE_GLAZED_TERRACOTTA, 200D)
                                 .put(MapField.ENTITY_NAME, "meteor")
-                                .put(MapField.BLOCK_FALL_SPEED, -0.03D)
-                                .put(MapField.HEIGHT, 5D)
+                                .put(MapField.BLOCK_FALL_SPEED, -0.05D)
+                                .put(MapField.HEIGHT, 4D)
                                 .put(MapField.FIND_NEAREST_SURFACE, false)
                                 .put(MapField.IS_BLOCK_FALLING, true))))
 
