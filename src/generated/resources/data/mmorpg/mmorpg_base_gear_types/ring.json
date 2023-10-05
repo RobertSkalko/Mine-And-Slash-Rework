@@ -3,6 +3,23 @@
   "gear_slot": "ring",
   "guid": "ring",
   "implicit_stats": [],
+  "possible_items": [
+    {
+      "item_id": "mmorpg:jewelry/ring/iron",
+      "min_rar": "common",
+      "weight": 1000
+    },
+    {
+      "item_id": "mmorpg:jewelry/ring/gold",
+      "min_rar": "rare",
+      "weight": 1000
+    },
+    {
+      "item_id": "mmorpg:jewelry/ring/diamond",
+      "min_rar": "legendary",
+      "weight": 1000
+    }
+  ],
   "req": {
     "scaling_req": {}
   },

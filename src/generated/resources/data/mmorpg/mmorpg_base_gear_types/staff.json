@@ -10,6 +10,23 @@
   "gear_slot": "staff",
   "guid": "staff",
   "implicit_stats": [],
+  "possible_items": [
+    {
+      "item_id": "mmorpg:weapon/staff/wood",
+      "min_rar": "common",
+      "weight": 1000
+    },
+    {
+      "item_id": "mmorpg:weapon/staff/iron",
+      "min_rar": "rare",
+      "weight": 1000
+    },
+    {
+      "item_id": "mmorpg:weapon/staff/diamond",
+      "min_rar": "legendary",
+      "weight": 1000
+    }
+  ],
   "req": {
     "scaling_req": {
       "intelligence": 0.75

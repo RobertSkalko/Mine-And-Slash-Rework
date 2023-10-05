@@ -19,5 +19,4 @@ mastery_seal2
 mastery_seal1
 mastery_seal4
 mastery_seal3
-orb_of_linking
 mastery_seal0

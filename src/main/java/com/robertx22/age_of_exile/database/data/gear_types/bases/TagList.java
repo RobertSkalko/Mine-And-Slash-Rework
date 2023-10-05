@@ -5,7 +5,10 @@ import com.robertx22.age_of_exile.aoe_data.datapacks.JsonUtils;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType.SlotTag;
 import com.robertx22.library_of_exile.registry.serialization.ISerializable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class TagList implements ISerializable<TagList> {
@@ -40,24 +43,6 @@ public class TagList implements ISerializable<TagList> {
 
     public void add(ITagString t) {
         tags.add(t.getTagId());
-    }
-
-    public SlotFamily getFamily() {
-        Optional<SlotTag> opt = tags.stream()
-                .filter(f -> Arrays.stream(SlotTag.values())
-                        .anyMatch(m -> m.name()
-                                .equals(f)))
-                .map(x -> SlotTag.valueOf(x))
-                .filter(t -> t.family != SlotFamily.NONE)
-                .findFirst();
-
-        if (!opt.isPresent()) {
-            System.out.println("gear type doesn't have a slot family tag!!!");
-            return null;
-        } else {
-            return opt.get().family;
-        }
-
     }
 
 

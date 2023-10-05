@@ -10,6 +10,13 @@
   "gear_slot": "bow",
   "guid": "bow",
   "implicit_stats": [],
+  "possible_items": [
+    {
+      "item_id": "minecraft:bow",
+      "min_rar": "common",
+      "weight": 1000
+    }
+  ],
   "req": {
     "scaling_req": {
       "dexterity": 0.75

@@ -10,6 +10,23 @@
   "gear_slot": "boots",
   "guid": "leather_boots",
   "implicit_stats": [],
+  "possible_items": [
+    {
+      "item_id": "minecraft:iron_boots",
+      "min_rar": "common",
+      "weight": 1000
+    },
+    {
+      "item_id": "minecraft:diamond_boots",
+      "min_rar": "rare",
+      "weight": 1000
+    },
+    {
+      "item_id": "minecraft:netherite_boots",
+      "min_rar": "legendary",
+      "weight": 1000
+    }
+  ],
   "req": {
     "scaling_req": {
       "dexterity": 0.75

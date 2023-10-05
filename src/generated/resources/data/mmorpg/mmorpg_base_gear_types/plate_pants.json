@@ -10,6 +10,23 @@
   "gear_slot": "pants",
   "guid": "plate_pants",
   "implicit_stats": [],
+  "possible_items": [
+    {
+      "item_id": "minecraft:iron_leggings",
+      "min_rar": "common",
+      "weight": 1000
+    },
+    {
+      "item_id": "minecraft:diamond_leggings",
+      "min_rar": "rare",
+      "weight": 1000
+    },
+    {
+      "item_id": "minecraft:netherite_leggings",
+      "min_rar": "legendary",
+      "weight": 1000
+    }
+  ],
   "req": {
     "scaling_req": {
       "strength": 0.75

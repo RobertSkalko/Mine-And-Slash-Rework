@@ -17,9 +17,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
-import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -38,21 +36,6 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
     @Override
     public void BuildTooltip(TooltipContext ctx) {
 
-    }
-
-    static class LinkChance implements IWeighted {
-        int weight;
-        public int links;
-
-        public LinkChance(int weight, int links) {
-            this.weight = weight;
-            this.links = links;
-        }
-
-        @Override
-        public int Weight() {
-            return weight;
-        }
     }
 
 
@@ -90,13 +73,6 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
         getStackSaver().saveTo(stack, this);
     }
 
-    static List<LinkChance> linkChances = Arrays.asList(
-            new LinkChance(1000, 1),
-            new LinkChance(500, 2),
-            new LinkChance(300, 3),
-            new LinkChance(100, 4),
-            new LinkChance(20, 5)
-    );
 
     public String id = "";
     public SkillGemType type = SkillGemType.SKILL;
@@ -110,20 +86,6 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
         SKILL(), SUPPORT(), AURA();
 
 
-    }
-
-
-    public void reRollLinks() {
-
-        int random = RandomUtils.weightedRandom(linkChances).links;
-
-        int max = getRarity().max_spell_links;
-
-        if (random > max) {
-            random = max;
-        }
-
-        this.links = random;
     }
 
 

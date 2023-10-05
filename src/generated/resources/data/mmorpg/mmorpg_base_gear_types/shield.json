@@ -10,6 +10,13 @@
   "gear_slot": "shield",
   "guid": "shield",
   "implicit_stats": [],
+  "possible_items": [
+    {
+      "item_id": "minecraft:shield",
+      "min_rar": "common",
+      "weight": 1000
+    }
+  ],
   "req": {
     "scaling_req": {
       "strength": 0.75

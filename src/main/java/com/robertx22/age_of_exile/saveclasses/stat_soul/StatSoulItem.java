@@ -44,11 +44,13 @@ public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt {
 
                 StatSoulData data = StackSaving.STAT_SOULS.loadFrom(itemstack);
 
-                Item item = data.getRarity().getLootableItem(ExileDB.GearSlots().get(data.slot));
+                var geardata = data.createGearData(null, p);
+
+                Item item = geardata.GetBaseGearType().getRandomItem(data.getRarity());
 
                 ItemStack stack = item.getDefaultInstance();
 
-                StackSaving.GEARS.saveTo(stack, data.createGearData(stack, p));
+                StackSaving.GEARS.saveTo(stack, geardata);
 
                 PlayerUtils.giveItem(stack, p);
                 itemstack.shrink(1);

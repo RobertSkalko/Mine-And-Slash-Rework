@@ -10,6 +10,23 @@
   "gear_slot": "tome",
   "guid": "tome",
   "implicit_stats": [],
+  "possible_items": [
+    {
+      "item_id": "mmorpg:offhand/tome/iron",
+      "min_rar": "common",
+      "weight": 1000
+    },
+    {
+      "item_id": "mmorpg:offhand/tome/iron",
+      "min_rar": "rare",
+      "weight": 1000
+    },
+    {
+      "item_id": "mmorpg:offhand/tome/diamond",
+      "min_rar": "legendary",
+      "weight": 1000
+    }
+  ],
   "req": {
     "scaling_req": {
       "intelligence": 0.75

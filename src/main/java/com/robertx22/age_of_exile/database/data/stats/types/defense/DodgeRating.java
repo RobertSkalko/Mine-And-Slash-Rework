@@ -91,6 +91,11 @@ public class DodgeRating extends Stat implements IUsableStat {
 
         @Override
         public boolean canActivate(DamageEvent effect, StatData data, Stat stat) {
+
+            if (effect.GetElement() != Elements.Physical) {
+                return false;
+            }
+
             DodgeRating dodge = (DodgeRating) stat;
 
             float totalDodge = Mth.clamp(data.getValue() - effect.data.getNumber(EventData.ACCURACY).number, 0, Integer.MAX_VALUE);

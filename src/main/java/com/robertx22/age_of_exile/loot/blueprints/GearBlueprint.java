@@ -32,7 +32,7 @@ public class GearBlueprint extends RarityItemBlueprint implements ITypeBlueprint
 
     @Override
     ItemStack generate() {
-        this.item = rarity.get().getLootableItem(this.gearItemSlot.get().getGearSlot());
+        this.item = this.gearItemSlot.get().getRandomItem(rarity.get());
 
         if (item == Items.AIR) {
             return SoulLootGen.createSoulBasedOnGear(this);

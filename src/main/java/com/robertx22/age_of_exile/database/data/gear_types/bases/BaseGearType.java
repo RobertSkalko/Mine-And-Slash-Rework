@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gear_types.weapons.mechanics.NormalWeaponMechanic;
 import com.robertx22.age_of_exile.database.data.gear_types.weapons.mechanics.WeaponMechanic;
+import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -11,14 +12,21 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequiremen
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
+import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
+import com.robertx22.library_of_exile.utils.RandomUtils;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.Item;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseGearType>, IAutoGson<BaseGearType> {
 
@@ -38,6 +46,8 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
     public WeaponTypes weapon_type = WeaponTypes.none;
     public TagList tags = new TagList();
 
+    public List<ItemChance> possible_items = new ArrayList<>();
+
     protected transient String locname;
 
     public BaseGearType(String slot, String guid, String locname) {
@@ -47,8 +57,30 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
 
     }
 
+
     private BaseGearType() {
 
+    }
+
+    public static class ItemChance implements IWeighted {
+        public int weight = 1000;
+        public String item_id = "";
+        public String min_rar = IRarity.COMMON_ID;
+
+        public ItemChance(int weight, String item_id, String min_rar) {
+            this.weight = weight;
+            this.item_id = item_id;
+            this.min_rar = min_rar;
+        }
+
+        public Item getItem() {
+            return VanillaUTIL.REGISTRY.items().get(new ResourceLocation(item_id));
+        }
+
+        @Override
+        public int Weight() {
+            return weight;
+        }
     }
 
     public List<StatMod> implicitStats() {
@@ -75,6 +107,11 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
     public GearSlot getGearSlot() {
         return ExileDB.GearSlots()
                 .get(gear_slot);
+    }
+
+    public Item getRandomItem(GearRarity rar) {
+        var list = this.possible_items.stream().filter(x -> rar.item_tier >= ExileDB.GearRarities().get(x.min_rar).item_tier).collect(Collectors.toList());
+        return RandomUtils.weightedRandom(list).getItem();
     }
 
     @Override
@@ -188,10 +225,10 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
         dexterity(SlotFamily.NONE),
         strength(SlotFamily.NONE);
 
-        public SlotFamily family = SlotFamily.NONE;
+        // todo is this needed public SlotFamily family = SlotFamily.NONE;
 
         SlotTag(SlotFamily family) {
-            this.family = family;
+            //    this.family = family;
         }
 
         @Override
@@ -201,7 +238,7 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
     }
 
     public final SlotFamily family() {
-        return getTags().getFamily();
+        return this.getGearSlot().fam;
     }
 
     public final WeaponMechanic getWeaponMechanic() {

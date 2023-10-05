@@ -7,7 +7,10 @@ import com.robertx22.age_of_exile.database.data.gear_types.bases.TagList;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequirement;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.library_of_exile.registry.DataGenKey;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
+import net.minecraft.world.item.Item;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,6 +25,7 @@ public class BaseGearBuilder implements GearDataHelper {
     private TagList tags;
     private List<StatMod> basestats = new ArrayList<>();
     private List<StatMod> implicitstats = new ArrayList<>();
+    private List<BaseGearType.ItemChance> items = new ArrayList<>();
     private StatRequirement req = new StatRequirement();
     private WeaponTypes wep = WeaponTypes.none;
     private int weight = 1000;
@@ -50,6 +54,26 @@ public class BaseGearBuilder implements GearDataHelper {
 
     public BaseGearBuilder attackStyle(PlayStyle style) {
         this.style = style;
+        return this;
+    }
+
+    public BaseGearBuilder items(List<Item> items) {
+
+        for (int i = 0; i < items.size(); i++) {
+            String rar = IRarity.COMMON_ID;
+
+            if (i > 0) {
+                rar = IRarity.RARE_ID;
+            }
+            if (i > 1) {
+                rar = IRarity.LEGENDARY_ID;
+            }
+
+            String key = VanillaUTIL.REGISTRY.items().getKey(items.get(i)).toString();
+
+            this.items.add(new BaseGearType.ItemChance(1000, key, rar));
+        }
+
         return this;
     }
 
@@ -92,6 +116,7 @@ public class BaseGearBuilder implements GearDataHelper {
         type.weight = weight;
         type.style = style;
         type.req = req;
+        type.possible_items = items;
         type.addToSerializables();
 
 

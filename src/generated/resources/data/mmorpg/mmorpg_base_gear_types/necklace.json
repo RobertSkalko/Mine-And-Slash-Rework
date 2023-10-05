@@ -3,6 +3,23 @@
   "gear_slot": "necklace",
   "guid": "necklace",
   "implicit_stats": [],
+  "possible_items": [
+    {
+      "item_id": "mmorpg:jewelry/necklace/iron",
+      "min_rar": "common",
+      "weight": 1000
+    },
+    {
+      "item_id": "mmorpg:jewelry/necklace/gold",
+      "min_rar": "rare",
+      "weight": 1000
+    },
+    {
+      "item_id": "mmorpg:jewelry/necklace/diamond",
+      "min_rar": "legendary",
+      "weight": 1000
+    }
+  ],
   "req": {
     "scaling_req": {}
   },
