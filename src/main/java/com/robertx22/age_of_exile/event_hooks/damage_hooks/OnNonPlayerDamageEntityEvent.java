@@ -24,7 +24,6 @@ import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 
 public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDamageEntity> {
@@ -64,7 +63,11 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
 
             if (event.source.getEntity() instanceof SummonEntity summon) {
                 LivingEntity caster = summon.getOwner();
+
+
                 if (caster != null) {
+
+
                     int num = (int) Load.Unit(caster)
                             .getUnit()
                             .getCalculatedStat(WeaponDamage.getInstance())
@@ -76,6 +79,9 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
                     // to make them more viable more summoners, ill make summon damage stats bigger
 
 
+                    event.damage = 0;
+                    event.canceled = true;
+
                     Spell spell = ExileDB.Spells().get(Load.Unit(summon).summonedPetData.spell);
 
                     if (spell != null) {
@@ -85,10 +91,9 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
                         SpendResourceEvent spendEnergy = new SpendResourceEvent(caster, ResourceType.energy, cost);
                         spendEnergy.calculateEffects();
 
+
                         if (spendEnergy.data.getNumber() <= Load.Unit(caster).getResources().getEnergy()) {
 
-                            event.damage = 0;
-                            event.canceled = true;
 
                             spendEnergy.Activate();
 
@@ -107,6 +112,8 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
                             dmg.Activate();
                         }
                     }
+                } else {
+                    summon.kill();
                 }
             } else {
                 OnHurtEvent.onHurtEvent(new AttackInformation(event, AttackInformation.Mitigation.PRE, event.mob, event.source, event.damage));
