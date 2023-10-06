@@ -36,11 +36,15 @@ public class MobData {
 
         this.affixes.clear();
 
+        //  this.affixes.add("fire_mob_affix"); // todo
+
         if (amount > 0) {
 
             this.affixes.add(ExileDB.MobAffixes()
                     .random()
                     .GUID());
+
+
         }
     }
 }
