@@ -116,6 +116,9 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
     public boolean canApplyTo(ItemStack stack) {
         GearSlot slot = GearSlot.getSlotOf(stack.getItem());
 
+        if (slot == null) {
+            return false;
+        }
         if (canBeOnAnySlot()) {
             return slot != null;
         }
