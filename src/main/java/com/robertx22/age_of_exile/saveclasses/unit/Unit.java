@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.capability.player.helper.GemInventoryHelper;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
+import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEntity;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.AttributeStat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.IAfterStatCalc;
@@ -239,6 +240,10 @@ public class Unit {
             statContexts.addAll(addGearStats(gears));
             CommonStatUtils.addMapAffixStats(entity);
 
+            if (entity instanceof SummonEntity sum) {
+                statContexts.addAll(MobStatUtils.addSummonStats(sum));
+            }
+
             if (entity instanceof Player p) {
                 var playerData = Load.player(p);
 
@@ -256,10 +261,16 @@ public class Unit {
                 statContexts.addAll(playerData.ascClass.getStatAndContext(entity));
 
                 if (skillGem > -1 && skillGem <= GemInventoryHelper.MAX_SKILL_GEMS) {
-                    for (SkillGemData d : playerData.getSkillGemInventory().getHotbarGem(skillGem).getSupportDatas()) {
+                    var gem = playerData.getSkillGemInventory().getHotbarGem(skillGem);
+                    for (SkillGemData d : gem.getSupportDatas()) {
                         if (d.getSupport() != null) {
                             statContexts.add(new MiscStatCtx(d.getSupport().GetAllStats(data, d)));
                         }
+                    }
+                    var spell = gem.getSpell();
+                    if (spell != null) {
+                        var stats = spell.getStats(p);
+                        statContexts.add(new MiscStatCtx(stats));
                     }
                 }
             } else {

@@ -4,11 +4,14 @@ import com.robertx22.age_of_exile.capability.player.data.*;
 import com.robertx22.age_of_exile.capability.player.helper.GemInventoryHelper;
 import com.robertx22.age_of_exile.capability.player.helper.JewelInvHelper;
 import com.robertx22.age_of_exile.capability.player.helper.MyInventory;
+import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.DeathStatsData;
 import com.robertx22.age_of_exile.saveclasses.perks.TalentsData;
 import com.robertx22.age_of_exile.saveclasses.spells.AscendancyClassesData;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellCastingData;
+import com.robertx22.age_of_exile.saveclasses.unit.Unit;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.components.ICap;
 import com.robertx22.library_of_exile.utils.LoadSave;
 import net.minecraft.core.Direction;
@@ -138,6 +141,18 @@ public class PlayerData implements ICap {
         auraInv.fromTag(nbt.getList(AURAS, 10)); // todo
         jewelsInv.fromTag(nbt.getList(JEWELS, 10)); // todo
 
+    }
+
+    public Unit getSpellStats(Spell spell) {
+        Unit un = new Unit();
+        var gem = Load.player(player).getSkillGemInventory().getSpellGem(spell);
+        if (gem != null) {
+            // its null if its casted by a summon
+            int slot = gem.getHotbarSlot();
+            un = new Unit(); // todo test if this works
+            un.recalculateStats(player, Load.Unit(player), null, slot);
+        }
+        return un;
     }
 
     public GemInventoryHelper getSkillGemInventory() {

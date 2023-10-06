@@ -103,6 +103,7 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
                                     .set(x -> {
                                         x.petEntity = summon;
                                         x.data.setBoolean(EventData.IS_SUMMON_ATTACK, true);
+                                        // x.targetData = Load.Unit(summon);
                                     })
                                     .build();
 

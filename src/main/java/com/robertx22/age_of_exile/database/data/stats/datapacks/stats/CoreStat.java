@@ -25,7 +25,7 @@ public class CoreStat extends BaseDatapackStat implements ICoreStat {
 
     public CoreStatData data = new CoreStatData();
 
-    transient String locname;
+    String locname;
 
     public CoreStat(String id, String name, CoreStatData data) {
         super(SER_ID);

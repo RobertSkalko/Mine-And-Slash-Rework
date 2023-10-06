@@ -214,6 +214,7 @@ immobilizing_eff_dur_u_cast
 heal_over_time_eff_duration
 health_regen_per_10_intelligence
 heal_cleanse
+summon_health
 learn_arrow_storm
 fishing_medium_drop_bonus
 dex_dmg

@@ -45,8 +45,9 @@ public class LearnClassPointButton extends ImageButton {
 
     @Override
     public void render(GuiGraphics gui, int mouseX, int mouseY, float delta) {
-        setModTooltip();
-
+        if (this.isHovered()) {
+            setModTooltip();
+        }
         Minecraft mc = Minecraft.getInstance();
 
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);

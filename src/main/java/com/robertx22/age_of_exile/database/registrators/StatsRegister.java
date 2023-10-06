@@ -42,6 +42,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaR
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCapacity;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.age_of_exile.database.data.stats.types.summon.GolemSpellChance;
+import com.robertx22.age_of_exile.database.data.stats.types.summon.SummonHealth;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.IGenerated;
@@ -63,6 +64,8 @@ public class StatsRegister implements ExileRegistryInit {
             {
                 {
 
+                    add(new SummonHealth());
+
                     for (Ailment ailment : ExileDB.Ailments().getList()) {
                         add(new AilmentChance(ailment));
                         add(new AilmentDamage(ailment));
@@ -81,7 +84,7 @@ public class StatsRegister implements ExileRegistryInit {
                         add(new ProfExp(prof));
                     }
 
-                   
+
                     add(JewelSocketStat.getInstance());
 
                     add(new BonusPhysicalAsElemental(Elements.Elemental));

@@ -11,6 +11,7 @@ import com.robertx22.age_of_exile.database.data.value_calc.MaxLevelProvider;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.ISkillGem;
@@ -44,6 +45,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExileRegistry<Spell>, IAutoLocName, IAutoLocDesc, MaxLevelProvider {
     public static Spell SERIALIZER = new Spell();
@@ -64,8 +66,9 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
     public int max_lvl = 16; // first lvl unlocks spell, then every 3 lvls unlocks a supp gem slot?
 
+    public List<StatMod> statsForSkillGem = new ArrayList<>();
+
     public transient String locDesc = "";
-    public transient List<StatMod> statsForSkillGem = new ArrayList<>();
 
     public boolean isAllowedInDimension(Level world) {
 
@@ -80,6 +83,12 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
     public AttachedSpell getAttached() {
         return attached;
+    }
+
+    public List<ExactStatData> getStats(Player p) {
+        int perc = (int) ((getLevelOf(p) / (float) getMaxLevel()) * 100F);
+        var stats = statsForSkillGem.stream().map(x -> x.ToExactStat(perc, Load.Unit(p).getLevel())).collect(Collectors.toList());
+        return stats;
     }
 
     public boolean is(SpellTag tag) {
@@ -283,6 +292,13 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         }
 
 
+        if (!this.statsForSkillGem.isEmpty()) {
+            list.add(Component.literal("Spell Stats: "));
+            for (ExactStatData stat : getStats(info.player)) {
+                list.addAll(stat.GetTooltipString(info));
+            }
+        }
+
         int currentlvl = getLevelOf(info.player);
 
         String taglist = StringUTIL.join(this.config.tags.stream().map(x -> x.locname).iterator(), ", ");
@@ -305,7 +321,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
                 return opt.get().rank;
             }
         }
-        return 1;
+        return 0;
     }
 
 

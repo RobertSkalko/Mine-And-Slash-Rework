@@ -5,11 +5,13 @@ import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SummonType;
+import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.ExileEffectAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
+import com.robertx22.age_of_exile.database.data.stats.types.summon.SummonHealth;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
@@ -40,6 +42,8 @@ public class SummonSpells implements ExileRegistryInit {
                 .manualDesc("Summon a Golem that can cast Fire Nova to aid you in combat.")
                 .summons(SlashEntities.FIRE_GOLEM.get(), 20 * 60 * 3, 1)
                 .levelReq(20)
+                .addStat(Stats.SUMMON_DAMAGE.get().mod(10, 50))
+                .addStat(new SummonHealth().mod(10, 100))
                 .build();
 
         SpellBuilder.of(SUMMON_COLD_GOLEM, PlayStyle.INT, SpellConfiguration.Builder.instant(40, 20 * 60).setSummonType(SummonType.GOLEM), "Summon Frost Golem",
@@ -47,6 +51,8 @@ public class SummonSpells implements ExileRegistryInit {
                 .manualDesc("Summon a Golem that can cast Frost Nova to aid you in combat.")
                 .summons(SlashEntities.COLD_GOLEM.get(), 20 * 60 * 3, 1)
                 .levelReq(20)
+                .addStat(Stats.SUMMON_DAMAGE.get().mod(10, 50))
+                .addStat(new SummonHealth().mod(10, 100))
                 .build();
 
         SpellBuilder.of(SUMMON_LIGHTNING_GOLEM, PlayStyle.INT, SpellConfiguration.Builder.instant(40, 20 * 60).setSummonType(SummonType.GOLEM), "Summon Lightning Golem",
@@ -54,6 +60,8 @@ public class SummonSpells implements ExileRegistryInit {
                 .manualDesc("Summon a Golem that can cast Lightning Nova to aid you in combat .")
                 .summons(SlashEntities.LIGHTNING_GOLEM.get(), 20 * 60 * 3, 1)
                 .levelReq(20)
+                .addStat(Stats.SUMMON_DAMAGE.get().mod(10, 50))
+                .addStat(new SummonHealth().mod(10, 100))
                 .build();
 
 
@@ -61,6 +69,8 @@ public class SummonSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.beast))
                 .manualDesc("Summon a Spirit Wolf to aid you in combat.")
                 .summons(SlashEntities.SPIRIT_WOLF.get(), 20 * 30, 1)
+                .addStat(Stats.SUMMON_DAMAGE.get().mod(5, 25))
+                .addStat(new SummonHealth().mod(30, 300))
                 .levelReq(1)
                 .build();
 
@@ -68,6 +78,8 @@ public class SummonSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTag.summon, SpellTag.damage))
                 .manualDesc("Summon a Zombie to aid you in combat.")
                 .summons(SlashEntities.ZOMBIE.get(), 20 * 60 * 2, 1)
+                .addStat(Stats.SUMMON_DAMAGE.get().mod(10, 50))
+                .addStat(new SummonHealth().mod(20, 200))
                 .levelReq(1)
                 .build();
 
@@ -76,6 +88,9 @@ public class SummonSpells implements ExileRegistryInit {
                 .manualDesc("Summon a horde of Skeletons to fight for you for a short duration.")
                 .summons(SlashEntities.SKELETON.get(), 20 * 20, 3)
                 .levelReq(30)
+                .addStat(Stats.SUMMON_DAMAGE.get().mod(10, 150))
+                .addStat(new SummonHealth().mod(10, 100))
+
                 .build();
 
 

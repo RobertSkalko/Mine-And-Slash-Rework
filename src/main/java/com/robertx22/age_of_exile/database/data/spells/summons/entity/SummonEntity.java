@@ -1,6 +1,9 @@
 package com.robertx22.age_of_exile.database.data.spells.summons.entity;
 
 import com.robertx22.age_of_exile.aoe_data.database.spells.SummonType;
+import com.robertx22.age_of_exile.database.data.spells.components.Spell;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -29,6 +32,10 @@ public abstract class SummonEntity extends TamableAnimal implements RangedAttack
     }
 
     public abstract SummonType summonType();
+
+    public Spell getSourceSpell() {
+        return ExileDB.Spells().get(Load.Unit(this).summonedPetData.spell);
+    }
 
     public boolean countsTowardsMaxSummons() {
         return true;

@@ -5,7 +5,9 @@ import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.EntityConfig;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
+import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEntity;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
+import com.robertx22.age_of_exile.database.data.stats.types.SummonStat;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusPhysicalAsElemental;
@@ -18,6 +20,7 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.maps.MapData;
 import com.robertx22.age_of_exile.maps.MapItemData;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
+import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -25,13 +28,34 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.utils.EntityUtils;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 
 public class MobStatUtils {
+
+    public static List<StatContext> addSummonStats(SummonEntity en) {
+        List<ExactStatData> stats = new ArrayList<>();
+
+        LivingEntity caster = en.getOwner();
+
+        if (caster instanceof Player player) {
+            var spell = en.getSourceSpell();
+
+            for (Map.Entry<String, StatData> e : Load.player(player).getSpellStats(spell).getStats().stats.entrySet()) {
+                if (e.getValue().GetStat() instanceof SummonStat sstat) {
+                    stats.add(sstat.giveToSummon(e.getValue()));
+                }
+            }
+
+        }
+        return Arrays.asList(new MiscStatCtx(stats));
+
+    }
 
     public static List<StatContext> addMobBaseElementalBonusDamages(LivingEntity en, EntityData data) {
         List<ExactStatData> stats = new ArrayList<>();

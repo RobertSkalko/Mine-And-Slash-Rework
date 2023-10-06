@@ -24,3 +24,10 @@ Depending on the ratio of per swing vs per mob costs the weapon can be either go
 - fix breed event null
 
 - fix recoil shot shooting you forward
+
+- added stats per spells
+
+- added summon health stat (and special stats that transfer player stats to summons)
+In this case the summon health stat gives summons the normal health stat
+
+- summon spells now have innate summon hp and dmg stats per level

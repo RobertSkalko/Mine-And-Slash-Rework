@@ -268,5 +268,6 @@
   "manual_tip": true,
   "max_lvl": 16,
   "min_lvl": 1,
+  "statsForSkillGem": [],
   "weight": 1000
 }

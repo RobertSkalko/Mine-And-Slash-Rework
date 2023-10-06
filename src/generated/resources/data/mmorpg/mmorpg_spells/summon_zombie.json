@@ -116,5 +116,19 @@
   "manual_tip": true,
   "max_lvl": 16,
   "min_lvl": 1,
+  "statsForSkillGem": [
+    {
+      "type": "FLAT",
+      "max": 50.0,
+      "min": 10.0,
+      "stat": "summon_damage"
+    },
+    {
+      "type": "FLAT",
+      "max": 200.0,
+      "min": 20.0,
+      "stat": "summon_health"
+    }
+  ],
   "weight": 1000
 }
