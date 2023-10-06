@@ -189,7 +189,6 @@ aura_effect
 blood_user
 enchanting_exp_bonus
 learn_frost_nova
-leech_per_sec
 dmg_received
 learn_refresh
 learn_mage_circle
@@ -203,6 +202,7 @@ physical_any_wep_damage
 learn_astral_totem
 critical_damage
 mana_cost
+block_leech_cap
 ele_trident_damage
 physical_weapon_damage
 spell_fire_damage
@@ -221,6 +221,7 @@ husbandry_double_drop
 area_cdr
 health_per_10_dexterity
 spell_chaos_damage
+health_leech_cap
 technique_spell_dmg
 inc_effect_of_offensive_buff_given
 chaos_health_leech
@@ -327,6 +328,7 @@ summon_spell_dmg
 inc_effect_of_negative_buff_given
 all_dot_damage
 max_fire_resist
+blood_leech_cap
 more_food_stats
 max_all_resist
 staff_spell_cdr
@@ -349,6 +351,7 @@ lightning_focus
 mana_shield
 salvaging_triple_drop
 mana_per_sec
+energy_leech_cap
 all_fire_damage
 curse_eff_duration
 husbandry_lesser_drop_bonus
@@ -419,6 +422,7 @@ gear_weapon_damage
 damage_shield
 inc_effect_of_positive_buff_given
 learn_curse_of_weak
+magic_shield_leech_cap
 inc_effect_of_food_buff_on_you
 husbandry_triple_drop
 inc_effect_of_song_buff_on_you
@@ -441,6 +445,7 @@ chaos_penetration
 learn_meteor_arrow
 enchanting_misc_drop_bonus
 all_vuln_crit
+mana_leech_cap
 learn_frozen_orb
 inc_leech
 salvaging_exp_bonus

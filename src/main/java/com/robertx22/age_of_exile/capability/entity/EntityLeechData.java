@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.capability.entity;
 
-import com.robertx22.age_of_exile.database.data.stats.types.resources.LeechCapStat;
+import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 
 import java.util.HashMap;
@@ -23,13 +23,15 @@ public class EntityLeechData {
     // todo implement expiration after 5s
     public void onSecondUseLeeches(EntityData data) {
 
-        float leechMaxPerSec = data.getUnit().getCalculatedStat(LeechCapStat.getInstance()).getValueOrBase(LeechCapStat.getInstance()) / 100F;
 
         for (Map.Entry<ResourceType, Float> entry : map.entrySet()) {
+            float leechMaxPerSec = data.getUnit().getCalculatedStat(Stats.LEECH_CAP.get(entry.getKey())).getValue() / 100F;
 
             float num = entry.getValue();
 
-            float max = leechMaxPerSec * data.getResources().getMax(data.entity, entry.getKey());
+            float maxres = data.getResources().getMax(data.entity, entry.getKey());
+
+            float max = leechMaxPerSec * maxres;
 
             if (num > max) {
                 num = max;

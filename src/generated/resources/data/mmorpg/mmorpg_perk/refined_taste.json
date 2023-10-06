@@ -14,7 +14,13 @@
     {
       "type": "FLAT",
       "scale_to_lvl": false,
-      "stat": "leech_per_sec",
+      "stat": "health_leech_cap",
+      "v1": 2.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "magic_shield_leech_cap",
       "v1": 2.0
     },
     {

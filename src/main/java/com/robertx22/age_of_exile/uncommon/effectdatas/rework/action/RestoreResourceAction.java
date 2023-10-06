@@ -36,7 +36,7 @@ public class RestoreResourceAction extends StatEffect {
         val *= event.data.getNumber(EventData.ATTACK_COOLDOWN).number; // todo test
 
         if (this.restore_type == RestoreType.leech) {
-            event.targetData.leech.addLeech(type, val);
+            event.sourceData.leech.addLeech(type, val);
             return;
         }
 

@@ -386,6 +386,20 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
+    public static DataPackStatAccessor<ResourceType> LEECH_CAP = DatapackStatBuilder
+            .<ResourceType>of(x -> x.id + "_leech_cap", x -> Elements.All)
+            .addAllOfType(ResourceType.values())
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(100)
+            .setSide(EffectSides.Source)
+            .setLocName(x -> "Total " + x.locname + " Leech Per Second")
+            .setLocDesc(x -> "")
+            .modifyAfterDone(x -> {
+                x.min = 0;
+                x.is_perc = true;
+                x.scaling = StatScaling.NORMAL;
+            })
+            .build();
 
     public static DataPackStatAccessor<EffectCtx> CHANCE_OF_APPLYING_EFFECT = DatapackStatBuilder
             .<EffectCtx>of(x -> "chance_of_" + x.id, x -> x.element)

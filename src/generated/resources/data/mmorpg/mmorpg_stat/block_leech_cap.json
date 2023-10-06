@@ -1,0 +1,26 @@
+{
+  "base": 0.0,
+  "effect": {
+    "effects": [],
+    "events": [
+      "on_damage"
+    ],
+    "ifs": [],
+    "order": 100,
+    "side": "Source"
+  },
+  "ele": "All",
+  "format": "aqua",
+  "group": "Misc",
+  "icon": "❁",
+  "id": "block_leech_cap",
+  "is_long": false,
+  "is_perc": true,
+  "max": 2.14748365E9,
+  "min": 0.0,
+  "multiUseType": "MULTIPLY_STAT",
+  "order": 100,
+  "scaling": "NORMAL",
+  "ser": "data",
+  "show": true
+}

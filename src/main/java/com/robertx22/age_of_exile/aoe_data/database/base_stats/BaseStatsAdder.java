@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.aoe_data.database.base_stats;
 
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.database.data.base_stats.BaseStatsConfig;
+import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.RegeneratePercentStat;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
@@ -43,6 +44,10 @@ public class BaseStatsAdder implements ExileRegistryInit {
         // why did i add this again? I think its a must
         c.nonScaled(Stats.CRIT_CHANCE.get(), 1);
         c.nonScaled(Stats.CRIT_DAMAGE.get(), 1);
+
+        for (Stat cap : Stats.LEECH_CAP.getAll()) {
+            c.nonScaled(cap, 5);
+        }
 
         return c;
 
