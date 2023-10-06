@@ -83,7 +83,7 @@ public class PhysicalToElement extends ElementalStat {
 
         @Override
         public boolean canActivate(DamageEvent effect, StatData data, Stat stat) {
-            return effect.GetElement() == PhysicalToElement.this.getElement() && effect.getAttackType().equals(AttackType.hit);
+            return effect.GetElement() == Elements.Physical && effect.getAttackType().equals(AttackType.hit);
         }
 
     }

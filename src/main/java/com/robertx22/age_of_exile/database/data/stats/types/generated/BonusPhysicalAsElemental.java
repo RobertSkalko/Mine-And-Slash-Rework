@@ -76,7 +76,7 @@ public class BonusPhysicalAsElemental extends ElementalStat {
 
         @Override
         public boolean canActivate(DamageEvent effect, StatData data, Stat stat) {
-            return effect.GetElement() == BonusPhysicalAsElemental.this.getElement() && effect.getAttackType().equals(AttackType.hit);
+            return effect.GetElement() == Elements.Physical && effect.getAttackType().equals(AttackType.hit);
         }
 
     }
