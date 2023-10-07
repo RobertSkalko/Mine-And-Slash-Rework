@@ -53,7 +53,7 @@ public class OnClientTick {
 
                 Load.Unit(player)
                         .getResources()
-                        .onTickBlock(player);
+                        .onTickBlock(player, 1);
 
                 NO_MANA_SOUND_COOLDOWN--;
 

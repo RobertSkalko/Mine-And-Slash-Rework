@@ -282,19 +282,6 @@ public class SpellCastingData {
             return true;
         }
 
-        /*
-        if (!ServerContainer.get().BLACKLIST_SPELLS_IN_DIMENSIONS.isEmpty()) {
-            ResourceLocation id = ctx.caster.level().registryAccess().registry(Registries.DIMENSION_TYPE).get()
-                    .getKey(ctx.caster.level().dimensionType());
-
-            if (ServerContainer.get().BLACKLIST_SPELLS_IN_DIMENSIONS.stream()
-                    .anyMatch(x -> x.equals(id.toString()))) {
-                return false;
-            }
-        }
-
-         */
-
         EntityData data = Load.Unit(caster);
 
         if (data != null) {

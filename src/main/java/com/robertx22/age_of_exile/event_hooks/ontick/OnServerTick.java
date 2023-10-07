@@ -7,10 +7,6 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
 import com.robertx22.age_of_exile.uncommon.effectdatas.RestoreResourceEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.GearSoulOnInvTick;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
-import com.robertx22.age_of_exile.vanilla_mc.packets.SyncAreaLevelPacket;
-import com.robertx22.library_of_exile.main.Packets;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -29,7 +25,7 @@ public class OnServerTick {
         TICK_ACTIONS.add(new PlayerTickAction("update_caps", 20, (player) -> {
             if (player.isAlive()) {
                 CapSyncUtil.syncPerSecond(player);
-                Packets.sendToClient(player, new SyncAreaLevelPacket(LevelUtils.determineLevel(player.level(), player.blockPosition(), player).level));
+                //Packets.sendToClient(player, new SyncAreaLevelPacket(LevelUtils.determineLevel(player.level(), player.blockPosition(), player).level));
             }
         }));
 
@@ -39,19 +35,7 @@ public class OnServerTick {
             if (player.isAlive()) {
 
 
-                Load.player(player).professions.daily_drop_multis.checkDayPass(player);
-
                 Load.player(player).favor.onSecond(player);
-
-                /*
-                if (WorldUtils.isMapWorldClass(player.level())) {
-                    if (player.tickCount % 40 == 0) {
-                        if (player.getInventory().countItem(SlashItems.TP_BACK.get()) < 1) {
-                            PlayerUtils.giveItem(SlashItems.TP_BACK.get().getDefaultInstance(), player);
-                        }
-                    }
-                }
-                 */
 
                 if (Load.Unit(player)
                         .getResources()
@@ -67,7 +51,6 @@ public class OnServerTick {
                 if (player.tickCount % 60 == 0) {
                     Load.player(player).getSkillGemInventory().removeSupportGemsIfTooMany(player);
                     Load.player(player).getJewels().checkRemoveJewels(player);
-
                 }
 
                 Load.player(player).spellCastingData.charges.onTicks(player, 20);
@@ -125,13 +108,10 @@ public class OnServerTick {
             }
         }));
 
-        TICK_ACTIONS.add(new PlayerTickAction("gear_soul_gen_in_inventory", 20, (player) ->
-        {
-            GearSoulOnInvTick.checkAndGenerate(player);
-        }));
 
+        var tickrate = 5;
         TICK_ACTIONS.add(new
-                PlayerTickAction("every_tick", 1, (player) ->
+                PlayerTickAction("every_tick", tickrate, (player) ->
         {
             if (player == null || player.isDeadOrDying()) {
                 return;
@@ -143,27 +123,11 @@ public class OnServerTick {
                 }
             }
 
-            Load.player(player).buff.onTick(player);
+            Load.player(player).buff.onTick(player, tickrate);
 
-            Load.player(player).spellCastingData.onTimePass(player, 1);
+            Load.player(player).spellCastingData.onTimePass(player, tickrate);
 
-            Load.Unit(player).getResources().onTickBlock(player);
-
-            // todo is this needed since i stopped using client sided particle spawns in spells?
-            /*
-            Spell spell = Load.player(player).spellCastingData.getSpellBeingCast();
-
-            if (spell != null) {
-                spell.getAttached()
-                        .tryActivate(Spell.CASTER_NAME, SpellCtx.onTick(player, player, Load.player(player).spellCastingData.calcSpell));
-
-                PlayerUtils.getNearbyPlayers(player, 50)
-                        .forEach(x -> {
-                            Packets.sendToClient(x, new TellClientEntityIsCastingSpellPacket(player, spell));
-                        });
-
-            }
-                         */
+            Load.Unit(player).getResources().onTickBlock(player, tickrate);
 
         }));
 

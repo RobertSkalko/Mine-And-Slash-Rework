@@ -50,11 +50,11 @@ public class PlayerBuffData implements IStatCtx {
         }
     }
 
-    public void onTick(Player p) {
+    public void onTick(Player p, int ticks) {
 
 
         for (Buff buff : map.values()) {
-            buff.ticks--;
+            buff.ticks -= ticks;
         }
 
         for (Map.Entry<Type, Buff> en : new HashMap<>(map).entrySet()) {

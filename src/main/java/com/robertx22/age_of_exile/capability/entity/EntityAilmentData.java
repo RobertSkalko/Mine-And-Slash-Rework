@@ -28,6 +28,8 @@ public class EntityAilmentData {
 
     String lastAttacker = "";
 
+    transient HashMap<String, UUID> idCache = new HashMap<>();
+
 
     // todo have to call this with stats or ways that do it. I'll have stats that have chance to do it etc.
     public void shatterAccumulated(LivingEntity caster, LivingEntity target, Ailment ailment) {
@@ -90,7 +92,7 @@ public class EntityAilmentData {
             }
             dmgMap.put(ailment.GUID(), dmgMap.get(ailment.GUID()) + dmg);
 
-            
+
             float add = dmg / forFull;
             strength = MathHelper.clamp(strMap.get(ailment.GUID()) + (add), 0, 1);
             strength *= Load.Unit(caster).getUnit().getCalculatedStat(eff).getMultiplier();
@@ -147,7 +149,12 @@ public class EntityAilmentData {
 
             UUID id = null;
             try {
-                id = UUID.fromString(lastAttacker);
+
+                if (!idCache.containsKey(lastAttacker)) {
+                    idCache.put(lastAttacker, UUID.fromString(lastAttacker));
+                }
+                id = idCache.get(lastAttacker);
+
             } catch (Exception e) {
                 //throw new RuntimeException(e);
             }

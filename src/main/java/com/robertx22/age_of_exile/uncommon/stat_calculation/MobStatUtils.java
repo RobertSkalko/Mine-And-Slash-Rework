@@ -46,7 +46,7 @@ public class MobStatUtils {
         if (caster instanceof Player player) {
             var spell = en.getSourceSpell();
 
-            for (Map.Entry<String, StatData> e : Load.player(player).getSpellStats(spell).getStats().stats.entrySet()) {
+            for (Map.Entry<String, StatData> e : Load.player(player).getSpellUnitStats(spell).getStats().stats.entrySet()) {
                 if (e.getValue().GetStat() instanceof SummonStat sstat) {
                     stats.add(sstat.giveToSummon(e.getValue()));
                 }

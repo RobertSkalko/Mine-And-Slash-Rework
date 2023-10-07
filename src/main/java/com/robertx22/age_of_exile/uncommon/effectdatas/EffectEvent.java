@@ -166,7 +166,7 @@ public abstract class EffectEvent implements IGUID {
             if (isSpell()) {
                 if (en instanceof Player p) {
                     if (getSpell() != null) {
-                        un = Load.player(p).getSpellStats(getSpell());
+                        un = Load.player(p).getSpellUnitStats(getSpell());
                     }
                 }
             }

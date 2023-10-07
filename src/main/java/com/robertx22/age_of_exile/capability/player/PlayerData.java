@@ -26,6 +26,9 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
+import java.util.List;
+
 
 public class PlayerData implements ICap {
 
@@ -143,7 +146,27 @@ public class PlayerData implements ICap {
 
     }
 
-    public Unit getSpellStats(Spell spell) {
+    transient HashMap<String, Unit> spellUnits = new HashMap<>();
+
+    public Unit getSpellUnitStats(Spell spell) {
+
+        if (!spellUnits.containsKey(spell.GUID())) {
+            spellUnits.put(spell.GUID(), getSpellStats(spell));
+        }
+
+        return spellUnits.get(spell.GUID());
+    }
+
+    public void calcSpellUnits(List<Spell> spells) {
+
+        for (Spell spell : spells) {
+            spellUnits.put(spell.GUID(), getSpellStats(spell));
+
+        }
+
+    }
+
+    private Unit getSpellStats(Spell spell) {
         Unit un = new Unit();
         var gem = Load.player(player).getSkillGemInventory().getSpellGem(spell);
         if (gem != null) {

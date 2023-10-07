@@ -68,6 +68,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 public class EntityData implements ICap, INeededForClient {
@@ -509,6 +510,11 @@ public class EntityData implements ICap, INeededForClient {
         if (needsToRecalcStats()) {
             //Watch watch = new Watch();
             unit.recalculateStats(entity, this, null, -1);
+
+            if (entity instanceof Player p) {
+                var data = Load.player(p);
+                data.calcSpellUnits(data.spellCastingData.spells.stream().map(x -> ExileDB.Spells().get(x.id)).collect(Collectors.toList()));
+            }
             //watch.print("stat calc for " + (entity instanceof PlayerEntity ? "player " : "mob "));
         }
 

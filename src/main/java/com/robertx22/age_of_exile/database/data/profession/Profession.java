@@ -88,10 +88,10 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
 
         for (ChancedDrop chancedDrop : ALLDROPS) {
 
-            float dailyMulti = Load.player(p).professions.daily_drop_multis.getMulti(this, chancedDrop.type);
+            //float dailyMulti = Load.player(p).professions.daily_drop_multis.getMulti(this, chancedDrop.type);
             float statMuti = Load.Unit(p).getUnit().getCalculatedStat(new ProfCategoryDropStat(chancedDrop.type, GUID())).getMultiplier();
 
-            float chance = dropChanceMulti * chancedDrop.chance * statMuti * dailyMulti;
+            float chance = dropChanceMulti * chancedDrop.chance * statMuti;
 
             if (RandomUtils.roll(chance)) {
                 Weighted<ProfessionDrop> drop = RandomUtils.weightedRandom(chancedDrop.drops.stream().filter(x -> lvlmulti >= x.min_lvl).map(x -> x.toWeighted(p, this)).collect(Collectors.toList()));

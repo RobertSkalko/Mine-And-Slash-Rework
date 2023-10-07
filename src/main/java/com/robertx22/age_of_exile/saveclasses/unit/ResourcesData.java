@@ -46,12 +46,12 @@ public class ResourcesData {
         return magic_shield;
     }
 
-    public void onTickBlock(Player player) {
+    public void onTickBlock(Player player, int ticks) {
         if (player.isBlocking()) {
             float cost = Energy.getInstance()
                     .scale(ModType.FLAT, 0.25F, Load.Unit(player)
                             .getLevel());
-            SpendResourceEvent event = new SpendResourceEvent(player, ResourceType.energy, cost);
+            SpendResourceEvent event = new SpendResourceEvent(player, ResourceType.energy, cost * ticks);
             event.calculateEffects();
             event.Activate();
         }
@@ -59,7 +59,7 @@ public class ResourcesData {
         this.cap(player, ResourceType.block);
     }
 
-  
+
     public float getModifiedValue(LivingEntity en, ResourceType type, Use use, float amount) {
         if (use == Use.RESTORE) {
             return get(en, type) + amount;
