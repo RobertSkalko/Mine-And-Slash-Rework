@@ -23,6 +23,7 @@ import java.util.List;
 public class LearnClassPointButton extends ImageButton {
 
     static ResourceLocation SPELL_SLOT = SlashRef.guiId("spells/slots/spell");
+    static ResourceLocation PASSIVE = SlashRef.guiId("spells/slots/passive");
 
     public static int BUTTON_SIZE_X = 18;
     public static int BUTTON_SIZE_Y = 18;
@@ -51,8 +52,12 @@ public class LearnClassPointButton extends ImageButton {
         Minecraft mc = Minecraft.getInstance();
 
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-        gui.blit(SPELL_SLOT, getX(), getY(), BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X);
-
+        if (perk.stats.isEmpty()) {
+            gui.blit(SPELL_SLOT, getX(), getY(), BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X);
+        } else {
+            gui.blit(PASSIVE, getX(), getY(), BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X);
+        }
+        
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
         gui.blit(perk.getIcon(), getX() + 1, getY() + 1, 16, 16, 16, 16, 16, 16);
 
@@ -78,13 +83,9 @@ public class LearnClassPointButton extends ImageButton {
 
         tooltip.addAll(perk.GetTooltipString(info));
 
-        /*
-        int reqlvl = screen.currentSchool()
-                .getLevelNeededToAllocate(screen.currentSchool().perks.get(perk.GUID()));
 
+        int reqlvl = screen.currentSchool().getLevelNeededToAllocate(screen.currentSchool().perks.get(perk.GUID()));
         tooltip.add(Component.literal("Required Level: " + reqlvl).withStyle(ChatFormatting.RED));
-        
-         */
 
 
         this.setTooltip(Tooltip.create(TextUTIL.mergeList(tooltip)));

@@ -27,25 +27,57 @@ public class AscendancyClassesData implements IStatCtx {
         this.school = new ArrayList<>();
     }
 
+    public enum PointType {
+        SPELL, PASSIVE;
+
+        public boolean is(String perkid) {
+            if (this == SPELL) {
+                return ExileDB.Perks().get(perkid).isSpell();
+            } else {
+                return !ExileDB.Perks().get(perkid).isSpell();
+            }
+
+        }
+    }
+
+    public int getRemainingPoints(LivingEntity en, PointType type) {
+        if (type == PointType.SPELL) {
+            return getFreeSpellPoints(en);
+        } else {
+            return getFreePassivePoints(en);
+        }
+    }
+
 
     public int getLevel(String id) {
         return allocated_lvls.getOrDefault(id, 0);
     }
 
     public int getFreeSpellPoints(LivingEntity entity) {
-        return (int) (GameBalanceConfig.get().CLASS_POINTS_AT_MAX_LEVEL * LevelUtils.getMaxLevelMultiplier(Load.Unit(entity).getLevel())) - getSpentPoints();
+        return (int) (GameBalanceConfig.get().CLASS_POINTS_AT_MAX_LEVEL * LevelUtils.getMaxLevelMultiplier(Load.Unit(entity).getLevel())) - getSpentPoints(PointType.SPELL);
     }
 
-    public int getSpentPoints() {
+    public int getFreePassivePoints(LivingEntity entity) {
+        return (int) (GameBalanceConfig.get().PASSIVE_POINTS_AT_MAX_LEVEL * LevelUtils.getMaxLevelMultiplier(Load.Unit(entity).getLevel())) - getSpentPoints(PointType.PASSIVE);
+    }
+
+    public int getSpentPoints(PointType type) {
         int total = 0;
-        for (Integer x : allocated_lvls.values()) {
-            total += x;
+
+        for (Map.Entry<String, Integer> en : allocated_lvls.entrySet()) {
+            if (type.is(en.getKey())) {
+                total += en.getValue();
+            }
         }
+
         return total;
     }
 
     public boolean canLearn(LivingEntity en, AscendancyClass school, Perk perk) {
-        if (getFreeSpellPoints(en) < 1) {
+
+        PointType type = perk.getPointType();
+
+        if (getRemainingPoints(en, PointType.PASSIVE) < 1) {
             return false;
         }
         if (!school.isLevelEnoughFor(en, perk)) {
@@ -56,11 +88,6 @@ public class AscendancyClassesData implements IStatCtx {
         }
         if (allocated_lvls.getOrDefault(perk.GUID(), 0) >= perk.getMaxLevel()) {
             return false;
-        }
-        var point = school.perks.get(perk.GUID());
-
-        if (this.allocated_lvls.entrySet().stream().anyMatch(x -> school.perks.containsKey(x.getKey()) && school.perks.get(x.getKey()).y == point.y)) {
-            // return false; // only allow 1 point per row, if i want to not hardcode this, use Oneofakind types
         }
         return true;
     }
@@ -83,9 +110,10 @@ public class AscendancyClassesData implements IStatCtx {
             for (OptScaleExactStat stat : ExileDB.Perks().get(s.getKey()).stats) {
                 var data = stat.toExactStat(Load.Unit(en).getLevel());
                 data.percentIncrease = (s.getValue() - 1) * 100;
-                data.increaseByAddedPercent(); // todo test if this works
+                data.increaseByAddedPercent();
                 stats.add(data);
             }
+
 
         }
         return Arrays.asList(new SimpleStatCtx(StatContext.StatCtxType.TALENT, stats));

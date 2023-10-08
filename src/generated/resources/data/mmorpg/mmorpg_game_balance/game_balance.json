@@ -21,6 +21,7 @@
     "cap_to_max_lvl": false,
     "per_level_scaling": 0.2
   },
+  "PASSIVE_POINTS_AT_MAX_LEVEL": 100,
   "SLOW_STAT_SCALING": {
     "base_scaling": 1.0,
     "cap_to_max_lvl": true,

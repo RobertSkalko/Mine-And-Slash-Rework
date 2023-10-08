@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.spell_schools;
 
-import com.mojang.datafixers.types.templates.Sum;
+import com.robertx22.age_of_exile.aoe_data.database.perks.SpellPassives;
 import com.robertx22.age_of_exile.aoe_data.database.spells.impl.*;
 import com.robertx22.age_of_exile.aoe_data.database.spells.schools.*;
 import com.robertx22.age_of_exile.saveclasses.PointData;
@@ -18,6 +18,7 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
         // dps, summoner, self sustain
         SchoolBuilder.of("sorcerer", "Sorcerer")
                 .add(BasicAttackSpells.FIREBALL_ID, new PointData(0, 0))
+                .add(SpellPassives.BURN_CHANCE, new PointData(0, 1))
                 .add(BasicAttackSpells.FROSTBALL_ID, new PointData(6, 0))
 
                 .add(FireSpells.FIRE_NOVA_ID, new PointData(1, 1))

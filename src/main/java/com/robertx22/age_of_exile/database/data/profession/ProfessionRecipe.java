@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.database.data.profession;
 
 import com.robertx22.age_of_exile.database.data.profession.all.ProfessionMatItems;
+import com.robertx22.age_of_exile.database.data.profession.stat.ProfExp;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
@@ -75,14 +76,17 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
     }
 
 
-    public int getExpReward(int skilLvl, List<ItemStack> mats) {
+    public int getExpReward(Player player, int skilLvl, List<ItemStack> mats) {
         int expLvl = MathHelper.clamp(skilLvl, getTier().levelRange.getMinLevel(), getTier().levelRange.getMaxLevel());
 
         int req = getTier().levelRange.getMinLevel();
 
         RecipeDifficulty diff = RecipeDifficulty.get(skilLvl, req);
 
-        return (int) (expLvl * diff.xpMulti * this.exp);
+        float expbonusmulti = Load.Unit(player).getUnit().getCalculatedStat(new ProfExp(this.profession)).getMultiplier();
+
+
+        return (int) (expLvl * diff.xpMulti * this.exp * expbonusmulti);
     }
 
     public ItemStack toResultStackForJei() {

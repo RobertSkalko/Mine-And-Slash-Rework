@@ -222,6 +222,7 @@ resonance
 poison_cloud
 summon_damage
 spell_damage
+burn_chance
 song_of_vigor
 all_penetration
 spell_fire_damage_big

@@ -37,7 +37,21 @@ public class PerkBuilder {
         perk.icon = spell.getIconLoc().toString();
 
         perk.max_lvls = spell.max_lvl;
-        
+
+        perk.addToSerializables();
+        return perk;
+    }
+
+    public static Perk passive(String id, int maxlvl, OptScaleExactStat... stat) {
+        List<OptScaleExactStat> list = Arrays.asList(stat);
+
+        Perk perk = new Perk();
+        perk.stats = list;
+        perk.type = Perk.PerkType.STAT;
+        perk.id = id;
+        perk.max_lvls = maxlvl;
+        perk.icon = new ResourceLocation(SlashRef.MODID, "textures/gui/spells/passives/" + id + ".png").toString();
+
         perk.addToSerializables();
         return perk;
     }

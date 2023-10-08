@@ -6,6 +6,8 @@ import com.robertx22.age_of_exile.database.data.stats.types.LearnSpellStat;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.spells.AscendancyClassesData;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientTextureUtils;
@@ -35,10 +37,21 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
 
     transient ResourceLocation cachedIcon = null;
 
+    public AscendancyClassesData.PointType getPointType() {
+        return stats.isEmpty() ? AscendancyClassesData.PointType.SPELL : AscendancyClassesData.PointType.PASSIVE;
+    }
 
     // todo
     public int getMaxLevel() {
         return max_lvls;
+    }
+
+    public boolean isSpell() {
+        return this.stats.size() > 0 && stats.get(0).getStat() instanceof LearnSpellStat;
+    }
+
+    public boolean isPassive() {
+        return !isSpell() && this.max_lvls > 1;
     }
 
     public ResourceLocation getIcon() {
@@ -75,7 +88,25 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
             }
             //   info.statTooltipType = StatTooltipType.NORMAL;
 
-            stats.forEach(x -> list.addAll(x.GetTooltipString(info)));
+
+            if (isPassive()) {
+                int lvl = Load.player(info.player).ascClass.getLevel(GUID());
+                if (lvl < 1) {
+                    lvl = 1;
+                }
+                int finalLvl = lvl;
+                var scaled = stats.stream().map(x -> {
+                    var d = x.toExactStat(1);
+                    d.percentIncrease = (finalLvl - 1) * 100;
+                    d.increaseByAddedPercent();
+                    return d;
+                });
+
+                scaled.forEach(x -> list.addAll(x.GetTooltipString(info)));
+
+            } else {
+                stats.forEach(x -> list.addAll(x.GetTooltipString(info)));
+            }
 
 
             if (this.one_kind != null) {

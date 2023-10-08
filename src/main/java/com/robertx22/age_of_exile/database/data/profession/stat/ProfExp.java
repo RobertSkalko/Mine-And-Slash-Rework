@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.database.data.profession.stat;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
-import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 
 public class ProfExp extends Stat {
@@ -19,10 +18,7 @@ public class ProfExp extends Stat {
 
     private ProfExp() {
 
-        this.min = 0;
-        this.scaling = StatScaling.NORMAL;
-        this.group = StatGroup.MAIN;
-
+       
     }
 
     @Override

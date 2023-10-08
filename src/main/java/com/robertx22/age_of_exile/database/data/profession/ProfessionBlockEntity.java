@@ -150,7 +150,7 @@ public class ProfessionBlockEntity extends BlockEntity {
             destroyOuput = true;
         }
 
-        int expGive = (int) (recipe.getExpReward(ownerLvl, getMats()) * expMulti);
+        int expGive = (int) (recipe.getExpReward(p, ownerLvl, getMats()) * expMulti);
 
         this.addExp(expGive);
 
