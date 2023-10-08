@@ -66,6 +66,11 @@ public class SpellCastingData {
         return spells.stream().filter(x -> x.id.equals(id)).findAny().orElse(new InsertedSpell("", 0));
     }
 
+    public InsertedSpell getSpellData(String id) {
+        return spells.stream().filter(x -> x.id.equals(id)).findAny().orElse(new InsertedSpell("", 0));
+    }
+
+
     public String getSpellId(int slot) {
 
         return hotbar.getOrDefault(slot, "");

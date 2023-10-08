@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.saveclasses.spells.AscendancyClassesData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientTextureUtils;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
@@ -38,7 +39,9 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
     transient ResourceLocation cachedIcon = null;
 
     public AscendancyClassesData.PointType getPointType() {
-        return stats.isEmpty() ? AscendancyClassesData.PointType.SPELL : AscendancyClassesData.PointType.PASSIVE;
+       
+
+        return isSpell() ? AscendancyClassesData.PointType.SPELL : AscendancyClassesData.PointType.PASSIVE;
     }
 
     // todo
@@ -123,7 +126,12 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
 
             if (stats.size() > 0) {
                 if (stats.get(0).getStat() instanceof LearnSpellStat spell) {
-                    list.addAll(spell.spell.GetTooltipString(new TooltipInfo()));
+                    var data = Load.player(ClientOnly.getPlayer()).spellCastingData.getSpellData(spell.spell.GUID());
+                    if (data.rank > 0) {
+                        list.addAll(data.getData().getTooltip(info.player));
+                    } else {
+                        list.addAll(spell.spell.GetTooltipString(new TooltipInfo()));
+                    }
                 }
             }
 
