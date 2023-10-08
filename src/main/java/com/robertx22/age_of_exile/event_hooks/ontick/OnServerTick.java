@@ -130,7 +130,7 @@ public class OnServerTick {
         }));
 
         TICK_ACTIONS.add(new
-                PlayerTickAction("every_tick", tickrate, (player) ->
+                PlayerTickAction("every_tick", 1, (player) ->
         {
             if (player == null || player.isDeadOrDying()) {
                 return;
