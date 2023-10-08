@@ -77,7 +77,7 @@ public class AscendancyClassesData implements IStatCtx {
 
         PointType type = perk.getPointType();
 
-        if (getRemainingPoints(en, PointType.PASSIVE) < 1) {
+        if (getRemainingPoints(en, type) < 1) {
             return false;
         }
         if (!school.isLevelEnoughFor(en, perk)) {
