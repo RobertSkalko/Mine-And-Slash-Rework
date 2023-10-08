@@ -67,7 +67,7 @@ public class OnClientTick {
                         .onTicksPass(1);
 
                 Load.player(player).spellCastingData
-                        .onTimePass(player, 1); // ticks spells on client
+                        .onTimePass(player); // ticks spells on client
 
                 List<String> onCooldownAfter = Load.player(player)
                         .spellCastingData

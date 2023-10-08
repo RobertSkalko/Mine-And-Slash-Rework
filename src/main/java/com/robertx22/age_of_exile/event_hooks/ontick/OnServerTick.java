@@ -111,7 +111,7 @@ public class OnServerTick {
 
         var tickrate = 5;
         TICK_ACTIONS.add(new
-                PlayerTickAction("every_tick", tickrate, (player) ->
+                PlayerTickAction("every_5_ticks", tickrate, (player) ->
         {
             if (player == null || player.isDeadOrDying()) {
                 return;
@@ -125,10 +125,17 @@ public class OnServerTick {
 
             Load.player(player).buff.onTick(player, tickrate);
 
-            Load.player(player).spellCastingData.onTimePass(player, tickrate);
-
             Load.Unit(player).getResources().onTickBlock(player, tickrate);
 
+        }));
+
+        TICK_ACTIONS.add(new
+                PlayerTickAction("every_tick", tickrate, (player) ->
+        {
+            if (player == null || player.isDeadOrDying()) {
+                return;
+            }
+            Load.player(player).spellCastingData.onTimePass(player);
         }));
 
 

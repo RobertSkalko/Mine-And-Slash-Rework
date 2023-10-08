@@ -152,7 +152,7 @@ public class SpellCastingData {
 
     transient static Spell lastSpell = null;
 
-    public void onTimePass(LivingEntity entity, int ticks) {
+    public void onTimePass(LivingEntity entity) {
 
         try {
 
