@@ -11,37 +11,13 @@
           "weight": 1000
         },
         {
-          "item_id": "mmorpg:rare_mats/farming/lesser",
-          "min_lvl": 0.0,
-          "num": 1,
-          "weight": 1000
-        },
-        {
           "item_id": "mmorpg:rare_mats/farming/greater",
-          "min_lvl": 0.0,
-          "num": 1,
-          "weight": 1000
-        }
-      ]
-    },
-    {
-      "type": "LESSER",
-      "chance": 5.0,
-      "drops": [
-        {
-          "item_id": "mmorpg:rare_mats/farming/medium",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
         },
         {
           "item_id": "mmorpg:rare_mats/farming/lesser",
-          "min_lvl": 0.0,
-          "num": 1,
-          "weight": 1000
-        },
-        {
-          "item_id": "mmorpg:rare_mats/farming/greater",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
@@ -59,13 +35,37 @@
           "weight": 1000
         },
         {
+          "item_id": "mmorpg:rare_mats/farming/greater",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
           "item_id": "mmorpg:rare_mats/farming/lesser",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        }
+      ]
+    },
+    {
+      "type": "LESSER",
+      "chance": 5.0,
+      "drops": [
+        {
+          "item_id": "mmorpg:rare_mats/farming/medium",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
         },
         {
           "item_id": "mmorpg:rare_mats/farming/greater",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:rare_mats/farming/lesser",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000

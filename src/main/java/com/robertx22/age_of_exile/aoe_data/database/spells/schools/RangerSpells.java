@@ -220,7 +220,7 @@ public class RangerSpells implements ExileRegistryInit {
 
                 .build();
 
-        SpellBuilder.of(BARRAGE, PlayStyle.DEX, SpellConfiguration.Builder.multiCast(20, 20, 20, 5)
+        SpellBuilder.of(BARRAGE, PlayStyle.DEX, SpellConfiguration.Builder.multiCast(20, 20, 20, 10)
                                 .setChargesAndRegen(BARRAGE, 3, 20 * 10), "Arrow Barrage",
                         Arrays.asList(SpellTag.projectile, SpellTag.damage))
 

@@ -165,7 +165,7 @@
       "projectile",
       "damage"
     ],
-    "times_to_cast": 5
+    "times_to_cast": 10
   },
   "disabled_dims": [],
   "effect_tip": "",

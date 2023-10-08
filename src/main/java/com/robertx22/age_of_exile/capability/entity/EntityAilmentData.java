@@ -138,15 +138,7 @@ public class EntityAilmentData {
 
 
         if (en.tickCount % 20 == 0) {
-            /*
-            float freeze = strMap.getOrDefault(Ailments.FREEZE.GUID(), 0F);
-
-            if (freeze > 0) {
-                en.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, Ailments.FREEZE.getSlowTier(freeze)));
-            }
-
-             */
-
+       
             UUID id = null;
             try {
 

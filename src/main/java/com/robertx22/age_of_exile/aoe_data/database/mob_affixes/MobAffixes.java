@@ -52,11 +52,6 @@ public class MobAffixes implements ExileRegistryInit {
         eleAffix("Flaming", Fire);
         eleAffix("Poisoned", Chaos);
 
-        new MobAffix("reflect", "Thorned", Physical.format, Affix.Type.prefix)
-                .setMods(
-                        new StatMod(15, 15, Stats.DAMAGE_REFLECTED.get()))
-                .setWeight(200)
-                .addToSerializables();
 
         new MobAffix("winter", "Winter Lord", Cold.format, Affix.Type.prefix)
                 .setMods(
