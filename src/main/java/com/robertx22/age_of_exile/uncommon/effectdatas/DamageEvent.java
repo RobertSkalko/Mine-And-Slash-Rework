@@ -362,10 +362,14 @@ public class DamageEvent extends EffectEvent {
                     attackInfo.event.damage = 0;
                     attackInfo.event.canceled = true;
                 }
-                int inv = target.invulnerableTime;
-                target.invulnerableTime = 0;
-                target.hurt(dmgsource, vanillaDamage);
-                target.invulnerableTime = inv;
+                if (target instanceof Player == false) {
+                    int inv = target.invulnerableTime;
+                    target.invulnerableTime = 0;
+                    target.hurt(dmgsource, vanillaDamage);
+                    target.invulnerableTime = inv;
+                } else {
+                    target.hurt(dmgsource, vanillaDamage);
+                }
             }
 
             if (target instanceof Player == false) {
@@ -413,6 +417,8 @@ public class DamageEvent extends EffectEvent {
             }
 
             sendDamageParticle(info);
+
+            // target.invulnerableTime = 20;
 
         }
 
