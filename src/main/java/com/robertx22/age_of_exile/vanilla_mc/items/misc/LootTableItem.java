@@ -43,7 +43,7 @@ public class LootTableItem extends Item implements IAutoModel {
 
     public static ItemStack of(ResourceLocation loottable) {
 
-        
+
         ItemStack stack = new ItemStack(SlashItems.LOOT_TABLE_ITEM.get());
         stack.setTag(new CompoundTag());
         stack.getTag()
@@ -104,8 +104,7 @@ public class LootTableItem extends Item implements IAutoModel {
         try {
             //LootTableManager
 
-            tooltip.add(Words.ClickToOpen.locName()
-                    .withStyle(ChatFormatting.RED));
+            tooltip.add(Words.ClickToOpen.locName().withStyle(ChatFormatting.RED));
 
         } catch (Exception e) {
             // e.printStackTrace();

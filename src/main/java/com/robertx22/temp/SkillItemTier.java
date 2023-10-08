@@ -1,6 +1,7 @@
 package com.robertx22.temp;
 
 
+import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.level_ranges.LevelRange;
 import com.robertx22.age_of_exile.database.registrators.LevelRanges;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
@@ -51,15 +52,24 @@ public enum SkillItemTier {
     }
 
     public static SkillItemTier fromLevel(int lvl) {
+        if (lvl < 1) {
+            lvl = 1;
+        }
+        if (lvl > GameBalanceConfig.get().MAX_LEVEL) {
+            lvl = GameBalanceConfig.get().MAX_LEVEL;
+        }
+
+        int finalLvl = lvl;
+
         return Arrays.stream(SkillItemTier.values())
                 .filter(x -> {
                     int minlvl = x.levelRange.getMinLevel();
-                    return lvl >= minlvl;
+                    return finalLvl >= minlvl;
                 })
                 .max(Comparator.comparingInt(x -> {
                     return x.tier;
                 }))
-                .get();
+                .orElseGet(() -> SkillItemTier.TIER0);
     }
 
     public SkillItemTier lowerTier() {

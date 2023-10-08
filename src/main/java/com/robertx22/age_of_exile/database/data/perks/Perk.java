@@ -77,7 +77,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
 
         try {
 
-            if (this.type != PerkType.STAT && type != PerkType.MAJOR) {
+            if (this.type != PerkType.STAT && type != PerkType.MAJOR && type != PerkType.SPECIAL) {
                 list.add(locName().withStyle(type.format));
             }
             if (type == PerkType.MAJOR) {
