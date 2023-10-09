@@ -211,7 +211,7 @@ public class WaterSpells implements ExileRegistryInit {
                 .build();
 
 
-        SpellBuilder.of(FROST_NOVA_AOE, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 25 * 20), "addToSerializables",
+        SpellBuilder.of(FROST_NOVA_AOE, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 25 * 20), "Frost Nova",
                         Arrays.asList(SpellTag.area, SpellTag.damage))
                 .manualDesc(
                         "Explode with frost around you, dealing " + SpellCalcs.FROST_NOVA.getLocDmgTooltip()
