@@ -1,0 +1,15 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/spells/passives/p_song_duration.png",
+  "id": "p_song_duration",
+  "is_entry": false,
+  "max_lvls": 8,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "song_eff_dur_u_cast",
+      "v1": 4.0
+    }
+  ]
+}

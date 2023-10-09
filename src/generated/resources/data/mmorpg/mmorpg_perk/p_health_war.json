@@ -1,0 +1,15 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/spells/passives/p_health_war.png",
+  "id": "p_health_war",
+  "is_entry": false,
+  "max_lvls": 8,
+  "stats": [
+    {
+      "type": "PERCENT",
+      "scale_to_lvl": false,
+      "stat": "health",
+      "v1": 4.0
+    }
+  ]
+}

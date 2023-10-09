@@ -202,9 +202,9 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
         // hub buttons
 
         List<INamedScreen> rightButtons = new ArrayList<>();
+        rightButtons.add(new AscendancyClassScreen());
         rightButtons.add(new OpenSkillGems());
         rightButtons.add(new TalentsScreen());
-        rightButtons.add(new AscendancyClassScreen());
         rightButtons.add(new OpenJewelsScreen());
 
         List<INamedScreen> leftButtons = new ArrayList<>();

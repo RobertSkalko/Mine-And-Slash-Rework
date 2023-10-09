@@ -143,6 +143,7 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
                 .add(LightningSpells.CHAIN_LIGHTNING, new PointData(1, 3))
 
                 .add(TotemSpells.HEAL_TOTEM_ID, new PointData(3, 0))
+                .add(LightningSpells.LIGHTNING_TOTEM, new PointData(3, 1))
                 .add(TotemSpells.MANA_TOTEM_ID, new PointData(3, 3))
                 .add(FireSpells.MAGMA_FLOWER, new PointData(3, 4))
                 .add(WaterSpells.FROST_FLOWER, new PointData(4, 4))
@@ -173,11 +174,11 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
                 .add(HolySpells.CHARGE_ID, new PointData(2, 4))
                 .add(DexSpells.EXECUTE, new PointData(1, 5))
 
-                .add(HolySpells.TAUNT, new PointData(3, 1))
-                .add(RangerSpells.BOOMERANG, new PointData(4, 1))
-                .add(HolySpells.PULL, new PointData(3, 2))
-                .add(FireSpells.VAMP_BLOOD, new PointData(3, 4))
-                .add(HolySpells.UNDYING_WILL, new PointData(3, 6))
+                .add(HolySpells.TAUNT, new PointData(4, 1))
+                .add(RangerSpells.BOOMERANG, new PointData(5, 1))
+                .add(HolySpells.PULL, new PointData(4, 2))
+                .add(FireSpells.VAMP_BLOOD, new PointData(4, 4))
+                .add(HolySpells.UNDYING_WILL, new PointData(4, 6))
 
                 .add(SpellPassives.HEALTH_WAR, new PointData(8, 1))
                 .add(SpellPassives.ARMOR_PEN, new PointData(8, 2))

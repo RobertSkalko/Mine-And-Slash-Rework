@@ -1,0 +1,15 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/spells/passives/p_trap_dmg.png",
+  "id": "p_trap_dmg",
+  "is_entry": false,
+  "max_lvls": 8,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "trap_spell_dmg",
+      "v1": 5.0
+    }
+  ]
+}

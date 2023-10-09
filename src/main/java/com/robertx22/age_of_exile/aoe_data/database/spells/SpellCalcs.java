@@ -118,6 +118,9 @@ public class SpellCalcs {
     public static ValueCalculation TIDAL_STRIKE = ValueCalcBuilder.of("tidal_strike")
             .attackScaling(0.4F, 0.75F)
             .build();
+    public static ValueCalculation LIGHTNING_TOTEM = ValueCalcBuilder.of("lightning_totem")
+            .attackScaling(0.5F, 1)
+            .build();
     public static ValueCalculation FROST_FLOWER = ValueCalcBuilder.of("flower_flower")
             .attackScaling(0.5F, 1)
             .build();

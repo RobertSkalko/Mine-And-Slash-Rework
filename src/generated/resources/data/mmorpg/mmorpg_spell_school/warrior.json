@@ -11,47 +11,79 @@
   ],
   "perks": {
     "boomerang": {
-      "x": 10,
+      "x": 5,
       "y": 1
     },
     "charge": {
-      "x": 4,
-      "y": 3
+      "x": 2,
+      "y": 4
     },
     "execute": {
-      "x": 2,
+      "x": 1,
       "y": 5
     },
     "flame_strike": {
-      "x": 5,
+      "x": 1,
       "y": 3
     },
     "gong_strike": {
-      "x": 0,
+      "x": 1,
       "y": 0
     },
-    "pull": {
-      "x": 3,
+    "p_armor_pen": {
+      "x": 8,
       "y": 2
     },
-    "shred": {
-      "x": 5,
-      "y": 2
+    "p_aura_effect": {
+      "x": 8,
+      "y": 5
     },
-    "taunt": {
-      "x": 1,
-      "y": 1
-    },
-    "tidal_strike": {
-      "x": 6,
+    "p_block_chance": {
+      "x": 9,
       "y": 3
     },
-    "undying_will": {
+    "p_crit_hit": {
+      "x": 8,
+      "y": 4
+    },
+    "p_damage_received": {
       "x": 8,
       "y": 6
     },
+    "p_health_regen": {
+      "x": 8,
+      "y": 3
+    },
+    "p_health_war": {
+      "x": 8,
+      "y": 1
+    },
+    "p_lifesteal": {
+      "x": 9,
+      "y": 4
+    },
+    "pull": {
+      "x": 4,
+      "y": 2
+    },
+    "shred": {
+      "x": 1,
+      "y": 2
+    },
+    "taunt": {
+      "x": 4,
+      "y": 1
+    },
+    "tidal_strike": {
+      "x": 2,
+      "y": 3
+    },
+    "undying_will": {
+      "x": 4,
+      "y": 6
+    },
     "vamp_blood": {
-      "x": 7,
+      "x": 4,
       "y": 4
     },
     "whirlwind": {
