@@ -19,23 +19,23 @@ public class StartPerks implements ExileRegistryInit {
 
 
         of(MAGE, "Mage",
-                new OptScaleExactStat(10, DatapackStats.INT, ModType.FLAT),
+                new OptScaleExactStat(9, DatapackStats.INT, ModType.FLAT),
                 new OptScaleExactStat(5, DatapackStats.STR, ModType.FLAT),
                 new OptScaleExactStat(5, DatapackStats.DEX, ModType.FLAT)
         );
         of(WARRIOR, "Warrior",
                 new OptScaleExactStat(5, DatapackStats.INT, ModType.FLAT),
-                new OptScaleExactStat(10, DatapackStats.STR, ModType.FLAT),
+                new OptScaleExactStat(9, DatapackStats.STR, ModType.FLAT),
                 new OptScaleExactStat(5, DatapackStats.DEX, ModType.FLAT)
         );
         of(RANGER, "Ranger",
                 new OptScaleExactStat(5, DatapackStats.INT, ModType.FLAT),
                 new OptScaleExactStat(5, DatapackStats.STR, ModType.FLAT),
-                new OptScaleExactStat(10, DatapackStats.DEX, ModType.FLAT)
+                new OptScaleExactStat(9, DatapackStats.DEX, ModType.FLAT)
         );
         of(GUARDIAN, "Guardian",
                 new OptScaleExactStat(7, DatapackStats.INT, ModType.FLAT),
-                new OptScaleExactStat(8, DatapackStats.STR, ModType.FLAT),
+                new OptScaleExactStat(7, DatapackStats.STR, ModType.FLAT),
                 new OptScaleExactStat(5, DatapackStats.DEX, ModType.FLAT)
         );
 

@@ -778,6 +778,25 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
+    public static DataPackStatAccessor<EmptyAccessor> DOT_LIFESTEAL = DatapackStatBuilder
+            .ofSingle("dot_lifesteal", Elements.All)
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(100)
+            .setSide(EffectSides.Source)
+            .addCondition(StatConditions.ATTACK_TYPE_MATCHES.get(AttackType.dot))
+            .addEffect(StatEffects.LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.get(ResourceType.health))
+            .setLocName(x -> "Damage over Time Lifesteal")
+            .setLocDesc(x -> "Restore % of DoT damage as health.")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+                x.base = 0;
+                x.min = 0;
+                x.scaling = StatScaling.NONE;
+                x.format = ChatFormatting.RED.getName();
+                x.group = StatGroup.RESTORATION;
+            })
+            .build();
+
     public static DataPackStatAccessor<EmptyAccessor> INCREASED_LEECH = DatapackStatBuilder
             .ofSingle("inc_leech", Elements.All)
             .worksWithEvent(RestoreResourceEvent.ID)
