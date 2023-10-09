@@ -177,12 +177,12 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
             for (Component c : spell.GetTooltipString(new TooltipInfo(p))) {
                 list.add(c);
             }
+            // mahj to-do need to change to current level rather than the "minimum" level
+            //list.add(ExileText.emptyLine().get());
+            //if (req > 0) { 
+            //    list.add(TooltipUtils.level(req));
 
-            list.add(ExileText.emptyLine().get());
-            if (req > 0) {
-                list.add(TooltipUtils.level(req));
-
-            }
+            //}
 
             list.add(ExileText.emptyLine().get());
             list.add(TooltipUtils.rarity(rar));

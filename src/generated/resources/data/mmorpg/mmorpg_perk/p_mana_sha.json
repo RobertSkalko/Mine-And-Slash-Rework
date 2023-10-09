@@ -1,0 +1,15 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/spells/passives/p_mana_sha.png",
+  "id": "p_mana_sha",
+  "is_entry": false,
+  "max_lvls": 8,
+  "stats": [
+    {
+      "type": "PERCENT",
+      "scale_to_lvl": false,
+      "stat": "mana",
+      "v1": 3.0
+    }
+  ]
+}

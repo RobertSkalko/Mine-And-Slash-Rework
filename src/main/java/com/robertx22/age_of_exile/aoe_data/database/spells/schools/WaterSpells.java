@@ -86,7 +86,7 @@ public class WaterSpells implements ExileRegistryInit {
                 .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.SNOWFLAKE, 5D, 1.5D, 0.2D))
                 .onTick("block", PartBuilder.playSound(SoundEvents.PLAYER_HURT_FREEZE, 1D, 1D).tickRequirement(20D))
 
-                .onTick("block", PartBuilder.damageInAoe(SpellCalcs.TIDAL_STRIKE, Elements.Cold, 6D).tickRequirement(20D)
+                .onTick("block", PartBuilder.damageInAoe(SpellCalcs.FROST_FLOWER, Elements.Cold, 6D).tickRequirement(20D)
                         .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.RAIN, 75D, 1D, 0.1D))
                         .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.SPLASH, 50D, 1D, 0.1D))
                         .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.SNOWFLAKE, 100D, 1D, 0.1D))

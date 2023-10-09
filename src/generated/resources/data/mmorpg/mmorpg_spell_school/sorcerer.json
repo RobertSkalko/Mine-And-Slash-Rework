@@ -10,12 +10,8 @@
     30
   ],
   "perks": {
-    "burn_chance": {
-      "x": 0,
-      "y": 1
-    },
     "chilling_field": {
-      "x": 8,
+      "x": 3,
       "y": 2
     },
     "fire_nova": {
@@ -23,48 +19,84 @@
       "y": 1
     },
     "fireball": {
-      "x": 0,
+      "x": 1,
       "y": 0
     },
     "frost_nova": {
-      "x": 7,
+      "x": 3,
       "y": 1
     },
     "frostball": {
-      "x": 6,
+      "x": 3,
       "y": 0
     },
     "frozen_orb": {
-      "x": 6,
+      "x": 3,
       "y": 4
     },
     "heart_of_ice": {
-      "x": 10,
-      "y": 3
+      "x": 5,
+      "y": 2
     },
     "ice_comet": {
-      "x": 9,
+      "x": 3,
       "y": 3
     },
     "mage_circle": {
-      "x": 4,
-      "y": 6
+      "x": 5,
+      "y": 4
     },
     "meteor": {
-      "x": 2,
+      "x": 1,
       "y": 2
     },
-    "refresh": {
+    "p_burn_chance": {
+      "x": 8,
+      "y": 2
+    },
+    "p_cast_speed_sorc": {
+      "x": 8,
+      "y": 5
+    },
+    "p_ele_res": {
+      "x": 8,
+      "y": 4
+    },
+    "p_freeze_chance": {
+      "x": 9,
+      "y": 2
+    },
+    "p_golem_chance": {
       "x": 8,
       "y": 6
     },
+    "p_magic_shield_regen": {
+      "x": 8,
+      "y": 3
+    },
+    "p_mana_regen": {
+      "x": 8,
+      "y": 1
+    },
+    "p_spell_dmg": {
+      "x": 9,
+      "y": 1
+    },
+    "refresh": {
+      "x": 5,
+      "y": 5
+    },
+    "summon_cold_golem": {
+      "x": 3,
+      "y": 5
+    },
     "summon_fire_golem": {
-      "x": 7,
+      "x": 1,
       "y": 5
     },
     "teleport": {
       "x": 5,
-      "y": 4
+      "y": 3
     }
   }
 }
