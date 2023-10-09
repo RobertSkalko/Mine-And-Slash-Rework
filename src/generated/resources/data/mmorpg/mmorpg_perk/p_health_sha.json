@@ -1,0 +1,15 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/spells/passives/p_health_sha.png",
+  "id": "p_health_sha",
+  "is_entry": false,
+  "max_lvls": 8,
+  "stats": [
+    {
+      "type": "PERCENT",
+      "scale_to_lvl": false,
+      "stat": "health",
+      "v1": 3.0
+    }
+  ]
+}

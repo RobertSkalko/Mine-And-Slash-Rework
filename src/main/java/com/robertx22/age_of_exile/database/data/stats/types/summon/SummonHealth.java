@@ -4,10 +4,18 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.types.SummonStat;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
+
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 
 public class SummonHealth extends SummonStat {
+
+    public static String GUID = "summon_health";
+
+    public static SummonHealth getInstance() {
+        return SummonHealth.SingletonHolder.INSTANCE;
+
+    }
     public SummonHealth() {
         this.is_perc = true;
         this.scaling = StatScaling.NONE;
@@ -40,6 +48,10 @@ public class SummonHealth extends SummonStat {
 
     @Override
     public String GUID() {
-        return "summon_health";
+        return GUID;
+    }
+
+    private static class SingletonHolder {
+        private static final SummonHealth INSTANCE = new SummonHealth();
     }
 }

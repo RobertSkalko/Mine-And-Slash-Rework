@@ -71,7 +71,7 @@ public class AscendancyClassScreen extends BaseScreen implements INamedScreen, I
 
                         if (perk != null) {
                             int x = this.guiLeft + 12 + (point.x * SLOT_SPACING);
-                            int y = this.guiTop + 177 - (point.y * SLOT_SPACING);
+                            int y = this.guiTop + 178 - (point.y * SLOT_SPACING);
 
                             this.addRenderableWidget(new LearnClassPointButton(this, perk, x, y));
 
@@ -103,18 +103,18 @@ public class AscendancyClassScreen extends BaseScreen implements INamedScreen, I
             );
 
             gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-            gui.blit(currentSchool().getIconLoc(), guiLeft + 108, guiTop + 8, 34, 34, 34, 34, 34, 34);
+            gui.blit(currentSchool().getIconLoc(), guiLeft + 107, guiTop + 8, 36, 36, 36, 36, 36, 36);
 
             // background
             gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 
-            gui.blit(currentSchool().getBackgroundLoc(), guiLeft + 7, guiTop + 7, 93, 36, 93, 36, 93, 36);
-            gui.blit(currentSchool().getBackgroundLoc(), guiLeft + 150, guiTop + 7, 93, 36, 93, 36, 93, 36);
+            gui.blit(currentSchool().getBackgroundLoc(), guiLeft + 7, guiTop + 8, 93, 36, 93, 36, 93, 36);
+            gui.blit(currentSchool().getBackgroundLoc(), guiLeft + 150, guiTop + 8, 93, 36, 93, 36, 93, 36);
 
             super.render(gui, x, y, ticks);
 
             String txt = "Spell Points: " + Load.player(mc.player).ascClass.getFreeSpellPoints(mc.player);
-            GuiUtils.renderScaledText(gui, guiLeft + 45, guiTop + 215, 1, txt, ChatFormatting.AQUA);
+            GuiUtils.renderScaledText(gui, guiLeft + 48, guiTop + 215, 1, txt, ChatFormatting.AQUA);
 
             String tx2 = "Passive Points: " + Load.player(mc.player).ascClass.getFreePassivePoints(mc.player);
             GuiUtils.renderScaledText(gui, guiLeft + 195, guiTop + 215, 1, tx2, ChatFormatting.YELLOW);

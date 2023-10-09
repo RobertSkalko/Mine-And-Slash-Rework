@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.SpellConfigura
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeapon;
+import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -22,6 +23,7 @@ public class LightningSpells implements ExileRegistryInit {
     public static String LIGHTNING_NOVA = "lightning_nova";
     public static String LIGHTNING_SPEAR = "lightning_spear";
     public static String CHAIN_LIGHTNING = "chain_lightning";
+    public static String LIGHTNING_TOTEM = "lightning_totem";
 
     @Override
     public void registerAll() {
@@ -86,6 +88,34 @@ public class LightningSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.damageInAoe(SpellCalcs.LIGHNING_NOVA, Elements.Lightning, 4D)
                         .addPerEntityHit(PartBuilder.playSoundPerTarget(SoundEvents.GENERIC_HURT, 1D, 1D)))
                 .levelReq(10)
+                .build();
+
+        SpellBuilder.of(LIGHTNING_TOTEM, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 60)
+                                .setSwingArm(), "Lightning Totem",
+                        Arrays.asList(SpellTag.damage, SpellTag.area, SpellTag.totem))
+                .manualDesc("Summon a lightning totem that deals "
+                        + SpellCalcs.LIGHTNING_TOTEM.getLocDmgTooltip(Elements.Lightning) + " in an area every second.")
+
+                .onCast(PartBuilder.playSound(SoundEvents.GRASS_PLACE, 1D, 1D))
+
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 0D)))
+                .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(SlashBlocks.GUARD_TOTEM.get(), 20D * 8)
+                        .put(MapField.ENTITY_NAME, "block")
+                        .put(MapField.BLOCK_FALL_SPEED, 0D)
+                        .put(MapField.FIND_NEAREST_SURFACE, true)
+                        .put(MapField.IS_BLOCK_FALLING, false)))
+
+                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.ELECTRIC_SPARK, 20D, 1.5D, 0.2D))
+                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.POOF, 5D, 1.5D, 0.2D))
+                .onTick("block", PartBuilder.playSound(SoundEvents.FIRE_EXTINGUISH, 0.75D, 1D).tickRequirement(20D))
+
+                .onTick("block", PartBuilder.damageInAoe(SpellCalcs.LIGHTNING_TOTEM, Elements.Lightning, 6D).tickRequirement(20D)
+                        .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.ELECTRIC_SPARK, 75D, 1.5D, 0.1D))
+                        .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.ELECTRIC_SPARK, 50D, 1D, 0.1D))
+                        .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.ELECTRIC_SPARK, 100D, 2D, 0.1D))
+                )
+
+                .levelReq(20)
                 .build();
 
 

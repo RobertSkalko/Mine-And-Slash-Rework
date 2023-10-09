@@ -1,0 +1,15 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/spells/passives/p_inc_aoe.png",
+  "id": "p_inc_aoe",
+  "is_entry": false,
+  "max_lvls": 8,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "inc_aoe",
+      "v1": 3.0
+    }
+  ]
+}

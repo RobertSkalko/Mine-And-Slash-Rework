@@ -68,7 +68,7 @@
               "type": "damage",
               "map": {
                 "element": "Cold",
-                "value_calculation": "tidal_strike"
+                "value_calculation": "flower_flower"
               }
             }
           ],

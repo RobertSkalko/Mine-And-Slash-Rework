@@ -1,0 +1,15 @@
+{
+  "type": "STAT",
+  "icon": "mmorpg:textures/gui/spells/passives/p_dmg_to_cursed.png",
+  "id": "p_dmg_to_cursed",
+  "is_entry": false,
+  "max_lvls": 8,
+  "stats": [
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "damage_to_cursed",
+      "v1": 4.0
+    }
+  ]
+}
