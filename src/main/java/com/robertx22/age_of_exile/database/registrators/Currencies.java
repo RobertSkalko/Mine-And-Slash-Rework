@@ -17,6 +17,7 @@ public class Currencies implements ExileRegistryInit {
 
     public static List<Currency> ALL = new ArrayList<>();
 
+
     static {
 
 
@@ -35,6 +36,11 @@ public class Currencies implements ExileRegistryInit {
         }
 
 
+    }
+
+
+    public static void init() {
+        
     }
 
     @Override
