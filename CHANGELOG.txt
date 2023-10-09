@@ -1,4 +1,4 @@
-v.5.2.0
+v.5.3.0
 
 CLASS rework BETA:
 

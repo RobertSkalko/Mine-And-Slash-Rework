@@ -4,6 +4,7 @@
 build/
 out/
 classes/
+src/generated/resources/data/mmorpg/
 
 # eclipse
 

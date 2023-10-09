@@ -8,7 +8,6 @@ water_mob_affix
 winter
 thorny_mobs
 fire_lord
-reflect
 fire_mob_affix
 vampire
 full_chaos

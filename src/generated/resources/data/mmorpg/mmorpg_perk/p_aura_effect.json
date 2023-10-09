@@ -6,7 +6,7 @@
   "max_lvls": 8,
   "stats": [
     {
-      "type": "PERCENT",
+      "type": "FLAT",
       "scale_to_lvl": false,
       "stat": "aura_effect",
       "v1": 4.0

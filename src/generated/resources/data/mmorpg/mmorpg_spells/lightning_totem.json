@@ -46,7 +46,7 @@
               "type": "sound",
               "map": {
                 "pitch": 1.0,
-                "sound": "minecraft:item.trident.thunder",
+                "sound": "minecraft:block.fire.extinguish",
                 "volume": 0.75
               }
             }

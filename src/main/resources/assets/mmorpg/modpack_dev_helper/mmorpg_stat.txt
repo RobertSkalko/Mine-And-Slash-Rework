@@ -119,6 +119,7 @@ freeze_resistance
 beast_spell_dmg
 attack_atk_style_dmg
 area_spell_dmg
+learn_lightning_totem
 fire_weapon_damage
 mining_double_drop
 more_threat_on_take_dmg
@@ -325,6 +326,7 @@ bow_damage
 learn_pull
 inc_effect_of_defensive_buff_given
 poison_resistance
+learn_ritardando
 summon_spell_dmg
 inc_effect_of_negative_buff_given
 all_dot_damage
@@ -337,6 +339,7 @@ physical_mana_leech
 learn_chilling_touch
 learn_gale_wind
 fishing_double_drop
+dot_lifesteal
 husbandry_greater_drop_bonus
 shield_cdr
 lightning_vuln_crit

@@ -5,8 +5,12 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.ResourceAndAttack;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.spells.SpellTag;
-import com.robertx22.age_of_exile.database.data.stats.types.ailment.*;
+import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
+import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentProcStat;
+import com.robertx22.age_of_exile.database.data.stats.types.ailment.AllAilmentDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.ailment.HitDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalPenetration;
+import com.robertx22.age_of_exile.database.data.stats.types.summon.SummonHealth;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -234,6 +238,11 @@ public class SupportGems {
                 .levelReq(1).addToSerializables();
 
 
+        new SupportGem("summon_health", "Summon Health", PlayStyle.INT, 1.3F,
+                Arrays.asList(new StatMod(20, 50, SummonHealth.getInstance(), ModType.MORE)
+                ))
+                .levelReq(10).addToSerializables();
+
         // weaker
         new SupportGem("crit_chance", "Crit Chance", PlayStyle.DEX, 1.2F,
                 Arrays.asList(new StatMod(10, 30, Stats.CRIT_CHANCE.get(), ModType.FLAT)
@@ -263,15 +272,15 @@ public class SupportGems {
         new SupportGem("rare_cooldown", "Greater Cooldown", PlayStyle.INT, 1.2F,
                 Arrays.asList(new StatMod(15, 50, Stats.COOLDOWN_REDUCTION.get(), ModType.FLAT)
                 )).edit(x -> {
-            x.weight = 50;
-        })
+                    x.weight = 50;
+                })
                 .levelReq(30).addToSerializables();
 
         new SupportGem("rare_mana_eff", "Greater Mana Cost", PlayStyle.STR, 1,
                 Arrays.asList(new StatMod(-15, -50, Stats.MANA_COST.get(), ModType.FLAT)
                 )).edit(x -> {
-            x.weight = 50;
-        })
+                    x.weight = 50;
+                })
                 .levelReq(30).addToSerializables();
 
 

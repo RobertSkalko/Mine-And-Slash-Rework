@@ -33,6 +33,8 @@ arrow_totem
 poisonball
 despair
 petrify
+ritardando
+lightning_totem
 breath
 nature_balm
 black_hole

@@ -6,7 +6,7 @@
   "max_lvls": 8,
   "stats": [
     {
-      "type": "PERCENT",
+      "type": "FLAT",
       "scale_to_lvl": false,
       "stat": "block_chance",
       "v1": 3.0

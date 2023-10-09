@@ -52,12 +52,12 @@ public class LearnClassPointButton extends ImageButton {
         Minecraft mc = Minecraft.getInstance();
 
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-        if (perk.stats.isEmpty()) {
+        if (perk.isSpell()) {
             gui.blit(SPELL_SLOT, getX(), getY(), BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X);
         } else {
             gui.blit(PASSIVE, getX(), getY(), BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X);
         }
-        
+
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
         gui.blit(perk.getIcon(), getX() + 1, getY() + 1, 16, 16, 16, 16, 16, 16);
 

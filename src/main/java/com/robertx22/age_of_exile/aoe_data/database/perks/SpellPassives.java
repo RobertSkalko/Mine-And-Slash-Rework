@@ -8,7 +8,6 @@ import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
 import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDuration;
-import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.ArmorPenetration;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.BlockChance;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
@@ -24,10 +23,8 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaR
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.age_of_exile.database.data.stats.types.summon.GolemSpellChance;
 import com.robertx22.age_of_exile.database.data.stats.types.summon.SummonHealth;
-import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
-
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
 public class SpellPassives implements ExileRegistryInit {
@@ -107,8 +104,8 @@ public class SpellPassives implements ExileRegistryInit {
         PerkBuilder.passive(CAST_SPEED_WL, 8, new OptScaleExactStat(2, Stats.CAST_SPEED.get(), ModType.FLAT));
         PerkBuilder.passive(SUMMON_DMG, 8, new OptScaleExactStat(2, Stats.SUMMON_DAMAGE.get(), ModType.FLAT));
         PerkBuilder.passive(DMG_TO_CURSED, 8, new OptScaleExactStat(4, Stats.DAMAGE_TO_CURSED.get(), ModType.FLAT));
-        PerkBuilder.passive(SPELL_LIFESTEAL, 8, new OptScaleExactStat(2, Stats.SPELL_LIFESTEAL.get(), ModType.FLAT));
-        PerkBuilder.passive(DOT_LIFESTEAL, 8, new OptScaleExactStat(3, Stats.DOT_LIFESTEAL.get(), ModType.FLAT));
+        PerkBuilder.passive(SPELL_LIFESTEAL, 8, new OptScaleExactStat(1, Stats.SPELL_LIFESTEAL.get(), ModType.FLAT));
+        PerkBuilder.passive(DOT_LIFESTEAL, 8, new OptScaleExactStat(2, Stats.DOT_LIFESTEAL.get(), ModType.FLAT));
 
         // Minstrel
         PerkBuilder.passive(HEALTH_MINS, 8, new OptScaleExactStat(3, Health.getInstance(), ModType.PERCENT));
@@ -145,9 +142,9 @@ public class SpellPassives implements ExileRegistryInit {
         PerkBuilder.passive(HEALTH_REGEN, 8, new OptScaleExactStat(4, HealthRegen.getInstance(), ModType.PERCENT));
         PerkBuilder.passive(CRIT_HIT, 8, new OptScaleExactStat(1, Stats.CRIT_CHANCE.get()));
         PerkBuilder.passive(DAMAGE_RECEIVED, 8, new OptScaleExactStat(-1.5f, Stats.DAMAGE_RECEIVED.get()));
-        PerkBuilder.passive(AURA_EFFECT, 8, new OptScaleExactStat(4, AuraEffect.getInstance(), ModType.PERCENT));
-        PerkBuilder.passive(BLOCK_CHANCE, 8, new OptScaleExactStat(3, BlockChance.getInstance(), ModType.PERCENT));
-        PerkBuilder.passive(LIFESTEAL, 8, new OptScaleExactStat(2, Stats.LIFESTEAL.get(), ModType.FLAT));
+        PerkBuilder.passive(AURA_EFFECT, 8, new OptScaleExactStat(4, AuraEffect.getInstance(), ModType.FLAT));
+        PerkBuilder.passive(BLOCK_CHANCE, 8, new OptScaleExactStat(3, BlockChance.getInstance(), ModType.FLAT));
+        PerkBuilder.passive(LIFESTEAL, 8, new OptScaleExactStat(1, Stats.LIFESTEAL.get(), ModType.FLAT));
         PerkBuilder.passive(ARMOR_PEN, 8, new OptScaleExactStat(3, ArmorPenetration.getInstance()));
     }
 }

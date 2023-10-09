@@ -107,14 +107,14 @@ public class AscendancyClassesData implements IStatCtx {
     public List<StatContext> getStatAndContext(LivingEntity en) {
         List<ExactStatData> stats = new ArrayList<>();
         for (Map.Entry<String, Integer> s : this.allocated_lvls.entrySet()) {
-            for (OptScaleExactStat stat : ExileDB.Perks().get(s.getKey()).stats) {
-                var data = stat.toExactStat(Load.Unit(en).getLevel());
-                data.percentIncrease = (s.getValue() - 1) * 100;
-                data.increaseByAddedPercent();
-                stats.add(data);
+            if (ExileDB.Perks().isRegistered(s.getKey())) {
+                for (OptScaleExactStat stat : ExileDB.Perks().get(s.getKey()).stats) {
+                    var data = stat.toExactStat(Load.Unit(en).getLevel());
+                    data.percentIncrease = (s.getValue() - 1) * 100;
+                    data.increaseByAddedPercent();
+                    stats.add(data);
+                }
             }
-
-
         }
         return Arrays.asList(new SimpleStatCtx(StatContext.StatCtxType.TALENT, stats));
     }

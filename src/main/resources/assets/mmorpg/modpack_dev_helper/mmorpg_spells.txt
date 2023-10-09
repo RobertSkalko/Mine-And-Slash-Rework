@@ -45,7 +45,9 @@ recoil_shot
 poison_ball
 teleport
 summon_zombie
+ritardando
 mage_circle
+lightning_totem
 return_summons
 summon_skeleton_army
 entangling_seed

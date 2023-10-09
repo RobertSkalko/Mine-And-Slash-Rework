@@ -45,5 +45,6 @@ burn_chance
 rare_cooldown
 fire_pene
 small_cdr
+summon_health
 crit_dmg_less_non_crit_dmg
 crit_chance
