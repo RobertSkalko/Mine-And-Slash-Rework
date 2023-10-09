@@ -13,6 +13,8 @@ public class CurrencyItems {
 
     public static void init() {
 
+        Currencies.init();
+        
         for (Currency cur : Currencies.ALL) {
             currency(() -> new CurrencyItem(cur), cur.GUID());
         }

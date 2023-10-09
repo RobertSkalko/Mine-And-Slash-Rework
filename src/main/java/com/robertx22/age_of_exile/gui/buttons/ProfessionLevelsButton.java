@@ -53,7 +53,11 @@ public class ProfessionLevelsButton extends ImageButton {
             int exp = Load.player(ClientOnly.getPlayer()).professions.getExp(prof.GUID());
             int maxexp = Load.player(ClientOnly.getPlayer()).professions.getMaxExp(prof.GUID());
 
-            list.add(prof.locName().append(":").withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD));
+            var name = prof.locName().append(":").withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD);
+            if (Load.player(ClientOnly.getPlayer()).professions.getLevel(prof.GUID()) >= Load.Unit(ClientOnly.getPlayer()).getLevel()) {
+                name.append(" [Capped to your LVL!]").withStyle(ChatFormatting.RED);
+            }
+            list.add(name);
 
             list.add(TooltipUtils.level(lvl).append(" Exp: " + exp + "/" + maxexp).withStyle(ChatFormatting.GREEN));
 

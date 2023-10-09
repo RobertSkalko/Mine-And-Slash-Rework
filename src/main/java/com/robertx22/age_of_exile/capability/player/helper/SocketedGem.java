@@ -52,6 +52,14 @@ public class SocketedGem {
         boolean toomany = false;
 
         for (SkillGemData data : this.getSupportDatas()) {
+            if (data.getSupport() == null) {
+                continue;
+            }
+            map.put(data.getSupport().id, map.getOrDefault(data.getSupport().id, 0) + 1);
+            if (map.get(data.getSupport().id) > 1) {
+                toomany = true;
+                break;
+            }
             if (data.getSupport().isOneOfAKind()) {
                 String id = data.getSupport().one_of_a_kind;
                 map.put(id, map.getOrDefault(id, 0) + 1);
