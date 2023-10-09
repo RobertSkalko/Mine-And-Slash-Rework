@@ -79,6 +79,7 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
         // dps, buffer, healer
         SchoolBuilder.of("minstrel", "Minstrel")
                 .add(SongSpells.POWER_CHORD, new PointData(1, 0))
+                .add(SongSpells.RITARDANDO, new PointData(1, 3))
                 .add(SongSpells.RESONANCE, new PointData(1, 5))
 
                 .add(HolySpells.HYMN_OF_VIGOR, new PointData(3, 0))

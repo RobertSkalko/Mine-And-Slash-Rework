@@ -107,7 +107,7 @@ public class LightningSpells implements ExileRegistryInit {
 
                 .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.ELECTRIC_SPARK, 20D, 1.5D, 0.2D))
                 .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.POOF, 5D, 1.5D, 0.2D))
-                .onTick("block", PartBuilder.playSound(SoundEvents.TRIDENT_THUNDER, 0.75D, 1D).tickRequirement(20D))
+                .onTick("block", PartBuilder.playSound(SoundEvents.FIRE_EXTINGUISH, 0.75D, 1D).tickRequirement(20D))
 
                 .onTick("block", PartBuilder.damageInAoe(SpellCalcs.LIGHTNING_TOTEM, Elements.Lightning, 6D).tickRequirement(20D)
                         .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.ELECTRIC_SPARK, 75D, 1.5D, 0.1D))
