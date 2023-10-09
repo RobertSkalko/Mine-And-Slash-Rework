@@ -22,7 +22,7 @@ public class EntityStatusEffectsData {
 
 
     public ExileEffectInstanceData get(ExileStatusEffect eff) {
-        return exileMap.getOrDefault(eff.GUID(), null);
+        return exileMap.getOrDefault(eff.GUID(), new ExileEffectInstanceData());
     }
 
     public void set(ExileStatusEffect eff, ExileEffectInstanceData data) {
