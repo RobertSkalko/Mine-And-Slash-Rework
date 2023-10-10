@@ -94,7 +94,7 @@ public class CraftedJewelAffixes implements ExileRegistryInit {
                 .Build();
 
         AffixBuilder.Normal(PREFIX + "critdmg")
-                .stat(Stats.CRIT_CHANCE.get().mod(10, 25))
+                .stat(Stats.CRIT_DAMAGE.get().mod(10, 25))
                 .includesTags(BaseGearType.SlotTag.crafted_jewel_unique)
                 .Weight(1000)
                 .Suffix()

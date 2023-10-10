@@ -8,10 +8,10 @@ public class RestedExpData {
     public int bonusCombatExp = 0;
 
     public void onGiveCombatExp(int give) {
-        bonusProfExp += give * ServerContainer.get().COMBAT_PROFESSION_RESTED_XP_GENERATION.get();
+        bonusProfExp += give * ServerContainer.get().COMBAT_TO_PROFESSION_RESTED_XP_GENERATION.get();
     }
 
     public void onGiveProfExp(int give) {
-        bonusCombatExp += give * ServerContainer.get().COMBAT_PROFESSION_RESTED_XP_GENERATION.get();
+        bonusCombatExp += give * ServerContainer.get().PROFESSION_TO_COMBAT_RESTED_XP_GENERATION.get();
     }
 }

@@ -77,34 +77,46 @@ public class ProfessionBlockEntity extends BlockEntity {
                 Player p = getOwner(level);
 
                 if (p != null) {
-
                     if (this.inventory.getInventory(INPUTS).isEmpty()) {
                         return;
                     }
 
                     cooldown -= tickRate;
 
-                    var rec = tryRecipe(p, true);
+                    if (getProfession().GUID().equals(Professions.SALVAGING)) {
+                        if (trySalvage(p, true).can) {
+                            craftingTicks += tickRate;
 
-                    if (!rec.can) {
-                        if (cooldown < 1) {
-                            if (p.containerMenu instanceof CraftingStationMenu && p.blockPosition().distManhattan(getBlockPos()) < 5) {
-                                p.sendSystemMessage(rec.answer);
-                                cooldown = 20 * 10;
+                            if (craftingTicks > 100) {
+                                craftingTicks = 0;
+                                trySalvage(p, false);
+                                SoundUtils.playSound(level, getBlockPos(), SoundEvents.ANVIL_DESTROY);
                             }
-                        }
-                    }
-                    if (rec.can || trySalvage(p, true).can) {
-                        craftingTicks += tickRate;
-
-                        if (craftingTicks > 100) {
-                            craftingTicks = 0;
-                            tryRecipe(p, false);
-                            trySalvage(p, false);
-                            SoundUtils.playSound(level, getBlockPos(), SoundEvents.ANVIL_DESTROY);
+                        } else {
+                            show.clearContent();
                         }
                     } else {
-                        show.clearContent();
+                        var rec = tryRecipe(p, true);
+
+                        if (!rec.can) {
+                            if (cooldown < 1) {
+                                if (p.containerMenu instanceof CraftingStationMenu && p.blockPosition().distManhattan(getBlockPos()) < 5) {
+                                    p.sendSystemMessage(rec.answer);
+                                    cooldown = 20 * 10;
+                                }
+                            }
+                        }
+                        if (rec.can) {
+                            craftingTicks += tickRate;
+
+                            if (craftingTicks > 100) {
+                                craftingTicks = 0;
+                                tryRecipe(p, false);
+                                SoundUtils.playSound(level, getBlockPos(), SoundEvents.ANVIL_DESTROY);
+                            }
+                        } else {
+                            show.clearContent();
+                        }
                     }
                 }
 
@@ -118,6 +130,7 @@ public class ProfessionBlockEntity extends BlockEntity {
     }
 
     public ExplainedResult tryRecipe(Player p, boolean justCheck) {
+
 
         int ownerLvl = Load.player(p).professions.getLevel(getProfession().GUID());
 
@@ -187,6 +200,7 @@ public class ProfessionBlockEntity extends BlockEntity {
                             for (ItemStack res : sal.getSalvageResult(stack)) {
                                 this.inventory.addStack(OUTPUTS, res);
                             }
+                            this.addExp(data.getSalvageExpReward());
 
                             float multi = data.getRarity().item_value_multi;
 

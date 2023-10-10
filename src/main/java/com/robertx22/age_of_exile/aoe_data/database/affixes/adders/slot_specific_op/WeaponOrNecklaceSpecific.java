@@ -12,7 +12,7 @@ public class WeaponOrNecklaceSpecific implements ExileRegistryInit {
     public void registerAll() {
         AffixBuilder.Normal("precise")
                 .Named("Precise")
-                .stats(new StatMod(4, 30, Stats.CRIT_CHANCE.get(), ModType.FLAT))
+                .stats(new StatMod(4, 20, Stats.CRIT_CHANCE.get(), ModType.FLAT))
                 .includesTags(SlotTag.necklace, SlotTag.weapon_family)
                 .Prefix()
                 .Build();
@@ -25,7 +25,7 @@ public class WeaponOrNecklaceSpecific implements ExileRegistryInit {
 
         AffixBuilder.Normal("focused")
                 .Named("Focused")
-                .stats(new StatMod(4, 30, Stats.CRIT_CHANCE.get(), ModType.FLAT))
+                .stats(new StatMod(4, 20, Stats.CRIT_CHANCE.get(), ModType.FLAT))
                 .includesTags(SlotTag.necklace, SlotTag.mage_weapon)
                 .Prefix()
                 .Build();

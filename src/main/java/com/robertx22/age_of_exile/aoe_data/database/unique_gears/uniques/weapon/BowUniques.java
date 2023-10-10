@@ -13,13 +13,13 @@ import java.util.Arrays;
 public class BowUniques implements ExileRegistryInit {
     @Override
     public void registerAll() {
-        
+
         UniqueGearBuilder.of("critical_impossibility", "Critical Impossibility", BaseGearTypes.BOW)
                 .setReplacesName()
                 .stats(Arrays.asList(
-                        new StatMod(-150, 150, GearDamage.getInstance(), ModType.PERCENT),
-                        new StatMod(-100, -100, Stats.CRIT_CHANCE.get(), ModType.FLAT),
-                        new StatMod(100, 250, Stats.CRIT_DAMAGE.get(), ModType.FLAT)))
+                        new StatMod(50, 150, GearDamage.getInstance(), ModType.PERCENT),
+                        new StatMod(-50, -50, Stats.CRIT_CHANCE.get(), ModType.FLAT),
+                        new StatMod(50, 200, Stats.CRIT_DAMAGE.get(), ModType.FLAT)))
                 .build();
     }
 }

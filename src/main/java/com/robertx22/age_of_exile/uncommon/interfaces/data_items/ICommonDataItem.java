@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.uncommon.interfaces.data_items;
 
+import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ITooltip;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.Rarity;
 import com.robertx22.library_of_exile.utils.AllItemStackSavers;
@@ -14,6 +15,11 @@ public interface ICommonDataItem<R extends Rarity> extends ISalvagable, ITooltip
     }
 
     public int getLevel();
+
+    public default int getSalvageExpReward() {
+        GearRarity rar = getRarity();
+        return (int) (30 * rar.item_tier_power * getLevel());
+    }
 
     ItemstackDataSaver<? extends ICommonDataItem> getStackSaver();
 

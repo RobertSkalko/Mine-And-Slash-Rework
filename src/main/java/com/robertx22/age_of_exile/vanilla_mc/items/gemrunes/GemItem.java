@@ -330,7 +330,7 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocN
 
             @Override
             public List<StatMod> onJewelry() {
-                return Arrays.asList(new StatMod(1, 6, Stats.CRIT_CHANCE.get()));
+                return Arrays.asList(new StatMod(1, 5, Stats.CRIT_CHANCE.get()));
             }
 
             @Override
@@ -367,7 +367,7 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocN
 
             @Override
             public List<StatMod> onWeapons() {
-                return Arrays.asList(new StatMod(2, 10, Stats.CRIT_DAMAGE.get()));
+                return Arrays.asList(new StatMod(5, 25, Stats.CRIT_DAMAGE.get()));
             }
         }),
         RUBY("ruby", "Ruby", ChatFormatting.RED, new EleGem(Elements.Fire)),

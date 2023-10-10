@@ -88,8 +88,8 @@ public class SpellPassives implements ExileRegistryInit {
     public void registerAll() {
 
         // Sorcerer
-        PerkBuilder.passive(FREEZE_CHANCE, 8, new OptScaleExactStat(6, new AilmentChance(Ailments.FREEZE)));
-        PerkBuilder.passive(BURN_CHANCE, 8, new OptScaleExactStat(6, new AilmentChance(Ailments.BURN)));
+        PerkBuilder.passive(FREEZE_CHANCE, 8, new OptScaleExactStat(4, new AilmentChance(Ailments.FREEZE)));
+        PerkBuilder.passive(BURN_CHANCE, 8, new OptScaleExactStat(4, new AilmentChance(Ailments.BURN)));
         PerkBuilder.passive(MANA_REGEN, 8, new OptScaleExactStat(4, ManaRegen.getInstance(), ModType.PERCENT));
         PerkBuilder.passive(SPELL_DMG, 8, new OptScaleExactStat(2, SkillDamage.getInstance(), ModType.FLAT));
         PerkBuilder.passive(MAGIC_SHIELD_REGEN, 8, new OptScaleExactStat(5, MagicShieldRegen.getInstance(), ModType.PERCENT));
@@ -98,7 +98,7 @@ public class SpellPassives implements ExileRegistryInit {
         PerkBuilder.passive(GOLEM_CHANCE, 8, new OptScaleExactStat(6, GolemSpellChance.getInstance(), ModType.FLAT));
 
         // Warlock
-        PerkBuilder.passive(POISON_CHANCE, 8, new OptScaleExactStat(6, new AilmentChance(Ailments.POISON)));
+        PerkBuilder.passive(POISON_CHANCE, 8, new OptScaleExactStat(4, new AilmentChance(Ailments.POISON)));
         PerkBuilder.passive(POISON_DURATION, 8, new OptScaleExactStat(6, new AilmentDuration(Ailments.POISON)));
         PerkBuilder.passive(DOT_DMG, 8, new OptScaleExactStat(3, Stats.DOT_DAMAGE.get(), ModType.FLAT));
         PerkBuilder.passive(CAST_SPEED_WL, 8, new OptScaleExactStat(2, Stats.CAST_SPEED.get(), ModType.FLAT));
@@ -133,7 +133,7 @@ public class SpellPassives implements ExileRegistryInit {
         PerkBuilder.passive(ELE_PEN, 8, new OptScaleExactStat(2, new ElementalPenetration(Elements.Elemental)));
         PerkBuilder.passive(LIGHTNING_ELE, 8, new OptScaleExactStat(2, Stats.ELEMENTAL_DAMAGE.get(Elements.Lightning)));
         PerkBuilder.passive(ARMOR_PER_MANA, 8, new OptScaleExactStat(0.2f, DatapackStats.ARMOR_PER_MANA));
-        PerkBuilder.passive(ELECTRIFY_CHANCE, 8, new OptScaleExactStat(6, new AilmentChance(Ailments.ELECTRIFY)));
+        PerkBuilder.passive(ELECTRIFY_CHANCE, 8, new OptScaleExactStat(4, new AilmentChance(Ailments.ELECTRIFY)));
         PerkBuilder.passive(TOTEM_DMG, 8, new OptScaleExactStat(5, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.totem), ModType.FLAT));
         PerkBuilder.passive(TOTEM_CDR, 8, new OptScaleExactStat(3, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTag.totem), ModType.FLAT));
 
