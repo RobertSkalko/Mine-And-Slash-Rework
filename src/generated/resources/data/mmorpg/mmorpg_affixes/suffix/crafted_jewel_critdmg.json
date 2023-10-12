@@ -17,7 +17,7 @@
       "type": "FLAT",
       "max": 25.0,
       "min": 10.0,
-      "stat": "critical_hit"
+      "stat": "critical_damage"
     }
   ],
   "weight": 1000

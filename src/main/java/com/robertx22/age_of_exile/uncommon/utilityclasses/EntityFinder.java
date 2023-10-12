@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 public class EntityFinder {
 
@@ -105,6 +106,7 @@ public class EntityFinder {
 
     public static class Setup<T extends LivingEntity> {
 
+        Predicate<T> pred = x -> true;
         List<T> excluded = new ArrayList<>();
         Class<T> entityType;
         SelectionType selectionType = SelectionType.RADIUS;
@@ -146,6 +148,7 @@ public class EntityFinder {
 
             list.removeIf(x -> !x.isAlive());
             list.removeIf(x -> excluded.contains(x));
+            list.removeIf(x -> !pred.test(x));
 
             return list;
 
@@ -162,6 +165,11 @@ public class EntityFinder {
 
         public Setup<T> finder(SelectionType f) {
             this.selectionType = f;
+            return this;
+        }
+
+        public Setup<T> predicate(Predicate<T> p) {
+            this.pred = p;
             return this;
         }
 

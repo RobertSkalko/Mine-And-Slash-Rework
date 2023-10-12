@@ -31,7 +31,7 @@ public class DamageAction extends SpellAction {
 
             int value = calc.getCalculatedValue(ctx.caster, ctx.calculatedSpellData.getSpell());
 
-            
+
             for (LivingEntity t : targets) {
 
                 if (t == null) {
@@ -42,6 +42,9 @@ public class DamageAction extends SpellAction {
                         .build();
                 if (data.has(MapField.DMG_EFFECT_TYPE)) {
                     dmg.data.setString(EventData.ATTACK_TYPE, data.getDmgEffectType().name());
+                }
+                if (data.getOrDefault(MapField.DISABLE_KNOCKBACK, false)) {
+                    dmg.data.setBoolean(EventData.DISABLE_KNOCKBACK, true);
                 }
                 dmg.setElement(ele);
                 dmg.Activate();

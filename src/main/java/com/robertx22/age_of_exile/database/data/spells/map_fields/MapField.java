@@ -81,6 +81,7 @@ public class MapField<T> implements IGUID {
     public static MapField<Boolean> HITS_ALLIES = make("hits_allies");
     public static MapField<Boolean> IGNORE_Y = make("ignore_y");
     public static MapField<Boolean> TRACKS_ENEMIES = make("tracks_enemies");
+    public static MapField<Boolean> DISABLE_KNOCKBACK = make("disable_knockback");
 
     public static MapField<List<String>> ENTITY_PREDICATES = make("entity_predicates");
 

@@ -67,6 +67,7 @@
             {
               "type": "damage",
               "map": {
+                "disable_knockback": true,
                 "element": "Lightning",
                 "value_calculation": "lightning_totem"
               }

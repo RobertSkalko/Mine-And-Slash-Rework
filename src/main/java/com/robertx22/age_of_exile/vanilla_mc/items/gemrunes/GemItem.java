@@ -118,24 +118,28 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocN
 
                     ItemStack newstack = new ItemStack(gem.getHigherTierGem().getItem());
 
-                    Item old = stack.getItem();
-
-                    stack.shrink(3);
-
-                    if (success) {
-                        p.displayClientMessage(Component.literal(ChatFormatting.GREEN + "").append(new ItemStack(old).getHoverName())
-                                .append(" has been upgraded to ")
-                                .append(newstack.getHoverName()), false);
-
-                        PlayerUtils.giveItem(newstack, p);
-                        Packets.sendToClient(p, new TotemAnimationPacket(newstack));
+                    if (!newstack.isEmpty()) {
+                        Item old = stack.getItem();
 
 
-                    } else {
-                        SoundUtils.playSound(p, SoundEvents.VILLAGER_NO, 1, 1);
+                        if (success) {
+                            p.displayClientMessage(Component.literal(ChatFormatting.GREEN + "").append(new ItemStack(old).getHoverName())
+                                    .append(" has been upgraded to ")
+                                    .append(newstack.getHoverName()), false);
 
-                        p.displayClientMessage(Component.literal(ChatFormatting.RED + "").append(new ItemStack(old).getHoverName())
-                                .append(" has failed the upgrade and was destroyed."), false);
+                            PlayerUtils.giveItem(newstack, p);
+                            Packets.sendToClient(p, new TotemAnimationPacket(new ItemStack(newstack.getItem())));
+
+
+                        } else {
+                            SoundUtils.playSound(p, SoundEvents.VILLAGER_NO, 1, 1);
+
+                            p.displayClientMessage(Component.literal(ChatFormatting.RED + "").append(new ItemStack(old).getHoverName())
+                                    .append(" has failed the upgrade and was destroyed."), false);
+                        }
+                        
+                        stack.shrink(3);
+
                     }
                 }
             }

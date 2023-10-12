@@ -24,7 +24,7 @@
       "type": "FLAT",
       "scale_to_lvl": true,
       "stat": "critical_damage",
-      "v1": 8.0
+      "v1": 20.0
     }
   ],
   "perc_upgrade_chance": 5,

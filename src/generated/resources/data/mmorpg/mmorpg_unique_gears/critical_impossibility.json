@@ -7,19 +7,19 @@
     {
       "type": "percent",
       "max": 150.0,
-      "min": -150.0,
+      "min": 50.0,
       "stat": "gear_weapon_damage"
     },
     {
       "type": "flat",
-      "max": -100.0,
-      "min": -100.0,
+      "max": -50.0,
+      "min": -50.0,
       "stat": "critical_hit"
     },
     {
       "type": "flat",
-      "max": 250.0,
-      "min": 100.0,
+      "max": 200.0,
+      "min": 50.0,
       "stat": "critical_damage"
     }
   ],

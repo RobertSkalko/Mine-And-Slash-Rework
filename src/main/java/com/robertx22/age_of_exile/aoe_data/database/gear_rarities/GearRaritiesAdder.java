@@ -141,7 +141,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity unique = new GearRarity().edit(x -> {
-            x.mob = MobRarity.of(50, 10, 3);
+            x.mob = MobRarity.of(25, 10, 3);
             x.max_sockets = 3;
             x.socket_chance = 20;
             x.pot = new GearRarity.Potential(100, 1);

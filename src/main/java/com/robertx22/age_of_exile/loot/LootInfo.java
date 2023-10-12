@@ -253,6 +253,7 @@ public class LootInfo {
 
         if (this.isMapWorld) {
             multis.add(this.map.map.getBonusLootMulti());
+
         }
 
         float additiveMod = 1;

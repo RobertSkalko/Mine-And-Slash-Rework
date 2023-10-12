@@ -31,3 +31,7 @@ Depending on the ratio of per swing vs per mob costs the weapon can be either go
 In this case the summon health stat gives summons the normal health stat
 
 - summon spells now have innate summon hp and dmg stats per level
+
+v.5.3.1
+
+- try to make arrow totems only target visible enemies.

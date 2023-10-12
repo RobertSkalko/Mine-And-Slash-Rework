@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.conditions.Eff
 import com.robertx22.age_of_exile.database.data.spells.components.entity_predicates.SpellEntityPredicate;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.BaseTargetSelector;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
+import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -32,6 +33,16 @@ public class ComponentPart {
 
     public ComponentPart enemiesInRadius(Double radius) {
         targets.add(TargetSelector.AOE.enemiesInRadius(radius));
+        return this;
+    }
+
+    public ComponentPart disableKnockback() {
+        for (MapHolder act : acts) {
+            if (act.type.equals(SpellAction.DEAL_DAMAGE.GUID())) {
+                act.put(MapField.DISABLE_KNOCKBACK, true);
+            }
+        }
+
         return this;
     }
 

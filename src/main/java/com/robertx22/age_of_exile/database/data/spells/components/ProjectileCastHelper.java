@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.spells.components;
 
+import com.robertx22.age_of_exile.database.data.spells.components.selectors.AoeSelector;
 import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellUtils;
@@ -114,6 +115,7 @@ public class ProjectileCastHelper {
                 EntityFinder.Setup<LivingEntity> finder = EntityFinder.start(caster, LivingEntity.class, pos)
                         .finder(EntityFinder.SelectionType.RADIUS)
                         .searchFor(AllyOrEnemy.enemies)
+                        .predicate(x -> AoeSelector.canHit(ctx.getPos(), x))
                         .radius(15);
 
 

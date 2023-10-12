@@ -16,7 +16,7 @@
       "type": "FLAT",
       "scale_to_lvl": true,
       "stat": "critical_hit",
-      "v1": 1.8000001
+      "v1": 1.5
     }
   ],
   "on_weapons_stats": [
