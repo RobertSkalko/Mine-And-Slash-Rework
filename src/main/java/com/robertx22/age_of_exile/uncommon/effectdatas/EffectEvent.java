@@ -64,6 +64,11 @@ public abstract class EffectEvent implements IGUID {
 
     }
 
+
+    public boolean canWorkOnDeadTarget() {
+        return false;
+    }
+
     public void increaseByPercent(float perc) {
         increaseByPercent(EventData.NUMBER, perc);
     }
@@ -74,9 +79,12 @@ public abstract class EffectEvent implements IGUID {
 
     public void Activate() {
         if (!activated) {
+
             if (this.source.isDeadOrDying() || target.isDeadOrDying()) {
-                this.activated = true;
-                return;
+                if (!canWorkOnDeadTarget()) {
+                    this.activated = true;
+                    return;
+                }
             }
 
 

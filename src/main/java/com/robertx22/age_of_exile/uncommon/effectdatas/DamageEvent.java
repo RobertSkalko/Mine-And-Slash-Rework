@@ -14,6 +14,7 @@ import com.robertx22.age_of_exile.mixin_ducks.ProjectileEntityDuck;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.DeathStatsData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
@@ -390,8 +391,12 @@ public class DamageEvent extends EffectEvent {
         }
 
         if (this.target.isDeadOrDying()) {
-            OnMobKilledByDamageEvent event = new OnMobKilledByDamageEvent(this);
-            event.Activate();
+            if (!Load.Unit(target).getCooldowns().isOnCooldown("death")) {
+                // make absolutely sure this isn't called twice somehow
+                Load.Unit(target).getCooldowns().setOnCooldown("death", Integer.MAX_VALUE);
+                OnMobKilledByDamageEvent event = new OnMobKilledByDamageEvent(this);
+                event.Activate();
+            }
         }
 
         if (dmg > 0) {

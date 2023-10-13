@@ -119,7 +119,7 @@ public class Backpacks {
             BackpackInventory inv = getInv(type);
             //inv.throwOutBlockedSlotItems(rows * 9);
             p.openMenu(new SimpleMenuProvider((i, playerInventory, playerEntity) -> {
-                return new BackpackMenu(i, playerInventory, inv, rows);
+                return new BackpackMenu(type, i, playerInventory, inv, rows);
             }, Component.literal("")));
         }
     }

@@ -34,7 +34,8 @@ import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
 public class Perks implements ExileRegistryInit {
 
-    
+    public static String UNKNOWN_ID = "unknown";
+
     @Override
     public void registerAll() {
 
@@ -46,7 +47,7 @@ public class Perks implements ExileRegistryInit {
             PerkBuilder.spell(spell.GUID());
         }
 
-        PerkBuilder.stat(new OptScaleExactStat(1, new UnknownStat(), ModType.FLAT));
+        PerkBuilder.stat(UNKNOWN_ID, new OptScaleExactStat(1, new UnknownStat(), ModType.FLAT));
 
 
         PerkBuilder.stat("int", new OptScaleExactStat(1, DatapackStats.INT, ModType.FLAT));

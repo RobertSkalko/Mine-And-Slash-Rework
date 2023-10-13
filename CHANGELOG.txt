@@ -35,3 +35,13 @@ In this case the summon health stat gives summons the normal health stat
 v.5.3.1
 
 - try to make arrow totems only target visible enemies.
+
+- fixed backpack slots
+
+- summons now have cast time, summon skeleton is no longer an ultimate (summoners need a ranged attack too)
+
+- fixed resource on kill stats
+
+- michu improved some dungeons to be less harsh
+
+- mana cost is now capped to -75% max

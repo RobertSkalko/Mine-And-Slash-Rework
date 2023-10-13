@@ -89,7 +89,7 @@
   },
   "config": {
     "apply_cast_speed_to_cd": false,
-    "cast_time_ticks": 0,
+    "cast_time_ticks": 40,
     "castingWeapon": "ANY_WEAPON",
     "charge_name": "",
     "charge_regen": 0,

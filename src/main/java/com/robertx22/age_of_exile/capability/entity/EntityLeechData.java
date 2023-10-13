@@ -29,16 +29,18 @@ public class EntityLeechData {
 
             float num = entry.getValue();
 
-            float maxres = data.getResources().getMax(data.entity, entry.getKey());
+            if (num > 1) {
+                float maxres = data.getResources().getMax(data.entity, entry.getKey());
 
-            float max = leechMaxPerSec * maxres;
+                float max = leechMaxPerSec * maxres;
 
-            if (num > max) {
-                num = max;
+                if (num > max) {
+                    num = max;
+                }
+
+                addLeech(entry.getKey(), -num);
+                data.getResources().restore(data.entity, entry.getKey(), num);
             }
-
-            addLeech(entry.getKey(), -num);
-            data.getResources().restore(data.entity, entry.getKey(), num);
         }
 
 

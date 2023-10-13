@@ -19,6 +19,11 @@ public class OnMobKilledByDamageEvent extends EffectEvent {
     }
 
     @Override
+    public boolean canWorkOnDeadTarget() {
+        return true;
+    }
+
+    @Override
     protected void activate() {
 
     }
