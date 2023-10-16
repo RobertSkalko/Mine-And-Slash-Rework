@@ -10,7 +10,6 @@ import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEnti
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
-import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import net.minecraft.server.level.ServerLevel;
@@ -59,8 +58,9 @@ public class SummonPetAction extends SpellAction {
 
             Load.Unit(en).summonedPetData.setup(ctx.calculatedSpellData.getSpell(), duration);
 
+            String rarid = ctx.calculatedSpellData.getSpell().getSummonRarityPerLevel((Player) ctx.caster);
 
-            GearRarity rar = ExileDB.GearRarities().get(IRarity.RARE_ID);
+            GearRarity rar = ExileDB.GearRarities().get(rarid);
 
             Load.Unit(en).SetMobLevelAtSpawn((Player) ctx.caster);
 

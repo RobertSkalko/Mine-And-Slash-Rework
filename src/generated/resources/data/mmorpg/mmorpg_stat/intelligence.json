@@ -6,12 +6,12 @@
         {
           "type": "FLAT",
           "stat": "mana",
-          "v1": 5.0
+          "v1": 10.0
         },
         {
           "type": "FLAT",
           "stat": "mana_regen",
-          "v1": 0.1
+          "v1": 0.2
         },
         {
           "type": "PERCENT",

@@ -21,6 +21,7 @@ hunter_pot_heal
 shout_warn
 shooting_star
 ranger_trap
+resonance
 execute
 poison_cloud
 gong_strike

@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
 import com.robertx22.age_of_exile.uncommon.effectdatas.ExilePotionEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
+import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.world.entity.LivingEntity;
 
 import java.util.Arrays;
@@ -36,18 +37,22 @@ public class ExileEffectAction extends SpellAction {
             int duration = data.get(POTION_DURATION)
                     .intValue();
 
+            float chance = data.getOrDefault(CHANCE, 100D).floatValue();
+            
             targets.forEach(t -> {
 
-                ExilePotionEvent potionEvent = EventBuilder.ofEffect(ctx.calculatedSpellData, ctx.caster, t, Load.Unit(ctx.caster)
-                                .getLevel(), potion, com.robertx22.age_of_exile.uncommon.effectdatas.GiveOrTake.give, duration)
-                        .setSpell(ctx.calculatedSpellData.getSpell())
-                        .set(x -> x.data.getNumber(EventData.STACKS).number = count)
-                        .build();
+                if (RandomUtils.roll(chance)) {
+                    ExilePotionEvent potionEvent = EventBuilder.ofEffect(ctx.calculatedSpellData, ctx.caster, t, Load.Unit(ctx.caster)
+                                    .getLevel(), potion, com.robertx22.age_of_exile.uncommon.effectdatas.GiveOrTake.give, duration)
+                            .setSpell(ctx.calculatedSpellData.getSpell())
+                            .set(x -> x.data.getNumber(EventData.STACKS).number = count)
+                            .build();
 
-                potionEvent.spellid = ctx.calculatedSpellData.getSpell()
-                        .GUID();
+                    potionEvent.spellid = ctx.calculatedSpellData.getSpell()
+                            .GUID();
 
-                potionEvent.Activate();
+                    potionEvent.Activate();
+                }
 
             });
         } catch (Exception e) {

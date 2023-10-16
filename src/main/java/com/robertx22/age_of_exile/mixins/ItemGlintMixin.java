@@ -18,6 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(AbstractContainerScreen.class)
 public class ItemGlintMixin {
 
+
     @Inject(method = "renderSlot", at = @At(value = "HEAD"))
     private void drawMyGlint(GuiGraphics gui, Slot slot, CallbackInfo ci) {
 

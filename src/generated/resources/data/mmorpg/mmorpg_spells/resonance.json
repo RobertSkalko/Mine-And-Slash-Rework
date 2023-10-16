@@ -31,12 +31,13 @@
               "type": "damage",
               "map": {
                 "element": "Physical",
-                "value_calculation": "power_chord"
+                "value_calculation": "resonance"
               }
             },
             {
               "type": "exile_effect",
               "map": {
+                "chance": 10.0,
                 "count": 1.0,
                 "exile_potion_id": "negative/10",
                 "potion_action": "GIVE_STACKS",
@@ -68,7 +69,7 @@
               "type": "damage",
               "map": {
                 "element": "Physical",
-                "value_calculation": "power_chord"
+                "value_calculation": "resonance"
               }
             }
           ],

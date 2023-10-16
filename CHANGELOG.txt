@@ -45,3 +45,9 @@ v.5.3.1
 - michu improved some dungeons to be less harsh
 
 - mana cost is now capped to -75% max
+
+- made summon rarity scale with spell lvl
+
+- maps no longer give massive loot and xp bonuses because they already natively do that by having massive amount of mobs and chests.
+
+- ender pearls are no longer usable in maps.

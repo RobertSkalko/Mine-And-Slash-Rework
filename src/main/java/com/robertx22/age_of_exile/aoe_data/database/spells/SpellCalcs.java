@@ -109,6 +109,9 @@ public class SpellCalcs {
     public static ValueCalculation POWER_CHORD = ValueCalcBuilder.of("power_chord")
             .spellScaling(0.5F, 1F)
             .build();
+    public static ValueCalculation RESONANCE = ValueCalcBuilder.of("resonance")
+            .spellScaling(0.2F, 0.5F)
+            .build();
     public static ValueCalculation RITARDANDO = ValueCalcBuilder.of("ritardando")
             .spellScaling(1.0F, 2F)
             .build();

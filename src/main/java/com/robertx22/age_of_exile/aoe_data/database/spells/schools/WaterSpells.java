@@ -67,6 +67,7 @@ public class WaterSpells implements ExileRegistryInit {
                 .levelReq(20)
                 .build();
 
+        
         SpellBuilder.of(FROST_FLOWER, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 60)
                                 .setSwingArm(), "Frost Totem",
                         Arrays.asList(SpellTag.damage, SpellTag.area, SpellTag.totem))

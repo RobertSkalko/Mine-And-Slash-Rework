@@ -32,8 +32,8 @@ import java.util.UUID;
 public class DatapackStats implements ExileRegistryInit {
 
     public static Stat INT = new CoreStat("intelligence", "Intelligence", CoreStatData.of(Arrays.asList(
-            new OptScaleExactStat(5, Mana.getInstance(), ModType.FLAT),
-            new OptScaleExactStat(0.1F, ManaRegen.getInstance(), ModType.FLAT),
+            new OptScaleExactStat(10, Mana.getInstance(), ModType.FLAT),
+            new OptScaleExactStat(0.2F, ManaRegen.getInstance(), ModType.FLAT),
             new OptScaleExactStat(0.5F, MagicShield.getInstance(), ModType.PERCENT)
     )));
 
@@ -46,7 +46,7 @@ public class DatapackStats implements ExileRegistryInit {
     public static Stat DEX = new CoreStat("dexterity", "Dexterity", CoreStatData.of(Arrays.asList(
             new OptScaleExactStat(1, DodgeRating.getInstance(), ModType.PERCENT),
             new OptScaleExactStat(0.2F, EnergyRegen.getInstance(), ModType.FLAT),
-            new OptScaleExactStat(5, Energy.getInstance(), ModType.FLAT)
+            new OptScaleExactStat(10, Energy.getInstance(), ModType.FLAT)
     )));
 
 

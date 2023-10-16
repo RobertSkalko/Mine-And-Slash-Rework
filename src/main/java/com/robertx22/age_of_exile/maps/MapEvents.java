@@ -14,6 +14,7 @@ public class MapEvents {
 
     public static void init() {
 
+    
         ForgeEvents.registerForgeEvent(BlockEvent.BreakEvent.class, event -> {
             Level level = event.getPlayer().level();
 

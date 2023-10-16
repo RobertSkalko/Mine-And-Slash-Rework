@@ -21,7 +21,7 @@
     },
     {
       "type": "FLAT",
-      "max": 4.0,
+      "max": 3.0,
       "min": 1.0,
       "stat": "energy_regen"
     }

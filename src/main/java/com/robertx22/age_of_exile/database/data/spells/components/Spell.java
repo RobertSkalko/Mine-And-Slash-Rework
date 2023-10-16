@@ -25,6 +25,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.MapManager;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
@@ -163,6 +164,33 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
             System.out.println("Times to cast spell is: " + timesToCast + " . this seems like a bug.");
         }
 
+    }
+
+
+    public String getSummonRarityPerLevel(Player p) {
+
+        try {
+            int lvl = Load.player(p).spellCastingData.getSpellData(GUID()).rank;
+
+            if (lvl < 2) {
+                return IRarity.COMMON_ID;
+            }
+            if (lvl < 4) {
+                return IRarity.UNCOMMON;
+            }
+            if (lvl < 6) {
+                return IRarity.RARE_ID;
+            }
+            if (lvl < 8) {
+                return IRarity.EPIC_ID;
+            }
+            if (lvl < 14) {
+                return IRarity.LEGENDARY_ID;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return IRarity.MYTHIC_ID;
     }
 
     public void cast(SpellCastContext ctx) {
