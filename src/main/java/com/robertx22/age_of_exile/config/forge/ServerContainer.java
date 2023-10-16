@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.config.forge;
 
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -94,6 +95,16 @@ public class ServerContainer {
                     String str = (String) x;
                     return str.split(":").length == 3;
                 });
+
+
+        List<String> items = new ArrayList<>();
+        items.add(VanillaUTIL.REGISTRY.items().getKey(Items.ENDER_PEARL).toString());
+        items.add(VanillaUTIL.REGISTRY.items().getKey(Items.CHORUS_FRUIT).toString());
+        BANNED_ITEMS = b.comment("Stops items from being used in maps/adventuremaps. This is used for items that allow cheesing mechanics like teleporation items mostly.")
+                .defineList("disabled_items_in_maps", items, x -> {
+                    String str = (String) x;
+                    return true;
+                });
         b.pop();
     }
 
@@ -127,7 +138,13 @@ public class ServerContainer {
 
     }
 
+    public boolean isItemBanned(Item item) {
+        String id = VanillaUTIL.REGISTRY.items().getKey(item).toString();
+        return BANNED_ITEMS.get().stream().anyMatch(x -> x.equals(id));
+    }
+
     public ForgeConfigSpec.ConfigValue<List<? extends String>> GEAR_COMPATS;
+    public ForgeConfigSpec.ConfigValue<List<? extends String>> BANNED_ITEMS;
 
     public ForgeConfigSpec.BooleanValue ALL_PLAYERS_ARE_TEAMED_PVE_MODE;
     public ForgeConfigSpec.BooleanValue GET_STARTER_ITEMS;

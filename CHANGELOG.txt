@@ -50,4 +50,4 @@ v.5.3.1
 
 - maps no longer give massive loot and xp bonuses because they already natively do that by having massive amount of mobs and chests.
 
-- ender pearls are no longer usable in maps.
+- ender pearls and chorus fruits are no longer usable in maps. (this is a config)
