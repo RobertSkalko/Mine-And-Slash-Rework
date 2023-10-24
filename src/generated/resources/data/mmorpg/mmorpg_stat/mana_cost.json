@@ -14,7 +14,7 @@
   "ele": "Physical",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "mana_cost",
   "is_long": false,
   "is_perc": true,

@@ -16,7 +16,7 @@
   "ele": "Physical",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "movement_cdr",
   "is_long": false,
   "is_perc": true,

@@ -16,7 +16,7 @@
   "ele": "Physical",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "physical_vuln_crit",
   "is_long": true,
   "is_perc": true,

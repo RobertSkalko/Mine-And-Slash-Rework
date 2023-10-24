@@ -16,7 +16,7 @@
   "ele": "Cold",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "water_vuln_crit",
   "is_long": true,
   "is_perc": true,

@@ -16,7 +16,7 @@
   "ele": "Chaos",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "chaos_vuln_crit",
   "is_long": true,
   "is_perc": true,

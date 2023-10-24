@@ -16,7 +16,7 @@
   "ele": "Elemental",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "elemental_vuln_crit",
   "is_long": true,
   "is_perc": true,

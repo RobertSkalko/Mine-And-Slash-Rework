@@ -16,7 +16,7 @@
   "ele": "Physical",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "dmg_when_target_near_full_hp",
   "is_long": false,
   "is_perc": true,

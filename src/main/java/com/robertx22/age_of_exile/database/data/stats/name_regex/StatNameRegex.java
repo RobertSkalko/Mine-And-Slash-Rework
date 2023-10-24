@@ -58,7 +58,7 @@ public abstract class StatNameRegex {
         }
         String add = "";
 
-      
+
         if (type == ModType.MORE) {
             if (v1 > 0) {
                 add += stat.getMultiUseType().tooltipPrefix + " ";
@@ -83,6 +83,8 @@ public abstract class StatNameRegex {
         str = str.replace(VALUE, numberColor(format, stat, v1) + "" + plusminus + v1s + perc + ChatFormatting.RESET + statColor(stat));
 
         str = str.replace(NAME, add + "" + CLOC.translate(stat.locName()));
+
+        str = Stat.format(str);
 
         return str;
 

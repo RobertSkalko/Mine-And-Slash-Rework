@@ -16,7 +16,7 @@
   "ele": "All",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "health_on_hit_hit",
   "is_long": false,
   "is_perc": false,

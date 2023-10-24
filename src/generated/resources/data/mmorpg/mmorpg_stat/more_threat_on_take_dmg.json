@@ -16,7 +16,7 @@
   "ele": "Physical",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "more_threat_on_take_dmg",
   "is_long": true,
   "is_perc": true,

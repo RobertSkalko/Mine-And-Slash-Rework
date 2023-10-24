@@ -16,7 +16,7 @@
   "ele": "All",
   "format": "blue",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "area_dmg",
   "is_long": false,
   "is_perc": true,

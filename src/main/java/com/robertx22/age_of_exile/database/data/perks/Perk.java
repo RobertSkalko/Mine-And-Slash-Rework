@@ -39,7 +39,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
     transient ResourceLocation cachedIcon = null;
 
     public AscendancyClassesData.PointType getPointType() {
-       
+
 
         return isSpell() ? AscendancyClassesData.PointType.SPELL : AscendancyClassesData.PointType.PASSIVE;
     }
@@ -85,9 +85,9 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
             }
             if (type == PerkType.MAJOR) {
                 // to get rid of like 100 lines o flang file
-                if (stats.size() > 0) {
-                    list.add(Words.MAJOR.locName().append(" ").append(this.stats.get(0).getStat().locName()).withStyle(type.format));
-                }
+                list.add(this.locName().withStyle(ChatFormatting.DARK_PURPLE));
+                // list.add(Component.empty());
+
             }
             //   info.statTooltipType = StatTooltipType.NORMAL;
 

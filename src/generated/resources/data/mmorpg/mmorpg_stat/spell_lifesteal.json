@@ -17,7 +17,7 @@
   "ele": "All",
   "format": "red",
   "group": "RESTORATION",
-  "icon": "❁",
+  "icon": "★",
   "id": "spell_lifesteal",
   "is_long": false,
   "is_perc": true,

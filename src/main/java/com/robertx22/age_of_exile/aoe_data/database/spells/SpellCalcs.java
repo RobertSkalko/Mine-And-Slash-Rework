@@ -64,7 +64,7 @@ public class SpellCalcs {
 
     public static ValueCalculation GONG_STRIKE = ValueCalcBuilder.of("gong_strike")
             .attackScaling(0.1f, 0.3F)
-            .statScaling(Health.getInstance(), 0.1F, 0.25F)
+            .statScaling(Health.getInstance(), 0.1F, 0.2F)
             .capScaling(3)
             .build();
 

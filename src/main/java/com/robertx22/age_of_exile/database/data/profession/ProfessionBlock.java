@@ -96,8 +96,7 @@ public class ProfessionBlock extends BaseEntityBlock implements WorldlyContainer
                 }
             }
 
-            be.onOpen(p);
-
+           
             p.openMenu(new MenuProvider() {
                 @Override
                 public Component getDisplayName() {

@@ -17,7 +17,7 @@
   "ele": "Chaos",
   "format": "red",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "chaos_dot_damage",
   "is_long": false,
   "is_perc": true,

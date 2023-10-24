@@ -17,7 +17,7 @@
   "ele": "Fire",
   "format": "red",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "fire_dot_damage",
   "is_long": false,
   "is_perc": true,

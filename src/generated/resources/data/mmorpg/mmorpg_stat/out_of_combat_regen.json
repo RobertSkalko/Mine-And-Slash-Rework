@@ -17,7 +17,7 @@
   "ele": "All",
   "format": "green",
   "group": "RESTORATION",
-  "icon": "❁",
+  "icon": "★",
   "id": "out_of_combat_regen",
   "is_long": false,
   "is_perc": true,

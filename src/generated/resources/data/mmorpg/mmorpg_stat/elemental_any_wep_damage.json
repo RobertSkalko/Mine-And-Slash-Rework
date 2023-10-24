@@ -17,7 +17,7 @@
   "ele": "Elemental",
   "format": "aqua",
   "group": "WEAPON",
-  "icon": "❁",
+  "icon": "★",
   "id": "elemental_any_wep_damage",
   "is_long": false,
   "is_perc": true,

@@ -17,7 +17,7 @@
   "ele": "Chaos",
   "format": "aqua",
   "group": "ELEMENTAL",
-  "icon": "❁",
+  "icon": "★",
   "id": "spell_chaos_damage",
   "is_long": false,
   "is_perc": true,

@@ -12,6 +12,9 @@ public class LeveledValue {
     }
 
     public float getValue(LivingEntity en, MaxLevelProvider provider) {
+        if (provider == null) {
+            return 0;
+        }
         if (min == max) {
             return min;
         }

@@ -16,7 +16,7 @@
   "ele": "Physical",
   "format": "aqua",
   "group": "WEAPON",
-  "icon": "❁",
+  "icon": "★",
   "id": "axe_damage",
   "is_long": false,
   "is_perc": true,

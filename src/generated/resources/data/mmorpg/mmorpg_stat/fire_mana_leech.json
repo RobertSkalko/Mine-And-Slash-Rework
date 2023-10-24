@@ -17,7 +17,7 @@
   "ele": "Fire",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "fire_mana_leech",
   "is_long": true,
   "is_perc": true,

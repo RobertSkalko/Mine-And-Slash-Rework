@@ -17,7 +17,7 @@
   "ele": "Lightning",
   "format": "aqua",
   "group": "WEAPON",
-  "icon": "❁",
+  "icon": "★",
   "id": "lightning_any_wep_damage",
   "is_long": false,
   "is_perc": true,

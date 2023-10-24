@@ -37,8 +37,6 @@ public class ProfessionBlockEntity extends BlockEntity {
 
     public String owner = "";
 
-    public int savedXP = 0;
-
 
     public ProfessionBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(SlashBlockEntities.PROFESSION.get(), pPos, pBlockState);
@@ -53,14 +51,21 @@ public class ProfessionBlockEntity extends BlockEntity {
     int ticks = 0;
     int craftingTicks = 0;
 
+    transient Player cached = null;
+
     public Player getOwner(Level l) {
-        try {
-            var id = UUID.fromString(owner);
-            return l.getPlayerByUUID(id);
-        } catch (Exception e) {
-            //e.printStackTrace();
+        if (cached == null) {
+            if (owner != null && !owner.isEmpty()) {
+                try {
+                    var id = UUID.fromString(owner);
+                    cached = l.getPlayerByUUID(id);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
-        return null;
+        return cached;
+
     }
 
     int cooldown = 0;
@@ -225,21 +230,10 @@ public class ProfessionBlockEntity extends BlockEntity {
 
         if (p != null) {
             Load.player(p).professions.addExp(p, getProfession().GUID(), xp);
-        } else {
-            this.savedXP += xp;
         }
 
     }
 
-
-    public void onOpen(Player p) {
-
-        if (savedXP > 0) {
-            Load.player(p).professions.addExp(p, getProfession().GUID(), savedXP);
-            savedXP = 0;
-        }
-
-    }
 
     public List<ItemStack> getMats() {
         return inventory.getAllStacks(INPUTS);
@@ -277,7 +271,6 @@ public class ProfessionBlockEntity extends BlockEntity {
         this.inventory.fromTag(pTag.getList("inv", 10));
 
         this.owner = pTag.getString("owner");
-        this.savedXP = pTag.getInt("saved_exp");
 
     }
 
@@ -289,8 +282,7 @@ public class ProfessionBlockEntity extends BlockEntity {
 
         pTag.putString("owner", owner);
 
-        pTag.putInt("saved_exp", savedXP);
-
+     
     }
 
 }

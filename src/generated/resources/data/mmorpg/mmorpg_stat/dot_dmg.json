@@ -16,7 +16,7 @@
   "ele": "All",
   "format": "red",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "dot_dmg",
   "is_long": false,
   "is_perc": true,

@@ -86,7 +86,7 @@ public class SpellPassives implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
-
+        
         // Sorcerer
         PerkBuilder.passive(FREEZE_CHANCE, 8, new OptScaleExactStat(4, new AilmentChance(Ailments.FREEZE)));
         PerkBuilder.passive(BURN_CHANCE, 8, new OptScaleExactStat(4, new AilmentChance(Ailments.BURN)));
@@ -95,7 +95,7 @@ public class SpellPassives implements ExileRegistryInit {
         PerkBuilder.passive(MAGIC_SHIELD_REGEN, 8, new OptScaleExactStat(5, MagicShieldRegen.getInstance(), ModType.PERCENT));
         PerkBuilder.passive(CAST_SPEED_SORC, 8, new OptScaleExactStat(3, Stats.CAST_SPEED.get(), ModType.FLAT));
         PerkBuilder.passive(ELE_RES, 8, new OptScaleExactStat(4, new ElementalResist(Elements.Elemental)));
-        PerkBuilder.passive(GOLEM_CHANCE, 8, new OptScaleExactStat(6, GolemSpellChance.getInstance(), ModType.FLAT));
+        PerkBuilder.passive(GOLEM_CHANCE, 8, new OptScaleExactStat(3, GolemSpellChance.getInstance(), ModType.FLAT));
 
         // Warlock
         PerkBuilder.passive(POISON_CHANCE, 8, new OptScaleExactStat(4, new AilmentChance(Ailments.POISON)));

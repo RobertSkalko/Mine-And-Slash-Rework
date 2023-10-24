@@ -17,7 +17,7 @@
   "ele": "All",
   "format": "aqua",
   "group": "WEAPON",
-  "icon": "❁",
+  "icon": "★",
   "id": "all_any_wep_damage",
   "is_long": false,
   "is_perc": true,

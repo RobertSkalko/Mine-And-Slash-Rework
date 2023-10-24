@@ -16,7 +16,7 @@
   "ele": "Cold",
   "format": "aqua",
   "group": "ELEMENTAL",
-  "icon": "❁",
+  "icon": "★",
   "id": "all_water_damage",
   "is_long": false,
   "is_perc": true,

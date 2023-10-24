@@ -17,7 +17,7 @@
   "ele": "Fire",
   "format": "aqua",
   "group": "WEAPON",
-  "icon": "❁",
+  "icon": "★",
   "id": "fire_any_wep_damage",
   "is_long": false,
   "is_perc": true,

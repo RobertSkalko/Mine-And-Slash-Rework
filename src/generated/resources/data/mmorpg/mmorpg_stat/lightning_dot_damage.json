@@ -17,7 +17,7 @@
   "ele": "Lightning",
   "format": "red",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "lightning_dot_damage",
   "is_long": false,
   "is_perc": true,

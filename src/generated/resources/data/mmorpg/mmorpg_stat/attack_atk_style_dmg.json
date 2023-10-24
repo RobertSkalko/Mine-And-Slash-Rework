@@ -16,7 +16,7 @@
   "ele": "Physical",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "attack_atk_style_dmg",
   "is_long": false,
   "is_perc": true,

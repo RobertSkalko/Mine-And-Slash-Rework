@@ -19,7 +19,7 @@
   "ele": "All",
   "format": "yellow",
   "group": "RESTORATION",
-  "icon": "❁",
+  "icon": "★",
   "id": "low_hp_healing",
   "is_long": false,
   "is_perc": true,

@@ -16,7 +16,7 @@
   "ele": "Physical",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "inc_effect_of_positive_buff_given",
   "is_long": false,
   "is_perc": true,

@@ -16,7 +16,7 @@
   "ele": "Physical",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "heal_over_time_eff_dur_u_cast",
   "is_long": false,
   "is_perc": true,

@@ -17,7 +17,7 @@
   "ele": "Physical",
   "format": "red",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "physical_dot_damage",
   "is_long": false,
   "is_perc": true,

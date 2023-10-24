@@ -17,7 +17,7 @@
   "ele": "Physical",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "physical_mana_leech",
   "is_long": true,
   "is_perc": true,

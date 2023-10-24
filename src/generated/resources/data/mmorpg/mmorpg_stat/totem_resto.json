@@ -16,7 +16,7 @@
   "ele": "All",
   "format": "yellow",
   "group": "RESTORATION",
-  "icon": "❁",
+  "icon": "★",
   "id": "totem_resto",
   "is_long": true,
   "is_perc": true,

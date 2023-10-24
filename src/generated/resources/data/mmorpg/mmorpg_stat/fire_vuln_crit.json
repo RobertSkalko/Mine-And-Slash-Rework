@@ -16,7 +16,7 @@
   "ele": "Fire",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "fire_vuln_crit",
   "is_long": true,
   "is_perc": true,

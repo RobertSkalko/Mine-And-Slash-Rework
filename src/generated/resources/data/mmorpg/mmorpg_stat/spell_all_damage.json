@@ -17,7 +17,7 @@
   "ele": "All",
   "format": "aqua",
   "group": "ELEMENTAL",
-  "icon": "❁",
+  "icon": "★",
   "id": "spell_all_damage",
   "is_long": false,
   "is_perc": true,

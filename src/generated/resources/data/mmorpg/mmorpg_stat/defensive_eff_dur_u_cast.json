@@ -16,7 +16,7 @@
   "ele": "Physical",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "defensive_eff_dur_u_cast",
   "is_long": false,
   "is_perc": true,

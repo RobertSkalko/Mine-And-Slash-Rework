@@ -17,7 +17,7 @@
   "ele": "Cold",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "water_health_leech",
   "is_long": true,
   "is_perc": true,

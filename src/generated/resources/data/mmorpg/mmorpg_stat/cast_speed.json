@@ -17,7 +17,7 @@
   "ele": "Physical",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "cast_speed",
   "is_long": false,
   "is_perc": true,

@@ -18,7 +18,7 @@
   "ele": "Elemental",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "chance_of_torment",
   "is_long": true,
   "is_perc": true,

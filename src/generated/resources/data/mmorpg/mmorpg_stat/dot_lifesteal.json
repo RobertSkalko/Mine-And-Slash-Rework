@@ -16,7 +16,7 @@
   "ele": "All",
   "format": "red",
   "group": "RESTORATION",
-  "icon": "❁",
+  "icon": "★",
   "id": "dot_lifesteal",
   "is_long": false,
   "is_perc": true,

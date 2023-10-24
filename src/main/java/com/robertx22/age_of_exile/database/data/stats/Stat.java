@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageInc
 import com.robertx22.age_of_exile.database.data.stats.name_regex.StatNameRegex;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.mmorpg.UNICODE;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.modify.IStatCtxModifier;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -62,7 +63,7 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     public boolean is_perc = false;
     public StatScaling scaling = StatScaling.NONE;
     public boolean is_long = false;
-    public String icon = "\u2741";
+    public String icon = UNICODE.STAR;
     public int order = 100;
     public String format = ChatFormatting.AQUA.getName();
     public StatGroup group = StatGroup.Misc;

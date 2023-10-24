@@ -16,7 +16,7 @@
   "ele": "All",
   "format": "red",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "attack_damage",
   "is_long": false,
   "is_perc": true,

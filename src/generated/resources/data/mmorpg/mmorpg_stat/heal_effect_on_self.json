@@ -18,7 +18,7 @@
   "ele": "All",
   "format": "yellow",
   "group": "RESTORATION",
-  "icon": "❁",
+  "icon": "★",
   "id": "heal_effect_on_self",
   "is_long": false,
   "is_perc": true,

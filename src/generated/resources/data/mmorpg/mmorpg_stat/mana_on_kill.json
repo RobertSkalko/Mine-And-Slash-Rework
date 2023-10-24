@@ -14,7 +14,7 @@
   "ele": "All",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "mana_on_kill",
   "is_long": false,
   "is_perc": false,

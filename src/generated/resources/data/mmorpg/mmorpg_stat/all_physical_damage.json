@@ -16,7 +16,7 @@
   "ele": "Physical",
   "format": "aqua",
   "group": "ELEMENTAL",
-  "icon": "❁",
+  "icon": "★",
   "id": "all_physical_damage",
   "is_long": false,
   "is_perc": true,

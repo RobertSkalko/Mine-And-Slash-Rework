@@ -16,7 +16,7 @@
   "ele": "Physical",
   "format": "green",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "totem_duration",
   "is_long": false,
   "is_perc": true,

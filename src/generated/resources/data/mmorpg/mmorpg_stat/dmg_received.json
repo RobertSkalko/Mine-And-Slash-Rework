@@ -14,7 +14,7 @@
   "ele": "Physical",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "dmg_received",
   "is_long": false,
   "is_perc": true,

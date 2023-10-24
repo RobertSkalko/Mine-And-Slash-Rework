@@ -16,7 +16,7 @@
   "ele": "Physical",
   "format": "aqua",
   "group": "MAIN",
-  "icon": "❁",
+  "icon": "★",
   "id": "accuracy",
   "is_long": false,
   "is_perc": false,

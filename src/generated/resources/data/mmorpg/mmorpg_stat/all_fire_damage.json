@@ -16,7 +16,7 @@
   "ele": "Fire",
   "format": "aqua",
   "group": "ELEMENTAL",
-  "icon": "❁",
+  "icon": "★",
   "id": "all_fire_damage",
   "is_long": false,
   "is_perc": true,

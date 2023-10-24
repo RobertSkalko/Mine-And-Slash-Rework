@@ -18,7 +18,7 @@
   "ele": "Chaos",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "give_regenerate_to_allies_in_aoe",
   "is_long": true,
   "is_perc": false,

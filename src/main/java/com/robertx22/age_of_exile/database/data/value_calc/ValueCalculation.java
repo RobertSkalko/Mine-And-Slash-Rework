@@ -102,7 +102,16 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
         });
 
         if (capsToWeaponDamage()) {
-            text.append(" (" + ((int) (cap_to_wep_dmg * 100F) + "% Non Wep-Dmg Stat Scaling Cap)"));
+
+            var opt = getAllScalingValues().stream().filter(x -> x.getStat() == WeaponDamage.getInstance()).findFirst();
+
+            if (opt.isPresent()) {
+
+                int num = (int) (opt.get().getMulti().getValue(en, provider) * 100F * this.cap_to_wep_dmg);
+
+                text.append(" (" + "Capped to " + num + "% of Wep-Dmg)");
+
+            }
         }
 
         return text;

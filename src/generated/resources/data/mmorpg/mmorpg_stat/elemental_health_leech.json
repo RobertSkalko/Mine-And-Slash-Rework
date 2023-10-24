@@ -17,7 +17,7 @@
   "ele": "Elemental",
   "format": "aqua",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "elemental_health_leech",
   "is_long": true,
   "is_perc": true,

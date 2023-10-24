@@ -17,7 +17,7 @@
   "ele": "All",
   "format": "red",
   "group": "Misc",
-  "icon": "❁",
+  "icon": "★",
   "id": "all_dot_damage",
   "is_long": false,
   "is_perc": true,
