@@ -33,9 +33,6 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
-import com.robertx22.age_of_exile.vanilla_mc.packets.TotemAnimationPacket;
-import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.library_of_exile.utils.RandomUtils;
@@ -127,9 +124,11 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocN
                                     .append(" has been upgraded to ")
                                     .append(newstack.getHoverName()), false);
 
-                            PlayerUtils.giveItem(newstack, p);
-                            Packets.sendToClient(p, new TotemAnimationPacket(new ItemStack(newstack.getItem())));
+                            p.spawnAtLocation(newstack.copy());
 
+                            SoundUtils.playSound(p, SoundEvents.EXPERIENCE_ORB_PICKUP, 1, 1);
+
+                            //Packets.sendToClient(p, new TotemAnimationPacket(new ItemStack(newstack.getItem())));
 
                         } else {
                             SoundUtils.playSound(p, SoundEvents.VILLAGER_NO, 1, 1);
@@ -137,7 +136,7 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocN
                             p.displayClientMessage(Component.literal(ChatFormatting.RED + "").append(new ItemStack(old).getHoverName())
                                     .append(" has failed the upgrade and was destroyed."), false);
                         }
-                        
+
                         stack.shrink(3);
 
                     }

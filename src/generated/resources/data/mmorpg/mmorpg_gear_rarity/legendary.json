@@ -1,4 +1,5 @@
 {
+  "affix_rarity_weight": 200,
   "announce_in_chat": true,
   "favor_loot_multi": 1.2,
   "favor_needed": 500,

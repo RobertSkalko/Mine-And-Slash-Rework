@@ -2,16 +2,19 @@ package com.robertx22.age_of_exile.capability.player.data;
 
 import com.robertx22.age_of_exile.database.data.profession.buffs.StatBuff;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.mmorpg.registers.common.SlashPotions;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.*;
+import java.util.function.Supplier;
 
 public class PlayerBuffData implements IStatCtx {
 
@@ -30,19 +33,22 @@ public class PlayerBuffData implements IStatCtx {
     }
 
     public enum Type {
-        POTION("potion", "Potion", 20 * 60 * 30),
-        ELIXIR("elixir", "Elixir", 20 * 60 * 15),
-        MEAL("meal", "Meal", 20 * 60 * 60),
-        FISH("fish", "Seafood", 20 * 60 * 60);
+        POTION("potion", "Potion", 20 * 60 * 30, () -> SlashPotions.POTION.get()),
+        // ELIXIR("elixir", "Elixir", 20 * 60 * 15),
+        MEAL("meal", "Meal", 20 * 60 * 60, () -> SlashPotions.MEAL.get()),
+        FISH("fish", "Seafood", 20 * 60 * 60, () -> SlashPotions.FISH.get());
 
         public String id;
         public String name;
         public int durationTicks;
+        public Supplier<MobEffect> effect;
 
-        Type(String id, String name, int durationTicks) {
+        Type(String id, String name, int durationTicks, Supplier<MobEffect> sup) {
             this.id = id;
             this.name = name;
+            this.effect = sup;
             this.durationTicks = durationTicks;
+
         }
 
         public boolean isFood() {

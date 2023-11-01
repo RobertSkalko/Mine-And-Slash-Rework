@@ -51,3 +51,10 @@ v.5.3.1
 - maps no longer give massive loot and xp bonuses because they already natively do that by having massive amount of mobs and chests.
 
 - ender pearls and chorus fruits are no longer usable in maps. (this is a config)
+
+v.5.3.2
+
+- affix tiers changed into affix rarities. Highest rarity an affix can get is based on rarity of the gear.
+Higher Affix rarities are a lot easier to obtain than the gear rarity (mythic affixes are more often found than mythic items)
+
+- buffs from items now show duration as status effects (but the status effects themselves have nothing to do with the buff) (its just for visual clarity)

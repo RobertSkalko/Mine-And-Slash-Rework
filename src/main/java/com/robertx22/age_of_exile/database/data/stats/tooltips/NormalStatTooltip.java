@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.database.data.stats.tooltips;
 
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -32,8 +33,8 @@ public class NormalStatTooltip implements IStatTooltipType {
                     .append(getPercentageView(ctx.statinfo.percent));
         }
         if (ctx.showStatRanges()) {
-            if (ctx.statinfo.affix_tier > 0) {
-                txt.append(" [T" + ctx.statinfo.affix_tier + "]");
+            if (ctx.statinfo.affix_rarity != null) {
+                txt.append(" [").append(TooltipUtils.rarityShort(ctx.statinfo.affix_rarity)).append("]");
             }
         }
 

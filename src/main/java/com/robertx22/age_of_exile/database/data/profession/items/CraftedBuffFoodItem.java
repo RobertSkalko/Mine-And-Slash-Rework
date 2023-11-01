@@ -15,6 +15,7 @@ import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
@@ -56,6 +57,7 @@ public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered 
             if (pLivingEntity instanceof Player p) {
                 boolean did = Load.player(p).buff.tryAdd(p, getBuff(), LeveledItem.getLevel(stack), power.perc, type, getTicksDuration());
                 if (did) {
+                    pLivingEntity.addEffect(new MobEffectInstance(this.type.effect.get(), getTicksDuration()));
                     stack.shrink(1);
                     return stack;
                 }

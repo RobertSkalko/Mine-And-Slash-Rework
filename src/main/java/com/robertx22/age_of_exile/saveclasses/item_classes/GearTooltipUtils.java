@@ -147,7 +147,7 @@ public class GearTooltipUtils {
                 int cost = (int) Energy.getInstance().scale(ModType.FLAT, gear.GetBaseGearType().getGearSlot().weapon_data.energy_cost_per_swing, data.getLevel());
                 int permob = (int) Energy.getInstance().scale(ModType.FLAT, gear.GetBaseGearType().getGearSlot().weapon_data.energy_cost_per_mob_attacked, data.getLevel());
 
-                tip.add(ExileText.ofText("Energy Cost: " + cost + " + " + permob + " Per mob, " + ", x" + (gear.GetBaseGearType().getGearSlot().getBasicDamageMulti() * 100) / 100F + " Dmg").format(ChatFormatting.GREEN).get());
+                tip.add(ExileText.ofText("Energy Cost: " + cost + " + " + permob + " Per mob, " + "x" + (gear.GetBaseGearType().getGearSlot().getBasicDamageMulti() * 100) / 100F + " Dmg").format(ChatFormatting.GREEN).get());
             }
         }
 

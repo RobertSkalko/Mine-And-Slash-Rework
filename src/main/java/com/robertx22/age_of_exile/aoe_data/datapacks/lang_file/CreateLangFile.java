@@ -110,7 +110,7 @@ public class CreateLangFile {
                     .toString());
 
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
 
     }

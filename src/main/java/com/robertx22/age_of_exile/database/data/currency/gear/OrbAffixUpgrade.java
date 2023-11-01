@@ -34,7 +34,7 @@ public class OrbAffixUpgrade extends GearCurrency {
                     @Override
                     public ItemStack modify(LocReqContext ctx, GearItemData gear, ItemStack stack) {
                         AffixData data = RandomUtils.randomFromList(gear.affixes.getAllAffixesAndSockets());
-                        data.setTier(data.getAffixTier() + 1);
+                        data.upgradeRarity();
                         data.RerollNumbers(gear);
                         StackSaving.GEARS.saveTo(stack, gear);
                         return stack;
@@ -42,7 +42,7 @@ public class OrbAffixUpgrade extends GearCurrency {
 
                     @Override
                     public int Weight() {
-                        return 1000;
+                        return 250;
                     }
                 },
                 new GearOutcome() {
@@ -59,7 +59,7 @@ public class OrbAffixUpgrade extends GearCurrency {
                     @Override
                     public ItemStack modify(LocReqContext ctx, GearItemData gear, ItemStack stack) {
                         AffixData data = RandomUtils.randomFromList(gear.affixes.getAllAffixesAndSockets());
-                        data.setTier(data.getAffixTier() - 1);
+                        data.downgradeRarity();
                         data.RerollNumbers(gear);
                         StackSaving.GEARS.saveTo(stack, gear);
                         return stack;
