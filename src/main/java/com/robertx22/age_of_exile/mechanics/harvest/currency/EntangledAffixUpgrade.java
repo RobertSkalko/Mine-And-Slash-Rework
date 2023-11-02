@@ -37,7 +37,7 @@ public class EntangledAffixUpgrade extends GearCurrency {
                     @Override
                     public ItemStack modify(LocReqContext ctx, GearItemData gear, ItemStack stack) {
                         AffixData data = RandomUtils.randomFromList(gear.affixes.getAllAffixesAndSockets());
-                        data.setTier(10);
+                        data.setMaxRarity();
                         data.RerollNumbers(gear);
                         StackSaving.GEARS.saveTo(stack, gear);
                         return stack;
@@ -45,7 +45,7 @@ public class EntangledAffixUpgrade extends GearCurrency {
 
                     @Override
                     public int Weight() {
-                        return 1000;
+                        return 500;
                     }
                 },
                 new GearOutcome() {

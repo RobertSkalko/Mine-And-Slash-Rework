@@ -56,7 +56,7 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
             }).random();
 
             var data = new AffixData(Affix.Type.jewel);
-            data.randomizeTier(lvl);
+            data.randomizeTier(getRarity());
             data.p = data.getMinMax().random();
             data.id = affix.guid;
             affixes.add(data);

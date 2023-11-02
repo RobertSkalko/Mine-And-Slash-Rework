@@ -28,6 +28,9 @@ public enum Chats implements IAutoLocName {
     CANT_GO_ABOVE("Can't upgrade past %1$s"),
 
     NEED_PEARL("You need to have at least one %1$s in your inventory to enter."),
+    PROF_MAT_DROPGUIDE("Mine and Slash Profession Material"),
+    PROF_MAT_DROPGUIDE_COMMON("Common Drop"),
+    PROF_MAT_DROPGUIDE_RARE("Rare Drop"),
     CAUGHT_SOMETHING("You caught something!"),
     TOOL_ADD_STAT("%1$s has been Upgraded to %2$s!"),
     TOOL_LEVEL_UP("%1$s has reached level %2$s!"),

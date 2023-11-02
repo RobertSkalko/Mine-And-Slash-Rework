@@ -42,7 +42,7 @@ public class UniqueJewelData {
             }).random();
 
             var affixdata = new AffixData(Affix.Type.jewel);
-            affixdata.randomizeTier(data.lvl);
+            affixdata.randomizeTier(data.getRarity());
             affixdata.p = affixdata.getMinMax().random();
             affixdata.id = affix.guid;
             data.affixes.add(affixdata);

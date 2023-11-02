@@ -195,7 +195,7 @@ public class TooltipUtils {
     }
 
     public static MutableComponent rarityShort(Rarity rarity) {
-        return (Component.literal(rarity.textFormatting() + "").append(rarity.locName()));
+        return (Component.literal(rarity.textFormatting() + "").append(rarity.locName().withStyle(rarity.textFormatting())));
     }
 
     public static MutableComponent tier(int tier) {
