@@ -77,7 +77,7 @@ public class GameChangerPerks implements ExileRegistryInit {
         );
 
         PerkBuilder.gameChanger("steady_hand", "Steady Hand",
-                new OptScaleExactStat(-100, Stats.CRIT_DAMAGE.get(), ModType.MORE),
+                new OptScaleExactStat(-100, Stats.CRIT_CHANCE.get(), ModType.MORE),
                 new OptScaleExactStat(-100, Stats.CRIT_DAMAGE.get(), ModType.MORE),
                 new OptScaleExactStat(25, Stats.TOTAL_DAMAGE.get(), ModType.FLAT)
         );

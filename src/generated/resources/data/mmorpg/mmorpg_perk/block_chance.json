@@ -9,7 +9,7 @@
       "type": "FLAT",
       "scale_to_lvl": false,
       "stat": "block_chance",
-      "v1": 3.0
+      "v1": 1.0
     }
   ]
 }

@@ -167,7 +167,7 @@ public class PerkButton extends ImageButton {
             offset = 9;
             RenderUtils.render16Icon(gui, perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti));
         } else if (perk.getType() == Perk.PerkType.START) {
-            offset = 3;
+            offset = 6;
             if (perk.icon == null || perk.icon.isEmpty()) {
                 RenderUtils.render16Icon(gui, new ResourceLocation(school.icon), xPos(offset, posMulti), yPos(offset, posMulti));
             } else {
