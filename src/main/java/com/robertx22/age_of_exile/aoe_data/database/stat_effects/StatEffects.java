@@ -47,6 +47,7 @@ public class StatEffects implements ExileRegistryInit {
             Arrays.asList(
                     ResourceType.mana,
                     ResourceType.energy,
+                    ResourceType.magic_shield,
                     ResourceType.health
             )
             , x -> new RestoreResourceAction("leech_" + x.id, NumberProvider.ofPercentOfDataNumber(EventData.NUMBER), x, RestoreType.leech)

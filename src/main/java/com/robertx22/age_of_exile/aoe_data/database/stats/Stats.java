@@ -365,6 +365,7 @@ public class Stats implements ExileRegistryInit {
                 x.min = 0;
                 x.is_perc = false;
                 x.scaling = StatScaling.NORMAL;
+                x.group = StatGroup.RESTORATION;
             })
             .build();
 
@@ -383,6 +384,7 @@ public class Stats implements ExileRegistryInit {
                 x.min = 0;
                 x.is_perc = false;
                 x.scaling = StatScaling.NORMAL;
+                x.group = StatGroup.RESTORATION;
             })
             .build();
 
@@ -398,6 +400,7 @@ public class Stats implements ExileRegistryInit {
                 x.min = 0;
                 x.is_perc = true;
                 x.scaling = StatScaling.NORMAL;
+                x.group = StatGroup.RESTORATION;
             })
             .build();
 
@@ -564,6 +567,24 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
+    public static DataPackStatAccessor<EmptyAccessor> TRAP_AREA_DAMAGE = DatapackStatBuilder
+            .ofSingle("trap_area_dmg", Elements.All)
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(0)
+            .setUsesMoreMultiplier()
+            .setSide(EffectSides.Source)
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.area))
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.trap))
+            .addEffect(StatEffects.INCREASE_VALUE)
+            .setLocName(x -> "Trap Area Damage")
+            .setLocDesc(x -> "Affects trap dmg done by area of effect abilities.")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+                x.base = 0;
+                x.format = ChatFormatting.BLUE.getName();
+            })
+            .build();
+
 
     public static DataPackStatAccessor<EmptyAccessor> DOT_DAMAGE = DatapackStatBuilder
             .ofSingle("dot_dmg", Elements.All)
@@ -573,7 +594,7 @@ public class Stats implements ExileRegistryInit {
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.ATTACK_TYPE_MATCHES.get(AttackType.dot))
             .addEffect(StatEffects.INCREASE_VALUE)
-            .setLocName(x -> "Damage over Time")
+            .setLocName(x -> "Damage Over Time")
             .setLocDesc(x -> "Increases dmg of effects that do damage over time, like burn")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
@@ -758,6 +779,26 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
+    public static DataPackStatAccessor<EmptyAccessor> MANASTEAL = DatapackStatBuilder
+            .ofSingle("manasteal", Elements.All)
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(100)
+            .setSide(EffectSides.Source)
+            .addCondition(StatConditions.IS_ATTACK_DAMAGE)
+            .addCondition(x -> StatConditions.IS_NOT_SUMMON_ATTACK)
+            .addEffect(StatEffects.LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.get(ResourceType.mana))
+            .setLocName(x -> "Manasteal")
+            .setLocDesc(x -> "Restore % of damage as mana.")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+                x.base = 0;
+                x.min = 0;
+                x.scaling = StatScaling.NONE;
+                x.format = ChatFormatting.RED.getName();
+                x.group = StatGroup.RESTORATION;
+            })
+            .build();
+
     public static DataPackStatAccessor<EmptyAccessor> SPELL_LIFESTEAL = DatapackStatBuilder
             .ofSingle("spell_lifesteal", Elements.All)
             .worksWithEvent(DamageEvent.ID)
@@ -778,6 +819,26 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
+    public static DataPackStatAccessor<EmptyAccessor> SPELL_MSSTEAL = DatapackStatBuilder
+            .ofSingle("spell_mssteal", Elements.All)
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(100)
+            .setSide(EffectSides.Source)
+            .addCondition(StatConditions.IS_STYLE.get(PlayStyle.INT))
+            .addCondition(x -> StatConditions.IS_NOT_SUMMON_ATTACK)
+            .addEffect(StatEffects.LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.get(ResourceType.magic_shield))
+            .setLocName(x -> "Spell Magic Shield Steal") // need a better name than this lol
+            .setLocDesc(x -> "Restore % of spell damage as magic shield.")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+                x.base = 0;
+                x.min = 0;
+                x.scaling = StatScaling.NONE;
+                x.format = ChatFormatting.RED.getName();
+                x.group = StatGroup.RESTORATION;
+            })
+            .build();
+
     public static DataPackStatAccessor<EmptyAccessor> DOT_LIFESTEAL = DatapackStatBuilder
             .ofSingle("dot_lifesteal", Elements.All)
             .worksWithEvent(DamageEvent.ID)
@@ -785,7 +846,7 @@ public class Stats implements ExileRegistryInit {
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.ATTACK_TYPE_MATCHES.get(AttackType.dot))
             .addEffect(StatEffects.LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.get(ResourceType.health))
-            .setLocName(x -> "Damage over Time Lifesteal")
+            .setLocName(x -> "Damage Over Time Lifesteal")
             .setLocDesc(x -> "Restore % of DoT damage as health.")
             .modifyAfterDone(x -> {
                 x.is_perc = true;

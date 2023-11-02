@@ -8,7 +8,7 @@
     {
       "type": "MORE",
       "scale_to_lvl": false,
-      "stat": "critical_damage",
+      "stat": "critical_hit",
       "v1": -100.0
     },
     {

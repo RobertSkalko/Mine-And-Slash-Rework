@@ -70,8 +70,8 @@ public class Perks implements ExileRegistryInit {
         PerkBuilder.stat(new OptScaleExactStat(5, ArmorPenetration.getInstance(), ModType.PERCENT));
         PerkBuilder.bigStat(new OptScaleExactStat(10, ArmorPenetration.getInstance(), ModType.PERCENT));
 
-        PerkBuilder.stat(new OptScaleExactStat(3, BlockChance.getInstance(), ModType.FLAT));
-        PerkBuilder.bigStat(new OptScaleExactStat(6, BlockChance.getInstance(), ModType.FLAT));
+        PerkBuilder.stat(new OptScaleExactStat(1, BlockChance.getInstance(), ModType.FLAT));
+        PerkBuilder.bigStat(new OptScaleExactStat(3, BlockChance.getInstance(), ModType.FLAT));
 
 
         PerkBuilder.stat(new OptScaleExactStat(3, Stats.CAST_SPEED.get(), ModType.FLAT));
@@ -106,10 +106,6 @@ public class Perks implements ExileRegistryInit {
         PerkBuilder.stat(new OptScaleExactStat(3, Stats.INCREASED_AREA.get(), ModType.FLAT));
         PerkBuilder.bigStat(new OptScaleExactStat(10, Stats.AREA_DAMAGE.get(), ModType.FLAT));
         PerkBuilder.bigStat(new OptScaleExactStat(10, Stats.INCREASED_AREA.get(), ModType.FLAT));
-
-
-        PerkBuilder.stat(new OptScaleExactStat(3, Stats.CRIT_DAMAGE.get(), ModType.FLAT));
-        PerkBuilder.stat(new OptScaleExactStat(2, Stats.CRIT_CHANCE.get(), ModType.FLAT));
 
         PerkBuilder.stat(new OptScaleExactStat(3, DamageShield.getInstance(), ModType.FLAT));
 
@@ -226,7 +222,7 @@ public class Perks implements ExileRegistryInit {
         Stats.ELEMENTAL_WEAPON_DAMAGE.getAll()
                 .forEach(x -> {
                     PerkBuilder.stat(x.GUID(), new OptScaleExactStat(3, x, ModType.FLAT));
-
+                    PerkBuilder.bigStat(new OptScaleExactStat(10, x, ModType.FLAT));
                 });
 
         Stats.ELEMENTAL_DAMAGE.getAll()

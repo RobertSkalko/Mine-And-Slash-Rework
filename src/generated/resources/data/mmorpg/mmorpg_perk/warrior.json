@@ -1,6 +1,6 @@
 {
   "type": "START",
-  "icon": "mmorpg:textures/gui/stat_icons/core/intelligence.png",
+  "icon": "mmorpg:textures/gui/stat_icons/start/warrior.png",
   "id": "warrior",
   "is_entry": true,
   "max_lvls": 1,

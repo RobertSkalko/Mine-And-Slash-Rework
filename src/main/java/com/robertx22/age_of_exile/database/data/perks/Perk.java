@@ -121,7 +121,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
 
             if (this.type == PerkType.MAJOR) {
 
-                list.add(Component.literal("Game changer talent.").withStyle(ChatFormatting.RED));
+                list.add(Component.literal("Game Changer Talent").withStyle(ChatFormatting.RED));
             }
 
             if (stats.size() > 0) {
@@ -170,7 +170,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
         STAT(2, 24, 24, 39, ChatFormatting.WHITE),
         SPECIAL(3, 28, 28, 77, ChatFormatting.LIGHT_PURPLE),
         MAJOR(1, 33, 33, 1, ChatFormatting.RED),
-        START(4, 22, 22, 155, ChatFormatting.YELLOW);
+        START(4, 28, 28, 77, ChatFormatting.YELLOW);
         // SPELL_MOD(5, 26, 26, 153, ChatFormatting.BLACK);
 
         int order;

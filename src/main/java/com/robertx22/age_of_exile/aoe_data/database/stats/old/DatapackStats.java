@@ -19,10 +19,13 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Ene
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShieldRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
+import com.robertx22.age_of_exile.database.data.stats.types.summon.SummonHealth;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
+import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
@@ -52,6 +55,7 @@ public class DatapackStats implements ExileRegistryInit {
 
     public static Stat HEAL_TO_SPELL_DMG = new AddPerPercentOfOther(Stats.HEAL_STRENGTH.get(), SkillDamage.getInstance());
     public static Stat PHYS_DMG_PER_MANA = new AddPerPercentOfOther(Mana.getInstance(), new BonusAttackDamage(Elements.Physical));
+    public static Stat SUMMON_HP_PER_HP = new AddPerPercentOfOther(Health.getInstance(), SummonHealth.getInstance());
 
     public static Stat BLOOD_PER_10STR = new MoreXPerYOf(DatapackStats.STR, Blood.getInstance(), 10);
     public static Stat HEALTH_PER_10_INT = new MoreXPerYOf(DatapackStats.INT, Health.getInstance(), 10);
@@ -60,9 +64,14 @@ public class DatapackStats implements ExileRegistryInit {
 
     public static Stat MOVE_SPEED = new AttributeStat("move_speed", "Move Speed", UUID.fromString("7e286d81-3fcf-471c-85b8-980072b30907"), Attributes.MOVEMENT_SPEED, true);
 
+    public static Stat DODGE_PER_MS = new MoreXPerYOf(DodgeRating.getInstance(), MagicShield.getInstance(), 10);
     public static Stat HP_REGEN_PER_INT = new MoreXPerYOf(DatapackStats.INT, HealthRegen.getInstance(), 10);
     public static Stat HP_PER_DEX = new MoreXPerYOf(DatapackStats.DEX, Health.getInstance(), 10);
     public static Stat ARMOR_PER_MANA = new MoreXPerYOf(Mana.getInstance(), Armor.getInstance(), 10);
+    public static Stat ARMOR_PER_DODGE = new MoreXPerYOf(Armor.getInstance(), DodgeRating.getInstance(), 10);
+    public static Stat PROJ_DMG_PER_STR = new MoreXPerYOf(Stats.PROJECTILE_DAMAGE.get(), DatapackStats.STR, 10);
+    public static Stat SPELL_DMG_PER_STR = new MoreXPerYOf(Stats.STYLE_DAMAGE.get(PlayStyle.INT), DatapackStats.STR, 10);
+    public static Stat HP_REGEN_PER_MS_REGEN = new MoreXPerYOf(MagicShieldRegen.getInstance(), HealthRegen.getInstance(), 1);
 
     @Override
     public void registerAll() {
@@ -80,5 +89,11 @@ public class DatapackStats implements ExileRegistryInit {
         MANA_PER_10_INT.addToSerializables();
         MOVE_SPEED.addToSerializables();
         PHYS_DMG_PER_MANA.addToSerializables();
+        DODGE_PER_MS.addToSerializables();
+        SUMMON_HP_PER_HP.addToSerializables();
+        PROJ_DMG_PER_STR.addToSerializables();
+        ARMOR_PER_DODGE.addToSerializables();
+        HP_REGEN_PER_MS_REGEN.addToSerializables();
+        SPELL_DMG_PER_STR.addToSerializables();
     }
 }
