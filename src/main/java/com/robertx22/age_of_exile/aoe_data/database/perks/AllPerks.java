@@ -21,8 +21,7 @@ public class AllPerks implements ExileRegistryInit {
         new StartPerks().registerAll();
 
         new StartPerksAddtl().registerAll();
-        new BigEleDotAndLeechPerks().registerAll();
-
+        
         new SpellPassives().registerAll();
     }
 }

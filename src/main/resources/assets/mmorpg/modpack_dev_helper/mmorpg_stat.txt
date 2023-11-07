@@ -111,6 +111,7 @@ enchanting_triple_drop
 learn_nature_balm
 water_focus
 spell_water_damage
+strength_per_10_projectile_damage
 proj_dmg_received
 elemental_penetration
 ele_sword_damage
@@ -175,6 +176,7 @@ give_taunt_stance_to_self_on_tick
 chaos_dot_damage
 damage_cdr
 learn_shred
+spell_mssteal
 offensive_eff_dur_u_cast
 learn_dash
 curse_eff_dur_u_cast
@@ -220,6 +222,7 @@ learn_arrow_storm
 fishing_medium_drop_bonus
 dex_dmg
 husbandry_double_drop
+summon_health_per_perc_of_health
 area_cdr
 health_per_10_dexterity
 spell_chaos_damage
@@ -235,6 +238,7 @@ arrow_spell_dmg
 learn_poison_trap
 max_elemental_resist
 husbandry_medium_drop_bonus
+strength_per_10_int_dmg
 fire_penetration
 dexterity
 farming_triple_drop
@@ -272,11 +276,14 @@ cast_speed
 electrify_strength
 farming_lesser_drop_bonus
 gear_defense
+health_regen_per_1_magic_shield_regen
 learn_recoil_shot
+magic_shield_per_10_dodge
 physical_health_leech
 learn_poison_ball
 learn_smoke_bomb
 electrify_resistance
+trap_area_dmg
 all_health_leech
 all_physical_damage
 cooking_lesser_drop_bonus
@@ -376,6 +383,7 @@ learn_power_chord
 health_per_10_intelligence
 block_chance
 ele_axe_damage
+manasteal
 water_weapon_damage
 all_lightning_damage
 summon_damage
@@ -427,6 +435,7 @@ damage_shield
 inc_effect_of_positive_buff_given
 learn_curse_of_weak
 magic_shield_leech_cap
+dodge_per_10_armor
 inc_effect_of_food_buff_on_you
 husbandry_triple_drop
 inc_effect_of_song_buff_on_you

@@ -10,6 +10,7 @@ leech_energy
 multiply_number_num
 give_negative/5_to_target
 apply_cd_as_cast_time
+leech_magic_shield
 increase_proj_speed_num
 reduce_cd_by_ticks
 give_regenerate_to_allies_in_radius
