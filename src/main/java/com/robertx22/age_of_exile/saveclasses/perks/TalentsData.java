@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.saveclasses.perks;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
+import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.perks.PerkStatus;
@@ -11,6 +12,7 @@ import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.TalentStatCtx;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -22,6 +24,8 @@ public class TalentsData implements IStatCtx {
 
 
     SchoolData perks = new SchoolData();
+
+    public int additional_points = 0;
 
     public int reset_points = 5;
 
@@ -39,6 +43,9 @@ public class TalentsData implements IStatCtx {
         num += GameBalanceConfig.get().TALENT_POINTS_PER_LVL * data.getLevel();
 
         num -= this.getAllocatedPoints(type);
+
+        num += MathHelper.clamp(additional_points, 0, ServerContainer.get().MAX_ADDITIONAL_TALENT_POINTS.get());
+
         return num;
     }
 
@@ -214,7 +221,7 @@ public class TalentsData implements IStatCtx {
         return Perk.Connection.BLOCKED;
     }
 
- 
+
     public boolean isAllocated(TalentTree school, PointData point) {
         return getSchool().isAllocated(point);
     }

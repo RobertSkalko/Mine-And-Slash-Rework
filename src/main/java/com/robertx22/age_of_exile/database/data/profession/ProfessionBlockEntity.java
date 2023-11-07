@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.profession;
 import com.robertx22.age_of_exile.database.data.profession.all.Professions;
 import com.robertx22.age_of_exile.database.data.profession.screen.CraftingStationMenu;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.mmorpg.ModErrors;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlockEntities;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -81,7 +82,9 @@ public class ProfessionBlockEntity extends BlockEntity {
 
                 Player p = getOwner(level);
 
+
                 if (p != null) {
+                   
                     if (this.inventory.getInventory(INPUTS).isEmpty()) {
                         return;
                     }
@@ -128,7 +131,7 @@ public class ProfessionBlockEntity extends BlockEntity {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ModErrors.print(e);
         }
 
         this.setChanged(); // todo will this cause any problems to have it perma on?
@@ -188,6 +191,7 @@ public class ProfessionBlockEntity extends BlockEntity {
     }
 
     public ExplainedResult trySalvage(Player p, boolean justCheck) {
+
         int ownerLvl = Load.player(p).professions.getLevel(getProfession().GUID());
 
         if (getProfession().GUID().equals(Professions.SALVAGING)) {
@@ -282,7 +286,7 @@ public class ProfessionBlockEntity extends BlockEntity {
 
         pTag.putString("owner", owner);
 
-     
+
     }
 
 }

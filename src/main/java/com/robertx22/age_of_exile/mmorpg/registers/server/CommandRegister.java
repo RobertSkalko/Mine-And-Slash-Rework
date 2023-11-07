@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 import com.robertx22.age_of_exile.loot.blueprints.LootChestBlueprint;
 import com.robertx22.age_of_exile.loot.blueprints.SkillGemBlueprint;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
+import com.robertx22.age_of_exile.vanilla_mc.commands.GivePoints;
 import com.robertx22.age_of_exile.vanilla_mc.commands.RollCommand;
 import com.robertx22.age_of_exile.vanilla_mc.commands.RunTestCommand;
 import com.robertx22.age_of_exile.vanilla_mc.commands.TeamCommand;
@@ -56,6 +57,10 @@ public class CommandRegister {
         RollCommand.register(dispatcher);
 
         RunTestCommand.register(dispatcher);
+
+
+        GivePoints.giveCommand(dispatcher);
+        GivePoints.resetCommand(dispatcher);
 
         OpenHub.register(dispatcher);
 

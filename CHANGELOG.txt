@@ -60,3 +60,5 @@ Higher Affix rarities are a lot easier to obtain than the gear rarity (mythic af
 - buffs from items now show duration as status effects (but the status effects themselves have nothing to do with the buff) (its just for visual clarity)
 
 - added Korean translation
+
+- added give and reset talent commands
