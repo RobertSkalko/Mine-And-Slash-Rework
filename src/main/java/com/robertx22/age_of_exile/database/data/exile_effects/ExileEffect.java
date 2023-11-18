@@ -15,6 +15,7 @@ import com.robertx22.age_of_exile.vanilla_mc.potion_effects.types.ExileStatusEff
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
+import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -110,7 +111,7 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
                 .withStyle(ChatFormatting.YELLOW));
         if (!stats.isEmpty()) {
             list.add(Words.Stats.locName()
-                    .append(": ")
+                    .append(" (per Stack): ")
                     .withStyle(ChatFormatting.GREEN));
 
             for (StatMod stat : this.stats) {
@@ -136,6 +137,8 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
         }
 
         list.add(Component.literal(ChatFormatting.YELLOW + string));
+
+        list.add(ExileText.emptyLine().get());
 
         return list;
 
