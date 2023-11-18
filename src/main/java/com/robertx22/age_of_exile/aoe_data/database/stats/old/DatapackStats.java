@@ -64,13 +64,13 @@ public class DatapackStats implements ExileRegistryInit {
 
     public static Stat MOVE_SPEED = new AttributeStat("move_speed", "Move Speed", UUID.fromString("7e286d81-3fcf-471c-85b8-980072b30907"), Attributes.MOVEMENT_SPEED, true);
 
-    public static Stat DODGE_PER_MS = new MoreXPerYOf(DodgeRating.getInstance(), MagicShield.getInstance(), 10);
+    public static Stat DODGE_PER_MS = new MoreXPerYOf(MagicShield.getInstance(), DodgeRating.getInstance(), 5);
     public static Stat HP_REGEN_PER_INT = new MoreXPerYOf(DatapackStats.INT, HealthRegen.getInstance(), 10);
     public static Stat HP_PER_DEX = new MoreXPerYOf(DatapackStats.DEX, Health.getInstance(), 10);
     public static Stat ARMOR_PER_MANA = new MoreXPerYOf(Mana.getInstance(), Armor.getInstance(), 10);
-    public static Stat ARMOR_PER_DODGE = new MoreXPerYOf(Armor.getInstance(), DodgeRating.getInstance(), 10);
-    public static Stat PROJ_DMG_PER_STR = new MoreXPerYOf(Stats.PROJECTILE_DAMAGE.get(), DatapackStats.STR, 10);
-    public static Stat SPELL_DMG_PER_STR = new MoreXPerYOf(Stats.STYLE_DAMAGE.get(PlayStyle.INT), DatapackStats.STR, 10);
+    public static Stat ARMOR_PER_DODGE = new MoreXPerYOf(DodgeRating.getInstance(), Armor.getInstance(), 10);
+    public static Stat PROJ_DMG_PER_STR = new MoreXPerYOf(DatapackStats.STR, Stats.PROJECTILE_DAMAGE.get(), 5);
+    public static Stat SPELL_DMG_PER_STR = new MoreXPerYOf(DatapackStats.STR, Stats.STYLE_DAMAGE.get(PlayStyle.INT), 5);
     public static Stat HP_REGEN_PER_MS_REGEN = new MoreXPerYOf(MagicShieldRegen.getInstance(), HealthRegen.getInstance(), 1);
 
     @Override
