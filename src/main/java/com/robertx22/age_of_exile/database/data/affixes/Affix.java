@@ -20,8 +20,6 @@ public class Affix implements IWeighted, IGUID, IAutoLocName, IhasRequirements,
         enchant,
         tool,
         jewel,
-        dungeon_prefix,
-        dungeon_suffix,
         implicit;
 
         public boolean isPrefix() {

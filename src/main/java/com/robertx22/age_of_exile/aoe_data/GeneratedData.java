@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.aoe_data;
 
 import com.robertx22.age_of_exile.aoe_data.database.affixes.Prefixes;
 import com.robertx22.age_of_exile.aoe_data.database.affixes.Suffixes;
-import com.robertx22.age_of_exile.aoe_data.database.affixes.adders.dungeon.DungeonAffixAdder;
 import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearsAdder;
 import com.robertx22.age_of_exile.aoe_data.database.base_stats.BaseStatsAdder;
 import com.robertx22.age_of_exile.aoe_data.database.dim_configs.DimConfigs;
@@ -58,7 +57,6 @@ public class GeneratedData {
 
         new ExileEffects().registerAll();
 
-        new DungeonAffixAdder().registerAll();
         new Prefixes().registerAll();
         new Suffixes().registerAll();
 

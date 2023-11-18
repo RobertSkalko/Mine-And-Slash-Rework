@@ -23,7 +23,6 @@ husbandry_triple
 mining_medium_exp
 wep_item_flat
 farming_misc_exp
-physical_wep_dmg_dun
 wep_item_both
 lightningjewel_res
 of_brutality
@@ -44,7 +43,6 @@ scavanger
 fishing_lesser_exp
 wep_item_perc
 strong_str_armor_suf
-fire_ele_mobs
 precise
 husbandry_greater_exp
 crafted_jewel_aura_cost
@@ -95,11 +93,9 @@ fishing_medium_exp
 chaos_ele_dmg_jewelry
 fishing_core_exp
 crafted_jewel_ms
-armored_mobs
 item_both_ms
 mining_misc_exp
 focused
-chaos_wep_dmg_dun
 crafted_jewel_armor
 waterjewel_res
 chaos_wep_dmg
@@ -109,17 +105,12 @@ item_perc_ms
 enchantment_wep_dmg
 fire_spell_ele_dmg
 mining_triple
-chaos_ele_mobs
 mana_reg
-water_wep_dmg_dun
-water_ele_mobs
-life_on_hit_dun
 crit_prefix
 physical_wep_dmg
 mining_double
 mining_lesser_exp
 crafted_jewel_aura_eff
-fire_wep_dmg_dun
 of_the_sky
 enchantment_jewerly_int
 of_mana

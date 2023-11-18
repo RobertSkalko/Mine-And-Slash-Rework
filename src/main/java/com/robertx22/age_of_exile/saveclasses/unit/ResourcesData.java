@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.saveclasses.unit;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
+import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.SpendResourceEvent;
@@ -48,9 +49,7 @@ public class ResourcesData {
 
     public void onTickBlock(Player player, int ticks) {
         if (player.isBlocking()) {
-            float cost = Energy.getInstance()
-                    .scale(ModType.FLAT, 0.25F, Load.Unit(player)
-                            .getLevel());
+            float cost = Energy.getInstance().scale(ModType.FLAT, ServerContainer.get().BLOCK_COST.get().floatValue(), Load.Unit(player).getLevel());
             SpendResourceEvent event = new SpendResourceEvent(player, ResourceType.energy, cost * ticks);
             event.calculateEffects();
             event.Activate();

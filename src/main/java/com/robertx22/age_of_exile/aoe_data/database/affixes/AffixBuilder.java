@@ -57,17 +57,7 @@ public class AffixBuilder {
         return this;
     }
 
-    public AffixBuilder DungeonPrefix() {
-        type = Affix.Type.dungeon_prefix;
-        return this;
-    }
-
-    public AffixBuilder DungeonSuffix() {
-        type = Affix.Type.dungeon_suffix;
-        return this;
-    }
-
-
+ 
     public AffixBuilder coreStat(Stat stat) {
         return this.stats(new StatMod(2, 15, stat, ModType.FLAT));
     }
