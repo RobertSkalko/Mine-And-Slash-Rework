@@ -194,7 +194,7 @@ public class GameChangerPerksAddtl implements ExileRegistryInit {
 
         PerkBuilder.gameChanger("focused_magician", "Focused Magician",
                 new OptScaleExactStat(10, ManaRegen.getInstance(), ModType.MORE),
-                new OptScaleExactStat(10, Stats.CAST_SPEED.get(), ModType.MORE),
+                new OptScaleExactStat(6, Stats.CAST_SPEED.get(), ModType.MORE),
                 new OptScaleExactStat(-100, DodgeRating.getInstance(), ModType.MORE)
         );
 

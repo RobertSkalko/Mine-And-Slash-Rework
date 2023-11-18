@@ -88,7 +88,7 @@ public class StatMod implements ISerializable<StatMod> {
         fmin = (int) GetStat().scale(getModType(), min, lvl);
         fmax = (int) GetStat().scale(getModType(), max, lvl);
 
-        String text = fmin + "/" + fmax;
+        String text = fmin + " -> " + fmax;
 
         if (GetStat().IsPercent() || getModType().isPercent()) {
             text = text + "%";

@@ -116,16 +116,16 @@ public class NegativeEffects implements ExileRegistryInit {
                 .build();
 
         ExileEffectBuilder.of(SLOW)
-                .vanillaStat(VanillaStatData.create(MOVEMENT_SPEED, -25, ModType.MORE, UUID.fromString("3fb10485-f309-468f-afc6-a23b0d6cf4c1")))
-                .vanillaStat(VanillaStatData.create(ATTACK_SPEED, -10, ModType.MORE, UUID.fromString("00fb60a7-904b-462f-a7cb-a557f02e362e")))
+                .vanillaStat(VanillaStatData.create(MOVEMENT_SPEED, -0.25F, ModType.MORE, UUID.fromString("3fb10485-f309-468f-afc6-a23b0d6cf4c1")))
+                .vanillaStat(VanillaStatData.create(ATTACK_SPEED, -0.10F, ModType.MORE, UUID.fromString("00fb60a7-904b-462f-a7cb-a557f02e362e")))
                 .addTags(EffectTags.negative)
                 .build();
 
         ExileEffectBuilder.of(STUN)
                 .addTags(EffectTags.immobilizing, EffectTags.negative)
-                .vanillaStat(VanillaStatData.create(MOVEMENT_SPEED, -100, ModType.MORE, UUID.fromString("3fb10485-f309-468f-afc6-a23b0d6cf4c1")))
-                .vanillaStat(VanillaStatData.create(ATTACK_SPEED, -100, ModType.MORE, UUID.fromString("00fb60a7-904b-462f-a7cb-a557f02e362e")))
-                .vanillaStat(VanillaStatData.create(ATTACK_DAMAGE, -100, ModType.MORE, UUID.fromString("10fb60a7-904b-462f-a7cb-a557f02e362e")))
+                .vanillaStat(VanillaStatData.create(MOVEMENT_SPEED, -10.0F, ModType.MORE, UUID.fromString("3fb10485-f309-468f-afc6-a23b0d6cf4c1")))
+                .vanillaStat(VanillaStatData.create(ATTACK_SPEED, -10.0F, ModType.MORE, UUID.fromString("00fb60a7-904b-462f-a7cb-a557f02e362e")))
+                .vanillaStat(VanillaStatData.create(ATTACK_DAMAGE, -10.0F, ModType.MORE, UUID.fromString("10fb60a7-904b-462f-a7cb-a557f02e362e")))
                 .build();
 
         ExileEffectBuilder.of(TORMENT)
@@ -146,8 +146,8 @@ public class NegativeEffects implements ExileRegistryInit {
                 .build();
 
         ExileEffectBuilder.of(BLIND)
-                .vanillaStat(VanillaStatData.create(ATTACK_DAMAGE, -100F, ModType.MORE, UUID.fromString("5eccf34c-29f7-4eea-bbad-82a905594064")))
-                .vanillaStat(VanillaStatData.create(ATTACK_SPEED, -100F, ModType.MORE, UUID.fromString("57eb6210-2a42-4ad3-a604-6f679d440a9b")))
+                .vanillaStat(VanillaStatData.create(ATTACK_DAMAGE, -10.0F, ModType.MORE, UUID.fromString("5eccf34c-29f7-4eea-bbad-82a905594064")))
+                .vanillaStat(VanillaStatData.create(ATTACK_SPEED, -10.0F, ModType.MORE, UUID.fromString("57eb6210-2a42-4ad3-a604-6f679d440a9b")))
                 .spell(SpellBuilder.forEffect()
                         .onTick(PartBuilder.aoeParticles(ParticleTypes.SQUID_INK, 3D, 1D)
                                 .tickRequirement(20D))
@@ -162,7 +162,7 @@ public class NegativeEffects implements ExileRegistryInit {
 
         ExileEffectBuilder.of(PETRIFY)
                 .addTags(EffectTags.immobilizing)
-                .vanillaStat(VanillaStatData.create(MOVEMENT_SPEED, -1F, ModType.MORE, UUID.fromString("bd9d32fa-c8c2-455c-92aa-4a94c2a70cd5")))
+                .vanillaStat(VanillaStatData.create(MOVEMENT_SPEED, -10.0F, ModType.MORE, UUID.fromString("bd9d32fa-c8c2-455c-92aa-4a94c2a70cd5")))
                 .spell(SpellBuilder.forEffect()
                         .onTick(PartBuilder.aoeParticles(ParticleTypes.ITEM_SLIME, 10D, 1D)
                                 .tickRequirement(20D))
