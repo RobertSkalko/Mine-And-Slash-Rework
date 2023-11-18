@@ -62,3 +62,7 @@ Higher Affix rarities are a lot easier to obtain than the gear rarity (mythic af
 - added Korean translation
 
 - added give and reset talent commands
+
+v.5.3.3
+
+- added config and some fixes

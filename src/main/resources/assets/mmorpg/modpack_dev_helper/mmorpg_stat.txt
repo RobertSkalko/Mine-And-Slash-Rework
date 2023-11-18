@@ -109,6 +109,7 @@ plus_phys_to_elemental
 movement_spell_dmg
 enchanting_triple_drop
 learn_nature_balm
+int_dmg_per_5_strength
 water_focus
 spell_water_damage
 strength_per_10_projectile_damage
@@ -203,6 +204,7 @@ learn_teleport
 song_cdr
 physical_any_wep_damage
 learn_astral_totem
+projectile_damage_per_5_strength
 critical_damage
 mana_cost
 block_leech_cap
@@ -389,6 +391,7 @@ all_lightning_damage
 summon_damage
 mining_medium_drop_bonus
 song_spell_dmg
+armor_per_10_dodge
 husbandry_core_drop_bonus
 energy_on_hit_hit
 all_penetration
@@ -441,6 +444,7 @@ husbandry_triple_drop
 inc_effect_of_song_buff_on_you
 food_eff_duration
 fishing_greater_drop_bonus
+dodge_per_5_magic_shield
 health_regen
 inc_effect_of_negative_buff_on_you
 freeze_duration

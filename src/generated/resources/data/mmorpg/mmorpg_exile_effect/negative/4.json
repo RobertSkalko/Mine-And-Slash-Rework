@@ -7,13 +7,13 @@
       "type": "MORE",
       "id": "minecraft:generic.attack_damage",
       "uuid": "5eccf34c-29f7-4eea-bbad-82a905594064",
-      "val": -100.0
+      "val": -10.0
     },
     {
       "type": "MORE",
       "id": "minecraft:generic.attack_speed",
       "uuid": "57eb6210-2a42-4ad3-a604-6f679d440a9b",
-      "val": -100.0
+      "val": -10.0
     }
   ],
   "one_of_a_kind_id": "",
