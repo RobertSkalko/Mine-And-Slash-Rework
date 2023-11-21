@@ -3,12 +3,14 @@ package com.robertx22.age_of_exile.database.registry;
 import com.robertx22.age_of_exile.database.Serializers;
 import com.robertx22.age_of_exile.database.data.DimensionConfig;
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
+import com.robertx22.age_of_exile.database.data.aura.AuraGem;
 import com.robertx22.age_of_exile.database.data.base_stats.BaseStatsConfig;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.gems.Gem;
+import com.robertx22.age_of_exile.database.data.map_affix.MapAffix;
 import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.profession.Profession;
@@ -20,6 +22,7 @@ import com.robertx22.age_of_exile.database.data.runewords.RuneWord;
 import com.robertx22.age_of_exile.database.data.spell_school.AscendancyClass;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.base.BaseDatapackStat;
+import com.robertx22.age_of_exile.database.data.support_gem.SupportGem;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
@@ -64,9 +67,9 @@ public class ExileRegistryTypes {
     public static ExileRegistryType GAME_BALANCE = ExileRegistryType.register(SlashRef.MODID, "game_balance", 26, GameBalanceConfig.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType SPELL_SCHOOL = ExileRegistryType.register(SlashRef.MODID, "spell_school", 26, AscendancyClass.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType AILMENT = ExileRegistryType.register(SlashRef.MODID, "ailment", 27, null, SyncTime.NEVER);
-    public static ExileRegistryType AURA = ExileRegistryType.register(SlashRef.MODID, "aura", 28, null, SyncTime.NEVER);
-    public static ExileRegistryType SUPPORT_GEM = ExileRegistryType.register(SlashRef.MODID, "support_gem", 29, null, SyncTime.NEVER);
-    public static ExileRegistryType MAP_AFFIX = ExileRegistryType.register(SlashRef.MODID, "map_affix", 30, null, SyncTime.NEVER);
+    public static ExileRegistryType AURA = ExileRegistryType.register(SlashRef.MODID, "aura", 28, AuraGem.SERIALIZER, SyncTime.ON_LOGIN);
+    public static ExileRegistryType SUPPORT_GEM = ExileRegistryType.register(SlashRef.MODID, "support_gem", 29, SupportGem.SER, SyncTime.ON_LOGIN);
+    public static ExileRegistryType MAP_AFFIX = ExileRegistryType.register(SlashRef.MODID, "map_affix", 30, MapAffix.SER, SyncTime.ON_LOGIN);
     public static ExileRegistryType BOSS_SPELL = ExileRegistryType.register(SlashRef.MODID, "boss", 31, null, SyncTime.NEVER);
 
     public static ExileRegistryType LEAGUE_MECHANIC = ExileRegistryType.register(new ExileRegistryType(SlashRef.MODID, "league_mechanic", 32, null, SyncTime.NEVER) {

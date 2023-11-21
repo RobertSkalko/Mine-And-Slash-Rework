@@ -13,13 +13,14 @@ import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class SupportGem implements ISkillGem, JsonExileRegistry<SupportGem>, IAutoGson<SupportGem> {
 
-
+    public static SupportGem SER = new SupportGem("", "", PlayStyle.STR, 0, Arrays.asList());
     public String id = "";
     public transient String locname = "";
 

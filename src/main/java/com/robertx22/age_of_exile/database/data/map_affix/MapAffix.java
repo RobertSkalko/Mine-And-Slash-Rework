@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 
 public class MapAffix implements JsonExileRegistry<MobAffix>, IAutoGson<MapAffix> {
 
+    public static MapAffix SER = new MapAffix("");
+
     List<StatMod> stats = new ArrayList<>();
     String id = "";
     int weight = 1000;

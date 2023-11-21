@@ -14,11 +14,13 @@ import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class AuraGem implements JsonExileRegistry<SupportGem>, ISkillGem, IAutoGson<AuraGem> {
 
+    public static AuraGem SERIALIZER = new AuraGem("", "", PlayStyle.STR, 0, Arrays.asList());
 
     public String id = "";
 
