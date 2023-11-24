@@ -1,24 +1,15 @@
 package com.robertx22.age_of_exile.event_hooks.damage_hooks;
 
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
+import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
+import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.SpellCastContext;
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEntity;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
-import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.DmgSourceUtils;
 import com.robertx22.age_of_exile.mixin_methods.OnHurtEvent;
-import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.UnstuckMobs;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
-import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
-import com.robertx22.age_of_exile.uncommon.effectdatas.SpendResourceEvent;
-import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
-import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
-import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
-import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
-import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
@@ -67,18 +58,6 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
 
                 if (caster != null) {
 
-
-                    int num = (int) Load.Unit(caster)
-                            .getUnit()
-                            .getCalculatedStat(WeaponDamage.getInstance())
-                            .getValue();
-
-                    float dmgMulti = 0.5F;
-
-                    num *= dmgMulti; // gotta nerf summons a bit i think or they would be op for every build?
-                    // to make them more viable more summoners, ill make summon damage stats bigger
-
-
                     event.damage = 0;
                     event.canceled = true;
 
@@ -86,32 +65,27 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
 
                     if (spell != null) {
 
-                        float cost = Energy.getInstance().scale(ModType.FLAT, 5, Load.Unit(caster).getLevel()) * dmgMulti;
 
-                        SpendResourceEvent spendEnergy = new SpendResourceEvent(caster, ResourceType.energy, cost);
-                        spendEnergy.calculateEffects();
+                        Spell basic = spell.getConfig().getSummonBasicSpell();
 
-
-                        if (spendEnergy.data.getNumber() <= Load.Unit(caster).getResources().getEnergy()) {
+                        var ctx = new SpellCastContext(caster, 0, basic);
 
 
-                            spendEnergy.Activate();
-
-                            DamageEvent dmg = EventBuilder.ofSpellDamage(caster, event.mob, num, spell)
-                                    .setupDamage(AttackType.hit, WeaponTypes.none, PlayStyle.INT)
-                                    .setIsBasicAttack()
-                                    .set(x -> {
-                                        x.petEntity = summon;
-                                        x.data.setBoolean(EventData.IS_SUMMON_ATTACK, true);
-                                        // x.targetData = Load.Unit(summon);
-                                    })
-                                    .build();
-
-                            //the knockback makes them op
-                            dmg.data.setBoolean(EventData.DISABLE_KNOCKBACK, true);
-
-                            dmg.Activate();
+                        boolean cancast = false;
+                        if (caster instanceof Player p) {
+                            if (Load.player(p).spellCastingData.canCast(basic, p)) {
+                                cancast = true;
+                            } else {
+                                cancast = false;
+                            }
                         }
+
+                        if (cancast) {
+                            basic.spendResources(ctx);
+                            basic.attached.onCast(SpellCtx.onCast(caster, ctx.calcData));
+                            basic.attached.tryActivate(Spell.DEFAULT_EN_NAME, SpellCtx.onHit(caster, summon, event.mob, ctx.calcData));
+                        }
+
                     }
                 } else {
                     summon.kill();

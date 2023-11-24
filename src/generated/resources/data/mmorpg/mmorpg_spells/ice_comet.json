@@ -260,6 +260,10 @@
     "charge_regen": 400,
     "charges": 3,
     "cooldown_ticks": 10,
+    "ene_cost": {
+      "max": 0.0,
+      "min": 0.0
+    },
     "imbues": 0,
     "mana_cost": {
       "max": 13.5,
@@ -267,6 +271,7 @@
     },
     "style": "int",
     "summonType": "NONE",
+    "summon_basic_atk": "pet_basic",
     "swing_arm": true,
     "tags": [
       "area",

@@ -11,7 +11,7 @@
         {
           "type": "FLAT",
           "stat": "health_regen",
-          "v1": 0.1
+          "v1": 0.25
         },
         {
           "type": "PERCENT",

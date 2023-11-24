@@ -1,40 +1,10 @@
 {
   "chance_drops": [
     {
-      "type": "LESSER",
-      "chance": 15.0,
-      "drops": [
-        {
-          "item_id": "mmorpg:rare_mats/fishing/lesser",
-          "min_lvl": 0.0,
-          "num": 1,
-          "weight": 1000
-        },
-        {
-          "item_id": "mmorpg:rare_mats/fishing/greater",
-          "min_lvl": 0.0,
-          "num": 1,
-          "weight": 1000
-        },
-        {
-          "item_id": "mmorpg:rare_mats/fishing/medium",
-          "min_lvl": 0.0,
-          "num": 1,
-          "weight": 1000
-        }
-      ]
-    },
-    {
       "type": "GREATER",
       "chance": 0.75,
       "drops": [
         {
-          "item_id": "mmorpg:rare_mats/fishing/lesser",
-          "min_lvl": 0.0,
-          "num": 1,
-          "weight": 1000
-        },
-        {
           "item_id": "mmorpg:rare_mats/fishing/greater",
           "min_lvl": 0.0,
           "num": 1,
@@ -42,6 +12,12 @@
         },
         {
           "item_id": "mmorpg:rare_mats/fishing/medium",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:rare_mats/fishing/lesser",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
@@ -53,11 +29,29 @@
       "chance": 3.75,
       "drops": [
         {
-          "item_id": "mmorpg:rare_mats/fishing/lesser",
+          "item_id": "mmorpg:rare_mats/fishing/greater",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000
         },
+        {
+          "item_id": "mmorpg:rare_mats/fishing/medium",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:rare_mats/fishing/lesser",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        }
+      ]
+    },
+    {
+      "type": "LESSER",
+      "chance": 15.0,
+      "drops": [
         {
           "item_id": "mmorpg:rare_mats/fishing/greater",
           "min_lvl": 0.0,
@@ -66,6 +60,12 @@
         },
         {
           "item_id": "mmorpg:rare_mats/fishing/medium",
+          "min_lvl": 0.0,
+          "num": 1,
+          "weight": 1000
+        },
+        {
+          "item_id": "mmorpg:rare_mats/fishing/lesser",
           "min_lvl": 0.0,
           "num": 1,
           "weight": 1000

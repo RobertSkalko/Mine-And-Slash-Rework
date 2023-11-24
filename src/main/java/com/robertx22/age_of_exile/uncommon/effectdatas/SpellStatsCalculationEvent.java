@@ -50,6 +50,7 @@ public class SpellStatsCalculationEvent extends EffectEvent {
         }
         this.data.setupNumber(EventData.CAST_TICKS, spell.config.getCastTimeTicks());
         this.data.setupNumber(EventData.MANA_COST, manamultilvl * spell.config.mana_cost.getValue(caster, spell));
+        this.data.setupNumber(EventData.ENERGY_COST, manamultilvl * spell.config.ene_cost.getValue(caster, spell));
         this.data.setupNumber(EventData.COOLDOWN_TICKS, spell.config.cooldown_ticks);
         this.data.setupNumber(EventData.PROJECTILE_SPEED_MULTI, 1F);
         this.data.setupNumber(EventData.DURATION_MULTI, 1F);

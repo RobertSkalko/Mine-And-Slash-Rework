@@ -11,7 +11,7 @@
         {
           "type": "FLAT",
           "stat": "energy_regen",
-          "v1": 0.2
+          "v1": 0.5
         },
         {
           "type": "FLAT",

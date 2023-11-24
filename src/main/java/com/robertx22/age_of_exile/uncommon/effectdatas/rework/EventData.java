@@ -51,6 +51,7 @@ public class EventData {
     public static String EFFECT_DURATION_TICKS = "effect_duration_ticks";
     public static String COOLDOWN_TICKS = "cd_ticks";
     public static String MANA_COST = "mana_cost";
+    public static String ENERGY_COST = "energy_cost";
     public static String AREA_MULTI = "area";
     public static String PIERCE = "pierce";
     public static String BARRAGE = "barrage";

@@ -135,6 +135,10 @@
     "charge_regen": 0,
     "charges": 0,
     "cooldown_ticks": 12,
+    "ene_cost": {
+      "max": 0.0,
+      "min": 0.0
+    },
     "imbues": 0,
     "mana_cost": {
       "max": 6.0,
@@ -142,6 +146,7 @@
     },
     "style": "str",
     "summonType": "NONE",
+    "summon_basic_atk": "pet_basic",
     "swing_arm": true,
     "tags": [
       "technique",

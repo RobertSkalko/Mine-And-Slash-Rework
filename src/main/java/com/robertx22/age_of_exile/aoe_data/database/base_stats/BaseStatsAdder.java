@@ -36,9 +36,9 @@ public class BaseStatsAdder implements ExileRegistryInit {
         c.scaled(WeaponDamage.getInstance(), 2);
 
         c.scaled(Health.getInstance(), 50);
-        c.scaled(Mana.getInstance(), 30);
-        c.scaled(Energy.getInstance(), 30);
-
+        c.scaled(Mana.getInstance(), 50);
+        c.scaled(Energy.getInstance(), 50);
+    
         c.nonScaled(Stats.MAX_SUMMON_CAPACITY.get(), 3);
 
         // why did i add this again? I think its a must

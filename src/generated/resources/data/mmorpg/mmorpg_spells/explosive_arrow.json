@@ -189,6 +189,10 @@
     "charge_regen": 0,
     "charges": 0,
     "cooldown_ticks": 200,
+    "ene_cost": {
+      "max": 0.0,
+      "min": 0.0
+    },
     "imbues": 0,
     "mana_cost": {
       "max": 7.5,
@@ -196,6 +200,7 @@
     },
     "style": "dex",
     "summonType": "NONE",
+    "summon_basic_atk": "pet_basic",
     "swing_arm": false,
     "tags": [
       "projectile",

@@ -299,9 +299,9 @@ public class SpellCastingData {
             }
 
             SpendResourceEvent rctx = spell.getManaCostCtx(ctx);
+            SpendResourceEvent ectx = spell.getManaCostCtx(ctx);
 
-            if (data.getResources()
-                    .hasEnough(rctx)) {
+            if (data.getResources().hasEnough(rctx) && data.getResources().hasEnough(ectx)) {
 
                 if (!spell.getConfig().castingWeapon.predicate.predicate.test(caster)) {
                     return false;

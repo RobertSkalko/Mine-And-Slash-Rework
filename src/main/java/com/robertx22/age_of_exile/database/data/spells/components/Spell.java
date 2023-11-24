@@ -225,6 +225,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
     public void spendResources(SpellCastContext ctx) {
         getManaCostCtx(ctx).Activate();
+        getEnergyCostCtx(ctx).Activate();
     }
 
     public SpendResourceEvent getManaCostCtx(SpellCastContext ctx) {
@@ -234,8 +235,19 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         return event;
     }
 
+    public SpendResourceEvent getEnergyCostCtx(SpellCastContext ctx) {
+        float cost = this.getCalculatedEnergyCost(ctx);
+        SpendResourceEvent event = new SpendResourceEvent(ctx.caster, ResourceType.energy, cost);
+        event.calculateEffects();
+        return event;
+    }
+
     public final int getCalculatedManaCost(SpellCastContext ctx) {
         return (int) ctx.event.data.getNumber(EventData.MANA_COST).number;
+    }
+
+    public final int getCalculatedEnergyCost(SpellCastContext ctx) {
+        return (int) ctx.event.data.getNumber(EventData.ENERGY_COST).number;
     }
 
     public final List<Component> GetTooltipString(TooltipInfo info) {
@@ -258,7 +270,16 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         list.add(ExileText.emptyLine().get());
 
 
-        list.add(Component.literal(ChatFormatting.BLUE + "Mana Cost: " + getCalculatedManaCost(ctx)));
+        int mana = getCalculatedManaCost(ctx);
+        int ene = getCalculatedEnergyCost(ctx);
+
+        if (mana > 0) {
+            list.add(Component.literal(ChatFormatting.BLUE + "Mana Cost: " + mana));
+        }
+        if (ene > 0) {
+            list.add(Component.literal(ChatFormatting.GREEN + "Energy Cost: " + mana));
+
+        }
         if (config.usesCharges()) {
             list.add(Component.literal(ChatFormatting.YELLOW + "Max Charges: " + config.charges));
             list.add(Component.literal(ChatFormatting.YELLOW + "Charge Regen: " + config.charge_regen / 20 + "s"));

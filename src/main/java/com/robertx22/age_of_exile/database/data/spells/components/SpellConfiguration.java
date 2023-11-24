@@ -1,9 +1,11 @@
 package com.robertx22.age_of_exile.database.data.spells.components;
 
 import com.robertx22.age_of_exile.aoe_data.database.spells.SummonType;
+import com.robertx22.age_of_exile.aoe_data.database.spells.schools.PetSpells;
 import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeapon;
 import com.robertx22.age_of_exile.database.data.value_calc.LeveledValue;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 
 import java.util.ArrayList;
@@ -14,13 +16,15 @@ public class SpellConfiguration {
     public boolean swing_arm = true;
     public boolean apply_cast_speed_to_cd = false;
     public CastingWeapon castingWeapon = CastingWeapon.ANY_WEAPON;
-    public LeveledValue mana_cost;
+    public LeveledValue mana_cost = new LeveledValue(0, 0);
+    public LeveledValue ene_cost = new LeveledValue(0, 0);
     public int times_to_cast = 1;
     public int charges = 0;
     public int charge_regen = 0;
     public int imbues = 0;
     public SummonType summonType = SummonType.NONE;
     public String charge_name = "";
+    public String summon_basic_atk = PetSpells.PET_BASIC;
     private int cast_time_ticks = 0;
     public int cooldown_ticks = 20;
     private String style = PlayStyle.STR.id;
@@ -42,6 +46,14 @@ public class SpellConfiguration {
     public SpellConfiguration setStyle(PlayStyle s) {
         this.style = s.id;
         return this;
+    }
+
+    public boolean hasSummonBasicAttack() {
+        return !summon_basic_atk.isEmpty();
+    }
+
+    public Spell getSummonBasicSpell() {
+        return ExileDB.Spells().get(summon_basic_atk);
     }
 
     public boolean usesCharges() {
@@ -79,6 +91,11 @@ public class SpellConfiguration {
         return this;
     }
 
+    public SpellConfiguration setSummonBasicAttack(String s) {
+        this.summon_basic_atk = s;
+        return this;
+    }
+
     public SpellConfiguration setSummonType(SummonType type) {
         this.summonType = type;
         return this;
@@ -86,6 +103,13 @@ public class SpellConfiguration {
 
 
     public static class Builder {
+        public static SpellConfiguration energy(int ene, int cd) {
+            SpellConfiguration c = new SpellConfiguration();
+            c.cast_time_ticks = 0;
+            c.ene_cost = new LeveledValue(1F * ene, 0.75F * ene);
+            c.cooldown_ticks = cd;
+            return c;
+        }
 
         public static SpellConfiguration instant(int mana, int cd) {
             SpellConfiguration c = new SpellConfiguration();

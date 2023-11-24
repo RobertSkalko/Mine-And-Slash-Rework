@@ -36,19 +36,19 @@ public class DatapackStats implements ExileRegistryInit {
 
     public static Stat INT = new CoreStat("intelligence", "Intelligence", CoreStatData.of(Arrays.asList(
             new OptScaleExactStat(10, Mana.getInstance(), ModType.FLAT),
-            new OptScaleExactStat(0.2F, ManaRegen.getInstance(), ModType.FLAT),
+            new OptScaleExactStat(0.5F, ManaRegen.getInstance(), ModType.FLAT),
             new OptScaleExactStat(0.5F, MagicShield.getInstance(), ModType.PERCENT)
     )));
 
     public static Stat STR = new CoreStat("strength", "Strength", CoreStatData.of(Arrays.asList(
             new OptScaleExactStat(0.1F, WeaponDamage.getInstance(), ModType.FLAT),
-            new OptScaleExactStat(0.1F, HealthRegen.getInstance(), ModType.FLAT),
+            new OptScaleExactStat(0.25F, HealthRegen.getInstance(), ModType.FLAT),
             new OptScaleExactStat(1, Armor.getInstance(), ModType.PERCENT)
     )));
 
     public static Stat DEX = new CoreStat("dexterity", "Dexterity", CoreStatData.of(Arrays.asList(
             new OptScaleExactStat(1, DodgeRating.getInstance(), ModType.PERCENT),
-            new OptScaleExactStat(0.2F, EnergyRegen.getInstance(), ModType.FLAT),
+            new OptScaleExactStat(0.5F, EnergyRegen.getInstance(), ModType.FLAT),
             new OptScaleExactStat(10, Energy.getInstance(), ModType.FLAT)
     )));
 

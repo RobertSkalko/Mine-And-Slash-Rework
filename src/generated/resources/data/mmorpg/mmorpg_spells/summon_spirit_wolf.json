@@ -95,6 +95,10 @@
     "charge_regen": 0,
     "charges": 0,
     "cooldown_ticks": 600,
+    "ene_cost": {
+      "max": 0.0,
+      "min": 0.0
+    },
     "imbues": 0,
     "mana_cost": {
       "max": 22.5,
@@ -102,6 +106,7 @@
     },
     "style": "int",
     "summonType": "BEAST",
+    "summon_basic_atk": "pet_basic",
     "swing_arm": true,
     "tags": [
       "summon",

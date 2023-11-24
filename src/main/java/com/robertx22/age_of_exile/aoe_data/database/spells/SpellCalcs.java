@@ -12,6 +12,10 @@ public class SpellCalcs {
 
     }
 
+    public static ValueCalculation PET_BASIC = ValueCalcBuilder.of("pet_basic")
+            .spellScaling(1, 1)
+            .build();
+
     public static ValueCalculation CHAOS_TOTEM = ValueCalcBuilder.of("chaos_totem")
             .spellScaling(0.5F, 0.1F)
             .build();

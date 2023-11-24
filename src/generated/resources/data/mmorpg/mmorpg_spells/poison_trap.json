@@ -180,6 +180,10 @@
     "charge_regen": 600,
     "charges": 3,
     "cooldown_ticks": 10,
+    "ene_cost": {
+      "max": 0.0,
+      "min": 0.0
+    },
     "imbues": 0,
     "mana_cost": {
       "max": 5.25,
@@ -187,6 +191,7 @@
     },
     "style": "dex",
     "summonType": "NONE",
+    "summon_basic_atk": "pet_basic",
     "swing_arm": true,
     "tags": [
       "damage",
