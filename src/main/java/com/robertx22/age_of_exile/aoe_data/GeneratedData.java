@@ -2,8 +2,10 @@ package com.robertx22.age_of_exile.aoe_data;
 
 import com.robertx22.age_of_exile.aoe_data.database.affixes.Prefixes;
 import com.robertx22.age_of_exile.aoe_data.database.affixes.Suffixes;
+import com.robertx22.age_of_exile.aoe_data.database.auto_items.AutoItems;
 import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearsAdder;
 import com.robertx22.age_of_exile.aoe_data.database.base_stats.BaseStatsAdder;
+import com.robertx22.age_of_exile.aoe_data.database.custom_item_gens.CustomItems;
 import com.robertx22.age_of_exile.aoe_data.database.dim_configs.DimConfigs;
 import com.robertx22.age_of_exile.aoe_data.database.entity_configs.EntityConfigs;
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ExileEffects;
@@ -68,6 +70,9 @@ public class GeneratedData {
         new Runes().registerAll();
 
         new AllPerks().registerAll();
+
+        new AutoItems().registerAll();
+        new CustomItems().registerAll();
 
         new AutoDatapackStats().registerAll();
 

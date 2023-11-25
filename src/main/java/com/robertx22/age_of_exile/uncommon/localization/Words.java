@@ -7,6 +7,8 @@ import net.minecraft.ChatFormatting;
 import java.util.Locale;
 
 public enum Words implements IAutoLocName {
+    PET_BASIC("Pet Basic Attack:"),
+
     PROFESSIONS("Professions"),
     POTION("Potion"),
     SUPPGEM("Support Gem"),

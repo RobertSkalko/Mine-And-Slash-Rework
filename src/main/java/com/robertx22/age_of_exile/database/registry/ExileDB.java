@@ -7,8 +7,10 @@ import com.robertx22.age_of_exile.database.data.DimensionConfig;
 import com.robertx22.age_of_exile.database.data.EntityConfig;
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
 import com.robertx22.age_of_exile.database.data.aura.AuraGem;
+import com.robertx22.age_of_exile.database.data.auto_item.AutoItem;
 import com.robertx22.age_of_exile.database.data.base_stats.BaseStatsConfig;
 import com.robertx22.age_of_exile.database.data.currency.base.Currency;
+import com.robertx22.age_of_exile.database.data.custom_item.CustomItem;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
@@ -212,6 +214,14 @@ public class ExileDB {
 
     public static ExileRegistryContainer<Profession> Professions() {
         return Database.getRegistry(ExileRegistryTypes.PROFESSION);
+    }
+
+    public static ExileRegistryContainer<AutoItem> AutoItems() {
+        return Database.getRegistry(ExileRegistryTypes.AUTO_ITEM);
+    }
+
+    public static ExileRegistryContainer<CustomItem> CustomItemGenerations() {
+        return Database.getRegistry(ExileRegistryTypes.CUSTOM_ITEM);
     }
 
     public static ExileRegistryContainer<StatBuff> StatBuffs() {

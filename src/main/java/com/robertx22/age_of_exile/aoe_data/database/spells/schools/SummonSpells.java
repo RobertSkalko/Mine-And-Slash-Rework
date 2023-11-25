@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.spells.schools;
 
+import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.NegativeEffects;
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
@@ -11,6 +12,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.SpellConfigura
 import com.robertx22.age_of_exile.database.data.spells.components.actions.ExileEffectAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
+import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.summon.SummonHealth;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -30,15 +32,17 @@ public class SummonSpells implements ExileRegistryInit {
     public static String SUMMON_LIGHTNING_GOLEM = "summon_lightning_golem";
     public static String SUMMON_SPIRIT_WOLF = "summon_spirit_wolf";
     public static String SUMMON_ZOMBIE = "summon_zombie";
+    public static String SUMMON_SPIDER = "summon_spider";
     public static String SUMMON_SKELETAL_ARMY = "summon_skeleton_army";
     public static String RETURN_SUMMONS = "return_summons";
     public static String CHILLING_TOUCH = "chilling_touch";
+    public static String EXPLODE_MINIONS = "explode_minions";
 
     @Override
     public void registerAll() {
 
         SpellBuilder.of(SUMMON_FIRE_GOLEM, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(40, 20 * 60, 30).setSummonType(SummonType.GOLEM), "Summon Fire Golem",
-                        Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.golem))
+                        Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.golem, SpellTag.has_pet_ability))
                 .manualDesc("Summon a Golem that can cast Fire Nova to aid you in combat.")
                 .summons(SlashEntities.FIRE_GOLEM.get(), 20 * 60 * 3, 1)
                 .levelReq(20)
@@ -47,7 +51,7 @@ public class SummonSpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(SUMMON_COLD_GOLEM, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(40, 20 * 60, 30).setSummonType(SummonType.GOLEM), "Summon Frost Golem",
-                        Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.golem))
+                        Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.golem, SpellTag.has_pet_ability))
                 .manualDesc("Summon a Golem that can cast Frost Nova to aid you in combat.")
                 .summons(SlashEntities.COLD_GOLEM.get(), 20 * 60 * 3, 1)
                 .levelReq(20)
@@ -56,7 +60,7 @@ public class SummonSpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(SUMMON_LIGHTNING_GOLEM, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(40, 20 * 60, 30).setSummonType(SummonType.GOLEM), "Summon Lightning Golem",
-                        Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.golem))
+                        Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.golem, SpellTag.has_pet_ability))
                 .manualDesc("Summon a Golem that can cast Lightning Nova to aid you in combat .")
                 .summons(SlashEntities.LIGHTNING_GOLEM.get(), 20 * 60 * 3, 1)
                 .levelReq(20)
@@ -66,7 +70,7 @@ public class SummonSpells implements ExileRegistryInit {
 
 
         SpellBuilder.of(SUMMON_SPIRIT_WOLF, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(30, 30 * 20, 30).setSummonType(SummonType.BEAST), "Summon Spirit Wolf",
-                        Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.beast))
+                        Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.beast, SpellTag.has_pet_ability))
                 .manualDesc("Summon a Spirit Wolf to aid you in combat.")
                 .summons(SlashEntities.SPIRIT_WOLF.get(), 20 * 30, 1)
                 .addStat(Stats.SUMMON_DAMAGE.get().mod(5, 25))
@@ -75,7 +79,7 @@ public class SummonSpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(SUMMON_ZOMBIE, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(30, 20 * 60, 40).setSummonType(SummonType.UNDEAD), "Summon Zombie",
-                        Arrays.asList(SpellTag.summon, SpellTag.damage))
+                        Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.has_pet_ability))
                 .manualDesc("Summon a Zombie to aid you in combat.")
                 .summons(SlashEntities.ZOMBIE.get(), 20 * 60 * 2, 1)
                 .addStat(Stats.SUMMON_DAMAGE.get().mod(10, 50))
@@ -83,8 +87,19 @@ public class SummonSpells implements ExileRegistryInit {
                 .levelReq(1)
                 .build();
 
+        SpellBuilder.of(SUMMON_SPIDER, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 1)
+                                .setSummonBasicAttack(PetSpells.SPIDER)
+                                .setChargesAndRegen("spider", 3, 20 * 15).setSummonType(SummonType.UNDEAD), "Summon Spider",
+                        Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.has_pet_ability))
+                .manualDesc("Summon a fast moving spider to aid you in combat.")
+                .summons(SlashEntities.SPIDER.get(), 20 * 60 * 2, 1)
+                .addStat(Stats.SUMMON_DAMAGE.get().mod(5, 25))
+                .addStat(new AilmentChance(Ailments.POISON).mod(10, 50))
+                .levelReq(1)
+                .build();
+
         SpellBuilder.of(SUMMON_SKELETAL_ARMY, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(35, 20 * 60, 40).setSummonType(SummonType.UNDEAD), "Summon Skeleton",
-                        Arrays.asList(SpellTag.summon, SpellTag.damage))
+                        Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.has_pet_ability))
                 .manualDesc("Summon a horde of Skeletons to fight for you for a short duration.")
                 .summons(SlashEntities.SKELETON.get(), 20 * 60, 1)
                 .levelReq(30)
@@ -121,6 +136,26 @@ public class SummonSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.damageInFront(SpellCalcs.CHILLING_TOUCH, Elements.Cold, 2D, 3D)
                         .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.SNOWFLAKE, 100D, 1D, 0.1D))
                         .addPerEntityHit(PartBuilder.justAction(SpellAction.COMMAND_SUMMONS_ATTACK.create()))
+                )
+                .levelReq(1)
+                .build();
+
+
+        SpellBuilder.of(EXPLODE_MINIONS, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 5)
+                                .setSwingArm(), "Explode Minions",
+                        Arrays.asList(SpellTag.area, SpellTag.damage, SpellTag.minion_explode, SpellTag.summon))
+                .manualDesc("Explodes all your nearby minions for " + SpellCalcs.EXPLODE_MINION.getLocDmgTooltip(Elements.Fire)
+                        + ". Summon HP stat acts as a damage bonus for this spell.")
+
+                .addSpecificAction("explode", PartBuilder.damageInAoe(SpellCalcs.EXPLODE_MINION, Elements.Fire, 3D))
+                // todo not sure why this works as "specific" action but not otherwise
+
+                .onCast(PartBuilder.selectSummons(10D)
+                        .addPerEntityHit(PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
+                        .addPerEntityHit(PartBuilder.aoeParticles(ParticleTypes.EXPLOSION, 10D, 3D))
+                        .addPerEntityHit(PartBuilder.aoeParticles(ParticleTypes.EXPLOSION_EMITTER, 2D, 1D))
+                        .addPerEntityHit(PartBuilder.justAction(SpellAction.SPECIFIC_ACTION.create("explode")))
+                        .addPerEntityHit(PartBuilder.justAction(SpellAction.EXPIRE.create()))
                 )
                 .levelReq(1)
                 .build();

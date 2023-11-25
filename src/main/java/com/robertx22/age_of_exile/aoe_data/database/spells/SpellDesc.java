@@ -31,9 +31,7 @@ public class SpellDesc {
 
         List<String> list = TooltipUtils.cutIfTooLong(tip);
 
-        list = list.stream()
-                .map(x -> ChatFormatting.GRAY + x)
-                .collect(Collectors.toList());
+        list = list.stream().map(x -> ChatFormatting.GRAY + x).collect(Collectors.toList());
 
         return list;
 

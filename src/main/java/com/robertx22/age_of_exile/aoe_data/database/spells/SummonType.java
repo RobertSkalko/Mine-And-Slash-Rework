@@ -4,6 +4,7 @@ public enum SummonType {
     TOTAL("total", "Total", 5),
     GOLEM("golem", "Golem", 3),
     UNDEAD("undead", "Undead", 3),
+    SPIDER("spider", "Spider", 5),
     BEAST("beast", "Beast", 2),
     NONE("none", "NONE", 0);
 

@@ -110,10 +110,12 @@
     "swing_arm": true,
     "tags": [
       "summon",
-      "damage"
+      "damage",
+      "has_pet_ability"
     ],
     "times_to_cast": 1
   },
+  "default_lvl": 0,
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "summon_zombie",

@@ -24,9 +24,11 @@ public class ExpireAction extends SpellAction {
                     StationaryFallingBlockEntity s = (StationaryFallingBlockEntity) ctx.sourceEntity;
                     s.scheduleRemoval();
                 } else {
-
+                    //ctx.sourceEntity.kill(); // todo make sure this doesnt screw up anything else
                     //ctx.sourceEntity.remove();
                 }
+            } else {
+                ctx.getPositionEntity().kill(); // todo why is source entity.. the player
             }
         }
     }

@@ -151,6 +151,7 @@
     ],
     "times_to_cast": 10
   },
+  "default_lvl": 0,
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "whirlwind",

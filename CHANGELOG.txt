@@ -70,3 +70,13 @@ v.5.3.3
 v.5.3.4
 
 fixes
+
+v.5.3.5
+
+- added spider summon spell
+- pet basic attacks are now spells and their dmg and scaling is displayed if you press shift 
+- made a few spells like magma totem not knockback enemies which should make them more useful
+- chilling field now has extra vanilla slow
+- removed tooltip cutting if too long, it seems vanilla does it anyway so it was double cutting
+- increased base mana and energy that scales per lvl
+- added explode minions spell

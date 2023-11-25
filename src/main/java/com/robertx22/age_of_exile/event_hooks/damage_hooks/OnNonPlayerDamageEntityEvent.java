@@ -70,6 +70,8 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
 
                         var ctx = new SpellCastContext(caster, 0, basic);
 
+                        var originctx = new SpellCastContext(caster, 0, spell);
+
 
                         boolean cancast = false;
                         if (caster instanceof Player p) {
@@ -82,8 +84,9 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
 
                         if (cancast) {
                             basic.spendResources(ctx);
-                            basic.attached.onCast(SpellCtx.onCast(caster, ctx.calcData));
-                            basic.attached.tryActivate(Spell.DEFAULT_EN_NAME, SpellCtx.onHit(caster, summon, event.mob, ctx.calcData));
+                            basic.attached.onCast(SpellCtx.onCast(caster, originctx.calcData));
+                            basic.attached.tryActivate(Spell.DEFAULT_EN_NAME, SpellCtx.onHit(caster, summon, event.mob, originctx.calcData)); // todo this should be reworked.
+                            // pet ability should gain the stats of the pet used to summon it, this is a nasty hack
                         }
 
                     }

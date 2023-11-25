@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.mixin_methods;
 
+import com.robertx22.age_of_exile.database.data.auto_item.AutoItem;
 import com.robertx22.age_of_exile.database.data.currency.IItemAsCurrency;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.age_of_exile.database.data.profession.items.CraftedSoulItem;
@@ -17,10 +18,28 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.ItemStackedOnOtherEvent;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 
 public class OnItemInteract {
 
     public static void register() {
+
+        ForgeEvents.registerForgeEvent(EntityItemPickupEvent.class, x -> {
+
+            ItemStack stack = x.getItem().getItem();
+
+
+            if (!StackSaving.GEARS.has(stack)) {
+                if (!stack.hasTag() || (stack.hasTag() && !stack.getTag().getBoolean("free_souled"))) {
+                    var auto = AutoItem.get(stack.getItem());
+                    if (auto != null) {
+                        stack.getOrCreateTag().putBoolean("free_souled", true);
+                        StackSaving.GEARS.saveTo(stack, auto.create(x.getEntity()));
+                    }
+
+                }
+            }
+        });
 
         ForgeEvents.registerForgeEvent(ItemStackedOnOtherEvent.class, x -> {
             ItemStack cursor = x.getStackedOnItem();

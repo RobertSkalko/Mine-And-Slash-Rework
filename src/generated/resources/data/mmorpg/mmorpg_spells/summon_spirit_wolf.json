@@ -111,10 +111,12 @@
     "tags": [
       "summon",
       "damage",
-      "beast"
+      "beast",
+      "has_pet_ability"
     ],
     "times_to_cast": 1
   },
+  "default_lvl": 0,
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "summon_spirit_wolf",

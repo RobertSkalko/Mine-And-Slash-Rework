@@ -34,7 +34,6 @@ public class OnServerTick {
         {
             if (player.isAlive()) {
 
-
                 Load.player(player).favor.onSecond(player);
 
                 if (Load.Unit(player)

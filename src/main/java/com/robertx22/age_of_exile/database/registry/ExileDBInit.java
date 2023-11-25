@@ -76,6 +76,8 @@ public class ExileDBInit {
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.RECIPE, ""));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.PROFESSION, ""));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.STAT_BUFF, ""));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.AUTO_ITEM, ""));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.CUSTOM_ITEM, ""));
 
     }
 }

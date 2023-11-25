@@ -26,6 +26,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.MapManager;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
@@ -60,6 +61,8 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     public SpellConfiguration config = new SpellConfiguration();
 
     public int min_lvl = 1;
+
+    public int default_lvl = 0;
 
     public boolean manual_tip = false;
     public List<String> disabled_dims = new ArrayList<>();
@@ -277,7 +280,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
             list.add(Component.literal(ChatFormatting.BLUE + "Mana Cost: " + mana));
         }
         if (ene > 0) {
-            list.add(Component.literal(ChatFormatting.GREEN + "Energy Cost: " + mana));
+            list.add(Component.literal(ChatFormatting.GREEN + "Energy Cost: " + ene));
 
         }
         if (config.usesCharges()) {
@@ -348,14 +351,21 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
             }
         }
 
-        int currentlvl = getLevelOf(info.player);
-
         String taglist = StringUTIL.join(this.config.tags.stream().map(x -> x.locname).iterator(), ", ");
         MutableComponent tagtext = Component.literal("Tags: ").append(taglist);
 
         list.add(tagtext);
 
-        // list.add(Component.literal("Quality: " + currentlvl + "%").withStyle(ChatFormatting.GOLD));
+
+        if (info.hasShiftDown && this.config.tags.contains(SpellTag.has_pet_ability)) {
+
+            list.add(Words.PET_BASIC.locName());
+
+            Spell spell = config.getSummonBasicSpell();
+
+            list.addAll(spell.GetTooltipString(info));
+        }
+
 
         TooltipUtils.removeDoubleBlankLines(list);
 
@@ -364,13 +374,19 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     }
 
     public int getLevelOf(LivingEntity en) {
+
+        int lvl = 0;
+
         if (en instanceof Player p) {
             Optional<SpellCastingData.InsertedSpell> opt = Load.player(p).spellCastingData.getAllHotbarSpells().stream().filter(x -> x.id.equals(GUID())).findAny();
             if (opt.isPresent()) {
-                return opt.get().rank;
+                lvl = opt.get().rank;
             }
         }
-        return 0;
+        if (lvl < default_lvl) {
+            lvl = default_lvl;
+        }
+        return lvl;
     }
 
 

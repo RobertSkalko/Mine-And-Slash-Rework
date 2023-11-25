@@ -45,6 +45,7 @@
             {
               "type": "damage",
               "map": {
+                "disable_knockback": true,
                 "element": "Chaos",
                 "value_calculation": "thorn_bush"
               }
@@ -192,6 +193,7 @@
     ],
     "times_to_cast": 1
   },
+  "default_lvl": 0,
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "thorn_bush",

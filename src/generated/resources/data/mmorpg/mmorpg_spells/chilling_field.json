@@ -67,6 +67,7 @@
             {
               "type": "damage",
               "map": {
+                "disable_knockback": true,
                 "element": "Cold",
                 "value_calculation": "chilling_field"
               }
@@ -81,6 +82,31 @@
               }
             }
           ],
+          "targets": [
+            {
+              "type": "aoe",
+              "map": {
+                "en_predicate": "enemies",
+                "radius": 3.0,
+                "selection_type": "RADIUS"
+              }
+            }
+          ]
+        },
+        {
+          "acts": [
+            {
+              "type": "potion",
+              "map": {
+                "count": 1.0,
+                "potion_action": "GIVE_STACKS",
+                "potion_dur": 20.0,
+                "potion_id": "minecraft:slowness"
+              }
+            }
+          ],
+          "en_preds": [],
+          "ifs": [],
           "targets": [
             {
               "type": "aoe",
@@ -191,6 +217,7 @@
     ],
     "times_to_cast": 1
   },
+  "default_lvl": 0,
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "chilling_field",

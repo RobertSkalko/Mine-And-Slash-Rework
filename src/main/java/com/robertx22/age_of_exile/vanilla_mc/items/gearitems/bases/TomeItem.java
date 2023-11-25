@@ -5,7 +5,7 @@ import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
 
 public class TomeItem extends AutoItem {
     public TomeItem() {
-        super(new Properties());
+        super(new Properties().stacksTo(1));
     }
 
     @Override
@@ -20,6 +20,6 @@ public class TomeItem extends AutoItem {
 
     @Override
     public void generateModel(ItemModelManager manager) {
-        
+
     }
 }

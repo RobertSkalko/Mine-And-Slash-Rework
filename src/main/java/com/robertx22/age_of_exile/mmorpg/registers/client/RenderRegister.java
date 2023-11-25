@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.database.data.spells.entities.renders.ModTride
 import com.robertx22.age_of_exile.database.data.spells.entities.renders.MySpriteRenderer;
 import com.robertx22.age_of_exile.database.data.spells.entities.renders.RangerArrowRenderer;
 import com.robertx22.age_of_exile.database.data.spells.summons.render.ModSkeletonRender;
+import com.robertx22.age_of_exile.database.data.spells.summons.render.ModSpiderRender;
 import com.robertx22.age_of_exile.database.data.spells.summons.render.ModWolfRender;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
@@ -19,6 +20,7 @@ public class RenderRegister {
         x.registerEntityRenderer(SlashEntities.SPIRIT_WOLF.get(), ctx -> new ModWolfRender(SlashRef.id("textures/entity/spirit_wolf.png"), ctx));
         x.registerEntityRenderer(SlashEntities.SKELETON.get(), ctx -> new ModSkeletonRender(SlashRef.id("textures/entity/skeleton.png"), ctx));
         x.registerEntityRenderer(SlashEntities.ZOMBIE.get(), ctx -> new ModSkeletonRender(SlashRef.id("textures/entity/zombie.png"), ctx));
+        x.registerEntityRenderer(SlashEntities.SPIDER.get(), ctx -> new ModSpiderRender(SlashRef.id("textures/entity/spider.png"), ctx));
 
         x.registerEntityRenderer(SlashEntities.FIRE_GOLEM.get(), ctx -> new ModSkeletonRender(SlashRef.id("textures/entity/fire_golem.png"), ctx));
         x.registerEntityRenderer(SlashEntities.COLD_GOLEM.get(), ctx -> new ModSkeletonRender(SlashRef.id("textures/entity/cold_golem.png"), ctx));

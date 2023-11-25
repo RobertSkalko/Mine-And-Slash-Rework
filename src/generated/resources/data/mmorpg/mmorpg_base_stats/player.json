@@ -69,7 +69,7 @@
     {
       "type": "FLAT",
       "scale_to_lvl": false,
-      "stat": "mana_leech_cap",
+      "stat": "health_leech_cap",
       "v1": 5.0
     },
     {
@@ -81,25 +81,25 @@
     {
       "type": "FLAT",
       "scale_to_lvl": false,
-      "stat": "health_leech_cap",
-      "v1": 5.0
-    },
-    {
-      "type": "FLAT",
-      "scale_to_lvl": false,
       "stat": "block_leech_cap",
       "v1": 5.0
     },
     {
       "type": "FLAT",
       "scale_to_lvl": false,
-      "stat": "energy_leech_cap",
+      "stat": "mana_leech_cap",
       "v1": 5.0
     },
     {
       "type": "FLAT",
       "scale_to_lvl": false,
       "stat": "magic_shield_leech_cap",
+      "v1": 5.0
+    },
+    {
+      "type": "FLAT",
+      "scale_to_lvl": false,
+      "stat": "energy_leech_cap",
       "v1": 5.0
     }
   ],

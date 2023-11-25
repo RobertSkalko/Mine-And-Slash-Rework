@@ -185,8 +185,7 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
             //}
 
             list.add(ExileText.emptyLine().get());
-            list.add(TooltipUtils.rarity(rar));
-
+       
             list.add(stars());
 
 

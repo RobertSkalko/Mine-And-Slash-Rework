@@ -34,6 +34,10 @@
       "x": 5,
       "y": 4
     },
+    "explode_minions": {
+      "x": 5,
+      "y": 2
+    },
     "p_cast_speed_wl": {
       "x": 9,
       "y": 4
@@ -80,6 +84,10 @@
     },
     "summon_skeleton_army": {
       "x": 3,
+      "y": 3
+    },
+    "summon_spider": {
+      "x": 1,
       "y": 3
     },
     "summon_zombie": {

@@ -51,6 +51,7 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
         SchoolBuilder.of("warlock", "Warlock")
                 .add(BasicAttackSpells.POISONBALL_ID, new PointData(1, 0))
                 .add(NatureSpells.THORN_BUSH, new PointData(1, 2))
+                .add(SummonSpells.SUMMON_SPIDER, new PointData(1, 3))
                 .add(NatureSpells.POISON_CLOUD, new PointData(1, 4))
                 .add(IntSpells.BLACK_HOLE, new PointData(1, 6))
 
@@ -60,6 +61,7 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
                 .add(SummonSpells.SUMMON_SKELETAL_ARMY, new PointData(3, 3))
 
                 .add(CurseSpells.CURSE_OF_AGONY, new PointData(5, 1))
+                .add(SummonSpells.EXPLODE_MINIONS, new PointData(5, 2))
                 .add(CurseSpells.CURSE_OF_WEAK, new PointData(5, 3))
                 .add(FireSpells.DRACONIC_BLOOD, new PointData(5, 4))
                 .add(CurseSpells.CURSE_OF_DESPAIR, new PointData(5, 5))

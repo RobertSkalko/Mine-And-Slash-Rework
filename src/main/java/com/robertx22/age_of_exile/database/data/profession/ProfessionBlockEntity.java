@@ -83,8 +83,8 @@ public class ProfessionBlockEntity extends BlockEntity {
                 Player p = getOwner(level);
 
 
-                if (p != null) {
-                   
+                if (p != null && p.isAlive()) {
+
                     if (this.inventory.getInventory(INPUTS).isEmpty()) {
                         return;
                     }

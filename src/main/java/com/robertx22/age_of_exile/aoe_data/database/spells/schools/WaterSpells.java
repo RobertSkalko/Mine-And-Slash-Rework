@@ -19,6 +19,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 
@@ -67,7 +68,7 @@ public class WaterSpells implements ExileRegistryInit {
                 .levelReq(20)
                 .build();
 
-        
+
         SpellBuilder.of(FROST_FLOWER, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 60)
                                 .setSwingArm(), "Frost Totem",
                         Arrays.asList(SpellTag.damage, SpellTag.area, SpellTag.totem))
@@ -130,7 +131,7 @@ public class WaterSpells implements ExileRegistryInit {
 
                 .manualDesc("Spawn a cloud of bone-chilling frost, damaging enemies for "
                         + SpellCalcs.CHILLING_FIELD.getLocDmgTooltip()
-                        + Elements.Cold.getIconNameDmg() + " every second.")
+                        + Elements.Cold.getIconNameDmg() + " every second and applying slow.")
 
                 .onCast(PartBuilder.playSound(SoundEvents.END_PORTAL_SPAWN, 1D, 1D))
 
@@ -146,7 +147,10 @@ public class WaterSpells implements ExileRegistryInit {
                 .onTick("block", PartBuilder.playSound(SoundEvents.HORSE_BREATHE, 1.1D, 1.5D)
                         .tickRequirement(20D))
                 .onTick("block", PartBuilder.damageInAoe(SpellCalcs.CHILLING_FIELD, Elements.Cold, 3D)
+                        .disableKnockback()
                         .tickRequirement(20D))
+                .onTick("block", PartBuilder.addEffectToEnemiesInAoe(MobEffects.MOVEMENT_SLOWDOWN, 3D, 20D))
+
                 .levelReq(20)
                 .build();
 

@@ -131,6 +131,17 @@ public class SpellBuilder {
         return this;
     }
 
+    public SpellBuilder defaultAndMaxLevel(int lvl) {
+        this.spell.default_lvl = lvl;
+        maxLevel(lvl);
+        return this;
+    }
+
+    public SpellBuilder maxLevel(int lvl) {
+        this.spell.max_lvl = lvl;
+        return this;
+    }
+
     public SpellBuilder disableInMapDimension() {
         this.spell.disabled_dims.add(WorldUtils.DUNGEON_DIM_ID.toString());
         return this;

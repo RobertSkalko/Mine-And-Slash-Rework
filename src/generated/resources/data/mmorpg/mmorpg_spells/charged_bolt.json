@@ -233,6 +233,7 @@
     ],
     "times_to_cast": 1
   },
+  "default_lvl": 0,
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "charged_bolt",

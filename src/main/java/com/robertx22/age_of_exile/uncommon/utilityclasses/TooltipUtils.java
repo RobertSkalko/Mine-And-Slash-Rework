@@ -15,6 +15,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -82,6 +83,9 @@ public class TooltipUtils {
     static Character CHAR = "§".charAt(0); // TODO WTF INTELIJ
 
     public static List<String> cutIfTooLong(String str) {
+        if (true) {
+            return Arrays.asList(str);
+        }
 
         List<String> list = new ArrayList<>();
 
@@ -111,7 +115,7 @@ public class TooltipUtils {
                     formattouse = null;
                 }
                 list.add(cut);
-            } else if (i - start > 32 && c == ' ') {
+            } else if (i - start > 22 && c == ' ') {
                 String cut = str.substring(start, i);
                 if (start > 0) {
                     cut = cut.substring(1);

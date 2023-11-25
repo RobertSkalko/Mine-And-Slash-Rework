@@ -1,7 +1,7 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
-full_lightning
 full_fire
+full_lightning
 phys_lord
 full_water
 water_mob_affix

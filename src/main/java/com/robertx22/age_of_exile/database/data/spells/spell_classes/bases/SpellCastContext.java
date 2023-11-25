@@ -49,8 +49,6 @@ public class SpellCastContext {
         // todo need better ways
         if (caster instanceof Player p) {
             try {
-
-
                 int slot = Load.player(p).getSkillGemInventory().getSpellGem(this.spell).getHotbarSlot();
                 if (slot != -1) {
                     this.unit = new Unit(); // todo test if this works

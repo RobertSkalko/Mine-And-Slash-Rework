@@ -189,6 +189,7 @@
     ],
     "times_to_cast": 3
   },
+  "default_lvl": 0,
   "disabled_dims": [],
   "effect_tip": "",
   "identifier": "gale_wind",

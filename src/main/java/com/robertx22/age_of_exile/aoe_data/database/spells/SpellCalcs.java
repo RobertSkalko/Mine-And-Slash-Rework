@@ -16,6 +16,16 @@ public class SpellCalcs {
             .spellScaling(1, 1)
             .build();
 
+    public static ValueCalculation SPIDER_PET_BASIC = ValueCalcBuilder.of("spider_pet_basic")
+            .spellScaling(0.75F, 0.75F)
+            .build();
+
+    public static ValueCalculation EXPLODE_MINION = ValueCalcBuilder.of("explode_minion")
+            .spellScaling(0.25F, 1f)
+            .capScaling(5)
+            .statScaling(Health.getInstance(), 0.1F, 0.3F)
+            .build();
+
     public static ValueCalculation CHAOS_TOTEM = ValueCalcBuilder.of("chaos_totem")
             .spellScaling(0.5F, 0.1F)
             .build();

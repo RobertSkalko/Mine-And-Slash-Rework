@@ -31,6 +31,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.monster.Skeleton;
+import net.minecraft.world.entity.monster.Spider;
 import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BowItem;
@@ -52,6 +53,7 @@ public class CommonEvents {
         ForgeEvents.registerForgeEvent(EntityAttributeCreationEvent.class, x -> {
             x.put(SlashEntities.SPIRIT_WOLF.get(), Wolf.createAttributes().add(Attributes.MOVEMENT_SPEED, 0.4).build());
             x.put(SlashEntities.SKELETON.get(), Skeleton.createAttributes().add(Attributes.MOVEMENT_SPEED, 0.3).build());
+            x.put(SlashEntities.SPIDER.get(), Spider.createAttributes().add(Attributes.MOVEMENT_SPEED, 0.5).build());
             x.put(SlashEntities.ZOMBIE.get(), Zombie.createAttributes().add(Attributes.MOVEMENT_SPEED, 0.4).build());
             x.put(SlashEntities.THORNY_MINION.get(), Zombie.createAttributes().add(Attributes.MOVEMENT_SPEED, 0.2).build());
             x.put(SlashEntities.EXPLODE_MINION.get(), Zombie.createAttributes().add(Attributes.MOVEMENT_SPEED, 0.3).build());
