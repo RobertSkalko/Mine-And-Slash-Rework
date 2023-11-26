@@ -50,7 +50,7 @@ public class ChargeData {
         for (Map.Entry<String, Integer> en : charge_regen.entrySet()) {
             charge_regen.put(en.getKey(), 100000);
         }
-       
+
     }
 
     public void onTicks(Player player, int ticks) {
@@ -82,8 +82,8 @@ public class ChargeData {
                     chargesadded.add(id);
 
                     float regen = charge_regen.getOrDefault(s.config.charge_name, 0);
-                    regen *= Load.Unit(player).getUnit().getCalculatedStat(Stats.COOLDOWN_REDUCTION.get()).getMultiplier();
-                    charge_regen.put(s.config.charge_name, (int) (ticks + regen));
+                    regen += (float) ticks * (float) Load.Unit(player).getUnit().getCalculatedStat(Stats.COOLDOWN_REDUCTION.get()).getMultiplier();
+                    charge_regen.put(s.config.charge_name, (int) (regen));
 
                     if (charge_regen.get(id) >= s.config.charge_regen) {
                         charge_regen.put(id, 0);

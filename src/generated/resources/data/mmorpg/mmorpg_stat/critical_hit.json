@@ -8,8 +8,7 @@
       "on_damage"
     ],
     "ifs": [
-      "random_roll",
-      "is_attack_or_spell_attack"
+      "random_roll"
     ],
     "order": 0,
     "side": "Source"

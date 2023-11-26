@@ -16,6 +16,7 @@ import com.robertx22.age_of_exile.event_hooks.player.OnLogin;
 import com.robertx22.age_of_exile.event_hooks.player.StopCastingIfInteract;
 import com.robertx22.age_of_exile.mixin_methods.OnItemInteract;
 import com.robertx22.age_of_exile.mmorpg.ForgeEvents;
+import com.robertx22.age_of_exile.mmorpg.ModErrors;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashPotions;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
@@ -117,6 +118,18 @@ public class CommonEvents {
                         }
                     }
                 }
+            }
+        });
+        ForgeEvents.registerForgeEvent(PlayerEvent.Clone.class, event -> {
+            try {
+                if (event.getEntity() instanceof ServerPlayer p) {
+                    if (!p.level().isClientSide) {
+                        var data = Load.player(p);
+                        data.spellCastingData.cancelCast(p); // so player doesn't continue casting spell after reviving
+                    }
+                }
+            } catch (Exception e) {
+                ModErrors.print(e);
             }
         });
 

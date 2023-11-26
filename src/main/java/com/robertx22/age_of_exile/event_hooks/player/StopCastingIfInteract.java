@@ -9,8 +9,11 @@ public class StopCastingIfInteract {
         if (player.level().isClientSide) {
             return;
         }
+        if (player.isDeadOrDying()) {
+            return;
+        }
         var data = Load.player(player);
-
+        
         if (data.spellCastingData
                 .isCasting()) {
             data.spellCastingData.cancelCast(player);

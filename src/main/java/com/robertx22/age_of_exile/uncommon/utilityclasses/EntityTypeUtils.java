@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.NeutralMob;
 import net.minecraft.world.entity.ambient.AmbientCreature;
 import net.minecraft.world.entity.animal.Animal;
@@ -38,7 +39,7 @@ public class EntityTypeUtils {
             return EntityClassification.NPC;
         } else if (entity instanceof Player) {
             return EntityClassification.PLAYER;
-        } else if (entity instanceof AmbientCreature) {
+        } else if (entity instanceof AmbientCreature || entity.getType().getCategory() == MobCategory.AMBIENT || entity.getType().getCategory() == MobCategory.WATER_AMBIENT) {
             return EntityClassification.AMBIENT;
         } else {
             return EntityClassification.OTHER;
