@@ -255,8 +255,8 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
             tooltip.addAll(statsTooltip());
 
 
-            tooltip.add(Component.literal("Click or Sneak+Click to Open RuneWord Crafting/Showcase"));
-            tooltip.add(Component.literal("One allowed per Item."));
+            tooltip.add(Component.literal("Use to view craftable Runewords."));
+            tooltip.add(Component.literal("Sneak + Use to view all Runewords."));
 
         } catch (Exception e) {
             e.printStackTrace();

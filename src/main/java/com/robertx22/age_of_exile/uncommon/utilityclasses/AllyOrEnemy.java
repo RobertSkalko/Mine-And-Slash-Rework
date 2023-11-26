@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.uncommon.utilityclasses;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.NeutralMob;
 import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.player.Player;
 
@@ -36,6 +37,9 @@ public enum AllyOrEnemy {
                 return false;
             }
             if (type == EntityTypeUtils.EntityClassification.NPC) {
+                return false;
+            }
+            if (target instanceof NeutralMob) {
                 return false;
             }
 
