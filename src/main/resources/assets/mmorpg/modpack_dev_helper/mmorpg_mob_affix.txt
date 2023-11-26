@@ -2,14 +2,13 @@ These are all default registry entries of this type.
 This registry is modify-able through datapacks.
 full_fire
 full_lightning
-phys_lord
-full_water
-water_mob_affix
-winter
-thorny_mobs
 fire_lord
+phys_lord
 fire_mob_affix
+full_water
 vampire
+water_mob_affix
 full_chaos
+winter
 chaos_mob_affix
 nature_lord

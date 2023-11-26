@@ -88,3 +88,4 @@ v.5.3.5
 - removed reflect
 - fixed charge regen bug
 - your summons will no longer drown trying to attack fish
+- gems are now craftable instead

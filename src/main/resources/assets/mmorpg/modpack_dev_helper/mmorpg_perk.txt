@@ -239,7 +239,6 @@ hp_mana_big
 summon_spirit_wolf
 ele_trident_damage
 accuracy_percent
-netherite_bastion
 bloody_dance
 physical_weapon_damage
 spell_fire_damage

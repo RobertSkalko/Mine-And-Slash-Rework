@@ -11,6 +11,7 @@ import com.robertx22.age_of_exile.database.data.currency.IItemAsCurrency;
 import com.robertx22.age_of_exile.database.data.currency.base.Currency;
 import com.robertx22.age_of_exile.database.data.currency.base.GearCurrency;
 import com.robertx22.age_of_exile.database.data.currency.base.GearOutcome;
+import com.robertx22.age_of_exile.database.data.currency.base.IShapelessRecipe;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.data.gems.Gem;
@@ -23,6 +24,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Hea
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.mmorpg.registers.common.items.GemItems;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.SocketData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
@@ -35,16 +37,11 @@ import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.registry.IWeighted;
-import com.robertx22.library_of_exile.utils.RandomUtils;
-import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.ChatFormatting;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -56,7 +53,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocName, IItemAsCurrency, IWeighted {
+public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocName, IItemAsCurrency, IWeighted, IShapelessRecipe {
 
     @Override
     public AutoLocGroup locNameGroup() {
@@ -67,6 +64,21 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocN
     @Override
     public Component getName(ItemStack stack) {
         return Component.translatable("item." + locNameLangFileGUID(), this.gemRank.locName, this.gemType.locName).withStyle(gemType.format);
+    }
+
+    @Override
+    public ShapelessRecipeBuilder getRecipe() {
+
+        if (this.gemRank.lower() == null) {
+            return null;
+        }
+        return ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, GemItems.MAP.get(gemType)
+                        .get(gemRank)
+                        .get())
+                .requires(GemItems.MAP.get(gemType)
+                        .get(gemRank.lower())
+                        .get(), 3)
+                .unlockedBy("player_level", trigger());
     }
 
     @Override
@@ -87,64 +99,6 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocN
     @Override
     public void generateModel(ItemModelManager manager) {
         manager.generated(this);
-    }
-
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player p, InteractionHand hand) {
-
-
-        ItemStack stack = p.getItemInHand(hand);
-
-        if (!world.isClientSide) {
-
-
-            if (!getGem().hasHigherTierGem()) {
-                p.displayClientMessage(Component.literal(ChatFormatting.RED + "These gems are already maximum rank."), false);
-                return InteractionResultHolder.success(stack);
-            }
-            if (stack.getCount() < 3) {
-                p.displayClientMessage(Component.literal(ChatFormatting.RED + "You need 3 gems to attempt upgrade."), false);
-                return InteractionResultHolder.success(stack);
-            }
-
-            Gem gem = getGem();
-
-            if (stack.getCount() > 2) {
-                if (gem.hasHigherTierGem()) {
-                    boolean success = RandomUtils.roll(gem.perc_upgrade_chance);
-
-                    ItemStack newstack = new ItemStack(gem.getHigherTierGem().getItem());
-
-                    if (!newstack.isEmpty()) {
-                        Item old = stack.getItem();
-
-
-                        if (success) {
-                            p.displayClientMessage(Component.literal(ChatFormatting.GREEN + "").append(new ItemStack(old).getHoverName())
-                                    .append(" has been upgraded to ")
-                                    .append(newstack.getHoverName()), false);
-
-                            p.spawnAtLocation(newstack.copy());
-
-                            SoundUtils.playSound(p, SoundEvents.EXPERIENCE_ORB_PICKUP, 1, 1);
-
-                            //Packets.sendToClient(p, new TotemAnimationPacket(new ItemStack(newstack.getItem())));
-
-                        } else {
-                            SoundUtils.playSound(p, SoundEvents.VILLAGER_NO, 1, 1);
-
-                            p.displayClientMessage(Component.literal(ChatFormatting.RED + "").append(new ItemStack(old).getHoverName())
-                                    .append(" has failed the upgrade and was destroyed."), false);
-                        }
-
-                        stack.shrink(3);
-
-                    }
-                }
-            }
-
-        }
-        return InteractionResultHolder.success(stack);
     }
 
 
@@ -448,6 +402,15 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocN
 
         }
 
+        public GemRank lower() {
+            for (GemRank gr : GemRank.values()) {
+                if (gr.tier == (tier - 1)) {
+                    return gr;
+                }
+            }
+            return null;
+        }
+
         @Override
         public AutoLocGroup locNameGroup() {
             return AutoLocGroup.Misc;
@@ -513,10 +476,6 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocN
 
             tooltip.add(Component.literal(""));
 
-            if (getGem().hasHigherTierGem()) {
-                tooltip.add(Component.literal("Click with 3 gems to attempt upgrade"));
-                tooltip.add(Component.literal("Upgrade chance: " + getGem().perc_upgrade_chance + "%"));
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
