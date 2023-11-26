@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.database.data.currency.base.GearCurrency;
 import com.robertx22.age_of_exile.database.data.currency.base.GearOutcome;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
+import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -52,10 +53,9 @@ public class CurrencyItem extends Item implements IItemAsCurrency, IAutoLocName,
 
         if (effect instanceof GearCurrency gc) {
             if (gc.isAffectedByPotential()) {
-                String txt = "Potential Cost: " + gc.getPotentialLoss();
-                tooltip.add(Component.literal(txt));
+                tooltip.add(Words.POTENTIAL_COST.locName(gc.getPotentialLoss()));
             } else {
-                tooltip.add(Component.literal("Not affected by potential."));
+                tooltip.add(Words.NOT_AFFECTED_BY_POTENT.locName());
             }
         }
 

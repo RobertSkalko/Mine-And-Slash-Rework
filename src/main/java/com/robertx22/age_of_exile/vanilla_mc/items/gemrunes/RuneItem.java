@@ -278,7 +278,7 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
         if (!wep.isEmpty()) {
             tooltip.add(Component.literal(""));
 
-            tooltip.add(Component.literal("On Weapon:").withStyle(ChatFormatting.RED));
+            tooltip.add(Words.WEAPON.locName().withStyle(ChatFormatting.RED));
             for (StatMod x : wep) {
                 tooltip.addAll(x.getEstimationTooltip(lvl));
             }
@@ -288,7 +288,7 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
         if (!armor.isEmpty()) {
             tooltip.add(Component.literal(""));
 
-            tooltip.add(Component.literal("On Armor:").withStyle(ChatFormatting.BLUE));
+            tooltip.add(Words.ARMOR.locName().withStyle(ChatFormatting.BLUE));
             for (StatMod x : armor) {
                 tooltip.addAll(x.getEstimationTooltip(lvl));
             }
@@ -297,7 +297,7 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
         if (!jewelry.isEmpty()) {
             tooltip.add(Component.literal(""));
 
-            tooltip.add(Component.literal("On Jewelry:").withStyle(ChatFormatting.LIGHT_PURPLE));
+            tooltip.add(Words.JEWERLY.locName().withStyle(ChatFormatting.LIGHT_PURPLE));
             for (StatMod x : jewelry) {
                 tooltip.addAll(x.getEstimationTooltip(lvl));
             }

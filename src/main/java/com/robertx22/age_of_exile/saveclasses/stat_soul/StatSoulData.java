@@ -17,6 +17,8 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISettableLevelTier;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
+import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
@@ -230,9 +232,9 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
 
             } else {
                 if (data.fam != SlotFamily.NONE) {
-                    tooltip.add(Component.literal("Item Type: ").withStyle(ChatFormatting.WHITE).append(data.fam.name()).withStyle(ChatFormatting.BLUE));
+                    tooltip.add(Words.ITEM_TYPE.locName().withStyle(ChatFormatting.WHITE).append(data.fam.name()).withStyle(ChatFormatting.BLUE));
                 } else {
-                    tooltip.add(Component.literal("Item Type: ").withStyle(ChatFormatting.WHITE)
+                    tooltip.add(Words.ITEM_TYPE.locName().withStyle(ChatFormatting.WHITE)
                             .append(ExileDB.GearSlots()
                                     .get(data.slot)
                                     .locName()
@@ -245,9 +247,9 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
         }
         tooltip.add(Component.literal(""));
 
-        tooltip.add(Component.literal("Infuses stats into blank gear.").withStyle(ChatFormatting.AQUA));
+        tooltip.add(Chats.INFUSES_STATS.locName().withStyle(ChatFormatting.AQUA));
         tooltip.add(TooltipUtils.dragOntoGearToUse());
-        tooltip.add(Component.literal("You can also right-click to generate an item.").withStyle(ChatFormatting.AQUA));
+        tooltip.add(Chats.RIGHT_CLICK_TO_GEN_ITEM.locName().withStyle(ChatFormatting.AQUA));
 
         return tooltip;
     }

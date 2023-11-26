@@ -10,7 +10,7 @@ import net.minecraft.world.entity.monster.Slime;
 
 public class LootUtils {
 
-  
+
     // prevents lvl 50 players farming lvl 1 mobs
     public static float getLevelDistancePunishmentMulti(int level, int playerLevel) {
 
@@ -19,6 +19,13 @@ public class LootUtils {
         }
 
         int num = Math.abs(playerLevel - level);
+
+
+        int leeway = ServerContainer.get().LEVEL_DISTANCE_PENALTY_LEEWAY.get();
+
+        if (num <= leeway) {
+            return 1;
+        }
 
         float multi = (float) (1F - num * ServerContainer.get().LEVEL_DISTANCE_PENALTY_PER_LVL.get());
 

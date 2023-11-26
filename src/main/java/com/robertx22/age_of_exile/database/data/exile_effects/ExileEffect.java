@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.vanilla_mc.potion_effects.types.ExileStatusEffect;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
@@ -107,36 +108,34 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
     public List<Component> GetTooltipString(TooltipInfo info, CalculatedSpellData data) {
         List<Component> list = new ArrayList<>();
 
-        list.add(Component.literal("Status Effect: ").append(this.locName())
+        list.add(Words.STATUS_EFFECT.locName().append(": ").append(this.locName())
                 .withStyle(ChatFormatting.YELLOW));
         if (!stats.isEmpty()) {
-            list.add(Words.Stats.locName()
-                    .append(" (per Stack): ")
-                    .withStyle(ChatFormatting.GREEN));
+            list.add(Words.Stats.locName().append(Words.PER_STACK.locName()).withStyle(ChatFormatting.GREEN));
 
             for (StatMod stat : this.stats) {
                 for (Component comp : stat.getEstimationTooltip(Load.Unit(info.player).getLevel())) {
                     list.add(comp);
                 }
             }
-            
+
         }
 
         if (max_stacks > 1) {
-            list.add(Component.literal("Maximum Stacks: " + max_stacks));
+            list.add(Chats.MAX_STACKS.locName(max_stacks));
         }
 
         List<EffectTags> tags = this.tags.stream()
                 .map(x -> EffectTags.valueOf(x))
                 .collect(Collectors.toList());
 
-        String string = "Tags: ";
+        var tagtext = Words.TAGS.locName().append(": ");
 
         for (EffectTags x : tags) {
-            string += x.name + " ";
+            tagtext.append(x.name + " ");
         }
 
-        list.add(Component.literal(ChatFormatting.YELLOW + string));
+        list.add(tagtext.withStyle(ChatFormatting.YELLOW));
 
         list.add(ExileText.emptyLine().get());
 

@@ -43,6 +43,7 @@ public class ServerContainer {
         LOG_ERRORS = b.define("log_errors", true);
         STOP_ERROR_SPAM = b.define("stop_error_spam", true);
         MIN_LEVEL_MAP_DROPS = b.defineInRange("min_level_map_drops", 10, 0, Integer.MAX_VALUE);
+        LEVEL_DISTANCE_PENALTY_LEEWAY = b.defineInRange("LEVEL_DISTANCE_PENALTY_LEEWAY", 2, 0, Integer.MAX_VALUE);
 
 
         REGEN_HUNGER_COST = b.defineInRange("regen_hunger_cost", 10D, 0, 1000);
@@ -51,8 +52,8 @@ public class ServerContainer {
         MAX_EXP_DEBT_MULTI = b.defineInRange("max_death_exp_debt_multi", 1F, 0, 100);
         EXP_GAIN_MULTI = b.defineInRange("exp_gain_multi", 1D, 0, 1000);
         PARTY_RADIUS = b.defineInRange("party_radius", 200D, 0, 1000);
-        LEVEL_DISTANCE_PENALTY_PER_LVL = b.defineInRange("lvl_distance_penalty_per_level", 0.05D, 0, 1D);
-        LEVEL_DISTANCE_PENALTY_MIN_MULTI = b.defineInRange("min_loot_chance", 0.25D, 0, 1);
+        LEVEL_DISTANCE_PENALTY_PER_LVL = b.defineInRange("lvl_distance_penalty_per_level", 0.1D, 0, 1D);
+        LEVEL_DISTANCE_PENALTY_MIN_MULTI = b.defineInRange("min_loot_chance", 0.2D, 0, 1);
         EXTRA_MOB_STATS_PER_LEVEL = b.defineInRange("extra_mob_stats_per_lvl", 0.02D, 0, 1000);
         VANILLA_MOB_DMG_AS_EXILE_DMG = b.defineInRange("vanilla_mob_dmg_as_exile_dmg", 1D, 0, 1000);
         PLAYER_VANILLA_DMG_MULTI = b.defineInRange("PLAYER_VANILLA_DMG_MULTI", 0D, 0, 1000);
@@ -162,6 +163,8 @@ public class ServerContainer {
     public ForgeConfigSpec.BooleanValue LOG_ERRORS;
     public ForgeConfigSpec.BooleanValue STOP_ERROR_SPAM;
     public ForgeConfigSpec.IntValue MIN_LEVEL_MAP_DROPS;
+
+    public ForgeConfigSpec.IntValue LEVEL_DISTANCE_PENALTY_LEEWAY;
 
 
     public ForgeConfigSpec.DoubleValue REGEN_HUNGER_COST;

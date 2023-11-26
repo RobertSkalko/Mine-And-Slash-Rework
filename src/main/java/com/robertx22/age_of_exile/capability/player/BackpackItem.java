@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.RarityStoneItem;
 import net.minecraft.ChatFormatting;
@@ -62,7 +63,7 @@ public class BackpackItem extends AutoItem implements IAutoLocName, IAutoModel, 
     public void appendHoverText(ItemStack stack, @Nullable Level pLevel, List<Component> list, TooltipFlag pIsAdvanced) {
 
         list.add(Component.literal(""));
-        list.add(Component.literal("Right Click to open"));
+        list.add(Chats.RIGHT_CLICK_OPEN.locName());
 
     }
 

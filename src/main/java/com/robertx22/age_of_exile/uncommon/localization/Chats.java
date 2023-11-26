@@ -7,6 +7,15 @@ import net.minecraft.ChatFormatting;
 import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
+    INFUSES_STATS("Infuses stats into blank gear."),
+    RIGHT_CLICK_TO_GEN_ITEM("You can also right-click to generate an item."),
+
+    REQ_LVL("Required Level: %1$s"),
+    ONLY_ONE_OF_TYPE("Can only have one Perk of this type:"),
+    RIGHT_CLICK_OPEN("Right Click to Open"),
+
+    MAX_STACKS("Maximum Stacks: %1$s"),
+
     ITEM_NON_NBT("This is an empty item, without any NBT/Random Stats, this means you got it through creative mode or a /give command. If you want to test the mod, you can use the /mine_and_slash give command which creates items with working NBT."),
 
     NOT_FAMILY("Can't be applied to an item of that slot family."),

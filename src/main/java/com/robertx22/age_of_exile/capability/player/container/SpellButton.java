@@ -62,14 +62,10 @@ public class SpellButton extends ImageButton {
 
         List<Component> tooltip = new ArrayList<>();
         if (hasSpell()) {
-
             Minecraft mc = Minecraft.getInstance();
-
             tooltip = getSpell().getTooltip(mc.player);
-
         }
         this.setTooltip(Tooltip.create(TextUTIL.mergeList(tooltip)));
-
 
     }
 

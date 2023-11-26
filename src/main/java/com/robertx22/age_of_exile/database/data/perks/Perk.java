@@ -9,6 +9,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.spells.AscendancyClassesData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientTextureUtils;
@@ -113,7 +114,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
 
 
             if (this.one_kind != null) {
-                list.add(Component.literal("Can only have one Perk of this type: ").withStyle(ChatFormatting.GREEN));
+                list.add(Chats.ONLY_ONE_OF_TYPE.locName().withStyle(ChatFormatting.GREEN));
 
                 list.add(Component.translatable(SlashRef.MODID + ".one_of_a_kind." + one_kind).withStyle(ChatFormatting.GREEN));
             }
@@ -121,7 +122,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
 
             if (this.type == PerkType.MAJOR) {
 
-                list.add(Component.literal("Game Changer Talent").withStyle(ChatFormatting.RED));
+                list.add(Words.GAME_CHANGER.locName().withStyle(ChatFormatting.RED));
             }
 
             if (stats.size() > 0) {

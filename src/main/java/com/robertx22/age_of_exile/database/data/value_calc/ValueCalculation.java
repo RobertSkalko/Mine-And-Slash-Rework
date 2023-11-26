@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
+import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
@@ -106,11 +107,8 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
             var opt = getAllScalingValues().stream().filter(x -> x.getStat() == WeaponDamage.getInstance()).findFirst();
 
             if (opt.isPresent()) {
-
                 int num = (int) (opt.get().getMulti().getValue(en, provider) * 100F * this.cap_to_wep_dmg);
-
-                text.append(" (" + "Capped to " + num + "% of Wep-Dmg)");
-
+                text.append(Words.CAPPED_TO_WEP_DMG.locName(num));
             }
         }
 

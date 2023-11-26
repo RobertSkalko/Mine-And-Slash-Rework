@@ -277,28 +277,28 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         int ene = getCalculatedEnergyCost(ctx);
 
         if (mana > 0) {
-            list.add(Component.literal(ChatFormatting.BLUE + "Mana Cost: " + mana));
+            list.add(Words.MANA_COST.locName(mana).withStyle(ChatFormatting.BLUE));
         }
         if (ene > 0) {
-            list.add(Component.literal(ChatFormatting.GREEN + "Energy Cost: " + ene));
+            list.add(Words.ENE_COST.locName(ene).withStyle(ChatFormatting.GREEN));
 
         }
         if (config.usesCharges()) {
-            list.add(Component.literal(ChatFormatting.YELLOW + "Max Charges: " + config.charges));
-            list.add(Component.literal(ChatFormatting.YELLOW + "Charge Regen: " + config.charge_regen / 20 + "s"));
+
+            list.add(Words.MAX_CHARGES.locName(config.charges).withStyle(ChatFormatting.YELLOW));
+            list.add(Words.CHARGE_REGEN.locName(config.charge_regen).withStyle(ChatFormatting.YELLOW));
 
         } else {
-            list.add(Component.literal(ChatFormatting.YELLOW + "Cooldown: " + (getCooldownTicks(ctx) / 20) + "s"));
+            list.add(Words.COOLDOWN.locName(getCooldownTicks(ctx) / 20).withStyle(ChatFormatting.YELLOW));
         }
 
         int casttime = getCastTimeTicks(ctx);
 
+
         if (casttime == 0) {
-            list.add(Component.literal(ChatFormatting.GREEN + "Cast time: " + "Instant"));
-
+            list.add(Words.INSTANT_CAST.locName().withStyle(ChatFormatting.GREEN));
         } else {
-            list.add(Component.literal(ChatFormatting.GREEN + "Cast time: " + casttime / 20 + "s"));
-
+            list.add(Words.CAST_TIME.locName(casttime / 20).withStyle(ChatFormatting.GREEN));
         }
 
         list.add(ExileText.emptyLine().get());
@@ -309,8 +309,8 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
         if (this.config.times_to_cast > 1) {
             list.add(ExileText.emptyLine().get());
-            list.add(Component.literal("Casted " + config.times_to_cast + " times during channel.").withStyle(ChatFormatting.RED));
 
+            list.add(Words.CASTED_TIMES_CHANNEL.locName(config.times_to_cast).withStyle(ChatFormatting.RED));
         }
 
         if (Screen.hasShiftDown()) {
@@ -345,14 +345,14 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
 
         if (!this.statsForSkillGem.isEmpty()) {
-            list.add(Component.literal("Spell Stats: "));
+            list.add(Words.SPELL_STATS.locName());
             for (ExactStatData stat : getStats(info.player)) {
                 list.addAll(stat.GetTooltipString(info));
             }
         }
 
         String taglist = StringUTIL.join(this.config.tags.stream().map(x -> x.locname).iterator(), ", ");
-        MutableComponent tagtext = Component.literal("Tags: ").append(taglist);
+        MutableComponent tagtext = Words.TAGS.locName().append(": ").append(taglist);
 
         list.add(tagtext);
 

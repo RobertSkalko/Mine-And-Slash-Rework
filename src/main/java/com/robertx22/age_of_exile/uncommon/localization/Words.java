@@ -6,9 +6,31 @@ import net.minecraft.ChatFormatting;
 
 import java.util.Locale;
 
+// to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
-    PET_BASIC("Pet Basic Attack:"),
+    TAGS("Tags"),
+    ITEM_TYPE("Item Type: "),
+    SPELL_STATS("Spell Stats:"),
+    CASTED_TIMES_CHANNEL("Casted %1$s times during channel."),
+    INSTANT_CAST("Instant Cast"),
+    CAPPED_TO_WEP_DMG(" (" + "Capped to %1$s%% of Wep-Dmg)"),
 
+    CAST_TIME("Cast Time: %1$ss"),
+    MANA_COST("Mana Cost: %1$s"),
+    ENE_COST("Energy Cost: %1$s"),
+    COOLDOWN("Cooldown: %1$s"),
+    MAX_CHARGES("Max Charges: %1$s"),
+    CHARGE_REGEN("Charge Regen: %1$ss"),
+
+    GAME_CHANGER("Game Changer Talent"),
+    POTENTIAL_COST("Potential Cost: %1$s"),
+    NOT_AFFECTED_BY_POTENT("Not affected by potential."),
+    STATUS_EFFECT("Status Effect"),
+    PET_BASIC("Pet Basic Attack:"),
+    PER_STACK(" (per stack): "),
+    WEAPON("Weapon:"),
+    ARMOR("Armor:"),
+    JEWERLY("Jewelry:"),
     PROFESSIONS("Professions"),
     POTION("Potion"),
     SUPPGEM("Support Gem"),

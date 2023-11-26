@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.gui.TextUtils;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.vanilla_mc.packets.AllocateClassPointPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.TextUTIL;
@@ -85,7 +86,7 @@ public class LearnClassPointButton extends ImageButton {
 
 
         int reqlvl = screen.currentSchool().getLevelNeededToAllocate(screen.currentSchool().perks.get(perk.GUID()));
-        tooltip.add(Component.literal("Required Level: " + reqlvl).withStyle(ChatFormatting.RED));
+        tooltip.add(Chats.REQ_LVL.locName(reqlvl).withStyle(ChatFormatting.RED));
 
 
         this.setTooltip(Tooltip.create(TextUTIL.mergeList(tooltip)));
