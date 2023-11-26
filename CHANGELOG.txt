@@ -84,3 +84,7 @@ v.5.3.5
 - fixed some untranslatable text, not all
 - fix stations stopping to work "randomly", turns out caching player no good when player dies
 - fixed effects, they now actually disappear and tick and also their stacks work now
+- dot dmg can now crit
+- removed reflect
+- fixed charge regen bug
+- your summons will no longer drown trying to attack fish

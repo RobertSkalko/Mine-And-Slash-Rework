@@ -99,11 +99,12 @@ public class OnItemInteract {
                 if (cursor.getItem() instanceof CraftedSoulItem cs) {
                     data = cs.getSoul(cursor);
                 }
-
                 if (data != null) {
                     if (data.canInsertIntoStack(stack)) {
-                        data.insertAsUnidentifiedOn(stack, player);
-                        success = true;
+                        if (stack.getCount() == 1) {
+                            data.insertAsUnidentifiedOn(stack, player);
+                            success = true;
+                        }
                     }
                 }
 

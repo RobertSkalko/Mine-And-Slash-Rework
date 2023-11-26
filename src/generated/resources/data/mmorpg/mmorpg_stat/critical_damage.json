@@ -8,8 +8,7 @@
       "on_damage"
     ],
     "ifs": [
-      "is_crit_true",
-      "is_attack_or_spell_attack"
+      "is_crit_true"
     ],
     "order": 100,
     "side": "Source"

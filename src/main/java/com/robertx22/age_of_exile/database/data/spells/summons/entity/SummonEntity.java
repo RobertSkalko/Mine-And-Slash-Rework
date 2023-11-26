@@ -97,7 +97,7 @@ public abstract class SummonEntity extends TamableAnimal implements RangedAttack
         if (canAttack == pTarget) {
             return true;
         }
-
+      
         LivingEntity owner = getOwner();
         if (owner == null) {
             return false;

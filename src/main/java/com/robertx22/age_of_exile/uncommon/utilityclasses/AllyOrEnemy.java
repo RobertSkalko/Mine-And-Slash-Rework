@@ -27,7 +27,6 @@ public enum AllyOrEnemy {
             if (!enemies.is(caster, target)) {
                 return false;
             }
-
             var type = Load.Unit(target).getType();
 
             if (type == EntityTypeUtils.EntityClassification.AMBIENT) {
@@ -39,10 +38,11 @@ public enum AllyOrEnemy {
             if (type == EntityTypeUtils.EntityClassification.NPC) {
                 return false;
             }
+
             if (target instanceof NeutralMob) {
                 return false;
             }
-
+          
             return true;
         }
 

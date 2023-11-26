@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.aoe_data.database.perks;
 
-import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
@@ -8,13 +7,11 @@ import com.robertx22.age_of_exile.database.OptScaleExactStat;
 import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
 import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
-import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDuration;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.BlockChance;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
-import com.robertx22.age_of_exile.database.data.stats.types.defense.SpellDodge;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.PhysicalToElement;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
@@ -124,10 +121,13 @@ public class GameChangerPerksAddtl implements ExileRegistryInit {
                 new OptScaleExactStat(-50, Stats.INCREASED_AREA.get(), ModType.FLAT)
         );
 
+        /*
         PerkBuilder.gameChanger("netherite_bastion", "Netherite Bastion",
                 new OptScaleExactStat(25, Stats.DAMAGE_REFLECTED.get(), ModType.FLAT),
                 new OptScaleExactStat(-100, DodgeRating.getInstance(), ModType.MORE)
         );
+
+         */
 
         PerkBuilder.gameChanger("diamond_grip", "Diamond Grip",
                 new OptScaleExactStat(1, DatapackStats.PROJ_DMG_PER_STR, ModType.FLAT)
