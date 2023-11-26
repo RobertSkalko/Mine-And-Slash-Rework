@@ -107,6 +107,8 @@ public class ExilePotionEvent extends EffectEvent {
             extraData.caster_uuid = source.getStringUUID();
             extraData.spell_id = this.spellid;
             extraData.str_multi = data.getNumber();
+            extraData.calcSpell = this.calc;
+            extraData.ticks_left = (int) data.getNumber(EventData.EFFECT_DURATION_TICKS).number;
 
             MobEffectInstance newInstance = new MobEffectInstance(status, duration, extraData.stacks, false, false, true);
 
@@ -121,7 +123,7 @@ public class ExilePotionEvent extends EffectEvent {
                 target.addEffect(newInstance);
             }
 
-            
+
             // sync packets to client
             ClientboundUpdateMobEffectPacket packet = new ClientboundUpdateMobEffectPacket(target.getId(), newInstance);
 

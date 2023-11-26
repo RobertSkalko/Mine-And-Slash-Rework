@@ -37,6 +37,7 @@ public class ProfessionBlockEntity extends BlockEntity {
     public SimpleContainer show = new SimpleContainer(1);
 
     public String owner = "";
+    public UUID ownerUUID = null;
 
 
     public ProfessionBlockEntity(BlockPos pPos, BlockState pBlockState) {
@@ -52,21 +53,24 @@ public class ProfessionBlockEntity extends BlockEntity {
     int ticks = 0;
     int craftingTicks = 0;
 
-    transient Player cached = null;
 
     public Player getOwner(Level l) {
-        if (cached == null) {
-            if (owner != null && !owner.isEmpty()) {
+
+        if (ownerUUID == null) {
+            if (!owner.isEmpty()) {
                 try {
-                    var id = UUID.fromString(owner);
-                    cached = l.getPlayerByUUID(id);
+                    ownerUUID = UUID.fromString(owner);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    ModErrors.print(e);
                 }
             }
         }
-        return cached;
+        
+        if (ownerUUID != null) {
+            return l.getPlayerByUUID(ownerUUID);
+        }
 
+        return null;
     }
 
     int cooldown = 0;

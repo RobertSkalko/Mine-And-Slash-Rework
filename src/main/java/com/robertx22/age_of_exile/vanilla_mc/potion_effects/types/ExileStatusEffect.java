@@ -65,11 +65,8 @@ public class ExileStatusEffect extends MobEffect implements IGUID, IOneOfATypePo
 
             if (data != null) {
                 int stacks = data.stacks;
-
                 exect.mc_stats.forEach(x -> x.applyVanillaStats(entity, stacks));
-
-                Load.Unit(entity)
-                        .forceRecalculateStats();
+                Load.Unit(entity).forceRecalculateStats();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -114,37 +111,6 @@ public class ExileStatusEffect extends MobEffect implements IGUID, IOneOfATypePo
         return true;
     }
 
-    @Override
-    public void applyEffectTick(LivingEntity entity, int amplifier) {
-
-        try {
-            if (entity.isDeadOrDying()) {
-                return;
-            }
-
-            ExileEffect exect = getExileEffect();
-
-            if (exect.spell == null) {
-                return;
-            }
-
-            ExileEffectInstanceData data = getSavedData(entity);
-
-            if (data == null) {
-                return;
-            }
-
-            LivingEntity caster = data.getCaster(entity.level());
-            if (caster == null) {
-                return;
-            }
-
-            SpellCtx ctx = SpellCtx.onTick(caster, entity, data.calcSpell);
-            exect.spell.tryActivate(Spell.DEFAULT_EN_NAME, ctx); // source is default name at all times
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public String GUID() {

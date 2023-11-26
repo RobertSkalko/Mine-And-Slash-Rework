@@ -82,3 +82,5 @@ v.5.3.5
 - added explode minions spell
 - added LEVEL_DISTANCE_PENALTY_LEEWAY, example if set to 2, mobs 2 lvls higher or lower won't have xp penalty applied, but it starts at 3 lvls higher
 - fixed some untranslatable text, not all
+- fix stations stopping to work "randomly", turns out caching player no good when player dies
+- fixed effects, they now actually disappear and tick and also their stacks work now

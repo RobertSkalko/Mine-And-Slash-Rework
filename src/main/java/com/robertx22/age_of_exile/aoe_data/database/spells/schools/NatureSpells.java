@@ -133,7 +133,7 @@ public class NatureSpells implements ExileRegistryInit {
         SpellBuilder.of(NATURE_BALM, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 60 * 20)
                         , "Nature's Balm",
                         Arrays.asList(SpellTag.heal))
-                .manualDesc("Gives buff to nearby allies.")
+                .manualDesc("Gives buff that heals nearby allies for " + SpellCalcs.NATURE_BALM.getLocDmgTooltip() + " every second.")
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
                 .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, BeneficialEffects.REGENERATE.resourcePath, 20 * 15D))
                 .levelReq(1)

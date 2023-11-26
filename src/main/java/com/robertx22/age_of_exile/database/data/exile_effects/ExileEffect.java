@@ -2,7 +2,9 @@ package com.robertx22.age_of_exile.database.data.exile_effects;
 
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.spells.components.AttachedSpell;
+import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
+import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.value_calc.LeveledValue;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashPotions;
@@ -89,6 +91,30 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
         return this.locName;
     }
 
+    public void onTick(LivingEntity entity, ExileEffectInstanceData data) {
+
+        try {
+            if (entity.isDeadOrDying()) {
+                return;
+            }
+            if (spell == null) {
+                return;
+            }
+            if (data == null) {
+                return;
+            }
+            LivingEntity caster = data.getCaster(entity.level());
+            if (caster == null) {
+                return;
+            }
+
+            SpellCtx ctx = SpellCtx.onTick(caster, entity, data.calcSpell);
+            spell.tryActivate(Spell.DEFAULT_EN_NAME, ctx); // source is default name at all times
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     public List<ExactStatData> getExactStats(LivingEntity caster, ExileEffectInstanceData data) {
 
         if (caster == null) {
@@ -99,7 +125,17 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
                 .map(x -> {
                     LeveledValue lvlval = new LeveledValue(0, 100);
                     int perc = (int) lvlval.getValue(caster, data.getSpell());
-                    return x.ToExactStat((int) (perc * data.str_multi * data.stacks), Load.Unit(caster).getLevel());
+
+                    var result = x.ToExactStat((int) (perc * data.str_multi), Load.Unit(caster).getLevel());
+
+                    if (data.stacks > 1) {
+                        var inc = (data.stacks - 1) * 100F;
+                        result.percentIncrease = inc;
+                        result.increaseByAddedPercent();
+                    }
+
+                    return result;
+
                 })
                 .collect(Collectors.toList());
 

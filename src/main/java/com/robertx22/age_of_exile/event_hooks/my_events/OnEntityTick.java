@@ -21,6 +21,7 @@ public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
             return;
         }
         try {
+
             if (Load.Unit(entity) == null) {
                 return; // it shouldnt be though
             }
@@ -32,12 +33,15 @@ public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
             }
 
             data.ailments.onTick(entity);
+
+            data.getStatusEffectsData().tick(entity);
+
             data.getCooldowns().onTicksPass(1);
 
             if (entity.tickCount % 20 == 0) {
-             
                 data.leech.onSecondUseLeeches(data);
             }
+
 
             var boss = data.getBossData();
             if (boss != null) {

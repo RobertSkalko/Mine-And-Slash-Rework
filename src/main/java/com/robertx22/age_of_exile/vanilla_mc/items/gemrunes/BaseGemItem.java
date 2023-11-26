@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -60,21 +61,21 @@ public abstract class BaseGemItem extends Item {
 
         tooltip.add(Component.literal(""));
         List<OptScaleExactStat> wep = gem.getFor(SlotFamily.Weapon);
-        tooltip.add(Component.literal("On Weapon:").withStyle(ChatFormatting.RED));
+        tooltip.add(Words.WEAPON.locName().withStyle(ChatFormatting.RED));
         for (OptScaleExactStat x : wep) {
             tooltip.addAll(x.GetTooltipString(info));
         }
 
         tooltip.add(Component.literal(""));
         List<OptScaleExactStat> armor = gem.getFor(SlotFamily.Armor);
-        tooltip.add(Component.literal("On Armor:").withStyle(ChatFormatting.BLUE));
+        tooltip.add(Words.ARMOR.locName().withStyle(ChatFormatting.BLUE));
         for (OptScaleExactStat x : armor) {
             tooltip.addAll(x.GetTooltipString(info));
         }
 
         tooltip.add(Component.literal(""));
         List<OptScaleExactStat> jewelry = gem.getFor(SlotFamily.Jewelry);
-        tooltip.add(Component.literal("On Jewelry:").withStyle(ChatFormatting.LIGHT_PURPLE));
+        tooltip.add(Words.JEWERLY.locName().withStyle(ChatFormatting.LIGHT_PURPLE));
         for (OptScaleExactStat x : jewelry) {
             tooltip.addAll(x.GetTooltipString(info));
         }

@@ -17,11 +17,11 @@ public class ExileEffectInstanceData {
     public String spell_id = "";
     public int stacks = 1;
     public float str_multi = 1;
+    public int ticks_left = 0;
 
-
+    
     public Spell getSpell() {
-        return ExileDB.Spells()
-                .get(spell_id);
+        return ExileDB.Spells().get(spell_id);
     }
 
     public LivingEntity getCaster(Level world) {

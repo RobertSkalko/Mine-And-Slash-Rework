@@ -20,6 +20,17 @@ public class EntityStatusEffectsData {
 
     public HashMap<String, ExileEffectInstanceData> exileMap = new HashMap<>();
 
+    public void tick(LivingEntity en) {
+
+        for (Map.Entry<String, ExileEffectInstanceData> e : exileMap.entrySet()) {
+            e.getValue().ticks_left--;
+            ExileEffect eff = ExileDB.ExileEffects().get(e.getKey());
+            if (eff != null) {
+                eff.onTick(en, e.getValue());
+            }
+        }
+        exileMap.entrySet().removeIf(x -> x.getValue().ticks_left < 1);
+    }
 
     public ExileEffectInstanceData get(ExileStatusEffect eff) {
         return exileMap.getOrDefault(eff.GUID(), new ExileEffectInstanceData());

@@ -36,6 +36,7 @@ public class OnServerTick {
 
                 Load.player(player).favor.onSecond(player);
 
+             
                 if (Load.Unit(player)
                         .getResources()
                         .getEnergy() < Load.Unit(player)
