@@ -20,7 +20,6 @@ import static com.robertx22.age_of_exile.uncommon.enumclasses.Elements.*;
 
 public class MobAffixes implements ExileRegistryInit {
 
-    public static String THORNY = "thorny_mobs";
     public static String FULL_COLD = "full_cold";
     public static String FULL_FIRE = "full_fire";
     public static String FULL_LIGHTNING = "full_fire";
@@ -101,13 +100,6 @@ public class MobAffixes implements ExileRegistryInit {
                 .setWeight(500)
                 .addToSerializables();
 
-
-        // special ones that are only set from boss spells etc
-        new MobAffix(THORNY, "Mega Thorns", ChatFormatting.RED, Affix.Type.prefix)
-                .setMods(new StatMod(10, 25, Stats.DAMAGE_REFLECTED.get()))
-                .setMods(new StatMod(100, 250, Health.getInstance()))
-                .setWeight(0)
-                .addToSerializables();
 
         fullEle(Cold);
         fullEle(Lightning);

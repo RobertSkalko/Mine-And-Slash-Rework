@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.database.registry;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearTypes;
-import com.robertx22.age_of_exile.aoe_data.database.boss_spell.SummonThornMobs;
+import com.robertx22.age_of_exile.aoe_data.database.boss_spell.SummonExplodyMobs;
 import com.robertx22.age_of_exile.aoe_data.database.gear_slots.GearSlots;
 import com.robertx22.age_of_exile.aoe_data.database.mob_affixes.MobAffixes;
 import com.robertx22.age_of_exile.aoe_data.database.perks.Perks;
@@ -69,7 +69,7 @@ public class ExileDBInit {
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.SUPPORT_GEM, ""));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.AURA, ""));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.MAP_AFFIX, ""));
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.BOSS_SPELL, new SummonThornMobs().GUID()));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.BOSS_SPELL, new SummonExplodyMobs().GUID()));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.LEAGUE_MECHANIC, new HarvestLeague().GUID()));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.LOOT_CHEST, new GearLootChest().GUID()));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.DUNGEON, ""));

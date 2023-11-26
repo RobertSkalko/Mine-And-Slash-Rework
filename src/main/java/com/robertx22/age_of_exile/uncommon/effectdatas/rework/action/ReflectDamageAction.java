@@ -11,6 +11,8 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import net.minecraft.world.entity.LivingEntity;
 
+// todo WARNING
+// this probably infi-loops when combined with non MNS reflect, because there's no good way to check if the dmg is also reflect
 public class ReflectDamageAction extends StatEffect {
 
     NumberProvider num_provider = new NumberProvider();
@@ -33,9 +35,9 @@ public class ReflectDamageAction extends StatEffect {
         float val = num_provider.getValue(event, en, data);
 
         DamageEvent dmg = EventBuilder.ofDamage(en, target, val)
-            .setupDamage(AttackType.reflect, event.data.getWeaponType(), event.data.getStyle())
-            .set(x -> x.data.setElement(event.data.getElement()))
-            .build();
+                .setupDamage(AttackType.reflect, event.data.getWeaponType(), event.data.getStyle())
+                .set(x -> x.data.setElement(event.data.getElement()))
+                .build();
 
         dmg.data.setBoolean(EventData.DISABLE_KNOCKBACK, true);
 
