@@ -9,6 +9,7 @@ import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.library_of_exile.utils.SoundUtils;
+import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -50,7 +51,7 @@ public class CraftRunewordAction extends GuiAction {
 
         String runes = StringUTIL.join(runeWord.runes.stream().map(x -> x.toUpperCase(Locale.ROOT)).collect(Collectors.toList()).listIterator(), ", ");
 
-        list.add(Component.literal(runes).withStyle(ChatFormatting.YELLOW));
+        list.add(Component.literal(ChatFormatting.WHITE + "Runes: ").append(Component.literal(runes).withStyle(ChatFormatting.YELLOW)));
 
 
         return list;
