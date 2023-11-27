@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.aoe_data.database.gear_slots.GearSlots;
 import com.robertx22.age_of_exile.database.data.currency.base.IShapedRecipe;
 import com.robertx22.age_of_exile.database.data.currency.base.IShapelessRecipe;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
+import com.robertx22.age_of_exile.database.data.profession.all.ProfessionMatItems;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mechanics.harvest.HarvestItems;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -105,6 +106,7 @@ public class RecipeGenerator {
         gearRecipe(consumer, SlashItems.GearItems.RINGS, GearSlots.RING);
         gearRecipe(consumer, SlashItems.GearItems.STAFFS, GearSlots.STAFF);
 
+        ProfessionMatItems.addDownRankRecipes(consumer);
 
     }
 

@@ -6,9 +6,15 @@ import com.robertx22.age_of_exile.database.data.profession.items.RareMaterialIte
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
 import com.robertx22.temp.SkillItemTier;
+import net.minecraft.advancements.critereon.EnchantedItemTrigger;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Item;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Consumer;
 
 public class ProfessionMatItems {
 
@@ -47,6 +53,26 @@ public class ProfessionMatItems {
             POWERED_RARE_MATS.get(Professions.SALVAGING).put(power, Def.item("rare_mats/" + Professions.SALVAGING + "/" + power.id, () -> new RareMaterialItem(power, "Essence")));
         }
 
+
+    }
+
+    public static void addDownRankRecipes(Consumer<FinishedRecipe> con) {
+        for (Map.Entry<String, HashMap<SkillItemTier, RegObj<Item>>> en : TIERED_MAIN_MATS.entrySet()) {
+            for (Map.Entry<SkillItemTier, RegObj<Item>> e : en.getValue().entrySet()) {
+
+                if (e.getKey().tier != SkillItemTier.TIER0.tier) {
+
+                    var lower = e.getKey().lowerTier();
+
+                    var loweritem = en.getValue().get(lower).get();
+
+                    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, loweritem, 1)
+                            .unlockedBy("player_level", EnchantedItemTrigger.TriggerInstance.enchantedItem())
+                            .requires(e.getValue().get(), 1)
+                            .save(con);
+                }
+            }
+        }
 
     }
 }
