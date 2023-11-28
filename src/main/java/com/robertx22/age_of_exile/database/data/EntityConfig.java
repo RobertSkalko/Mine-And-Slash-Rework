@@ -40,6 +40,8 @@ public class EntityConfig implements JsonExileRegistry<EntityConfig>, ISerializa
 
     public SpecialMobStats stats = new SpecialMobStats();
 
+    public String set_rar = "";
+
     public double loot_multi = 1F;
 
     public double exp_multi = 1F;
@@ -53,6 +55,10 @@ public class EntityConfig implements JsonExileRegistry<EntityConfig>, ISerializa
     public double hp_multi = 1;
 
     public double stat_multi = 1;
+
+    public boolean hasSpecificRarity() {
+        return !this.set_rar.isEmpty();
+    }
 
     @Override
     public String datapackFolder() {
