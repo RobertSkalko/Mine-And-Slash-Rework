@@ -155,7 +155,7 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
     private MutableComponent stars() {
 
-        return Component.literal("Support Slots: " + links + "/5").withStyle(ChatFormatting.DARK_PURPLE);
+        return Component.literal("Support Slots: " + links + "/5 Available").withStyle(ChatFormatting.DARK_PURPLE);
 
     }
 
@@ -207,7 +207,7 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
             list.add(ExileText.emptyLine().get());
 
-            list.add(ExileText.ofText("Mana Cost Multiplier: " + (int) (supp.manaMulti * 100) + "%").get());
+            list.add(ExileText.ofText("Resource Cost Multiplier: " + (int) (supp.manaMulti * 100) + "%").get());
 
             if (supp.isOneOfAKind()) {
                 list.add(Component.literal("Only One Allowed: " + supp.one_of_a_kind));
