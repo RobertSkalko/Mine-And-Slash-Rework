@@ -1,15 +1,9 @@
 package com.robertx22.age_of_exile.event_hooks.damage_hooks;
 
-import com.robertx22.age_of_exile.database.data.spells.components.Spell;
-import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
-import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.SpellCastContext;
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEntity;
-import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.DmgSourceUtils;
-import com.robertx22.age_of_exile.mixin_methods.OnHurtEvent;
 import com.robertx22.age_of_exile.uncommon.UnstuckMobs;
-import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
@@ -36,7 +30,6 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
                 }
             }
         }
-
         if (DmgSourceUtils.isMyDmgSource(event.source)) {
             return;
         }
@@ -49,52 +42,16 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
             }
             return;
         }
-
         if (!(event.source.getEntity() instanceof Player)) {
-
             if (event.source.getEntity() instanceof SummonEntity summon) {
                 LivingEntity caster = summon.getOwner();
-
-
                 if (caster != null) {
-
+                    PetAttackUTIL.tryAttack(summon, caster, event.mob);
                     event.damage = 0;
                     event.canceled = true;
-
-                    Spell spell = ExileDB.Spells().get(Load.Unit(summon).summonedPetData.spell);
-
-                    if (spell != null) {
-
-
-                        Spell basic = spell.getConfig().getSummonBasicSpell();
-
-                        var ctx = new SpellCastContext(caster, 0, basic);
-
-                        var originctx = new SpellCastContext(caster, 0, spell);
-
-
-                        boolean cancast = false;
-                        if (caster instanceof Player p) {
-                            if (Load.player(p).spellCastingData.canCast(basic, p)) {
-                                cancast = true;
-                            } else {
-                                cancast = false;
-                            }
-                        }
-
-                        if (cancast) {
-                            basic.spendResources(ctx);
-                            basic.attached.onCast(SpellCtx.onCast(caster, originctx.calcData));
-                            basic.attached.tryActivate(Spell.DEFAULT_EN_NAME, SpellCtx.onHit(caster, summon, event.mob, originctx.calcData)); // todo this should be reworked.
-                            // pet ability should gain the stats of the pet used to summon it, this is a nasty hack
-                        }
-
-                    }
-                } else {
-                    summon.kill();
                 }
             } else {
-                OnHurtEvent.onHurtEvent(new AttackInformation(event, AttackInformation.Mitigation.PRE, event.mob, event.source, event.damage));
+                LivingHurtUtils.tryAttack(new AttackInformation(event, AttackInformation.Mitigation.PRE, event.mob, event.source, event.damage));
             }
         }
     }

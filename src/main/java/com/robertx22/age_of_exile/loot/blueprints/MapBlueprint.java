@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.loot.blueprints;
 
 
+import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.map_affix.MapAffix;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -48,7 +49,7 @@ public class MapBlueprint extends RarityItemBlueprint {
 
         int mechs = 0;
 
-        if (RandomUtils.roll(33)) {
+        if (RandomUtils.roll(ServerContainer.get().MAP_MECHANIC_CHANCE.get())) {
             mechs++;
         }
         // todo add more when more league mechanics are added!

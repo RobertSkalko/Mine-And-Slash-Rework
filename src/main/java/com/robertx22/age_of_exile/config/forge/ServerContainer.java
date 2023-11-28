@@ -78,6 +78,8 @@ public class ServerContainer {
         CURRENCY_DROPRATE = b.defineInRange("currency_drop_rate", 0.5D, 0, 1000);
         JEWEL_DROPRATE = b.defineInRange("jewel_drop_rate", 0.25D, 0, 1000);
         LOOT_CHEST_DROPRATE = b.defineInRange("loot_chest_drop_rate", 0.1D, 0, 1000);
+        
+        MAP_MECHANIC_CHANCE = b.defineInRange("MAP_MECHANIC_CHANCE", 33D, 0, 100D);
 
 
         BLOCK_COST = b.defineInRange("block_cost", 0.25D, 0, 1000);
@@ -200,6 +202,7 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue RUNE_DROPRATE;
     public ForgeConfigSpec.DoubleValue CURRENCY_DROPRATE;
     public ForgeConfigSpec.DoubleValue JEWEL_DROPRATE;
+    public ForgeConfigSpec.DoubleValue MAP_MECHANIC_CHANCE;
 
     public ForgeConfigSpec.DoubleValue BLOCK_COST;
 

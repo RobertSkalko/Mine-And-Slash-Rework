@@ -3,7 +3,8 @@ package com.robertx22.age_of_exile.mmorpg.event_registers;
 import com.robertx22.age_of_exile.capability.player.PlayerData;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.AttributeStat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import com.robertx22.age_of_exile.event_hooks.damage_hooks.*;
+import com.robertx22.age_of_exile.event_hooks.damage_hooks.LivingHurtUtils;
+import com.robertx22.age_of_exile.event_hooks.damage_hooks.reworked.NewDamageMain;
 import com.robertx22.age_of_exile.event_hooks.entity.OnMobSpawn;
 import com.robertx22.age_of_exile.event_hooks.entity.OnTrackEntity;
 import com.robertx22.age_of_exile.event_hooks.my_events.OnEntityTick;
@@ -164,12 +165,12 @@ public class CommonEvents {
         ExileEvents.LIVING_ENTITY_TICK.register(new OnEntityTick());
         ExileEvents.MOB_DEATH.register(new OnMobDeathDrops());
 
-        ExileEvents.DAMAGE_BEFORE_CALC.register(new OnNonPlayerDamageEntityEvent());
+        NewDamageMain.init();
 
-        ExileEvents.DAMAGE_BEFORE_CALC.register(new ScaleVanillaMobDamage());
-        ExileEvents.DAMAGE_BEFORE_CALC.register(new ScaleVanillaPlayerDamage());
 
-        ExileEvents.DAMAGE_AFTER_CALC.register(new OnPlayerDamageEntityEvent());
+        // ExileEvents.DAMAGE_BEFORE_CALC.register(new ScaleVanillaMobDamage()); todo this doesnt seem needed..?
+        //ExileEvents.DAMAGE_BEFORE_CALC.register(new ScaleVanillaPlayerDamage()); todo same
+
 
         ExileEvents.PLAYER_DEATH.register(new OnPlayerDeath());
 

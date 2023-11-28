@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.event_hooks.damage_hooks;
 import com.robertx22.age_of_exile.a_libraries.curios.MyCurioUtils;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.DmgSourceUtils;
+import com.robertx22.age_of_exile.mixin_ducks.DamageSourceDuck;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.OnScreenMessageUtils;
@@ -54,11 +55,13 @@ public class LivingHurtUtils {
             if (DmgSourceUtils.isMyDmgSource(event.getSource())) {
                 return;
             }
-            if (event.getSource()
-                    .getEntity() instanceof LivingEntity) {
+            if (event.getSource().getEntity() instanceof LivingEntity) {
                 onAttack(event);
             }
 
+
+            var duck = (DamageSourceDuck) event.getSource();
+            duck.tryOverrideDmgWithMns(event);
         }
 
     }
@@ -92,10 +95,8 @@ public class LivingHurtUtils {
                 }
 
                 if (weapondata != null && weapondata.isWeapon()) {
-                    if (data.getAttackerEntityData()
-                            .canUseWeapon(weapondata)) {
-                        data.getAttackerEntityData()
-                                .attackWithWeapon(data);
+                    if (data.getAttackerEntityData().canUseWeapon(weapondata)) {
+                        data.getAttackerEntityData().attackWithWeapon(data);
                     }
 
                 } else {

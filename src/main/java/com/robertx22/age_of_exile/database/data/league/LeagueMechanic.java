@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.maps.MapData;
 import com.robertx22.age_of_exile.mechanics.base.LeagueBlockData;
 import com.robertx22.age_of_exile.mechanics.base.LeagueControlBlockEntity;
+import com.robertx22.age_of_exile.mmorpg.ModErrors;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.registry.ExileRegistry;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
@@ -111,21 +112,26 @@ public abstract class LeagueMechanic implements ExileRegistry<LeagueMechanic> {
     protected boolean generateStructure(LevelAccessor world, ResourceLocation room, ChunkPos cpos) {
 
 
-        var template = world.getServer().getStructureManager().get(room).get();
-        StructurePlaceSettings settings = new StructurePlaceSettings().setMirror(Mirror.NONE)
-                .setIgnoreEntities(false);
+        try {
+            var template = world.getServer().getStructureManager().get(room).get();
+            StructurePlaceSettings settings = new StructurePlaceSettings().setMirror(Mirror.NONE)
+                    .setIgnoreEntities(false);
 
-        settings.setBoundingBox(settings.getBoundingBox());
+            settings.setBoundingBox(settings.getBoundingBox());
 
-        BlockPos position = cpos.getBlockAt(0, startY(), 0);
+            BlockPos position = cpos.getBlockAt(0, startY(), 0);
 
-        if (template == null) {
-            System.out.println("FATAL ERROR: Structure does not exist (" + room.toString() + ")");
+            if (template == null) {
+                System.out.println("FATAL ERROR: Structure does not exist (" + room.toString() + ")");
+                return false;
+            }
+            settings.setRotation(Rotation.NONE);
+
+            template.placeInWorld((ServerLevelAccessor) world, position, position, settings, world.getRandom(), Block.UPDATE_CLIENTS);
+        } catch (Exception e) {
+            ModErrors.print(e);
             return false;
         }
-        settings.setRotation(Rotation.NONE);
-
-        template.placeInWorld((ServerLevelAccessor) world, position, position, settings, world.getRandom(), Block.UPDATE_CLIENTS);
 
         return true;
     }

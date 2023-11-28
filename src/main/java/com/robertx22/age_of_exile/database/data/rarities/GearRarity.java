@@ -140,11 +140,13 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
 
 
     public boolean hasHigherRarity() {
-        return ExileDB.GearRarities()
-                .isRegistered(higher_rar);
+        return ExileDB.GearRarities().isRegistered(higher_rar);
     }
 
     public GearRarity getHigherRarity() {
+        if (this.higher_rar.isEmpty()) {
+            return null;
+        }
         return ExileDB.GearRarities().get(higher_rar);
     }
 

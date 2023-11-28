@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class AttackInformation {
 
-    public ExileEvents.OnDamageEntity event;
+    private ExileEvents.OnDamageEntity event;
     Mitigation mitigation;
     boolean canceled = false;
     LivingEntity targetEntity;
@@ -48,6 +48,15 @@ public class AttackInformation {
 
     public void setAmount(float f) {
         amount = f;
+        if (event != null) {
+            this.event.damage = f;
+
+            if (f > 0) {
+                event.canceled = false;
+            } else {
+                event.canceled = true;
+            }
+        }
     }
 
     public LivingEntity getTargetEntity() {
@@ -68,6 +77,9 @@ public class AttackInformation {
 
     public void setCanceled(boolean canceled) {
         this.canceled = canceled;
+        if (event != null) {
+            this.event.canceled = canceled;
+        }
     }
 
     public enum Mitigation {

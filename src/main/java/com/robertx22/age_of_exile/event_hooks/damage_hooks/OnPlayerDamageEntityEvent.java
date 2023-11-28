@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.event_hooks.damage_hooks;
 
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.DmgSourceUtils;
-import com.robertx22.age_of_exile.mixin_methods.OnHurtEvent;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -27,7 +26,7 @@ public class OnPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDamag
             return; // todo temp fix
         }
         if (event.source.getEntity() instanceof Player) {
-            OnHurtEvent.onHurtEvent(new AttackInformation(event, AttackInformation.Mitigation.POST, event.mob, event.source, event.damage));
+            LivingHurtUtils.tryAttack(new AttackInformation(event, AttackInformation.Mitigation.PRE, event.mob, event.source, event.damage));
         }
     }
 

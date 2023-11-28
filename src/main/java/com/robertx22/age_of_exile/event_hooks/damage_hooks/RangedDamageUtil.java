@@ -24,8 +24,7 @@ public class RangedDamageUtil {
         LivingEntity en = (LivingEntity) event.getSource()
                 .getEntity();
         DamageSource source = event.getSource();
-        Item item = en.getMainHandItem()
-                .getItem();
+        Item item = en.getMainHandItem().getItem();
         GearItemData gear = StackSaving.GEARS.loadFrom(en.getMainHandItem());
 
 

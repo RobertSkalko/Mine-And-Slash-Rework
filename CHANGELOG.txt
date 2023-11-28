@@ -89,3 +89,12 @@ v.5.3.5
 - fixed charge regen bug
 - your summons will no longer drown trying to attack fish
 - gems are now craftable instead
+
+.5.3.6
+
+- added downranking of profession gatherable mats, 1 > 1 exchange rate
+- attempted to clean up dmg code a bit, now shouldn't be replacing all dmg types anymore, instead just setting the dmg numbers at the end
+WEIRD DAMAGE BEHAVIOR MIGHT HAPPEN, SO PLEASE REPORT
+- should fix stations taking too many mats if they are spread across stacks
+- fixed orb of imbalance
+- added map mechanic chance config

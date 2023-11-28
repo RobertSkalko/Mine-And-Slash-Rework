@@ -170,6 +170,7 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
             for (ItemStack stack : stacks) {
                 if (mat.matches(stack)) {
                     mat.spend(stack);
+                    break; // don't spend too many
                 }
             }
         }

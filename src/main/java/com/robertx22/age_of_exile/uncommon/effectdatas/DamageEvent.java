@@ -8,7 +8,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.offense.FullSwingDam
 import com.robertx22.age_of_exile.database.data.stats.types.resources.DamageAbsorbedByMana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
-import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.DmgSourceUtils;
+import com.robertx22.age_of_exile.mixin_ducks.DamageSourceDuck;
 import com.robertx22.age_of_exile.mixin_ducks.LivingEntityAccesor;
 import com.robertx22.age_of_exile.mixin_ducks.ProjectileEntityDuck;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -38,12 +38,9 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.boss.EnderDragonPart;
-import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.UUID;
@@ -232,7 +229,6 @@ public class DamageEvent extends EffectEvent {
         if (attackInfo != null) {
             attackInfo.setAmount(0);
             attackInfo.setCanceled(true);
-            attackInfo.event.canceled = true;
         }
         return;
     }
@@ -283,7 +279,8 @@ public class DamageEvent extends EffectEvent {
 
         if (data.isDodged()) {
             if (attackInfo != null) {
-                attackInfo.event.damage = 0; // todo test this
+                attackInfo.setAmount(0);
+                attackInfo.setCanceled(true);
             }
             cancelDamage();
             sendDamageParticle(info);
@@ -308,87 +305,57 @@ public class DamageEvent extends EffectEvent {
             });
         }
 
+        AttributeInstance attri = target.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
+
+        if (data.getBoolean(EventData.DISABLE_KNOCKBACK) || this.getAttackType() == AttackType.dot) {
+            if (!attri.hasModifier(NO_KNOCKBACK)) {
+                attri.addPermanentModifier(NO_KNOCKBACK);
+            }
+        }
+
         DamageSource dmgsource = new DamageSource(source.level().registryAccess().registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(DAMAGE_TYPE), source);
 
 
         // todo MyDamageSource dmgsource = new MyDamageSource(ds, source, getElement(), dmg);
 
-        if (attackInfo == null || !(DmgSourceUtils.isMyDmgSource(attackInfo.getSource()))) { // todo wtf
 
-            AttributeInstance attri = target.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
-
-            if (data.getBoolean(EventData.DISABLE_KNOCKBACK) || this.getAttackType() == AttackType.dot) {
-                if (!attri.hasModifier(NO_KNOCKBACK)) {
-                    attri.addPermanentModifier(NO_KNOCKBACK);
-                }
+        if (this.data.isSpellEffect()) {
+            if (!data.getBoolean(EventData.DISABLE_KNOCKBACK) && dmg > 0 && !data.isDodged()) {
+                // if magic shield absorbed the damage, still do knockback
+                DashUtils.knockback(source, target);
             }
-
-            // todo test how different inv speeds feel
-            if (target instanceof Player == false) {
-                target.invulnerableTime = 20; // disable iframes hopefully
-                target.hurtTime = 20;
-            }
-
-
-            if (this.data.isSpellEffect()) {
-                if (!data.getBoolean(EventData.DISABLE_KNOCKBACK) && dmg > 0 && !data.isDodged()) {
-                    // if magic shield absorbed the damage, still do knockback
-                    DashUtils.knockback(source, target);
-                }
-
-                // play spell hurt sounds or else spells will feel like they do nothing
-                LivingEntityAccesor duck = (LivingEntityAccesor) target;
-                SoundEvent sound = SoundEvents.GENERIC_HURT;
-                float volume = duck.myGetHurtVolume();
-                float pitch = duck.myGetHurtPitch();
-                SoundUtils.playSound(target, sound, volume, pitch);
-            }
-
-            if (target instanceof EnderDragon) {
-                try {
-                    // Dumb vanilla hardcodings require dumb workarounds
-                    EnderDragon dragon = (EnderDragon) target;
-                    EnderDragonPart part = Arrays.stream(dragon.getSubEntities())
-                            .filter(x -> x.name.equals("body"))
-                            .findFirst()
-                            .get();
-                    dragon.hurt(part, dmgsource, vanillaDamage);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            } else {
-
-                if (attackInfo != null && attackInfo.event != null) {
-                    attackInfo.event.damage = 0;
-                    attackInfo.event.canceled = true;
-                }
-                if (target instanceof Player == false) {
-                    int inv = target.invulnerableTime;
-                    target.invulnerableTime = 0;
-                    target.hurt(dmgsource, vanillaDamage);
-                    target.invulnerableTime = inv;
-                } else {
-                    target.hurt(dmgsource, vanillaDamage);
-                }
-            }
-
-            if (target instanceof Player == false) {
-
-
-                if (getAttackType() == AttackType.dot) {
-                    target.invulnerableTime = 0; // disable iframes hopefully
-                    target.hurtTime = 0;
-                }
-            }
-
-            // allow multiple dmg same tick
-
-            if (attri.hasModifier(NO_KNOCKBACK)) {
-                attri.removeModifier(NO_KNOCKBACK);
-            }
-
+            // play spell hurt sounds or else spells will feel like they do nothing
+            LivingEntityAccesor duck = (LivingEntityAccesor) target;
+            SoundEvent sound = SoundEvents.GENERIC_HURT;
+            float volume = duck.myGetHurtVolume();
+            float pitch = duck.myGetHurtPitch();
+            SoundUtils.playSound(target, sound, volume, pitch);
         }
+
+
+        if (attackInfo != null) {
+            DamageSourceDuck duck = (DamageSourceDuck) attackInfo.getSource();
+            duck.setMnsDamage(vanillaDamage);
+            duck.tryOverrideDmgWithMns(attackInfo);
+        } else {
+            if (target instanceof Player == false) {
+                int inv = target.invulnerableTime;
+                target.invulnerableTime = 0;
+                target.hurt(dmgsource, vanillaDamage);
+                target.invulnerableTime = inv;
+            } else {
+                target.hurt(dmgsource, vanillaDamage);
+            }
+        }
+
+        //target.invulnerableTime = 20;
+        //target.hurtTime = 20;
+
+
+        if (attri.hasModifier(NO_KNOCKBACK)) {
+            attri.removeModifier(NO_KNOCKBACK);
+        }
+
 
         if (this.target.isDeadOrDying()) {
             if (!Load.Unit(target).getCooldowns().isOnCooldown("death")) {
