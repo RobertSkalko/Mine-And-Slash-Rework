@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
+import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.Rarity;
@@ -154,10 +155,10 @@ public class TooltipUtils {
     }
 
     public static List<Component> removeDoubleBlankLines(List<Component> list) {
-        return removeDoubleBlankLines(list, 5000);
+        return removeDoubleBlankLines(list, ClientConfigs.getConfig().REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES.get());
     }
 
-    public static List<Component> removeDoubleBlankLines(List<Component> list, int minLinesCutAllBlanks) {
+    private static List<Component> removeDoubleBlankLines(List<Component> list, int minLinesCutAllBlanks) {
 
         List<Component> newt = new ArrayList();
 

@@ -155,12 +155,8 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
                 }
             }
 
-            if (ctx.isLastCastTick) {
+            if (ctx.ticksInUse > 0 && ctx.ticksInUse % castEveryXTicks == 0) {
                 this.cast(ctx);
-            } else {
-                if (ctx.ticksInUse > 0 && ctx.ticksInUse % castEveryXTicks == 0) {
-                    this.cast(ctx);
-                }
             }
 
         } else if (timesToCast < 1) {
@@ -358,6 +354,8 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
 
         if (info.hasShiftDown && this.config.tags.contains(SpellTag.has_pet_ability)) {
+
+            list.clear(); // tooltip too long otherwise
 
             list.add(Words.PET_BASIC.locName());
 

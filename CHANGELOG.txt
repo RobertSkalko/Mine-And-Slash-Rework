@@ -98,3 +98,6 @@ WEIRD DAMAGE BEHAVIOR MIGHT HAPPEN, SO PLEASE REPORT
 - should fix stations taking too many mats if they are spread across stacks
 - fixed orb of imbalance
 - added map mechanic chance config
+- added REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES client config in case some people play on super small screens/gui sizes
+- staffs can now have looting
+- try fix spells being casted 1 more time than needed

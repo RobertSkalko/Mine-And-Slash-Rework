@@ -39,6 +39,8 @@ public class ClientConfigs {
         PLAYER_GUI_TYPE = b.defineEnum("PLAYER_GUI_TYPE", PlayerGUIs.RPG);
         SKILL_TREE_ZOOM_SPEED = b.defineInRange("SKILL_TREE_ZOOM_SPEED", 0.15D, 0.000001D, 1D);
 
+        REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES = b.defineInRange("REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES", 20, 0, 1000);
+
         b.pop();
     }
 
@@ -59,7 +61,8 @@ public class ClientConfigs {
     public ForgeConfigSpec.DoubleValue HEALTH_BAR_GUI_SCALE;
     public ForgeConfigSpec.DoubleValue SKILL_TREE_ZOOM_SPEED;
 
-    public int REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES = 35;
+    public ForgeConfigSpec.IntValue REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES;
+
 
     public enum GlintType {
         BORDER, FULL;

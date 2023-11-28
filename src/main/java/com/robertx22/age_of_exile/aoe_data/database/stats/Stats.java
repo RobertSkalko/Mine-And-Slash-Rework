@@ -1090,7 +1090,7 @@ public class Stats implements ExileRegistryInit {
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.summon))
             .addEffect(StatEffects.INCREASE_VALUE)
             .setLocName(x -> "Summon Damage")
-            .setLocDesc(x -> "")
+            .setLocDesc(x -> "Increases damage of your summoned minions.")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
                 x.icon = "\u27B9";

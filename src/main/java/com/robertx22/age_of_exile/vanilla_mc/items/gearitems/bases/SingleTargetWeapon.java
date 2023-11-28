@@ -11,7 +11,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.enchantment.Enchantment;
 
 public abstract class SingleTargetWeapon extends Item implements IAutoLocName {
 
@@ -19,6 +21,12 @@ public abstract class SingleTargetWeapon extends Item implements IAutoLocName {
 
         super(settings);
         this.locname = locname;
+
+    }
+
+    @Override
+    public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+        return super.canApplyAtEnchantingTable(stack, enchantment) || Items.DIAMOND_SWORD.canApplyAtEnchantingTable(stack, enchantment);
     }
 
     String locname;
@@ -48,7 +56,7 @@ public abstract class SingleTargetWeapon extends Item implements IAutoLocName {
                 .toString();
     }
 
-    
+
     @Override
     public String GUID() {
         return "";

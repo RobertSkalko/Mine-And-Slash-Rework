@@ -178,8 +178,7 @@ public class GearTooltipUtils {
                     .withStyle(ChatFormatting.BLUE));
         }
 
-        List<Component> tool = TooltipUtils.removeDoubleBlankLines(tip,
-                ClientConfigs.getConfig().REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES);
+        List<Component> tool = TooltipUtils.removeDoubleBlankLines(tip);
 
         tip.clear();
 
