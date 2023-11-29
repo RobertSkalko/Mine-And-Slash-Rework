@@ -6,6 +6,8 @@ import com.robertx22.age_of_exile.loot.blueprints.bases.UniqueGearPart;
 import com.robertx22.age_of_exile.loot.generators.SoulLootGen;
 import com.robertx22.age_of_exile.loot.generators.util.GearCreationUtils;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -32,7 +34,14 @@ public class GearBlueprint extends RarityItemBlueprint implements ITypeBlueprint
 
     @Override
     ItemStack generate() {
+
         this.item = this.gearItemSlot.get().getRandomItem(rarity.get());
+
+        if (uniquePart.get() != null && rarity.get().is_unique_item) {
+            if (!uniquePart.get().force_item_id.isEmpty()) {
+                item = VanillaUTIL.REGISTRY.items().get(new ResourceLocation(uniquePart.get().force_item_id));
+            }
+        }
 
         if (item == Items.AIR) {
             return SoulLootGen.createSoulBasedOnGear(this);
