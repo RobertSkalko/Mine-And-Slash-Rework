@@ -148,7 +148,7 @@ public class ProfessionRecipes {
 
                     var b = ProfessionRecipe.TierBuilder.of(x -> ProfessionProductItems.CRAFTED_SOULS.get(fam).get(rar).get(), Professions.GEAR_CRAFTING, 1)
                             .onlyOnTier(x -> new ItemStack(ProfessionMatItems.TIERED_MAIN_MATS.get(Professions.MINING).get(x).get(), (int) ((x.tier + 1) * finalRarnumMulti)))
-                            .onTierOrAbove(SkillItemTier.TIER0, RarityItems.RARITY_STONE.get(rar).get(), (int) (3 + rarnum * famMulti))
+                            .onTierOrAbove(SkillItemTier.TIER0, RarityItems.RARITY_STONE.get(rar).get(), (int) (3 + (rarnum * 1.5F) * famMulti))
                             .onTierOrAbove(SkillItemTier.TIER0, fam.craftItem.get(), 1);
 
                     b.forRarityPower(rar, ProfessionMatItems.POWERED_RARE_MATS.get(Professions.MINING));

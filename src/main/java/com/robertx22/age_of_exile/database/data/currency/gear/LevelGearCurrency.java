@@ -55,7 +55,7 @@ public class LevelGearCurrency extends GearCurrency {
     @Override
     public ExplainedResult canBeModified(GearItemData data) {
 
-
+        
         if (data.data.get(GearItemData.KEYS.LEVEL_TIMES) >= 5) {
             return ExplainedResult.failure(Chats.THIS_ITEM_CANT_BE_USED_MORE_THAN_X_TIMES.locName(5));
         }
@@ -82,6 +82,6 @@ public class LevelGearCurrency extends GearCurrency {
 
     @Override
     public int Weight() {
-        return 200;
+        return 500;
     }
 }

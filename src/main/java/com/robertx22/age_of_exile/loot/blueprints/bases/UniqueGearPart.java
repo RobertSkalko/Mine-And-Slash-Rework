@@ -14,30 +14,20 @@ public class UniqueGearPart extends BlueprintPart<UniqueGear, GearBlueprint> {
     protected UniqueGear generateIfNull() {
 
         try {
-
-            if (!blueprint.gearItemSlot.isGenerated()) {
-                UniqueGear gear = ExileDB.UniqueGears()
-                    .getFilterWrapped(x -> x.uniqueRarity.equals(blueprint.rarity.get()
-                        .GUID()))
-                    .random();
-                blueprint.gearItemSlot.set(gear.getBaseGear());
-                return gear;
-
-            } else {
-                return ExileDB.UniqueGears()
+            var uniq = ExileDB.UniqueGears()
                     .getWrapped()
-                    .of(x -> x.uniqueRarity.equals(blueprint.rarity.get()
-                        .GUID()))
-                    .of(x -> x.getBaseGear().gear_slot
-                        .equals(blueprint.gearItemSlot.get().gear_slot))
+                    .of(x -> x.uniqueRarity.equals(blueprint.rarity.get().GUID()))
+                    .of(x -> x.getBaseGear().gear_slot.equals(blueprint.gearItemSlot.get().gear_slot))
                     .random();
-            }
+
+            blueprint.gearItemSlot.override(uniq.getBaseGear());
+
+            return uniq;
 
         } catch (Exception e) {
             e.printStackTrace();
 
-            UniqueGear uniq = ExileDB.UniqueGears()
-                .random();
+            UniqueGear uniq = ExileDB.UniqueGears().random();
             if (uniq != null) {
                 blueprint.gearItemSlot.override(uniq.getBaseGear());
             }
