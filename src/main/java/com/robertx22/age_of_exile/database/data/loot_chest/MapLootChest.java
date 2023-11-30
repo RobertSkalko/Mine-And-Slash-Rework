@@ -20,6 +20,11 @@ public class MapLootChest extends LootChest {
     }
 
     @Override
+    public int minLevelDrop() {
+        return ServerContainer.get().MIN_LEVEL_MAP_DROPS.get();
+    }
+
+    @Override
     public DropRequirement getDropReq() {
         return DropRequirement.Builder.of().build();
     }

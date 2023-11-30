@@ -46,6 +46,8 @@ public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, 
 
         json.addProperty("base_gear", base_gear);
 
+        json.addProperty("force_item_id", force_item_id);
+    
         return json;
     }
 
@@ -59,10 +61,9 @@ public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, 
 
         uniq.uniqueStats = JsonUtils.getStats(json, "unique_stats");
 
-        uniq.base_gear = json.get("base_gear")
-                .getAsString();
-        uniq.uniqueRarity = json.get("rarity")
-                .getAsString();
+        uniq.base_gear = json.get("base_gear").getAsString();
+        uniq.uniqueRarity = json.get("rarity").getAsString();
+        uniq.force_item_id = json.get("force_item_id").getAsString();
 
         if (json.has("replaces_name")) {
             uniq.replaces_name = json.get("replaces_name")

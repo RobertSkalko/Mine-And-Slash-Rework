@@ -12,6 +12,6 @@ public class LootChestPart extends BlueprintPart<LootChest, ItemBlueprint> {
 
     @Override
     protected LootChest generateIfNull() {
-        return ExileDB.LootChests().getFilterWrapped(x -> x.getDropReq().canDropInLeague(blueprint.info.league)).random();
+        return ExileDB.LootChests().getFilterWrapped(x -> blueprint.info.level >= x.minLevelDrop() && x.getDropReq().canDropInLeague(blueprint.info.league)).random();
     }
 }

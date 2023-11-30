@@ -101,3 +101,4 @@ WEIRD DAMAGE BEHAVIOR MIGHT HAPPEN, SO PLEASE REPORT
 - added REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES client config in case some people play on super small screens/gui sizes
 - staffs can now have looting
 - try fix spells being casted 1 more time than needed
+- fishing crates now respect min map lvl drop

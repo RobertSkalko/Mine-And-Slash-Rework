@@ -15,6 +15,11 @@ public abstract class LootChest implements ExileRegistry<LootChest> {
 
     public abstract ItemStack generateOne(LootChestData data);
 
+
+    public int minLevelDrop() {
+        return 0;
+    }
+
     public abstract DropRequirement getDropReq();
 
     public abstract Item getKey();

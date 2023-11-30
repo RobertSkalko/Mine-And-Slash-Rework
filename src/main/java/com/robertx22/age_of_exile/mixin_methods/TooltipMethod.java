@@ -108,6 +108,7 @@ public class TooltipMethod {
                 currency.currencyEffect(stack).addToTooltip(tooltip);
             }
 
+            tooltip = TooltipUtils.removeDoubleBlankLines(tooltip);
 
         } catch (Exception e) {
             e.printStackTrace();
