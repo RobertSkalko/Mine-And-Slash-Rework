@@ -58,7 +58,7 @@ public class InvGuiButton extends ImageButton {
             gui.blit(data.getAction().getBackGroundIcon(), getX() + 1, getY() + 1, 16, 16, 16, 16, 16, 16);
         }
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-        gui.blit(data.getAction().getIcon(), getX() + 1, getY() + 1, 16, 16, 16, 16, 16, 16);
+        gui.blit(data.getAction().getIcon(), getX() + 2, getY() + 1, 16, 16, 16, 16, 16, 16);
 
     }
 

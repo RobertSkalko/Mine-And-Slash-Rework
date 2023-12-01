@@ -47,15 +47,17 @@ public class ProfessionLevelsButton extends ImageButton {
     public void setModTooltip() {
 
         List<Component> list = new ArrayList<>();
+        list.add(Component.literal("Professions").withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD));
+        list.add(Component.empty());
 
         for (Profession prof : ExileDB.Professions().getList()) {
             var lvl = Load.player(ClientOnly.getPlayer()).professions.getLevel(prof.GUID());
             int exp = Load.player(ClientOnly.getPlayer()).professions.getExp(prof.GUID());
             int maxexp = Load.player(ClientOnly.getPlayer()).professions.getMaxExp(prof.GUID());
 
-            var name = prof.locName().append(":").withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD);
+            var name = prof.locName().append(":").withStyle(ChatFormatting.YELLOW);
             if (Load.player(ClientOnly.getPlayer()).professions.getLevel(prof.GUID()) >= Load.Unit(ClientOnly.getPlayer()).getLevel()) {
-                name.append(" [Capped to your LVL!]").withStyle(ChatFormatting.RED);
+                name.append(" [Capped to LVL]");
             }
             list.add(name);
 
@@ -64,8 +66,8 @@ public class ProfessionLevelsButton extends ImageButton {
         }
         list.add(Component.empty());
 
-        list.add(Component.literal("Rested Combat Exp: " + Load.player(mc.player).rested_xp.bonusCombatExp).withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
-        list.add(Component.literal("Rested Profession Exp: " + Load.player(mc.player).rested_xp.bonusProfExp).withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD));
+        list.add(Component.literal("Rested Combat Exp: " + Load.player(mc.player).rested_xp.bonusCombatExp).withStyle(ChatFormatting.WHITE));
+        list.add(Component.literal("Rested Prof. Exp: " + Load.player(mc.player).rested_xp.bonusProfExp).withStyle(ChatFormatting.WHITE));
 
         this.setTooltip(Tooltip.create(TextUTIL.mergeList(list)));
 
