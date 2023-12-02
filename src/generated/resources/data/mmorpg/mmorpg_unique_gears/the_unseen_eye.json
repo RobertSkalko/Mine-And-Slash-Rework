@@ -1,5 +1,6 @@
 {
   "base_gear": "necklace",
+  "force_item_id": "",
   "id": "the_unseen_eye",
   "rarity": "unique",
   "replaces_name": false,

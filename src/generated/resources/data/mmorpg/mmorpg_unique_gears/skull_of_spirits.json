@@ -1,5 +1,6 @@
 {
   "base_gear": "necklace",
+  "force_item_id": "",
   "id": "skull_of_spirits",
   "rarity": "unique",
   "replaces_name": true,

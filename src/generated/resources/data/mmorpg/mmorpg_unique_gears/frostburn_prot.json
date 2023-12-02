@@ -1,5 +1,6 @@
 {
   "base_gear": "cloth_helmet",
+  "force_item_id": "",
   "id": "frostburn_prot",
   "rarity": "runeword",
   "replaces_name": true,

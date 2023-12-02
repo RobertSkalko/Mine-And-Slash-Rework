@@ -1,5 +1,6 @@
 {
   "base_gear": "bow",
+  "force_item_id": "",
   "id": "critical_impossibility",
   "rarity": "unique",
   "replaces_name": true,

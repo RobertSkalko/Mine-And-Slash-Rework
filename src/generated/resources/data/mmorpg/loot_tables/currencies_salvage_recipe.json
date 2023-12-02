@@ -21,7 +21,7 @@
         {
           "type": "minecraft:item",
           "name": "mmorpg:currency/level_up_orb",
-          "weight": 200
+          "weight": 500
         },
         {
           "type": "minecraft:item",

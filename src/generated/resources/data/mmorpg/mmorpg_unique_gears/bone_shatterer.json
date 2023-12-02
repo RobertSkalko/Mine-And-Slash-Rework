@@ -1,5 +1,6 @@
 {
   "base_gear": "bow",
+  "force_item_id": "",
   "id": "bone_shatterer",
   "rarity": "runeword",
   "replaces_name": true,

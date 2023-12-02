@@ -1,5 +1,6 @@
 {
   "base_gear": "leather_boots",
+  "force_item_id": "",
   "id": "fire_step",
   "rarity": "unique",
   "replaces_name": false,

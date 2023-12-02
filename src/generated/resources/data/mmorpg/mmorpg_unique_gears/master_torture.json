@@ -1,5 +1,6 @@
 {
   "base_gear": "necklace",
+  "force_item_id": "",
   "id": "master_torture",
   "rarity": "unique",
   "replaces_name": false,

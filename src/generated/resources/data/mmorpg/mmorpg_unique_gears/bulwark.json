@@ -1,5 +1,6 @@
 {
   "base_gear": "plate_chest",
+  "force_item_id": "",
   "id": "bulwark",
   "rarity": "unique",
   "replaces_name": false,

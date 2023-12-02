@@ -1,5 +1,6 @@
 {
   "base_gear": "necklace",
+  "force_item_id": "",
   "id": "rabbit_paw",
   "rarity": "unique",
   "replaces_name": true,

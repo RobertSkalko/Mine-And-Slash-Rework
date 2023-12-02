@@ -1,5 +1,6 @@
 {
   "base_gear": "staff",
+  "force_item_id": "",
   "id": "new_dawn_flame",
   "rarity": "unique",
   "replaces_name": true,

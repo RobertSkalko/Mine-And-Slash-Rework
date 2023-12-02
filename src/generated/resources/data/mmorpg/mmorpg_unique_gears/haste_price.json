@@ -1,5 +1,6 @@
 {
   "base_gear": "plate_boots",
+  "force_item_id": "",
   "id": "haste_price",
   "rarity": "unique",
   "replaces_name": false,

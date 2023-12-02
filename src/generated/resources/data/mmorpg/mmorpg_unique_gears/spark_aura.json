@@ -1,5 +1,6 @@
 {
   "base_gear": "ring",
+  "force_item_id": "",
   "id": "spark_aura",
   "rarity": "unique",
   "replaces_name": false,

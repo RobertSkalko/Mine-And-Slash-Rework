@@ -1,5 +1,6 @@
 {
   "base_gear": "leather_boots",
+  "force_item_id": "",
   "id": "sparkfinder",
   "rarity": "runeword",
   "replaces_name": true,

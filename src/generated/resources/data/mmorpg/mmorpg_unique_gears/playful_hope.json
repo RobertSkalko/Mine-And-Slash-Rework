@@ -1,5 +1,6 @@
 {
   "base_gear": "ring",
+  "force_item_id": "",
   "id": "playful_hope",
   "rarity": "runeword",
   "replaces_name": true,

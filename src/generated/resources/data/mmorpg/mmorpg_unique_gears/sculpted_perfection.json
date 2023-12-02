@@ -1,5 +1,6 @@
 {
   "base_gear": "cloth_pants",
+  "force_item_id": "",
   "id": "sculpted_perfection",
   "rarity": "unique",
   "replaces_name": false,

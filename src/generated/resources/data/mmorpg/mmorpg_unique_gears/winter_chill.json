@@ -1,5 +1,6 @@
 {
   "base_gear": "ring",
+  "force_item_id": "",
   "id": "winter_chill",
   "rarity": "unique",
   "replaces_name": true,

@@ -1,5 +1,6 @@
 {
   "base_gear": "sword",
+  "force_item_id": "",
   "id": "omni_vamp",
   "rarity": "unique",
   "replaces_name": true,

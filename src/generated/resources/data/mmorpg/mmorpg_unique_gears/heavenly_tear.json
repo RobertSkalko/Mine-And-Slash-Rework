@@ -1,5 +1,6 @@
 {
   "base_gear": "necklace",
+  "force_item_id": "",
   "id": "heavenly_tear",
   "rarity": "runeword",
   "replaces_name": true,

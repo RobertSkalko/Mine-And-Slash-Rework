@@ -1,5 +1,6 @@
 {
   "base_gear": "cloth_helmet",
+  "force_item_id": "",
   "id": "mana_dominion",
   "rarity": "unique",
   "replaces_name": true,

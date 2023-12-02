@@ -1,5 +1,6 @@
 {
   "base_gear": "ring",
+  "force_item_id": "",
   "id": "curse_effect_ring",
   "rarity": "unique",
   "replaces_name": false,

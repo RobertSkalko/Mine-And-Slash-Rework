@@ -1,5 +1,6 @@
 {
   "base_gear": "leather_helmet",
+  "force_item_id": "",
   "id": "pack_leader",
   "rarity": "unique",
   "replaces_name": true,

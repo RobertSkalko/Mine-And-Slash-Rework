@@ -1,5 +1,6 @@
 {
   "base_gear": "plate_boots",
+  "force_item_id": "",
   "id": "ice_stomper",
   "rarity": "runeword",
   "replaces_name": true,

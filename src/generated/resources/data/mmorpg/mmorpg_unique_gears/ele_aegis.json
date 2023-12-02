@@ -1,5 +1,6 @@
 {
   "base_gear": "shield",
+  "force_item_id": "",
   "id": "ele_aegis",
   "rarity": "unique",
   "replaces_name": false,

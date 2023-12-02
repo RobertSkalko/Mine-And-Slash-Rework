@@ -1,5 +1,6 @@
 {
   "base_gear": "cloth_chest",
+  "force_item_id": "",
   "id": "towering_physique",
   "rarity": "unique",
   "replaces_name": false,

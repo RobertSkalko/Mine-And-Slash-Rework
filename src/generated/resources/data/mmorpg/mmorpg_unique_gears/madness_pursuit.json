@@ -1,5 +1,6 @@
 {
   "base_gear": "cloth_boots",
+  "force_item_id": "",
   "id": "madness_pursuit",
   "rarity": "unique",
   "replaces_name": true,

@@ -1,5 +1,6 @@
 {
   "base_gear": "necklace",
+  "force_item_id": "",
   "id": "futility_of_suffering",
   "rarity": "unique",
   "replaces_name": true,

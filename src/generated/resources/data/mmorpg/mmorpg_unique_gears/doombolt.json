@@ -1,5 +1,6 @@
 {
   "base_gear": "bow",
+  "force_item_id": "",
   "id": "doombolt",
   "rarity": "runeword",
   "replaces_name": true,

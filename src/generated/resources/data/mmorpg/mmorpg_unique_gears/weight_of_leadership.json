@@ -1,5 +1,6 @@
 {
   "base_gear": "cloth_pants",
+  "force_item_id": "",
   "id": "weight_of_leadership",
   "rarity": "runeword",
   "replaces_name": true,
