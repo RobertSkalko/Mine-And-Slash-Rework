@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.loot.blueprints.bases;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
+import com.robertx22.age_of_exile.mmorpg.ModErrors;
 
 public class UniqueGearPart extends BlueprintPart<UniqueGear, GearBlueprint> {
 
@@ -14,18 +15,27 @@ public class UniqueGearPart extends BlueprintPart<UniqueGear, GearBlueprint> {
     protected UniqueGear generateIfNull() {
 
         try {
-            var uniq = ExileDB.UniqueGears()
+
+            var filt = ExileDB.UniqueGears()
                     .getWrapped()
                     .of(x -> x.uniqueRarity.equals(blueprint.rarity.get().GUID()))
-                    .of(x -> x.getBaseGear().gear_slot.equals(blueprint.gearItemSlot.get().gear_slot))
-                    .random();
+                    .of(x -> x.getBaseGear().gear_slot.equals(blueprint.gearItemSlot.get().gear_slot));
 
-            blueprint.gearItemSlot.override(uniq.getBaseGear());
+            if (!filt.list.isEmpty()) {
+                var uniq = filt.random();
+                blueprint.gearItemSlot.override(uniq.getBaseGear());
+                return uniq;
+            } else {
+                UniqueGear uniq = ExileDB.UniqueGears().random();
+                if (uniq != null) {
+                    blueprint.gearItemSlot.override(uniq.getBaseGear());
+                }
+                return uniq;
+            }
 
-            return uniq;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            ModErrors.print(e);
 
             UniqueGear uniq = ExileDB.UniqueGears().random();
             if (uniq != null) {
