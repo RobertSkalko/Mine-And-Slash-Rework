@@ -171,7 +171,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
         STAT(2, 24, 24, 39, ChatFormatting.WHITE),
         SPECIAL(3, 28, 28, 77, ChatFormatting.LIGHT_PURPLE),
         MAJOR(1, 33, 33, 1, ChatFormatting.RED),
-        START(4, 28, 28, 77, ChatFormatting.YELLOW);
+        START(4, 28, 28, 115, ChatFormatting.YELLOW);
         // SPELL_MOD(5, 26, 26, 153, ChatFormatting.BLACK);
 
         int order;

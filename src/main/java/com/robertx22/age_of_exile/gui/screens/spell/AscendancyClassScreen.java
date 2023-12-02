@@ -114,10 +114,10 @@ public class AscendancyClassScreen extends BaseScreen implements INamedScreen, I
             super.render(gui, x, y, ticks);
 
             String txt = "Spell Points: " + Load.player(mc.player).ascClass.getFreeSpellPoints(mc.player);
-            GuiUtils.renderScaledText(gui, guiLeft + 48, guiTop + 215, 1, txt, ChatFormatting.AQUA);
+            GuiUtils.renderScaledText(gui, guiLeft + 48, guiTop + 216, 1, txt, ChatFormatting.WHITE);
 
             String tx2 = "Passive Points: " + Load.player(mc.player).ascClass.getFreePassivePoints(mc.player);
-            GuiUtils.renderScaledText(gui, guiLeft + 195, guiTop + 215, 1, tx2, ChatFormatting.YELLOW);
+            GuiUtils.renderScaledText(gui, guiLeft + 195, guiTop + 216, 1, tx2, ChatFormatting.WHITE);
 
             //buttons.forEach(b -> b.renderToolTip(matrix, x, y));
         } catch (Exception e) {

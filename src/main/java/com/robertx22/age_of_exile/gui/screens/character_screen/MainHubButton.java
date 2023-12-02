@@ -26,7 +26,7 @@ public class MainHubButton extends ImageButton {
     boolean right;
 
     public MainHubButton(boolean isright, ResourceLocation loc, INamedScreen screen, int xPos, int yPos) {
-        super(xPos, yPos, xSize, ySize, 0, 0, ySize + 1, loc, (button) -> {
+        super(xPos, yPos, xSize, ySize, 0, 0, ySize, loc, (button) -> {
             if (screen instanceof IContainerNamedScreen) {
                 IContainerNamedScreen con = (IContainerNamedScreen) screen;
                 con.openContainer();
@@ -65,9 +65,9 @@ public class MainHubButton extends ImageButton {
 
         if (isHovered()) {
             if (right) {
-                gui.drawString(Minecraft.getInstance().font, str, this.getX() + 32, this.getY() + 9, ChatFormatting.GREEN.getColor());
+                gui.drawCenteredString(Minecraft.getInstance().font, str, this.getX() + 65, this.getY() + 10, ChatFormatting.YELLOW.getColor());
             } else {
-                gui.drawString(Minecraft.getInstance().font, str, this.getX() + 6, this.getY() + 9, ChatFormatting.GREEN.getColor());
+                gui.drawCenteredString(Minecraft.getInstance().font, str, this.getX() + 40, this.getY() + 10, ChatFormatting.YELLOW.getColor());
 
             }
         }

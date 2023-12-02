@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.gui.screens.character_screen;
 
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.CoreStat;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
@@ -9,6 +10,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalPenetration;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.EnergyRegen;
@@ -68,7 +70,9 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
     public enum StatType {
         RESOURCE("resource"),
         DAMAGE("damage"),
+        ELE_DAMAGE("ele_damage"),
         DEFENSE("defense"),
+        RECOVERY("recovery"),
         MISC("misc");
 
         String id;
@@ -125,17 +129,30 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
 
     static {
 
-        addTo(StatType.RESOURCE, Arrays.asList(Health.getInstance(), MagicShield.getInstance(), Mana.getInstance(), Energy.getInstance(), HealthRegen.getInstance(), MagicShieldRegen.getInstance(), ManaRegen.getInstance(), EnergyRegen.getInstance()));
+        addTo(StatType.RESOURCE, Arrays.asList(Health.getInstance(), HealthRegen.getInstance(), MagicShield.getInstance(), MagicShieldRegen.getInstance(), Mana.getInstance(), ManaRegen.getInstance(), Energy.getInstance(), EnergyRegen.getInstance()));
+        addTo(StatType.RESOURCE, Arrays.asList(DatapackStats.STR, DatapackStats.INT, DatapackStats.DEX));
+
+        addTo(StatType.DAMAGE, Arrays.asList(WeaponDamage.getInstance(), SkillDamage.getInstance()));
+        addTo(StatType.DAMAGE, Stats.STYLE_DAMAGE.getAll());
+        addTo(StatType.DAMAGE, Arrays.asList(Stats.ACCURACY.get(), Stats.CRIT_CHANCE.get(), Stats.CRIT_DAMAGE.get()));
+        addTo(StatType.DAMAGE, Arrays.asList(Stats.COOLDOWN_REDUCTION.get(), Stats.CAST_SPEED.get()));
+
+        addTo(StatType.ELE_DAMAGE, Stats.ELEMENTAL_DAMAGE.getAll());
+        addTo(StatType.ELE_DAMAGE, Stats.ELEMENTAL_ANY_WEAPON_DAMAGE.getAll());
+        addTo(StatType.ELE_DAMAGE, Stats.ELEMENTAL_SPELL_DAMAGE.getAll());
+        addTo(StatType.ELE_DAMAGE, new ElementalPenetration(Elements.Elemental).generateAllSingleVariations());
 
         addTo(StatType.DEFENSE, Arrays.asList(Armor.getInstance(), DodgeRating.getInstance()));
+        addTo(StatType.DEFENSE, Arrays.asList(Stats.DAMAGE_RECEIVED.get()));
         addTo(StatType.DEFENSE, new ElementalResist(Elements.Elemental).generateAllSingleVariations());
         addTo(StatType.DEFENSE, new MaxElementalResist(Elements.Elemental).generateAllSingleVariations());
 
-        addTo(StatType.DAMAGE, Arrays.asList(WeaponDamage.getInstance()));
-        addTo(StatType.DAMAGE, Arrays.asList(Stats.CRIT_CHANCE.get(), Stats.CRIT_DAMAGE.get()));
-        addTo(StatType.DAMAGE, Stats.ELEMENTAL_SPELL_DAMAGE.getAll());
-        addTo(StatType.DAMAGE, Stats.ELEMENTAL_DAMAGE.getAll());
-        addTo(StatType.DAMAGE, new ElementalPenetration(Elements.Elemental).generateAllSingleVariations());
+        addTo(StatType.RECOVERY, Arrays.asList(Stats.HEAL_STRENGTH.get(), Stats.HEALING_RECEIVED.get()));
+        addTo(StatType.RECOVERY, Arrays.asList(Stats.LIFESTEAL.get(), Stats.MANASTEAL.get(), Stats.SPELL_LIFESTEAL.get(), Stats.SPELL_MSSTEAL.get(), Stats.DOT_LIFESTEAL.get()));
+        addTo(StatType.RECOVERY, Stats.RESOURCE_ON_HIT.getAll());
+        addTo(StatType.RECOVERY, Stats.RESOURCE_ON_KILL.getAll());
+        addTo(StatType.RECOVERY, Arrays.asList(Stats.INCREASED_LEECH.get()));
+        addTo(StatType.RECOVERY, Stats.LEECH_CAP.getAll());
 
         addRemaining(StatType.MISC);
 
@@ -185,8 +202,8 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
         int YSEP = 20;
 
         // TODO MAKE STATIC IDS
-        xpos = guiLeft + 35;
-        ypos = guiTop + 25;
+        xpos = guiLeft + 28;
+        ypos = guiTop + 21;
 
         publicAddButton(new AllocateStatButton(AllAttributes.STR_ID, xpos, ypos));
         ypos += YSEP;
@@ -219,7 +236,7 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
 
 
         publicAddButton(new FavorButton(guiLeft + sizeX / 2 - FavorButton.FAVOR_BUTTON_SIZE_X / 2, guiTop - FavorButton.FAVOR_BUTTON_SIZE_Y));
-        publicAddButton(new ProfessionLevelsButton(guiLeft + sizeX / 2 - ProfessionLevelsButton.SX / 2, guiTop + 150));
+        publicAddButton(new ProfessionLevelsButton(guiLeft + sizeX / 2 - ProfessionLevelsButton.SX / 2, guiTop + 147));
 
 
         int x = guiLeft + sizeX - 1;
@@ -238,12 +255,12 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
             y += MainHubButton.ySize + 0;
         }
 
-        int xp = guiLeft + 77;
-        int yp = guiTop + 120;
+        int xp = guiLeft + 30;
+        int yp = guiTop + 118;
 
         for (StatType type : StatType.values()) {
             publicAddButton(new CharacterStatsButtons(type, xp, yp));
-            xp += 30;
+            xp += 36;
         }
 
 
@@ -281,7 +298,7 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
                 .getFreePoints(mc.player);
         if (p > 0) {
             String points = "Points: " + p;
-            gui.drawString(mc.font, points, guiLeft + sizeX / 2 - mc.font.width(points) / 2, guiTop + sizeY + 15, ChatFormatting.GREEN.getColor());
+            gui.drawString(mc.font, points, guiLeft + sizeX / 2 - mc.font.width(points) / 2, guiTop + sizeY + 10, ChatFormatting.GREEN.getColor());
         }
 
     }
@@ -342,9 +359,9 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
                     .getCalculatedStat(stat)
                     .getValue()) + "";
 
-            RenderUtils.render16Icon(gui, stat.getIconForRendering(), this.getX() - 20, this.getY() + 1);
+            RenderUtils.render16Icon(gui, stat.getIconForRendering(), this.getX() - 17, this.getY() + 1);
 
-            gui.drawString(mc.font, txt, this.getX() + SIZEX + 4, this.getY() + 4, ChatFormatting.YELLOW.getColor());
+            gui.drawCenteredString(mc.font, txt, this.getX() + SIZEX + 13, this.getY() + 5, ChatFormatting.WHITE.getColor());
 
         }
 

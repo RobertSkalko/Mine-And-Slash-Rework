@@ -70,7 +70,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         graphics.pose().mulPose(Axis.ZP.rotation(rotation));
         int length = (int) getDistanceBetweenButtons(button1, button2);
 
-        graphics.pose().scale(1F, 1.5F, 1F); // thicken it a bit
+        //graphics.pose().scale(1F, 1.5F, 1F); // thicken it a bit
 
         int off = 0;
 
@@ -486,10 +486,10 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         Minecraft mc = Minecraft.getInstance();
 
         // todo test
-        gui.setColor(0.25F, 0.25F, 0.25F, 1.0F);
+        //gui.setColor(0.25F, 0.25F, 0.25F, 1.0F);
         int i = 32;
         gui.blit(BACKGROUND, 0, 0, 0, 0.0F, 0.0F, mc.screen.width, mc.screen.height, 32, 32);
-        gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+        //gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 
     }
 
