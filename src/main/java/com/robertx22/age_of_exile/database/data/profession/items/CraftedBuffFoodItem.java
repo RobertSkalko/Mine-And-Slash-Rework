@@ -24,6 +24,7 @@ import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Properties;
 
 public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered {
 
@@ -93,9 +94,7 @@ public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered 
     // Greater intelligence potion = power + name
     @Override
     public Component getName(ItemStack stack) {
-        return power.word.locName().append(" ")
-                .append(getBuff().mods.get(0).GetStat().locName()).append(" ")
-                .append(type.name)
+        return Component.translatable(locNameLangFileGUID(), power.word.locName(), getBuff().mods.get(0).GetStat().locName(), type.locName())
                 .withStyle(LeveledItem.getTier(stack).format);
     }
 
@@ -122,18 +121,24 @@ public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered 
     }
 
     @Override
+    public AutoLocGroup locNameGroup() {
+        return AutoLocGroup.Misc;
+    }
+
+
+    @Override
     public String locNameLangFileGUID() {
-        return SlashRef.MODID + ".potion_name_unused";
+        return SlashRef.MODID + ".item.consumption_item_name";
     }
 
     @Override
     public String locNameForLangFile() {
-        return "";
+        return "%1$s" + " " + "%2$s" + " " + "%3$s";
     }
 
     @Override
     public String GUID() {
-        return null;
+        return GUID();
     }
 
 
