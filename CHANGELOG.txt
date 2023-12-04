@@ -103,3 +103,7 @@ WEIRD DAMAGE BEHAVIOR MIGHT HAPPEN, SO PLEASE REPORT
 - staffs can now have looting
 - try fix spells being casted 1 more time than needed
 - fishing crates now respect min map lvl drop
+
+v.5.3.7
+
+- hotfix a map hang, related to a while loop, never again

@@ -86,9 +86,7 @@ public class BossData {
 
         while (spells.size() < amount) {
             String id = ExileDB.BossSpells().random().GUID();
-            if (!spells.contains(id)) {
-                this.spells.add(id);
-            }
+            this.spells.add(id);
         }
 
     }
