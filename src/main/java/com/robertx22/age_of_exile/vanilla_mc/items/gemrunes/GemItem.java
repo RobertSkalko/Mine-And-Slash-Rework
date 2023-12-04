@@ -63,7 +63,7 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocN
 
     @Override
     public Component getName(ItemStack stack) {
-        return Component.translatable("item." + locNameLangFileGUID(), this.gemRank.locName, this.gemType.locName).withStyle(gemType.format);
+        return Component.translatable(locNameLangFileGUID(), this.gemRank.locName(), this.gemType.locName()).withStyle(gemType.format);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocN
 
     @Override
     public String locNameLangFileGUID() {
-        return SlashRef.MODID + ".gem_item_name";
+        return SlashRef.MODID + ".item.gem_item_name";
     }
 
     @Override
