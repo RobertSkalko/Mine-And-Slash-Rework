@@ -92,6 +92,7 @@ v.5.3.5
 
 .5.3.6
 
+- GUI OVERHAUL by Skullbushi! The mod should feel more thematic and RPG-like with mostly unified gui theme.
 - added downranking of profession gatherable mats, 1 > 1 exchange rate
 - attempted to clean up dmg code a bit, now shouldn't be replacing all dmg types anymore, instead just setting the dmg numbers at the end
 WEIRD DAMAGE BEHAVIOR MIGHT HAPPEN, SO PLEASE REPORT

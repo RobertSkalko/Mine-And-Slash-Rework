@@ -380,6 +380,8 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
         this.targetZoom = Mth.clamp(targetZoom, 0.08F, 1);
 
+        this.zoom = targetZoom;
+
         return true;
     }
 
@@ -411,24 +413,20 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
         try {
 
+            float addx = (1F / zoom - 1) * this.width / 2F;
+            float addy = (1F / zoom - 1) * this.height / 2F;
 
             for (Renderable e : this.renderables) {
                 if (e instanceof ImageButton b)
                     if (originalButtonLocMap.containsKey(b)) {
-                        b.setX((this.originalButtonLocMap.get(b).
-                                x));
-                        b.setY((this.originalButtonLocMap.get(b)
-                                .y));
-
-                        float addx = (1F / zoom - 1) * this.width / 2F;
-                        float addy = (1F / zoom - 1) * this.height / 2F;
+                        b.setX((this.originalButtonLocMap.get(b).x));
+                        b.setY((this.originalButtonLocMap.get(b).y));
 
                         b.setX((int) (b.getX() + addx));
                         b.setY((int) (b.getY() + addy));
 
                         b.setX(b.getX() + scrollX);
                         b.setY(b.getY() + scrollY);
-
                     }
             }
 
