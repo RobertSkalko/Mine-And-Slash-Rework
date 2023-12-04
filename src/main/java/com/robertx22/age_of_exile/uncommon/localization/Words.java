@@ -18,7 +18,7 @@ public enum Words implements IAutoLocName {
     CAST_TIME("Cast Time: %1$ss"),
     MANA_COST("Mana Cost: %1$s"),
     ENE_COST("Energy Cost: %1$s"),
-    COOLDOWN("Cooldown: %1$s"),
+    COOLDOWN("Cooldown: %1$ss"),
     MAX_CHARGES("Max Charges: %1$s"),
     CHARGE_REGEN("Charge Regen: %1$ss"),
 
@@ -204,6 +204,24 @@ public enum Words implements IAutoLocName {
     Unsalvagable("Unsalvageable"),
 
     UsableOn("Usable On");
+
+    Tooltips_Rarity("Rarity: "),
+    Tooltips_Item_Type("Item Type: "),
+    Tooltips_Tier("Tier: "),
+    Tooltips_Item_Tier("Item Tier: "),
+    Tooltips_Level("Level: "),
+    Use_Tip("[Drag onto gear to use]"),
+    Stat_Req("%1$s Min: "),
+    Potential("Potential: %1$s%%"),
+    Quality("Quality: %1$s%%"),
+    Energy_Cost_Per_Mob("Energy Cost: %1$s + %2$s Per mob, x %3$s Dmg"),
+    Durability("Durability: "),
+    Unbreakable("Unbreakable"),
+    Restores("Restores: %1$s%%"),
+    Favor_In_GUI(" Favor"),
+    Current_Favor("Current: %1$s"),
+    Loot_Exp_Multiplier("Loot/Exp Multiplier: %1$sx");
+
 
     private String localization = "";
 

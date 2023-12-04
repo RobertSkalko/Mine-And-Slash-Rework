@@ -65,15 +65,15 @@ public class DeathFavorData {
 
         GearRarity rar = getRarity();
 
-        tooltip.add(rar.locName().append(" Favor").withStyle(rar.textFormatting()));
+        tooltip.add(rar.locName().append(Words.Favor_In_GUI.locName()).withStyle(rar.textFormatting()));
 
         tooltip.add(Component.empty());
 
-        tooltip.add(Component.literal("Current: " + (int) favor).withStyle(ChatFormatting.YELLOW));
+        tooltip.add(Words.Current_Favor.locName((int) favor).withStyle(ChatFormatting.YELLOW));
 
         tooltip.add(Component.empty());
 
-        tooltip.add(Component.literal("Loot/Exp Multiplier: " + getLootExpMulti() + "x").withStyle(rar.textFormatting()));
+        tooltip.add(Words.Loot_Exp_Multiplier.locName(getLootExpMulti()).withStyle(rar.textFormatting()));
 
         tooltip.add(Component.empty());
 
