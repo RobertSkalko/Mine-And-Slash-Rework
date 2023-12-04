@@ -94,6 +94,7 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
             this.tooltipPrefix = tooltipPrefix;
             this.tooltipPrefixLess = tooltipPrefixLess;
         }
+        
     }
 
 /*
@@ -125,6 +126,12 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
 
     public String getIconNameFormat(String str) {
         return this.getFormat() + this.icon + " " + str + ChatFormatting.GRAY;
+    }
+
+    public MutableComponent getMutableIconNameFormat() {
+        return ExileText.ofTranslate(SlashRef.MODID + ".spell.conbine_icon_and_damage", this.getFormat() + this.icon, this.locName())
+                        .append("").format(ChatFormatting.GRAY)
+                        .get();
     }
 
     @Override
