@@ -43,7 +43,8 @@ public class OnServerTick {
                         .getUnit()
                         .energyData()
                         .getValue() / 10) {
-                    player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 3, 1));
+                    player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 3, 2));
+                    player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 20 * 3, 2));
                 }
 
                 UnequipGear.onTick(player);
