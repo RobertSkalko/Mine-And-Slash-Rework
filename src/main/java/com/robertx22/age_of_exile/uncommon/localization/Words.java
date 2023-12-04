@@ -203,8 +203,12 @@ public enum Words implements IAutoLocName {
 
     Unsalvagable("Unsalvageable"),
 
-    UsableOn("Usable On");
+    UsableOn("Usable On"),
 
+    Prefix_Space(" "),
+    Suffix_Space(" "),
+    TM_Prefix_Space(" "),
+    TM_Suffix_Space(" "),
     Tooltips_Rarity("Rarity: "),
     Tooltips_Item_Type("Item Type: "),
     Tooltips_Tier("Tier: "),

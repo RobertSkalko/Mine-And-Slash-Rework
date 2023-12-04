@@ -287,7 +287,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
                     .locName());
         }
         if (this.uniqueStats == null) {
-            text.append(" ").append(GetBaseGearType().locName());
+            text.append(Words.Prefix_Space.locName()).append(GetBaseGearType().locName());
         } else {
             text.append(uniqueStats.getUnique(this)
                     .locName()
@@ -296,7 +296,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
         if (affixes.hasSuffix()) {
             AffixData suffix = affixes.suf.get(0);
-            text.append(" ")
+            text.append(Words.Suffix_Space.locName())
                     .append(suffix.BaseAffix()
                             .locName());
         }
@@ -344,9 +344,9 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
             txt.append("").append(prefix.locName());
 
-            txt.append(" ").append(suffix.locName()).withStyle(format);
+            txt.append(Words.TM_Prefix_Space.locName()).append(suffix.locName()).withStyle(format);
 
-            txt.append(" ").append(GetBaseGearType().locName());
+            txt.append(Words.TM_Suffix_Space.locName()).append(GetBaseGearType().locName());
 
             txt.withStyle(format);
 
