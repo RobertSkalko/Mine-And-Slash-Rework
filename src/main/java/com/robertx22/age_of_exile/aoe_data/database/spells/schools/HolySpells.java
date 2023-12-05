@@ -60,7 +60,7 @@ public class HolySpells implements ExileRegistryInit {
 
         SpellBuilder.of(WHIRLWIND, PlayStyle.STR, SpellConfiguration.Builder.multiCast(10, 0, 100, 10)
                                 .setSwingArm(), "Whirlwind",
-                        Arrays.asList(SpellTag.technique, SpellTag.area, SpellTag.damage))
+                        Arrays.asList(SpellTag.weapon_skill, SpellTag.area, SpellTag.damage))
                 .manualDesc("Spin and continuously strike enemies around you for " + SpellCalcs.WHIRLWIND.getLocDmgTooltip(Elements.Physical))
 
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
@@ -114,7 +114,7 @@ public class HolySpells implements ExileRegistryInit {
 
 
         SpellBuilder.of(PULL, PlayStyle.STR, SpellConfiguration.Builder.instant(5, 60 * 20), "Pull",
-                        Arrays.asList(SpellTag.technique, SpellTag.area, SpellTag.damage))
+                        Arrays.asList(SpellTag.weapon_skill, SpellTag.area, SpellTag.damage))
                 .manualDesc(
                         "Pull enemies in area to you, dealing " +
                                 SpellCalcs.PULL.getLocDmgTooltip() + " " +
@@ -132,7 +132,7 @@ public class HolySpells implements ExileRegistryInit {
 
         SpellBuilder.of(GONG_STRIKE_ID, PlayStyle.STR, SpellConfiguration.Builder.instant(8, 20 * 10)
                                 .setSwingArm(), "Gong Strike",
-                        Arrays.asList(SpellTag.technique, SpellTag.area, SpellTag.damage))
+                        Arrays.asList(SpellTag.weapon_skill, SpellTag.area, SpellTag.damage))
                 .manualDesc("Bash enemies around you for " +
                         SpellCalcs.GONG_STRIKE.getLocDmgTooltip(Elements.Physical))
 

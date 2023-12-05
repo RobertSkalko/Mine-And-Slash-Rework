@@ -22,7 +22,7 @@ public class DexSpells implements ExileRegistryInit {
 
         SpellBuilder.of(EXECUTE, PlayStyle.DEX, SpellConfiguration.Builder.instant(10, 20 * 60)
                                 .setSwingArm(), "Execute",
-                        Arrays.asList(SpellTag.area, SpellTag.damage, SpellTag.technique))
+                        Arrays.asList(SpellTag.area, SpellTag.damage, SpellTag.weapon_skill))
                 .manualDesc(
                         "Slash enemies in front of you for " + SpellCalcs.EXECUTE.getLocDmgTooltip()
                                 + " " + Elements.Physical.getIconNameDmg()

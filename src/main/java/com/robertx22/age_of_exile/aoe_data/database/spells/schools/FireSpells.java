@@ -58,7 +58,7 @@ public class FireSpells implements ExileRegistryInit {
 
         SpellBuilder.of(FLAME_STRIKE_ID, PlayStyle.STR, SpellConfiguration.Builder.instant(8, 15)
                                 .setSwingArm(), "Flame Strike",
-                        Arrays.asList(SpellTag.technique, SpellTag.area, SpellTag.damage))
+                        Arrays.asList(SpellTag.weapon_skill, SpellTag.area, SpellTag.damage))
                 .manualDesc("Strike enemies in front for " +
                         SpellCalcs.FLAME_STRIKE.getLocDmgTooltip(Elements.Fire))
                 .weaponReq(CastingWeapon.MELEE_WEAPON)

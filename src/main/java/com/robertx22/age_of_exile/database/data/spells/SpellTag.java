@@ -2,6 +2,8 @@ package com.robertx22.age_of_exile.database.data.spells;
 
 public enum SpellTag {
     projectile("Projectile"),
+    magic("Magic Skill"),
+    weapon_skill("Weapon Skill"),
     movement("Movement"),
     damage("Damage"),
     minion_explode("Minion Explode"),
@@ -9,7 +11,6 @@ public enum SpellTag {
     has_pet_ability("Has Pet Ability"),
     heal("Heal"),
     arrow("Arrow"),
-    technique("Technique"),
     curse("Curse"),
     shield("Shield"),
     shout("Shout"),

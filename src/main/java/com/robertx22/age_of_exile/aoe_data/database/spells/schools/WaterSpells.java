@@ -202,7 +202,7 @@ public class WaterSpells implements ExileRegistryInit {
 
         SpellBuilder.of(TIDAL_STRIKE, PlayStyle.STR, SpellConfiguration.Builder.instant(8, 12)
                                 .setSwingArm(), "Tidal Strike",
-                        Arrays.asList(SpellTag.technique, SpellTag.area, SpellTag.damage))
+                        Arrays.asList(SpellTag.weapon_skill, SpellTag.area, SpellTag.damage))
                 .manualDesc("Strike enemies in front of you for " + SpellCalcs.TIDAL_STRIKE.getLocDmgTooltip(Elements.Cold))
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.TRIDENT_THROW, 1D, 1D))

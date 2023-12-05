@@ -24,7 +24,6 @@ import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.age_of_exile.database.data.stats.types.summon.GolemSpellChance;
 import com.robertx22.age_of_exile.database.data.stats.types.summon.SummonHealth;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
-import com.robertx22.age_of_exile.uncommon.enumclasses.AttackStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -117,7 +116,7 @@ public class GameChangerPerksAddtl implements ExileRegistryInit {
         );
 
         PerkBuilder.gameChanger("collateral", "Collateral",
-                new OptScaleExactStat(20, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.technique), ModType.MORE),
+                new OptScaleExactStat(20, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.weapon_skill), ModType.MORE),
                 new OptScaleExactStat(-50, Stats.INCREASED_AREA.get(), ModType.FLAT)
         );
 
@@ -174,7 +173,7 @@ public class GameChangerPerksAddtl implements ExileRegistryInit {
         PerkBuilder.gameChanger("heretic", "Heretic",
                 new OptScaleExactStat(50, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTag.totem), ModType.MORE),
                 new OptScaleExactStat(20, Stats.TOTEM_DURATION.get(), ModType.MORE),
-                new OptScaleExactStat(-50, Stats.ATTACK_STYLE_DAMAGE.get(AttackStyle.ATTACK), ModType.FLAT)
+                new OptScaleExactStat(-50, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.weapon_skill), ModType.FLAT)
         );
 
         PerkBuilder.gameChanger("necromantic_defenses", "Necromantic Defenses",

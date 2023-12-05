@@ -22,8 +22,7 @@ public class SpellHasTagCondition extends StatCondition {
     @Override
     public boolean can(EffectEvent event, EffectSides statSource, StatData data, Stat stat) {
         if (event.isSpell()) {
-            return event.getSpell()
-                .is(tag);
+            return event.getSpell().is(tag);
         }
         return false;
     }

@@ -24,7 +24,7 @@ public class StrSpells implements ExileRegistryInit {
         SpellBuilder.of(SHRED, PlayStyle.STR, SpellConfiguration.Builder.instant(10, 20 * 1)
                                 .setSwingArm()
                                 .setChargesAndRegen("shred", 3, 20 * 15), "Shred",
-                        Arrays.asList(SpellTag.technique, SpellTag.area, SpellTag.damage))
+                        Arrays.asList(SpellTag.weapon_skill, SpellTag.area, SpellTag.damage))
                 .manualDesc(
                         "Slash all nearby enemies, dealing "
                                 + SpellCalcs.SHRED.getLocDmgTooltip() + " " + Elements.Physical.getIconNameDmg()
@@ -51,7 +51,7 @@ public class StrSpells implements ExileRegistryInit {
         /*
         SpellBuilder.of("thirst_strike", SpellConfiguration.Builder.instant(5, 15)
                     .setSwingArm(), "Thirsting Strike",
-                Arrays.asList(SpellTag.technique, SpellTag.area, SpellTag.damage))
+                Arrays.asList(SpellTag.weapon_skill, SpellTag.area, SpellTag.damage))
 
             .attackStyle(PlayStyle.melee)
             .weaponReq(CastingWeapon.MELEE_WEAPON)

@@ -10,14 +10,10 @@ import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElement
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.*;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
-import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
-import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.EnergyRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
-import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShieldRegen;
-import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.summon.SummonHealth;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
@@ -43,11 +39,10 @@ public class PerksAddtl implements ExileRegistryInit {
                     PerkBuilder.bigStat(new OptScaleExactStat(10, x, ModType.FLAT));
                 });
 
-        Stats.ATTACK_STYLE_DAMAGE.getAll()
-                .forEach(x -> {
-                    PerkBuilder.stat(x.GUID(), new OptScaleExactStat(3, x, ModType.FLAT));
-                    PerkBuilder.bigStat(new OptScaleExactStat(10, x, ModType.FLAT));
-                });
+        PerkBuilder.stat("spell_atk_style_dmg", new OptScaleExactStat(3, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.magic), ModType.FLAT));
+        PerkBuilder.stat("attack_atk_style_dmg", new OptScaleExactStat(3, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.weapon_skill), ModType.FLAT));
+        PerkBuilder.bigStat("spell_atk_style_dmg", new OptScaleExactStat(10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.magic), ModType.FLAT));
+        PerkBuilder.bigStat("attack_atk_style_dmg", new OptScaleExactStat(10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.weapon_skill), ModType.FLAT));
 
         PerkBuilder.bigStat(new OptScaleExactStat(10, Stats.PROJECTILE_SPEED.get()));
         PerkBuilder.bigStat(new OptScaleExactStat(8, Stats.PROJECTILE_DAMAGE.get(), ModType.FLAT));

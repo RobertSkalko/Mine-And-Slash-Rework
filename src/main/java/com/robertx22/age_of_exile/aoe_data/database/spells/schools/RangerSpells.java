@@ -139,7 +139,7 @@ public class RangerSpells implements ExileRegistryInit {
 
                                 .setChargesAndRegen("dash", 3, 20 * 30)
                         , "Dash",
-                        Arrays.asList(SpellTag.movement, SpellTag.technique))
+                        Arrays.asList(SpellTag.movement, SpellTag.weapon_skill))
                 .manualDesc(
                         "Dash forwards quickly and gain slowfall.")
                 .weaponReq(CastingWeapon.NON_MAGE_WEAPON)
