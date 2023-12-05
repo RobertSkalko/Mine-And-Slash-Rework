@@ -107,3 +107,7 @@ WEIRD DAMAGE BEHAVIOR MIGHT HAPPEN, SO PLEASE REPORT
 v.5.3.7
 
 - hotfix a map hang, related to a while loop, never again
+
+v.5.3.8
+
+- added random offsets for summonblockaction

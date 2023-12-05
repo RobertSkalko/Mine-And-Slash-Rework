@@ -6,6 +6,8 @@ import com.robertx22.age_of_exile.database.data.spells.entities.StationaryFallin
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellUtils;
+import com.robertx22.library_of_exile.utils.RandomUtils;
+import com.robertx22.library_of_exile.utils.geometry.MyPosition;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
@@ -30,6 +32,16 @@ public class SummonBlockAction extends SpellAction {
     }
 
 
+    static float getRandomOffset(MapHolder data, MapField<Double> f) {
+        float off = data.getOrDefault(f, 0D).floatValue();
+        if (off != 0) {
+            int te = (int) (off * 100F);
+            float num = RandomUtils.RandomRange(0, te) / 100F;
+            return RandomUtils.roll(50) ? num : -num;
+        }
+        return 0;
+    }
+
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
         if (ctx.world.isClientSide) {
@@ -37,11 +49,19 @@ public class SummonBlockAction extends SpellAction {
         }
 
         //HitResult ray = ctx.caster.rayTrace(5D, 0.0F, false);
-        BlockPos pos = ctx.getBlockPos();
+        MyPosition pos = new MyPosition(ctx.getBlockPos());
 
-        pos = new BlockPos(pos.getX(), pos.getY() + data.getOrDefault(MapField.HEIGHT, 0D).intValue(), pos.getZ());
+        float yoff = getRandomOffset(data, MapField.RANDOM_Y_OFFSET);
+        float xoff = getRandomOffset(data, MapField.RANDOM_X_OFFSET);
+        float zoff = getRandomOffset(data, MapField.RANDOM_Z_OFFSET);
+
+
+        pos = new MyPosition(pos.x() + xoff,
+                pos.y() + data.getOrDefault(MapField.HEIGHT, 0D).intValue() + yoff,
+                pos.z() + zoff);
 
         boolean found = true;
+
 
         if (data.getOrDefault(MapField.FIND_NEAREST_SURFACE, true)) {
 
@@ -49,23 +69,23 @@ public class SummonBlockAction extends SpellAction {
 
             int times = 0;
 
-            while (!found && pos.getY() > 1 && SEARCH > times) {
+            while (!found && pos.y() > 1 && SEARCH > times) {
                 times++;
-                if (!isSolid(ctx.world, pos) && isSolid(ctx.world, pos.below())) {
+                if (!isSolid(ctx.world, pos.asBlockPos()) && isSolid(ctx.world, pos.asBlockPos().below())) {
                     found = true;
                 } else {
-                    pos = pos.below();
+                    pos = new MyPosition(pos.x, pos.y - 1, pos.z);
                 }
             }
             if (!found) {
-                pos = ctx.getBlockPos();
+                pos = new MyPosition(ctx.getBlockPos());
                 times = 0;
-                while (!found && pos.getY() < ctx.world.getMaxBuildHeight() && SEARCH > times) {
+                while (!found && pos.y() < ctx.world.getMaxBuildHeight() && SEARCH > times) {
                     times++;
-                    if (!isSolid(ctx.world, pos) && isSolid(ctx.world, pos.below())) {
+                    if (!isSolid(ctx.world, pos.asBlockPos()) && isSolid(ctx.world, pos.asBlockPos().below())) {
                         found = true;
                     } else {
-                        pos = pos.above();
+                        pos = new MyPosition(pos.x, pos.y + 1, pos.z);
                     }
                 }
             }
@@ -75,9 +95,8 @@ public class SummonBlockAction extends SpellAction {
 
 
         if (found) {
-            StationaryFallingBlockEntity be = new StationaryFallingBlockEntity(ctx.world, pos, block.defaultBlockState());
-            be.getEntityData()
-                    .set(StationaryFallingBlockEntity.IS_FALLING, data.getOrDefault(MapField.IS_BLOCK_FALLING, false));
+            StationaryFallingBlockEntity be = new StationaryFallingBlockEntity(ctx.world, pos.asBlockPos(), block.defaultBlockState());
+            be.getEntityData().set(StationaryFallingBlockEntity.IS_FALLING, data.getOrDefault(MapField.IS_BLOCK_FALLING, false));
             SpellUtils.initSpellEntity(be, ctx.caster, ctx.calculatedSpellData, data);
 
             ctx.world.addFreshEntity(be);
