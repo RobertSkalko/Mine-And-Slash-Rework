@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 import com.robertx22.age_of_exile.loot.req.DropRequirement;
 import com.robertx22.age_of_exile.mechanics.harvest.HarvestItems;
+import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -44,5 +45,20 @@ public class HarvestBlueChest extends LootChest {
     @Override
     public int Weight() {
         return 1000;
+    }
+
+    @Override
+    public AutoLocGroup locNameGroup() {
+        return AutoLocGroup.Lootboxes;
+    }
+
+    @Override
+    public String locNameLangFileGUID() {
+        return SlashRef.MODID + ".chest_type." + GUID();
+    }
+
+    @Override
+    public String locNameForLangFile() {
+        return "Harvest Blue Chest";
     }
 }

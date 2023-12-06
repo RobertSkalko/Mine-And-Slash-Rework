@@ -223,7 +223,12 @@ public enum Words implements IAutoLocName {
     MULTIPLY_STAT_INCREASED("Increased"),
     MULTIPLY_STAT_REDUCED("Reduced"),
     MULTIPLICATIVE_DAMAGE_MORE("More"),
-    MULTIPLICATIVE_DAMAGE_LESS("Less"), PERCENT_INCREASED_STAT(" Extra ");
+    MULTIPLICATIVE_DAMAGE_LESS("Less"),
+    PERCENT_INCREASED_STAT(" Extra "),
+    CHEST_CONTAINS("Contains: "),
+    NEED_KEY("Needs Key: "),
+    EMPTY_SOCKET("[Socket]"),
+    EMPTY_BOX("Box");
 
 
     private String localization = "";

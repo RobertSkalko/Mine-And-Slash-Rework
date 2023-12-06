@@ -65,7 +65,7 @@ public enum Chats implements IAutoLocName {
 
     Dev_tools_enabled_contact_the_author("Devs tools enabled, if you see this please contact the author of Mine and Slash [robertx22], he forgot to disable them!"),
     Not_enough_experience("Not enough experience"),
-    Can_not_go_over_maximum_level("Can not go over maximum level");
+    Can_not_go_over_maximum_level("Can not go over maximum level"), OPEN_LOOT_CHEST("Right-click to open Loot Chest!");
 
     private String localization = "";
 

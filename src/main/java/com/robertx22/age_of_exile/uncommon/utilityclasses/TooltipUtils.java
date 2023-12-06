@@ -195,8 +195,7 @@ public class TooltipUtils {
 
     public static MutableComponent rarity(Rarity rarity) {
         return Words.Tooltips_Rarity.locName().withStyle(ChatFormatting.WHITE)
-                .append(rarity.locName()
-                        .withStyle(rarity.textFormatting()));
+                .append(rarity.locName().withStyle(rarity.textFormatting()));
     }
 
     public static MutableComponent rarityShort(Rarity rarity) {

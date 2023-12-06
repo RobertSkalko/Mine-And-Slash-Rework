@@ -275,9 +275,9 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     private MutableComponent prefixChecker(){
         if (affixes.hasPrefix()) {
             AffixData prefix = affixes.pre.get(0);
-            return ExileText.ofText("").append(prefix.BaseAffix().locName());
+            return prefix.BaseAffix().locName();
         } else {
-            return ExileText.ofText("").get();
+            return Component.literal("");
         }
     }
 
@@ -285,7 +285,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         if (this.uniqueStats == null) {
             return GetBaseGearType().locName();
         } else {
-            return uniqueStats.getUnique(this).locName()
+            return uniqueStats.getUnique(this).locName();
         }
 
     }
@@ -295,7 +295,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
             AffixData suffix = affixes.suf.get(0);
             return suffix.BaseAffix().locName();
         } else {
-            return ExileText.ofText("").get();
+            return Component.literal("");
         }
     }
 
