@@ -7,6 +7,11 @@ import net.minecraft.ChatFormatting;
 import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
+    NONE_MAGE("Non Mage weapons can use."),
+    ANY_ITEM("Any weapon can use."),
+    REQUIRE_MELEE("Requires Melee weapon to use."),
+    REQUIRE_MAGE("Requires Mage Weapon to use."),
+    REQUIRE_RANGED("Requires Ranged Weapon to use."),
     INFUSES_STATS("Infuses stats into blank gear."),
     RIGHT_CLICK_TO_GEN_ITEM("You can also right-click to generate an item."),
 

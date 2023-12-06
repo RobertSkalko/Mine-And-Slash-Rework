@@ -152,8 +152,8 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                             ": +" + this.getBonusLootAmountInPercent() + "%"));
         }
         comp.append(ChatFormatting.GRAY + ", ")
-                .append(Words.Tier.locName().withStyle(ChatFormatting.GOLD)
-                        .append(": " + this.tier));
+                .append(Words.Tooltips_Tier.locName().withStyle(ChatFormatting.GOLD)
+                        .append(this.tier + ""));
 
         tooltip.add(comp);
 

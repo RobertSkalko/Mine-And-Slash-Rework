@@ -249,6 +249,21 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         return (int) ctx.event.data.getNumber(EventData.ENERGY_COST).number;
     }
 
+    private MutableComponent getMutabletags(Iterator<?> iterator, MutableComponent separator){
+        if (separator == null) {
+            separator = ExileText.ofText("").get();
+        }
+
+        ExileText Etext = ExileText.emptyLine();
+            while (iterator.hasNext()) {
+                Etext.append((MutableComponent) iterator.next());
+                if (iterator.hasNext()) {
+                    Etext.append(separator);
+                }
+            }
+            return Etext.get();
+    }
+
     public final List<Component> GetTooltipString(TooltipInfo info) {
 
         SpellCastContext ctx = new SpellCastContext(info.player, 0, this);
@@ -347,8 +362,8 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
             }
         }
 
-        String taglist = StringUTIL.join(this.config.tags.stream().map(x -> x.locname).iterator(), ", ");
-        MutableComponent tagtext = Words.TAGS.locName().append(": ").append(taglist);
+        MutableComponent taglist = getMutabletags(this.config.tags.stream().map(x -> x.locName()).iterator(), ExileText.ofTranslate(SlashRef.MODID + ".spell.spell_tag_seperator").get());
+        MutableComponent tagtext = Words.TAGS.locName().append(taglist);
 
         list.add(tagtext);
 
