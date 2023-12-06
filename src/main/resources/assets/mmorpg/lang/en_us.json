@@ -854,21 +854,6 @@
 	"mmorpg.word.weapon": "Weapon:",
 	"mmorpg.word.wiki": "Wiki",
 	"mmorpg.word.wind": "Wind",
-	"mmorpg.word.tooltips_rarity": "Rarity: ",
-	"mmorpg.word.tooltips_tier": "Tier: ",
-	"mmorpg.word.tooltips_item_tier": "Item Tier: ",
-	"mmorpg.word.tooltips_level": "Level: ",
-	"mmorpg.word.use_tip": "[Drag onto gear to use]",
-	"mmorpg.word.stat_req": "%1$s Min: ",
-	"mmorpg.word.potential": "Potential: %1$s%%",
-	"mmorpg.word.quality": "Quality: %1$s%%",
-	"mmorpg.word.energy_cost_per_mob": "Energy Cost: %1$s + %2$s Per mob, x %3$s Dmg",
-	"mmorpg.word.durability": "Durability: ",
-	"mmorpg.word.unbreakable": "Unbreakable",
-	"mmorpg.word.restores": "Restores: %1$s%%",
-	"mmorpg.word.favor_in_gui": " Favor",
-	"mmorpg.word.current_favor": "Current: %1$s",
-	"mmorpg.word.loot_exp_multiplier": "Loot/Exp Multiplier: %1$sx",
 
 	
 
@@ -1529,11 +1514,6 @@
 	"mmorpg.chat.too_many_buffs": "You can't have that many buffs.",
 	"mmorpg.chat.tool_add_stat": "%1$s has been Upgraded to %2$s!",
 	"mmorpg.chat.tool_level_up": "%1$s has reached level %2$s!",
-	"mmorpg.chat.none_mage": "Non Mage weapons can use.",
-	"mmorpg.chat.any_item": "Any weapon can use.",
-	"mmorpg.chat.require_melee": "Requires Melee weapon to use.",
-	"mmorpg.chat.require_mage": "Requires Mage Weapon to use.",
-	"mmorpg.chat.require_ranged": "Requires Ranged Weapon to use.",
 
 
 
@@ -1567,8 +1547,6 @@
 
 
 "_comment": " [CATEGORY]: SPELLS - DESCRIPTIONS",
-	"mmorpg.spell.conbine_icon_and_damage": "%1$s %2$s",
-	"mmorpg.spell.spell_damage_proportion": "(%1$s%% of %2$s)",
 	"spell.desc.arrow_barrage": "Shoot out arrows in rapid succession, dealing [calc:arrow_storm] §6☀ Physical§7 Damage",
 	"spell.desc.arrow_storm": "Shoot out arrows in an arc, dealing [calc:arrow_storm] §6☀ Physical§7 Damage",
 	"spell.desc.arrow_totem": "Summons a totem that rapidly shoots arrows, dealing [calc:arrow_totem] §6☀ Physical§7 Damage",
