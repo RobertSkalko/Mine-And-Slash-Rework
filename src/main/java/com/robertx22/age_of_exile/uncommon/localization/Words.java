@@ -8,7 +8,7 @@ import java.util.Locale;
 
 // to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
-    TAGS("Tags"),
+    TAGS("Tags: "),
     ITEM_TYPE("Item Type: "),
     SPELL_STATS("Spell Stats:"),
     CASTED_TIMES_CHANNEL("Casted %1$s times during channel."),
@@ -205,12 +205,7 @@ public enum Words implements IAutoLocName {
 
     UsableOn("Usable On"),
 
-    Prefix_Space(" "),
-    Suffix_Space(" "),
-    TM_Prefix_Space(" "),
-    TM_Suffix_Space(" "),
     Tooltips_Rarity("Rarity: "),
-    Tooltips_Item_Type("Item Type: "),
     Tooltips_Tier("Tier: "),
     Tooltips_Item_Tier("Item Tier: "),
     Tooltips_Level("Level: "),
@@ -222,9 +217,13 @@ public enum Words implements IAutoLocName {
     Durability("Durability: "),
     Unbreakable("Unbreakable"),
     Restores("Restores: %1$s%%"),
-    Favor_In_GUI(" Favor"),
-    Current_Favor("Current: %1$s"),
-    Loot_Exp_Multiplier("Loot/Exp Multiplier: %1$sx");
+    CAPPED_TO_LVL(" [Capped to LVL]"),
+    RESTED_COMBAT_EXP("Rested Combat Exp: "),
+    RESTED_PROF_EXP("Rested Prof. Exp: "),
+    MULTIPLY_STAT_INCREASED("Increased"),
+    MULTIPLY_STAT_REDUCED("Reduced"),
+    MULTIPLICATIVE_DAMAGE_MORE("More"),
+    MULTIPLICATIVE_DAMAGE_LESS("Less"), PERCENT_INCREASED_STAT(" Extra ");
 
 
     private String localization = "";

@@ -94,9 +94,9 @@ public class StatMod implements ISerializable<StatMod> {
             text = text + "%";
         } else if (getModType() == ModType.MORE) {
             if (fmin > 0) {
-                text = text + " " + GetStat().getMultiUseType().tooltipPrefix;
+                text = text + " " + GetStat().getMultiUseType().prefixWord.locName().toString();
             } else {
-                text = text + " " + GetStat().getMultiUseType().tooltipPrefixLess;
+                text = text + " " + GetStat().getMultiUseType().prefixLessWord.locName().toString();
 
             }
         }

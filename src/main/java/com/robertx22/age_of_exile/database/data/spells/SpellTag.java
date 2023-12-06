@@ -1,6 +1,11 @@
 package com.robertx22.age_of_exile.database.data.spells;
 
-public enum SpellTag {
+import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
+
+import java.util.Locale;
+
+public enum SpellTag implements IAutoLocName {
     projectile("Projectile"),
     movement("Movement"),
     damage("Damage"),
@@ -26,5 +31,25 @@ public enum SpellTag {
 
     SpellTag(String locname) {
         this.locname = locname;
+    }
+
+    @Override
+    public AutoLocGroup locNameGroup() {
+        return AutoLocGroup.Misc;
+    }
+
+    @Override
+    public String locNameLangFileGUID() {
+        return SlashRef.MODID + ".spell.spell_tag." + GUID();
+    }
+
+    @Override
+    public String locNameForLangFile() {
+        return locname;
+    }
+
+    @Override
+    public String GUID() {
+        return this.name().toLowerCase(Locale.ROOT);
     }
 }

@@ -3,12 +3,15 @@ package com.robertx22.age_of_exile.gui.screens.character_screen;
 import com.robertx22.age_of_exile.gui.bases.BaseScreen;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.localization.Gui;
+import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.library_of_exile.gui.ItemSlotButton;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -51,8 +54,7 @@ public class PlayerGearButton extends ImageButton {
     public void render(GuiGraphics gui, int x, int y, float ticks) {
         super.render(gui, x, y, ticks);
 
-        String str = "Level: " + Load.Unit(player)
-                .getLevel();
+        MutableComponent str = Gui.MAINHUB_LEVEL.locName().append(String.valueOf(Load.Unit(player).getLevel()));
 
         Minecraft mc = Minecraft.getInstance();
 
