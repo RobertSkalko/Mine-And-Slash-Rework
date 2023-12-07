@@ -29,6 +29,7 @@ public class SpellConfiguration {
     public int cooldown_ticks = 20;
     private String style = PlayStyle.STR.id;
     public List<SpellTag> tags = new ArrayList<>();
+    public int tracking_radius = 5;
 
     public int getCastTimeTicks() {
         return cast_time_ticks;

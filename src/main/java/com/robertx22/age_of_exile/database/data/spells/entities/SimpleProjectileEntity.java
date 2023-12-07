@@ -245,10 +245,12 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
 
     public void tryMoveTowardsEnemies() {
         if (moveTowardsEnemies) {
+            int radius = getSpellData().getSpell().config.tracking_radius;
+
             var b = EntityFinder.start(getCaster(), LivingEntity.class, position())
                     .finder(EntityFinder.SelectionType.RADIUS)
                     .searchFor(AllyOrEnemy.enemies)
-                    .radius(8);
+                    .radius(radius);
 
             var target = b.getClosest();
 
@@ -391,7 +393,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
                         chains = 0;
                     }
 
-                  
+
                     var radius = getSpellData().data.getNumber(EventData.AREA_MULTI, 1F).number;
 
                     var b = EntityFinder.start(getCaster(), LivingEntity.class, position())
