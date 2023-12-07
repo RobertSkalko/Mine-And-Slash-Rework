@@ -17,7 +17,6 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
-import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
@@ -156,7 +155,7 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
     private MutableComponent stars() {
 
-        return Gui.AVAILABLE_SUPPORT_SLOTS.locName(links).withStyle(ChatFormatting.DARK_PURPLE);
+        return Component.literal("Support Slots: " + links + "/5 Available").withStyle(ChatFormatting.DARK_PURPLE);
 
     }
 

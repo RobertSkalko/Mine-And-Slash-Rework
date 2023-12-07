@@ -3,11 +3,7 @@ package com.robertx22.age_of_exile.gui.overlays;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.blood.BloodUser;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.HealthUtils;
-import com.robertx22.library_of_exile.wrappers.ExileText;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
@@ -45,8 +41,8 @@ public enum BarGuiType {
         }
 
         @Override
-        public MutableComponent getText(EntityData data, Player en) {
-            return Gui.STATUS_BAR_LEVEL.locName();
+        public String getText(EntityData data, Player en) {
+            return "Level " + data.getLevel() + " " + (int) (getMulti(data, en) * 100) + "%";
         }
     },
     ENERGY {
@@ -167,8 +163,9 @@ public enum BarGuiType {
         }
 
         @Override
-        public MutableComponent getText(EntityData data, Player en) {
-            return Gui.STATUS_BAR_HUGER.locName((int) getCurrent(data, en), (int) en.getFoodData().getSaturationLevel());
+        public String getText(EntityData data, Player en) {
+            return "H: " + (int) getCurrent(data, en) + " S: " + (int) en.getFoodData()
+                    .getSaturationLevel();
         }
 
     },
@@ -198,8 +195,8 @@ public enum BarGuiType {
         return Math.min(getCurrent(data, en) / getMax(data, en), 1);
     }
 
-    public MutableComponent getText(EntityData data, Player en) {
-        return Component.literal((int) getCurrent(data, en) + "/" + (int) getMax(data, en));
+    public String getText(EntityData data, Player en) {
+        return (int) getCurrent(data, en) + "/" + (int) getMax(data, en);
     }
 
     public ResourceLocation getIcon(EntityData data, Player en) {

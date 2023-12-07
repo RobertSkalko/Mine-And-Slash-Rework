@@ -19,7 +19,6 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.rework.GenericDataHol
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
-import com.robertx22.age_of_exile.uncommon.localization.Formatter;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
@@ -272,41 +271,35 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         return Arrays.asList();
     }
 
-    private MutableComponent prefixChecker(){
-        if (affixes.hasPrefix()) {
-            AffixData prefix = affixes.pre.get(0);
-            return ExileText.ofText("").append(prefix.BaseAffix().locName());
-        } else {
-            return ExileText.ofText("").get();
-        }
-    }
-
-    private MutableComponent uniqueChecker(){
-        if (this.uniqueStats == null) {
-            return GetBaseGearType().locName();
-        } else {
-            return uniqueStats.getUnique(this).locName()
-        }
-
-    }
-
-    private MutableComponent suffixChecker(){
-        if (affixes.hasSuffix()) {
-            AffixData suffix = affixes.suf.get(0);
-            return suffix.BaseAffix().locName();
-        } else {
-            return ExileText.ofText("").get();
-        }
-    }
 
     private List<MutableComponent> getFullAffixedName() {
         List<MutableComponent> list = new ArrayList<>();
         ChatFormatting format = this.getRarity()
                 .textFormatting();
 
-        ExileText meditation = ExileText.emptyLine();
+        MutableComponent text = ExileText.emptyLine().get();
 
-        MutableComponent text = Formatter.GEAR_ITEM_NAME.locName(prefixChecker(), uniqueChecker(), suffixChecker());
+        if (affixes.hasPrefix()) {
+
+            AffixData prefix = affixes.pre.get(0);
+
+            text.append(prefix.BaseAffix()
+                    .locName());
+        }
+        if (this.uniqueStats == null) {
+            text.append(" ").append(GetBaseGearType().locName());
+        } else {
+            text.append(uniqueStats.getUnique(this)
+                    .locName()
+            );
+        }
+
+        if (affixes.hasSuffix()) {
+            AffixData suffix = affixes.suf.get(0);
+            text.append(" ")
+                    .append(suffix.BaseAffix()
+                            .locName());
+        }
 
         text.withStyle(format);
 
@@ -347,11 +340,17 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
         if (prefix != null && suffix != null) {
 
-            ExileText meditation = ExileText.emptyLine();
+            MutableComponent txt = ExileText.emptyLine().get();
 
-            MutableComponent text = Formatter.HIGH_RARITY_GEAR_ITEM_NAME.locName(prefix.locName(), suffix.locName(), GetBaseGearType().locName());
+            txt.append("").append(prefix.locName());
 
-            list.addAll(TooltipUtils.cutIfTooLong(text, format));
+            txt.append(" ").append(suffix.locName()).withStyle(format);
+
+            txt.append(" ").append(GetBaseGearType().locName());
+
+            txt.withStyle(format);
+
+            list.addAll(TooltipUtils.cutIfTooLong(txt, format));
 
             return list;
         }

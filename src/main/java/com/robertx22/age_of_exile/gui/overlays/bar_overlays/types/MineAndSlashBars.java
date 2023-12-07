@@ -10,7 +10,6 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 public class MineAndSlashBars {
@@ -23,7 +22,7 @@ public class MineAndSlashBars {
 
     static Minecraft mc = Minecraft.getInstance();
 
-    public static void renderMineAndSlashBar(GuiPartConfig config, BarGuiType type, GuiGraphics gui, PointData point, MutableComponent text, boolean drawText) {
+    public static void renderMineAndSlashBar(GuiPartConfig config, BarGuiType type, GuiGraphics gui, PointData point, String text, boolean drawText) {
 
         
         int BAR_HEIGHT = 11;

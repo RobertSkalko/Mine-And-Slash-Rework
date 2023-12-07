@@ -1,12 +1,10 @@
 package com.robertx22.age_of_exile.database.data.value_calc;
-import com.robertx22.age_of_exile.mmorpg.SlashRef;
+
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
-import com.robertx22.age_of_exile.uncommon.localization.Gui;
-import com.robertx22.age_of_exile.uncommon.localization.Words;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -45,7 +43,7 @@ public class ScalingCalc {
     }
 
     public Component GetTooltipString(LivingEntity en, MaxLevelProvider provider) {
-        return Gui.SPELL_DAMAGE_PROPORTION.locName(getMultiAsPercent(en, provider), getStat().getMutableIconNameFormat());
+        return Component.literal("(" + getMultiAsPercent(en, provider) + "% of " + getStat().getIconNameFormat() + ")");
     }
 
     public List<Component> getTooltipFor(float multi, float value, MutableComponent statname, Elements el) {

@@ -14,8 +14,6 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect;
-import com.robertx22.age_of_exile.uncommon.localization.Formatter;
-import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientTextureUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
@@ -86,22 +84,16 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
 
     public enum MultiUseType {
         // todo will this still be confusing
-        MULTIPLY_STAT("Increased", "Reduced", Words.MULTIPLY_STAT_INCREASED, Words.MULTIPLY_STAT_REDUCED),
-        MULTIPLICATIVE_DAMAGE("More", "Less", Words.MULTIPLICATIVE_DAMAGE_MORE, Words.MULTIPLICATIVE_DAMAGE_LESS);
+        MULTIPLY_STAT("Increased", "Reduced"),
+        MULTIPLICATIVE_DAMAGE("More", "Less");
 
-        private String tooltipPrefix;
-        private String tooltipPrefixLess;
+        public String tooltipPrefix;
+        public String tooltipPrefixLess;
 
-        public Words prefixWord;
-        public Words prefixLessWord;
-
-        MultiUseType(String tooltipPrefix, String tooltipPrefixLess, Words prefixWord, Words prefixLessWord) {
+        MultiUseType(String tooltipPrefix, String tooltipPrefixLess) {
             this.tooltipPrefix = tooltipPrefix;
             this.tooltipPrefixLess = tooltipPrefixLess;
-            this.prefixWord = prefixWord;
-            this.prefixLessWord = prefixLessWord;
         }
-        
     }
 
 /*
@@ -133,10 +125,6 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
 
     public String getIconNameFormat(String str) {
         return this.getFormat() + this.icon + " " + str + ChatFormatting.GRAY;
-    }
-
-    public MutableComponent getMutableIconNameFormat() {
-        return Formatter.ICON_AND_DAMAGE_IN_SPELL_DAMAGE_PROPORTION.locName(this.getFormat() + this.icon, this.locName());
     }
 
     @Override

@@ -34,7 +34,6 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
-import com.robertx22.age_of_exile.uncommon.localization.Formatter;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.registry.IWeighted;
@@ -54,12 +53,17 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCurrency, IWeighted, IShapelessRecipe {
+public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IAutoLocName, IItemAsCurrency, IWeighted, IShapelessRecipe {
+
+    @Override
+    public AutoLocGroup locNameGroup() {
+        return AutoLocGroup.Misc;
+    }
 
 
     @Override
     public Component getName(ItemStack stack) {
-        return Formatter.GEM_ITEM_NAME.locName(this.gemRank.locName(), this.gemType.locName()).withStyle(gemType.format);
+        return Component.translatable("item." + locNameLangFileGUID(), this.gemRank.locName, this.gemType.locName).withStyle(gemType.format);
     }
 
     @Override
@@ -80,6 +84,16 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
     @Override
     public int Weight() {
         return this.weight;
+    }
+
+    @Override
+    public String locNameLangFileGUID() {
+        return SlashRef.MODID + ".gem_item_name";
+    }
+
+    @Override
+    public String locNameForLangFile() {
+        return "%1$s" + " " + "%2$s";
     }
 
     @Override

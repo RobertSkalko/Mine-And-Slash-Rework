@@ -36,7 +36,6 @@ import com.robertx22.age_of_exile.gui.wiki.BestiaryScreen;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
-import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.vanilla_mc.packets.AllocateStatPacket;
 import com.robertx22.library_of_exile.main.Packets;
@@ -49,7 +48,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
@@ -299,7 +297,7 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
         int p = Load.player(mc.player).statPoints
                 .getFreePoints(mc.player);
         if (p > 0) {
-            MutableComponent points = Gui.STATS_POINTS.locName().append(String.valueOf(p));
+            String points = "Points: " + p;
             gui.drawString(mc.font, points, guiLeft + sizeX / 2 - mc.font.width(points) / 2, guiTop + sizeY + 10, ChatFormatting.GREEN.getColor());
         }
 

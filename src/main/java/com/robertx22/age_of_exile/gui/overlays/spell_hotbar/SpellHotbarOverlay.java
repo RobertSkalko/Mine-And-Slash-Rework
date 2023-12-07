@@ -10,7 +10,6 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ChatUtils;
 import com.robertx22.library_of_exile.utils.CLOC;
 import com.robertx22.library_of_exile.utils.GuiUtils;
-import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;

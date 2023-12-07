@@ -8,12 +8,10 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import com.robertx22.age_of_exile.mmorpg.SlashRef;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -34,7 +32,7 @@ public class PlayerBuffData implements IStatCtx {
         return Arrays.asList(new MiscStatCtx(stats));
     }
 
-    public enum Type implements IAutoLocName{
+    public enum Type {
         POTION("potion", "Potion", 20 * 60 * 30, () -> SlashPotions.POTION.get()),
         // ELIXIR("elixir", "Elixir", 20 * 60 * 15),
         MEAL("meal", "Meal", 20 * 60 * 60, () -> SlashPotions.MEAL.get()),
@@ -56,28 +54,6 @@ public class PlayerBuffData implements IStatCtx {
         public boolean isFood() {
             return this == MEAL || this == FISH;
         }
-
-        @Override
-        public AutoLocGroup locNameGroup() {
-            return AutoLocGroup.Foods;
-        }
-
-        @Override
-        public String locNameLangFileGUID() {
-            return SlashRef.MODID + ".buff_consumption." + GUID();
-        }
-    
-        @Override
-        public String locNameForLangFile() {
-            return name;
-        }
-    
-        @Override
-        public String GUID() {
-            return this.name
-                    .toLowerCase(Locale.ROOT);
-        }
-    
     }
 
     public void onTick(Player p, int ticks) {

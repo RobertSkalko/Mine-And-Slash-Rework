@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.database.data.stats.name_regex;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
-import com.robertx22.age_of_exile.uncommon.localization.Formatter;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.NumberUtils;
 import com.robertx22.library_of_exile.utils.CLOC;
 import net.minecraft.ChatFormatting;
@@ -62,9 +61,9 @@ public abstract class StatNameRegex {
 
         if (type == ModType.MORE) {
             if (v1 > 0) {
-                add += stat.getMultiUseType().prefixWord.locName().toString();
+                add += stat.getMultiUseType().tooltipPrefix + " ";
             } else {
-                add += stat.getMultiUseType().prefixLessWord.locName().toString();
+                add += stat.getMultiUseType().tooltipPrefixLess + " ";
             }
         }
 
@@ -83,7 +82,7 @@ public abstract class StatNameRegex {
 
         str = str.replace(VALUE, numberColor(format, stat, v1) + "" + plusminus + v1s + perc + ChatFormatting.RESET + statColor(stat));
 
-        str = str.replace(NAME, Formatter.SPECIAL_CALC_STAT.locName(add, stat.locName()).toString());
+        str = str.replace(NAME, add + "" + CLOC.translate(stat.locName()));
 
         str = Stat.format(str);
 
