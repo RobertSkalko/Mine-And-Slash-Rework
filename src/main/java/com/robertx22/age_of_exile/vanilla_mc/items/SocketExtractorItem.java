@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.vanilla_mc.items;
 
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -31,6 +32,6 @@ public class SocketExtractorItem extends AutoItem {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {
-        tooltip.add(Component.literal("Click on gear to extract a gem.").withStyle(ChatFormatting.RED));
+        tooltip.add(Itemtips.SOCKET_EXTRACTOR_USAGE.locName().withStyle(ChatFormatting.RED));
     }
 }

@@ -27,8 +27,8 @@ public class OnLogin {
 
             if (!player.getServer()
                     .isCommandBlockEnabled()) {
-                player.displayClientMessage(Component.literal("Command blocks are disabled, this will stop you from playing Mine and slash Dungeons!").withStyle(ChatFormatting.RED), false);
-                player.displayClientMessage(Component.literal("To enable go to your server.properties file and put enable-command-block as true.").withStyle(ChatFormatting.GREEN), false);
+                player.displayClientMessage(Chats.COMMAND_BLOCK_UNAVALIABLE.locName().withStyle(ChatFormatting.RED), false);
+                player.displayClientMessage(Chats.HOW_TO_ENABLE_COMMAND_BLOCK.locName().withStyle(ChatFormatting.GREEN), false);
             }
 
             CapSyncUtil.syncAll(player);

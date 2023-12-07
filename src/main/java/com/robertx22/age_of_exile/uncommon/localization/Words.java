@@ -9,7 +9,7 @@ import java.util.Locale;
 // to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
     TAGS("Tags: "),
-    ITEM_TYPE("Item Type: "),
+
     SPELL_STATS("Spell Stats:"),
     CASTED_TIMES_CHANNEL("Casted %1$s times during channel."),
     INSTANT_CAST("Instant Cast"),
@@ -32,11 +32,9 @@ public enum Words implements IAutoLocName {
     ARMOR("Armor:"),
     JEWERLY("Jewelry:"),
     PROFESSIONS("Professions"),
-    POTION("Potion"),
     SUPPGEM("Support Gem"),
     AURA("Aura"),
     MAJOR("Major"),
-    MEAL("Meal"),
     WIKI("Wiki"),
     LESSER("Lesser"),
     MEDIUM("Medium"),
@@ -73,56 +71,6 @@ public enum Words implements IAutoLocName {
     Rune("Rune"),
     LevelRewards("Level Rewards"),
     Gem("Gem"),
-    Miracle("Miracle"),
-    Oblivion("Oblivion"),
-    Beast("Beast"),
-    Golem("Golem"),
-    Spirit("Spirit"),
-    Rage("Rage"),
-
-    Beads("Beads"),
-    Charm("Charm"),
-    Locket("Locket"),
-    //
-    Band("Band"),
-    Eye("Eye"),
-    Loop("Loop"),
-    //
-    Crown("Crown"),
-    Circlet("Circlet"),
-    Horn("Horn"),
-    //
-    Cloak("Cloak"),
-    Coat("Coat"),
-    Mantle("Mantle"),
-    Shell("Shell"),
-    //
-    Aegis("Aegis"),
-    Barrier("Barrier"),
-    Guard("Guard"),
-    Tower("Tower"),
-    Road("Road"),
-    Hoof("Hoof"),
-    Dash("Dash"),
-    //
-
-    Bane("Bane"),
-    Bite("Bite"),
-    Wind("Wind"),
-    Star("Star"),
-    Splitter("Splitter"),
-    //
-    Legguards("Legguards"),
-    Leggings("Leggings"),
-    Britches("Britches"),
-    Legwraps("Legwraps"),
-    //
-    Creation("Creation"),
-    Crest("Crest"),
-    Keep("Keep"),
-    Ward("Ward"),
-    Refuge("Refuge"),
-
     // name2
 
     ClickToOpen("Click to Open"),
@@ -205,30 +153,14 @@ public enum Words implements IAutoLocName {
 
     UsableOn("Usable On"),
 
-    Tooltips_Rarity("Rarity: "),
-    Tooltips_Tier("Tier: "),
-    Tooltips_Item_Tier("Item Tier: "),
-    Tooltips_Level("Level: "),
-    Use_Tip("[Drag onto gear to use]"),
-    Stat_Req("%1$s Min: "),
-    Potential("Potential: %1$s%%"),
-    Quality("Quality: %1$s%%"),
     Energy_Cost_Per_Mob("Energy Cost: %1$s + %2$s Per mob, x %3$s Dmg"),
-    Durability("Durability: "),
-    Unbreakable("Unbreakable"),
-    Restores("Restores: %1$s%%"),
     CAPPED_TO_LVL(" [Capped to LVL]"),
-    RESTED_COMBAT_EXP("Rested Combat Exp: "),
-    RESTED_PROF_EXP("Rested Prof. Exp: "),
     MULTIPLY_STAT_INCREASED("Increased"),
     MULTIPLY_STAT_REDUCED("Reduced"),
     MULTIPLICATIVE_DAMAGE_MORE("More"),
     MULTIPLICATIVE_DAMAGE_LESS("Less"),
     PERCENT_INCREASED_STAT(" Extra "),
-    CHEST_CONTAINS("Contains: "),
-    NEED_KEY("Needs Key: "),
-    EMPTY_SOCKET("[Socket]"),
-    EMPTY_BOX("Box");
+    EMPTY_BOX("Box"), LEVEL_UP_TYPE_PLAYER("Player");
 
 
     private String localization = "";

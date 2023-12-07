@@ -9,6 +9,7 @@ import com.robertx22.age_of_exile.mechanics.base.LeagueBlockData;
 import com.robertx22.age_of_exile.mechanics.base.LeagueControlBlockEntity;
 import com.robertx22.age_of_exile.mechanics.harvest.HarvestItems;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.OnScreenMessageUtils;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.ChatFormatting;
@@ -78,7 +79,7 @@ public class HarvestLeague extends LeagueMechanic {
         if (data.ticks > ticksLast || map.getLeagueData(this).kills > maxKills) {
             data.finished = true;
             for (Player p : be.getPlayers()) {
-                p.sendSystemMessage(Component.literal("The Vines appear to shrink, for now...").withStyle(ChatFormatting.GREEN));
+                p.sendSystemMessage(Chats.VINES_SHRINK.locName().withStyle(ChatFormatting.GREEN));
             }
             return;
         } else {

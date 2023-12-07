@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.a_libraries.curios.MyCurioUtils;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -60,7 +61,7 @@ public class UnequipGear {
             
             if (gear != null) {
                 if (!gear.canPlayerWear(Load.Unit(player))) {
-                    drop(player, slot, stack, Component.literal("You do not meet the requirements of that item.").withStyle(ChatFormatting.RED));
+                    drop(player, slot, stack, Chats.GEAR_DROP.locName().withStyle(ChatFormatting.RED));
                 }
             }
         }
@@ -79,7 +80,7 @@ public class UnequipGear {
 
                     if (gear != null) {
                         if (!gear.canPlayerWear(Load.Unit(player))) {
-                            drop(player, handler, i, stack, Component.literal("You do not meet the requirements of that item.").withStyle(ChatFormatting.RED));
+                            drop(player, handler, i, stack, Chats.GEAR_DROP.locName().withStyle(ChatFormatting.RED));
                         }
                     }
                 }

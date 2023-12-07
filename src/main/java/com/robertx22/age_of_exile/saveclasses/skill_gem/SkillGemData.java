@@ -16,6 +16,8 @@ import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
+import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
@@ -208,10 +210,10 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
             list.add(ExileText.emptyLine().get());
 
-            list.add(ExileText.ofText("Resource Cost Multiplier: " + (int) (supp.manaMulti * 100) + "%").get());
+            list.add(Itemtips.SUPPORT_GEM_COST.locName(supp.manaMulti * 100));
 
             if (supp.isOneOfAKind()) {
-                list.add(Component.literal("Only One Allowed: " + supp.one_of_a_kind));
+                list.add(Itemtips.SUPPORT_GEM_ONLY_ONE.locName().append(supp.one_of_a_kind + ""));
             }
         }
 
@@ -224,14 +226,14 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
             list.add(ExileText.emptyLine().get());
 
-            list.add(ExileText.ofText("Aura Reservation: " + (int) (aura.reservation * 100)).get());
+            list.add(Itemtips.AURA_RESERVATION.locName().append(aura.reservation * 100 + ""));
 
 
             int spiritLeft = (int) Load.player(p).getSkillGemInventory().getRemainingSpirit(p);
 
             list.add(ExileText.emptyLine().get());
 
-            list.add(Component.literal("Remaining Aura Capacity: " + spiritLeft).withStyle(ChatFormatting.AQUA));
+            list.add(Itemtips.REMAINING_AURA_CAPACITY.locName().append(spiritLeft + "").withStyle(ChatFormatting.AQUA));
 
 
         }

@@ -6,6 +6,9 @@ import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import java.util.Locale;
 
 public enum Gui implements IAutoLocName {
+    RESTED_COMBAT_EXP("Rested Combat Exp: "),
+    RESTED_PROF_EXP("Rested Prof. Exp: "),
+
     Favor_In_GUI(" Favor"),
     Current_Favor("Current: %1$s"),
     Loot_Exp_Multiplier("Loot/Exp Multiplier: %1$sx"),

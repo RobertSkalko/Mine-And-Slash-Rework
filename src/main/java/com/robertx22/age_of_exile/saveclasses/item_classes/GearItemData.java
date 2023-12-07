@@ -20,6 +20,7 @@ import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Formatter;
+import com.robertx22.age_of_exile.uncommon.localization.Specialaffixs;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
@@ -315,6 +316,14 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         return list;
 
     }
+    private MutableComponent replaceNameChecker(){
+        UniqueGear uniq = this.uniqueStats.getUnique(this);
+        if (!uniq.replaces_name) {
+            return GetBaseGearType().locName().withStyle(ChatFormatting.BOLD);
+        }
+        return Component.literal("");
+
+    }
 
     private List<MutableComponent> getUniqueName() {
         List<MutableComponent> list = new ArrayList<>();
@@ -323,15 +332,9 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
         UniqueGear uniq = this.uniqueStats.getUnique(this);
 
-        MutableComponent txt = ExileText.emptyLine().get().append(uniq.locName()
-                .withStyle(format));
+        MutableComponent txt = ExileText.emptyLine().get().append(uniq.locName());
 
-        if (!uniq.replaces_name) {
-            txt.append(ExileText.ofText(format + " ").append(GetBaseGearType().locName().withStyle(ChatFormatting.BOLD))
-                    .format(format).format(ChatFormatting.BOLD).get());
-        }
-
-        list.addAll(TooltipUtils.cutIfTooLong(txt, format));
+        list.addAll(TooltipUtils.cutIfTooLong(Formatter.SPECIAL_UNIQUE_PROCESS.locName(txt, replaceNameChecker()).withStyle(format).withStyle(ChatFormatting.BOLD), format));
 
         return list;
     }
@@ -342,8 +345,8 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
                 .textFormatting();
 
 
-        Words prefix = RareItemAffixNames.getPrefix(this);
-        Words suffix = RareItemAffixNames.getSuffix(this);
+        Specialaffixs prefix = RareItemAffixNames.getPrefix(this);
+        Specialaffixs suffix = RareItemAffixNames.getSuffix(this);
 
         if (prefix != null && suffix != null) {
 

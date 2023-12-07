@@ -9,6 +9,7 @@ import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -149,13 +150,13 @@ public class ProfessionBlockEntity extends BlockEntity {
         var recipe = getCurrentRecipe(level);
 
         if (recipe == null) {
-            return ExplainedResult.failure(Component.literal("Recipe not found"));
+            return ExplainedResult.failure(Chats.PROF_RECIPE_NOT_FOUND.locName());
         }
         if (!this.inventory.getInventory(OUTPUTS).isEmpty()) {
-            return ExplainedResult.failure(Component.literal("Output slots are not empty."));
+            return ExplainedResult.failure(Chats.PROF_OUTPUT_SLOT_NOT_EMPTY.locName());
         }
         if (recipe.getLevelRequirement() > ownerLvl) {
-            return ExplainedResult.failure(Component.literal("Not high enough level to craft."));
+            return ExplainedResult.failure(Chats.PROF_RECIPE_LEVEL_NOT_ENOUGH.locName());
         }
 
         if (justCheck) {

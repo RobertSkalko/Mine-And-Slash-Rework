@@ -11,6 +11,7 @@ import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.effectdatas.SpendResourceEvent;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.OnScreenMessageUtils;
 import com.robertx22.age_of_exile.vanilla_mc.packets.NoManaPacket;
 import com.robertx22.library_of_exile.main.Packets;
@@ -316,7 +317,7 @@ public class SpellCastingData {
 
                 if (!wep.canPlayerWear(ctx.data)) {
                     if (ctx.caster instanceof Player) {
-                        OnScreenMessageUtils.sendMessage((ServerPlayer) ctx.caster, Component.literal(""), Component.literal("Weapon requirements not met"));
+                        OnScreenMessageUtils.sendMessage((ServerPlayer) ctx.caster, Component.literal(""), Chats.WEAPON_REQ_NOT_MET.locName());
                     }
                     return false;
                 }

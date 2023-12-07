@@ -3,6 +3,8 @@ package com.robertx22.age_of_exile.vanilla_mc.items;
 import com.robertx22.age_of_exile.database.data.currency.base.IShapedRecipe;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
@@ -37,7 +39,7 @@ public class TpBackItem extends AutoItem implements IShapedRecipe {
 
             if (WorldUtils.isMapWorldClass(pLevel)) {
                 if (!EntityFinder.start(p, Mob.class, p.blockPosition()).radius(5).searchFor(AllyOrEnemy.enemies).build().isEmpty()) {
-                    p.sendSystemMessage(Component.literal("You can't teleport when enemies are nearby."));
+                    p.sendSystemMessage(Chats.ENEMY_TOO_CLOSE.locName());
                     return InteractionResultHolder.pass(p.getItemInHand(pUsedHand));
                 }
                 itemstack.shrink(1);
@@ -49,8 +51,7 @@ public class TpBackItem extends AutoItem implements IShapedRecipe {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(Component.literal("Right click to return from the Map"));
-        pTooltipComponents.add(Component.literal("Exits the Map Dimension."));
+        pTooltipComponents.add(Itemtips.TP_BACK_ITEM.locName());
     }
 
 

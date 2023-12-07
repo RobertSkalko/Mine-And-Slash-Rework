@@ -6,7 +6,7 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttributes;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
-import com.robertx22.age_of_exile.uncommon.localization.Words;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 
@@ -125,12 +125,12 @@ public class StatRequirement {
         if (data.getUnit()
                 .getCalculatedStat(stat)
                 .getValue() >= req) {
-            return Component.literal(ChatFormatting.GREEN + "" + ChatFormatting.BOLD + CHECK_YES_ICON + " ").append(Words.Stat_Req.locName(stat.locName())
+            return Component.literal(ChatFormatting.GREEN + "" + ChatFormatting.BOLD + CHECK_YES_ICON + " ").append(Itemtips.Stat_Req.locName(stat.locName())
                             .withStyle(ChatFormatting.GRAY))
                     .append("" + ChatFormatting.GRAY + req + " ");
         } else {
 
-            return Component.literal(ChatFormatting.RED + "" + ChatFormatting.BOLD + NO_ICON + " ").append(Words.Stat_Req.locName(stat.locName())
+            return Component.literal(ChatFormatting.RED + "" + ChatFormatting.BOLD + NO_ICON + " ").append(Itemtips.Stat_Req.locName(stat.locName())
                             .withStyle(ChatFormatting.GRAY))
                     .append("" + ChatFormatting.GRAY + req + " ");
 
