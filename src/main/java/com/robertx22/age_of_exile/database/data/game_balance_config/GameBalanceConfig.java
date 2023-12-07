@@ -1,10 +1,13 @@
 package com.robertx22.age_of_exile.database.data.game_balance_config;
 
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.registry.Database;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
+import net.minecraft.world.entity.player.Player;
 
 public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, IAutoGson<GameBalanceConfig> {
 
@@ -37,6 +40,35 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     public int PASSIVE_POINTS_AT_MAX_LEVEL = 100;
     public double STARTING_TALENT_POINTS = 1;
 
+    public int link_1_lvl = 1;
+    public int link_2_lvl = 5;
+    public int link_3_lvl = 10;
+    public int link_4_lvl = 25;
+    public int link_5_lvl = 50;
+
+    public int getMaxLinksForLevel(int lvl) {
+        if (lvl < link_1_lvl) {
+            return 0;
+        }
+        if (lvl < link_2_lvl) {
+            return 1;
+        }
+        if (lvl < link_3_lvl) {
+            return 2;
+        }
+        if (lvl < link_4_lvl) {
+            return 3;
+        }
+        if (lvl < link_5_lvl) {
+            return 4;
+        }
+        return 5;
+    }
+
+    public int getTotalLinks(int links, Player p) {
+        int max = Load.Unit(p).getLevel();
+        return MathHelper.clamp(links, 0, max);
+    }
 
     @Override
     public ExileRegistryType getExileRegistryType() {
