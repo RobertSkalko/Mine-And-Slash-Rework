@@ -108,7 +108,7 @@ public class PerkBuilder {
 
         Perk perk = stat(id, stat);
         perk.type = Perk.PerkType.SPECIAL;
-        // perk.locname = locname;
+        perk.locname = locname;
 
         if (true) {
             perk.icon = list.get(0)
