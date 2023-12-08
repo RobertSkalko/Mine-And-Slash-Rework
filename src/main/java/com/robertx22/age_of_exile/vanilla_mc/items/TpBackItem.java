@@ -24,6 +24,8 @@ import net.minecraft.world.level.Level;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static com.robertx22.age_of_exile.uncommon.utilityclasses.MutableComponentUtils.splitLongText;
+
 public class TpBackItem extends AutoItem implements IShapedRecipe {
 
     public TpBackItem() {
@@ -51,7 +53,7 @@ public class TpBackItem extends AutoItem implements IShapedRecipe {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        pTooltipComponents.add(Itemtips.TP_BACK_ITEM.locName());
+        pTooltipComponents.addAll(splitLongText(Itemtips.TP_BACK_ITEM.locName()));
     }
 
 

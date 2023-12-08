@@ -51,6 +51,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 
+import static com.robertx22.age_of_exile.uncommon.utilityclasses.MutableComponentUtils.splitLongText;
+
 
 public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, IWeighted, IItemAsCurrency {
 
@@ -255,8 +257,8 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
 
             tooltip.addAll(statsTooltip());
 
+            tooltip.addAll(splitLongText(Itemtips.RUNE_ITEM_USAGE.locName().withStyle(ChatFormatting.RED)));
 
-            tooltip.add(Itemtips.RUNE_ITEM_USAGE.locName());
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.RarityStoneItem;
+import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.critereon.EnchantedItemTrigger;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
@@ -19,6 +20,8 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
+
+import static com.robertx22.age_of_exile.uncommon.utilityclasses.MutableComponentUtils.splitLongText;
 
 public class SoulMakerItem extends AutoItem implements IShapelessRecipe {
 
@@ -48,7 +51,7 @@ public class SoulMakerItem extends AutoItem implements IShapelessRecipe {
 
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {
-        tooltip.add(Itemtips.SOUL_EXTRACTOR_TIP.locName());
+        tooltip.addAll(splitLongText(Itemtips.SOUL_EXTRACTOR_TIP.locName().withStyle(ChatFormatting.RED)));
 
     }
 

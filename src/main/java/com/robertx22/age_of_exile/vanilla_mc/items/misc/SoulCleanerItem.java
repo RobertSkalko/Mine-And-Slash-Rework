@@ -15,6 +15,8 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
+import static com.robertx22.age_of_exile.uncommon.utilityclasses.MutableComponentUtils.splitLongText;
+
 public class SoulCleanerItem extends AutoItem implements IShapelessRecipe {
 
 
@@ -35,8 +37,7 @@ public class SoulCleanerItem extends AutoItem implements IShapelessRecipe {
 
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {
-        tooltip.add(Itemtips.SOUL_CLEANER_USAGE_AND_WARNING.locName().withStyle(ChatFormatting.RED));
-
+        tooltip.addAll(splitLongText(Itemtips.SOUL_CLEANER_USAGE_AND_WARNING.locName().withStyle(ChatFormatting.RED)));
     }
 
     @Override
