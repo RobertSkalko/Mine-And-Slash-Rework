@@ -5,8 +5,10 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatW
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.localization.Formatter;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.NumberUtils;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.library_of_exile.utils.CLOC;
 import net.minecraft.ChatFormatting;
+import org.apache.commons.lang3.StringUtils;
 
 public abstract class StatNameRegex {
 
@@ -62,9 +64,9 @@ public abstract class StatNameRegex {
 
         if (type == ModType.MORE) {
             if (v1 > 0) {
-                add += stat.getMultiUseType().prefixWord.locName().toString();
+                add = stat.getMultiUseType().prefixWord.locName().getString();
             } else {
-                add += stat.getMultiUseType().prefixLessWord.locName().toString();
+                add = stat.getMultiUseType().prefixLessWord.locName().getString();
             }
         }
 
@@ -81,13 +83,18 @@ public abstract class StatNameRegex {
 
         String str = statColor(stat) + getStatNameRegex(format, type, stat, v1);
 
-        str = str.replace(VALUE, numberColor(format, stat, v1) + "" + plusminus + v1s + perc + ChatFormatting.RESET + statColor(stat));
 
-        str = str.replace(NAME, Formatter.SPECIAL_CALC_STAT.locName(add, stat.locName()).toString());
+
+        str = str.replace(VALUE, numberColor(format, stat, v1) + plusminus + v1s + perc + "  " + ChatFormatting.RESET + statColor(stat));
+
+        String[] processedReplacement = StringUTIL.processStrings(add, stat.locName().getString());
+
+        str = str.replace(NAME, Formatter.SPECIAL_CALC_STAT.locName((Object[]) processedReplacement).getString());
 
         str = Stat.format(str);
 
         return str;
 
     }
+
 }

@@ -21,7 +21,6 @@ import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Formatter;
 import com.robertx22.age_of_exile.uncommon.localization.Specialaffixs;
-import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
@@ -37,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 public class GearItemData implements ICommonDataItem<GearRarity> {
 
@@ -288,7 +288,6 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         } else {
             return uniqueStats.getUnique(this).locName();
         }
-
     }
 
     private MutableComponent suffixChecker(){
@@ -300,14 +299,37 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         }
     }
 
+
     private List<MutableComponent> getFullAffixedName() {
         List<MutableComponent> list = new ArrayList<>();
         ChatFormatting format = this.getRarity()
                 .textFormatting();
 
         ExileText meditation = ExileText.emptyLine();
+        // turns out the null mutablecomponent could remain a space-like char when form the name.
+        //String[] name = processStrings(prefixChecker().getString(), uniqueChecker().getString(), suffixChecker().getString());
+        MutableComponent text;
 
-        MutableComponent text = Formatter.GEAR_ITEM_NAME.locName(prefixChecker(), uniqueChecker(), suffixChecker());
+        String str1 = prefixChecker().getString();
+        String str2 = uniqueChecker().getString();
+        String str3 = suffixChecker().getString();
+
+        // pre-gear-suf
+        if (!str1.isEmpty() && !str2.isEmpty() && !str3.isEmpty()) {
+            text = Formatter.GEAR_ITEM_NAME_ALL.locName(prefixChecker(), uniqueChecker(), suffixChecker());
+        }
+        // gear
+        else if (str1.isEmpty() && !str2.isEmpty() && str3.isEmpty()) {
+            text = Formatter.GEAR_ITEM_NAME_ONLY_GEAR.locName(uniqueChecker());
+        }
+        // pre-gear
+        else if (!str1.isEmpty() && !str2.isEmpty() && str3.isEmpty()) {
+            text = Formatter.GEAR_ITEM_NAME_PRE_GEAR.locName(prefixChecker(), uniqueChecker());
+        }
+        // another
+        else {
+            text = Formatter.GEAR_ITEM_NAME_ANOTHER.locName(prefixChecker(), uniqueChecker(), suffixChecker());
+        }
 
         text.withStyle(format);
 
