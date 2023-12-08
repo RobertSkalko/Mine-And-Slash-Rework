@@ -8,7 +8,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatsContaine
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
-import com.robertx22.age_of_exile.uncommon.localization.Words;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
@@ -38,7 +38,7 @@ public class GearEnchantData implements IStatsContainer, IGearPartTooltip {
 
         GearRarity rarity = ExileDB.GearRarities().get(rar);
 
-        list.add(Words.Enchanted.locName().withStyle(rarity.textFormatting()));
+        list.add(Itemtips.Enchanted.locName().withStyle(rarity.textFormatting()));
 
         for (ExactStatData stat : GetAllStats(gear)) {
             list.addAll(stat.GetTooltipString(info));

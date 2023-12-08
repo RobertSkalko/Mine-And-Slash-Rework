@@ -46,7 +46,7 @@ public enum BarGuiType {
 
         @Override
         public MutableComponent getText(EntityData data, Player en) {
-            return Gui.STATUS_BAR_LEVEL.locName();
+            return Gui.STATUS_BAR_LEVEL.locName(data.getLevel(), getMulti(data, en) * 100);
         }
     },
     ENERGY {

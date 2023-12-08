@@ -8,6 +8,7 @@ import java.util.Locale;
 
 public enum Itemtips implements IAutoLocName {
     //add "tip" at the end to avoid same variable call
+    //you can use \n in here, just remember use the splitLongText() to process it.
     RARITY_TIP("Rarity: "),
     ITEM_TYPE("Item Type: "),
     TIER_TIP("Tier: "),
@@ -29,7 +30,7 @@ public enum Itemtips implements IAutoLocName {
     REMAINING_AURA_CAPACITY("Remaining Aura Capacity: "),
     SUPPORT_GEM_COST("Resource Cost Multiplier: %2$s%%"),
     SUPPORT_GEM_ONLY_ONE("Only One Allowed: " ),
-    SOUL_EXTRACTOR_TIP(ChatFormatting.RED + "Click on items to extract their soul.\nWorks only on that rarity.\nDeletes the Item in the process."),
+    SOUL_EXTRACTOR_TIP("Click on items to extract their soul.\nWorks only on that rarity.\nDeletes the Item in the process."),
 
     GEM_OPEN_GUI_TIP("Right Click to Open Gui"),
     SOUL_STONE_TIP("Right click to produce a common gear soul."),
@@ -38,7 +39,7 @@ public enum Itemtips implements IAutoLocName {
     RUNE_ITEM_USAGE("Use to view craftable Runewords.\nSneak + Use to view all Runewords."),
     STONE_REPAIRE_DURABILITY("Repairs %1$s durability."),
     SOUL_CLEANER_USAGE_AND_WARNING("Click on items to remove their soul.\nThe item remains but the stats will be deleted."),
-    SOCKET_EXTRACTOR_USAGE("Click on gear to extract a gem.");
+    SOCKET_EXTRACTOR_USAGE("Click on gear to extract a gem."), Enchanted("Enchanted: "), OUTCOME_TIP("%1$s, Base Weight: %2$s");
 
     private String localization = "";
 
