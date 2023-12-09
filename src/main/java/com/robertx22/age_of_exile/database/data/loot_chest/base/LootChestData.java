@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.loot_chest.base;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
+import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
@@ -83,7 +84,7 @@ public class LootChestData implements ICommonDataItem<GearRarity> {
     public void BuildTooltip(TooltipContext ctx) {
 
         var tip = ctx.tooltip;
-        String type = getLootChest().GUID().substring(0,1).toUpperCase() + getLootChest().GUID().substring(1);
+        MutableComponent type = Component.translatable(SlashRef.MODID + ".chest_type."+ getLootChest().GUID());
 
         tip.clear();
 
