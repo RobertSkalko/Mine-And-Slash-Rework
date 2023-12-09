@@ -12,7 +12,7 @@ import net.minecraft.world.item.Items;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class LootChest implements ExileRegistry<LootChest>, IAutoLocName {
+public abstract class LootChest implements ExileRegistry<LootChest> {
 
     public abstract ItemStack generateOne(LootChestData data);
 

@@ -45,19 +45,4 @@ public class SupportLootChest extends LootChest {
     public int Weight() {
         return (int) (ServerContainer.get().SUPP_GEM_DROPRATE.get() * 100);
     }
-
-    @Override
-    public AutoLocGroup locNameGroup() {
-        return AutoLocGroup.Lootboxes;
-    }
-
-    @Override
-    public String locNameLangFileGUID() {
-        return SlashRef.MODID + ".chest_type." + GUID();
-    }
-
-    @Override
-    public String locNameForLangFile() {
-        return "Support Gem";
-    }
 }

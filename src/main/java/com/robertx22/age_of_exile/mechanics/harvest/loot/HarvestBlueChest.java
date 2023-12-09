@@ -47,18 +47,4 @@ public class HarvestBlueChest extends LootChest {
         return 1000;
     }
 
-    @Override
-    public AutoLocGroup locNameGroup() {
-        return AutoLocGroup.Lootboxes;
-    }
-
-    @Override
-    public String locNameLangFileGUID() {
-        return SlashRef.MODID + ".chest_type." + GUID();
-    }
-
-    @Override
-    public String locNameForLangFile() {
-        return "Harvest Blue Chest";
-    }
 }

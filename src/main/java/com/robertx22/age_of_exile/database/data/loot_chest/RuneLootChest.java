@@ -46,20 +46,5 @@ public class RuneLootChest extends LootChest {
         return (int) (ServerContainer.get().RUNE_DROPRATE.get() * 100);
     }
 
-    @Override
-    public AutoLocGroup locNameGroup() {
-        return AutoLocGroup.Lootboxes;
-    }
-
-    @Override
-    public String locNameLangFileGUID() {
-        return SlashRef.MODID + ".chest_type." + GUID();
-    }
-
-    @Override
-    public String locNameForLangFile() {
-        return GUID().substring(0, 1).toUpperCase() + GUID().substring(1);
-    }
-
 
 }
