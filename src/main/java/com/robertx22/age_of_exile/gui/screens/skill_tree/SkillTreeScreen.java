@@ -21,6 +21,8 @@ import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkScreenConte
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.localization.Gui;
+import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -29,6 +31,7 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
@@ -516,7 +519,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         xp = savedx;
         yp = savedy;
 
-        String text = "Points: " + playerData.talents.getFreePoints(Load.Unit(mc.player), this.schoolType);
+        MutableComponent text = Gui.TALENT_POINTS.locName().append(String.valueOf(playerData.talents.getFreePoints(Load.Unit(mc.player), this.schoolType)));
 
         int tx = xp - mc.font.width(text) - 10;
         int yx = yp + BG_HEIGHT / 2 - mc.font.lineHeight / 2;
@@ -524,7 +527,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
         gui.drawString(mc.font, text, tx, yx, ChatFormatting.GREEN.getColor());
 
-        text = "Reset Points: " + playerData.talents.reset_points;
+        text = Gui.TALENT_RESET_POINTS.locName().append(String.valueOf(playerData.talents.reset_points));
 
         tx = savedx + 10 + BG_WIDTH;
 

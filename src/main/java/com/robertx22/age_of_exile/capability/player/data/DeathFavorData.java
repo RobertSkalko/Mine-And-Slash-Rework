@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
+import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -65,15 +66,15 @@ public class DeathFavorData {
 
         GearRarity rar = getRarity();
 
-        tooltip.add(rar.locName().append(" Favor").withStyle(rar.textFormatting()));
+        tooltip.add(rar.locName().append(Gui.Favor_In_GUI.locName()).withStyle(rar.textFormatting()));
 
         tooltip.add(Component.empty());
 
-        tooltip.add(Component.literal("Current: " + (int) favor).withStyle(ChatFormatting.YELLOW));
+        tooltip.add(Gui.Current_Favor.locName((int) favor).withStyle(ChatFormatting.YELLOW));
 
         tooltip.add(Component.empty());
 
-        tooltip.add(Component.literal("Loot/Exp Multiplier: " + getLootExpMulti() + "x").withStyle(rar.textFormatting()));
+        tooltip.add(Gui.Loot_Exp_Multiplier.locName(getLootExpMulti()).withStyle(rar.textFormatting()));
 
         tooltip.add(Component.empty());
 

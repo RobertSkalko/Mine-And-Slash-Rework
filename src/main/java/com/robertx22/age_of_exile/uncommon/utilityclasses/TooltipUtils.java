@@ -57,8 +57,8 @@ public class TooltipUtils {
     }
 
     public static MutableComponent level(int lvl) {
-        return Component.literal(ChatFormatting.YELLOW + "").append(Words.Level.locName())
-                .append((": " + lvl))
+        return Component.literal(ChatFormatting.YELLOW + "").append(Words.Tooltips_Level.locName())
+                .append(lvl + "")
                 .withStyle(ChatFormatting.YELLOW);
 
     }
@@ -194,7 +194,7 @@ public class TooltipUtils {
     }
 
     public static MutableComponent rarity(Rarity rarity) {
-        return Component.literal("Rarity: ").withStyle(ChatFormatting.WHITE)
+        return Words.Tooltips_Rarity.locName().withStyle(ChatFormatting.WHITE)
                 .append(rarity.locName()
                         .withStyle(rarity.textFormatting()));
     }
@@ -204,23 +204,23 @@ public class TooltipUtils {
     }
 
     public static MutableComponent tier(int tier) {
-        return Words.Tier.locName().append(": " + tier);
+        return Words.Tooltips_Tier.locName().append(tier + "");
 
     }
 
     public static MutableComponent gearSlot(GearSlot slot) {
-        return Component.literal("Item Type: ").withStyle(ChatFormatting.WHITE)
+        return Words.ITEM_TYPE.locName().withStyle(ChatFormatting.WHITE)
                 .append(slot.locName()
                         .withStyle(ChatFormatting.AQUA));
     }
 
     public static MutableComponent gearTier(int tier) {
-        return Component.literal("Item Tier: ").withStyle(ChatFormatting.WHITE)
+        return Words.Tooltips_Item_Tier.locName().withStyle(ChatFormatting.WHITE)
                 .append(Component.literal(tier + "").withStyle(ChatFormatting.AQUA));
     }
 
     public static MutableComponent gearRarity(GearRarity rarity) {
-        return Component.literal("Rarity: ").withStyle(ChatFormatting.WHITE)
+        return Words.Tooltips_Rarity.locName().withStyle(ChatFormatting.WHITE)
                 .append(rarity.locName()
                         .withStyle(rarity.textFormatting()));
     }
@@ -231,7 +231,7 @@ public class TooltipUtils {
         if (lvl > playerlvl) {
             color = ChatFormatting.RED;
         }
-        return Component.literal("Level: ")
+        return Words.Tooltips_Level.locName()
                 .withStyle(color)
                 .append(Component.literal(lvl + "")
                         .withStyle(color));
@@ -239,6 +239,6 @@ public class TooltipUtils {
 
 
     public static MutableComponent dragOntoGearToUse() {
-        return Component.literal("[Drag onto gear to use]").withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD);
+        return Words.Use_Tip.locName().withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD);
     }
 }
