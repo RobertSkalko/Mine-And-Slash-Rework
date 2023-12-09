@@ -112,3 +112,4 @@ v.5.3.8
 
 - added random offsets for summonblockaction
 - support gem slots are now locked per player level AND spell level. 
+- added tracking radius per spell (datapack stuff)
