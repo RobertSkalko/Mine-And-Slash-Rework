@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.saveclasses.jewel.JewelItemData;
 import com.robertx22.age_of_exile.saveclasses.jewel.UniqueJewelData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.vanilla_mc.items.gemrunes.RuneItem;
 import net.minecraft.advancements.critereon.EnchantedItemTrigger;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -61,7 +62,7 @@ public class CraftedUniqueJewelItem extends Item implements IShapelessRecipe {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
         if (!StackSaving.JEWEL.has(pStack)) {
-            pTooltipComponents.add(Component.literal("Right click to create"));
+            pTooltipComponents.add(Itemtips.UNIQUE_JEWEL_USE.locName());
         }
     }
 

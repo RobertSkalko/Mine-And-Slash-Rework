@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -17,8 +18,8 @@ public class OnScreenMessageUtils {
                 .withStyle(ChatFormatting.BOLD);
 
         ServerPlayer p = (ServerPlayer) player;
-        p.connection.send(new ClientboundSetTitleTextPacket(Component.literal(ChatFormatting.YELLOW + "" + ChatFormatting.BOLD + "Leveled Up!")));
-        p.connection.send(new ClientboundSetSubtitleTextPacket(levelType.append(Component.literal(ChatFormatting.GREEN + "" + ChatFormatting.BOLD + " Level: " + before + " > " + now + "!"))));
+        p.connection.send(new ClientboundSetTitleTextPacket(Chats.LEVEL_UP_MESSAGE_UP.locName().withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)));
+        p.connection.send(new ClientboundSetSubtitleTextPacket(Chats.LEVEL_UP_MESSAGE_DOWN.locName(levelType, before, now).withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD)));
 
         SoundUtils.ding(player.level(), player.blockPosition());
     }

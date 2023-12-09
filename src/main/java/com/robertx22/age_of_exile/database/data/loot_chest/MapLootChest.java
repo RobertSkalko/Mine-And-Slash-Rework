@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChestData;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.MapBlueprint;
 import com.robertx22.age_of_exile.loot.req.DropRequirement;
+import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -48,5 +49,6 @@ public class MapLootChest extends LootChest {
     public int Weight() {
         return (int) (ServerContainer.get().MAP_DROPRATE.get() * 100);
     }
+
 
 }

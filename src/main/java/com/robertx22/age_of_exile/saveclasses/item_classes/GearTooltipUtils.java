@@ -11,6 +11,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.MergedStats;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.wrappers.ExileText;
@@ -126,7 +127,7 @@ public class GearTooltipUtils {
         tip.add(Component.literal(""));
 
         MutableComponent lvl = TooltipUtils.gearLevel(gear.lvl, Load.Unit(info.player).getLevel());
-
+        int potential = (int) Math.round((gear.getPotential().multi + gear.getAdditionalPotentialMultiFromQuality()) * 100F);
 
         tip.add(lvl);
         TooltipUtils.addRequirements(tip, gear.getLevel(), gear.getRequirement(), Load.Unit(info.player));
@@ -136,18 +137,19 @@ public class GearTooltipUtils {
         tip.add(TooltipUtils.gearRarity(gear.getRarity()));
 
 
-        tip.add(ExileText.ofText("Potential: " + (int) ((gear.getPotential().multi + gear.getAdditionalPotentialMultiFromQuality()) * 100F) + "%").format(gear.getPotentialColor()).get());
+        tip.add(Itemtips.POTENTIAL.locName(potential).withStyle(gear.getPotentialColor()));
 
         if (gear.getQuality() > 0) {
-            tip.add(ExileText.ofText("Quality: " + gear.getQuality() + "%").format(gear.getQualityType().color).get());
+            tip.add(Itemtips.QUALITY.locName(gear.getQuality()).withStyle(gear.getQualityType().color));
         }
 
         if (Screen.hasShiftDown()) {
             if (gear.GetBaseGearType().getGearSlot().weapon_data.damage_multiplier > 0) {
                 int cost = (int) Energy.getInstance().scale(ModType.FLAT, gear.GetBaseGearType().getGearSlot().weapon_data.energy_cost_per_swing, data.getLevel());
                 int permob = (int) Energy.getInstance().scale(ModType.FLAT, gear.GetBaseGearType().getGearSlot().weapon_data.energy_cost_per_mob_attacked, data.getLevel());
-
-                tip.add(ExileText.ofText("Energy Cost: " + cost + " + " + permob + " Per mob, " + "x" + (gear.GetBaseGearType().getGearSlot().getBasicDamageMulti() * 100) / 100F + " Dmg").format(ChatFormatting.GREEN).get());
+                float damageFactor = (gear.GetBaseGearType().getGearSlot().getBasicDamageMulti() * 100) / 100F;
+                
+                tip.add(Words.Energy_Cost_Per_Mob.locName(cost, permob, damageFactor).withStyle(ChatFormatting.GREEN));
             }
         }
 
@@ -165,9 +167,10 @@ public class GearTooltipUtils {
 
         if (ClientConfigs.getConfig().SHOW_DURABILITY.get()) {
             if (stack.isDamageableItem()) {
-                tip.add(ExileText.ofText(ChatFormatting.WHITE + "Durability: " + (stack.getMaxDamage() - stack.getDamageValue()) + "/" + stack.getMaxDamage()).get());
+                tip.add(Itemtips.Durability.locName().withStyle(ChatFormatting.WHITE)
+                        .append(stack.getMaxDamage() - stack.getDamageValue() + "/" + stack.getMaxDamage()));
             } else {
-                tip.add(ExileText.ofText(ChatFormatting.WHITE + "Unbreakable").get());
+                tip.add(Itemtips.Unbreakable.locName().withStyle(ChatFormatting.WHITE));
             }
         }
 

@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.localization.Formatter;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
 import net.minecraft.network.chat.Component;
@@ -24,6 +25,7 @@ import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Properties;
 
 public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered {
 
@@ -93,10 +95,7 @@ public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered 
     // Greater intelligence potion = power + name
     @Override
     public Component getName(ItemStack stack) {
-        return power.word.locName().append(" ")
-                .append(getBuff().mods.get(0).GetStat().locName()).append(" ")
-                .append(type.name)
-                .withStyle(LeveledItem.getTier(stack).format);
+        return Formatter.BUFF_COMSUPTIONS_NAME.locName(power.word.locName(), getBuff().mods.get(0).GetStat().locName(), type.locName()).withStyle(LeveledItem.getTier(stack).format);
     }
 
 
@@ -122,8 +121,14 @@ public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered 
     }
 
     @Override
+    public AutoLocGroup locNameGroup() {
+        return AutoLocGroup.Misc;
+    }
+
+    //Use Formatter process the item name
+    @Override
     public String locNameLangFileGUID() {
-        return SlashRef.MODID + ".potion_name_unused";
+        return "";
     }
 
     @Override
@@ -133,7 +138,7 @@ public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered 
 
     @Override
     public String GUID() {
-        return null;
+        return "";
     }
 
 

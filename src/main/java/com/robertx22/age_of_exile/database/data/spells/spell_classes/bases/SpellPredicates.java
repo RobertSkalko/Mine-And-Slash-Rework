@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.spells.spell_classes.bases;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.LivingEntity;
@@ -51,11 +52,11 @@ public class SpellPredicates {
         return true;
     };
 
-    public static SpellPredicate REQUIRE_SHOOTABLE = new SpellPredicate(SHOOTABLE_PRED, ExileText.ofText(ChatFormatting.GREEN + "Requires Ranged Weapon to use.").get());
-    public static SpellPredicate REQUIRE_MAGE_WEAPON = new SpellPredicate(MAGE_PRED, ExileText.ofText(ChatFormatting.GREEN + "Requires Mage Weapon to use.").get());
-    public static SpellPredicate REQUIRE_MELEE = new SpellPredicate(MELEE_PRED, ExileText.ofText(ChatFormatting.GOLD + "Requires Melee weapon to use.").get());
-    public static SpellPredicate ANY_ITEM = new SpellPredicate(ANY, ExileText.ofText(ChatFormatting.GOLD + "Any weapon can use.").get());
-    public static SpellPredicate NON_MAGE_WEAPON = new SpellPredicate(NON_MAGE_PRED, ExileText.ofText(ChatFormatting.GOLD + "Non Mage weapons can use.").get());
+    public static SpellPredicate REQUIRE_SHOOTABLE = new SpellPredicate(SHOOTABLE_PRED, Chats.REQUIRE_RANGED.locName().withStyle(ChatFormatting.GREEN));
+    public static SpellPredicate REQUIRE_MAGE_WEAPON = new SpellPredicate(MAGE_PRED, Chats.REQUIRE_MAGE.locName().withStyle(ChatFormatting.GREEN));
+    public static SpellPredicate REQUIRE_MELEE = new SpellPredicate(MELEE_PRED, Chats.REQUIRE_MELEE.locName().withStyle(ChatFormatting.GOLD));
+    public static SpellPredicate ANY_ITEM = new SpellPredicate(ANY, Chats.ANY_ITEM.locName().withStyle(ChatFormatting.GOLD));
+    public static SpellPredicate NON_MAGE_WEAPON = new SpellPredicate(NON_MAGE_PRED, Chats.NONE_MAGE.locName().withStyle(ChatFormatting.GOLD));
 
 }
 

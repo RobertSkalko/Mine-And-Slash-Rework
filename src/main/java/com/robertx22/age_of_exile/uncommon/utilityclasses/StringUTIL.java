@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
-import java.util.Iterator;
-import java.util.StringTokenizer;
+import java.util.*;
 
 // apparently mc doesnt load these deps so
 public class StringUTIL {
@@ -79,4 +78,27 @@ public class StringUTIL {
         }
         return buf.toString();
     }
+
+    public static String[] processStrings(String... strings) {
+        List<String> dynamicArray = new ArrayList<>();
+
+        for (String str : strings) {
+            if (str != null && !str.isEmpty()) {
+                dynamicArray.add(str);
+            }
+        }
+
+        int size = Math.max(dynamicArray.size(), strings.length);
+
+        String[] resultArray = new String[size];
+        for (int i = 0; i < size; i++) {
+            if (i < dynamicArray.size()) {
+                resultArray[i] = dynamicArray.get(i);
+            } else {
+                resultArray[i] = "";
+            }
+        }
+        return resultArray;
+    }
+
 }

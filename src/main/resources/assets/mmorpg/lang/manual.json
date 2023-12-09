@@ -110,3 +110,13 @@
 "mmorpg.one_of_a_kind.start": "Start",
 
 "curios.identifier.salvage_bag": "Salvage Bag",
+"mmorpg.chest_type.aura": "Aura",
+"mmorpg.chest_type.currency": "Currency",
+"mmorpg.chest_type.gear": "Gear",
+"mmorpg.chest_type.gem": "Gem",
+"mmorpg.chest_type.harvest_blue_chest": "Harvest Blue Chest",
+"mmorpg.chest_type.harvest_green_chest": "Harvest Green Chest",
+"mmorpg.chest_type.harvest_purple_chest": "Harvest Purple Chest",
+"mmorpg.chest_type.map": "Map",
+"mmorpg.chest_type.rune": "Rune",
+"mmorpg.chest_type.support_gem": "Support Gem",

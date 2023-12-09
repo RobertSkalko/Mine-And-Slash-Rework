@@ -9,6 +9,8 @@ import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
+import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.HealthUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
@@ -54,8 +56,8 @@ public class SlashPotionItem extends AutoItem implements ICreativeTabTiered {
         int num = (int) this.getHealPercent(pStack);
 
 
-        pTooltipComponents.add(Component.literal("Restores " + num + "%"));
-        pTooltipComponents.add(Component.literal("Cooldown:  " + getCooldownTicks() / 20 + "s"));
+        pTooltipComponents.add(Itemtips.Restores.locName(num));
+        pTooltipComponents.add(Words.COOLDOWN.locName(getCooldownTicks() / 20));
 
     }
 

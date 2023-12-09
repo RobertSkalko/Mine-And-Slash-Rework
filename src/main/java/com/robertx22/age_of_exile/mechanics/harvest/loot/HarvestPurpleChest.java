@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.JewelBlueprint;
 import com.robertx22.age_of_exile.loot.req.DropRequirement;
 import com.robertx22.age_of_exile.mechanics.harvest.HarvestItems;
+import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -45,4 +46,5 @@ public class HarvestPurpleChest extends LootChest {
     public int Weight() {
         return 1000;
     }
+
 }

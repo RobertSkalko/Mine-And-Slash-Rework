@@ -1,15 +1,23 @@
 package com.robertx22.age_of_exile.aoe_data.datapacks.lang_file;
 
+import com.robertx22.age_of_exile.capability.player.data.PlayerBuffData;
+import com.robertx22.age_of_exile.database.data.loot_chest.*;
+import com.robertx22.age_of_exile.database.data.spell_school.AscendancyClass;
+import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.mechanics.harvest.loot.HarvestBlueChest;
+import com.robertx22.age_of_exile.mechanics.harvest.loot.HarvestGreenChest;
+import com.robertx22.age_of_exile.mechanics.harvest.loot.HarvestPurpleChest;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
-import com.robertx22.age_of_exile.uncommon.localization.Chats;
-import com.robertx22.age_of_exile.uncommon.localization.Words;
+import com.robertx22.age_of_exile.uncommon.localization.Formatter;
+import com.robertx22.age_of_exile.uncommon.localization.*;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.DirUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.gemrunes.GemItem;
 import com.robertx22.library_of_exile.registry.Database;
 import com.robertx22.library_of_exile.registry.ExileRegistryContainer;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -51,8 +59,9 @@ public class CreateLangFile {
                     if (iauto.formattedLocNameLangFileGUID().isEmpty()) {
                         continue;
                     }
-
-                    json += "\t" + "\"" + iauto.formattedLocNameLangFileGUID() + "\": \"" + iauto.locNameForLangFile() + "\",\n";
+                    // I dont know why I got encoding error when export the lang file, have to add this.
+                    //If you dont want it, just delte and change the \n in Itemtips.java to \\n.
+                    json += "\t" + "\"" + iauto.formattedLocNameLangFileGUID() + "\": \"" + StringEscapeUtils.escapeJava(iauto.locNameForLangFile()) + "\",\n";
                 }
             }
             json += CreateLangFileUtils.comment(entry.getKey());
@@ -81,7 +90,7 @@ public class CreateLangFile {
                     }
                     usedGUIDS.add(iauto.formattedLocDescLangFileGUID());
 
-                    json += "\t" + "\"" + iauto.formattedLocDescLangFileGUID() + "\": \"" + iauto.locDescForLangFile() + "\",\n";
+                    json += "\t" + "\"" + iauto.formattedLocDescLangFileGUID() + "\": \"" + StringEscapeUtils.escapeJava(iauto.locDescForLangFile()) + "\",\n";
                 }
             }
             json += CreateLangFileUtils.comment(entry.getKey());
@@ -134,8 +143,16 @@ public class CreateLangFile {
 
         list.addAll(Arrays.asList(Chats.values()));
         list.addAll(Arrays.asList(Words.values()));
+        list.addAll(Arrays.asList(Formatter.values()));
+        list.addAll(Arrays.asList(Gui.values()));
+        list.addAll(Arrays.asList(Itemtips.values()));
+        list.addAll(Arrays.asList(Specialaffixs.values()));
+        //
+        list.addAll(Arrays.asList(SpellTag.values()));
+        //
         list.addAll(Arrays.asList(GemItem.GemType.values()));
         list.addAll(Arrays.asList(GemItem.GemRank.values()));
+        list.addAll(Arrays.asList(PlayerBuffData.Type.values()));
 
 
         HashMap<IAutoLocName.AutoLocGroup, List<IAutoLocName>> map = new HashMap<>();

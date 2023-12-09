@@ -17,6 +17,8 @@ public interface IBaseAutoLoc extends IGUID {
         Spells,
         Gear_Items,
         Words,
+        Gui,
+        Formatter,
         Rarities,
         Affixes,
 

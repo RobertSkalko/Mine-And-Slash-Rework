@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.Rarity;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequirement;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.library_of_exile.utils.CLOC;
 import com.robertx22.library_of_exile.wrappers.ExileText;
@@ -57,8 +58,8 @@ public class TooltipUtils {
     }
 
     public static MutableComponent level(int lvl) {
-        return Component.literal(ChatFormatting.YELLOW + "").append(Words.Level.locName())
-                .append((": " + lvl))
+        return Component.literal(ChatFormatting.YELLOW + "").append(Itemtips.LEVEL_TIP.locName())
+                .append(lvl + "")
                 .withStyle(ChatFormatting.YELLOW);
 
     }
@@ -194,9 +195,8 @@ public class TooltipUtils {
     }
 
     public static MutableComponent rarity(Rarity rarity) {
-        return Component.literal("Rarity: ").withStyle(ChatFormatting.WHITE)
-                .append(rarity.locName()
-                        .withStyle(rarity.textFormatting()));
+        return Itemtips.RARITY_TIP.locName().withStyle(ChatFormatting.WHITE)
+                .append(rarity.locName().withStyle(rarity.textFormatting()));
     }
 
     public static MutableComponent rarityShort(Rarity rarity) {
@@ -204,23 +204,23 @@ public class TooltipUtils {
     }
 
     public static MutableComponent tier(int tier) {
-        return Words.Tier.locName().append(": " + tier);
+        return Itemtips.TIER_TIP.locName().append(tier + "");
 
     }
 
     public static MutableComponent gearSlot(GearSlot slot) {
-        return Component.literal("Item Type: ").withStyle(ChatFormatting.WHITE)
+        return Itemtips.ITEM_TYPE.locName().withStyle(ChatFormatting.WHITE)
                 .append(slot.locName()
                         .withStyle(ChatFormatting.AQUA));
     }
 
     public static MutableComponent gearTier(int tier) {
-        return Component.literal("Item Tier: ").withStyle(ChatFormatting.WHITE)
+        return Itemtips.ITEM_TIER_TIP.locName().withStyle(ChatFormatting.WHITE)
                 .append(Component.literal(tier + "").withStyle(ChatFormatting.AQUA));
     }
 
     public static MutableComponent gearRarity(GearRarity rarity) {
-        return Component.literal("Rarity: ").withStyle(ChatFormatting.WHITE)
+        return Itemtips.RARITY_TIP.locName().withStyle(ChatFormatting.WHITE)
                 .append(rarity.locName()
                         .withStyle(rarity.textFormatting()));
     }
@@ -231,7 +231,7 @@ public class TooltipUtils {
         if (lvl > playerlvl) {
             color = ChatFormatting.RED;
         }
-        return Component.literal("Level: ")
+        return Itemtips.LEVEL_TIP.locName()
                 .withStyle(color)
                 .append(Component.literal(lvl + "")
                         .withStyle(color));
@@ -239,6 +239,6 @@ public class TooltipUtils {
 
 
     public static MutableComponent dragOntoGearToUse() {
-        return Component.literal("[Drag onto gear to use]").withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD);
+        return Itemtips.USE_TIP.locName().withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD);
     }
 }

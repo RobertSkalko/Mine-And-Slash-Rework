@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.vanilla_mc.items.misc;
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.IAutoModel;
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.ItemModelManager;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.registry.IWeighted;
 import net.minecraft.network.chat.Component;
@@ -43,7 +44,7 @@ public class RarityStoneItem extends Item implements IWeighted, IAutoModel {
 
         tooltip.add(Component.literal(""));
 
-        tooltip.add(Component.literal("Repairs " + getTotalRepair() + " durability."));
+        tooltip.add(Itemtips.STONE_REPAIRE_DURABILITY.locName(getTotalRepair()));
 
         tooltip.add(TooltipUtils.dragOntoGearToUse());
 

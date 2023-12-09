@@ -2,23 +2,22 @@ package com.robertx22.age_of_exile.uncommon.localization;
 
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
-import net.minecraft.ChatFormatting;
 
 import java.util.Locale;
 
 // to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
-    TAGS("Tags"),
-    ITEM_TYPE("Item Type: "),
+    TAGS("Tags: "),
+
     SPELL_STATS("Spell Stats:"),
     CASTED_TIMES_CHANNEL("Casted %1$s times during channel."),
     INSTANT_CAST("Instant Cast"),
-    CAPPED_TO_WEP_DMG(" (" + "Capped to %1$s%% of Wep-Dmg)"),
+    CAPPED_TO_WEP_DMG(" (Capped to %1$s%% of Wep-Dmg)"),
 
     CAST_TIME("Cast Time: %1$ss"),
     MANA_COST("Mana Cost: %1$s"),
     ENE_COST("Energy Cost: %1$s"),
-    COOLDOWN("Cooldown: %1$s"),
+    COOLDOWN("Cooldown: %1$ss"),
     MAX_CHARGES("Max Charges: %1$s"),
     CHARGE_REGEN("Charge Regen: %1$ss"),
 
@@ -28,15 +27,13 @@ public enum Words implements IAutoLocName {
     STATUS_EFFECT("Status Effect"),
     PET_BASIC("Pet Basic Attack:"),
     PER_STACK(" (per stack): "),
-    WEAPON("Weapon:"),
-    ARMOR("Armor:"),
-    JEWERLY("Jewelry:"),
+    WEAPON("On Weapon: "),
+    ARMOR("On Armor: "),
+    JEWERLY("On Jewelry: "),
     PROFESSIONS("Professions"),
-    POTION("Potion"),
     SUPPGEM("Support Gem"),
     AURA("Aura"),
     MAJOR("Major"),
-    MEAL("Meal"),
     WIKI("Wiki"),
     LESSER("Lesser"),
     MEDIUM("Medium"),
@@ -46,13 +43,8 @@ public enum Words implements IAutoLocName {
     Hard("Hard"),
     VERY_HARD("Very Hard"),
 
-    FAVOR_REGEN_PER_HOUR(ChatFormatting.LIGHT_PURPLE + "Regenerates %1$s per Hour"),
-    FAVOR_PER_CHEST(ChatFormatting.GREEN + "Gain %1$s per Chest Looted"),
-    FAVOR_PER_DEATH(ChatFormatting.RED + "You Lose %1$s on Death"),
-
     AddSocket("Adds a socket"),
     Nothing("Nothing"),
-    Enchanted("Enchanted:"),
 
     UpgradeAffix("Upgrades an affix"),
     UpgradeEnchant("Upgrades or Rerolls the Enchant"),
@@ -73,56 +65,6 @@ public enum Words implements IAutoLocName {
     Rune("Rune"),
     LevelRewards("Level Rewards"),
     Gem("Gem"),
-    Miracle("Miracle"),
-    Oblivion("Oblivion"),
-    Beast("Beast"),
-    Golem("Golem"),
-    Spirit("Spirit"),
-    Rage("Rage"),
-
-    Beads("Beads"),
-    Charm("Charm"),
-    Locket("Locket"),
-    //
-    Band("Band"),
-    Eye("Eye"),
-    Loop("Loop"),
-    //
-    Crown("Crown"),
-    Circlet("Circlet"),
-    Horn("Horn"),
-    //
-    Cloak("Cloak"),
-    Coat("Coat"),
-    Mantle("Mantle"),
-    Shell("Shell"),
-    //
-    Aegis("Aegis"),
-    Barrier("Barrier"),
-    Guard("Guard"),
-    Tower("Tower"),
-    Road("Road"),
-    Hoof("Hoof"),
-    Dash("Dash"),
-    //
-
-    Bane("Bane"),
-    Bite("Bite"),
-    Wind("Wind"),
-    Star("Star"),
-    Splitter("Splitter"),
-    //
-    Legguards("Legguards"),
-    Leggings("Leggings"),
-    Britches("Britches"),
-    Legwraps("Legwraps"),
-    //
-    Creation("Creation"),
-    Crest("Crest"),
-    Keep("Keep"),
-    Ward("Ward"),
-    Refuge("Refuge"),
-
     // name2
 
     ClickToOpen("Click to Open"),
@@ -175,7 +117,8 @@ public enum Words implements IAutoLocName {
     Jewels("Jewels"),
 
 
-    Loot("Loot"), Exp("Exp"),
+    Loot("Loot"),
+    Exp("Exp"),
 
     Currency("Currency"),
     Backpack("Backpack"),
@@ -203,7 +146,19 @@ public enum Words implements IAutoLocName {
 
     Unsalvagable("Unsalvageable"),
 
-    UsableOn("Usable On");
+    UsableOn("Usable On"),
+
+    Energy_Cost_Per_Mob("Energy Cost: %1$s + %2$s Per mob, x %3$s Dmg"),
+    CAPPED_TO_LVL("[Capped to LVL]"),
+    MULTIPLY_STAT_INCREASED("Increased"),
+    MULTIPLY_STAT_REDUCED("Reduced"),
+    MULTIPLICATIVE_DAMAGE_MORE("More"),
+    MULTIPLICATIVE_DAMAGE_LESS("Less"),
+    PERCENT_INCREASED_STAT("Extra "),
+    EMPTY_BOX("Box"),
+    LEVEL_UP_TYPE_PLAYER("Player"),
+    SPELL_TAG_SPARATOR(", ");
+
 
     private String localization = "";
 

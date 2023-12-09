@@ -18,7 +18,7 @@ import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISettableLevelTier;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
-import com.robertx22.age_of_exile.uncommon.localization.Words;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
@@ -232,9 +232,9 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
 
             } else {
                 if (data.fam != SlotFamily.NONE) {
-                    tooltip.add(Words.ITEM_TYPE.locName().withStyle(ChatFormatting.WHITE).append(data.fam.name()).withStyle(ChatFormatting.BLUE));
+                    tooltip.add(Itemtips.ITEM_TYPE.locName().withStyle(ChatFormatting.WHITE).append(data.fam.name()).withStyle(ChatFormatting.BLUE));
                 } else {
-                    tooltip.add(Words.ITEM_TYPE.locName().withStyle(ChatFormatting.WHITE)
+                    tooltip.add(Itemtips.ITEM_TYPE.locName().withStyle(ChatFormatting.WHITE)
                             .append(ExileDB.GearSlots()
                                     .get(data.slot)
                                     .locName()
