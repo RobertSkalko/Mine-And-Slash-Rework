@@ -2,10 +2,14 @@ package com.robertx22.age_of_exile.uncommon.localization;
 
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
+import net.minecraft.ChatFormatting;
 
 import java.util.Locale;
 
 public enum Gui implements IAutoLocName {
+    RESTED_COMBAT_EXP("Rested Combat Exp: "),
+    RESTED_PROF_EXP("Rested Prof. Exp: "),
+
     Favor_In_GUI(" Favor"),
     Current_Favor("Current: %1$s"),
     Loot_Exp_Multiplier("Loot/Exp Multiplier: %1$sx"),
@@ -24,7 +28,7 @@ public enum Gui implements IAutoLocName {
     SALVAGE_TIP_OFF("Auto Salvage for %1$s %2$s: Off"),
     PROF_NAME("%1$s: %2$s"),
     SPELL_DAMAGE_PROPORTION("(%1$s%% of %2$s§7)"),
-    PROF_LEVEL_AND_EXP("Level: %1$s EXP: %2$s/%3$s"), AVAILABLE_SUPPORT_SLOTS("Support Slots: %1$s/5 Available");
+    PROF_LEVEL_AND_EXP("Level: %1$s EXP: %2$s/%3$s"), AVAILABLE_SUPPORT_SLOTS("Support Slots: %1$s/5 Available"), FAVOR_REGEN_PER_HOUR(ChatFormatting.LIGHT_PURPLE + "Regenerates %1$s per Hour"), FAVOR_PER_CHEST(ChatFormatting.GREEN + "Gain %1$s per Chest Looted"), FAVOR_PER_DEATH(ChatFormatting.RED + "You Lose %1$s on Death");
 
 
     private String localization = "";

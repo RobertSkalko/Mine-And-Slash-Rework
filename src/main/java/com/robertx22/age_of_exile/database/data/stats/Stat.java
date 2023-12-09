@@ -89,15 +89,10 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
         MULTIPLY_STAT("Increased", "Reduced", Words.MULTIPLY_STAT_INCREASED, Words.MULTIPLY_STAT_REDUCED),
         MULTIPLICATIVE_DAMAGE("More", "Less", Words.MULTIPLICATIVE_DAMAGE_MORE, Words.MULTIPLICATIVE_DAMAGE_LESS);
 
-        private String tooltipPrefix;
-        private String tooltipPrefixLess;
-
         public Words prefixWord;
         public Words prefixLessWord;
 
         MultiUseType(String tooltipPrefix, String tooltipPrefixLess, Words prefixWord, Words prefixLessWord) {
-            this.tooltipPrefix = tooltipPrefix;
-            this.tooltipPrefixLess = tooltipPrefixLess;
             this.prefixWord = prefixWord;
             this.prefixLessWord = prefixLessWord;
         }

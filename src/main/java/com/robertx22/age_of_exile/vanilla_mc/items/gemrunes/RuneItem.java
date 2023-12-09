@@ -27,6 +27,7 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.vanilla_mc.LuckyRandom;
@@ -49,6 +50,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
+
+import static com.robertx22.age_of_exile.uncommon.utilityclasses.MutableComponentUtils.splitLongText;
 
 
 public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, IWeighted, IItemAsCurrency {
@@ -254,9 +257,8 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
 
             tooltip.addAll(statsTooltip());
 
+            tooltip.addAll(splitLongText(Itemtips.RUNE_ITEM_USAGE.locName().withStyle(ChatFormatting.RED)));
 
-            tooltip.add(Component.literal("Use to view craftable Runewords."));
-            tooltip.add(Component.literal("Sneak + Use to view all Runewords."));
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChestData;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.SkillGemBlueprint;
 import com.robertx22.age_of_exile.loot.req.DropRequirement;
+import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import net.minecraft.world.item.Item;
@@ -45,5 +46,18 @@ public class AuraLootChest extends LootChest {
         return (int) (ServerContainer.get().AURA_GEM_DROPRATE.get() * 100);
     }
 
+    @Override
+    public AutoLocGroup locNameGroup() {
+        return AutoLocGroup.Lootboxes;
+    }
 
+    @Override
+    public String locNameLangFileGUID() {
+        return SlashRef.MODID + ".chest_type." + GUID();
+    }
+
+    @Override
+    public String locNameForLangFile() {
+        return GUID().substring(0, 1).toUpperCase() + GUID().substring(1);
+    }
 }

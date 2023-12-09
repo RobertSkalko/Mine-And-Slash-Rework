@@ -11,6 +11,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.MergedStats;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.wrappers.ExileText;
@@ -136,10 +137,10 @@ public class GearTooltipUtils {
         tip.add(TooltipUtils.gearRarity(gear.getRarity()));
 
 
-        tip.add(Words.Potential.locName(potential).withStyle(gear.getPotentialColor()));
+        tip.add(Itemtips.POTENTIAL.locName(potential).withStyle(gear.getPotentialColor()));
 
         if (gear.getQuality() > 0) {
-            tip.add(Words.Quality.locName(gear.getQuality()).withStyle(gear.getQualityType().color));
+            tip.add(Itemtips.QUALITY.locName(gear.getQuality()).withStyle(gear.getQualityType().color));
         }
 
         if (Screen.hasShiftDown()) {
@@ -166,10 +167,10 @@ public class GearTooltipUtils {
 
         if (ClientConfigs.getConfig().SHOW_DURABILITY.get()) {
             if (stack.isDamageableItem()) {
-                tip.add(Words.Durability.locName().withStyle(ChatFormatting.WHITE)
+                tip.add(Itemtips.Durability.locName().withStyle(ChatFormatting.WHITE)
                         .append(stack.getMaxDamage() - stack.getDamageValue() + "/" + stack.getMaxDamage()));
             } else {
-                tip.add(Words.Unbreakable.locName().withStyle(ChatFormatting.WHITE));
+                tip.add(Itemtips.Unbreakable.locName().withStyle(ChatFormatting.WHITE));
             }
         }
 

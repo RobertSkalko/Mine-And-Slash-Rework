@@ -41,7 +41,7 @@ public enum SpellTag implements IAutoLocName {
 
     @Override
     public String locNameLangFileGUID() {
-        return SlashRef.MODID + ".spell.spell_tag." + GUID();
+        return SlashRef.MODID + ".spell_tag." + GUID();
     }
 
     @Override

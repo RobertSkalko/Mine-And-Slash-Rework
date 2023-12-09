@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.database.data.currency.base.IShapelessRecipe;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.RarityStoneItem;
@@ -19,6 +20,8 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
+
+import static com.robertx22.age_of_exile.uncommon.utilityclasses.MutableComponentUtils.splitLongText;
 
 public class SoulMakerItem extends AutoItem implements IShapelessRecipe {
 
@@ -48,9 +51,7 @@ public class SoulMakerItem extends AutoItem implements IShapelessRecipe {
 
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {
-        tooltip.add(Component.literal("Click on items to extract their soul.").withStyle(ChatFormatting.RED));
-        tooltip.add(Component.literal("Works only on that rarity.").withStyle(ChatFormatting.RED));
-        tooltip.add(Component.literal("Deletes the Item in the process.").withStyle(ChatFormatting.RED));
+        tooltip.addAll(splitLongText(Itemtips.SOUL_EXTRACTOR_TIP.locName().withStyle(ChatFormatting.RED)));
 
     }
 
@@ -65,4 +66,5 @@ public class SoulMakerItem extends AutoItem implements IShapelessRecipe {
                 .requires(item, 2)
                 .requires(middle, 1);
     }
+
 }

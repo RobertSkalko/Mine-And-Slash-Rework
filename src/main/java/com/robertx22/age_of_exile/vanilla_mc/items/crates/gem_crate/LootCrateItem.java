@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.enumclasses.LootType;
+import com.robertx22.age_of_exile.uncommon.localization.Formatter;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TierColors;
@@ -144,32 +145,24 @@ public class LootCrateItem extends Item implements IGUID {
     public Component getName(ItemStack stack) {
 
         LootCrateData data = getData(stack);
-
-        MutableComponent comp = Component.literal("");
-
+        
         if (data != null) {
 
-            if (data.type == LootType.Gem) {
-                String gemrank = "";
-                GemItem.GemRank rank = GemItem.GemRank.ofTier(data.tier);
-                gemrank = rank.locName; // todo make loc
-                comp.append(gemrank)
-                        .append(" ");
+            class rankChecker{
+                private MutableComponent checker(){
+                    if (data.type == LootType.Gem) {
+                        return GemItem.GemRank.ofTier(data.tier).locName();
+                    }
+                    return Component.literal("");
+
+                }
             }
 
-            comp.append(data.type.word.locName())
-                    .append(" ")
-                    .append(Words.Loot.locName())
-                    .append(" ")
-                    .append(Words.Crate.locName())
-                    .withStyle(TierColors.get(data.tier))
-                    .withStyle(ChatFormatting.BOLD);
-
-            return comp;
-
+            return Formatter.GEM_CHEST_NAME.locName(new rankChecker().checker(), data.type.word.locName(), Words.Loot.locName(), Words.Crate.locName()
+                    .withStyle(TierColors.get(data.tier)).withStyle(ChatFormatting.BOLD));
         }
 
-        return Component.literal("Box");
+        return Words.EMPTY_BOX.locName();
 
     }
 

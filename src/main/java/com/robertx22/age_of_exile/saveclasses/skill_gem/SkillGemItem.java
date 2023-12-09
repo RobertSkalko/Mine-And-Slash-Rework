@@ -4,8 +4,8 @@ import com.robertx22.age_of_exile.capability.player.container.SkillGemsMenu;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.INeedsNBT;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
-import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -67,7 +67,7 @@ public class SkillGemItem extends Item implements INeedsNBT {
                     list.add(m);
                 }
 
-                list.add(ExileText.ofText("Right Click to Open Gui").get());
+                list.add(Itemtips.GEM_OPEN_GUI_TIP.locName());
             }
         } catch (Exception e) {
             //  throw new RuntimeException(e);

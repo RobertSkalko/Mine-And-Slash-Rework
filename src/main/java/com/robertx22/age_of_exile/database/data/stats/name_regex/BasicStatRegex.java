@@ -17,15 +17,12 @@ public class BasicStatRegex extends StatNameRegex {
 
         if (type.isFlat()) {
 
-            String adds = "";
 
-            String to = " ";
-
-            return adds + VALUE + to + NAME;
+            return VALUE + NAME;
 
         }
         if (type.isPercent()) {
-            String s = v1 > 0 && (stat.IsPercent() && type != ModType.MORE) ? Words.PERCENT_INCREASED_STAT.locName().toString() : " ";
+            String s = v1 > 0 && (stat.IsPercent() && type != ModType.MORE) ? Words.PERCENT_INCREASED_STAT.locName().getString() : "";
             return VALUE + s + NAME;
         }
         if (type == ModType.MORE) {

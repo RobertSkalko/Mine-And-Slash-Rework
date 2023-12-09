@@ -3,6 +3,8 @@ package com.robertx22.age_of_exile.vanilla_mc.items;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
@@ -56,7 +58,7 @@ public class CommonGearProducerItem extends AutoItem {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {
-        tooltip.add(Component.literal("Right click to produce a common gear soul."));
+        tooltip.add(Itemtips.SOUL_STONE_TIP.locName());
     }
 
     @Override

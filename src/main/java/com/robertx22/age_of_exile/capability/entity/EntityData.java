@@ -35,6 +35,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
+import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.threat_aggro.ThreatData;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityTypeUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
@@ -812,7 +813,7 @@ public class EntityData implements ICap, INeededForClient {
             this.setLevel(level + 1);
             setExp(getRemainingExp());
 
-            OnScreenMessageUtils.sendLevelUpMessage(player, ExileText.ofText("Player").get(), level - 1, level);
+            OnScreenMessageUtils.sendLevelUpMessage(player, Words.LEVEL_UP_TYPE_PLAYER.locName(), level - 1, level);
 
             return true;
         }

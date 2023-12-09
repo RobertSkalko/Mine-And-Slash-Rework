@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.vanilla_mc.items.misc;
 
 import com.robertx22.age_of_exile.database.data.currency.base.IShapelessRecipe;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.critereon.EnchantedItemTrigger;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -13,6 +14,8 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
+
+import static com.robertx22.age_of_exile.uncommon.utilityclasses.MutableComponentUtils.splitLongText;
 
 public class SoulCleanerItem extends AutoItem implements IShapelessRecipe {
 
@@ -34,9 +37,7 @@ public class SoulCleanerItem extends AutoItem implements IShapelessRecipe {
 
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {
-        tooltip.add(Component.literal("Click on items to remove their soul.").withStyle(ChatFormatting.RED));
-        tooltip.add(Component.literal("The item remains but the stats will be deleted.").withStyle(ChatFormatting.RED));
-
+        tooltip.addAll(splitLongText(Itemtips.SOUL_CLEANER_USAGE_AND_WARNING.locName().withStyle(ChatFormatting.RED)));
     }
 
     @Override

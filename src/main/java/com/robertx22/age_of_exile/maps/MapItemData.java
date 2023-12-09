@@ -13,6 +13,7 @@ import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
@@ -152,7 +153,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                             ": +" + this.getBonusLootAmountInPercent() + "%"));
         }
         comp.append(ChatFormatting.GRAY + ", ")
-                .append(Words.Tooltips_Tier.locName().withStyle(ChatFormatting.GOLD)
+                .append(Itemtips.TIER_TIP.locName().withStyle(ChatFormatting.GOLD)
                         .append(this.tier + ""));
 
         tooltip.add(comp);

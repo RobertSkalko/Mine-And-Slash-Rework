@@ -8,7 +8,6 @@ import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
-import com.robertx22.age_of_exile.uncommon.localization.Words;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -80,10 +79,10 @@ public class DeathFavorData {
 
         if (this.getRarity().getFavorGainEverySecond() > 0) {
             int perhour = (int) (getRarity().getFavorGainEverySecond() * 60F * 60f);
-            tooltip.add(Words.FAVOR_REGEN_PER_HOUR.locName(perhour));
+            tooltip.add(Gui.FAVOR_REGEN_PER_HOUR.locName(perhour));
         }
-        tooltip.add(Words.FAVOR_PER_CHEST.locName(ServerContainer.get().FAVOR_CHEST_GAIN.get()));
-        tooltip.add(Words.FAVOR_PER_DEATH.locName(ServerContainer.get().FAVOR_DEATH_LOSS.get()));
+        tooltip.add(Gui.FAVOR_PER_CHEST.locName(ServerContainer.get().FAVOR_CHEST_GAIN.get()));
+        tooltip.add(Gui.FAVOR_PER_DEATH.locName(ServerContainer.get().FAVOR_DEATH_LOSS.get()));
 
         return tooltip;
     }

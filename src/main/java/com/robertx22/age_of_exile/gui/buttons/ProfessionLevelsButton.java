@@ -49,7 +49,7 @@ public class ProfessionLevelsButton extends ImageButton {
     public void setModTooltip() {
 
         List<Component> list = new ArrayList<>();
-        list.add(Component.literal("Professions").withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD));
+        list.add(Words.PROFESSIONS.locName().withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD));
         list.add(Component.empty());
 
         for (Profession prof : ExileDB.Professions().getList()) {
@@ -75,8 +75,8 @@ public class ProfessionLevelsButton extends ImageButton {
         }
         list.add(Component.empty());
 
-        list.add(Words.RESTED_COMBAT_EXP.locName().append(String.valueOf(Load.player(mc.player).rested_xp.bonusCombatExp)).withStyle(ChatFormatting.WHITE));
-        list.add(Words.RESTED_PROF_EXP.locName().append(String.valueOf(Load.player(mc.player).rested_xp.bonusProfExp)).withStyle(ChatFormatting.WHITE));
+        list.add(Gui.RESTED_COMBAT_EXP.locName().append(String.valueOf(Load.player(mc.player).rested_xp.bonusCombatExp)).withStyle(ChatFormatting.WHITE));
+        list.add(Gui.RESTED_PROF_EXP.locName().append(String.valueOf(Load.player(mc.player).rested_xp.bonusProfExp)).withStyle(ChatFormatting.WHITE));
 
         this.setTooltip(Tooltip.create(TextUTIL.mergeList(list)));
 

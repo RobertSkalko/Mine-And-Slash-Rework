@@ -65,7 +65,20 @@ public enum Chats implements IAutoLocName {
 
     Dev_tools_enabled_contact_the_author("Devs tools enabled, if you see this please contact the author of Mine and Slash [robertx22], he forgot to disable them!"),
     Not_enough_experience("Not enough experience"),
-    Can_not_go_over_maximum_level("Can not go over maximum level");
+    Can_not_go_over_maximum_level("Can not go over maximum level"),
+    OPEN_LOOT_CHEST("Right-click to open Loot Chest!"),
+    VINES_SHRINK("The Vines appear to shrink, for now..."),
+    PROF_RECIPE_NOT_FOUND("Recipe not found"),
+    PROF_OUTPUT_SLOT_NOT_EMPTY("Output slots are not empty."),
+    PROF_RECIPE_LEVEL_NOT_ENOUGH("Not high enough level to craft."),
+    GEAR_DROP("You do not meet the requirements of that item."),
+    COMMAND_BLOCK_UNAVALIABLE("Command blocks are disabled, this will stop you from playing Mine and slash Dungeons!"),
+    HOW_TO_ENABLE_COMMAND_BLOCK("To enable go to your server.properties file and put enable-command-block as true."),
+    WEAPON_REQ_NOT_MET("Weapon requirements not met"),
+    ENEMY_TOO_CLOSE("You can't teleport when enemies are nearby."),
+    GEM_SOCKETED("Gem Socketed"),
+    LEVEL_UP_MESSAGE_UP("Leveled Up!"),
+    LEVEL_UP_MESSAGE_DOWN("%1$s Level: %2$s > %3$s!");
 
     private String localization = "";
 
