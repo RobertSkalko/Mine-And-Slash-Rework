@@ -7,7 +7,6 @@ import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
 import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
-import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeapon;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -67,14 +66,13 @@ public class SongSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTag.projectile, SpellTag.area, SpellTag.damage, SpellTag.song))
                 .manualDesc(
                         "Throw out a ball of music, dealing " + SpellCalcs.RESONANCE.getLocDmgTooltip()
-                                + " " + Elements.Physical.getIconNameDmg() + " and has 10% chance of charming enemies, reducing their defenses. Hits against charmed enemies explode.")
+                                + " " + Elements.Physical.getIconNameDmg() + "Hits against charmed enemies explode.")
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.SNOWBALL_THROW, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.AIR, 1D, 1D, SlashEntities.SIMPLE_PROJECTILE.get(), 20D, false)))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.NOTE, 2D, 0.15D))
 
-                .onExpire(PartBuilder.damageInAoe(SpellCalcs.RESONANCE, Elements.Physical, 1.5D)
-                        .addActions(SpellAction.EXILE_EFFECT.giveSeconds(NegativeEffects.CHARM, 6).put(MapField.CHANCE, 10D)))
+                .onExpire(PartBuilder.damageInAoe(SpellCalcs.RESONANCE, Elements.Physical, 1.5D))
 
                 .onExpire(PartBuilder.damageInAoeIfCharmed(SpellCalcs.RESONANCE, Elements.Physical, 3D)
                         .addPerEntityHit(PartBuilder.aoeParticles(ParticleTypes.NOTE, 100D, 1D))

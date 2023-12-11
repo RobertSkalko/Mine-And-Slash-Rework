@@ -132,7 +132,8 @@
     "summon_basic_atk": "pet_basic",
     "swing_arm": true,
     "tags": [],
-    "times_to_cast": 1
+    "times_to_cast": 1,
+    "tracking_radius": 5
   },
   "default_lvl": 0,
   "disabled_dims": [],

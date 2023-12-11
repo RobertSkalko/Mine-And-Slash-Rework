@@ -21,7 +21,7 @@
       "type": "flat",
       "max": 20.0,
       "min": 20.0,
-      "stat": "spell_atk_style_dmg"
+      "stat": "magic_spell_dmg"
     },
     {
       "type": "flat",

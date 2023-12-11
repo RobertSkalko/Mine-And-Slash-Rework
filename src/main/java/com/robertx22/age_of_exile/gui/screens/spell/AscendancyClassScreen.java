@@ -15,9 +15,7 @@ import com.robertx22.library_of_exile.utils.GuiUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.network.chat.MutableComponent;
 
 import java.util.List;
 
@@ -117,10 +115,10 @@ public class AscendancyClassScreen extends BaseScreen implements INamedScreen, I
             super.render(gui, x, y, ticks);
 
             String txt = Gui.SPELL_POINTS.locName().append(String.valueOf(Load.player(mc.player).ascClass.getFreeSpellPoints(mc.player))).getString();
-            GuiUtils.renderScaledText(gui, guiLeft + 48, guiTop + 216, 1, txt, ChatFormatting.WHITE);
+            GuiUtils.renderScaledText(gui, guiLeft + 50, guiTop + 215, 1, txt, ChatFormatting.WHITE);
 
             String tx2 = Gui.PASSIVE_POINTS.locName().append(String.valueOf(Load.player(mc.player).ascClass.getFreePassivePoints(mc.player))).getString();
-            GuiUtils.renderScaledText(gui, guiLeft + 195, guiTop + 216, 1, tx2, ChatFormatting.WHITE);
+            GuiUtils.renderScaledText(gui, guiLeft + 195, guiTop + 215, 1, tx2, ChatFormatting.WHITE);
 
             //buttons.forEach(b -> b.renderToolTip(matrix, x, y));
         } catch (Exception e) {

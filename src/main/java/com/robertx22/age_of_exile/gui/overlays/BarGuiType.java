@@ -5,7 +5,6 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.blood.Bloo
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.HealthUtils;
-import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -46,7 +45,7 @@ public enum BarGuiType {
 
         @Override
         public MutableComponent getText(EntityData data, Player en) {
-            return Gui.STATUS_BAR_LEVEL.locName(data.getLevel(), getMulti(data, en) * 100);
+            return Gui.STATUS_BAR_LEVEL.locName(data.getLevel(), (int) (getMulti(data, en) * 100));
         }
     },
     ENERGY {

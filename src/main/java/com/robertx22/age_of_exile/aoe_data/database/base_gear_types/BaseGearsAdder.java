@@ -28,87 +28,9 @@ public class BaseGearsAdder implements ExileRegistryInit, GearDataHelper {
 
         // todo cant do this with a gear defense stat, i need to make it work differently
 
-        /*
-        // ARMOR/MS
-        BaseGearBuilder.of(BaseGearTypes.ARMOR_MS_BOOTS, GearSlots.BOOTS, "Chain Boots", StatRequirement.of(PlayStyle.INT, PlayStyle.STR))
-                .tags(new TagList(SlotTag.magic_shield_stat, SlotTag.boots, SlotTag.armor_family, SlotTag.armor_stat, SlotTag.intelligence, SlotTag.strength))
-                .baseStat(halfStat(ArmorStat.MAGIC_SHIELD, ArmorSlot.BOOTS))
-                .baseStat(halfStat(ArmorStat.ARMOR, ArmorSlot.BOOTS))
-                .build();
 
-        BaseGearBuilder.of(BaseGearTypes.ARMOR_MS_PANTS, GearSlots.PANTS, "Chain Pants", StatRequirement.of(PlayStyle.INT, PlayStyle.STR))
-                .tags(new TagList(SlotTag.magic_shield_stat, SlotTag.pants, SlotTag.armor_family, SlotTag.armor_stat, SlotTag.intelligence, SlotTag.strength))
-                .baseStat(halfStat(ArmorStat.MAGIC_SHIELD, ArmorSlot.PANTS))
-                .baseStat(halfStat(ArmorStat.ARMOR, ArmorSlot.PANTS))
-                .build();
-
-        BaseGearBuilder.of(BaseGearTypes.ARMOR_MS_CHEST, GearSlots.CHEST, "Chain Chest", StatRequirement.of(PlayStyle.INT, PlayStyle.STR))
-                .tags(new TagList(SlotTag.magic_shield_stat, SlotTag.chest, SlotTag.armor_family, SlotTag.armor_stat, SlotTag.intelligence, SlotTag.strength))
-                .baseStat(halfStat(ArmorStat.MAGIC_SHIELD, ArmorSlot.CHEST))
-                .baseStat(halfStat(ArmorStat.ARMOR, ArmorSlot.CHEST))
-                .build();
-
-        BaseGearBuilder.of(BaseGearTypes.ARMOR_MS_HELMET, GearSlots.HELMET, "Chain Helmet", StatRequirement.of(PlayStyle.INT, PlayStyle.STR))
-                .tags(new TagList(SlotTag.magic_shield_stat, SlotTag.helmet, SlotTag.armor_family, SlotTag.armor_stat, SlotTag.intelligence, SlotTag.strength))
-                .baseStat(halfStat(ArmorStat.MAGIC_SHIELD, ArmorSlot.HELMET))
-                .baseStat(halfStat(ArmorStat.ARMOR, ArmorSlot.HELMET))
-                .build();
-        // ARMOR/MS
-
-
-        // DODGE/MS
-        BaseGearBuilder.of(BaseGearTypes.DODGE_MS_BOOTS, GearSlots.BOOTS, "Bone Boots", StatRequirement.of(PlayStyle.INT, PlayStyle.DEX))
-                .tags(new TagList(SlotTag.magic_shield_stat, SlotTag.boots, SlotTag.armor_family, SlotTag.dodge_stat, SlotTag.intelligence, SlotTag.dexterity))
-                .baseStat(halfStat(ArmorStat.MAGIC_SHIELD, ArmorSlot.BOOTS))
-                .baseStat(halfStat(ArmorStat.DODGE, ArmorSlot.BOOTS))
-                .build();
-
-        BaseGearBuilder.of(BaseGearTypes.DODGE_MS_PANTS, GearSlots.PANTS, "Bone Pants", StatRequirement.of(PlayStyle.INT, PlayStyle.DEX))
-                .tags(new TagList(SlotTag.magic_shield_stat, SlotTag.pants, SlotTag.armor_family, SlotTag.dodge_stat, SlotTag.intelligence, SlotTag.dexterity))
-                .baseStat(halfStat(ArmorStat.MAGIC_SHIELD, ArmorSlot.PANTS))
-                .baseStat(halfStat(ArmorStat.DODGE, ArmorSlot.PANTS))
-                .build();
-
-        BaseGearBuilder.of(BaseGearTypes.DODGE_MS_CHEST, GearSlots.CHEST, "Bone Chest", StatRequirement.of(PlayStyle.INT, PlayStyle.DEX))
-                .tags(new TagList(SlotTag.magic_shield_stat, SlotTag.chest, SlotTag.armor_family, SlotTag.dodge_stat, SlotTag.intelligence, SlotTag.dexterity))
-                .baseStat(halfStat(ArmorStat.MAGIC_SHIELD, ArmorSlot.CHEST))
-                .baseStat(halfStat(ArmorStat.DODGE, ArmorSlot.CHEST))
-                .build();
-
-        BaseGearBuilder.of(BaseGearTypes.DODGE_MS_HELMET, GearSlots.HELMET, "Bone Helmet", StatRequirement.of(PlayStyle.INT, PlayStyle.DEX))
-                .tags(new TagList(SlotTag.magic_shield_stat, SlotTag.helmet, SlotTag.armor_family, SlotTag.dodge_stat, SlotTag.intelligence, SlotTag.dexterity))
-                .baseStat(halfStat(ArmorStat.MAGIC_SHIELD, ArmorSlot.HELMET))
-                .baseStat(halfStat(ArmorStat.DODGE, ArmorSlot.HELMET))
-                .build();
-        // DODGE/MS
-
-        // DODGE/ARMOR
-        BaseGearBuilder.of(BaseGearTypes.DODGE_ARMOR_BOOTS, GearSlots.BOOTS, "Scale Boots", StatRequirement.of(PlayStyle.STR, PlayStyle.DEX))
-                .tags(new TagList(SlotTag.armor_stat, SlotTag.boots, SlotTag.armor_family, SlotTag.dodge_stat, SlotTag.strength, SlotTag.dexterity))
-                .baseStat(halfStat(ArmorStat.ARMOR, ArmorSlot.BOOTS))
-                .baseStat(halfStat(ArmorStat.DODGE, ArmorSlot.BOOTS))
-                .build();
-
-        BaseGearBuilder.of(BaseGearTypes.DODGE_ARMOR_PANTS, GearSlots.PANTS, "Scale Pants", StatRequirement.of(PlayStyle.STR, PlayStyle.DEX))
-                .tags(new TagList(SlotTag.magic_shield_stat, SlotTag.pants, SlotTag.armor_family, SlotTag.dodge_stat, SlotTag.strength, SlotTag.dexterity))
-                .baseStat(halfStat(ArmorStat.ARMOR, ArmorSlot.PANTS))
-                .baseStat(halfStat(ArmorStat.DODGE, ArmorSlot.PANTS))
-                .build();
-
-        BaseGearBuilder.of(BaseGearTypes.DODGE_ARMOR_CHEST, GearSlots.CHEST, "Scale Chest", StatRequirement.of(PlayStyle.STR, PlayStyle.DEX))
-                .tags(new TagList(SlotTag.armor_stat, SlotTag.chest, SlotTag.armor_family, SlotTag.dodge_stat, SlotTag.strength, SlotTag.dexterity))
-                .baseStat(halfStat(ArmorStat.ARMOR, ArmorSlot.CHEST))
-                .baseStat(halfStat(ArmorStat.DODGE, ArmorSlot.CHEST))
-                .build();
-
-        BaseGearBuilder.of(BaseGearTypes.DODGE_ARMOR_HELMET, GearSlots.HELMET, "Scale Helmet", StatRequirement.of(PlayStyle.STR, PlayStyle.DEX))
-                .tags(new TagList(SlotTag.armor_stat, SlotTag.helmet, SlotTag.armor_family, SlotTag.dodge_stat, SlotTag.strength, SlotTag.dexterity))
-                .baseStat(halfStat(ArmorStat.ARMOR, ArmorSlot.HELMET))
-                .baseStat(halfStat(ArmorStat.DODGE, ArmorSlot.HELMET))
-                .build();
-        // DODGE/ARMOR
-
-         */
+        // todo make base gears actually base gears with a simple builder, each base gear will have many variations like .of("serpent","Serpent Dagger", Stats.crit)
+        // each will have a blank item in case there's ZERO base gears in that lvl range, the blank one will have weight 1
 
         List<Item> boots = Arrays.asList(Items.IRON_BOOTS, Items.DIAMOND_BOOTS, Items.NETHERITE_BOOTS);
         List<Item> chest = Arrays.asList(Items.IRON_CHESTPLATE, Items.DIAMOND_CHESTPLATE, Items.NETHERITE_CHESTPLATE);
