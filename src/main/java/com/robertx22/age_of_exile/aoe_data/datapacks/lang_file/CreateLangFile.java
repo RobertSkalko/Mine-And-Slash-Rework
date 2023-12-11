@@ -153,6 +153,7 @@ public class CreateLangFile {
         list.addAll(Arrays.asList(GemItem.GemType.values()));
         list.addAll(Arrays.asList(GemItem.GemRank.values()));
         list.addAll(Arrays.asList(PlayerBuffData.Type.values()));
+        list.addAll(Arrays.asList(ChestType.chestTypeEnum.values()));
 
 
         HashMap<IAutoLocName.AutoLocGroup, List<IAutoLocName>> map = new HashMap<>();

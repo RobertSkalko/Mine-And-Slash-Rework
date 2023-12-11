@@ -24,8 +24,7 @@ public class GearEnumLocReq extends BaseLocRequirement {
     @Override
     public MutableComponent getText() {
 
-        MutableComponent comp = Words.AllowedOn.locName()
-            .append(": ");
+        MutableComponent comp = Words.AllowedOn.locName();
 
         List<GearItemEnum> enums = Arrays.stream(GearItemEnum.values())
             .filter(x -> gearsThatCanDoThis.test(x))

@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
+import com.robertx22.age_of_exile.uncommon.localization.ChestType;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
@@ -84,7 +85,7 @@ public class LootChestData implements ICommonDataItem<GearRarity> {
     public void BuildTooltip(TooltipContext ctx) {
 
         var tip = ctx.tooltip;
-        MutableComponent type = Component.translatable(SlashRef.MODID + ".chest_type."+ getLootChest().GUID());
+        String type = getLootChest().GUID().substring(0,1).toUpperCase() + getLootChest().GUID().substring(1);
 
         tip.clear();
 
@@ -96,7 +97,7 @@ public class LootChestData implements ICommonDataItem<GearRarity> {
 
         tip.add(Component.empty());
 
-        tip.add(Itemtips.CHEST_CONTAINS.locName().append(type));
+        tip.add(Itemtips.CHEST_CONTAINS.locName().append(new ChestType(type).get().locName()));
 
         tip.add(Component.empty());
 

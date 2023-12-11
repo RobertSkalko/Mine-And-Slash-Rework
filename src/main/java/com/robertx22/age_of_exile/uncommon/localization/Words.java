@@ -104,7 +104,7 @@ public enum Words implements IAutoLocName {
 
     NoDuplicateSockets("No Duplicate Sockets"),
 
-    AllowedOn("Allowed On"),
+    AllowedOn("Allowed On: "),
 
     Unique_Gear("Unique Gear"),
 
@@ -146,7 +146,7 @@ public enum Words implements IAutoLocName {
 
     Unsalvagable("Unsalvageable"),
 
-    UsableOn("Usable On"),
+    UsableOn("Usable On: "),
 
     Energy_Cost_Per_Mob("Energy Cost: %1$s + %2$s Per mob, x %3$s Dmg"),
     CAPPED_TO_LVL("[Capped to LVL]"),
@@ -154,7 +154,7 @@ public enum Words implements IAutoLocName {
     MULTIPLY_STAT_REDUCED("Reduced"),
     MULTIPLICATIVE_DAMAGE_MORE("More"),
     MULTIPLICATIVE_DAMAGE_LESS("Less"),
-    PERCENT_INCREASED_STAT("Extra "),
+    INCREASE_PERCENT_STAT("Extra "),
     EMPTY_BOX("Box"),
     LEVEL_UP_TYPE_PLAYER("Player"),
     SPELL_TAG_SPARATOR(", ");

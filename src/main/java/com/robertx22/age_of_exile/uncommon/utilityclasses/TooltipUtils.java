@@ -241,4 +241,15 @@ public class TooltipUtils {
     public static MutableComponent dragOntoGearToUse() {
         return Itemtips.USE_TIP.locName().withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD);
     }
+
+    public static List<MutableComponent> splitLongText(MutableComponent comp) {
+        List<MutableComponent> componentList = new ArrayList<>();
+        Style format = comp.getStyle();
+        String[] originalList = comp.getString().split("\n");
+
+        for (String comp1 : originalList) {
+            componentList.add(Component.literal(comp1).withStyle(format));
+        }
+        return componentList;
+    }
 }
