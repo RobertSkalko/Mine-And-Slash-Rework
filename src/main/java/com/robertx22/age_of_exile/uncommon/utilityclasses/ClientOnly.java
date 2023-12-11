@@ -3,7 +3,10 @@ package com.robertx22.age_of_exile.uncommon.utilityclasses;
 import com.robertx22.age_of_exile.gui.inv_gui.GuiInventoryGrids;
 import com.robertx22.age_of_exile.gui.inv_gui.InvGuiScreen;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -11,6 +14,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ClientOnly {
 
@@ -66,5 +71,11 @@ public class ClientOnly {
     public static void stopUseKey() {
         Minecraft.getInstance().options.keyUse.setDown(false);
     }
+
+    public static void printInChat(MutableComponent text) {
+        Minecraft.getInstance().player.sendSystemMessage(text);
+    }
+
+
 
 }
