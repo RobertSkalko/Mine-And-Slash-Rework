@@ -48,7 +48,7 @@ public class HarvestPurpleChest extends LootChest {
     }
 
     public String locNameForLangFile() {
-        return "Harvest Blue Chest";
+        return "Jewel From Harvest";
     }
 
 }
