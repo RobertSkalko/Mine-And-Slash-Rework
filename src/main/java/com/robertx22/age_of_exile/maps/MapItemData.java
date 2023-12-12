@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSal
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.AffixData;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
@@ -15,6 +16,7 @@ import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipStatsFactory;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.library_of_exile.wrappers.ExileText;
@@ -187,8 +189,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
     }
 
 
-    private static void addAffixTypeToTooltip(MapItemData data, List<Component> tooltip,
-                                              AffectedEntities affected) {
+    private static void addAffixTypeToTooltip(MapItemData data, List<Component> tooltip, AffectedEntities affected) {
 
         List<MapAffixData> affixes = new ArrayList<>(data.getAllAffixesThatAffect(affected));
 
@@ -208,15 +209,20 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
         tooltip.add(str.withStyle(ChatFormatting.AQUA));
 
+        List<Component> preList = new ArrayList<>();
+
         for (MapAffixData affix : affixes) {
 
             for (ExactStatData statmod : affix.getAffix().getStats(affix.p, data.getLevel())) {
 
                 TooltipInfo info = new TooltipInfo();
-                tooltip.addAll(statmod.GetTooltipString(info));
+                preList.addAll(statmod.GetTooltipString(info));
             }
 
         }
+        List<Component> finalList = new TooltipStatsFactory(preList).buildNewTooltipsStats();
+        tooltip.addAll(finalList);
+
     }
 
 
