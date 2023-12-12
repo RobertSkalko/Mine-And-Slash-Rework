@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
+import com.robertx22.age_of_exile.database.data.stats.name_regex.StatNameRegex;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -9,6 +10,14 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
+/*
+    here is the detail of this aligner:                            this space is from the translate() in StatNameRegex.java, so they are all same.
+                                                                     ⬆
+        +3    Strength           Calc the max width           +3   |   Strength            add some black dot to      +3...|   Strength
+        +30%    Fire Damege     -------------------->         +30% |   Fire Damege         -------------------->      +30%.|   Fire Damege
+        +0.5%    Health                                       +0.5%|   Health               fill the space            +0.5%|   Health
+ */
 public class TooltipStatsFactory {
     List<String> list = new ArrayList<>();
     List<Integer> width = new ArrayList<>();
@@ -31,7 +40,14 @@ public class TooltipStatsFactory {
         for (String x : list) {
             Minecraft mc = Minecraft.getInstance();
             // Create a Matcher for finding patterns in the stats, this patterns will match the value, like +3, -20%.
-            Matcher matcherForValue = Pattern.compile("(?<![◆].{0,})([\\+\\-]\\S+)").matcher(x);
+            /*
+                this regex make sure the stat pattern is like:
+                    (something not spaces here, and must start from the beginning of line)(two spaces here, or sth, anyway it is from the StatNameRegex.java)(something not spaces here)
+                that means whether you use:
+                +3    Strength  or  Strength:    +3
+                they will be all good.
+            */
+            Matcher matcherForValue = Pattern.compile("^(\\S+)" + StatNameRegex.VALUEAndNAMESeparator + "(\\S+)").matcher(x);
             Matcher matcherForStatDesc = Pattern.compile("^ (\\[)").matcher(x);
 
             //that's so weird that the stat desc will lose its Format. I have to add for it at here.
@@ -78,7 +94,7 @@ public class TooltipStatsFactory {
                 mediaStatsList.set(j, replacedStats);
                 i++;
             }
-            //for the special stat.
+            //just add empty line for special stat, both up and down.
             if (Pattern.compile("◆ ").matcher(currentStat).find()){
                 int index = j ;
                 String previousLine = (index > 0) ? mediaStatsList.get(index - 1) : "";

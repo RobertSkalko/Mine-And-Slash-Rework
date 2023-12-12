@@ -8,7 +8,6 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.NumberUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.library_of_exile.utils.CLOC;
 import net.minecraft.ChatFormatting;
-import org.apache.commons.lang3.StringUtils;
 
 public abstract class StatNameRegex {
 
@@ -24,6 +23,8 @@ public abstract class StatNameRegex {
     public static String NAME = "STAT_NAME";
 
     public boolean addPlus = true;
+
+    public static String VALUEAndNAMESeparator = "  ";
 
     protected StatNameRegex setAddPlus(boolean bool) {
         this.addPlus = bool;
@@ -85,7 +86,7 @@ public abstract class StatNameRegex {
 
 
 
-        str = str.replace(VALUE, numberColor(format, stat, v1) + plusminus + v1s + perc + "  " + ChatFormatting.RESET + statColor(stat));
+        str = str.replace(VALUE, numberColor(format, stat, v1) + plusminus + v1s + perc + VALUEAndNAMESeparator + ChatFormatting.RESET + statColor(stat));
 
         String[] processedReplacement = StringUTIL.processStrings(add, stat.locName().getString());
 
