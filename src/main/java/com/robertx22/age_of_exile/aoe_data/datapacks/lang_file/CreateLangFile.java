@@ -1,14 +1,9 @@
 package com.robertx22.age_of_exile.aoe_data.datapacks.lang_file;
 
 import com.robertx22.age_of_exile.capability.player.data.PlayerBuffData;
-import com.robertx22.age_of_exile.database.data.loot_chest.*;
-import com.robertx22.age_of_exile.database.data.spell_school.AscendancyClass;
 import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import com.robertx22.age_of_exile.mechanics.harvest.loot.HarvestBlueChest;
-import com.robertx22.age_of_exile.mechanics.harvest.loot.HarvestGreenChest;
-import com.robertx22.age_of_exile.mechanics.harvest.loot.HarvestPurpleChest;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.localization.Formatter;
@@ -153,6 +148,7 @@ public class CreateLangFile {
         list.addAll(Arrays.asList(GemItem.GemType.values()));
         list.addAll(Arrays.asList(GemItem.GemRank.values()));
         list.addAll(Arrays.asList(PlayerBuffData.Type.values()));
+        list.addAll(Arrays.asList(ChestContent.chestTypeEnum.values()));
 
 
         HashMap<IAutoLocName.AutoLocGroup, List<IAutoLocName>> map = new HashMap<>();

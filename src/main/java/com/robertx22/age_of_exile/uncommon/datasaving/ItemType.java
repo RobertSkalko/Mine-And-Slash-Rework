@@ -29,7 +29,6 @@ public enum ItemType {
     public static MutableComponent getTooltipString(ItemType types) {
 
         MutableComponent comp = Words.UsableOn.locName()
-            .append(": ")
             .append(types.word.locName());
 
         comp.withStyle(ChatFormatting.LIGHT_PURPLE);

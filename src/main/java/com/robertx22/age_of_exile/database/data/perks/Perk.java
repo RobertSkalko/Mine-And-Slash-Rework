@@ -13,6 +13,7 @@ import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientTextureUtils;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipStatsAligner;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
@@ -85,7 +86,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
                 list.add(locName().withStyle(type.format));
             }
             if (type == PerkType.MAJOR) {
-                // to get rid of like 100 lines o flang file
+                // to get rid of like 100 lines of lang file
                 list.add(this.locName().withStyle(ChatFormatting.DARK_PURPLE));
                 // list.add(Component.empty());
 
@@ -106,10 +107,12 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
                     return d;
                 });
 
-                scaled.forEach(x -> list.addAll(x.GetTooltipString(info)));
+                //scaled.forEach(x -> list.addAll(x.GetTooltipString(info)));
 
             } else {
-                stats.forEach(x -> list.addAll(x.GetTooltipString(info)));
+                List<Component> preList = new ArrayList<>();
+                stats.forEach(x -> preList.addAll(x.GetTooltipString(info)));
+                list.addAll(new TooltipStatsAligner(preList).buildNewTooltipsStats());
             }
 
 

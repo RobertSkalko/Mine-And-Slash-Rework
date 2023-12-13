@@ -24,6 +24,8 @@ public abstract class StatNameRegex {
 
     public boolean addPlus = true;
 
+    public static String VALUEAndNAMESeparator = "  ";
+
     protected StatNameRegex setAddPlus(boolean bool) {
         this.addPlus = bool;
         return this;
@@ -83,7 +85,9 @@ public abstract class StatNameRegex {
         String str = statColor(stat) + getStatNameRegex(format, type, stat, v1);
 
 
-        str = str.replace(VALUE, numberColor(format, stat, v1) + plusminus + v1s + perc + " " + ChatFormatting.RESET + statColor(stat));
+
+        str = str.replace(VALUE, numberColor(format, stat, v1) + plusminus + v1s + perc + VALUEAndNAMESeparator + ChatFormatting.RESET + statColor(stat));
+
 
         String[] processedReplacement = StringUTIL.processStrings(add, stat.locName().getString());
 

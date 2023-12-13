@@ -13,6 +13,7 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipStatsAligner;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
@@ -65,8 +66,11 @@ public class GearTooltipUtils {
 
         if (info.useInDepthStats()) {
             if (gear.uniqueStats != null) {
+                //List<Component> finalList = new TooltipStatsFactory(gear.uniqueStats.GetTooltipString(info, gear)).buildNewTooltipsStats();
                 tip.addAll(gear.uniqueStats.GetTooltipString(info, gear));
             }
+
+            //List<Component> finalList = new TooltipStatsFactory(gear.affixes.GetTooltipString(info, gear)).buildNewTooltipsStats();
             tip.addAll(gear.affixes.GetTooltipString(info, gear));
             //tip.addAll(gear.imp.GetTooltipString(info, gear));
 
@@ -91,14 +95,18 @@ public class GearTooltipUtils {
 
         }
 
-        int n = 0;
+        List<Component> preProcessedList = new ArrayList<>();
+
         for (IGearPartTooltip part : list) {
             if (part != null) {
-                tip.addAll(part.GetTooltipString(info, gear));
-                tip.add(Component.literal(""));
+                preProcessedList.addAll(part.GetTooltipString(info, gear));
             }
-            n++;
         }
+
+        List<Component> finalStats = new TooltipStatsAligner(preProcessedList).buildNewTooltipsStats();
+        tip.addAll(finalStats);
+        //tip.addAll(preProcessedList);
+
 
         specialStats.forEach(x -> {
             x.GetTooltipString(info)

@@ -19,6 +19,7 @@ import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipStatsAligner;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import net.minecraft.network.chat.Component;
@@ -75,11 +76,12 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
 
         TooltipInfo info = new TooltipInfo(ctx.data);
 
+        List<Component> preList = new ArrayList<>();
         for (AffixData affix : affixes) {
-            for (Component c : affix.GetTooltipString(info, lvl)) {
-                ctx.tooltip.add(c);
-            }
+            preList.addAll(affix.GetTooltipString(info, lvl));
         }
+        List<Component> finalList = new TooltipStatsAligner(preList).buildNewTooltipsStats();
+        ctx.tooltip.addAll(finalList);
 
         ctx.tooltip.add(Component.literal(""));
 

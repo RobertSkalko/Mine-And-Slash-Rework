@@ -15,6 +15,7 @@ import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipStatsAligner;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.library_of_exile.wrappers.ExileText;
@@ -137,9 +138,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
         boolean addedExp = false;
         if (getBonusExpAmountInPercent() > 0) {
-            comp.append(Words.Exp.locName()
-                    .append(
-                            ": +" + this.getBonusExpAmountInPercent() + "%"));
+            comp.append(Itemtips.Exp.locName(this.getBonusExpAmountInPercent()));
             addedExp = true;
         }
 
@@ -148,9 +147,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                 comp.append(ChatFormatting.GRAY + ", ");
             }
 
-            comp.append(Words.Loot.locName()
-                    .append(ChatFormatting.YELLOW +
-                            ": +" + this.getBonusLootAmountInPercent() + "%"));
+            comp.append(Itemtips.Loot.locName(this.getBonusLootAmountInPercent()).withStyle(ChatFormatting.YELLOW));
         }
         comp.append(ChatFormatting.GRAY + ", ")
                 .append(Itemtips.TIER_TIP.locName().withStyle(ChatFormatting.GOLD)
@@ -187,8 +184,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
     }
 
 
-    private static void addAffixTypeToTooltip(MapItemData data, List<Component> tooltip,
-                                              AffectedEntities affected) {
+    private static void addAffixTypeToTooltip(MapItemData data, List<Component> tooltip, AffectedEntities affected) {
 
         List<MapAffixData> affixes = new ArrayList<>(data.getAllAffixesThatAffect(affected));
 
@@ -208,15 +204,20 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
         tooltip.add(str.withStyle(ChatFormatting.AQUA));
 
+        List<Component> preList = new ArrayList<>();
+
         for (MapAffixData affix : affixes) {
 
             for (ExactStatData statmod : affix.getAffix().getStats(affix.p, data.getLevel())) {
 
                 TooltipInfo info = new TooltipInfo();
-                tooltip.addAll(statmod.GetTooltipString(info));
+                preList.addAll(statmod.GetTooltipString(info));
             }
 
         }
+        List<Component> finalList = new TooltipStatsAligner(preList).buildNewTooltipsStats();
+        tooltip.addAll(finalList);
+
     }
 
 

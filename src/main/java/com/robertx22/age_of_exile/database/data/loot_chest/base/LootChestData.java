@@ -3,18 +3,17 @@ package com.robertx22.age_of_exile.database.data.loot_chest.base;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
-import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
+import com.robertx22.age_of_exile.uncommon.localization.ChestContent;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -84,7 +83,6 @@ public class LootChestData implements ICommonDataItem<GearRarity> {
     public void BuildTooltip(TooltipContext ctx) {
 
         var tip = ctx.tooltip;
-        MutableComponent type = Component.translatable(SlashRef.MODID + ".chest_type."+ getLootChest().GUID());
 
         tip.clear();
 
@@ -96,7 +94,7 @@ public class LootChestData implements ICommonDataItem<GearRarity> {
 
         tip.add(Component.empty());
 
-        tip.add(Itemtips.CHEST_CONTAINS.locName().append(type));
+        tip.add(Itemtips.CHEST_CONTAINS.locName().append(new ChestContent(getLootChest().GUID()).get().locName()));
 
         tip.add(Component.empty());
 
