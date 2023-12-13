@@ -12,7 +12,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.unit.InCalcStatData;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipStatsFactory;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipStatsAligner;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -73,7 +73,7 @@ public class CoreStat extends BaseDatapackStat implements ICoreStat {
         list.add(Gui.STATS_INFLUENCE.locName().withStyle(ChatFormatting.GREEN));
         List<Component> preList = new ArrayList<>();
         getMods(1).forEach(x -> preList.addAll(x.GetTooltipString(info)));
-        List<Component> finalList = new TooltipStatsFactory(preList).buildNewTooltipsStats();
+        List<Component> finalList = new TooltipStatsAligner(preList).buildNewTooltipsStats();
         list.addAll(finalList);
 
         list.add(ExileText.ofText("").get());

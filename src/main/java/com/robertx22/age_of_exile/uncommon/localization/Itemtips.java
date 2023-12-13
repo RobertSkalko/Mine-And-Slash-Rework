@@ -39,7 +39,7 @@ public enum Itemtips implements IAutoLocName {
     RUNE_ITEM_USAGE("Use to view craftable Runewords.\nSneak + Use to view all Runewords."),
     STONE_REPAIRE_DURABILITY("Repairs %1$s durability."),
     SOUL_CLEANER_USAGE_AND_WARNING("Click on items to remove their soul.\nThe item remains but the stats will be deleted."),
-    SOCKET_EXTRACTOR_USAGE("Click on gear to extract a gem."), Enchanted("Enchanted: "), OUTCOME_TIP("%1$s, Base Weight: %2$s");
+    SOCKET_EXTRACTOR_USAGE("Click on gear to extract a gem."), Enchanted("Enchanted: "), OUTCOME_TIP("%1$s, Base Weight: %2$s"), Exp("Exp: %1$s%%"), Loot("Loot: %1$s%%"),;
 
     private String localization = "";
 

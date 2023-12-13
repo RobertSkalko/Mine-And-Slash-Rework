@@ -13,7 +13,7 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipStatsFactory;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipStatsAligner;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
@@ -66,16 +66,12 @@ public class GearTooltipUtils {
 
         if (info.useInDepthStats()) {
             if (gear.uniqueStats != null) {
-                List<Component> preList = new ArrayList<>();
-                preList.addAll(gear.uniqueStats.GetTooltipString(info, gear));
-                List<Component> finalList = new TooltipStatsFactory(preList).buildNewTooltipsStats();
-                tip.addAll(finalList);
+                //List<Component> finalList = new TooltipStatsFactory(gear.uniqueStats.GetTooltipString(info, gear)).buildNewTooltipsStats();
+                tip.addAll(gear.uniqueStats.GetTooltipString(info, gear));
             }
 
-            List<Component> preList = new ArrayList<>();
-            preList.addAll(gear.affixes.GetTooltipString(info, gear));
-            List<Component> finalList = new TooltipStatsFactory(preList).buildNewTooltipsStats();
-            tip.addAll(finalList);
+            //List<Component> finalList = new TooltipStatsFactory(gear.affixes.GetTooltipString(info, gear)).buildNewTooltipsStats();
+            tip.addAll(gear.affixes.GetTooltipString(info, gear));
             //tip.addAll(gear.imp.GetTooltipString(info, gear));
 
 
@@ -107,7 +103,7 @@ public class GearTooltipUtils {
             }
         }
 
-        List<Component> finalStats = new TooltipStatsFactory(preProcessedList).buildNewTooltipsStats();
+        List<Component> finalStats = new TooltipStatsAligner(preProcessedList).buildNewTooltipsStats();
         tip.addAll(finalStats);
         //tip.addAll(preProcessedList);
 

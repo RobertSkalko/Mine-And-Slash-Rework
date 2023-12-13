@@ -15,16 +15,19 @@ import java.util.regex.Pattern;
     here is the detail of this aligner:                            this space is from the translate() in StatNameRegex.java, so they are all same.
                                                                      ⬆
         +3    Strength           Calc the max width           +3   |   Strength            add some black dot to      +3...|   Strength
-        +30%    Fire Damege     -------------------->         +30% |   Fire Damege         -------------------->      +30%.|   Fire Damege
+        +30%    Fire Damage     -------------------->         +30% |   Fire Damage         -------------------->      +30%.|   Fire Damage
         +0.5%    Health                                       +0.5%|   Health               fill the space            +0.5%|   Health
+
+        This aligner can only work properly when every single Stat string is given, otherwise it can't calculate the right width needed for alignment.
+
  */
-public class TooltipStatsFactory {
+public class TooltipStatsAligner {
     List<String> list = new ArrayList<>();
     List<Integer> width = new ArrayList<>();
     List<Integer> addTime = new ArrayList<>();
 
     // Constructor that takes a list of Components and extracts their string representations
-    public TooltipStatsFactory(List<Component> listInput) {
+    public TooltipStatsAligner(List<Component> listInput) {
         // Extract strings from Components and add them to the internal list
         listInput.forEach(x -> list.add(x.getString()));
     }

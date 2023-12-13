@@ -8,7 +8,6 @@ import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSal
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.AffixData;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
@@ -16,7 +15,7 @@ import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipStatsFactory;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipStatsAligner;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.library_of_exile.wrappers.ExileText;
@@ -139,9 +138,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
         boolean addedExp = false;
         if (getBonusExpAmountInPercent() > 0) {
-            comp.append(Words.Exp.locName()
-                    .append(
-                            ": +" + this.getBonusExpAmountInPercent() + "%"));
+            comp.append(Itemtips.Exp.locName(this.getBonusExpAmountInPercent()));
             addedExp = true;
         }
 
@@ -150,9 +147,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                 comp.append(ChatFormatting.GRAY + ", ");
             }
 
-            comp.append(Words.Loot.locName()
-                    .append(ChatFormatting.YELLOW +
-                            ": +" + this.getBonusLootAmountInPercent() + "%"));
+            comp.append(Itemtips.Loot.locName(this.getBonusLootAmountInPercent()).withStyle(ChatFormatting.YELLOW));
         }
         comp.append(ChatFormatting.GRAY + ", ")
                 .append(Itemtips.TIER_TIP.locName().withStyle(ChatFormatting.GOLD)
@@ -220,7 +215,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
             }
 
         }
-        List<Component> finalList = new TooltipStatsFactory(preList).buildNewTooltipsStats();
+        List<Component> finalList = new TooltipStatsAligner(preList).buildNewTooltipsStats();
         tooltip.addAll(finalList);
 
     }
