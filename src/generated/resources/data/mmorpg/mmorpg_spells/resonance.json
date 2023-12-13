@@ -33,16 +33,6 @@
                 "element": "Physical",
                 "value_calculation": "resonance"
               }
-            },
-            {
-              "type": "exile_effect",
-              "map": {
-                "chance": 10.0,
-                "count": 1.0,
-                "exile_potion_id": "negative/10",
-                "potion_action": "GIVE_STACKS",
-                "potion_dur": 120.0
-              }
             }
           ],
           "en_preds": [],

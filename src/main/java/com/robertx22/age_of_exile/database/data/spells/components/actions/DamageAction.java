@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.spells.components.actions;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
+import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEntity;
 import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
@@ -45,6 +46,9 @@ public class DamageAction extends SpellAction {
                 }
                 if (data.getOrDefault(MapField.DISABLE_KNOCKBACK, false)) {
                     dmg.data.setBoolean(EventData.DISABLE_KNOCKBACK, true);
+                }
+                if (ctx.sourceEntity instanceof SummonEntity) {
+                    dmg.petEntity = (LivingEntity) ctx.sourceEntity;
                 }
                 dmg.setElement(ele);
                 dmg.Activate();

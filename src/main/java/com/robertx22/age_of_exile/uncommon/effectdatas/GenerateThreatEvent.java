@@ -24,7 +24,9 @@ public class GenerateThreatEvent extends EffectEvent {
 
         int threat = (int) data.getNumber();
 
-        float distance = source.distanceTo(target);
+        //  float distance = source.distanceTo(target);
+
+        /*
 
         if (distance > 6) {
             threat *= 0.8F; // ranged do less threat
@@ -32,14 +34,13 @@ public class GenerateThreatEvent extends EffectEvent {
             threat *= 0.9F; // ranged do less threat
         }
 
+         */
+
         if (threat == 0) {
             return;
         }
 
-
-        Load.Unit(target)
-                .getThreat()
-                .addThreat(source, (Mob) target, threat);
+        Load.Unit(target).getThreat().addThreat(source, (Mob) target, threat);
     }
 
 }
