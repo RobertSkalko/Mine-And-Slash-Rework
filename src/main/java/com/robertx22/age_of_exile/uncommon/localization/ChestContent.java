@@ -3,15 +3,15 @@ package com.robertx22.age_of_exile.uncommon.localization;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 
-public class ChestType {
+public class ChestContent {
     public enum chestTypeEnum implements IAutoLocName {
         aura("Aura"),
         currency("Currency"),
         gear("Gear"),
         gem("Gem"),
-        harvest_blue_chest("Harvest Blue Chest"),
-        harvest_green_chest("Harvest Green Chest"),
-        harvest_purple_chest("Harvest Purple Chest"),
+        harvest_blue_chest("Gear From Harvest"),
+        harvest_green_chest("Currency From Harvest"),
+        harvest_purple_chest("Jewel From Harvest"),
         map("Map"),
         rune("Rune"),
         support_gem("Support Gem");
@@ -30,12 +30,12 @@ public class ChestType {
 
         @Override
         public AutoLocGroup locNameGroup() {
-            return AutoLocGroup.Misc;
+            return AutoLocGroup.Lootboxes;
         }
 
         @Override
         public String locNameLangFileGUID() {
-            return SlashRef.MODID + ".chest_type." + getName();
+            return SlashRef.MODID + ".chest_content." + getName();
         }
 
         @Override
@@ -51,7 +51,7 @@ public class ChestType {
 
     private final String chestType;
 
-    public ChestType(String type) {
+    public ChestContent(String type) {
         this.chestType = type;
     }
 
