@@ -63,7 +63,7 @@ public class TooltipStatsAligner {
                 +3    Strength  or  Strength:    +3
                 they will be all good.
             */
-            Matcher matcherForValue = Pattern.compile("^(\\S+)" + StatNameRegex.VALUEAndNAMESeparator + "(\\S+)").matcher(x);
+            Matcher matcherForValue = Pattern.compile("^([^◆\\s]+)" + StatNameRegex.VALUEAndNAMESeparator + "(\\S+)").matcher(x);
             Matcher matcherForStatDesc = Pattern.compile("^ (\\[)").matcher(x);
 
             //that's so weird that the stat desc will lose its Format. I have to add for it at here.
@@ -82,7 +82,7 @@ public class TooltipStatsAligner {
 
                 // Replace the first occurrence of the pattern with a placeholder.
                 //no need to add formatter here.
-                mediaStatsList.add(Pattern.compile("([\\+\\-]\\S+)").matcher(x).replaceFirst("$1replacement_seg"));
+                mediaStatsList.add(Pattern.compile("^([^◆\\s]+)").matcher(x).replaceFirst("$1replacement_seg"));
             } else {
                 mediaStatsList.add(x);
             }
