@@ -27,6 +27,8 @@ public class TooltipStatsAligner {
     List<Integer> width = new ArrayList<>();
     List<Integer> addTime = new ArrayList<>();
 
+    Boolean addEmptyLine = true;
+
 
     List<Component> original = new ArrayList<>();
 
@@ -37,6 +39,15 @@ public class TooltipStatsAligner {
         listInput.forEach(x -> list.add(x.getString()));
 
         this.original = listInput;
+    }
+
+    public TooltipStatsAligner(List<Component> listInput, Boolean addEmptyLine) {
+        // Extract strings from Components and add them to the internal list
+        listInput.forEach(x -> list.add(x.getString()));
+
+        this.original = listInput;
+
+        this.addEmptyLine = addEmptyLine;
     }
 
 
@@ -126,8 +137,8 @@ public class TooltipStatsAligner {
             }
 
         }
-        if (!mediaStatsList.isEmpty()) {// not empty, sometime it will.
-            if (!mediaStatsList.get(mediaStatsList.size() - 1).equals("")) {// check if the last line is emty line, if it is then dont add
+        if (!mediaStatsList.isEmpty() && addEmptyLine) {// not empty, sometime it will.
+            if (!mediaStatsList.get(mediaStatsList.size() - 1).equals("")) {// check if the last line is empty line, if it is then dont add
                 if (mediaStatsList.size() > 1)
                     mediaStatsList.add("");// if there is only one stat in mediaStatsList, like most of the talents, just dont add, cuz it will be so weird.
             }
