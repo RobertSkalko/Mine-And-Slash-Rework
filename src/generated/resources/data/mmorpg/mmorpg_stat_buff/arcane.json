@@ -5,7 +5,7 @@
       "type": "FLAT",
       "max": 25.0,
       "min": 5.0,
-      "stat": "spell_atk_style_dmg"
+      "stat": "magic_spell_dmg"
     }
   ]
 }

@@ -149,7 +149,8 @@
       "area",
       "heal"
     ],
-    "times_to_cast": 1
+    "times_to_cast": 1,
+    "tracking_radius": 5
   },
   "default_lvl": 0,
   "disabled_dims": [],
