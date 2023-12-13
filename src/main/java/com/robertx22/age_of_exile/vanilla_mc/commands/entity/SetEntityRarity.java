@@ -9,6 +9,8 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.world.entity.Entity;
 
+import java.util.Collection;
+
 import static net.minecraft.commands.Commands.argument;
 import static net.minecraft.commands.Commands.literal;
 
@@ -23,18 +25,21 @@ public class SetEntityRarity {
                                 .then(literal("entity")
                                         .then(literal("rarity")
                                                 .requires(e -> e.hasPermission(2))
-                                                .then(argument("target", EntityArgument.entity())
+                                                .then(argument("target", EntityArgument.entities())
                                                         .then(argument("rarity", StringArgumentType.string())
-                                                                .executes(e -> execute(e.getSource(), EntityArgument.getEntity(e, "target"), StringArgumentType
+                                                                .executes(e -> execute(e.getSource(), EntityArgument.getEntities(e, "target"), StringArgumentType
                                                                         .getString(e, "rarity")))))))));
     }
 
-    private static int execute(CommandSourceStack commandSource, Entity player,
-                               String rarity) {
+    private static int execute(CommandSourceStack commandSource, Collection<? extends Entity> entities, String rarity) {
 
-        EntityData data = Load.Unit(player);
+        for (Entity en : entities) {
+            EntityData data = Load.Unit(en);
 
-        data.setRarity(rarity);
+            data.setRarity(rarity);
+            data.trySync();
+        }
+
 
         return 0;
     }

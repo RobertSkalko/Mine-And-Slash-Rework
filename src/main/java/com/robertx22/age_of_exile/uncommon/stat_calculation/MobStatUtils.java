@@ -4,7 +4,7 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.EntityConfig;
-import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
+import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEntity;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.SummonStat;
@@ -46,7 +46,7 @@ public class MobStatUtils {
         if (caster instanceof Player player) {
             var spell = en.getSourceSpell();
             var data = Load.player(player).getSpellUnitStats(spell);
-            
+
             for (Map.Entry<String, StatData> e : data.getStats().stats.entrySet()) {
                 if (e.getValue().GetStat() instanceof SummonStat sstat) {
                     stats.add(sstat.giveToSummon(e.getValue()));
@@ -165,11 +165,11 @@ public class MobStatUtils {
         List<StatContext> list = new ArrayList<>();
         List<ExactStatData> stats = new ArrayList<>();
 
-        GearRarity rar = unitdata.getMobRarity();
+        MobRarity rar = unitdata.getMobRarity();
 
         int lvl = unitdata.getLevel();
 
-        float hpToAdd = EntityUtils.getVanillaMaxHealth(en) * rar.mob.ExtraHealthMulti();
+        float hpToAdd = EntityUtils.getVanillaMaxHealth(en) * rar.ExtraHealthMulti();
 
         hpToAdd += (ServerContainer.get().EXTRA_MOB_STATS_PER_LEVEL.get() * lvl) * hpToAdd;
 
@@ -186,12 +186,12 @@ public class MobStatUtils {
 
         stats.add(ExactStatData.scaleTo(1, ModType.FLAT, Stats.ACCURACY.get()
                 .GUID(), lvl));
-        stats.add(ExactStatData.scaleTo(10 * rar.mob.StatMultiplier(), ModType.FLAT, Armor.getInstance()
+        stats.add(ExactStatData.scaleTo(10 * rar.StatMultiplier(), ModType.FLAT, Armor.getInstance()
                 .GUID(), lvl));
-        stats.add(ExactStatData.noScaling(10 * rar.mob.StatMultiplier(), ModType.FLAT, new ElementalResist(Elements.Elemental)
+        stats.add(ExactStatData.noScaling(10 * rar.StatMultiplier(), ModType.FLAT, new ElementalResist(Elements.Elemental)
                 .GUID()));
 
-        stats.add(ExactStatData.scaleTo(5 * rar.mob.DamageMultiplier(), ModType.FLAT, Stats.CRIT_CHANCE.get()
+        stats.add(ExactStatData.scaleTo(5 * rar.DamageMultiplier(), ModType.FLAT, Stats.CRIT_CHANCE.get()
                 .GUID(), lvl));
 
         stats.add(ExactStatData.scaleTo(-25, ModType.FLAT, SkillDamage.getInstance()

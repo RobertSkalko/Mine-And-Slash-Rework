@@ -238,7 +238,7 @@ public class LootInfo {
             multis.add(LootUtils.getMobHealthBasedLootMulti(mobData, mobKilled));
             multis.add((float) ExileDB.getEntityConfig(mobKilled, this.mobData).loot_multi);
             multis.add(mobData.getUnit().getCalculatedStat(ExtraMobDropsStat.getInstance()).getMultiplier());
-            multis.add(mobData.getMobRarity().mob.LootMultiplier());
+            multis.add(mobData.getMobRarity().LootMultiplier());
         }
 
         if (this.playerEntityData != null) {

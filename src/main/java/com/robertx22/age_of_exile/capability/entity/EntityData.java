@@ -8,7 +8,6 @@ import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceC
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
-import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
@@ -448,16 +447,8 @@ public class EntityData implements ICap, INeededForClient {
         return uuid;
     }
 
-    public GearRarity getMobRarity() {
-
-
-        String rar = rarity;
-
-        if (!ExileDB.GearRarities()
-                .isRegistered(rar)) {
-            rar = IRarity.COMMON_ID;
-        }
-        return ExileDB.GearRarities().get(rar);
+    public MobRarity getMobRarity() {
+        return ExileDB.MobRarities().get(rarity);
     }
 
     public void setUUID(UUID id) {
@@ -472,7 +463,7 @@ public class EntityData implements ICap, INeededForClient {
 
         } else {
 
-            GearRarity rarity = getMobRarity();
+            MobRarity rarity = getMobRarity();
 
             ChatFormatting rarformat = rarity.textFormatting();
 
@@ -569,21 +560,6 @@ public class EntityData implements ICap, INeededForClient {
         }
     }
 
-    public boolean increaseRarity() {
-
-        GearRarity rar = getMobRarity();
-
-        if (rar.hasHigherRarity()) {
-            rarity = rar.getHigherRarity()
-                    .GUID();
-            this.equipsChanged = true;
-            this.shouldSync = true;
-            this.forceRecalculateStats();
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     public int getSyncedMaxHealth() {
         return this.maxHealth;
@@ -635,7 +611,7 @@ public class EntityData implements ICap, INeededForClient {
 
 
     public float getMobBaseDamage() {
-        MobRarity rar = getMobRarity().mob;
+        MobRarity rar = getMobRarity();
 
         float multi = (float) (ServerContainer.get().VANILLA_MOB_DMG_AS_EXILE_DMG.get().floatValue());
 
@@ -652,13 +628,13 @@ public class EntityData implements ICap, INeededForClient {
 
     public void mobBasicAttack(AttackInformation data) {
 
-        GearRarity rar = getMobRarity();
+        MobRarity rar = getMobRarity();
 
         float multi = (float) (ServerContainer.get().VANILLA_MOB_DMG_AS_EXILE_DMG.get().floatValue());
 
         float num = (data.getAmount() * 0.33F) + 8;
 
-        num *= multi * rar.mob.DamageMultiplier();
+        num *= multi * rar.DamageMultiplier();
 
         num *= ExileDB.getEntityConfig(entity, this).dmg_multi;
 

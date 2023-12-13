@@ -15,15 +15,6 @@
   "max_spell_links": 3,
   "min_affixes": 3,
   "min_lvl": 10,
-  "mob": {
-    "affixes": 1,
-    "dmg_multi": 1.75,
-    "exp_multi": 1.5,
-    "extra_hp_multi": 2.5,
-    "loot_multi": 1.5,
-    "min_lvl": 3,
-    "stat_multi": 2.0
-  },
   "pot": {
     "multi": 1.5,
     "total": 100

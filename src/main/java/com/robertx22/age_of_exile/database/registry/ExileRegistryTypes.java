@@ -19,6 +19,7 @@ import com.robertx22.age_of_exile.database.data.profession.Profession;
 import com.robertx22.age_of_exile.database.data.profession.ProfessionRecipe;
 import com.robertx22.age_of_exile.database.data.profession.buffs.StatBuff;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
+import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.database.data.runewords.RuneWord;
 import com.robertx22.age_of_exile.database.data.spell_school.AscendancyClass;
@@ -93,6 +94,7 @@ public class ExileRegistryTypes {
     public static ExileRegistryType STAT_BUFF = ExileRegistryType.register(SlashRef.MODID, "stat_buff", 36, StatBuff.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType AUTO_ITEM = ExileRegistryType.register(SlashRef.MODID, "auto_item", 37, AutoItem.SERIALIZER, SyncTime.NEVER);
     public static ExileRegistryType CUSTOM_ITEM = ExileRegistryType.register(SlashRef.MODID, "custom_item", 38, CustomItem.SERIALIZER, SyncTime.NEVER);
+    public static ExileRegistryType MOB_RARITY = ExileRegistryType.register(SlashRef.MODID, "mob_rarity", 39, MobRarity.SERIALIZER, SyncTime.ON_LOGIN);
 
 
 }

@@ -47,7 +47,6 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     public int item_model_data_num = -1;
     public MinMax stat_percents = new MinMax(0, 0);
     public Potential pot = new Potential(100, 0.5F);
-    public MobRarity mob = new MobRarity();
     public int min_affixes = 0;
     public int max_sockets = 3;
     public int socket_chance = 25;

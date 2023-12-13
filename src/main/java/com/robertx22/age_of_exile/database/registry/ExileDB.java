@@ -24,6 +24,7 @@ import com.robertx22.age_of_exile.database.data.profession.Profession;
 import com.robertx22.age_of_exile.database.data.profession.ProfessionRecipe;
 import com.robertx22.age_of_exile.database.data.profession.buffs.StatBuff;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
+import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.database.data.runewords.RuneWord;
 import com.robertx22.age_of_exile.database.data.spell_school.AscendancyClass;
@@ -155,6 +156,9 @@ public class ExileDB {
         return (RarityRegistryContainer<GearRarity>) Database.getRegistry(ExileRegistryTypes.GEAR_RARITY);
     }
 
+    public static ExileRegistryContainer<MobRarity> MobRarities() {
+        return Database.getRegistry(ExileRegistryTypes.MOB_RARITY);
+    }
 
     public static ExileRegistryContainer<BaseGearType> GearTypes() {
         return Database.getRegistry(ExileRegistryTypes.GEAR_TYPE);

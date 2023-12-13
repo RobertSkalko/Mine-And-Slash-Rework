@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.saveclasses.unit;
 
 import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
-import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
+import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 
 import java.util.ArrayList;
@@ -30,9 +30,9 @@ public class MobData {
         return Arrays.asList();
     }
 
-    public void randomizeAffixes(GearRarity rarity) {
+    public void randomizeAffixes(MobRarity rarity) {
 
-        int amount = rarity.mob.affixes;
+        int amount = rarity.affixes;
 
         this.affixes.clear();
 

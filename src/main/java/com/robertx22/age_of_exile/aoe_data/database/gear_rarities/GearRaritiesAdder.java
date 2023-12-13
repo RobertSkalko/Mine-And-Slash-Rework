@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.aoe_data.database.gear_rarities;
 
 import com.robertx22.age_of_exile.database.data.MinMax;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
-import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
@@ -15,7 +14,6 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         GearRarity common = new GearRarity().edit(x -> {
             x.favor_loot_multi = 0.75F;
             x.favor_needed = 0;
-            x.mob = MobRarity.of(0, 0, 0);
             x.min_affixes = 1;
             x.weight = 5000;
             x.item_tier_power = 1;
@@ -34,7 +32,6 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         GearRarity uncommon = new GearRarity().edit(x -> {
             x.favor_loot_multi = 0.9F;
             x.favor_needed = 50;
-            x.mob = MobRarity.of(0, 0.25F, 0);
             x.max_sockets = 1;
             x.socket_chance = 5;
             x.max_spell_links = 2;
@@ -56,7 +53,6 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
             x.favor_loot_multi = 1;
             x.favor_needed = 100;
-            x.mob = MobRarity.of(3, 1, 1);
             x.max_sockets = 2;
             x.socket_chance = 15;
             x.max_spell_links = 3;
@@ -80,7 +76,6 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
             x.favor_loot_multi = 1.05F;
             x.favor_needed = 250;
-            x.mob = MobRarity.of(20, 2, 1);
             x.max_sockets = 3;
             x.socket_chance = 20;
             x.min_lvl = 25;
@@ -104,7 +99,6 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
             x.favor_loot_multi = 1.2F;
             x.favor_needed = 500;
-            x.mob = MobRarity.of(40, 4, 2);
             x.max_sockets = 3;
             x.socket_chance = 30;
             x.max_spell_links = 5;
@@ -129,7 +123,6 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
             x.favor_loot_multi = 1.25F;
             x.favor_needed = 1000;
-            x.mob = MobRarity.of(50, 8, 3);
             x.max_sockets = 3;
             x.min_lvl = 75;
             x.max_spell_links = 5;
@@ -149,7 +142,6 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity unique = new GearRarity().edit(x -> {
-            x.mob = MobRarity.of(25, 10, 3);
             x.max_sockets = 3;
             x.socket_chance = 20;
             x.pot = new GearRarity.Potential(100, 1);
@@ -166,7 +158,6 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity runeword = new GearRarity().edit(x -> {
-            x.mob = MobRarity.of(50, 10, 3);
             x.max_sockets = 3;
             x.socket_chance = 50;
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;

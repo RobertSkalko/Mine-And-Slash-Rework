@@ -25,10 +25,8 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
-import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.MapManager;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
@@ -166,32 +164,6 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     }
 
 
-    public String getSummonRarityPerLevel(Player p) {
-
-        try {
-            int lvl = Load.player(p).spellCastingData.getSpellData(GUID()).rank;
-
-            if (lvl < 2) {
-                return IRarity.COMMON_ID;
-            }
-            if (lvl < 4) {
-                return IRarity.UNCOMMON;
-            }
-            if (lvl < 6) {
-                return IRarity.RARE_ID;
-            }
-            if (lvl < 8) {
-                return IRarity.EPIC_ID;
-            }
-            if (lvl < 14) {
-                return IRarity.LEGENDARY_ID;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return IRarity.MYTHIC_ID;
-    }
-
     public void cast(SpellCastContext ctx) {
 
         LivingEntity caster = ctx.caster;
@@ -249,19 +221,19 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         return (int) ctx.event.data.getNumber(EventData.ENERGY_COST).number;
     }
 
-    private MutableComponent getMutabletags(Iterator<?> iterator, MutableComponent separator){
+    private MutableComponent getMutabletags(Iterator<?> iterator, MutableComponent separator) {
         if (separator == null) {
             separator = ExileText.ofText("").get();
         }
 
         ExileText Etext = ExileText.emptyLine();
-            while (iterator.hasNext()) {
-                Etext.append((MutableComponent) iterator.next());
-                if (iterator.hasNext()) {
-                    Etext.append(separator);
-                }
+        while (iterator.hasNext()) {
+            Etext.append((MutableComponent) iterator.next());
+            if (iterator.hasNext()) {
+                Etext.append(separator);
             }
-            return Etext.get();
+        }
+        return Etext.get();
     }
 
     public final List<Component> GetTooltipString(TooltipInfo info) {

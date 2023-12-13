@@ -1,15 +1,14 @@
 package com.robertx22.age_of_exile.database.data.spells.components.actions;
 
 import com.robertx22.age_of_exile.aoe_data.database.spells.SummonType;
-import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEntity;
-import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import net.minecraft.server.level.ServerLevel;
@@ -58,16 +57,12 @@ public class SummonPetAction extends SpellAction {
 
             Load.Unit(en).summonedPetData.setup(ctx.calculatedSpellData.getSpell(), duration);
 
-            String rarid = ctx.calculatedSpellData.getSpell().getSummonRarityPerLevel((Player) ctx.caster);
-
-            GearRarity rar = ExileDB.GearRarities().get(rarid);
 
             Load.Unit(en).SetMobLevelAtSpawn((Player) ctx.caster);
 
-
             Load.Unit(en).setLevel(Load.Unit(ctx.caster).getLevel());
 
-            Load.Unit(en).setRarity(rar.GUID());
+            Load.Unit(en).setRarity(IRarity.SUMMON_ID);
 
 
             ctx.world.addFreshEntity(en);

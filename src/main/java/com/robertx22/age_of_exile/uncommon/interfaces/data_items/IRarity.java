@@ -31,5 +31,6 @@ public interface IRarity {
 
     String UNIQUE_ID = "unique";
     String RUNEWORD_ID = "runeword";
+    String SUMMON_ID = "summon";
 
 }
