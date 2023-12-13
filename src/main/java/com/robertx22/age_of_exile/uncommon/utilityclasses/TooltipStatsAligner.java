@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
+import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.stats.name_regex.StatNameRegex;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -26,15 +27,27 @@ public class TooltipStatsAligner {
     List<Integer> width = new ArrayList<>();
     List<Integer> addTime = new ArrayList<>();
 
+
+    List<Component> original = new ArrayList<>();
+
+
     // Constructor that takes a list of Components and extracts their string representations
     public TooltipStatsAligner(List<Component> listInput) {
         // Extract strings from Components and add them to the internal list
         listInput.forEach(x -> list.add(x.getString()));
+
+        this.original = listInput;
     }
+
 
     // Build new tooltips
     //This method manipulate the stats part in tooltips as a whole, then Iterate it to get info with keeping the same tooltips order.
     public List<Component> buildNewTooltipsStats() {
+
+        if (!ClientConfigs.getConfig().ALIGN_STAT_TOOLTIPS.get()) {
+            return original;
+        }
+
         // List to store the modified strings
         List<String> mediaStatsList = new ArrayList<>();
         List<Component> finalStatsList = new ArrayList<>();
@@ -54,7 +67,7 @@ public class TooltipStatsAligner {
             Matcher matcherForStatDesc = Pattern.compile("^ (\\[)").matcher(x);
 
             //that's so weird that the stat desc will lose its Format. I have to add for it at here.
-            if (matcherForStatDesc.find()){
+            if (matcherForStatDesc.find()) {
                 mediaStatsList.add(ChatFormatting.BLUE + matcherForStatDesc.replaceFirst("$1"));
                 continue;
             }
@@ -89,7 +102,7 @@ public class TooltipStatsAligner {
 
             if (currentStat.equals("")) continue;
 
-            if (Pattern.compile("replacement_seg").matcher(currentStat).find()){
+            if (Pattern.compile("replacement_seg").matcher(currentStat).find()) {
                 // Generate a string to replace the placeholder, based on the increment count
                 String stringUsedToReplace = ChatFormatting.BLACK + ".".repeat(currentAddTime) + ChatFormatting.RESET;
                 // Replace the placeholder with the generated string and create a new Component
@@ -98,8 +111,8 @@ public class TooltipStatsAligner {
                 i++;
             }
             //just add empty line for special stat, both up and down.
-            if (Pattern.compile("◆ ").matcher(currentStat).find()){
-                int index = j ;
+            if (Pattern.compile("◆ ").matcher(currentStat).find()) {
+                int index = j;
                 String previousLine = (index > 0) ? mediaStatsList.get(index - 1) : "";
                 String nextLine = (index < mediaStatsList.size() - 1) ? mediaStatsList.get(index + 1) : "";
                 if (!previousLine.isEmpty()) {
@@ -115,7 +128,8 @@ public class TooltipStatsAligner {
         }
         if (!mediaStatsList.isEmpty()) {// not empty, sometime it will.
             if (!mediaStatsList.get(mediaStatsList.size() - 1).equals("")) {// check if the last line is emty line, if it is then dont add
-                if (mediaStatsList.size() > 1) mediaStatsList.add("");// if there is only one stat in mediaStatsList, like most of the talents, just dont add, cuz it will be so weird.
+                if (mediaStatsList.size() > 1)
+                    mediaStatsList.add("");// if there is only one stat in mediaStatsList, like most of the talents, just dont add, cuz it will be so weird.
             }
         }
         mediaStatsList.forEach(x -> finalStatsList.add(Component.literal(x)));

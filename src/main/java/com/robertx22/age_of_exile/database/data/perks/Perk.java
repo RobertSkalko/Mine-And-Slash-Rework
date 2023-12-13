@@ -107,7 +107,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
                     return d;
                 });
 
-                //scaled.forEach(x -> list.addAll(x.GetTooltipString(info)));
+                scaled.forEach(x -> list.addAll(x.GetTooltipString(info)));
 
             } else {
                 List<Component> preList = new ArrayList<>();
