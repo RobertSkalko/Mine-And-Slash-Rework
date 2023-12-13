@@ -53,6 +53,6 @@ public abstract class LootChest implements ExileRegistry<LootChest>, IAutoLocNam
 
     @Override
     public String locNameLangFileGUID() {
-        return SlashRef.MODID + ".chest_content." + GUID();
+        return SlashRef.MODID + ".chest_type." + GUID();
     }
 }

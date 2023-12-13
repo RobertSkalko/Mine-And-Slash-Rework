@@ -49,7 +49,7 @@ public class HarvestBlueChest extends LootChest {
     }
     @Override
     public String locNameForLangFile() {
-        return "Gear From Harvest";
+        return "Harvest Blue Chest";
     }
 
 }
