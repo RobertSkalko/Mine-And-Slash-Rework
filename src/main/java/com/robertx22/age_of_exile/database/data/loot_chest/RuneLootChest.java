@@ -8,7 +8,6 @@ import com.robertx22.age_of_exile.loot.blueprints.RuneBlueprint;
 import com.robertx22.age_of_exile.loot.req.DropRequirement;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -47,8 +46,5 @@ public class RuneLootChest extends LootChest {
         return (int) (ServerContainer.get().RUNE_DROPRATE.get() * 100);
     }
 
-    @Override
-    public String locNameForLangFile() {
-        return StringUTIL.capitalise(GUID());
-    }
+
 }

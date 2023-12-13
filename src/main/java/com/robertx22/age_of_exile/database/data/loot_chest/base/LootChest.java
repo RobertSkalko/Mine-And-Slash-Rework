@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.database.data.loot_chest.base;
 
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.loot.req.DropRequirement;
-import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.library_of_exile.registry.ExileRegistry;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
@@ -13,7 +12,7 @@ import net.minecraft.world.item.Items;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class LootChest implements ExileRegistry<LootChest>, IAutoLocName {
+public abstract class LootChest implements ExileRegistry<LootChest> {
 
     public abstract ItemStack generateOne(LootChestData data);
 
@@ -44,15 +43,5 @@ public abstract class LootChest implements ExileRegistry<LootChest>, IAutoLocNam
     @Override
     public ExileRegistryType getExileRegistryType() {
         return ExileRegistryTypes.LOOT_CHEST;
-    }
-
-    @Override
-    public AutoLocGroup locNameGroup() {
-        return AutoLocGroup.Lootboxes;
-    }
-
-    @Override
-    public String locNameLangFileGUID() {
-        return SlashRef.MODID + ".chest_type." + GUID();
     }
 }

@@ -85,7 +85,7 @@ public class LootChestData implements ICommonDataItem<GearRarity> {
     public void BuildTooltip(TooltipContext ctx) {
 
         var tip = ctx.tooltip;
-        MutableComponent type = getLootChest().locName();
+        String type = getLootChest().GUID().substring(0,1).toUpperCase() + getLootChest().GUID().substring(1);
 
         tip.clear();
 
@@ -97,7 +97,7 @@ public class LootChestData implements ICommonDataItem<GearRarity> {
 
         tip.add(Component.empty());
 
-        tip.add(Itemtips.CHEST_CONTAINS.locName().append(type));
+        tip.add(Itemtips.CHEST_CONTAINS.locName().append(new ChestType(type).get().locName()));
 
         tip.add(Component.empty());
 

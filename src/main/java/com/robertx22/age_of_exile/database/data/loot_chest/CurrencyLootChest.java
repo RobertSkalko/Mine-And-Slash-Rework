@@ -9,7 +9,6 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.req.DropRequirement;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -52,9 +51,5 @@ public class CurrencyLootChest extends LootChest {
         return (int) (ServerContainer.get().CURRENCY_DROPRATE.get() * 100);
     }
 
-    @Override
-    public String locNameForLangFile() {
-        return StringUTIL.capitalise(GUID());
-    }
 
 }

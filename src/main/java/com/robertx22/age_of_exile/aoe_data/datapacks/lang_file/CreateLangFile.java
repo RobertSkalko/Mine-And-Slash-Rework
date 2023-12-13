@@ -153,16 +153,7 @@ public class CreateLangFile {
         list.addAll(Arrays.asList(GemItem.GemType.values()));
         list.addAll(Arrays.asList(GemItem.GemRank.values()));
         list.addAll(Arrays.asList(PlayerBuffData.Type.values()));
-        list.addAll(Arrays.asList(new CurrencyLootChest()));
-        list.addAll(Arrays.asList(new GearLootChest()));
-        list.addAll(Arrays.asList(new MapLootChest()));
-        list.addAll(Arrays.asList(new AuraLootChest()));
-        list.addAll(Arrays.asList(new SupportLootChest()));
-        list.addAll(Arrays.asList(new GemLootChest()));
-        list.addAll(Arrays.asList(new RuneLootChest()));
-        list.addAll(Arrays.asList(new HarvestPurpleChest()));
-        list.addAll(Arrays.asList(new HarvestBlueChest()));
-        list.addAll(Arrays.asList(new HarvestGreenChest()));
+        list.addAll(Arrays.asList(ChestType.chestTypeEnum.values()));
 
 
         HashMap<IAutoLocName.AutoLocGroup, List<IAutoLocName>> map = new HashMap<>();
