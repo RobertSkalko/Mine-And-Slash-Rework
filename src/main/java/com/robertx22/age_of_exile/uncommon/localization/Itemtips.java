@@ -28,7 +28,7 @@ public enum Itemtips implements IAutoLocName {
 
     AURA_RESERVATION("Aura Reservation: "),
     REMAINING_AURA_CAPACITY("Remaining Aura Capacity: "),
-    SUPPORT_GEM_COST("Resource Cost Multiplier: %2$s%%"),
+    SUPPORT_GEM_COST("Resource Cost Multiplier: %1$s%%"),
     SUPPORT_GEM_ONLY_ONE("Only One Allowed: " ),
     SOUL_EXTRACTOR_TIP("Click on items to extract their soul.\nWorks only on that rarity.\nDeletes the Item in the process."),
 
