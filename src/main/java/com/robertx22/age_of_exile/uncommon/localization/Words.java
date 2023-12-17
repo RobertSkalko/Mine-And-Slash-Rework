@@ -156,8 +156,7 @@ public enum Words implements IAutoLocName {
     MULTIPLICATIVE_DAMAGE_LESS("Less"),
     INCREASE_PERCENT_STAT("Extra "),
     EMPTY_BOX("Box"),
-    LEVEL_UP_TYPE_PLAYER("Player"),
-    SPELL_TAG_SPARATOR(", ");
+    LEVEL_UP_TYPE_PLAYER("Player");
 
 
     private String localization = "";
