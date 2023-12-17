@@ -66,12 +66,12 @@ public class GearTooltipUtils {
 
         if (info.useInDepthStats()) {
             if (gear.uniqueStats != null) {
-                //List<Component> finalList = new TooltipStatsFactory(gear.uniqueStats.GetTooltipString(info, gear)).buildNewTooltipsStats();
-                tip.addAll(gear.uniqueStats.GetTooltipString(info, gear));
+                List<Component> finalList = new TooltipStatsAligner(gear.uniqueStats.GetTooltipString(info, gear)).buildNewTooltipsStats();
+                tip.addAll(finalList);
             }
 
-            //List<Component> finalList = new TooltipStatsFactory(gear.affixes.GetTooltipString(info, gear)).buildNewTooltipsStats();
-            tip.addAll(gear.affixes.GetTooltipString(info, gear));
+            List<Component> finalList = new TooltipStatsAligner(gear.affixes.GetTooltipString(info, gear)).buildNewTooltipsStats();
+            tip.addAll(finalList);
             //tip.addAll(gear.imp.GetTooltipString(info, gear));
 
 

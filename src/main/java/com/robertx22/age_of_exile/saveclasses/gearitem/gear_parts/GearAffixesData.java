@@ -6,7 +6,11 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPartToolt
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
+import com.robertx22.age_of_exile.uncommon.localization.Words;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.RandomUtils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
@@ -48,11 +52,43 @@ public class GearAffixesData implements IGearPartTooltip {
         this.cor.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), info)));
         return list;
     }
+    public List<TooltipStatWithContext> getSufStatsWithCtx(GearItemData gear, TooltipInfo info) {
+        List<TooltipStatWithContext> list = new ArrayList<>();
+        this.suf.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), info)));
+        return list;
+    }
+    public List<TooltipStatWithContext> getPreStatsWithCtx(GearItemData gear, TooltipInfo info) {
+        List<TooltipStatWithContext> list = new ArrayList<>();
+        this.pre.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), info)));
+        return list;
+    }
+    public List<TooltipStatWithContext> getCorStatsWithCtx(GearItemData gear, TooltipInfo info) {
+        List<TooltipStatWithContext> list = new ArrayList<>();
+        this.cor.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), info)));
+        return list;
+    }
 
     @Override
     public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {
         List<Component> list = new ArrayList<Component>();
-        getAllStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
+        if (!getPreStatsWithCtx(gear, info).isEmpty()){
+            list.add(Itemtips.PREFIX_STATS.locName());
+            getPreStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
+            TooltipUtils.addEmpty(list);
+        }
+
+        if (!getCorStatsWithCtx(gear, info).isEmpty()){
+            list.add(Itemtips.COR_STATS.locName());
+            getCorStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
+            TooltipUtils.addEmpty(list);
+        }
+
+        if (!getSufStatsWithCtx(gear, info).isEmpty()){
+            list.add(Itemtips.SUFFIX_STATS.locName());
+            getSufStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
+            TooltipUtils.addEmpty(list);
+        }
+
         return list;
     }
 

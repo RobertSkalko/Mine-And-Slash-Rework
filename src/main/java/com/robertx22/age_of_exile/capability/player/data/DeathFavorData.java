@@ -29,9 +29,9 @@ public class DeathFavorData {
 
         if (rar != getRarity()) {
             if (upped) {
-                p.sendSystemMessage(Chats.FAVOR_UP.locName(getRarity().locName()));
+                p.sendSystemMessage(Chats.FAVOR_UP.locName(getRarity().textFormatting() + getRarity().locName().getString()));
             } else {
-                p.sendSystemMessage(Chats.FAVOR_DOWN.locName(getRarity().locName()));
+                p.sendSystemMessage(Chats.FAVOR_DOWN.locName(getRarity().textFormatting() + getRarity().locName().getString()));
             }
         }
     }
@@ -79,10 +79,10 @@ public class DeathFavorData {
 
         if (this.getRarity().getFavorGainEverySecond() > 0) {
             int perhour = (int) (getRarity().getFavorGainEverySecond() * 60F * 60f);
-            tooltip.add(Gui.FAVOR_REGEN_PER_HOUR.locName(perhour));
+            tooltip.add(Gui.FAVOR_REGEN_PER_HOUR.locName(getRarity().textFormatting() + String.valueOf(perhour)));
         }
-        tooltip.add(Gui.FAVOR_PER_CHEST.locName(ServerContainer.get().FAVOR_CHEST_GAIN.get()));
-        tooltip.add(Gui.FAVOR_PER_DEATH.locName(ServerContainer.get().FAVOR_DEATH_LOSS.get()));
+        tooltip.add(Gui.FAVOR_PER_CHEST.locName(ServerContainer.get().FAVOR_CHEST_GAIN.get()).withStyle(ChatFormatting.GREEN));
+        tooltip.add(Gui.FAVOR_PER_DEATH.locName(ServerContainer.get().FAVOR_DEATH_LOSS.get()).withStyle(ChatFormatting.RED));
 
         return tooltip;
     }

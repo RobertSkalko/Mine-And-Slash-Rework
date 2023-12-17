@@ -158,16 +158,5 @@ publishMods {
     changelog = file("CHANGELOG.txt").text
     type = BETA
     modLoaders.add("forge")
-    
-    curseforge {
-        accessToken = file("key.properties").text
-        projectId = "${curse_id}"
-        displayName = "${mod_archive_name}-${minecraft_version}-v${mod_version}"
-        minecraftVersions.add("${minecraft_version}")
-        minecraftVersions.add("1.20")
 
-        requires { slug = "library-of-exile" }
-        requires { slug = "curios" }
-
-    }
 }

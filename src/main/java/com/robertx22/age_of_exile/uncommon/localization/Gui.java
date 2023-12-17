@@ -28,7 +28,11 @@ public enum Gui implements IAutoLocName {
     SALVAGE_TIP_OFF("Auto Salvage for %1$s %2$s: Off"),
     PROF_NAME("%1$s: %2$s"),
     SPELL_DAMAGE_PROPORTION("(%1$s%% of %2$s§7)"),
-    PROF_LEVEL_AND_EXP("Level: %1$s EXP: %2$s/%3$s"), AVAILABLE_SUPPORT_SLOTS("Support Slots: %1$s/5 Available"), FAVOR_REGEN_PER_HOUR(ChatFormatting.LIGHT_PURPLE + "Regenerates %1$s per Hour"), FAVOR_PER_CHEST(ChatFormatting.GREEN + "Gain %1$s per Chest Looted"), FAVOR_PER_DEATH(ChatFormatting.RED + "You Lose %1$s on Death");
+    PROF_LEVEL_AND_EXP("Level: %1$s EXP: %2$s/%3$s"),
+    AVAILABLE_SUPPORT_SLOTS("Support Slots: %1$s/5 Available"),
+    FAVOR_REGEN_PER_HOUR(ChatFormatting.LIGHT_PURPLE + "Regenerates %1$s " + ChatFormatting.LIGHT_PURPLE + "per Hour"),
+    FAVOR_PER_CHEST(ChatFormatting.GREEN + "Gain %1$s per Chest Looted"),
+    FAVOR_PER_DEATH(ChatFormatting.RED + "You Lose %1$s on Death");
 
 
     private String localization = "";

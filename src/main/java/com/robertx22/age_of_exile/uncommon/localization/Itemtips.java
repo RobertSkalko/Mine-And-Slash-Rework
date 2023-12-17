@@ -9,6 +9,7 @@ import java.util.Locale;
 public enum Itemtips implements IAutoLocName {
     //add "tip" at the end to avoid same variable call
     //you can use \n in here, just remember use the splitLongText() to process it.
+    //a special method splitLongText() in TooltipsUtils.java can split the sentence into different line by replacing the "\n", achieving a actual line break function.
     RARITY_TIP("Rarity: "),
     ITEM_TYPE("Item Type: "),
     TIER_TIP("Tier: "),
@@ -39,7 +40,14 @@ public enum Itemtips implements IAutoLocName {
     RUNE_ITEM_USAGE("Use to view craftable Runewords.\nSneak + Use to view all Runewords."),
     STONE_REPAIRE_DURABILITY("Repairs %1$s durability."),
     SOUL_CLEANER_USAGE_AND_WARNING("Click on items to remove their soul.\nThe item remains but the stats will be deleted."),
-    SOCKET_EXTRACTOR_USAGE("Click on gear to extract a gem."), Enchanted("Enchanted: "), OUTCOME_TIP("%1$s, Base Weight: %2$s"), Exp("Exp: %1$s%%"), Loot("Loot: %1$s%%"),;
+    SOCKET_EXTRACTOR_USAGE("Click on gear to extract a gem."),
+    Enchanted("Enchanted: "),
+    OUTCOME_TIP("%1$s, Base Weight: %2$s"),
+    Exp("Exp: %1$s%%"),
+    Loot("Loot: %1$s%%"),
+    PREFIX_STATS(ChatFormatting.BLUE + "Prefix Stats: "),
+    COR_STATS(ChatFormatting.BLUE + "Base Stats: "),
+    SUFFIX_STATS(ChatFormatting.BLUE + "Suffix Stats: ");
 
     private String localization = "";
 

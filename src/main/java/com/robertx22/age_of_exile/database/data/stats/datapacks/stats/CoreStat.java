@@ -73,7 +73,7 @@ public class CoreStat extends BaseDatapackStat implements ICoreStat {
         list.add(Gui.STATS_INFLUENCE.locName().withStyle(ChatFormatting.GREEN));
         List<Component> preList = new ArrayList<>();
         getMods(1).forEach(x -> preList.addAll(x.GetTooltipString(info)));
-        List<Component> finalList = new TooltipStatsAligner(preList).buildNewTooltipsStats();
+        List<Component> finalList = new TooltipStatsAligner(preList, false).buildNewTooltipsStats();
         list.addAll(finalList);
 
         list.add(ExileText.ofText("").get());
