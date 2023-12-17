@@ -1,10 +1,14 @@
 package com.robertx22.age_of_exile.aoe_data.database.stats.base;
 
 import com.robertx22.age_of_exile.database.data.exile_effects.EffectType;
+import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffectInstanceData;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.library_of_exile.registry.IGUID;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.LivingEntity;
 
 import java.util.Objects;
 
@@ -23,6 +27,13 @@ public class EffectCtx extends AutoHashClass implements IGUID {
     @Override
     public int hashCode() {
         return Objects.hash(resourcePath, id);
+    }
+
+    public ExileEffectInstanceData getData(LivingEntity en) {
+        var data = Load.Unit(en).getStatusEffectsData();
+        var effect = ExileDB.ExileEffects().get(id);
+        var result = data.get(effect.getStatusEffect());
+        return result;
     }
 
     public EffectCtx(String id, String locname, int num, Elements element, EffectType type) {

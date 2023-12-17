@@ -43,7 +43,7 @@ public class PaladinPerks implements ExileRegistryInit {
         PerkBuilder.ascPoint(GUARDIAN_4, new OptScaleExactStat(25, Armor.getInstance(), ModType.MORE));
 
         PerkBuilder.ascPoint(WARRIOR_1, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Physical), ModType.FLAT));
-        PerkBuilder.ascPoint(WARRIOR_2, new OptScaleExactStat(5, ArmorPenetration.getInstance(), ModType.FLAT));
+        PerkBuilder.ascPoint(WARRIOR_2, new OptScaleExactStat(25, ArmorPenetration.getInstance(), ModType.PERCENT));
         PerkBuilder.ascPoint(WARRIOR_3, new OptScaleExactStat(30, Stats.CRIT_DAMAGE.get(), ModType.FLAT));
         PerkBuilder.ascPoint(WARRIOR_4, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Physical), ModType.MORE));
 

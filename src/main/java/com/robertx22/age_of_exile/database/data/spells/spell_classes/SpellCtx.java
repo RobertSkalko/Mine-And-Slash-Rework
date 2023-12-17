@@ -14,6 +14,8 @@ import java.util.Objects;
 
 public class SpellCtx {
 
+    public static String ON_ENTITY_ATTACKED = "on_entity_attacked";
+
     public Level world;
 
     // the entity the effect came from, player summons fireball. fireball hits enemy, dmg comes from fireball
@@ -81,6 +83,12 @@ public class SpellCtx {
         Objects.requireNonNull(ctx);
         Objects.requireNonNull(target);
         return new SpellCtx(EntityActivation.PER_ENTITY_HIT, ctx.sourceEntity, ctx.caster, target, ctx.calculatedSpellData).setPositionSource(PositionSource.TARGET);
+    }
+
+    public static SpellCtx onEntityBasicAttacked(LivingEntity caster, CalculatedSpellData data, LivingEntity target) {
+        Objects.requireNonNull(caster);
+        Objects.requireNonNull(target);
+        return new SpellCtx(EntityActivation.ENTITY_BASIC_ATTACKED, target, caster, target, data).setPositionSource(PositionSource.TARGET);
     }
 
     public static SpellCtx onExpire(LivingEntity caster, Entity sourceEntity, CalculatedSpellData data) {

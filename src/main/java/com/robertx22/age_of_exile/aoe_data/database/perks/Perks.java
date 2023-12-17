@@ -68,10 +68,10 @@ public class Perks implements ExileRegistryInit {
 
 
         PerkBuilder.stat(new OptScaleExactStat(5, ArmorPenetration.getInstance(), ModType.PERCENT));
-        PerkBuilder.bigStat(new OptScaleExactStat(10, ArmorPenetration.getInstance(), ModType.PERCENT));
+        PerkBuilder.bigStat(new OptScaleExactStat(15, ArmorPenetration.getInstance(), ModType.PERCENT));
 
         PerkBuilder.stat(new OptScaleExactStat(1, BlockChance.getInstance(), ModType.FLAT));
-        PerkBuilder.bigStat(new OptScaleExactStat(3, BlockChance.getInstance(), ModType.FLAT));
+        PerkBuilder.bigStat(new OptScaleExactStat(2, BlockChance.getInstance(), ModType.FLAT));
 
 
         PerkBuilder.stat(new OptScaleExactStat(3, Stats.CAST_SPEED.get(), ModType.FLAT));

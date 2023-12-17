@@ -3,10 +3,14 @@ package com.robertx22.age_of_exile.uncommon.effectdatas;
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
 import com.robertx22.age_of_exile.capability.entity.CooldownsData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
+import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
+import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffectInstanceData;
+import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEntity;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.FullSwingDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.DamageAbsorbedByMana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.mixin_ducks.DamageSourceDuck;
 import com.robertx22.age_of_exile.mixin_ducks.LivingEntityAccesor;
@@ -367,6 +371,19 @@ public class DamageEvent extends EffectEvent {
         }
 
         if (dmg > 0) {
+
+            if (this.data.isBasicAttack()) {
+                for (Entry<String, ExileEffectInstanceData> e : targetData.getStatusEffectsData().exileMap.entrySet()) {
+                    if (e.getValue().stacks > 0) {
+                        var data = e.getValue();
+                        var sd = data.calcSpell;
+                        var ctx = SpellCtx.onEntityBasicAttacked(this.source, sd, target);
+                        ExileEffect eff = ExileDB.ExileEffects().get(e.getKey());
+                        eff.spell.tryActivate(SpellCtx.ON_ENTITY_ATTACKED, ctx); // i can use this kind of as event
+                    }
+                }
+            }
+
             if (source instanceof Player) {
                 sourceData.getCooldowns().setOnCooldown(CooldownsData.IN_COMBAT, 20 * 10);
                 if (target instanceof Mob) {

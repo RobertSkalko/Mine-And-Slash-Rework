@@ -100,6 +100,10 @@ public class SpellBuilder {
         return this.addEntityAction(Spell.DEFAULT_EN_NAME, comp);
     }
 
+    public SpellBuilder onAttacked(ComponentPart comp) {
+        return this.addEntityAction(Spell.DEFAULT_EN_NAME, comp.addActivationRequirement(EntityActivation.ENTITY_BASIC_ATTACKED));
+    }
+
     public SpellBuilder addSpecificAction(String id, ComponentPart comp) {
         this.addEntityAction(id, comp);
         return this;
@@ -174,8 +178,7 @@ public class SpellBuilder {
             spell.attached.entity_components.put(entity, new ArrayList<>());
         }
 
-        this.spell.attached.getDataForEntity(entity)
-                .add(comp);
+        this.spell.attached.getDataForEntity(entity).add(comp);
 
         return this;
     }

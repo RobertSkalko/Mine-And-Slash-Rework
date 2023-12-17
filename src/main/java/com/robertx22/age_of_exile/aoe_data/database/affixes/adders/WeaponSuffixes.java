@@ -17,7 +17,7 @@ public class WeaponSuffixes implements ExileRegistryInit {
 
         AffixBuilder.Normal("of_pene")
                 .Named("Of Penetration")
-                .stats(new StatMod(1, 5, ArmorPenetration.getInstance(), ModType.FLAT))
+                .stats(new StatMod(5, 25, ArmorPenetration.getInstance(), ModType.FLAT))
                 .includesTags(SlotTag.weapon_family)
                 .Suffix()
                 .Build();

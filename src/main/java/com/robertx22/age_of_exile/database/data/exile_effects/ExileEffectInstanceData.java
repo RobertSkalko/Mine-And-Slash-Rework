@@ -19,13 +19,17 @@ public class ExileEffectInstanceData {
     public float str_multi = 1;
     public int ticks_left = 0;
 
-    
+
     public Spell getSpell() {
         return ExileDB.Spells().get(spell_id);
     }
 
     public LivingEntity getCaster(Level world) {
         try {
+            if (caster_uuid.isEmpty()) {
+                return null;
+            }
+
             return Utilities.getLivingEntityByUUID(world, UUID.fromString(caster_uuid));
         } catch (Exception e) {
             e.printStackTrace();

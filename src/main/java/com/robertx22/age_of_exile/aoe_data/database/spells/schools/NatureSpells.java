@@ -71,12 +71,15 @@ public class NatureSpells implements ExileRegistryInit {
 
                 .build();
 
+
         SpellBuilder.of(THORN_BUSH, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 20 * 6)
                                 .setSwingArm(), "Thorn Bush",
                         Arrays.asList(SpellTag.damage, SpellTag.area, SpellTag.totem))
                 .manualDesc("Summon a thorny bush that deals "
                         + SpellCalcs.THORN_BUSH.getLocDmgTooltip()
-                        + Elements.Chaos.getIconNameDmg() + " in an area every second.")
+                        + Elements.Chaos.getIconNameDmg() + " in an area every second and applies Thorned. " +
+                        "Thorned enemies consume the stack of thorns every time they are basic attacked to deal "
+                        + SpellCalcs.THORN_CONSUME.getLocDmgTooltip(Elements.Physical))
 
                 .onCast(PartBuilder.playSound(SoundEvents.GRASS_PLACE, 1D, 1D))
 
@@ -87,9 +90,11 @@ public class NatureSpells implements ExileRegistryInit {
                         .put(MapField.FIND_NEAREST_SURFACE, true)
                         .put(MapField.IS_BLOCK_FALLING, false)))
 
+
                 .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.SNEEZE, 40D, 3D, 1D))
                 .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.ITEM_SLIME, 40D, 3D, 1D))
                 .onTick("block", PartBuilder.damageInAoe(SpellCalcs.THORN_BUSH, Elements.Chaos, 3D).tickRequirement(20D).disableKnockback())
+                .onTick("block", PartBuilder.addExileEffectToEnemiesInAoe(NegativeEffects.THORN.resourcePath, 3D, 20 * 8D).tickRequirement(20D))
                 .onTick("block", PartBuilder.playSound(SoundEvents.GRASS_BREAK, 1D, 1D).tickRequirement(20D))
                 .levelReq(20)
                 .build();

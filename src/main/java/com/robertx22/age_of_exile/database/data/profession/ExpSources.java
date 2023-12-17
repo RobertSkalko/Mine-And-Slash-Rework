@@ -23,13 +23,14 @@ import java.util.List;
 
 public class ExpSources {
 
+    public static String REQ_GROWTH_STAGE = "req_growth_stage";
     public HashMap<Integer, List<ExpSource>> map = new HashMap<>();
 
     public enum Type {
         BLOCK, FARM_ITEM, ENTITY, CRAFTING, BLOCK_TAG
     }
 
-    public void add(SkillItemTier tier, Type type, String id, int exp) {
+    public void add(SkillItemTier tier, Type type, String id, int exp, String... req) {
         if (!map.containsKey(tier.tier)) {
             map.put(tier.tier, new ArrayList<>());
         }
@@ -103,6 +104,7 @@ public class ExpSources {
 
         public int exp;
         public int tier;
+        public List<String> req = new ArrayList<>();
 
         public ExpData(int exp, int tier) {
             this.exp = exp;

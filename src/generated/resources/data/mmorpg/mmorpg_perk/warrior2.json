@@ -6,10 +6,10 @@
   "max_lvls": 1,
   "stats": [
     {
-      "type": "FLAT",
+      "type": "PERCENT",
       "scale_to_lvl": false,
       "stat": "armor_penetration",
-      "v1": 5.0
+      "v1": 25.0
     }
   ]
 }

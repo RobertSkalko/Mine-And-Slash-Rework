@@ -376,6 +376,13 @@ public class PartBuilder {
         return c;
     }
 
+    public static ComponentPart removeExileEffectStacksToTarget(String effect) {
+        ComponentPart c = new ComponentPart();
+        c.acts.add(SpellAction.EXILE_EFFECT.create(effect, GiveOrTake.REMOVE_STACKS, 20D));
+        c.targets.add(BaseTargetSelector.TARGET.create());
+        return c;
+    }
+
     public static ComponentPart addEffectToEnemiesInAoe(MobEffect effect, Double radius, Double duration) {
         ComponentPart c = new ComponentPart();
         c.acts.add(SpellAction.POTION.createGive(effect, duration));

@@ -9,7 +9,7 @@
       "type": "PERCENT",
       "scale_to_lvl": false,
       "stat": "armor_penetration",
-      "v1": 10.0
+      "v1": 15.0
     }
   ]
 }

@@ -61,16 +61,19 @@ public class ComponentPart {
         return this;
     }
 
-    public void addActivationRequirement(EntityActivation act) {
+    public ComponentPart addActivationRequirement(EntityActivation act) {
         if (act == EntityActivation.ON_EXPIRE) {
             this.addCondition(EffectCondition.ON_ENTITY_EXPIRE.create());
-        }
-        if (act == EntityActivation.ON_HIT) {
+        } else if (act == EntityActivation.ON_HIT) {
             this.addCondition(EffectCondition.ON_HIT.create());
-        }
-        if (act == EntityActivation.ON_CAST) {
+        } else if (act == EntityActivation.ON_CAST) {
             this.addCondition(EffectCondition.ON_CAST.create());
+        } else if (act == EntityActivation.ENTITY_BASIC_ATTACKED) {
+            this.addCondition(EffectCondition.ON_ATTACKED.create());
+        } else {
+            throw new NullPointerException("Activation not found"); // ... why did i do it like this
         }
+        return this;
     }
 
     public void validate() {

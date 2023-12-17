@@ -1,13 +1,12 @@
 package com.robertx22.age_of_exile.database.data.stats.types.defense;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
+import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageEffect;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
-
-import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect.Priority;
 
 public class ArmorPenetration extends Stat {
 
@@ -25,6 +24,7 @@ public class ArmorPenetration extends Stat {
     private ArmorPenetration() {
         this.min = 0;
         this.statEffect = new Effect();
+        this.scaling = StatScaling.NORMAL;
     }
 
     @Override

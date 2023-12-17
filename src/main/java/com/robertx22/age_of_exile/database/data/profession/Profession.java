@@ -26,6 +26,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.ArrayList;
@@ -244,6 +245,7 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
     public List<ItemStack> onMineGetBonusDrops(Player p, List<ItemStack> drops, BlockState state) {
         var data = this.exp_sources.getData(state.getBlock());
 
+
         if (data == null) {
             for (TagKey<Block> drop : state.getTags().toList()) {
                 if (exp_sources.getData(drop) != null) {
@@ -262,8 +264,15 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
         }
         // todo add default drop for modded ores
 
+
         if (data != null) {
             if (data.exp > 0) {
+                if (data.req.contains(ExpSources.REQ_GROWTH_STAGE)) {
+                    if (state.getValue(CropBlock.AGE) != CropBlock.MAX_AGE) {
+                        return Arrays.asList();
+                    }
+                }
+
                 data.giveExp(p, this);
 
                 float chance = data.getLootChanceMulti(p, this);

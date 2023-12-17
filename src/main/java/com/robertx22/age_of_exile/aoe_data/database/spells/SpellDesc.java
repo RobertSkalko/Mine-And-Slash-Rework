@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.CLOC;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.LivingEntity;
+import org.codehaus.plexus.util.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,12 +21,22 @@ public class SpellDesc {
         String tip = CLOC.translate(spell.locDesc());
         String copy = tip;
 
+        int amount = StringUtils.countMatches(tip, "calc:");
+
+        int counted = 0;
         for (ValueCalculation calc : ExileDB.ValueCalculations()
                 .getList()) {
             String id = "[calc:" + calc.id + "]";
+
             tip = tip.replace(id, CLOC.translate(calc.getShortTooltip(caster, spell)));
+
             if (!tip.equals(copy)) {
-                break;
+                counted++;
+                copy = tip;
+
+                if (counted >= amount) {
+                    break;
+                }
             }
         }
 

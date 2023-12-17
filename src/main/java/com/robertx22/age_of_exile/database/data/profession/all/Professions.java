@@ -84,16 +84,17 @@ public class Professions {
 
         var FARM_EXP = 30;
         var ORE_EXP = 100;
-
+        
         Builder.of(FARMING)
                 .tool(BaseGearType.SlotTag.farming_tool)
 
-                .item(SkillItemTier.TIER0, FARM_EXP, Items.WHEAT, Items.POTATO)
-                .item(SkillItemTier.TIER1, FARM_EXP, Items.MELON)
-                .item(SkillItemTier.TIER2, FARM_EXP, Items.BEETROOT)
-                .item(SkillItemTier.TIER3, FARM_EXP, Items.CARROT)
-                .item(SkillItemTier.TIER4, FARM_EXP, Items.NETHER_WART)
-                .item(SkillItemTier.TIER5, FARM_EXP, Items.COCOA_BEANS)
+                .crop(SkillItemTier.TIER0, FARM_EXP, Items.WHEAT, ExpSources.REQ_GROWTH_STAGE)
+                .crop(SkillItemTier.TIER0, FARM_EXP, Items.POTATO, ExpSources.REQ_GROWTH_STAGE)
+                .crop(SkillItemTier.TIER1, FARM_EXP, Items.MELON_SLICE)
+                .crop(SkillItemTier.TIER2, FARM_EXP, Items.BEETROOT, ExpSources.REQ_GROWTH_STAGE)
+                .crop(SkillItemTier.TIER3, FARM_EXP, Items.CARROT, ExpSources.REQ_GROWTH_STAGE)
+                .crop(SkillItemTier.TIER4, FARM_EXP, Items.NETHER_WART, ExpSources.REQ_GROWTH_STAGE)
+                .crop(SkillItemTier.TIER5, FARM_EXP, Items.COCOA_BEANS, ExpSources.REQ_GROWTH_STAGE)
 
                 .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(FARMING), 1)
 
@@ -170,6 +171,12 @@ public class Professions {
 
         public Builder tool(BaseGearType.SlotTag tag) {
             this.p.tool_tag = tag.getTagId();
+            return this;
+        }
+
+        public Builder crop(SkillItemTier tier, int exp, Item item, String... tags) {
+            this.p.exp_sources.add(tier, ExpSources.Type.FARM_ITEM, VanillaUTIL.REGISTRY.items().getKey(item).toString(), exp, tags);
+
             return this;
         }
 

@@ -14,6 +14,7 @@ import com.robertx22.age_of_exile.database.data.spells.SetAdd;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.vanity.ParticleMotion;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
+import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
@@ -43,9 +44,19 @@ public class NegativeEffects implements ExileRegistryInit {
     public static EffectCtx GROUNDING = new EffectCtx("ground", "Grounding", 11, Elements.Physical, EffectType.negative);
     public static EffectCtx MARK_OF_DEATH = new EffectCtx("mark_of_death", "Mark of Death", 12, Elements.Physical, EffectType.negative);
     public static EffectCtx SHRED = new EffectCtx("shred", "Shred", 13, Elements.Physical, EffectType.negative);
+    public static EffectCtx THORN = new EffectCtx("thorn", "Thorn", 14, Elements.Physical, EffectType.negative);
 
     @Override
     public void registerAll() {
+
+        ExileEffectBuilder.of(THORN)
+                .maxStacks(5)
+                .spell(SpellBuilder.forEffect()
+                        .addSpecificAction(SpellCtx.ON_ENTITY_ATTACKED, PartBuilder.damage(SpellCalcs.THORN_CONSUME, Elements.Physical))
+                        .addSpecificAction(SpellCtx.ON_ENTITY_ATTACKED, PartBuilder.removeExileEffectStacksToTarget(NegativeEffects.THORN.resourcePath))
+                        .onTick(PartBuilder.aoeParticles(ParticleTypes.CRIT, 2D, 0.5D).tickRequirement(2D))
+                        .buildForEffect())
+                .build();
 
         ExileEffectBuilder.of(SHRED)
                 .maxStacks(3)

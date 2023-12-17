@@ -24,6 +24,7 @@ public class ExileStatusEffect extends MobEffect implements IGUID, IOneOfATypePo
         super(type.type, 0);
         this.exileEffectId = getIdPath(type, numericId);
         this.type = type;
+        
     }
 
     public static String getIdPath(EffectType type, int num) {

@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.spells;
 
+import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
@@ -11,6 +12,13 @@ public class SpellCalcs {
     public static void init() {
 
     }
+
+    public static ValueCalculation THORN_CONSUME = ValueCalcBuilder.of("thorn_consume")
+            .spellScaling(0.5F, 0.5F)
+            .statScaling(Energy.getInstance(), 0.1f, 0.1f)
+            .capScaling(1)
+            .build();
+
 
     public static ValueCalculation PET_BASIC = ValueCalcBuilder.of("pet_basic")
             .spellScaling(1, 1)
@@ -219,7 +227,7 @@ public class SpellCalcs {
             .spellScaling(0.5F, 1.5F)
             .build();
     public static ValueCalculation THORN_BUSH = ValueCalcBuilder.of("thorn_bush")
-            .spellScaling(0.25F, 0.5F)
+            .spellScaling(0.1F, 0.25F)
             .build();
     public static ValueCalculation MAGMA_FLOWER = ValueCalcBuilder.of("magma_flower")
             .spellScaling(0.5F, 1F)
