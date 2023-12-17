@@ -14,9 +14,14 @@ public interface IRarity {
 
     public GearRarity getRarity();
 
-    public default boolean isUnique() {
+    default boolean isUnique() {
         return this.getRarityId()
                 .equals(UNIQUE_ID);
+    }
+
+    default boolean isRuneWord() {
+        return this.getRarityId()
+                .equals(RUNEWORD_ID);
     }
 
     String COMMON_ID = "common";

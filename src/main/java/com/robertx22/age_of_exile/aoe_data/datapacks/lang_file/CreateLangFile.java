@@ -56,7 +56,7 @@ public class CreateLangFile {
                         continue;
                     }
                     // I dont know why I got encoding error when export the lang file, have to add this.
-                    //If you dont want it, just delte and change the \n in Itemtips.java to \\n.
+                    //If you dont want it, just delete and change the \n in Itemtips.java to \\n.
                     json += "\t" + "\"" + iauto.formattedLocNameLangFileGUID() + "\": \"" + StringEscapeUtils.escapeJava(iauto.locNameForLangFile()) + "\",\n";
                 }
             }
@@ -190,6 +190,7 @@ public class CreateLangFile {
                 .getSerializable());
 
         list.addAll(stats);
+        list.addAll(ExileDB.UniqueGears().getSerializable());
 
         HashMap<IAutoLocName.AutoLocGroup, List<IAutoLocDesc>> map = new HashMap<>();
 

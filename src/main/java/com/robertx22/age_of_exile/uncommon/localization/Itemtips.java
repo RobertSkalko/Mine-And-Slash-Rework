@@ -47,13 +47,21 @@ public enum Itemtips implements IAutoLocName {
     Loot("Loot: %1$s%%"),
     PREFIX_STATS(ChatFormatting.BLUE + "Prefix Stats: "),
     COR_STATS(ChatFormatting.BLUE + "Base Stats: "),
-    SUFFIX_STATS(ChatFormatting.BLUE + "Suffix Stats: ");
+    SUFFIX_STATS(ChatFormatting.BLUE + "Suffix Stats: "), MAP_LEAGUE_SPAWN("Can Spawn: ");
 
     private String localization = "";
 
     Itemtips(String str) {
         this.localization = str;
     }
+
+    /*Itemtips(String str, ChatFormatting... format) {
+        StringBuilder text = new StringBuilder();
+        for (ChatFormatting x : format){
+            text.append(x);
+        }
+        this.localization =  text.append(str).toString();
+    }*/
 
     @Override
     public IAutoLocName.AutoLocGroup locNameGroup() {

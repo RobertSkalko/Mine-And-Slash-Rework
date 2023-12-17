@@ -173,6 +173,12 @@ public class GearTooltipUtils {
 
         //  ItemStack.appendEnchantmentNames(tip, stack.getEnchantmentTags());
 
+        if ((gear.isUnique() || gear.isRuneWord()) && !gear.uniqueStats.getUnique(gear).locDesc().getString().isEmpty()) {
+            tip.add(gear.uniqueStats.getUnique(gear).locDesc());
+            tip.add(Component.literal(""));
+        }
+
+
         if (ClientConfigs.getConfig().SHOW_DURABILITY.get()) {
             if (stack.isDamageableItem()) {
                 tip.add(Itemtips.Durability.locName().withStyle(ChatFormatting.WHITE)
@@ -183,11 +189,13 @@ public class GearTooltipUtils {
         }
 
 
-        if (Screen.hasShiftDown() == false) {
+        if (!Screen.hasShiftDown()) {
             tip.add(Component.literal(ChatFormatting.BLUE + "").append(Component.translatable(SlashRef.MODID + ".tooltip." + "press_shift_more_info")
                     )
                     .withStyle(ChatFormatting.BLUE));
         }
+
+
 
         List<Component> tool = TooltipUtils.removeDoubleBlankLines(tip);
 
