@@ -82,7 +82,7 @@ public abstract class BaseGemItem extends Item {
 
         tooltip.add(Component.literal(""));
         tooltip.add(TooltipUtils.tier(gem.tier));
-
+        tooltip.add(Words.PressAltForStatInfo.locName().withStyle(ChatFormatting.BLUE));
         return tooltip;
     }
 

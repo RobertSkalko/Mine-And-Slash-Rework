@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.name_regex.StatNameRegex;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.registry.serialization.ISerializable;
@@ -169,6 +170,11 @@ public class StatMod implements ISerializable<StatMod> {
                 .append(GetStat().locName());
 
         list.add(txt);
+
+        var info = new TooltipInfo();
+        if(info.shouldShowDescriptions()) {
+            list.addAll(GetStat().getCutDescTooltip());
+        }
 
         return list;
     }

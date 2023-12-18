@@ -22,6 +22,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaR
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCapacity;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.SocketData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -304,8 +305,8 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
                 tooltip.addAll(x.getEstimationTooltip(lvl));
             }
         }
-
         tooltip.add(Component.literal(""));
+        tooltip.add(Words.PressAltForStatInfo.locName().withStyle(ChatFormatting.BLUE));
 
         return tooltip;
     }
