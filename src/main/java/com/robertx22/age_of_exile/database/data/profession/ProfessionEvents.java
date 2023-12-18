@@ -22,7 +22,13 @@ public class ProfessionEvents {
             @Override
             public void accept(ExileEvents.PlayerMineOreEvent e) {
                 Player p = e.player;
+
                 if (!p.level().isClientSide) {
+
+                    if (PlayerUTIL.isFake(p)) {
+                        return;
+                    }
+
                     var drops = ExileDB.Professions().get(Professions.MINING).onMineGetBonusDrops(p, Arrays.asList(), e.state);
                     e.itemsToAddToDrop.addAll(drops);
                 }
@@ -34,6 +40,9 @@ public class ProfessionEvents {
             public void accept(ExileEvents.PlayerMineFarmableBlockEvent e) {
                 Player p = e.player;
                 if (!p.level().isClientSide) {
+                    if (PlayerUTIL.isFake(p)) {
+                        return;
+                    }
                     var drops = ExileDB.Professions().get(Professions.FARMING).onMineGetBonusDrops(p, e.droppedItems, e.state);
                     e.itemsToAddToDrop.addAll(drops);
                 }
@@ -43,6 +52,9 @@ public class ProfessionEvents {
         ForgeEvents.registerForgeEvent(ItemFishedEvent.class, x -> {
             Player p = x.getEntity();
             if (!p.level().isClientSide) {
+                if (PlayerUTIL.isFake(p)) {
+                    return;
+                }
                 var drops = ExileDB.Professions().get(Professions.FISHING).onFish(p);
 
                 if (!drops.isEmpty()) {
@@ -60,6 +72,9 @@ public class ProfessionEvents {
             Player p = x.getCausedByPlayer();
             if (p != null) {
                 if (!p.level().isClientSide) {
+                    if (PlayerUTIL.isFake(p)) {
+                        return;
+                    }
                     if (x.getChild() != null) {
                         var drops = ExileDB.Professions().get(Professions.HUSBANDRY).onBreedAnimal(p, x.getChild());
                         for (ItemStack drop : drops) {

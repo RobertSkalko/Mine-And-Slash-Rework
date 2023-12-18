@@ -120,3 +120,4 @@ v.5.3.8
 - buffed armor pene numbers a bit, changed some to %
 -  profession exp datapacks now have optional req list
 - new growth stage req to prevent people placing potato, breaking it instantly and gaining xp
+- fake players mostly used by automation mods will no longer proc mns profession item bonus drops
