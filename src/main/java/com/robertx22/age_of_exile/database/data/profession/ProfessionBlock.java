@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.profession;
 import com.robertx22.age_of_exile.database.data.profession.screen.CraftingStationMenu;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlockEntities;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -91,7 +92,7 @@ public class ProfessionBlock extends BaseEntityBlock implements WorldlyContainer
                 be.owner = p.getStringUUID();
             } else {
                 if (!be.owner.equals(p.getStringUUID())) {
-                    p.sendSystemMessage(Chats.NOT_OWNER.locName());
+                    p.sendSystemMessage(Chats.NOT_OWNER.locName().withStyle(ChatFormatting.RED));
                     return InteractionResult.FAIL;
                 }
             }

@@ -29,9 +29,9 @@ public class DeathFavorData {
 
         if (rar != getRarity()) {
             if (upped) {
-                p.sendSystemMessage(Chats.FAVOR_UP.locName(getRarity().textFormatting() + getRarity().locName().getString()));
+                p.sendSystemMessage(Chats.FAVOR_UP.locName(getRarity().locName().withStyle(getRarity().textFormatting())).withStyle(ChatFormatting.GREEN));
             } else {
-                p.sendSystemMessage(Chats.FAVOR_DOWN.locName(getRarity().textFormatting() + getRarity().locName().getString()));
+                p.sendSystemMessage(Chats.FAVOR_DOWN.locName(getRarity().locName().withStyle(getRarity().textFormatting())).withStyle(ChatFormatting.RED));
             }
         }
     }

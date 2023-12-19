@@ -75,6 +75,8 @@ public class TooltipStatsAligner {
                 they will be all good.
             */
             Matcher matcherForValue = Pattern.compile("^([^◆\\s]+)" + StatNameRegex.VALUEAndNAMESeparator + "(\\S+)").matcher(x);
+            //add this to fine smth match (+/-)(a figure), basically the stats value
+            Matcher deepmatcher = Pattern.compile("([\\+\\-][0-9])").matcher(x);
             Matcher matcherForStatDesc = Pattern.compile("^ (\\[)").matcher(x);
 
             //that's so weird that the stat desc will lose its Format. I have to add for it at here.
@@ -84,7 +86,7 @@ public class TooltipStatsAligner {
             }
 
             // Check if a pattern is found in the string
-            if (matcherForValue.find()) {
+            if (matcherForValue.find() && deepmatcher.find()) {
                 // Retrieve the value part
                 String matchText = matcherForValue.group(1);
 

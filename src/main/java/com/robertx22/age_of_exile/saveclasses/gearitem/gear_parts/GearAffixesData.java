@@ -72,19 +72,19 @@ public class GearAffixesData implements IGearPartTooltip {
     public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {
         List<Component> list = new ArrayList<Component>();
         if (!getPreStatsWithCtx(gear, info).isEmpty()){
-            list.add(Itemtips.PREFIX_STATS.locName());
+            list.add(Itemtips.PREFIX_STATS.locName().withStyle(ChatFormatting.BLUE));
             getPreStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
             TooltipUtils.addEmpty(list);
         }
 
         if (!getCorStatsWithCtx(gear, info).isEmpty()){
-            list.add(Itemtips.COR_STATS.locName());
+            list.add(Itemtips.COR_STATS.locName().withStyle(ChatFormatting.BLUE));
             getCorStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
             TooltipUtils.addEmpty(list);
         }
 
         if (!getSufStatsWithCtx(gear, info).isEmpty()){
-            list.add(Itemtips.SUFFIX_STATS.locName());
+            list.add(Itemtips.SUFFIX_STATS.locName().withStyle(ChatFormatting.BLUE));
             getSufStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
             TooltipUtils.addEmpty(list);
         }

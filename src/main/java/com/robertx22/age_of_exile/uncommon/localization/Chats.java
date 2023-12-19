@@ -54,10 +54,10 @@ public enum Chats implements IAutoLocName {
     NEW_DAY("A new day has arrived! Profession drop rates have been boosted for the following items:"),
     TOO_LOW_LEVEL("Your level is too low."),
     CANT_SAME_BUFF("You already have a buff of that type."),
-    NOT_OWNER(ChatFormatting.RED + "You are not the owner of this Station."),
+    NOT_OWNER("You are not the owner of this Station."),
 
-    FAVOR_UP(ChatFormatting.GREEN + "As a result of your achievements, your Favor has risen to %1$s" + ChatFormatting.GREEN + "!"),
-    FAVOR_DOWN(ChatFormatting.RED + "As a result of death, your Favor has fallen to %1$s" + ChatFormatting.RED + ". Remember this disgrace."),
+    FAVOR_UP("As a result of your achievements, your Favor has risen to %1$s!"),
+    FAVOR_DOWN("As a result of death, your Favor has fallen to %1$s, Remember this disgrace."),
 
 
     DEATH_EXP_LOSS_MSG("As a result of dying, you have lost %1$s Exp and received %2$s Exp debt."),
