@@ -32,13 +32,13 @@ public class EffectCtx extends AutoHashClass implements IGUID {
     public ExileEffectInstanceData getData(LivingEntity en) {
         var data = Load.Unit(en).getStatusEffectsData();
         var effect = ExileDB.ExileEffects().get(id);
-        var result = data.get(effect.getStatusEffect());
+        var result = data.get(effect);
         return result;
     }
 
-    public EffectCtx(String id, String locname, int num, Elements element, EffectType type) {
+    public EffectCtx(String id, String locname, Elements element, EffectType type) {
         this.id = id;
-        this.resourcePath = type.name() + "/" + num;
+        this.resourcePath = id;
         this.element = element;
         this.locname = locname;
         this.type = type;

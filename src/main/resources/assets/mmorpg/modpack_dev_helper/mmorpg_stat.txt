@@ -311,7 +311,6 @@ threat_generated
 mana_per_10_intelligence
 alchemy_lesser_drop_bonus
 mining_misc_drop_bonus
-chance_of_torment
 dodge
 salvaging_misc_drop_bonus
 fishing_misc_drop_bonus

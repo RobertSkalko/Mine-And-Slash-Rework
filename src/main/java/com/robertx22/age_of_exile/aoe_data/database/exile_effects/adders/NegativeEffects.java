@@ -30,21 +30,18 @@ import static net.minecraft.world.entity.ai.attributes.Attributes.*;
 
 public class NegativeEffects implements ExileRegistryInit {
 
-    public static EffectCtx ELE_WEAKNESS = new EffectCtx("ele_weakness", "Ele Weakness", 0, Elements.Elemental, EffectType.negative);
-    public static EffectCtx PETRIFY = new EffectCtx("petrify", "Petrify", 1, Elements.Chaos, EffectType.negative);
-    public static EffectCtx WOUNDS = new EffectCtx("wounds", "Wounds", 2, Elements.Physical, EffectType.negative);
-    public static EffectCtx TORMENT = new EffectCtx("torment", "Torment", 3, Elements.Elemental, EffectType.negative);
-    public static EffectCtx BLIND = new EffectCtx("blind", "Blind", 4, Elements.Chaos, EffectType.negative);
-    public static EffectCtx STUN = new EffectCtx("stun", "Stun", 5, Elements.Physical, EffectType.negative);
-    public static EffectCtx SLOW = new EffectCtx("slow", "Slow", 6, Elements.Physical, EffectType.negative);
-    public static EffectCtx CURSE_AGONY = new EffectCtx("agony", "Curse of Agony", 7, Elements.Elemental, EffectType.negative);
-    public static EffectCtx CURSE_WEAKNESS = new EffectCtx("weak", "Curse of Weakness", 8, Elements.Elemental, EffectType.negative);
-    public static EffectCtx DESPAIR = new EffectCtx("despair", "Curse of Despair", 9, Elements.Elemental, EffectType.negative);
-    public static EffectCtx CHARM = new EffectCtx("charm", "Charm", 10, Elements.Elemental, EffectType.negative);
-    public static EffectCtx GROUNDING = new EffectCtx("ground", "Grounding", 11, Elements.Physical, EffectType.negative);
-    public static EffectCtx MARK_OF_DEATH = new EffectCtx("mark_of_death", "Mark of Death", 12, Elements.Physical, EffectType.negative);
-    public static EffectCtx SHRED = new EffectCtx("shred", "Shred", 13, Elements.Physical, EffectType.negative);
-    public static EffectCtx THORN = new EffectCtx("thorn", "Thorn", 14, Elements.Physical, EffectType.negative);
+    public static EffectCtx PETRIFY = new EffectCtx("petrify", "Petrify", Elements.Chaos, EffectType.negative);
+    public static EffectCtx WOUNDS = new EffectCtx("wounds", "Wounds", Elements.Physical, EffectType.negative);
+    public static EffectCtx BLIND = new EffectCtx("blind", "Blind", Elements.Chaos, EffectType.negative);
+    public static EffectCtx STUN = new EffectCtx("stun", "Stun", Elements.Physical, EffectType.negative);
+    public static EffectCtx SLOW = new EffectCtx("slow", "Slow", Elements.Physical, EffectType.negative);
+    public static EffectCtx CURSE_AGONY = new EffectCtx("agony", "Curse of Agony", Elements.Elemental, EffectType.negative);
+    public static EffectCtx CURSE_WEAKNESS = new EffectCtx("weak", "Curse of Weakness", Elements.Elemental, EffectType.negative);
+    public static EffectCtx DESPAIR = new EffectCtx("despair", "Curse of Despair", Elements.Elemental, EffectType.negative);
+    public static EffectCtx CHARM = new EffectCtx("charm", "Charm", Elements.Elemental, EffectType.negative);
+    public static EffectCtx GROUNDING = new EffectCtx("ground", "Grounding", Elements.Physical, EffectType.negative);
+    public static EffectCtx SHRED = new EffectCtx("shred", "Shred", Elements.Physical, EffectType.negative);
+    public static EffectCtx THORN = new EffectCtx("thorn", "Thorn", Elements.Physical, EffectType.negative);
 
     @Override
     public void registerAll() {
@@ -65,12 +62,6 @@ public class NegativeEffects implements ExileRegistryInit {
                 .stat(-2, -5, Armor.getInstance(), ModType.PERCENT)
                 .build();
 
-        ExileEffectBuilder.of(MARK_OF_DEATH)
-                .maxStacks(1)
-                .stat(-20, -50, Armor.getInstance(), ModType.FLAT)
-                .stat(-10, -25, DodgeRating.getInstance(), ModType.PERCENT)
-                .stat(-5, -10, new ElementalResist(Elements.Elemental), ModType.FLAT)
-                .build();
 
         ExileEffectBuilder.of(GROUNDING)
                 .maxStacks(1)
@@ -93,7 +84,6 @@ public class NegativeEffects implements ExileRegistryInit {
                 .maxStacks(1)
                 .stat(-10, -20, Armor.getInstance(), ModType.MORE)
                 .stat(5, 10, DatapackStats.MOVE_SPEED)
-
                 .spell(SpellBuilder.forEffect()
                         .onTick(PartBuilder.aoeParticles(ParticleTypes.CRIT, 2D, 0.5D)
                                 .tickRequirement(20D))
@@ -139,22 +129,6 @@ public class NegativeEffects implements ExileRegistryInit {
                 .vanillaStat(VanillaStatData.create(ATTACK_DAMAGE, -10.0F, ModType.MORE, UUID.fromString("10fb60a7-904b-462f-a7cb-a557f02e362e")))
                 .build();
 
-        ExileEffectBuilder.of(TORMENT)
-                .maxStacks(1)
-                .vanillaStat(VanillaStatData.create(MOVEMENT_SPEED, 0.2F, ModType.MORE, UUID.fromString("bd9f32fa-c8c1-455c-92aa-4a94c2a70cd8")))
-                .stat(-5, -10, new ElementalResist(Elements.Elemental), ModType.FLAT)
-                .spell(SpellBuilder.forEffect()
-                        .onTick(PartBuilder.dotDamageOnTick(TORMENT.resourcePath, SpellCalcs.TORMENT, Elements.Elemental)
-                                .tickRequirement(20D))
-                        .onTick(PartBuilder.aoeParticles(ParticleTypes.SOUL, 10D, 1D)
-                                .tickRequirement(10D))
-                        .buildForEffect())
-                .build();
-
-
-        ExileEffectBuilder.of(ELE_WEAKNESS)
-                .stat(-15, -15, new ElementalResist(Elements.Elemental), ModType.FLAT)
-                .build();
 
         ExileEffectBuilder.of(BLIND)
                 .vanillaStat(VanillaStatData.create(ATTACK_DAMAGE, -10.0F, ModType.MORE, UUID.fromString("5eccf34c-29f7-4eea-bbad-82a905594064")))

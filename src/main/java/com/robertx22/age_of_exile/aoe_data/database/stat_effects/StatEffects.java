@@ -63,8 +63,7 @@ public class StatEffects implements ExileRegistryInit {
                     NegativeEffects.SLOW,
                     NegativeEffects.STUN,
 
-                    NegativeEffects.BLIND,
-                    NegativeEffects.TORMENT
+                    NegativeEffects.BLIND
             )
             , x -> new GiveExileStatusEffect(x.resourcePath, EffectSides.Target, 5));
 

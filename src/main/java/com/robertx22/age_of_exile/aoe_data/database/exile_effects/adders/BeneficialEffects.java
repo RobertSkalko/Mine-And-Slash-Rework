@@ -25,15 +25,15 @@ import net.minecraft.core.particles.ParticleTypes;
 
 public class BeneficialEffects implements ExileRegistryInit {
 
-    public static EffectCtx VAMPIRIC_BLOOD = new EffectCtx("vamp_blood", "Vamp Blood", 3, Elements.Fire, EffectType.beneficial);
-    public static EffectCtx DRACONIC_BLOOD = new EffectCtx("draconic_blood", "Dragon Blood", 4, Elements.Fire, EffectType.beneficial);
-    public static EffectCtx REGENERATE = new EffectCtx("regenerate", "Nature Balm", 5, Elements.Chaos, EffectType.beneficial);
-    public static EffectCtx VALOR = new EffectCtx("valor", "Valor", 8, Elements.Physical, EffectType.beneficial);
-    public static EffectCtx PERSEVERANCE = new EffectCtx("perseverance", "Perseverance", 9, Elements.Physical, EffectType.beneficial);
-    public static EffectCtx VIGOR = new EffectCtx("vigor", "Vigor", 10, Elements.Physical, EffectType.beneficial);
-    public static EffectCtx TAUNT_STANCE = new EffectCtx("taunt_stance", "Taunt Stance", 11, Elements.Physical, EffectType.beneficial);
-    public static EffectCtx UNDYING_WILL = new EffectCtx("undying_will", "Undying Will", 11, Elements.Physical, EffectType.beneficial);
-    public static EffectCtx MAGE_CIRCLE = new EffectCtx("mage_circle", "Mage Circle", 12, Elements.Elemental, EffectType.beneficial);
+    public static EffectCtx VAMPIRIC_BLOOD = new EffectCtx("vamp_blood", "Vamp Blood", Elements.Fire, EffectType.beneficial);
+    public static EffectCtx DRACONIC_BLOOD = new EffectCtx("draconic_blood", "Dragon Blood", Elements.Fire, EffectType.beneficial);
+    public static EffectCtx REGENERATE = new EffectCtx("regenerate", "Nature Balm", Elements.Chaos, EffectType.beneficial);
+    public static EffectCtx VALOR = new EffectCtx("valor", "Valor", Elements.Physical, EffectType.beneficial);
+    public static EffectCtx PERSEVERANCE = new EffectCtx("perseverance", "Perseverance", Elements.Physical, EffectType.beneficial);
+    public static EffectCtx VIGOR = new EffectCtx("vigor", "Vigor", Elements.Physical, EffectType.beneficial);
+    public static EffectCtx TAUNT_STANCE = new EffectCtx("taunt_stance", "Taunt Stance", Elements.Physical, EffectType.beneficial);
+    public static EffectCtx UNDYING_WILL = new EffectCtx("undying_will", "Undying Will", Elements.Physical, EffectType.beneficial);
+    public static EffectCtx MAGE_CIRCLE = new EffectCtx("mage_circle", "Mage Circle", Elements.Elemental, EffectType.beneficial);
 
     @Override
     public void registerAll() {

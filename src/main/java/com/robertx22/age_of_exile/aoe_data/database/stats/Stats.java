@@ -226,7 +226,7 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
-    
+
     public static DataPackStatAccessor<EmptyAccessor> DAMAGE_RECEIVED = DatapackStatBuilder
             .ofSingle("dmg_received", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
@@ -394,7 +394,6 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EffectCtx> CHANCE_OF_APPLYING_EFFECT = DatapackStatBuilder
             .<EffectCtx>of(x -> "chance_of_" + x.id, x -> x.element)
             .addAllOfType(Arrays.asList(
-                            NegativeEffects.TORMENT,
                             NegativeEffects.BLIND,
                             NegativeEffects.SLOW
                     )

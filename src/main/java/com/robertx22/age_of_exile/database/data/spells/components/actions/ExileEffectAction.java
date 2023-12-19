@@ -18,8 +18,21 @@ import static com.robertx22.age_of_exile.database.data.spells.map_fields.MapFiel
 
 public class ExileEffectAction extends SpellAction {
 
+    // todo merge these two or rename..
     public enum GiveOrTake {
-        GIVE_STACKS, REMOVE_STACKS, REMOVE_NEGATIVE
+        GIVE_STACKS(com.robertx22.age_of_exile.uncommon.effectdatas.GiveOrTake.give),
+        REMOVE_STACKS(com.robertx22.age_of_exile.uncommon.effectdatas.GiveOrTake.take),
+        REMOVE_NEGATIVE(null);
+
+        private com.robertx22.age_of_exile.uncommon.effectdatas.GiveOrTake other;
+
+        GiveOrTake(com.robertx22.age_of_exile.uncommon.effectdatas.GiveOrTake other) {
+            this.other = other;
+        }
+
+        com.robertx22.age_of_exile.uncommon.effectdatas.GiveOrTake getOther() {
+            return other;
+        }
     }
 
     public ExileEffectAction() {
@@ -38,12 +51,12 @@ public class ExileEffectAction extends SpellAction {
                     .intValue();
 
             float chance = data.getOrDefault(CHANCE, 100D).floatValue();
-            
+
             targets.forEach(t -> {
 
                 if (RandomUtils.roll(chance)) {
                     ExilePotionEvent potionEvent = EventBuilder.ofEffect(ctx.calculatedSpellData, ctx.caster, t, Load.Unit(ctx.caster)
-                                    .getLevel(), potion, com.robertx22.age_of_exile.uncommon.effectdatas.GiveOrTake.give, duration)
+                                    .getLevel(), potion, action.getOther(), duration)
                             .setSpell(ctx.calculatedSpellData.getSpell())
                             .set(x -> x.data.getNumber(EventData.STACKS).number = count)
                             .build();

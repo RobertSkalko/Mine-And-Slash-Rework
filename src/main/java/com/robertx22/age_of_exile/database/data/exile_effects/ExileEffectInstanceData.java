@@ -20,6 +20,11 @@ public class ExileEffectInstanceData {
     public int ticks_left = 0;
 
 
+    public boolean shouldRemove() {
+        return ticks_left < 1 || stacks < 1;
+    }
+
+
     public Spell getSpell() {
         return ExileDB.Spells().get(spell_id);
     }

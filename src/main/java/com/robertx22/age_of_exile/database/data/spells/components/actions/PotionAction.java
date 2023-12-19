@@ -1,11 +1,9 @@
 package com.robertx22.age_of_exile.database.data.spells.components.actions;
 
-import com.robertx22.age_of_exile.database.data.exile_effects.EffectType;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.ExileEffectAction.GiveOrTake;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.mixin_ducks.StatusEffectAccesor;
-import com.robertx22.age_of_exile.vanilla_mc.potion_effects.types.ExileStatusEffect;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -55,11 +53,6 @@ public class PotionAction extends SpellAction {
                                     if (x.getEffect() instanceof StatusEffectAccesor) {
                                         StatusEffectAccesor acc = (StatusEffectAccesor) x.getEffect();
                                         return acc.my$getstatusEffectType() == net.minecraft.world.effect.MobEffectCategory.HARMFUL;
-                                    } else {
-                                        if (x.getEffect() instanceof ExileStatusEffect) {
-                                            ExileStatusEffect es = (ExileStatusEffect) x.getEffect();
-                                            return es.type == EffectType.negative;
-                                        }
                                     }
                                     return false;
                                 })

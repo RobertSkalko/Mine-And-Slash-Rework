@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.exile_effects;
 
+import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.spells.components.AttachedSpell;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
@@ -7,7 +8,7 @@ import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellD
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.value_calc.LeveledValue;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
-import com.robertx22.age_of_exile.mmorpg.registers.common.SlashPotions;
+import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -16,13 +17,11 @@ import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
-import com.robertx22.age_of_exile.vanilla_mc.potion_effects.types.ExileStatusEffect;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -58,9 +57,6 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
 
     public AttachedSpell spell;
 
-    public ExileStatusEffect getStatusEffect() {
-        return SlashPotions.getExileEffect(id);
-    }
 
     @Override
     public ExileRegistryType getExileRegistryType() {
@@ -84,8 +80,7 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
 
     @Override
     public String locNameLangFileGUID() {
-        return "effect." + BuiltInRegistries.MOB_EFFECT.getKey(getStatusEffect())
-                .toString();
+        return SlashRef.MODID + ".effect." + GUID();
     }
 
     @Override
@@ -116,7 +111,7 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
             e.printStackTrace();
         }
     }
-    
+
     public List<ExactStatData> getExactStats(LivingEntity caster, ExileEffectInstanceData data) {
 
         if (caster == null) {
@@ -176,6 +171,53 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
 
         return list;
 
+    }
+
+    // todo
+    public void onApply(LivingEntity entity) {
+
+        try {
+            ExileEffectInstanceData data = getSavedData(entity);
+
+            if (data != null) {
+                int stacks = data.stacks;
+                mc_stats.forEach(x -> x.applyVanillaStats(entity, stacks));
+                Load.Unit(entity).forceRecalculateStats();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public ExileEffectInstanceData getSavedData(LivingEntity en) {
+        return Load.Unit(en).getStatusEffectsData().get(this);
+    }
+
+    public void onRemove(LivingEntity target) {
+
+        try {
+
+            mc_stats.forEach(x -> x.removeVanillaStats(target));
+
+            ExileEffectInstanceData data = getSavedData(target);
+
+            if (data != null) {
+                LivingEntity caster = data.getCaster(target.level());
+                if (caster != null && spell != null) {
+                    SpellCtx ctx = SpellCtx.onExpire(caster, target, data.calcSpell);
+                    spell.tryActivate(Spell.DEFAULT_EN_NAME, ctx); // source is default name at all times
+                }
+            }
+
+            EntityData unitdata = Load.Unit(target);
+            unitdata.getStatusEffectsData()
+                    .get(this).stacks = 0;
+            unitdata.setEquipsChanged(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

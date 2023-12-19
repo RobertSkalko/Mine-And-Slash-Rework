@@ -6,7 +6,6 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.EffectStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
-import com.robertx22.age_of_exile.vanilla_mc.potion_effects.types.ExileStatusEffect;
 import net.minecraft.world.entity.LivingEntity;
 
 import java.util.ArrayList;
@@ -22,6 +21,10 @@ public class EntityStatusEffectsData {
 
     public void tick(LivingEntity en) {
 
+        if (exileMap.isEmpty()) {
+            return;
+        }
+
         for (Map.Entry<String, ExileEffectInstanceData> e : exileMap.entrySet()) {
             e.getValue().ticks_left--;
             ExileEffect eff = ExileDB.ExileEffects().get(e.getKey());
@@ -29,15 +32,36 @@ public class EntityStatusEffectsData {
                 eff.onTick(en, e.getValue());
             }
         }
-        exileMap.entrySet().removeIf(x -> x.getValue().ticks_left < 1);
+
+
+        // todo this is probably bit laggy per tick no?
+        List<ExileEffect> removed = new ArrayList<>();
+
+        exileMap.entrySet().removeIf(x -> {
+            boolean bo = x.getValue().shouldRemove();
+            removed.add(ExileDB.ExileEffects().get(x.getKey()));
+            return bo;
+        });
+
+        for (ExileEffect eff : removed) {
+            eff.onRemove(en);
+        }
+
     }
 
-    public ExileEffectInstanceData get(ExileStatusEffect eff) {
+    public ExileEffectInstanceData get(ExileEffect eff) {
         return exileMap.getOrDefault(eff.GUID(), new ExileEffectInstanceData());
     }
 
-    public void set(ExileStatusEffect eff, ExileEffectInstanceData data) {
-        exileMap.put(eff.GUID(), data);
+    public ExileEffectInstanceData getOrCreate(ExileEffect eff) {
+        if (!exileMap.containsKey(eff.GUID())) {
+            exileMap.put(eff.GUID(), new ExileEffectInstanceData());
+        }
+        return exileMap.getOrDefault(eff.GUID(), new ExileEffectInstanceData());
+    }
+
+    public void delete(ExileEffect eff) {
+        exileMap.remove(eff.GUID());
     }
 
 
