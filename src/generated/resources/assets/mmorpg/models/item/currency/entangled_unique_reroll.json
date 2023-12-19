@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "mmorpg:item/currency/entangled_unique_reroll"
-  }
-}

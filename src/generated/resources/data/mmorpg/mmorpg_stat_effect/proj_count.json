@@ -1,9 +1,0 @@
-{
-  "id": "proj_count",
-  "num_provider": {
-    "type": "stat_data",
-    "calc": ""
-  },
-  "number_id": "bonus_proj",
-  "ser": "add_to_number"
-}

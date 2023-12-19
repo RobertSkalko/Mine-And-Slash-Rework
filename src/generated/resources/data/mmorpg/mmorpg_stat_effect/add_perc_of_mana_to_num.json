@@ -1,9 +1,0 @@
-{
-  "id": "add_perc_of_mana_to_num",
-  "num_provider": {
-    "type": "perc_of_stat",
-    "calc": "mana"
-  },
-  "number_id": "number",
-  "ser": "add_to_number"
-}

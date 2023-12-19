@@ -1,8 +1,0 @@
-{
-  "id": "is_projectile",
-  "ifs": [
-    "spell_has_tag_projectile",
-    "is_ranged_weapon"
-  ],
-  "ser": "either_is_true"
-}

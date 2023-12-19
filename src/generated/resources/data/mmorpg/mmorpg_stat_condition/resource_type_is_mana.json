@@ -1,6 +1,0 @@
-{
-  "id": "resource_type_is_mana",
-  "ser": "string_matches",
-  "string_id": "mana",
-  "string_key": "resource_type"
-}

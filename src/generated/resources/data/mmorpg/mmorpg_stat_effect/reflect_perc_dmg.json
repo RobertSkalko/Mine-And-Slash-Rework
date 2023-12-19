@@ -1,8 +1,0 @@
-{
-  "id": "reflect_perc_dmg",
-  "num_provider": {
-    "type": "perc_of_num",
-    "calc": "number"
-  },
-  "ser": "reflect_dmg"
-}

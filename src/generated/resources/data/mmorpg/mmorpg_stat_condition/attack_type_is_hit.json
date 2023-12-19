@@ -1,6 +1,0 @@
-{
-  "id": "attack_type_is_hit",
-  "ser": "string_matches",
-  "string_id": "hit",
-  "string_key": "attack_type"
-}

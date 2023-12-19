@@ -1,9 +1,0 @@
-{
-  "id": "reduce_cd_by_ticks",
-  "num_provider": {
-    "type": "stat_data",
-    "calc": ""
-  },
-  "number_id": "cd_ticks",
-  "ser": "add_to_number"
-}
