@@ -34,7 +34,7 @@ public enum Gui implements IAutoLocName {
     FAVOR_REGEN_PER_HOUR(ChatFormatting.LIGHT_PURPLE + "Regenerates %1$s " + ChatFormatting.LIGHT_PURPLE + "per Hour"),
     FAVOR_PER_CHEST(ChatFormatting.GREEN + "Gain %1$s per Chest Looted"),
     FAVOR_PER_DEATH(ChatFormatting.RED + "You Lose %1$s on Death"),
-    SPELL_TAG_SEPARATOR(", ");
+    TAG_SEPARATOR(", ");
 
 
     private String localization = "";

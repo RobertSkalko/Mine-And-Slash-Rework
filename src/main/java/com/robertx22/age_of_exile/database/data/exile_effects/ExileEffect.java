@@ -28,7 +28,6 @@ import net.minecraft.world.entity.LivingEntity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -168,7 +167,7 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
                 .map(EffectTags::valueOf)
                 .toList();
 
-        var tagtext = Words.TAGS.locName().append(TooltipUtils.getMutabletags(tags.stream().iterator(), Gui.SPELL_TAG_SEPARATOR.locName()));
+        var tagtext = Words.TAGS.locName().append(TooltipUtils.getMutabletags(tags.stream().map(IAutoLocName::locName).iterator(), Gui.TAG_SEPARATOR.locName()));
 
 
         list.add(tagtext.withStyle(ChatFormatting.YELLOW));

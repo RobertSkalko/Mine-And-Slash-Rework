@@ -320,7 +320,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
             }
         }
 
-        MutableComponent taglist = TooltipUtils.getMutabletags(this.config.tags.stream().map(IAutoLocName::locName).iterator(), Gui.SPELL_TAG_SEPARATOR.locName());
+        MutableComponent taglist = TooltipUtils.getMutabletags(this.config.tags.stream().map(IAutoLocName::locName).iterator(), Gui.TAG_SEPARATOR.locName());
         MutableComponent tagtext = Words.TAGS.locName().append(taglist);
 
         list.add(tagtext);
