@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.aoe_data.datapacks.lang_file;
 
 import com.robertx22.age_of_exile.capability.player.data.PlayerBuffData;
+import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
 import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -55,7 +56,7 @@ public class CreateLangFile {
                         continue;
                     }
                     // I dont know why I got encoding error when export the lang file, have to add this.
-                    //If you dont want it, just delte and change the \n in Itemtips.java to \\n.
+                    //If you dont want it, just delete and change the \n in Itemtips.java to \\n.
                     json += "\t" + "\"" + iauto.formattedLocNameLangFileGUID() + "\": \"" + StringEscapeUtils.escapeJava(iauto.locNameForLangFile()) + "\",\n";
                 }
             }
@@ -144,6 +145,7 @@ public class CreateLangFile {
         list.addAll(Arrays.asList(Specialaffixs.values()));
         //
         list.addAll(Arrays.asList(SpellTag.values()));
+        list.addAll(Arrays.asList(EffectTags.values()));
         //
         list.addAll(Arrays.asList(GemItem.GemType.values()));
         list.addAll(Arrays.asList(GemItem.GemRank.values()));
@@ -188,6 +190,7 @@ public class CreateLangFile {
                 .getSerializable());
 
         list.addAll(stats);
+        list.addAll(ExileDB.UniqueGears().getSerializable());
 
         HashMap<IAutoLocName.AutoLocGroup, List<IAutoLocDesc>> map = new HashMap<>();
 

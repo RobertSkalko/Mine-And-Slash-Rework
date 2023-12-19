@@ -9,16 +9,18 @@ import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.library_of_exile.registry.serialization.ISerializable;
+import net.minecraft.ChatFormatting;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, ISerializable<UniqueGear> {
+public class UniqueGear implements IAutoLocName, IAutoLocDesc, JsonExileRegistry<UniqueGear>, ISerializable<UniqueGear> {
 
     public static UniqueGear SERIALIZER = new UniqueGear();
 
@@ -28,6 +30,8 @@ public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, 
     public String force_item_id = "";
     public String uniqueRarity = IRarity.UNIQUE_ID;
     public boolean replaces_name = true;
+
+    public String flavorText = "";
 
     public String base_gear = "";
 
@@ -68,6 +72,11 @@ public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, 
         if (json.has("replaces_name")) {
             uniq.replaces_name = json.get("replaces_name")
                     .getAsBoolean();
+        }
+
+        if (json.has("flavor_text")) {
+            uniq.flavorText = json.get("flavor_text")
+                    .getAsString();
         }
 
         return uniq;
@@ -120,5 +129,20 @@ public class UniqueGear implements IAutoLocName, JsonExileRegistry<UniqueGear>, 
     public BaseGearType getBaseGear() {
         return ExileDB.GearTypes()
                 .get(base_gear);
+    }
+
+    @Override
+    public AutoLocGroup locDescGroup() {
+        return locNameGroup();
+    }
+
+    @Override
+    public String locDescLangFileGUID() {
+        return SlashRef.MODID + ".unique_gear." + this.GUID() + ".flavor_text";
+    }
+
+    @Override
+    public String locDescForLangFile() {
+        return ChatFormatting.ITALIC + "" + ChatFormatting.GRAY + this.flavorText;
     }
 }

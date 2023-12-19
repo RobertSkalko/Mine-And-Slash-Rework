@@ -19,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -287,4 +288,18 @@ public class TooltipUtils {
 
     }
 
+    public static MutableComponent getMutabletags(Iterator<?> iterator, MutableComponent separator) {
+        if (separator == null) {
+            separator = Component.literal("");
+        }
+
+        ExileText Etext = ExileText.emptyLine();
+        while (iterator.hasNext()) {
+            Etext.append((MutableComponent) iterator.next());
+            if (iterator.hasNext()) {
+                Etext.append(separator);
+            }
+        }
+        return Etext.get();
+    }
 }

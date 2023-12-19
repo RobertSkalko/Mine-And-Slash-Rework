@@ -25,7 +25,7 @@ public abstract class GearCurrency extends Currency {
 
     public abstract int getPotentialLoss();
 
-    public boolean isAffectedByPotential() {
+    public boolean isPotentialConsumer() {
         return getPotentialLoss() > 0;
     }
 
@@ -53,7 +53,7 @@ public abstract class GearCurrency extends Currency {
         for (GearOutcome o : getOutcomes()) {
             int w = o.Weight();
 
-            if (isAffectedByPotential()) {
+            if (isPotentialConsumer()) {
                 if (o.getOutcomeType() == GearOutcome.OutcomeType.GOOD) {
                     w *= multi;
                 }

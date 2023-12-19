@@ -34,7 +34,7 @@ public class NormalStatTooltip implements IStatTooltipType {
         }
         if (ctx.showStatRanges()) {
             if (ctx.statinfo.affix_rarity != null) {
-                txt.append(" [").append(TooltipUtils.rarityShort(ctx.statinfo.affix_rarity)).append("]");
+                txt.append(ctx.statinfo.affix_rarity.textFormatting() + " [").append(TooltipUtils.rarityShort(ctx.statinfo.affix_rarity)).append("]" + ChatFormatting.RESET);
             }
         }
 
@@ -63,7 +63,7 @@ public class NormalStatTooltip implements IStatTooltipType {
             format = ChatFormatting.LIGHT_PURPLE;
         }
 
-        return Component.literal(format + " [" + perc + "%]").withStyle(format);
+        return Component.literal(format + " [" + perc + "%]" + ChatFormatting.RESET);
 
     }
 

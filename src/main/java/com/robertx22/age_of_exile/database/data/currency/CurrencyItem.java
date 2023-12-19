@@ -52,10 +52,10 @@ public class CurrencyItem extends Item implements IItemAsCurrency, IAutoLocName,
 
 
         if (effect instanceof GearCurrency gc) {
-            if (gc.isAffectedByPotential()) {
+            if (gc.isPotentialConsumer()) {
                 tooltip.add(Words.POTENTIAL_COST.locName(gc.getPotentialLoss()));
             } else {
-                tooltip.add(Words.NOT_AFFECTED_BY_POTENT.locName());
+                tooltip.add(Words.NOT_A_POTENTIAL_CONSUMER.locName());
             }
         }
 

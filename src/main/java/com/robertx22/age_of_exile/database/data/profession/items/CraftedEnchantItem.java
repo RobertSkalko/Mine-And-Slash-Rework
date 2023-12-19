@@ -11,6 +11,7 @@ import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.database.data.profession.ICreativeTabTiered;
 import com.robertx22.age_of_exile.database.data.profession.LeveledItem;
+import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.requirements.bases.GearRequestedFor;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.GearEnchantData;
@@ -18,6 +19,7 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
+import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
@@ -33,7 +35,7 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
 
-public class CraftedEnchantItem extends AutoItem implements IItemAsCurrency, ICreativeTabTiered {
+public class CraftedEnchantItem extends AutoItem implements IItemAsCurrency, ICreativeTabTiered, IRarity {
 
     public SlotFamily fam;
     String rar;
@@ -49,12 +51,12 @@ public class CraftedEnchantItem extends AutoItem implements IItemAsCurrency, ICr
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> l, TooltipFlag pIsAdvanced) {
         var tier = LeveledItem.getTier(pStack);
         l.add(TooltipUtils.tier(tier.tier));
-        l.add(Component.literal("Levels " + tier.levelRange.getMinLevel() + "-" + tier.levelRange.getMaxLevel()));
+        l.add(Gui.ENCHANTMENT_LEVEL.locName().append(tier.levelRange.getMinLevel() + "-" + tier.levelRange.getMaxLevel()));
     }
 
     @Override
     public String locNameForLangFile() {
-        return StringUTIL.capitalise(rar) + " " + fam.name() + " Enchantment";
+        return getRarity().textFormatting() + StringUTIL.capitalise(rar) + " " + fam.name() + " Enchantment";
     }
 
     @Override
@@ -197,5 +199,15 @@ public class CraftedEnchantItem extends AutoItem implements IItemAsCurrency, ICr
     @Override
     public Item getThis() {
         return this;
+    }
+
+    @Override
+    public String getRarityId() {
+        return rar;
+    }
+
+    @Override
+    public GearRarity getRarity() {
+        return ExileDB.GearRarities().get(rar);
     }
 }

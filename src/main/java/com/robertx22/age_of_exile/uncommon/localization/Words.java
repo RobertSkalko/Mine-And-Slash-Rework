@@ -23,7 +23,7 @@ public enum Words implements IAutoLocName {
 
     GAME_CHANGER("Game Changer Talent"),
     POTENTIAL_COST("Potential Cost: %1$s"),
-    NOT_AFFECTED_BY_POTENT("Not affected by potential."),
+    NOT_A_POTENTIAL_CONSUMER("Does not consume potential when used"),
     STATUS_EFFECT("Status Effect"),
     PET_BASIC("Pet Basic Attack:"),
     PER_STACK(" (per stack): "),
@@ -156,8 +156,7 @@ public enum Words implements IAutoLocName {
     MULTIPLICATIVE_DAMAGE_LESS("Less"),
     INCREASE_PERCENT_STAT("Extra "),
     EMPTY_BOX("Box"),
-    LEVEL_UP_TYPE_PLAYER("Player"),
-    SPELL_TAG_SPARATOR(", ");
+    LEVEL_UP_TYPE_PLAYER("Player");
 
 
     private String localization = "";

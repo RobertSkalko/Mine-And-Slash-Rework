@@ -159,7 +159,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
 
         for (LeagueMechanic league : this.getLeagueMechanics()) {
-            tooltip.add(Component.literal("Can Spawn: " + league.GUID()));
+            tooltip.add(Itemtips.MAP_LEAGUE_SPAWN.locName().append(league.GUID()));
         }
 
         TooltipUtils.removeDoubleBlankLines(tooltip);

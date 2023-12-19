@@ -72,7 +72,7 @@ public class SingleTalentResetPotion extends AutoItem implements IShapedRecipe {
 
     @Override
     public String locNameForLangFile() {
-        return "Single Talent Reset Potion";
+        return "Small Talent Reset Potion";
     }
 
 }

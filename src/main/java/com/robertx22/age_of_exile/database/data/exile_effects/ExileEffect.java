@@ -13,7 +13,9 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
+import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.age_of_exile.vanilla_mc.potion_effects.types.ExileStatusEffect;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
@@ -162,14 +164,11 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
         }
 
         List<EffectTags> tags = this.tags.stream()
-                .map(x -> EffectTags.valueOf(x))
-                .collect(Collectors.toList());
+                .map(EffectTags::valueOf)
+                .toList();
 
-        var tagtext = Words.TAGS.locName().append(": ");
+        var tagtext = Words.TAGS.locName().append(TooltipUtils.getMutabletags(tags.stream().map(IAutoLocName::locName).iterator(), Gui.TAG_SEPARATOR.locName()));
 
-        for (EffectTags x : tags) {
-            tagtext.append(x.name + " ");
-        }
 
         list.add(tagtext.withStyle(ChatFormatting.YELLOW));
 
