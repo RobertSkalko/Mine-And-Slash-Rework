@@ -51,7 +51,7 @@ public class UniqueGear implements IAutoLocName, IAutoLocDesc, JsonExileRegistry
         json.addProperty("base_gear", base_gear);
 
         json.addProperty("force_item_id", force_item_id);
-    
+
         return json;
     }
 
@@ -143,6 +143,9 @@ public class UniqueGear implements IAutoLocName, IAutoLocDesc, JsonExileRegistry
 
     @Override
     public String locDescForLangFile() {
+        if (flavorText.isEmpty()) {
+            return flavorText;
+        }
         return ChatFormatting.ITALIC + "" + ChatFormatting.GRAY + this.flavorText;
     }
 }

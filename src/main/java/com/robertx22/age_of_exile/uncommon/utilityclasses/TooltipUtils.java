@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
@@ -122,7 +120,7 @@ public class TooltipUtils {
                     formattouse = null;
                 }
                 list.add(cut);
-            } else if (i - start > 22 && c == ' ') {
+            } else if (i - start > 35 && c == ' ') {
                 String cut = str.substring(start, i);
                 if (start > 0) {
                     cut = cut.substring(1);

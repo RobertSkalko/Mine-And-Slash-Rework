@@ -18,6 +18,7 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
@@ -156,7 +157,7 @@ public class GearTooltipUtils {
                 int cost = (int) Energy.getInstance().scale(ModType.FLAT, gear.GetBaseGearType().getGearSlot().weapon_data.energy_cost_per_swing, data.getLevel());
                 int permob = (int) Energy.getInstance().scale(ModType.FLAT, gear.GetBaseGearType().getGearSlot().weapon_data.energy_cost_per_mob_attacked, data.getLevel());
                 float damageFactor = (gear.GetBaseGearType().getGearSlot().getBasicDamageMulti() * 100) / 100F;
-                
+
                 tip.add(Words.Energy_Cost_Per_Mob.locName(cost, permob, damageFactor).withStyle(ChatFormatting.GREEN));
             }
         }
@@ -174,8 +175,11 @@ public class GearTooltipUtils {
         //  ItemStack.appendEnchantmentNames(tip, stack.getEnchantmentTags());
 
         if ((gear.isUnique() || gear.isRuneWord()) && !gear.uniqueStats.getUnique(gear).locDesc().getString().isEmpty()) {
-            tip.add(gear.uniqueStats.getUnique(gear).locDesc());
-            tip.add(Component.literal(""));
+            var desc = gear.uniqueStats.getUnique(gear).locDesc();
+            if (I18n.exists(gear.uniqueStats.getUnique(gear).locDescLangFileGUID())) {
+                tip.add(desc);
+                tip.add(Component.literal(""));
+            }
         }
 
 
@@ -194,7 +198,6 @@ public class GearTooltipUtils {
                     )
                     .withStyle(ChatFormatting.BLUE));
         }
-
 
 
         List<Component> tool = TooltipUtils.removeDoubleBlankLines(tip);
