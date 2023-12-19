@@ -50,7 +50,6 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
         // dps, summoner, debuffer
         SchoolBuilder.of("warlock", "Warlock")
                 .add(BasicAttackSpells.POISONBALL_ID, new PointData(1, 0))
-                .add(NatureSpells.THORN_BUSH, new PointData(1, 2))
                 .add(SummonSpells.SUMMON_SPIDER, new PointData(1, 3))
                 .add(NatureSpells.POISON_CLOUD, new PointData(1, 4))
                 .add(IntSpells.BLACK_HOLE, new PointData(1, 6))
@@ -145,15 +144,17 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
                 .add(LightningSpells.LIGHTNING_NOVA, new PointData(1, 2))
                 .add(LightningSpells.CHAIN_LIGHTNING, new PointData(1, 3))
 
-                .add(TotemSpells.HEAL_TOTEM_ID, new PointData(3, 0))
-                .add(LightningSpells.LIGHTNING_TOTEM, new PointData(3, 1))
+                .add(NatureSpells.THORN_BUSH, new PointData(3, 0))
+                .add(TotemSpells.HEAL_TOTEM_ID, new PointData(3, 1))
+                .add(LightningSpells.LIGHTNING_TOTEM, new PointData(3, 2))
                 .add(TotemSpells.MANA_TOTEM_ID, new PointData(3, 3))
                 .add(FireSpells.MAGMA_FLOWER, new PointData(3, 4))
-                .add(WaterSpells.FROST_FLOWER, new PointData(4, 4))
                 .add(NatureSpells.CHAOS_TOTEM, new PointData(3, 5))
 
-                .add(NatureSpells.NATURE_BALM, new PointData(5, 1))
-                .add(NatureSpells.ENTANGLE_SEED, new PointData(5, 3))
+                .add(NatureSpells.REJUVENATION, new PointData(5, 0))
+                .add(NatureSpells.CIRCLE_OF_HEALING, new PointData(5, 1))
+                .add(NatureSpells.ENTANGLE_SEED, new PointData(5, 2))
+                .add(WaterSpells.FROST_FLOWER, new PointData(5, 5))
 
                 .add(SpellPassives.ELECTRIFY_CHANCE, new PointData(8, 1))
                 .add(SpellPassives.TOTEM_DMG, new PointData(9, 1))

@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.stats;
 
-import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.BeneficialEffects;
-import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.NegativeEffects;
+import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stat_conditions.StatConditions;
 import com.robertx22.age_of_exile.aoe_data.database.stat_effects.StatEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.*;
@@ -70,7 +69,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EffectCtx> GIVE_EFFECT_TO_ALLIES_IN_RADIUS = DatapackStatBuilder
             .<EffectCtx>of(x -> "give_" + x.id + "_to_allies_in_aoe", x -> x.element)
             .addAllOfType(Arrays.asList(
-                    BeneficialEffects.REGENERATE
+                    ModEffects.REGENERATE
             ))
             .worksWithEvent(RestoreResourceEvent.ID) // todo should be tick event, BUT LAG
             .setPriority(0)
@@ -93,7 +92,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EffectCtx> GIVE_EFFECT_TO_SELF_ON_TICK = DatapackStatBuilder
             .<EffectCtx>of(x -> "give_" + x.id + "_to_self_on_tick", x -> x.element)
             .addAllOfType(Arrays.asList(
-                    BeneficialEffects.TAUNT_STANCE
+                    ModEffects.TAUNT_STANCE
             ))
             .worksWithEvent(RestoreResourceEvent.ID) // todo should be tick event, BUT LAG
             .setPriority(0)
@@ -394,8 +393,8 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EffectCtx> CHANCE_OF_APPLYING_EFFECT = DatapackStatBuilder
             .<EffectCtx>of(x -> "chance_of_" + x.id, x -> x.element)
             .addAllOfType(Arrays.asList(
-                            NegativeEffects.BLIND,
-                            NegativeEffects.SLOW
+                            ModEffects.BLIND,
+                            ModEffects.SLOW
                     )
             )
             .worksWithEvent(DamageEvent.ID)
@@ -709,6 +708,7 @@ public class Stats implements ExileRegistryInit {
             .ofSingle("totem_resto", Elements.All)
             .worksWithEvent(RestoreResourceEvent.ID)
             .setPriority(100)
+            .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.totem))
             .addEffect(StatEffects.INCREASE_VALUE)
@@ -724,6 +724,25 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
+    public static DataPackStatAccessor<EmptyAccessor> REJUV_HEAL_SELF = DatapackStatBuilder
+            .ofSingle("rejuv_eff_on_self", Elements.All)
+            .worksWithEvent(RestoreResourceEvent.ID)
+            .setPriority(100)
+            .setSide(EffectSides.Target)
+            .addCondition(StatConditions.IS_SPELL)
+            .addCondition(StatConditions.IS_RESOURCE.get(ResourceType.health))
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.rejuvenate))
+            .addEffect(StatEffects.INCREASE_VALUE)
+            .setLocName(x -> "Rejuvenation Healing")
+            .setLocDesc(x -> "Increases Rejuvenation related heals on you.")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+                x.base = 0;
+                x.min = -100;
+                x.format = ChatFormatting.GREEN.getName();
+                x.group = StatGroup.RESTORATION;
+            })
+            .build();
 
     public static DataPackStatAccessor<EmptyAccessor> HEALING_RECEIVED = DatapackStatBuilder
             .ofSingle("heal_effect_on_self", Elements.All)

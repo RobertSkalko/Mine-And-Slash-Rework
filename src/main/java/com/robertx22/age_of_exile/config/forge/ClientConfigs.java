@@ -20,6 +20,7 @@ public class ClientConfigs {
         b.comment("Client Configs")
                 .push("general");
 
+        
         SHOW_LOW_ENERGY_MANA_WARNING = b.define("show_low_mana_warning", true);
         RENDER_SIMPLE_MOB_BAR = b.define("render_mob_bar", true);
         RENDER_DEATH_STATISTICS = b.define("render_death_stats", true);

@@ -15,7 +15,7 @@ public class ExileEffectInstanceData {
 
     public String caster_uuid = "";
     public String spell_id = "";
-    public int stacks = 1;
+    public int stacks = 0;
     public float str_multi = 1;
     public int ticks_left = 0;
 

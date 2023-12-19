@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.spells.impl;
 
-import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.NegativeEffects;
+import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
@@ -22,7 +22,7 @@ public class CurseSpells implements ExileRegistryInit {
     public static String CURSE_OF_WEAK = "curse_of_weak";
     public static String CURSE_OF_DESPAIR = "curse_of_despair";
 
-    
+
     static void curse(String id, String name, EffectCtx effect) {
         SpellBuilder.of(id, PlayStyle.INT, SpellConfiguration.Builder.instant(10, 20 * 30)
                                 .setSwingArm()
@@ -44,9 +44,9 @@ public class CurseSpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        curse(CURSE_OF_AGONY, "Curse of Agony", NegativeEffects.CURSE_AGONY);
-        curse(CURSE_OF_WEAK, "Curse of Weakness", NegativeEffects.CURSE_WEAKNESS);
-        curse(CURSE_OF_DESPAIR, "Curse of Despair", NegativeEffects.DESPAIR);
+        curse(CURSE_OF_AGONY, "Curse of Agony", ModEffects.CURSE_AGONY);
+        curse(CURSE_OF_WEAK, "Curse of Weakness", ModEffects.CURSE_WEAKNESS);
+        curse(CURSE_OF_DESPAIR, "Curse of Despair", ModEffects.DESPAIR);
 
     }
 }

@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.spells;
 
-import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.NegativeEffects;
+import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
 import com.robertx22.age_of_exile.database.data.spells.components.ComponentPart;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
@@ -85,7 +85,7 @@ public class PartBuilder {
     public static ComponentPart damageInAoeIfCharmed(ValueCalculation calc, Elements ele, Double radius) {
         ComponentPart c = new ComponentPart();
         c.acts.add(SpellAction.DEAL_DAMAGE.create(calc, ele));
-        c.en_preds.add(HasEffect.HAS_EFFECT.create(NegativeEffects.CHARM));
+        c.en_preds.add(HasEffect.HAS_EFFECT.create(ModEffects.CHARM));
         c.targets.add(BaseTargetSelector.AOE.create(radius, EntityFinder.SelectionType.RADIUS, AllyOrEnemy.enemies));
         return c;
     }

@@ -15,6 +15,7 @@ public enum SpellTag implements IAutoLocName {
     summon("Summon"),
     has_pet_ability("Has Pet Ability"),
     heal("Heal"),
+    rejuvenate("Rejuvenate"),
     arrow("Arrow"),
     curse("Curse"),
     shield("Shield"),

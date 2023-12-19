@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.HealthUtils;
 import com.robertx22.library_of_exile.utils.CLOC;
@@ -36,8 +37,10 @@ import net.minecraft.world.scores.Team;
 import org.joml.Quaternionf;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class HealthBarRenderer {
 
@@ -193,6 +196,16 @@ public class HealthBarRenderer {
         return visible;
     }
 
+    static List<ItemStack> getIcons(Entity e) {
+
+        if (e instanceof LivingEntity en) {
+            return Load.Unit(en).getStatusEffectsData().exileMap.entrySet().stream()
+                    .map(x -> new ItemStack(ExileDB.ExileEffects().get(x.getKey()).getEffectDisplayItem(), x.getValue().stacks)).collect(Collectors.toList());
+        }
+        return Arrays.asList();
+
+    }
+
     public static void hookRender(Entity entity, PoseStack poseStack, MultiBufferSource buffers,
                                   Quaternionf cameraOrientation) {
         final Minecraft mc = Minecraft.getInstance();
@@ -213,6 +226,7 @@ public class HealthBarRenderer {
         final int barHeight = NeatConfig.instance.barHeight();
         final boolean boss = isBoss(living);
 
+        List<ItemStack> icons = getIcons(entity);
 
         String lvl = "Lvl " + Load.Unit(living).getLevel();
 
@@ -242,7 +256,7 @@ public class HealthBarRenderer {
 
         String name = ChatFormatting.YELLOW + lvl + " " + color + rar + " " + prefix + " " + living.getDisplayName().getString() + " " + suffix;
 
-        final float nameLen = mc.font.width(name) * textScale;
+        final float nameLen = (mc.font.width(name) + (icons.size() * 5)) * textScale;
         final float halfSize = Math.max(NeatConfig.instance.plateSize(), nameLen / 2.0F + 10.0F);
 
         poseStack.pushPose();
@@ -342,39 +356,14 @@ public class HealthBarRenderer {
 
             float iconOffset = 2.85F;
             float zShift = 0F;
-            if (NeatConfig.instance.showAttributes()) {
-                var icon = getIcon(living, boss);
-                renderIcon(living.level(), icon, poseStack, buffers,
-                        globalScale, halfSize, iconOffset, zShift);
+
+            // todo
+            for (ItemStack icon : icons) {
+                renderIcon(living.level(), icon, poseStack, buffers, globalScale, halfSize, iconOffset, zShift);
                 iconOffset += 5F;
                 zShift += zBump;
             }
 
-            int armor = living.getArmorValue();
-            if (armor > 0 && NeatConfig.instance.showArmor()) {
-                int ironArmor = armor % 5;
-                int diamondArmor = armor / 5;
-                if (!NeatConfig.instance.groupArmor()) {
-                    ironArmor = armor;
-                    diamondArmor = 0;
-                }
-
-                var iron = new ItemStack(Items.IRON_CHESTPLATE);
-                for (int i = 0; i < ironArmor; i++) {
-                    renderIcon(living.level(), iron, poseStack, buffers,
-                            globalScale, halfSize, iconOffset, zShift);
-                    iconOffset += 1F;
-                    zShift += zBump;
-                }
-
-                var diamond = new ItemStack(Items.DIAMOND_CHESTPLATE);
-                for (int i = 0; i < diamondArmor; i++) {
-                    renderIcon(living.level(), diamond, poseStack, buffers,
-                            globalScale, halfSize, iconOffset, zShift);
-                    iconOffset += 1F;
-                    zShift += zBump;
-                }
-            }
 
             poseStack.popPose();
         }
@@ -397,9 +386,10 @@ public class HealthBarRenderer {
             poseStack.translate(-dx, dy, dz);
             poseStack.scale(iconScale, iconScale, iconScale);
             poseStack.mulPose(Axis.YP.rotationDegrees(180F));
+
+
             Minecraft.getInstance().getItemRenderer()
-                    .renderStatic(icon, ItemDisplayContext.NONE, 0xF000F0,
-                            OverlayTexture.NO_OVERLAY, poseStack, buffers, level, 0);
+                    .renderStatic(icon, ItemDisplayContext.NONE, 0xF000F0, OverlayTexture.NO_OVERLAY, poseStack, buffers, level, 0);
             poseStack.popPose();
         }
     }

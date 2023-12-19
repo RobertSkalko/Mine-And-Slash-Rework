@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.spells.schools;
 
-import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.BeneficialEffects;
+import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
@@ -74,7 +74,7 @@ public class FireSpells implements ExileRegistryInit {
                         Arrays.asList())
                 .manualDesc("Gives effect to nearby allies.")
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
-                .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, BeneficialEffects.VAMPIRIC_BLOOD.resourcePath, 20 * 60D))
+                .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, ModEffects.VAMPIRIC_BLOOD.resourcePath, 20 * 60D))
                 .levelReq(30)
                 .build();
 
@@ -82,7 +82,7 @@ public class FireSpells implements ExileRegistryInit {
                         Arrays.asList())
                 .manualDesc("Gives effect to nearby allies.")
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
-                .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, BeneficialEffects.DRACONIC_BLOOD.resourcePath, 20 * 60D))
+                .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, ModEffects.DRACONIC_BLOOD.resourcePath, 20 * 60D))
                 .levelReq(30)
                 .build();
 

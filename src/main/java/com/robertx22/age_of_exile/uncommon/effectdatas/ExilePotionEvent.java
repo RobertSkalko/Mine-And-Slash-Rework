@@ -52,6 +52,8 @@ public class ExilePotionEvent extends EffectEvent {
 
         ExileEffectInstanceData extraData = Load.Unit(target).getStatusEffectsData().getOrCreate(effect);
 
+        boolean applied = extraData.stacks == 0;
+
 
         if (action == GiveOrTake.take) {
 
@@ -63,14 +65,9 @@ public class ExilePotionEvent extends EffectEvent {
             Load.Unit(target).trySync();
         } else {
 
-            boolean applied = extraData.stacks == 0;
 
             extraData.stacks++;
             extraData.stacks = Mth.clamp(extraData.stacks, 1, effect.max_stacks);
-
-            if (applied) {
-                effect.onApply(target);
-            }
 
         }
 
@@ -83,6 +80,10 @@ public class ExilePotionEvent extends EffectEvent {
 
         if (extraData.stacks < 1) {
             Load.Unit(target).getStatusEffectsData().delete(effect);
+        }
+
+        if (applied) {
+            effect.onApply(target);
         }
 
         Load.Unit(target).setEquipsChanged(true);

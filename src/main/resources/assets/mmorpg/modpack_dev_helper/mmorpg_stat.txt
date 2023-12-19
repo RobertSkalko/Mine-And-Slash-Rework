@@ -44,6 +44,7 @@ damage_spell_dmg
 alchemy_triple_drop
 totem_spell_dmg
 elemental_mana_leech
+learn_circle_of_healing
 golem_cdr
 mining_core_drop_bonus
 piercing_projectiles
@@ -116,6 +117,7 @@ int_dmg_per_5_strength
 water_focus
 spell_water_damage
 proj_dmg_received
+rejuvenate_cdr
 elemental_penetration
 ele_sword_damage
 dmg_to_undead
@@ -261,6 +263,7 @@ learn_boomerang
 chaos_weapon_damage
 offensive_eff_duration
 all_chaos_damage
+rejuv_eff_on_self
 all_water_damage
 learn_fireball
 low_hp_healing
@@ -360,6 +363,7 @@ mining_lesser_drop_bonus
 fire_dmg_when_target_low_hp
 energy_per_sec
 totem_cdr
+learn_rejuvenation
 projectile_cdr
 phys_to_chaos
 learn_test_command
@@ -490,6 +494,7 @@ health_on_kill
 int_dmg_received
 freeze_strength
 mining_exp_bonus
+rejuvenate_spell_dmg
 learn_curse_of_agony
 water_any_wep_damage
 lightning_dmg_when_target_low_hp

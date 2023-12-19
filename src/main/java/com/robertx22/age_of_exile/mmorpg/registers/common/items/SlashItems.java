@@ -1,5 +1,7 @@
 package com.robertx22.age_of_exile.mmorpg.registers.common.items;
 
+import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
+import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
 import com.robertx22.age_of_exile.capability.player.BackpackItem;
 import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChestItem;
 import com.robertx22.age_of_exile.database.data.profession.all.Professions;
@@ -45,6 +47,11 @@ public class SlashItems {
         station(Professions.GEAR_CRAFTING, () -> Items.IRON_CHESTPLATE);
         station(Professions.ALCHEMY, () -> Items.CAULDRON);
         station(Professions.ENCHANTING, () -> Items.PAPER);
+
+        for (EffectCtx eff : ModEffects.ALL) {
+            EFFECT_DISPLAY.put(eff.GUID(), Def.item(() -> new EffectDisplayItem(), "mob_effects/" + eff.GUID()));
+        }
+        
 
     }
 
@@ -100,6 +107,7 @@ public class SlashItems {
 
 
     public static HashMap<String, RegObj<Item>> STATIONS = new HashMap<>();
+    public static HashMap<String, RegObj<Item>> EFFECT_DISPLAY = new HashMap<>();
 
 
     public static class GearItems {

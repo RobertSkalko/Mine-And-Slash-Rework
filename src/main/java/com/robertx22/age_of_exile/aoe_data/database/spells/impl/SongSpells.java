@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.spells.impl;
 
-import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.NegativeEffects;
+import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
@@ -38,7 +38,7 @@ public class SongSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.AIR, 1D, 1D, SlashEntities.SIMPLE_PROJECTILE.get(), 20D, false)))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.NOTE, 2D, 0.15D))
                 .onExpire(PartBuilder.damageInAoe(SpellCalcs.POWER_CHORD, Elements.Physical, 1.5D)
-                        .addActions(SpellAction.EXILE_EFFECT.giveSeconds(NegativeEffects.CHARM, 6)))
+                        .addActions(SpellAction.EXILE_EFFECT.giveSeconds(ModEffects.CHARM, 6)))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.ENCHANTED_HIT, 10D, 1D))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.NOTE, 20D, 1D))
                 .build();
@@ -55,7 +55,7 @@ public class SongSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.AIR, 1D, 0.25D, SlashEntities.SIMPLE_PROJECTILE.get(), 80D, false)))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.NOTE, 2D, 0.15D))
                 .onExpire(PartBuilder.damageInAoe(SpellCalcs.RITARDANDO, Elements.Physical, 3D)
-                        .addActions(SpellAction.EXILE_EFFECT.giveSeconds(NegativeEffects.SLOW, 3)))
+                        .addActions(SpellAction.EXILE_EFFECT.giveSeconds(ModEffects.SLOW, 3)))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.ENCHANTED_HIT, 10D, 3D))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.NOTE, 20D, 3D))
                 .build();

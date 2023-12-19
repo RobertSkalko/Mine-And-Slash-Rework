@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.spells.schools;
 
-import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.NegativeEffects;
+import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
@@ -127,7 +127,7 @@ public class RangerSpells implements ExileRegistryInit {
                 .weaponReq(CastingWeapon.ANY_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.SPLASH_POTION_BREAK, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.AGGRO.create(SpellCalcs.SMOKE_BOMB, AggroAction.Type.DE_AGGRO))
-                        .addActions(SpellAction.EXILE_EFFECT.create(NegativeEffects.BLIND.resourcePath, ExileEffectAction.GiveOrTake.GIVE_STACKS, 20D * 5))
+                        .addActions(SpellAction.EXILE_EFFECT.create(ModEffects.BLIND.resourcePath, ExileEffectAction.GiveOrTake.GIVE_STACKS, 20D * 5))
                         .addTarget(TargetSelector.AOE.create(10D, EntityFinder.SelectionType.RADIUS, AllyOrEnemy.enemies)))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.SMOKE, 200D, 3D))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.EFFECT, 50D, 3D))
@@ -259,7 +259,7 @@ public class RangerSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.createArrow(1D)))
                 .onHit(PartBuilder.damage(SpellCalcs.DIRECT_ARROW_HIT, Elements.Physical))
                 .onCast(PartBuilder.pushCaster(DashUtils.Way.BACKWARDS, DashUtils.Strength.MEDIUM_DISTANCE))
-                .onHit(PartBuilder.addExileEffectToEnemiesInAoe(NegativeEffects.WOUNDS.resourcePath, 1D, 20 * 20D))
+                .onHit(PartBuilder.addExileEffectToEnemiesInAoe(ModEffects.WOUNDS.resourcePath, 1D, 20 * 20D))
                 .onHit(PartBuilder.playSound(SoundEvents.ARROW_HIT, 1D, 1D))
                 .onTick(PartBuilder.particleOnTick(5D, ParticleTypes.CRIT, 5D, 0.1D)
                 )

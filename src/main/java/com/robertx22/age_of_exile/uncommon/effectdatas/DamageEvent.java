@@ -374,7 +374,7 @@ public class DamageEvent extends EffectEvent {
 
             if (this.data.isBasicAttack()) {
                 for (Entry<String, ExileEffectInstanceData> e : targetData.getStatusEffectsData().exileMap.entrySet()) {
-                    if (e.getValue().stacks > 0) {
+                    if (!e.getValue().shouldRemove()) {
                         var data = e.getValue();
                         var sd = data.calcSpell;
                         var ctx = SpellCtx.onEntityBasicAttacked(this.source, sd, target);

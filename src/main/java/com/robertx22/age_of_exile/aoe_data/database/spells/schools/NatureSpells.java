@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.spells.schools;
 
-import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.BeneficialEffects;
-import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.NegativeEffects;
+import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
@@ -27,11 +26,12 @@ import java.util.Arrays;
 public class NatureSpells implements ExileRegistryInit {
 
     public static String REFRESH = "refresh";
-    public static String NATURE_BALM = "nature_balm";
+    public static String REJUVENATION = "rejuvenation";
     public static String ENTANGLE_SEED = "entangling_seed";
     public static String POISON_CLOUD = "poison_cloud";
     public static String THORN_BUSH = "thorn_bush";
     public static String CHAOS_TOTEM = "chaos_totem";
+    public static String CIRCLE_OF_HEALING = "circle_of_healing";
 
     @Override
     public void registerAll() {
@@ -94,7 +94,7 @@ public class NatureSpells implements ExileRegistryInit {
                 .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.SNEEZE, 40D, 3D, 1D))
                 .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.ITEM_SLIME, 40D, 3D, 1D))
                 .onTick("block", PartBuilder.damageInAoe(SpellCalcs.THORN_BUSH, Elements.Chaos, 3D).tickRequirement(20D).disableKnockback())
-                .onTick("block", PartBuilder.addExileEffectToEnemiesInAoe(NegativeEffects.THORN.resourcePath, 3D, 20 * 8D).tickRequirement(20D))
+                .onTick("block", PartBuilder.addExileEffectToEnemiesInAoe(ModEffects.THORN.resourcePath, 3D, 20 * 8D).tickRequirement(20D))
                 .onTick("block", PartBuilder.playSound(SoundEvents.GRASS_BREAK, 1D, 1D).tickRequirement(20D))
                 .levelReq(20)
                 .build();
@@ -135,14 +135,27 @@ public class NatureSpells implements ExileRegistryInit {
                 .build();
 
 
-        SpellBuilder.of(NATURE_BALM, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 60 * 20)
-                        , "Nature's Balm",
-                        Arrays.asList(SpellTag.heal))
+        SpellBuilder.of(REJUVENATION, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 60 * 20)
+                        , "Rejuvenation",
+                        Arrays.asList(SpellTag.heal, SpellTag.rejuvenate))
                 .manualDesc("Gives buff that heals nearby allies for " + SpellCalcs.NATURE_BALM.getLocDmgTooltip() + " every second.")
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
-                .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, BeneficialEffects.REGENERATE.resourcePath, 20 * 15D))
+                .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, ModEffects.REGENERATE.resourcePath, 20 * 15D))
                 .levelReq(1)
                 .build();
+
+        SpellBuilder.of(CIRCLE_OF_HEALING, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 10)
+                                .setChargesAndRegen(CIRCLE_OF_HEALING, 3, 20 * 30), "Circle of Healing",
+                        Arrays.asList(SpellTag.heal, SpellTag.rejuvenate))
+                .manualDesc("Rejuvenate allies around you for " + SpellCalcs.CIRCLE_OF_HEALING.getLocDmgTooltip() + " health")
+                .weaponReq(CastingWeapon.ANY_WEAPON)
+                .onCast(PartBuilder.playSound(SlashSounds.BUFF.get(), 1D, 1D))
+                .onCast(PartBuilder.groundParticles(ParticleTypes.COMPOSTER, 50D, 5D, 0.2D))
+                .onCast(PartBuilder.groundParticles(ParticleTypes.HEART, 50D, 5D, 0.2D))
+                .onCast(PartBuilder.healInAoe(SpellCalcs.CIRCLE_OF_HEALING, 5D))
+                .levelReq(20)
+                .build();
+
 
         SpellBuilder.of(ENTANGLE_SEED, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 60 * 20)
                                 .setSwingArm(), "Entangling Seed",
@@ -151,7 +164,7 @@ public class NatureSpells implements ExileRegistryInit {
 
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.BEETROOT_SEEDS, 1D, SlashEntities.SIMPLE_PROJECTILE.get(), 40D)))
 
-                .onExpire(PartBuilder.justAction(SpellAction.EXILE_EFFECT.giveSeconds(NegativeEffects.PETRIFY, 5))
+                .onExpire(PartBuilder.justAction(SpellAction.EXILE_EFFECT.giveSeconds(ModEffects.PETRIFY, 5))
                         .enemiesInRadius(3D))
                 .onExpire(PartBuilder.groundParticles(ParticleTypes.LARGE_SMOKE, 50D, 3D, 0.25D))
                 .onExpire(PartBuilder.groundParticles(ParticleTypes.ITEM_SLIME, 100D, 3D, 0.25D))

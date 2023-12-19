@@ -9,6 +9,7 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.value_calc.LeveledValue;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -23,7 +24,9 @@ import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,6 +60,14 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
 
     public AttachedSpell spell;
 
+
+    public ResourceLocation getTexture() {
+        return SlashRef.id("textures/item/mob_effects/" + GUID() + ".png");
+    }
+
+    public Item getEffectDisplayItem() {
+        return SlashItems.EFFECT_DISPLAY.get(GUID()).get();
+    }
 
     @Override
     public ExileRegistryType getExileRegistryType() {
@@ -184,6 +195,9 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
                 mc_stats.forEach(x -> x.applyVanillaStats(entity, stacks));
                 Load.Unit(entity).forceRecalculateStats();
             }
+
+            Load.Unit(entity).trySync();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -214,6 +228,8 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
             unitdata.getStatusEffectsData()
                     .get(this).stacks = 0;
             unitdata.setEquipsChanged(true);
+
+            Load.Unit(target).trySync();
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -18,26 +18,29 @@ import net.minecraftforge.fml.common.Mod;
 public class GuiOverlays {
     @SubscribeEvent
     public static void registerOverlay(RegisterGuiOverlaysEvent event) {
-  
-        event.registerAbove(VanillaGuiOverlay.CHAT_PANEL.id(), SlashRef.MODID + ".gui", new Overlay());
+
+
+        event.registerAbove(VanillaGuiOverlay.CHAT_PANEL.id(), SlashRef.MODID + ".spell_hotbar", new IGuiOverlay() {
+            @Override
+            public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
+                new SpellHotbarOverlay().onHudRender(guiGraphics);
+            }
+        });
+        event.registerAbove(VanillaGuiOverlay.CHAT_PANEL.id(), SlashRef.MODID + ".cast_bar", new IGuiOverlay() {
+            @Override
+            public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
+                new SpellCastBarOverlay().onHudRender(guiGraphics);
+            }
+        });
+        event.registerAbove(VanillaGuiOverlay.CHAT_PANEL.id(), SlashRef.MODID + ".rpg_gui", new IGuiOverlay() {
+            @Override
+            public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
+                new RPGGuiOverlay().onHudRender(guiGraphics);
+            }
+        });
+
+
     }
 
-    public static class Overlay implements IGuiOverlay {
-
-
-        SpellHotbarOverlay spellHotbarOverlay = new SpellHotbarOverlay();
-        SpellCastBarOverlay castbar = new SpellCastBarOverlay();
-        RPGGuiOverlay rpggui = new RPGGuiOverlay();
-
-
-        @Override
-        public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
-            guiGraphics.drawManaged(() -> {
-                spellHotbarOverlay.onHudRender(guiGraphics);
-                castbar.onHudRender(guiGraphics);
-                rpggui.onHudRender(guiGraphics);
-            });
-        }
-    }
 
 }

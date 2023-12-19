@@ -11,6 +11,8 @@ import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
 import com.robertx22.age_of_exile.database.data.exile_effects.EffectType;
 import com.robertx22.age_of_exile.database.data.exile_effects.VanillaStatData;
 import com.robertx22.age_of_exile.database.data.spells.SetAdd;
+import com.robertx22.age_of_exile.database.data.spells.SpellTag;
+import com.robertx22.age_of_exile.database.data.spells.components.actions.AggroAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.vanity.ParticleMotion;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
@@ -18,18 +20,36 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import static net.minecraft.world.entity.ai.attributes.Attributes.*;
 
-public class NegativeEffects implements ExileRegistryInit {
+public class ModEffects implements ExileRegistryInit {
 
+    public static List<EffectCtx> ALL = new ArrayList<>();
+
+    public static EffectCtx VAMPIRIC_BLOOD = new EffectCtx("vamp_blood", "Vamp Blood", Elements.Fire, EffectType.beneficial);
+    public static EffectCtx DRACONIC_BLOOD = new EffectCtx("draconic_blood", "Dragon Blood", Elements.Fire, EffectType.beneficial);
+    public static EffectCtx REGENERATE = new EffectCtx("regenerate", "Nature Balm", Elements.Chaos, EffectType.beneficial);
+    public static EffectCtx VALOR = new EffectCtx("valor", "Valor", Elements.Physical, EffectType.beneficial);
+    public static EffectCtx PERSEVERANCE = new EffectCtx("perseverance", "Perseverance", Elements.Physical, EffectType.beneficial);
+    public static EffectCtx VIGOR = new EffectCtx("vigor", "Vigor", Elements.Physical, EffectType.beneficial);
+    public static EffectCtx TAUNT_STANCE = new EffectCtx("taunt_stance", "Taunt Stance", Elements.Physical, EffectType.beneficial);
+    public static EffectCtx UNDYING_WILL = new EffectCtx("undying_will", "Undying Will", Elements.Physical, EffectType.beneficial);
+    public static EffectCtx MAGE_CIRCLE = new EffectCtx("mage_circle", "Mage Circle", Elements.Elemental, EffectType.beneficial);
     public static EffectCtx PETRIFY = new EffectCtx("petrify", "Petrify", Elements.Chaos, EffectType.negative);
     public static EffectCtx WOUNDS = new EffectCtx("wounds", "Wounds", Elements.Physical, EffectType.negative);
     public static EffectCtx BLIND = new EffectCtx("blind", "Blind", Elements.Chaos, EffectType.negative);
@@ -43,19 +63,24 @@ public class NegativeEffects implements ExileRegistryInit {
     public static EffectCtx SHRED = new EffectCtx("shred", "Shred", Elements.Physical, EffectType.negative);
     public static EffectCtx THORN = new EffectCtx("thorn", "Thorn", Elements.Physical, EffectType.negative);
 
+    public static void init() {
+
+    }
+
     @Override
     public void registerAll() {
 
-        ExileEffectBuilder.of(THORN)
+
+        ExileEffectBuilder.of(ModEffects.THORN)
                 .maxStacks(5)
                 .spell(SpellBuilder.forEffect()
                         .addSpecificAction(SpellCtx.ON_ENTITY_ATTACKED, PartBuilder.damage(SpellCalcs.THORN_CONSUME, Elements.Physical))
-                        .addSpecificAction(SpellCtx.ON_ENTITY_ATTACKED, PartBuilder.removeExileEffectStacksToTarget(NegativeEffects.THORN.resourcePath))
+                        .addSpecificAction(SpellCtx.ON_ENTITY_ATTACKED, PartBuilder.removeExileEffectStacksToTarget(ModEffects.THORN.resourcePath))
                         .onTick(PartBuilder.aoeParticles(ParticleTypes.CRIT, 2D, 0.5D).tickRequirement(2D))
                         .buildForEffect())
                 .build();
 
-        ExileEffectBuilder.of(SHRED)
+        ExileEffectBuilder.of(ModEffects.SHRED)
                 .maxStacks(3)
                 .stat(-10, -25, Armor.getInstance(), ModType.FLAT)
                 .stat(-1, -3, new ElementalResist(Elements.Elemental), ModType.FLAT)
@@ -63,7 +88,7 @@ public class NegativeEffects implements ExileRegistryInit {
                 .build();
 
 
-        ExileEffectBuilder.of(GROUNDING)
+        ExileEffectBuilder.of(ModEffects.GROUNDING)
                 .maxStacks(1)
                 .spell(SpellBuilder.forEffect()
                         .onTick(PartBuilder.justAction(SpellAction.SET_ADD_MOTION.create(SetAdd.ADD, 1D, ParticleMotion.Downwards))
@@ -73,14 +98,14 @@ public class NegativeEffects implements ExileRegistryInit {
                         .buildForEffect())
                 .build();
 
-        ExileEffectBuilder.of(CHARM)
+        ExileEffectBuilder.of(ModEffects.CHARM)
                 .maxStacks(5)
                 .stat(-1, -3, Armor.getInstance(), ModType.PERCENT)
                 .stat(-1, -3, DodgeRating.getInstance(), ModType.PERCENT)
                 .stat(-1, -3, new ElementalResist(Elements.Elemental), ModType.FLAT)
                 .build();
 
-        ExileEffectBuilder.of(CURSE_AGONY)
+        ExileEffectBuilder.of(ModEffects.CURSE_AGONY)
                 .maxStacks(1)
                 .stat(-10, -20, Armor.getInstance(), ModType.MORE)
                 .stat(5, 10, DatapackStats.MOVE_SPEED)
@@ -92,7 +117,7 @@ public class NegativeEffects implements ExileRegistryInit {
                 .addTags(EffectTags.curse, EffectTags.negative)
                 .build();
 
-        ExileEffectBuilder.of(CURSE_WEAKNESS)
+        ExileEffectBuilder.of(ModEffects.CURSE_WEAKNESS)
                 .maxStacks(1)
                 .stat(-10, -20, new ElementalResist(Elements.Elemental))
 
@@ -104,7 +129,7 @@ public class NegativeEffects implements ExileRegistryInit {
                 .addTags(EffectTags.curse, EffectTags.negative)
                 .build();
 
-        ExileEffectBuilder.of(DESPAIR)
+        ExileEffectBuilder.of(ModEffects.DESPAIR)
                 .maxStacks(1)
                 .stat(-15, -25, new ElementalResist(Elements.Chaos))
 
@@ -116,13 +141,13 @@ public class NegativeEffects implements ExileRegistryInit {
                 .addTags(EffectTags.curse, EffectTags.negative)
                 .build();
 
-        ExileEffectBuilder.of(SLOW)
+        ExileEffectBuilder.of(ModEffects.SLOW)
                 .vanillaStat(VanillaStatData.create(MOVEMENT_SPEED, -0.25F, ModType.MORE, UUID.fromString("3fb10485-f309-468f-afc6-a23b0d6cf4c1")))
                 .vanillaStat(VanillaStatData.create(ATTACK_SPEED, -0.10F, ModType.MORE, UUID.fromString("00fb60a7-904b-462f-a7cb-a557f02e362e")))
                 .addTags(EffectTags.negative)
                 .build();
 
-        ExileEffectBuilder.of(STUN)
+        ExileEffectBuilder.of(ModEffects.STUN)
                 .addTags(EffectTags.immobilizing, EffectTags.negative)
                 .vanillaStat(VanillaStatData.create(MOVEMENT_SPEED, -10.0F, ModType.MORE, UUID.fromString("3fb10485-f309-468f-afc6-a23b0d6cf4c1")))
                 .vanillaStat(VanillaStatData.create(ATTACK_SPEED, -10.0F, ModType.MORE, UUID.fromString("00fb60a7-904b-462f-a7cb-a557f02e362e")))
@@ -130,7 +155,7 @@ public class NegativeEffects implements ExileRegistryInit {
                 .build();
 
 
-        ExileEffectBuilder.of(BLIND)
+        ExileEffectBuilder.of(ModEffects.BLIND)
                 .vanillaStat(VanillaStatData.create(ATTACK_DAMAGE, -10.0F, ModType.MORE, UUID.fromString("5eccf34c-29f7-4eea-bbad-82a905594064")))
                 .vanillaStat(VanillaStatData.create(ATTACK_SPEED, -10.0F, ModType.MORE, UUID.fromString("57eb6210-2a42-4ad3-a604-6f679d440a9b")))
                 .spell(SpellBuilder.forEffect()
@@ -141,11 +166,11 @@ public class NegativeEffects implements ExileRegistryInit {
                 .addTags(EffectTags.immobilizing)
                 .build();
 
-        ExileEffectBuilder.of(WOUNDS)
+        ExileEffectBuilder.of(ModEffects.WOUNDS)
                 .stat(-25, -25, Stats.HEAL_STRENGTH.get(), ModType.FLAT)
                 .build();
 
-        ExileEffectBuilder.of(PETRIFY)
+        ExileEffectBuilder.of(ModEffects.PETRIFY)
                 .addTags(EffectTags.immobilizing)
                 .vanillaStat(VanillaStatData.create(MOVEMENT_SPEED, -10.0F, ModType.MORE, UUID.fromString("bd9d32fa-c8c2-455c-92aa-4a94c2a70cd5")))
                 .spell(SpellBuilder.forEffect()
@@ -157,6 +182,87 @@ public class NegativeEffects implements ExileRegistryInit {
                         .onExpire(PartBuilder.justAction(SpellAction.PLAY_SOUND.create(SoundEvents.SHEEP_SHEAR, 1D, 1D)))
                         .buildForEffect())
                 .build();
+
+
+        ExileEffectBuilder.of(DRACONIC_BLOOD)
+                .stat(2, 4, Stats.SPELL_LIFESTEAL.get(), ModType.FLAT)
+                .maxStacks(1)
+                .addTags(EffectTags.positive)
+                .build();
+
+        ExileEffectBuilder.of(VAMPIRIC_BLOOD)
+                .stat(2, 5, Stats.LIFESTEAL.get(), ModType.FLAT)
+                .maxStacks(1)
+                .addTags(EffectTags.positive)
+                .build();
+
+        ExileEffectBuilder.of(MAGE_CIRCLE)
+                .stat(10, 25, Stats.CRIT_DAMAGE.get(), ModType.FLAT)
+                .stat(5, 20, SkillDamage.getInstance(), ModType.FLAT)
+                .maxStacks(1)
+                .addTags(EffectTags.offensive)
+                .build();
+
+
+        ExileEffectBuilder.of(TAUNT_STANCE)
+                .stat(10, 25, Stats.THREAT_GENERATED.get())
+                .stat(25, 50, Stats.MORE_THREAT_WHEN_TAKING_DAMAGE.get())
+
+                .spell(SpellBuilder.forEffect()
+                        .onTick(PartBuilder.justAction(SpellAction.AGGRO.create(SpellCalcs.TAUNT, AggroAction.Type.AGGRO))
+                                .setTarget(TargetSelector.AOE.create(10D, EntityFinder.SelectionType.RADIUS, AllyOrEnemy.enemies))
+                                .tickRequirement(60D))
+                        .buildForEffect())
+                .maxStacks(1)
+                .build();
+
+        ExileEffectBuilder.of(UNDYING_WILL)
+                .stat(-25, -75, Stats.DAMAGE_RECEIVED.get())
+                .stat(1, 2, HealthRegen.getInstance())
+                .maxStacks(1)
+                .build();
+
+        ExileEffectBuilder.of(VIGOR)
+                .stat(0.25F, 0.5F, HealthRegen.getInstance())
+                .stat(0.25F, 0.5F, ManaRegen.getInstance())
+                .stat(10, 10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.song), ModType.MORE)
+                .maxStacks(3)
+                .addTags(EffectTags.song)
+                .build();
+
+        ExileEffectBuilder.of(PERSEVERANCE)
+                .stat(5, 10, new ElementalResist(Elements.Physical))
+                .stat(5, 10, new ElementalResist(Elements.Chaos))
+                .stat(5, 10, new ElementalResist(Elements.Fire))
+                .stat(5, 10, new ElementalResist(Elements.Cold))
+                .stat(5, 10, new ElementalResist(Elements.Lightning))
+                .stat(10, 10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.song), ModType.MORE)
+                .maxStacks(3)
+                .addTags(EffectTags.song, EffectTags.defensive)
+                .build();
+
+        ExileEffectBuilder.of(VALOR)
+                .stat(5, 10, Stats.TOTAL_DAMAGE.get(), ModType.FLAT)
+                .stat(2, 5, Stats.CRIT_CHANCE.get(), ModType.FLAT)
+                .stat(10, 10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.song), ModType.MORE)
+                .maxStacks(3)
+                .addTags(EffectTags.song, EffectTags.offensive)
+                .build();
+
+
+        ExileEffectBuilder.of(REGENERATE)
+                .maxStacks(5)
+                .addTags(EffectTags.heal_over_time)
+                .stat(Stats.REJUV_HEAL_SELF.get().mod(25, 100).more())
+                .spell(SpellBuilder.forEffect()
+                        .onTick(PartBuilder.justAction(SpellAction.RESTORE_HEALTH.create(SpellCalcs.NATURE_BALM))
+                                .setTarget(TargetSelector.TARGET.create())
+                                .tickRequirement(20D))
+                        .onTick(PartBuilder.aoeParticles(ParticleTypes.HEART, 5D, 1D)
+                                .tickRequirement(20D))
+                        .buildForEffect())
+                .build();
+
 
     }
 }

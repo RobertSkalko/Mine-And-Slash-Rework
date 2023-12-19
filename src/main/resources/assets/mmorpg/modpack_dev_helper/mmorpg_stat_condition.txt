@@ -64,6 +64,7 @@ effect_has_tag_curse
 resource_type_is_energy
 restore_type_is_heal
 spell_has_tag_shield
+spell_has_tag_rejuvenate
 is_trident_wep_type
 attack_type_is_reflect
 spell_has_tag_totem

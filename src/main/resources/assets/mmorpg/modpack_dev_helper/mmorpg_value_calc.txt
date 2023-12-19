@@ -26,6 +26,7 @@ ranger_trap
 resonance
 execute
 poison_cloud
+circle_of_healing
 gong_strike
 gale_wind
 chaos_totem

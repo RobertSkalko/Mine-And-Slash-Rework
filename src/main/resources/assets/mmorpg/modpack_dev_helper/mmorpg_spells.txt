@@ -16,6 +16,7 @@ spider_basic
 arrow_storm
 minion_explosion
 shred
+rejuvenation
 poison_trap
 summon_spirit_wolf
 vamp_blood
@@ -31,6 +32,7 @@ execute
 poison_cloud
 astral_totem
 draconic_blood
+circle_of_healing
 smoke_bomb
 gong_strike
 gale_wind

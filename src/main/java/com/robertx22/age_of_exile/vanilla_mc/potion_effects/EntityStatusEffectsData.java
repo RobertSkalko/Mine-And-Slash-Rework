@@ -39,7 +39,9 @@ public class EntityStatusEffectsData {
 
         exileMap.entrySet().removeIf(x -> {
             boolean bo = x.getValue().shouldRemove();
-            removed.add(ExileDB.ExileEffects().get(x.getKey()));
+            if (bo) {
+                removed.add(ExileDB.ExileEffects().get(x.getKey()));
+            }
             return bo;
         });
 

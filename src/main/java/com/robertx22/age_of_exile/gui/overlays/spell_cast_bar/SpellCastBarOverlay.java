@@ -37,9 +37,12 @@ public class SpellCastBarOverlay {
 
             render(gui, x, y, BossEvent.BossBarColor.PURPLE, BossEvent.BossBarOverlay.NOTCHED_20, percent);
         }
+
+      
     }
 
-    private void render(GuiGraphics gui, int x, int y, BossEvent.BossBarColor color, BossEvent.BossBarOverlay overlay, float percent) {
+    private void render(GuiGraphics gui, int x, int y, BossEvent.BossBarColor color, BossEvent.
+            BossBarOverlay overlay, float percent) {
 
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 

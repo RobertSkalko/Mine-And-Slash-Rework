@@ -8,7 +8,7 @@ import com.robertx22.age_of_exile.aoe_data.database.base_stats.BaseStatsAdder;
 import com.robertx22.age_of_exile.aoe_data.database.custom_item_gens.CustomItems;
 import com.robertx22.age_of_exile.aoe_data.database.dim_configs.DimConfigs;
 import com.robertx22.age_of_exile.aoe_data.database.entity_configs.EntityConfigs;
-import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ExileEffects;
+import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.aoe_data.database.gear_rarities.GearRaritiesAdder;
 import com.robertx22.age_of_exile.aoe_data.database.gear_slots.GearSlots;
 import com.robertx22.age_of_exile.aoe_data.database.gems.Gems;
@@ -58,7 +58,7 @@ public class GeneratedData {
         new BaseGearsAdder().registerAll();
         new UniqueGearReg().registerAll();
 
-        new ExileEffects().registerAll();
+        new ModEffects().registerAll();
 
         new Prefixes().registerAll();
         new Suffixes().registerAll();

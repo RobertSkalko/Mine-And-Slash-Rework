@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.spells.schools;
 
-import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.BeneficialEffects;
-import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.NegativeEffects;
+import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
@@ -54,9 +53,9 @@ public class HolySpells implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        song(HYMN_OF_VALOR, "Hymn of Valor", BeneficialEffects.VALOR);
-        song(HYMN_OF_PERSERVANCE, "Hymn of Perseverance", BeneficialEffects.PERSEVERANCE);
-        song(HYMN_OF_VIGOR, "Hymn of Vigor", BeneficialEffects.VIGOR);
+        song(HYMN_OF_VALOR, "Hymn of Valor", ModEffects.VALOR);
+        song(HYMN_OF_PERSERVANCE, "Hymn of Perseverance", ModEffects.PERSEVERANCE);
+        song(HYMN_OF_VIGOR, "Hymn of Vigor", ModEffects.VIGOR);
 
         SpellBuilder.of(WHIRLWIND, PlayStyle.STR, SpellConfiguration.Builder.multiCast(10, 0, 100, 10)
                                 .setSwingArm(), "Whirlwind",
@@ -124,7 +123,7 @@ public class HolySpells implements ExileRegistryInit {
                 .onCast(PartBuilder.justAction(SpellAction.TP_TARGET_TO_SELF.create())
                         .addActions(SpellAction.POTION.createGive(MobEffects.MOVEMENT_SLOWDOWN, 20D * 5))
                         .addActions(SpellAction.DEAL_DAMAGE.create(SpellCalcs.PULL, Elements.Physical))
-                        .addActions(SpellAction.EXILE_EFFECT.create(NegativeEffects.STUN.resourcePath, ExileEffectAction.GiveOrTake.GIVE_STACKS, 20D * 2))
+                        .addActions(SpellAction.EXILE_EFFECT.create(ModEffects.STUN.resourcePath, ExileEffectAction.GiveOrTake.GIVE_STACKS, 20D * 2))
                         .addTarget(TargetSelector.AOE.create(8D, EntityFinder.SelectionType.RADIUS, AllyOrEnemy.enemies)))
                 .onCast(PartBuilder.groundEdgeParticles(ParticleTypes.CRIT, 100D, 6D, 0.1D))
                 .levelReq(20)
@@ -142,7 +141,7 @@ public class HolySpells implements ExileRegistryInit {
                 .onCast(PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
 
                 .onCast(PartBuilder.damageInFront(SpellCalcs.GONG_STRIKE, Elements.Physical, 2D, 3D))
-                .onCast(PartBuilder.addExileEffectToEnemiesInFront(NegativeEffects.STUN.resourcePath, 2D, 2D, 20D * 3))
+                .onCast(PartBuilder.addExileEffectToEnemiesInFront(ModEffects.STUN.resourcePath, 2D, 2D, 20D * 3))
 
                 .onCast(PartBuilder.groundEdgeParticles(ParticleTypes.CLOUD, 300D, 2D, 0.1D))
                 .onCast(PartBuilder.groundEdgeParticles(ParticleTypes.EXPLOSION, 5D, 2D, 0.1D))
@@ -156,7 +155,7 @@ public class HolySpells implements ExileRegistryInit {
                 .manualDesc("Gives buff to self.")
                 .weaponReq(CastingWeapon.ANY_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.RAVAGER_ROAR, 1D, 1D))
-                .onCast(PartBuilder.giveSelfExileEffect(BeneficialEffects.UNDYING_WILL, 20D * 10))
+                .onCast(PartBuilder.giveSelfExileEffect(ModEffects.UNDYING_WILL, 20D * 10))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.ENCHANTED_HIT, 50D, 1D))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.ENCHANT, 50D, 1D))
                 .levelReq(30)

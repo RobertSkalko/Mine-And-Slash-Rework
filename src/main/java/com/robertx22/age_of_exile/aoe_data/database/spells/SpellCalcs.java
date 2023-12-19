@@ -124,6 +124,9 @@ public class SpellCalcs {
     public static ValueCalculation WISH = ValueCalcBuilder.of("wish")
             .spellScaling(1, 2)
             .build();
+    public static ValueCalculation CIRCLE_OF_HEALING = ValueCalcBuilder.of("circle_of_healing")
+            .spellScaling(1, 2)
+            .build();
     public static ValueCalculation NATURE_BALM = ValueCalcBuilder.of("nature_balm")
             .spellScaling(0.1F, 0.2F)
             .build();

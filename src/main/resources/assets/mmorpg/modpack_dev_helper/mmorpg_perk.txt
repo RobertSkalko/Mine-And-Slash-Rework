@@ -235,6 +235,7 @@ critical_damage
 spider_basic
 mana_cost
 hp_mana_big
+rejuvenation
 summon_spirit_wolf
 ele_trident_damage
 accuracy_percent
@@ -317,6 +318,7 @@ execute
 lightning_resist_big
 astral_totem
 phys_to_all_big
+circle_of_healing
 armor_penetration_percent
 str
 projectile_damage

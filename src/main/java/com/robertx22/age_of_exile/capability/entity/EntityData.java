@@ -180,6 +180,8 @@ public class EntityData implements ICap, INeededForClient {
         if (affixes != null) {
             LoadSave.Save(affixes, nbt, AFFIXES);
         }
+        LoadSave.Save(statusEffects, nbt, STATUSES);
+
     }
 
     @Override
@@ -204,7 +206,9 @@ public class EntityData implements ICap, INeededForClient {
             affixes = new MobData();
         }
 
+        this.statusEffects = loadOrBlank(EntityStatusEffectsData.class, new EntityStatusEffectsData(), nbt, STATUSES, new EntityStatusEffectsData());
 
+    
     }
 
     @Override
@@ -222,7 +226,6 @@ public class EntityData implements ICap, INeededForClient {
         nbt.putBoolean(SHOULD_SYNC, shouldSync);
 
         LoadSave.Save(cooldowns, nbt, COOLDOWNS);
-        LoadSave.Save(statusEffects, nbt, STATUSES);
         LoadSave.Save(ailments, nbt, AILMENTS);
         LoadSave.Save(summonedPetData, nbt, PET);
         LoadSave.Save(leech, nbt, LEECH);
@@ -292,7 +295,6 @@ public class EntityData implements ICap, INeededForClient {
         try {
             this.summonedPetData = loadOrBlank(SummonedPetData.class, new SummonedPetData(), nbt, PET, new SummonedPetData());
             this.ailments = loadOrBlank(EntityAilmentData.class, new EntityAilmentData(), nbt, AILMENTS, new EntityAilmentData());
-            this.statusEffects = loadOrBlank(EntityStatusEffectsData.class, new EntityStatusEffectsData(), nbt, STATUSES, new EntityStatusEffectsData());
             this.threat = loadOrBlank(ThreatData.class, new ThreatData(), nbt, THREAT, new ThreatData());
             this.customExactStats = loadOrBlank(CustomExactStatsData.class, new CustomExactStatsData(), nbt, CUSTOM_STATS, new CustomExactStatsData());
             this.resources = loadOrBlank(ResourcesData.class, new ResourcesData(), nbt, RESOURCES_LOC, new ResourcesData());

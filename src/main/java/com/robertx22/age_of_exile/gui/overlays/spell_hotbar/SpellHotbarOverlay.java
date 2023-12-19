@@ -2,15 +2,17 @@ package com.robertx22.age_of_exile.gui.overlays.spell_hotbar;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.capability.entity.CooldownsData;
+import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.event_hooks.player.OnKeyPress;
+import com.robertx22.age_of_exile.gui.overlays.EffectsOverlay;
+import com.robertx22.age_of_exile.gui.overlays.GuiPosition;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.registers.client.KeybindsRegister;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ChatUtils;
 import com.robertx22.library_of_exile.utils.CLOC;
 import com.robertx22.library_of_exile.utils.GuiUtils;
-import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -86,7 +88,13 @@ public class SpellHotbarOverlay {
                 renderCurrentSpell(place, i, gui);
 
             }
+
             RenderSystem.disableBlend(); // enables transparency
+
+            if (ClientConfigs.getConfig().GUI_POSITION.get() != GuiPosition.TOP_LEFT) {
+                EffectsOverlay.render(3, y + 85, mc.player, gui, false);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

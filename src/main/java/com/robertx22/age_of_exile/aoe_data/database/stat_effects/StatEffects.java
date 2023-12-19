@@ -1,8 +1,7 @@
 package com.robertx22.age_of_exile.aoe_data.database.stat_effects;
 
 import com.robertx22.age_of_exile.aoe_data.DataHolder;
-import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.BeneficialEffects;
-import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.NegativeEffects;
+import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
@@ -21,14 +20,14 @@ public class StatEffects implements ExileRegistryInit {
 
     public static DataHolder<EffectCtx, StatEffect> GIVE_SELF_EFFECT = new DataHolder<>(
             Arrays.asList(
-                    BeneficialEffects.TAUNT_STANCE
+                    ModEffects.TAUNT_STANCE
             ),
             x -> new GiveExileStatusEffect(x.resourcePath, EffectSides.Source, 10)
     );
 
 
     public static DataHolder<EffectCtx, StatEffect> GIVE_EFFECT_IN_AOE = new DataHolder<>(
-            Arrays.asList(BeneficialEffects.REGENERATE
+            Arrays.asList(ModEffects.REGENERATE
             ),
             x -> new GiveExileStatusInRadius("give_" + x.id + "_to_allies_in_radius", AllyOrEnemy.allies, 10, x.resourcePath)
     );
@@ -60,10 +59,10 @@ public class StatEffects implements ExileRegistryInit {
 
     public static DataHolder<EffectCtx, StatEffect> GIVE_EFFECT_TO_TARGET = new DataHolder<>(
             Arrays.asList(
-                    NegativeEffects.SLOW,
-                    NegativeEffects.STUN,
+                    ModEffects.SLOW,
+                    ModEffects.STUN,
 
-                    NegativeEffects.BLIND
+                    ModEffects.BLIND
             )
             , x -> new GiveExileStatusEffect(x.resourcePath, EffectSides.Target, 5));
 

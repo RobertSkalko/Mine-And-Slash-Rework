@@ -2,6 +2,9 @@ package com.robertx22.age_of_exile.gui.overlays.bar_overlays.types;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
+import com.robertx22.age_of_exile.gui.overlays.BarGuiType;
+import com.robertx22.age_of_exile.gui.overlays.EffectsOverlay;
+import com.robertx22.age_of_exile.gui.overlays.GuiPosition;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.SyncedToClientValues;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -41,7 +44,7 @@ public class RPGGuiOverlay {
 
         try {
 
-            
+
             if (mc.player == null) {
                 return;
             }
@@ -85,6 +88,20 @@ public class RPGGuiOverlay {
                                     true);
                         }
                     });
+
+
+            int off = 0;
+
+            if (BarGuiType.MAGIC_SHIELD.shouldRender(data, mc.player)) {
+                off = 13;
+            }
+
+            if (ClientConfigs.getConfig().GUI_POSITION.get() == GuiPosition.TOP_LEFT) {
+                EffectsOverlay.render(18, 63 + off, mc.player, gui, true);
+            } else {
+//                EffectsOverlay.render(5, 63, mc.player, gui, true);
+
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
