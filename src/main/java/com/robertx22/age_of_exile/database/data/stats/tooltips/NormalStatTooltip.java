@@ -34,7 +34,7 @@ public class NormalStatTooltip implements IStatTooltipType {
         }
         if (ctx.showStatRanges()) {
             if (ctx.statinfo.affix_rarity != null) {
-                txt.append(ctx.statinfo.affix_rarity.textFormatting().toString() + " [").append(TooltipUtils.rarityShort(ctx.statinfo.affix_rarity)).append("]" + ChatFormatting.RESET);
+                txt.append(ctx.statinfo.affix_rarity.textFormatting() + " [").append(TooltipUtils.rarityShort(ctx.statinfo.affix_rarity)).append("]" + ChatFormatting.RESET);
             }
         }
 
