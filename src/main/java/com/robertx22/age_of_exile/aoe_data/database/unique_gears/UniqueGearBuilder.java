@@ -48,6 +48,11 @@ public class UniqueGearBuilder {
         return this;
     }
 
+    public UniqueGearBuilder setFlavorText(String txt){
+        this.uniq.flavorText = txt;
+        return this;
+    }
+
 
     // delete this not needed
     public UniqueGearBuilder setReplacesName() {
