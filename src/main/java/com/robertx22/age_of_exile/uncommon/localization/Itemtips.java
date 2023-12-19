@@ -45,9 +45,10 @@ public enum Itemtips implements IAutoLocName {
     OUTCOME_TIP("%1$s, Base Weight: %2$s"),
     Exp("Exp: %1$s%%"),
     Loot("Loot: %1$s%%"),
-    PREFIX_STATS(ChatFormatting.BLUE + "Prefix Stats: "),
-    COR_STATS(ChatFormatting.BLUE + "Base Stats: "),
-    SUFFIX_STATS(ChatFormatting.BLUE + "Suffix Stats: "), MAP_LEAGUE_SPAWN("Can Spawn: ");
+    PREFIX_STATS("Prefix Stats: "),
+    COR_STATS("Base Stats: "),
+    SUFFIX_STATS("Suffix Stats: "),
+    MAP_LEAGUE_SPAWN("Can Spawn: ");
 
     private String localization = "";
 

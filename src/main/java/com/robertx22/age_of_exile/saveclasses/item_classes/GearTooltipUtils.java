@@ -193,7 +193,7 @@ public class GearTooltipUtils {
         }
 
 
-        if (!Screen.hasShiftDown()) {
+        if (Screen.hasShiftDown() == false) {
             tip.add(Component.literal(ChatFormatting.BLUE + "").append(Component.translatable(SlashRef.MODID + ".tooltip." + "press_shift_more_info")
                     )
                     .withStyle(ChatFormatting.BLUE));
