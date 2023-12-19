@@ -57,7 +57,7 @@ public class CraftedSoulItem extends AutoItem implements ICreativeTabTiered, IRa
 
     @Override
     public String locNameForLangFile() {
-        return "Crafted " + StringUTIL.capitalise(rar) + " " + StringUTIL.capitalise(fam.id) + " Soul";
+        return ExileDB.GearRarities().get(rar).textFormatting() + "Crafted " + StringUTIL.capitalise(rar) + " " + StringUTIL.capitalise(fam.id) + " Soul";
     }
 
     @Override
