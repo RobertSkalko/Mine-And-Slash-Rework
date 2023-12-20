@@ -13,7 +13,6 @@ increase_healing
 plus_phys_to_all
 phys_to_physical
 hit_damage
-give_regenerate_to_allies_in_aoe
 blood_per_10_strength
 learn_summon_cold_golem
 learn_song_of_perseverance
@@ -101,6 +100,7 @@ magic_find
 learn_healing_aura
 chaos_any_wep_damage
 curse_spell_dmg
+give_rejuvenation_to_allies_in_aoe
 learn_resonance
 magic_shield
 spell_lifesteal
@@ -110,9 +110,9 @@ ele_staff_damage
 poison_damage
 heal_over_time_eff_dur_u_cast
 plus_phys_to_elemental
+thorns_cdr
 movement_spell_dmg
 enchanting_triple_drop
-learn_nature_balm
 int_dmg_per_5_strength
 water_focus
 spell_water_damage
@@ -264,6 +264,7 @@ chaos_weapon_damage
 offensive_eff_duration
 all_chaos_damage
 rejuv_eff_on_self
+learn_garden_of_thorns
 all_water_damage
 learn_fireball
 low_hp_healing
@@ -479,6 +480,7 @@ spell_dodge
 crossbow_damage
 fire_focus
 learn_black_hole
+thorns_spell_dmg
 ele_crossbow_damage
 magic_shield_regen
 salvaging_greater_drop_bonus

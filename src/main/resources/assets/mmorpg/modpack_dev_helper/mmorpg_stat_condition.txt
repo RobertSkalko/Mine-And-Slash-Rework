@@ -28,6 +28,7 @@ resource_type_is_health
 is_in_combat_is_false
 ele_match_stat
 style_is_dex
+spell_has_tag_thorns
 is_day
 spell_has_tag_staff_spell
 spell_has_tag_movement

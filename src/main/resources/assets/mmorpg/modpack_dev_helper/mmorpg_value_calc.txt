@@ -16,11 +16,13 @@ arrow_storm
 minion_explosion
 shred
 totem_heal
+rejuvenation
 lose_aggro
 charged_bolt
 thorn_consume
 hunter_pot_heal
 shout_warn
+inner_calm
 shooting_star
 ranger_trap
 resonance
@@ -41,7 +43,6 @@ pet_basic
 ritardando
 lightning_totem
 breath
-nature_balm
 black_hole
 lightning_nova
 fireball

@@ -7,7 +7,6 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.CLOC;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.LivingEntity;
-import org.codehaus.plexus.util.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,12 +15,28 @@ public class SpellDesc {
 
     public static String NEWLINE = "[LINE]";
 
+    public static int countMatches(String str, String sub) {
+        if (sub.equals("")) {
+            return 0;
+        }
+        if (str == null) {
+            return 0;
+        }
+        int count = 0;
+        int idx = 0;
+        while ((idx = str.indexOf(sub, idx)) != -1) {
+            count++;
+            idx += sub.length();
+        }
+        return count;
+    }
+
     public static List<String> getTooltip(LivingEntity caster, Spell spell) {
 
         String tip = CLOC.translate(spell.locDesc());
         String copy = tip;
 
-        int amount = StringUtils.countMatches(tip, "calc:");
+        int amount = countMatches(tip, "calc:");
 
         int counted = 0;
         for (ValueCalculation calc : ExileDB.ValueCalculations()

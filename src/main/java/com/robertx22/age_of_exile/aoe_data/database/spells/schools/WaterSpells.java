@@ -28,7 +28,6 @@ import java.util.Arrays;
 public class WaterSpells implements ExileRegistryInit {
     public static String FROZEN_ORB = "frozen_orb";
     public static String FROST_NOVA_AOE = "frost_nova";
-    public static String WATER_BREATH = "water_breath";
     public static String MAGE_CIRCLE = "mage_circle";
     public static String FROST_ARMOR = "frost_armor";
     public static String TIDAL_STRIKE = "tidal_strike";

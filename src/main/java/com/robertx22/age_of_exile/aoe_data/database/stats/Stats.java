@@ -69,7 +69,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EffectCtx> GIVE_EFFECT_TO_ALLIES_IN_RADIUS = DatapackStatBuilder
             .<EffectCtx>of(x -> "give_" + x.id + "_to_allies_in_aoe", x -> x.element)
             .addAllOfType(Arrays.asList(
-                    ModEffects.REGENERATE
+                    ModEffects.REJUVENATE
             ))
             .worksWithEvent(RestoreResourceEvent.ID) // todo should be tick event, BUT LAG
             .setPriority(0)

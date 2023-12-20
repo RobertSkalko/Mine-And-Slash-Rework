@@ -154,6 +154,7 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
                 .add(NatureSpells.REJUVENATION, new PointData(5, 0))
                 .add(NatureSpells.CIRCLE_OF_HEALING, new PointData(5, 1))
                 .add(NatureSpells.ENTANGLE_SEED, new PointData(5, 2))
+                .add(NatureSpells.GARDEN_OF_THORNS, new PointData(5, 3))
                 .add(WaterSpells.FROST_FLOWER, new PointData(5, 5))
 
                 .add(SpellPassives.ELECTRIFY_CHANCE, new PointData(8, 1))

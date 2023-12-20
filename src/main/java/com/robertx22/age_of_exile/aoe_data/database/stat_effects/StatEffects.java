@@ -27,7 +27,7 @@ public class StatEffects implements ExileRegistryInit {
 
 
     public static DataHolder<EffectCtx, StatEffect> GIVE_EFFECT_IN_AOE = new DataHolder<>(
-            Arrays.asList(ModEffects.REGENERATE
+            Arrays.asList(ModEffects.REJUVENATE
             ),
             x -> new GiveExileStatusInRadius("give_" + x.id + "_to_allies_in_radius", AllyOrEnemy.allies, 10, x.resourcePath)
     );
