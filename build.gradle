@@ -45,6 +45,8 @@ repositories {
             includeGroup "mezz.jei"
         }
     }
+
+    maven { url 'https://repo1.maven.org/maven2/' }
 }
 
 minecraft {
@@ -118,6 +120,7 @@ dependencies {
 
     implementation fg.deobf("blank:Library_of_Exile-1.20.1:1.4.0")
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
+    implementation 'org.codehaus.plexus:plexus-utils:4.0.0'
 
     compileOnly fg.deobf("mezz.jei:jei-1.20.1-common-api:${project.jei_version}") //API for compile
     compileOnly fg.deobf("mezz.jei:jei-1.20.1-forge-api:${project.jei_version}") //API for compile
