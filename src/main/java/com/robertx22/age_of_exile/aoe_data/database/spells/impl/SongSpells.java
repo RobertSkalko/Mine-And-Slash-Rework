@@ -66,7 +66,7 @@ public class SongSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTag.projectile, SpellTag.area, SpellTag.damage, SpellTag.song))
                 .manualDesc(
                         "Throw out a ball of music, dealing " + SpellCalcs.RESONANCE.getLocDmgTooltip()
-                                + " " + Elements.Physical.getIconNameDmg() + "Hits against charmed enemies explode.")
+                                + " " + Elements.Physical.getIconNameDmg() + ". Hits against charmed enemies explode.")
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.SNOWBALL_THROW, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.AIR, 1D, 1D, SlashEntities.SIMPLE_PROJECTILE.get(), 20D, false)))

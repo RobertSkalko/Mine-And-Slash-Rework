@@ -254,7 +254,7 @@ public class ModEffects implements ExileRegistryInit {
         ExileEffectBuilder.of(REJUVENATE)
                 .maxStacks(5)
                 .addTags(EffectTags.heal_over_time)
-                .stat(Stats.REJUV_HEAL_SELF.get().mod(25, 100).more())
+                .stat(Stats.REJUV_HEAL_SELF.get().mod(25, 50).more())
                 .stat(Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.thorns).mod(2, 10).more())
                 .spell(SpellBuilder.forEffect()
                         .onTick(PartBuilder.justAction(SpellAction.RESTORE_HEALTH.create(SpellCalcs.REJUVENATION))

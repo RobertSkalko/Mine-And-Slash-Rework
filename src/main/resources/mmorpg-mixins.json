@@ -17,6 +17,7 @@
     "StopFireInDungeonMixin"
   ],
   "client": [
+    "TooltipMixin",
     "StopOffhandRenderMixin",
     "MixinServerWorldInfo",
     "NeatRenderMixin",

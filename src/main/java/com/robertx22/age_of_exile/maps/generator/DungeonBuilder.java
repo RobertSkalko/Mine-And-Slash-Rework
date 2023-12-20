@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.maps.generator;
 
 
+import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.maps.DungeonRoom;
 import com.robertx22.age_of_exile.maps.MapData;
@@ -30,7 +31,7 @@ public class DungeonBuilder {
 
         //       this.dungeon = ExileDB.Dungeons().get("pyramid"); // todo
 
-        this.size = RandomUtils.RandomRange(12, 20, rand);
+        this.size = RandomUtils.RandomRange(ServerContainer.get().MIN_MAP_ROOMS.get(), ServerContainer.get().MAX_MAP_ROOMS.get(), rand);
 
         // todo this needs the same random if i'll use at world gen async, if i do it myself, it doesnt
 

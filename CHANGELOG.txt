@@ -128,3 +128,4 @@ v.5.3.8
 You scale with energy on both healing and damage and can basic attack mobs to proc extra damage from thorns.
 When you're out of mana, you have garden of thorns to deal damage and give you an effect that restores mana which scales with your energy.
 Hopefully this will be more fun than the generic spells of before, I hope I can rework existing spells to work similarly.
+- adventure map size now configurable
