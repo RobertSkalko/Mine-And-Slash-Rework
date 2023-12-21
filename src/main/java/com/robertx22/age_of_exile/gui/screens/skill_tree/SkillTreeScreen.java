@@ -374,6 +374,8 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
         resetZoom();
 
+        SkillTreeScreen.SEARCH.setFocused(false);
+
     }
 
     @Override
