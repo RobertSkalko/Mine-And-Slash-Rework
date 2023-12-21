@@ -9,6 +9,7 @@ taunt_stance
 inner_calm
 vigor
 valor
+bone_chill
 perseverance
 stun
 mage_circle

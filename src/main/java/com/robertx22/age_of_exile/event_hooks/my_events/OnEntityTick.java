@@ -51,6 +51,9 @@ public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
             if (entity instanceof Player) {
                 checkGearChanged(entity);
             }
+
+            data.trySync();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

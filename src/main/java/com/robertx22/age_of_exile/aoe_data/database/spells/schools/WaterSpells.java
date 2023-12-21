@@ -130,7 +130,7 @@ public class WaterSpells implements ExileRegistryInit {
 
                 .manualDesc("Spawn a cloud of bone-chilling frost, damaging enemies for "
                         + SpellCalcs.CHILLING_FIELD.getLocDmgTooltip()
-                        + Elements.Cold.getIconNameDmg() + " every second and applying slow.")
+                        + Elements.Cold.getIconNameDmg() + " every second and applying slow and Bone Chill.")
 
                 .onCast(PartBuilder.playSound(SoundEvents.END_PORTAL_SPAWN, 1D, 1D))
 
@@ -147,6 +147,8 @@ public class WaterSpells implements ExileRegistryInit {
                         .tickRequirement(20D))
                 .onTick("block", PartBuilder.damageInAoe(SpellCalcs.CHILLING_FIELD, Elements.Cold, 3D)
                         .disableKnockback()
+                        .tickRequirement(20D))
+                .onTick("block", PartBuilder.addExileEffectToEnemiesInAoe(ModEffects.BONE_CHILL.resourcePath, 3D, 20 * 10D)
                         .tickRequirement(20D))
                 .onTick("block", PartBuilder.addEffectToEnemiesInAoe(MobEffects.MOVEMENT_SLOWDOWN, 3D, 20D))
 

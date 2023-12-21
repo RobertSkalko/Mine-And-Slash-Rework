@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.spells.schools;
 
+import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
@@ -35,7 +36,7 @@ public class BasicAttackSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTag.projectile, SpellTag.damage))
                 .manualDesc(
                         "Throw out a shard of ice, dealing " + SpellCalcs.ICEBALL.getLocDmgTooltip()
-                                + " " + Elements.Cold.getIconNameDmg())
+                                + " " + Elements.Cold.getIconNameDmg() + " and applying a stack of Bone Chill.")
 
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.SNOWBALL_THROW, 1D, 1D))
@@ -44,6 +45,7 @@ public class BasicAttackSpells implements ExileRegistryInit {
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.ITEM_SNOWBALL, 2D, 0.15D))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.SNOWFLAKE, 7D, 0.3D))
                 .onExpire(PartBuilder.damageInAoe(SpellCalcs.ICEBALL, Elements.Cold, RADIUS))
+                .onExpire(PartBuilder.addExileEffectToEnemiesInAoe(ModEffects.BONE_CHILL.resourcePath, RADIUS, 20 * 10D))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.ITEM_SNOWBALL, 5D, 1D))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.SNOWFLAKE, 15D, 0.5D))
                 .levelReq(1)

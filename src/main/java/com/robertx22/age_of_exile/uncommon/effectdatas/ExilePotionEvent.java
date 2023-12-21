@@ -62,7 +62,7 @@ public class ExilePotionEvent extends EffectEvent {
             extraData.str_multi = data.getNumber();
 
             Load.Unit(target).setEquipsChanged(true);
-            Load.Unit(target).trySync();
+            Load.Unit(target).setShouldSync();
         } else {
 
 
@@ -88,7 +88,7 @@ public class ExilePotionEvent extends EffectEvent {
 
         Load.Unit(target).setEquipsChanged(true);
         Load.Unit(target).tryRecalculateStats();
-        Load.Unit(target).trySync();
+        Load.Unit(target).setShouldSync();
     }
 
 

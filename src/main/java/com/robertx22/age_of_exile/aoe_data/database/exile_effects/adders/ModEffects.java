@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders;
 
+import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.ExileEffectBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
@@ -17,6 +18,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellA
 import com.robertx22.age_of_exile.database.data.spells.components.actions.vanity.ParticleMotion;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
+import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
@@ -62,7 +64,8 @@ public class ModEffects implements ExileRegistryInit {
     public static EffectCtx GROUNDING = new EffectCtx("ground", "Grounding", Elements.Physical, EffectType.negative);
     public static EffectCtx SHRED = new EffectCtx("shred", "Shred", Elements.Physical, EffectType.negative);
     public static EffectCtx THORN = new EffectCtx("thorn", "Thorn", Elements.Physical, EffectType.negative);
-    public static EffectCtx INNER_CALM = new EffectCtx("inner_calm", "Inner Calm", Elements.Physical, EffectType.negative);
+    public static EffectCtx INNER_CALM = new EffectCtx("inner_calm", "Inner Calm", Elements.Physical, EffectType.beneficial);
+    public static EffectCtx BONE_CHILL = new EffectCtx("bone_chill", "Bone Chill", Elements.Cold, EffectType.negative);
 
     public static void init() {
 
@@ -71,6 +74,12 @@ public class ModEffects implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
+        ExileEffectBuilder.of(ModEffects.BONE_CHILL)
+                .maxStacks(5)
+                .stat(5, 10, Stats.CRIT_DAMAGE_TAKEN.get(), ModType.FLAT)
+                .stat(5, 10, new AilmentDamage(Ailments.FREEZE), ModType.FLAT)
+                .stat(-2, -5, new ElementalResist(Elements.Cold), ModType.FLAT)
+                .build();
 
         ExileEffectBuilder.of(ModEffects.THORN)
                 .maxStacks(5)

@@ -208,7 +208,7 @@ public class EntityData implements ICap, INeededForClient {
 
         this.statusEffects = loadOrBlank(EntityStatusEffectsData.class, new EntityStatusEffectsData(), nbt, STATUSES, new EntityStatusEffectsData());
 
-    
+
     }
 
     @Override
@@ -313,6 +313,7 @@ public class EntityData implements ICap, INeededForClient {
 
     public void setEquipsChanged(boolean bool) {
         this.equipsChanged = bool;
+        this.setShouldSync();
     }
 
     public CooldownsData getCooldowns() {
@@ -380,6 +381,10 @@ public class EntityData implements ICap, INeededForClient {
 
     public ThreatData getThreat() {
         return threat;
+    }
+
+    public void setShouldSync() {
+        this.shouldSync = true;
     }
 
     public void trySync() {

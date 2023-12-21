@@ -191,7 +191,7 @@ public class NatureSpells implements ExileRegistryInit {
                         .put(MapField.FIND_NEAREST_SURFACE, false)
                         .put(MapField.BLOCK_FALL_SPEED, -0.02D)
                         .put(MapField.IS_BLOCK_FALLING, true)))
-                .onExpire("block", PartBuilder.damageInAoe(SpellCalcs.THORN_CONSUME, Elements.Physical, 3D))
+                .onExpire("block", PartBuilder.damageInAoe(SpellCalcs.THORN_CONSUME, Elements.Physical, 3D).disableKnockback())
                 .onExpire("block", PartBuilder.addExileEffectToEnemiesInAoe(ModEffects.THORN.resourcePath, 3D, 20 * 10D))
                 .onExpire("block", PartBuilder.aoeParticles(ParticleTypes.ITEM_SLIME, 150D, 3D))
                 .onExpire("block", PartBuilder.aoeParticles(ParticleTypes.SNEEZE, 40D, 3D))

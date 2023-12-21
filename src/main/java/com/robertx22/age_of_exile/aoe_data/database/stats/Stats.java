@@ -50,6 +50,18 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
+    public static DataPackStatAccessor<EmptyAccessor> EFFECT_DURATION_YOU_CAST = DatapackStatBuilder
+            .ofSingle("eff_dur_u_cast", Elements.Physical)
+            .worksWithEvent(ExilePotionEvent.ID)
+            .setPriority(0)
+            .setSide(EffectSides.Source)
+            .addEffect(e -> StatEffects.INCREASE_EFFECT_DURATION)
+            .setLocName(x -> "Effect Duration")
+            .setLocDesc(x -> "")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+            })
+            .build();
 
     public static DataPackStatAccessor<EffectTags> EFFECT_DURATION_YOU_CAST_PER_TAG = DatapackStatBuilder
             .<EffectTags>of(x -> x.name() + "_eff_dur_u_cast", x -> Elements.Physical)
@@ -439,6 +451,28 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
+
+    public static DataPackStatAccessor<EmptyAccessor> CRIT_DAMAGE_TAKEN = DatapackStatBuilder
+            .ofSingle("critical_damage", Elements.Physical)
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(100)
+            .setSide(EffectSides.Target)
+            .addCondition(StatConditions.IF_CRIT)
+            .addEffect(StatEffects.MULTIPLY_VALUE)
+            .setLocName(x -> "Crit Damage Taken")
+            .setLocDesc(x -> "If Critical, multiply by x")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+                x.base = 0;
+                x.min = 0;
+                x.max = 500;
+                x.group = StatGroup.MAIN;
+
+                x.icon = "\u2694";
+                x.format = ChatFormatting.RED.getName();
+
+            })
+            .build();
 
     public static DataPackStatAccessor<EmptyAccessor> CRIT_DAMAGE = DatapackStatBuilder
             .ofSingle("critical_damage", Elements.Physical)

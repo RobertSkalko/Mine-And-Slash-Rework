@@ -324,6 +324,7 @@ inc_effect_of_curse_buff_on_you
 farming_greater_drop_bonus
 enchanting_lesser_drop_bonus
 mana
+eff_dur_u_cast
 phys_to_fire
 inc_effect_of_heal_over_time_buff_on_you
 learn_lightning_nova

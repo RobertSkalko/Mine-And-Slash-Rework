@@ -11,6 +11,7 @@ proc_shock
 mana_saver_dmg
 poison_chance
 cold_damage
+effect_duration
 lightning_pene
 plus_aoe
 dot_damage

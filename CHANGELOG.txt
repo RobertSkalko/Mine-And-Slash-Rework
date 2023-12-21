@@ -129,3 +129,5 @@ You scale with energy on both healing and damage and can basic attack mobs to pr
 When you're out of mana, you have garden of thorns to deal damage and give you an effect that restores mana which scales with your energy.
 Hopefully this will be more fun than the generic spells of before, I hope I can rework existing spells to work similarly.
 - adventure map size now configurable
+- Ice shard and chilling field now apply bone chill
+- added effect duration support gem
