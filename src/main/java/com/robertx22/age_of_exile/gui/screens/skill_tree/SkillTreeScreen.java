@@ -202,7 +202,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     public TalentTree school;
 
-    private static int SEARCH_WIDTH = 150;
+    private static int SEARCH_WIDTH = 100;
     private static int SEARCH_HEIGHT = 14;
     public static EditBox SEARCH = new EditBox(Minecraft.getInstance().font, 0, 0, SEARCH_WIDTH, SEARCH_HEIGHT, Component.translatable("fml.menu.mods.search"));
 
@@ -213,6 +213,10 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
             // Handle the case when search is not initialized
             return false;
         }
+    }
+
+    public void tick() {
+        SkillTreeScreen.SEARCH.tick();
     }
 
     @Override
@@ -421,10 +425,8 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
     }
 
-
     @Override
     public void render(GuiGraphics gui, int x, int y, float ticks) {
-        SkillTreeScreen.SEARCH.tick();
         String searchTerm = SkillTreeScreen.SEARCH.getValue();
 
         // Watch watch = new Watch();
@@ -556,7 +558,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
         gui.drawString(mc.font, text, tx, yx, ChatFormatting.GREEN.getColor());
         tx = (tx - savedx)/2 + savedx - SEARCH_WIDTH/2;
-        yx = yx - (SEARCH_HEIGHT - mc.font.lineHeight);
+        yx = yx - (SEARCH_HEIGHT - mc.font.lineHeight)/2;
 
         SkillTreeScreen.SEARCH.setX(tx);
         SkillTreeScreen.SEARCH.setY(yx);

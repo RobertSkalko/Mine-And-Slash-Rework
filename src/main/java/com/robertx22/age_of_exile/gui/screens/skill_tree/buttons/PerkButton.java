@@ -159,9 +159,12 @@ public class PerkButton extends ImageButton {
 
         boolean containsSearchStat = !search.isEmpty() && perk.stats.stream()
                 .anyMatch(item -> item.getStat().translate().toLowerCase().contains(search.toLowerCase()));
-        int pVOffset = containsSearchStat ? PerkStatus.LOCKED_UNDER_ACHIEV.getYOffset() : status.getYOffset();
+        float opacity = containsSearchStat || search.isEmpty() ? 1.0f : 0.2f;
+
+        gui.setColor(1.0F, 1.0F, 1.0F, opacity);
+
         gui.blit(ID, xPos(0, posMulti), yPos(0, posMulti), perk.getType()
-                .getXOffset(), pVOffset, this.width, this.height);
+                .getXOffset(), status.getYOffset(), this.width, this.height);
 
         if (this.perk.getType() == Perk.PerkType.STAT) {
             // icon
@@ -185,7 +188,6 @@ public class PerkButton extends ImageButton {
         }
 
         gui.pose().scale(1F / scale, 1F / scale, 1F / scale);
+        gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
-
-
 }
