@@ -28,9 +28,11 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -200,11 +202,26 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     public TalentTree school;
 
+    private static int SEARCH_WIDTH = 150;
+    private static int SEARCH_HEIGHT = 14;
+    public static EditBox SEARCH = new EditBox(Minecraft.getInstance().font, 0, 0, SEARCH_WIDTH, SEARCH_HEIGHT, Component.translatable("fml.menu.mods.search"));
+
+    public static boolean searchFocused(){
+        if (SkillTreeScreen.SEARCH != null) {
+            return SkillTreeScreen.SEARCH.isFocused();
+        } else {
+            // Handle the case when search is not initialized
+            return false;
+        }
+    }
+
     @Override
     protected void init() {
         super.init();
 
         try {
+            SkillTreeScreen.SEARCH.setFocused(false);
+            SkillTreeScreen.SEARCH.setCanLoseFocus(true);
 
             schoolsInOrder = ExileDB.TalentTrees()
                     .getFiltered(x -> {
@@ -357,6 +374,8 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
         resetZoom();
 
+        SkillTreeScreen.SEARCH.setFocused(false);
+
     }
 
     @Override
@@ -405,6 +424,8 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     @Override
     public void render(GuiGraphics gui, int x, int y, float ticks) {
+        SkillTreeScreen.SEARCH.tick();
+        String searchTerm = SkillTreeScreen.SEARCH.getValue();
 
         // Watch watch = new Watch();
         mouseRecentlyClickedTicks--;
@@ -420,7 +441,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
             float addy = (1F / zoom - 1) * this.height / 2F;
 
             for (Renderable e : this.renderables) {
-                if (e instanceof ImageButton b)
+                if (e instanceof PerkButton b)
                     if (originalButtonLocMap.containsKey(b)) {
                         b.setX((this.originalButtonLocMap.get(b).x));
                         b.setY((this.originalButtonLocMap.get(b).y));
@@ -430,6 +451,8 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
                         b.setX(b.getX() + scrollX);
                         b.setY(b.getY() + scrollY);
+
+                        b.search = searchTerm;
                     }
             }
 
@@ -532,7 +555,13 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         tx = savedx + 10 + BG_WIDTH;
 
         gui.drawString(mc.font, text, tx, yx, ChatFormatting.GREEN.getColor());
+        tx = (tx - savedx)/2 + savedx - SEARCH_WIDTH/2;
+        yx = yx - (SEARCH_HEIGHT - mc.font.lineHeight);
 
+        SkillTreeScreen.SEARCH.setX(tx);
+        SkillTreeScreen.SEARCH.setY(yx);
+        SkillTreeScreen.SEARCH.render(gui, 0, 0,0);
+        this.addWidget(SkillTreeScreen.SEARCH);
     }
 
 }
