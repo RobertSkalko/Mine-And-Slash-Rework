@@ -37,6 +37,7 @@ public class PerkButton extends ImageButton {
     public PointData point;
     public TalentTree school;
     public PlayerData playerData;
+    public String search;
 
     public int originalWidth;
     public int originalHeight;
@@ -155,9 +156,12 @@ public class PerkButton extends ImageButton {
 
         // background
         RenderSystem.enableDepthTest();
+
+        boolean containsSearchStat = !search.isEmpty() && perk.stats.stream()
+                .anyMatch(item -> item.getStat().translate().toLowerCase().contains(search.toLowerCase()));
+        int pVOffset = containsSearchStat ? PerkStatus.LOCKED_UNDER_ACHIEV.getYOffset() : status.getYOffset();
         gui.blit(ID, xPos(0, posMulti), yPos(0, posMulti), perk.getType()
-                .getXOffset(), status
-                .getYOffset(), this.width, this.height);
+                .getXOffset(), pVOffset, this.width, this.height);
 
         if (this.perk.getType() == Perk.PerkType.STAT) {
             // icon
