@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.gui.screens.skill_tree.buttons;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.*;
 import com.robertx22.age_of_exile.capability.player.PlayerData;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.perks.PerkStatus;
@@ -20,11 +19,9 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import org.joml.Matrix4f;
 
 import java.util.List;
 
@@ -164,12 +161,14 @@ public class PerkButton extends ImageButton {
                 .anyMatch(item -> item.getStat().translate().toLowerCase().contains(search.toLowerCase()));
         float opacity = containsSearchStat || search.isEmpty() ? 1.0f : 0.2f;
 
-        this.blit(ID, xPos(0, posMulti), yPos(0, posMulti), perk.getType()
-                .getXOffset(), status.getYOffset(), this.width, this.height, opacity, gui.pose());
+        gui.setColor(1.0F, 1.0F, 1.0F, opacity);
+
+        gui.blit(ID, xPos(0, posMulti), yPos(0, posMulti), perk.getType()
+                .getXOffset(), status.getYOffset(), this.width, this.height);
 
         if (this.perk.getType() == Perk.PerkType.STAT) {
             // icon
-            this.blit(perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti), 0, 0, 16, 16, 16, 16, opacity, gui.pose());
+            gui.blit(perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti), 0, 0, 16, 16, 16, 16);
         } else if (this.perk.getType() == Perk.PerkType.MAJOR) {
             // icon
             offset = 9;
@@ -185,76 +184,10 @@ public class PerkButton extends ImageButton {
 
             // icon
             offset = 6;
-            this.blit(perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti), 0, 0, 16, 16, 16, 16, opacity, gui.pose());
+            gui.blit(perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti), 0, 0, 16, 16, 16, 16);
         }
 
         gui.pose().scale(1F / scale, 1F / scale, 1F / scale);
+        gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
-
-    void blit(ResourceLocation pAtlasLocation, int pX, int pY, int pUOffset, int pVOffset, int pUWidth, int pVHeight, float pAlpha, PoseStack pose) {
-        this.blit(pAtlasLocation, pX, pY, 0, (float)pUOffset, (float)pVOffset, pUWidth, pVHeight, 256, 256, pAlpha, pose);
-    }
-
-    void blit(ResourceLocation pAtlasLocation, int pX, int pY, int pBlitOffset, float pUOffset, float pVOffset, int pUWidth, int pVHeight, int pTextureWidth, int pTextureHeight, float pAlpha, PoseStack pose) {
-        this.blit(pAtlasLocation, pX, pX + pUWidth, pY, pY + pVHeight, pBlitOffset, pUWidth, pVHeight, pUOffset, pVOffset, pTextureWidth, pTextureHeight, pAlpha, pose);
-    }
-
-    void blit(ResourceLocation pAtlasLocation, int pX, int pY, int pWidth, int pHeight, float pUOffset, float pVOffset, int pUWidth, int pVHeight, int pTextureWidth, int pTextureHeight, float pAlpha, PoseStack pose) {
-        this.blit(pAtlasLocation, pX, pX + pWidth, pY, pY + pHeight, 0, pUWidth, pVHeight, pUOffset, pVOffset, pTextureWidth, pTextureHeight, pAlpha, pose);
-    }
-
-    void blit(ResourceLocation pAtlasLocation, int pX, int pY, float pUOffset, float pVOffset, int pWidth, int pHeight, int pTextureWidth, int pTextureHeight, float pAlpha, PoseStack pose) {
-        this.blit(pAtlasLocation, pX, pY, pWidth, pHeight, pUOffset, pVOffset, pWidth, pHeight, pTextureWidth, pTextureHeight, pAlpha, pose);
-    }
-
-    void blit(ResourceLocation pAtlasLocation, int pX1, int pX2, int pY1, int pY2, int pBlitOffset, int pUWidth, int pVHeight, float pUOffset, float pVOffset, int pTextureWidth, int pTextureHeight, float pAlpha, PoseStack pose) {
-        this.innerBlit(pAtlasLocation, pX1, pX2, pY1, pY2, pBlitOffset, (pUOffset + 0.0F) / (float)pTextureWidth, (pUOffset + (float)pUWidth) / (float)pTextureWidth, (pVOffset + 0.0F) / (float)pTextureHeight, (pVOffset + (float)pVHeight) / (float)pTextureHeight, 1.0f, 1.0f, 1.0f, pAlpha, pose);
-    }
-
-    void innerBlit(ResourceLocation pAtlasLocation, int pX1, int pX2, int pY1, int pY2, int pBlitOffset, float pMinU, float pMaxU, float pMinV, float pMaxV, float pRed, float pGreen, float pBlue, float pAlpha, PoseStack pose) {
-        RenderSystem.setShaderTexture(0, pAtlasLocation);
-        RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
-        RenderSystem.enableBlend();
-        Matrix4f matrix4f = pose.last().pose();
-        BufferBuilder bufferbuilder = Tesselator.getInstance().getBuilder();
-        bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR_TEX);
-        bufferbuilder.vertex(matrix4f, (float)pX1, (float)pY1, (float)pBlitOffset).color(pRed, pGreen, pBlue, pAlpha).uv(pMinU, pMinV).endVertex();
-        bufferbuilder.vertex(matrix4f, (float)pX1, (float)pY2, (float)pBlitOffset).color(pRed, pGreen, pBlue, pAlpha).uv(pMinU, pMaxV).endVertex();
-        bufferbuilder.vertex(matrix4f, (float)pX2, (float)pY2, (float)pBlitOffset).color(pRed, pGreen, pBlue, pAlpha).uv(pMaxU, pMaxV).endVertex();
-        bufferbuilder.vertex(matrix4f, (float)pX2, (float)pY1, (float)pBlitOffset).color(pRed, pGreen, pBlue, pAlpha).uv(pMaxU, pMinV).endVertex();
-        BufferUploader.drawWithShader(bufferbuilder.end());
-        RenderSystem.disableBlend();
-    }
-
-//     void innerBlit(PoseStack stack, ResourceLocation pAtlasLocation, int pX, int pY, int pUOffset, int pVOffset, int pUWidth, int pVHeight, float pAlpha) {
-//         int pX1 = pX;
-//         int pX2 = pX + pUWidth;
-//         int pY1 = pY;
-//         int pY2 = pY + pVHeight;
-//
-//         int pBlitOffset = 0;
-//         int pTextureWidth = 256;
-//         int pTextureHeight = 256;
-//
-//         float pMinU = ((float)pUOffset + 0.0F) / (float)pTextureWidth;
-//         float pMaxU = ((float)pUOffset + (float)pUWidth) / (float)pTextureWidth;
-//         float pMinV = ((float)pVOffset + 0.0F) / (float)pTextureHeight;
-//         float pMaxV = ((float)pVOffset + (float)pVHeight) / (float)pTextureHeight;
-//         float pRed = 1.0f;
-//         float pGreen = 1.0f;
-//         float pBlue = 1.0f;
-//
-//         RenderSystem.setShaderTexture(0, pAtlasLocation);
-//         RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
-//         RenderSystem.enableBlend();
-//         Matrix4f matrix4f = stack.last().pose();
-//         BufferBuilder bufferbuilder = Tesselator.getInstance().getBuilder();
-//         bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_COLOR_TEX);
-//         bufferbuilder.vertex(matrix4f, (float)pX1, (float)pY1, (float)pBlitOffset).color(pRed, pGreen, pBlue, pAlpha).uv(pMinU, pMinV).endVertex();
-//         bufferbuilder.vertex(matrix4f, (float)pX1, (float)pY2, (float)pBlitOffset).color(pRed, pGreen, pBlue, pAlpha).uv(pMinU, pMaxV).endVertex();
-//         bufferbuilder.vertex(matrix4f, (float)pX2, (float)pY2, (float)pBlitOffset).color(pRed, pGreen, pBlue, pAlpha).uv(pMaxU, pMaxV).endVertex();
-//         bufferbuilder.vertex(matrix4f, (float)pX2, (float)pY1, (float)pBlitOffset).color(pRed, pGreen, pBlue, pAlpha).uv(pMaxU, pMinV).endVertex();
-//         BufferUploader.drawWithShader(bufferbuilder.end());
-//         RenderSystem.disableBlend();
-//    }
 }
