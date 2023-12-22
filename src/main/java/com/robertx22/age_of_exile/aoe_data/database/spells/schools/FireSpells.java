@@ -117,7 +117,11 @@ public class FireSpells implements ExileRegistryInit {
                                 + " " + Elements.Fire.getIconNameDmg() + " to nearby enemies.")
 
                 .onCast(PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
-
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(Blocks.AIR, 100d)
+                        .put(MapField.ENTITY_NAME, "block")
+                        .put(MapField.BLOCK_FALL_SPEED, 0D)
+                        .put(MapField.FIND_NEAREST_SURFACE, false)
+                        .put(MapField.IS_BLOCK_FALLING, false)))
                 .onCast(PartBuilder.nova(ParticleTypes.FLAME, 200D, 5D, 0.05D))
                 .onCast(PartBuilder.nova(ParticleTypes.FLAME, 100D, 3.5D, 0.05D))
                 .onCast(PartBuilder.nova(ParticleTypes.FLAME, 100D, 1.5D, 0.05D))

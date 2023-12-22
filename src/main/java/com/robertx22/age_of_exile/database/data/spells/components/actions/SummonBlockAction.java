@@ -1,15 +1,21 @@
 package com.robertx22.age_of_exile.database.data.spells.components.actions;
 
+import com.lowdragmc.photon.client.fx.BlockEffect;
+import com.lowdragmc.photon.client.fx.EntityEffect;
+import com.lowdragmc.photon.client.fx.FX;
+import com.lowdragmc.photon.client.fx.FXHelper;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.entities.StationaryFallingBlockEntity;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellUtils;
+import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.utils.geometry.MyPosition;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -93,11 +99,13 @@ public class SummonBlockAction extends SpellAction {
         Block block = data.getBlock();
         Objects.requireNonNull(block);
 
-
         if (found) {
             StationaryFallingBlockEntity be = new StationaryFallingBlockEntity(ctx.world, pos.asBlockPos(), block.defaultBlockState());
             be.getEntityData().set(StationaryFallingBlockEntity.IS_FALLING, data.getOrDefault(MapField.IS_BLOCK_FALLING, false));
             SpellUtils.initSpellEntity(be, ctx.caster, ctx.calculatedSpellData, data);
+            FX fx = FXHelper.getFX(new ResourceLocation(SlashRef.MODID + ":firenova3"));
+            new BlockEffect(fx, ctx.world, pos.asBlockPos()).start();
+
 
             ctx.world.addFreshEntity(be);
         }

@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.selectors.AoeS
 import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellUtils;
+import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
@@ -104,7 +105,7 @@ public class ProjectileCastHelper {
 
             AbstractArrow en = (AbstractArrow) projectile.create(world);
 
-            FX fx = FXHelper.getFX(new ResourceLocation("photon:fireball_for"));
+            FX fx = FXHelper.getFX(new ResourceLocation(SlashRef.MODID + ":wtf_fireball"));
 
             SpellUtils.shootProjectile(pos.add(posAdd), en, ctx.getPositionEntity(), shootSpeed, pitch, yaw + addYaw);
             new EntityEffect(fx, en.level(), en).start();
