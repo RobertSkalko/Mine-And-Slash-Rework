@@ -15,6 +15,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.*;
@@ -39,12 +40,11 @@ public class SummonPetAction extends SpellAction {
 
             Optional<EntityType<?>> type = EntityType.byString(data.get(MapField.SUMMONED_PET_ID));
 
-            SummonEntity en = (SummonEntity) type.get().create(ctx.world);
+            TamableAnimal en = (TamableAnimal) type.get().create(ctx.world);
 
             en.finalizeSpawn((ServerLevel) ctx.world, ctx.world.getCurrentDifficultyAt(ctx.getBlockPos()), MobSpawnType.MOB_SUMMONED, null, null);
 
             en.tame((Player) ctx.caster);
-
 
             var pos = ctx.caster.blockPosition(); // todo
 
@@ -67,9 +67,11 @@ public class SummonPetAction extends SpellAction {
 
             ctx.world.addFreshEntity(en);
 
-            SummonType summonType = en.summonType();
 
-            if (en.countsTowardsMaxSummons()) {
+            boolean counts = data.getOrDefault(MapField.COUNTS_TOWARDS_MAX_SUMMONS, true);
+            SummonType summonType = data.getSummonType();
+
+            if (counts) {
                 int maxTotal = (int) ctx.calculatedSpellData.data.getNumber(EventData.BONUS_TOTAL_SUMMONS, 0).number;
                 despawnIfExceededMaximumSummons(ctx.caster, maxTotal, summonType);
             }
@@ -100,12 +102,14 @@ public class SummonPetAction extends SpellAction {
         }
     }
 
-    public MapHolder create(EntityType type, int lifespan, int amount) {
+    public MapHolder create(EntityType type, int lifespan, int amount, SummonType st, boolean counts) {
         MapHolder c = new MapHolder();
+        c.put(MapField.SUMMON_TYPE, st.name());
         c.put(MapField.SUMMONED_PET_ID, EntityType.getKey(type).toString());
         c.put(MapField.ENTITY_NAME, Spell.DEFAULT_EN_NAME);
         c.put(MapField.LIFESPAN_TICKS, (double) lifespan);
         c.put(MapField.COUNT, (double) amount);
+        c.put(MapField.COUNTS_TOWARDS_MAX_SUMMONS, counts);
         c.type = GUID();
         return c;
     }

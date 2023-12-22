@@ -5,7 +5,6 @@ import com.robertx22.age_of_exile.capability.player.helper.GemInventoryHelper;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
-import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEntity;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.AttributeStat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.IAfterStatCalc;
@@ -42,6 +41,7 @@ import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 
@@ -166,7 +166,7 @@ public class Unit {
 
         MobRarity finalRarity = RandomUtils.weightedRandom(rarities);
 
-   
+
         return finalRarity.GUID();
 
     }
@@ -233,8 +233,8 @@ public class Unit {
             statContexts.addAll(addGearStats(gears));
             CommonStatUtils.addMapAffixStats(entity);
 
-            if (entity instanceof SummonEntity sum) {
-                statContexts.addAll(MobStatUtils.addSummonStats(sum));
+            if (data.isSummon()) {
+                statContexts.addAll(MobStatUtils.addSummonStats((TamableAnimal) entity));
             }
 
             if (entity instanceof Player p) {

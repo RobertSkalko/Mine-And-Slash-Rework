@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.database.data.spells.summons.entity;
 
-import com.robertx22.age_of_exile.aoe_data.database.spells.SummonType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
@@ -19,21 +18,12 @@ public class SkeletonSummon extends SummonEntity {
 
     }
 
-    @Override
-    public SummonType summonType() {
-        return SummonType.UNDEAD;
-    }
 
     @Override
     public boolean usesRanged() {
         return true;
     }
 
-    // todo maybe better way
-    @Override
-    public boolean countsTowardsMaxSummons() {
-        return false;
-    }
 
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {

@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.spells.components;
 
+import com.robertx22.age_of_exile.aoe_data.database.spells.SummonType;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
 import com.robertx22.age_of_exile.database.data.spells.SetAdd;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.AggroAction;
@@ -77,6 +78,10 @@ public class MapHolder {
 
     public Elements getElement() {
         return Elements.valueOf(get(MapField.ELEMENT));
+    }
+
+    public SummonType getSummonType() {
+        return SummonType.valueOf(get(MapField.SUMMON_TYPE));
     }
 
     public DashUtils.Way getPushWay() {

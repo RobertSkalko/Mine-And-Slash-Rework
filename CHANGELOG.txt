@@ -131,3 +131,4 @@ Hopefully this will be more fun than the generic spells of before, I hope I can 
 - adventure map size now configurable
 - Ice shard and chilling field now apply bone chill
 - added effect duration support gem
+- added search bar to talents

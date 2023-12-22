@@ -56,6 +56,7 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -750,6 +751,14 @@ public class EntityData implements ICap, INeededForClient {
             return i;
         }
         return i;
+    }
+
+    public boolean isSummon() {
+        return entity instanceof TamableAnimal && !this.summonedPetData.isEmpty();
+    }
+
+    public TamableAnimal getSummonClass() {
+        return (TamableAnimal) entity;
     }
 
     public boolean CheckIfCanLevelUp() {

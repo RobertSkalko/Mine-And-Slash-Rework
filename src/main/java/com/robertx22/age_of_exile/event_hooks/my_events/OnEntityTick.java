@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.event_hooks.my_events;
 
 import com.robertx22.age_of_exile.capability.bases.EntityGears;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEntity;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
@@ -22,14 +21,14 @@ public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
         }
         try {
 
-            if (Load.Unit(entity) == null) {
-                return; // it shouldnt be though
-            }
-
             var data = Load.Unit(entity);
 
-            if (entity instanceof SummonEntity s) {
-                data.summonedPetData.tick(s);
+            if (data == null) {
+                return;
+            }
+
+            if (data.isSummon()) {
+                data.summonedPetData.tick(entity);
             }
 
             data.ailments.onTick(entity);
