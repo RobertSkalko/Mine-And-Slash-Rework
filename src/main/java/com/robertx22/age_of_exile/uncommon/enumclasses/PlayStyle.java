@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.uncommon.enumclasses;
 
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
+import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 
 public enum PlayStyle {
@@ -10,6 +11,11 @@ public enum PlayStyle {
         @Override
         public Stat getStat() {
             return DatapackStats.STR;
+        }
+
+        @Override
+        public SpellTag getTag() {
+            return SpellTag.melee;
         }
 
         @Override
@@ -24,14 +30,24 @@ public enum PlayStyle {
         }
 
         @Override
+        public SpellTag getTag() {
+            return SpellTag.ranged; // todo maybe call it technique
+        }
+
+        @Override
         public BaseGearType.SlotTag getJewelAffixTag() {
             return BaseGearType.SlotTag.jewel_dex;
         }
     },
-    INT("int", "Spell") {
+    INT("int", "Magic") {
         @Override
         public Stat getStat() {
             return DatapackStats.INT;
+        }
+
+        @Override
+        public SpellTag getTag() {
+            return SpellTag.magic;
         }
 
         @Override
@@ -40,11 +56,13 @@ public enum PlayStyle {
         }
     };
 
-    
+
     public String id;
     public String name;
 
     public abstract Stat getStat();
+
+    public abstract SpellTag getTag();
 
     public abstract BaseGearType.SlotTag getJewelAffixTag();
 

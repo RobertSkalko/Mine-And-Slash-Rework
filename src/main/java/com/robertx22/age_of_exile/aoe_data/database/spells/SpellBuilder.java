@@ -37,7 +37,9 @@ public class SpellBuilder {
         builder.spell.loc_name = name;
         builder.spell.config.setStyle(style);
 
-        builder.spell.getConfig().tags = tags;
+        builder.spell.getConfig().tags = new ArrayList<>();
+        builder.spell.getConfig().tags.addAll(tags);
+        builder.spell.getConfig().tags.add(style.getTag()); // maybe get rid of style after this
 
         return builder;
     }

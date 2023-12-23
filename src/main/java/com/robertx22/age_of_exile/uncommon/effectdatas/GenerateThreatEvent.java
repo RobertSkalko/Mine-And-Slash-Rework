@@ -20,21 +20,15 @@ public class GenerateThreatEvent extends EffectEvent {
     }
 
     @Override
+    public String getName() {
+        return "Threat Event";
+    }
+
+    @Override
     protected void activate() {
 
         int threat = (int) data.getNumber();
 
-        //  float distance = source.distanceTo(target);
-
-        /*
-
-        if (distance > 6) {
-            threat *= 0.8F; // ranged do less threat
-        } else if (distance > 4) {
-            threat *= 0.9F; // ranged do less threat
-        }
-
-         */
 
         if (threat == 0) {
             return;

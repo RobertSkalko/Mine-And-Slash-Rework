@@ -18,7 +18,7 @@ import java.util.List;
 
 public class RestoreResourceEvent extends EffectEvent {
 
-    public static String ID = "on_spend_resource";
+    public static String ID = "on_restore_resource";
 
     protected RestoreResourceEvent(float num, LivingEntity source, LivingEntity target) {
         super(num, source, target);
@@ -27,6 +27,11 @@ public class RestoreResourceEvent extends EffectEvent {
     @Override
     public String GUID() {
         return ID;
+    }
+
+    @Override
+    public String getName() {
+        return "Restore Resource Event";
     }
 
     @Override
@@ -54,7 +59,6 @@ public class RestoreResourceEvent extends EffectEvent {
 
                     if (source != target) {
                         String text = NumberUtils.format(num);
-
                         DmgNumPacket packet = new DmgNumPacket(target, text, data.isCrit(), ChatFormatting.GREEN);
                         Packets.sendToClient((Player) source, packet);
                     }

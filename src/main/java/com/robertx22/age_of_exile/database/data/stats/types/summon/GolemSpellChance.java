@@ -55,6 +55,11 @@ public class GolemSpellChance extends Stat {
     static class GolemSpellEffect implements IStatEffect {
 
         @Override
+        public boolean worksOnEvent(EffectEvent ev) {
+            return ev instanceof DamageEvent;
+        }
+
+        @Override
         public EffectSides Side() {
             return EffectSides.Source;
         }

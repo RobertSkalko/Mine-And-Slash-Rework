@@ -5,12 +5,16 @@ import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DatapackStat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.base.EffectWithCtx;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
+import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect;
 import com.robertx22.library_of_exile.registry.IGUID;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
@@ -28,6 +32,9 @@ public abstract class EffectEvent implements IGUID {
     private boolean effectsCalculated = false;
 
     public EventData data = new EventData();
+
+
+    public abstract String getName();
 
     private boolean activated = false;
 
@@ -180,32 +187,65 @@ public abstract class EffectEvent implements IGUID {
             }
         }
 
+        List<String> list = new ArrayList<>();
+
         un.getStats().stats
                 .values()
                 .forEach(data -> {
                     if (data.isNotZero()) {
                         Stat stat = data.GetStat();
 
+                        IStatEffect effect = null;
+
+
                         if (stat.statEffect != null) {
-                            if (stat.statEffect.Side()
-                                    .equals(side)) {
-                                effects.add(new EffectWithCtx(stat.statEffect, side, data));
+                            if (stat.statEffect.Side().equals(side)) {
+                                if (stat.statEffect.worksOnEvent(this)) {
+                                    effect = stat.statEffect;
+                                }
                             }
                         }
 
                         if (stat instanceof DatapackStat) {
                             DatapackStat d = (DatapackStat) stat;
                             if (d.effect != null) {
-                                if (d.effect.Side()
-                                        .equals(side)) {
-                                    effects.add(new EffectWithCtx(d.effect, side, data));
+                                if (d.effect.worksOnEvent(this)) {
+                                    if (d.effect.Side().equals(side)) {
+                                        effect = d.effect;
+                                    }
                                 }
                             }
                         }
+
+                        if (effect != null) {
+                            effects.add(new EffectWithCtx(effect, side, data));
+                            list.add(stat.GUID());
+                        }
+
                     }
                 });
 
 
+        if (MMORPG.deepCombatLogEnabled()) {
+            if (this instanceof RestoreResourceEvent == false) { // todo allow config
+                String merged = "";
+                for (String s : list) {
+                    merged += s + ", ";
+                }
+                /// todo
+                if (this.source instanceof Player p && side == EffectSides.Source) {
+                    p.sendSystemMessage(Component.literal(getName()).withStyle(ChatFormatting.RED)
+                            .append(Component.literal(", " + side.id).withStyle(ChatFormatting.YELLOW)
+                                    .append(Component.literal(", Used Stats: ").withStyle(ChatFormatting.WHITE)).append(Component.literal(merged).withStyle(ChatFormatting.GREEN))));
+                }
+                if (this.target instanceof Player p && side == EffectSides.Target) {
+                    p.sendSystemMessage(Component.literal(getName()).withStyle(ChatFormatting.RED)
+                            .append(Component.literal(", " + side.id).withStyle(ChatFormatting.YELLOW)
+                                    .append(Component.literal(", Used Stats: ").withStyle(ChatFormatting.WHITE)).append(Component.literal(merged).withStyle(ChatFormatting.GREEN))));
+
+                }
+            }
+        }
         return effects;
     }
 

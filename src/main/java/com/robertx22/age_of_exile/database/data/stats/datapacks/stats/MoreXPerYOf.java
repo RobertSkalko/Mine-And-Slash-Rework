@@ -47,6 +47,7 @@ public class MoreXPerYOf extends BaseDatapackStat implements IAffectsStatsInCalc
         this.scaling = StatScaling.NONE;
     }
 
+    // todo this doesnt cap stat values to min max etc
     @Override
     public void affectStats(EntityData data, InCalcStatData statData) {
         InCalcStatData add_to = data.getUnit()

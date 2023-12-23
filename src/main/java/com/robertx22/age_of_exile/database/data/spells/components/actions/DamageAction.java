@@ -47,7 +47,7 @@ public class DamageAction extends SpellAction {
                 if (data.getOrDefault(MapField.DISABLE_KNOCKBACK, false)) {
                     dmg.data.setBoolean(EventData.DISABLE_KNOCKBACK, true);
                 }
-                if (Load.Unit(ctx.sourceEntity).isSummon()) {
+                if (ctx.sourceEntity instanceof LivingEntity && Load.Unit(ctx.sourceEntity).isSummon()) {
                     dmg.petEntity = (LivingEntity) ctx.sourceEntity;
                 }
                 dmg.setElement(ele);

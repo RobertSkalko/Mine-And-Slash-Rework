@@ -7,7 +7,9 @@ import java.util.Locale;
 
 public enum SpellTag implements IAutoLocName {
     projectile("Projectile"),
-    magic("Magic Skill"),
+    ranged("Ranged"),
+    melee("Melee"),
+    magic("Magic"),
     weapon_skill("Weapon Skill"),
     movement("Movement"),
     damage("Damage"),

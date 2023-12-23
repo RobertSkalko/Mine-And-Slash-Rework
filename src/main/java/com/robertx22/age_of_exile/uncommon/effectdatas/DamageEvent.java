@@ -263,6 +263,11 @@ public class DamageEvent extends EffectEvent {
     );
 
     @Override
+    public String getName() {
+        return "Damage Event";
+    }
+
+    @Override
     public void initBeforeActivating() {
         calcAttackCooldown();
     }
@@ -386,7 +391,7 @@ public class DamageEvent extends EffectEvent {
             if (source instanceof Player) {
                 sourceData.getCooldowns().setOnCooldown(CooldownsData.IN_COMBAT, 20 * 10);
                 if (target instanceof Mob) {
-                    if (Load.Unit(petEntity).isSummon()) {
+                    if (petEntity instanceof LivingEntity && Load.Unit(petEntity).isSummon()) {
                         GenerateThreatEvent threatEvent = new GenerateThreatEvent(petEntity, (Mob) target, ThreatGenType.deal_dmg, dmg);
                         threatEvent.Activate();
                     } else {

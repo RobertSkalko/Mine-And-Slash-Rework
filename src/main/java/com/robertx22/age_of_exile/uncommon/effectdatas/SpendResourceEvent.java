@@ -20,6 +20,11 @@ public class SpendResourceEvent extends EffectEvent {
     }
 
     @Override
+    public String getName() {
+        return "Spend Resource Event";
+    }
+
+    @Override
     protected void activate() {
 
         if (data.isCanceled()) {
@@ -27,7 +32,7 @@ public class SpendResourceEvent extends EffectEvent {
         }
 
         this.targetData.getResources()
-            .spend(target, data.getResourceType(), data.getNumber());
+                .spend(target, data.getResourceType(), data.getNumber());
 
     }
 }

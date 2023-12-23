@@ -352,6 +352,7 @@ blood_leech_cap
 more_food_stats
 max_all_resist
 staff_spell_cdr
+ranged_spell_dmg
 physical_mana_leech
 learn_chilling_touch
 learn_gale_wind
@@ -360,6 +361,7 @@ dot_lifesteal
 husbandry_greater_drop_bonus
 shield_cdr
 lightning_vuln_crit
+ranged_cdr
 double_attack_chance
 mining_lesser_drop_bonus
 fire_dmg_when_target_low_hp
@@ -367,6 +369,7 @@ energy_per_sec
 totem_cdr
 learn_rejuvenation
 projectile_cdr
+melee_cdr
 phys_to_chaos
 learn_test_command
 lightning_focus
@@ -394,6 +397,7 @@ learn_power_chord
 health_per_10_intelligence
 block_chance
 ele_axe_damage
+melee_spell_dmg
 manasteal
 water_weapon_damage
 all_lightning_damage

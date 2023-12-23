@@ -288,8 +288,12 @@ public class Unit {
             map.forEach((key, value) -> value
                     .forEach(v -> {
                         v.stats.forEach(s -> {
-                            if (s.getStat().statContextModifier != null) {
-                                map.get(s.getStat().statContextModifier.getCtxTypeNeeded()).forEach(c -> s.getStat().statContextModifier.modify(s, c));
+                            if (s.getStat() == null) {
+                                System.out.println(s.getStatId());
+                            } else {
+                                if (s.getStat().statContextModifier != null) {
+                                    map.get(s.getStat().statContextModifier.getCtxTypeNeeded()).forEach(c -> s.getStat().statContextModifier.modify(s, c));
+                                }
                             }
                         });
                     }));

@@ -17,6 +17,10 @@ public abstract class InCodeStatEffect<T extends EffectEvent> implements IStatEf
 
     public abstract T activate(T effect, StatData data, Stat stat);
 
+    public boolean worksOnEvent(EffectEvent ev) {
+        return theclass.isAssignableFrom(ev.getClass());
+    }
+
     public abstract boolean canActivate(T effect, StatData data, Stat stat);
 
     public Unit getSource(EffectEvent effect) {
@@ -32,12 +36,8 @@ public abstract class InCodeStatEffect<T extends EffectEvent> implements IStatEf
 
         try {
             if (!effect.data.isCanceled()) {
-                if (theclass.isAssignableFrom(effect.getClass())) {
-                    if (canActivate((T) effect, data, stat)) {
-
-                        activate((T) effect, data, stat);
-
-                    }
+                if (canActivate((T) effect, data, stat)) {
+                    activate((T) effect, data, stat);
                 }
             }
         } catch (Exception e) {

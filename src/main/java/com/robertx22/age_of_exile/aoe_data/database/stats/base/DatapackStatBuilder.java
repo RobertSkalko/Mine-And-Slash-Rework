@@ -151,7 +151,7 @@ public class DatapackStatBuilder<T> {
 
         ErrorUtils.ifFalse(!stats.isEmpty());
         ErrorUtils.ifFalse(priority > -1);
-        ErrorUtils.ifFalse(!events.isEmpty());
+        //ErrorUtils.ifFalse(!events.isEmpty());
 
         stats.entrySet()
                 .forEach(x -> {

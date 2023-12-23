@@ -15,6 +15,11 @@ public class ExilePotionEvent extends EffectEvent {
     public String spellid = "";
 
     @Override
+    public String getName() {
+        return "MNS Effect Event";
+    }
+
+    @Override
     public String GUID() {
         return ID;
     }
