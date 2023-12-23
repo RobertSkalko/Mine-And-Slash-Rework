@@ -7,7 +7,6 @@ import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceC
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.AttributeStat;
-import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.IAfterStatCalc;
 import com.robertx22.age_of_exile.database.data.stats.types.LearnSpellStat;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.base.ICoreStat;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.base.ITransferToOtherStats;
@@ -289,7 +288,7 @@ public class Unit {
                     .forEach(v -> {
                         v.stats.forEach(s -> {
                             if (s.getStat() == null) {
-                                System.out.println(s.getStatId());
+                                //System.out.println(s.getStatId());
                             } else {
                                 if (s.getStat().statContextModifier != null) {
                                     map.get(s.getStat().statContextModifier.getCtxTypeNeeded()).forEach(c -> s.getStat().statContextModifier.modify(s, c));
@@ -340,22 +339,9 @@ public class Unit {
                             AttributeStat stat = (AttributeStat) x.GetStat();
                             stat.addToEntity(entity, x);
                         }
-
                     });
 
-            if (entity instanceof Player) {
 
-
-                this.getStats().stats.values()
-                        .forEach(x -> {
-
-                            if (x.GetStat() instanceof IAfterStatCalc) {
-                                IAfterStatCalc af = (IAfterStatCalc) x.GetStat();
-                                af.affectUnit(data, x);
-                            }
-                        });
-
-            }
             if (old.isDirty(aftercalc)) {
                 if (!Unit.shouldSendUpdatePackets((LivingEntity) entity)) {
                     return;
@@ -373,18 +359,7 @@ public class Unit {
                             }
                         });
 
-                /*
-                if (MMORPG.RUN_DEV_TOOLS) {
-                    Load.player(p).spellCastingData.resetSpells();
-
-                    for (Spell spell : ExileDB.Spells().getList()) {
-                        Load.player(p).spellCastingData.addSpell(new SpellCastingData.InsertedSpell(spell.GUID(), 10));
-                    }
-
-                }
-                 */
-
-
+            
                 Load.player(p).getSkillGemInventory().removeAurasIfCantWear(p);
 
                 Packets.sendToClient((Player) entity, new EntityUnitPacket(entity));

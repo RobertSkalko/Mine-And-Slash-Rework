@@ -227,18 +227,21 @@ public abstract class EffectEvent implements IGUID {
 
 
         if (MMORPG.deepCombatLogEnabled()) {
-            if (this instanceof RestoreResourceEvent == false) { // todo allow config
+            if (this instanceof DamageEvent) { // todo allow config
                 String merged = "";
                 for (String s : list) {
                     merged += s + ", ";
                 }
                 /// todo
-                if (this.source instanceof Player p && side == EffectSides.Source) {
-                    p.sendSystemMessage(Component.literal(getName()).withStyle(ChatFormatting.RED)
-                            .append(Component.literal(", " + side.id).withStyle(ChatFormatting.YELLOW)
-                                    .append(Component.literal(", Used Stats: ").withStyle(ChatFormatting.WHITE)).append(Component.literal(merged).withStyle(ChatFormatting.GREEN))));
+
+                Player p = null;
+                if (this.source instanceof Player px && side == EffectSides.Source) {
+                    p = px;
                 }
-                if (this.target instanceof Player p && side == EffectSides.Target) {
+                if (this.target instanceof Player px && side == EffectSides.Target) {
+                    p = px;
+                }
+                if (p != null) {
                     p.sendSystemMessage(Component.literal(getName()).withStyle(ChatFormatting.RED)
                             .append(Component.literal(", " + side.id).withStyle(ChatFormatting.YELLOW)
                                     .append(Component.literal(", Used Stats: ").withStyle(ChatFormatting.WHITE)).append(Component.literal(merged).withStyle(ChatFormatting.GREEN))));
