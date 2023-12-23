@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.saveclasses.unit.stat_calc;
 
-import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.base.ICoreStat;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.base.ITransferToOtherStats;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
@@ -30,7 +29,7 @@ public class InCalc {
         }
     }
 
-    public void modify(EntityData data) {
+    public void modify(Unit data) {
         // apply stats that add to others
         unit.getStats().modifyInCalc(calcStat -> {
             if (calcStat.GetStat() instanceof IAffectsStatsInCalc aff) {

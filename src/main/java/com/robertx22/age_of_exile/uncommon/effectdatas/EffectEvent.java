@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DatapackStat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
+import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.base.EffectWithCtx;
@@ -15,6 +16,7 @@ import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect;
 import com.robertx22.library_of_exile.registry.IGUID;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
@@ -187,7 +189,7 @@ public abstract class EffectEvent implements IGUID {
             }
         }
 
-        List<String> list = new ArrayList<>();
+        List<StatData> list = new ArrayList<>();
 
         un.getStats().stats
                 .values()
@@ -219,7 +221,7 @@ public abstract class EffectEvent implements IGUID {
 
                         if (effect != null) {
                             effects.add(new EffectWithCtx(effect, side, data));
-                            list.add(stat.GUID());
+                            list.add(data);
                         }
 
                     }
@@ -228,25 +230,28 @@ public abstract class EffectEvent implements IGUID {
 
         if (MMORPG.deepCombatLogEnabled()) {
             if (this instanceof DamageEvent) { // todo allow config
-                String merged = "";
-                for (String s : list) {
-                    merged += s + ", ";
+                MutableComponent merged = Component.literal("");
+                for (StatData s : list) {
+                    merged.append(Component.literal(s.getId() + ":" + s.getValue() + ", "));
                 }
                 /// todo
 
                 Player p = null;
-                if (this.source instanceof Player px && side == EffectSides.Source) {
+                if (this.source instanceof Player px) {
                     p = px;
-                }
-                if (this.target instanceof Player px && side == EffectSides.Target) {
-                    p = px;
-                }
-                if (p != null) {
                     p.sendSystemMessage(Component.literal(getName()).withStyle(ChatFormatting.RED)
                             .append(Component.literal(", " + side.id).withStyle(ChatFormatting.YELLOW)
-                                    .append(Component.literal(", Used Stats: ").withStyle(ChatFormatting.WHITE)).append(Component.literal(merged).withStyle(ChatFormatting.GREEN))));
-
+                                    .append(Component.literal(", Used Stats: ").withStyle(ChatFormatting.WHITE)).append(merged).withStyle(ChatFormatting.GREEN)))
+                    ;
                 }
+                if (this.target instanceof Player px) {
+                    p = px;
+                    p.sendSystemMessage(Component.literal(getName()).withStyle(ChatFormatting.RED)
+                            .append(Component.literal(", " + side.id).withStyle(ChatFormatting.YELLOW)
+                                    .append(Component.literal(", Used Stats: ").withStyle(ChatFormatting.WHITE)).append(merged).withStyle(ChatFormatting.GREEN)))
+                    ;
+                }
+
             }
         }
         return effects;

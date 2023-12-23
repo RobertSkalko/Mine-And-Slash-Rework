@@ -54,7 +54,7 @@ public class StatCalculation {
 
         InCalc incalc = new InCalc(unit);
         incalc.addVanillaHpToStats(entity);
-        incalc.modify(data);
+        incalc.modify(unit);
 
         unit.getStats().calculate();
 
@@ -122,7 +122,7 @@ public class StatCalculation {
 
             statContexts.addAll(playerData.getSkillGemInventory().getAuraStats(entity));
             statContexts.addAll(playerData.getJewels().getStatAndContext(entity));
-            playerData.statPoints.getStatAndContext(entity);
+            statContexts.addAll(playerData.statPoints.getStatAndContext(entity));
 
             statContexts.addAll(PlayerStatUtils.AddPlayerBaseStats(entity));
             statContexts.addAll(PlayerStatUtils.addNewbieElementalResists(data));

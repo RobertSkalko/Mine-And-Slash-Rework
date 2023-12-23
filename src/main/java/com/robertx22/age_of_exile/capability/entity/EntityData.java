@@ -510,6 +510,11 @@ public class EntityData implements ICap, INeededForClient {
         }
 
         if (needsToRecalcStats()) {
+
+            if (this.entity.level().isClientSide()) {
+                return;
+            }
+
             //Watch watch = new Watch();
             this.unit = StatCalculation.calc(entity, -1, null);
 
@@ -528,8 +533,11 @@ public class EntityData implements ICap, INeededForClient {
         if (unit == null) {
             unit = new Unit();
         }
+        if (this.entity.level().isClientSide()) {
+            return;
+        }
         this.unit = StatCalculation.calc(entity, -1, null);
-      
+
     }
 
     // This reduces stat calculation by about 4 TIMES!

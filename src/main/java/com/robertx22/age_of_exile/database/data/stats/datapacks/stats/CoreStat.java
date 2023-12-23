@@ -11,6 +11,7 @@ import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.unit.InCalcStatData;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
+import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipStatsAligner;
 import com.robertx22.library_of_exile.wrappers.ExileText;
@@ -112,9 +113,9 @@ public class CoreStat extends BaseDatapackStat implements ICoreStat {
     }
 
     @Override
-    public void addToOtherStats(EntityData unitdata, InCalcStatData data) {
+    public void addToOtherStats(Unit unitdata, InCalcStatData data) {
         for (ExactStatData x : getMods((int) data.getValue())) {
-            x.applyToStatInCalc(unitdata.getUnit());
+            x.applyToStatInCalc(unitdata);
         }
     }
 

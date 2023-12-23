@@ -453,7 +453,7 @@ public class Stats implements ExileRegistryInit {
 
 
     public static DataPackStatAccessor<EmptyAccessor> CRIT_DAMAGE_TAKEN = DatapackStatBuilder
-            .ofSingle("critical_damage", Elements.Physical)
+            .ofSingle("critical_damage_taken", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(100)
             .setSide(EffectSides.Target)
