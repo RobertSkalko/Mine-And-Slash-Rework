@@ -133,3 +133,6 @@ Hopefully this will be more fun than the generic spells of before, I hope I can 
 - added effect duration support gem
 - added search bar to talents
 - should have fixed some stat bugs
+- loot bonus from maps is now based on map tier, not affixes
+- maps now have 100 tiers
+- map rarity and tier now correlate

@@ -13,7 +13,6 @@ public class MinMax {
     }
 
     public boolean isInRange(int num) {
-
         if (num >= min) {
             if (num <= max) {
                 return true;

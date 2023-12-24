@@ -56,11 +56,24 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     public float item_value_multi;
     public boolean announce_in_chat = false;
     public boolean is_unique_item = false;
+    public MinMax map_tiers = new MinMax(0, 100);
 
     public int max_spell_links = 1;
 
     transient ResourceLocation glintFull;
     transient ResourceLocation glintTexBorder;
+
+    public boolean isNear(GearRarity rar) {
+        return Math.abs(rar.item_tier - this.item_tier) < 2;
+    }
+
+    public MinMax getPossibleMapTiers() {
+        return this.map_tiers;
+    }
+
+    public static GearRarity getRarityFromMapTier(int tier) {
+        return ExileDB.GearRarities().getFiltered(x -> x.map_tiers.isInRange(tier)).stream().findAny().orElse(ExileDB.GearRarities().getDefault());
+    }
 
     public enum LootableGearTier {
         LOW(0), MID(1), HIGH(2);

@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.EntityConfig;
+import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.SummonStat;
@@ -14,7 +15,6 @@ import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalR
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
-import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.maps.MapData;
 import com.robertx22.age_of_exile.maps.MapItemData;
@@ -79,13 +79,10 @@ public class MobStatUtils {
         if (map != null) {
             MapItemData data = map.map;
 
-            float mob_stat_multi = (0.3F * data.tier);
+            float mob_stat_multi = (float) (GameBalanceConfig.get().HP_DMG_MOB_BONUS_PER_MAP_TIER * data.tier);
 
-            // todo should mobs have dodge at all?
             List<Stat> to = new ArrayList<>();
             to.add(Health.getInstance());
-            to.add(MagicShield.getInstance());
-            to.add(Armor.getInstance());
             to.add(Stats.TOTAL_DAMAGE.get());
 
             List<ExactStatData> stats = new ArrayList<>();

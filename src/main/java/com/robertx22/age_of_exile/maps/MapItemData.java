@@ -36,7 +36,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
     }
 
-    public static int MAX_TIER = 10;
+    public static int MAX_TIER = 100;
 
     public int lvl = 1;
     public int tier = 0;
@@ -74,9 +74,9 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
     public float bonusFormula() {
 
-        float tierBonus = tier * 0.04F;
+        float tierBonus = tier * 0.02F;
 
-        return (1 + tierBonus + getAffixMulti());
+        return (1 + tierBonus);
     }
 
     public float getBonusExpMulti() {
@@ -100,6 +100,8 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
         return true;
     }
 
+    // we just need tier bonus i think
+    /*
     private float getAffixMulti() {
 
         float total = 0;
@@ -108,6 +110,8 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
         }
         return total;
     }
+
+     */
 
     public List<MapAffixData> getAllAffixesThatAffect(AffectedEntities aff) {
         return affixes.stream().filter(x -> x.getAffix().affected == aff).collect(Collectors.toList());

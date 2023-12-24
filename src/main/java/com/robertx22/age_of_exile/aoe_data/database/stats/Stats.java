@@ -454,6 +454,7 @@ public class Stats implements ExileRegistryInit {
 
     public static DataPackStatAccessor<Elements> ELEMENT_CRIT_DAMAGE_TAKEN = DatapackStatBuilder
             .<Elements>of(x -> x.guidName + "_crit_taken", x -> x)
+            .addAllOfType(Elements.values())
             .worksWithEvent(DamageEvent.ID)
             .setPriority(100)
             .setSide(EffectSides.Target)
@@ -1184,7 +1185,7 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
-   
+
     public static DataPackStatAccessor<EmptyAccessor> THREAT_GENERATED = DatapackStatBuilder
             .ofSingle("threat_generated", Elements.Physical)
             .worksWithEvent(GenerateThreatEvent.ID)

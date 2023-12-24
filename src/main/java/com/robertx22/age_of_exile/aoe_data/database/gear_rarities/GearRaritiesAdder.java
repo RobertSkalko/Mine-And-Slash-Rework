@@ -12,6 +12,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
 
         GearRarity common = new GearRarity().edit(x -> {
+            x.map_tiers = new MinMax(0, 10);
             x.favor_loot_multi = 0.75F;
             x.favor_needed = 0;
             x.min_affixes = 1;
@@ -30,6 +31,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity uncommon = new GearRarity().edit(x -> {
+            x.map_tiers = new MinMax(10, 20);
+
             x.favor_loot_multi = 0.9F;
             x.favor_needed = 50;
             x.max_sockets = 1;
@@ -49,6 +52,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity rar = new GearRarity().edit(x -> {
+            x.map_tiers = new MinMax(20, 40);
+
             x.affix_rarity_weight = 750;
 
             x.favor_loot_multi = 1;
@@ -72,6 +77,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
         });
         GearRarity epic = new GearRarity().edit(x -> {
+            x.map_tiers = new MinMax(40, 60);
+
             x.affix_rarity_weight = 500;
 
             x.favor_loot_multi = 1.05F;
@@ -95,6 +102,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity legendary = new GearRarity().edit(x -> {
+            x.map_tiers = new MinMax(60, 80);
+
             x.affix_rarity_weight = 200;
 
             x.favor_loot_multi = 1.2F;
@@ -119,6 +128,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity mythic = new GearRarity().edit(x -> {
+            x.map_tiers = new MinMax(80, 100);
+
             x.affix_rarity_weight = 100;
 
             x.favor_loot_multi = 1.25F;
