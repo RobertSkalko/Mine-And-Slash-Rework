@@ -14,7 +14,8 @@
     "EntityMixin",
     "StopMobDropWornGearInMapsMixin",
     "DamageSourceMixin",
-    "StopFireInDungeonMixin"
+    "StopFireInDungeonMixin",
+    "RecipeTest"
   ],
   "client": [
     "TooltipMixin",
