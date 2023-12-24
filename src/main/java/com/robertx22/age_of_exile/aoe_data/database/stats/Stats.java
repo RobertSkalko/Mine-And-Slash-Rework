@@ -452,15 +452,16 @@ public class Stats implements ExileRegistryInit {
             .build();
 
 
-    public static DataPackStatAccessor<EmptyAccessor> CRIT_DAMAGE_TAKEN = DatapackStatBuilder
-            .ofSingle("critical_damage_taken", Elements.Physical)
+    public static DataPackStatAccessor<Elements> ELEMENT_CRIT_DAMAGE_TAKEN = DatapackStatBuilder
+            .<Elements>of(x -> x.guidName + "_crit_taken", x -> x)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(100)
             .setSide(EffectSides.Target)
             .addCondition(StatConditions.IF_CRIT)
+            .addCondition(StatConditions.ELEMENT_MATCH_STAT)
             .addEffect(StatEffects.MULTIPLY_VALUE)
-            .setLocName(x -> "Crit Damage Taken")
-            .setLocDesc(x -> "If Critical, multiply by x")
+            .setLocName(x -> x.dmgName + " Crit DMG Taken")
+            .setLocDesc(x -> "If Critical of that element, multiply by x")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
                 x.base = 0;
@@ -1183,21 +1184,7 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
-    public static DataPackStatAccessor<EmptyAccessor> DAMAGE_REFLECTED = DatapackStatBuilder
-            .ofSingle("damage_reflected", Elements.Physical)
-            .worksWithEvent(DamageEvent.ID)
-            .setPriority(200)
-            .setSide(EffectSides.Target)
-            .addCondition(StatConditions.IS_ATTACK_OR_SPELL_ATTACK)
-            .addEffect(StatEffects.REFLECT_PERCENT_DAMAGE)
-            .setLocName(x -> "Damage Reflected")
-            .setLocDesc(x -> "Deals a % of damage you receive to enemies that attack you.")
-            .modifyAfterDone(x -> {
-                x.is_perc = true;
-                x.scaling = StatScaling.NONE;
-            })
-            .build();
-
+   
     public static DataPackStatAccessor<EmptyAccessor> THREAT_GENERATED = DatapackStatBuilder
             .ofSingle("threat_generated", Elements.Physical)
             .worksWithEvent(GenerateThreatEvent.ID)

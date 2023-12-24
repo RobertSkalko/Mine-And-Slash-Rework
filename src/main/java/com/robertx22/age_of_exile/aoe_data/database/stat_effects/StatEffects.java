@@ -89,7 +89,6 @@ public class StatEffects implements ExileRegistryInit {
     public static StatEffect DURATION_INCREASE = new IncreaseNumberByPercentEffect(EventData.DURATION_MULTI);
     public static StatEffect DECREASE_CAST_TIME = new DecreaseNumberByPercentEffect(EventData.CAST_TICKS);
     public static StatEffect INCREASE_AREA = new IncreaseNumberByPercentEffect(EventData.AREA_MULTI);
-    public static StatEffect REFLECT_PERCENT_DAMAGE = new ReflectDamageAction("reflect_perc_dmg", NumberProvider.ofPercentOfDataNumber(EventData.NUMBER));
     public static StatEffect APPLY_CAST_SPEED_TO_CD = new ApplyCooldownAsCastTimeEffect();
 
     public static DataHolder<String, StatEffect> ADD_PERC_OF_STAT_TO_NUMBER = new DataHolder<>(
@@ -131,7 +130,6 @@ public class StatEffects implements ExileRegistryInit {
         DECREASE_CAST_TIME.addToSerializables();
         LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.addToSerializables();
         GIVE_EFFECT_IN_AOE.addToSerializables();
-        REFLECT_PERCENT_DAMAGE.addToSerializables();
         DECREASE_COOLDOWN_BY_X_TICKS.addToSerializables();
         DECREASE_VALUE.addToSerializables();
         INCREASE_EFFECT_DURATION.addToSerializables();

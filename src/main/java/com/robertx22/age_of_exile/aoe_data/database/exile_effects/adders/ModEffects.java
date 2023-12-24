@@ -18,7 +18,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellA
 import com.robertx22.age_of_exile.database.data.spells.components.actions.vanity.ParticleMotion;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
-import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentResistance;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
@@ -76,8 +76,8 @@ public class ModEffects implements ExileRegistryInit {
 
         ExileEffectBuilder.of(ModEffects.BONE_CHILL)
                 .maxStacks(5)
-                .stat(5, 10, Stats.CRIT_DAMAGE_TAKEN.get(), ModType.FLAT)
-                .stat(5, 10, new AilmentDamage(Ailments.FREEZE), ModType.FLAT)
+                .stat(2, 5, Stats.ELEMENT_CRIT_DAMAGE_TAKEN.get(Elements.Cold), ModType.FLAT)
+                .stat(-5, -10, new AilmentResistance(Ailments.FREEZE), ModType.FLAT)
                 .stat(-2, -5, new ElementalResist(Elements.Cold), ModType.FLAT)
                 .build();
 
