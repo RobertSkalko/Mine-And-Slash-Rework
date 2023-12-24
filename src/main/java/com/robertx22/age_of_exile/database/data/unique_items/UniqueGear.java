@@ -1,7 +1,5 @@
 package com.robertx22.age_of_exile.database.data.unique_items;
 
-import com.google.gson.JsonObject;
-import com.robertx22.age_of_exile.aoe_data.datapacks.JsonUtils;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
@@ -13,6 +11,7 @@ import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.library_of_exile.registry.serialization.ISerializable;
 import net.minecraft.ChatFormatting;
@@ -20,67 +19,22 @@ import net.minecraft.ChatFormatting;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UniqueGear implements IAutoLocName, IAutoLocDesc, JsonExileRegistry<UniqueGear>, ISerializable<UniqueGear> {
+public class UniqueGear implements JsonExileRegistry<UniqueGear>, IAutoLocName, IAutoLocDesc, IAutoGson<UniqueGear>, ISerializable<UniqueGear> {
 
     public static UniqueGear SERIALIZER = new UniqueGear();
 
-    public List<StatMod> uniqueStats = new ArrayList<>();
+    public List<StatMod> unique_stats = new ArrayList<>();
     public int weight = 1000;
+    public int min_tier = 0;
     public String guid;
     public String force_item_id = "";
-    public String uniqueRarity = IRarity.UNIQUE_ID;
+    public String rarity = IRarity.UNIQUE_ID;
     public boolean replaces_name = true;
-
-    public String flavorText = "";
-
+    public String flavor_text = "";
     public String base_gear = "";
-
 
     public transient String langName;
 
-
-    @Override
-    public JsonObject toJson() {
-        JsonObject json = getDefaultJson();
-
-        JsonUtils.addStats(uniqueStats(), json, "unique_stats");
-
-        json.addProperty("rarity", this.uniqueRarity);
-        json.addProperty("replaces_name", this.replaces_name);
-
-        json.addProperty("base_gear", base_gear);
-
-        json.addProperty("force_item_id", force_item_id);
-
-        return json;
-    }
-
-    @Override
-    public UniqueGear fromJson(JsonObject json) {
-
-        UniqueGear uniq = new UniqueGear();
-
-        uniq.guid = getGUIDFromJson(json);
-        uniq.weight = getWeightFromJson(json);
-
-        uniq.uniqueStats = JsonUtils.getStats(json, "unique_stats");
-
-        uniq.base_gear = json.get("base_gear").getAsString();
-        uniq.uniqueRarity = json.get("rarity").getAsString();
-        uniq.force_item_id = json.get("force_item_id").getAsString();
-
-        if (json.has("replaces_name")) {
-            uniq.replaces_name = json.get("replaces_name")
-                    .getAsBoolean();
-        }
-
-        if (json.has("flavor_text")) {
-            uniq.flavorText = json.get("flavor_text")
-                    .getAsString();
-        }
-
-        return uniq;
-    }
 
     @Override
     public int Weight() {
@@ -98,12 +52,11 @@ public class UniqueGear implements IAutoLocName, IAutoLocDesc, JsonExileRegistry
     }
 
     public GearRarity getUniqueRarity() {
-        return ExileDB.GearRarities()
-                .get(uniqueRarity);
+        return ExileDB.GearRarities().get(rarity);
     }
 
     public List<StatMod> uniqueStats() {
-        return this.uniqueStats;
+        return this.unique_stats;
     }
 
     @Override
@@ -143,9 +96,14 @@ public class UniqueGear implements IAutoLocName, IAutoLocDesc, JsonExileRegistry
 
     @Override
     public String locDescForLangFile() {
-        if (flavorText.isEmpty()) {
-            return flavorText;
+        if (flavor_text.isEmpty()) {
+            return flavor_text;
         }
-        return ChatFormatting.ITALIC + "" + ChatFormatting.GRAY + this.flavorText;
+        return ChatFormatting.ITALIC + "" + ChatFormatting.GRAY + this.flavor_text;
+    }
+
+    @Override
+    public Class<UniqueGear> getClassForSerialization() {
+        return UniqueGear.class;
     }
 }

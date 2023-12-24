@@ -63,7 +63,7 @@ public class GiveExactUnique {
 
                 blueprint.rarity.set(ExileDB.GearRarities()
                         .get(ExileDB.UniqueGears()
-                                .random().uniqueRarity));
+                                .random().rarity));
 
                 blueprint.uniquePart.set(ExileDB.UniqueGears()
                         .get(id));
@@ -75,7 +75,7 @@ public class GiveExactUnique {
                         .getFilterWrapped(x -> x.is_unique_item)
                         .random());
                 blueprint.uniquePart.set(ExileDB.UniqueGears()
-                        .getFilterWrapped(x -> x.uniqueRarity.equals(blueprint.rarity.get()
+                        .getFilterWrapped(x -> x.rarity.equals(blueprint.rarity.get()
                                 .GUID()))
                         .random());
                 blueprint.gearItemSlot.set(blueprint.uniquePart.get()

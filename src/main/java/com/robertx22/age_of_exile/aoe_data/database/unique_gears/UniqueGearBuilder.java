@@ -34,12 +34,12 @@ public class UniqueGearBuilder {
     }
 
     public UniqueGearBuilder stats(List<StatMod> stats) {
-        this.uniq.uniqueStats = stats;
+        this.uniq.unique_stats = stats;
         return this;
     }
 
     public UniqueGearBuilder stat(StatMod stat) {
-        this.uniq.uniqueStats.add(stat);
+        this.uniq.unique_stats.add(stat);
         return this;
     }
 
@@ -48,8 +48,8 @@ public class UniqueGearBuilder {
         return this;
     }
 
-    public UniqueGearBuilder setFlavorText(String txt){
-        this.uniq.flavorText = txt;
+    public UniqueGearBuilder setFlavorText(String txt) {
+        this.uniq.flavor_text = txt;
         return this;
     }
 
@@ -67,7 +67,7 @@ public class UniqueGearBuilder {
 
     public UniqueGearBuilder makeRuneWordOnly(List<RuneItem.RuneType> runes) {
         RunewordBuilder.of(uniq.guid, uniq.guid, runes, uniq.getBaseGear().gear_slot);
-        this.uniq.uniqueRarity = IRarity.RUNEWORD_ID;
+        this.uniq.rarity = IRarity.RUNEWORD_ID;
         this.uniq.weight = 0;
         return this;
     }
@@ -79,7 +79,7 @@ public class UniqueGearBuilder {
     }
 
     public UniqueGear build() {
-        ErrorUtils.ifFalse(!uniq.uniqueStats.isEmpty());
+        ErrorUtils.ifFalse(!uniq.unique_stats.isEmpty());
 
         uniq.addToSerializables();
         return uniq;

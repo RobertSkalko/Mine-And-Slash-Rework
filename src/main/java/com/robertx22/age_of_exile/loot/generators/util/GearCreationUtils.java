@@ -52,7 +52,7 @@ public class GearCreationUtils {
             Preconditions.checkNotNull(unique);
 
             data.rar = ExileDB.GearRarities()
-                    .get(unique.uniqueRarity)
+                    .get(unique.rarity)
                     .GUID();
 
             data.gtype = unique.base_gear;

@@ -255,7 +255,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         if (config.usesCharges()) {
 
             list.add(Words.MAX_CHARGES.locName(config.charges).withStyle(ChatFormatting.YELLOW));
-            list.add(Words.CHARGE_REGEN.locName(config.charge_regen).withStyle(ChatFormatting.YELLOW));
+            list.add(Words.CHARGE_REGEN.locName(config.charge_regen / 20).withStyle(ChatFormatting.YELLOW));
 
         } else {
             list.add(Words.COOLDOWN.locName(getCooldownTicks(ctx) / 20).withStyle(ChatFormatting.YELLOW));
@@ -311,7 +311,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
                 e.printStackTrace();
             }
         }
-    
+
 
         if (!this.statsForSkillGem.isEmpty()) {
             list.add(Words.SPELL_STATS.locName());

@@ -18,7 +18,8 @@ public class UniqueGearPart extends BlueprintPart<UniqueGear, GearBlueprint> {
 
             var filt = ExileDB.UniqueGears()
                     .getWrapped()
-                    .of(x -> x.uniqueRarity.equals(blueprint.rarity.get().GUID()))
+                    .of(x -> x.rarity.equals(blueprint.rarity.get().GUID()))
+                    .of(x -> blueprint.info.map_tier >= x.min_tier)
                     .of(x -> x.getBaseGear().gear_slot.equals(blueprint.gearItemSlot.get().gear_slot));
 
             if (!filt.list.isEmpty()) {
@@ -26,7 +27,7 @@ public class UniqueGearPart extends BlueprintPart<UniqueGear, GearBlueprint> {
                 blueprint.gearItemSlot.override(uniq.getBaseGear());
                 return uniq;
             } else {
-                UniqueGear uniq = ExileDB.UniqueGears().random();
+                UniqueGear uniq = ExileDB.UniqueGears().getFilterWrapped(x -> blueprint.info.map_tier >= x.min_tier).random();
                 if (uniq != null) {
                     blueprint.gearItemSlot.override(uniq.getBaseGear());
                 }
