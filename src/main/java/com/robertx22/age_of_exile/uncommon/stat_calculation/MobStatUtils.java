@@ -4,9 +4,7 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.EntityConfig;
-import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
-import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.SummonStat;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
@@ -79,19 +77,8 @@ public class MobStatUtils {
         if (map != null) {
             MapItemData data = map.map;
 
-            float mob_stat_multi = (float) (GameBalanceConfig.get().HP_DMG_MOB_BONUS_PER_MAP_TIER * data.tier);
-
-            List<Stat> to = new ArrayList<>();
-            to.add(Health.getInstance());
-            to.add(Stats.TOTAL_DAMAGE.get());
-
-            List<ExactStatData> stats = new ArrayList<>();
-
-            for (Stat stat : to) {
-                stats.add(ExactStatData.noScaling(mob_stat_multi * 100F, ModType.MORE, stat.GUID()));
-            }
-
-            list.add(new MiscStatCtx(stats));
+         
+            list.add(new MiscStatCtx(data.getTierStats()));
         }
 
         return list;

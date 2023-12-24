@@ -13,6 +13,7 @@ public interface IStatSerializer<T extends BaseDatapackStat> {
     default void saveBaseStatValues(T obj, JsonObject json) {
 
         json.addProperty("id", obj.id);
+        json.addProperty("name", obj.locNameForLangFile());
         json.addProperty("min", obj.min);
         json.addProperty("max", obj.max);
         json.addProperty("base", obj.base);
@@ -24,19 +25,19 @@ public interface IStatSerializer<T extends BaseDatapackStat> {
     default void loadBaseStatValues(T obj, JsonObject json) {
 
         obj.id = json.get("id")
-            .getAsString();
+                .getAsString();
         obj.min = json.get("min")
-            .getAsFloat();
+                .getAsFloat();
         obj.max = json.get("max")
-            .getAsFloat();
+                .getAsFloat();
         obj.base = json.get("base")
-            .getAsFloat();
+                .getAsFloat();
         obj.is_perc = json.get("perc")
-            .getAsBoolean();
+                .getAsBoolean();
         obj.element = Elements.valueOf(json.get("ele")
-            .getAsString());
+                .getAsString());
         obj.scaling = StatScaling.valueOf(json.get("scale")
-            .getAsString());
+                .getAsString());
 
     }
 

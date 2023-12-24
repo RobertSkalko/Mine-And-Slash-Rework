@@ -129,10 +129,11 @@ You scale with energy on both healing and damage and can basic attack mobs to pr
 When you're out of mana, you have garden of thorns to deal damage and give you an effect that restores mana which scales with your energy.
 Hopefully this will be more fun than the generic spells of before, I hope I can rework existing spells to work similarly.
 - adventure map size now configurable
-- Ice shard and chilling field now apply bone chill
+- Ice shard and chilling field now apply bone chill, should help frost mages have a bit of a rotation too with these spells being used to stack effects and chill, and other spells being used to shatter for extra damage
 - added effect duration support gem
 - added search bar to talents
 - should have fixed some stat bugs
 - loot bonus from maps is now based on map tier, not affixes
 - maps now have 100 tiers
 - map rarity and tier now correlate
+- map items now show the tier hp and dmg mob bonus on the tooltip

@@ -6,8 +6,11 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.RegeneratePercentStat;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.EnergyRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
 public class BaseStatsAdder implements ExileRegistryInit {
@@ -38,7 +41,11 @@ public class BaseStatsAdder implements ExileRegistryInit {
         c.scaled(Health.getInstance(), 50);
         c.scaled(Mana.getInstance(), 50);
         c.scaled(Energy.getInstance(), 50);
-    
+
+        c.scaled(HealthRegen.getInstance(), 1);
+        c.scaled(ManaRegen.getInstance(), 1);
+        c.scaled(EnergyRegen.getInstance(), 1);
+
         c.nonScaled(Stats.MAX_SUMMON_CAPACITY.get(), 3);
 
         // why did i add this again? I think its a must

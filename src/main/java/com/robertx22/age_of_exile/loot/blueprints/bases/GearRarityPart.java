@@ -39,7 +39,7 @@ public class GearRarityPart extends BlueprintPart<GearRarity, ItemBlueprint> {
             // so if you do common maps you can get uncommon, but not rare.
             // if you do mythic map, you will only get mythic and legendary maps
             return ExileDB.GearRarities().getFiltered(x -> this.blueprint.info.level >= x.min_lvl && !x.is_unique_item
-                    && x.isNear(GearRarity.getRarityFromMapTier(blueprint.info.tier)));
+                    && x.isNear(GearRarity.getRarityFromMapTier(blueprint.info.map_tier)));
         }
 
         if (canRollUnique) {

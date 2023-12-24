@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.DimensionConfig;
-import com.robertx22.age_of_exile.database.data.MinMax;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.level_ranges.LevelRange;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -15,38 +14,13 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class LevelUtils {
 
-    static boolean isTier(MinMax range, int lvl) {
-        return lvl >= range.min && lvl <= range.max;
-    }
-
-    static Set<Integer> cachedTiers = new HashSet<>();
-
+ 
     public static int getMaxTier() {
         return levelToTier(GameBalanceConfig.get().MAX_LEVEL);
     }
 
-    public static Set<Integer> getAllTiers() {
-
-        if (cachedTiers.isEmpty()) {
-
-            int maxlvl = GameBalanceConfig.get().MAX_LEVEL;
-
-            Set<Integer> tiers = new HashSet<>();
-
-            for (int i = 0; i < maxlvl; i++) {
-                tiers.add(levelToTier(i));
-            }
-
-            cachedTiers = tiers;
-        }
-
-        return cachedTiers;
-    }
 
     public static void runTests() {
         if (MMORPG.RUN_DEV_TOOLS) {

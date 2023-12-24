@@ -11,7 +11,7 @@ public class CoreStatSer implements IStatSerializer<CoreStat> {
     @Override
     public JsonObject statToJson(CoreStat obj) {
         JsonObject data = AutoStatGson.PARSER.parse(AutoStatGson.GSON.toJson(obj.data))
-            .getAsJsonObject();
+                .getAsJsonObject();
 
         JsonObject json = new JsonObject();
         this.saveBaseStatValues(obj, json);
@@ -23,9 +23,9 @@ public class CoreStatSer implements IStatSerializer<CoreStat> {
     @Override
     public CoreStat getStatFromJson(JsonObject json) {
         CoreStatData data = AutoStatGson.GSON.fromJson(json.get("core_stat_data"), CoreStatData.class);
-        String id = json.get("id")
-            .getAsString();
-        CoreStat stat = new CoreStat(id, id, data);
+        String id = json.get("id").getAsString();
+        String name = json.get("name").getAsString();
+        CoreStat stat = new CoreStat(id, name, data);
         this.loadBaseStatValues(stat, json);
         return stat;
     }

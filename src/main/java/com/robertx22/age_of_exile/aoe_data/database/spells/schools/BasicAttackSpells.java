@@ -45,7 +45,7 @@ public class BasicAttackSpells implements ExileRegistryInit {
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.ITEM_SNOWBALL, 2D, 0.15D))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.SNOWFLAKE, 7D, 0.3D))
                 .onExpire(PartBuilder.damageInAoe(SpellCalcs.ICEBALL, Elements.Cold, RADIUS))
-                .onExpire(PartBuilder.addExileEffectToEnemiesInAoe(ModEffects.BONE_CHILL.resourcePath, RADIUS, 20 * 10D))
+                .onExpire(PartBuilder.addExileEffectToEnemiesInAoe(ModEffects.BONE_CHILL.resourcePath, RADIUS, 20 * 6D))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.ITEM_SNOWBALL, 5D, 1D))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.SNOWFLAKE, 15D, 0.5D))
                 .levelReq(1)

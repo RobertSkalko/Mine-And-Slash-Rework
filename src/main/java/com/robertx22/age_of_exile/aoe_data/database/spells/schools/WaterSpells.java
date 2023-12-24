@@ -141,16 +141,16 @@ public class WaterSpells implements ExileRegistryInit {
                         .put(MapField.FIND_NEAREST_SURFACE, true)
                         .put(MapField.IS_BLOCK_FALLING, false)))
 
-                .onTick("block", PartBuilder.groundParticles(ParticleTypes.CLOUD, 5D, 3D, 0.2D))
-                .onTick("block", PartBuilder.groundParticles(ParticleTypes.SNOWFLAKE, 30D, 3D, 0.2D))
+                .onTick("block", PartBuilder.groundParticles(ParticleTypes.CLOUD, 5D, 3.5D, 0.2D))
+                .onTick("block", PartBuilder.groundParticles(ParticleTypes.SNOWFLAKE, 30D, 3.5D, 0.2D))
                 .onTick("block", PartBuilder.playSound(SoundEvents.HORSE_BREATHE, 1.1D, 1.5D)
                         .tickRequirement(20D))
-                .onTick("block", PartBuilder.damageInAoe(SpellCalcs.CHILLING_FIELD, Elements.Cold, 3D)
+                .onTick("block", PartBuilder.damageInAoe(SpellCalcs.CHILLING_FIELD, Elements.Cold, 4D)
                         .disableKnockback()
                         .tickRequirement(20D))
-                .onTick("block", PartBuilder.addExileEffectToEnemiesInAoe(ModEffects.BONE_CHILL.resourcePath, 3D, 20 * 10D)
+                .onTick("block", PartBuilder.addExileEffectToEnemiesInAoe(ModEffects.BONE_CHILL.resourcePath, 4D, 20 * 8D)
                         .tickRequirement(20D))
-                .onTick("block", PartBuilder.addEffectToEnemiesInAoe(MobEffects.MOVEMENT_SLOWDOWN, 3D, 20D))
+                .onTick("block", PartBuilder.addEffectToEnemiesInAoe(MobEffects.MOVEMENT_SLOWDOWN, 4D, 20D))
 
                 .levelReq(20)
                 .build();

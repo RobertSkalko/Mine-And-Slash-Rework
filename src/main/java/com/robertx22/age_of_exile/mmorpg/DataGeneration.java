@@ -13,10 +13,11 @@ public class DataGeneration {
 
         try {
 
+            CreateLangFile.create();
+
             new DataGenHook().run(CachedOutput.NO_CACHE);
 
             ModpackerHelperLists.generate();
-            CreateLangFile.create();
             GenerateCurioDataJsons.generate();
             ItemModelManager.INSTANCE.generateModels();
 

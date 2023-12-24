@@ -311,7 +311,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
                 e.printStackTrace();
             }
         }
-
+    
 
         if (!this.statsForSkillGem.isEmpty()) {
             list.add(Words.SPELL_STATS.locName());

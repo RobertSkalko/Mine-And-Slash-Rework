@@ -34,6 +34,10 @@ public class StatCalculation {
     // todo trying to rewrite calc code..
     public static Unit calc(LivingEntity entity, int skillGem, AttackInformation dmgData) {
 
+        if (entity.level().isClientSide) {
+            return new Unit();
+        }
+
         Unit unit = new Unit();
 
         EntityData data = Load.Unit(entity);
