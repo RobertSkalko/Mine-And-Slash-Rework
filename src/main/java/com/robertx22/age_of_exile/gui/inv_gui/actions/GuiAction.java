@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.gui.inv_gui.actions;
 
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
-import com.robertx22.age_of_exile.database.data.runewords.RuneWord;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
@@ -67,9 +66,6 @@ public abstract class GuiAction<T> implements IGUID {
             for (GearRarity rar : ExileDB.GearRarities().getList()) {
                 of(new ToggleAutoSalvageRarity(type, rar));
             }
-        }
-        for (RuneWord rw : ExileDB.RuneWords().getList()) {
-            of(new CraftRunewordAction(rw));
         }
         for (Spell rw : ExileDB.Spells().getList()) {
             of(new PickSpellAction(rw));

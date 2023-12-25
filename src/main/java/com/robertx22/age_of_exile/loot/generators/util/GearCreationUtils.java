@@ -10,7 +10,6 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.UniqueStatsDat
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -41,10 +40,12 @@ public class GearCreationUtils {
         data.setPotential(rarity.pot.total);
         data.setPotentialRarity(rarity);
 
-        if (RandomUtils.roll(rarity.socket_chance)) {
+        int sockets = rarity.sockets.random();
+
+        for (int i = 0; i < sockets; i++) {
             data.sockets.addSocket();
         }
-
+   
         if (rarity.is_unique_item && blueprint.uniquePart.get() != null) {
 
             UniqueGear unique = blueprint.uniquePart.get();

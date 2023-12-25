@@ -174,7 +174,7 @@ public class GearTooltipUtils {
 
         //  ItemStack.appendEnchantmentNames(tip, stack.getEnchantmentTags());
 
-        if ((gear.isUnique() || gear.isRuneWord()) && !gear.uniqueStats.getUnique(gear).locDesc().getString().isEmpty()) {
+        if (gear.isUnique() && !gear.uniqueStats.getUnique(gear).locDesc().getString().isEmpty()) {
             var desc = gear.uniqueStats.getUnique(gear).locDesc();
             if (I18n.exists(gear.uniqueStats.getUnique(gear).locDescLangFileGUID())) {
                 tip.add(desc);

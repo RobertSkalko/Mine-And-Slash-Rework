@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuild
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDuration;
+import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
@@ -25,7 +26,19 @@ public class UniqueNecklaces implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
-
+        UniqueGearBuilder.of(
+                        "heavenly_tear",
+                        "Heavenly Tear",
+                        BaseGearTypes.NECKLACE)
+                .setReplacesName()
+                .stats(Arrays.asList(
+                        new StatMod(10, 25, Stats.ELEMENTAL_DAMAGE.get(Elements.Lightning)),
+                        new StatMod(10, 20, Stats.HEAL_STRENGTH.get()),
+                        new StatMod(5, 15, Armor.getInstance())
+                ))
+                .devComment("divine school heal necklace")
+                .build();
+        
         UniqueGearBuilder.of(
                         "rabbit_paw",
                         "Rabbit's Paw",

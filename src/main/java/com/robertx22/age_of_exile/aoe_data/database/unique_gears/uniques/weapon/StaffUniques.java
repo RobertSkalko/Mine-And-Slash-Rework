@@ -17,6 +17,15 @@ public class StaffUniques implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
+        UniqueGearBuilder.of("doombolt", "Touch of Doom", BaseGearTypes.BOW)
+                .stats(Arrays.asList(
+                        new StatMod(0, 100, GearDamage.getInstance()).percent(),
+                        new StatMod(15, 30, Stats.ELEMENTAL_DAMAGE.get(Elements.Chaos)),
+                        new StatMod(1, 1, Stats.SPELL_LIFESTEAL.get()),
+                        new StatMod(10, 25, Stats.DOT_DAMAGE.get())
+                ))
+                .build();
+
         UniqueGearBuilder.of("arch_gamble", "The Arch-Gamble", BaseGearTypes.STAFF)
                 .stats(Arrays.asList(
                         new StatMod(-150, 150, GearDamage.getInstance(), ModType.PERCENT),
@@ -51,7 +60,7 @@ public class StaffUniques implements ExileRegistryInit {
                         new StatMod(10, 25, Stats.AREA_DAMAGE.get())
                 ))
                 .build();
-   
+
 
     }
 }

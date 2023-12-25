@@ -1,12 +1,9 @@
 package com.robertx22.age_of_exile.aoe_data.database.unique_gears;
 
-import com.robertx22.age_of_exile.aoe_data.database.runewords.RunewordBuilder;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
-import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ErrorUtils;
-import com.robertx22.age_of_exile.vanilla_mc.items.gemrunes.RuneItem;
 import com.robertx22.library_of_exile.registry.DataGenKey;
 
 import java.util.List;
@@ -62,13 +59,6 @@ public class UniqueGearBuilder {
 
     public UniqueGearBuilder keepsBaseName() {
         this.uniq.replaces_name = false;
-        return this;
-    }
-
-    public UniqueGearBuilder makeRuneWordOnly(List<RuneItem.RuneType> runes) {
-        RunewordBuilder.of(uniq.guid, uniq.guid, runes, uniq.getBaseGear().gear_slot);
-        this.uniq.rarity = IRarity.RUNEWORD_ID;
-        this.uniq.weight = 0;
         return this;
     }
 

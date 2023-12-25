@@ -48,8 +48,7 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     public MinMax stat_percents = new MinMax(0, 0);
     public Potential pot = new Potential(100, 0.5F);
     public int min_affixes = 0;
-    public int max_sockets = 3;
-    public int socket_chance = 25;
+    public MinMax sockets = new MinMax(0, 2);
     public int item_tier = -1;
     public float item_tier_power;
     public int min_lvl = 0;

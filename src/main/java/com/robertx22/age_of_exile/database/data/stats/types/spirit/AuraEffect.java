@@ -16,7 +16,7 @@ public class AuraEffect extends Stat {
         this.statContextModifier = new IStatCtxModifier() {
             @Override
             public void modify(ExactStatData stat, StatContext ctx) {
-                float multi = 1F + stat.getAverageValue() / 100F;
+                float multi = 1F + stat.getValue() / 100F;
                 ctx.stats.forEach(x -> {
                     x.multiplyBy(multi);
                 });

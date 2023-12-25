@@ -16,6 +16,7 @@ import com.robertx22.age_of_exile.aoe_data.database.mob_affixes.MobAffixes;
 import com.robertx22.age_of_exile.aoe_data.database.mob_rarities.MobRarities;
 import com.robertx22.age_of_exile.aoe_data.database.perks.AllPerks;
 import com.robertx22.age_of_exile.aoe_data.database.runes.Runes;
+import com.robertx22.age_of_exile.aoe_data.database.runewords.Runewords;
 import com.robertx22.age_of_exile.aoe_data.database.spell_schools.SpellSchoolsAdder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
 import com.robertx22.age_of_exile.aoe_data.database.spells.Spells;
@@ -79,6 +80,8 @@ public class GeneratedData {
         new AutoDatapackStats().registerAll();
 
         new BaseStatsAdder().registerAll();
+
+        new Runewords().registerAll();
 
         Dungeons.init();
 

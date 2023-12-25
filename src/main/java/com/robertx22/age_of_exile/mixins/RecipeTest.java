@@ -6,6 +6,9 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin(RecipeBook.class)
 public class RecipeTest {
 
+    // todo2, turns out mods like this already exist, try them first. Only do it myself if the mods are lacking
+
+
     // todo this seems to work, try in JEI and if JEI works too make this a separate mod
     // NO IDEA how dumb this is, could break things but if not, it might be solve the big nbt problem
 

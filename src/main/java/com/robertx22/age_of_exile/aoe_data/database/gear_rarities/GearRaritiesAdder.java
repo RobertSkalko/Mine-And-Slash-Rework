@@ -22,8 +22,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.pot = new GearRarity.Potential(100, 0.5F);
             x.item_value_multi = 1;
             x.item_model_data_num = 1;
-            x.max_sockets = 0;
-            x.socket_chance = 0;
+            x.sockets = new MinMax(0, 0);
             x.higher_rar = IRarity.UNCOMMON;
             x.stat_percents = new MinMax(0, 10);
             x.setCommonFields();
@@ -35,8 +34,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
             x.favor_loot_multi = 0.9F;
             x.favor_needed = 50;
-            x.max_sockets = 1;
-            x.socket_chance = 5;
+            x.sockets = new MinMax(0, 1);
             x.max_spell_links = 2;
             x.pot = new GearRarity.Potential(100, 1);
             x.min_affixes = 2;
@@ -58,8 +56,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
             x.favor_loot_multi = 1;
             x.favor_needed = 100;
-            x.max_sockets = 2;
-            x.socket_chance = 15;
+            x.sockets = new MinMax(0, 2);
             x.max_spell_links = 3;
             x.min_lvl = 10;
             x.lootable_gear_tier = GearRarity.LootableGearTier.MID;
@@ -83,8 +80,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
             x.favor_loot_multi = 1.05F;
             x.favor_needed = 250;
-            x.max_sockets = 3;
-            x.socket_chance = 20;
+            x.sockets = new MinMax(0, 3);
             x.min_lvl = 25;
             x.max_spell_links = 4;
             x.lootable_gear_tier = GearRarity.LootableGearTier.MID;
@@ -108,8 +104,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
             x.favor_loot_multi = 1.2F;
             x.favor_needed = 500;
-            x.max_sockets = 3;
-            x.socket_chance = 30;
+            x.sockets = new MinMax(1, 3);
             x.max_spell_links = 5;
             x.min_lvl = 50;
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
@@ -134,10 +129,9 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
             x.favor_loot_multi = 1.25F;
             x.favor_needed = 1000;
-            x.max_sockets = 3;
+            x.sockets = new MinMax(2, 3);
             x.min_lvl = 75;
             x.max_spell_links = 5;
-            x.socket_chance = 50;
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
             x.pot = new GearRarity.Potential(100, 2F);
             x.min_affixes = 6;
@@ -153,8 +147,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         });
 
         GearRarity unique = new GearRarity().edit(x -> {
-            x.max_sockets = 3;
-            x.socket_chance = 20;
+            x.sockets = new MinMax(1, 3);
             x.pot = new GearRarity.Potential(100, 1);
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
             x.min_affixes = 0;
@@ -168,20 +161,20 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.is_unique_item = true;
         });
 
+        // todo need to make separate maprarity etc or else this will roll somehow
         GearRarity runeword = new GearRarity().edit(x -> {
-            x.max_sockets = 3;
-            x.socket_chance = 50;
+            x.sockets = new MinMax(2, 6);
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
             x.pot = new GearRarity.Potential(100, 1);
             x.min_affixes = 0;
-            x.weight = 0;
+            x.weight = 150;
             x.item_tier_power = 2;
             x.item_value_multi = 2;
-            x.item_tier = 5;
+            x.item_tier = 10;
             x.setRunewordFields();
             x.addToSerializables();
             x.announce_in_chat = false;
-            x.is_unique_item = true;
+            x.is_unique_item = false;
         });
 
 

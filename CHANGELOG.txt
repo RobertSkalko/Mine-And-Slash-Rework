@@ -137,3 +137,4 @@ Hopefully this will be more fun than the generic spells of before, I hope I can 
 - maps now have 100 tiers
 - map rarity and tier now correlate
 - map items now show the tier hp and dmg mob bonus on the tooltip
+- runewords changed back to old system, existing runeword uniques are now just normal uniques
