@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.database.data.spells.map_fields;
 
 import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
 import com.robertx22.library_of_exile.registry.IGUID;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.HashMap;
 import java.util.List;
@@ -93,6 +94,8 @@ public class MapField<T> implements IGUID {
     public static MapField<List<String>> ENTITY_PREDICATES = make("entity_predicates");
 
     public static MapField<ValueCalculation> VALUE_CALCULATION = make("value_calculation");
+
+    public static MapField<String> SKILL_FX = make("skill_fx");
 
     public MapField(String id) {
         this.id = id;

@@ -5,15 +5,14 @@ import com.lowdragmc.photon.client.fx.FX;
 import com.lowdragmc.photon.client.fx.FXHelper;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.AoeSelector;
 import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
+import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellUtils;
-import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.library_of_exile.utils.geometry.MyPosition;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -105,11 +104,13 @@ public class ProjectileCastHelper {
 
             AbstractArrow en = (AbstractArrow) projectile.create(world);
 
-            FX fx = FXHelper.getFX(new ResourceLocation(SlashRef.MODID + ":wtf_fireball"));
-
             SpellUtils.shootProjectile(pos.add(posAdd), en, ctx.getPositionEntity(), shootSpeed, pitch, yaw + addYaw);
-            new EntityEffect(fx, en.level(), en).start();
             SpellUtils.initSpellEntity(en, caster, data, holder);
+
+            if(holder.has(MapField.SKILL_FX)){
+                FX fx = FXHelper.getFX(holder.getSkillFXResourceLocation());
+                new EntityEffect(fx, ctx.world, en).start();
+            }
 
             if (fallDown) {
                 en.setDeltaMovement(0, -1, 0);

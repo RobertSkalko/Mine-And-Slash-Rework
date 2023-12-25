@@ -36,6 +36,7 @@ public abstract class SpellAction extends BaseFieldNeeder implements IGUID {
     public static RideAction RIDE = of(new RideAction());
     public static OpenEnderChestAction OPEN_ENDER_CHEST = of(new OpenEnderChestAction());
     public static SummonProjectileAction SUMMON_PROJECTILE = of(new SummonProjectileAction());
+    public static SummonFXHolderAction SUMMON_FX_HOLDER = of(new SummonFXHolderAction());
     public static DamageAction DEAL_DAMAGE = of(new DamageAction());
     public static ParticleInRadiusAction PARTICLES_IN_RADIUS = of(new ParticleInRadiusAction());
     public static SoundAction PLAY_SOUND = of(new SoundAction());
