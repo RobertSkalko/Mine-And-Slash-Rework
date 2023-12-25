@@ -60,6 +60,7 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     public int max_spell_links = 1;
 
     transient ResourceLocation glintFull;
+    transient ResourceLocation glintCircle;
     transient ResourceLocation glintTexBorder;
 
     public boolean isNear(GearRarity rar) {
@@ -101,7 +102,6 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     }
 
     public ResourceLocation getGlintTextureFull() {
-
         if (glintFull == null) {
             ResourceLocation tex = SlashRef.id("textures/gui/rarity_glint/full/" + GUID() + ".png");
             if (ClientTextureUtils.textureExists(tex)) {
@@ -111,6 +111,19 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
             }
         }
         return glintFull;
+
+    }
+
+    public ResourceLocation getGlintTextureCircle() {
+        if (glintCircle == null) {
+            ResourceLocation tex = SlashRef.id("textures/gui/rarity_glint/circle/" + GUID() + ".png");
+            if (ClientTextureUtils.textureExists(tex)) {
+                glintCircle = tex;
+            } else {
+                glintCircle = SlashRef.id("textures/gui/rarity_glint/circle/default.png");
+            }
+        }
+        return glintCircle;
 
     }
 

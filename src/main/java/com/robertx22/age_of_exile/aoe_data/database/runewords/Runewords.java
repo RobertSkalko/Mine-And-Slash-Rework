@@ -24,7 +24,7 @@ public class Runewords implements ExileRegistryInit {
                         Mana.getInstance().mod(10, 25).percent(),
                         Stats.SUMMON_DAMAGE.get().mod(10, 25)
                 ),
-                Arrays.asList(RuneType.NOS, RuneType.MOS, RuneType.ITA),
+                Arrays.asList(RuneType.NOS, RuneType.MOS, RuneType.ITA, RuneType.CEN),
                 GearSlots.CHEST);
 
     }
