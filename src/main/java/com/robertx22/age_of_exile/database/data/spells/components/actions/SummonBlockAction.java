@@ -103,8 +103,10 @@ public class SummonBlockAction extends SpellAction {
             StationaryFallingBlockEntity be = new StationaryFallingBlockEntity(ctx.world, pos.asBlockPos(), block.defaultBlockState());
             be.getEntityData().set(StationaryFallingBlockEntity.IS_FALLING, data.getOrDefault(MapField.IS_BLOCK_FALLING, false));
             SpellUtils.initSpellEntity(be, ctx.caster, ctx.calculatedSpellData, data);
-            FX fx = FXHelper.getFX(new ResourceLocation(SlashRef.MODID + ":firenova3"));
-            new BlockEffect(fx, ctx.world, pos.asBlockPos()).start();
+            if(data.has(MapField.SKILL_FX)){
+                FX fx = FXHelper.getFX(data.getSkillFXResourceLocation());
+                new EntityEffect(fx, ctx.world, be).start();
+            }
 
 
             ctx.world.addFreshEntity(be);

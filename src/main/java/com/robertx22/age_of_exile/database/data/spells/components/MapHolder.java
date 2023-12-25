@@ -147,4 +147,7 @@ public class MapHolder {
         return (T) map.getOrDefault(field.GUID(), defa);
     }
 
+    public ResourceLocation getSkillFXResourceLocation() {
+        return new ResourceLocation("mmorpg:" + get(MapField.SKILL_FX));
+    }
 }

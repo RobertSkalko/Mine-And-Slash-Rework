@@ -19,6 +19,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.Arrays;
+import java.util.Map;
 
 public class FireSpells implements ExileRegistryInit {
     public static String FIRE_NOVA_ID = "fire_nova";
@@ -100,7 +101,8 @@ public class FireSpells implements ExileRegistryInit {
                         .put(MapField.ENTITY_NAME, "block")
                         .put(MapField.FIND_NEAREST_SURFACE, false)
                         .put(MapField.BLOCK_FALL_SPEED, -0.03D)
-                        .put(MapField.IS_BLOCK_FALLING, true)))
+                        .put(MapField.IS_BLOCK_FALLING, true)
+                        .put(MapField.SKILL_FX, "meteor")))
                 .onTick("block", PartBuilder.particleOnTick(2D, ParticleTypes.LAVA, 2D, 0.5D))
                 .onExpire("block", PartBuilder.damageInAoe(SpellCalcs.METEOR, Elements.Fire, 3D))
                 .onExpire("block", PartBuilder.aoeParticles(ParticleTypes.LAVA, 150D, 3D))
@@ -117,11 +119,8 @@ public class FireSpells implements ExileRegistryInit {
                                 + " " + Elements.Fire.getIconNameDmg() + " to nearby enemies.")
 
                 .onCast(PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
-                .onCast(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(Blocks.AIR, 100d)
-                        .put(MapField.ENTITY_NAME, "block")
-                        .put(MapField.BLOCK_FALL_SPEED, 0D)
-                        .put(MapField.FIND_NEAREST_SURFACE, false)
-                        .put(MapField.IS_BLOCK_FALLING, false)))
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_FX_HOLDER.createFXHolder(80d, "fire_nova")
+                        .put(MapField.HEIGHT, 0.5D)))
                 .onCast(PartBuilder.nova(ParticleTypes.FLAME, 200D, 5D, 0.05D))
                 .onCast(PartBuilder.nova(ParticleTypes.FLAME, 100D, 3.5D, 0.05D))
                 .onCast(PartBuilder.nova(ParticleTypes.FLAME, 100D, 1.5D, 0.05D))
