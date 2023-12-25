@@ -9,7 +9,6 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.value_calc.LeveledValue;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -27,6 +26,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,7 +66,8 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
     }
 
     public Item getEffectDisplayItem() {
-        return SlashItems.EFFECT_DISPLAY.get(GUID()).get();
+        var id = SlashRef.id("mob_effects/" + GUID());
+        return ForgeRegistries.ITEMS.getValue(id);
     }
 
     @Override
