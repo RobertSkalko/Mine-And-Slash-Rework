@@ -7,7 +7,7 @@ import net.minecraft.world.level.GameRules;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
-import net.minecraftforge.event.server.ServerStoppedEvent;
+import net.minecraftforge.event.server.ServerStoppingEvent;
 
 public class LifeCycleEvents {
 
@@ -47,7 +47,7 @@ public class LifeCycleEvents {
             }
         });
 
-        ForgeEvents.registerForgeEvent(ServerStoppedEvent.class, event -> {
+        ForgeEvents.registerForgeEvent(ServerStoppingEvent.class, event -> {
             event.getServer()
                     .getGameRules()
                     .getRule(GameRules.RULE_NATURAL_REGENERATION)

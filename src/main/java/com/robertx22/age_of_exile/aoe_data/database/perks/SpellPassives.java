@@ -86,7 +86,7 @@ public class SpellPassives implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
-        
+
         // Sorcerer
         PerkBuilder.passive(FREEZE_CHANCE, 8, new OptScaleExactStat(4, new AilmentChance(Ailments.FREEZE)));
         PerkBuilder.passive(BURN_CHANCE, 8, new OptScaleExactStat(4, new AilmentChance(Ailments.BURN)));
@@ -142,8 +142,8 @@ public class SpellPassives implements ExileRegistryInit {
         PerkBuilder.passive(HEALTH_REGEN, 8, new OptScaleExactStat(4, HealthRegen.getInstance(), ModType.PERCENT));
         PerkBuilder.passive(CRIT_HIT, 8, new OptScaleExactStat(1, Stats.CRIT_CHANCE.get()));
         PerkBuilder.passive(DAMAGE_RECEIVED, 8, new OptScaleExactStat(-1.5f, Stats.DAMAGE_RECEIVED.get()));
-        PerkBuilder.passive(AURA_EFFECT, 8, new OptScaleExactStat(4, AuraEffect.getInstance(), ModType.FLAT));
-        PerkBuilder.passive(BLOCK_CHANCE, 8, new OptScaleExactStat(3, BlockChance.getInstance(), ModType.FLAT));
+        PerkBuilder.passive(AURA_EFFECT, 8, new OptScaleExactStat(2, AuraEffect.getInstance(), ModType.FLAT));
+        PerkBuilder.passive(BLOCK_CHANCE, 8, new OptScaleExactStat(1, BlockChance.getInstance(), ModType.FLAT));
         PerkBuilder.passive(LIFESTEAL, 8, new OptScaleExactStat(1, Stats.LIFESTEAL.get(), ModType.FLAT));
         PerkBuilder.passive(ARMOR_PEN, 8, new OptScaleExactStat(3, ArmorPenetration.getInstance()));
     }

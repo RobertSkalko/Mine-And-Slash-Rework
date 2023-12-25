@@ -19,12 +19,12 @@ public class Runewords implements ExileRegistryInit {
         RunewordBuilder.of("abyssal_depths", "Abyssal Depths",
                 Arrays.asList(
                         GearDefense.getInstance().mod(25, 100).percent(),
-                        Health.getInstance().mod(5, 10),
-                        Energy.getInstance().mod(10, 25),
-                        Mana.getInstance().mod(10, 25),
+                        Health.getInstance().mod(5, 10).percent(),
+                        Energy.getInstance().mod(10, 25).percent(),
+                        Mana.getInstance().mod(10, 25).percent(),
                         Stats.SUMMON_DAMAGE.get().mod(10, 25)
                 ),
-                Arrays.asList(RuneType.ANO, RuneType.MOS),
+                Arrays.asList(RuneType.NOS, RuneType.MOS, RuneType.ITA),
                 GearSlots.CHEST);
 
     }

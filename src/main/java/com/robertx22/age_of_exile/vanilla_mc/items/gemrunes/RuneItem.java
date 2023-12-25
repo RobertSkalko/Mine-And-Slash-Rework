@@ -21,6 +21,7 @@ import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.vanilla_mc.LuckyRandom;
+import com.robertx22.age_of_exile.vanilla_mc.packets.proxies.OpenGuiWrapper;
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
@@ -87,7 +88,7 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
                             if (add) {
                                 gear.sockets.getSocketed().add(rune);
                             }
-                            
+
                             if (!gear.sockets.hasRuneWord()) {
                                 var list = ExileDB.RuneWords().getFilterWrapped(x -> x.canApplyOnItem(stack) && x.hasMatchingRunesToCreate(gear)).list;
                                 if (!list.isEmpty()) {
@@ -159,6 +160,10 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+
+        if (pLevel.isClientSide) {
+            OpenGuiWrapper.openWikiRunewords();
+        }
 
         return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
 

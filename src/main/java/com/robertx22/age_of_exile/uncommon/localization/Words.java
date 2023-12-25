@@ -63,6 +63,7 @@ public enum Words implements IAutoLocName {
     Gear("Gear"),
     All("All"),
     Rune("Rune"),
+    Runeword("Runeword"),
     LevelRewards("Level Rewards"),
     Gem("Gem"),
     // name2

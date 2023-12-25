@@ -20,13 +20,13 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import java.util.function.Supplier;
 
 public enum RuneType {
-    YUN(100, "yun", "Yun", 4, 0.8F, () -> StatPerType.of()
+    YUN(100, "yun", "Yun", 4, 0.5F, () -> StatPerType.of()
             .addArmor(AuraEffect.getInstance().mod(1, 5))
             .addJewerly(SpecialStats.BETTER_FOOD_BUFFS.mod(2, 10))
             .addWeapon(Stats.COOLDOWN_REDUCTION.get().mod(3, 10))
 
     ),
-    VEN(100, "ven", "Ven", 4, 0.8F, () -> StatPerType.of()
+    VEN(100, "ven", "Ven", 4, 0.5F, () -> StatPerType.of()
             .addArmor(Stats.EFFECT_DURATION_YOU_CAST.get().mod(1, 5))
             .addJewerly(AuraCapacity.getInstance().mod(1, 5))
             .addWeapon(Stats.SUMMON_DAMAGE.get().mod(5, 25))
@@ -61,37 +61,37 @@ public enum RuneType {
             .addJewerly(Stats.PROJECTILE_SPEED.get().mod(2, 8).percent())
             .addWeapon(Stats.PROJECTILE_DAMAGE.get().mod(5, 15).percent())
     ),
-    ANO(1000, "ano", "Ano", 2, 0.3F, () -> StatPerType.of()
+    ANO(1000, "ano", "Ano", 2, 0.2F, () -> StatPerType.of()
             .addArmor(HealthRegen.getInstance().mod(0.1F, 0.75F))
             .addJewerly(ManaRegen.getInstance().mod(0.1F, 1F))
             .addWeapon(EnergyRegen.getInstance().mod(1, 3))
     ),
-    TOQ(1000, "toq", "Toq", 2, 0.4F, () -> StatPerType.of()
+    TOQ(1000, "toq", "Toq", 2, 0.3F, () -> StatPerType.of()
             .addArmor(Stats.NON_CRIT_DAMAGE.get().mod(1, 5))
             .addJewerly(Stats.CRIT_CHANCE.get().mod(1, 5))
             .addWeapon(Stats.CRIT_CHANCE.get().mod(5, 10))
     ),
-    ORU(500, "oru", "Oru", 4, 0.6F, () -> StatPerType.of()
+    ORU(500, "oru", "Oru", 4, 0.4F, () -> StatPerType.of()
             .addArmor(Stats.CRIT_DAMAGE.get().mod(1, 5))
             .addJewerly(Stats.CRIT_DAMAGE.get().mod(2, 10))
             .addWeapon(Stats.CRIT_DAMAGE.get().mod(5, 15))
     ),
-    WIR(200, "wir", "Wir", 4, 0.7F, () -> StatPerType.of()
+    WIR(200, "wir", "Wir", 4, 0.4F, () -> StatPerType.of()
             .addArmor(Stats.TOTAL_DAMAGE.get().mod(5, 10))
             .addJewerly(Stats.TOTAL_DAMAGE.get().mod(5, 10))
             .addWeapon(Stats.TOTAL_DAMAGE.get().mod(5, 10))
     ),
-    ENO(1000, "eno", "Eno", 3, 0.5F, () -> StatPerType.of()
+    ENO(1000, "eno", "Eno", 3, 0.3F, () -> StatPerType.of()
             .addArmor(Stats.MANA_COST.get().mod(-2, -5))
             .addJewerly(Stats.MANA_COST.get().mod(-3, -7))
             .addWeapon(Stats.MANA_COST.get().mod(-4, -10))
     ),
-    HAR(1000, "har", "Har", 3, 0.4f, () -> StatPerType.of()
+    HAR(1000, "har", "Har", 3, 0.3f, () -> StatPerType.of()
             .addArmor(Stats.HEAL_STRENGTH.get().mod(3, 10))
             .addJewerly(Stats.HEAL_STRENGTH.get().mod(5, 12))
             .addWeapon(Stats.HEAL_STRENGTH.get().mod(6, 20))
     ),
-    XER(1000, "xer", "Xer", 3, 0.5f, () -> StatPerType.of()
+    XER(1000, "xer", "Xer", 3, 0.4f, () -> StatPerType.of()
             .addArmor(Stats.SUMMON_DAMAGE.get().mod(3, 8))
             .addJewerly(Stats.SUMMON_DAMAGE.get().mod(4, 12))
             .addWeapon(Stats.SUMMON_DAMAGE.get().mod(5, 15))
