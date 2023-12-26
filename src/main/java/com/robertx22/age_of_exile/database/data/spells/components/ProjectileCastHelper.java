@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.spells.components;
 import com.lowdragmc.photon.client.fx.EntityEffect;
 import com.lowdragmc.photon.client.fx.FX;
 import com.lowdragmc.photon.client.fx.FXHelper;
+import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.AoeSelector;
 import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
@@ -24,7 +25,7 @@ import org.joml.Math;
 public class ProjectileCastHelper {
 
     LivingEntity caster;
-
+    public Boolean FXEnable;
     public boolean silent = false;
     public float apart = 3;
     public float shootSpeed = 1;
@@ -106,8 +107,8 @@ public class ProjectileCastHelper {
 
             SpellUtils.shootProjectile(pos.add(posAdd), en, ctx.getPositionEntity(), shootSpeed, pitch, yaw + addYaw);
             SpellUtils.initSpellEntity(en, caster, data, holder);
-
-            if(holder.has(MapField.SKILL_FX)){
+            //how it can work on server???
+            if(FXEnable && holder.has(MapField.SKILL_FX)){
                 FX fx = FXHelper.getFX(holder.getSkillFXResourceLocation());
                 new EntityEffect(fx, ctx.world, en).start();
             }

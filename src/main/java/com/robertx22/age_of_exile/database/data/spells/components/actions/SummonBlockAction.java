@@ -4,6 +4,7 @@ import com.lowdragmc.photon.client.fx.BlockEffect;
 import com.lowdragmc.photon.client.fx.EntityEffect;
 import com.lowdragmc.photon.client.fx.FX;
 import com.lowdragmc.photon.client.fx.FXHelper;
+import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.entities.StationaryFallingBlockEntity;
@@ -50,66 +51,68 @@ public class SummonBlockAction extends SpellAction {
 
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
-        if (ctx.world.isClientSide) {
-            return;
-        }
 
-        //HitResult ray = ctx.caster.rayTrace(5D, 0.0F, false);
-        MyPosition pos = new MyPosition(ctx.getBlockPos());
+        Boolean FXEnable = ClientConfigs.getConfig().ENABLE_PHOTON_FX.get();
 
-        float yoff = getRandomOffset(data, MapField.RANDOM_Y_OFFSET);
-        float xoff = getRandomOffset(data, MapField.RANDOM_X_OFFSET);
-        float zoff = getRandomOffset(data, MapField.RANDOM_Z_OFFSET);
+        if (!ctx.world.isClientSide) {
+            //HitResult ray = ctx.caster.rayTrace(5D, 0.0F, false);
+            MyPosition pos = new MyPosition(ctx.getBlockPos());
 
-
-        pos = new MyPosition(pos.x() + xoff,
-                pos.y() + data.getOrDefault(MapField.HEIGHT, 0D).intValue() + yoff,
-                pos.z() + zoff);
-
-        boolean found = true;
+            float yoff = getRandomOffset(data, MapField.RANDOM_Y_OFFSET);
+            float xoff = getRandomOffset(data, MapField.RANDOM_X_OFFSET);
+            float zoff = getRandomOffset(data, MapField.RANDOM_Z_OFFSET);
 
 
-        if (data.getOrDefault(MapField.FIND_NEAREST_SURFACE, true)) {
+            pos = new MyPosition(pos.x() + xoff,
+                    pos.y() + data.getOrDefault(MapField.HEIGHT, 0D).intValue() + yoff,
+                    pos.z() + zoff);
 
-            found = false;
+            boolean found = true;
 
-            int times = 0;
 
-            while (!found && pos.y() > 1 && SEARCH > times) {
-                times++;
-                if (!isSolid(ctx.world, pos.asBlockPos()) && isSolid(ctx.world, pos.asBlockPos().below())) {
-                    found = true;
-                } else {
-                    pos = new MyPosition(pos.x, pos.y - 1, pos.z);
-                }
-            }
-            if (!found) {
-                pos = new MyPosition(ctx.getBlockPos());
-                times = 0;
-                while (!found && pos.y() < ctx.world.getMaxBuildHeight() && SEARCH > times) {
+            if (data.getOrDefault(MapField.FIND_NEAREST_SURFACE, true)) {
+
+                found = false;
+
+                int times = 0;
+
+                while (!found && pos.y() > 1 && SEARCH > times) {
                     times++;
                     if (!isSolid(ctx.world, pos.asBlockPos()) && isSolid(ctx.world, pos.asBlockPos().below())) {
                         found = true;
                     } else {
-                        pos = new MyPosition(pos.x, pos.y + 1, pos.z);
+                        pos = new MyPosition(pos.x, pos.y - 1, pos.z);
+                    }
+                }
+                if (!found) {
+                    pos = new MyPosition(ctx.getBlockPos());
+                    times = 0;
+                    while (!found && pos.y() < ctx.world.getMaxBuildHeight() && SEARCH > times) {
+                        times++;
+                        if (!isSolid(ctx.world, pos.asBlockPos()) && isSolid(ctx.world, pos.asBlockPos().below())) {
+                            found = true;
+                        } else {
+                            pos = new MyPosition(pos.x, pos.y + 1, pos.z);
+                        }
                     }
                 }
             }
-        }
-        Block block = data.getBlock();
-        Objects.requireNonNull(block);
+            Block block = data.getBlock();
+            Objects.requireNonNull(block);
 
-        if (found) {
-            StationaryFallingBlockEntity be = new StationaryFallingBlockEntity(ctx.world, pos.asBlockPos(), block.defaultBlockState());
-            be.getEntityData().set(StationaryFallingBlockEntity.IS_FALLING, data.getOrDefault(MapField.IS_BLOCK_FALLING, false));
-            SpellUtils.initSpellEntity(be, ctx.caster, ctx.calculatedSpellData, data);
-            if(data.has(MapField.SKILL_FX)){
-                FX fx = FXHelper.getFX(data.getSkillFXResourceLocation());
-                new EntityEffect(fx, ctx.world, be).start();
+            if (found) {
+                StationaryFallingBlockEntity be = new StationaryFallingBlockEntity(ctx.world, pos.asBlockPos(), block.defaultBlockState());
+                be.getEntityData().set(StationaryFallingBlockEntity.IS_FALLING, data.getOrDefault(MapField.IS_BLOCK_FALLING, false));
+                SpellUtils.initSpellEntity(be, ctx.caster, ctx.calculatedSpellData, data);
+                if(FXEnable && data.has(MapField.SKILL_FX)){
+                    FX fx = FXHelper.getFX(data.getSkillFXResourceLocation());
+                    new EntityEffect(fx, ctx.world, be).start();
+                }
+
+
+                ctx.world.addFreshEntity(be);
             }
 
-
-            ctx.world.addFreshEntity(be);
         }
 
 
