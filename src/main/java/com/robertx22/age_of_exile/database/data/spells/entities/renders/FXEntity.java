@@ -3,36 +3,25 @@ package com.robertx22.age_of_exile.database.data.spells.entities.renders;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
-import com.robertx22.age_of_exile.database.data.spells.components.ProjectileCastHelper;
 import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.database.data.spells.entities.IDatapackSpellEntity;
-import com.robertx22.age_of_exile.database.data.spells.entities.SimpleProjectileEntity;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
-import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.Utilities;
-import com.robertx22.library_of_exile.utils.SoundUtils;
-import com.robertx22.library_of_exile.utils.geometry.MyPosition;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.boss.EnderDragonPart;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.network.NetworkHooks;
 
 import java.util.ArrayList;
@@ -192,6 +181,9 @@ public class FXEntity extends Entity implements IDatapackSpellEntity {
 
     @Override
     protected void defineSynchedData() {
+        this.entityData.define(SPELL_DATA, new CompoundTag());
+        this.entityData.define(ENTITY_NAME, "");
+        this.entityData.define(DEATH_TIME, 100);
     }
 
     @Override
