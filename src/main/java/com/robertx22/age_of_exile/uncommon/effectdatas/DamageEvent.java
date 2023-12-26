@@ -376,6 +376,10 @@ public class DamageEvent extends EffectEvent {
 
         if (dmg > 0) {
 
+            if (this.areBothPlayers()) {
+                Load.Unit(source).getCooldowns().setOnCooldown("pvp", 20 * 30);
+            }
+
             // todo can this be done better?
             if (this.data.isBasicAttack()) {
                 for (Entry<String, ExileEffectInstanceData> e : targetData.getStatusEffectsData().exileMap.entrySet()) {
