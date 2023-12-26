@@ -34,7 +34,7 @@ public class ParticleInRadiusAction extends SpellAction {
 
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
-        if (!ClientConfigs.getConfig().ENABLE_PHOTON_FX.get() && data.getOrDefault(MapField.HIDE_IN_FX, false)) {
+        if (ClientConfigs.getConfig().ENABLE_PHOTON_FX.get() && data.getOrDefault(MapField.HIDE_IN_FX, false)) {
             return;
         }
         if (!ctx.world.isClientSide) {

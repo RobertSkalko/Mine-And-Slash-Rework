@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.spells.components.actions;
 import com.lowdragmc.photon.client.fx.EntityEffect;
 import com.lowdragmc.photon.client.fx.FX;
 import com.lowdragmc.photon.client.fx.FXHelper;
+import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.entities.renders.FXEntity;
@@ -29,25 +30,26 @@ public class SummonFXHolderAction extends SpellAction {
 
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
-        if (ctx.world.isClientSide) {
-            return;
+        Boolean FXEnable = ClientConfigs.getConfig().ENABLE_PHOTON_FX.get();
+
+        if (!ctx.world.isClientSide) {
+            Optional<EntityType<?>> entity = EntityType.byString(data.get(MapField.FX_ENTITY));
+
+            Vec3 pos = ctx.caster.position();
+            Double addY = data.getOrDefault(MapField.HEIGHT, 0D);
+
+            Vec3 finalPos = new Vec3(pos.x, pos.y + addY, pos.z);
+
+            Level world = ctx.caster.level();
+            FXEntity en = (FXEntity) entity.get().create(world);
+            en.setPos(finalPos);
+            if(FXEnable && data.has(MapField.SKILL_FX)){
+                FX fx = FXHelper.getFX(data.getSkillFXResourceLocation());
+                new EntityEffect(fx, ctx.world, en).start();
+            }
+            SpellUtils.initSpellEntity(en, ctx.caster, ctx.calculatedSpellData, data);
+
         }
-
-        Optional<EntityType<?>> entity = EntityType.byString(data.get(MapField.FX_ENTITY));
-
-        Vec3 pos = ctx.caster.position();
-        Double addY = data.getOrDefault(MapField.HEIGHT, 0D);
-
-        Vec3 finalPos = new Vec3(pos.x, pos.y + addY, pos.z);
-
-        Level world = ctx.caster.level();
-        FXEntity en = (FXEntity) entity.get().create(world);
-        en.setPos(finalPos);
-        if(data.has(MapField.SKILL_FX)){
-            FX fx = FXHelper.getFX(data.getSkillFXResourceLocation());
-            new EntityEffect(fx, ctx.world, en).start();
-        }
-        SpellUtils.initSpellEntity(en, ctx.caster, ctx.calculatedSpellData, data);
 
     }
 
