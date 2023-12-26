@@ -9,6 +9,7 @@ import com.robertx22.age_of_exile.gui.screens.skill_tree.SkillTreeScreen;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.vanilla_mc.packets.perks.PerkChangePacket;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.GuiUtils;
@@ -20,7 +21,6 @@ import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 
 import java.util.List;
 
@@ -63,7 +63,6 @@ public class PerkButton extends ImageButton {
     }
 
     public boolean isInside(int x, int y) {
-
         float scale = 2 - screen.zoom;
         return GuiUtils.isInRect((int) (this.getX() - ((width / 4) * scale)), (int) (this.getY() - ((height / 4) * scale)), (int) (width * scale), (int) (height * scale), x, y);
     }
@@ -145,13 +144,15 @@ public class PerkButton extends ImageButton {
         float posMulti = 1F / scale;
 
 
-        float zoomOffset = Mth.lerp(screen.zoom, 0.0f, -0.04f);
-        gui.pose().translate(width / 2f, height / 2f, 0);
-        gui.pose().scale(scale, scale, scale);
-        float inverse = 1F / scale;
-        gui.pose().translate((-(width / 2f) - zoomOffset / 4f) * inverse, (-(height / 2f) - zoomOffset / 4f) * inverse, 0);
-        PerkStatus status = playerData.talents.getStatus(Minecraft.getInstance().player, school, point);
+        // todo test
+        float add = MathHelper.clamp(scale - 1, 0, 2);
+        float off = width / -2F * add;
+        gui.pose().translate(off, off, 0);
 
+        gui.pose().scale(scale, scale, scale);
+
+
+        PerkStatus status = playerData.talents.getStatus(Minecraft.getInstance().player, school, point);
 
         int offset = perk.getType().getOffset();
 
