@@ -107,7 +107,7 @@ public class ProjectileCastHelper {
 
             SpellUtils.shootProjectile(pos.add(posAdd), en, ctx.getPositionEntity(), shootSpeed, pitch, yaw + addYaw);
             SpellUtils.initSpellEntity(en, caster, data, holder);
-            //how it can work on server???
+
             if(FXEnable && holder.has(MapField.SKILL_FX)){
                 FX fx = FXHelper.getFX(holder.getSkillFXResourceLocation());
                 new EntityEffect(fx, ctx.world, en).start();
