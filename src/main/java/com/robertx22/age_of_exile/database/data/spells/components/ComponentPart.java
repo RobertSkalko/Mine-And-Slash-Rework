@@ -46,6 +46,16 @@ public class ComponentPart {
         return this;
     }
 
+    public ComponentPart hideInFX() {
+        for (MapHolder act : acts) {
+            if (act.type.equals(SpellAction.PARTICLES_IN_RADIUS.GUID())) {
+                act.put(MapField.HIDE_IN_FX, true);
+            }
+        }
+
+        return this;
+    }
+
     public ComponentPart alliesInRadius(Double radius) {
         targets.add(TargetSelector.AOE.alliesInRadius(radius));
         return this;

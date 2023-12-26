@@ -32,6 +32,7 @@ public class ClientConfigs {
         SHOW_DURABILITY = b.define("show_durability", true);
         ENABLE_FLOATING_DMG = b.define("render_floating_damage", true);
         ALIGN_STAT_TOOLTIPS = b.define("ALIGN_STAT_TOOLTIPS", true);
+        ENABLE_PHOTON_FX = b.define("enable_photon_fx", false);
 
         ITEM_RARITY_OPACITY = b.defineInRange("ITEM_RARITY_OPACITY", 0.75F, 0, 1F);
         HEALTH_BAR_GUI_SCALE = b.defineInRange("health_bar_gui_scale", 1.25F, 0, 10F);
@@ -56,6 +57,8 @@ public class ClientConfigs {
     public ForgeConfigSpec.BooleanValue USE_HOTBAR_TOGGLE;
     public ForgeConfigSpec.BooleanValue ONLY_RENDER_MOB_LOOKED_AT;
     public ForgeConfigSpec.BooleanValue ALIGN_STAT_TOOLTIPS;
+
+    public ForgeConfigSpec.BooleanValue ENABLE_PHOTON_FX;
 
     public ForgeConfigSpec.EnumValue<GlintType> ITEM_RARITY_BACKGROUND_TYPE;
     public ForgeConfigSpec.EnumValue<GuiPosition> GUI_POSITION;
