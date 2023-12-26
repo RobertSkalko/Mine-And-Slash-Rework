@@ -163,6 +163,7 @@ public class LootInfo {
         if (map != null) {
             this.map_tier = map.map.tier;
         }
+        
 
         return this;
 

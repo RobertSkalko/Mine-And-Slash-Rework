@@ -14,7 +14,6 @@ public class CraftingStationScreen extends AbstractContainerScreen<CraftingStati
         super(pMenu, pPlayerInventory, Component.literal(""));
         this.imageWidth = 176;
         this.imageHeight = 166;
-        
 
     }
 
@@ -22,6 +21,7 @@ public class CraftingStationScreen extends AbstractContainerScreen<CraftingStati
         this.renderBackground(pGuiGraphics);
         super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
         this.renderTooltip(pGuiGraphics, pMouseX, pMouseY);
+
     }
 
     @Override

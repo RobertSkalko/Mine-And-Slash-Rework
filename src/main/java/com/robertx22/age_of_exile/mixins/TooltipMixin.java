@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.mixins;
 
+import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.mixin_methods.TooltipWidth;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Tooltip;
@@ -17,7 +18,9 @@ public class TooltipMixin {
     @Inject(method = "splitTooltip", at = @At(value = "HEAD"), cancellable = true)
     private static void sdsdsdsdsd(Minecraft mc, Component msg, CallbackInfoReturnable<List<FormattedCharSequence>> cir) {
         try {
-            cir.setReturnValue(mc.font.split(msg, TooltipWidth.getMax(msg)));
+            if (ClientConfigs.getConfig().MODIFY_TOOLTIP_LENGTH.get()) {
+                cir.setReturnValue(mc.font.split(msg, TooltipWidth.getMax(msg)));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
