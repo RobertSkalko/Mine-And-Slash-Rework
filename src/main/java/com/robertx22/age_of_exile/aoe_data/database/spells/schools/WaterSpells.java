@@ -24,6 +24,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.Arrays;
+import java.util.Map;
 
 public class WaterSpells implements ExileRegistryInit {
     public static String FROZEN_ORB = "frozen_orb";
@@ -56,10 +57,11 @@ public class WaterSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.SNOWBALL, 1D, 0.5D, SlashEntities.SIMPLE_PROJECTILE.get(), 20 * 10D, false)
                         .put(MapField.TRACKS_ENEMIES, true)
                         .put(MapField.EXPIRE_ON_ENTITY_HIT, false)
+                        .put(MapField.SKILL_FX, "frozen_orb")
                 ))
 
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.ITEM_SNOWBALL, 2D, 0.15D))
-                .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.SNOWFLAKE, 7D, 0.15D))
+                .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.SNOWFLAKE, 7D, 0.15D).hideInFX())
 
                 .onTick(PartBuilder.damageInAoe(SpellCalcs.ICEBALL, Elements.Cold, 3D).tickRequirement(20D))
                 .onTick(PartBuilder.aoeParticles(ParticleTypes.ITEM_SNOWBALL, 5D, 3D).tickRequirement(20D))
@@ -142,8 +144,8 @@ public class WaterSpells implements ExileRegistryInit {
                         .put(MapField.IS_BLOCK_FALLING, false)
                         .put(MapField.SKILL_FX, "chilling_field")))
 
-                .onTick("block", PartBuilder.groundParticles(ParticleTypes.CLOUD, 5D, 3.5D, 0.2D))
-                .onTick("block", PartBuilder.groundParticles(ParticleTypes.SNOWFLAKE, 30D, 3.5D, 0.2D))
+                .onTick("block", PartBuilder.groundParticles(ParticleTypes.CLOUD, 5D, 3.5D, 0.2D).hideInFX())
+                .onTick("block", PartBuilder.groundParticles(ParticleTypes.SNOWFLAKE, 30D, 3.5D, 0.2D).hideInFX())
                 .onTick("block", PartBuilder.playSound(SoundEvents.HORSE_BREATHE, 1.1D, 1.5D)
                         .tickRequirement(20D))
                 .onTick("block", PartBuilder.damageInAoe(SpellCalcs.CHILLING_FIELD, Elements.Cold, 4D)

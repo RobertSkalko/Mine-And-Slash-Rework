@@ -1,7 +1,9 @@
 package com.robertx22.age_of_exile.database.data.spells.components.actions.vanity;
 
+import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
+import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.library_of_exile.utils.RandomUtils;
@@ -32,7 +34,9 @@ public class ParticleInRadiusAction extends SpellAction {
 
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
-
+        if (!ClientConfigs.getConfig().ENABLE_PHOTON_FX.get() && data.getOrDefault(MapField.HIDE_IN_FX, false)) {
+            return;
+        }
         if (!ctx.world.isClientSide) {
 
             Shape shape = data.getParticleShape();
