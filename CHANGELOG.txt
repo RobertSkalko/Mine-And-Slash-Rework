@@ -139,3 +139,6 @@ Hopefully this will be more fun than the generic spells of before, I hope I can 
 - map items now show the tier hp and dmg mob bonus on the tooltip
 - runewords changed back to old system, existing runeword uniques are now just normal uniques
 - changed rune drop requirements a bit, and made runes have all stats (for for any gear family)
+- EVEN MORE upgraded textures!
+- added dual wielding. Right now only certain melee weapons that make sense can be placed in the offhand to grant 25% of its original stats.
+This is probably still way more op than any current normal offhand so will probably be tweaked

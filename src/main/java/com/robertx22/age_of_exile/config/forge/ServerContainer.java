@@ -44,6 +44,7 @@ public class ServerContainer {
         STOP_ERROR_SPAM = b.define("stop_error_spam", true);
         MIN_LEVEL_MAP_DROPS = b.defineInRange("min_level_map_drops", 10, 0, Integer.MAX_VALUE);
         LEVEL_DISTANCE_PENALTY_LEEWAY = b.defineInRange("LEVEL_DISTANCE_PENALTY_LEEWAY", 2, 0, Integer.MAX_VALUE);
+        PERC_OFFHAND_WEP_STAT = b.defineInRange("PERC_OFFHAND_WEP_STAT", 25, 0, 100);
 
 
         REGEN_HUNGER_COST = b.defineInRange("regen_hunger_cost", 10D, 0, 1000);
@@ -170,6 +171,7 @@ public class ServerContainer {
     public ForgeConfigSpec.IntValue MIN_LEVEL_MAP_DROPS;
 
     public ForgeConfigSpec.IntValue LEVEL_DISTANCE_PENALTY_LEEWAY;
+    public ForgeConfigSpec.IntValue PERC_OFFHAND_WEP_STAT;
 
 
     public ForgeConfigSpec.DoubleValue REGEN_HUNGER_COST;

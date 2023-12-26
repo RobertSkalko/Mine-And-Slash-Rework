@@ -86,33 +86,19 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
 
     public enum MultiUseType {
         // todo will this still be confusing
-        MULTIPLY_STAT("Increased", "Reduced", Words.MULTIPLY_STAT_INCREASED, Words.MULTIPLY_STAT_REDUCED),
-        MULTIPLICATIVE_DAMAGE("More", "Less", Words.MULTIPLICATIVE_DAMAGE_MORE, Words.MULTIPLICATIVE_DAMAGE_LESS);
+        MULTIPLY_STAT(Words.MULTIPLY_STAT_INCREASED, Words.MULTIPLY_STAT_REDUCED),
+        MULTIPLICATIVE_DAMAGE(Words.MULTIPLICATIVE_DAMAGE_MORE, Words.MULTIPLICATIVE_DAMAGE_LESS);
 
         public Words prefixWord;
         public Words prefixLessWord;
 
-        MultiUseType(String tooltipPrefix, String tooltipPrefixLess, Words prefixWord, Words prefixLessWord) {
+        MultiUseType(Words prefixWord, Words prefixLessWord) {
             this.prefixWord = prefixWord;
             this.prefixLessWord = prefixLessWord;
         }
-        
+
     }
 
-/*
-    public MultiUseType isDamageStatAndUsesMoreMultiplier() {
-
-        if (multiUseType == null) {
-            if (this.statEffect instanceof BaseDamageIncreaseEffect || (this instanceof DatapackStat st && st.effect.effects.contains(IncreaseNumberByPercentEffect.ID))) {
-                multiUseType = MultiUseType.MULTIPLICATIVE_DAMAGE;
-            } else {
-                multiUseType = MultiUseType.MULTIPLY_STAT;
-            }
-        }
-        return multiUseType;
-    }
-
- */
 
     public ChatFormatting getFormat() {
         return ChatFormatting.getByName(format);

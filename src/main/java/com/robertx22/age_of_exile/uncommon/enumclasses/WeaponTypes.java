@@ -16,7 +16,7 @@ public class WeaponTypes {
     public static WeaponTypes axe = new WeaponTypes("axe", PlayStyle.STR, WeaponRange.MELEE, false);
     public static WeaponTypes staff = new WeaponTypes("staff", PlayStyle.INT, WeaponRange.MELEE, false);
     public static WeaponTypes trident = new WeaponTypes("trident", PlayStyle.STR, WeaponRange.OPTIONALLY_RANGED, false);
-    public static WeaponTypes sword = new WeaponTypes("sword", PlayStyle.STR, WeaponRange.MELEE, false);
+    public static WeaponTypes sword = new WeaponTypes("sword", PlayStyle.STR, WeaponRange.MELEE, false).setCanDualWield();
     public static WeaponTypes bow = new WeaponTypes("bow", PlayStyle.DEX, WeaponRange.RANGED, true);
     public static WeaponTypes crossbow = new WeaponTypes("crossbow", PlayStyle.DEX, WeaponRange.RANGED, true);
 
@@ -40,11 +40,17 @@ public class WeaponTypes {
         // ErrorUtils.ifFalse(this.id.equals(this.name()));
     }
 
+    public boolean can_dual_wield = false;
     public PlayStyle style;
     WeaponRange range;
     public String id;
     public boolean isProjectile;
 
+
+    public WeaponTypes setCanDualWield() {
+        this.can_dual_wield = true;
+        return this;
+    }
 
     public String locName() {
         return StringUTIL.capitalise(id);
