@@ -25,9 +25,9 @@ public class PerkScreenContext {
     }
 
     private void setupOffsets() {
-        offsetX = (int) (Minecraft.getInstance().getWindow().getGuiScaledWidth() * getZoomMulti() / 2 - SkillTreeScreen.sizeX() * getZoomMulti() / 2);
+        offsetX = (int) (Minecraft.getInstance().getWindow().getGuiScaledWidth() * getZoomMulti() / 2F - SkillTreeScreen.sizeX() * getZoomMulti() / 2F);
 
-        offsetY = (int) (Minecraft.getInstance().getWindow().getGuiScaledHeight() * getZoomMulti() / 2 - SkillTreeScreen.sizeY() * getZoomMulti() / 2);
+        offsetY = (int) (Minecraft.getInstance().getWindow().getGuiScaledHeight() * getZoomMulti() / 2F - SkillTreeScreen.sizeY() * getZoomMulti() / 2F);
     }
 
     public float getZoomMulti() {

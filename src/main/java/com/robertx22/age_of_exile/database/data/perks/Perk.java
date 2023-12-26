@@ -171,10 +171,10 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
     }
 
     public enum PerkType {
-        STAT(2, 24, 24, 39, ChatFormatting.WHITE),
-        SPECIAL(3, 28, 28, 77, ChatFormatting.LIGHT_PURPLE),
-        MAJOR(1, 33, 33, 1, ChatFormatting.RED),
-        START(4, 28, 28, 115, ChatFormatting.YELLOW);
+        STAT(2, 24, 24, 39, 4, ChatFormatting.WHITE),
+        SPECIAL(3, 28, 28, 77, 6, ChatFormatting.LIGHT_PURPLE),
+        MAJOR(1, 33, 33, 1, 9, ChatFormatting.RED),
+        START(4, 28, 28, 115, 6, ChatFormatting.YELLOW);
         // SPELL_MOD(5, 26, 26, 153, ChatFormatting.BLACK);
 
         int order;
@@ -182,18 +182,24 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
         public int width;
         public int height;
         private int xoff;
+        public int off;
         public ChatFormatting format;
 
-        PerkType(int order, int width, int height, int xoff, ChatFormatting format) {
+        PerkType(int order, int width, int height, int xoff, int off, ChatFormatting format) {
             this.order = order;
             this.width = width;
             this.height = height;
             this.xoff = xoff;
             this.format = format;
+            this.off = off;
         }
 
         public int getXOffset() {
             return xoff;
+        }
+
+        public int getOffset() {
+            return off;
         }
 
     }
