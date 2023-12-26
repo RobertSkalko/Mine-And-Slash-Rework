@@ -5,6 +5,7 @@ import com.lowdragmc.photon.client.fx.FX;
 import com.lowdragmc.photon.client.fx.FXHelper;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
+import com.robertx22.age_of_exile.database.data.spells.entities.renders.FXEntity;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellUtils;
@@ -40,7 +41,7 @@ public class SummonFXHolderAction extends SpellAction {
         Vec3 finalPos = new Vec3(pos.x, pos.y + addY, pos.z);
 
         Level world = ctx.caster.level();
-        AbstractArrow en = (AbstractArrow) entity.get().create(world);
+        FXEntity en = (FXEntity) entity.get().create(world);
         en.setPos(finalPos);
         if(data.has(MapField.SKILL_FX)){
             FX fx = FXHelper.getFX(data.getSkillFXResourceLocation());
