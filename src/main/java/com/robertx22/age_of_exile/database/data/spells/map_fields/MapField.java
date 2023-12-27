@@ -36,6 +36,8 @@ public class MapField<T> implements IGUID {
     public static MapField<Double> BLOCK_FALL_SPEED = make("block_fall_speed");
     public static MapField<Double> PROJECTILE_COUNT = make("proj_count");
 
+    public static MapField<Double> PLAYER_EFFECT_HEIGHT_CHANGE = make("player_effect_height_change");
+
     public static MapField<String> MOTION = make("motion");
     public static MapField<String> SET_ADD = make("set_add");
     public static MapField<String> COOLDOWN_ID = make("cooldown_id");
@@ -85,6 +87,7 @@ public class MapField<T> implements IGUID {
     public static MapField<Boolean> FIND_NEAREST_SURFACE = make("find_surface");
     public static MapField<Boolean> HIDE_IN_FX = make("hide_in_fx");
     public static MapField<Boolean> FOLLOW_PLAYER = make("follow_player");
+    public static MapField<Boolean> IS_PLAYER_EFFECT = make("is_player_effect");
     //public static MapField<Boolean> FIND_NEAREST_CEILING = make("find_ceiling");
     public static MapField<Boolean> IS_SILENT = make("is_silent");
     public static MapField<Boolean> HITS_ALLIES = make("hits_allies");
@@ -96,6 +99,7 @@ public class MapField<T> implements IGUID {
 
     public static MapField<ValueCalculation> VALUE_CALCULATION = make("value_calculation");
 
+    public static MapField<Integer> PLAYER_EFFECT_MAX_LIFE = make("player_effect_max_life");
 
 
     public MapField(String id) {
