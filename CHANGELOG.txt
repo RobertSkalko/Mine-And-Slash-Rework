@@ -145,3 +145,6 @@ This is probably still way more op than any current normal offhand so will proba
 
 v.5.3.9
 - picking a hotbar spell now returns you to skill gem screens/gui
+- talent tree makeover
+- fix totem duration stat
+- tweaked pet targetting

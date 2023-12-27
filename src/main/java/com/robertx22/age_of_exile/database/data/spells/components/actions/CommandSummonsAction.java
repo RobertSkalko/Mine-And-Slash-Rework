@@ -21,7 +21,7 @@ public class CommandSummonsAction extends SpellAction {
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
 
-        float radius = data.getOrDefault(MapField.RADIUS, 10D).floatValue();
+        float radius = data.getOrDefault(MapField.RADIUS, 20D).floatValue();
 
         if (ctx.target == null) {
             return;

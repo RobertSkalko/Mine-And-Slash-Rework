@@ -9,7 +9,6 @@ import com.robertx22.age_of_exile.maps.generator.ChunkProcessData;
 import com.robertx22.age_of_exile.maps.generator.DungeonBuilder;
 import com.robertx22.age_of_exile.maps.processors.DataProcessor;
 import com.robertx22.age_of_exile.maps.processors.DataProcessors;
-import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import net.minecraft.core.BlockPos;
@@ -63,11 +62,7 @@ public class ProcessChunkBlocks {
                 List<ChunkPos> chunks = new ArrayList<>();
                 chunks.add(start);
 
-                int size = 2;
-
-                if (false && MMORPG.RUN_DEV_TOOLS) {
-                    size = 5;
-                }
+                int size = 4;
 
                 for (int x = -size; x < size; x++) {
                     for (int z = -size; z < size; z++) {
@@ -75,20 +70,10 @@ public class ProcessChunkBlocks {
                     }
                 }
 
-/*
-                for (int i = 1; i < size; i++) {
-                    chunks.add(new ChunkPos(start.x + i, start.z));
-                    chunks.add(new ChunkPos(start.x - i, start.z));
-                    chunks.add(new ChunkPos(start.x, start.z + i));
-                    chunks.add(new ChunkPos(start.x, start.z - i));
+                int gened = 0;
 
-                    chunks.add(new ChunkPos(start.x + i, start.z + i));
-                    chunks.add(new ChunkPos(start.x - i, start.z - i));
-                    chunks.add(new ChunkPos(start.x - i, start.z + i));
-                    chunks.add(new ChunkPos(start.x + i, start.z - i));
-                }
- */
-                
+                int maxtogen = 3;
+
                 for (ChunkPos cpos : chunks) {
                     if (!level.hasChunk(cpos.x, cpos.z)) {
                         continue;
@@ -127,7 +112,10 @@ public class ProcessChunkBlocks {
                             // this will gen both the league mechs and the dungeon if it runs after the league mechs gen
                             generateData(level, chunk, room);
 
-
+                            gened++;
+                            if (gened >= maxtogen) {
+                                return;
+                            }
                         }
 
 

@@ -14,7 +14,7 @@ public class MapEvents {
 
     public static void init() {
 
-    
+
         ForgeEvents.registerForgeEvent(BlockEvent.BreakEvent.class, event -> {
             Level level = event.getPlayer().level();
 
@@ -58,7 +58,7 @@ public class MapEvents {
                         }
                     }
 
-                    if (p.tickCount == 0 || p.tickCount == 1 || p.tickCount % 20 == 0) {
+                    if (true) {
                         ProcessChunkBlocks.process(sw, x.getEntity().blockPosition());
                     }
                 }
