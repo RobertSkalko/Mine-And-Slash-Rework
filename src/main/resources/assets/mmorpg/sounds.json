@@ -30,6 +30,9 @@
     "splash": {
         "category": "hostile",
         "sounds": [{"name": "mmorpg:splash", "stream": true}]
+    },
+    "refresh": {
+        "category": "hostile",
+        "sounds": [{"name": "mmorpg:refresh", "stream": true}]
     }
-
 }
