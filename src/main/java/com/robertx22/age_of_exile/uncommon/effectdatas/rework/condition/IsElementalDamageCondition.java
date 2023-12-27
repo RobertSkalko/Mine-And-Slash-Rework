@@ -5,32 +5,18 @@ import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EffectEvent;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 
-public class StringMatchesCondition extends StatCondition {
-
-    public String string_id = "";
-    public String string_key = "";
-
-    public StringMatchesCondition(String key, String id) {
-        super(key + "_is_" + id, "string_matches");
-        this.string_id = id;
-        this.string_key = key;
-
-
+public class IsElementalDamageCondition extends StatCondition {
+    public IsElementalDamageCondition() {
+        super("is_elemental_damage", "is_elemental_damage");
     }
-
-    public StringMatchesCondition() {
-        super("", "string_matches");
-    }
-
 
     @Override
     public boolean can(EffectEvent event, EffectSides statSource, StatData data, Stat stat) {
-        return event.data.getString(string_key).equals(string_id);
+        return event.data.getElement().isElemental;
     }
 
     @Override
     public Class<? extends StatCondition> getSerClass() {
-        return StringMatchesCondition.class;
+        return IsElementalDamageCondition.class;
     }
-
 }

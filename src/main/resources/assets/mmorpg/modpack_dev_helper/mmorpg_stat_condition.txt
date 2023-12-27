@@ -82,6 +82,7 @@ is_is_basic_atk_true
 threat_gen_type_is_heal
 restore_type_is_regen
 spell_has_tag_minion_explode
+is_elemental_damage
 is_target_cursed
 spell_has_tag_heal
 spell_has_tag_curse

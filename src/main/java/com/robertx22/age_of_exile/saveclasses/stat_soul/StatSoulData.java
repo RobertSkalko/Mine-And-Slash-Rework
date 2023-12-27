@@ -42,13 +42,13 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
 
     public String slot = "";
 
-
     public String rar = "";
 
     public SlotFamily fam = SlotFamily.NONE;
 
     public String uniq = "";
 
+    public String force_tag = "";
 
     public boolean can_sal = true;
 
@@ -115,6 +115,10 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
         return gearslot;
     }
 
+    public boolean forcesTag() {
+        return !force_tag.isEmpty();
+    }
+
     public boolean canApplyTo(ItemStack stack) {
         GearSlot slot = GearSlot.getSlotOf(stack.getItem());
 
@@ -159,7 +163,7 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
         String slotid = gearslot.GUID();
 
         b.gearItemSlot.set(ExileDB.GearTypes()
-                .getFilterWrapped(x -> x.gear_slot.equals(slotid))
+                .getFilterWrapped(x -> x.gear_slot.equals(slotid) && (!forcesTag() ? true : x.tags.contains(force_tag)))
                 .random());
 
 

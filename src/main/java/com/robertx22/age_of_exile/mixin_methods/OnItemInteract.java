@@ -12,6 +12,7 @@ import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulItem;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.SoulMakerItem;
+import com.robertx22.age_of_exile.vanilla_mc.items.TagForceSoulItem;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.RarityStoneItem;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.sounds.SoundEvents;
@@ -79,6 +80,29 @@ public class OnItemInteract {
                     }
                 }
             }
+
+
+            if (cursor.getItem() instanceof TagForceSoulItem force) {
+                if (stack.getCount() == 1) {
+                    StatSoulData data = StackSaving.STAT_SOULS.loadFrom(stack);
+                    if (data != null) {
+                        data.force_tag = force.tag;
+                        data.saveToStack(stack);
+
+                        success = true;
+                        cursor.shrink(1);
+                        
+                    } else {
+                        if (stack.getItem() instanceof CraftedSoulItem) {
+                            stack.getOrCreateTag().putString("force_tag", force.tag);
+
+                            success = true;
+                            cursor.shrink(1);
+                        }
+                    }
+                }
+            }
+
 
             if (stack.isDamaged() && cursor.getItem() instanceof RarityStoneItem) {
 
