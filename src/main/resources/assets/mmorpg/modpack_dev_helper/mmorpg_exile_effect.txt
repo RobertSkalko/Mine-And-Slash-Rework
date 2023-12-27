@@ -6,8 +6,10 @@ petrify
 wounds
 thorn
 taunt_stance
+inner_calm
 vigor
 valor
+bone_chill
 perseverance
 stun
 mage_circle
@@ -16,8 +18,8 @@ draconic_blood
 agony
 charm
 slow
-regenerate
 shred
 ground
+rejuvenation
 despair
 vamp_blood

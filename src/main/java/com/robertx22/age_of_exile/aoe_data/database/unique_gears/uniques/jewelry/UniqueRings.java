@@ -34,6 +34,32 @@ public class UniqueRings implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
+        
+        UniqueGearBuilder.of("air_disaster", "Aria of Disaster",
+                        BaseGearTypes.RING)
+                .setReplacesName()
+                .stats(Arrays.asList(
+                        new StatMod(15, 30, Stats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.song), ModType.FLAT),
+                        new StatMod(5, 15, Stats.AREA_DAMAGE.get(), ModType.FLAT),
+                        new StatMod(3, 10, ManaRegen.getInstance(), ModType.FLAT)
+                ))
+                .devComment("song buffer / area damage")
+                .build();
+
+        UniqueGearBuilder.of(
+                        "playful_hope",
+                        "Playful Hope",
+                        BaseGearTypes.RING)
+                .setReplacesName()
+                .stats(Arrays.asList(
+                        new StatMod(-75, 25, Stats.CRIT_DAMAGE.get()),
+                        new StatMod(-50, 15, new ElementalResist(Elements.Cold), ModType.FLAT),
+                        new StatMod(-50, 15, new ElementalResist(Elements.Fire), ModType.FLAT),
+                        new StatMod(-50, 15, new ElementalResist(Elements.Chaos), ModType.FLAT)
+                ))
+                .devComment("global crit + res, high RNG")
+                .build();
+
         UniqueGearBuilder.of(
                         "spring_blossoms",
                         "Spring Blossoms",

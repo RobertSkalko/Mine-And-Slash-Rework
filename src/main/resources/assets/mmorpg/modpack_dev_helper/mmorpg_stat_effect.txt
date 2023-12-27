@@ -9,11 +9,11 @@ restore_mana_per_stat_data
 leech_energy
 multiply_number_num
 apply_cd_as_cast_time
+give_rejuvenation_to_allies_in_radius
 give_stun_to_target
 leech_magic_shield
 increase_proj_speed_num
 reduce_cd_by_ticks
-give_regenerate_to_allies_in_radius
 give_blind_to_target
 set_bool_pierce
 leech_mana
@@ -29,7 +29,6 @@ add_perc_of_health_to_num
 restore_health_per_stat_data
 increase_seconds_num
 add_total_summons
-reflect_perc_dmg
 increase_area_num
 proj_count
 set_data_num_accuracy

@@ -24,6 +24,11 @@ public class SpellStatsCalculationEvent extends EffectEvent {
 
     public CalculatedSpellData savedData;
 
+    @Override
+    public String getName() {
+        return "Spell Calc Event";
+    }
+
     public SpellStatsCalculationEvent(LivingEntity caster, String spellid) {
         super(caster, caster);
 

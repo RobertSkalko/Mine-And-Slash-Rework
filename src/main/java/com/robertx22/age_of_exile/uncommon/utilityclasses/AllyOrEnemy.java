@@ -24,9 +24,18 @@ public enum AllyOrEnemy {
         @Override
         public boolean is(Entity caster, LivingEntity target) {
 
+            if (caster instanceof Player p && target instanceof Player p2) {
+                if (Load.Unit(caster).getCooldowns().isOnCooldown("pvp")) {
+                    if (!TeamUtils.areOnSameTeam(p, p2)) {
+                        return true;
+                    }
+                }
+            }
+
             if (!enemies.is(caster, target)) {
                 return false;
             }
+
             var type = Load.Unit(target).getType();
 
             if (type == EntityTypeUtils.EntityClassification.AMBIENT) {
@@ -42,7 +51,7 @@ public enum AllyOrEnemy {
             if (target instanceof NeutralMob) {
                 return false;
             }
-          
+
             return true;
         }
 
@@ -56,9 +65,7 @@ public enum AllyOrEnemy {
     allies() {
         @Override
         public <T extends LivingEntity> List<T> getMatchingEntities(List<T> list, Entity caster) {
-
-            return list.stream()
-                    .filter(x -> is(caster, x))
+            return list.stream().filter(x -> is(caster, x))
                     .collect(Collectors.toList());
         }
 

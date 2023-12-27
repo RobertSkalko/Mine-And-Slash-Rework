@@ -1,8 +1,10 @@
 package com.robertx22.age_of_exile.mixins;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.robertx22.age_of_exile.capability.player.container.SkillGemsScreen;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
+import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.uncommon.interfaces.IRarityItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import net.minecraft.client.gui.GuiGraphics;
@@ -24,6 +26,7 @@ public class ItemGlintMixin {
 
         try {
             AbstractContainerScreen screen = (AbstractContainerScreen) (Object) this;
+
 
             if (ClientConfigs.getConfig().RENDER_ITEM_RARITY_BACKGROUND.get()) {
                 ItemStack stack = slot.getItem();
@@ -47,22 +50,16 @@ public class ItemGlintMixin {
                 }
 
                 RenderSystem.enableBlend();
-                gui.setColor(1.0F, 1.0F, 1.0F, ClientConfigs.getConfig().ITEM_RARITY_OPACITY.get()
-                        .floatValue()); // transparency
+                gui.setColor(1.0F, 1.0F, 1.0F, ClientConfigs.getConfig().ITEM_RARITY_OPACITY.get().floatValue()); // transparency
 
-                ResourceLocation tex = rar
-                        .getGlintTextureFull();
+                ResourceLocation tex = rar.getGlintTextureFull();
 
                 if (ClientConfigs.getConfig().ITEM_RARITY_BACKGROUND_TYPE.get() == ClientConfigs.GlintType.BORDER) {
-                    tex = rar
-                            .getGlintTextureBorder();
+                    tex = rar.getGlintTextureBorder();
                 }
-/*
-                Minecraft.getInstance()
-                        .getTextureManager()
-                        .bind(tex);
-
- */
+                if (screen instanceof SkillGemsScreen && data instanceof SkillGemData) {
+                    tex = rar.getGlintTextureCircle();
+                }
 
                 gui.blit(tex, slot.x, slot.y, 0, 0, 16, 16, 16, 16);
                 gui.setColor(1.0F, 1.0F, 1.0F, 1F);

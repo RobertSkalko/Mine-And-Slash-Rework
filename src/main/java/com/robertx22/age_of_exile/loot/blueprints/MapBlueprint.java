@@ -43,7 +43,7 @@ public class MapBlueprint extends RarityItemBlueprint {
 
         data.rar = rarity.GUID();
 
-        data.tier = RandomUtils.RandomRange(0, 3);
+        data.tier = rarity.getPossibleMapTiers().random();
 
         data.lvl = level.get();
 

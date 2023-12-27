@@ -171,29 +171,68 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
     }
 
     public enum PerkType {
-        STAT(2, 24, 24, 39, ChatFormatting.WHITE),
-        SPECIAL(3, 28, 28, 77, ChatFormatting.LIGHT_PURPLE),
-        MAJOR(1, 33, 33, 1, ChatFormatting.RED),
-        START(4, 28, 28, 115, ChatFormatting.YELLOW);
-        // SPELL_MOD(5, 26, 26, 153, ChatFormatting.BLACK);
+        STAT("stat", 2, 24, 24, 39, 4, ChatFormatting.WHITE),
+        SPECIAL("special", 3, 28, 28, 77, 6, ChatFormatting.LIGHT_PURPLE),
+        MAJOR("major", 1, 33, 33, 1, 9, ChatFormatting.RED),
+        START("start", 4, 28, 28, 115, 6, ChatFormatting.YELLOW);
 
         int order;
 
+        String id;
         public int width;
         public int height;
         private int xoff;
+        public int off;
         public ChatFormatting format;
 
-        PerkType(int order, int width, int height, int xoff, ChatFormatting format) {
+        public ResourceLocation yes;
+        public ResourceLocation no;
+
+
+        public ResourceLocation yesColor = SlashRef.guiId("skill_tree/indic/yes");
+        public ResourceLocation canColor = SlashRef.guiId("skill_tree/indic/can");
+        public ResourceLocation noColor = SlashRef.guiId("skill_tree/indic/no");
+
+
+        PerkType(String id, int order, int width, int height, int xoff, int off, ChatFormatting format) {
+            this.id = id;
             this.order = order;
             this.width = width;
             this.height = height;
             this.xoff = xoff;
             this.format = format;
+            this.off = off;
+
+            this.yes = SlashRef.guiId("skill_tree/borders/" + id + "_on");
+            this.no = SlashRef.guiId("skill_tree/borders/" + id + "_off");
+        }
+
+        public ResourceLocation getColorTexture(PerkStatus s) {
+            if (s == PerkStatus.BLOCKED) {
+                return noColor;
+            }
+            if (s == PerkStatus.POSSIBLE) {
+                return canColor;
+            }
+            if (s == PerkStatus.CONNECTED) {
+                return yesColor;
+            }
+            return null;
+        }
+
+        public ResourceLocation getBorderTexture(PerkStatus status) {
+            if (status == PerkStatus.CONNECTED) {
+                return yes;
+            }
+            return no;
         }
 
         public int getXOffset() {
             return xoff;
+        }
+
+        public int getOffset() {
+            return off;
         }
 
     }

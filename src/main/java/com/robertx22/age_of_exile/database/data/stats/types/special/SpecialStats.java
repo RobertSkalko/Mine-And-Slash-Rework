@@ -72,7 +72,7 @@ public class SpecialStats {
             new IStatCtxModifier() {
                 @Override
                 public void modify(ExactStatData thisStat, StatContext target) {
-                    float multi = 1F + thisStat.getAverageValue() / 100F;
+                    float multi = 1F + thisStat.getValue() / 100F;
                     target.stats.forEach(x -> {
                         x.multiplyBy(multi);
                     });

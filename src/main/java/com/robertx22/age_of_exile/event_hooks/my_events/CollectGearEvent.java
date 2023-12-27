@@ -22,7 +22,7 @@ public class CollectGearEvent {
         public List<GearData> gears;
 
         public LivingEntity entity;
-        public AttackInformation data;
+        public AttackInformation data; // this was used to retrieve thrown weapons like tridents
 
         public CollectedGearStacks(LivingEntity entity, List<GearData> gears, AttackInformation data) {
             this.entity = entity;

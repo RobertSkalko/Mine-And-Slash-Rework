@@ -60,10 +60,6 @@ public class StatConditions implements ExileRegistryInit {
             SpellTag.values()
             , x -> new SpellHasTagCondition(x));
 
-    public static DataHolder<PlayStyle, StatCondition> IS_STYLE = new DataHolder<>(
-            PlayStyle.values()
-            , x -> new StringMatchesCondition(EventData.STYLE, x.id));
-
 
     public static DataHolder<SummonType, StatCondition> IS_SUMMON_TYPE = new DataHolder<>(
             SummonType.values()
@@ -140,7 +136,6 @@ public class StatConditions implements ExileRegistryInit {
         IS_MAGIC_WEAPON.addToSerializables();
         IS_MELEE_WEAPON.addToSerializables();
         SPELL_HAS_TAG.addToSerializables();
-        IS_STYLE.addToSerializables();
         IS_ATTACK_DAMAGE.addToSerializables();
         IS_RESOURCE.addToSerializables();
         IS_IN_COMBAT.addToSerializables();

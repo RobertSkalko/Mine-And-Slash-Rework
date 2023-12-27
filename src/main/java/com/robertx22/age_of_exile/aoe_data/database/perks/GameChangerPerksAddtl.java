@@ -120,14 +120,6 @@ public class GameChangerPerksAddtl implements ExileRegistryInit {
                 new OptScaleExactStat(-50, Stats.INCREASED_AREA.get(), ModType.FLAT)
         );
 
-        /*
-        PerkBuilder.gameChanger("netherite_bastion", "Netherite Bastion",
-                new OptScaleExactStat(25, Stats.DAMAGE_REFLECTED.get(), ModType.FLAT),
-                new OptScaleExactStat(-100, DodgeRating.getInstance(), ModType.MORE)
-        );
-
-         */
-
         PerkBuilder.gameChanger("diamond_grip", "Diamond Grip",
                 new OptScaleExactStat(1, DatapackStats.PROJ_DMG_PER_STR, ModType.FLAT)
         );

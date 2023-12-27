@@ -32,6 +32,7 @@ public class NatureSpells implements ExileRegistryInit {
     public static String THORN_BUSH = "thorn_bush";
     public static String CHAOS_TOTEM = "chaos_totem";
     public static String CIRCLE_OF_HEALING = "circle_of_healing";
+    public static String GARDEN_OF_THORNS = "garden_of_thorns";
 
     @Override
     public void registerAll() {
@@ -74,10 +75,10 @@ public class NatureSpells implements ExileRegistryInit {
 
         SpellBuilder.of(THORN_BUSH, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 20 * 6)
                                 .setSwingArm(), "Thorn Bush",
-                        Arrays.asList(SpellTag.damage, SpellTag.area, SpellTag.totem))
+                        Arrays.asList(SpellTag.damage, SpellTag.area, SpellTag.totem, SpellTag.thorns))
                 .manualDesc("Summon a thorny bush that deals "
                         + SpellCalcs.THORN_BUSH.getLocDmgTooltip()
-                        + Elements.Chaos.getIconNameDmg() + " in an area every second and applies Thorned. " +
+                        + Elements.Physical.getIconNameDmg() + " in an area every second and applies Thorned. " +
                         "Thorned enemies consume the stack of thorns every time they are basic attacked to deal "
                         + SpellCalcs.THORN_CONSUME.getLocDmgTooltip(Elements.Physical))
 
@@ -93,7 +94,7 @@ public class NatureSpells implements ExileRegistryInit {
 
                 .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.SNEEZE, 40D, 3D, 1D))
                 .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.ITEM_SLIME, 40D, 3D, 1D))
-                .onTick("block", PartBuilder.damageInAoe(SpellCalcs.THORN_BUSH, Elements.Chaos, 3D).tickRequirement(20D).disableKnockback())
+                .onTick("block", PartBuilder.damageInAoe(SpellCalcs.THORN_BUSH, Elements.Physical, 3D).tickRequirement(20D).disableKnockback())
                 .onTick("block", PartBuilder.addExileEffectToEnemiesInAoe(ModEffects.THORN.resourcePath, 3D, 20 * 8D).tickRequirement(20D))
                 .onTick("block", PartBuilder.playSound(SoundEvents.GRASS_BREAK, 1D, 1D).tickRequirement(20D))
                 .levelReq(20)
@@ -140,16 +141,16 @@ public class NatureSpells implements ExileRegistryInit {
         SpellBuilder.of(REJUVENATION, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 60 * 20)
                         , "Rejuvenation",
                         Arrays.asList(SpellTag.heal, SpellTag.rejuvenate))
-                .manualDesc("Gives buff that heals nearby allies for " + SpellCalcs.NATURE_BALM.getLocDmgTooltip() + " every second.")
+                .manualDesc("Gives buff that heals nearby allies for " + SpellCalcs.REJUVENATION.getLocDmgTooltip() + " every second.")
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
-                .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, ModEffects.REGENERATE.resourcePath, 20 * 15D))
+                .onCast(PartBuilder.giveExileEffectToAlliesInRadius(8D, ModEffects.REJUVENATE.resourcePath, 20 * 15D))
                 .levelReq(1)
                 .build();
 
         SpellBuilder.of(CIRCLE_OF_HEALING, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 10)
                                 .setChargesAndRegen(CIRCLE_OF_HEALING, 3, 20 * 30), "Circle of Healing",
                         Arrays.asList(SpellTag.heal, SpellTag.rejuvenate))
-                .manualDesc("Rejuvenate allies around you for " + SpellCalcs.CIRCLE_OF_HEALING.getLocDmgTooltip() + " health")
+                .manualDesc("Rejuvenate allies around you for " + SpellCalcs.CIRCLE_OF_HEALING.getLocDmgTooltip() + " health.")
                 .weaponReq(CastingWeapon.ANY_WEAPON)
                 .onCast(PartBuilder.playSound(SlashSounds.BUFF.get(), 1D, 1D))
                 .onCast(PartBuilder.groundParticles(ParticleTypes.COMPOSTER, 50D, 5D, 0.2D))
@@ -173,5 +174,33 @@ public class NatureSpells implements ExileRegistryInit {
                 .onExpire(PartBuilder.playSound(SlashSounds.STONE_CRACK.get(), 1D, 1D))
                 .levelReq(10)
                 .build();
+
+
+        SpellBuilder.of(GARDEN_OF_THORNS, PlayStyle.INT, SpellConfiguration.Builder.multiCast(15, 20, 20, 5)
+                                .setChargesAndRegen(GARDEN_OF_THORNS, 3, 20 * 30), "Garden of Thorns",
+                        Arrays.asList(SpellTag.area, SpellTag.damage, SpellTag.thorns)
+                )
+                .manualDesc("Deals " + SpellCalcs.THORN_CONSUME.getLocDmgTooltip(Elements.Physical) +
+                        " in the area and applies Thorns. Gives you Inner Calm which restores " + SpellCalcs.INNER_CALM.getLocDmgTooltip() + " Mana/s.")
+
+                .onCast(PartBuilder.playSound(SoundEvents.GRASS_PLACE, 1D, 1D))
+
+                .onCast(PartBuilder.giveSelfExileEffect(ModEffects.INNER_CALM, 20 * 5D))
+
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 7D)))
+                .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(Blocks.CACTUS, 200D)
+                        .put(MapField.ENTITY_NAME, "block")
+                        .put(MapField.FIND_NEAREST_SURFACE, false)
+                        .put(MapField.BLOCK_FALL_SPEED, -0.02D)
+                        .put(MapField.IS_BLOCK_FALLING, true)))
+                .onExpire("block", PartBuilder.damageInAoe(SpellCalcs.THORN_CONSUME, Elements.Physical, 3D).disableKnockback())
+                .onExpire("block", PartBuilder.addExileEffectToEnemiesInAoe(ModEffects.THORN.resourcePath, 3D, 20 * 10D))
+                .onExpire("block", PartBuilder.aoeParticles(ParticleTypes.ITEM_SLIME, 150D, 3D))
+                .onExpire("block", PartBuilder.aoeParticles(ParticleTypes.SNEEZE, 40D, 3D))
+                .onExpire("block", PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
+                .levelReq(20)
+                .build();
+
+
     }
 }

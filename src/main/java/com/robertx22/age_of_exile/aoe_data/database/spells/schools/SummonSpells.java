@@ -44,7 +44,7 @@ public class SummonSpells implements ExileRegistryInit {
         SpellBuilder.of(SUMMON_FIRE_GOLEM, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(40, 20 * 60, 30).setSummonType(SummonType.GOLEM), "Summon Fire Golem",
                         Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.golem, SpellTag.has_pet_ability))
                 .manualDesc("Summon a Golem that can cast Fire Nova to aid you in combat.")
-                .summons(SlashEntities.FIRE_GOLEM.get(), 20 * 60 * 3, 1)
+                .summons(SlashEntities.FIRE_GOLEM.get(), 20 * 60 * 3, 1, SummonType.GOLEM)
                 .levelReq(20)
                 .addStat(Stats.SUMMON_DAMAGE.get().mod(10, 50))
                 .addStat(new SummonHealth().mod(10, 100))
@@ -53,7 +53,7 @@ public class SummonSpells implements ExileRegistryInit {
         SpellBuilder.of(SUMMON_COLD_GOLEM, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(40, 20 * 60, 30).setSummonType(SummonType.GOLEM), "Summon Frost Golem",
                         Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.golem, SpellTag.has_pet_ability))
                 .manualDesc("Summon a Golem that can cast Frost Nova to aid you in combat.")
-                .summons(SlashEntities.COLD_GOLEM.get(), 20 * 60 * 3, 1)
+                .summons(SlashEntities.COLD_GOLEM.get(), 20 * 60 * 3, 1, SummonType.GOLEM)
                 .levelReq(20)
                 .addStat(Stats.SUMMON_DAMAGE.get().mod(10, 50))
                 .addStat(new SummonHealth().mod(10, 100))
@@ -62,7 +62,7 @@ public class SummonSpells implements ExileRegistryInit {
         SpellBuilder.of(SUMMON_LIGHTNING_GOLEM, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(40, 20 * 60, 30).setSummonType(SummonType.GOLEM), "Summon Lightning Golem",
                         Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.golem, SpellTag.has_pet_ability))
                 .manualDesc("Summon a Golem that can cast Lightning Nova to aid you in combat .")
-                .summons(SlashEntities.LIGHTNING_GOLEM.get(), 20 * 60 * 3, 1)
+                .summons(SlashEntities.LIGHTNING_GOLEM.get(), 20 * 60 * 3, 1, SummonType.GOLEM)
                 .levelReq(20)
                 .addStat(Stats.SUMMON_DAMAGE.get().mod(10, 50))
                 .addStat(new SummonHealth().mod(10, 100))
@@ -72,7 +72,7 @@ public class SummonSpells implements ExileRegistryInit {
         SpellBuilder.of(SUMMON_SPIRIT_WOLF, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(30, 30 * 20, 30).setSummonType(SummonType.BEAST), "Summon Spirit Wolf",
                         Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.beast, SpellTag.has_pet_ability))
                 .manualDesc("Summon a Spirit Wolf to aid you in combat.")
-                .summons(SlashEntities.SPIRIT_WOLF.get(), 20 * 30, 1)
+                .summons(SlashEntities.SPIRIT_WOLF.get(), 20 * 30, 1, SummonType.BEAST)
                 .addStat(Stats.SUMMON_DAMAGE.get().mod(5, 25))
                 .addStat(new SummonHealth().mod(30, 300))
                 .levelReq(1)
@@ -81,7 +81,7 @@ public class SummonSpells implements ExileRegistryInit {
         SpellBuilder.of(SUMMON_ZOMBIE, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(30, 20 * 60, 40).setSummonType(SummonType.UNDEAD), "Summon Zombie",
                         Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.has_pet_ability))
                 .manualDesc("Summon a Zombie to aid you in combat.")
-                .summons(SlashEntities.ZOMBIE.get(), 20 * 60 * 2, 1)
+                .summons(SlashEntities.ZOMBIE.get(), 20 * 60 * 2, 1, SummonType.UNDEAD)
                 .addStat(Stats.SUMMON_DAMAGE.get().mod(10, 50))
                 .addStat(new SummonHealth().mod(20, 200))
                 .levelReq(1)
@@ -92,7 +92,7 @@ public class SummonSpells implements ExileRegistryInit {
                                 .setChargesAndRegen("spider", 3, 20 * 15).setSummonType(SummonType.UNDEAD), "Summon Spider",
                         Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.has_pet_ability))
                 .manualDesc("Summon a fast moving spider to aid you in combat.")
-                .summons(SlashEntities.SPIDER.get(), 20 * 60 * 2, 1)
+                .summons(SlashEntities.SPIDER.get(), 20 * 60 * 2, 1, SummonType.SPIDER)
                 .addStat(Stats.SUMMON_DAMAGE.get().mod(5, 25))
                 .addStat(new AilmentChance(Ailments.POISON).mod(10, 50))
                 .levelReq(1)
@@ -101,7 +101,7 @@ public class SummonSpells implements ExileRegistryInit {
         SpellBuilder.of(SUMMON_SKELETAL_ARMY, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(35, 20 * 60, 40).setSummonType(SummonType.UNDEAD), "Summon Skeleton",
                         Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.has_pet_ability))
                 .manualDesc("Summon a horde of Skeletons to fight for you for a short duration.")
-                .summons(SlashEntities.SKELETON.get(), 20 * 60, 1)
+                .summons(SlashEntities.SKELETON.get(), 20 * 60, 1, SummonType.UNDEAD)
                 .levelReq(30)
                 .addStat(Stats.SUMMON_DAMAGE.get().mod(10, 150))
                 .addStat(new SummonHealth().mod(10, 100))

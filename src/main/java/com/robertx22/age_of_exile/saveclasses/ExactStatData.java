@@ -94,8 +94,8 @@ public class ExactStatData implements ISerializable<ExactStatData>, ITooltipList
         return stat;
     }
 
-    public float getAverageValue() {
-        return (v1) / 2F;
+    public float getValue() {
+        return v1;
     }
 
     public void add(ExactStatData other) {

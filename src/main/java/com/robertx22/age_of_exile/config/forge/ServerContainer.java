@@ -44,6 +44,7 @@ public class ServerContainer {
         STOP_ERROR_SPAM = b.define("stop_error_spam", true);
         MIN_LEVEL_MAP_DROPS = b.defineInRange("min_level_map_drops", 10, 0, Integer.MAX_VALUE);
         LEVEL_DISTANCE_PENALTY_LEEWAY = b.defineInRange("LEVEL_DISTANCE_PENALTY_LEEWAY", 2, 0, Integer.MAX_VALUE);
+        PERC_OFFHAND_WEP_STAT = b.defineInRange("PERC_OFFHAND_WEP_STAT", 25, 0, 100);
 
 
         REGEN_HUNGER_COST = b.defineInRange("regen_hunger_cost", 10D, 0, 1000);
@@ -56,7 +57,6 @@ public class ServerContainer {
         LEVEL_DISTANCE_PENALTY_MIN_MULTI = b.defineInRange("min_loot_chance", 0.2D, 0, 1);
         EXTRA_MOB_STATS_PER_LEVEL = b.defineInRange("extra_mob_stats_per_lvl", 0.02D, 0, 1000);
         VANILLA_MOB_DMG_AS_EXILE_DMG = b.defineInRange("vanilla_mob_dmg_as_exile_dmg", 1D, 0, 1000);
-        PLAYER_VANILLA_DMG_MULTI = b.defineInRange("PLAYER_VANILLA_DMG_MULTI", 0D, 0, 1000);
         PVP_DMG_MULTI = b.defineInRange("pvp_dmg_multi", 1D, 0, 1000);
         MAX_TEAM_DISTANCE = b.defineInRange("max_team_distance", 75D, 0, 100000);
         IN_COMBAT_REGEN_MULTI = b.defineInRange("in_combat_regen_multi", 0.5, 0, 10);
@@ -78,7 +78,7 @@ public class ServerContainer {
         CURRENCY_DROPRATE = b.defineInRange("currency_drop_rate", 0.5D, 0, 1000);
         JEWEL_DROPRATE = b.defineInRange("jewel_drop_rate", 0.25D, 0, 1000);
         LOOT_CHEST_DROPRATE = b.defineInRange("loot_chest_drop_rate", 0.1D, 0, 1000);
-        
+
         MAP_MECHANIC_CHANCE = b.defineInRange("MAP_MECHANIC_CHANCE", 33D, 0, 100D);
 
 
@@ -86,6 +86,10 @@ public class ServerContainer {
 
         PACK_MOB_MIN = b.defineInRange("pack_mob_min", 3, 0, 20);
         PACK_MOB_MAX = b.defineInRange("pack_mob_max", 6, 0, 20);
+
+        MIN_MAP_ROOMS = b.defineInRange("MIN_MAP_ROOMS", 12, 1, 100);
+        MAX_MAP_ROOMS = b.defineInRange("MAX_MAP_ROOMS", 20, 1, 100);
+
 
         MOB_MIN = b.defineInRange("mob_min", 1, 0, 20);
         MOB_MAX = b.defineInRange("mob_max", 2, 0, 20);
@@ -167,6 +171,7 @@ public class ServerContainer {
     public ForgeConfigSpec.IntValue MIN_LEVEL_MAP_DROPS;
 
     public ForgeConfigSpec.IntValue LEVEL_DISTANCE_PENALTY_LEEWAY;
+    public ForgeConfigSpec.IntValue PERC_OFFHAND_WEP_STAT;
 
 
     public ForgeConfigSpec.DoubleValue REGEN_HUNGER_COST;
@@ -180,7 +185,6 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue EXTRA_MOB_STATS_PER_LEVEL;
     public ForgeConfigSpec.DoubleValue VANILLA_MOB_DMG_AS_EXILE_DMG;
     public ForgeConfigSpec.DoubleValue PVP_DMG_MULTI;
-    public ForgeConfigSpec.DoubleValue PLAYER_VANILLA_DMG_MULTI;
     public ForgeConfigSpec.DoubleValue MAX_TEAM_DISTANCE;
     public ForgeConfigSpec.DoubleValue IN_COMBAT_REGEN_MULTI;
     public ForgeConfigSpec.DoubleValue COMBAT_TO_PROFESSION_RESTED_XP_GENERATION;
@@ -208,6 +212,9 @@ public class ServerContainer {
 
     public ForgeConfigSpec.IntValue PACK_MOB_MIN;
     public ForgeConfigSpec.IntValue PACK_MOB_MAX;
+
+    public ForgeConfigSpec.IntValue MIN_MAP_ROOMS;
+    public ForgeConfigSpec.IntValue MAX_MAP_ROOMS;
 
     public ForgeConfigSpec.IntValue MOB_MIN;
     public ForgeConfigSpec.IntValue MOB_MAX;

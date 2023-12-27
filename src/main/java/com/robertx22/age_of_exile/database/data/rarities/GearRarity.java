@@ -48,19 +48,32 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     public MinMax stat_percents = new MinMax(0, 0);
     public Potential pot = new Potential(100, 0.5F);
     public int min_affixes = 0;
-    public int max_sockets = 3;
-    public int socket_chance = 25;
+    public MinMax sockets = new MinMax(0, 2);
     public int item_tier = -1;
     public float item_tier_power;
     public int min_lvl = 0;
     public float item_value_multi;
     public boolean announce_in_chat = false;
     public boolean is_unique_item = false;
+    public MinMax map_tiers = new MinMax(0, 100);
 
     public int max_spell_links = 1;
 
     transient ResourceLocation glintFull;
+    transient ResourceLocation glintCircle;
     transient ResourceLocation glintTexBorder;
+
+    public boolean isNear(GearRarity rar) {
+        return Math.abs(rar.item_tier - this.item_tier) < 2;
+    }
+
+    public MinMax getPossibleMapTiers() {
+        return this.map_tiers;
+    }
+
+    public static GearRarity getRarityFromMapTier(int tier) {
+        return ExileDB.GearRarities().getFiltered(x -> x.map_tiers.isInRange(tier)).stream().findAny().orElse(ExileDB.GearRarities().getDefault());
+    }
 
     public enum LootableGearTier {
         LOW(0), MID(1), HIGH(2);
@@ -89,7 +102,6 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     }
 
     public ResourceLocation getGlintTextureFull() {
-
         if (glintFull == null) {
             ResourceLocation tex = SlashRef.id("textures/gui/rarity_glint/full/" + GUID() + ".png");
             if (ClientTextureUtils.textureExists(tex)) {
@@ -99,6 +111,19 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
             }
         }
         return glintFull;
+
+    }
+
+    public ResourceLocation getGlintTextureCircle() {
+        if (glintCircle == null) {
+            ResourceLocation tex = SlashRef.id("textures/gui/rarity_glint/circle/" + GUID() + ".png");
+            if (ClientTextureUtils.textureExists(tex)) {
+                glintCircle = tex;
+            } else {
+                glintCircle = SlashRef.id("textures/gui/rarity_glint/circle/default.png");
+            }
+        }
+        return glintCircle;
 
     }
 

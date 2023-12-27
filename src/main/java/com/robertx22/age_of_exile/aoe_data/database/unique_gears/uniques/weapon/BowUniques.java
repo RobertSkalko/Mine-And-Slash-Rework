@@ -14,6 +14,15 @@ public class BowUniques implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
+        UniqueGearBuilder.of("bone_shatterer", "Bone Shatterer", BaseGearTypes.BOW)
+                .stats(Arrays.asList(
+                        new StatMod(25, 50, Stats.CRIT_DAMAGE.get()),
+                        new StatMod(20, 40, Stats.DAMAGE_TO_UNDEAD.get()),
+                        new StatMod(5, 5, Stats.LIFESTEAL.get())
+                ))
+                .devComment("crit dmg to undead bow")
+                .build();
+        
         UniqueGearBuilder.of("critical_impossibility", "Critical Impossibility", BaseGearTypes.BOW)
                 .setReplacesName()
                 .stats(Arrays.asList(

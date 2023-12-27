@@ -7,7 +7,7 @@ import com.robertx22.age_of_exile.saveclasses.jewel.UniqueJewelData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
-import com.robertx22.age_of_exile.vanilla_mc.items.gemrunes.RuneItem;
+import com.robertx22.age_of_exile.vanilla_mc.items.gemrunes.RuneType;
 import net.minecraft.advancements.critereon.EnchantedItemTrigger;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
@@ -71,20 +71,20 @@ public class CraftedUniqueJewelItem extends Item implements IShapelessRecipe {
     public ShapelessRecipeBuilder getRecipe() {
         return ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, this)
                 .unlockedBy("player_level", EnchantedItemTrigger.TriggerInstance.enchantedItem())
-                .requires(rune(RuneItem.RuneType.ANO))
-                .requires(rune(RuneItem.RuneType.DOS))
-                .requires(rune(RuneItem.RuneType.TOQ))
+                .requires(rune(RuneType.ANO))
+                .requires(rune(RuneType.DOS))
+                .requires(rune(RuneType.TOQ))
 
-                .requires(rune(RuneItem.RuneType.CEN))
-                .requires(rune(RuneItem.RuneType.ENO))
-                .requires(rune(RuneItem.RuneType.ITA))
+                .requires(rune(RuneType.CEN))
+                .requires(rune(RuneType.ENO))
+                .requires(rune(RuneType.ITA))
 
-                .requires(rune(RuneItem.RuneType.XER))
-                .requires(rune(RuneItem.RuneType.WIR))
-                .requires(rune(RuneItem.RuneType.HAR));
+                .requires(rune(RuneType.XER))
+                .requires(rune(RuneType.WIR))
+                .requires(rune(RuneType.HAR));
     }
 
-    private Item rune(RuneItem.RuneType type) {
+    private Item rune(RuneType type) {
         return RuneItems.MAP.get(type.id).get();
     }
 }

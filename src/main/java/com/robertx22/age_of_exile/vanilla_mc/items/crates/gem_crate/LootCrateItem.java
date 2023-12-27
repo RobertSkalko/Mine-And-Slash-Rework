@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.database.data.gems.Gem;
 import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.enumclasses.LootType;
 import com.robertx22.age_of_exile.uncommon.localization.Formatter;
@@ -75,7 +76,7 @@ public class LootCrateItem extends Item implements IGUID {
                     reward = new ItemStack(gem.getItem());
                 } else if (data.type == LootType.Rune) {
                     Rune rune = ExileDB.Runes()
-                            .getFilterWrapped(x -> data.tier >= x.tier)
+                            .getFilterWrapped(x -> Load.Unit(player).getLevel() >= x.getReqLevelToDrop())
                             .random();
                     reward = new ItemStack(rune.getItem());
                 } else if (data.type == LootType.Currency) {
@@ -145,11 +146,11 @@ public class LootCrateItem extends Item implements IGUID {
     public Component getName(ItemStack stack) {
 
         LootCrateData data = getData(stack);
-        
+
         if (data != null) {
 
-            class rankChecker{
-                private MutableComponent checker(){
+            class rankChecker {
+                private MutableComponent checker() {
                     if (data.type == LootType.Gem) {
                         return GemItem.GemRank.ofTier(data.tier).locName();
                     }

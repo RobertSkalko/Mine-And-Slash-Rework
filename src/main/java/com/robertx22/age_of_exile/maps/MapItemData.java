@@ -1,8 +1,12 @@
 package com.robertx22.age_of_exile.maps;
 
 
+import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.league.LeagueMechanic;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
+import com.robertx22.age_of_exile.database.data.stats.Stat;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
@@ -11,6 +15,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
@@ -36,7 +41,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
     }
 
-    public static int MAX_TIER = 10;
+    public static int MAX_TIER = 100;
 
     public int lvl = 1;
     public int tier = 0;
@@ -49,6 +54,21 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
     public List<LeagueMechanic> getLeagueMechanics() {
         return mechs.stream().map(x -> ExileDB.LeagueMechanics().get(x)).collect(Collectors.toList());
+    }
+
+    public List<ExactStatData> getTierStats() {
+        float mob_stat_multi = (float) (GameBalanceConfig.get().HP_DMG_MOB_BONUS_PER_MAP_TIER * tier);
+
+        List<Stat> to = new ArrayList<>();
+        to.add(Health.getInstance());
+        to.add(Stats.TOTAL_DAMAGE.get());
+
+        List<ExactStatData> stats = new ArrayList<>();
+
+        for (Stat stat : to) {
+            stats.add(ExactStatData.noScaling(mob_stat_multi * 100F, ModType.MORE, stat.GUID()));
+        }
+        return stats;
     }
 
 
@@ -74,9 +94,9 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
     public float bonusFormula() {
 
-        float tierBonus = tier * 0.04F;
+        float tierBonus = tier * 0.02F;
 
-        return (1 + tierBonus + getAffixMulti());
+        return (1 + tierBonus);
     }
 
     public float getBonusExpMulti() {
@@ -100,6 +120,8 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
         return true;
     }
 
+    // we just need tier bonus i think
+    /*
     private float getAffixMulti() {
 
         float total = 0;
@@ -108,6 +130,8 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
         }
         return total;
     }
+
+     */
 
     public List<MapAffixData> getAllAffixesThatAffect(AffectedEntities aff) {
         return affixes.stream().filter(x -> x.getAffix().affected == aff).collect(Collectors.toList());
@@ -124,6 +148,8 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
 
         addAffixTypeToTooltip(this, tooltip, AffectedEntities.Mobs);
+        this.getTierStats().forEach(x -> tooltip.addAll(x.GetTooltipString(new TooltipInfo())));
+
         addAffixTypeToTooltip(this, tooltip, AffectedEntities.Players);
         addAffixTypeToTooltip(this, tooltip, AffectedEntities.All);
 

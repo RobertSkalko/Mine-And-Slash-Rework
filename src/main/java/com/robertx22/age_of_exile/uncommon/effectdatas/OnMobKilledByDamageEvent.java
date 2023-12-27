@@ -19,6 +19,11 @@ public class OnMobKilledByDamageEvent extends EffectEvent {
     }
 
     @Override
+    public String getName() {
+        return "Kill Event";
+    }
+
+    @Override
     public boolean canWorkOnDeadTarget() {
         return true;
     }

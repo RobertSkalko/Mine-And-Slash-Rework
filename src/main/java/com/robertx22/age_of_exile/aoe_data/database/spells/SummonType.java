@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.spells;
 
+// todo this should be a datapack
 public enum SummonType {
     TOTAL("total", "Total", 5),
     GOLEM("golem", "Golem", 3),
@@ -17,4 +18,6 @@ public enum SummonType {
         this.name = name;
         this.maxSummons = maxSummons;
     }
+
+
 }

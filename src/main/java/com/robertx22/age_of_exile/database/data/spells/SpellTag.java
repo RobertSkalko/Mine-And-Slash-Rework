@@ -7,7 +7,9 @@ import java.util.Locale;
 
 public enum SpellTag implements IAutoLocName {
     projectile("Projectile"),
-    magic("Magic Skill"),
+    ranged("Ranged"),
+    melee("Melee"),
+    magic("Magic"),
     weapon_skill("Weapon Skill"),
     movement("Movement"),
     damage("Damage"),
@@ -16,6 +18,7 @@ public enum SpellTag implements IAutoLocName {
     has_pet_ability("Has Pet Ability"),
     heal("Heal"),
     rejuvenate("Rejuvenate"),
+    thorns("Thorns"),
     arrow("Arrow"),
     curse("Curse"),
     shield("Shield"),

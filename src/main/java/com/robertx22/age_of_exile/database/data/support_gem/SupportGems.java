@@ -267,6 +267,11 @@ public class SupportGems {
                 ))
                 .levelReq(1).addToSerializables();
 
+        new SupportGem("effect_duration", "Effect Duration", PlayStyle.INT, 1.15F,
+                Arrays.asList(new StatMod(15, 40, Stats.EFFECT_DURATION_YOU_CAST.get(), ModType.FLAT)
+                ))
+                .levelReq(1).addToSerializables();
+
 
         // exceptional
         new SupportGem("rare_cooldown", "Greater Cooldown", PlayStyle.INT, 1.2F,

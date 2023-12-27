@@ -13,7 +13,7 @@ public class AuraCapacity extends Stat {
         this.format = ChatFormatting.AQUA.getName();
 
         this.base = 100;
-        this.min = 100;
+        this.min = 0;
         this.max = 250;
     }
 

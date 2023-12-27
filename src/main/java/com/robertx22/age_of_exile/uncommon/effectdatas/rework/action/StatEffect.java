@@ -23,7 +23,6 @@ public abstract class StatEffect implements JsonExileRegistry<StatEffect>, IAuto
         addSer(new DoubleDamageAction());
         addSer(new RemoveExileEffectAction());
         addSer(new MultiplyNumberByPercentEffect());
-        addSer(new ReflectDamageAction());
         addSer(new GiveExileStatusInRadius());
         addSer(new DecreaseNumberByPercentEffect());
         addSer(new AddToNumberEffect());
@@ -66,10 +65,10 @@ public abstract class StatEffect implements JsonExileRegistry<StatEffect>, IAuto
     @Override
     public final StatEffect fromJson(JsonObject json) {
         String ser = json.get("ser")
-            .getAsString();
+                .getAsString();
 
         StatEffect t = GSON.fromJson(json, SERIALIZERS.get(ser)
-            .getSerClass());
+                .getSerClass());
         t.onLoadedFromJson();
         return t;
     }

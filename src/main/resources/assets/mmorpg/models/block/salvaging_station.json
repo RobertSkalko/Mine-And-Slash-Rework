@@ -3,6 +3,6 @@
   "textures": {
     "front": "mmorpg:block/station/salvage_front_on",
     "side": "mmorpg:block/station/salvage_side",
-    "top": "mmorpg:block/station/blast_furnace_top"
+    "top": "mmorpg:block/station/salvage_top"
   }
 }

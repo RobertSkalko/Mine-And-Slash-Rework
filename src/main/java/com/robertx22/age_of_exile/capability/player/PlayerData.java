@@ -11,6 +11,7 @@ import com.robertx22.age_of_exile.saveclasses.perks.TalentsData;
 import com.robertx22.age_of_exile.saveclasses.spells.AscendancyClassesData;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellCastingData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_calc.StatCalculation;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.components.ICap;
 import com.robertx22.library_of_exile.utils.LoadSave;
@@ -158,12 +159,9 @@ public class PlayerData implements ICap {
     }
 
     public void calcSpellUnits(List<Spell> spells) {
-
         for (Spell spell : spells) {
             spellUnits.put(spell.GUID(), getSpellStats(spell));
-
         }
-
     }
 
     private Unit getSpellStats(Spell spell) {
@@ -172,8 +170,7 @@ public class PlayerData implements ICap {
         if (gem != null) {
             // its null if its casted by a summon
             int slot = gem.getHotbarSlot();
-            un = new Unit(); // todo test if this works
-            un.recalculateStats(player, Load.Unit(player), null, slot);
+            return StatCalculation.calc(player, slot, null);
         }
         return un;
     }

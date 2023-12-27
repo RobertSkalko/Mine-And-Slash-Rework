@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_calc.StatCalculation;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.SpellStatsCalculationEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
@@ -51,13 +52,11 @@ public class SpellCastContext {
             try {
                 int slot = Load.player(p).getSkillGemInventory().getSpellGem(this.spell).getHotbarSlot();
                 if (slot != -1) {
-                    this.unit = new Unit(); // todo test if this works
-                    this.unit.recalculateStats(caster, data, null, slot);
+                    this.unit = StatCalculation.calc(caster, slot, null);
                 }
             } catch (Exception e) {
                 this.unit = this.data.getUnit();
             }
-
         } else {
             this.unit = this.data.getUnit();
         }

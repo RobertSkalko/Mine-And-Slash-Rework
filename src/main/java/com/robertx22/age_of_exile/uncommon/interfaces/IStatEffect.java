@@ -31,6 +31,8 @@ public interface IStatEffect {
         }
     }
 
+    public boolean worksOnEvent(EffectEvent ev);
+
     public abstract EffectSides Side();
 
     public abstract int GetPriority();

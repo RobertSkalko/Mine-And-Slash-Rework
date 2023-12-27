@@ -9,10 +9,10 @@ import com.robertx22.age_of_exile.gui.screens.skill_tree.SkillTreeScreen;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.vanilla_mc.packets.perks.PerkChangePacket;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.GuiUtils;
-import com.robertx22.library_of_exile.utils.RenderUtils;
 import com.robertx22.library_of_exile.utils.TextUTIL;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -21,7 +21,6 @@ import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 
 import java.util.List;
 
@@ -37,6 +36,7 @@ public class PerkButton extends ImageButton {
     public PointData point;
     public TalentTree school;
     public PlayerData playerData;
+    public String search;
 
     public int originalWidth;
     public int originalHeight;
@@ -63,7 +63,6 @@ public class PerkButton extends ImageButton {
     }
 
     public boolean isInside(int x, int y) {
-
         float scale = 2 - screen.zoom;
         return GuiUtils.isInRect((int) (this.getX() - ((width / 4) * scale)), (int) (this.getY() - ((height / 4) * scale)), (int) (width * scale), (int) (height * scale), x, y);
     }
@@ -92,6 +91,7 @@ public class PerkButton extends ImageButton {
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
 
+
         screen.mouseRecentlyClickedTicks = 25;
         screen.pointClicked = this.point;
 
@@ -99,9 +99,11 @@ public class PerkButton extends ImageButton {
         mouseY = 1F / screen.zoom * mouseY;
 
         if (this.active && this.visible) {
-
             boolean bl = this.clicked(mouseX, mouseY);
             if (bl) {
+//                System.out.println(this.getX() + "_" + getY() + " : " + perk.GUID());
+
+
                 this.playDownSound(Minecraft.getInstance()
                         .getSoundManager());
 
@@ -123,65 +125,69 @@ public class PerkButton extends ImageButton {
     }
 
     int xPos(int offset, float multi) {
-        float scale = 2 - screen.zoom;
-        return (int) ((this.getX() - ((width / 6) * scale)) * multi) + offset;
+        return (int) (this.getX() * multi) + offset;
+
     }
 
     int yPos(int offset, float multi) {
-        float scale = 2 - screen.zoom;
-        return (int) ((this.getY() - ((height / 6) * scale)) * multi) + offset;
+        return (int) (getY() * multi) + offset;
     }
 
     @Override
     public void renderWidget(GuiGraphics gui, int mouseX, int mouseY, float pPartialTick) {
         setTooltipMOD(gui, mouseX, mouseY);
 
+        gui.pose().pushPose();
+
         float scale = 2 - screen.zoom;
 
         float posMulti = 1F / scale;
 
-        if (posMulti > 1.5F) {
-            posMulti = 1.5F;
-        }
-        float zoomOffset = Mth.lerp(screen.zoom, 0.0f, -0.04f);
-        gui.pose().translate(width / 2f, height / 2f, 0);
+
+        // todo test
+        float add = MathHelper.clamp(scale - 1, 0, 2);
+        float off = width / -2F * add;
+        gui.pose().translate(off, off, 0);
+
         gui.pose().scale(scale, scale, scale);
-        float inverse = 1F / scale;
-        gui.pose().translate((-(width / 2f) - zoomOffset / 4f) * inverse, (-(height / 2f) - zoomOffset / 4f) * inverse, 0);
+
+
         PerkStatus status = playerData.talents.getStatus(Minecraft.getInstance().player, school, point);
 
-
-        int offset = 4;
+        int offset = perk.getType().getOffset();
 
         // background
         RenderSystem.enableDepthTest();
-        gui.blit(ID, xPos(0, posMulti), yPos(0, posMulti), perk.getType()
-                .getXOffset(), status
-                .getYOffset(), this.width, this.height);
 
-        if (this.perk.getType() == Perk.PerkType.STAT) {
-            // icon
-            gui.blit(perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti), 0, 0, 16, 16, 16, 16);
-        } else if (this.perk.getType() == Perk.PerkType.MAJOR) {
-            // icon
-            offset = 9;
-            RenderUtils.render16Icon(gui, perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti));
-        } else if (perk.getType() == Perk.PerkType.START) {
-            offset = 6;
-            if (perk.icon == null || perk.icon.isEmpty()) {
-                RenderUtils.render16Icon(gui, new ResourceLocation(school.icon), xPos(offset, posMulti), yPos(offset, posMulti));
+        boolean containsSearchStat = !search.isEmpty() && perk.stats.stream()
+                .anyMatch(item -> item.getStat().translate().toLowerCase().contains(search.toLowerCase()));
+
+
+        float opacity = containsSearchStat || search.isEmpty() ? 1.0f : 0.2f;
+        if (search.equals("all")) {
+            if (status != PerkStatus.CONNECTED) {
+                opacity = 0.2F;
             } else {
-                RenderUtils.render16Icon(gui, perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti));
+                opacity = 1;
             }
-        } else if (perk.getType() == Perk.PerkType.SPECIAL) {
-
-            // icon
-            offset = 6;
-            gui.blit(perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti), 0, 0, 16, 16, 16, 16);
         }
+        gui.setColor(1.0F, 1.0F, 1.0F, opacity);
+
+        //gui.blit(ID, xPos(0, posMulti), yPos(0, posMulti), perk.getType().getXOffset(), status.getYOffset(), this.width, this.height);
+
+        int offcolor = (int) ((perk.getType().height - 20) / 2F);
+
+        gui.blit(perk.getType().getColorTexture(status), xPos(offcolor, posMulti), yPos(offcolor, posMulti), 20, 20, 0, 0, 20, 20, 20, 20);
+        gui.blit(perk.getType().getBorderTexture(status), xPos(0, posMulti), yPos(0, posMulti), 0, 0, this.width, this.height, this.width, this.height);
+
+
+        gui.blit(perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti), 0, 0, 16, 16, 16, 16);
+
 
         gui.pose().scale(1F / scale, 1F / scale, 1F / scale);
+        gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+
+        gui.pose().popPose();
+
     }
-
-
 }

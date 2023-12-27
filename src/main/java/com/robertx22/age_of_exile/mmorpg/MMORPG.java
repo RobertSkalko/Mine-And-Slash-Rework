@@ -62,6 +62,14 @@ public class MMORPG {
     // DISABLE WHEN PUBLIC BUILD
     public static boolean RUN_DEV_TOOLS = true;
 
+    public static boolean combatLogEnabled() {
+        return RUN_DEV_TOOLS; // todo, should this be a client config and have server send packets ?
+    }
+
+    public static boolean deepCombatLogEnabled() {
+        return RUN_DEV_TOOLS; // todo, should this be a client config and have server send packets ?
+    }
+
     private static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel NETWORK = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(SlashRef.MODID, "main"),

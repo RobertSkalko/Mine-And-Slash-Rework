@@ -1,9 +1,7 @@
 package com.robertx22.age_of_exile.gui.inv_gui;
 
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
-import com.robertx22.age_of_exile.database.data.runewords.RuneWord;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import com.robertx22.age_of_exile.gui.inv_gui.actions.CraftRunewordAction;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.GuiAction;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.PickSpellAction;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
@@ -15,19 +13,6 @@ import java.util.*;
 
 public class GuiInventoryGrids {
 
-    public static InvGuiGrid ofCratableRuneWords(Player p) {
-        GuiAction.regenActionMap(); //  todo find better way of ensuring
-
-        List<GuiItemData> list = new ArrayList<>();
-
-        for (RuneWord rw : ExileDB.RuneWords().getList()) {
-            if (rw.hasRunesToCraft(p)) {
-                list.add(new GuiItemData(new CraftRunewordAction(rw)));
-            }
-        }
-        return InvGuiGrid.ofList(list);
-
-    }
 
     public static InvGuiGrid ofSelectableSpells(Player p, int slot) {
         GuiAction.regenActionMap(); //  todo find better way of ensuring
@@ -40,22 +25,11 @@ public class GuiInventoryGrids {
             list.add(new GuiItemData(new PickSpellAction(spell.getData().getSpell())));
         }
 
-       
+
         return InvGuiGrid.ofList(list);
     }
 
-    public static InvGuiGrid ofAllRuneWords(Player p) {
-        GuiAction.regenActionMap(); //  todo find better way of ensuring
-
-        List<GuiItemData> list = new ArrayList<>();
-
-        for (RuneWord rw : ExileDB.RuneWords().getList()) {
-            list.add(new GuiItemData(new CraftRunewordAction(rw)));
-        }
-        return InvGuiGrid.ofList(list);
-
-    }
-
+    
     public static InvGuiGrid ofSalvageConfig() {
         GuiAction.regenActionMap(); //  todo find better way of ensuring
 

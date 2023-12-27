@@ -122,3 +122,23 @@ v.5.3.8
 - new growth stage req to prevent people placing potato, breaking it instantly and gaining xp
 - fake players mostly used by automation mods will no longer proc mns profession item bonus drops
 - new druid spell: circle of healing. It scales healing with rejuvenation stacks on the target
+- tried to separate overlay guis so they can be moved independently
+- added garden of thorns ability and inner calm effect
+- druid now hopefully has a bit of a "rotation". Rejuv gives you dot healing but also increases your thorn damage.
+You scale with energy on both healing and damage and can basic attack mobs to proc extra damage from thorns.
+When you're out of mana, you have garden of thorns to deal damage and give you an effect that restores mana which scales with your energy.
+Hopefully this will be more fun than the generic spells of before, I hope I can rework existing spells to work similarly.
+- adventure map size now configurable
+- Ice shard and chilling field now apply bone chill, should help frost mages have a bit of a rotation too with these spells being used to stack effects and chill, and other spells being used to shatter for extra damage
+- added effect duration support gem
+- added search bar to talents
+- should have fixed some stat bugs
+- loot bonus from maps is now based on map tier, not affixes
+- maps now have 100 tiers
+- map rarity and tier now correlate
+- map items now show the tier hp and dmg mob bonus on the tooltip
+- runewords changed back to old system, existing runeword uniques are now just normal uniques
+- changed rune drop requirements a bit, and made runes have all stats (for for any gear family)
+- EVEN MORE upgraded textures!
+- added dual wielding. Right now only certain melee weapons that make sense can be placed in the offhand to grant 25% of its original stats.
+This is probably still way more op than any current normal offhand so will probably be tweaked

@@ -45,11 +45,9 @@ public class StatContainer {
         InCalcStatData data = statsInCalc.get(guid);
 
         if (data == null) {
-            Stat stat = ExileDB.Stats()
-                    .get(guid);
+            Stat stat = ExileDB.Stats().get(guid);
             if (stat != null) {
                 statsInCalc.put(stat.GUID(), new InCalcStatData(stat.GUID()));
-
                 return statsInCalc.get(stat.GUID());
             } else {
                 return new InCalcStatData(new UnknownStat().GUID());

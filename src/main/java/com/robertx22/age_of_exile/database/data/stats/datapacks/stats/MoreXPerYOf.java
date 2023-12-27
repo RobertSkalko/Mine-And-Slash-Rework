@@ -1,11 +1,11 @@
 package com.robertx22.age_of_exile.database.data.stats.datapacks.stats;
 
-import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.base.BaseDatapackStat;
 import com.robertx22.age_of_exile.database.data.stats.name_regex.StatNameRegex;
 import com.robertx22.age_of_exile.saveclasses.unit.InCalcStatData;
+import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAffectsStatsInCalc;
 import net.minecraft.ChatFormatting;
 
@@ -47,12 +47,11 @@ public class MoreXPerYOf extends BaseDatapackStat implements IAffectsStatsInCalc
         this.scaling = StatScaling.NONE;
     }
 
+    // todo this doesnt cap stat values to min max etc
     @Override
-    public void affectStats(EntityData data, InCalcStatData statData) {
-        InCalcStatData add_to = data.getUnit()
-                .getStatInCalculation(stat_to_add_to);
-        InCalcStatData adder = data.getUnit()
-                .getStatInCalculation(adder_stat);
+    public void affectStats(Unit data, InCalcStatData statData) {
+        InCalcStatData add_to = data.getStatInCalculation(stat_to_add_to);
+        InCalcStatData adder = data.getStatInCalculation(adder_stat);
 
         float val = (int) (adder.getValue() / perEach) * statData.getValue();
 

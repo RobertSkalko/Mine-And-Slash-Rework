@@ -6,7 +6,6 @@ import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.EntityConfig;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
-import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
@@ -15,12 +14,15 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Ene
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
-import com.robertx22.age_of_exile.event_hooks.my_events.CollectGearEvent;
 import com.robertx22.age_of_exile.event_hooks.player.OnLogin;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.CustomExactStatsData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import com.robertx22.age_of_exile.saveclasses.unit.*;
+import com.robertx22.age_of_exile.saveclasses.unit.MobData;
+import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
+import com.robertx22.age_of_exile.saveclasses.unit.ResourcesData;
+import com.robertx22.age_of_exile.saveclasses.unit.Unit;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_calc.StatCalculation;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.CustomExactStats;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -56,6 +58,7 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -208,7 +211,7 @@ public class EntityData implements ICap, INeededForClient {
 
         this.statusEffects = loadOrBlank(EntityStatusEffectsData.class, new EntityStatusEffectsData(), nbt, STATUSES, new EntityStatusEffectsData());
 
-    
+
     }
 
     @Override
@@ -313,6 +316,7 @@ public class EntityData implements ICap, INeededForClient {
 
     public void setEquipsChanged(boolean bool) {
         this.equipsChanged = bool;
+        this.setShouldSync();
     }
 
     public CooldownsData getCooldowns() {
@@ -380,6 +384,10 @@ public class EntityData implements ICap, INeededForClient {
 
     public ThreatData getThreat() {
         return threat;
+    }
+
+    public void setShouldSync() {
+        this.shouldSync = true;
     }
 
     public void trySync() {
@@ -502,8 +510,13 @@ public class EntityData implements ICap, INeededForClient {
         }
 
         if (needsToRecalcStats()) {
+
+            if (this.entity.level().isClientSide()) {
+                return;
+            }
+
             //Watch watch = new Watch();
-            unit.recalculateStats(entity, this, null, -1);
+            this.unit = StatCalculation.calc(entity, -1, null);
 
             if (entity instanceof Player p) {
                 var data = Load.player(p);
@@ -514,16 +527,17 @@ public class EntityData implements ICap, INeededForClient {
 
     }
 
-    public void forceRecalculateStats(AttackInformation data) {
-        unit.recalculateStats(entity, this, data, -1);
-    }
 
     public void forceRecalculateStats() {
 
         if (unit == null) {
             unit = new Unit();
         }
-        unit.recalculateStats(entity, this, null, -1);
+        if (this.entity.level().isClientSide()) {
+            return;
+        }
+        this.unit = StatCalculation.calc(entity, -1, null);
+
     }
 
     // This reduces stat calculation by about 4 TIMES!
@@ -747,6 +761,14 @@ public class EntityData implements ICap, INeededForClient {
         return i;
     }
 
+    public boolean isSummon() {
+        return entity instanceof TamableAnimal && !this.summonedPetData.isEmpty();
+    }
+
+    public TamableAnimal getSummonClass() {
+        return (TamableAnimal) entity;
+    }
+
     public boolean CheckIfCanLevelUp() {
 
         return getExp() >= getExpRequiredForLevelUp();
@@ -802,34 +824,6 @@ public class EntityData implements ICap, INeededForClient {
         return level;
     }
 
-    public int getAverageILVL() {
-
-        List<GearData> gears = new ArrayList<>();
-        new CollectGearEvent.CollectedGearStacks(entity, gears, null);
-
-        int divideBy = 4 + 3; // armors, jewelry
-
-        // dont count weapon and offhand for obvious reasons
-
-        int totalILVL = 0;
-
-        for (GearData x : gears) {
-            if (x.gear != null) {
-                if (!x.gear.GetBaseGearType()
-                        .isWeapon() && !x.gear.GetBaseGearType().tags.contains(BaseGearType.SlotTag.offhand_family)) {
-                    totalILVL += x.gear.getLevel();
-                }
-            }
-        }
-
-        if (totalILVL < 1) {
-            return 0;
-        }
-
-        totalILVL /= divideBy;
-
-        return totalILVL;
-    }
 
     public void setLevel(int lvl) {
 

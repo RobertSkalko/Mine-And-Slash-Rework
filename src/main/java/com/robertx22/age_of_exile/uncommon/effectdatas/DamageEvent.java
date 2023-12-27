@@ -6,7 +6,6 @@ import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffectInstanceData;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
-import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEntity;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.FullSwingDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.DamageAbsorbedByMana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
@@ -264,6 +263,11 @@ public class DamageEvent extends EffectEvent {
     );
 
     @Override
+    public String getName() {
+        return "Damage Event";
+    }
+
+    @Override
     public void initBeforeActivating() {
         calcAttackCooldown();
     }
@@ -372,6 +376,11 @@ public class DamageEvent extends EffectEvent {
 
         if (dmg > 0) {
 
+            if (this.areBothPlayers()) {
+                Load.Unit(source).getCooldowns().setOnCooldown("pvp", 20 * 30);
+            }
+
+            // todo can this be done better?
             if (this.data.isBasicAttack()) {
                 for (Entry<String, ExileEffectInstanceData> e : targetData.getStatusEffectsData().exileMap.entrySet()) {
                     if (!e.getValue().shouldRemove()) {
@@ -387,8 +396,7 @@ public class DamageEvent extends EffectEvent {
             if (source instanceof Player) {
                 sourceData.getCooldowns().setOnCooldown(CooldownsData.IN_COMBAT, 20 * 10);
                 if (target instanceof Mob) {
-
-                    if (petEntity instanceof SummonEntity) {
+                    if (petEntity instanceof LivingEntity && Load.Unit(petEntity).isSummon()) {
                         GenerateThreatEvent threatEvent = new GenerateThreatEvent(petEntity, (Mob) target, ThreatGenType.deal_dmg, dmg);
                         threatEvent.Activate();
                     } else {

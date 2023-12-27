@@ -1,9 +1,9 @@
 package com.robertx22.age_of_exile.event_hooks.damage_hooks;
 
-import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEntity;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.DmgSourceUtils;
 import com.robertx22.age_of_exile.uncommon.UnstuckMobs;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
@@ -43,10 +43,10 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
             return;
         }
         if (!(event.source.getEntity() instanceof Player)) {
-            if (event.source.getEntity() instanceof SummonEntity summon) {
-                LivingEntity caster = summon.getOwner();
+            if (event.source.getEntity() instanceof LivingEntity en && Load.Unit(en).isSummon()) {
+                LivingEntity caster = Load.Unit(en).getSummonClass().getOwner();
                 if (caster != null) {
-                    PetAttackUTIL.tryAttack(summon, caster, event.mob);
+                    PetAttackUTIL.tryAttack(en, caster, event.mob);
                     event.damage = 0;
                     event.canceled = true;
                 }

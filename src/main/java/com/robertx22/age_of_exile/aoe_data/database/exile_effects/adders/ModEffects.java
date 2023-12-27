@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders;
 
+import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.ExileEffectBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
@@ -17,6 +18,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellA
 import com.robertx22.age_of_exile.database.data.spells.components.actions.vanity.ParticleMotion;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
+import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentResistance;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
@@ -43,7 +45,7 @@ public class ModEffects implements ExileRegistryInit {
 
     public static EffectCtx VAMPIRIC_BLOOD = new EffectCtx("vamp_blood", "Vamp Blood", Elements.Fire, EffectType.beneficial);
     public static EffectCtx DRACONIC_BLOOD = new EffectCtx("draconic_blood", "Dragon Blood", Elements.Fire, EffectType.beneficial);
-    public static EffectCtx REGENERATE = new EffectCtx("regenerate", "Nature Balm", Elements.Chaos, EffectType.beneficial);
+    public static EffectCtx REJUVENATE = new EffectCtx("rejuvenation", "Rejuvenation", Elements.Physical, EffectType.beneficial);
     public static EffectCtx VALOR = new EffectCtx("valor", "Valor", Elements.Physical, EffectType.beneficial);
     public static EffectCtx PERSEVERANCE = new EffectCtx("perseverance", "Perseverance", Elements.Physical, EffectType.beneficial);
     public static EffectCtx VIGOR = new EffectCtx("vigor", "Vigor", Elements.Physical, EffectType.beneficial);
@@ -62,6 +64,8 @@ public class ModEffects implements ExileRegistryInit {
     public static EffectCtx GROUNDING = new EffectCtx("ground", "Grounding", Elements.Physical, EffectType.negative);
     public static EffectCtx SHRED = new EffectCtx("shred", "Shred", Elements.Physical, EffectType.negative);
     public static EffectCtx THORN = new EffectCtx("thorn", "Thorn", Elements.Physical, EffectType.negative);
+    public static EffectCtx INNER_CALM = new EffectCtx("inner_calm", "Inner Calm", Elements.Physical, EffectType.beneficial);
+    public static EffectCtx BONE_CHILL = new EffectCtx("bone_chill", "Bone Chill", Elements.Cold, EffectType.negative);
 
     public static void init() {
 
@@ -70,6 +74,12 @@ public class ModEffects implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
+        ExileEffectBuilder.of(ModEffects.BONE_CHILL)
+                .maxStacks(5)
+                .stat(2, 5, Stats.ELEMENT_CRIT_DAMAGE_TAKEN.get(Elements.Cold), ModType.FLAT)
+                .stat(-5, -10, new AilmentResistance(Ailments.FREEZE), ModType.FLAT)
+                .stat(-2, -5, new ElementalResist(Elements.Cold), ModType.FLAT)
+                .build();
 
         ExileEffectBuilder.of(ModEffects.THORN)
                 .maxStacks(5)
@@ -250,15 +260,28 @@ public class ModEffects implements ExileRegistryInit {
                 .build();
 
 
-        ExileEffectBuilder.of(REGENERATE)
+        ExileEffectBuilder.of(REJUVENATE)
                 .maxStacks(5)
                 .addTags(EffectTags.heal_over_time)
-                .stat(Stats.REJUV_HEAL_SELF.get().mod(25, 100).more())
+                .stat(Stats.REJUV_HEAL_SELF.get().mod(25, 50).more())
+                .stat(Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.thorns).mod(2, 10).more())
                 .spell(SpellBuilder.forEffect()
-                        .onTick(PartBuilder.justAction(SpellAction.RESTORE_HEALTH.create(SpellCalcs.NATURE_BALM))
+                        .onTick(PartBuilder.justAction(SpellAction.RESTORE_HEALTH.create(SpellCalcs.REJUVENATION))
                                 .setTarget(TargetSelector.TARGET.create())
                                 .tickRequirement(20D))
                         .onTick(PartBuilder.aoeParticles(ParticleTypes.HEART, 5D, 1D)
+                                .tickRequirement(20D))
+                        .buildForEffect())
+                .build();
+
+        ExileEffectBuilder.of(INNER_CALM)
+                .maxStacks(1)
+                .addTags(EffectTags.heal_over_time)
+                .spell(SpellBuilder.forEffect()
+                        .onTick(PartBuilder.justAction(SpellAction.RESTORE_MANA.create(SpellCalcs.REJUVENATION))
+                                .setTarget(TargetSelector.TARGET.create())
+                                .tickRequirement(20D))
+                        .onTick(PartBuilder.aoeParticles(ParticleTypes.ENCHANT, 15D, 1D)
                                 .tickRequirement(20D))
                         .buildForEffect())
                 .build();

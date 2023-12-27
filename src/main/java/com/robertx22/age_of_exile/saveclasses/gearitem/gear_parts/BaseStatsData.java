@@ -66,52 +66,52 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
     }
 
     @Override
-    public List<ExactStatData> GetAllStats(GearItemData affixStats) {
+    public List<ExactStatData> GetAllStats(GearItemData gear) {
 
         List<ExactStatData> baseStats = new ArrayList<>();
 
         try {
+            int perc = (int) (p * gear.getQualityBaseStatsMulti());
 
-            int perc = (int) (p * affixStats.getQualityBaseStatsMulti());
-
-
-            for (StatMod mod : affixStats.GetBaseGearType()
-                    .baseStats()) {
-                baseStats.add(mod.ToExactStat(perc, affixStats.getLevel()));
+            for (StatMod mod : gear.GetBaseGearType().baseStats()) {
+                baseStats.add(mod.ToExactStat(perc, gear.getLevel()));
             }
 
+            var list = gear.GetAllStatContainersExceptBase();
 
-            for (IStatsContainer affixStat : affixStats.GetAllStatContainersExceptBase()) {
-                for (ExactStatData affixStatData : affixStat.GetAllStats(affixStats)) {
-                    if (affixStatData.getStat() instanceof IBaseStatModifier mod) {
-                        for (ExactStatData baseStat : baseStats) {
-                            if (mod.canModifyBaseStat(baseStat.getStat())) {
-                                if (affixStatData.getType() == ModType.FLAT) {
-                                    baseStat.add(ExactStatData.noScaling(affixStatData.getAverageValue(), ModType.FLAT, baseStat.getStatId()));
-                                }
+            var allstats = new ArrayList<ExactStatData>();
+            for (IStatsContainer cont : list) {
+                allstats.addAll(cont.GetAllStats(gear));
+            }
+            allstats.removeIf(x -> x.getStat() instanceof IBaseStatModifier == false);
+
+            for (ExactStatData affixStatData : allstats) {
+                if (affixStatData.getStat() instanceof IBaseStatModifier mod) {
+                    for (ExactStatData baseStat : baseStats) {
+                        if (mod.canModifyBaseStat(baseStat.getStat())) {
+                            if (affixStatData.getType() == ModType.FLAT) {
+                                baseStat.add(ExactStatData.noScaling(affixStatData.getValue(), ModType.FLAT, baseStat.getStatId()));
                             }
                         }
-
                     }
                 }
             }
 
-            for (IStatsContainer affixStat : affixStats.GetAllStatContainersExceptBase()) {
-                for (ExactStatData affixStatData : affixStat.GetAllStats(affixStats)) {
-                    if (affixStatData.getStat() instanceof IBaseStatModifier mod) {
-                        for (ExactStatData baseStat : baseStats) {
-                            if (mod.canModifyBaseStat(baseStat.getStat())) {
-                                if (affixStatData.getType() == ModType.PERCENT) {
-                                    //baseStat.add(ExactStatData.noScaling(affixStatData.getAverageValue(), ModType.PERCENT, baseStat.getStatId()));
-                                    baseStat.percentIncrease = affixStatData.getAverageValue();
-                                    baseStat.increaseByAddedPercent();
-                                }
+
+            for (ExactStatData affixStatData : allstats) {
+                if (affixStatData.getStat() instanceof IBaseStatModifier mod) {
+                    for (ExactStatData baseStat : baseStats) {
+                        if (mod.canModifyBaseStat(baseStat.getStat())) {
+                            if (affixStatData.getType() == ModType.PERCENT) {
+                                baseStat.percentIncrease = affixStatData.getValue();
+                                baseStat.increaseByAddedPercent();
                             }
                         }
-
                     }
+
                 }
             }
+
 
         } catch (Exception e) {
             e.printStackTrace();

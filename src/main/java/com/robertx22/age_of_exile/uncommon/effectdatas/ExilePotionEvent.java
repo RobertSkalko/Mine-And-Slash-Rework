@@ -15,6 +15,11 @@ public class ExilePotionEvent extends EffectEvent {
     public String spellid = "";
 
     @Override
+    public String getName() {
+        return "MNS Effect Event";
+    }
+
+    @Override
     public String GUID() {
         return ID;
     }
@@ -62,7 +67,7 @@ public class ExilePotionEvent extends EffectEvent {
             extraData.str_multi = data.getNumber();
 
             Load.Unit(target).setEquipsChanged(true);
-            Load.Unit(target).trySync();
+            Load.Unit(target).setShouldSync();
         } else {
 
 
@@ -88,7 +93,7 @@ public class ExilePotionEvent extends EffectEvent {
 
         Load.Unit(target).setEquipsChanged(true);
         Load.Unit(target).tryRecalculateStats();
-        Load.Unit(target).trySync();
+        Load.Unit(target).setShouldSync();
     }
 
 

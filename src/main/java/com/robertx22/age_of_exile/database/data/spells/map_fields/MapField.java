@@ -70,6 +70,7 @@ public class MapField<T> implements IGUID {
     public static MapField<String> ENTITY_NAME = make("entity_name");
     public static MapField<String> PUSH_WAY = make("push_way");
     public static MapField<String> AGGRO_TYPE = make("aggro");
+    public static MapField<String> SUMMON_TYPE = make("summon_type");
     public static MapField<String> COMMAND = make("command");
     public static MapField<String> POS_SOURCE = make("pos_source");
     public static MapField<String> SHOOT_DIRECTION = make("shoot_way");
@@ -94,6 +95,7 @@ public class MapField<T> implements IGUID {
     public static MapField<Boolean> IGNORE_Y = make("ignore_y");
     public static MapField<Boolean> TRACKS_ENEMIES = make("tracks_enemies");
     public static MapField<Boolean> DISABLE_KNOCKBACK = make("disable_knockback");
+    public static MapField<Boolean> COUNTS_TOWARDS_MAX_SUMMONS = make("counts_towards_max_summons");
 
     public static MapField<List<String>> ENTITY_PREDICATES = make("entity_predicates");
 

@@ -5,8 +5,6 @@ import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.EntityConfig;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
-import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEntity;
-import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.SummonStat;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
@@ -15,7 +13,6 @@ import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalR
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
-import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.maps.MapData;
 import com.robertx22.age_of_exile.maps.MapItemData;
@@ -28,6 +25,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.utils.EntityUtils;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
@@ -38,13 +36,13 @@ import java.util.Map;
 
 public class MobStatUtils {
 
-    public static List<StatContext> addSummonStats(SummonEntity en) {
+    public static List<StatContext> addSummonStats(TamableAnimal en) {
         List<ExactStatData> stats = new ArrayList<>();
 
         LivingEntity caster = en.getOwner();
 
         if (caster instanceof Player player) {
-            var spell = en.getSourceSpell();
+            var spell = Load.Unit(en).summonedPetData.getSourceSpell();
             var data = Load.player(player).getSpellUnitStats(spell);
 
             for (Map.Entry<String, StatData> e : data.getStats().stats.entrySet()) {
@@ -79,22 +77,8 @@ public class MobStatUtils {
         if (map != null) {
             MapItemData data = map.map;
 
-            float mob_stat_multi = (0.3F * data.tier);
-
-            // todo should mobs have dodge at all?
-            List<Stat> to = new ArrayList<>();
-            to.add(Health.getInstance());
-            to.add(MagicShield.getInstance());
-            to.add(Armor.getInstance());
-            to.add(Stats.TOTAL_DAMAGE.get());
-
-            List<ExactStatData> stats = new ArrayList<>();
-
-            for (Stat stat : to) {
-                stats.add(ExactStatData.noScaling(mob_stat_multi * 100F, ModType.MORE, stat.GUID()));
-            }
-
-            list.add(new MiscStatCtx(stats));
+         
+            list.add(new MiscStatCtx(data.getTierStats()));
         }
 
         return list;

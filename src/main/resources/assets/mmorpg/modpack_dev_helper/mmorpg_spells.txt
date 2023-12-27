@@ -29,6 +29,7 @@ summon_spider
 hunter_potion
 resonance
 execute
+garden_of_thorns
 poison_cloud
 astral_totem
 draconic_blood
@@ -57,7 +58,6 @@ return_summons
 summon_skeleton_army
 entangling_seed
 frost_flower
-nature_balm
 black_hole
 rejuv_totem
 lightning_nova

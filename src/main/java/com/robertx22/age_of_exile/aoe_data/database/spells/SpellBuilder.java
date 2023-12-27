@@ -37,7 +37,9 @@ public class SpellBuilder {
         builder.spell.loc_name = name;
         builder.spell.config.setStyle(style);
 
-        builder.spell.getConfig().tags = tags;
+        builder.spell.getConfig().tags = new ArrayList<>();
+        builder.spell.getConfig().tags.addAll(tags);
+        builder.spell.getConfig().tags.add(style.getTag()); // maybe get rid of style after this
 
         return builder;
     }
@@ -75,13 +77,16 @@ public class SpellBuilder {
         return this;
     }
 
-
-    public SpellBuilder summons(EntityType type, int duration, int amount) {
-        onCast(PartBuilder.justAction(SummonPetAction.SUMMON_PET.create(type, duration, amount)))
+    public SpellBuilder summons(EntityType type, int duration, int amount, SummonType st, boolean countsTowardsMax) {
+        onCast(PartBuilder.justAction(SummonPetAction.SUMMON_PET.create(type, duration, amount, st, countsTowardsMax)))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.WITCH, 200D, 3.5D))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.SOUL, 200D, 3.5D))
                 .onCast(PartBuilder.playSound(SoundEvents.EVOKER_PREPARE_SUMMON, 0.5D, 1D));
         return this;
+    }
+
+    public SpellBuilder summons(EntityType type, int duration, int amount, SummonType st) {
+        return summons(type, duration, amount, st, true);
     }
 
     public SpellBuilder teleportForward() {

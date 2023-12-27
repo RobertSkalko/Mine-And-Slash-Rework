@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.saveclasses.unit;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
+import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
@@ -21,7 +22,7 @@ public class GearData {
             this.gear = StackSaving.GEARS.loadFrom(stack);
         }
         this.slot = slot;
-        
+
 
         calcStatUtilization(data);
     }
@@ -37,11 +38,16 @@ public class GearData {
     }
 
     private void calcStatUtilization(EntityData data) {
-
         if (slot == EquipmentSlot.OFFHAND) {
-            if (gear != null && !gear.GetBaseGearType().getTags().contains(BaseGearType.SlotTag.offhand_family)) {
-                percentStatUtilization = 0;
-                return;
+            if (gear != null) {
+                if (gear.GetBaseGearType().getTags().contains(BaseGearType.SlotTag.offhand_family)) {
+                    percentStatUtilization = 100;
+                }
+                if (gear.GetBaseGearType().weapon_type.can_dual_wield) {
+                    if (gear.GetBaseGearType().getTags().contains(BaseGearType.SlotTag.weapon_family)) {
+                        percentStatUtilization = ServerContainer.get().PERC_OFFHAND_WEP_STAT.get();
+                    }
+                }
             }
         }
     }
@@ -70,8 +76,7 @@ public class GearData {
         BaseGearType type = gear.GetBaseGearType();
 
         if (type.isWeapon()) {
-
-            if (type.isMeleeWeapon()) {
+            if (type.weapon_type.can_dual_wield) {
                 if (slot == EquipmentSlot.OFFHAND) {
                     return true;
                 }

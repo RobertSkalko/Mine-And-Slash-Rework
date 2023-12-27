@@ -50,6 +50,18 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
+    public static DataPackStatAccessor<EmptyAccessor> EFFECT_DURATION_YOU_CAST = DatapackStatBuilder
+            .ofSingle("eff_dur_u_cast", Elements.Physical)
+            .worksWithEvent(ExilePotionEvent.ID)
+            .setPriority(0)
+            .setSide(EffectSides.Source)
+            .addEffect(e -> StatEffects.INCREASE_EFFECT_DURATION)
+            .setLocName(x -> "Effect Duration")
+            .setLocDesc(x -> "")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+            })
+            .build();
 
     public static DataPackStatAccessor<EffectTags> EFFECT_DURATION_YOU_CAST_PER_TAG = DatapackStatBuilder
             .<EffectTags>of(x -> x.name() + "_eff_dur_u_cast", x -> Elements.Physical)
@@ -69,7 +81,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EffectCtx> GIVE_EFFECT_TO_ALLIES_IN_RADIUS = DatapackStatBuilder
             .<EffectCtx>of(x -> "give_" + x.id + "_to_allies_in_aoe", x -> x.element)
             .addAllOfType(Arrays.asList(
-                    ModEffects.REGENERATE
+                    ModEffects.REJUVENATE
             ))
             .worksWithEvent(RestoreResourceEvent.ID) // todo should be tick event, BUT LAG
             .setPriority(0)
@@ -214,7 +226,7 @@ public class Stats implements ExileRegistryInit {
             .worksWithEvent(DamageEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)
-            .addCondition(x -> StatConditions.IS_STYLE.get(x))
+            .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x.getTag()))
             .setUsesMoreMultiplier()
             .addEffect(StatEffects.INCREASE_VALUE)
             .setLocName(x -> x.name + " Damage")
@@ -248,7 +260,7 @@ public class Stats implements ExileRegistryInit {
             .worksWithEvent(DamageEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Target)
-            .addCondition(x -> StatConditions.IS_STYLE.get(x))
+            .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x.getTag()))
             .addEffect(StatEffects.INCREASE_VALUE)
             .setLocName(x -> x.name + " Damage Received")
             .setLocDesc(x -> "Magic damage are mage spells, like fireball.")
@@ -268,7 +280,7 @@ public class Stats implements ExileRegistryInit {
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
-            .addCondition(StatConditions.IS_STYLE.get(PlayStyle.INT))
+            .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTag.magic))
             .addEffect(StatEffects.INCREASE_VALUE)
             .setLocName(x -> x.dmgName + " Spells Damage")
             .setLocDesc(x -> "Increases damage of spells of that element.")
@@ -377,7 +389,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<ResourceType> LEECH_CAP = DatapackStatBuilder
             .<ResourceType>of(x -> x.id + "_leech_cap", x -> Elements.All)
             .addAllOfType(ResourceType.values())
-            .worksWithEvent(DamageEvent.ID)
+            //.worksWithEvent(DamageEvent.ID)
             .setPriority(100)
             .setSide(EffectSides.Source)
             .setLocName(x -> "Max " + x.locname + " Leech Rate")
@@ -439,6 +451,30 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
+
+    public static DataPackStatAccessor<Elements> ELEMENT_CRIT_DAMAGE_TAKEN = DatapackStatBuilder
+            .<Elements>of(x -> x.guidName + "_crit_taken", x -> x)
+            .addAllOfType(Elements.values())
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(100)
+            .setSide(EffectSides.Target)
+            .addCondition(StatConditions.IF_CRIT)
+            .addCondition(StatConditions.ELEMENT_MATCH_STAT)
+            .addEffect(StatEffects.MULTIPLY_VALUE)
+            .setLocName(x -> x.dmgName + " Crit DMG Taken")
+            .setLocDesc(x -> "If Critical of that element, multiply by x")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+                x.base = 0;
+                x.min = 0;
+                x.max = 500;
+                x.group = StatGroup.MAIN;
+
+                x.icon = "\u2694";
+                x.format = ChatFormatting.RED.getName();
+
+            })
+            .build();
 
     public static DataPackStatAccessor<EmptyAccessor> CRIT_DAMAGE = DatapackStatBuilder
             .ofSingle("critical_damage", Elements.Physical)
@@ -809,7 +845,7 @@ public class Stats implements ExileRegistryInit {
             .worksWithEvent(DamageEvent.ID)
             .setPriority(100)
             .setSide(EffectSides.Source)
-            .addCondition(StatConditions.IS_STYLE.get(PlayStyle.INT))
+            .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTag.magic))
             .addCondition(x -> StatConditions.IS_NOT_SUMMON_ATTACK)
             .addEffect(StatEffects.LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.get(ResourceType.health))
             .setLocName(x -> "Spell Lifesteal")
@@ -829,7 +865,7 @@ public class Stats implements ExileRegistryInit {
             .worksWithEvent(DamageEvent.ID)
             .setPriority(100)
             .setSide(EffectSides.Source)
-            .addCondition(StatConditions.IS_STYLE.get(PlayStyle.INT))
+            .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTag.magic))
             .addCondition(x -> StatConditions.IS_NOT_SUMMON_ATTACK)
             .addEffect(StatEffects.LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.get(ResourceType.magic_shield))
             .setLocName(x -> "Spell Magic Shield Steal") // need a better name than this lol
@@ -904,11 +940,11 @@ public class Stats implements ExileRegistryInit {
             .worksWithEvent(SpellStatsCalculationEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)
-            .addCondition(StatConditions.IS_STYLE.get(PlayStyle.INT))
+            .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTag.magic))
             .addEffect(StatEffects.DECREASE_CAST_TIME)
             .addEffect(StatEffects.APPLY_CAST_SPEED_TO_CD)
             .setLocName(x -> "Cast Speed")
-            .setLocDesc(x -> "Affects amount of time needed to cast spells. If the spell is instant, it reduces the cooldown")
+            .setLocDesc(x -> "Affects amount of time needed to cast spells. If the spell is instant, it reduces the cooldown. Only works on spells tagged as Magic")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
                 x.base = 0;
@@ -1149,20 +1185,6 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
-    public static DataPackStatAccessor<EmptyAccessor> DAMAGE_REFLECTED = DatapackStatBuilder
-            .ofSingle("damage_reflected", Elements.Physical)
-            .worksWithEvent(DamageEvent.ID)
-            .setPriority(200)
-            .setSide(EffectSides.Target)
-            .addCondition(StatConditions.IS_ATTACK_OR_SPELL_ATTACK)
-            .addEffect(StatEffects.REFLECT_PERCENT_DAMAGE)
-            .setLocName(x -> "Damage Reflected")
-            .setLocDesc(x -> "Deals a % of damage you receive to enemies that attack you.")
-            .modifyAfterDone(x -> {
-                x.is_perc = true;
-                x.scaling = StatScaling.NONE;
-            })
-            .build();
 
     public static DataPackStatAccessor<EmptyAccessor> THREAT_GENERATED = DatapackStatBuilder
             .ofSingle("threat_generated", Elements.Physical)

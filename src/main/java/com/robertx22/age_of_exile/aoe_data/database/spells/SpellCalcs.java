@@ -124,11 +124,23 @@ public class SpellCalcs {
     public static ValueCalculation WISH = ValueCalcBuilder.of("wish")
             .spellScaling(1, 2)
             .build();
+
     public static ValueCalculation CIRCLE_OF_HEALING = ValueCalcBuilder.of("circle_of_healing")
             .spellScaling(1, 2)
+            .statScaling(Energy.getInstance(), 0.05F, 0.05F)
+            .capScaling(1)
             .build();
-    public static ValueCalculation NATURE_BALM = ValueCalcBuilder.of("nature_balm")
+
+    public static ValueCalculation REJUVENATION = ValueCalcBuilder.of("rejuvenation")
             .spellScaling(0.1F, 0.2F)
+            .statScaling(Energy.getInstance(), 0.1F, 0.1F)
+            .capScaling(1)
+            .build();
+
+    public static ValueCalculation INNER_CALM = ValueCalcBuilder.of("inner_calm")
+            .spellScaling(0.05F, 0.1F)
+            .statScaling(Energy.getInstance(), 0.1F, 0.2F)
+            .capScaling(2)
             .build();
 
     public static ValueCalculation POWER_CHORD = ValueCalcBuilder.of("power_chord")
@@ -229,9 +241,11 @@ public class SpellCalcs {
     public static ValueCalculation BLACK_HOLE = ValueCalcBuilder.of("black_hole")
             .spellScaling(0.5F, 1.5F)
             .build();
+
     public static ValueCalculation THORN_BUSH = ValueCalcBuilder.of("thorn_bush")
             .spellScaling(0.1F, 0.25F)
             .build();
+
     public static ValueCalculation MAGMA_FLOWER = ValueCalcBuilder.of("magma_flower")
             .spellScaling(0.5F, 1F)
             .build();

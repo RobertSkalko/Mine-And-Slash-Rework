@@ -24,6 +24,10 @@ public class DataPackStatEffect implements IStatEffect {
 
     public List<String> events = new ArrayList<>();
 
+    public boolean worksOnEvent(EffectEvent ev) {
+        return events.contains(ev.GUID());
+    }
+
     @Override
     public EffectSides Side() {
         return side;
@@ -37,12 +41,10 @@ public class DataPackStatEffect implements IStatEffect {
     @Override
     public void TryModifyEffect(EffectEvent effect, EffectSides statSource, StatData data, Stat stat) {
 
-        if (events.contains(effect.GUID())) {
-
-            if (ifs.stream()
+        if (ifs.stream()
                 .allMatch(x -> {
                     StatCondition cond = ExileDB.StatConditions()
-                        .get(x);
+                            .get(x);
                     if (cond == null) {
                         return false;
                     }
@@ -50,19 +52,17 @@ public class DataPackStatEffect implements IStatEffect {
                     return istrue;
                 })) {
 
-                effects.forEach(x -> {
-                    StatEffect e = ExileDB.StatEffects()
-                        .get(x);
-                    if (e == null) {
-                        return;
-                    }
-                    e.activate(effect, statSource, data, stat);
+            effects.forEach(x -> {
+                StatEffect e = ExileDB.StatEffects().get(x);
+                if (e == null) {
+                    return;
+                }
+                e.activate(effect, statSource, data, stat);
 
-                });
-
-            }
+            });
 
         }
+
 
     }
 }

@@ -25,6 +25,6 @@ public class IncreaseNumberPerCurseOnTarget extends StatEffect {
 
     @Override
     public Class<? extends StatEffect> getSerClass() {
-        return IncreaseNumberByPercentEffect.class;
+        return IncreaseNumberPerCurseOnTarget.class;
     }
 }

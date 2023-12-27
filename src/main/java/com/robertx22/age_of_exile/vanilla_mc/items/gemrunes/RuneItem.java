@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.vanilla_mc.items.gemrunes;
 
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.IAutoModel;
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.ItemModelManager;
 import com.robertx22.age_of_exile.database.data.StatMod;
@@ -12,17 +11,7 @@ import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.database.data.runes.Rune;
-import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
-import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
-import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.EnergyRegen;
-import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
-import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
-import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
-import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
-import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCapacity;
-import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.SocketData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -32,6 +21,7 @@ import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.vanilla_mc.LuckyRandom;
+import com.robertx22.age_of_exile.vanilla_mc.packets.proxies.OpenGuiWrapper;
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
@@ -50,7 +40,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Supplier;
 
 import static com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils.splitLongText;
 
@@ -83,15 +72,29 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
 
                         @Override
                         public ItemStack modify(LocReqContext ctx, GearItemData gear, ItemStack stack) {
-                            gear.sockets.removeRune();
-
 
                             //todo actually make this based on gear rarities
                             var rune = new SocketData();
+                            boolean add = true;
+                            var opt = gear.sockets.getSocketed().stream().filter(x -> x.isRune() && x.getRune().GUID().equals(RuneItem.this.type.id)).findAny();
+                            if (opt.isPresent()) {
+                                rune = opt.get();
+                                add = false;
+                            }
+
                             rune.g = RuneItem.this.type.id;
                             rune.p = LuckyRandom.randomInt(0, 100, LuckyRandom.LuckyUnlucky.UNLUCKY, 5);
 
-                            gear.sockets.getSocketed().add(rune);
+                            if (add) {
+                                gear.sockets.getSocketed().add(rune);
+                            }
+
+                            if (!gear.sockets.hasRuneWord()) {
+                                var list = ExileDB.RuneWords().getFilterWrapped(x -> x.canApplyOnItem(stack) && x.hasMatchingRunesToCreate(gear)).list;
+                                if (!list.isEmpty()) {
+                                    gear.sockets.setRuneword(list.get(0));
+                                }
+                            }
 
                             gear.saveToStack(stack);
                             return stack;
@@ -119,8 +122,8 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
                 return ExplainedResult.failure(Chats.NOT_FAMILY.locName());
             }
 
-            int runes = (int) data.sockets.getSocketed().stream().filter(x -> x.isRune()).count();
-            var can = data.getEmptySockets() > 0 || runes == 1;
+            int samerunes = (int) data.sockets.getSocketed().stream().filter(x -> x.isRune() && x.getRune().GUID().equals(RuneItem.this.type.id)).count();
+            var can = data.getEmptySockets() > 0 || samerunes == 1;
 
             if (!can) {
                 return ExplainedResult.failure(Chats.NEEDS_EMPTY_OR_RUNE.locName());
@@ -157,13 +160,11 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+
         if (pLevel.isClientSide) {
-            if (pPlayer.isDiscrete()) {
-                ClientOnly.ALLrunewordsScreen(pPlayer);
-            } else {
-                ClientOnly.runewordsScreen(pPlayer);
-            }
+            OpenGuiWrapper.openWikiRunewords();
         }
+
         return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
 
     }
@@ -207,42 +208,6 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
     @Override
     public int Weight() {
         return weight;
-    }
-
-    public enum RuneType {
-        YUN(100, "yun", "Yun", 4, 0.8F, () -> StatPerType.of().addArmor(AuraEffect.getInstance().mod(1, 10).percent())),
-        VEN(100, "ven", "Ven", 4, 0.8F, () -> StatPerType.of().addJewerly(AuraCapacity.getInstance().mod(1, 10))),
-        NOS(1000, "nos", "Nos", 0, 0F, () -> StatPerType.of().addArmor(Health.getInstance().mod(1, 10).percent())),
-        MOS(1000, "mos", "Mos", 0, 0f, () -> StatPerType.of().addArmor(MagicShield.getInstance().mod(1, 10).percent())),
-        ITA(1000, "ita", "Ita", 0, 0f, () -> StatPerType.of().addJewerly(ManaRegen.getInstance().mod(1, 10).percent())),
-        CEN(1000, "cen", "Cen", 1, 0.1F, () -> StatPerType.of().addArmor(Armor.getInstance().mod(1, 10).percent())),
-        FEY(1000, "fey", "Fey", 1, 0.2F, () -> StatPerType.of().addJewerly(EnergyRegen.getInstance().mod(1, 10).percent())),
-        DOS(1000, "dos", "Dos", 1, 0.1F, () -> StatPerType.of().addArmor(DodgeRating.getInstance().mod(1, 10).percent())),
-        ANO(1000, "ano", "Ano", 2, 0.3F, () -> StatPerType.of().addJewerly(HealthRegen.getInstance().mod(1, 10).percent())),
-        TOQ(1000, "toq", "Toq", 2, 0.4F, () -> StatPerType.of().addWeapon(Stats.CRIT_CHANCE.get().mod(5, 15))),
-        ORU(500, "oru", "Oru", 4, 0.6F, () -> StatPerType.of().addWeapon(Stats.CRIT_DAMAGE.get().mod(5, 25))),
-        WIR(200, "wir", "Wir", 4, 0.7F, () -> StatPerType.of().addWeapon(Stats.TOTAL_DAMAGE.get().mod(5, 20))),
-        ENO(1000, "eno", "Eno", 3, 0.5F, () -> StatPerType.of().addArmor(Stats.MANA_COST.get().mod(-2, -8))),
-        HAR(1000, "har", "Har", 3, 0.4f, () -> StatPerType.of().addArmor(Stats.HEAL_STRENGTH.get().mod(3, 15))),
-        XER(1000, "xer", "Xer", 3, 0.5f, () -> StatPerType.of().addArmor(Stats.SUMMON_DAMAGE.get().mod(3, 15)));
-
-        public String id;
-        public String locName;
-        public int tier;
-        public int weight;
-        public float lvlmin;
-
-        public Supplier<StatPerType> stats;
-
-        RuneType(int weight, String id, String locName, int tier, float lvl, Supplier<StatPerType> stats) {
-            this.id = id;
-            this.locName = locName;
-            this.tier = tier;
-            this.weight = weight;
-            this.lvlmin = lvl;
-            this.stats = stats;
-        }
-
     }
 
     public Rune getRune() {

@@ -16,10 +16,9 @@ import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
-import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
-import com.robertx22.age_of_exile.uncommon.localization.Words;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
@@ -188,7 +187,7 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
             //}
 
             list.add(ExileText.emptyLine().get());
-       
+
             list.add(stars());
 
 
@@ -210,7 +209,7 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
             list.add(ExileText.emptyLine().get());
 
-            list.add(Itemtips.SUPPORT_GEM_COST.locName(supp.manaMulti * 100));
+            list.add(Itemtips.SUPPORT_GEM_COST.locName((int) (supp.manaMulti * 100)));
 
             if (supp.isOneOfAKind()) {
                 list.add(Itemtips.SUPPORT_GEM_ONLY_ONE.locName().append(supp.one_of_a_kind + ""));

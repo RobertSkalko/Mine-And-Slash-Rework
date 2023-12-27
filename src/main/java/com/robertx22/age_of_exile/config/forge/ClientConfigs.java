@@ -20,7 +20,7 @@ public class ClientConfigs {
         b.comment("Client Configs")
                 .push("general");
 
-        
+
         SHOW_LOW_ENERGY_MANA_WARNING = b.define("show_low_mana_warning", true);
         RENDER_SIMPLE_MOB_BAR = b.define("render_mob_bar", true);
         RENDER_DEATH_STATISTICS = b.define("render_death_stats", true);
@@ -33,6 +33,7 @@ public class ClientConfigs {
         ENABLE_FLOATING_DMG = b.define("render_floating_damage", true);
         ALIGN_STAT_TOOLTIPS = b.define("ALIGN_STAT_TOOLTIPS", true);
         ENABLE_PHOTON_FX = b.define("enable_photon_fx", false);
+        MODIFY_TOOLTIP_LENGTH = b.define("MODIFY_TOOLTIP_LENGTH", true);
 
         ITEM_RARITY_OPACITY = b.defineInRange("ITEM_RARITY_OPACITY", 0.75F, 0, 1F);
         HEALTH_BAR_GUI_SCALE = b.defineInRange("health_bar_gui_scale", 1.25F, 0, 10F);
@@ -57,6 +58,7 @@ public class ClientConfigs {
     public ForgeConfigSpec.BooleanValue USE_HOTBAR_TOGGLE;
     public ForgeConfigSpec.BooleanValue ONLY_RENDER_MOB_LOOKED_AT;
     public ForgeConfigSpec.BooleanValue ALIGN_STAT_TOOLTIPS;
+    public ForgeConfigSpec.BooleanValue MODIFY_TOOLTIP_LENGTH;
 
     public ForgeConfigSpec.BooleanValue ENABLE_PHOTON_FX;
 

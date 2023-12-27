@@ -33,7 +33,7 @@ public class LootInfo {
 
     public int amount = 0;
     public int level = 0;
-    public int tier = 1;
+    public int map_tier = 0;
 
     public LootOrigin lootOrigin;
     public EntityData mobData;
@@ -161,8 +161,9 @@ public class LootInfo {
 
     private LootInfo setTier() {
         if (map != null) {
-            this.tier = map.map.tier;
+            this.map_tier = map.map.tier;
         }
+        
 
         return this;
 
@@ -193,10 +194,6 @@ public class LootInfo {
                 }
             }
         }
-
-
-        this.tier = LevelUtils.levelToTier(level);
-
 
     }
 

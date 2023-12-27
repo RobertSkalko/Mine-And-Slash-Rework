@@ -29,7 +29,6 @@ import java.util.Map;
 public class WaterSpells implements ExileRegistryInit {
     public static String FROZEN_ORB = "frozen_orb";
     public static String FROST_NOVA_AOE = "frost_nova";
-    public static String WATER_BREATH = "water_breath";
     public static String MAGE_CIRCLE = "mage_circle";
     public static String FROST_ARMOR = "frost_armor";
     public static String TIDAL_STRIKE = "tidal_strike";
@@ -133,7 +132,7 @@ public class WaterSpells implements ExileRegistryInit {
 
                 .manualDesc("Spawn a cloud of bone-chilling frost, damaging enemies for "
                         + SpellCalcs.CHILLING_FIELD.getLocDmgTooltip()
-                        + Elements.Cold.getIconNameDmg() + " every second and applying slow.")
+                        + Elements.Cold.getIconNameDmg() + " every second and applying slow and Bone Chill.")
 
                 .onCast(PartBuilder.playSound(SoundEvents.END_PORTAL_SPAWN, 1D, 1D))
 
@@ -145,14 +144,16 @@ public class WaterSpells implements ExileRegistryInit {
                         .put(MapField.IS_BLOCK_FALLING, false)
                         .put(MapField.SKILL_FX, "chilling_field")))
 
-                .onTick("block", PartBuilder.groundParticles(ParticleTypes.CLOUD, 5D, 3D, 0.2D).hideInFX())
-                .onTick("block", PartBuilder.groundParticles(ParticleTypes.SNOWFLAKE, 30D, 3D, 0.2D).hideInFX())
+                .onTick("block", PartBuilder.groundParticles(ParticleTypes.CLOUD, 5D, 3.5D, 0.2D).hideInFX())
+                .onTick("block", PartBuilder.groundParticles(ParticleTypes.SNOWFLAKE, 30D, 3.5D, 0.2D).hideInFX())
                 .onTick("block", PartBuilder.playSound(SoundEvents.HORSE_BREATHE, 1.1D, 1.5D)
                         .tickRequirement(20D))
-                .onTick("block", PartBuilder.damageInAoe(SpellCalcs.CHILLING_FIELD, Elements.Cold, 3D)
+                .onTick("block", PartBuilder.damageInAoe(SpellCalcs.CHILLING_FIELD, Elements.Cold, 4D)
                         .disableKnockback()
                         .tickRequirement(20D))
-                .onTick("block", PartBuilder.addEffectToEnemiesInAoe(MobEffects.MOVEMENT_SLOWDOWN, 3D, 20D))
+                .onTick("block", PartBuilder.addExileEffectToEnemiesInAoe(ModEffects.BONE_CHILL.resourcePath, 4D, 20 * 8D)
+                        .tickRequirement(20D))
+                .onTick("block", PartBuilder.addEffectToEnemiesInAoe(MobEffects.MOVEMENT_SLOWDOWN, 4D, 20D))
 
                 .levelReq(20)
                 .build();

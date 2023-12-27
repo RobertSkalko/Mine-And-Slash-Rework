@@ -14,7 +14,6 @@ summon_type_is_spider
 effect_has_tag_positive
 is_melee_weapon
 is_day_is_false
-style_is_str
 spell_has_tag_summon
 is_crit_true
 spell_has_tag_weapon_skill
@@ -27,7 +26,7 @@ is_in_combat
 resource_type_is_health
 is_in_combat_is_false
 ele_match_stat
-style_is_dex
+spell_has_tag_thorns
 is_day
 spell_has_tag_staff_spell
 spell_has_tag_movement
@@ -47,6 +46,7 @@ spell_has_tag_projectile
 is_spell
 is_undead
 is_target_low_magic_shield
+spell_has_tag_melee
 threat_gen_type_is_deal_dmg
 is_attack_or_spell_attack
 is_bow_wep_type
@@ -58,7 +58,6 @@ summon_type_is_undead
 restore_type_is_leech
 attack_type_is_dot
 summon_type_is_none
-style_is_int
 spell_has_tag_shout
 effect_has_tag_curse
 resource_type_is_energy
@@ -69,6 +68,7 @@ is_trident_wep_type
 attack_type_is_reflect
 spell_has_tag_totem
 threat_gen_type_is_take_dmg
+spell_has_tag_ranged
 is_projectile
 is_ranged_weapon
 effect_has_tag_immobilizing
