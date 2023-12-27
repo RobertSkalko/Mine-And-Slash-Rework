@@ -4,18 +4,14 @@ import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.GuiAction;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
-import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -37,9 +33,10 @@ public class ToggleAutoSalvageRarity extends GuiAction {
         var text = Component.literal("");
 
         if (Load.player(p).config.salvage.salvages(type, rarity.GUID())) {
-             text = Gui.SALVAGE_TIP_ON.locName(rarity.locName(), type.word.locName()).withStyle(ChatFormatting.GREEN);
+            text = Gui.SALVAGE_TIP_ON.locName(rarity.locName(), type.word.locName()).withStyle(ChatFormatting.GREEN);
         } else {
-             text = Gui.SALVAGE_TIP_OFF.locName(rarity.locName(), type.word.locName()).withStyle(ChatFormatting.RED);;
+            text = Gui.SALVAGE_TIP_OFF.locName(rarity.locName(), type.word.locName()).withStyle(ChatFormatting.RED);
+            ;
 
         }
 
@@ -55,6 +52,11 @@ public class ToggleAutoSalvageRarity extends GuiAction {
         Load.player(p).syncToClient(p);
     }
 
+    @Override
+    public void clientAction(Player p, Object obj) {
+        
+    }
+
     public ResourceLocation getIcon() {
         return SlashRef.id("textures/gui/inv_gui/icons/" + type.name().toLowerCase(Locale.ROOT) + ".png");
     }
@@ -66,7 +68,7 @@ public class ToggleAutoSalvageRarity extends GuiAction {
 
     @Override
     public void saveExtraData(FriendlyByteBuf buf) {
-        
+
     }
 
     @Override

@@ -57,7 +57,7 @@ public class EventData {
     public static String BARRAGE = "barrage";
     public static String PROJECTILE_SPEED_MULTI = "proj_speed";
     public static String BONUS_PROJECTILES = "bonus_proj";
-    public static String DURATION_MULTI = "_duration";
+    public static String DURATION_MULTI = "duration_multi";
 
     private boolean isFrozen = false;
 

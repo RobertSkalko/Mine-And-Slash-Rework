@@ -47,6 +47,11 @@ public abstract class GuiAction<T> implements IGUID {
             }
 
             @Override
+            public void clientAction(Player p, Object obj) {
+                
+            }
+
+            @Override
             public String GUID() {
                 return "empty";
             }
@@ -89,6 +94,8 @@ public abstract class GuiAction<T> implements IGUID {
     public abstract List<Component> getTooltip(Player p);
 
     public abstract void doAction(Player p, Object obj);
+
+    public abstract void clientAction(Player p, Object obj);
 
 
 }

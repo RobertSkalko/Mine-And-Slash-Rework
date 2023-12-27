@@ -163,23 +163,34 @@ public class PerkButton extends ImageButton {
                 .anyMatch(item -> item.getStat().translate().toLowerCase().contains(search.toLowerCase()));
 
 
-        float opacity = containsSearchStat || search.isEmpty() ? 1.0f : 0.2f;
-        if (search.equals("all")) {
-            if (status != PerkStatus.CONNECTED) {
-                opacity = 0.2F;
-            } else {
-                opacity = 1;
+        float opacity = containsSearchStat || search.isEmpty() ? 1F : 0.2f;
+
+        if (!this.search.isEmpty()) {
+            if (search.equals("all")) {
+                if (status != PerkStatus.CONNECTED) {
+                    opacity = 0.2F;
+                } else {
+                    opacity = 1;
+                }
             }
+        } else {
+            opacity = status.getOpacity();
         }
-        gui.setColor(1.0F, 1.0F, 1.0F, opacity);
+
 
         //gui.blit(ID, xPos(0, posMulti), yPos(0, posMulti), perk.getType().getXOffset(), status.getYOffset(), this.width, this.height);
 
         int offcolor = (int) ((perk.getType().height - 20) / 2F);
 
+        gui.setColor(1.0F, 1.0F, 1.0F, opacity);
         gui.blit(perk.getType().getColorTexture(status), xPos(offcolor, posMulti), yPos(offcolor, posMulti), 20, 20, 0, 0, 20, 20, 20, 20);
         gui.blit(perk.getType().getBorderTexture(status), xPos(0, posMulti), yPos(0, posMulti), 0, 0, this.width, this.height, this.width, this.height);
 
+        if (search.isEmpty()) {
+            opacity += 0.2F;
+        }
+
+        gui.setColor(1.0F, 1.0F, 1.0F, MathHelper.clamp(opacity, 0, 1));
 
         gui.blit(perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti), 0, 0, 16, 16, 16, 16);
 

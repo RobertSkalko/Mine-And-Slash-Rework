@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.gui.inv_gui;
 
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.vanilla_mc.packets.InvGuiPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.TextUTIL;
@@ -29,6 +30,7 @@ public class InvGuiButton extends ImageButton {
         super(xPos, yPos, BUTTON_SIZE_X, BUTTON_SIZE_Y, 0, 0, BUTTON_SIZE_Y, TEX, (button) -> {
             if (!data.isEmpty()) {
                 Packets.sendToServer(new InvGuiPacket(data));
+                data.getAction().clientAction(ClientOnly.getPlayer(), data);
             }
 
         });

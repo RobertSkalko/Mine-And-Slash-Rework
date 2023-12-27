@@ -108,6 +108,7 @@ public class StatEffects implements ExileRegistryInit {
 
         //ADD_TO_MAX_SUMMONS.addToSerializables();
         ADD_TOTAL_SUMMONS.addToSerializables();
+        DURATION_INCREASE.addToSerializables();
         SET_BARRAGE.addToSerializables();
         PROJECTILE_COUNT.addToSerializables();
         GIVE_SELF_EFFECT.addToSerializables();

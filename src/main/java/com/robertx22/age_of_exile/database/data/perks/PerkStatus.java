@@ -2,19 +2,20 @@ package com.robertx22.age_of_exile.database.data.perks;
 
 public enum PerkStatus {
 
-    CONNECTED(1, 1), BLOCKED(2, 39), POSSIBLE(4, 113);
+    CONNECTED(1, 1), BLOCKED(2, 0.5F), POSSIBLE(4, 1);
 
     public int order;
 
-    private int yoff;
+    float opacity;
 
-    PerkStatus(int order, int yoff) {
+    PerkStatus(int order, float opacity) {
         this.order = order;
-        this.yoff = yoff;
+        this.opacity = opacity;
     }
 
-    public int getYOffset() {
-        return yoff;
+    public float getOpacity() {
+        return opacity;
     }
+
 
 }

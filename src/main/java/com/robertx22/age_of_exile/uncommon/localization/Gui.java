@@ -18,7 +18,7 @@ public enum Gui implements IAutoLocName {
     MAINHUB_LEVEL("Level: "),
     ENCHANTMENT_LEVEL("Level: "),
     STATS_POINTS("Points: "),
-    TALENT_RESET_POINTS("Reset Points: "),
+    TALENT_RESET_POINTS("Respecs: "),
     TALENT_POINTS("Points: "),
     PASSIVE_POINTS("Passive Points: "),
     SPELL_POINTS("Spell Points: "),

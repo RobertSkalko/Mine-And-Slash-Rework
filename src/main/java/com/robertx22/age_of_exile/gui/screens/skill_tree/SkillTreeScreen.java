@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.*;
 
 public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen {
-    static ResourceLocation BIG_PANEL = new ResourceLocation(SlashRef.MODID, "textures/gui/skill_tree/background.png");
+    static ResourceLocation BIG_PANEL = new ResourceLocation(SlashRef.MODID, "textures/gui/skill_tree/bar.png");
 
     public SchoolType schoolType;
 
@@ -223,6 +223,8 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         super.init();
 
         try {
+
+
             SkillTreeScreen.SEARCH.setFocused(false);
             SkillTreeScreen.SEARCH.setCanLoseFocus(true);
 
@@ -516,42 +518,34 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     private void renderPanels(GuiGraphics gui) {
 
-        int BG_HEIGHT = 38;
         Minecraft mc = Minecraft.getInstance();
 
         RenderSystem.enableDepthTest();
 
-        int BG_WIDTH = 237;
-        int xp = mc.getWindow()
-                .getGuiScaledWidth() / 2 - BG_WIDTH / 2;
+
+        int BG_WIDTH = 256;
+        int BG_HEIGHT = 22;
+
+        int xp = (int) (mc.getWindow().getGuiScaledWidth() / 2F - BG_WIDTH / 2F);
         int yp = 0;
 
-        if (this.schoolsInOrder.size() > 1) {
-            gui.blit(BIG_PANEL, xp, yp, 0, 0, BG_WIDTH, 39);
-        }
+        gui.blit(BIG_PANEL, xp, yp, 0, 0, BG_WIDTH, BG_HEIGHT);
 
         RenderSystem.enableDepthTest();
 
         int savedx = xp;
         int savedy = yp;
 
-        // LEFT
-        xp = savedx;
-        yp = savedy;
 
         MutableComponent text = Gui.TALENT_POINTS.locName().append(String.valueOf(playerData.talents.getFreePoints(Load.Unit(mc.player), this.schoolType)));
 
-        int tx = xp - mc.font.width(text) - 10;
-        int yx = yp + BG_HEIGHT / 2 - mc.font.lineHeight / 2;
+        int yx = 4;
 
-
-        gui.drawString(mc.font, text, tx, yx, ChatFormatting.GREEN.getColor());
-
+        gui.drawString(mc.font, text, savedx + 15, yx, ChatFormatting.YELLOW.getColor());
         text = Gui.TALENT_RESET_POINTS.locName().append(String.valueOf(playerData.talents.reset_points));
+        gui.drawString(mc.font, text, savedx + (BG_WIDTH) - mc.font.width(text) - 15, yx, ChatFormatting.YELLOW.getColor());
 
-        tx = savedx + 10 + BG_WIDTH;
-
-        gui.drawString(mc.font, text, tx, yx, ChatFormatting.GREEN.getColor());
+        int tx = savedx + BG_WIDTH;
         tx = (tx - savedx) / 2 + savedx - SEARCH_WIDTH / 2;
         yx = yx - (SEARCH_HEIGHT - mc.font.lineHeight) / 2;
 
@@ -559,6 +553,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         SkillTreeScreen.SEARCH.setY(yx);
         SkillTreeScreen.SEARCH.render(gui, 0, 0, 0);
         this.addWidget(SkillTreeScreen.SEARCH);
+
     }
 
 }
