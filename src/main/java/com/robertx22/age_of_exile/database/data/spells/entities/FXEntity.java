@@ -1,15 +1,15 @@
-package com.robertx22.age_of_exile.database.data.spells.entities.renders;
+package com.robertx22.age_of_exile.database.data.spells.entities;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
-import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
-import com.robertx22.age_of_exile.database.data.spells.entities.IDatapackSpellEntity;
+import com.robertx22.age_of_exile.database.data.spells.entities.renders.IMyRenderAsItem;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
-import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
+import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.Utilities;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -17,37 +17,36 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
-public class FXEntity extends Entity implements IDatapackSpellEntity {
+public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderAsItem {
 
     CalculatedSpellData spellData;
+    private Boolean followPlayer;
+
+    private Integer lifeSpan;
 
     private static final EntityDataAccessor<CompoundTag> SPELL_DATA = SynchedEntityData.defineId(FXEntity.class, EntityDataSerializers.COMPOUND_TAG);
     private static final EntityDataAccessor<String> ENTITY_NAME = SynchedEntityData.defineId(FXEntity.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Integer> DEATH_TIME = SynchedEntityData.defineId(FXEntity.class, EntityDataSerializers.INT);
 
-
-    protected boolean onExpireProc(LivingEntity caster) {
-        return true;
+    public FXEntity(EntityType<? extends Entity> type, Level worldIn) {
+        super(SlashEntities.FX_ENTITY.get(), worldIn);
+        this.lifeSpan = 0;
+        this.followPlayer = false;
     }
 
-    @Override
-    public Iterable<ItemStack> getArmorSlots() {
-        return new ArrayList<>();
-    }
-
-    @Override
-    public void setItemSlot(EquipmentSlot slotIn, ItemStack stack) {
-
+    public FXEntity(Level world) {
+        this(SlashEntities.FX_ENTITY.get(), world);
     }
 
     @Override
@@ -64,12 +63,16 @@ public class FXEntity extends Entity implements IDatapackSpellEntity {
         this.entityData.set(DEATH_TIME, newVal);
     }
 
-    public FXEntity(EntityType<? extends Entity> type, Level worldIn) {
-        super(type, worldIn);
+    public void setFollowPlayer() {
+        this.followPlayer = true;
     }
 
+    protected void tickDespawn() {
+        ++this.lifeSpan;
+        if (this.lifeSpan >= getDeathTime()) {
+            this.remove(RemovalReason.KILLED);
+        }
 
-    public void onTick() {
     }
 
     @Override
@@ -89,8 +92,9 @@ public class FXEntity extends Entity implements IDatapackSpellEntity {
 
 
     @Override
-    public final void tick() {
+    public void tick() {
 
+        tickDespawn();
         if (this.removeNextTick) {
             this.remove(RemovalReason.KILLED);
             return;
@@ -104,24 +108,17 @@ public class FXEntity extends Entity implements IDatapackSpellEntity {
         }
 
         if (this.getSpellData() == null || getCaster() == null) {
-            if (tickCount > 100) {
+            if (lifeSpan > 100) {
                 this.scheduleRemoval();
             }
             return;
         }
 
-        try {
-            onTick();
 
-
-            if (this.tickCount >= this.getDeathTime()) {
-                onExpireProc(this.getCaster());
-                this.scheduleRemoval();
-                return;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            this.scheduleRemoval();
+        if (this.followPlayer != null && this.followPlayer){
+            var casterPos = this.getCaster().position();
+            var updatePos = new Vec3(casterPos.x, this.getCaster().getEyeY() - 0.2D, casterPos.z);
+            this.setPos(updatePos);
         }
 
     }
@@ -226,26 +223,33 @@ public class FXEntity extends Entity implements IDatapackSpellEntity {
 
     @Override
     public void init(LivingEntity caster, CalculatedSpellData data, MapHolder holder) {
-        this.holder = holder;
-        this.spellData = data;
+        try {
+            this.holder = holder;
+            this.spellData = data;
+            
+            this.setNoGravity(!holder.getOrDefault(MapField.GRAVITY, true));
+            this.setDeathTime(holder.get(MapField.LIFESPAN_TICKS)
+                    .intValue());
 
+            this.checkInsideBlocks();
+            this.followPlayer = holder.getOrDefault(MapField.FOLLOW_PLAYER, false);
 
-        this.setNoGravity(!holder.getOrDefault(MapField.GRAVITY, true));
-        this.setDeathTime(holder.get(MapField.LIFESPAN_TICKS)
-                .intValue());
+            this.speed = holder.getOrDefault(MapField.PROJECTILE_SPEED, 1D).floatValue();
 
-        this.checkInsideBlocks();
+            CompoundTag nbt = new CompoundTag();
+            nbt.putString("spell", GSON.toJson(spellData));
+            entityData.set(SPELL_DATA, nbt);
 
+            String name = holder.get(MapField.ENTITY_NAME);
+            entityData.set(ENTITY_NAME, name);
 
-        this.speed = holder.getOrDefault(MapField.PROJECTILE_SPEED, 1D).floatValue();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-        data.data.setString(EventData.ITEM_ID, holder.get(MapField.ITEM));
-        CompoundTag nbt = new CompoundTag();
-        nbt.putString("spell", GSON.toJson(spellData));
-        entityData.set(SPELL_DATA, nbt);
-
-        String name = holder.get(MapField.ENTITY_NAME);
-        entityData.set(ENTITY_NAME, name);
-
+    @Override
+    public ItemStack getItem() {
+        return Items.AIR.getDefaultInstance();
     }
 }

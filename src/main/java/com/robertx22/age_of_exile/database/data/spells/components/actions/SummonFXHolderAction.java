@@ -6,14 +6,15 @@ import com.lowdragmc.photon.client.fx.FXHelper;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
-import com.robertx22.age_of_exile.database.data.spells.entities.renders.FXEntity;
+import com.robertx22.age_of_exile.database.data.spells.entities.FXEntity;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellUtils;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
@@ -41,13 +42,17 @@ public class SummonFXHolderAction extends SpellAction {
             Vec3 finalPos = new Vec3(pos.x, pos.y + addY, pos.z);
 
             Level world = ctx.caster.level();
-            FXEntity en = (FXEntity) entity.get().create(world);
-            en.setPos(finalPos);
+
+            FXEntity en = new FXEntity(world);
+            SpellUtils.initSpellEntity(en, ctx.caster, ctx.calculatedSpellData, data);
+                en.setPos(finalPos);
+
             if(FXEnable && data.has(MapField.SKILL_FX)){
                 FX fx = FXHelper.getFX(data.getSkillFXResourceLocation());
                 new EntityEffect(fx, ctx.world, en).start();
             }
-            SpellUtils.initSpellEntity(en, ctx.caster, ctx.calculatedSpellData, data);
+
+            ctx.world.addFreshEntity(en);
 
         }
 
