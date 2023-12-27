@@ -148,3 +148,4 @@ v.5.3.9
 - talent tree makeover
 - fix totem duration stat
 - tweaked pet targetting
+- maps now gen larger radius around you but limit generation to 3 chunks per tick (will this help, not sure)

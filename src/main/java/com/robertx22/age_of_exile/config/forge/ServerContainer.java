@@ -131,13 +131,16 @@ public class ServerContainer {
                         try {
                             String[] array = x.split(":");
                             ResourceLocation id = new ResourceLocation(array[0], array[1]);
-                            GearSlot slot = ExileDB.GearSlots()
-                                    .get(array[2]);
                             Item item = ForgeRegistries.ITEMS.getValue(id);
+
                             if (item != Items.AIR && item != null) {
-                                if (slot != null && !slot.GUID()
-                                        .isEmpty()) {
-                                    cachedCompatMap.put(item, slot);
+                                if (!ExileDB.GearSlots().isRegistered(array[2])) {
+                                    cachedCompatMap.put(item, null); // if invalid, make the item have no gear type, this was requested as a way to blacklist
+                                } else {
+                                    GearSlot slot = ExileDB.GearSlots().get(array[2]);
+                                    if (slot != null && !slot.GUID().isEmpty()) {
+                                        cachedCompatMap.put(item, slot);
+                                    }
                                 }
                             }
                         } catch (Exception e) {

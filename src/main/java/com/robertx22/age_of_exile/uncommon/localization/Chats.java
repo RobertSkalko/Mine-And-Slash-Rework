@@ -2,11 +2,16 @@ package com.robertx22.age_of_exile.uncommon.localization;
 
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
-import net.minecraft.ChatFormatting;
 
 import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
+    NO_DUPLICATE_AURA("You can't equip duplicate aura gems."),
+    LACK_AURA_CAPACITY("You lack the aura capacity to equip all these auras."),
+
+    CANT_EQUIP_THAT_MANY_SUPPORTS("You can't equip that many Support Gems! You can increase the number of slots by leveling the skill."),
+    CANT_USE_MULTIPLE_SAME_SUPPORTS("You can't use Multiples of those Support Gems."),
+
     NONE_MAGE("Non Mage weapons can use."),
     ANY_ITEM("Any weapon can use."),
     REQUIRE_MELEE("Requires Melee weapon to use."),

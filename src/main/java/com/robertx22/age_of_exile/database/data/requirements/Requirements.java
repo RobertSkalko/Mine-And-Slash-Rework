@@ -42,8 +42,7 @@ public class Requirements implements ITooltipList {
         return true;
     }
 
-    public static List<ISerializablePart> possible = Arrays.asList(
-            new SlotRequirement(), new TagRequirement());
+    public static List<ISerializablePart> possible = Arrays.asList(new TagRequirement());
 
     @Override
     public List<MutableComponent> GetTooltipString(TooltipInfo info) {

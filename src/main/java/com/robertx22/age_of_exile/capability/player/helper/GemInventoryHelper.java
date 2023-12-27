@@ -8,8 +8,8 @@ import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.AuraStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
-import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -163,7 +163,7 @@ public class GemInventoryHelper {
                 PlayerUtils.giveItem(s.copy(), p);
                 s.shrink(100);
             }
-            p.sendSystemMessage(ExileText.ofText("You lack the aura capacity to equip all these auras.").get());
+            p.sendSystemMessage(Chats.LACK_AURA_CAPACITY.locName());
         }
 
         if (hasDuplicates()) {
@@ -171,7 +171,7 @@ public class GemInventoryHelper {
                 PlayerUtils.giveItem(s.copy(), p);
                 s.shrink(100);
             }
-            p.sendSystemMessage(ExileText.ofText("You can't equip duplicate aura gems.").get());
+            p.sendSystemMessage(Chats.NO_DUPLICATE_AURA.locName());
         }
     }
 

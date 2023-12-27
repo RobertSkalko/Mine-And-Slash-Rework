@@ -69,12 +69,8 @@ public class GearSlot implements JsonExileRegistry<GearSlot>, IAutoGson<GearSlot
             return CACHED.get(item);
         }
 
-        if (ServerContainer.get()
-                .getCompatMap()
-                .containsKey(item)) {
-            CACHED.put(item, ServerContainer.get()
-                    .getCompatMap()
-                    .get(item));
+        if (ServerContainer.get().getCompatMap().containsKey(item)) {
+            CACHED.put(item, ServerContainer.get().getCompatMap().get(item));
             return CACHED.get(item);
         }
 

@@ -29,7 +29,7 @@ public class ProfExpBestiary extends BestiaryGroup {
 
                     tip.add(p.locName().withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD));
 
-                    tip.add(Component.literal(so.exp + " Exp"));
+                    tip.add(Words.Exp.locName().append(": " + so.exp));
                     tip.add(TooltipUtils.tier(en.getKey()));
                     tip.add(Component.literal(so.id));
 

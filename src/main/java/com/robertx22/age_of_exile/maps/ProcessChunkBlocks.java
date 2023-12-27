@@ -94,16 +94,7 @@ public class ProcessChunkBlocks {
                             builder.build();
                             BuiltRoom room = builder.builtDungeon.getRoomForChunk(cpos);
 
-                            /*
-                            DungeonBuilder test = new DungeonBuilder(0, cpos);
-                            test.build();
-
-                            if (!test.builtDungeon.equals(builder.builtDungeon)) {
-                                System.out.println("sdsdsd");
-                            }
-
-                             */
-
+                          
                             var ran = DungeonBuilder.createRandom(0l, cpos);
 
                             for (LeagueMechanic mech : opt.get().map.getLeagueMechanics()) {
