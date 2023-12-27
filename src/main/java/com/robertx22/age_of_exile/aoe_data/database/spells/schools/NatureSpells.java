@@ -123,14 +123,16 @@ public class NatureSpells implements ExileRegistryInit {
                         "Refreshes all your cooldowns by 1 minute.")
 
                 .weaponReq(CastingWeapon.ANY_WEAPON)
-                .onCast(PartBuilder.playSound(SlashSounds.FREEZE.get(), 1D, 1D))
+                .onCast(PartBuilder.playSound(SlashSounds.REFRESH.get(), 1D, 1D))
 
                 .onCast(PartBuilder.justAction(SpellAction.REFRESH_COOLDOWNS_BY_X_TICKS.create(20 * 60D))
                         .addTarget(TargetSelector.CASTER.create()))
-
-                .onCast(PartBuilder.aoeParticles(ParticleTypes.FALLING_WATER, 100D, 1.5D))
-                .onCast(PartBuilder.aoeParticles(ParticleTypes.DRIPPING_WATER, 50D, 1.5D))
-                .onCast(PartBuilder.aoeParticles(ParticleTypes.EFFECT, 50D, 1.5D))
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_FX_HOLDER.createFXHolder(60D, "fireball")
+                        .put(MapField.FOLLOW_PLAYER, true)
+                ))
+                .onCast(PartBuilder.aoeParticles(ParticleTypes.FALLING_WATER, 100D, 1.5D).hideInFX())
+                .onCast(PartBuilder.aoeParticles(ParticleTypes.DRIPPING_WATER, 50D, 1.5D).hideInFX())
+                .onCast(PartBuilder.aoeParticles(ParticleTypes.EFFECT, 50D, 1.5D).hideInFX())
                 .levelReq(30)
                 .build();
 
