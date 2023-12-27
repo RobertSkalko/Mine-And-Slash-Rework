@@ -10,8 +10,8 @@ import com.robertx22.age_of_exile.database.data.spells.entities.FXEntity;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellUtils;
+import com.robertx22.age_of_exile.database.data.spells.spell_fx.PlayerEffect;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -36,6 +36,7 @@ public class SummonFXHolderAction extends SpellAction {
         if (!ctx.world.isClientSide) {
             Optional<EntityType<?>> entity = EntityType.byString(data.get(MapField.FX_ENTITY));
 
+
             Vec3 pos = ctx.caster.position();
             Double addY = data.getOrDefault(MapField.HEIGHT, 0D);
 
@@ -43,16 +44,25 @@ public class SummonFXHolderAction extends SpellAction {
 
             Level world = ctx.caster.level();
 
-            FXEntity en = new FXEntity(world);
-            SpellUtils.initSpellEntity(en, ctx.caster, ctx.calculatedSpellData, data);
-                en.setPos(finalPos);
+            if (FXEnable && data.has(MapField.SKILL_FX)) {
 
-            if(FXEnable && data.has(MapField.SKILL_FX)){
                 FX fx = FXHelper.getFX(data.getSkillFXResourceLocation());
-                new EntityEffect(fx, ctx.world, en).start();
+
+                if(data.getOrDefault(MapField.IS_PLAYER_EFFECT, false) && ctx.caster instanceof Player){
+                    //yeah I'm lazy.
+                    var heightChange = data.getOrDefault(MapField.PLAYER_EFFECT_HEIGHT_CHANGE, 0D);
+                    var maxLife = data.getOrDefault(MapField.PLAYER_EFFECT_MAX_LIFE, 60);
+                    new PlayerEffect(fx, ctx.world, (Player) ctx.caster, heightChange, maxLife).start();
+                } else {
+                    FXEntity en = new FXEntity(world);
+                    SpellUtils.initSpellEntity(en, ctx.caster, ctx.calculatedSpellData, data);
+                    en.setPos(finalPos);
+                    new EntityEffect(fx, ctx.world, en).start();
+                    ctx.world.addFreshEntity(en);
+                }
             }
 
-            ctx.world.addFreshEntity(en);
+
 
         }
 

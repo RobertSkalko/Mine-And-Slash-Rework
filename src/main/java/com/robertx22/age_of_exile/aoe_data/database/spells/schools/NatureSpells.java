@@ -128,8 +128,8 @@ public class NatureSpells implements ExileRegistryInit {
 
                 .onCast(PartBuilder.justAction(SpellAction.REFRESH_COOLDOWNS_BY_X_TICKS.create(20 * 60D))
                         .addTarget(TargetSelector.CASTER.create()))
-                .onCast(PartBuilder.justAction(SpellAction.SUMMON_FX_HOLDER.createFXHolder(60D, "fireball")
-                        .put(MapField.FOLLOW_PLAYER, true)
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_FX_HOLDER.createFXHolder(60D, "refresh")
+                        .put(MapField.IS_PLAYER_EFFECT, true)
                 ))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.FALLING_WATER, 100D, 1.5D).hideInFX())
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.DRIPPING_WATER, 50D, 1.5D).hideInFX())

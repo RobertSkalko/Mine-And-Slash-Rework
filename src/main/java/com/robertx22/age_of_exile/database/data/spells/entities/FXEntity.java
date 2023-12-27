@@ -31,8 +31,6 @@ import java.util.UUID;
 public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderAsItem {
 
     CalculatedSpellData spellData;
-    private Boolean followPlayer;
-
     private Integer lifeSpan;
 
     private static final EntityDataAccessor<CompoundTag> SPELL_DATA = SynchedEntityData.defineId(FXEntity.class, EntityDataSerializers.COMPOUND_TAG);
@@ -42,7 +40,6 @@ public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderA
     public FXEntity(EntityType<? extends Entity> type, Level worldIn) {
         super(SlashEntities.FX_ENTITY.get(), worldIn);
         this.lifeSpan = 0;
-        this.followPlayer = false;
     }
 
     public FXEntity(Level world) {
@@ -63,9 +60,6 @@ public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderA
         this.entityData.set(DEATH_TIME, newVal);
     }
 
-    public void setFollowPlayer() {
-        this.followPlayer = true;
-    }
 
     protected void tickDespawn() {
         ++this.lifeSpan;
@@ -111,14 +105,6 @@ public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderA
             if (lifeSpan > 100) {
                 this.scheduleRemoval();
             }
-            return;
-        }
-
-
-        if (this.followPlayer != null && this.followPlayer){
-            var casterPos = this.getCaster().position();
-            var updatePos = new Vec3(casterPos.x, this.getCaster().getEyeY() - 0.2D, casterPos.z);
-            this.setPos(updatePos);
         }
 
     }
@@ -226,13 +212,12 @@ public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderA
         try {
             this.holder = holder;
             this.spellData = data;
-            
+
             this.setNoGravity(!holder.getOrDefault(MapField.GRAVITY, true));
             this.setDeathTime(holder.get(MapField.LIFESPAN_TICKS)
                     .intValue());
 
             this.checkInsideBlocks();
-            this.followPlayer = holder.getOrDefault(MapField.FOLLOW_PLAYER, false);
 
             this.speed = holder.getOrDefault(MapField.PROJECTILE_SPEED, 1D).floatValue();
 
