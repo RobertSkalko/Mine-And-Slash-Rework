@@ -18,5 +18,6 @@ public class SlashSounds {
     public static RegObj<SoundEvent> BUFF = Def.sound("buff");
     public static RegObj<SoundEvent> FIRE = Def.sound("fire");
     public static RegObj<SoundEvent> BURN = Def.sound("burn");
+    public static RegObj<SoundEvent> REFRESH = Def.sound("refresh");
 
 }
