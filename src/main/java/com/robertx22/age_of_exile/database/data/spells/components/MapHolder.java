@@ -58,8 +58,7 @@ public class MapHolder {
     }
 
     public ExileEffect getExileEffect() {
-        return ExileDB.ExileEffects()
-                .get(get(EXILE_POTION_ID));
+        return ExileDB.ExileEffects().get(get(EXILE_POTION_ID));
     }
 
     // todo test if this works

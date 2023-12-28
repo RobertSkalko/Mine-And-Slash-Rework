@@ -14,3 +14,4 @@ v.5.3.9
 - you now lose half of your rested xp on death
 - tweaked some regen base stats
 - reworked a lot of TAG CODE, datapack devs warning
+- chained spells now do less dmg per chain, up to configurable minimum
