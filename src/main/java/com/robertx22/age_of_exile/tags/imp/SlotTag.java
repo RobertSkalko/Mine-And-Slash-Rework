@@ -26,4 +26,9 @@ public class SlotTag extends NormalModTag {
     public ModTag fromString(String s) {
         return new SlotTag(s);
     }
+
+    @Override
+    public TagType getTagType() {
+        return TagType.GearSlot;
+    }
 }

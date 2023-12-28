@@ -66,7 +66,7 @@ public class StatCalculation {
 
         Cached.VANILLA_STAT_UIDS_TO_CLEAR_EVERY_STAT_CALC.forEach(x -> {
             AttributeInstance in = entity.getAttribute(x.left);
-            if (in.getModifier(x.right) != null) {
+            if (in != null && in.getModifier(x.right) != null) {
                 in.removeModifier(x.right);
             }
         });

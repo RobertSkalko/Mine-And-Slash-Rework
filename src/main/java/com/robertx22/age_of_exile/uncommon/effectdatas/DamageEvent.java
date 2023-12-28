@@ -313,6 +313,7 @@ public class DamageEvent extends EffectEvent {
             });
         }
 
+
         AttributeInstance attri = target.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
 
         if (data.getBoolean(EventData.DISABLE_KNOCKBACK) || this.getAttackType() == AttackType.dot) {
@@ -321,10 +322,7 @@ public class DamageEvent extends EffectEvent {
             }
         }
 
-        DamageSource dmgsource = new DamageSource(source.level().registryAccess().registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(DAMAGE_TYPE), source);
-
-
-        // todo MyDamageSource dmgsource = new MyDamageSource(ds, source, getElement(), dmg);
+        DamageSource dmgsource = new DamageSource(source.level().registryAccess().registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(DAMAGE_TYPE), source, source, source.position());
 
 
         if (this.data.isSpellEffect()) {

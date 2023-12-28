@@ -27,4 +27,9 @@ public class EffectTag extends NormalModTag {
     public ModTag fromString(String s) {
         return new EffectTag(s);
     }
+
+    @Override
+    public TagType getTagType() {
+        return TagType.Effect;
+    }
 }

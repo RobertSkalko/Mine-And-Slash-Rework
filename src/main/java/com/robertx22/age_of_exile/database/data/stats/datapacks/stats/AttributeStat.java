@@ -64,10 +64,12 @@ public class AttributeStat extends BaseDatapackStat {
 
         AttributeInstance atri = en.getAttribute(attribute);
 
-        if (atri.hasModifier(mod)) {
-            atri.removeModifier(mod); // KEEP THIS OR UPDATE WONT MAKE HP CORRECT!!!
+        if (atri != null) {
+            if (atri.hasModifier(mod)) {
+                atri.removeModifier(mod); // KEEP THIS OR UPDATE WONT MAKE HP CORRECT!!!
+            }
+            atri.addPermanentModifier(mod);
         }
-        atri.addPermanentModifier(mod);
 
     }
 }

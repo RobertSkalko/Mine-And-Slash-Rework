@@ -8,8 +8,7 @@ import java.util.List;
 public enum AttackType {
 
     hit("hit", "Hit") {},
-    dot("dot", "DOT") {},
-    reflect("reflect", "Reflect") {};
+    dot("dot", "DOT") {};
     // all("all", "Any") {};
 
     public static List<AttackType> getAllUsed() {
@@ -34,23 +33,7 @@ public enum AttackType {
         return this == hit;
     }
 
-    /*
-
-    public boolean isDot() {
-        return this == dot;
-    }
-
-    public boolean matches(AttackType other) {
-
-        if (other == all || this == all) {
-            return true;
-        }
-
-        return this == other;
-    }
-
-
-     */
+ 
     public String locname;
 
 }

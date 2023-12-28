@@ -60,9 +60,14 @@ public abstract class StatCondition implements JsonExileRegistry<StatCondition>,
         }
 
         StatCondition t = null;
+        try {
+            t = null;
 
-        t = GSON.fromJson(json, SERIALIZERS.get(ser).getSerClass());
-        t.onLoadedFromJson();
+            t = GSON.fromJson(json, SERIALIZERS.get(ser).getSerClass());
+            t.onLoadedFromJson();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
 
         return t;

@@ -2,8 +2,8 @@ package com.robertx22.age_of_exile.tags;
 
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.library_of_exile.registry.IGUID;
-import org.codehaus.plexus.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,8 +22,10 @@ public abstract class ModTag implements IAutoLocName, IGUID {
         return tag;
     }
 
-    
+
     public abstract ModTag fromString(String s);
+
+    public abstract TagType getTagType();
 
     @Override
     public AutoLocGroup locNameGroup() {
@@ -32,12 +34,12 @@ public abstract class ModTag implements IAutoLocName, IGUID {
 
     @Override
     public String locNameLangFileGUID() {
-        return SlashRef.MODID + ".tag." + GUID();
+        return SlashRef.MODID + ".tag." + getTagType().id + "." + GUID();
     }
 
     @Override
     public String locNameForLangFile() {
-        return StringUtils.capitalise(GUID().replaceAll("_", " "));
+        return StringUTIL.capitalise(GUID().replaceAll("_", " "));
     }
 
 

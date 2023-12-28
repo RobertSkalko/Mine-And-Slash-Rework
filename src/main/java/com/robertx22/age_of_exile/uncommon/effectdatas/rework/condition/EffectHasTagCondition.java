@@ -8,11 +8,11 @@ import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 
 public class EffectHasTagCondition extends StatCondition {
 
-    ModTag tag;
+    String tag;
 
     public EffectHasTagCondition(ModTag tag) {
         super("effect_has_tag_" + tag.GUID(), "effect_has_tag");
-        this.tag = tag;
+        this.tag = tag.GUID();
     }
 
     EffectHasTagCondition() {
@@ -22,7 +22,7 @@ public class EffectHasTagCondition extends StatCondition {
     @Override
     public boolean can(EffectEvent event, EffectSides statSource, StatData data, Stat stat) {
         if (event.data.hasExileEffect()) {
-            return event.data.getExileEffect().hasTag(tag.GUID());
+            return event.data.getExileEffect().hasTag(tag);
         }
         return false;
     }

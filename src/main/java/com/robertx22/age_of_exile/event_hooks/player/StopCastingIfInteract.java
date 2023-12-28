@@ -13,9 +13,8 @@ public class StopCastingIfInteract {
             return;
         }
         var data = Load.player(player);
-        
-        if (data.spellCastingData
-                .isCasting()) {
+
+        if (data.spellCastingData.isCasting()) {
             data.spellCastingData.cancelCast(player);
             data.syncToClient(player);
         }
