@@ -4,7 +4,6 @@ import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffe
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.components.conditions.EffectCondition;
@@ -14,6 +13,7 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeap
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashSounds;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -46,7 +46,7 @@ public class WaterSpells implements ExileRegistryInit {
         SpellBuilder.of(FROZEN_ORB, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 30)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Frozen orb",
-                        Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.area))
+                        Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.area))
                 .manualDesc(
                         "Throw out an orb of ice which slowly moves towards enemies and deals " + SpellCalcs.ICEBALL.getLocDmgTooltip()
                                 + " " + Elements.Cold.getIconNameDmg() + " in an area.")
@@ -70,7 +70,7 @@ public class WaterSpells implements ExileRegistryInit {
 
         SpellBuilder.of(FROST_FLOWER, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 60)
                                 .setSwingArm(), "Frost Totem",
-                        Arrays.asList(SpellTag.damage, SpellTag.area, SpellTag.totem))
+                        Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.totem))
                 .manualDesc("Summon a frost totem that deals "
                         + SpellCalcs.FROST_FLOWER.getLocDmgTooltip(Elements.Cold) + " in an area every second.")
 
@@ -98,7 +98,7 @@ public class WaterSpells implements ExileRegistryInit {
 
         SpellBuilder.of(ICE_COMET, PlayStyle.INT, SpellConfiguration.Builder.instant(18, 20).setChargesAndRegen(ICE_COMET, 3, 20 * 20),
                         "Ice Comet",
-                        Arrays.asList(SpellTag.area, SpellTag.damage)
+                        Arrays.asList(SpellTags.area, SpellTags.damage)
                 )
                 .manualDesc("Summon a meteor that falls from the sky, dealing " +
                         SpellCalcs.ICE_COMET.getLocDmgTooltip(Elements.Cold))
@@ -125,7 +125,7 @@ public class WaterSpells implements ExileRegistryInit {
 
         SpellBuilder.of(CHILLING_FIELD, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 30)
                                 .setSwingArm(), "Chilling Field",
-                        Arrays.asList(SpellTag.damage, SpellTag.area))
+                        Arrays.asList(SpellTags.damage, SpellTags.area))
                 .weaponReq(CastingWeapon.ANY_WEAPON)
 
                 .manualDesc("Spawn a cloud of bone-chilling frost, damaging enemies for "
@@ -159,7 +159,7 @@ public class WaterSpells implements ExileRegistryInit {
         SpellBuilder.of(HEART_OF_ICE, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 10)
                                 .setChargesAndRegen(HEART_OF_ICE, 3, 20 * 30)
                         , "Heart of Ice",
-                        Arrays.asList(SpellTag.heal))
+                        Arrays.asList(SpellTags.heal))
                 .manualDesc(
                         "Heal allies around you for " + SpellCalcs.HEART_OF_ICE.getLocDmgTooltip() +
                                 " health.")
@@ -174,7 +174,7 @@ public class WaterSpells implements ExileRegistryInit {
 
 
         SpellBuilder.of(MAGE_CIRCLE, PlayStyle.INT, SpellConfiguration.Builder.instant(10, 20 * 45)
-                        , "Mage Circle", Arrays.asList(SpellTag.movement))
+                        , "Mage Circle", Arrays.asList(SpellTags.movement))
 
                 .manualDesc(
                         "Summon a Magic Circle. Standing in it increases your damage." +
@@ -203,7 +203,7 @@ public class WaterSpells implements ExileRegistryInit {
 
         SpellBuilder.of(TIDAL_STRIKE, PlayStyle.STR, SpellConfiguration.Builder.instant(8, 12)
                                 .setSwingArm(), "Tidal Strike",
-                        Arrays.asList(SpellTag.weapon_skill, SpellTag.area, SpellTag.damage))
+                        Arrays.asList(SpellTags.weapon_skill, SpellTags.area, SpellTags.damage))
                 .manualDesc("Strike enemies in front of you for " + SpellCalcs.TIDAL_STRIKE.getLocDmgTooltip(Elements.Cold))
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.TRIDENT_THROW, 1D, 1D))
@@ -218,7 +218,7 @@ public class WaterSpells implements ExileRegistryInit {
 
 
         SpellBuilder.of(FROST_NOVA_AOE, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 25 * 20), "Frost Nova",
-                        Arrays.asList(SpellTag.area, SpellTag.damage))
+                        Arrays.asList(SpellTags.area, SpellTags.damage))
                 .manualDesc(
                         "Explode with frost around you, dealing " + SpellCalcs.FROST_NOVA.getLocDmgTooltip()
                                 + " " + Elements.Cold.getIconNameDmg() + " to nearby enemies.")

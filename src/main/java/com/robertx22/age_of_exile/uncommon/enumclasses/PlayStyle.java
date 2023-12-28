@@ -1,9 +1,11 @@
 package com.robertx22.age_of_exile.uncommon.enumclasses;
 
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
-import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
+import com.robertx22.age_of_exile.tags.all.SlotTags;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
+import com.robertx22.age_of_exile.tags.imp.SlotTag;
+import com.robertx22.age_of_exile.tags.imp.SpellTag;
 
 public enum PlayStyle {
 
@@ -15,12 +17,12 @@ public enum PlayStyle {
 
         @Override
         public SpellTag getTag() {
-            return SpellTag.melee;
+            return SpellTags.melee;
         }
 
         @Override
-        public BaseGearType.SlotTag getJewelAffixTag() {
-            return BaseGearType.SlotTag.jewel_str;
+        public SlotTag getJewelAffixTag() {
+            return SlotTags.jewel_str;
         }
     },
     DEX("dex", "Ranged") {
@@ -31,12 +33,12 @@ public enum PlayStyle {
 
         @Override
         public SpellTag getTag() {
-            return SpellTag.ranged; // todo maybe call it technique
+            return SpellTags.ranged; // todo maybe call it technique
         }
 
         @Override
-        public BaseGearType.SlotTag getJewelAffixTag() {
-            return BaseGearType.SlotTag.jewel_dex;
+        public SlotTag getJewelAffixTag() {
+            return SlotTags.jewel_dex;
         }
     },
     INT("int", "Magic") {
@@ -47,12 +49,12 @@ public enum PlayStyle {
 
         @Override
         public SpellTag getTag() {
-            return SpellTag.magic;
+            return SpellTags.magic;
         }
 
         @Override
-        public BaseGearType.SlotTag getJewelAffixTag() {
-            return BaseGearType.SlotTag.jewel_int;
+        public SlotTag getJewelAffixTag() {
+            return SlotTags.jewel_int;
         }
     };
 
@@ -64,7 +66,7 @@ public enum PlayStyle {
 
     public abstract SpellTag getTag();
 
-    public abstract BaseGearType.SlotTag getJewelAffixTag();
+    public abstract SlotTag getJewelAffixTag();
 
     public static PlayStyle fromID(String id) {
         for (PlayStyle value : values()) {

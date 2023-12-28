@@ -4,8 +4,6 @@ import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
-import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDuration;
@@ -24,6 +22,8 @@ import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.age_of_exile.database.data.stats.types.summon.GolemSpellChance;
 import com.robertx22.age_of_exile.database.data.stats.types.summon.SummonHealth;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
+import com.robertx22.age_of_exile.tags.all.EffectTags;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -116,7 +116,7 @@ public class GameChangerPerksAddtl implements ExileRegistryInit {
         );
 
         PerkBuilder.gameChanger("collateral", "Collateral",
-                new OptScaleExactStat(20, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.weapon_skill), ModType.MORE),
+                new OptScaleExactStat(20, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.weapon_skill), ModType.MORE),
                 new OptScaleExactStat(-50, Stats.INCREASED_AREA.get(), ModType.FLAT)
         );
 
@@ -136,7 +136,7 @@ public class GameChangerPerksAddtl implements ExileRegistryInit {
 
         PerkBuilder.gameChanger("wandering_bard", "Wandering Bard",
                 new OptScaleExactStat(50, Stats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.song), ModType.FLAT),
-                new OptScaleExactStat(33, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTag.song), ModType.FLAT),
+                new OptScaleExactStat(33, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.song), ModType.FLAT),
                 new OptScaleExactStat(-50, Stats.EFFECT_DURATION_YOU_CAST_PER_TAG.get(EffectTags.song), ModType.FLAT)
         );
 
@@ -158,14 +158,14 @@ public class GameChangerPerksAddtl implements ExileRegistryInit {
         );
 
         PerkBuilder.gameChanger("performer", "Performer",
-                new OptScaleExactStat(20, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.song), ModType.MORE),
+                new OptScaleExactStat(20, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.song), ModType.MORE),
                 new OptScaleExactStat(-10, Stats.CAST_SPEED.get(), ModType.FLAT)
         );
 
         PerkBuilder.gameChanger("heretic", "Heretic",
-                new OptScaleExactStat(50, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTag.totem), ModType.MORE),
+                new OptScaleExactStat(50, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.totem), ModType.MORE),
                 new OptScaleExactStat(20, Stats.TOTEM_DURATION.get(), ModType.MORE),
-                new OptScaleExactStat(-50, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.weapon_skill), ModType.FLAT)
+                new OptScaleExactStat(-50, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.weapon_skill), ModType.FLAT)
         );
 
         PerkBuilder.gameChanger("necromantic_defenses", "Necromantic Defenses",

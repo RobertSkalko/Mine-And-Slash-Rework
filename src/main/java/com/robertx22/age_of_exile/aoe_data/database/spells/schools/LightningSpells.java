@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.aoe_data.database.spells.schools;
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
@@ -11,6 +10,7 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeap
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -32,7 +32,7 @@ public class LightningSpells implements ExileRegistryInit {
         SpellBuilder.of(CHAIN_LIGHTNING, PlayStyle.INT, SpellConfiguration.Builder.instant(25, 20)
                                 .setChargesAndRegen("chain_lightning", 3, 20 * 10)
                                 .applyCastSpeedToCooldown(), "Chain Lightning",
-                        Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.chaining))
+                        Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.chaining))
                 .manualDesc(
                         "Strike enemies with chaining lightning that deals " + SpellCalcs.LIGHTNING_SPEAR.getLocDmgTooltip()
                                 + " " + Elements.Lightning.getIconNameDmg())
@@ -54,7 +54,7 @@ public class LightningSpells implements ExileRegistryInit {
                                 .setSwingArm()
                                 .setChargesAndRegen("lightning_spear", 3, 20 * 5)
                                 .applyCastSpeedToCooldown(), "Lightning Spear",
-                        Arrays.asList(SpellTag.projectile, SpellTag.damage))
+                        Arrays.asList(SpellTags.projectile, SpellTags.damage))
                 .manualDesc(
                         "Throw out an electric spear, dealing " + SpellCalcs.LIGHTNING_SPEAR.getLocDmgTooltip()
                                 + " " + Elements.Lightning.getIconNameDmg())
@@ -74,7 +74,7 @@ public class LightningSpells implements ExileRegistryInit {
 
 
         SpellBuilder.of(LIGHTNING_NOVA, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 25 * 10), "Lightning Nova",
-                        Arrays.asList(SpellTag.area, SpellTag.damage))
+                        Arrays.asList(SpellTags.area, SpellTags.damage))
                 .manualDesc(
                         "Deal " + SpellCalcs.LIGHNING_NOVA.getLocDmgTooltip()
                                 + " " + Elements.Lightning.getIconNameDmg() + " to nearby enemies.")
@@ -92,7 +92,7 @@ public class LightningSpells implements ExileRegistryInit {
 
         SpellBuilder.of(LIGHTNING_TOTEM, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 60)
                                 .setSwingArm(), "Lightning Totem",
-                        Arrays.asList(SpellTag.damage, SpellTag.area, SpellTag.totem))
+                        Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.totem))
                 .manualDesc("Summon a lightning totem that deals "
                         + SpellCalcs.LIGHTNING_TOTEM.getLocDmgTooltip(Elements.Lightning) + " in an area every second.")
 

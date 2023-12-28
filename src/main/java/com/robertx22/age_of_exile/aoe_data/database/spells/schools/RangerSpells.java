@@ -4,7 +4,6 @@ import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffe
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.*;
 import com.robertx22.age_of_exile.database.data.spells.components.conditions.EffectCondition;
@@ -16,6 +15,7 @@ import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashPotions;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
@@ -59,7 +59,7 @@ public class RangerSpells implements ExileRegistryInit {
         SpellBuilder.of(ARROW_TOTEM, PlayStyle.DEX, SpellConfiguration.Builder.instant(25, 10)
                                 .setChargesAndRegen("arrow_totem", 3, 20 * 30)
                                 .applyCastSpeedToCooldown(), "Arrow Totem",
-                        Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.totem))
+                        Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.totem))
 
                 .manualDesc("Summons a totem that rapidly shoots arrows, dealing " + SpellCalcs.ARROW_TOTEM.getLocDmgTooltip(Elements.Physical))
 
@@ -90,7 +90,7 @@ public class RangerSpells implements ExileRegistryInit {
         SpellBuilder.of(BOOMERANG, PlayStyle.DEX, SpellConfiguration.Builder.instant(10, 20 * 5)
                                 .setChargesAndRegen("boomerang", 3, 20 * 10)
                                 .applyCastSpeedToCooldown(), "Boomerang",
-                        Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.chaining))
+                        Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.chaining))
                 .manualDesc("Strike enemies with a projectile that deals " + SpellCalcs.BOOMERANG.getLocDmgTooltip(Elements.Physical))
 
                 .onCast(PartBuilder.playSound(SoundEvents.ALLAY_THROW, 1D, 1D))
@@ -106,7 +106,7 @@ public class RangerSpells implements ExileRegistryInit {
 
 
         SpellBuilder.of(HUNTER_POTION, PlayStyle.DEX, SpellConfiguration.Builder.instant(0, 60 * 20 * 3), "Hunter's Potion",
-                        Arrays.asList(SpellTag.heal)
+                        Arrays.asList(SpellTags.heal)
                 )
                 .manualDesc("Drink a potion, healing you for " + SpellCalcs.HUNTER_POTION_HEAL.getLocDmgTooltip() + " health.")
                 .weaponReq(CastingWeapon.ANY_WEAPON)
@@ -139,7 +139,7 @@ public class RangerSpells implements ExileRegistryInit {
 
                                 .setChargesAndRegen("dash", 3, 20 * 30)
                         , "Dash",
-                        Arrays.asList(SpellTag.movement, SpellTag.weapon_skill))
+                        Arrays.asList(SpellTags.movement, SpellTags.weapon_skill))
                 .manualDesc(
                         "Dash forwards quickly and gain slowfall.")
                 .weaponReq(CastingWeapon.NON_MAGE_WEAPON)
@@ -153,7 +153,7 @@ public class RangerSpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(CHARGED_BOLT, PlayStyle.DEX, SpellConfiguration.Builder.arrowSpell(8, 20 * 15), "Charged Bolt",
-                        Arrays.asList(SpellTag.projectile, SpellTag.area, SpellTag.damage))
+                        Arrays.asList(SpellTags.projectile, SpellTags.area, SpellTags.damage))
 
                 .manualDesc(
                         "Shoot a slowing charged arrow that goes through enemies and deals "
@@ -191,7 +191,7 @@ public class RangerSpells implements ExileRegistryInit {
 
         // todo does this do anything?
         SpellBuilder.of(ARROW_STORM, PlayStyle.DEX, SpellConfiguration.Builder.arrowSpell(20, 20 * 25), "Arrow Storm",
-                        Arrays.asList(SpellTag.projectile, SpellTag.damage))
+                        Arrays.asList(SpellTags.projectile, SpellTags.damage))
                 .weaponReq(CastingWeapon.RANGED)
                 .manualDesc("Shoot out arrows in an arc, dealing " + SpellCalcs.ARROW_STORM.getLocDmgTooltip(Elements.Physical))
                 .onCast(PartBuilder.playSound(SoundEvents.ARROW_SHOOT, 1D, 1D))
@@ -204,7 +204,7 @@ public class RangerSpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(GALE_WIND, PlayStyle.DEX, SpellConfiguration.Builder.multiCast(20, 20 * 10, 10, 3), "Gale Wind",
-                        Arrays.asList(SpellTag.projectile, SpellTag.damage))
+                        Arrays.asList(SpellTags.projectile, SpellTags.damage))
                 .manualDesc("Summons multiple clouds, knocking back and dealing " + SpellCalcs.GALE_WIND.getLocDmgTooltip(Elements.Physical))
                 .onCast(PartBuilder.playSound(SoundEvents.EGG_THROW, 1D, 0.5D))
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.AIR, 5D, 0.5D, SlashEntities.SIMPLE_PROJECTILE.get(), 40D, false)))
@@ -222,7 +222,7 @@ public class RangerSpells implements ExileRegistryInit {
 
         SpellBuilder.of(BARRAGE, PlayStyle.DEX, SpellConfiguration.Builder.multiCast(20, 20, 20, 10)
                                 .setChargesAndRegen(BARRAGE, 3, 20 * 10), "Arrow Barrage",
-                        Arrays.asList(SpellTag.projectile, SpellTag.damage))
+                        Arrays.asList(SpellTags.projectile, SpellTags.damage))
 
                 .weaponReq(CastingWeapon.RANGED)
                 .manualDesc("Shoot out arrows in rapid succession, dealing " + SpellCalcs.ARROW_STORM.getLocDmgTooltip(Elements.Physical))
@@ -237,7 +237,7 @@ public class RangerSpells implements ExileRegistryInit {
 
 
         SpellBuilder.of(EXPLOSIVE_ARROW_ID, PlayStyle.DEX, SpellConfiguration.Builder.arrowSpell(10, 20 * 10), "Explosive Arrow",
-                        Arrays.asList(SpellTag.projectile, SpellTag.damage))
+                        Arrays.asList(SpellTags.projectile, SpellTags.damage))
                 .weaponReq(CastingWeapon.RANGED)
                 .manualDesc("Shoot an arrow that upon impact, deals " + SpellCalcs.EXPLOSIVE_ARROW.getLocDmgTooltip(Elements.Fire) + " in an area")
                 .onCast(PartBuilder.playSound(SoundEvents.ARROW_SHOOT, 1D, 1D))
@@ -252,7 +252,7 @@ public class RangerSpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(RECOIL_SHOT, PlayStyle.DEX, SpellConfiguration.Builder.arrowSpell(10, 20 * 10), "Recoil Shot",
-                        Arrays.asList(SpellTag.projectile, SpellTag.damage))
+                        Arrays.asList(SpellTags.projectile, SpellTags.damage))
                 .weaponReq(CastingWeapon.RANGED)
                 .manualDesc("Flip backwards while shooting an arrow that deals " + SpellCalcs.EXPLOSIVE_ARROW.getLocDmgTooltip(Elements.Fire) + " and applies Wounds in an area.")
                 .onCast(PartBuilder.playSound(SoundEvents.ARROW_SHOOT, 1D, 1D))
@@ -268,7 +268,7 @@ public class RangerSpells implements ExileRegistryInit {
 
         SpellBuilder.of(METEOR_ARROW, PlayStyle.DEX, SpellConfiguration.Builder.arrowSpell(15, 10)
                                 .setChargesAndRegen("meteor_arrow", 3, 20 * 10), "Meteor Arrow",
-                        Arrays.asList(SpellTag.projectile, SpellTag.area, SpellTag.damage))
+                        Arrays.asList(SpellTags.projectile, SpellTags.area, SpellTags.damage))
                 .weaponReq(CastingWeapon.RANGED)
                 .manualDesc("Shoots an arrow that deals "
                         + SpellCalcs.METEOR.getLocDmgTooltip(Elements.Physical)
@@ -312,7 +312,7 @@ public class RangerSpells implements ExileRegistryInit {
         return SpellBuilder.of(id, PlayStyle.DEX, SpellConfiguration.Builder.instant(7, 5)
                                 .setChargesAndRegen(id, 3, 20 * 30)
                                 .setSwingArm(), name,
-                        Arrays.asList(SpellTag.damage, SpellTag.area, SpellTag.trap))
+                        Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.trap))
                 .manualDesc(
                         "Throw out a trap that stays on the ground and activates when an enemy approaches to deal "
                                 + dmg.getLocDmgTooltip() + element.getIconNameDmg() + " in area around itself."

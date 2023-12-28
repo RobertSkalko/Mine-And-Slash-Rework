@@ -1,8 +1,10 @@
 package com.robertx22.age_of_exile.maps.mobs;
 
 
-import com.robertx22.age_of_exile.database.data.gear_types.bases.TagList;
 import com.robertx22.age_of_exile.maps.generator.BuiltRoom;
+import com.robertx22.age_of_exile.tags.TagList;
+import com.robertx22.age_of_exile.tags.all.MobTags;
+import com.robertx22.age_of_exile.tags.imp.MobTag;
 import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.world.entity.EntityType;
@@ -33,7 +35,7 @@ public class SpawnedMob implements IWeighted {
 
          */
     }
-    
+
 
     // todo make this into data
     public static List<SpawnedMob> getAll() {
@@ -64,32 +66,12 @@ public class SpawnedMob implements IWeighted {
 
     }
 
-    public enum MobTags implements TagList.ITagString {
-
-        RANGED("ranged"),
-        SPIDER("spider"),
-        NETHER("nether"),
-        FIRE("fire"),
-        UNDEAD("undead");
-
-        String id;
-
-        MobTags(String id) {
-            this.id = id;
-        }
-
-        @Override
-        public String getTagId() {
-            return id;
-        }
-    }
-
 
     public EntityType<? extends Mob> type;
 
     int weight = 1000;
 
-    public TagList tags = new TagList();
+    public TagList<MobTag> tags = new TagList<>();
 
     public boolean canBeBoss = false; // todo replace this with ACTUAL bosses!!!!
 

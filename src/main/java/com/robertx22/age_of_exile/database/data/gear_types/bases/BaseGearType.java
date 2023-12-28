@@ -9,6 +9,8 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequirement;
+import com.robertx22.age_of_exile.tags.TagList;
+import com.robertx22.age_of_exile.tags.all.SlotTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
@@ -25,7 +27,6 @@ import net.minecraft.world.item.Item;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseGearType>, IAutoGson<BaseGearType> {
@@ -122,19 +123,19 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
 
     public final EquipmentSlot getVanillaSlotType() {
 
-        if (tags.contains(SlotTag.shield)) {
+        if (tags.contains(SlotTags.shield)) {
             return EquipmentSlot.OFFHAND;
         }
-        if (tags.contains(SlotTag.boots)) {
+        if (tags.contains(SlotTags.boots)) {
             return EquipmentSlot.FEET;
         }
-        if (tags.contains(SlotTag.chest)) {
+        if (tags.contains(SlotTags.chest)) {
             return EquipmentSlot.CHEST;
         }
-        if (tags.contains(SlotTag.pants)) {
+        if (tags.contains(SlotTags.pants)) {
             return EquipmentSlot.LEGS;
         }
-        if (tags.contains(SlotTag.helmet)) {
+        if (tags.contains(SlotTags.helmet)) {
             return EquipmentSlot.HEAD;
         }
         if (isWeapon()) {
@@ -163,78 +164,11 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
 
     public final boolean isMeleeWeapon() {
         return this.getTags()
-                .contains(SlotTag.melee_weapon);
+                .contains(SlotTags.melee_weapon);
     }
 
     public boolean isShield() {
-        return getTags().contains(SlotTag.shield);
-    }
-
-    public enum SlotTag implements TagList.ITagString {
-
-        sword(SlotFamily.Weapon),
-        //staff(SlotFamily.Weapon),
-        staff(SlotFamily.Weapon),
-        hammer(SlotFamily.Weapon),
-        spear(SlotFamily.Weapon),
-        axe(SlotFamily.Weapon),
-        bow(SlotFamily.Weapon),
-        crossbow(SlotFamily.Weapon),
-
-        boots(SlotFamily.Armor),
-        helmet(SlotFamily.Armor),
-        pants(SlotFamily.Armor),
-        chest(SlotFamily.Armor),
-
-        necklace(SlotFamily.Jewelry),
-        ring(SlotFamily.Jewelry),
-
-        shield(SlotFamily.OffHand),
-        tome(SlotFamily.OffHand),
-        totem(SlotFamily.OffHand),
-
-        mage_weapon(SlotFamily.NONE), melee_weapon(SlotFamily.NONE), ranged_weapon(SlotFamily.NONE),
-
-        armor_stat(SlotFamily.NONE),
-        magic_shield_stat(SlotFamily.NONE),
-        dodge_stat(SlotFamily.NONE),
-
-        warrior_casting_weapon(SlotFamily.Weapon),
-        ranger_casting_weapon(SlotFamily.Weapon),
-
-        weapon_family(SlotFamily.NONE),
-        armor_family(SlotFamily.NONE),
-        jewelry_family(SlotFamily.NONE),
-        offhand_family(SlotFamily.NONE),
-
-        enchantment(SlotFamily.NONE),
-
-        any_jewel(SlotFamily.NONE),
-        jewel_str(SlotFamily.NONE),
-        jewel_dex(SlotFamily.NONE),
-        jewel_int(SlotFamily.NONE),
-        crafted_jewel_unique(SlotFamily.NONE),
-
-        tool(SlotFamily.NONE),
-        mining_tool(SlotFamily.NONE),
-        farming_tool(SlotFamily.NONE),
-        husbandry_tool(SlotFamily.NONE),
-        fishing_tool(SlotFamily.NONE),
-
-        intelligence(SlotFamily.NONE),
-        dexterity(SlotFamily.NONE),
-        strength(SlotFamily.NONE);
-
-        // todo is this needed public SlotFamily family = SlotFamily.NONE;
-
-        SlotTag(SlotFamily family) {
-            //    this.family = family;
-        }
-
-        @Override
-        public String getTagId() {
-            return name().toLowerCase(Locale.ROOT);
-        }
+        return getTags().contains(SlotTags.shield);
     }
 
     public final SlotFamily family() {
@@ -261,7 +195,7 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
     }
 
     public final boolean isMageWeapon() {
-        return getTags().contains(SlotTag.mage_weapon);
+        return getTags().contains(SlotTags.mage_weapon);
     }
 
     @Override

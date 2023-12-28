@@ -1,9 +1,9 @@
 package com.robertx22.age_of_exile.saveclasses.jewel;
 
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
-import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.AffixData;
+import com.robertx22.age_of_exile.tags.all.SlotTags;
 import net.minecraft.world.item.ItemStack;
 
 public class UniqueJewelData {
@@ -38,7 +38,7 @@ public class UniqueJewelData {
         if (tier.addsAffix) {// make all rarity upgrades add to affixes, whatever, if its too op, nerf the affixes
 
             Affix affix = ExileDB.Affixes().getFilterWrapped(x -> {
-                return x.getAllTagReq().contains(BaseGearType.SlotTag.crafted_jewel_unique.getTagId());
+                return x.getAllTagReq().contains(SlotTags.crafted_jewel_unique.GUID());
             }).random();
 
             var affixdata = new AffixData(Affix.Type.jewel);

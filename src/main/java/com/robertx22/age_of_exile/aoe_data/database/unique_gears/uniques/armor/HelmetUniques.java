@@ -7,7 +7,6 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueRarityTier;
 import com.robertx22.age_of_exile.database.data.StatMod;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentResistance;
 import com.robertx22.age_of_exile.database.data.stats.types.gear_base.GearDefense;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
@@ -17,6 +16,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCapacity;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -66,7 +66,7 @@ public class HelmetUniques implements ExileRegistryInit {
                 .stats(Arrays.asList(
                         new StatMod(10, 25, AuraCapacity.getInstance(), ModType.FLAT),
                         new StatMod(10, 10, AuraEffect.getInstance(), ModType.FLAT),
-                        new StatMod(5, 15, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.beast), ModType.FLAT),
+                        new StatMod(5, 15, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.beast), ModType.FLAT),
                         new StatMod(1, 1, Stats.MAX_SUMMON_CAPACITY.get(), ModType.FLAT)
                 ))
                 .build();

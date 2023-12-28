@@ -2,9 +2,11 @@ package com.robertx22.age_of_exile.aoe_data.database.stat_conditions;
 
 import com.robertx22.age_of_exile.aoe_data.DataHolder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SummonType;
-import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
+import com.robertx22.age_of_exile.tags.ModTag;
+import com.robertx22.age_of_exile.tags.TagType;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
+import com.robertx22.age_of_exile.tags.imp.SpellTag;
 import com.robertx22.age_of_exile.uncommon.effectdatas.ThreatGenType;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
@@ -43,8 +45,8 @@ public class StatConditions implements ExileRegistryInit {
     public static StatCondition IS_NOT_SUMMON_ATTACK = new IsBooleanTrueCondition(EventData.IS_SUMMON_ATTACK).flipCondition();
 
 
-    public static DataHolder<EffectTags, StatCondition> EFFECT_HAS_TAG = new DataHolder<>(
-            EffectTags.values()
+    public static DataHolder<ModTag, StatCondition> EFFECT_HAS_TAG = new DataHolder<>(
+            ModTag.MAP.get(TagType.Effect)
             , x -> new EffectHasTagCondition(x));
 
     public static DataHolder<ResourceType, StatCondition> IS_RESOURCE = new DataHolder<>(
@@ -56,7 +58,7 @@ public class StatConditions implements ExileRegistryInit {
             , x -> new StringMatchesCondition(EventData.THREAT_GEN_TYPE, x.name()));
 
     public static DataHolder<SpellTag, StatCondition> SPELL_HAS_TAG = new DataHolder<>(
-            SpellTag.values()
+            SpellTag.getAll()
             , x -> new SpellHasTagCondition(x));
 
 
@@ -90,7 +92,7 @@ public class StatConditions implements ExileRegistryInit {
 
 
     public static StatCondition IS_ANY_PROJECTILE = new EitherIsTrueCondition("is_projectile",
-            Arrays.asList(SPELL_HAS_TAG.get(SpellTag.projectile).GUID(), IS_RANGED_WEAPON.GUID()));
+            Arrays.asList(SPELL_HAS_TAG.get(SpellTags.projectile).GUID(), IS_RANGED_WEAPON.GUID()));
 
     public static DataHolder<AttackType, StatCondition> ATTACK_TYPE_MATCHES = new DataHolder<>(
             AttackType.values()

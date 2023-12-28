@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.saveclasses.jewel;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
-import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
@@ -15,6 +14,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.AffixData;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
+import com.robertx22.age_of_exile.tags.all.SlotTags;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
@@ -53,7 +53,7 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
 
         for (int i = 0; i < num; i++) {
             Affix affix = ExileDB.Affixes().getFilterWrapped(x -> {
-                return x.getAllTagReq().contains(BaseGearType.SlotTag.any_jewel.getTagId()) || x.getAllTagReq().contains(getStyle().getJewelAffixTag().getTagId());
+                return x.getAllTagReq().contains(SlotTags.any_jewel.GUID()) || x.getAllTagReq().contains(getStyle().getJewelAffixTag().GUID());
             }).random();
 
             var data = new AffixData(Affix.Type.jewel);

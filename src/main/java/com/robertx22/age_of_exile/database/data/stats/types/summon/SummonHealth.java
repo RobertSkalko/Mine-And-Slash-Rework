@@ -1,12 +1,12 @@
 package com.robertx22.age_of_exile.database.data.stats.types.summon;
 
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageIncreaseEffect;
 import com.robertx22.age_of_exile.database.data.stats.types.SummonStat;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
@@ -64,7 +64,7 @@ public class SummonHealth extends SummonStat {
     private static class Effect extends BaseDamageIncreaseEffect {
         @Override
         public boolean canActivate(DamageEvent effect, StatData data, Stat stat) {
-            return effect.isSpell() && effect.getSpell().config.tags.contains(SpellTag.minion_explode);
+            return effect.isSpell() && effect.getSpell().config.tags.contains(SpellTags.minion_explode);
         }
     }
 }

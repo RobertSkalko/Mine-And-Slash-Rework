@@ -2,9 +2,10 @@ package com.robertx22.age_of_exile.aoe_data.database.affixes;
 
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
-import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.requirements.Requirements;
 import com.robertx22.age_of_exile.database.data.requirements.TagRequirement;
+import com.robertx22.age_of_exile.tags.ModTag;
+import com.robertx22.age_of_exile.tags.TagType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +21,7 @@ public class GenericAffixBuilder<T> {
     int weight = 1000;
     Affix.Type type;
 
-    TagRequirement tagRequirement = new TagRequirement();
+    TagRequirement tagRequirement = new TagRequirement(TagType.GearSlot, new ArrayList<>(), new ArrayList<>());
 
     Function<T, String> guid;
     Function<T, List<StatMod>> stats;
@@ -43,16 +44,16 @@ public class GenericAffixBuilder<T> {
         return this;
     }
 
-    public GenericAffixBuilder<T> includesTags(BaseGearType.SlotTag... tags) {
+    public GenericAffixBuilder<T> includesTags(ModTag... tags) {
         this.tagRequirement.included.addAll(Arrays.stream(tags)
-                .map(x -> x.name())
+                .map(x -> x.GUID())
                 .collect(Collectors.toList()));
         return this;
     }
 
-    public GenericAffixBuilder<T> excludesTags(BaseGearType.SlotTag... tags) {
+    public GenericAffixBuilder<T> excludesTags(ModTag... tags) {
         this.tagRequirement.excluded.addAll(Arrays.stream(tags)
-                .map(x -> x.name())
+                .map(x -> x.GUID())
                 .collect(Collectors.toList()));
         return this;
     }
@@ -73,7 +74,7 @@ public class GenericAffixBuilder<T> {
         return this;
     }
 
-  
+
     public GenericAffixBuilder<T> Implicit() {
         type = Affix.Type.implicit;
         return this;

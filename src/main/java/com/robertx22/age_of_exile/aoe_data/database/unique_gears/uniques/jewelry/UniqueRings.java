@@ -6,7 +6,7 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuilder;
 import com.robertx22.age_of_exile.database.data.StatMod;
-import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
+import com.robertx22.age_of_exile.tags.all.EffectTags;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttributes;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;

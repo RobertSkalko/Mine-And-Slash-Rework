@@ -6,7 +6,6 @@ import com.robertx22.age_of_exile.database.data.currency.base.Currency;
 import com.robertx22.age_of_exile.database.data.currency.base.GearCurrency;
 import com.robertx22.age_of_exile.database.data.currency.base.GearOutcome;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
-import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.database.data.profession.ICreativeTabTiered;
@@ -16,6 +15,7 @@ import com.robertx22.age_of_exile.database.data.requirements.bases.GearRequested
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.GearEnchantData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
+import com.robertx22.age_of_exile.tags.all.SlotTags;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
@@ -88,7 +88,7 @@ public class CraftedEnchantItem extends AutoItem implements IItemAsCurrency, ICr
 
                                 // todo test this
                                 Affix affix = ExileDB.Affixes().getFilterWrapped(x -> {
-                                    return x.type == Affix.Type.enchant && x.requirements.satisfiesAllRequirements(new GearRequestedFor(gear)) && x.getAllTagReq().contains(BaseGearType.SlotTag.enchantment.getTagId());
+                                    return x.type == Affix.Type.enchant && x.requirements.satisfiesAllRequirements(new GearRequestedFor(gear)) && x.getAllTagReq().contains(SlotTags.enchantment.GUID());
                                 }).random();
 
                                 en.en = affix.GUID();

@@ -3,13 +3,14 @@ package com.robertx22.age_of_exile.aoe_data.database.spells.impl;
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.components.conditions.EffectCondition;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
+import com.robertx22.age_of_exile.tags.imp.SpellTag;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
@@ -28,6 +29,7 @@ public class TotemSpells implements ExileRegistryInit {
     public static String HEAL_TOTEM_ID = "rejuv_totem";
     public static String GUARD_TOTEM_ID = "guard_totem";
 
+    
     SpellBuilder of(Block block, String id, SpellConfiguration config, String name, List<SpellTag> tags, SimpleParticleType particle) {
 
         return SpellBuilder.of(id, PlayStyle.STR, config, name, tags)
@@ -66,7 +68,7 @@ public class TotemSpells implements ExileRegistryInit {
  */
 
         of(SlashBlocks.BLUE_TOTEM.get(), MANA_TOTEM_ID, SpellConfiguration.Builder.instant(18, 20 * 30), "Astral Totem",
-                Arrays.asList(SpellTag.totem, SpellTag.area), ParticleTypes.WITCH)
+                Arrays.asList(SpellTags.totem, SpellTags.area), ParticleTypes.WITCH)
                 .manualDesc(
                         "Summon a totem which restores " + SpellCalcs.TOTEM_MANA.getLocDmgTooltip() + " mana to allies around it."
                 )
@@ -75,7 +77,7 @@ public class TotemSpells implements ExileRegistryInit {
                 .build();
 
         of(SlashBlocks.GREEN_TOTEM.get(), HEAL_TOTEM_ID, SpellConfiguration.Builder.instant(18, 20 * 30), "Rejuvenating Totem",
-                Arrays.asList(SpellTag.totem, SpellTag.area), ParticleTypes.HAPPY_VILLAGER)
+                Arrays.asList(SpellTags.totem, SpellTags.area), ParticleTypes.HAPPY_VILLAGER)
 
                 .manualDesc(
                         "Summon a totem which restores " + SpellCalcs.TOTEM_HEAL.getLocDmgTooltip() + " health to allies around it."

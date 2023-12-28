@@ -156,9 +156,9 @@ publishMods {
 
     file = jar.archiveFile
     changelog = file("CHANGELOG.txt").text
-    type = BETA
+    type = STABLE
     modLoaders.add("forge")
-    
+
     curseforge {
         accessToken = file("key.properties").text
         projectId = "${curse_id}"

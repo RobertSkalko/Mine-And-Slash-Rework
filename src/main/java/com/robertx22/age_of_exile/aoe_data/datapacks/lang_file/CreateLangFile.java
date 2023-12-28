@@ -1,10 +1,10 @@
 package com.robertx22.age_of_exile.aoe_data.datapacks.lang_file;
 
 import com.robertx22.age_of_exile.capability.player.data.PlayerBuffData;
-import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.tags.ModTag;
+import com.robertx22.age_of_exile.tags.TagType;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.localization.Formatter;
@@ -144,8 +144,10 @@ public class CreateLangFile {
         list.addAll(Arrays.asList(Itemtips.values()));
         list.addAll(Arrays.asList(Specialaffixs.values()));
         //
-        list.addAll(Arrays.asList(SpellTag.values()));
-        list.addAll(Arrays.asList(EffectTags.values()));
+
+        for (Map.Entry<TagType, List<ModTag>> entry : ModTag.MAP.entrySet()) {
+            list.addAll(entry.getValue());
+        }
         //
         list.addAll(Arrays.asList(GemItem.GemType.values()));
         list.addAll(Arrays.asList(GemItem.GemRank.values()));

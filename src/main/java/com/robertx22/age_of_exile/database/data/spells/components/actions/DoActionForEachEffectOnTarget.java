@@ -1,12 +1,12 @@
 package com.robertx22.age_of_exile.database.data.spells.components.actions;
 
-import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
 import com.robertx22.age_of_exile.database.data.spells.components.ComponentPart;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.tags.imp.EffectTag;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -35,9 +35,9 @@ public class DoActionForEachEffectOnTarget extends SpellAction {
             for (LivingEntity x : targets) {
 
                 for (String k : Load.Unit(x)
-                    .getStatusEffectsData().exileMap.keySet()) {
+                        .getStatusEffectsData().exileMap.keySet()) {
                     ExileEffect eff = ExileDB.ExileEffects()
-                        .get(k);
+                            .get(k);
                     if (eff.hasTag(tag)) {
                         amount++;
                     }
@@ -54,10 +54,10 @@ public class DoActionForEachEffectOnTarget extends SpellAction {
         }
     }
 
-    public MapHolder create(String action, EffectTags tag) {
+    public MapHolder create(String action, EffectTag tag) {
         MapHolder c = new MapHolder();
         c.put(MapField.SPECIFIC_ACTION, action);
-        c.put(MapField.EFFECT_TAG, tag.name());
+        c.put(MapField.EFFECT_TAG, tag.GUID());
         c.type = GUID();
         this.validate(c);
         return c;

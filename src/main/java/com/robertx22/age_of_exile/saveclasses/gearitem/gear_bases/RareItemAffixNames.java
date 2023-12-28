@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases;
 
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import com.robertx22.age_of_exile.uncommon.localization.Specialaffixs;
+import com.robertx22.age_of_exile.tags.all.SlotTags;
 import com.robertx22.age_of_exile.uncommon.localization.Specialaffixs;
 
 import java.util.HashMap;
@@ -77,7 +77,7 @@ public class RareItemAffixNames {
         put(3, Specialaffixs.Star);
         put(4, Specialaffixs.Splitter);
     }};
-    
+
     private static HashMap<Integer, Specialaffixs> pants = new HashMap<Integer, Specialaffixs>() {{
         put(0, Specialaffixs.Leggings);
         put(1, Specialaffixs.Legguards);
@@ -102,31 +102,31 @@ public class RareItemAffixNames {
             return weapons;
         }
         if (slot.getTags()
-                .contains(BaseGearType.SlotTag.boots)) {
+                .contains(SlotTags.boots)) {
             return boots;
         }
         if (slot.getTags()
-                .contains(BaseGearType.SlotTag.chest)) {
+                .contains(SlotTags.chest)) {
             return chest;
         }
         if (slot.getTags()
-                .contains(BaseGearType.SlotTag.helmet)) {
+                .contains(SlotTags.helmet)) {
             return helmet;
         }
         if (slot.getTags()
-                .contains(BaseGearType.SlotTag.ring)) {
+                .contains(SlotTags.ring)) {
             return ring;
         }
         if (slot.getTags()
-                .contains(BaseGearType.SlotTag.necklace)) {
+                .contains(SlotTags.necklace)) {
             return necklace;
         }
         if (slot.getTags()
-                .contains(BaseGearType.SlotTag.shield)) {
+                .contains(SlotTags.shield)) {
             return shield;
         }
         if (slot.getTags()
-                .contains(BaseGearType.SlotTag.pants)) {
+                .contains(SlotTags.pants)) {
             return pants;
         }
 

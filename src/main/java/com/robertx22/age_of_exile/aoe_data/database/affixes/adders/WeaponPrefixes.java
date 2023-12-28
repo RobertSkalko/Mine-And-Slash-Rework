@@ -4,8 +4,8 @@ import com.robertx22.age_of_exile.aoe_data.database.affixes.AffixBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.affixes.ElementalAffixBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.database.data.StatMod;
-import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType.SlotTag;
 import com.robertx22.age_of_exile.database.data.stats.types.gear_base.GearDamage;
+import com.robertx22.age_of_exile.tags.all.SlotTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -19,20 +19,20 @@ public class WeaponPrefixes implements ExileRegistryInit {
         AffixBuilder.Normal("wep_item_flat")
                 .Named("Deadly")
                 .stats(new StatMod(10, 50, GearDamage.getInstance(), ModType.PERCENT))
-                .includesTags(SlotTag.weapon_family)
+                .includesTags(SlotTags.weapon_family)
                 .Prefix()
                 .Build();
         AffixBuilder.Normal("wep_item_perc")
                 .Named("Cruel")
                 .stats(new StatMod(10, 150, GearDamage.getInstance(), ModType.PERCENT))
-                .includesTags(SlotTag.weapon_family)
+                .includesTags(SlotTags.weapon_family)
                 .Prefix()
                 .Build();
         AffixBuilder.Normal("wep_item_both")
                 .Named("Miserable")
                 .stats(new StatMod(1, 3, GearDamage.getInstance(), ModType.FLAT),
                         new StatMod(10, 50, GearDamage.getInstance(), ModType.PERCENT))
-                .includesTags(SlotTag.weapon_family)
+                .includesTags(SlotTags.weapon_family)
                 .Prefix()
                 .Build();
 
@@ -43,7 +43,7 @@ public class WeaponPrefixes implements ExileRegistryInit {
                 .add(Elements.Chaos, "Poisoned")
                 .add(Elements.Physical, "Tyrannical")
                 .stats(x -> Arrays.asList(new StatMod(5, 15, Stats.ELEMENTAL_DAMAGE.get(x), ModType.FLAT)))
-                .includesTags(SlotTag.weapon_family, SlotTag.jewel_dex)
+                .includesTags(SlotTags.weapon_family, SlotTags.jewel_dex)
                 .Prefix()
                 .Build();
 
@@ -54,14 +54,14 @@ public class WeaponPrefixes implements ExileRegistryInit {
                 .add(Elements.Lightning, "Poisoned")
                 .stats(x -> Arrays.asList(new StatMod(5, 15, Stats.ELEMENTAL_SPELL_DAMAGE.get(x))))
                 .Weight(500)
-                .includesTags(SlotTag.mage_weapon, SlotTag.jewel_int)
+                .includesTags(SlotTags.mage_weapon, SlotTags.jewel_int)
                 .Prefix()
                 .Build();
 
         AffixBuilder.Normal("desolation")
                 .Named("Desolation")
                 .stats(new StatMod(3, 15, Stats.CRIT_CHANCE.get()), new StatMod(3, 15, Stats.CRIT_DAMAGE.get()))
-                .includesTags(SlotTag.mage_weapon, SlotTag.jewel_str)
+                .includesTags(SlotTags.mage_weapon, SlotTags.jewel_str)
                 .Weight(100)
                 .Prefix()
                 .Build();
@@ -70,28 +70,28 @@ public class WeaponPrefixes implements ExileRegistryInit {
         AffixBuilder.Normal("true_hit")
                 .Named("True Hit")
                 .stats(new StatMod(3, 25, Stats.CRIT_CHANCE.get(), ModType.FLAT))
-                .includesTags(SlotTag.weapon_family)
+                .includesTags(SlotTags.weapon_family)
                 .Prefix()
                 .Build();
 
         AffixBuilder.Normal("crit_prefix")
                 .Named("Critical")
                 .stats(new StatMod(6, 30, Stats.CRIT_DAMAGE.get(), ModType.FLAT))
-                .includesTags(SlotTag.weapon_family)
+                .includesTags(SlotTags.weapon_family)
                 .Prefix()
                 .Build();
 
         AffixBuilder.Normal("heal_crit_prefix")
                 .Named("Truthful")
                 .stats(new StatMod(3, 12, Stats.CRIT_CHANCE.get(), ModType.FLAT))
-                .includesTags(SlotTag.staff)
+                .includesTags(SlotTags.staff)
                 .Prefix()
                 .Build();
 
         AffixBuilder.Normal("heal_crit_dmg_prefix")
                 .Named("Inspiring")
                 .stats(new StatMod(5, 20, Stats.CRIT_DAMAGE.get(), ModType.FLAT))
-                .includesTags(SlotTag.staff)
+                .includesTags(SlotTags.staff)
                 .Prefix()
                 .Build();
 

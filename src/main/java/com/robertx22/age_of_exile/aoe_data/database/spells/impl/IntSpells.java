@@ -3,15 +3,14 @@ package com.robertx22.age_of_exile.aoe_data.database.spells.impl;
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeapon;
-import com.robertx22.age_of_exile.database.data.stats.types.defense.BlockChance;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
@@ -31,7 +30,7 @@ public class IntSpells implements ExileRegistryInit {
 
         SpellBuilder.of(BLACK_HOLE, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 60)
                                 .setSwingArm(), "Black Hole",
-                        Arrays.asList(SpellTag.damage, SpellTag.area))
+                        Arrays.asList(SpellTags.damage, SpellTags.area))
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
 
                 .manualDesc("Summon a dark sphere that attracts nearby enemies to it, dealing "
@@ -60,7 +59,7 @@ public class IntSpells implements ExileRegistryInit {
 
         SpellBuilder.of(TELEPORT, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 30)
                         , "Teleport",
-                        Arrays.asList(SpellTag.damage, SpellTag.movement)
+                        Arrays.asList(SpellTags.damage, SpellTags.movement)
                 )
                 .manualDesc("Teleport yourself in the direction you're looking at.")
                 .disableInMapDimension()

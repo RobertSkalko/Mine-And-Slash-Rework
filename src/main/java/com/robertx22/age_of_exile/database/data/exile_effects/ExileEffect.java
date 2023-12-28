@@ -11,6 +11,9 @@ import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.tags.TagList;
+import com.robertx22.age_of_exile.tags.imp.EffectTag;
+import com.robertx22.age_of_exile.tags.imp.SpellTag;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
@@ -44,10 +47,11 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
 
     public transient String locName = "";
 
-    public List<String> tags = new ArrayList<>();
+    public TagList<EffectTag> tags = new TagList<>();
+    public TagList<SpellTag> spell_tags = new TagList<>(); // used for augments
 
-    public boolean hasTag(EffectTags tag) {
-        return tags.contains(tag.name());
+    public boolean hasTag(EffectTag tag) {
+        return tags.contains(tag);
     }
 
     public boolean hasTag(String tag) {
@@ -170,9 +174,7 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
             list.add(Chats.MAX_STACKS.locName(max_stacks));
         }
 
-        List<EffectTags> tags = this.tags.stream()
-                .map(EffectTags::valueOf)
-                .toList();
+        List<EffectTag> tags = this.tags.getTags(EffectTag.SERIALIZER);
 
         var tagtext = Words.TAGS.locName().append(TooltipUtils.getMutabletags(tags.stream().map(IAutoLocName::locName).iterator(), Gui.TAG_SEPARATOR.locName()));
 

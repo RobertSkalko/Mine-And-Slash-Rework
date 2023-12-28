@@ -1,17 +1,17 @@
 package com.robertx22.age_of_exile.uncommon.effectdatas.rework.condition;
 
-import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
+import com.robertx22.age_of_exile.tags.ModTag;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EffectEvent;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 
 public class EffectHasTagCondition extends StatCondition {
 
-    EffectTags tag;
+    ModTag tag;
 
-    public EffectHasTagCondition(EffectTags tag) {
-        super("effect_has_tag_" + tag, "effect_has_tag");
+    public EffectHasTagCondition(ModTag tag) {
+        super("effect_has_tag_" + tag.GUID(), "effect_has_tag");
         this.tag = tag;
     }
 
@@ -22,8 +22,7 @@ public class EffectHasTagCondition extends StatCondition {
     @Override
     public boolean can(EffectEvent event, EffectSides statSource, StatData data, Stat stat) {
         if (event.data.hasExileEffect()) {
-            return event.data.getExileEffect()
-                .hasTag(tag);
+            return event.data.getExileEffect().hasTag(tag.GUID());
         }
         return false;
     }

@@ -3,9 +3,9 @@ package com.robertx22.age_of_exile.aoe_data.database.spells.impl;
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeapon;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -22,7 +22,7 @@ public class DexSpells implements ExileRegistryInit {
 
         SpellBuilder.of(EXECUTE, PlayStyle.DEX, SpellConfiguration.Builder.instant(10, 20 * 60)
                                 .setSwingArm(), "Execute",
-                        Arrays.asList(SpellTag.area, SpellTag.damage, SpellTag.weapon_skill))
+                        Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.weapon_skill))
                 .manualDesc(
                         "Slash enemies in front of you for " + SpellCalcs.EXECUTE.getLocDmgTooltip()
                                 + " " + Elements.Physical.getIconNameDmg()
@@ -35,7 +35,7 @@ public class DexSpells implements ExileRegistryInit {
                         .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.CRIT, 25D, 1D, 0.1D))
                         .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.SMOKE, 45D, 1D, 0.1D)))
                 .build();
-        
+
 
     }
 }

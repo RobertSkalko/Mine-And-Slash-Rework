@@ -2,9 +2,9 @@ package com.robertx22.age_of_exile.aoe_data.database.affixes.adders;
 
 import com.robertx22.age_of_exile.aoe_data.database.affixes.AffixBuilder;
 import com.robertx22.age_of_exile.database.data.StatMod;
-import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType.SlotTag;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
+import com.robertx22.age_of_exile.tags.all.SlotTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
@@ -16,7 +16,7 @@ public class ManaArmorAffixes implements ExileRegistryInit {
         AffixBuilder.Normal("glimmering")
                 .Named("Glimmering")
                 .stats(new StatMod(4, 15, Mana.getInstance(), ModType.PERCENT))
-                .includesTags(SlotTag.armor_family, SlotTag.jewel_int)
+                .includesTags(SlotTags.armor_family, SlotTags.jewel_int)
                 .Prefix()
                 .Build();
 
@@ -24,14 +24,14 @@ public class ManaArmorAffixes implements ExileRegistryInit {
                 .Named("Seraphim's")
                 .stats(new StatMod(4, 10, Mana.getInstance(), ModType.PERCENT),
                         new StatMod(3, 6, Health.getInstance(), ModType.PERCENT))
-                .includesTags(SlotTag.armor_family, SlotTag.jewel_int)
+                .includesTags(SlotTags.armor_family, SlotTags.jewel_int)
                 .Prefix()
                 .Build();
 
         AffixBuilder.Normal("azure")
                 .Named("Azure")
                 .stats(new StatMod(2, 14, Mana.getInstance(), ModType.PERCENT))
-                .includesTags(SlotTag.armor_family, SlotTag.jewel_int)
+                .includesTags(SlotTags.armor_family, SlotTags.jewel_int)
                 .Prefix()
                 .Build();
 

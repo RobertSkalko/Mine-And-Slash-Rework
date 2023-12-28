@@ -12,7 +12,6 @@ import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.blood.Blood;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.EnergyRegen;
@@ -41,15 +40,15 @@ public class DatapackStats implements ExileRegistryInit {
     )));
 
     public static Stat STR = new CoreStat("strength", "Strength", CoreStatData.of(Arrays.asList(
-            new OptScaleExactStat(0.1F, WeaponDamage.getInstance(), ModType.FLAT),
+            new OptScaleExactStat(5, Health.getInstance(), ModType.FLAT),
             new OptScaleExactStat(0.25F, HealthRegen.getInstance(), ModType.FLAT),
             new OptScaleExactStat(1, Armor.getInstance(), ModType.PERCENT)
     )));
 
     public static Stat DEX = new CoreStat("dexterity", "Dexterity", CoreStatData.of(Arrays.asList(
+            new OptScaleExactStat(10, Energy.getInstance(), ModType.FLAT),
             new OptScaleExactStat(1, DodgeRating.getInstance(), ModType.PERCENT),
-            new OptScaleExactStat(0.5F, EnergyRegen.getInstance(), ModType.FLAT),
-            new OptScaleExactStat(10, Energy.getInstance(), ModType.FLAT)
+            new OptScaleExactStat(0.5F, EnergyRegen.getInstance(), ModType.FLAT)
     )));
 
 

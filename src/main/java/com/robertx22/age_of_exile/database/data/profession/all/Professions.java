@@ -1,10 +1,11 @@
 package com.robertx22.age_of_exile.database.data.profession.all;
 
-import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.profession.CraftedItemPower;
 import com.robertx22.age_of_exile.database.data.profession.ExpSources;
 import com.robertx22.age_of_exile.database.data.profession.Profession;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
+import com.robertx22.age_of_exile.tags.all.SlotTags;
+import com.robertx22.age_of_exile.tags.imp.SlotTag;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.temp.SkillItemTier;
 import net.minecraft.tags.BlockTags;
@@ -84,9 +85,9 @@ public class Professions {
 
         var FARM_EXP = 30;
         var ORE_EXP = 100;
-        
+
         Builder.of(FARMING)
-                .tool(BaseGearType.SlotTag.farming_tool)
+                .tool(SlotTags.farming_tool)
 
                 .crop(SkillItemTier.TIER0, FARM_EXP, Items.WHEAT, ExpSources.REQ_GROWTH_STAGE)
                 .crop(SkillItemTier.TIER0, FARM_EXP, Items.POTATO, ExpSources.REQ_GROWTH_STAGE)
@@ -103,7 +104,7 @@ public class Professions {
                 .build();
 
         Builder.of(FISHING)
-                .tool(BaseGearType.SlotTag.fishing_tool)
+                .tool(SlotTags.fishing_tool)
 
                 // todo locked crates
 
@@ -113,7 +114,7 @@ public class Professions {
                 .build();
 
         Builder.of(HUSBANDRY)
-                .tool(BaseGearType.SlotTag.husbandry_tool)
+                .tool(SlotTags.husbandry_tool)
 
                 .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(HUSBANDRY), 1)
 
@@ -123,7 +124,7 @@ public class Professions {
 
         // todo each should really be separate and have chance for tag..
         Builder.of(MINING)
-                .tool(BaseGearType.SlotTag.mining_tool)
+                .tool(SlotTags.mining_tool)
 
                 .blockTag(SkillItemTier.TIER0, 15, BlockTags.COAL_ORES)
                 .blockTag(SkillItemTier.TIER1, 20, BlockTags.COPPER_ORES)
@@ -169,8 +170,8 @@ public class Professions {
             return b;
         }
 
-        public Builder tool(BaseGearType.SlotTag tag) {
-            this.p.tool_tag = tag.getTagId();
+        public Builder tool(SlotTag tag) {
+            this.p.tool_tag = tag.GUID();
             return this;
         }
 

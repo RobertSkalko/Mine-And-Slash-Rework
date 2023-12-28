@@ -1,10 +1,10 @@
 package com.robertx22.age_of_exile.uncommon.interfaces;
 
 import com.robertx22.library_of_exile.registry.IGUID;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.level.block.Block;
 
 public interface IBaseAutoLoc extends IGUID {
 
@@ -28,6 +28,7 @@ public interface IBaseAutoLoc extends IGUID {
         Misc,
 
         Races,
+        Tags,
         Talents,
         Gear_Slots,
         World_Types,

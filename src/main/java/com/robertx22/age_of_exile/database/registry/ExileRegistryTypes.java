@@ -95,6 +95,7 @@ public class ExileRegistryTypes {
     public static ExileRegistryType AUTO_ITEM = ExileRegistryType.register(SlashRef.MODID, "auto_item", 37, AutoItem.SERIALIZER, SyncTime.NEVER);
     public static ExileRegistryType CUSTOM_ITEM = ExileRegistryType.register(SlashRef.MODID, "custom_item", 38, CustomItem.SERIALIZER, SyncTime.NEVER);
     public static ExileRegistryType MOB_RARITY = ExileRegistryType.register(SlashRef.MODID, "mob_rarity", 39, MobRarity.SERIALIZER, SyncTime.ON_LOGIN);
+    //public static ExileRegistryType AUGMENT = ExileRegistryType.register(SlashRef.MODID, "augment", 40, Augment.SERIALIZER, SyncTime.ON_LOGIN);
 
 
 }

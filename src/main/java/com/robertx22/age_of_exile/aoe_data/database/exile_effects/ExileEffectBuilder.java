@@ -2,12 +2,14 @@ package com.robertx22.age_of_exile.aoe_data.database.exile_effects;
 
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
 import com.robertx22.age_of_exile.database.data.StatMod;
-import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
 import com.robertx22.age_of_exile.database.data.exile_effects.EffectType;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
 import com.robertx22.age_of_exile.database.data.exile_effects.VanillaStatData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
+import com.robertx22.age_of_exile.tags.all.EffectTags;
+import com.robertx22.age_of_exile.tags.imp.EffectTag;
+import com.robertx22.age_of_exile.tags.imp.SpellTag;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 
 public class ExileEffectBuilder {
@@ -36,10 +38,19 @@ public class ExileEffectBuilder {
         return b;
     }
 
-    public ExileEffectBuilder addTags(EffectTags... tags) {
-        for (EffectTags tag : tags) {
-            if (!effect.tags.contains(tag.name())) {
-                this.effect.tags.add(tag.name());
+    public ExileEffectBuilder addTags(EffectTag... tags) {
+        for (EffectTag tag : tags) {
+            if (!effect.tags.contains(tag.GUID())) {
+                this.effect.tags.add(tag);
+            }
+        }
+        return this;
+    }
+
+    public ExileEffectBuilder addSpellTags(SpellTag... tags) {
+        for (SpellTag tag : tags) {
+            if (!effect.spell_tags.contains(tag.GUID())) {
+                this.effect.spell_tags.add(tag);
             }
         }
         return this;

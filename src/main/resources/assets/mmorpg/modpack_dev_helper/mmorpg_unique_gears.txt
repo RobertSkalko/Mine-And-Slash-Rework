@@ -1,13 +1,13 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
-spark_aura
-ghostly_shores
-golemancer
 pack_leader
+golemancer
+ghostly_shores
+spark_aura
 haste_price
 weight_of_leadership
-ele_gamble
 fire_step
+ele_gamble
 piercing_touch
 sculpted_perfection
 futility_of_suffering
@@ -17,14 +17,14 @@ bulwark
 master_torture
 air_disaster
 crystalized_capacitor
-new_dawn_flame
 thread_of_hope
+new_dawn_flame
 sparkfinder
 divine_frost
 summer_heat
 frostburn_prot
-witch_brew
 azuna_ring
+witch_brew
 madness_pursuit
 doombolt
 mana_dominion
@@ -34,14 +34,14 @@ winter_chill
 omni_vamp
 spring_blossoms
 insight
-rabbit_paw
 burning_desire
+rabbit_paw
 autumn_harvest
 skull_of_spirits
 heavenly_tear
 ele_aegis
 playful_hope
-arch_gamble
 ice_stomper
+arch_gamble
 towering_physique
 ghast_necklace

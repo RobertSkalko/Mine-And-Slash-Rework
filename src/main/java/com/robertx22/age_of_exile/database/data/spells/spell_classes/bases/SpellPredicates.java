@@ -1,10 +1,9 @@
 package com.robertx22.age_of_exile.database.data.spells.spell_classes.bases;
 
-import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
+import com.robertx22.age_of_exile.tags.all.SlotTags;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
-import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -13,11 +12,11 @@ import java.util.function.Predicate;
 public class SpellPredicates {
     private static Predicate<LivingEntity> SHOOTABLE_PRED = x -> {
         try {
-            
+
             GearItemData data = StackSaving.GEARS.loadFrom(x.getMainHandItem());
             return data != null && data.GetBaseGearType()
                     .getTags()
-                    .contains(BaseGearType.SlotTag.ranger_casting_weapon);
+                    .contains(SlotTags.ranged_weapon);
         } catch (Exception e) {
             return false;
         }
@@ -29,7 +28,7 @@ public class SpellPredicates {
             GearItemData data = StackSaving.GEARS.loadFrom(x.getMainHandItem());
             return data != null && data.GetBaseGearType()
                     .getTags()
-                    .contains(BaseGearType.SlotTag.melee_weapon);
+                    .contains(SlotTags.melee_weapon);
         } catch (Exception e) {
             return false;
         }
@@ -40,7 +39,7 @@ public class SpellPredicates {
             GearItemData data = StackSaving.GEARS.loadFrom(x.getMainHandItem());
             return data != null && data.GetBaseGearType()
                     .getTags()
-                    .contains(BaseGearType.SlotTag.mage_weapon);
+                    .contains(SlotTags.mage_weapon);
         } catch (Exception e) {
             return false;
         }

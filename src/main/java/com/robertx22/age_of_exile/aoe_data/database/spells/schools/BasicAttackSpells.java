@@ -4,12 +4,12 @@ import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffe
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeapon;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -33,7 +33,7 @@ public class BasicAttackSpells implements ExileRegistryInit {
         SpellBuilder.of(FROSTBALL_ID, PlayStyle.INT, SpellConfiguration.Builder.instant(mana, cd)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Ice Shard",
-                        Arrays.asList(SpellTag.projectile, SpellTag.damage))
+                        Arrays.asList(SpellTags.projectile, SpellTags.damage))
                 .manualDesc(
                         "Throw out a shard of ice, dealing " + SpellCalcs.ICEBALL.getLocDmgTooltip()
                                 + " " + Elements.Cold.getIconNameDmg() + " and applying a stack of Bone Chill.")
@@ -54,7 +54,7 @@ public class BasicAttackSpells implements ExileRegistryInit {
         SpellBuilder.of(FIREBALL_ID, PlayStyle.INT, SpellConfiguration.Builder.instant(mana, cd)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Fire Ball",
-                        Arrays.asList(SpellTag.projectile, SpellTag.damage))
+                        Arrays.asList(SpellTags.projectile, SpellTags.damage))
                 .manualDesc(
                         "Throw out a ball of fire, dealing " + SpellCalcs.FIREBALL.getLocDmgTooltip()
                                 + " " + Elements.Fire.getIconNameDmg())
@@ -76,7 +76,7 @@ public class BasicAttackSpells implements ExileRegistryInit {
         SpellBuilder.of(POISONBALL_ID, PlayStyle.INT, SpellConfiguration.Builder.instant(mana, cd)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Poison Blast",
-                        Arrays.asList(SpellTag.projectile, SpellTag.damage))
+                        Arrays.asList(SpellTags.projectile, SpellTags.damage))
                 .manualDesc(
                         "Blast out a ball of poison, dealing " + SpellCalcs.POISON_BALL.getLocDmgTooltip()
                                 + " " + Elements.Chaos.getIconNameDmg())

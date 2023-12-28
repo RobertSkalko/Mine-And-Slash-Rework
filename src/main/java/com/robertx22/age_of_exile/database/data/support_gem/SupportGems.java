@@ -4,7 +4,6 @@ import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.ResourceAndAttack;
 import com.robertx22.age_of_exile.database.data.StatMod;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentProcStat;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AllAilmentDamage;
@@ -12,6 +11,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.ailment.HitDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalPenetration;
 import com.robertx22.age_of_exile.database.data.stats.types.summon.SummonHealth;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
@@ -90,13 +90,13 @@ public class SupportGems {
                 .levelReq(10).addToSerializables();
 
         new SupportGem("totem_dmg_cdr", "Primed Totems", PlayStyle.STR, 1.3F,
-                Arrays.asList(new StatMod(5, 10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.totem), ModType.MORE),
-                        new StatMod(10, 20, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTag.totem), ModType.FLAT)
+                Arrays.asList(new StatMod(5, 10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.totem), ModType.MORE),
+                        new StatMod(10, 20, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.totem), ModType.FLAT)
                 ))
                 .levelReq(1).addToSerializables();
 
         new SupportGem("totem_damage", "Totem Damage", PlayStyle.STR, 1.3F,
-                Arrays.asList(new StatMod(15, 30, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.totem), ModType.MORE)
+                Arrays.asList(new StatMod(15, 30, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.totem), ModType.MORE)
                 ))
                 .levelReq(10).addToSerializables();
 

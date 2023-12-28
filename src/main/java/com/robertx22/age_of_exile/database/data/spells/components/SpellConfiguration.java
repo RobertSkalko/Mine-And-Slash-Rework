@@ -2,14 +2,13 @@ package com.robertx22.age_of_exile.database.data.spells.components;
 
 import com.robertx22.age_of_exile.aoe_data.database.spells.SummonType;
 import com.robertx22.age_of_exile.aoe_data.database.spells.schools.PetSpells;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeapon;
 import com.robertx22.age_of_exile.database.data.value_calc.LeveledValue;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.tags.TagList;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
+import com.robertx22.age_of_exile.tags.imp.SpellTag;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SpellConfiguration {
 
@@ -28,7 +27,7 @@ public class SpellConfiguration {
     private int cast_time_ticks = 0;
     public int cooldown_ticks = 20;
     private String style = PlayStyle.STR.id;
-    public List<SpellTag> tags = new ArrayList<>();
+    public TagList<SpellTag> tags = new TagList<>();
     public int tracking_radius = 5;
 
     public int getCastTimeTicks() {
@@ -79,7 +78,7 @@ public class SpellConfiguration {
 
 
     public boolean isProjectile() {
-        return tags.contains(SpellTag.projectile);
+        return tags.contains(SpellTags.projectile);
     }
 
     public SpellConfiguration setSwingArm() {

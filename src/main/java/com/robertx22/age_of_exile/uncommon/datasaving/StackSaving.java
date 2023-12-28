@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.uncommon.datasaving;
 import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChestData;
 import com.robertx22.age_of_exile.maps.MapItemData;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.saveclasses.augment.AugmentData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.jewel.JewelItemData;
 import com.robertx22.age_of_exile.saveclasses.prof_tool.ProfessionToolData;
@@ -21,6 +22,7 @@ public class StackSaving {
     public static ItemstackDataSaver<JewelItemData> JEWEL = of(new ItemstackDataSaver<>(SlashRef.MODID + "_jewel", JewelItemData.class, () -> new JewelItemData()));
     public static ItemstackDataSaver<LootChestData> LOOT_CHEST = of(new ItemstackDataSaver<>(SlashRef.MODID + "_loot_chest", LootChestData.class, () -> new LootChestData()));
     public static ItemstackDataSaver<ProfessionToolData> TOOL = of(new ItemstackDataSaver<>(SlashRef.MODID + "_tool_stats", ProfessionToolData.class, () -> new ProfessionToolData()));
+    public static ItemstackDataSaver<AugmentData> AUGMENT = of(new ItemstackDataSaver<>(SlashRef.MODID + "_augment", AugmentData.class, () -> new AugmentData()));
 
     static ItemstackDataSaver of(ItemstackDataSaver t) {
         return t;

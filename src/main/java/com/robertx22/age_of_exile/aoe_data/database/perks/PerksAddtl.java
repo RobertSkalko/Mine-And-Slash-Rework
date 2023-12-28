@@ -4,8 +4,6 @@ import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.ResourceAndAttack;
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
-import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.*;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
@@ -17,6 +15,8 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shie
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.summon.SummonHealth;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
+import com.robertx22.age_of_exile.tags.all.EffectTags;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
@@ -39,10 +39,10 @@ public class PerksAddtl implements ExileRegistryInit {
                     PerkBuilder.bigStat(new OptScaleExactStat(10, x, ModType.FLAT));
                 });
 
-        PerkBuilder.stat("spell_atk_style_dmg", new OptScaleExactStat(3, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.magic), ModType.FLAT));
-        PerkBuilder.stat("attack_atk_style_dmg", new OptScaleExactStat(3, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.weapon_skill), ModType.FLAT));
-        PerkBuilder.bigStat("spell_atk_style_dmg", new OptScaleExactStat(10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.magic), ModType.FLAT));
-        PerkBuilder.bigStat("attack_atk_style_dmg", new OptScaleExactStat(10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.weapon_skill), ModType.FLAT));
+        PerkBuilder.stat("spell_atk_style_dmg", new OptScaleExactStat(3, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.magic), ModType.FLAT));
+        PerkBuilder.stat("attack_atk_style_dmg", new OptScaleExactStat(3, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.weapon_skill), ModType.FLAT));
+        PerkBuilder.bigStat("spell_atk_style_dmg", new OptScaleExactStat(10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.magic), ModType.FLAT));
+        PerkBuilder.bigStat("attack_atk_style_dmg", new OptScaleExactStat(10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.weapon_skill), ModType.FLAT));
 
         PerkBuilder.bigStat(new OptScaleExactStat(10, Stats.PROJECTILE_SPEED.get()));
         PerkBuilder.bigStat(new OptScaleExactStat(8, Stats.PROJECTILE_DAMAGE.get(), ModType.FLAT));
@@ -113,23 +113,23 @@ public class PerksAddtl implements ExileRegistryInit {
 
         PerkBuilder.stat("ms_steal", new OptScaleExactStat(2, Stats.SPELL_MSSTEAL.get(), ModType.FLAT));
 
-        PerkBuilder.stat("chain_damage", new OptScaleExactStat(3, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.chaining), ModType.FLAT));
-        PerkBuilder.bigStat("chain_damage_big", new OptScaleExactStat(10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.chaining), ModType.FLAT));
+        PerkBuilder.stat("chain_damage", new OptScaleExactStat(3, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.chaining), ModType.FLAT));
+        PerkBuilder.bigStat("chain_damage_big", new OptScaleExactStat(10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.chaining), ModType.FLAT));
 
-        PerkBuilder.stat("trap_damage", new OptScaleExactStat(3, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.trap), ModType.FLAT));
-        PerkBuilder.bigStat("trap_damage_big", new OptScaleExactStat(10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.trap), ModType.FLAT));
+        PerkBuilder.stat("trap_damage", new OptScaleExactStat(3, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.trap), ModType.FLAT));
+        PerkBuilder.bigStat("trap_damage_big", new OptScaleExactStat(10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.trap), ModType.FLAT));
 
         PerkBuilder.stat("trap_area_dmg", new OptScaleExactStat(3, Stats.TRAP_AREA_DAMAGE.get(), ModType.FLAT));
         PerkBuilder.bigStat("trap_area_dmg_big", new OptScaleExactStat(10, Stats.TRAP_AREA_DAMAGE.get(), ModType.FLAT));
 
-        PerkBuilder.stat("trap_cdr", new OptScaleExactStat(2, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTag.trap), ModType.FLAT));
-        PerkBuilder.bigStat("trap_cdr_big", new OptScaleExactStat(10, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTag.trap), ModType.FLAT));
+        PerkBuilder.stat("trap_cdr", new OptScaleExactStat(2, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.trap), ModType.FLAT));
+        PerkBuilder.bigStat("trap_cdr_big", new OptScaleExactStat(10, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.trap), ModType.FLAT));
 
-        PerkBuilder.stat("song_damage", new OptScaleExactStat(3, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.song), ModType.FLAT));
-        PerkBuilder.bigStat("song_damage_big", new OptScaleExactStat(10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.song), ModType.FLAT));
+        PerkBuilder.stat("song_damage", new OptScaleExactStat(3, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.song), ModType.FLAT));
+        PerkBuilder.bigStat("song_damage_big", new OptScaleExactStat(10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.song), ModType.FLAT));
 
-        PerkBuilder.stat("song_cdr", new OptScaleExactStat(2, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTag.song), ModType.FLAT));
-        PerkBuilder.bigStat("song_cdr_big", new OptScaleExactStat(10, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTag.song), ModType.FLAT));
+        PerkBuilder.stat("song_cdr", new OptScaleExactStat(2, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.song), ModType.FLAT));
+        PerkBuilder.bigStat("song_cdr_big", new OptScaleExactStat(10, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.song), ModType.FLAT));
 
         PerkBuilder.stat("song_effect", new OptScaleExactStat(6, Stats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.song), ModType.FLAT));
         PerkBuilder.bigStat("song_effect_big", new OptScaleExactStat(20, Stats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.song), ModType.FLAT));
@@ -140,11 +140,11 @@ public class PerksAddtl implements ExileRegistryInit {
         PerkBuilder.stat("song_duration", new OptScaleExactStat(6, Stats.EFFECT_DURATION_YOU_CAST_PER_TAG.get(EffectTags.song), ModType.FLAT));
         PerkBuilder.bigStat("song_duration_big", new OptScaleExactStat(20, Stats.EFFECT_DURATION_YOU_CAST_PER_TAG.get(EffectTags.song), ModType.FLAT));
 
-        PerkBuilder.stat("totem_damage", new OptScaleExactStat(3, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.totem), ModType.FLAT));
-        PerkBuilder.bigStat("totem_damage_big", new OptScaleExactStat(10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.totem), ModType.FLAT));
+        PerkBuilder.stat("totem_damage", new OptScaleExactStat(3, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.totem), ModType.FLAT));
+        PerkBuilder.bigStat("totem_damage_big", new OptScaleExactStat(10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.totem), ModType.FLAT));
 
-        PerkBuilder.stat("totem_cdr", new OptScaleExactStat(2, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTag.totem), ModType.FLAT));
-        PerkBuilder.bigStat("totem_cdr_big", new OptScaleExactStat(10, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTag.totem), ModType.FLAT));
+        PerkBuilder.stat("totem_cdr", new OptScaleExactStat(2, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.totem), ModType.FLAT));
+        PerkBuilder.bigStat("totem_cdr_big", new OptScaleExactStat(10, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.totem), ModType.FLAT));
 
         PerkBuilder.stat("totem_duration", new OptScaleExactStat(6, Stats.TOTEM_DURATION.get(), ModType.FLAT));
         PerkBuilder.bigStat("totem_duration_big", new OptScaleExactStat(20, Stats.TOTEM_DURATION.get(), ModType.FLAT));

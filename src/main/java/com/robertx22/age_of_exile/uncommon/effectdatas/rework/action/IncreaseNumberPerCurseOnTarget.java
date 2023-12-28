@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.uncommon.effectdatas.rework.action;
 
-import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
+import com.robertx22.age_of_exile.tags.all.EffectTags;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EffectEvent;

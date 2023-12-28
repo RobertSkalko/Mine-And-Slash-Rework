@@ -14,4 +14,11 @@ public class RestedExpData {
     public void onGiveProfExp(int give) {
         bonusCombatExp += give * ServerContainer.get().PROFESSION_TO_COMBAT_RESTED_XP_GENERATION.get();
     }
+
+    public void onDeath() {
+
+        bonusProfExp *= ServerContainer.get().RESTED_XP_DEATH_PENALTY.get();
+        bonusCombatExp *= ServerContainer.get().RESTED_XP_DEATH_PENALTY.get();
+
+    }
 }

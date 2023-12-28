@@ -4,13 +4,13 @@ import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffe
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeapon;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -35,7 +35,7 @@ public class FireSpells implements ExileRegistryInit {
 
         SpellBuilder.of(MAGMA_FLOWER, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 20 * 30)
                                 .setSwingArm(), "Magma Totem",
-                        Arrays.asList(SpellTag.damage, SpellTag.area, SpellTag.totem))
+                        Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.totem))
                 .manualDesc("Summon a flaming totem that deals "
                         + SpellCalcs.MAGMA_FLOWER.getLocDmgTooltip()
                         + Elements.Fire.getIconNameDmg() + " in an area every second.")
@@ -58,7 +58,7 @@ public class FireSpells implements ExileRegistryInit {
 
         SpellBuilder.of(FLAME_STRIKE_ID, PlayStyle.STR, SpellConfiguration.Builder.instant(8, 15)
                                 .setSwingArm(), "Flame Strike",
-                        Arrays.asList(SpellTag.weapon_skill, SpellTag.area, SpellTag.damage))
+                        Arrays.asList(SpellTags.weapon_skill, SpellTags.area, SpellTags.damage))
                 .manualDesc("Strike enemies in front for " +
                         SpellCalcs.FLAME_STRIKE.getLocDmgTooltip(Elements.Fire))
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
@@ -88,7 +88,7 @@ public class FireSpells implements ExileRegistryInit {
 
 
         SpellBuilder.of(METEOR, PlayStyle.INT, SpellConfiguration.Builder.instant(18, 20).setChargesAndRegen(METEOR, 3, 20 * 20), "Meteor",
-                        Arrays.asList(SpellTag.area, SpellTag.damage)
+                        Arrays.asList(SpellTags.area, SpellTags.damage)
                 )
                 .manualDesc("Summon a meteor that falls from the sky, dealing " +
                         SpellCalcs.METEOR.getLocDmgTooltip(Elements.Fire) + " in an area.")
@@ -111,7 +111,7 @@ public class FireSpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(FIRE_NOVA_ID, PlayStyle.STR, SpellConfiguration.Builder.instant(20, 20 * 25), "Fire Nova",
-                        Arrays.asList(SpellTag.area, SpellTag.damage))
+                        Arrays.asList(SpellTags.area, SpellTags.damage))
                 .manualDesc(
                         "Engulf the area in flames, dealing " + SpellCalcs.FIRE_NOVA.getLocDmgTooltip()
                                 + " " + Elements.Fire.getIconNameDmg() + " to nearby enemies.")

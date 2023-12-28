@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.maps.generator.ChunkProcessData;
 import com.robertx22.age_of_exile.maps.mobs.SpawnedMob;
 import com.robertx22.age_of_exile.maps.processors.DataProcessor;
 import com.robertx22.age_of_exile.maps.processors.helpers.MobBuilder;
+import com.robertx22.age_of_exile.tags.imp.MobTag;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.library_of_exile.utils.RandomUtils;
@@ -81,8 +82,8 @@ public class ComplexMobProcessor extends DataProcessor {
 
             if (type == null) {
                 for (String x : parts) {
-                    for (SpawnedMob.MobTags tag : SpawnedMob.MobTags.values()) {
-                        if (x.equals(tag.getTagId())) {
+                    for (MobTag tag : MobTag.getAll()) {
+                        if (x.equals(tag.GUID())) {
                             filter = SpawnedMob.getAll()
                                     .stream()
                                     .filter(m -> m.tags.contains(tag));

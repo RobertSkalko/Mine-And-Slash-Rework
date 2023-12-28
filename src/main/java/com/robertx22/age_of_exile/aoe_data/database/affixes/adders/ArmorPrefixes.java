@@ -2,9 +2,10 @@ package com.robertx22.age_of_exile.aoe_data.database.affixes.adders;
 
 import com.robertx22.age_of_exile.aoe_data.database.affixes.AffixBuilder;
 import com.robertx22.age_of_exile.database.data.StatMod;
-import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType.SlotTag;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.gear_base.GearDefense;
+import com.robertx22.age_of_exile.tags.ModTag;
+import com.robertx22.age_of_exile.tags.all.SlotTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
@@ -18,12 +19,12 @@ public class ArmorPrefixes implements ExileRegistryInit {
 
         Stat stat;
         String name;
-        SlotTag tag;
+        ModTag tag;
 
         public float flatMulti = 1;
         String suffix;
 
-        public TYPE(String suffix, Stat stat, String name, SlotTag tag, float flatMulti) {
+        public TYPE(String suffix, Stat stat, String name, ModTag tag, float flatMulti) {
             this.stat = stat;
             this.name = name;
             this.suffix = suffix;
@@ -39,9 +40,9 @@ public class ArmorPrefixes implements ExileRegistryInit {
 
         List<TYPE> stats = new ArrayList<>();
 
-        var ARMOR = new TYPE("armor", GearDefense.getInstance(), "Reinforced", SlotTag.armor_stat, 1);
-        var MS = new TYPE("ms", GearDefense.getInstance(), "Fortified", SlotTag.magic_shield_stat, 0.33f);
-        var DODGE = new TYPE("dodge", GearDefense.getInstance(), "Scaled", SlotTag.dodge_stat, 1);
+        var ARMOR = new TYPE("armor", GearDefense.getInstance(), "Reinforced", SlotTags.armor_stat, 1);
+        var MS = new TYPE("ms", GearDefense.getInstance(), "Fortified", SlotTags.magic_shield_stat, 0.33f);
+        var DODGE = new TYPE("dodge", GearDefense.getInstance(), "Scaled", SlotTags.dodge_stat, 1);
 
         stats.add(ARMOR);
         stats.add(MS);

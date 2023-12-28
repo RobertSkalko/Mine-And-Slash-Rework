@@ -6,7 +6,6 @@ import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
 import com.robertx22.age_of_exile.database.data.spells.SetAdd;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.AggroAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.ExileEffectAction;
@@ -18,6 +17,7 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeap
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashPotions;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashSounds;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
@@ -59,7 +59,7 @@ public class HolySpells implements ExileRegistryInit {
 
         SpellBuilder.of(WHIRLWIND, PlayStyle.STR, SpellConfiguration.Builder.multiCast(10, 0, 100, 10)
                                 .setSwingArm(), "Whirlwind",
-                        Arrays.asList(SpellTag.weapon_skill, SpellTag.area, SpellTag.damage))
+                        Arrays.asList(SpellTags.weapon_skill, SpellTags.area, SpellTags.damage))
                 .manualDesc("Spin and continuously strike enemies around you for " + SpellCalcs.WHIRLWIND.getLocDmgTooltip(Elements.Physical))
 
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
@@ -74,7 +74,7 @@ public class HolySpells implements ExileRegistryInit {
 
         SpellBuilder.of(CHARGE_ID, PlayStyle.STR, SpellConfiguration.Builder.multiCast(10, 20 * 10, 60, 60)
                         , "Charge",
-                        Arrays.asList(SpellTag.area, SpellTag.damage, SpellTag.movement))
+                        Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.movement))
                 .manualDesc(
                         "Charge in a direction, stopping upon first enemy hit to deal "
                                 + SpellCalcs.CHARGE.getLocDmgTooltip() + " " + Elements.Physical.getIconNameDmg() + " in an area."
@@ -98,7 +98,7 @@ public class HolySpells implements ExileRegistryInit {
 
         SpellBuilder.of(TAUNT, PlayStyle.STR, SpellConfiguration.Builder.instant(0, 20 * 30)
                                 .setSwingArm(), "Taunt",
-                        Arrays.asList(SpellTag.area))
+                        Arrays.asList(SpellTags.area))
                 .manualDesc(
                         "Shout, making nearby enemies want to attack you. " +
                                 "Generates " + SpellCalcs.TAUNT.getLocDmgTooltip() + " threat."
@@ -113,7 +113,7 @@ public class HolySpells implements ExileRegistryInit {
 
 
         SpellBuilder.of(PULL, PlayStyle.STR, SpellConfiguration.Builder.instant(5, 60 * 20), "Pull",
-                        Arrays.asList(SpellTag.weapon_skill, SpellTag.area, SpellTag.damage))
+                        Arrays.asList(SpellTags.weapon_skill, SpellTags.area, SpellTags.damage))
                 .manualDesc(
                         "Pull enemies in area to you, dealing " +
                                 SpellCalcs.PULL.getLocDmgTooltip() + " " +
@@ -131,7 +131,7 @@ public class HolySpells implements ExileRegistryInit {
 
         SpellBuilder.of(GONG_STRIKE_ID, PlayStyle.STR, SpellConfiguration.Builder.instant(8, 20 * 10)
                                 .setSwingArm(), "Gong Strike",
-                        Arrays.asList(SpellTag.weapon_skill, SpellTag.area, SpellTag.damage))
+                        Arrays.asList(SpellTags.weapon_skill, SpellTags.area, SpellTags.damage))
                 .manualDesc("Bash enemies around you for " +
                         SpellCalcs.GONG_STRIKE.getLocDmgTooltip(Elements.Physical))
 
@@ -162,7 +162,7 @@ public class HolySpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(INSPIRATION, PlayStyle.INT, SpellConfiguration.Builder.instant(0, 300 * 20), "Inspiration",
-                        Arrays.asList(SpellTag.heal)
+                        Arrays.asList(SpellTags.heal)
                 )
                 .manualDesc("Restores " + SpellCalcs.AWAKEN_MANA.getLocDmgTooltip() + " mana.")
                 .weaponReq(CastingWeapon.ANY_WEAPON)
@@ -176,7 +176,7 @@ public class HolySpells implements ExileRegistryInit {
         SpellBuilder.of(SHOOTING_STAR, PlayStyle.INT, SpellConfiguration.Builder.instant(10, 20)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Shooting Star",
-                        Arrays.asList(SpellTag.projectile, SpellTag.heal))
+                        Arrays.asList(SpellTags.projectile, SpellTags.heal))
                 .manualDesc("Shoots a star that heals allies for " + SpellCalcs.SHOOTING_STAR.getLocDmgTooltip() + " health on hit.")
 
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
@@ -192,7 +192,7 @@ public class HolySpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(HEALING_AURA_ID, PlayStyle.INT, SpellConfiguration.Builder.multiCast(15, 20 * 30, 60, 3), "Healing Aria",
-                        Arrays.asList(SpellTag.area, SpellTag.heal, SpellTag.song))
+                        Arrays.asList(SpellTags.area, SpellTags.heal, SpellTags.song))
                 .manualDesc(
                         "Heal allies around you for " + SpellCalcs.HEALING_AURA.getLocDmgTooltip() +
                                 " health")
@@ -207,7 +207,7 @@ public class HolySpells implements ExileRegistryInit {
 
         SpellBuilder.of(WISH, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 10)
                                 .setChargesAndRegen(WISH, 3, 20 * 30), "Wish",
-                        Arrays.asList(SpellTag.heal))
+                        Arrays.asList(SpellTags.heal))
                 .manualDesc(
                         "Heal allies around you for " + SpellCalcs.WISH.getLocDmgTooltip() +
                                 " health")
@@ -225,7 +225,7 @@ public class HolySpells implements ExileRegistryInit {
 
         SpellBuilder.of(id, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(10, 20 * 10, 10)
                         , name,
-                        Arrays.asList(SpellTag.area, SpellTag.song))
+                        Arrays.asList(SpellTags.area, SpellTags.song))
                 .manualDesc(
                         "Give a stack of " + effect.locname + " to all allies around you."
                 )

@@ -18,6 +18,8 @@ public class OnPlayerDeath extends EventConsumer<ExileEvents.OnPlayerDeath> {
 
             PlayerData data = Load.player(event.player);
 
+            data.rested_xp.onDeath();
+            
             data.favor.onDeath(event.player);
 
             data.deathStats.died = true;

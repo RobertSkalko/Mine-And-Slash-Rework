@@ -3,12 +3,10 @@ package com.robertx22.age_of_exile.database.data.requirements;
 import com.robertx22.age_of_exile.database.data.requirements.bases.GearRequestedFor;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ITooltipList;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
-import com.robertx22.library_of_exile.registry.serialization.ISerializablePart;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.network.chat.MutableComponent;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Requirements implements ITooltipList {
@@ -42,8 +40,7 @@ public class Requirements implements ITooltipList {
         return true;
     }
 
-    public static List<ISerializablePart> possible = Arrays.asList(new TagRequirement());
-
+   
     @Override
     public List<MutableComponent> GetTooltipString(TooltipInfo info) {
         List<MutableComponent> list = new ArrayList<>();

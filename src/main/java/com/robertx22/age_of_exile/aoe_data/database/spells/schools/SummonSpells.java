@@ -7,7 +7,6 @@ import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SummonType;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.ExileEffectAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
@@ -15,6 +14,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.selectors.Targ
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.summon.SummonHealth;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
@@ -42,7 +42,7 @@ public class SummonSpells implements ExileRegistryInit {
     public void registerAll() {
 
         SpellBuilder.of(SUMMON_FIRE_GOLEM, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(40, 20 * 60, 30).setSummonType(SummonType.GOLEM), "Summon Fire Golem",
-                        Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.golem, SpellTag.has_pet_ability))
+                        Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.golem, SpellTags.has_pet_ability))
                 .manualDesc("Summon a Golem that can cast Fire Nova to aid you in combat.")
                 .summons(SlashEntities.FIRE_GOLEM.get(), 20 * 60 * 3, 1, SummonType.GOLEM)
                 .levelReq(20)
@@ -51,7 +51,7 @@ public class SummonSpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(SUMMON_COLD_GOLEM, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(40, 20 * 60, 30).setSummonType(SummonType.GOLEM), "Summon Frost Golem",
-                        Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.golem, SpellTag.has_pet_ability))
+                        Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.golem, SpellTags.has_pet_ability))
                 .manualDesc("Summon a Golem that can cast Frost Nova to aid you in combat.")
                 .summons(SlashEntities.COLD_GOLEM.get(), 20 * 60 * 3, 1, SummonType.GOLEM)
                 .levelReq(20)
@@ -60,7 +60,7 @@ public class SummonSpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(SUMMON_LIGHTNING_GOLEM, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(40, 20 * 60, 30).setSummonType(SummonType.GOLEM), "Summon Lightning Golem",
-                        Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.golem, SpellTag.has_pet_ability))
+                        Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.golem, SpellTags.has_pet_ability))
                 .manualDesc("Summon a Golem that can cast Lightning Nova to aid you in combat .")
                 .summons(SlashEntities.LIGHTNING_GOLEM.get(), 20 * 60 * 3, 1, SummonType.GOLEM)
                 .levelReq(20)
@@ -70,7 +70,7 @@ public class SummonSpells implements ExileRegistryInit {
 
 
         SpellBuilder.of(SUMMON_SPIRIT_WOLF, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(30, 30 * 20, 30).setSummonType(SummonType.BEAST), "Summon Spirit Wolf",
-                        Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.beast, SpellTag.has_pet_ability))
+                        Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.beast, SpellTags.has_pet_ability))
                 .manualDesc("Summon a Spirit Wolf to aid you in combat.")
                 .summons(SlashEntities.SPIRIT_WOLF.get(), 20 * 30, 1, SummonType.BEAST)
                 .addStat(Stats.SUMMON_DAMAGE.get().mod(5, 25))
@@ -79,7 +79,7 @@ public class SummonSpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(SUMMON_ZOMBIE, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(30, 20 * 60, 40).setSummonType(SummonType.UNDEAD), "Summon Zombie",
-                        Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.has_pet_ability))
+                        Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.has_pet_ability))
                 .manualDesc("Summon a Zombie to aid you in combat.")
                 .summons(SlashEntities.ZOMBIE.get(), 20 * 60 * 2, 1, SummonType.UNDEAD)
                 .addStat(Stats.SUMMON_DAMAGE.get().mod(10, 50))
@@ -90,7 +90,7 @@ public class SummonSpells implements ExileRegistryInit {
         SpellBuilder.of(SUMMON_SPIDER, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 1)
                                 .setSummonBasicAttack(PetSpells.SPIDER)
                                 .setChargesAndRegen("spider", 3, 20 * 15).setSummonType(SummonType.UNDEAD), "Summon Spider",
-                        Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.has_pet_ability))
+                        Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.has_pet_ability))
                 .manualDesc("Summon a fast moving spider to aid you in combat.")
                 .summons(SlashEntities.SPIDER.get(), 20 * 60 * 2, 1, SummonType.SPIDER)
                 .addStat(Stats.SUMMON_DAMAGE.get().mod(5, 25))
@@ -99,7 +99,7 @@ public class SummonSpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(SUMMON_SKELETAL_ARMY, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(35, 20 * 60, 40).setSummonType(SummonType.UNDEAD), "Summon Skeleton",
-                        Arrays.asList(SpellTag.summon, SpellTag.damage, SpellTag.has_pet_ability))
+                        Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.has_pet_ability))
                 .manualDesc("Summon a horde of Skeletons to fight for you for a short duration.")
                 .summons(SlashEntities.SKELETON.get(), 20 * 60, 1, SummonType.UNDEAD)
                 .levelReq(30)
@@ -110,7 +110,7 @@ public class SummonSpells implements ExileRegistryInit {
 
 
         SpellBuilder.of(RETURN_SUMMONS, PlayStyle.STR, SpellConfiguration.Builder.instant(15, 20 * 30), "Return Summons",
-                        Arrays.asList(SpellTag.area, SpellTag.heal))
+                        Arrays.asList(SpellTags.area, SpellTags.heal))
                 .manualDesc("Regroup your summons and heal them for " + SpellCalcs.HEALING_AURA.getLocDmgTooltip() + " health.")
                 .onCast(PartBuilder.playSound(SoundEvents.ANVIL_HIT, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.TP_TARGET_TO_SELF.create())
@@ -128,7 +128,7 @@ public class SummonSpells implements ExileRegistryInit {
 
         SpellBuilder.of(CHILLING_TOUCH, PlayStyle.STR, SpellConfiguration.Builder.instant(8, 20 * 5)
                                 .setSwingArm(), "Chilling Touch",
-                        Arrays.asList(SpellTag.area, SpellTag.damage))
+                        Arrays.asList(SpellTags.area, SpellTags.damage))
                 .manualDesc("Strike enemies in front for " +
                         SpellCalcs.CHILLING_TOUCH.getLocDmgTooltip(Elements.Cold) + ", and command your summons to attack them.")
                 .onCast(PartBuilder.playSound(SoundEvents.FIRE_EXTINGUISH, 1D, 1D))
@@ -143,7 +143,7 @@ public class SummonSpells implements ExileRegistryInit {
 
         SpellBuilder.of(EXPLODE_MINIONS, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 5)
                                 .setSwingArm(), "Explode Minions",
-                        Arrays.asList(SpellTag.area, SpellTag.damage, SpellTag.minion_explode, SpellTag.summon))
+                        Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.minion_explode, SpellTags.summon))
                 .manualDesc("Explodes all your nearby minions for " + SpellCalcs.EXPLODE_MINION.getLocDmgTooltip(Elements.Fire)
                         + ". Summon HP stat acts as a damage bonus for this spell.")
 

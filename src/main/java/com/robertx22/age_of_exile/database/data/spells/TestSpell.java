@@ -9,6 +9,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellA
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeapon;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import net.minecraft.core.particles.ParticleTypes;
@@ -26,7 +27,7 @@ public class TestSpell {
                 SpellBuilder.of(USE_THIS_EXACT_ID, PlayStyle.INT, SpellConfiguration.Builder.instant(7, 20)
                                         .setSwingArm()
                                         .applyCastSpeedToCooldown(), "Poison Ball",
-                                Arrays.asList(SpellTag.projectile, SpellTag.damage))
+                                Arrays.asList(SpellTags.projectile, SpellTags.damage))
                         .weaponReq(CastingWeapon.MAGE_WEAPON)
 
                         .onCast(PartBuilder.playSound(SoundEvents.BLAZE_SHOOT, 1D, 0.6D))

@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.mmorpg.registers.common.items;
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
 import com.robertx22.age_of_exile.capability.player.BackpackItem;
-import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChestItem;
 import com.robertx22.age_of_exile.database.data.profession.all.Professions;
 import com.robertx22.age_of_exile.database.data.profession.items.DestroyOutputMegaExpItem;
@@ -13,6 +12,7 @@ import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
 import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulItem;
+import com.robertx22.age_of_exile.tags.all.SlotTags;
 import com.robertx22.age_of_exile.vanilla_mc.items.*;
 import com.robertx22.age_of_exile.vanilla_mc.items.crates.gem_crate.LootCrateItem;
 import com.robertx22.age_of_exile.vanilla_mc.items.gearitems.VanillaMaterial;
@@ -110,10 +110,11 @@ public class SlashItems {
     public static HashMap<String, RegObj<Item>> STATIONS = new HashMap<>();
     public static HashMap<String, RegObj<Item>> EFFECT_DISPLAY = new HashMap<>();
 
-    public static RegObj<Item> CLOTH_SET = Def.item(() -> new TagForceSoulItem(() -> Items.PAPER, BaseGearType.SlotTag.magic_shield_stat.getTagId(), "Cloth"), "cloth_set");
-    public static RegObj<Item> LEATHER_SET = Def.item(() -> new TagForceSoulItem(() -> Items.LEATHER, BaseGearType.SlotTag.dodge_stat.getTagId(), "Leather"), "leather_set");
-    public static RegObj<Item> PLATE_SET = Def.item(() -> new TagForceSoulItem(() -> Items.COPPER_INGOT, BaseGearType.SlotTag.armor_stat.getTagId(), "Plate"), "plate_set");
+    public static RegObj<Item> CLOTH_SET = Def.item(() -> new TagForceSoulItem(() -> Items.PAPER, SlotTags.magic_shield_stat.GUID(), "Cloth"), "cloth_set");
+    public static RegObj<Item> LEATHER_SET = Def.item(() -> new TagForceSoulItem(() -> Items.LEATHER, SlotTags.dodge_stat.GUID(), "Leather"), "leather_set");
+    public static RegObj<Item> PLATE_SET = Def.item(() -> new TagForceSoulItem(() -> Items.COPPER_INGOT, SlotTags.armor_stat.GUID(), "Plate"), "plate_set");
 
+    public static RegObj<Item> AUGMENT = Def.item(() -> new Item(new Item.Properties()), "augment");
 
     public static class GearItems {
 

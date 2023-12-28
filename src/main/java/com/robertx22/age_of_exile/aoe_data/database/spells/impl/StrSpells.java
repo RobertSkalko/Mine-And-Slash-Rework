@@ -4,9 +4,9 @@ import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffe
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -24,7 +24,7 @@ public class StrSpells implements ExileRegistryInit {
         SpellBuilder.of(SHRED, PlayStyle.STR, SpellConfiguration.Builder.instant(10, 20 * 1)
                                 .setSwingArm()
                                 .setChargesAndRegen("shred", 3, 20 * 15), "Shred",
-                        Arrays.asList(SpellTag.weapon_skill, SpellTag.area, SpellTag.damage))
+                        Arrays.asList(SpellTags.weapon_skill, SpellTags.area, SpellTags.damage))
                 .manualDesc(
                         "Slash all nearby enemies, dealing "
                                 + SpellCalcs.SHRED.getLocDmgTooltip() + " " + Elements.Physical.getIconNameDmg()

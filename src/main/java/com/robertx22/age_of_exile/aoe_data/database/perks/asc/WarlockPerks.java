@@ -4,13 +4,13 @@ import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.perks.PerkBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
-import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDuration;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalPenetration;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
+import com.robertx22.age_of_exile.tags.all.EffectTags;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -49,7 +49,7 @@ public class WarlockPerks implements ExileRegistryInit {
         PerkBuilder.ascPoint(CHAOS_4, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Chaos), ModType.MORE));
 
         PerkBuilder.ascPoint(CURSE_1, new OptScaleExactStat(30, Stats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.curse), ModType.FLAT));
-        PerkBuilder.ascPoint(CURSE_2, new OptScaleExactStat(50, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTag.curse), ModType.FLAT));
+        PerkBuilder.ascPoint(CURSE_2, new OptScaleExactStat(50, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.curse), ModType.FLAT));
         PerkBuilder.ascPoint(CURSE_3, new OptScaleExactStat(20, Stats.DOT_DAMAGE.get(), ModType.FLAT));
         PerkBuilder.ascPoint(CURSE_4, new OptScaleExactStat(25, Stats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.curse), ModType.FLAT), new OptScaleExactStat(10, Stats.ELEMENTAL_DAMAGE.get(Elements.Chaos), ModType.MORE));
 

@@ -8,11 +8,9 @@ import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
-import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
 import com.robertx22.age_of_exile.database.data.exile_effects.EffectType;
 import com.robertx22.age_of_exile.database.data.exile_effects.VanillaStatData;
 import com.robertx22.age_of_exile.database.data.spells.SetAdd;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.AggroAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.vanity.ParticleMotion;
@@ -25,6 +23,8 @@ import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalR
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
+import com.robertx22.age_of_exile.tags.all.EffectTags;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
@@ -235,7 +235,7 @@ public class ModEffects implements ExileRegistryInit {
         ExileEffectBuilder.of(VIGOR)
                 .stat(0.25F, 0.5F, HealthRegen.getInstance())
                 .stat(0.25F, 0.5F, ManaRegen.getInstance())
-                .stat(10, 10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.song), ModType.MORE)
+                .stat(10, 10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.song), ModType.MORE)
                 .maxStacks(3)
                 .addTags(EffectTags.song)
                 .build();
@@ -246,7 +246,7 @@ public class ModEffects implements ExileRegistryInit {
                 .stat(5, 10, new ElementalResist(Elements.Fire))
                 .stat(5, 10, new ElementalResist(Elements.Cold))
                 .stat(5, 10, new ElementalResist(Elements.Lightning))
-                .stat(10, 10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.song), ModType.MORE)
+                .stat(10, 10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.song), ModType.MORE)
                 .maxStacks(3)
                 .addTags(EffectTags.song, EffectTags.defensive)
                 .build();
@@ -254,7 +254,7 @@ public class ModEffects implements ExileRegistryInit {
         ExileEffectBuilder.of(VALOR)
                 .stat(5, 10, Stats.TOTAL_DAMAGE.get(), ModType.FLAT)
                 .stat(2, 5, Stats.CRIT_CHANCE.get(), ModType.FLAT)
-                .stat(10, 10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.song), ModType.MORE)
+                .stat(10, 10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.song), ModType.MORE)
                 .maxStacks(3)
                 .addTags(EffectTags.song, EffectTags.offensive)
                 .build();
@@ -264,7 +264,7 @@ public class ModEffects implements ExileRegistryInit {
                 .maxStacks(5)
                 .addTags(EffectTags.heal_over_time)
                 .stat(Stats.REJUV_HEAL_SELF.get().mod(25, 50).more())
-                .stat(Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.thorns).mod(2, 10).more())
+                .stat(Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.thorns).mod(2, 10).more())
                 .spell(SpellBuilder.forEffect()
                         .onTick(PartBuilder.justAction(SpellAction.RESTORE_HEALTH.create(SpellCalcs.REJUVENATION))
                                 .setTarget(TargetSelector.TARGET.create())

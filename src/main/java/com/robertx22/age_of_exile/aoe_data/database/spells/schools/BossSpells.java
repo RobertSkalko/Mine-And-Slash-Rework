@@ -3,8 +3,8 @@ package com.robertx22.age_of_exile.aoe_data.database.spells.schools;
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -23,7 +23,7 @@ public class BossSpells implements ExileRegistryInit {
 
 
         SpellBuilder.of(MINION_EXPLOSION, PlayStyle.STR, SpellConfiguration.Builder.instant(0, 0), "Minion Explosion",
-                        Arrays.asList(SpellTag.area, SpellTag.damage))
+                        Arrays.asList(SpellTags.area, SpellTags.damage))
 
                 .weight(0)
                 .onCast(PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
@@ -38,7 +38,7 @@ public class BossSpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(CLOSE_NOVA, PlayStyle.STR, SpellConfiguration.Builder.instant(0, 0), "Close Nova",
-                        Arrays.asList(SpellTag.area, SpellTag.damage))
+                        Arrays.asList(SpellTags.area, SpellTags.damage))
 
                 .weight(0)
                 .onCast(PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))

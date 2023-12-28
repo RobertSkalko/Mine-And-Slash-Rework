@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.database.data.spells.components;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellDesc;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.SpellCastContext;
@@ -17,6 +16,8 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.ISkillGem;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellCastingData;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
+import com.robertx22.age_of_exile.tags.imp.SpellTag;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.effectdatas.SpendResourceEvent;
@@ -320,13 +321,13 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
             }
         }
 
-        MutableComponent taglist = TooltipUtils.getMutabletags(this.config.tags.stream().map(IAutoLocName::locName).iterator(), Gui.TAG_SEPARATOR.locName());
+        MutableComponent taglist = TooltipUtils.getMutabletags(this.config.tags.getTags(SpellTag.SERIALIZER).stream().map(x -> x.locName()).iterator(), Gui.TAG_SEPARATOR.locName());
         MutableComponent tagtext = Words.TAGS.locName().append(taglist);
 
         list.add(tagtext);
 
 
-        if (info.hasShiftDown && this.config.tags.contains(SpellTag.has_pet_ability)) {
+        if (info.hasShiftDown && this.config.tags.contains(SpellTags.has_pet_ability)) {
 
             list.clear(); // tooltip too long otherwise
 

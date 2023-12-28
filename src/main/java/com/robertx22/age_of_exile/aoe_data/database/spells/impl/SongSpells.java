@@ -4,11 +4,11 @@ import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffe
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeapon;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -29,7 +29,7 @@ public class SongSpells implements ExileRegistryInit {
         SpellBuilder.of(POWER_CHORD, PlayStyle.INT, SpellConfiguration.Builder.instant(7, 15)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Power Chord",
-                        Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.song))
+                        Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.song))
                 .manualDesc(
                         "Throw out a ball of music, dealing " + SpellCalcs.POWER_CHORD.getLocDmgTooltip()
                                 + " " + Elements.Physical.getIconNameDmg() + " and charming enemies, reducing their defenses.")
@@ -46,7 +46,7 @@ public class SongSpells implements ExileRegistryInit {
         SpellBuilder.of(RITARDANDO, PlayStyle.INT, SpellConfiguration.Builder.instant(7, 15)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Ritardando",
-                        Arrays.asList(SpellTag.projectile, SpellTag.damage, SpellTag.song))
+                        Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.song))
                 .manualDesc(
                         "Throw out a slow wave of sound, exploding upon contact and dealing " + SpellCalcs.RITARDANDO.getLocDmgTooltip()
                                 + " " + Elements.Physical.getIconNameDmg() + " and slowing enemies in an area.")
@@ -63,7 +63,7 @@ public class SongSpells implements ExileRegistryInit {
         SpellBuilder.of(RESONANCE, PlayStyle.INT, SpellConfiguration.Builder.multiCast(7, 20, 10, 3)
                                 .setSwingArm().setChargesAndRegen("resonance", 3, 20 * 30)
                                 .applyCastSpeedToCooldown(), "Resonance",
-                        Arrays.asList(SpellTag.projectile, SpellTag.area, SpellTag.damage, SpellTag.song))
+                        Arrays.asList(SpellTags.projectile, SpellTags.area, SpellTags.damage, SpellTags.song))
                 .manualDesc(
                         "Throw out a ball of music, dealing " + SpellCalcs.RESONANCE.getLocDmgTooltip()
                                 + " " + Elements.Physical.getIconNameDmg() + ". Hits against charmed enemies explode.")

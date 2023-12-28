@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.saveclasses.prof_tool;
 
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
-import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.profession.Profession;
 import com.robertx22.age_of_exile.database.data.profession.all.Professions;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
@@ -11,6 +10,7 @@ import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ITooltip;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.tags.all.SlotTags;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
@@ -99,7 +99,7 @@ public class ProfessionToolData implements ITooltip {
         ToolAffix data = new ToolAffix();
         data.rar = rar.GUID();
         data.p = rar.stat_percents.random();
-        data.id = ExileDB.Affixes().getFilterWrapped(x -> x.type == Affix.Type.tool && x.getAllTagReq().contains(getProfession().tool_tag) && x.getAllTagReq().contains(BaseGearType.SlotTag.tool.getTagId())).random().GUID();
+        data.id = ExileDB.Affixes().getFilterWrapped(x -> x.type == Affix.Type.tool && x.getAllTagReq().contains(getProfession().tool_tag) && x.getAllTagReq().contains(SlotTags.tool.GUID())).random().GUID();
 
         this.affixes.add(data);
     }

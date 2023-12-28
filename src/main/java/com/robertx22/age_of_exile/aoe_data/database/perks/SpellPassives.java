@@ -4,8 +4,6 @@ import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
-import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDuration;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.ArmorPenetration;
@@ -23,6 +21,8 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaR
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.age_of_exile.database.data.stats.types.summon.GolemSpellChance;
 import com.robertx22.age_of_exile.database.data.stats.types.summon.SummonHealth;
+import com.robertx22.age_of_exile.tags.all.EffectTags;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -124,8 +124,8 @@ public class SpellPassives implements ExileRegistryInit {
         PerkBuilder.passive(CRIT_DMG, 8, new OptScaleExactStat(4, Stats.CRIT_DAMAGE.get()));
         PerkBuilder.passive(SUMMON_HEALTH, 8, new OptScaleExactStat(4, SummonHealth.getInstance(), ModType.FLAT));
         PerkBuilder.passive(ENE_REGEN, 8, new OptScaleExactStat(4, EnergyRegen.getInstance(), ModType.PERCENT));
-        PerkBuilder.passive(TRAP_DMG, 8, new OptScaleExactStat(5, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.trap), ModType.FLAT));
-        PerkBuilder.passive(TRAP_CDR, 8, new OptScaleExactStat(3, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTag.trap), ModType.FLAT));
+        PerkBuilder.passive(TRAP_DMG, 8, new OptScaleExactStat(5, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.trap), ModType.FLAT));
+        PerkBuilder.passive(TRAP_CDR, 8, new OptScaleExactStat(3, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.trap), ModType.FLAT));
 
         // Shaman
         PerkBuilder.passive(HEALTH_SHA, 8, new OptScaleExactStat(3, Health.getInstance(), ModType.PERCENT));
@@ -134,8 +134,8 @@ public class SpellPassives implements ExileRegistryInit {
         PerkBuilder.passive(LIGHTNING_ELE, 8, new OptScaleExactStat(2, Stats.ELEMENTAL_DAMAGE.get(Elements.Lightning)));
         PerkBuilder.passive(ARMOR_PER_MANA, 8, new OptScaleExactStat(0.2f, DatapackStats.ARMOR_PER_MANA));
         PerkBuilder.passive(ELECTRIFY_CHANCE, 8, new OptScaleExactStat(4, new AilmentChance(Ailments.ELECTRIFY)));
-        PerkBuilder.passive(TOTEM_DMG, 8, new OptScaleExactStat(5, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTag.totem), ModType.FLAT));
-        PerkBuilder.passive(TOTEM_CDR, 8, new OptScaleExactStat(3, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTag.totem), ModType.FLAT));
+        PerkBuilder.passive(TOTEM_DMG, 8, new OptScaleExactStat(5, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.totem), ModType.FLAT));
+        PerkBuilder.passive(TOTEM_CDR, 8, new OptScaleExactStat(3, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.totem), ModType.FLAT));
 
         // Warrior
         PerkBuilder.passive(HEALTH_WAR, 8, new OptScaleExactStat(4, Health.getInstance(), ModType.PERCENT));

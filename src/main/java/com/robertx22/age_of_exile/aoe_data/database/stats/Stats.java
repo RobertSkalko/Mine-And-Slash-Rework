@@ -4,13 +4,15 @@ import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffe
 import com.robertx22.age_of_exile.aoe_data.database.stat_conditions.StatConditions;
 import com.robertx22.age_of_exile.aoe_data.database.stat_effects.StatEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.*;
-import com.robertx22.age_of_exile.database.data.exile_effects.EffectTags;
-import com.robertx22.age_of_exile.database.data.spells.SpellTag;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DataPackStatAccessor;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
+import com.robertx22.age_of_exile.tags.ModTag;
+import com.robertx22.age_of_exile.tags.TagType;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
+import com.robertx22.age_of_exile.tags.imp.SpellTag;
 import com.robertx22.age_of_exile.uncommon.effectdatas.*;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
@@ -33,22 +35,6 @@ public class Stats implements ExileRegistryInit {
 
     }
 
-    public static DataPackStatAccessor<EffectTags> EFFECT_DURATION_ON_YOU_PER_TAG = DatapackStatBuilder
-            .<EffectTags>of(x -> x.name() + "_eff_duration", x -> Elements.Physical)
-            .addAllOfType(EffectTags.values())
-            .worksWithEvent(ExilePotionEvent.ID)
-            .setPriority(0)
-            .setSide(EffectSides.Target)
-            .addCondition(x -> StatConditions.EFFECT_HAS_TAG.get(x))
-            .addEffect(e -> StatEffects.INCREASE_EFFECT_DURATION)
-            .setLocName(x -> Stat.format(
-                    Stat.VAL1 + "% to duration of " + x.getLocName() + " effects on you."
-            ))
-            .setLocDesc(x -> "")
-            .modifyAfterDone(x -> {
-                x.is_long = true;
-            })
-            .build();
 
     public static DataPackStatAccessor<EmptyAccessor> EFFECT_DURATION_YOU_CAST = DatapackStatBuilder
             .ofSingle("eff_dur_u_cast", Elements.Physical)
@@ -63,15 +49,15 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
-    public static DataPackStatAccessor<EffectTags> EFFECT_DURATION_YOU_CAST_PER_TAG = DatapackStatBuilder
-            .<EffectTags>of(x -> x.name() + "_eff_dur_u_cast", x -> Elements.Physical)
-            .addAllOfType(EffectTags.values())
+    public static DataPackStatAccessor<ModTag> EFFECT_DURATION_YOU_CAST_PER_TAG = DatapackStatBuilder
+            .<ModTag>of(x -> x.GUID() + "_eff_dur_u_cast", x -> Elements.Physical)
+            .addAllOfType(ModTag.MAP.get(TagType.Effect))
             .worksWithEvent(ExilePotionEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.EFFECT_HAS_TAG.get(x))
             .addEffect(e -> StatEffects.INCREASE_EFFECT_DURATION)
-            .setLocName(x -> x.getLocName() + " Effect Duration")
+            .setLocName(x -> x.locNameLangFileGUID() + " Effect Duration")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
@@ -280,7 +266,7 @@ public class Stats implements ExileRegistryInit {
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
-            .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTag.magic))
+            .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTags.magic))
             .addEffect(StatEffects.INCREASE_VALUE)
             .setLocName(x -> x.dmgName + " Spells Damage")
             .setLocDesc(x -> "Increases damage of spells of that element.")
@@ -577,7 +563,7 @@ public class Stats implements ExileRegistryInit {
             .setPriority(0)
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
-            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.area))
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.area))
             .addEffect(StatEffects.INCREASE_VALUE)
             .setLocName(x -> "Area Damage")
             .setLocDesc(x -> "Affects dmg done by area of effect abilities. Think meteor or other large aoe spells")
@@ -594,8 +580,8 @@ public class Stats implements ExileRegistryInit {
             .setPriority(0)
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
-            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.area))
-            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.trap))
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.area))
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.trap))
             .addEffect(StatEffects.INCREASE_VALUE)
             .setLocName(x -> "Trap Area Damage")
             .setLocDesc(x -> "Affects trap dmg done by area of effect abilities.")
@@ -746,7 +732,7 @@ public class Stats implements ExileRegistryInit {
             .setPriority(100)
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
-            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.totem))
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.totem))
             .addEffect(StatEffects.INCREASE_VALUE)
             .setLocName(x -> "Your Totem restoration effects are " + Stat.VAL1 + "% stronger.")
             .setLocDesc(x -> "")
@@ -767,7 +753,7 @@ public class Stats implements ExileRegistryInit {
             .setSide(EffectSides.Target)
             .addCondition(StatConditions.IS_SPELL)
             .addCondition(StatConditions.IS_RESOURCE.get(ResourceType.health))
-            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.rejuvenate))
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.rejuvenate))
             .addEffect(StatEffects.INCREASE_VALUE)
             .setLocName(x -> "Rejuvenation Healing")
             .setLocDesc(x -> "Increases Rejuvenation related heals on you.")
@@ -845,7 +831,7 @@ public class Stats implements ExileRegistryInit {
             .worksWithEvent(DamageEvent.ID)
             .setPriority(100)
             .setSide(EffectSides.Source)
-            .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTag.magic))
+            .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTags.magic))
             .addCondition(x -> StatConditions.IS_NOT_SUMMON_ATTACK)
             .addEffect(StatEffects.LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.get(ResourceType.health))
             .setLocName(x -> "Spell Lifesteal")
@@ -865,7 +851,7 @@ public class Stats implements ExileRegistryInit {
             .worksWithEvent(DamageEvent.ID)
             .setPriority(100)
             .setSide(EffectSides.Source)
-            .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTag.magic))
+            .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTags.magic))
             .addCondition(x -> StatConditions.IS_NOT_SUMMON_ATTACK)
             .addEffect(StatEffects.LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.get(ResourceType.magic_shield))
             .setLocName(x -> "Spell Magic Shield Steal") // need a better name than this lol
@@ -940,7 +926,7 @@ public class Stats implements ExileRegistryInit {
             .worksWithEvent(SpellStatsCalculationEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)
-            .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTag.magic))
+            .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTags.magic))
             .addEffect(StatEffects.DECREASE_CAST_TIME)
             .addEffect(StatEffects.APPLY_CAST_SPEED_TO_CD)
             .setLocName(x -> "Cast Speed")
@@ -969,15 +955,15 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
     public static DataPackStatAccessor<SpellTag> DAMAGE_PER_SPELL_TAG = DatapackStatBuilder
-            .<SpellTag>of(x -> x.name() + "_spell_dmg", x -> Elements.Physical)
-            .addAllOfType(SpellTag.values())
+            .<SpellTag>of(x -> x.GUID() + "_spell_dmg", x -> Elements.Physical)
+            .addAllOfType(SpellTag.getAll())
             .worksWithEvent(DamageEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x))
             .addEffect(StatEffects.INCREASE_VALUE)
-            .setLocName(x -> x.locname + " Damage")
+            .setLocName(x -> x.locNameForLangFile() + " Damage")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
@@ -985,14 +971,14 @@ public class Stats implements ExileRegistryInit {
             .build();
 
     public static DataPackStatAccessor<SpellTag> COOLDOWN_REDUCTION_PER_SPELL_TAG = DatapackStatBuilder
-            .<SpellTag>of(x -> x.name() + "_cdr", x -> Elements.Physical)
-            .addAllOfType(SpellTag.values())
+            .<SpellTag>of(x -> x.GUID() + "_cdr", x -> Elements.Physical)
+            .addAllOfType(SpellTag.getAll())
             .worksWithEvent(SpellStatsCalculationEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x))
             .addEffect(StatEffects.DECREASE_COOLDOWN)
-            .setLocName(x -> x.locname + " Spell Cooldown Reduction")
+            .setLocName(x -> x.locNameForLangFile() + " Spell Cooldown Reduction")
             .setLocDesc(x -> "Reduces spell cooldown of spells with the tag.")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
@@ -1036,7 +1022,7 @@ public class Stats implements ExileRegistryInit {
             .worksWithEvent(SpellStatsCalculationEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)
-            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.projectile))
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.projectile))
             .addEffect(StatEffects.INCREASE_PROJ_SPEED)
             .setLocName(x -> "Faster Projectiles")
             .setLocDesc(x -> "")
@@ -1052,7 +1038,7 @@ public class Stats implements ExileRegistryInit {
             .worksWithEvent(SpellStatsCalculationEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)
-            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.projectile))
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.projectile))
             .addEffect(StatEffects.PROJECTILE_COUNT)
             .setLocName(x -> "Projectile Count")
             .setLocDesc(x -> "")
@@ -1066,7 +1052,7 @@ public class Stats implements ExileRegistryInit {
             .worksWithEvent(SpellStatsCalculationEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)
-            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.projectile))
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.projectile))
             .addEffect(StatEffects.SET_BARRAGE)
             .setLocName(x -> "Projectiles Barrage")
             .setLocDesc(x -> "")
@@ -1079,7 +1065,7 @@ public class Stats implements ExileRegistryInit {
             .worksWithEvent(SpellStatsCalculationEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)
-            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.summon))
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.summon))
             .addEffect(StatEffects.DURATION_INCREASE)
             .setLocName(x -> "Summon Duration")
             .setLocDesc(x -> "Your summons last longer (mobs like zombie, wolf etc summons)")
@@ -1096,7 +1082,7 @@ public class Stats implements ExileRegistryInit {
             .worksWithEvent(SpellStatsCalculationEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)
-            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.totem))
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.totem))
             .addEffect(StatEffects.DURATION_INCREASE)
             .setLocName(x -> "Totem Duration")
             .setLocDesc(x -> "")
@@ -1128,7 +1114,7 @@ public class Stats implements ExileRegistryInit {
             .setPriority(0)
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
-            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.summon))
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.summon))
             .addEffect(StatEffects.INCREASE_VALUE)
             .setLocName(x -> "Summon Damage")
             .setLocDesc(x -> "Increases damage of your summoned minions.")
@@ -1145,7 +1131,7 @@ public class Stats implements ExileRegistryInit {
             .setPriority(0)
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
-            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.golem))
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.golem))
             .addEffect(StatEffects.INCREASE_VALUE)
             .setLocName(x -> "Golem Damage")
             .setLocDesc(x -> "")
@@ -1161,7 +1147,7 @@ public class Stats implements ExileRegistryInit {
             .worksWithEvent(SpellStatsCalculationEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)
-            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.area))
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.area))
             .addEffect(StatEffects.INCREASE_AREA)
             .setLocName(x -> "Area of Effect")
             .setLocDesc(x -> "Spell aoe effects will be larger")
@@ -1175,7 +1161,7 @@ public class Stats implements ExileRegistryInit {
             .worksWithEvent(SpellStatsCalculationEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)
-            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTag.projectile))
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.projectile))
             .addEffect(StatEffects.SET_PIERCE)
             .setLocName(x -> "Piercing Projectiles")
             .setLocDesc(x -> "Makes spell pierce enemies and keep on")
@@ -1200,15 +1186,15 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
-    public static DataPackStatAccessor<EffectTags> EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG = DatapackStatBuilder
-            .<EffectTags>of(x -> "inc_effect_of_" + x.name() + "_buff_given", x -> Elements.Physical)
-            .addAllOfType(EffectTags.values())
+    public static DataPackStatAccessor<ModTag> EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG = DatapackStatBuilder
+            .<ModTag>of(x -> "inc_effect_of_" + x.GUID() + "_buff_given", x -> Elements.Physical)
+            .addAllOfType(ModTag.MAP.get(TagType.Effect))
             .worksWithEvent(ExilePotionEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.EFFECT_HAS_TAG.get(x))
             .addEffect(e -> StatEffects.INCREASE_VALUE)
-            .setLocName(x -> x.getLocName() + " Effect Strength")
+            .setLocName(x -> x.locNameForLangFile() + " Effect Strength")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
                 //  x.is_long = true;
@@ -1217,15 +1203,15 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
-    public static DataPackStatAccessor<EffectTags> EFFECT_OF_BUFFS_ON_YOU_PER_EFFECT_TAG = DatapackStatBuilder
-            .<EffectTags>of(x -> "inc_effect_of_" + x.name() + "_buff_on_you", x -> Elements.Physical)
-            .addAllOfType(EffectTags.values())
+    public static DataPackStatAccessor<ModTag> EFFECT_OF_BUFFS_ON_YOU_PER_EFFECT_TAG = DatapackStatBuilder
+            .<ModTag>of(x -> "inc_effect_of_" + x.GUID() + "_buff_on_you", x -> Elements.Physical)
+            .addAllOfType(ModTag.MAP.get(TagType.Effect))
             .worksWithEvent(ExilePotionEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Target)
             .addCondition(x -> StatConditions.EFFECT_HAS_TAG.get(x))
             .addEffect(e -> StatEffects.INCREASE_VALUE)
-            .setLocName(x -> Stat.VAL1 + "% to effectiveness of " + x.getLocName() + " buffs on you")
+            .setLocName(x -> Stat.VAL1 + "% to effectiveness of " + x.locNameForLangFile() + " buffs on you")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
                 x.is_long = true;

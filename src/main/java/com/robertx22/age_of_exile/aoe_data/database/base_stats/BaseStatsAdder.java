@@ -9,6 +9,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Ene
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.EnergyRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShieldRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -30,11 +31,7 @@ public class BaseStatsAdder implements ExileRegistryInit {
 
         c.id = PLAYER;
 
-        c.nonScaled(RegeneratePercentStat.HEALTH, 2);
         c.nonScaled(RegeneratePercentStat.MAGIC_SHIELD, 2);
-
-        c.nonScaled(RegeneratePercentStat.MANA, 3);
-        c.nonScaled(RegeneratePercentStat.ENERGY, 5);
 
         c.scaled(WeaponDamage.getInstance(), 2);
 
@@ -42,9 +39,10 @@ public class BaseStatsAdder implements ExileRegistryInit {
         c.scaled(Mana.getInstance(), 50);
         c.scaled(Energy.getInstance(), 50);
 
-        c.scaled(HealthRegen.getInstance(), 1);
-        c.scaled(ManaRegen.getInstance(), 1);
-        c.scaled(EnergyRegen.getInstance(), 1);
+        c.scaled(HealthRegen.getInstance(), 2);
+        c.scaled(MagicShieldRegen.getInstance(), 2);
+        c.scaled(ManaRegen.getInstance(), 3);
+        c.scaled(EnergyRegen.getInstance(), 5);
 
         c.nonScaled(Stats.MAX_SUMMON_CAPACITY.get(), 3);
 

@@ -2,10 +2,11 @@ package com.robertx22.age_of_exile.aoe_data.database.affixes;
 
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
-import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.requirements.Requirements;
 import com.robertx22.age_of_exile.database.data.requirements.TagRequirement;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
+import com.robertx22.age_of_exile.tags.ModTag;
+import com.robertx22.age_of_exile.tags.TagType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class AffixBuilder {
     public List<String> tags = new ArrayList<>();
     public Affix.Type type;
 
-    TagRequirement tagRequirement = new TagRequirement();
+    TagRequirement tagRequirement = new TagRequirement(TagType.GearSlot, new ArrayList<>(), new ArrayList<>());
 
     private AffixBuilder(String id) {
         this.guid = id;
@@ -38,16 +39,16 @@ public class AffixBuilder {
         return this;
     }
 
-    public AffixBuilder includesTags(BaseGearType.SlotTag... tags) {
+    public AffixBuilder includesTags(ModTag... tags) {
         this.tagRequirement.included.addAll(Arrays.stream(tags)
-                .map(x -> x.getTagId())
+                .map(x -> x.GUID())
                 .collect(Collectors.toList()));
         return this;
     }
 
-    public AffixBuilder excludesTags(BaseGearType.SlotTag... tags) {
+    public AffixBuilder excludesTags(ModTag... tags) {
         this.tagRequirement.excluded.addAll(Arrays.stream(tags)
-                .map(x -> x.getTagId())
+                .map(x -> x.GUID())
                 .collect(Collectors.toList()));
         return this;
     }
@@ -57,7 +58,7 @@ public class AffixBuilder {
         return this;
     }
 
- 
+
     public AffixBuilder coreStat(Stat stat) {
         return this.stats(new StatMod(2, 15, stat, ModType.FLAT));
     }
