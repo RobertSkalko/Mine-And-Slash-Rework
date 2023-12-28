@@ -1,8 +1,10 @@
 {
+
 	"infinite_dungeons.reward_list.gem_box": "幸运宝石袋",
 	"infinite_dungeons.reward_list.gear_crate": "幸运装备袋",
 	"infinite_dungeons.reward_list.upgrade_box": "升级材料袋",
 	"infinite_dungeons.reward_list.any_slot_gear_crate": "手造装备袋",
+
 
 	"item.mmorpg.custom_loot_crate": "战利品奖励箱",
 	"item.mmorpg.loot_crate": "战利品奖励箱",
@@ -47,7 +49,7 @@
 	"item.mmorpg.currency_bag": "通货袋",
 	"item.mmorpg.newbie_gear_bag": "新手装备袋",
 	"item.mmorpg.tutorial_book": "流放时代教程",
-	"item.mmorpg.map_back_portal": "回城珍珠",
+	"item.mmorpg.map_back_portal": "地牢脱离珍珠",
 	"item.mmorpg.level_nearest_entity": "提升最近1个生物的等级",
 	"item.mmorpg.increase_rarity_nearest_entity": "提升最近1个生物的品级",
 	"item.mmorpg.mat.infused_iron": "注魔铁锭",
@@ -59,7 +61,6 @@
 	"item.mmorpg.teleport_scroll": "回城卷轴",
 	"item.mmorpg.prefix": "前缀",
 	"item.mmorpg.suffix": "后缀",
-	"item.mmorpg.custom_crate": "板条箱",
 	"_comment": "SPELL TOOLTIPS",
 	"mmorpg.tooltip.aoe_spell_explosion": "释放元素弹体，命中后造成范围伤害.",
 	"mmorpg.tooltip.single_target_spell_bolt": "释放元素弹体，对单个目标造成伤害.",
@@ -67,18 +68,22 @@
 	"mmorpg.tooltip.aoe_bomb_spell": "留下一枚炸弹，之后造成范围爆炸伤害.",
 	"mmorpg.tooltip.spell_self_regen": "缓慢的持续治疗施法者的生命值.",
 	"mmorpg.tooltip.aoe_spell_nova": "伤害你周围的所有目标.",
-	"mmorpg.tooltip.ele_bonus_atk_dmg_spell": "给予增益效果，基于法力造成额外伤害.",
+	"mmorpg.tooltip.ele_bonus_atk_dmg_spell": "给予增益效果，造成基于消耗的法力值的额外伤害.",
+	
 	"_comment": "ITEM TOOLTIPS",
 	"_comment": "MAPS",
 	"mmorpg.name.map": "冒险地图",
 	"mmorpg.tooltip.put_in_mapdevice": "右键点击地图装置使用",
-	"mmorpg.tooltip.press_shift_more_info": "[Shift]: 信息，[Alt]: 描述，[Ctrl]: 附魔",
+	"mmorpg.tooltip.press_shift_more_info": "[Alt]: 查看描述，[Ctrl]: 隐藏",
 	"mmorpg.tooltip.affix_rarity_lootbonus": "词缀品级战利品奖励",
+
+
 	"entity.mmorpg.nature_slime": "神谕史莱姆",
 	"entity.mmorpg.fire_slime": "火焰史莱姆",
 	"entity.mmorpg.water_slime": "冰封史莱姆",
 	"entity.mmorpg.thunder_slime": "闪光史莱姆",
 	"entity.mmorpg.arcane_slime": "奥术史莱姆",
+	
 	"entity.mmorpg.nature_spider": "神谕蜘蛛",
 	"entity.mmorpg.fire_spider": "火焰蜘蛛",
 	"entity.mmorpg.water_spider": "冰封蜘蛛",
