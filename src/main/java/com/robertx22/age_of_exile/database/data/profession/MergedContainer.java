@@ -26,7 +26,6 @@ public class MergedContainer extends SimpleContainer implements WorldlyContainer
     }
 
     public boolean addStack(Inventory inv, ItemStack stack) {
-
         for (int index : getIndices(inv.id)) {
             if (getItem(index).isEmpty()) {
                 setItem(index, stack.copy());

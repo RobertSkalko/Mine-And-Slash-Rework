@@ -36,7 +36,6 @@ public class PerkButton extends ImageButton {
     public PointData point;
     public TalentTree school;
     public PlayerData playerData;
-    public String search;
 
     public int originalWidth;
     public int originalHeight;
@@ -137,6 +136,10 @@ public class PerkButton extends ImageButton {
     public void renderWidget(GuiGraphics gui, int mouseX, int mouseY, float pPartialTick) {
         setTooltipMOD(gui, mouseX, mouseY);
 
+        if (!screen.shouldRender(getX(), getY(), screen.ctx)) {
+            return;
+        }
+
         gui.pose().pushPose();
 
         float scale = 2 - screen.zoom;
@@ -159,13 +162,15 @@ public class PerkButton extends ImageButton {
         // background
         RenderSystem.enableDepthTest();
 
+        var search = SkillTreeScreen.SEARCH.getValue();
+
         boolean containsSearchStat = !search.isEmpty() && perk.stats.stream()
                 .anyMatch(item -> item.getStat().translate().toLowerCase().contains(search.toLowerCase()));
 
 
         float opacity = containsSearchStat || search.isEmpty() ? 1F : 0.2f;
 
-        if (!this.search.isEmpty()) {
+        if (!search.isEmpty()) {
             if (search.equals("all")) {
                 if (status != PerkStatus.CONNECTED) {
                     opacity = 0.2F;

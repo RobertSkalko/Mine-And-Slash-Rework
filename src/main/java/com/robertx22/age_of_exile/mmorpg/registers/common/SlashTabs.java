@@ -16,7 +16,7 @@ import net.minecraft.world.item.ItemStack;
 public class SlashTabs {
     public static RegObj<CreativeModeTab> CREATIVE = Def.creativeTab("tab", () -> new CreativeModeTab.Builder(CreativeModeTab.Row.TOP, 2)
             .icon(() -> RarityItems.RARITY_STONE.get(IRarity.MYTHIC_ID).get().getDefaultInstance())
-            .title(Words.MOD_NAME.locName().withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD))
+            .title(Words.MOD_NAME.locName().withStyle(ChatFormatting.DARK_PURPLE, ChatFormatting.BOLD))
             .displayItems((pParameters, x) -> {
                 for (Item item : VanillaUTIL.REGISTRY.items().getAll()) {
                     if (VanillaUTIL.REGISTRY.items().getKey(item).getNamespace().equals(SlashRef.MODID)) {

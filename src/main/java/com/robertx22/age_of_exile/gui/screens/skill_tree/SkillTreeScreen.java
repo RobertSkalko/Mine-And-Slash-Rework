@@ -14,7 +14,6 @@ import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree.SchoolTyp
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.bases.BaseScreen;
 import com.robertx22.age_of_exile.gui.bases.INamedScreen;
-import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.ConnectionButton;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkButton;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkConnectionRender;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkScreenContext;
@@ -153,23 +152,20 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     private void renderConnections(GuiGraphics gui) {
 
-        PerkScreenContext ctx = new PerkScreenContext(this);
-
         for (PerkConnectionRender con : this.buttonConnections) {
             this.renderConnection(gui, con);
         }
-
     }
 
 
     public boolean shouldRender(int x, int y, PerkScreenContext ctx) {
 
+        // todo this doesnt seem to work perfect but at least it stops rendering  some offscreen buttons
         if (x >= ctx.offsetX + 10 && x < ctx.offsetX + (sizeX()) * ctx.getZoomMulti() - 10) {
             if (y >= ctx.offsetY + 10 && y < ctx.offsetY + (sizeY()) * ctx.getZoomMulti() - 10) {
                 return true;
             }
         }
-
         return false;
 
     }
@@ -401,7 +397,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
             targetZoom += 0.1F;
         }
 
-        this.targetZoom = Mth.clamp(targetZoom, 0.08F, 1);
+        this.targetZoom = Mth.clamp(targetZoom, 0.15F, 1);
 
         this.zoom = targetZoom;
 
@@ -422,9 +418,14 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
     }
 
+    public PerkScreenContext ctx = new PerkScreenContext(this);
+
+
     @Override
     public void render(GuiGraphics gui, int x, int y, float ticks) {
-        String searchTerm = SkillTreeScreen.SEARCH.getValue();
+        ctx = new PerkScreenContext(this);
+
+        // String searchTerm = SkillTreeScreen.SEARCH.getValue();
 
         // Watch watch = new Watch();
         mouseRecentlyClickedTicks--;
@@ -442,21 +443,16 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
             for (Renderable e : this.renderables) {
                 if (e instanceof PerkButton b)
                     if (originalButtonLocMap.containsKey(b)) {
-                        b.setX((this.originalButtonLocMap.get(b).x));
-                        b.setY((this.originalButtonLocMap.get(b).y));
 
-                        b.setX((int) (b.getX() + addx));
-                        b.setY((int) (b.getY() + addy));
+                        int xp = (int) (originalButtonLocMap.get(b).x + addx + scrollX);
+                        int yp = (int) (originalButtonLocMap.get(b).y + addy + scrollY);
 
-                        b.setX(b.getX() + scrollX);
-                        b.setY(b.getY() + scrollY);
+                        b.setX(xp);
+                        b.setY(yp);
 
-                        b.search = searchTerm;
+                        //b.search = searchTerm;
                     }
             }
-
-
-            //   renderBackgroundDirt(gui, this, 0);
 
 
             this.renderConnections(gui);
@@ -469,21 +465,11 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                 mouseRecentlyClickedTicks = 0;
             }
 
-
-            gui.drawManaged(() -> {
-                for (Renderable r : this.renderables) {
-                    if (r instanceof ConnectionButton c) {
-                        c.renderButtonForReal(gui);
-                    }
-                }
-            });
-
             super.render(gui, x, y, ticks);
 
             this.tick_count++;
 
-        } catch (
-                Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

@@ -74,7 +74,7 @@ public enum Chats implements IAutoLocName {
     OPEN_LOOT_CHEST("Right-click to open Loot Chest!"),
     VINES_SHRINK("The Vines appear to shrink, for now..."),
     PROF_RECIPE_NOT_FOUND("Recipe not found"),
-    PROF_OUTPUT_SLOT_NOT_EMPTY("Output slots are not empty."),
+    PROF_OUTPUT_SLOT_NOT_EMPTY("Needs at least 1 empty Output slot."),
     PROF_RECIPE_LEVEL_NOT_ENOUGH("Not high enough level to craft."),
     GEAR_DROP("You do not meet the requirements of that item."),
     COMMAND_BLOCK_UNAVALIABLE("Command blocks are disabled, this will stop you from playing Mine and slash Dungeons!"),

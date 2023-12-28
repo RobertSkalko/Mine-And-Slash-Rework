@@ -17,16 +17,14 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class ProfessionBlockEntity extends BlockEntity {
 
@@ -66,7 +64,7 @@ public class ProfessionBlockEntity extends BlockEntity {
                 }
             }
         }
-        
+
         if (ownerUUID != null) {
             return l.getPlayerByUUID(ownerUUID);
         }
@@ -142,6 +140,17 @@ public class ProfessionBlockEntity extends BlockEntity {
         this.setChanged(); // todo will this cause any problems to have it perma on?
     }
 
+    public boolean hasAtLeastOneFreeOutputSlot() {
+        var inv = this.inventory.getInventory(OUTPUTS);
+
+        for (int i = 0; i < inv.getContainerSize(); i++) {
+            if (inv.getItem(i).isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public ExplainedResult tryRecipe(Player p, boolean justCheck) {
 
 
@@ -152,7 +161,7 @@ public class ProfessionBlockEntity extends BlockEntity {
         if (recipe == null) {
             return ExplainedResult.failure(Chats.PROF_RECIPE_NOT_FOUND.locName());
         }
-        if (!this.inventory.getInventory(OUTPUTS).isEmpty()) {
+        if (!hasAtLeastOneFreeOutputSlot()) {
             return ExplainedResult.failure(Chats.PROF_OUTPUT_SLOT_NOT_EMPTY.locName());
         }
         if (recipe.getLevelRequirement() > ownerLvl) {
@@ -184,9 +193,12 @@ public class ProfessionBlockEntity extends BlockEntity {
             SoundUtils.playSound(level, getBlockPos(), SoundEvents.FIRE_EXTINGUISH);
             SoundUtils.playSound(level, getBlockPos(), SoundEvents.EXPERIENCE_ORB_PICKUP);
         } else {
-            for (ItemStack stack : recipe.craft(p, getMats())) {
-                inventory.addStack(OUTPUTS, stack);
-            }
+
+            var output = recipe.craft(p, getMats());
+
+            tryPutToOutputs(output);
+
+
         }
 
 
@@ -195,40 +207,53 @@ public class ProfessionBlockEntity extends BlockEntity {
 
     }
 
+    public void tryPutToOutputs(List<ItemStack> stacks) {
+        for (ItemStack stack : stacks) {
+            if (!inventory.addStack(OUTPUTS, stack)) {
+                ItemEntity itementity = new ItemEntity(level, getBlockPos().getX(), getBlockPos().getY() + 0.5, getBlockPos().getZ(), stack);
+                itementity.setDefaultPickUpDelay();
+                level.addFreshEntity(itementity);
+            }
+        }
+    }
+
     public ExplainedResult trySalvage(Player p, boolean justCheck) {
+
+        if (!hasAtLeastOneFreeOutputSlot()) {
+            return ExplainedResult.failure(Chats.PROF_OUTPUT_SLOT_NOT_EMPTY.locName());
+        }
 
         int ownerLvl = Load.player(p).professions.getLevel(getProfession().GUID());
 
         if (getProfession().GUID().equals(Professions.SALVAGING)) {
-            if (this.inventory.getInventory(OUTPUTS).isEmpty()) {
-                for (ItemStack stack : this.getMats()) {
+            for (ItemStack stack : this.getMats()) {
 
-                    ICommonDataItem data = ICommonDataItem.load(stack);
-                    ISalvagable sal = ISalvagable.load(stack);
-                    if (data != null && sal != null) {
-                        if (sal.isSalvagable()) {
+                ICommonDataItem data = ICommonDataItem.load(stack);
+                ISalvagable sal = ISalvagable.load(stack);
+                if (data != null && sal != null) {
+                    if (sal.isSalvagable()) {
 
-                            if (justCheck) {
-                                return ExplainedResult.success();
-                            }
-                            for (ItemStack res : sal.getSalvageResult(stack)) {
-                                this.inventory.addStack(OUTPUTS, res);
-                            }
-                            this.addExp(data.getSalvageExpReward());
-
-                            float multi = data.getRarity().item_value_multi;
-
-                            stack.shrink(1);
-                            for (ItemStack randomDrop : getProfession().getAllDrops(p, ownerLvl, data.getLevel(), multi)) {
-                                this.inventory.addStack(OUTPUTS, randomDrop);
-                            }
-
+                        if (justCheck) {
                             return ExplainedResult.success();
                         }
+
+                        float multi = data.getRarity().item_value_multi;
+
+                        List<ItemStack> output = new ArrayList<>();
+                        output.addAll(sal.getSalvageResult(stack));
+                        output.addAll(getProfession().getAllDrops(p, ownerLvl, data.getLevel(), multi));
+
+                        tryPutToOutputs(output);
+
+                        this.addExp(data.getSalvageExpReward());
+
+                        stack.shrink(1);
+
+                        return ExplainedResult.success();
                     }
                 }
-
             }
+
         }
         return ExplainedResult.failure(Component.literal(""));
     }

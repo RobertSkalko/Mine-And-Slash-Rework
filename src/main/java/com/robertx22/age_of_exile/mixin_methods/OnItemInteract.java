@@ -43,13 +43,13 @@ public class OnItemInteract {
         });
 
         ForgeEvents.registerForgeEvent(ItemStackedOnOtherEvent.class, x -> {
-            ItemStack cursor = x.getStackedOnItem();
-            ItemStack stack = x.getCarriedItem();
             Player player = x.getPlayer();
 
             if (player.level().isClientSide) {
                 return;
             }
+            ItemStack cursor = x.getStackedOnItem();
+            ItemStack stack = x.getCarriedItem();
 
             boolean sound = true;
 
@@ -91,7 +91,7 @@ public class OnItemInteract {
 
                         success = true;
                         cursor.shrink(1);
-                        
+
                     } else {
                         if (stack.getItem() instanceof CraftedSoulItem) {
                             stack.getOrCreateTag().putString("force_tag", force.tag);
