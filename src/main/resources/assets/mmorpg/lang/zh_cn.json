@@ -1,208 +1,238 @@
 {
-
+	
 	"death.attack.mmorpg": "%1$s被%2$s杀死",
-
-	"infinite_dungeons.reward_list.gem_box": "幸运宝石包",
-	"infinite_dungeons.reward_list.gear_crate": "幸运装备箱",
-	"infinite_dungeons.reward_list.upgrade_box": "强化材料箱",
-	"infinite_dungeons.reward_list.any_slot_gear_crate": "定制装备箱",
-
-
-	"item.mmorpg.custom_loot_crate": "战利品箱",
-	"item.mmorpg.loot_crate": "战利品箱",
-	"item.mmorpg.custom_crate": "装备箱",
-
+	
+	"block.mmorpg.harvest.purple": "Chaotic Seeds",
+	"block.mmorpg.harvest.green": "Primal Seeds",
+	"block.mmorpg.harvest.blue": "Lucid Seeds",
+	
+	
+	"item.mmorpg.custom_loot_crate": "战利品奖励箱",
+	"item.mmorpg.loot_crate": "战利品奖励箱",
+	"item.mmorpg.custom_crate": "装备奖励箱",
+	
 	"_comment": "# 创造模式标签",
 	"itemGroup.mmorpg.tab": "挖矿与砍杀",
-
-	"death.attack.mmorpg.custom_damage": "巨量伤害!",
-	"death.attack.death_potion": "%1$s认为喝带有“死亡”的药水会是个好主意~",
-
+	
+	"death.attack.mmorpg.custom_damage": "成吨的伤害！",
+	"death.attack.death_potion": "%1$s 居然觉得喝下名字上带着“死亡”俩字的药水是个好主意~",
+	
 	"_comment": "工作台",
-
+	
 	"block.mmorpg.teleporter": "地图装置",
-
+	
 	"_comment": "物品提示",
-	"mmorpg.tooltip.item_modifiable_in_station": "可在装备修改站中使用",
-	"mmorpg.tooltip.lootbox": "里面可能有什么?",
-	"mmorpg.tooltip.player_levelup": "如果你的经验条已满,请使用此物品升级~",
-	"mmorpg.tooltip.capacitor": "放入修理站可减少燃料消耗。",
-	"mmorpg.tooltip.capacitor2": "燃料乘数",
-	"mmorpg.tooltip.socketable_item": "这个宝石可以插在插槽中",
+	"mmorpg.tooltip.item_modifiable_in_station": "可以在装备强化台中使用",
+	"mmorpg.tooltip.lootbox": "会开出来什么呢？",
+	"mmorpg.tooltip.player_levelup": "当你的经验值攒满之后，便可以右键使用该物品进行升级。",
+	"mmorpg.tooltip.capacitor": "放在装备修理台中以减少燃料的消耗。",
+	"mmorpg.tooltip.capacitor2": "燃料消耗乘数",
+	"mmorpg.tooltip.socketable_item": "该宝石可以放入插槽中",
 	"_comment": "稀有度物品名称",
 	"_comment": "杂项物品",
-	"item.mmorpg.jewel.dex": "翡翠宝石",
-	"item.mmorpg.jewel.str": "陨石宝石",
-	"item.mmorpg.jewel.int": "星尘宝石",
+	"item.mmorpg.jewel.dex": "翠绿珠宝",
+	"item.mmorpg.jewel.str": "陨石珠宝",
+	"item.mmorpg.jewel.int": "星尘珠宝",
 	"item.mmorpg.jewel.unique_crafted": "符文工艺独特宝石",
-
-	"item.mmorpg.stone.0": "普通石头",
-	"item.mmorpg.stone.1": "非凡石头",
-	"item.mmorpg.stone.2": "稀有石头",
-	"item.mmorpg.stone.3": "史诗石头",
-	"item.mmorpg.stone.4": "传奇石头",
-	"item.mmorpg.stone.5": "神话石头",
-
+	
+	"item.mmorpg.stone.0": "普通级修复石",
+	"item.mmorpg.stone.1": "精良级修复石",
+	"item.mmorpg.stone.2": "稀有级修复石",
+	"item.mmorpg.stone.3": "史诗级修复石",
+	"item.mmorpg.stone.4": "传说级修复石",
+	"item.mmorpg.stone.5": "神话级修复石",
+	
 	"item.mmorpg.map": "探险地图",
 	"item.mmorpg.stat_soul": "装备属性之魂",
 	"item.mmorpg.set_map": "套装地图工具",
 	"item.mmorpg.loot_bag": "装备战利品袋",
 	"item.mmorpg.map_bag": "地图袋",
-	"item.mmorpg.currency_bag": "货币袋",
+	"item.mmorpg.currency_bag": "通货袋",
 	"item.mmorpg.newbie_gear_bag": "新手装备袋",
-	"item.mmorpg.tutorial_book": "流亡时代教程",
-	"item.mmorpg.map_back_portal": "地图回程珍珠",
+	"item.mmorpg.tutorial_book": "流放时代教程",
+	"item.mmorpg.map_back_portal": "地牢脱离珍珠",
 	"item.mmorpg.level_nearest_entity": "升级最近的实体",
-	"item.mmorpg.increase_rarity_nearest_entity": "提高附近实体稀有度",
-	"item.mmorpg.mat.infused_iron": "聚能铁",
-	"item.mmorpg.mat.crystallized_essence": "结晶精华",
+	"item.mmorpg.increase_rarity_nearest_entity": "提高最近实体的稀有度",
+	"item.mmorpg.mat.infused_iron": "注魔铁",
+	"item.mmorpg.mat.crystallized_essence": "源质结晶",
 	"item.mmorpg.mat.golden_orb": "金色宝珠",
 	"item.mmorpg.mat.mythic_essence": "神话精华",
-	"item.mmorpg.awaken_runeword": "唤醒符文",
-	"item.mmorpg.identify_tome": "鉴定古卷",
+	"item.mmorpg.awaken_runeword": "觉醒符文之语",
+	"item.mmorpg.identify_tome": "鉴定卷轴",
 	"item.mmorpg.teleport_scroll": "回城卷轴",
 	"item.mmorpg.prefix": "前缀",
 	"item.mmorpg.suffix": "后缀",
-
+	
 	"_comment": "物品提示",
 	"_comment": "地图",
 	"mmorpg.name.map": "探险地图",
 	"mmorpg.tooltip.put_in_mapdevice": "右键点击地图装置使用",
 	"mmorpg.tooltip.press_shift_more_info": "[Alt]: 描述, [Ctrl]: 隐藏",
-	"mmorpg.tooltip.affix_rarity_lootbonus": "含有稀有度词缀的战利品奖励",
-
+	"mmorpg.tooltip.affix_rarity_lootbonus": "词缀品级的战利品奖励",
+	
 	"entity.mmorpg.zombie": "僵尸",
+	"entity.mmorpg.spider": "蜘蛛",
 	"entity.mmorpg.spirit_wolf": "幽狼",
 	"entity.mmorpg.skeleton": "骷髅",
 	"entity.mmorpg.thorny_minion": "荆棘小兵",
 	"entity.mmorpg.explody_minion": "TNT小兵",
-
+	
 	"entity.mmorpg.fire_golem": "火焰魔像",
 	"entity.mmorpg.cold_golem": "冰霜魔像",
 	"entity.mmorpg.lightning_golem": "闪电魔像",
-
+	
 	"entity.mmorpg.boss_golem": "腐化魔像",
-
+	
 	"effect.mmorpg.food_health_regen": "生命恢复",
 	"effect.mmorpg.food_mana_regen": "魔力恢复",
-	"effect.mmorpg.food_magic_shield_regen": "魔法恢复",
-	"effect.mmorpg.knockback_resist": "击退抗性",
+	"effect.mmorpg.food_magic_shield_regen": "魔法盾恢复",
+	"effect.mmorpg.knockback_resist": "击退抵抗",
 	"effect.mmorpg.anti_wither": "凋零抵抗",
 	"effect.mmorpg.anti_poison": "中毒抵抗",
-	"effect.mmorpg.scroll_buff": "卷轴buff",
-
+	"effect.mmorpg.scroll_buff": "卷轴增益",
+	"effect.mmorpg.instant_arrows": "瞬发箭矢",
+	"effect.mmorpg.meal": "食物增益",
+	"effect.mmorpg.fish": "海鲜增益",
+	"effect.mmorpg.potion": "药水增益",
+	
 
 	"item.mmorpg.loot_crate.common": "普通物品战利品箱",
 	"item.mmorpg.loot_crate.magic": "魔法物品战利品箱",
 	"item.mmorpg.loot_crate.rare": "稀有物品战利品箱",
-	"item.mmorpg.loot_crate.relic": "圣物战利品箱",
+	"item.mmorpg.loot_crate.relic": "遗物战利品箱",
 	"item.mmorpg.loot_crate.unique": "独特物品战利品箱",
 	"item.mmorpg.loot_crate.gem": "宝石战利品箱",
 	"item.mmorpg.loot_crate.rune": "符文战利品箱",
-
-
-	"item.mmorpg.loot_table_chest": "等级奖励袋",
-
+	
+	
+	"item.mmorpg.loot_table_chest": "升级奖励袋",
+	
 	"mmorpg.one_of_a_kind.passive_spell": "被动法术",
 	"mmorpg.one_of_a_kind.start": "开始",
-
+	
 	"curios.identifier.salvage_bag": "回收袋",
-
+	"mmorpg.chest_type.aura": "光环",
+	"mmorpg.chest_type.currency": "通货",
+	"mmorpg.chest_type.gear": "装备",
+	"mmorpg.chest_type.gem": "宝石",
+	"mmorpg.chest_type.harvest_blue_chest": "流明采集宝箱",
+	"mmorpg.chest_type.harvest_green_chest": "原始采集宝箱",
+	"mmorpg.chest_type.harvest_purple_chest": "混沌采集宝箱",
+	"mmorpg.chest_type.map": "地图",
+	"mmorpg.chest_type.rune": "符文",
+	"mmorpg.chest_type.support_gem": "支援宝石",
 	"_comment": " [CATEGORY]: MISC - NAMES",
-
-	"mmorpg.mob_affix.chaos_mob_affix": "§5☀混沌",
-	"mmorpg.mob_affix.fire_lord": "§c☀火之领主",
-	"mmorpg.mob_affix.fire_mob_affix": "§c☀火焰",
-	"mmorpg.mob_affix.full_fire": "§c☀纯火",
-	"mmorpg.mob_affix.full_lightning": "§e☀纯雷",
-	"mmorpg.mob_affix.full_water": "§b☀纯冰",
-	"mmorpg.mob_affix.nature_lord": "§5☀自然之领主",
-	"mmorpg.mob_affix.phys_lord": "§6☀物理之领主",
-	"mmorpg.mob_affix.reflect": "§b❁反射",
-	"mmorpg.mob_affix.thorny_mobs": "§b❁荆棘",
-	"mmorpg.mob_affix.vampire": "§c❁吸血鬼",
-	"mmorpg.mob_affix.water_mob_affix": "§b☀冰冻",
-	"mmorpg.mob_affix.winter": "§b☀冬天",
-	"item.mmorpg.backpack.0": "§7普通背包",
-	"item.mmorpg.backpack.1": "§a稀有背包",
-	"item.mmorpg.backpack.2": "§b罕见背包",
-	"item.mmorpg.backpack.3": "§d史诗背包",
-	"item.mmorpg.backpack.4": "§6传说背包",
-	"item.mmorpg.backpack.5": "§5神话背包",
-	"item.mmorpg.chest.common_gear": "普通装备宝箱",
-	"item.mmorpg.chest.currency": "货币宝箱",
-	"item.mmorpg.chest.epic_gear": "史诗装备宝箱",
-	"item.mmorpg.chest.harvest_blue": "流明采集宝箱",
-	"item.mmorpg.chest.harvest_green": "原始采集宝箱",
-	"item.mmorpg.chest.harvest_purple": "混沌采集宝箱",
-	"item.mmorpg.chest.legendary_gear": "传说装备宝箱",
-	"item.mmorpg.chest.mythic_gear": "神话装备宝箱",
-	"item.mmorpg.chest.rare_gear": "稀有装备宝箱",
-	"item.mmorpg.chest.uncommon_gear": "非凡装备宝箱",
-	"item.mmorpg.common_soul_produce": "普通装备灵魂石",
-	"item.mmorpg.gems.amethyst.0": "破碎紫水晶",
-	"item.mmorpg.gems.amethyst.1": "裂缝紫水晶",
-	"item.mmorpg.gems.amethyst.2": "有缺陷紫水晶",
-	"item.mmorpg.gems.amethyst.3": "普通紫水晶",
-	"item.mmorpg.gems.amethyst.4": "宏伟紫水晶",
-	"item.mmorpg.gems.amethyst.5": "辉煌紫水晶",
-	"item.mmorpg.gems.amethyst.6": "神圣紫水晶",
-	"item.mmorpg.gems.azurite.0": "破碎青金石",
-	"item.mmorpg.gems.azurite.1": "裂缝青金石",
-	"item.mmorpg.gems.azurite.2": "有缺陷青金石",
-	"item.mmorpg.gems.azurite.3": "普通青金石",
-	"item.mmorpg.gems.azurite.4": "宏伟青金石",
-	"item.mmorpg.gems.azurite.5": "辉煌青金石",
-	"item.mmorpg.gems.azurite.6": "神圣青金石",
-	"item.mmorpg.gems.emerald.0": "破碎绿宝石",
-	"item.mmorpg.gems.emerald.1": "裂缝绿宝石",
-	"item.mmorpg.gems.emerald.2": "有缺陷绿宝石",
-	"item.mmorpg.gems.emerald.3": "普通绿宝石",
-	"item.mmorpg.gems.emerald.4": "宏伟绿宝石",
-	"item.mmorpg.gems.emerald.5": "辉煌绿宝石",
-	"item.mmorpg.gems.emerald.6": "神圣绿宝石",
-	"item.mmorpg.gems.garnet.0": "破碎石榴石",
-	"item.mmorpg.gems.garnet.1": "裂缝石榴石",
-	"item.mmorpg.gems.garnet.2": "有缺陷石榴石",
-	"item.mmorpg.gems.garnet.3": "普通石榴石",
-	"item.mmorpg.gems.garnet.4": "宏伟石榴石",
-	"item.mmorpg.gems.garnet.5": "辉煌石榴石",
-	"item.mmorpg.gems.garnet.6": "神圣石榴石",
-	"item.mmorpg.gems.opal.0": "破碎蛋白石",
-	"item.mmorpg.gems.opal.1": "裂缝蛋白石",
-	"item.mmorpg.gems.opal.2": "有缺陷蛋白石",
-	"item.mmorpg.gems.opal.3": "普通蛋白石",
-	"item.mmorpg.gems.opal.4": "宏伟蛋白石",
-	"item.mmorpg.gems.opal.5": "辉煌蛋白石",
-	"item.mmorpg.gems.opal.6": "神圣蛋白石",
-	"item.mmorpg.gems.ruby.0": "破碎红宝石",
-	"item.mmorpg.gems.ruby.1": "裂缝红宝石",
-	"item.mmorpg.gems.ruby.2": "有缺陷红宝石",
-	"item.mmorpg.gems.ruby.3": "普通红宝石",
-	"item.mmorpg.gems.ruby.4": "宏伟红宝石",
-	"item.mmorpg.gems.ruby.5": "辉煌红宝石",
-	"item.mmorpg.gems.ruby.6": "神圣红宝石",
-	"item.mmorpg.gems.sapphire.0": "破碎蓝宝石",
-	"item.mmorpg.gems.sapphire.1": "裂缝蓝宝石",
-	"item.mmorpg.gems.sapphire.2": "有缺陷蓝宝石",
-	"item.mmorpg.gems.sapphire.3": "普通蓝宝石",
-	"item.mmorpg.gems.sapphire.4": "宏伟蓝宝石",
-	"item.mmorpg.gems.sapphire.5": "辉煌蓝宝石",
-	"item.mmorpg.gems.sapphire.6": "神圣蓝宝石",
-	"item.mmorpg.gems.topaz.0": "破碎黄玉",
-	"item.mmorpg.gems.topaz.1": "裂缝黄玉",
-	"item.mmorpg.gems.topaz.2": "有缺陷黄玉",
-	"item.mmorpg.gems.topaz.3": "普通黄玉",
-	"item.mmorpg.gems.topaz.4": "宏伟黄玉",
-	"item.mmorpg.gems.topaz.5": "辉煌黄玉",
-	"item.mmorpg.gems.topaz.6": "神圣黄玉",
-	"item.mmorpg.gems.tourmaline.0": "破碎碧玺",
-	"item.mmorpg.gems.tourmaline.1": "裂缝碧玺",
-	"item.mmorpg.gems.tourmaline.2": "有缺陷碧玺",
-	"item.mmorpg.gems.tourmaline.3": "普通碧玺",
-	"item.mmorpg.gems.tourmaline.4": "宏伟碧玺",
-	"item.mmorpg.gems.tourmaline.5": "辉煌碧玺",
-	"item.mmorpg.gems.tourmaline.6": "神圣碧玺",
+	
+	"mmorpg.gem_rank.chipped": "裂纹的",
+	"mmorpg.gem_rank.cracked": "碎裂的",
+	"mmorpg.gem_rank.divine": "神圣的",
+	"mmorpg.gem_rank.flawed": "瑕疵的",
+	"mmorpg.gem_rank.glorious": "辉耀的",
+	"mmorpg.gem_rank.grand": "恢弘的",
+	"mmorpg.gem_rank.regular": "普通的",
+	"mmorpg.gem_type.amethyst": "紫水晶",
+	"mmorpg.gem_type.azurite": "青水晶",
+	"mmorpg.gem_type.emerald": "绿宝石",
+	"mmorpg.gem_type.garnet": "石榴石",
+	"mmorpg.gem_type.opal": "蛋白石",
+	"mmorpg.gem_type.ruby": "红宝石",
+	"mmorpg.gem_type.sapphire": "蓝宝石",
+	"mmorpg.gem_type.topaz": "黄玉",
+	"mmorpg.gem_type.tourmaline": "碧玺",
+	"mmorpg.item_tips.aura_reservation": "光环储备：",
+	"mmorpg.item_tips.chest_contains": "包含：",
+	"mmorpg.item_tips.cor_stats": "基础属性：",
+	"mmorpg.item_tips.durability": "耐久度：",
+	"mmorpg.item_tips.empty_socket": "[插槽]",
+	"mmorpg.item_tips.enchanted": "强化：",
+	"mmorpg.item_tips.exp": "经验：%1$s%%",
+	"mmorpg.item_tips.gem_open_gui_tip": "右键以打开GUI",
+	"mmorpg.item_tips.item_tier_tip": "物品品阶：",
+	"mmorpg.item_tips.item_type": "物品类型：",
+	"mmorpg.item_tips.level_tip": "等级：",
+	"mmorpg.item_tips.loot": "战利品：%1$s%%",
+	"mmorpg.item_tips.map_league_spawn": "可以生成：",
+	"mmorpg.item_tips.need_key": "需要钥匙：",
+	"mmorpg.item_tips.outcome_tip": "%1$s,基础权重：%2$s",
+	"mmorpg.item_tips.potential": "潜力：%1$s%%",
+	"mmorpg.item_tips.prefix_stats": "前缀属性",
+	"mmorpg.item_tips.quality": "质量：%1$s%%",
+	"mmorpg.item_tips.rarity_tip": "稀有度",
+	"mmorpg.item_tips.remaining_aura_capacity": "剩余光环容量：",
+	"mmorpg.item_tips.restores": "恢复：%1$s%%",
+	"mmorpg.item_tips.rune_item_usage": "所有的符文之语都写在百科中，\n使用以查看可以合成的符文之语。",
+	"mmorpg.item_tips.socket_extractor_usage": "点击到一个装备上以提取一个宝石。",
+	"mmorpg.item_tips.soul_cleaner_usage_and_warning": "点击到物品上以移除其灵魂。\n物品将会保留，但属性将会被删除。",
+	"mmorpg.item_tips.soul_extractor_tip": "点击到物品上以移除其灵魂。\n只能用于同样的稀有度上。\n在此过程中会删除物品。",
+	"mmorpg.item_tips.soul_stone_tip": "右键以产生一个普通级装备灵魂。",
+	"mmorpg.item_tips.stat_req": "%1$s最少要：",
+	"mmorpg.item_tips.stone_repaire_durability": "修复%1$s耐久度.",
+	"mmorpg.item_tips.suffix_stats": "后缀属性：",
+	"mmorpg.item_tips.support_gem_cost": "资源消耗乘数：%1$s%%",
+	"mmorpg.item_tips.support_gem_only_one": "只允许一个：",
+	"mmorpg.item_tips.tier_tip": "品阶：",
+	"mmorpg.item_tips.tp_back_item": "右键以从地图中返回\n退出地图维度",
+	"mmorpg.item_tips.unbreakable": "不可摧毁",
+	"mmorpg.item_tips.unique_jewel_use": "右键以生成",
+	"mmorpg.item_tips.use_tip": "[拖到装备上使用]",
+	"mmorpg.mob_affix.chaos_mob_affix": "剧毒",
+	"mmorpg.mob_affix.fire_lord": "火焰领主",
+	"mmorpg.mob_affix.fire_mob_affix": "烈焰",
+	"mmorpg.mob_affix.full_chaos": "混沌之",
+	"mmorpg.mob_affix.full_fire": "火焰之",
+	"mmorpg.mob_affix.full_lightning": "雷霆之",
+	"mmorpg.mob_affix.full_water": "寒冷之",
+	"mmorpg.mob_affix.nature_lord": "混沌领主",
+	"mmorpg.mob_affix.phys_lord": "战士领主",
+	"mmorpg.mob_affix.vampire": "吸血",
+	"mmorpg.mob_affix.water_mob_affix": "冻结",
+	"mmorpg.mob_affix.winter": "寒冬领主",
+	"mmorpg.profession.alchemy": "炼金术",
+	"mmorpg.profession.cooking": "烹饪",
+	"mmorpg.profession.enchanting": "强化术",
+	"mmorpg.profession.farming": "农业",
+	"mmorpg.profession.fishing": "钓鱼",
+	"mmorpg.profession.gear_crafting": "装备打造",
+	"mmorpg.profession.husbandry": "畜牧",
+	"mmorpg.profession.mining": "挖矿",
+	"mmorpg.profession.salvaging": "回收",
+	"item.mmorpg.chest.common_gear": "战利品箱",
+	"item.mmorpg.chest.currency": "战利品箱",
+	"item.mmorpg.chest.epic_gear": "战利品箱",
+	"item.mmorpg.chest.harvest_blue": "战利品箱",
+	"item.mmorpg.chest.harvest_green": "战利品箱",
+	"item.mmorpg.chest.harvest_purple": "战利品箱",
+	"item.mmorpg.chest.legendary_gear": "战利品箱",
+	"item.mmorpg.chest.mythic_gear": "战利品箱",
+	"item.mmorpg.chest.rare_gear": "战利品箱",
+	"item.mmorpg.chest.uncommon_gear": "战利品箱",
+	"item.mmorpg.cloth_set": "服装灵魂修正",
+	"item.mmorpg.common_soul_produce": "普通级装备灵魂石",
+	"item.mmorpg.destroy_output_exp": "拆解者的习得方法",
+	"item.mmorpg.enchantment.family.armor.common": "\u00A77Common Armor Enchantment",
+	"item.mmorpg.enchantment.family.armor.epic": "\u00A7dEpic Armor Enchantment",
+	"item.mmorpg.enchantment.family.armor.legendary": "\u00A76Legendary Armor Enchantment",
+	"item.mmorpg.enchantment.family.armor.mythic": "\u00A75Mythic Armor Enchantment",
+	"item.mmorpg.enchantment.family.armor.rare": "\u00A7bRare Armor Enchantment",
+	"item.mmorpg.enchantment.family.armor.uncommon": "\u00A7aUncommon Armor Enchantment",
+	"item.mmorpg.enchantment.family.jewelry.common": "\u00A77Common Jewelry Enchantment",
+	"item.mmorpg.enchantment.family.jewelry.epic": "\u00A7dEpic Jewelry Enchantment",
+	"item.mmorpg.enchantment.family.jewelry.legendary": "\u00A76Legendary Jewelry Enchantment",
+	"item.mmorpg.enchantment.family.jewelry.mythic": "\u00A75Mythic Jewelry Enchantment",
+	"item.mmorpg.enchantment.family.jewelry.rare": "\u00A7bRare Jewelry Enchantment",
+	"item.mmorpg.enchantment.family.jewelry.uncommon": "\u00A7aUncommon Jewelry Enchantment",
+	"item.mmorpg.enchantment.family.offhand.common": "\u00A77Common OffHand Enchantment",
+	"item.mmorpg.enchantment.family.offhand.epic": "\u00A7dEpic OffHand Enchantment",
+	"item.mmorpg.enchantment.family.offhand.legendary": "\u00A76Legendary OffHand Enchantment",
+	"item.mmorpg.enchantment.family.offhand.mythic": "\u00A75Mythic OffHand Enchantment",
+	"item.mmorpg.enchantment.family.offhand.rare": "\u00A7bRare OffHand Enchantment",
+	"item.mmorpg.enchantment.family.offhand.uncommon": "\u00A7aUncommon OffHand Enchantment",
+	"item.mmorpg.enchantment.family.weapon.common": "\u00A77Common Weapon Enchantment",
+	"item.mmorpg.enchantment.family.weapon.epic": "\u00A7dEpic Weapon Enchantment",
+	"item.mmorpg.enchantment.family.weapon.legendary": "\u00A76Legendary Weapon Enchantment",
+	"item.mmorpg.enchantment.family.weapon.mythic": "\u00A75Mythic Weapon Enchantment",
+	"item.mmorpg.enchantment.family.weapon.rare": "\u00A7bRare Weapon Enchantment",
+	"item.mmorpg.enchantment.family.weapon.uncommon": "\u00A7aUncommon Weapon Enchantment",
 	"item.mmorpg.harvest.blue_ingot": "流明锭",
 	"item.mmorpg.harvest.blue_key": "流明钥匙",
 	"item.mmorpg.harvest.blue_plant": "流明精华",
@@ -212,6 +242,57 @@
 	"item.mmorpg.harvest.purple_ingot": "混沌锭",
 	"item.mmorpg.harvest.purple_key": "混沌钥匙",
 	"item.mmorpg.harvest.purple_plant": "混沌精华",
+	"item.mmorpg.keys.0": "Common Key",
+	"item.mmorpg.keys.1": "Uncommon Key",
+	"item.mmorpg.keys.2": "Rare Key",
+	"item.mmorpg.keys.3": "Epic Key",
+	"item.mmorpg.keys.4": "Legendary Key",
+	"item.mmorpg.keys.5": "Mythic Key",
+	"item.mmorpg.leather_set": "Leather Soul Modifier",
+	"item.mmorpg.master_bag": "\u00A75Master Backpack",
+	"item.mmorpg.material.farming.0": "Spiritual Produce",
+	"item.mmorpg.material.farming.1": "Celestial Produce",
+	"item.mmorpg.material.farming.2": "Empyrean Produce",
+	"item.mmorpg.material.farming.3": "Angelic Produce",
+	"item.mmorpg.material.farming.4": "Divine Produce",
+	"item.mmorpg.material.farming.5": "Godly Produce",
+	"item.mmorpg.material.fishing.0": "Spiritual Raw Fish",
+	"item.mmorpg.material.fishing.1": "Celestial Raw Fish",
+	"item.mmorpg.material.fishing.2": "Empyrean Raw Fish",
+	"item.mmorpg.material.fishing.3": "Angelic Raw Fish",
+	"item.mmorpg.material.fishing.4": "Divine Raw Fish",
+	"item.mmorpg.material.fishing.5": "Godly Raw Fish",
+	"item.mmorpg.material.meat.0": "Spiritual Raw Meat",
+	"item.mmorpg.material.meat.1": "Celestial Raw Meat",
+	"item.mmorpg.material.meat.2": "Empyrean Raw Meat",
+	"item.mmorpg.material.meat.3": "Angelic Raw Meat",
+	"item.mmorpg.material.meat.4": "Divine Raw Meat",
+	"item.mmorpg.material.meat.5": "Godly Raw Meat",
+	"item.mmorpg.material.mining.0": "Spiritual Ore",
+	"item.mmorpg.material.mining.1": "Celestial Ore",
+	"item.mmorpg.material.mining.2": "Empyrean Ore",
+	"item.mmorpg.material.mining.3": "Angelic Ore",
+	"item.mmorpg.material.mining.4": "Divine Ore",
+	"item.mmorpg.material.mining.5": "Godly Ore",
+	"item.mmorpg.offhand.dodge.diamond": "Totem",
+	"item.mmorpg.offhand.dodge.iron": "Totem",
+	"item.mmorpg.offhand.dodge.wood": "Totem",
+	"item.mmorpg.offhand.tome.diamond": "Tome",
+	"item.mmorpg.offhand.tome.iron": "Tome",
+	"item.mmorpg.offhand.tome.wood": "Tome",
+	"item.mmorpg.plate_set": "Plate Soul Modifier",
+	"item.mmorpg.potion.health.0": "\u00A77Common Restoration Potion",
+	"item.mmorpg.potion.health.1": "\u00A7aUncommon Restoration Potion",
+	"item.mmorpg.potion.health.2": "\u00A7bRare Restoration Potion",
+	"item.mmorpg.potion.health.3": "\u00A7dEpic Restoration Potion",
+	"item.mmorpg.potion.health.4": "\u00A76Legendary Restoration Potion",
+	"item.mmorpg.potion.health.5": "\u00A75Mythic Restoration Potion",
+	"item.mmorpg.potion.resource.0": "\u00A77Common Invigoration Potion",
+	"item.mmorpg.potion.resource.1": "\u00A7aUncommon Invigoration Potion",
+	"item.mmorpg.potion.resource.2": "\u00A7bRare Invigoration Potion",
+	"item.mmorpg.potion.resource.3": "\u00A7dEpic Invigoration Potion",
+	"item.mmorpg.potion.resource.4": "\u00A76Legendary Invigoration Potion",
+	"item.mmorpg.potion.resource.5": "\u00A75Mythic Invigoration Potion",
 	"item.mmorpg.potions.add_reset_perk_points": "单点天赋重置药水",
 	"item.mmorpg.potions.reset_all_perks": "天赋全重置药水",
 	"item.mmorpg.potions.reset_spells": "职业重置药水",
@@ -221,6 +302,21 @@
 	"item.mmorpg.projectile.lightning": "投掷物",
 	"item.mmorpg.projectile.slimeball": "投掷物",
 	"item.mmorpg.projectile.snowball": "投掷物",
+	"item.mmorpg.rare_mats.farming.greater": "Greater Produce",
+	"item.mmorpg.rare_mats.farming.lesser": "Lesser Produce",
+	"item.mmorpg.rare_mats.farming.medium": "Medium Produce",
+	"item.mmorpg.rare_mats.fishing.greater": "Greater Fish",
+	"item.mmorpg.rare_mats.fishing.lesser": "Lesser Fish",
+	"item.mmorpg.rare_mats.fishing.medium": "Medium Fish",
+	"item.mmorpg.rare_mats.husbandry.greater": "Greater Beef",
+	"item.mmorpg.rare_mats.husbandry.lesser": "Lesser Beef",
+	"item.mmorpg.rare_mats.husbandry.medium": "Medium Beef",
+	"item.mmorpg.rare_mats.mining.greater": "Greater Crystal",
+	"item.mmorpg.rare_mats.mining.lesser": "Lesser Crystal",
+	"item.mmorpg.rare_mats.mining.medium": "Medium Crystal",
+	"item.mmorpg.rare_mats.salvaging.greater": "Greater Essence",
+	"item.mmorpg.rare_mats.salvaging.lesser": "Lesser Essence",
+	"item.mmorpg.rare_mats.salvaging.medium": "Medium Essence",
 	"item.mmorpg.runes.ano": "安诺符文",
 	"item.mmorpg.runes.cen": "岑符文",
 	"item.mmorpg.runes.dos": "多斯符文",
@@ -245,12 +341,12 @@
 	"item.mmorpg.soul_extractor.rare": "稀有装备魂印",
 	"item.mmorpg.soul_extractor.uncommon": "非凡装备魂印",
 	"item.mmorpg.tp_back": "回家珍珠",
-
+	
 	"_comment": " [CATEGORY]: MISC - NAMES",
-
-
+	
+	
 	"_comment": " [CATEGORY]: SPELLS - NAMES",
-
+	
 	"mmorpg.aura.armor": "护甲光环",
 	"mmorpg.aura.chaos_ailment": "混沌附魔光环",
 	"mmorpg.aura.chaos_damage": "混沌伤害光环",
@@ -392,14 +488,14 @@
 	"mmorpg.support_gem.summon_damage": "召唤伤害支援宝石",
 	"mmorpg.support_gem.summon_duration": "召唤持续时间支援宝石",
 	"mmorpg.support_gem.totem_damage": "图腾伤害辅助宝石",
-"mmorpg.support_gem.totem_dmg_cdr": "图腾准备辅助宝石",
+	"mmorpg.support_gem.totem_dmg_cdr": "图腾准备辅助宝石",
 	"mmorpg.support_gem.water_pene": "冰霜穿透支援宝石",
-
+	
 	"_comment": " [CATEGORY]: SPELLS - NAMES",
-
-
+	
+	
 	"_comment": " [CATEGORY]: AFFIXES - NAMES",
-
+	
 	"mmorpg.affix.archeologists": "考古家的",
 	"mmorpg.affix.armored_mobs": "装甲",
 	"mmorpg.affix.azure": "天蓝",
@@ -475,12 +571,12 @@
 	"mmorpg.affix.wep_item_both": "悲惨",
 	"mmorpg.affix.wep_item_flat": "致命",
 	"mmorpg.affix.wep_item_perc": "残酷",
-
+	
 	"_comment": " [CATEGORY]: AFFIXES - NAMES",
-
-
+	
+	
 	"_comment": " [CATEGORY]: ONEOFAKIND - NAMES",
-
+	
 	"mmorpg.one_of_a_kind.arrow_barrage_mod": "箭矢弹幕修饰词",
 	"mmorpg.one_of_a_kind.arrow_storm_mod": "箭矢风暴修饰词",
 	"mmorpg.one_of_a_kind.arrow_totem_mod": "箭矢图腾修饰词",
@@ -559,12 +655,12 @@
 	"mmorpg.one_of_a_kind.vamp_blood_mod": "吸血鬼之血修饰词",
 	"mmorpg.one_of_a_kind.whirlwind_mod": "旋风修饰词",
 	"mmorpg.one_of_a_kind.wish_mod": "祈愿修饰词",
-
+	
 	"_comment": " [CATEGORY]: ONEOFAKIND - NAMES",
-
-
+	
+	
 	"_comment": " [CATEGORY]: RARITIES - NAMES",
-
+	
 	"mmorpg.rarity.gear.common": "普通",
 	"mmorpg.rarity.gear.epic": "史诗",
 	"mmorpg.rarity.gear.legendary": "传奇",
@@ -573,26 +669,26 @@
 	"mmorpg.rarity.gear.runeword": "符文之语",
 	"mmorpg.rarity.gear.uncommon": "非凡",
 	"mmorpg.rarity.gear.unique": "独特",
-
+	
 	"_comment": " [CATEGORY]: RARITIES - NAMES",
-
-
+	
+	
 	"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
-
-"item.mmorpg.currency.affix_tier_up_down": "混乱源质",
-"item.mmorpg.currency.entangled_affix_upgrade": "纠缠混乱源质",
-"item.mmorpg.currency.entangled_quality": "纠缠品质源质",
-"item.mmorpg.currency.entangled_unique_reroll": "纠缠精华源质",
-"item.mmorpg.currency.orb_of_linking": "链接源质",
-"item.mmorpg.currency.orb_of_quality": "品质源质",
-"item.mmorpg.currency.socket_adder": "凿孔源质",
-"item.mmorpg.currency.unique_reroll": "精华源质",
-
-"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
-
-
+	
+	"item.mmorpg.currency.affix_tier_up_down": "混乱源质",
+	"item.mmorpg.currency.entangled_affix_upgrade": "纠缠混乱源质",
+	"item.mmorpg.currency.entangled_quality": "纠缠品质源质",
+	"item.mmorpg.currency.entangled_unique_reroll": "纠缠精华源质",
+	"item.mmorpg.currency.orb_of_linking": "链接源质",
+	"item.mmorpg.currency.orb_of_quality": "品质源质",
+	"item.mmorpg.currency.socket_adder": "凿孔源质",
+	"item.mmorpg.currency.unique_reroll": "精华源质",
+	
+	"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
+	
+	
 	"_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
-
+	
 	"effect.mmorpg.beneficial.10": "活力",
 	"effect.mmorpg.beneficial.11": "不死意志",
 	"effect.mmorpg.beneficial.12": "法阵",
@@ -620,12 +716,12 @@
 	"mmorpg.ailment.electrify": "感电",
 	"mmorpg.ailment.freeze": "冰冻",
 	"mmorpg.ailment.poison": "中毒",
-
+	
 	"_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
-
-
+	
+	
 	"_comment": " [CATEGORY]: TALENTS - NAMES",
-
+	
 	"mmorpg.talent.all_all_damage_big": "全伤害强化",
 	"mmorpg.talent.all_chaos_damage_big": "混沌伤害强化",
 	"mmorpg.talent.all_elemental_damage_big": "元素伤害强化",
@@ -720,12 +816,12 @@
 	"mmorpg.talent.warrior": "武士",
 	"mmorpg.talent.water_penetration_big": "冰霜穿透强化",
 	"mmorpg.talent.water_resist_big": "冰霜抗性强化",
-
+	
 	"_comment": " [CATEGORY]: TALENTS - NAMES",
-
-
+	
+	
 	"_comment": " [CATEGORY]: WORDS - NAMES",
-
+	
 	"mmorpg.word.activation_time": "激活时间",
 	"mmorpg.word.addmajorarcana": "添加混沌主要奥术属性",
 	"mmorpg.word.addrarestaffixes": "添加最稀有词缀",
@@ -1061,12 +1157,12 @@
 	"mmorpg.word.world_type": "世界类型",
 	"mmorpg.word.wrongingredient": "你不能在这个配方中使用那个物品。",
 	"mmorpg.word.wrongrecipeingredient": "那个配料不可在此专业中使用。",
-
+	
 	"_comment": " [CATEGORY]: WORDS - NAMES",
-
-
+	
+	
 	"_comment": " [CATEGORY]: STATS - NAMES",
-
+	
 	"mmorpg.stat.accuracy": "命中率",
 	"mmorpg.stat.ailment_damage": "异常伤害",
 	"mmorpg.stat.all_all_damage": "全伤害",
@@ -1388,12 +1484,12 @@
 	"mmorpg.stat.water_vuln_crit": "§7冰霜伤害必定暴击。",
 	"mmorpg.stat.water_weapon_damage": "冰霜伤害",
 	"mmorpg.stat.weapon_damage": "武器伤害",
-
-"_comment": " [CATEGORY]: STATS - NAMES",
-
-
-"_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
-
+	
+	"_comment": " [CATEGORY]: STATS - NAMES",
+	
+	
+	"_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
+	
 	"mmorpg.gear_type.bow": "弓",
 	"mmorpg.gear_type.cloth_boots": "布质软靴",
 	"mmorpg.gear_type.cloth_chest": "布质外衣",
@@ -1424,12 +1520,12 @@
 	"mmorpg.gearslot.shield": "盾牌",
 	"mmorpg.gearslot.staff": "法杖",
 	"mmorpg.gearslot.sword": "剑",
-
-"_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
-
-
-"_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
-
+	
+	"_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
+	
+	
+	"_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
+	
 	"mmorpg.unique_gear.air_disaster.name": "灾难咏叹调",
 	"mmorpg.unique_gear.arch_gamble.name": "神圣博弈",
 	"mmorpg.unique_gear.autumn_harvest.name": "丰年秋典",
@@ -1475,12 +1571,12 @@
 	"mmorpg.unique_gear.weight_of_leadership.name": "权责沉甸",
 	"mmorpg.unique_gear.winter_chill.name": "寒冬冷峭",
 	"mmorpg.unique_gear.witch_brew.name": "女巫之酿",
-
+	
 	"_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
-
-
+	
+	
 	"_comment": " [CATEGORY]: GEAR ITEMS - NAMES",
-
+	
 	"item.mmorpg.jewelry.necklace.diamond": "钻石项链",
 	"item.mmorpg.jewelry.necklace.gold": "金项链",
 	"item.mmorpg.jewelry.necklace.iron": "铁项链",
@@ -1491,12 +1587,12 @@
 	"item.mmorpg.weapon.staff.gold": "金法杖",
 	"item.mmorpg.weapon.staff.iron": "铁法杖",
 	"item.mmorpg.weapon.staff.wood": "木法杖",
-
+	
 	"_comment": " [CATEGORY]: GEAR ITEMS - NAMES",
-
-
+	
+	
 	"_comment": " [CATEGORY]: CHAT MESSAGES - NAMES",
-
+	
 	"mmorpg.chat.can_not_go_over_maximum_level": "无法超过最大等级",
 	"mmorpg.chat.cooldown_not_met": "冷却时间未到",
 	"mmorpg.chat.dev_tools_enabled_contact_the_author": "开发者工具已启用,如果您看到此消息,请联系《挖矿与砍杀》的作者[robertx22],他忘记禁用开发者工具了！",
@@ -1508,12 +1604,12 @@
 	"mmorpg.chat.weapon_durability_is_too_low": "武器耐久过低",
 	"mmorpg.chat.you_are_too_low_level": "你的等级过低",
 	"mmorpg.chat.you_have_leveled_up": "你升级了",
-
+	
 	"_comment": " [CATEGORY]: CHAT MESSAGES - NAMES",
-
-
+	
+	
 	"_comment": " [CATEGORY]: CURRENCY ITEMS - DESCRIPTIONS",
-
+	
 	"item.mmorpg.currency.desc.affix_tier_up_down": "随机提升或降低一个词缀的阶级。",
 	"item.mmorpg.currency.desc.entangled_affix_upgrade": "提升一个随机词缀至最高阶,或移除所有词缀。",
 	"item.mmorpg.currency.desc.entangled_quality": "提升装备品质,增强装备潜力。",
@@ -1522,12 +1618,12 @@
 	"item.mmorpg.currency.desc.orb_of_quality": "提升装备品质,品质提升装备防御。",
 	"item.mmorpg.currency.desc.socket_adder": "有一定几率添加一个插槽,或无任何改变。",
 	"item.mmorpg.currency.desc.unique_reroll": "提升或降低精华属性5%。",
-
+	
 	"_comment": " [CATEGORY]: CURRENCY ITEMS - DESCRIPTIONS",
-
-
+	
+	
 	"_comment": " [CATEGORY]: STATS - DESCRIPTIONS",
-
+	
 	"mmorpg.stat_desc.accuracy": "提高你的命中率,低命中率也会导致暴击失败。具体来说,它降低了对手的闪避几率。",
 	"mmorpg.stat_desc.ailment_damage": "增加异常状态效果造成的伤害。",
 	"mmorpg.stat_desc.all_all_damage": "增加所有该元素的伤害,包括法术和攻击。",
@@ -1698,12 +1794,12 @@
 	"mmorpg.stat_desc.water_dmg_when_target_low_hp": "低生命值指30%或更低。",
 	"mmorpg.stat_desc.water_dot_damage": "水元素持续伤害增加诸如淹没等效果的伤害。",
 	"mmorpg.stat_desc.weapon_damage": "用于某些法术",
-
-"_comment": " [CATEGORY]: STATS - DESCRIPTIONS",
-
-
-"_comment": " [CATEGORY]: SPELLS - DESCRIPTIONS",
-
+	
+	"_comment": " [CATEGORY]: STATS - DESCRIPTIONS",
+	
+	
+	"_comment": " [CATEGORY]: SPELLS - DESCRIPTIONS",
+	
 	"spell.desc.arrow_barrage": "在一条直线上射出多支箭,造成[calc:arrow_storm] §6☀ 物理§7 伤害",
 	"spell.desc.arrow_storm": "在一个扇形范围内射出箭矢,造成[calc:arrow_storm] §6☀ 物理§7 伤害",
 	"spell.desc.arrow_totem": "召唤一个图腾,高速射出箭矢造成[calc:arrow_totem] §6☀ 物理§7 伤害",
@@ -1780,4 +1876,4 @@
 	"_comment": " [CATEGORY]: SPELLS - DESCRIPTIONS"
 	
 	
-	}
+}
