@@ -970,6 +970,22 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
+    public static DataPackStatAccessor<SpellTag> DAMAGE_TAKEN_PER_SPELL_TAG = DatapackStatBuilder
+            .<SpellTag>of(x -> x.GUID() + "_spell_dmg_taken", x -> Elements.Physical)
+            .addAllOfType(SpellTag.getAll())
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(0)
+            .setSide(EffectSides.Target)
+            .setUsesMoreMultiplier()
+            .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x))
+            .addEffect(StatEffects.INCREASE_VALUE)
+            .setLocName(x -> x.locNameForLangFile() + " Damage Taken")
+            .setLocDesc(x -> "")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+            })
+            .build();
+
     public static DataPackStatAccessor<SpellTag> COOLDOWN_REDUCTION_PER_SPELL_TAG = DatapackStatBuilder
             .<SpellTag>of(x -> x.GUID() + "_cdr", x -> Elements.Physical)
             .addAllOfType(SpellTag.getAll())

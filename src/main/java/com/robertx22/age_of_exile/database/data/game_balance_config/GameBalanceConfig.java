@@ -47,6 +47,9 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     public int link_4_lvl = 25;
     public int link_5_lvl = 50;
 
+    public float DMG_REDUCT_PER_CHAIN = 0.2F;
+    public float MIN_CHAIN_DMG = 0.2F;
+
     public int getMaxLinksForLevel(int lvl) {
         if (lvl < link_1_lvl) {
             return 0;

@@ -1,9 +1,11 @@
 package com.robertx22.age_of_exile.database.data.spells.components.actions;
 
+import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
@@ -32,6 +34,10 @@ public class DamageAction extends SpellAction {
 
             int value = calc.getCalculatedValue(ctx.caster, ctx.calculatedSpellData.getSpell());
 
+            if (ctx.calculatedSpellData.chains_did > 0) {
+                float dmgMulti = MathHelper.clamp(1F - (GameBalanceConfig.get().DMG_REDUCT_PER_CHAIN * ctx.calculatedSpellData.chains_did), GameBalanceConfig.get().MIN_CHAIN_DMG, 1F);
+                value *= dmgMulti;
+            }
 
             for (LivingEntity t : targets) {
 

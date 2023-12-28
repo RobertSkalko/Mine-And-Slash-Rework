@@ -410,7 +410,9 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
 
                         SimpleProjectileEntity en = (SimpleProjectileEntity) getType().create(level());
                         en.setPos(position());
-                        en.init(caster, this.getSpellData(), holder);
+                        var sd = this.getSpellDataCopy(); // important so it doesnt affect old ones
+                        sd.chains_did++; // when upping chain count
+                        en.init(caster, sd, holder);
                         en.entityData.set(CHAINS, chains);
                         var vel = ProjectileCastHelper.positionToVelocity(new MyPosition(position()), new MyPosition(target.getEyePosition()));
                         en.setDeltaMovement(vel.normalize().multiply(speed, speed, speed));
@@ -525,6 +527,10 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
             e.printStackTrace();
         }
         return spellData;
+    }
+
+    public CalculatedSpellData getSpellDataCopy() {
+        return GSON.fromJson(GSON.toJson(getSpellData()), CalculatedSpellData.class);
     }
 
     @Override
