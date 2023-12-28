@@ -32,6 +32,7 @@ public class MapField<T> implements IGUID {
     public static MapField<Double> POTION_DURATION = make("potion_dur");
     public static MapField<Double> COOLDOWN_TICKS = make("cooldown_ticks");
     public static MapField<Double> POTION_STRENGTH = make("potion_str");
+    public static MapField<Double> EFFECT_STACKS = make("effect_stacks");
     public static MapField<Double> BLOCK_FALL_SPEED = make("block_fall_speed");
     public static MapField<Double> PROJECTILE_COUNT = make("proj_count");
 

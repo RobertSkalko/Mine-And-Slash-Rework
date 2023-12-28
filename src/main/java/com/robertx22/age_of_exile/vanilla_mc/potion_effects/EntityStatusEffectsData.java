@@ -51,6 +51,10 @@ public class EntityStatusEffectsData {
 
     }
 
+    public boolean has(ExileEffect eff) {
+        return this.exileMap.containsKey(eff.GUID()) && !exileMap.get(eff.GUID()).shouldRemove();
+    }
+
     public ExileEffectInstanceData get(ExileEffect eff) {
         return exileMap.getOrDefault(eff.GUID(), new ExileEffectInstanceData());
     }

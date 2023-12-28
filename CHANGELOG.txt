@@ -150,3 +150,4 @@ v.5.3.9
 - tweaked pet targetting
 - maps now gen larger radius around you but limit generation to 3 chunks per tick (will this help, not sure)
 - you can now use cloth etc soul modifiers that make it so your soul item always creates cloth gear for example
+- datapack change, spell config now uses taglist instead of array

@@ -30,6 +30,10 @@ public abstract class EffectCondition extends BaseFieldNeeder implements IGUID {
     public static TargetHasEffectCondition TARGET_HAS_POTION;
     public static OnAttackedCondition ON_ATTACKED;
 
+    public static HasMnsEffectCondition HAS_MNS_EFFECT;
+    public static CasterHasMnsEffectCondition CASTER_HAS_MNS_EFFECT;
+
+
     public abstract boolean canActivate(SpellCtx ctx, MapHolder data);
 
     public static HashMap<String, EffectCondition> MAP = new HashMap<>();
@@ -40,6 +44,8 @@ public abstract class EffectCondition extends BaseFieldNeeder implements IGUID {
     }
 
     public static void init() {
+        HAS_MNS_EFFECT = of(new HasMnsEffectCondition());
+        CASTER_HAS_MNS_EFFECT = of(new CasterHasMnsEffectCondition());
         IS_TARGET_CASTER = of(new IsCasterCondition());
         IS_NOT_ON_COOLDOWN = of(new IsNotOnCooldownCondition());
         IS_ENTITY_IN_RADIUS = of(new EntityInRadiusCondition());
