@@ -1,15 +1,15 @@
 {
-
+	
 	"infinite_dungeons.reward_list.gem_box": "幸运宝石袋",
 	"infinite_dungeons.reward_list.gear_crate": "幸运装备袋",
 	"infinite_dungeons.reward_list.upgrade_box": "升级材料袋",
 	"infinite_dungeons.reward_list.any_slot_gear_crate": "手造装备袋",
-
-
+	
+	
 	"item.mmorpg.custom_loot_crate": "战利品奖励箱",
 	"item.mmorpg.loot_crate": "战利品奖励箱",
 	"item.mmorpg.custom_crate": "装备奖励箱",
-
+	
 	"block.mmorpg.ore_block0": "凡品矿石",
 	"block.mmorpg.ore_block1": "下品矿石",
 	"block.mmorpg.ore_block2": "中品矿石",
@@ -25,16 +25,16 @@
 	"itemGroup.mmorpg_currency": "锻造物品",
 	"itemGroup.mmorpg_lootboxes": "战利品盒",
 	"itemGroup.mmorpg_alchemy": "药水",
-
+	
 	"death.attack.mmorpg.custom_damage": "成吨的伤害！",
 	"death.attack.death_potion": "%1$s 居然觉得喝下名字上带着“死亡”俩字的药水是个好主意。",
-
+	
 	"_comment": "STATIONS",
 	"block.mmorpg.modify_station": "装备强化台",
 	"block.mmorpg.repair_station": "装备修理台",
 	"block.mmorpg.socket_station": "装备镶嵌台",
 	"block.mmorpg.salvage_station": "装备回收台",
-
+	
 	"_comment": "ITEM TOOLTIPS",
 	"mmorpg.tooltip.item_modifiable_in_station": "可以在装备强化台中使用",
 	"mmorpg.tooltip.lootbox": "会开出来什么呢？",
@@ -76,8 +76,8 @@
 	"mmorpg.tooltip.put_in_mapdevice": "右键点击地图装置使用",
 	"mmorpg.tooltip.press_shift_more_info": "[Alt]: 查看描述，[Ctrl]: 隐藏",
 	"mmorpg.tooltip.affix_rarity_lootbonus": "词缀品级战利品奖励",
-
-
+	
+	
 	"entity.mmorpg.nature_slime": "神谕史莱姆",
 	"entity.mmorpg.fire_slime": "火焰史莱姆",
 	"entity.mmorpg.water_slime": "冰封史莱姆",
@@ -89,30 +89,42 @@
 	"entity.mmorpg.water_spider": "冰封蜘蛛",
 	"entity.mmorpg.thunder_spider": "闪光蜘蛛",
 	"entity.mmorpg.arcane_spider": "奥术蜘蛛",
+	
 	"entity.mmorpg.nature_zombie": "神谕僵尸",
 	"entity.mmorpg.fire_zombie": "火焰僵尸",
 	"entity.mmorpg.water_zombie": "冰封僵尸",
 	"entity.mmorpg.thunder_zombie": "闪光僵尸",
 	"entity.mmorpg.arcane_zombie": "奥术僵尸",
+	
 	"entity.mmorpg.nature_mage": "剧毒术士",
 	"entity.mmorpg.fire_mage": "火焰术士",
 	"entity.mmorpg.water_mage": "霜冻术士",
 	"entity.mmorpg.thunder_mage": "闪电术士",
 	"entity.mmorpg.healer_mage": "治疗术士",
+	
 	"entity.mmorpg.nature_chicken": "神谕鸡",
 	"entity.mmorpg.fire_chicken": "火焰鸡",
 	"entity.mmorpg.water_chicken": "霜冻鸡",
 	"entity.mmorpg.thunder_chicken": "闪电鸡",
+	
 	"entity.mmorpg.nature_skeleton": "神谕骷髅",
 	"entity.mmorpg.fire_skeleton": "火焰骷髅",
 	"entity.mmorpg.water_skeleton": "霜冻骷髅",
 	"entity.mmorpg.thunder_skeleton": "闪电骷髅",
+	
 	"entity.mmorpg.boss_golem": "堕落铁傀儡",
+	
 	"effect.mmorpg.food_health_regen": "生命回复",
 	"effect.mmorpg.food_mana_regen": "魔力回复",
 	"effect.mmorpg.food_magic_shield_regen": "魔法盾回复",
+	"effect.mmorpg.knockback_resist": "击退抵抗",
+	"effect.mmorpg.anti_wither": "凋零抗性",
+	"effect.mmorpg.anti_poison": "毒性抗性",
+	"effect.mmorpg.scroll_buff": "卷轴增益",
+	
 	"item.patchouli.age_of_exile_guide.name": "流放时代|指导书",
 	"item.patchouli.age_of_exile_guide.landing": "冒险家指南",
+	
 	"item.mmorpg.loot_crate.common": "常见战利品箱",
 	"item.mmorpg.loot_crate.magic": "魔法战利品箱",
 	"item.mmorpg.loot_crate.rare": "稀有战利品箱",
@@ -120,16 +132,64 @@
 	"item.mmorpg.loot_crate.unique": "珍品战利品箱",
 	"item.mmorpg.loot_crate.gem": "宝石战利品箱",
 	"item.mmorpg.loot_crate.rune": "符文战利品箱",
+	
+	"item.mmorpg.full_favor": "满恩惠瓶",
+	"item.mmorpg.empty_favor": "空恩惠瓶",
+	
+	"item.mmorpg.loot_table_chest": "升级奖励袋",
+	
 	"mmorpg.one_of_a_kind.passive_spell": "被动法术",
+	"mmorpg.one_of_a_kind.start": "启动",
+	
+	"curios.identifier.salvage_bag": "回收袋",
+	
 	"_comment": " [CATEGORY]: MISC - NAMES",
-	"mmorpg.mob_affix.cold": "寒冷",
-	"mmorpg.mob_affix.flaming": "燃烧",
-	"mmorpg.mob_affix.haunted": "鬼魅",
-	"mmorpg.mob_affix.lightning": "闪电",
-	"mmorpg.mob_affix.ruin": "毁灭",
-	"mmorpg.mob_affix.vampire": "吸血鬼",
-	"mmorpg.mob_affix.venom": "毒牙",
-	"mmorpg.mob_affix.vit": "苍劲",
+	
+	"mmorpg.difficulty.heroic": "英雄",
+	"mmorpg.difficulty.mythic": "神话",
+	"mmorpg.difficulty.normal": "普通",
+	"mmorpg.favor.favored": "受宠的",
+	"mmorpg.favor.high": "高",
+	"mmorpg.favor.low": "低",
+	"mmorpg.favor.none": "空",
+	"mmorpg.favor.normal": "普通",
+	"mmorpg.favor.very_high": "非常高",
+	"mmorpg.mob_affix.earth_mob_affix": "§2✿",
+	"mmorpg.mob_affix.fire_lord": "§c☀",
+	"mmorpg.mob_affix.fire_mob_affix": "§c☀",
+	"mmorpg.mob_affix.nature_lord": "§2✿",
+	"mmorpg.mob_affix.phys_lord": "§6✦",
+	"mmorpg.mob_affix.reflect": "§b❁",
+	"mmorpg.mob_affix.vampire": "§c❁",
+	"mmorpg.mob_affix.water_mob_affix": "§b❉",
+	"mmorpg.mob_affix.winter": "§b❉",
+	"item.mmorpg.alchemy.potion.health.0": "Spiritual Health Potion",
+	"item.mmorpg.alchemy.potion.health.1": "Celestial Health Potion",
+	"item.mmorpg.alchemy.potion.health.2": "Empyrean Health Potion",
+	"item.mmorpg.alchemy.potion.health.3": "Angelic Health Potion",
+	"item.mmorpg.alchemy.potion.health.4": "Divine Health Potion",
+	"item.mmorpg.alchemy.potion.mana.0": "Spiritual Mana Potion",
+	"item.mmorpg.alchemy.potion.mana.1": "Celestial Mana Potion",
+	"item.mmorpg.alchemy.potion.mana.2": "Empyrean Mana Potion",
+	"item.mmorpg.alchemy.potion.mana.3": "Angelic Mana Potion",
+	"item.mmorpg.alchemy.potion.mana.4": "Divine Mana Potion",
+	"item.mmorpg.backpack.material_pouch": "Material Pouch",
+	"item.mmorpg.backpack.normal": "Adventurer's Backpack",
+	"item.mmorpg.backpack.upgrade.auto_sal0": "Auto Salvage Commons Upgrade",
+	"item.mmorpg.backpack.upgrade.auto_sal1": "Auto Salvage Uncommons Upgrade",
+	"item.mmorpg.backpack.upgrade.auto_sal2": "Auto Salvage Rares Upgrade",
+	"item.mmorpg.backpack.upgrade.currency3": "Auto Currency Pickup Upgrade",
+	"item.mmorpg.backpack.upgrade.essence0": "Auto Essence Pickup Upgrade",
+	"item.mmorpg.backpack.upgrade.gem1": "Auto Gem Pickup Upgrade",
+	"item.mmorpg.backpack.upgrade.rune2": "Auto Rune Pickup Upgrade",
+	"item.mmorpg.backpack.upgrade.save1": "Save Important Items Upgrade",
+	"item.mmorpg.backpack.upgrade.size0": "Spiritual Size Upgrade",
+	"item.mmorpg.backpack.upgrade.size1": "Celestial Size Upgrade",
+	"item.mmorpg.backpack.upgrade.size2": "Empyrean Size Upgrade",
+	"item.mmorpg.backpack.upgrade.size3": "Angelic Size Upgrade",
+	"item.mmorpg.backpack.upgrade.size4": "Divine Size Upgrade",
+	"item.mmorpg.backpack.upgrade.trash0": "Auto Trash Pickup Upgrade",
+	"item.mmorpg.common_soul_produce": "Common Gear Soul Stone",
 	"item.mmorpg.gear_mat.cloth.cloth0": "下品布匹",
 	"item.mmorpg.gear_mat.cloth.cloth1": "中品布匹",
 	"item.mmorpg.gear_mat.cloth.cloth2": "上品布匹",
