@@ -11,6 +11,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
+import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.network.chat.Component;
 
@@ -47,6 +48,8 @@ public class ImplicitStatsData implements IGearPartTooltip, IRerollable, IStatsC
         List<Component> list = new ArrayList<>();
 
         List<ExactStatData> stats = GetAllStats(gear);
+
+        list.add(Words.IMPLICIT_STATS.locName());
 
         if (!stats.isEmpty()) {
             list.add(ExileText.ofText("").get());
