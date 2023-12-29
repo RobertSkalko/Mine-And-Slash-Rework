@@ -735,40 +735,41 @@
 	"mmorpg.gui.passive_points": "被动技能点：",
 	"mmorpg.gui.prof_level_and_exp": "等级：%1$s EXP: %2$s/%3$s",
 	"mmorpg.gui.prof_name": "%1$s: %2$s",
-	"mmorpg.gui.rested_combat_exp": "Rested Combat Exp: ",
-	"mmorpg.gui.rested_prof_exp": "Rested Prof. Exp: ",
-	"mmorpg.gui.salvage_tip_off": "Auto Salvage for %1$s %2$s: Off",
-	"mmorpg.gui.salvage_tip_on": "Auto Salvage for %1$s %2$s: On",
-	"mmorpg.gui.spell_damage_proportion": "(%1$s%% of %2$s\u00A77)",
-	"mmorpg.gui.spell_points": "Spell Points: ",
-	"mmorpg.gui.stat_total": "Total: ",
-	"mmorpg.gui.stats_influence": "For each point: ",
-	"mmorpg.gui.stats_points": "Points: ",
+	"mmorpg.gui.rested_combat_exp": "储备战斗经验：",
+	"mmorpg.gui.rested_prof_exp": "储备职业经验：",
+	"mmorpg.gui.salvage_tip_off": "为%1$s %2$s的自动回收: 已关闭",
+	"mmorpg.gui.salvage_tip_on": "为%1$s %2$s的自动回收: 已打开",
+	"mmorpg.gui.spell_damage_proportion": "(%1$s%% 的 %2$s\u00A77)",
+	"mmorpg.gui.spell_points": "法术点：",
+	"mmorpg.gui.stat_total": "总计：",
+	"mmorpg.gui.stats_influence": "每增加一点：",
+	"mmorpg.gui.stats_points": "点数：",
 	"mmorpg.gui.status_bar_huger": "H: %1$s S: %2$s",
-	"mmorpg.gui.status_bar_level": "Level %1$s %2$s%%",
+	"mmorpg.gui.status_bar_level": "等级 %1$s %2$s%%",
 	"mmorpg.gui.tag_separator": ", ",
-	"mmorpg.gui.talent_points": "Points: ",
-	"mmorpg.gui.talent_reset_points": "Respecs: ",
+	"mmorpg.gui.talent_points": "点数：",
+	"mmorpg.gui.talent_reset_points": "重置点：",
 	
 	"_comment": " [CATEGORY]: GUI - NAMES",
 	
 	
-	"_comment": " [CATEGORY]: FOODS - NAMES",
-	
-	"mmorpg.buff_consumption.meal": "Meal",
-	"mmorpg.buff_consumption.potion": "Potion",
-	"mmorpg.buff_consumption.seafood": "Seafood",
-	
-	"_comment": " [CATEGORY]: FOODS - NAMES",
-	
-	
 	"_comment": " [CATEGORY]: RUNE WORDS - NAMES",
 	
-	"mmorpg.runeword.abyssal_depths": "Abyssal Depths",
+	"mmorpg.runeword.abyssal_depths": "无尽黑渊",
+	"mmorpg.runeword.the_novice": "初心者",
 	
 	"_comment": " [CATEGORY]: RUNE WORDS - NAMES",
 	
 	
+	"_comment": " [CATEGORY]: FOODS - NAMES",
+	
+	"mmorpg.buff_consumption.meal": "食物",
+	"mmorpg.buff_consumption.potion": "药水",
+	"mmorpg.buff_consumption.seafood": "海鲜",
+	
+	"_comment": " [CATEGORY]: FOODS - NAMES",
+
+
 	"_comment": " [CATEGORY]: RARITIES - NAMES",
 	
 	"mmorpg.rarity.gear.common": "普通",
