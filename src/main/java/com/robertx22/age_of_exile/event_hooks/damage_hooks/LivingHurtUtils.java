@@ -98,7 +98,6 @@ public class LivingHurtUtils {
                     if (data.getAttackerEntityData().canUseWeapon(weapondata)) {
                         data.getAttackerEntityData().attackWithWeapon(data);
                     }
-
                 } else {
                     Load.Unit(p).unarmedAttack(data);
                 }

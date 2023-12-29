@@ -5,8 +5,8 @@ import com.robertx22.age_of_exile.database.data.affixes.Affix;
 import com.robertx22.age_of_exile.database.data.requirements.Requirements;
 import com.robertx22.age_of_exile.database.data.requirements.TagRequirement;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
-import com.robertx22.age_of_exile.tags.ModTag;
 import com.robertx22.age_of_exile.tags.TagType;
+import com.robertx22.age_of_exile.tags.imp.SlotTag;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 
 import java.util.ArrayList;
@@ -21,7 +21,6 @@ public class AffixBuilder {
     String langName = "";
     boolean allowDupli = false;
     int weight = 1000;
-    public List<String> tags = new ArrayList<>();
     public Affix.Type type;
 
     TagRequirement tagRequirement = new TagRequirement(TagType.GearSlot, new ArrayList<>(), new ArrayList<>());
@@ -39,14 +38,22 @@ public class AffixBuilder {
         return this;
     }
 
-    public AffixBuilder includesTags(ModTag... tags) {
+    public AffixBuilder includesTags(SlotTag... tags) {
         this.tagRequirement.included.addAll(Arrays.stream(tags)
                 .map(x -> x.GUID())
                 .collect(Collectors.toList()));
         return this;
     }
 
-    public AffixBuilder excludesTags(ModTag... tags) {
+    public AffixBuilder mustIncludesAllTags(SlotTag... tags) {
+        this.tagRequirement.included.addAll(Arrays.stream(tags)
+                .map(x -> x.GUID())
+                .collect(Collectors.toList()));
+        this.tagRequirement.req_type = TagRequirement.ReqType.HAS_ALL;
+        return this;
+    }
+
+    public AffixBuilder excludesTags(SlotTag... tags) {
         this.tagRequirement.excluded.addAll(Arrays.stream(tags)
                 .map(x -> x.GUID())
                 .collect(Collectors.toList()));

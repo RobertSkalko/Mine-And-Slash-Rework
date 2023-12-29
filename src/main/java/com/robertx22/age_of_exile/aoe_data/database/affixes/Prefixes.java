@@ -27,6 +27,8 @@ public class Prefixes implements IRandomDefault<Affix>, ExileRegistryInit {
         new JewelryPrefixes().registerAll();
         new ManaArmorAffixes().registerAll();
 
+        new ImplicitAffixes().registerAll();
+
     }
 
     public static final Prefixes INSTANCE = new Prefixes();

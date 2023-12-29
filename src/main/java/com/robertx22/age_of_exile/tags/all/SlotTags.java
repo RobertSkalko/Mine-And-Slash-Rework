@@ -4,6 +4,21 @@ import com.robertx22.age_of_exile.tags.imp.SlotTag;
 
 public class SlotTags {
 
+    public final static SlotTag CLOTH_BOOTS = SlotTag.of("cloth_boots");
+    public final static SlotTag CLOTH_PANTS = SlotTag.of("cloth_pants");
+    public final static SlotTag CLOTH_CHEST = SlotTag.of("cloth_chest");
+    public final static SlotTag CLOTH_HELMET = SlotTag.of("cloth_helmet");
+
+    public final static SlotTag LEATHER_BOOTS = SlotTag.of("leather_boots");
+    public final static SlotTag LEATHER_PANTS = SlotTag.of("leather_pants");
+    public final static SlotTag LEATHER_CHEST = SlotTag.of("leather_chest");
+    public final static SlotTag LEATHER_HELMET = SlotTag.of("leather_helmet");
+
+    public final static SlotTag PLATE_BOOTS = SlotTag.of("plate_boots");
+    public final static SlotTag PLATE_PANTS = SlotTag.of("plate_pants");
+    public final static SlotTag PLATE_CHEST = SlotTag.of("plate_chest");
+    public final static SlotTag PLATE_HELMET = SlotTag.of("plate_helmet");
+
     public static SlotTag sword = SlotTag.of("sword");
     public static SlotTag chest = SlotTag.of("chest");
     public static SlotTag pants = SlotTag.of("pants");

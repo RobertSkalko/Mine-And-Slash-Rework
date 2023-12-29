@@ -24,7 +24,6 @@ public class BaseGearBuilder implements GearDataHelper {
     private String slot;
     private TagList tags;
     private List<StatMod> basestats = new ArrayList<>();
-    private List<StatMod> implicitstats = new ArrayList<>();
     private List<BaseGearType.ItemChance> items = new ArrayList<>();
     private StatRequirement req = new StatRequirement();
     private WeaponTypes wep = WeaponTypes.none;
@@ -98,10 +97,6 @@ public class BaseGearBuilder implements GearDataHelper {
         return this;
     }
 
-    public BaseGearBuilder implicitStat(StatMod mod) {
-        this.implicitstats.add(mod);
-        return this;
-    }
 
     public DataGenKey<BaseGearType> build() {
 
@@ -111,7 +106,6 @@ public class BaseGearBuilder implements GearDataHelper {
         BaseGearType type = new BaseGearType(slot, id, name);
         type.weapon_type = wep;
         type.tags = tags;
-        type.implicit_stats = implicitstats;
         type.base_stats = basestats;
         type.weight = weight;
         type.style = style;

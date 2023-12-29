@@ -4,10 +4,12 @@ import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.tooltips.StatTooltipType;
 import com.robertx22.age_of_exile.database.data.stats.types.gear_base.IBaseStatModifier;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.*;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPartTooltip;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IRerollable;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatsContainer;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
@@ -24,11 +26,7 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
 
         p = gear.getRarity().stat_percents.random();
 
-        gear.rp = RandomUtils.randomFromList(new ArrayList<>(RareItemAffixNames.prefixAny
-                .keySet()));
-        gear.rs = RandomUtils.randomFromList(new ArrayList<>(RareItemAffixNames.getSuffixMap(gear.GetBaseGearType())
-                .keySet()));
-
+    
     }
 
     @Override

@@ -18,3 +18,6 @@ v.5.3.9
 - profession stations now fill up the output slots BUT any recipes with more than 1 output will throw items on the ground, so use hoppers anyway
 - should fix move speed stat crash
 - now requires the latest exile lib 1.4.0 because it fixes an important bug
+- gem stats now scale to lvl (the ones that can)
+- added new req_type arg to tag req datapacks, if INCLUDES_ANY it means affix can be on any item with that tag, if HAS_ALL it needs to have all the tags, no changes to jsons needed i think for most use cases
+- removed special names for items with more than 2 affixes, now uses the strongest of each, prefix and suffix for names. Think it's better this way 

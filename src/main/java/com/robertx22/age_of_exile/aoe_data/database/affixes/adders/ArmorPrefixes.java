@@ -4,8 +4,8 @@ import com.robertx22.age_of_exile.aoe_data.database.affixes.AffixBuilder;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.gear_base.GearDefense;
-import com.robertx22.age_of_exile.tags.ModTag;
 import com.robertx22.age_of_exile.tags.all.SlotTags;
+import com.robertx22.age_of_exile.tags.imp.SlotTag;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
@@ -19,12 +19,12 @@ public class ArmorPrefixes implements ExileRegistryInit {
 
         Stat stat;
         String name;
-        ModTag tag;
+        SlotTag tag;
 
         public float flatMulti = 1;
         String suffix;
 
-        public TYPE(String suffix, Stat stat, String name, ModTag tag, float flatMulti) {
+        public TYPE(String suffix, Stat stat, String name, SlotTag tag, float flatMulti) {
             this.stat = stat;
             this.name = name;
             this.suffix = suffix;

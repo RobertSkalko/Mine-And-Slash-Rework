@@ -6,7 +6,6 @@ import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.requirements.bases.GearRequestedFor;
-import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
@@ -20,11 +19,9 @@ import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Formatter;
-import com.robertx22.age_of_exile.uncommon.localization.Specialaffixs;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
-import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -34,6 +31,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -75,8 +73,6 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     // apparently people had big issues with many storage mods, So i should try minimize the nbt.
     public String rar = IRarity.COMMON_ID; // rar
 
-    public int rp = -1; // pre_name rare prefix
-    public int rs = -1; // suf_name rare suffix
 
     public int lvl = 1; // lvl
     public String gtype = "";
@@ -255,44 +251,44 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     public List<MutableComponent> GetDisplayName(ItemStack stack) {
 
         try {
-            ChatFormatting format = this.getRarity()
-                    .textFormatting();
 
-            if (useFullAffixedName()) {
-                return getFullAffixedName();
-            } else {
-                if (isUnique()) {
-                    return getUniqueName();
-                } else {
-                    return getTooManyAffixesName();
-                }
-            }
+            return getFullAffixedName();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return Arrays.asList();
     }
 
-    private MutableComponent prefixChecker(){
+    private MutableComponent prefixChecker() {
         if (affixes.hasPrefix()) {
-            AffixData prefix = affixes.pre.get(0);
+            // find strongest
+            AffixData prefix = affixes.pre.stream().sorted(Comparator.comparingInt(x -> -x.p)).findFirst().get();
             return prefix.BaseAffix().locName();
         } else {
             return Component.literal("");
         }
     }
 
-    private MutableComponent uniqueChecker(){
+    private MutableComponent uniqueChecker() {
+        var base = GetBaseGearType().locName();
+
+        if (imp.has()) {
+            base = imp.get().locName();
+        }
         if (this.uniqueStats == null) {
-            return GetBaseGearType().locName();
+            return base;
         } else {
-            return uniqueStats.getUnique(this).locName();
+            return uniqueStats.getUnique(this).locName().append(" ").append(base);
         }
     }
 
-    private MutableComponent suffixChecker(){
+    private MutableComponent suffixChecker() {
+
         if (affixes.hasSuffix()) {
-            AffixData suffix = affixes.suf.get(0);
+            // find strongest
+            AffixData suffix = affixes.suf.stream().sorted(Comparator.comparingInt(x -> -x.p)).findFirst().get();
+
             return suffix.BaseAffix().locName();
         } else {
             return Component.literal("");
@@ -305,7 +301,6 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         ChatFormatting format = this.getRarity()
                 .textFormatting();
 
-        ExileText meditation = ExileText.emptyLine();
         // turns out the null mutablecomponent could remain a space-like char when form the name.
         //String[] name = processStrings(prefixChecker().getString(), uniqueChecker().getString(), suffixChecker().getString());
         MutableComponent text;
@@ -338,66 +333,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         return list;
 
     }
-    private MutableComponent replaceNameChecker(){
-        UniqueGear uniq = this.uniqueStats.getUnique(this);
-        if (!uniq.replaces_name) {
-            return GetBaseGearType().locName().withStyle(ChatFormatting.BOLD);
-        }
-        return Component.literal("");
 
-    }
-
-    private List<MutableComponent> getUniqueName() {
-        List<MutableComponent> list = new ArrayList<>();
-        ChatFormatting format = this.getRarity()
-                .textFormatting();
-
-        UniqueGear uniq = this.uniqueStats.getUnique(this);
-
-        MutableComponent txt = ExileText.emptyLine().get().append(uniq.locName());
-
-        list.addAll(TooltipUtils.cutIfTooLong(Formatter.SPECIAL_UNIQUE_PROCESS.locName(txt, replaceNameChecker()).withStyle(format).withStyle(ChatFormatting.BOLD), format));
-
-        return list;
-    }
-
-    private List<MutableComponent> getTooManyAffixesName() {
-        List<MutableComponent> list = new ArrayList<>();
-        ChatFormatting format = this.getRarity()
-                .textFormatting();
-
-
-        Specialaffixs prefix = RareItemAffixNames.getPrefix(this);
-        Specialaffixs suffix = RareItemAffixNames.getSuffix(this);
-
-        if (prefix != null && suffix != null) {
-
-            ExileText meditation = ExileText.emptyLine();
-
-            MutableComponent text = Formatter.HIGH_RARITY_GEAR_ITEM_NAME.locName(prefix.locName(), suffix.locName(), GetBaseGearType().locName());
-
-            list.addAll(TooltipUtils.cutIfTooLong(text, format));
-
-            return list;
-        }
-
-        return list;
-
-    }
-
-    private boolean useFullAffixedName() {
-
-        if (isUnique() && affixes.getNumberOfAffixes() == 0) {
-            return false;
-        }
-        if (affixes.getNumberOfPrefixes() > 1) {
-            return false;
-        }
-        if (affixes.getNumberOfSuffixes() > 1) {
-            return false;
-        }
-        return true;
-    }
 
     public List<IStatsContainer> GetAllStatContainers() {
 

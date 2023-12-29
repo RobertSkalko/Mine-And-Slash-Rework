@@ -1,5 +1,8 @@
 package com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts;
 
+import com.robertx22.age_of_exile.database.data.affixes.Affix;
+import com.robertx22.age_of_exile.database.data.requirements.bases.GearRequestedFor;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPartTooltip;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IRerollable;
@@ -12,6 +15,7 @@ import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,10 +24,14 @@ public class ImplicitStatsData implements IGearPartTooltip, IRerollable, IStatsC
 
 
     public Integer p = 0;
+    public String imp = "";
 
     @Override
     public void RerollFully(GearItemData gear) {
-
+        var opt = ExileDB.Affixes().getFilterWrapped(x -> x.type == Affix.Type.implicit && x.meetsRequirements(new GearRequestedFor(gear)));
+        if (!opt.list.isEmpty()) {
+            this.imp = opt.random().GUID();
+        }
         p = getMinMax(gear).random();
 
     }
@@ -43,12 +51,19 @@ public class ImplicitStatsData implements IGearPartTooltip, IRerollable, IStatsC
         if (!stats.isEmpty()) {
             list.add(ExileText.ofText("").get());
 
-            getAllStatsWithCtx(gear, info)
-                    .forEach(x -> list.addAll(x.GetTooltipString(info)));
+            getAllStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
         }
         return list;
     }
 
+
+    public Affix get() {
+        return ExileDB.Affixes().get(imp);
+    }
+
+    public boolean has() {
+        return ExileDB.Affixes().isRegistered(imp);
+    }
 
     @Override
     public Part getPart() {
@@ -57,21 +72,27 @@ public class ImplicitStatsData implements IGearPartTooltip, IRerollable, IStatsC
 
     public List<TooltipStatWithContext> getAllStatsWithCtx(GearItemData gear, TooltipInfo info) {
         List<TooltipStatWithContext> list = new ArrayList<>();
-        gear.GetBaseGearType()
-                .implicitStats()
-                .forEach(x -> {
-                    ExactStatData exact = x.ToExactStat(p, gear.getLevel());
-                    list.add(new TooltipStatWithContext(new TooltipStatInfo(exact, p, info), x, (int) gear.getLevel()));
-                });
+
+        if (has()) {
+
+            get().getStats()
+                    .forEach(x -> {
+                        ExactStatData exact = x.ToExactStat(p, gear.getLevel());
+                        list.add(new TooltipStatWithContext(new TooltipStatInfo(exact, p, info), x, (int) gear.getLevel()));
+                    });
+        }
         return list;
     }
 
     @Override
     public List<ExactStatData> GetAllStats(GearItemData gear) {
-        return gear.GetBaseGearType()
-                .implicitStats()
-                .stream()
-                .map(x -> x.ToExactStat(p, gear.lvl))
-                .collect(Collectors.toList());
+
+        if (has()) {
+            return get().getStats()
+                    .stream()
+                    .map(x -> x.ToExactStat(p, gear.lvl))
+                    .collect(Collectors.toList());
+        }
+        return Arrays.asList();
     }
 }

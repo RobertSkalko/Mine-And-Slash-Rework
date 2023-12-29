@@ -12,10 +12,16 @@ import java.util.List;
 
 public class TagRequirement extends BaseRequirement<TagRequirement> {
 
+    public enum ReqType {
+        INCLUDES_ANY, HAS_ALL
+    }
+
     public TagType type = TagType.GearSlot;
 
     public List<String> included = new ArrayList<>();
     public List<String> excluded = new ArrayList<>();
+
+    public ReqType req_type = ReqType.INCLUDES_ANY;
 
     public TagRequirement(TagType type, List<String> included, List<String> excluded) {
         this.type = type;
@@ -30,15 +36,16 @@ public class TagRequirement extends BaseRequirement<TagRequirement> {
     public boolean meetsRequierment(GearRequestedFor requested) {
         TagList list = requested.forSlot.getTags();
 
-        if (included.stream()
-                .anyMatch(x -> list.contains(x))) {
-            if (excluded.stream()
-                    .noneMatch(y -> list.contains(y))) {
-                return true;
-            }
+        if (excluded.stream().anyMatch(y -> list.contains(y))) {
+            return false;
         }
 
-        return false;
+        if (req_type == ReqType.HAS_ALL) {
+            return included.stream().allMatch(x -> list.contains(x));
+        } else {
+            return included.stream().anyMatch(x -> list.contains(x));
+        }
+        
     }
 
 

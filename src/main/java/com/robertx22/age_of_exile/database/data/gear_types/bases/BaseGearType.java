@@ -41,7 +41,6 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
 
     public StatRequirement req = new StatRequirement();
 
-    public List<StatMod> implicit_stats = new ArrayList<>();
     public List<StatMod> base_stats = new ArrayList<>();
 
     public WeaponTypes weapon_type = WeaponTypes.none;
@@ -84,10 +83,7 @@ public final class BaseGearType implements IAutoLocName, JsonExileRegistry<BaseG
         }
     }
 
-    public List<StatMod> implicitStats() {
-        return implicit_stats;
-    }
-
+   
     public List<StatMod> baseStats() {
         return base_stats;
     }

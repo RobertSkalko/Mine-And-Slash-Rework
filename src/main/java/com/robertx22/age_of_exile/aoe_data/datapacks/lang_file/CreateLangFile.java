@@ -142,7 +142,6 @@ public class CreateLangFile {
         list.addAll(Arrays.asList(Formatter.values()));
         list.addAll(Arrays.asList(Gui.values()));
         list.addAll(Arrays.asList(Itemtips.values()));
-        list.addAll(Arrays.asList(Specialaffixs.values()));
         //
 
         for (Map.Entry<TagType, List<ModTag>> entry : ModTag.MAP.entrySet()) {

@@ -19,6 +19,7 @@ husbandry_core_exp
 item_both_armor
 azure
 of_fast_cast
+bandit_mask
 husbandry_triple
 mining_medium_exp
 wep_item_flat
@@ -111,6 +112,7 @@ physical_wep_dmg
 mining_double
 mining_lesser_exp
 crafted_jewel_aura_eff
+oakwood_staff
 of_the_sky
 enchantment_jewerly_int
 of_mana
