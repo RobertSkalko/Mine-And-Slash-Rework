@@ -2,9 +2,9 @@
 	
 	"death.attack.mmorpg": "%1$s被%2$s杀死",
 	
-	"block.mmorpg.harvest.purple": "Chaotic Seeds",
-	"block.mmorpg.harvest.green": "Primal Seeds",
-	"block.mmorpg.harvest.blue": "Lucid Seeds",
+	"block.mmorpg.harvest.purple": "混沌之种",
+	"block.mmorpg.harvest.green": "原始之种",
+	"block.mmorpg.harvest.blue": "流明之种",
 	
 	
 	"item.mmorpg.custom_loot_crate": "战利品奖励箱",
@@ -115,9 +115,9 @@
 	"mmorpg.chest_type.currency": "通货",
 	"mmorpg.chest_type.gear": "装备",
 	"mmorpg.chest_type.gem": "宝石",
-	"mmorpg.chest_type.harvest_blue_chest": "流明采集宝箱",
-	"mmorpg.chest_type.harvest_green_chest": "原始采集宝箱",
-	"mmorpg.chest_type.harvest_purple_chest": "混沌采集宝箱",
+	"mmorpg.chest_type.harvest_blue_chest": "流明庄园宝箱",
+	"mmorpg.chest_type.harvest_green_chest": "原始庄园宝箱",
+	"mmorpg.chest_type.harvest_purple_chest": "混沌庄园宝箱",
 	"mmorpg.chest_type.map": "地图",
 	"mmorpg.chest_type.rune": "符文",
 	"mmorpg.chest_type.support_gem": "支援宝石",
