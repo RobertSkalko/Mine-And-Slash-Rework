@@ -23,3 +23,6 @@ v.5.3.9
 - removed special names for items with more than 2 affixes, now uses the strongest of each, prefix and suffix for names. Think it's better this way 
 - added tags for each specific base gear like leather_helmet
 - items can now have implicit stats and change their name accordingly, this should make low rarity gear a bit more interesting
+- heavily nerfed jewel stats, they were meant to be slight help to gearing, not a complete solution to resistances
+- normal jewels now have more possible affixes
+- added give jewel command

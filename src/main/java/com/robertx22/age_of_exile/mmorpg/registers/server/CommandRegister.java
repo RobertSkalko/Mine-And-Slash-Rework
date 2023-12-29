@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.mmorpg.registers.server;
 import com.mojang.brigadier.CommandDispatcher;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
+import com.robertx22.age_of_exile.loot.blueprints.JewelBlueprint;
 import com.robertx22.age_of_exile.loot.blueprints.LootChestBlueprint;
 import com.robertx22.age_of_exile.loot.blueprints.SkillGemBlueprint;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
@@ -34,6 +35,7 @@ public class CommandRegister {
         //new GenericGive("spell", ExileRegistryTypes.SPELL, x -> new SkillGemBlueprint(x, SkillGemData.SkillGemType.SKILL)).register(dispatcher);
         new GenericGive("aura", ExileRegistryTypes.AURA, x -> new SkillGemBlueprint(x, SkillGemData.SkillGemType.AURA)).register(dispatcher);
         new GenericGive("support_gem", ExileRegistryTypes.SUPPORT_GEM, x -> new SkillGemBlueprint(x, SkillGemData.SkillGemType.SUPPORT)).register(dispatcher);
+        new GenericGive("jewel", null, x -> new JewelBlueprint(x)).register(dispatcher);
 
         new GenericGive("gear", ExileRegistryTypes.GEAR_TYPE, x -> new GearBlueprint(x)).register(dispatcher);
         new GenericGive("loot_chest", ExileRegistryTypes.LOOT_CHEST, x -> new LootChestBlueprint(x)).register(dispatcher);
