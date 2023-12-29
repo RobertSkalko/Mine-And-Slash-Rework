@@ -47,25 +47,25 @@ public class BaseGearsAdder implements ExileRegistryInit, GearDataHelper {
 
         // ARMOR
         BaseGearBuilder.of(BaseGearTypes.PLATE_BOOTS, GearSlots.BOOTS, "Plate Boots", StatRequirement.of(PlayStyle.STR))
-                .tags(new TagList(SlotTags.armor_stat, SlotTags.boots, SlotTags.armor_family, SlotTags.strength))
+                .tags(new TagList(SlotTags.PLATE_BOOTS, SlotTags.armor_stat, SlotTags.boots, SlotTags.armor_family, SlotTags.strength))
                 .baseStat(getStat(ArmorStat.ARMOR, ArmorSlot.BOOTS))
                 .items(boots)
                 .build();
 
         BaseGearBuilder.of(BaseGearTypes.PLATE_PANTS, GearSlots.PANTS, "Plate Pants", StatRequirement.of(PlayStyle.STR))
-                .tags(new TagList(SlotTags.armor_stat, SlotTags.pants, SlotTags.armor_family, SlotTags.strength))
+                .tags(new TagList(SlotTags.PLATE_PANTS, SlotTags.armor_stat, SlotTags.pants, SlotTags.armor_family, SlotTags.strength))
                 .baseStat(getStat(ArmorStat.ARMOR, ArmorSlot.PANTS))
                 .items(legs)
                 .build();
 
         BaseGearBuilder.of(BaseGearTypes.PLATE_CHEST, GearSlots.CHEST, "Plate Chest", StatRequirement.of(PlayStyle.STR))
-                .tags(new TagList(SlotTags.armor_stat, SlotTags.chest, SlotTags.armor_family, SlotTags.strength))
+                .tags(new TagList(SlotTags.PLATE_CHEST, SlotTags.armor_stat, SlotTags.chest, SlotTags.armor_family, SlotTags.strength))
                 .baseStat(getStat(ArmorStat.ARMOR, ArmorSlot.CHEST))
                 .items(chest)
                 .build();
 
         BaseGearBuilder.of(BaseGearTypes.PLATE_HELMET, GearSlots.HELMET, "Plate Helmet", StatRequirement.of(PlayStyle.STR))
-                .tags(new TagList(SlotTags.armor_stat, SlotTags.helmet, SlotTags.armor_family, SlotTags.strength))
+                .tags(new TagList(SlotTags.PLATE_HELMET, SlotTags.armor_stat, SlotTags.helmet, SlotTags.armor_family, SlotTags.strength))
                 .baseStat(getStat(ArmorStat.ARMOR, ArmorSlot.HELMET))
                 .items(helmet)
                 .build();
@@ -73,25 +73,25 @@ public class BaseGearsAdder implements ExileRegistryInit, GearDataHelper {
 
         // MS
         BaseGearBuilder.of(BaseGearTypes.CLOTH_BOOTS, GearSlots.BOOTS, "Cloth Boots", StatRequirement.of(PlayStyle.INT))
-                .tags(new TagList(SlotTags.magic_shield_stat, SlotTags.boots, SlotTags.armor_family, SlotTags.intelligence))
+                .tags(new TagList(SlotTags.CLOTH_BOOTS, SlotTags.magic_shield_stat, SlotTags.boots, SlotTags.armor_family, SlotTags.intelligence))
                 .baseStat(getStat(ArmorStat.MAGIC_SHIELD, ArmorSlot.BOOTS))
                 .items(boots)
                 .build();
 
         BaseGearBuilder.of(BaseGearTypes.CLOTH_PANTS, GearSlots.PANTS, "Cloth Pants", StatRequirement.of(PlayStyle.INT))
-                .tags(new TagList(SlotTags.magic_shield_stat, SlotTags.pants, SlotTags.armor_family, SlotTags.intelligence))
+                .tags(new TagList(SlotTags.CLOTH_PANTS, SlotTags.magic_shield_stat, SlotTags.pants, SlotTags.armor_family, SlotTags.intelligence))
                 .baseStat(getStat(ArmorStat.MAGIC_SHIELD, ArmorSlot.PANTS))
                 .items(legs)
                 .build();
 
         BaseGearBuilder.of(BaseGearTypes.CLOTH_CHEST, GearSlots.CHEST, "Cloth Chest", StatRequirement.of(PlayStyle.INT))
-                .tags(new TagList(SlotTags.magic_shield_stat, SlotTags.chest, SlotTags.armor_family, SlotTags.intelligence))
+                .tags(new TagList(SlotTags.CLOTH_CHEST, SlotTags.magic_shield_stat, SlotTags.chest, SlotTags.armor_family, SlotTags.intelligence))
                 .baseStat(getStat(ArmorStat.MAGIC_SHIELD, ArmorSlot.CHEST))
                 .items(chest)
                 .build();
 
         BaseGearBuilder.of(BaseGearTypes.CLOTH_HELMET, GearSlots.HELMET, "Cloth Helmet", StatRequirement.of(PlayStyle.INT))
-                .tags(new TagList(SlotTags.magic_shield_stat, SlotTags.helmet, SlotTags.armor_family, SlotTags.intelligence))
+                .tags(new TagList(SlotTags.CLOTH_HELMET, SlotTags.magic_shield_stat, SlotTags.helmet, SlotTags.armor_family, SlotTags.intelligence))
                 .baseStat(getStat(ArmorStat.MAGIC_SHIELD, ArmorSlot.HELMET))
                 .items(helmet)
                 .build();
@@ -99,25 +99,25 @@ public class BaseGearsAdder implements ExileRegistryInit, GearDataHelper {
 
         // DODGE
         BaseGearBuilder.of(BaseGearTypes.LEATHER_BOOTS, GearSlots.BOOTS, "Leather Boots", StatRequirement.of(PlayStyle.DEX))
-                .tags(new TagList(SlotTags.dodge_stat, SlotTags.boots, SlotTags.armor_family, SlotTags.dexterity))
+                .tags(new TagList(SlotTags.LEATHER_BOOTS, SlotTags.dodge_stat, SlotTags.boots, SlotTags.armor_family, SlotTags.dexterity))
                 .baseStat(getStat(ArmorStat.DODGE, ArmorSlot.BOOTS))
                 .items(boots)
                 .build();
 
         BaseGearBuilder.of(BaseGearTypes.LEATHER_PANTS, GearSlots.PANTS, "Leather Pants", StatRequirement.of(PlayStyle.DEX))
-                .tags(new TagList(SlotTags.dodge_stat, SlotTags.pants, SlotTags.armor_family, SlotTags.dexterity))
+                .tags(new TagList(SlotTags.LEATHER_PANTS, SlotTags.dodge_stat, SlotTags.pants, SlotTags.armor_family, SlotTags.dexterity))
                 .baseStat(getStat(ArmorStat.DODGE, ArmorSlot.PANTS))
                 .items(legs)
                 .build();
 
         BaseGearBuilder.of(BaseGearTypes.LEATHER_CHEST, GearSlots.CHEST, "Leather Chest", StatRequirement.of(PlayStyle.DEX))
-                .tags(new TagList(SlotTags.dodge_stat, SlotTags.chest, SlotTags.armor_family, SlotTags.dexterity))
+                .tags(new TagList(SlotTags.LEATHER_CHEST, SlotTags.dodge_stat, SlotTags.chest, SlotTags.armor_family, SlotTags.dexterity))
                 .baseStat(getStat(ArmorStat.DODGE, ArmorSlot.CHEST))
                 .items(chest)
                 .build();
 
         BaseGearBuilder.of(BaseGearTypes.LEATHER_HELMET, GearSlots.HELMET, "Leather Helmet", StatRequirement.of(PlayStyle.DEX))
-                .tags(new TagList(SlotTags.dodge_stat, SlotTags.helmet, SlotTags.armor_family, SlotTags.dexterity))
+                .tags(new TagList(SlotTags.LEATHER_HELMET, SlotTags.dodge_stat, SlotTags.helmet, SlotTags.armor_family, SlotTags.dexterity))
                 .baseStat(getStat(ArmorStat.DODGE, ArmorSlot.HELMET))
                 .items(helmet)
                 .build();

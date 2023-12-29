@@ -12,6 +12,7 @@ import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.tags.ModTag;
 import com.robertx22.age_of_exile.tags.TagType;
 import com.robertx22.age_of_exile.tags.all.SpellTags;
+import com.robertx22.age_of_exile.tags.imp.EffectTag;
 import com.robertx22.age_of_exile.tags.imp.SpellTag;
 import com.robertx22.age_of_exile.uncommon.effectdatas.*;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
@@ -49,9 +50,9 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
-    public static DataPackStatAccessor<ModTag> EFFECT_DURATION_YOU_CAST_PER_TAG = DatapackStatBuilder
-            .<ModTag>of(x -> x.GUID() + "_eff_dur_u_cast", x -> Elements.Physical)
-            .addAllOfType(ModTag.MAP.get(TagType.Effect))
+    public static DataPackStatAccessor<EffectTag> EFFECT_DURATION_YOU_CAST_PER_TAG = DatapackStatBuilder
+            .<EffectTag>of(x -> x.GUID() + "_eff_dur_u_cast", x -> Elements.Physical)
+            .addAllOfType(EffectTag.getAll())
             .worksWithEvent(ExilePotionEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)

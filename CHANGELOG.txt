@@ -21,3 +21,4 @@ v.5.3.9
 - gem stats now scale to lvl (the ones that can)
 - added new req_type arg to tag req datapacks, if INCLUDES_ANY it means affix can be on any item with that tag, if HAS_ALL it needs to have all the tags, no changes to jsons needed i think for most use cases
 - removed special names for items with more than 2 affixes, now uses the strongest of each, prefix and suffix for names. Think it's better this way 
+- added tags for each specific base gear like leather_helmet
