@@ -9,6 +9,7 @@ import java.util.Locale;
 public enum Words implements IAutoLocName {
     MOD_NAME("Mine and Slash"),
     TAGS("Tags: "),
+    ON_SLOTS("Slots: "),
 
     SPELL_STATS("Spell Stats:"),
     CASTED_TIMES_CHANNEL("Casted %1$s times during channel."),

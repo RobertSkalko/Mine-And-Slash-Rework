@@ -273,12 +273,12 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
 
             @Override
             public List<StatMod> onJewelry() {
-                return Arrays.asList(new StatMod(1, 5, Stats.CRIT_CHANCE.get()));
+                return Arrays.asList(new StatMod(1, 4, Stats.CRIT_CHANCE.get()));
             }
 
             @Override
             public List<StatMod> onWeapons() {
-                return Arrays.asList(new StatMod(3, 12, Stats.CRIT_DAMAGE.get()));
+                return Arrays.asList(new StatMod(3, 15, Stats.CRIT_DAMAGE.get()));
             }
         }),
         TOPAZ("topaz", "Topaz", ChatFormatting.YELLOW, new GemStatPerTypes() {
@@ -310,7 +310,7 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
 
             @Override
             public List<StatMod> onWeapons() {
-                return Arrays.asList(new StatMod(5, 25, Stats.CRIT_DAMAGE.get()));
+                return Arrays.asList(new StatMod(3, 15, Stats.CRIT_DAMAGE.get()));
             }
         }),
         RUBY("ruby", "Ruby", ChatFormatting.RED, new EleGem(Elements.Fire)),

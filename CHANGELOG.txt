@@ -17,3 +17,4 @@ v.5.3.9
 - chained spells now do less dmg per chain, up to configurable minimum
 - profession stations now fill up the output slots BUT any recipes with more than 1 output will throw items on the ground, so use hoppers anyway
 - should fix move speed stat crash
+- now requires the latest exile lib 1.4.0 because it fixes an important bug

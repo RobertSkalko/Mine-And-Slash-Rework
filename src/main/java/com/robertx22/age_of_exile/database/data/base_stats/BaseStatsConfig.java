@@ -26,7 +26,6 @@ public class BaseStatsConfig implements JsonExileRegistry<BaseStatsConfig>, IAut
 
     public void scaled(Stat stat, float val) {
         base_stats.add(new OptScaleExactStat(val, stat, ModType.FLAT).scale());
-
     }
 
     public void nonScaled(Stat stat, float val) {

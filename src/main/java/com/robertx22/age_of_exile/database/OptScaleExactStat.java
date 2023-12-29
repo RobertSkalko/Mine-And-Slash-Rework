@@ -33,8 +33,6 @@ public class OptScaleExactStat {
         this.v1 = first;
         this.stat = stat.GUID();
         this.type = type.name();
-
-
     }
 
     public String getPerkIdSuffix() {
@@ -71,8 +69,7 @@ public class OptScaleExactStat {
     }
 
     public ExactStatData toExactStat(int lvl) {
-        Stat stat = ExileDB.Stats()
-                .get(this.stat);
+        Stat stat = ExileDB.Stats().get(this.stat);
 
         return ExactStatData.levelScaled(v1, stat, getModType(), scale_to_lvl ? lvl : 1);
 

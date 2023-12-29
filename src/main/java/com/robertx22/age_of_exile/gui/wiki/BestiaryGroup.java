@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.gui.wiki;
 
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.aura.AuraGem;
+import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gems.Gem;
 import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.database.data.runewords.RuneWord;
@@ -41,6 +42,16 @@ public abstract class BestiaryGroup<T> {
 
                 tooltip.add(x.locName().withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD));
                 tooltip.add(Component.empty());
+
+                var slotsText = Words.ON_SLOTS.locName();
+
+                for (String slot : x.slots) {
+                    GearSlot s = ExileDB.GearSlots().get(slot);
+                    slotsText.append(s.locName()).append(", ");
+                }
+                tooltip.add(slotsText);
+                tooltip.add(Component.empty());
+
 
                 tooltip.add(Component.literal(RuneWord.join(x.runes.listIterator(), ", ").toUpperCase(Locale.ROOT)).withStyle(ChatFormatting.RED));
                 tooltip.add(Component.empty());

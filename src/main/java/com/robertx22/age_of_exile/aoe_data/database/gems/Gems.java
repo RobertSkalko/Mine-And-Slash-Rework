@@ -26,6 +26,10 @@ public class Gems implements ExileRegistryInit {
             gem.on_weapons_stats = x.getStatsForSerialization(SlotFamily.Weapon);
             gem.on_jewelry_stats = x.getStatsForSerialization(SlotFamily.Jewelry);
 
+            gem.on_armor_stats.forEach(e -> e.scale_to_lvl = true);
+            gem.on_weapons_stats.forEach(e -> e.scale_to_lvl = true);
+            gem.on_jewelry_stats.forEach(e -> e.scale_to_lvl = true);
+          
             gem.tier = x.gemRank.tier;
             gem.gem_type = x.gemType.id;
             gem.text_format = x.gemType.format.name();

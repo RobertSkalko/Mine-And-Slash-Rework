@@ -58,8 +58,8 @@ public enum RuneType {
     ),
     DOS(1000, "dos", "Dos", 1, 0.1F, () -> StatPerType.of()
             .addArmor(DodgeRating.getInstance().mod(1, 5).percent())
-            .addJewerly(Stats.PROJECTILE_SPEED.get().mod(2, 8).percent())
-            .addWeapon(Stats.PROJECTILE_DAMAGE.get().mod(5, 15).percent())
+            .addJewerly(Stats.PROJECTILE_SPEED.get().mod(2, 8))
+            .addWeapon(Stats.PROJECTILE_DAMAGE.get().mod(5, 15))
     ),
     ANO(1000, "ano", "Ano", 2, 0.2F, () -> StatPerType.of()
             .addArmor(HealthRegen.getInstance().mod(0.1F, 0.75F))

@@ -14,10 +14,6 @@ public class ContainerGuiRegisters {
         MenuScreens.register(SlashContainers.CRAFTING.get(), CraftingStationScreen::new);
         MenuScreens.register(SlashContainers.BACKPACK.get(), BackpackScreen::new);
 
-        //ScreenManager.register(SlashContainers.BACKPACK.get(), BackpackScreen::new);
-        //  ScreenManager.register(SlashContainers.RUNEWORD.get(), RuneWordStationGui::new);
-        // ScreenManager.register(SlashContainers.MAT_POUCH.get(), MatBagScreen::new);
-        //ScreenManager.register(SlashContainers.PROF_CRAFTING.get(), ProfCraftScreen::new);
 
     }
 
