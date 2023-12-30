@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.gui.screens.spell;
 
 import com.robertx22.age_of_exile.database.data.perks.Perk;
-import com.robertx22.age_of_exile.database.data.spell_school.AscendancyClass;
+import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.bases.BaseScreen;
 import com.robertx22.age_of_exile.gui.bases.INamedScreen;
@@ -19,7 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
 
-public class AscendancyClassScreen extends BaseScreen implements INamedScreen, ILeftRight {
+public class SpellSchoolScreen extends BaseScreen implements INamedScreen, ILeftRight {
     private static final ResourceLocation BACKGROUND = new ResourceLocation(SlashRef.MODID, "textures/gui/asc_classes/background.png");
 
     static int sizeX = 250;
@@ -27,17 +27,17 @@ public class AscendancyClassScreen extends BaseScreen implements INamedScreen, I
 
     Minecraft mc = Minecraft.getInstance();
 
-    public List<AscendancyClass> schoolsInOrder = ExileDB.SpellSchools()
+    public List<SpellSchool> schoolsInOrder = ExileDB.SpellSchools()
             .getList();
     public int currentIndex = 0;
     public int maxIndex = ExileDB.SpellSchools()
             .getSize() - 1;
 
-    public AscendancyClass currentSchool() {
+    public SpellSchool currentSchool() {
         return schoolsInOrder.get(currentIndex);
     }
 
-    public AscendancyClassScreen() {
+    public SpellSchoolScreen() {
         super(sizeX, sizeY);
     }
 

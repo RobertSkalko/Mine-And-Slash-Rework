@@ -209,7 +209,6 @@ public class TalentsData implements IStatCtx {
     public Perk.Connection getConnection(TalentTree school, PointData one, PointData two) {
 
         if (isAllocated(school, one)) {
-
             if (isAllocated(school, two)) {
                 return Perk.Connection.LINKED;
             }

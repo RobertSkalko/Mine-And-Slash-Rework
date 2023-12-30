@@ -6,7 +6,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.LearnSpellStat;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
-import com.robertx22.age_of_exile.saveclasses.spells.AscendancyClassesData;
+import com.robertx22.age_of_exile.saveclasses.spells.SpellSchoolsData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
@@ -40,10 +40,10 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
 
     transient ResourceLocation cachedIcon = null;
 
-    public AscendancyClassesData.PointType getPointType() {
+    public SpellSchoolsData.PointType getPointType() {
 
 
-        return isSpell() ? AscendancyClassesData.PointType.SPELL : AscendancyClassesData.PointType.PASSIVE;
+        return isSpell() ? SpellSchoolsData.PointType.SPELL : SpellSchoolsData.PointType.PASSIVE;
     }
 
     // todo

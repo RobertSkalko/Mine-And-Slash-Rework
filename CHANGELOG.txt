@@ -26,3 +26,5 @@ v.5.3.9
 - heavily nerfed jewel stats, they were meant to be slight help to gearing, not a complete solution to resistances
 - normal jewels now have more possible affixes
 - added give jewel command
+- EXPERIMENTAL characters feature. You can now save/load different builds by leveling new characters. Probably has a few bugs, might need some tweaking, currently
+the only limitation is you can't change classes in the map dimension and when in combat, but there might still be exploits I didn't think of

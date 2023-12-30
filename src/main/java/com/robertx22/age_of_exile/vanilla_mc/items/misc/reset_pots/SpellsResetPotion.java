@@ -16,9 +16,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
-public class AscClassResetPotion extends AutoItem implements IShapedRecipe {
+public class SpellsResetPotion extends AutoItem implements IShapedRecipe {
 
-    public AscClassResetPotion() {
+    public SpellsResetPotion() {
         super(new Item.Properties()
                 .stacksTo(10));
     }

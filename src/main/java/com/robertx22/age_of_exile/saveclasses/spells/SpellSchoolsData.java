@@ -3,7 +3,7 @@ package com.robertx22.age_of_exile.saveclasses.spells;
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
-import com.robertx22.age_of_exile.database.data.spell_school.AscendancyClass;
+import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatCtx;
@@ -16,7 +16,7 @@ import net.minecraft.world.entity.LivingEntity;
 import java.util.*;
 
 
-public class AscendancyClassesData implements IStatCtx {
+public class SpellSchoolsData implements IStatCtx {
 
     public HashMap<String, Integer> allocated_lvls = new HashMap<>();
     public List<String> school = new ArrayList<>();
@@ -73,7 +73,7 @@ public class AscendancyClassesData implements IStatCtx {
         return total;
     }
 
-    public boolean canLearn(LivingEntity en, AscendancyClass school, Perk perk) {
+    public boolean canLearn(LivingEntity en, SpellSchool school, Perk perk) {
 
         PointType type = perk.getPointType();
 
@@ -92,7 +92,7 @@ public class AscendancyClassesData implements IStatCtx {
         return true;
     }
 
-    public void learn(Perk perk, AscendancyClass school) {
+    public void learn(Perk perk, SpellSchool school) {
 
         if (!this.school.contains(school.GUID())) {
             this.school.add(school.GUID());

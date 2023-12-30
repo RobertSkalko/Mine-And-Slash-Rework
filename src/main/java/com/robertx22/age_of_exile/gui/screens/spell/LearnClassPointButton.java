@@ -30,12 +30,12 @@ public class LearnClassPointButton extends ImageButton {
     public static int BUTTON_SIZE_Y = 18;
 
     Minecraft mc = Minecraft.getInstance();
-    AscendancyClassScreen screen;
+    SpellSchoolScreen screen;
 
     Perk perk;
 
 
-    public LearnClassPointButton(AscendancyClassScreen screen, Perk perk, int xPos, int yPos) {
+    public LearnClassPointButton(SpellSchoolScreen screen, Perk perk, int xPos, int yPos) {
         super(xPos, yPos, BUTTON_SIZE_X, BUTTON_SIZE_Y, 0, 0, BUTTON_SIZE_Y, SPELL_SLOT, (button) -> {
             Packets.sendToServer(new AllocateClassPointPacket(screen.currentSchool(), perk, AllocateClassPointPacket.ACTION.ALLOCATE));
 

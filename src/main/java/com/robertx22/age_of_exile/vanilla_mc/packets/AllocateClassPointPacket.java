@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.vanilla_mc.packets;
 
 import com.robertx22.age_of_exile.database.data.perks.Perk;
-import com.robertx22.age_of_exile.database.data.spell_school.AscendancyClass;
+import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -24,7 +24,7 @@ public class AllocateClassPointPacket extends MyPacket<AllocateClassPointPacket>
 
     }
 
-    public AllocateClassPointPacket(AscendancyClass school, Perk perk, ACTION action) {
+    public AllocateClassPointPacket(SpellSchool school, Perk perk, ACTION action) {
         this.id = perk.GUID();
         this.schoolid = school.GUID();
         this.action = action;
@@ -57,7 +57,7 @@ public class AllocateClassPointPacket extends MyPacket<AllocateClassPointPacket>
 
         Perk perk = ExileDB.Perks()
                 .get(this.id);
-        AscendancyClass school = ExileDB.SpellSchools()
+        SpellSchool school = ExileDB.SpellSchools()
                 .get(this.schoolid);
 
         var data = Load.player(ctx.getPlayer()).ascClass;

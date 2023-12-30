@@ -24,28 +24,8 @@ public class RuneBlueprint extends ItemBlueprint {
 
         if (rune != null && item != null) {
 
-            // todo do i give runes stats too like gems so they are more interesting?
-
             ItemStack stack = new ItemStack(item);
 
-            /*
-            RuneItemData data = new RuneItemData();
-
-            data.rarity = rarity.get()
-                    .Rank();
-            data.name = rune.GUID();
-            data.level = level.get();
-
-            data.armor = StatModData.NewRandom(data.getRarity(), RandomUtils.weightedRandom(rune.armorStat()));
-
-            data.weapon = StatModData.NewRandom(data.getRarity(), RandomUtils.weightedRandom(rune.weaponStat()));
-
-            data.jewerly = StatModData.NewRandom(data.getRarity(), RandomUtils.weightedRandom(rune.jewerlyStat()));
-
-            Rune.Save(stack, data);
-
-
-             */
             return stack;
         } else {
             return ItemStack.EMPTY;

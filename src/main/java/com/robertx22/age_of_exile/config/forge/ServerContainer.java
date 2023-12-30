@@ -95,6 +95,7 @@ public class ServerContainer {
         MOB_MIN = b.defineInRange("mob_min", 1, 0, 20);
         MOB_MAX = b.defineInRange("mob_max", 2, 0, 20);
         MAX_ADDITIONAL_TALENT_POINTS = b.defineInRange("MAX_ADDITIONAL_TALENT_POINTS", 30, 0, 10000);
+        MAX_CHARACTERS = b.defineInRange("MAX_CHARACTERS", 7, 1, 7);
 
         UNARMED_ENERGY_COST = b.defineInRange("UNARMED_ENERGY_COST", 5D, 0D, 100D);
 
@@ -225,5 +226,6 @@ public class ServerContainer {
     public ForgeConfigSpec.IntValue MOB_MIN;
     public ForgeConfigSpec.IntValue MOB_MAX;
     public ForgeConfigSpec.IntValue MAX_ADDITIONAL_TALENT_POINTS;
+    public ForgeConfigSpec.IntValue MAX_CHARACTERS;
 
 }

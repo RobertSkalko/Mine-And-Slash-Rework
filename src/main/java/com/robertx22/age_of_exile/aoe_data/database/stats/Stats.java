@@ -217,7 +217,7 @@ public class Stats implements ExileRegistryInit {
             .setUsesMoreMultiplier()
             .addEffect(StatEffects.INCREASE_VALUE)
             .setLocName(x -> x.name + " Damage")
-            .setLocDesc(x -> "Magic damage are mage spells, like fireball.")
+            .setLocDesc(x -> "Magic damage are spells that have tag Magic etc")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
                 x.group = StatGroup.Misc;
@@ -250,7 +250,7 @@ public class Stats implements ExileRegistryInit {
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x.getTag()))
             .addEffect(StatEffects.INCREASE_VALUE)
             .setLocName(x -> x.name + " Damage Received")
-            .setLocDesc(x -> "Magic damage are mage spells, like fireball.")
+            .setLocDesc(x -> "Magic damage are spells that have tag Magic etc")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
                 x.scaling = StatScaling.NONE;

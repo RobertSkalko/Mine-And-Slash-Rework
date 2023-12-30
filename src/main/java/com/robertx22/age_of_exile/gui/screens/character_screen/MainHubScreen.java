@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.gui.screens.character_screen;
 
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
+import com.robertx22.age_of_exile.characters.gui.CharacterSelectScreen;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.CoreStat;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
@@ -31,7 +32,7 @@ import com.robertx22.age_of_exile.gui.screens.OpenInvGuiScreen;
 import com.robertx22.age_of_exile.gui.screens.OpenJewelsScreen;
 import com.robertx22.age_of_exile.gui.screens.OpenSkillGems;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.TalentsScreen;
-import com.robertx22.age_of_exile.gui.screens.spell.AscendancyClassScreen;
+import com.robertx22.age_of_exile.gui.screens.spell.SpellSchoolScreen;
 import com.robertx22.age_of_exile.gui.wiki.BestiaryScreen;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -221,7 +222,7 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
         // hub buttons
 
         List<INamedScreen> rightButtons = new ArrayList<>();
-        rightButtons.add(new AscendancyClassScreen());
+        rightButtons.add(new SpellSchoolScreen());
         rightButtons.add(new OpenSkillGems());
         rightButtons.add(new TalentsScreen());
         rightButtons.add(new OpenJewelsScreen());
@@ -229,12 +230,10 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
         List<INamedScreen> leftButtons = new ArrayList<>();
 
         leftButtons.add(new BestiaryScreen());
+        leftButtons.add(new CharacterSelectScreen());
 
 
         leftButtons.add(new OpenInvGuiScreen(Words.Salvaging, "salvage", GuiInventoryGrids.ofSalvageConfig()));
-
-
-        // screens.add(new SpellScreen());
 
 
         publicAddButton(new FavorButton(guiLeft + sizeX / 2 - FavorButton.FAVOR_BUTTON_SIZE_X / 2, guiTop - FavorButton.FAVOR_BUTTON_SIZE_Y));

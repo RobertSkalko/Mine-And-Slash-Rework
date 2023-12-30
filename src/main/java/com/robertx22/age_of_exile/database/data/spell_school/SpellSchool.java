@@ -16,8 +16,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class AscendancyClass implements JsonExileRegistry<AscendancyClass>, IAutoGson<AscendancyClass>, IAutoLocName {
-    public static AscendancyClass SERIALIZER = new AscendancyClass();
+public class SpellSchool implements JsonExileRegistry<SpellSchool>, IAutoGson<SpellSchool>, IAutoLocName {
+    public static SpellSchool SERIALIZER = new SpellSchool();
 
     public String id = "";
     public transient String locname = "";
@@ -28,9 +28,7 @@ public class AscendancyClass implements JsonExileRegistry<AscendancyClass>, IAut
     public HashMap<String, PointData> perks = new HashMap<>();
 
     public List<Integer> lvl_reqs = Arrays.asList(1, 5, 10, 15, 20, 25, 30);
-
-    // public HashMap<String, PointData> spells = new HashMap<>(); todo synergies
-
+ 
     public int getLevelNeededToAllocate(PointData point) {
 
         int req = lvl_reqs.get(point.y);
@@ -57,8 +55,8 @@ public class AscendancyClass implements JsonExileRegistry<AscendancyClass>, IAut
     }
 
     @Override
-    public Class<AscendancyClass> getClassForSerialization() {
-        return AscendancyClass.class;
+    public Class<SpellSchool> getClassForSerialization() {
+        return SpellSchool.class;
     }
 
     @Override

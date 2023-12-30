@@ -4,12 +4,13 @@ import com.robertx22.age_of_exile.capability.player.data.*;
 import com.robertx22.age_of_exile.capability.player.helper.GemInventoryHelper;
 import com.robertx22.age_of_exile.capability.player.helper.JewelInvHelper;
 import com.robertx22.age_of_exile.capability.player.helper.MyInventory;
+import com.robertx22.age_of_exile.characters.CharStorageData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.DeathStatsData;
 import com.robertx22.age_of_exile.saveclasses.perks.TalentsData;
-import com.robertx22.age_of_exile.saveclasses.spells.AscendancyClassesData;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellCastingData;
+import com.robertx22.age_of_exile.saveclasses.spells.SpellSchoolsData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_calc.StatCalculation;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -70,6 +71,8 @@ public class PlayerData implements ICap {
     private static final String PROFESSIONS = "profs";
     private static final String BUFFS = "buffs";
     private static final String RESTED_XP = "rxp";
+    private static final String NAME = "name";
+    private static final String CHARACTERS = "chars";
 
     public transient Player player;
 
@@ -78,7 +81,7 @@ public class PlayerData implements ICap {
     public StatPointsData statPoints = new StatPointsData();
     public DeathStatsData deathStats = new DeathStatsData();
     public PlayerMapData map = new PlayerMapData();
-    public AscendancyClassesData ascClass = new AscendancyClassesData();
+    public SpellSchoolsData ascClass = new SpellSchoolsData();
     public SpellCastingData spellCastingData = new SpellCastingData();
     public PlayerConfigData config = new PlayerConfigData();
     public DeathFavorData favor = new DeathFavorData();
@@ -90,6 +93,9 @@ public class PlayerData implements ICap {
     private MyInventory auraInv = new MyInventory(GemInventoryHelper.TOTAL_AURAS);
     private MyInventory jewelsInv = new MyInventory(9);
 
+    public CharStorageData characters = new CharStorageData();
+
+    public String name = "";
 
     public PlayerData(Player player) {
         this.player = player;
@@ -117,10 +123,13 @@ public class PlayerData implements ICap {
         LoadSave.Save(professions, nbt, PROFESSIONS);
         LoadSave.Save(buff, nbt, BUFFS);
         LoadSave.Save(rested_xp, nbt, RESTED_XP);
+        LoadSave.Save(characters, nbt, CHARACTERS);
 
         nbt.put(GEMS, skillGemInv.createTag());
         nbt.put(AURAS, auraInv.createTag());
         nbt.put(JEWELS, jewelsInv.createTag());
+
+        nbt.putString(NAME, name);
 
         return nbt;
     }
@@ -133,17 +142,20 @@ public class PlayerData implements ICap {
         this.statPoints = loadOrBlank(StatPointsData.class, new StatPointsData(), nbt, STAT_POINTS, new StatPointsData());
         this.deathStats = loadOrBlank(DeathStatsData.class, new DeathStatsData(), nbt, DEATH_STATS, new DeathStatsData());
         this.map = loadOrBlank(PlayerMapData.class, new PlayerMapData(), nbt, MAP, new PlayerMapData());
-        this.ascClass = loadOrBlank(AscendancyClassesData.class, new AscendancyClassesData(), nbt, ASC, new AscendancyClassesData());
+        this.ascClass = loadOrBlank(SpellSchoolsData.class, new SpellSchoolsData(), nbt, ASC, new SpellSchoolsData());
         this.spellCastingData = loadOrBlank(SpellCastingData.class, new SpellCastingData(), nbt, CAST, new SpellCastingData());
         this.config = loadOrBlank(PlayerConfigData.class, new PlayerConfigData(), nbt, CONFIG, new PlayerConfigData());
         this.favor = loadOrBlank(DeathFavorData.class, new DeathFavorData(), nbt, FAVOR, new DeathFavorData());
         this.professions = loadOrBlank(PlayerProfessionsData.class, new PlayerProfessionsData(), nbt, PROFESSIONS, new PlayerProfessionsData());
         this.buff = loadOrBlank(PlayerBuffData.class, new PlayerBuffData(), nbt, BUFFS, new PlayerBuffData());
         this.rested_xp = loadOrBlank(RestedExpData.class, new RestedExpData(), nbt, RESTED_XP, new RestedExpData());
+        this.characters = loadOrBlank(CharStorageData.class, new CharStorageData(), nbt, CHARACTERS, new CharStorageData());
 
         skillGemInv.fromTag(nbt.getList(GEMS, 10)); // todo
         auraInv.fromTag(nbt.getList(AURAS, 10)); // todo
         jewelsInv.fromTag(nbt.getList(JEWELS, 10)); // todo
+
+        this.name = nbt.getString(NAME);
 
     }
 

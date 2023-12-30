@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class SpellCastingData {
 
-    private HashMap<Integer, String> hotbar = new HashMap<>();
+    public HashMap<Integer, String> hotbar = new HashMap<>();
 
     public List<InsertedSpell> getAllHotbarSpells() {
         List<InsertedSpell> list = new ArrayList<>();
