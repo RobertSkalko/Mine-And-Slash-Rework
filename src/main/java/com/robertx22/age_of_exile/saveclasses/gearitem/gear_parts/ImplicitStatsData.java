@@ -49,12 +49,13 @@ public class ImplicitStatsData implements IGearPartTooltip, IRerollable, IStatsC
 
         List<ExactStatData> stats = GetAllStats(gear);
 
-        list.add(Words.IMPLICIT_STATS.locName());
 
         if (!stats.isEmpty()) {
-            list.add(ExileText.ofText("").get());
+            list.add(Words.IMPLICIT_STATS.locName());
 
             getAllStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
+            list.add(ExileText.ofText("").get());
+
         }
         return list;
     }

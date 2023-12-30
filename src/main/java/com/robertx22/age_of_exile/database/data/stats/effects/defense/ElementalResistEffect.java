@@ -51,8 +51,7 @@ public class ElementalResistEffect extends BaseDamageEffect {
         if (effect.data.getBoolean(EventData.RESISTED_ALREADY)) {
             return false;
         }
-        if (effect.GetElement()
-                .equals(stat.getElement())) {
+        if (effect.GetElement().equals(stat.getElement())) {
             return true;
         }
 

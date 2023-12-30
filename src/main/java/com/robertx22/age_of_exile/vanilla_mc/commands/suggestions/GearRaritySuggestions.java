@@ -12,12 +12,11 @@ public class GearRaritySuggestions extends CommandSuggestions {
         List<String> list = new ArrayList();
 
         ExileDB.GearRarities()
-            .getList()
-            .forEach(x -> {
-                if (!x.is_unique_item) {
+                .getList()
+                .forEach(x -> {
                     list.add(x.GUID());
-                }
-            });
+                
+                });
         list.add("random");
 
         return list;

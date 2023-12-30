@@ -47,7 +47,9 @@ public class GearBlueprint extends RarityItemBlueprint implements ITypeBlueprint
         if (item == Items.AIR) {
             return SoulLootGen.createSoulBasedOnGear(this);
         } else {
-            return GearCreationUtils.CreateStack(createData(), item); // todo need to find item
+            var data = createData();
+            this.item = this.gearItemSlot.get().getRandomItem(rarity.get());// if item changed
+            return GearCreationUtils.CreateStack(data, item); // todo need to find item
         }
     }
 

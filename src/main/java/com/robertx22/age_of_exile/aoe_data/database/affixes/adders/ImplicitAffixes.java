@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
@@ -16,6 +17,7 @@ import com.robertx22.age_of_exile.tags.all.SlotTags;
 import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.tags.imp.SlotTag;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
+import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
 import java.util.function.Consumer;
@@ -27,7 +29,7 @@ public class ImplicitAffixes implements ExileRegistryInit {
     public void registerAll() {
 
         new Builder(SlotTags.ring).build(x -> {
-            x.add("hp_ring", "Coral Ring", Health.getInstance().mod(10, 20));
+            x.add("hp_ring", "Coral Ring", Health.getInstance().mod(5, 10));
             x.add("mana_ring", "Paua Ring", Mana.getInstance().mod(10, 20));
             x.add("ms_ring", "Moonstone Ring", MagicShield.getInstance().mod(10, 20));
             x.add("ene_ring", "Emerald Ring", Energy.getInstance().mod(10, 20));
@@ -38,8 +40,25 @@ public class ImplicitAffixes implements ExileRegistryInit {
             x.add("jade_amulet", "Jade Amulet", DatapackStats.INT.mod(5, 10).percent());
         });
 
+        new Builder(SlotTags.PLATE_HELMET).build(x -> {
+            x.add("gladiator_helm", "Gladiator Helm", Stats.ELEMENTAL_DAMAGE.get(Elements.Physical).mod(3, 6));
+            x.add("siege_helm", "Siege Helmet", Stats.STYLE_DAMAGE.get(PlayStyle.STR).mod(5, 10));
+            x.add("royal_helm", "Royal Helm", DatapackStats.STR.mod(3, 6).percent());
+        });
+
         new Builder(SlotTags.LEATHER_HELMET).build(x -> {
             x.add("bandit_mask", "Bandit Mask", Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.trap).mod(5, 10));
+            x.add("vdo_mask", "Voodoo Mask", Stats.INCREASED_LEECH.get().mod(5, 10));
+            x.add("hunter_hood", "Hunter Hood", Stats.PROJECTILE_DAMAGE.get().mod(3, 6));
+            x.add("wolf_pelt", "Wolf Pelt", Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.beast).mod(4, 8));
+        });
+
+        new Builder(SlotTags.CLOTH_HELMET).build(x -> {
+            x.add("lunaris_circlet", "Lunaris Circlet", 200, Stats.ELEMENTAL_DAMAGE.get(Elements.Cold).mod(3, 6));
+            x.add("mind_cage", "Mind Cage", Mana.getInstance().mod(10, 20));
+            x.add("necro_helmet", "Necromancer Helm", 100, Stats.MAX_SUMMON_CAPACITY.get().mod(1, 1));
+            x.add("bone_helm", "Bone Circlet", Stats.SUMMON_DAMAGE.get().mod(3, 6));
+            x.add("golden_crown", "Golden Crown", new ElementalResist(Elements.Physical).mod(2, 4));
         });
 
         // todo i hate crossbows..
@@ -89,13 +108,20 @@ public class ImplicitAffixes implements ExileRegistryInit {
             c.accept(this);
         }
 
-        public void add(String id, String name, StatMod... mods) {
+        public void add(String id, String name, int weight, StatMod... mods) {
             AffixBuilder.Normal(id)
                     .Named(name)
                     .stats(mods)
                     .mustIncludesAllTags(slot)
                     .Implicit()
+                    .Weight(weight)
                     .Build();
         }
+
+        public void add(String id, String name, StatMod... mods) {
+            this.add(id, name, 1000, mods);
+        }
+
+
     }
 }

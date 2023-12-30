@@ -34,7 +34,6 @@ public class ExileEffectInstanceData {
             if (caster_uuid.isEmpty()) {
                 return null;
             }
-
             return Utilities.getLivingEntityByUUID(world, UUID.fromString(caster_uuid));
         } catch (Exception e) {
             e.printStackTrace();

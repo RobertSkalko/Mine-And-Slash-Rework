@@ -148,8 +148,7 @@ public abstract class EffectEvent implements IGUID {
 
         for (EffectWithCtx item : effectsWithCtx) {
             if (item.stat.isNotZero()) {
-                if (item.effect.Side()
-                        .equals(side)) {
+                if (item.effect.Side().equals(side)) {
                     item.effect.TryModifyEffect(this, item.statSource, item.stat, item.stat.GetStat());
                 } else {
                     System.out.print("ERORR Stat at wrong side should never be added in the first place! ");

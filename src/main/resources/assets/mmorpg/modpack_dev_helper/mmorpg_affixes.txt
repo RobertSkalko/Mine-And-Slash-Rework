@@ -1,6 +1,7 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
 farming_exp
+gladiator_helm
 of_devastation
 heal_suff
 crafted_jewel_crit
@@ -18,10 +19,13 @@ lightning_res
 fire_wep_dmg
 item_perc_dodge
 of_spell_dmg
+wolf_pelt
+siege_helm
 husbandry_core_exp
 imperial_crossbow
 item_both_armor
 arcane_staff
+necro_helmet
 azure
 of_fast_cast
 bandit_mask
@@ -55,6 +59,7 @@ jewel_armor
 wep_item_perc
 strong_str_armor_suf
 precise
+bone_helm
 husbandry_greater_exp
 crafted_jewel_aura_cost
 energetic
@@ -80,6 +85,8 @@ ass_crossbow
 jewel_critdmg
 enchantment_off_def
 chaos_res
+vdo_mask
+lunaris_circlet
 mining_core_exp
 fire_res
 fishing_triple
@@ -119,6 +126,7 @@ glacial_staff
 crafted_jewel_ms
 amber_amulet
 item_both_ms
+royal_helm
 mining_misc_exp
 bone_bow
 focused
@@ -136,6 +144,7 @@ fire_spell_ele_dmg
 jewel_crit
 mining_triple
 mana_reg
+hunter_hood
 thicket_crossbow
 crit_prefix
 physical_wep_dmg
@@ -149,12 +158,14 @@ of_the_sky
 enchantment_jewerly_int
 of_mana
 chaos_jewel_res
+golden_crown
 of_vampirism
 husbandry_lesser_exp
 water_wep_dmg
 lightning_spell_ele_dmg
 strong_dex_armor_suf
 of_less_cd
+mind_cage
 vampiric
 of_spirit_markings
 of_the_philosopher
