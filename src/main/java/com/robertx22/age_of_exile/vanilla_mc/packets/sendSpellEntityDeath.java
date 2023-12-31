@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.UUID;
 
-import static com.robertx22.age_of_exile.event_hooks.player.OnLogin.clientPlayerEntityFXHolder;
+import static com.robertx22.age_of_exile.database.data.spells.spell_fx.FXInfoHolder.clientPlayerEntityFXHolder;
 
 public class sendSpellEntityDeath extends MyPacket<sendSpellEntityDeath> {
 

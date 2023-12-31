@@ -6,7 +6,7 @@ import com.robertx22.age_of_exile.database.data.spells.entities.StationaryFallin
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellUtils;
-import com.robertx22.age_of_exile.event_hooks.player.OnLogin;
+import com.robertx22.age_of_exile.database.data.spells.spell_fx.FXInfoHolder;
 import com.robertx22.age_of_exile.vanilla_mc.packets.SpellEntityInitPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.RandomUtils;
@@ -107,7 +107,7 @@ public class SummonBlockAction extends SpellAction {
                     var finalPosAdd = pos.asBlockPos();
                     getPlayerWithinRange(finalPosAdd.getCenter(), ctx.world, 128.0D)
                             .stream()
-                            .filter(OnLogin::readFXConfigValue)
+                            .filter(FXInfoHolder::readFXConfigValue)
                             .toList()
                             .forEach(serverPlayer ->
                                     Packets.sendToClient(serverPlayer, new SpellEntityInitPacket(be.getUUID(), new Vec3(finalPosAdd.getX(), finalPosAdd.getY(), finalPosAdd.getZ()), data.get(MapField.SKILL_FX))));

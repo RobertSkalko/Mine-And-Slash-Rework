@@ -48,12 +48,11 @@ import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.*;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.forgespi.language.IModInfo;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.ArrayList;
-
-import static com.robertx22.age_of_exile.event_hooks.player.OnLogin.readFXConfigValue;
-import static com.robertx22.age_of_exile.event_hooks.player.OnLogin.writeFXConfigValue;
 
 public class CommonEvents {
 
@@ -231,12 +230,16 @@ public class CommonEvents {
             public void accept(ExileEvents.OnPlayerLogin event) {
                 OnLogin.onLoad(event.player);
                 Level level = event.player.level();
-                if(!level.isClientSide()){
+
+                if(!level.isClientSide() && ModList.get().getMods().stream()
+                        .map(IModInfo::getModId)
+                        .anyMatch(s -> s.contentEquals("photon"))){
                     Packets.sendToClient(event.player, new askForFXConfigPacket());
                 }
             }
 
         });
+
         ExileEvents.AFTER_DATABASE_LOADED.register(new EventConsumer<ExileEvents.AfterDatabaseLoaded>() {
             @Override
             public void accept(ExileEvents.AfterDatabaseLoaded event) {

@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
-import com.robertx22.age_of_exile.event_hooks.player.OnLogin;
+import com.robertx22.age_of_exile.database.data.spells.spell_fx.FXInfoHolder;
 import com.robertx22.age_of_exile.mixin_ducks.FallingBlockAccessor;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
@@ -117,7 +117,7 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
         if(this.playerList.isEmpty()){
             this.playerList.addAll(getPlayerWithinRange(this.position(), this.level(), 128.0D)
                     .stream()
-                    .filter(OnLogin::readFXConfigValue)
+                    .filter(FXInfoHolder::readFXConfigValue)
                     .toList()
             );
         }

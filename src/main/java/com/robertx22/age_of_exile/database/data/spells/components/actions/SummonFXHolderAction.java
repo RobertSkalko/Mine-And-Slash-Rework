@@ -6,7 +6,7 @@ import com.robertx22.age_of_exile.database.data.spells.entities.FXEntity;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellUtils;
-import com.robertx22.age_of_exile.event_hooks.player.OnLogin;
+import com.robertx22.age_of_exile.database.data.spells.spell_fx.FXInfoHolder;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.vanilla_mc.packets.SpellEntityInitPacket;
 import com.robertx22.library_of_exile.main.Packets;
@@ -52,7 +52,7 @@ public class SummonFXHolderAction extends SpellAction {
                     en.setPos(finalPos);
                     getPlayerWithinRange(finalPos, world, 128.0D)
                             .stream()
-                            .filter(OnLogin::readFXConfigValue)
+                            .filter(FXInfoHolder::readFXConfigValue)
                             .toList()
                             .forEach(serverPlayer ->
                                     Packets.sendToClient(serverPlayer, new SpellEntityInitPacket(en.getUUID(), new Vec3(finalPos.x, finalPos.y, finalPos.z), data.get(MapField.SKILL_FX))));
@@ -64,7 +64,7 @@ public class SummonFXHolderAction extends SpellAction {
                     en.setPos(finalPos);
                     getPlayerWithinRange(finalPos, world, 128.0D)
                             .stream()
-                            .filter(OnLogin::readFXConfigValue)
+                            .filter(FXInfoHolder::readFXConfigValue)
                             .toList()
                             .forEach(serverPlayer ->
                                     Packets.sendToClient(serverPlayer, new SpellEntityInitPacket(en.getUUID(), new Vec3(finalPos.x, finalPos.y, finalPos.z), data.get(MapField.SKILL_FX))));

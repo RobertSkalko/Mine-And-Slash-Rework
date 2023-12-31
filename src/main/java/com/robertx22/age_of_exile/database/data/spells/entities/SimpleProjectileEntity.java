@@ -7,7 +7,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.ProjectileCast
 import com.robertx22.age_of_exile.database.data.spells.entities.renders.IMyRenderAsItem;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
-import com.robertx22.age_of_exile.event_hooks.player.OnLogin;
+import com.robertx22.age_of_exile.database.data.spells.spell_fx.FXInfoHolder;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
@@ -236,7 +236,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
             if(this.playerList.isEmpty()){
                 this.playerList.addAll(getPlayerWithinRange(this.position(), this.level(), 128.0D)
                         .stream()
-                        .filter(OnLogin::readFXConfigValue)
+                        .filter(FXInfoHolder::readFXConfigValue)
                         .toList()
                 );
             }
