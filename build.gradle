@@ -58,6 +58,13 @@ repositories {
     repositories {
         maven { url "https://maven.shedaniel.me" }
     }
+
+    maven {
+        url "https://maven.saps.dev/releases"
+        content {
+            includeGroup "dev.latvian.mods"
+        }
+    }
 }
 
 minecraft {
@@ -136,6 +143,8 @@ dependencies {
 
     compileOnly fg.deobf("mezz.jei:jei-1.20.1-common-api:${project.jei_version}") //API for compile
     compileOnly fg.deobf("mezz.jei:jei-1.20.1-forge-api:${project.jei_version}") //API for compile
+    compileOnly fg.deobf("com.lowdragmc.ldlib:ldlib-forge-1.20.1:1.0.21.a")
+
     runtimeOnly fg.deobf("mezz.jei:jei-1.20.1-forge:${project.jei_version}") //Full for runtime
 
 
