@@ -19,7 +19,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.Arrays;
-import java.util.Map;
 
 public class FireSpells implements ExileRegistryInit {
     public static String FIRE_NOVA_ID = "fire_nova";

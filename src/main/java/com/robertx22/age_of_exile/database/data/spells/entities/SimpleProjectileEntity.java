@@ -7,12 +7,16 @@ import com.robertx22.age_of_exile.database.data.spells.components.ProjectileCast
 import com.robertx22.age_of_exile.database.data.spells.entities.renders.IMyRenderAsItem;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
+import com.robertx22.age_of_exile.event_hooks.player.OnLogin;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.Utilities;
+import com.robertx22.age_of_exile.vanilla_mc.packets.sendSpellEntityDeath;
+import com.robertx22.age_of_exile.vanilla_mc.packets.sendSpellEntityPositionPacket;
+import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.library_of_exile.utils.geometry.MyPosition;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
@@ -47,7 +51,10 @@ import net.minecraftforge.network.NetworkHooks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
+
+import static com.robertx22.age_of_exile.uncommon.utilityclasses.ServerOnly.getPlayerWithinRange;
 
 public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAsItem, IDatapackSpellEntity {
 
@@ -62,6 +69,8 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
     private int ticksInGround = 0;
 
     public boolean moveTowardsEnemies = false;
+
+    private List<ServerPlayer> playerList = new ArrayList<>();
 
     private static final EntityDataAccessor<CompoundTag> SPELL_DATA = SynchedEntityData.defineId(SimpleProjectileEntity.class, EntityDataSerializers.COMPOUND_TAG);
     private static final EntityDataAccessor<String> ENTITY_NAME = SynchedEntityData.defineId(SimpleProjectileEntity.class, EntityDataSerializers.STRING);
@@ -224,6 +233,23 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
         }
 
         try {
+            if(this.playerList.isEmpty()){
+                this.playerList.addAll(getPlayerWithinRange(this.position(), this.level(), 128.0D)
+                        .stream()
+                        .filter(OnLogin::readFXConfigValue)
+                        .toList()
+                );
+            }
+            if(!this.playerList.isEmpty()){
+                this.playerList
+                        .stream()
+                        .filter(Objects::nonNull)
+                        .toList()
+                        .forEach(serverPlayer ->
+                        Packets.sendToClient(serverPlayer, new sendSpellEntityPositionPacket(this.getUUID(), this.position())));
+            }
+
+
             onTick();
 
             if (this.inGround) {
@@ -429,6 +455,11 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
 
     public void scheduleRemoval() {
         removeNextTick = true;
+        if(!this.playerList.isEmpty()){
+            this.playerList.forEach(serverPlayer ->
+                    Packets.sendToClient(serverPlayer, new sendSpellEntityDeath(this.getUUID())));
+        }
+
     }
 
     static Gson GSON = new Gson();

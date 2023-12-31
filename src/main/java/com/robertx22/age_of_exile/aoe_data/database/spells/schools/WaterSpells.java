@@ -24,7 +24,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.Arrays;
-import java.util.Map;
 
 public class WaterSpells implements ExileRegistryInit {
     public static String FROZEN_ORB = "frozen_orb";

@@ -5,7 +5,10 @@ import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
+import com.robertx22.age_of_exile.event_hooks.player.OnLogin;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
+import com.robertx22.age_of_exile.vanilla_mc.packets.SpellParticlePacket;
+import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.utils.geometry.Circle2d;
 import com.robertx22.library_of_exile.utils.geometry.Circle3d;
@@ -20,6 +23,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import static com.robertx22.age_of_exile.database.data.spells.map_fields.MapField.*;
+import static com.robertx22.age_of_exile.uncommon.utilityclasses.ServerOnly.getPlayerWithinRange;
 
 public class ParticleInRadiusAction extends SpellAction {
 
@@ -100,7 +104,15 @@ public class ParticleInRadiusAction extends SpellAction {
 
                 // todo this could be buggy
 
-                c.spawnParticle(ctx.world, sp.asVector3D(), particle, new MyPosition(v).asVector3D());
+                //c.spawnParticle(ctx.world, sp.asVector3D(), particle, new MyPosition(v).asVector3D());
+                MyPosition finalSp = sp;
+                getPlayerWithinRange(finalSp, ctx.world, 128.0D)
+                        .stream()
+                        .toList()
+                        .forEach(serverPlayer ->
+                                Packets.sendToClient(serverPlayer, new SpellParticlePacket(finalSp, particle, new MyPosition(v), data.getOrDefault(MapField.HIDE_IN_FX,true))));
+
+
             });
 
 

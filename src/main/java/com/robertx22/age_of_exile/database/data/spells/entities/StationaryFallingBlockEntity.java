@@ -4,9 +4,13 @@ import com.google.gson.Gson;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
+import com.robertx22.age_of_exile.event_hooks.player.OnLogin;
 import com.robertx22.age_of_exile.mixin_ducks.FallingBlockAccessor;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
+import com.robertx22.age_of_exile.vanilla_mc.packets.sendSpellEntityDeath;
+import com.robertx22.age_of_exile.vanilla_mc.packets.sendSpellEntityPositionPacket;
+import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -16,6 +20,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -28,8 +33,15 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import static com.robertx22.age_of_exile.uncommon.utilityclasses.ServerOnly.getPlayerWithinRange;
 
 public class StationaryFallingBlockEntity extends FallingBlockEntity implements IDatapackSpellEntity {
+
+    private List<ServerPlayer> playerList = new ArrayList<>();
+
 
     public StationaryFallingBlockEntity(EntityType<? extends FallingBlockEntity> entityType, Level world) {
         super(SlashEntities.SIMPLE_BLOCK_ENTITY.get(), world);
@@ -81,6 +93,11 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
 
     public void scheduleRemoval() {
         removeNextTick = true;
+        if(!this.playerList.isEmpty()){
+            this.playerList.forEach(serverPlayer ->
+                    Packets.sendToClient(serverPlayer, new sendSpellEntityDeath(this.getUUID())));
+        }
+
     }
 
     @Override
@@ -96,6 +113,24 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
             return;
         }
 
+
+        if(this.playerList.isEmpty()){
+            this.playerList.addAll(getPlayerWithinRange(this.position(), this.level(), 128.0D)
+                    .stream()
+                    .filter(OnLogin::readFXConfigValue)
+                    .toList()
+            );
+        }
+        if(!this.playerList.isEmpty()){
+            this.playerList
+                    .stream()
+                    .filter(Objects::nonNull)
+                    .toList()
+                    .forEach(serverPlayer ->
+                            Packets.sendToClient(serverPlayer, new sendSpellEntityPositionPacket(this.getUUID(), this.position())));
+        }
+
+
         //this.age++; this is called somewhere again idk
 
         if (entityData.get(IS_FALLING)) {
@@ -110,7 +145,7 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
             this.move(MoverType.SELF, this.getDeltaMovement());
 
             if (this.onGround()) {
-                remove(RemovalReason.KILLED);
+                scheduleRemoval();
             }
 
         }
@@ -126,11 +161,11 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
 
         } catch (Exception e) {
             e.printStackTrace();
-            this.remove(RemovalReason.KILLED);
+            scheduleRemoval();
         }
 
         if (tickCount > lifespan) {
-            remove(RemovalReason.KILLED);
+            scheduleRemoval();
         }
     }
 

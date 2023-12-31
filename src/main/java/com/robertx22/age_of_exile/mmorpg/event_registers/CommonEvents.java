@@ -25,8 +25,11 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.error_checks.base.ErrorChecks;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.Cached;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
+import com.robertx22.age_of_exile.vanilla_mc.packets.askForFXConfigPacket;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
+import com.robertx22.library_of_exile.main.Packets;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResultHolder;
@@ -38,6 +41,7 @@ import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -47,6 +51,9 @@ import net.minecraftforge.event.entity.player.*;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.ArrayList;
+
+import static com.robertx22.age_of_exile.event_hooks.player.OnLogin.readFXConfigValue;
+import static com.robertx22.age_of_exile.event_hooks.player.OnLogin.writeFXConfigValue;
 
 public class CommonEvents {
 
@@ -223,7 +230,12 @@ public class CommonEvents {
             @Override
             public void accept(ExileEvents.OnPlayerLogin event) {
                 OnLogin.onLoad(event.player);
+                Level level = event.player.level();
+                if(!level.isClientSide()){
+                    Packets.sendToClient(event.player, new askForFXConfigPacket());
+                }
             }
+
         });
         ExileEvents.AFTER_DATABASE_LOADED.register(new EventConsumer<ExileEvents.AfterDatabaseLoaded>() {
             @Override

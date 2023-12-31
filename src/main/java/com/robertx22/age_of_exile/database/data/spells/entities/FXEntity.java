@@ -6,27 +6,36 @@ import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.entities.renders.IMyRenderAsItem;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
+import com.robertx22.age_of_exile.event_hooks.player.OnLogin;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.Utilities;
+import com.robertx22.age_of_exile.vanilla_mc.packets.sendSpellEntityDeath;
+import com.robertx22.age_of_exile.vanilla_mc.packets.sendSpellEntityPositionPacket;
+import com.robertx22.library_of_exile.main.Packets;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
+
+import static com.robertx22.age_of_exile.uncommon.utilityclasses.ServerOnly.getPlayerWithinRange;
 
 public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderAsItem {
 
@@ -36,14 +45,17 @@ public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderA
     private static final EntityDataAccessor<CompoundTag> SPELL_DATA = SynchedEntityData.defineId(FXEntity.class, EntityDataSerializers.COMPOUND_TAG);
     private static final EntityDataAccessor<String> ENTITY_NAME = SynchedEntityData.defineId(FXEntity.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Integer> DEATH_TIME = SynchedEntityData.defineId(FXEntity.class, EntityDataSerializers.INT);
+    private boolean isFollowCaster;
+    private List<ServerPlayer> playerList = new ArrayList<>();
 
     public FXEntity(EntityType<? extends Entity> type, Level worldIn) {
         super(SlashEntities.FX_ENTITY.get(), worldIn);
         this.lifeSpan = 0;
     }
 
-    public FXEntity(Level world) {
+    public FXEntity(Level world, Boolean isFollowCaster) {
         this(SlashEntities.FX_ENTITY.get(), world);
+        this.isFollowCaster = isFollowCaster;
     }
 
     @Override
@@ -107,6 +119,28 @@ public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderA
             }
         }
 
+
+        if(this.playerList.isEmpty()){
+            this.playerList.addAll(getPlayerWithinRange(this.position(), this.level(), 128.0D)
+                    .stream()
+                    .filter(OnLogin::readFXConfigValue)
+                    .toList()
+            );
+        }
+        if(!this.playerList.isEmpty()){
+            this.playerList
+                    .stream()
+                    .filter(Objects::nonNull)
+                    .toList()
+                    .forEach(serverPlayer ->
+                            Packets.sendToClient(serverPlayer, new sendSpellEntityPositionPacket(this.getUUID(), this.position())));
+        }
+
+
+        if(this.isFollowCaster){
+            this.move(MoverType.PLAYER, new Vec3(this.caster.position().x, this.position().y, this.caster.position().z));
+        }
+
     }
 
 
@@ -115,6 +149,11 @@ public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderA
 
     public void scheduleRemoval() {
         removeNextTick = true;
+        if(!this.playerList.isEmpty()){
+            this.playerList.forEach(serverPlayer ->
+                    Packets.sendToClient(serverPlayer, new sendSpellEntityDeath(this.getUUID())));
+        }
+
     }
 
     static Gson GSON = new Gson();

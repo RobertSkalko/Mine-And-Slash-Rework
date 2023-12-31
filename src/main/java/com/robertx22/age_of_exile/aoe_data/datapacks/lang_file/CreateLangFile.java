@@ -13,6 +13,8 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.DirUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.gemrunes.GemItem;
 import com.robertx22.library_of_exile.registry.Database;
 import com.robertx22.library_of_exile.registry.ExileRegistryContainer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import java.io.File;

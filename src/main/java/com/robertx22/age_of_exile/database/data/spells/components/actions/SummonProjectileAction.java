@@ -32,7 +32,6 @@ public class SummonProjectileAction extends SpellAction {
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
 
-        Boolean FXEnable = ClientConfigs.getConfig().ENABLE_PHOTON_FX.get();
 
         if (!ctx.world.isClientSide) {
             Optional<EntityType<?>> projectile = EntityType.byString(data.get(MapField.PROJECTILE_ENTITY));
@@ -47,7 +46,6 @@ public class SummonProjectileAction extends SpellAction {
             ProjectileCastHelper builder = new ProjectileCastHelper(ctx, pos, data, ctx.caster, projectile.get(), ctx.calculatedSpellData);
             builder.projectilesAmount = (int) (data.get(MapField.PROJECTILE_COUNT) + ctx.calculatedSpellData.data.getNumber(EventData.BONUS_PROJECTILES, 0).number);
 
-            builder.FXEnable = FXEnable;
 
             builder.silent = silent;
 

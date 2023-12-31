@@ -1,29 +1,28 @@
 package com.robertx22.age_of_exile.database.data.spells.components.actions;
 
-import com.lowdragmc.photon.client.fx.BlockEffect;
-import com.lowdragmc.photon.client.fx.EntityEffect;
-import com.lowdragmc.photon.client.fx.FX;
-import com.lowdragmc.photon.client.fx.FXHelper;
-import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.entities.StationaryFallingBlockEntity;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellUtils;
-import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.event_hooks.player.OnLogin;
+import com.robertx22.age_of_exile.vanilla_mc.packets.SpellEntityInitPacket;
+import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.utils.geometry.MyPosition;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Objects;
+
+import static com.robertx22.age_of_exile.uncommon.utilityclasses.ServerOnly.getPlayerWithinRange;
 
 public class SummonBlockAction extends SpellAction {
 
@@ -52,7 +51,6 @@ public class SummonBlockAction extends SpellAction {
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
 
-        Boolean FXEnable = ClientConfigs.getConfig().ENABLE_PHOTON_FX.get();
 
         if (!ctx.world.isClientSide) {
             //HitResult ray = ctx.caster.rayTrace(5D, 0.0F, false);
@@ -104,9 +102,16 @@ public class SummonBlockAction extends SpellAction {
                 StationaryFallingBlockEntity be = new StationaryFallingBlockEntity(ctx.world, pos.asBlockPos(), block.defaultBlockState());
                 be.getEntityData().set(StationaryFallingBlockEntity.IS_FALLING, data.getOrDefault(MapField.IS_BLOCK_FALLING, false));
                 SpellUtils.initSpellEntity(be, ctx.caster, ctx.calculatedSpellData, data);
-                if(FXEnable && data.has(MapField.SKILL_FX)){
-                    FX fx = FXHelper.getFX(data.getSkillFXResourceLocation());
-                    new EntityEffect(fx, ctx.world, be).start();
+
+                if(data.has(MapField.SKILL_FX)){
+                    var finalPosAdd = pos.asBlockPos();
+                    getPlayerWithinRange(finalPosAdd.getCenter(), ctx.world, 128.0D)
+                            .stream()
+                            .filter(OnLogin::readFXConfigValue)
+                            .toList()
+                            .forEach(serverPlayer ->
+                                    Packets.sendToClient(serverPlayer, new SpellEntityInitPacket(be.getUUID(), new Vec3(finalPosAdd.getX(), finalPosAdd.getY(), finalPosAdd.getZ()), data.get(MapField.SKILL_FX))));
+
                 }
 
 

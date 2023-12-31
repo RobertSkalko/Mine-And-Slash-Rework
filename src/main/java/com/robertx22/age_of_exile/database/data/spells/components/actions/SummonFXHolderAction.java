@@ -1,26 +1,25 @@
 package com.robertx22.age_of_exile.database.data.spells.components.actions;
 
-import com.lowdragmc.photon.client.fx.EntityEffect;
-import com.lowdragmc.photon.client.fx.FX;
-import com.lowdragmc.photon.client.fx.FXHelper;
-import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.entities.FXEntity;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellUtils;
-import com.robertx22.age_of_exile.database.data.spells.spell_fx.PlayerEffect;
+import com.robertx22.age_of_exile.event_hooks.player.OnLogin;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
+import com.robertx22.age_of_exile.vanilla_mc.packets.SpellEntityInitPacket;
+import com.robertx22.library_of_exile.main.Packets;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
+
+import static com.robertx22.age_of_exile.uncommon.utilityclasses.ServerOnly.getPlayerWithinRange;
 
 public class SummonFXHolderAction extends SpellAction {
 
@@ -31,7 +30,6 @@ public class SummonFXHolderAction extends SpellAction {
 
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
-        Boolean FXEnable = ClientConfigs.getConfig().ENABLE_PHOTON_FX.get();
 
         if (!ctx.world.isClientSide) {
             Optional<EntityType<?>> entity = EntityType.byString(data.get(MapField.FX_ENTITY));
@@ -44,20 +42,33 @@ public class SummonFXHolderAction extends SpellAction {
 
             Level world = ctx.caster.level();
 
-            if (FXEnable && data.has(MapField.SKILL_FX)) {
+            if (data.has(MapField.SKILL_FX)) {
 
-                FX fx = FXHelper.getFX(data.getSkillFXResourceLocation());
 
-                if(data.getOrDefault(MapField.IS_PLAYER_EFFECT, false) && ctx.caster instanceof Player){
+                if(data.getOrDefault(MapField.IS_ENTITY_EFFECT, false)){
                     //yeah I'm lazy.
-                    var heightChange = data.getOrDefault(MapField.PLAYER_EFFECT_HEIGHT_CHANGE, 0D);
-                    var maxLife = data.getOrDefault(MapField.PLAYER_EFFECT_MAX_LIFE, 60);
-                    new PlayerEffect(fx, ctx.world, (Player) ctx.caster, heightChange, maxLife).start();
-                } else {
-                    FXEntity en = new FXEntity(world);
+                    FXEntity en = new FXEntity(world, true);
                     SpellUtils.initSpellEntity(en, ctx.caster, ctx.calculatedSpellData, data);
                     en.setPos(finalPos);
-                    new EntityEffect(fx, ctx.world, en).start();
+                    getPlayerWithinRange(finalPos, world, 128.0D)
+                            .stream()
+                            .filter(OnLogin::readFXConfigValue)
+                            .toList()
+                            .forEach(serverPlayer ->
+                                    Packets.sendToClient(serverPlayer, new SpellEntityInitPacket(en.getUUID(), new Vec3(finalPos.x, finalPos.y, finalPos.z), data.get(MapField.SKILL_FX))));
+                    ctx.world.addFreshEntity(en);
+
+                } else {
+                    FXEntity en = new FXEntity(world, false);
+                    SpellUtils.initSpellEntity(en, ctx.caster, ctx.calculatedSpellData, data);
+                    en.setPos(finalPos);
+                    getPlayerWithinRange(finalPos, world, 128.0D)
+                            .stream()
+                            .filter(OnLogin::readFXConfigValue)
+                            .toList()
+                            .forEach(serverPlayer ->
+                                    Packets.sendToClient(serverPlayer, new SpellEntityInitPacket(en.getUUID(), new Vec3(finalPos.x, finalPos.y, finalPos.z), data.get(MapField.SKILL_FX))));
+
                     ctx.world.addFreshEntity(en);
                 }
             }

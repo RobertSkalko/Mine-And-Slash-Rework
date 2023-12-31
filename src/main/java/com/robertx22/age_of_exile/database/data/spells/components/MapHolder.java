@@ -154,4 +154,8 @@ public class MapHolder {
     public ResourceLocation getSkillFXResourceLocation() {
         return new ResourceLocation("mmorpg:" + get(MapField.SKILL_FX));
     }
+
+    public static ResourceLocation getSkillFXFromRawString(String txt) {
+        return new ResourceLocation("mmorpg:" + txt);
+    }
 }

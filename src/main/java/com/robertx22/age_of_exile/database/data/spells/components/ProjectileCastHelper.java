@@ -1,17 +1,16 @@
 package com.robertx22.age_of_exile.database.data.spells.components;
 
-import com.lowdragmc.photon.client.fx.EntityEffect;
-import com.lowdragmc.photon.client.fx.FX;
-import com.lowdragmc.photon.client.fx.FXHelper;
-import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.AoeSelector;
 import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellUtils;
+import com.robertx22.age_of_exile.event_hooks.player.OnLogin;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
+import com.robertx22.age_of_exile.vanilla_mc.packets.SpellEntityInitPacket;
+import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.geometry.MyPosition;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
@@ -22,10 +21,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Math;
 
+import static com.robertx22.age_of_exile.uncommon.utilityclasses.ServerOnly.getPlayerWithinRange;
+
 public class ProjectileCastHelper {
 
     LivingEntity caster;
-    public Boolean FXEnable;
     public boolean silent = false;
     public float apart = 3;
     public float shootSpeed = 1;
@@ -108,9 +108,15 @@ public class ProjectileCastHelper {
             SpellUtils.shootProjectile(pos.add(posAdd), en, ctx.getPositionEntity(), shootSpeed, pitch, yaw + addYaw);
             SpellUtils.initSpellEntity(en, caster, data, holder);
 
-            if(FXEnable && holder.has(MapField.SKILL_FX)){
-                FX fx = FXHelper.getFX(holder.getSkillFXResourceLocation());
-                new EntityEffect(fx, ctx.world, en).start();
+            if(holder.has(MapField.SKILL_FX)){
+                Vec3 finalPosAdd = pos.add(posAdd);
+                getPlayerWithinRange(pos.add(posAdd), world, 128.0D)
+                        .stream()
+                        .filter(OnLogin::readFXConfigValue)
+                        .toList()
+                        .forEach(serverPlayer ->
+                                Packets.sendToClient(serverPlayer, new SpellEntityInitPacket(en.getUUID(), new Vec3(finalPosAdd.x, caster.getEyeY() - 0.1F, finalPosAdd.z), holder.get(MapField.SKILL_FX))));
+
             }
 
             if (fallDown) {
