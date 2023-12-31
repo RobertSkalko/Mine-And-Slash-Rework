@@ -40,12 +40,12 @@ import static com.robertx22.age_of_exile.uncommon.utilityclasses.ServerOnly.getP
 public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderAsItem {
 
     CalculatedSpellData spellData;
-    private Integer lifeSpan;
+    private Integer lifeSpan = 0;
 
     private static final EntityDataAccessor<CompoundTag> SPELL_DATA = SynchedEntityData.defineId(FXEntity.class, EntityDataSerializers.COMPOUND_TAG);
     private static final EntityDataAccessor<String> ENTITY_NAME = SynchedEntityData.defineId(FXEntity.class, EntityDataSerializers.STRING);
     private static final EntityDataAccessor<Integer> DEATH_TIME = SynchedEntityData.defineId(FXEntity.class, EntityDataSerializers.INT);
-    private boolean isFollowCaster;
+    private boolean isFollowCaster = false;
     private List<ServerPlayer> playerList = new ArrayList<>();
 
     public FXEntity(EntityType<? extends Entity> type, Level worldIn) {
@@ -76,7 +76,7 @@ public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderA
     protected void tickDespawn() {
         ++this.lifeSpan;
         if (this.lifeSpan >= getDeathTime()) {
-            this.remove(RemovalReason.KILLED);
+            this.scheduleRemoval();
         }
 
     }
@@ -243,22 +243,17 @@ public class FXEntity extends Entity implements IDatapackSpellEntity, IMyRenderA
     public void playerTouch(Player player) {
     }
 
-    MapHolder holder;
-    float speed = 0;
 
     @Override
     public void init(LivingEntity caster, CalculatedSpellData data, MapHolder holder) {
         try {
-            this.holder = holder;
             this.spellData = data;
 
-            this.setNoGravity(!holder.getOrDefault(MapField.GRAVITY, true));
             this.setDeathTime(holder.get(MapField.LIFESPAN_TICKS)
                     .intValue());
 
             this.checkInsideBlocks();
 
-            this.speed = holder.getOrDefault(MapField.PROJECTILE_SPEED, 1D).floatValue();
 
             CompoundTag nbt = new CompoundTag();
             nbt.putString("spell", GSON.toJson(spellData));
