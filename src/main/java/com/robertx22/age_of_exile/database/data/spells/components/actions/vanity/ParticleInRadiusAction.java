@@ -38,85 +38,81 @@ public class ParticleInRadiusAction extends SpellAction {
 
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
-        if (ClientConfigs.getConfig().ENABLE_PHOTON_FX.get() && data.getOrDefault(MapField.HIDE_IN_FX, false)) {
+        if (ctx.world.isClientSide) {
             return;
         }
-        if (!ctx.world.isClientSide) {
 
-            Shape shape = data.getParticleShape();
+        Shape shape = data.getParticleShape();
 
-            SimpleParticleType particle = data.getParticle();
+        SimpleParticleType particle = data.getParticle();
 
-            float radius = data.get(RADIUS)
-                    .floatValue();
+        float radius = data.get(RADIUS)
+                .floatValue();
 
-            radius *= ctx.calculatedSpellData.data.getNumber(EventData.AREA_MULTI, 1F).number;
+        radius *= ctx.calculatedSpellData.data.getNumber(EventData.AREA_MULTI, 1F).number;
 
-            float height = data.getOrDefault(HEIGHT, 0D)
-                    .floatValue();
-            int amount = data.get(PARTICLE_COUNT)
-                    .intValue();
+        float height = data.getOrDefault(HEIGHT, 0D)
+                .floatValue();
+        int amount = data.get(PARTICLE_COUNT)
+                .intValue();
 
-            amount *= ctx.calculatedSpellData.data.getNumber(EventData.AREA_MULTI, 1F).number;
+        amount *= ctx.calculatedSpellData.data.getNumber(EventData.AREA_MULTI, 1F).number;
 
-            ParticleMotion motion = null;
+        ParticleMotion motion = null;
 
-            try {
-                motion = ParticleMotion.valueOf(data.get(MOTION));
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-                motion = ParticleMotion.None;
+        try {
+            motion = ParticleMotion.valueOf(data.get(MOTION));
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            motion = ParticleMotion.None;
+        }
+
+        float yrand = data.getOrDefault(Y_RANDOM, 0D)
+                .floatValue();
+
+        float motionMulti = data.getOrDefault(MOTION_MULTI, 1D)
+                .floatValue();
+
+        Vec3 pos = ctx.getPos();
+        Vec3 vel = ctx.getPositionEntity().getDeltaMovement();
+
+        ShapeHelper c = new Circle3d(new MyPosition(pos), radius);
+
+        float finalRadius = radius;
+        ParticleMotion finalMotion1 = motion;
+        c.doXTimes(amount, x -> {
+            MyPosition sp = null;
+            float yRandom = (int) RandomUtils.RandomRange(0, yrand);
+
+            if (shape == Shape.CIRCLE) {
+                sp = new MyPosition(new Circle3d(new MyPosition(pos), finalRadius).getRandomPos());
+            }
+            if (shape == Shape.CIRCLE_EDGE) {
+                sp = new MyPosition(new Circle3d(new MyPosition(pos), finalRadius).getRandomEdgePos());
+            }
+            if (shape == Shape.CIRCLE_2D) {
+                sp = new MyPosition(new Circle2d(new MyPosition(pos), finalRadius).getRandomPos());
+            }
+            if (shape == Shape.CIRCLE_2D_EDGE) {
+                sp = new MyPosition(new Circle2d(new MyPosition(pos), finalRadius).getEdgePos(x.multi));
             }
 
-            float yrand = data.getOrDefault(Y_RANDOM, 0D)
-                    .floatValue();
+            sp = new MyPosition(sp.x - vel.x / 2F, sp.y - vel.y / 2 + height, sp.z - vel.z / 2);
 
-            float motionMulti = data.getOrDefault(MOTION_MULTI, 1D)
-                    .floatValue();
+            Vec3 v = finalMotion1.getMotion(new Vec3(sp.x, sp.y + yRandom, sp.z), ctx).multiply(motionMulti, motionMulti, motionMulti);
 
-            Vec3 pos = ctx.getPos();
-            Vec3 vel = ctx.getPositionEntity().getDeltaMovement();
+            // todo this could be buggy
 
-            ShapeHelper c = new Circle3d(new MyPosition(pos), radius);
-
-            float finalRadius = radius;
-            ParticleMotion finalMotion1 = motion;
-            c.doXTimes(amount, x -> {
-                MyPosition sp = null;
-                float yRandom = (int) RandomUtils.RandomRange(0, yrand);
-
-                if (shape == Shape.CIRCLE) {
-                    sp = new MyPosition(new Circle3d(new MyPosition(pos), finalRadius).getRandomPos());
-                }
-                if (shape == Shape.CIRCLE_EDGE) {
-                    sp = new MyPosition(new Circle3d(new MyPosition(pos), finalRadius).getRandomEdgePos());
-                }
-                if (shape == Shape.CIRCLE_2D) {
-                    sp = new MyPosition(new Circle2d(new MyPosition(pos), finalRadius).getRandomPos());
-                }
-                if (shape == Shape.CIRCLE_2D_EDGE) {
-                    sp = new MyPosition(new Circle2d(new MyPosition(pos), finalRadius).getEdgePos(x.multi));
-                }
-
-                sp = new MyPosition(sp.x - vel.x / 2F, sp.y - vel.y / 2 + height, sp.z - vel.z / 2);
-
-                Vec3 v = finalMotion1.getMotion(new Vec3(sp.x, sp.y + yRandom, sp.z), ctx).multiply(motionMulti, motionMulti, motionMulti);
-
-                // todo this could be buggy
-
-                //c.spawnParticle(ctx.world, sp.asVector3D(), particle, new MyPosition(v).asVector3D());
-                MyPosition finalSp = sp;
-                getPlayerWithinRange(finalSp, ctx.world, 128.0D)
-                        .stream()
-                        .toList()
-                        .forEach(serverPlayer ->
-                                Packets.sendToClient(serverPlayer, new SpellParticlePacket(finalSp, particle, new MyPosition(v), data.getOrDefault(MapField.HIDE_IN_FX,true))));
+            //c.spawnParticle(ctx.world, sp.asVector3D(), particle, new MyPosition(v).asVector3D());
+            MyPosition finalSp = sp;
+            getPlayerWithinRange(finalSp, ctx.world, 128.0D)
+                    .stream()
+                    .toList()
+                    .forEach(serverPlayer ->
+                            Packets.sendToClient(serverPlayer, new SpellParticlePacket(finalSp, particle, new MyPosition(v), data.getOrDefault(MapField.HIDE_IN_FX,true))));
 
 
-            });
-
-
-        }
+        });
     }
 
 

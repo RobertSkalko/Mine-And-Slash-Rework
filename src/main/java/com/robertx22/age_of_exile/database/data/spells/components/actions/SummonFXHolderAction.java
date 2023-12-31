@@ -30,52 +30,50 @@ public class SummonFXHolderAction extends SpellAction {
 
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
-
-        if (!ctx.world.isClientSide) {
-            Optional<EntityType<?>> entity = EntityType.byString(data.get(MapField.FX_ENTITY));
-
-
-            Vec3 pos = ctx.caster.position();
-            Double addY = data.getOrDefault(MapField.HEIGHT, 0D);
-
-            Vec3 finalPos = new Vec3(pos.x, pos.y + addY, pos.z);
-
-            Level world = ctx.caster.level();
-
-            if (data.has(MapField.SKILL_FX)) {
-
-
-                if(data.getOrDefault(MapField.IS_ENTITY_EFFECT, false)){
-                    //yeah I'm lazy.
-                    FXEntity en = new FXEntity(world, true);
-                    SpellUtils.initSpellEntity(en, ctx.caster, ctx.calculatedSpellData, data);
-                    en.setPos(finalPos);
-                    getPlayerWithinRange(finalPos, world, 128.0D)
-                            .stream()
-                            .filter(FXInfoHolder::readFXConfigValue)
-                            .toList()
-                            .forEach(serverPlayer ->
-                                    Packets.sendToClient(serverPlayer, new SpellEntityInitPacket(en.getUUID(), new Vec3(finalPos.x, finalPos.y, finalPos.z), data.get(MapField.SKILL_FX))));
-                    ctx.world.addFreshEntity(en);
-
-                } else {
-                    FXEntity en = new FXEntity(world, false);
-                    SpellUtils.initSpellEntity(en, ctx.caster, ctx.calculatedSpellData, data);
-                    en.setPos(finalPos);
-                    getPlayerWithinRange(finalPos, world, 128.0D)
-                            .stream()
-                            .filter(FXInfoHolder::readFXConfigValue)
-                            .toList()
-                            .forEach(serverPlayer ->
-                                    Packets.sendToClient(serverPlayer, new SpellEntityInitPacket(en.getUUID(), new Vec3(finalPos.x, finalPos.y, finalPos.z), data.get(MapField.SKILL_FX))));
-
-                    ctx.world.addFreshEntity(en);
-                }
-            }
-
-
-
+        if (ctx.world.isClientSide) {
+            return;
         }
+        Optional<EntityType<?>> entity = EntityType.byString(data.get(MapField.FX_ENTITY));
+
+
+        Vec3 pos = ctx.caster.position();
+        Double addY = data.getOrDefault(MapField.HEIGHT, 0D);
+
+        Vec3 finalPos = new Vec3(pos.x, pos.y + addY, pos.z);
+
+        Level world = ctx.caster.level();
+
+        if (data.has(MapField.SKILL_FX)) {
+
+
+            if(data.getOrDefault(MapField.IS_ENTITY_EFFECT, false)){
+                //yeah I'm lazy.
+                FXEntity en = new FXEntity(world, true);
+                SpellUtils.initSpellEntity(en, ctx.caster, ctx.calculatedSpellData, data);
+                en.setPos(finalPos);
+                getPlayerWithinRange(finalPos, world, 128.0D)
+                        .stream()
+                        .filter(FXInfoHolder::readFXConfigValue)
+                        .toList()
+                        .forEach(serverPlayer ->
+                                Packets.sendToClient(serverPlayer, new SpellEntityInitPacket(en.getUUID(), new Vec3(finalPos.x, finalPos.y, finalPos.z), data.get(MapField.SKILL_FX))));
+                ctx.world.addFreshEntity(en);
+
+            } else {
+                FXEntity en = new FXEntity(world, false);
+                SpellUtils.initSpellEntity(en, ctx.caster, ctx.calculatedSpellData, data);
+                en.setPos(finalPos);
+                getPlayerWithinRange(finalPos, world, 128.0D)
+                        .stream()
+                        .filter(FXInfoHolder::readFXConfigValue)
+                        .toList()
+                        .forEach(serverPlayer ->
+                                Packets.sendToClient(serverPlayer, new SpellEntityInitPacket(en.getUUID(), new Vec3(finalPos.x, finalPos.y, finalPos.z), data.get(MapField.SKILL_FX))));
+
+                ctx.world.addFreshEntity(en);
+            }
+        }
+
 
     }
 

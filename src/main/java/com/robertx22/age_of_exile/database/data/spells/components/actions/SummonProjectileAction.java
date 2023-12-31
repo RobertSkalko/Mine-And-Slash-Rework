@@ -31,46 +31,45 @@ public class SummonProjectileAction extends SpellAction {
 
     @Override
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
-
-
-        if (!ctx.world.isClientSide) {
-            Optional<EntityType<?>> projectile = EntityType.byString(data.get(MapField.PROJECTILE_ENTITY));
-
-            PositionSource posSource = data.getOrDefault(PositionSource.CASTER);
-            ShootWay shootWay = data.getOrDefault(ShootWay.FROM_PLAYER_VIEW);
-
-            Vec3 pos = ctx.getPos();
-
-            boolean silent = data.getOrDefault(MapField.IS_SILENT, false);
-
-            ProjectileCastHelper builder = new ProjectileCastHelper(ctx, pos, data, ctx.caster, projectile.get(), ctx.calculatedSpellData);
-            builder.projectilesAmount = (int) (data.get(MapField.PROJECTILE_COUNT) + ctx.calculatedSpellData.data.getNumber(EventData.BONUS_PROJECTILES, 0).number);
-
-
-            builder.silent = silent;
-
-            builder.shootSpeed = data.get(MapField.PROJECTILE_SPEED)
-                    .floatValue();
-
-            builder.shootSpeed *= ctx.calculatedSpellData.data.getNumber(EventData.PROJECTILE_SPEED_MULTI, 1).number;
-
-            builder.apart = data.getOrDefault(MapField.PROJECTILES_APART, 75D)
-                    .floatValue();
-
-            if (posSource == PositionSource.SOURCE_ENTITY) {
-                builder.pitch = ctx.sourceEntity.getXRot();
-                builder.yaw = ctx.sourceEntity.getYRot();
-            }
-            if (shootWay == ShootWay.DOWN) {
-                builder.fallDown = true;
-            }
-            if (shootWay == ShootWay.FIND_ENEMY) {
-                builder.targetEnemy = true;
-            }
-
-            builder.cast();
-
+        if (ctx.world.isClientSide) {
+            return;
         }
+
+        Optional<EntityType<?>> projectile = EntityType.byString(data.get(MapField.PROJECTILE_ENTITY));
+
+        PositionSource posSource = data.getOrDefault(PositionSource.CASTER);
+        ShootWay shootWay = data.getOrDefault(ShootWay.FROM_PLAYER_VIEW);
+
+        Vec3 pos = ctx.getPos();
+
+        boolean silent = data.getOrDefault(MapField.IS_SILENT, false);
+
+        ProjectileCastHelper builder = new ProjectileCastHelper(ctx, pos, data, ctx.caster, projectile.get(), ctx.calculatedSpellData);
+        builder.projectilesAmount = (int) (data.get(MapField.PROJECTILE_COUNT) + ctx.calculatedSpellData.data.getNumber(EventData.BONUS_PROJECTILES, 0).number);
+
+
+        builder.silent = silent;
+
+        builder.shootSpeed = data.get(MapField.PROJECTILE_SPEED)
+                .floatValue();
+
+        builder.shootSpeed *= ctx.calculatedSpellData.data.getNumber(EventData.PROJECTILE_SPEED_MULTI, 1).number;
+
+        builder.apart = data.getOrDefault(MapField.PROJECTILES_APART, 75D)
+                .floatValue();
+
+        if (posSource == PositionSource.SOURCE_ENTITY) {
+            builder.pitch = ctx.sourceEntity.getXRot();
+            builder.yaw = ctx.sourceEntity.getYRot();
+        }
+        if (shootWay == ShootWay.DOWN) {
+            builder.fallDown = true;
+        }
+        if (shootWay == ShootWay.FIND_ENEMY) {
+            builder.targetEnemy = true;
+        }
+
+        builder.cast();
 
     }
 
