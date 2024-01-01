@@ -2,9 +2,15 @@ package com.robertx22.age_of_exile.characters.gui;
 
 import com.robertx22.age_of_exile.characters.CreateCharPacket;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.library_of_exile.main.Packets;
+import com.robertx22.library_of_exile.utils.TextUTIL;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.Tooltip;
+
+import static com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils.splitLongText;
 
 public class NewCharButton extends ImageButton {
 
@@ -16,5 +22,13 @@ public class NewCharButton extends ImageButton {
             Packets.sendToServer(new CreateCharPacket(CharacterSelectScreen.SEARCH.getValue()));
             Minecraft.getInstance().setScreen(null);
         });
+    }
+
+    @Override
+    public void renderWidget(GuiGraphics gui, int mouseX, int mouseY, float delta) {
+        if (isHovered()) {
+            this.setTooltip(Tooltip.create(TextUTIL.mergeList(splitLongText(Chats.CREATE_NEW_CHARACTER.locName()))));
+        }
+        super.renderWidget(gui, mouseX, mouseY, delta);
     }
 }

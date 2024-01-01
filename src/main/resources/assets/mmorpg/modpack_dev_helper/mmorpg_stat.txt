@@ -14,11 +14,11 @@ plus_phys_to_all
 phys_to_physical
 hit_damage
 blood_per_10_strength
-learn_song_of_perseverance
 learn_summon_cold_golem
+learn_song_of_perseverance
 bonus_exp
-learn_tidal_strike
 learn_arrow_totem
+learn_tidal_strike
 weapon_skill_cdr
 int_dmg
 learn_song_of_valor
@@ -146,8 +146,8 @@ dmg_when_target_is_low_hp
 freeze_chance
 golem_spell_dmg
 chaos_mana_leech
-learn_gong_strike
 learn_summon_zombie
+learn_gong_strike
 sword_damage
 learn_taunt
 mining_triple_drop
@@ -287,8 +287,8 @@ low_hp_healing
 learn_fire_nova
 weapon_damage
 str_dmg
-learn_close_nova
 learn_vamp_blood
+learn_close_nova
 farming_misc_drop_bonus
 golem_spell_chance
 weapon_skill_spell_dmg
@@ -306,8 +306,8 @@ gear_defense
 health_regen_per_1_magic_shield_regen
 learn_recoil_shot
 physical_health_leech
-learn_smoke_bomb
 learn_poison_ball
+learn_smoke_bomb
 electrify_resistance
 trap_area_dmg
 all_health_leech

@@ -7,7 +7,7 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.perks.TalentsData;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellSchoolsData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import com.robertx22.age_of_exile.uncommon.localization.Words;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils.splitLongText;
 
 
 // todo have to make sure loading and saving works perfectly
@@ -76,9 +78,8 @@ public class CharacterData {
     public List<Component> getTooltip() {
         List<Component> list = new ArrayList<>();
 
-        list.add(Words.Level.locName().append(" " + this.lvl).append(Component.literal(name)));
+        list.addAll(splitLongText(Chats.CHARACTER_LOAD_INFO.locName()));
 
-        // todo add other stuff
 
         return list;
     }

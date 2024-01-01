@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
+    CHARACTER_LOAD_INFO("CLICK to Load this Character\n\nCharacter Feature saves:\n- Your level and exp\n- Your spells, stats, talents, hotbar setup\n\nIt does not save your gear, gems jewels etc.\n\nEach Character starts from Level 1"),
     NO_DUPLICATE_AURA("You can't equip duplicate aura gems."),
     LACK_AURA_CAPACITY("You lack the aura capacity to equip all these auras."),
 
@@ -13,6 +14,7 @@ public enum Chats implements IAutoLocName {
     CANT_USE_MULTIPLE_SAME_SUPPORTS("You can't use Multiples of those Support Gems."),
 
     NONE_MAGE("Non Mage weapons can use."),
+    CREATE_NEW_CHARACTER("Create New Character\n\nName Must be Unique"),
     ANY_ITEM("Any weapon can use."),
     REQUIRE_MELEE("Requires Melee weapon to use."),
     REQUIRE_MAGE("Requires Mage Weapon to use."),

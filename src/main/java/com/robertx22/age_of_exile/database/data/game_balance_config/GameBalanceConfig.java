@@ -70,7 +70,7 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     }
 
     public int getTotalLinks(int links, Player p) {
-        int max = Load.Unit(p).getLevel();
+        int max = getMaxLinksForLevel(Load.Unit(p).getLevel());
         return MathHelper.clamp(links, 0, max);
     }
 

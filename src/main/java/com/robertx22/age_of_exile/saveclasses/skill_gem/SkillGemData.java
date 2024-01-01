@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.saveclasses.skill_gem;
 
 import com.robertx22.age_of_exile.database.data.aura.AuraGem;
+import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.support_gem.SupportGem;
@@ -155,9 +156,9 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
     }
 
 
-    private MutableComponent stars() {
+    private MutableComponent stars(Player p) {
 
-        return Gui.AVAILABLE_SUPPORT_SLOTS.locName(links).withStyle(ChatFormatting.DARK_PURPLE);
+        return Gui.AVAILABLE_SUPPORT_SLOTS.locName(GameBalanceConfig.get().getTotalLinks(links, p)).withStyle(ChatFormatting.DARK_PURPLE);
 
     }
 
@@ -188,7 +189,7 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
             list.add(ExileText.emptyLine().get());
 
-            list.add(stars());
+            list.add(stars(p));
 
 
             return list;

@@ -17,6 +17,8 @@ import java.util.Arrays;
 
 public class Runewords implements ExileRegistryInit {
 
+    // todo add more stuff
+
     @Override
     public void registerAll() {
 

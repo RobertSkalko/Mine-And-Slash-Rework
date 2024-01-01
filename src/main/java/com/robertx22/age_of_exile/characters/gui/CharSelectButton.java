@@ -7,10 +7,12 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.library_of_exile.main.Packets;
+import com.robertx22.library_of_exile.utils.TextUTIL;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.network.chat.Component;
 
 public class CharSelectButton extends ImageButton {
@@ -42,6 +44,9 @@ public class CharSelectButton extends ImageButton {
 
         if (data != null) {
 
+            if (this.isHovered()) {
+                this.setTooltip(Tooltip.create(TextUTIL.mergeList(data.getTooltip())));
+            }
             gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 
             Minecraft mc = Minecraft.getInstance();
