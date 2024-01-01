@@ -1,6 +1,7 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
 summon_type_is_golem
+spell_has_tag_physical
 spell_has_tag_song
 attack_type_is_hit
 summon_type_is_beast
@@ -26,6 +27,7 @@ is_in_combat
 resource_type_is_health
 is_in_combat_is_false
 ele_match_stat
+spell_has_tag_fire
 spell_has_tag_thorns
 is_day
 effect_has_tag_augment
@@ -64,9 +66,12 @@ effect_has_tag_curse
 resource_type_is_energy
 restore_type_is_heal
 spell_has_tag_shield
+spell_has_tag_chaos
 spell_has_tag_rejuvenate
 is_trident_wep_type
 attack_type_is_reflect
+spell_has_tag_lightning
+spell_has_tag_buff
 spell_has_tag_totem
 threat_gen_type_is_take_dmg
 spell_has_tag_ranged
@@ -80,6 +85,7 @@ effect_has_tag_food
 spell_has_tag_chaining
 resource_type_is_magic_shield
 is_is_basic_atk_true
+spell_has_tag_cold
 threat_gen_type_is_heal
 restore_type_is_regen
 spell_has_tag_minion_explode

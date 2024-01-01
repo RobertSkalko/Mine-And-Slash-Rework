@@ -35,7 +35,7 @@ public class FireSpells implements ExileRegistryInit {
 
         SpellBuilder.of(MAGMA_FLOWER, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 20 * 30)
                                 .setSwingArm(), "Magma Totem",
-                        Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.totem))
+                        Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.totem, SpellTags.FIRE))
                 .manualDesc("Summon a flaming totem that deals "
                         + SpellCalcs.MAGMA_FLOWER.getLocDmgTooltip()
                         + Elements.Fire.getIconNameDmg() + " in an area every second.")
@@ -58,7 +58,7 @@ public class FireSpells implements ExileRegistryInit {
 
         SpellBuilder.of(FLAME_STRIKE_ID, PlayStyle.STR, SpellConfiguration.Builder.instant(8, 15)
                                 .setSwingArm(), "Flame Strike",
-                        Arrays.asList(SpellTags.weapon_skill, SpellTags.area, SpellTags.damage))
+                        Arrays.asList(SpellTags.weapon_skill, SpellTags.area, SpellTags.damage, SpellTags.FIRE))
                 .manualDesc("Strike enemies in front for " +
                         SpellCalcs.FLAME_STRIKE.getLocDmgTooltip(Elements.Fire))
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
@@ -71,7 +71,7 @@ public class FireSpells implements ExileRegistryInit {
 
 
         SpellBuilder.of(VAMP_BLOOD, PlayStyle.STR, SpellConfiguration.Builder.nonInstant(10, 60 * 20 * 3, 30), "Vampiric Blood",
-                        Arrays.asList())
+                        Arrays.asList(SpellTags.FIRE, SpellTags.BUFF))
                 .manualDesc("Gives effect to nearby allies.")
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
                 .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, ModEffects.VAMPIRIC_BLOOD.resourcePath, 20 * 60D))
@@ -79,7 +79,7 @@ public class FireSpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(DRACONIC_BLOOD, PlayStyle.STR, SpellConfiguration.Builder.nonInstant(10, 60 * 20 * 3, 30), "Draconic Blood",
-                        Arrays.asList())
+                        Arrays.asList(SpellTags.FIRE, SpellTags.BUFF))
                 .manualDesc("Gives effect to nearby allies.")
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
                 .onCast(PartBuilder.giveExileEffectToAlliesInRadius(5D, ModEffects.DRACONIC_BLOOD.resourcePath, 20 * 60D))
@@ -88,7 +88,7 @@ public class FireSpells implements ExileRegistryInit {
 
 
         SpellBuilder.of(METEOR, PlayStyle.INT, SpellConfiguration.Builder.instant(18, 20).setChargesAndRegen(METEOR, 3, 20 * 20), "Meteor",
-                        Arrays.asList(SpellTags.area, SpellTags.damage)
+                        Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.FIRE)
                 )
                 .manualDesc("Summon a meteor that falls from the sky, dealing " +
                         SpellCalcs.METEOR.getLocDmgTooltip(Elements.Fire) + " in an area.")
@@ -111,7 +111,7 @@ public class FireSpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(FIRE_NOVA_ID, PlayStyle.STR, SpellConfiguration.Builder.instant(20, 20 * 25), "Fire Nova",
-                        Arrays.asList(SpellTags.area, SpellTags.damage))
+                        Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.FIRE))
                 .manualDesc(
                         "Engulf the area in flames, dealing " + SpellCalcs.FIRE_NOVA.getLocDmgTooltip()
                                 + " " + Elements.Fire.getIconNameDmg() + " to nearby enemies.")

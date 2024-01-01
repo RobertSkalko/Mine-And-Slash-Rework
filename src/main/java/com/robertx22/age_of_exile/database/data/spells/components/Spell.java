@@ -90,7 +90,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     }
 
     public List<ExactStatData> getStats(Player p) {
-        int perc = (int) ((getLevelOf(p) / (float) getMaxLevel()) * 100F);
+        int perc = (int) ((getLevelOf(p) / (float) getMaxLevelWithBonuses()) * 100F);
         var stats = statsForSkillGem.stream().map(x -> x.ToExactStat(perc, Load.Unit(p).getLevel())).collect(Collectors.toList());
         return stats;
     }
@@ -421,7 +421,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
     @Override
     public int getMaxLevelWithBonuses() {
-        return getMaxLevel();
+        return getMaxLevel() + 5;
     }
 
     @Override

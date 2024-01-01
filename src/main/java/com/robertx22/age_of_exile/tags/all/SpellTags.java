@@ -29,6 +29,12 @@ public class SpellTags {
     public static SpellTag staff_spell = SpellTag.of("staff_spell");
     public static SpellTag totem = SpellTag.of("totem");
     public static SpellTag ranged = SpellTag.of("ranged");
+    public static SpellTag FIRE = SpellTag.of("fire");
+    public static SpellTag PHYSICAL = SpellTag.of("physical");
+    public static SpellTag COLD = SpellTag.of("cold");
+    public static SpellTag CHAOS = SpellTag.of("chaos");
+    public static SpellTag LIGHTNING = SpellTag.of("lightning");
+    public static SpellTag BUFF = SpellTag.of("buff");
 
     public static void init() {
 

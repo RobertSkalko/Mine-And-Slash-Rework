@@ -19,7 +19,7 @@ public class LeveledValue {
             return min;
         }
 
-        int maxlevel = provider.getMaxLevel();
+        int maxlevel = provider.getMaxLevelWithBonuses();
         int level = provider.getCurrentLevel(en);
 
         float perlevel = (max - min) / maxlevel;

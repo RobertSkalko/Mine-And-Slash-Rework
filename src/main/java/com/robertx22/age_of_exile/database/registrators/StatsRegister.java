@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.database.data.profession.stat.TripleDropChance
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.JewelSocketStat;
+import com.robertx22.age_of_exile.database.data.stats.types.MaxSpellLevel;
 import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.*;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttributes;
@@ -44,6 +45,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.age_of_exile.database.data.stats.types.summon.GolemSpellChance;
 import com.robertx22.age_of_exile.database.data.stats.types.summon.SummonHealth;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.IGenerated;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -63,6 +65,7 @@ public class StatsRegister implements ExileRegistryInit {
         List<Stat> generated = new ArrayList<Stat>() {
             {
                 {
+                    add(new MaxSpellLevel(SpellTags.area));
 
                     add(new SummonHealth());
 

@@ -4,10 +4,13 @@ import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.SpellCastContext;
+import com.robertx22.age_of_exile.database.data.stats.types.LearnSpellStat;
+import com.robertx22.age_of_exile.database.data.stats.types.MaxSpellLevel;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
+import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.effectdatas.SpendResourceEvent;
@@ -58,6 +61,30 @@ public class SpellCastingData {
         spells.clear();
     }
 
+    public void calcSpellLevels(Unit unit) {
+        resetSpells();
+
+
+        unit.getStats().stats.values()
+                .forEach(x -> {
+                    if (x.GetStat() instanceof LearnSpellStat learn) {
+                        addSpell(new SpellCastingData.InsertedSpell(learn.spell.GUID(), (int) x.getValue()));
+                    }
+                });
+
+        // todo this might be a bit perf heavy?
+        unit.getStats().stats.values().forEach(x -> {
+            if (x.GetStat() instanceof MaxSpellLevel max) {
+                for (InsertedSpell spell : this.spells) {
+                    if (spell.getSpell().config.tags.contains(max.tag)) {
+                        spell.rank += x.getValue();
+                    }
+                }
+            }
+        });
+
+    }
+
     public void addSpell(InsertedSpell spell) {
         spells.add(spell);
     }
@@ -82,6 +109,10 @@ public class SpellCastingData {
 
         public String id;
         public int rank;
+
+        public Spell getSpell() {
+            return ExileDB.Spells().get(id);
+        }
 
         public InsertedSpell(String id, int rank) {
             this.id = id;

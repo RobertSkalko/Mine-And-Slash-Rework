@@ -30,7 +30,7 @@ public class IntSpells implements ExileRegistryInit {
 
         SpellBuilder.of(BLACK_HOLE, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 60)
                                 .setSwingArm(), "Black Hole",
-                        Arrays.asList(SpellTags.damage, SpellTags.area))
+                        Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.CHAOS))
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
 
                 .manualDesc("Summon a dark sphere that attracts nearby enemies to it, dealing "

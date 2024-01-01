@@ -25,7 +25,7 @@ public class CurseSpells implements ExileRegistryInit {
 
     static void curse(String id, String name, EffectCtx effect) {
         SpellBuilder.of(id, PlayStyle.INT, SpellConfiguration.Builder.instant(10, 20 * 30).setSwingArm()
-                        , name, Arrays.asList(SpellTags.area, SpellTags.curse))
+                        , name, Arrays.asList(SpellTags.area, SpellTags.curse, SpellTags.CHAOS))
                 .manualDesc(
                         "Curse enemies with " + effect.locname +
                                 " and deal " + SpellCalcs.CURSE.getLocDmgTooltip() + " " + Elements.Chaos.getIconNameDmg())

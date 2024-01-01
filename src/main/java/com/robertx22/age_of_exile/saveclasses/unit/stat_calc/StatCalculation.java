@@ -3,12 +3,10 @@ package com.robertx22.age_of_exile.saveclasses.unit.stat_calc;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.capability.player.helper.GemInventoryHelper;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.AttributeStat;
-import com.robertx22.age_of_exile.database.data.stats.types.LearnSpellStat;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.event_hooks.my_events.CollectGearEvent;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
-import com.robertx22.age_of_exile.saveclasses.spells.SpellCastingData;
 import com.robertx22.age_of_exile.saveclasses.unit.GearData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.GearStatCtx;
@@ -87,14 +85,8 @@ public class StatCalculation {
         }
 
         if (entity instanceof Player p) {
-            Load.player(p).spellCastingData.resetSpells();
-            unit.getStats().stats.values()
-                    .forEach(x -> {
-                        if (x.GetStat() instanceof LearnSpellStat learn) {
-                            Load.player(p).spellCastingData.addSpell(new SpellCastingData.InsertedSpell(learn.spell.GUID(), (int) x.getValue()));
-                        }
-                    });
-
+            Load.player(p).spellCastingData.calcSpellLevels(unit);
+            
             Load.player(p).getSkillGemInventory().removeAurasIfCantWear(p);
 
             Packets.sendToClient((Player) entity, new EntityUnitPacket(entity));

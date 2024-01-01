@@ -32,7 +32,7 @@ public class LightningSpells implements ExileRegistryInit {
         SpellBuilder.of(CHAIN_LIGHTNING, PlayStyle.INT, SpellConfiguration.Builder.instant(25, 20)
                                 .setChargesAndRegen("chain_lightning", 3, 20 * 10)
                                 .applyCastSpeedToCooldown(), "Chain Lightning",
-                        Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.chaining))
+                        Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.chaining, SpellTags.LIGHTNING))
                 .manualDesc(
                         "Strike enemies with chaining lightning that deals " + SpellCalcs.LIGHTNING_SPEAR.getLocDmgTooltip()
                                 + " " + Elements.Lightning.getIconNameDmg())
@@ -54,7 +54,7 @@ public class LightningSpells implements ExileRegistryInit {
                                 .setSwingArm()
                                 .setChargesAndRegen("lightning_spear", 3, 20 * 5)
                                 .applyCastSpeedToCooldown(), "Lightning Spear",
-                        Arrays.asList(SpellTags.projectile, SpellTags.damage))
+                        Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.LIGHTNING))
                 .manualDesc(
                         "Throw out an electric spear, dealing " + SpellCalcs.LIGHTNING_SPEAR.getLocDmgTooltip()
                                 + " " + Elements.Lightning.getIconNameDmg())
@@ -74,7 +74,7 @@ public class LightningSpells implements ExileRegistryInit {
 
 
         SpellBuilder.of(LIGHTNING_NOVA, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 25 * 10), "Lightning Nova",
-                        Arrays.asList(SpellTags.area, SpellTags.damage))
+                        Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.LIGHTNING))
                 .manualDesc(
                         "Deal " + SpellCalcs.LIGHNING_NOVA.getLocDmgTooltip()
                                 + " " + Elements.Lightning.getIconNameDmg() + " to nearby enemies.")
@@ -92,7 +92,7 @@ public class LightningSpells implements ExileRegistryInit {
 
         SpellBuilder.of(LIGHTNING_TOTEM, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 60)
                                 .setSwingArm(), "Lightning Totem",
-                        Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.totem))
+                        Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.totem, SpellTags.LIGHTNING))
                 .manualDesc("Summon a lightning totem that deals "
                         + SpellCalcs.LIGHTNING_TOTEM.getLocDmgTooltip(Elements.Lightning) + " in an area every second.")
 

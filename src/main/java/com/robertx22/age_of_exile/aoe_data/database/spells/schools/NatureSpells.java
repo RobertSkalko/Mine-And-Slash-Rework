@@ -38,7 +38,7 @@ public class NatureSpells implements ExileRegistryInit {
     public void registerAll() {
 
         SpellBuilder.of(CHAOS_TOTEM, PlayStyle.STR, SpellConfiguration.Builder.instant(40, 20 * 60), "Chaos Totem",
-                        Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.totem))
+                        Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.totem, SpellTags.CHAOS))
 
                 .manualDesc("Summons a totem that spawns chaos meteors, dealing " + SpellCalcs.CHAOS_TOTEM.getLocDmgTooltip(Elements.Chaos)
                         + " in an area.")
@@ -75,7 +75,7 @@ public class NatureSpells implements ExileRegistryInit {
 
         SpellBuilder.of(THORN_BUSH, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 20 * 6)
                                 .setSwingArm(), "Thorn Bush",
-                        Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.totem, SpellTags.thorns))
+                        Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.totem, SpellTags.thorns, SpellTags.PHYSICAL))
                 .manualDesc("Summon a thorny bush that deals "
                         + SpellCalcs.THORN_BUSH.getLocDmgTooltip()
                         + Elements.Physical.getIconNameDmg() + " in an area every second and applies Thorned. " +
@@ -101,7 +101,7 @@ public class NatureSpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(POISON_CLOUD, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 45), "Poison Cloud",
-                        Arrays.asList(SpellTags.area, SpellTags.damage))
+                        Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.CHAOS))
                 .manualDesc(
                         "Erupt with poisonous gas, dealing " + SpellCalcs.POISON_CLOUD.getLocDmgTooltip()
                                 + " " + Elements.Chaos.getIconNameDmg() + " to nearby enemies.")
@@ -118,7 +118,7 @@ public class NatureSpells implements ExileRegistryInit {
 
         SpellBuilder.of(REFRESH, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(40, 20 * 60 * 3, 20)
                         , "Refresh",
-                        Arrays.asList())
+                        Arrays.asList(SpellTags.BUFF))
 
                 .manualDesc(
                         "Refreshes all your cooldowns by 1 minute.")
@@ -138,7 +138,7 @@ public class NatureSpells implements ExileRegistryInit {
 
         SpellBuilder.of(REJUVENATION, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 60 * 20)
                         , "Rejuvenation",
-                        Arrays.asList(SpellTags.heal, SpellTags.rejuvenate))
+                        Arrays.asList(SpellTags.heal, SpellTags.rejuvenate, SpellTags.BUFF))
                 .manualDesc("Gives buff that heals nearby allies for " + SpellCalcs.REJUVENATION.getLocDmgTooltip() + " every second.")
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
                 .onCast(PartBuilder.giveExileEffectToAlliesInRadius(8D, ModEffects.REJUVENATE.resourcePath, 20 * 15D))
@@ -176,7 +176,7 @@ public class NatureSpells implements ExileRegistryInit {
 
         SpellBuilder.of(GARDEN_OF_THORNS, PlayStyle.INT, SpellConfiguration.Builder.multiCast(15, 20, 20, 5)
                                 .setChargesAndRegen(GARDEN_OF_THORNS, 3, 20 * 30), "Garden of Thorns",
-                        Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.thorns)
+                        Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.thorns, SpellTags.PHYSICAL)
                 )
                 .manualDesc("Deals " + SpellCalcs.THORN_CONSUME.getLocDmgTooltip(Elements.Physical) +
                         " in the area and applies Thorns. Gives you Inner Calm which restores " + SpellCalcs.INNER_CALM.getLocDmgTooltip() + " Mana/s.")

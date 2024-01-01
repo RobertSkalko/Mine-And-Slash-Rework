@@ -21,7 +21,7 @@ public class PetSpells implements ExileRegistryInit {
     public void registerAll() {
 
         SpellBuilder.of(PET_BASIC, PlayStyle.INT, SpellConfiguration.Builder.energy(3, 1), "Basic Pet Attack",
-                        Arrays.asList(SpellTags.summon, SpellTags.damage))
+                        Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.PHYSICAL))
                 .defaultAndMaxLevel(1)
                 .manualDesc(
                         "Basic Attack dealing " + SpellCalcs.PET_BASIC.getLocDmgTooltip() + " " + Elements.Physical.getIconNameDmg() + " to single enemy."
@@ -32,7 +32,7 @@ public class PetSpells implements ExileRegistryInit {
                 .build();
 
         SpellBuilder.of(SPIDER, PlayStyle.INT, SpellConfiguration.Builder.instant(2, 1), "Spider Pet Attack",
-                        Arrays.asList(SpellTags.summon, SpellTags.damage))
+                        Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.CHAOS))
                 .defaultAndMaxLevel(1)
                 .manualDesc(
                         "Basic Attack dealing " + SpellCalcs.SPIDER_PET_BASIC.getLocDmgTooltip() + " " + Elements.Chaos.getIconNameDmg() + " to single enemy."

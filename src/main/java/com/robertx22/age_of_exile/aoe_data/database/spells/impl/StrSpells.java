@@ -24,7 +24,7 @@ public class StrSpells implements ExileRegistryInit {
         SpellBuilder.of(SHRED, PlayStyle.STR, SpellConfiguration.Builder.instant(10, 20 * 1)
                                 .setSwingArm()
                                 .setChargesAndRegen("shred", 3, 20 * 15), "Shred",
-                        Arrays.asList(SpellTags.weapon_skill, SpellTags.area, SpellTags.damage))
+                        Arrays.asList(SpellTags.weapon_skill, SpellTags.area, SpellTags.damage, SpellTags.PHYSICAL))
                 .manualDesc(
                         "Slash all nearby enemies, dealing "
                                 + SpellCalcs.SHRED.getLocDmgTooltip() + " " + Elements.Physical.getIconNameDmg()

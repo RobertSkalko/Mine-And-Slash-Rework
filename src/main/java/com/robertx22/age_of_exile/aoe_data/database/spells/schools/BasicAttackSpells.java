@@ -33,7 +33,7 @@ public class BasicAttackSpells implements ExileRegistryInit {
         SpellBuilder.of(FROSTBALL_ID, PlayStyle.INT, SpellConfiguration.Builder.instant(mana, cd)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Ice Shard",
-                        Arrays.asList(SpellTags.projectile, SpellTags.damage))
+                        Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.COLD))
                 .manualDesc(
                         "Throw out a shard of ice, dealing " + SpellCalcs.ICEBALL.getLocDmgTooltip()
                                 + " " + Elements.Cold.getIconNameDmg() + " and applying a stack of Bone Chill.")
@@ -54,7 +54,7 @@ public class BasicAttackSpells implements ExileRegistryInit {
         SpellBuilder.of(FIREBALL_ID, PlayStyle.INT, SpellConfiguration.Builder.instant(mana, cd)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Fire Ball",
-                        Arrays.asList(SpellTags.projectile, SpellTags.damage))
+                        Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.FIRE))
                 .manualDesc(
                         "Throw out a ball of fire, dealing " + SpellCalcs.FIREBALL.getLocDmgTooltip()
                                 + " " + Elements.Fire.getIconNameDmg())
@@ -76,7 +76,7 @@ public class BasicAttackSpells implements ExileRegistryInit {
         SpellBuilder.of(POISONBALL_ID, PlayStyle.INT, SpellConfiguration.Builder.instant(mana, cd)
                                 .setSwingArm()
                                 .applyCastSpeedToCooldown(), "Poison Blast",
-                        Arrays.asList(SpellTags.projectile, SpellTags.damage))
+                        Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.CHAOS))
                 .manualDesc(
                         "Blast out a ball of poison, dealing " + SpellCalcs.POISON_BALL.getLocDmgTooltip()
                                 + " " + Elements.Chaos.getIconNameDmg())

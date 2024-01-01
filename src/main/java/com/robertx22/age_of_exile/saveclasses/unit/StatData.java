@@ -26,27 +26,13 @@ public class StatData {
     }
 
     public Stat GetStat() {
-        return ExileDB.Stats()
-                .get(id);
+        return ExileDB.Stats().get(id);
     }
 
     private String id = "";
     private float v1 = 0;
     private float m = 1;
 
-    /*
-    public String toSerializationString() {
-        return id + ":" + v1;
-    }
-
-    public static StatData fromSerializationString(String str) {
-        String[] parts = str.split(":");
-        String id = parts[0];
-        float v1 = Float.parseFloat(parts[1]);
-        return new StatData(id, v1);
-    }
-
-     */
 
     public String getId() {
         return id;
