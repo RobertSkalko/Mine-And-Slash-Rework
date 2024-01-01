@@ -184,15 +184,6 @@ public class BestiaryScreen extends BaseScreen implements INamedScreen {
     @Override
     public boolean mouseReleased(double m1, double m2, int m3) {
         this.setDragging(false);
-
-        /*
-        buttons.stream()
-                .filter(x -> x.isMouseOver(m1, m2))
-                .findFirst()
-                .ifPresent(x -> x.onClick(m1, m2));
-
-         */
-
         return super.mouseReleased(m1, m2, m3);
 
     }
@@ -296,7 +287,7 @@ public class BestiaryScreen extends BaseScreen implements INamedScreen {
 
             gui.renderFakeItem(item.stack, getStackX(), getStackY());
 
-            int xp = (int) (this.getX() + 35);
+            int xp = (int) (this.getX() + 37);
             int yp = (int) (this.getY() + entryButtonY / 2) - mc.font.lineHeight / 2;
 
             gui.drawString(mc.font, item.getName(), xp, yp, ChatFormatting.GREEN.getColor());

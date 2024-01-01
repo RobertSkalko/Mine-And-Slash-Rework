@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.capability.entity;
 
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +24,15 @@ public class EntityLeechData {
     // todo implement expiration after 5s
     public void onSecondUseLeeches(EntityData data) {
 
+
+        // don't allow to accumulate more than x depending on total resource
+        // currently lets try with capping it to 5 seconds of regen.
+        for (Map.Entry<ResourceType, Float> en : map.entrySet()) {
+            float leechMaxPerSec = 5F * data.getUnit().getCalculatedStat(Stats.LEECH_CAP.get(en.getKey())).getValue() / 100F;
+            float max = data.getMaximumResource(en.getKey()) * leechMaxPerSec;
+            float fi = MathHelper.clamp(en.getValue(), 0, max);
+            map.put(en.getKey(), fi);
+        }
 
         for (Map.Entry<ResourceType, Float> entry : map.entrySet()) {
             float leechMaxPerSec = data.getUnit().getCalculatedStat(Stats.LEECH_CAP.get(entry.getKey())).getValue() / 100F;

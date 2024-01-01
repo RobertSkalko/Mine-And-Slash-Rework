@@ -33,6 +33,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class MapItemData implements ICommonDataItem<GearRarity> {
@@ -50,6 +51,8 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
     public List<MapAffixData> affixes = new ArrayList<MapAffixData>();
 
     public List<String> mechs = new ArrayList<>();
+
+    public String uuid = UUID.randomUUID().toString();
 
 
     public List<LeagueMechanic> getLeagueMechanics() {
@@ -93,15 +96,12 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
     }
 
     public float bonusFormula() {
-
         float tierBonus = tier * 0.02F;
-
         return (1 + tierBonus);
     }
 
-    public float getBonusExpMulti() {
-
-        return (bonusFormula());
+    public float getExpMulti() {
+        return getRarity().map_xp_multi;
     }
 
 
@@ -119,19 +119,6 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
         this.tier = tier;
         return true;
     }
-
-    // we just need tier bonus i think
-    /*
-    private float getAffixMulti() {
-
-        float total = 0;
-        for (MapAffixData affix : affixes) {
-            total += affix.getBonusLootMultiplier();
-        }
-        return total;
-    }
-
-     */
 
     public List<MapAffixData> getAllAffixesThatAffect(AffectedEntities aff) {
         return affixes.stream().filter(x -> x.getAffix().affected == aff).collect(Collectors.toList());
@@ -162,16 +149,12 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                 .append(ChatFormatting.GRAY + ", ")
                 .withStyle(ChatFormatting.GREEN);
 
-        boolean addedExp = false;
-        if (getBonusExpAmountInPercent() > 0) {
-            comp.append(Itemtips.Exp.locName(this.getBonusExpAmountInPercent()));
-            addedExp = true;
-        }
+        comp.append(Itemtips.Exp.locName(this.getBonusExpAmountInPercent()));
+
 
         if (getBonusLootAmountInPercent() > 0) {
-            if (addedExp) {
-                comp.append(ChatFormatting.GRAY + ", ");
-            }
+            comp.append(ChatFormatting.GRAY + ", ");
+
 
             comp.append(Itemtips.Loot.locName(this.getBonusLootAmountInPercent()).withStyle(ChatFormatting.YELLOW));
         }
@@ -206,7 +189,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
     }
 
     private int getBonusExpAmountInPercent() {
-        return (int) ((this.getBonusExpMulti() - 1) * 100);
+        return (int) ((this.getExpMulti() - 1) * 100);
     }
 
 

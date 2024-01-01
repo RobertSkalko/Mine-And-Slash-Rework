@@ -2,7 +2,9 @@ package com.robertx22.age_of_exile.maps.processors.helpers;
 
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.event_hooks.entity.OnMobSpawn;
+import com.robertx22.age_of_exile.mmorpg.ModErrors;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.utils.geometry.MyPosition;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
@@ -53,6 +55,15 @@ public class MobBuilder {
 
         if (rarity != null) {
             Load.Unit(mob).setRarity(rarity.GUID());
+        }
+
+        try {
+            if (WorldUtils.isMapWorldClass(world)) {
+                var map = Load.mapAt(world, p);
+                Load.Unit(mob).mapUUID = map.map.uuid;
+            }
+        } catch (Exception e) {
+            ModErrors.print(e);
         }
 
         world.addFreshEntity(mob);

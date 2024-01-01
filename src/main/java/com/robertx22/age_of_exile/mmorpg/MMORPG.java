@@ -64,11 +64,11 @@ public class MMORPG {
     public static boolean RUN_DEV_TOOLS = true;
 
     public static boolean combatLogEnabled() {
-        return RUN_DEV_TOOLS; // todo, should this be a client config and have server send packets ?
+        return false; // todo, should this be a client config and have server send packets ?
     }
 
     public static boolean deepCombatLogEnabled() {
-        return RUN_DEV_TOOLS; // todo, should this be a client config and have server send packets ?
+        return false; // todo, should this be a client config and have server send packets ?
     }
 
     private static final String PROTOCOL_VERSION = "1";
@@ -106,6 +106,7 @@ public class MMORPG {
         ForgeEvents.registerForgeEvent(AddReloadListenerEvent.class, event -> {
             ExileRegistryType.registerJsonListeners(event);
         });
+
 
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
 

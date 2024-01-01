@@ -131,7 +131,7 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
         if (WorldUtils.isMapWorldClass(victim.level())) {
             MapData map = Load.mapAt(victim.level(), victim.blockPosition());
             if (map != null) {
-                exp *= map.map.getBonusLootMulti();
+                exp *= map.map.getExpMulti();
             }
         }
 

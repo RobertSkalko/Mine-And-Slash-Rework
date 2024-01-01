@@ -16,9 +16,7 @@ public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
     public void accept(ExileEvents.OnEntityTick onEntityTick) {
         LivingEntity entity = onEntityTick.entity;
 
-        if (entity.level().isClientSide) {
-            return;
-        }
+      
         try {
 
             var data = Load.Unit(entity);

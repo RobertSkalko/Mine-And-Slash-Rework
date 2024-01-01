@@ -16,6 +16,8 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Math;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 public class ProjectileCastHelper {
 
@@ -70,6 +72,7 @@ public class ProjectileCastHelper {
 
         Vec3 posAdd = new Vec3(0, 0, 0);
 
+
         for (int i = 0; i < projectilesAmount; i++) {
 
             if (this.castType == CastType.SPREAD_OUT_IN_RADIUS) {
@@ -98,9 +101,19 @@ public class ProjectileCastHelper {
                 }
             }
 
+            // copied from multishot crossbow code
+            Vec3 vec31 = this.caster.getUpVector(1.0F);
+            Quaternionf quaternionf = (new Quaternionf()).setAngleAxis((double) (addYaw * ((float) java.lang.Math.PI / 180F)), vec31.x, vec31.y, vec31.z);
+            Vec3 vec3 = caster.getViewVector(1.0F);
+            Vector3f finalVel = vec3.toVector3f().rotate(quaternionf);
+
+            //posAdd = new MyPosition(finalVel);
+
             AbstractArrow en = (AbstractArrow) projectile.create(world);
             SpellUtils.shootProjectile(pos.add(posAdd), en, ctx.getPositionEntity(), shootSpeed, pitch, yaw + addYaw);
             SpellUtils.initSpellEntity(en, caster, data, holder);
+
+            en.shoot(finalVel.x, finalVel.y, finalVel.z, shootSpeed, 1);
 
             if (fallDown) {
                 en.setDeltaMovement(0, -1, 0);

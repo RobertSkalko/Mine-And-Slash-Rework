@@ -7,7 +7,6 @@ public enum ResourceType {
     health("health", "Health"),
     magic_shield("magic_shield", "Magic Shield"),
     mana("mana", "Mana"),
-    block("block", "Block"),
     energy("energy", "Energy"),
     blood("blood", "Blood");
 
@@ -18,6 +17,7 @@ public enum ResourceType {
         this.locname = locname;
     }
 
+ 
     public static List<ResourceType> getUsed() {
         return Arrays.asList(health, magic_shield, mana, energy);
     }

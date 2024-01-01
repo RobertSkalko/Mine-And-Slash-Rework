@@ -55,7 +55,7 @@ public class ResourcesData {
             event.Activate();
         }
 
-        this.cap(player, ResourceType.block);
+        this.cap(player, ResourceType.energy);
     }
 
 
@@ -88,9 +88,7 @@ public class ResourcesData {
     public float getMax(LivingEntity en, ResourceType type) {
         EntityData data = Load.Unit(en);
 
-        if (type == ResourceType.block) {
-            return 100F;
-        } else if (type == ResourceType.mana) {
+        if (type == ResourceType.mana) {
             return data.getUnit()
                     .manaData()
                     .getValue();

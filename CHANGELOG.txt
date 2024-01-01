@@ -28,3 +28,11 @@ v.5.3.9
 - added give jewel command
 - EXPERIMENTAL characters feature. You can now save/load different builds by leveling new characters. Probably has a few bugs, might need some tweaking, currently
 the only limitation is you can't change classes in the map dimension and when in combat, but there might still be exploits I didn't think of
+- try fix multi proj gems and shooting straight up/down merging the proj
+- maps now provide less xp. They're meant to be endgame activity, not a way to speed level. The pack size being so much bigger meant maps didn't just give say 30% more xp, but also double or triple that.
+I think they'll still be decent at leveling but not much worse than overworld activity
+- nerfed rate of rested xp gain. I put it very high because I wanted to encourage professions, but as professions are already attractive enough, they're currently just making leveling too fast
+(Remember most changes are either datapacks or configs)
+- summons can now leech. I forgot why I specifically disabled this, i might have been afraid of them being too op, or maybe I had a better reason.. So don't get too attached just yet
+- stored leech now further capped to 5 seconds of regen by leech. So if you have 100 mana, your leech cap is 5%, you can accumulate 25 mana with leech. Previously it was possible to accumulate infinite leech.
+This made some spells extremely op, like greater multi projectile spells. Now they still synergize with flat leech but need less of it to hit the leech cap or can opt for talents that increase leech cap

@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.capability.player.data;
 
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
+import com.robertx22.age_of_exile.mmorpg.ModErrors;
 
 public class RestedExpData {
 
@@ -17,8 +18,14 @@ public class RestedExpData {
 
     public void onDeath() {
 
-        bonusProfExp *= ServerContainer.get().RESTED_XP_DEATH_PENALTY.get();
-        bonusCombatExp *= ServerContainer.get().RESTED_XP_DEATH_PENALTY.get();
+        try {
+
+            bonusProfExp *= ServerContainer.get().RESTED_XP_DEATH_PENALTY.get();
+            bonusCombatExp *= ServerContainer.get().RESTED_XP_DEATH_PENALTY.get();
+
+        } catch (Exception e) {
+            ModErrors.print(e);
+        }
 
     }
 }

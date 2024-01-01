@@ -124,6 +124,7 @@ public class EntityData implements ICap, INeededForClient {
     private static final String BOSS = "boss";
     private static final String CUSTOM_STATS = "custom_stats";
     private static final String LEECH = "leech";
+    private static final String MAP_ID = "mapid";
 
 
     transient LivingEntity entity;
@@ -133,6 +134,7 @@ public class EntityData implements ICap, INeededForClient {
 
     public SummonedPetData summonedPetData = new SummonedPetData();
 
+    public String mapUUID = "";
 
     // sync these for mobs
     Unit unit = new Unit();
@@ -170,6 +172,25 @@ public class EntityData implements ICap, INeededForClient {
     public void setupRandomBoss() {
         this.boss = new BossData();
         boss.setupRandomBoss();
+    }
+
+    public boolean canDespawnMapMob() {
+        if (this.entity instanceof Player) {
+            return false;
+        }
+        if (!WorldUtils.isDungeonWorld(entity.level())) {
+            return false;
+        }
+        var map = Load.mapAt(entity.level(), entity.blockPosition());
+
+        if (map == null) {
+            return true;
+        }
+        if (map.map != null && !map.map.uuid.equals(this.mapUUID)) {
+            return true;
+        }
+        return false;
+
     }
 
     @Override
@@ -223,6 +244,7 @@ public class EntityData implements ICap, INeededForClient {
         nbt.putInt(EXP, exp);
         nbt.putInt(EXP_DEBT, expDebt);
         nbt.putString(UUID, uuid);
+        nbt.putString(MAP_ID, this.mapUUID);
         nbt.putBoolean(SET_MOB_STATS, setMobStats);
         nbt.putBoolean(NEWBIE_STATUS, this.isNewbie);
         nbt.putBoolean(EQUIPS_CHANGED, equipsChanged);
@@ -282,6 +304,7 @@ public class EntityData implements ICap, INeededForClient {
         this.exp = nbt.getInt(EXP);
         this.expDebt = nbt.getInt(EXP_DEBT);
         this.uuid = nbt.getString(UUID);
+        this.mapUUID = nbt.getString(MAP_ID);
         this.setMobStats = nbt.getBoolean(SET_MOB_STATS);
         if (nbt.contains(NEWBIE_STATUS)) {
             this.isNewbie = nbt.getBoolean(NEWBIE_STATUS);
@@ -330,21 +353,16 @@ public class EntityData implements ICap, INeededForClient {
     public float getMaximumResource(ResourceType type) {
 
         if (type == ResourceType.blood) {
-            return getUnit().bloodData()
-                    .getValue();
+            return getUnit().bloodData().getValue();
         } else if (type == ResourceType.mana) {
-            return getUnit().manaData()
-                    .getValue();
+            return getUnit().manaData().getValue();
         } else if (type == ResourceType.health) {
-            return entity.getMaxHealth();
+            return getUnit().healthData().getValue();
         } else if (type == ResourceType.energy) {
-            return getUnit().energyData()
-                    .getValue();
+            return getUnit().energyData().getValue();
         } else if (type == ResourceType.magic_shield) {
-            return getUnit().magicShieldData()
-                    .getValue();
+            return getUnit().magicShieldData().getValue();
         }
-
         return 0;
 
     }
@@ -458,7 +476,10 @@ public class EntityData implements ICap, INeededForClient {
     }
 
     public MobRarity getMobRarity() {
-        return ExileDB.MobRarities().get(rarity);
+        if (ExileDB.MobRarities().isRegistered(rarity)) {
+            return ExileDB.MobRarities().get(rarity);
+        }
+        return ExileDB.MobRarities().get(IRarity.COMMON_ID);
     }
 
     public void setUUID(UUID id) {

@@ -11,6 +11,7 @@ import static net.minecraft.commands.Commands.literal;
 
 
 public class OpenHub {
+
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
         commandDispatcher.register(
                 literal(CommandRefs.ID)
