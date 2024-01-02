@@ -257,34 +257,6 @@ public class TooltipUtils {
     }
 
 
-    public static List<Integer> incrementArray(List<Integer> inputList) {
-        // Find the maximum value in the input list
-        int max = inputList.stream().max(Integer::compareTo).orElse(0);
-
-        // Create a list to store the count of increments for each element
-        List<Integer> countList = new ArrayList<>(inputList.size());
-
-        // Initialize the countList with zeros
-        for (int i = 0; i < inputList.size(); i++) {
-            countList.add(0);
-        }
-
-        // Create a new list to operate on (a copy of the input list)
-        List<Integer> result = new ArrayList<>(inputList);
-
-        // Iterate over each element in the result list
-        for (int i = 0; i < result.size(); i++) {
-            // Increment the element until it reaches or exceeds the maximum value
-            while (result.get(i) < max) {
-                result.set(i, result.get(i) + 2); // Increment the element by 2, is the "."'s width
-                countList.set(i, countList.get(i) + 1); // Increment the count
-            }
-        }
-
-        // Return the list containing the count of increments for each element
-        return countList;
-
-    }
 
     public static MutableComponent getMutabletags(Iterator<?> iterator, MutableComponent separator) {
         if (separator == null) {

@@ -96,7 +96,7 @@ public abstract class StatNameRegex {
         str = str.replace(VALUE, numberColor(format, stat, v1) + plusminus + v1s + perc + VALUEAndNAMESeparator + ChatFormatting.RESET + statColor(stat));
 
 
-        String[] processedReplacement = StringUTIL.processStrings(add, stat.locName().getString());
+        String[] processedReplacement = StringUTIL.joinWithoutEmpty(add, stat.locName().getString());
 
         str = str.replace(NAME, Formatter.SPECIAL_CALC_STAT.locName((Object[]) processedReplacement).getString());
 
