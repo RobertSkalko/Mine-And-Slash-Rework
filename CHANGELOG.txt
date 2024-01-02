@@ -36,3 +36,7 @@ I think they'll still be decent at leveling but not much worse than overworld ac
 - summons can now leech. I forgot why I specifically disabled this, i might have been afraid of them being too op, or maybe I had a better reason.. So don't get too attached just yet
 - stored leech now further capped to 5 seconds of regen by leech. So if you have 100 mana, your leech cap is 5%, you can accumulate 25 mana with leech. Previously it was possible to accumulate infinite leech.
 This made some spells extremely op, like greater multi projectile spells. Now they still synergize with flat leech but need less of it to hit the leech cap or can opt for talents that increase leech cap
+- runeword items can't have more gems than runes now
+- added + spell level stat, spells can have +5 extra levels now with stats from mostly unique and runeword items
+- fixed mns letting vanilla dmg happen when at 0 energy
+- stats that are good in minus like -mana cost now no longer show as red on tooltip

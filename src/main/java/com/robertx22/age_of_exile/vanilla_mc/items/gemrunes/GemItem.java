@@ -33,6 +33,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Formatter;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
@@ -139,7 +140,6 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
 
                                 ctx.player.displayClientMessage(Chats.GEM_SOCKETED.locName(), false);
 
-
                                 StackSaving.GEARS.saveTo(stack, gear);
 
 
@@ -161,10 +161,19 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
 
             @Override
             public ExplainedResult canBeModified(GearItemData data) {
-                if (data.getEmptySockets() > 0) {
-                    return ExplainedResult.success();
+                if (data.getEmptySockets() < 1) {
+                    return ExplainedResult.failure(Chats.NEED_EMPTY_SOCKET.locName());
                 }
-                return ExplainedResult.failure(Chats.NEED_EMPTY_SOCKET.locName());
+                if (data.rar.equals(IRarity.RUNEWORD_ID)) {
+                    int runes = (int) data.sockets.getSocketed().stream().filter(x -> x.isRune()).count();
+                    int gems = (int) data.sockets.getSocketed().stream().filter(x -> x.isGem()).count();
+                    gems++;
+                    if (gems > runes) {
+                        return ExplainedResult.failure(Chats.CANT_HAVE_MORE_GEMS_THAN_RUNES_IN_RUNEWORD.locName());
+                    }
+                }
+
+                return ExplainedResult.success();
             }
 
 

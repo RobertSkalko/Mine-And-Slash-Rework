@@ -1,6 +1,8 @@
 package com.robertx22.age_of_exile.capability.player.helper;
 
+import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.database.data.aura.AuraGem;
+import com.robertx22.age_of_exile.database.data.aura.AuraGems;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCapacity;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
@@ -132,8 +134,20 @@ public class GemInventoryHelper {
     public int getSpiritReserved(Player p) {
         int res = 0;
 
+        var data = Load.Unit(p).getUnit();
+
         for (SkillGemData aura : getAurasGems()) {
-            res += aura.getAura().reservation * 100F;
+
+            float cost = aura.getAura().reservation * 100F;
+
+            // todo need better ways, this one is equals based on instance, so its never true lol
+            var stat = Stats.SPECIFIC_AURA_COST.get(new AuraGems.AuraInfo(aura.getAura()));
+            if (data.getCalculatedStat(stat).isNotZero()) {
+                float multi = data.getCalculatedStat(stat).getMultiplier();
+                cost *= multi;
+            }
+
+            res += cost;
         }
 
         return res;

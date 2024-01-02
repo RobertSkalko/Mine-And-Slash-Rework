@@ -40,6 +40,7 @@ public enum Chats implements IAutoLocName {
     NOT_JEWEL("This is not a jewel item."),
     NOT_TOOL("This is not a tool item, or the tool has no stats yet."),
     NEED_EMPTY_SOCKET("Requires an empty socket"),
+    CANT_HAVE_MORE_GEMS_THAN_RUNES_IN_RUNEWORD("Runeword Items Can not have more Gems than Runes socketed"),
     ALREADY_MAX_SOCKETS("Item already has maximum possible sockets."),
     ALREADY_MAX_LINKS("Item already has maximum possible links."),
     NEEDS_AN_AFFIX("Item needs an affix."),

@@ -42,10 +42,18 @@ public abstract class StatNameRegex {
             return format;
         }
 
-        if (val > 0) {
-            return ChatFormatting.GREEN;
+        if (stat.minus_is_good) {
+            if (val > 0) {
+                return ChatFormatting.RED;
+            } else {
+                return ChatFormatting.GREEN;
+            }
         } else {
-            return ChatFormatting.RED;
+            if (val > 0) {
+                return ChatFormatting.GREEN;
+            } else {
+                return ChatFormatting.RED;
+            }
         }
     }
 

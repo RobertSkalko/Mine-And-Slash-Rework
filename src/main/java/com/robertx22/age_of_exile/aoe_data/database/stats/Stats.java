@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffe
 import com.robertx22.age_of_exile.aoe_data.database.stat_conditions.StatConditions;
 import com.robertx22.age_of_exile.aoe_data.database.stat_effects.StatEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.*;
+import com.robertx22.age_of_exile.database.data.aura.AuraGems;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
@@ -129,6 +130,19 @@ public class Stats implements ExileRegistryInit {
                 x.min = 0;
                 x.is_perc = true;
                 x.scaling = StatScaling.NONE;
+            })
+            .build();
+
+    public static DataPackStatAccessor<AuraGems.AuraInfo> SPECIFIC_AURA_COST = DatapackStatBuilder
+            .<AuraGems.AuraInfo>of(x -> x.id + "_aura_cost", x -> Elements.Physical)
+            .addAllOfType(AuraGems.ALL)
+            .setPriority(0)
+            .setSide(EffectSides.Source)
+            .setLocName(x -> Stat.format(x.name + " Cost"))
+            .setLocDesc(x -> "")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+                x.minus_is_good = true;
             })
             .build();
 
@@ -914,6 +928,7 @@ public class Stats implements ExileRegistryInit {
                 x.base = 0;
                 x.min = -75;
                 x.max = 300;
+                x.minus_is_good = true;
             })
             .build();
 

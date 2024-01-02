@@ -434,6 +434,8 @@ public class EntityData implements ICap, INeededForClient {
         event.calculateEffects();
 
         if (event.data.getNumber() > resources.getEnergy()) {
+            data.setCanceled(true);
+            data.setAmount(0);
             return;
         }
 
@@ -636,6 +638,8 @@ public class EntityData implements ICap, INeededForClient {
             event.calculateEffects();
 
             if (event.data.getNumber() > resources.getEnergy()) {
+                data.setCanceled(true);
+                data.setAmount(0);
                 return;
             }
 

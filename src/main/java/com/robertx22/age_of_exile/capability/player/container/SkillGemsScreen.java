@@ -1,6 +1,8 @@
 package com.robertx22.age_of_exile.capability.player.container;
 
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -17,9 +19,15 @@ public class SkillGemsScreen extends AbstractContainerScreen<SkillGemsMenu> {
 
     }
 
+    int auraX = 0;
+    int auraY = 0;
+
     @Override
     protected void init() {
         super.init();
+
+        auraX = getGuiLeft() + 201;
+        auraY = getGuiTop() + 153;
 
         int x = getGuiLeft() + 16;
         int y = getGuiTop() + 16;
@@ -41,8 +49,10 @@ public class SkillGemsScreen extends AbstractContainerScreen<SkillGemsMenu> {
 
     @Override
     protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
-        //  pGuiGraphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, 4210752, false);
-        // pGuiGraphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, 4210752, false);
+
+        String left = "" + Load.player(minecraft.player).getSkillGemInventory().getRemainingSpirit(minecraft.player);
+
+        pGuiGraphics.drawString(this.font, left, 201, 153, ChatFormatting.LIGHT_PURPLE.getColor(), true);
     }
 
     @Override

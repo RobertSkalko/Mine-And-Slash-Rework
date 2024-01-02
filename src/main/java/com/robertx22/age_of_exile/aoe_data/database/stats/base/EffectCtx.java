@@ -27,7 +27,7 @@ public class EffectCtx extends AutoHashClass implements IGUID {
 
     @Override
     public int hashCode() {
-        return Objects.hash(resourcePath, id);
+        return Objects.hash(id);
     }
 
     public ExileEffectInstanceData getData(LivingEntity en) {

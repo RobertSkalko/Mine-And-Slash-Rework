@@ -19,6 +19,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 
 import java.util.function.Supplier;
 
+// todo make it easier for me to know which runes are rare, maybe something like A_RUNE_MYTHIC ?
 // todo add unused runes if datapacks want to "use" them
 public enum RuneType {
     YUN(100, "yun", "Yun", 4, 0.5F, () -> StatPerType.of()

@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.database.data.profession.stat.TripleDropChance
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.JewelSocketStat;
+import com.robertx22.age_of_exile.database.data.stats.types.MaxAllSpellLevels;
 import com.robertx22.age_of_exile.database.data.stats.types.MaxSpellLevel;
 import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.*;
@@ -65,6 +66,7 @@ public class StatsRegister implements ExileRegistryInit {
         List<Stat> generated = new ArrayList<Stat>() {
             {
                 {
+                    add(new MaxAllSpellLevels());
                     add(new MaxSpellLevel(SpellTags.area));
 
                     add(new SummonHealth());

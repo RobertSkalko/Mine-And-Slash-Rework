@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 public class AuraGem implements JsonExileRegistry<SupportGem>, ISkillGem, IAutoGson<AuraGem> {
 
-    public static AuraGem SERIALIZER = new AuraGem("", "", PlayStyle.STR, 0, Arrays.asList());
+    public static AuraGem SERIALIZER = new AuraGem(AuraGems.summon_dmg, PlayStyle.STR, 0, Arrays.asList());
 
     public String id = "";
 
@@ -34,9 +34,9 @@ public class AuraGem implements JsonExileRegistry<SupportGem>, ISkillGem, IAutoG
 
     transient String name;
 
-    public AuraGem(String id, String name, PlayStyle style, float reservation, List<StatMod> stats) {
-        this.id = id;
-        this.name = name + " Aura";
+    public AuraGem(AuraGems.AuraInfo info, PlayStyle style, float reservation, List<StatMod> stats) {
+        this.id = info.id;
+        this.name = info.name + " Aura";
         this.style = style;
         this.reservation = reservation;
         this.stats = stats;

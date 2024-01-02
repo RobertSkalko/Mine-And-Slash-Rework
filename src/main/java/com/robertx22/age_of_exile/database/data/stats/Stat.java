@@ -70,6 +70,7 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     public String format = ChatFormatting.AQUA.getName();
     public StatGroup group = StatGroup.Misc;
     private MultiUseType multiUseType = MultiUseType.MULTIPLY_STAT;
+    public boolean minus_is_good = false; // so stats like minus mana cost dont have nasty red tooltip
 
 
     public void setUsesMoreMultiplier() {

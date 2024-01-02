@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.SpellCastContext;
 import com.robertx22.age_of_exile.database.data.stats.types.LearnSpellStat;
+import com.robertx22.age_of_exile.database.data.stats.types.MaxAllSpellLevels;
 import com.robertx22.age_of_exile.database.data.stats.types.MaxSpellLevel;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
@@ -79,6 +80,10 @@ public class SpellCastingData {
                     if (spell.getSpell().config.tags.contains(max.tag)) {
                         spell.rank += x.getValue();
                     }
+                }
+            } else if (x.GetStat() instanceof MaxAllSpellLevels) {
+                for (InsertedSpell spell : this.spells) {
+                    spell.rank += x.getValue();
                 }
             }
         });
