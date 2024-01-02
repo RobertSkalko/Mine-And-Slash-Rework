@@ -53,7 +53,8 @@ public class GivePoints {
 
 
                 if (type.equals("talent")) {
-                    Load.player(player).talents.additional_points += num;
+
+                    Load.player(player).bonusTalents += num;
                     player.sendSystemMessage(Chats.AWARDED_TALENTS.locName(num));
                 }
             }
@@ -89,7 +90,7 @@ public class GivePoints {
                 Player player = (Player) en;
 
                 if (type.equals("talent")) {
-                    Load.player(player).talents.additional_points = 0;
+                    Load.player(player).bonusTalents = 0;
                 }
             }
 

@@ -25,8 +25,6 @@ public class TalentsData implements IStatCtx {
 
     SchoolData perks = new SchoolData();
 
-    public int additional_points = 0;
-
     public int reset_points = 5;
 
 
@@ -44,8 +42,10 @@ public class TalentsData implements IStatCtx {
 
         num -= this.getAllocatedPoints(type);
 
-        num += MathHelper.clamp(additional_points, 0, ServerContainer.get().MAX_ADDITIONAL_TALENT_POINTS.get());
 
+        if (data.getEntity() instanceof Player p) {
+            num += MathHelper.clamp(Load.player(p).bonusTalents, 0, ServerContainer.get().MAX_ADDITIONAL_TALENT_POINTS.get());
+        }
         return num;
     }
 

@@ -32,8 +32,8 @@ public class BootsUniques implements ExileRegistryInit {
         UniqueGearBuilder.of("sparkfinder", "Sparkfinder", BaseGearTypes.LEATHER_BOOTS)
                 .stats(Arrays.asList(
                         GearDefense.getInstance().mod(25, 100).percent(),
-                        TreasureQuality.getInstance().mod(5, 25).percent(),
-                        new ElementalResist(Elements.Fire).mod(-100, 100).percent()
+                        TreasureQuality.getInstance().mod(5, 15).percent(),
+                        new ElementalResist(Elements.Fire).mod(-50, 75).percent()
                 ))
                 .build();
 

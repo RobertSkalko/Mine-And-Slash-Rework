@@ -93,7 +93,7 @@ public class JewelrySuffixes implements ExileRegistryInit {
 
         AffixBuilder.Normal("of_treasure")
                 .Named("Of Treasure")
-                .stats(new StatMod(5, 15F, TreasureQuality.getInstance(), ModType.FLAT))
+                .stats(new StatMod(3, 10F, TreasureQuality.getInstance(), ModType.FLAT))
                 .includesTags(SlotTags.jewelry_family)
                 .Suffix()
                 .Build();

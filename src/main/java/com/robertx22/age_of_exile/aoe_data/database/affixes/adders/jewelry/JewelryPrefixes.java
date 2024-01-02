@@ -15,7 +15,7 @@ public class JewelryPrefixes implements ExileRegistryInit {
 
         AffixBuilder.Normal("archeologists")
                 .Named("Archeologist's")
-                .stats(new StatMod(5, 15F, TreasureQuality.getInstance(), ModType.FLAT))
+                .stats(new StatMod(3, 8, TreasureQuality.getInstance(), ModType.FLAT))
                 .includesTags(SlotTags.jewelry_family)
                 .Prefix()
                 .Build();

@@ -73,6 +73,7 @@ public class PlayerData implements ICap {
     private static final String RESTED_XP = "rxp";
     private static final String NAME = "name";
     private static final String CHARACTERS = "chars";
+    private static final String BONUS_TALENTS = "btal";
 
     public transient Player player;
 
@@ -96,6 +97,8 @@ public class PlayerData implements ICap {
     public CharStorageData characters = new CharStorageData();
 
     public String name = "";
+
+    public int bonusTalents = 0;
 
     public PlayerData(Player player) {
         this.player = player;
@@ -130,6 +133,7 @@ public class PlayerData implements ICap {
         nbt.put(JEWELS, jewelsInv.createTag());
 
         nbt.putString(NAME, name);
+        nbt.putInt(BONUS_TALENTS, bonusTalents);
 
         return nbt;
     }
@@ -156,6 +160,7 @@ public class PlayerData implements ICap {
         jewelsInv.fromTag(nbt.getList(JEWELS, 10)); // todo
 
         this.name = nbt.getString(NAME);
+        this.bonusTalents = nbt.getInt(BONUS_TALENTS);
 
     }
 

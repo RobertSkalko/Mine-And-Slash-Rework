@@ -40,3 +40,4 @@ This made some spells extremely op, like greater multi projectile spells. Now th
 - added + spell level stat, spells can have +5 extra levels now with stats from mostly unique and runeword items
 - fixed mns letting vanilla dmg happen when at 0 energy
 - stats that are good in minus like -mana cost now no longer show as red on tooltip
+- magic find is now capped to 75% and sources are reduced
