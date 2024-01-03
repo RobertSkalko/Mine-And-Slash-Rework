@@ -16,7 +16,7 @@ import net.minecraft.world.level.Level;
 
 public class LevelUtils {
 
- 
+
     public static int getMaxTier() {
         return levelToTier(GameBalanceConfig.get().MAX_LEVEL);
     }
@@ -63,7 +63,7 @@ public class LevelUtils {
 
 
     public static int getBaseExpMobReward(int level) {
-        return 200 + scaleExpReward(4, level);
+        return 50 + scaleExpReward(4, level);
     }
 
     public static int scaleExpReward(int exp, int level) {

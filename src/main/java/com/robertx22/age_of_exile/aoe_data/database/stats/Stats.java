@@ -392,7 +392,7 @@ public class Stats implements ExileRegistryInit {
             //.worksWithEvent(DamageEvent.ID)
             .setPriority(100)
             .setSide(EffectSides.Source)
-            .setLocName(x -> "Max " + x.locname + " Leech Rate")
+            .setLocName(x -> x.locname + " Leech Cap")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
                 x.min = 0;

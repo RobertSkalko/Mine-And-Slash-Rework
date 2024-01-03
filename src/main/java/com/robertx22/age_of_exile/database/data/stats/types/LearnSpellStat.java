@@ -9,6 +9,7 @@ public class LearnSpellStat extends Stat {
 
     public LearnSpellStat(Spell spell) {
         this.spell = spell;
+        this.show_in_gui = false;
     }
 
     @Override

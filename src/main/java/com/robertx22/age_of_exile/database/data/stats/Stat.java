@@ -53,8 +53,6 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     }
 
 
-    public boolean show = true;
-
     // can't serialize
     public transient IStatEffect statEffect = null;
     public transient IStatCtxModifier statContextModifier;
@@ -71,6 +69,7 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     public StatGroup group = StatGroup.Misc;
     private MultiUseType multiUseType = MultiUseType.MULTIPLY_STAT;
     public boolean minus_is_good = false; // so stats like minus mana cost dont have nasty red tooltip
+    public boolean show_in_gui = true;
 
 
     public void setUsesMoreMultiplier() {

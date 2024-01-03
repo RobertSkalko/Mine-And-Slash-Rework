@@ -1,11 +1,14 @@
 package com.robertx22.age_of_exile.aoe_data.database.runewords;
 
+import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.gear_slots.GearSlots;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.ResourceAndAttack;
 import com.robertx22.age_of_exile.database.data.aura.AuraGems;
 import com.robertx22.age_of_exile.database.data.stats.types.MaxAllSpellLevels;
 import com.robertx22.age_of_exile.database.data.stats.types.MaxSpellLevel;
+import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
+import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.gear_base.GearDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.gear_base.GearDefense;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalPenetration;
@@ -28,6 +31,17 @@ public class Runewords implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
+
+        RunewordBuilder.of("plague", "Plague",
+                Arrays.asList(
+                        GearDamage.getInstance().mod(50, 150).percent(),
+                        new MaxAllSpellLevels().mod(1, 2),
+                        new AilmentChance(Ailments.BLEED).mod(5, 15),
+                        new AilmentDamage(Ailments.POISON).mod(10, 15),
+                        new ElementalPenetration(Elements.Chaos).mod(10, 25)
+                ),
+                Arrays.asList(RuneType.VEN, RuneType.ANO, RuneType.ITA, RuneType.XER, RuneType.HAR),
+                GearSlots.BOW, GearSlots.STAFF);
 
         RunewordBuilder.of("flickering_flame", "Flickering Flame",
                 Arrays.asList(

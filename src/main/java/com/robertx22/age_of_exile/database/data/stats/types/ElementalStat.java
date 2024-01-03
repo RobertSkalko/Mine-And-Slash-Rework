@@ -18,7 +18,7 @@ public abstract class ElementalStat extends Stat implements IElementalGenerated<
     public ElementalStat(Elements element) {
         this.element = element;
 
-        this.show = element != Elements.Elemental;
+        this.show_in_gui = element != Elements.Elemental;
 
         if (getElement() != null) {
             this.format = getElement().format.getName();

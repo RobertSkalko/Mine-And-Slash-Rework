@@ -5,3 +5,4 @@ the_novice
 bramble
 cure
 flickering_flame
+plague
