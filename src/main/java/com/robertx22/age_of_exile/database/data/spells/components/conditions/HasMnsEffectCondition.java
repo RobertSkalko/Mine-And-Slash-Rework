@@ -21,7 +21,7 @@ public class HasMnsEffectCondition extends EffectCondition {
         ExileEffect potion = data.getExileEffect();
         int stacks = data.getOrDefault(MapField.EFFECT_STACKS, 1D).intValue();
         var d = Load.Unit(ctx.target).getStatusEffectsData();
-        return d.has(potion) && d.get(potion).stacks > stacks;
+        return d.has(potion) && d.get(potion).stacks >= stacks;
     }
 
     public MapHolder create(EffectCtx effect) {

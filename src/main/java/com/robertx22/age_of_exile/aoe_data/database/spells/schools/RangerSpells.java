@@ -58,7 +58,7 @@ public class RangerSpells implements ExileRegistryInit {
 
         SpellBuilder.of(ARROW_TOTEM, PlayStyle.DEX, SpellConfiguration.Builder.instant(25, 10)
                                 .setChargesAndRegen("arrow_totem", 3, 20 * 30)
-                                .applyCastSpeedToCooldown(), "Arrow Totem",
+                        , "Arrow Totem",
                         Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.totem, SpellTags.PHYSICAL))
 
                 .manualDesc("Summons a totem that rapidly shoots arrows, dealing " + SpellCalcs.ARROW_TOTEM.getLocDmgTooltip(Elements.Physical))

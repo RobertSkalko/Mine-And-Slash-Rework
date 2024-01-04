@@ -32,6 +32,8 @@ public class Runewords implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
+        // todo turn this into an actual builder so editing later doesnt become a pain
+
         RunewordBuilder.of("plague", "Plague",
                 Arrays.asList(
                         GearDamage.getInstance().mod(50, 150).percent(),

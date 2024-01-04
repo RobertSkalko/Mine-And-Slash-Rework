@@ -44,8 +44,7 @@ public class WaterSpells implements ExileRegistryInit {
 
 
         SpellBuilder.of(FROZEN_ORB, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 30)
-                                .setSwingArm()
-                                .applyCastSpeedToCooldown(), "Frozen orb",
+                                .setSwingArm(), "Frozen orb",
                         Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.area, SpellTags.COLD))
                 .manualDesc(
                         "Throw out an orb of ice which slowly moves towards enemies and deals " + SpellCalcs.ICEBALL.getLocDmgTooltip()

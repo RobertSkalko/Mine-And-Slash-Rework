@@ -60,8 +60,9 @@ import java.util.function.Consumer;
 @Mod(SlashRef.MODID)
 public class MMORPG {
 
+  
     // DISABLE WHEN PUBLIC BUILD
-    public static boolean RUN_DEV_TOOLS = true;
+    public static boolean RUN_DEV_TOOLS = false;
 
     public static boolean combatLogEnabled() {
         return false; // todo, should this be a client config and have server send packets ?
