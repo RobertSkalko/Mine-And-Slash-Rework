@@ -118,7 +118,7 @@ public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered 
             for (ExactStatData stat : buff.getStats(lvl, power.perc)) {
                 preList.addAll(stat.GetTooltipString(new TooltipInfo()));
             }
-            List<Component> finalList = new TooltipStatsAligner(preList).buildNewTooltipsStats();
+            List<Component> finalList = new TooltipStatsAligner(preList, false).buildNewTooltipsStats();
             list.addAll(finalList);
 
 

@@ -6,6 +6,7 @@ import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 
 import java.util.*;
@@ -108,9 +109,9 @@ public class TooltipStatsAligner {
 
         //put any post-post edit logic in here.
         LinkedList<Component> compList = new LinkedList<>(mapWithIndex.values());
-
         ListIterator<Component> iterator = compList.listIterator();
-
+        MutableComponent emptyLine = ExileText.emptyLine().get();
+        // place empty lines.
         while (iterator.hasNext()) {
             int index = iterator.nextIndex();
 
@@ -118,10 +119,11 @@ public class TooltipStatsAligner {
                 String previousLine = iterator.hasPrevious() ? compList.get(index - 1).getString() : "";
                 String nextLine = compList.get(index + 1).getString();
 
-                if (!previousLine.isEmpty()) iterator.add(Component.literal(""));
-                iterator.next(); // Move the iterator to the next position
+                if (!previousLine.isEmpty()) iterator.add(emptyLine);
 
-                if (!nextLine.isEmpty()) iterator.add(Component.literal(""));
+                iterator.next();
+
+                if (!nextLine.isEmpty()) iterator.add(emptyLine);
 
             } else {
                 iterator.next();
@@ -129,7 +131,7 @@ public class TooltipStatsAligner {
         }
         if (addEmptyLine && !compList.get(iterator.previousIndex()).getString().equals("")) {
             if (compList.size() > 1) {
-                compList.addLast(Component.literal(""));
+                compList.addLast(emptyLine);
             }
         }
 

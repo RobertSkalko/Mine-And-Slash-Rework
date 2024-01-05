@@ -251,16 +251,16 @@ public class TooltipUtils {
         String[] originalList = comp.getString().split("\n");
 
         for (String comp1 : originalList) {
-            componentList.add(Component.literal(comp1).withStyle(format));
+            componentList.add(ExileText.ofText(comp1).get().withStyle(format));
         }
         return componentList;
     }
 
 
 
-    public static MutableComponent getMutabletags(Iterator<?> iterator, MutableComponent separator) {
+    public static MutableComponent getMutableTags(Iterator<?> iterator, MutableComponent separator) {
         if (separator == null) {
-            separator = Component.literal("");
+            separator = ExileText.emptyLine().get();
         }
 
         ExileText Etext = ExileText.emptyLine();
