@@ -137,7 +137,7 @@ public class ProfessionBlockEntity extends BlockEntity {
             ModErrors.print(e);
         }
 
-        this.setChanged(); // todo will this cause any problems to have it perma on?
+        //    this.setChanged(); // todo will this cause any problems to have it perma on?
     }
 
     public boolean hasAtLeastOneFreeOutputSlot() {
@@ -154,8 +154,6 @@ public class ProfessionBlockEntity extends BlockEntity {
     public ExplainedResult tryRecipe(Player p, boolean justCheck) {
 
 
-        int ownerLvl = Load.player(p).professions.getLevel(getProfession().GUID());
-
         var recipe = getCurrentRecipe(level);
 
         if (recipe == null) {
@@ -164,6 +162,7 @@ public class ProfessionBlockEntity extends BlockEntity {
         if (!hasAtLeastOneFreeOutputSlot()) {
             return ExplainedResult.failure(Chats.PROF_OUTPUT_SLOT_NOT_EMPTY.locName());
         }
+        int ownerLvl = Load.player(p).professions.getLevel(getProfession().GUID());
         if (recipe.getLevelRequirement() > ownerLvl) {
             return ExplainedResult.failure(Chats.PROF_RECIPE_LEVEL_NOT_ENOUGH.locName());
         }
@@ -203,6 +202,8 @@ public class ProfessionBlockEntity extends BlockEntity {
 
 
         recipe.spendMaterials(getMats());
+
+        this.setChanged();
         return ExplainedResult.success();
 
     }
@@ -249,6 +250,8 @@ public class ProfessionBlockEntity extends BlockEntity {
 
                         stack.shrink(1);
 
+                        this.setChanged();
+
                         return ExplainedResult.success();
                     }
                 }
@@ -271,7 +274,6 @@ public class ProfessionBlockEntity extends BlockEntity {
 
     public List<ItemStack> getMats() {
         return inventory.getAllStacks(INPUTS);
-
     }
 
     public ProfessionRecipe getCurrentRecipe(Level level) {

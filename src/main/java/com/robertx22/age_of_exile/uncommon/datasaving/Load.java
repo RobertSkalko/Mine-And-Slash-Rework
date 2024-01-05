@@ -19,13 +19,11 @@ public class Load {
 
 
     public static EntityData Unit(Entity entity) {
-        return entity.getCapability(EntityData.INSTANCE)
-                .orElse(new EntityData((LivingEntity) entity));
+        return entity.getCapability(EntityData.INSTANCE).orElse(new EntityData((LivingEntity) entity));
     }
 
     public static PlayerData player(Player player) {
-        return player.getCapability(PlayerData.INSTANCE)
-                .orElse(null);
+        return player.getCapability(PlayerData.INSTANCE).orElse(new PlayerData(player));
     }
 
     public static PlayerBackpackData backpacks(Player player) {

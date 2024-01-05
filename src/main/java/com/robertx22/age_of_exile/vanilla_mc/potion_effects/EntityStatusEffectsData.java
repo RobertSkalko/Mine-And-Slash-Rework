@@ -25,6 +25,8 @@ public class EntityStatusEffectsData {
             return;
         }
 
+        exileMap.entrySet().removeIf(x -> !ExileDB.ExileEffects().isRegistered(x.getKey()));
+
         for (Map.Entry<String, ExileEffectInstanceData> e : exileMap.entrySet()) {
             e.getValue().ticks_left--;
             ExileEffect eff = ExileDB.ExileEffects().get(e.getKey());
@@ -81,7 +83,9 @@ public class EntityStatusEffectsData {
 
         for (Map.Entry<String, ExileEffectInstanceData> e : exileMap.entrySet()) {
             ExileEffect eff = ExileDB.ExileEffects().get(e.getKey());
-            stats.addAll(eff.getExactStats(e.getValue().getCaster(en.level()), e.getValue()));
+            if (eff != null) {
+                stats.addAll(eff.getExactStats(e.getValue().getCaster(en.level()), e.getValue()));
+            }
         }
 
         return new EffectStatCtx(stats);

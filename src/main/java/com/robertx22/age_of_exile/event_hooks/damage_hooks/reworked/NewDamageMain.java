@@ -13,7 +13,6 @@ public class NewDamageMain {
         ExileEvents.DAMAGE_BEFORE_CALC.register(new OnNonPlayerDamageEntityEvent());
         ExileEvents.DAMAGE_BEFORE_CALC.register(new OnPlayerDamageEntityEvent());
 
-
         ExileEvents.DAMAGE_AFTER_CALC.register(new EventConsumer<>() {
             @Override
             public void accept(ExileEvents.OnDamageEntity event) {

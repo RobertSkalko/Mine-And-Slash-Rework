@@ -15,11 +15,15 @@ public class DataPackStatAccessor<T> {
     private HashMap<T, String> map = new HashMap<>();
     private HashMap<T, Stat> map2 = new HashMap<>();
 
+    public boolean has(T key) {
+        return map.containsKey(key);
+    }
+
     public Stat get(T key) {
         Stat stat;
 
         if (!ExileDB.Stats()
-            .isRegistered(getId(key))) {
+                .isRegistered(getId(key))) {
             stat = map2.get(key);
             if (stat == null) {
                 throw new RuntimeException(key.toString() + " is null");
@@ -28,7 +32,7 @@ public class DataPackStatAccessor<T> {
         }
 
         stat = ExileDB.Stats()
-            .get(map.get(key));
+                .get(map.get(key));
         Objects.requireNonNull(stat, "Null for " + key.toString());
         return stat;
     }
@@ -49,16 +53,16 @@ public class DataPackStatAccessor<T> {
     public List<Stat> getAll() {
 
         if (ExileDB.Stats()
-            .isRegistered(map2.values()
-                .stream()
-                .findFirst()
-                .get())) {
+                .isRegistered(map2.values()
+                        .stream()
+                        .findFirst()
+                        .get())) {
 
             return map.values()
-                .stream()
-                .map(x -> ExileDB.Stats()
-                    .get(x))
-                .collect(Collectors.toList());
+                    .stream()
+                    .map(x -> ExileDB.Stats()
+                            .get(x))
+                    .collect(Collectors.toList());
         }
         // if in dev environment, just use the data gen ones
         return new ArrayList<>(map2.values());

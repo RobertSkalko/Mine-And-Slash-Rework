@@ -29,8 +29,8 @@ public class GiveExp {
     private static int run(Player player, int exp) {
 
         try {
-            Load.Unit(player)
-                    .GiveExp(player, exp);
+            Load.Unit(player).GiveExp(player, exp);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

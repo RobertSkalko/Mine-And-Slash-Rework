@@ -231,15 +231,15 @@ public class TalentsData implements IStatCtx {
 
         HashMap<PointData, Perk> map = getAllAllocatedPerks();
 
-        int lvl = Load.Unit(en)
-                .getLevel();
+        int lvl = Load.Unit(en).getLevel();
+
+        List<ExactStatData> stats = new ArrayList<>();
 
         map.forEach((key, value) -> {
-            List<ExactStatData> stats = new ArrayList<>();
             value.stats.forEach(s -> stats.add(s.toExactStat(lvl)));
-            ctx.add(new TalentStatCtx(key, value, stats));
-
         });
+
+        ctx.add(new TalentStatCtx(stats));
 
         return ctx;
     }

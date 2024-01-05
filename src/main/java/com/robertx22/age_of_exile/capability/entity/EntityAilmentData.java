@@ -138,44 +138,47 @@ public class EntityAilmentData {
 
 
         if (en.tickCount % 20 == 0) {
-       
-            UUID id = null;
-            try {
 
-                if (!idCache.containsKey(lastAttacker)) {
-                    idCache.put(lastAttacker, UUID.fromString(lastAttacker));
-                }
-                id = idCache.get(lastAttacker);
-
-            } catch (Exception e) {
-                //throw new RuntimeException(e);
-            }
-
-            if (id != null) {
-                LivingEntity caster = en.level().getPlayerByUUID(id);
-
-
-                if (caster != null) {
-                    for (Map.Entry<String, List<DotData>> e : dotMap.entrySet()) {
-                        float dmg = 0;
-
-                        for (DotData d : e.getValue()) {
-                            dmg += d.dmg;
-                        }
-
-                        // todo why is this sometimes 0?
-                        if (dmg > 1) {
-                            Ailment ailment = ExileDB.Ailments().get(e.getKey());
-                            // todo will probably have to tweak this
-                            EventBuilder.ofDamage(caster, en, dmg).setupDamage(AttackType.dot, WeaponTypes.none, PlayStyle.INT).set(x -> {
-                                        x.setElement(ailment.element);
-                                        x.setisAilmentDamage(ailment);
-                                    }).build()
-                                    .Activate();
+            if (!this.dotMap.isEmpty()) {
+                UUID id = null;
+                try {
+                    if (!idCache.containsKey(lastAttacker)) {
+                        if (!lastAttacker.isEmpty()) {
+                            idCache.put(lastAttacker, UUID.fromString(lastAttacker));
                         }
                     }
+                    id = idCache.get(lastAttacker);
+
+                } catch (Exception e) {
+                    //throw new RuntimeException(e);
                 }
 
+                if (id != null) {
+                    LivingEntity caster = en.level().getPlayerByUUID(id);
+
+
+                    if (caster != null) {
+                        for (Map.Entry<String, List<DotData>> e : dotMap.entrySet()) {
+                            float dmg = 0;
+
+                            for (DotData d : e.getValue()) {
+                                dmg += d.dmg;
+                            }
+
+                            // todo why is this sometimes 0?
+                            if (dmg > 1) {
+                                Ailment ailment = ExileDB.Ailments().get(e.getKey());
+                                // todo will probably have to tweak this
+                                EventBuilder.ofDamage(caster, en, dmg).setupDamage(AttackType.dot, WeaponTypes.none, PlayStyle.INT).set(x -> {
+                                            x.setElement(ailment.element);
+                                            x.setisAilmentDamage(ailment);
+                                        }).build()
+                                        .Activate();
+                            }
+                        }
+                    }
+
+                }
             }
         }
 

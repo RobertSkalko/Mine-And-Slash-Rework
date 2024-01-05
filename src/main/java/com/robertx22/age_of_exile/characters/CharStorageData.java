@@ -55,6 +55,9 @@ public class CharStorageData {
         if (getAllCharacters().stream().anyMatch(x -> x.name.equals(name))) {
             return;
         }
+        if (name.length() > 20) {
+            return;
+        }
         int amount = getAllCharacters().size();
 
         if (amount < ServerContainer.get().MAX_CHARACTERS.get()) {

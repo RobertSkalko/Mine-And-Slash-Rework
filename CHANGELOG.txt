@@ -76,3 +76,11 @@ This made some spells extremely op, like greater multi projectile spells. Now th
 
 v5.3.10
 - small bugfix for caster has and has mns effect datapack
+
+v.5.3.11
+- more fixes
+v.5.3.12
+- more fixes
+v.5.3.13
+- more fixes
+- slight perf improvements

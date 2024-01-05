@@ -74,6 +74,7 @@ public class OnKeyPress {
             if (number > -1) {
                 // todo make sure its not lagging servers
                 Packets.sendToServer(new TellServerToCastSpellPacket(number));
+                cooldown = 2;
             }
         }
     }

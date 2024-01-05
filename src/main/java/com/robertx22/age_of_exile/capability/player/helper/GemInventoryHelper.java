@@ -140,11 +140,14 @@ public class GemInventoryHelper {
 
             float cost = aura.getAura().reservation * 100F;
 
-            // todo need better ways, this one is equals based on instance, so its never true lol
-            var stat = Stats.SPECIFIC_AURA_COST.get(new AuraGems.AuraInfo(aura.getAura()));
-            if (data.getCalculatedStat(stat).isNotZero()) {
-                float multi = data.getCalculatedStat(stat).getMultiplier();
-                cost *= multi;
+            var info = new AuraGems.AuraInfo(aura.getAura());
+            if (Stats.SPECIFIC_AURA_COST.has(info)) {
+                // todo need better ways, this one is equals based on instance, so its never true lol
+                var stat = Stats.SPECIFIC_AURA_COST.get(info);
+                if (data.getCalculatedStat(stat).isNotZero()) {
+                    float multi = data.getCalculatedStat(stat).getMultiplier();
+                    cost *= multi;
+                }
             }
 
             res += cost;
