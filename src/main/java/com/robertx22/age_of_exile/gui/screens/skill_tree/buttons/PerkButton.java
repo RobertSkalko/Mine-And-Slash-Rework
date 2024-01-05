@@ -1,10 +1,12 @@
 package com.robertx22.age_of_exile.gui.screens.skill_tree.buttons;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.robertx22.age_of_exile.capability.player.PlayerData;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.perks.PerkStatus;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
+import com.robertx22.age_of_exile.gui.CustomGui;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.SkillTreeScreen;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.PointData;
@@ -168,7 +170,7 @@ public class PerkButton extends ImageButton {
                 .anyMatch(item -> item.getStat().translate().toLowerCase().contains(search.toLowerCase()));
 
 
-        float opacity = containsSearchStat || search.isEmpty() ? 1F : 0.2f;
+        float opacity = containsSearchStat || search.isEmpty() ? 1F : 0.2F;
 
         if (!search.isEmpty()) {
             if (search.equals("all")) {
@@ -187,21 +189,19 @@ public class PerkButton extends ImageButton {
 
         int offcolor = (int) ((perk.getType().height - 20) / 2F);
 
-        gui.setColor(1.0F, 1.0F, 1.0F, opacity);
-        gui.blit(perk.getType().getColorTexture(status), xPos(offcolor, posMulti), yPos(offcolor, posMulti), 20, 20, 0, 0, 20, 20, 20, 20);
-        gui.blit(perk.getType().getBorderTexture(status), xPos(0, posMulti), yPos(0, posMulti), 0, 0, this.width, this.height, this.width, this.height);
+        PoseStack pose = gui.pose();
+
+        CustomGui.blit(perk.getType().getColorTexture(status), xPos(offcolor, posMulti), yPos(offcolor, posMulti), 20, 20, 0, 0, 20, 20, 20, 20, opacity, pose);
+        CustomGui.blit(perk.getType().getBorderTexture(status), xPos(0, posMulti), yPos(0, posMulti), 0, 0, this.width, this.height, this.width, this.height, opacity, pose);
 
         if (search.isEmpty()) {
             opacity += 0.2F;
         }
 
-        gui.setColor(1.0F, 1.0F, 1.0F, MathHelper.clamp(opacity, 0, 1));
-
-        gui.blit(perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti), 0, 0, 16, 16, 16, 16);
+        CustomGui.blit(perk.getIcon(), xPos(offset, posMulti), yPos(offset, posMulti), 0, 0, 16, 16, 16, 16, MathHelper.clamp(opacity, 0, 1), pose);
 
 
         gui.pose().scale(1F / scale, 1F / scale, 1F / scale);
-        gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 
         gui.pose().popPose();
 
