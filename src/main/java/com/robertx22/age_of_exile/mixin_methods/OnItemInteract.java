@@ -95,7 +95,6 @@ public class OnItemInteract {
                     } else {
                         if (stack.getItem() instanceof CraftedSoulItem) {
                             stack.getOrCreateTag().putString("force_tag", force.tag);
-
                             success = true;
                             cursor.shrink(1);
                         }

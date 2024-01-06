@@ -81,6 +81,13 @@ public abstract class StatNameRegex {
 
         String v1s = NumberUtils.formatForTooltip(v1);
 
+        // todo rewrite this ENTIRE GODDAMN THING
+        if (!ctx.showNumber) {
+            v1s = "";
+            plusminus = "";
+            perc = "";
+        }
+
         if (stat.is_long) {
             String txt = CLOC.translate(stat.locName());
 

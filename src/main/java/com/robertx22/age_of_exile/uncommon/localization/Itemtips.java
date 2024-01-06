@@ -36,7 +36,7 @@ public enum Itemtips implements IAutoLocName {
     SOUL_STONE_TIP("Right click to produce a common gear soul."),
     UNIQUE_JEWEL_USE("Right click to create"),
     TP_BACK_ITEM("Right click to return from the Map\nExits the Map Dimension."),
-    RUNE_ITEM_USAGE("All Runewords are shown in the Wiki.\nUse to view craftable Runewords."),
+    RUNE_ITEM_USAGE("Use on Gear with sockets to Insert\nIf same rune is already socketed, rerolls it\n\nAll Runewords are shown in the Wiki.\nUse to view craftable Runewords."),
     STONE_REPAIRE_DURABILITY("Repairs %1$s durability."),
     SOUL_CLEANER_USAGE_AND_WARNING("Click on items to remove their soul.\nThe item remains but the stats will be deleted."),
     SOCKET_EXTRACTOR_USAGE("Click on gear to extract a gem."),

@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 import com.robertx22.age_of_exile.loot.blueprints.ItemBlueprint;
 import com.robertx22.age_of_exile.loot.blueprints.MapBlueprint;
+import com.robertx22.age_of_exile.loot.blueprints.SkillGemBlueprint;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class GearRarityPart extends BlueprintPart<GearRarity, ItemBlueprint> {
     public float chanceForHigherRarity = 0;
 
     public boolean canRollUnique = false;
+
 
     public GearRarityPart(ItemBlueprint blueprint) {
         super(blueprint);
@@ -33,7 +35,14 @@ public class GearRarityPart extends BlueprintPart<GearRarity, ItemBlueprint> {
         }
     }
 
+    // todo clean this up
     public List<GearRarity> getPossibleRarities() {
+
+        // todo fix this better
+        if (blueprint instanceof SkillGemBlueprint) {
+            return ExileDB.GearRarities().getFiltered(x -> this.blueprint.info.level >= x.min_lvl && !x.is_unique_item && x.getLowerRarity().isPresent() || x.hasHigherRarity());
+        }
+
         if (this.blueprint instanceof MapBlueprint) {
             // for maps, we drop rarity and tier close to the map tier it dropped in.
             // so if you do common maps you can get uncommon, but not rare.

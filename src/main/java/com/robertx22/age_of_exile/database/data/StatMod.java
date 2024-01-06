@@ -3,9 +3,12 @@ package com.robertx22.age_of_exile.database.data;
 import com.google.gson.JsonObject;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.name_regex.StatNameRegex;
+import com.robertx22.age_of_exile.database.data.stats.tooltips.StatTooltipType;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
+import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.registry.serialization.ISerializable;
@@ -82,6 +85,7 @@ public class StatMod implements ISerializable<StatMod> {
     }
 
     public MutableComponent getRangeToShow(int lvl) {
+
 
         int fmin = (int) min;
         int fmax = (int) max;
@@ -165,14 +169,19 @@ public class StatMod implements ISerializable<StatMod> {
                     StatNameRegex.JUST_NAME.translate(ChatFormatting.GREEN, null, getModType(), min, GetStat())
             ).get());
         }
+        var c = new TooltipStatWithContext(new TooltipStatInfo(this.ToExactStat(100, lvl), 100, new TooltipInfo()), this, lvl);
+        c.showNumber = false;
+        c.disablestatranges = true;
+        
+        Component add = StatTooltipType.NORMAL.impl.getTooltipList(null, c).get(0);
 
-        Component txt = getRangeToShow(lvl).append(" ")
-                .append(GetStat().locName());
+        Component txt = getRangeToShow(lvl).append(" ").append(add);
+
 
         list.add(txt);
 
         var info = new TooltipInfo();
-        if(info.shouldShowDescriptions()) {
+        if (info.shouldShowDescriptions()) {
             list.addAll(GetStat().getCutDescTooltip());
         }
 

@@ -59,7 +59,7 @@ public class Stats implements ExileRegistryInit {
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.EFFECT_HAS_TAG.get(x))
             .addEffect(e -> StatEffects.INCREASE_EFFECT_DURATION)
-            .setLocName(x -> x.locNameLangFileGUID() + " Effect Duration")
+            .setLocName(x -> x.locNameForLangFile() + " Effect Duration")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
@@ -358,7 +358,7 @@ public class Stats implements ExileRegistryInit {
             .setSide(EffectSides.Source)
             .addEffect(e -> StatEffects.LEECH_RESTORE_RESOURCE_BASED_ON_STAT_DATA.get(e))
             .setLocName(x -> x.locname + " on Kill")
-            .setLocDesc(x -> "")
+            .setLocDesc(x -> "Leeches resource every time you kill an enemy. This is capped as all other leech")
             .modifyAfterDone(x -> {
                 x.min = 0;
                 x.is_perc = false;
@@ -1222,7 +1222,7 @@ public class Stats implements ExileRegistryInit {
             .addCondition(x -> StatConditions.EFFECT_HAS_TAG.get(x))
             .addEffect(e -> StatEffects.INCREASE_VALUE)
             .setLocName(x -> x.locNameForLangFile() + " Effect Strength")
-            .setLocDesc(x -> "")
+            .setLocDesc(x -> "Increases the stat strength of effects you give")
             .modifyAfterDone(x -> {
                 //  x.is_long = true;
                 x.is_perc = true;
@@ -1239,7 +1239,7 @@ public class Stats implements ExileRegistryInit {
             .addCondition(x -> StatConditions.EFFECT_HAS_TAG.get(x))
             .addEffect(e -> StatEffects.INCREASE_VALUE)
             .setLocName(x -> Stat.VAL1 + "% to effectiveness of " + x.locNameForLangFile() + " buffs on you")
-            .setLocDesc(x -> "")
+            .setLocDesc(x -> "Increases the stat strength of effects you receive")
             .modifyAfterDone(x -> {
                 x.is_long = true;
                 x.is_perc = true;

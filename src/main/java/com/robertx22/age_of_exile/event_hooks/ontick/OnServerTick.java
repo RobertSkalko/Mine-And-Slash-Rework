@@ -36,7 +36,7 @@ public class OnServerTick {
 
                 Load.player(player).favor.onSecond(player);
 
-             
+
                 if (Load.Unit(player)
                         .getResources()
                         .getEnergy() < Load.Unit(player)
@@ -86,25 +86,21 @@ public class OnServerTick {
                         .build();
                 msevent.Activate();
 
-                boolean restored = false;
 
                 boolean canHeal = player.getFoodData()
                         .getFoodLevel() >= 1;
 
                 if (canHeal) {
                     if (player.getHealth() < player.getMaxHealth()) {
-                        restored = true;
+
+                        RestoreResourceEvent hpevent = EventBuilder.ofRestore(player, player, ResourceType.health, RestoreType.regen, 0)
+                                .build();
+                        hpevent.Activate();
                     }
 
-                    RestoreResourceEvent hpevent = EventBuilder.ofRestore(player, player, ResourceType.health, RestoreType.regen, 0)
-                            .build();
-                    hpevent.Activate();
 
-
-                    if (restored) {
-                        unitdata.syncToClient(player);
-                    }
                 }
+                unitdata.syncToClient(player);
 
             }
         }));

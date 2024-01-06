@@ -160,7 +160,11 @@ public class PlayerData implements ICap {
         jewelsInv.fromTag(nbt.getList(JEWELS, 10)); // todo
 
         this.name = nbt.getString(NAME);
+
         this.bonusTalents = nbt.getInt(BONUS_TALENTS);
+        if (bonusTalents < 0) {
+            bonusTalents = 0;
+        }
 
     }
 

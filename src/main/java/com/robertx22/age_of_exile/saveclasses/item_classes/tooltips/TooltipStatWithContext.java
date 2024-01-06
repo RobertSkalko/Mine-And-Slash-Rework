@@ -10,10 +10,11 @@ import java.util.List;
 public class TooltipStatWithContext implements ITooltipList {
 
     public TooltipStatInfo statinfo;
-    public
-    StatMod mod;
-    public
-    Integer level;
+    public StatMod mod;
+    public Integer level;
+
+    public boolean showNumber = true;
+    public boolean disablestatranges = false;
 
     public TooltipStatWithContext(TooltipStatInfo statinfo, StatMod mod, Integer level) {
         this.statinfo = statinfo;
@@ -27,6 +28,9 @@ public class TooltipStatWithContext implements ITooltipList {
     }
 
     public boolean showStatRanges() {
+        if (disablestatranges) {
+            return false;
+        }
         if (statinfo.useInDepthStats()) {
             if (mod != null) {
                 if (level != null) {

@@ -106,7 +106,7 @@ public abstract class BaseRarity implements Rarity {
 
     public void setRunewordFields() {
         this.guid = IRarity.RUNEWORD_ID;
-        this.loc_name = "Rune Word";
+        this.loc_name = "Runed";
         this.text_format = ChatFormatting.YELLOW.name();
         onSetFields();
     }

@@ -84,3 +84,5 @@ v.5.3.12
 v.5.3.13
 - more fixes
 - slight perf improvements
+v.5.3.14
+- should fix effect tooltips 

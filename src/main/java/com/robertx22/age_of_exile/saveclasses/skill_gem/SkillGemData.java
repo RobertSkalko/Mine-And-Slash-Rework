@@ -226,7 +226,7 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
             list.add(ExileText.emptyLine().get());
 
-            list.add(Itemtips.AURA_RESERVATION.locName().append(aura.reservation * 100 + ""));
+            list.add(Itemtips.AURA_RESERVATION.locName().append((int) (aura.reservation * 100) + ""));
 
 
             int spiritLeft = (int) Load.player(p).getSkillGemInventory().getRemainingSpirit(p);

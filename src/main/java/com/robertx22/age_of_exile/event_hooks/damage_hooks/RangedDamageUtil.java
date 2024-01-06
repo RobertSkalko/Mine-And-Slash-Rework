@@ -17,8 +17,7 @@ public class RangedDamageUtil {
 
     public static boolean isValidAttack(AttackInformation event) {
 
-        if (!(event.getSource()
-                .getEntity() instanceof Player)) {
+        if (!(event.getSource().getEntity() instanceof Player)) {
             return true;
         }
         LivingEntity en = (LivingEntity) event.getSource()
@@ -28,10 +27,8 @@ public class RangedDamageUtil {
         GearItemData gear = StackSaving.GEARS.loadFrom(en.getMainHandItem());
 
 
-        if (gear != null && gear.GetBaseGearType()
-                .weaponType().isProjectile) {
-            if (!VALID_PROJECTILE_NAMES.stream()
-                    .anyMatch(x -> source.getMsgId().contains(x))) {
+        if (gear != null && gear.GetBaseGearType().weaponType().isProjectile) {
+            if (!VALID_PROJECTILE_NAMES.stream().anyMatch(x -> source.getMsgId().contains(x))) {
                 return false; // if a ranged weapon's damage entity isn't an arrow or similar, don't do damage
             }
         } else {

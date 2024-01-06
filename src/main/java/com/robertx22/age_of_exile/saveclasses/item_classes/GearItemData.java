@@ -406,9 +406,8 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     public List<ItemStack> getSalvageResult(ItemStack stack) {
 
         if (!data.get(KEYS.SALVAGING_DISABLED)) {
-
             int amount = 1;
-            return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(getRarity().GUID()).get(), amount));
+            return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.getOrDefault(getRarity().GUID(), RarityItems.RARITY_STONE.get(IRarity.COMMON_ID)).get(), amount));
         }
 
         return Arrays.asList(ItemStack.EMPTY);
