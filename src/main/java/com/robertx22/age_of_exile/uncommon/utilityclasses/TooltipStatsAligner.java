@@ -2,48 +2,33 @@ package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.stats.name_regex.StatNameRegex;
+import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-
-/*
-    here is the detail of this aligner:                            this space is from the translate() in StatNameRegex.java, so they are all same.
-                                                                     ⬆
-        +3    Strength           Calc the max width           +3   |   Strength            add some black dot to      +3...|   Strength
-        +30%    Fire Damage     -------------------->         +30% |   Fire Damage         -------------------->      +30%.|   Fire Damage
-        +0.5%    Health                                       +0.5%|   Health               fill the space            +0.5%|   Health
-
-        This aligner can only work properly when every single Stat string is given, otherwise it can't calculate the right width needed for alignment.
-
- */
 public class TooltipStatsAligner {
-    List<String> list = new ArrayList<>();
-    List<Integer> width = new ArrayList<>();
-    List<Integer> addTime = new ArrayList<>();
-
+    List<Component> list = new ArrayList<>();
     Boolean addEmptyLine = true;
-
-
     List<Component> original = new ArrayList<>();
 
-
-    // Constructor that takes a list of Components and extracts their string representations
     public TooltipStatsAligner(List<Component> listInput) {
-        // Extract strings from Components and add them to the internal list
-        listInput.forEach(x -> list.add(x.getString()));
+        list.addAll(listInput);
 
         this.original = listInput;
     }
 
     public TooltipStatsAligner(List<Component> listInput, Boolean addEmptyLine) {
-        // Extract strings from Components and add them to the internal list
-        listInput.forEach(x -> list.add(x.getString()));
+        list.addAll(listInput);
 
         this.original = listInput;
 
@@ -52,100 +37,104 @@ public class TooltipStatsAligner {
 
 
     // Build new tooltips
-    //This method manipulate the stats part in tooltips as a whole, then Iterate it to get info with keeping the same tooltips order.
+    //This method manipulate the stats part in tooltips as a whole.
     public List<Component> buildNewTooltipsStats() {
 
         if (!ClientConfigs.getConfig().ALIGN_STAT_TOOLTIPS.get()) {
             return original;
         }
+        Minecraft mc = Minecraft.getInstance();
+        // Create a Matcher for finding patterns in the stats, this patterns will match the value, like +3, -20%.
+                /*
+                    this regex make sure the stat pattern is like:
+                        (something not spaces here, and must start from the beginning of line)(two spaces here, or sth, anyway it is from the StatNameRegex.java)(something not spaces here)
+                    that means whether you use:
+                    +3    Strength  or  Strength:    +3
+                    they will be all good.
+                */
+        Pattern matcherForValue = Pattern.compile("^([^◆\\s]+)" + StatNameRegex.VALUEAndNAMESeparator + "(.+)");
+        //add this to find smth match (+/-)(a figure), basically the stats value
+        Pattern deepmatcher = Pattern.compile("([\\+\\-][0-9])");
+        Function<String, Function<Pattern, Matcher>> getMatcherFunction =
+                str -> pattern -> pattern.matcher(str);
 
-        // List to store the modified strings
-        List<String> mediaStatsList = new ArrayList<>();
-        List<Component> finalStatsList = new ArrayList<>();
+        LinkedHashMap<Integer, Component> mapWithIndex;
+        //wrap the list into a map, map key is value's index, map value is the value.
+        mapWithIndex = IntStream.range(0, list.size())
+                .boxed()
+                .collect(Collectors.toMap(
+                        integer -> integer,
+                        integer -> list.get(integer),
+                        (existing, replacement) -> existing,
+                        LinkedHashMap::new
+                ));
 
-        // Iterate over the internal list of Stats
-        for (String x : list) {
-            Minecraft mc = Minecraft.getInstance();
-            // Create a Matcher for finding patterns in the stats, this patterns will match the value, like +3, -20%.
-            /*
-                this regex make sure the stat pattern is like:
-                    (something not spaces here, and must start from the beginning of line)(two spaces here, or sth, anyway it is from the StatNameRegex.java)(something not spaces here)
-                that means whether you use:
-                +3    Strength  or  Strength:    +3
-                they will be all good.
-            */
-            Matcher matcherForValue = Pattern.compile("^([^◆\\s]+)" + StatNameRegex.VALUEAndNAMESeparator + "(\\S+)").matcher(x);
-            //add this to fine smth match (+/-)(a figure), basically the stats value
-            Matcher deepmatcher = Pattern.compile("([\\+\\-][0-9])").matcher(x);
-            Matcher matcherForStatDesc = Pattern.compile("^ (\\[)").matcher(x);
+        final int[] maxWidth = {0};
+        Map<Integer, Component> targetMap = new HashMap<>();
 
-            //that's so weird that the stat desc will lose its Format. I have to add for it at here.
-            if (matcherForStatDesc.find()) {
-                mediaStatsList.add(ChatFormatting.BLUE + matcherForStatDesc.replaceFirst("$1"));
-                continue;
-            }
+        mapWithIndex.entrySet().stream()
+                //take all stats
+                .filter(x -> matcherForValue.asPredicate().test(x.getValue().getString()))
+                .filter(x -> deepmatcher.asPredicate().test(x.getValue().getString()))
+                .forEach(x -> {
+                    //calc all target line's width, take the max.
+                    Matcher matcher = getMatcherFunction.apply(x.getValue().getString()).apply(matcherForValue);
+                    matcher.find();
+                    String matchedValue = matcher.group(1);
+                    int width = mc.font.width(matchedValue);
+                    maxWidth[0] = Math.max(maxWidth[0], width);
+                    targetMap.put(x.getKey(), x.getValue());
+                });
 
-            // Check if a pattern is found in the string
-            if (matcherForValue.find() && deepmatcher.find()) {
-                // Retrieve the value part
-                String matchText = matcherForValue.group(1);
 
-                // Calculate the width of the value text using Minecraft's font
-                this.width.add(mc.font.width(matchText));
+        Map<Integer, Component> onlyContainTargetMap = new HashMap<>(targetMap);
+        onlyContainTargetMap.entrySet()
+                .forEach(x -> {
+                    var currentComp = x.getValue();
+                    Matcher matcher = getMatcherFunction.apply(x.getValue().getString()).apply(matcherForValue);
+                    matcher.find();
+                    String gearValue = matcher.group(1);
+                    int width = mc.font.width(gearValue);
+                    Style style = currentComp.getStyle();
+                    String dotNeed = ".".repeat((maxWidth[0] - width) / 2);
+                    String lastPart = StatNameRegex.VALUEAndNAMESeparator + matcher.group(2);
+                    Component wholeComponent = ExileText.ofText(gearValue)
+                            .append(ExileText.ofText(dotNeed).format(ChatFormatting.BLACK).get())
+                            .append(lastPart)
+                            .get()
+                            .withStyle(style);
+                    x.setValue(wholeComponent);
+                });
+        mapWithIndex.putAll(onlyContainTargetMap);
 
-                // Replace the first occurrence of the pattern with a placeholder.
-                //no need to add formatter here.
-                mediaStatsList.add(Pattern.compile("^([^◆\\s]+)").matcher(x).replaceFirst("$1replacement_seg"));
+        //put any post-post edit logic in here.
+        LinkedList<Component> compList = new LinkedList<>(mapWithIndex.values());
+        ListIterator<Component> iterator = compList.listIterator();
+        MutableComponent emptyLine = ExileText.emptyLine().get();
+        // place empty lines.
+        while (iterator.hasNext()) {
+            int index = iterator.nextIndex();
+
+            if (getMatcherFunction.apply(compList.get(index).getString()).apply(Pattern.compile("◆ ")).find()) {
+                String previousLine = iterator.hasPrevious() ? compList.get(index - 1).getString() : "";
+                String nextLine = compList.get(index + 1).getString();
+
+                if (!previousLine.isEmpty()) iterator.add(emptyLine);
+
+                iterator.next();
+
+                if (!nextLine.isEmpty()) iterator.add(emptyLine);
+
             } else {
-                mediaStatsList.add(x);
-            }
-            //ClientOnly.printInChat(Component.literal(x));
-
-        }
-        //I found that the black "." nobody can notice and absolutely is a good icon to align the different value.
-        // In this part, I calculate the number of increments for each width, I just need to add some black dot to make every value equal in width
-        addTime = TooltipUtils.incrementArray(width);
-
-        // List to store the final modified Components
-
-        // Iterate over the modified strings and corresponding increment counts
-        for (int i = 0, j = 0; i < addTime.size() && j < mediaStatsList.size(); j++) {
-            String currentStat = mediaStatsList.get(j);
-            int currentAddTime = addTime.get(i);
-
-            if (currentStat.equals("")) continue;
-
-            if (Pattern.compile("replacement_seg").matcher(currentStat).find()) {
-                // Generate a string to replace the placeholder, based on the increment count
-                String stringUsedToReplace = ChatFormatting.BLACK + ".".repeat(currentAddTime) + ChatFormatting.RESET;
-                // Replace the placeholder with the generated string and create a new Component
-                String replacedStats = currentStat.replace("replacement_seg", stringUsedToReplace);
-                mediaStatsList.set(j, replacedStats);
-                i++;
-            }
-            //just add empty line for special stat, both up and down.
-            if (Pattern.compile("◆ ").matcher(currentStat).find()) {
-                int index = j;
-                String previousLine = (index > 0) ? mediaStatsList.get(index - 1) : "";
-                String nextLine = (index < mediaStatsList.size() - 1) ? mediaStatsList.get(index + 1) : "";
-                if (!previousLine.isEmpty()) {
-                    mediaStatsList.add(index, "");
-                    index++;
-                }
-
-                if (!nextLine.isEmpty()) {
-                    mediaStatsList.add(index + 1, "");
-                }
-            }
-
-        }
-        if (!mediaStatsList.isEmpty() && addEmptyLine) {// not empty, sometime it will.
-            if (!mediaStatsList.get(mediaStatsList.size() - 1).equals("")) {// check if the last line is empty line, if it is then dont add
-                if (mediaStatsList.size() > 1)
-                    mediaStatsList.add("");// if there is only one stat in mediaStatsList, like most of the talents, just dont add, cuz it will be so weird.
+                iterator.next();
             }
         }
-        mediaStatsList.forEach(x -> finalStatsList.add(Component.literal(x)));
-        return finalStatsList;
+        if (addEmptyLine && !compList.get(iterator.previousIndex()).getString().equals("")) {
+            if (compList.size() > 1) {
+                compList.addLast(emptyLine);
+            }
+        }
+
+        return compList;
     }
 }

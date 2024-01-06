@@ -79,7 +79,7 @@ public class StringUTIL {
         return buf.toString();
     }
 
-    public static String[] processStrings(String... strings) {
+    public static String[] joinWithoutEmpty(String... strings) {
         List<String> dynamicArray = new ArrayList<>();
 
         for (String str : strings) {
