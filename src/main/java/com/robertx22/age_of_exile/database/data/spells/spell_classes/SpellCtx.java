@@ -59,8 +59,6 @@ public class SpellCtx {
         this.calculatedSpellData = calculatedSpellData;
         this.world = caster.level();
         this.activation = act;
-
-
     }
 
     public static SpellCtx onCast(LivingEntity caster, CalculatedSpellData data) {

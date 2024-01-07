@@ -67,6 +67,7 @@ fireball
 explosive_arrow
 charge
 heart_of_ice
+blizzard
 curse_of_agony
 frost_trap
 fire_trap

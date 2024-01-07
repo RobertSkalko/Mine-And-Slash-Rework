@@ -7,7 +7,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.actions.AggroA
 import com.robertx22.age_of_exile.database.data.spells.components.actions.ExileEffectAction.GiveOrTake;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.PositionSource;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SummonProjectileAction;
-import com.robertx22.age_of_exile.database.data.spells.components.actions.vanity.ParticleInRadiusAction;
+import com.robertx22.age_of_exile.database.data.spells.components.actions.vanity.ParticleShape;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -133,13 +133,13 @@ public class MapHolder {
         return SetAdd.valueOf(get(MapField.SET_ADD));
     }
 
-    public ParticleInRadiusAction.Shape getParticleShape() {
+    public ParticleShape getParticleShape() {
         String str = get(MapField.PARTICLE_SHAPE);
 
         if (str != null && !str.isEmpty()) {
-            return ParticleInRadiusAction.Shape.valueOf(str);
+            return ParticleShape.valueOf(str);
         } else {
-            return ParticleInRadiusAction.Shape.CIRCLE;
+            return ParticleShape.CIRCLE;
         }
     }
 

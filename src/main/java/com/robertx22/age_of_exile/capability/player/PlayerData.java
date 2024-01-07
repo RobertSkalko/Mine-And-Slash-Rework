@@ -22,7 +22,6 @@ import com.robertx22.library_of_exile.packets.SyncPlayerCapToClient;
 import com.robertx22.library_of_exile.utils.LoadSave;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -69,7 +68,7 @@ public class PlayerData implements ICap {
             syncedRecently = true;
         } else {
             if (MMORPG.RUN_DEV_TOOLS) {
-                player.sendSystemMessage(Component.literal("skipped syncing PLAYER data because synced recently"));
+                //player.sendSystemMessage(Component.literal("skipped syncing PLAYER data because synced recently"));
             }
         }
     }

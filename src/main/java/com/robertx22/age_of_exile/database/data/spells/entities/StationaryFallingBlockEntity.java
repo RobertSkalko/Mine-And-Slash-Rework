@@ -118,11 +118,12 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
         try {
 
 
-            this.getSpellData()
-                    .getSpell()
-                    .getAttached()
-                    .tryActivate(getScoreboardName(), SpellCtx.onTick(getSpellData().getCaster(level()), this, getSpellData()));
-            
+            if (!level().isClientSide) {
+                this.getSpellData()
+                        .getSpell()
+                        .getAttached()
+                        .tryActivate(getScoreboardName(), SpellCtx.onTick(getSpellData().getCaster(level()), this, getSpellData()));
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -140,6 +140,7 @@ public class PerkButton extends ImageButton {
             return;
         }
 
+
         gui.pose().pushPose();
 
         float scale = 2 - screen.zoom;
@@ -160,6 +161,7 @@ public class PerkButton extends ImageButton {
         int offset = perk.getType().getOffset();
 
         // background
+
         RenderSystem.enableDepthTest();
 
         var search = SkillTreeScreen.SEARCH.getValue();
@@ -182,7 +184,7 @@ public class PerkButton extends ImageButton {
         } else {
             opacity = status.getOpacity();
         }
-        
+
         // if newbie, show only the starter perks he can pick
         if (playerData.talents.getAllocatedPoints(TalentTree.SchoolType.TALENTS) < 1) {
             opacity = this.perk.getType() == Perk.PerkType.START ? 1 : 0.2F;

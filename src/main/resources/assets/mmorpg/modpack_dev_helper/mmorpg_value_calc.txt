@@ -52,6 +52,7 @@ flower_flower
 charge
 heart_of_ice
 poison_arrow
+blizzard
 direct_arrow_hit
 flame_strike
 meteor

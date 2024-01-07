@@ -54,7 +54,6 @@ import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -482,7 +481,7 @@ public class EntityData implements ICap, INeededForClient {
             syncedRecently = true;
         } else {
             if (MMORPG.RUN_DEV_TOOLS) {
-                player.sendSystemMessage(Component.literal("skipped syncing entity data because synced recently"));
+                //  player.sendSystemMessage(Component.literal("skipped syncing entity data because synced recently"));
             }
         }
     }

@@ -4,8 +4,10 @@ import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffe
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
+import com.robertx22.age_of_exile.aoe_data.database.spells.builders.ParticleBuilder;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
+import com.robertx22.age_of_exile.database.data.spells.components.actions.vanity.ParticleShape;
 import com.robertx22.age_of_exile.database.data.spells.components.conditions.EffectCondition;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
@@ -36,12 +38,41 @@ public class WaterSpells implements ExileRegistryInit {
     public static String ICY_WEAPON = "ice_weapon";
     public static String CHILLING_FIELD = "chilling_field";
     public static String ICE_COMET = "ice_comet";
+    public static String BLIZZARD = "blizzard";
 
     public static String FROST_FLOWER = "frost_flower";
 
     @Override
     public void registerAll() {
 
+        SpellBuilder.of(BLIZZARD, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(25, 20 * 25, 20),
+                        "Blizzard",
+                        Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.COLD, SpellTags.PHYSICAL)
+                )
+                .manualDesc("Create a Cloud that sends cold waves, damaging enemies for " + SpellCalcs.BLIZZARD.getLocDmgTooltip(Elements.Cold)
+                        + " and for same amount of Physical Damage if the targets are Bone-Chilled.")
+                .weaponReq(CastingWeapon.MAGE_WEAPON)
+                .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
+
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 0D)))
+
+                .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(Blocks.AIR, 20D * 8)
+                        .put(MapField.ENTITY_NAME, "cloud")
+                        .put(MapField.BLOCK_FALL_SPEED, 0D)
+                        .put(MapField.FIND_NEAREST_SURFACE, false)
+                        .put(MapField.IS_BLOCK_FALLING, false)))
+
+
+                // todo..
+
+                .onTick("cloud", ParticleBuilder.of(ParticleTypes.SNOWFLAKE, 3f).shape(ParticleShape.CIRCLE_2D).amount(100).randomY(0.5F).height(6).build())
+                .onTick("cloud", ParticleBuilder.of(ParticleTypes.ITEM_SNOWBALL, 3f).shape(ParticleShape.CIRCLE_2D).amount(50).randomY(0.5F).height(6).build())
+
+
+                .onTick("cloud", PartBuilder.damageInAoe(SpellCalcs.BLIZZARD, Elements.Cold, 3D).tickRequirement(20D).disableKnockback())
+                .onTick("cloud", PartBuilder.damageInAoeIfBoneChilled(SpellCalcs.BLIZZARD, Elements.Physical, 3D).tickRequirement(20D).disableKnockback())
+
+                .build();
 
         SpellBuilder.of(FROZEN_ORB, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 30)
                                 .setSwingArm(), "Frozen orb",
@@ -94,6 +125,7 @@ public class WaterSpells implements ExileRegistryInit {
 
                 .levelReq(20)
                 .build();
+
 
         SpellBuilder.of(ICE_COMET, PlayStyle.INT, SpellConfiguration.Builder.instant(18, 20).setChargesAndRegen(ICE_COMET, 3, 20 * 20),
                         "Ice Comet",

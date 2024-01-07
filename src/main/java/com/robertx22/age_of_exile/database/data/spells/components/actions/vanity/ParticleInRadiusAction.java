@@ -21,11 +21,6 @@ import static com.robertx22.age_of_exile.database.data.spells.map_fields.MapFiel
 
 public class ParticleInRadiusAction extends SpellAction {
 
-    public enum Shape {
-        CIRCLE, CIRCLE_EDGE, CIRCLE_2D, CIRCLE_2D_EDGE;
-
-    }
-
     public ParticleInRadiusAction() {
         super(Arrays.asList(PARTICLE_TYPE, RADIUS, PARTICLE_COUNT));
     }
@@ -35,7 +30,7 @@ public class ParticleInRadiusAction extends SpellAction {
 
         if (!ctx.world.isClientSide) {
 
-            Shape shape = data.getParticleShape();
+            ParticleShape shape = data.getParticleShape();
 
             SimpleParticleType particle = data.getParticle();
 
@@ -77,16 +72,16 @@ public class ParticleInRadiusAction extends SpellAction {
                 MyPosition sp = null;
                 float yRandom = (int) RandomUtils.RandomRange(0, yrand);
 
-                if (shape == Shape.CIRCLE) {
+                if (shape == ParticleShape.CIRCLE) {
                     sp = new MyPosition(new Circle3d(new MyPosition(pos), finalRadius).getRandomPos());
                 }
-                if (shape == Shape.CIRCLE_EDGE) {
+                if (shape == ParticleShape.CIRCLE_EDGE) {
                     sp = new MyPosition(new Circle3d(new MyPosition(pos), finalRadius).getRandomEdgePos());
                 }
-                if (shape == Shape.CIRCLE_2D) {
+                if (shape == ParticleShape.CIRCLE_2D) {
                     sp = new MyPosition(new Circle2d(new MyPosition(pos), finalRadius).getRandomPos());
                 }
-                if (shape == Shape.CIRCLE_2D_EDGE) {
+                if (shape == ParticleShape.CIRCLE_2D_EDGE) {
                     sp = new MyPosition(new Circle2d(new MyPosition(pos), finalRadius).getEdgePos(x.multi));
                 }
 

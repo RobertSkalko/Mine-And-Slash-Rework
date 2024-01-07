@@ -278,34 +278,38 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
             list.add(Words.CASTED_TIMES_CHANNEL.locName(config.times_to_cast).withStyle(ChatFormatting.RED));
         }
 
-        if (Screen.hasShiftDown()) {
+        boolean showeffect = Screen.hasShiftDown();
 
-            Set<ExileEffect> effect = new HashSet<>();
 
-            if (ExileDB.ExileEffects()
-                    .isRegistered(effect_tip)) {
-                effect.add(ExileDB.ExileEffects()
-                        .get(effect_tip));
-            }
+        Set<ExileEffect> effect = new HashSet<>();
 
-            try {
-                this.getAttached()
-                        .getAllComponents()
-                        .forEach(x -> {
-                            x.acts.forEach(a -> {
-                                if (a.has(MapField.EXILE_POTION_ID)) {
-                                    effect.add(a.getExileEffect());
-                                }
-                            });
+        if (ExileDB.ExileEffects().isRegistered(effect_tip)) {
+            effect.add(ExileDB.ExileEffects().get(effect_tip));
+        }
+
+        try {
+            this.getAttached()
+                    .getAllComponents()
+                    .forEach(x -> {
+                        x.acts.forEach(a -> {
+                            if (a.has(MapField.EXILE_POTION_ID)) {
+                                effect.add(a.getExileEffect());
+                            }
                         });
-            } catch (Exception e) {
-                e.printStackTrace();
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            if (showeffect) {
+                effect.forEach(x -> list.addAll(x.GetTooltipString(info)));
+            } else {
+                if (!effect.isEmpty()) {
+                    list.add(Words.SHIFT_TO_SHOW_EFFECT.locName());
+                }
             }
-            try {
-                effect.forEach(x -> list.addAll(x.GetTooltipString(info, ctx.calcData)));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
 

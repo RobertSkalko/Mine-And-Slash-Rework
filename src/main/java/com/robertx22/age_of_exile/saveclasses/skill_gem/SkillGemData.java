@@ -19,6 +19,7 @@ import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
+import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.library_of_exile.wrappers.ExileText;
@@ -158,7 +159,14 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
     private MutableComponent stars(Player p) {
 
-        return Gui.AVAILABLE_SUPPORT_SLOTS.locName(GameBalanceConfig.get().getTotalLinks(links, p)).withStyle(ChatFormatting.DARK_PURPLE);
+        int slots = GameBalanceConfig.get().getTotalLinks(links, p);
+
+        var text = Gui.AVAILABLE_SUPPORT_SLOTS.locName(slots).withStyle(ChatFormatting.DARK_PURPLE);
+
+        if (links > slots) {
+            text = text.append(Words.CAPPED_BECAUSE_PLAYER_LEVEL.locName());
+        }
+        return text;
 
     }
 

@@ -13,9 +13,6 @@ import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
-import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect.Priority;
-
 public class BonusAttackDamage extends ElementalStat {
 
     @Override
@@ -55,16 +52,12 @@ public class BonusAttackDamage extends ElementalStat {
 
     @Override
     public String locNameForLangFile() {
-        if (element.equals(Elements.Elemental)) {
-            return getElement().name() + "Attack Damage";
-        } else {
-            return getElement().dmgName + " Damage";
-        }
+        return getElement().dmgName + " DMG on Basic ATK";
     }
 
     @Override
     public String locDescForLangFile() {
-        return "Adds x element damage on weapon hit";
+        return "Adds x element damage on basic attacks only";
     }
 
     @Override

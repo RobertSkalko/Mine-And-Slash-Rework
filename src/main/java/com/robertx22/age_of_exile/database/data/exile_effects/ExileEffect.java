@@ -4,7 +4,6 @@ import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.spells.components.AttachedSpell;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
-import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.value_calc.LeveledValue;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
@@ -154,7 +153,7 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
 
     }
 
-    public List<Component> GetTooltipString(TooltipInfo info, CalculatedSpellData data) {
+    public List<Component> GetTooltipString(TooltipInfo info) {
         List<Component> list = new ArrayList<>();
 
         list.add(Words.STATUS_EFFECT.locName().append(": ").append(this.locName())

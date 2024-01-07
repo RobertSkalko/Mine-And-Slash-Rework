@@ -28,6 +28,7 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
                 .add(WaterSpells.ICE_COMET, new PointData(3, 3))
                 .add(WaterSpells.FROZEN_ORB, new PointData(3, 4))
                 .add(SummonSpells.SUMMON_COLD_GOLEM, new PointData(3, 5))
+                .add(WaterSpells.BLIZZARD, new PointData(3, 6))
 
                 .add(WaterSpells.HEART_OF_ICE, new PointData(5, 2))
                 .add(IntSpells.TELEPORT, new PointData(5, 3))

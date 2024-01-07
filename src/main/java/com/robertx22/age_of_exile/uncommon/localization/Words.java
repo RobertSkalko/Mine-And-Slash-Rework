@@ -10,8 +10,11 @@ public enum Words implements IAutoLocName {
     LOAD("Load"),
     MOD_NAME("Mine and Slash"),
     TAGS("Tags: "),
+    CAPPED_BECAUSE_PLAYER_LEVEL(" - Capped due to Player Level Too Low"),
     IMPLICIT_STATS("Implicit Stats: "),
     ON_SLOTS("Slots: "),
+    SHIFT_TO_SHOW_EFFECT("Shift to Show Status Effect info."),
+    ONLY_SHOW_ALLOCATED("Only Show Allocated Talents, Toggle ON/OFF"),
 
     SPELL_STATS("Spell Stats:"),
     CASTED_TIMES_CHANNEL("Casted %1$s times during channel."),

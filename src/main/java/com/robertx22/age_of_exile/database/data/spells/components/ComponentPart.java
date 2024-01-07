@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.database.data.spells.components;
 
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.components.conditions.EffectCondition;
-import com.robertx22.age_of_exile.database.data.spells.components.entity_predicates.SpellEntityPredicate;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.BaseTargetSelector;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
@@ -97,6 +96,9 @@ public class ComponentPart {
 
     public void tryActivate(SpellCtx ctx) {
 
+        if (ctx.world.isClientSide) {
+            return;
+        }
         for (MapHolder part : ifs) {
             EffectCondition condition = EffectCondition.MAP.get(part.type);
             if (!condition.canActivate(ctx, part)) {
@@ -110,13 +112,15 @@ public class ComponentPart {
             BaseTargetSelector selector = BaseTargetSelector.MAP.get(part.type);
             List<LivingEntity> selected = selector.get(ctx, ctx.caster, ctx.target, ctx.getPos(), part);
 
+
             for (MapHolder entityPredicate : en_preds) {
-                SpellEntityPredicate pred = SpellEntityPredicate.MAP.get(entityPredicate.type);
+                EffectCondition pred = EffectCondition.MAP.get(entityPredicate.type);
 
                 if (pred != null) {
-                    selected = selected.stream()
-                            .filter(x -> pred.is(ctx, x, entityPredicate))
-                            .collect(Collectors.toList());
+                    selected = selected.stream().filter(targetEntity -> {
+                        SpellCtx chainedCtx = SpellCtx.onEntityHit(ctx, targetEntity);
+                        return pred.canActivate(chainedCtx, entityPredicate);
+                    }).collect(Collectors.toList());
                 }
             }
             list.addAll(selected);

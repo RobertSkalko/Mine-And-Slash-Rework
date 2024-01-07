@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.saveclasses.jewel.JewelItemData;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -63,6 +64,7 @@ public class JewelInvHelper implements IStatCtx {
 
                 }
                 if (total > max) {
+                    p.sendSystemMessage(Chats.YOU_LACK_JEWEL_SLOTS.locName());
                     unequip(p, i);
                 }
             } else {

@@ -8,6 +8,7 @@ import java.util.Locale;
 public enum Chats implements IAutoLocName {
     CHARACTER_LOAD_INFO("CLICK to Load this Character\n\nCharacter Feature saves:\n- Your level and exp\n- Your spells, stats, talents, hotbar setup\n\nIt does not save your gear, gems jewels etc.\n\nEach Character starts from Level 1"),
     NO_DUPLICATE_AURA("You can't equip duplicate aura gems."),
+    YOU_LACK_JEWEL_SLOTS("You lack jewel slots! You gain these typically from the Talent tree. You can use the search bar in the Talents screen to find them."),
     LACK_AURA_CAPACITY("You lack the aura capacity to equip all these auras."),
 
     CANT_EQUIP_THAT_MANY_SUPPORTS("You can't equip that many Support Gems! You can increase the number of slots by leveling the skill."),

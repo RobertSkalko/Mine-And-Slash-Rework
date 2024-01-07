@@ -352,6 +352,7 @@ total_damage_big
 chaos4
 chaos3
 chaos2
+blizzard
 chaos1
 hp_dodge_big
 p_totem_cdr

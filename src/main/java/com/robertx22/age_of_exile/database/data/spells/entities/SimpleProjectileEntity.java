@@ -173,11 +173,13 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
 
             tryMoveTowardsEnemies();
 
-            this.getSpellData()
-                    .getSpell()
-                    .getAttached()
-                    .tryActivate(getScoreboardName(), SpellCtx.onTick(getCaster(), this, getSpellData()));
+            if (!level().isClientSide) {
+                this.getSpellData()
+                        .getSpell()
+                        .getAttached()
+                        .tryActivate(getScoreboardName(), SpellCtx.onTick(getCaster(), this, getSpellData()));
 
+            }
         }
     }
 
@@ -187,10 +189,12 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
         LivingEntity caster = getCaster();
 
         if (caster != null) {
-            this.getSpellData()
-                    .getSpell()
-                    .getAttached()
-                    .tryActivate(getScoreboardName(), SpellCtx.onExpire(caster, this, getSpellData()));
+            if (!level().isClientSide) {
+                this.getSpellData()
+                        .getSpell()
+                        .getAttached()
+                        .tryActivate(getScoreboardName(), SpellCtx.onExpire(caster, this, getSpellData()));
+            }
         }
 
         super.remove(r);
@@ -350,10 +354,12 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
             if (caster != null) {
                 if (!Load.Unit(caster)
                         .alreadyHit(this, en)) {
-                    this.getSpellData()
-                            .getSpell()
-                            .getAttached()
-                            .tryActivate(getScoreboardName(), SpellCtx.onHit(caster, this, en, getSpellData()));
+                    if (!level().isClientSide) {
+                        this.getSpellData()
+                                .getSpell()
+                                .getAttached()
+                                .tryActivate(getScoreboardName(), SpellCtx.onHit(caster, this, en, getSpellData()));
+                    }
                 }
             }
 

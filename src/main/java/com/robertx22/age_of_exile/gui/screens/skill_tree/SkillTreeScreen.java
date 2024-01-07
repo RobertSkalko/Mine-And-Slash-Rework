@@ -234,6 +234,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
             refreshButtons();
 
+       
             goToCenter();
         } catch (Exception e) {
             e.printStackTrace();

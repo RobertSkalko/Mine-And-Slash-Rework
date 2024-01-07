@@ -65,6 +65,11 @@ public class AllocateClassPointPacket extends MyPacket<AllocateClassPointPacket>
         if (data.canLearn(ctx.getPlayer(), school, perk)) {
             data.learn(perk, school);
         }
+
+        Load.Unit(ctx.getPlayer()).setEquipsChanged();
+        Load.Unit(ctx.getPlayer()).tryRecalculateStats();
+
+
         Load.player(ctx.getPlayer()).syncToClient(ctx.getPlayer());
 
     }

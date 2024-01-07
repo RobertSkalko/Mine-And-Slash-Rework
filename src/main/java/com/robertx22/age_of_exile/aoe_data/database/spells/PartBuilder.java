@@ -7,10 +7,9 @@ import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.AggroAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.ExileEffectAction.GiveOrTake;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
-import com.robertx22.age_of_exile.database.data.spells.components.actions.vanity.ParticleInRadiusAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.vanity.ParticleMotion;
+import com.robertx22.age_of_exile.database.data.spells.components.actions.vanity.ParticleShape;
 import com.robertx22.age_of_exile.database.data.spells.components.conditions.EffectCondition;
-import com.robertx22.age_of_exile.database.data.spells.components.entity_predicates.HasEffect;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.BaseTargetSelector;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
@@ -79,13 +78,23 @@ public class PartBuilder {
         ComponentPart c = new ComponentPart();
         c.acts.add(SpellAction.DEAL_DAMAGE.create(calc, ele));
         c.targets.add(BaseTargetSelector.AOE.create(radius, EntityFinder.SelectionType.RADIUS, AllyOrEnemy.enemies));
+
         return c;
     }
 
     public static ComponentPart damageInAoeIfCharmed(ValueCalculation calc, Elements ele, Double radius) {
         ComponentPart c = new ComponentPart();
+
         c.acts.add(SpellAction.DEAL_DAMAGE.create(calc, ele));
-        c.en_preds.add(HasEffect.HAS_EFFECT.create(ModEffects.CHARM));
+        c.en_preds.add(EffectCondition.HAS_MNS_EFFECT.create(ModEffects.CHARM)); // todo this doesnt work
+        c.targets.add(BaseTargetSelector.AOE.create(radius, EntityFinder.SelectionType.RADIUS, AllyOrEnemy.enemies));
+        return c;
+    }
+
+    public static ComponentPart damageInAoeIfBoneChilled(ValueCalculation calc, Elements ele, Double radius) {
+        ComponentPart c = new ComponentPart();
+        c.acts.add(SpellAction.DEAL_DAMAGE.create(calc, ele));
+        c.en_preds.add(EffectCondition.HAS_MNS_EFFECT.create(ModEffects.BONE_CHILL)); // todo this doesnt work
         c.targets.add(BaseTargetSelector.AOE.create(radius, EntityFinder.SelectionType.RADIUS, AllyOrEnemy.enemies));
         return c;
     }
@@ -213,7 +222,7 @@ public class PartBuilder {
     public static ComponentPart cloudParticles(SimpleParticleType particle, Double count, Double radius, Double randomY) {
         ComponentPart c = new ComponentPart();
         c.acts.add(SpellAction.PARTICLES_IN_RADIUS.create(particle, count, radius)
-                .put(MapField.PARTICLE_SHAPE, ParticleInRadiusAction.Shape.CIRCLE_2D.name())
+                .put(MapField.PARTICLE_SHAPE, ParticleShape.CIRCLE_2D.name())
                 .put(MapField.Y_RANDOM, randomY));
         return c;
     }
@@ -242,7 +251,7 @@ public class PartBuilder {
         public static Particle builder(SimpleParticleType particle, Double count, Double radius) {
             Particle p = new Particle();
             p.map = SpellAction.PARTICLES_IN_RADIUS.create(particle, count, radius);
-            p.map.put(MapField.PARTICLE_SHAPE, ParticleInRadiusAction.Shape.CIRCLE.name());
+            p.map.put(MapField.PARTICLE_SHAPE, ParticleShape.CIRCLE.name());
             return p;
         }
 
@@ -262,30 +271,30 @@ public class PartBuilder {
     public static ComponentPart nova(SimpleParticleType particle, Double count, Double radius, Double motionMulti) {
         ComponentPart c = new ComponentPart();
         c.acts.add(SpellAction.PARTICLES_IN_RADIUS.create(particle, count, radius)
-                .put(MapField.PARTICLE_SHAPE, ParticleInRadiusAction.Shape.CIRCLE_2D.name())
+                .put(MapField.PARTICLE_SHAPE, ParticleShape.CIRCLE_2D.name())
                 .put(MapField.Y_RANDOM, 0.2D)
                 .put(MapField.HEIGHT, 0.5D)
                 .put(MapField.MOTION, ParticleMotion.OutwardMotion.name())
                 .put(MapField.MOTION_MULTI, motionMulti)
-                .put(MapField.PARTICLE_SHAPE, ParticleInRadiusAction.Shape.CIRCLE_2D_EDGE.name()));
+                .put(MapField.PARTICLE_SHAPE, ParticleShape.CIRCLE_2D_EDGE.name()));
         return c;
     }
 
     public static ComponentPart groundEdgeParticles(SimpleParticleType particle, Double count, Double radius, Double randomY, ParticleMotion motion) {
         ComponentPart c = new ComponentPart();
         c.acts.add(SpellAction.PARTICLES_IN_RADIUS.create(particle, count, radius)
-                .put(MapField.PARTICLE_SHAPE, ParticleInRadiusAction.Shape.CIRCLE_2D.name())
+                .put(MapField.PARTICLE_SHAPE, ParticleShape.CIRCLE_2D.name())
                 .put(MapField.Y_RANDOM, randomY)
                 .put(MapField.HEIGHT, 0.5D)
                 .put(MapField.MOTION, motion.name())
-                .put(MapField.PARTICLE_SHAPE, ParticleInRadiusAction.Shape.CIRCLE_2D_EDGE.name()));
+                .put(MapField.PARTICLE_SHAPE, ParticleShape.CIRCLE_2D_EDGE.name()));
         return c;
     }
 
     public static ComponentPart groundParticles(SimpleParticleType particle, Double count, Double radius, Double randomY) {
         ComponentPart c = new ComponentPart();
         c.acts.add(SpellAction.PARTICLES_IN_RADIUS.create(particle, count, radius)
-                .put(MapField.PARTICLE_SHAPE, ParticleInRadiusAction.Shape.CIRCLE_2D.name())
+                .put(MapField.PARTICLE_SHAPE, ParticleShape.CIRCLE_2D.name())
                 .put(MapField.Y_RANDOM, randomY)
                 .put(MapField.HEIGHT, 0.5D));
         return c;
