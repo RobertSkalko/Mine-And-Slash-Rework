@@ -66,9 +66,10 @@ public class OnServerTick {
 
             if (player.isAlive()) {
 
-
                 EntityData unitdata = Load.Unit(player);
 
+                unitdata.syncedRecently = false;
+                Load.player(player).syncedRecently = false;
 
                 unitdata.tryRecalculateStats();
 
@@ -87,18 +88,14 @@ public class OnServerTick {
                 msevent.Activate();
 
 
-                boolean canHeal = player.getFoodData()
-                        .getFoodLevel() >= 1;
+                boolean canHeal = player.getFoodData().getFoodLevel() >= 1;
 
                 if (canHeal) {
                     if (player.getHealth() < player.getMaxHealth()) {
-
                         RestoreResourceEvent hpevent = EventBuilder.ofRestore(player, player, ResourceType.health, RestoreType.regen, 0)
                                 .build();
                         hpevent.Activate();
                     }
-
-
                 }
                 unitdata.syncToClient(player);
 
@@ -133,6 +130,8 @@ public class OnServerTick {
                 return;
             }
             Load.player(player).spellCastingData.onTimePass(player);
+
+            Load.Unit(player).didStatCalcThisTickForPlayer = false;
         }));
 
 

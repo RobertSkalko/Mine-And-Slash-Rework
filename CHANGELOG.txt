@@ -91,3 +91,5 @@ v.5.3.14
 - fix soul mod use on non armors
 - healing no longer causes threat
 - try optimize stat calc a biiiit
+- try optimize syncing to client a bit
+If you notice anything weird after update please say

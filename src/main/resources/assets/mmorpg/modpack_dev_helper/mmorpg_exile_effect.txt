@@ -6,8 +6,8 @@ petrify
 wounds
 thorn
 taunt_stance
-vigor
 inner_calm
+vigor
 valor
 bone_chill
 perseverance

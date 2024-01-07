@@ -120,16 +120,11 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     public WeaponTypes getWeapon(LivingEntity en) {
         try {
             if (getStyle() != PlayStyle.INT) {
-
                 ItemStack stack = en.getMainHandItem();
-
                 GearItemData gear = StackSaving.GEARS.loadFrom(stack);
-
-
                 if (gear != null) {
                     return gear.GetBaseGearType().weapon_type;
                 }
-
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -47,6 +47,7 @@ import com.robertx22.age_of_exile.vanilla_mc.packets.EntityUnitPacket;
 import com.robertx22.age_of_exile.vanilla_mc.potion_effects.EntityStatusEffectsData;
 import com.robertx22.library_of_exile.components.ICap;
 import com.robertx22.library_of_exile.main.Packets;
+import com.robertx22.library_of_exile.packets.SyncPlayerCapToClient;
 import com.robertx22.library_of_exile.utils.CLOC;
 import com.robertx22.library_of_exile.utils.LoadSave;
 import com.robertx22.library_of_exile.wrappers.ExileText;
@@ -152,6 +153,8 @@ public class EntityData implements ICap, INeededForClient {
     CooldownsData cooldowns = new CooldownsData();
     ThreatData threat = new ThreatData();
     public EntityLeechData leech = new EntityLeechData();
+
+    public boolean didStatCalcThisTickForPlayer = false;
 
     private BossData boss = null;
 
@@ -472,6 +475,20 @@ public class EntityData implements ICap, INeededForClient {
         this.shouldSync = true;
     }
 
+    @Override
+    public void syncToClient(Player player) {
+        if (!syncedRecently) {
+            Packets.sendToClient(player, new SyncPlayerCapToClient(player, this.getCapIdForSyncing()));
+            syncedRecently = true;
+        } else {
+            if (MMORPG.RUN_DEV_TOOLS) {
+                player.sendSystemMessage(Component.literal("skipped syncing entity data because synced recently"));
+            }
+        }
+    }
+
+    public boolean syncedRecently = false;
+
     public String getRarity() {
         return rarity;
     }
@@ -535,11 +552,19 @@ public class EntityData implements ICap, INeededForClient {
             unit = new Unit();
         }
 
+        if (entity instanceof Player p && didStatCalcThisTickForPlayer) {
+            if (MMORPG.RUN_DEV_TOOLS) {
+                //   p.sendSystemMessage(Component.literal("Stats Skipped because done this tick already!").withStyle(ChatFormatting.GREEN));
+            }
+            return;
+        }
+
         if (needsToRecalcStats()) {
 
             if (this.entity.level().isClientSide()) {
                 return;
             }
+
 
             //Watch watch = new Watch();
             this.unit = new Unit();
@@ -547,6 +572,9 @@ public class EntityData implements ICap, INeededForClient {
             var statsWithoutSupps = StatCalculation.calc(unit, null, entity, -1, null);
 
             if (entity instanceof Player p) {
+                this.didStatCalcThisTickForPlayer = true;
+
+
                 var data = Load.player(p);
                 var spells = data.spellCastingData.getAllHotbarSpells().stream().map(x -> x.getSpell()).collect(Collectors.toList());
                 data.calcSpellUnits(spells, statsWithoutSupps);
@@ -556,7 +584,7 @@ public class EntityData implements ICap, INeededForClient {
                 Packets.sendToClient((Player) entity, new EntityUnitPacket(entity));
 
                 if (MMORPG.RUN_DEV_TOOLS) {
-                    p.sendSystemMessage(Component.literal("Stats Calculated!"));
+                    // p.sendSystemMessage(Component.literal("Stats Calculated!").withStyle(ChatFormatting.RED));
                 }
 
                 this.syncToClient(p);

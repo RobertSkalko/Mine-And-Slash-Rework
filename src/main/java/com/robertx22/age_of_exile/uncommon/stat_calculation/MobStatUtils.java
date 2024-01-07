@@ -43,7 +43,7 @@ public class MobStatUtils {
 
         if (caster instanceof Player player) {
             var spell = Load.Unit(en).summonedPetData.getSourceSpell();
-            var data = Load.player(player).getSpellUnitStats(spell);
+            var data = Load.player(player).getSpellUnitStats(player, spell);
 
             for (Map.Entry<String, StatData> e : data.getStats().stats.entrySet()) {
                 if (e.getValue().GetStat() instanceof SummonStat sstat) {
@@ -77,7 +77,7 @@ public class MobStatUtils {
         if (map != null) {
             MapItemData data = map.map;
 
-         
+
             list.add(new MiscStatCtx(data.getTierStats()));
         }
 

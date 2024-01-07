@@ -386,7 +386,9 @@ public class DamageEvent extends EffectEvent {
                         var sd = data.calcSpell;
                         var ctx = SpellCtx.onEntityBasicAttacked(this.source, sd, target);
                         ExileEffect eff = ExileDB.ExileEffects().get(e.getKey());
-                        eff.spell.tryActivate(SpellCtx.ON_ENTITY_ATTACKED, ctx); // i can use this kind of as event
+                        if (eff.spell != null) {
+                            eff.spell.tryActivate(SpellCtx.ON_ENTITY_ATTACKED, ctx); // i can use this kind of as event
+                        }
                     }
                 }
             }

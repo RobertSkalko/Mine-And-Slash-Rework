@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.capability.player.helper.JewelInvHelper;
 import com.robertx22.age_of_exile.capability.player.helper.MyInventory;
 import com.robertx22.age_of_exile.characters.CharStorageData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
+import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.DeathStatsData;
 import com.robertx22.age_of_exile.saveclasses.perks.TalentsData;
@@ -14,10 +15,14 @@ import com.robertx22.age_of_exile.saveclasses.spells.SpellSchoolsData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_calc.StatCalculation;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.components.ICap;
+import com.robertx22.library_of_exile.main.Packets;
+import com.robertx22.library_of_exile.packets.SyncPlayerCapToClient;
 import com.robertx22.library_of_exile.utils.LoadSave;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -53,6 +58,20 @@ public class PlayerData implements ICap {
         }
         return LazyOptional.empty();
 
+    }
+
+    public boolean syncedRecently = false;
+
+    @Override
+    public void syncToClient(Player player) {
+        if (!syncedRecently) {
+            Packets.sendToClient(player, new SyncPlayerCapToClient(player, this.getCapIdForSyncing()));
+            syncedRecently = true;
+        } else {
+            if (MMORPG.RUN_DEV_TOOLS) {
+                player.sendSystemMessage(Component.literal("skipped syncing PLAYER data because synced recently"));
+            }
+        }
     }
 
 
@@ -170,9 +189,9 @@ public class PlayerData implements ICap {
 
     transient HashMap<String, Unit> spellUnits = new HashMap<>();
 
-    public Unit getSpellUnitStats(Spell spell) {
+    public Unit getSpellUnitStats(Player p, Spell spell) {
         if (!spellUnits.containsKey(spell.GUID())) {
-            return Unit.EMPTY;
+            return Load.Unit(p).getUnit();
             // todo will this break anything
             //   spellUnits.put(spell.GUID(), getSpellStats(spell));
         }
