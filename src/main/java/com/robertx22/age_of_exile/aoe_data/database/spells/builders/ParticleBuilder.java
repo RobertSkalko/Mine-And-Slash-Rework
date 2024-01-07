@@ -70,7 +70,7 @@ public class ParticleBuilder {
                 .put(MapField.Y_RANDOM, (double) randomY));
 
         if (everyXticks > 1) {
-            c.tickRequirement((double) everyXticks);
+            c.tick((double) everyXticks);
         }
         return c;
     }

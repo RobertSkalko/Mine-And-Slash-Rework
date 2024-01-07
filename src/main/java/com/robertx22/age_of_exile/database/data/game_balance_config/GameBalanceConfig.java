@@ -69,6 +69,26 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
         return 5;
     }
 
+    public int getNextLinkUpgradeLevel(int lvl) {
+        if (lvl < link_1_lvl) {
+            return link_1_lvl;
+        }
+        if (lvl < link_2_lvl) {
+            return link_2_lvl;
+        }
+        if (lvl < link_3_lvl) {
+            return link_3_lvl;
+        }
+        if (lvl < link_4_lvl) {
+            return link_4_lvl;
+        }
+        if (lvl < link_5_lvl) {
+            return link_5_lvl;
+        }
+        return 5;
+    }
+
+
     public int getTotalLinks(int links, Player p) {
         int max = getMaxLinksForLevel(Load.Unit(p).getLevel());
         return MathHelper.clamp(links, 0, max);

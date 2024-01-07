@@ -13,7 +13,6 @@ import com.robertx22.age_of_exile.database.data.spells.components.conditions.Eff
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.BaseTargetSelector;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
-import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.DashUtils;
@@ -36,16 +35,7 @@ public class PartBuilder {
         return c;
     }
 
-    public static ComponentPart dotDamageOnTick(String effect, ValueCalculation calc, Elements ele) {
-        ComponentPart c = new ComponentPart();
-        c.acts.add(SpellAction.DEAL_DAMAGE.create(calc, ele)
-                .put(MapField.EXILE_POTION_ID, effect)
-                .put(MapField.DMG_EFFECT_TYPE, AttackType.dot.name()));
-
-        c.targets.add(BaseTargetSelector.TARGET.create());
-        return c;
-    }
-
+   
     public static ComponentPart exileEffect(String effect, Double duration) {
         ComponentPart c = new ComponentPart();
         c.acts.add(SpellAction.EXILE_EFFECT.create(effect, GiveOrTake.GIVE_STACKS, duration));
@@ -78,7 +68,6 @@ public class PartBuilder {
         ComponentPart c = new ComponentPart();
         c.acts.add(SpellAction.DEAL_DAMAGE.create(calc, ele));
         c.targets.add(BaseTargetSelector.AOE.create(radius, EntityFinder.SelectionType.RADIUS, AllyOrEnemy.enemies));
-
         return c;
     }
 
@@ -106,27 +95,6 @@ public class PartBuilder {
         return c;
     }
 
-    public static ComponentPart onTickRaycast(Double ticks, ValueCalculation calc, Elements ele, Double distance) {
-        ComponentPart c = new ComponentPart();
-        c.acts.add(SpellAction.DEAL_DAMAGE.create(calc, ele));
-        c.ifs.add(EffectCondition.EVERY_X_TICKS.create(ticks));
-        c.targets.add(BaseTargetSelector.RAY_CAST.create(distance, AllyOrEnemy.enemies));
-        return c;
-    }
-
-    public static ComponentPart onTickRayHeal(Double ticks, ValueCalculation calc, Double distance) {
-        ComponentPart c = new ComponentPart();
-        c.acts.add(SpellAction.RESTORE_HEALTH.create(calc));
-        c.ifs.add(EffectCondition.EVERY_X_TICKS.create(ticks));
-        c.targets.add(BaseTargetSelector.RAY_CAST.create(distance, AllyOrEnemy.allies));
-        return c;
-    }
-
-    public static ComponentPart onTickHealInAoe(Double ticks, ValueCalculation calc, Double radius) {
-        ComponentPart c = healInAoe(calc, radius);
-        c.ifs.add(EffectCondition.EVERY_X_TICKS.create(ticks));
-        return c;
-    }
 
     public static ComponentPart healInAoe(ValueCalculation calc, Double radius) {
         ComponentPart c = new ComponentPart();
@@ -244,29 +212,6 @@ public class PartBuilder {
         return groundEdgeParticles(particle, count, radius, randomY, ParticleMotion.None);
     }
 
-    public static class Particle {
-
-        MapHolder map;
-
-        public static Particle builder(SimpleParticleType particle, Double count, Double radius) {
-            Particle p = new Particle();
-            p.map = SpellAction.PARTICLES_IN_RADIUS.create(particle, count, radius);
-            p.map.put(MapField.PARTICLE_SHAPE, ParticleShape.CIRCLE.name());
-            return p;
-        }
-
-        public <T> Particle set(MapField<T> field, T t) {
-            map.put(field, t);
-            return this;
-        }
-
-        public ComponentPart build() {
-            ComponentPart p = new ComponentPart();
-            p.acts.add(map);
-            return p;
-        }
-
-    }
 
     public static ComponentPart nova(SimpleParticleType particle, Double count, Double radius, Double motionMulti) {
         ComponentPart c = new ComponentPart();

@@ -8,11 +8,11 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ErrorUtils;
 
-public class DamageBuilder extends EventBuilder<DamageEvent> {
+public class DamageEventBuilder extends EventBuilder<DamageEvent> {
 
     boolean isSetup = false;
 
-    public DamageBuilder setupDamage(AttackType effectType, WeaponTypes weptype, PlayStyle style) {
+    public DamageEventBuilder setupDamage(AttackType effectType, WeaponTypes weptype, PlayStyle style) {
         this.isSetup = true;
         event.data.setString(EventData.STYLE, style.id);
         event.data.setString(EventData.WEAPON_TYPE, weptype.id);
@@ -21,7 +21,7 @@ public class DamageBuilder extends EventBuilder<DamageEvent> {
         return this;
     }
 
-    public DamageBuilder setIsBasicAttack() {
+    public DamageEventBuilder setIsBasicAttack() {
         event.data.setBoolean(EventData.IS_BASIC_ATTACK, true);
         return this;
     }

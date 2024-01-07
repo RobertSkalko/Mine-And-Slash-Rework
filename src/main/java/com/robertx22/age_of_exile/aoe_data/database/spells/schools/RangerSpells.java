@@ -71,15 +71,15 @@ public class RangerSpells implements ExileRegistryInit {
                         .put(MapField.FIND_NEAREST_SURFACE, false)
                         .put(MapField.IS_BLOCK_FALLING, false)))
 
-                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.CRIT, 100D, 3D, 0.5D).tickRequirement(2D))
+                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.CRIT, 100D, 3D, 0.5D).tick(2D))
 
                 .onTick("block", PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.AIR,
                                 1D, 2.5D, SlashEntities.SIMPLE_ARROW.get(), 40D, false)
                         .put(MapField.ENTITY_NAME, "arrow")
                         .put(MapField.POS_SOURCE, PositionSource.SOURCE_ENTITY.name())
                         .put(MapField.SHOOT_DIRECTION, SummonProjectileAction.ShootWay.FIND_ENEMY.name())
-                ).tickRequirement(5D))
-                .onTick("block", PartBuilder.playSound(SoundEvents.ARROW_SHOOT, 1D, 1D).tickRequirement(5D))
+                ).tick(5D))
+                .onTick("block", PartBuilder.playSound(SoundEvents.ARROW_SHOOT, 1D, 1D).tick(5D))
 
                 .onExpire("arrow", PartBuilder.damageInAoe(SpellCalcs.ARROW_TOTEM, Elements.Physical, 1.5D))
                 .levelReq(20)
@@ -329,7 +329,7 @@ public class RangerSpells implements ExileRegistryInit {
                         .addCondition(EffectCondition.IS_ENTITY_IN_RADIUS.enemiesInRadius(1D))
                         .addActions(SpellAction.EXPIRE.create())
                         .addActions(SpellAction.SPECIFIC_ACTION.create("expire"))
-                        .tickRequirement(2D))
+                        .tick(2D))
 
                 .addSpecificAction("expire", PartBuilder.damageInAoe(dmg, element, 3D))
                 .addSpecificAction("expire", PartBuilder.aoeParticles(particle, 30D, 3D))

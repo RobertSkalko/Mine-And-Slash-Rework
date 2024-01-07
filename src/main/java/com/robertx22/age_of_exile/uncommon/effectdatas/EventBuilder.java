@@ -5,7 +5,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
-import com.robertx22.age_of_exile.uncommon.effectdatas.builders.DamageBuilder;
+import com.robertx22.age_of_exile.uncommon.effectdatas.builders.DamageEventBuilder;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
@@ -24,25 +24,25 @@ public class EventBuilder<T extends EffectEvent> {
         return b;
     }
 
-    public static DamageBuilder ofSpellDamage(LivingEntity source, LivingEntity target, int dmg, Spell spell) {
+    public static DamageEventBuilder ofSpellDamage(LivingEntity source, LivingEntity target, int dmg, Spell spell) {
         DamageEvent event = new DamageEvent(null, source, target, dmg);
-        DamageBuilder b = new DamageBuilder();
+        DamageEventBuilder b = new DamageEventBuilder();
         b.event = event;
         b.setupDamage(AttackType.hit, spell.getWeapon(source), spell.getConfig().getStyle());
         b.setSpell(spell);
         return b;
     }
 
-    public static DamageBuilder ofDamage(AttackInformation data, LivingEntity source, LivingEntity target, float dmg) {
+    public static DamageEventBuilder ofDamage(AttackInformation data, LivingEntity source, LivingEntity target, float dmg) {
         DamageEvent event = new DamageEvent(data, source, target, dmg);
-        DamageBuilder b = new DamageBuilder();
+        DamageEventBuilder b = new DamageEventBuilder();
         b.event = event;
         return b;
     }
 
-    public static DamageBuilder ofDamage(LivingEntity source, LivingEntity target, float dmg) {
+    public static DamageEventBuilder ofDamage(LivingEntity source, LivingEntity target, float dmg) {
         DamageEvent event = new DamageEvent(null, source, target, dmg);
-        DamageBuilder b = new DamageBuilder();
+        DamageEventBuilder b = new DamageEventBuilder();
         b.event = event;
         return b;
     }

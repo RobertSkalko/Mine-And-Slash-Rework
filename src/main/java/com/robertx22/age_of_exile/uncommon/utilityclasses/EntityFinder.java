@@ -26,6 +26,12 @@ public class EntityFinder {
     }
 
     public enum SelectionType {
+        TARGET() {
+            @Override
+            public <T extends Entity> List<T> getEntities(Setup setup) {
+                return null; // dont use
+            }
+        },
         RADIUS() {
             @Override
             public <T extends Entity> List<T> getEntities(Setup setup) {
@@ -92,6 +98,7 @@ public class EntityFinder {
         };
 
         public abstract <T extends Entity> List<T> getEntities(Setup setup);
+
 
     }
 

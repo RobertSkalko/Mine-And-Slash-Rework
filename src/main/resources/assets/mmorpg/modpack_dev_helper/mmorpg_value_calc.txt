@@ -1,15 +1,15 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
-magma_flower
 ice_comet
+magma_flower
 torment
 chilling_touch
 healing_aura
 chilling_field
 close_nova
 lightning_spear
-wish
 whirlwind
+wish
 iceball
 spider_pet_basic
 arrow_storm
@@ -49,15 +49,15 @@ fireball
 explode_minion
 explosive_arrow
 flower_flower
-charge
 heart_of_ice
+charge
 poison_arrow
 blizzard
 direct_arrow_hit
 flame_strike
 meteor
-thorn_bush
 frost_nova
+thorn_bush
 boomerang
 totem_guard
 power_chord

@@ -10,7 +10,7 @@ public enum Words implements IAutoLocName {
     LOAD("Load"),
     MOD_NAME("Mine and Slash"),
     TAGS("Tags: "),
-    CAPPED_BECAUSE_PLAYER_LEVEL(" - Capped due to Player Level Too Low"),
+    CAPPED_BECAUSE_PLAYER_LEVEL(" - Next Slot Unlocks at Player Level %1$s"),
     IMPLICIT_STATS("Implicit Stats: "),
     ON_SLOTS("Slots: "),
     SHIFT_TO_SHOW_EFFECT("Shift to Show Status Effect info."),

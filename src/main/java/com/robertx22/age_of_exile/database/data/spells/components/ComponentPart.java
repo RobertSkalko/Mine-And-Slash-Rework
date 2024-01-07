@@ -35,7 +35,7 @@ public class ComponentPart {
         return this;
     }
 
-    public ComponentPart disableKnockback() {
+    public ComponentPart noKnock() {
         for (MapHolder act : acts) {
             if (act.type.equals(SpellAction.DEAL_DAMAGE.GUID())) {
                 act.put(MapField.DISABLE_KNOCKBACK, true);
@@ -50,7 +50,7 @@ public class ComponentPart {
         return this;
     }
 
-    public ComponentPart tickRequirement(Double ticks) {
+    public ComponentPart tick(Double ticks) {
         ifs.add(EffectCondition.EVERY_X_TICKS.create(ticks));
         return this;
     }

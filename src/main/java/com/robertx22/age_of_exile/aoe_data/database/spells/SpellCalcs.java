@@ -174,9 +174,9 @@ public class SpellCalcs {
     public static ValueCalculation ICE_COMET = ValueCalcBuilder.of("ice_comet")
             .spellScaling(0.75F, 1.5F)
             .build();
-    
+
     public static ValueCalculation BLIZZARD = ValueCalcBuilder.of("blizzard")
-            .spellScaling(0.25F, 0.5F)
+            .spellScaling(0.2F, 0.4F)
             .statScaling(MagicShield.getInstance(), 0.1F, 0.2F)
             .capScaling(3)
             .build();

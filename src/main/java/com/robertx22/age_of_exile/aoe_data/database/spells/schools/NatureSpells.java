@@ -52,9 +52,9 @@ public class NatureSpells implements ExileRegistryInit {
                         .put(MapField.IS_BLOCK_FALLING, false)))
 
 
-                .onTick("totem", PartBuilder.groundEdgeParticles(ParticleTypes.WITCH, 100D, 3D, 0.5D).tickRequirement(2D))
+                .onTick("totem", PartBuilder.groundEdgeParticles(ParticleTypes.WITCH, 100D, 3D, 0.5D).tick(2D))
 
-                .onTick("totem", PartBuilder.aoeSelectEnemies(10D, 50D).tickRequirement(20D)
+                .onTick("totem", PartBuilder.aoeSelectEnemies(10D, 50D).tick(20D)
                         .addPerEntityHit(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(Blocks.PURPLE_GLAZED_TERRACOTTA, 200D)
                                 .put(MapField.ENTITY_NAME, "meteor")
                                 .put(MapField.BLOCK_FALL_SPEED, -0.05D)
@@ -94,9 +94,9 @@ public class NatureSpells implements ExileRegistryInit {
 
                 .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.SNEEZE, 40D, 3D, 1D))
                 .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.ITEM_SLIME, 40D, 3D, 1D))
-                .onTick("block", PartBuilder.damageInAoe(SpellCalcs.THORN_BUSH, Elements.Physical, 3D).tickRequirement(20D).disableKnockback())
-                .onTick("block", PartBuilder.addExileEffectToEnemiesInAoe(ModEffects.THORN.resourcePath, 3D, 20 * 8D).tickRequirement(20D))
-                .onTick("block", PartBuilder.playSound(SoundEvents.GRASS_BREAK, 1D, 1D).tickRequirement(20D))
+                .onTick("block", PartBuilder.damageInAoe(SpellCalcs.THORN_BUSH, Elements.Physical, 3D).tick(20D).noKnock())
+                .onTick("block", PartBuilder.addExileEffectToEnemiesInAoe(ModEffects.THORN.resourcePath, 3D, 20 * 8D).tick(20D))
+                .onTick("block", PartBuilder.playSound(SoundEvents.GRASS_BREAK, 1D, 1D).tick(20D))
                 .levelReq(20)
                 .build();
 
@@ -191,7 +191,7 @@ public class NatureSpells implements ExileRegistryInit {
                         .put(MapField.FIND_NEAREST_SURFACE, false)
                         .put(MapField.BLOCK_FALL_SPEED, -0.02D)
                         .put(MapField.IS_BLOCK_FALLING, true)))
-                .onExpire("block", PartBuilder.damageInAoe(SpellCalcs.THORN_CONSUME, Elements.Physical, 3D).disableKnockback())
+                .onExpire("block", PartBuilder.damageInAoe(SpellCalcs.THORN_CONSUME, Elements.Physical, 3D).noKnock())
                 .onExpire("block", PartBuilder.addExileEffectToEnemiesInAoe(ModEffects.THORN.resourcePath, 3D, 20 * 10D))
                 .onExpire("block", PartBuilder.aoeParticles(ParticleTypes.ITEM_SLIME, 150D, 3D))
                 .onExpire("block", PartBuilder.aoeParticles(ParticleTypes.SNEEZE, 40D, 3D))

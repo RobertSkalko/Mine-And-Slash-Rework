@@ -29,7 +29,7 @@ public class TotemSpells implements ExileRegistryInit {
     public static String HEAL_TOTEM_ID = "rejuv_totem";
     public static String GUARD_TOTEM_ID = "guard_totem";
 
-    
+
     SpellBuilder of(Block block, String id, SpellConfiguration config, String name, List<SpellTag> tags, SimpleParticleType particle) {
 
         return SpellBuilder.of(id, PlayStyle.STR, config, name, tags)
@@ -73,7 +73,7 @@ public class TotemSpells implements ExileRegistryInit {
                         "Summon a totem which restores " + SpellCalcs.TOTEM_MANA.getLocDmgTooltip() + " mana to allies around it."
                 )
                 .onTick("block", PartBuilder.restoreManaInRadius(SpellCalcs.TOTEM_MANA, RADIUS)
-                        .tickRequirement(20D))
+                        .tick(20D))
                 .build();
 
         of(SlashBlocks.GREEN_TOTEM.get(), HEAL_TOTEM_ID, SpellConfiguration.Builder.instant(18, 20 * 30), "Rejuvenating Totem",
@@ -83,7 +83,7 @@ public class TotemSpells implements ExileRegistryInit {
                         "Summon a totem which restores " + SpellCalcs.TOTEM_HEAL.getLocDmgTooltip() + " health to allies around it."
                 )
                 .onTick("block", PartBuilder.healInAoe(SpellCalcs.TOTEM_HEAL, RADIUS)
-                        .tickRequirement(20D))
+                        .tick(20D))
                 .build();
 
     }

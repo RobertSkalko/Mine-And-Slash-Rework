@@ -164,7 +164,8 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
         var text = Gui.AVAILABLE_SUPPORT_SLOTS.locName(slots).withStyle(ChatFormatting.DARK_PURPLE);
 
         if (links > slots) {
-            text = text.append(Words.CAPPED_BECAUSE_PLAYER_LEVEL.locName());
+            int next = GameBalanceConfig.get().getNextLinkUpgradeLevel(Load.Unit(p).getLevel());
+            text = text.append(Words.CAPPED_BECAUSE_PLAYER_LEVEL.locName(next));
         }
         return text;
 
