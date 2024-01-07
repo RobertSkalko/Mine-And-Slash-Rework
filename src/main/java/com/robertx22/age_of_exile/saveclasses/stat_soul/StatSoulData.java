@@ -119,6 +119,10 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
         return !force_tag.isEmpty();
     }
 
+    public boolean isArmor() {
+        return this.fam == SlotFamily.Armor || (this.slot.isEmpty() && ExileDB.GearSlots().get(slot).fam == SlotFamily.Armor);
+    }
+
     public boolean canApplyTo(ItemStack stack) {
         GearSlot slot = GearSlot.getSlotOf(stack.getItem());
 

@@ -86,3 +86,8 @@ v.5.3.13
 - slight perf improvements
 v.5.3.14
 - should fix effect tooltips 
+- talents now lower opacity when players have 0 talents, to show which are the starter ones
+- fix double soul modifier use
+- fix soul mod use on non armors
+- healing no longer causes threat
+- try optimize stat calc a biiiit

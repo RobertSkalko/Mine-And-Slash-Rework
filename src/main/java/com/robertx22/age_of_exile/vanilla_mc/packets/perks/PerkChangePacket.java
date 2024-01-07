@@ -80,10 +80,8 @@ public class PerkChangePacket extends MyPacket<PerkChangePacket> {
             }
         }
 
-        Load.Unit(ctx.getPlayer())
-                .setEquipsChanged(true);
-        Load.Unit(ctx.getPlayer())
-                .tryRecalculateStats();
+        Load.Unit(ctx.getPlayer()).setEquipsChanged();
+        Load.Unit(ctx.getPlayer()).tryRecalculateStats();
 
         playerData.syncToClient(ctx.getPlayer());
 

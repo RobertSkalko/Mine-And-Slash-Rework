@@ -30,7 +30,6 @@ public class TalentsData implements IStatCtx {
 
     public int getAllocatedPoints(TalentTree.SchoolType type) {
         return this.perks.getAllocatedPointsInSchool();
-
     }
 
     public int getFreePoints(EntityData data, TalentTree.SchoolType type) {
@@ -41,7 +40,6 @@ public class TalentsData implements IStatCtx {
         num += GameBalanceConfig.get().TALENT_POINTS_PER_LVL * data.getLevel();
 
         num -= this.getAllocatedPoints(type);
-
 
         if (data.getEntity() instanceof Player p) {
             num += MathHelper.clamp(Load.player(p).bonusTalents, 0, ServerContainer.get().MAX_ADDITIONAL_TALENT_POINTS.get());

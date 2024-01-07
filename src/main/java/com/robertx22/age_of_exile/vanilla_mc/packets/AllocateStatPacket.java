@@ -51,10 +51,8 @@ public class AllocateStatPacket extends MyPacket<AllocateStatPacket> {
     @Override
     public void onReceived(ExilePacketContext ctx) {
 
-        Load.Unit(ctx.getPlayer())
-                .setEquipsChanged(true);
-        Load.Unit(ctx.getPlayer())
-                .tryRecalculateStats();
+        Load.Unit(ctx.getPlayer()).setEquipsChanged();
+        Load.Unit(ctx.getPlayer()).tryRecalculateStats();
 
         PlayerData cap = Load.player(ctx.getPlayer());
 

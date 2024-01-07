@@ -33,15 +33,45 @@ public class SpellCastingData {
 
     public HashMap<Integer, String> hotbar = new HashMap<>();
 
+
+    public static class HotbarSpellData {
+        public Spell spell;
+        public int hotbarkey;
+
+        public HotbarSpellData(Spell spell, int hotbarkey) {
+            this.spell = spell;
+            this.hotbarkey = hotbarkey;
+        }
+    }
+
+    public int keyOfSpell(String spell) {
+
+        for (Map.Entry<Integer, String> en : hotbar.entrySet()) {
+            if (en.getValue().equals(spell)) {
+                return en.getKey();
+            }
+        }
+        return -1;
+    }
+
+    public List<HotbarSpellData> getAllHotbarSpellsInfo() {
+        List<HotbarSpellData> list = new ArrayList<>();
+        for (Integer i : hotbar.keySet()) {
+            String spell = hotbar.getOrDefault(i, "");
+            if (ExileDB.Spells().isRegistered(spell)) {
+                list.add(new HotbarSpellData(ExileDB.Spells().get(spell), i));
+            }
+        }
+        return list;
+    }
+
     public List<InsertedSpell> getAllHotbarSpells() {
         List<InsertedSpell> list = new ArrayList<>();
         for (Integer i : hotbar.keySet()) {
             list.add(getSpellData(i));
         }
-
         list.removeIf(x -> x == null || x.getData() == null);
         return list;
-
     }
 
     public List<InsertedSpell> spells = new ArrayList<>();

@@ -48,7 +48,7 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
             return Arrays.asList();
         }
         int amount = 1; // todo
-        return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(getRarity().GUID()).get(), amount));
+        return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.getOrDefault(getRarity().GUID(), RarityItems.RARITY_STONE.get(IRarity.COMMON_ID)).get(), amount));
     }
 
     @Override

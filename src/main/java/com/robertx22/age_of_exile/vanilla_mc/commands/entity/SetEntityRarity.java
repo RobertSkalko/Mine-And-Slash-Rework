@@ -37,7 +37,7 @@ public class SetEntityRarity {
             EntityData data = Load.Unit(en);
 
             data.setRarity(rarity);
-            data.setShouldSync();
+            data.setEquipsChanged();
         }
 
 

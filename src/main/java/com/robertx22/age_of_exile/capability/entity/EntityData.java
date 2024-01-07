@@ -15,6 +15,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Hea
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.event_hooks.player.OnLogin;
+import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.CustomExactStatsData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
@@ -42,6 +43,7 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityTypeUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.OnScreenMessageUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
+import com.robertx22.age_of_exile.vanilla_mc.packets.EntityUnitPacket;
 import com.robertx22.age_of_exile.vanilla_mc.potion_effects.EntityStatusEffectsData;
 import com.robertx22.library_of_exile.components.ICap;
 import com.robertx22.library_of_exile.main.Packets;
@@ -51,6 +53,7 @@ import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -337,8 +340,8 @@ public class EntityData implements ICap, INeededForClient {
 
     }
 
-    public void setEquipsChanged(boolean bool) {
-        this.equipsChanged = bool;
+    public void setEquipsChanged() {
+        this.equipsChanged = true;
         this.setShouldSync();
     }
 
@@ -404,7 +407,7 @@ public class EntityData implements ICap, INeededForClient {
         return threat;
     }
 
-    public void setShouldSync() {
+    private void setShouldSync() {
         this.shouldSync = true;
     }
 
@@ -539,12 +542,30 @@ public class EntityData implements ICap, INeededForClient {
             }
 
             //Watch watch = new Watch();
-            this.unit = StatCalculation.calc(entity, -1, null);
+            this.unit = new Unit();
+
+            var statsWithoutSupps = StatCalculation.calc(unit, null, entity, -1, null);
 
             if (entity instanceof Player p) {
                 var data = Load.player(p);
-                data.calcSpellUnits(data.spellCastingData.spells.stream().map(x -> ExileDB.Spells().get(x.id)).collect(Collectors.toList()));
+                var spells = data.spellCastingData.getAllHotbarSpells().stream().map(x -> x.getSpell()).collect(Collectors.toList());
+                data.calcSpellUnits(spells, statsWithoutSupps);
+
+                Load.player(p).spellCastingData.calcSpellLevels(unit);
+                Load.player(p).getSkillGemInventory().removeAurasIfCantWear(p);
+                Packets.sendToClient((Player) entity, new EntityUnitPacket(entity));
+
+                if (MMORPG.RUN_DEV_TOOLS) {
+                    p.sendSystemMessage(Component.literal("Stats Calculated!"));
+                }
+
+                this.syncToClient(p);
+            } else {
+                if (Unit.shouldSendUpdatePackets((LivingEntity) entity)) {
+                    Packets.sendToTracking(unit.getUpdatePacketFor(entity, this), entity);
+                }
             }
+            this.equipsChanged = false;
             //watch.print("stat calc for " + (entity instanceof PlayerEntity ? "player " : "mob "));
         }
 
@@ -559,7 +580,9 @@ public class EntityData implements ICap, INeededForClient {
         if (this.entity.level().isClientSide()) {
             return;
         }
-        this.unit = StatCalculation.calc(entity, -1, null);
+        this.equipsChanged = true;
+        this.tryRecalculateStats();
+        // this.unit = StatCalculation.calc(entity, -1, null);
 
     }
 

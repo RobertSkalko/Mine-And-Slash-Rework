@@ -18,7 +18,7 @@ public class CurioEvents {
                 if (!entity.level().isClientSide) {
                     EntityData data = Load.Unit(entity);
                     if (data != null) {
-                        data.setEquipsChanged(true);
+                        data.setEquipsChanged();
                         data.tryRecalculateStats();
 
                         if (entity instanceof ServerPlayer) {

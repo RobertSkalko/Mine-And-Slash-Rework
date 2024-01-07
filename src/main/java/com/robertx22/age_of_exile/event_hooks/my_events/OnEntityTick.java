@@ -16,7 +16,7 @@ public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
     public void accept(ExileEvents.OnEntityTick onEntityTick) {
         LivingEntity entity = onEntityTick.entity;
 
-      
+
         try {
 
             var data = Load.Unit(entity);
@@ -92,7 +92,7 @@ public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
         if (entity != null) {
 
             EntityData data = Load.Unit(entity);
-            data.setEquipsChanged(true);
+            data.setEquipsChanged();
             data.tryRecalculateStats();
 
             if (entity instanceof Player) {

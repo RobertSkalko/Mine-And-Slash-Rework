@@ -13,7 +13,7 @@ import com.robertx22.age_of_exile.saveclasses.spells.SpellCastingData;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellSchoolsData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_calc.StatCalculation;
-import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.library_of_exile.components.ICap;
 import com.robertx22.library_of_exile.utils.LoadSave;
 import net.minecraft.core.Direction;
@@ -171,29 +171,31 @@ public class PlayerData implements ICap {
     transient HashMap<String, Unit> spellUnits = new HashMap<>();
 
     public Unit getSpellUnitStats(Spell spell) {
-
         if (!spellUnits.containsKey(spell.GUID())) {
-            spellUnits.put(spell.GUID(), getSpellStats(spell));
+            return Unit.EMPTY;
+            // todo will this break anything
+            //   spellUnits.put(spell.GUID(), getSpellStats(spell));
         }
-
         return spellUnits.get(spell.GUID());
     }
 
-    public void calcSpellUnits(List<Spell> spells) {
+    public void calcSpellUnits(List<Spell> spells, List<StatContext> stats) {
         for (Spell spell : spells) {
-            spellUnits.put(spell.GUID(), getSpellStats(spell));
+            spellUnits.put(spell.GUID(), getSpellStats(spell, stats));
         }
     }
 
-    private Unit getSpellStats(Spell spell) {
-        Unit un = new Unit();
-        var gem = Load.player(player).getSkillGemInventory().getSpellGem(spell);
-        if (gem != null) {
-            // its null if its casted by a summon
-            int slot = gem.getHotbarSlot();
-            return StatCalculation.calc(player, slot, null);
-        }
-        return un;
+    private Unit getSpellStats(SpellCastingData.HotbarSpellData data) {
+        var unit = new Unit();
+        StatCalculation.calc(unit, null, player, data.hotbarkey, null);
+        return unit;
+    }
+
+    private Unit getSpellStats(Spell spell, List<StatContext> stats) {
+        int key = this.spellCastingData.keyOfSpell(spell.GUID());
+        var unit = new Unit();
+        StatCalculation.calc(unit, stats, player, key, null);
+        return unit;
     }
 
     public GemInventoryHelper getSkillGemInventory() {

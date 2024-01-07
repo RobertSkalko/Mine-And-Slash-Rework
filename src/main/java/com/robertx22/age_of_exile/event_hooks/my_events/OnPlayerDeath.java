@@ -14,12 +14,12 @@ public class OnPlayerDeath extends EventConsumer<ExileEvents.OnPlayerDeath> {
 
             Load.Unit(event.player).onDeath();
 
-            Load.Unit(event.player).setEquipsChanged(true);
+            Load.Unit(event.player).setEquipsChanged();
 
             PlayerData data = Load.player(event.player);
 
             data.rested_xp.onDeath();
-            
+
             data.favor.onDeath(event.player);
 
             data.deathStats.died = true;

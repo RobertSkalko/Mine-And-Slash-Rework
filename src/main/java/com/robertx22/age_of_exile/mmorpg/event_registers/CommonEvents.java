@@ -41,7 +41,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.*;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -134,11 +133,10 @@ public class CommonEvents {
             }
         });
 
-        ForgeEvents.registerForgeEvent(LivingEvent.LivingTickEvent.class, event -> {
-            if (event.getEntity() instanceof ServerPlayer p) {
-                if (!p.level().isClientSide) {
-                    OnServerTick.onEndTick(p);
-                }
+
+        ForgeEvents.registerForgeEvent(TickEvent.PlayerTickEvent.class, event -> {
+            if (!event.player.level().isClientSide) {
+                OnServerTick.onEndTick((ServerPlayer) event.player);
             }
         });
 

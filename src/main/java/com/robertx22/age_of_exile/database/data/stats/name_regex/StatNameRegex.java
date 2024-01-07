@@ -11,26 +11,23 @@ import net.minecraft.ChatFormatting;
 
 public abstract class StatNameRegex {
 
+
     public static StatNameRegex BASIC = new BasicStatRegex();
-    public static StatNameRegex BASIC_LOCAL = new BasicLocalStatRegex().setAddPlus(false);
     public static StatNameRegex JUST_NAME = new JustNameRegex();
 
-    public static String VALUE = "VALUE";
+    public static String VALUE = "[VALUE]";
+    public static String PLUS_MINUS = "[PLUS_MINUS]";
+    public static String NAME = "[STAT_NAME]";
 
-    public static String MIN_VALUE = "MIN_VALUE";
-    public static String MAX_VALUE = "MAX_VALUE";
-
-    public static String NAME = "STAT_NAME";
 
     public boolean addPlus = true;
 
     public static String VALUEAndNAMESeparator = " ";
 
-    protected StatNameRegex setAddPlus(boolean bool) {
-        this.addPlus = bool;
-        return this;
-
-    }
+    // place these in lang file
+    private static String NORMAL_LOOK = PLUS_MINUS + VALUE + " " + NAME; // +5% Strength
+    private static String PRIMARY_STAT = NAME + ": " + VALUE; // +5% Strength
+    private static String JUST_NAME_STAT = NAME; // Blood User
 
     public ChatFormatting statColor(Stat stat) {
         return ChatFormatting.GRAY;
@@ -82,7 +79,7 @@ public abstract class StatNameRegex {
         String v1s = NumberUtils.formatForTooltip(v1);
 
         // todo rewrite this ENTIRE GODDAMN THING
-        if (!ctx.showNumber) {
+        if (ctx != null && !ctx.showNumber) {
             v1s = "";
             plusminus = "";
             perc = "";

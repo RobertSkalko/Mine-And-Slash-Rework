@@ -5,16 +5,12 @@ import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.NumberUtils;
 import com.robertx22.age_of_exile.vanilla_mc.packets.DmgNumPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-
-import java.util.List;
 
 public class RestoreResourceEvent extends EffectEvent {
 
@@ -63,6 +59,7 @@ public class RestoreResourceEvent extends EffectEvent {
                         Packets.sendToClient((Player) source, packet);
                     }
 
+                    /*
                     float threat = (int) (num * 0.1F);
                     List<Mob> mobs = EntityFinder.start(source, Mob.class, source.blockPosition())
                             .radius(10)
@@ -71,6 +68,8 @@ public class RestoreResourceEvent extends EffectEvent {
                         GenerateThreatEvent threatEvent = new GenerateThreatEvent((Player) source, x, ThreatGenType.heal, threat);
                         threatEvent.Activate();
                     }
+
+                     */
                 }
             }
         }

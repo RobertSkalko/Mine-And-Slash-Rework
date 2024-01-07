@@ -53,9 +53,9 @@ public class ResourcesData {
             SpendResourceEvent event = new SpendResourceEvent(player, ResourceType.energy, cost * ticks);
             event.calculateEffects();
             event.Activate();
+            this.cap(player, ResourceType.energy);
         }
 
-        this.cap(player, ResourceType.energy);
     }
 
 

@@ -170,6 +170,7 @@ public class PerkButton extends ImageButton {
 
         float opacity = containsSearchStat || search.isEmpty() ? 1F : 0.2f;
 
+
         if (!search.isEmpty()) {
             if (search.equals("all")) {
                 if (status != PerkStatus.CONNECTED) {
@@ -180,6 +181,11 @@ public class PerkButton extends ImageButton {
             }
         } else {
             opacity = status.getOpacity();
+        }
+        
+        // if newbie, show only the starter perks he can pick
+        if (playerData.talents.getAllocatedPoints(TalentTree.SchoolType.TALENTS) < 1) {
+            opacity = this.perk.getType() == Perk.PerkType.START ? 1 : 0.2F;
         }
 
 

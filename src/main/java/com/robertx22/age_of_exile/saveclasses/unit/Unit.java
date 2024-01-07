@@ -12,7 +12,6 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Hea
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.vanilla_mc.packets.EfficientMobUnitPacket;
 import com.robertx22.library_of_exile.main.MyPacket;
@@ -28,6 +27,7 @@ import java.util.stream.Collectors;
 
 public class Unit {
 
+    public static Unit EMPTY = new Unit();
 
     private StatContainer stats = new StatContainer();
 
@@ -163,41 +163,10 @@ public class Unit {
         }
     }
 
-    /**
-     * @return checks if it should be synced to clients. Clients currently only see
-     * health and status effects
-     */
-    public DirtyCheck getDirtyCheck() {
-
-        if (getStats().stats == null || getStats().stats.isEmpty()) {
-            this.initStats();
-        }
-
-        DirtyCheck check = new DirtyCheck();
-
-        check.hp = (int) getCalculatedStat(Health.GUID).getValue();
-
-        return check;
-    }
-
-
-    public void recalculateStats(LivingEntity entity, EntityData data, AttackInformation dmgData, int skillGem) {
-
-        try {
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
 
     public static boolean shouldSendUpdatePackets(LivingEntity en) {
         if (ServerContainer.get().DONT_SYNC_DATA_OF_AMBIENT_MOBS.get()) {
-            return en.getType()
-                    .getCategory() != MobCategory.AMBIENT && en.getType()
-                    .getCategory() != MobCategory.WATER_AMBIENT;
+            return en.getType().getCategory() != MobCategory.AMBIENT && en.getType().getCategory() != MobCategory.WATER_AMBIENT;
         }
         return true;
     }

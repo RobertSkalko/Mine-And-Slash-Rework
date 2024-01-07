@@ -42,15 +42,14 @@ public class TeamUtils {
         List<Player> players = new ArrayList<>();
 
         try {
-            player.getServer()
-                    .getPlayerList()
-                    .getPlayers()
+            player.level()
+                    .players()
                     .forEach(x -> {
                         if (areOnSameTeam(player, x)) {
                             players.add(x);
                         }
-
                     });
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

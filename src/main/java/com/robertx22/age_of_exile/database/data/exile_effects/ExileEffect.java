@@ -199,7 +199,7 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
                 Load.Unit(entity).forceRecalculateStats();
             }
 
-            Load.Unit(entity).setShouldSync();
+            Load.Unit(entity).setEquipsChanged();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -230,9 +230,8 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
             EntityData unitdata = Load.Unit(target);
             unitdata.getStatusEffectsData()
                     .get(this).stacks = 0;
-            unitdata.setEquipsChanged(true);
+            unitdata.setEquipsChanged();
 
-            Load.Unit(target).setShouldSync();
 
         } catch (Exception e) {
             e.printStackTrace();

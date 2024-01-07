@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.saveclasses.unit.stat_calc;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
+import com.robertx22.age_of_exile.capability.player.PlayerData;
 import com.robertx22.age_of_exile.capability.player.helper.GemInventoryHelper;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.AttributeStat;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
@@ -17,41 +18,44 @@ import com.robertx22.age_of_exile.uncommon.interfaces.data_items.Cached;
 import com.robertx22.age_of_exile.uncommon.stat_calculation.CommonStatUtils;
 import com.robertx22.age_of_exile.uncommon.stat_calculation.MobStatUtils;
 import com.robertx22.age_of_exile.uncommon.stat_calculation.PlayerStatUtils;
-import com.robertx22.age_of_exile.vanilla_mc.packets.EntityUnitPacket;
-import com.robertx22.library_of_exile.main.Packets;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class StatCalculation {
 
     // todo trying to rewrite calc code..
-    public static Unit calc(LivingEntity entity, int skillGem, AttackInformation dmgData) {
+    public static List<StatContext> calc(Unit unit, List<StatContext> statContexts, LivingEntity entity, int skillGem, AttackInformation dmgData) {
 
         if (entity.level().isClientSide) {
-            return new Unit();
+            return Arrays.asList();
         }
 
-        Unit unit = new Unit();
-
         EntityData data = Load.Unit(entity);
-
         unit.clearStats();
 
-        Unit.DirtyCheck old = unit.getDirtyCheck();
 
+        // we should save a bunch of time x 8 with this
+        if (statContexts == null) {
+            List<GearData> gears = new ArrayList<>();
+            new CollectGearEvent.CollectedGearStacks(entity, gears, dmgData);
+            statContexts = collectStatsWithCtx(entity, data, gears);
+        }
 
-        List<GearData> gears = new ArrayList<>();
-        new CollectGearEvent.CollectedGearStacks(entity, gears, dmgData);
+        if (entity instanceof Player p) {
+            PlayerData playerData = Load.player(p);
+            statContexts.addAll(collectGemStats(p, data, playerData, skillGem));
+        }
 
-        var statContexts = collectStatsWithCtx(entity, data, gears, skillGem);
+        var sc = new CtxStats(statContexts);
 
-        statContexts.applyCtxModifierStats();
-        statContexts.applyToInCalc(unit);
+        sc.applyCtxModifierStats();
+        sc.applyToInCalc(unit);
 
 
         InCalc incalc = new InCalc(unit);
@@ -60,7 +64,6 @@ public class StatCalculation {
 
         unit.getStats().calculate();
 
-        Unit.DirtyCheck aftercalc = unit.getDirtyCheck();
 
         Cached.VANILLA_STAT_UIDS_TO_CLEAR_EVERY_STAT_CALC.forEach(x -> {
             AttributeInstance in = entity.getAttribute(x.left);
@@ -78,25 +81,32 @@ public class StatCalculation {
                 });
 
 
-        if (old.isDirty(aftercalc)) {
-            if (Unit.shouldSendUpdatePackets((LivingEntity) entity)) {
-                Packets.sendToTracking(unit.getUpdatePacketFor(entity, data), entity);
-            }
-        }
-
-        if (entity instanceof Player p) {
-            Load.player(p).spellCastingData.calcSpellLevels(unit);
-            
-            Load.player(p).getSkillGemInventory().removeAurasIfCantWear(p);
-
-            Packets.sendToClient((Player) entity, new EntityUnitPacket(entity));
-        }
-        return unit;
+        return statContexts;
 
     }
 
 
-    private static CtxStats collectStatsWithCtx(LivingEntity entity, EntityData data, List<GearData> gears, int skillGem) {
+    private static List<StatContext> collectGemStats(Player p, EntityData data, PlayerData playerData, int skillGem) {
+        List<StatContext> statContexts = new ArrayList<>();
+
+        if (skillGem > -1 && skillGem <= GemInventoryHelper.MAX_SKILL_GEMS) {
+            var gem = playerData.getSkillGemInventory().getHotbarGem(skillGem);
+            for (SkillGemData d : gem.getSupportDatas()) {
+                if (d.getSupport() != null) {
+                    statContexts.add(new MiscStatCtx(d.getSupport().GetAllStats(data, d)));
+                }
+            }
+            var spell = gem.getSpell();
+            if (spell != null) {
+                var stats = spell.getStats(p);
+                statContexts.add(new MiscStatCtx(stats));
+            }
+        }
+        return statContexts;
+    }
+
+
+    private static List<StatContext> collectStatsWithCtx(LivingEntity entity, EntityData data, List<GearData> gears) {
         List<StatContext> statContexts = new ArrayList<>();
 
 
@@ -125,19 +135,7 @@ public class StatCalculation {
             statContexts.addAll(playerData.talents.getStatAndContext(entity));
             statContexts.addAll(playerData.ascClass.getStatAndContext(entity));
 
-            if (skillGem > -1 && skillGem <= GemInventoryHelper.MAX_SKILL_GEMS) {
-                var gem = playerData.getSkillGemInventory().getHotbarGem(skillGem);
-                for (SkillGemData d : gem.getSupportDatas()) {
-                    if (d.getSupport() != null) {
-                        statContexts.add(new MiscStatCtx(d.getSupport().GetAllStats(data, d)));
-                    }
-                }
-                var spell = gem.getSpell();
-                if (spell != null) {
-                    var stats = spell.getStats(p);
-                    statContexts.add(new MiscStatCtx(stats));
-                }
-            }
+
         } else {
             statContexts.addAll(MobStatUtils.getMobBaseStats(data, entity));
             statContexts.addAll(MobStatUtils.getAffixStats(entity));
@@ -147,7 +145,7 @@ public class StatCalculation {
             statContexts.addAll(MobStatUtils.getMobConfigStats(entity, data));
         }
 
-        return new CtxStats(statContexts);
+        return statContexts;
     }
 
     static List<StatContext> addGearStats(List<GearData> gears) {
