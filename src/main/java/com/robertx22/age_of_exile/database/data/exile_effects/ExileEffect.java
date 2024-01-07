@@ -196,7 +196,7 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
             if (data != null) {
                 int stacks = data.stacks;
                 mc_stats.forEach(x -> x.applyVanillaStats(entity, stacks));
-                Load.Unit(entity).forceRecalculateStats();
+                Load.Unit(entity).setEquipsChanged();
             }
 
             Load.Unit(entity).setEquipsChanged();

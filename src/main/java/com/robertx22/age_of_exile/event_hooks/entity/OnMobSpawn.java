@@ -50,9 +50,7 @@ public class OnMobSpawn {
                 if (endata.getUnit() == null) {
                     endata.setUnit(new Unit());
                 }
-
-                endata.getUnit()
-                        .initStats(); // give new stats to mob on spawn
+                endata.getUnit().initStats(); // give new stats to mob on spawn
                 endata.forceRecalculateStats();
             }
 

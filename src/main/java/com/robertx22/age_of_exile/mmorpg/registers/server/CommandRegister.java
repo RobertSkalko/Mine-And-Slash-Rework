@@ -16,6 +16,7 @@ import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GenericGive;
 import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GiveExactUnique;
 import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GiveMap;
 import com.robertx22.age_of_exile.vanilla_mc.commands.open_gui.OpenHub;
+import com.robertx22.age_of_exile.vanilla_mc.commands.reset.ResetCommand;
 import com.robertx22.age_of_exile.vanilla_mc.commands.reset.ResetSpellCooldowns;
 import com.robertx22.age_of_exile.vanilla_mc.commands.stats.ClearStats;
 import com.robertx22.age_of_exile.vanilla_mc.commands.stats.GiveStat;
@@ -50,6 +51,8 @@ public class CommandRegister {
 
         ResetSpellCooldowns.register(dispatcher);
 
+        ResetCommand.register(dispatcher);
+        
         GiveStat.register(dispatcher);
         RemoveStat.register(dispatcher);
         ClearStats.register(dispatcher);

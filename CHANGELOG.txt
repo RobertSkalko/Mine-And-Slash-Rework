@@ -93,3 +93,4 @@ v.5.3.14
 - try optimize stat calc a biiiit
 - try optimize syncing to client a bit
 If you notice anything weird after update please say
+- /mine_and_slash reset_player_data to reset parts of a player

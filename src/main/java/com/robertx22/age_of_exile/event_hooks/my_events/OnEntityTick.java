@@ -19,6 +19,10 @@ public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
 
         try {
 
+            if (entity.level().isClientSide) {
+                return;
+            }
+
             var data = Load.Unit(entity);
 
             if (data == null) {
@@ -50,7 +54,7 @@ public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
             }
 
             data.trySync();
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
