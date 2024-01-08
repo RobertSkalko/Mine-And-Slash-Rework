@@ -44,10 +44,12 @@ public class TooltipStatsAligner {
         if (!ClientConfigs.getConfig().ALIGN_STAT_TOOLTIPS.get()) {
             return original;
         }
-        LinkedList<Component> compList = null;
-        try {
-            Minecraft mc = Minecraft.getInstance();
-            // Create a Matcher for finding patterns in the stats, this patterns will match the value, like +3, -20%.
+
+        if(list.size() <= 1){
+            return original;
+        }
+        Minecraft mc = Minecraft.getInstance();
+        // Create a Matcher for finding patterns in the stats, this patterns will match the value, like +3, -20%.
                 /*
                     this regex make sure the stat pattern is like:
                         (something not spaces here, and must start from the beginning of line)(two spaces here, or sth, anyway it is from the StatNameRegex.java)(something not spaces here)
