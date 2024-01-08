@@ -90,25 +90,25 @@ public class TooltipStatsAligner {
                     });
 
 
-            Map<Integer, Component> onlyContainTargetMap = new HashMap<>(targetMap);
-            onlyContainTargetMap.entrySet()
-                    .forEach(x -> {
-                        var currentComp = x.getValue();
-                        Matcher matcher = getMatcherFunction.apply(x.getValue().getString()).apply(matcherForValue);
-                        matcher.find();
-                        String gearValue = matcher.group(1);
-                        int width = mc.font.width(gearValue);
-                        Style style = currentComp.getStyle();
-                        String dotNeed = ".".repeat((maxWidth[0] - width) / 2);
-                        String lastPart = StatNameRegex.VALUEAndNAMESeparator + matcher.group(2);
-                        Component wholeComponent = ExileText.ofText(gearValue)
-                                .append(ExileText.ofText(dotNeed).format(ChatFormatting.BLACK).get())
-                                .append(lastPart)
-                                .get()
-                                .withStyle(style);
-                        x.setValue(wholeComponent);
-                    });
-            mapWithIndex.putAll(onlyContainTargetMap);
+        Map<Integer, Component> onlyContainTargetMap = new HashMap<>(targetMap);
+        onlyContainTargetMap.entrySet()
+                .forEach(x -> {
+                    var currentComp = x.getValue();
+                    Matcher matcher = getMatcherFunction.apply(x.getValue().getString()).apply(matcherForValue);
+                    matcher.find();
+                    String gearValue = matcher.group(1);
+                    int width = mc.font.width(gearValue);
+                    Style style = currentComp.getStyle();
+                    String dotNeed = ".".repeat((maxWidth[0] - width) / 2);
+                    String lastPart = StatNameRegex.VALUEAndNAMESeparator + matcher.group(2);
+                    Component wholeComponent = ExileText.ofText(gearValue)
+                            .append(ExileText.ofText(ChatFormatting.BLACK + dotNeed).get())
+                            .append(lastPart)
+                            .get()
+                            .withStyle(style);
+                    x.setValue(wholeComponent);
+                });
+        mapWithIndex.putAll(onlyContainTargetMap);
 
             //put any post-post edit logic in here.
             compList = new LinkedList<>(mapWithIndex.values());
@@ -132,14 +132,16 @@ public class TooltipStatsAligner {
                     iterator.next();
                 }
             }
-            if (addEmptyLine && !compList.get(iterator.previousIndex()).getString().equals("")) {
-                if (compList.size() > 1) {
-                    compList.addLast(emptyLine);
-                }
-            }
-        } catch (Exception e) {
-            ModErrors.print(e);
-            return original;
+        }
+        if (!addEmptyLine) {
+            return compList;
+        }
+        if(compList.size() <= 1){
+            return compList;
+        }
+
+        if (!compList.get(iterator.previousIndex()).getString().equals("")) {
+            compList.addLast(emptyLine);
         }
 
         return compList;
