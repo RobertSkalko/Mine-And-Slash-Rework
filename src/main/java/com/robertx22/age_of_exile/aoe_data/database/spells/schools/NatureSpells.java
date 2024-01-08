@@ -136,7 +136,7 @@ public class NatureSpells implements ExileRegistryInit {
                 .build();
 
 
-        SpellBuilder.of(REJUVENATION, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 60 * 20)
+        SpellBuilder.of(REJUVENATION, PlayStyle.INT, SpellConfiguration.Builder.instant(15, 20 * 3)
                         , "Rejuvenation",
                         Arrays.asList(SpellTags.heal, SpellTags.rejuvenate, SpellTags.BUFF))
                 .manualDesc("Gives buff that heals nearby allies for " + SpellCalcs.REJUVENATION.getLocDmgTooltip() + " every second.")

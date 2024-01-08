@@ -6,11 +6,11 @@ import com.robertx22.age_of_exile.saveclasses.DeathStatsData;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.util.Mth;
+import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.ChatFormatting;
-
-import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
 
 public class MagicShield extends Stat {
     public static String GUID = "magic_shield";
@@ -59,8 +59,7 @@ public class MagicShield extends Stat {
     public static float modifyEntityDamage(DamageEvent effect, float dmg) {
 
 
-        float current = effect.targetData.getResources()
-                .getMagicShield();
+        float current = effect.targetData.getResources().getMagicShield();
 
         if (current > 0) {
 
@@ -69,12 +68,14 @@ public class MagicShield extends Stat {
 
             if (dmgReduced > 0) {
 
+                SoundUtils.playSound(effect.target, SoundEvents.GENERIC_HURT, 0.5F, 1);
+                SoundUtils.playSound(effect.target, SoundEvents.GUARDIAN_HURT, 1, 1);
+           
                 if (effect.target instanceof Player) {
                     DeathStatsData.record((Player) effect.target, effect.getElement(), dmgReduced);
                 }
 
-                effect.targetData.getResources()
-                        .spend(effect.target, ResourceType.magic_shield, dmgReduced);
+                effect.targetData.getResources().spend(effect.target, ResourceType.magic_shield, dmgReduced);
 
                 return dmg - dmgReduced;
 

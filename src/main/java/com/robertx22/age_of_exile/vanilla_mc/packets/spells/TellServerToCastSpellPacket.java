@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.SpellCastContext;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
 import net.minecraft.network.FriendlyByteBuf;
@@ -65,7 +66,7 @@ public class TellServerToCastSpellPacket extends MyPacket<TellServerToCastSpellP
                 if (!cds.isOnCooldown("spell_fail")) {
                     cds.setOnCooldown("spell_fail", 40);
                     if (can.answer != null) {
-                        player.sendSystemMessage(can.answer);
+                        player.sendSystemMessage(Chats.CAST_FAILED.locName().append(can.answer));
                     }
                 }
             }

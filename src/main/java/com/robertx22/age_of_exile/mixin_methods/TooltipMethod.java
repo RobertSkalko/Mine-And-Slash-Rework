@@ -25,6 +25,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
+import static com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils.splitLongText;
+
 public class TooltipMethod {
     public static List<Component> getTooltip(ItemStack stack, Player entity, TooltipFlag tooltipContext, CallbackInfoReturnable<List<Component>> list) {
 
@@ -95,6 +97,8 @@ public class TooltipMethod {
                 GearSlot slot = GearSlot.getSlotOf(stack.getItem());
                 if (slot != null) {
                     tooltip.add(TooltipUtils.gearSlot(slot));
+
+                    tooltip.addAll(splitLongText(Chats.SOULLESS_GEAR_INFO.locName()));
                 }
 
                 if (stack.getItem() instanceof INeedsNBT) {

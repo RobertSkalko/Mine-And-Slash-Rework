@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.stats.name_regex.StatNameRegex;
+import com.robertx22.age_of_exile.mmorpg.ModErrors;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -43,8 +44,10 @@ public class TooltipStatsAligner {
         if (!ClientConfigs.getConfig().ALIGN_STAT_TOOLTIPS.get()) {
             return original;
         }
-        Minecraft mc = Minecraft.getInstance();
-        // Create a Matcher for finding patterns in the stats, this patterns will match the value, like +3, -20%.
+        LinkedList<Component> compList = null;
+        try {
+            Minecraft mc = Minecraft.getInstance();
+            // Create a Matcher for finding patterns in the stats, this patterns will match the value, like +3, -20%.
                 /*
                     this regex make sure the stat pattern is like:
                         (something not spaces here, and must start from the beginning of line)(two spaces here, or sth, anyway it is from the StatNameRegex.java)(something not spaces here)
@@ -52,87 +55,91 @@ public class TooltipStatsAligner {
                     +3    Strength  or  Strength:    +3
                     they will be all good.
                 */
-        Pattern matcherForValue = Pattern.compile("^([^◆\\s]+)" + StatNameRegex.VALUEAndNAMESeparator + "(.+)");
-        //add this to find smth match (+/-)(a figure), basically the stats value
-        Pattern deepmatcher = Pattern.compile("([\\+\\-][0-9])");
-        Function<String, Function<Pattern, Matcher>> getMatcherFunction =
-                str -> pattern -> pattern.matcher(str);
+            Pattern matcherForValue = Pattern.compile("^([^◆\\s]+)" + StatNameRegex.VALUEAndNAMESeparator + "(.+)");
+            //add this to find smth match (+/-)(a figure), basically the stats value
+            Pattern deepmatcher = Pattern.compile("([\\+\\-][0-9])");
+            Function<String, Function<Pattern, Matcher>> getMatcherFunction =
+                    str -> pattern -> pattern.matcher(str);
 
-        LinkedHashMap<Integer, Component> mapWithIndex;
-        //wrap the list into a map, map key is value's index, map value is the value.
-        mapWithIndex = IntStream.range(0, list.size())
-                .boxed()
-                .collect(Collectors.toMap(
-                        integer -> integer,
-                        integer -> list.get(integer),
-                        (existing, replacement) -> existing,
-                        LinkedHashMap::new
-                ));
+            LinkedHashMap<Integer, Component> mapWithIndex;
+            //wrap the list into a map, map key is value's index, map value is the value.
+            mapWithIndex = IntStream.range(0, list.size())
+                    .boxed()
+                    .collect(Collectors.toMap(
+                            integer -> integer,
+                            integer -> list.get(integer),
+                            (existing, replacement) -> existing,
+                            LinkedHashMap::new
+                    ));
 
-        final int[] maxWidth = {0};
-        Map<Integer, Component> targetMap = new HashMap<>();
+            final int[] maxWidth = {0};
+            Map<Integer, Component> targetMap = new HashMap<>();
 
-        mapWithIndex.entrySet().stream()
-                //take all stats
-                .filter(x -> matcherForValue.asPredicate().test(x.getValue().getString()))
-                .filter(x -> deepmatcher.asPredicate().test(x.getValue().getString()))
-                .forEach(x -> {
-                    //calc all target line's width, take the max.
-                    Matcher matcher = getMatcherFunction.apply(x.getValue().getString()).apply(matcherForValue);
-                    matcher.find();
-                    String matchedValue = matcher.group(1);
-                    int width = mc.font.width(matchedValue);
-                    maxWidth[0] = Math.max(maxWidth[0], width);
-                    targetMap.put(x.getKey(), x.getValue());
-                });
+            mapWithIndex.entrySet().stream()
+                    //take all stats
+                    .filter(x -> matcherForValue.asPredicate().test(x.getValue().getString()))
+                    .filter(x -> deepmatcher.asPredicate().test(x.getValue().getString()))
+                    .forEach(x -> {
+                        //calc all target line's width, take the max.
+                        Matcher matcher = getMatcherFunction.apply(x.getValue().getString()).apply(matcherForValue);
+                        matcher.find();
+                        String matchedValue = matcher.group(1);
+                        int width = mc.font.width(matchedValue);
+                        maxWidth[0] = Math.max(maxWidth[0], width);
+                        targetMap.put(x.getKey(), x.getValue());
+                    });
 
 
-        Map<Integer, Component> onlyContainTargetMap = new HashMap<>(targetMap);
-        onlyContainTargetMap.entrySet()
-                .forEach(x -> {
-                    var currentComp = x.getValue();
-                    Matcher matcher = getMatcherFunction.apply(x.getValue().getString()).apply(matcherForValue);
-                    matcher.find();
-                    String gearValue = matcher.group(1);
-                    int width = mc.font.width(gearValue);
-                    Style style = currentComp.getStyle();
-                    String dotNeed = ".".repeat((maxWidth[0] - width) / 2);
-                    String lastPart = StatNameRegex.VALUEAndNAMESeparator + matcher.group(2);
-                    Component wholeComponent = ExileText.ofText(gearValue)
-                            .append(ExileText.ofText(dotNeed).format(ChatFormatting.BLACK).get())
-                            .append(lastPart)
-                            .get()
-                            .withStyle(style);
-                    x.setValue(wholeComponent);
-                });
-        mapWithIndex.putAll(onlyContainTargetMap);
+            Map<Integer, Component> onlyContainTargetMap = new HashMap<>(targetMap);
+            onlyContainTargetMap.entrySet()
+                    .forEach(x -> {
+                        var currentComp = x.getValue();
+                        Matcher matcher = getMatcherFunction.apply(x.getValue().getString()).apply(matcherForValue);
+                        matcher.find();
+                        String gearValue = matcher.group(1);
+                        int width = mc.font.width(gearValue);
+                        Style style = currentComp.getStyle();
+                        String dotNeed = ".".repeat((maxWidth[0] - width) / 2);
+                        String lastPart = StatNameRegex.VALUEAndNAMESeparator + matcher.group(2);
+                        Component wholeComponent = ExileText.ofText(gearValue)
+                                .append(ExileText.ofText(dotNeed).format(ChatFormatting.BLACK).get())
+                                .append(lastPart)
+                                .get()
+                                .withStyle(style);
+                        x.setValue(wholeComponent);
+                    });
+            mapWithIndex.putAll(onlyContainTargetMap);
 
-        //put any post-post edit logic in here.
-        LinkedList<Component> compList = new LinkedList<>(mapWithIndex.values());
-        ListIterator<Component> iterator = compList.listIterator();
-        MutableComponent emptyLine = ExileText.emptyLine().get();
-        // place empty lines.
-        while (iterator.hasNext()) {
-            int index = iterator.nextIndex();
+            //put any post-post edit logic in here.
+            compList = new LinkedList<>(mapWithIndex.values());
+            ListIterator<Component> iterator = compList.listIterator();
+            MutableComponent emptyLine = ExileText.emptyLine().get();
+            // place empty lines.
+            while (iterator.hasNext()) {
+                int index = iterator.nextIndex();
 
-            if (getMatcherFunction.apply(compList.get(index).getString()).apply(Pattern.compile("◆ ")).find()) {
-                String previousLine = iterator.hasPrevious() ? compList.get(index - 1).getString() : "";
-                String nextLine = compList.get(index + 1).getString();
+                if (getMatcherFunction.apply(compList.get(index).getString()).apply(Pattern.compile("◆ ")).find()) {
+                    String previousLine = iterator.hasPrevious() ? compList.get(index - 1).getString() : "";
+                    String nextLine = compList.get(index + 1).getString();
 
-                if (!previousLine.isEmpty()) iterator.add(emptyLine);
+                    if (!previousLine.isEmpty()) iterator.add(emptyLine);
 
-                iterator.next();
+                    iterator.next();
 
-                if (!nextLine.isEmpty()) iterator.add(emptyLine);
+                    if (!nextLine.isEmpty()) iterator.add(emptyLine);
 
-            } else {
-                iterator.next();
+                } else {
+                    iterator.next();
+                }
             }
-        }
-        if (addEmptyLine && !compList.get(iterator.previousIndex()).getString().equals("")) {
-            if (compList.size() > 1) {
-                compList.addLast(emptyLine);
+            if (addEmptyLine && !compList.get(iterator.previousIndex()).getString().equals("")) {
+                if (compList.size() > 1) {
+                    compList.addLast(emptyLine);
+                }
             }
+        } catch (Exception e) {
+            ModErrors.print(e);
+            return original;
         }
 
         return compList;
