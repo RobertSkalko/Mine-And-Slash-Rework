@@ -18,6 +18,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SpellSchoolScreen extends BaseScreen implements INamedScreen, ILeftRight {
     private static final ResourceLocation BACKGROUND = new ResourceLocation(SlashRef.MODID, "textures/gui/asc_classes/background.png");
@@ -37,6 +38,18 @@ public class SpellSchoolScreen extends BaseScreen implements INamedScreen, ILeft
         return schoolsInOrder.get(currentIndex);
     }
 
+
+    public void setCurrent(SpellSchool sc) {
+        for (int i = 0; i < schoolsInOrder.size(); i++) {
+            if (sc.GUID().equals(schoolsInOrder.get(i).GUID())) {
+                this.currentIndex = i;
+                init();
+                break;
+            }
+        }
+
+    }
+
     public SpellSchoolScreen() {
         super(sizeX, sizeY);
     }
@@ -53,15 +66,35 @@ public class SpellSchoolScreen extends BaseScreen implements INamedScreen, ILeft
 
     static int SLOT_SPACING = 21;
 
+    SchoolButton LEFT_SCHOOL;
+    SchoolButton RIGHT_SCHOOL;
+
     @Override
     public void init() {
         super.init();
+        this.clearWidgets();
 
         try {
-            this.clearWidgets();
+
+            var all = Load.player(mc.player).ascClass.school.stream().map(x -> ExileDB.SpellSchools().get(x)).collect(Collectors.toList());
+
+            LEFT_SCHOOL = new SchoolButton(this, guiLeft + 41, guiTop + 13);
+            RIGHT_SCHOOL = new SchoolButton(this, guiLeft + 185, guiTop + 13);
+
+            this.publicAddButton(LEFT_SCHOOL);
+            this.publicAddButton(RIGHT_SCHOOL);
+
+            if (all.size() > 0) {
+                LEFT_SCHOOL.school = all.get(0);
+            }
+            if (all.size() > 1) {
+                RIGHT_SCHOOL.school = all.get(1);
+            }
+
 
             addRenderableWidget(new LeftRightButton(this, guiLeft + 100 - LeftRightButton.xSize - 5, guiTop + 25 - LeftRightButton.ySize / 2, true));
             addRenderableWidget(new LeftRightButton(this, guiLeft + 150 + 5, guiTop + 25 - LeftRightButton.ySize / 2, false));
+
 
             currentSchool().perks.entrySet()
                     .forEach(e -> {

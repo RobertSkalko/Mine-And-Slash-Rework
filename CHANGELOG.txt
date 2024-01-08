@@ -102,3 +102,4 @@ Some are excluded like like low cooldown spammable spells wont screech at you fo
 - tweaked item click on other code, please check for any errors
 - currencies shouldnt move items around in inventory anymore
 - added set_health_damage_override to entityconfig datapack for stubborn closed source mods that mess with damage mechanics and dont provide configs. Yes i see the irony
+- added buttons for choosen spell schools

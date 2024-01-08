@@ -144,7 +144,8 @@ public class RangerSpells implements ExileRegistryInit {
                         "Dash forwards quickly and gain slowfall.")
                 .weaponReq(CastingWeapon.NON_MAGE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.CREEPER_PRIMED, 1D, 1.6D)
-                        .addActions(SpellAction.CASTER_USE_COMMAND.create("effect give @p minecraft:slow_falling 1 1 true")))
+                        .addActions(SpellAction.POTION.createGive(MobEffects.SLOW_FALLING, 20D))
+                        .addTarget(TargetSelector.CASTER.create()))
                 .onCast(PartBuilder.playSound(SoundEvents.FIRE_EXTINGUISH, 1D, 1.6D))
 
                 .teleportForward()
