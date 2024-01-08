@@ -84,16 +84,15 @@ public class WaterSpells implements ExileRegistryInit {
                         .put(MapField.TRACKS_ENEMIES, true)
                         .put(MapField.EXPIRE_ON_ENTITY_HIT, false)
                 ))
+                .onTick(ParticleBuilder.of(ParticleTypes.SNOWFLAKE, 0.15F).amount(2).build())
+                .onTick(ParticleBuilder.of(ParticleTypes.ITEM_SNOWBALL, 0.15F).amount(7).build())
+                .onTick(ParticleBuilder.of(ParticleTypes.SNOWFLAKE, 3F).amount(15).build().tick(20D))
+                .onTick(ParticleBuilder.of(ParticleTypes.ITEM_SNOWBALL, 3F).amount(5).build().tick(20D))
 
-                .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.ITEM_SNOWBALL, 2D, 0.15D))
-                .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.SNOWFLAKE, 7D, 0.15D))
+                .onTick(DamageBuilder.radius(Elements.Cold, 3, SpellCalcs.ICEBALL).build())
 
-                .onTick(PartBuilder.damageInAoe(SpellCalcs.ICEBALL, Elements.Cold, 3D).tick(20D))
-                .onTick(PartBuilder.aoeParticles(ParticleTypes.ITEM_SNOWBALL, 5D, 3D).tick(20D))
-                .onTick(PartBuilder.aoeParticles(ParticleTypes.SNOWFLAKE, 15D, 3D).tick(20D))
                 .levelReq(20)
                 .build();
-
 
         SpellBuilder.of(FROST_FLOWER, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 60)
                                 .setSwingArm(), "Frost Totem",

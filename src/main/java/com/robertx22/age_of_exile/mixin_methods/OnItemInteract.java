@@ -44,10 +44,6 @@ public class OnItemInteract {
         }
     }
 
-    public enum Applied {
-        SUCCESS, DIDNT_MODIFY, FAILED, CUSTOM;
-    }
-
     public abstract static class ClickFeature {
         public abstract Result tryApply(Player player, ItemStack craftedStack, ItemStack currency, Slot slot);
     }

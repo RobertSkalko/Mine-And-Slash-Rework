@@ -36,6 +36,8 @@ public class EntityConfig implements JsonExileRegistry<EntityConfig>, ISerializa
         this.exp_multi = loot;
     }
 
+    public boolean set_health_damage_override = false;
+
     public String identifier = "";
 
     public SpecialMobStats stats = new SpecialMobStats();

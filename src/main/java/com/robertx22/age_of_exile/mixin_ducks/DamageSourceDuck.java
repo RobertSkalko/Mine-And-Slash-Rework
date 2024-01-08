@@ -9,7 +9,12 @@ public interface DamageSourceDuck {
 
     public float getMnsDamage();
 
+    public void setOriginalHP(float hp);
+
+    public float getOriginalHP();
+
     public boolean hasMnsDamageOverride();
+
 
     default void tryOverrideDmgWithMns(AttackInformation info) {
         if (hasMnsDamageOverride()) {
@@ -32,6 +37,7 @@ public interface DamageSourceDuck {
             } else {
                 event.canceled = false;
             }
+
         }
     }
 

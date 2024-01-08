@@ -13,6 +13,16 @@ public class NewDamageMain {
         ExileEvents.DAMAGE_BEFORE_CALC.register(new OnNonPlayerDamageEntityEvent());
         ExileEvents.DAMAGE_BEFORE_CALC.register(new OnPlayerDamageEntityEvent());
 
+        ExileEvents.DAMAGE_BEFORE_CALC.register(new EventConsumer<>() {
+            @Override
+            public void accept(ExileEvents.OnDamageEntity event) {
+                if (event.source != null) {
+                    var duck = (DamageSourceDuck) event.source;
+                    duck.setOriginalHP(event.mob.getHealth());
+                }
+            }
+        });
+
         ExileEvents.DAMAGE_AFTER_CALC.register(new EventConsumer<>() {
             @Override
             public void accept(ExileEvents.OnDamageEntity event) {

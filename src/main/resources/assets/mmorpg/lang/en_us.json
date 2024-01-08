@@ -810,6 +810,15 @@
 "_comment": " [CATEGORY]: GUI - NAMES",
 
 
+"_comment": " [CATEGORY]: FOODS - NAMES",
+
+	"mmorpg.buff_consumption.meal": "Meal",
+	"mmorpg.buff_consumption.potion": "Potion",
+	"mmorpg.buff_consumption.seafood": "Seafood",
+
+"_comment": " [CATEGORY]: FOODS - NAMES",
+
+
 "_comment": " [CATEGORY]: RUNE WORDS - NAMES",
 
 	"mmorpg.runeword.abyssal_depths": "Abyssal Depths",
@@ -820,15 +829,6 @@
 	"mmorpg.runeword.the_novice": "The Novice",
 
 "_comment": " [CATEGORY]: RUNE WORDS - NAMES",
-
-
-"_comment": " [CATEGORY]: FOODS - NAMES",
-
-	"mmorpg.buff_consumption.meal": "Meal",
-	"mmorpg.buff_consumption.potion": "Potion",
-	"mmorpg.buff_consumption.seafood": "Seafood",
-
-"_comment": " [CATEGORY]: FOODS - NAMES",
 
 
 "_comment": " [CATEGORY]: RARITIES - NAMES",
@@ -850,6 +850,52 @@
 	"mmorpg.rarity..unique": "Unique",
 
 "_comment": " [CATEGORY]: RARITIES - NAMES",
+
+
+"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
+
+	"mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
+	"item.mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
+	"mmorpg.currency.entangled_affix_upgrade": "Entangled Orb of Imbalance",
+	"item.mmorpg.currency.entangled_affix_upgrade": "Entangled Orb of Imbalance",
+	"item.mmorpg.currency.entangled_quality": "Entangled Orb of Quality",
+	"mmorpg.currency.entangled_quality": "Entangled Orb of Quality",
+	"mmorpg.currency.entangled_unique_reroll": "Entangled Orb of Imperfection",
+	"item.mmorpg.currency.entangled_unique_reroll": "Entangled Orb of Imperfection",
+	"mmorpg.currency.level_up_orb": "Orb of Infinity",
+	"item.mmorpg.currency.level_up_orb": "Orb of Infinity",
+	"item.mmorpg.currency.mastery_seal0": "Spiritual Mastery Seal",
+	"mmorpg.currency.mastery_seal0": "Spiritual Mastery Seal",
+	"mmorpg.currency.mastery_seal1": "Celestial Mastery Seal",
+	"item.mmorpg.currency.mastery_seal1": "Celestial Mastery Seal",
+	"mmorpg.currency.mastery_seal2": "Empyrean Mastery Seal",
+	"item.mmorpg.currency.mastery_seal2": "Empyrean Mastery Seal",
+	"item.mmorpg.currency.mastery_seal3": "Angelic Mastery Seal",
+	"mmorpg.currency.mastery_seal3": "Angelic Mastery Seal",
+	"item.mmorpg.currency.mastery_seal4": "Divine Mastery Seal",
+	"mmorpg.currency.mastery_seal4": "Divine Mastery Seal",
+	"item.mmorpg.currency.mastery_seal5": "Godly Mastery Seal",
+	"mmorpg.currency.mastery_seal5": "Godly Mastery Seal",
+	"item.mmorpg.currency.orb_of_quality": "Orb of Quality",
+	"mmorpg.currency.orb_of_quality": "Orb of Quality",
+	"mmorpg.currency.sharpening_stone0": "Spiritual Sharpening Stone",
+	"item.mmorpg.currency.sharpening_stone0": "Spiritual Sharpening Stone",
+	"mmorpg.currency.sharpening_stone1": "Celestial Sharpening Stone",
+	"item.mmorpg.currency.sharpening_stone1": "Celestial Sharpening Stone",
+	"mmorpg.currency.sharpening_stone2": "Empyrean Sharpening Stone",
+	"item.mmorpg.currency.sharpening_stone2": "Empyrean Sharpening Stone",
+	"item.mmorpg.currency.sharpening_stone3": "Angelic Sharpening Stone",
+	"mmorpg.currency.sharpening_stone3": "Angelic Sharpening Stone",
+	"mmorpg.currency.sharpening_stone4": "Divine Sharpening Stone",
+	"item.mmorpg.currency.sharpening_stone4": "Divine Sharpening Stone",
+	"mmorpg.currency.sharpening_stone5": "Godly Sharpening Stone",
+	"item.mmorpg.currency.sharpening_stone5": "Godly Sharpening Stone",
+	"item.mmorpg.currency.socket_adder": "Orb of Digging",
+	"mmorpg.currency.socket_adder": "Orb of Digging",
+	"mmorpg.currency.unique_reroll": "Orb of Imperfection",
+	"item.mmorpg.currency.unique_reroll": "Orb of Imperfection",
+
+"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
 
 
 "_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
@@ -884,52 +930,6 @@
 	"mmorpg.effect.wounds": "Wounds",
 
 "_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
-
-
-"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
-
-	"mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
-	"item.mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
-	"item.mmorpg.currency.entangled_affix_upgrade": "Entangled Orb of Imbalance",
-	"mmorpg.currency.entangled_affix_upgrade": "Entangled Orb of Imbalance",
-	"item.mmorpg.currency.entangled_quality": "Entangled Orb of Quality",
-	"mmorpg.currency.entangled_quality": "Entangled Orb of Quality",
-	"item.mmorpg.currency.entangled_unique_reroll": "Entangled Orb of Imperfection",
-	"mmorpg.currency.entangled_unique_reroll": "Entangled Orb of Imperfection",
-	"mmorpg.currency.level_up_orb": "Orb of Infinity",
-	"item.mmorpg.currency.level_up_orb": "Orb of Infinity",
-	"item.mmorpg.currency.mastery_seal0": "Spiritual Mastery Seal",
-	"mmorpg.currency.mastery_seal0": "Spiritual Mastery Seal",
-	"mmorpg.currency.mastery_seal1": "Celestial Mastery Seal",
-	"item.mmorpg.currency.mastery_seal1": "Celestial Mastery Seal",
-	"item.mmorpg.currency.mastery_seal2": "Empyrean Mastery Seal",
-	"mmorpg.currency.mastery_seal2": "Empyrean Mastery Seal",
-	"mmorpg.currency.mastery_seal3": "Angelic Mastery Seal",
-	"item.mmorpg.currency.mastery_seal3": "Angelic Mastery Seal",
-	"item.mmorpg.currency.mastery_seal4": "Divine Mastery Seal",
-	"mmorpg.currency.mastery_seal4": "Divine Mastery Seal",
-	"item.mmorpg.currency.mastery_seal5": "Godly Mastery Seal",
-	"mmorpg.currency.mastery_seal5": "Godly Mastery Seal",
-	"mmorpg.currency.orb_of_quality": "Orb of Quality",
-	"item.mmorpg.currency.orb_of_quality": "Orb of Quality",
-	"mmorpg.currency.sharpening_stone0": "Spiritual Sharpening Stone",
-	"item.mmorpg.currency.sharpening_stone0": "Spiritual Sharpening Stone",
-	"mmorpg.currency.sharpening_stone1": "Celestial Sharpening Stone",
-	"item.mmorpg.currency.sharpening_stone1": "Celestial Sharpening Stone",
-	"item.mmorpg.currency.sharpening_stone2": "Empyrean Sharpening Stone",
-	"mmorpg.currency.sharpening_stone2": "Empyrean Sharpening Stone",
-	"item.mmorpg.currency.sharpening_stone3": "Angelic Sharpening Stone",
-	"mmorpg.currency.sharpening_stone3": "Angelic Sharpening Stone",
-	"item.mmorpg.currency.sharpening_stone4": "Divine Sharpening Stone",
-	"mmorpg.currency.sharpening_stone4": "Divine Sharpening Stone",
-	"item.mmorpg.currency.sharpening_stone5": "Godly Sharpening Stone",
-	"mmorpg.currency.sharpening_stone5": "Godly Sharpening Stone",
-	"mmorpg.currency.socket_adder": "Orb of Digging",
-	"item.mmorpg.currency.socket_adder": "Orb of Digging",
-	"mmorpg.currency.unique_reroll": "Orb of Imperfection",
-	"item.mmorpg.currency.unique_reroll": "Orb of Imperfection",
-
-"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
 
 
 "_comment": " [CATEGORY]: TALENTS - NAMES",

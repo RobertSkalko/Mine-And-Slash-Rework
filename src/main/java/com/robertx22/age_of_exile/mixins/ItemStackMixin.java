@@ -46,14 +46,19 @@ public abstract class ItemStackMixin {
         TooltipMethod.getTooltip(stack, entity, tooltipContext, list);
     }
 
-
     /*
-    @Inject(method = {"use"}, cancellable = true, at = {@At("HEAD")})
-    public void onUseItemstackmethod(Level world, Player user, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> ci) {
-        ItemStack stack = (ItemStack) (Object) this;
+    @Inject(method = "overrideStackedOnOther", at = @At(value = "HEAD"), cancellable = true)
+    public void stackedonsdsd(Slot slot, ClickAction action, Player p, CallbackInfoReturnable<Boolean> cir) {
 
-        OnItemStoppedUsingCastImbuedSpell.crossbow(stack, world, user, hand, ci);
+        try {
+            ItemStack stack = (ItemStack) (Object) this;
 
+            OnItemInteract.
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
      */

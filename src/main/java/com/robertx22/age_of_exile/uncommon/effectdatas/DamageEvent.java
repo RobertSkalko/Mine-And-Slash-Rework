@@ -339,21 +339,30 @@ public class DamageEvent extends EffectEvent {
         }
 
 
-        if (attackInfo != null) {
-            DamageSourceDuck duck = (DamageSourceDuck) attackInfo.getSource();
-            duck.setMnsDamage(vanillaDamage);
-            duck.tryOverrideDmgWithMns(attackInfo);
+        var config = ExileDB.getEntityConfig(target, Load.Unit(target));
+
+        if (target instanceof Player == false && config != null && config.set_health_damage_override) {
+            target.setHealth(target.getHealth() - vanillaDamage);
+            // todo this might create bugs but its probably better that damage actually works..
+            if (target.getHealth() <= 0) {
+                target.die(target.damageSources().mobAttack(this.source));
+            }
         } else {
-            if (target instanceof Player == false) {
-                int inv = target.invulnerableTime;
-                target.invulnerableTime = 0;
-                target.hurt(dmgsource, vanillaDamage);
-                target.invulnerableTime = inv;
+            if (attackInfo != null) {
+                DamageSourceDuck duck = (DamageSourceDuck) attackInfo.getSource();
+                duck.setMnsDamage(vanillaDamage);
+                duck.tryOverrideDmgWithMns(attackInfo);
             } else {
-                target.hurt(dmgsource, vanillaDamage);
+                if (target instanceof Player == false) {
+                    int inv = target.invulnerableTime;
+                    target.invulnerableTime = 0;
+                    target.hurt(dmgsource, vanillaDamage);
+                    target.invulnerableTime = inv;
+                } else {
+                    target.hurt(dmgsource, vanillaDamage);
+                }
             }
         }
-
         //target.invulnerableTime = 20;
         //target.hurtTime = 20;
 
