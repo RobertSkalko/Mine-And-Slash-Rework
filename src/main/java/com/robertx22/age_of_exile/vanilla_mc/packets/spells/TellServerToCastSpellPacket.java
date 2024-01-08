@@ -46,7 +46,9 @@ public class TellServerToCastSpellPacket extends MyPacket<TellServerToCastSpellP
 
         if (spell != null) {
 
-            if (data.spellCastingData.canCast(spell, player)) {
+            var can = data.spellCastingData.canCast(spell, player);
+
+            if (can.can) {
 
                 SpellCastContext c = new SpellCastContext(player, 0, spell);
                 data.spellCastingData.setToCast(c);
@@ -56,6 +58,16 @@ public class TellServerToCastSpellPacket extends MyPacket<TellServerToCastSpellP
                 //data.syncToClient(player);
 
                 return true;
+            } else {
+
+                var cds = Load.Unit(player).getCooldowns();
+
+                if (!cds.isOnCooldown("spell_fail")) {
+                    cds.setOnCooldown("spell_fail", 40);
+                    if (can.answer != null) {
+                        player.sendSystemMessage(can.answer);
+                    }
+                }
             }
 
         }

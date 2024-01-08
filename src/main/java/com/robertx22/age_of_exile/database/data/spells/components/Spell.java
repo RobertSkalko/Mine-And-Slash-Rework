@@ -302,7 +302,10 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         }
         try {
             if (showeffect) {
+
                 effect.forEach(x -> list.addAll(x.GetTooltipString(info)));
+
+            
             } else {
                 if (!effect.isEmpty()) {
                     list.add(Words.SHIFT_TO_SHOW_EFFECT.locName());

@@ -14,7 +14,7 @@ public class PetAttackUTIL {
 
 
         if (caster != null) {
-            
+
             Spell spell = ExileDB.Spells().get(Load.Unit(summon).summonedPetData.spell);
 
             if (spell != null) {
@@ -29,7 +29,7 @@ public class PetAttackUTIL {
 
                 boolean cancast = false;
                 if (caster instanceof Player p) {
-                    if (Load.player(p).spellCastingData.canCast(basic, p)) {
+                    if (Load.player(p).spellCastingData.canCast(basic, p).can) {
                         cancast = true;
                     } else {
                         cancast = false;

@@ -6,6 +6,15 @@ import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
+    ALREADY_CASTING("Already Casting a Spell"),
+    SPELL_IS_ON_CD("Spell is on cooldown"),
+    USING_TEST_SPELL("You are trying to use a test spell outside test environment"),
+    NO_CHARGES("You lack spell charges."),
+    NOT_IN_THIS_DIMENSION("You can't cast this spell in this dimension."),
+    NO_MANA("Not enough Resources to cast."),
+    WRONG_CASTING_WEAPON("That weapon type Can't cast this spell"),
+    NOT_MNS_WEAPON("You need a Mine and Slash Weapon (Imbued with Stats) to Cast spells."),
+
     CHARACTER_LOAD_INFO("CLICK to Load this Character\n\nCharacter Feature saves:\n- Your level and exp\n- Your spells, stats, talents, hotbar setup\n\nIt does not save your gear, gems jewels etc.\n\nEach Character starts from Level 1"),
     NO_DUPLICATE_AURA("You can't equip duplicate aura gems."),
     YOU_LACK_JEWEL_SLOTS("You lack jewel slots! You gain these typically from the Talent tree. You can use the search bar in the Talents screen to find them."),

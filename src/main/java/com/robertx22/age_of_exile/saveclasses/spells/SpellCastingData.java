@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.saveclasses.spells;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
+import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.SpellCastContext;
@@ -16,7 +17,6 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.effectdatas.SpendResourceEvent;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.OnScreenMessageUtils;
 import com.robertx22.age_of_exile.vanilla_mc.packets.NoManaPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import net.minecraft.network.chat.Component;
@@ -305,98 +305,84 @@ public class SpellCastingData {
         return null;
     }
 
-    public boolean canCast(Spell spell, Player player) {
+    public ExplainedResult canCast(Spell spell, Player player) {
 
         if (player.level().isClientSide) {
-            return false;
+            return ExplainedResult.failure(Component.literal("Client side"));
         }
-
         if (isCasting()) {
-            return false;
+            return ExplainedResult.failure(Chats.ALREADY_CASTING.locName());
         }
 
         if (spell == null) {
-            return false;
+            return ExplainedResult.failure(Component.literal("Trying to cast NULL Spell, this shouldn't happen"));
         }
 
-        if (Load.Unit(player)
-                .getCooldowns()
-                .isOnCooldown(spell.GUID())) {
-            return false;
+        if (Load.Unit(player).getCooldowns().isOnCooldown(spell.GUID())) {
+            // dont spam chat with no cd msgs for stuff like fireball
+            if (Load.Unit(player).getCooldowns().getCooldownTicks(spell.GUID()) > 40) {
+                return ExplainedResult.failure(Chats.SPELL_IS_ON_CD.locName());
+            }
+            return ExplainedResult.failure(null);
         }
 
         if (player.isCreative()) {
-            return true;
+            return ExplainedResult.success();
         }
 
-        if (spell.GUID()
-                .contains("test")) {
+        if (spell.GUID().contains("test")) {
             if (!MMORPG.RUN_DEV_TOOLS) {
-                return false;
+                return ExplainedResult.failure(Chats.USING_TEST_SPELL.locName());
             }
         }
 
         if (spell.config.charges > 0) {
             if (!charges.hasCharge(spell.config.charge_name)) {
-                return false;
+                return ExplainedResult.failure(Chats.NO_CHARGES.locName());
             }
         }
 
         SpellCastContext ctx = new SpellCastContext(player, 0, spell);
 
-        LivingEntity caster = ctx.caster;
 
-        if (caster instanceof Player == false) {
-            return true;
-        }
-
-        if (((Player) caster).isCreative()) {
-            return true;
-        }
-
-        EntityData data = Load.Unit(caster);
+        EntityData data = Load.Unit(player);
 
         if (data != null) {
 
-            if (!spell.isAllowedInDimension(caster.level())) {
-                if (caster instanceof Player) {
-                    ((Player) caster).displayClientMessage(Component.literal("You feel an entity watching you. [Spell can not be casted in this dimension]"), false);
-                }
-                return false;
+            if (!spell.isAllowedInDimension(player.level())) {
+                return ExplainedResult.failure(Chats.NOT_IN_THIS_DIMENSION.locName());
             }
 
             SpendResourceEvent rctx = spell.getManaCostCtx(ctx);
             SpendResourceEvent ectx = spell.getManaCostCtx(ctx);
 
+
             if (data.getResources().hasEnough(rctx) && data.getResources().hasEnough(ectx)) {
-
-                if (!spell.getConfig().castingWeapon.predicate.predicate.test(caster)) {
-                    return false;
-                }
-
 
                 GearItemData wep = StackSaving.GEARS.loadFrom(ctx.caster.getMainHandItem());
 
                 if (wep == null) {
-                    return false;
+                    return ExplainedResult.failure(Chats.NOT_MNS_WEAPON.locName());
+                }
+
+                if (!spell.getConfig().castingWeapon.predicate.predicate.test(player)) {
+                    return ExplainedResult.failure(Chats.WRONG_CASTING_WEAPON.locName());
                 }
 
                 if (!wep.canPlayerWear(ctx.data)) {
-                    if (ctx.caster instanceof Player) {
-                        OnScreenMessageUtils.sendMessage((ServerPlayer) ctx.caster, Component.literal(""), Chats.WEAPON_REQ_NOT_MET.locName());
-                    }
-                    return false;
+                    return ExplainedResult.failure(Chats.WEAPON_REQ_NOT_MET.locName());
                 }
 
-                return true;
+                return ExplainedResult.success();
             } else {
-                if (caster instanceof ServerPlayer) {
-                    Packets.sendToClient((Player) caster, new NoManaPacket());
+                if (player instanceof ServerPlayer) {
+                    Packets.sendToClient((Player) player, new NoManaPacket());
+                    return ExplainedResult.failure(Chats.NO_MANA.locName());
                 }
             }
         }
 
-        return false;
+        return ExplainedResult.failure(null);
 
     }
 

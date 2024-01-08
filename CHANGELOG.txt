@@ -96,3 +96,5 @@ If you notice anything weird after update please say
 - /mine_and_slash reset_player_data to reset parts of a player
 - added status effect wiki
 - added blizzard spell
+- added chat explanation for ANY reason your spell cast might fail :)
+Some are excluded like like low cooldown spammable spells wont screech at you for holding the button, but if the cooldown is higher than 2 seconds than it will gladly tell you

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-// todo
+// todo replace all spells with these builders
 public class DamageBuilder {
 
     private EntityFinder.SelectionType selection = EntityFinder.SelectionType.RADIUS;
