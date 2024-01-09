@@ -13,6 +13,7 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatI
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.library_of_exile.wrappers.ExileText;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class ImplicitStatsData implements IGearPartTooltip, IRerollable, IStatsC
 
 
         if (!stats.isEmpty()) {
-            list.add(Words.IMPLICIT_STATS.locName());
+            list.add(Words.IMPLICIT_STATS.locName().withStyle(ChatFormatting.BLUE));
 
             getAllStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
             list.add(ExileText.ofText("").get());
