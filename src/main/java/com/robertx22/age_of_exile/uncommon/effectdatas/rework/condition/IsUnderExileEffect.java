@@ -16,6 +16,7 @@ public class IsUnderExileEffect extends StatCondition {
     public IsUnderExileEffect(EffectCtx ctx, EffectSides side) {
         super("is_" + side.id + "_under_" + ctx.id, "is_under_exile_effect");
         this.side = side;
+        this.effect = ctx.resourcePath;
     }
 
     IsUnderExileEffect() {
@@ -24,7 +25,13 @@ public class IsUnderExileEffect extends StatCondition {
 
     @Override
     public boolean can(EffectEvent event, EffectSides statSource, StatData data, Stat stat) {
-        return Load.Unit(event.getSide(side)).getStatusEffectsData().get(ExileDB.ExileEffects().get(effect)).stacks > 0;
+        var d = Load.Unit(event.getSide(side)).getStatusEffectsData();
+
+        var eff = ExileDB.ExileEffects().get(effect);
+        if (d.has(eff)) {
+            return d.get(eff).stacks > 0;
+        }
+        return false;
     }
 
     @Override

@@ -58,7 +58,6 @@ public class DataPackStatEffect implements IStatEffect {
                     return;
                 }
                 e.activate(effect, statSource, data, stat);
-
             });
 
         }

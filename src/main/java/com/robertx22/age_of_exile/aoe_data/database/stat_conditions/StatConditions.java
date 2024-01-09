@@ -1,7 +1,12 @@
 package com.robertx22.age_of_exile.aoe_data.database.stat_conditions;
 
 import com.robertx22.age_of_exile.aoe_data.DataHolder;
+import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
+import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
+import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SummonType;
+import com.robertx22.age_of_exile.aoe_data.database.spells.schools.WaterSpells;
+import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.tags.ModTag;
 import com.robertx22.age_of_exile.tags.TagType;
@@ -44,10 +49,14 @@ public class StatConditions implements ExileRegistryInit {
     public static StatCondition IS_ATTACK_DAMAGE = new StringMatchesCondition(EventData.STYLE, PlayStyle.INT.id).flipCondition();
     public static StatCondition IS_NOT_SUMMON_ATTACK = new IsBooleanTrueCondition(EventData.IS_SUMMON_ATTACK).flipCondition();
 
+    public static StatCondition BONE_SHATTER_NO_CD = new IsNotOnCooldownCondition(WaterSpells.BONE_SHATTER_PROC);
 
-    public static DataHolder<ModTag, StatCondition> EFFECT_HAS_TAG = new DataHolder<>(
-            ModTag.MAP.get(TagType.Effect)
-            , x -> new EffectHasTagCondition(x));
+
+    public static DataHolder<EffectCtx, StatCondition> TARGET_HAS_EFFECT = new DataHolder<>(Arrays.asList(ModEffects.BONE_CHILL), x -> new IsUnderExileEffect(x, EffectSides.Target));
+
+    public static DataHolder<Ailment, StatCondition> IS_EVENT_AILMENT = new DataHolder<>(Ailments.ALL, x -> new IsAilmentCondition(x));
+
+    public static DataHolder<ModTag, StatCondition> EFFECT_HAS_TAG = new DataHolder<>(ModTag.MAP.get(TagType.Effect), x -> new EffectHasTagCondition(x));
 
     public static DataHolder<ResourceType, StatCondition> IS_RESOURCE = new DataHolder<>(
             ResourceType.values()
@@ -114,6 +123,14 @@ public class StatConditions implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
+
+        // todo why not just do it when class is contructed
+        
+        BONE_SHATTER_NO_CD.addToSerializables();
+
+        TARGET_HAS_EFFECT.addToSerializables();
+        BONE_SHATTER_NO_CD.addToSerializables();
+        IS_EVENT_AILMENT.addToSerializables();
 
         ATTACK_TYPE_MATCHES.addToSerializables();
         IS_ELEMENTAL.addToSerializables();

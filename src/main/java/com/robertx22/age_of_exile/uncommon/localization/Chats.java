@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
+    ALT_TO_SHOW_OTHER_SPELL("[Alt] to show the other Spell"),
     ALREADY_CASTING("Already Casting a Spell"),
     SPELL_IS_ON_CD("Spell is on cooldown"),
     USING_TEST_SPELL("You are trying to use a test spell outside test environment"),
@@ -74,7 +75,7 @@ public enum Chats implements IAutoLocName {
     NEW_DAY("A new day has arrived! Profession drop rates have been boosted for the following items:"),
     TOO_LOW_LEVEL("Your level is too low."),
     CANT_SAME_BUFF("You already have a buff of that type."),
-    NOT_OWNER("You are not the owner of this Station."),
+    NOT_OWNER("You are not the owner of this Station. Stations can NOT be shared, you have to craft your own."),
 
     FAVOR_UP("As a result of your achievements, your Favor has risen to %1$s!"),
     FAVOR_DOWN("As a result of death, your Favor has fallen to %1$s, Remember this disgrace."),

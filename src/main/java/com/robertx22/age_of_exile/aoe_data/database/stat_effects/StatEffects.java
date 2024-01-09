@@ -2,7 +2,9 @@ package com.robertx22.age_of_exile.aoe_data.database.stat_effects;
 
 import com.robertx22.age_of_exile.aoe_data.DataHolder;
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
+import com.robertx22.age_of_exile.aoe_data.database.spells.schools.WaterSpells;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
+import com.robertx22.age_of_exile.database.data.spells.components.actions.PositionSource;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
@@ -61,10 +63,16 @@ public class StatEffects implements ExileRegistryInit {
             Arrays.asList(
                     ModEffects.SLOW,
                     ModEffects.STUN,
-
                     ModEffects.BLIND
             )
             , x -> new GiveExileStatusEffect(x.resourcePath, EffectSides.Target, 5));
+
+    public static DataHolder<EffectCtx, StatEffect> REMOVE_EFFECT_FROM_TARGET = new DataHolder<>(
+            Arrays.asList(
+                    ModEffects.BONE_CHILL
+            )
+            , x -> new RemoveExileEffectAction(x.resourcePath, EffectSides.Target));
+
 
     public static StatEffect SET_IS_CRIT = new SetBooleanEffect(EventData.CRIT);
     public static StatEffect INC_VALUE_PER_CURSE_ON_TARGET = new IncreaseNumberPerCurseOnTarget();
@@ -100,13 +108,18 @@ public class StatEffects implements ExileRegistryInit {
             )
             , x -> new AddToNumberEffect("add_perc_of_" + x + "_to_num", EventData.NUMBER, NumberProvider.ofPercentOfStat(x)));
 
+
+    public static StatEffect PROC_SHATTER = new ProcSpellEffect(WaterSpells.BONE_SHATTER_PROC, PositionSource.TARGET);
+
+
     public static void loadClass() {
     }
 
     @Override
     public void registerAll() {
+        PROC_SHATTER.addToSerializables();
+        REMOVE_EFFECT_FROM_TARGET.addToSerializables();
 
-        //ADD_TO_MAX_SUMMONS.addToSerializables();
         ADD_TOTAL_SUMMONS.addToSerializables();
         DURATION_INCREASE.addToSerializables();
         SET_BARRAGE.addToSerializables();

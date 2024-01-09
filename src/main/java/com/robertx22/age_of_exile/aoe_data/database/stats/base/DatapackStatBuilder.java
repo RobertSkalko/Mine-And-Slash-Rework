@@ -30,11 +30,14 @@ public class DatapackStatBuilder<T> {
     private Function<T, String> locNameMaker;
     private Function<T, String> locDescMaker;
     private Function<T, Elements> elementMaker;
-    private Function<T, StatEffect> effectMaker;
-    private Function<T, StatCondition> conditionMaker;
+
+    private List<Function<T, StatEffect>> effectMaker = new ArrayList<>();
+    private List<Function<T, StatCondition>> conditionMaker = new ArrayList<>();
+
     private Consumer<DatapackStat> modifyAfterDone;
 
     public boolean usesMoreMulti = false;
+
     private List<StatCondition> conditions = new ArrayList<>();
     private List<StatEffect> effects = new ArrayList<>();
 
@@ -94,7 +97,7 @@ public class DatapackStatBuilder<T> {
 
     public DatapackStatBuilder<T> addCondition(Function<T, StatCondition> condition) {
         Objects.requireNonNull(condition);
-        this.conditionMaker = condition;
+        this.conditionMaker.add(condition);
         return this;
     }
 
@@ -106,7 +109,7 @@ public class DatapackStatBuilder<T> {
 
     public DatapackStatBuilder<T> addEffect(Function<T, StatEffect> effect) {
         Objects.requireNonNull(effect);
-        this.effectMaker = effect;
+        this.effectMaker.add(effect);
         return this;
     }
 
@@ -180,19 +183,24 @@ public class DatapackStatBuilder<T> {
                     this.effects.forEach(c -> {
                         stat.effect.effects.add(c.GUID());
                     });
+
                     if (this.effectMaker != null) {
                         T key = x.getKey();
 
-                        StatEffect effect = effectMaker.apply(key);
-                        if (effect == null) {
-                            System.out.print("Can't make effect for key: " + key.toString());
+                        for (Function<T, StatEffect> maker : effectMaker) {
+                            StatEffect effect = maker.apply(key);
+                            if (effect == null) {
+                                System.out.print("Can't make effect for key: " + key.toString());
+                            }
+                            stat.effect.effects.add(effect.GUID());
                         }
-                        stat.effect.effects.add(effect.GUID());
+
 
                     }
                     if (this.conditionMaker != null) {
-                        stat.effect.ifs.add(this.conditionMaker.apply(x.getKey())
-                                .GUID());
+                        for (Function<T, StatCondition> maker : this.conditionMaker) {
+                            stat.effect.ifs.add(maker.apply(x.getKey()).GUID());
+                        }
                     }
 
                     accessor.add(x.getKey(), stat);

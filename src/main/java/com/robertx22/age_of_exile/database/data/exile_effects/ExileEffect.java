@@ -153,6 +153,19 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
 
     }
 
+    public List<ExactStatData> getTooltipStats(LivingEntity caster, int perc) {
+        if (caster == null) {
+            return Arrays.asList();
+        }
+        return this.stats.stream()
+                .map(x -> {
+                    var result = x.ToExactStat((int) (perc), Load.Unit(caster).getLevel());
+                    return result;
+                })
+                .collect(Collectors.toList());
+
+    }
+
     public List<Component> GetTooltipString(TooltipInfo info) {
         List<Component> list = new ArrayList<>();
 

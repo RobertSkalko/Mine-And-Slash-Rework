@@ -26,6 +26,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.MapManager;
@@ -63,6 +64,9 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     public int min_lvl = 1;
 
     public int default_lvl = 0;
+
+    public String lvl_based_on_spell = "";
+    public String show_other_spell_tooltip = "";
 
     public boolean manual_tip = false;
     public List<String> disabled_dims = new ArrayList<>();
@@ -302,10 +306,15 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         }
         try {
             if (showeffect) {
+                int lvl = this.getLevelOf(ctx.caster);
+                int perc = (int) (((float) lvl / (float) getMaxLevel()) * 100f);
+                effect.forEach(x -> {
+                    List<ExactStatData> stats = x.getTooltipStats(ctx.caster, perc);
+                    for (ExactStatData stat : stats) {
+                        list.addAll(stat.GetTooltipString(info));
+                    }
+                });
 
-                effect.forEach(x -> list.addAll(x.GetTooltipString(info)));
-
-            
             } else {
                 if (!effect.isEmpty()) {
                     list.add(Words.SHIFT_TO_SHOW_EFFECT.locName());
@@ -338,6 +347,16 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
             Spell spell = config.getSummonBasicSpell();
 
             list.addAll(spell.GetTooltipString(info));
+
+        }
+        if (!this.show_other_spell_tooltip.isEmpty()) {
+            if (info.hasAltDown) {
+                list.clear(); // tooltip too long otherwise
+                Spell other = ExileDB.Spells().get(show_other_spell_tooltip);
+                list.addAll(other.GetTooltipString(info));
+            } else {
+                list.add(Chats.ALT_TO_SHOW_OTHER_SPELL.locName());
+            }
         }
 
 
@@ -348,6 +367,12 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     }
 
     public int getLevelOf(LivingEntity en) {
+        if (!lvl_based_on_spell.isEmpty()) {
+            var other = ExileDB.Spells().get(lvl_based_on_spell);
+            if (!other.lvl_based_on_spell.equals(this.lvl_based_on_spell)) {// just to make sure it doesnt loop forever
+                return other.getLevelOf(en);
+            }
+        }
 
         int lvl = 0;
 
@@ -360,6 +385,8 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         if (lvl < default_lvl) {
             lvl = default_lvl;
         }
+
+
         return lvl;
     }
 

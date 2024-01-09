@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.capability.entity;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
+import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDuration;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentEffectStat;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentResistance;
@@ -32,16 +33,16 @@ public class EntityAilmentData {
 
 
     // todo have to call this with stats or ways that do it. I'll have stats that have chance to do it etc.
-    public void shatterAccumulated(LivingEntity caster, LivingEntity target, Ailment ailment) {
+    public void shatterAccumulated(LivingEntity caster, LivingEntity target, Ailment ailment, Spell spell) {
 
         float dmg = dmgMap.getOrDefault(ailment.GUID(), 0F);
         dmgMap.put(ailment.GUID(), 0F);
 
-
         if (dmg > 0) {
-            EventBuilder.ofDamage(caster, target, dmg).setupDamage(AttackType.dot, WeaponTypes.none, PlayStyle.INT).set(x -> {
+            EventBuilder.ofSpellDamage(caster, target, (int) dmg, spell).setupDamage(AttackType.dot, WeaponTypes.none, PlayStyle.INT).set(x -> {
                         x.setElement(ailment.element);
                         x.setisAilmentDamage(ailment);
+
                     }).build()
                     .Activate();
         }

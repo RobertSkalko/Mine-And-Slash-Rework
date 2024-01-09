@@ -21,6 +21,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.DamageAbsorbedByMana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.tags.all.EffectTags;
@@ -66,6 +67,7 @@ public class ModEffects implements ExileRegistryInit {
     public static EffectCtx THORN = new EffectCtx("thorn", "Thorn", Elements.Physical, EffectType.negative);
     public static EffectCtx INNER_CALM = new EffectCtx("inner_calm", "Inner Calm", Elements.Physical, EffectType.beneficial);
     public static EffectCtx BONE_CHILL = new EffectCtx("bone_chill", "Bone Chill", Elements.Cold, EffectType.negative);
+    public static EffectCtx FROST_LICH = new EffectCtx("frost_lich", "Frost Lich", Elements.Cold, EffectType.beneficial);
 
     public static void init() {
 
@@ -73,6 +75,17 @@ public class ModEffects implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
+
+        ExileEffectBuilder.of(ModEffects.FROST_LICH)
+                .maxStacks(1)
+
+                .stat(DatapackStats.ARMOR_PER_MANA.mod(0.1F, 1)) // todo test how op is it
+                .stat(DamageAbsorbedByMana.getInstance().mod(5, 25))
+                .stat(Stats.PROC_SHATTER.get().mod(25, 100))
+                .stat(Stats.TOTAL_DAMAGE.get().mod(-25, -25))
+                .stat(new ElementalResist(Elements.Fire).mod(-25, -25))
+
+                .build();
 
         ExileEffectBuilder.of(ModEffects.BONE_CHILL)
                 .maxStacks(5)

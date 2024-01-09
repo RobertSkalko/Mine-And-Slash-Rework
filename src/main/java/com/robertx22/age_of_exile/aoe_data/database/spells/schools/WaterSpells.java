@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.spells.schools;
 
+import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
@@ -13,6 +14,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.conditions.Eff
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeapon;
+import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDamage;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashSounds;
@@ -43,8 +45,40 @@ public class WaterSpells implements ExileRegistryInit {
 
     public static String FROST_FLOWER = "frost_flower";
 
+    public static String BONE_SHATTER_PROC = "bone_shatter";
+
+    public static String FROST_LICH_ARMOR = "frost_lich_armor";
+
     @Override
     public void registerAll() {
+
+
+        SpellBuilder.of(FROST_LICH_ARMOR, PlayStyle.INT, SpellConfiguration.Builder.instant(60, 20 * 60), "Frost Lich Armor",
+                        Arrays.asList(SpellTags.BUFF, SpellTags.COLD, SpellTags.PHYSICAL))
+                .manualDesc("Surround yourself with Deadly Frost, granting you additional powers.")
+                .weaponReq(CastingWeapon.ANY_WEAPON)
+                .showOtherSpellTooltip(BONE_SHATTER_PROC)
+                .onCast(PartBuilder.playSound(SlashSounds.BUFF.get(), 1D, 1D))
+                .onCast(PartBuilder.groundParticles(ParticleTypes.SPLASH, 50D, 5D, 0.2D))
+                .onCast(PartBuilder.groundParticles(ParticleTypes.DRIPPING_WATER, 50D, 5D, 0.2D))
+                .onCast(PartBuilder.giveSelfExileEffect(ModEffects.FROST_LICH, 20D * 60))
+                .build();
+
+
+        SpellBuilder.of(BONE_SHATTER_PROC, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(0, 20 * 3, 0),
+                        "Bone Shatter", Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.COLD, SpellTags.PHYSICAL))
+                .manualDesc("Shatters the ice dealing " + SpellCalcs.SHATTER_PROC.getLocDmgTooltip(Elements.Cold) + " and same amount of Physical Damage.")
+                .onCast(PartBuilder.playSound(SoundEvents.GLASS_BREAK, 1D, 1D))
+                .derivesLevelFromSpell(FROST_LICH_ARMOR)
+
+                .onCast(ParticleBuilder.of(ParticleTypes.SNOWFLAKE, 3.5f).shape(ParticleShape.CIRCLE_2D_EDGE).height(1).amount(200).build())
+                .onCast(ParticleBuilder.of(ParticleTypes.ITEM_SNOWBALL, 3.5f).shape(ParticleShape.CIRCLE_2D_EDGE).height(1).amount(100).build())
+                .onCast(ParticleBuilder.of(ParticleTypes.CRIT, 3.5f).shape(ParticleShape.CIRCLE_2D_EDGE).height(1).amount(55).build())
+
+                .onCast(DamageBuilder.radius(Elements.Cold, 3, SpellCalcs.SHATTER_PROC).build().noKnock())
+                .onCast(DamageBuilder.radius(Elements.Physical, 3, SpellCalcs.SHATTER_PROC).build().noKnock())
+
+                .build();
 
         SpellBuilder.of(BLIZZARD, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(35, 20 * 25, 20),
                         "Blizzard",
@@ -100,6 +134,7 @@ public class WaterSpells implements ExileRegistryInit {
                 .manualDesc("Summon a frost totem that deals "
                         + SpellCalcs.FROST_FLOWER.getLocDmgTooltip(Elements.Cold) + " in an area every second.")
 
+
                 .onCast(PartBuilder.playSound(SoundEvents.GRASS_PLACE, 1D, 1D))
 
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 0D)))
@@ -130,6 +165,7 @@ public class WaterSpells implements ExileRegistryInit {
                 .manualDesc("Summon a meteor that falls from the sky, dealing " +
                         SpellCalcs.ICE_COMET.getLocDmgTooltip(Elements.Cold))
 
+                .addStat(new AilmentDamage(Ailments.FREEZE).mod(25, 50).more())
 
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))

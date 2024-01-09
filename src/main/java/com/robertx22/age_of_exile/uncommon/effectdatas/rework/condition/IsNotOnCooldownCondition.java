@@ -21,9 +21,7 @@ public class IsNotOnCooldownCondition extends StatCondition {
 
     @Override
     public boolean can(EffectEvent event, EffectSides statSource, StatData data, Stat stat) {
-        return Load.Unit(event.getSide(statSource))
-            .getCooldowns()
-            .isOnCooldown(cd_id);
+        return !Load.Unit(event.getSide(statSource)).getCooldowns().isOnCooldown(cd_id);
     }
 
     @Override

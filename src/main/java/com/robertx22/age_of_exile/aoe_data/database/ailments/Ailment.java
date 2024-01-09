@@ -50,6 +50,8 @@ public class Ailment implements ExileRegistry<Ailment>, IAutoLocName, IAutoLocDe
         this.damageEffectivenessMulti = damageEffectivenessMulti;
         this.percentLostEveryXSeconds = percentLostEveryXSeconds;
         this.durationTicks = durationTicks;
+
+        Ailments.ALL.add(this);
     }
 
     public int getSlowTier(float multi) {
@@ -97,7 +99,7 @@ public class Ailment implements ExileRegistry<Ailment>, IAutoLocName, IAutoLocDe
         return StringUTIL.capitalise(id);
     }
 
-    
+
     @Override
     public AutoLocGroup locDescGroup() {
         return AutoLocGroup.StatusEffects;

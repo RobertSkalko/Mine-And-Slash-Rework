@@ -34,6 +34,7 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
                 .add(IntSpells.TELEPORT, new PointData(5, 3))
                 .add(WaterSpells.MAGE_CIRCLE, new PointData(5, 4))
                 .add(NatureSpells.REFRESH, new PointData(5, 5))
+                .add(WaterSpells.FROST_LICH_ARMOR, new PointData(5, 0))
 
                 .add(SpellPassives.MANA_REGEN, new PointData(8, 1))
                 .add(SpellPassives.SPELL_DMG, new PointData(9, 1))

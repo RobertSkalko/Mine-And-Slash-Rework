@@ -147,6 +147,16 @@ public class SpellBuilder {
         return this;
     }
 
+    public SpellBuilder derivesLevelFromSpell(String spell) {
+        this.spell.lvl_based_on_spell = spell;
+        return this;
+    }
+
+    public SpellBuilder showOtherSpellTooltip(String spell) {
+        this.spell.show_other_spell_tooltip = spell;
+        return this;
+    }
+
     public SpellBuilder maxLevel(int lvl) {
         this.spell.max_lvl = lvl;
         return this;

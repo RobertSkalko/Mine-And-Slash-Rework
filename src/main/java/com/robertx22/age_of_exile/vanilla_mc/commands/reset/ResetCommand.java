@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.capability.player.data.RestedExpData;
 import com.robertx22.age_of_exile.capability.player.data.StatPointsData;
 import com.robertx22.age_of_exile.characters.CharStorageData;
 import com.robertx22.age_of_exile.saveclasses.perks.TalentsData;
+import com.robertx22.age_of_exile.saveclasses.spells.SpellSchoolsData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.vanilla_mc.commands.CommandRefs;
 import com.robertx22.age_of_exile.vanilla_mc.commands.suggestions.CommandSuggestions;
@@ -28,6 +29,12 @@ public class ResetCommand {
             @Override
             public void reset(Player p) {
                 Load.Unit(p).setLevel(1);
+            }
+        },
+        SPELLS() {
+            @Override
+            public void reset(Player p) {
+                Load.player(p).ascClass = new SpellSchoolsData();
             }
         },
         PROFESSIONS() {

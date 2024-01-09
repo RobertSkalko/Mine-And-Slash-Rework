@@ -13,6 +13,7 @@ import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.effectdatas.SpendResourceEvent;
@@ -108,15 +109,20 @@ public class SpellCastingData {
             if (x.GetStat() instanceof MaxSpellLevel max) {
                 for (InsertedSpell spell : this.spells) {
                     if (spell.getSpell().config.tags.contains(max.tag)) {
-                        spell.rank += x.getValue();
+                        spell.bonus_ranks += x.getValue();
                     }
                 }
             } else if (x.GetStat() instanceof MaxAllSpellLevels) {
                 for (InsertedSpell spell : this.spells) {
-                    spell.rank += x.getValue();
+                    spell.bonus_ranks += x.getValue();
                 }
             }
         });
+        // caps the bonus ranks to 5 max
+        for (InsertedSpell spell : this.spells) {
+            spell.bonus_ranks = MathHelper.clamp(spell.bonus_ranks, 0, 5);
+            spell.rank += spell.bonus_ranks;
+        }
 
     }
 
@@ -144,6 +150,7 @@ public class SpellCastingData {
 
         public String id;
         public int rank;
+        public int bonus_ranks = 0;
 
         public Spell getSpell() {
             return ExileDB.Spells().get(id);
@@ -386,12 +393,11 @@ public class SpellCastingData {
 
     }
 
-    public void onSpellCast(SpellCastContext ctx) {
+    public void setCooldownOnCasted(SpellCastContext ctx) {
 
         int cd = ctx.spell.getCooldownTicks(ctx);
 
-        ctx.data.getCooldowns()
-                .setOnCooldown(ctx.spell.GUID(), cd);
+        ctx.data.getCooldowns().setOnCooldown(ctx.spell.GUID(), cd);
 
         if (ctx.spell.config.charges > 0) {
             if (ctx.caster instanceof Player) {
@@ -410,11 +416,16 @@ public class SpellCastingData {
             }
         }
 
+    }
+
+    public void onSpellCast(SpellCastContext ctx) {
+
+        setCooldownOnCasted(ctx);
+
         this.casting = false;
 
         if (ctx.caster instanceof ServerPlayer) {
-            Load.Unit(ctx.caster)
-                    .syncToClient((Player) ctx.caster);
+            Load.Unit(ctx.caster).syncToClient((Player) ctx.caster);
         }
     }
 

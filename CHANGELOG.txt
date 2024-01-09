@@ -3,87 +3,6 @@ Mine and Slash 1.20.1 is finally at a point where I don't feel BETA suits it tha
 A lot of bugs have been ironed out, gui and items received a generous makeover, mechanics have been polished, tweaked.
 Localization has been added to more and more parts of the code. Lots of small updates that didn't feel like they added much, added up I guess!
 
-v.5.3.9
-- picking a hotbar spell now returns you to skill gem screens/gui
-
-- talent tree makeover
-
-- fix totem duration stat
-
-- tweaked pet targetting
-
-- maps now gen larger radius around you but limit generation to 3 chunks per tick (will this help, not sure)
-
-- you can now use cloth etc soul modifiers that make it so your soul item always creates cloth gear for example
-
-- datapack change, spell config now uses taglist instead of array
-
-- you now lose half of your rested xp on death
-
-- tweaked some regen base stats
-
-- reworked a lot of TAG CODE, datapack devs warning
-
-- chained spells now do less dmg per chain, up to configurable minimum
-
-- profession stations now fill up the output slots BUT any recipes with more than 1 output will throw items on the ground, so use hoppers anyway
-
-- should fix move speed stat crash
-
-- now requires the latest exile lib 1.4.0 because it fixes an important bug
-
-- gem stats now scale to lvl (the ones that can)
-
-- added new req_type arg to tag req datapacks, if INCLUDES_ANY it means affix can be on any item with that tag, if HAS_ALL it needs to have all the tags, no changes to jsons needed i think for most use cases
-
-- removed special names for items with more than 2 affixes, now uses the strongest of each, prefix and suffix for names. Think it's better this way 
-
-- added tags for each specific base gear like leather_helmet
-
-- items can now have implicit stats and change their name accordingly, this should make low rarity gear a bit more interesting
-
-- heavily nerfed jewel stats, they were meant to be slight help to gearing, not a complete solution to resistances
-
-- normal jewels now have more possible affixes
-
-- added give jewel command
-
-- EXPERIMENTAL characters feature. You can now save/load different builds by leveling new characters. Probably has a few bugs, might need some tweaking, currently
-the only limitation is you can't change classes in the map dimension and when in combat, but there might still be exploits I didn't think of
-
-- try fix multi proj gems and shooting straight up/down merging the proj
-
-- maps now provide less xp. They're meant to be endgame activity, not a way to speed level. The pack size being so much bigger meant maps didn't just give say 30% more xp, but also double or triple that.
-I think they'll still be decent at leveling but not much worse than overworld activity
-
-- nerfed rate of rested xp gain. I put it very high because I wanted to encourage professions, but as professions are already attractive enough, they're currently just making leveling too fast
-(Remember most changes are either datapacks or configs)
-
-- summons can now leech. I forgot why I specifically disabled this, i might have been afraid of them being too op, or maybe I had a better reason.. So don't get too attached just yet
-
-- stored leech now further capped to 5 seconds of regen by leech. So if you have 100 mana, your leech cap is 5%, you can accumulate 25 mana with leech. Previously it was possible to accumulate infinite leech.
-This made some spells extremely op, like greater multi projectile spells. Now they still synergize with flat leech but need less of it to hit the leech cap or can opt for talents that increase leech cap
-
-- runeword items can't have more gems than runes now
-
-- added + spell level stat, spells can have +5 extra levels now with stats from mostly unique and runeword items
-
-- fixed mns letting vanilla dmg happen when at 0 energy
-
-- stats that are good in minus like -mana cost now no longer show as red on tooltip
-
-- magic find is now capped to 75% and sources are reduced
-
-v5.3.10
-- small bugfix for caster has and has mns effect datapack
-
-v.5.3.11
-- more fixes
-v.5.3.12
-- more fixes
-v.5.3.13
-- more fixes
-- slight perf improvements
 v.5.3.14
 - should fix effect tooltips 
 - talents now lower opacity when players have 0 talents, to show which are the starter ones
@@ -103,3 +22,8 @@ Some are excluded like like low cooldown spammable spells wont screech at you fo
 - currencies shouldnt move items around in inventory anymore
 - added set_health_damage_override to entityconfig datapack for stubborn closed source mods that mess with damage mechanics and dont provide configs. Yes i see the irony
 - added buttons for choosen spell schools
+- blue skies added as default datapack (to override damage)
+- added new spell datapack mechanic, derives level from spell. This combined with new spell proc stat, means you can say have a buff you can lvl up, and the buff would provide a stat that procs a spell that isn't in the 
+actual spell school or learnable at all, and that procced spell's lvl will be based on the buff spell level
+- added some new stat conditions like is ailment, has effect
+- added lich armor

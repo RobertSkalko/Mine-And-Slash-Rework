@@ -65,8 +65,7 @@ public abstract class EffectEvent implements IGUID {
     }
 
     public Spell getSpell() {
-        return ExileDB.Spells()
-                .get(data.getString(EventData.SPELL));
+        return ExileDB.Spells().get(data.getString(EventData.SPELL));
     }
 
     public void initBeforeActivating() {

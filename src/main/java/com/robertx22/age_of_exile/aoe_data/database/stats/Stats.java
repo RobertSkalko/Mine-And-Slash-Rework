@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.stats;
 
+import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stat_conditions.StatConditions;
 import com.robertx22.age_of_exile.aoe_data.database.stat_effects.StatEffects;
@@ -37,6 +38,25 @@ public class Stats implements ExileRegistryInit {
 
     }
 
+    public static DataPackStatAccessor<EmptyAccessor> PROC_SHATTER = DatapackStatBuilder
+            .ofSingle("proc_shatter", Elements.Physical)
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(0)
+            .setSide(EffectSides.Source)
+            .addCondition(StatConditions.IF_RANDOM_ROLL)
+            .addCondition(StatConditions.IS_EVENT_AILMENT.get(Ailments.FREEZE))
+            .addCondition(StatConditions.TARGET_HAS_EFFECT.get(ModEffects.BONE_CHILL))
+            .addCondition(StatConditions.BONE_SHATTER_NO_CD)
+            .addEffect(e -> StatEffects.PROC_SHATTER)
+            .addEffect(e -> StatEffects.REMOVE_EFFECT_FROM_TARGET.get(ModEffects.BONE_CHILL))
+            .setLocName(x -> Stat.format(VAL1 + "% Chance to casts Bone Shatter when you shatter a bone-chilled enemy."))
+            .setLocDesc(x -> "")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+                x.is_long = true;
+                x.max = 100;
+            })
+            .build();
 
     public static DataPackStatAccessor<EmptyAccessor> EFFECT_DURATION_YOU_CAST = DatapackStatBuilder
             .ofSingle("eff_dur_u_cast", Elements.Physical)
@@ -181,27 +201,6 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
-    /*
-    public static DataPackStatAccessor<SummonType> MAX_SUMMONS = DatapackStatBuilder
-            .<SummonType>of(x -> "max_" + x.id + "_summons", x -> Elements.All)
-            .addAllOfType(SummonType.values())
-            .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(0)
-            .setSide(EffectSides.Source)
-            .addCondition(x -> StatConditions.IS_SUMMON_TYPE.get(x))
-            .addEffect(StatEffects.ADD_TO_MAX_SUMMONS)
-            .setLocName(x -> "Maximum " + x.name + " Summons")
-            .setLocDesc(x -> "You can summon more types of that summon.")
-            .modifyAfterDone(x ->
-            {
-                x.is_perc = false;
-                x.base = 0;
-                x.min = -100;
-                x.max = 10;
-            }).
-            build();
-
-     */
 
     public static DataPackStatAccessor MAX_SUMMON_CAPACITY = DatapackStatBuilder
             .ofSingle("max_total_summons", Elements.All)

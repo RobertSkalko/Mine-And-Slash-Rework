@@ -19,7 +19,7 @@ public class RemoveExileEffectAction extends StatEffect {
     public int stacks = 1;
 
     public RemoveExileEffectAction(String effect, EffectSides remove_from) {
-        super("give_" + effect + "_to_" + remove_from.id, "remove_exile_effect");
+        super("remove_" + effect + "_from_" + remove_from.id, "remove_exile_effect");
         this.remove_from = remove_from;
         this.effect = effect;
     }

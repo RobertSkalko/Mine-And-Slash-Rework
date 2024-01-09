@@ -58,8 +58,14 @@ public class EntityConfigs implements ExileRegistryInit {
     }
 
     void setupWholeMods() {
+
+
         new EntityConfig("lycanite_mobs", 1.2F).addToSerializables();
 
+        EntityConfig blue = new EntityConfig("blue_skies", 1);
+        blue.set_health_damage_override = true;
+        blue.addToSerializables();
+        
     }
 
     void setupMyMobs() {

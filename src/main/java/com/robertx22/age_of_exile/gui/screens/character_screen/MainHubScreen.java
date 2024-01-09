@@ -120,7 +120,7 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
         }
 
         var v = Load.Unit(Minecraft.getInstance().player).getUnit().getStats().stats.values().stream()
-                .filter(x -> x.isNotZero() && x.GetStat().show_in_gui && !x.GetStat().is_long && list.stream().noneMatch(e -> e.GUID().equals(x.getId())))
+                .filter(x -> x.isNotZero() && x.GetStat() != null && x.GetStat().show_in_gui && !x.GetStat().is_long && list.stream().noneMatch(e -> e.GUID().equals(x.getId())))
                 .map(t -> t.GetStat()).collect(Collectors.toList());
 
         if (!STAT_MAP.containsKey(type)) {

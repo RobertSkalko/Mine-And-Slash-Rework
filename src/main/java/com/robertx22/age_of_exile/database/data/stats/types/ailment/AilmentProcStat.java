@@ -35,7 +35,7 @@ public class AilmentProcStat extends Stat {
 
         @Override
         public DamageEvent activate(DamageEvent effect, StatData data, Stat stat) {
-            effect.targetData.ailments.shatterAccumulated(effect.source, effect.target, ailment);
+            effect.targetData.ailments.shatterAccumulated(effect.source, effect.target, ailment, effect.getSpell());
             return effect;
         }
 
@@ -65,7 +65,7 @@ public class AilmentProcStat extends Stat {
         return name + " Chance";
     }
 
-    
+
     @Override
     public String GUID() {
         return ailment.GUID() + "_proc_chance";

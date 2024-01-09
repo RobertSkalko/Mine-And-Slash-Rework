@@ -31,7 +31,7 @@ public class ExileDBInit {
     }
 
     private static void registerAllNonDatapackEntries() {
-        Ailments.init();
+        Ailments.init(); // todo will this cause problems. I need to really figure a good way to know when each registry should register
         new StatsRegister().registerAll();
 
 

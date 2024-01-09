@@ -6,8 +6,8 @@ petrify
 wounds
 thorn
 taunt_stance
-inner_calm
 vigor
+inner_calm
 valor
 bone_chill
 perseverance
@@ -18,6 +18,7 @@ draconic_blood
 agony
 charm
 slow
+frost_lich
 shred
 ground
 rejuvenation

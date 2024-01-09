@@ -33,7 +33,8 @@ public class AilmentDamage extends Stat {
 
         @Override
         public boolean canActivate(DamageEvent effect, StatData data, Stat stat) {
-            return effect.data.getString(EventData.AILMENT).equals(ailment.GUID());
+            boolean bo = effect.data.getString(EventData.AILMENT).equals(ailment.GUID());
+            return bo;
         }
 
     }

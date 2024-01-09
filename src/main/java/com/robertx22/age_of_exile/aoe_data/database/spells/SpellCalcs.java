@@ -181,6 +181,11 @@ public class SpellCalcs {
             .capScaling(3)
             .build();
 
+
+    public static ValueCalculation SHATTER_PROC = ValueCalcBuilder.of("shatter")
+            .spellScaling(0.25F, 0.5F)
+            .build();
+
     public static ValueCalculation FLAME_STRIKE = ValueCalcBuilder.of("flame_strike")
             .attackScaling(0.4F, 0.75F)
             .build();
