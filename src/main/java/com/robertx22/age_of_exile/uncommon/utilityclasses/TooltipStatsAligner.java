@@ -103,17 +103,19 @@ public class TooltipStatsAligner {
                     Style style = currentComp.getStyle();
                     String dotNeed = ".".repeat((maxWidth[0] - width) / 2);
                     String lastPart = StatNameRegex.VALUEAndNAMESeparator + matcher.group(2);
-                    Component wholeComponent = ExileText.ofText(gearValue)
-                            .append(ExileText.ofText(ChatFormatting.BLACK + dotNeed).get())
+                    Component wholeComponent =
+                            //use the append() method from MutableComponent is better because in this case I need to keep every Component sibling's Style, the
+                            //ExileText will erase all the sibling distinction that sucks, and will also have potential format interference problem.
+                            ExileText.ofText(gearValue).get()
+                            .append(ChatFormatting.BLACK + dotNeed)
                             .append(lastPart)
-                            .get()
                             .withStyle(style);
                     x.setValue(wholeComponent);
                 });
         mapWithIndex.putAll(onlyContainTargetMap);
 
             //put any post-post edit logic in here.
-            compList = new LinkedList<>(mapWithIndex.values());
+            var compList = new LinkedList<>(mapWithIndex.values());
             ListIterator<Component> iterator = compList.listIterator();
             MutableComponent emptyLine = ExileText.emptyLine().get();
             // place empty lines.
@@ -134,7 +136,7 @@ public class TooltipStatsAligner {
                     iterator.next();
                 }
             }
-        }
+
         if (!addEmptyLine) {
             return compList;
         }
