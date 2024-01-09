@@ -49,10 +49,14 @@ public class StatConditions implements ExileRegistryInit {
     public static StatCondition IS_ATTACK_DAMAGE = new StringMatchesCondition(EventData.STYLE, PlayStyle.INT.id).flipCondition();
     public static StatCondition IS_NOT_SUMMON_ATTACK = new IsBooleanTrueCondition(EventData.IS_SUMMON_ATTACK).flipCondition();
 
+
     public static StatCondition BONE_SHATTER_NO_CD = new IsNotOnCooldownCondition(WaterSpells.BONE_SHATTER_PROC);
 
 
     public static DataHolder<EffectCtx, StatCondition> TARGET_HAS_EFFECT = new DataHolder<>(Arrays.asList(ModEffects.BONE_CHILL), x -> new IsUnderExileEffect(x, EffectSides.Target));
+
+    public static DataHolder<EffectCtx, StatCondition> IS_SOURCE_MAX_CHARGES = new DataHolder<>(Arrays.asList(ModEffects.ESSENCE_OF_FROST), x -> new IsAtMaxCharges(x, EffectSides.Source));
+
 
     public static DataHolder<Ailment, StatCondition> IS_EVENT_AILMENT = new DataHolder<>(Ailments.ALL, x -> new IsAilmentCondition(x));
 
@@ -125,8 +129,9 @@ public class StatConditions implements ExileRegistryInit {
     public void registerAll() {
 
         // todo why not just do it when class is contructed
-        
+
         BONE_SHATTER_NO_CD.addToSerializables();
+        IS_SOURCE_MAX_CHARGES.addToSerializables();
 
         TARGET_HAS_EFFECT.addToSerializables();
         BONE_SHATTER_NO_CD.addToSerializables();

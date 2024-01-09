@@ -54,10 +54,11 @@ public class StatEffects implements ExileRegistryInit {
             , x -> new RestoreResourceAction("leech_" + x.id, NumberProvider.ofPercentOfDataNumber(EventData.NUMBER), x, RestoreType.leech)
     );
 
-    public static DataHolder<EffectCtx, StatEffect> GIVE_EFFECT_TO_SOURCE = new DataHolder<>(
+    public static DataHolder<EffectCtx, StatEffect> GIVE_EFFECT_TO_SOURCE_30_SEC = new DataHolder<>(
             Arrays.asList(
+                    ModEffects.ESSENCE_OF_FROST
             )
-            , x -> new GiveExileStatusEffect(x.resourcePath, EffectSides.Source, 5));
+            , x -> new GiveExileStatusEffect(x.resourcePath, EffectSides.Source, 30));
 
     public static DataHolder<EffectCtx, StatEffect> GIVE_EFFECT_TO_TARGET = new DataHolder<>(
             Arrays.asList(
@@ -117,7 +118,9 @@ public class StatEffects implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
+        
         PROC_SHATTER.addToSerializables();
+        GIVE_EFFECT_TO_SOURCE_30_SEC.addToSerializables();
         REMOVE_EFFECT_FROM_TARGET.addToSerializables();
 
         ADD_TOTAL_SUMMONS.addToSerializables();

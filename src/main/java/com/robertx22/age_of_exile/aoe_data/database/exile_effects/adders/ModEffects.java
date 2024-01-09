@@ -16,6 +16,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellA
 import com.robertx22.age_of_exile.database.data.spells.components.actions.vanity.ParticleMotion;
 import com.robertx22.age_of_exile.database.data.spells.components.selectors.TargetSelector;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
+import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentResistance;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
@@ -68,6 +69,9 @@ public class ModEffects implements ExileRegistryInit {
     public static EffectCtx INNER_CALM = new EffectCtx("inner_calm", "Inner Calm", Elements.Physical, EffectType.beneficial);
     public static EffectCtx BONE_CHILL = new EffectCtx("bone_chill", "Bone Chill", Elements.Cold, EffectType.negative);
     public static EffectCtx FROST_LICH = new EffectCtx("frost_lich", "Frost Lich", Elements.Cold, EffectType.beneficial);
+    public static EffectCtx ESSENCE_OF_FROST = new EffectCtx("essence_of_frost", "Essence of Frost", Elements.Cold, EffectType.beneficial);
+
+    public static int ESSENCE_OF_FROST_MAX_STACKS = 5;
 
     public static void init() {
 
@@ -76,12 +80,21 @@ public class ModEffects implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
+        ExileEffectBuilder.of(ModEffects.ESSENCE_OF_FROST)
+                .maxStacks(ESSENCE_OF_FROST_MAX_STACKS)
+                .stat(Stats.CRIT_DAMAGE.get().mod(1, 5))
+                .stat(Stats.ELEMENTAL_DAMAGE.get(Elements.Cold).mod(1, 5))
+                .stat(new AilmentDamage(Ailments.FREEZE).mod(2, 5))
+                .build();
+
+
         ExileEffectBuilder.of(ModEffects.FROST_LICH)
                 .maxStacks(1)
 
-                .stat(DatapackStats.ARMOR_PER_MANA.mod(0.1F, 1)) // todo test how op is it
+                .stat(DatapackStats.ARMOR_PER_MANA.mod(0.1F, 1))
                 .stat(DamageAbsorbedByMana.getInstance().mod(5, 25))
                 .stat(Stats.PROC_SHATTER.get().mod(25, 100))
+                .stat(Stats.PROC_SHATTER_MAX_FROST_ESSENCE.get().mod(10, 50))
                 .stat(Stats.TOTAL_DAMAGE.get().mod(-25, -25))
                 .stat(new ElementalResist(Elements.Fire).mod(-25, -25))
 

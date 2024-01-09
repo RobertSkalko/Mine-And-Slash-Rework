@@ -9,6 +9,7 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.EffectEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
 import com.robertx22.age_of_exile.uncommon.effectdatas.ExilePotionEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.GiveOrTake;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 
 public class GiveExileStatusEffect extends StatEffect {
@@ -31,10 +32,14 @@ public class GiveExileStatusEffect extends StatEffect {
     @Override
     public void activate(EffectEvent event, EffectSides statSource, StatData data, Stat stat) {
 
-
         ExilePotionEvent potionEvent = EventBuilder.ofEffect(new CalculatedSpellData(null), event.getSide(statSource), event.getSide(give_to), Load.Unit(event.getSide(statSource))
                         .getLevel(), ExileDB.ExileEffects()
                         .get(effect), GiveOrTake.give, seconds * 20)
+                .set(x -> {
+                    if (event.isSpell()) {
+                        x.data.setString(EventData.SPELL, event.getSpell().GUID());
+                    }
+                })
                 .build();
         potionEvent.Activate();
 

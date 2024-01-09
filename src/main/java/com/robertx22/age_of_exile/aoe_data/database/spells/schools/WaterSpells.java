@@ -82,10 +82,10 @@ public class WaterSpells implements ExileRegistryInit {
 
         SpellBuilder.of(BLIZZARD, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(35, 20 * 25, 20),
                         "Blizzard",
-                        Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.COLD, SpellTags.PHYSICAL)
+                        Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.COLD, SpellTags.PHYSICAL, SpellTags.SHATTER)
                 )
                 .manualDesc("Create a Cloud that sends cold waves, damaging enemies for " + SpellCalcs.BLIZZARD.getLocDmgTooltip(Elements.Cold)
-                        + " and for same amount of Physical Damage if the targets are Bone-Chilled.")
+                )
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
 
@@ -101,7 +101,6 @@ public class WaterSpells implements ExileRegistryInit {
                 .onTick("cloud", ParticleBuilder.of(ParticleTypes.ITEM_SNOWBALL, 3f).shape(ParticleShape.CIRCLE_2D).amount(50).randomY(0.5F).height(6).build())
 
                 .onTick("cloud", DamageBuilder.radius(Elements.Cold, 3, SpellCalcs.BLIZZARD).build().noKnock().tick(20D))
-                .onTick("cloud", DamageBuilder.radius(Elements.Physical, 3, SpellCalcs.BLIZZARD).onEntitiesWithMnsEffect(ModEffects.BONE_CHILL).build().noKnock().tick(20D))
 
                 .build();
 
