@@ -119,12 +119,16 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
 
 
             if (!level().isClientSide) {
-                this.getSpellData()
-                        .getSpell()
-                        .getAttached()
-                        .tryActivate(getScoreboardName(), SpellCtx.onTick(getSpellData().getCaster(level()), this, getSpellData()));
+                if (getSpellData() != null) {
+                    var caster = getSpellData().getCaster(level());
+                    if (caster != null) {
+                        this.getSpellData()
+                                .getSpell()
+                                .getAttached()
+                                .tryActivate(getScoreboardName(), SpellCtx.onTick(caster, this, getSpellData()));
+                    }
+                }
             }
-
         } catch (Exception e) {
             e.printStackTrace();
             this.remove(RemovalReason.KILLED);

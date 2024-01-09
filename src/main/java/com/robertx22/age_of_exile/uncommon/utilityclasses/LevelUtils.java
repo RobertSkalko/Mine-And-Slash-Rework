@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.database.data.level_ranges.LevelRange;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.temp.SkillItemTier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -101,6 +102,10 @@ public class LevelUtils {
         } else {
             lvl = determineLevelPerDistanceFromSpawn(sw, pos, dimConfig);
         }
+
+        var LevelVariance = ServerContainer.get().MOB_LEVEL_VARIANCE.get();
+
+        lvl = RandomUtils.RandomRange(lvl - LevelVariance, lvl + LevelVariance);
 
         lvl = Mth.clamp(lvl, dimConfig.min_lvl, dimConfig.max_lvl);
         lvl = Mth.clamp(lvl, 1, GameBalanceConfig.get().MAX_LEVEL);

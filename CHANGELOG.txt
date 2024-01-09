@@ -27,3 +27,7 @@ Some are excluded like like low cooldown spammable spells wont screech at you fo
 actual spell school or learnable at all, and that procced spell's lvl will be based on the buff spell level
 - added some new stat conditions like is ailment, has effect
 - added lich armor buff, this will define the dps frost mage playstyle. Shattering enemies, and unleashing devastating aoe damage upon reaching max frost essence stacks
+
+v.5.3.15
+- only gems can be extracted from sockets now
+- added mob and item lvl variance configs

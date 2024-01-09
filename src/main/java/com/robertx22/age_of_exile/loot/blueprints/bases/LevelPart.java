@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.loot.blueprints.bases;
 
+import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.loot.blueprints.ItemBlueprint;
 import com.robertx22.library_of_exile.utils.RandomUtils;
@@ -9,7 +10,7 @@ public class LevelPart extends BlueprintPart<Integer, ItemBlueprint> {
 
     public boolean LevelRange = true;
 
-    public int LevelVariance = 3;
+    public int LevelVariance = ServerContainer.get().ITEM_LEVEL_VARIANCE.get();
 
     public int minLevel = 1;
 
@@ -26,7 +27,6 @@ public class LevelPart extends BlueprintPart<Integer, ItemBlueprint> {
 
         int finalLvl = number;
 
-       
         if (LevelRange) {
             finalLvl = RandomUtils.RandomRange(number - LevelVariance, number + LevelVariance);
         }

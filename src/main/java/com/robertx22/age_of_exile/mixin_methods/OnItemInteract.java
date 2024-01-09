@@ -191,12 +191,19 @@ public class OnItemInteract {
                     if (gear != null) {
                         if (gear.sockets != null && gear.sockets.getSocketed().size() > 0) {
                             try {
-                                ItemStack gem = gear.sockets.getSocketed().get(0).getOriginalItemStack();
-                                gear.sockets.getSocketed().remove(0);
-                                StackSaving.GEARS.saveTo(craftedStack, gear);
-                                PlayerUtils.giveItem(gem, player);
-                                currency.shrink(1);
-                                return new Result(true).ding();
+                                int index = gear.sockets.getFirstGemIndex();
+
+                                if (index > -1) {
+                                    var s = gear.sockets.getSocketed().get(index);
+                                    if (s.isGem()) {
+                                        ItemStack gem = s.getOriginalItemStack();
+                                        gear.sockets.getSocketed().remove(index);
+                                        StackSaving.GEARS.saveTo(craftedStack, gear);
+                                        PlayerUtils.giveItem(gem, player);
+                                        currency.shrink(1);
+                                        return new Result(true).ding();
+                                    }
+                                }
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

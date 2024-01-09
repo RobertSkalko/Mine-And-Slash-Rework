@@ -47,6 +47,17 @@ public class GearSocketsData implements IStatsContainer, IGearPartTooltip {
         return so;
     }
 
+    public int getFirstGemIndex() {
+        int i = 0;
+        for (SocketData s : this.so) {
+            if (s.isGem()) {
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
+
 
     public void addSocket() {
         sl++;
