@@ -26,4 +26,4 @@ Some are excluded like like low cooldown spammable spells wont screech at you fo
 - added new spell datapack mechanic, derives level from spell. This combined with new spell proc stat, means you can say have a buff you can lvl up, and the buff would provide a stat that procs a spell that isn't in the 
 actual spell school or learnable at all, and that procced spell's lvl will be based on the buff spell level
 - added some new stat conditions like is ailment, has effect
-- added lich armor
+- added lich armor buff, this will define the dps frost mage playstyle. Shattering enemies, and unleashing devastating aoe damage upon reaching max frost essence stacks
