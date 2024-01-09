@@ -44,10 +44,12 @@ public class TooltipStatsAligner {
         if (!ClientConfigs.getConfig().ALIGN_STAT_TOOLTIPS.get()) {
             return original;
         }
-        LinkedList<Component> compList = null;
-        try {
-            Minecraft mc = Minecraft.getInstance();
-            // Create a Matcher for finding patterns in the stats, this patterns will match the value, like +3, -20%.
+
+        if(list.size() <= 1){
+            return original;
+        }
+        Minecraft mc = Minecraft.getInstance();
+        // Create a Matcher for finding patterns in the stats, this patterns will match the value, like +3, -20%.
                 /*
                     this regex make sure the stat pattern is like:
                         (something not spaces here, and must start from the beginning of line)(two spaces here, or sth, anyway it is from the StatNameRegex.java)(something not spaces here)
@@ -90,28 +92,30 @@ public class TooltipStatsAligner {
                     });
 
 
-            Map<Integer, Component> onlyContainTargetMap = new HashMap<>(targetMap);
-            onlyContainTargetMap.entrySet()
-                    .forEach(x -> {
-                        var currentComp = x.getValue();
-                        Matcher matcher = getMatcherFunction.apply(x.getValue().getString()).apply(matcherForValue);
-                        matcher.find();
-                        String gearValue = matcher.group(1);
-                        int width = mc.font.width(gearValue);
-                        Style style = currentComp.getStyle();
-                        String dotNeed = ".".repeat((maxWidth[0] - width) / 2);
-                        String lastPart = StatNameRegex.VALUEAndNAMESeparator + matcher.group(2);
-                        Component wholeComponent = ExileText.ofText(gearValue)
-                                .append(ExileText.ofText(dotNeed).format(ChatFormatting.BLACK).get())
-                                .append(lastPart)
-                                .get()
-                                .withStyle(style);
-                        x.setValue(wholeComponent);
-                    });
-            mapWithIndex.putAll(onlyContainTargetMap);
+        Map<Integer, Component> onlyContainTargetMap = new HashMap<>(targetMap);
+        onlyContainTargetMap.entrySet()
+                .forEach(x -> {
+                    var currentComp = x.getValue();
+                    Matcher matcher = getMatcherFunction.apply(x.getValue().getString()).apply(matcherForValue);
+                    matcher.find();
+                    String gearValue = matcher.group(1);
+                    int width = mc.font.width(gearValue);
+                    Style style = currentComp.getStyle();
+                    String dotNeed = ".".repeat((maxWidth[0] - width) / 2);
+                    String lastPart = StatNameRegex.VALUEAndNAMESeparator + matcher.group(2);
+                    Component wholeComponent =
+                            //use the append() method from MutableComponent is better because in this case I need to keep every Component sibling's Style, the
+                            //ExileText will erase all the sibling distinction that sucks, and will also have potential format interference problem.
+                            ExileText.ofText(gearValue).get()
+                            .append(ChatFormatting.BLACK + dotNeed)
+                            .append(lastPart)
+                            .withStyle(style);
+                    x.setValue(wholeComponent);
+                });
+        mapWithIndex.putAll(onlyContainTargetMap);
 
             //put any post-post edit logic in here.
-            compList = new LinkedList<>(mapWithIndex.values());
+            var compList = new LinkedList<>(mapWithIndex.values());
             ListIterator<Component> iterator = compList.listIterator();
             MutableComponent emptyLine = ExileText.emptyLine().get();
             // place empty lines.
@@ -132,14 +136,16 @@ public class TooltipStatsAligner {
                     iterator.next();
                 }
             }
-            if (addEmptyLine && !compList.get(iterator.previousIndex()).getString().equals("")) {
-                if (compList.size() > 1) {
-                    compList.addLast(emptyLine);
-                }
-            }
-        } catch (Exception e) {
-            ModErrors.print(e);
-            return original;
+
+        if (!addEmptyLine) {
+            return compList;
+        }
+        if(compList.size() <= 1){
+            return compList;
+        }
+
+        if (!compList.get(iterator.previousIndex()).getString().equals("")) {
+            compList.addLast(emptyLine);
         }
 
         return compList;

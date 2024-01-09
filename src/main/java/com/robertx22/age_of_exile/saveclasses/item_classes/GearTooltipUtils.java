@@ -66,14 +66,11 @@ public class GearTooltipUtils {
 
             tip.addAll(gear.imp.GetTooltipString(info, gear));
 
-
             if (gear.uniqueStats != null) {
-                List<Component> finalList = new TooltipStatsAligner(gear.uniqueStats.GetTooltipString(info, gear)).buildNewTooltipsStats();
-                tip.addAll(finalList);
+                tip.addAll(gear.uniqueStats.GetTooltipString(info, gear));
             }
 
-            List<Component> finalList = new TooltipStatsAligner(gear.affixes.GetTooltipString(info, gear)).buildNewTooltipsStats();
-            tip.addAll(finalList);
+            tip.addAll(gear.affixes.GetTooltipString(info, gear));
             //tip.addAll(gear.imp.GetTooltipString(info, gear));
 
 
@@ -97,17 +94,13 @@ public class GearTooltipUtils {
 
         }
 
-        List<Component> preProcessedList = new ArrayList<>();
 
         for (IGearPartTooltip part : list) {
             if (part != null) {
-                preProcessedList.addAll(part.GetTooltipString(info, gear));
+                tip.addAll(part.GetTooltipString(info, gear));
+
             }
         }
-
-        List<Component> finalStats = new TooltipStatsAligner(preProcessedList).buildNewTooltipsStats();
-        tip.addAll(finalStats);
-        //tip.addAll(preProcessedList);
 
 
         specialStats.forEach(x -> {
@@ -118,6 +111,10 @@ public class GearTooltipUtils {
                     });
         });
         tip.add(Component.literal(""));
+
+        List<Component> finalList = new TooltipStatsAligner(tip).buildNewTooltipsStats();
+        tip.clear();
+        tip.addAll(finalList);
 
 
         if (Screen.hasShiftDown()) {
