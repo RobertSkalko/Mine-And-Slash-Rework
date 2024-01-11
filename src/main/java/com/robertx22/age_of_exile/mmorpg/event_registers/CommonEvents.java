@@ -136,7 +136,9 @@ public class CommonEvents {
 
         ForgeEvents.registerForgeEvent(TickEvent.PlayerTickEvent.class, event -> {
             if (!event.player.level().isClientSide) {
-                OnServerTick.onEndTick((ServerPlayer) event.player);
+                if (event.phase == TickEvent.Phase.END) {
+                    OnServerTick.onEndTick((ServerPlayer) event.player);
+                }
             }
         });
 

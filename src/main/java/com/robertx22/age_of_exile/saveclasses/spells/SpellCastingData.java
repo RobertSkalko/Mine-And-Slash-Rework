@@ -330,7 +330,7 @@ public class SpellCastingData {
             if (Load.Unit(player).getCooldowns().getCooldownTicks(spell.GUID()) > 40) {
                 return ExplainedResult.failure(Chats.SPELL_IS_ON_CD.locName());
             }
-            return ExplainedResult.failure(null);
+            return ExplainedResult.silentlyFail();
         }
 
         if (player.isCreative()) {
@@ -388,8 +388,7 @@ public class SpellCastingData {
                 }
             }
         }
-
-        return ExplainedResult.failure(null);
+        return ExplainedResult.silentlyFail();
 
     }
 

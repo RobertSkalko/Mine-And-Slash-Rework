@@ -21,4 +21,7 @@ public class ExplainedResult {
         return new ExplainedResult(false, Component.empty().append(txt).withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
     }
 
+    public static ExplainedResult silentlyFail() {
+        return new ExplainedResult(false, null);
+    }
 }

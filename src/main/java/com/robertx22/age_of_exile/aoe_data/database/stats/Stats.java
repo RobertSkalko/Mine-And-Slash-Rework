@@ -37,7 +37,7 @@ public class Stats implements ExileRegistryInit {
     public static void loadClass() {
 
     }
-    
+
 
     public static DataPackStatAccessor<EmptyAccessor> PROC_SHATTER_MAX_FROST_ESSENCE = DatapackStatBuilder
             .ofSingle("proc_shatter_max_frost", Elements.Cold)
@@ -1323,7 +1323,7 @@ public class Stats implements ExileRegistryInit {
             .addCondition(StatConditions.IS_TARGET_LOW_HP)
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
             .addEffect(StatEffects.INCREASE_VALUE)
-            .setLocName(x -> format("Execute targets bellow 30% health, dealing "
+            .setLocName(x -> format("Execute targets below 30% health, dealing "
                     + VAL1 + "% increased  " + x.getIconNameFormat()))
             .setLocDesc(x -> "Low hp is 30% or less.")
             .modifyAfterDone(x -> {

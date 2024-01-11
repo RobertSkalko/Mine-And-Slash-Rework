@@ -294,6 +294,7 @@ public class OnItemInteract {
                 }
 
                 if (result.can) {
+                    x.setCanceled(true);
                     break;
                 }
             }

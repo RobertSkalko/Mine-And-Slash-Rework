@@ -55,7 +55,7 @@ public class AilmentChance extends Stat {
 
     @Override
     public String locDescForLangFile() {
-        return "Chance to Cause the Ailment on hit. Maximum is 100%, Ailment strength is affected by the total damage dealt and all ailments accumulate, some may have caps.";
+        return "Chance to Cause the Ailment on hit. Maximum chance is 100%. " + ailment.locDescForLangFile();
     }
 
     @Override

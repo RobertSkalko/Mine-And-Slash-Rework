@@ -137,7 +137,7 @@ public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt {
 
         StatSoulData data = StackSaving.STAT_SOULS.loadFrom(stack);
 
-        for (Component c : data.getTooltip(stack)) {
+        for (Component c : data.getTooltip(stack, true)) {
             tooltip.add(c);
         }
 

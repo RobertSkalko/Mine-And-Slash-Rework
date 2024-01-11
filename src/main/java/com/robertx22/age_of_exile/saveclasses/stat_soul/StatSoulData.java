@@ -16,6 +16,7 @@ import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISettableLevelTier;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
@@ -226,7 +227,7 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
         return StackSaving.STAT_SOULS;
     }
 
-    public List<Component> getTooltip(ItemStack stack) {
+    public List<Component> getTooltip(ItemStack stack, boolean cangen) {
 
         List<Component> tooltip = new ArrayList<>();
 
@@ -257,8 +258,9 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
 
         tooltip.add(Chats.INFUSES_STATS.locName().withStyle(ChatFormatting.AQUA));
         tooltip.add(TooltipUtils.dragOntoGearToUse());
-        tooltip.add(Chats.RIGHT_CLICK_TO_GEN_ITEM.locName().withStyle(ChatFormatting.AQUA));
-
+        if (cangen) {
+            tooltip.add(Chats.RIGHT_CLICK_TO_GEN_ITEM.locName().withStyle(ChatFormatting.AQUA));
+        }
         return tooltip;
     }
 
@@ -270,7 +272,7 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
     @Override
     public List<ItemStack> getSalvageResult(ItemStack stack) {
         int amount = 1;
-        return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(getRarity().GUID()).get(), amount));
+        return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.getOrDefault(getRarity().GUID(), RarityItems.RARITY_STONE.get(IRarity.COMMON_ID)).get(), amount));
     }
 
 

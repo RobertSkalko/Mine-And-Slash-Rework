@@ -21,7 +21,8 @@ public class HealthUtils {
 
     public static float realToVanilla(LivingEntity en, float dmg) {
         float multi = dmg / getCombinedMaxHealth(en);
-        float total = multi * en.getMaxHealth();
+        float max = en.getMaxHealth();
+        float total = multi * max;
         return total;
     }
 
@@ -57,9 +58,9 @@ public class HealthUtils {
     }
 
     public static float getCombinedMaxHealth(LivingEntity en) {
-        EntityData data = Load.Unit(en);
-        return getMaxHealth(en);
+        var hp = getMaxHealth(en);
 
+        return hp;
     }
 
     public static float getCombinedCurrentHealth(LivingEntity en) {

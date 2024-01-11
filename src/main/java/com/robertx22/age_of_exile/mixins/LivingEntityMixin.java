@@ -55,8 +55,9 @@ public abstract class LivingEntityMixin implements LivingEntityAccesor {
             ci.setReturnValue(amount);
         }
 
-    }
+    } // ENSURE MY SPECIAL DAMAGE ISNT LOWERED BY ARMOR, ENCHANTS ETC
 
+    
     @Inject(method = "getDamageAfterMagicAbsorb", at = @At(value = "RETURN"), cancellable = true)
     public void hookenchreturn(DamageSource source, float amount, CallbackInfoReturnable<Float> ci) {
         LivingEntity en = (LivingEntity) (Object) this;

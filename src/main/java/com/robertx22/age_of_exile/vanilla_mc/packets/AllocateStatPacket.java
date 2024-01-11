@@ -57,12 +57,12 @@ public class AllocateStatPacket extends MyPacket<AllocateStatPacket> {
         PlayerData cap = Load.player(ctx.getPlayer());
 
         if (cap.statPoints.getFreePoints(ctx.getPlayer()) > 0) {
-            if (ExileDB.Stats()
-                    .get(stat) instanceof CoreStat) {
+            if (ExileDB.Stats().get(stat) instanceof CoreStat) {
                 cap.statPoints.map.put(stat, 1 + cap.statPoints.map.getOrDefault(stat, 0));
 
+                Load.Unit(ctx.getPlayer()).setEquipsChanged();
+                Load.Unit(ctx.getPlayer()).tryRecalculateStats();
                 cap.syncToClient(ctx.getPlayer());
-
             }
         }
     }

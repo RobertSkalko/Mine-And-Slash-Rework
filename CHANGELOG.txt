@@ -31,3 +31,11 @@ actual spell school or learnable at all, and that procced spell's lvl will be ba
 v.5.3.15
 - only gems can be extracted from sockets now
 - added mob and item lvl variance configs
+
+v.5.3.16
+- fixed stat allocation syncing
+- fixed a null log
+- fixed all player events being called twice a tick
+- blocking with shield now stops energy regen
+- you cant block with 0 energy now. Your items will be put on short cooldown and your shield block disabled
+- added GivePerLvlExp command

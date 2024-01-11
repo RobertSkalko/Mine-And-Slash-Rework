@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.event_hooks.ontick;
 
 import com.robertx22.age_of_exile.capability.bases.CapSyncUtil;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
+import com.robertx22.age_of_exile.capability.player.PlayerData;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
@@ -22,22 +23,43 @@ public class OnServerTick {
     static {
 
 
-        TICK_ACTIONS.add(new PlayerTickAction("update_caps", 20, (player) -> {
-            if (player.isAlive()) {
-                CapSyncUtil.syncPerSecond(player);
-                //Packets.sendToClient(player, new SyncAreaLevelPacket(LevelUtils.determineLevel(player.level(), player.blockPosition(), player).level));
-            }
-        }));
+    }
 
-        TICK_ACTIONS.add(new
-                PlayerTickAction("second_pass", 20, (player) ->
-        {
-            if (player.isAlive()) {
+
+    public static void onEndTick(ServerPlayer player) {
+        try {
+            if (player == null || player.isDeadOrDying()) {
+                return;
+            }
+            Load.player(player).spellCastingData.onTimePass(player);
+            Load.Unit(player).didStatCalcThisTickForPlayer = false;
+
+            int age = player.tickCount;
+
+            if (age % 200 == 0) {
+                Load.Unit(player).setEquipsChanged();
+            }
+
+            if (age % 5 == 0) {
+                var tickrate = 5;
+
+                if (player.isBlocking()) {
+                    if (Load.player(player).spellCastingData.isCasting()) {
+                        Load.player(player).spellCastingData.cancelCast(player);
+                    }
+                }
+                Load.player(player).buff.onTick(player, tickrate);
+                Load.Unit(player).getResources().onTickBlock(player, tickrate);
+
+            }
+
+            if (age % 20 == 0) {
+                EntityData unitdata = Load.Unit(player);
+                PlayerData playerData = Load.player(player);
 
                 Load.player(player).favor.onSecond(player);
 
-
-                if (Load.Unit(player)
+                if (unitdata
                         .getResources()
                         .getEnergy() < Load.Unit(player)
                         .getUnit()
@@ -50,26 +72,15 @@ public class OnServerTick {
                 UnequipGear.onTick(player);
 
                 if (player.tickCount % 60 == 0) {
-                    Load.player(player).getSkillGemInventory().removeSupportGemsIfTooMany(player);
-                    Load.player(player).getJewels().checkRemoveJewels(player);
+                    playerData.getSkillGemInventory().removeSupportGemsIfTooMany(player);
+                    playerData.getJewels().checkRemoveJewels(player);
                 }
 
-                Load.player(player).spellCastingData.charges.onTicks(player, 20);
-            }
-        }));
+                playerData.spellCastingData.charges.onTicks(player, 20);
 
-        TICK_ACTIONS.add(new
-
-                PlayerTickAction("regen", 20, (player) ->
-
-        {
-
-            if (player.isAlive()) {
-
-                EntityData unitdata = Load.Unit(player);
 
                 unitdata.syncedRecently = false;
-                Load.player(player).syncedRecently = false;
+                playerData.syncedRecently = false;
 
                 unitdata.tryRecalculateStats();
 
@@ -78,9 +89,17 @@ public class OnServerTick {
                 mana.Activate();
 
                 //if (!player.isSprinting()) {
-                RestoreResourceEvent energy = EventBuilder.ofRestore(player, player, ResourceType.energy, RestoreType.regen, 0)
-                        .build();
-                energy.Activate();
+                if (!player.isBlocking()) {
+                    RestoreResourceEvent energy = EventBuilder.ofRestore(player, player, ResourceType.energy, RestoreType.regen, 0)
+                            .build();
+                    energy.Activate();
+                } else {
+                    if (unitdata.getResources().getEnergy() < 1) {
+                        player.getCooldowns().addCooldown(player.getOffhandItem().getItem(), 20 * 3);
+                        player.getCooldowns().addCooldown(player.getMainHandItem().getItem(), 20 * 3);
+                        player.stopUsingItem();
+                    }
+                }
                 // }
 
                 RestoreResourceEvent msevent = EventBuilder.ofRestore(player, player, ResourceType.magic_shield, RestoreType.regen, 0)
@@ -95,57 +114,14 @@ public class OnServerTick {
                         RestoreResourceEvent hpevent = EventBuilder.ofRestore(player, player, ResourceType.health, RestoreType.regen, 0)
                                 .build();
                         hpevent.Activate();
+
                     }
                 }
-                unitdata.syncToClient(player);
+
+                CapSyncUtil.syncPerSecond(player);
 
             }
-        }));
 
-
-        var tickrate = 5;
-        TICK_ACTIONS.add(new
-                PlayerTickAction("every_5_ticks", tickrate, (player) ->
-        {
-            if (player == null || player.isDeadOrDying()) {
-                return;
-            }
-
-            if (player.isBlocking()) {
-                if (Load.player(player).spellCastingData.isCasting()) {
-                    Load.player(player).spellCastingData.cancelCast(player);
-                }
-            }
-
-            Load.player(player).buff.onTick(player, tickrate);
-
-            Load.Unit(player).getResources().onTickBlock(player, tickrate);
-
-        }));
-
-        TICK_ACTIONS.add(new
-                PlayerTickAction("every_tick", 1, (player) ->
-        {
-            if (player == null || player.isDeadOrDying()) {
-                return;
-            }
-            Load.player(player).spellCastingData.onTimePass(player);
-
-            Load.Unit(player).didStatCalcThisTickForPlayer = false;
-        }));
-
-
-    }
-
-
-    public static void onEndTick(ServerPlayer player) {
-        try {
-
-            if (player.isAlive()) {
-                TICK_ACTIONS.forEach(x -> {
-                    x.tick(player);
-                });
-            }
 
         } catch (Exception e) {
             e.printStackTrace();

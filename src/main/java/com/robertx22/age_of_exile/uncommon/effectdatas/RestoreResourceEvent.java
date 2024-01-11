@@ -74,5 +74,9 @@ public class RestoreResourceEvent extends EffectEvent {
             }
         }
 
+        if (target instanceof Player p) {
+            this.targetData.syncedRecently = false;
+        }
+
     }
 }

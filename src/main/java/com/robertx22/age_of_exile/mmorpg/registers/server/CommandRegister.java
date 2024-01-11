@@ -47,12 +47,12 @@ public class CommandRegister {
         SetLevel.register(dispatcher);
         GiveExp.register(dispatcher);
         SetFavor.register(dispatcher);
-
+        GivePerLvlExp.register(dispatcher);
 
         ResetSpellCooldowns.register(dispatcher);
 
         ResetCommand.register(dispatcher);
-        
+
         GiveStat.register(dispatcher);
         RemoveStat.register(dispatcher);
         ClearStats.register(dispatcher);
