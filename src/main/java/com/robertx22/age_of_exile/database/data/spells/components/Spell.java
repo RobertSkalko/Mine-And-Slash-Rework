@@ -48,6 +48,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExileRegistry<Spell>, IAutoLocName, IAutoLocDesc, MaxLevelProvider {
@@ -286,6 +287,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
 
         Set<ExileEffect> effect = new HashSet<>();
+        List<Integer> ticks = new ArrayList<>();
 
         if (ExileDB.ExileEffects().isRegistered(effect_tip)) {
             effect.add(ExileDB.ExileEffects().get(effect_tip));
@@ -298,6 +300,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
                         x.acts.forEach(a -> {
                             if (a.has(MapField.EXILE_POTION_ID)) {
                                 effect.add(a.getExileEffect());
+                                ticks.add(a.getOrDefault(MapField.POTION_DURATION, 0D).intValue() / 20);
                             }
                         });
                     });
@@ -308,11 +311,15 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
             if (showeffect) {
                 int lvl = this.getLevelOf(ctx.caster);
                 int perc = (int) (((float) lvl / (float) getMaxLevel()) * 100f);
+                AtomicInteger i = new AtomicInteger();
                 effect.forEach(x -> {
+                    list.add(x.locName());
                     List<ExactStatData> stats = x.getTooltipStats(ctx.caster, perc);
                     for (ExactStatData stat : stats) {
                         list.addAll(stat.GetTooltipString(info));
                     }
+                    list.add(Words.LASTS_SEC.locName(ticks.get(i.get())));
+                    i.getAndIncrement();
                 });
 
             } else {

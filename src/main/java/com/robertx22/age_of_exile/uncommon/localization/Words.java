@@ -8,6 +8,7 @@ import java.util.Locale;
 // to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
     LOAD("Load"),
+    LASTS_SEC("Lasts %1$ss"),
     MOD_NAME("Mine and Slash"),
     TAGS("Tags: "),
     CAPPED_BECAUSE_PLAYER_LEVEL(" - Next Slot Unlocks at Player Level %1$s"),
