@@ -30,6 +30,7 @@ import com.robertx22.age_of_exile.mmorpg.registers.common.SlashItemTags;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.SlashDeferred;
 import com.robertx22.age_of_exile.tags.ModTags;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.action.StatEffect;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
@@ -62,7 +63,7 @@ public class MMORPG {
 
 
     // DISABLE WHEN PUBLIC BUILD
-    public static boolean RUN_DEV_TOOLS = true;
+    public static boolean RUN_DEV_TOOLS = false;
 
     public static boolean combatLogEnabled() {
         return false; // todo, should this be a client config and have server send packets ?
@@ -96,6 +97,7 @@ public class MMORPG {
         });
 
         StackSaving.init();
+        StatEffect.init();
 
         ForgeEvents.registerForgeEvent(RegisterClientTooltipComponentFactoriesEvent.class, x -> {
             x.register(SocketTooltip.SocketComponent.class, SocketTooltip::new);

@@ -132,11 +132,8 @@ public class StatConditions implements ExileRegistryInit {
 
         BONE_SHATTER_NO_CD.addToSerializables();
         IS_SOURCE_MAX_CHARGES.addToSerializables();
-
         TARGET_HAS_EFFECT.addToSerializables();
-        BONE_SHATTER_NO_CD.addToSerializables();
         IS_EVENT_AILMENT.addToSerializables();
-
         ATTACK_TYPE_MATCHES.addToSerializables();
         IS_ELEMENTAL.addToSerializables();
         IS_TARGET_LOW.addToSerializables();

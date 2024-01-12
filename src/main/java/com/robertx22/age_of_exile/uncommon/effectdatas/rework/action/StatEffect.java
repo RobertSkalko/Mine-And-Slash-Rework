@@ -14,23 +14,12 @@ import java.util.HashMap;
 
 public abstract class StatEffect implements JsonExileRegistry<StatEffect>, IAutoGson<StatEffect> {
 
-    public static StatEffect SERIALIZER = new SetBooleanEffect();
     public static HashMap<String, StatEffect> SERIALIZERS = new HashMap<>();
+    public static StatEffect SERIALIZER = new SetBooleanEffect();
 
-    static {
-        addSer(new ApplyCooldownAsCastTimeEffect());
-        addSer(new IncreaseNumberPerCurseOnTarget());
-        addSer(new DoubleDamageAction());
-        addSer(new RemoveExileEffectAction());
-        addSer(new MultiplyNumberByPercentEffect());
-        addSer(new GiveExileStatusInRadius());
-        addSer(new DecreaseNumberByPercentEffect());
-        addSer(new AddToNumberEffect());
-        addSer(new SetDataNumberAction());
-        addSer(new SetBooleanEffect());
-        addSer(new IncreaseNumberByPercentEffect());
-        addSer(new RestoreResourceAction());
-        addSer(new GiveExileStatusEffect());
+
+    public static void init() {
+
     }
 
     static void addSer(StatEffect eff) {
@@ -43,6 +32,8 @@ public abstract class StatEffect implements JsonExileRegistry<StatEffect>, IAuto
     public StatEffect(String id, String ser) {
         this.id = id;
         this.ser = ser;
+
+        addSer(this);
     }
 
     public abstract void activate(EffectEvent event, EffectSides statSource, StatData data, Stat stat);
