@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.datapacks.lang_file;
 
+import com.google.common.collect.Lists;
 import com.robertx22.age_of_exile.capability.player.data.PlayerBuffData;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -21,12 +22,34 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class CreateLangFile {
 
     public static void create() {
 
-        String json = "{\n" + DirUtils.getManualString();
+        List<String> translatorGuide = Lists.newArrayList(
+        "This part of text serve as a guide for helping translator to understand some internal detail.",
+        "1. some lang lines have corresponding locale context, especially the formatter lines. these context can help translator to understand how the formatters work. Also translating these lines is meaningless",
+        "2. some lines contain line break format(\\n). translator can add/remove that format at will, basing on the actual text length."
+        );
+
+        String json = "{\n";
+        LinkedHashMap<String, String> guideMap = IntStream.range(0, translatorGuide.size())
+                                                .boxed()
+                                                .collect(Collectors.toMap(
+                                                        integer -> "translator_guide_" + integer,
+                                                        translatorGuide::get,
+                                                        (existing, replacement) -> existing,
+                                                        LinkedHashMap::new
+                                                ));
+
+        for(Map.Entry<String, String> x : guideMap.entrySet()){
+            json += "\t" + "\"" + x.getKey() + "\": \"" + StringEscapeUtils.escapeJava(x.getValue()) + "\",\n";
+        }
+
+
+        json += DirUtils.getManualString();
 
         // dont print duplicates
         List<String> usedGUIDS = new ArrayList<>();
@@ -59,7 +82,7 @@ public class CreateLangFile {
                     //If you dont want it, just delete and change the \n in Itemtips.java to \\n.
                     json += "\t" + "\"" + iauto.formattedLocNameLangFileGUID() + "\": \"" + StringEscapeUtils.escapeJava(iauto.locNameForLangFile()) + "\",\n";
                     if (iauto.additionLocInformation() != null) {
-                        json += "\t" + "\"" + iauto.formattedLocNameLangFileGUID() + ".locale_context\": \"(This is a context info, no need to be  translated)" + StringEscapeUtils.escapeJava(iauto.additionLocInformation()) + "\",\n";
+                        json += "\t" + "\"" + iauto.formattedLocNameLangFileGUID() + ".locale_context_for_translator\": \"" + StringEscapeUtils.escapeJava(iauto.additionLocInformation()) + "\",\n";
                     }
                 }
             }
