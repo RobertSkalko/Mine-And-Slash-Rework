@@ -163,16 +163,23 @@ public enum Words implements IAutoLocName {
     MULTIPLY_STAT_REDUCED("Reduced"),
     MULTIPLICATIVE_DAMAGE_MORE("More"),
     MULTIPLICATIVE_DAMAGE_LESS("Less"),
-    INCREASE_PERCENT_STAT("Extra "),
+    INCREASE_PERCENT_STAT("Extra ", "use for stat like \"(Extra) (attack speed)\", this is different with multiply stat prefix."),
     EMPTY_BOX("Box"),
     LEVEL_UP_TYPE_PLAYER("Player");
 
 
     private String localization = "";
 
+    private String localeContext = null;
+
     Words(String str) {
         this.localization = str;
 
+    }
+
+    Words(String localization, String localeContext) {
+        this.localization = localization;
+        this.localeContext = localeContext;
     }
 
     @Override
@@ -191,8 +198,15 @@ public enum Words implements IAutoLocName {
     }
 
     @Override
+    public String additionLocInformation() {
+        return this.localeContext;
+    }
+
+    @Override
     public String GUID() {
         return this.name()
                 .toLowerCase(Locale.ROOT);
     }
+
+
 }

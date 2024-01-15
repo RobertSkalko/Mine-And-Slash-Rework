@@ -6,7 +6,6 @@ import com.robertx22.age_of_exile.database.data.profession.ICreativeTabTiered;
 import com.robertx22.age_of_exile.database.data.profession.LeveledItem;
 import com.robertx22.age_of_exile.database.data.profession.buffs.StatBuff;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -27,7 +26,6 @@ import net.minecraft.world.level.Level;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered {
 
@@ -97,7 +95,7 @@ public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered 
     // Greater intelligence potion = power + name
     @Override
     public Component getName(ItemStack stack) {
-        return Formatter.BUFF_COMSUPTIONS_NAME.locName(power.word.locName(), getBuff().mods.get(0).GetStat().locName(), type.locName())
+        return Formatter.BUFF_CONSUMPTIONS_NAME.locName(power.word.locName(), getBuff().mods.get(0).GetStat().locName(), type.locName())
                 .withStyle(LeveledItem.getTier(stack).format);
     }
 
