@@ -41,7 +41,7 @@ public enum Itemtips implements IAutoLocName {
     SOUL_CLEANER_USAGE_AND_WARNING("Click on items to remove their soul.\nThe item remains but the stats will be deleted."),
     SOCKET_EXTRACTOR_USAGE("Click on gear to extract a gem."),
     Enchanted("Enchanted: "),
-    OUTCOME_TIP("%1$s, Base Weight: %2$s"),
+    OUTCOME_TIP("%1$s, Base Weight: %2$s", "for currency tooltips"),
     Exp("Exp: %1$s%%"),
     Loot("Loot: %1$s%%"),
     PREFIX_STATS("Prefix Stats: "),
@@ -51,17 +51,16 @@ public enum Itemtips implements IAutoLocName {
 
     private String localization = "";
 
+    private String localeContext = null;
+
     Itemtips(String str) {
         this.localization = str;
     }
 
-    /*Itemtips(String str, ChatFormatting... format) {
-        StringBuilder text = new StringBuilder();
-        for (ChatFormatting x : format){
-            text.append(x);
-        }
-        this.localization =  text.append(str).toString();
-    }*/
+    Itemtips(String localization, String localeContext) {
+        this.localization = localization;
+        this.localeContext = localeContext;
+    }
 
     @Override
     public IAutoLocName.AutoLocGroup locNameGroup() {
@@ -76,6 +75,11 @@ public enum Itemtips implements IAutoLocName {
     @Override
     public String locNameForLangFile() {
         return localization;
+    }
+
+    @Override
+    public String additionLocInformation() {
+        return localeContext;
     }
 
     @Override

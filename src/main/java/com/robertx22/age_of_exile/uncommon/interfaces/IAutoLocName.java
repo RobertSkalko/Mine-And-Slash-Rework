@@ -38,4 +38,8 @@ public interface IAutoLocName extends IBaseAutoLoc {
         return CLOC.blank(getFormatedForLangFile(locNameLangFileGUID()));
     }
 
+    default String additionLocInformation(){
+        return null;
+    }
+
 }
