@@ -6,9 +6,9 @@ import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import java.util.Locale;
 
 public enum Formatter implements IAutoLocName {
-    GEM_ITEM_NAME("%1$s %2$s"),
+    GEM_ITEM_NAME("%1$s %2$s", "Use to control the order and space of gem item name, like \"(cracked) (ruby)\""),
     BUFF_COMSUPTIONS_NAME("%1$s %2$s %3$s"),
-    GEAR_ITEM_NAME_ALL("%1$s %2$s %3$s"),
+    GEAR_ITEM_NAME_ALL("%1$s %2$s %3$s", "Use to control the order and space of gear item name, like \"(Giant) (Rusted Sword) (of Penetration)\""),
     ICON_AND_DAMAGE_IN_SPELL_DAMAGE_PROPORTION("%1$s %2$s"),
     SPECIAL_CALC_STAT("%1$s %2$s"),
     SECOND_SPECIAL_CALC_STAT("%1$s %2$s"),
@@ -20,8 +20,15 @@ public enum Formatter implements IAutoLocName {
     GEAR_ITEM_NAME_ANOTHER("%1$s %2$s %3$s");
     private String localization = "";
 
+    private String localeContext = null;
+
     Formatter(String str) {
         this.localization = str;
+
+    }
+    Formatter(String str, String localeContext) {
+        this.localization = str;
+        this.localeContext = localeContext;
 
     }
 
@@ -44,6 +51,11 @@ public enum Formatter implements IAutoLocName {
     public String GUID() {
         return this.name()
                 .toLowerCase(Locale.ROOT);
+    }
+
+    @Override
+    public String additionLocInformation(){
+        return localeContext;
     }
 
 }

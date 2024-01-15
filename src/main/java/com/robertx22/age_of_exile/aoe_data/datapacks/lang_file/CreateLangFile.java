@@ -58,6 +58,9 @@ public class CreateLangFile {
                     // I dont know why I got encoding error when export the lang file, have to add this.
                     //If you dont want it, just delete and change the \n in Itemtips.java to \\n.
                     json += "\t" + "\"" + iauto.formattedLocNameLangFileGUID() + "\": \"" + StringEscapeUtils.escapeJava(iauto.locNameForLangFile()) + "\",\n";
+                    if (iauto.additionLocInformation() != null) {
+                        json += "\t" + "\"" + iauto.formattedLocNameLangFileGUID() + ".locale_context\": \"(This is a context info, no need to be  translated)" + StringEscapeUtils.escapeJava(iauto.additionLocInformation()) + "\",\n";
+                    }
                 }
             }
             json += CreateLangFileUtils.comment(entry.getKey());
