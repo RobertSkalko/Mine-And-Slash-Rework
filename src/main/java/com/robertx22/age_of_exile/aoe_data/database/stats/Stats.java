@@ -995,7 +995,7 @@ public class Stats implements ExileRegistryInit {
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x))
             .addEffect(StatEffects.INCREASE_VALUE)
             .setLocName(x -> x.locNameForLangFile() + " Damage")
-            .setLocDesc(x -> "")
+            .setLocDesc(x -> "Increases damage of spells with this tag. Totem Damage increases dmg of totems, etc.")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
             })

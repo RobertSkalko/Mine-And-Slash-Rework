@@ -28,6 +28,8 @@ public class ProcSpellEffect extends StatEffect {
 
     @Override
     public void activate(EffectEvent event, EffectSides statSource, StatData data, Stat stat) {
+
+        // be careful not to make it proc itself
         var spell = ExileDB.Spells().get(spellId);
 
         var ctx = new SpellCastContext(event.source, 0, spell);
@@ -42,6 +44,7 @@ public class ProcSpellEffect extends StatEffect {
         if (event.source instanceof Player p) {
             Load.player(p).spellCastingData.setCooldownOnCasted(ctx);
         }
+
 
     }
 

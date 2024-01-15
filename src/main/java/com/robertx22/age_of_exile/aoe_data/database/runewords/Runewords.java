@@ -80,7 +80,7 @@ public class Runewords implements ExileRegistryInit {
                         Energy.getInstance().mod(10, 10).percent(),
                         Mana.getInstance().mod(10, 10).percent()
                 ),
-                Arrays.asList(RuneType.WIR, RuneType.MOS, RuneType.ANO, RuneType.CEN),
+                Arrays.asList(RuneType.FEY, RuneType.MOS, RuneType.ANO, RuneType.CEN),
                 GearSlots.CHEST);
 
         RunewordBuilder.of("abyssal_depths", "Abyssal Depths",

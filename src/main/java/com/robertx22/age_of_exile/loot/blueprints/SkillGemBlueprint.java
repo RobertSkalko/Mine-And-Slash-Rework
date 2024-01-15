@@ -28,6 +28,7 @@ public class SkillGemBlueprint extends RarityItemBlueprint implements ITypeBluep
 
 
     public SkillGemData createData() {
+       
         GearRarity rar = rarity.get();
 
         String id = getType().get().GUID();

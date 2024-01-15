@@ -39,20 +39,33 @@ public class StatCalculation {
         EntityData data = Load.Unit(entity);
         unit.clearStats();
 
+        List<StatContext> gemstats = new ArrayList<>();
+
+
+        var onlyGear = new ArrayList<StatContext>();
 
         // we should save a bunch of time x 8 with this
         if (statContexts == null) {
             List<GearData> gears = new ArrayList<>();
             new CollectGearEvent.CollectedGearStacks(entity, gears, dmgData);
             statContexts = collectStatsWithCtx(entity, data, gears);
+            onlyGear.addAll(statContexts);
         }
 
         if (entity instanceof Player p) {
             PlayerData playerData = Load.player(p);
-            statContexts.addAll(collectGemStats(p, data, playerData, skillGem));
+            gemstats.addAll(collectGemStats(p, data, playerData, skillGem));
         }
 
-        var sc = new CtxStats(statContexts);
+        var allstats = new ArrayList<StatContext>();
+
+        allstats.addAll(gemstats);
+        allstats.addAll(onlyGear);
+        if (statContexts != null) {
+            allstats.addAll(statContexts);
+        }
+
+        var sc = new CtxStats(allstats);
 
         sc.applyCtxModifierStats();
         sc.applyToInCalc(unit);
@@ -81,7 +94,7 @@ public class StatCalculation {
                 });
 
 
-        return statContexts;
+        return onlyGear;
 
     }
 

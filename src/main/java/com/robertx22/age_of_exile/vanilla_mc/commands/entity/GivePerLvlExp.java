@@ -16,10 +16,10 @@ public class GivePerLvlExp {
         commandDispatcher.register(
                 literal(CommandRefs.ID)
                         .then(literal("give").requires(e -> e.hasPermission(2))
-                                .then(literal("exp")
+                                .then(literal("xp_times_lvl")
                                         .requires(e -> e.hasPermission(2))
                                         .then(argument("target", EntityArgument.player())
-                                                .then(argument("xp_times_lvl", IntegerArgumentType.integer())
+                                                .then(argument("exp", IntegerArgumentType.integer())
                                                         .executes(ctx -> run(EntityArgument.getPlayer(ctx, "target"), IntegerArgumentType
                                                                 .getInteger(ctx, "exp"))))))));
     }

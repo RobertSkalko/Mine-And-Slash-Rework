@@ -40,3 +40,4 @@ v.5.3.16
 - you cant block with 0 energy now. Your items will be put on short cooldown and your shield block disabled
 - added GivePerLvlExp command
 - added seconds tooltip to effect
+- fixed stat calc bug with supp gems

@@ -50,6 +50,7 @@ public class LivingHurtUtils {
         if (event.getSource() != null) {
 
             if (!RangedDamageUtil.isValidAttack(event)) {
+                event.setCanceled(true);
                 return;
             }
             if (DmgSourceUtils.isMyDmgSource(event.getSource())) {
