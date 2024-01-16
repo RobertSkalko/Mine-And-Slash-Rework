@@ -41,3 +41,8 @@ v.5.3.16
 - added GivePerLvlExp command
 - added seconds tooltip to effect
 - fixed stat calc bug with supp gems
+
+v.5.3.17
+- socket extractor now removes runes and deletes runeword if it cant hold it anymore
+- fix stat calc bug resulting in double stats
+- refined how phys conversion works. It transfers now at start of dmg, and uses original number, which means 50% fire and 50% cold conversion should convert your entire phys dmg, and would benefit each from their elemental dmg bonusess

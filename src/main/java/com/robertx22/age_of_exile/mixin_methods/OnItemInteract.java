@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.database.data.auto_item.AutoItem;
 import com.robertx22.age_of_exile.database.data.currency.IItemAsCurrency;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.age_of_exile.database.data.profession.items.CraftedSoulItem;
+import com.robertx22.age_of_exile.database.data.runewords.RuneWord;
 import com.robertx22.age_of_exile.mmorpg.ForgeEvents;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
@@ -191,18 +192,34 @@ public class OnItemInteract {
                     if (gear != null) {
                         if (gear.sockets != null && gear.sockets.getSocketed().size() > 0) {
                             try {
-                                int index = gear.sockets.getFirstGemIndex();
+
+
+                                int index = gear.sockets.lastFilledSocketIndex();
 
                                 if (index > -1) {
-                                    var s = gear.sockets.getSocketed().get(index);
-                                    if (s.isGem()) {
-                                        ItemStack gem = s.getOriginalItemStack();
-                                        gear.sockets.getSocketed().remove(index);
-                                        StackSaving.GEARS.saveTo(craftedStack, gear);
-                                        PlayerUtils.giveItem(gem, player);
-                                        currency.shrink(1);
-                                        return new Result(true).ding();
+                                    RuneWord runeword = null;
+                                    if (gear.sockets.hasRuneWord()) {
+                                        runeword = gear.sockets.getRuneWord();
                                     }
+                                    var s = gear.sockets.getSocketed().get(index);
+
+                                    ItemStack gem = s.getOriginalItemStack();
+
+                                    gear.sockets.getSocketed().remove(index);
+
+                                    if (gear.sockets.hasRuneWord()) {
+
+                                        if (!runeword.hasMatchingRunesToCreate(gear)) {
+                                            gear.sockets.removeRuneword();
+                                        }
+                                    }
+
+                                    StackSaving.GEARS.saveTo(craftedStack, gear);
+
+                                    PlayerUtils.giveItem(gem, player);
+                                    currency.shrink(1);
+                                    return new Result(true).ding();
+
                                 }
                             } catch (Exception e) {
                                 e.printStackTrace();

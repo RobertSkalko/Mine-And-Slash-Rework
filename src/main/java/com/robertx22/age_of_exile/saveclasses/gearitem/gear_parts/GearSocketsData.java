@@ -43,6 +43,11 @@ public class GearSocketsData implements IStatsContainer, IGearPartTooltip {
         this.rp = new MinMax(0, 100).random();
     }
 
+    public void removeRuneword() {
+        this.rw = "";
+        this.rp = 0;
+    }
+
     public List<SocketData> getSocketed() {
         return so;
     }
@@ -54,6 +59,18 @@ public class GearSocketsData implements IStatsContainer, IGearPartTooltip {
                 return i;
             }
             i++;
+        }
+        return -1;
+    }
+
+    public int lastFilledSocketIndex() {
+
+        for (int i = so.size() - 1; i > -1; i--) {
+            var socket = so.get(i);
+
+            if (socket.isGem() || socket.isRune()) {
+                return i;
+            }
         }
         return -1;
     }

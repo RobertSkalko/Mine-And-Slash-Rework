@@ -21,7 +21,7 @@ public class SocketExtractorItem extends AutoItem {
 
     @Override
     public String locNameForLangFile() {
-        return "Gem Socket Extractor Tool";
+        return "Socket Extractor Tool";
     }
 
     @Override

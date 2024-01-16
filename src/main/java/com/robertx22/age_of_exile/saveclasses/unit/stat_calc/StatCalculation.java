@@ -24,33 +24,33 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class StatCalculation {
 
+    public static List<StatContext> getStatsWithoutSuppGems(LivingEntity entity, EntityData data, AttackInformation dmgData) {
+        List<StatContext> statContexts = new ArrayList<>();
+
+        List<GearData> gears = new ArrayList<>();
+
+        new CollectGearEvent.CollectedGearStacks(entity, gears, dmgData);
+
+        statContexts = collectStatsWithCtx(entity, data, gears);
+
+        return statContexts;
+    }
+
     // todo trying to rewrite calc code..
-    public static List<StatContext> calc(Unit unit, List<StatContext> statContexts, LivingEntity entity, int skillGem, AttackInformation dmgData) {
+    public static void calc(Unit unit, List<StatContext> statsWithoutSuppGems, LivingEntity entity, int skillGem, AttackInformation dmgData) {
 
         if (entity.level().isClientSide) {
-            return Arrays.asList();
+            return;
         }
 
         EntityData data = Load.Unit(entity);
         unit.clearStats();
 
         List<StatContext> gemstats = new ArrayList<>();
-
-
-        var onlyGear = new ArrayList<StatContext>();
-
-        // we should save a bunch of time x 8 with this
-        if (statContexts == null) {
-            List<GearData> gears = new ArrayList<>();
-            new CollectGearEvent.CollectedGearStacks(entity, gears, dmgData);
-            statContexts = collectStatsWithCtx(entity, data, gears);
-            onlyGear.addAll(statContexts);
-        }
 
         if (entity instanceof Player p) {
             PlayerData playerData = Load.player(p);
@@ -60,10 +60,7 @@ public class StatCalculation {
         var allstats = new ArrayList<StatContext>();
 
         allstats.addAll(gemstats);
-        allstats.addAll(onlyGear);
-        if (statContexts != null) {
-            allstats.addAll(statContexts);
-        }
+        allstats.addAll(statsWithoutSuppGems);
 
         var sc = new CtxStats(allstats);
 
@@ -93,8 +90,6 @@ public class StatCalculation {
                     }
                 });
 
-
-        return onlyGear;
 
     }
 

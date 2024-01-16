@@ -203,11 +203,6 @@ public class PlayerData implements ICap {
         }
     }
 
-    private Unit getSpellStats(SpellCastingData.HotbarSpellData data) {
-        var unit = new Unit();
-        StatCalculation.calc(unit, null, player, data.hotbarkey, null);
-        return unit;
-    }
 
     private Unit getSpellStats(Spell spell, List<StatContext> stats) {
         int key = this.spellCastingData.keyOfSpell(spell.GUID());

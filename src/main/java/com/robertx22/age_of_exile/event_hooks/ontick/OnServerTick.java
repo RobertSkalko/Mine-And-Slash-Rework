@@ -31,6 +31,7 @@ public class OnServerTick {
             if (player == null || player.isDeadOrDying()) {
                 return;
             }
+           
             Load.player(player).spellCastingData.onTimePass(player);
             Load.Unit(player).didStatCalcThisTickForPlayer = false;
 

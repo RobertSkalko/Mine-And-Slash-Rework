@@ -13,6 +13,7 @@ public interface IBaseAutoLoc extends IGUID {
         Foods,
         Runes,
         StatusEffects,
+        StatPriority,
         Unique_Items,
         Spells,
         Gear_Items,

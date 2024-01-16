@@ -19,11 +19,7 @@ public interface IRarity {
                 .equals(UNIQUE_ID);
     }
 
-    default boolean isRuneWord() {
-        return this.getRarityId()
-                .equals(RUNEWORD_ID);
-    }
-
+  
     String COMMON_ID = "common";
     String UNCOMMON = "uncommon";
     String RARE_ID = "rare";

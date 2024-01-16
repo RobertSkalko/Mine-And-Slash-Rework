@@ -208,7 +208,7 @@ public class Stats implements ExileRegistryInit {
             .<Elements>of(x -> "all_" + x.guidName + "_damage", x -> x)
             .addAllOfType(Elements.values())
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(1)
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)

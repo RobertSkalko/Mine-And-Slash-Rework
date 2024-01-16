@@ -568,7 +568,9 @@ public class EntityData implements ICap, INeededForClient {
             //Watch watch = new Watch();
             this.unit = new Unit();
 
-            var statsWithoutSupps = StatCalculation.calc(unit, null, entity, -1, null);
+            var stats = StatCalculation.getStatsWithoutSuppGems(entity, this, null);
+
+            StatCalculation.calc(unit, stats, entity, -1, null);
 
             if (entity instanceof Player p) {
                 this.didStatCalcThisTickForPlayer = true;
@@ -576,7 +578,7 @@ public class EntityData implements ICap, INeededForClient {
 
                 var data = Load.player(p);
                 var spells = data.spellCastingData.getAllHotbarSpells().stream().map(x -> x.getSpell()).collect(Collectors.toList());
-                data.calcSpellUnits(spells, statsWithoutSupps);
+                data.calcSpellUnits(spells, stats);
 
                 Load.player(p).spellCastingData.calcSpellLevels(unit);
                 Load.player(p).getSkillGemInventory().removeAurasIfCantWear(p);
