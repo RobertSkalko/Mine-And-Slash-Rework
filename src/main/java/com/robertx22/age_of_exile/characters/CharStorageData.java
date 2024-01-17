@@ -29,6 +29,10 @@ public class CharStorageData {
 
     }
 
+    public CharacterData getCurrent() {
+        return this.map.getOrDefault(current, new CharacterData());
+    }
+
     public boolean canChangeCharactersRightNow(Player p) {
         if (Load.Unit(p).getCooldowns().isOnCooldown(CooldownsData.IN_COMBAT)) {
             return false;

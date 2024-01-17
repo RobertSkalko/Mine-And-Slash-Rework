@@ -141,7 +141,7 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
         addTo(StatType.DAMAGE, Arrays.asList(Stats.COOLDOWN_REDUCTION.get(), Stats.CAST_SPEED.get()));
 
         addTo(StatType.ELE_DAMAGE, Stats.ELEMENTAL_DAMAGE.getAll());
-        addTo(StatType.ELE_DAMAGE, Stats.ELEMENTAL_ANY_WEAPON_DAMAGE.getAll());
+        // addTo(StatType.ELE_DAMAGE, Stats.ELEMENTAL_ANY_WEAPON_DAMAGE.getAll());
         addTo(StatType.ELE_DAMAGE, Stats.ELEMENTAL_SPELL_DAMAGE.getAll());
         addTo(StatType.ELE_DAMAGE, new ElementalPenetration(Elements.Elemental).generateAllSingleVariations());
 

@@ -131,6 +131,8 @@ public class StatCalculation {
             var playerData = Load.player(p);
 
             statContexts.addAll(PlayerStatUtils.addToolStats(p));
+            
+            statContexts.add(PlayerStatUtils.addBonusExpPerCharacters(p));
 
             statContexts.addAll(playerData.buff.getStatAndContext(p));
 

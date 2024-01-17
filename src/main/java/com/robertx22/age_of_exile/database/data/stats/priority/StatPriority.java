@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Locale;
 
 // todo use this for every stat, and make sure each is used for its own event.s
+// should it be a registry or just like the tags
 
 public class StatPriority implements IAutoLocName {
 

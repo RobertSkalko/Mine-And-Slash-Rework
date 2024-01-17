@@ -8,6 +8,8 @@ public class MaxAllSpellLevels extends Stat {
 
     public MaxAllSpellLevels() {
         this.is_perc = false;
+
+        this.show_in_gui = false;
     }
 
     @Override
