@@ -47,3 +47,6 @@ v.5.3.17
 - fix stat calc bug resulting in double stats
 - BONUS_EXP_PERCENT_PER_HIGHER_LVL_CHARACTERS config
 - refined how phys conversion works. It transfers now at start of dmg, and uses original number, which means 50% fire and 50% cold conversion should convert your entire phys dmg, and would benefit each from their elemental dmg bonusess
+
+v.5.3.18
+- forgot to gen the data folder

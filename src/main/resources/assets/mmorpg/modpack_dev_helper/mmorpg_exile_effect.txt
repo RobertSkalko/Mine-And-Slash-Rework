@@ -21,7 +21,7 @@ thorn
 inner_calm
 valor
 draconic_blood
-slow
 charm
+slow
 ground
 despair
