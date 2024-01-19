@@ -26,7 +26,7 @@ public class OnPlayerDeath extends EventConsumer<ExileEvents.OnPlayerDeath> {
 
             data.buff = new PlayerBuffData(); // we delete all the buff foods and potions on death, if in the future i want some buffs to persist across death, change this
 
-            data.syncToClient(event.player);
+            data.playerDataSync.setDirty();
 
 
         } catch (Exception e) {

@@ -149,20 +149,6 @@ public class Unit {
 
     }
 
-    public static class DirtyCheck {
-        public int hp;
-
-        public boolean isDirty(DirtyCheck newcheck) {
-
-            if (newcheck.hp != hp) {
-                return true;
-            }
-
-            return false;
-
-        }
-    }
-
 
     public static boolean shouldSendUpdatePackets(LivingEntity en) {
         if (ServerContainer.get().DONT_SYNC_DATA_OF_AMBIENT_MOBS.get()) {

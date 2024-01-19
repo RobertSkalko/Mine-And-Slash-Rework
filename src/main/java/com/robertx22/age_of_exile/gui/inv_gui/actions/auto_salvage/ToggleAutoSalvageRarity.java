@@ -49,12 +49,12 @@ public class ToggleAutoSalvageRarity extends GuiAction {
     @Override
     public void doAction(Player p, Object data) {
         Load.player(p).config.salvage.toggle(type, rarity.GUID());
-        Load.player(p).syncToClient(p);
+        Load.player(p).playerDataSync.setDirty();
     }
 
     @Override
     public void clientAction(Player p, Object obj) {
-        
+
     }
 
     public ResourceLocation getIcon() {

@@ -1,5 +1,7 @@
 package com.robertx22.age_of_exile.saveclasses.unit;
 
+import com.robertx22.age_of_exile.capability.entity.EntityData;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,7 +19,11 @@ public enum ResourceType {
         this.locname = locname;
     }
 
- 
+
+    public boolean isFull(EntityData data) {
+        return data.getResources().get(data.getEntity(), this) >= data.getResources().getMax(data.getEntity(), this);
+    }
+
     public static List<ResourceType> getUsed() {
         return Arrays.asList(health, magic_shield, mana, energy);
     }

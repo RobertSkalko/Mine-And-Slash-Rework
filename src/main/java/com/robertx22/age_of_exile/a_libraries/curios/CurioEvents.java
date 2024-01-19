@@ -19,10 +19,9 @@ public class CurioEvents {
                     EntityData data = Load.Unit(entity);
                     if (data != null) {
                         data.setEquipsChanged();
-                        data.tryRecalculateStats();
-
+                      
                         if (entity instanceof ServerPlayer) {
-                            data.syncToClient((ServerPlayer) entity);
+                            data.sync.setDirty();
                         }
                     }
                 }

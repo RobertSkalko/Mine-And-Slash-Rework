@@ -38,14 +38,18 @@ public class TpBackItem extends AutoItem implements IShapedRecipe {
         ItemStack itemstack = p.getItemInHand(pUsedHand);
 
         if (!pLevel.isClientSide) {
-
             if (WorldUtils.isMapWorldClass(pLevel)) {
                 if (!EntityFinder.start(p, Mob.class, p.blockPosition()).radius(5).searchFor(AllyOrEnemy.enemies).build().isEmpty()) {
                     p.sendSystemMessage(Chats.ENEMY_TOO_CLOSE.locName());
                     return InteractionResultHolder.pass(p.getItemInHand(pUsedHand));
                 }
                 itemstack.shrink(1);
+
+                Load.Unit(p).getCooldowns().setOnCooldown("stop_map_gen", 2);
+
                 Load.player(p).map.teleportBack(p);
+
+                return InteractionResultHolder.success(p.getItemInHand(pUsedHand));
             }
         }
         return InteractionResultHolder.pass(p.getItemInHand(pUsedHand));

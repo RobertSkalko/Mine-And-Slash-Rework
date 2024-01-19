@@ -54,8 +54,8 @@ public class TellServerToCastSpellPacket extends MyPacket<TellServerToCastSpellP
                 SpellCastContext c = new SpellCastContext(player, 0, spell);
                 data.spellCastingData.setToCast(c);
                 spell.spendResources(c);
-                data.syncedRecently = false;
-                data.syncToClient(player);
+
+                data.playerDataSync.setDirty();
                 return true;
             } else {
 

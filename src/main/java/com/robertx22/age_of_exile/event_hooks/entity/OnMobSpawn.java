@@ -51,7 +51,7 @@ public class OnMobSpawn {
                     endata.setUnit(new Unit());
                 }
                 endata.getUnit().initStats(); // give new stats to mob on spawn
-                endata.forceRecalculateStats();
+                endata.setEquipsChanged();
             }
 
         }
@@ -82,8 +82,8 @@ public class OnMobSpawn {
         endata.setUnit(mob);
 
         endata.mobStatsAreSet();
-        endata.forceRecalculateStats();
-
+        endata.setEquipsChanged();
+      
         return mob;
 
     }

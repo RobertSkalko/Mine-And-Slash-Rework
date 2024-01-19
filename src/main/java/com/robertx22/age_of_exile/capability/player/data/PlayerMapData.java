@@ -30,6 +30,7 @@ public class PlayerMapData {
         if (tp_back_from_league_pos == 0) {
             pos = MapData.getDungeonStartTeleportPos(p.blockPosition());
         }
+
         TeleportUtils.teleport((ServerPlayer) p, pos);
     }
 

@@ -50,3 +50,6 @@ v.5.3.17
 
 v.5.3.18
 - forgot to gen the data folder
+
+v.5.3.19
+- try to optimize gear calc and sync code

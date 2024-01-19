@@ -58,24 +58,12 @@ public class RestoreResourceEvent extends EffectEvent {
                         DmgNumPacket packet = new DmgNumPacket(target, text, data.isCrit(), ChatFormatting.GREEN);
                         Packets.sendToClient((Player) source, packet);
                     }
-
-                    /*
-                    float threat = (int) (num * 0.1F);
-                    List<Mob> mobs = EntityFinder.start(source, Mob.class, source.blockPosition())
-                            .radius(10)
-                            .build();
-                    for (Mob x : mobs) {
-                        GenerateThreatEvent threatEvent = new GenerateThreatEvent((Player) source, x, ThreatGenType.heal, threat);
-                        threatEvent.Activate();
-                    }
-
-                     */
                 }
             }
         }
 
         if (target instanceof Player p) {
-            this.targetData.syncedRecently = false;
+            this.targetData.sync.setDirty();
         }
 
     }

@@ -52,7 +52,6 @@ public class AllocateStatPacket extends MyPacket<AllocateStatPacket> {
     public void onReceived(ExilePacketContext ctx) {
 
         Load.Unit(ctx.getPlayer()).setEquipsChanged();
-        Load.Unit(ctx.getPlayer()).tryRecalculateStats();
 
         PlayerData cap = Load.player(ctx.getPlayer());
 
@@ -61,8 +60,7 @@ public class AllocateStatPacket extends MyPacket<AllocateStatPacket> {
                 cap.statPoints.map.put(stat, 1 + cap.statPoints.map.getOrDefault(stat, 0));
 
                 Load.Unit(ctx.getPlayer()).setEquipsChanged();
-                Load.Unit(ctx.getPlayer()).tryRecalculateStats();
-                cap.syncToClient(ctx.getPlayer());
+                cap.playerDataSync.setDirty();
             }
         }
     }

@@ -43,7 +43,7 @@ public class TellServerToCancelSpellCast extends MyPacket<TellServerToCancelSpel
             spells.spellCastingData
                     .cancelCast(player);
 
-            spells.syncToClient(player);
+            spells.playerDataSync.setDirty();
         }
     }
 

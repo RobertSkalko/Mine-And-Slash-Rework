@@ -53,8 +53,10 @@ public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
                 checkGearChanged(entity);
             }
 
-            data.trySync();
-            
+
+            data.gear.onTickTrySync(entity);
+            data.sync.onTickTrySync(entity);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -97,11 +99,7 @@ public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
 
             EntityData data = Load.Unit(entity);
             data.setEquipsChanged();
-            data.tryRecalculateStats();
 
-            if (entity instanceof Player) {
-                data.syncToClient((Player) entity);
-            }
         }
 
     }

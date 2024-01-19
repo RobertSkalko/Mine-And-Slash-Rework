@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.capability.entity;
 
+import com.robertx22.age_of_exile.capability.DirtySync;
 import com.robertx22.age_of_exile.capability.bases.EntityGears;
 import com.robertx22.age_of_exile.capability.bases.INeededForClient;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
@@ -47,7 +48,6 @@ import com.robertx22.age_of_exile.vanilla_mc.packets.EntityUnitPacket;
 import com.robertx22.age_of_exile.vanilla_mc.potion_effects.EntityStatusEffectsData;
 import com.robertx22.library_of_exile.components.ICap;
 import com.robertx22.library_of_exile.main.Packets;
-import com.robertx22.library_of_exile.packets.SyncPlayerCapToClient;
 import com.robertx22.library_of_exile.utils.CLOC;
 import com.robertx22.library_of_exile.utils.LoadSave;
 import com.robertx22.library_of_exile.wrappers.ExileText;
@@ -114,9 +114,7 @@ public class EntityData implements ICap, INeededForClient {
     private static final String UUID = "uuid";
     private static final String SET_MOB_STATS = "set_mob_stats";
     private static final String NEWBIE_STATUS = "is_a_newbie";
-    private static final String EQUIPS_CHANGED = "eq_changed";
     private static final String AFFIXES = "affix";
-    private static final String SHOULD_SYNC = "do_sync";
     private static final String ENTITY_TYPE = "ENTITY_TYPE";
     private static final String RESOURCES_LOC = "res_loc";
     private static final String STATUSES = "statuses";
@@ -128,6 +126,10 @@ public class EntityData implements ICap, INeededForClient {
     private static final String CUSTOM_STATS = "custom_stats";
     private static final String LEECH = "leech";
     private static final String MAP_ID = "mapid";
+
+
+    public DirtySync sync = new DirtySync("endata sync", x -> syncData());
+    public DirtySync gear = new DirtySync("gear_recalc", x -> recalcStats());
 
 
     transient LivingEntity entity;
@@ -168,8 +170,6 @@ public class EntityData implements ICap, INeededForClient {
     boolean setMobStats = false;
     String uuid = "";
     boolean isNewbie = true;
-    boolean equipsChanged = true;
-    boolean shouldSync = false;
 
     ResourcesData resources = new ResourcesData();
     CustomExactStatsData customExactStats = new CustomExactStatsData();
@@ -252,8 +252,6 @@ public class EntityData implements ICap, INeededForClient {
         nbt.putString(MAP_ID, this.mapUUID);
         nbt.putBoolean(SET_MOB_STATS, setMobStats);
         nbt.putBoolean(NEWBIE_STATUS, this.isNewbie);
-        nbt.putBoolean(EQUIPS_CHANGED, equipsChanged);
-        nbt.putBoolean(SHOULD_SYNC, shouldSync);
 
         LoadSave.Save(cooldowns, nbt, COOLDOWNS);
         LoadSave.Save(ailments, nbt, AILMENTS);
@@ -314,8 +312,6 @@ public class EntityData implements ICap, INeededForClient {
         if (nbt.contains(NEWBIE_STATUS)) {
             this.isNewbie = nbt.getBoolean(NEWBIE_STATUS);
         }
-        this.equipsChanged = nbt.getBoolean(EQUIPS_CHANGED);
-        this.shouldSync = nbt.getBoolean(SHOULD_SYNC);
 
         this.unit = UnitNbt.Load(nbt);
         if (this.unit == null) {
@@ -343,8 +339,8 @@ public class EntityData implements ICap, INeededForClient {
     }
 
     public void setEquipsChanged() {
-        this.equipsChanged = true;
-        this.setShouldSync();
+        this.gear.setDirty();
+        this.sync.setDirty();
     }
 
     public CooldownsData getCooldowns() {
@@ -409,21 +405,6 @@ public class EntityData implements ICap, INeededForClient {
         return threat;
     }
 
-    private void setShouldSync() {
-        this.shouldSync = true;
-    }
-
-    public void trySync() {
-        if (this.shouldSync) {
-            this.shouldSync = false;
-
-            if (!Unit.shouldSendUpdatePackets(entity)) {
-                return;
-            }
-            Packets.sendToTracking(Unit.getUpdatePacketFor(entity, this), entity);
-        }
-
-    }
 
     public Unit getUnit() {
         return unit;
@@ -467,26 +448,32 @@ public class EntityData implements ICap, INeededForClient {
     }
 
     public void setRarity(String rarity) {
-
         this.rarity = rarity;
-
-        this.equipsChanged = true;
-        this.shouldSync = true;
+        this.sync.setDirty();
+        this.gear.setDirty();
     }
 
     @Override
     public void syncToClient(Player player) {
-        if (!syncedRecently) {
-            Packets.sendToClient(player, new SyncPlayerCapToClient(player, this.getCapIdForSyncing()));
-            syncedRecently = true;
+
+
+    }
+
+    private void syncData() {
+        if (entity.level().isClientSide) {
+            return;
+        }
+        if (entity instanceof Player p) {
+
+            Packets.sendToClient(p, new EntityUnitPacket(p));
         } else {
-            if (MMORPG.RUN_DEV_TOOLS) {
-                //  player.sendSystemMessage(Component.literal("skipped syncing entity data because synced recently"));
+            if (!Unit.shouldSendUpdatePackets(entity)) {
+                return;
             }
+            Packets.sendToTracking(Unit.getUpdatePacketFor(entity, this), entity);
         }
     }
 
-    public boolean syncedRecently = false;
 
     public String getRarity() {
         return rarity;
@@ -545,7 +532,11 @@ public class EntityData implements ICap, INeededForClient {
         }
     }
 
-    public void tryRecalculateStats() {
+    private void recalcStats() {
+
+        if (this.entity.level().isClientSide()) {
+            return;
+        }
 
         if (unit == null) {
             unit = new Unit();
@@ -558,66 +549,32 @@ public class EntityData implements ICap, INeededForClient {
             return;
         }
 
-        if (needsToRecalcStats()) {
 
-            if (this.entity.level().isClientSide()) {
-                return;
-            }
+        //Watch watch = new Watch();
+        this.unit = new Unit();
 
+        var stats = StatCalculation.getStatsWithoutSuppGems(entity, this, null);
 
-            //Watch watch = new Watch();
-            this.unit = new Unit();
+        StatCalculation.calc(unit, stats, entity, -1, null);
 
-            var stats = StatCalculation.getStatsWithoutSuppGems(entity, this, null);
-
-            StatCalculation.calc(unit, stats, entity, -1, null);
-
-            if (entity instanceof Player p) {
-                this.didStatCalcThisTickForPlayer = true;
+        if (entity instanceof Player p) {
+            this.didStatCalcThisTickForPlayer = true;
 
 
-                var data = Load.player(p);
-                var spells = data.spellCastingData.getAllHotbarSpells().stream().map(x -> x.getSpell()).collect(Collectors.toList());
-                data.calcSpellUnits(spells, stats);
+            var data = Load.player(p);
+            var spells = data.spellCastingData.getAllHotbarSpells().stream().map(x -> x.getSpell()).collect(Collectors.toList());
+            data.calcSpellUnits(spells, stats);
 
-                Load.player(p).spellCastingData.calcSpellLevels(unit);
-                Load.player(p).getSkillGemInventory().removeAurasIfCantWear(p);
-                Packets.sendToClient((Player) entity, new EntityUnitPacket(entity));
+            Load.player(p).spellCastingData.calcSpellLevels(unit);
+            Load.player(p).getSkillGemInventory().removeAurasIfCantWear(p);
 
-                if (MMORPG.RUN_DEV_TOOLS) {
-                    // p.sendSystemMessage(Component.literal("Stats Calculated!").withStyle(ChatFormatting.RED));
-                }
-
-                this.syncToClient(p);
-            } else {
-                if (Unit.shouldSendUpdatePackets((LivingEntity) entity)) {
-                    Packets.sendToTracking(unit.getUpdatePacketFor(entity, this), entity);
-                }
-            }
-            this.equipsChanged = false;
-            //watch.print("stat calc for " + (entity instanceof PlayerEntity ? "player " : "mob "));
         }
 
-    }
+
+        this.sync.setDirty();
+        //watch.print("stat calc for " + (entity instanceof PlayerEntity ? "player " : "mob "));
 
 
-    public void forceRecalculateStats() {
-
-        if (unit == null) {
-            unit = new Unit();
-        }
-        if (this.entity.level().isClientSide()) {
-            return;
-        }
-        this.equipsChanged = true;
-        this.tryRecalculateStats();
-        // this.unit = StatCalculation.calc(entity, -1, null);
-
-    }
-
-    // This reduces stat calculation by about 4 TIMES!
-    private boolean needsToRecalcStats() {
-        return this.equipsChanged;
     }
 
 
@@ -909,8 +866,8 @@ public class EntityData implements ICap, INeededForClient {
 
         level = Mth.clamp(lvl, 1, GameBalanceConfig.get().MAX_LEVEL);
 
-        this.equipsChanged = true;
-        this.shouldSync = true;
+        this.gear.setDirty();
+        this.sync.setDirty();
 
     }
 

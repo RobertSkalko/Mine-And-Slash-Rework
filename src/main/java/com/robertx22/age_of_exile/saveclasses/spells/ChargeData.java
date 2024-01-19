@@ -32,7 +32,7 @@ public class ChargeData {
 
         charges.put(id, Mth.clamp(charges.getOrDefault(id, 0) - 1, 0, 100000));
 
-        Load.player(player).syncToClient(player);
+        Load.player(player).playerDataSync.setDirty();
 
     }
 
@@ -101,7 +101,7 @@ public class ChargeData {
 
         if (sync) {
 
-            Load.player(player).syncToClient(player);
+            Load.player(player).playerDataSync.setDirty();
         }
     }
 }

@@ -1,12 +1,12 @@
 package com.robertx22.age_of_exile.capability.player;
 
+import com.robertx22.age_of_exile.capability.DirtySync;
 import com.robertx22.age_of_exile.capability.player.data.*;
 import com.robertx22.age_of_exile.capability.player.helper.GemInventoryHelper;
 import com.robertx22.age_of_exile.capability.player.helper.JewelInvHelper;
 import com.robertx22.age_of_exile.capability.player.helper.MyInventory;
 import com.robertx22.age_of_exile.characters.CharStorageData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
-import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.DeathStatsData;
 import com.robertx22.age_of_exile.saveclasses.perks.TalentsData;
@@ -59,18 +59,10 @@ public class PlayerData implements ICap {
 
     }
 
-    public boolean syncedRecently = false;
 
     @Override
     public void syncToClient(Player player) {
-        if (!syncedRecently) {
-            Packets.sendToClient(player, new SyncPlayerCapToClient(player, this.getCapIdForSyncing()));
-            syncedRecently = true;
-        } else {
-            if (MMORPG.RUN_DEV_TOOLS) {
-                //player.sendSystemMessage(Component.literal("skipped syncing PLAYER data because synced recently"));
-            }
-        }
+
     }
 
 
@@ -92,6 +84,8 @@ public class PlayerData implements ICap {
     private static final String NAME = "name";
     private static final String CHARACTERS = "chars";
     private static final String BONUS_TALENTS = "btal";
+
+    public DirtySync playerDataSync = new DirtySync("playerdata_sync", x -> syncData());
 
     public transient Player player;
 
@@ -184,6 +178,10 @@ public class PlayerData implements ICap {
             bonusTalents = 0;
         }
 
+    }
+
+    private void syncData() {
+        Packets.sendToClient(player, new SyncPlayerCapToClient(player, this.getCapIdForSyncing()));
     }
 
     transient HashMap<String, Unit> spellUnits = new HashMap<>();

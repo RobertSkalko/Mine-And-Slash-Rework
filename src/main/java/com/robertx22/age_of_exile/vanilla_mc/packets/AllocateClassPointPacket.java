@@ -67,10 +67,9 @@ public class AllocateClassPointPacket extends MyPacket<AllocateClassPointPacket>
         }
 
         Load.Unit(ctx.getPlayer()).setEquipsChanged();
-        Load.Unit(ctx.getPlayer()).tryRecalculateStats();
 
 
-        Load.player(ctx.getPlayer()).syncToClient(ctx.getPlayer());
+        Load.player(ctx.getPlayer()).playerDataSync.setDirty();
 
     }
 

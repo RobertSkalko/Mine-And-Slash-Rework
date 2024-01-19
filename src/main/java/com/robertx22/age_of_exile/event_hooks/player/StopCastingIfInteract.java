@@ -16,7 +16,7 @@ public class StopCastingIfInteract {
 
         if (data.spellCastingData.isCasting()) {
             data.spellCastingData.cancelCast(player);
-            data.syncToClient(player);
+            data.playerDataSync.setDirty();
         }
     }
 

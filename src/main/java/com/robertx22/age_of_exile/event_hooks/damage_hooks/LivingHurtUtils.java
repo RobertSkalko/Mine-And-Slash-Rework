@@ -77,9 +77,6 @@ public class LivingHurtUtils {
 
             GearItemData weapondata = data.weaponData;
 
-            data.getTargetEntityData().tryRecalculateStats();
-            data.getAttackerEntityData().tryRecalculateStats();
-
             if (data.getAttackerEntity() instanceof Player p) {
 
                 if (weapondata == null) {

@@ -424,7 +424,7 @@ public class SpellCastingData {
         this.casting = false;
 
         if (ctx.caster instanceof ServerPlayer) {
-            Load.Unit(ctx.caster).syncToClient((Player) ctx.caster);
+            Load.Unit(ctx.caster).sync.setDirty();
         }
     }
 

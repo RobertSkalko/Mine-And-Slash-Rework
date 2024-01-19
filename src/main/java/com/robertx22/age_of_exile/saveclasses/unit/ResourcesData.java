@@ -7,8 +7,6 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.SpendResourceEvent;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.HealthUtils;
-import com.robertx22.age_of_exile.vanilla_mc.packets.EntityUnitPacket;
-import com.robertx22.library_of_exile.main.Packets;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
@@ -160,7 +158,7 @@ public class ResourcesData {
 
     private void sync(LivingEntity en) {
         if (en instanceof ServerPlayer) {
-            Packets.sendToClient((Player) en, new EntityUnitPacket(en));
+            Load.Unit(en).sync.setDirty();
         }
     }
 

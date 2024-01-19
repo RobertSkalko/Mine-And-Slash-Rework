@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.event_hooks.player;
 
-import com.robertx22.age_of_exile.capability.bases.CapSyncUtil;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
@@ -8,7 +7,6 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.library_of_exile.utils.Watch;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -31,7 +29,6 @@ public class OnLogin {
                 player.displayClientMessage(Chats.HOW_TO_ENABLE_COMMAND_BLOCK.locName().withStyle(ChatFormatting.GREEN), false);
             }
 
-            CapSyncUtil.syncAll(player);
 
             if (MMORPG.RUN_DEV_TOOLS) {
                 player.displayClientMessage(Chats.Dev_tools_enabled_contact_the_author.locName(), false);
@@ -41,7 +38,9 @@ public class OnLogin {
 
             data.onLogin(player);
 
-            data.syncToClient(player);
+            data.sync.setDirty();
+
+            Load.player(player).playerDataSync.setDirty();
 
         } catch (
                 Exception e) {

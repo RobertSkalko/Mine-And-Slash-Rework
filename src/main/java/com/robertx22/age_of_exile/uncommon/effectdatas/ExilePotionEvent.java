@@ -91,7 +91,6 @@ public class ExilePotionEvent extends EffectEvent {
         }
 
         Load.Unit(target).setEquipsChanged();
-        Load.Unit(target).tryRecalculateStats();
     }
 
 

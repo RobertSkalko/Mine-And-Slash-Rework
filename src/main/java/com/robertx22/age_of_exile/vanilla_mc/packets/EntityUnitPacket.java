@@ -52,8 +52,7 @@ public class EntityUnitPacket extends MyPacket<EntityUnitPacket> {
 
             LivingEntity en = (LivingEntity) entity;
 
-            Load.Unit(en)
-                    .deserializeNBT(nbt);
+            Load.Unit(en).deserializeNBT(nbt);
         }
     }
 
