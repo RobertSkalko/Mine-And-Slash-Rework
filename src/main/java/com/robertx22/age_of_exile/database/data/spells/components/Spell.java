@@ -309,12 +309,12 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         }
         try {
             if (showeffect) {
-                int lvl = this.getLevelOf(ctx.caster);
-                int perc = (int) (((float) lvl / (float) getMaxLevel()) * 100f);
+                //int lvl = this.getLevelOf(ctx.caster);
+                //int perc = (int) (((float) lvl / (float) getMaxLevel()) * 100f);
                 AtomicInteger i = new AtomicInteger();
                 effect.forEach(x -> {
                     list.add(x.locName());
-                    List<ExactStatData> stats = x.getTooltipStats(ctx.caster, perc);
+                    List<ExactStatData> stats = x.getExactStats(ctx.caster, this, 1, 1);
                     for (ExactStatData stat : stats) {
                         list.addAll(stat.GetTooltipString(info));
                     }

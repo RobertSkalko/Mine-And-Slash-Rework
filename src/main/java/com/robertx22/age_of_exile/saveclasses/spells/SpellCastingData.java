@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.saveclasses.spells;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
+import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
@@ -118,9 +119,9 @@ public class SpellCastingData {
                 }
             }
         });
-        // caps the bonus ranks to 5 max
+        // caps the bonus ranks to config value max
         for (InsertedSpell spell : this.spells) {
-            spell.bonus_ranks = MathHelper.clamp(spell.bonus_ranks, 0, 5);
+            spell.bonus_ranks = MathHelper.clamp(spell.bonus_ranks, 0, ServerContainer.get().BONUS_SPELL_LEVELS_MAX.get());
             spell.rank += spell.bonus_ranks;
         }
 

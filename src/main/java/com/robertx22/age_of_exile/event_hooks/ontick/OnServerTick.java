@@ -1,7 +1,9 @@
 package com.robertx22.age_of_exile.event_hooks.ontick;
 
+import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.capability.player.PlayerData;
+import com.robertx22.age_of_exile.database.data.spells.components.actions.SummonPetAction;
 import com.robertx22.age_of_exile.maps.ProcessChunkBlocks;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -64,6 +66,10 @@ public class OnServerTick {
                 playerData.buff.onTick(player, tickrate);
                 unitdata.getResources().onTickBlock(player, tickrate);
 
+            }
+
+            if (age % (20 * 30) == 0) {
+                SummonPetAction.despawnIfExceededMaximumSummons(player, (int) unitdata.getUnit().getStatInCalculation(Stats.MAX_SUMMON_CAPACITY.get()).getValue());
             }
 
             if (age % 20 == 0) {

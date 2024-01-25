@@ -127,7 +127,7 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
         }
     }
 
-    public List<ExactStatData> getExactStats(LivingEntity caster, ExileEffectInstanceData data) {
+    public List<ExactStatData> getExactStats(LivingEntity caster, Spell spell, int stacks, float multi) {
 
         if (caster == null) {
             return Arrays.asList();
@@ -136,31 +136,18 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
         return this.stats.stream()
                 .map(x -> {
                     LeveledValue lvlval = new LeveledValue(0, 100);
-                    int perc = (int) lvlval.getValue(caster, data.getSpell());
+                    int perc = (int) lvlval.getValue(caster, spell);
 
-                    var result = x.ToExactStat((int) (perc * data.str_multi), Load.Unit(caster).getLevel());
+                    var result = x.ToExactStat((int) (perc * multi), Load.Unit(caster).getLevel());
 
-                    if (data.stacks > 1) {
-                        var inc = (data.stacks - 1) * 100F;
+                    if (stacks > 1) {
+                        var inc = (stacks - 1) * 100F;
                         result.percentIncrease = inc;
                         result.increaseByAddedPercent();
                     }
 
                     return result;
 
-                })
-                .collect(Collectors.toList());
-
-    }
-
-    public List<ExactStatData> getTooltipStats(LivingEntity caster, int perc) {
-        if (caster == null) {
-            return Arrays.asList();
-        }
-        return this.stats.stream()
-                .map(x -> {
-                    var result = x.ToExactStat((int) (perc), Load.Unit(caster).getLevel());
-                    return result;
                 })
                 .collect(Collectors.toList());
 
