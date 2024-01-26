@@ -22,30 +22,21 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class CreateLangFile {
 
     public static void create() {
 
         List<String> translatorGuide = Lists.newArrayList(
-        "This part of text serve as a guide for helping translator to understand some internal detail.",
-        "1. some lang lines have corresponding locale context, especially the formatter lines. these context can help translator to understand how the formatters work. Also translating these lines is meaningless",
-        "2. some lines contain line break format(\\n). translator can add/remove that format at will, basing on the actual text length."
+        "This section provides guidance to translators, offering insights into internal details:",
+        "1. Some lang lines have corresponding locale context, particularly the formatter lines. Understanding these contexts helps translators comprehend how the lang line function. Translating these lines is unnecessary.",
+        "2. Certain lines contain line break format(\\n). translator can add/remove that format at will based on the actual length of the translated text."
         );
 
         String json = "{\n";
-        LinkedHashMap<String, String> guideMap = IntStream.range(0, translatorGuide.size())
-                                                .boxed()
-                                                .collect(Collectors.toMap(
-                                                        integer -> "translator_guide_" + integer,
-                                                        translatorGuide::get,
-                                                        (existing, replacement) -> existing,
-                                                        LinkedHashMap::new
-                                                ));
 
-        for(Map.Entry<String, String> x : guideMap.entrySet()){
-            json += "\t" + "\"" + x.getKey() + "\": \"" + StringEscapeUtils.escapeJava(x.getValue()) + "\",\n";
+        for(String x : translatorGuide){
+            json += "\t" + "\"" + "translator_guide_" + translatorGuide.indexOf(x) + "\": \"" + StringEscapeUtils.escapeJava(x) + "\",\n";
         }
 
 
