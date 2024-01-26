@@ -313,13 +313,14 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
                 int perc = (int) (((float) lvl / (float) getMaxLevel()) * 100f);
                 AtomicInteger i = new AtomicInteger();
                 effect.forEach(x -> {
-                    list.add(x.locName());
+                    list.add(x.locName().withStyle(ChatFormatting.BLUE));
                     List<ExactStatData> stats = x.getTooltipStats(ctx.caster, perc);
                     for (ExactStatData stat : stats) {
                         list.addAll(stat.GetTooltipString(info));
                     }
                     list.add(Words.LASTS_SEC.locName(ticks.get(i.get())));
                     i.getAndIncrement();
+                    list.add(ExileText.emptyLine().get());
                 });
 
             } else {
