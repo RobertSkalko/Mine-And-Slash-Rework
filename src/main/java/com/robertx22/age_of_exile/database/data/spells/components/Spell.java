@@ -46,7 +46,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.apache.commons.lang3.StringUtils;
 
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -286,8 +288,10 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         boolean showeffect = Screen.hasShiftDown();
 
 
-        Set<ExileEffect> effect = new HashSet<>();
-        List<Integer> ticks = new ArrayList<>();
+        List<ExileEffect> effect = new ArrayList<>();
+        List<String> ticks = new ArrayList<>();
+        //In CTE2 the duration of some effects is not a integer.
+        DecimalFormat decimalFormat = new DecimalFormat("0.0");
 
         if (ExileDB.ExileEffects().isRegistered(effect_tip)) {
             effect.add(ExileDB.ExileEffects().get(effect_tip));
@@ -300,13 +304,15 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
                         x.acts.forEach(a -> {
                             if (a.has(MapField.EXILE_POTION_ID)) {
                                 effect.add(a.getExileEffect());
-                                ticks.add(a.getOrDefault(MapField.POTION_DURATION, 0D).intValue() / 20);
+                                //first format the double, then if the number have ".0", simply remove it
+                                ticks.add(StringUtils.remove(decimalFormat.format(a.getOrDefault(MapField.POTION_DURATION, 0D) / 20), ".0"));
                             }
                         });
                     });
         } catch (Exception e) {
             e.printStackTrace();
         }
+        MutableComponent showEffectTip = Component.literal("");
         try {
             if (showeffect) {
                 int lvl = this.getLevelOf(ctx.caster);
@@ -325,7 +331,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
             } else {
                 if (!effect.isEmpty()) {
-                    list.add(Words.SHIFT_TO_SHOW_EFFECT.locName());
+                    showEffectTip = Words.SHIFT_TO_SHOW_EFFECT.locName().withStyle(ChatFormatting.BLUE);
                 }
             }
         } catch (Exception e) {
@@ -345,6 +351,9 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
         list.add(tagtext);
 
+        if(!showEffectTip.getString().isBlank()){
+            list.add(showEffectTip);
+        }
 
         if (info.hasShiftDown && this.config.tags.contains(SpellTags.has_pet_ability)) {
 
