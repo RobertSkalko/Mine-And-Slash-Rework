@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.database.data.stats.types.offense;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
-import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageEffect;
+import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageIncreaseEffect;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -50,7 +50,7 @@ public class SkillDamage extends Stat {
         return "Skill Damage";
     }
 
-    private static class Effect extends BaseDamageEffect {
+    private static class Effect extends BaseDamageIncreaseEffect {
 
         private Effect() {
             super();
@@ -64,12 +64,6 @@ public class SkillDamage extends Stat {
         @Override
         public EffectSides Side() {
             return EffectSides.Source;
-        }
-
-        @Override
-        public DamageEvent activate(DamageEvent effect, StatData data, Stat stat) {
-            effect.increaseByPercent(data.getValue());
-            return effect;
         }
 
         @Override

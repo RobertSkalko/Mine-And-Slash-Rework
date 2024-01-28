@@ -121,7 +121,8 @@ public class StatCalculation {
         statContexts.addAll(CommonStatUtils.addExactCustomStats(entity));
         statContexts.add(data.getStatusEffectsData().getStats(entity));
         statContexts.addAll(addGearStats(gears));
-        CommonStatUtils.addMapAffixStats(entity);
+        statContexts.addAll(CommonStatUtils.addMapAffixStats(entity));
+        statContexts.addAll(CommonStatUtils.addBaseStats(entity));
 
         if (data.isSummon()) {
             statContexts.addAll(MobStatUtils.addSummonStats((TamableAnimal) entity));
@@ -131,7 +132,7 @@ public class StatCalculation {
             var playerData = Load.player(p);
 
             statContexts.addAll(PlayerStatUtils.addToolStats(p));
-            
+
             statContexts.add(PlayerStatUtils.addBonusExpPerCharacters(p));
 
             statContexts.addAll(playerData.buff.getStatAndContext(p));
@@ -140,7 +141,6 @@ public class StatCalculation {
             statContexts.addAll(playerData.getJewels().getStatAndContext(entity));
             statContexts.addAll(playerData.statPoints.getStatAndContext(entity));
 
-            statContexts.addAll(PlayerStatUtils.AddPlayerBaseStats(entity));
             statContexts.addAll(PlayerStatUtils.addNewbieElementalResists(data));
             statContexts.addAll(playerData.talents.getStatAndContext(entity));
             statContexts.addAll(playerData.ascClass.getStatAndContext(entity));
@@ -150,8 +150,8 @@ public class StatCalculation {
             statContexts.addAll(MobStatUtils.getMobBaseStats(data, entity));
             statContexts.addAll(MobStatUtils.getAffixStats(entity));
             statContexts.addAll(MobStatUtils.getWorldMultiplierStats(entity));
-            MobStatUtils.addMobBaseElementalBonusDamages(entity, data);
-            MobStatUtils.addMapTierStats(entity);
+            statContexts.addAll(MobStatUtils.addMobBaseElementalBonusDamages(entity, data));
+            statContexts.addAll(MobStatUtils.addMapTierStats(entity));
             statContexts.addAll(MobStatUtils.getMobConfigStats(entity, data));
         }
 

@@ -47,7 +47,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -286,7 +288,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         boolean showeffect = Screen.hasShiftDown();
 
 
-        Set<ExileEffect> effect = new HashSet<>();
+        List<ExileEffect> effect = new ArrayList<>();
         List<Integer> ticks = new ArrayList<>();
 
         if (ExileDB.ExileEffects().isRegistered(effect_tip)) {

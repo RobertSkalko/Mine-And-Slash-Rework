@@ -41,6 +41,8 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     public double STARTING_TALENT_POINTS = 1;
     public double HP_DMG_MOB_BONUS_PER_MAP_TIER = 0.1;
 
+    public int PERCENT_OF_PHYS_AS_BONUS_OF_EACH_ELEMENT_DMG_FOR_MOBS = 20;
+
     public int link_1_lvl = 1;
     public int link_2_lvl = 5;
     public int link_3_lvl = 10;

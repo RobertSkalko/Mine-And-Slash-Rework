@@ -57,3 +57,5 @@ v.5.3.19
 - should fix effect tooltips
 - add configurable max lvl spells cap 
 - summons are now despawn checked every 30s in case people find ways to cheese the cap
+- fix map stat bugs: tier stats, player/mob map stats
+- mobs now properly get 100% of their phys dmg as bonus ele dmg of all types combined (this is a config)
