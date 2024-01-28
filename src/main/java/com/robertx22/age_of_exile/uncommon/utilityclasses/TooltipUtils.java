@@ -164,7 +164,7 @@ public class TooltipUtils {
 
     private static List<Component> removeDoubleBlankLines(List<Component> list, int minLinesCutAllBlanks) {
 
-        List<Component> newt = new ArrayList();
+        List<Component> newt = new ArrayList<>();
 
         boolean lastIsEmpty = false;
 
@@ -172,9 +172,9 @@ public class TooltipUtils {
 
         for (int i = 0; i < list.size(); i++) {
 
-            if (list.get(i)
+            if (!list.get(i)
                     .getString()
-                    .length() > 2) {
+                    .isBlank()) {
                 lastIsEmpty = false;
                 newt.add(list.get(i));
             } else {
