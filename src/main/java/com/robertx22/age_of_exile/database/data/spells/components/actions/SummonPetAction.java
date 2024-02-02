@@ -73,24 +73,22 @@ public class SummonPetAction extends SpellAction {
 
             if (counts) {
                 int maxTotal = (int) ctx.calculatedSpellData.data.getNumber(EventData.BONUS_TOTAL_SUMMONS, 0).number;
-                despawnIfExceededMaximumSummons(ctx.caster, maxTotal, summonType);
+                despawnIfExceededMaximumSummons(ctx.caster, maxTotal);
             }
         }
     }
 
-    private void despawnIfExceededMaximumSummons(LivingEntity caster, int max, SummonType type) {
+    public static void despawnIfExceededMaximumSummons(LivingEntity caster, int max) {
 
         int current = 0;
 
         List<SummonEntity> list = new ArrayList<>();
 
-        for (SummonEntity en : EntityFinder.start(caster, SummonEntity.class, caster.blockPosition()).searchFor(AllyOrEnemy.all).radius(400).build()) {
-            // if (en.summonType() == type) {
+        for (SummonEntity en : EntityFinder.start(caster, SummonEntity.class, caster.blockPosition()).searchFor(AllyOrEnemy.all).radius(100).build()) {
             if (en.getOwner() == caster) {
                 current++;
                 list.add(en);
             }
-            //}
         }
 
         list.sort(Comparator.comparingInt(x -> -x.tickCount)); // todo this needs to be from highest to lowest age

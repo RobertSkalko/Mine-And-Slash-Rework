@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.EntityConfig;
+import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.stats.types.SummonStat;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
@@ -61,7 +62,7 @@ public class MobStatUtils {
 
         for (Elements ele : Elements.getAllSingle()) {
             if (ele != Elements.Physical) {
-                stats.add(ExactStatData.noScaling(20, ModType.FLAT, new BonusPhysicalAsElemental(ele).GUID()));
+                stats.add(ExactStatData.noScaling(GameBalanceConfig.get().PERCENT_OF_PHYS_AS_BONUS_OF_EACH_ELEMENT_DMG_FOR_MOBS, ModType.FLAT, new BonusPhysicalAsElemental(ele).GUID()));
             }
         }
         return Arrays.asList(new MiscStatCtx(stats));

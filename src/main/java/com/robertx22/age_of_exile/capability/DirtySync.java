@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.capability;
 
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 
@@ -28,7 +27,7 @@ public class DirtySync {
             sync.accept(p);
 
             if (p instanceof Player pl) {
-                pl.sendSystemMessage(Component.literal(id));
+                //  pl.sendSystemMessage(Component.literal(id));
             }
         }
     }

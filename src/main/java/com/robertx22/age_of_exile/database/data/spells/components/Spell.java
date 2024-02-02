@@ -49,7 +49,9 @@ import net.minecraft.world.level.Level;
 import org.apache.commons.lang3.StringUtils;
 
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -315,12 +317,12 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         MutableComponent showEffectTip = Component.literal("");
         try {
             if (showeffect) {
-                int lvl = this.getLevelOf(ctx.caster);
-                int perc = (int) (((float) lvl / (float) getMaxLevel()) * 100f);
+                //int lvl = this.getLevelOf(ctx.caster);
+                //int perc = (int) (((float) lvl / (float) getMaxLevel()) * 100f);
                 AtomicInteger i = new AtomicInteger();
                 effect.forEach(x -> {
                     list.add(x.locName().withStyle(ChatFormatting.BLUE));
-                    List<ExactStatData> stats = x.getTooltipStats(ctx.caster, perc);
+                    List<ExactStatData> stats = x.getExactStats(ctx.caster, this, 1, 1);
                     for (ExactStatData stat : stats) {
                         list.addAll(stat.GetTooltipString(info));
                     }

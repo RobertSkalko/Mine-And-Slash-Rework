@@ -89,8 +89,8 @@ public enum AllyOrEnemy {
 
         @Override
         public boolean is(Entity caster, LivingEntity target) {
-            if (caster instanceof Player) {
-                if (EntityFinder.isTamed(target) && target instanceof OwnableEntity pet && pet.getOwner() == caster) {
+            if (caster instanceof Player p) {
+                if (EntityFinder.isTamedByAlly(p, target) && target instanceof OwnableEntity pet && pet.getOwner() == caster) {
                     return true;
                 }
             }
@@ -106,8 +106,8 @@ public enum AllyOrEnemy {
         @Override
         public boolean is(Entity caster, LivingEntity target) {
 
-            if (caster instanceof Player) {
-                if (EntityFinder.isTamed(target)) {
+            if (caster instanceof Player p) {
+                if (EntityFinder.isTamedByAlly(p, target)) {
                     return false;
                 }
                 if (target instanceof Player) {

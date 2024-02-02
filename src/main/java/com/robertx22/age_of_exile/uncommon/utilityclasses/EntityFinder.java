@@ -17,10 +17,11 @@ import java.util.function.Predicate;
 
 public class EntityFinder {
 
-    public static boolean isTamed(LivingEntity x) {
+    public static boolean isTamedByAlly(Player other, LivingEntity x) {
         if (x instanceof OwnableEntity) {
             OwnableEntity tame = (OwnableEntity) x;
-            return tame.getOwner() instanceof Player; // we dont want players killing pets of others either
+
+            return tame.getOwner() instanceof Player p && TeamUtils.areOnSameTeam(other, p); // we dont want players killing pets of others either
         }
         return false;
     }

@@ -9,6 +9,7 @@ import com.robertx22.age_of_exile.tags.TagList;
 import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.tags.imp.SpellTag;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 
 public class SpellConfiguration {
 
@@ -29,6 +30,7 @@ public class SpellConfiguration {
     private String style = PlayStyle.STR.id;
     public TagList<SpellTag> tags = new TagList<>();
     public int tracking_radius = 5;
+    public AllyOrEnemy tracks = AllyOrEnemy.enemies;
 
     public int getCastTimeTicks() {
         return cast_time_ticks;

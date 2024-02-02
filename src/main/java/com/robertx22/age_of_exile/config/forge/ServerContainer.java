@@ -90,6 +90,7 @@ public class ServerContainer {
 
         MIN_MAP_ROOMS = b.defineInRange("MIN_MAP_ROOMS", 12, 1, 100);
         MAX_MAP_ROOMS = b.defineInRange("MAX_MAP_ROOMS", 20, 1, 100);
+        BONUS_SPELL_LEVELS_MAX = b.defineInRange("BONUS_SPELL_LEVELS_MAX", 5, 0, 50);
 
         ITEM_LEVEL_VARIANCE = b.defineInRange("ITEM_LEVEL_VARIANCE", 3, 0, 100);
         MOB_LEVEL_VARIANCE = b.defineInRange("MOB_LEVEL_VARIANCE", 3, 0, 100);
@@ -99,7 +100,6 @@ public class ServerContainer {
         MOB_MAX = b.defineInRange("mob_max", 2, 0, 20);
 
         BONUS_EXP_PERCENT_PER_HIGHER_LVL_CHARACTERS = b.defineInRange("BONUS_EXP_PERCENT_PER_HIGHER_LVL_CHARACTERS", 10, 0, 1000);
-        
 
         MAX_ADDITIONAL_TALENT_POINTS = b.defineInRange("MAX_ADDITIONAL_TALENT_POINTS", 30, 0, 10000);
         MAX_CHARACTERS = b.defineInRange("MAX_CHARACTERS", 7, 1, 7);
@@ -229,6 +229,7 @@ public class ServerContainer {
 
     public ForgeConfigSpec.IntValue MIN_MAP_ROOMS;
     public ForgeConfigSpec.IntValue MAX_MAP_ROOMS;
+    public ForgeConfigSpec.IntValue BONUS_SPELL_LEVELS_MAX;
 
     public ForgeConfigSpec.IntValue BONUS_EXP_PERCENT_PER_HIGHER_LVL_CHARACTERS;
 

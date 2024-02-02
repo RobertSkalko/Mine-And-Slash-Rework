@@ -17,11 +17,25 @@ import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 public class BaseStatsAdder implements ExileRegistryInit {
 
     public static String PLAYER = "player";
+    public static String MOB = "mob";
 
     @Override
     public void registerAll() {
         playerStats().addToSerializables();
+        mob().addToSerializables();
 
+
+    }
+
+    public static BaseStatsConfig mob() {
+
+        BaseStatsConfig c = new BaseStatsConfig();
+
+        c.id = MOB;
+
+        c.scaled(Stats.ACCURACY.get(), 5);
+
+        return c;
 
     }
 
