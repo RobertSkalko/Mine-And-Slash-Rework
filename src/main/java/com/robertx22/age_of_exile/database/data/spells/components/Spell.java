@@ -372,7 +372,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
                 Spell other = ExileDB.Spells().get(show_other_spell_tooltip);
                 list.addAll(other.GetTooltipString(info));
             } else {
-                list.add(Chats.ALT_TO_SHOW_OTHER_SPELL.locName());
+                list.add(Chats.ALT_TO_SHOW_OTHER_SPELL.locName().withStyle(ChatFormatting.BLUE));
             }
         }
 

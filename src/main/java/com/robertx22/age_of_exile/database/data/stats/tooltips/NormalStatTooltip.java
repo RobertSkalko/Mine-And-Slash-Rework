@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.stats.tooltips;
 
+import com.robertx22.age_of_exile.database.data.stats.types.LearnSpellStat;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
@@ -39,7 +40,7 @@ public class NormalStatTooltip implements IStatTooltipType {
 
         list.add(txt);
 
-        if (info.shouldShowDescriptions()) {
+        if (info.shouldShowDescriptions() && !(info.stat instanceof LearnSpellStat)) {
             list.addAll(info.stat.getCutDescTooltip());
         }
 
