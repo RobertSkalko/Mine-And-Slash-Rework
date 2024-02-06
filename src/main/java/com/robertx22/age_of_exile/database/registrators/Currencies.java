@@ -21,8 +21,6 @@ public class Currencies implements ExileRegistryInit {
     static {
 
 
-        ALL.add(new OrbRareReroll());
-        ALL.add(new OrbMythicReroll());
         ALL.add(new OrbAffixUpgrade());
         ALL.add(new OrbSocketAdder());
         ALL.add(new QualityUpgrade());

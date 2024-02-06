@@ -57,8 +57,6 @@ public enum Chats implements IAutoLocName {
     ALREADY_MAX_SOCKETS("Item already has maximum possible sockets."),
     ALREADY_MAX_LINKS("Item already has maximum possible links."),
     NEEDS_AN_AFFIX("Item needs an affix."),
-    NEEDS_RARE_RARITY("Item needs to be Common, Uncommon, or Rare."),
-    NEEDS_RARITY("Item cannot be of Unique or Runed rarity."),
     NOT_SKILLGEM("This is not a skill gem."),
     BE_UNIQUE("The item must be of unique rarity."),
     DESTROYS_OUTPUT("When Placed in a Profession Station with other inputs/materials, it will make all recipes produced give 3X the EXP but it will destroy the output."),

@@ -55,8 +55,6 @@ public enum Words implements IAutoLocName {
     Nothing("Nothing"),
 
     UpgradeAffix("Upgrades an affix"),
-    RerollAffix("Rerolls new affixes for gear up to Rare"),
-    RerollAffixMythic("Rerolls new affixes for gear up to Mythic"),
     UpgradeEnchant("Upgrades or Rerolls the Enchant"),
     UpgradeQuality("Upgrade Quality"),
     DowngradeAffix("Downgrades an affix"),
