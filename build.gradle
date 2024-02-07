@@ -151,7 +151,6 @@ mixin {
     add sourceSets.main, "mmorpg.refmap.json"
 }
 
-/*
 publishMods {
 
     file = jar.archiveFile
@@ -171,4 +170,3 @@ publishMods {
 
     }
 }
-*/
