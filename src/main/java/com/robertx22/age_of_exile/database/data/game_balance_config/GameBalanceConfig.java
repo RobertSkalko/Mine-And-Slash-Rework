@@ -43,6 +43,8 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
 
     public int PERCENT_OF_PHYS_AS_BONUS_OF_EACH_ELEMENT_DMG_FOR_MOBS = 20;
 
+    public int MAX_BONUS_SPELL_LEVELS = 5;
+
     public int link_1_lvl = 1;
     public int link_2_lvl = 5;
     public int link_3_lvl = 10;
@@ -50,6 +52,7 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     public int link_5_lvl = 50;
 
     public float DMG_REDUCT_PER_CHAIN = 0.2F;
+
     public float MIN_CHAIN_DMG = 0.2F;
 
     public int getMaxLinksForLevel(int lvl) {

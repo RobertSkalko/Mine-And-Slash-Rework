@@ -80,6 +80,7 @@ public class SummonPetAction extends SpellAction {
 
     public static void despawnIfExceededMaximumSummons(LivingEntity caster, int max) {
 
+
         int current = 0;
 
         List<SummonEntity> list = new ArrayList<>();
@@ -95,8 +96,10 @@ public class SummonPetAction extends SpellAction {
 
         int excess = current - max;
 
-        for (int i = 0; i < excess; i++) {
-            list.get(i).discard();
+        if (excess > 0) {
+            for (int i = 0; i < excess; i++) {
+                list.get(i).discard();
+            }
         }
     }
 

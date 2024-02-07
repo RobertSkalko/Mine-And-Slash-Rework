@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.saveclasses.spells;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.config.forge.ServerContainer;
+import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
@@ -121,7 +121,7 @@ public class SpellCastingData {
         });
         // caps the bonus ranks to config value max
         for (InsertedSpell spell : this.spells) {
-            spell.bonus_ranks = MathHelper.clamp(spell.bonus_ranks, 0, ServerContainer.get().BONUS_SPELL_LEVELS_MAX.get());
+            spell.bonus_ranks = MathHelper.clamp(spell.bonus_ranks, 0, GameBalanceConfig.get().MAX_BONUS_SPELL_LEVELS);
             spell.rank += spell.bonus_ranks;
         }
 
@@ -150,6 +150,7 @@ public class SpellCastingData {
     public static class InsertedSpell {
 
         public String id;
+        public int rankBeforePlusSkills = 0;
         public int rank;
         public int bonus_ranks = 0;
 
@@ -160,6 +161,7 @@ public class SpellCastingData {
         public InsertedSpell(String id, int rank) {
             this.id = id;
             this.rank = rank;
+            this.rankBeforePlusSkills = rank;
         }
 
         public SkillGemData getData() {
@@ -174,11 +176,11 @@ public class SpellCastingData {
 
             data.links = 0;
 
-            data.perc = (int) ((rank / (float) data.getSpell().max_lvl) * 100);
+            data.perc = (int) ((rankBeforePlusSkills / (float) data.getSpell().max_lvl) * 100);
 
-            if (rank > 1) {
+            if (rankBeforePlusSkills > 1) {
 
-                int total = rank - 1;
+                int total = rankBeforePlusSkills - 1;
 
                 while (total > 2) {
                     total -= 3;

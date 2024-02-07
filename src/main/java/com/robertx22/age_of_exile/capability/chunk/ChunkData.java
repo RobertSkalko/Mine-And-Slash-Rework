@@ -34,7 +34,8 @@ public class ChunkData implements ICap {
 
     transient LevelChunk chunk;
 
-    public boolean generated = false;
+    public boolean generatedMobs = false;
+    public boolean generatedTerrain = false;
 
     public ChunkData(LevelChunk chunk) {
         this.chunk = chunk;
@@ -46,7 +47,8 @@ public class ChunkData implements ICap {
 
         CompoundTag nbt = new CompoundTag();
 
-        nbt.putBoolean("gen", generated);
+        nbt.putBoolean("gen", generatedTerrain);
+        nbt.putBoolean("genmobs", generatedMobs);
 
         return nbt;
     }
@@ -54,7 +56,8 @@ public class ChunkData implements ICap {
     @Override
     public void deserializeNBT(CompoundTag nbt) {
 
-        this.generated = nbt.getBoolean("gen");
+        this.generatedTerrain = nbt.getBoolean("gen");
+        this.generatedMobs = nbt.getBoolean("genmobs");
 
     }
 

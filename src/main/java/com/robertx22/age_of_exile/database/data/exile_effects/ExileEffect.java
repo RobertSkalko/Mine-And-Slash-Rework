@@ -138,13 +138,16 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
                     LeveledValue lvlval = new LeveledValue(0, 100);
                     int perc = (int) lvlval.getValue(caster, spell);
 
-                    var result = x.ToExactStat((int) (perc * multi), Load.Unit(caster).getLevel());
+                    var result = x.ToExactStat((int) (perc), Load.Unit(caster).getLevel());
 
                     if (stacks > 1) {
                         var inc = (stacks - 1) * 100F;
                         result.percentIncrease = inc;
                         result.increaseByAddedPercent();
                     }
+                    
+                    result.percentIncrease = (100 * multi) - 100;
+                    result.increaseByAddedPercent();
 
                     return result;
 

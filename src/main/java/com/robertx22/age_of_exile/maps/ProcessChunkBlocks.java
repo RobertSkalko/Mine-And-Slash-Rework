@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.maps;
 
 
 import com.robertx22.age_of_exile.capability.world.WorldData;
+import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.league.LeagueMechanic;
 import com.robertx22.age_of_exile.maps.feature.DungeonFeature;
 import com.robertx22.age_of_exile.maps.generator.BuiltRoom;
@@ -59,14 +60,22 @@ public class ProcessChunkBlocks {
                     return;
                 }
 
-                List<ChunkPos> chunks = new ArrayList<>();
-                chunks.add(start);
+                List<ChunkPos> terrainChunks = new ArrayList<>();
+                terrainChunks.add(start);
+                List<ChunkPos> mobChunks = new ArrayList<>();
+                mobChunks.add(start);
 
-                int size = 4;
+                int terrain = ServerContainer.get().MAP_GEN_TERRAIN_RADIUS.get();
+                int mob = ServerContainer.get().MAP_GEN_MOB_RADIUS.get();
 
-                for (int x = -size; x < size; x++) {
-                    for (int z = -size; z < size; z++) {
-                        chunks.add(new ChunkPos(start.x + x, start.z + z));
+                for (int x = -terrain; x < terrain; x++) {
+                    for (int z = -terrain; z < terrain; z++) {
+                        terrainChunks.add(new ChunkPos(start.x + x, start.z + z));
+                    }
+                }
+                for (int x = -mob; x < mob; x++) {
+                    for (int z = -mob; z < mob; z++) {
+                        mobChunks.add(new ChunkPos(start.x + x, start.z + z));
                     }
                 }
 
@@ -74,7 +83,11 @@ public class ProcessChunkBlocks {
 
                 int maxtogen = 3;
 
-                for (ChunkPos cpos : chunks) {
+                DungeonBuilder builder = new DungeonBuilder(0, start);
+                builder.build();
+
+
+                for (ChunkPos cpos : terrainChunks) {
                     if (!level.hasChunk(cpos.x, cpos.z)) {
                         continue;
                     }
@@ -84,14 +97,36 @@ public class ProcessChunkBlocks {
 
                         var chunkdata = Load.chunkData(chunk);
 
-                        if (!chunkdata.generated) {
+                        if (!chunkdata.generatedTerrain) {
 
-                            chunkdata.generated = true;
+                            chunkdata.generatedTerrain = true;
 
                             DungeonFeature.place(opt.get(), level, level.getRandom(), cpos.getBlockAt(0, 0, 0));
 
-                            DungeonBuilder builder = new DungeonBuilder(0, cpos);
-                            builder.build();
+                        
+                            gened++;
+                            if (gened >= maxtogen) {
+                                return;
+                            }
+                        }
+
+                    }
+                }
+
+                for (ChunkPos cpos : mobChunks) {
+                    if (!level.hasChunk(cpos.x, cpos.z)) {
+                        continue;
+                    }
+                    ChunkAccess c = level.getChunk(cpos.x, cpos.z);
+
+                    if (c instanceof LevelChunk chunk) {
+
+                        var chunkdata = Load.chunkData(chunk);
+
+                        if (!chunkdata.generatedMobs) {
+
+                            chunkdata.generatedMobs = true;
+
                             BuiltRoom room = builder.builtDungeon.getRoomForChunk(cpos);
 
 
@@ -103,18 +138,12 @@ public class ProcessChunkBlocks {
                             // this will gen both the league mechs and the dungeon if it runs after the league mechs gen
                             generateData(level, chunk, room);
 
-                            gened++;
-                            if (gened >= maxtogen) {
-                                return;
-                            }
                         }
-
 
                     }
 
 
                 }
-
             }
         } catch (Exception e) {
             e.printStackTrace();

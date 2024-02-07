@@ -1,9 +1,7 @@
 package com.robertx22.age_of_exile.event_hooks.ontick;
 
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.capability.player.PlayerData;
-import com.robertx22.age_of_exile.database.data.spells.components.actions.SummonPetAction;
 import com.robertx22.age_of_exile.maps.ProcessChunkBlocks;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -68,8 +66,8 @@ public class OnServerTick {
 
             }
 
-            if (age % (20 * 30) == 0) {
-                SummonPetAction.despawnIfExceededMaximumSummons(player, (int) unitdata.getUnit().getStatInCalculation(Stats.MAX_SUMMON_CAPACITY.get()).getValue());
+            if (true || age % (20 * 30) == 0) {
+                //     SummonPetAction.despawnIfExceededMaximumSummons(player, (int) unitdata.getUnit().getStatInCalculation(Stats.MAX_SUMMON_CAPACITY.get()).getValue());
             }
 
             if (age % 20 == 0) {
@@ -125,7 +123,7 @@ public class OnServerTick {
                 boolean canHeal = player.getFoodData().getFoodLevel() >= 1;
 
                 if (canHeal) {
-                    if (player.getHealth() < player.getMaxHealth()) {
+                    if (true) { //if (player.getHealth() < player.getMaxHealth()) {
                         RestoreResourceEvent hpevent = EventBuilder.ofRestore(player, player, ResourceType.health, RestoreType.regen, 0)
                                 .build();
                         hpevent.Activate();
