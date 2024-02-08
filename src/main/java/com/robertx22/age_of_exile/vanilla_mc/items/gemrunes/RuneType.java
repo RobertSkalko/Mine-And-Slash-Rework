@@ -5,6 +5,8 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.base.ResourceAndAttack
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.ArmorPenetration;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
+import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
+import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuantity;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.EnergyRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
@@ -16,6 +18,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCapacity;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
+import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 
 import java.util.function.Supplier;
 
@@ -97,6 +100,41 @@ public enum RuneType {
             .addArmor(Stats.SUMMON_DAMAGE.get().mod(3, 8))
             .addJewerly(Stats.SUMMON_DAMAGE.get().mod(4, 12))
             .addWeapon(Stats.SUMMON_DAMAGE.get().mod(5, 15))
+    ),
+    OWD(0, "owd", "Owd", 0, 0.0f, () -> StatPerType.of()
+            .addArmor(Stats.ACCURACY.get().mod(3, 15).percent())
+            .addJewerly(Stats.ACCURACY.get().mod(3, 15).percent())
+            .addWeapon(Stats.ACCURACY.get().mod(5, 25).percent())
+    ),
+    NET(0, "net", "Net", 1, 0.15f, () -> StatPerType.of()
+            .addArmor(new ElementalResist(Elements.Fire).mod(5, 25))
+            .addJewerly(new ElementalResist(Elements.Fire).mod(5, 25))
+            .addWeapon(Stats.ELEMENTAL_DAMAGE.get(Elements.Fire).mod(1, 10))
+    ),
+    UND(0, "und", "Und", 2, 0.3f, () -> StatPerType.of()
+            .addArmor(new ElementalResist(Elements.Cold).mod(5, 25))
+            .addJewerly(new ElementalResist(Elements.Cold).mod(5, 25))
+            .addWeapon(Stats.ELEMENTAL_DAMAGE.get(Elements.Cold).mod(1, 10))
+    ),
+    BRI(0, "bri", "Bri", 3, 0.4f, () -> StatPerType.of()
+            .addArmor(new ElementalResist(Elements.Lightning).mod(5, 25))
+            .addJewerly(new ElementalResist(Elements.Lightning).mod(5, 25))
+            .addWeapon(Stats.ELEMENTAL_DAMAGE.get(Elements.Lightning).mod(1, 10))
+    ),
+    DAW(0, "daw", "Daw", 3, 0.4f, () -> StatPerType.of()
+            .addArmor(new ElementalResist(Elements.Chaos).mod(3, 15))
+            .addJewerly(new ElementalResist(Elements.Chaos).mod(3, 15))
+            .addWeapon(Stats.ELEMENTAL_DAMAGE.get(Elements.Fire).mod(1, 10))
+    ),
+    END(0, "end", "End", 4, 0.55f, () -> StatPerType.of()
+            .addArmor(new ElementalResist(Elements.Physical).mod(5, 25))
+            .addJewerly(new ElementalResist(Elements.Physical).mod(5, 25))
+            .addWeapon(Stats.ELEMENTAL_DAMAGE.get(Elements.Physical).mod(1, 10))
+    ),
+    SID(0, "sid", "Sid", 4, 0.65f, () -> StatPerType.of()
+            .addArmor(TreasureQuantity.getInstance().mod(1, 8))
+            .addJewerly(TreasureQuantity.getInstance().mod(1, 8))
+            .addWeapon(TreasureQuantity.getInstance().mod(1, 8))
     );
 
     public String id;
