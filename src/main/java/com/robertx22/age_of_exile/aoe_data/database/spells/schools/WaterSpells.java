@@ -122,7 +122,7 @@ public class WaterSpells implements ExileRegistryInit {
                 .onTick(ParticleBuilder.of(ParticleTypes.SNOWFLAKE, 3F).amount(15).build().tick(20D))
                 .onTick(ParticleBuilder.of(ParticleTypes.ITEM_SNOWBALL, 3F).amount(5).build().tick(20D))
 
-                .onTick(DamageBuilder.radius(Elements.Cold, 3, SpellCalcs.ICEBALL).build())
+                .onTick(DamageBuilder.radius(Elements.Cold, 3, SpellCalcs.ICEBALL).build().tick(20D))
 
                 .levelReq(20)
                 .build();

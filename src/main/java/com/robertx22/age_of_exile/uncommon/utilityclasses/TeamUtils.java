@@ -49,7 +49,7 @@ public class TeamUtils {
                             players.add(x);
                         }
                     });
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,6 +62,9 @@ public class TeamUtils {
     }
 
     public static boolean areOnSameTeam(Player p1, Player p2) {
+        if (p1 == p2) {
+            return true;
+        }
         if (p1.distanceTo(p2) > ServerContainer.get().MAX_TEAM_DISTANCE.get()) {
             return false;
         }

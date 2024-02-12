@@ -71,6 +71,7 @@ public class ServerContainer {
         GEAR_DROPRATE = b.defineInRange("gear_drop_rate", 7D, 0, 1000);
         SOUl_DROPRATE = b.defineInRange("soul_drop_rate", 0.3D, 0, 1000);
         MAP_DROPRATE = b.defineInRange("map_drop_rate", 0.5D, 0, 1000);
+        MAP_DROPRATE_INSIDE_MAPS = b.defineInRange("MAP_DROPRATE_INSIDE_MAPS", 0.5D, 0, 1000);
         GEM_DROPRATE = b.defineInRange("gem_drop_rate", 1D, 0, 1000);
         SKILL_GEM_DROPRATE = b.defineInRange("skill_gem_drop_rate", 3D, 0, 1000);
         SUPP_GEM_DROPRATE = b.defineInRange("support_gem_drop_rate", 2D, 0, 1000);
@@ -215,6 +216,7 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue GEAR_DROPRATE;
     public ForgeConfigSpec.DoubleValue SOUl_DROPRATE;
     public ForgeConfigSpec.DoubleValue MAP_DROPRATE;
+    public ForgeConfigSpec.DoubleValue MAP_DROPRATE_INSIDE_MAPS;
     public ForgeConfigSpec.DoubleValue GEM_DROPRATE;
     public ForgeConfigSpec.DoubleValue SKILL_GEM_DROPRATE;
     public ForgeConfigSpec.DoubleValue LOOT_CHEST_DROPRATE;

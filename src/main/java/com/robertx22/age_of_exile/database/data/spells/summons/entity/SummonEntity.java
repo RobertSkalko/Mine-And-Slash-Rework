@@ -80,20 +80,22 @@ public abstract class SummonEntity extends TamableAnimal implements RangedAttack
 
     @Override
     public boolean canAttack(LivingEntity pTarget) {
+        LivingEntity owner = getOwner();
+
+        if (pTarget == owner) {
+            return false;
+        }
         if (!pTarget.isAlive()) {
             return false;
         }
         if (canAttack == pTarget && pTarget.isAlive()) {
             return true;
         }
-        LivingEntity owner = getOwner();
         if (owner == null) {
             return false;
-
         }
         return true;
         // return AllyOrEnemy.summonShouldAttack.is(owner, pTarget);
-
     }
 
     @Nullable

@@ -24,14 +24,6 @@ public enum AllyOrEnemy {
         @Override
         public boolean is(Entity caster, LivingEntity target) {
 
-            if (caster instanceof Player p && target instanceof Player p2) {
-                if (Load.Unit(caster).getCooldowns().isOnCooldown("pvp")) {
-                    if (!TeamUtils.areOnSameTeam(p, p2)) {
-                        return true;
-                    }
-                }
-            }
-
             if (!enemies.is(caster, target)) {
                 return false;
             }

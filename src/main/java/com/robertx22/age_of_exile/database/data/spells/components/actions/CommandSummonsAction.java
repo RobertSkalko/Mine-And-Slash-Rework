@@ -42,6 +42,7 @@ public class CommandSummonsAction extends SpellAction {
                 /// todo is this enough
                 if (en instanceof SummonEntity s) {
                     s.canAttack = ctx.target;
+                    
                 }
             }
         }

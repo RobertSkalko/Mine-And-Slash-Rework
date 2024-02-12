@@ -340,7 +340,6 @@ public class EntityData implements ICap, INeededForClient {
 
     public void setEquipsChanged() {
         this.gear.setDirty();
-        this.sync.setDirty();
     }
 
     public CooldownsData getCooldowns() {

@@ -363,11 +363,11 @@ public class SpellCastingData {
                 return ExplainedResult.failure(Chats.NOT_IN_THIS_DIMENSION.locName());
             }
 
-            SpendResourceEvent rctx = spell.getManaCostCtx(ctx);
-            SpendResourceEvent ectx = spell.getManaCostCtx(ctx);
+            SpendResourceEvent mana = spell.getManaCostCtx(ctx);
+            SpendResourceEvent energy = spell.getEnergyCostCtx(ctx);
 
 
-            if (data.getResources().hasEnough(rctx) && data.getResources().hasEnough(ectx)) {
+            if (data.getResources().hasEnough(mana) && data.getResources().hasEnough(energy)) {
 
                 GearItemData wep = StackSaving.GEARS.loadFrom(ctx.caster.getMainHandItem());
 

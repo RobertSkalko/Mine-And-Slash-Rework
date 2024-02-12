@@ -167,6 +167,7 @@ public class StatConditions implements ExileRegistryInit {
         IS_SOURCE_LOW_HP.addToSerializables();
         IS_TARGET_UNDEAD.addToSerializables();
         IS_TARGET_NOT_UNDEAD.addToSerializables();
+        IS_TARGET_NEAR_FULL_HP.addToSerializables();
 
     }
 }
