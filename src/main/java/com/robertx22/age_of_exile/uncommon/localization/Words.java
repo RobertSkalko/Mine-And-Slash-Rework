@@ -8,6 +8,8 @@ import java.util.Locale;
 // to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
     LOAD("Load"),
+    POSSIBLE_DROS("Possible Gear Drops:"),
+    CAN_UPGRADE_MAP_RARITY("Can Upgrade Map Rarity\nThis Depends on Map level"),
     LASTS_SEC("Lasts %1$ss"),
     MOD_NAME("Mine and Slash"),
     TAGS("Tags: "),

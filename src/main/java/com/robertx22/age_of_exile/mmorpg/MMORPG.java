@@ -63,7 +63,7 @@ public class MMORPG {
 
 
     // DISABLE WHEN PUBLIC BUILD
-    public static boolean RUN_DEV_TOOLS = false;
+    public static boolean RUN_DEV_TOOLS = true;
 
     public static boolean combatLogEnabled() {
         return false; // todo, should this be a client config and have server send packets ?
@@ -138,7 +138,7 @@ public class MMORPG {
 
         ModTags.init();
 
-        StatEffects.loadClass();
+        StatEffects.addSerializers();
         StatConditions.loadClass();
         Stats.loadClass();
         ExileDBInit.initRegistries();

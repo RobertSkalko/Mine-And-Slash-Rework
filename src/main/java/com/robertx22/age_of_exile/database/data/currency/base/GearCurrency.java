@@ -66,6 +66,7 @@ public abstract class GearCurrency extends Currency {
 
     }
 
+    @Override
     public ExplainedResult canItemBeModified(LocReqContext context) {
         GearItemData data = StackSaving.GEARS.loadFrom(context.stack);
         if (data == null) {

@@ -101,9 +101,11 @@ public class DatapackStatBuilder<T> {
         return this;
     }
 
-    public DatapackStatBuilder<T> addEffect(StatEffect effect) {
+    public DatapackStatBuilder<T> addEffect(StatEffect... effect) {
         Objects.requireNonNull(effect);
-        this.effects.add(effect);
+        for (StatEffect ef : effect) {
+            this.effects.add(ef);
+        }
         return this;
     }
 

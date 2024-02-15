@@ -22,6 +22,8 @@ import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashPotions;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
+import com.robertx22.age_of_exile.uncommon.effectdatas.OnMobKilledByDamageEvent;
 import com.robertx22.age_of_exile.uncommon.error_checks.base.ErrorChecks;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.Cached;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
@@ -30,6 +32,7 @@ import com.robertx22.library_of_exile.events.base.ExileEvents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.monster.Skeleton;
@@ -41,6 +44,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.*;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -96,7 +100,28 @@ public class CommonEvents {
                 }
             }
         });
+
         // instant bows
+
+
+        ForgeEvents.registerForgeEvent(LivingDeathEvent.class, event -> {
+
+            if (event.getEntity() != null) {
+                if (event.getSource().getEntity() instanceof Player p) {
+                    LivingEntity target = event.getEntity();
+                    if (!Load.Unit(target).getCooldowns().isOnCooldown("death")) {
+                        DamageEvent dmg = Load.Unit(target).lastDamageTaken;
+                        if (dmg != null) {
+                            // make absolutely sure this isn't called twice somehow
+                            Load.Unit(target).getCooldowns().setOnCooldown("death", Integer.MAX_VALUE);
+                            OnMobKilledByDamageEvent e = new OnMobKilledByDamageEvent(dmg);
+                            e.Activate();
+                        }
+                    }
+                }
+            }
+        });
+
 
         ForgeEvents.registerForgeEvent(EntityJoinLevelEvent.class, event -> {
             OnMobSpawn.onLoad(event.getEntity());

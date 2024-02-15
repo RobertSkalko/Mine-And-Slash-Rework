@@ -132,6 +132,8 @@ public class EntityData implements ICap, INeededForClient {
     public DirtySync gear = new DirtySync("gear_recalc", x -> recalcStats());
 
 
+    public DamageEvent lastDamageTaken = null;
+
     transient LivingEntity entity;
 
     transient EntityGears gears = new EntityGears();
@@ -655,6 +657,8 @@ public class EntityData implements ICap, INeededForClient {
 
             data.weaponData.GetBaseGearType().getWeaponMechanic().attack(data);
 
+        } else {
+            data.setCanceled(true);
         }
     }
 
@@ -676,6 +680,14 @@ public class EntityData implements ICap, INeededForClient {
     }
 
     public void mobBasicAttack(AttackInformation data) {
+
+
+        if (this.cooldowns.isOnCooldown("basic_attack")) {
+            data.setCanceled(true);
+            return;
+        }
+
+        cooldowns.setOnCooldown("basic_attack", 5);
 
         MobRarity rar = getMobRarity();
 

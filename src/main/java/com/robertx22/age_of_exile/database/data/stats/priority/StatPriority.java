@@ -55,13 +55,13 @@ public class StatPriority implements IAutoLocName {
         // they should be based on saved value at point of dmg bonus event start
 
         StatPriority DAMAGE_TRANSFER = damage("DAMAGE_TRANSFER", 0);
-        StatPriority DAMAGE_ADDITION = damage("DAMAGE_ADDITION", 1);
-        StatPriority HIT_PREVENTION = damage("HIT_PREVENTION", 2);
-        StatPriority DAMAGE_BONUSES = damage("DAMAGE_BONUSES", 3);
-        StatPriority AFTER_DAMAGE_BONUSES = damage("AFTER_DAMAGE_BONUSES", 4); // for stuff like leech
-        StatPriority DAMAGE_TAKEN_AS = damage("DAMAGE_TAKEN_AS", 5);
-        StatPriority DAMAGE_REDUCTION = damage("DAMAGE_REDUCTION", 6);
-        StatPriority DAMAGE_ABSORPTION = damage("DAMAGE_ABSORPTION", 7);
+        StatPriority DAMAGE_ADDITION = damage("DAMAGE_ADDITION", 10);
+        StatPriority HIT_PREVENTION = damage("HIT_PREVENTION", 20);
+        StatPriority DAMAGE_BONUSES = damage("DAMAGE_BONUSES", 30);
+        StatPriority AFTER_DAMAGE_BONUSES = damage("AFTER_DAMAGE_BONUSES", 31); // for stuff like leech
+        StatPriority DAMAGE_TAKEN_AS = damage("DAMAGE_TAKEN_AS", 40);
+        StatPriority DAMAGE_REDUCTION = damage("DAMAGE_REDUCTION", 50);
+        StatPriority DAMAGE_ABSORPTION = damage("DAMAGE_ABSORPTION", 60);
 
     }
 }

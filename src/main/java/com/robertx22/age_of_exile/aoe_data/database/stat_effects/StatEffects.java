@@ -29,7 +29,8 @@ public class StatEffects implements ExileRegistryInit {
 
 
     public static DataHolder<EffectCtx, StatEffect> GIVE_EFFECT_IN_AOE = new DataHolder<>(
-            Arrays.asList(ModEffects.REJUVENATE
+            Arrays.asList(
+                    ModEffects.REJUVENATE
             ),
             x -> new GiveExileStatusInRadius("give_" + x.id + "_to_allies_in_radius", AllyOrEnemy.allies, 10, x.resourcePath)
     );
@@ -113,43 +114,16 @@ public class StatEffects implements ExileRegistryInit {
     public static StatEffect PROC_SHATTER = new ProcSpellEffect(WaterSpells.BONE_SHATTER_PROC, PositionSource.TARGET);
 
 
-    public static void loadClass() {
+    public static void addSerializers() {
     }
 
     @Override
     public void registerAll() {
-        
-        PROC_SHATTER.addToSerializables();
-        GIVE_EFFECT_TO_SOURCE_30_SEC.addToSerializables();
-        REMOVE_EFFECT_FROM_TARGET.addToSerializables();
 
-        ADD_TOTAL_SUMMONS.addToSerializables();
-        DURATION_INCREASE.addToSerializables();
-        SET_BARRAGE.addToSerializables();
-        PROJECTILE_COUNT.addToSerializables();
-        GIVE_SELF_EFFECT.addToSerializables();
-        APPLY_CAST_SPEED_TO_CD.addToSerializables();
-        DOUBLE_DAMAGE.addToSerializables();
-        MULTIPLY_VALUE.addToSerializables();
-        GIVE_EFFECT_TO_TARGET.addToSerializables();
-        SET_IS_CRIT.addToSerializables();
-        INCREASE_VALUE.addToSerializables();
-        SET_ACCURACY.addToSerializables();
-        LEECH_RESTORE_RESOURCE_BASED_ON_STAT_DATA.addToSerializables();
-        ADD_PERC_OF_STAT_TO_NUMBER.addToSerializables();
-        ADD_STAT_DATA_TO_NUMBER.addToSerializables();
-        INCREASE_SECONDS.addToSerializables();
-        DECREASE_COOLDOWN.addToSerializables();
-        INCREASE_MANA_COST.addToSerializables();
-        SET_PIERCE.addToSerializables();
-        INCREASE_AREA.addToSerializables();
-        INCREASE_PROJ_SPEED.addToSerializables();
-        DECREASE_CAST_TIME.addToSerializables();
-        LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.addToSerializables();
-        GIVE_EFFECT_IN_AOE.addToSerializables();
-        DECREASE_COOLDOWN_BY_X_TICKS.addToSerializables();
-        DECREASE_VALUE.addToSerializables();
-        INCREASE_EFFECT_DURATION.addToSerializables();
-
+        for (StatEffect v : StatEffect.ALL_SERIAZABLE) {
+            if (!v.id.isEmpty()) {
+                v.addToSerializables();
+            }
+        }
     }
 }

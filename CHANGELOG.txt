@@ -67,3 +67,13 @@ v5.3.20
 
 v.5.3.21
 - more fixes
+
+v.5.3.22
+- maps now drop common
+- maps can now be upgraded in rarity with new currency
+- low rarity maps no longer drop high rarity gear
+I didn't intend for players to be hit in the face with super difficult maps but if difficulty is optional, then some encouragement is needed to pursue it.
+- spell procs shouldnt be able to proc other spell procs now
+- tried to fix magic shield being burnt by fast atking mobs
+- mobs now have 5 tick cooldown on their basic attacks, slimes should no longer 1 shot
+- on kill stuff should work now

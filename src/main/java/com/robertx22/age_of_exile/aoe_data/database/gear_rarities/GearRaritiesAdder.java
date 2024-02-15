@@ -87,6 +87,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.sockets = new MinMax(0, 3);
             x.min_lvl = 25;
             x.max_spell_links = 4;
+            x.min_map_rarity_to_drop = IRarity.UNCOMMON;
             x.lootable_gear_tier = GearRarity.LootableGearTier.MID;
             x.pot = new GearRarity.Potential(100, 1.5F);
             x.min_affixes = 4;
@@ -112,6 +113,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.sockets = new MinMax(1, 3);
             x.max_spell_links = 5;
             x.min_lvl = 50;
+            x.min_map_rarity_to_drop = IRarity.RARE_ID;
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
             x.pot = new GearRarity.Potential(100, 1.75F);
             x.min_affixes = 5;
@@ -131,13 +133,14 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.map_tiers = new MinMax(80, 100);
 
             x.affix_rarity_weight = 100;
-            
+
             x.map_xp_multi = 1F;
 
             x.favor_loot_multi = 1.25F;
             x.favor_needed = 1000;
             x.sockets = new MinMax(2, 3);
             x.min_lvl = 75;
+            x.min_map_rarity_to_drop = IRarity.EPIC_ID;
             x.max_spell_links = 5;
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
             x.pot = new GearRarity.Potential(100, 2F);
@@ -159,6 +162,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
             x.min_affixes = 0;
             x.weight = 25;
+            x.min_map_rarity_to_drop = IRarity.RARE_ID;
             x.item_tier_power = 2;
             x.item_value_multi = 2;
             x.item_tier = 5;
@@ -175,6 +179,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.pot = new GearRarity.Potential(100, 1);
             x.min_affixes = 0;
             x.weight = 150;
+            x.min_map_rarity_to_drop = IRarity.COMMON_ID;
             x.item_tier_power = 2;
             x.item_value_multi = 2;
             x.item_tier = 10;

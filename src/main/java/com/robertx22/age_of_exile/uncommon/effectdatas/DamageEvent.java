@@ -15,7 +15,6 @@ import com.robertx22.age_of_exile.mixin_ducks.DamageSourceDuck;
 import com.robertx22.age_of_exile.mixin_ducks.LivingEntityAccesor;
 import com.robertx22.age_of_exile.mixin_ducks.ProjectileEntityDuck;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import com.robertx22.age_of_exile.saveclasses.DeathStatsData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
@@ -126,15 +125,6 @@ public class DamageEvent extends EffectEvent {
             dmg *= ServerContainer.get().PVP_DMG_MULTI.get();
         }
 
-        if (!data.isDodged() && target instanceof Player) { // todo this code sucks
-            // a getter should not modify anything
-            dmg = MagicShield.modifyEntityDamage(this, dmg);
-            dmg = DamageAbsorbedByMana.modifyEntityDamage(this, dmg);
-
-            if (dmg > 0) {
-
-            }
-        }
 
         if (this.data.isBasicAttack()) {
             if (this.attackInfo != null && attackInfo.weaponData != null) {
@@ -142,6 +132,7 @@ public class DamageEvent extends EffectEvent {
                 dmg *= multi;
             }
         }
+
 
         return dmg;
     }
@@ -282,6 +273,7 @@ public class DamageEvent extends EffectEvent {
         if (stopFriendlyFire()) {
             return;
         }
+        this.targetData.lastDamageTaken = this;
 
         DmgByElement info = getDmgByElement();
 
@@ -298,19 +290,17 @@ public class DamageEvent extends EffectEvent {
 
         float dmg = info.totalDmg;
 
+        if (target instanceof Player p) { // todo this code sucks
+            // a getter should not modify anything
+            dmg = MagicShield.modifyEntityDamage(this, dmg);
+            dmg = DamageAbsorbedByMana.modifyEntityDamage(this, dmg);
+        }
 
         float vanillaDamage = HealthUtils.realToVanilla(target, dmg);
 
         if (this.data.isCanceled()) {
             cancelDamage();
             return;
-        }
-
-
-        if (target instanceof Player) {
-            info.dmgmap.forEach((key, value) -> {
-                DeathStatsData.record((Player) target, key, value);
-            });
         }
 
 
@@ -372,18 +362,9 @@ public class DamageEvent extends EffectEvent {
         }
 
 
-        if (this.target.isDeadOrDying()) {
-            if (!Load.Unit(target).getCooldowns().isOnCooldown("death")) {
-                // make absolutely sure this isn't called twice somehow
-                Load.Unit(target).getCooldowns().setOnCooldown("death", Integer.MAX_VALUE);
-                OnMobKilledByDamageEvent event = new OnMobKilledByDamageEvent(this);
-                event.Activate();
-            }
-        }
-
         if (dmg > 0) {
 
-         
+
             // todo can this be done better?
             if (this.data.isBasicAttack()) {
                 for (Entry<String, ExileEffectInstanceData> e : targetData.getStatusEffectsData().exileMap.entrySet()) {

@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EffectEvent;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import net.minecraft.world.entity.player.Player;
 
@@ -29,12 +30,17 @@ public class ProcSpellEffect extends StatEffect {
     @Override
     public void activate(EffectEvent event, EffectSides statSource, StatData data, Stat stat) {
 
+        if (event.data.getBoolean(EventData.IS_PROC)) {
+            return;
+        }
+
         // be careful not to make it proc itself
         var spell = ExileDB.Spells().get(spellId);
 
         var ctx = new SpellCastContext(event.source, 0, spell);
 
         var c = SpellCtx.onCast(event.source, ctx.calcData);
+        c.isProc = true;
 
         c.setPositionSource(pos);
         c.target = event.target;

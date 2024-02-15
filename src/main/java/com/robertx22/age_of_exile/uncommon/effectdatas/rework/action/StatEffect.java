@@ -10,11 +10,14 @@ import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public abstract class StatEffect implements JsonExileRegistry<StatEffect>, IAutoGson<StatEffect> {
 
     public static HashMap<String, StatEffect> SERIALIZERS = new HashMap<>();
+    public static List<StatEffect> ALL_SERIAZABLE = new ArrayList<>();
     public static StatEffect SERIALIZER = new SetBooleanEffect();
 
 
@@ -24,6 +27,7 @@ public abstract class StatEffect implements JsonExileRegistry<StatEffect>, IAuto
 
     static void addSer(StatEffect eff) {
         SERIALIZERS.put(eff.ser, eff);
+
     }
 
     public String id = "";
@@ -34,6 +38,7 @@ public abstract class StatEffect implements JsonExileRegistry<StatEffect>, IAuto
         this.ser = ser;
 
         addSer(this);
+        ALL_SERIAZABLE.add(this);
     }
 
     public abstract void activate(EffectEvent event, EffectSides statSource, StatData data, Stat stat);

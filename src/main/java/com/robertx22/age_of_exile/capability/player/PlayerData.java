@@ -205,7 +205,7 @@ public class PlayerData implements ICap {
     private Unit getSpellStats(Spell spell, List<StatContext> stats) {
         int key = this.spellCastingData.keyOfSpell(spell.GUID());
         var unit = new Unit();
-        StatCalculation.calc(unit, stats, player, key, null);
+        StatCalculation.calc(unit, StatCalculation.getStatsWithoutSuppGems(this.player, Load.Unit(player), null), player, key, null);
         return unit;
     }
 

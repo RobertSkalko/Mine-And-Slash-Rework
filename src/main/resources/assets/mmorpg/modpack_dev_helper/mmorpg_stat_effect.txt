@@ -1,5 +1,6 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
+increase_number_per_curse_on_target
 decrease_number_num
 restore_magic_shield_per_stat_data
 set_bool_crit

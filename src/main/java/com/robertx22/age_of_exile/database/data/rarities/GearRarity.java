@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.database.data.MinMax;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientTextureUtils;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
@@ -52,13 +53,14 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     public int item_tier = -1;
     public float item_tier_power;
     public int min_lvl = 0;
+    public String min_map_rarity_to_drop = IRarity.COMMON_ID;
     public float item_value_multi;
     public boolean announce_in_chat = false;
     public boolean is_unique_item = false;
     public MinMax map_tiers = new MinMax(0, 100);
 
     public float map_xp_multi = 1;
-    
+
     public int max_spell_links = 1;
 
     transient ResourceLocation glintFull;

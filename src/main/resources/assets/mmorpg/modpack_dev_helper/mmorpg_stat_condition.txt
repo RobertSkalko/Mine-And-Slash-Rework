@@ -97,6 +97,7 @@ is_staff_wep_type
 effect_has_tag_food
 is_is_basic_atk_true
 spell_has_tag_cold
+is_target_near_full_hp
 threat_gen_type_is_heal
 is_elemental_damage
 is_target_cursed

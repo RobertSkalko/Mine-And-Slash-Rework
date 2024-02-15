@@ -16,6 +16,7 @@ unique_reroll
 sharpening_stone2
 entangled_affix_upgrade
 mastery_seal2
+map_rarity_upgrade
 mastery_seal1
 mastery_seal4
 mastery_seal3

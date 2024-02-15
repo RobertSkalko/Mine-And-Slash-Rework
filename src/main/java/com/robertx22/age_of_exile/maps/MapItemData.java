@@ -24,16 +24,14 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipStatsAligner;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.library_of_exile.wrappers.ExileText;
+import joptsimple.internal.Strings;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class MapItemData implements ICommonDataItem<GearRarity> {
@@ -170,6 +168,16 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
         for (LeagueMechanic league : this.getLeagueMechanics()) {
             tooltip.add(Itemtips.MAP_LEAGUE_SPAWN.locName().append(league.GUID()));
         }
+
+        List<GearRarity> possiblerarities = ExileDB.GearRarities().getFilterWrapped(x -> this.getRarity().item_tier >= ExileDB.GearRarities().get(x.min_map_rarity_to_drop).item_tier).list;
+
+        possiblerarities.sort(Comparator.comparingInt(x -> x.item_tier));
+        tooltip.add(Words.POSSIBLE_DROS.locName());
+        //  tooltip.add(TextUTIL.mergeList(possiblerarities.stream().map(x -> x.locName().withStyle(x.textFormatting())).collect(Collectors.toList())));
+
+        var list = possiblerarities.stream().map(x -> x.textFormatting() + x.locName().getString()).collect(Collectors.toList());
+
+        tooltip.add(Component.literal(Strings.join(list, ", ")));
 
         TooltipUtils.removeDoubleBlankLines(tooltip);
 

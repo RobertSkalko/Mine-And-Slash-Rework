@@ -40,6 +40,7 @@ public class StatCalculation {
         return statContexts;
     }
 
+    // the List<StatContext> is modified so i cant reuse it until the code is redone and fixed
     // todo trying to rewrite calc code..
     public static void calc(Unit unit, List<StatContext> statsWithoutSuppGems, LivingEntity entity, int skillGem, AttackInformation dmgData) {
 
@@ -51,6 +52,12 @@ public class StatCalculation {
         unit.clearStats();
 
         List<StatContext> gemstats = new ArrayList<>();
+        ;
+
+        if (entity instanceof Player p) {
+            PlayerData playerData = Load.player(p);
+            gemstats.addAll(collectGemStats(p, data, playerData, skillGem));
+        }
 
         if (entity instanceof Player p) {
             PlayerData playerData = Load.player(p);

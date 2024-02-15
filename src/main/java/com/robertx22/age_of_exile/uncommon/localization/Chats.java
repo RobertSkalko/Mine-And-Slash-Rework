@@ -7,6 +7,8 @@ import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
     ALT_TO_SHOW_OTHER_SPELL("[Alt] to show the other Spell"),
+    MAX_MAP_RARITY_FOR_LVL("This map is at maximum possible rarity for it's level."),
+    MAX_MAP_RARITY("This map is at maximum possible rarity."),
     ALREADY_CASTING("Already Casting a Spell"),
     SPELL_IS_ON_CD("Spell is on cooldown"),
     USING_TEST_SPELL("You are trying to use a test spell outside test environment"),
@@ -47,6 +49,7 @@ public enum Chats implements IAutoLocName {
     ENCHANT_UPGRADE_RARITY("Enchants must be applied consecutively. A common enchant has to come before an uncommon enchant may be applied."),
     THIS_ITEM_CANT_BE_USED_MORE_THAN_X_TIMES("This item has already reached maximum uses: (%1$s)"),
     NOT_GEAR("This is not a gear item."),
+    NOT_MAP("This is not a map item."),
     NOT_CORRECT_TIER_LEVEL("You are trying to use an in item with a different level range than possible."),
     CANT_GO_ABOVE_MAX_LEVEL("You can't upgrade an item past maximum level: %1$s"),
     NEEDS_EMPTY_OR_RUNE("Requires an empty socket, or a rune inside the item. If the item has a rune, it will be re-rolled."),

@@ -8,8 +8,10 @@ import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 import com.robertx22.age_of_exile.loot.blueprints.ItemBlueprint;
 import com.robertx22.age_of_exile.loot.blueprints.MapBlueprint;
 import com.robertx22.age_of_exile.loot.blueprints.SkillGemBlueprint;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class GearRarityPart extends BlueprintPart<GearRarity, ItemBlueprint> {
@@ -44,17 +46,21 @@ public class GearRarityPart extends BlueprintPart<GearRarity, ItemBlueprint> {
         }
 
         if (this.blueprint instanceof MapBlueprint) {
-            // for maps, we drop rarity and tier close to the map tier it dropped in.
-            // so if you do common maps you can get uncommon, but not rare.
-            // if you do mythic map, you will only get mythic and legendary maps
-            return ExileDB.GearRarities().getFiltered(x -> this.blueprint.info.level >= x.min_lvl && !x.is_unique_item
-                    && x.isNear(GearRarity.getRarityFromMapTier(blueprint.info.map_tier)));
+            return Arrays.asList(ExileDB.GearRarities().get(IRarity.COMMON_ID));
         }
 
-        if (canRollUnique) {
-            return ExileDB.GearRarities().getFiltered(x -> this.blueprint.info.level >= x.min_lvl);
+
+        var filt = ExileDB.GearRarities().getFilterWrapped(x -> this.blueprint.info.level >= x.min_lvl);
+
+        if (!canRollUnique) {
+            filt = filt.of(x -> !x.is_unique_item);
         }
-        return ExileDB.GearRarities().getFiltered(x -> this.blueprint.info.level >= x.min_lvl && !x.is_unique_item);
+
+        // prevent high rarity gear from dropping in low rarity maps
+        filt = filt.of(x -> this.blueprint.info.map_tier >= ExileDB.GearRarities().get(x.min_map_rarity_to_drop).map_tiers.min);
+
+        return filt.list;
+
     }
 
     @Override
