@@ -28,7 +28,7 @@ public class DamageAbsorbedByMana extends Stat {
 
     @Override
     public String locDescForLangFile() {
-        return "Percent of damage is absorbed by mana. This effect only works if mana is not less than 50 percent capacity. Mana shield is applied after magic shield.";
+        return "Percent of damage is absorbed by Mana if remaining Mana is greater than 50 percent of max Mana.";
     }
 
     @Override

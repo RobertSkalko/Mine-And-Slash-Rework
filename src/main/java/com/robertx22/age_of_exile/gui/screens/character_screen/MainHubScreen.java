@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.CoreStat;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttributes;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
+import com.robertx22.age_of_exile.database.data.stats.types.defense.BlockChance;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalPenetration;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
@@ -145,7 +146,7 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
         addTo(StatType.ELE_DAMAGE, Stats.ELEMENTAL_SPELL_DAMAGE.getAll());
         addTo(StatType.ELE_DAMAGE, new ElementalPenetration(Elements.Elemental).generateAllSingleVariations());
 
-        addTo(StatType.DEFENSE, Arrays.asList(Armor.getInstance(), DodgeRating.getInstance()));
+        addTo(StatType.DEFENSE, Arrays.asList(Armor.getInstance(), DodgeRating.getInstance(), BlockChance.getInstance()));
         addTo(StatType.DEFENSE, Arrays.asList(Stats.DAMAGE_RECEIVED.get()));
         addTo(StatType.DEFENSE, new ElementalResist(Elements.Elemental).generateAllSingleVariations());
         addTo(StatType.DEFENSE, new MaxElementalResist(Elements.Elemental).generateAllSingleVariations());
