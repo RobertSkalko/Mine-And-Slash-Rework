@@ -16,6 +16,7 @@ public class ProcSpellEffect extends StatEffect {
 
     String spellId = "";
     PositionSource pos = PositionSource.TARGET;
+    boolean can_proc_from_procs = false;
 
     public ProcSpellEffect(String spellId, PositionSource pos) {
         super("proc_spell_" + spellId, "proc_spell");
@@ -30,7 +31,7 @@ public class ProcSpellEffect extends StatEffect {
     @Override
     public void activate(EffectEvent event, EffectSides statSource, StatData data, Stat stat) {
 
-        if (event.data.getBoolean(EventData.IS_PROC)) {
+        if (!can_proc_from_procs && event.data.getBoolean(EventData.IS_PROC)) {
             return;
         }
 

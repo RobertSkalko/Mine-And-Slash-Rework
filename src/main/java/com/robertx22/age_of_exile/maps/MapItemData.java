@@ -5,7 +5,6 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.league.LeagueMechanic;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
-import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
@@ -58,17 +57,12 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
     }
 
     public List<ExactStatData> getTierStats() {
-        float mob_stat_multi = (float) (GameBalanceConfig.get().HP_DMG_MOB_BONUS_PER_MAP_TIER * tier);
-
-        List<Stat> to = new ArrayList<>();
-        to.add(Health.getInstance());
-        to.add(Stats.TOTAL_DAMAGE.get());
-
+      
         List<ExactStatData> stats = new ArrayList<>();
 
-        for (Stat stat : to) {
-            stats.add(ExactStatData.noScaling(mob_stat_multi * 100F, ModType.MORE, stat.GUID()));
-        }
+        stats.add(ExactStatData.noScaling((float) (GameBalanceConfig.get().HP_MOB_BONUS_PER_MAP_TIER * tier * 100F), ModType.MORE, Health.getInstance().GUID()));
+        stats.add(ExactStatData.noScaling((float) (GameBalanceConfig.get().DMG_MOB_BONUS_PER_MAP_TIER * tier * 100F), ModType.MORE, Stats.TOTAL_DAMAGE.get().GUID()));
+
         return stats;
     }
 

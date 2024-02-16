@@ -75,11 +75,12 @@ public class PhysicalToElement extends ElementalStat {
 
         @Override
         public DamageEvent activate(DamageEvent effect, StatData data, Stat stat) {
-            float dmg = effect.data.getOriginalNumber(EventData.NUMBER).number * data.getValue() / 100F;
+            float dmg = effect.data.getNumber(EventData.NUMBER).number * data.getValue() / 100F;
             dmg = MathHelper.clamp(dmg, 0, effect.data.getNumber());
             if (dmg > 0) {
                 effect.addBonusEleDmg(stat.getElement(), dmg);
                 effect.data.getNumber(EventData.NUMBER).number -= dmg;
+                effect.data.getOriginalNumber(EventData.NUMBER).number -= dmg; // todo will it fix it
             }
             return effect;
         }
