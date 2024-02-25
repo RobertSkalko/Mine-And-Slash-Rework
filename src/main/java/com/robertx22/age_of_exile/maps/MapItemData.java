@@ -5,20 +5,25 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.league.LeagueMechanic;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
+import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequirement;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipStatsAligner;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
@@ -56,8 +61,32 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
         return mechs.stream().map(x -> ExileDB.LeagueMechanics().get(x)).collect(Collectors.toList());
     }
 
+    public StatRequirement getStatReq() {
+
+        StatRequirement req = new StatRequirement();
+
+        for (Elements ele : Elements.getAllSingle()) {
+            if (ele != Elements.Physical) {
+                var stat = new ElementalResist(ele);
+
+                int number = getRarity().map_resist_req;
+
+                for (MapAffixData affix : this.affixes) {
+                    if (affix.getAffix().map_resist == ele) {
+                        number += affix.getAffix().map_resist_bonus_needed;
+                    }
+                }
+
+                req.base_req.put(stat.GUID(), (float) number);
+            }
+        }
+
+        return req;
+    }
+
     public List<ExactStatData> getTierStats() {
-      
+
+
         List<ExactStatData> stats = new ArrayList<>();
 
         stats.add(ExactStatData.noScaling((float) (GameBalanceConfig.get().HP_MOB_BONUS_PER_MAP_TIER * tier * 100F), ModType.MORE, Health.getInstance().GUID()));
@@ -96,21 +125,6 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
         return getRarity().map_xp_multi;
     }
 
-
-    public boolean canIncreaseTier() {
-        return tier < MAX_TIER;
-    }
-
-    public boolean increaseTier(int i) {
-
-        int tier = this.tier + i;
-
-        if (!canIncreaseTier()) {
-            return false;
-        }
-        this.tier = tier;
-        return true;
-    }
 
     public List<MapAffixData> getAllAffixesThatAffect(AffectedEntities aff) {
         return affixes.stream().filter(x -> x.getAffix().affected == aff).collect(Collectors.toList());
@@ -174,6 +188,10 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
         tooltip.add(Component.literal(Strings.join(list, ", ")));
 
         TooltipUtils.removeDoubleBlankLines(tooltip);
+
+        TooltipUtils.addEmpty(tooltip);
+        tooltip.add(Words.Requirements.locName().append(": ").withStyle(ChatFormatting.GREEN));
+        TooltipUtils.addRequirements(tooltip, this.lvl, getStatReq(), Load.Unit(ClientOnly.getPlayer()));
 
         return tooltip;
 

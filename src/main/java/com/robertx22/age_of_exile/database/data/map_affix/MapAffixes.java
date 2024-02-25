@@ -24,11 +24,11 @@ public class MapAffixes {
         for (Elements element : elements) {
 
             // mobs
-            new MapAffix(element.guidName + "_atk").addMod(new StatMod(1, 3, new BonusAttackDamage(element))).addToSerializables();
+            new MapAffix(element.guidName + "_atk").addMod(new StatMod(1, 3, new BonusAttackDamage(element))).upsMapResistRequirement(element, 25).addToSerializables();
             new MapAffix(element.guidName + "_res").addMod(new StatMod(20, 60, new ElementalResist(element))).addToSerializables();
 
             // players
-            new MapAffix(element.guidName + "_minus_res").addMod(new StatMod(-20, -60, new ElementalResist(element))).affectsPlayer().addToSerializables();
+            new MapAffix(element.guidName + "_minus_res").addMod(new StatMod(-15, -30, new ElementalResist(element))).affectsPlayer().addToSerializables();
 
         }
 

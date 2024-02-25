@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.maps.AffectedEntities;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
+import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
@@ -22,6 +23,9 @@ public class MapAffix implements JsonExileRegistry<MobAffix>, IAutoGson<MapAffix
     int weight = 1000;
     public AffectedEntities affected = AffectedEntities.Mobs;
 
+    public Elements map_resist = Elements.Physical;
+    public int map_resist_bonus_needed = 0;
+
     public MapAffix(String id) {
         this.id = id;
     }
@@ -33,6 +37,12 @@ public class MapAffix implements JsonExileRegistry<MobAffix>, IAutoGson<MapAffix
 
     public MapAffix affectsPlayer() {
         this.affected = AffectedEntities.Players;
+        return this;
+    }
+
+    public MapAffix upsMapResistRequirement(Elements ele, int number) {
+        this.map_resist = ele;
+        this.map_resist_bonus_needed = number;
         return this;
     }
 

@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.library_of_exile.utils.geometry.Circle2d;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -77,6 +78,12 @@ public class MapBlock extends BaseEntityBlock {
             } else {
 
                 if (data != null) {
+
+                    if (!data.getStatReq().meetsReq(data.lvl, Load.Unit(p))) {
+                        p.sendSystemMessage(Chats.RESISTS_TOO_LOW_FOR_MAP.locName().withStyle(ChatFormatting.RED));
+                        return InteractionResult.FAIL;
+                    }
+
                     Load.worldData(level).map.startNewMap(p, data);
                     SoundUtils.playSound(p, SoundEvents.EXPERIENCE_ORB_PICKUP);
                     MapBlockEntity be = (MapBlockEntity) level.getBlockEntity(pPos);
@@ -96,6 +103,11 @@ public class MapBlock extends BaseEntityBlock {
                 MapBlockEntity be = (MapBlockEntity) level.getBlockEntity(pPos);
 
                 var map = Load.worldData(level).map.getMapFromPlayerID(be.getMapId());
+
+                if (!map.get().map.getStatReq().meetsReq(map.get().map.lvl, Load.Unit(p))) {
+                    p.sendSystemMessage(Chats.RESISTS_TOO_LOW_FOR_MAP.locName().withStyle(ChatFormatting.RED));
+                    return InteractionResult.FAIL;
+                }
 
                 if (p.getInventory().countItem(SlashItems.TP_BACK.get()) < 1) {
                     p.sendSystemMessage(Chats.NEED_PEARL.locName(SlashItems.TP_BACK.get().getDefaultInstance().getHoverName()));

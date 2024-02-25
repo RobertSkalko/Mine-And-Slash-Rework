@@ -88,3 +88,7 @@ This is meant for players who don't want to mess with inviting to parties etc
 - fix harvest generation/tp issues
 - attempt fix double death xp loss etc
 - rune reroll now cant roll stat into lower value than it was before, roll away!
+- added a new system, map resist requirements. Maps of higher rarity and difficulty now require some baseline of elemental resistances to actually enter,
+which should hopefully reduce the amount of complaints about one shots. 
+Maps that have elemental mob damage affixes require higher resists
+If there's some unique way to mitigate elemental damage in the future, like a stat that reduces say Fire damage received by 90%, i'll have to include to allow it to bypass the requirement system.

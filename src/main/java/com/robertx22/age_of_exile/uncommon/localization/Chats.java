@@ -7,6 +7,7 @@ import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
     ALT_TO_SHOW_OTHER_SPELL("[Alt] to show the other Spell"),
+    RESISTS_TOO_LOW_FOR_MAP("You lack Resistances to Open/Enter this Map."),
     MAX_MAP_RARITY_FOR_LVL("This map is at maximum possible rarity for it's level."),
     MAX_MAP_RARITY("This map is at maximum possible rarity."),
     ALREADY_CASTING("Already Casting a Spell"),
