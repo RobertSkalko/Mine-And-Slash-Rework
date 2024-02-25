@@ -94,6 +94,29 @@ public enum AllyOrEnemy {
             return false;
         }
     },
+    casters_summons() {
+        @Override
+        public <T extends LivingEntity> List<T> getMatchingEntities(List<T> list, Entity caster) {
+            return list.stream()
+                    .filter(x -> is(caster, x))
+                    .collect(Collectors.toList());
+        }
+
+        @Override
+        public boolean is(Entity caster, LivingEntity target) {
+            if (caster instanceof Player p) {
+                if (EntityFinder.isTamedByAlly(p, target) && target instanceof OwnableEntity pet && pet.getOwner() == caster) {
+                    return !Load.Unit(target).summonedPetData.isEmpty();
+                }
+            }
+            return false;
+        }
+
+        @Override
+        public boolean includesCaster() {
+            return false;
+        }
+    },
     enemies {
         @Override
         public boolean is(Entity caster, LivingEntity target) {

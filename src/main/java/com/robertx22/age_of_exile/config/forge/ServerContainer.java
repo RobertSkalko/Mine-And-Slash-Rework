@@ -33,7 +33,8 @@ public class ServerContainer {
         b.comment("General Configs")
                 .push("general");
 
-        ALL_PLAYERS_ARE_TEAMED_PVE_MODE = b.define("all_players_are_allied", true);
+        ENERGY_PENALTY = b.define("ENERGY_PENALTY", true);
+
         GET_STARTER_ITEMS = b.define("start_items", true);
         ALWAYS_SCALE_MOB_LEVEL_TO_PLAYER = b.define("scale_mob_to_nearby_player_lvl", true);
         ENABLE_LOOT_ANNOUNCEMENTS = b.define("loot_announcements", true);
@@ -80,6 +81,8 @@ public class ServerContainer {
         CURRENCY_DROPRATE = b.defineInRange("currency_drop_rate", 0.5D, 0, 1000);
         JEWEL_DROPRATE = b.defineInRange("jewel_drop_rate", 0.25D, 0, 1000);
         LOOT_CHEST_DROPRATE = b.defineInRange("loot_chest_drop_rate", 0.1D, 0, 1000);
+
+        MOB_FLAT_DAMAGE_BONUS = b.defineInRange("MOB_FLAT_DAMAGE_BONUS", 5D, 0, 1000);
 
         MAP_MECHANIC_CHANCE = b.defineInRange("MAP_MECHANIC_CHANCE", 33D, 0, 100D);
 
@@ -175,7 +178,6 @@ public class ServerContainer {
     public ForgeConfigSpec.ConfigValue<List<? extends String>> GEAR_COMPATS;
     public ForgeConfigSpec.ConfigValue<List<? extends String>> BANNED_ITEMS;
 
-    public ForgeConfigSpec.BooleanValue ALL_PLAYERS_ARE_TEAMED_PVE_MODE;
     public ForgeConfigSpec.BooleanValue GET_STARTER_ITEMS;
     public ForgeConfigSpec.BooleanValue ALWAYS_SCALE_MOB_LEVEL_TO_PLAYER;
     public ForgeConfigSpec.BooleanValue ENABLE_LOOT_ANNOUNCEMENTS;
@@ -184,6 +186,7 @@ public class ServerContainer {
     public ForgeConfigSpec.BooleanValue MAPS_DONT_DROP_IN_MAPS;
     public ForgeConfigSpec.BooleanValue LOG_ERRORS;
     public ForgeConfigSpec.BooleanValue STOP_ERROR_SPAM;
+    public ForgeConfigSpec.BooleanValue ENERGY_PENALTY;
     public ForgeConfigSpec.IntValue MIN_LEVEL_MAP_DROPS;
 
     public ForgeConfigSpec.IntValue LEVEL_DISTANCE_PENALTY_LEEWAY;
@@ -226,6 +229,8 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue CURRENCY_DROPRATE;
     public ForgeConfigSpec.DoubleValue JEWEL_DROPRATE;
     public ForgeConfigSpec.DoubleValue MAP_MECHANIC_CHANCE;
+
+    public ForgeConfigSpec.DoubleValue MOB_FLAT_DAMAGE_BONUS;
 
     public ForgeConfigSpec.DoubleValue BLOCK_COST;
 

@@ -16,6 +16,7 @@ import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GenericGive;
 import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GiveExactUnique;
 import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GiveMap;
 import com.robertx22.age_of_exile.vanilla_mc.commands.open_gui.OpenHub;
+import com.robertx22.age_of_exile.vanilla_mc.commands.report.ReportMapIssue;
 import com.robertx22.age_of_exile.vanilla_mc.commands.reset.ResetCommand;
 import com.robertx22.age_of_exile.vanilla_mc.commands.reset.ResetSpellCooldowns;
 import com.robertx22.age_of_exile.vanilla_mc.commands.stats.ClearStats;
@@ -69,5 +70,6 @@ public class CommandRegister {
 
         OpenHub.register(dispatcher);
 
+        ReportMapIssue.register(dispatcher);
     }
 }

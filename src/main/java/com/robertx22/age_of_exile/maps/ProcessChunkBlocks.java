@@ -103,7 +103,11 @@ public class ProcessChunkBlocks {
 
                             DungeonFeature.place(opt.get(), level, level.getRandom(), cpos.getBlockAt(0, 0, 0));
 
-                        
+                            var ran = DungeonBuilder.createRandom(0l, cpos);
+
+                            for (LeagueMechanic mech : opt.get().map.getLeagueMechanics()) {
+                                mech.tryGenerate(level, cpos, ran);
+                            }
                             gened++;
                             if (gened >= maxtogen) {
                                 return;
@@ -130,11 +134,6 @@ public class ProcessChunkBlocks {
                             BuiltRoom room = builder.builtDungeon.getRoomForChunk(cpos);
 
 
-                            var ran = DungeonBuilder.createRandom(0l, cpos);
-
-                            for (LeagueMechanic mech : opt.get().map.getLeagueMechanics()) {
-                                mech.tryGenerate(level, cpos, ran);
-                            }
                             // this will gen both the league mechs and the dungeon if it runs after the league mechs gen
                             generateData(level, chunk, room);
 

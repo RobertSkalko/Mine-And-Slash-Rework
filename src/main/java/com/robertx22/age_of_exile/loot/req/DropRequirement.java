@@ -5,12 +5,16 @@ import com.robertx22.age_of_exile.database.data.league.LeagueMechanic;
 public class DropRequirement {
 
     private String league = "";
+    int req_lvl = 0;
 
     private DropRequirement() {
 
     }
 
-    public boolean canDropInLeague(LeagueMechanic m) {
+    public boolean canDropInLeague(LeagueMechanic m, int lvl) {
+        if (lvl < req_lvl) {
+            return false;
+        }
         if (league.isEmpty()) {
             return true;
         } else {
@@ -36,6 +40,11 @@ public class DropRequirement {
 
         public Builder setOnlyDropsInLeague(String le) {
             r.league = le;
+            return this;
+        }
+
+        public Builder setLevelReq(int lvl) {
+            r.req_lvl = lvl;
             return this;
         }
 

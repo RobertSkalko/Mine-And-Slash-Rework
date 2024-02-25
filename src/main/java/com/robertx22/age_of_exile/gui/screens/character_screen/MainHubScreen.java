@@ -235,6 +235,7 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
 
 
         leftButtons.add(new OpenInvGuiScreen(Words.Salvaging, "salvage", GuiInventoryGrids.ofSalvageConfig()));
+        leftButtons.add(new OpenInvGuiScreen(Words.Configs, "configs", GuiInventoryGrids.ofConfigs()));
 
 
         publicAddButton(new FavorButton(guiLeft + sizeX / 2 - FavorButton.FAVOR_BUTTON_SIZE_X / 2, guiTop - FavorButton.FAVOR_BUTTON_SIZE_Y));

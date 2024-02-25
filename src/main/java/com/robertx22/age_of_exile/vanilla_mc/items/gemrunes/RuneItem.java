@@ -83,8 +83,13 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
                             }
 
                             rune.g = RuneItem.this.type.id;
-                            rune.p = LuckyRandom.randomInt(0, 100, LuckyRandom.LuckyUnlucky.UNLUCKY, 5);
 
+                            int val = LuckyRandom.randomInt(0, 100, LuckyRandom.LuckyUnlucky.UNLUCKY, 5);
+
+                            if (val > rune.p) {
+                                rune.p = val;
+                            }
+                            
                             if (add) {
                                 gear.sockets.getSocketed().add(rune);
                             }

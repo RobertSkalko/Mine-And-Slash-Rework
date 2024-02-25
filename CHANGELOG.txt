@@ -77,3 +77,14 @@ I didn't intend for players to be hit in the face with super difficult maps but 
 - tried to fix magic shield being burnt by fast atking mobs
 - mobs now have 5 tick cooldown on their basic attacks, slimes should no longer 1 shot
 - on kill stuff should work now
+- added mob flat dmg bonus to server config and lowered the dmg from 8 to 5
+
+v.5.3.23
+- added a /mine_and_slash report map_problem command
+- fixed the missing crop stage requirement for all the crops and professions.. 
+- added config in main hub for cast fail msgs
+- removed auto pve server config, it's now a per player config in the main hub config section, if 2 players both have auto pve on, they will be automatically grouped, won't be able to damage each other etc.
+This is meant for players who don't want to mess with inviting to parties etc
+- fix harvest generation/tp issues
+- attempt fix double death xp loss etc
+- rune reroll now cant roll stat into lower value than it was before, roll away!

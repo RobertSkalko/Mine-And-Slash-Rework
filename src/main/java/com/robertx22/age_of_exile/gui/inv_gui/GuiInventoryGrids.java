@@ -1,8 +1,10 @@
 package com.robertx22.age_of_exile.gui.inv_gui;
 
+import com.robertx22.age_of_exile.capability.player.data.PlayerConfigData;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.GuiAction;
+import com.robertx22.age_of_exile.gui.inv_gui.actions.GuiConfigToggle;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.PickSpellAction;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellCastingData;
@@ -29,7 +31,7 @@ public class GuiInventoryGrids {
         return InvGuiGrid.ofList(list);
     }
 
-    
+
     public static InvGuiGrid ofSalvageConfig() {
         GuiAction.regenActionMap(); //  todo find better way of ensuring
 
@@ -54,5 +56,17 @@ public class GuiInventoryGrids {
         }
 
         return InvGuiGrid.ofYRowLists(lists);
+    }
+
+    public static InvGuiGrid ofConfigs() {
+        GuiAction.regenActionMap(); //  todo find better way of ensuring
+
+        List<GuiItemData> lists = new ArrayList<>();
+
+        lists.add(new GuiItemData(new GuiConfigToggle(PlayerConfigData.STOP_CAST_FAIL_MESSAGES)));
+        lists.add(new GuiItemData(new GuiConfigToggle(PlayerConfigData.AUTO_PVE)));
+
+
+        return InvGuiGrid.ofYRowLists(Arrays.asList(lists));
     }
 }

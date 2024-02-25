@@ -7,7 +7,6 @@ import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChestData;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.req.DropRequirement;
 import com.robertx22.age_of_exile.mechanics.harvest.HarvestItems;
-import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -16,7 +15,7 @@ public class HarvestGreenChest extends LootChest {
     @Override
     public ItemStack generateOne(LootChestData data) {
 
-        Currency currency = ExileDB.CurrencyItems().getFilterWrapped(x -> x.getDropReq().canDropInLeague(LeagueMechanics.HARVEST)).random();
+        Currency currency = ExileDB.CurrencyItems().getFilterWrapped(x -> x.getDropReq().canDropInLeague(LeagueMechanics.HARVEST, data.lvl)).random();
 
         return new ItemStack(currency.getCurrencyItem(), 1 + data.getRarity().item_tier);
     }

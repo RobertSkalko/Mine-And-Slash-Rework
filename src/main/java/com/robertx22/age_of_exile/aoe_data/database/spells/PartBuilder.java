@@ -35,7 +35,7 @@ public class PartBuilder {
         return c;
     }
 
-   
+
     public static ComponentPart exileEffect(String effect, Double duration) {
         ComponentPart c = new ComponentPart();
         c.acts.add(SpellAction.EXILE_EFFECT.create(effect, GiveOrTake.GIVE_STACKS, duration));
@@ -346,7 +346,7 @@ public class PartBuilder {
 
     public static ComponentPart selectSummons(Double radius) {
         ComponentPart c = new ComponentPart();
-        c.targets.add(BaseTargetSelector.AOE.create(radius, EntityFinder.SelectionType.RADIUS, AllyOrEnemy.pets));
+        c.targets.add(BaseTargetSelector.AOE.create(radius, EntityFinder.SelectionType.RADIUS, AllyOrEnemy.casters_summons));
         return c;
     }
 

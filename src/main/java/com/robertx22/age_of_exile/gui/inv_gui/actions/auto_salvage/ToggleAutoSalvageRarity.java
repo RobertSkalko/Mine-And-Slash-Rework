@@ -36,8 +36,6 @@ public class ToggleAutoSalvageRarity extends GuiAction {
             text = Gui.SALVAGE_TIP_ON.locName(rarity.locName(), type.word.locName()).withStyle(ChatFormatting.GREEN);
         } else {
             text = Gui.SALVAGE_TIP_OFF.locName(rarity.locName(), type.word.locName()).withStyle(ChatFormatting.RED);
-            ;
-
         }
 
         list.add(text);

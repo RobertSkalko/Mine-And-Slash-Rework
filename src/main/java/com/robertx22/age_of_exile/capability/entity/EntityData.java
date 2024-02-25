@@ -693,7 +693,7 @@ public class EntityData implements ICap, INeededForClient {
 
         float multi = (float) (ServerContainer.get().VANILLA_MOB_DMG_AS_EXILE_DMG.get().floatValue());
 
-        float num = (data.getAmount() * 0.33F) + 8;
+        float num = (data.getAmount() * 0.33F) + ServerContainer.get().MOB_FLAT_DAMAGE_BONUS.get().floatValue();
 
         num *= multi * rar.DamageMultiplier();
 

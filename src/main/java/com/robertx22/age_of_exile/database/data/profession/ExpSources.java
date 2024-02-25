@@ -18,6 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -35,7 +36,9 @@ public class ExpSources {
             map.put(tier.tier, new ArrayList<>());
         }
 
-        map.get(tier.tier).add(new ExpSource(type, exp, id));
+        map.get(tier.tier).add(new ExpSource(type, exp, id, Arrays.asList(req)));
+
+
     }
 
     public static class ExpSource {
@@ -43,11 +46,13 @@ public class ExpSources {
         public Type type;
         public int exp;
         public String id;
+        public List<String> req;
 
-        public ExpSource(Type type, int exp, String id) {
+        public ExpSource(Type type, int exp, String id, List<String> req) {
             this.type = type;
             this.exp = exp;
             this.id = id;
+            this.req = req;
         }
 
         public boolean matches(Object obj) {
@@ -84,7 +89,7 @@ public class ExpSources {
             if (this.map.containsKey(value.tier)) {
                 var opt = map.get(value.tier).stream().filter(x -> x.matches(obj)).findAny();
                 if (opt.isPresent()) {
-                    return new ExpData(opt.get().exp, value.tier);
+                    return new ExpData(opt.get().exp, value.tier, opt.get().req);
                 }
             }
         }
@@ -92,11 +97,11 @@ public class ExpSources {
     }
 
     public ExpData getDefaultExp() {
-        return new ExpData(50, 0);
+        return new ExpData(50, 0, new ArrayList<>());
     }
 
     public ExpData exp(int exp, int tier) {
-        return new ExpData(exp, tier);
+        return new ExpData(exp, tier, new ArrayList<>());
     }
 
     public class ExpData {
@@ -106,9 +111,10 @@ public class ExpSources {
         public int tier;
         public List<String> req = new ArrayList<>();
 
-        public ExpData(int exp, int tier) {
+        public ExpData(int exp, int tier, List<String> req) {
             this.exp = exp;
             this.tier = tier;
+            this.req = req;
         }
 
         public void levelTool(Player p, Profession pro, int xpgiven) {

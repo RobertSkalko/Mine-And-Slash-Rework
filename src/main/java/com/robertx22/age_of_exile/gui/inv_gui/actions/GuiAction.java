@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.gui.inv_gui.actions;
 
+import com.robertx22.age_of_exile.capability.player.data.PlayerConfigData;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -48,7 +49,7 @@ public abstract class GuiAction<T> implements IGUID {
 
             @Override
             public void clientAction(Player p, Object obj) {
-                
+
             }
 
             @Override
@@ -66,6 +67,9 @@ public abstract class GuiAction<T> implements IGUID {
 
     // do every time before constructing the gui, because we want to use datapack stuff and not care about when its loaded
     public static void regenActionMap() {
+
+        of(new GuiConfigToggle(PlayerConfigData.STOP_CAST_FAIL_MESSAGES));
+        of(new GuiConfigToggle(PlayerConfigData.AUTO_PVE));
 
         for (ToggleAutoSalvageRarity.SalvageType type : ToggleAutoSalvageRarity.SalvageType.values()) {
             for (GearRarity rar : ExileDB.GearRarities().getList()) {

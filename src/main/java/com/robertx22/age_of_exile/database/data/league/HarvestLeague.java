@@ -68,7 +68,7 @@ public class HarvestLeague extends LeagueMechanic {
 
     @Override
     public float chanceToSpawnMechanicAfterKillingMob() {
-        return 1;
+        return 100;
     }
 
     @Override

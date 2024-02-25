@@ -15,6 +15,7 @@ public class JewelBlueprint extends RarityItemBlueprint {
     public JewelBlueprint(LootInfo info) {
         super(info);
         this.rarity.chanceForHigherRarity = 50;
+        this.rarity.canRollUnique = false;
     }
 
     @Override

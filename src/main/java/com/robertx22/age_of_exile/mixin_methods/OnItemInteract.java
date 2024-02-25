@@ -92,6 +92,7 @@ public class OnItemInteract {
                         if (data != null && data.isArmor()) {
                             data.force_tag = force.tag;
                             data.saveToStack(craftedStack);
+                            currency.shrink(1);
 
                             return new Result(true).ding();
 
@@ -99,6 +100,7 @@ public class OnItemInteract {
                             if (craftedStack.getItem() instanceof CraftedSoulItem i) {
                                 if (i.getSoul(craftedStack) != null && i.getSoul(craftedStack).isArmor()) {
                                     craftedStack.getOrCreateTag().putString("force_tag", force.tag);
+                                    currency.shrink(1);
                                     return new Result(true).ding();
                                 }
                             }

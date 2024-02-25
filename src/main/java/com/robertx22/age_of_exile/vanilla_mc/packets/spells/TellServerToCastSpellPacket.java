@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.vanilla_mc.packets.spells;
 
+import com.robertx22.age_of_exile.capability.player.data.PlayerConfigData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.SpellCastContext;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -64,7 +65,9 @@ public class TellServerToCastSpellPacket extends MyPacket<TellServerToCastSpellP
                 if (!cds.isOnCooldown("spell_fail")) {
                     cds.setOnCooldown("spell_fail", 40);
                     if (can.answer != null) {
-                        player.sendSystemMessage(Chats.CAST_FAILED.locName().append(can.answer));
+                        if (!Load.player(player).config.isConfigEnabled(PlayerConfigData.STOP_CAST_FAIL_MESSAGES)) {
+                            player.sendSystemMessage(Chats.CAST_FAILED.locName().append(can.answer));
+                        }
                     }
                 }
             }

@@ -12,22 +12,28 @@ public class OnPlayerDeath extends EventConsumer<ExileEvents.OnPlayerDeath> {
     public void accept(ExileEvents.OnPlayerDeath event) {
         try {
 
-            Load.Unit(event.player).onDeath();
 
-            Load.Unit(event.player).setEquipsChanged();
+            var cd = Load.Unit(event.player).getCooldowns();
 
-            PlayerData data = Load.player(event.player);
+            if (!cd.isOnCooldown("death_event")) {
+                cd.setOnCooldown("death_event", 100);
+                
+                Load.Unit(event.player).onDeath();
 
-            data.rested_xp.onDeath();
+                Load.Unit(event.player).setEquipsChanged();
 
-            data.favor.onDeath(event.player);
+                PlayerData data = Load.player(event.player);
 
-            data.deathStats.died = true;
+                data.rested_xp.onDeath();
 
-            data.buff = new PlayerBuffData(); // we delete all the buff foods and potions on death, if in the future i want some buffs to persist across death, change this
+                data.favor.onDeath(event.player);
 
-            data.playerDataSync.setDirty();
+                data.deathStats.died = true;
 
+                data.buff = new PlayerBuffData(); // we delete all the buff foods and potions on death, if in the future i want some buffs to persist across death, change this
+
+                data.playerDataSync.setDirty();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

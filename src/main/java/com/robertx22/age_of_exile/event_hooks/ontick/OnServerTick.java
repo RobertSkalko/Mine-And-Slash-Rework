@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.event_hooks.ontick;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.capability.player.PlayerData;
+import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.maps.ProcessChunkBlocks;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -80,8 +81,10 @@ public class OnServerTick {
                         .getUnit()
                         .energyData()
                         .getValue() / 10) {
-                    player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 3, 2));
-                    player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 20 * 3, 2));
+                    if (ServerContainer.get().ENERGY_PENALTY.get()) {
+                        player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20 * 3, 2));
+                        player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 20 * 3, 2));
+                    }
                 }
 
                 UnequipGear.onTick(player);

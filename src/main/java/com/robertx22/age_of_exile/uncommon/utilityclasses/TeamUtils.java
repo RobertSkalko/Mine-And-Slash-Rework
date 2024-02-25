@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
+import com.robertx22.age_of_exile.capability.player.data.PlayerConfigData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.core.BlockPos;
@@ -68,10 +69,10 @@ public class TeamUtils {
         if (p1.distanceTo(p2) > ServerContainer.get().MAX_TEAM_DISTANCE.get()) {
             return false;
         }
-        if (ServerContainer.get().ALL_PLAYERS_ARE_TEAMED_PVE_MODE.get()) {
+
+        if (Load.player(p1).config.isConfigEnabled(PlayerConfigData.AUTO_PVE) && Load.player(p2).config.isConfigEnabled(PlayerConfigData.AUTO_PVE)) {
             return true;
         }
-
         if (Load.player(p1).team.isOnSameTeam(p2)) {
             return true;
         }

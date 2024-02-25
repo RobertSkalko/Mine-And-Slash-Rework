@@ -13,7 +13,18 @@ import java.util.HashMap;
 
 public class PlayerConfigData {
 
+    public static String STOP_CAST_FAIL_MESSAGES = "stop_cast_fail_messages";
+    public static String AUTO_PVE = "auto_pve";
+
     public AutoSalvage salvage = new AutoSalvage();
+
+
+    public HashMap<String, Boolean> configs = new HashMap<>();
+
+    public boolean isConfigEnabled(String id) {
+        return configs.getOrDefault(id, false);
+    }
+
 
     public class AutoSalvage {
 

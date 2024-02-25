@@ -1,10 +1,12 @@
 package com.robertx22.age_of_exile.database.data.currency.base;
 
+import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.BaseLocRequirement;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.MapBlueprint;
+import com.robertx22.age_of_exile.loot.req.DropRequirement;
 import com.robertx22.age_of_exile.maps.MapItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
@@ -32,6 +34,11 @@ public class MapRarityIncrease extends Currency {
 
         data.saveToStack(stack);
         return stack;
+    }
+
+    @Override
+    public DropRequirement getDropReq() {
+        return DropRequirement.Builder.of().setLevelReq(ServerContainer.get().MIN_LEVEL_MAP_DROPS.get()).build();
     }
 
     @Override
