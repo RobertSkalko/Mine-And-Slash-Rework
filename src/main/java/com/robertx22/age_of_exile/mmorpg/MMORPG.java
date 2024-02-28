@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.a_libraries.curios.CurioEvents;
 import com.robertx22.age_of_exile.a_libraries.neat.NeatForgeConfig;
 import com.robertx22.age_of_exile.aoe_data.GeneratedData;
 import com.robertx22.age_of_exile.aoe_data.database.boss_spell.BossSpells;
+import com.robertx22.age_of_exile.aoe_data.database.prophecies.ProphecyStarts;
 import com.robertx22.age_of_exile.aoe_data.database.stat_conditions.StatConditions;
 import com.robertx22.age_of_exile.aoe_data.database.stat_effects.StatEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
@@ -197,6 +198,8 @@ public class MMORPG {
         BossSpells.init();
         LeagueMechanics.init();
         LootChests.init();
+
+        new ProphecyStarts().registerAll();
 
         SlashCapabilities.register();
 

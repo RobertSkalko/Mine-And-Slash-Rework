@@ -15,6 +15,7 @@ import com.robertx22.age_of_exile.aoe_data.database.gems.Gems;
 import com.robertx22.age_of_exile.aoe_data.database.mob_affixes.MobAffixes;
 import com.robertx22.age_of_exile.aoe_data.database.mob_rarities.MobRarities;
 import com.robertx22.age_of_exile.aoe_data.database.perks.AllPerks;
+import com.robertx22.age_of_exile.aoe_data.database.prophecies.ProphecyModifiers;
 import com.robertx22.age_of_exile.aoe_data.database.runes.Runes;
 import com.robertx22.age_of_exile.aoe_data.database.runewords.Runewords;
 import com.robertx22.age_of_exile.aoe_data.database.spell_schools.SpellSchoolsAdder;
@@ -93,6 +94,8 @@ public class GeneratedData {
         MapAffixes.init();
         SupportGems.init();
         AuraGems.init();
+
+        new ProphecyModifiers().registerAll();
 
         GameBalanceConfig c = new GameBalanceConfig();
         c.addToSerializables();

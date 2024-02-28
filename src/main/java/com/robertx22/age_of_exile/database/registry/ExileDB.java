@@ -23,6 +23,8 @@ import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.profession.Profession;
 import com.robertx22.age_of_exile.database.data.profession.ProfessionRecipe;
 import com.robertx22.age_of_exile.database.data.profession.buffs.StatBuff;
+import com.robertx22.age_of_exile.database.data.prophecy.ProphecyModifier;
+import com.robertx22.age_of_exile.database.data.prophecy.ProphecyStart;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.runes.Rune;
@@ -158,6 +160,14 @@ public class ExileDB {
 
     public static ExileRegistryContainer<MobRarity> MobRarities() {
         return Database.getRegistry(ExileRegistryTypes.MOB_RARITY);
+    }
+
+    public static ExileRegistryContainer<ProphecyModifier> ProphecyModifiers() {
+        return Database.getRegistry(ExileRegistryTypes.PROPHECY_MODIFIER);
+    }
+
+    public static ExileRegistryContainer<ProphecyStart> ProphecyStarts() {
+        return Database.getRegistry(ExileRegistryTypes.PROPHECY_START);
     }
 
     public static ExileRegistryContainer<BaseGearType> GearTypes() {

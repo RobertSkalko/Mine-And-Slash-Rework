@@ -20,8 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PlayerStatUtils {
-    private static List<Integer> all;
-
+    
     public static List<StatContext> addToolStats(Player p) {
         ItemStack stack = p.getMainHandItem();
         if (StackSaving.TOOL.has(stack)) {

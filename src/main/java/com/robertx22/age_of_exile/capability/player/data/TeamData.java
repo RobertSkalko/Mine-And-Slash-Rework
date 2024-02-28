@@ -36,8 +36,7 @@ public class TeamData {
     }
 
     public void createTeam() {
-        this.team_id = UUID.randomUUID()
-                .toString();
+        this.team_id = UUID.randomUUID().toString();
         this.isLeader = true;
     }
 

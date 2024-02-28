@@ -122,21 +122,7 @@ public class LootInfo {
         return info;
     }
 
-    public static LootInfo ofLockedChestItem(Player player, int level) {
-        LootInfo info = new LootInfo(LootOrigin.LOOT_CRATE);
-        info.player = player;
-        info.world = player.level();
-        info.pos = player.blockPosition();
-        info.level = level;
-        info.multi = 5;
-        info.minItems = 3;
-        info.maxItems = 6;
-        info.setupAllFields();
-
-        info.isMapWorld = false;
-        return info;
-    }
-
+    
     public static LootInfo ofSpawner(Player player, Level world, BlockPos pos) {
         LootInfo info = new LootInfo(LootOrigin.OTHER);
         info.world = world;
@@ -163,7 +149,7 @@ public class LootInfo {
         if (map != null) {
             this.map_tier = map.map.tier;
         }
-        
+
 
         return this;
 

@@ -42,6 +42,8 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     public double HP_MOB_BONUS_PER_MAP_TIER = 0.1;
     public double DMG_MOB_BONUS_PER_MAP_TIER = 0.1;
 
+    public int PROPHECY_REROLL_COST = 500;
+
     public int PERCENT_OF_PHYS_AS_BONUS_OF_EACH_ELEMENT_DMG_FOR_MOBS = 20;
 
     public int MAX_BONUS_SPELL_LEVELS = 5;

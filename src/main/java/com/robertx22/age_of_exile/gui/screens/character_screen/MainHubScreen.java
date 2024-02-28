@@ -272,8 +272,7 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
     }
 
     private static final ResourceLocation BACKGROUND = new ResourceLocation(SlashRef.MODID, "textures/gui/stats.png");
-    private static final ResourceLocation WIDE_BACKGROUND = new ResourceLocation(SlashRef.MODID, "textures/gui/full_stats_panel.png");
-
+    
     @Override
     public void render(GuiGraphics gui, int x, int y, float ticks) {
 

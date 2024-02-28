@@ -102,6 +102,8 @@ public class ServerContainer {
         ITEM_LEVEL_VARIANCE = b.defineInRange("ITEM_LEVEL_VARIANCE", 3, 0, 100);
         MOB_LEVEL_VARIANCE = b.defineInRange("MOB_LEVEL_VARIANCE", 3, 0, 100);
 
+        PROPHECY_OFFERS_PER_REROLL = b.defineInRange("PROPHECY_OFFERS_PER_REROLL", 15, 1, 27);
+       
 
         MOB_MIN = b.defineInRange("mob_min", 1, 0, 20);
         MOB_MAX = b.defineInRange("mob_max", 2, 0, 20);
@@ -237,10 +239,13 @@ public class ServerContainer {
     public ForgeConfigSpec.IntValue PACK_MOB_MIN;
     public ForgeConfigSpec.IntValue PACK_MOB_MAX;
 
+
     public ForgeConfigSpec.IntValue MIN_MAP_ROOMS;
     public ForgeConfigSpec.IntValue MAX_MAP_ROOMS;
     public ForgeConfigSpec.IntValue MAP_GEN_TERRAIN_RADIUS;
     public ForgeConfigSpec.IntValue MAP_GEN_MOB_RADIUS;
+
+    public ForgeConfigSpec.IntValue PROPHECY_OFFERS_PER_REROLL;
 
     public ForgeConfigSpec.IntValue BONUS_EXP_PERCENT_PER_HIGHER_LVL_CHARACTERS;
 

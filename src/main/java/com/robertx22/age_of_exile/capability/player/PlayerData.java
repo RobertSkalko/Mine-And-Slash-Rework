@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.capability.player.helper.MyInventory;
 import com.robertx22.age_of_exile.characters.CharStorageData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.prophecy.PlayerProphecies;
 import com.robertx22.age_of_exile.saveclasses.DeathStatsData;
 import com.robertx22.age_of_exile.saveclasses.perks.TalentsData;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellCastingData;
@@ -67,6 +68,7 @@ public class PlayerData implements ICap {
 
 
     private static final String TEAM_DATA = "teams";
+    private static final String PROPHECY = "proph";
     private static final String TALENTS_DATA = "tals";
     private static final String STAT_POINTS = "stats";
     private static final String DEATH_STATS = "death";
@@ -95,6 +97,7 @@ public class PlayerData implements ICap {
     public DeathStatsData deathStats = new DeathStatsData();
     public PlayerMapData map = new PlayerMapData();
     public SpellSchoolsData ascClass = new SpellSchoolsData();
+    public PlayerProphecies prophecy = new PlayerProphecies();
     public SpellCastingData spellCastingData = new SpellCastingData();
     public PlayerConfigData config = new PlayerConfigData();
     public DeathFavorData favor = new DeathFavorData();
@@ -128,6 +131,7 @@ public class PlayerData implements ICap {
 
         LoadSave.Save(team, nbt, TEAM_DATA);
         LoadSave.Save(talents, nbt, TALENTS_DATA);
+        LoadSave.Save(prophecy, nbt, PROPHECY);
         LoadSave.Save(statPoints, nbt, STAT_POINTS);
         LoadSave.Save(deathStats, nbt, DEATH_STATS);
         LoadSave.Save(map, nbt, MAP);
@@ -154,6 +158,7 @@ public class PlayerData implements ICap {
     public void deserializeNBT(CompoundTag nbt) {
 
         this.team = loadOrBlank(TeamData.class, new TeamData(), nbt, TEAM_DATA, new TeamData());
+        this.prophecy = loadOrBlank(PlayerProphecies.class, new PlayerProphecies(), nbt, PROPHECY, new PlayerProphecies());
         this.talents = loadOrBlank(TalentsData.class, new TalentsData(), nbt, TALENTS_DATA, new TalentsData());
         this.statPoints = loadOrBlank(StatPointsData.class, new StatPointsData(), nbt, STAT_POINTS, new StatPointsData());
         this.deathStats = loadOrBlank(DeathStatsData.class, new DeathStatsData(), nbt, DEATH_STATS, new DeathStatsData());
