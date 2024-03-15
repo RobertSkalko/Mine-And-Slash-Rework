@@ -28,6 +28,7 @@ public class PetSpells implements ExileRegistryInit {
                 )
                 .weaponReq(CastingWeapon.ANY_WEAPON)
                 .onHit(PartBuilder.damage(SpellCalcs.PET_BASIC, Elements.Physical))
+                .isBasicAttack()
                 .levelReq(1)
                 .build();
 
@@ -39,6 +40,7 @@ public class PetSpells implements ExileRegistryInit {
                 )
                 .weaponReq(CastingWeapon.ANY_WEAPON)
                 .onHit(PartBuilder.damage(SpellCalcs.SPIDER_PET_BASIC, Elements.Chaos))
+                .isBasicAttack()
                 .levelReq(1)
                 .build();
     }

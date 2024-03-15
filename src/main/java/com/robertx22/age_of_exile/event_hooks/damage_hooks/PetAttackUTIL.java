@@ -25,6 +25,7 @@ public class PetAttackUTIL {
                 var ctx = new SpellCastContext(caster, 0, basic);
 
                 var originctx = new SpellCastContext(caster, 0, spell);
+                originctx.overrideIsBasicAttack(basic.isBasicAttack());
 
 
                 boolean cancast = false;

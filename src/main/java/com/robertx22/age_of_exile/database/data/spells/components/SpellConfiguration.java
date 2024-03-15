@@ -25,6 +25,7 @@ public class SpellConfiguration {
     public SummonType summonType = SummonType.NONE;
     public String charge_name = "";
     public String summon_basic_atk = PetSpells.PET_BASIC;
+    public boolean is_basic_attack = false;
     private int cast_time_ticks = 0;
     public int cooldown_ticks = 20;
     private String style = PlayStyle.STR.id;

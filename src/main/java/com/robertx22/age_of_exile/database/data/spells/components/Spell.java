@@ -482,4 +482,8 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     public PlayStyle getStyle() {
         return this.config.getStyle();
     }
+
+    public boolean isBasicAttack() {
+        return this.config.is_basic_attack;
+    }
 }

@@ -62,6 +62,8 @@ public class SpellStatsCalculationEvent extends EffectEvent {
         this.data.setupNumber(EventData.AREA_MULTI, 1);
 
         // todo test spells like summon duration multi etc
+
+        this.data.setBoolean(EventData.IS_BASIC_ATTACK, spell.config.is_basic_attack);
     }
 
 

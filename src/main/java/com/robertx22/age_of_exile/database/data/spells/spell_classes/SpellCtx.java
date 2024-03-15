@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.database.data.spells.components.EntityActivati
 import com.robertx22.age_of_exile.database.data.spells.components.actions.PositionSource;
 import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -26,6 +27,7 @@ public class SpellCtx {
     public final EntityActivation activation;
 
     public CalculatedSpellData calculatedSpellData;
+    public boolean isBasicAttack = false;
 
     public boolean isProc = false;
 
@@ -45,6 +47,12 @@ public class SpellCtx {
         return this;
     }
 
+    public SpellCtx setBasicAttack(boolean basicAttack) {
+        isBasicAttack = basicAttack;
+        this.calculatedSpellData.data.setBoolean(EventData.IS_BASIC_ATTACK, basicAttack);
+        return this;
+    }
+
     public BlockPos getBlockPos() {
         return positionSource.get(this).blockPosition();
     }
@@ -60,6 +68,7 @@ public class SpellCtx {
         this.calculatedSpellData = calculatedSpellData;
         this.world = caster.level();
         this.activation = act;
+        this.isBasicAttack = calculatedSpellData.data.getBoolean(EventData.IS_BASIC_ATTACK);
     }
 
     public static SpellCtx onCast(LivingEntity caster, CalculatedSpellData data) {

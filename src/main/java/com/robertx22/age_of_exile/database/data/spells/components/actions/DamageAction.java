@@ -59,7 +59,9 @@ public class DamageAction extends SpellAction {
                 if (ctx.isProc) {
                     dmg.data.setBoolean(EventData.IS_PROC, true);
                 }
-                
+
+                dmg.data.setBoolean(EventData.IS_BASIC_ATTACK, ctx.isBasicAttack);
+
                 dmg.setElement(ele);
                 dmg.Activate();
             }

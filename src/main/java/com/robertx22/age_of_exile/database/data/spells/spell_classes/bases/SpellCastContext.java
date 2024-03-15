@@ -25,6 +25,7 @@ public class SpellCastContext {
     public SpellStatsCalculationEvent event;
     public CalculatedSpellData calcData;
     public Unit unit;
+    public boolean isBasicAttack;
 
     public SpellCastContext(LivingEntity caster, int ticksInUse, Spell spell) {
         this.caster = caster;
@@ -34,6 +35,8 @@ public class SpellCastContext {
 
         Objects.requireNonNull(spell);
 
+
+        this.isBasicAttack = spell.config.is_basic_attack;
 
         this.event = new SpellStatsCalculationEvent(caster, spell.GUID());
 
@@ -55,5 +58,10 @@ public class SpellCastContext {
             this.unit = this.data.getUnit();
         }
 
+    }
+
+    public void overrideIsBasicAttack(boolean isBasicAttack) {
+        this.isBasicAttack = spell.config.is_basic_attack;
+        event.savedData.data.setBoolean(EventData.IS_BASIC_ATTACK, isBasicAttack);
     }
 }

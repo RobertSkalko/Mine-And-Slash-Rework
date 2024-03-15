@@ -214,4 +214,9 @@ public class SpellBuilder {
         Objects.requireNonNull(spell);
         return spell;
     }
+
+    public SpellBuilder isBasicAttack() {
+        this.spell.config.is_basic_attack = true;
+        return this;
+    }
 }
