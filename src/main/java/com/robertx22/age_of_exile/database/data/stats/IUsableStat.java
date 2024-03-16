@@ -35,14 +35,12 @@ public interface IUsableStat {
 
         if (this instanceof Stat) {
             Stat stat = (Stat) this;
+            value = Math.max(0, value);
 
-            float valNeededForMax = stat.scale(ModType.FLAT, valueNeededToReachMaximumPercentAtLevelOne(), lvl);
+            float maximumPossibleValue = stat.scale(ModType.FLAT, valueNeededToReachMaximumPercentAtLevelOne(), lvl);
 
-            float percOfMax = (float) value / valNeededForMax / (value / valNeededForMax + 1.5F);
-
-            if (percOfMax > 1) {
-                percOfMax = 1;
-            }
+            float percOfMax = (float) value / maximumPossibleValue / (value / maximumPossibleValue + 1.5F);
+            percOfMax = Math.min(1, percOfMax);
 
             return percOfMax * getMaxMulti();
 
