@@ -52,12 +52,7 @@ public class StatCalculation {
         unit.clearStats();
 
         List<StatContext> gemstats = new ArrayList<>();
-        ;
 
-        if (entity instanceof Player p) {
-            PlayerData playerData = Load.player(p);
-            gemstats.addAll(collectGemStats(p, data, playerData, skillGem));
-        }
 
         if (entity instanceof Player p) {
             PlayerData playerData = Load.player(p);

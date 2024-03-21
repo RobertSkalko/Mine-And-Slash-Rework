@@ -1,8 +1,10 @@
 package com.robertx22.age_of_exile.uncommon.enumclasses;
 
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,6 +47,8 @@ public class WeaponTypes {
     WeaponRange range;
     public String id;
     public boolean isProjectile;
+    public List<ResourceLocation> valid_proj_dmg_id = Arrays.asList(new ResourceLocation("testmodid", "name"));
+    public List<String> valid_proj_dmg_name = Arrays.asList("arrow", "bolt", "ammo", "bullet", "dart", "missile");
 
 
     public WeaponTypes setCanDualWield() {

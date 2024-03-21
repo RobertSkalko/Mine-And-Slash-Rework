@@ -3,6 +3,8 @@ package com.robertx22.age_of_exile.event_hooks.damage_hooks;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -26,11 +28,23 @@ public class RangedDamageUtil {
         Item item = en.getMainHandItem().getItem();
         GearItemData gear = StackSaving.GEARS.loadFrom(en.getMainHandItem());
 
+        var type = gear.GetBaseGearType();
 
-        if (gear != null && gear.GetBaseGearType().weaponType().isProjectile) {
-            if (!VALID_PROJECTILE_NAMES.stream().anyMatch(x -> source.getMsgId().contains(x))) {
-                return false; // if a ranged weapon's damage entity isn't an arrow or similar, don't do damage
+        if (gear != null && type.weaponType().isProjectile) {
+
+            var dmgid = en.level().registryAccess().registry(Registries.DAMAGE_TYPE).get().getKey(source.type());
+
+            for (ResourceLocation id : type.weapon_type.valid_proj_dmg_id) {
+                if (id.equals(dmgid)) {
+                    return true;
+                }
             }
+            for (String name : type.weapon_type.valid_proj_dmg_name) {
+                if (source.getMsgId().contains(name)) {
+                    return true;
+                }
+            }
+            return false;
         } else {
 
             // todo what
