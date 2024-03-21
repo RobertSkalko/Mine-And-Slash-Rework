@@ -101,6 +101,15 @@ public class CommonEvents {
             }
         });
 
+        ForgeEvents.registerForgeEvent(TickEvent.PlayerTickEvent.class, event -> {
+            if (!event.player.level().isClientSide) {
+                var data = Load.player(event.player).prophecy;
+                if (data.canTakeOffers() && data.offers.isEmpty()) {
+                    data.regenerateNewOffers(event.player);
+                }
+            }
+        });
+
         // instant bows
 
 

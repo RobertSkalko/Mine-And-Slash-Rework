@@ -5,7 +5,9 @@ import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceC
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
+import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -26,6 +28,10 @@ public class PlayerProphecies {
 
     public float progress = 0;
 
+    public boolean canTakeOffers() {
+        return canClaim();
+    }
+
     public int favor = 0;
 
     public boolean canClaim() {
@@ -41,9 +47,9 @@ public class PlayerProphecies {
     }
 
 
-    public void onLoginRegenIfEmpty() {
+    public void onLoginRegenIfEmpty(Player p) {
         if (offers.isEmpty() && taken.isEmpty()) {
-            this.regenerateNewOffers();
+            this.regenerateNewOffers(p);
         }
     }
 
@@ -71,23 +77,27 @@ public class PlayerProphecies {
         return GameBalanceConfig.get().PROPHECY_REROLL_COST;
     }
 
-    public void regenerateNewOffers() {
+    public void regenerateNewOffers(Player p) {
 
         offers = new ArrayList<>();
 
         for (int i = 0; i < ServerContainer.get().PROPHECY_OFFERS_PER_REROLL.get(); i++) {
-            offers.add(ProphecyGeneration.generate());
+            offers.add(ProphecyGeneration.generate(p));
         }
 
     }
 
     public void onBarFinishGiveRewards(Player p) {
+
         for (ProphecyData data : taken) {
             for (ItemStack stack : data.generateRewards(p)) {
                 PlayerUtils.giveItem(stack, p);
             }
         }
-        regenerateNewOffers();
+
+        this.offers = new ArrayList<>();
+
+        this.taken = new ArrayList<>();
 
         this.progress = 0;
     }
@@ -99,16 +109,23 @@ public class PlayerProphecies {
             return;
         }
 
+        if (!this.canTakeOffers()) {
+            p.sendSystemMessage(Chats.YOU_NEED_FULL_BAR_TO_TAKE_PROPHECY.locName().withStyle(ChatFormatting.RED));
+            return;
+        }
+
 
         ProphecyData data = offers.stream().filter(x -> x.uuid.equals(uuid)).findAny().get();
 
         if (data != null) {
-            
+
             if (favor < data.cost) {
                 p.sendSystemMessage(Chats.NOT_ENOUGH_FAVOR_TO_BUY_PROPHECY.locName().withStyle(ChatFormatting.RED));
                 return;
             }
 
+
+            SoundUtils.playSound(p, SoundEvents.EXPERIENCE_ORB_PICKUP);
 
             offers.removeIf(x -> x.uuid.equals(data.uuid)); // todo check if this works
             taken.add(data);
