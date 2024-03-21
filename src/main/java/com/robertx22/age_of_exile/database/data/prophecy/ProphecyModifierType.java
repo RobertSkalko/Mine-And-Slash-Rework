@@ -4,10 +4,17 @@ import com.robertx22.age_of_exile.database.data.prophecy.starts.GearProphecy;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 import com.robertx22.age_of_exile.loot.blueprints.ItemBlueprint;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.MutableComponent;
 
 public enum ProphecyModifierType {
 
     GEAR_TYPE() {
+        @Override
+        public MutableComponent getTooltip(String data) {
+            return ExileDB.GearTypes().get(data).locName().withStyle(ChatFormatting.WHITE);
+        }
+
         @Override
         public float chanceToSpawn() {
             return 15;
@@ -27,6 +34,12 @@ public enum ProphecyModifierType {
     },
     GEAR_RARITY() {
         @Override
+        public MutableComponent getTooltip(String data) {
+            var rar = ExileDB.GearRarities().get(data);
+            return rar.locName().withStyle(rar.textFormatting());
+        }
+
+        @Override
         public float chanceToSpawn() {
             return 75;
         }
@@ -43,6 +56,9 @@ public enum ProphecyModifierType {
             return start instanceof GearProphecy;
         }
     };
+
+
+    public abstract MutableComponent getTooltip(String data);
 
     public abstract float chanceToSpawn();
 

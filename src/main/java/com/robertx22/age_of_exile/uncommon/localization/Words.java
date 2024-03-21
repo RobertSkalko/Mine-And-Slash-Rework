@@ -8,6 +8,11 @@ import java.util.Locale;
 // to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
     LOAD("Load"),
+    CLAIM("Claim"),
+    X_ITEMS("Reward Amount: %1$s"),
+    COSTS_FAVOR("Costs %1$ss Favor"),
+    PROPHECIES("Prophecies"),
+    CURRENTLY_SELECTED("Currently Selected"),
     Configs("Configs"),
     POSSIBLE_DROS("Possible Gear Drops:"),
     CAN_UPGRADE_MAP_RARITY("Can Upgrade Map Rarity\nThis Depends on Map level"),
@@ -45,7 +50,7 @@ public enum Words implements IAutoLocName {
     SUPPGEM("Support Gem"),
     AURA("Aura"),
     MAJOR("Major"),
-    WIKI("Wiki"),
+    WIKI("Library"),
     LESSER("Lesser"),
     MEDIUM("Medium"),
     GREATER("Greater"),

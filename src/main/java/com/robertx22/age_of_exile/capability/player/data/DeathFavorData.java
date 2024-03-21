@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
@@ -49,6 +50,8 @@ public class DeathFavorData {
 
     public void onLootChest(Player p) {
         set(p, favor + ServerContainer.get().FAVOR_CHEST_GAIN.get().floatValue());
+
+        Load.player(p).prophecy.favor += ServerContainer.get().FAVOR_CHEST_GAIN.get();
     }
 
     public GearRarity getRarity() {
@@ -56,7 +59,7 @@ public class DeathFavorData {
         while (rar.hasHigherRarity() && favor >= rar.getHigherRarity().favor_needed) {
             rar = rar.getHigherRarity();
         }
-        
+
         return rar;
     }
 

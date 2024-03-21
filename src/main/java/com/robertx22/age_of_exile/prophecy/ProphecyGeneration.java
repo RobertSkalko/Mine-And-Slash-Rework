@@ -6,6 +6,7 @@ import com.robertx22.library_of_exile.utils.RandomUtils;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class ProphecyGeneration {
 
@@ -18,6 +19,8 @@ public class ProphecyGeneration {
         List<ProphecyModifierType> modtypes = Arrays.stream(ProphecyModifierType.values()).toList();
 
         ProphecyData data = new ProphecyData();
+        data.uuid = UUID.randomUUID().toString();
+        
         data.amount = RandomUtils.RandomRange(1, 3);
 
         cost *= data.amount;
@@ -25,6 +28,7 @@ public class ProphecyGeneration {
         var start = ExileDB.ProphecyStarts().random();
 
         data.start = start.GUID();
+
 
         for (ProphecyModifierType type : modtypes) {
             if (RandomUtils.roll(type.chanceToSpawn())) {

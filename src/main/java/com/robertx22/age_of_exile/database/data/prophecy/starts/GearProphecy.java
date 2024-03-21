@@ -23,4 +23,9 @@ public class GearProphecy extends ProphecyStart {
     public int Weight() {
         return 1000;
     }
+
+    @Override
+    public String locNameForLangFile() {
+        return "Gear Prophecy";
+    }
 }

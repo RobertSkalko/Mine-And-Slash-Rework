@@ -14,6 +14,8 @@ public interface IBaseAutoLoc extends IGUID {
         Runes,
         StatusEffects,
         StatPriority,
+        PROPHECY,
+
         Unique_Items,
         Spells,
         Gear_Items,

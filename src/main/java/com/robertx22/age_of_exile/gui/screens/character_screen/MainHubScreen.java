@@ -36,6 +36,7 @@ import com.robertx22.age_of_exile.gui.screens.skill_tree.TalentsScreen;
 import com.robertx22.age_of_exile.gui.screens.spell.SpellSchoolScreen;
 import com.robertx22.age_of_exile.gui.wiki.BestiaryScreen;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.prophecy.gui.ProphecyScreen;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
@@ -227,6 +228,7 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
         rightButtons.add(new OpenSkillGems());
         rightButtons.add(new TalentsScreen());
         rightButtons.add(new OpenJewelsScreen());
+        rightButtons.add(new ProphecyScreen());
 
         List<INamedScreen> leftButtons = new ArrayList<>();
 
@@ -272,7 +274,7 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
     }
 
     private static final ResourceLocation BACKGROUND = new ResourceLocation(SlashRef.MODID, "textures/gui/stats.png");
-    
+
     @Override
     public void render(GuiGraphics gui, int x, int y, float ticks) {
 

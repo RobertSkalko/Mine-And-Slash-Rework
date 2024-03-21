@@ -6,7 +6,9 @@ import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
+    YOU_CANT_TAKE_ANY_MORE_PROPHECIES("You have accepted the maximum amount of Prophecies"),
     ALT_TO_SHOW_OTHER_SPELL("[Alt] to show the other Spell"),
+    NOT_ENOUGH_FAVOR_TO_BUY_PROPHECY("Not enough Favor to buy the Prophecy. You can gain more Favor Currency by looting new Chests."),
     RESISTS_TOO_LOW_FOR_MAP("You lack Resistances to Open/Enter this Map."),
     MAX_MAP_RARITY_FOR_LVL("This map is at maximum possible rarity for it's level."),
     MAX_MAP_RARITY("This map is at maximum possible rarity."),

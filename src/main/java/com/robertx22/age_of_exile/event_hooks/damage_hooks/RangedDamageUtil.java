@@ -28,6 +28,10 @@ public class RangedDamageUtil {
         Item item = en.getMainHandItem().getItem();
         GearItemData gear = StackSaving.GEARS.loadFrom(en.getMainHandItem());
 
+        if (gear == null) {
+            return false;
+        }
+
         var type = gear.GetBaseGearType();
 
         if (gear != null && type.weaponType().isProjectile) {

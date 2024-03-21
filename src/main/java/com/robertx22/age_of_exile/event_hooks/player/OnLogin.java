@@ -40,7 +40,10 @@ public class OnLogin {
 
             data.sync.setDirty();
 
+            Load.player(player).prophecy.onLoginRegenIfEmpty();
+
             Load.player(player).playerDataSync.setDirty();
+
 
         } catch (
                 Exception e) {

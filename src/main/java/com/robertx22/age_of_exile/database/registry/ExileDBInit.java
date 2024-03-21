@@ -79,6 +79,8 @@ public class ExileDBInit {
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.AUTO_ITEM, ""));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.CUSTOM_ITEM, ""));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.MOB_RARITY, IRarity.COMMON_ID));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.PROPHECY_MODIFIER, ""));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.PROPHECY_START, ""));
 
     }
 }
