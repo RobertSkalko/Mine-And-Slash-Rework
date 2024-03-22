@@ -134,7 +134,7 @@ public class GearTooltipUtils {
         tip.add(Component.literal(""));
 
         MutableComponent lvl = TooltipUtils.gearLevel(gear.lvl, Load.Unit(info.player).getLevel());
-        int potential = (int) Math.round((gear.getPotential().multi + gear.getAdditionalPotentialMultiFromQuality()) * 100F);
+        int potential = (int) gear.getPotentialNumber();
 
         tip.add(lvl);
         TooltipUtils.addRequirements(tip, gear.getLevel(), gear.getRequirement(), Load.Unit(info.player));
@@ -144,7 +144,7 @@ public class GearTooltipUtils {
         tip.add(TooltipUtils.gearRarity(gear.getRarity()));
 
 
-        tip.add(Itemtips.POTENTIAL.locName(potential).withStyle(gear.getPotentialColor()));
+        tip.add(Itemtips.POTENTIAL.locName(potential).withStyle(ChatFormatting.YELLOW));
 
         if (gear.getQuality() > 0) {
             tip.add(Itemtips.QUALITY.locName(gear.getQuality()).withStyle(gear.getQualityType().color));

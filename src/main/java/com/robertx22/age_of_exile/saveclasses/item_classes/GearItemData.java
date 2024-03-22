@@ -15,6 +15,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.*;
 import com.robertx22.age_of_exile.saveclasses.item_classes.rework.DataKey;
 import com.robertx22.age_of_exile.saveclasses.item_classes.rework.DataKeyHolder;
 import com.robertx22.age_of_exile.saveclasses.item_classes.rework.GenericDataHolder;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
@@ -78,7 +79,6 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     public String gtype = "";
 
     // potential
-    private String pot = IRarity.COMMON_ID;
     // potential number
     private int pn = 0;
     // salvagable
@@ -178,44 +178,9 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         return pn;
     }
 
-    public GearRarity.Potential getPotential() {
-        return ExileDB.GearRarities().get(pot).pot;
-    }
-
-
-    public float getAdditionalPotentialMultiFromQuality() {
-        if (getQualityType() != GearQualityType.POT) {
-            return 0;
-        }
-        return getQuality() / 100F;
-    }
-
-
-    public ChatFormatting getPotentialColor() {
-        return ExileDB.GearRarities().get(pot).textFormatting();
-    }
-
-    public void setPotentialRarity(GearRarity rar) {
-        this.pot = rar.GUID();
-    }
 
     public void setPotential(int potential) {
-        this.pn = potential;
-        if (pn < 0) {
-            var lower = ExileDB.GearRarities().getFilterWrapped(x -> x.getHigherRarity() == ExileDB.GearRarities().get(pot)).list;
-            if (this.isUnique()) {
-                if (lower.isEmpty()) {
-                    lower = Arrays.asList(ExileDB.GearRarities().get(IRarity.COMMON_ID));
-                }
-            }
-            if (!lower.isEmpty()) {
-                GearRarity newrar = lower.get(0);
-                this.pn = newrar.pot.total;
-                this.pot = newrar.GUID();
-            } else {
-                pn = 0;
-            }
-        }
+        this.pn = MathHelper.clamp(potential, 0, 1000000);
     }
 
     public GearItemEnum getGearEnum() {

@@ -77,7 +77,7 @@ public class OrbAffixUpgrade extends GearCurrency {
 
     @Override
     public int getPotentialLoss() {
-        return 20;
+        return 5;
     }
 
     @Override

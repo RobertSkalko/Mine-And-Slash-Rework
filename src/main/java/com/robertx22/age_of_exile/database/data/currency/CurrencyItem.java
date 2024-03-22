@@ -38,7 +38,7 @@ public class CurrencyItem extends Item implements IItemAsCurrency, IAutoLocName,
 
         if (effect instanceof GearCurrency g) {
             for (GearOutcome o : g.getOutcomes()) {
-                tooltip.add(o.getTooltip());
+                tooltip.add(o.getTooltip(g.getOutcomes().stream().mapToInt(x -> x.Weight()).sum()));
             }
         }
 
@@ -52,7 +52,7 @@ public class CurrencyItem extends Item implements IItemAsCurrency, IAutoLocName,
 
 
         if (effect instanceof GearCurrency gc) {
-            if (gc.isPotentialConsumer()) {
+            if (gc.spendsGearPotential()) {
                 tooltip.add(Words.POTENTIAL_COST.locName(gc.getPotentialLoss()));
             } else {
                 tooltip.add(Words.NOT_A_POTENTIAL_CONSUMER.locName());

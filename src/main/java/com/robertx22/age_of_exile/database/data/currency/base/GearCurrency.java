@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.database.data.currency.base;
 
-import com.robertx22.age_of_exile.database.Weighted;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.BaseLocRequirement;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
@@ -13,7 +12,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,14 +23,15 @@ public abstract class GearCurrency extends Currency {
 
     public abstract int getPotentialLoss();
 
-    public boolean isPotentialConsumer() {
+    public boolean spendsGearPotential() {
         return getPotentialLoss() > 0;
     }
 
     @Override
     public ItemStack internalModifyMethod(LocReqContext ctx, ItemStack stack, ItemStack currency) {
         GearItemData data = StackSaving.GEARS.loadFrom(stack);
-        GearOutcome outcome = getOutcome(data.getPotential().multi + data.getAdditionalPotentialMultiFromQuality());
+
+        GearOutcome outcome = getOutcome();
         data.setPotential(data.getPotentialNumber() - getPotentialLoss());
 
         Player player = ctx.player;
@@ -46,32 +45,25 @@ public abstract class GearCurrency extends Currency {
         return outcome.modify(ctx, data, stack);
     }
 
-    private GearOutcome getOutcome(float multi) {
-
-        List<Weighted<GearOutcome>> list = new ArrayList<>();
-
-        for (GearOutcome o : getOutcomes()) {
-            int w = o.Weight();
-
-            if (isPotentialConsumer()) {
-                if (o.getOutcomeType() == GearOutcome.OutcomeType.GOOD) {
-                    w *= multi;
-                }
-            }
-            list.add(new Weighted<>(o, w));
-        }
-
-
-        return RandomUtils.weightedRandom(list).obj;
-
+    private GearOutcome getOutcome() {
+        return RandomUtils.weightedRandom(getOutcomes());
     }
 
     @Override
     public ExplainedResult canItemBeModified(LocReqContext context) {
         GearItemData data = StackSaving.GEARS.loadFrom(context.stack);
+
+
         if (data == null) {
             return ExplainedResult.failure(Chats.NOT_GEAR.locName());
         }
+
+        if (data.getPotentialNumber() < 1) {
+            if (this.spendsGearPotential()) {
+                return ExplainedResult.failure(Chats.GEAR_NO_POTENTIAL.locName());
+            }
+        }
+
         var can = canBeModified(data);
         if (!can.can) {
             return can;

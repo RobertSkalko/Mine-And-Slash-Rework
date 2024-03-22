@@ -92,6 +92,11 @@ This is meant for players who don't want to mess with inviting to parties etc
 which should hopefully reduce the amount of complaints about one shots. 
 Maps that have elemental mob damage affixes require higher resists
 If there's some unique way to mitigate elemental damage in the future, like a stat that reduces say Fire damage received by 90%, i'll have to include to allow it to bypass the requirement system.
+- making a bigger runeword on top of a smaller one now overwites the smaller one
+- simplified Currencies and item potential. It now acts as the opposite of instability in earlier versions.
+Now your item starts with say 100 potential and you spend potential to use currencies on the item, at 0 potential, you can't use any more currencies on the item.
+The system was too confusing and nobody knew what it was. It was meant to be a less restrictive system that just reduced your chances of good outcomes the more you crafted but, 
+I decided to just go back to the old system where you either can or can't craft an item anymore.
 
 New Feature, Prophecies:
 

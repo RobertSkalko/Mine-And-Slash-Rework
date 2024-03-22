@@ -70,7 +70,7 @@ public class OrbSocketAdder extends GearCurrency {
 
     @Override
     public int getPotentialLoss() {
-        return 20;
+        return 10;
     }
 
     @Override

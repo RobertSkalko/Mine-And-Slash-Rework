@@ -23,7 +23,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.weight = 5000;
             x.item_tier_power = 1;
             x.item_tier = 0;
-            x.pot = new GearRarity.Potential(100, 0.5F);
+            x.pot = new GearRarity.Potential(5);
             x.item_value_multi = 1;
             x.item_model_data_num = 1;
             x.sockets = new MinMax(0, 0);
@@ -43,7 +43,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.favor_needed = 50;
             x.sockets = new MinMax(0, 1);
             x.max_spell_links = 2;
-            x.pot = new GearRarity.Potential(100, 1);
+            x.pot = new GearRarity.Potential(10);
             x.min_affixes = 2;
             x.weight = 2000;
             x.item_tier = 1;
@@ -70,7 +70,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.max_spell_links = 3;
             x.min_lvl = 10;
             x.lootable_gear_tier = GearRarity.LootableGearTier.MID;
-            x.pot = new GearRarity.Potential(100, 1.5F);
+            x.pot = new GearRarity.Potential(25);
             x.item_tier = 2;
             x.item_model_data_num = 3;
             x.min_affixes = 3;
@@ -98,7 +98,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.max_spell_links = 4;
             x.min_map_rarity_to_drop = IRarity.UNCOMMON;
             x.lootable_gear_tier = GearRarity.LootableGearTier.MID;
-            x.pot = new GearRarity.Potential(100, 1.5F);
+            x.pot = new GearRarity.Potential(50);
             x.min_affixes = 4;
             x.weight = 100;
             x.item_tier = 3;
@@ -126,7 +126,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.min_lvl = 50;
             x.min_map_rarity_to_drop = IRarity.RARE_ID;
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
-            x.pot = new GearRarity.Potential(100, 1.75F);
+            x.pot = new GearRarity.Potential(75);
             x.min_affixes = 5;
             x.weight = 50;
             x.item_tier = 4;
@@ -156,7 +156,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.min_map_rarity_to_drop = IRarity.EPIC_ID;
             x.max_spell_links = 5;
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
-            x.pot = new GearRarity.Potential(100, 2F);
+            x.pot = new GearRarity.Potential(100);
             x.min_affixes = 6;
             x.weight = 25;
             x.item_tier = 5;
@@ -173,7 +173,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.map_resist_req = 50;
 
             x.sockets = new MinMax(1, 3);
-            x.pot = new GearRarity.Potential(100, 1);
+            x.pot = new GearRarity.Potential(50);
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
             x.min_affixes = 0;
             x.weight = 25;
@@ -193,7 +193,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
             x.sockets = new MinMax(2, 6);
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
-            x.pot = new GearRarity.Potential(100, 1);
+            x.pot = new GearRarity.Potential(25);
             x.min_affixes = 0;
             x.weight = 150;
             x.min_map_rarity_to_drop = IRarity.COMMON_ID;

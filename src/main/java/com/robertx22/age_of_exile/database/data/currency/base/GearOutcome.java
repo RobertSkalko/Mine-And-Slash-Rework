@@ -21,8 +21,10 @@ public abstract class GearOutcome implements IWeighted {
     public abstract ItemStack modify(LocReqContext ctx, GearItemData gear, ItemStack stack);
 
 
-    public MutableComponent getTooltip() {
-        return Itemtips.OUTCOME_TIP.locName(getName().locName(), Weight());
+    public MutableComponent getTooltip(int totalweight) {
+        int chance = (int) ((float) Weight() / (float) totalweight * 100F);
+
+        return Itemtips.OUTCOME_TIP.locName(getName().locName(), chance);
     }
 
 }

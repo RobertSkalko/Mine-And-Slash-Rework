@@ -71,7 +71,7 @@ public class OrbUniqueReroll extends GearCurrency {
 
     @Override
     public int getPotentialLoss() {
-        return 50;
+        return 5;
     }
 
     @Override

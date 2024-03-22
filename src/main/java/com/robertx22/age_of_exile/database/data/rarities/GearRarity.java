@@ -47,7 +47,7 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     public LootableGearTier lootable_gear_tier = LootableGearTier.LOW;
     public int item_model_data_num = -1;
     public MinMax stat_percents = new MinMax(0, 0);
-    public Potential pot = new Potential(100, 0.5F);
+    public Potential pot = new Potential(100);
     public int min_affixes = 0;
     public MinMax sockets = new MinMax(0, 2);
     public int item_tier = -1;
@@ -99,11 +99,9 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
 
     public static class Potential {
         public int total;
-        public float multi;
 
-        public Potential(int total, float multi) {
+        public Potential(int total) {
             this.total = total;
-            this.multi = multi;
         }
     }
 

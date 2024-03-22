@@ -39,6 +39,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import static com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils.splitLongText;
@@ -89,15 +90,20 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
                             if (val > rune.p) {
                                 rune.p = val;
                             }
-                            
+
                             if (add) {
                                 gear.sockets.getSocketed().add(rune);
                             }
 
-                            if (!gear.sockets.hasRuneWord()) {
+                            if (true || !gear.sockets.hasRuneWord()) {
                                 var list = ExileDB.RuneWords().getFilterWrapped(x -> x.canApplyOnItem(stack) && x.hasMatchingRunesToCreate(gear)).list;
                                 if (!list.isEmpty()) {
-                                    gear.sockets.setRuneword(list.get(0));
+                                    var biggest = list.stream().max(Comparator.comparingInt(x -> x.runes.size())).get();
+
+                                    var current = gear.sockets.getRuneWord();
+                                    if (current == null || biggest.runes.size() > current.runes.size()) {
+                                        gear.sockets.setRuneword(biggest);
+                                    }
                                 }
                             }
 
