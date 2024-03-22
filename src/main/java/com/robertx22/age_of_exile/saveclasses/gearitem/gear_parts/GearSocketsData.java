@@ -86,7 +86,6 @@ public class GearSocketsData implements IStatsContainer, IGearPartTooltip {
 
     public ExplainedResult canAddSocket(GearItemData gear) {
 
-
         if (sl < gear.getRarity().sockets.max) {
             return ExplainedResult.success();
         }

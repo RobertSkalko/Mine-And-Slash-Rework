@@ -53,7 +53,7 @@ public class PlayerProphecies {
         }
     }
 
-    public void onKillMobInMap(LivingEntity en) {
+    public void onKillMobInMap(Player p, LivingEntity en) {
 
         int tier = Load.mapAt(en.level(), en.blockPosition()).map.tier;
 
@@ -66,10 +66,13 @@ public class PlayerProphecies {
         lvlsAdded++;
         tiersAdded++;
 
-        progress += GameBalanceConfig.get().PROPHECY_PROGRESS_PER_MOB_KILL;
+        if (progress < 100) {
+            progress += GameBalanceConfig.get().PROPHECY_PROGRESS_PER_MOB_KILL;
 
-        if (progress > 100) {
-            progress = 100;
+            if (progress >= 100) {
+                progress = 100;
+                p.sendSystemMessage(Chats.PROPHECY_BAR_FILLED.locName().withStyle(ChatFormatting.LIGHT_PURPLE));
+            }
         }
     }
 

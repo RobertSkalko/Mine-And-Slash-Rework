@@ -18,6 +18,7 @@ public class Affix implements IWeighted, IGUID, IAutoLocName, IhasRequirements,
         prefix,
         suffix,
         enchant,
+        chaos_stat,
         tool,
         jewel,
         implicit;
@@ -30,15 +31,6 @@ public class Affix implements IWeighted, IGUID, IAutoLocName, IhasRequirements,
             return this == suffix;
         }
 
-        public Type getOpposite() {
-            if (this.isPrefix()) {
-                return suffix;
-            }
-            if (this.isSuffix()) {
-                return prefix;
-            }
-            return null;
-        }
     }
 
     public String guid;
