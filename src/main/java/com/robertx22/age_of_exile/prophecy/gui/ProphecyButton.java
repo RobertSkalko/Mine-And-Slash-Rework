@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.prophecy.AcceptProphecyPacket;
 import com.robertx22.age_of_exile.prophecy.ProphecyData;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.TextUTIL;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Tooltip;
@@ -21,6 +22,7 @@ public class ProphecyButton extends ImageButton {
         super(x, y, 16, 16, 0, 0, 1, ID, (action) -> {
             if (canTake) {
                 Packets.sendToServer(new AcceptProphecyPacket(data.uuid));
+                Minecraft.getInstance().setScreen(null);
             }
         });
         this.data = data;

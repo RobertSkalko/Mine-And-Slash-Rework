@@ -824,6 +824,15 @@
 "_comment": " [CATEGORY]: GUI - NAMES",
 
 
+"_comment": " [CATEGORY]: FOODS - NAMES",
+
+	"mmorpg.buff_consumption.meal": "Meal",
+	"mmorpg.buff_consumption.potion": "Potion",
+	"mmorpg.buff_consumption.seafood": "Seafood",
+
+"_comment": " [CATEGORY]: FOODS - NAMES",
+
+
 "_comment": " [CATEGORY]: RUNE WORDS - NAMES",
 
 	"mmorpg.runeword.abyssal_depths": "Abyssal Depths",
@@ -834,15 +843,6 @@
 	"mmorpg.runeword.the_novice": "The Novice",
 
 "_comment": " [CATEGORY]: RUNE WORDS - NAMES",
-
-
-"_comment": " [CATEGORY]: FOODS - NAMES",
-
-	"mmorpg.buff_consumption.meal": "Meal",
-	"mmorpg.buff_consumption.potion": "Potion",
-	"mmorpg.buff_consumption.seafood": "Seafood",
-
-"_comment": " [CATEGORY]: FOODS - NAMES",
 
 
 "_comment": " [CATEGORY]: RARITIES - NAMES",
@@ -871,6 +871,54 @@
 	"mmorpg.prophecy_start.gear": "Gear Prophecy",
 
 "_comment": " [CATEGORY]: PROPHECY - NAMES",
+
+
+"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
+
+	"mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
+	"item.mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
+	"item.mmorpg.currency.entangled_affix_upgrade": "Entangled Orb of Imbalance",
+	"mmorpg.currency.entangled_affix_upgrade": "Entangled Orb of Imbalance",
+	"mmorpg.currency.entangled_quality": "Entangled Orb of Quality",
+	"item.mmorpg.currency.entangled_quality": "Entangled Orb of Quality",
+	"mmorpg.currency.entangled_unique_reroll": "Entangled Orb of Imperfection",
+	"item.mmorpg.currency.entangled_unique_reroll": "Entangled Orb of Imperfection",
+	"item.mmorpg.currency.level_up_orb": "Orb of Infinity",
+	"mmorpg.currency.level_up_orb": "Orb of Infinity",
+	"item.mmorpg.currency.map_rarity_upgrade": "Map Rarity Upgrade Orb",
+	"mmorpg.currency.map_rarity_upgrade": "Map Rarity Upgrade Orb",
+	"item.mmorpg.currency.mastery_seal0": "Spiritual Mastery Seal",
+	"mmorpg.currency.mastery_seal0": "Spiritual Mastery Seal",
+	"item.mmorpg.currency.mastery_seal1": "Celestial Mastery Seal",
+	"mmorpg.currency.mastery_seal1": "Celestial Mastery Seal",
+	"item.mmorpg.currency.mastery_seal2": "Empyrean Mastery Seal",
+	"mmorpg.currency.mastery_seal2": "Empyrean Mastery Seal",
+	"mmorpg.currency.mastery_seal3": "Angelic Mastery Seal",
+	"item.mmorpg.currency.mastery_seal3": "Angelic Mastery Seal",
+	"item.mmorpg.currency.mastery_seal4": "Divine Mastery Seal",
+	"mmorpg.currency.mastery_seal4": "Divine Mastery Seal",
+	"item.mmorpg.currency.mastery_seal5": "Godly Mastery Seal",
+	"mmorpg.currency.mastery_seal5": "Godly Mastery Seal",
+	"item.mmorpg.currency.orb_of_quality": "Orb of Quality",
+	"mmorpg.currency.orb_of_quality": "Orb of Quality",
+	"mmorpg.currency.sharpening_stone0": "Spiritual Sharpening Stone",
+	"item.mmorpg.currency.sharpening_stone0": "Spiritual Sharpening Stone",
+	"item.mmorpg.currency.sharpening_stone1": "Celestial Sharpening Stone",
+	"mmorpg.currency.sharpening_stone1": "Celestial Sharpening Stone",
+	"mmorpg.currency.sharpening_stone2": "Empyrean Sharpening Stone",
+	"item.mmorpg.currency.sharpening_stone2": "Empyrean Sharpening Stone",
+	"mmorpg.currency.sharpening_stone3": "Angelic Sharpening Stone",
+	"item.mmorpg.currency.sharpening_stone3": "Angelic Sharpening Stone",
+	"mmorpg.currency.sharpening_stone4": "Divine Sharpening Stone",
+	"item.mmorpg.currency.sharpening_stone4": "Divine Sharpening Stone",
+	"item.mmorpg.currency.sharpening_stone5": "Godly Sharpening Stone",
+	"mmorpg.currency.sharpening_stone5": "Godly Sharpening Stone",
+	"mmorpg.currency.socket_adder": "Orb of Digging",
+	"item.mmorpg.currency.socket_adder": "Orb of Digging",
+	"item.mmorpg.currency.unique_reroll": "Orb of Imperfection",
+	"mmorpg.currency.unique_reroll": "Orb of Imperfection",
+
+"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
 
 
 "_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
@@ -907,54 +955,6 @@
 	"mmorpg.effect.wounds": "Wounds",
 
 "_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
-
-
-"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
-
-	"mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
-	"item.mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
-	"mmorpg.currency.entangled_affix_upgrade": "Entangled Orb of Imbalance",
-	"item.mmorpg.currency.entangled_affix_upgrade": "Entangled Orb of Imbalance",
-	"item.mmorpg.currency.entangled_quality": "Entangled Orb of Quality",
-	"mmorpg.currency.entangled_quality": "Entangled Orb of Quality",
-	"mmorpg.currency.entangled_unique_reroll": "Entangled Orb of Imperfection",
-	"item.mmorpg.currency.entangled_unique_reroll": "Entangled Orb of Imperfection",
-	"mmorpg.currency.level_up_orb": "Orb of Infinity",
-	"item.mmorpg.currency.level_up_orb": "Orb of Infinity",
-	"item.mmorpg.currency.map_rarity_upgrade": "Map Rarity Upgrade Orb",
-	"mmorpg.currency.map_rarity_upgrade": "Map Rarity Upgrade Orb",
-	"mmorpg.currency.mastery_seal0": "Spiritual Mastery Seal",
-	"item.mmorpg.currency.mastery_seal0": "Spiritual Mastery Seal",
-	"mmorpg.currency.mastery_seal1": "Celestial Mastery Seal",
-	"item.mmorpg.currency.mastery_seal1": "Celestial Mastery Seal",
-	"item.mmorpg.currency.mastery_seal2": "Empyrean Mastery Seal",
-	"mmorpg.currency.mastery_seal2": "Empyrean Mastery Seal",
-	"mmorpg.currency.mastery_seal3": "Angelic Mastery Seal",
-	"item.mmorpg.currency.mastery_seal3": "Angelic Mastery Seal",
-	"item.mmorpg.currency.mastery_seal4": "Divine Mastery Seal",
-	"mmorpg.currency.mastery_seal4": "Divine Mastery Seal",
-	"item.mmorpg.currency.mastery_seal5": "Godly Mastery Seal",
-	"mmorpg.currency.mastery_seal5": "Godly Mastery Seal",
-	"item.mmorpg.currency.orb_of_quality": "Orb of Quality",
-	"mmorpg.currency.orb_of_quality": "Orb of Quality",
-	"item.mmorpg.currency.sharpening_stone0": "Spiritual Sharpening Stone",
-	"mmorpg.currency.sharpening_stone0": "Spiritual Sharpening Stone",
-	"mmorpg.currency.sharpening_stone1": "Celestial Sharpening Stone",
-	"item.mmorpg.currency.sharpening_stone1": "Celestial Sharpening Stone",
-	"item.mmorpg.currency.sharpening_stone2": "Empyrean Sharpening Stone",
-	"mmorpg.currency.sharpening_stone2": "Empyrean Sharpening Stone",
-	"item.mmorpg.currency.sharpening_stone3": "Angelic Sharpening Stone",
-	"mmorpg.currency.sharpening_stone3": "Angelic Sharpening Stone",
-	"item.mmorpg.currency.sharpening_stone4": "Divine Sharpening Stone",
-	"mmorpg.currency.sharpening_stone4": "Divine Sharpening Stone",
-	"mmorpg.currency.sharpening_stone5": "Godly Sharpening Stone",
-	"item.mmorpg.currency.sharpening_stone5": "Godly Sharpening Stone",
-	"mmorpg.currency.socket_adder": "Orb of Digging",
-	"item.mmorpg.currency.socket_adder": "Orb of Digging",
-	"mmorpg.currency.unique_reroll": "Orb of Imperfection",
-	"item.mmorpg.currency.unique_reroll": "Orb of Imperfection",
-
-"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
 
 
 "_comment": " [CATEGORY]: TALENTS - NAMES",
@@ -1178,6 +1178,8 @@
 	"mmorpg.word.armor": "On Armor: ",
 	"mmorpg.word.ascclasses": "Classes",
 	"mmorpg.word.aura": "Aura",
+	"mmorpg.word.avg_lvl": "Average LVL: %1$s",
+	"mmorpg.word.avg_tier": "Average Tier: %1$s",
 	"mmorpg.word.backpack": "Backpack",
 	"mmorpg.word.broken": "Broken",
 	"mmorpg.word.can_upgrade_map_rarity": "Can Upgrade Map Rarity\nThis Depends on Map level",
@@ -1198,6 +1200,7 @@
 	"mmorpg.word.costs_favor": "Costs %1$ss Favor",
 	"mmorpg.word.crate": "Crate",
 	"mmorpg.word.currency": "Currency",
+	"mmorpg.word.current_favor_currency": "Current Favor: %1$s",
 	"mmorpg.word.currently_selected": "Currently Selected",
 	"mmorpg.word.decreased": "Decreased",
 	"mmorpg.word.deletesallaffixes": "Deletes all affixes",
@@ -2116,6 +2119,7 @@
 	"mmorpg.chat.prof_recipe_level_not_enough": "Not high enough level to craft.",
 	"mmorpg.chat.prof_recipe_not_found": "Recipe not found",
 	"mmorpg.chat.profession_level_up": "Your %1$s level has increased to level %2$s!",
+	"mmorpg.chat.prophecies_guide": "1) Kill Monsters in Maps to Progress the Bar and earn Favor\n\n2) When Bar is full, you can choose rewards\n\n3) Click Claim after choosing the rewards\n\nAverage lvl/tier depends on which Maps you do",
 	"mmorpg.chat.req_lvl": "Required Level: %1$s",
 	"mmorpg.chat.require_mage": "Requires Mage Weapon to use.",
 	"mmorpg.chat.require_melee": "Requires Melee weapon to use.",
@@ -2136,6 +2140,7 @@
 	"mmorpg.chat.wrong_casting_weapon": "That weapon type Can't cast this spell",
 	"mmorpg.chat.you_cant_take_any_more_prophecies": "You have accepted the maximum amount of Prophecies",
 	"mmorpg.chat.you_lack_jewel_slots": "You lack jewel slots! You gain these typically from the Talent tree. You can use the search bar in the Talents screen to find them.",
+	"mmorpg.chat.you_need_full_bar_to_take_prophecy": "You need to fill the progress bar to be able to accept Prophecies",
 
 "_comment": " [CATEGORY]: CHAT MESSAGES - NAMES",
 

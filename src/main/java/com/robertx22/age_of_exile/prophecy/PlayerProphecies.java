@@ -124,6 +124,8 @@ public class PlayerProphecies {
                 return;
             }
 
+            this.favor -= data.cost;
+
 
             SoundUtils.playSound(p, SoundEvents.EXPERIENCE_ORB_PICKUP);
 

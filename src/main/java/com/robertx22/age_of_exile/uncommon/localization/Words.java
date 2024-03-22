@@ -9,6 +9,9 @@ import java.util.Locale;
 public enum Words implements IAutoLocName {
     LOAD("Load"),
     CLAIM("Claim"),
+    CURRENT_FAVOR_CURRENCY("Current Favor: %1$s"),
+    AVG_LVL("Average LVL: %1$s"),
+    AVG_TIER("Average Tier: %1$s"),
     X_ITEMS("Reward Amount: %1$s"),
     COSTS_FAVOR("Costs %1$ss Favor"),
     PROPHECIES("Prophecies"),

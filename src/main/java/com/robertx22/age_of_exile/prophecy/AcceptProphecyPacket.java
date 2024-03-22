@@ -36,7 +36,7 @@ public class AcceptProphecyPacket extends MyPacket<AcceptProphecyPacket> {
     public void onReceived(ExilePacketContext ctx) {
 
         Load.player(ctx.getPlayer()).prophecy.tryAcceptOffer(ctx.getPlayer(), id);
-
+        Load.player(ctx.getPlayer()).playerDataSync.setDirty();
     }
 
     @Override

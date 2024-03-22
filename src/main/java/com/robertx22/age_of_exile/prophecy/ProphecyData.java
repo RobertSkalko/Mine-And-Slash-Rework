@@ -11,7 +11,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class ProphecyData {
@@ -23,6 +22,7 @@ public class ProphecyData {
     public List<ProphecyModifierData> mods = new ArrayList<>();
 
 
+    /*
     public List<ProphecyReqData> getRequirements() {
 
 
@@ -40,6 +40,8 @@ public class ProphecyData {
 
         return list;
     }
+
+     */
 
     public List<ItemStack> generateRewards(Player p) {
         List<ItemStack> list = new ArrayList<>();
@@ -60,7 +62,7 @@ public class ProphecyData {
             ItemStack stack = blueprint.createStack();
 
             list.add(stack);
-            
+
         }
 
         return list;

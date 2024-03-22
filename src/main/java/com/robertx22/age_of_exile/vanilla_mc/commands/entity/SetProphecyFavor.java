@@ -14,18 +14,18 @@ import java.util.Objects;
 import static net.minecraft.commands.Commands.argument;
 import static net.minecraft.commands.Commands.literal;
 
-public class SetProphecyProgress {
+public class SetProphecyFavor {
 
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {
         commandDispatcher.register(
                 literal(CommandRefs.ID)
                         .then(literal("set").requires(e -> e.hasPermission(2))
-                                .then(literal("prophecy_progress")
+                                .then(literal("prophecy_favor")
                                         .requires(e -> e.hasPermission(2))
                                         .then(argument("target", EntityArgument.player())
-                                                .then(argument("progress", IntegerArgumentType.integer())
+                                                .then(argument("number", IntegerArgumentType.integer())
                                                         .executes(e -> execute(e.getSource(), EntityArgument.getPlayer(e, "target"), IntegerArgumentType
-                                                                .getInteger(e, "progress"))))))));
+                                                                .getInteger(e, "number"))))))));
     }
 
     private static int execute(CommandSourceStack commandSource, Player player,
@@ -39,7 +39,7 @@ public class SetProphecyProgress {
             }
         }
 
-        Load.player(player).prophecy.progress = num;
+        Load.player(player).prophecy.favor = num;
         Load.player(player).playerDataSync.setDirty();
 
         return 0;

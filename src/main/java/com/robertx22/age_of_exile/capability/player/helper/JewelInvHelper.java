@@ -28,8 +28,10 @@ public class JewelInvHelper implements IStatCtx {
     public void unequip(Player p, int i) {
 
         var stack = inv.getItem(i);
-        PlayerUtils.giveItem(stack.copy(), p);
-        stack.shrink(100);
+        if (!stack.isEmpty()) {
+            PlayerUtils.giveItem(stack.copy(), p);
+            stack.shrink(100);
+        }
     }
 
 

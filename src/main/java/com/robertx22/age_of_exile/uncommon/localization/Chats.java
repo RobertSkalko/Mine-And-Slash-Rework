@@ -6,6 +6,8 @@ import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
+    PROPHECIES_GUIDE("1) Kill Monsters in Maps to Progress the Bar and earn Favor\n\n2) When Bar is full, you can choose rewards\n\n3) Click Claim after choosing the rewards\n\nAverage lvl/tier depends on which Maps you do"),
+
     YOU_CANT_TAKE_ANY_MORE_PROPHECIES("You have accepted the maximum amount of Prophecies"),
     ALT_TO_SHOW_OTHER_SPELL("[Alt] to show the other Spell"),
     YOU_NEED_FULL_BAR_TO_TAKE_PROPHECY("You need to fill the progress bar to be able to accept Prophecies"),

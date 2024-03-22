@@ -76,6 +76,8 @@ public class ProphecyScreen extends BaseScreen implements INamedScreen {
                 i++;
             }
 
+            this.addRenderableWidget(new MainProphecyButton(guiLeft + sizeX / 2 - MainProphecyButton.FAVOR_BUTTON_SIZE_X / 2, guiTop + 7));
+
             if (data.canClaim()) {
                 this.addRenderableWidget(new ClaimProphecyRewardsButton(guiLeft + 65, guiTop + 186));
             }
@@ -115,7 +117,7 @@ public class ProphecyScreen extends BaseScreen implements INamedScreen {
             super.render(gui, x, y, ticks);
 
             String txt = Words.PROPHECIES.locName().getString();
-            GuiUtils.renderScaledText(gui, guiLeft + 88, guiTop + 22, 1, txt, ChatFormatting.DARK_PURPLE);
+            //  GuiUtils.renderScaledText(gui, guiLeft + 88, guiTop + 22, 1, txt, ChatFormatting.DARK_PURPLE);
 
             String tx2 = Words.CURRENTLY_SELECTED.locName().getString();
             GuiUtils.renderScaledText(gui, guiLeft + 88, guiTop + 116, 1, tx2, ChatFormatting.YELLOW);

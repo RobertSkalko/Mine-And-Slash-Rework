@@ -57,7 +57,7 @@ public enum ProphecyModifierType {
         }
     };
 
-
+    
     public abstract MutableComponent getTooltip(String data);
 
     public abstract float chanceToSpawn();

@@ -34,7 +34,7 @@ public class ClaimProphecyRewardsPacket extends MyPacket<ClaimProphecyRewardsPac
     public void onReceived(ExilePacketContext ctx) {
 
         Load.player(ctx.getPlayer()).prophecy.onBarFinishGiveRewards(ctx.getPlayer());
-
+        Load.player(ctx.getPlayer()).playerDataSync.setDirty();
     }
 
     @Override

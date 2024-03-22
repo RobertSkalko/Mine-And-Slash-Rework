@@ -18,7 +18,6 @@ public class RangedDamageUtil {
     private static List<String> VALID_PROJECTILE_NAMES = Arrays.asList("arrow", "bolt", "ammo", "bullet", "dart", "missile");
 
     public static boolean isValidAttack(AttackInformation event) {
-
         if (!(event.getSource().getEntity() instanceof Player)) {
             return true;
         }
@@ -29,7 +28,7 @@ public class RangedDamageUtil {
         GearItemData gear = StackSaving.GEARS.loadFrom(en.getMainHandItem());
 
         if (gear == null) {
-            return false;
+            return event.getSource().getEntity() == event.getSource().getDirectEntity();
         }
 
         var type = gear.GetBaseGearType();
@@ -62,6 +61,7 @@ public class RangedDamageUtil {
 
              */
         }
-        return true;
+        return event.getSource().getEntity() == event.getSource().getDirectEntity();
+
     }
 }
