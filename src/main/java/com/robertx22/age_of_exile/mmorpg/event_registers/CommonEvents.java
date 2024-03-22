@@ -104,8 +104,12 @@ public class CommonEvents {
         ForgeEvents.registerForgeEvent(TickEvent.PlayerTickEvent.class, event -> {
             if (!event.player.level().isClientSide) {
                 var data = Load.player(event.player).prophecy;
-                if (data.canTakeOffers() && data.offers.isEmpty()) {
-                    data.regenerateNewOffers(event.player);
+                if (event.player.tickCount % 20 == 0) {
+                    if (data.canTakeOffers()) {
+                        if (data.offers.isEmpty() || data.offers.stream().anyMatch(x -> x.getStart() == null)) {
+                            data.regenerateNewOffers(event.player);
+                        }
+                    }
                 }
             }
         });

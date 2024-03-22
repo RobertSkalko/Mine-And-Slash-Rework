@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.prophecy;
 
 import com.robertx22.age_of_exile.database.data.prophecy.ProphecyModifierType;
-import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.utils.RandomUtils;
@@ -22,8 +21,7 @@ public class ProphecyGeneration {
         int lvl = pdata.getAverageLevel();
         int tier = pdata.getAverageTier();
 
-        GearRarity rar = ExileDB.GearRarities().getFilterWrapped(x -> x.map_tiers.isInRange(tier)).list.get(0);
-
+        // GearRarity rar = ExileDB.GearRarities().getFilterWrapped(x -> x.map_tiers.isInRange(tier)).list.get(0);
 
         int cost = 1000;
 
@@ -40,9 +38,10 @@ public class ProphecyGeneration {
 
         data.start = start.GUID();
 
+        var b = start.create(lvl, tier);
 
         for (ProphecyModifierType type : modtypes) {
-            if (RandomUtils.roll(type.chanceToSpawn())) {
+            if (type.canApplyTo(start, b) && RandomUtils.roll(type.chanceToSpawn())) {
                 var mod = ExileDB.ProphecyModifiers().getFilterWrapped(x -> x.modifier_type == type).of(x -> {
                     if (x.tier_req > tier) {
                         return false;

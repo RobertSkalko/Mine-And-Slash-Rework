@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.database.data.prophecy.starts.GearProphecy;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 import com.robertx22.age_of_exile.loot.blueprints.ItemBlueprint;
+import com.robertx22.age_of_exile.loot.blueprints.RarityItemBlueprint;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.MutableComponent;
 
@@ -28,7 +29,7 @@ public enum ProphecyModifierType {
         }
 
         @Override
-        public boolean canApplyTo(ProphecyStart start) {
+        public boolean canApplyTo(ProphecyStart start, ItemBlueprint b) {
             return start instanceof GearProphecy;
         }
     },
@@ -46,23 +47,23 @@ public enum ProphecyModifierType {
 
         @Override
         public void set(ItemBlueprint b, String data) {
-            if (b instanceof GearBlueprint gb) {
+            if (b instanceof RarityItemBlueprint gb) {
                 gb.rarity.set(ExileDB.GearRarities().get(data));
             }
         }
 
         @Override
-        public boolean canApplyTo(ProphecyStart start) {
-            return start instanceof GearProphecy;
+        public boolean canApplyTo(ProphecyStart start, ItemBlueprint b) {
+            return b instanceof RarityItemBlueprint;
         }
     };
 
-    
+
     public abstract MutableComponent getTooltip(String data);
 
     public abstract float chanceToSpawn();
 
     public abstract void set(ItemBlueprint b, String data);
 
-    public abstract boolean canApplyTo(ProphecyStart start);
+    public abstract boolean canApplyTo(ProphecyStart start, ItemBlueprint b);
 }

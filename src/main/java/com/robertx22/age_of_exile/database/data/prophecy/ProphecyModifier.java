@@ -15,8 +15,7 @@ public class ProphecyModifier implements JsonExileRegistry<ProphecyModifier>, IA
     public ProphecyModifierType modifier_type = ProphecyModifierType.GEAR_TYPE;
     public String id = "";
     public int weight = 1000;
-    // when you pick a prophecy, the highest modifiers get applied as a requirement.
-    // no prophecy? Can kill t0 mobs, pick a prophecy that gives mythic boots? You now have to kill t50 mobs!
+    
     public int tier_req = 0;
     public int lvl_req = 0;
 
