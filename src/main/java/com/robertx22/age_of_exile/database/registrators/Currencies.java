@@ -28,6 +28,7 @@ public class Currencies implements ExileRegistryInit {
         ALL.add(new OrbSocketAdder());
         ALL.add(new QualityUpgrade());
         ALL.add(new LevelGearCurrency());
+        ALL.add(new ChaosStatCurrency());
         ALL.add(new EntangledAffixUpgrade());
         ALL.add(new EntangledQuality());
         ALL.add(new OrbUniqueReroll());

@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.database.data.affixes.Affix;
 import com.robertx22.age_of_exile.database.data.aura.AuraGem;
 import com.robertx22.age_of_exile.database.data.auto_item.AutoItem;
 import com.robertx22.age_of_exile.database.data.base_stats.BaseStatsConfig;
+import com.robertx22.age_of_exile.database.data.chaos_stats.ChaosStat;
 import com.robertx22.age_of_exile.database.data.custom_item.CustomItem;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
@@ -97,7 +98,8 @@ public class ExileRegistryTypes {
     public static ExileRegistryType CUSTOM_ITEM = ExileRegistryType.register(SlashRef.MODID, "custom_item", 38, CustomItem.SERIALIZER, SyncTime.NEVER);
     public static ExileRegistryType MOB_RARITY = ExileRegistryType.register(SlashRef.MODID, "mob_rarity", 39, MobRarity.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType PROPHECY_MODIFIER = ExileRegistryType.register(SlashRef.MODID, "prophecy_modifier", 40, ProphecyModifier.SERIALIZER, SyncTime.ON_LOGIN);
-    public static ExileRegistryType PROPHECY_START = ExileRegistryType.register(SlashRef.MODID, "prophecy_start", 40, null, SyncTime.NEVER);
+    public static ExileRegistryType PROPHECY_START = ExileRegistryType.register(SlashRef.MODID, "prophecy_start", 41, null, SyncTime.NEVER);
+    public static ExileRegistryType CHAOS_STAT = ExileRegistryType.register(SlashRef.MODID, "chaos_stat", 42, ChaosStat.SERIALIZER, SyncTime.ON_LOGIN);
     //public static ExileRegistryType AUGMENT = ExileRegistryType.register(SlashRef.MODID, "augment", 40, Augment.SERIALIZER, SyncTime.ON_LOGIN);
 
 

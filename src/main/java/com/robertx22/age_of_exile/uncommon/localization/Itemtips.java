@@ -13,7 +13,7 @@ public enum Itemtips implements IAutoLocName {
     ITEM_TYPE("Item Type: "),
     TIER_TIP("Tier: "),
     ITEM_TIER_TIP("Item Tier: "),
-    LEVEL_TIP("Level: "),
+    LEVEL_TIP("Level "),
     USE_TIP("[Drag onto gear to use]"),
     Stat_Req("%1$s Min: "),
     POTENTIAL("Potential: %1$s"),
@@ -45,7 +45,8 @@ public enum Itemtips implements IAutoLocName {
     Exp("Exp: %1$s%%"),
     Loot("Loot: %1$s%%"),
     PREFIX_STATS("Prefix Stats: "),
-    COR_STATS("Base Stats: "),
+    COR_STATS("Corruption Stats: "),
+    UNIQUE_STATS("Unique Stats: "),
     SUFFIX_STATS("Suffix Stats: "),
     MAP_LEAGUE_SPAWN("Can Spawn: ");
 

@@ -9,6 +9,7 @@ import com.robertx22.age_of_exile.database.data.affixes.Affix;
 import com.robertx22.age_of_exile.database.data.aura.AuraGem;
 import com.robertx22.age_of_exile.database.data.auto_item.AutoItem;
 import com.robertx22.age_of_exile.database.data.base_stats.BaseStatsConfig;
+import com.robertx22.age_of_exile.database.data.chaos_stats.ChaosStat;
 import com.robertx22.age_of_exile.database.data.currency.base.Currency;
 import com.robertx22.age_of_exile.database.data.custom_item.CustomItem;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
@@ -240,6 +241,10 @@ public class ExileDB {
 
     public static ExileRegistryContainer<StatBuff> StatBuffs() {
         return Database.getRegistry(ExileRegistryTypes.STAT_BUFF);
+    }
+
+    public static ExileRegistryContainer<ChaosStat> ChaosStats() {
+        return Database.getRegistry(ExileRegistryTypes.CHAOS_STAT);
     }
 
     public static ExileRegistryContainer<ProfessionRecipe> Recipes() {

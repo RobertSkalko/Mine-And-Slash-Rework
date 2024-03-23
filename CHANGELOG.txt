@@ -104,3 +104,5 @@ Killing Mobs in maps now rewards favor currency which can be spent to buy prophe
 Prophecy rewards are a way to target farm things! You can buy stuff like "3 Epic Boots" or "5 runes".
 The higher mob lvl and tier you kill while filling up the progress bar, the higher lvl and tier rewards you will have at the end.
 The more specific the reward, the costlier it is. A Sword reward is more expensive than an any gear reward etc
+
+Chaos stats added back

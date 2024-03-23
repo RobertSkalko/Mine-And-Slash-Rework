@@ -7,9 +7,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
-import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 
@@ -26,24 +24,10 @@ public class GearAffixesData implements IGearPartTooltip {
 
     public List<AffixData> cor = new ArrayList<>();
 
-    public boolean canCorrupt() {
-        return cor.isEmpty();
+    public boolean isCorrupted() {
+        return !cor.isEmpty();
     }
 
-    public void addCorruptAffix(GearItemData gear) {
-        // todo currently just gives a normal affix
-
-        if (RandomUtils.roll(50)) {
-            AffixData suffix = new AffixData(Affix.Type.suffix);
-            suffix.RerollFully(gear);
-            cor.add(suffix);
-        } else {
-            AffixData prefix = new AffixData(Affix.Type.prefix);
-            prefix.RerollFully(gear);
-            cor.add(prefix);
-        }
-
-    }
 
     public List<TooltipStatWithContext> getAllStatsWithCtx(GearItemData gear, TooltipInfo info) {
         List<TooltipStatWithContext> list = new ArrayList<>();
@@ -52,16 +36,19 @@ public class GearAffixesData implements IGearPartTooltip {
         this.cor.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), info)));
         return list;
     }
+
     public List<TooltipStatWithContext> getSufStatsWithCtx(GearItemData gear, TooltipInfo info) {
         List<TooltipStatWithContext> list = new ArrayList<>();
         this.suf.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), info)));
         return list;
     }
+
     public List<TooltipStatWithContext> getPreStatsWithCtx(GearItemData gear, TooltipInfo info) {
         List<TooltipStatWithContext> list = new ArrayList<>();
         this.pre.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), info)));
         return list;
     }
+
     public List<TooltipStatWithContext> getCorStatsWithCtx(GearItemData gear, TooltipInfo info) {
         List<TooltipStatWithContext> list = new ArrayList<>();
         this.cor.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), info)));
@@ -71,19 +58,22 @@ public class GearAffixesData implements IGearPartTooltip {
     @Override
     public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {
         List<Component> list = new ArrayList<Component>();
-        if (!getPreStatsWithCtx(gear, info).isEmpty()){
+        if (!getPreStatsWithCtx(gear, info).isEmpty()) {
+            TooltipUtils.addEmpty(list);
             list.add(Itemtips.PREFIX_STATS.locName().withStyle(ChatFormatting.BLUE));
             getPreStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
             TooltipUtils.addEmpty(list);
         }
 
-        if (!getCorStatsWithCtx(gear, info).isEmpty()){
-            list.add(Itemtips.COR_STATS.locName().withStyle(ChatFormatting.BLUE));
+        if (!getCorStatsWithCtx(gear, info).isEmpty()) {
+            TooltipUtils.addEmpty(list);
+            list.add(Itemtips.COR_STATS.locName().withStyle(ChatFormatting.RED));
             getCorStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
             TooltipUtils.addEmpty(list);
         }
 
-        if (!getSufStatsWithCtx(gear, info).isEmpty()){
+        if (!getSufStatsWithCtx(gear, info).isEmpty()) {
+            TooltipUtils.addEmpty(list);
             list.add(Itemtips.SUFFIX_STATS.locName().withStyle(ChatFormatting.BLUE));
             getSufStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
             TooltipUtils.addEmpty(list);

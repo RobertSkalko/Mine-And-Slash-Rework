@@ -164,11 +164,20 @@ public class TooltipUtils {
 
     private static List<Component> removeDoubleBlankLines(List<Component> list, int minLinesCutAllBlanks) {
 
+        List<Component> newt = removeDoubleBlankLines(list, minLinesCutAllBlanks, false);
+        boolean alwaysRemoveEmpty = newt.size() > minLinesCutAllBlanks;
+        if (alwaysRemoveEmpty) {
+            newt = removeDoubleBlankLines(newt, minLinesCutAllBlanks, true);
+        }
+        return newt;
+
+    }
+
+    private static List<Component> removeDoubleBlankLines(List<Component> list, int minLinesCutAllBlanks, boolean alwaysRemoveEmpty) {
+
         List<Component> newt = new ArrayList<>();
 
         boolean lastIsEmpty = false;
-
-        boolean alwaysRemoveEmpty = list.size() > minLinesCutAllBlanks;
 
         for (int i = 0; i < list.size(); i++) {
 
@@ -193,6 +202,7 @@ public class TooltipUtils {
         list.clear();
 
         list.addAll(newt);
+
 
         return newt;
     }
@@ -228,6 +238,18 @@ public class TooltipUtils {
                         .withStyle(rarity.textFormatting()));
     }
 
+    public static MutableComponent levelAndRarity(int lvl, int playerlvl, GearRarity rar) {
+
+        ChatFormatting color = ChatFormatting.YELLOW;
+        if (lvl > playerlvl) {
+            color = ChatFormatting.RED;
+        }
+        return Itemtips.LEVEL_TIP.locName()
+                .withStyle(color)
+                .append(Component.literal(lvl + "")
+                        .withStyle(color)).append(" ").append(rar.locName().withStyle(rar.textFormatting())).append(" ").append(Words.ITEM.locName());
+    }
+
     public static MutableComponent gearLevel(int lvl, int playerlvl) {
 
         ChatFormatting color = ChatFormatting.YELLOW;
@@ -255,7 +277,6 @@ public class TooltipUtils {
         }
         return componentList;
     }
-
 
 
     public static MutableComponent getMutableTags(Iterator<?> iterator, MutableComponent separator) {

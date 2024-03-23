@@ -32,6 +32,7 @@ public class UniqueGear implements JsonExileRegistry<UniqueGear>, IAutoLocName, 
     public boolean replaces_name = true;
     public String flavor_text = "";
     public String base_gear = "";
+    public boolean runable = false;
 
     public transient String langName;
 

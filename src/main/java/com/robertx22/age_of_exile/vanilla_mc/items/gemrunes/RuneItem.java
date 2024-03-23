@@ -127,6 +127,10 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
         @Override
         public ExplainedResult canBeModified(GearItemData data) {
 
+            if (data.uniqueStats != null && data.isUnique() && !data.uniqueStats.getUnique(data).runable) {
+                return ExplainedResult.failure(Chats.CANT_RUNE_THIS_UNIQUE.locName());
+            }
+
             Rune rune = ExileDB.Runes().get(RuneItem.this.type.id);
 
             if (rune.getFor(data.GetBaseGearType().family()).isEmpty()) {

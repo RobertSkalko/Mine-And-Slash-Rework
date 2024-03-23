@@ -9,6 +9,7 @@ import java.util.Locale;
 public enum Words implements IAutoLocName {
     LOAD("Load"),
     CLAIM("Claim"),
+    ITEM("Item"),
     CURRENT_FAVOR_CURRENCY("Current Favor: %1$s"),
     AVG_LVL("Average LVL: %1$s"),
     AVG_TIER("Average Tier: %1$s"),
@@ -68,6 +69,7 @@ public enum Words implements IAutoLocName {
     UpgradeAffix("Upgrades an affix"),
     UpgradeEnchant("Upgrades or Rerolls the Enchant"),
     UpgradeQuality("Upgrade Quality"),
+    CHAOS_STAT_SUCCESS("Upgrades the Item randomly."),
     DowngradeAffix("Downgrades an affix"),
     DeletesAllAffixes("Deletes all affixes"),
     DestroysItem("DESTROYS the Item"),
