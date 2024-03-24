@@ -22,6 +22,7 @@ import com.robertx22.age_of_exile.aoe_data.database.runewords.Runewords;
 import com.robertx22.age_of_exile.aoe_data.database.spell_schools.SpellSchoolsAdder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
 import com.robertx22.age_of_exile.aoe_data.database.spells.Spells;
+import com.robertx22.age_of_exile.aoe_data.database.stat_compats.StatCompats;
 import com.robertx22.age_of_exile.aoe_data.database.stat_conditions.StatConditions;
 import com.robertx22.age_of_exile.aoe_data.database.stat_effects.StatEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
@@ -97,6 +98,8 @@ public class GeneratedData {
         SupportGems.init();
         AuraGems.init();
 
+        new StatCompats().registerAll();
+        
         new ProphecyModifiers().registerAll();
 
         GameBalanceConfig c = new GameBalanceConfig();

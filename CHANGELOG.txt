@@ -106,3 +106,11 @@ The higher mob lvl and tier you kill while filling up the progress bar, the high
 The more specific the reward, the costlier it is. A Sword reward is more expensive than an any gear reward etc
 
 Chaos stats added back
+
+Added a new system for compatibility between vanilla and mns stats.
+The system is simple, you create a datapack that for example:
+- makes it so each point of vanilla armor gives you +3% mine and slash armor
+- maybe another rpg mod has a fire damage stat, you can make that stat give you mine and slash Fire damage % etc
+
+You can make it give flat amounts that scale per player level or percentages that don't need scaling.
+You can even add caps in case you don't want the attribute to give too much of the stat endgame

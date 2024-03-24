@@ -26,6 +26,7 @@ import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.database.data.runewords.RuneWord;
 import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
+import com.robertx22.age_of_exile.database.data.stat_compat.StatCompat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.base.BaseDatapackStat;
 import com.robertx22.age_of_exile.database.data.support_gem.SupportGem;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
@@ -100,6 +101,7 @@ public class ExileRegistryTypes {
     public static ExileRegistryType PROPHECY_MODIFIER = ExileRegistryType.register(SlashRef.MODID, "prophecy_modifier", 40, ProphecyModifier.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType PROPHECY_START = ExileRegistryType.register(SlashRef.MODID, "prophecy_start", 41, null, SyncTime.NEVER);
     public static ExileRegistryType CHAOS_STAT = ExileRegistryType.register(SlashRef.MODID, "chaos_stat", 42, ChaosStat.SERIALIZER, SyncTime.ON_LOGIN);
+    public static ExileRegistryType STAT_COMPAT = ExileRegistryType.register(SlashRef.MODID, "stat_compat", 44, StatCompat.SERIALIZER, SyncTime.ON_LOGIN);
     //public static ExileRegistryType AUGMENT = ExileRegistryType.register(SlashRef.MODID, "augment", 40, Augment.SERIALIZER, SyncTime.ON_LOGIN);
 
 

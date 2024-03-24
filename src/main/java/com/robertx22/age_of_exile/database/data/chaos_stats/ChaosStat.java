@@ -31,6 +31,7 @@ public class ChaosStat implements JsonExileRegistry<ChaosStat>, IAutoGson<ChaosS
     public List<String> for_item_rarities = new ArrayList<>();
 
     public ChaosStat() {
+        
     }
 
     public ChaosStat(String id, String name, int weight, int affix_number, Affix.Type affix_type, int bonus_sockets, List<String> for_item_rarities) {

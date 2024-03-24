@@ -34,6 +34,7 @@ public class LootUtils {
 
     public static float getMobHealthBasedLootMulti(EntityData mob, LivingEntity entity) {
 
+        
         float multi = 1;
 
         float hp = EntityUtils.getVanillaMaxHealth(entity);

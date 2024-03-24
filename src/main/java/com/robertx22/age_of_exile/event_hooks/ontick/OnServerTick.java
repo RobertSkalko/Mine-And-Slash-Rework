@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.event_hooks.ontick;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.capability.player.PlayerData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
+import com.robertx22.age_of_exile.database.data.stat_compat.StatCompat;
 import com.robertx22.age_of_exile.maps.ProcessChunkBlocks;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -27,6 +28,7 @@ public class OnServerTick {
             EntityData unitdata = Load.Unit(player);
             PlayerData playerData = Load.player(player);
 
+
             if (player.level() instanceof ServerLevel sw) {
                 if (WorldUtils.isMapWorldClass(sw)) {
                     if (player.gameMode.isSurvival()) {
@@ -48,6 +50,10 @@ public class OnServerTick {
             unitdata.didStatCalcThisTickForPlayer = false;
 
             int age = player.tickCount;
+
+            if (age % 20 == 0) {
+                StatCompat.onTick(player);
+            }
 
             if (age % 200 == 0) {
                 unitdata.setEquipsChanged();

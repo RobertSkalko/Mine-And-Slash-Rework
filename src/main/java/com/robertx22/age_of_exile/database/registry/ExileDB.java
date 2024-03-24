@@ -32,6 +32,7 @@ import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.database.data.runewords.RuneWord;
 import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
+import com.robertx22.age_of_exile.database.data.stat_compat.StatCompat;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.support_gem.SupportGem;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
@@ -249,6 +250,10 @@ public class ExileDB {
 
     public static ExileRegistryContainer<ProfessionRecipe> Recipes() {
         return Database.getRegistry(ExileRegistryTypes.RECIPE);
+    }
+
+    public static ExileRegistryContainer<StatCompat> StatCompat() {
+        return Database.getRegistry(ExileRegistryTypes.STAT_COMPAT);
     }
 
     public static ExileRegistryContainer<AuraGem> AuraGems() {
