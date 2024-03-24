@@ -1,6 +1,8 @@
 package com.robertx22.age_of_exile.database.data.stat_compat;
 
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
+import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.AttributeStat;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mixin_ducks.IDirty;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
@@ -49,7 +51,10 @@ public class StatCompat implements JsonExileRegistry<StatCompat>, IAutoGson<Stat
     }
 
     public ExactStatData getResult(LivingEntity en, int lvl) {
-
+        if (ExileDB.Stats().get(mns_stat_id) instanceof AttributeStat) {
+            return null;
+        }
+        
         int val = (int) (en.getAttributeValue(getAttribute()) * conversion);
         int value = MathHelper.clamp(val, minimum_cap, maximum_cap);
 
@@ -57,6 +62,7 @@ public class StatCompat implements JsonExileRegistry<StatCompat>, IAutoGson<Stat
             value = (int) scaling.scale(value, lvl);
             var data = ExactStatData.noScaling(value, mod_type, mns_stat_id);
             return data;
+
         }
         return null;
     }

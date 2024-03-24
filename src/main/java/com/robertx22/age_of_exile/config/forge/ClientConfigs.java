@@ -31,7 +31,7 @@ public class ClientConfigs {
         ONLY_RENDER_MOB_LOOKED_AT = b.define("only_render_mob_looked_at", true);
         SHOW_DURABILITY = b.define("show_durability", true);
         ENABLE_FLOATING_DMG = b.define("render_floating_damage", true);
-        ALIGN_STAT_TOOLTIPS = b.define("ALIGN_STAT_TOOLTIPS", true);
+        ALIGN_STAT_TOOLTIPS = b.define("ALIGN_STAT_TOOLTIPS", false);
         MODIFY_TOOLTIP_LENGTH = b.define("MODIFY_TOOLTIP_LENGTH", true);
 
         ITEM_RARITY_OPACITY = b.defineInRange("ITEM_RARITY_OPACITY", 0.75F, 0, 1F);
@@ -42,7 +42,7 @@ public class ClientConfigs {
         PLAYER_GUI_TYPE = b.defineEnum("PLAYER_GUI_TYPE", PlayerGUIs.RPG);
         SKILL_TREE_ZOOM_SPEED = b.defineInRange("SKILL_TREE_ZOOM_SPEED", 0.15D, 0.000001D, 1D);
 
-        REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES = b.defineInRange("REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES", 30, 0, 1000);
+        REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES = b.defineInRange("REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES", 35, 0, 1000);
 
         b.pop();
     }

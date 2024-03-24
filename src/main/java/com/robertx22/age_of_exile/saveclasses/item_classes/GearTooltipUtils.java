@@ -138,13 +138,17 @@ public class GearTooltipUtils {
 
 
         tip.add(lvl);
-        int potential = (int) gear.getPotentialNumber();
-        tip.add(Itemtips.POTENTIAL.locName(potential).withStyle(ChatFormatting.GRAY));
+
+        if (gear.isCorrupted()) {
+            tip.add(Component.literal(ChatFormatting.RED + "").append(Words.Corrupted.locName()).withStyle(ChatFormatting.RED));
+        } else {
+            int potential = (int) gear.getPotentialNumber();
+            tip.add(Itemtips.POTENTIAL.locName(potential).withStyle(ChatFormatting.GRAY));
+
+        }
+
         TooltipUtils.addRequirements(tip, gear.getLevel(), gear.getRequirement(), Load.Unit(info.player));
         tip.add(Component.literal(""));
-
-        //  tip.add(TooltipUtils.gearRarity(gear.getRarity()));
-
 
         if (gear.getQuality() > 0) {
             tip.add(Itemtips.QUALITY.locName(gear.getQuality()).withStyle(gear.getQualityType().color));
@@ -158,13 +162,6 @@ public class GearTooltipUtils {
 
                 tip.add(Words.Energy_Cost_Per_Mob.locName(cost, permob, damageFactor).withStyle(ChatFormatting.GREEN));
             }
-        }
-
-
-        tip.add(Component.literal(""));
-
-        if (gear.isCorrupted()) {
-            tip.add(Component.literal(ChatFormatting.RED + "").append(Words.Corrupted.locName()).withStyle(ChatFormatting.RED));
         }
 
         tip.add(Component.literal(""));

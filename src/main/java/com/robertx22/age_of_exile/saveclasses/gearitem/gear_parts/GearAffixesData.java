@@ -58,9 +58,11 @@ public class GearAffixesData implements IGearPartTooltip {
     @Override
     public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {
         List<Component> list = new ArrayList<Component>();
+
+        var color = ChatFormatting.GREEN;
         if (!getPreStatsWithCtx(gear, info).isEmpty()) {
             TooltipUtils.addEmpty(list);
-            list.add(Itemtips.PREFIX_STATS.locName().withStyle(ChatFormatting.BLUE));
+            list.add(Itemtips.PREFIX_STATS.locName().withStyle(color));
             getPreStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
             TooltipUtils.addEmpty(list);
         }
@@ -74,7 +76,7 @@ public class GearAffixesData implements IGearPartTooltip {
 
         if (!getSufStatsWithCtx(gear, info).isEmpty()) {
             TooltipUtils.addEmpty(list);
-            list.add(Itemtips.SUFFIX_STATS.locName().withStyle(ChatFormatting.BLUE));
+            list.add(Itemtips.SUFFIX_STATS.locName().withStyle(color));
             getSufStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
             TooltipUtils.addEmpty(list);
         }
