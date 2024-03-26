@@ -4,6 +4,7 @@ ailment_damage_less_hit_dmg
 lightning_damage
 gmp_barrage
 totem_dmg_cdr
+holy_pene
 inc_heal
 summon_duration
 lmp

@@ -293,7 +293,7 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
         TOPAZ("topaz", "Topaz", ChatFormatting.YELLOW, new GemStatPerTypes() {
             @Override
             public List<StatMod> onArmor() {
-                return Arrays.asList(new StatMod(MIN_RES, MAX_RES, new ElementalResist(Elements.Lightning)));
+                return Arrays.asList(new StatMod(MIN_RES, MAX_RES, new ElementalResist(Elements.Nature)));
             }
 
             @Override
@@ -323,7 +323,7 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
             }
         }),
         RUBY("ruby", "Ruby", ChatFormatting.RED, new EleGem(Elements.Fire)),
-        EMERALD("emerald", "Emerald", ChatFormatting.GREEN, new EleGem(Elements.Chaos)),
+        EMERALD("emerald", "Emerald", ChatFormatting.GREEN, new EleGem(Elements.Shadow)),
         SAPPHIRE("sapphire", "Sapphire", ChatFormatting.BLUE, new EleGem(Elements.Cold));
 
         public String locName;

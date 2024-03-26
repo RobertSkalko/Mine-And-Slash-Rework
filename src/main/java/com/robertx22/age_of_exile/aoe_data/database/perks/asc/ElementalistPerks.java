@@ -38,7 +38,7 @@ public class ElementalistPerks implements ExileRegistryInit {
 
         PerkBuilder.ascPoint(FIRE_NOVICE, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Fire), ModType.FLAT));
         PerkBuilder.ascPoint(COLD_NOVICE, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Cold), ModType.FLAT));
-        PerkBuilder.ascPoint(LIGHTNING_NOVICE, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Lightning), ModType.FLAT));
+        PerkBuilder.ascPoint(LIGHTNING_NOVICE, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Nature), ModType.FLAT));
 
         PerkBuilder.ascPoint(FIRE_APPRENTICE, new OptScaleExactStat(20, new AilmentChance(Ailments.BURN), ModType.FLAT));
         PerkBuilder.ascPoint(COLD_APPRENTICE, new OptScaleExactStat(20, new AilmentChance(Ailments.FREEZE), ModType.FLAT));
@@ -46,11 +46,11 @@ public class ElementalistPerks implements ExileRegistryInit {
 
         PerkBuilder.ascPoint(FIRE_EXPERT, new OptScaleExactStat(15, new ElementalPenetration(Elements.Fire), ModType.FLAT));
         PerkBuilder.ascPoint(COLD_EXPERT, new OptScaleExactStat(15, new ElementalPenetration(Elements.Cold), ModType.FLAT));
-        PerkBuilder.ascPoint(LIGHTNING_EXPERT, new OptScaleExactStat(15, new ElementalPenetration(Elements.Lightning), ModType.FLAT));
+        PerkBuilder.ascPoint(LIGHTNING_EXPERT, new OptScaleExactStat(15, new ElementalPenetration(Elements.Nature), ModType.FLAT));
 
         PerkBuilder.ascPoint(FIRE_MASTER, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Fire), ModType.MORE));
         PerkBuilder.ascPoint(COLD_MASTER, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Cold), ModType.MORE));
-        PerkBuilder.ascPoint(LIGHTNING_MASTER, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Lightning), ModType.MORE));
+        PerkBuilder.ascPoint(LIGHTNING_MASTER, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Nature), ModType.MORE));
 
     }
 }

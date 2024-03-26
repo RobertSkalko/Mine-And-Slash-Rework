@@ -27,7 +27,7 @@ public class JewelrySuffixes implements ExileRegistryInit {
                 .guid(x -> x.guidName + "_ele_dmg_jewelry")
                 .add(Elements.Fire, "Of Embers")
                 .add(Elements.Cold, "Of Ice")
-                .add(Elements.Chaos, "Of Venom")
+                .add(Elements.Shadow, "Of Venom")
                 .stats(x -> Arrays.asList(new StatMod(3, 10, Stats.ELEMENTAL_DAMAGE.get(x), ModType.FLAT)))
                 .includesTags(SlotTags.jewelry_family)
                 .Suffix()

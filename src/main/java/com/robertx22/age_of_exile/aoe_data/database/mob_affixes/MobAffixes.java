@@ -49,7 +49,7 @@ public class MobAffixes implements ExileRegistryInit {
 
         eleAffix("Freezing", Cold);
         eleAffix("Flaming", Fire);
-        eleAffix("Poisoned", Chaos);
+        eleAffix("Poisoned", Shadow);
 
 
         new MobAffix("winter", "Winter Lord", Cold.format, Affix.Type.prefix)
@@ -74,14 +74,14 @@ public class MobAffixes implements ExileRegistryInit {
                 .setWeight(250)
                 .addToSerializables();
 
-        new MobAffix("nature_lord", "Chaos Lord", Chaos.format, Affix.Type.prefix)
+        new MobAffix("nature_lord", "Chaos Lord", Shadow.format, Affix.Type.prefix)
                 .setMods(
                         new StatMod(15, 15, Health.getInstance()),
                         new StatMod(5, 5, new AilmentChance(Ailments.POISON)),
-                        new StatMod(75, 75, new PhysicalToElement(Chaos)),
-                        new StatMod(50, 50, new BonusPhysicalAsElemental(Chaos), ModType.FLAT),
+                        new StatMod(75, 75, new PhysicalToElement(Shadow)),
+                        new StatMod(50, 50, new BonusPhysicalAsElemental(Shadow), ModType.FLAT),
                         new StatMod(20, 20, ExtraMobDropsStat.getInstance()))
-                .icon(Chaos.format + Chaos.icon)
+                .icon(Shadow.format + Shadow.icon)
                 .setWeight(250)
                 .addToSerializables();
 
@@ -102,9 +102,9 @@ public class MobAffixes implements ExileRegistryInit {
 
 
         fullEle(Cold);
-        fullEle(Lightning);
+        fullEle(Nature);
         fullEle(Fire);
-        fullEle(Chaos);
+        fullEle(Shadow);
 
 
     }

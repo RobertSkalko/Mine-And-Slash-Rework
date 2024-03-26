@@ -32,13 +32,13 @@ public class UniqueNecklaces implements ExileRegistryInit {
                         BaseGearTypes.NECKLACE)
                 .setReplacesName()
                 .stats(Arrays.asList(
-                        new StatMod(10, 25, Stats.ELEMENTAL_DAMAGE.get(Elements.Lightning)),
+                        new StatMod(10, 25, Stats.ELEMENTAL_DAMAGE.get(Elements.Nature)),
                         new StatMod(10, 20, Stats.HEAL_STRENGTH.get()),
                         new StatMod(5, 15, Armor.getInstance())
                 ))
                 .devComment("divine school heal necklace")
                 .build();
-        
+
         UniqueGearBuilder.of(
                         "rabbit_paw",
                         "Rabbit's Paw",
@@ -93,14 +93,14 @@ public class UniqueNecklaces implements ExileRegistryInit {
                         AuraCapacity.getInstance().mod(5, 10),
                         AuraEffect.getInstance().mod(-10, 10),
                         DodgeRating.getInstance().mod(5, 25).percent(),
-                        new ElementalResist(Elements.Chaos).mod(25, 25)
+                        new ElementalResist(Elements.Shadow).mod(25, 25)
                 ))
                 .build();
 
         UniqueGearBuilder.of("master_torture", "Master of Torture", BaseGearTypes.NECKLACE)
                 .keepsBaseName()
                 .stat(Stats.DAMAGE_TO_CURSED.get().mod(25, 50))
-                .stat(new ElementalResist(Elements.Chaos).mod(10, 25))
+                .stat(new ElementalResist(Elements.Shadow).mod(10, 25))
                 .stat(new ElementalResist(Elements.Cold).mod(10, 25))
                 .stat(new ElementalResist(Elements.Fire).mod(10, 25))
                 .build();

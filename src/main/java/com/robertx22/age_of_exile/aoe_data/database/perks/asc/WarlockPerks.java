@@ -43,15 +43,15 @@ public class WarlockPerks implements ExileRegistryInit {
         PerkBuilder.ascPoint(POISON_3, new OptScaleExactStat(30, new AilmentDuration(Ailments.POISON), ModType.FLAT));
         PerkBuilder.ascPoint(POISON_4, new OptScaleExactStat(25, new AilmentDamage(Ailments.POISON), ModType.MORE));
 
-        PerkBuilder.ascPoint(CHAOS_1, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Chaos), ModType.FLAT));
-        PerkBuilder.ascPoint(CHAOS_2, new OptScaleExactStat(15, new ElementalPenetration(Elements.Chaos), ModType.FLAT));
-        PerkBuilder.ascPoint(CHAOS_3, new OptScaleExactStat(50, new ElementalResist(Elements.Chaos), ModType.FLAT));
-        PerkBuilder.ascPoint(CHAOS_4, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Chaos), ModType.MORE));
+        PerkBuilder.ascPoint(CHAOS_1, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Shadow), ModType.FLAT));
+        PerkBuilder.ascPoint(CHAOS_2, new OptScaleExactStat(15, new ElementalPenetration(Elements.Shadow), ModType.FLAT));
+        PerkBuilder.ascPoint(CHAOS_3, new OptScaleExactStat(50, new ElementalResist(Elements.Shadow), ModType.FLAT));
+        PerkBuilder.ascPoint(CHAOS_4, new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Shadow), ModType.MORE));
 
         PerkBuilder.ascPoint(CURSE_1, new OptScaleExactStat(30, Stats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.curse), ModType.FLAT));
         PerkBuilder.ascPoint(CURSE_2, new OptScaleExactStat(50, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.curse), ModType.FLAT));
         PerkBuilder.ascPoint(CURSE_3, new OptScaleExactStat(20, Stats.DOT_DAMAGE.get(), ModType.FLAT));
-        PerkBuilder.ascPoint(CURSE_4, new OptScaleExactStat(25, Stats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.curse), ModType.FLAT), new OptScaleExactStat(10, Stats.ELEMENTAL_DAMAGE.get(Elements.Chaos), ModType.MORE));
+        PerkBuilder.ascPoint(CURSE_4, new OptScaleExactStat(25, Stats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.curse), ModType.FLAT), new OptScaleExactStat(10, Stats.ELEMENTAL_DAMAGE.get(Elements.Shadow), ModType.MORE));
 
 
     }

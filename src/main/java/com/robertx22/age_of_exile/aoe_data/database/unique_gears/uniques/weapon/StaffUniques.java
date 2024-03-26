@@ -20,7 +20,7 @@ public class StaffUniques implements ExileRegistryInit {
         UniqueGearBuilder.of("doombolt", "Touch of Doom", BaseGearTypes.BOW)
                 .stats(Arrays.asList(
                         new StatMod(0, 100, GearDamage.getInstance()).percent(),
-                        new StatMod(15, 30, Stats.ELEMENTAL_DAMAGE.get(Elements.Chaos)),
+                        new StatMod(15, 30, Stats.ELEMENTAL_DAMAGE.get(Elements.Shadow)),
                         new StatMod(1, 1, Stats.SPELL_LIFESTEAL.get()),
                         new StatMod(10, 25, Stats.DOT_DAMAGE.get())
                 ))
@@ -37,7 +37,7 @@ public class StaffUniques implements ExileRegistryInit {
         UniqueGearBuilder.of("crystalized_capacitor", "Crystalized Capacitor", BaseGearTypes.STAFF)
                 .stats(Arrays.asList(
                         new StatMod(25, 50, GearDamage.getInstance(), ModType.PERCENT),
-                        new StatMod(25, 150, Stats.ELEMENTAL_DAMAGE.get(Elements.Lightning)),
+                        new StatMod(25, 150, Stats.ELEMENTAL_DAMAGE.get(Elements.Nature)),
                         new StatMod(-150, -150, Stats.ELEMENTAL_DAMAGE.get(Elements.Cold)),
                         new StatMod(10, 25, Stats.CRIT_CHANCE.get())
                 ))

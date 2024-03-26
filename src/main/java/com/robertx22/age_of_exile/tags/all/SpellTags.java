@@ -33,6 +33,7 @@ public class SpellTags {
     public static SpellTag PHYSICAL = SpellTag.of("physical");
     public static SpellTag COLD = SpellTag.of("cold");
     public static SpellTag CHAOS = SpellTag.of("chaos");
+    public static SpellTag HOLY = SpellTag.of("holy");
     public static SpellTag LIGHTNING = SpellTag.of("lightning");
     public static SpellTag BUFF = SpellTag.of("buff");
     public static SpellTag SHATTER = SpellTag.of("shatter");

@@ -40,7 +40,7 @@ public class Runewords implements ExileRegistryInit {
                         new MaxAllSpellLevels().mod(1, 2),
                         new AilmentChance(Ailments.BLEED).mod(5, 15),
                         new AilmentDamage(Ailments.POISON).mod(10, 15),
-                        new ElementalPenetration(Elements.Chaos).mod(10, 25)
+                        new ElementalPenetration(Elements.Shadow).mod(10, 25)
                 ),
                 Arrays.asList(RuneType.VEN, RuneType.ANO, RuneType.ITA, RuneType.XER, RuneType.HAR),
                 GearSlots.BOW, GearSlots.STAFF);
@@ -51,7 +51,7 @@ public class Runewords implements ExileRegistryInit {
                         new MaxSpellLevel(SpellTags.FIRE).mod(1, 2),
                         Stats.SPECIFIC_AURA_COST.get(AuraGems.FIRE_RESIST).mod(-25, -50),
                         new ElementalPenetration(Elements.Fire).mod(10, 15),
-                        new ElementalResist(Elements.Chaos).mod(15, 25)
+                        new ElementalResist(Elements.Shadow).mod(15, 25)
                 ),
                 Arrays.asList(RuneType.ENO, RuneType.MOS, RuneType.ANO, RuneType.XER, RuneType.HAR),
                 GearSlots.HELMET);
@@ -63,7 +63,7 @@ public class Runewords implements ExileRegistryInit {
                         new MaxAllSpellLevels().mod(1, 1),
                         Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.thorns).mod(15, 25),
                         Stats.HEAL_STRENGTH.get().mod(15, 25),
-                        new ElementalResist(Elements.Chaos).mod(25, 25),
+                        new ElementalResist(Elements.Shadow).mod(25, 25),
                         Energy.getInstance().mod(5, 10).percent(),
                         Mana.getInstance().mod(5, 10).percent()
                 ),

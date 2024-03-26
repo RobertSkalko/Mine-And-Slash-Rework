@@ -224,7 +224,7 @@ public class Stats implements ExileRegistryInit {
 
 
     public static DataPackStatAccessor MAX_SUMMON_CAPACITY = DatapackStatBuilder
-            .ofSingle("max_total_summons", Elements.All)
+            .ofSingle("max_total_summons", Elements.NONE)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)
@@ -294,7 +294,7 @@ public class Stats implements ExileRegistryInit {
 
     public static DataPackStatAccessor<Elements> ELEMENTAL_SPELL_DAMAGE = DatapackStatBuilder
             .<Elements>of(x -> "spell_" + x.guidName + "_damage", x -> x)
-            .addAllOfType(Elements.getEverythingBesidesPhysical())
+            .addAllOfType(Elements.getAllSingle())
             .worksWithEvent(DamageEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)
@@ -368,7 +368,7 @@ public class Stats implements ExileRegistryInit {
             .build();
 
     public static DataPackStatAccessor<ResourceType> RESOURCE_ON_KILL = DatapackStatBuilder
-            .<ResourceType>of(x -> x.id + "_on_kill", x -> Elements.All)
+            .<ResourceType>of(x -> x.id + "_on_kill", x -> Elements.NONE)
             .addAllOfType(Arrays.asList(
                     ResourceType.health,
                     ResourceType.mana
@@ -388,7 +388,7 @@ public class Stats implements ExileRegistryInit {
             .build();
 
     public static DataPackStatAccessor<ResourceAndAttack> RESOURCE_ON_HIT = DatapackStatBuilder
-            .<ResourceAndAttack>of(x -> x.resource.id + "_on_" + x.attackType.id + "_hit", x -> Elements.All)
+            .<ResourceAndAttack>of(x -> x.resource.id + "_on_" + x.attackType.id + "_hit", x -> Elements.NONE)
             .addAllOfType(ResourceAndAttack.allCombos())
             .worksWithEvent(DamageEvent.ID)
             .setPriority(100)
@@ -407,7 +407,7 @@ public class Stats implements ExileRegistryInit {
             .build();
 
     public static DataPackStatAccessor<ResourceType> LEECH_CAP = DatapackStatBuilder
-            .<ResourceType>of(x -> x.id + "_leech_cap", x -> Elements.All)
+            .<ResourceType>of(x -> x.id + "_leech_cap", x -> Elements.NONE)
             .addAllOfType(ResourceType.values())
             //.worksWithEvent(DamageEvent.ID)
             .setPriority(100)
@@ -592,7 +592,7 @@ public class Stats implements ExileRegistryInit {
             .build();
 
     public static DataPackStatAccessor<EmptyAccessor> AREA_DAMAGE = DatapackStatBuilder
-            .ofSingle("area_dmg", Elements.All)
+            .ofSingle("area_dmg", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(0)
             .setUsesMoreMultiplier()
@@ -609,7 +609,7 @@ public class Stats implements ExileRegistryInit {
             .build();
 
     public static DataPackStatAccessor<EmptyAccessor> TRAP_AREA_DAMAGE = DatapackStatBuilder
-            .ofSingle("trap_area_dmg", Elements.All)
+            .ofSingle("trap_area_dmg", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(0)
             .setUsesMoreMultiplier()
@@ -628,7 +628,7 @@ public class Stats implements ExileRegistryInit {
 
 
     public static DataPackStatAccessor<EmptyAccessor> DOT_DAMAGE = DatapackStatBuilder
-            .ofSingle("dot_dmg", Elements.All)
+            .ofSingle("dot_dmg", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)
@@ -645,7 +645,7 @@ public class Stats implements ExileRegistryInit {
             .build();
 
     public static DataPackStatAccessor<EmptyAccessor> TOTAL_DAMAGE = DatapackStatBuilder
-            .ofSingle("total_damage", Elements.All)
+            .ofSingle("total_damage", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(0)
             .setUsesMoreMultiplier()
@@ -662,7 +662,7 @@ public class Stats implements ExileRegistryInit {
             .build();
 
     public static DataPackStatAccessor<EmptyAccessor> ATTACK_DAMAGE = DatapackStatBuilder
-            .ofSingle("attack_damage", Elements.All)
+            .ofSingle("attack_damage", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(0)
             .setUsesMoreMultiplier()
@@ -701,7 +701,7 @@ public class Stats implements ExileRegistryInit {
 
 
     public static DataPackStatAccessor<EmptyAccessor> LOW_HP_HEALING = DatapackStatBuilder
-            .ofSingle("low_hp_healing", Elements.All)
+            .ofSingle("low_hp_healing", Elements.NONE)
             .worksWithEvent(RestoreResourceEvent.ID)
             .setPriority(100)
             .setUsesMoreMultiplier()
@@ -722,7 +722,7 @@ public class Stats implements ExileRegistryInit {
             .build();
 
     public static DataPackStatAccessor<EmptyAccessor> OUT_OF_COMBAT_REGEN = DatapackStatBuilder
-            .ofSingle("out_of_combat_regen", Elements.All)
+            .ofSingle("out_of_combat_regen", Elements.NONE)
             .worksWithEvent(RestoreResourceEvent.ID)
             .setPriority(100)
             .setUsesMoreMultiplier()
@@ -741,7 +741,7 @@ public class Stats implements ExileRegistryInit {
             .build();
 
     public static DataPackStatAccessor<EmptyAccessor> HEAL_STRENGTH = DatapackStatBuilder
-            .ofSingle("increase_healing", Elements.All)
+            .ofSingle("increase_healing", Elements.NONE)
             .worksWithEvent(RestoreResourceEvent.ID)
             .setPriority(100)
             .setUsesMoreMultiplier()
@@ -761,7 +761,7 @@ public class Stats implements ExileRegistryInit {
             .build();
 
     public static DataPackStatAccessor<EmptyAccessor> TOTEM_RESTORATION_STRENGTH = DatapackStatBuilder
-            .ofSingle("totem_resto", Elements.All)
+            .ofSingle("totem_resto", Elements.NONE)
             .worksWithEvent(RestoreResourceEvent.ID)
             .setPriority(100)
             .setUsesMoreMultiplier()
@@ -781,7 +781,7 @@ public class Stats implements ExileRegistryInit {
             .build();
 
     public static DataPackStatAccessor<EmptyAccessor> REJUV_HEAL_SELF = DatapackStatBuilder
-            .ofSingle("rejuv_eff_on_self", Elements.All)
+            .ofSingle("rejuv_eff_on_self", Elements.NONE)
             .worksWithEvent(RestoreResourceEvent.ID)
             .setPriority(100)
             .setSide(EffectSides.Target)
@@ -801,7 +801,7 @@ public class Stats implements ExileRegistryInit {
             .build();
 
     public static DataPackStatAccessor<EmptyAccessor> HEALING_RECEIVED = DatapackStatBuilder
-            .ofSingle("heal_effect_on_self", Elements.All)
+            .ofSingle("heal_effect_on_self", Elements.NONE)
             .worksWithEvent(RestoreResourceEvent.ID)
             .setPriority(100)
             .setSide(EffectSides.Target)
@@ -821,7 +821,7 @@ public class Stats implements ExileRegistryInit {
             .build();
 
     public static DataPackStatAccessor<EmptyAccessor> LIFESTEAL = DatapackStatBuilder
-            .ofSingle("lifesteal", Elements.All)
+            .ofSingle("lifesteal", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(100)
             .setSide(EffectSides.Source)
@@ -840,7 +840,7 @@ public class Stats implements ExileRegistryInit {
             .build();
 
     public static DataPackStatAccessor<EmptyAccessor> MANASTEAL = DatapackStatBuilder
-            .ofSingle("manasteal", Elements.All)
+            .ofSingle("manasteal", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(100)
             .setSide(EffectSides.Source)
@@ -859,7 +859,7 @@ public class Stats implements ExileRegistryInit {
             .build();
 
     public static DataPackStatAccessor<EmptyAccessor> SPELL_LIFESTEAL = DatapackStatBuilder
-            .ofSingle("spell_lifesteal", Elements.All)
+            .ofSingle("spell_lifesteal", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(100)
             .setSide(EffectSides.Source)
@@ -878,7 +878,7 @@ public class Stats implements ExileRegistryInit {
             .build();
 
     public static DataPackStatAccessor<EmptyAccessor> SPELL_MSSTEAL = DatapackStatBuilder
-            .ofSingle("spell_mssteal", Elements.All)
+            .ofSingle("spell_mssteal", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(100)
             .setSide(EffectSides.Source)
@@ -897,7 +897,7 @@ public class Stats implements ExileRegistryInit {
             .build();
 
     public static DataPackStatAccessor<EmptyAccessor> DOT_LIFESTEAL = DatapackStatBuilder
-            .ofSingle("dot_lifesteal", Elements.All)
+            .ofSingle("dot_lifesteal", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(100)
             .setSide(EffectSides.Source)
@@ -916,7 +916,7 @@ public class Stats implements ExileRegistryInit {
             .build();
 
     public static DataPackStatAccessor<EmptyAccessor> INCREASED_LEECH = DatapackStatBuilder
-            .ofSingle("inc_leech", Elements.All)
+            .ofSingle("inc_leech", Elements.NONE)
             .worksWithEvent(RestoreResourceEvent.ID)
             .setPriority(100)
             .setSide(EffectSides.Source)

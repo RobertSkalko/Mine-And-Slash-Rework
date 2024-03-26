@@ -15,7 +15,6 @@ spell_has_tag_magic
 is_in_combat
 resource_type_is_health
 ele_match_stat
-effect_has_tag_augment
 is_crossbow_wep_type
 is_target_low_hp
 restore_type_is_potion
@@ -79,6 +78,7 @@ is_spell
 spell_has_tag_melee
 threat_gen_type_is_deal_dmg
 is_attack_or_spell_attack
+spell_has_tag_holy
 is_bow_wep_type
 spell_has_tag_beast
 resource_type_is_blood

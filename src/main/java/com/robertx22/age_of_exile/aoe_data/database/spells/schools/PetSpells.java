@@ -35,10 +35,10 @@ public class PetSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.CHAOS))
                 .defaultAndMaxLevel(1)
                 .manualDesc(
-                        "Basic Attack dealing " + SpellCalcs.SPIDER_PET_BASIC.getLocDmgTooltip() + " " + Elements.Chaos.getIconNameDmg() + " to single enemy."
+                        "Basic Attack dealing " + SpellCalcs.SPIDER_PET_BASIC.getLocDmgTooltip() + " " + Elements.Shadow.getIconNameDmg() + " to single enemy."
                 )
                 .weaponReq(CastingWeapon.ANY_WEAPON)
-                .onHit(PartBuilder.damage(SpellCalcs.SPIDER_PET_BASIC, Elements.Chaos))
+                .onHit(PartBuilder.damage(SpellCalcs.SPIDER_PET_BASIC, Elements.Shadow))
                 .levelReq(1)
                 .build();
     }

@@ -149,7 +149,7 @@ public class GameChangerPerksAddtl implements ExileRegistryInit {
         PerkBuilder.gameChanger("nether_enthusiast", "Nether Enthusiast",
                 new OptScaleExactStat(50, new PhysicalToElement(Elements.Fire), ModType.FLAT),
                 new OptScaleExactStat(-50, Stats.ELEMENTAL_DAMAGE.get(Elements.Cold), ModType.MORE),
-                new OptScaleExactStat(-50, Stats.ELEMENTAL_DAMAGE.get(Elements.Lightning), ModType.MORE)
+                new OptScaleExactStat(-50, Stats.ELEMENTAL_DAMAGE.get(Elements.Nature), ModType.MORE)
         );
 
         PerkBuilder.gameChanger("glancing_strikes", "Glancing Strikes",

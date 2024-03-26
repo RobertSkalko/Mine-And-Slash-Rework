@@ -33,7 +33,7 @@ public class PantsUniques implements ExileRegistryInit {
                         DodgeRating.getInstance().mod(-25, -25).more()
                 ))
                 .build();
-        
+
         UniqueGearBuilder.of("burning_desire", "Burning Desire", BaseGearTypes.PLATE_CHEST)
                 .keepsBaseName()
                 .stats(Arrays.asList(
@@ -50,7 +50,7 @@ public class PantsUniques implements ExileRegistryInit {
                 .stat(AuraEffect.getInstance().mod(5, 15))
                 .stat(new ElementalResist(Elements.Fire).mod(10, 10))
                 .stat(new ElementalResist(Elements.Cold).mod(10, 10))
-                .stat(new ElementalResist(Elements.Chaos).mod(10, 10))
+                .stat(new ElementalResist(Elements.Shadow).mod(10, 10))
                 .build();
 
     }

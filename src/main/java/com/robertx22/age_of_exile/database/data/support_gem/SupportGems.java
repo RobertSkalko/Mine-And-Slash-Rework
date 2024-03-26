@@ -175,11 +175,11 @@ public class SupportGems {
                 ))
                 .levelReq(20).addToSerializables();
         new SupportGem("lightning_damage", "Lightning Damage", PlayStyle.INT, 1.3F,
-                Arrays.asList(new StatMod(15, 30, Stats.ELEMENTAL_DAMAGE.get(Elements.Lightning), ModType.MORE)
+                Arrays.asList(new StatMod(15, 30, Stats.ELEMENTAL_DAMAGE.get(Elements.Nature), ModType.MORE)
                 ))
                 .levelReq(20).addToSerializables();
         new SupportGem("chaos_damage", "Chaos Damage", PlayStyle.DEX, 1.3F,
-                Arrays.asList(new StatMod(15, 30, Stats.ELEMENTAL_DAMAGE.get(Elements.Chaos), ModType.MORE)
+                Arrays.asList(new StatMod(15, 30, Stats.ELEMENTAL_DAMAGE.get(Elements.Shadow), ModType.MORE)
                 ))
                 .levelReq(20).addToSerializables();
         new SupportGem("physical_damage", "Physical Damage", PlayStyle.STR, 1.3F,

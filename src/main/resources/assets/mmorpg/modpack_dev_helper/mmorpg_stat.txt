@@ -6,6 +6,7 @@ plus_lvl_shield_spells
 electrify_damage
 accuracy
 dmg_when_low_hp
+plus_lvl_holy_spells
 energy_regen
 trident_damage
 farming_core_drop_bonus
@@ -27,6 +28,7 @@ int_dmg
 learn_song_of_valor
 water_crit_taken
 bleed_damage
+holy_penetration
 energy
 summon_spell_dmg_taken
 inc_effect_of_song_buff_given
@@ -34,10 +36,12 @@ bleed_duration
 trap_spell_dmg
 learn_chilling_field
 learn_song_of_vigor
+phys_to_holy
 arrow_cdr
 burn_proc_chance
 food_eff_dur_u_cast
 burn_damage
+holy_cdr
 cdr
 salvaging_double_drop
 inc_effect_of_defensive_buff_on_you
@@ -46,6 +50,7 @@ chaos_spell_dmg_taken
 learn_wish
 defensive_eff_dur_u_cast
 damage_spell_dmg
+plus_phys_to_holy
 alchemy_triple_drop
 totem_spell_dmg
 elemental_mana_leech
@@ -66,7 +71,6 @@ mining_greater_drop_bonus
 fire_res_aura_cost
 song_spell_dmg_taken
 all_all_damage
-spell_elemental_damage
 magic_shield_on_hit_hit
 learn_minion_explosion
 electrify_proc_chance
@@ -89,6 +93,7 @@ phys_to_elemental
 magic_cdr
 learn_frost_trap
 freeze_damage
+spell_holy_damage
 chance_of_slow
 learn_charged_bolt
 inc_effect_of_offensive_buff_on_you
@@ -138,6 +143,7 @@ fire_cdr
 proj_dmg_received
 plus_lvl_golem_spells
 thorns_spell_dmg_taken
+holy_crit_taken
 rejuvenate_cdr
 elemental_penetration
 ele_sword_damage
@@ -182,6 +188,8 @@ proc_shatter
 has_pet_ability_cdr
 learn_fire_trap
 learn_ice_comet
+holy_any_wep_damage
+holy_mana_leech
 elemental_vuln_crit
 all_resist
 water_mana_leech
@@ -232,6 +240,7 @@ shout_spell_dmg_taken
 blood_user
 enchanting_exp_bonus
 chaos_ailment_aura_cost
+holy_resist
 learn_frost_nova
 dmg_received
 plus_lvl_has_pet_ability_spells
@@ -251,7 +260,6 @@ projectile_damage_per_5_strength
 critical_damage
 mana_cost
 chaos_res_aura_cost
-inc_effect_of_augment_buff_given
 ele_trident_damage
 plus_lvl_buff_spells
 physical_weapon_damage
@@ -306,6 +314,7 @@ plus_lvl_lightning_spells
 out_of_combat_regen
 chaining_spell_dmg
 negative_eff_dur_u_cast
+holy_spell_dmg_taken
 plus_phys_to_fire
 poison_duration
 dmg_taken_to_mana
@@ -314,6 +323,7 @@ plus_lvl_all_spells
 movement_cdr
 learn_boomerang
 chaos_weapon_damage
+holy_spell_dmg
 buff_spell_dmg
 all_chaos_damage
 rejuv_eff_on_self
@@ -323,6 +333,7 @@ projectile_spell_dmg_taken
 learn_fireball
 low_hp_healing
 learn_fire_nova
+holy_dot_damage
 weapon_damage
 str_dmg
 learn_close_nova
@@ -332,7 +343,6 @@ farming_misc_drop_bonus
 light_res_aura_cost
 golem_spell_chance
 weapon_skill_spell_dmg
-spell_all_damage
 plus_lvl_cold_spells
 all_any_wep_damage
 chaos_damage_aura_cost
@@ -385,6 +395,7 @@ farming_greater_drop_bonus
 enchanting_lesser_drop_bonus
 plus_lvl_beast_spells
 mana
+holy_health_leech
 physical_spell_dmg
 eff_dur_u_cast
 physical_spell_dmg_taken
@@ -425,7 +436,6 @@ ranged_spell_dmg
 physical_mana_leech
 learn_chilling_touch
 learn_gale_wind
-augment_eff_dur_u_cast
 fishing_double_drop
 dot_lifesteal
 husbandry_greater_drop_bonus
@@ -468,9 +478,9 @@ learn_frost_flower
 ele_bow_damage
 jewel_socket
 learn_power_chord
+all_holy_damage
 physical_ailment_aura_cost
 health_per_10_intelligence
-inc_effect_of_augment_buff_on_you
 block_chance
 ele_axe_damage
 melee_spell_dmg
@@ -508,6 +518,7 @@ lightning_resist
 learn_blizzard
 electrify_chance
 shatter_cdr
+spell_physical_damage
 lightning_dot_damage
 learn_explosive_arrow
 plus_lvl_staff_spell_spells
@@ -537,6 +548,7 @@ shout_cdr
 dex_dmg_received
 attack_damage
 mana_on_kill
+holy_weapon_damage
 learn_charge
 gear_weapon_damage
 damage_shield
@@ -575,6 +587,8 @@ all_vuln_crit
 mana_leech_cap
 block_aura_cost
 learn_frozen_orb
+max_holy_resist
+holy_vuln_crit
 inc_leech
 learn_explode_minions
 salvaging_exp_bonus
@@ -592,7 +606,6 @@ magic_shield_regen
 salvaging_greater_drop_bonus
 mana_reg_aura_cost
 learn_poison_cloud
-crit_water_dmg_mana
 physical_resist
 curse_cdr
 plus_lvl_ranged_spells

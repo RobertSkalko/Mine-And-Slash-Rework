@@ -35,7 +35,12 @@ public class MapAffixes {
         // mobs
         new MapAffix("crit").addMod(new StatMod(25, 100, Stats.CRIT_CHANCE.get())).addToSerializables();
         new MapAffix("crit_dmg").addMod(new StatMod(20, 50, Stats.CRIT_DAMAGE.get())).addToSerializables();
-        new MapAffix("all_ele_res").addMod(new StatMod(20, 50, new ElementalResist(Elements.All), ModType.FLAT)).addToSerializables();
+
+        var allres = new MapAffix("all_ele_res");
+        for (Elements ele : Elements.getAllSingle()) {
+            allres.addMod(new StatMod(20, 50, new ElementalResist(ele), ModType.FLAT));
+        }
+        allres.addToSerializables();
 
         new MapAffix("health").addMod(new StatMod(20, 50, Health.getInstance(), ModType.MORE)).addToSerializables();
         new MapAffix("armor").addMod(new StatMod(20, 100, Armor.getInstance(), ModType.MORE)).addToSerializables();

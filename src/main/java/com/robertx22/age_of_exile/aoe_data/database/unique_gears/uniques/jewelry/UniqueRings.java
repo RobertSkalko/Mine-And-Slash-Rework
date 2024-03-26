@@ -6,7 +6,6 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuilder;
 import com.robertx22.age_of_exile.database.data.StatMod;
-import com.robertx22.age_of_exile.tags.all.EffectTags;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttributes;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
@@ -24,6 +23,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.special.SpecialStats
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCapacity;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
+import com.robertx22.age_of_exile.tags.all.EffectTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -34,7 +34,7 @@ public class UniqueRings implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
-        
+
         UniqueGearBuilder.of("air_disaster", "Aria of Disaster",
                         BaseGearTypes.RING)
                 .setReplacesName()
@@ -55,7 +55,7 @@ public class UniqueRings implements ExileRegistryInit {
                         new StatMod(-75, 25, Stats.CRIT_DAMAGE.get()),
                         new StatMod(-50, 15, new ElementalResist(Elements.Cold), ModType.FLAT),
                         new StatMod(-50, 15, new ElementalResist(Elements.Fire), ModType.FLAT),
-                        new StatMod(-50, 15, new ElementalResist(Elements.Chaos), ModType.FLAT)
+                        new StatMod(-50, 15, new ElementalResist(Elements.Shadow), ModType.FLAT)
                 ))
                 .devComment("global crit + res, high RNG")
                 .build();
@@ -69,7 +69,7 @@ public class UniqueRings implements ExileRegistryInit {
                         new StatMod(10, 10, SpecialStats.HEAL_CLEANSE, ModType.FLAT),
                         new StatMod(5, 10, HealthRegen.getInstance(), ModType.PERCENT),
                         new StatMod(10, 15, Stats.HEAL_STRENGTH.get(), ModType.FLAT),
-                        new StatMod(15, 25, new ElementalResist(Elements.Chaos), ModType.FLAT)
+                        new StatMod(15, 25, new ElementalResist(Elements.Shadow), ModType.FLAT)
                 ))
 
                 .devComment("")
@@ -82,7 +82,7 @@ public class UniqueRings implements ExileRegistryInit {
                 .setReplacesName()
 
                 .stats(Arrays.asList(
-                        new StatMod(10, 20, new ElementalResist(Elements.Chaos), ModType.FLAT),
+                        new StatMod(10, 20, new ElementalResist(Elements.Shadow), ModType.FLAT),
                         new StatMod(10, 20, new ElementalResist(Elements.Fire), ModType.FLAT),
                         new StatMod(10, 20, new ElementalResist(Elements.Cold), ModType.FLAT),
                         new StatMod(25, 25, SpecialStats.BETTER_FOOD_BUFFS, ModType.FLAT),
@@ -126,7 +126,7 @@ public class UniqueRings implements ExileRegistryInit {
                 .setReplacesName()
                 .stats(Arrays.asList(
                         new StatMod(-50, 50, new ElementalResist(Elements.Fire), ModType.FLAT),
-                        new StatMod(-50, 50, new ElementalResist(Elements.Chaos), ModType.FLAT),
+                        new StatMod(-50, 50, new ElementalResist(Elements.Shadow), ModType.FLAT),
                         new StatMod(-50, 15, TreasureQuality.getInstance(), ModType.FLAT),
                         new StatMod(-50, 15, TreasureQuantity.getInstance(), ModType.FLAT)
                 ))
@@ -139,7 +139,7 @@ public class UniqueRings implements ExileRegistryInit {
                         BaseGearTypes.RING)
 
                 .stats(Arrays.asList(
-                        new StatMod(15, 25, new ElementalResist(Elements.Chaos), ModType.FLAT),
+                        new StatMod(15, 25, new ElementalResist(Elements.Shadow), ModType.FLAT),
                         new StatMod(-20, 20, AuraEffect.getInstance(), ModType.FLAT),
                         new StatMod(10, 15, SkillDamage.getInstance(), ModType.FLAT),
                         new StatMod(5, 10, ManaRegen.getInstance(), ModType.PERCENT)
@@ -171,7 +171,7 @@ public class UniqueRings implements ExileRegistryInit {
                 .stats(Arrays.asList(
                         new StatMod(-50, 35, Stats.ELEMENTAL_DAMAGE.get(Elements.Cold), ModType.FLAT),
                         new StatMod(-50, 35, Stats.ELEMENTAL_DAMAGE.get(Elements.Fire), ModType.FLAT),
-                        new StatMod(-50, 35, Stats.ELEMENTAL_DAMAGE.get(Elements.Lightning), ModType.FLAT)
+                        new StatMod(-50, 35, Stats.ELEMENTAL_DAMAGE.get(Elements.Nature), ModType.FLAT)
                 ))
 
                 .build();
@@ -190,7 +190,7 @@ public class UniqueRings implements ExileRegistryInit {
                 .keepsBaseName()
                 .stat(Stats.ELEMENTAL_DAMAGE.get(Elements.Fire).mod(10, 25))
                 .stat(Stats.ELEMENTAL_DAMAGE.get(Elements.Cold).mod(10, 25))
-                .stat(Stats.ELEMENTAL_DAMAGE.get(Elements.Chaos).mod(10, 20))
+                .stat(Stats.ELEMENTAL_DAMAGE.get(Elements.Shadow).mod(10, 20))
                 .build();
 
 
@@ -205,7 +205,7 @@ public class UniqueRings implements ExileRegistryInit {
                 .keepsBaseName()
                 .stat(Stats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.curse).mod(10, 25))
                 .stat(Stats.EFFECT_DURATION_YOU_CAST_PER_TAG.get(EffectTags.curse).mod(50, 50))
-                .stat(new ElementalResist(Elements.Chaos).mod(10, 25))
+                .stat(new ElementalResist(Elements.Shadow).mod(10, 25))
                 .build();
     }
 }

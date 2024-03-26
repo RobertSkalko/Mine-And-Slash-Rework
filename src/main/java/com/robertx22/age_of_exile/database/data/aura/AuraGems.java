@@ -104,7 +104,7 @@ public class AuraGems {
                 new StatMod(5, 25, new AilmentChance(Ailments.BURN), ModType.FLAT)
         )).levelReq(10).addToSerializables();
         new AuraGem(lightning_ailment, PlayStyle.INT, 0.4F, Arrays.asList(
-                new StatMod(10, 50, Stats.ELEMENTAL_DAMAGE.get(Elements.Lightning), ModType.FLAT),
+                new StatMod(10, 50, Stats.ELEMENTAL_DAMAGE.get(Elements.Nature), ModType.FLAT),
                 new StatMod(5, 25, new AilmentChance(Ailments.ELECTRIFY), ModType.FLAT)
         )).levelReq(10).addToSerializables();
         new AuraGem(physical_ailment, PlayStyle.STR, 0.4F, Arrays.asList(
@@ -112,7 +112,7 @@ public class AuraGems {
                 new StatMod(5, 25, new AilmentChance(Ailments.BLEED), ModType.FLAT)
         )).levelReq(10).addToSerializables();
         new AuraGem(chaos_ailment, PlayStyle.DEX, 0.4F, Arrays.asList(
-                new StatMod(10, 50, Stats.ELEMENTAL_DAMAGE.get(Elements.Chaos), ModType.FLAT),
+                new StatMod(10, 50, Stats.ELEMENTAL_DAMAGE.get(Elements.Shadow), ModType.FLAT),
                 new StatMod(5, 25, new AilmentChance(Ailments.POISON), ModType.FLAT)
         )).levelReq(10).addToSerializables();
 
@@ -129,13 +129,13 @@ public class AuraGems {
                 new StatMod(10, 35, Stats.ELEMENTAL_DAMAGE.get(Elements.Fire), ModType.MORE)
         )).levelReq(30).addToSerializables();
         new AuraGem(lightning_damage, PlayStyle.INT, 0.4F, Arrays.asList(
-                new StatMod(10, 35, Stats.ELEMENTAL_DAMAGE.get(Elements.Lightning), ModType.MORE)
+                new StatMod(10, 35, Stats.ELEMENTAL_DAMAGE.get(Elements.Nature), ModType.MORE)
         )).levelReq(30).addToSerializables();
         new AuraGem(physical_damage, PlayStyle.STR, 0.4F, Arrays.asList(
                 new StatMod(10, 35, Stats.ELEMENTAL_DAMAGE.get(Elements.Physical), ModType.MORE)
         )).levelReq(30).addToSerializables();
         new AuraGem(chaos_damage, PlayStyle.DEX, 0.4F, Arrays.asList(
-                new StatMod(10, 35, Stats.ELEMENTAL_DAMAGE.get(Elements.Chaos), ModType.MORE)
+                new StatMod(10, 35, Stats.ELEMENTAL_DAMAGE.get(Elements.Shadow), ModType.MORE)
         )).levelReq(30).addToSerializables();
 
 
@@ -179,7 +179,7 @@ public class AuraGems {
         new AuraGem(ELEMENT_RESIST, PlayStyle.INT, 0.4F, Arrays.asList(
                 new StatMod(15, 30, new ElementalResist(Elements.Fire), ModType.FLAT),
                 new StatMod(15, 30, new ElementalResist(Elements.Cold), ModType.FLAT),
-                new StatMod(15, 30, new ElementalResist(Elements.Lightning), ModType.FLAT)
+                new StatMod(15, 30, new ElementalResist(Elements.Nature), ModType.FLAT)
         )).levelReq(20).addToSerializables();
 
         new AuraGem(COLD_RESIST, PlayStyle.DEX, 0.35F, Arrays.asList(
@@ -193,13 +193,13 @@ public class AuraGems {
         )).levelReq(20).addToSerializables();
 
         new AuraGem(LIGHTNING_RESIST, PlayStyle.INT, 0.35F, Arrays.asList(
-                new StatMod(25, 50, new ElementalResist(Elements.Lightning), ModType.FLAT),
-                new StatMod(1, 5, new MaxElementalResist(Elements.Lightning), ModType.FLAT)
+                new StatMod(25, 50, new ElementalResist(Elements.Nature), ModType.FLAT),
+                new StatMod(1, 5, new MaxElementalResist(Elements.Nature), ModType.FLAT)
         )).levelReq(20).addToSerializables();
 
         new AuraGem(CHAOS_RESIST, PlayStyle.INT, 0.35F, Arrays.asList(
-                new StatMod(25, 50, new ElementalResist(Elements.Chaos), ModType.FLAT),
-                new StatMod(1, 5, new MaxElementalResist(Elements.Chaos), ModType.FLAT)
+                new StatMod(25, 50, new ElementalResist(Elements.Shadow), ModType.FLAT),
+                new StatMod(1, 5, new MaxElementalResist(Elements.Shadow), ModType.FLAT)
         )).levelReq(20).addToSerializables();
 
     }

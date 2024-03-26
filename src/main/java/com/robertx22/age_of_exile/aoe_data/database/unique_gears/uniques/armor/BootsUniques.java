@@ -25,7 +25,7 @@ public class BootsUniques implements ExileRegistryInit {
                         new StatMod(25, 150, GearDefense.getInstance(), ModType.PERCENT),
                         new StatMod(25, 50, new AilmentProcStat(Ailments.FREEZE), ModType.FLAT),
                         new StatMod(25, 50, new AilmentProcStat(Ailments.ELECTRIFY), ModType.FLAT),
-                        new StatMod(-25, -25, new ElementalResist(Elements.Chaos), ModType.FLAT)
+                        new StatMod(-25, -25, new ElementalResist(Elements.Shadow), ModType.FLAT)
                 ))
                 .build();
 
@@ -41,9 +41,9 @@ public class BootsUniques implements ExileRegistryInit {
                 .setReplacesName()
                 .stats(Arrays.asList(
                         new StatMod(25, 100, GearDefense.getInstance(), ModType.PERCENT),
-                        new StatMod(50, 100, new ElementalResist(Elements.Chaos), ModType.FLAT),
+                        new StatMod(50, 100, new ElementalResist(Elements.Shadow), ModType.FLAT),
                         new StatMod(-25, -25, new ElementalResist(Elements.Cold), ModType.FLAT),
-                        new StatMod(-25, -25, new ElementalResist(Elements.Lightning), ModType.FLAT),
+                        new StatMod(-25, -25, new ElementalResist(Elements.Nature), ModType.FLAT),
                         new StatMod(-25, -25, new ElementalResist(Elements.Fire), ModType.FLAT)
                 ))
                 .build();

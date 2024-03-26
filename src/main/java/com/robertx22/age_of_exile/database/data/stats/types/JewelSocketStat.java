@@ -8,7 +8,7 @@ public class JewelSocketStat extends Stat {
     private JewelSocketStat() {
         this.max = 9;
     }
-       
+
     public static JewelSocketStat getInstance() {
         return JewelSocketStat.SingletonHolder.INSTANCE;
     }
@@ -20,7 +20,7 @@ public class JewelSocketStat extends Stat {
 
     @Override
     public Elements getElement() {
-        return Elements.All;
+        return Elements.NONE;
     }
 
     @Override

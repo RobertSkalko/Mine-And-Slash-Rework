@@ -36,7 +36,7 @@ public class GameChangerPerks implements ExileRegistryInit {
         PerkBuilder.gameChanger("ms_all_in", "Stare of Abyss",
                 new OptScaleExactStat(-100, Health.getInstance(), ModType.MORE),
                 new OptScaleExactStat(30, MagicShield.getInstance(), ModType.MORE),
-                new OptScaleExactStat(50, new ElementalResist(Elements.Chaos), ModType.MORE)
+                new OptScaleExactStat(50, new ElementalResist(Elements.Shadow), ModType.MORE)
         );
 
         PerkBuilder.gameChanger("warlock", "Warlock",
@@ -97,7 +97,7 @@ public class GameChangerPerks implements ExileRegistryInit {
 
         PerkBuilder.gameChanger("mana_battery", "Mana Battery",
                 new OptScaleExactStat(50, DamageAbsorbedByMana.getInstance(), ModType.FLAT),
-                new OptScaleExactStat(25, new ElementalResist(Elements.Lightning), ModType.FLAT)
+                new OptScaleExactStat(25, new ElementalResist(Elements.Nature), ModType.FLAT)
         );
 
         PerkBuilder.gameChanger("divinity", "Divinity",

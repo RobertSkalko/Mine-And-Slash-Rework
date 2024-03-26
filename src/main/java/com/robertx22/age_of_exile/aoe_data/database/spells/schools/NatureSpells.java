@@ -40,7 +40,7 @@ public class NatureSpells implements ExileRegistryInit {
         SpellBuilder.of(CHAOS_TOTEM, PlayStyle.STR, SpellConfiguration.Builder.instant(40, 20 * 60), "Chaos Totem",
                         Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.totem, SpellTags.CHAOS))
 
-                .manualDesc("Summons a totem that spawns chaos meteors, dealing " + SpellCalcs.CHAOS_TOTEM.getLocDmgTooltip(Elements.Chaos)
+                .manualDesc("Summons a totem that spawns chaos meteors, dealing " + SpellCalcs.CHAOS_TOTEM.getLocDmgTooltip(Elements.Shadow)
                         + " in an area.")
 
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
@@ -63,7 +63,7 @@ public class NatureSpells implements ExileRegistryInit {
                                 .put(MapField.IS_BLOCK_FALLING, true))))
 
                 .onTick("meteor", PartBuilder.particleOnTick(1D, ParticleTypes.WITCH, 20D, 0.5D))
-                .onExpire("meteor", PartBuilder.damageInAoe(SpellCalcs.CHAOS_TOTEM, Elements.Chaos, 2D))
+                .onExpire("meteor", PartBuilder.damageInAoe(SpellCalcs.CHAOS_TOTEM, Elements.Shadow, 2D))
 
                 .onExpire("meteor", PartBuilder.aoeParticles(ParticleTypes.WITCH, 100D, 2D))
                 .onExpire("meteor", PartBuilder.aoeParticles(ParticleTypes.EXPLOSION, 15D, 3D))
@@ -104,13 +104,13 @@ public class NatureSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.CHAOS))
                 .manualDesc(
                         "Erupt with poisonous gas, dealing " + SpellCalcs.POISON_CLOUD.getLocDmgTooltip()
-                                + " " + Elements.Chaos.getIconNameDmg() + " to nearby enemies.")
+                                + " " + Elements.Shadow.getIconNameDmg() + " to nearby enemies.")
                 .weaponReq(CastingWeapon.ANY_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.PLAYER_SPLASH_HIGH_SPEED, 0.5D, 1D))
                 .onCast(PartBuilder.groundParticles(ParticleTypes.SNEEZE, 300D, 5D, 0.2D))
                 .onCast(PartBuilder.groundParticles(ParticleTypes.COMPOSTER, 200D, 5D, 0.2D))
 
-                .onCast(PartBuilder.damageInAoe(SpellCalcs.POISON_CLOUD, Elements.Chaos, 5D)
+                .onCast(PartBuilder.damageInAoe(SpellCalcs.POISON_CLOUD, Elements.Shadow, 5D)
                         .addPerEntityHit(PartBuilder.playSoundPerTarget(SoundEvents.GENERIC_HURT, 1D, 1D)))
                 .levelReq(20)
                 .build();
