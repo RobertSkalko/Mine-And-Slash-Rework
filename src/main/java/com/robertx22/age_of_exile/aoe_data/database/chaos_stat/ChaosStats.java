@@ -16,9 +16,9 @@ public class ChaosStats implements ExileRegistryInit {
         new ChaosStat("normal_med", "Elevated", 1000, 2, Affix.Type.suffix, 0, IRarity.NORMAL_GEAR_RARITIES).addToSerializables();
         new ChaosStat("normal_high", "Ascended", 500, 3, Affix.Type.suffix, 0, IRarity.NORMAL_GEAR_RARITIES).addToSerializables();
 
-        new ChaosStat("unique_low", "Upgraded", 5000, 1, Affix.Type.suffix, 1, List.of(IRarity.UNIQUE_ID)).addToSerializables();
-        new ChaosStat("unique_med", "Elevated", 1000, 2, Affix.Type.suffix, 2, List.of(IRarity.UNIQUE_ID)).addToSerializables();
-        new ChaosStat("unique_high", "Ascended", 250, 3, Affix.Type.suffix, 3, List.of(IRarity.UNIQUE_ID)).addToSerializables();
+        new ChaosStat("unique_low", "Upgraded", 5000, 1, Affix.Type.suffix, 1, List.of(IRarity.UNIQUE_ID, IRarity.RUNEWORD_ID)).addToSerializables();
+        new ChaosStat("unique_med", "Elevated", 1000, 2, Affix.Type.suffix, 2, List.of(IRarity.UNIQUE_ID, IRarity.RUNEWORD_ID)).addToSerializables();
+        new ChaosStat("unique_high", "Ascended", 250, 3, Affix.Type.suffix, 3, List.of(IRarity.UNIQUE_ID, IRarity.RUNEWORD_ID)).addToSerializables();
 
     }
 }

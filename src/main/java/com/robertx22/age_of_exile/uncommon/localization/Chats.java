@@ -11,6 +11,7 @@ public enum Chats implements IAutoLocName {
     YOU_CANT_TAKE_ANY_MORE_PROPHECIES("You have accepted the maximum amount of Prophecies"),
     PROPHECY_BAR_FILLED("Your Prophecies are ready to Claim."),
     PROPHECY_MAP_DEATH("You lost %1$s Prophecy Progress"),
+    PROPHECY_MAP_DEATHCURRENCY("You lost %1$s Prophecy Currency"),
     ITEM_CANT_CORRUPT_TWICE("This item is already corrupted."),
     ALT_TO_SHOW_OTHER_SPELL("[Alt] to show the other Spell"),
     YOU_NEED_FULL_BAR_TO_TAKE_PROPHECY("You need to fill the progress bar to be able to accept Prophecies"),

@@ -59,6 +59,9 @@ public class PlayerProphecies {
         if (WorldUtils.isDungeonWorld(p.level())) {
             this.progress = MathHelper.clamp(progress - GameBalanceConfig.get().PROPHECY_PROGRESS_LOST_ON_MAP_DEATH, 0, 100);
             p.sendSystemMessage(Chats.PROPHECY_MAP_DEATH.locName(GameBalanceConfig.get().PROPHECY_PROGRESS_LOST_ON_MAP_DEATH).withStyle(ChatFormatting.RED));
+
+            this.favor = MathHelper.clamp(favor - GameBalanceConfig.get().PROPHECY_CURRENCY_LOST_ON_MAP_DEATH, 0, favor);
+            p.sendSystemMessage(Chats.PROPHECY_MAP_DEATHCURRENCY.locName(GameBalanceConfig.get().PROPHECY_CURRENCY_LOST_ON_MAP_DEATH).withStyle(ChatFormatting.RED));
         }
     }
 

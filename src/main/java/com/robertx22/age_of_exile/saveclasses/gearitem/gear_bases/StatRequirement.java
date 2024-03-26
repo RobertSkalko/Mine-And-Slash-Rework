@@ -34,7 +34,7 @@ public class StatRequirement {
 
     public static StatRequirement of(PlayStyle... styles) {
         StatRequirement r = new StatRequirement();
-        float multi = 0.75F / (float) styles.length;
+        float multi = 0.5F / (float) styles.length;
 
         for (PlayStyle style : styles) {
             r.setStyleReq(style, multi);
