@@ -5,6 +5,7 @@ v.5.4.0
 - removed auto pve server config, it's now a per player config in the main hub config section, if 2 players both have auto pve on, they will be automatically grouped, won't be able to damage each other etc.
 This is meant for players who don't want to mess with inviting to parties etc
 - fix harvest generation/tp issues
+- runed items now have a min drop lvl
 - attempt fix double death xp loss etc
 - rune reroll now cant roll stat into lower value than it was before, roll away!
 - fixed the tooltips a bit, now correctly cuts lines only if there is too many (before it counted double blank lines that were removed anyway)

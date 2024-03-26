@@ -114,8 +114,7 @@ public class SlashItems {
     public static RegObj<Item> LEATHER_SET = Def.item(() -> new TagForceSoulItem(() -> Items.LEATHER, SlotTags.dodge_stat.GUID(), "Leather"), "leather_set");
     public static RegObj<Item> PLATE_SET = Def.item(() -> new TagForceSoulItem(() -> Items.COPPER_INGOT, SlotTags.armor_stat.GUID(), "Plate"), "plate_set");
 
-    public static RegObj<Item> AUGMENT = Def.item(() -> new Item(new Item.Properties()), "augment");
-
+  
     public static class GearItems {
 
         public static void init() {

@@ -102,7 +102,6 @@ public class ExileRegistryTypes {
     public static ExileRegistryType PROPHECY_START = ExileRegistryType.register(SlashRef.MODID, "prophecy_start", 41, null, SyncTime.NEVER);
     public static ExileRegistryType CHAOS_STAT = ExileRegistryType.register(SlashRef.MODID, "chaos_stat", 42, ChaosStat.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType STAT_COMPAT = ExileRegistryType.register(SlashRef.MODID, "stat_compat", 44, StatCompat.SERIALIZER, SyncTime.ON_LOGIN);
-    //public static ExileRegistryType AUGMENT = ExileRegistryType.register(SlashRef.MODID, "augment", 40, Augment.SERIALIZER, SyncTime.ON_LOGIN);
-
+  
 
 }
