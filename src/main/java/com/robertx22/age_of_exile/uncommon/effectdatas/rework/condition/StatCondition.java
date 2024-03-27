@@ -11,17 +11,25 @@ import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public abstract class StatCondition implements JsonExileRegistry<StatCondition>, IAutoGson<StatCondition> {
+
+    public static List<StatCondition> ALL = new ArrayList<>();
 
     public static StatCondition SERIALIZER = new RandomRollCondition();
     public static HashMap<String, StatCondition> SERIALIZERS = new HashMap<>();
 
 
+    public static void loadclass() {
+
+    }
+
+
     public static void addSer(StatCondition eff) {
         SERIALIZERS.put(eff.ser, eff);
-
     }
 
     public String id = "";
@@ -35,6 +43,8 @@ public abstract class StatCondition implements JsonExileRegistry<StatCondition>,
     public StatCondition(String id, String ser) {
         this.ser = ser;
         this.id = id;
+
+        ALL.add(this);
     }
 
     public StatCondition flipCondition() {

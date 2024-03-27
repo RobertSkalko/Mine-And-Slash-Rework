@@ -19,7 +19,7 @@ public class MapAffixes {
 
     public static void init() {
 
-        List<Elements> elements = Elements.getAllSingleElementals();
+        List<Elements> elements = Elements.getAllSingle();
 
         for (Elements element : elements) {
 

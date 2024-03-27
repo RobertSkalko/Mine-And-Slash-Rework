@@ -1,6 +1,8 @@
 package com.robertx22.age_of_exile.saveclasses.spells;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
+import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
+import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffectInstanceData;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
@@ -256,6 +258,16 @@ public class SpellCastingData {
                 castTicksDone++;
 
                 if (castTickLeft < 0) {
+
+                    for (Map.Entry<String, ExileEffectInstanceData> en : ctx.data.statusEffects.exileMap.entrySet()) {
+                        ExileEffect eff = ExileDB.ExileEffects().get(en.getKey());
+                        if (eff.remove_on_spell_cast != null) {
+                            if (spell.config.tags.contains(eff.remove_on_spell_cast)) {
+                                en.getValue().stacks--;
+                            }
+                        }
+                    }
+
                     this.calcSpell = null;
                 }
             } else {

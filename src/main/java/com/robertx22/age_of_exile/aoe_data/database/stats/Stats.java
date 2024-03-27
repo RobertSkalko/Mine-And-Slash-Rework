@@ -140,7 +140,7 @@ public class Stats implements ExileRegistryInit {
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_RESOURCE.get(ResourceType.health))
             .addCondition(StatConditions.IS_RESTORE_TYPE.get(RestoreType.regen))
-            .addEffect(e -> StatEffects.GIVE_SELF_EFFECT.get(e))
+            .addEffect(e -> StatEffects.GIVE_SELF_EFFECT_30_SEC.get(e))
             .setLocName(x -> Stat.format(
                     "Give " + x.locname + " to self"
             ))
@@ -1001,6 +1001,22 @@ public class Stats implements ExileRegistryInit {
             })
             .build();
 
+    public static DataPackStatAccessor<SpellTag> CAST_TIME_PER_SPELL_TAG = DatapackStatBuilder
+            .<SpellTag>of(x -> x.GUID() + "_cast_time", x -> Elements.Physical)
+            .addAllOfType(SpellTag.getAll())
+
+            .worksWithEvent(SpellStatsCalculationEvent.ID)
+            .setPriority(0)
+            .setSide(EffectSides.Source)
+            .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x))
+            .addEffect(StatEffects.DECREASE_CAST_TIME)
+            .setLocName(x -> x.locNameForLangFile() + " Cast Time")
+            .setLocDesc(x -> "Reduces cast time of spells with this tag")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+            })
+            .build();
+
     public static DataPackStatAccessor<SpellTag> DAMAGE_TAKEN_PER_SPELL_TAG = DatapackStatBuilder
             .<SpellTag>of(x -> x.GUID() + "_spell_dmg_taken", x -> Elements.Physical)
             .addAllOfType(SpellTag.getAll())
@@ -1315,7 +1331,7 @@ public class Stats implements ExileRegistryInit {
 
     public static DataPackStatAccessor<Elements> ELE_DAMAGE_WHEN_TARGET_IS_LOW_HP = DatapackStatBuilder
             .<Elements>of(x -> x.guidName + "_dmg_when_target_low_hp", x -> x)
-            .addAllOfType(Elements.getAllSingleElementals())
+            .addAllOfType(Elements.getAllSingle())
             .worksWithEvent(DamageEvent.ID)
             .setPriority(100)
             .setSide(EffectSides.Source)

@@ -29,7 +29,7 @@ public class DataHolder<Key, Item extends JsonExileRegistry> {
 
     public void addToSerializables() {
         map.values()
-            .forEach(x -> x.addToSerializables());
+                .forEach(x -> x.addToSerializables());
     }
 
     private HashMap<Key, Item> map = new HashMap<>();
@@ -37,12 +37,12 @@ public class DataHolder<Key, Item extends JsonExileRegistry> {
     public Item get(Key key) {
 
         if (!map.containsKey(key)) {
-
             try {
                 throw new RuntimeException("Key missing: " + key.toString());
             } catch (RuntimeException e) {
                 e.printStackTrace();
             }
+        
         }
 
         return map.get(key);

@@ -14,11 +14,11 @@ rare
 totem
 leather_chest
 cloth_helmet
-tome
 mythic
+tome
 epic
-staff
 necklace
+staff
 cloth_pants
 leather_pants
 sword

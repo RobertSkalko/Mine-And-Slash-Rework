@@ -78,6 +78,7 @@ public class SlashItems {
     public static RegObj<ProjectileItem> SLIMEBALL = Def.item(() -> new ProjectileItem("slimeball"), "projectile/" + "slimeball");
     public static RegObj<ProjectileItem> LIGHTNING = Def.item(() -> new ProjectileItem("lightning"), "projectile/" + "lightning");
     public static RegObj<ProjectileItem> BOOMERANG = Def.item(() -> new ProjectileItem("boomerang"), "projectile/" + "boomerang");
+    public static RegObj<ProjectileItem> HOLYBALL = Def.item(() -> new ProjectileItem("holy_ball"), "projectile/" + "holy_ball");
 
 
     public static RegObj<LootTableItem> LOOT_TABLE_ITEM = Def.item(() -> new LootTableItem(), "loot_table_chest");
@@ -114,7 +115,7 @@ public class SlashItems {
     public static RegObj<Item> LEATHER_SET = Def.item(() -> new TagForceSoulItem(() -> Items.LEATHER, SlotTags.dodge_stat.GUID(), "Leather"), "leather_set");
     public static RegObj<Item> PLATE_SET = Def.item(() -> new TagForceSoulItem(() -> Items.COPPER_INGOT, SlotTags.armor_stat.GUID(), "Plate"), "plate_set");
 
-  
+
     public static class GearItems {
 
         public static void init() {

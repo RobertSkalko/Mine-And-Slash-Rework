@@ -72,20 +72,11 @@ public enum Elements {
     }
 
 
-    private static List<Elements> allIncludingPhys = Arrays.stream(Elements.values()).filter(x -> x.isSingleElement() && x.isValid()).collect(Collectors.toList());
-    private static List<Elements> allSingleElementals = Arrays.stream(Elements.values()).filter(x -> x.isSingleElement() && x.tags.contains(ElementTags.ELEMENTAL)).collect(Collectors.toList());
     private static List<Elements> allSingle = Arrays.stream(Elements.values()).filter(x -> x.isSingleElement() && x.isValid()).collect(Collectors.toList());
 
-    public static List<Elements> getAllSingleElementals() {
-        return allSingleElementals;
-    }
 
     public static List<Elements> getAllSingle() {
         return allSingle;
-    }
-
-    public static List<Elements> getAllSingleIncludingPhysical() {
-        return allIncludingPhys;
     }
 
 

@@ -4,6 +4,8 @@ import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffe
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
+import com.robertx22.age_of_exile.aoe_data.database.spells.builders.DamageBuilder;
+import com.robertx22.age_of_exile.aoe_data.database.spells.builders.ParticleBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
 import com.robertx22.age_of_exile.database.data.spells.SetAdd;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
@@ -46,12 +48,35 @@ public class HolySpells implements ExileRegistryInit {
     public static String SHOUT_WARN = "shout_warn";
     public static String PULL = "pull";
 
+    public static String HOLY_MISSILES = "holy_missiles";
+
     public static String HYMN_OF_VALOR = "song_of_valor";
     public static String HYMN_OF_PERSERVANCE = "song_of_perseverance";
     public static String HYMN_OF_VIGOR = "song_of_vigor";
 
     @Override
     public void registerAll() {
+
+        SpellBuilder.of(HOLY_MISSILES, PlayStyle.INT, SpellConfiguration.Builder.multiCast(30, 10, 30, 5)
+                                .setSwingArm().setTrackingRadius(2), "Holy Missiles",
+                        Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.HOLY, SpellTags.MISSILE))
+                .manualDesc(
+                        "Fire off Missiles that slowly move towards enemies and deal " + SpellCalcs.ICEBALL.getLocDmgTooltip()
+                                + " " + Elements.Cold.getIconNameDmg() + ".")
+
+                .weaponReq(CastingWeapon.MAGE_WEAPON)
+                .onCast(PartBuilder.playSound(SoundEvents.WITCH_THROW, 1D, 2D))
+                .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(Items.AIR, 1D, 0.3D, SlashEntities.SIMPLE_PROJECTILE.get(), 20 * 10D, false)
+                        .put(MapField.TRACKS_ENEMIES, true)
+                        .put(MapField.EXPIRE_ON_ENTITY_HIT, true)
+                ))
+                .onTick(ParticleBuilder.of(ParticleTypes.END_ROD, 0.03F).amount(3).build())
+                .onTick(ParticleBuilder.of(ParticleTypes.ENCHANT, 0.03F).amount(3).build())
+
+                .onHit(DamageBuilder.target(Elements.Holy, SpellCalcs.HOLY_MISSILES).build())
+
+                .build();
+
 
         song(HYMN_OF_VALOR, "Hymn of Valor", ModEffects.VALOR);
         song(HYMN_OF_PERSERVANCE, "Hymn of Perseverance", ModEffects.PERSEVERANCE);

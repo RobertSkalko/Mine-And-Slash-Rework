@@ -182,7 +182,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
             caster.swing(InteractionHand.MAIN_HAND);
         }
 
-
+       
         attached.onCast(SpellCtx.onCast(caster, ctx.calcData));
 
 
@@ -354,7 +354,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
         list.add(tagtext);
 
-        if(!showEffectTip.getString().isBlank()){
+        if (!showEffectTip.getString().isBlank()) {
             list.add(showEffectTip);
         }
 

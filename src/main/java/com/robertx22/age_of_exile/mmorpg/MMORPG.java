@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.aoe_data.database.boss_spell.BossSpells;
 import com.robertx22.age_of_exile.aoe_data.database.prophecies.ProphecyStarts;
 import com.robertx22.age_of_exile.aoe_data.database.stat_conditions.StatConditions;
 import com.robertx22.age_of_exile.aoe_data.database.stat_effects.StatEffects;
+import com.robertx22.age_of_exile.aoe_data.database.stats.AscensionStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
@@ -32,6 +33,7 @@ import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.SlashDeferre
 import com.robertx22.age_of_exile.tags.ModTags;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.action.StatEffect;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.condition.StatCondition;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
@@ -99,6 +101,7 @@ public class MMORPG {
 
         StackSaving.init();
         StatEffect.init();
+        StatCondition.loadclass();
 
         ForgeEvents.registerForgeEvent(RegisterClientTooltipComponentFactoriesEvent.class, x -> {
             x.register(SocketTooltip.SocketComponent.class, SocketTooltip::new);
@@ -142,6 +145,7 @@ public class MMORPG {
         StatEffects.addSerializers();
         StatConditions.loadClass();
         Stats.loadClass();
+        AscensionStats.init();
         ExileDBInit.initRegistries();
         SpecialStats.init();
 

@@ -70,6 +70,7 @@ public class ModEffects implements ExileRegistryInit {
     public static EffectCtx BONE_CHILL = new EffectCtx("bone_chill", "Bone Chill", Elements.Cold, EffectType.negative);
     public static EffectCtx FROST_LICH = new EffectCtx("frost_lich", "Frost Lich", Elements.Cold, EffectType.beneficial);
     public static EffectCtx ESSENCE_OF_FROST = new EffectCtx("essence_of_frost", "Essence of Frost", Elements.Cold, EffectType.beneficial);
+    public static EffectCtx MISSILE_BARRAGE = new EffectCtx("missile_barrage", "Missile Barrage", Elements.NONE, EffectType.beneficial);
 
     public static int ESSENCE_OF_FROST_MAX_STACKS = 5;
 
@@ -79,6 +80,14 @@ public class ModEffects implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
+
+        ExileEffectBuilder.of(MISSILE_BARRAGE)
+                .maxStacks(5)
+                .stat(Stats.CAST_TIME_PER_SPELL_TAG.get(SpellTags.MISSILE).mod(50, 50))
+                .stat(Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.MISSILE).mod(25, 25))
+                .disableStackingStatBuff()
+                .removeOnSpellCastWithTag(SpellTags.MISSILE)
+                .build();
 
         ExileEffectBuilder.of(ModEffects.ESSENCE_OF_FROST)
                 .maxStacks(ESSENCE_OF_FROST_MAX_STACKS)

@@ -55,7 +55,7 @@ public class OnServerTick {
                 StatCompat.onTick(player);
             }
 
-            if (age % 200 == 0) {
+            if (age % (20 * 3) == 0) {
                 unitdata.setEquipsChanged();
                 playerData.playerDataSync.setDirty();
             }

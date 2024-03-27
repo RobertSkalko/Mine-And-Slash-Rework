@@ -15,6 +15,7 @@ import com.robertx22.age_of_exile.tags.imp.SpellTag;
 import com.robertx22.age_of_exile.uncommon.effectdatas.ThreatGenType;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.action.SetCooldownEffect;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.condition.*;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
@@ -49,6 +50,9 @@ public class StatConditions implements ExileRegistryInit {
     public static StatCondition IS_ATTACK_DAMAGE = new StringMatchesCondition(EventData.STYLE, PlayStyle.INT.id).flipCondition();
     public static StatCondition IS_NOT_SUMMON_ATTACK = new IsBooleanTrueCondition(EventData.IS_SUMMON_ATTACK).flipCondition();
 
+    public static DataHolder<String, StatCondition> IS_NOT_ON_COOLDOWN = new DataHolder<>(Arrays.asList(
+            SetCooldownEffect.MISSILE_BARRAGE.cd_id
+    ), x -> new IsNotOnCooldownCondition(x));
 
     public static StatCondition BONE_SHATTER_NO_CD = new IsNotOnCooldownCondition(WaterSpells.BONE_SHATTER_PROC);
 
@@ -74,6 +78,9 @@ public class StatConditions implements ExileRegistryInit {
             SpellTag.getAll()
             , x -> new SpellHasTagCondition(x));
 
+    public static DataHolder<SpellTag, StatCondition> SPELL_NOT_HAVE_TAG = new DataHolder<>(
+            SpellTag.getAll()
+            , x -> new SpellHasTagCondition(x).flipCondition());
 
     public static DataHolder<SummonType, StatCondition> IS_SUMMON_TYPE = new DataHolder<>(
             SummonType.values()
@@ -130,6 +137,12 @@ public class StatConditions implements ExileRegistryInit {
 
         // todo why not just do it when class is contructed
 
+        for (StatCondition c : StatCondition.ALL) {
+            c.addToSerializables();
+        }
+        // todo test
+
+        /*
         BONE_SHATTER_NO_CD.addToSerializables();
         IS_SOURCE_MAX_CHARGES.addToSerializables();
         TARGET_HAS_EFFECT.addToSerializables();
@@ -169,5 +182,7 @@ public class StatConditions implements ExileRegistryInit {
         IS_TARGET_NOT_UNDEAD.addToSerializables();
         IS_TARGET_NEAR_FULL_HP.addToSerializables();
 
+
+         */
     }
 }

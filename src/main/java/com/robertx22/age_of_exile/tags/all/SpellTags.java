@@ -37,6 +37,7 @@ public class SpellTags {
     public static SpellTag LIGHTNING = SpellTag.of("lightning");
     public static SpellTag BUFF = SpellTag.of("buff");
     public static SpellTag SHATTER = SpellTag.of("shatter");
+    public static SpellTag MISSILE = SpellTag.of("missile");
 
     public static void init() {
 
