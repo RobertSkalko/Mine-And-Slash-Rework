@@ -16,12 +16,12 @@
 	"mmorpg.chest_type.currency": "Валюта",
 	"mmorpg.chest_type.gear": "Экипировка",
 	"mmorpg.chest_type.gem": "Самоцвет",
-	"mmorpg.chest_type.harvest_blue_chest": "Сбор Голубого Сундука",
-	"mmorpg.chest_type.harvest_green_chest": "Сбор Зеленого Сундука",
-	"mmorpg.chest_type.harvest_purple_chest": "Сбор Фиолетового Сундука",
+	"mmorpg.chest_type.harvest_blue_chest": "Голубой сундук жатвы",
+	"mmorpg.chest_type.harvest_green_chest": "Зелёный сундук жатвы",
+	"mmorpg.chest_type.harvest_purple_chest": "Фиолетовый сундук жатвы",
 	"mmorpg.chest_type.map": "Карта",
 	"mmorpg.chest_type.rune": "Руна",
-	"mmorpg.chest_type.support_gem": "Вспомогательный Самоцвет",
+	"mmorpg.chest_type.support_gem": "Самоцвет поддержки",
 
 "_comment": "# CREATIVE TAB",
 
@@ -33,20 +33,20 @@
 "_comment": "STATIONS",
 
 	"block.mmorpg.teleporter": "Картографическое устройство",
-	"block.mmorpg.station.cooking": "Картографическое устройство",
-	"block.mmorpg.station.salving": "Картографическое устройство",
-	"block.mmorpg.station.gear_crafting": "Картографическое устройство",
-	"block.mmorpg.station.alchemy": "Картографическое устройство",
-	"block.mmorpg.station.enchanting": "Картографическое устройство",
+	"block.mmorpg.station.cooking": "Станция готовки",
+	"block.mmorpg.station.salving": "Станция утилизации",
+	"block.mmorpg.station.gear_crafting": "Станция снаряжения",
+	"block.mmorpg.station.alchemy": "Алихимическая станция",
+	"block.mmorpg.station.enchanting": "Модификационная станция",
 
 "_comment": "ITEM TOOLTIPS",
 
-	"mmorpg.tooltip.item_modifiable_in_station": "Можно использовать внутри модификационной станции для снаряжения",
-	"mmorpg.tooltip.lootbox": "Что может быть внутри?",
+	"mmorpg.tooltip.item_modifiable_in_station": "Можно использовать внутри модификационной станции",
+	"mmorpg.tooltip.lootbox": "Что внутри?",
 	"mmorpg.tooltip.player_levelup": "Если ваша шкала опыта заполнена, используйте этот предмет для повышения уровня!",
 	"mmorpg.tooltip.capacitor": "Поместите в станцию ремонта, чтобы уменьшить потребление топлива.",
 	"mmorpg.tooltip.capacitor2": "Множитель топлива",
-	"mmorpg.tooltip.socketable_item": "Этот самоцвет можно вставить в гнездо слота",
+	"mmorpg.tooltip.socketable_item": "Этот самоцвет можно вставить в свободное гнездо",
 
 "_comment": "RARITY ITEM NAMES",
 
