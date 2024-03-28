@@ -4,5 +4,5 @@ abyssal_depths
 the_novice
 bramble
 cure
-plague
 flickering_flame
+plague

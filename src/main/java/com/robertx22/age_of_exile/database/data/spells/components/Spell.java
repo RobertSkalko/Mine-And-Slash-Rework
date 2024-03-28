@@ -19,6 +19,7 @@ import com.robertx22.age_of_exile.saveclasses.spells.SpellCastingData;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.tags.imp.SpellTag;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.effectdatas.SpendResourceEvent;
@@ -182,7 +183,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
             caster.swing(InteractionHand.MAIN_HAND);
         }
 
-       
+
         attached.onCast(SpellCtx.onCast(caster, ctx.calcData));
 
 
@@ -193,7 +194,8 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     }
 
     public final int getCastTimeTicks(SpellCastContext ctx) {
-        return (int) ctx.event.data.getNumber(EventData.CAST_TICKS).number;
+        // if it casts 5 times a cast, it should take at least 5 ticks to cast it
+        return MathHelper.clamp((int) ctx.event.data.getNumber(EventData.CAST_TICKS).number, config.times_to_cast, 10000);
     }
 
     @Override

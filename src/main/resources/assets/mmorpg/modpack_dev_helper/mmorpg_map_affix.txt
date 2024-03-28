@@ -4,8 +4,8 @@ chaos_atk
 holy_atk
 water_minus_res
 fire_minus_res
-crit_dmg
 all_ele_res
+crit_dmg
 lightning_res
 holy_res
 lightning_atk
@@ -18,12 +18,12 @@ lightning_minus_res
 physical_atk
 holy_minus_res
 water_atk
-physical_minus_res
 minus_ene_reg
+physical_minus_res
 armor
-crit
-minus_mana_reg
 minus_ms_reg
-water_res
+minus_mana_reg
+crit
 chaos_res
+water_res
 fire_res

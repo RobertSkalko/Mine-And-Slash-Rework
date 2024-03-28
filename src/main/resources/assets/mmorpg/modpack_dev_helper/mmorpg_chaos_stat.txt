@@ -3,6 +3,6 @@ This registry is modify-able through datapacks.
 normal_low
 unique_low
 normal_high
-normal_med
 unique_high
+normal_med
 unique_med
