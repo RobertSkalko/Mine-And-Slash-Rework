@@ -27,7 +27,7 @@ public class MobAffixes implements ExileRegistryInit {
     static void eleAffix(String name, Elements element) {
         new MobAffix(element.guidName + "_mob_affix", name, element.format, Affix.Type.prefix)
                 .setMods(
-                        new StatMod(100, 100, new PhysicalToElement(element)),
+                        new StatMod(50, 50, new PhysicalToElement(element)),
                         new StatMod(50, 50, new BonusPhysicalAsElemental(element), ModType.FLAT),
                         new StatMod(10, 10, ExtraMobDropsStat.getInstance()))
                 .setWeight(2000)
@@ -38,6 +38,7 @@ public class MobAffixes implements ExileRegistryInit {
         new MobAffix("full_" + element.guidName, "Of " + element.dmgName, element.format, Affix.Type.suffix)
                 .setMods(
                         new StatMod(100, 100, new PhysicalToElement(element)),
+                        new StatMod(25, 25, new BonusPhysicalAsElemental(element), ModType.FLAT),
                         new StatMod(25, 25, new ElementalResist(element))
                 )
                 .setWeight(0)
@@ -49,6 +50,9 @@ public class MobAffixes implements ExileRegistryInit {
 
         eleAffix("Freezing", Cold);
         eleAffix("Flaming", Fire);
+        eleAffix("Lightning", Nature);
+
+        eleAffix("Smiting", Holy);
         eleAffix("Poisoned", Shadow);
 
 
@@ -105,6 +109,7 @@ public class MobAffixes implements ExileRegistryInit {
         fullEle(Nature);
         fullEle(Fire);
         fullEle(Shadow);
+        fullEle(Holy);
 
 
     }

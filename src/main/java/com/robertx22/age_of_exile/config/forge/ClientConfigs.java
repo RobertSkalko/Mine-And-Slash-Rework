@@ -27,7 +27,6 @@ public class ClientConfigs {
         RENDER_ITEM_RARITY_BACKGROUND = b.define("render_item_rarity_background", true);
         SHOW_DURABILITY = b.define("show_durability", true);
         RENDER_MOB_HEALTH_GUI = b.define("render_mob_hp_gui", true);
-        USE_HOTBAR_TOGGLE = b.define("use_hotbar_toggle", true);
         ONLY_RENDER_MOB_LOOKED_AT = b.define("only_render_mob_looked_at", true);
         SHOW_DURABILITY = b.define("show_durability", true);
         ENABLE_FLOATING_DMG = b.define("render_floating_damage", true);
@@ -54,7 +53,6 @@ public class ClientConfigs {
     public ForgeConfigSpec.BooleanValue RENDER_ITEM_RARITY_BACKGROUND;
     public ForgeConfigSpec.BooleanValue SHOW_DURABILITY;
     public ForgeConfigSpec.BooleanValue RENDER_MOB_HEALTH_GUI;
-    public ForgeConfigSpec.BooleanValue USE_HOTBAR_TOGGLE;
     public ForgeConfigSpec.BooleanValue ONLY_RENDER_MOB_LOOKED_AT;
     public ForgeConfigSpec.BooleanValue ALIGN_STAT_TOOLTIPS;
     public ForgeConfigSpec.BooleanValue MODIFY_TOOLTIP_LENGTH;

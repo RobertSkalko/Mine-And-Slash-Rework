@@ -4,7 +4,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.capability.entity.CooldownsData;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
-import com.robertx22.age_of_exile.event_hooks.player.OnKeyPress;
 import com.robertx22.age_of_exile.gui.overlays.EffectsOverlay;
 import com.robertx22.age_of_exile.gui.overlays.GuiPosition;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -18,6 +17,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraftforge.client.settings.KeyModifier;
 
 import java.util.Locale;
 
@@ -43,11 +43,17 @@ public class SpellHotbarOverlay {
     private static final ResourceLocation CHARGE = new ResourceLocation(SlashRef.MODID,
             "textures/gui/spells/charge_icon.png"
     );
+    private static final ResourceLocation KEY_BG = new ResourceLocation(SlashRef.MODID,
+            "textures/gui/spells/keybind_bg.png"
+    );
+    private static final ResourceLocation MOD_BG = new ResourceLocation(SlashRef.MODID,
+            "textures/gui/spells/modbg.png"
+    );
 
     int CHARGE_SIZE = 9;
 
     static int WIDTH = 22;
-    static int HEIGHT = 82;
+    static int HEIGHT = 162;
 
     Minecraft mc = Minecraft.getInstance();
 
@@ -78,12 +84,10 @@ public class SpellHotbarOverlay {
             renderHotbar(gui, x, y);
             //renderSpellsOnHotbar(matrix, x, y);
 
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 8; i++) {
 
                 int place = i;
-                if (OnKeyPress.SECOND_HOTBAR) {
-                    place += 4;
-                }
+
 
                 renderCurrentSpell(place, i, gui);
 
@@ -190,14 +194,38 @@ public class SpellHotbarOverlay {
                     }
                 }
 
-                String txt = CLOC.translate(KeybindsRegister.getSpellHotbar(place)
-                                .getTranslatedKeyMessage())
-                        .toUpperCase(Locale.ROOT);
 
-                if (txt.length() > 3) {
-                    txt = txt.substring(0, 2);
+                int xkey = xs + 15;
+                int ykey = y + 14;
+                int bgsize = 10;
+
+
+                RenderSystem.enableBlend(); // enables transparency
+
+                float alpha = 0.75f;
+                gui.setColor(alpha, alpha, alpha, alpha);
+                gui.blit(KEY_BG, xkey - 6, ykey - 6, 0, 0, bgsize, bgsize, bgsize, bgsize);
+                gui.setColor(1.0F, 1.0F, 1.0F, 1);
+
+
+                String txt = CLOC.translate(KeybindsRegister.getSpellHotbar(place).getKey().getDisplayName()).toUpperCase(Locale.ROOT);
+                txt = txt.substring(0, 1);
+                GuiUtils.renderScaledText(gui, xkey - 1, ykey, 1, txt, ChatFormatting.GREEN);
+
+                var key = KeybindsRegister.getSpellHotbar(place);
+                if (key.getKeyModifier() != KeyModifier.NONE) {
+
+                    RenderSystem.enableBlend(); // enables transparency
+                    gui.setColor(alpha, alpha, alpha, alpha);
+                    gui.blit(MOD_BG, xkey - 18, ykey - 6, 0, 0, 13, bgsize, 13, bgsize);
+                    gui.setColor(1.0F, 1.0F, 1.0F, 1F);
+
+                    String modtext = KeybindsRegister.getSpellHotbar(place).getKeyModifier().toString().substring(0, 3);
+                    GuiUtils.renderScaledText(gui, xkey - 11, ykey, 0.6F, modtext, ChatFormatting.YELLOW);
                 }
-                GuiUtils.renderScaledText(gui, xs + 14, ys + 12, 1, txt, ChatFormatting.GREEN);
+
+
+                RenderSystem.disableBlend(); // enables transparency
 
             }
         } catch (Exception e) {

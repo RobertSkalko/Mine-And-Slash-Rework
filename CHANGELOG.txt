@@ -7,6 +7,10 @@ This is meant for players who don't want to mess with inviting to parties etc
 - fix harvest generation/tp issues
 - runed items now have a min drop lvl
 - attempt fix double death xp loss etc
+- improved hotbar ui a bit
+- datapack thing: effects can now NOT stack stat buffs per effect stack amount and effects can now decrease their stack count by 1 if casted with a tagged spell.
+This will be used for missile barrage talent. It gives you cast speed and dmg to any missile tag spell, but the buff stacks are reduced by 1 every time you cast any missile tag spell.
+
 - rune reroll now cant roll stat into lower value than it was before, roll away!
 - fixed the tooltips a bit, now correctly cuts lines only if there is too many (before it counted double blank lines that were removed anyway)
 - added a new system, map resist requirements. Maps of higher rarity and difficulty now require some baseline of elemental resistances to actually enter,
