@@ -85,19 +85,7 @@ public class ProfessionBlock extends BaseEntityBlock implements WorldlyContainer
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player p, InteractionHand pHand, BlockHitResult pHit) {
 
         if (!pLevel.isClientSide) {
-
             ProfessionBlockEntity be = (ProfessionBlockEntity) pLevel.getBlockEntity(pPos);
-
-            if (be.owner.isEmpty()) {
-                be.owner = p.getStringUUID();
-            } else {
-                if (!be.owner.equals(p.getStringUUID())) {
-                    p.sendSystemMessage(Chats.NOT_OWNER.locName().withStyle(ChatFormatting.RED));
-                    return InteractionResult.FAIL;
-                }
-            }
-
-           
             p.openMenu(new MenuProvider() {
                 @Override
                 public Component getDisplayName() {
@@ -106,7 +94,7 @@ public class ProfessionBlock extends BaseEntityBlock implements WorldlyContainer
 
                 @Override
                 public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-                    return new CraftingStationMenu(pContainerId, pPlayerInventory, be.inventory, be.show);
+                    return new CraftingStationMenu(pContainerId, pPlayerInventory, be);
                 }
             });
 

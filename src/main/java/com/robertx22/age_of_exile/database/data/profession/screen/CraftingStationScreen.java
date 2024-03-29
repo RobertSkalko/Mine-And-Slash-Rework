@@ -1,5 +1,7 @@
 package com.robertx22.age_of_exile.database.data.profession.screen;
 
+import com.robertx22.age_of_exile.capability.player.container.BackpackButton;
+import com.robertx22.age_of_exile.capability.player.data.Backpacks;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -8,13 +10,23 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class CraftingStationScreen extends AbstractContainerScreen<CraftingStationMenu> {
-    public static final ResourceLocation BACKGROUND_LOCATION = new ResourceLocation(SlashRef.MODID, "textures/gui/crafting_table.png");
+    public static final ResourceLocation BACKGROUND_LOCATION = new ResourceLocation(SlashRef.MODID, "textures/gui/crafting_table2.png");
+    CraftingStationMenu stationMenu;
 
     public CraftingStationScreen(CraftingStationMenu pMenu, Inventory pPlayerInventory, Component txt) {
         super(pMenu, pPlayerInventory, Component.literal(""));
         this.imageWidth = 176;
         this.imageHeight = 166;
+        stationMenu = pMenu;
+    }
 
+    @Override
+    protected void init() {
+        super.init();
+        if(stationMenu.professionBlockEntity != null){
+            this.addRenderableWidget(new LockButton(leftPos + 79, topPos + 33, stationMenu.professionBlockEntity));
+            this.addRenderableWidget(new CraftButton(leftPos + 79, topPos + 51, stationMenu.professionBlockEntity));
+        }
     }
 
     public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
