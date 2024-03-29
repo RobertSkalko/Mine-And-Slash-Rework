@@ -47,21 +47,18 @@ public class LockTogglePacket extends MyPacket<LockTogglePacket> {
         if (be instanceof ProfessionBlockEntity) {
             ProfessionBlockEntity pbe = (ProfessionBlockEntity) be;
             if(pbe.craftingState == Crafting_State.ACTIVE && pbe.recipe_locked){
-                if((pbe.ownerUUID != null && pbe.ownerUUID.compareTo(exilePacketContext.getPlayer().getUUID()) == 0) || pbe.ownerUUID == null){
-                    pbe.recipe_locked = false;
-                    pbe.last_recipe = null;
-                    pbe.show.clearContent();
-                }else
+                if((pbe.ownerUUID != null && pbe.ownerUUID.compareTo(exilePacketContext.getPlayer().getUUID()) == 0) || pbe.ownerUUID == null)
                     exilePacketContext.getPlayer().sendSystemMessage(Component.literal("This Station is currently claimed by another player").withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
-            }else if((pbe.craftingState == Crafting_State.IDLE || pbe.craftingState == Crafting_State.STOPPED ) && pbe.recipe_locked){
+            }else if(pbe.craftingState == Crafting_State.IDLE && pbe.recipe_locked){
+                exilePacketContext.getPlayer().sendSystemMessage(Component.literal("Stop auto crafting before unlocking the recipe").withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+            }else if(pbe.craftingState == Crafting_State.STOPPED && pbe.recipe_locked){
                 pbe.recipe_locked = false;
                 pbe.last_recipe = null;
                 pbe.show.clearContent();
                 if(pbe.ownerUUID != null && pbe.ownerUUID.compareTo(exilePacketContext.getPlayer().getUUID()) != 0){
                     pbe.ownerUUID = null;
-                    pbe.craftingState = Crafting_State.STOPPED;
                 }
-            }else if((pbe.craftingState == Crafting_State.IDLE || pbe.craftingState == Crafting_State.ACTIVE) && !pbe.recipe_locked){
+            }else if(pbe.craftingState == Crafting_State.ACTIVE && !pbe.recipe_locked){
                 exilePacketContext.getPlayer().sendSystemMessage(Component.literal("Stop auto crafting before locking the recipe").withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
             }else if(pbe.craftingState == Crafting_State.STOPPED && !pbe.recipe_locked){
                 ProfessionRecipe recipe = pbe.getCurrentRecipe();
@@ -81,7 +78,7 @@ public class LockTogglePacket extends MyPacket<LockTogglePacket> {
                 showstack.setCount(1);
                 pbe.show.setItem(0, showstack);
             }else{
-                exilePacketContext.getPlayer().sendSystemMessage(Component.literal("unhandled case " + pbe.recipe_locked + " + " + pbe.craftingState.name()).withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+                exilePacketContext.getPlayer().sendSystemMessage(Component.literal("Unhandled Case(Report The Following):  " + pbe.recipe_locked + " + " + pbe.craftingState.name()).withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
             }
             pbe.setChanged();
         }
