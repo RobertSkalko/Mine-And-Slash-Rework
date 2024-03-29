@@ -15,10 +15,12 @@ import java.util.Optional;
 public class MergedContainer extends SimpleContainer implements WorldlyContainer {
 
     public List<Inventory> invs;
+    public ProfessionBlockEntity pbe;
 
-    public MergedContainer(List<Inventory> invs) {
+    public MergedContainer(List<Inventory> invs, ProfessionBlockEntity be) {
         super(getSize(invs));
         this.invs = invs;
+        this.pbe = be;
     }
 
     static int getSize(List<Inventory> inv) {
@@ -27,13 +29,19 @@ public class MergedContainer extends SimpleContainer implements WorldlyContainer
 
     public boolean addStack(Inventory inv, ItemStack stack) {
         for (int index : getIndices(inv.id)) {
-            if (getItem(index).isEmpty()) {
+            ItemStack current = getItem(index);
+            if (current.isEmpty()) {
                 setItem(index, stack.copy());
                 return true;
             }
+            if(current.getItem() == stack.getItem()){
+                if(current.getCount() + stack.getCount() <= current.getMaxStackSize()){
+                    current.setCount(current.getCount() + stack.getCount());
+                    return true;
+                }
+            }
         }
         return false;
-
     }
 
     public int[] getIndices(String id) {
@@ -102,7 +110,22 @@ public class MergedContainer extends SimpleContainer implements WorldlyContainer
 
     @Override
     public boolean canPlaceItemThroughFace(int pIndex, ItemStack pItemStack, @Nullable Direction pDirection) {
-        return this.canPlaceItem(pIndex, pItemStack) && pDirection == Direction.UP;
+        if(pDirection != Direction.UP)
+            return false;
+
+        if(pbe.recipe_locked){
+            for(ItemStack item : pbe.last_recipe.getMaterials()){
+                if(item.getItem() == pItemStack.getItem()){
+                    if(pbe.craftingState == Crafting_State.IDLE)
+                        pbe.craftingState = Crafting_State.ACTIVE;
+                    return true;
+                }
+            }
+            return false;
+        }
+        if(pbe.craftingState == Crafting_State.IDLE)
+            pbe.craftingState = Crafting_State.ACTIVE;
+        return true;
     }
 
     @Override

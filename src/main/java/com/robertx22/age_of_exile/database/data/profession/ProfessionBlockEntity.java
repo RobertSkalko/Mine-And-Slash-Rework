@@ -11,12 +11,15 @@ import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.library_of_exile.utils.SoundUtils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -31,11 +34,13 @@ public class ProfessionBlockEntity extends BlockEntity {
     static MergedContainer.Inventory INPUTS = new MergedContainer.Inventory("INPUTS", 9, Direction.UP);
     static MergedContainer.Inventory OUTPUTS = new MergedContainer.Inventory("OUTPUTS", 9, Direction.DOWN);
 
-    public MergedContainer inventory = new MergedContainer(Arrays.asList(INPUTS, OUTPUTS));
+    public MergedContainer inventory = new MergedContainer(Arrays.asList(INPUTS, OUTPUTS), this);
 
     public SimpleContainer show = new SimpleContainer(1);
 
-    public String owner = "";
+    public Boolean recipe_locked = false;
+    public ProfessionRecipe last_recipe;
+    public Crafting_State craftingState = Crafting_State.STOPPED;
     public UUID ownerUUID = null;
 
 
@@ -48,91 +53,65 @@ public class ProfessionBlockEntity extends BlockEntity {
         return ExileDB.Professions().get(id);
     }
 
-
-    int ticks = 0;
-    int craftingTicks = 0;
-
-
     public Player getOwner(Level l) {
-
-        if (ownerUUID == null) {
-            if (!owner.isEmpty()) {
-                try {
-                    ownerUUID = UUID.fromString(owner);
-                } catch (Exception e) {
-                    ModErrors.print(e);
-                }
-            }
-        }
-
         if (ownerUUID != null) {
             return l.getPlayerByUUID(ownerUUID);
         }
-
         return null;
     }
 
-    int cooldown = 0;
-
     public void tick(Level level) {
-
         try {
-            ticks++;
-
-            int tickRate = 5;
-
-            if (ticks % tickRate == 0) {
-
-                Player p = getOwner(level);
-
-
-                if (p != null && p.isAlive()) {
-
-                    if (this.inventory.getInventory(INPUTS).isEmpty()) {
-                        return;
+            if(craftingState == Crafting_State.ACTIVE){
+                if (this.inventory.getInventory(INPUTS).isEmpty()) {
+                    if(recipe_locked)
+                        craftingState = Crafting_State.IDLE;
+                    else{
+                        craftingState = Crafting_State.STOPPED;
+                        ownerUUID = null;
                     }
-
-                    cooldown -= tickRate;
-
+                    return;
+                }
+                Player p = getOwner(level);
+                if (p != null && p.isAlive()) {
                     if (getProfession().GUID().equals(Professions.SALVAGING)) {
-                        if (trySalvage(p, true).can) {
-                            craftingTicks += tickRate;
-
-                            if (craftingTicks > 100) {
-                                craftingTicks = 0;
-                                trySalvage(p, false);
-                                SoundUtils.playSound(level, getBlockPos(), SoundEvents.ANVIL_DESTROY);
-                            }
-                        } else {
+                        var rec = trySalvage(p);
+                        if(!rec.can && !recipe_locked)
                             show.clearContent();
-                        }
                     } else {
-                        var rec = tryRecipe(p, true);
+                        if(recipe_locked){
+                            if(last_recipe.canCraft(getMats())){
+                                tryRecipe(p);
+                            }else
+                                craftingState = Crafting_State.IDLE;
+                        }else{
+                            ProfessionRecipe recipe = getCurrentRecipe();
+                            if(recipe == null){
+                                p.sendSystemMessage(Chats.PROF_RECIPE_NOT_FOUND.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+                                craftingState = Crafting_State.STOPPED;
+                                ownerUUID = null;
+                                return;
+                            }
+                            int ownerLvl = Load.player(p).professions.getLevel(recipe.profession);
+                            if (recipe.getLevelRequirement() > ownerLvl) {
+                                p.sendSystemMessage(Chats.PROF_RECIPE_LEVEL_NOT_ENOUGH.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+                                craftingState = Crafting_State.STOPPED;
+                                ownerUUID = null;
+                                return;
+                            }
 
-                        if (!rec.can) {
-                            if (cooldown < 1) {
-                                if (p.containerMenu instanceof CraftingStationMenu && p.blockPosition().distManhattan(getBlockPos()) < 5) {
-                                    p.sendSystemMessage(rec.answer);
-                                    cooldown = 20 * 10;
+                            if(recipe.canCraft(getMats())){
+                                var rec = tryRecipe(p);
+                                if(!rec.can){
+                                    show.clearContent();
+                                    craftingState = Crafting_State.STOPPED;
+                                    ownerUUID = null;
                                 }
                             }
                         }
-                        if (rec.can) {
-                            craftingTicks += tickRate;
-
-                            if (craftingTicks > 100) {
-                                craftingTicks = 0;
-                                tryRecipe(p, false);
-                                SoundUtils.playSound(level, getBlockPos(), SoundEvents.ANVIL_DESTROY);
-                            }
-                        } else {
-                            show.clearContent();
-                        }
                     }
                 }
-
             }
-
         } catch (Exception e) {
             ModErrors.print(e);
         }
@@ -151,29 +130,21 @@ public class ProfessionBlockEntity extends BlockEntity {
         return false;
     }
 
-    public ExplainedResult tryRecipe(Player p, boolean justCheck) {
+    public ExplainedResult tryRecipe(Player p) {
+        ProfessionRecipe recipe;
 
-
-        var recipe = getCurrentRecipe(level);
+        if(recipe_locked)
+            recipe = last_recipe;
+        else
+            recipe = getCurrentRecipe();
 
         if (recipe == null) {
             return ExplainedResult.failure(Chats.PROF_RECIPE_NOT_FOUND.locName());
-        }
-        if (!hasAtLeastOneFreeOutputSlot()) {
-            return ExplainedResult.failure(Chats.PROF_OUTPUT_SLOT_NOT_EMPTY.locName());
         }
         int ownerLvl = Load.player(p).professions.getLevel(getProfession().GUID());
         if (recipe.getLevelRequirement() > ownerLvl) {
             return ExplainedResult.failure(Chats.PROF_RECIPE_LEVEL_NOT_ENOUGH.locName());
         }
-
-        if (justCheck) {
-            var showstack = recipe.toResultStackForJei();
-            showstack.setCount(1);
-            this.show.setItem(0, showstack);
-            return ExplainedResult.success();
-        }
-
 
         float expMulti = 1;
 
@@ -185,40 +156,29 @@ public class ProfessionBlockEntity extends BlockEntity {
         }
 
         int expGive = (int) (recipe.getExpReward(p, ownerLvl, getMats()) * expMulti);
-
         this.addExp(expGive);
-
-        if (destroyOuput) {
-            SoundUtils.playSound(level, getBlockPos(), SoundEvents.FIRE_EXTINGUISH);
-            SoundUtils.playSound(level, getBlockPos(), SoundEvents.EXPERIENCE_ORB_PICKUP);
-        } else {
-
-            var output = recipe.craft(p, getMats());
-
-            tryPutToOutputs(output);
-
-
-        }
-
-
+        var output = recipe.craft(p, getMats());
+        if(!destroyOuput && !tryPutToOutputs(output))
+            return ExplainedResult.failure(Chats.PROF_OUTPUT_SLOT_NOT_EMPTY.locName());
         recipe.spendMaterials(getMats());
-
         this.setChanged();
         return ExplainedResult.success();
 
     }
 
-    public void tryPutToOutputs(List<ItemStack> stacks) {
+    public boolean tryPutToOutputs(List<ItemStack> stacks) {
         for (ItemStack stack : stacks) {
             if (!inventory.addStack(OUTPUTS, stack)) {
                 ItemEntity itementity = new ItemEntity(level, getBlockPos().getX(), getBlockPos().getY() + 0.5, getBlockPos().getZ(), stack);
                 itementity.setDefaultPickUpDelay();
                 level.addFreshEntity(itementity);
-            }
+            }else
+                return true;
         }
+        return false;
     }
 
-    public ExplainedResult trySalvage(Player p, boolean justCheck) {
+    public ExplainedResult trySalvage(Player p) {
 
         if (!hasAtLeastOneFreeOutputSlot()) {
             return ExplainedResult.failure(Chats.PROF_OUTPUT_SLOT_NOT_EMPTY.locName());
@@ -233,10 +193,6 @@ public class ProfessionBlockEntity extends BlockEntity {
                 ISalvagable sal = ISalvagable.load(stack);
                 if (data != null && sal != null) {
                     if (sal.isSalvagable()) {
-
-                        if (justCheck) {
-                            return ExplainedResult.success();
-                        }
 
                         float multi = data.getRarity().item_value_multi;
 
@@ -276,11 +232,9 @@ public class ProfessionBlockEntity extends BlockEntity {
         return inventory.getAllStacks(INPUTS);
     }
 
-    public ProfessionRecipe getCurrentRecipe(Level level) {
+    public ProfessionRecipe getCurrentRecipe() {
 
         var mats = getMats();
-
-
         if (mats.stream().anyMatch(x -> !x.isEmpty())) {
 
             String prof = getProfession().id;
@@ -299,26 +253,74 @@ public class ProfessionBlockEntity extends BlockEntity {
         return null;
     }
 
+    public ListTag createTag() {
+        ListTag listtag = new ListTag();
+
+        for(int i = 0; i < inventory.getContainerSize(); ++i) {
+            ItemStack itemstack = inventory.getItem(i);
+            if(itemstack.isEmpty())
+                continue;
+            CompoundTag slot = new CompoundTag();
+            slot.putInt("slot", i);
+            itemstack.save(slot);
+            listtag.add(slot);
+        }
+        return listtag;
+    }
+    public void fromTag(ListTag pContainerNbt) {
+        inventory.clearContent();
+        for(int i = 0; i < pContainerNbt.size(); ++i) {
+            CompoundTag tag = pContainerNbt.getCompound(i);
+            int slot = tag.getInt("slot");
+            tag.remove("slot");
+            ItemStack itemstack = ItemStack.of(tag);
+            inventory.setItem(slot, itemstack);
+        }
+    }
+
 
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
-
-        this.inventory.fromTag(pTag.getList("inv", 10));
-
-        this.owner = pTag.getString("owner");
-
+        fromTag(pTag.getList("inv", 10));
+        this.show.fromTag(pTag.getList("show", 10));
+        this.recipe_locked = pTag.getBoolean("locked");
+        this.craftingState = Crafting_State.valueOf(pTag.getString("state"));
+        if(craftingState != Crafting_State.STOPPED){
+            if(pTag.contains("owner"))
+                this.ownerUUID = pTag.getUUID("owner");
+            else{
+                this.ownerUUID = null;
+                craftingState = Crafting_State.STOPPED;
+            }
+        }
+        if(recipe_locked && pTag.contains("recipe")){
+            this.last_recipe = ExileDB.Recipes().get(pTag.getString("recipe"));
+        }
     }
 
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
 
-        pTag.put("inv", this.inventory.createTag());
-
-        pTag.putString("owner", owner);
-
-
+        pTag.put("inv", createTag());
+        pTag.put("show", this.show.createTag());
+        if(recipe_locked){
+            if(last_recipe != null){
+                pTag.putBoolean("locked", recipe_locked);
+                pTag.putString("recipe", last_recipe.GUID());
+            }else{
+                pTag.putBoolean("locked", false);
+            }
+        }
+        if(craftingState != Crafting_State.STOPPED){
+            if(this.ownerUUID != null){
+                pTag.putUUID("owner", this.ownerUUID);
+                pTag.putString("state", craftingState.name());
+            }else{
+                pTag.putString("state", Crafting_State.STOPPED.name());
+            }
+        }
     }
 
 }

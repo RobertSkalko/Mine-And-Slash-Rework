@@ -70,14 +70,14 @@ public class JeiIntegration implements IModPlugin {
         init();
 
         for (RecipeType<ProfessionRecipe> value : map.values()) {
-            registration.addRecipeClickArea(CraftingStationScreen.class, 88, 32, 28, 23, value);
+            //registration.addRecipeClickArea(CraftingStationScreen.class, 79, 16, 16, 16, value);
+            registration.addRecipeClickArea(CraftingStationScreen.class, 0, 0, 0, 0, value);
         }
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         init();
-
         for (Map.Entry<String, RecipeType<ProfessionRecipe>> en : map.entrySet()) {
             var list = ExileDB.Recipes().getFilterWrapped(x -> x.profession.equals(en.getKey())).list;
             list.sort(Comparator.comparingInt(x -> x.tier));

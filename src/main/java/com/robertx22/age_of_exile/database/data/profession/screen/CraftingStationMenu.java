@@ -1,5 +1,7 @@
 package com.robertx22.age_of_exile.database.data.profession.screen;
 
+import com.robertx22.age_of_exile.database.data.profession.Crafting_State;
+import com.robertx22.age_of_exile.database.data.profession.ProfessionBlockEntity;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashContainers;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -13,22 +15,27 @@ import java.util.List;
 
 public class CraftingStationMenu extends AbstractContainerMenu {
 
+    // really only use this for JEI integration
+    public List<Slot> matslots = new ArrayList<>();
+    public List<Slot> invslots = new ArrayList<>();
+
+    int size = 19;
+
+    public static ProfessionBlockEntity professionBlockEntity;
 
     public CraftingStationMenu(int pContainerId, Container pContainer) {
         this(pContainerId, pContainer, new SimpleContainer(18), new SimpleContainer(1));
     }
 
+    public CraftingStationMenu(int pContainerId, Container pContainer, ProfessionBlockEntity be) {
+        this(pContainerId, pContainer, be.inventory, be.show);
+        professionBlockEntity = be;
+    }
 
-    // really only use this for JEI integration
-    public List<Slot> matslots = new ArrayList<>();
-    public List<Slot> invslots = new ArrayList<>();
-
-
-    public CraftingStationMenu(int pContainerId, Container pinv, Container inv, Container show) {
+    private CraftingStationMenu(int pContainerId, Container pinv, Container inv, Container show) {
         super(SlashContainers.CRAFTING.get(), pContainerId);
 
-        addSlot(new ShowSlot(show, 0, 80, 18));
-
+        //Player Inventory
         for (int k = 0; k < 3; ++k) {
             for (int i1 = 0; i1 < 9; ++i1) {
                 var slot = new Slot(pinv, i1 + k * 9 + 9, 8 + i1 * 18, 84 + k * 18);
@@ -43,14 +50,16 @@ public class CraftingStationMenu extends AbstractContainerMenu {
             this.addSlot(slot);
         }
 
+        addSlot(new ShowSlot(show, 0, 80, 16));//80, 56
 
+        //Menu Inventory
         try {
 
             int index = 0;
 
             for (int i = 0; i < 3; ++i) {
                 for (int j = 0; j < 3; ++j) {
-                    var slot = new Slot(inv, index, 30 + j * 18 - 17, 17 + i * 18);
+                    var slot = new TogglableSlot(inv, index, 30 + j * 18 - 17, 17 + i * 18);
                     this.matslots.add(slot);
                     this.addSlot(slot);
                     index++;
@@ -67,8 +76,6 @@ public class CraftingStationMenu extends AbstractContainerMenu {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
     static class ShowSlot extends Slot {
@@ -87,11 +94,79 @@ public class CraftingStationMenu extends AbstractContainerMenu {
         public boolean mayPickup(Player pPlayer) {
             return false;
         }
+
+        @Override
+        public boolean isHighlightable(){
+            return false;
+        }
+
+    }
+
+    class TogglableSlot extends Slot {
+
+        public TogglableSlot(Container pContainer, int pSlot, int pX, int pY) {
+            super(pContainer, pSlot, pX, pY);
+
+        }
+
+        @Override
+        public boolean mayPlace(ItemStack pStack) {
+            if(professionBlockEntity.recipe_locked){
+                if(professionBlockEntity.last_recipe == null)
+                    return false;
+
+                for(ItemStack item : professionBlockEntity.last_recipe.getMaterials()){
+                    if(item.getItem() == pStack.getItem()){
+                        if(professionBlockEntity.craftingState == Crafting_State.IDLE)
+                            professionBlockEntity.craftingState = Crafting_State.ACTIVE;
+                        return true;
+                    }
+                }
+                return false;
+            }
+            if(professionBlockEntity.craftingState == Crafting_State.IDLE)
+                professionBlockEntity.craftingState = Crafting_State.ACTIVE;
+            return true;
+        }
+
+        @Override
+        public boolean mayPickup(Player pPlayer) {
+            return true;
+        }
+
+        @Override
+        public boolean isHighlightable(){
+            return true;
+        }
+
     }
 
     @Override
     public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
-        return ItemStack.EMPTY;
+        ItemStack itemstack = ItemStack.EMPTY;
+        Slot slot = this.slots.get(pIndex);
+        if (slot != null && slot.hasItem()) {
+            ItemStack itemstack1 = slot.getItem();
+            itemstack = itemstack1.copy();
+            if (pIndex > 36) {
+                if (!this.moveItemStackTo(itemstack1, 0, 35, true)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (!this.moveItemStackTo(itemstack1, 37, 46, false)) {
+                return ItemStack.EMPTY;
+            }
+
+            if (itemstack1.isEmpty()) {
+                slot.setByPlayer(ItemStack.EMPTY);
+            } else {
+                slot.setChanged();
+            }
+        }
+
+        if(professionBlockEntity.craftingState == Crafting_State.IDLE)
+            professionBlockEntity.craftingState = Crafting_State.ACTIVE;
+
+        return itemstack;
     }
 
     @Override

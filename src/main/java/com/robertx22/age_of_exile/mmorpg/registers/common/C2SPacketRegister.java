@@ -27,12 +27,13 @@ public class C2SPacketRegister {
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new OpenBackpackPacket(Backpacks.BackpackType.GEARS), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new InvGuiPacket(), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new OpenJewelsPacket(), i++);
-        Packets.registerClientToServerPacket(MMORPG.NETWORK, new CraftPacket("", BlockPos.ZERO), i++);
+        Packets.registerClientToServerPacket(MMORPG.NETWORK, new CraftPacket(), i++);
 
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new CreateCharPacket(""), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new LoadCharPacket(0), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new AcceptProphecyPacket(""), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new ClaimProphecyRewardsPacket(), i++);
+        Packets.registerClientToServerPacket(MMORPG.NETWORK, new LockTogglePacket(), i++);
 
 
         // Packets.registerClientToServerPacket(MMORPG.NETWORK, new SetupHotbarPacket(), i++);
