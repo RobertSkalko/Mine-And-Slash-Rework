@@ -36,7 +36,11 @@ public class ArmorEffect extends InCodeStatEffect<DamageEvent> {
 
         EffectiveArmor = 1F - Mth.clamp(EffectiveArmor, 0, armor.getMaxMulti());
 
-        effect.data.getNumber(EventData.NUMBER).number *= EffectiveArmor;
+        var id = effect.data.getNumber(EventData.NUMBER);
+
+        float num = id.number;
+        num *= EffectiveArmor;
+        id.number = num;
 
         return effect;
     }
