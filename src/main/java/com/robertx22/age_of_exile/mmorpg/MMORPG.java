@@ -134,8 +134,6 @@ public class MMORPG {
 
         bus.addListener(this::commonSetupEvent);
         bus.addListener(this::interMod);
-        PlayerStats.register();
-        PlayerStats.initialize();
 
         CurioEvents.reg();
 
@@ -157,6 +155,8 @@ public class MMORPG {
 
         ExileDBInit.registerAllItems(); // after config registerAll
 
+        PlayerStats.register();
+        PlayerStats.initialize();
 
         CommonEvents.register();
 

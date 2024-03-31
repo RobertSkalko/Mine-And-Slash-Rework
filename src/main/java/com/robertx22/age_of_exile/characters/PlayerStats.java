@@ -1,5 +1,11 @@
 package com.robertx22.age_of_exile.characters;
 
+import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.blood.Blood;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -12,18 +18,14 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class PlayerStats {
-
     public static final ResourceLocation LEVELS_GAINED = new ResourceLocation(SlashRef.MODID, "levels_gained");
-    public static final ResourceLocation TOTAL_MANA = new ResourceLocation(SlashRef.MODID, "total_mana");
-    public static final ResourceLocation TOTAL_ENERGY = new ResourceLocation(SlashRef.MODID, "total_energy");
-    public static final ResourceLocation TOTAL_MAGIC_SHIELD = new ResourceLocation(SlashRef.MODID, "total_magic_shield");
-    public static final ResourceLocation TOTAL_BLOOD = new ResourceLocation(SlashRef.MODID, "total_blood");
-    public static final ResourceLocation TOTAL_HEALTH = new ResourceLocation(SlashRef.MODID, "total_health");
+    public static final HashMap<String, ResourceLocation> REGISTERED_STATS = new HashMap<>();
 
     private static class Registrations {
         public final List<ResourceLocation> customStats = new ArrayList<>();
@@ -50,13 +52,24 @@ public class PlayerStats {
     private static Registrations getActiveRegistrations() {
         return registrations.computeIfAbsent(ModLoadingContext.get().getActiveNamespace(), it -> new Registrations());
     }
+
+    public static void addReg(String id){
+        REGISTERED_STATS.put(id, new ResourceLocation(SlashRef.MODID, id));
+    }
+
     public static void initialize() {
+        addReg(Health.getInstance().GUID());
+        addReg(Mana.getInstance().GUID());
+        addReg(Blood.getInstance().GUID());
+        addReg(Energy.getInstance().GUID());
+        addReg(MagicShield.getInstance().GUID());
+        addReg(DatapackStats.DEX.GUID());
+        addReg(DatapackStats.INT.GUID());
+        addReg(DatapackStats.STR.GUID());
+
         registerCustomStat(LEVELS_GAINED);
-        registerCustomStat(TOTAL_MANA);
-        registerCustomStat(TOTAL_ENERGY);
-        registerCustomStat(TOTAL_MAGIC_SHIELD);
-        registerCustomStat(TOTAL_BLOOD);
-        registerCustomStat(TOTAL_HEALTH);
+        for(ResourceLocation rl : REGISTERED_STATS.values())
+            registerCustomStat(rl);
     }
 
 }

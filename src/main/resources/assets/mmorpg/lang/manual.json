@@ -122,8 +122,11 @@
 
 
 "stat.mmorpg.levels_gained": "M&S Level",
-"stat.mmorpg.total_mana": "M&S Max Mana",
-"stat.mmorpg.total_health": "M&S Max Health",
-"stat.mmorpg.total_magic_shield": "M&S Max Magic Shield",
-"stat.mmorpg.total_energy": "M&S Max Energy",
-"stat.mmorpg.total_blood": "M&S Max Blood",
+"stat.mmorpg.mana": "M&S Max Mana",
+"stat.mmorpg.health": "M&S Max Health",
+"stat.mmorpg.magic_shield": "M&S Max Magic Shield",
+"stat.mmorpg.energy": "M&S Max Energy",
+"stat.mmorpg.blood": "M&S Max Blood",
+"stat.mmorpg.intelligence": "M&S Intelligence",
+"stat.mmorpg.dexterity": "M&S Dexterity",
+"stat.mmorpg.strength": "M&S Strength",
