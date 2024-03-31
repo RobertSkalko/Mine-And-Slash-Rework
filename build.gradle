@@ -153,13 +153,13 @@ mixin {
 
 publishMods {
 
-    file = jar.archiveFile
+    //file = jar.archiveFile
     changelog = file("CHANGELOG.txt").text
     type = STABLE
     modLoaders.add("forge")
 
     curseforge {
-        accessToken = file("key.properties").text
+        //accessToken = file("key.properties").text
         projectId = "${curse_id}"
         displayName = "${mod_archive_name}-${minecraft_version}-v${mod_version}"
         minecraftVersions.add("${minecraft_version}")

@@ -6,6 +6,8 @@ import com.robertx22.age_of_exile.capability.player.data.PlayerProfessionsData;
 import com.robertx22.age_of_exile.capability.player.data.RestedExpData;
 import com.robertx22.age_of_exile.capability.player.data.StatPointsData;
 import com.robertx22.age_of_exile.characters.CharStorageData;
+import com.robertx22.age_of_exile.characters.CharacterData;
+import com.robertx22.age_of_exile.characters.PlayerStats;
 import com.robertx22.age_of_exile.saveclasses.perks.TalentsData;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellSchoolsData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -13,6 +15,7 @@ import com.robertx22.age_of_exile.vanilla_mc.commands.CommandRefs;
 import com.robertx22.age_of_exile.vanilla_mc.commands.suggestions.CommandSuggestions;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.Arrays;
@@ -28,7 +31,7 @@ public class ResetCommand {
         LEVEL() {
             @Override
             public void reset(Player p) {
-                Load.Unit(p).setLevel(1);
+                Load.Unit(p).setLevel_player(1, p);
             }
         },
         SPELLS() {

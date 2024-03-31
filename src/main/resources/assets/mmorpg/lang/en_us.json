@@ -2,8 +2,7 @@
 	"translator_guide_0": "This section provides guidance to translators, offering insights into internal details:",
 	"translator_guide_1": "1. Some lang lines have corresponding locale context, particularly the formatter lines. Understanding these contexts helps translators comprehend how the lang line function. Translating these lines is unnecessary.",
 	"translator_guide_2": "2. Certain lines contain line break format(\\n). translator can add/remove that format at will based on the actual length of the translated text.",
-
- "death.attack.mmorpg": "%1$s was slain by %2$s",
+"death.attack.mmorpg": "%1$s was slain by %2$s",
 
 "block.mmorpg.harvest.purple": "Chaotic Seeds",
 "block.mmorpg.harvest.green": "Primal Seeds",
@@ -124,6 +123,14 @@
 "mmorpg.chest_type.map": "Map",
 "mmorpg.chest_type.rune": "Rune",
 "mmorpg.chest_type.support_gem": "Support Gem",
+
+
+"stat.mmorpg.levels_gained": "M&S Level",
+"stat.mmorpg.total_mana": "M&S Max Mana",
+"stat.mmorpg.total_health": "M&S Max Health",
+"stat.mmorpg.total_magic_shield": "M&S Max Magic Shield",
+"stat.mmorpg.total_energy": "M&S Max Energy",
+"stat.mmorpg.total_blood": "M&S Max Blood",
 "_comment": " [CATEGORY]: MISC - NAMES",
 
 	"mmorpg.gem_rank.chipped": "Chipped",
@@ -158,7 +165,7 @@
 	"mmorpg.item_tips.need_key": "Needs Key: ",
 	"mmorpg.item_tips.outcome_tip": "%1$s, Chance: %2$s%%",
 	"mmorpg.item_tips.outcome_tip.locale_context_for_translator": "for currency tooltips",
-	"mmorpg.item_tips.potential": "Potential: %1$s%%",
+	"mmorpg.item_tips.potential": "Potential: %1$s",
 	"mmorpg.item_tips.prefix_stats": "Prefix Stats: ",
 	"mmorpg.item_tips.quality": "Quality: %1$s%%",
 	"mmorpg.item_tips.rarity_tip": "Rarity: ",
@@ -824,6 +831,15 @@
 "_comment": " [CATEGORY]: GUI - NAMES",
 
 
+"_comment": " [CATEGORY]: FOODS - NAMES",
+
+	"mmorpg.buff_consumption.meal": "Meal",
+	"mmorpg.buff_consumption.potion": "Potion",
+	"mmorpg.buff_consumption.seafood": "Seafood",
+
+"_comment": " [CATEGORY]: FOODS - NAMES",
+
+
 "_comment": " [CATEGORY]: RUNE WORDS - NAMES",
 
 	"mmorpg.runeword.abyssal_depths": "Abyssal Depths",
@@ -834,15 +850,6 @@
 	"mmorpg.runeword.the_novice": "The Novice",
 
 "_comment": " [CATEGORY]: RUNE WORDS - NAMES",
-
-
-"_comment": " [CATEGORY]: FOODS - NAMES",
-
-	"mmorpg.buff_consumption.meal": "Meal",
-	"mmorpg.buff_consumption.potion": "Potion",
-	"mmorpg.buff_consumption.seafood": "Seafood",
-
-"_comment": " [CATEGORY]: FOODS - NAMES",
 
 
 "_comment": " [CATEGORY]: RARITIES - NAMES",
@@ -875,6 +882,54 @@
 	"mmorpg.prophecy_start.support_gem": "Support Gem Prophecy",
 
 "_comment": " [CATEGORY]: PROPHECY - NAMES",
+
+
+"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
+
+	"item.mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
+	"mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
+	"mmorpg.currency.entangled_affix_upgrade": "Entangled Orb of Imbalance",
+	"item.mmorpg.currency.entangled_affix_upgrade": "Entangled Orb of Imbalance",
+	"mmorpg.currency.entangled_quality": "Entangled Orb of Quality",
+	"item.mmorpg.currency.entangled_quality": "Entangled Orb of Quality",
+	"item.mmorpg.currency.entangled_unique_reroll": "Entangled Orb of Imperfection",
+	"mmorpg.currency.entangled_unique_reroll": "Entangled Orb of Imperfection",
+	"mmorpg.currency.level_up_orb": "Orb of Infinity",
+	"item.mmorpg.currency.level_up_orb": "Orb of Infinity",
+	"mmorpg.currency.map_rarity_upgrade": "Map Rarity Upgrade Orb",
+	"item.mmorpg.currency.map_rarity_upgrade": "Map Rarity Upgrade Orb",
+	"item.mmorpg.currency.mastery_seal0": "Spiritual Mastery Seal",
+	"mmorpg.currency.mastery_seal0": "Spiritual Mastery Seal",
+	"mmorpg.currency.mastery_seal1": "Celestial Mastery Seal",
+	"item.mmorpg.currency.mastery_seal1": "Celestial Mastery Seal",
+	"item.mmorpg.currency.mastery_seal2": "Empyrean Mastery Seal",
+	"mmorpg.currency.mastery_seal2": "Empyrean Mastery Seal",
+	"item.mmorpg.currency.mastery_seal3": "Angelic Mastery Seal",
+	"mmorpg.currency.mastery_seal3": "Angelic Mastery Seal",
+	"mmorpg.currency.mastery_seal4": "Divine Mastery Seal",
+	"item.mmorpg.currency.mastery_seal4": "Divine Mastery Seal",
+	"item.mmorpg.currency.mastery_seal5": "Godly Mastery Seal",
+	"mmorpg.currency.mastery_seal5": "Godly Mastery Seal",
+	"item.mmorpg.currency.orb_of_quality": "Orb of Quality",
+	"mmorpg.currency.orb_of_quality": "Orb of Quality",
+	"mmorpg.currency.sharpening_stone0": "Spiritual Sharpening Stone",
+	"item.mmorpg.currency.sharpening_stone0": "Spiritual Sharpening Stone",
+	"item.mmorpg.currency.sharpening_stone1": "Celestial Sharpening Stone",
+	"mmorpg.currency.sharpening_stone1": "Celestial Sharpening Stone",
+	"mmorpg.currency.sharpening_stone2": "Empyrean Sharpening Stone",
+	"item.mmorpg.currency.sharpening_stone2": "Empyrean Sharpening Stone",
+	"item.mmorpg.currency.sharpening_stone3": "Angelic Sharpening Stone",
+	"mmorpg.currency.sharpening_stone3": "Angelic Sharpening Stone",
+	"mmorpg.currency.sharpening_stone4": "Divine Sharpening Stone",
+	"item.mmorpg.currency.sharpening_stone4": "Divine Sharpening Stone",
+	"mmorpg.currency.sharpening_stone5": "Godly Sharpening Stone",
+	"item.mmorpg.currency.sharpening_stone5": "Godly Sharpening Stone",
+	"mmorpg.currency.socket_adder": "Orb of Digging",
+	"item.mmorpg.currency.socket_adder": "Orb of Digging",
+	"item.mmorpg.currency.unique_reroll": "Orb of Imperfection",
+	"mmorpg.currency.unique_reroll": "Orb of Imperfection",
+
+"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
 
 
 "_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
@@ -911,54 +966,6 @@
 	"mmorpg.effect.wounds": "Wounds",
 
 "_comment": " [CATEGORY]: STATUSEFFECTS - NAMES",
-
-
-"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
-
-	"item.mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
-	"mmorpg.currency.affix_tier_up_down": "Orb of Imbalance",
-	"mmorpg.currency.entangled_affix_upgrade": "Entangled Orb of Imbalance",
-	"item.mmorpg.currency.entangled_affix_upgrade": "Entangled Orb of Imbalance",
-	"mmorpg.currency.entangled_quality": "Entangled Orb of Quality",
-	"item.mmorpg.currency.entangled_quality": "Entangled Orb of Quality",
-	"item.mmorpg.currency.entangled_unique_reroll": "Entangled Orb of Imperfection",
-	"mmorpg.currency.entangled_unique_reroll": "Entangled Orb of Imperfection",
-	"mmorpg.currency.level_up_orb": "Orb of Infinity",
-	"item.mmorpg.currency.level_up_orb": "Orb of Infinity",
-	"mmorpg.currency.map_rarity_upgrade": "Map Rarity Upgrade Orb",
-	"item.mmorpg.currency.map_rarity_upgrade": "Map Rarity Upgrade Orb",
-	"item.mmorpg.currency.mastery_seal0": "Spiritual Mastery Seal",
-	"mmorpg.currency.mastery_seal0": "Spiritual Mastery Seal",
-	"mmorpg.currency.mastery_seal1": "Celestial Mastery Seal",
-	"item.mmorpg.currency.mastery_seal1": "Celestial Mastery Seal",
-	"item.mmorpg.currency.mastery_seal2": "Empyrean Mastery Seal",
-	"mmorpg.currency.mastery_seal2": "Empyrean Mastery Seal",
-	"item.mmorpg.currency.mastery_seal3": "Angelic Mastery Seal",
-	"mmorpg.currency.mastery_seal3": "Angelic Mastery Seal",
-	"item.mmorpg.currency.mastery_seal4": "Divine Mastery Seal",
-	"mmorpg.currency.mastery_seal4": "Divine Mastery Seal",
-	"mmorpg.currency.mastery_seal5": "Godly Mastery Seal",
-	"item.mmorpg.currency.mastery_seal5": "Godly Mastery Seal",
-	"item.mmorpg.currency.orb_of_quality": "Orb of Quality",
-	"mmorpg.currency.orb_of_quality": "Orb of Quality",
-	"item.mmorpg.currency.sharpening_stone0": "Spiritual Sharpening Stone",
-	"mmorpg.currency.sharpening_stone0": "Spiritual Sharpening Stone",
-	"item.mmorpg.currency.sharpening_stone1": "Celestial Sharpening Stone",
-	"mmorpg.currency.sharpening_stone1": "Celestial Sharpening Stone",
-	"mmorpg.currency.sharpening_stone2": "Empyrean Sharpening Stone",
-	"item.mmorpg.currency.sharpening_stone2": "Empyrean Sharpening Stone",
-	"item.mmorpg.currency.sharpening_stone3": "Angelic Sharpening Stone",
-	"mmorpg.currency.sharpening_stone3": "Angelic Sharpening Stone",
-	"mmorpg.currency.sharpening_stone4": "Divine Sharpening Stone",
-	"item.mmorpg.currency.sharpening_stone4": "Divine Sharpening Stone",
-	"item.mmorpg.currency.sharpening_stone5": "Godly Sharpening Stone",
-	"mmorpg.currency.sharpening_stone5": "Godly Sharpening Stone",
-	"item.mmorpg.currency.socket_adder": "Orb of Digging",
-	"mmorpg.currency.socket_adder": "Orb of Digging",
-	"item.mmorpg.currency.unique_reroll": "Orb of Imperfection",
-	"mmorpg.currency.unique_reroll": "Orb of Imperfection",
-
-"_comment": " [CATEGORY]: CURRENCY ITEMS - NAMES",
 
 
 "_comment": " [CATEGORY]: TALENTS - NAMES",
@@ -1947,6 +1954,46 @@
 "_comment": " [CATEGORY]: FORMATTER - NAMES",
 
 
+"_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
+
+	"mmorpg.gear_type.bow": "Bow",
+	"mmorpg.gear_type.cloth_boots": "Cloth Boots",
+	"mmorpg.gear_type.cloth_chest": "Cloth Chest",
+	"mmorpg.gear_type.cloth_helmet": "Cloth Helmet",
+	"mmorpg.gear_type.cloth_pants": "Cloth Pants",
+	"mmorpg.gear_type.crossbow": "Crossbow",
+	"mmorpg.gear_type.leather_boots": "Leather Boots",
+	"mmorpg.gear_type.leather_chest": "Leather Chest",
+	"mmorpg.gear_type.leather_helmet": "Leather Helmet",
+	"mmorpg.gear_type.leather_pants": "Leather Pants",
+	"mmorpg.gear_type.necklace": "Necklace",
+	"mmorpg.gear_type.plate_boots": "Plate Boots",
+	"mmorpg.gear_type.plate_chest": "Plate Chest",
+	"mmorpg.gear_type.plate_helmet": "Plate Helmet",
+	"mmorpg.gear_type.plate_pants": "Plate Pants",
+	"mmorpg.gear_type.ring": "Ring",
+	"mmorpg.gear_type.shield": "Tower Shield",
+	"mmorpg.gear_type.staff": "Staff",
+	"mmorpg.gear_type.sword": "Sword",
+	"mmorpg.gear_type.tome": "Tome",
+	"mmorpg.gear_type.totem": "Totem",
+	"mmorpg.gearslot.boots": "Boots",
+	"mmorpg.gearslot.bow": "Bow",
+	"mmorpg.gearslot.chest": "Chest",
+	"mmorpg.gearslot.crossbow": "Crossbow",
+	"mmorpg.gearslot.helmet": "Helmet",
+	"mmorpg.gearslot.necklace": "Necklace",
+	"mmorpg.gearslot.pants": "Pants",
+	"mmorpg.gearslot.ring": "Ring",
+	"mmorpg.gearslot.shield": "Shield",
+	"mmorpg.gearslot.staff": "Staff",
+	"mmorpg.gearslot.sword": "Sword",
+	"mmorpg.gearslot.tome": "Tome",
+	"mmorpg.gearslot.totem": "Totem",
+
+"_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
+
+
 "_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
 
 	"mmorpg.unique_gear.air_disaster.name": "Aria of Disaster",
@@ -1996,46 +2043,6 @@
 	"mmorpg.unique_gear.witch_brew.name": "Witch's Brew",
 
 "_comment": " [CATEGORY]: UNIQUE ITEMS - NAMES",
-
-
-"_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
-
-	"mmorpg.gear_type.bow": "Bow",
-	"mmorpg.gear_type.cloth_boots": "Cloth Boots",
-	"mmorpg.gear_type.cloth_chest": "Cloth Chest",
-	"mmorpg.gear_type.cloth_helmet": "Cloth Helmet",
-	"mmorpg.gear_type.cloth_pants": "Cloth Pants",
-	"mmorpg.gear_type.crossbow": "Crossbow",
-	"mmorpg.gear_type.leather_boots": "Leather Boots",
-	"mmorpg.gear_type.leather_chest": "Leather Chest",
-	"mmorpg.gear_type.leather_helmet": "Leather Helmet",
-	"mmorpg.gear_type.leather_pants": "Leather Pants",
-	"mmorpg.gear_type.necklace": "Necklace",
-	"mmorpg.gear_type.plate_boots": "Plate Boots",
-	"mmorpg.gear_type.plate_chest": "Plate Chest",
-	"mmorpg.gear_type.plate_helmet": "Plate Helmet",
-	"mmorpg.gear_type.plate_pants": "Plate Pants",
-	"mmorpg.gear_type.ring": "Ring",
-	"mmorpg.gear_type.shield": "Tower Shield",
-	"mmorpg.gear_type.staff": "Staff",
-	"mmorpg.gear_type.sword": "Sword",
-	"mmorpg.gear_type.tome": "Tome",
-	"mmorpg.gear_type.totem": "Totem",
-	"mmorpg.gearslot.boots": "Boots",
-	"mmorpg.gearslot.bow": "Bow",
-	"mmorpg.gearslot.chest": "Chest",
-	"mmorpg.gearslot.crossbow": "Crossbow",
-	"mmorpg.gearslot.helmet": "Helmet",
-	"mmorpg.gearslot.necklace": "Necklace",
-	"mmorpg.gearslot.pants": "Pants",
-	"mmorpg.gearslot.ring": "Ring",
-	"mmorpg.gearslot.shield": "Shield",
-	"mmorpg.gearslot.staff": "Staff",
-	"mmorpg.gearslot.sword": "Sword",
-	"mmorpg.gearslot.tome": "Tome",
-	"mmorpg.gearslot.totem": "Totem",
-
-"_comment": " [CATEGORY]: GEAR SLOTS - NAMES",
 
 
 "_comment": " [CATEGORY]: GEAR ITEMS - NAMES",
