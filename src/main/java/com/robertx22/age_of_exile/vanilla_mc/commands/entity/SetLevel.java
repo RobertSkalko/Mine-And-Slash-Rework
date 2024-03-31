@@ -30,7 +30,8 @@ public class SetLevel {
                                                                 .getInteger(e, "level"))))))));
     }
 
-    private static int execute(CommandSourceStack commandSource, Player player, int lvl) {
+    private static int execute(CommandSourceStack commandSource, Player player,
+                               int lvl) {
         if (Objects.isNull(player)) {
             try {
                 player = commandSource.getPlayerOrException();
@@ -42,7 +43,7 @@ public class SetLevel {
 
         EntityData data = Load.Unit(player);
 
-        data.setLevel_player(lvl, player);
+        data.setLevel(lvl);
         data.setExp(0);
 
         return 0;

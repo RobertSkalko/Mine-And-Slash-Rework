@@ -59,8 +59,6 @@ public class AllocateStatPacket extends MyPacket<AllocateStatPacket> {
             if (ExileDB.Stats().get(stat) instanceof CoreStat) {
                 cap.statPoints.map.put(stat, 1 + cap.statPoints.map.getOrDefault(stat, 0));
 
-                //TODO abandoncaptian, add Stat Rewards
-
                 Load.Unit(ctx.getPlayer()).setEquipsChanged();
                 cap.playerDataSync.setDirty();
             }

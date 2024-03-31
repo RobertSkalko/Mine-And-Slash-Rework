@@ -3,8 +3,6 @@ package com.robertx22.age_of_exile.capability.entity;
 import com.robertx22.age_of_exile.capability.DirtySync;
 import com.robertx22.age_of_exile.capability.bases.EntityGears;
 import com.robertx22.age_of_exile.capability.bases.INeededForClient;
-import com.robertx22.age_of_exile.characters.CharacterData;
-import com.robertx22.age_of_exile.characters.PlayerStats;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.EntityConfig;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
@@ -54,13 +52,11 @@ import com.robertx22.library_of_exile.utils.CLOC;
 import com.robertx22.library_of_exile.utils.LoadSave;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.stats.Stats;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -862,7 +858,7 @@ public class EntityData implements ICap, INeededForClient {
 
             // fully restore on lvlup
 
-            this.setLevel_player(level + 1, player);
+            this.setLevel(level + 1);
             setExp(getRemainingExp());
 
             OnScreenMessageUtils.sendLevelUpMessage(player, Words.LEVEL_UP_TYPE_PLAYER.locName(), level - 1, level);
@@ -878,15 +874,12 @@ public class EntityData implements ICap, INeededForClient {
 
 
     public void setLevel(int lvl) {
+
         level = Mth.clamp(lvl, 1, GameBalanceConfig.get().MAX_LEVEL);
 
         this.gear.setDirty();
         this.sync.setDirty();
-    }
-    public void setLevel_player(int lvl, Player player) {
-        setLevel(lvl);
-        player.resetStat(Stats.CUSTOM.get(PlayerStats.LEVELS_GAINED));
-        player.awardStat(Stats.CUSTOM.get(PlayerStats.LEVELS_GAINED), lvl);
+
     }
 
     public int getExp() {
