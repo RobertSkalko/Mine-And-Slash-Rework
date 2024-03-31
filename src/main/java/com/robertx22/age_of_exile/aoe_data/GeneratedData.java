@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.aoe_data.database.affixes.Suffixes;
 import com.robertx22.age_of_exile.aoe_data.database.auto_items.AutoItems;
 import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearsAdder;
 import com.robertx22.age_of_exile.aoe_data.database.base_stats.BaseStatsAdder;
+import com.robertx22.age_of_exile.aoe_data.database.chaos_stat.ChaosStats;
 import com.robertx22.age_of_exile.aoe_data.database.custom_item_gens.CustomItems;
 import com.robertx22.age_of_exile.aoe_data.database.dim_configs.DimConfigs;
 import com.robertx22.age_of_exile.aoe_data.database.entity_configs.EntityConfigs;
@@ -21,6 +22,7 @@ import com.robertx22.age_of_exile.aoe_data.database.runewords.Runewords;
 import com.robertx22.age_of_exile.aoe_data.database.spell_schools.SpellSchoolsAdder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
 import com.robertx22.age_of_exile.aoe_data.database.spells.Spells;
+import com.robertx22.age_of_exile.aoe_data.database.stat_compats.StatCompats;
 import com.robertx22.age_of_exile.aoe_data.database.stat_conditions.StatConditions;
 import com.robertx22.age_of_exile.aoe_data.database.stat_effects.StatEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
@@ -71,6 +73,7 @@ public class GeneratedData {
         new DimConfigs().registerAll();
         new EntityConfigs().registerAll();
 
+        new ChaosStats().registerAll();
         new Gems().registerAll();
         new Runes().registerAll();
 
@@ -95,6 +98,8 @@ public class GeneratedData {
         SupportGems.init();
         AuraGems.init();
 
+        new StatCompats().registerAll();
+        
         new ProphecyModifiers().registerAll();
 
         GameBalanceConfig c = new GameBalanceConfig();

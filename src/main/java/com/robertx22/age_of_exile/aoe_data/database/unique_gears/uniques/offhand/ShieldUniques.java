@@ -21,7 +21,7 @@ public class ShieldUniques implements ExileRegistryInit {
                 .stat(AuraEffect.getInstance().mod(5, 5))
                 .stat(new MaxElementalResist(Elements.Fire).mod(1, 3))
                 .stat(new MaxElementalResist(Elements.Cold).mod(1, 3))
-                .stat(new MaxElementalResist(Elements.Chaos).mod(1, 3))
+                .stat(new MaxElementalResist(Elements.Shadow).mod(1, 3))
                 .build();
 
     }

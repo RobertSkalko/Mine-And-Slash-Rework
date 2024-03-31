@@ -1,20 +1,29 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
-minus_hp_reg
+chaos_atk
+holy_atk
 water_minus_res
-fire_atk
-health
-lightning_minus_res
 fire_minus_res
 all_ele_res
 crit_dmg
+lightning_res
+holy_res
+lightning_atk
+chaos_minus_res
+minus_hp_reg
+fire_atk
+physical_res
+health
+lightning_minus_res
+physical_atk
+holy_minus_res
 water_atk
 minus_ene_reg
+physical_minus_res
 armor
-crit
 minus_ms_reg
 minus_mana_reg
-lightning_res
+crit
+chaos_res
 water_res
 fire_res
-lightning_atk

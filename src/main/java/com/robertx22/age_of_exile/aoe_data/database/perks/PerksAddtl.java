@@ -219,9 +219,9 @@ public class PerksAddtl implements ExileRegistryInit {
                 new OptScaleExactStat(10, Stats.HEALING_RECEIVED.get(), ModType.FLAT));
 
         PerkBuilder.stat("physical_chaos_damage", new OptScaleExactStat(2, Stats.ELEMENTAL_DAMAGE.get(Elements.Physical), ModType.FLAT),
-                new OptScaleExactStat(2, Stats.ELEMENTAL_DAMAGE.get(Elements.Chaos), ModType.FLAT));
+                new OptScaleExactStat(2, Stats.ELEMENTAL_DAMAGE.get(Elements.Shadow), ModType.FLAT));
         PerkBuilder.bigStat("physical_chaos_damage_big", new OptScaleExactStat(6, Stats.ELEMENTAL_DAMAGE.get(Elements.Physical), ModType.FLAT),
-                new OptScaleExactStat(6, Stats.ELEMENTAL_DAMAGE.get(Elements.Chaos), ModType.FLAT));
+                new OptScaleExactStat(6, Stats.ELEMENTAL_DAMAGE.get(Elements.Shadow), ModType.FLAT));
 
         PerkBuilder.stat("fire_water_damage", new OptScaleExactStat(2, Stats.ELEMENTAL_DAMAGE.get(Elements.Fire), ModType.FLAT),
                 new OptScaleExactStat(2, Stats.ELEMENTAL_DAMAGE.get(Elements.Cold), ModType.FLAT));

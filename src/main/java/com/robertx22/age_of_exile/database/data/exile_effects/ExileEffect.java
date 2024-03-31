@@ -44,6 +44,9 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
     public EffectType type = EffectType.neutral;
     public int max_stacks = 1;
 
+    public SpellTag remove_on_spell_cast = null;
+    public boolean stacks_affect_stats = true;
+
     public transient String locName = "";
 
     public TagList<EffectTag> tags = new TagList<>();
@@ -140,12 +143,12 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
 
                     var result = x.ToExactStat((int) (perc), Load.Unit(caster).getLevel());
 
-                    if (stacks > 1) {
+                    if (stacks > 1 && this.stacks_affect_stats) {
                         var inc = (stacks - 1) * 100F;
                         result.percentIncrease = inc;
                         result.increaseByAddedPercent();
                     }
-                    
+
                     result.percentIncrease = (100 * multi) - 100;
                     result.increaseByAddedPercent();
 
@@ -174,6 +177,9 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
 
         if (max_stacks > 1) {
             list.add(Chats.MAX_STACKS.locName(max_stacks));
+            if (!this.stacks_affect_stats) {
+                list.add(Chats.STACKS_DONT_MULTIPLY_STATS.locName());
+            }
         }
 
         List<EffectTag> tags = this.tags.getTags(EffectTag.SERIALIZER);

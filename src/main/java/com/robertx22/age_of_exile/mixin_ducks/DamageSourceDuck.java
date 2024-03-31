@@ -21,6 +21,7 @@ public interface DamageSourceDuck {
             info.setAmount(getMnsDamage());
 
             if (info.getAmount() <= 0) {
+                info.setAmount(0);
                 info.setCanceled(true);
             } else {
                 info.setCanceled(false);
@@ -33,6 +34,7 @@ public interface DamageSourceDuck {
             event.damage = getMnsDamage();
 
             if (event.damage <= 0) {
+                event.damage = 0;
                 event.canceled = true;
             } else {
                 event.canceled = false;

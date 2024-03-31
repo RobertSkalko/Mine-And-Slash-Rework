@@ -231,20 +231,20 @@ public class Perks implements ExileRegistryInit {
                     PerkBuilder.bigStat(new OptScaleExactStat(10, x, ModType.FLAT));
                 });
 
-        new ElementalResist(Elements.Chaos).generateAllPossibleStatVariations()
+        new ElementalResist(Elements.Shadow).generateAllPossibleStatVariations()
                 .forEach(x -> {
                     PerkBuilder.stat(new OptScaleExactStat(4, x, ModType.FLAT));
                     PerkBuilder.bigStat(new OptScaleExactStat(10, x, ModType.FLAT));
 
                 });
 
-        new ElementalPenetration(Elements.Chaos).generateAllPossibleStatVariations()
+        new ElementalPenetration(Elements.Shadow).generateAllPossibleStatVariations()
                 .forEach(x -> {
                     PerkBuilder.stat(new OptScaleExactStat(4, x, ModType.FLAT));
                     PerkBuilder.bigStat(new OptScaleExactStat(10, x, ModType.FLAT));
                 });
 
-        new BonusAttackDamage(Elements.Chaos).generateAllPossibleStatVariations()
+        new BonusAttackDamage(Elements.Shadow).generateAllPossibleStatVariations()
                 .forEach(x -> {
                     PerkBuilder.stat(x.GUID(), new OptScaleExactStat(2, x, ModType.PERCENT));
 

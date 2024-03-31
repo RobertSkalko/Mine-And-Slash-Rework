@@ -2,9 +2,11 @@ package com.robertx22.age_of_exile.prophecy;
 
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.sounds.SoundEvents;
@@ -50,6 +52,16 @@ public class PlayerProphecies {
     public void onLoginRegenIfEmpty(Player p) {
         if (offers.isEmpty() && taken.isEmpty()) {
             this.regenerateNewOffers(p);
+        }
+    }
+
+    public void OnDeath(Player p) {
+        if (WorldUtils.isDungeonWorld(p.level())) {
+            this.progress = MathHelper.clamp(progress - GameBalanceConfig.get().PROPHECY_PROGRESS_LOST_ON_MAP_DEATH, 0, 100);
+            p.sendSystemMessage(Chats.PROPHECY_MAP_DEATH.locName(GameBalanceConfig.get().PROPHECY_PROGRESS_LOST_ON_MAP_DEATH).withStyle(ChatFormatting.RED));
+
+            this.favor = MathHelper.clamp(favor - GameBalanceConfig.get().PROPHECY_CURRENCY_LOST_ON_MAP_DEATH, 0, favor);
+            p.sendSystemMessage(Chats.PROPHECY_MAP_DEATHCURRENCY.locName(GameBalanceConfig.get().PROPHECY_CURRENCY_LOST_ON_MAP_DEATH).withStyle(ChatFormatting.RED));
         }
     }
 

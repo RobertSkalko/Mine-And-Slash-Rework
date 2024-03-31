@@ -18,7 +18,9 @@ increase_proj_speed_num
 reduce_cd_by_ticks
 give_blind_to_target
 set_bool_pierce
+give_missile_barrage_to_source
 leech_mana
+set_cooldown_missile_barrage20
 leech_health
 decrease_cd_ticks_num
 proc_spell_bone_shatter

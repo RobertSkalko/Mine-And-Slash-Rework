@@ -25,6 +25,6 @@ public class LightningGolem extends GolemSummon {
 
     @Override
     public Elements ele() {
-        return Elements.Lightning;
+        return Elements.Nature;
     }
 }

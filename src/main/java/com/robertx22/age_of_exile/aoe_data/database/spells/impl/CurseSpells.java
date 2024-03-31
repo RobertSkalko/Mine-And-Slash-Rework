@@ -28,13 +28,13 @@ public class CurseSpells implements ExileRegistryInit {
                         , name, Arrays.asList(SpellTags.area, SpellTags.curse, SpellTags.CHAOS))
                 .manualDesc(
                         "Curse enemies with " + effect.locname +
-                                " and deal " + SpellCalcs.CURSE.getLocDmgTooltip() + " " + Elements.Chaos.getIconNameDmg())
+                                " and deal " + SpellCalcs.CURSE.getLocDmgTooltip() + " " + Elements.Shadow.getIconNameDmg())
 
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 0D)))
                 .onExpire(PartBuilder.playSound(SoundEvents.WITHER_SKELETON_HURT, 1D, 1D))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.SMOKE, 200D, 3D))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.SQUID_INK, 200D, 3D))
-                .onExpire(PartBuilder.damageInAoe(SpellCalcs.CURSE, Elements.Chaos, 3D))
+                .onExpire(PartBuilder.damageInAoe(SpellCalcs.CURSE, Elements.Shadow, 3D))
                 .onExpire(PartBuilder.addExileEffectToEnemiesInAoe(effect.resourcePath, 3D, 20 * 15D))
                 .build();
     }

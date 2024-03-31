@@ -62,11 +62,12 @@ public class GearTooltipUtils {
 
         //tip.add(new LiteralText(""));
 
-        if (info.useInDepthStats()) {
+        if (true || info.useInDepthStats()) {
 
             tip.addAll(gear.imp.GetTooltipString(info, gear));
 
             if (gear.uniqueStats != null) {
+                tip.add(Itemtips.UNIQUE_STATS.locName().withStyle(ChatFormatting.YELLOW));
                 tip.addAll(gear.uniqueStats.GetTooltipString(info, gear));
             }
 
@@ -133,18 +134,21 @@ public class GearTooltipUtils {
 
         tip.add(Component.literal(""));
 
-        MutableComponent lvl = TooltipUtils.gearLevel(gear.lvl, Load.Unit(info.player).getLevel());
-        int potential = (int) gear.getPotentialNumber();
+        MutableComponent lvl = TooltipUtils.levelAndRarity(gear.lvl, Load.Unit(info.player).getLevel(), gear.getRarity());
+
 
         tip.add(lvl);
+
+        if (gear.isCorrupted()) {
+            tip.add(Component.literal(ChatFormatting.RED + "").append(Words.Corrupted.locName()).withStyle(ChatFormatting.RED));
+        } else {
+            int potential = (int) gear.getPotentialNumber();
+            tip.add(Itemtips.POTENTIAL.locName(potential).withStyle(ChatFormatting.GRAY));
+
+        }
+
         TooltipUtils.addRequirements(tip, gear.getLevel(), gear.getRequirement(), Load.Unit(info.player));
-
         tip.add(Component.literal(""));
-
-        tip.add(TooltipUtils.gearRarity(gear.getRarity()));
-
-
-        tip.add(Itemtips.POTENTIAL.locName(potential).withStyle(ChatFormatting.YELLOW));
 
         if (gear.getQuality() > 0) {
             tip.add(Itemtips.QUALITY.locName(gear.getQuality()).withStyle(gear.getQualityType().color));
@@ -158,13 +162,6 @@ public class GearTooltipUtils {
 
                 tip.add(Words.Energy_Cost_Per_Mob.locName(cost, permob, damageFactor).withStyle(ChatFormatting.GREEN));
             }
-        }
-
-
-        tip.add(Component.literal(""));
-
-        if (gear.isCorrupted()) {
-            tip.add(Component.literal(ChatFormatting.RED + "").append(Words.Corrupted.locName()).withStyle(ChatFormatting.RED));
         }
 
         tip.add(Component.literal(""));

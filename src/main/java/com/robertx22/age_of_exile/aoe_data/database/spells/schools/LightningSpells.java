@@ -35,7 +35,7 @@ public class LightningSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.chaining, SpellTags.LIGHTNING))
                 .manualDesc(
                         "Strike enemies with chaining lightning that deals " + SpellCalcs.LIGHTNING_SPEAR.getLocDmgTooltip()
-                                + " " + Elements.Lightning.getIconNameDmg())
+                                + " " + Elements.Nature.getIconNameDmg())
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.ALLAY_THROW, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(SlashItems.LIGHTNING.get(), 1D, 1D, SlashEntities.SIMPLE_PROJECTILE.get(), 12D, true)
@@ -43,7 +43,7 @@ public class LightningSpells implements ExileRegistryInit {
                         .put(MapField.GRAVITY, false)
                 ))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.ELECTRIC_SPARK, 10D, 0.01D))
-                .onExpire(PartBuilder.damageInAoe(SpellCalcs.LIGHTNING_SPEAR, Elements.Lightning, 1D))
+                .onExpire(PartBuilder.damageInAoe(SpellCalcs.LIGHTNING_SPEAR, Elements.Nature, 1D))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.ELECTRIC_SPARK, 50D, 0.5D))
                 .onExpire(PartBuilder.playSound(SoundEvents.TRIDENT_HIT, 1D, 1D))
                 .levelReq(20)
@@ -57,14 +57,14 @@ public class LightningSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.LIGHTNING))
                 .manualDesc(
                         "Throw out an electric spear, dealing " + SpellCalcs.LIGHTNING_SPEAR.getLocDmgTooltip()
-                                + " " + Elements.Lightning.getIconNameDmg())
+                                + " " + Elements.Nature.getIconNameDmg())
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.TRIDENT_THROW, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_PROJECTILE.create(SlashItems.SLIMEBALL.get(), 1D, 3D, SlashEntities.SIMPLE_TRIDENT.get(), 12D, true)
                 ))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.ELECTRIC_SPARK, 1D, 0.15D))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.ELECTRIC_SPARK, 10D, 0.2D))
-                .onExpire(PartBuilder.damageInAoe(SpellCalcs.LIGHTNING_SPEAR, Elements.Lightning, 2D))
+                .onExpire(PartBuilder.damageInAoe(SpellCalcs.LIGHTNING_SPEAR, Elements.Nature, 2D))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.ELECTRIC_SPARK, 100D, 2D))
                 .onExpire(PartBuilder.playSound(SoundEvents.TRIDENT_HIT, 1D, 1D))
                 .onExpire(PartBuilder.aoeParticles(ParticleTypes.ELECTRIC_SPARK, 25D, 1D))
@@ -77,7 +77,7 @@ public class LightningSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.LIGHTNING))
                 .manualDesc(
                         "Deal " + SpellCalcs.LIGHNING_NOVA.getLocDmgTooltip()
-                                + " " + Elements.Lightning.getIconNameDmg() + " to nearby enemies.")
+                                + " " + Elements.Nature.getIconNameDmg() + " to nearby enemies.")
 
                 .weaponReq(CastingWeapon.ANY_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.TRIDENT_THUNDER, 1D, 1D))
@@ -85,7 +85,7 @@ public class LightningSpells implements ExileRegistryInit {
                 .onCast(PartBuilder.groundParticles(ParticleTypes.ELECTRIC_SPARK, 300D, 3.5D, 0.5D))
                 .onCast(PartBuilder.groundParticles(ParticleTypes.ELECTRIC_SPARK, 250D, 4D, 0.5D))
                 .onCast(PartBuilder.playSound(SoundEvents.GENERIC_HURT, 0.5D, 1D))
-                .onCast(PartBuilder.damageInAoe(SpellCalcs.LIGHNING_NOVA, Elements.Lightning, 4D)
+                .onCast(PartBuilder.damageInAoe(SpellCalcs.LIGHNING_NOVA, Elements.Nature, 4D)
                         .addPerEntityHit(PartBuilder.playSoundPerTarget(SoundEvents.GENERIC_HURT, 1D, 1D)))
                 .levelReq(10)
                 .build();
@@ -94,7 +94,7 @@ public class LightningSpells implements ExileRegistryInit {
                                 .setSwingArm(), "Lightning Totem",
                         Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.totem, SpellTags.LIGHTNING))
                 .manualDesc("Summon a lightning totem that deals "
-                        + SpellCalcs.LIGHTNING_TOTEM.getLocDmgTooltip(Elements.Lightning) + " in an area every second.")
+                        + SpellCalcs.LIGHTNING_TOTEM.getLocDmgTooltip(Elements.Nature) + " in an area every second.")
 
                 .onCast(PartBuilder.playSound(SoundEvents.GRASS_PLACE, 1D, 1D))
 
@@ -109,7 +109,7 @@ public class LightningSpells implements ExileRegistryInit {
                 .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.POOF, 5D, 1.5D, 0.2D))
                 .onTick("block", PartBuilder.playSound(SoundEvents.FIRE_EXTINGUISH, 0.75D, 1D).tick(20D))
 
-                .onTick("block", PartBuilder.damageInAoe(SpellCalcs.LIGHTNING_TOTEM, Elements.Lightning, 6D).noKnock().tick(20D)
+                .onTick("block", PartBuilder.damageInAoe(SpellCalcs.LIGHTNING_TOTEM, Elements.Nature, 6D).noKnock().tick(20D)
                         .noKnock()
                         .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.ELECTRIC_SPARK, 75D, 1.5D, 0.1D))
                         .addPerEntityHit(PartBuilder.groundEdgeParticles(ParticleTypes.ELECTRIC_SPARK, 50D, 1D, 0.1D))

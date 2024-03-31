@@ -49,6 +49,8 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     public int PERCENT_OF_PHYS_AS_BONUS_OF_EACH_ELEMENT_DMG_FOR_MOBS = 20;
 
     public int MAX_BONUS_SPELL_LEVELS = 5;
+    public int PROPHECY_PROGRESS_LOST_ON_MAP_DEATH = 50;
+    public int PROPHECY_CURRENCY_LOST_ON_MAP_DEATH = 1000;
 
     public int link_1_lvl = 1;
     public int link_2_lvl = 5;

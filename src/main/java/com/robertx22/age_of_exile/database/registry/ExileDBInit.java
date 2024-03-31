@@ -81,6 +81,8 @@ public class ExileDBInit {
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.MOB_RARITY, IRarity.COMMON_ID));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.PROPHECY_MODIFIER, ""));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.PROPHECY_START, ""));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.CHAOS_STAT, ""));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.STAT_COMPAT, ""));
 
     }
 }

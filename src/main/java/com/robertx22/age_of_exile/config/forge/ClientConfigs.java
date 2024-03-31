@@ -27,11 +27,10 @@ public class ClientConfigs {
         RENDER_ITEM_RARITY_BACKGROUND = b.define("render_item_rarity_background", true);
         SHOW_DURABILITY = b.define("show_durability", true);
         RENDER_MOB_HEALTH_GUI = b.define("render_mob_hp_gui", true);
-        USE_HOTBAR_TOGGLE = b.define("use_hotbar_toggle", true);
         ONLY_RENDER_MOB_LOOKED_AT = b.define("only_render_mob_looked_at", true);
         SHOW_DURABILITY = b.define("show_durability", true);
         ENABLE_FLOATING_DMG = b.define("render_floating_damage", true);
-        ALIGN_STAT_TOOLTIPS = b.define("ALIGN_STAT_TOOLTIPS", true);
+        ALIGN_STAT_TOOLTIPS = b.define("ALIGN_STAT_TOOLTIPS", false);
         MODIFY_TOOLTIP_LENGTH = b.define("MODIFY_TOOLTIP_LENGTH", true);
 
         ITEM_RARITY_OPACITY = b.defineInRange("ITEM_RARITY_OPACITY", 0.75F, 0, 1F);
@@ -42,7 +41,7 @@ public class ClientConfigs {
         PLAYER_GUI_TYPE = b.defineEnum("PLAYER_GUI_TYPE", PlayerGUIs.RPG);
         SKILL_TREE_ZOOM_SPEED = b.defineInRange("SKILL_TREE_ZOOM_SPEED", 0.15D, 0.000001D, 1D);
 
-        REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES = b.defineInRange("REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES", 30, 0, 1000);
+        REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES = b.defineInRange("REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES", 35, 0, 1000);
 
         b.pop();
     }
@@ -54,7 +53,6 @@ public class ClientConfigs {
     public ForgeConfigSpec.BooleanValue RENDER_ITEM_RARITY_BACKGROUND;
     public ForgeConfigSpec.BooleanValue SHOW_DURABILITY;
     public ForgeConfigSpec.BooleanValue RENDER_MOB_HEALTH_GUI;
-    public ForgeConfigSpec.BooleanValue USE_HOTBAR_TOGGLE;
     public ForgeConfigSpec.BooleanValue ONLY_RENDER_MOB_LOOKED_AT;
     public ForgeConfigSpec.BooleanValue ALIGN_STAT_TOOLTIPS;
     public ForgeConfigSpec.BooleanValue MODIFY_TOOLTIP_LENGTH;

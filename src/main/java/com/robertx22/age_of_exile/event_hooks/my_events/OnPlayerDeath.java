@@ -17,21 +17,18 @@ public class OnPlayerDeath extends EventConsumer<ExileEvents.OnPlayerDeath> {
 
             if (!cd.isOnCooldown("death_event")) {
                 cd.setOnCooldown("death_event", 100);
-                
+
                 Load.Unit(event.player).onDeath();
 
                 Load.Unit(event.player).setEquipsChanged();
 
                 PlayerData data = Load.player(event.player);
 
+                data.prophecy.OnDeath(event.player);
                 data.rested_xp.onDeath();
-
                 data.favor.onDeath(event.player);
-
                 data.deathStats.died = true;
-
                 data.buff = new PlayerBuffData(); // we delete all the buff foods and potions on death, if in the future i want some buffs to persist across death, change this
-
                 data.playerDataSync.setDirty();
             }
 

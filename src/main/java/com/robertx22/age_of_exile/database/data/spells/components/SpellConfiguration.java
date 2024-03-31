@@ -93,6 +93,11 @@ public class SpellConfiguration {
         return this;
     }
 
+    public SpellConfiguration setTrackingRadius(int rad) {
+        this.tracking_radius = rad;
+        return this;
+    }
+
     public SpellConfiguration setSummonBasicAttack(String s) {
         this.summon_basic_atk = s;
         return this;

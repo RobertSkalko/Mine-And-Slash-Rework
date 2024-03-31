@@ -54,9 +54,9 @@ public class ModEffects implements ExileRegistryInit {
     public static EffectCtx TAUNT_STANCE = new EffectCtx("taunt_stance", "Taunt Stance", Elements.Physical, EffectType.beneficial);
     public static EffectCtx UNDYING_WILL = new EffectCtx("undying_will", "Undying Will", Elements.Physical, EffectType.beneficial);
     public static EffectCtx MAGE_CIRCLE = new EffectCtx("mage_circle", "Mage Circle", Elements.Elemental, EffectType.beneficial);
-    public static EffectCtx PETRIFY = new EffectCtx("petrify", "Petrify", Elements.Chaos, EffectType.negative);
+    public static EffectCtx PETRIFY = new EffectCtx("petrify", "Petrify", Elements.Shadow, EffectType.negative);
     public static EffectCtx WOUNDS = new EffectCtx("wounds", "Wounds", Elements.Physical, EffectType.negative);
-    public static EffectCtx BLIND = new EffectCtx("blind", "Blind", Elements.Chaos, EffectType.negative);
+    public static EffectCtx BLIND = new EffectCtx("blind", "Blind", Elements.Shadow, EffectType.negative);
     public static EffectCtx STUN = new EffectCtx("stun", "Stun", Elements.Physical, EffectType.negative);
     public static EffectCtx SLOW = new EffectCtx("slow", "Slow", Elements.Physical, EffectType.negative);
     public static EffectCtx CURSE_AGONY = new EffectCtx("agony", "Curse of Agony", Elements.Elemental, EffectType.negative);
@@ -70,6 +70,7 @@ public class ModEffects implements ExileRegistryInit {
     public static EffectCtx BONE_CHILL = new EffectCtx("bone_chill", "Bone Chill", Elements.Cold, EffectType.negative);
     public static EffectCtx FROST_LICH = new EffectCtx("frost_lich", "Frost Lich", Elements.Cold, EffectType.beneficial);
     public static EffectCtx ESSENCE_OF_FROST = new EffectCtx("essence_of_frost", "Essence of Frost", Elements.Cold, EffectType.beneficial);
+    public static EffectCtx MISSILE_BARRAGE = new EffectCtx("missile_barrage", "Missile Barrage", Elements.NONE, EffectType.beneficial);
 
     public static int ESSENCE_OF_FROST_MAX_STACKS = 5;
 
@@ -79,6 +80,14 @@ public class ModEffects implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
+
+        ExileEffectBuilder.of(MISSILE_BARRAGE)
+                .maxStacks(5)
+                .stat(Stats.CAST_TIME_PER_SPELL_TAG.get(SpellTags.MISSILE).mod(50, 50))
+                .stat(Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.MISSILE).mod(25, 25))
+                .disableStackingStatBuff()
+                .removeOnSpellCastWithTag(SpellTags.MISSILE)
+                .build();
 
         ExileEffectBuilder.of(ModEffects.ESSENCE_OF_FROST)
                 .maxStacks(ESSENCE_OF_FROST_MAX_STACKS)
@@ -167,7 +176,7 @@ public class ModEffects implements ExileRegistryInit {
 
         ExileEffectBuilder.of(ModEffects.DESPAIR)
                 .maxStacks(1)
-                .stat(-15, -25, new ElementalResist(Elements.Chaos))
+                .stat(-15, -25, new ElementalResist(Elements.Shadow))
 
                 .spell(SpellBuilder.forEffect()
                         .onTick(PartBuilder.aoeParticles(ParticleTypes.ITEM_SLIME, 2D, 0.5D)
@@ -212,7 +221,7 @@ public class ModEffects implements ExileRegistryInit {
                 .spell(SpellBuilder.forEffect()
                         .onTick(PartBuilder.aoeParticles(ParticleTypes.ITEM_SLIME, 10D, 1D)
                                 .tick(20D))
-                        .onExpire(PartBuilder.justAction(SpellAction.DEAL_DAMAGE.create(SpellCalcs.PETRIFY, Elements.Chaos))
+                        .onExpire(PartBuilder.justAction(SpellAction.DEAL_DAMAGE.create(SpellCalcs.PETRIFY, Elements.Shadow))
                                 .setTarget(TargetSelector.TARGET.create()))
                         .onExpire(PartBuilder.aoeParticles(ParticleTypes.CLOUD, 15D, 1D))
                         .onExpire(PartBuilder.justAction(SpellAction.PLAY_SOUND.create(SoundEvents.SHEEP_SHEAR, 1D, 1D)))
@@ -268,10 +277,10 @@ public class ModEffects implements ExileRegistryInit {
 
         ExileEffectBuilder.of(PERSEVERANCE)
                 .stat(5, 10, new ElementalResist(Elements.Physical))
-                .stat(5, 10, new ElementalResist(Elements.Chaos))
+                .stat(5, 10, new ElementalResist(Elements.Shadow))
                 .stat(5, 10, new ElementalResist(Elements.Fire))
                 .stat(5, 10, new ElementalResist(Elements.Cold))
-                .stat(5, 10, new ElementalResist(Elements.Lightning))
+                .stat(5, 10, new ElementalResist(Elements.Nature))
                 .stat(10, 10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.song), ModType.MORE)
                 .maxStacks(3)
                 .addTags(EffectTags.song, EffectTags.defensive)

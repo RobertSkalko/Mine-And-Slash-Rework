@@ -169,6 +169,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.addToSerializables();
         });
 
+        
         GearRarity unique = new GearRarity().edit(x -> {
             x.map_resist_req = 50;
 
@@ -191,6 +192,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
         GearRarity runeword = new GearRarity().edit(x -> {
             x.map_resist_req = 50;
 
+            x.min_lvl = 20;
             x.sockets = new MinMax(2, 6);
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
             x.pot = new GearRarity.Potential(25);

@@ -72,6 +72,14 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     public boolean show_in_gui = true;
 
 
+    public void setChanceBasedStatDefaults() {
+        min = 0;
+        max = 100;
+        is_long = true;
+        is_perc = true;
+        scaling = StatScaling.NONE;
+    }
+
     public void setUsesMoreMultiplier() {
         this.multiUseType = MultiUseType.MULTIPLICATIVE_DAMAGE;
     }

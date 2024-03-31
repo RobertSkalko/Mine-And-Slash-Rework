@@ -20,7 +20,7 @@ public abstract class BaseRarity implements Rarity {
 
     @Override
     public String locNameLangFileGUID() {
-        return SlashRef.MODID + ".rarity." + "." + GUID();
+        return SlashRef.MODID + ".rarity." + GUID();
     }
 
     @Override

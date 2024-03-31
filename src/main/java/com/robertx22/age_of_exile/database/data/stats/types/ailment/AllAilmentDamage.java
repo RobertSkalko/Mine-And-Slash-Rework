@@ -15,7 +15,7 @@ public class AllAilmentDamage extends Stat {
 
         this.statEffect = new Effect();
         this.is_perc = true;
-               
+
 
     }
 
@@ -48,7 +48,7 @@ public class AllAilmentDamage extends Stat {
 
     @Override
     public Elements getElement() {
-        return Elements.All;
+        return Elements.NONE;
     }
 
     @Override

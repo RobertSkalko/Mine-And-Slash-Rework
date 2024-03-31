@@ -34,7 +34,7 @@ public class StatRequirement {
 
     public static StatRequirement of(PlayStyle... styles) {
         StatRequirement r = new StatRequirement();
-        float multi = 0.75F / (float) styles.length;
+        float multi = 0.5F / (float) styles.length;
 
         for (PlayStyle style : styles) {
             r.setStyleReq(style, multi);
@@ -73,14 +73,14 @@ public class StatRequirement {
         for (Map.Entry<String, Float> en : this.scaling_req.entrySet()) {
             Stat x = ExileDB.Stats().get(en.getKey());
             int num = getScalingReq(x, lvl);
-            if (num > -1) {
+            if (num > 0) {
                 list.add(getTooltip(num, x, data));
             }
         }
         for (Map.Entry<String, Float> en : this.base_req.entrySet()) {
             Stat x = ExileDB.Stats().get(en.getKey());
             int num = getNonScalingReq(x, lvl);
-            if (num > -1) {
+            if (num > 0) {
                 list.add(getTooltip(num, x, data));
             }
         }
@@ -130,6 +130,7 @@ public class StatRequirement {
         if (stat.is_perc) {
             perc = "%";
         }
+
 
         if (data.getUnit()
                 .getCalculatedStat(stat)

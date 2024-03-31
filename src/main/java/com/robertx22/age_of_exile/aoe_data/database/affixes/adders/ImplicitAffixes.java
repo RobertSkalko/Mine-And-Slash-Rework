@@ -88,8 +88,8 @@ public class ImplicitAffixes implements ExileRegistryInit {
             x.add("cleric_staff", "Cleric Staff", Stats.HEAL_STRENGTH.get().mod(10, 20));
             x.add("glacial_staff", "Glacial Staff", Stats.ELEMENTAL_DAMAGE.get(Elements.Cold).mod(10, 15));
             x.add("wildfire_staff", "Wildfire Staff", Stats.ELEMENTAL_DAMAGE.get(Elements.Fire).mod(5, 10), new AilmentChance(Ailments.BURN).mod(3, 5));
-            x.add("cursed_staff", "Cursed Staff", Stats.ELEMENTAL_DAMAGE.get(Elements.Chaos).mod(5, 10), Stats.EFFECT_DURATION_YOU_CAST_PER_TAG.get(EffectTags.curse).mod(5, 10));
-            x.add("lightning_staff", "Lightning Staff", Stats.ELEMENTAL_DAMAGE.get(Elements.Lightning).mod(5, 10), Stats.CRIT_CHANCE.get().mod(2, 3));
+            x.add("cursed_staff", "Cursed Staff", Stats.ELEMENTAL_DAMAGE.get(Elements.Shadow).mod(5, 10), Stats.EFFECT_DURATION_YOU_CAST_PER_TAG.get(EffectTags.curse).mod(5, 10));
+            x.add("lightning_staff", "Lightning Staff", Stats.ELEMENTAL_DAMAGE.get(Elements.Nature).mod(5, 10), Stats.CRIT_CHANCE.get().mod(2, 3));
         });
 
 

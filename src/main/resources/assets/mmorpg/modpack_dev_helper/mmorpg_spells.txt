@@ -84,6 +84,7 @@ boomerang
 power_chord
 pull
 test_command
+holy_missiles
 awaken_mana
 explode_minions
 fire_nova

@@ -20,11 +20,12 @@ import java.util.Arrays;
 
 public class StatEffects implements ExileRegistryInit {
 
-    public static DataHolder<EffectCtx, StatEffect> GIVE_SELF_EFFECT = new DataHolder<>(
+    public static DataHolder<EffectCtx, StatEffect> GIVE_SELF_EFFECT_30_SEC = new DataHolder<>(
             Arrays.asList(
-                    ModEffects.TAUNT_STANCE
+                    ModEffects.TAUNT_STANCE,
+                    ModEffects.MISSILE_BARRAGE
             ),
-            x -> new GiveExileStatusEffect(x.resourcePath, EffectSides.Source, 10)
+            x -> new GiveExileStatusEffect(x.resourcePath, EffectSides.Source, 30)
     );
 
 
@@ -101,6 +102,7 @@ public class StatEffects implements ExileRegistryInit {
     public static StatEffect INCREASE_AREA = new IncreaseNumberByPercentEffect(EventData.AREA_MULTI);
     public static StatEffect APPLY_CAST_SPEED_TO_CD = new ApplyCooldownAsCastTimeEffect();
 
+
     public static DataHolder<String, StatEffect> ADD_PERC_OF_STAT_TO_NUMBER = new DataHolder<>(
             Arrays.asList(
                     Health.getInstance()
@@ -110,11 +112,18 @@ public class StatEffects implements ExileRegistryInit {
             )
             , x -> new AddToNumberEffect("add_perc_of_" + x + "_to_num", EventData.NUMBER, NumberProvider.ofPercentOfStat(x)));
 
+    public static DataHolder<SetCooldownEffect.Data, StatEffect> SET_COOLDOWN = new DataHolder<>(
+            Arrays.asList(
+                    SetCooldownEffect.MISSILE_BARRAGE
+            )
+            , x -> new SetCooldownEffect(x));
+
 
     public static StatEffect PROC_SHATTER = new ProcSpellEffect(WaterSpells.BONE_SHATTER_PROC, PositionSource.TARGET);
 
 
     public static void addSerializers() {
+
     }
 
     @Override

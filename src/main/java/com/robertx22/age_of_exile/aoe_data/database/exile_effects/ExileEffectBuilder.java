@@ -61,6 +61,11 @@ public class ExileEffectBuilder {
         return this;
     }
 
+    public ExileEffectBuilder removeOnSpellCastWithTag(SpellTag tag) {
+        this.effect.remove_on_spell_cast = tag;
+        return this;
+    }
+
     public ExileEffectBuilder stat(StatMod stat) {
         this.effect.stats.add(stat);
         return this;
@@ -78,6 +83,11 @@ public class ExileEffectBuilder {
 
     public ExileEffectBuilder spell(Spell stat) {
         this.effect.spell = stat.getAttached();
+        return this;
+    }
+
+    public ExileEffectBuilder disableStackingStatBuff() {
+        this.effect.stacks_affect_stats = false;
         return this;
     }
 

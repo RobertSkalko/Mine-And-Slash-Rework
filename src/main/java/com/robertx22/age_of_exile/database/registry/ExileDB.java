@@ -9,6 +9,7 @@ import com.robertx22.age_of_exile.database.data.affixes.Affix;
 import com.robertx22.age_of_exile.database.data.aura.AuraGem;
 import com.robertx22.age_of_exile.database.data.auto_item.AutoItem;
 import com.robertx22.age_of_exile.database.data.base_stats.BaseStatsConfig;
+import com.robertx22.age_of_exile.database.data.chaos_stats.ChaosStat;
 import com.robertx22.age_of_exile.database.data.currency.base.Currency;
 import com.robertx22.age_of_exile.database.data.custom_item.CustomItem;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
@@ -31,6 +32,7 @@ import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.database.data.runewords.RuneWord;
 import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
+import com.robertx22.age_of_exile.database.data.stat_compat.StatCompat;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.support_gem.SupportGem;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
@@ -242,8 +244,16 @@ public class ExileDB {
         return Database.getRegistry(ExileRegistryTypes.STAT_BUFF);
     }
 
+    public static ExileRegistryContainer<ChaosStat> ChaosStats() {
+        return Database.getRegistry(ExileRegistryTypes.CHAOS_STAT);
+    }
+
     public static ExileRegistryContainer<ProfessionRecipe> Recipes() {
         return Database.getRegistry(ExileRegistryTypes.RECIPE);
+    }
+
+    public static ExileRegistryContainer<StatCompat> StatCompat() {
+        return Database.getRegistry(ExileRegistryTypes.STAT_COMPAT);
     }
 
     public static ExileRegistryContainer<AuraGem> AuraGems() {

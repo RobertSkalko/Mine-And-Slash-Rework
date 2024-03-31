@@ -37,7 +37,7 @@ public class CoreStat extends BaseDatapackStat implements ICoreStat {
 
         this.data = data;
 
-        this.is_perc = true;
+        this.is_perc = false;
         this.min = 0;
         this.group = StatGroup.CORE;
         this.scaling = StatScaling.NONE;

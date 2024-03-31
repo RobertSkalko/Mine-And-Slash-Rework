@@ -19,7 +19,7 @@ public class BonusAttackDamage extends ElementalStat {
     public List<Stat> generateAllPossibleStatVariations() {
 
         List<Stat> list = new ArrayList<>();
-        Elements.getAllSingleIncludingPhysical()
+        Elements.getAllSingle()
                 .forEach(x -> list.add(newGeneratedInstance(x)));
         return list;
     }

@@ -133,6 +133,7 @@ public class StatCalculation {
         if (entity instanceof Player p) {
             var playerData = Load.player(p);
 
+            statContexts.add(CommonStatUtils.addStatCompat(p));
             statContexts.addAll(PlayerStatUtils.addToolStats(p));
 
             statContexts.add(PlayerStatUtils.addBonusExpPerCharacters(p));

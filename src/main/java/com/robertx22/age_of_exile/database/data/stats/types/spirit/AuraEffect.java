@@ -41,7 +41,7 @@ public class AuraEffect extends Stat {
 
     @Override
     public Elements getElement() {
-        return Elements.All;
+        return Elements.NONE;
     }
 
     @Override

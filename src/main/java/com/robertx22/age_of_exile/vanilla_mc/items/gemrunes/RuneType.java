@@ -117,13 +117,13 @@ public enum RuneType {
             .addWeapon(Stats.ELEMENTAL_DAMAGE.get(Elements.Cold).mod(1, 10))
     ),
     BRI(0, "bri", "Bri", 3, 0.4f, () -> StatPerType.of()
-            .addArmor(new ElementalResist(Elements.Lightning).mod(5, 25))
-            .addJewerly(new ElementalResist(Elements.Lightning).mod(5, 25))
-            .addWeapon(Stats.ELEMENTAL_DAMAGE.get(Elements.Lightning).mod(1, 10))
+            .addArmor(new ElementalResist(Elements.Nature).mod(5, 25))
+            .addJewerly(new ElementalResist(Elements.Nature).mod(5, 25))
+            .addWeapon(Stats.ELEMENTAL_DAMAGE.get(Elements.Nature).mod(1, 10))
     ),
     DAW(0, "daw", "Daw", 3, 0.4f, () -> StatPerType.of()
-            .addArmor(new ElementalResist(Elements.Chaos).mod(3, 15))
-            .addJewerly(new ElementalResist(Elements.Chaos).mod(3, 15))
+            .addArmor(new ElementalResist(Elements.Shadow).mod(3, 15))
+            .addJewerly(new ElementalResist(Elements.Shadow).mod(3, 15))
             .addWeapon(Stats.ELEMENTAL_DAMAGE.get(Elements.Fire).mod(1, 10))
     ),
     END(0, "end", "End", 4, 0.55f, () -> StatPerType.of()

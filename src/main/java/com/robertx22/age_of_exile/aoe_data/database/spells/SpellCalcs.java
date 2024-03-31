@@ -53,9 +53,15 @@ public class SpellCalcs {
     public static ValueCalculation POISON_BALL = ValueCalcBuilder.of("poisonball")
             .spellScaling(0.25F, 0.5F)
             .build();
+
     public static ValueCalculation ICEBALL = ValueCalcBuilder.of("iceball")
             .spellScaling(0.25F, 0.5F)
             .build();
+
+    public static ValueCalculation HOLY_MISSILES = ValueCalcBuilder.of("holy_missiles")
+            .spellScaling(0.15F, 0.25F)
+            .build();
+
     public static ValueCalculation FIREBALL = ValueCalcBuilder.of("fireball")
             .spellScaling(0.25F, 0.5F)
             .build();

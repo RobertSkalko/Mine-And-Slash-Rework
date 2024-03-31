@@ -10,6 +10,7 @@ bone_chill
 perseverance
 stun
 mage_circle
+missile_barrage
 weak
 agony
 frost_lich

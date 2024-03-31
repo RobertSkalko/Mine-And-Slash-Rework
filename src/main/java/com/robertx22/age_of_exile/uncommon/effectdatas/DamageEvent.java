@@ -16,6 +16,7 @@ import com.robertx22.age_of_exile.mixin_ducks.LivingEntityAccesor;
 import com.robertx22.age_of_exile.mixin_ducks.ProjectileEntityDuck;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
@@ -332,7 +333,8 @@ public class DamageEvent extends EffectEvent {
         var config = ExileDB.getEntityConfig(target, Load.Unit(target));
 
         if (target instanceof Player == false && config != null && config.set_health_damage_override) {
-            target.setHealth(target.getHealth() - vanillaDamage);
+            float hp = MathHelper.clamp(target.getHealth() - vanillaDamage, 0, target.getMaxHealth());
+            target.setHealth(hp);
             // todo this might create bugs but its probably better that damage actually works..
             if (target.getHealth() <= 0) {
                 target.die(target.damageSources().mobAttack(this.source));

@@ -118,7 +118,7 @@ public class RangerSpells implements ExileRegistryInit {
                 .build();
 
         trap(FROST_TRAP, "Frost Trap", ParticleTypes.ITEM_SNOWBALL, SpellCalcs.RANGER_TRAP, Elements.Cold).levelReq(10).build();
-        trap(POISON_TRAP, "Poison Trap", ParticleTypes.ITEM_SLIME, SpellCalcs.RANGER_TRAP, Elements.Chaos).levelReq(30).build();
+        trap(POISON_TRAP, "Poison Trap", ParticleTypes.ITEM_SLIME, SpellCalcs.RANGER_TRAP, Elements.Shadow).levelReq(30).build();
         trap(FIRE_TRAP, "Fire Trap", ParticleTypes.FLAME, SpellCalcs.RANGER_TRAP, Elements.Fire).levelReq(1).build();
 
         SpellBuilder.of(SMOKE_BOMB, PlayStyle.DEX, SpellConfiguration.Builder.instant(7, 20 * 60), "Smoke Bomb",
@@ -158,7 +158,7 @@ public class RangerSpells implements ExileRegistryInit {
 
                 .manualDesc(
                         "Shoot a slowing charged arrow that goes through enemies and deals "
-                                + SpellCalcs.CHARGED_BOLT.getLocDmgTooltip() + " " + Elements.Lightning.getIconNameDmg() + " in a radius along its path.")
+                                + SpellCalcs.CHARGED_BOLT.getLocDmgTooltip() + " " + Elements.Nature.getIconNameDmg() + " in a radius along its path.")
 
                 .weaponReq(CastingWeapon.RANGED)
                 .onCast(PartBuilder.playSound(SoundEvents.ARROW_SHOOT, 1D, 1D))
@@ -170,7 +170,7 @@ public class RangerSpells implements ExileRegistryInit {
 
                 .onHit(PartBuilder.aoeParticles(ParticleTypes.CRIT, 100D, 1D))
                 .onHit(PartBuilder.playSound(SoundEvents.ARROW_HIT, 1D, 1D))
-                .onHit(PartBuilder.damageInAoe(SpellCalcs.CHARGED_BOLT, Elements.Lightning, 2D)
+                .onHit(PartBuilder.damageInAoe(SpellCalcs.CHARGED_BOLT, Elements.Nature, 2D)
                         .addPerEntityHit(PartBuilder.justAction(SpellAction.POTION.createGive(MobEffects.MOVEMENT_SLOWDOWN, 40D))))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.CRIT, 4D, 0.1D))
                 .onTick(PartBuilder.particleOnTick(1D, ParticleTypes.ENCHANTED_HIT, 4D, 0.1D))

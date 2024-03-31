@@ -27,7 +27,7 @@ public class MobAffixes implements ExileRegistryInit {
     static void eleAffix(String name, Elements element) {
         new MobAffix(element.guidName + "_mob_affix", name, element.format, Affix.Type.prefix)
                 .setMods(
-                        new StatMod(100, 100, new PhysicalToElement(element)),
+                        new StatMod(50, 50, new PhysicalToElement(element)),
                         new StatMod(50, 50, new BonusPhysicalAsElemental(element), ModType.FLAT),
                         new StatMod(10, 10, ExtraMobDropsStat.getInstance()))
                 .setWeight(2000)
@@ -38,6 +38,7 @@ public class MobAffixes implements ExileRegistryInit {
         new MobAffix("full_" + element.guidName, "Of " + element.dmgName, element.format, Affix.Type.suffix)
                 .setMods(
                         new StatMod(100, 100, new PhysicalToElement(element)),
+                        new StatMod(25, 25, new BonusPhysicalAsElemental(element), ModType.FLAT),
                         new StatMod(25, 25, new ElementalResist(element))
                 )
                 .setWeight(0)
@@ -49,7 +50,10 @@ public class MobAffixes implements ExileRegistryInit {
 
         eleAffix("Freezing", Cold);
         eleAffix("Flaming", Fire);
-        eleAffix("Poisoned", Chaos);
+        eleAffix("Lightning", Nature);
+
+        eleAffix("Smiting", Holy);
+        eleAffix("Poisoned", Shadow);
 
 
         new MobAffix("winter", "Winter Lord", Cold.format, Affix.Type.prefix)
@@ -74,14 +78,14 @@ public class MobAffixes implements ExileRegistryInit {
                 .setWeight(250)
                 .addToSerializables();
 
-        new MobAffix("nature_lord", "Chaos Lord", Chaos.format, Affix.Type.prefix)
+        new MobAffix("nature_lord", "Chaos Lord", Shadow.format, Affix.Type.prefix)
                 .setMods(
                         new StatMod(15, 15, Health.getInstance()),
                         new StatMod(5, 5, new AilmentChance(Ailments.POISON)),
-                        new StatMod(75, 75, new PhysicalToElement(Chaos)),
-                        new StatMod(50, 50, new BonusPhysicalAsElemental(Chaos), ModType.FLAT),
+                        new StatMod(75, 75, new PhysicalToElement(Shadow)),
+                        new StatMod(50, 50, new BonusPhysicalAsElemental(Shadow), ModType.FLAT),
                         new StatMod(20, 20, ExtraMobDropsStat.getInstance()))
-                .icon(Chaos.format + Chaos.icon)
+                .icon(Shadow.format + Shadow.icon)
                 .setWeight(250)
                 .addToSerializables();
 
@@ -102,9 +106,10 @@ public class MobAffixes implements ExileRegistryInit {
 
 
         fullEle(Cold);
-        fullEle(Lightning);
+        fullEle(Nature);
         fullEle(Fire);
-        fullEle(Chaos);
+        fullEle(Shadow);
+        fullEle(Holy);
 
 
     }

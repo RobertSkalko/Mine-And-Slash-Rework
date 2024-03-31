@@ -63,6 +63,7 @@ boomerang
 totem_guard
 power_chord
 pull
+holy_missiles
 awaken_mana
 fire_nova
 taunt

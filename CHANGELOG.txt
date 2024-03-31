@@ -1,93 +1,18 @@
-Start of Release builds!
-Mine and Slash 1.20.1 is finally at a point where I don't feel BETA suits it that well anymore, as it's very very close to ready to actually play and not just test.
-A lot of bugs have been ironed out, gui and items received a generous makeover, mechanics have been polished, tweaked.
-Localization has been added to more and more parts of the code. Lots of small updates that didn't feel like they added much, added up I guess!
-
-v.5.3.14
-- should fix effect tooltips 
-- talents now lower opacity when players have 0 talents, to show which are the starter ones
-- fix double soul modifier use
-- fix soul mod use on non armors
-- healing no longer causes threat
-- try optimize stat calc a biiiit
-- try optimize syncing to client a bit
-If you notice anything weird after update please say
-- /mine_and_slash reset_player_data to reset parts of a player
-- added status effect wiki
-- added blizzard spell
-- added chat explanation for ANY reason your spell cast might fail :)
-Some are excluded like like low cooldown spammable spells wont screech at you for holding the button, but if the cooldown is higher than 2 seconds than it will gladly tell you
-- added hurt sound on magic shield being hit
-- tweaked item click on other code, please check for any errors
-- currencies shouldnt move items around in inventory anymore
-- added set_health_damage_override to entityconfig datapack for stubborn closed source mods that mess with damage mechanics and dont provide configs. Yes i see the irony
-- added buttons for choosen spell schools
-- blue skies added as default datapack (to override damage)
-- added new spell datapack mechanic, derives level from spell. This combined with new spell proc stat, means you can say have a buff you can lvl up, and the buff would provide a stat that procs a spell that isn't in the 
-actual spell school or learnable at all, and that procced spell's lvl will be based on the buff spell level
-- added some new stat conditions like is ailment, has effect
-- added lich armor buff, this will define the dps frost mage playstyle. Shattering enemies, and unleashing devastating aoe damage upon reaching max frost essence stacks
-
-v.5.3.15
-- only gems can be extracted from sockets now
-- added mob and item lvl variance configs
-
-v.5.3.16
-- fixed stat allocation syncing
-- fixed a null log
-- fixed all player events being called twice a tick
-- blocking with shield now stops energy regen
-- you cant block with 0 energy now. Your items will be put on short cooldown and your shield block disabled
-- added GivePerLvlExp command
-- added seconds tooltip to effect
-- fixed stat calc bug with supp gems
-
-v.5.3.17
-- socket extractor now removes runes and deletes runeword if it cant hold it anymore
-- fix stat calc bug resulting in double stats
-- BONUS_EXP_PERCENT_PER_HIGHER_LVL_CHARACTERS config
-- refined how phys conversion works. It transfers now at start of dmg, and uses original number, which means 50% fire and 50% cold conversion should convert your entire phys dmg, and would benefit each from their elemental dmg bonusess
-
-v.5.3.18
-- forgot to gen the data folder
-
-v.5.3.19
-- try to optimize gear calc and sync code
-- should be able to pvp other's summons now
-- should fix effect tooltips
-- add configurable max lvl spells cap 
-- summons are now despawn checked every 30s in case people find ways to cheese the cap
-- fix map stat bugs: tier stats, player/mob map stats
-- mobs now properly get 100% of their phys dmg as bonus ele dmg of all types combined (this is a config)
-
-v5.3.20
-- hp regen will now happen always, even at full hp.. to fix blood mage
-- fix summons not working without having a + summons stat
-- terrain now generates far away in maps, but mobs only gen when close by
-
-v.5.3.21
-- more fixes
-
-v.5.3.22
-- maps now drop common
-- maps can now be upgraded in rarity with new currency
-- low rarity maps no longer drop high rarity gear
-I didn't intend for players to be hit in the face with super difficult maps but if difficulty is optional, then some encouragement is needed to pursue it.
-- spell procs shouldnt be able to proc other spell procs now
-- tried to fix magic shield being burnt by fast atking mobs
-- mobs now have 5 tick cooldown on their basic attacks, slimes should no longer 1 shot
-- on kill stuff should work now
-- added mob flat dmg bonus to server config and lowered the dmg from 8 to 5
-
-v.5.3.23
+v.5.4.0
 - added a /mine_and_slash report map_problem command
 - fixed the missing crop stage requirement for all the crops and professions.. 
 - added config in main hub for cast fail msgs
 - removed auto pve server config, it's now a per player config in the main hub config section, if 2 players both have auto pve on, they will be automatically grouped, won't be able to damage each other etc.
 This is meant for players who don't want to mess with inviting to parties etc
 - fix harvest generation/tp issues
+- runed items now have a min drop lvl
 - attempt fix double death xp loss etc
+- improved hotbar ui a bit
+- datapack thing: effects can now NOT stack stat buffs per effect stack amount and effects can now decrease their stack count by 1 if casted with a tagged spell.
+This will be used for missile barrage talent. It gives you cast speed and dmg to any missile tag spell, but the buff stacks are reduced by 1 every time you cast any missile tag spell.
+
 - rune reroll now cant roll stat into lower value than it was before, roll away!
+- fixed the tooltips a bit, now correctly cuts lines only if there is too many (before it counted double blank lines that were removed anyway)
 - added a new system, map resist requirements. Maps of higher rarity and difficulty now require some baseline of elemental resistances to actually enter,
 which should hopefully reduce the amount of complaints about one shots. 
 Maps that have elemental mob damage affixes require higher resists
@@ -104,3 +29,14 @@ Killing Mobs in maps now rewards favor currency which can be spent to buy prophe
 Prophecy rewards are a way to target farm things! You can buy stuff like "3 Epic Boots" or "5 runes".
 The higher mob lvl and tier you kill while filling up the progress bar, the higher lvl and tier rewards you will have at the end.
 The more specific the reward, the costlier it is. A Sword reward is more expensive than an any gear reward etc
+To encourage tankier playstyles, dying in maps now reduces both your prophecy progress bar and takes a huge chunk of your currency away.
+
+Chaos stats added back
+
+Added a new system for compatibility between vanilla and mns stats.
+The system is simple, you create a datapack that for example:
+- makes it so each point of vanilla armor gives you +3% mine and slash armor
+- maybe another rpg mod has a fire damage stat, you can make that stat give you mine and slash Fire damage % etc
+
+You can make it give flat amounts that scale per player level or percentages that don't need scaling.
+You can even add caps in case you don't want the attribute to give too much of the stat endgame
