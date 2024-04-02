@@ -1,14 +1,13 @@
 package com.robertx22.age_of_exile.database.data.spells.summons.entity;
 
-import com.robertx22.age_of_exile.uncommon.utilityclasses.TeamUtils;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.*;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtTargetGoal;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -61,7 +60,7 @@ public abstract class SummonEntity extends TamableAnimal implements RangedAttack
             this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
         }
         if (usesRanged()) {
-            this.goalSelector.addGoal(5, new RangedBowAttackGoal<>(this, 1.0D, 20, 5F));
+            this.goalSelector.addGoal(5, new RangedBowAttackGoal<>(this, 1.0D, 20, 15F));
         }
 
         this.goalSelector.addGoal(6, new RandomSwimmingGoal(this, 1, 1));
@@ -72,31 +71,43 @@ public abstract class SummonEntity extends TamableAnimal implements RangedAttack
         //this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
 
 
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Monster.class, false));
+        // this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Monster.class, false));
         this.targetSelector.addGoal(3, new OwnerHurtByTargetGoal(this));
         this.targetSelector.addGoal(4, new OwnerHurtTargetGoal(this));
     }
 
-    public Entity canAttack = null;
+    public Entity focusEntity = null;
 
     @Override
     public boolean canAttack(LivingEntity pTarget) {
         LivingEntity owner = getOwner();
 
-        if (pTarget instanceof Player p && owner instanceof Player p2 && TeamUtils.areOnSameTeam(p, p2)) {
+        if (owner == null) {
             return false;
         }
         if (!pTarget.isAlive()) {
             return false;
         }
-        if (canAttack == pTarget && pTarget.isAlive()) {
-            return true;
-        }
-        if (owner == null) {
+        if (AllyOrEnemy.allies.is(owner, pTarget)) {
             return false;
         }
-        return true;
-        // return AllyOrEnemy.summonShouldAttack.is(owner, pTarget);
+        // aggro the focus target, otherwise find something else
+        if (focusEntity != null && focusEntity.isAlive() && isInAggroRadius((LivingEntity) focusEntity)) {
+            return focusEntity == pTarget;
+        } else {
+            return isInAggroRadius(pTarget);
+        }
+
+    }
+
+    // todo test this
+    private boolean isInAggroRadius(LivingEntity target) {
+        var aggroRadius = Load.Unit(this).summonedPetData.aggro_radius;
+
+        int distance = (int) target.distanceTo(this);
+
+        return aggroRadius >= distance;
+
     }
 
     @Nullable

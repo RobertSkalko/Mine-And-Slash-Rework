@@ -439,6 +439,7 @@ strength
 learn_rejuv_totem
 fishing_exp_bonus
 lightning_weapon_damage
+aggro_radius
 minion_explode_spell_dmg_taken
 ailment_damage
 summon_duration

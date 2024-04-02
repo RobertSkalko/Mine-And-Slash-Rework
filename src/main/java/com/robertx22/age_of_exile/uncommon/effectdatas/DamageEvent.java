@@ -382,7 +382,10 @@ public class DamageEvent extends EffectEvent {
                 }
             }
 
-            if (source instanceof Player) {
+            if (source instanceof Player p) {
+
+                p.setLastHurtMob(target); // this allows summons to know who to attack
+
                 sourceData.getCooldowns().setOnCooldown(CooldownsData.IN_COMBAT, 20 * 10);
                 if (target instanceof Mob) {
                     if (petEntity instanceof LivingEntity && Load.Unit(petEntity).isSummon()) {

@@ -33,6 +33,7 @@ give_taunt_stance_to_source
 increase_number_num
 add_perc_of_health_to_num
 restore_health_per_stat_data
+increase_aggro_radius_num
 increase_duration_multi_num
 increase_seconds_num
 add_total_summons

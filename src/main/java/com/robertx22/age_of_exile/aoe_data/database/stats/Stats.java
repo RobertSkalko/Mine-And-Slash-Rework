@@ -1156,6 +1156,22 @@ public class Stats implements ExileRegistryInit {
 
             .build();
 
+    public static DataPackStatAccessor<EmptyAccessor> AGGRO_RADIUS = DatapackStatBuilder
+            .ofSingle("aggro_radius", Elements.Physical)
+            .worksWithEvent(SpellStatsCalculationEvent.ID)
+            .setPriority(0)
+            .setSide(EffectSides.Source)
+            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.summon))
+            .addEffect(StatEffects.AGGRO_INCREASE)
+            .setLocName(x -> "Minion Aggro Radius")
+            .setLocDesc(x -> "Higher radius means minions can travel further to kill stuff for you, lower means they will stay nearby more")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+                x.format = ChatFormatting.GREEN.getName();
+            })
+
+            .build();
+
     public static DataPackStatAccessor<EmptyAccessor> DAMAGE_TO_CURSED = DatapackStatBuilder
             .ofSingle("damage_to_cursed", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)

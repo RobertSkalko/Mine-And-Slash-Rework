@@ -21,6 +21,7 @@ public class SpellConfiguration {
     public int times_to_cast = 1;
     public int charges = 0;
     public int charge_regen = 0;
+    public int aggro_radius = 10;
     public int imbues = 0;
     public SummonType summonType = SummonType.NONE;
     public String charge_name = "";

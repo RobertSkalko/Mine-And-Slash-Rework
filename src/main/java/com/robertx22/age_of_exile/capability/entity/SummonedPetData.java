@@ -10,10 +10,12 @@ public class SummonedPetData {
 
     public String spell = "";
     public int ticks = 0;
+    public int aggro_radius = 10;
 
-    public void setup(Spell spell, int ticks) {
+    public void setup(Spell spell, int ticks, int aggro_radius) {
         this.spell = spell.GUID();
         this.ticks = ticks;
+        this.aggro_radius = aggro_radius;
     }
 
     public boolean isEmpty() {

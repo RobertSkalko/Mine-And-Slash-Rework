@@ -303,6 +303,20 @@ public class SupportGems {
                 ))
                 .levelReq(5).addToSerializables();
 
+        new SupportGem("aggressive_minions", "Aggressive Minions", PlayStyle.STR, 0.95F,
+                Arrays.asList(
+                        new StatMod(25, 50, Stats.AGGRO_RADIUS.get(), ModType.MORE),
+                        new StatMod(15, 30, Stats.SUMMON_DAMAGE.get(), ModType.MORE)
+                ))
+                .levelReq(5).addToSerializables();
+        
+
+        new SupportGem("defensive_minions", "Defensive Minions", PlayStyle.STR, 0.95F,
+                Arrays.asList(
+                        new StatMod(-25, -50, Stats.AGGRO_RADIUS.get(), ModType.MORE),
+                        new StatMod(25, 50, SummonHealth.getInstance(), ModType.MORE)
+                ))
+                .levelReq(5).addToSerializables();
 
     }
 }

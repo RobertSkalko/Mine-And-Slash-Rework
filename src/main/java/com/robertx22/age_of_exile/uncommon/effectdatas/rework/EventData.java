@@ -59,6 +59,7 @@ public class EventData {
     public static String PROJECTILE_SPEED_MULTI = "proj_speed";
     public static String BONUS_PROJECTILES = "bonus_proj";
     public static String DURATION_MULTI = "duration_multi";
+    public static String AGGRO_RADIUS = "aggro_radius";
 
     private boolean isFrozen = false;
 

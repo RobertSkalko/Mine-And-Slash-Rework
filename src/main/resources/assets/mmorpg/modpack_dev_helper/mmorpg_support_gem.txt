@@ -39,11 +39,13 @@ aoe_dmg
 melee_damage
 lmp_barrage
 proc_freeze
+aggressive_minions
 rare_mana_eff
 electrify_chance
 spell_damage_no_crit
 freeze_chance
 physical_pene
+defensive_minions
 magic_shield_on_hit
 ranged_damage
 bleed_chance

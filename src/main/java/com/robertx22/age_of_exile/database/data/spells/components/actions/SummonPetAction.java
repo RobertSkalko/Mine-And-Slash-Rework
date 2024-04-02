@@ -51,11 +51,13 @@ public class SummonPetAction extends SpellAction {
             en.setPos(pos.getX(), pos.getY(), pos.getZ());
 
             int duration = data.get(MapField.LIFESPAN_TICKS).intValue();
-
             duration *= ctx.calculatedSpellData.data.getNumber(EventData.DURATION_MULTI, 1).number;
 
+            int aggroRadius = data.get(MapField.LIFESPAN_TICKS).intValue();
+            aggroRadius *= ctx.calculatedSpellData.data.getNumber(EventData.AGGRO_RADIUS, 1).number;
 
-            Load.Unit(en).summonedPetData.setup(ctx.calculatedSpellData.getSpell(), duration);
+
+            Load.Unit(en).summonedPetData.setup(ctx.calculatedSpellData.getSpell(), duration, aggroRadius);
 
 
             Load.Unit(en).SetMobLevelAtSpawn((Player) ctx.caster);
