@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.spells.summons.entity;
 
+import com.robertx22.age_of_exile.uncommon.utilityclasses.TeamUtils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.*;
@@ -60,7 +61,7 @@ public abstract class SummonEntity extends TamableAnimal implements RangedAttack
             this.goalSelector.addGoal(5, new MeleeAttackGoal(this, 1.0D, true));
         }
         if (usesRanged()) {
-            this.goalSelector.addGoal(5, new RangedBowAttackGoal<>(this, 1.0D, 20, 15.0F));
+            this.goalSelector.addGoal(5, new RangedBowAttackGoal<>(this, 1.0D, 20, 5F));
         }
 
         this.goalSelector.addGoal(6, new RandomSwimmingGoal(this, 1, 1));
@@ -82,7 +83,7 @@ public abstract class SummonEntity extends TamableAnimal implements RangedAttack
     public boolean canAttack(LivingEntity pTarget) {
         LivingEntity owner = getOwner();
 
-        if (pTarget == owner) {
+        if (pTarget instanceof Player p && owner instanceof Player p2 && TeamUtils.areOnSameTeam(p, p2)) {
             return false;
         }
         if (!pTarget.isAlive()) {

@@ -208,19 +208,19 @@ public class SpellHotbarOverlay {
                 gui.setColor(1.0F, 1.0F, 1.0F, 1);
 
 
-                String txt = CLOC.translate(KeybindsRegister.getSpellHotbar(place).getKey().getDisplayName()).toUpperCase(Locale.ROOT);
+                String txt = CLOC.translate(KeybindsRegister.getSpellHotbar(place).key.getKey().getDisplayName()).toUpperCase(Locale.ROOT);
                 txt = txt.substring(0, 1);
                 GuiUtils.renderScaledText(gui, xkey - 1, ykey, 1, txt, ChatFormatting.GREEN);
 
                 var key = KeybindsRegister.getSpellHotbar(place);
-                if (key.getKeyModifier() != KeyModifier.NONE) {
+                if (key.key.getKeyModifier() != KeyModifier.NONE) {
 
                     RenderSystem.enableBlend(); // enables transparency
                     gui.setColor(alpha, alpha, alpha, alpha);
                     gui.blit(MOD_BG, xkey - 18, ykey - 6, 0, 0, 13, bgsize, 13, bgsize);
                     gui.setColor(1.0F, 1.0F, 1.0F, 1F);
 
-                    String modtext = KeybindsRegister.getSpellHotbar(place).getKeyModifier().toString().substring(0, 3);
+                    String modtext = KeybindsRegister.getSpellHotbar(place).key.getKeyModifier().toString().substring(0, 3);
                     GuiUtils.renderScaledText(gui, xkey - 11, ykey, 0.6F, modtext, ChatFormatting.YELLOW);
                 }
 

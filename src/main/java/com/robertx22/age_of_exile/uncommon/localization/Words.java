@@ -81,6 +81,7 @@ public enum Words implements IAutoLocName {
     AscClasses("Classes"),
     Salvaging("Salvaging"),
     SkillGem("Skills"),
+    Hotbar("Spell Hotbar"),
     Gear("Gear"),
     All("All"),
     Rune("Rune"),

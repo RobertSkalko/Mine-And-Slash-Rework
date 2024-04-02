@@ -22,6 +22,6 @@ public class OpenSkillGems implements IContainerNamedScreen {
 
     @Override
     public Words screenName() {
-        return Words.SkillGem;
+        return Words.Hotbar;
     }
 }
