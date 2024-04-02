@@ -77,6 +77,7 @@ public class OnServerTick {
                 //     SummonPetAction.despawnIfExceededMaximumSummons(player, (int) unitdata.getUnit().getStatInCalculation(Stats.MAX_SUMMON_CAPACITY.get()).getValue());
             }
 
+
             if (age % 20 == 0) {
 
                 playerData.favor.onSecond(player);
@@ -93,12 +94,6 @@ public class OnServerTick {
                     }
                 }
 
-                UnequipGear.onTick(player);
-
-                if (player.tickCount % 60 == 0) {
-                    playerData.getSkillGemInventory().removeSupportGemsIfTooMany(player);
-                    playerData.getJewels().checkRemoveJewels(player);
-                }
 
                 playerData.spellCastingData.charges.onTicks(player, 20);
 

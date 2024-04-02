@@ -49,8 +49,9 @@ public class FireSpells implements ExileRegistryInit {
                         .put(MapField.FIND_NEAREST_SURFACE, true)
                         .put(MapField.IS_BLOCK_FALLING, false)))
 
-                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.FLAME, 40D, 3D, 1D))
-                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.SMOKE, 40D, 3D, 1D))
+                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.FLAME, 40D, 3D, 1D).tick(20D))
+                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.SMOKE, 40D, 3D, 1D).tick(20D))
+
                 .onTick("block", PartBuilder.damageInAoe(SpellCalcs.MAGMA_FLOWER, Elements.Fire, 3D).tick(20D).noKnock())
                 .onTick("block", PartBuilder.playSound(SoundEvents.GENERIC_BURN, 1D, 1D).tick(20D))
                 .levelReq(20)

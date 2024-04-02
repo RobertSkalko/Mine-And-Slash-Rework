@@ -12,6 +12,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// todo for now keep lightning/nature mostly the same, or revert the rename
+// shadow will be chaos and need a few new priest abilities or turn a few to holy
 // todo
 public enum Elements {
 

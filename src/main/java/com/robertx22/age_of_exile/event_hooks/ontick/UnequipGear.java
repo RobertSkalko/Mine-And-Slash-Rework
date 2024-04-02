@@ -7,7 +7,6 @@ import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -49,7 +48,7 @@ public class UnequipGear {
         player.displayClientMessage(txt, false);
     }
 
-    public static void onTick(Player player) {
+    public static void check(Player player) {
 
 
         for (EquipmentSlot slot : SLOTS) {
@@ -58,7 +57,7 @@ public class UnequipGear {
 
             GearItemData gear = StackSaving.GEARS.loadFrom(stack);
 
-            
+
             if (gear != null) {
                 if (!gear.canPlayerWear(Load.Unit(player))) {
                     drop(player, slot, stack, Chats.GEAR_DROP.locName().withStyle(ChatFormatting.RED));

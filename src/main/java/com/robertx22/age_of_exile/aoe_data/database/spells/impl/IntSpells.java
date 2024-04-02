@@ -29,7 +29,7 @@ public class IntSpells implements ExileRegistryInit {
     public void registerAll() {
 
         SpellBuilder.of(BLACK_HOLE, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 60)
-                                .setSwingArm(), "Black Hole",
+                                .setSwingArm(), "   Black Hole",
                         Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.CHAOS))
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
 
@@ -46,15 +46,15 @@ public class IntSpells implements ExileRegistryInit {
                         .put(MapField.FIND_NEAREST_SURFACE, true)
                         .put(MapField.IS_BLOCK_FALLING, false)))
 
-                .onTick("block", PartBuilder.particleOnTick(1D, ParticleTypes.PORTAL, 40D, 1D))
-                .onTick("block", PartBuilder.particleOnTick(1D, ParticleTypes.WITCH, 8D, 1D))
+                .onTick("block", PartBuilder.particleOnTick(3D, ParticleTypes.PORTAL, 40D, 1D))
+                .onTick("block", PartBuilder.particleOnTick(3D, ParticleTypes.WITCH, 8D, 1D))
                 .onTick("block", PartBuilder.justAction(SpellAction.TP_TARGET_TO_SELF.create())
                         .addTarget(TargetSelector.AOE.create(3D, EntityFinder.SelectionType.RADIUS, AllyOrEnemy.enemies)))
                 .onExpire("block", PartBuilder.damageInAoe(SpellCalcs.BLACK_HOLE, Elements.Shadow, 2D))
-                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.WITCH, 100D, 3D, 3D))
-                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.WITCH, 100D, 3D, 1.5D))
-                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.WITCH, 50D, 1.5D, 3D))
-                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.WITCH, 50D, 1.5D, 1.5D))
+                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.WITCH, 100D, 3D, 3D).tick(3D))
+                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.WITCH, 100D, 3D, 1.5D).tick(3D))
+                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.WITCH, 50D, 1.5D, 3D).tick(3D))
+                .onTick("block", PartBuilder.groundEdgeParticles(ParticleTypes.WITCH, 50D, 1.5D, 1.5D).tick(3D))
                 .build();
 
         SpellBuilder.of(TELEPORT, PlayStyle.INT, SpellConfiguration.Builder.instant(20, 20 * 30)

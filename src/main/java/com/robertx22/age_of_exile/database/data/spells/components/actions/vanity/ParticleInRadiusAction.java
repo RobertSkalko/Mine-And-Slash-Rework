@@ -19,6 +19,7 @@ import java.util.Collection;
 
 import static com.robertx22.age_of_exile.database.data.spells.map_fields.MapField.*;
 
+// TODO MAKE THIS A PACKET AGAIN, 1 PACKET > SUMMON INFINITE PARTICLES
 public class ParticleInRadiusAction extends SpellAction {
 
     public ParticleInRadiusAction() {

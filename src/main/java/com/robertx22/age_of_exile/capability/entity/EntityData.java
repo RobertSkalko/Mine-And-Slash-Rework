@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.capability.entity;
 import com.robertx22.age_of_exile.capability.DirtySync;
 import com.robertx22.age_of_exile.capability.bases.EntityGears;
 import com.robertx22.age_of_exile.capability.bases.INeededForClient;
-import com.robertx22.age_of_exile.characters.CharacterData;
 import com.robertx22.age_of_exile.characters.PlayerStats;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.EntityConfig;
@@ -17,6 +16,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Ene
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
+import com.robertx22.age_of_exile.event_hooks.ontick.UnequipGear;
 import com.robertx22.age_of_exile.event_hooks.player.OnLogin;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -54,7 +54,6 @@ import com.robertx22.library_of_exile.utils.CLOC;
 import com.robertx22.library_of_exile.utils.LoadSave;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.MutableComponent;
@@ -573,6 +572,10 @@ public class EntityData implements ICap, INeededForClient {
             Load.player(p).spellCastingData.calcSpellLevels(unit);
             Load.player(p).getSkillGemInventory().removeAurasIfCantWear(p);
 
+            UnequipGear.check(p);
+
+            data.getSkillGemInventory().removeSupportGemsIfTooMany(p);
+            data.getJewels().checkRemoveJewels(p);
         }
 
 
@@ -883,6 +886,7 @@ public class EntityData implements ICap, INeededForClient {
         this.gear.setDirty();
         this.sync.setDirty();
     }
+
     public void setLevel_player(int lvl, Player player) {
         setLevel(lvl);
         player.resetStat(Stats.CUSTOM.get(PlayerStats.LEVELS_GAINED));

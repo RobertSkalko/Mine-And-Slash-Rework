@@ -8,6 +8,7 @@ This is meant for players who don't want to mess with inviting to parties etc
 - runed items now have a min drop lvl
 - attempt fix double death xp loss etc
 - improved hotbar ui a bit
+- gear should now only ever be stat checked requirements after the stat calculation
 - datapack thing: effects can now NOT stack stat buffs per effect stack amount and effects can now decrease their stack count by 1 if casted with a tagged spell.
 This will be used for missile barrage talent. It gives you cast speed and dmg to any missile tag spell, but the buff stacks are reduced by 1 every time you cast any missile tag spell.
 
