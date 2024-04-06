@@ -66,6 +66,7 @@ public class PlayerStats {
         addReg(DatapackStats.DEX.GUID());
         addReg(DatapackStats.INT.GUID());
         addReg(DatapackStats.STR.GUID());
+        addReg(DatapackStats.MOVE_SPEED.GUID());
 
         registerCustomStat(LEVELS_GAINED);
         for(ResourceLocation rl : REGISTERED_STATS.values())
