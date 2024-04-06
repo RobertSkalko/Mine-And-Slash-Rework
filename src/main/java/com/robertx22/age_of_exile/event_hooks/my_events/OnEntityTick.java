@@ -66,7 +66,6 @@ public class OnEntityTick extends EventConsumer<ExileEvents.OnEntityTick> {
                         p.resetStat(Stats.CUSTOM.get(PlayerStats.REGISTERED_STATS.get(set.getKey())));
                         p.awardStat(Stats.CUSTOM.get(PlayerStats.REGISTERED_STATS.get(set.getKey())), max);
                     }
-                    System.out.println("updated");
                 }
             }
 
