@@ -33,8 +33,7 @@ public class SpellMotionAction extends SpellAction {
 
                 ParticleMotion pm = ParticleMotion.valueOf(data.get(MapField.MOTION));
 
-                Vec3 motion = pm.getMotion(ctx.getPos(), ctx)
-                        .scale(str);
+                Vec3 motion = pm.getMotion(ctx.getPos(), ctx.caster.getLookAngle(), ctx.getPos()).scale(str);
 
                 SetAdd setAdd = data.getSetAdd();
 

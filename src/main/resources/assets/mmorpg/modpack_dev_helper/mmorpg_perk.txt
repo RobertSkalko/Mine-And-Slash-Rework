@@ -18,11 +18,9 @@ block_chance_big
 int_dmg
 bleed_damage
 spell_chaos_damage_big
-holy_penetration
 bleed_duration
 faster_projectiles_big
 song_duration
-phys_to_holy
 trap_damage_big
 burn_damage
 chaos_penetration_big
@@ -38,7 +36,6 @@ elemental_resist_big
 curse_duration_big
 all_elemental_damage
 arrow_totem
-holy_dot_damage_big
 chaos_dot_damage_big
 all_chaos_damage_big
 hp_energy_regen_big
@@ -46,7 +43,6 @@ p_aura_effect
 hp_mana_regen
 chain_damage
 p_dot_dmg
-all_holy_damage_big
 physical_dot_damage
 elemental_penetration_big
 lightning_nova
@@ -70,7 +66,6 @@ harmony
 freeze_damage
 phys_to_chaos_big
 p_low_hp_heal
-spell_holy_damage
 burn_damage_big
 curse_duration
 mana_regen_energy_regen
@@ -99,7 +94,6 @@ p_summon_dmg
 armor_ms_big
 all_all_damage_big
 spell_lifesteal
-holy_any_wep_damage_big
 chaos_totem
 ele_staff_damage
 poison_damage
@@ -122,7 +116,6 @@ lightning_totem
 return_summons
 song_effect
 curse_master
-spell_holy_damage_big
 frost_flower
 attack_atk_style_dmg
 health_percent_big
@@ -140,7 +133,6 @@ all_fire_damage_big
 p_lifesteal
 trident_damage_big
 sword_damage
-holy_missiles
 awaken_mana
 dodge_percent
 mana_ms_percent_small
@@ -157,7 +149,6 @@ ele_axe_damage_big
 hp_healing_received_big
 arrow_storm
 poison_duration_big
-holy_any_wep_damage
 poison_trap
 dot_dmg_hp_regen_big
 freeze_chance_big
@@ -203,8 +194,6 @@ power_chord
 staff_damage
 spell_lightning_damage
 aura_effect
-holy_penetration_big
-holy_resist
 p_mana_sha
 fire_any_wep_damage_big
 ice_comet
@@ -263,7 +252,6 @@ bone_shatter
 area_dmg_big
 frost_nova
 fire_penetration
-holy_resist_big
 p_proj_dmg
 water_any_wep_damage_big
 p_summon_health
@@ -281,7 +269,6 @@ song_effect_big
 all_water_damage
 reckless_defender
 hp_armor_big
-holy_dot_damage
 charged_bolt
 str_dmg
 str_big
@@ -340,7 +327,6 @@ phys_to_fire
 magma_flower
 p_magic_shield_regen
 chilling_touch
-spell_holy_damage_and_dot
 lightning_weapon_damage
 ailment_damage
 fire_any_wep_damage
@@ -408,7 +394,6 @@ hp_max_fire_res_big
 ele_bow_damage
 elemental_dot_damage_big
 jewel_socket
-all_holy_damage
 mana_regen_percent_big
 close_nova
 spell_chaos_damage_and_dot
@@ -457,7 +442,6 @@ all_lightning_damage_big
 fire_dot_damage_big
 acrobat
 test_command
-phys_to_holy_big
 song_cdr_big
 all_elemental_damage_big
 mana_regen_hp_regen_big
@@ -470,7 +454,6 @@ ms_steal
 energy_claws
 mana_on_kill
 armor_ms
-holy_weapon_damage
 freeze_damage_big
 mana_battery
 lightning_dot_damage_big

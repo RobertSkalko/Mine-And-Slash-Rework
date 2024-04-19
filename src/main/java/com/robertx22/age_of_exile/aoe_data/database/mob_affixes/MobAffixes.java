@@ -52,7 +52,7 @@ public class MobAffixes implements ExileRegistryInit {
         eleAffix("Flaming", Fire);
         eleAffix("Lightning", Nature);
 
-        eleAffix("Smiting", Holy);
+        // eleAffix("Smiting", Holy);
         eleAffix("Poisoned", Shadow);
 
 
@@ -109,7 +109,7 @@ public class MobAffixes implements ExileRegistryInit {
         fullEle(Nature);
         fullEle(Fire);
         fullEle(Shadow);
-        fullEle(Holy);
+        // fullEle(Holy);
 
 
     }

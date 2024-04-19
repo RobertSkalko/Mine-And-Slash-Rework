@@ -4,7 +4,6 @@ import com.robertx22.age_of_exile.database.data.stats.types.core_stats.base.ICor
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.base.ITransferToOtherStats;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
-import com.robertx22.age_of_exile.uncommon.interfaces.IAffectsStatsInCalc;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -30,12 +29,7 @@ public class InCalc {
     }
 
     public void modify(Unit data) {
-        // apply stats that add to others
-        unit.getStats().modifyInCalc(calcStat -> {
-            if (calcStat.GetStat() instanceof IAffectsStatsInCalc aff) {
-                aff.affectStats(data, calcStat);
-            }
-        });
+     
         // todo these should probably be after stats are out of calculation..? or they should be another phase
         // apply transfer stats
         unit.getStats().modifyInCalc(calcStat -> {

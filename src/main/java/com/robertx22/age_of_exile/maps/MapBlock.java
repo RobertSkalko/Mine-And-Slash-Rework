@@ -79,6 +79,11 @@ public class MapBlock extends BaseEntityBlock {
 
                 if (data != null) {
 
+                    if (Load.Unit(p).getLevel() < (data.lvl - 5)) {
+                        p.sendSystemMessage(Chats.TOO_LOW_LEVEL.locName().withStyle(ChatFormatting.RED));
+                        return InteractionResult.FAIL;
+                    }
+
                     if (!data.getStatReq().meetsReq(data.lvl, Load.Unit(p))) {
                         p.sendSystemMessage(Chats.RESISTS_TOO_LOW_FOR_MAP.locName().withStyle(ChatFormatting.RED));
                         return InteractionResult.FAIL;

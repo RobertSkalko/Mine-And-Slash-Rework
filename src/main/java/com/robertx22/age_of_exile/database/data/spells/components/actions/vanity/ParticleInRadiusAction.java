@@ -2,13 +2,10 @@ package com.robertx22.age_of_exile.database.data.spells.components.actions.vanit
 
 import com.robertx22.age_of_exile.database.data.spells.components.MapHolder;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
+import com.robertx22.age_of_exile.database.data.spells.components.packets.ParticlesPacket;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
-import com.robertx22.library_of_exile.utils.RandomUtils;
-import com.robertx22.library_of_exile.utils.geometry.Circle2d;
-import com.robertx22.library_of_exile.utils.geometry.Circle3d;
-import com.robertx22.library_of_exile.utils.geometry.MyPosition;
-import com.robertx22.library_of_exile.utils.geometry.ShapeHelper;
+import com.robertx22.library_of_exile.main.Packets;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.LivingEntity;
@@ -35,16 +32,12 @@ public class ParticleInRadiusAction extends SpellAction {
 
             SimpleParticleType particle = data.getParticle();
 
-            float radius = data.get(RADIUS)
-                    .floatValue();
+            float radius = data.get(RADIUS).floatValue();
 
             radius *= ctx.calculatedSpellData.data.getNumber(EventData.AREA_MULTI, 1F).number;
 
-            float height = data.getOrDefault(HEIGHT, 0D)
-                    .floatValue();
-            int amount = data.get(PARTICLE_COUNT)
-                    .intValue();
-
+            float height = data.getOrDefault(HEIGHT, 0D).floatValue();
+            int amount = data.get(PARTICLE_COUNT).intValue();
             amount *= ctx.calculatedSpellData.data.getNumber(EventData.AREA_MULTI, 1F).number;
 
             ParticleMotion motion = null;
@@ -56,15 +49,30 @@ public class ParticleInRadiusAction extends SpellAction {
                 motion = ParticleMotion.None;
             }
 
-            float yrand = data.getOrDefault(Y_RANDOM, 0D)
-                    .floatValue();
+            float yrand = data.getOrDefault(Y_RANDOM, 0D).floatValue();
 
-            float motionMulti = data.getOrDefault(MOTION_MULTI, 1D)
-                    .floatValue();
+            float motionMulti = data.getOrDefault(MOTION_MULTI, 1D).floatValue();
 
             Vec3 pos = ctx.getPos();
             Vec3 vel = ctx.getPositionEntity().getDeltaMovement();
 
+
+            ParticlesPacket.Data saved = new ParticlesPacket.Data();
+            saved.particle = data.get(PARTICLE_TYPE);
+            saved.pos = pos;
+            saved.motion = motion;
+            saved.shape = shape;
+            saved.casterAngle = ctx.caster.getLookAngle();
+            saved.amount = amount;
+            saved.radius = radius;
+            saved.height = height;
+            saved.yrand = yrand;
+            saved.motionMulti = motionMulti;
+            saved.vel = vel;
+
+            Packets.sendToTracking(new ParticlesPacket(saved), ctx.getBlockPos(), ctx.world);
+
+            /*
             ShapeHelper c = new Circle3d(new MyPosition(pos), radius);
 
             float finalRadius = radius;
@@ -94,6 +102,8 @@ public class ParticleInRadiusAction extends SpellAction {
 
                 c.spawnParticle(ctx.world, sp.asVector3D(), particle, new MyPosition(v).asVector3D());
             });
+
+             */
 
 
         }

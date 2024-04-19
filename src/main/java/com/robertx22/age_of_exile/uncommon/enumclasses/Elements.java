@@ -24,7 +24,7 @@ public enum Elements {
     Nature(Arrays.asList(), Arrays.asList(ElementTags.ELEMENTAL), "Nature", ChatFormatting.GREEN, ElementIds.NATURE, "\u2600", SpellTags.LIGHTNING),
     // alignments
     Shadow(Arrays.asList(), Arrays.asList(ElementTags.ALIGNMENT), "Shadow", ChatFormatting.DARK_PURPLE, "chaos", "\u2600", SpellTags.CHAOS),
-    Holy(Arrays.asList(), Arrays.asList(ElementTags.ALIGNMENT), "Holy", ChatFormatting.YELLOW, "holy", "\u2600", SpellTags.HOLY),
+    //Holy(Arrays.asList(), Arrays.asList(ElementTags.ALIGNMENT), "Holy", ChatFormatting.YELLOW, "holy", "\u2600", SpellTags.HOLY),
     // multi ele
     Elemental(Arrays.asList(ElementIds.NATURE, ElementIds.FIRE, ElementIds.WATER), Arrays.asList(ElementTags.ELEMENTAL), "Elemental", ChatFormatting.LIGHT_PURPLE, "elemental", "\u2600", SpellTags.PHYSICAL),
 

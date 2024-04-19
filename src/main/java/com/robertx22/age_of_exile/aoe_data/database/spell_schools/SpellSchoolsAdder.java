@@ -90,7 +90,7 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
                 .add(HolySpells.HYMN_OF_PERSERVANCE, new PointData(3, 2))
                 .add(HolySpells.HYMN_OF_VALOR, new PointData(3, 4))
 
-                .add(HolySpells.HOLY_MISSILES, new PointData(5, 0))
+                // .add(HolySpells.HOLY_MISSILES, new PointData(5, 0))
                 .add(HolySpells.HEALING_AURA_ID, new PointData(5, 1))
                 .add(HolySpells.SHOOTING_STAR, new PointData(5, 2))
                 .add(HolySpells.INSPIRATION, new PointData(5, 4))

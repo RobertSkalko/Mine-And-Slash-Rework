@@ -1,10 +1,8 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
-full_holy
 full_fire
 full_lightning
 phys_lord
-holy_mob_affix
 full_water
 water_mob_affix
 winter

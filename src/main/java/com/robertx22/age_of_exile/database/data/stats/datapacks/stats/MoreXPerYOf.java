@@ -4,12 +4,12 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.base.BaseDatapackStat;
 import com.robertx22.age_of_exile.database.data.stats.name_regex.StatNameRegex;
-import com.robertx22.age_of_exile.saveclasses.unit.InCalcStatData;
+import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
-import com.robertx22.age_of_exile.uncommon.interfaces.IAffectsStatsInCalc;
+import com.robertx22.age_of_exile.uncommon.interfaces.AddToAfterCalcEnd;
 import net.minecraft.ChatFormatting;
 
-public class MoreXPerYOf extends BaseDatapackStat implements IAffectsStatsInCalc {
+public class MoreXPerYOf extends BaseDatapackStat implements AddToAfterCalcEnd {
 
     public static String SER_ID = "more_x_per_y";
 
@@ -49,13 +49,14 @@ public class MoreXPerYOf extends BaseDatapackStat implements IAffectsStatsInCalc
 
     // todo this doesnt cap stat values to min max etc
     @Override
-    public void affectStats(Unit data, InCalcStatData statData) {
-        InCalcStatData add_to = data.getStatInCalculation(stat_to_add_to);
-        InCalcStatData adder = data.getStatInCalculation(adder_stat);
+    public void affectStats(Unit data, StatData statData) {
+        StatData add_to = data.getCalculatedStat(stat_to_add_to);
+        StatData adder = data.getCalculatedStat(adder_stat);
 
         float val = (int) (adder.getValue() / perEach) * statData.getValue();
 
-        add_to.addAlreadyScaledFlat(val);
+        add_to.setValue(add_to.getValue() + val);
+
     }
 
     @Override

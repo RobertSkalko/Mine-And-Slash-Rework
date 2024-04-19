@@ -9,11 +9,13 @@ import com.robertx22.age_of_exile.event_hooks.my_events.CollectGearEvent;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.saveclasses.unit.GearData;
+import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.GearStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.interfaces.AddToAfterCalcEnd;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.Cached;
 import com.robertx22.age_of_exile.uncommon.stat_calculation.CommonStatUtils;
 import com.robertx22.age_of_exile.uncommon.stat_calculation.MobStatUtils;
@@ -25,6 +27,7 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class StatCalculation {
 
@@ -76,6 +79,13 @@ public class StatCalculation {
 
         unit.getStats().calculate();
 
+        // apply stats that add to others
+
+        for (Map.Entry<String, StatData> en : unit.getStats().stats.entrySet()) {
+            if (en.getValue().GetStat() instanceof AddToAfterCalcEnd aff) {
+                aff.affectStats(unit, en.getValue());
+            }
+        }
 
         Cached.VANILLA_STAT_UIDS_TO_CLEAR_EVERY_STAT_CALC.forEach(x -> {
             AttributeInstance in = entity.getAttribute(x.left);
@@ -126,9 +136,6 @@ public class StatCalculation {
         statContexts.addAll(CommonStatUtils.addMapAffixStats(entity));
         statContexts.addAll(CommonStatUtils.addBaseStats(entity));
 
-        if (data.isSummon()) {
-            statContexts.addAll(MobStatUtils.addSummonStats((TamableAnimal) entity));
-        }
 
         if (entity instanceof Player p) {
             var playerData = Load.player(p);
@@ -150,12 +157,17 @@ public class StatCalculation {
 
 
         } else {
-            statContexts.addAll(MobStatUtils.getMobBaseStats(data, entity));
-            statContexts.addAll(MobStatUtils.getAffixStats(entity));
-            statContexts.addAll(MobStatUtils.getWorldMultiplierStats(entity));
-            statContexts.addAll(MobStatUtils.addMobBaseElementalBonusDamages(entity, data));
-            statContexts.addAll(MobStatUtils.addMapTierStats(entity));
-            statContexts.addAll(MobStatUtils.getMobConfigStats(entity, data));
+            if (data.isSummon()) {
+                statContexts.addAll(MobStatUtils.addSummonStats((TamableAnimal) entity));
+            } else {
+
+                statContexts.addAll(MobStatUtils.getMobBaseStats(data, entity));
+                statContexts.addAll(MobStatUtils.getAffixStats(entity));
+                statContexts.addAll(MobStatUtils.getWorldMultiplierStats(entity));
+                statContexts.addAll(MobStatUtils.addMobBaseElementalBonusDamages(entity, data));
+                statContexts.addAll(MobStatUtils.addMapTierStats(entity));
+                statContexts.addAll(MobStatUtils.getMobConfigStats(entity, data));
+            }
         }
 
         return statContexts;

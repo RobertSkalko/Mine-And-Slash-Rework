@@ -8,6 +8,9 @@ This is meant for players who don't want to mess with inviting to parties etc
 - runed items now have a min drop lvl
 - attempt fix double death xp loss etc
 - improved hotbar ui a bit
+- particles are now sent in 1 packet which should hopefully improve server performance
+- summons will no longer get map mob stats
+- you can no longer enter too high level maps (currently max is your lvl + 5
 - fix allies being able to attack summons
 - added aggressive and defensive minion support gems, changing their aggro radius
 - SHIFT+R keybind will now cast when you do it instead of the spell binded to R keybind. (as an example) Meaning keybinds with button modifiers are prioritized

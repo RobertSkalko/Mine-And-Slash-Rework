@@ -45,6 +45,10 @@ public class PlayerProphecies {
     }
 
     public int getAverageLevel() {
+        if (lvlsAdded < 1) {
+            return 0;
+        }
+
         return totalLvls / lvlsAdded;
     }
 
