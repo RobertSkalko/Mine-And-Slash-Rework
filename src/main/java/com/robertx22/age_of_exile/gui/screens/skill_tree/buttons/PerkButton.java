@@ -4,8 +4,10 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.capability.player.PlayerData;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.perks.PerkStatus;
+import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.SkillTreeScreen;
+import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
@@ -45,6 +47,8 @@ public class PerkButton extends ImageButton {
     Minecraft mc = Minecraft.getInstance();
     SkillTreeScreen screen;
 
+    public String perkid = "";
+
     public PerkButton(SkillTreeScreen screen, PlayerData playerData, TalentTree school, PointData point, Perk perk, int x, int y) {
         super(x, y, perk.getType().width, perk.getType().height, 0, 0, 1, ID, (action) -> {
         });
@@ -73,7 +77,18 @@ public class PerkButton extends ImageButton {
         int MmouseY = (int) (1F / screen.zoom * mouseY);
 
         if (this.isInside(MmouseX, MmouseY)) {
+
+
             List<Component> tooltip = perk.GetTooltipString(new TooltipInfo(Minecraft.getInstance().player));
+
+            if (perk.stats.stream().anyMatch(x -> x.stat.equals(new UnknownStat().GUID()))) {
+                tooltip.add(Component.literal("No Perk of this ID found: " + perkid));
+            } else {
+                if (MMORPG.RUN_DEV_TOOLS || Screen.hasShiftDown()) {
+                    tooltip.add(Component.literal("Perk ID: " + perkid));
+                }
+            }
+
             setTooltip(Tooltip.create(TextUTIL.mergeList(tooltip)));
 
             Screen screen = Minecraft.getInstance().screen;

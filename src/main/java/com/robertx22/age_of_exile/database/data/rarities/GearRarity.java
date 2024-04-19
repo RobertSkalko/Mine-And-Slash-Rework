@@ -59,6 +59,8 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     public boolean is_unique_item = false;
     public MinMax map_tiers = new MinMax(0, 100);
 
+    public int map_lives = 5;
+
     public float map_xp_multi = 1;
 
     public int max_spell_links = 1;

@@ -134,55 +134,8 @@ public class StatConditions implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
-
-        // todo why not just do it when class is contructed
-
         for (StatCondition c : StatCondition.ALL) {
             c.addToSerializables();
         }
-        // todo test
-
-        /*
-        BONE_SHATTER_NO_CD.addToSerializables();
-        IS_SOURCE_MAX_CHARGES.addToSerializables();
-        TARGET_HAS_EFFECT.addToSerializables();
-        IS_EVENT_AILMENT.addToSerializables();
-        ATTACK_TYPE_MATCHES.addToSerializables();
-        IS_ELEMENTAL.addToSerializables();
-        IS_TARGET_LOW.addToSerializables();
-        IS_TARGET_LOW_MAGIC_SHIELD.addToSerializables();
-        IS_NOT_SUMMON_ATTACK.addToSerializables();
-        IS_TARGET_CURSED.addToSerializables();
-        IS_SUMMON_TYPE.addToSerializables();
-        IS_NOT_IN_COMBAT.addToSerializables();
-        IF_CRIT.addToSerializables();
-        IF_RANDOM_ROLL.addToSerializables();
-        IS_SPELL.addToSerializables();
-        WEAPON_TYPE_MATCHES.addToSerializables();
-        IF_NOT_CRIT.addToSerializables();
-        ELEMENT_MATCH_STAT.addToSerializables();
-        IS_ATTACK_OR_SPELL_ATTACK.addToSerializables();
-        IS_DAY.addToSerializables();
-        IS_NIGHT.addToSerializables();
-        IS_BASIC_ATTACK.addToSerializables();
-        IS_RANGED_WEAPON.addToSerializables();
-        IS_ANY_PROJECTILE.addToSerializables();
-        IS_MAGIC_WEAPON.addToSerializables();
-        IS_MELEE_WEAPON.addToSerializables();
-        SPELL_HAS_TAG.addToSerializables();
-        IS_ATTACK_DAMAGE.addToSerializables();
-        IS_RESOURCE.addToSerializables();
-        IS_IN_COMBAT.addToSerializables();
-        IS_RESTORE_TYPE.addToSerializables();
-        EFFECT_HAS_TAG.addToSerializables();
-        IS_THREAT_GEN_TYPE.addToSerializables();
-        IS_TARGET_LOW_HP.addToSerializables();
-        IS_SOURCE_LOW_HP.addToSerializables();
-        IS_TARGET_UNDEAD.addToSerializables();
-        IS_TARGET_NOT_UNDEAD.addToSerializables();
-        IS_TARGET_NEAR_FULL_HP.addToSerializables();
-
-
-         */
     }
 }

@@ -19,6 +19,8 @@ public enum Chats implements IAutoLocName {
     RESISTS_TOO_LOW_FOR_MAP("You lack Resistances to Open/Enter this Map."),
     MAX_MAP_RARITY_FOR_LVL("This map is at maximum possible rarity for it's level."),
     MAX_MAP_RARITY("This map is at maximum possible rarity."),
+    NO_MORE_LIVES_REMAINING("You have no more lives remaining."),
+    MAP_DEATH_LIVES_LOSS("You have died, you can only enter the map %1$s more times."),
     ALREADY_CASTING("Already Casting a Spell"),
     SPELL_IS_ON_CD("Spell is on cooldown"),
     USING_TEST_SPELL("You are trying to use a test spell outside test environment"),

@@ -50,8 +50,8 @@ public class MoreXPerYOf extends BaseDatapackStat implements AddToAfterCalcEnd {
     // todo this doesnt cap stat values to min max etc
     @Override
     public void affectStats(Unit data, StatData statData) {
-        StatData add_to = data.getCalculatedStat(stat_to_add_to);
-        StatData adder = data.getCalculatedStat(adder_stat);
+        StatData add_to = data.getOrCreateCalculatedStat(stat_to_add_to);
+        StatData adder = data.getOrCreateCalculatedStat(adder_stat);
 
         float val = (int) (adder.getValue() / perEach) * statData.getValue();
 

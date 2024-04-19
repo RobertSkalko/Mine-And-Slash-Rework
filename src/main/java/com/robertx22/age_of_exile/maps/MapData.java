@@ -29,8 +29,20 @@ public class MapData {
 
     public List<String> spawnedMechs = new ArrayList<>();
 
-    public String playerUuid = "";
+    private HashMap<String, Integer> lives = new HashMap<>();
 
+
+    public int getLives(Player p) {
+        int cur = lives.getOrDefault(p.getStringUUID(), map.getRarity().map_lives);
+        return cur;
+    }
+
+    public void reduceLives(Player p) {
+        int cur = getLives(p) - 1;
+        lives.put(p.getStringUUID(), cur);
+    }
+
+    public String playerUuid = "";
 
     public int chunkX = 0;
     public int chunkZ = 0;

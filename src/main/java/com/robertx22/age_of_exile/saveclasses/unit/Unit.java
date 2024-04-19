@@ -67,6 +67,15 @@ public class Unit {
         return getStats().stats.getOrDefault(guid, StatData.empty());
     }
 
+    public StatData getOrCreateCalculatedStat(String guid) {
+        if (getStats().stats == null) {
+            this.initStats();
+        }
+        var data = getStats().stats.getOrDefault(guid, new StatData(guid, 0, 1));
+        getStats().stats.put(guid, data);
+        return data;
+    }
+
     public Unit() {
 
     }

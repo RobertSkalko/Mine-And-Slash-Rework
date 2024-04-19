@@ -49,8 +49,8 @@ public class AddPerPercentOfOther extends BaseDatapackStat implements AddToAfter
 
     @Override
     public void affectStats(Unit data, StatData statData) {
-        StatData add_to = data.getCalculatedStat(stat_to_add_to);
-        StatData adder = data.getCalculatedStat(adder_stat);
+        StatData add_to = data.getOrCreateCalculatedStat(stat_to_add_to);
+        StatData adder = data.getOrCreateCalculatedStat(adder_stat);
         StatData thisstat = data.getCalculatedStat(this.GUID());
 
         float multi = thisstat.getValue() / 100F;

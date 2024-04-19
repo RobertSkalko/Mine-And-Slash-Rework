@@ -26,6 +26,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -81,7 +82,9 @@ public class StatCalculation {
 
         // apply stats that add to others
 
-        for (Map.Entry<String, StatData> en : unit.getStats().stats.entrySet()) {
+        var stats = new HashMap<String, StatData>(unit.getStats().stats);
+
+        for (Map.Entry<String, StatData> en : stats.entrySet()) {
             if (en.getValue().GetStat() instanceof AddToAfterCalcEnd aff) {
                 aff.affectStats(unit, en.getValue());
             }
@@ -155,12 +158,10 @@ public class StatCalculation {
             statContexts.addAll(playerData.talents.getStatAndContext(entity));
             statContexts.addAll(playerData.ascClass.getStatAndContext(entity));
 
-
         } else {
             if (data.isSummon()) {
                 statContexts.addAll(MobStatUtils.addSummonStats((TamableAnimal) entity));
             } else {
-
                 statContexts.addAll(MobStatUtils.getMobBaseStats(data, entity));
                 statContexts.addAll(MobStatUtils.getAffixStats(entity));
                 statContexts.addAll(MobStatUtils.getWorldMultiplierStats(entity));

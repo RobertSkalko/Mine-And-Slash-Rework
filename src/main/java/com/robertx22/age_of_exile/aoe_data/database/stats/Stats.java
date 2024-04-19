@@ -294,7 +294,7 @@ public class Stats implements ExileRegistryInit {
 
     public static DataPackStatAccessor<Elements> ELEMENTAL_SPELL_DAMAGE = DatapackStatBuilder
             .<Elements>of(x -> "spell_" + x.guidName + "_damage", x -> x)
-            .addAllOfType(Elements.getAllSingle())
+            .addAllOfType(Elements.values())
             .worksWithEvent(DamageEvent.ID)
             .setPriority(0)
             .setSide(EffectSides.Source)
@@ -1347,7 +1347,7 @@ public class Stats implements ExileRegistryInit {
 
     public static DataPackStatAccessor<Elements> ELE_DAMAGE_WHEN_TARGET_IS_LOW_HP = DatapackStatBuilder
             .<Elements>of(x -> x.guidName + "_dmg_when_target_low_hp", x -> x)
-            .addAllOfType(Elements.getAllSingle())
+            .addAllOfType(Elements.values())
             .worksWithEvent(DamageEvent.ID)
             .setPriority(100)
             .setSide(EffectSides.Source)

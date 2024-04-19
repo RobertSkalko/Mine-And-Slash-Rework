@@ -10,8 +10,11 @@ This is meant for players who don't want to mess with inviting to parties etc
 - improved hotbar ui a bit
 - particles are now sent in 1 packet which should hopefully improve server performance
 - summons will no longer get map mob stats
+- added map lives system, higher rarity maps now have less lives.
+- crafted gear now have lowered potential which means it can be crafted on with currencies less and hopefully dropped gear remains viable in the endgame.
 - you can no longer enter too high level maps (currently max is your lvl + 5
 - fix allies being able to attack summons
+- if the perk is missing or you're in dev mode, or you shift, talents gui will now show the perk id
 - added aggressive and defensive minion support gems, changing their aggro radius
 - SHIFT+R keybind will now cast when you do it instead of the spell binded to R keybind. (as an example) Meaning keybinds with button modifiers are prioritized
 - gear should now only ever be stat checked requirements after the stat calculation
@@ -30,7 +33,7 @@ Now your item starts with say 100 potential and you spend potential to use curre
 The system was too confusing and nobody knew what it was. It was meant to be a less restrictive system that just reduced your chances of good outcomes the more you crafted but, 
 I decided to just go back to the old system where you either can or can't craft an item anymore.
 
-New Feature, Prophecies:
+New Feature, Prophecies:  TODO MIGHT TURN THIS INTO A LEAGUE FEATURE
 
 Killing Mobs in maps now rewards favor currency which can be spent to buy prophecy rewards.
 Prophecy rewards are a way to target farm things! You can buy stuff like "3 Epic Boots" or "5 runes".

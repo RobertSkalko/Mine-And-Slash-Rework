@@ -101,6 +101,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.pot = new GearRarity.Potential(50);
             x.min_affixes = 4;
             x.weight = 100;
+            x.map_lives = 4;
             x.item_tier = 3;
             x.item_model_data_num = 4;
             x.item_tier_power = 1.7F;
@@ -129,6 +130,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.pot = new GearRarity.Potential(75);
             x.min_affixes = 5;
             x.weight = 50;
+            x.map_lives = 3;
             x.item_tier = 4;
             x.item_model_data_num = 5;
             x.item_tier_power = 2;
@@ -159,6 +161,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.pot = new GearRarity.Potential(100);
             x.min_affixes = 6;
             x.weight = 25;
+            x.map_lives = 3;
             x.item_tier = 5;
             x.item_model_data_num = 6;
             x.item_tier_power = 3;
@@ -169,7 +172,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.addToSerializables();
         });
 
-        
+
         GearRarity unique = new GearRarity().edit(x -> {
             x.map_resist_req = 50;
 

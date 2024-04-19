@@ -95,17 +95,16 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
                                 gear.sockets.getSocketed().add(rune);
                             }
 
-                            if (true || !gear.sockets.hasRuneWord()) {
-                                var list = ExileDB.RuneWords().getFilterWrapped(x -> x.canApplyOnItem(stack) && x.hasMatchingRunesToCreate(gear)).list;
-                                if (!list.isEmpty()) {
-                                    var biggest = list.stream().max(Comparator.comparingInt(x -> x.runes.size())).get();
+                            var list = ExileDB.RuneWords().getFilterWrapped(x -> x.canApplyOnItem(stack) && x.hasMatchingRunesToCreate(gear)).list;
+                            if (!list.isEmpty()) {
+                                var biggest = list.stream().max(Comparator.comparingInt(x -> x.runes.size())).get();
 
-                                    var current = gear.sockets.getRuneWord();
-                                    if (current == null || biggest.runes.size() > current.runes.size()) {
-                                        gear.sockets.setRuneword(biggest);
-                                    }
+                                var current = gear.sockets.getRuneWord();
+                                if (current == null || biggest.runes.size() > current.runes.size()) {
+                                    gear.sockets.setRuneword(biggest);
                                 }
                             }
+                            
 
                             gear.saveToStack(stack);
                             return stack;

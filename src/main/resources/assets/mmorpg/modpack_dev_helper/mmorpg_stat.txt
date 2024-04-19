@@ -70,6 +70,7 @@ mining_greater_drop_bonus
 fire_res_aura_cost
 song_spell_dmg_taken
 all_all_damage
+spell_elemental_damage
 magic_shield_on_hit_hit
 learn_minion_explosion
 electrify_proc_chance
@@ -122,6 +123,7 @@ golem_spell_dmg_taken
 curse_spell_dmg
 lightning_crit_taken
 give_rejuvenation_to_allies_in_aoe
+all_dmg_when_target_low_hp
 learn_resonance
 movement_spell_dmg_taken
 weapon_skill_spell_dmg_taken
@@ -282,6 +284,7 @@ phys_to_all
 magic_shield_aura_cost
 learn_arrow_barrage
 fire_spell_dmg
+elemental_dmg_when_target_low_hp
 alchemy_greater_drop_bonus
 immobilizing_eff_dur_u_cast
 cold_cdr
@@ -359,6 +362,7 @@ farming_misc_drop_bonus
 light_res_aura_cost
 golem_spell_chance
 weapon_skill_spell_dmg
+spell_all_damage
 plus_lvl_cold_spells
 all_any_wep_damage
 chaos_damage_aura_cost

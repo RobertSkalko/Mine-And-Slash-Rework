@@ -41,10 +41,11 @@ public abstract class ElementalStat extends Stat implements IElementalGenerated<
 
     }
 
+    // todo make this its own stat?
     @Override
     public void transferStats(Unit unit, InCalcStatData thisstat) {
         if (this.element == Elements.Elemental) {
-            for (Elements ele : Elements.getAllSingle()) {
+            for (Elements ele : Elements.getAllSingleElemental()) {
                 thisstat.addFullyTo(unit.getStatInCalculation(newGeneratedInstance(ele)));
             }
             thisstat.clear();

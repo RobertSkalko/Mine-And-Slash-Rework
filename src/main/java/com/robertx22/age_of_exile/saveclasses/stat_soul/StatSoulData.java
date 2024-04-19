@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.saveclasses.stat_soul;
 
+import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
@@ -173,6 +174,8 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
 
 
         GearItemData gear = b.createData();
+
+        gear.setPotential((int) (gear.getPotentialNumber() * GameBalanceConfig.get().CRAFTED_GEAR_POTENTIAL_MULTI));
 
         gear.data.set(GearItemData.KEYS.SALVAGING_DISABLED, !this.can_sal);
         return gear;

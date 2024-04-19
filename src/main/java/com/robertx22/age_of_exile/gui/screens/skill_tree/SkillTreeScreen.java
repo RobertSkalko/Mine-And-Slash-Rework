@@ -234,7 +234,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
             refreshButtons();
 
-       
+
             goToCenter();
         } catch (Exception e) {
             e.printStackTrace();
@@ -301,6 +301,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         this.scrollY = 0;
 
         for (Map.Entry<PointData, String> e : school.calcData.perks.entrySet()) {
+
             Perk perk = ExileDB.Perks().get(e.getValue());
 
             if (perk == null) {
@@ -315,7 +316,11 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                 int x = pos.x;
                 int y = pos.y;
 
-                this.newButton(new PerkButton(this, playerData, school, e.getKey(), perk, x, y));
+                var button = new PerkButton(this, playerData, school, e.getKey(), perk, x, y);
+
+                button.perkid = e.getValue();
+                
+                this.newButton(button);
             } catch (Exception exception) {
                 exception.printStackTrace();
             }

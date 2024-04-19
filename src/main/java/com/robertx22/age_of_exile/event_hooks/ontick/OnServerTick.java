@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
 import com.robertx22.age_of_exile.uncommon.effectdatas.RestoreResourceEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -31,6 +32,15 @@ public class OnServerTick {
 
             if (player.level() instanceof ServerLevel sw) {
                 if (WorldUtils.isMapWorldClass(sw)) {
+
+                    if (player.tickCount % (20 * 5) == 0) {
+                        var map = Load.mapAt(player.level(), player.blockPosition());
+                        if (map.getLives(player) < 1) {
+                            player.sendSystemMessage(Chats.NO_MORE_LIVES_REMAINING.locName());
+                            Load.player(player).map.teleportBack(player);
+                        }
+
+                    }
                     if (player.gameMode.isSurvival()) {
                         player.setGameMode(GameType.ADVENTURE);
                     }
