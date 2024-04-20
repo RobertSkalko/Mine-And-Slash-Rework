@@ -100,10 +100,10 @@ public class SpellSchoolScreen extends BaseScreen implements INamedScreen, ILeft
                     .forEach(e -> {
 
                         PointData point = e.getValue();
-                        Perk perk = ExileDB.Perks()
-                                .get(e.getKey());
+                        Perk perk = ExileDB.Perks().get(e.getKey());
 
-                        if (perk != null) {
+                        
+                        if (perk != null && ExileDB.Perks().isRegistered(e.getKey())) {
                             int x = this.guiLeft + 12 + (point.x * SLOT_SPACING);
                             int y = this.guiTop + 178 - (point.y * SLOT_SPACING);
 

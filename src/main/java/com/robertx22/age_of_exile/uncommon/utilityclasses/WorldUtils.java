@@ -115,6 +115,9 @@ public class WorldUtils {
     }
 
     public static boolean isMapWorldClass(Level world) {
+        if (world == null) {
+            return false;
+        }
         return VanillaUTIL.REGISTRY.dimensionTypes(world).getKey(world.dimensionType()).equals(DUNGEON_DIM_ID); // todo
 
     }

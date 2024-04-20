@@ -44,7 +44,7 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
                 .add(SpellPassives.ELE_RES, new PointData(8, 4))
                 .add(SpellPassives.CAST_SPEED_SORC, new PointData(8, 5))
                 .add(SpellPassives.GOLEM_CHANCE, new PointData(8, 6))
-                .add(SpellPassives.MISSILE_BARRAGE, new PointData(9, 5))
+                //  .add(SpellPassives.MISSILE_BARRAGE, new PointData(9, 5))
 
                 .build();
 

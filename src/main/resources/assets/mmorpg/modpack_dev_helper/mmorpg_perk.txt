@@ -53,8 +53,8 @@ spell_elemental_damage
 test_spell
 summon_damage_big
 charge
-spell_elemental_damage_and_dot
 mana_regen_hp_regen
+spell_elemental_damage_and_dot
 flame_strike
 p_heal_to_spell
 elemental_any_wep_damage

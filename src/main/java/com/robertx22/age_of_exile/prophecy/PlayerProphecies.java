@@ -41,12 +41,15 @@ public class PlayerProphecies {
     }
 
     public int getAverageTier() {
+        if (tiersAdded < 1) {
+            return 0;
+        }
         return totalTiers / tiersAdded;
     }
 
     public int getAverageLevel() {
         if (lvlsAdded < 1) {
-            return 0;
+            return 1;
         }
 
         return totalLvls / lvlsAdded;
