@@ -16,11 +16,16 @@ public class LeagueSpawnPos extends DataProcessor {
     }
 
     @Override
+    public boolean canSpawnLeagueMechanic() {
+        return false;
+    }
+
+    @Override
     public void processImplementation(String key, BlockPos pos, Level world, ChunkProcessData data) {
 
         try {
             var mech = LeagueMechanic.getMechanicFromPosition((ServerLevel) world, pos);
-            Load.mapAt(world, pos).getLeagueData(mech).spawn_pos = pos.asLong();
+            Load.mapAt(world, pos).leagues.get(mech).spawn_pos = pos.asLong();
         } catch (Exception e) {
             //   throw new RuntimeException(e);
         }

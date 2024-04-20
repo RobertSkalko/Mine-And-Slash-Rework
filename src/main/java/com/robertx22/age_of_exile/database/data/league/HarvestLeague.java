@@ -1,8 +1,10 @@
 package com.robertx22.age_of_exile.database.data.league;
 
+import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.LootChestBlueprint;
+import com.robertx22.age_of_exile.maps.LeagueData;
 import com.robertx22.age_of_exile.maps.MapData;
 import com.robertx22.age_of_exile.maps.processors.helpers.MobBuilder;
 import com.robertx22.age_of_exile.mechanics.base.LeagueBlockData;
@@ -30,12 +32,28 @@ import java.util.List;
 
 public class HarvestLeague extends LeagueMechanic {
 
+    public static MapField<Double> KILLS = new MapField<>("kills");
+
     public int ticksLast = 20 * 60 * 1;
     int maxKills = 200;
     int maximumBonusLootTimes = 5;
 
     @Override
+    public int getDefaultSpawns() {
+        return 1;
+    }
+
+    @Override
+    public void onMapStartSetup(LeagueData data) {
+
+
+    }
+
+    @Override
     public void onKillMob(MapData map, LootInfo info) {
+        map.leagues.get(this).map.modify(HarvestLeague.KILLS, 0D, x -> x + 1D);
+
+
         float lootChance = (maximumBonusLootTimes * (100F / maxKills)); // i hope this formula isn't wrong
 
         if (RandomUtils.roll(lootChance)) {
@@ -61,22 +79,18 @@ public class HarvestLeague extends LeagueMechanic {
     }
 
     @Override
-    public void spawnTeleportInMap(ServerLevel level, BlockPos pos) {
+    public void spawnMechanicInMap(ServerLevel level, BlockPos pos) {
 
         level.setBlock(pos, SlashBlocks.HARVEST_TELEPORT.get().defaultBlockState(), 2);
     }
 
-    @Override
-    public float chanceToSpawnMechanicAfterKillingMob() {
-        return 100;
-    }
 
     @Override
     public void onTick(MapData map, ServerLevel level, BlockPos pos, LeagueControlBlockEntity be, LeagueBlockData data) {
 
         data.ticks++;
 
-        if (data.ticks > ticksLast || map.getLeagueData(this).kills > maxKills) {
+        if (data.ticks > ticksLast || map.leagues.get(this).map.getOrDefault(KILLS, 0D).intValue() > maxKills) {
             data.finished = true;
             for (Player p : be.getPlayers()) {
                 p.sendSystemMessage(Chats.VINES_SHRINK.locName().withStyle(ChatFormatting.GREEN));

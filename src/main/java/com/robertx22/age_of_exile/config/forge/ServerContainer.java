@@ -84,9 +84,7 @@ public class ServerContainer {
 
         MOB_FLAT_DAMAGE_BONUS = b.defineInRange("MOB_FLAT_DAMAGE_BONUS", 5D, 0, 1000);
 
-        MAP_MECHANIC_CHANCE = b.defineInRange("MAP_MECHANIC_CHANCE", 33D, 0, 100D);
-
-
+    
         BLOCK_COST = b.defineInRange("block_cost", 0.25D, 0, 1000);
 
         PACK_MOB_MIN = b.defineInRange("pack_mob_min", 3, 0, 20);
@@ -103,7 +101,7 @@ public class ServerContainer {
         MOB_LEVEL_VARIANCE = b.defineInRange("MOB_LEVEL_VARIANCE", 3, 0, 100);
 
         PROPHECY_OFFERS_PER_REROLL = b.defineInRange("PROPHECY_OFFERS_PER_REROLL", 15, 1, 27);
-       
+
 
         MOB_MIN = b.defineInRange("mob_min", 1, 0, 20);
         MOB_MAX = b.defineInRange("mob_max", 2, 0, 20);
@@ -230,7 +228,6 @@ public class ServerContainer {
     public ForgeConfigSpec.DoubleValue RUNE_DROPRATE;
     public ForgeConfigSpec.DoubleValue CURRENCY_DROPRATE;
     public ForgeConfigSpec.DoubleValue JEWEL_DROPRATE;
-    public ForgeConfigSpec.DoubleValue MAP_MECHANIC_CHANCE;
 
     public ForgeConfigSpec.DoubleValue MOB_FLAT_DAMAGE_BONUS;
 

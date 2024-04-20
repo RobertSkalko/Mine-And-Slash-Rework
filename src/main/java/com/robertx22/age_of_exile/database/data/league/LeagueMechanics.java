@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.database.data.league;
 
 import com.robertx22.age_of_exile.loot.LootInfo;
+import com.robertx22.age_of_exile.maps.LeagueData;
 import com.robertx22.age_of_exile.maps.MapData;
 import com.robertx22.age_of_exile.mechanics.base.LeagueBlockData;
 import com.robertx22.age_of_exile.mechanics.base.LeagueControlBlockEntity;
@@ -15,19 +16,24 @@ public class LeagueMechanics {
 
 
         @Override
+        public int getDefaultSpawns() {
+            return 0;
+        }
+
+        @Override
+        public void onMapStartSetup(LeagueData data) {
+
+        }
+
+        @Override
         public void onKillMob(MapData map, LootInfo info) {
 
         }
 
         @Override
-        public void spawnTeleportInMap(ServerLevel level, BlockPos pos) {
+        public void spawnMechanicInMap(ServerLevel level, BlockPos pos) {
 
 
-        }
-
-        @Override
-        public float chanceToSpawnMechanicAfterKillingMob() {
-            return 0;
         }
 
         @Override

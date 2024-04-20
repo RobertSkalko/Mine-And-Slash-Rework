@@ -33,6 +33,7 @@ public class BuiltRoom {
 
     public static BuiltRoom getBarrier() {
         DungeonRoom barrier = new DungeonRoom(Dungeon.SERIALIZER, "", RoomType.END); // todo what
+        barrier.isBarrier = true;
         barrier.loc = new ResourceLocation(SlashRef.MODID, "dun/barrier");
         RoomRotation rot = new RoomRotation(RoomType.END, new RoomSides(RoomSide.BLOCKED, RoomSide.BLOCKED, RoomSide.BLOCKED, RoomSide.BLOCKED), Rotation.NONE);
         BuiltRoom built = new BuiltRoom(Dungeon.SERIALIZER, rot, barrier);

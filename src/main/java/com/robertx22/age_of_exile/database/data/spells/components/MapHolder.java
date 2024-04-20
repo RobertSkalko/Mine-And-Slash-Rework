@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashMap;
+import java.util.function.Function;
 
 import static com.robertx22.age_of_exile.database.data.spells.map_fields.MapField.EXILE_POTION_ID;
 import static com.robertx22.age_of_exile.database.data.spells.map_fields.MapField.POTION_ID;
@@ -47,6 +48,11 @@ public class MapHolder {
         }
         this.map.put(field.GUID(), t);
         return this;
+    }
+
+    public <T> void modify(MapField<T> f, T def, Function<T, T> edit) {
+        T val = getOrDefault(f, def);
+        put(f, edit.apply(val));
     }
 
     public <T> T get(MapField<T> field) {

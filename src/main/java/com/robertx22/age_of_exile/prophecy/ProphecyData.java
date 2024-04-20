@@ -22,27 +22,6 @@ public class ProphecyData {
     public List<ProphecyModifierData> mods = new ArrayList<>();
 
 
-    /*
-    public List<ProphecyReqData> getRequirements() {
-
-
-        List<ProphecyReqData> list = new ArrayList<>();
-
-        int lvlreq = mods.stream().max(Comparator.comparingInt(x -> x.get().lvl_req)).get().get().lvl_req;
-        int tierreq = mods.stream().max(Comparator.comparingInt(x -> x.get().tier_req)).get().get().tier_req;
-
-        if (lvlreq > 0) {
-            list.add(new ProphecyReqData(ProphecyReqData.ReqType.LEVEL, lvlreq));
-        }
-        if (tierreq > 0) {
-            list.add(new ProphecyReqData(ProphecyReqData.ReqType.TIER, tierreq));
-        }
-
-        return list;
-    }
-
-     */
-
     public List<ItemStack> generateRewards(Player p) {
         List<ItemStack> list = new ArrayList<>();
 

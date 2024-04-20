@@ -40,8 +40,14 @@ public class DungeonFeature {
 
         BuiltRoom room = builder.builtDungeon.getRoomForChunk(cpos);
 
+
         if (room == null) {
             return false;
+        }
+
+        if (!room.room.isBarrier) {
+            // we make sure only valid rooms are added to the total
+            mapData.leagues.totalGenDungeonChunks++;
         }
 
         //world.getServer().getStructureManager().listTemplates();

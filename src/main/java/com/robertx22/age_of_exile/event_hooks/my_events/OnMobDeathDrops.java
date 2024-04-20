@@ -83,14 +83,12 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
                             if (map != null) {
                                 Load.player(player).prophecy.onKillMobInMap(player, mobKilled);
 
-                                map.trySpawnMechanic(mobKilled.level(), mobKilled.blockPosition());
+                                // map.trySpawnMechanic(mobKilled.level(), mobKilled.blockPosition());
 
                                 var mech = LeagueMechanic.getMechanicFromPosition((ServerLevel) player.level(), mobKilled.blockPosition());
                                 if (!mech.isEmpty()) {
                                     var info = LootInfo.ofMobKilled(player, mobKilled);
                                     mech.onKillMob(map, info);
-                                    map.getLeagueData(mech).kills++;
-
                                 }
 
                             }

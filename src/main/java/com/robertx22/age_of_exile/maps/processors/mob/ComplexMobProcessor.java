@@ -28,6 +28,11 @@ public class ComplexMobProcessor extends DataProcessor {
     }
 
     @Override
+    public boolean canSpawnLeagueMechanic() {
+        return true;
+    }
+
+    @Override
     public void processImplementation(String key, BlockPos pos, Level world, ChunkProcessData data) {
 
         try {

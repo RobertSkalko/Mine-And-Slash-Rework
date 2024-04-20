@@ -15,6 +15,11 @@ public class LeagueControlBlockProcessor extends DataProcessor {
     }
 
     @Override
+    public boolean canSpawnLeagueMechanic() {
+        return false;
+    }
+
+    @Override
     public void processImplementation(String key, BlockPos pos, Level world, ChunkProcessData data) {
         try {
             String[] parts = key.split(":");

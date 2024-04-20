@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.maps;
 
 import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
-import com.robertx22.age_of_exile.database.data.league.LeagueMechanic;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
@@ -52,14 +51,9 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
     public List<MapAffixData> affixes = new ArrayList<MapAffixData>();
 
-    public List<String> mechs = new ArrayList<>();
 
     public String uuid = UUID.randomUUID().toString();
 
-
-    public List<LeagueMechanic> getLeagueMechanics() {
-        return mechs.stream().map(x -> ExileDB.LeagueMechanics().get(x)).collect(Collectors.toList());
-    }
 
     public StatRequirement getStatReq() {
 
@@ -172,10 +166,6 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
         tooltip.add(ExileText.emptyLine().get());
 
-
-        for (LeagueMechanic league : this.getLeagueMechanics()) {
-            tooltip.add(Itemtips.MAP_LEAGUE_SPAWN.locName().append(league.GUID()));
-        }
 
         List<GearRarity> possiblerarities = ExileDB.GearRarities().getFilterWrapped(x -> this.getRarity().item_tier >= ExileDB.GearRarities().get(x.min_map_rarity_to_drop).item_tier).list;
 

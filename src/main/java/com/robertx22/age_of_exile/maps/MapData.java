@@ -1,8 +1,6 @@
 package com.robertx22.age_of_exile.maps;
 
-import com.robertx22.age_of_exile.database.data.league.LeagueMechanic;
 import com.robertx22.age_of_exile.database.data.league.LeagueMechanics;
-import com.robertx22.age_of_exile.mechanics.base.LeagueMapData;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
@@ -19,15 +17,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.border.WorldBorder;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.stream.Collectors;
 
 public class MapData {
 
     public MapItemData map = new MapItemData();
 
-    public List<String> spawnedMechs = new ArrayList<>();
+
+    public MapLeaguesData leagues = new MapLeaguesData();
 
     private HashMap<String, Integer> lives = new HashMap<>();
 
@@ -47,14 +45,6 @@ public class MapData {
     public int chunkX = 0;
     public int chunkZ = 0;
 
-    private HashMap<String, LeagueMapData> leagueDatas = new HashMap<>();
-
-    public LeagueMapData getLeagueData(LeagueMechanic l) {
-        if (!leagueDatas.containsKey(l.GUID())) {
-            leagueDatas.put(l.GUID(), new LeagueMapData());
-        }
-        return leagueDatas.get(l.GUID());
-    }
 
     public static MapData newMap(Player p, MapItemData map, MapsData maps) {
 
@@ -70,24 +60,25 @@ public class MapData {
         data.chunkX = cp.x;
         data.chunkZ = cp.z;
 
+        data.leagues.setupOnMapStart(p);
 
         return data;
 
     }
 
-    public void trySpawnMechanic(Level level, BlockPos pos) {
-
+    public void spawnRandomLeagueMechanic(Level level, BlockPos pos) {
         if (LeagueMechanics.NONE.isInsideLeague((ServerLevel) level, pos)) {
-            for (LeagueMechanic league : this.map.getLeagueMechanics()) {
-                if (!this.spawnedMechs.contains(league.GUID())) {
-                    if (RandomUtils.roll(league.chanceToSpawnMechanicAfterKillingMob())) {
-                        this.spawnedMechs.add(league.GUID());
-                        league.spawnTeleportInMap((ServerLevel) level, pos);
-                    }
-                }
+
+            var list = leagues.getLeagueMechanics().stream().filter(x -> leagues.get(x).remainingSpawns > 0).collect(Collectors.toList());
+
+            if (list.size() > 0) {
+                var league = RandomUtils.randomFromList(list);
+
+                league.spawnMechanicInMap((ServerLevel) level, pos);
+
+                leagues.get(league).remainingSpawns--;
             }
         }
-
     }
 
 

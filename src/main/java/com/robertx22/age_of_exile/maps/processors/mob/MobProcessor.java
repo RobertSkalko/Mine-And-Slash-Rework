@@ -18,6 +18,11 @@ public class MobProcessor extends DataProcessor {
     }
 
     @Override
+    public boolean canSpawnLeagueMechanic() {
+        return true;
+    }
+
+    @Override
     public void processImplementation(String key, BlockPos pos, Level world, ChunkProcessData data) {
         EntityType<? extends Mob> type = SpawnedMob.random(data.getRoom()).type;
 
