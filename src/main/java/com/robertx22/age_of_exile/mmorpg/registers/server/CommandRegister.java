@@ -46,7 +46,6 @@ public class CommandRegister {
         SetEntityRarity.register(dispatcher);
         SpawnBoss.register(dispatcher);
         SetLevel.register(dispatcher);
-        SetProphecyProgress.register(dispatcher);
         SetProphecyFavor.register(dispatcher);
         GiveExp.register(dispatcher);
         SetFavor.register(dispatcher);

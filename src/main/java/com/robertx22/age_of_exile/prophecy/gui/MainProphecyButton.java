@@ -57,7 +57,7 @@ public class MainProphecyButton extends ImageButton {
 
         list.add(Component.literal(""));
 
-        list.add(Words.CURRENT_FAVOR_CURRENCY.locName(data.favor));
+        list.add(Words.CURRENT_PROPHECY_CURRENCY.locName(data.getCurrency()));
         list.add(Words.AVG_LVL.locName(data.getAverageLevel()));
         list.add(Words.AVG_TIER.locName(data.getAverageTier()));
 

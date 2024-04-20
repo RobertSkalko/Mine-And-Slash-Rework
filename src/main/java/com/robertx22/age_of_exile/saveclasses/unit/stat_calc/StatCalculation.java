@@ -157,6 +157,7 @@ public class StatCalculation {
             statContexts.addAll(PlayerStatUtils.addNewbieElementalResists(data));
             statContexts.addAll(playerData.talents.getStatAndContext(entity));
             statContexts.addAll(playerData.ascClass.getStatAndContext(entity));
+            statContexts.addAll(playerData.prophecy.getStatAndContext(entity));
 
         } else {
             if (data.isSummon()) {

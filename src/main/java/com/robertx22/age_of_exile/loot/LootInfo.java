@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.loot;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.league.LeagueMechanic;
 import com.robertx22.age_of_exile.database.data.league.LeagueMechanics;
+import com.robertx22.age_of_exile.database.data.league.LeagueStructure;
 import com.robertx22.age_of_exile.database.data.stats.types.loot.TreasureQuantity;
 import com.robertx22.age_of_exile.database.data.stats.types.misc.ExtraMobDropsStat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -122,7 +123,7 @@ public class LootInfo {
         return info;
     }
 
-    
+
     public static LootInfo ofSpawner(Player player, Level world, BlockPos pos) {
         LootInfo info = new LootInfo(LootOrigin.OTHER);
         info.world = world;
@@ -198,7 +199,7 @@ public class LootInfo {
                 if (data.get() != null) {
                     this.isMapWorld = true;
                     this.map = data.get();
-                    this.league = LeagueMechanic.getMechanicFromPosition((ServerLevel) world, pos);
+                    this.league = LeagueStructure.getMechanicFromPosition((ServerLevel) world, pos);
                 }
 
             }

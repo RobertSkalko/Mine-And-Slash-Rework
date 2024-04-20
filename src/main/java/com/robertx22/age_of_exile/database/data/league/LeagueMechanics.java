@@ -16,6 +16,11 @@ public class LeagueMechanics {
 
 
         @Override
+        public LeagueStructure getStructure() {
+            return LeagueStructure.EMPTY;
+        }
+
+        @Override
         public int getDefaultSpawns() {
             return 0;
         }
@@ -46,25 +51,6 @@ public class LeagueMechanics {
 
         }
 
-        @Override
-        public BlockPos getTeleportPos(BlockPos pos) {
-            return pos;
-        }
-
-        @Override
-        public LeaguePiecesList getPieces() {
-            return null;
-        }
-
-        @Override
-        public int startY() {
-            return 0;
-        }
-
-        @Override
-        public boolean isInsideLeague(ServerLevel level, BlockPos pos) {
-            return pos.getY() < 77;
-        }
 
         @Override
         public String GUID() {
@@ -78,9 +64,11 @@ public class LeagueMechanics {
     };
 
     public static LeagueMechanic HARVEST = new HarvestLeague();
+    public static LeagueMechanic PROPHECY = new ProphecyLeague();
 
 
     public static void init() {
         HARVEST.registerToExileRegistry();
+        PROPHECY.registerToExileRegistry();
     }
 }

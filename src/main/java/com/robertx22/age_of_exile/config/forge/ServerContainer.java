@@ -84,7 +84,7 @@ public class ServerContainer {
 
         MOB_FLAT_DAMAGE_BONUS = b.defineInRange("MOB_FLAT_DAMAGE_BONUS", 5D, 0, 1000);
 
-    
+
         BLOCK_COST = b.defineInRange("block_cost", 0.25D, 0, 1000);
 
         PACK_MOB_MIN = b.defineInRange("pack_mob_min", 3, 0, 20);
@@ -100,7 +100,7 @@ public class ServerContainer {
         ITEM_LEVEL_VARIANCE = b.defineInRange("ITEM_LEVEL_VARIANCE", 3, 0, 100);
         MOB_LEVEL_VARIANCE = b.defineInRange("MOB_LEVEL_VARIANCE", 3, 0, 100);
 
-        PROPHECY_OFFERS_PER_REROLL = b.defineInRange("PROPHECY_OFFERS_PER_REROLL", 15, 1, 27);
+        PROPHECY_OFFERS_PER_REROLL = b.defineInRange("PROPHECY_OFFERS_PER_REROLL", 18, 1, 18);
 
 
         MOB_MIN = b.defineInRange("mob_min", 1, 0, 20);

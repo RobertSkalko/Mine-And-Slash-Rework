@@ -2,6 +2,13 @@ package com.robertx22.age_of_exile.prophecy;
 
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
+import com.robertx22.age_of_exile.database.data.map_affix.MapAffix;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.maps.AffectedEntities;
+import com.robertx22.age_of_exile.saveclasses.ExactStatData;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatCtx;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
@@ -15,12 +22,20 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class PlayerProphecies {
+public class PlayerProphecies implements IStatCtx {
 
-    public List<ProphecyData> offers = new ArrayList<>();
-    public List<ProphecyData> taken = new ArrayList<>();
+    public List<ProphecyData> rewardOffers = new ArrayList<>();
+
+
+    public List<String> affixOffers = new ArrayList<>();
+
+    public List<String> affixesTaken = new ArrayList<>();
+
+
+    public int numMobAffixesCanAdd = 0;
 
     private int totalTiers = 0;
     private int totalLvls = 0;
@@ -28,16 +43,29 @@ public class PlayerProphecies {
     private int lvlsAdded = 0;
     private int tiersAdded = 0;
 
-    public float progress = 0;
+    private int favor = 0;
 
-    public boolean canTakeOffers() {
-        return canClaim();
+
+    public int getCurrency() {
+        return favor;
     }
 
-    public int favor = 0;
+    public void regenAffixOffers() {
+        this.affixOffers.clear();
 
-    public boolean canClaim() {
-        return progress >= 100;
+        for (int i = 0; i < 3; i++) {
+            MapAffix affix = ExileDB.MapAffixes().getFilterWrapped(x -> x.affected == AffectedEntities.Players).random();
+            affixOffers.add(affix.GUID());
+        }
+
+    }
+
+    public void gainFavor(int num) {
+        this.favor += num * affixesTaken.size();
+    }
+
+    public void forceSetCurrency(int num) {
+        this.favor = num;
     }
 
     public int getAverageTier() {
@@ -56,21 +84,13 @@ public class PlayerProphecies {
     }
 
 
-    public void onLoginRegenIfEmpty(Player p) {
-        if (offers.isEmpty() && taken.isEmpty()) {
-            this.regenerateNewOffers(p);
-        }
-    }
-
     public void OnDeath(Player p) {
         if (WorldUtils.isDungeonWorld(p.level())) {
-            this.progress = MathHelper.clamp(progress - GameBalanceConfig.get().PROPHECY_PROGRESS_LOST_ON_MAP_DEATH, 0, 100);
-            p.sendSystemMessage(Chats.PROPHECY_MAP_DEATH.locName(GameBalanceConfig.get().PROPHECY_PROGRESS_LOST_ON_MAP_DEATH).withStyle(ChatFormatting.RED));
-
             this.favor = MathHelper.clamp(favor - GameBalanceConfig.get().PROPHECY_CURRENCY_LOST_ON_MAP_DEATH, 0, favor);
             p.sendSystemMessage(Chats.PROPHECY_MAP_DEATHCURRENCY.locName(GameBalanceConfig.get().PROPHECY_CURRENCY_LOST_ON_MAP_DEATH).withStyle(ChatFormatting.RED));
         }
     }
+
 
     public void onKillMobInMap(Player p, LivingEntity en) {
 
@@ -78,66 +98,31 @@ public class PlayerProphecies {
 
         int lvl = Load.Unit(en).getLevel();
 
-
         totalTiers += tier;
         totalLvls += lvl;
 
         lvlsAdded++;
         tiersAdded++;
 
-        if (progress < 100) {
-            progress += GameBalanceConfig.get().PROPHECY_PROGRESS_PER_MOB_KILL;
-
-            if (progress >= 100) {
-                progress = 100;
-                p.sendSystemMessage(Chats.PROPHECY_BAR_FILLED.locName().withStyle(ChatFormatting.LIGHT_PURPLE));
-            }
-        }
+        this.gainFavor(1);
     }
 
-    public int getRerollCost() {
-        return GameBalanceConfig.get().PROPHECY_REROLL_COST;
-    }
 
     public void regenerateNewOffers(Player p) {
 
-        offers = new ArrayList<>();
+        rewardOffers = new ArrayList<>();
 
         for (int i = 0; i < ServerContainer.get().PROPHECY_OFFERS_PER_REROLL.get(); i++) {
-            offers.add(ProphecyGeneration.generate(p));
+            rewardOffers.add(ProphecyGeneration.generate(p));
         }
 
     }
 
-    public void onBarFinishGiveRewards(Player p) {
 
-        for (ProphecyData data : taken) {
-            for (ItemStack stack : data.generateRewards(p)) {
-                PlayerUtils.giveItem(stack, p);
-            }
-        }
-
-        this.offers = new ArrayList<>();
-
-        this.taken = new ArrayList<>();
-
-        this.progress = 0;
-    }
-
-    public void tryAcceptOffer(Player p, String uuid) {
-
-        if (taken.size() >= 9) {
-            p.sendSystemMessage(Chats.YOU_CANT_TAKE_ANY_MORE_PROPHECIES.locName().withStyle(ChatFormatting.RED));
-            return;
-        }
-
-        if (!this.canTakeOffers()) {
-            p.sendSystemMessage(Chats.YOU_NEED_FULL_BAR_TO_TAKE_PROPHECY.locName().withStyle(ChatFormatting.RED));
-            return;
-        }
+    public void tryAcceptReward(Player p, String uuid) {
 
 
-        ProphecyData data = offers.stream().filter(x -> x.uuid.equals(uuid)).findAny().get();
+        ProphecyData data = rewardOffers.stream().filter(x -> x.uuid.equals(uuid)).findAny().get();
 
         if (data != null) {
 
@@ -151,8 +136,27 @@ public class PlayerProphecies {
 
             SoundUtils.playSound(p, SoundEvents.EXPERIENCE_ORB_PICKUP);
 
-            offers.removeIf(x -> x.uuid.equals(data.uuid)); // todo check if this works
-            taken.add(data);
+            rewardOffers.removeIf(x -> x.uuid.equals(data.uuid)); // todo check if this works
+
+            for (ItemStack stack : data.generateRewards(p)) {
+                PlayerUtils.giveItem(stack, p);
+            }
+
         }
+    }
+
+    @Override
+    public List<StatContext> getStatAndContext(LivingEntity en) {
+        List<ExactStatData> list = new ArrayList<>();
+
+        if (WorldUtils.isMapWorldClass(en.level())) {
+            for (String s : this.affixesTaken) {
+                list.addAll(ExileDB.MapAffixes().get(s).getStats(100, Load.Unit(en).getLevel()));
+            }
+        }
+
+        var ctx = new MiscStatCtx(list);
+
+        return Arrays.asList(ctx);
     }
 }

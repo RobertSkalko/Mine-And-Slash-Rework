@@ -1,5 +1,7 @@
 package com.robertx22.age_of_exile.prophecy.gui;
 
+import com.robertx22.age_of_exile.database.data.map_affix.MapAffix;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.bases.BaseScreen;
 import com.robertx22.age_of_exile.gui.bases.INamedScreen;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -49,7 +51,7 @@ public class ProphecyScreen extends BaseScreen implements INamedScreen {
             int i = 0;
             int yc = 0;
 
-            for (ProphecyData offer : data.offers) {
+            for (ProphecyData offer : data.rewardOffers) {
 
                 int x = this.guiLeft + 9 + (i * SLOT_SPACING);
                 int y = this.guiTop + 52 + (yc * SLOT_SPACING);
@@ -66,21 +68,26 @@ public class ProphecyScreen extends BaseScreen implements INamedScreen {
 
             i = 0;
 
-            for (ProphecyData offer : data.taken) {
-
+            if (data.numMobAffixesCanAdd > 0) {
+                for (String id : data.affixOffers) {
+                    MapAffix affix = ExileDB.MapAffixes().get(id);
+                    int x = this.guiLeft + 9 + (i * SLOT_SPACING);
+                    int y = this.guiTop + 107;
+                    this.addRenderableWidget(new ProphecyAffixButton(affix, ProphecyAffixButton.Info.IS_OFFER, true, x, y));
+                    i++;
+                }
+            }
+            for (String id : data.affixesTaken) {
+                MapAffix affix = ExileDB.MapAffixes().get(id);
                 int x = this.guiLeft + 9 + (i * SLOT_SPACING);
-                int y = this.guiTop + 125;
-
-                this.addRenderableWidget(new ProphecyButton(offer, false, x, y));
-
+                int y = this.guiTop + 153;
+                this.addRenderableWidget(new ProphecyAffixButton(affix, ProphecyAffixButton.Info.IS_TAKEN, false, x, y));
                 i++;
             }
 
-            this.addRenderableWidget(new MainProphecyButton(guiLeft + sizeX / 2 - MainProphecyButton.FAVOR_BUTTON_SIZE_X / 2, guiTop + 7));
 
-            if (data.canClaim()) {
-                this.addRenderableWidget(new ClaimProphecyRewardsButton(guiLeft + 65, guiTop + 186));
-            }
+            this.addRenderableWidget(new MainProphecyButton(guiLeft + sizeX / 2 - MainProphecyButton.FAVOR_BUTTON_SIZE_X / 2, guiTop + 0));
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,23 +111,11 @@ public class ProphecyScreen extends BaseScreen implements INamedScreen {
                             .getGuiScaledHeight() / 2 - sizeY / 2, 0, 0, sizeX, sizeY
             );
 
-            int xpos = guiLeft + 10;
-            int ypos = guiTop + 157;
-
-            int width = 159;
-            int height = 11;
-            var progress = Load.player(mc.player).prophecy.progress;
-            gui.blit(SlashRef.guiId("prophecy/base"), xpos, ypos, 0, 0, width, height, width, height);
-            gui.blit(SlashRef.guiId("prophecy/fill"), xpos, ypos, 0, 0, (int) (width * progress / 100F), height, width, height);
-
-
             super.render(gui, x, y, ticks);
 
-            String txt = Words.PROPHECIES.locName().getString();
-            //  GuiUtils.renderScaledText(gui, guiLeft + 88, guiTop + 22, 1, txt, ChatFormatting.DARK_PURPLE);
-
-            String tx2 = Words.CURRENTLY_SELECTED.locName().getString();
-            GuiUtils.renderScaledText(gui, guiLeft + 88, guiTop + 116, 1, tx2, ChatFormatting.YELLOW);
+            GuiUtils.renderScaledText(gui, guiLeft + 88, guiTop + 35, 1, Words.REWARD_OFFERS.locName().getString(), ChatFormatting.LIGHT_PURPLE);
+            GuiUtils.renderScaledText(gui, guiLeft + 88, guiTop + 98, 1, Words.CURSE_OFFERS.locName().getString(), ChatFormatting.RED);
+            GuiUtils.renderScaledText(gui, guiLeft + 88, guiTop + 144, 1, Words.ACCEPTED_CURSES.locName().getString(), ChatFormatting.YELLOW);
 
             //buttons.forEach(b -> b.renderToolTip(matrix, x, y));
         } catch (Exception e) {

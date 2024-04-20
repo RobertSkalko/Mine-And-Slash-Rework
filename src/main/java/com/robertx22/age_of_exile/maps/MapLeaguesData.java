@@ -51,7 +51,7 @@ public class MapLeaguesData {
     }
 
     public int getTotalSpawnsRemainingFromAllLeagues() {
-        return (int) map.values().stream().mapToInt(x -> x.remainingSpawns).count();
+        return (int) map.values().stream().mapToInt(x -> x.remainingSpawns).sum();
     }
 
     public List<LeagueMechanic> getLeagueMechanics() {

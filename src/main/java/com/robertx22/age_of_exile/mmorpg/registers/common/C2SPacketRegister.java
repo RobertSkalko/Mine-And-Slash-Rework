@@ -4,14 +4,13 @@ import com.robertx22.age_of_exile.capability.player.data.Backpacks;
 import com.robertx22.age_of_exile.characters.CreateCharPacket;
 import com.robertx22.age_of_exile.characters.LoadCharPacket;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
+import com.robertx22.age_of_exile.prophecy.AcceptProphecyAffixPacket;
 import com.robertx22.age_of_exile.prophecy.AcceptProphecyPacket;
-import com.robertx22.age_of_exile.prophecy.ClaimProphecyRewardsPacket;
 import com.robertx22.age_of_exile.vanilla_mc.packets.*;
 import com.robertx22.age_of_exile.vanilla_mc.packets.perks.PerkChangePacket;
 import com.robertx22.age_of_exile.vanilla_mc.packets.spells.TellServerToCancelSpellCast;
 import com.robertx22.age_of_exile.vanilla_mc.packets.spells.TellServerToCastSpellPacket;
 import com.robertx22.library_of_exile.main.Packets;
-import net.minecraft.core.BlockPos;
 
 public class C2SPacketRegister {
 
@@ -32,7 +31,7 @@ public class C2SPacketRegister {
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new CreateCharPacket(""), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new LoadCharPacket(0), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new AcceptProphecyPacket(""), i++);
-        Packets.registerClientToServerPacket(MMORPG.NETWORK, new ClaimProphecyRewardsPacket(), i++);
+        Packets.registerClientToServerPacket(MMORPG.NETWORK, new AcceptProphecyAffixPacket(""), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new LockTogglePacket(), i++);
 
 

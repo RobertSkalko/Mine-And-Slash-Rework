@@ -39,7 +39,7 @@ public class SetProphecyFavor {
             }
         }
 
-        Load.player(player).prophecy.favor = num;
+        Load.player(player).prophecy.forceSetCurrency(num);
         Load.player(player).playerDataSync.setDirty();
 
         return 0;

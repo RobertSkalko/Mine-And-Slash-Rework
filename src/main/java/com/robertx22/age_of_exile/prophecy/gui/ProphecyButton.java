@@ -16,8 +16,7 @@ public class ProphecyButton extends ImageButton {
 
     ProphecyData data;
 
-    boolean cantake = false;
-
+    
     public ProphecyButton(ProphecyData data, boolean canTake, int x, int y) {
         super(x, y, 16, 16, 0, 0, 1, ID, (action) -> {
             if (canTake) {

@@ -7,10 +7,14 @@ import java.util.Locale;
 
 // to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
+    CURSE_OFFERS("Curse Offers:"),
+    REWARD_OFFERS("Reward Offers:"),
+    ACCEPTED_CURSES("Accepted Curses:"),
+
     LOAD("Load"),
     CLAIM("Claim"),
     ITEM("Item"),
-    CURRENT_FAVOR_CURRENCY("Current Favor: %1$s"),
+    CURRENT_PROPHECY_CURRENCY("Current Prophecy Coins: %1$s"),
     AVG_LVL("Average LVL: %1$s"),
     AVG_TIER("Average Tier: %1$s"),
     X_ITEMS("Reward Amount: %1$s"),
@@ -161,6 +165,9 @@ public enum Words implements IAutoLocName {
     None("None"),
 
     Player_Affixes("Player Affixes"),
+    ProphecyPlayerAffix("Player Gains Debuff:"),
+    ProphecyPlayerAffixTaken("Currently Taken Debuff:"),
+    ProphecyPlayerAffixInfo("Your rate of Prophecy Coins gain will increase."),
 
     Character("Character"),
     Characters("Characters"),

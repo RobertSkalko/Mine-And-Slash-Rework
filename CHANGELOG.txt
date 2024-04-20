@@ -1,4 +1,16 @@
 v.5.4.0
+
+Starting with this update, I will try to create League-like content for the endgame. 
+This update will start with the Prophecy League!
+
+It works like this:
+- you find altars in maps
+- the altars allow you to apply curses to yourself
+- the more curses you have, the more currency you gain by killing mobs in maps
+- spend that currency on your pick of prophecy rewards like "3 rare boots" or "5 runes", it's a way to semi-target farm items you want
+- your curses are reset when you start a new map
+- prophecy altars always appear in maps while the league is ongoing, at the start of next league, altars will be rarer
+
 - added a /mine_and_slash report map_problem command
 - fixed the missing crop stage requirement for all the crops and professions.. 
 - added config in main hub for cast fail msgs
@@ -8,6 +20,8 @@ This is meant for players who don't want to mess with inviting to parties etc
 - runed items now have a min drop lvl
 - attempt fix double death xp loss etc
 - improved hotbar ui a bit
+- should fix harvest not working
+- changed how harvest and league mechanics spawn (now its a chance to spawn in the same place mobs spawn, scattered through the dungeon)
 - particles are now sent in 1 packet which should hopefully improve server performance
 - summons will no longer get map mob stats
 - added map lives system, higher rarity maps now have less lives.
@@ -33,13 +47,6 @@ Now your item starts with say 100 potential and you spend potential to use curre
 The system was too confusing and nobody knew what it was. It was meant to be a less restrictive system that just reduced your chances of good outcomes the more you crafted but, 
 I decided to just go back to the old system where you either can or can't craft an item anymore.
 
-New Feature, Prophecies:  TODO MIGHT TURN THIS INTO A LEAGUE FEATURE
-
-Killing Mobs in maps now rewards favor currency which can be spent to buy prophecy rewards.
-Prophecy rewards are a way to target farm things! You can buy stuff like "3 Epic Boots" or "5 runes".
-The higher mob lvl and tier you kill while filling up the progress bar, the higher lvl and tier rewards you will have at the end.
-The more specific the reward, the costlier it is. A Sword reward is more expensive than an any gear reward etc
-To encourage tankier playstyles, dying in maps now reduces both your prophecy progress bar and takes a huge chunk of your currency away.
 
 Chaos stats added back
 

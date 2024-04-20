@@ -50,6 +50,43 @@ public class HarvestLeague extends LeagueMechanic {
     }
 
     @Override
+    public LeagueStructure getStructure() {
+        return new LeagueStructure(this) {
+            @Override
+            public BlockPos getTeleportPos(BlockPos pos) {
+                BlockPos p = MapData.getStartChunk(pos).getBlockAt(0, 0, 0);
+                p = new BlockPos(p.getX() + 10, startY() + 5 + 3, p.getZ() + 22);
+                return p;
+            }
+
+
+            @Override
+            public LeaguePiecesList getPieces() {
+                return new LeaguePiecesList(Arrays.asList(
+                        new LeagueStructurePieces(2, "harvest/river"),
+                        new LeagueStructurePieces(2, "harvest/circle")
+                ));
+            }
+
+            @Override
+            public int startY() {
+                return 85;
+            }
+
+
+            @Override
+            public boolean isInsideLeague(ServerLevel level, BlockPos pos) {
+                return pos.getY() >= startY() && pos.getY() <= (startY() + 30);
+            }
+        };
+    }
+
+    @Override
+    public float getBaseSpawnChance() {
+        return 30;
+    }
+
+    @Override
     public void onKillMob(MapData map, LootInfo info) {
         map.leagues.get(this).map.modify(HarvestLeague.KILLS, 0D, x -> x + 1D);
 
@@ -154,33 +191,6 @@ public class HarvestLeague extends LeagueMechanic {
         return EntityType.SPIDER;
     }
 
-
-    @Override
-    public BlockPos getTeleportPos(BlockPos pos) {
-        BlockPos p = MapData.getStartChunk(pos).getBlockAt(0, 0, 0);
-        p = new BlockPos(p.getX() + 10, startY() + 5 + 3, p.getZ() + 22);
-        return p;
-    }
-
-
-    @Override
-    public LeaguePiecesList getPieces() {
-        return new LeaguePiecesList(Arrays.asList(
-                new LeagueStructurePieces(2, "harvest/river"),
-                new LeagueStructurePieces(2, "harvest/circle")
-        ));
-    }
-
-    @Override
-    public int startY() {
-        return 85;
-    }
-
-
-    @Override
-    public boolean isInsideLeague(ServerLevel level, BlockPos pos) {
-        return pos.getY() >= startY() && pos.getY() <= (startY() + 30);
-    }
 
     @Override
     public String GUID() {

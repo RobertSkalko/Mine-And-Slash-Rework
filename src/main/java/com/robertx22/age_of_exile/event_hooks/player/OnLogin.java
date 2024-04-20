@@ -40,8 +40,7 @@ public class OnLogin {
 
             data.sync.setDirty();
 
-            Load.player(player).prophecy.onLoginRegenIfEmpty(player);
-
+          
             Load.player(player).playerDataSync.setDirty();
 
 

@@ -15,7 +15,7 @@ public class LeagueBlockData {
     public boolean finished = false;
 
     public LeagueMechanic getMechanic(ServerLevel sw, BlockPos pos) {
-        return ExileDB.LeagueMechanics().getFilterWrapped(x -> x.isInsideLeague(sw, pos)).list.get(0);
+        return ExileDB.LeagueMechanics().getFilterWrapped(x -> x.getStructure().isInsideLeague(sw, pos)).list.get(0);
     }
 
     public static class StructureRadius {

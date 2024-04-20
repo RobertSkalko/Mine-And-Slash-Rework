@@ -49,6 +49,8 @@ public class MapData {
     public static MapData newMap(Player p, MapItemData map, MapsData maps) {
 
 
+        Load.player(p).prophecy.affixesTaken.clear();
+
         maps.deleteOldMap(p);
 
         MapData data = new MapData();
@@ -67,7 +69,7 @@ public class MapData {
     }
 
     public void spawnRandomLeagueMechanic(Level level, BlockPos pos) {
-        if (LeagueMechanics.NONE.isInsideLeague((ServerLevel) level, pos)) {
+        if (LeagueMechanics.NONE.getStructure().isInsideLeague((ServerLevel) level, pos)) {
 
             var list = leagues.getLeagueMechanics().stream().filter(x -> leagues.get(x).remainingSpawns > 0).collect(Collectors.toList());
 

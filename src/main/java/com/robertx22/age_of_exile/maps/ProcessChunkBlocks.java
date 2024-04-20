@@ -110,7 +110,7 @@ public class ProcessChunkBlocks {
                             var ran = DungeonBuilder.createRandom(0l, cpos);
 
                             for (LeagueMechanic mech : opt.get().leagues.getLeagueMechanics()) {
-                                mech.tryGenerate(level, cpos, ran);
+                                mech.getStructure().tryGenerate(level, cpos, ran);
                                 generateData(level, chunk, room); // for league mechanics we instantly gen the data because we need to know the spawn pos, which is gained by processing the spawn block..
                             }
                             gened++;
