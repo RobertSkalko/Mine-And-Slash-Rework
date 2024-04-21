@@ -6,11 +6,13 @@ import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
-    PROPHECIES_GUIDE("1) Kill Monsters in Maps to Progress the Bar and earn Favor\n\n2) When Bar is full, you can choose rewards\n\n3) Click Claim after choosing the rewards\n\nAverage lvl/tier depends on which Maps you do"),
+    PROPHECIES_GUIDE("1) Kill Monsters while Cursed to gain Prophecy Coins\n\n2) You can Buy Rewards in this GUI\n\n3) The More curses you accept, the more coins you will earn.\n\nYour Coins and Prophecies reset on entering another map."),
 
     PROPHECY_MAP_DEATHCURRENCY("You lost %1$s Prophecy Coins"),
+    TP_TO_DUNGEON_MAPNAME("Teleported to the [%1$s] Dungeon"),
     ITEM_CANT_CORRUPT_TWICE("This item is already corrupted."),
     ALT_TO_SHOW_OTHER_SPELL("[Alt] to show the other Spell"),
+    MUST_BE_IN_MAP_TO_ACCEPT_PROPHECY("You must be inside the same Map Dungeon to accept Prophecy Rewards"),
     NOT_ENOUGH_FAVOR_TO_BUY_PROPHECY("Not enough Currency to buy the Prophecy. You can gain more Currency by killing dungeon mobs while under Prophecy Debuffs."),
     RESISTS_TOO_LOW_FOR_MAP("You lack Resistances to Open/Enter this Map."),
     MAX_MAP_RARITY_FOR_LVL("This map is at maximum possible rarity for it's level."),

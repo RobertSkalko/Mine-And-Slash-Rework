@@ -15,11 +15,13 @@ public class ProphecyGeneration {
 
     public static ProphecyData generate(Player p) {
 
+        //  var pdata = Load.player(p).prophecy;
 
-        var pdata = Load.player(p).prophecy;
+        var map = Load.mapAt(p.level(), p.blockPosition());
 
-        int lvl = pdata.getAverageLevel();
-        int tier = pdata.getAverageTier();
+        
+        int lvl = map.map.lvl;
+        int tier = map.map.tier;
 
         // GearRarity rar = ExileDB.GearRarities().getFilterWrapped(x -> x.map_tiers.isInRange(tier)).list.get(0);
 

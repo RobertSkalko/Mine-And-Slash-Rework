@@ -807,7 +807,7 @@ public class EntityData implements ICap, INeededForClient {
 
         setExp(exp + i);
 
-        if (exp > this.getExpRequiredForLevelUp()) {
+        if (exp >= this.getExpRequiredForLevelUp()) {
             if (this.CheckIfCanLevelUp() && this.CheckLevelCap()) {
                 this.LevelUp(player);
             }

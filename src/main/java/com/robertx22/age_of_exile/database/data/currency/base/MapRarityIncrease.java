@@ -48,7 +48,7 @@ public class MapRarityIncrease extends Currency {
 
     @Override
     public String locDescForLangFile() {
-        return "Upgrades Map Rarity.\nMaps with higher rarities can drop better and higher rarity gear but are also more difficult to beat.";
+        return "Upgrades Map Rarity. Maps with higher rarities can drop better and higher rarity gear but are also more difficult to beat.";
     }
 
     @Override

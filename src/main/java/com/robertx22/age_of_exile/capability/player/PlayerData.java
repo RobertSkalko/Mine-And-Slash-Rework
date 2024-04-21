@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.capability.player.helper.JewelInvHelper;
 import com.robertx22.age_of_exile.capability.player.helper.MyInventory;
 import com.robertx22.age_of_exile.characters.CharStorageData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
+import com.robertx22.age_of_exile.gui.stats.SavedStatCtxList;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.prophecy.PlayerProphecies;
 import com.robertx22.age_of_exile.saveclasses.DeathStatsData;
@@ -14,7 +15,6 @@ import com.robertx22.age_of_exile.saveclasses.perks.TalentsData;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellCastingData;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellSchoolsData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
-import com.robertx22.age_of_exile.saveclasses.unit.stat_calc.CtxStats;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_calc.StatCalculation;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -34,7 +34,6 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -94,7 +93,7 @@ public class PlayerData implements ICap {
     public transient Player player;
 
     // so players know where their stats come from in the future gui
-    public CtxStats ctxStats = new CtxStats(Arrays.asList());
+    public SavedStatCtxList ctxStats = new SavedStatCtxList();
 
     public TeamData team = new TeamData();
     public TalentsData talents = new TalentsData();
@@ -177,7 +176,7 @@ public class PlayerData implements ICap {
         this.buff = loadOrBlank(PlayerBuffData.class, new PlayerBuffData(), nbt, BUFFS, new PlayerBuffData());
         this.rested_xp = loadOrBlank(RestedExpData.class, new RestedExpData(), nbt, RESTED_XP, new RestedExpData());
         this.characters = loadOrBlank(CharStorageData.class, new CharStorageData(), nbt, CHARACTERS, new CharStorageData());
-        this.ctxStats = loadOrBlank(CtxStats.class, new CtxStats(), nbt, "ctx", new CtxStats());
+        this.ctxStats = loadOrBlank(SavedStatCtxList.class, new SavedStatCtxList(), nbt, "ctx", new SavedStatCtxList());
 
         skillGemInv.fromTag(nbt.getList(GEMS, 10)); // todo
         auraInv.fromTag(nbt.getList(AURAS, 10)); // todo

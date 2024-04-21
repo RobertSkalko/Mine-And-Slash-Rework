@@ -42,11 +42,6 @@ public class PlayerProphecies implements IStatCtx {
 
     public int numMobAffixesCanAdd = 0;
 
-    private int totalTiers = 0;
-    private int totalLvls = 0;
-
-    private int lvlsAdded = 0;
-    private int tiersAdded = 0;
 
     private int favor = 0;
 
@@ -54,11 +49,6 @@ public class PlayerProphecies implements IStatCtx {
     public void clearIfNewMap(MapItemData map) {
 
         this.mapid = map.uuid;
-
-        totalLvls = 0;
-        lvlsAdded = 0;
-        totalTiers = 0;
-        tiersAdded = 0;
 
         favor = 0;
 
@@ -90,21 +80,6 @@ public class PlayerProphecies implements IStatCtx {
         this.favor = num;
     }
 
-    public int getAverageTier() {
-        if (tiersAdded < 1) {
-            return 0;
-        }
-        return totalTiers / tiersAdded;
-    }
-
-    public int getAverageLevel() {
-        if (lvlsAdded < 1) {
-            return 1;
-        }
-
-        return totalLvls / lvlsAdded;
-    }
-
 
     public void OnDeath(Player p) {
         if (WorldUtils.isDungeonWorld(p.level())) {
@@ -116,17 +91,7 @@ public class PlayerProphecies implements IStatCtx {
 
     public void onKillMobInMap(Player p, LivingEntity en) {
 
-        int tier = Load.mapAt(en.level(), en.blockPosition()).map.tier;
-
-        int lvl = Load.Unit(en).getLevel();
-
-        totalTiers += tier;
-        totalLvls += lvl;
-
-        lvlsAdded++;
-        tiersAdded++;
-
-        this.gainFavor(1);
+        this.gainFavor(GameBalanceConfig.get().PROPHECY_GAIN_PER_MOB);
     }
 
 
@@ -143,7 +108,17 @@ public class PlayerProphecies implements IStatCtx {
 
     public void tryAcceptReward(Player p, String uuid) {
 
+        var map = Load.mapAt(p.level(), p.blockPosition());
 
+        if (map == null) {
+            p.sendSystemMessage(Chats.MUST_BE_IN_MAP_TO_ACCEPT_PROPHECY.locName().withStyle(ChatFormatting.RED));
+            return;
+        }
+        if (!WorldUtils.isDungeonWorld(p.level()) || !map.map.uuid.equals(this.mapid)) {
+            // this is to stop people gathering points in lvl 1 maps and going into lvl 100 tier 100 maps to claim rewards
+            p.sendSystemMessage(Chats.MUST_BE_IN_MAP_TO_ACCEPT_PROPHECY.locName().withStyle(ChatFormatting.RED));
+            return;
+        }
         ProphecyData data = rewardOffers.stream().filter(x -> x.uuid.equals(uuid)).findAny().get();
 
         if (data != null) {

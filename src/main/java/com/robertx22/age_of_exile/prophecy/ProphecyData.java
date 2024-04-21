@@ -27,8 +27,10 @@ public class ProphecyData {
 
         var data = Load.player(p).prophecy;
 
-        int lvl = data.getAverageLevel();
-        int tier = data.getAverageTier();
+        var map = Load.mapAt(p.level(), p.blockPosition());
+
+        int lvl = map.map.lvl;
+        int tier = map.map.tier;
 
         for (int i = 0; i < amount; i++) {
 

@@ -12,6 +12,7 @@ public class PlayerMapData {
     // there is always  1 map per player, so this isnt needed, player id is the current map id
     //public String currentMapId = "";
 
+    public boolean sendMapTpMsg = false;
     public String tpbackdim = "";
     public long tp_back_pos = 0;
     public long tp_back_from_league_pos = 0;

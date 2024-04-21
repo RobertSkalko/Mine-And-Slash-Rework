@@ -17,6 +17,7 @@ public interface IBaseAutoLoc extends IGUID {
         PROPHECY,
         CHAOS_STAT,
         LEAGUE,
+        DUNGEON,
 
         Unique_Items,
         Spells,

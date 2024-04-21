@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.capability.player.helper.GemInventoryHelper;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.AttributeStat;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.event_hooks.my_events.CollectGearEvent;
+import com.robertx22.age_of_exile.gui.stats.SavedStatCtxList;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.saveclasses.unit.GearData;
@@ -74,7 +75,7 @@ public class StatCalculation {
 
 
         if (entity instanceof Player p) {
-            Load.player(p).ctxStats = sc;
+            Load.player(p).ctxStats = new SavedStatCtxList(sc);
         }
 
         InCalc incalc = new InCalc(unit);

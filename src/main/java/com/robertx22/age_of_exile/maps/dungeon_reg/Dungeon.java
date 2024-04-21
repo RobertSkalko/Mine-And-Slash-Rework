@@ -5,6 +5,8 @@ import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.maps.DungeonRoom;
 import com.robertx22.age_of_exile.maps.generator.RoomType;
 import com.robertx22.age_of_exile.maps.room_adders.BaseRoomAdder;
+import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
@@ -16,12 +18,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class Dungeon implements IAutoGson<Dungeon>, JsonExileRegistry<Dungeon> {
+public class Dungeon implements IAutoGson<Dungeon>, JsonExileRegistry<Dungeon>, IAutoLocName {
 
     public static Dungeon SERIALIZER = new Dungeon();
 
     public String id = "";
     public int weight = 1000;
+    public String name = "";
 
     public boolean can_be_main = true;
 
@@ -139,13 +142,29 @@ public class Dungeon implements IAutoGson<Dungeon>, JsonExileRegistry<Dungeon> {
         return weight;
     }
 
+    @Override
+    public AutoLocGroup locNameGroup() {
+        return AutoLocGroup.DUNGEON;
+    }
+
+    @Override
+    public String locNameLangFileGUID() {
+        return SlashRef.MODID + ".mmorpg." + GUID();
+    }
+
+    @Override
+    public String locNameForLangFile() {
+        return name;
+    }
+
     public static class Builder {
 
         Dungeon dungeon = new Dungeon();
 
-        public static Builder of(String id, BaseRoomAdder adder) {
+        public static Builder of(String id, String name, BaseRoomAdder adder) {
             Builder b = new Builder();
             b.dungeon.id = id;
+            b.dungeon.name = name;
             adder.addRoomsToDungeon(b.dungeon);
             return b;
         }

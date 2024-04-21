@@ -29,6 +29,7 @@ public class MapData {
 
     private HashMap<String, Integer> lives = new HashMap<>();
 
+    public String dungeonid = "";
 
     public int getLives(Player p) {
         int cur = lives.getOrDefault(p.getStringUUID(), map.getRarity().map_lives);
@@ -88,6 +89,10 @@ public class MapData {
         if (p.level().isClientSide) {
             return;
         }
+
+
+        Load.player(p).map.sendMapTpMsg = true;
+
         Load.player(p).map.tpbackdim = p.level().dimensionTypeId().location().toString();
         Load.player(p).map.tp_back_pos = p.blockPosition().asLong();
 
@@ -100,6 +105,7 @@ public class MapData {
         world.setBlock(new BlockPos(pos.getX(), 54, pos.getZ()), Blocks.BEDROCK.defaultBlockState(), 2);
 
         TeleportUtils.teleport((ServerPlayer) p, pos, WorldUtils.DUNGEON_DIM_ID);
+
 
     }
 

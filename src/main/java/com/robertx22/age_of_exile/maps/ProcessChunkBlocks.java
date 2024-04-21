@@ -88,6 +88,8 @@ public class ProcessChunkBlocks {
 
                 var map = Load.mapAt(level, pos);
 
+                map.dungeonid = builder.dungeon.GUID();
+
                 for (ChunkPos cpos : terrainChunks) {
                     if (!level.hasChunk(cpos.x, cpos.z)) {
                         continue;

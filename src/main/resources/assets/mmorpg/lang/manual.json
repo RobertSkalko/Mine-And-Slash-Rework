@@ -17,6 +17,13 @@
 
 "_comment": "STATIONS",
 
+"block.mmorpg.station.salvaging": "Salvage Station",
+"block.mmorpg.station.cooking": "Cooking Station",
+"block.mmorpg.station.alchemy": "Alchemy Station",
+"block.mmorpg.station.enchanting": "Enchanting Station",
+"block.mmorpg.station.gear_crafting": "Gear Crafting Station",
+
+
 "block.mmorpg.teleporter": "Map Device",
 
 "_comment": "ITEM TOOLTIPS",

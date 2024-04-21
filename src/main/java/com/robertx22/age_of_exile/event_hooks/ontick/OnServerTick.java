@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.capability.player.PlayerData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.stat_compat.StatCompat;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.maps.ProcessChunkBlocks;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -12,6 +13,7 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.RestoreResourceEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -33,14 +35,25 @@ public class OnServerTick {
             if (player.level() instanceof ServerLevel sw) {
                 if (WorldUtils.isMapWorldClass(sw)) {
 
+                    var map = Load.mapAt(player.level(), player.blockPosition());
+
+                    var pro = Load.player(player).prophecy;
+
+                    if (!pro.mapid.equals(map.map.uuid)) {
+                        pro.clearIfNewMap(map.map);
+                    }
+
                     if (player.tickCount % (20 * 5) == 0) {
-                        var map = Load.mapAt(player.level(), player.blockPosition());
+                        //  var map = Load.mapAt(player.level(), player.blockPosition());
 
-                        var pro = Load.player(player).prophecy;
-
-                        if (!pro.mapid.equals(map.map.uuid)) {
-                            pro.clearIfNewMap(map.map);
+                        if (!map.dungeonid.isEmpty()) {
+                            if (Load.player(player).map.sendMapTpMsg) {
+                                Load.player(player).map.sendMapTpMsg = false;
+                                player.sendSystemMessage(Chats.TP_TO_DUNGEON_MAPNAME.locName(ExileDB.Dungeons().get(map.dungeonid).locName().withStyle(ChatFormatting.DARK_PURPLE))
+                                        .withStyle(ChatFormatting.LIGHT_PURPLE));
+                            }
                         }
+
 
                         if (map.getLives(player) < 1) {
                             player.sendSystemMessage(Chats.NO_MORE_LIVES_REMAINING.locName());
