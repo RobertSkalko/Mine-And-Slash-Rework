@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.database.data.map_affix;
 
 import com.robertx22.age_of_exile.database.data.StatMod;
+import com.robertx22.age_of_exile.database.data.league.ProphecyLeague;
 import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.maps.AffectedEntities;
@@ -26,8 +27,15 @@ public class MapAffix implements JsonExileRegistry<MobAffix>, IAutoGson<MapAffix
     public Elements map_resist = Elements.Physical;
     public int map_resist_bonus_needed = 0;
 
+    public String req = "";
+
     public MapAffix(String id) {
         this.id = id;
+    }
+
+    public MapAffix setProphecyLeague() {
+        this.req = new ProphecyLeague().GUID();
+        return this;
     }
 
     public MapAffix addMod(StatMod mod) {

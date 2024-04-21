@@ -67,7 +67,7 @@ public class UniqueStatsData implements IGearPartTooltip, IRerollable, IStatsCon
         List<Component> list = new ArrayList<Component>();
 
         getAllStatsWithCtx(gear, info).forEach(x -> {
-            if (!x.mod.GetStat().is_long) {
+            if (true || !x.mod.GetStat().is_long) {
                 list.addAll(x.GetTooltipString(info));
             }
         });

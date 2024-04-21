@@ -46,7 +46,7 @@ public class MapBlueprint extends RarityItemBlueprint {
 
         data.lvl = level.get();
 
-    
+
         genAffixes(data, rarity);
 
 
@@ -61,10 +61,10 @@ public class MapBlueprint extends RarityItemBlueprint {
 
         for (int i = 0; i < amount; i++) {
 
-            MapAffix affix = ExileDB.MapAffixes().random();
+            MapAffix affix = ExileDB.MapAffixes().getFilterWrapped(x -> x.req.isEmpty()).random();
 
             while (affixes.contains(affix.GUID()) /*|| affix.isBeneficial()*/) {
-                affix = ExileDB.MapAffixes().random();
+                affix = ExileDB.MapAffixes().getFilterWrapped(x -> x.req.isEmpty()).random();
             }
             int percent = RandomUtils.RandomRange(0, 100);
             map.affixes.add(new MapAffixData(affix, percent));

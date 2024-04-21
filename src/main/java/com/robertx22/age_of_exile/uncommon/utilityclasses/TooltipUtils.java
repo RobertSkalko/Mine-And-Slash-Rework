@@ -244,6 +244,7 @@ public class TooltipUtils {
         if (lvl > playerlvl) {
             color = ChatFormatting.RED;
         }
+
         return Itemtips.LEVEL_TIP.locName()
                 .withStyle(color)
                 .append(Component.literal(lvl + "")

@@ -13,13 +13,12 @@ public class UniqueGearPart extends BlueprintPart<UniqueGear, GearBlueprint> {
 
     @Override
     protected UniqueGear generateIfNull() {
-
         try {
-
             var filt = ExileDB.UniqueGears()
                     .getWrapped()
                     .of(x -> x.rarity.equals(blueprint.rarity.get().GUID()))
                     .of(x -> blueprint.info.map_tier >= x.min_tier)
+                    .of(x -> x.canSpawnInLeague(blueprint.info.league))
                     .of(x -> x.getBaseGear().gear_slot.equals(blueprint.gearItemSlot.get().gear_slot));
 
             if (!filt.list.isEmpty()) {

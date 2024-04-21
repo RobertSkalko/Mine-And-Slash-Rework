@@ -12,7 +12,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatCtx;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.AffixData;
-import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.tags.all.SlotTags;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
@@ -164,7 +164,7 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
             list.addAll(affix.GetAllStats(lvl));
         }
 
-        return Arrays.asList(new MiscStatCtx(list));
+        return Arrays.asList(new SimpleStatCtx(StatContext.StatCtxType.JEWEL, list));
     }
 
     @Override

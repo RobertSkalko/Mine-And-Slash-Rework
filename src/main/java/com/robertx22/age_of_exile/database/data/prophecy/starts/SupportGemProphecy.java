@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.prophecy.starts;
 
+import com.robertx22.age_of_exile.database.data.prophecy.ProphecyModifierType;
 import com.robertx22.age_of_exile.database.data.prophecy.ProphecyStart;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.ItemBlueprint;
@@ -14,6 +15,10 @@ public class SupportGemProphecy extends ProphecyStart {
         return new SkillGemBlueprint(info, SkillGemData.SkillGemType.SUPPORT);
     }
 
+    @Override
+    public boolean acceptsModifier(ProphecyModifierType type) {
+        return true;
+    }
 
     @Override
     public String GUID() {

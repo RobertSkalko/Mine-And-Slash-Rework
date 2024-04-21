@@ -144,6 +144,7 @@ water_focus
 spell_water_damage
 shout_cast_time
 fire_cdr
+health_per_10_strength
 proj_dmg_received
 plus_lvl_golem_spells
 thorns_spell_dmg_taken
@@ -229,6 +230,7 @@ plus_lvl_missile_spells
 give_taunt_stance_to_self_on_tick
 chaos_dot_damage
 damage_cdr
+mana_per_10_strength
 learn_shred
 spell_mssteal
 offensive_eff_dur_u_cast
@@ -531,6 +533,7 @@ energy_on_hit_hit
 all_penetration
 water_penetration
 beast_cdr
+energy_per_10_dexterity
 chance_of_blind
 learn_summon_skeleton_army
 unknown
@@ -556,6 +559,7 @@ learn_explosive_arrow
 plus_lvl_staff_spell_spells
 buff_cast_time
 lightning_spell_dmg_taken
+mana_per_10_dexterity
 elemental_health_leech
 inc_effect_of_curse_buff_given
 plus_phys_to_physical

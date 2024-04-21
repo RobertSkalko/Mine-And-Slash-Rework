@@ -6,6 +6,7 @@ import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 public class ProphecyStarts implements ExileRegistryInit {
     @Override
     public void registerAll() {
+        new ProphecyUniqueGearProphecy().registerToExileRegistry();
         new GearProphecy().registerToExileRegistry();
         new RuneProphecy().registerToExileRegistry();
         new JewelProphecy().registerToExileRegistry();

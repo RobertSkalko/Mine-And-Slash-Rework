@@ -58,7 +58,12 @@ public class DatapackStats implements ExileRegistryInit {
 
     public static Stat BLOOD_PER_10STR = new MoreXPerYOf(DatapackStats.STR, Blood.getInstance(), 10);
     public static Stat HEALTH_PER_10_INT = new MoreXPerYOf(DatapackStats.INT, Health.getInstance(), 10);
+    public static Stat HEALTH_PER_10_STR = new MoreXPerYOf(DatapackStats.STR, Health.getInstance(), 10);
     public static Stat MANA_PER_10_INT = new MoreXPerYOf(DatapackStats.INT, Mana.getInstance(), 10);
+    public static Stat MANA_PER_10_STR = new MoreXPerYOf(DatapackStats.STR, Mana.getInstance(), 10);
+    public static Stat MANA_PER_10_DEX = new MoreXPerYOf(DatapackStats.DEX, Mana.getInstance(), 10);
+
+    public static Stat ENERGY_PER_10_DEX = new MoreXPerYOf(DatapackStats.DEX, Energy.getInstance(), 10);
 
 
     public static Stat MOVE_SPEED = new AttributeStat("move_speed", "Move Speed", UUID.fromString("7e286d81-3fcf-471c-85b8-980072b30907"), Attributes.MOVEMENT_SPEED, true);
@@ -74,6 +79,11 @@ public class DatapackStats implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
+
+        ENERGY_PER_10_DEX.addToSerializables();
+        MANA_PER_10_DEX.addToSerializables();
+        MANA_PER_10_STR.addToSerializables();
+        HEALTH_PER_10_STR.addToSerializables();
 
         DEX.addToSerializables();
         INT.addToSerializables();

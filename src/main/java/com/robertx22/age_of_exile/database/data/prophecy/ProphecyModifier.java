@@ -15,7 +15,7 @@ public class ProphecyModifier implements JsonExileRegistry<ProphecyModifier>, IA
     public ProphecyModifierType modifier_type = ProphecyModifierType.GEAR_TYPE;
     public String id = "";
     public int weight = 1000;
-    
+
     public int tier_req = 0;
     public int lvl_req = 0;
 

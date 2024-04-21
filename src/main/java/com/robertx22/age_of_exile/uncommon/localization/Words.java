@@ -18,7 +18,7 @@ public enum Words implements IAutoLocName {
     AVG_LVL("Average LVL: %1$s"),
     AVG_TIER("Average Tier: %1$s"),
     X_ITEMS("Reward Amount: %1$s"),
-    COSTS_FAVOR("Costs %1$ss Favor"),
+    COSTS_FAVOR("Costs %1$s Prophecy Coins"),
     PROPHECIES("Prophecies"),
     CURRENTLY_SELECTED("Currently Selected"),
     Configs("Configs"),

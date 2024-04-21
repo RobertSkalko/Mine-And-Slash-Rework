@@ -57,7 +57,6 @@ public class StatCalculation {
 
         List<StatContext> gemstats = new ArrayList<>();
 
-
         if (entity instanceof Player p) {
             PlayerData playerData = Load.player(p);
             gemstats.addAll(collectGemStats(p, data, playerData, skillGem));
@@ -73,6 +72,10 @@ public class StatCalculation {
         sc.applyCtxModifierStats();
         sc.applyToInCalc(unit);
 
+
+        if (entity instanceof Player p) {
+            Load.player(p).ctxStats = sc;
+        }
 
         InCalc incalc = new InCalc(unit);
         incalc.addVanillaHpToStats(entity);

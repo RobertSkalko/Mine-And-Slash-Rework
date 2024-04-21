@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.unique_items;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
+import com.robertx22.age_of_exile.database.data.league.LeagueMechanic;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
@@ -32,10 +33,20 @@ public class UniqueGear implements JsonExileRegistry<UniqueGear>, IAutoLocName, 
     public boolean replaces_name = true;
     public String flavor_text = "";
     public String base_gear = "";
+    public String league = "";
     public boolean runable = false;
 
     public transient String langName;
 
+
+    public boolean canSpawnInLeague(LeagueMechanic league) {
+
+        if (league.isEmpty() && this.league.isEmpty()) {
+            return true;
+        }
+
+        return this.league.equals(league.GUID());
+    }
 
     @Override
     public int Weight() {

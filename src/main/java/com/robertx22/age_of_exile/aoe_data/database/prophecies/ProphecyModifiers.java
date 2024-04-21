@@ -17,7 +17,9 @@ public class ProphecyModifiers implements ExileRegistryInit {
         of(IRarity.EPIC_ID, 1000, ProphecyModifierType.GEAR_RARITY, IRarity.EPIC_ID, 1.3F).levelReq(25).tierReq(20);
         of(IRarity.LEGENDARY_ID, 500, ProphecyModifierType.GEAR_RARITY, IRarity.LEGENDARY_ID, 1.5F).levelReq(40).tierReq(25);
         of(IRarity.MYTHIC_ID, 100, ProphecyModifierType.GEAR_RARITY, IRarity.MYTHIC_ID, 2).levelReq(50).tierReq(50);
+
         of(IRarity.UNIQUE_ID, 50, ProphecyModifierType.GEAR_RARITY, IRarity.UNIQUE_ID, 3).levelReq(25).tierReq(25);
+        ///   of(IRarity.UNIQUE_ID, 10, ProphecyModifierType.GEAR_RARITY, IRarity.UNIQUE_ID, 3).levelReq(25).tierReq(25).forceLeagueUniques(LeagueMechanics.PROPHECY);
 
 
         BaseGearTypes.init();
@@ -39,6 +41,7 @@ public class ProphecyModifiers implements ExileRegistryInit {
             m.tier_req = tier;
             return this;
         }
+
 
         public Builder levelReq(int lvl) {
             m.lvl_req = lvl;

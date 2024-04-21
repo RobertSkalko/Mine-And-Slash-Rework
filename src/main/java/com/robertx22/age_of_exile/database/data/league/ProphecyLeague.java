@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.maps.MapData;
 import com.robertx22.age_of_exile.mechanics.base.LeagueBlockData;
 import com.robertx22.age_of_exile.mechanics.base.LeagueControlBlockEntity;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 
@@ -41,6 +42,11 @@ public class ProphecyLeague extends LeagueMechanic {
 
     }
 
+    @Override
+    public ChatFormatting getTextColor() {
+        return ChatFormatting.LIGHT_PURPLE;
+    }
+
 
     @Override
     public String GUID() {
@@ -50,5 +56,10 @@ public class ProphecyLeague extends LeagueMechanic {
     @Override
     public int Weight() {
         return 1000;
+    }
+
+    @Override
+    public String locNameForLangFile() {
+        return "Prophecy League";
     }
 }

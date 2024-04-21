@@ -77,6 +77,7 @@ public class ProphecyScreen extends BaseScreen implements INamedScreen {
                     i++;
                 }
             }
+            i = 0;
             for (String id : data.affixesTaken) {
                 MapAffix affix = ExileDB.MapAffixes().get(id);
                 int x = this.guiLeft + 9 + (i * SLOT_SPACING);

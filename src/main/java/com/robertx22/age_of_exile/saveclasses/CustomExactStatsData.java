@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.saveclasses;
 
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatCtx;
-import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
@@ -55,7 +55,7 @@ public class CustomExactStatsData implements IStatCtx {
         this.mods.values()
                 .forEach(x -> stats.add(x.ToExactStat(100, Load.Unit(en)
                         .getLevel())));
-        return Arrays.asList(new MiscStatCtx(stats));
+        return Arrays.asList(new SimpleStatCtx(StatContext.StatCtxType.COMMAND_EXACT_STATS, stats));
     }
 
 }

@@ -38,6 +38,8 @@ public class GearBlueprint extends RarityItemBlueprint implements ITypeBlueprint
         this.item = this.gearItemSlot.get().getRandomItem(rarity.get());
 
         if (rarity.get().is_unique_item && uniquePart.get() != null) {
+            this.item = uniquePart.get().getBaseGear().getRandomItem(rarity.get());
+
             // because uniquepart.get overrides the base gear type, we need to first check if it's unique item
             if (!uniquePart.get().force_item_id.isEmpty()) {
                 item = VanillaUTIL.REGISTRY.items().get(new ResourceLocation(uniquePart.get().force_item_id));

@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.unique_gears;
 
+import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.ProphecyUniques;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.armor.BootsUniques;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.armor.ChestUniques;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.armor.HelmetUniques;
@@ -31,6 +32,8 @@ public class UniqueGearReg implements ExileRegistryInit {
         new BowUniques().registerAll();
         new SwordUniques().registerAll();
 
-     
+
+        new ProphecyUniques().registerAll();
+
     }
 }

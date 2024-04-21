@@ -21,6 +21,9 @@ public class CtxStats {
         });
     }
 
+    public CtxStats() {
+    }
+
     public void applyToInCalc(Unit unit) {
         map.forEach((key, value) -> value
                 .forEach(v -> {

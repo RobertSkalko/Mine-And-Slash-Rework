@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalR
 import com.robertx22.age_of_exile.database.data.stats.types.misc.BonusExp;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PlayerStatUtils {
-    
+
     public static List<StatContext> addToolStats(Player p) {
         ItemStack stack = p.getMainHandItem();
         if (StackSaving.TOOL.has(stack)) {
@@ -43,10 +44,10 @@ public class PlayerStatUtils {
         int higher = (int) all.stream().filter(x -> x > lvl).count();
 
         if (higher > 0) {
-            return new MiscStatCtx(Arrays.asList(ExactStatData.noScaling(
+            return new SimpleStatCtx(StatContext.StatCtxType.BONUS_XP_PER_CHARACTER, Arrays.asList(ExactStatData.noScaling(
                     ServerContainer.get().BONUS_EXP_PERCENT_PER_HIGHER_LVL_CHARACTERS.get() * higher, ModType.FLAT, BonusExp.getInstance().GUID())));
         }
-        return new MiscStatCtx(Arrays.asList());
+        return new SimpleStatCtx(StatContext.StatCtxType.BONUS_XP_PER_CHARACTER, Arrays.asList());
     }
 
     public static List<StatContext> addNewbieElementalResists(EntityData data) {
@@ -68,7 +69,7 @@ public class PlayerStatUtils {
                 stats.add(ExactStatData.noScaling(value, ModType.FLAT, new ElementalResist(ele).GUID()));
             }
         }
-        return Arrays.asList(new MiscStatCtx(stats));
+        return Arrays.asList(new SimpleStatCtx(StatContext.StatCtxType.NEWBIE_RESISTS, stats));
 
     }
 

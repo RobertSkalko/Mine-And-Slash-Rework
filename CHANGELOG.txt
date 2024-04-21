@@ -10,6 +10,7 @@ It works like this:
 - spend that currency on your pick of prophecy rewards like "3 rare boots" or "5 runes", it's a way to semi-target farm items you want
 - your curses are reset when you start a new map
 - prophecy altars always appear in maps while the league is ongoing, at the start of next league, altars will be rarer
+- prophecies contain some exclusive gear that is curse themed, you can find it in the reward options
 
 - added a /mine_and_slash report map_problem command
 - fixed the missing crop stage requirement for all the crops and professions.. 

@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.MinMax;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPartTooltip;
@@ -135,9 +136,15 @@ public class GearTooltipUtils {
         tip.add(Component.literal(""));
 
         MutableComponent lvl = TooltipUtils.levelAndRarity(gear.lvl, Load.Unit(info.player).getLevel(), gear.getRarity());
-
-
         tip.add(lvl);
+
+        if (gear.isUnique()) {
+            if (!gear.uniqueStats.getUnique(gear).league.isEmpty()) {
+                var league = ExileDB.LeagueMechanics().get(gear.uniqueStats.getUnique(gear).league);
+                tip.add(league.locName().withStyle(league.getTextColor()));
+            }
+        }
+
 
         if (gear.isCorrupted()) {
             tip.add(Component.literal(ChatFormatting.RED + "").append(Words.Corrupted.locName()).withStyle(ChatFormatting.RED));

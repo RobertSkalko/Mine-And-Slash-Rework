@@ -2,12 +2,14 @@ package com.robertx22.age_of_exile.prophecy;
 
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
+import com.robertx22.age_of_exile.database.data.league.LeagueMechanics;
 import com.robertx22.age_of_exile.database.data.map_affix.MapAffix;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.maps.AffectedEntities;
+import com.robertx22.age_of_exile.maps.MapItemData;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatCtx;
-import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -32,6 +34,9 @@ public class PlayerProphecies implements IStatCtx {
 
     public List<String> affixOffers = new ArrayList<>();
 
+
+    public String mapid = "";
+
     public List<String> affixesTaken = new ArrayList<>();
 
 
@@ -46,6 +51,24 @@ public class PlayerProphecies implements IStatCtx {
     private int favor = 0;
 
 
+    public void clearIfNewMap(MapItemData map) {
+
+        this.mapid = map.uuid;
+
+        totalLvls = 0;
+        lvlsAdded = 0;
+        totalTiers = 0;
+        tiersAdded = 0;
+
+        favor = 0;
+
+        numMobAffixesCanAdd = 0;
+        affixesTaken.clear();
+
+        affixOffers.clear();
+        rewardOffers.clear();
+    }
+
     public int getCurrency() {
         return favor;
     }
@@ -54,10 +77,9 @@ public class PlayerProphecies implements IStatCtx {
         this.affixOffers.clear();
 
         for (int i = 0; i < 3; i++) {
-            MapAffix affix = ExileDB.MapAffixes().getFilterWrapped(x -> x.affected == AffectedEntities.Players).random();
+            MapAffix affix = ExileDB.MapAffixes().getFilterWrapped(x -> x.req.equals(LeagueMechanics.PROPHECY.GUID()) && x.affected == AffectedEntities.Players).random();
             affixOffers.add(affix.GUID());
         }
-
     }
 
     public void gainFavor(int num) {
@@ -155,7 +177,7 @@ public class PlayerProphecies implements IStatCtx {
             }
         }
 
-        var ctx = new MiscStatCtx(list);
+        var ctx = new SimpleStatCtx(StatContext.StatCtxType.PROPHECY_CURSE, list);
 
         return Arrays.asList(ctx);
     }

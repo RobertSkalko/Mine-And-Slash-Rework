@@ -5,6 +5,8 @@ import com.robertx22.age_of_exile.maps.LeagueData;
 import com.robertx22.age_of_exile.maps.MapData;
 import com.robertx22.age_of_exile.mechanics.base.LeagueBlockData;
 import com.robertx22.age_of_exile.mechanics.base.LeagueControlBlockEntity;
+import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 
@@ -14,6 +16,26 @@ public class LeagueMechanics {
 
     public static LeagueMechanic NONE = new LeagueMechanic() {
 
+
+        @Override
+        public AutoLocGroup locNameGroup() {
+            return AutoLocGroup.LEAGUE;
+        }
+
+        @Override
+        public ChatFormatting getTextColor() {
+            return ChatFormatting.WHITE;
+        }
+
+        @Override
+        public String locNameLangFileGUID() {
+            return SlashRef.MODID + ".league." + GUID();
+        }
+
+        @Override
+        public String locNameForLangFile() {
+            return "empty";
+        }
 
         @Override
         public LeagueStructure getStructure() {

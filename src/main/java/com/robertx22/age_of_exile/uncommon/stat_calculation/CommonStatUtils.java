@@ -7,7 +7,7 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.maps.MapData;
 import com.robertx22.age_of_exile.maps.MapItemData;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
-import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
@@ -33,7 +33,7 @@ public class CommonStatUtils {
             }
         }
 
-        return new MiscStatCtx(list);
+        return new SimpleStatCtx(StatContext.StatCtxType.VANILLA_STAT_COMPAT, list);
     }
 
     public static List<StatContext> addExactCustomStats(LivingEntity en) {

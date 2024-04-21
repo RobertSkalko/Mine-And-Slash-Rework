@@ -35,6 +35,13 @@ public class OnServerTick {
 
                     if (player.tickCount % (20 * 5) == 0) {
                         var map = Load.mapAt(player.level(), player.blockPosition());
+
+                        var pro = Load.player(player).prophecy;
+
+                        if (!pro.mapid.equals(map.map.uuid)) {
+                            pro.clearIfNewMap(map.map);
+                        }
+
                         if (map.getLives(player) < 1) {
                             player.sendSystemMessage(Chats.NO_MORE_LIVES_REMAINING.locName());
                             Load.player(player).map.teleportBack(player);

@@ -7,13 +7,16 @@ import com.robertx22.age_of_exile.maps.LeagueData;
 import com.robertx22.age_of_exile.maps.MapData;
 import com.robertx22.age_of_exile.mechanics.base.LeagueBlockData;
 import com.robertx22.age_of_exile.mechanics.base.LeagueControlBlockEntity;
+import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.library_of_exile.registry.ExileRegistry;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.utils.RandomUtils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 
-public abstract class LeagueMechanic implements ExileRegistry<LeagueMechanic> {
+public abstract class LeagueMechanic implements ExileRegistry<LeagueMechanic>, IAutoLocName {
     public static MapField<String> STRUCTURE = new MapField<>("structure");
 
 
@@ -47,6 +50,19 @@ public abstract class LeagueMechanic implements ExileRegistry<LeagueMechanic> {
     }
 
     public abstract void onTick(MapData map, ServerLevel level, BlockPos pos, LeagueControlBlockEntity be, LeagueBlockData data);
+
+
+    @Override
+    public AutoLocGroup locNameGroup() {
+        return AutoLocGroup.LEAGUE;
+    }
+
+    public abstract ChatFormatting getTextColor();
+
+    @Override
+    public String locNameLangFileGUID() {
+        return SlashRef.MODID + ".league." + GUID();
+    }
 
 
     @Override

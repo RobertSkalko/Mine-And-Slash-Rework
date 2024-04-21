@@ -62,6 +62,10 @@ public class UniqueGearBuilder {
         return this;
     }
 
+    public UniqueGearBuilder leagueOnly(String comment) {
+        this.uniq.league = comment;
+        return this;
+    }
 
     public UniqueGearBuilder devComment(String comment) {
         // OMAE WA MOU SHINDEIRU

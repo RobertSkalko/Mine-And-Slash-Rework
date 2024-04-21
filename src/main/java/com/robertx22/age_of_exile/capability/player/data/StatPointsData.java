@@ -4,7 +4,7 @@ import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceC
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatCtx;
-import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
@@ -50,6 +50,6 @@ public class StatPointsData implements IStatCtx {
             return stat;
         }).collect(Collectors.toList());
 
-        return Arrays.asList(new MiscStatCtx(list));
+        return Arrays.asList(new SimpleStatCtx(StatContext.StatCtxType.STAT_POINTS, list));
     }
 }

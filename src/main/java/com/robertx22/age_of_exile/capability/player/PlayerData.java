@@ -14,6 +14,7 @@ import com.robertx22.age_of_exile.saveclasses.perks.TalentsData;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellCastingData;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellSchoolsData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_calc.CtxStats;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_calc.StatCalculation;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -33,6 +34,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -91,6 +93,9 @@ public class PlayerData implements ICap {
 
     public transient Player player;
 
+    // so players know where their stats come from in the future gui
+    public CtxStats ctxStats = new CtxStats(Arrays.asList());
+
     public TeamData team = new TeamData();
     public TalentsData talents = new TalentsData();
     public StatPointsData statPoints = new StatPointsData();
@@ -143,6 +148,7 @@ public class PlayerData implements ICap {
         LoadSave.Save(buff, nbt, BUFFS);
         LoadSave.Save(rested_xp, nbt, RESTED_XP);
         LoadSave.Save(characters, nbt, CHARACTERS);
+        LoadSave.Save(ctxStats, nbt, "ctx");
 
         nbt.put(GEMS, skillGemInv.createTag());
         nbt.put(AURAS, auraInv.createTag());
@@ -171,6 +177,7 @@ public class PlayerData implements ICap {
         this.buff = loadOrBlank(PlayerBuffData.class, new PlayerBuffData(), nbt, BUFFS, new PlayerBuffData());
         this.rested_xp = loadOrBlank(RestedExpData.class, new RestedExpData(), nbt, RESTED_XP, new RestedExpData());
         this.characters = loadOrBlank(CharStorageData.class, new CharStorageData(), nbt, CHARACTERS, new CharStorageData());
+        this.ctxStats = loadOrBlank(CtxStats.class, new CtxStats(), nbt, "ctx", new CtxStats());
 
         skillGemInv.fromTag(nbt.getList(GEMS, 10)); // todo
         auraInv.fromTag(nbt.getList(AURAS, 10)); // todo

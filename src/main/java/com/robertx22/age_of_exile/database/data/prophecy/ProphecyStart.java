@@ -27,10 +27,18 @@ public abstract class ProphecyStart implements ExileRegistry<ProphecyStart>, IAu
         }
 
         @Override
+        public boolean acceptsModifier(ProphecyModifierType type) {
+            return false;
+        }
+
+        @Override
         public ItemBlueprint create(int lvl, int tier) {
             return null;
         }
     };
+
+
+    public abstract boolean acceptsModifier(ProphecyModifierType type);
 
     public abstract ItemBlueprint create(int lvl, int tier);
 

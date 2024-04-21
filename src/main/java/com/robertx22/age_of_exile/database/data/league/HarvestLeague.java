@@ -175,6 +175,11 @@ public class HarvestLeague extends LeagueMechanic {
 
     }
 
+    @Override
+    public ChatFormatting getTextColor() {
+        return ChatFormatting.GREEN;
+    }
+
     public EntityType getRandomMobToSpawn() {
         if (RandomUtils.roll(10)) {
             return EntityType.CAVE_SPIDER;
@@ -200,5 +205,10 @@ public class HarvestLeague extends LeagueMechanic {
     @Override
     public int Weight() {
         return 1000;
+    }
+
+    @Override
+    public String locNameForLangFile() {
+        return "Harvest League";
     }
 }

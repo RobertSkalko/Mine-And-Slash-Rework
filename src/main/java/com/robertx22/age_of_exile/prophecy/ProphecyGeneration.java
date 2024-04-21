@@ -41,7 +41,7 @@ public class ProphecyGeneration {
         var b = start.create(lvl, tier);
 
         for (ProphecyModifierType type : modtypes) {
-            if (type.canApplyTo(start, b) && RandomUtils.roll(type.chanceToSpawn())) {
+            if (start.acceptsModifier(type) && type.canApplyTo(start, b) && RandomUtils.roll(type.chanceToSpawn())) {
                 var mod = ExileDB.ProphecyModifiers().getFilterWrapped(x -> x.modifier_type == type).of(x -> {
                     if (x.tier_req > tier) {
                         return false;
