@@ -14,9 +14,7 @@ public class HarvestGreenChest extends LootChest {
 
     @Override
     public ItemStack generateOne(LootChestData data) {
-
         Currency currency = ExileDB.CurrencyItems().getFilterWrapped(x -> x.getDropReq().canDropInLeague(LeagueMechanics.HARVEST, data.lvl)).random();
-
         return new ItemStack(currency.getCurrencyItem(), 1 + data.getRarity().item_tier);
     }
 

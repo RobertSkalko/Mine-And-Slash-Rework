@@ -44,7 +44,7 @@ public class SharpeningStone extends GearCurrency {
                     @Override
                     public ItemStack modify(LocReqContext ctx, GearItemData data, ItemStack stack) {
                         data.data.set(GearItemData.KEYS.USED_SHARPENING_STONE, true);
-                        data.setQuality(data.getQuality() + amount, data.getQualityType());
+                        data.setQuality(data.getQuality() + amount);
                         StackSaving.GEARS.saveTo(stack, data);
                         return stack;
                     }

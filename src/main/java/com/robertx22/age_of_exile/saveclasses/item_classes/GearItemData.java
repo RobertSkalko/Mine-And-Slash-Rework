@@ -55,7 +55,6 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         public DataKey.IntKey ENCHANT_TIMES = of(new DataKey.IntKey("et"));
         public DataKey.IntKey LEVEL_TIMES = of(new DataKey.IntKey("lt"));
 
-        public DataKey.EnumKey<GearQualityType> QUALITY_TYPE = of(new DataKey.EnumKey(GearQualityType.BASE, "qt"));
     }
 
     // Stats
@@ -89,30 +88,13 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     }
 
     public float getQualityBaseStatsMulti() {
-        if (getQualityType() == GearQualityType.BASE) {
-            return 1F + (getQuality() / 100F);
-        }
-        return 1;
+        return 1F + (getQuality() / 100F);
+
     }
 
-    public GearQualityType getQualityType() {
-        return data.get(KEYS.QUALITY_TYPE);
-    }
 
-    public enum GearQualityType {
-        BASE(ChatFormatting.GOLD),
-        POT(ChatFormatting.RED);
-
-        public ChatFormatting color;
-
-        GearQualityType(ChatFormatting color) {
-            this.color = color;
-        }
-    }
-
-    public void setQuality(int a, GearQualityType type) {
+    public void setQuality(int a) {
         this.data.set(KEYS.QUALITY, a);
-        this.data.set(KEYS.QUALITY_TYPE, type);
     }
 
     public boolean isCorrupted() {

@@ -158,7 +158,7 @@ public class GearTooltipUtils {
         tip.add(Component.literal(""));
 
         if (gear.getQuality() > 0) {
-            tip.add(Itemtips.QUALITY.locName(gear.getQuality()).withStyle(gear.getQualityType().color));
+            tip.add(Itemtips.QUALITY.locName(gear.getQuality()).withStyle(ChatFormatting.GOLD));
         }
 
         if (Screen.hasShiftDown()) {

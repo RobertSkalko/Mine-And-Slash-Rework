@@ -31,12 +31,7 @@ public class QualityUpgrade extends GearCurrency {
 
                     @Override
                     public ItemStack modify(LocReqContext ctx, GearItemData data, ItemStack stack) {
-
-                        if (data.getQualityType() != GearItemData.GearQualityType.BASE) {
-                            data.setQuality(0, GearItemData.GearQualityType.BASE);
-                        }
-
-                        data.setQuality(data.getQuality() + 1, GearItemData.GearQualityType.BASE);
+                        data.setQuality(data.getQuality() + 1);
                         StackSaving.GEARS.saveTo(stack, data);
                         return stack;
                     }

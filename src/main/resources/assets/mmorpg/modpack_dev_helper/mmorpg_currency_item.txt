@@ -7,6 +7,7 @@ level_up_orb
 mastery_seal5
 orb_of_quality
 sharpening_stone5
+affix_common_reroll
 entangled_unique_reroll
 sharpening_stone0
 sharpening_stone3

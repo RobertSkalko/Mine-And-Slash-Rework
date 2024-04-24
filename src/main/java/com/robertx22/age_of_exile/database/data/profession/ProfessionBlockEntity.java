@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.database.data.profession;
 
 import com.robertx22.age_of_exile.database.data.profession.all.Professions;
-import com.robertx22.age_of_exile.database.data.profession.screen.CraftingStationMenu;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.ModErrors;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlockEntities;
@@ -10,16 +9,13 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
-import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -62,11 +58,11 @@ public class ProfessionBlockEntity extends BlockEntity {
 
     public void tick(Level level) {
         try {
-            if(craftingState == Crafting_State.ACTIVE){
+            if (craftingState == Crafting_State.ACTIVE) {
                 if (this.inventory.getInventory(INPUTS).isEmpty()) {
-                    if(recipe_locked)
+                    if (recipe_locked)
                         craftingState = Crafting_State.IDLE;
-                    else{
+                    else {
                         craftingState = Crafting_State.STOPPED;
                         ownerUUID = null;
                     }
@@ -76,17 +72,17 @@ public class ProfessionBlockEntity extends BlockEntity {
                 if (p != null && p.isAlive()) {
                     if (getProfession().GUID().equals(Professions.SALVAGING)) {
                         var rec = trySalvage(p);
-                        if(!rec.can && !recipe_locked)
+                        if (!rec.can && !recipe_locked)
                             show.clearContent();
                     } else {
-                        if(recipe_locked){
-                            if(last_recipe.canCraft(getMats())){
+                        if (recipe_locked) {
+                            if (last_recipe.canCraft(getMats())) {
                                 tryRecipe(p);
-                            }else
+                            } else
                                 craftingState = Crafting_State.IDLE;
-                        }else{
+                        } else {
                             ProfessionRecipe recipe = getCurrentRecipe();
-                            if(recipe == null){
+                            if (recipe == null) {
                                 p.sendSystemMessage(Chats.PROF_RECIPE_NOT_FOUND.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
                                 craftingState = Crafting_State.STOPPED;
                                 ownerUUID = null;
@@ -100,9 +96,9 @@ public class ProfessionBlockEntity extends BlockEntity {
                                 return;
                             }
 
-                            if(recipe.canCraft(getMats())){
+                            if (recipe.canCraft(getMats())) {
                                 var rec = tryRecipe(p);
-                                if(!rec.can){
+                                if (!rec.can) {
                                     show.clearContent();
                                     craftingState = Crafting_State.STOPPED;
                                     ownerUUID = null;
@@ -133,7 +129,7 @@ public class ProfessionBlockEntity extends BlockEntity {
     public ExplainedResult tryRecipe(Player p) {
         ProfessionRecipe recipe;
 
-        if(recipe_locked)
+        if (recipe_locked)
             recipe = last_recipe;
         else
             recipe = getCurrentRecipe();
@@ -158,7 +154,7 @@ public class ProfessionBlockEntity extends BlockEntity {
         int expGive = (int) (recipe.getExpReward(p, ownerLvl, getMats()) * expMulti);
         this.addExp(expGive);
         var output = recipe.craft(p, getMats());
-        if(!destroyOuput && !tryPutToOutputs(output))
+        if (!destroyOuput && !tryPutToOutputs(output))
             return ExplainedResult.failure(Chats.PROF_OUTPUT_SLOT_NOT_EMPTY.locName());
         recipe.spendMaterials(getMats());
         this.setChanged();
@@ -172,7 +168,7 @@ public class ProfessionBlockEntity extends BlockEntity {
                 ItemEntity itementity = new ItemEntity(level, getBlockPos().getX(), getBlockPos().getY() + 0.5, getBlockPos().getZ(), stack);
                 itementity.setDefaultPickUpDelay();
                 level.addFreshEntity(itementity);
-            }else
+            } else
                 return true;
         }
         return false;
@@ -256,9 +252,9 @@ public class ProfessionBlockEntity extends BlockEntity {
     public ListTag createTag() {
         ListTag listtag = new ListTag();
 
-        for(int i = 0; i < inventory.getContainerSize(); ++i) {
+        for (int i = 0; i < inventory.getContainerSize(); ++i) {
             ItemStack itemstack = inventory.getItem(i);
-            if(itemstack.isEmpty())
+            if (itemstack.isEmpty())
                 continue;
             CompoundTag slot = new CompoundTag();
             slot.putInt("slot", i);
@@ -267,9 +263,10 @@ public class ProfessionBlockEntity extends BlockEntity {
         }
         return listtag;
     }
+
     public void fromTag(ListTag pContainerNbt) {
         inventory.clearContent();
-        for(int i = 0; i < pContainerNbt.size(); ++i) {
+        for (int i = 0; i < pContainerNbt.size(); ++i) {
             CompoundTag tag = pContainerNbt.getCompound(i);
             int slot = tag.getInt("slot");
             tag.remove("slot");
@@ -285,16 +282,21 @@ public class ProfessionBlockEntity extends BlockEntity {
         fromTag(pTag.getList("inv", 10));
         this.show.fromTag(pTag.getList("show", 10));
         this.recipe_locked = pTag.getBoolean("locked");
-        this.craftingState = Crafting_State.valueOf(pTag.getString("state"));
-        if(craftingState != Crafting_State.STOPPED){
-            if(pTag.contains("owner"))
+
+        var state = pTag.getString("state");
+        if (state.isEmpty()) {
+            state = Crafting_State.IDLE.name();
+        }
+        this.craftingState = Crafting_State.valueOf(state);
+        if (craftingState != Crafting_State.STOPPED) {
+            if (pTag.contains("owner"))
                 this.ownerUUID = pTag.getUUID("owner");
-            else{
+            else {
                 this.ownerUUID = null;
                 craftingState = Crafting_State.STOPPED;
             }
         }
-        if(recipe_locked && pTag.contains("recipe")){
+        if (recipe_locked && pTag.contains("recipe")) {
             this.last_recipe = ExileDB.Recipes().get(pTag.getString("recipe"));
         }
     }
@@ -305,19 +307,19 @@ public class ProfessionBlockEntity extends BlockEntity {
 
         pTag.put("inv", createTag());
         pTag.put("show", this.show.createTag());
-        if(recipe_locked){
-            if(last_recipe != null){
+        if (recipe_locked) {
+            if (last_recipe != null) {
                 pTag.putBoolean("locked", recipe_locked);
                 pTag.putString("recipe", last_recipe.GUID());
-            }else{
+            } else {
                 pTag.putBoolean("locked", false);
             }
         }
-        if(craftingState != Crafting_State.STOPPED){
-            if(this.ownerUUID != null){
+        if (craftingState != Crafting_State.STOPPED) {
+            if (this.ownerUUID != null) {
                 pTag.putUUID("owner", this.ownerUUID);
                 pTag.putString("state", craftingState.name());
-            }else{
+            } else {
                 pTag.putString("state", Crafting_State.STOPPED.name());
             }
         }

@@ -1,6 +1,7 @@
-package com.robertx22.age_of_exile.database.data.currency.base;
+package com.robertx22.age_of_exile.database.data.currency.map;
 
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
+import com.robertx22.age_of_exile.database.data.currency.base.Currency;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.BaseLocRequirement;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;

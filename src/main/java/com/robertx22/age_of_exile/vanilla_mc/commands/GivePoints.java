@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
+import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.vanilla_mc.commands.suggestions.CommandSuggestions;
@@ -54,8 +55,12 @@ public class GivePoints {
 
                 if (type.equals("talent")) {
 
-                    Load.player(player).bonusTalents += num;
-                    player.sendSystemMessage(Chats.AWARDED_TALENTS.locName(num));
+                    if (Load.player(player).bonusTalents > ServerContainer.get().MAX_ADDITIONAL_TALENT_POINTS.get()) {
+                        player.sendSystemMessage(Chats.FAILED_TO_AWARD_TALENTS.locName());
+                    } else {
+                        Load.player(player).bonusTalents += num;
+                        player.sendSystemMessage(Chats.AWARDED_TALENTS.locName(num));
+                    }
                 }
             }
 

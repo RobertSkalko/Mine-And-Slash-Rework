@@ -1,8 +1,8 @@
 package com.robertx22.age_of_exile.database.registrators;
 
 import com.robertx22.age_of_exile.database.data.currency.base.Currency;
-import com.robertx22.age_of_exile.database.data.currency.base.MapRarityIncrease;
 import com.robertx22.age_of_exile.database.data.currency.gear.*;
+import com.robertx22.age_of_exile.database.data.currency.map.MapRarityIncrease;
 import com.robertx22.age_of_exile.database.data.profession.items.ProfDropTierPickerCurrency;
 import com.robertx22.age_of_exile.mechanics.harvest.currency.EntangledAffixUpgrade;
 import com.robertx22.age_of_exile.mechanics.harvest.currency.EntangledQuality;
@@ -29,6 +29,7 @@ public class Currencies implements ExileRegistryInit {
         ALL.add(new QualityUpgrade());
         ALL.add(new LevelGearCurrency());
         ALL.add(new ChaosStatCurrency());
+        ALL.add(new AffixRerollCurrency());
         ALL.add(new EntangledAffixUpgrade());
         ALL.add(new EntangledQuality());
         ALL.add(new OrbUniqueReroll());

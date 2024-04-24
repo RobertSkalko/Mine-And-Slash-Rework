@@ -80,6 +80,7 @@ public enum Chats implements IAutoLocName {
     DESTROYS_OUTPUT("When Placed in a Profession Station with other inputs/materials, it will make all recipes produced give 3X the EXP but it will destroy the output."),
     CANT_GO_ABOVE("Can't upgrade past %1$s"),
     AWARDED_TALENTS("You have been rewarded %1$s Talent Points."),
+    FAILED_TO_AWARD_TALENTS("Failed to give more talent points, you have reached the cap. The maximum allowed bonus talent points is controlled by the config file."),
 
     NEED_PEARL("You need to have at least one %1$s in your inventory to enter."),
     PROF_MAT_DROPGUIDE("Mine and Slash Profession Material"),

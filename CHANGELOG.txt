@@ -22,6 +22,7 @@ This is meant for players who don't want to mess with inviting to parties etc
 - attempt fix double death xp loss etc
 - improved hotbar ui a bit
 - dungeons now have names
+- added new currency that rerols a random affix into a random common affix
 - should fix harvest not working
 - changed how harvest and league mechanics spawn (now its a chance to spawn in the same place mobs spawn, scattered through the dungeon)
 - particles are now sent in 1 packet which should hopefully improve server performance
