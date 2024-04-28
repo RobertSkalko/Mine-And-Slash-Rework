@@ -4,12 +4,19 @@ import com.robertx22.age_of_exile.mmorpg.ForgeEvents;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.event.entity.EntityMobGriefingEvent;
 import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.eventbus.api.Event;
 
 public class MapEvents {
 
     public static void init() {
 
+        ForgeEvents.registerForgeEvent(EntityMobGriefingEvent.class, x -> {
+            if (WorldUtils.isMapWorldClass(x.getEntity().level())) {
+                x.setResult(Event.Result.DENY);
+            }
+        });
 
         ForgeEvents.registerForgeEvent(BlockEvent.BreakEvent.class, event -> {
             Level level = event.getPlayer().level();

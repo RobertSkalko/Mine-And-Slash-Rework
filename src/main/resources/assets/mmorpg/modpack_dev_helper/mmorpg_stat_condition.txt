@@ -92,6 +92,7 @@ is_undead_is_false
 threat_gen_type_is_spell
 effect_has_tag_heal_over_time
 is_target_low
+spell_has_tag_cast_speed_to_cooldown
 is_ailment_bleed
 effect_has_tag_song
 is_bone_shatter_not_on_cd
@@ -138,5 +139,6 @@ spell_has_tag_beast_is_false
 is_target_cursed
 spell_has_tag_holy_is_false
 spell_has_tag_heal
+spell_has_tag_cast_speed_to_cooldown_is_false
 spell_has_tag_shatter
 effect_has_tag_negative

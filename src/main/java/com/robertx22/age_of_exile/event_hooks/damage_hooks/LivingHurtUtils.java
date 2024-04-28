@@ -43,6 +43,7 @@ public class LivingHurtUtils {
 
         LivingEntity target = event.getTargetEntity();
 
+        
         if (target.level().isClientSide) {
             return;
         }

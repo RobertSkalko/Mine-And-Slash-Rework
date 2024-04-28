@@ -38,6 +38,7 @@ public class SpellTags {
     public static SpellTag BUFF = SpellTag.of("buff");
     public static SpellTag SHATTER = SpellTag.of("shatter");
     public static SpellTag MISSILE = SpellTag.of("missile");
+    public static SpellTag CAST_TO_CD = SpellTag.of("cast_speed_to_cooldown");
 
     public static void init() {
 

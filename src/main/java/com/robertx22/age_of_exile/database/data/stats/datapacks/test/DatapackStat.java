@@ -4,6 +4,9 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DatapackStat extends Stat implements IAutoGson<DatapackStat> {
 
     public static DatapackStat SERIALIZER = new DatapackStat();
@@ -13,7 +16,7 @@ public class DatapackStat extends Stat implements IAutoGson<DatapackStat> {
     public String id = "";
     public Elements ele = Elements.Physical;
 
-    public DataPackStatEffect effect = new DataPackStatEffect();
+    public List<DataPackStatEffect> effect = new ArrayList<>();
 
     public transient String locname;
     public transient String locdesc;

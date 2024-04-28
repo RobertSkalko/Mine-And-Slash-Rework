@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.uncommon.effectdatas;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
+import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DataPackStatEffect;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DatapackStat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
@@ -197,7 +198,6 @@ public abstract class EffectEvent implements IGUID {
 
                         IStatEffect effect = null;
 
-
                         if (stat.statEffect != null) {
                             if (stat.statEffect.Side().equals(side)) {
                                 if (stat.statEffect.worksOnEvent(this)) {
@@ -205,22 +205,25 @@ public abstract class EffectEvent implements IGUID {
                                 }
                             }
                         }
-
-                        if (stat instanceof DatapackStat) {
-                            DatapackStat d = (DatapackStat) stat;
-                            if (d.effect != null) {
-                                if (d.effect.worksOnEvent(this)) {
-                                    if (d.effect.Side().equals(side)) {
-                                        effect = d.effect;
-                                    }
-                                }
-                            }
-                        }
-
                         if (effect != null) {
                             effects.add(new EffectWithCtx(effect, side, data));
                             list.add(data);
                         }
+
+
+                        if (stat instanceof DatapackStat) {
+                            DatapackStat d = (DatapackStat) stat;
+                            for (DataPackStatEffect eff : d.effect) {
+                                if (eff.worksOnEvent(this)) {
+                                    if (eff.Side().equals(side)) {
+                                        effects.add(new EffectWithCtx(eff, side, data));
+                                        list.add(data);
+                                    }
+                                }
+                            }
+
+                        }
+
 
                     }
                 });

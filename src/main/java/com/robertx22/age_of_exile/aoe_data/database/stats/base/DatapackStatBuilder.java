@@ -7,6 +7,7 @@ package com.robertx22.age_of_exile.aoe_data.database.stats.base;
 // T can be a wrapper class with multiple enums!
 
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DataPackStatAccessor;
+import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DataPackStatEffect;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DatapackStat;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.action.StatEffect;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.condition.StatCondition;
@@ -31,15 +32,33 @@ public class DatapackStatBuilder<T> {
     private Function<T, String> locDescMaker;
     private Function<T, Elements> elementMaker;
 
-    private List<Function<T, StatEffect>> effectMaker = new ArrayList<>();
-    private List<Function<T, StatCondition>> conditionMaker = new ArrayList<>();
+
+    public DatapackStatBuilder() {
+
+        for (EffectPlace value : EffectPlace.values()) {
+            EFFECTS.put(value, new EffectMaker());
+        }
+    }
+
+
+    public static enum EffectPlace {
+        FIRST, SECOND;
+    }
+
+    public HashMap<EffectPlace, EffectMaker<T>> EFFECTS = new HashMap<>();
+
+    public static class EffectMaker<T> {
+        private List<Function<T, StatEffect>> effectMaker = new ArrayList<>();
+        private List<Function<T, StatCondition>> conditionMaker = new ArrayList<>();
+
+        private List<StatCondition> conditions = new ArrayList<>();
+        private List<StatEffect> effects = new ArrayList<>();
+    }
 
     private Consumer<DatapackStat> modifyAfterDone;
 
     public boolean usesMoreMulti = false;
 
-    private List<StatCondition> conditions = new ArrayList<>();
-    private List<StatEffect> effects = new ArrayList<>();
 
     private int priority = -1;
     private EffectSides side = EffectSides.Source;
@@ -90,28 +109,37 @@ public class DatapackStatBuilder<T> {
     }
 
     public DatapackStatBuilder<T> addCondition(StatCondition condition) {
+        return addCondition(EffectPlace.FIRST, condition);
+    }
+
+    public DatapackStatBuilder<T> addCondition(EffectPlace place, StatCondition condition) {
         Objects.requireNonNull(condition);
-        this.conditions.add(condition);
+        EFFECTS.get(place).conditions.add(condition);
         return this;
     }
 
     public DatapackStatBuilder<T> addCondition(Function<T, StatCondition> condition) {
         Objects.requireNonNull(condition);
-        this.conditionMaker.add(condition);
+        EFFECTS.get(EffectPlace.FIRST).conditionMaker.add(condition);
         return this;
     }
 
+
     public DatapackStatBuilder<T> addEffect(StatEffect... effect) {
+        return addEffect(EffectPlace.FIRST, effect);
+    }
+
+    public DatapackStatBuilder<T> addEffect(EffectPlace place, StatEffect... effect) {
         Objects.requireNonNull(effect);
         for (StatEffect ef : effect) {
-            this.effects.add(ef);
+            EFFECTS.get(place).effects.add(ef);
         }
         return this;
     }
 
     public DatapackStatBuilder<T> addEffect(Function<T, StatEffect> effect) {
         Objects.requireNonNull(effect);
-        this.effectMaker.add(effect);
+        EFFECTS.get(EffectPlace.FIRST).effectMaker.add(effect);
         return this;
     }
 
@@ -178,30 +206,38 @@ public class DatapackStatBuilder<T> {
                         modifyAfterDone.accept(stat);
                     }
 
-                    stat.effect.order = priority;
-                    stat.effect.events = events;
-                    stat.effect.side = side;
-                    this.conditions.forEach(c -> stat.effect.ifs.add(c.GUID()));
-                    this.effects.forEach(c -> {
-                        stat.effect.effects.add(c.GUID());
-                    });
+                    for (Map.Entry<EffectPlace, EffectMaker<T>> en : EFFECTS.entrySet()) {
+                        var effectMaker = en.getValue();
 
-                    if (this.effectMaker != null) {
-                        T key = x.getKey();
+                        DataPackStatEffect dataEffect = new DataPackStatEffect();
+                        dataEffect.order = priority;
+                        dataEffect.events = events;
+                        dataEffect.side = side;
 
-                        for (Function<T, StatEffect> maker : effectMaker) {
-                            StatEffect effect = maker.apply(key);
-                            if (effect == null) {
-                                System.out.print("Can't make effect for key: " + key.toString());
+                        effectMaker.conditions.forEach(c -> dataEffect.ifs.add(c.GUID()));
+                        effectMaker.effects.forEach(c -> {
+                            dataEffect.effects.add(c.GUID());
+                        });
+
+                        stat.effect.add(dataEffect);
+
+                        if (effectMaker.effectMaker != null) {
+                            T key = x.getKey();
+
+                            for (Function<T, StatEffect> maker : effectMaker.effectMaker) {
+                                StatEffect effect = maker.apply(key);
+                                if (effect == null) {
+                                    System.out.print("Can't make effect for key: " + key.toString());
+                                }
+                                dataEffect.effects.add(effect.GUID());
                             }
-                            stat.effect.effects.add(effect.GUID());
+
+
                         }
-
-
-                    }
-                    if (this.conditionMaker != null) {
-                        for (Function<T, StatCondition> maker : this.conditionMaker) {
-                            stat.effect.ifs.add(maker.apply(x.getKey()).GUID());
+                        if (effectMaker.conditionMaker != null) {
+                            for (Function<T, StatCondition> maker : effectMaker.conditionMaker) {
+                                dataEffect.ifs.add(maker.apply(x.getKey()).GUID());
+                            }
                         }
                     }
 

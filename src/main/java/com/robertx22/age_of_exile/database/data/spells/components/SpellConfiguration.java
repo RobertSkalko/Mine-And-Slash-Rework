@@ -14,7 +14,6 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
 public class SpellConfiguration {
 
     public boolean swing_arm = true;
-    public boolean apply_cast_speed_to_cd = false;
     public CastingWeapon castingWeapon = CastingWeapon.ANY_WEAPON;
     public LeveledValue mana_cost = new LeveledValue(0, 0);
     public LeveledValue ene_cost = new LeveledValue(0, 0);
@@ -38,7 +37,7 @@ public class SpellConfiguration {
     }
 
     public SpellConfiguration applyCastSpeedToCooldown() {
-        this.apply_cast_speed_to_cd = true;
+        this.tags.add(SpellTags.CAST_TO_CD);
         return this;
     }
 

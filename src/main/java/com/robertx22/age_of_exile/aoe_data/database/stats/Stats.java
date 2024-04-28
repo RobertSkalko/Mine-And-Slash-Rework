@@ -959,7 +959,8 @@ public class Stats implements ExileRegistryInit {
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTags.magic))
             .addEffect(StatEffects.DECREASE_CAST_TIME)
-            .addEffect(StatEffects.APPLY_CAST_SPEED_TO_CD)
+            .addCondition(DatapackStatBuilder.EffectPlace.SECOND, StatConditions.SPELL_HAS_TAG.get(SpellTags.CAST_TO_CD))
+            .addEffect(DatapackStatBuilder.EffectPlace.SECOND, StatEffects.APPLY_CAST_SPEED_TO_CD)
             .setLocName(x -> "Cast Speed")
             .setLocDesc(x -> "Affects amount of time needed to cast spells. If the spell is instant, it reduces the cooldown. Only works on spells tagged as Magic")
             .modifyAfterDone(x -> {

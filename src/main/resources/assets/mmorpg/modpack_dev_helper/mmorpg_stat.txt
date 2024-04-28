@@ -407,6 +407,7 @@ water_dot_damage
 threat_generated
 mana_per_10_intelligence
 alchemy_lesser_drop_bonus
+cast_speed_to_cooldown_cast_time
 mining_misc_drop_bonus
 dodge
 lightning_cast_time
@@ -421,6 +422,7 @@ enchanting_lesser_drop_bonus
 plus_lvl_beast_spells
 golem_cast_time
 mana
+cast_speed_to_cooldown_spell_dmg_taken
 physical_spell_dmg
 eff_dur_u_cast
 rejuvenate_cast_time
@@ -484,6 +486,7 @@ melee_cdr
 shatter_spell_dmg_taken
 phys_to_chaos
 learn_test_command
+cast_speed_to_cooldown_spell_dmg
 lightning_focus
 has_pet_ability_cast_time
 mana_shield
@@ -551,6 +554,7 @@ fire_resist
 lightning_resist
 learn_blizzard
 electrify_chance
+cast_speed_to_cooldown_cdr
 shatter_cdr
 spell_physical_damage
 lightning_dot_damage
@@ -627,6 +631,7 @@ shatter_cast_time
 mana_leech_cap
 block_aura_cost
 learn_frozen_orb
+plus_lvl_cast_speed_to_cooldown_spells
 inc_leech
 learn_explode_minions
 salvaging_exp_bonus

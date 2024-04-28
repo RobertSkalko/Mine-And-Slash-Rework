@@ -21,7 +21,7 @@ public class RarityItems {
     public static HashMap<String, RegObj<RarityKeyItem>> RARITY_KEYS = new HashMap<>();
 
     public static void init() {
-
+        
         int tier = 0;
         for (String rar : IRarity.NORMAL_GEAR_RARITIES) {
 

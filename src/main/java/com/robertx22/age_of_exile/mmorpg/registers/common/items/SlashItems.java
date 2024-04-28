@@ -3,6 +3,10 @@ package com.robertx22.age_of_exile.mmorpg.registers.common.items;
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
 import com.robertx22.age_of_exile.capability.player.BackpackItem;
+import com.robertx22.age_of_exile.content.ubers.UberBossMapItem;
+import com.robertx22.age_of_exile.content.ubers.UberBossTier;
+import com.robertx22.age_of_exile.content.ubers.UberEnum;
+import com.robertx22.age_of_exile.content.ubers.UberFragmentItem;
 import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChestItem;
 import com.robertx22.age_of_exile.database.data.profession.all.Professions;
 import com.robertx22.age_of_exile.database.data.profession.items.DestroyOutputMegaExpItem;
@@ -54,12 +58,33 @@ public class SlashItems {
         }
 
 
+        for (UberBossTier tier : UberBossTier.map.values()) {
+            for (UberEnum uber : UberEnum.values()) {
+
+                if (!UBER_MAPS.containsKey(uber)) {
+                    UBER_MAPS.put(uber, new HashMap<>());
+                }
+                var maps = UBER_MAPS.get(uber);
+                maps.put(tier.tier, Def.item(() -> new UberBossMapItem(tier.tier, uber), "uber/map_" + uber.id + "_" + tier.tier));
+
+                if (!UBER_FRAGS.containsKey(uber)) {
+                    UBER_FRAGS.put(uber, new HashMap<>());
+                }
+                var frags = UBER_FRAGS.get(uber);
+                frags.put(tier.tier, Def.item(() -> new UberFragmentItem(tier.tier, uber), "uber/frag_" + uber.id + "_" + tier.tier));
+            }
+        }
+
     }
 
     private static void station(String pro, Supplier<Item> sup) {
         STATIONS.put(pro, Def.item(pro + "_station", () -> new StationBlockItem(SlashBlocks.STATIONS.get(pro).get(), new Item.Properties(), sup)));
 
     }
+
+    public static HashMap<UberEnum, HashMap<Integer, RegObj<UberBossMapItem>>> UBER_MAPS = new HashMap<>();
+    public static HashMap<UberEnum, HashMap<Integer, RegObj<UberFragmentItem>>> UBER_FRAGS = new HashMap<>();
+
 
     public static RegObj<CommonGearProducerItem> COMMON_SOUL_PRODUCE = Def.item(() -> new CommonGearProducerItem(), "common_soul_produce");
 

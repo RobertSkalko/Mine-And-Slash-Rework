@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
+import com.robertx22.age_of_exile.database.data.profession.PlayerUTIL;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.requirements.bases.GearRequestedFor;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -26,6 +27,7 @@ import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -120,7 +122,9 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     }
 
     public boolean canPlayerWear(EntityData data) {
-
+        if (PlayerUTIL.isFake((Player) data.getEntity())) {
+            return true;
+        }
         if (this.getLevel() > data.getLevel()) {
             return false;
         }

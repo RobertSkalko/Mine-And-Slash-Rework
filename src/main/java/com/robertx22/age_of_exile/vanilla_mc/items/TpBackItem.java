@@ -38,6 +38,23 @@ public class TpBackItem extends AutoItem implements IShapedRecipe {
         ItemStack itemstack = p.getItemInHand(pUsedHand);
 
         if (!pLevel.isClientSide) {
+
+
+            /*
+            if (MMORPG.RUN_DEV_TOOLS) {
+
+                final FakePlayer fakePlayer = FakePlayerFactory.getMinecraft((ServerLevel) p.level());
+
+                var b = new GearBlueprint(LootInfo.ofPlayer(p));
+                b.gearItemSlot.set(BaseGearTypes.SWORD.GUID());
+                var stack = b.createStack();
+                fakePlayer.setItemInHand(InteractionHand.MAIN_HAND, stack);
+                fakePlayer.attack(p);
+            }
+
+             */
+
+
             if (WorldUtils.isMapWorldClass(pLevel)) {
                 if (!EntityFinder.start(p, Mob.class, p.blockPosition()).radius(5).searchFor(AllyOrEnemy.enemies).build().isEmpty()) {
                     p.sendSystemMessage(Chats.ENEMY_TOO_CLOSE.locName());

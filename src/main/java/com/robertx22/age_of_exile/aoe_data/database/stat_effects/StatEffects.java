@@ -20,6 +20,8 @@ import java.util.Arrays;
 
 public class StatEffects implements ExileRegistryInit {
 
+    // todo LOCALIZE THIS!!!!
+
     public static DataHolder<EffectCtx, StatEffect> GIVE_SELF_EFFECT_30_SEC = new DataHolder<>(
             Arrays.asList(
                     ModEffects.TAUNT_STANCE,

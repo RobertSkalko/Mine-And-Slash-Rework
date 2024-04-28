@@ -24,6 +24,9 @@ This is meant for players who don't want to mess with inviting to parties etc
 - dungeons now have names
 - added new currency that rerols a random affix into a random common affix
 - should fix harvest not working
+- attempted to make fake players be able to attack (they are considered players so my code checked if they have energy, if they can use the weapon (stat and lvl req) and also they had 0 stats because they dont TICK...
+Which means they didn't get their stats calculated because that's done on tick.. It's a lot of jank i'm unfamiliar with too
+- stat datapacks now have an effect list instead of just 1 effect, this will make creating some stats more reasonable, but you'll need to fix existing stat datapacks
 - changed how harvest and league mechanics spawn (now its a chance to spawn in the same place mobs spawn, scattered through the dungeon)
 - particles are now sent in 1 packet which should hopefully improve server performance
 - summons will no longer get map mob stats

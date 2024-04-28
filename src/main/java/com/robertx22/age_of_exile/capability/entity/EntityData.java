@@ -9,6 +9,7 @@ import com.robertx22.age_of_exile.database.data.EntityConfig;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
+import com.robertx22.age_of_exile.database.data.profession.PlayerUTIL;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
@@ -423,10 +424,18 @@ public class EntityData implements ICap, INeededForClient {
         SpendResourceEvent event = new SpendResourceEvent(entity, ResourceType.energy, cost);
         event.calculateEffects();
 
-        if (event.data.getNumber() > resources.getEnergy()) {
-            data.setCanceled(true);
-            data.setAmount(0);
-            return;
+
+        if (data.getAttackerEntity() instanceof Player p && PlayerUTIL.isFake(p)) {
+            // this is a bit jank but it solves 2 things: fake players not having energy to attack, and fake players not having stats because they dont tick
+            // and stats are calc on tick..
+            Load.Unit(p).gear.setDirty();
+            Load.Unit(p).recalcStats();
+        } else {
+            if (event.data.getNumber() > resources.getEnergy()) {
+                data.setCanceled(true);
+                data.setAmount(0);
+                return;
+            }
         }
 
         event.Activate();
@@ -438,12 +447,16 @@ public class EntityData implements ICap, INeededForClient {
                 .getCalculatedStat(WeaponDamage.getInstance())
                 .getValue();
 
-        DamageEvent dmg = EventBuilder.ofDamage(data, data.getAttackerEntity(), data.getTargetEntity(), num)
-                .setupDamage(AttackType.hit, weptype, PlayStyle.STR)
-                .setIsBasicAttack()
-                .build();
+        if (num > 0) {
 
-        dmg.Activate();
+            DamageEvent dmg = EventBuilder.ofDamage(data, data.getAttackerEntity(), data.getTargetEntity(), num)
+                    .setupDamage(AttackType.hit, weptype, PlayStyle.STR)
+                    .setIsBasicAttack()
+                    .build();
+
+            dmg.Activate();
+
+        }
 
     }
 
@@ -653,11 +666,18 @@ public class EntityData implements ICap, INeededForClient {
 
             SpendResourceEvent event = new SpendResourceEvent(entity, ResourceType.energy, cost);
             event.calculateEffects();
-
-            if (event.data.getNumber() > resources.getEnergy()) {
-                data.setCanceled(true);
-                data.setAmount(0);
-                return;
+            
+            if (data.getAttackerEntity() instanceof Player p && PlayerUTIL.isFake(p)) {
+                // this is a bit jank but it solves 2 things: fake players not having energy to attack, and fake players not having stats because they dont tick
+                // and stats are calc on tick..
+                Load.Unit(p).gear.setDirty();
+                Load.Unit(p).recalcStats();
+            } else {
+                if (event.data.getNumber() > resources.getEnergy()) {
+                    data.setCanceled(true);
+                    data.setAmount(0);
+                    return;
+                }
             }
 
             event.Activate();

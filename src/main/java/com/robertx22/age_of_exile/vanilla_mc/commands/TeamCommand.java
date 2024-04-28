@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.TeamUtils;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.List;
@@ -35,6 +36,7 @@ public class TeamCommand {
                                     Load.player(x.getSource()
                                                     .getPlayerOrException()).team
                                             .createTeam();
+                                    x.getSource().getPlayer().sendSystemMessage(Component.literal("Team Created, you can now invite other players."));
                                     return 0;
                                 }))
                                 .then(literal("leave").executes(x -> {
