@@ -29,6 +29,7 @@ public class ArmorEffect extends InCodeStatEffect<DamageEvent> {
     @Override
     public DamageEvent activate(DamageEvent effect, StatData data, Stat stat) {
         float pene = effect.getPenetration();
+        
 
         IUsableStat armor = (IUsableStat) stat;
 

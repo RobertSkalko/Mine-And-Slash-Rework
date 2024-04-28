@@ -18,7 +18,7 @@ public interface IBaseAutoLoc extends IGUID {
         CHAOS_STAT,
         LEAGUE,
         DUNGEON,
-
+        STAT_LAYER,
         Unique_Items,
         Spells,
         Gear_Items,

@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.base.DatapackStatBuild
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EmptyAccessor;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DataPackStatAccessor;
+import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.action.SetCooldownEffect;
@@ -20,7 +21,7 @@ public class AscensionStats {
     public static DataPackStatAccessor<EmptyAccessor> BARRAGE_SELF_BUFF_ON_SPELL_CRIT = DatapackStatBuilder
             .ofSingle("chance_of_barrage_on_spell_crit", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IF_RANDOM_ROLL)
             .addCondition(StatConditions.IF_CRIT)

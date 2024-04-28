@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.database.data.stats.datapacks.test;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
+import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EffectEvent;
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class DataPackStatEffect implements IStatEffect {
 
-    public int order = 0;
+    public String order = "";
 
     public EffectSides side = EffectSides.Source;
 
@@ -35,7 +36,7 @@ public class DataPackStatEffect implements IStatEffect {
 
     @Override
     public int GetPriority() {
-        return order;
+        return StatPriority.MAP.get(order).priority;
     }
 
     @Override

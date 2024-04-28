@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DataPackStatAccessor;
+import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.tags.ModTag;
 import com.robertx22.age_of_exile.tags.TagType;
@@ -23,7 +24,6 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
-import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.ChatFormatting;
 
@@ -32,6 +32,8 @@ import java.util.Arrays;
 import static com.robertx22.age_of_exile.database.data.stats.Stat.VAL1;
 import static com.robertx22.age_of_exile.database.data.stats.Stat.format;
 
+
+// todo split this into multiple classes
 public class Stats implements ExileRegistryInit {
 
     public static void loadClass() {
@@ -42,7 +44,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> PROC_SHATTER_MAX_FROST_ESSENCE = DatapackStatBuilder
             .ofSingle("proc_shatter_max_frost", Elements.Cold)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IF_RANDOM_ROLL)
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
@@ -61,7 +63,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> PROC_SHATTER = DatapackStatBuilder
             .ofSingle("proc_shatter", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IF_RANDOM_ROLL)
             .addCondition(StatConditions.IS_EVENT_AILMENT.get(Ailments.FREEZE))
@@ -82,7 +84,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> EFFECT_DURATION_YOU_CAST = DatapackStatBuilder
             .ofSingle("eff_dur_u_cast", Elements.Physical)
             .worksWithEvent(ExilePotionEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addEffect(e -> StatEffects.INCREASE_EFFECT_DURATION)
             .setLocName(x -> "Effect Duration")
@@ -96,7 +98,7 @@ public class Stats implements ExileRegistryInit {
             .<EffectTag>of(x -> x.GUID() + "_eff_dur_u_cast", x -> Elements.Physical)
             .addAllOfType(EffectTag.getAll())
             .worksWithEvent(ExilePotionEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.EFFECT_HAS_TAG.get(x))
             .addEffect(e -> StatEffects.INCREASE_EFFECT_DURATION)
@@ -113,7 +115,7 @@ public class Stats implements ExileRegistryInit {
                     ModEffects.REJUVENATE
             ))
             .worksWithEvent(RestoreResourceEvent.ID) // todo should be tick event, BUT LAG
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_RESOURCE.get(ResourceType.health))
             .addCondition(StatConditions.IS_RESTORE_TYPE.get(RestoreType.regen))
@@ -136,7 +138,7 @@ public class Stats implements ExileRegistryInit {
                     ModEffects.TAUNT_STANCE
             ))
             .worksWithEvent(RestoreResourceEvent.ID) // todo should be tick event, BUT LAG
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_RESOURCE.get(ResourceType.health))
             .addCondition(StatConditions.IS_RESTORE_TYPE.get(RestoreType.regen))
@@ -156,7 +158,7 @@ public class Stats implements ExileRegistryInit {
             .<LeechInfo>of(x -> x.element.guidName + "_" + x.resourceType.id + "_leech", x -> x.element)
             .addAllOfType(LeechInfo.allCombos())
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.FINAL_DAMAGE)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
             .addEffect(e -> StatEffects.LEECH_RESTORE_RESOURCE_BASED_ON_STAT_DATA.get(e.resourceType))
@@ -177,7 +179,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<AuraGems.AuraInfo> SPECIFIC_AURA_COST = DatapackStatBuilder
             .<AuraGems.AuraInfo>of(x -> x.id + "_aura_cost", x -> Elements.Physical)
             .addAllOfType(AuraGems.ALL)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .setLocName(x -> Stat.format(x.name + " Cost"))
             .setLocDesc(x -> "")
@@ -191,7 +193,7 @@ public class Stats implements ExileRegistryInit {
             .<Elements>of(x -> x.guidName + "_vuln_crit", x -> x)
             .addAllOfType(Elements.values())
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.BEFORE_DAMAGE_LAYERS)
             .setSide(EffectSides.Target)
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
             .addEffect(StatEffects.SET_IS_CRIT)
@@ -208,11 +210,11 @@ public class Stats implements ExileRegistryInit {
             .<Elements>of(x -> "all_" + x.guidName + "_damage", x -> x)
             .addAllOfType(Elements.values())
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(1)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> x.dmgName + " Damage")
             .setLocDesc(x -> "Increases All dmg of that element, both spells and attacks")
             .modifyAfterDone(x -> {
@@ -226,7 +228,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor MAX_SUMMON_CAPACITY = DatapackStatBuilder
             .ofSingle("max_total_summons", Elements.NONE)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addEffect(StatEffects.ADD_TOTAL_SUMMONS)
             .setLocName(x -> "Maximum Summons")
@@ -244,11 +246,11 @@ public class Stats implements ExileRegistryInit {
             .<PlayStyle>of(x -> x.id + "_dmg", x -> Elements.Physical)
             .addAllOfType(PlayStyle.values())
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x.getTag()))
             .setUsesMoreMultiplier()
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> x.name + " Damage")
             .setLocDesc(x -> "Magic damage are spells that have tag Magic etc")
             .modifyAfterDone(x -> {
@@ -261,9 +263,9 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> DAMAGE_RECEIVED = DatapackStatBuilder
             .ofSingle("dmg_received", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Target)
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Damage Received")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
@@ -278,10 +280,10 @@ public class Stats implements ExileRegistryInit {
             .<PlayStyle>of(x -> x.id + "_dmg_received", x -> Elements.Physical)
             .addAllOfType(PlayStyle.values())
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Target)
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x.getTag()))
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> x.name + " Damage Received")
             .setLocDesc(x -> "Magic damage are spells that have tag Magic etc")
             .modifyAfterDone(x -> {
@@ -296,12 +298,12 @@ public class Stats implements ExileRegistryInit {
             .<Elements>of(x -> "spell_" + x.guidName + "_damage", x -> x)
             .addAllOfType(Elements.values())
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTags.magic))
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> x.dmgName + " Spells Damage")
             .setLocDesc(x -> "Increases damage of spells of that element.")
             .modifyAfterDone(x -> {
@@ -315,11 +317,11 @@ public class Stats implements ExileRegistryInit {
             .<WeaponTypes>of(x -> x.id + "_damage", x -> Elements.Physical)
             .addAllOfType(WeaponTypes.getAll())
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(x -> StatConditions.WEAPON_TYPE_MATCHES.get(x))
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> x.locName() + " Damage")
             .setLocDesc(x -> "Increases damage done if it was caused by that weapon")
             .modifyAfterDone(x -> {
@@ -333,12 +335,12 @@ public class Stats implements ExileRegistryInit {
             .<WeaponTypes>of(x -> "ele_" + x.id + "_damage", x -> Elements.Physical)
             .addAllOfType(WeaponTypes.getAll())
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.WEAPON_TYPE_MATCHES.get(x))
             .addCondition(StatConditions.IS_ELEMENTAL)
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Elemental " + x.locName() + " Damage")
             .setLocDesc(x -> "Increases elemental damage done if it was caused by that weapon")
             .modifyAfterDone(x -> {
@@ -352,12 +354,12 @@ public class Stats implements ExileRegistryInit {
             .<Elements>of(x -> x.guidName + "_any_wep_damage", x -> x)
             .addAllOfType(Elements.values())
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(x -> StatConditions.ELEMENT_MATCH_STAT)
             .addCondition(StatConditions.ATTACK_TYPE_MATCHES.get(AttackType.hit))
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> x.dmgName + " Weapon Damage")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
@@ -374,7 +376,7 @@ public class Stats implements ExileRegistryInit {
                     ResourceType.mana
             ))
             .worksWithEvent(OnMobKilledByDamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.FINAL_DAMAGE)
             .setSide(EffectSides.Source)
             .addEffect(e -> StatEffects.LEECH_RESTORE_RESOURCE_BASED_ON_STAT_DATA.get(e))
             .setLocName(x -> x.locname + " on Kill")
@@ -391,7 +393,7 @@ public class Stats implements ExileRegistryInit {
             .<ResourceAndAttack>of(x -> x.resource.id + "_on_" + x.attackType.id + "_hit", x -> Elements.NONE)
             .addAllOfType(ResourceAndAttack.allCombos())
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.FINAL_DAMAGE)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.ATTACK_TYPE_MATCHES.get(x.attackType))
             //.addCondition(x -> StatConditions.IS_NOT_SUMMON_ATTACK) // todo why did i do this?
@@ -410,7 +412,7 @@ public class Stats implements ExileRegistryInit {
             .<ResourceType>of(x -> x.id + "_leech_cap", x -> Elements.NONE)
             .addAllOfType(ResourceType.values())
             //.worksWithEvent(DamageEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .setLocName(x -> x.locname + " Leech Cap")
             .setLocDesc(x -> "")
@@ -430,7 +432,7 @@ public class Stats implements ExileRegistryInit {
                     )
             )
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.FINAL_DAMAGE)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IF_RANDOM_ROLL)
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
@@ -453,10 +455,9 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> CRIT_CHANCE = DatapackStatBuilder
             .ofSingle("critical_hit", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.BEFORE_DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IF_RANDOM_ROLL)
-            //.addCondition(StatConditions.IS_ATTACK_OR_SPELL_ATTACK)
             .addEffect(StatEffects.SET_IS_CRIT)
             .setLocName(x -> "Crit Chance")
             .setLocDesc(x -> "Chance to multiply attack damage by critical damage")
@@ -472,38 +473,14 @@ public class Stats implements ExileRegistryInit {
             .build();
 
 
-    public static DataPackStatAccessor<Elements> ELEMENT_CRIT_DAMAGE_TAKEN = DatapackStatBuilder
-            .<Elements>of(x -> x.guidName + "_crit_taken", x -> x)
-            .addAllOfType(Elements.values())
-            .worksWithEvent(DamageEvent.ID)
-            .setPriority(100)
-            .setSide(EffectSides.Target)
-            .addCondition(StatConditions.IF_CRIT)
-            .addCondition(StatConditions.ELEMENT_MATCH_STAT)
-            .addEffect(StatEffects.MULTIPLY_VALUE)
-            .setLocName(x -> x.dmgName + " Crit DMG Taken")
-            .setLocDesc(x -> "If Critical of that element, multiply by x")
-            .modifyAfterDone(x -> {
-                x.is_perc = true;
-                x.base = 0;
-                x.min = 0;
-                x.max = 500;
-                x.group = StatGroup.MAIN;
-
-                x.icon = "\u2694";
-                x.format = ChatFormatting.RED.getName();
-
-            })
-            .build();
-
     public static DataPackStatAccessor<EmptyAccessor> CRIT_DAMAGE = DatapackStatBuilder
             .ofSingle("critical_damage", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IF_CRIT)
             //addCondition(StatConditions.IS_ATTACK_OR_SPELL_ATTACK)
-            .addEffect(StatEffects.MULTIPLY_VALUE)
+            .addEffect(StatEffects.Layers.CRIT_DAMAGE)
             .setLocName(x -> "Crit Damage")
             .setLocDesc(x -> "If Critical, multiply by x")
             .modifyAfterDone(x -> {
@@ -523,11 +500,11 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> NON_CRIT_DAMAGE = DatapackStatBuilder
             .ofSingle("non_crit_damage", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(99)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.IF_NOT_CRIT)
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Non Critical Damage")
             .setLocDesc(x -> "If not a Critical, multiply by x")
             .modifyAfterDone(x -> {
@@ -543,7 +520,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> ACCURACY = DatapackStatBuilder
             .ofSingle("accuracy", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.BEFORE_HIT_PREVENTION)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.ATTACK_TYPE_MATCHES.get(AttackType.hit))
             .addEffect(StatEffects.SET_ACCURACY)
@@ -561,11 +538,11 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> PROJECTILE_DAMAGE = DatapackStatBuilder
             .ofSingle("projectile_damage", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.IS_ANY_PROJECTILE)
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Projectile Damage")
             .setLocDesc(x -> "Affects projectile damage, includes projectile spells like fireballs, and ranged basic attacks.")
             .modifyAfterDone(x -> {
@@ -579,10 +556,10 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> PROJECTILE_DAMAGE_RECEIVED = DatapackStatBuilder
             .ofSingle("proj_dmg_received", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Target)
             .addCondition(StatConditions.IS_ANY_PROJECTILE)
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Projectile Damage Receieved")
             .setLocDesc(x -> "Affects projectile damage, includes projectile spells like fireballs, and ranged basic attacks.")
             .modifyAfterDone(x -> {
@@ -594,11 +571,11 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> AREA_DAMAGE = DatapackStatBuilder
             .ofSingle("area_dmg", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.area))
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Area Damage")
             .setLocDesc(x -> "Affects dmg done by area of effect abilities. Think meteor or other large aoe spells")
             .modifyAfterDone(x -> {
@@ -611,12 +588,12 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> TRAP_AREA_DAMAGE = DatapackStatBuilder
             .ofSingle("trap_area_dmg", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.area))
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.trap))
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Trap Area Damage")
             .setLocDesc(x -> "Affects trap dmg done by area of effect abilities.")
             .modifyAfterDone(x -> {
@@ -630,11 +607,11 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> DOT_DAMAGE = DatapackStatBuilder
             .ofSingle("dot_dmg", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.ATTACK_TYPE_MATCHES.get(AttackType.dot))
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Damage Over Time")
             .setLocDesc(x -> "Increases dmg of effects that do damage over time, like burn")
             .modifyAfterDone(x -> {
@@ -647,10 +624,10 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> TOTAL_DAMAGE = DatapackStatBuilder
             .ofSingle("total_damage", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Total Damage")
             .setLocDesc(x -> "Increases all your damage.")
             .modifyAfterDone(x -> {
@@ -664,11 +641,11 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> ATTACK_DAMAGE = DatapackStatBuilder
             .ofSingle("attack_damage", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_ATTACK_DAMAGE)
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Attack Damage")
             .setLocDesc(x -> "Increases all attack damage.")
             .modifyAfterDone(x -> {
@@ -683,12 +660,12 @@ public class Stats implements ExileRegistryInit {
             .<Elements>of(x -> x.guidName + "_dot_damage", x -> x)
             .addAllOfType(Elements.values())
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
             .addCondition(StatConditions.ATTACK_TYPE_MATCHES.get(AttackType.dot))
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> x.dmgName + " Damage Over Time")
             .setLocDesc(x -> "Fire damage over time increases damage of burn, for example.")
             .modifyAfterDone(x -> {
@@ -703,14 +680,14 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> LOW_HP_HEALING = DatapackStatBuilder
             .ofSingle("low_hp_healing", Elements.NONE)
             .worksWithEvent(RestoreResourceEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_SPELL)
             .addCondition(StatConditions.IS_TARGET_LOW)
             .addCondition(StatConditions.IS_RESOURCE.get(ResourceType.health))
             .addCondition(StatConditions.IS_RESTORE_TYPE.get(RestoreType.heal))
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Healing when Low")
             .setLocDesc(x -> "Boosts healing done to low hp/magic shield targets. If magic shield is higher, it checks that, otherwise it checks HP.")
             .modifyAfterDone(x -> {
@@ -724,12 +701,12 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> OUT_OF_COMBAT_REGEN = DatapackStatBuilder
             .ofSingle("out_of_combat_regen", Elements.NONE)
             .worksWithEvent(RestoreResourceEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_RESTORE_TYPE.get(RestoreType.regen))
             .addCondition(StatConditions.IS_NOT_IN_COMBAT)
-            .addEffect(StatEffects.MULTIPLY_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Out of Combat Regen")
             .setLocDesc(x -> "Increases your out of combat regeneration")
             .modifyAfterDone(x -> {
@@ -743,13 +720,13 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> HEAL_STRENGTH = DatapackStatBuilder
             .ofSingle("increase_healing", Elements.NONE)
             .worksWithEvent(RestoreResourceEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_SPELL)
             .addCondition(StatConditions.IS_RESOURCE.get(ResourceType.health))
             .addCondition(StatConditions.IS_RESTORE_TYPE.get(RestoreType.heal))
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Heal Strength")
             .setLocDesc(x -> "Increases spell related heals.")
             .modifyAfterDone(x -> {
@@ -763,11 +740,11 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> TOTEM_RESTORATION_STRENGTH = DatapackStatBuilder
             .ofSingle("totem_resto", Elements.NONE)
             .worksWithEvent(RestoreResourceEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.totem))
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Your Totem restoration effects are " + Stat.VAL1 + "% stronger.")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
@@ -783,12 +760,12 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> REJUV_HEAL_SELF = DatapackStatBuilder
             .ofSingle("rejuv_eff_on_self", Elements.NONE)
             .worksWithEvent(RestoreResourceEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Target)
             .addCondition(StatConditions.IS_SPELL)
             .addCondition(StatConditions.IS_RESOURCE.get(ResourceType.health))
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.rejuvenate))
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Rejuvenation Healing")
             .setLocDesc(x -> "Increases Rejuvenation related heals on you.")
             .modifyAfterDone(x -> {
@@ -803,12 +780,12 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> HEALING_RECEIVED = DatapackStatBuilder
             .ofSingle("heal_effect_on_self", Elements.NONE)
             .worksWithEvent(RestoreResourceEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Target)
             .addCondition(StatConditions.IS_SPELL)
             .addCondition(StatConditions.IS_RESOURCE.get(ResourceType.health))
             .addCondition(StatConditions.IS_RESTORE_TYPE.get(RestoreType.heal))
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Healing Received")
             .setLocDesc(x -> "Increases spell related heals on you.")
             .modifyAfterDone(x -> {
@@ -823,7 +800,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> LIFESTEAL = DatapackStatBuilder
             .ofSingle("lifesteal", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.FINAL_DAMAGE)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_ATTACK_DAMAGE)
             .addEffect(StatEffects.LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.get(ResourceType.health))
@@ -842,7 +819,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> MANASTEAL = DatapackStatBuilder
             .ofSingle("manasteal", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.FINAL_DAMAGE)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_ATTACK_DAMAGE)
             .addEffect(StatEffects.LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.get(ResourceType.mana))
@@ -861,7 +838,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> SPELL_LIFESTEAL = DatapackStatBuilder
             .ofSingle("spell_lifesteal", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.FINAL_DAMAGE)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTags.magic))
             .addEffect(StatEffects.LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.get(ResourceType.health))
@@ -880,7 +857,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> SPELL_MSSTEAL = DatapackStatBuilder
             .ofSingle("spell_mssteal", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.FINAL_DAMAGE)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTags.magic))
             .addEffect(StatEffects.LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.get(ResourceType.magic_shield))
@@ -899,7 +876,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> DOT_LIFESTEAL = DatapackStatBuilder
             .ofSingle("dot_lifesteal", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.FINAL_DAMAGE)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.ATTACK_TYPE_MATCHES.get(AttackType.dot))
             .addEffect(StatEffects.LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.get(ResourceType.health))
@@ -918,10 +895,10 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> INCREASED_LEECH = DatapackStatBuilder
             .ofSingle("inc_leech", Elements.NONE)
             .worksWithEvent(RestoreResourceEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.FINAL_DAMAGE)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_RESTORE_TYPE.get(RestoreType.leech))
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Leech Effect")
             .setLocDesc(x -> "Affects all resource leech stats like: onhit, leech dmg, on kill restore etc")
             .modifyAfterDone(x -> {
@@ -938,7 +915,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> MANA_COST = DatapackStatBuilder
             .ofSingle("mana_cost", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addEffect(StatEffects.INCREASE_MANA_COST)
             .setLocName(x -> "Mana Cost")
@@ -955,7 +932,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> CAST_SPEED = DatapackStatBuilder
             .ofSingle("cast_speed", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTags.magic))
             .addEffect(StatEffects.DECREASE_CAST_TIME)
@@ -974,10 +951,10 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> DOUBLE_ATTACK_DAMAGE = DatapackStatBuilder
             .ofSingle("double_attack_chance", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(IStatEffect.Priority.Last.priority)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.ATTACK_TYPE_MATCHES.get(AttackType.hit))
-            .addEffect(StatEffects.DOUBLE_DAMAGE)
+            .addEffect(StatEffects.Layers.DOUBLE_DAMAGE)
             .setLocName(x -> "Double Attack Damage Chance")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
@@ -990,11 +967,11 @@ public class Stats implements ExileRegistryInit {
             .<SpellTag>of(x -> x.GUID() + "_spell_dmg", x -> Elements.Physical)
             .addAllOfType(SpellTag.getAll())
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x))
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> x.locNameForLangFile() + " Damage")
             .setLocDesc(x -> "Increases damage of spells with this tag. Totem Damage increases dmg of totems, etc.")
             .modifyAfterDone(x -> {
@@ -1007,7 +984,7 @@ public class Stats implements ExileRegistryInit {
             .addAllOfType(SpellTag.getAll())
 
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x))
             .addEffect(StatEffects.DECREASE_CAST_TIME)
@@ -1022,11 +999,11 @@ public class Stats implements ExileRegistryInit {
             .<SpellTag>of(x -> x.GUID() + "_spell_dmg_taken", x -> Elements.Physical)
             .addAllOfType(SpellTag.getAll())
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Target)
             .setUsesMoreMultiplier()
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x))
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> x.locNameForLangFile() + " Damage Taken")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
@@ -1038,7 +1015,7 @@ public class Stats implements ExileRegistryInit {
             .<SpellTag>of(x -> x.GUID() + "_cdr", x -> Elements.Physical)
             .addAllOfType(SpellTag.getAll())
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x))
             .addEffect(StatEffects.DECREASE_COOLDOWN)
@@ -1054,7 +1031,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> COOLDOWN_REDUCTION = DatapackStatBuilder
             .ofSingle("cdr", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addEffect(StatEffects.DECREASE_COOLDOWN)
             .setLocName(x -> "Cooldown Reduction")
@@ -1069,7 +1046,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> COOLDOWN_TICKS = DatapackStatBuilder
             .ofSingle("cd_ticks", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addEffect(StatEffects.DECREASE_COOLDOWN_BY_X_TICKS)
             .setLocName(x -> "Cooldown Ticks")
@@ -1084,7 +1061,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> PROJECTILE_SPEED = DatapackStatBuilder
             .ofSingle("faster_projectiles", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.projectile))
             .addEffect(StatEffects.INCREASE_PROJ_SPEED)
@@ -1100,7 +1077,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> PROJECTILE_COUNT = DatapackStatBuilder
             .ofSingle("projectile_count", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.projectile))
             .addEffect(StatEffects.PROJECTILE_COUNT)
@@ -1114,7 +1091,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> PROJECTILE_BARRAGE = DatapackStatBuilder
             .ofSingle("projectile_barrage", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.projectile))
             .addEffect(StatEffects.SET_BARRAGE)
@@ -1127,7 +1104,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> SUMMON_DURATION = DatapackStatBuilder
             .ofSingle("summon_duration", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.summon))
             .addEffect(StatEffects.DURATION_INCREASE)
@@ -1144,7 +1121,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> TOTEM_DURATION = DatapackStatBuilder
             .ofSingle("totem_duration", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.totem))
             .addEffect(StatEffects.DURATION_INCREASE)
@@ -1160,7 +1137,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> AGGRO_RADIUS = DatapackStatBuilder
             .ofSingle("aggro_radius", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.summon))
             .addEffect(StatEffects.AGGRO_INCREASE)
@@ -1176,11 +1153,11 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> DAMAGE_TO_CURSED = DatapackStatBuilder
             .ofSingle("damage_to_cursed", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.IS_TARGET_CURSED)
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Damage to Cursed Enemies")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
@@ -1191,11 +1168,11 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> SUMMON_DAMAGE = DatapackStatBuilder
             .ofSingle("summon_damage", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.summon))
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Summon Damage")
             .setLocDesc(x -> "Increases damage of your summoned minions.")
             .modifyAfterDone(x -> {
@@ -1208,11 +1185,11 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> GOLEM_DAMAGE = DatapackStatBuilder
             .ofSingle("golem_damage", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.golem))
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Golem Damage")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
@@ -1225,7 +1202,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> INCREASED_AREA = DatapackStatBuilder
             .ofSingle("inc_aoe", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.area))
             .addEffect(StatEffects.INCREASE_AREA)
@@ -1239,7 +1216,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> PIERCING_PROJECTILES = DatapackStatBuilder
             .ofSingle("piercing_projectiles", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.projectile))
             .addEffect(StatEffects.SET_PIERCE)
@@ -1255,9 +1232,9 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> THREAT_GENERATED = DatapackStatBuilder
             .ofSingle("threat_generated", Elements.Physical)
             .worksWithEvent(GenerateThreatEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Threat Generated")
             .setLocDesc(x -> "Modifies amount of threat you generate. Mobs attack targets with highest threat.")
             .modifyAfterDone(x -> {
@@ -1270,10 +1247,10 @@ public class Stats implements ExileRegistryInit {
             .<ModTag>of(x -> "inc_effect_of_" + x.GUID() + "_buff_given", x -> Elements.Physical)
             .addAllOfType(ModTag.MAP.get(TagType.Effect))
             .worksWithEvent(ExilePotionEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.EFFECT_HAS_TAG.get(x))
-            .addEffect(e -> StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> x.locNameForLangFile() + " Effect Strength")
             .setLocDesc(x -> "Increases the stat strength of effects you give")
             .modifyAfterDone(x -> {
@@ -1287,10 +1264,10 @@ public class Stats implements ExileRegistryInit {
             .<ModTag>of(x -> "inc_effect_of_" + x.GUID() + "_buff_on_you", x -> Elements.Physical)
             .addAllOfType(ModTag.MAP.get(TagType.Effect))
             .worksWithEvent(ExilePotionEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
             .setSide(EffectSides.Target)
             .addCondition(x -> StatConditions.EFFECT_HAS_TAG.get(x))
-            .addEffect(e -> StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> Stat.VAL1 + "% to effectiveness of " + x.locNameForLangFile() + " buffs on you")
             .setLocDesc(x -> "Increases the stat strength of effects you receive")
             .modifyAfterDone(x -> {
@@ -1303,10 +1280,10 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> MORE_THREAT_WHEN_TAKING_DAMAGE = DatapackStatBuilder
             .ofSingle("more_threat_on_take_dmg", Elements.Physical)
             .worksWithEvent(GenerateThreatEvent.ID)
-            .setPriority(0)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_THREAT_GEN_TYPE.get(ThreatGenType.take_dmg))
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> Stat.format("You generate " + Stat.VAL1 + "% more threat when taking damage."))
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
@@ -1319,11 +1296,11 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> DAMAGE_WHEN_LOW_HP = DatapackStatBuilder
             .ofSingle("dmg_when_low_hp", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.IS_SOURCE_LOW_HP)
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Damage when on Low Health")
             .setLocDesc(x -> "Low hp is 30% or less.")
             .modifyAfterDone(x -> {
@@ -1334,11 +1311,11 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> DAMAGE_WHEN_TARGET_IS_FULL_HP = DatapackStatBuilder
             .ofSingle("dmg_when_target_near_full_hp", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_TARGET_NEAR_FULL_HP)
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Damage to near Full Health Targets")
             .setLocDesc(x -> "70% health or above..")
             .modifyAfterDone(x -> {
@@ -1350,12 +1327,12 @@ public class Stats implements ExileRegistryInit {
             .<Elements>of(x -> x.guidName + "_dmg_when_target_low_hp", x -> x)
             .addAllOfType(Elements.values())
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.IS_TARGET_LOW_HP)
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> format("Execute targets below 30% health, dealing "
                     + VAL1 + "% increased  " + x.getIconNameFormat()))
             .setLocDesc(x -> "Low hp is 30% or less.")
@@ -1368,11 +1345,11 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> DAMAGE_WHEN_TARGET_IS_LOW_HP = DatapackStatBuilder
             .ofSingle("dmg_when_target_is_low_hp", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_TARGET_LOW_HP)
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Damage to Low Health Targets")
             .setLocDesc(x -> "Low hp is 30% or less.")
             .modifyAfterDone(x -> {
@@ -1383,11 +1360,11 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> DAMAGE_TO_LIVING = DatapackStatBuilder
             .ofSingle("dmg_to_living", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.IS_TARGET_NOT_UNDEAD)
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Damage To Living")
             .setLocDesc(x -> "Living entities are not undead ones.")
             .modifyAfterDone(x -> {
@@ -1398,11 +1375,11 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> DAMAGE_TO_UNDEAD = DatapackStatBuilder
             .ofSingle("dmg_to_undead", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(100)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_TARGET_UNDEAD)
-            .addEffect(StatEffects.INCREASE_VALUE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Damage To Undead")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {

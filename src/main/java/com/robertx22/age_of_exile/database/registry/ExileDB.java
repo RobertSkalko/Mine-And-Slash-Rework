@@ -34,6 +34,7 @@ import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.stat_compat.StatCompat;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
+import com.robertx22.age_of_exile.database.data.stats.layers.StatLayer;
 import com.robertx22.age_of_exile.database.data.support_gem.SupportGem;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
@@ -195,6 +196,10 @@ public class ExileDB {
 
     public static ExileRegistryContainer<Dungeon> Dungeons() {
         return Database.getRegistry(ExileRegistryTypes.DUNGEON);
+    }
+
+    public static ExileRegistryContainer<StatLayer> StatLayers() {
+        return Database.getRegistry(ExileRegistryTypes.STAT_LAYER);
     }
 
     public static ExileRegistryContainer<EntityConfig> EntityConfigs() {

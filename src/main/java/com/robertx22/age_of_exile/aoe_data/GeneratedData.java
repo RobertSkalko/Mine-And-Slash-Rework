@@ -35,6 +35,7 @@ import com.robertx22.age_of_exile.database.data.map_affix.MapAffixes;
 import com.robertx22.age_of_exile.database.data.profession.all.ProfessionRecipes;
 import com.robertx22.age_of_exile.database.data.profession.all.Professions;
 import com.robertx22.age_of_exile.database.data.profession.buffs.StatBuffs;
+import com.robertx22.age_of_exile.database.data.stats.layers.StatLayers;
 import com.robertx22.age_of_exile.database.data.support_gem.SupportGems;
 import com.robertx22.age_of_exile.maps.dungeon_reg.Dungeons;
 
@@ -47,6 +48,7 @@ public class GeneratedData {
     public static void addAllObjectsToGenerate() {
         AuraGems.initKeys();
 
+        StatLayers.register();
         new StatEffects().registerAll();
         new StatConditions().registerAll();
         new Stats().registerAll();
@@ -99,7 +101,7 @@ public class GeneratedData {
         AuraGems.init();
 
         new StatCompats().registerAll();
-        
+
         new ProphecyModifiers().registerAll();
 
         GameBalanceConfig c = new GameBalanceConfig();

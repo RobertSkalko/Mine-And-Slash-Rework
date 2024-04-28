@@ -111,7 +111,6 @@ public class ModEffects implements ExileRegistryInit {
 
         ExileEffectBuilder.of(ModEffects.BONE_CHILL)
                 .maxStacks(5)
-                .stat(2, 5, Stats.ELEMENT_CRIT_DAMAGE_TAKEN.get(Elements.Cold), ModType.FLAT)
                 .stat(-5, -10, new AilmentResistance(Ailments.FREEZE), ModType.FLAT)
                 .stat(-2, -5, new ElementalResist(Elements.Cold), ModType.FLAT)
                 .build();

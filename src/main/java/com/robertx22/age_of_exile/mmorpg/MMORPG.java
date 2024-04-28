@@ -17,6 +17,7 @@ import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChests;
 import com.robertx22.age_of_exile.database.data.profession.ProfessionEvents;
 import com.robertx22.age_of_exile.database.data.spells.components.conditions.EffectCondition;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
+import com.robertx22.age_of_exile.database.data.stats.layers.StatLayers;
 import com.robertx22.age_of_exile.database.data.stats.types.special.SpecialStats;
 import com.robertx22.age_of_exile.database.registrators.Currencies;
 import com.robertx22.age_of_exile.database.registry.ExileDBInit;
@@ -143,6 +144,7 @@ public class MMORPG {
 
         ModTags.init();
 
+        StatLayers.init();
         StatEffects.addSerializers();
         StatConditions.loadClass();
         Stats.loadClass();

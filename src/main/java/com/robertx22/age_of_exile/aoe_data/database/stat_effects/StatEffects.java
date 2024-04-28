@@ -5,8 +5,7 @@ import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffe
 import com.robertx22.age_of_exile.aoe_data.database.spells.schools.WaterSpells;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.PositionSource;
-import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
-import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
+import com.robertx22.age_of_exile.database.data.stats.layers.StatLayers;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
@@ -22,8 +21,27 @@ public class StatEffects implements ExileRegistryInit {
 
     // todo LOCALIZE THIS!!!!
 
+    public static class Layers {
+
+        public static ModifyStatLayerEffect ADDITIVE_DAMAGE = new ModifyStatLayerEffect(StatLayers.Offensive.ADDITIVE_DMG, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, ModifyStatLayerEffect.CalculationType.JUST_STAT_NUMBER);
+        public static ModifyStatLayerEffect CRIT_DAMAGE = new ModifyStatLayerEffect(StatLayers.Offensive.CRIT_DAMAGE, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, ModifyStatLayerEffect.CalculationType.JUST_STAT_NUMBER);
+        public static ModifyStatLayerEffect DOUBLE_DAMAGE = new ModifyStatLayerEffect(StatLayers.Offensive.DOUBLE_DAMAGE, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, ModifyStatLayerEffect.CalculationType.JUST_STAT_NUMBER);
+
+
+        public static ModifyStatLayerEffect ELEMENTAL_RESIST = new ModifyStatLayerEffect(StatLayers.Defensive.ELEMENTAL_MITIGATION, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.REDUCE, ModifyStatLayerEffect.CalculationType.JUST_STAT_NUMBER);
+        public static ModifyStatLayerEffect ELEMENTAL_PENETRATION = new ModifyStatLayerEffect(StatLayers.Defensive.ELEMENTAL_MITIGATION, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, ModifyStatLayerEffect.CalculationType.JUST_STAT_NUMBER);
+
+        public static ModifyStatLayerEffect ARMOR = new ModifyStatLayerEffect(StatLayers.Defensive.PHYS_MITIGATION, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.REDUCE, ModifyStatLayerEffect.CalculationType.EFFECTIVE_ARMOR);
+        public static ModifyStatLayerEffect ARMOR_PENETRATION = new ModifyStatLayerEffect(StatLayers.Defensive.PHYS_MITIGATION, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, ModifyStatLayerEffect.CalculationType.EFFECTIVE_ARMOR);
+
+        public static void init() {
+
+        }
+    }
+
     public static DataHolder<EffectCtx, StatEffect> GIVE_SELF_EFFECT_30_SEC = new DataHolder<>(
             Arrays.asList(
+
                     ModEffects.TAUNT_STANCE,
                     ModEffects.MISSILE_BARRAGE
             ),
@@ -84,9 +102,15 @@ public class StatEffects implements ExileRegistryInit {
     public static StatEffect DOUBLE_DAMAGE = new DoubleDamageAction();
     public static StatEffect SET_PIERCE = new SetBooleanEffect(EventData.PIERCE);
     public static StatEffect SET_BARRAGE = new SetBooleanEffect(EventData.BARRAGE);
+
+    /*
+    // todo ..
     public static StatEffect INCREASE_VALUE = new IncreaseNumberByPercentEffect(EventData.NUMBER);
     public static StatEffect MULTIPLY_VALUE = new MultiplyNumberByPercentEffect(EventData.NUMBER);
     public static StatEffect DECREASE_VALUE = new DecreaseNumberByPercentEffect(EventData.NUMBER);
+
+
+     */
     public static StatEffect INCREASE_EFFECT_DURATION = new IncreaseNumberByPercentEffect(EventData.EFFECT_DURATION_TICKS);
     public static StatEffect INCREASE_SECONDS = new IncreaseNumberByPercentEffect(EventData.SECONDS);
     public static StatEffect SET_ACCURACY = new SetDataNumberAction(EventData.ACCURACY);
@@ -106,15 +130,6 @@ public class StatEffects implements ExileRegistryInit {
     public static StatEffect APPLY_CAST_SPEED_TO_CD = new ApplyCooldownAsCastTimeEffect();
 
 
-    public static DataHolder<String, StatEffect> ADD_PERC_OF_STAT_TO_NUMBER = new DataHolder<>(
-            Arrays.asList(
-                    Health.getInstance()
-                            .GUID(),
-                    Mana.getInstance()
-                            .GUID()
-            )
-            , x -> new AddToNumberEffect("add_perc_of_" + x + "_to_num", EventData.NUMBER, NumberProvider.ofPercentOfStat(x)));
-
     public static DataHolder<SetCooldownEffect.Data, StatEffect> SET_COOLDOWN = new DataHolder<>(
             Arrays.asList(
                     SetCooldownEffect.MISSILE_BARRAGE
@@ -127,6 +142,7 @@ public class StatEffects implements ExileRegistryInit {
 
     public static void addSerializers() {
 
+        Layers.init();
     }
 
     @Override

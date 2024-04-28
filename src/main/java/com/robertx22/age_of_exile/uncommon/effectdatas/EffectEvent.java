@@ -5,6 +5,9 @@ import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DataPackStatEffect;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DatapackStat;
+import com.robertx22.age_of_exile.database.data.stats.layers.StatLayer;
+import com.robertx22.age_of_exile.database.data.stats.layers.StatLayerData;
+import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
@@ -22,6 +25,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 public abstract class EffectEvent implements IGUID {
@@ -36,10 +41,38 @@ public abstract class EffectEvent implements IGUID {
 
     public EventData data = new EventData();
 
-
     public abstract String getName();
 
     private boolean activated = false;
+
+    private HashMap<String, StatLayerData> layers = new HashMap<>(); // todo use this later
+
+    private List<MoreMultiData> moreMultis = new ArrayList<>(); // todo use this later
+
+
+    public void addMoreMulti(String number, float multi) {
+        moreMultis.add(new MoreMultiData(multi, number));
+    }
+
+    public static class MoreMultiData {
+
+        public float multi = 1;
+        public String numberid = "";
+
+        public MoreMultiData(float multi, String numberid) {
+            this.multi = multi;
+            this.numberid = numberid;
+        }
+    }
+
+    public StatLayerData getLayer(StatLayer layer, String number) {
+        String id = layer.GUID() + "_" + number;
+        if (!layers.containsKey(id)) {
+            layers.put(id, new StatLayerData(layer.GUID(), number));
+        }
+        return layers.get(id);
+
+    }
 
     public EffectEvent(float num, LivingEntity source, LivingEntity target) {
         this(source, target);
@@ -105,6 +138,7 @@ public abstract class EffectEvent implements IGUID {
             data.freeze();
 
             if (!data.isCanceled()) {
+
                 activate();
                 this.activated = true;
             }
@@ -112,6 +146,21 @@ public abstract class EffectEvent implements IGUID {
             // watch.print("stat events " + GUID() + " ");
         }
 
+    }
+
+    // todo this shouldnt be calculated at the end.. stats like magic shield depend on it
+    private void calculateStatLayersAndMoreMultis() {
+        List<StatLayerData> all = new ArrayList<>();
+        all.addAll(layers.values());
+        all.sort(Comparator.comparingInt(x -> x.getLayer().priority)); // todo check if this is correct order
+
+        for (StatLayerData layer : all) {
+            layer.getLayer().action.apply(this, layer, layer.numberID);
+        }
+
+        for (MoreMultiData more : this.moreMultis) {
+            this.data.getNumber(more.numberid).number *= more.multi;
+        }
     }
 
     public void calculateEffects() {
@@ -127,6 +176,8 @@ public abstract class EffectEvent implements IGUID {
 
             TryApplyEffects(source, sourceData, EffectSides.Source);
             TryApplyEffects(target, targetData, EffectSides.Target);
+
+
         }
 
     }
@@ -168,6 +219,29 @@ public abstract class EffectEvent implements IGUID {
         }
     }
 
+    private static EffectWithCtx CALC_LAYERS_EFFECT = new EffectWithCtx(new IStatEffect() {
+        @Override
+        public boolean worksOnEvent(EffectEvent ev) {
+            return true;
+        }
+
+        @Override
+        public EffectSides Side() {
+            return EffectSides.Source;
+        }
+
+        @Override
+        public int GetPriority() {
+            return StatPriority.Damage.CALC_DAMAGE_LAYERS.priority;
+        }
+
+        @Override
+        public void TryModifyEffect(EffectEvent effect, EffectSides statSource, StatData data, Stat stat) {
+            effect.calculateStatLayersAndMoreMultis();
+        }
+    }, EffectSides.Source, new StatData());
+
+
     private List<EffectWithCtx> AddEffects(List<EffectWithCtx> effects, EntityData enData, LivingEntity en, EffectSides side) {
 
         if (enData == null) {
@@ -179,6 +253,8 @@ public abstract class EffectEvent implements IGUID {
 
 
         if (side == EffectSides.Source) {
+            effects.add(CALC_LAYERS_EFFECT);
+
             if (isSpell()) {
                 if (en instanceof Player p) {
                     if (getSpell() != null) {

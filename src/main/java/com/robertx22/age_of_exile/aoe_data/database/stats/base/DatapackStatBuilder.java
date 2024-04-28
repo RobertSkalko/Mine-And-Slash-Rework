@@ -9,6 +9,7 @@ package com.robertx22.age_of_exile.aoe_data.database.stats.base;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DataPackStatAccessor;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DataPackStatEffect;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DatapackStat;
+import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.action.StatEffect;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.condition.StatCondition;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -60,7 +61,7 @@ public class DatapackStatBuilder<T> {
     public boolean usesMoreMulti = false;
 
 
-    private int priority = -1;
+    private String priority = "";
     private EffectSides side = EffectSides.Source;
 
     private List<String> events = new ArrayList<>();
@@ -153,8 +154,8 @@ public class DatapackStatBuilder<T> {
         return this;
     }
 
-    public DatapackStatBuilder<T> setPriority(int priority) {
-        this.priority = priority;
+    public DatapackStatBuilder<T> setPriority(StatPriority priority) {
+        this.priority = priority.GUID();
         return this;
     }
 
@@ -183,7 +184,6 @@ public class DatapackStatBuilder<T> {
         Objects.requireNonNull(locDescMaker);
 
         ErrorUtils.ifFalse(!stats.isEmpty());
-        ErrorUtils.ifFalse(priority > -1);
         //ErrorUtils.ifFalse(!events.isEmpty());
 
         stats.entrySet()
