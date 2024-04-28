@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DatapackSta
 import com.robertx22.age_of_exile.database.data.stats.layers.StatLayer;
 import com.robertx22.age_of_exile.database.data.stats.layers.StatLayerData;
 import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
+import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
@@ -231,15 +232,15 @@ public abstract class EffectEvent implements IGUID {
         }
 
         @Override
-        public int GetPriority() {
-            return StatPriority.Damage.CALC_DAMAGE_LAYERS.priority;
+        public StatPriority GetPriority() {
+            return StatPriority.Damage.CALC_DAMAGE_LAYERS;
         }
 
         @Override
         public void TryModifyEffect(EffectEvent effect, EffectSides statSource, StatData data, Stat stat) {
             effect.calculateStatLayersAndMoreMultis();
         }
-    }, EffectSides.Source, new StatData());
+    }, EffectSides.Source, new StatData(new UnknownStat().GUID(), 1, 1));
 
 
     private List<EffectWithCtx> AddEffects(List<EffectWithCtx> effects, EntityData enData, LivingEntity en, EffectSides side) {

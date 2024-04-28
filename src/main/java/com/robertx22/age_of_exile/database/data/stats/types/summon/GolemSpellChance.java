@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.SpellCastContext;
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.golems.GolemSummon;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
+import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -65,8 +66,8 @@ public class GolemSpellChance extends Stat {
         }
 
         @Override
-        public int GetPriority() {
-            return 0;
+        public StatPriority GetPriority() {
+            return StatPriority.Spell.FIRST;
         }
 
         @Override

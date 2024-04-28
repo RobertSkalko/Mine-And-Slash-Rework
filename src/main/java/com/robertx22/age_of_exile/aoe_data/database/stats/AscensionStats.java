@@ -21,7 +21,7 @@ public class AscensionStats {
     public static DataPackStatAccessor<EmptyAccessor> BARRAGE_SELF_BUFF_ON_SPELL_CRIT = DatapackStatBuilder
             .ofSingle("chance_of_barrage_on_spell_crit", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IF_RANDOM_ROLL)
             .addCondition(StatConditions.IF_CRIT)

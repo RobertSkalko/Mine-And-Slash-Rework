@@ -35,8 +35,14 @@ public class DataPackStatEffect implements IStatEffect {
     }
 
     @Override
-    public int GetPriority() {
-        return StatPriority.MAP.get(order).priority;
+    public StatPriority GetPriority() {
+        var p = StatPriority.MAP.get(order);
+        if (p == null) {
+            // todo find better error way
+            System.out.println("No such stat priority: " + order);
+            return StatPriority.Spell.FIRST;
+        }
+        return p;
     }
 
     @Override

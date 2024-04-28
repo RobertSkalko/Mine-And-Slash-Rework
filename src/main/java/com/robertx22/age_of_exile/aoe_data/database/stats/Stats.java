@@ -44,7 +44,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> PROC_SHATTER_MAX_FROST_ESSENCE = DatapackStatBuilder
             .ofSingle("proc_shatter_max_frost", Elements.Cold)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IF_RANDOM_ROLL)
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
@@ -63,7 +63,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> PROC_SHATTER = DatapackStatBuilder
             .ofSingle("proc_shatter", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IF_RANDOM_ROLL)
             .addCondition(StatConditions.IS_EVENT_AILMENT.get(Ailments.FREEZE))
@@ -84,7 +84,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> EFFECT_DURATION_YOU_CAST = DatapackStatBuilder
             .ofSingle("eff_dur_u_cast", Elements.Physical)
             .worksWithEvent(ExilePotionEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addEffect(e -> StatEffects.INCREASE_EFFECT_DURATION)
             .setLocName(x -> "Effect Duration")
@@ -98,7 +98,7 @@ public class Stats implements ExileRegistryInit {
             .<EffectTag>of(x -> x.GUID() + "_eff_dur_u_cast", x -> Elements.Physical)
             .addAllOfType(EffectTag.getAll())
             .worksWithEvent(ExilePotionEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.EFFECT_HAS_TAG.get(x))
             .addEffect(e -> StatEffects.INCREASE_EFFECT_DURATION)
@@ -115,7 +115,7 @@ public class Stats implements ExileRegistryInit {
                     ModEffects.REJUVENATE
             ))
             .worksWithEvent(RestoreResourceEvent.ID) // todo should be tick event, BUT LAG
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_RESOURCE.get(ResourceType.health))
             .addCondition(StatConditions.IS_RESTORE_TYPE.get(RestoreType.regen))
@@ -138,7 +138,7 @@ public class Stats implements ExileRegistryInit {
                     ModEffects.TAUNT_STANCE
             ))
             .worksWithEvent(RestoreResourceEvent.ID) // todo should be tick event, BUT LAG
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_RESOURCE.get(ResourceType.health))
             .addCondition(StatConditions.IS_RESTORE_TYPE.get(RestoreType.regen))
@@ -158,7 +158,7 @@ public class Stats implements ExileRegistryInit {
             .<LeechInfo>of(x -> x.element.guidName + "_" + x.resourceType.id + "_leech", x -> x.element)
             .addAllOfType(LeechInfo.allCombos())
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(StatPriority.Damage.FINAL_DAMAGE)
+            .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
             .addEffect(e -> StatEffects.LEECH_RESTORE_RESOURCE_BASED_ON_STAT_DATA.get(e.resourceType))
@@ -179,7 +179,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<AuraGems.AuraInfo> SPECIFIC_AURA_COST = DatapackStatBuilder
             .<AuraGems.AuraInfo>of(x -> x.id + "_aura_cost", x -> Elements.Physical)
             .addAllOfType(AuraGems.ALL)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .setLocName(x -> Stat.format(x.name + " Cost"))
             .setLocDesc(x -> "")
@@ -228,7 +228,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor MAX_SUMMON_CAPACITY = DatapackStatBuilder
             .ofSingle("max_total_summons", Elements.NONE)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addEffect(StatEffects.ADD_TOTAL_SUMMONS)
             .setLocName(x -> "Maximum Summons")
@@ -376,7 +376,7 @@ public class Stats implements ExileRegistryInit {
                     ResourceType.mana
             ))
             .worksWithEvent(OnMobKilledByDamageEvent.ID)
-            .setPriority(StatPriority.Damage.FINAL_DAMAGE)
+            .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)
             .setSide(EffectSides.Source)
             .addEffect(e -> StatEffects.LEECH_RESTORE_RESOURCE_BASED_ON_STAT_DATA.get(e))
             .setLocName(x -> x.locname + " on Kill")
@@ -393,7 +393,7 @@ public class Stats implements ExileRegistryInit {
             .<ResourceAndAttack>of(x -> x.resource.id + "_on_" + x.attackType.id + "_hit", x -> Elements.NONE)
             .addAllOfType(ResourceAndAttack.allCombos())
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(StatPriority.Damage.FINAL_DAMAGE)
+            .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.ATTACK_TYPE_MATCHES.get(x.attackType))
             //.addCondition(x -> StatConditions.IS_NOT_SUMMON_ATTACK) // todo why did i do this?
@@ -479,7 +479,6 @@ public class Stats implements ExileRegistryInit {
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IF_CRIT)
-            //addCondition(StatConditions.IS_ATTACK_OR_SPELL_ATTACK)
             .addEffect(StatEffects.Layers.CRIT_DAMAGE)
             .setLocName(x -> "Crit Damage")
             .setLocDesc(x -> "If Critical, multiply by x")
@@ -800,7 +799,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> LIFESTEAL = DatapackStatBuilder
             .ofSingle("lifesteal", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(StatPriority.Damage.FINAL_DAMAGE)
+            .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_ATTACK_DAMAGE)
             .addEffect(StatEffects.LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.get(ResourceType.health))
@@ -819,7 +818,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> MANASTEAL = DatapackStatBuilder
             .ofSingle("manasteal", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(StatPriority.Damage.FINAL_DAMAGE)
+            .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_ATTACK_DAMAGE)
             .addEffect(StatEffects.LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.get(ResourceType.mana))
@@ -838,7 +837,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> SPELL_LIFESTEAL = DatapackStatBuilder
             .ofSingle("spell_lifesteal", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(StatPriority.Damage.FINAL_DAMAGE)
+            .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTags.magic))
             .addEffect(StatEffects.LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.get(ResourceType.health))
@@ -857,7 +856,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> SPELL_MSSTEAL = DatapackStatBuilder
             .ofSingle("spell_mssteal", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(StatPriority.Damage.FINAL_DAMAGE)
+            .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTags.magic))
             .addEffect(StatEffects.LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.get(ResourceType.magic_shield))
@@ -876,7 +875,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> DOT_LIFESTEAL = DatapackStatBuilder
             .ofSingle("dot_lifesteal", Elements.NONE)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(StatPriority.Damage.FINAL_DAMAGE)
+            .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.ATTACK_TYPE_MATCHES.get(AttackType.dot))
             .addEffect(StatEffects.LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE.get(ResourceType.health))
@@ -915,7 +914,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> MANA_COST = DatapackStatBuilder
             .ofSingle("mana_cost", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addEffect(StatEffects.INCREASE_MANA_COST)
             .setLocName(x -> "Mana Cost")
@@ -932,7 +931,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> CAST_SPEED = DatapackStatBuilder
             .ofSingle("cast_speed", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTags.magic))
             .addEffect(StatEffects.DECREASE_CAST_TIME)
@@ -984,7 +983,7 @@ public class Stats implements ExileRegistryInit {
             .addAllOfType(SpellTag.getAll())
 
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x))
             .addEffect(StatEffects.DECREASE_CAST_TIME)
@@ -1015,7 +1014,7 @@ public class Stats implements ExileRegistryInit {
             .<SpellTag>of(x -> x.GUID() + "_cdr", x -> Elements.Physical)
             .addAllOfType(SpellTag.getAll())
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x))
             .addEffect(StatEffects.DECREASE_COOLDOWN)
@@ -1031,7 +1030,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> COOLDOWN_REDUCTION = DatapackStatBuilder
             .ofSingle("cdr", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addEffect(StatEffects.DECREASE_COOLDOWN)
             .setLocName(x -> "Cooldown Reduction")
@@ -1046,7 +1045,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> COOLDOWN_TICKS = DatapackStatBuilder
             .ofSingle("cd_ticks", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addEffect(StatEffects.DECREASE_COOLDOWN_BY_X_TICKS)
             .setLocName(x -> "Cooldown Ticks")
@@ -1061,7 +1060,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> PROJECTILE_SPEED = DatapackStatBuilder
             .ofSingle("faster_projectiles", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.projectile))
             .addEffect(StatEffects.INCREASE_PROJ_SPEED)
@@ -1077,7 +1076,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> PROJECTILE_COUNT = DatapackStatBuilder
             .ofSingle("projectile_count", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.projectile))
             .addEffect(StatEffects.PROJECTILE_COUNT)
@@ -1091,7 +1090,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> PROJECTILE_BARRAGE = DatapackStatBuilder
             .ofSingle("projectile_barrage", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.projectile))
             .addEffect(StatEffects.SET_BARRAGE)
@@ -1104,7 +1103,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> SUMMON_DURATION = DatapackStatBuilder
             .ofSingle("summon_duration", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.summon))
             .addEffect(StatEffects.DURATION_INCREASE)
@@ -1121,7 +1120,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> TOTEM_DURATION = DatapackStatBuilder
             .ofSingle("totem_duration", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.totem))
             .addEffect(StatEffects.DURATION_INCREASE)
@@ -1137,7 +1136,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> AGGRO_RADIUS = DatapackStatBuilder
             .ofSingle("aggro_radius", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.summon))
             .addEffect(StatEffects.AGGRO_INCREASE)
@@ -1202,7 +1201,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> INCREASED_AREA = DatapackStatBuilder
             .ofSingle("inc_aoe", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.area))
             .addEffect(StatEffects.INCREASE_AREA)
@@ -1216,7 +1215,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> PIERCING_PROJECTILES = DatapackStatBuilder
             .ofSingle("piercing_projectiles", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.projectile))
             .addEffect(StatEffects.SET_PIERCE)
@@ -1232,7 +1231,7 @@ public class Stats implements ExileRegistryInit {
     public static DataPackStatAccessor<EmptyAccessor> THREAT_GENERATED = DatapackStatBuilder
             .ofSingle("threat_generated", Elements.Physical)
             .worksWithEvent(GenerateThreatEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
             .setLocName(x -> "Threat Generated")
@@ -1247,7 +1246,7 @@ public class Stats implements ExileRegistryInit {
             .<ModTag>of(x -> "inc_effect_of_" + x.GUID() + "_buff_given", x -> Elements.Physical)
             .addAllOfType(ModTag.MAP.get(TagType.Effect))
             .worksWithEvent(ExilePotionEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.EFFECT_HAS_TAG.get(x))
             .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
@@ -1264,7 +1263,7 @@ public class Stats implements ExileRegistryInit {
             .<ModTag>of(x -> "inc_effect_of_" + x.GUID() + "_buff_on_you", x -> Elements.Physical)
             .addAllOfType(ModTag.MAP.get(TagType.Effect))
             .worksWithEvent(ExilePotionEvent.ID)
-            .setPriority(StatPriority.Spell.DATA_MODIFICATION)
+            .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Target)
             .addCondition(x -> StatConditions.EFFECT_HAS_TAG.get(x))
             .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)

@@ -1,7 +1,7 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
-pack_leader
 ghostly_shores
+pack_leader
 blood_curse
 weight_of_leadership
 ele_gamble
@@ -20,17 +20,17 @@ curse_effect_ring
 the_unseen_eye
 winter_chill
 insight
-burning_desire
 rabbit_paw
-skull_of_spirits
+burning_desire
 curse_of_tongues
+skull_of_spirits
 ele_aegis
 arch_gamble
+chained_oak
 towering_physique
 ghast_necklace
-chained_oak
-golemancer
 spark_aura
+golemancer
 haste_price
 fire_step
 piercing_touch
@@ -39,8 +39,8 @@ master_torture
 air_disaster
 crystalized_capacitor
 new_dawn_flame
-azuna_ring
 witch_brew
+azuna_ring
 madness_pursuit
 doombolt
 mana_dominion

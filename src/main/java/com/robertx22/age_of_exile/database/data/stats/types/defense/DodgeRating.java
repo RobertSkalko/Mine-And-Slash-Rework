@@ -72,8 +72,8 @@ public class DodgeRating extends Stat implements IUsableStat {
     private static class Effect extends BaseDamageEffect {
 
         @Override
-        public int GetPriority() {
-            return StatPriority.Damage.HIT_PREVENTION.priority;
+        public StatPriority GetPriority() {
+            return StatPriority.Damage.HIT_PREVENTION;
         }
 
         @Override

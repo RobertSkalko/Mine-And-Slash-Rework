@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shi
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.InCodeStatEffect;
+import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
@@ -67,8 +68,8 @@ public class MagicShieldHeal extends Stat {
 
 
         @Override
-        public int GetPriority() {
-            return Priority.First.priority;
+        public StatPriority GetPriority() {
+            return StatPriority.Damage.DAMAGE_LAYERS;
         }
 
         @Override

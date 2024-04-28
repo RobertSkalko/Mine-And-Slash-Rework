@@ -29,10 +29,6 @@ public class AllAilmentDamage extends Stat {
 
     private class Effect extends BaseDamageIncreaseEffect {
 
-        @Override
-        public int GetPriority() {
-            return Priority.First.priority;
-        }
 
         @Override
         public EffectSides Side() {

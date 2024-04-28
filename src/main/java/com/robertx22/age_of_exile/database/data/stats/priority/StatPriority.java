@@ -32,7 +32,7 @@ public class StatPriority implements IAutoLocName {
         this.event = event;
         this.priority = priority;
 
-        MAP.put(id, this);
+        MAP.put(this.id, this);
     }
 
     @Override
@@ -62,21 +62,37 @@ public class StatPriority implements IAutoLocName {
 
         StatPriority DAMAGE_TRANSFER = damage("DAMAGE_TRANSFER", 0);
 
-        StatPriority BEFORE_HIT_PREVENTION = damage("BEFORE_HIT_PREVENTION", 9);
-        StatPriority HIT_PREVENTION = damage("HIT_PREVENTION", 10);
-        StatPriority BEFORE_DAMAGE_LAYERS = damage("BEFORE_DAMAGE_LAYERS", 19);
+        StatPriority BEFORE_HIT_PREVENTION = damage("BEFORE_HIT_PREVENTION", 9); // for stuff like accuracy
+        StatPriority HIT_PREVENTION = damage("HIT_PREVENTION", 10); // dodge, block
+        StatPriority BEFORE_DAMAGE_LAYERS = damage("BEFORE_DAMAGE_LAYERS", 19); // currently only used for old dmg stats that arent converted to datapacks yet
 
-        StatPriority DAMAGE_LAYERS = damage("DAMAGE_LAYERS", 20);
-        StatPriority CALC_DAMAGE_LAYERS = damage("CALC_DAMAGE_LAYERS", 31);
-        StatPriority AFTER_DAMAGE_BONUSES = damage("AFTER_DAMAGE_BONUSES", 32); // for stuff like leech
-        StatPriority DAMAGE_TAKEN_AS = damage("DAMAGE_TAKEN_AS", 40);
-        StatPriority DAMAGE_REDUCTION = damage("DAMAGE_REDUCTION", 50);
-        StatPriority DAMAGE_ABSORPTION = damage("DAMAGE_ABSORPTION", 60);
+        StatPriority DAMAGE_LAYERS = damage("DAMAGE_LAYERS", 20); // this one contains a bunch of its own ordered multipliers
+        StatPriority CALC_DAMAGE_LAYERS = damage("CALC_DAMAGE_LAYERS", 30); // this should only be used by the custom stat that exists to fit right here at this place in the order of effect calc
+        StatPriority AFTER_DAMAGE_BONUSES = damage("AFTER_DAMAGE_BONUSES", 32); // for stuff like leech, because we don't want absorbs, mana shields etc to stop leech
+        // todo not using this yet  StatPriority DAMAGE_TAKEN_AS = damage("DAMAGE_TAKEN_AS", 40);
+        // todo should this be the same as dmg layer StatPriority DAMAGE_REDUCTION = damage("DAMAGE_REDUCTION", 50);
+        //this row must have a custom priority for each type of damage absorb so it's never random!!
+        StatPriority DAMAGE_ABSORBED_BY_SHIELD = damage("DAMAGE_ABSORBED_BY_SHIELD", 60);
+        StatPriority DAMAGE_ABSORBED_BY_MANA = damage("DAMAGE_ABSORBED_BY_MANA", 61);
+        // todo this is currently not a stat effect, why?  StatPriority DAMAGE_ABSORBED_BY_MAGIC_SHIELD = damage("DAMAGE_ABSORBED_BY_MAGIC_SHIELD", 62);
         StatPriority FINAL_DAMAGE = damage("FINAL_DAMAGE", 100);
 
+        public static void init() {
+
+        }
     }
 
     public interface Spell {
-        StatPriority DATA_MODIFICATION = damage("DATA_MODIFICATION", 0);
+        StatPriority FIRST = damage("DATA_MODIFICATION", 0);
+
+        public static void init() {
+
+        }
+    }
+
+
+    public static void init() {
+        Damage.init();
+        Spell.init();
     }
 }

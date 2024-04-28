@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.stats.effects.defense;
 import com.robertx22.age_of_exile.database.data.stats.IUsableStat;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.InCodeStatEffect;
+import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
@@ -17,8 +18,8 @@ public class ArmorEffect extends InCodeStatEffect<DamageEvent> {
     }
 
     @Override
-    public int GetPriority() {
-        return Priority.Third.priority;
+    public StatPriority GetPriority() {
+        return StatPriority.Damage.BEFORE_DAMAGE_LAYERS;
     }
 
     @Override
@@ -29,7 +30,7 @@ public class ArmorEffect extends InCodeStatEffect<DamageEvent> {
     @Override
     public DamageEvent activate(DamageEvent effect, StatData data, Stat stat) {
         float pene = effect.getPenetration();
-        
+
 
         IUsableStat armor = (IUsableStat) stat;
 

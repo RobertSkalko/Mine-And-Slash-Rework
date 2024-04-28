@@ -2,13 +2,12 @@ package com.robertx22.age_of_exile.database.data.stats.effects.game_changers;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.InCodeStatEffect;
+import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.SpendResourceEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
-
-import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect.Priority;
 
 public class BloodUserEffect extends InCodeStatEffect<SpendResourceEvent> {
 
@@ -21,8 +20,8 @@ public class BloodUserEffect extends InCodeStatEffect<SpendResourceEvent> {
     }
 
     @Override
-    public int GetPriority() {
-        return Priority.Last.priority;
+    public StatPriority GetPriority() {
+        return StatPriority.Spell.FIRST;
     }
 
     @Override

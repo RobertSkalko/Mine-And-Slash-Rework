@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.database.data.stats.types.misc;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageEffect;
+import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
@@ -10,8 +11,6 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.RestoreResourceEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
-
-import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect.Priority;
 
 public class DamageTakenToMana extends Stat {
 
@@ -51,8 +50,8 @@ public class DamageTakenToMana extends Stat {
     private static class Effect extends BaseDamageEffect {
 
         @Override
-        public int GetPriority() {
-            return Priority.Last.priority;
+        public StatPriority GetPriority() {
+            return StatPriority.Damage.DAMAGE_ABSORBED_BY_MANA;
         }
 
         @Override
@@ -67,7 +66,7 @@ public class DamageTakenToMana extends Stat {
 
             if (restore > 0) {
                 RestoreResourceEvent mana = EventBuilder.ofRestore(effect.source, effect.target, ResourceType.mana, RestoreType.heal, restore)
-                    .build();
+                        .build();
                 mana.Activate();
 
             }

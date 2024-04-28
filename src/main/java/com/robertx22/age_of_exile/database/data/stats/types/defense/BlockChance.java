@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.database.data.stats.types.defense;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageEffect;
+import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
@@ -59,8 +60,8 @@ public class BlockChance extends Stat {
     private static class Effect extends BaseDamageEffect {
 
         @Override
-        public int GetPriority() {
-            return 100;
+        public StatPriority GetPriority() {
+            return StatPriority.Damage.HIT_PREVENTION;
         }
 
         @Override

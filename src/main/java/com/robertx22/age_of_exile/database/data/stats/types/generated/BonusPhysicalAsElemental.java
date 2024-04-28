@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.stats.types.generated;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageEffect;
+import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.database.data.stats.types.ElementalStat;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
@@ -57,8 +58,8 @@ public class BonusPhysicalAsElemental extends ElementalStat {
     private class Effect extends BaseDamageEffect {
 
         @Override
-        public int GetPriority() {
-            return Priority.Fourth.priority;
+        public StatPriority GetPriority() {
+            return StatPriority.Damage.AFTER_DAMAGE_BONUSES;
         }
 
         @Override

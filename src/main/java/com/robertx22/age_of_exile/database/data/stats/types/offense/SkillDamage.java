@@ -56,11 +56,7 @@ public class SkillDamage extends Stat {
             super();
         }
 
-        @Override
-        public int GetPriority() {
-            return Priority.Second.priority;
-        }
-
+   
         @Override
         public EffectSides Side() {
             return EffectSides.Source;

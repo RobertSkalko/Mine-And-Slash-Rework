@@ -2,14 +2,13 @@ package com.robertx22.age_of_exile.database.data.stats.effects.game_changers;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.InCodeStatEffect;
+import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
 import com.robertx22.age_of_exile.uncommon.effectdatas.RestoreResourceEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
-
-import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect.Priority;
 
 public class HealthRestorationToBloodEffect extends InCodeStatEffect<RestoreResourceEvent> {
 
@@ -22,8 +21,8 @@ public class HealthRestorationToBloodEffect extends InCodeStatEffect<RestoreReso
     }
 
     @Override
-    public int GetPriority() {
-        return Priority.Last.priority;
+    public StatPriority GetPriority() {
+        return StatPriority.Damage.FINAL_DAMAGE;
     }
 
     @Override
@@ -37,7 +36,7 @@ public class HealthRestorationToBloodEffect extends InCodeStatEffect<RestoreReso
         float bloodrestored = effect.data.getNumber() * data.getValue() / 100F;
 
         RestoreResourceEvent restore = EventBuilder.ofRestore(effect.source, effect.target, ResourceType.blood, RestoreType.regen, bloodrestored)
-            .build();
+                .build();
 
         restore.Activate();
         return effect;

@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.database.data.stats.types.generated;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageEffect;
+import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.database.data.stats.types.ElementalStat;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
@@ -12,9 +13,6 @@ import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import com.robertx22.age_of_exile.uncommon.wrappers.MapWrapper;
 
 import java.util.List;
-
-import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
-import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect.Priority;
 
 public class ElementalPenetration extends ElementalStat {
     public static MapWrapper<Elements, ElementalPenetration> MAP = new MapWrapper();
@@ -64,14 +62,14 @@ public class ElementalPenetration extends ElementalStat {
     @Override
     public String locNameForLangFile() {
         return this.getElement()
-            .dmgName + " Penetration";
+                .dmgName + " Penetration";
     }
 
     private static class Effect extends BaseDamageEffect {
 
         @Override
-        public int GetPriority() {
-            return Priority.First.priority;
+        public StatPriority GetPriority() {
+            return StatPriority.Spell.FIRST;
         }
 
         @Override
@@ -88,8 +86,8 @@ public class ElementalPenetration extends ElementalStat {
         @Override
         public boolean canActivate(DamageEvent effect, StatData data, Stat stat) {
             return effect.GetElement()
-                .equals(stat.getElement()) && !stat.getElement()
-                .equals(Elements.Elemental);
+                    .equals(stat.getElement()) && !stat.getElement()
+                    .equals(Elements.Elemental);
         }
 
     }

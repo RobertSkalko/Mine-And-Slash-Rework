@@ -22,6 +22,7 @@ This is meant for players who don't want to mess with inviting to parties etc
 - attempt fix double death xp loss etc
 - improved hotbar ui a bit
 - dungeons now have names
+- attempted to cleanup some stat code, expect bugs in the short term.
 - added new currency that rerols a random affix into a random common affix
 - should fix harvest not working
 - attempted to make fake players be able to attack (they are considered players so my code checked if they have energy, if they can use the weapon (stat and lvl req) and also they had 0 stats because they dont TICK...

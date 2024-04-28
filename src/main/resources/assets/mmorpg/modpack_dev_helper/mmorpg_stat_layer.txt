@@ -2,6 +2,7 @@ These are all default registry entries of this type.
 This registry is modify-able through datapacks.
 additive_damage
 physical_mitigation
+double_damage
 elemental_mitigation
 crit_damage
 flat_damage
