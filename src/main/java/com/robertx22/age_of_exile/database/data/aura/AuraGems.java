@@ -202,5 +202,6 @@ public class AuraGems {
                 new StatMod(1, 5, new MaxElementalResist(Elements.Shadow), ModType.FLAT)
         )).levelReq(20).addToSerializables();
 
+        WatcherEyeAffixes.init();
     }
 }

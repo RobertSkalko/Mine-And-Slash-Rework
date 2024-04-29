@@ -57,6 +57,9 @@ public class JewelInvHelper implements IStatCtx {
             if (data != null) {
                 total++;
 
+                if (!data.canWear(Load.Unit(p))) {
+                    unequip(p, i);
+                }
                 if (!data.uniq.id.isEmpty()) {
                     if (uniques.contains(data.uniq.id)) {
                         unequip(p, i);

@@ -150,6 +150,11 @@ public class StatCalculation {
         if (entity instanceof Player p) {
             var playerData = Load.player(p);
 
+            playerData.aurasOn = new ArrayList<>();
+            for (SkillGemData aura : playerData.getSkillGemInventory().getAurasGems()) {
+                playerData.aurasOn.add(aura.id);
+            }
+
             statContexts.add(CommonStatUtils.addStatCompat(p));
             statContexts.addAll(PlayerStatUtils.addToolStats(p));
 

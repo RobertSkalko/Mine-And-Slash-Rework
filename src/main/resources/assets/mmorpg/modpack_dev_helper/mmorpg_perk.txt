@@ -184,6 +184,7 @@ ms_all_in
 guardian
 poison_chance_big
 arrow_barrage
+magic_shield_on_kill
 water_resist_big
 fire_water_damage_big
 heart_of_ice

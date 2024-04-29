@@ -17,6 +17,7 @@ public enum LootType implements IGUID {
     Jewel("Jewel", "jewel", Words.Jewel, 7),
     LootChest("Loot Chest", "loot_chest", Words.Loot, 8),
     UberFrag("Uber Fragment", "uber_frag", Words.UBER_FRAG, 9),
+    WatcherEye("Watcher Eye", "watcher_eye", Words.None, 10),
     All("All", "all", Words.All, 0);
 
     public int custommodeldata;

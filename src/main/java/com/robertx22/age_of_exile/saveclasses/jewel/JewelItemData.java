@@ -15,6 +15,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.AffixData;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.tags.all.SlotTags;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
@@ -24,6 +25,7 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -34,9 +36,11 @@ import java.util.List;
 public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
 
 
-    public UniqueJewelData uniq = new UniqueJewelData();
+    public CraftedUniqueJewelData uniq = new CraftedUniqueJewelData();
 
     public List<AffixData> affixes = new ArrayList<>();
+
+    public List<StatsWhileUnderAuraData> auraStats = new ArrayList<>();
 
     public String style = PlayStyle.STR.id;
 
@@ -76,29 +80,37 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
 
         TooltipInfo info = new TooltipInfo(ctx.data);
 
-        List<Component> preList = new ArrayList<>();
-        for (AffixData affix : affixes) {
-            preList.addAll(affix.GetTooltipString(info, lvl));
-        }
-        List<Component> finalList = new TooltipStatsAligner(preList).buildNewTooltipsStats();
-        ctx.tooltip.addAll(finalList);
 
-        ctx.tooltip.add(Component.literal(""));
+        if (this.auraStats.isEmpty()) {
 
-        ctx.tooltip.add(TooltipUtils.gearRarity(getRarity()));
+            List<Component> preList = new ArrayList<>();
+            for (AffixData affix : affixes) {
+                preList.addAll(affix.GetTooltipString(info, lvl));
+            }
+            List<Component> finalList = new TooltipStatsAligner(preList).buildNewTooltipsStats();
+            ctx.tooltip.addAll(finalList);
+            ctx.tooltip.add(Component.literal(""));
 
-        if (uniq.isUnique()) {
-            if (uniq.isCraftableUnique()) {
-                if (uniq.getCraftedTier().canUpgradeMore()) {
-                    var up = uniq.getCraftedTier().upgradeStack.get();
-                    ctx.tooltip.add(Component.literal("To Upgrade needs: " + up.getCount() + "x ").append(up.getHoverName()));
-                    ctx.tooltip.add(Component.literal("[Click the Jewel with the Stone]"));
+            if (uniq.isUnique()) {
+                if (uniq.isCraftableUnique()) {
+                    if (uniq.getCraftedTier().canUpgradeMore()) {
+                        var up = uniq.getCraftedTier().upgradeStack.get();
+                        ctx.tooltip.add(Component.literal("To Upgrade needs: " + up.getCount() + "x ").append(up.getHoverName()));
+                        ctx.tooltip.add(Component.literal("[Click the Jewel with the Stone]"));
+                    }
+
                 }
+            }
+        } else {
 
+            for (StatsWhileUnderAuraData aura : this.auraStats) {
+                ctx.tooltip.addAll(aura.getTooltip());
+                ctx.tooltip.add(Component.empty());
             }
         }
 
 
+        ctx.tooltip.add(TooltipUtils.gearRarity(getRarity()));
         ctx.tooltip.add(TooltipUtils.level(lvl));
     }
 
@@ -134,14 +146,15 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
 
     public Item getItem() {
         var s = getStyle();
-
+        if (!auraStats.isEmpty()) {
+            return SlashItems.WATCHER_EYE_JEWEL.get();
+        }
         if (s == PlayStyle.DEX) {
             return SlashItems.DEX_JEWEL.get();
         }
         if (s == PlayStyle.INT) {
             return SlashItems.INT_JEWEL.get();
         }
-
         return SlashItems.STR_JEWEL.get();
 
     }
@@ -164,7 +177,21 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
             list.addAll(affix.GetAllStats(lvl));
         }
 
-        return Arrays.asList(new SimpleStatCtx(StatContext.StatCtxType.JEWEL, list));
+        List<StatContext> ctx = new ArrayList<>();
+
+        if (en instanceof Player p) {
+            var data = Load.player(p);
+
+            for (StatsWhileUnderAuraData aura : auraStats) {
+                if (data.aurasOn.contains(aura.getAura().id)) {
+                    ctx.addAll(aura.getStatAndContext(en));
+                }
+            }
+        }
+
+        ctx.add(new SimpleStatCtx(StatContext.StatCtxType.JEWEL, list));
+
+        return ctx;
     }
 
     @Override

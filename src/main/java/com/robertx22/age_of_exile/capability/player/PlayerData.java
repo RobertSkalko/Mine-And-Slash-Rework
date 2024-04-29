@@ -34,6 +34,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -114,6 +115,8 @@ public class PlayerData implements ICap {
     private MyInventory jewelsInv = new MyInventory(9);
 
     public CharStorageData characters = new CharStorageData();
+
+    public List<String> aurasOn = new ArrayList<>();
 
     public String name = "";
 

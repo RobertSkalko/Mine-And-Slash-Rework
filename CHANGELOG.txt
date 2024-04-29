@@ -22,6 +22,7 @@ This is meant for players who don't want to mess with inviting to parties etc
 - attempt fix double death xp loss etc
 - improved hotbar ui a bit
 - dungeons now have names
+- added force_custom_hp to mob rarity so you can now not worry if the boss mob has 100 times more hp than intended, currently used for uber bosses
 - attempted to cleanup some stat code, expect bugs in the short term.
 - added new currency that rerols a random affix into a random common affix
 - should fix harvest not working

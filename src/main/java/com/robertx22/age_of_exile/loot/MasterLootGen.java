@@ -87,6 +87,8 @@ public class MasterLootGen {
             items.addAll(new RuneLootGen(info).tryGenerate());
             items.addAll(new LootChestGen(info).tryGenerate());
 
+            items.addAll(new WatcherEyeLootGen(info).tryGenerate());
+
 
         } catch (Exception e) {
             e.printStackTrace();

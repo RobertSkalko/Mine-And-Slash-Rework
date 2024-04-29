@@ -2,8 +2,8 @@ package com.robertx22.age_of_exile.vanilla_mc.items;
 
 import com.robertx22.age_of_exile.database.data.currency.base.IShapelessRecipe;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RuneItems;
+import com.robertx22.age_of_exile.saveclasses.jewel.CraftedUniqueJewelData;
 import com.robertx22.age_of_exile.saveclasses.jewel.JewelItemData;
-import com.robertx22.age_of_exile.saveclasses.jewel.UniqueJewelData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
@@ -46,8 +46,8 @@ public class CraftedUniqueJewelItem extends Item implements IShapelessRecipe {
 
                 data.rar = IRarity.RUNEWORD_ID;
 
-                data.uniq = new UniqueJewelData();
-                data.uniq.id = UniqueJewelData.CRAFTED_UNIQUE_ID;
+                data.uniq = new CraftedUniqueJewelData();
+                data.uniq.id = CraftedUniqueJewelData.CRAFTED_UNIQUE_ID;
 
                 data.saveToStack(stack);
             }

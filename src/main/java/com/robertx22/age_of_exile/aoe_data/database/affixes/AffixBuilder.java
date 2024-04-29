@@ -23,6 +23,8 @@ public class AffixBuilder {
     int weight = 1000;
     public Affix.Type type;
 
+    public String auraReq = "";
+
     TagRequirement tagRequirement = new TagRequirement(TagType.GearSlot, new ArrayList<>(), new ArrayList<>());
 
     private AffixBuilder(String id) {
@@ -35,6 +37,11 @@ public class AffixBuilder {
 
     public AffixBuilder Named(String name) {
         langName = name;
+        return this;
+    }
+
+    public AffixBuilder AuraReq(String aura) {
+        auraReq = aura;
         return this;
     }
 
@@ -89,6 +96,11 @@ public class AffixBuilder {
         return this;
     }
 
+    public AffixBuilder WatchersEye() {
+        type = Affix.Type.watcher_eye;
+        return this;
+    }
+
     public AffixBuilder Prefix() {
         type = Affix.Type.prefix;
         return this;
@@ -128,6 +140,7 @@ public class AffixBuilder {
         affix.weight = weight;
         affix.loc_name = langName;
 
+        affix.eye_aura_req = auraReq;
 
         affix.addToSerializables();
 

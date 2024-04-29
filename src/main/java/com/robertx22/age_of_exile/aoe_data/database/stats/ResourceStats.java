@@ -49,6 +49,7 @@ public class ResourceStats {
             .<ResourceType>of(x -> x.id + "_on_kill", x -> Elements.NONE)
             .addAllOfType(Arrays.asList(
                     ResourceType.health,
+                    ResourceType.magic_shield,
                     ResourceType.mana
             ))
             .worksWithEvent(OnMobKilledByDamageEvent.ID)

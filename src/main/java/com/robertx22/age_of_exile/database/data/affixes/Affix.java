@@ -17,6 +17,7 @@ public class Affix implements IWeighted, IGUID, IAutoLocName, IhasRequirements,
     public enum Type {
         prefix,
         suffix,
+        watcher_eye,
         enchant,
         chaos_stat,
         tool,
@@ -34,6 +35,7 @@ public class Affix implements IWeighted, IGUID, IAutoLocName, IhasRequirements,
     }
 
     public String guid;
+    public String eye_aura_req = "";
     public transient String loc_name;
     public boolean only_one_per_item = true;
     public int weight = 1000;

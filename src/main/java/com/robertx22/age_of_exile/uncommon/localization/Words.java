@@ -7,6 +7,7 @@ import java.util.Locale;
 
 // to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
+    WHILE_UNDER_AURA("While Under Effect of %1$s:"),
     CURSE_OFFERS("Curse Offers:"),
     REWARD_OFFERS("Reward Offers:"),
     ACCEPTED_CURSES("Accepted Curses:"),

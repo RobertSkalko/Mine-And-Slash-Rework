@@ -64,7 +64,7 @@ public class SlotTags {
     public static SlotTag intelligence = SlotTag.of("intelligence");
     public static SlotTag dexterity = SlotTag.of("dexterity");
     public static SlotTag strength = SlotTag.of("strength");
-
+ 
     public static void init() {
 
     }

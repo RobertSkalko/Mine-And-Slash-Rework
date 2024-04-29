@@ -37,6 +37,12 @@ public final class MobRarity implements JsonExileRegistry<MobRarity>, IAutoGson<
         return r;
     }
 
+
+    public MobRarity setForceCustomHP(int hp) {
+        this.force_custom_hp = hp;
+        return this;
+    }
+
     public String text_format;
 
     String name = "";
@@ -47,6 +53,8 @@ public final class MobRarity implements JsonExileRegistry<MobRarity>, IAutoGson<
 
     public int min_lvl;
 
+    public int force_custom_hp = -1;
+
     public float dmg_multi;
     public float extra_hp_multi;
     public float stat_multi;
@@ -54,6 +62,10 @@ public final class MobRarity implements JsonExileRegistry<MobRarity>, IAutoGson<
     public float exp_multi;
     public int affixes = 0;
 
+
+    public boolean forcesCustomHp() {
+        return force_custom_hp > 0;
+    }
 
     public ChatFormatting textFormatting() {
         try {

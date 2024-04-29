@@ -18,7 +18,7 @@ public class MobRarities implements ExileRegistryInit {
         MobRarity.of(IRarity.EPIC_ID, "Epic", 250, 20, 2, 1, ChatFormatting.LIGHT_PURPLE);
         MobRarity.of(IRarity.LEGENDARY_ID, "Legendary", 50, 40, 4, 2, ChatFormatting.GOLD);
         MobRarity.of(IRarity.MYTHIC_ID, "Mythic", 25, 50, 8, 3, ChatFormatting.DARK_PURPLE);
-        MobRarity.of(IRarity.UBER, "Uber", 0, 1, 25, 0, ChatFormatting.RED);
+        MobRarity.of(IRarity.UBER, "Uber", 0, 1, 25, 0, ChatFormatting.RED).setForceCustomHP(20);
 
 
         MobRarity.of(IRarity.SUMMON_ID, "Summon", 0, 0, 3, 0, ChatFormatting.YELLOW);

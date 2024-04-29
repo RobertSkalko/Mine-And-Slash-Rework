@@ -154,7 +154,13 @@ public class MobStatUtils {
 
         int lvl = unitdata.getLevel();
 
-        float hpToAdd = EntityUtils.getVanillaMaxHealth(en) * rar.ExtraHealthMulti();
+        float vanillahp = EntityUtils.getVanillaMaxHealth(en);
+
+        if (rar.forcesCustomHp()) {
+            vanillahp = rar.force_custom_hp;
+        }
+
+        float hpToAdd = vanillahp * rar.ExtraHealthMulti();
 
         hpToAdd += (ServerContainer.get().EXTRA_MOB_STATS_PER_LEVEL.get() * lvl) * hpToAdd;
 
