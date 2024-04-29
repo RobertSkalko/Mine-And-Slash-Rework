@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.mechanics.base;
 
 import com.robertx22.age_of_exile.database.data.league.LeagueMechanic;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 
@@ -15,7 +16,10 @@ public class LeagueBlockData {
     public boolean finished = false;
 
     public LeagueMechanic getMechanic(ServerLevel sw, BlockPos pos) {
-        return ExileDB.LeagueMechanics().getFilterWrapped(x -> x.getStructure().isInsideLeague(sw, pos)).list.get(0);
+
+        var map = Load.mapAt(sw, pos).map;
+
+        return ExileDB.LeagueMechanics().getFilterWrapped(x -> x.getStructure(map).isInsideLeague(sw, pos)).list.get(0);
     }
 
     public static class StructureRadius {

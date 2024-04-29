@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.maps.processors;
 
 
+import com.robertx22.age_of_exile.maps.processors.boss.UberBossAltarProcessor;
 import com.robertx22.age_of_exile.maps.processors.league.LeagueControlBlockProcessor;
 import com.robertx22.age_of_exile.maps.processors.league.LeagueSpawnPos;
 import com.robertx22.age_of_exile.maps.processors.league.LeagueTpBackProcessor;
@@ -29,6 +30,7 @@ public class DataProcessors {
             all.add(new ChanceChestProcessor());
             all.add(new RemoveAllBesidesOneProcessor());
             all.add(new ComplexMobProcessor());
+            all.add(new UberBossAltarProcessor());
             all.add(new LeagueControlBlockProcessor());
             all.add(new LeagueTpBackProcessor());
             all.add(new LeagueSpawnPos());

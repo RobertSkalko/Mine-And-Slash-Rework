@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.maps.LeagueData;
 import com.robertx22.age_of_exile.maps.MapData;
+import com.robertx22.age_of_exile.maps.MapItemData;
 import com.robertx22.age_of_exile.mechanics.base.LeagueBlockData;
 import com.robertx22.age_of_exile.mechanics.base.LeagueControlBlockEntity;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -20,7 +21,7 @@ public abstract class LeagueMechanic implements ExileRegistry<LeagueMechanic>, I
     public static MapField<String> STRUCTURE = new MapField<>("structure");
 
 
-    public abstract LeagueStructure getStructure();
+    public abstract LeagueStructure getStructure(MapItemData map);
 
     public float getBaseSpawnChance() {
         return 100;
@@ -28,12 +29,12 @@ public abstract class LeagueMechanic implements ExileRegistry<LeagueMechanic>, I
 
     public abstract int getDefaultSpawns();
 
-    public final void onMapStartSetupBase(LeagueData data) {
+    public final void onMapStartSetupBase(MapItemData map, LeagueData data) {
 
         data.remainingSpawns = getDefaultSpawns();
 
-        if (!getStructure().getPieces().list.isEmpty()) {
-            data.map.put(STRUCTURE, RandomUtils.weightedRandom(getStructure().getPieces().list).folder);
+        if (!getStructure(map).getPieces(map).list.isEmpty()) {
+            data.map.put(STRUCTURE, RandomUtils.weightedRandom(getStructure(map).getPieces(map).list).folder);
         }
     }
 

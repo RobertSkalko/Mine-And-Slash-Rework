@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.saveclasses.unit.stat_calc;
 
-import com.robertx22.age_of_exile.saveclasses.unit.Unit;
+import com.robertx22.age_of_exile.saveclasses.unit.InCalcStatContainer;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class CtxStats {
     public CtxStats() {
     }
 
-    public void applyToInCalc(Unit unit) {
+    public void applyToInCalc(InCalcStatContainer unit) {
         map.forEach((key, value) -> value
                 .forEach(v -> {
                     v.stats.forEach(s -> {

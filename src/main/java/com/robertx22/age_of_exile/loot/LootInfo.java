@@ -48,7 +48,7 @@ public class LootInfo {
     public boolean isMapWorld = false;
     public MapData map;
     public BlockPos pos;
-    
+
 
     public LeagueMechanic league = LeagueMechanics.NONE;
 

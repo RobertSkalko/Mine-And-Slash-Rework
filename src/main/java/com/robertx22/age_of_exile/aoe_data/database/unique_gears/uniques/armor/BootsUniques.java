@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.armor;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearTypes;
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuilder;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
@@ -52,7 +52,7 @@ public class BootsUniques implements ExileRegistryInit {
                 .keepsBaseName()
                 .stat(GearDefense.getInstance().mod(50, 100).percent())
                 .stat(new AilmentChance(Ailments.BURN).mod(5, 10))
-                .stat(Stats.ELEMENTAL_DAMAGE.get(Elements.Fire).mod(20, 20))
+                .stat(OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Fire).mod(20, 20))
                 .stat(new MaxElementalResist(Elements.Fire).mod(5, 5))
                 .build();
 

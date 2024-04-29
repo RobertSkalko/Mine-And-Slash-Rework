@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.capability.player.helper;
 
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.SpellChangeStats;
 import com.robertx22.age_of_exile.database.data.aura.AuraGem;
 import com.robertx22.age_of_exile.database.data.aura.AuraGems;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
@@ -141,9 +141,9 @@ public class GemInventoryHelper {
             float cost = aura.getAura().reservation * 100F;
 
             var info = new AuraGems.AuraInfo(aura.getAura());
-            if (Stats.SPECIFIC_AURA_COST.has(info)) {
+            if (SpellChangeStats.SPECIFIC_AURA_COST.has(info)) {
                 // todo need better ways, this one is equals based on instance, so its never true lol
-                var stat = Stats.SPECIFIC_AURA_COST.get(info);
+                var stat = SpellChangeStats.SPECIFIC_AURA_COST.get(info);
                 if (data.getCalculatedStat(stat).isNotZero()) {
                     float multi = data.getCalculatedStat(stat).getMultiplier();
                     cost *= multi;

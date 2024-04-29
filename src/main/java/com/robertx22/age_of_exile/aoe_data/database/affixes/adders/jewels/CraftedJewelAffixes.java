@@ -2,7 +2,8 @@ package com.robertx22.age_of_exile.aoe_data.database.affixes.adders.jewels;
 
 import com.robertx22.age_of_exile.aoe_data.database.affixes.AffixBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.affixes.ElementalAffixBuilder;
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.SpellChangeStats;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
@@ -80,21 +81,21 @@ public class CraftedJewelAffixes implements ExileRegistryInit {
                 .Build();
 
         AffixBuilder.Normal(PREFIX + "cdr")
-                .stat(Stats.COOLDOWN_REDUCTION.get().mod(3, 15))
+                .stat(SpellChangeStats.COOLDOWN_REDUCTION.get().mod(3, 15))
                 .includesTags(SlotTags.crafted_jewel_unique)
                 .Weight(1000)
                 .Suffix()
                 .Build();
 
         AffixBuilder.Normal(PREFIX + "crit")
-                .stat(Stats.CRIT_CHANCE.get().mod(5, 15))
+                .stat(OffenseStats.CRIT_CHANCE.get().mod(5, 15))
                 .includesTags(SlotTags.crafted_jewel_unique)
                 .Weight(1000)
                 .Suffix()
                 .Build();
 
         AffixBuilder.Normal(PREFIX + "critdmg")
-                .stat(Stats.CRIT_DAMAGE.get().mod(10, 25))
+                .stat(OffenseStats.CRIT_DAMAGE.get().mod(10, 25))
                 .includesTags(SlotTags.crafted_jewel_unique)
                 .Weight(1000)
                 .Suffix()

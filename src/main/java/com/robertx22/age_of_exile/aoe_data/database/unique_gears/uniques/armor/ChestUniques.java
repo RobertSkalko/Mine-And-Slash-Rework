@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.armor;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearTypes;
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueRarityTier;
 import com.robertx22.age_of_exile.database.data.StatMod;
@@ -41,7 +41,7 @@ public class ChestUniques implements ExileRegistryInit {
                 .stats(Arrays.asList(
                         new StatMod(50, 100, GearDefense.getInstance(), ModType.PERCENT),
                         new StatMod(5, 15, GolemSpellChance.getInstance()),
-                        new StatMod(10, 25, Stats.SUMMON_DAMAGE.get(), ModType.FLAT),
+                        new StatMod(10, 25, OffenseStats.SUMMON_DAMAGE.get(), ModType.FLAT),
                         new StatMod(25, 25, new ElementalResist(Elements.Fire), ModType.FLAT)
                 ))
                 .build();
@@ -51,7 +51,7 @@ public class ChestUniques implements ExileRegistryInit {
                 .rarityWeight(UniqueRarityTier.RARE)
                 .stat(GearDefense.getInstance().mod(50, 100).percent())
                 .stat(RegeneratePercentStat.MANA.mod(1, 2))
-                .stat(Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.magic).mod(20, 20))
+                .stat(OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.magic).mod(20, 20))
                 .stat(new ElementalResist(Elements.Physical).mod(10, 25))
                 .build();
     }

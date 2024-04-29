@@ -2,8 +2,8 @@ package com.robertx22.age_of_exile.database.data.stats.types;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.base.ITransferToOtherStats;
+import com.robertx22.age_of_exile.saveclasses.unit.InCalcStatContainer;
 import com.robertx22.age_of_exile.saveclasses.unit.InCalcStatData;
-import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.IElementalGenerated;
 
@@ -43,7 +43,7 @@ public abstract class ElementalStat extends Stat implements IElementalGenerated<
 
     // todo make this its own stat?
     @Override
-    public void transferStats(Unit unit, InCalcStatData thisstat) {
+    public void transferStats(InCalcStatContainer unit, InCalcStatData thisstat) {
         if (this.element == Elements.Elemental) {
             for (Elements ele : Elements.getAllSingleElemental()) {
                 thisstat.addFullyTo(unit.getStatInCalculation(newGeneratedInstance(ele)));

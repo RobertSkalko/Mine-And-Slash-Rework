@@ -6,7 +6,7 @@ import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SummonType;
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.ExileEffectAction;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
@@ -46,7 +46,7 @@ public class SummonSpells implements ExileRegistryInit {
                 .manualDesc("Summon a Golem that can cast Fire Nova to aid you in combat.")
                 .summons(SlashEntities.FIRE_GOLEM.get(), 20 * 60 * 3, 1, SummonType.GOLEM)
                 .levelReq(20)
-                .addStat(Stats.SUMMON_DAMAGE.get().mod(10, 50))
+                .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(10, 50))
                 .addStat(new SummonHealth().mod(10, 100))
                 .build();
 
@@ -55,7 +55,7 @@ public class SummonSpells implements ExileRegistryInit {
                 .manualDesc("Summon a Golem that can cast Frost Nova to aid you in combat.")
                 .summons(SlashEntities.COLD_GOLEM.get(), 20 * 60 * 3, 1, SummonType.GOLEM)
                 .levelReq(20)
-                .addStat(Stats.SUMMON_DAMAGE.get().mod(10, 50))
+                .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(10, 50))
                 .addStat(new SummonHealth().mod(10, 100))
                 .build();
 
@@ -64,7 +64,7 @@ public class SummonSpells implements ExileRegistryInit {
                 .manualDesc("Summon a Golem that can cast Lightning Nova to aid you in combat .")
                 .summons(SlashEntities.LIGHTNING_GOLEM.get(), 20 * 60 * 3, 1, SummonType.GOLEM)
                 .levelReq(20)
-                .addStat(Stats.SUMMON_DAMAGE.get().mod(10, 50))
+                .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(10, 50))
                 .addStat(new SummonHealth().mod(10, 100))
                 .build();
 
@@ -73,7 +73,7 @@ public class SummonSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.beast, SpellTags.has_pet_ability, SpellTags.PHYSICAL))
                 .manualDesc("Summon a Spirit Wolf to aid you in combat.")
                 .summons(SlashEntities.SPIRIT_WOLF.get(), 20 * 30, 1, SummonType.BEAST)
-                .addStat(Stats.SUMMON_DAMAGE.get().mod(5, 25))
+                .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(5, 25))
                 .addStat(new SummonHealth().mod(30, 300))
                 .levelReq(1)
                 .build();
@@ -82,7 +82,7 @@ public class SummonSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.has_pet_ability, SpellTags.PHYSICAL))
                 .manualDesc("Summon a Zombie to aid you in combat.")
                 .summons(SlashEntities.ZOMBIE.get(), 20 * 60 * 2, 1, SummonType.UNDEAD)
-                .addStat(Stats.SUMMON_DAMAGE.get().mod(10, 50))
+                .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(10, 50))
                 .addStat(new SummonHealth().mod(20, 200))
                 .levelReq(1)
                 .build();
@@ -93,7 +93,7 @@ public class SummonSpells implements ExileRegistryInit {
                         Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.has_pet_ability, SpellTags.CHAOS))
                 .manualDesc("Summon a fast moving spider to aid you in combat.")
                 .summons(SlashEntities.SPIDER.get(), 20 * 60 * 2, 1, SummonType.SPIDER)
-                .addStat(Stats.SUMMON_DAMAGE.get().mod(5, 25))
+                .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(5, 25))
                 .addStat(new AilmentChance(Ailments.POISON).mod(10, 50))
                 .levelReq(1)
                 .build();
@@ -103,7 +103,7 @@ public class SummonSpells implements ExileRegistryInit {
                 .manualDesc("Summon a horde of Skeletons to fight for you for a short duration.")
                 .summons(SlashEntities.SKELETON.get(), 20 * 60, 1, SummonType.UNDEAD)
                 .levelReq(30)
-                .addStat(Stats.SUMMON_DAMAGE.get().mod(10, 150))
+                .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(10, 150))
                 .addStat(new SummonHealth().mod(10, 100))
 
                 .build();

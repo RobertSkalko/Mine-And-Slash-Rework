@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.database.data.league;
 
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.maps.MapItemData;
 import com.robertx22.age_of_exile.mmorpg.ModErrors;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.utils.TeleportUtils;
@@ -30,7 +31,7 @@ public abstract class LeagueStructure {
         }
 
         @Override
-        public LeaguePiecesList getPieces() {
+        public LeaguePiecesList getPieces(MapItemData map) {
             return new LeaguePiecesList(Arrays.asList());
         }
 
@@ -41,8 +42,11 @@ public abstract class LeagueStructure {
 
         @Override
         public boolean isInsideLeague(ServerLevel level, BlockPos pos) {
+            var md = Load.mapAt(level, pos);
+            var map = md.map;
+
             // if it's not inside any other league mechanic, its in the normal map
-            return ExileDB.LeagueMechanics().getList().stream().filter(x -> !x.getStructure().getPieces().list.isEmpty()).allMatch(x -> !x.getStructure().isInsideLeague(level, pos));
+            return ExileDB.LeagueMechanics().getList().stream().filter(x -> !x.getStructure(map).getPieces(map).list.isEmpty()).allMatch(x -> !x.getStructure(map).isInsideLeague(level, pos));
         }
     };
 
@@ -54,7 +58,10 @@ public abstract class LeagueStructure {
 
     public static LeagueMechanic getMechanicFromPosition(ServerLevel sw, BlockPos pos) {
 
-        var list = ExileDB.LeagueMechanics().getFilterWrapped(x -> x.getStructure() != null && x.getStructure().isInsideLeague(sw, pos)).list;
+        var md = Load.mapAt(sw, pos);
+        var map = md.map;
+
+        var list = ExileDB.LeagueMechanics().getFilterWrapped(x -> x.getStructure(map) != null && x.getStructure(map).isInsideLeague(sw, pos)).list;
 
         if (!list.isEmpty()) {
             return list.get(0);
@@ -66,7 +73,7 @@ public abstract class LeagueStructure {
     public abstract BlockPos getTeleportPos(BlockPos pos);
 
 
-    public abstract LeaguePiecesList getPieces();
+    public abstract LeaguePiecesList getPieces(MapItemData map);
 
 
     public abstract int startY();
@@ -77,19 +84,20 @@ public abstract class LeagueStructure {
 
     public final void tryGenerate(ServerLevel level, ChunkPos pos, Random ran) {
         try {
+            var md = Load.mapAt(level, pos.getBlockAt(0, 0, 0));
+            var map = md.map;
 
-            var list = getPieces();
+            var list = getPieces(map);
 
-            if (!getPieces().list.isEmpty()) {
-                var map = Load.mapAt(level, pos.getBlockAt(0, 0, 0));
+            if (!getPieces(map).list.isEmpty()) {
 
-                var s = map.leagues.get(league).map.get(LeagueMechanic.STRUCTURE);
+                var s = md.leagues.get(league).map.get(LeagueMechanic.STRUCTURE);
 
                 LeagueStructurePieces pieces = list.get(s);
 
                 var room = pieces.getRoomForChunk(pos);
                 if (room != null) {
-                    generateStructure(level, room, pos);
+                    generateStructure(map, level, room, pos);
 
                 }
             }
@@ -99,11 +107,11 @@ public abstract class LeagueStructure {
     }
 
 
-    protected boolean generateStructure(LevelAccessor world, ResourceLocation room, ChunkPos cpos) {
+    protected boolean generateStructure(MapItemData map, LevelAccessor world, ResourceLocation room, ChunkPos cpos) {
 
 
         try {
-            if (!getPieces().list.isEmpty()) {
+            if (!getPieces(map).list.isEmpty()) {
 
 
                 var opt = world.getServer().getStructureManager().get(room);

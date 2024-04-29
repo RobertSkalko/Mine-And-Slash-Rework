@@ -1,6 +1,8 @@
 package com.robertx22.age_of_exile.aoe_data.database.perks;
 
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.ResourceStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.SpellChangeStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AllAilmentDamage;
@@ -28,9 +30,9 @@ public class GameChangerPerks implements ExileRegistryInit {
 
 
         PerkBuilder.gameChanger("summoner", "Summoner",
-                new OptScaleExactStat(+3, Stats.MAX_SUMMON_CAPACITY.get(), ModType.FLAT),
-                new OptScaleExactStat(50, Stats.SUMMON_DAMAGE.get(), ModType.MORE),
-                new OptScaleExactStat(-25, Stats.TOTAL_DAMAGE.get(), ModType.MORE)
+                new OptScaleExactStat(+3, SpellChangeStats.MAX_SUMMON_CAPACITY.get(), ModType.FLAT),
+                new OptScaleExactStat(50, OffenseStats.SUMMON_DAMAGE.get(), ModType.MORE),
+                new OptScaleExactStat(-25, OffenseStats.TOTAL_DAMAGE.get(), ModType.MORE)
         );
 
         PerkBuilder.gameChanger("ms_all_in", "Stare of Abyss",
@@ -41,18 +43,18 @@ public class GameChangerPerks implements ExileRegistryInit {
 
         PerkBuilder.gameChanger("warlock", "Warlock",
                 new OptScaleExactStat(-25, HitDamage.getInstance(), ModType.MORE),
-                new OptScaleExactStat(30, Stats.DOT_DAMAGE.get(), ModType.MORE)
+                new OptScaleExactStat(30, OffenseStats.DOT_DAMAGE.get(), ModType.MORE)
         );
 
         PerkBuilder.gameChanger("mantra", "Mantra",
                 new OptScaleExactStat(3, DatapackStats.PHYS_DMG_PER_MANA),
-                new OptScaleExactStat(-100, Stats.CRIT_CHANCE.get(), ModType.MORE)
+                new OptScaleExactStat(-100, OffenseStats.CRIT_CHANCE.get(), ModType.MORE)
         );
 
         PerkBuilder.gameChanger("sniper", "Sniper",
-                new OptScaleExactStat(-25, Stats.TOTAL_DAMAGE.get(), ModType.MORE),
-                new OptScaleExactStat(-25, Stats.COOLDOWN_REDUCTION.get()),
-                new OptScaleExactStat(50, Stats.PROJECTILE_DAMAGE.get(), ModType.MORE)
+                new OptScaleExactStat(-25, OffenseStats.TOTAL_DAMAGE.get(), ModType.MORE),
+                new OptScaleExactStat(-25, SpellChangeStats.COOLDOWN_REDUCTION.get()),
+                new OptScaleExactStat(50, OffenseStats.PROJECTILE_DAMAGE.get(), ModType.MORE)
         );
 
         PerkBuilder.gameChanger("blood_mage", "Blood Mage",
@@ -64,27 +66,27 @@ public class GameChangerPerks implements ExileRegistryInit {
 
         // put this on physical side of the tree
         PerkBuilder.gameChanger("elemental_purity", "Elemental Purity",
-                new OptScaleExactStat(25, Stats.ELEMENTAL_DAMAGE.get(Elements.Elemental), ModType.FLAT),
-                new OptScaleExactStat(-100, Stats.ELEMENTAL_DAMAGE.get(Elements.Physical), ModType.FLAT)
+                new OptScaleExactStat(25, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Elemental), ModType.FLAT),
+                new OptScaleExactStat(-100, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Physical), ModType.FLAT)
         );
 
         PerkBuilder.gameChanger("refined_taste", "Refined Taste",
-                new OptScaleExactStat(50, Stats.INCREASED_LEECH.get(), ModType.FLAT),
-                new OptScaleExactStat(2, Stats.LEECH_CAP.get(ResourceType.health), ModType.FLAT),
-                new OptScaleExactStat(2, Stats.LEECH_CAP.get(ResourceType.magic_shield), ModType.FLAT),
+                new OptScaleExactStat(50, ResourceStats.INCREASED_LEECH.get(), ModType.FLAT),
+                new OptScaleExactStat(2, ResourceStats.LEECH_CAP.get(ResourceType.health), ModType.FLAT),
+                new OptScaleExactStat(2, ResourceStats.LEECH_CAP.get(ResourceType.magic_shield), ModType.FLAT),
                 new OptScaleExactStat(-75, HealthRegen.getInstance(), ModType.MORE),
                 new OptScaleExactStat(-75, ManaRegen.getInstance(), ModType.MORE)
         );
 
         PerkBuilder.gameChanger("steady_hand", "Steady Hand",
-                new OptScaleExactStat(-100, Stats.CRIT_CHANCE.get(), ModType.MORE),
-                new OptScaleExactStat(-100, Stats.CRIT_DAMAGE.get(), ModType.MORE),
-                new OptScaleExactStat(25, Stats.TOTAL_DAMAGE.get(), ModType.FLAT)
+                new OptScaleExactStat(-100, OffenseStats.CRIT_CHANCE.get(), ModType.MORE),
+                new OptScaleExactStat(-100, OffenseStats.CRIT_DAMAGE.get(), ModType.MORE),
+                new OptScaleExactStat(25, OffenseStats.TOTAL_DAMAGE.get(), ModType.FLAT)
         );
 
         PerkBuilder.gameChanger("true_hit", "True Hit",
-                new OptScaleExactStat(25, Stats.CRIT_DAMAGE.get(), ModType.MORE),
-                new OptScaleExactStat(-25, Stats.NON_CRIT_DAMAGE.get(), ModType.FLAT)
+                new OptScaleExactStat(25, OffenseStats.CRIT_DAMAGE.get(), ModType.MORE),
+                new OptScaleExactStat(-25, OffenseStats.NON_CRIT_DAMAGE.get(), ModType.FLAT)
         );
 
 
@@ -102,12 +104,12 @@ public class GameChangerPerks implements ExileRegistryInit {
 
         PerkBuilder.gameChanger("divinity", "Divinity",
                 new OptScaleExactStat(50, DatapackStats.HEAL_TO_SPELL_DMG, ModType.FLAT),
-                new OptScaleExactStat(-50, Stats.CRIT_DAMAGE.get(), ModType.MORE)
+                new OptScaleExactStat(-50, OffenseStats.CRIT_DAMAGE.get(), ModType.MORE)
         );
 
         PerkBuilder.gameChanger("tormentor", "Tormentor",
                 new OptScaleExactStat(35, AllAilmentDamage.getInstance(), ModType.MORE),
-                new OptScaleExactStat(-10, Stats.TOTAL_DAMAGE.get(), ModType.MORE)
+                new OptScaleExactStat(-10, OffenseStats.TOTAL_DAMAGE.get(), ModType.MORE)
         );
 
     }

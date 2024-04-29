@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.aoe_data.database.affixes.adders.jewelry;
 
 import com.robertx22.age_of_exile.aoe_data.database.affixes.AffixBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.affixes.ElementalAffixBuilder;
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttributes;
@@ -28,7 +28,7 @@ public class JewelrySuffixes implements ExileRegistryInit {
                 .add(Elements.Fire, "Of Embers")
                 .add(Elements.Cold, "Of Ice")
                 .add(Elements.Shadow, "Of Venom")
-                .stats(x -> Arrays.asList(new StatMod(3, 10, Stats.ELEMENTAL_DAMAGE.get(x), ModType.FLAT)))
+                .stats(x -> Arrays.asList(new StatMod(3, 10, OffenseStats.ELEMENTAL_DAMAGE.get(x), ModType.FLAT)))
                 .includesTags(SlotTags.jewelry_family)
                 .Suffix()
                 .Build();

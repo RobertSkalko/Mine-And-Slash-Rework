@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.league;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.maps.LeagueData;
 import com.robertx22.age_of_exile.maps.MapData;
+import com.robertx22.age_of_exile.maps.MapItemData;
 import com.robertx22.age_of_exile.mechanics.base.LeagueBlockData;
 import com.robertx22.age_of_exile.mechanics.base.LeagueControlBlockEntity;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
@@ -12,7 +13,7 @@ import net.minecraft.server.level.ServerLevel;
 
 public class ProphecyLeague extends LeagueMechanic {
     @Override
-    public LeagueStructure getStructure() {
+    public LeagueStructure getStructure(MapItemData map) {
         return LeagueStructure.EMPTY;
     }
 

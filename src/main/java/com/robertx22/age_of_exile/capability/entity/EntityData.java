@@ -31,7 +31,6 @@ import com.robertx22.age_of_exile.saveclasses.unit.stat_calc.StatCalculation;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.CustomExactStats;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import com.robertx22.age_of_exile.uncommon.datasaving.UnitNbt;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
 import com.robertx22.age_of_exile.uncommon.effectdatas.SpendResourceEvent;
@@ -148,7 +147,7 @@ public class EntityData implements ICap, INeededForClient {
     public String mapUUID = "";
 
     // sync these for mobs
-    Unit unit = new Unit();
+    transient Unit unit = new Unit();
     String rarity = IRarity.COMMON_ID;
     int level = 1;
     int exp = 0;
@@ -267,7 +266,7 @@ public class EntityData implements ICap, INeededForClient {
 
 
         if (unit != null) {
-            UnitNbt.Save(nbt, unit);
+            // todo does this need saving UnitNbt.Save(nbt, unit);
         }
 
         if (customExactStats != null) {
@@ -319,11 +318,14 @@ public class EntityData implements ICap, INeededForClient {
             this.isNewbie = nbt.getBoolean(NEWBIE_STATUS);
         }
 
+        /*
+
+        // todo does this need saving
         this.unit = UnitNbt.Load(nbt);
         if (this.unit == null) {
             this.unit = new Unit();
         }
-
+         */
 
         try {
             this.summonedPetData = loadOrBlank(SummonedPetData.class, new SummonedPetData(), nbt, PET, new SummonedPetData());
@@ -666,7 +668,7 @@ public class EntityData implements ICap, INeededForClient {
 
             SpendResourceEvent event = new SpendResourceEvent(entity, ResourceType.energy, cost);
             event.calculateEffects();
-            
+
             if (data.getAttackerEntity() instanceof Player p && PlayerUTIL.isFake(p)) {
                 // this is a bit jank but it solves 2 things: fake players not having energy to attack, and fake players not having stats because they dont tick
                 // and stats are calc on tick..

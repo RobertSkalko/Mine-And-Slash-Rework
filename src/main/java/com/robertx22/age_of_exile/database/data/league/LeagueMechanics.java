@@ -1,8 +1,10 @@
 package com.robertx22.age_of_exile.database.data.league;
 
+import com.robertx22.age_of_exile.content.ubers.UberMechanic;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.maps.LeagueData;
 import com.robertx22.age_of_exile.maps.MapData;
+import com.robertx22.age_of_exile.maps.MapItemData;
 import com.robertx22.age_of_exile.mechanics.base.LeagueBlockData;
 import com.robertx22.age_of_exile.mechanics.base.LeagueControlBlockEntity;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -13,6 +15,7 @@ import net.minecraft.server.level.ServerLevel;
 public class LeagueMechanics {
 
     public static String HARVEST_ID = "harvest";
+    public static String UBER_ID = "uber";
 
     public static LeagueMechanic NONE = new LeagueMechanic() {
 
@@ -38,7 +41,7 @@ public class LeagueMechanics {
         }
 
         @Override
-        public LeagueStructure getStructure() {
+        public LeagueStructure getStructure(MapItemData map) {
             return LeagueStructure.EMPTY;
         }
 
@@ -87,9 +90,11 @@ public class LeagueMechanics {
 
     public static LeagueMechanic HARVEST = new HarvestLeague();
     public static LeagueMechanic PROPHECY = new ProphecyLeague();
+    public static UberMechanic UBER = new UberMechanic();
 
 
     public static void init() {
+        UBER.registerToExileRegistry();
         HARVEST.registerToExileRegistry();
         PROPHECY.registerToExileRegistry();
     }

@@ -2,7 +2,8 @@ package com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.armor;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearTypes;
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.SpellChangeStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueRarityTier;
@@ -66,8 +67,8 @@ public class HelmetUniques implements ExileRegistryInit {
                 .stats(Arrays.asList(
                         new StatMod(10, 25, AuraCapacity.getInstance(), ModType.FLAT),
                         new StatMod(10, 10, AuraEffect.getInstance(), ModType.FLAT),
-                        new StatMod(5, 15, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.beast), ModType.FLAT),
-                        new StatMod(1, 1, Stats.MAX_SUMMON_CAPACITY.get(), ModType.FLAT)
+                        new StatMod(5, 15, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.beast), ModType.FLAT),
+                        new StatMod(1, 1, SpellChangeStats.MAX_SUMMON_CAPACITY.get(), ModType.FLAT)
                 ))
                 .build();
 
@@ -75,8 +76,8 @@ public class HelmetUniques implements ExileRegistryInit {
         UniqueGearBuilder.of("haste_price", "Price of Haste", BaseGearTypes.PLATE_BOOTS)
                 .keepsBaseName()
                 .stat(GearDefense.getInstance().mod(50, 100).percent())
-                .stat(Stats.COOLDOWN_REDUCTION.get().mod(15, 30))
-                .stat(Stats.MANA_COST.get().mod(15, 30))
+                .stat(SpellChangeStats.COOLDOWN_REDUCTION.get().mod(15, 30))
+                .stat(SpellChangeStats.MANA_COST.get().mod(15, 30))
                 .stat(new ElementalResist(Elements.Physical).mod(5, 10))
                 .build();
     }

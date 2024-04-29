@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.vanilla_mc.items.gemrunes;
 
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.ResourceStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.ResourceAndAttack;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.IAutoModel;
@@ -214,12 +215,12 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
 
         @Override
         public List<StatMod> onJewelry() {
-            return Arrays.asList(new StatMod(MIN_ELE_DMG, MAX_ELE_DMG, Stats.ELEMENTAL_SPELL_DAMAGE.get(ele)));
+            return Arrays.asList(new StatMod(MIN_ELE_DMG, MAX_ELE_DMG, OffenseStats.ELEMENTAL_SPELL_DAMAGE.get(ele)));
         }
 
         @Override
         public List<StatMod> onWeapons() {
-            return Arrays.asList(new StatMod(MIN_WEP_DMG, MAX_WEP_DMG, Stats.ELEMENTAL_DAMAGE.get(ele), ModType.FLAT));
+            return Arrays.asList(new StatMod(MIN_WEP_DMG, MAX_WEP_DMG, OffenseStats.ELEMENTAL_DAMAGE.get(ele), ModType.FLAT));
         }
     }
 
@@ -238,7 +239,7 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
 
             @Override
             public List<StatMod> onWeapons() {
-                return Arrays.asList(new StatMod(1, 5, Stats.LIFESTEAL.get()));
+                return Arrays.asList(new StatMod(1, 5, ResourceStats.LIFESTEAL.get()));
             }
         }),
         AZURITE("azurite", "Azurite", ChatFormatting.AQUA, new GemStatPerTypes() {
@@ -254,7 +255,7 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
 
             @Override
             public List<StatMod> onWeapons() {
-                return Arrays.asList(new StatMod(1, 3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.mana, AttackType.hit))));
+                return Arrays.asList(new StatMod(1, 3, ResourceStats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.mana, AttackType.hit))));
             }
         }),
 
@@ -271,7 +272,7 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
 
             @Override
             public List<StatMod> onWeapons() {
-                return Arrays.asList(new StatMod(2, 8, Stats.CRIT_CHANCE.get()));
+                return Arrays.asList(new StatMod(2, 8, OffenseStats.CRIT_CHANCE.get()));
             }
         }),
         OPAL("opal", "Opal", ChatFormatting.GOLD, new GemStatPerTypes() {
@@ -282,12 +283,12 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
 
             @Override
             public List<StatMod> onJewelry() {
-                return Arrays.asList(new StatMod(1, 4, Stats.CRIT_CHANCE.get()));
+                return Arrays.asList(new StatMod(1, 4, OffenseStats.CRIT_CHANCE.get()));
             }
 
             @Override
             public List<StatMod> onWeapons() {
-                return Arrays.asList(new StatMod(3, 15, Stats.CRIT_DAMAGE.get()));
+                return Arrays.asList(new StatMod(3, 15, OffenseStats.CRIT_DAMAGE.get()));
             }
         }),
         TOPAZ("topaz", "Topaz", ChatFormatting.YELLOW, new GemStatPerTypes() {
@@ -303,7 +304,7 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
 
             @Override
             public List<StatMod> onWeapons() {
-                return Arrays.asList(new StatMod(1, 3, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.energy, AttackType.hit))));
+                return Arrays.asList(new StatMod(1, 3, ResourceStats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.energy, AttackType.hit))));
             }
         }),
         AMETHYST("amethyst", "Amethyst", ChatFormatting.DARK_PURPLE, new GemStatPerTypes() {
@@ -319,7 +320,7 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
 
             @Override
             public List<StatMod> onWeapons() {
-                return Arrays.asList(new StatMod(3, 15, Stats.CRIT_DAMAGE.get()));
+                return Arrays.asList(new StatMod(3, 15, OffenseStats.CRIT_DAMAGE.get()));
             }
         }),
         RUBY("ruby", "Ruby", ChatFormatting.RED, new EleGem(Elements.Fire)),

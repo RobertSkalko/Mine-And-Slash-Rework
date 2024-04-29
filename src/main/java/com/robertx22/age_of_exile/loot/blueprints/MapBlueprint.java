@@ -1,6 +1,8 @@
 package com.robertx22.age_of_exile.loot.blueprints;
 
 
+import com.robertx22.age_of_exile.content.ubers.UberBossArena;
+import com.robertx22.age_of_exile.content.ubers.UberBossTier;
 import com.robertx22.age_of_exile.database.data.map_affix.MapAffix;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -10,6 +12,7 @@ import com.robertx22.age_of_exile.maps.MapItemData;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.library_of_exile.utils.RandomUtils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -22,13 +25,29 @@ public class MapBlueprint extends RarityItemBlueprint {
         super(info);
     }
 
+    boolean uberMap = false;
+    UberBossTier uberTier = UberBossTier.T1;
+    UberBossArena uber;
+
+    public void setUberBoss(UberBossArena boss, UberBossTier tier) {
+
+        this.uber = boss;
+        this.uberTier = tier;
+        this.uberMap = true;
+    }
+
     @Override
     public ItemStack generate() {
 
 
         MapItemData data = createData();
 
+
         ItemStack stack = new ItemStack(SlashItems.MAP.get());
+
+        if (this.uberMap) {
+            stack.setHoverName(uber.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+        }
 
         StackSaving.MAP.saveTo(stack, data);
 
@@ -38,6 +57,7 @@ public class MapBlueprint extends RarityItemBlueprint {
 
     public MapItemData createData() {
         MapItemData data = new MapItemData();
+
         GearRarity rarity = (GearRarity) this.rarity.get();
 
         data.rar = rarity.GUID();
@@ -47,8 +67,12 @@ public class MapBlueprint extends RarityItemBlueprint {
         data.lvl = level.get();
 
 
-        genAffixes(data, rarity);
+        if (this.uberMap) {
+            data.uber = this.uber.GUID();
+            data.uber_tier = this.uberTier.tier;
+        }
 
+        genAffixes(data, rarity);
 
         return data;
     }

@@ -65,13 +65,13 @@ public class SlashItems {
                     UBER_MAPS.put(uber, new HashMap<>());
                 }
                 var maps = UBER_MAPS.get(uber);
-                maps.put(tier.tier, Def.item(() -> new UberBossMapItem(tier.tier, uber), "uber/map_" + uber.id + "_" + tier.tier));
+                maps.put(tier.tier, Def.item(() -> new UberBossMapItem(tier.tier, uber), "uber/map_" + uber.id + "_tier" + tier.tier));
 
                 if (!UBER_FRAGS.containsKey(uber)) {
                     UBER_FRAGS.put(uber, new HashMap<>());
                 }
                 var frags = UBER_FRAGS.get(uber);
-                frags.put(tier.tier, Def.item(() -> new UberFragmentItem(tier.tier, uber), "uber/frag_" + uber.id + "_" + tier.tier));
+                frags.put(tier.tier, Def.item(() -> new UberFragmentItem(tier.tier, uber), "uber/frag_" + uber.id + "_tier" + tier.tier));
             }
         }
 

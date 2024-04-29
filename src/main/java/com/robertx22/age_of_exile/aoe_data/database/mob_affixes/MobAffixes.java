@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.aoe_data.database.mob_affixes;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.ResourceStats;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
 import com.robertx22.age_of_exile.database.data.mob_affixes.MobAffix;
@@ -99,7 +99,7 @@ public class MobAffixes implements ExileRegistryInit {
 
         new MobAffix("vampire", "Vampriric", ChatFormatting.RED, Affix.Type.prefix)
                 .setMods(new StatMod(25, 25, Health.getInstance()),
-                        new StatMod(15, 15, Stats.LIFESTEAL.get()),
+                        new StatMod(15, 15, ResourceStats.LIFESTEAL.get()),
                         new StatMod(15, 15, ExtraMobDropsStat.getInstance()))
                 .setWeight(500)
                 .addToSerializables();

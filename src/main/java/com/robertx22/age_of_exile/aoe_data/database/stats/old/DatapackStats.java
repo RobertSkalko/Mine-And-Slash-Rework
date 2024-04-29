@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.aoe_data.database.stats.old;
 
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.ResourceStats;
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.base.CoreStatData;
@@ -52,7 +53,7 @@ public class DatapackStats implements ExileRegistryInit {
     )));
 
 
-    public static Stat HEAL_TO_SPELL_DMG = new AddPerPercentOfOther(Stats.HEAL_STRENGTH.get(), SkillDamage.getInstance());
+    public static Stat HEAL_TO_SPELL_DMG = new AddPerPercentOfOther(ResourceStats.HEAL_STRENGTH.get(), SkillDamage.getInstance());
     public static Stat PHYS_DMG_PER_MANA = new AddPerPercentOfOther(Mana.getInstance(), new BonusAttackDamage(Elements.Physical));
     public static Stat SUMMON_HP_PER_HP = new AddPerPercentOfOther(Health.getInstance(), SummonHealth.getInstance());
 
@@ -73,8 +74,8 @@ public class DatapackStats implements ExileRegistryInit {
     public static Stat HP_PER_DEX = new MoreXPerYOf(DatapackStats.DEX, Health.getInstance(), 10);
     public static Stat ARMOR_PER_MANA = new MoreXPerYOf(Mana.getInstance(), Armor.getInstance(), 10);
     public static Stat ARMOR_PER_DODGE = new MoreXPerYOf(DodgeRating.getInstance(), Armor.getInstance(), 10);
-    public static Stat PROJ_DMG_PER_STR = new MoreXPerYOf(DatapackStats.STR, Stats.PROJECTILE_DAMAGE.get(), 5);
-    public static Stat SPELL_DMG_PER_STR = new MoreXPerYOf(DatapackStats.STR, Stats.STYLE_DAMAGE.get(PlayStyle.INT), 5);
+    public static Stat PROJ_DMG_PER_STR = new MoreXPerYOf(DatapackStats.STR, OffenseStats.PROJECTILE_DAMAGE.get(), 5);
+    public static Stat SPELL_DMG_PER_STR = new MoreXPerYOf(DatapackStats.STR, OffenseStats.STYLE_DAMAGE.get(PlayStyle.INT), 5);
     public static Stat HP_REGEN_PER_MS_REGEN = new MoreXPerYOf(MagicShieldRegen.getInstance(), HealthRegen.getInstance(), 1);
 
     @Override

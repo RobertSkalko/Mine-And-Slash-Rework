@@ -10,6 +10,7 @@ public enum Words implements IAutoLocName {
     CURSE_OFFERS("Curse Offers:"),
     REWARD_OFFERS("Reward Offers:"),
     ACCEPTED_CURSES("Accepted Curses:"),
+    UBER_FRAG("Uber Fragment"),
 
     LOAD("Load"),
     CLAIM("Claim"),
@@ -138,6 +139,7 @@ public enum Words implements IAutoLocName {
     Normal_Gear("Normal Gear"),
 
     Requirements("Requirements"),
+    AreaContains("Area Contains an Uber Boss Portal"),
 
 
     Jewel("Jewel"),

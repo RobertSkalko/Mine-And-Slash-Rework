@@ -5,7 +5,7 @@ import com.robertx22.age_of_exile.aoe_data.database.exile_effects.ExileEffectBui
 import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.*;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.data.exile_effects.EffectType;
@@ -41,6 +41,8 @@ import java.util.UUID;
 
 import static net.minecraft.world.entity.ai.attributes.Attributes.*;
 
+// todo try make each reg init have a registry type, and sort the register order based on the order of the registry type instead of manually in code?
+// make them all have 2 methods, loadclass and registerall
 public class ModEffects implements ExileRegistryInit {
 
     public static List<EffectCtx> ALL = new ArrayList<>();
@@ -83,16 +85,16 @@ public class ModEffects implements ExileRegistryInit {
 
         ExileEffectBuilder.of(MISSILE_BARRAGE)
                 .maxStacks(5)
-                .stat(Stats.CAST_TIME_PER_SPELL_TAG.get(SpellTags.MISSILE).mod(50, 50))
-                .stat(Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.MISSILE).mod(25, 25))
+                .stat(SpellChangeStats.CAST_TIME_PER_SPELL_TAG.get(SpellTags.MISSILE).mod(50, 50))
+                .stat(OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.MISSILE).mod(25, 25))
                 .disableStackingStatBuff()
                 .removeOnSpellCastWithTag(SpellTags.MISSILE)
                 .build();
 
         ExileEffectBuilder.of(ModEffects.ESSENCE_OF_FROST)
                 .maxStacks(ESSENCE_OF_FROST_MAX_STACKS)
-                .stat(Stats.CRIT_DAMAGE.get().mod(1, 5))
-                .stat(Stats.ELEMENTAL_DAMAGE.get(Elements.Cold).mod(1, 5))
+                .stat(OffenseStats.CRIT_DAMAGE.get().mod(1, 5))
+                .stat(OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Cold).mod(1, 5))
                 .stat(new AilmentDamage(Ailments.FREEZE).mod(2, 5))
                 .build();
 
@@ -102,9 +104,9 @@ public class ModEffects implements ExileRegistryInit {
 
                 .stat(DatapackStats.ARMOR_PER_MANA.mod(0.1F, 1))
                 .stat(DamageAbsorbedByMana.getInstance().mod(5, 25))
-                .stat(Stats.PROC_SHATTER.get().mod(25, 100))
-                .stat(Stats.PROC_SHATTER_MAX_FROST_ESSENCE.get().mod(10, 50))
-                .stat(Stats.TOTAL_DAMAGE.get().mod(-25, -25))
+                .stat(ProcStats.PROC_SHATTER.get().mod(25, 100))
+                .stat(ProcStats.PROC_SHATTER_MAX_FROST_ESSENCE.get().mod(10, 50))
+                .stat(OffenseStats.TOTAL_DAMAGE.get().mod(-25, -25))
                 .stat(new ElementalResist(Elements.Fire).mod(-25, -25))
 
                 .build();
@@ -211,7 +213,7 @@ public class ModEffects implements ExileRegistryInit {
                 .build();
 
         ExileEffectBuilder.of(ModEffects.WOUNDS)
-                .stat(-25, -25, Stats.HEAL_STRENGTH.get(), ModType.FLAT)
+                .stat(-25, -25, ResourceStats.HEAL_STRENGTH.get(), ModType.FLAT)
                 .build();
 
         ExileEffectBuilder.of(ModEffects.PETRIFY)
@@ -229,19 +231,19 @@ public class ModEffects implements ExileRegistryInit {
 
 
         ExileEffectBuilder.of(DRACONIC_BLOOD)
-                .stat(2, 4, Stats.SPELL_LIFESTEAL.get(), ModType.FLAT)
+                .stat(2, 4, ResourceStats.SPELL_LIFESTEAL.get(), ModType.FLAT)
                 .maxStacks(1)
                 .addTags(EffectTags.positive)
                 .build();
 
         ExileEffectBuilder.of(VAMPIRIC_BLOOD)
-                .stat(2, 5, Stats.LIFESTEAL.get(), ModType.FLAT)
+                .stat(2, 5, ResourceStats.LIFESTEAL.get(), ModType.FLAT)
                 .maxStacks(1)
                 .addTags(EffectTags.positive)
                 .build();
 
         ExileEffectBuilder.of(MAGE_CIRCLE)
-                .stat(10, 25, Stats.CRIT_DAMAGE.get(), ModType.FLAT)
+                .stat(10, 25, OffenseStats.CRIT_DAMAGE.get(), ModType.FLAT)
                 .stat(5, 20, SkillDamage.getInstance(), ModType.FLAT)
                 .maxStacks(1)
                 .addTags(EffectTags.offensive)
@@ -249,8 +251,8 @@ public class ModEffects implements ExileRegistryInit {
 
 
         ExileEffectBuilder.of(TAUNT_STANCE)
-                .stat(10, 25, Stats.THREAT_GENERATED.get())
-                .stat(25, 50, Stats.MORE_THREAT_WHEN_TAKING_DAMAGE.get())
+                .stat(10, 25, SpellChangeStats.THREAT_GENERATED.get())
+                .stat(25, 50, SpellChangeStats.MORE_THREAT_WHEN_TAKING_DAMAGE.get())
 
                 .spell(SpellBuilder.forEffect()
                         .onTick(PartBuilder.justAction(SpellAction.AGGRO.create(SpellCalcs.TAUNT, AggroAction.Type.AGGRO))
@@ -261,7 +263,7 @@ public class ModEffects implements ExileRegistryInit {
                 .build();
 
         ExileEffectBuilder.of(UNDYING_WILL)
-                .stat(-25, -75, Stats.DAMAGE_RECEIVED.get())
+                .stat(-25, -75, DefenseStats.DAMAGE_RECEIVED.get())
                 .stat(1, 2, HealthRegen.getInstance())
                 .maxStacks(1)
                 .build();
@@ -269,7 +271,7 @@ public class ModEffects implements ExileRegistryInit {
         ExileEffectBuilder.of(VIGOR)
                 .stat(0.25F, 0.5F, HealthRegen.getInstance())
                 .stat(0.25F, 0.5F, ManaRegen.getInstance())
-                .stat(10, 10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.song), ModType.MORE)
+                .stat(10, 10, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.song), ModType.MORE)
                 .maxStacks(3)
                 .addTags(EffectTags.song)
                 .build();
@@ -280,15 +282,15 @@ public class ModEffects implements ExileRegistryInit {
                 .stat(5, 10, new ElementalResist(Elements.Fire))
                 .stat(5, 10, new ElementalResist(Elements.Cold))
                 .stat(5, 10, new ElementalResist(Elements.Nature))
-                .stat(10, 10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.song), ModType.MORE)
+                .stat(10, 10, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.song), ModType.MORE)
                 .maxStacks(3)
                 .addTags(EffectTags.song, EffectTags.defensive)
                 .build();
 
         ExileEffectBuilder.of(VALOR)
-                .stat(5, 10, Stats.TOTAL_DAMAGE.get(), ModType.FLAT)
-                .stat(2, 5, Stats.CRIT_CHANCE.get(), ModType.FLAT)
-                .stat(10, 10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.song), ModType.MORE)
+                .stat(5, 10, OffenseStats.TOTAL_DAMAGE.get(), ModType.FLAT)
+                .stat(2, 5, OffenseStats.CRIT_CHANCE.get(), ModType.FLAT)
+                .stat(10, 10, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.song), ModType.MORE)
                 .maxStacks(3)
                 .addTags(EffectTags.song, EffectTags.offensive)
                 .build();
@@ -297,8 +299,8 @@ public class ModEffects implements ExileRegistryInit {
         ExileEffectBuilder.of(REJUVENATE)
                 .maxStacks(5)
                 .addTags(EffectTags.heal_over_time)
-                .stat(Stats.REJUV_HEAL_SELF.get().mod(25, 50).more())
-                .stat(Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.thorns).mod(2, 10).more())
+                .stat(ResourceStats.REJUV_HEAL_SELF.get().mod(25, 50).more())
+                .stat(OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.thorns).mod(2, 10).more())
                 .spell(SpellBuilder.forEffect()
                         .onTick(PartBuilder.justAction(SpellAction.RESTORE_HEALTH.create(SpellCalcs.REJUVENATION))
                                 .setTarget(TargetSelector.TARGET.create())

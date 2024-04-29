@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.database.data.map_affix;
 
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.DefenseStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
@@ -40,8 +41,8 @@ public class MapAffixes {
         }
 
         // mobs
-        new MapAffix("crit").addMod(new StatMod(25, 100, Stats.CRIT_CHANCE.get())).addToSerializables();
-        new MapAffix("crit_dmg").addMod(new StatMod(20, 50, Stats.CRIT_DAMAGE.get())).addToSerializables();
+        new MapAffix("crit").addMod(new StatMod(25, 100, OffenseStats.CRIT_CHANCE.get())).addToSerializables();
+        new MapAffix("crit_dmg").addMod(new StatMod(20, 50, OffenseStats.CRIT_DAMAGE.get())).addToSerializables();
 
         var allres = new MapAffix("all_ele_res");
         for (Elements ele : Elements.getAllSingle()) {
@@ -69,8 +70,8 @@ public class MapAffixes {
 
         for (Elements element : elements) {
             prophecyAffix("prophecy_max_ele_res" + element.guidName).addMod(new MaxElementalResist(element).mod(-5, -5)).addMod(new ElementalResist(element).mod(-25, -25));
-            prophecyAffix("prophecy_ele_dmg" + element.guidName).addMod(Stats.ELEMENTAL_DAMAGE.get(element).mod(-50, -50));
-            prophecyAffix("prophecy_always_crit" + element.guidName).addMod(Stats.ALWAYS_CRIT_WHEN_HIT_BY_ELEMENT.get(element).mod(1, 1));
+            prophecyAffix("prophecy_ele_dmg" + element.guidName).addMod(OffenseStats.ELEMENTAL_DAMAGE.get(element).mod(-50, -50));
+            prophecyAffix("prophecy_always_crit" + element.guidName).addMod(DefenseStats.ALWAYS_CRIT_WHEN_HIT_BY_ELEMENT.get(element).mod(1, 1));
 
         }
         prophecyAffix("prophecy_hp").addMod(Health.getInstance().mod(-25, -25).percent());
@@ -80,9 +81,9 @@ public class MapAffixes {
         prophecyAffix("prophecy_armor").addMod(Armor.getInstance().mod(-25, -25).percent());
         prophecyAffix("prophecy_dodge").addMod(DodgeRating.getInstance().mod(-25, -25).percent());
 
-        prophecyAffix("prophecy_total_dmg").addMod(Stats.TOTAL_DAMAGE.get().mod(-10, -10).more());
-        prophecyAffix("prophecy_crit").addMod(Stats.CRIT_CHANCE.get().mod(-25, -25).more());
-        prophecyAffix("prophecy_crit_dmg").addMod(Stats.CRIT_DAMAGE.get().mod(-25, -25).more());
+        prophecyAffix("prophecy_total_dmg").addMod(OffenseStats.TOTAL_DAMAGE.get().mod(-10, -10).more());
+        prophecyAffix("prophecy_crit").addMod(OffenseStats.CRIT_CHANCE.get().mod(-25, -25).more());
+        prophecyAffix("prophecy_crit_dmg").addMod(OffenseStats.CRIT_DAMAGE.get().mod(-25, -25).more());
 
     }
 

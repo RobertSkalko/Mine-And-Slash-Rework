@@ -2,3 +2,4 @@ These are all default registry entries of this type.
 This registry can't be modified or added to.
 harvest
 prophecy
+uber

@@ -2,7 +2,10 @@ package com.robertx22.age_of_exile.aoe_data.database.affixes.adders;
 
 import com.robertx22.age_of_exile.aoe_data.database.affixes.AffixBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.EffectStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.ResourceStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.SpellChangeStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
@@ -41,55 +44,55 @@ public class ImplicitAffixes implements ExileRegistryInit {
         });
 
         new Builder(SlotTags.PLATE_HELMET).build(x -> {
-            x.add("gladiator_helm", "Gladiator Helm", Stats.ELEMENTAL_DAMAGE.get(Elements.Physical).mod(3, 6));
-            x.add("siege_helm", "Siege Helmet", Stats.STYLE_DAMAGE.get(PlayStyle.STR).mod(5, 10));
+            x.add("gladiator_helm", "Gladiator Helm", OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Physical).mod(3, 6));
+            x.add("siege_helm", "Siege Helmet", OffenseStats.STYLE_DAMAGE.get(PlayStyle.STR).mod(5, 10));
             x.add("royal_helm", "Royal Helm", DatapackStats.STR.mod(3, 6).percent());
         });
 
         new Builder(SlotTags.LEATHER_HELMET).build(x -> {
-            x.add("bandit_mask", "Bandit Mask", Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.trap).mod(5, 10));
-            x.add("vdo_mask", "Voodoo Mask", Stats.INCREASED_LEECH.get().mod(5, 10));
-            x.add("hunter_hood", "Hunter Hood", Stats.PROJECTILE_DAMAGE.get().mod(3, 6));
-            x.add("wolf_pelt", "Wolf Pelt", Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.beast).mod(4, 8));
+            x.add("bandit_mask", "Bandit Mask", OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.trap).mod(5, 10));
+            x.add("vdo_mask", "Voodoo Mask", ResourceStats.INCREASED_LEECH.get().mod(5, 10));
+            x.add("hunter_hood", "Hunter Hood", OffenseStats.PROJECTILE_DAMAGE.get().mod(3, 6));
+            x.add("wolf_pelt", "Wolf Pelt", OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.beast).mod(4, 8));
         });
 
         new Builder(SlotTags.CLOTH_HELMET).build(x -> {
-            x.add("lunaris_circlet", "Lunaris Circlet", 200, Stats.ELEMENTAL_DAMAGE.get(Elements.Cold).mod(3, 6));
+            x.add("lunaris_circlet", "Lunaris Circlet", 200, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Cold).mod(3, 6));
             x.add("mind_cage", "Mind Cage", Mana.getInstance().mod(10, 20));
-            x.add("necro_helmet", "Necromancer Helm", 100, Stats.MAX_SUMMON_CAPACITY.get().mod(1, 1));
-            x.add("bone_helm", "Bone Circlet", Stats.SUMMON_DAMAGE.get().mod(3, 6));
+            x.add("necro_helmet", "Necromancer Helm", 100, SpellChangeStats.MAX_SUMMON_CAPACITY.get().mod(1, 1));
+            x.add("bone_helm", "Bone Circlet", OffenseStats.SUMMON_DAMAGE.get().mod(3, 6));
             x.add("golden_crown", "Golden Crown", new ElementalResist(Elements.Physical).mod(2, 4));
         });
 
         // todo i hate crossbows..
         new Builder(SlotTags.crossbow).build(x -> {
-            x.add("bone_crossbow", "Bone Crossbow", Stats.ELEMENTAL_DAMAGE.get(Elements.Physical).mod(5, 10));
-            x.add("imperial_crossbow", "Imperial Crossbow", Stats.CRIT_DAMAGE.get().mod(5, 10));
-            x.add("ass_crossbow", "Assassin Crossbow", Stats.CRIT_CHANCE.get().mod(3, 6));
-            x.add("thicket_crossbow", "Thicket Crossbow", Stats.PROJECTILE_DAMAGE.get().mod(5, 10));
+            x.add("bone_crossbow", "Bone Crossbow", OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Physical).mod(5, 10));
+            x.add("imperial_crossbow", "Imperial Crossbow", OffenseStats.CRIT_DAMAGE.get().mod(5, 10));
+            x.add("ass_crossbow", "Assassin Crossbow", OffenseStats.CRIT_CHANCE.get().mod(3, 6));
+            x.add("thicket_crossbow", "Thicket Crossbow", OffenseStats.PROJECTILE_DAMAGE.get().mod(5, 10));
         });
 
         new Builder(SlotTags.bow).build(x -> {
-            x.add("bone_bow", "Bone Bow", Stats.ELEMENTAL_DAMAGE.get(Elements.Physical).mod(5, 10));
-            x.add("imperial_bow", "Imperial Bow", Stats.CRIT_DAMAGE.get().mod(5, 10));
-            x.add("ass_bow", "Assassin Bow", Stats.CRIT_CHANCE.get().mod(3, 6));
-            x.add("thicket_bow", "Thicket Bow", Stats.PROJECTILE_DAMAGE.get().mod(5, 10));
+            x.add("bone_bow", "Bone Bow", OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Physical).mod(5, 10));
+            x.add("imperial_bow", "Imperial Bow", OffenseStats.CRIT_DAMAGE.get().mod(5, 10));
+            x.add("ass_bow", "Assassin Bow", OffenseStats.CRIT_CHANCE.get().mod(3, 6));
+            x.add("thicket_bow", "Thicket Bow", OffenseStats.PROJECTILE_DAMAGE.get().mod(5, 10));
         });
         new Builder(SlotTags.sword).build(x -> {
             x.add("rusted_sword", "Rusted Sword", new AilmentChance(Ailments.POISON).mod(4, 10));
             x.add("dusk_blade", "Dusk Blade", new AilmentDamage(Ailments.POISON).mod(7, 15));
-            x.add("twilight_blade", "Twilight Blade", Stats.CRIT_DAMAGE.get().mod(5, 10));
-            x.add("thorn_rapier", "Thorn Rapier", Stats.CRIT_CHANCE.get().mod(3, 3), Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.thorns).mod(5, 10));
+            x.add("twilight_blade", "Twilight Blade", OffenseStats.CRIT_DAMAGE.get().mod(5, 10));
+            x.add("thorn_rapier", "Thorn Rapier", OffenseStats.CRIT_CHANCE.get().mod(3, 3), OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.thorns).mod(5, 10));
         });
 
         new Builder(SlotTags.staff).build(x -> {
-            x.add("arcane_staff", "Arcane Staff", Stats.ELEMENTAL_DAMAGE.get(Elements.Elemental).mod(4, 8));
-            x.add("oakwood_staff", "Oak Wood Staff", Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.thorns).mod(10, 20));
-            x.add("cleric_staff", "Cleric Staff", Stats.HEAL_STRENGTH.get().mod(10, 20));
-            x.add("glacial_staff", "Glacial Staff", Stats.ELEMENTAL_DAMAGE.get(Elements.Cold).mod(10, 15));
-            x.add("wildfire_staff", "Wildfire Staff", Stats.ELEMENTAL_DAMAGE.get(Elements.Fire).mod(5, 10), new AilmentChance(Ailments.BURN).mod(3, 5));
-            x.add("cursed_staff", "Cursed Staff", Stats.ELEMENTAL_DAMAGE.get(Elements.Shadow).mod(5, 10), Stats.EFFECT_DURATION_YOU_CAST_PER_TAG.get(EffectTags.curse).mod(5, 10));
-            x.add("lightning_staff", "Lightning Staff", Stats.ELEMENTAL_DAMAGE.get(Elements.Nature).mod(5, 10), Stats.CRIT_CHANCE.get().mod(2, 3));
+            x.add("arcane_staff", "Arcane Staff", OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Elemental).mod(4, 8));
+            x.add("oakwood_staff", "Oak Wood Staff", OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.thorns).mod(10, 20));
+            x.add("cleric_staff", "Cleric Staff", ResourceStats.HEAL_STRENGTH.get().mod(10, 20));
+            x.add("glacial_staff", "Glacial Staff", OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Cold).mod(10, 15));
+            x.add("wildfire_staff", "Wildfire Staff", OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Fire).mod(5, 10), new AilmentChance(Ailments.BURN).mod(3, 5));
+            x.add("cursed_staff", "Cursed Staff", OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Shadow).mod(5, 10), EffectStats.EFFECT_DURATION_YOU_CAST_PER_TAG.get(EffectTags.curse).mod(5, 10));
+            x.add("lightning_staff", "Lightning Staff", OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Nature).mod(5, 10), OffenseStats.CRIT_CHANCE.get().mod(2, 3));
         });
 
 

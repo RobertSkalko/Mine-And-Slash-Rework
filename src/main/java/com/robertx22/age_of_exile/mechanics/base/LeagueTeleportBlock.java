@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.mechanics.base;
 
 import com.robertx22.age_of_exile.database.data.league.LeagueStructure;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -32,10 +33,12 @@ public class LeagueTeleportBlock extends Block {
 
                 var mech = LeagueStructure.getMechanicFromPosition((ServerLevel) level, pPos);
 
+                var map = Load.mapAt(level, pPos).map;
+
                 if (mech.GUID().equals(league)) {
-                    mech.getStructure().teleportBackToDungeon(p);
+                    mech.getStructure(map).teleportBackToDungeon(p);
                 } else {
-                    ExileDB.LeagueMechanics().get(league).getStructure().teleportToStartOfLeague(p);
+                    ExileDB.LeagueMechanics().get(league).getStructure(map).teleportToStartOfLeague(p);
                 }
 
             }

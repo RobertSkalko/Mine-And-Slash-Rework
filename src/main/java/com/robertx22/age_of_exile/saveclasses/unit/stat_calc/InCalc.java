@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.saveclasses.unit.stat_calc;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.base.ICoreStat;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.base.ITransferToOtherStats;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
+import com.robertx22.age_of_exile.saveclasses.unit.InCalcStatContainer;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,31 +17,31 @@ public class InCalc {
         this.unit = unit;
     }
 
-    public void addVanillaHpToStats(LivingEntity entity) {
+    public void addVanillaHpToStats(LivingEntity entity, InCalcStatContainer calc) {
         if (entity instanceof Player) {
 
             float maxhp = Mth.clamp(entity.getMaxHealth(), 0, 500);
             // all increases after this would just reduce enviro damage
 
-            unit.getStats().getStatInCalculation(Health.getInstance()).addAlreadyScaledFlat(maxhp);
+            calc.getStatInCalculation(Health.getInstance()).addAlreadyScaledFlat(maxhp);
 
             // add vanila hp to extra hp
         }
     }
 
-    public void modify(Unit data) {
-     
+    public void modify(InCalcStatContainer calc) {
+
         // todo these should probably be after stats are out of calculation..? or they should be another phase
         // apply transfer stats
-        unit.getStats().modifyInCalc(calcStat -> {
+        calc.modifyInCalc(calcStat -> {
             if (calcStat.GetStat() instanceof ITransferToOtherStats transfer) {
-                transfer.transferStats(data, calcStat);
+                transfer.transferStats(calc, calcStat);
             }
         });
         // apply core stats
-        unit.getStats().modifyInCalc(calcStat -> {
+        calc.modifyInCalc(calcStat -> {
             if (calcStat.GetStat() instanceof ICoreStat core) {
-                core.addToOtherStats(data, calcStat);
+                core.addToOtherStats(calc, calcStat);
             }
         });
     }

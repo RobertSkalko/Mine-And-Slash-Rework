@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.database.data.stats.types.special;
 
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.ResourceStats;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseHealEffect;
 import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
@@ -28,8 +28,8 @@ public class SpecialStats {
 
 
     public static SpecialStat HEAL_CLEANSE = new SpecialStat("heal_cleanse",
-            format("Your " + Stats.HEAL_STRENGTH.get()
-                    .getFormat() + Stats.HEAL_STRENGTH.get().icon + " Heal Spells " + ChatFormatting.GRAY + "have a " + VAL1 + "%" + " chance to cleanse a negative effect."),
+            format("Your " + ResourceStats.HEAL_STRENGTH.get()
+                    .getFormat() + ResourceStats.HEAL_STRENGTH.get().icon + " Heal Spells " + ChatFormatting.GRAY + "have a " + VAL1 + "%" + " chance to cleanse a negative effect."),
 
             new BaseHealEffect() {
                 @Override

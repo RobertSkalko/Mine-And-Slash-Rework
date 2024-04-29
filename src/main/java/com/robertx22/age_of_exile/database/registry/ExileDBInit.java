@@ -84,6 +84,7 @@ public class ExileDBInit {
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.CHAOS_STAT, ""));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.STAT_COMPAT, ""));
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.STAT_LAYER, ""));
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.UBER_BOSS, ""));
 
     }
 }

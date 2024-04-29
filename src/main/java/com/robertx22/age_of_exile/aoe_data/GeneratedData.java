@@ -29,6 +29,7 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.AutoDatapackStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearReg;
+import com.robertx22.age_of_exile.content.ubers.UberBosses;
 import com.robertx22.age_of_exile.database.data.aura.AuraGems;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.map_affix.MapAffixes;
@@ -103,6 +104,7 @@ public class GeneratedData {
         new StatCompats().registerAll();
 
         new ProphecyModifiers().registerAll();
+        UberBosses.init();
 
         GameBalanceConfig c = new GameBalanceConfig();
         c.addToSerializables();

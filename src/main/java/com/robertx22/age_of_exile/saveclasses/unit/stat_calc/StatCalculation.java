@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.gui.stats.SavedStatCtxList;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.saveclasses.unit.GearData;
+import com.robertx22.age_of_exile.saveclasses.unit.InCalcStatContainer;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.GearStatCtx;
@@ -63,6 +64,8 @@ public class StatCalculation {
             gemstats.addAll(collectGemStats(p, data, playerData, skillGem));
         }
 
+        InCalcStatContainer statCalc = new InCalcStatContainer();
+
         var allstats = new ArrayList<StatContext>();
 
         allstats.addAll(gemstats);
@@ -71,7 +74,7 @@ public class StatCalculation {
         var sc = new CtxStats(allstats);
 
         sc.applyCtxModifierStats();
-        sc.applyToInCalc(unit);
+        sc.applyToInCalc(statCalc);
 
 
         if (entity instanceof Player p) {
@@ -79,10 +82,10 @@ public class StatCalculation {
         }
 
         InCalc incalc = new InCalc(unit);
-        incalc.addVanillaHpToStats(entity);
-        incalc.modify(unit);
+        incalc.addVanillaHpToStats(entity, statCalc);
+        incalc.modify(statCalc);
 
-        unit.getStats().calculate();
+        unit.setStats(statCalc.calculate());
 
         // apply stats that add to others
 

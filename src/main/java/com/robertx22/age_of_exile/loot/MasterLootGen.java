@@ -74,6 +74,7 @@ public class MasterLootGen {
         try {
             items.addAll(new GearLootGen(info).tryGenerate());
             items.addAll(new SoulLootGen(info).tryGenerate());
+            items.addAll(new UberFragLootGen(info).tryGenerate());
 
             items.addAll(new AuraGemLootGen(info).tryGenerate());
             items.addAll(new SuppGemLootGen(info).tryGenerate());

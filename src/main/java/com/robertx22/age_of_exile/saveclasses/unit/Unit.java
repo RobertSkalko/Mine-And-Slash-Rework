@@ -32,14 +32,6 @@ public class Unit {
     private StatContainer stats = new StatContainer();
 
 
-    public InCalcStatData getStatInCalculation(Stat stat) {
-        return getStats().getStatInCalculation(stat);
-    }
-
-    public InCalcStatData getStatInCalculation(String stat) {
-        return getStats().getStatInCalculation(stat);
-    }
-
     public boolean isBloodMage() {
         return getCalculatedStat(BloodUser.getInstance())
                 .getValue() > 0;
@@ -53,7 +45,12 @@ public class Unit {
         if (stats == null) {
             stats = new StatContainer();
         }
+
         return stats;
+    }
+
+    public void setStats(StatContainer c) {
+        this.stats = c;
     }
 
     public StatData getCalculatedStat(Stat stat) {

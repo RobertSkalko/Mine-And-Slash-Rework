@@ -1,7 +1,8 @@
 package com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques;
 
 import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearTypes;
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.ResourceStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueRarityTier;
@@ -71,8 +72,8 @@ public class ProphecyUniques implements ExileRegistryInit {
                         new StatMod(-25, -25, new ElementalResist(Elements.Shadow), ModType.FLAT),
                         new StatMod(-25, -25, new ElementalResist(Elements.Fire), ModType.FLAT),
 
-                        Stats.LIFESTEAL.get().mod(1, 1),
-                        Stats.SPELL_LIFESTEAL.get().mod(1, 1),
+                        ResourceStats.LIFESTEAL.get().mod(1, 1),
+                        ResourceStats.SPELL_LIFESTEAL.get().mod(1, 1),
                         DatapackStats.HEALTH_PER_10_STR.mod(25, 50),
                         HealthRegen.getInstance().mod(10, 25).percent()
                 ))
@@ -90,7 +91,7 @@ public class ProphecyUniques implements ExileRegistryInit {
                         new StatMod(-25, -25, new ElementalResist(Elements.Fire), ModType.FLAT),
                         new StatMod(-25, -25, new ElementalResist(Elements.Nature), ModType.FLAT),
 
-                        Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.PHYSICAL).mod(15, 50),
+                        OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.PHYSICAL).mod(15, 50),
                         DatapackStats.MANA_PER_10_DEX.mod(25, 75),
                         HealthRegen.getInstance().mod(10, 25).percent(),
                         DatapackStats.INT.mod(5, 15).percent()
@@ -106,7 +107,7 @@ public class ProphecyUniques implements ExileRegistryInit {
                         new StatMod(-25, -25, Health.getInstance(), ModType.FLAT),
                         new StatMod(-50, -50, new ElementalResist(Elements.Shadow), ModType.FLAT),
 
-                        Stats.AREA_DAMAGE.get().mod(15, 50),
+                        OffenseStats.AREA_DAMAGE.get().mod(15, 50),
                         DatapackStats.MANA_PER_10_INT.mod(25, 50),
                         ManaRegen.getInstance().mod(10, 20).percent(),
                         DatapackStats.STR.mod(5, 15).percent()

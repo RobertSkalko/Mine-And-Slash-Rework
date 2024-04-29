@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.mmorpg.registers.common;
 
+import com.robertx22.age_of_exile.content.ubers.UberBossAltarBlock;
 import com.robertx22.age_of_exile.database.data.league.LeagueMechanics;
 import com.robertx22.age_of_exile.database.data.profession.ProfessionBlock;
 import com.robertx22.age_of_exile.database.data.profession.all.Professions;
@@ -30,14 +31,16 @@ public class SlashBlocks {
     public static RegObj<MapBlock> MAP = Def.block("teleporter", () -> new MapBlock());
     public static RegObj<LeagueControlBlock> LEAGUE_CONTROL = Def.block("league", () -> new LeagueControlBlock());
     public static RegObj<LeagueTeleportBlock> HARVEST_TELEPORT = Def.block("harvest_teleport", () -> new LeagueTeleportBlock(LeagueMechanics.HARVEST_ID));
+    public static RegObj<LeagueTeleportBlock> UBER_TELEPORT = Def.block("uber_teleport", () -> new LeagueTeleportBlock(LeagueMechanics.UBER.GUID()));
     public static RegObj<ProphecyAltarBlock> PROPHECY_ALTAR = Def.block("prophecy_altar", () -> new ProphecyAltarBlock());
+    public static RegObj<UberBossAltarBlock> UBER_BOSS_ALTAR = Def.block("uber_boss_altar", () -> new UberBossAltarBlock());
 
 
     public static HashMap<String, RegObj<ProfessionBlock>> STATIONS = new HashMap<>();
 
     public static void init() {
 
- 
+
         for (String p : Professions.STATION_PROFESSIONS) {
             STATIONS.put(p, Def.block("station/" + p, () -> new ProfessionBlock(p)));
         }

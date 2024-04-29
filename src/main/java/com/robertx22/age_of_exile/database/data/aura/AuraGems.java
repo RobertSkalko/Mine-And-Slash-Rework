@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.database.data.aura;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.AutoHashClass;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
@@ -96,46 +96,46 @@ public class AuraGems {
 
         // flat ele + ailment
         new AuraGem(cold_ailment, PlayStyle.DEX, 0.4F, Arrays.asList(
-                new StatMod(10, 50, Stats.ELEMENTAL_DAMAGE.get(Elements.Cold), ModType.FLAT),
+                new StatMod(10, 50, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Cold), ModType.FLAT),
                 new StatMod(5, 25, new AilmentChance(Ailments.FREEZE), ModType.FLAT)
         )).levelReq(10).addToSerializables();
         new AuraGem(fire_ailment, PlayStyle.STR, 0.4F, Arrays.asList(
-                new StatMod(10, 50, Stats.ELEMENTAL_DAMAGE.get(Elements.Fire), ModType.FLAT),
+                new StatMod(10, 50, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Fire), ModType.FLAT),
                 new StatMod(5, 25, new AilmentChance(Ailments.BURN), ModType.FLAT)
         )).levelReq(10).addToSerializables();
         new AuraGem(lightning_ailment, PlayStyle.INT, 0.4F, Arrays.asList(
-                new StatMod(10, 50, Stats.ELEMENTAL_DAMAGE.get(Elements.Nature), ModType.FLAT),
+                new StatMod(10, 50, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Nature), ModType.FLAT),
                 new StatMod(5, 25, new AilmentChance(Ailments.ELECTRIFY), ModType.FLAT)
         )).levelReq(10).addToSerializables();
         new AuraGem(physical_ailment, PlayStyle.STR, 0.4F, Arrays.asList(
-                new StatMod(10, 50, Stats.ELEMENTAL_DAMAGE.get(Elements.Physical), ModType.FLAT),
+                new StatMod(10, 50, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Physical), ModType.FLAT),
                 new StatMod(5, 25, new AilmentChance(Ailments.BLEED), ModType.FLAT)
         )).levelReq(10).addToSerializables();
         new AuraGem(chaos_ailment, PlayStyle.DEX, 0.4F, Arrays.asList(
-                new StatMod(10, 50, Stats.ELEMENTAL_DAMAGE.get(Elements.Shadow), ModType.FLAT),
+                new StatMod(10, 50, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Shadow), ModType.FLAT),
                 new StatMod(5, 25, new AilmentChance(Ailments.POISON), ModType.FLAT)
         )).levelReq(10).addToSerializables();
 
         new AuraGem(summon_dmg, PlayStyle.INT, 0.3F, Arrays.asList(
-                new StatMod(10, 40, Stats.SUMMON_DAMAGE.get(), ModType.MORE)
+                new StatMod(10, 40, OffenseStats.SUMMON_DAMAGE.get(), ModType.MORE)
         )).levelReq(20).addToSerializables();
 
 
         // ele dmg
         new AuraGem(cold_damage, PlayStyle.DEX, 0.4F, Arrays.asList(
-                new StatMod(10, 35, Stats.ELEMENTAL_DAMAGE.get(Elements.Cold), ModType.MORE)
+                new StatMod(10, 35, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Cold), ModType.MORE)
         )).levelReq(30).addToSerializables();
         new AuraGem(fire_damage, PlayStyle.STR, 0.4F, Arrays.asList(
-                new StatMod(10, 35, Stats.ELEMENTAL_DAMAGE.get(Elements.Fire), ModType.MORE)
+                new StatMod(10, 35, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Fire), ModType.MORE)
         )).levelReq(30).addToSerializables();
         new AuraGem(lightning_damage, PlayStyle.INT, 0.4F, Arrays.asList(
-                new StatMod(10, 35, Stats.ELEMENTAL_DAMAGE.get(Elements.Nature), ModType.MORE)
+                new StatMod(10, 35, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Nature), ModType.MORE)
         )).levelReq(30).addToSerializables();
         new AuraGem(physical_damage, PlayStyle.STR, 0.4F, Arrays.asList(
-                new StatMod(10, 35, Stats.ELEMENTAL_DAMAGE.get(Elements.Physical), ModType.MORE)
+                new StatMod(10, 35, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Physical), ModType.MORE)
         )).levelReq(30).addToSerializables();
         new AuraGem(chaos_damage, PlayStyle.DEX, 0.4F, Arrays.asList(
-                new StatMod(10, 35, Stats.ELEMENTAL_DAMAGE.get(Elements.Shadow), ModType.MORE)
+                new StatMod(10, 35, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Shadow), ModType.MORE)
         )).levelReq(30).addToSerializables();
 
 

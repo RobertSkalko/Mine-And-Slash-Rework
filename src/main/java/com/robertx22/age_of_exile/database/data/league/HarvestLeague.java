@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.LootChestBlueprint;
 import com.robertx22.age_of_exile.maps.LeagueData;
 import com.robertx22.age_of_exile.maps.MapData;
+import com.robertx22.age_of_exile.maps.MapItemData;
 import com.robertx22.age_of_exile.maps.processors.helpers.MobBuilder;
 import com.robertx22.age_of_exile.mechanics.base.LeagueBlockData;
 import com.robertx22.age_of_exile.mechanics.base.LeagueControlBlockEntity;
@@ -50,7 +51,7 @@ public class HarvestLeague extends LeagueMechanic {
     }
 
     @Override
-    public LeagueStructure getStructure() {
+    public LeagueStructure getStructure(MapItemData map) {
         return new LeagueStructure(this) {
             @Override
             public BlockPos getTeleportPos(BlockPos pos) {
@@ -61,7 +62,7 @@ public class HarvestLeague extends LeagueMechanic {
 
 
             @Override
-            public LeaguePiecesList getPieces() {
+            public LeaguePiecesList getPieces(MapItemData map) {
                 return new LeaguePiecesList(Arrays.asList(
                         new LeagueStructurePieces(2, "harvest/river"),
                         new LeagueStructurePieces(2, "harvest/circle")

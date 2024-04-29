@@ -2,7 +2,8 @@ package com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.jewelr
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearTypes;
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.ResourceStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuilder;
 import com.robertx22.age_of_exile.database.data.StatMod;
@@ -32,8 +33,8 @@ public class UniqueNecklaces implements ExileRegistryInit {
                         BaseGearTypes.NECKLACE)
                 .setReplacesName()
                 .stats(Arrays.asList(
-                        new StatMod(10, 25, Stats.ELEMENTAL_DAMAGE.get(Elements.Nature)),
-                        new StatMod(10, 20, Stats.HEAL_STRENGTH.get()),
+                        new StatMod(10, 25, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Nature)),
+                        new StatMod(10, 20, ResourceStats.HEAL_STRENGTH.get()),
                         new StatMod(5, 15, Armor.getInstance())
                 ))
                 .devComment("divine school heal necklace")
@@ -70,7 +71,7 @@ public class UniqueNecklaces implements ExileRegistryInit {
                         "Skull of Spirits",
                         BaseGearTypes.NECKLACE)
                 .stats(Arrays.asList(
-                        new StatMod(15, 50, Stats.SUMMON_DAMAGE.get(), ModType.FLAT),
+                        new StatMod(15, 50, OffenseStats.SUMMON_DAMAGE.get(), ModType.FLAT),
                         new StatMod(10, 30, ManaRegen.getInstance(), ModType.PERCENT),
                         new StatMod(-25, -25, new ElementalResist(Elements.Cold), ModType.FLAT),
                         new StatMod(-25, -25, new ElementalResist(Elements.Fire), ModType.FLAT)
@@ -99,7 +100,7 @@ public class UniqueNecklaces implements ExileRegistryInit {
 
         UniqueGearBuilder.of("master_torture", "Master of Torture", BaseGearTypes.NECKLACE)
                 .keepsBaseName()
-                .stat(Stats.DAMAGE_TO_CURSED.get().mod(25, 50))
+                .stat(OffenseStats.DAMAGE_TO_CURSED.get().mod(25, 50))
                 .stat(new ElementalResist(Elements.Shadow).mod(10, 25))
                 .stat(new ElementalResist(Elements.Cold).mod(10, 25))
                 .stat(new ElementalResist(Elements.Fire).mod(10, 25))

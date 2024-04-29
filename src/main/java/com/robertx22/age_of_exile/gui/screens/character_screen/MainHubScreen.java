@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.gui.screens.character_screen;
 
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.*;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.characters.gui.CharacterSelectScreen;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
@@ -138,26 +138,26 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
         addTo(StatType.RESOURCE, Arrays.asList(DatapackStats.STR, DatapackStats.INT, DatapackStats.DEX));
 
         addTo(StatType.DAMAGE, Arrays.asList(WeaponDamage.getInstance(), SkillDamage.getInstance()));
-        addTo(StatType.DAMAGE, Stats.STYLE_DAMAGE.getAll());
-        addTo(StatType.DAMAGE, Arrays.asList(Stats.ACCURACY.get(), Stats.CRIT_CHANCE.get(), Stats.CRIT_DAMAGE.get()));
-        addTo(StatType.DAMAGE, Arrays.asList(Stats.COOLDOWN_REDUCTION.get(), Stats.CAST_SPEED.get()));
+        addTo(StatType.DAMAGE, OffenseStats.STYLE_DAMAGE.getAll());
+        addTo(StatType.DAMAGE, Arrays.asList(OffenseStats.ACCURACY.get(), OffenseStats.CRIT_CHANCE.get(), OffenseStats.CRIT_DAMAGE.get()));
+        addTo(StatType.DAMAGE, Arrays.asList(SpellChangeStats.COOLDOWN_REDUCTION.get(), SpellChangeStats.CAST_SPEED.get()));
 
-        addTo(StatType.ELE_DAMAGE, Stats.ELEMENTAL_DAMAGE.getAll());
+        addTo(StatType.ELE_DAMAGE, OffenseStats.ELEMENTAL_DAMAGE.getAll());
         // addTo(StatType.ELE_DAMAGE, Stats.ELEMENTAL_ANY_WEAPON_DAMAGE.getAll());
-        addTo(StatType.ELE_DAMAGE, Stats.ELEMENTAL_SPELL_DAMAGE.getAll());
+        addTo(StatType.ELE_DAMAGE, OffenseStats.ELEMENTAL_SPELL_DAMAGE.getAll());
         addTo(StatType.ELE_DAMAGE, new ElementalPenetration(Elements.Elemental).generateAllSingleVariations());
 
         addTo(StatType.DEFENSE, Arrays.asList(Armor.getInstance(), DodgeRating.getInstance(), BlockChance.getInstance()));
-        addTo(StatType.DEFENSE, Arrays.asList(Stats.DAMAGE_RECEIVED.get()));
+        addTo(StatType.DEFENSE, Arrays.asList(DefenseStats.DAMAGE_RECEIVED.get()));
         addTo(StatType.DEFENSE, new ElementalResist(Elements.Elemental).generateAllSingleVariations());
         addTo(StatType.DEFENSE, new MaxElementalResist(Elements.Elemental).generateAllSingleVariations());
 
-        addTo(StatType.RECOVERY, Arrays.asList(Stats.HEAL_STRENGTH.get(), Stats.HEALING_RECEIVED.get()));
-        addTo(StatType.RECOVERY, Arrays.asList(Stats.LIFESTEAL.get(), Stats.MANASTEAL.get(), Stats.SPELL_LIFESTEAL.get(), Stats.SPELL_MSSTEAL.get(), Stats.DOT_LIFESTEAL.get()));
-        addTo(StatType.RECOVERY, Stats.RESOURCE_ON_HIT.getAll());
-        addTo(StatType.RECOVERY, Stats.RESOURCE_ON_KILL.getAll());
-        addTo(StatType.RECOVERY, Arrays.asList(Stats.INCREASED_LEECH.get()));
-        addTo(StatType.RECOVERY, Stats.LEECH_CAP.getAll());
+        addTo(StatType.RECOVERY, Arrays.asList(ResourceStats.HEAL_STRENGTH.get(), ResourceStats.HEALING_RECEIVED.get()));
+        addTo(StatType.RECOVERY, Arrays.asList(ResourceStats.LIFESTEAL.get(), ResourceStats.MANASTEAL.get(), ResourceStats.SPELL_LIFESTEAL.get(), ResourceStats.SPELL_MSSTEAL.get(), ResourceStats.DOT_LIFESTEAL.get()));
+        addTo(StatType.RECOVERY, ResourceStats.RESOURCE_ON_HIT.getAll());
+        addTo(StatType.RECOVERY, ResourceStats.RESOURCE_ON_KILL.getAll());
+        addTo(StatType.RECOVERY, Arrays.asList(ResourceStats.INCREASED_LEECH.get()));
+        addTo(StatType.RECOVERY, ResourceStats.LEECH_CAP.getAll());
 
         addRemaining(StatType.MISC);
 

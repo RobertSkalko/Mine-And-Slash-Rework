@@ -22,7 +22,7 @@ import net.minecraft.world.phys.BlockHitResult;
 public class ProphecyAltarBlock extends Block {
 
     public ProphecyAltarBlock() {
-        super(BlockBehaviour.Properties.copy(Blocks.LECTERN));
+        super(BlockBehaviour.Properties.copy(Blocks.LECTERN).noOcclusion());
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.maps;
 
 import com.robertx22.age_of_exile.database.data.league.LeagueMechanic;
+import com.robertx22.age_of_exile.database.data.league.LeagueMechanics;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.library_of_exile.utils.RandomUtils;
@@ -59,17 +60,23 @@ public class MapLeaguesData {
     }
 
     // todo eventually player stats will decide mechanic spawn chances etc
-    public void setupOnMapStart(Player p) {
+    public void setupOnMapStart(MapItemData map, Player p) {
 
         for (LeagueMechanic m : ExileDB.LeagueMechanics().getList()) {
             if (RandomUtils.roll(m.getBaseSpawnChance())) {
                 var data = new LeagueData();
-                m.onMapStartSetupBase(data);
+                m.onMapStartSetupBase(map, data);
                 m.onMapStartSetup(data);
                 this.map.put(m.GUID(), data);
             }
         }
 
+        if (map.isUber()) {
+            var data = new LeagueData();
+            LeagueMechanics.UBER.onMapStartSetupBase(map, data);
+            LeagueMechanics.UBER.onMapStartSetup(data);
+            this.map.put(LeagueMechanics.UBER_ID, data);
+        }
     }
 
     public LeagueData get(LeagueMechanic m) {

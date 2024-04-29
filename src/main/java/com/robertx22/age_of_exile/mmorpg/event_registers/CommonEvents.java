@@ -125,6 +125,11 @@ public class CommonEvents {
 
 
         ForgeEvents.registerForgeEvent(EntityJoinLevelEvent.class, event -> {
+
+            if (event.getEntity() instanceof LivingEntity en) {
+                Load.Unit(en).gear.setDirty(); // todo this is a new performance test
+                // does NOT saving stats to nbt, but calculating every time entity joins world make servers better or worse off?
+            }
             OnMobSpawn.onLoad(event.getEntity());
         });
 

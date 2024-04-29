@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.aoe_data.database.perks;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.*;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
@@ -95,7 +95,7 @@ public class SpellPassives implements ExileRegistryInit {
         PerkBuilder.passive(MANA_REGEN, 8, new OptScaleExactStat(4, ManaRegen.getInstance(), ModType.PERCENT));
         PerkBuilder.passive(SPELL_DMG, 8, new OptScaleExactStat(2, SkillDamage.getInstance(), ModType.FLAT));
         PerkBuilder.passive(MAGIC_SHIELD_REGEN, 8, new OptScaleExactStat(5, MagicShieldRegen.getInstance(), ModType.PERCENT));
-        PerkBuilder.passive(CAST_SPEED_SORC, 8, new OptScaleExactStat(3, Stats.CAST_SPEED.get(), ModType.FLAT));
+        PerkBuilder.passive(CAST_SPEED_SORC, 8, new OptScaleExactStat(3, SpellChangeStats.CAST_SPEED.get(), ModType.FLAT));
         PerkBuilder.passive(ELE_RES, 8, new OptScaleExactStat(4, new ElementalResist(Elements.Elemental)));
         PerkBuilder.passive(GOLEM_CHANCE, 8, new OptScaleExactStat(3, GolemSpellChance.getInstance(), ModType.FLAT));
 //        PerkBuilder.passive(MISSILE_BARRAGE, 8, new OptScaleExactStat(5, AscensionStats.BARRAGE_SELF_BUFF_ON_SPELL_CRIT.get(), ModType.FLAT));
@@ -103,51 +103,51 @@ public class SpellPassives implements ExileRegistryInit {
         // Warlock
         PerkBuilder.passive(POISON_CHANCE, 8, new OptScaleExactStat(4, new AilmentChance(Ailments.POISON)));
         PerkBuilder.passive(POISON_DURATION, 8, new OptScaleExactStat(6, new AilmentDuration(Ailments.POISON)));
-        PerkBuilder.passive(DOT_DMG, 8, new OptScaleExactStat(3, Stats.DOT_DAMAGE.get(), ModType.FLAT));
-        PerkBuilder.passive(CAST_SPEED_WL, 8, new OptScaleExactStat(2, Stats.CAST_SPEED.get(), ModType.FLAT));
-        PerkBuilder.passive(SUMMON_DMG, 8, new OptScaleExactStat(2, Stats.SUMMON_DAMAGE.get(), ModType.FLAT));
-        PerkBuilder.passive(DMG_TO_CURSED, 8, new OptScaleExactStat(4, Stats.DAMAGE_TO_CURSED.get(), ModType.FLAT));
-        PerkBuilder.passive(SPELL_LIFESTEAL, 8, new OptScaleExactStat(1, Stats.SPELL_LIFESTEAL.get(), ModType.FLAT));
-        PerkBuilder.passive(DOT_LIFESTEAL, 8, new OptScaleExactStat(2, Stats.DOT_LIFESTEAL.get(), ModType.FLAT));
+        PerkBuilder.passive(DOT_DMG, 8, new OptScaleExactStat(3, OffenseStats.DOT_DAMAGE.get(), ModType.FLAT));
+        PerkBuilder.passive(CAST_SPEED_WL, 8, new OptScaleExactStat(2, SpellChangeStats.CAST_SPEED.get(), ModType.FLAT));
+        PerkBuilder.passive(SUMMON_DMG, 8, new OptScaleExactStat(2, OffenseStats.SUMMON_DAMAGE.get(), ModType.FLAT));
+        PerkBuilder.passive(DMG_TO_CURSED, 8, new OptScaleExactStat(4, OffenseStats.DAMAGE_TO_CURSED.get(), ModType.FLAT));
+        PerkBuilder.passive(SPELL_LIFESTEAL, 8, new OptScaleExactStat(1, ResourceStats.SPELL_LIFESTEAL.get(), ModType.FLAT));
+        PerkBuilder.passive(DOT_LIFESTEAL, 8, new OptScaleExactStat(2, ResourceStats.DOT_LIFESTEAL.get(), ModType.FLAT));
 
         // Minstrel
         PerkBuilder.passive(HEALTH_MINS, 8, new OptScaleExactStat(3, Health.getInstance(), ModType.PERCENT));
-        PerkBuilder.passive(SONG_DURATION, 8, new OptScaleExactStat(4, Stats.EFFECT_DURATION_YOU_CAST_PER_TAG.get(EffectTags.song)));
-        PerkBuilder.passive(INC_AOE, 8, new OptScaleExactStat(3, Stats.INCREASED_AREA.get()));
-        PerkBuilder.passive(HEAL_STR, 8, new OptScaleExactStat(2, Stats.HEAL_STRENGTH.get()));
-        PerkBuilder.passive(LOW_HP_HEAL, 8, new OptScaleExactStat(4, Stats.LOW_HP_HEALING.get()));
-        PerkBuilder.passive(MANA_COST, 8, new OptScaleExactStat(3, Stats.MANA_COST.get()));
-        PerkBuilder.passive(CDR, 8, new OptScaleExactStat(2, Stats.COOLDOWN_REDUCTION.get()));
+        PerkBuilder.passive(SONG_DURATION, 8, new OptScaleExactStat(4, EffectStats.EFFECT_DURATION_YOU_CAST_PER_TAG.get(EffectTags.song)));
+        PerkBuilder.passive(INC_AOE, 8, new OptScaleExactStat(3, SpellChangeStats.INCREASED_AREA.get()));
+        PerkBuilder.passive(HEAL_STR, 8, new OptScaleExactStat(2, ResourceStats.HEAL_STRENGTH.get()));
+        PerkBuilder.passive(LOW_HP_HEAL, 8, new OptScaleExactStat(4, ResourceStats.LOW_HP_HEALING.get()));
+        PerkBuilder.passive(MANA_COST, 8, new OptScaleExactStat(3, SpellChangeStats.MANA_COST.get()));
+        PerkBuilder.passive(CDR, 8, new OptScaleExactStat(2, SpellChangeStats.COOLDOWN_REDUCTION.get()));
         PerkBuilder.passive(HEAL_TO_SPELL, 8, new OptScaleExactStat(10, DatapackStats.HEAL_TO_SPELL_DMG));
 
         // Hunter
-        PerkBuilder.passive(PROJ_DMG, 8, new OptScaleExactStat(2, Stats.PROJECTILE_DAMAGE.get(), ModType.FLAT));
-        PerkBuilder.passive(PROJ_SPD, 8, new OptScaleExactStat(3, Stats.PROJECTILE_SPEED.get(), ModType.FLAT));
+        PerkBuilder.passive(PROJ_DMG, 8, new OptScaleExactStat(2, OffenseStats.PROJECTILE_DAMAGE.get(), ModType.FLAT));
+        PerkBuilder.passive(PROJ_SPD, 8, new OptScaleExactStat(3, SpellChangeStats.PROJECTILE_SPEED.get(), ModType.FLAT));
         PerkBuilder.passive(DODGE, 8, new OptScaleExactStat(4, DodgeRating.getInstance(), ModType.PERCENT));
-        PerkBuilder.passive(CRIT_DMG, 8, new OptScaleExactStat(4, Stats.CRIT_DAMAGE.get()));
+        PerkBuilder.passive(CRIT_DMG, 8, new OptScaleExactStat(4, OffenseStats.CRIT_DAMAGE.get()));
         PerkBuilder.passive(SUMMON_HEALTH, 8, new OptScaleExactStat(4, SummonHealth.getInstance(), ModType.FLAT));
         PerkBuilder.passive(ENE_REGEN, 8, new OptScaleExactStat(4, EnergyRegen.getInstance(), ModType.PERCENT));
-        PerkBuilder.passive(TRAP_DMG, 8, new OptScaleExactStat(5, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.trap), ModType.FLAT));
-        PerkBuilder.passive(TRAP_CDR, 8, new OptScaleExactStat(3, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.trap), ModType.FLAT));
+        PerkBuilder.passive(TRAP_DMG, 8, new OptScaleExactStat(5, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.trap), ModType.FLAT));
+        PerkBuilder.passive(TRAP_CDR, 8, new OptScaleExactStat(3, SpellChangeStats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.trap), ModType.FLAT));
 
         // Shaman
         PerkBuilder.passive(HEALTH_SHA, 8, new OptScaleExactStat(3, Health.getInstance(), ModType.PERCENT));
         PerkBuilder.passive(MANA_SHA, 8, new OptScaleExactStat(3, Mana.getInstance(), ModType.PERCENT));
         PerkBuilder.passive(ELE_PEN, 8, new OptScaleExactStat(2, new ElementalPenetration(Elements.Elemental)));
-        PerkBuilder.passive(LIGHTNING_ELE, 8, new OptScaleExactStat(2, Stats.ELEMENTAL_DAMAGE.get(Elements.Nature)));
+        PerkBuilder.passive(LIGHTNING_ELE, 8, new OptScaleExactStat(2, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Nature)));
         PerkBuilder.passive(ARMOR_PER_MANA, 8, new OptScaleExactStat(0.2f, DatapackStats.ARMOR_PER_MANA));
         PerkBuilder.passive(ELECTRIFY_CHANCE, 8, new OptScaleExactStat(4, new AilmentChance(Ailments.ELECTRIFY)));
-        PerkBuilder.passive(TOTEM_DMG, 8, new OptScaleExactStat(5, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.totem), ModType.FLAT));
-        PerkBuilder.passive(TOTEM_CDR, 8, new OptScaleExactStat(3, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.totem), ModType.FLAT));
+        PerkBuilder.passive(TOTEM_DMG, 8, new OptScaleExactStat(5, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.totem), ModType.FLAT));
+        PerkBuilder.passive(TOTEM_CDR, 8, new OptScaleExactStat(3, SpellChangeStats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.totem), ModType.FLAT));
 
         // Warrior
         PerkBuilder.passive(HEALTH_WAR, 8, new OptScaleExactStat(4, Health.getInstance(), ModType.PERCENT));
         PerkBuilder.passive(HEALTH_REGEN, 8, new OptScaleExactStat(4, HealthRegen.getInstance(), ModType.PERCENT));
-        PerkBuilder.passive(CRIT_HIT, 8, new OptScaleExactStat(1, Stats.CRIT_CHANCE.get()));
-        PerkBuilder.passive(DAMAGE_RECEIVED, 8, new OptScaleExactStat(-1.5f, Stats.DAMAGE_RECEIVED.get()));
+        PerkBuilder.passive(CRIT_HIT, 8, new OptScaleExactStat(1, OffenseStats.CRIT_CHANCE.get()));
+        PerkBuilder.passive(DAMAGE_RECEIVED, 8, new OptScaleExactStat(-1.5f, DefenseStats.DAMAGE_RECEIVED.get()));
         PerkBuilder.passive(AURA_EFFECT, 8, new OptScaleExactStat(2, AuraEffect.getInstance(), ModType.FLAT));
         PerkBuilder.passive(BLOCK_CHANCE, 8, new OptScaleExactStat(1, BlockChance.getInstance(), ModType.FLAT));
-        PerkBuilder.passive(LIFESTEAL, 8, new OptScaleExactStat(1, Stats.LIFESTEAL.get(), ModType.FLAT));
+        PerkBuilder.passive(LIFESTEAL, 8, new OptScaleExactStat(1, ResourceStats.LIFESTEAL.get(), ModType.FLAT));
         PerkBuilder.passive(ARMOR_PEN, 8, new OptScaleExactStat(3, ArmorPenetration.getInstance()));
     }
 }

@@ -8,7 +8,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ITooltipList;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
-import com.robertx22.age_of_exile.saveclasses.unit.Unit;
+import com.robertx22.age_of_exile.saveclasses.unit.InCalcStatContainer;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.serialization.ISerializable;
 import net.minecraft.network.chat.MutableComponent;
@@ -127,8 +127,8 @@ public class ExactStatData implements ISerializable<ExactStatData>, ITooltipList
                 .get(stat);
     }
 
-    public void applyToStatInCalc(Unit unit) {
-        unit.getStats().getStatInCalculation(stat).add(this);
+    public void applyToStatInCalc(InCalcStatContainer calc) {
+        calc.getStatInCalculation(stat).add(this);
     }
 
     @Override

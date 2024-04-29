@@ -1,6 +1,8 @@
 package com.robertx22.age_of_exile.aoe_data.database.base_stats;
 
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.ResourceStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.SpellChangeStats;
 import com.robertx22.age_of_exile.database.data.base_stats.BaseStatsConfig;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
@@ -33,7 +35,7 @@ public class BaseStatsAdder implements ExileRegistryInit {
 
         c.id = MOB;
 
-        c.scaled(Stats.ACCURACY.get(), 5);
+        c.scaled(OffenseStats.ACCURACY.get(), 5);
 
         return c;
 
@@ -58,13 +60,13 @@ public class BaseStatsAdder implements ExileRegistryInit {
         c.scaled(ManaRegen.getInstance(), 3);
         c.scaled(EnergyRegen.getInstance(), 5);
 
-        c.nonScaled(Stats.MAX_SUMMON_CAPACITY.get(), 3);
+        c.nonScaled(SpellChangeStats.MAX_SUMMON_CAPACITY.get(), 3);
 
         // why did i add this again? I think its a must
-        c.nonScaled(Stats.CRIT_CHANCE.get(), 1);
-        c.nonScaled(Stats.CRIT_DAMAGE.get(), 1);
+        c.nonScaled(OffenseStats.CRIT_CHANCE.get(), 1);
+        c.nonScaled(OffenseStats.CRIT_DAMAGE.get(), 1);
 
-        for (Stat cap : Stats.LEECH_CAP.getAll()) {
+        for (Stat cap : ResourceStats.LEECH_CAP.getAll()) {
             c.nonScaled(cap, 5);
         }
 

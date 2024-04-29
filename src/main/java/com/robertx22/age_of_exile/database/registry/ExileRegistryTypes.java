@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.registry;
 
+import com.robertx22.age_of_exile.content.ubers.UberBossArena;
 import com.robertx22.age_of_exile.database.Serializers;
 import com.robertx22.age_of_exile.database.data.DimensionConfig;
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
@@ -105,6 +106,7 @@ public class ExileRegistryTypes {
     public static ExileRegistryType PROPHECY_START = ExileRegistryType.register(SlashRef.MODID, "prophecy_start", 41, null, SyncTime.NEVER);
     public static ExileRegistryType CHAOS_STAT = ExileRegistryType.register(SlashRef.MODID, "chaos_stat", 42, ChaosStat.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType STAT_COMPAT = ExileRegistryType.register(SlashRef.MODID, "stat_compat", 44, StatCompat.SERIALIZER, SyncTime.ON_LOGIN);
+    public static ExileRegistryType UBER_BOSS = ExileRegistryType.register(SlashRef.MODID, "uber_boss", 45, UberBossArena.SERIALIZER, SyncTime.ON_LOGIN);
 
 
 }

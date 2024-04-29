@@ -63,14 +63,14 @@ public class MapData {
         data.chunkX = cp.x;
         data.chunkZ = cp.z;
 
-        data.leagues.setupOnMapStart(p);
+        data.leagues.setupOnMapStart(map, p);
 
         return data;
 
     }
 
     public void spawnRandomLeagueMechanic(Level level, BlockPos pos) {
-        if (LeagueMechanics.NONE.getStructure().isInsideLeague((ServerLevel) level, pos)) {
+        if (LeagueMechanics.NONE.getStructure(map).isInsideLeague((ServerLevel) level, pos)) {
 
             var list = leagues.getLeagueMechanics().stream().filter(x -> leagues.get(x).remainingSpawns > 0).collect(Collectors.toList());
 

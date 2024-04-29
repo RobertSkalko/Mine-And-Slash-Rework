@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.aoe_data.database.affixes.adders;
 
 import com.robertx22.age_of_exile.aoe_data.database.affixes.AffixBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.affixes.ElementalAffixBuilder;
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.types.gear_base.GearDamage;
 import com.robertx22.age_of_exile.tags.all.SlotTags;
@@ -42,7 +42,7 @@ public class WeaponPrefixes implements ExileRegistryInit {
                 .add(Elements.Cold, "Chilled")
                 .add(Elements.Shadow, "Poisoned")
                 .add(Elements.Physical, "Tyrannical")
-                .stats(x -> Arrays.asList(new StatMod(5, 15, Stats.ELEMENTAL_DAMAGE.get(x), ModType.FLAT)))
+                .stats(x -> Arrays.asList(new StatMod(5, 15, OffenseStats.ELEMENTAL_DAMAGE.get(x), ModType.FLAT)))
                 .includesTags(SlotTags.weapon_family, SlotTags.jewel_dex)
                 .Prefix()
                 .Build();
@@ -52,7 +52,7 @@ public class WeaponPrefixes implements ExileRegistryInit {
                 .add(Elements.Fire, "Scorched")
                 .add(Elements.Cold, "Chilled")
                 .add(Elements.Nature, "Poisoned")
-                .stats(x -> Arrays.asList(new StatMod(5, 15, Stats.ELEMENTAL_SPELL_DAMAGE.get(x))))
+                .stats(x -> Arrays.asList(new StatMod(5, 15, OffenseStats.ELEMENTAL_SPELL_DAMAGE.get(x))))
                 .Weight(500)
                 .includesTags(SlotTags.mage_weapon, SlotTags.jewel_int)
                 .Prefix()
@@ -60,7 +60,7 @@ public class WeaponPrefixes implements ExileRegistryInit {
 
         AffixBuilder.Normal("desolation")
                 .Named("Desolation")
-                .stats(new StatMod(3, 15, Stats.CRIT_CHANCE.get()), new StatMod(3, 15, Stats.CRIT_DAMAGE.get()))
+                .stats(new StatMod(3, 15, OffenseStats.CRIT_CHANCE.get()), new StatMod(3, 15, OffenseStats.CRIT_DAMAGE.get()))
                 .includesTags(SlotTags.mage_weapon, SlotTags.jewel_str)
                 .Weight(100)
                 .Prefix()
@@ -69,28 +69,28 @@ public class WeaponPrefixes implements ExileRegistryInit {
 
         AffixBuilder.Normal("true_hit")
                 .Named("True Hit")
-                .stats(new StatMod(3, 25, Stats.CRIT_CHANCE.get(), ModType.FLAT))
+                .stats(new StatMod(3, 25, OffenseStats.CRIT_CHANCE.get(), ModType.FLAT))
                 .includesTags(SlotTags.weapon_family)
                 .Prefix()
                 .Build();
 
         AffixBuilder.Normal("crit_prefix")
                 .Named("Critical")
-                .stats(new StatMod(6, 30, Stats.CRIT_DAMAGE.get(), ModType.FLAT))
+                .stats(new StatMod(6, 30, OffenseStats.CRIT_DAMAGE.get(), ModType.FLAT))
                 .includesTags(SlotTags.weapon_family)
                 .Prefix()
                 .Build();
 
         AffixBuilder.Normal("heal_crit_prefix")
                 .Named("Truthful")
-                .stats(new StatMod(3, 12, Stats.CRIT_CHANCE.get(), ModType.FLAT))
+                .stats(new StatMod(3, 12, OffenseStats.CRIT_CHANCE.get(), ModType.FLAT))
                 .includesTags(SlotTags.staff)
                 .Prefix()
                 .Build();
 
         AffixBuilder.Normal("heal_crit_dmg_prefix")
                 .Named("Inspiring")
-                .stats(new StatMod(5, 20, Stats.CRIT_DAMAGE.get(), ModType.FLAT))
+                .stats(new StatMod(5, 20, OffenseStats.CRIT_DAMAGE.get(), ModType.FLAT))
                 .includesTags(SlotTags.staff)
                 .Prefix()
                 .Build();

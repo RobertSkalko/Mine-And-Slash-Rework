@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.uncommon.stat_calculation;
 
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.EntityConfig;
@@ -106,7 +106,7 @@ public class MobStatUtils {
 
         stats.add(ExactStatData.noScaling(val, ModType.MORE, Health.getInstance()
                 .GUID()));
-        stats.add(ExactStatData.noScaling(val, ModType.MORE, Stats.TOTAL_DAMAGE.get()
+        stats.add(ExactStatData.noScaling(val, ModType.MORE, OffenseStats.TOTAL_DAMAGE.get()
                 .GUID()));
 
         list.add(new MiscStatCtx(stats));
@@ -129,7 +129,7 @@ public class MobStatUtils {
 
         stats.add(ExactStatData.noScaling(hp, ModType.MORE, Health.getInstance()
                 .GUID()));
-        stats.add(ExactStatData.noScaling(dmg, ModType.FLAT, Stats.TOTAL_DAMAGE.get()
+        stats.add(ExactStatData.noScaling(dmg, ModType.FLAT, OffenseStats.TOTAL_DAMAGE.get()
                 .GUID()));
 
         stats.add(ExactStatData.noScaling(stat, ModType.MORE, DodgeRating.getInstance()
@@ -169,14 +169,14 @@ public class MobStatUtils {
         stats.add(ExactStatData.scaleTo(0.5F, ModType.FLAT, HealthRegen.getInstance()
                 .GUID(), lvl));
 
-        stats.add(ExactStatData.scaleTo(1, ModType.FLAT, Stats.ACCURACY.get()
+        stats.add(ExactStatData.scaleTo(1, ModType.FLAT, OffenseStats.ACCURACY.get()
                 .GUID(), lvl));
         stats.add(ExactStatData.scaleTo(10 * rar.StatMultiplier(), ModType.FLAT, Armor.getInstance()
                 .GUID(), lvl));
         stats.add(ExactStatData.noScaling(10 * rar.StatMultiplier(), ModType.FLAT, new ElementalResist(Elements.Elemental)
                 .GUID()));
 
-        stats.add(ExactStatData.scaleTo(5 * rar.DamageMultiplier(), ModType.FLAT, Stats.CRIT_CHANCE.get()
+        stats.add(ExactStatData.scaleTo(5 * rar.DamageMultiplier(), ModType.FLAT, OffenseStats.CRIT_CHANCE.get()
                 .GUID(), lvl));
 
         stats.add(ExactStatData.scaleTo(-25, ModType.FLAT, SkillDamage.getInstance()

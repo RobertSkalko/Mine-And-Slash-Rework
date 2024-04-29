@@ -29,7 +29,7 @@ public class ElementalResistEffect extends BaseDamageEffect {
 
         Stat maxstat = new MaxElementalResist(data.GetStat().getElement());
 
-        int max = (int) effect.targetData.getUnit().getStatInCalculation(maxstat).getValue();
+        int max = (int) effect.targetData.getUnit().getCalculatedStat(maxstat).getValue();
 
         float pene = effect.getPenetration();
 

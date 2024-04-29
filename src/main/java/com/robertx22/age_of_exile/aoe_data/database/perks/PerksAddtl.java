@@ -1,7 +1,10 @@
 package com.robertx22.age_of_exile.aoe_data.database.perks;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.EffectStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.ResourceStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.SpellChangeStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.ResourceAndAttack;
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
@@ -27,34 +30,34 @@ public class PerksAddtl implements ExileRegistryInit {
     @Override
     public void registerAll() {
 
-        Stats.ELE_DOT_DAMAGE.getAll()
+        OffenseStats.ELE_DOT_DAMAGE.getAll()
                 .forEach(x -> {
                     PerkBuilder.stat(x.GUID(), new OptScaleExactStat(3, x, ModType.FLAT));
                     PerkBuilder.bigStat(new OptScaleExactStat(10, x, ModType.FLAT));
                 });
 
-        Stats.ELEMENTAL_ANY_WEAPON_DAMAGE.getAll()
+        OffenseStats.ELEMENTAL_ANY_WEAPON_DAMAGE.getAll()
                 .forEach(x -> {
                     PerkBuilder.stat(x.GUID(), new OptScaleExactStat(3, x, ModType.FLAT));
                     PerkBuilder.bigStat(new OptScaleExactStat(10, x, ModType.FLAT));
                 });
 
-        PerkBuilder.stat("spell_atk_style_dmg", new OptScaleExactStat(3, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.magic), ModType.FLAT));
-        PerkBuilder.stat("attack_atk_style_dmg", new OptScaleExactStat(3, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.weapon_skill), ModType.FLAT));
-        PerkBuilder.bigStat("spell_atk_style_dmg", new OptScaleExactStat(10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.magic), ModType.FLAT));
-        PerkBuilder.bigStat("attack_atk_style_dmg", new OptScaleExactStat(10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.weapon_skill), ModType.FLAT));
+        PerkBuilder.stat("spell_atk_style_dmg", new OptScaleExactStat(3, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.magic), ModType.FLAT));
+        PerkBuilder.stat("attack_atk_style_dmg", new OptScaleExactStat(3, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.weapon_skill), ModType.FLAT));
+        PerkBuilder.bigStat("spell_atk_style_dmg", new OptScaleExactStat(10, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.magic), ModType.FLAT));
+        PerkBuilder.bigStat("attack_atk_style_dmg", new OptScaleExactStat(10, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.weapon_skill), ModType.FLAT));
 
-        PerkBuilder.bigStat(new OptScaleExactStat(10, Stats.PROJECTILE_SPEED.get()));
-        PerkBuilder.bigStat(new OptScaleExactStat(8, Stats.PROJECTILE_DAMAGE.get(), ModType.FLAT));
+        PerkBuilder.bigStat(new OptScaleExactStat(10, SpellChangeStats.PROJECTILE_SPEED.get()));
+        PerkBuilder.bigStat(new OptScaleExactStat(8, OffenseStats.PROJECTILE_DAMAGE.get(), ModType.FLAT));
 
-        PerkBuilder.stat("curse_duration", new OptScaleExactStat(6, Stats.EFFECT_DURATION_YOU_CAST_PER_TAG.get(EffectTags.curse), ModType.FLAT));
-        PerkBuilder.bigStat("curse_duration_big", new OptScaleExactStat(20, Stats.EFFECT_DURATION_YOU_CAST_PER_TAG.get(EffectTags.curse), ModType.FLAT));
+        PerkBuilder.stat("curse_duration", new OptScaleExactStat(6, EffectStats.EFFECT_DURATION_YOU_CAST_PER_TAG.get(EffectTags.curse), ModType.FLAT));
+        PerkBuilder.bigStat("curse_duration_big", new OptScaleExactStat(20, EffectStats.EFFECT_DURATION_YOU_CAST_PER_TAG.get(EffectTags.curse), ModType.FLAT));
 
-        PerkBuilder.stat("curse_effect", new OptScaleExactStat(3, Stats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.curse), ModType.FLAT));
-        PerkBuilder.bigStat("curse_effect_big", new OptScaleExactStat(10, Stats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.curse), ModType.FLAT));
+        PerkBuilder.stat("curse_effect", new OptScaleExactStat(3, EffectStats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.curse), ModType.FLAT));
+        PerkBuilder.bigStat("curse_effect_big", new OptScaleExactStat(10, EffectStats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.curse), ModType.FLAT));
 
-        PerkBuilder.stat(new OptScaleExactStat(3, Stats.GOLEM_DAMAGE.get(), ModType.FLAT));
-        PerkBuilder.bigStat(new OptScaleExactStat(10, Stats.GOLEM_DAMAGE.get(), ModType.FLAT));
+        PerkBuilder.stat(new OptScaleExactStat(3, OffenseStats.GOLEM_DAMAGE.get(), ModType.FLAT));
+        PerkBuilder.bigStat(new OptScaleExactStat(10, OffenseStats.GOLEM_DAMAGE.get(), ModType.FLAT));
 
 
         PerkBuilder.stat(new OptScaleExactStat(3, new AilmentChance(Ailments.ELECTRIFY), ModType.FLAT));
@@ -102,55 +105,55 @@ public class PerksAddtl implements ExileRegistryInit {
         PerkBuilder.stat(new OptScaleExactStat(4, SummonHealth.getInstance(), ModType.FLAT));
         PerkBuilder.bigStat(new OptScaleExactStat(15, SummonHealth.getInstance(), ModType.FLAT));
 
-        PerkBuilder.stat(new OptScaleExactStat(3, Stats.GOLEM_DAMAGE.get(), ModType.FLAT));
-        PerkBuilder.bigStat(new OptScaleExactStat(10, Stats.GOLEM_DAMAGE.get(), ModType.FLAT));
+        PerkBuilder.stat(new OptScaleExactStat(3, OffenseStats.GOLEM_DAMAGE.get(), ModType.FLAT));
+        PerkBuilder.bigStat(new OptScaleExactStat(10, OffenseStats.GOLEM_DAMAGE.get(), ModType.FLAT));
 
-        PerkBuilder.stat(new OptScaleExactStat(6, Stats.ACCURACY.get(), ModType.PERCENT));
-        PerkBuilder.bigStat(new OptScaleExactStat(20, Stats.ACCURACY.get(), ModType.PERCENT));
+        PerkBuilder.stat(new OptScaleExactStat(6, OffenseStats.ACCURACY.get(), ModType.PERCENT));
+        PerkBuilder.bigStat(new OptScaleExactStat(20, OffenseStats.ACCURACY.get(), ModType.PERCENT));
 
-        PerkBuilder.stat("mana_on_hit_big", new OptScaleExactStat(10, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.mana, AttackType.hit)), ModType.FLAT));
-        PerkBuilder.stat("health_on_hit_big", new OptScaleExactStat(10, Stats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.health, AttackType.hit)), ModType.FLAT));
+        PerkBuilder.stat("mana_on_hit_big", new OptScaleExactStat(10, ResourceStats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.mana, AttackType.hit)), ModType.FLAT));
+        PerkBuilder.stat("health_on_hit_big", new OptScaleExactStat(10, ResourceStats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.health, AttackType.hit)), ModType.FLAT));
 
-        PerkBuilder.stat("ms_steal", new OptScaleExactStat(2, Stats.SPELL_MSSTEAL.get(), ModType.FLAT));
+        PerkBuilder.stat("ms_steal", new OptScaleExactStat(2, ResourceStats.SPELL_MSSTEAL.get(), ModType.FLAT));
 
-        PerkBuilder.stat("chain_damage", new OptScaleExactStat(3, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.chaining), ModType.FLAT));
-        PerkBuilder.bigStat("chain_damage_big", new OptScaleExactStat(10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.chaining), ModType.FLAT));
+        PerkBuilder.stat("chain_damage", new OptScaleExactStat(3, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.chaining), ModType.FLAT));
+        PerkBuilder.bigStat("chain_damage_big", new OptScaleExactStat(10, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.chaining), ModType.FLAT));
 
-        PerkBuilder.stat("trap_damage", new OptScaleExactStat(3, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.trap), ModType.FLAT));
-        PerkBuilder.bigStat("trap_damage_big", new OptScaleExactStat(10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.trap), ModType.FLAT));
+        PerkBuilder.stat("trap_damage", new OptScaleExactStat(3, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.trap), ModType.FLAT));
+        PerkBuilder.bigStat("trap_damage_big", new OptScaleExactStat(10, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.trap), ModType.FLAT));
 
-        PerkBuilder.stat("trap_area_dmg", new OptScaleExactStat(3, Stats.TRAP_AREA_DAMAGE.get(), ModType.FLAT));
-        PerkBuilder.bigStat("trap_area_dmg_big", new OptScaleExactStat(10, Stats.TRAP_AREA_DAMAGE.get(), ModType.FLAT));
+        PerkBuilder.stat("trap_area_dmg", new OptScaleExactStat(3, OffenseStats.TRAP_AREA_DAMAGE.get(), ModType.FLAT));
+        PerkBuilder.bigStat("trap_area_dmg_big", new OptScaleExactStat(10, OffenseStats.TRAP_AREA_DAMAGE.get(), ModType.FLAT));
 
-        PerkBuilder.stat("trap_cdr", new OptScaleExactStat(2, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.trap), ModType.FLAT));
-        PerkBuilder.bigStat("trap_cdr_big", new OptScaleExactStat(10, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.trap), ModType.FLAT));
+        PerkBuilder.stat("trap_cdr", new OptScaleExactStat(2, SpellChangeStats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.trap), ModType.FLAT));
+        PerkBuilder.bigStat("trap_cdr_big", new OptScaleExactStat(10, SpellChangeStats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.trap), ModType.FLAT));
 
-        PerkBuilder.stat("song_damage", new OptScaleExactStat(3, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.song), ModType.FLAT));
-        PerkBuilder.bigStat("song_damage_big", new OptScaleExactStat(10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.song), ModType.FLAT));
+        PerkBuilder.stat("song_damage", new OptScaleExactStat(3, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.song), ModType.FLAT));
+        PerkBuilder.bigStat("song_damage_big", new OptScaleExactStat(10, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.song), ModType.FLAT));
 
-        PerkBuilder.stat("song_cdr", new OptScaleExactStat(2, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.song), ModType.FLAT));
-        PerkBuilder.bigStat("song_cdr_big", new OptScaleExactStat(10, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.song), ModType.FLAT));
+        PerkBuilder.stat("song_cdr", new OptScaleExactStat(2, SpellChangeStats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.song), ModType.FLAT));
+        PerkBuilder.bigStat("song_cdr_big", new OptScaleExactStat(10, SpellChangeStats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.song), ModType.FLAT));
 
-        PerkBuilder.stat("song_effect", new OptScaleExactStat(6, Stats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.song), ModType.FLAT));
-        PerkBuilder.bigStat("song_effect_big", new OptScaleExactStat(20, Stats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.song), ModType.FLAT));
+        PerkBuilder.stat("song_effect", new OptScaleExactStat(6, EffectStats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.song), ModType.FLAT));
+        PerkBuilder.bigStat("song_effect_big", new OptScaleExactStat(20, EffectStats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.song), ModType.FLAT));
 
-        PerkBuilder.stat("positive_effect", new OptScaleExactStat(4, Stats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.positive), ModType.FLAT));
-        PerkBuilder.bigStat("positive_effect_big", new OptScaleExactStat(12, Stats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.positive), ModType.FLAT));
+        PerkBuilder.stat("positive_effect", new OptScaleExactStat(4, EffectStats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.positive), ModType.FLAT));
+        PerkBuilder.bigStat("positive_effect_big", new OptScaleExactStat(12, EffectStats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.positive), ModType.FLAT));
 
-        PerkBuilder.stat("song_duration", new OptScaleExactStat(6, Stats.EFFECT_DURATION_YOU_CAST_PER_TAG.get(EffectTags.song), ModType.FLAT));
-        PerkBuilder.bigStat("song_duration_big", new OptScaleExactStat(20, Stats.EFFECT_DURATION_YOU_CAST_PER_TAG.get(EffectTags.song), ModType.FLAT));
+        PerkBuilder.stat("song_duration", new OptScaleExactStat(6, EffectStats.EFFECT_DURATION_YOU_CAST_PER_TAG.get(EffectTags.song), ModType.FLAT));
+        PerkBuilder.bigStat("song_duration_big", new OptScaleExactStat(20, EffectStats.EFFECT_DURATION_YOU_CAST_PER_TAG.get(EffectTags.song), ModType.FLAT));
 
-        PerkBuilder.stat("totem_damage", new OptScaleExactStat(3, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.totem), ModType.FLAT));
-        PerkBuilder.bigStat("totem_damage_big", new OptScaleExactStat(10, Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.totem), ModType.FLAT));
+        PerkBuilder.stat("totem_damage", new OptScaleExactStat(3, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.totem), ModType.FLAT));
+        PerkBuilder.bigStat("totem_damage_big", new OptScaleExactStat(10, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.totem), ModType.FLAT));
 
-        PerkBuilder.stat("totem_cdr", new OptScaleExactStat(2, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.totem), ModType.FLAT));
-        PerkBuilder.bigStat("totem_cdr_big", new OptScaleExactStat(10, Stats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.totem), ModType.FLAT));
+        PerkBuilder.stat("totem_cdr", new OptScaleExactStat(2, SpellChangeStats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.totem), ModType.FLAT));
+        PerkBuilder.bigStat("totem_cdr_big", new OptScaleExactStat(10, SpellChangeStats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.totem), ModType.FLAT));
 
-        PerkBuilder.stat("totem_duration", new OptScaleExactStat(6, Stats.TOTEM_DURATION.get(), ModType.FLAT));
-        PerkBuilder.bigStat("totem_duration_big", new OptScaleExactStat(20, Stats.TOTEM_DURATION.get(), ModType.FLAT));
+        PerkBuilder.stat("totem_duration", new OptScaleExactStat(6, SpellChangeStats.TOTEM_DURATION.get(), ModType.FLAT));
+        PerkBuilder.bigStat("totem_duration_big", new OptScaleExactStat(20, SpellChangeStats.TOTEM_DURATION.get(), ModType.FLAT));
 
-        PerkBuilder.stat("total_damage", new OptScaleExactStat(2, Stats.TOTAL_DAMAGE.get(), ModType.FLAT));
-        PerkBuilder.bigStat("total_damage_big", new OptScaleExactStat(8, Stats.TOTAL_DAMAGE.get(), ModType.FLAT));
+        PerkBuilder.stat("total_damage", new OptScaleExactStat(2, OffenseStats.TOTAL_DAMAGE.get(), ModType.FLAT));
+        PerkBuilder.bigStat("total_damage_big", new OptScaleExactStat(8, OffenseStats.TOTAL_DAMAGE.get(), ModType.FLAT));
 
         PerkBuilder.stat("armor_dodge", new OptScaleExactStat(2, Armor.getInstance(), ModType.PERCENT),
                 new OptScaleExactStat(2, DodgeRating.getInstance(), ModType.PERCENT));
@@ -213,29 +216,29 @@ public class PerksAddtl implements ExileRegistryInit {
         PerkBuilder.bigStat("hp_max_fire_res_big", new OptScaleExactStat(6, Health.getInstance(), ModType.PERCENT),
                 new OptScaleExactStat(1, new MaxElementalResist(Elements.Fire), ModType.FLAT));
 
-        PerkBuilder.stat("healing_received", new OptScaleExactStat(4, Stats.HEALING_RECEIVED.get(), ModType.FLAT));
-        PerkBuilder.bigStat("healing_received_big", new OptScaleExactStat(10, Stats.HEALING_RECEIVED.get(), ModType.FLAT));
+        PerkBuilder.stat("healing_received", new OptScaleExactStat(4, ResourceStats.HEALING_RECEIVED.get(), ModType.FLAT));
+        PerkBuilder.bigStat("healing_received_big", new OptScaleExactStat(10, ResourceStats.HEALING_RECEIVED.get(), ModType.FLAT));
         PerkBuilder.bigStat("hp_healing_received_big", new OptScaleExactStat(6, Health.getInstance(), ModType.PERCENT),
-                new OptScaleExactStat(10, Stats.HEALING_RECEIVED.get(), ModType.FLAT));
+                new OptScaleExactStat(10, ResourceStats.HEALING_RECEIVED.get(), ModType.FLAT));
 
-        PerkBuilder.stat("physical_chaos_damage", new OptScaleExactStat(2, Stats.ELEMENTAL_DAMAGE.get(Elements.Physical), ModType.FLAT),
-                new OptScaleExactStat(2, Stats.ELEMENTAL_DAMAGE.get(Elements.Shadow), ModType.FLAT));
-        PerkBuilder.bigStat("physical_chaos_damage_big", new OptScaleExactStat(6, Stats.ELEMENTAL_DAMAGE.get(Elements.Physical), ModType.FLAT),
-                new OptScaleExactStat(6, Stats.ELEMENTAL_DAMAGE.get(Elements.Shadow), ModType.FLAT));
+        PerkBuilder.stat("physical_chaos_damage", new OptScaleExactStat(2, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Physical), ModType.FLAT),
+                new OptScaleExactStat(2, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Shadow), ModType.FLAT));
+        PerkBuilder.bigStat("physical_chaos_damage_big", new OptScaleExactStat(6, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Physical), ModType.FLAT),
+                new OptScaleExactStat(6, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Shadow), ModType.FLAT));
 
-        PerkBuilder.stat("fire_water_damage", new OptScaleExactStat(2, Stats.ELEMENTAL_DAMAGE.get(Elements.Fire), ModType.FLAT),
-                new OptScaleExactStat(2, Stats.ELEMENTAL_DAMAGE.get(Elements.Cold), ModType.FLAT));
-        PerkBuilder.bigStat("fire_water_damage_big", new OptScaleExactStat(6, Stats.ELEMENTAL_DAMAGE.get(Elements.Fire), ModType.FLAT),
-                new OptScaleExactStat(6, Stats.ELEMENTAL_DAMAGE.get(Elements.Cold), ModType.FLAT));
+        PerkBuilder.stat("fire_water_damage", new OptScaleExactStat(2, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Fire), ModType.FLAT),
+                new OptScaleExactStat(2, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Cold), ModType.FLAT));
+        PerkBuilder.bigStat("fire_water_damage_big", new OptScaleExactStat(6, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Fire), ModType.FLAT),
+                new OptScaleExactStat(6, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Cold), ModType.FLAT));
 
-        PerkBuilder.bigStat("dot_dmg_hp_regen_big", new OptScaleExactStat(8, Stats.DOT_DAMAGE.get(), ModType.FLAT),
+        PerkBuilder.bigStat("dot_dmg_hp_regen_big", new OptScaleExactStat(8, OffenseStats.DOT_DAMAGE.get(), ModType.FLAT),
                 new OptScaleExactStat(8, HealthRegen.getInstance(), ModType.PERCENT));
 
-        PerkBuilder.stat(new OptScaleExactStat(1, Stats.MANASTEAL.get(), ModType.FLAT));
-        PerkBuilder.bigStat(new OptScaleExactStat(3, Stats.MANASTEAL.get(), ModType.FLAT));
+        PerkBuilder.stat(new OptScaleExactStat(1, ResourceStats.MANASTEAL.get(), ModType.FLAT));
+        PerkBuilder.bigStat(new OptScaleExactStat(3, ResourceStats.MANASTEAL.get(), ModType.FLAT));
 
-        PerkBuilder.stat(new OptScaleExactStat(5, Stats.INCREASED_LEECH.get(), ModType.FLAT));
-        PerkBuilder.bigStat(new OptScaleExactStat(15, Stats.INCREASED_LEECH.get(), ModType.FLAT));
+        PerkBuilder.stat(new OptScaleExactStat(5, ResourceStats.INCREASED_LEECH.get(), ModType.FLAT));
+        PerkBuilder.bigStat(new OptScaleExactStat(15, ResourceStats.INCREASED_LEECH.get(), ModType.FLAT));
 
     }
 }

@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.registry;
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
 import com.robertx22.age_of_exile.aoe_data.database.boss_spell.BossSpell;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
+import com.robertx22.age_of_exile.content.ubers.UberBossArena;
 import com.robertx22.age_of_exile.database.data.DimensionConfig;
 import com.robertx22.age_of_exile.database.data.EntityConfig;
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
@@ -222,6 +223,10 @@ public class ExileDB {
 
     public static ExileRegistryContainer<LeagueMechanic> LeagueMechanics() {
         return Database.getRegistry(ExileRegistryTypes.LEAGUE_MECHANIC);
+    }
+
+    public static ExileRegistryContainer<UberBossArena> UberBoss() {
+        return Database.getRegistry(ExileRegistryTypes.UBER_BOSS);
     }
 
     public static ExileRegistryContainer<LootChest> LootChests() {

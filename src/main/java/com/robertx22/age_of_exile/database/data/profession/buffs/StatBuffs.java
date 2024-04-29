@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.database.data.profession.buffs;
 
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.ResourceStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.profession.CraftedItemHolder;
@@ -35,9 +36,9 @@ public class StatBuffs {
     public static AlchemyBuff DEX = new AlchemyBuff("dex", "Dexterity", () -> DatapackStats.DEX.mod(5, 15).percent());
     public static AlchemyBuff STR = new AlchemyBuff("str", "Strength", () -> DatapackStats.STR.mod(5, 15).percent());
 
-    public static AlchemyBuff ARCANE = new AlchemyBuff("arcane", "Arcane", () -> Stats.DAMAGE_PER_SPELL_TAG.get(SpellTags.magic).mod(5, 25));
-    public static AlchemyBuff MIGHT = new AlchemyBuff("might", "Strength", () -> Stats.ELEMENTAL_DAMAGE.get(Elements.Physical).mod(5, 25));
-    public static AlchemyBuff CRIT = new AlchemyBuff("crit", "Criticals", () -> Stats.CRIT_DAMAGE.get().mod(10, 30));
+    public static AlchemyBuff ARCANE = new AlchemyBuff("arcane", "Arcane", () -> OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.magic).mod(5, 25));
+    public static AlchemyBuff MIGHT = new AlchemyBuff("might", "Strength", () -> OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Physical).mod(5, 25));
+    public static AlchemyBuff CRIT = new AlchemyBuff("crit", "Criticals", () -> OffenseStats.CRIT_DAMAGE.get().mod(10, 30));
 
     public static class AlchemyBuff {
         public String id;
@@ -93,7 +94,7 @@ public class StatBuffs {
         }
     }
 
-    static StatMod outCombatRegen = Stats.OUT_OF_COMBAT_REGEN.get().mod(20, 50);
+    static StatMod outCombatRegen = ResourceStats.OUT_OF_COMBAT_REGEN.get().mod(20, 50);
 
     public static FoodBuff HEALTH = new FoodBuff("life", "Life's Joy", () -> Arrays.asList(
             outCombatRegen,
@@ -123,11 +124,11 @@ public class StatBuffs {
     // seafood
     public static SeaFoodBuff EXP = new SeaFoodBuff("exp", "Seeker of Knowledge", () -> Arrays.asList(
             BonusExp.getInstance().mod(3, 15),
-            Stats.TOTAL_DAMAGE.get().mod(5, 25)
+            OffenseStats.TOTAL_DAMAGE.get().mod(5, 25)
     ));
     public static SeaFoodBuff LOOT = new SeaFoodBuff("loot", "Seeker of Wealth", () -> Arrays.asList(
             TreasureQuantity.getInstance().mod(3, 15),
-            Stats.TOTAL_DAMAGE.get().mod(5, 25)
+            OffenseStats.TOTAL_DAMAGE.get().mod(5, 25)
     ));
 
     public static void init() {

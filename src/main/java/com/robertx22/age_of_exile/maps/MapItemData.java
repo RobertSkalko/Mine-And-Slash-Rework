@@ -1,7 +1,8 @@
 package com.robertx22.age_of_exile.maps;
 
 
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
+import com.robertx22.age_of_exile.content.ubers.UberBossArena;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
@@ -45,6 +46,9 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
     public static int MAX_TIER = 100;
 
+    public int uber_tier = 0;
+    public String uber = "";
+
     public int lvl = 1;
     public int tier = 0;
     public String rar = IRarity.COMMON_ID;
@@ -54,6 +58,13 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
     public String uuid = UUID.randomUUID().toString();
 
+    public boolean isUber() {
+        return ExileDB.UberBoss().isRegistered(uber);
+    }
+
+    public UberBossArena getUber() {
+        return ExileDB.UberBoss().get(uber);
+    }
 
     public StatRequirement getStatReq() {
 
@@ -84,7 +95,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
         List<ExactStatData> stats = new ArrayList<>();
 
         stats.add(ExactStatData.noScaling((float) (GameBalanceConfig.get().HP_MOB_BONUS_PER_MAP_TIER * tier * 100F), ModType.MORE, Health.getInstance().GUID()));
-        stats.add(ExactStatData.noScaling((float) (GameBalanceConfig.get().DMG_MOB_BONUS_PER_MAP_TIER * tier * 100F), ModType.MORE, Stats.TOTAL_DAMAGE.get().GUID()));
+        stats.add(ExactStatData.noScaling((float) (GameBalanceConfig.get().DMG_MOB_BONUS_PER_MAP_TIER * tier * 100F), ModType.MORE, OffenseStats.TOTAL_DAMAGE.get().GUID()));
 
         return stats;
     }
@@ -182,6 +193,11 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
         TooltipUtils.addEmpty(tooltip);
         tooltip.add(Words.Requirements.locName().append(": ").withStyle(ChatFormatting.GREEN));
         TooltipUtils.addRequirements(tooltip, this.lvl, getStatReq(), Load.Unit(ClientOnly.getPlayer()));
+
+        if (this.isUber()) {
+            TooltipUtils.addEmpty(tooltip);
+            tooltip.add(Words.AreaContains.locName().withStyle(ChatFormatting.RED));
+        }
 
         return tooltip;
 

@@ -2,7 +2,8 @@ package com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.armor;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearTypes;
-import com.robertx22.age_of_exile.aoe_data.database.stats.Stats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.SpellChangeStats;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearBuilder;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
@@ -28,7 +29,7 @@ public class PantsUniques implements ExileRegistryInit {
                         GearDefense.getInstance().mod(50, 100).percent(),
                         Energy.getInstance().mod(15, 30).percent(),
                         EnergyRegen.getInstance().mod(15, 30).percent(),
-                        Stats.SUMMON_DAMAGE.get().mod(30, 30),
+                        OffenseStats.SUMMON_DAMAGE.get().mod(30, 30),
                         Armor.getInstance().mod(-25, -25).more(),
                         DodgeRating.getInstance().mod(-25, -25).more()
                 ))
@@ -38,9 +39,9 @@ public class PantsUniques implements ExileRegistryInit {
                 .keepsBaseName()
                 .stats(Arrays.asList(
                         new StatMod(50, 100, GearDefense.getInstance(), ModType.PERCENT),
-                        new StatMod(10, 25, Stats.ELEMENTAL_DAMAGE.get(Elements.Fire), ModType.FLAT),
+                        new StatMod(10, 25, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Fire), ModType.FLAT),
                         new StatMod(10, 25, new AilmentChance(Ailments.BURN), ModType.FLAT),
-                        new StatMod(-25, -25, Stats.COOLDOWN_REDUCTION.get(), ModType.PERCENT)
+                        new StatMod(-25, -25, SpellChangeStats.COOLDOWN_REDUCTION.get(), ModType.PERCENT)
                 ))
                 .build();
 
