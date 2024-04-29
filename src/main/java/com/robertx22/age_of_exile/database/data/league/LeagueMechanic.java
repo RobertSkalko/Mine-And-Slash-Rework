@@ -16,6 +16,7 @@ import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.Block;
 
 public abstract class LeagueMechanic implements ExileRegistry<LeagueMechanic>, IAutoLocName {
     public static MapField<String> STRUCTURE = new MapField<>("structure");
@@ -52,6 +53,8 @@ public abstract class LeagueMechanic implements ExileRegistry<LeagueMechanic>, I
 
     public abstract void onTick(MapData map, ServerLevel level, BlockPos pos, LeagueControlBlockEntity be, LeagueBlockData data);
 
+
+    public abstract Block getTeleportBlock();
 
     @Override
     public AutoLocGroup locNameGroup() {

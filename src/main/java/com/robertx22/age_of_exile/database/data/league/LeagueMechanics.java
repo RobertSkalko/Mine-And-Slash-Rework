@@ -11,6 +11,8 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 public class LeagueMechanics {
 
@@ -74,6 +76,11 @@ public class LeagueMechanics {
         @Override
         public void onTick(MapData map, ServerLevel level, BlockPos pos, LeagueControlBlockEntity be, LeagueBlockData data) {
 
+        }
+
+        @Override
+        public Block getTeleportBlock() {
+            return Blocks.AIR;
         }
 
 

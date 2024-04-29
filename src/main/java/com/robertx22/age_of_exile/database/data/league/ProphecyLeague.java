@@ -10,6 +10,8 @@ import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 public class ProphecyLeague extends LeagueMechanic {
     @Override
@@ -31,6 +33,11 @@ public class ProphecyLeague extends LeagueMechanic {
     @Override
     public void onKillMob(MapData map, LootInfo info) {
 
+    }
+
+    @Override
+    public Block getTeleportBlock() {
+        return Blocks.AIR;
     }
 
     @Override

@@ -27,6 +27,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 
 import java.util.Arrays;
 import java.util.List;
@@ -49,6 +50,12 @@ public class HarvestLeague extends LeagueMechanic {
 
 
     }
+
+    @Override
+    public Block getTeleportBlock() {
+        return SlashBlocks.HARVEST_TELEPORT.get();
+    }
+
 
     @Override
     public LeagueStructure getStructure(MapItemData map) {

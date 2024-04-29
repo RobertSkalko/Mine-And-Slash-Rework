@@ -14,6 +14,7 @@ import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.Block;
 
 public class UberMechanic extends LeagueMechanic {
 
@@ -60,6 +61,11 @@ public class UberMechanic extends LeagueMechanic {
     @Override
     public void onMapStartSetup(LeagueData data) {
 
+    }
+
+    @Override
+    public Block getTeleportBlock() {
+        return SlashBlocks.UBER_TELEPORT.get();
     }
 
     @Override
