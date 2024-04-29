@@ -24,7 +24,6 @@ chaos_minus_res
 minus_hp_reg
 prophecy_ele_dmgphysical
 fire_atk
-physical_res
 prophecy_ele_dmgfire
 prophecy_crit
 health
@@ -33,12 +32,10 @@ lightning_minus_res
 prophecy_always_critfire
 prophecy_ele_dmgchaos
 prophecy_dodge
-physical_atk
 prophecy_hp
 prophecy_max_ele_reswater
 water_atk
 minus_ene_reg
-physical_minus_res
 armor
 prophecy_total_dmg
 minus_ms_reg

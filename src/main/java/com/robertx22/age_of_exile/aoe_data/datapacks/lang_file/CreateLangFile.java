@@ -28,14 +28,14 @@ public class CreateLangFile {
     public static void create() {
 
         List<String> translatorGuide = Lists.newArrayList(
-        "This section provides guidance to translators, offering insights into internal details:",
-        "1. Some lang lines have corresponding locale context, particularly the formatter lines. Understanding these contexts helps translators comprehend how the lang line function. Translating these lines is unnecessary.",
-        "2. Certain lines contain line break format(\\n). translator can add/remove that format at will based on the actual length of the translated text."
+                "This section provides guidance to translators, offering insights into internal details:",
+                "1. Some lang lines have corresponding locale context, particularly the formatter lines. Understanding these contexts helps translators comprehend how the lang line function. Translating these lines is unnecessary.",
+                "2. Certain lines contain line break format(\\n). translator can add/remove that format at will based on the actual length of the translated text."
         );
 
         String json = "{\n";
 
-        for(String x : translatorGuide){
+        for (String x : translatorGuide) {
             json += "\t" + "\"" + "translator_guide_" + translatorGuide.indexOf(x) + "\": \"" + StringEscapeUtils.escapeJava(x) + "\",\n";
         }
 
@@ -196,8 +196,8 @@ public class CreateLangFile {
     public static HashMap<String, List<IAutoLocDesc>> getDescMap() {
         HashSet<IAutoLocDesc> list = CreateLangFileUtils.getFromRegistries(IAutoLocDesc.class);
 
-        list.addAll(ExileDB.Spells()
-                .getSerializable());
+        list.addAll(ExileDB.Spells().getSerializable());
+        list.addAll(ExileDB.UberBoss().getSerializable());
 
         List<Stat> stats = ExileDB.Stats()
                 .getList()

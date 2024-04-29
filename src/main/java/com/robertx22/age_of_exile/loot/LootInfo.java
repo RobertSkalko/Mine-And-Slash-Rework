@@ -239,8 +239,10 @@ public class LootInfo {
         if (this.isMapWorld) {
             multis.add(this.map.map.getBonusLootMulti());
 
+
         }
 
+/*
         float additiveMod = 1;
 
         for (Float m : multis) {
@@ -248,9 +250,14 @@ public class LootInfo {
             additiveMod += (m - 1F);
         }
 
-        float chance = gen.baseDropChance() * multiplicativeMod;
+ */
 
-        chance = ExileEvents.SETUP_LOOT_CHANCE.callEvents(new ExileEvents.OnSetupLootChance(mobKilled, player, chance)).lootChance;
+        float chance = gen.baseDropChance();
+
+        if (gen.chanceIsModified()) {
+            chance *= multiplicativeMod;
+            chance = ExileEvents.SETUP_LOOT_CHANCE.callEvents(new ExileEvents.OnSetupLootChance(mobKilled, player, chance)).lootChance;
+        }
 
         amount = LootUtils.WhileRoll(chance);
 

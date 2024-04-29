@@ -18,9 +18,14 @@ public class WatcherEyeLootGen extends BaseLootGen<MapBlueprint> {
 
     @Override
     public float baseDropChance() {
-       
+
         float chance = (float) ServerContainer.get().WATCHER_EYE_DROPRATE.get().floatValue();
         return chance;
+    }
+
+    @Override
+    public boolean chanceIsModified() {
+        return false;
     }
 
     @Override
@@ -43,7 +48,6 @@ public class WatcherEyeLootGen extends BaseLootGen<MapBlueprint> {
     @Override
     public ItemStack generateOne() {
         JewelBlueprint b = new JewelBlueprint(info);
-
 
         var map = Load.mapAt(info.world, info.pos);
 

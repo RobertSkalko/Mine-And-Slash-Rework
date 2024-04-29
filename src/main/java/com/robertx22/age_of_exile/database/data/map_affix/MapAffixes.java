@@ -6,7 +6,7 @@ import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
-import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusPhysicalAsElemental;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.EnergyRegen;
@@ -20,6 +20,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MapAffixes {
 
@@ -27,12 +28,12 @@ public class MapAffixes {
 
         prophecyAffixes();
 
-        List<Elements> elements = Elements.getAllSingle();
+        List<Elements> elements = Elements.getAllSingle().stream().filter(x -> x != Elements.Physical).collect(Collectors.toList());
 
         for (Elements element : elements) {
 
             // mobs
-            new MapAffix(element.guidName + "_atk").addMod(new StatMod(1, 3, new BonusAttackDamage(element))).upsMapResistRequirement(element, 25).addToSerializables();
+            new MapAffix(element.guidName + "_atk").addMod(new StatMod(25, 100, new BonusPhysicalAsElemental(element))).upsMapResistRequirement(element, 25).addToSerializables();
             new MapAffix(element.guidName + "_res").addMod(new StatMod(20, 60, new ElementalResist(element))).addToSerializables();
 
             // players

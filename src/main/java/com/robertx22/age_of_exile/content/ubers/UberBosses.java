@@ -12,7 +12,7 @@ public class UberBosses {
 
 
         UberEnum.WITHER.createBoss(EntityType.WITHER, new LeaguePiecesList(Arrays.asList(
-                new LeagueStructurePieces(2, "harvest/river")
+                new LeagueStructurePieces(2, "uber/river")
         )), x -> {
 
         });

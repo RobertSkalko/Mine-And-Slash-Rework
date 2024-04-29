@@ -20,11 +20,11 @@ plus_lvl_song_spells
 plus_lvl_physical_spells
 hit_damage
 blood_per_10_strength
-learn_summon_cold_golem
 learn_song_of_perseverance
+learn_summon_cold_golem
 bonus_exp
-learn_arrow_totem
 learn_tidal_strike
+learn_arrow_totem
 weapon_skill_cdr
 int_dmg
 learn_song_of_valor
@@ -168,8 +168,8 @@ freeze_chance
 golem_spell_dmg
 chaos_mana_leech
 missile_cast_time
-learn_summon_zombie
 learn_gong_strike
+learn_summon_zombie
 magic_cast_time
 sword_damage
 learn_taunt
@@ -302,7 +302,6 @@ plus_lvl_minion_explode_spells
 plus_lvl_chaining_spells
 spell_chaos_damage
 health_leech_cap
-magic_shield_per_500_mana_regen
 inc_effect_of_offensive_buff_given
 lightning_spell_dmg
 chaos_health_leech
@@ -354,8 +353,8 @@ low_hp_healing
 learn_fire_nova
 weapon_damage
 str_dmg
-learn_vamp_blood
 learn_close_nova
+learn_vamp_blood
 lightning_ailment_aura_cost
 farming_misc_drop_bonus
 light_res_aura_cost
@@ -379,8 +378,8 @@ health_regen_per_1_magic_shield_regen
 ranged_cast_time
 learn_recoil_shot
 physical_health_leech
-learn_poison_ball
 learn_smoke_bomb
+learn_poison_ball
 electrify_resistance
 trap_area_dmg
 all_health_leech
@@ -638,7 +637,6 @@ plus_lvl_shatter_spells
 learn_black_hole
 thorns_spell_dmg
 ele_crossbow_damage
-mana_per_10_magic_shield
 magic_shield_regen
 salvaging_greater_drop_bonus
 mana_reg_aura_cost

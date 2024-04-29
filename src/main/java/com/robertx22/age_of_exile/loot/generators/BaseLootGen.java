@@ -12,6 +12,10 @@ public abstract class BaseLootGen<T extends ItemBlueprint> {
 
     public abstract float baseDropChance();
 
+    public boolean chanceIsModified() {
+        return true;
+    }
+
     public abstract LootType lootType();
 
     public boolean hasLevelDistancePunishment() {
