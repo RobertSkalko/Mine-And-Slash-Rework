@@ -1,7 +1,12 @@
 package com.robertx22.age_of_exile.database.data.spells.summons.entity;
 
+import com.robertx22.age_of_exile.database.data.spells.components.ProjectileCastHelper;
+import com.robertx22.age_of_exile.database.data.spells.entities.AutoAimingProj;
+import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
+import com.robertx22.library_of_exile.utils.SoundUtils;
+import com.robertx22.library_of_exile.utils.geometry.MyPosition;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.*;
@@ -30,19 +35,47 @@ public abstract class SummonEntity extends TamableAnimal implements RangedAttack
 
     @Override
     public void performRangedAttack(LivingEntity pTarget, float pDistanceFactor) {
-        ItemStack itemstack = this.getProjectile(this.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this, item -> item instanceof net.minecraft.world.item.BowItem)));
-        AbstractArrow abstractarrow = this.getArrow(itemstack, pDistanceFactor);
-        if (this.getMainHandItem().getItem() instanceof net.minecraft.world.item.BowItem)
-            abstractarrow = ((net.minecraft.world.item.BowItem) this.getMainHandItem().getItem()).customArrow(abstractarrow);
-        double d0 = pTarget.getX() - this.getX();
-        double d1 = pTarget.getY(0.3333333333333333D) - abstractarrow.getY();
-        double d2 = pTarget.getZ() - this.getZ();
-        double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-        abstractarrow.shoot(d0, d1 + d3 * (double) 0.2F, d2, 1.6F, (float) (14 - this.level().getDifficulty().getId() * 4));
-        this.playSound(SoundEvents.SKELETON_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
-        this.level().addFreshEntity(abstractarrow);
+
+        if (true) {
+            autoAimingRangedAttack(pTarget);
+        } else {
+
+            ItemStack itemstack = this.getProjectile(this.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this, item -> item instanceof net.minecraft.world.item.BowItem)));
+            AbstractArrow abstractarrow = this.getArrow(itemstack, pDistanceFactor);
+            if (this.getMainHandItem().getItem() instanceof net.minecraft.world.item.BowItem)
+                abstractarrow = ((net.minecraft.world.item.BowItem) this.getMainHandItem().getItem()).customArrow(abstractarrow);
+            double d0 = pTarget.getX() - this.getX();
+            double d1 = pTarget.getY(0.3333333333333333D) - abstractarrow.getY();
+            double d2 = pTarget.getZ() - this.getZ();
+            double d3 = Math.sqrt(d0 * d0 + d2 * d2);
+            abstractarrow.shoot(d0, d1 + d3 * (double) 0.2F, d2, 5, 0);
+            this.playSound(SoundEvents.SKELETON_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+            this.level().addFreshEntity(abstractarrow);
+        }
     }
 
+
+    /**
+     * Launches a Wither skull toward (par2, par4, par6)
+     */
+    private void autoAimingRangedAttack(LivingEntity target) {
+
+        SoundUtils.playSound(this, SoundEvents.ARROW_SHOOT, 1, 0.2F);
+
+
+        AutoAimingProj en = SlashEntities.AUTO_AIMING_SKELETON_SKULL.get().create(level());
+
+        en.setOwner(this);
+
+        en.setPosRaw(getX(), getEyeY(), getZ());
+
+        en.setDeltaMovement(ProjectileCastHelper.positionToVelocity(new MyPosition(getEyePosition()), new MyPosition(target.getEyePosition())));
+
+        en.target = target;
+        en.speed = 2;
+
+        this.level().addFreshEntity(en);
+    }
 
     public boolean usesMelee() {
         return true;

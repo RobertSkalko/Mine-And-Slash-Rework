@@ -43,7 +43,8 @@ public class StatLayer implements JsonExileRegistry<StatLayer>, IAutoGson<StatLa
         MULTIPLY() {
             @Override
             public void apply(EffectEvent event, StatLayerData layer, String number) {
-                event.data.getNumber(number).number *= layer.getMultiplier();
+                float multi = layer.getMultiplier();
+                event.data.getNumber(number).number *= multi;
             }
         },
         ADD() {

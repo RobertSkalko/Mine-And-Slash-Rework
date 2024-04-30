@@ -176,10 +176,12 @@ public class StatCalculation {
             statContexts.addAll(playerData.prophecy.getStatAndContext(entity));
 
         } else {
+            statContexts.addAll(MobStatUtils.getMobBaseStats(data, entity));
+
+
             if (data.isSummon()) {
                 statContexts.addAll(MobStatUtils.addSummonStats((TamableAnimal) entity));
             } else {
-                statContexts.addAll(MobStatUtils.getMobBaseStats(data, entity));
                 statContexts.addAll(MobStatUtils.getAffixStats(entity));
                 statContexts.addAll(MobStatUtils.getWorldMultiplierStats(entity));
                 statContexts.addAll(MobStatUtils.addMobBaseElementalBonusDamages(entity, data));

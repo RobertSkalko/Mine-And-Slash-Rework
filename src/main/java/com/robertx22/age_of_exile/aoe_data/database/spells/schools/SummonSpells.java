@@ -98,10 +98,10 @@ public class SummonSpells implements ExileRegistryInit {
                 .levelReq(1)
                 .build();
 
-        SpellBuilder.of(SUMMON_SKELETAL_ARMY, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(35, 20 * 60, 40).setSummonType(SummonType.UNDEAD), "Summon Skeleton",
+        SpellBuilder.of(SUMMON_SKELETAL_ARMY, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(35, 20 * 3, 40).setSummonType(SummonType.UNDEAD), "Summon Skeleton",
                         Arrays.asList(SpellTags.summon, SpellTags.damage, SpellTags.has_pet_ability, SpellTags.PHYSICAL))
-                .manualDesc("Summon a horde of Skeletons to fight for you for a short duration.")
-                .summons(SlashEntities.SKELETON.get(), 20 * 60, 1, SummonType.UNDEAD)
+                .manualDesc("Summon Skeleton to fight for you using ranged attacks.")
+                .summons(SlashEntities.SKELETON.get(), 20 * 60 * 3, 1, SummonType.UNDEAD)
                 .levelReq(30)
                 .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(10, 150))
                 .addStat(new SummonHealth().mod(10, 100))

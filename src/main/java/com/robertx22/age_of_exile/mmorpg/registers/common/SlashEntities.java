@@ -1,9 +1,6 @@
 package com.robertx22.age_of_exile.mmorpg.registers.common;
 
-import com.robertx22.age_of_exile.database.data.spells.entities.SimpleArrowEntity;
-import com.robertx22.age_of_exile.database.data.spells.entities.SimpleProjectileEntity;
-import com.robertx22.age_of_exile.database.data.spells.entities.SimpleTridentEntity;
-import com.robertx22.age_of_exile.database.data.spells.entities.StationaryFallingBlockEntity;
+import com.robertx22.age_of_exile.database.data.spells.entities.*;
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.SkeletonSummon;
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.SpiderPet;
 import com.robertx22.age_of_exile.database.data.spells.summons.entity.WolfSummon;
@@ -29,6 +26,8 @@ public class SlashEntities {
     public static RegObj<EntityType<SimpleArrowEntity>> SIMPLE_ARROW = projectile(SimpleArrowEntity::new, "spell_arrow");
     public static RegObj<EntityType<StationaryFallingBlockEntity>> SIMPLE_BLOCK_ENTITY = projectile(StationaryFallingBlockEntity::new, "spell_block_entity", false);
     public static RegObj<EntityType<SimpleTridentEntity>> SIMPLE_TRIDENT = projectile(SimpleTridentEntity::new, "spell_trident", false);
+    public static RegObj<EntityType<AutoAimingProj>> AUTO_AIMING_SKELETON_SKULL = projectile(AutoAimingProj::new, "auto_aim_skull", false);
+
 
     // summons
     public static RegObj<EntityType<WolfSummon>> SPIRIT_WOLF = mob(WolfSummon::new, EntityType.WOLF, "spirit_wolf");

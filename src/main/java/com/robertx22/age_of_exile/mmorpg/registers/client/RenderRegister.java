@@ -37,6 +37,7 @@ public class RenderRegister {
         x.registerEntityRenderer(SlashEntities.SIMPLE_ARROW.get(), m -> new RangerArrowRenderer(m));
         x.registerEntityRenderer(SlashEntities.SIMPLE_BLOCK_ENTITY.get(), m -> new FallingBlockRenderer(m));
         x.registerEntityRenderer(SlashEntities.SIMPLE_TRIDENT.get(), m -> new ModTridentRenderer(m));
+        x.registerEntityRenderer(SlashEntities.AUTO_AIMING_SKELETON_SKULL.get(), m -> new AutoSkullRender(m));
 
 
     }
