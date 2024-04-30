@@ -15,6 +15,9 @@ import java.util.HashMap;
 public class PlayerConfigData {
 
     public enum Config {
+
+        /// todo add more configs like.. minions should attack x?
+
         CAST_FAIL("cast_fail_messages", Words.CAST_FAIL_MSGS),
         AUTO_PVE("auto_pve", Words.AUTOMATIC_PVE);
         public String id;

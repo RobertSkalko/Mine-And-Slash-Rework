@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.aoe_data.database.affixes;
 
 import com.robertx22.age_of_exile.aoe_data.database.affixes.adders.*;
+import com.robertx22.age_of_exile.aoe_data.database.affixes.adders.corruption.CorruptJewelAffixes;
 import com.robertx22.age_of_exile.aoe_data.database.affixes.adders.jewelry.JewelryPrefixes;
 import com.robertx22.age_of_exile.aoe_data.database.affixes.adders.jewels.CraftedJewelAffixes;
 import com.robertx22.age_of_exile.aoe_data.database.affixes.adders.jewels.JewelAffixes;
@@ -16,6 +17,8 @@ public class Prefixes implements IRandomDefault<Affix>, ExileRegistryInit {
 
     @Override
     public void registerAll() {
+        CorruptJewelAffixes.init();
+        
         new ToolAffixes().registerAll();
 
         new OffhandAffixes().registerAll();

@@ -47,6 +47,10 @@ Which means they didn't get their stats calculated because that's done on tick..
 - crafted gear now have lowered potential which means it can be crafted on with currencies less and hopefully dropped gear remains viable in the endgame.
 - you can no longer enter too high level maps (currently max is your lvl + 5
 - fix allies being able to attack summons
+- added jewel corruption, and jewel corruption orb
+- added new map affixes, player curses
+- new player curse immunity stat, currently found on jewel corruptions
+- reduced max characters to 3 by default, might be too much nbt for some servers
 - if the perk is missing or you're in dev mode, or you shift, talents gui will now show the perk id
 - added aggressive and defensive minion support gems, changing their aggro radius
 - SHIFT+R keybind will now cast when you do it instead of the spell binded to R keybind. (as an example) Meaning keybinds with button modifiers are prioritized

@@ -10,20 +10,56 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DataPackStatAccessor;
 import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
-import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.tags.ModTag;
 import com.robertx22.age_of_exile.tags.TagType;
 import com.robertx22.age_of_exile.tags.imp.EffectTag;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.ExilePotionEvent;
-import com.robertx22.age_of_exile.uncommon.effectdatas.RestoreResourceEvent;
-import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
+import com.robertx22.age_of_exile.uncommon.effectdatas.TenSecondPlayerTickEvent;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 
 import java.util.Arrays;
 
 public class EffectStats {
+
+    public static DataPackStatAccessor<EffectCtx> CURSE_SELF = DatapackStatBuilder
+            .<EffectCtx>of(x -> "cursed_by_" + x.id, x -> x.element)
+            .addAllOfType(ModEffects.getCurses())
+            .worksWithEvent(TenSecondPlayerTickEvent.ID)
+            .setPriority(StatPriority.Spell.FIRST)
+            .setSide(EffectSides.Source)
+            .addEffect(e -> StatEffects.GIVE_EFFECT_TO_TARGET.get(e))
+            .setLocName(x -> Stat.format(
+                    "Cursed by " + x.locname
+            ))
+            .setLocDesc(x -> "You can check the Stats of the Effect in the In-game Library (Accessed via Main and Slash Hub)")
+            .modifyAfterDone(x -> {
+                x.min = 0;
+                x.max = 1;
+                x.is_long = true;
+            })
+            .build();
+
+    public static DataPackStatAccessor<EffectCtx> EFFECT_IMMUNITY = DatapackStatBuilder
+            .<EffectCtx>of(x -> x.id + "_immunity", x -> x.element)
+            .addAllOfType(ModEffects.getCurses())
+            .worksWithEvent(ExilePotionEvent.ID)
+            .setPriority(StatPriority.Spell.FIRST)
+            .setSide(EffectSides.Target)
+            .addCondition(x -> StatConditions.IS_EFFECT.get(x))
+            .addEffect(e -> StatEffects.CANCEL_EVENT)
+            .setLocName(x -> Stat.format(
+                    "You are Immune to " + x.locname
+            ))
+            .setLocDesc(x -> "")
+            .modifyAfterDone(x -> {
+                x.min = 0;
+                x.max = 1;
+                x.is_long = true;
+            })
+            .build();
+
     public static DataPackStatAccessor<ModTag> EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG = DatapackStatBuilder
             .<ModTag>of(x -> "inc_effect_of_" + x.GUID() + "_buff_given", x -> Elements.Physical)
             .addAllOfType(ModTag.MAP.get(TagType.Effect))
@@ -82,49 +118,8 @@ public class EffectStats {
                 x.is_perc = true;
             })
             .build();
-    public static DataPackStatAccessor<EffectCtx> GIVE_EFFECT_TO_ALLIES_IN_RADIUS = DatapackStatBuilder
-            .<EffectCtx>of(x -> "give_" + x.id + "_to_allies_in_aoe", x -> x.element)
-            .addAllOfType(Arrays.asList(
-                    ModEffects.REJUVENATE
-            ))
-            .worksWithEvent(RestoreResourceEvent.ID) // todo should be tick event, BUT LAG
-            .setPriority(StatPriority.Spell.FIRST)
-            .setSide(EffectSides.Source)
-            .addCondition(StatConditions.IS_RESOURCE.get(ResourceType.health))
-            .addCondition(StatConditions.IS_RESTORE_TYPE.get(RestoreType.regen))
-            .addCondition(StatConditions.IS_IN_COMBAT)
-            .addEffect(e -> StatEffects.GIVE_EFFECT_IN_AOE.get(e))
-            .setLocName(x -> Stat.format(
-                    "Give " + x.locname + " to allies in Radius."
-            ))
-            .setLocDesc(x -> "")
-            .modifyAfterDone(x -> {
-                x.min = 0;
-                x.max = 1;
-                x.is_long = true;
-            })
-            .build();
-    public static DataPackStatAccessor<EffectCtx> GIVE_EFFECT_TO_SELF_ON_TICK = DatapackStatBuilder
-            .<EffectCtx>of(x -> "give_" + x.id + "_to_self_on_tick", x -> x.element)
-            .addAllOfType(Arrays.asList(
-                    ModEffects.TAUNT_STANCE
-            ))
-            .worksWithEvent(RestoreResourceEvent.ID) // todo should be tick event, BUT LAG
-            .setPriority(StatPriority.Spell.FIRST)
-            .setSide(EffectSides.Source)
-            .addCondition(StatConditions.IS_RESOURCE.get(ResourceType.health))
-            .addCondition(StatConditions.IS_RESTORE_TYPE.get(RestoreType.regen))
-            .addEffect(e -> StatEffects.GIVE_SELF_EFFECT_30_SEC.get(e))
-            .setLocName(x -> Stat.format(
-                    "Give " + x.locname + " to self"
-            ))
-            .setLocDesc(x -> "")
-            .modifyAfterDone(x -> {
-                x.min = 0;
-                x.max = 1;
-                x.is_long = true;
-            })
-            .build();
+
+
     public static DataPackStatAccessor<EffectCtx> CHANCE_OF_APPLYING_EFFECT = DatapackStatBuilder
             .<EffectCtx>of(x -> "chance_of_" + x.id, x -> x.element)
             .addAllOfType(Arrays.asList(

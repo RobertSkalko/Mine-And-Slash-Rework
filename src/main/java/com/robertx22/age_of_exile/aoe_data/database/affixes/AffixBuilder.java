@@ -101,6 +101,11 @@ public class AffixBuilder {
         return this;
     }
 
+    public AffixBuilder JewelCorruption() {
+        type = Affix.Type.jewel_corruption;
+        return this;
+    }
+
     public AffixBuilder Prefix() {
         type = Affix.Type.prefix;
         return this;

@@ -36,6 +36,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -57,13 +58,16 @@ public class ModEffects implements ExileRegistryInit {
     public static EffectCtx UNDYING_WILL = new EffectCtx("undying_will", "Undying Will", Elements.Physical, EffectType.beneficial);
     public static EffectCtx MAGE_CIRCLE = new EffectCtx("mage_circle", "Mage Circle", Elements.Elemental, EffectType.beneficial);
     public static EffectCtx PETRIFY = new EffectCtx("petrify", "Petrify", Elements.Shadow, EffectType.negative);
-    public static EffectCtx WOUNDS = new EffectCtx("wounds", "Wounds", Elements.Physical, EffectType.negative);
     public static EffectCtx BLIND = new EffectCtx("blind", "Blind", Elements.Shadow, EffectType.negative);
     public static EffectCtx STUN = new EffectCtx("stun", "Stun", Elements.Physical, EffectType.negative);
+
+    // these could be used for map affixes
     public static EffectCtx SLOW = new EffectCtx("slow", "Slow", Elements.Physical, EffectType.negative);
-    public static EffectCtx CURSE_AGONY = new EffectCtx("agony", "Curse of Agony", Elements.Elemental, EffectType.negative);
-    public static EffectCtx CURSE_WEAKNESS = new EffectCtx("weak", "Curse of Weakness", Elements.Elemental, EffectType.negative);
-    public static EffectCtx DESPAIR = new EffectCtx("despair", "Curse of Despair", Elements.Elemental, EffectType.negative);
+    public static EffectCtx WOUNDS = new EffectCtx("wounds", "Wounds", Elements.Physical, EffectType.negative);
+    public static EffectCtx CURSE_AGONY = new EffectCtx("agony", "Physical Agony", Elements.Elemental, EffectType.negative);
+    public static EffectCtx CURSE_WEAKNESS = new EffectCtx("weak", "Elemental Weakness", Elements.Elemental, EffectType.negative);
+    public static EffectCtx DESPAIR = new EffectCtx("despair", "Despair of Chaos", Elements.Elemental, EffectType.negative);
+
     public static EffectCtx CHARM = new EffectCtx("charm", "Charm", Elements.Elemental, EffectType.negative);
     public static EffectCtx GROUNDING = new EffectCtx("ground", "Grounding", Elements.Physical, EffectType.negative);
     public static EffectCtx SHRED = new EffectCtx("shred", "Shred", Elements.Physical, EffectType.negative);
@@ -73,6 +77,17 @@ public class ModEffects implements ExileRegistryInit {
     public static EffectCtx FROST_LICH = new EffectCtx("frost_lich", "Frost Lich", Elements.Cold, EffectType.beneficial);
     public static EffectCtx ESSENCE_OF_FROST = new EffectCtx("essence_of_frost", "Essence of Frost", Elements.Cold, EffectType.beneficial);
     public static EffectCtx MISSILE_BARRAGE = new EffectCtx("missile_barrage", "Missile Barrage", Elements.NONE, EffectType.beneficial);
+
+    public static List<EffectCtx> getCurses() {
+
+        return Arrays.asList(
+                ModEffects.CURSE_AGONY,
+                ModEffects.DESPAIR,
+                ModEffects.CURSE_WEAKNESS,
+                ModEffects.SLOW,
+                ModEffects.WOUNDS
+        );
+    }
 
     public static int ESSENCE_OF_FROST_MAX_STACKS = 5;
 

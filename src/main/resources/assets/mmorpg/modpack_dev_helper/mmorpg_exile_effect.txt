@@ -9,8 +9,8 @@ essence_of_frost
 bone_chill
 perseverance
 stun
-mage_circle
 missile_barrage
+mage_circle
 weak
 agony
 frost_lich
@@ -22,7 +22,7 @@ thorn
 inner_calm
 valor
 draconic_blood
-slow
 charm
+slow
 ground
 despair

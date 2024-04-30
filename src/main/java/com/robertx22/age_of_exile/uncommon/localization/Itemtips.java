@@ -49,6 +49,7 @@ public enum Itemtips implements IAutoLocName {
     PREFIX_STATS("Prefix Stats: "),
     COR_STATS("Corruption Stats: "),
     UNIQUE_STATS("Unique Stats: "),
+    JEWEL_STATS("Jewel Stats: "),
     SUFFIX_STATS("Suffix Stats: "),
     MAP_LEAGUE_SPAWN("Can Spawn: ");
 

@@ -27,6 +27,11 @@ public abstract class JewelCurrency extends Currency {
         if (data == null) {
             return ExplainedResult.failure(Chats.NOT_JEWEL.locName());
         }
+        if (!data.cor.isEmpty()) {
+            return ExplainedResult.failure(Chats.ITEM_CANT_CORRUPT_TWICE.locName());
+        }
+
+
         var can = canBeModified(data);
         if (!can.can) {
             return can;

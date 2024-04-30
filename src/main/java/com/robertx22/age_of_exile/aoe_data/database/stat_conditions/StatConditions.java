@@ -66,6 +66,9 @@ public class StatConditions implements ExileRegistryInit {
 
     public static DataHolder<ModTag, StatCondition> EFFECT_HAS_TAG = new DataHolder<>(ModTag.MAP.get(TagType.Effect), x -> new EffectHasTagCondition(x));
 
+    public static DataHolder<EffectCtx, StatCondition> IS_EFFECT = new DataHolder<>(ModEffects.getCurses(), x -> new IsEffectCondition(x));
+
+
     public static DataHolder<ResourceType, StatCondition> IS_RESOURCE = new DataHolder<>(
             ResourceType.values()
             , x -> new StringMatchesCondition(EventData.RESOURCE_TYPE, x.name()));

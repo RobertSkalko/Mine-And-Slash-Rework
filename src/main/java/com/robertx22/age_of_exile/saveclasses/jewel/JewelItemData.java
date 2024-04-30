@@ -20,9 +20,12 @@ import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipStatsAligner;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
+import com.robertx22.library_of_exile.utils.RandomUtils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -38,6 +41,9 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
 
     public CraftedUniqueJewelData uniq = new CraftedUniqueJewelData();
 
+
+    public List<AffixData> cor = new ArrayList<>();
+
     public List<AffixData> affixes = new ArrayList<>();
 
     public List<StatsWhileUnderAuraData> auraStats = new ArrayList<>();
@@ -48,6 +54,23 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
 
     public String rar = IRarity.COMMON_ID;
 
+
+    public void corrupt() {
+        if (cor.isEmpty()) {
+            int num = RandomUtils.roll(10) ? 2 : 1;
+
+            for (int i = 0; i < num; i++) {
+                Affix affix = ExileDB.Affixes().getFilterWrapped(x -> {
+                    return x.type == Affix.Type.jewel_corruption;
+                }).random();
+                var data = new AffixData(Affix.Type.jewel_corruption);
+                data.randomizeTier(getRarity());
+                data.p = data.getMinMax().random();
+                data.id = affix.guid;
+                cor.add(data);
+            }
+        }
+    }
 
     public void generateAffixes() {
 
@@ -80,8 +103,19 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
 
         TooltipInfo info = new TooltipInfo(ctx.data);
 
+        ctx.tooltip.add(Component.empty());
+
+        if (!cor.isEmpty()) {
+            ctx.tooltip.add(Itemtips.COR_STATS.locName().withStyle(ChatFormatting.RED));
+            for (AffixData affix : cor) {
+                ctx.tooltip.addAll(affix.GetTooltipString(info, lvl));
+            }
+        }
+
+        ctx.tooltip.add(Component.empty());
 
         if (this.auraStats.isEmpty()) {
+            ctx.tooltip.add(Itemtips.JEWEL_STATS.locName().withStyle(ChatFormatting.GREEN));
 
             List<Component> preList = new ArrayList<>();
             for (AffixData affix : affixes) {
@@ -102,6 +136,7 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
                 }
             }
         } else {
+            ctx.tooltip.add(Itemtips.UNIQUE_STATS.locName().withStyle(ChatFormatting.YELLOW));
 
             for (StatsWhileUnderAuraData aura : this.auraStats) {
                 ctx.tooltip.addAll(aura.getTooltip());
@@ -174,6 +209,9 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
     public List<StatContext> getStatAndContext(LivingEntity en) {
         List<ExactStatData> list = new ArrayList<>();
         for (AffixData affix : this.affixes) {
+            list.addAll(affix.GetAllStats(lvl));
+        }
+        for (AffixData affix : this.cor) {
             list.addAll(affix.GetAllStats(lvl));
         }
 

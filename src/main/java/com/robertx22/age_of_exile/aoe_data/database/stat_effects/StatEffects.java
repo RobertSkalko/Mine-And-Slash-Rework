@@ -41,9 +41,13 @@ public class StatEffects implements ExileRegistryInit {
 
     public static DataHolder<EffectCtx, StatEffect> GIVE_SELF_EFFECT_30_SEC = new DataHolder<>(
             Arrays.asList(
-
                     ModEffects.TAUNT_STANCE,
-                    ModEffects.MISSILE_BARRAGE
+                    ModEffects.MISSILE_BARRAGE,
+                    ModEffects.CURSE_AGONY,
+                    ModEffects.DESPAIR,
+                    ModEffects.CURSE_WEAKNESS,
+                    ModEffects.SLOW,
+                    ModEffects.WOUNDS
             ),
             x -> new GiveExileStatusEffect(x.resourcePath, EffectSides.Source, 30)
     );
@@ -84,11 +88,17 @@ public class StatEffects implements ExileRegistryInit {
 
     public static DataHolder<EffectCtx, StatEffect> GIVE_EFFECT_TO_TARGET = new DataHolder<>(
             Arrays.asList(
-                    ModEffects.SLOW,
                     ModEffects.STUN,
-                    ModEffects.BLIND
+                    ModEffects.BLIND,
+                    ModEffects.TAUNT_STANCE,
+                    ModEffects.MISSILE_BARRAGE,
+                    ModEffects.CURSE_AGONY,
+                    ModEffects.DESPAIR,
+                    ModEffects.CURSE_WEAKNESS,
+                    ModEffects.SLOW,
+                    ModEffects.WOUNDS
             )
-            , x -> new GiveExileStatusEffect(x.resourcePath, EffectSides.Target, 5));
+            , x -> new GiveExileStatusEffect(x.resourcePath, EffectSides.Target, 15));
 
     public static DataHolder<EffectCtx, StatEffect> REMOVE_EFFECT_FROM_TARGET = new DataHolder<>(
             Arrays.asList(
@@ -128,6 +138,7 @@ public class StatEffects implements ExileRegistryInit {
     public static StatEffect DECREASE_CAST_TIME = new DecreaseNumberByPercentEffect(EventData.CAST_TICKS);
     public static StatEffect INCREASE_AREA = new IncreaseNumberByPercentEffect(EventData.AREA_MULTI);
     public static StatEffect APPLY_CAST_SPEED_TO_CD = new ApplyCooldownAsCastTimeEffect();
+    public static StatEffect CANCEL_EVENT = new CancelEvent();
 
 
     public static DataHolder<SetCooldownEffect.Data, StatEffect> SET_COOLDOWN = new DataHolder<>(

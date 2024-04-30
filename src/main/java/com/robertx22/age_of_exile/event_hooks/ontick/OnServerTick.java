@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
 import com.robertx22.age_of_exile.uncommon.effectdatas.RestoreResourceEvent;
+import com.robertx22.age_of_exile.uncommon.effectdatas.TenSecondPlayerTickEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
@@ -84,7 +85,11 @@ public class OnServerTick {
             if (age % 20 == 0) {
                 StatCompat.onTick(player);
             }
-
+            if (age % 200 == 0) {
+                TenSecondPlayerTickEvent event = new TenSecondPlayerTickEvent(player, player);
+                event.Activate();
+            }
+            
             if (age % (20 * 3) == 0) {
                 unitdata.setEquipsChanged();
                 playerData.playerDataSync.setDirty();

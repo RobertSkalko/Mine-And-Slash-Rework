@@ -1,7 +1,10 @@
 package com.robertx22.age_of_exile.database.data.map_affix;
 
+import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stats.DefenseStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.EffectStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
@@ -29,6 +32,10 @@ public class MapAffixes {
         prophecyAffixes();
 
         List<Elements> elements = Elements.getAllSingle().stream().filter(x -> x != Elements.Physical).collect(Collectors.toList());
+
+        for (EffectCtx curse : ModEffects.getCurses()) {
+            new MapAffix(curse.GUID() + "_curse").addMod(new StatMod(1, 1, EffectStats.CURSE_SELF.get(curse))).affectsPlayer().addToSerializables();
+        }
 
         for (Elements element : elements) {
 

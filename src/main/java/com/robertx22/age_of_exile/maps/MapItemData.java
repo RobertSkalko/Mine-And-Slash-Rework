@@ -77,7 +77,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                 int number = getRarity().map_resist_req;
 
                 for (MapAffixData affix : this.affixes) {
-                    if (affix.getAffix().map_resist == ele) {
+                    if (affix.getAffix() != null && affix.getAffix().map_resist == ele) {
                         number += affix.getAffix().map_resist_bonus_needed;
                     }
                 }
