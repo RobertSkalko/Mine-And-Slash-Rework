@@ -82,7 +82,9 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                     }
                 }
 
-                req.base_req.put(stat.GUID(), (float) number);
+                if (number > 0) {
+                    req.base_req.put(stat.GUID(), (float) number);
+                }
             }
         }
 
@@ -132,7 +134,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
 
     public List<MapAffixData> getAllAffixesThatAffect(AffectedEntities aff) {
-        return affixes.stream().filter(x -> x.getAffix().affected == aff).collect(Collectors.toList());
+        return affixes.stream().filter(x -> x.getAffix() != null && x.getAffix().affected == aff).collect(Collectors.toList());
     }
 
 
@@ -188,16 +190,17 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
         tooltip.add(Component.literal(Strings.join(list, ", ")));
 
-        TooltipUtils.removeDoubleBlankLines(tooltip);
 
         TooltipUtils.addEmpty(tooltip);
-        tooltip.add(Words.Requirements.locName().append(": ").withStyle(ChatFormatting.GREEN));
-        TooltipUtils.addRequirements(tooltip, this.lvl, getStatReq(), Load.Unit(ClientOnly.getPlayer()));
-
+        if (!getStatReq().isEmpty()) {
+            tooltip.add(Words.Requirements.locName().append(": ").withStyle(ChatFormatting.GREEN));
+            TooltipUtils.addRequirements(tooltip, this.lvl, getStatReq(), Load.Unit(ClientOnly.getPlayer()));
+        }
         if (this.isUber()) {
             TooltipUtils.addEmpty(tooltip);
             tooltip.add(Words.AreaContains.locName().withStyle(ChatFormatting.RED));
         }
+        TooltipUtils.removeDoubleBlankLines(tooltip);
 
         return tooltip;
 

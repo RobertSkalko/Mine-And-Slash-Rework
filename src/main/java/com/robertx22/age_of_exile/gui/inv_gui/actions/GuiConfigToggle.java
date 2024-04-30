@@ -1,7 +1,10 @@
 package com.robertx22.age_of_exile.gui.inv_gui.actions;
 
+import com.robertx22.age_of_exile.capability.player.data.PlayerConfigData;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.localization.Words;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -13,15 +16,15 @@ import java.util.List;
 
 public class GuiConfigToggle extends GuiAction {
 
-    String config;
+    PlayerConfigData.Config config;
 
-    public GuiConfigToggle(String config) {
+    public GuiConfigToggle(PlayerConfigData.Config config) {
         this.config = config;
     }
 
     @Override
     public void saveExtraData(FriendlyByteBuf buf) {
-        buf.writeUtf(config);
+        buf.writeUtf(config.id);
     }
 
     @Override
@@ -37,13 +40,13 @@ public class GuiConfigToggle extends GuiAction {
     @Override
     public List<Component> getTooltip(Player p) {
         List<Component> t = new ArrayList<>();
-        t.add(Component.literal(config));
+        t.addAll(TooltipUtils.splitLongText(config.word.locName()));
 
         var text = Component.literal("");
-        if (Load.player(p).config.isConfigEnabled(config)) {
-            text = Component.literal("On").withStyle(ChatFormatting.GREEN);
+        if (Load.player(p).config.isConfigEnabled(config.id)) {
+            text = Words.ENABLED.locName().withStyle(ChatFormatting.GREEN);
         } else {
-            text = Component.literal("Off").withStyle(ChatFormatting.RED);
+            text = Words.DISABLED.locName().withStyle(ChatFormatting.RED);
         }
         t.add(text);
 
@@ -53,20 +56,19 @@ public class GuiConfigToggle extends GuiAction {
 
     @Override
     public void doAction(Player p, Object obj) {
-
-        boolean bo = !Load.player(p).config.isConfigEnabled(config);
-
-        Load.player(p).config.configs.put(config, bo);
+        boolean bo = !Load.player(p).config.isConfigEnabled(config.id);
+        Load.player(p).config.configs.put(config.id, bo);
+        Load.player(p).playerDataSync.setDirty();
     }
 
     @Override
     public void clientAction(Player p, Object obj) {
 
-        
+        // ClientOnly.closeScreen();
     }
 
     @Override
     public String GUID() {
-        return config;
+        return config.id;
     }
 }

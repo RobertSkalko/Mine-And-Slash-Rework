@@ -4,8 +4,8 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.base.BaseDatapackStat;
 import com.robertx22.age_of_exile.database.data.stats.name_regex.StatNameRegex;
+import com.robertx22.age_of_exile.saveclasses.unit.StatContainer;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
-import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.uncommon.interfaces.AddToAfterCalcEnd;
 import net.minecraft.ChatFormatting;
 
@@ -48,10 +48,10 @@ public class AddPerPercentOfOther extends BaseDatapackStat implements AddToAfter
     }
 
     @Override
-    public void affectStats(Unit data, StatData statData) {
-        StatData add_to = data.getOrCreateCalculatedStat(stat_to_add_to);
-        StatData adder = data.getOrCreateCalculatedStat(adder_stat);
-        StatData thisstat = data.getCalculatedStat(this.GUID());
+    public void affectStats(StatContainer copy, StatContainer stats, StatData statData) {
+        StatData add_to = stats.getOrCreateCalculatedStat(stat_to_add_to);
+        StatData adder = copy.getOrCreateCalculatedStat(adder_stat);
+        StatData thisstat = copy.getCalculatedStat(this.GUID());
 
         float multi = thisstat.getValue() / 100F;
         float val = adder.getValue() * multi;

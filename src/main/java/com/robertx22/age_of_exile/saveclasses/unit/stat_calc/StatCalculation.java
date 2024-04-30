@@ -43,6 +43,8 @@ public class StatCalculation {
 
         statContexts = collectStatsWithCtx(entity, data, gears);
 
+        statContexts.removeIf(x -> x.stats.isEmpty());
+
         return statContexts;
     }
 
@@ -91,9 +93,11 @@ public class StatCalculation {
 
         var stats = new HashMap<String, StatData>(unit.getStats().stats);
 
+        var copiedStats = unit.getStats().clone();
+
         for (Map.Entry<String, StatData> en : stats.entrySet()) {
             if (en.getValue().GetStat() instanceof AddToAfterCalcEnd aff) {
-                aff.affectStats(unit, en.getValue());
+                aff.affectStats(copiedStats, unit.getStats(), en.getValue());
             }
         }
 

@@ -65,7 +65,7 @@ public class TellServerToCastSpellPacket extends MyPacket<TellServerToCastSpellP
                 if (!cds.isOnCooldown("spell_fail")) {
                     cds.setOnCooldown("spell_fail", 40);
                     if (can.answer != null) {
-                        if (!Load.player(player).config.isConfigEnabled(PlayerConfigData.STOP_CAST_FAIL_MESSAGES)) {
+                        if (!Load.player(player).config.isConfigEnabled(PlayerConfigData.Config.CAST_FAIL.id)) {
                             player.sendSystemMessage(Chats.CAST_FAILED.locName().append(can.answer));
                         }
                     }

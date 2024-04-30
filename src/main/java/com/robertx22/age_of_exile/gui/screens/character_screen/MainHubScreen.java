@@ -1,6 +1,9 @@
 package com.robertx22.age_of_exile.gui.screens.character_screen;
 
-import com.robertx22.age_of_exile.aoe_data.database.stats.*;
+import com.robertx22.age_of_exile.aoe_data.database.stats.DefenseStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.ResourceStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.SpellChangeStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.characters.gui.CharacterSelectScreen;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
@@ -41,6 +44,7 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.age_of_exile.vanilla_mc.packets.AllocateStatPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.RenderUtils;
@@ -228,8 +232,9 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
         rightButtons.add(new OpenSkillGems());
         rightButtons.add(new TalentsScreen());
         rightButtons.add(new OpenJewelsScreen());
-        rightButtons.add(new ProphecyScreen());
-
+        if (WorldUtils.isMapWorldClass(this.mc.level)) {
+            rightButtons.add(new ProphecyScreen());
+        }
         List<INamedScreen> leftButtons = new ArrayList<>();
 
         leftButtons.add(new BestiaryScreen());

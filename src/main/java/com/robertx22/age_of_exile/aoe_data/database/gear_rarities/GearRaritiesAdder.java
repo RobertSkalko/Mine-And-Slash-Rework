@@ -17,7 +17,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
             x.map_tiers = new MinMax(0, 10);
             x.favor_loot_multi = 0.75F;
-            x.map_xp_multi = 0.25F;
+            x.map_xp_multi = 1;
             x.favor_needed = 0;
             x.min_affixes = 1;
             x.weight = 5000;
@@ -37,7 +37,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.map_resist_req = 10;
 
             x.map_tiers = new MinMax(10, 20);
-            x.map_xp_multi = 0.4F;
+            x.map_xp_multi = 1;
 
             x.favor_loot_multi = 0.9F;
             x.favor_needed = 50;
@@ -62,7 +62,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.map_tiers = new MinMax(20, 40);
 
             x.affix_rarity_weight = 750;
-            x.map_xp_multi = 0.5F;
+            x.map_xp_multi = 1;
 
             x.favor_loot_multi = 1;
             x.favor_needed = 100;
@@ -89,7 +89,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.map_tiers = new MinMax(40, 60);
 
             x.affix_rarity_weight = 500;
-            x.map_xp_multi = 0.6F;
+            x.map_xp_multi = 1.05F;
 
             x.favor_loot_multi = 1.05F;
             x.favor_needed = 250;
@@ -118,7 +118,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.map_tiers = new MinMax(60, 80);
 
             x.affix_rarity_weight = 200;
-            x.map_xp_multi = 0.8F;
+            x.map_xp_multi = 1.1F;
 
             x.favor_loot_multi = 1.2F;
             x.favor_needed = 500;
@@ -149,7 +149,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
             x.affix_rarity_weight = 100;
 
-            x.map_xp_multi = 1F;
+            x.map_xp_multi = 1.25F;
 
             x.favor_loot_multi = 1.25F;
             x.favor_needed = 1000;

@@ -7,6 +7,12 @@ import java.util.Locale;
 
 // to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
+    ENABLED("Enabled"),
+    DISABLED("Disabled"),
+
+    CAST_FAIL_MSGS("Spell Casting Failure Messages\n\nWill print helpful messages when you fail to cast a spell\nParticularly Helpful for New Players"),
+    AUTOMATIC_PVE("Auto PVE\n\nPlayers who enable this are considered Teamed up and Allies\n- Must be in Nearby (Radius set by config)"),
+
     WHILE_UNDER_AURA("While Under Effect of %1$s:"),
     CURSE_OFFERS("Curse Offers:"),
     REWARD_OFFERS("Reward Offers:"),

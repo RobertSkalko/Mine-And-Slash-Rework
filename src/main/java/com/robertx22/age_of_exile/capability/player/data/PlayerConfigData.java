@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.capability.player.data;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
+import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.sounds.SoundEvents;
@@ -13,8 +14,18 @@ import java.util.HashMap;
 
 public class PlayerConfigData {
 
-    public static String STOP_CAST_FAIL_MESSAGES = "stop_cast_fail_messages";
-    public static String AUTO_PVE = "auto_pve";
+    public enum Config {
+        CAST_FAIL("cast_fail_messages", Words.CAST_FAIL_MSGS),
+        AUTO_PVE("auto_pve", Words.AUTOMATIC_PVE);
+        public String id;
+        public Words word;
+
+        Config(String id, Words word) {
+            this.id = id;
+            this.word = word;
+        }
+    }
+
 
     public AutoSalvage salvage = new AutoSalvage();
 

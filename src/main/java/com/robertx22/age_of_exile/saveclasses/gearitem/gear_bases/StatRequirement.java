@@ -119,7 +119,7 @@ public class StatRequirement {
 
 
     public boolean isEmpty() {
-        return this.scaling_req.isEmpty();
+        return this.scaling_req.isEmpty() && this.base_req.isEmpty();
     }
 
 

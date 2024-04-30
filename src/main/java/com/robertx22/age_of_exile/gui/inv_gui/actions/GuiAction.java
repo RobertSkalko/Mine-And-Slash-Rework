@@ -68,8 +68,8 @@ public abstract class GuiAction<T> implements IGUID {
     // do every time before constructing the gui, because we want to use datapack stuff and not care about when its loaded
     public static void regenActionMap() {
 
-        of(new GuiConfigToggle(PlayerConfigData.STOP_CAST_FAIL_MESSAGES));
-        of(new GuiConfigToggle(PlayerConfigData.AUTO_PVE));
+        of(new GuiConfigToggle(PlayerConfigData.Config.CAST_FAIL));
+        of(new GuiConfigToggle(PlayerConfigData.Config.AUTO_PVE));
 
         for (ToggleAutoSalvageRarity.SalvageType type : ToggleAutoSalvageRarity.SalvageType.values()) {
             for (GearRarity rar : ExileDB.GearRarities().getList()) {

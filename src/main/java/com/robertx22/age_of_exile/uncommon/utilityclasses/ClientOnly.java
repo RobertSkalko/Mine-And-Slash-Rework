@@ -20,7 +20,7 @@ public class ClientOnly {
         Minecraft.getInstance().gameRenderer.displayItemActivation(stack);
     }
 
-   
+
     public static Entity getEntityByUUID(Level world, UUID id) {
 
         if (world instanceof ClientLevel) {
@@ -49,6 +49,11 @@ public class ClientOnly {
     public static Player getPlayer() {
         return Minecraft.getInstance().player;
     }
+
+    public static void closeScreen() {
+        Minecraft.getInstance().setScreen(null);
+    }
+
 
     public static void pressUseKey() {
         Minecraft.getInstance().options.keyUse.setDown(true);

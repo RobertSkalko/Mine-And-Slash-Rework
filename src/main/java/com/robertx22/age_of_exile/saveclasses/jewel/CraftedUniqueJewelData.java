@@ -8,6 +8,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class CraftedUniqueJewelData {
     public static String CRAFTED_UNIQUE_ID = "crafted_unique";
+    public static String WATCHER_EYE = "watcher_eye";
 
     private int t = 0;
 

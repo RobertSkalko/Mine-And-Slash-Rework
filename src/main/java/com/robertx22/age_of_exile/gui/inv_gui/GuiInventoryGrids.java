@@ -63,8 +63,8 @@ public class GuiInventoryGrids {
 
         List<GuiItemData> lists = new ArrayList<>();
 
-        lists.add(new GuiItemData(new GuiConfigToggle(PlayerConfigData.STOP_CAST_FAIL_MESSAGES)));
-        lists.add(new GuiItemData(new GuiConfigToggle(PlayerConfigData.AUTO_PVE)));
+        lists.add(new GuiItemData(new GuiConfigToggle(PlayerConfigData.Config.AUTO_PVE)));
+        lists.add(new GuiItemData(new GuiConfigToggle(PlayerConfigData.Config.CAST_FAIL)));
 
 
         return InvGuiGrid.ofYRowLists(Arrays.asList(lists));

@@ -31,6 +31,8 @@ This is meant for players who don't want to mess with inviting to parties etc
 - attempt fix double death xp loss etc
 - improved hotbar ui a bit
 - dungeons now have names
+- stats like "+5 hp per 10 mana" now work based on calculated final values, meaning +50% health will work on them, but not +50% mana in this example.
+The code now also creates a copy of the stats which means if you have mana per hp and hp per mana, there won't be any randomness or infinite loops trying to calculate them
 - added force_custom_hp to mob rarity so you can now not worry if the boss mob has 100 times more hp than intended, currently used for uber bosses
 - attempted to cleanup some stat code, expect bugs in the short term.
 - added new currency that rerols a random affix into a random common affix

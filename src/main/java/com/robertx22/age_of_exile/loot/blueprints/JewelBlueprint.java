@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.loot.blueprints;
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.LootInfo;
+import com.robertx22.age_of_exile.saveclasses.jewel.CraftedUniqueJewelData;
 import com.robertx22.age_of_exile.saveclasses.jewel.JewelItemData;
 import com.robertx22.age_of_exile.saveclasses.jewel.StatsWhileUnderAuraData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
@@ -47,6 +48,8 @@ public class JewelBlueprint extends RarityItemBlueprint {
             data.style = PlayStyle.INT.id;
             data.rar = IRarity.UNIQUE_ID;
 
+            data.uniq = new CraftedUniqueJewelData();
+            data.uniq.id = CraftedUniqueJewelData.WATCHER_EYE;
 
             while (data.auraStats.size() < this.auraAffixes) {
                 var affix = ExileDB.Affixes().getFilterWrapped(x -> x.type == Affix.Type.watcher_eye).random();
