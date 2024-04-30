@@ -69,7 +69,7 @@ public class ElementalPenetration extends ElementalStat {
 
         @Override
         public StatPriority GetPriority() {
-            return StatPriority.Spell.FIRST;
+            return StatPriority.Damage.BEFORE_DAMAGE_LAYERS;
         }
 
         @Override

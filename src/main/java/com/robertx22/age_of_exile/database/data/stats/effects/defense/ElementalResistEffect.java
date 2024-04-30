@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.database.data.stats.effects.defense;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageEffect;
+import com.robertx22.age_of_exile.database.data.stats.layers.StatLayers;
 import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
@@ -13,7 +14,8 @@ public class ElementalResistEffect extends BaseDamageEffect {
 
     @Override
     public StatPriority GetPriority() {
-        return StatPriority.Damage.BEFORE_DAMAGE_LAYERS;
+
+        return StatPriority.Damage.DAMAGE_LAYERS;
     }
 
     @Override
@@ -44,7 +46,14 @@ public class ElementalResistEffect extends BaseDamageEffect {
 
         float multi = 1 - (defense / 100F);
 
-        effect.data.getNumber(EventData.NUMBER).number *= multi;
+        // effect.data.getNumber(EventData.NUMBER).number *= multi;
+
+
+        if (stat.getElement() == Elements.Physical) {
+            effect.getLayer(StatLayers.Defensive.PHYS_MITIGATION, EventData.NUMBER).reduce(defense);
+        } else {
+            effect.getLayer(StatLayers.Defensive.ELEMENTAL_MITIGATION, EventData.NUMBER).reduce(defense);
+        }
 
         effect.data.setBoolean(EventData.RESISTED_ALREADY, true);
 

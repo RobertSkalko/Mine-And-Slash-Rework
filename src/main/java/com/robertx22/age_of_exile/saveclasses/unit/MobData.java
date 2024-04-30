@@ -44,7 +44,7 @@ public class MobData {
                     .random()
                     .GUID());
 
-
         }
+
     }
 }

@@ -15,6 +15,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 
 public class DefenseStats {
+   
     public static DataPackStatAccessor<Elements> ALWAYS_CRIT_WHEN_HIT_BY_ELEMENT = DatapackStatBuilder
             .<Elements>of(x -> x.guidName + "_vuln_crit", x -> x)
             .addAllOfType(Elements.values())

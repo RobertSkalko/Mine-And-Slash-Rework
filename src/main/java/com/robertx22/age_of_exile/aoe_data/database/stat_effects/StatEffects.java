@@ -28,11 +28,11 @@ public class StatEffects implements ExileRegistryInit {
         public static ModifyStatLayerEffect DOUBLE_DAMAGE = new ModifyStatLayerEffect(StatLayers.Offensive.DOUBLE_DAMAGE, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, ModifyStatLayerEffect.CalculationType.JUST_STAT_NUMBER);
 
 
-        public static ModifyStatLayerEffect ELEMENTAL_RESIST = new ModifyStatLayerEffect(StatLayers.Defensive.ELEMENTAL_MITIGATION, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.REDUCE, ModifyStatLayerEffect.CalculationType.JUST_STAT_NUMBER);
-        public static ModifyStatLayerEffect ELEMENTAL_PENETRATION = new ModifyStatLayerEffect(StatLayers.Defensive.ELEMENTAL_MITIGATION, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, ModifyStatLayerEffect.CalculationType.JUST_STAT_NUMBER);
+        // public static ModifyStatLayerEffect ELEMENTAL_RESIST = new ModifyStatLayerEffect(StatLayers.Defensive.ELEMENTAL_MITIGATION, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.REDUCE, ModifyStatLayerEffect.CalculationType.JUST_STAT_NUMBER);
+        //public static ModifyStatLayerEffect ELEMENTAL_PENETRATION = new ModifyStatLayerEffect(StatLayers.Defensive.ELEMENTAL_MITIGATION, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, ModifyStatLayerEffect.CalculationType.JUST_STAT_NUMBER);
 
-        public static ModifyStatLayerEffect ARMOR = new ModifyStatLayerEffect(StatLayers.Defensive.PHYS_MITIGATION, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.REDUCE, ModifyStatLayerEffect.CalculationType.EFFECTIVE_ARMOR);
-        public static ModifyStatLayerEffect ARMOR_PENETRATION = new ModifyStatLayerEffect(StatLayers.Defensive.PHYS_MITIGATION, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, ModifyStatLayerEffect.CalculationType.EFFECTIVE_ARMOR);
+        //public static ModifyStatLayerEffect ARMOR = new ModifyStatLayerEffect(StatLayers.Defensive.PHYS_MITIGATION, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.REDUCE, ModifyStatLayerEffect.CalculationType.EFFECTIVE_ARMOR);
+        //public static ModifyStatLayerEffect ARMOR_PENETRATION = new ModifyStatLayerEffect(StatLayers.Defensive.PHYS_MITIGATION, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, ModifyStatLayerEffect.CalculationType.EFFECTIVE_ARMOR);
 
         public static void init() {
 

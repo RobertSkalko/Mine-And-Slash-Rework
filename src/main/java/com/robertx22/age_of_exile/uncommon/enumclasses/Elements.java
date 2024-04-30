@@ -21,9 +21,9 @@ public enum Elements {
     // elementals
     Fire(Arrays.asList(), Arrays.asList(ElementTags.ELEMENTAL), "Fire", ChatFormatting.RED, ElementIds.FIRE, "\u2600", SpellTags.FIRE),
     Cold(Arrays.asList(), Arrays.asList(ElementTags.ELEMENTAL), "Cold", ChatFormatting.AQUA, ElementIds.WATER, "\u2600", SpellTags.COLD),
-    Nature(Arrays.asList(), Arrays.asList(ElementTags.ELEMENTAL), "Nature", ChatFormatting.GREEN, ElementIds.NATURE, "\u2600", SpellTags.LIGHTNING),
+    Nature(Arrays.asList(), Arrays.asList(ElementTags.ELEMENTAL), "Lightning", ChatFormatting.GREEN, ElementIds.NATURE, "\u2600", SpellTags.LIGHTNING),
     // alignments
-    Shadow(Arrays.asList(), Arrays.asList(ElementTags.ALIGNMENT), "Shadow", ChatFormatting.DARK_PURPLE, "chaos", "\u2600", SpellTags.CHAOS),
+    Shadow(Arrays.asList(), Arrays.asList(ElementTags.ALIGNMENT), "Chaos", ChatFormatting.DARK_PURPLE, "chaos", "\u2600", SpellTags.CHAOS),
     //Holy(Arrays.asList(), Arrays.asList(ElementTags.ALIGNMENT), "Holy", ChatFormatting.YELLOW, "holy", "\u2600", SpellTags.HOLY),
     // multi ele
     Elemental(Arrays.asList(ElementIds.NATURE, ElementIds.FIRE, ElementIds.WATER), Arrays.asList(ElementTags.ELEMENTAL), "Elemental", ChatFormatting.LIGHT_PURPLE, "elemental", "\u2600", SpellTags.PHYSICAL),

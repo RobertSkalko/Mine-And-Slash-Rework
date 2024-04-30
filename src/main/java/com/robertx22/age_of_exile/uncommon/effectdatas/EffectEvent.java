@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.uncommon.effectdatas;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
+import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DataPackStatEffect;
@@ -66,10 +67,24 @@ public abstract class EffectEvent implements IGUID {
         }
     }
 
+    /*
     public StatLayerData getLayer(StatLayer layer, String number) {
         String id = layer.GUID() + "_" + number;
         if (!layers.containsKey(id)) {
-            layers.put(id, new StatLayerData(layer.GUID(), number));
+            layers.put(id, new StatLayerData(layer.GUID(), number, ));
+        }
+        return layers.get(id);
+
+    }
+
+     */
+
+    public StatLayerData getLayer(StatLayer layer, String number) {
+        String id = layer.GUID() + "_" + number;
+        if (!layers.containsKey(id)) {
+            var data = new StatLayerData(layer.GUID(), number, 0);
+
+            layers.put(id, data);
         }
         return layers.get(id);
 
@@ -151,16 +166,19 @@ public abstract class EffectEvent implements IGUID {
 
     // todo this shouldnt be calculated at the end.. stats like magic shield depend on it
     private void calculateStatLayersAndMoreMultis() {
-        List<StatLayerData> all = new ArrayList<>();
-        all.addAll(layers.values());
-        all.sort(Comparator.comparingInt(x -> x.getLayer().priority)); // todo check if this is correct order
+        if (!this.layers.isEmpty()) {
+            List<StatLayerData> all = new ArrayList<>();
+            all.addAll(layers.values());
+            all.sort(Comparator.comparingInt(x -> x.getLayer().priority)); // todo check if this is correct order
 
-        for (StatLayerData layer : all) {
-            layer.getLayer().action.apply(this, layer, layer.numberID);
+            for (StatLayerData layer : all) {
+                layer.getLayer().action.apply(this, layer, layer.numberID);
+            }
         }
-
-        for (MoreMultiData more : this.moreMultis) {
-            this.data.getNumber(more.numberid).number *= more.multi;
+        if (!this.moreMultis.isEmpty()) {
+            for (MoreMultiData more : this.moreMultis) {
+                this.data.getNumber(more.numberid).number *= more.multi;
+            }
         }
     }
 
@@ -174,17 +192,64 @@ public abstract class EffectEvent implements IGUID {
                 return;
             }
 
+            if (data.isCanceled()) {
+                return;
+            }
+            // todo something is weird, why are some stats used 2 times here?
 
-            TryApplyEffects(source, sourceData, EffectSides.Source);
+            List<EffectWithCtx> effectsWithCtx = new ArrayList<>();
+            effectsWithCtx = AddEffects(effectsWithCtx, sourceData, source, EffectSides.Source);
+            effectsWithCtx = AddEffects(effectsWithCtx, targetData, target, EffectSides.Target);
+            effectsWithCtx.sort(EffectWithCtx.COMPARATOR);
+
+            testEffectsAreOrderedCorrectly(effectsWithCtx);
+
+            for (EffectWithCtx item : effectsWithCtx) {
+                if (item.stat.isNotZero()) {
+                    item.effect.TryModifyEffect(this, item.statSource, item.stat, item.stat.GetStat());
+                } else {
+                    System.out.print("ERORR cant be zero! ");
+                }
+            }
+
+/*            TryApplyEffects(source, sourceData, EffectSides.Source);
             TryApplyEffects(target, targetData, EffectSides.Target);
+ */
 
 
         }
 
     }
 
+    public void testEffectsAreOrderedCorrectly(List<EffectWithCtx> sortedEffects) {
+
+        if (ServerContainer.get().STAT_ORDER_WARNINGS.get()) {
+            List<String> toremove = new ArrayList<>();
+
+            HashMap<String, Integer> map = new HashMap<>();
+            int i = 0;
+            for (EffectWithCtx sort : sortedEffects) {
+                map.put(sort.stat.GetStat().GUID(), i);
+                i++;
+            }
+
+            for (StatOrderTest.FirstAndSecond test : StatOrderTest.getAll()) {
+                String id = test.test(map, source.level());
+                if (!id.isEmpty()) {
+                    toremove.add(id);
+                }
+            }
+
+            for (String s : toremove) {
+                StatOrderTest.removeTest(s);
+            }
+        }
+    }
+
+
     protected abstract void activate();
 
+    /*
     protected void TryApplyEffects(LivingEntity en, EntityData data, EffectSides side) {
 
 
@@ -212,6 +277,8 @@ public abstract class EffectEvent implements IGUID {
 
     }
 
+     */
+
     public LivingEntity getSide(EffectSides side) {
         if (side == EffectSides.Source) {
             return source;
@@ -220,7 +287,7 @@ public abstract class EffectEvent implements IGUID {
         }
     }
 
-    private static EffectWithCtx CALC_LAYERS_EFFECT = new EffectWithCtx(new IStatEffect() {
+    private static EffectWithCtx CALC_LAYERS_EFFECT_SOURCE = new EffectWithCtx(new IStatEffect() {
         @Override
         public boolean worksOnEvent(EffectEvent ev) {
             return true;
@@ -242,6 +309,28 @@ public abstract class EffectEvent implements IGUID {
         }
     }, EffectSides.Source, new StatData(new UnknownStat().GUID(), 1, 1));
 
+    private static EffectWithCtx CALC_LAYERS_EFFECT_TARGET = new EffectWithCtx(new IStatEffect() {
+        @Override
+        public boolean worksOnEvent(EffectEvent ev) {
+            return true;
+        }
+
+        @Override
+        public EffectSides Side() {
+            return EffectSides.Target;
+        }
+
+        @Override
+        public StatPriority GetPriority() {
+            return StatPriority.Damage.CALC_DAMAGE_LAYERS;
+        }
+
+        @Override
+        public void TryModifyEffect(EffectEvent effect, EffectSides statSource, StatData data, Stat stat) {
+            effect.calculateStatLayersAndMoreMultis();
+        }
+    }, EffectSides.Target, new StatData(new UnknownStat().GUID(), 1, 1));
+
 
     private List<EffectWithCtx> AddEffects(List<EffectWithCtx> effects, EntityData enData, LivingEntity en, EffectSides side) {
 
@@ -254,7 +343,7 @@ public abstract class EffectEvent implements IGUID {
 
 
         if (side == EffectSides.Source) {
-            effects.add(CALC_LAYERS_EFFECT);
+            effects.add(CALC_LAYERS_EFFECT_SOURCE);
 
             if (isSpell()) {
                 if (en instanceof Player p) {
@@ -263,6 +352,8 @@ public abstract class EffectEvent implements IGUID {
                     }
                 }
             }
+        } else {
+            effects.add(CALC_LAYERS_EFFECT_TARGET);
         }
 
         List<StatData> list = new ArrayList<>();
@@ -272,21 +363,6 @@ public abstract class EffectEvent implements IGUID {
                 .forEach(data -> {
                     if (data.isNotZero()) {
                         Stat stat = data.GetStat();
-
-                        IStatEffect effect = null;
-
-                        if (stat.statEffect != null) {
-                            if (stat.statEffect.Side().equals(side)) {
-                                if (stat.statEffect.worksOnEvent(this)) {
-                                    effect = stat.statEffect;
-                                }
-                            }
-                        }
-                        if (effect != null) {
-                            effects.add(new EffectWithCtx(effect, side, data));
-                            list.add(data);
-                        }
-
 
                         if (stat instanceof DatapackStat) {
                             DatapackStat d = (DatapackStat) stat;
@@ -299,6 +375,20 @@ public abstract class EffectEvent implements IGUID {
                                 }
                             }
 
+                        } else {
+                            IStatEffect effect = null;
+
+                            if (stat.statEffect != null) {
+                                if (stat.statEffect.Side().equals(side)) {
+                                    if (stat.statEffect.worksOnEvent(this)) {
+                                        effect = stat.statEffect;
+                                    }
+                                }
+                            }
+                            if (effect != null) {
+                                effects.add(new EffectWithCtx(effect, side, data));
+                                list.add(data);
+                            }
                         }
 
 

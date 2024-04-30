@@ -75,7 +75,7 @@ public class ResourceStats {
             //.addCondition(x -> StatConditions.IS_NOT_SUMMON_ATTACK) // todo why did i do this?
             .addEffect(e -> StatEffects.LEECH_RESTORE_RESOURCE_BASED_ON_STAT_DATA.get(e.resource))
             .setLocName(x -> x.resource.locname + " on " + x.attackType.locname)
-            .setLocDesc(x -> "")
+            .setLocDesc(x -> "Adds X amount of resource per hit to leech table and is capped by leech cap")
             .modifyAfterDone(x -> {
                 x.min = 0;
                 x.is_perc = false;

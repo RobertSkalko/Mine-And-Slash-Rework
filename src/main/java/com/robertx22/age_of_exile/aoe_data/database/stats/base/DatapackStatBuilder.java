@@ -54,6 +54,10 @@ public class DatapackStatBuilder<T> {
 
         private List<StatCondition> conditions = new ArrayList<>();
         private List<StatEffect> effects = new ArrayList<>();
+
+        public boolean isEmpty() {
+            return effectMaker.isEmpty() && effects.isEmpty();
+        }
     }
 
     private Consumer<DatapackStat> modifyAfterDone;
@@ -126,15 +130,13 @@ public class DatapackStatBuilder<T> {
     }
 
 
-    public DatapackStatBuilder<T> addEffect(StatEffect... effect) {
+    public DatapackStatBuilder<T> addEffect(StatEffect effect) {
         return addEffect(EffectPlace.FIRST, effect);
     }
 
-    public DatapackStatBuilder<T> addEffect(EffectPlace place, StatEffect... effect) {
+    public DatapackStatBuilder<T> addEffect(EffectPlace place, StatEffect effect) {
         Objects.requireNonNull(effect);
-        for (StatEffect ef : effect) {
-            EFFECTS.get(place).effects.add(ef);
-        }
+        EFFECTS.get(place).effects.add(effect);
         return this;
     }
 
@@ -209,6 +211,10 @@ public class DatapackStatBuilder<T> {
                     for (Map.Entry<EffectPlace, EffectMaker<T>> en : EFFECTS.entrySet()) {
                         var effectMaker = en.getValue();
 
+                        if (effectMaker.isEmpty()) {
+                            continue;
+                        }
+                        
                         DataPackStatEffect dataEffect = new DataPackStatEffect();
                         dataEffect.order = priority;
                         dataEffect.events = events;
@@ -219,7 +225,6 @@ public class DatapackStatBuilder<T> {
                             dataEffect.effects.add(c.GUID());
                         });
 
-                        stat.effect.add(dataEffect);
 
                         if (effectMaker.effectMaker != null) {
                             T key = x.getKey();
@@ -231,14 +236,15 @@ public class DatapackStatBuilder<T> {
                                 }
                                 dataEffect.effects.add(effect.GUID());
                             }
-
-
                         }
+
                         if (effectMaker.conditionMaker != null) {
                             for (Function<T, StatCondition> maker : effectMaker.conditionMaker) {
                                 dataEffect.ifs.add(maker.apply(x.getKey()).GUID());
                             }
                         }
+
+                        stat.effect.add(dataEffect);
                     }
 
                     accessor.add(x.getKey(), stat);

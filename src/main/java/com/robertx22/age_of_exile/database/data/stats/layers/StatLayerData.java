@@ -11,9 +11,11 @@ public class StatLayerData {
     public String numberID = "";
     private float number = 0;
 
-    public StatLayerData(String layer, String numberID) {
+
+    public StatLayerData(String layer, String numberID, float number) {
         this.layer = layer;
         this.numberID = numberID;
+        this.number = number;
     }
 
     public StatLayer getLayer() {
@@ -34,7 +36,7 @@ public class StatLayerData {
 
     public float getNumber() {
         var lay = getLayer();
-        float num = MathHelper.clamp(number, lay.min_multi, lay.max_multi);
+        float num = number; // MathHelper.clamp(number, lay.min_multi, lay.max_multi);
         return num;
     }
 

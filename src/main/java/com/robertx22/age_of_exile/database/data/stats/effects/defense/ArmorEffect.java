@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.stats.effects.defense;
 import com.robertx22.age_of_exile.database.data.stats.IUsableStat;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.InCodeStatEffect;
+import com.robertx22.age_of_exile.database.data.stats.layers.StatLayers;
 import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
@@ -14,12 +15,13 @@ import net.minecraft.util.Mth;
 public class ArmorEffect extends InCodeStatEffect<DamageEvent> {
 
     public ArmorEffect() {
+
         super(DamageEvent.class);
     }
 
     @Override
     public StatPriority GetPriority() {
-        return StatPriority.Damage.BEFORE_DAMAGE_LAYERS;
+        return StatPriority.Damage.DAMAGE_LAYERS;
     }
 
     @Override
@@ -31,18 +33,22 @@ public class ArmorEffect extends InCodeStatEffect<DamageEvent> {
     public DamageEvent activate(DamageEvent effect, StatData data, Stat stat) {
         float pene = effect.getPenetration();
 
-
         IUsableStat armor = (IUsableStat) stat;
 
         float EffectiveArmor = armor.getUsableValue((int) (data.getValue() - pene), effect.sourceData.getLevel());
 
         EffectiveArmor = 1F - Mth.clamp(EffectiveArmor, 0, armor.getMaxMulti());
 
+        /*
         var id = effect.data.getNumber(EventData.NUMBER);
-
         float num = id.number;
         num *= EffectiveArmor;
         id.number = num;
+         */
+
+        float defense = EffectiveArmor * 100F;
+        
+        effect.getLayer(StatLayers.Defensive.PHYS_MITIGATION, EventData.NUMBER).reduce(defense);
 
         return effect;
     }
