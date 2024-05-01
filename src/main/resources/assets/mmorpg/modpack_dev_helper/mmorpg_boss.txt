@@ -1,4 +1,4 @@
 These are all default registry entries of this type.
 This registry can't be modified or added to.
-summon_explody_mobs
 close_dmg
+summon_explody_mobs

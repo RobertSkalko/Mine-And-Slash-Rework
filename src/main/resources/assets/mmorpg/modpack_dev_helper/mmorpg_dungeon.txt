@@ -1,21 +1,21 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
-mine
-tent
-nether
-steampunk
-sewer2
-nature
-sewers
-it
-sandstone
-spruce_mansion
-cement
-wn
-pyramid
-stone_brick
-warped
 bastion
 brick
-mossy_brick
+cement
+it
+mine
 misc
+mossy_brick
+nature
+nether
+pyramid
+sandstone
+sewer2
+sewers
+spruce_mansion
+steampunk
+stone_brick
+tent
+warped
+wn

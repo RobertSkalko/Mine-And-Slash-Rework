@@ -91,7 +91,7 @@ public abstract class LeagueStructure {
 
             if (!getPieces(map).list.isEmpty()) {
 
-                var s = md.leagues.get(league).map.get(LeagueMechanic.STRUCTURE);
+                var s = md.leagues.get(league).map.get(this.league.getStructureId());
 
                 LeagueStructurePieces pieces = list.get(s);
 

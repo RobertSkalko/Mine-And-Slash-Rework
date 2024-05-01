@@ -1,14 +1,14 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
-magic
-str
-mana
+arcane
 crit
 dex
-might
-loot
-exp
-arcane
-life
-int
 energy
+exp
+int
+life
+loot
+magic
+mana
+might
+str

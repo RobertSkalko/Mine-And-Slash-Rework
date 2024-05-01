@@ -14,10 +14,11 @@ It works like this:
 
 -------
 
-Another new Feature is something a lot of players wanted and it's Uber bosses!  - TODO STILL NEED SOME WORK
+Another new Feature is something a lot of players wanted and it's Uber bosses!  
 Kill monsters in maps and find Uber fragments, Combine fragments into the corresponding Uber boss's Arena Maps
 Enter the map, find the portal and slay the Uber Boss!
 Uber bosses drop some exclusive loot btw
+Currently the mod has 1 boss, but Modpacks should be able to easily add more.
 
 
 Other:
@@ -48,6 +49,7 @@ Which means they didn't get their stats calculated because that's done on tick..
 - you can no longer enter too high level maps (currently max is your lvl + 5
 - fix allies being able to attack summons
 - added jewel corruption, and jewel corruption orb
+- summoned skeletons now fire
 - added new map affixes, player curses
 - new player curse immunity stat, currently found on jewel corruptions
 - reduced max characters to 3 by default, might be too much nbt for some servers

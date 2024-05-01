@@ -1,12 +1,12 @@
 These are all default registry entries of this type.
 This registry can't be modified or added to.
-harvest_purple_chest
-support_gem
-harvest_green_chest
-currency
-map
 aura
-gem
+currency
 gear
-rune
+gem
 harvest_blue_chest
+harvest_green_chest
+harvest_purple_chest
+map
+rune
+support_gem

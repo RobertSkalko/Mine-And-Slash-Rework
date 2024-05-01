@@ -63,7 +63,7 @@ public class GearTooltipUtils {
 
         //tip.add(new LiteralText(""));
 
-        if (true || info.useInDepthStats()) {
+        if (ClientConfigs.getConfig().IN_DEPTH_TOOLTIPS_BY_DEFAULT.get() || info.useInDepthStats()) {
 
             tip.addAll(gear.imp.GetTooltipString(info, gear));
 

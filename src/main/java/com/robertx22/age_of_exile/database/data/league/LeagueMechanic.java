@@ -19,9 +19,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Block;
 
 public abstract class LeagueMechanic implements ExileRegistry<LeagueMechanic>, IAutoLocName {
-    public static MapField<String> STRUCTURE = new MapField<>("structure");
-
-
+  
     public abstract LeagueStructure getStructure(MapItemData map);
 
     public float getBaseSpawnChance() {
@@ -30,12 +28,16 @@ public abstract class LeagueMechanic implements ExileRegistry<LeagueMechanic>, I
 
     public abstract int getDefaultSpawns();
 
+    public MapField<String> getStructureId() {
+        return new MapField<>(GUID() + "_structure");
+    }
+
     public final void onMapStartSetupBase(MapItemData map, LeagueData data) {
 
         data.remainingSpawns = getDefaultSpawns();
 
         if (!getStructure(map).getPieces(map).list.isEmpty()) {
-            data.map.put(STRUCTURE, RandomUtils.weightedRandom(getStructure(map).getPieces(map).list).folder);
+            data.map.put(getStructureId(), RandomUtils.weightedRandom(getStructure(map).getPieces(map).list).folder);
         }
     }
 

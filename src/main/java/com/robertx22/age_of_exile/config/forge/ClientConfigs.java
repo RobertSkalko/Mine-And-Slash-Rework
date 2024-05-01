@@ -32,6 +32,7 @@ public class ClientConfigs {
         ENABLE_FLOATING_DMG = b.define("render_floating_damage", true);
         ALIGN_STAT_TOOLTIPS = b.define("ALIGN_STAT_TOOLTIPS", false);
         MODIFY_TOOLTIP_LENGTH = b.define("MODIFY_TOOLTIP_LENGTH", true);
+        IN_DEPTH_TOOLTIPS_BY_DEFAULT = b.define("IN_DEPTH_TOOLTIPS_BY_DEFAULT", true);
 
         ITEM_RARITY_OPACITY = b.defineInRange("ITEM_RARITY_OPACITY", 0.75F, 0, 1F);
         HEALTH_BAR_GUI_SCALE = b.defineInRange("health_bar_gui_scale", 1.25F, 0, 10F);
@@ -56,6 +57,7 @@ public class ClientConfigs {
     public ForgeConfigSpec.BooleanValue ONLY_RENDER_MOB_LOOKED_AT;
     public ForgeConfigSpec.BooleanValue ALIGN_STAT_TOOLTIPS;
     public ForgeConfigSpec.BooleanValue MODIFY_TOOLTIP_LENGTH;
+    public ForgeConfigSpec.BooleanValue IN_DEPTH_TOOLTIPS_BY_DEFAULT;
 
     public ForgeConfigSpec.EnumValue<GlintType> ITEM_RARITY_BACKGROUND_TYPE;
     public ForgeConfigSpec.EnumValue<GuiPosition> GUI_POSITION;

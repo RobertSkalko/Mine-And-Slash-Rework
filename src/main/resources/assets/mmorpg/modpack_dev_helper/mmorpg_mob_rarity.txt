@@ -1,10 +1,10 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
-summon
-uncommon
 common
-mythic
-legendary
-rare
 epic
+legendary
+mythic
+rare
+summon
 uber
+uncommon

@@ -43,7 +43,8 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     public double DMG_MOB_BONUS_PER_MAP_TIER = 0.1;
 
     public double CRAFTED_GEAR_POTENTIAL_MULTI = 0.5;
-    public int PROPHECY_GAIN_PER_MOB = 5;
+    public int PROPHECY_GAIN_PER_MOB = 10;
+    public int PROPHECY_GAIN_PER_MOB_UNCURSED = 5;
 
     public int PERCENT_OF_PHYS_AS_BONUS_OF_EACH_ELEMENT_DMG_FOR_MOBS = 20;
 

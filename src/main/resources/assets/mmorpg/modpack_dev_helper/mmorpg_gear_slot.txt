@@ -1,15 +1,15 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
-shield
-chest
-pants
-crossbow
-tome
-ring
-staff
-necklace
-bow
-sword
-helmet
-totem
 boots
+bow
+chest
+crossbow
+helmet
+necklace
+pants
+ring
+shield
+staff
+sword
+tome
+totem

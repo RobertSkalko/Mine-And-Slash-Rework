@@ -73,7 +73,7 @@ public class PlayerProphecies implements IStatCtx {
     }
 
     public void gainFavor(int num) {
-        this.favor += num * affixesTaken.size();
+        this.favor += num;
     }
 
     public void forceSetCurrency(int num) {
@@ -91,7 +91,12 @@ public class PlayerProphecies implements IStatCtx {
 
     public void onKillMobInMap(Player p, LivingEntity en) {
 
-        this.gainFavor(GameBalanceConfig.get().PROPHECY_GAIN_PER_MOB);
+        int add = GameBalanceConfig.get().PROPHECY_GAIN_PER_MOB_UNCURSED;
+        if (!affixesTaken.isEmpty()) {
+            add = GameBalanceConfig.get().PROPHECY_GAIN_PER_MOB * affixesTaken.size();
+        }
+        add *= Load.Unit(en).getMobRarity().loot_multi;
+        this.gainFavor(add);
     }
 
 
