@@ -35,8 +35,8 @@ public class PlayerConfigData {
 
     public HashMap<String, Boolean> configs = new HashMap<>();
 
-    public boolean isConfigEnabled(String id) {
-        return configs.getOrDefault(id, false);
+    public boolean isConfigEnabled(Config id) {
+        return configs.getOrDefault(id.id, false);
     }
 
 

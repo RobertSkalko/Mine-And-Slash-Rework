@@ -86,3 +86,7 @@ You can even add caps in case you don't want the attribute to give too much of t
 
 v.5.4.1
 - fixed armor behaving the opposite way (mobs were too tanky)
+
+
+v.5.4.2
+- uber boss map not spending itself

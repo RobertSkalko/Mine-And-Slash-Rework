@@ -69,7 +69,7 @@ public class TeamUtils {
         if (p1.distanceTo(p2) > ServerContainer.get().MAX_TEAM_DISTANCE.get()) {
             return false;
         }
-        if (Load.player(p1).config.isConfigEnabled(PlayerConfigData.Config.AUTO_PVE.id) && Load.player(p2).config.isConfigEnabled(PlayerConfigData.Config.CAST_FAIL.id)) {
+        if (Load.player(p1).config.isConfigEnabled(PlayerConfigData.Config.AUTO_PVE) && Load.player(p2).config.isConfigEnabled(PlayerConfigData.Config.AUTO_PVE)) {
             return true;
         }
         if (Load.player(p1).team.isOnSameTeam(p2)) {

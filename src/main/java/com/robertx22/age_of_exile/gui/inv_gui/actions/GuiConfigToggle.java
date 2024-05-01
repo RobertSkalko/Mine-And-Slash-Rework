@@ -43,7 +43,7 @@ public class GuiConfigToggle extends GuiAction {
         t.addAll(TooltipUtils.splitLongText(config.word.locName()));
 
         var text = Component.literal("");
-        if (Load.player(p).config.isConfigEnabled(config.id)) {
+        if (Load.player(p).config.isConfigEnabled(config)) {
             text = Words.ENABLED.locName().withStyle(ChatFormatting.GREEN);
         } else {
             text = Words.DISABLED.locName().withStyle(ChatFormatting.RED);
@@ -56,7 +56,7 @@ public class GuiConfigToggle extends GuiAction {
 
     @Override
     public void doAction(Player p, Object obj) {
-        boolean bo = !Load.player(p).config.isConfigEnabled(config.id);
+        boolean bo = !Load.player(p).config.isConfigEnabled(config);
         Load.player(p).config.configs.put(config.id, bo);
         Load.player(p).playerDataSync.setDirty();
     }

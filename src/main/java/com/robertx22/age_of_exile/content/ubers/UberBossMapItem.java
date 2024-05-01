@@ -41,6 +41,8 @@ public class UberBossMapItem extends AutoItem implements IShapedRecipe {
 
         if (!pLevel.isClientSide) {
 
+            p.getItemInHand(pUsedHand).shrink(1);
+
             var tier = UberBossTier.map.get(uberTier);
 
             MapBlueprint b = new MapBlueprint(LootInfo.ofLevel(tier.boss_lvl));
@@ -48,7 +50,6 @@ public class UberBossMapItem extends AutoItem implements IShapedRecipe {
             b.level.set(tier.boss_lvl);
 
             ItemStack stack = b.createStack();
-
 
             PlayerUtils.giveItem(stack, p);
 
