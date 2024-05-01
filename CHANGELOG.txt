@@ -1,4 +1,5 @@
 v.5.4.0
+Warning! This update will need a few bug fixes probably to become stable!
 
 Starting with this update, I will try to create League-like content for the endgame. 
 This update will start with the Prophecy League!
