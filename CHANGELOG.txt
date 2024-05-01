@@ -82,3 +82,7 @@ The system is simple, you create a datapack that for example:
 
 You can make it give flat amounts that scale per player level or percentages that don't need scaling.
 You can even add caps in case you don't want the attribute to give too much of the stat endgame
+
+
+v.5.4.1
+- fixed armor behaving the opposite way (mobs were too tanky)
