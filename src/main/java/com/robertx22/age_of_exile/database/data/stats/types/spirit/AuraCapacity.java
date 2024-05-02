@@ -43,7 +43,7 @@ public class AuraCapacity extends Stat {
 
     @Override
     public String locNameForLangFile() {
-        return "Aura Capacity";
+        return "Augment Capacity";
     }
 
     private static class SingletonHolder {

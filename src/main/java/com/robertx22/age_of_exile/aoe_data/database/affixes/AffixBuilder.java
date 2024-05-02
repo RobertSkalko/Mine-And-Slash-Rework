@@ -106,6 +106,11 @@ public class AffixBuilder {
         return this;
     }
 
+    public AffixBuilder GearCorrupt() {
+        type = Affix.Type.chaos_stat;
+        return this;
+    }
+
     public AffixBuilder Prefix() {
         type = Affix.Type.prefix;
         return this;

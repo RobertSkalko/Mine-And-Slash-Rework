@@ -27,7 +27,7 @@ public enum Itemtips implements IAutoLocName {
     EMPTY_SOCKET("[Socket]"),
 
     AURA_RESERVATION("Aura Reservation: "),
-    REMAINING_AURA_CAPACITY("Remaining Aura Capacity: "),
+    REMAINING_AURA_CAPACITY("Remaining Augment Capacity: "),
     SUPPORT_GEM_COST("Resource Cost Multiplier: %1$s%%"),
     SUPPORT_GEM_ONLY_ONE("Only One Allowed: "),
     SOUL_EXTRACTOR_TIP("Click on items to extract their soul.\nWorks only on that rarity.\nDeletes the Item in the process."),
@@ -47,6 +47,7 @@ public enum Itemtips implements IAutoLocName {
     Exp("Exp: %1$s%%"),
     Loot("Loot: %1$s%%"),
     PREFIX_STATS("Prefix Stats: "),
+    AFFIX_STATS("Affix Stats: "),
     COR_STATS("Corruption Stats: "),
     UNIQUE_STATS("Unique Stats: "),
     JEWEL_STATS("Jewel Stats: "),

@@ -1,25 +1,32 @@
 package com.robertx22.age_of_exile.mechanics.harvest.currency;
 
-import com.robertx22.age_of_exile.database.data.currency.base.GearCurrency;
 import com.robertx22.age_of_exile.database.data.currency.base.GearOutcome;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
-import com.robertx22.age_of_exile.database.data.league.LeagueMechanics;
 import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
-import com.robertx22.age_of_exile.loot.req.DropRequirement;
+import com.robertx22.age_of_exile.mechanics.harvest.HarvestItems;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.library_of_exile.utils.RandomUtils;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
-import java.util.Arrays;
-import java.util.List;
-
-public class EntangledQuality extends GearCurrency {
+public class EntangledQuality extends BaseHarvestCurrency {
     @Override
-    public List<GearOutcome> getOutcomes() {
-        return Arrays.asList(
+    public Item getSpecialCraftItem() {
+        return Items.DIAMOND;
+    }
+
+    @Override
+    public Item getHarvestCraftItem() {
+        return HarvestItems.GREEN_INGOT.get();
+    }
+
+    @Override
+    public GearOutcome getGoodOutcome() {
+        return
                 new GearOutcome() {
                     @Override
                     public Words getName() {
@@ -42,14 +49,10 @@ public class EntangledQuality extends GearCurrency {
                     public int Weight() {
                         return 1000;
                     }
-                }
-        );
+                };
+
     }
 
-    @Override
-    public DropRequirement getDropReq() {
-        return DropRequirement.Builder.of().setOnlyDropsInLeague(LeagueMechanics.HARVEST.GUID()).build();
-    }
 
     @Override
     public int getPotentialLoss() {
@@ -64,9 +67,10 @@ public class EntangledQuality extends GearCurrency {
         return ExplainedResult.failure(Chats.CANT_GO_ABOVE.locName(21));
     }
 
+
     @Override
     public String locDescForLangFile() {
-        return "Randomly Upgrades Quality of An Item (1-5%), boosting gear potential";
+        return "Either " + "Randomly Upgrades Quality of An Item (1-5%)" + " or Corrupts the Item, making it Unmodifiable.";
     }
 
     @Override

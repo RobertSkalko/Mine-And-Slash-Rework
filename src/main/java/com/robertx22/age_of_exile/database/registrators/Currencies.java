@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.database.data.currency.jewel.JewelCorruptCurre
 import com.robertx22.age_of_exile.database.data.currency.map.MapRarityIncrease;
 import com.robertx22.age_of_exile.database.data.profession.items.ProfDropTierPickerCurrency;
 import com.robertx22.age_of_exile.mechanics.harvest.currency.EntangledAffixUpgrade;
+import com.robertx22.age_of_exile.mechanics.harvest.currency.EntangledPotentialUpgrade;
 import com.robertx22.age_of_exile.mechanics.harvest.currency.EntangledQuality;
 import com.robertx22.age_of_exile.mechanics.harvest.currency.EntangledUniqueReroll;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
@@ -35,6 +36,7 @@ public class Currencies implements ExileRegistryInit {
         ALL.add(new EntangledAffixUpgrade());
         ALL.add(new EntangledQuality());
         ALL.add(new OrbUniqueReroll());
+        ALL.add(new EntangledPotentialUpgrade());
         ALL.add(new EntangledUniqueReroll());
 
         for (SkillItemTier tier : SkillItemTier.values()) {

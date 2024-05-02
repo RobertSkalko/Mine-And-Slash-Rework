@@ -90,3 +90,8 @@ v.5.4.1
 
 v.5.4.2
 - uber boss map not spending itself
+- should fix maps leaving command blocks 
+
+v.5.4.3
+- Harvest was streamlined and simplified. Now mobs drop items, which can be directly crafted into exclusive currencies 
+

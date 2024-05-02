@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.database.data.chaos_stats;
 
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
+import com.robertx22.age_of_exile.database.data.requirements.bases.GearRequestedFor;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -31,7 +32,7 @@ public class ChaosStat implements JsonExileRegistry<ChaosStat>, IAutoGson<ChaosS
     public List<String> for_item_rarities = new ArrayList<>();
 
     public ChaosStat() {
-        
+
     }
 
     public ChaosStat(String id, String name, int weight, int affix_number, Affix.Type affix_type, int bonus_sockets, List<String> for_item_rarities) {
@@ -55,7 +56,7 @@ public class ChaosStat implements JsonExileRegistry<ChaosStat>, IAutoGson<ChaosS
 
         for (int i = 0; i < affix_number; i++) {
 
-            FilterListWrap<Affix> list = ExileDB.Affixes().getFilterWrapped(x -> x.type == this.affix_type && gear.canGetAffix(x));
+            FilterListWrap<Affix> list = ExileDB.Affixes().getFilterWrapped(x -> x.type == this.affix_type && x.meetsRequirements(new GearRequestedFor(gear)));
 
             var affix = list.random();
 
@@ -65,7 +66,6 @@ public class ChaosStat implements JsonExileRegistry<ChaosStat>, IAutoGson<ChaosS
             gear.affixes.cor.add(data);
 
         }
-
 
     }
 

@@ -1,9 +1,7 @@
 package com.robertx22.age_of_exile.database.data.league;
 
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
-import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.LootInfo;
-import com.robertx22.age_of_exile.loot.blueprints.LootChestBlueprint;
 import com.robertx22.age_of_exile.maps.LeagueData;
 import com.robertx22.age_of_exile.maps.MapData;
 import com.robertx22.age_of_exile.maps.MapItemData;
@@ -38,7 +36,7 @@ public class HarvestLeague extends LeagueMechanic {
 
     public int ticksLast = 20 * 60 * 1;
     int maxKills = 200;
-    int maximumBonusLootTimes = 5;
+    int maximumBonusLootTimes = 30;
 
     @Override
     public int getDefaultSpawns() {
@@ -111,16 +109,11 @@ public class HarvestLeague extends LeagueMechanic {
 
     private List<ItemStack> generateMobLoot(LootInfo info) {
 
-        LootChestBlueprint b = new LootChestBlueprint(info);
-        b.type.set(ExileDB.LootChests().getFilterWrapped(x -> x.getDropReq().isFromLeague(LeagueMechanics.HARVEST)).random());
+        Item seeditem = RandomUtils.randomFromList(Arrays.asList(HarvestItems.BLUE_INGOT, HarvestItems.GREEN_INGOT, HarvestItems.PURPLE_INGOT)).get();
 
-        ItemStack stack = b.createStack();
+        ItemStack seeds = new ItemStack(seeditem, RandomUtils.RandomRange(1, 5));
 
-        Item seeditem = RandomUtils.randomFromList(Arrays.asList(HarvestItems.BLUE_PLANT_SEED, HarvestItems.GREEN_PLANT_SEED, HarvestItems.PURPLE_PLANT_SEED)).get();
-
-        ItemStack seeds = new ItemStack(seeditem, 4);
-
-        return Arrays.asList(stack, seeds);
+        return Arrays.asList(seeds);
     }
 
     @Override

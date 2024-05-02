@@ -147,7 +147,9 @@ public class GearTooltipUtils {
 
 
         if (gear.isCorrupted()) {
-            tip.add(Component.literal(ChatFormatting.RED + "").append(Words.Corrupted.locName()).withStyle(ChatFormatting.RED));
+            if (info.useInDepthStats()) {
+                tip.add(Component.literal(ChatFormatting.RED + "").append(Words.Corrupted.locName()).withStyle(ChatFormatting.RED));
+            }
         } else {
             int potential = (int) gear.getPotentialNumber();
             tip.add(Itemtips.POTENTIAL.locName(potential).withStyle(ChatFormatting.GRAY));

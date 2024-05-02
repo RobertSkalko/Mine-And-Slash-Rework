@@ -78,7 +78,7 @@ public class ChaosStatCurrency extends GearCurrency {
     @Override
     public ExplainedResult canBeModified(GearItemData data) {
         if (data.isCorrupted()) {
-            return ExplainedResult.failure(Chats.THIS_ITEM_CANT_BE_USED_MORE_THAN_X_TIMES.locName(5));
+            return ExplainedResult.failure(Chats.ITEM_CANT_CORRUPT_TWICE.locName());
         }
         return ExplainedResult.success();
     }

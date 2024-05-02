@@ -48,7 +48,7 @@ public class CorruptJewelAffixes {
     static AffixBuilder of(Stat stat, int v1, int v2) {
 
         return AffixBuilder.Normal(PREFIX + stat.GUID())
-                .stat(stat.mod(1, 1))
+                .stat(stat.mod(v1, v2))
                 .JewelCorruption()
                 .Weight(1000);
     }

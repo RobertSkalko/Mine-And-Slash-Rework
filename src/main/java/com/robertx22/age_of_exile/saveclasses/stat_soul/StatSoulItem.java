@@ -134,13 +134,16 @@ public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {
-
-        StatSoulData data = StackSaving.STAT_SOULS.loadFrom(stack);
-
-        for (Component c : data.getTooltip(stack, true)) {
-            tooltip.add(c);
+        try {
+            StatSoulData data = StackSaving.STAT_SOULS.loadFrom(stack);
+            if (data != null) {
+                for (Component c : data.getTooltip(stack, true)) {
+                    tooltip.add(c);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
 
     }
 

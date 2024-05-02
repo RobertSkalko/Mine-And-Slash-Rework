@@ -16,6 +16,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Block;
 
+import java.util.Arrays;
+
 public class UberMechanic extends LeagueMechanic {
 
     @Override
@@ -31,13 +33,10 @@ public class UberMechanic extends LeagueMechanic {
 
             @Override
             public LeaguePiecesList getPieces(MapItemData map) {
+                if (!map.isUber()) {
+                    return new LeaguePiecesList(Arrays.asList());
+                }
                 return map.getUber().structure;
-               /*
-                return new LeaguePiecesList(Arrays.asList(
-                        new LeagueStructurePieces(2, "harvest/circle") // todo need custom
-                ));
-
-                */
             }
 
             @Override

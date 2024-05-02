@@ -8,7 +8,6 @@ import com.robertx22.age_of_exile.database.data.currency.base.IShapelessRecipe;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.profession.all.ProfessionMatItems;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import com.robertx22.age_of_exile.mechanics.harvest.HarvestItems;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
@@ -77,6 +76,28 @@ public class RecipeGenerator {
     }
 
     private void generate(Consumer<FinishedRecipe> consumer) {
+
+        ExileDB.CurrencyItems().getList().forEach(item -> {
+            if (item instanceof IShapedRecipe) {
+                IShapedRecipe ir = (IShapedRecipe) item;
+                ShapedRecipeBuilder rec = ir.getRecipe();
+                if (rec != null) {
+                    rec.save(consumer);
+                }
+            }
+            if (item instanceof IShapelessRecipe) {
+                IShapelessRecipe sr = (IShapelessRecipe) item;
+                ShapelessRecipeBuilder srec = sr.getRecipe();
+                if (srec != null) {
+                    try {
+                        srec.save(consumer);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
         for (Item item : ForgeRegistries.ITEMS) {
             if (item instanceof IShapedRecipe) {
                 IShapedRecipe ir = (IShapedRecipe) item;
@@ -112,17 +133,6 @@ public class RecipeGenerator {
 
     static void harvest(Consumer<FinishedRecipe> con) {
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, HarvestItems.BLUE_KEY.get())
-                .unlockedBy("player_level", EnchantedItemTrigger.TriggerInstance.enchantedItem())
-                .requires(HarvestItems.BLUE_INGOT.get(), 9).save(con);
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, HarvestItems.GREEN_KEY.get())
-                .unlockedBy("player_level", EnchantedItemTrigger.TriggerInstance.enchantedItem())
-                .requires(HarvestItems.GREEN_INGOT.get(), 9).save(con);
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, HarvestItems.PURPLE_KEY.get())
-                .unlockedBy("player_level", EnchantedItemTrigger.TriggerInstance.enchantedItem())
-                .requires(HarvestItems.PURPLE_INGOT.get(), 9).save(con);
 
     }
 

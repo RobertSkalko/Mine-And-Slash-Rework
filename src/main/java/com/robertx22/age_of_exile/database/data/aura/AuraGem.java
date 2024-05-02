@@ -36,7 +36,7 @@ public class AuraGem implements JsonExileRegistry<SupportGem>, ISkillGem, IAutoG
 
     public AuraGem(AuraGems.AuraInfo info, PlayStyle style, float reservation, List<StatMod> stats) {
         this.id = info.id;
-        this.name = info.name + " Aura";
+        this.name = info.name + " Augment";
         this.style = style;
         this.reservation = reservation;
         this.stats = stats;

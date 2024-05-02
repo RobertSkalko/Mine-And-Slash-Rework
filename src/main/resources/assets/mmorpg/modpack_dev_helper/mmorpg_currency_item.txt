@@ -4,6 +4,7 @@ affix_common_reroll
 affix_tier_up_down
 chaos_orb
 entangled_affix_upgrade
+entangled_potential
 entangled_quality
 entangled_unique_reroll
 jewel_corrupt

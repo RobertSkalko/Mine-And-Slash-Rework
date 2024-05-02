@@ -4,9 +4,6 @@ aura
 currency
 gear
 gem
-harvest_blue_chest
-harvest_green_chest
-harvest_purple_chest
 map
 rune
 support_gem

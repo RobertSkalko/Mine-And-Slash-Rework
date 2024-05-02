@@ -24,7 +24,7 @@ public class AffixRerollCurrency extends GearCurrency {
                 new GearOutcome() {
                     @Override
                     public Words getName() {
-                        return Words.UpgradeAffix;
+                        return Words.RerollsAffix;
                     }
 
                     @Override

@@ -64,7 +64,7 @@ public enum Words implements IAutoLocName {
     JEWERLY("On Jewelry: "),
     PROFESSIONS("Professions"),
     SUPPGEM("Support Gem"),
-    AURA("Aura"),
+    AURA("Augment"),
     MAJOR("Major"),
     WIKI("Library"),
     LESSER("Lesser"),
@@ -76,9 +76,11 @@ public enum Words implements IAutoLocName {
     VERY_HARD("Very Hard"),
 
     AddSocket("Adds a socket"),
+    AddPotential("Add Potential"),
     Nothing("Nothing"),
 
     UpgradeAffix("Upgrades an affix"),
+    RerollsAffix("Rerolls an Affix"),
     UpgradeEnchant("Upgrades or Rerolls the Enchant"),
     UpgradeQuality("Upgrade Quality"),
     CHAOS_STAT_SUCCESS("Upgrades the Item randomly."),
@@ -90,6 +92,7 @@ public enum Words implements IAutoLocName {
     Soul("Soul"),
     DungeonKey("Dungeon Key"),
     Corrupted("Corrupted"),
+    CorruptsItemHarvest("Turns the Item Corrupted (no benefits)"),
     AscClasses("Classes"),
     Salvaging("Salvaging"),
     SkillGem("Skills"),

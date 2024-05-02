@@ -6,17 +6,18 @@ import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.mechanics.harvest.HarvestItems;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
-import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
-public class EntangledUniqueReroll extends BaseHarvestCurrency {
+public class EntangledPotentialUpgrade extends BaseHarvestCurrency {
+
+    static int potentialAdd = 25;
 
     @Override
     public Item getSpecialCraftItem() {
-        return Items.DIAMOND_BLOCK;
+        return Items.GOLD_INGOT;
     }
 
     @Override
@@ -30,7 +31,7 @@ public class EntangledUniqueReroll extends BaseHarvestCurrency {
         return new GearOutcome() {
             @Override
             public Words getName() {
-                return Words.UpgradesUniqueStats;
+                return Words.AddPotential;
             }
 
             @Override
@@ -40,18 +41,17 @@ public class EntangledUniqueReroll extends BaseHarvestCurrency {
 
             @Override
             public ItemStack modify(LocReqContext ctx, GearItemData gear, ItemStack stack) {
-                gear.uniqueStats.increaseAllBy(gear, 5);
+                gear.setPotential(gear.getPotentialNumber() + potentialAdd);
                 StackSaving.GEARS.saveTo(stack, gear);
                 return stack;
             }
 
             @Override
             public int Weight() {
-                return 1000;
+                return 2000;
             }
         };
     }
-
 
     @Override
     public int getPotentialLoss() {
@@ -60,29 +60,26 @@ public class EntangledUniqueReroll extends BaseHarvestCurrency {
 
     @Override
     public ExplainedResult canBeModified(GearItemData data) {
-        if (data.isUnique() && data.uniqueStats != null) {
-            return ExplainedResult.success();
-        }
-        return ExplainedResult.failure(Chats.BE_UNIQUE.locName());
+        return ExplainedResult.success();
     }
 
     @Override
     public String locDescForLangFile() {
-        return "Either Upgrades unique stats by +5%" + " or Corrupts the Item, making it Unmodifiable.";
+        return "Either Adds " + potentialAdd + " Potential to the item or Corrupts the Item, making it Unmodifiable.";
     }
 
     @Override
     public String locNameForLangFile() {
-        return "Entangled Orb of Imperfection";
+        return "Entangled Orb of Potential";
     }
 
     @Override
     public String GUID() {
-        return "entangled_unique_reroll";
+        return "entangled_potential";
     }
 
     @Override
     public int Weight() {
-        return Weights.UBER;
+        return 250;
     }
 }

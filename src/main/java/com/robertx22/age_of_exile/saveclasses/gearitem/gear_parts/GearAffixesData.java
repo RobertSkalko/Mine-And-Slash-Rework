@@ -59,13 +59,6 @@ public class GearAffixesData implements IGearPartTooltip {
     public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {
         List<Component> list = new ArrayList<Component>();
 
-        var color = ChatFormatting.GREEN;
-        if (!getPreStatsWithCtx(gear, info).isEmpty()) {
-            TooltipUtils.addEmpty(list);
-            list.add(Itemtips.PREFIX_STATS.locName().withStyle(color));
-            getPreStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
-            TooltipUtils.addEmpty(list);
-        }
 
         if (!getCorStatsWithCtx(gear, info).isEmpty()) {
             TooltipUtils.addEmpty(list);
@@ -74,12 +67,42 @@ public class GearAffixesData implements IGearPartTooltip {
             TooltipUtils.addEmpty(list);
         }
 
+
+        var color = ChatFormatting.GREEN;
+        if (!getPreStatsWithCtx(gear, info).isEmpty()) {
+            TooltipUtils.addEmpty(list);
+            list.add(Itemtips.PREFIX_STATS.locName().withStyle(color));
+            getPreStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
+            TooltipUtils.addEmpty(list);
+        }
+
+
         if (!getSufStatsWithCtx(gear, info).isEmpty()) {
             TooltipUtils.addEmpty(list);
             list.add(Itemtips.SUFFIX_STATS.locName().withStyle(color));
             getSufStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
             TooltipUtils.addEmpty(list);
         }
+
+
+        /*
+
+        if (!pre.isEmpty() || !suf.isEmpty()) {
+            TooltipUtils.addEmpty(list);
+            var color = ChatFormatting.GREEN;
+            list.add(Itemtips.AFFIX_STATS.locName().withStyle(color));
+
+            if (!getPreStatsWithCtx(gear, info).isEmpty()) {
+                getPreStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
+
+            }
+            if (!getSufStatsWithCtx(gear, info).isEmpty()) {
+                getSufStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
+            }
+            TooltipUtils.addEmpty(list);
+        }
+
+         */
 
         return list;
     }
@@ -179,6 +202,15 @@ public class GearAffixesData implements IGearPartTooltip {
         list.addAll(suf);
         list.addAll(cor);
 
+        return list;
+    }
+
+    public List<AffixData> getPrefixesAndSuffixes() {
+        List<AffixData> list = new ArrayList<>();
+
+        list.addAll(pre);
+        list.addAll(suf);
+    
         return list;
     }
 

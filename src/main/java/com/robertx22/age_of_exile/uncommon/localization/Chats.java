@@ -11,6 +11,7 @@ public enum Chats implements IAutoLocName {
     PROPHECY_MAP_DEATHCURRENCY("You lost %1$s Prophecy Coins"),
     TP_TO_DUNGEON_MAPNAME("Teleported to the [%1$s] Dungeon"),
     ITEM_CANT_CORRUPT_TWICE("This item is already corrupted."),
+    CORRUPT_CANT_BE_MODIFIED("Corrupted Items can't be modified. They can only be sockeded with Gems etc."),
     ALT_TO_SHOW_OTHER_SPELL("[Alt] to show the other Spell"),
     MUST_BE_IN_MAP_TO_ACCEPT_PROPHECY("You must be inside the same Map Dungeon to accept Prophecy Rewards"),
     NOT_ENOUGH_FAVOR_TO_BUY_PROPHECY("Not enough Currency to buy the Prophecy. You can gain more Currency by killing dungeon mobs while under Prophecy Debuffs."),
@@ -36,7 +37,7 @@ public enum Chats implements IAutoLocName {
     CHARACTER_LOAD_INFO("CLICK to Load this Character\n\nCharacter Feature saves:\n- Your level and exp\n- Your spells, stats, talents, hotbar setup\n\nIt does not save your gear, gems jewels etc.\n\nEach Character starts from Level 1"),
     NO_DUPLICATE_AURA("You can't equip duplicate aura gems."),
     YOU_LACK_JEWEL_SLOTS("You lack jewel slots! You gain these typically from the Talent tree. You can use the search bar in the Talents screen to find them."),
-    LACK_AURA_CAPACITY("You lack the aura capacity to equip all these auras."),
+    LACK_AURA_CAPACITY("You lack the Augment capacity to equip all these Augments."),
 
     CANT_EQUIP_THAT_MANY_SUPPORTS("You can't equip that many Support Gems! You can increase the number of slots by leveling the skill."),
     CANT_USE_MULTIPLE_SAME_SUPPORTS("You can't use Multiples of those Support Gems."),

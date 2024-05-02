@@ -51,8 +51,12 @@ public class CraftedSoulItem extends AutoItem implements ICreativeTabTiered, IRa
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> list, TooltipFlag pIsAdvanced) {
-        for (Component c : getSoul(pStack).getTooltip(pStack, false)) {
-            list.add(c);
+        var soul = getSoul(pStack);
+
+        if (soul != null) {
+            for (Component c : soul.getTooltip(pStack, false)) {
+                list.add(c);
+            }
         }
     }
 

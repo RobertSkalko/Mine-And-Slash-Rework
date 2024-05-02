@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.mmorpg.registers.client;
 
-import com.robertx22.age_of_exile.mechanics.harvest.HarvestBlocks;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashBlocks;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -20,10 +19,7 @@ public class RenderLayersRegister {
         ItemBlockRenderTypes.setRenderLayer(SlashBlocks.THORN_BUSH.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(SlashBlocks.FROST_FLOWER.get(), RenderType.cutout());
 
-        ItemBlockRenderTypes.setRenderLayer(HarvestBlocks.BLUE.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(HarvestBlocks.GREEN.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(HarvestBlocks.PURPLE.get(), RenderType.cutout());
-
+     
         //  RenderTypeLookup.setRenderLayer(SlashBlocks.RUNEWORD.get(), RenderType.cutout());
 
     }

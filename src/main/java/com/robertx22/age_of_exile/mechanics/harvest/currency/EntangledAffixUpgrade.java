@@ -1,83 +1,62 @@
 package com.robertx22.age_of_exile.mechanics.harvest.currency;
 
-import com.robertx22.age_of_exile.database.data.currency.base.GearCurrency;
 import com.robertx22.age_of_exile.database.data.currency.base.GearOutcome;
 import com.robertx22.age_of_exile.database.data.currency.loc_reqs.LocReqContext;
-import com.robertx22.age_of_exile.database.data.league.LeagueMechanics;
 import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
-import com.robertx22.age_of_exile.loot.req.DropRequirement;
+import com.robertx22.age_of_exile.mechanics.harvest.HarvestItems;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.AffixData;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.GearAffixesData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.library_of_exile.utils.RandomUtils;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
-import java.util.Arrays;
-import java.util.List;
+// todo rework all harvest items simply into: upgrade OR destroy item
+// rework them to be crafted with seeds
 
-public class EntangledAffixUpgrade extends GearCurrency {
+public class EntangledAffixUpgrade extends BaseHarvestCurrency {
+
+
     @Override
-    public List<GearOutcome> getOutcomes() {
-
-        return Arrays.asList(
-                new GearOutcome() {
-                    @Override
-                    public Words getName() {
-                        return Words.UpgradeAffix;
-                    }
-
-                    @Override
-                    public OutcomeType getOutcomeType() {
-                        return OutcomeType.GOOD;
-                    }
-
-                    @Override
-                    public ItemStack modify(LocReqContext ctx, GearItemData gear, ItemStack stack) {
-                        AffixData data = RandomUtils.randomFromList(gear.affixes.getAllAffixesAndSockets());
-                        data.setMaxRarity();
-                        data.RerollNumbers(gear);
-                        StackSaving.GEARS.saveTo(stack, gear);
-                        return stack;
-                    }
-
-                    @Override
-                    public int Weight() {
-                        return 500;
-                    }
-                },
-                new GearOutcome() {
-                    @Override
-                    public Words getName() {
-                        return Words.DeletesAllAffixes;
-                    }
-
-                    @Override
-                    public OutcomeType getOutcomeType() {
-                        return OutcomeType.BAD;
-                    }
-
-                    @Override
-                    public ItemStack modify(LocReqContext ctx, GearItemData gear, ItemStack stack) {
-                        gear.affixes = new GearAffixesData();
-                        StackSaving.GEARS.saveTo(stack, gear);
-                        return stack;
-                    }
-
-                    @Override
-                    public int Weight() {
-                        return 1000;
-                    }
-                }
-
-        );
+    public Item getSpecialCraftItem() {
+        return Items.IRON_INGOT;
     }
 
     @Override
-    public DropRequirement getDropReq() {
-        return DropRequirement.Builder.of().setOnlyDropsInLeague(LeagueMechanics.HARVEST.GUID()).build();
+    public Item getHarvestCraftItem() {
+        return HarvestItems.BLUE_INGOT.get();
+    }
+
+    @Override
+    public GearOutcome getGoodOutcome() {
+        return new GearOutcome() {
+            @Override
+            public Words getName() {
+                return Words.UpgradeAffix;
+            }
+
+            @Override
+            public OutcomeType getOutcomeType() {
+                return OutcomeType.GOOD;
+            }
+
+            @Override
+            public ItemStack modify(LocReqContext ctx, GearItemData gear, ItemStack stack) {
+                AffixData data = RandomUtils.randomFromList(gear.affixes.getPrefixesAndSuffixes());
+                data.upgradeRarity();
+                data.RerollNumbers(gear);
+                StackSaving.GEARS.saveTo(stack, gear);
+                return stack;
+            }
+
+            @Override
+            public int Weight() {
+                return 1000;
+            }
+        };
     }
 
     @Override
@@ -95,12 +74,12 @@ public class EntangledAffixUpgrade extends GearCurrency {
 
     @Override
     public String locDescForLangFile() {
-        return "Either Upgrades a random affix to maximum tier, or removes all affixes on an item.";
+        return "Either Upgrades a random affix, or Corrupts the Item, making it Unmodifiable.";
     }
 
     @Override
     public String locNameForLangFile() {
-        return "Entangled Orb of Imbalance";
+        return "Entangled Orb of Upgrade";
     }
 
     @Override

@@ -58,6 +58,10 @@ public abstract class GearCurrency extends Currency {
             return ExplainedResult.failure(Chats.NOT_GEAR.locName());
         }
 
+        if (data.isCorrupted() && this.spendsGearPotential()) {
+            return ExplainedResult.failure(Chats.CORRUPT_CANT_BE_MODIFIED.locName());
+        }
+
         if (data.getPotentialNumber() < 1) {
             if (this.spendsGearPotential()) {
                 return ExplainedResult.failure(Chats.GEAR_NO_POTENTIAL.locName());

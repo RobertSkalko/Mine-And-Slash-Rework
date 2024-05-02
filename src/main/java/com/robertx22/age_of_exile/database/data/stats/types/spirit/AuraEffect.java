@@ -56,7 +56,7 @@ public class AuraEffect extends Stat {
 
     @Override
     public String locNameForLangFile() {
-        return "Aura Effect";
+        return "Augment Effect";
     }
 
     private static class SingletonHolder {

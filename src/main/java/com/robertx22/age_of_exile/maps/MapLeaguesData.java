@@ -63,7 +63,7 @@ public class MapLeaguesData {
     public void setupOnMapStart(MapItemData map, Player p) {
 
         for (LeagueMechanic m : ExileDB.LeagueMechanics().getList()) {
-            if (RandomUtils.roll(m.getBaseSpawnChance())) {
+            if (m.getBaseSpawnChance() > 0 && RandomUtils.roll(m.getBaseSpawnChance())) {
                 var data = new LeagueData();
                 m.onMapStartSetupBase(map, data);
                 m.onMapStartSetup(data);
