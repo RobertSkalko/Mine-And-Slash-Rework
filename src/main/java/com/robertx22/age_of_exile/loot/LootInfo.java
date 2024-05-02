@@ -242,15 +242,14 @@ public class LootInfo {
 
         }
 
-/*
-        float additiveMod = 1;
+
+        //float additiveMod = 1;
 
         for (Float m : multis) {
             multiplicativeMod *= m;
-            additiveMod += (m - 1F);
+            //additiveMod += (m - 1F);
         }
 
- */
 
         float chance = gen.baseDropChance();
 

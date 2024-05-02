@@ -56,6 +56,18 @@ public class ProfessionBlockEntity extends BlockEntity {
         return null;
     }
 
+
+    public void onTickWhenPlayerWatching(Player p) {
+        var recipe = this.getCurrentRecipe();
+
+        if (recipe != null) {
+            this.show.setItem(0, recipe.toResultStackForJei());
+        } else {
+            this.show.setItem(0, ItemStack.EMPTY);
+
+        }
+    }
+
     public void tick(Level level) {
         try {
             if (craftingState == Crafting_State.ACTIVE) {

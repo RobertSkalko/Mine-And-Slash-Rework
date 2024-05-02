@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.vanilla_mc.packets;
 
 import com.robertx22.age_of_exile.database.data.profession.Crafting_State;
-import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.database.data.profession.ProfessionBlockEntity;
 import com.robertx22.age_of_exile.database.data.profession.ProfessionRecipe;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -19,6 +18,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 public class LockTogglePacket extends MyPacket<LockTogglePacket> {
 
     public BlockPos block_pos;
+
     public LockTogglePacket() {
     }
 
@@ -46,23 +46,23 @@ public class LockTogglePacket extends MyPacket<LockTogglePacket> {
         BlockEntity be = exilePacketContext.getPlayer().level().getBlockEntity(this.block_pos);
         if (be instanceof ProfessionBlockEntity) {
             ProfessionBlockEntity pbe = (ProfessionBlockEntity) be;
-            if(pbe.craftingState == Crafting_State.ACTIVE && pbe.recipe_locked){
-                if((pbe.ownerUUID != null && pbe.ownerUUID.compareTo(exilePacketContext.getPlayer().getUUID()) == 0) || pbe.ownerUUID == null)
+            if (pbe.craftingState == Crafting_State.ACTIVE && pbe.recipe_locked) {
+                if ((pbe.ownerUUID != null && pbe.ownerUUID.compareTo(exilePacketContext.getPlayer().getUUID()) == 0) || pbe.ownerUUID == null)
                     exilePacketContext.getPlayer().sendSystemMessage(Component.literal("This Station is currently claimed by another player").withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
-            }else if(pbe.craftingState == Crafting_State.IDLE && pbe.recipe_locked){
+            } else if (pbe.craftingState == Crafting_State.IDLE && pbe.recipe_locked) {
                 exilePacketContext.getPlayer().sendSystemMessage(Component.literal("Stop auto crafting before unlocking the recipe").withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
-            }else if(pbe.craftingState == Crafting_State.STOPPED && pbe.recipe_locked){
+            } else if (pbe.craftingState == Crafting_State.STOPPED && pbe.recipe_locked) {
                 pbe.recipe_locked = false;
                 pbe.last_recipe = null;
-                pbe.show.clearContent();
-                if(pbe.ownerUUID != null && pbe.ownerUUID.compareTo(exilePacketContext.getPlayer().getUUID()) != 0){
+                //pbe.show.clearContent();
+                if (pbe.ownerUUID != null && pbe.ownerUUID.compareTo(exilePacketContext.getPlayer().getUUID()) != 0) {
                     pbe.ownerUUID = null;
                 }
-            }else if(pbe.craftingState == Crafting_State.ACTIVE && !pbe.recipe_locked){
+            } else if (pbe.craftingState == Crafting_State.ACTIVE && !pbe.recipe_locked) {
                 exilePacketContext.getPlayer().sendSystemMessage(Component.literal("Stop auto crafting before locking the recipe").withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
-            }else if(pbe.craftingState == Crafting_State.STOPPED && !pbe.recipe_locked){
+            } else if (pbe.craftingState == Crafting_State.STOPPED && !pbe.recipe_locked) {
                 ProfessionRecipe recipe = pbe.getCurrentRecipe();
-                if(recipe == null){
+                if (recipe == null) {
                     exilePacketContext.getPlayer().sendSystemMessage(Chats.PROF_RECIPE_NOT_FOUND.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
                     return;
                 }
@@ -76,8 +76,8 @@ public class LockTogglePacket extends MyPacket<LockTogglePacket> {
                 pbe.last_recipe = recipe;
                 var showstack = recipe.toResultStackForJei();
                 showstack.setCount(1);
-                pbe.show.setItem(0, showstack);
-            }else{
+                //pbe.show.setItem(0, showstack);
+            } else {
                 exilePacketContext.getPlayer().sendSystemMessage(Component.literal("Unhandled Case(Report The Following):  " + pbe.recipe_locked + " + " + pbe.craftingState.name()).withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
             }
             pbe.setChanged();

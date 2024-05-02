@@ -3,6 +3,9 @@ package com.robertx22.age_of_exile.event_hooks.ontick;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.capability.player.PlayerData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
+import com.robertx22.age_of_exile.database.data.profession.StationPacket;
+import com.robertx22.age_of_exile.database.data.profession.StationSyncData;
+import com.robertx22.age_of_exile.database.data.profession.screen.CraftingStationMenu;
 import com.robertx22.age_of_exile.database.data.stat_compat.StatCompat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.maps.ProcessChunkBlocks;
@@ -14,6 +17,7 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.TenSecondPlayerTickEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
+import com.robertx22.library_of_exile.main.Packets;
 import net.minecraft.ChatFormatting;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -89,7 +93,7 @@ public class OnServerTick {
                 TenSecondPlayerTickEvent event = new TenSecondPlayerTickEvent(player, player);
                 event.Activate();
             }
-            
+
             if (age % (20 * 3) == 0) {
                 unitdata.setEquipsChanged();
                 playerData.playerDataSync.setDirty();
@@ -110,6 +114,13 @@ public class OnServerTick {
 
             if (true || age % (20 * 30) == 0) {
                 //     SummonPetAction.despawnIfExceededMaximumSummons(player, (int) unitdata.getUnit().getStatInCalculation(Stats.MAX_SUMMON_CAPACITY.get()).getValue());
+            }
+
+            if (player.containerMenu instanceof CraftingStationMenu men) {
+                if (player.tickCount % 5 == 0) {
+                    men.professionBlockEntity.onTickWhenPlayerWatching(player);
+                    Packets.sendToClient(player, new StationPacket(new StationSyncData(men.professionBlockEntity)));
+                }
             }
 
 

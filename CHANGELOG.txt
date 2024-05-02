@@ -94,4 +94,7 @@ v.5.4.2
 
 v.5.4.3
 - Harvest was streamlined and simplified. Now mobs drop items, which can be directly crafted into exclusive currencies 
+- fixed loot being way lower than intended (didnt multiply once..)
 
+v.5.4.4
+- should fix profession stations
