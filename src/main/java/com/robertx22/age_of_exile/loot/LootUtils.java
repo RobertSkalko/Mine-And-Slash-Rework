@@ -34,15 +34,24 @@ public class LootUtils {
 
     public static float getMobHealthBasedLootMulti(EntityData mob, LivingEntity entity) {
 
-        
+
         float multi = 1;
 
         float hp = EntityUtils.getVanillaMaxHealth(entity);
 
         multi += (1 + hp / 40F) - 1;
 
-        if (entity instanceof Slime) {
-            multi *= 0.05F;
+        if (entity instanceof Slime slime) {
+
+            if (ServerContainer.get().MIN_SLIME_SIZE_FOR_LOOT.get() > slime.getSize()) {
+                multi = 0;
+            } else {
+                if (slime.getSize() < 5) {
+                    multi *= 0.05F;
+                } else {
+                    multi *= 0.1F;
+                }
+            }
         }
 
         return multi;

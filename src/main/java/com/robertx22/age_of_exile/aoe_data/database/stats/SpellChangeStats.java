@@ -50,7 +50,7 @@ public class SpellChangeStats {
     public static DataPackStatAccessor<EmptyAccessor> MANA_COST = DatapackStatBuilder
             .ofSingle("mana_cost", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
-            .setPriority(StatPriority.Spell.FIRST)
+            .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)
             .setSide(EffectSides.Source)
             .addEffect(StatEffects.INCREASE_MANA_COST)
             .setLocName(x -> "Mana Cost")
@@ -259,7 +259,7 @@ public class SpellChangeStats {
             .worksWithEvent(GenerateThreatEvent.ID)
             .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Threat Generated")
             .setLocDesc(x -> "Modifies amount of threat you generate. Mobs attack targets with highest threat.")
             .modifyAfterDone(x -> {
@@ -273,7 +273,7 @@ public class SpellChangeStats {
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_THREAT_GEN_TYPE.get(ThreatGenType.take_dmg))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> Stat.format("You generate " + Stat.VAL1 + "% more threat when taking damage."))
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {

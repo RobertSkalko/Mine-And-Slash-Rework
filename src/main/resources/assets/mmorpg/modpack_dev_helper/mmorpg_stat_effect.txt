@@ -2,14 +2,16 @@ These are all default registry entries of this type.
 This registry is modify-able through datapacks.
 add_stat_data_to_num
 add_total_summons
-additive_damage_number_add_just_stat_number
+additive_damage_number_add_stat_data
 apply_cd_as_cast_time
 cancel_event
-crit_damage_number_add_just_stat_number
+crit_damage_number_add_stat_data
 decrease_cast_ticks_num
 decrease_cd_ticks_num
-double_damage_number_add_just_stat_number
+double_damage_number_add_stat_data
 double_dmg
+flat_damage_number_add_stat_data
+flat_damage_number_add_stat_percent
 give_agony_to_source
 give_agony_to_target
 give_blind_to_target

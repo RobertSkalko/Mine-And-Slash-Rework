@@ -48,7 +48,7 @@ public class ResourcesData {
     public void onTickBlock(Player player, int ticks) {
         if (player.isBlocking()) {
             float cost = Energy.getInstance().scale(ModType.FLAT, ServerContainer.get().BLOCK_COST.get().floatValue(), Load.Unit(player).getLevel());
-            SpendResourceEvent event = new SpendResourceEvent(player, ResourceType.energy, cost * ticks);
+            SpendResourceEvent event = new SpendResourceEvent(player, null, ResourceType.energy, cost * ticks);
             event.calculateEffects();
             event.Activate();
             this.cap(player, ResourceType.energy);

@@ -67,7 +67,7 @@ public class EffectStats {
             .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.EFFECT_HAS_TAG.get(x))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> x.locNameForLangFile() + " Effect Strength")
             .setLocDesc(x -> "Increases the stat strength of effects you give")
             .modifyAfterDone(x -> {
@@ -83,7 +83,7 @@ public class EffectStats {
             .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Target)
             .addCondition(x -> StatConditions.EFFECT_HAS_TAG.get(x))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> Stat.VAL1 + "% to effectiveness of " + x.locNameForLangFile() + " buffs on you")
             .setLocDesc(x -> "Increases the stat strength of effects you receive")
             .modifyAfterDone(x -> {

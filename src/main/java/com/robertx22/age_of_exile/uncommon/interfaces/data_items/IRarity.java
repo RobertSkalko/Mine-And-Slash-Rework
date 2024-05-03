@@ -8,7 +8,7 @@ import java.util.List;
 public interface IRarity {
 
 
-    public static int TOTAL_GEAR_RARITIES = 6;
+    // public static int TOTAL_GEAR_RARITIES = 6;
 
     public String getRarityId();
 

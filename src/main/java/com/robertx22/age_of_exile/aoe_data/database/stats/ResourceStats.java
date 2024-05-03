@@ -108,7 +108,7 @@ public class ResourceStats {
             .addCondition(StatConditions.IS_TARGET_LOW)
             .addCondition(StatConditions.IS_RESOURCE.get(ResourceType.health))
             .addCondition(StatConditions.IS_RESTORE_TYPE.get(RestoreType.heal))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Healing when Low")
             .setLocDesc(x -> "Boosts healing done to low hp/magic shield targets. If magic shield is higher, it checks that, otherwise it checks HP.")
             .modifyAfterDone(x -> {
@@ -126,7 +126,7 @@ public class ResourceStats {
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_RESTORE_TYPE.get(RestoreType.regen))
             .addCondition(StatConditions.IS_NOT_IN_COMBAT)
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Out of Combat Regen")
             .setLocDesc(x -> "Increases your out of combat regeneration")
             .modifyAfterDone(x -> {
@@ -145,7 +145,7 @@ public class ResourceStats {
             .addCondition(StatConditions.IS_SPELL)
             .addCondition(StatConditions.IS_RESOURCE.get(ResourceType.health))
             .addCondition(StatConditions.IS_RESTORE_TYPE.get(RestoreType.heal))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Heal Strength")
             .setLocDesc(x -> "Increases spell related heals.")
             .modifyAfterDone(x -> {
@@ -162,7 +162,7 @@ public class ResourceStats {
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.totem))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Your Totem restoration effects are " + Stat.VAL1 + "% stronger.")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
@@ -182,7 +182,7 @@ public class ResourceStats {
             .addCondition(StatConditions.IS_SPELL)
             .addCondition(StatConditions.IS_RESOURCE.get(ResourceType.health))
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.rejuvenate))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Rejuvenation Healing")
             .setLocDesc(x -> "Increases Rejuvenation related heals on you.")
             .modifyAfterDone(x -> {
@@ -201,7 +201,7 @@ public class ResourceStats {
             .addCondition(StatConditions.IS_SPELL)
             .addCondition(StatConditions.IS_RESOURCE.get(ResourceType.health))
             .addCondition(StatConditions.IS_RESTORE_TYPE.get(RestoreType.heal))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Healing Received")
             .setLocDesc(x -> "Increases spell related heals on you.")
             .modifyAfterDone(x -> {
@@ -308,7 +308,7 @@ public class ResourceStats {
             .setPriority(StatPriority.Damage.FINAL_DAMAGE)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_RESTORE_TYPE.get(RestoreType.leech))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Leech Effect")
             .setLocDesc(x -> "Affects all resource leech stats like: onhit, leech dmg, on kill restore etc")
             .modifyAfterDone(x -> {

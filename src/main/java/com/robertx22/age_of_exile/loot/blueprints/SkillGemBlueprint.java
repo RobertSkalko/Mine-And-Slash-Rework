@@ -28,7 +28,7 @@ public class SkillGemBlueprint extends RarityItemBlueprint implements ITypeBluep
 
 
     public SkillGemData createData() {
-       
+
         GearRarity rar = rarity.get();
 
         String id = getType().get().GUID();
@@ -38,6 +38,7 @@ public class SkillGemBlueprint extends RarityItemBlueprint implements ITypeBluep
         data.type = type;
         data.rar = rar.GUID();
         data.perc = rar.stat_percents.random();
+
 
         return data;
     }

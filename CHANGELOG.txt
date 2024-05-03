@@ -98,3 +98,9 @@ v.5.4.3
 
 v.5.4.4
 - should fix profession stations
+
+v.5.4.5
+- small slimes no longer should drop loot or exp
+- added flat damage support gems, these should be good for early game
+- added archmage support gem
+- fixed stat bug, stats were applied twice

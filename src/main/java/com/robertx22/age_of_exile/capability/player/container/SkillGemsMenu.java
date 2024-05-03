@@ -4,7 +4,9 @@ import com.robertx22.age_of_exile.capability.player.PlayerData;
 import com.robertx22.age_of_exile.capability.player.helper.GemInventoryHelper;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashContainers;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -22,7 +24,7 @@ public class SkillGemsMenu extends AbstractContainerMenu {
 
 
     public SkillGemsMenu(int pContainerId, Container pContainer) {
-        this(new PlayerData(null), pContainerId, pContainer);
+        this(new PlayerData(ClientOnly.getPlayer()), pContainerId, pContainer);
     }
 
     Player player;
@@ -60,7 +62,7 @@ public class SkillGemsMenu extends AbstractContainerMenu {
                 index++;
 
                 for (int s = 0; s < GemInventoryHelper.SUPPORT_GEMS_PER_SKILL; s++) {
-                    this.addSlot(new GemSlot(SkillGemData.SkillGemType.SUPPORT, data.getGemsInv(), index, xp, 38 + (s * 18)));
+                    this.addSlot(new GemSlot(player, SkillGemData.SkillGemType.SUPPORT, data.getGemsInv(), index, xp, 38 + (s * 18)));
                     index++;
                 }
 
@@ -68,7 +70,7 @@ public class SkillGemsMenu extends AbstractContainerMenu {
 
 
             for (int i = 0; i < GemInventoryHelper.TOTAL_AURAS; i++) {
-                this.addSlot(new GemSlot(SkillGemData.SkillGemType.AURA, data.getAuraInv(), i, 36 + (i * 18), 148));
+                this.addSlot(new GemSlot(player, SkillGemData.SkillGemType.AURA, data.getAuraInv(), i, 36 + (i * 18), 148));
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -81,13 +83,23 @@ public class SkillGemsMenu extends AbstractContainerMenu {
     public class GemSlot extends Slot {
         SkillGemData.SkillGemType type;
 
-        public GemSlot(SkillGemData.SkillGemType type, Container pContainer, int pSlot, int pX, int pY) {
+        Player p;
+
+        public GemSlot(Player p, SkillGemData.SkillGemType type, Container pContainer, int pSlot, int pX, int pY) {
             super(pContainer, pSlot, pX, pY);
             this.type = type;
+            this.p = p;
+        }
+
+        @Override
+        public void setByPlayer(ItemStack pStack) {
+            Load.Unit(p).gear.setDirty();
+            super.setByPlayer(pStack);
         }
 
         @Override
         public boolean mayPlace(ItemStack pStack) {
+
             SkillGemData data = StackSaving.SKILL_GEM.loadFrom(pStack);
             if (player != null) {
                 if (data != null && data.canPlayerWear(player)) {

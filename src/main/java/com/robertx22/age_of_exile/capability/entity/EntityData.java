@@ -420,7 +420,7 @@ public class EntityData implements ICap, INeededForClient {
         cost = Energy.getInstance().scale(ModType.FLAT, cost, getLevel());
 
 
-        SpendResourceEvent event = new SpendResourceEvent(entity, ResourceType.energy, cost);
+        SpendResourceEvent event = new SpendResourceEvent(entity, null, ResourceType.energy, cost);
         event.calculateEffects();
 
 
@@ -663,7 +663,7 @@ public class EntityData implements ICap, INeededForClient {
                 cost += Energy.getInstance().scale(ModType.FLAT, slot.weapon_data.energy_cost_per_swing, getLevel());
             }
 
-            SpendResourceEvent event = new SpendResourceEvent(entity, ResourceType.energy, cost);
+            SpendResourceEvent event = new SpendResourceEvent(entity, null, ResourceType.energy, cost);
             event.calculateEffects();
 
             if (data.getAttackerEntity() instanceof Player p && PlayerUTIL.isFake(p)) {

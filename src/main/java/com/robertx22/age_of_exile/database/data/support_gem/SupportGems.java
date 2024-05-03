@@ -11,6 +11,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChanc
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentProcStat;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AllAilmentDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.HitDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusFlatElementalDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalPenetration;
 import com.robertx22.age_of_exile.database.data.stats.types.summon.SummonHealth;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
@@ -27,6 +28,14 @@ public class SupportGems {
     static String PROJ_COUNT = "proj_count";
 
     public static void init() {
+
+        new SupportGem("archmage", "Archmage", PlayStyle.INT, 1.25F,
+                Arrays.asList(
+                        OffenseStats.ARCHMAGE_BONUS_MANA_DAMAGE.get().mod(5, 20),
+                        OffenseStats.ARCHMAGE_BONUS_MANA_COST.get().mod(1, 5)
+                ))
+                .levelReq(10).addToSerializables();
+
 
         new SupportGem("gmp_barrage", "Greater Barrage Projectiles", PlayStyle.DEX, 1.5F,
                 Arrays.asList(
@@ -111,10 +120,17 @@ public class SupportGems {
         }
 
         for (Elements ele : Elements.getAllSingle()) {
-            new SupportGem(ele.guidName + "_pene", ele.dmgName + " Penetration", PlayStyle.STR, 1.25F,
-                    Arrays.asList(new StatMod(15, 30, new ElementalPenetration(ele), ModType.FLAT)
-                    ))
-                    .levelReq(10).addToSerializables();
+            if (ele != Elements.Physical) {
+                new SupportGem(ele.guidName + "_pene", ele.dmgName + " Penetration", PlayStyle.STR, 1.25F,
+                        Arrays.asList(new StatMod(15, 30, new ElementalPenetration(ele), ModType.FLAT)
+                        ))
+                        .levelReq(10).addToSerializables();
+
+                new SupportGem(ele.guidName + "_flat_dmg", ele.dmgName + " Flat Damage", PlayStyle.INT, 1.1F,
+                        Arrays.asList(new BonusFlatElementalDamage(ele).mod(4, 6)
+                        ))
+                        .levelReq(5).addToSerializables();
+            }
         }
 
         new SupportGem("proc_freeze", "Ice Breaker", PlayStyle.DEX, 1.3F,

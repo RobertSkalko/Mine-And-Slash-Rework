@@ -1,31 +1,41 @@
 package com.robertx22.age_of_exile.uncommon.effectdatas.rework.action;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
-import com.robertx22.age_of_exile.database.data.stats.layers.EffectiveStats;
 import com.robertx22.age_of_exile.database.data.stats.layers.StatLayer;
 import com.robertx22.age_of_exile.database.data.stats.layers.StatLayerData;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EffectEvent;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.number_provider.NumberModifier;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.number_provider.NumberProvider;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModifyStatLayerEffect extends StatEffect {
 
     String layer = "";
     String number_to_modify = "";
     public ModificationType modification = ModificationType.ADD;
-    public CalculationType calculation = CalculationType.JUST_STAT_NUMBER;
 
-    public ModifyStatLayerEffect(StatLayer layer, String number_to_modify, ModificationType modification, CalculationType calculation) {
-        super(layer.id + "_" + number_to_modify + "_" + modification.id + "_" + calculation.id, "modify_stat_layer");
+    public NumberProvider number_provider = NumberProvider.ofStatData();
+    public List<NumberModifier> number_modifiers = new ArrayList<>();
+
+    public ModifyStatLayerEffect(StatLayer layer, String number_to_modify, ModificationType modification, NumberProvider calculation, NumberModifier... numberMod) {
+        super(layer.id + "_" + number_to_modify + "_" + modification.id + "_" + calculation.getId(), "modify_stat_layer");
         this.layer = layer.GUID();
         this.number_to_modify = number_to_modify;
         this.modification = modification;
-        this.calculation = calculation;
+        this.number_provider = calculation;
+
+        for (NumberModifier mod : numberMod) {
+            this.number_modifiers.add(mod);
+        }
     }
 
     public enum ModificationType {
-      
+
         ADD("add") {
             @Override
             public void apply(StatLayerData data, float num) {
@@ -49,37 +59,6 @@ public class ModifyStatLayerEffect extends StatEffect {
         }
     }
 
-    public enum CalculationType {
-        JUST_STAT_NUMBER("just_stat_number") {
-            @Override
-            public float getCalcValue(EffectEvent event, StatData data, EffectSides side) {
-                return data.getValue();
-            }
-        },
-
-        EFFECTIVE_ARMOR("effective_armor") {
-            @Override
-            public float getCalcValue(EffectEvent event, StatData data, EffectSides side) {
-                return EffectiveStats.ARMOR.getUsableValue((int) data.getValue(), event.targetData.getLevel());
-            }
-        },
-        EFFECTIVE_DODGE("effective_dodge") {
-            @Override
-            public float getCalcValue(EffectEvent event, StatData data, EffectSides side) {
-                return EffectiveStats.DODGE.getUsableValue((int) data.getValue(), event.targetData.getLevel());
-            }
-        };
-
-        public String id;
-
-        CalculationType(String id) {
-            this.id = id;
-        }
-
-        public abstract float getCalcValue(EffectEvent event, StatData data, EffectSides side);
-
-    }
-
 
     ModifyStatLayerEffect() {
         super("", "modify_stat_layer");
@@ -89,7 +68,13 @@ public class ModifyStatLayerEffect extends StatEffect {
     public void activate(EffectEvent event, EffectSides statSource, StatData data, Stat stat) {
 
         var layerData = event.getLayer(ExileDB.StatLayers().get(layer), number_to_modify);
-        float num = this.calculation.getCalcValue(event, data, statSource);
+
+
+        float num = this.number_provider.getValue(event, event.getSide(statSource), data);
+        for (NumberModifier mod : this.number_modifiers) {
+            num = mod.type.modify(event, num);
+        }
+
         this.modification.apply(layerData, num);
 
         if (stat.getMultiUseType() == Stat.MultiUseType.MULTIPLICATIVE_DAMAGE) {

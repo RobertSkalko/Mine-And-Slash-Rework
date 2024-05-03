@@ -23,6 +23,7 @@ public class EventData {
     public static String BONUS_TOTAL_SUMMONS = "bonus_total_summons";
     public static String SUMMON_TYPE = "summon_type";
     public static String CANCELED = "canceled";
+    public static String DMG_EFFECTIVENESS = "dmg_effectiveness";
     public static String CRIT = "crit";
     public static String ELEMENT = "element";
     public static String ATTACK_TYPE = "attack_type";

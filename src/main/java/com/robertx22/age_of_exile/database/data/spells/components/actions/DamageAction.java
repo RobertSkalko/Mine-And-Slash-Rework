@@ -32,6 +32,8 @@ public class DamageAction extends SpellAction {
             Elements ele = data.getElement();
             ValueCalculation calc = data.get(VALUE_CALCULATION);
 
+            float dmgEffectiveness = calc.getDamageEffectiveness(ctx.caster, ctx.calculatedSpellData.getSpell());
+
             int value = calc.getCalculatedValue(ctx.caster, ctx.calculatedSpellData.getSpell());
 
             if (ctx.calculatedSpellData.chains_did > 0) {
@@ -47,6 +49,9 @@ public class DamageAction extends SpellAction {
 
                 DamageEvent dmg = EventBuilder.ofSpellDamage(ctx.caster, t, value, ctx.calculatedSpellData.getSpell())
                         .build();
+
+                dmg.data.setupNumber(EventData.DMG_EFFECTIVENESS, dmgEffectiveness);
+
                 if (data.has(MapField.DMG_EFFECT_TYPE)) {
                     dmg.data.setString(EventData.ATTACK_TYPE, data.getDmgEffectType().name());
                 }
@@ -60,7 +65,7 @@ public class DamageAction extends SpellAction {
                 if (ctx.isProc) {
                     dmg.data.setBoolean(EventData.IS_PROC, true);
                 }
-                
+
                 dmg.setElement(ele);
                 dmg.Activate();
             }

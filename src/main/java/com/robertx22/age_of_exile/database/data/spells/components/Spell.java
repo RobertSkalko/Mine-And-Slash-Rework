@@ -210,14 +210,14 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
     public SpendResourceEvent getManaCostCtx(SpellCastContext ctx) {
         float cost = this.getCalculatedManaCost(ctx);
-        SpendResourceEvent event = new SpendResourceEvent(ctx.caster, ResourceType.mana, cost);
+        SpendResourceEvent event = new SpendResourceEvent(ctx.caster, this, ResourceType.mana, cost);
         event.calculateEffects();
         return event;
     }
 
     public SpendResourceEvent getEnergyCostCtx(SpellCastContext ctx) {
         float cost = this.getCalculatedEnergyCost(ctx);
-        SpendResourceEvent event = new SpendResourceEvent(ctx.caster, ResourceType.energy, cost);
+        SpendResourceEvent event = new SpendResourceEvent(ctx.caster, this, ResourceType.energy, cost);
         event.calculateEffects();
         return event;
     }

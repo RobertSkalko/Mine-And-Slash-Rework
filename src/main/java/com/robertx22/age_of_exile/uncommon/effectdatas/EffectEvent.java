@@ -200,6 +200,7 @@ public abstract class EffectEvent implements IGUID {
             List<EffectWithCtx> effectsWithCtx = new ArrayList<>();
             effectsWithCtx = AddEffects(effectsWithCtx, sourceData, source, EffectSides.Source);
             effectsWithCtx = AddEffects(effectsWithCtx, targetData, target, EffectSides.Target);
+            effectsWithCtx.add(CALC_LAYERS_EFFECT);
             effectsWithCtx.sort(EffectWithCtx.COMPARATOR);
 
             testEffectsAreOrderedCorrectly(effectsWithCtx);
@@ -287,7 +288,7 @@ public abstract class EffectEvent implements IGUID {
         }
     }
 
-    private static EffectWithCtx CALC_LAYERS_EFFECT_SOURCE = new EffectWithCtx(new IStatEffect() {
+    private static EffectWithCtx CALC_LAYERS_EFFECT = new EffectWithCtx(new IStatEffect() {
         @Override
         public boolean worksOnEvent(EffectEvent ev) {
             return true;
@@ -309,28 +310,6 @@ public abstract class EffectEvent implements IGUID {
         }
     }, EffectSides.Source, new StatData(new UnknownStat().GUID(), 1, 1));
 
-    private static EffectWithCtx CALC_LAYERS_EFFECT_TARGET = new EffectWithCtx(new IStatEffect() {
-        @Override
-        public boolean worksOnEvent(EffectEvent ev) {
-            return true;
-        }
-
-        @Override
-        public EffectSides Side() {
-            return EffectSides.Target;
-        }
-
-        @Override
-        public StatPriority GetPriority() {
-            return StatPriority.Damage.CALC_DAMAGE_LAYERS;
-        }
-
-        @Override
-        public void TryModifyEffect(EffectEvent effect, EffectSides statSource, StatData data, Stat stat) {
-            effect.calculateStatLayersAndMoreMultis();
-        }
-    }, EffectSides.Target, new StatData(new UnknownStat().GUID(), 1, 1));
-
 
     private List<EffectWithCtx> AddEffects(List<EffectWithCtx> effects, EntityData enData, LivingEntity en, EffectSides side) {
 
@@ -343,7 +322,6 @@ public abstract class EffectEvent implements IGUID {
 
 
         if (side == EffectSides.Source) {
-            effects.add(CALC_LAYERS_EFFECT_SOURCE);
 
             if (isSpell()) {
                 if (en instanceof Player p) {
@@ -352,8 +330,6 @@ public abstract class EffectEvent implements IGUID {
                     }
                 }
             }
-        } else {
-            effects.add(CALC_LAYERS_EFFECT_TARGET);
         }
 
         List<StatData> list = new ArrayList<>();

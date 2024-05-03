@@ -6,10 +6,12 @@ import com.robertx22.age_of_exile.aoe_data.database.spells.schools.WaterSpells;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.PositionSource;
 import com.robertx22.age_of_exile.database.data.stats.layers.StatLayers;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.action.*;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.number_provider.NumberModifier;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.number_provider.NumberProvider;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
@@ -23,9 +25,14 @@ public class StatEffects implements ExileRegistryInit {
 
     public static class Layers {
 
-        public static ModifyStatLayerEffect ADDITIVE_DAMAGE = new ModifyStatLayerEffect(StatLayers.Offensive.ADDITIVE_DMG, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, ModifyStatLayerEffect.CalculationType.JUST_STAT_NUMBER);
-        public static ModifyStatLayerEffect CRIT_DAMAGE = new ModifyStatLayerEffect(StatLayers.Offensive.CRIT_DAMAGE, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, ModifyStatLayerEffect.CalculationType.JUST_STAT_NUMBER);
-        public static ModifyStatLayerEffect DOUBLE_DAMAGE = new ModifyStatLayerEffect(StatLayers.Offensive.DOUBLE_DAMAGE, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, ModifyStatLayerEffect.CalculationType.JUST_STAT_NUMBER);
+        public static ModifyStatLayerEffect ADDITIVE_FLAT_DAMAGE_FROM_MANA = new ModifyStatLayerEffect(StatLayers.Offensive.FLAT_DAMAGE, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, NumberProvider.ofPercentOfStat(Mana.getInstance().GUID()), new NumberModifier(NumberModifier.ModifierType.SPELL_DAMAGE_EFFECTIVENESS_MULTI));
+        public static ModifyStatLayerEffect ADDITIVE_FLAT_DAMAGE = new ModifyStatLayerEffect(StatLayers.Offensive.FLAT_DAMAGE, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, NumberProvider.ofStatData(), new NumberModifier(NumberModifier.ModifierType.SPELL_DAMAGE_EFFECTIVENESS_MULTI));
+        public static ModifyStatLayerEffect ADDITIVE_DAMAGE_PERCENT = new ModifyStatLayerEffect(StatLayers.Offensive.ADDITIVE_DMG, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, NumberProvider.ofStatData());
+        public static ModifyStatLayerEffect CRIT_DAMAGE = new ModifyStatLayerEffect(StatLayers.Offensive.CRIT_DAMAGE, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, NumberProvider.ofStatData());
+        public static ModifyStatLayerEffect DOUBLE_DAMAGE = new ModifyStatLayerEffect(StatLayers.Offensive.DOUBLE_DAMAGE, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, NumberProvider.ofStatData());
+
+
+        public static ModifyStatLayerEffect ADDITIVE_FLAT_MANA_FROM_MANA = new ModifyStatLayerEffect(StatLayers.Offensive.FLAT_DAMAGE, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, NumberProvider.ofPercentOfStat(Mana.getInstance().GUID()));
 
 
         // public static ModifyStatLayerEffect ELEMENTAL_RESIST = new ModifyStatLayerEffect(StatLayers.Defensive.ELEMENTAL_MITIGATION, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.REDUCE, ModifyStatLayerEffect.CalculationType.JUST_STAT_NUMBER);

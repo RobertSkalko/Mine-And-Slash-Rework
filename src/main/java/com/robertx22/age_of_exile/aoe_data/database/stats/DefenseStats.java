@@ -15,7 +15,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 
 public class DefenseStats {
-   
+
     public static DataPackStatAccessor<Elements> ALWAYS_CRIT_WHEN_HIT_BY_ELEMENT = DatapackStatBuilder
             .<Elements>of(x -> x.guidName + "_vuln_crit", x -> x)
             .addAllOfType(Elements.values())
@@ -36,7 +36,7 @@ public class DefenseStats {
             .worksWithEvent(DamageEvent.ID)
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Target)
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Damage Received")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
@@ -53,7 +53,7 @@ public class DefenseStats {
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Target)
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x.getTag()))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> x.name + " Damage Received")
             .setLocDesc(x -> "Magic damage are spells that have tag Magic etc")
             .modifyAfterDone(x -> {
@@ -69,7 +69,7 @@ public class DefenseStats {
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Target)
             .addCondition(StatConditions.IS_ANY_PROJECTILE)
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Projectile Damage Receieved")
             .setLocDesc(x -> "Affects projectile damage, includes projectile spells like fireballs, and ranged basic attacks.")
             .modifyAfterDone(x -> {
@@ -85,7 +85,7 @@ public class DefenseStats {
             .setSide(EffectSides.Target)
             .setUsesMoreMultiplier()
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> x.locNameForLangFile() + " Damage Taken")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {

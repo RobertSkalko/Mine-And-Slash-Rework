@@ -39,7 +39,7 @@ public enum Chats implements IAutoLocName {
     YOU_LACK_JEWEL_SLOTS("You lack jewel slots! You gain these typically from the Talent tree. You can use the search bar in the Talents screen to find them."),
     LACK_AURA_CAPACITY("You lack the Augment capacity to equip all these Augments."),
 
-    CANT_EQUIP_THAT_MANY_SUPPORTS("You can't equip that many Support Gems! You can increase the number of slots by leveling the skill."),
+    CANT_EQUIP_THAT_MANY_SUPPORTS("You can't equip that many Support Gems! You can increase the number of slots by leveling the skill and by increasing your player level!."),
     CANT_USE_MULTIPLE_SAME_SUPPORTS("You can't use Multiples of those Support Gems."),
 
     NONE_MAGE("Non Mage weapons can use."),

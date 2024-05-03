@@ -3,8 +3,8 @@ package com.robertx22.age_of_exile.database.data.value_calc;
 import net.minecraft.world.entity.LivingEntity;
 
 public class LeveledValue {
-    public final float min;
-    public final float max;
+    public float min;
+    public float max;
 
     public LeveledValue(float min, float max) {
         this.min = min;

@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.database.data.value_calc;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 
 public class ValueCalcBuilder {
     ValueCalculation calc;
@@ -25,6 +26,9 @@ public class ValueCalcBuilder {
     }
 
     public ValueCalcBuilder attackScaling(float min, float max) {
+        this.calc.dmg_effectiveness = new ScalingCalc(Health.getInstance(), new LeveledValue(min, max));
+
+
         defaultBaseValue(min, max);
         return statScaling(WeaponDamage.getInstance(), min, max);
 
@@ -32,10 +36,14 @@ public class ValueCalcBuilder {
 
     public ValueCalcBuilder capScaling(float min) {
         this.calc.cap_to_wep_dmg = min;
+        this.calc.dmg_effectiveness.multi.max += (min / 2F);
+        this.calc.dmg_effectiveness.multi.min += (min / 2F);
         return this;
     }
 
     public ValueCalcBuilder spellScaling(float min, float max) {
+        this.calc.dmg_effectiveness = new ScalingCalc(Health.getInstance(), new LeveledValue(min, max));
+
         defaultBaseValue(min, max);
         return statScaling(WeaponDamage.getInstance(), min, max);
 

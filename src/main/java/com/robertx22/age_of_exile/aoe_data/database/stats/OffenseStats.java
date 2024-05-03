@@ -8,9 +8,11 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DataPackStatAccessor;
 import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.tags.imp.SpellTag;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
+import com.robertx22.age_of_exile.uncommon.effectdatas.SpendResourceEvent;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
@@ -22,6 +24,76 @@ import static com.robertx22.age_of_exile.database.data.stats.Stat.VAL1;
 import static com.robertx22.age_of_exile.database.data.stats.Stat.format;
 
 public class OffenseStats {
+
+    // todo add generic bonus flat damage stats and gems
+
+
+    /*
+    public static DataPackStatAccessor<Elements> ADDED_ELEMENTAL_FLAT_DAMAGE = DatapackStatBuilder
+            .<Elements>of(x -> "flat_" + x.guidName + "_added_damage", x -> x)
+            .addAllOfType(Elements.values())
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
+            .setSide(EffectSides.Source)
+            .addCondition(StatConditions.ELEMENT_MATCH_STAT)
+            .addEffect(StatEffects.Layers.ADDITIVE_FLAT_DAMAGE)
+            .setLocName(x -> "Added " + x.dmgName + " Damage")
+            .setLocDesc(x -> "You must be dealing dmg of that element to add this flat dmg to it. It's multiplied by damage effectiveness of the hit.")
+            .modifyAfterDone(x -> {
+                x.min = 0;
+                x.scaling = StatScaling.NORMAL;
+                x.is_perc = false;
+                x.group = Stat.StatGroup.ELEMENTAL;
+            })
+            .build();
+
+     */
+
+    public static DataPackStatAccessor<EmptyAccessor> ARCHMAGE_BONUS_MANA_DAMAGE = DatapackStatBuilder
+            .ofSingle("archmage", Elements.Physical)
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
+            .setSide(EffectSides.Source)
+            .addEffect(StatEffects.Layers.ADDITIVE_FLAT_DAMAGE_FROM_MANA)
+
+            .setLocName(x -> Stat.format(
+                    "Add " + VAL1 + "% of your " + Mana.getInstance().getIconNameFormat() + " to Spell Damage"
+            ))
+            .setLocDesc(x -> "This damage is multiplied by the damage effectiveness of the spell (The weapon damage %)")
+            .modifyAfterDone(x -> {
+                x.is_long = true;
+                x.is_perc = true;
+                x.base = 0;
+                x.max = 100;
+                x.min = 0;
+                x.group = Stat.StatGroup.MAIN;
+                x.icon = "\u2694";
+                x.format = ChatFormatting.AQUA.getName();
+            })
+            .build();
+
+    public static DataPackStatAccessor<EmptyAccessor> ARCHMAGE_BONUS_MANA_COST = DatapackStatBuilder
+            .ofSingle("archmage_mana_cost", Elements.Physical)
+            .worksWithEvent(SpendResourceEvent.ID)
+            .setPriority(StatPriority.Damage.BEFORE_DAMAGE_LAYERS)
+            .setSide(EffectSides.Source)
+            .addEffect(StatEffects.Layers.ADDITIVE_FLAT_MANA_FROM_MANA)
+            .setLocName(x -> Stat.format(
+                    "Add " + VAL1 + "% of your " + Mana.getInstance().getIconNameFormat() + " to the Mana Cost"
+            ))
+            .setLocDesc(x -> "")
+            .modifyAfterDone(x -> {
+                x.is_long = true;
+                x.is_perc = true;
+                x.base = 0;
+                x.max = 100;
+                x.min = 0;
+                x.group = Stat.StatGroup.MAIN;
+                x.icon = "\u2694";
+                x.format = ChatFormatting.AQUA.getName();
+            })
+            .build();
+
     public static DataPackStatAccessor<Elements> ELEMENTAL_DAMAGE = DatapackStatBuilder
             .<Elements>of(x -> "all_" + x.guidName + "_damage", x -> x)
             .addAllOfType(Elements.values())
@@ -30,7 +102,7 @@ public class OffenseStats {
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> x.dmgName + " Damage")
             .setLocDesc(x -> "Increases All dmg of that element, both spells and attacks")
             .modifyAfterDone(x -> {
@@ -47,7 +119,7 @@ public class OffenseStats {
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x.getTag()))
             .setUsesMoreMultiplier()
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> x.name + " Damage")
             .setLocDesc(x -> "Magic damage are spells that have tag Magic etc")
             .modifyAfterDone(x -> {
@@ -64,7 +136,7 @@ public class OffenseStats {
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTags.magic))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> x.dmgName + " Spells Damage")
             .setLocDesc(x -> "Increases damage of spells of that element.")
             .modifyAfterDone(x -> {
@@ -81,7 +153,7 @@ public class OffenseStats {
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(x -> StatConditions.WEAPON_TYPE_MATCHES.get(x))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> x.locName() + " Damage")
             .setLocDesc(x -> "Increases damage done if it was caused by that weapon")
             .modifyAfterDone(x -> {
@@ -99,7 +171,7 @@ public class OffenseStats {
             .setSide(EffectSides.Source)
             .addCondition(x -> StatConditions.WEAPON_TYPE_MATCHES.get(x))
             .addCondition(StatConditions.IS_ELEMENTAL)
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Elemental " + x.locName() + " Damage")
             .setLocDesc(x -> "Increases elemental damage done if it was caused by that weapon")
             .modifyAfterDone(x -> {
@@ -117,7 +189,7 @@ public class OffenseStats {
             .setUsesMoreMultiplier()
             .addCondition(x -> StatConditions.ELEMENT_MATCH_STAT)
             .addCondition(StatConditions.ATTACK_TYPE_MATCHES.get(AttackType.hit))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> x.dmgName + " Weapon Damage")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
@@ -173,7 +245,7 @@ public class OffenseStats {
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.IF_NOT_CRIT)
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Non Critical Damage")
             .setLocDesc(x -> "If not a Critical, multiply by x")
             .modifyAfterDone(x -> {
@@ -208,7 +280,7 @@ public class OffenseStats {
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.IS_ANY_PROJECTILE)
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Projectile Damage")
             .setLocDesc(x -> "Affects projectile damage, includes projectile spells like fireballs, and ranged basic attacks.")
             .modifyAfterDone(x -> {
@@ -225,7 +297,7 @@ public class OffenseStats {
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.area))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Area Damage")
             .setLocDesc(x -> "Affects dmg done by area of effect abilities. Think meteor or other large aoe spells")
             .modifyAfterDone(x -> {
@@ -242,7 +314,7 @@ public class OffenseStats {
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.area))
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.trap))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Trap Area Damage")
             .setLocDesc(x -> "Affects trap dmg done by area of effect abilities.")
             .modifyAfterDone(x -> {
@@ -258,7 +330,7 @@ public class OffenseStats {
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.ATTACK_TYPE_MATCHES.get(AttackType.dot))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Damage Over Time")
             .setLocDesc(x -> "Increases dmg of effects that do damage over time, like burn")
             .modifyAfterDone(x -> {
@@ -273,7 +345,7 @@ public class OffenseStats {
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Total Damage")
             .setLocDesc(x -> "Increases all your damage.")
             .modifyAfterDone(x -> {
@@ -290,7 +362,7 @@ public class OffenseStats {
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_ATTACK_DAMAGE)
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Attack Damage")
             .setLocDesc(x -> "Increases all attack damage.")
             .modifyAfterDone(x -> {
@@ -309,7 +381,7 @@ public class OffenseStats {
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
             .addCondition(StatConditions.ATTACK_TYPE_MATCHES.get(AttackType.dot))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> x.dmgName + " Damage Over Time")
             .setLocDesc(x -> "Fire damage over time increases damage of burn, for example.")
             .modifyAfterDone(x -> {
@@ -342,7 +414,7 @@ public class OffenseStats {
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> x.locNameForLangFile() + " Damage")
             .setLocDesc(x -> "Increases damage of spells with this tag. Totem Damage increases dmg of totems, etc.")
             .modifyAfterDone(x -> {
@@ -356,7 +428,7 @@ public class OffenseStats {
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.IS_TARGET_CURSED)
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Damage to Cursed Enemies")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
@@ -370,7 +442,7 @@ public class OffenseStats {
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.summon))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Summon Damage")
             .setLocDesc(x -> "Increases damage of your summoned minions.")
             .modifyAfterDone(x -> {
@@ -386,7 +458,7 @@ public class OffenseStats {
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.golem))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Golem Damage")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
@@ -402,7 +474,7 @@ public class OffenseStats {
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.IS_SOURCE_LOW_HP)
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Damage when on Low Health")
             .setLocDesc(x -> "Low hp is 30% or less.")
             .modifyAfterDone(x -> {
@@ -416,7 +488,7 @@ public class OffenseStats {
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_TARGET_NEAR_FULL_HP)
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Damage to near Full Health Targets")
             .setLocDesc(x -> "70% health or above..")
             .modifyAfterDone(x -> {
@@ -432,7 +504,7 @@ public class OffenseStats {
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.IS_TARGET_LOW_HP)
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> format("Execute targets below 30% health, dealing "
                     + VAL1 + "% increased  " + x.getIconNameFormat()))
             .setLocDesc(x -> "Low hp is 30% or less.")
@@ -448,7 +520,7 @@ public class OffenseStats {
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_TARGET_LOW_HP)
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Damage to Low Health Targets")
             .setLocDesc(x -> "Low hp is 30% or less.")
             .modifyAfterDone(x -> {
@@ -462,7 +534,7 @@ public class OffenseStats {
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.IS_TARGET_NOT_UNDEAD)
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Damage To Living")
             .setLocDesc(x -> "Living entities are not undead ones.")
             .modifyAfterDone(x -> {
@@ -476,7 +548,7 @@ public class OffenseStats {
             .setUsesMoreMultiplier()
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_TARGET_UNDEAD)
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE)
+            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Damage To Undead")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
@@ -486,6 +558,6 @@ public class OffenseStats {
 
 
     public static void init() {
-        
+
     }
 }

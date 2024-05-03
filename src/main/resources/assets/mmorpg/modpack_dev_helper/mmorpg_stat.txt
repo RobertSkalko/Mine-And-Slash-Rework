@@ -28,6 +28,8 @@ all_physical_damage
 all_resist
 all_vuln_crit
 all_water_damage
+archmage
+archmage_mana_cost
 area_cast_time
 area_cdr
 area_dmg
@@ -227,6 +229,13 @@ fishing_lesser_drop_bonus
 fishing_medium_drop_bonus
 fishing_misc_drop_bonus
 fishing_triple_drop
+flat_all_added_damage
+flat_chaos_added_damage
+flat_elemental_added_damage
+flat_fire_added_damage
+flat_lightning_added_damage
+flat_physical_added_damage
+flat_water_added_damage
 food_eff_dur_u_cast
 freeze_chance
 freeze_damage

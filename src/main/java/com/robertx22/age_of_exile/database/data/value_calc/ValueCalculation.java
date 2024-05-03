@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.database.data.value_calc;
 
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -35,6 +36,8 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
     public StatScaling base_scaling_type = StatScaling.NORMAL;
     public LeveledValue base = new LeveledValue(0, 0);
 
+    public ScalingCalc dmg_effectiveness = new ScalingCalc(Health.getInstance(), new LeveledValue(1, 1));
+
     public float cap_to_wep_dmg = 1000; // by default doesnt cap
 
     public int getCalculatedBaseValue(LivingEntity en, MaxLevelProvider provider) {
@@ -44,6 +47,24 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
         }
 
         return (int) base_scaling_type.scale(base.getValue(en, provider), Load.Unit(en).getLevel());
+    }
+
+    public float getDamageEffectiveness(LivingEntity en, MaxLevelProvider provider) {
+        return dmg_effectiveness.getMulti().getValue(en, provider);
+
+        /*
+        Optional<ScalingCalc> wep = stat_scalings.stream().filter(x -> x.stat.equals(WeaponDamage.getInstance().GUID())).findFirst();
+        if (wep.isPresent()) {
+            float num = wep.get().getMulti().getValue(en, provider);
+            if (this.capsToWeaponDamage()) {
+                num += (this.cap_to_wep_dmg / 2F); // todo how do i balance dmg effectiveness of spells with stat scalings?
+                // not every reaches the cap
+            }
+            return num;
+        }
+        return 0;
+
+         */
     }
 
     public String getLocDmgTooltip(Elements element) {

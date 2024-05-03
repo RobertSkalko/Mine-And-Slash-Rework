@@ -45,6 +45,7 @@ public class ServerContainer {
         LOG_ERRORS = b.define("log_errors", true);
         STOP_ERROR_SPAM = b.define("stop_error_spam", true);
         MIN_LEVEL_MAP_DROPS = b.defineInRange("min_level_map_drops", 10, 0, Integer.MAX_VALUE);
+        MIN_SLIME_SIZE_FOR_LOOT = b.defineInRange("MIN_SLIME_SIZE_FOR_LOOT", 2, 0, Integer.MAX_VALUE);
         LEVEL_DISTANCE_PENALTY_LEEWAY = b.defineInRange("LEVEL_DISTANCE_PENALTY_LEEWAY", 2, 0, Integer.MAX_VALUE);
         PERC_OFFHAND_WEP_STAT = b.defineInRange("PERC_OFFHAND_WEP_STAT", 25, 0, 100);
 
@@ -192,6 +193,7 @@ public class ServerContainer {
     public ForgeConfigSpec.BooleanValue ENERGY_PENALTY;
     public ForgeConfigSpec.BooleanValue STAT_ORDER_WARNINGS;
     public ForgeConfigSpec.IntValue MIN_LEVEL_MAP_DROPS;
+    public ForgeConfigSpec.IntValue MIN_SLIME_SIZE_FOR_LOOT;
 
     public ForgeConfigSpec.IntValue LEVEL_DISTANCE_PENALTY_LEEWAY;
     public ForgeConfigSpec.IntValue PERC_OFFHAND_WEP_STAT;

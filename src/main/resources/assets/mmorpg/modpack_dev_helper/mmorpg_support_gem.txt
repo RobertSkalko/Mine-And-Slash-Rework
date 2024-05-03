@@ -3,9 +3,11 @@ This registry is modify-able through datapacks.
 aggressive_minions
 ailment_damage_less_hit_dmg
 aoe_dmg
+archmage
 bleed_chance
 burn_chance
 chaos_damage
+chaos_flat_dmg
 chaos_pene
 cold_damage
 crit_chance
@@ -17,6 +19,7 @@ effect_duration
 electrify_chance
 energy_on_hit
 fire_damage
+fire_flat_dmg
 fire_pene
 freeze_chance
 gmp
@@ -25,6 +28,7 @@ heal_at_low
 health_on_hit
 inc_heal
 lightning_damage
+lightning_flat_dmg
 lightning_pene
 lmp
 lmp_barrage
@@ -34,7 +38,6 @@ mana_saver_dmg
 melee_damage
 minion_threat
 physical_damage
-physical_pene
 plus_aoe
 poison_chance
 proc_freeze
@@ -52,4 +55,5 @@ summon_health
 threat
 totem_damage
 totem_dmg_cdr
+water_flat_dmg
 water_pene

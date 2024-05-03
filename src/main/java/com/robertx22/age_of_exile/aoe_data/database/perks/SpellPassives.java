@@ -116,7 +116,7 @@ public class SpellPassives implements ExileRegistryInit {
         PerkBuilder.passive(INC_AOE, 8, new OptScaleExactStat(3, SpellChangeStats.INCREASED_AREA.get()));
         PerkBuilder.passive(HEAL_STR, 8, new OptScaleExactStat(2, ResourceStats.HEAL_STRENGTH.get()));
         PerkBuilder.passive(LOW_HP_HEAL, 8, new OptScaleExactStat(4, ResourceStats.LOW_HP_HEALING.get()));
-        PerkBuilder.passive(MANA_COST, 8, new OptScaleExactStat(3, SpellChangeStats.MANA_COST.get()));
+        PerkBuilder.passive(MANA_COST, 8, new OptScaleExactStat(-3, SpellChangeStats.MANA_COST.get()));
         PerkBuilder.passive(CDR, 8, new OptScaleExactStat(2, SpellChangeStats.COOLDOWN_REDUCTION.get()));
         PerkBuilder.passive(HEAL_TO_SPELL, 8, new OptScaleExactStat(10, DatapackStats.HEAL_TO_SPELL_DMG));
 

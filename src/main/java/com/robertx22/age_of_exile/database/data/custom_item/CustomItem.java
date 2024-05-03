@@ -31,6 +31,7 @@ public class CustomItem implements JsonExileRegistry<CustomItem>, IAutoGson<Cust
 
     public String gear_type = "";
 
+    public boolean disable_salvaging = false;
 
     public GearItemData create(Player p) {
 
@@ -40,7 +41,6 @@ public class CustomItem implements JsonExileRegistry<CustomItem>, IAutoGson<Cust
 
         GearBlueprint b = new GearBlueprint(LootInfo.ofPlayer(p));
         b.level.set(itemlvl);
-
 
         var rar = RandomUtils.weightedRandom(possible_rar.stream().map(x -> ExileDB.GearRarities().get(x)).collect(Collectors.toList()));
 
@@ -54,7 +54,14 @@ public class CustomItem implements JsonExileRegistry<CustomItem>, IAutoGson<Cust
             b.setType(gear_type);
         }
 
-        return b.createData();
+        var data = b.createData();
+
+        if (disable_salvaging) {
+            data.data.set(GearItemData.KEYS.SALVAGING_DISABLED, true);
+        }
+
+
+        return data;
 
     }
 
