@@ -120,8 +120,8 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
             exp++;
         }
 
-      
-        exp *= LootUtils.getMobHealthBasedLootMulti(mobData, killer);
+
+        exp *= LootUtils.getMobHealthBasedLootMulti(victim);
         exp *= mobData.getMobRarity().expMulti();
         exp *= multi;
         exp *= ServerContainer.get().EXP_GAIN_MULTI.get();

@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.ElementalStat;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.number_provider.NumberModifier;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 
@@ -79,7 +80,7 @@ public class BonusFlatElementalDamage extends ElementalStat {
 
         @Override
         public DamageEvent activate(DamageEvent effect, StatData data, Stat stat) {
-            effect.addBonusEleDmg(stat.getElement(), data.getValue());
+            effect.addBonusEleDmg(stat.getElement(), NumberModifier.ModifierType.SPELL_DAMAGE_EFFECTIVENESS_MULTI.modify(effect, data.getValue()));
             return effect;
         }
 

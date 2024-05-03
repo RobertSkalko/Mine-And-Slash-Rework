@@ -21,7 +21,7 @@ public class StationBlockItem extends BlockItem implements IShapedRecipe {
     public ShapedRecipeBuilder getRecipe() {
         return shaped(this)
                 .define('X', sup.get())
-                .define('C', Items.GOLD_INGOT)
+                .define('C', Items.CRAFTING_TABLE)
                 .pattern("XXX")
                 .pattern("XCX")
                 .pattern("XXX")

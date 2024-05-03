@@ -50,6 +50,7 @@ public class BaseStatsAdder implements ExileRegistryInit {
         c.nonScaled(RegeneratePercentStat.MAGIC_SHIELD, 2);
 
         c.scaled(WeaponDamage.getInstance(), 2);
+        c.nonScaled(WeaponDamage.getInstance(), 2);
 
         c.scaled(Health.getInstance(), 50);
         c.scaled(Mana.getInstance(), 50);

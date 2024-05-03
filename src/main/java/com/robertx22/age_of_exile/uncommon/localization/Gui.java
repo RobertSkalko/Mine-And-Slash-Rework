@@ -12,7 +12,7 @@ public enum Gui implements IAutoLocName {
 
     Favor_In_GUI(" Favor"),
     Current_Favor("Current: %1$s"),
-    Loot_Exp_Multiplier("Loot/Exp Multiplier: %1$sx"),
+    Loot_Exp_Multiplier("Loot Multiplier: %1$sx"),
 
     STATUS_BAR_LEVEL("Level %1$s %2$s%%"),
     MAINHUB_LEVEL("Level: "),

@@ -378,7 +378,15 @@ public class EntityData implements ICap, INeededForClient {
             int loss = (int) (getExpRequiredForLevelUp() * ServerContainer.get().EXP_LOSS_ON_DEATH.get());
             int debt = (int) (getExpRequiredForLevelUp() * ServerContainer.get().EXP_DEBT_ON_DEATH.get());
 
-            int maxdebt = (int) (getExpRequiredForLevelUp() * ServerContainer.get().MAX_EXP_DEBT_MULTI.get());
+            if (Load.Unit(p).getLevel() < ServerContainer.get().EXP_DEBT_START_LEVEL.get()) {
+                debt = 0;
+            } else {
+                int maxdebt = (int) (getExpRequiredForLevelUp() * ServerContainer.get().MAX_EXP_DEBT_MULTI.get());
+                this.expDebt += debt;
+                if (debt > maxdebt) {
+                    expDebt = maxdebt;
+                }
+            }
 
             loss = MathHelper.clamp(loss, 0, exp);
 
@@ -386,11 +394,6 @@ public class EntityData implements ICap, INeededForClient {
                 this.exp = MathHelper.clamp(exp - loss, 0, Integer.MAX_VALUE);
             }
 
-            this.expDebt += debt;
-
-            if (debt > maxdebt) {
-                expDebt = maxdebt;
-            }
 
             p.sendSystemMessage(Chats.DEATH_EXP_LOSS_MSG.locName(loss, debt).withStyle(ChatFormatting.RED));
 

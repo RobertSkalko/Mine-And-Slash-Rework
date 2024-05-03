@@ -95,7 +95,7 @@ public enum Words implements IAutoLocName {
     CorruptsItemHarvest("Turns the Item Corrupted (no benefits)"),
     AscClasses("Classes"),
     Salvaging("Salvaging"),
-    SkillGem("Skills"),
+    SkillGem("Skill Gem"),
     Hotbar("Spell Hotbar"),
     Gear("Gear"),
     All("All"),

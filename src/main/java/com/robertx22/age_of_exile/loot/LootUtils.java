@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.loot;
 
-import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.library_of_exile.utils.EntityUtils;
 import com.robertx22.library_of_exile.utils.RandomUtils;
@@ -32,7 +31,7 @@ public class LootUtils {
         return (float) Mth.clamp(multi, ServerContainer.get().LEVEL_DISTANCE_PENALTY_MIN_MULTI.get(), 1F);
     }
 
-    public static float getMobHealthBasedLootMulti(EntityData mob, LivingEntity entity) {
+    public static float getMobHealthBasedLootMulti(LivingEntity entity) {
 
 
         float multi = 1;

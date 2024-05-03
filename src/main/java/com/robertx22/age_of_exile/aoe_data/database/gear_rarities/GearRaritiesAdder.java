@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
+// check if loot drops in maps
 public class GearRaritiesAdder implements ExileRegistryInit {
 
     @Override
@@ -16,7 +17,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.map_resist_req = 0;
 
             x.map_tiers = new MinMax(0, 10);
-            x.favor_loot_multi = 0.75F;
+            x.favor_loot_multi = 1;
             x.map_xp_multi = 1;
             x.favor_needed = 0;
             x.min_affixes = 1;
@@ -39,7 +40,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.map_tiers = new MinMax(10, 20);
             x.map_xp_multi = 1;
 
-            x.favor_loot_multi = 0.9F;
+            x.favor_loot_multi = 1.05f;
             x.favor_needed = 50;
             x.sockets = new MinMax(0, 1);
             x.max_spell_links = 2;
@@ -64,7 +65,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.affix_rarity_weight = 750;
             x.map_xp_multi = 1;
 
-            x.favor_loot_multi = 1;
+            x.favor_loot_multi = 1.1F;
             x.favor_needed = 100;
             x.sockets = new MinMax(0, 2);
             x.max_spell_links = 3;
@@ -91,7 +92,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.affix_rarity_weight = 500;
             x.map_xp_multi = 1.05F;
 
-            x.favor_loot_multi = 1.05F;
+            x.favor_loot_multi = 1.15F;
             x.favor_needed = 250;
             x.sockets = new MinMax(0, 3);
             x.min_lvl = 25;

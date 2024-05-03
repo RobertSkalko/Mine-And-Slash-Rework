@@ -229,9 +229,7 @@ fishing_lesser_drop_bonus
 fishing_medium_drop_bonus
 fishing_misc_drop_bonus
 fishing_triple_drop
-flat_all_added_damage
 flat_chaos_added_damage
-flat_elemental_added_damage
 flat_fire_added_damage
 flat_lightning_added_damage
 flat_physical_added_damage

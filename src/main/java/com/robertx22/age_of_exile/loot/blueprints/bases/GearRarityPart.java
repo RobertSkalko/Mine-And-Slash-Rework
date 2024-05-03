@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 import com.robertx22.age_of_exile.loot.blueprints.ItemBlueprint;
 import com.robertx22.age_of_exile.loot.blueprints.MapBlueprint;
 import com.robertx22.age_of_exile.loot.blueprints.SkillGemBlueprint;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 
@@ -73,7 +74,14 @@ public class GearRarityPart extends BlueprintPart<GearRarity, ItemBlueprint> {
         GearRarity rar = RandomUtils.weightedRandom(getPossibleRarities());
 
         if (rar.hasHigherRarity()) {
-            if (RandomUtils.roll(chanceForHigherRarity)) {
+            var higher = rar.getHigherRarity();
+
+            // the rarer the higher rarity, the harder it should be for magic find to upgrade the rarity
+            float chanceMulti = MathHelper.clamp((float) higher.Weight() / (float) rar.Weight(), 0F, 1F);
+
+            float chance = chanceForHigherRarity * chanceMulti;
+
+            if (RandomUtils.roll(chance)) {
                 if (rar.hasHigherRarity() && getPossibleRarities().contains(rar.getHigherRarity())) {
                     if (blueprint.info.level >= rar.getHigherRarity().min_lvl) {
                         rar = rar.getHigherRarity();

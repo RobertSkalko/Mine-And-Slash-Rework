@@ -137,7 +137,7 @@ public class ExpSources {
         }
 
         public void giveExp(Player p, Profession pro) {
-            float lvlmulti = MathHelper.clamp((float) Load.player(p).professions.getLevel(pro.GUID()) / (float) getLevelOfMastery(), 0F, 1F);
+            float lvlmulti = MathHelper.clamp((float) Load.player(p).professions.getLevel(pro.GUID()) / (float) getLevelOfMastery(), 0.5F, 1F);
 
             var fx = LevelUtils.scaleExpReward(exp, Load.player(p).professions.getLevel(pro.id));
 

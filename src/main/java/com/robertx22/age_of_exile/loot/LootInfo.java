@@ -220,13 +220,16 @@ public class LootInfo {
             if (this.playerEntityData != null) {
                 multis.add(LootUtils.getLevelDistancePunishmentMulti(mobData.getLevel(), playerEntityData.getLevel()));
             }
-            multis.add(LootUtils.getMobHealthBasedLootMulti(mobData, mobKilled));
+            multis.add(LootUtils.getMobHealthBasedLootMulti(mobKilled));
             multis.add((float) ExileDB.getEntityConfig(mobKilled, this.mobData).loot_multi);
             multis.add(mobData.getUnit().getCalculatedStat(ExtraMobDropsStat.getInstance()).getMultiplier());
             multis.add(mobData.getMobRarity().LootMultiplier());
         }
 
         if (this.playerEntityData != null) {
+            if (playerEntityData.getLevel() < 10) {
+                multis.add(2F);
+            }
             multis.add(Load.player(player).favor.getLootExpMulti());
             if (lootOrigin != LootOrigin.LOOT_CRATE) {
                 multis.add(playerEntityData.getUnit().getCalculatedStat(TreasureQuantity.getInstance()).getMultiplier());

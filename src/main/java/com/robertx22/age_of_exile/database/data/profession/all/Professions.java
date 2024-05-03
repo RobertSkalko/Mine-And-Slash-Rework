@@ -92,10 +92,10 @@ public class Professions {
                 .crop(SkillItemTier.TIER0, FARM_EXP, Items.WHEAT, ExpSources.REQ_GROWTH_STAGE)
                 .crop(SkillItemTier.TIER0, FARM_EXP, Items.POTATO, ExpSources.REQ_GROWTH_STAGE)
                 .crop(SkillItemTier.TIER1, FARM_EXP, Items.MELON_SLICE)
-                .crop(SkillItemTier.TIER2, FARM_EXP, Items.BEETROOT, ExpSources.REQ_GROWTH_STAGE)
-                .crop(SkillItemTier.TIER3, FARM_EXP, Items.CARROT, ExpSources.REQ_GROWTH_STAGE)
-                .crop(SkillItemTier.TIER4, FARM_EXP, Items.NETHER_WART, ExpSources.REQ_GROWTH_STAGE)
-                .crop(SkillItemTier.TIER5, FARM_EXP, Items.COCOA_BEANS, ExpSources.REQ_GROWTH_STAGE)
+                .crop(SkillItemTier.TIER2, 50, Items.BEETROOT, ExpSources.REQ_GROWTH_STAGE)
+                .crop(SkillItemTier.TIER3, 60, Items.CARROT, ExpSources.REQ_GROWTH_STAGE)
+                .crop(SkillItemTier.TIER4, 75, Items.NETHER_WART, ExpSources.REQ_GROWTH_STAGE)
+                .crop(SkillItemTier.TIER5, 100, Items.COCOA_BEANS, ExpSources.REQ_GROWTH_STAGE)
 
                 .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(FARMING), 1)
 

@@ -104,3 +104,13 @@ v.5.4.5
 - added flat damage support gems, these should be good for early game
 - added archmage support gem
 - fixed stat bug, stats were applied twice
+
+v.5.4.6
+- fixed added flat dmg not being adjusted for dmg effectiveness of spell
+- professions now give between 50% and 100% of xp if you are lower lvl than the ore/crop mined, instead of between 0% and 100%
+- new players have a bit of extra weapon damage from base stat now
+- fixed mob health loot multi, slimes should drop waaaaay less xp and loot now
+- heavily buffed fireball and other starter spells early game
+- low lvl players no longer get exp debt
+- added a loot boost for players under lvl 10
+- nerfed magic find, it's no longer a flat chance to upgrade rarity, it now depends on how much rarer the higher rarity is. so 100% magic find on a rare drop (1000 weight for example), will have 50% chance to upgrade to epic (500 weight for example)

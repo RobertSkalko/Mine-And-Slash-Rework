@@ -276,7 +276,7 @@ public class DamageEvent extends EffectEvent {
         }
         this.targetData.lastDamageTaken = this;
 
-        DmgByElement info = getDmgByElement();
+        DmgByElement info = calculateAllBonusElementalDamage();
 
         if (data.isDodged()) {
             if (attackInfo != null) {
@@ -447,11 +447,10 @@ public class DamageEvent extends EffectEvent {
         }
     }
 
+
     public static class DmgByElement {
 
-        public HashMap<Elements, Float> dmgmap = new HashMap<>();
-        public Elements highestDmgElement;
-        public float highestDmgValue;
+        private HashMap<Elements, Float> dmgmap = new HashMap<>();
         public float totalDmg = 0;
 
         public void addDmg(float dmg, Elements element) {
@@ -467,31 +466,32 @@ public class DamageEvent extends EffectEvent {
             dmgmap.put(ele, total);
 
             totalDmg += dmg;
-
-            if (total > highestDmgValue) {
-                highestDmgElement = ele;
-                highestDmgValue = total;
-            }
-
         }
 
     }
 
-    public DmgByElement getDmgByElement() {
+    // this calculates all the bonus elemental damages, uses the specific numbers for particles only, and the totalvalue for actually dealing dmg, ONCE
+    public DmgByElement calculateAllBonusElementalDamage() {
         DmgByElement info = new DmgByElement();
 
         for (Entry<Elements, Integer> entry : bonusElementDamageMap.entrySet()) {
             if (entry.getValue() > 0) {
 
-                // this seems like it could be buggy
+                // this how do i make a copy of the same event that it was at the start..except element
                 DamageEvent bonus = EventBuilder.ofDamage(attackInfo, source, target, entry.getValue())
                         .setupDamage(AttackType.hit, data.getWeaponType(), data.getStyle())
                         .set(x -> x.setElement(entry.getKey()))
                         .build();
 
+                if (isSpell()) {
+                    bonus.data.setString(EventData.SPELL, this.data.getString(EventData.SPELL));
+                }
+
                 bonus.data.setBoolean(EventData.IS_BASIC_ATTACK, this.data.getBoolean(EventData.IS_BASIC_ATTACK));
                 bonus.data.setBoolean(EventData.IS_ATTACK_FULLY_CHARGED, this.data.getBoolean(EventData.IS_ATTACK_FULLY_CHARGED));
                 bonus.data.setupNumber(EventData.ATTACK_COOLDOWN, this.data.getNumber(EventData.ATTACK_COOLDOWN).number);
+                bonus.data.setupNumber(EventData.DMG_EFFECTIVENESS, this.data.getNumber(EventData.DMG_EFFECTIVENESS).number);
+
                 bonus.calculateEffects();
 
                 bonus.setElement(entry.getKey());
