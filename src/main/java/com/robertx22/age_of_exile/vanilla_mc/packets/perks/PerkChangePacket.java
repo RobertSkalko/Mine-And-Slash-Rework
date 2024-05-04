@@ -75,7 +75,7 @@ public class PerkChangePacket extends MyPacket<PerkChangePacket> {
             }
         } else if (action == ACTION.REMOVE) {
             if (playerData.talents.canRemove(sc, point)) {
-                playerData.talents.remove(sc, new PointData(x, y));
+                playerData.talents.remove(sc.getSchool_type(), new PointData(x, y));
                 playerData.talents.reset_points--;
             }
         }

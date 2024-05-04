@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.aoe_data.database.spells.schools.BasicAttackSp
 import com.robertx22.age_of_exile.aoe_data.database.spells.schools.WaterSpells;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
+import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
@@ -131,7 +132,7 @@ public class ItemNewbieGearBag extends Item {
             try {
 
                 List<Perk> starts = Load.player(playerIn).talents
-                        .getAllAllocatedPerks()
+                        .getAllAllocatedPerks(TalentTree.SchoolType.TALENTS)
                         .values()
                         .stream()
                         .filter(x -> x.is_entry)

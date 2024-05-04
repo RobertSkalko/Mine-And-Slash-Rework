@@ -1,5 +1,8 @@
 package com.robertx22.age_of_exile.database.data.talent_tree;
 
+import com.robertx22.age_of_exile.capability.entity.EntityData;
+import com.robertx22.age_of_exile.config.forge.ServerContainer;
+import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.data.talent_tree.parser.TalentGrid;
@@ -7,9 +10,13 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.saveclasses.PointData;
+import com.robertx22.age_of_exile.saveclasses.perks.TalentsData;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -27,7 +34,42 @@ public class TalentTree implements JsonExileRegistry<TalentTree>, IAutoGson<Tale
     public String icon;
 
     public enum SchoolType {
-        TALENTS
+        TALENTS() {
+            @Override
+            public int getFreePoints(EntityData data, TalentsData talents) {
+
+                int num = 0;
+
+                num = (int) GameBalanceConfig.get().STARTING_TALENT_POINTS;
+                num += GameBalanceConfig.get().TALENT_POINTS_PER_LVL * data.getLevel();
+
+                num -= talents.getAllocatedPoints(this);
+
+                if (data.getEntity() instanceof Player p) {
+                    num += MathHelper.clamp(Load.player(p).bonusTalents, 0, ServerContainer.get().MAX_ADDITIONAL_TALENT_POINTS.get());
+                }
+                return num;
+            }
+        }, ASCENDANCY() {
+            @Override
+            public int getFreePoints(EntityData data, TalentsData talents) {
+
+                int num = 0;
+
+                int perlvl = (int) (data.getLevel() / (float) GameBalanceConfig.get().GIVE_ASCENDANCY_POINTS_EVERY_X_LEVELS);
+
+                num += perlvl;
+
+                if (num > GameBalanceConfig.get().MAX_ASCENDANCY_POINTS) {
+                    num = GameBalanceConfig.get().MAX_ASCENDANCY_POINTS;
+                }
+                num -= talents.getAllocatedPoints(this);
+           
+                return num;
+            }
+        };
+
+        public abstract int getFreePoints(EntityData data, TalentsData talents);
     }
 
     public SchoolType getSchool_type() {

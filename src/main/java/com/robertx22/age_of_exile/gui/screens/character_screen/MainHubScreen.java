@@ -35,9 +35,11 @@ import com.robertx22.age_of_exile.gui.inv_gui.GuiInventoryGrids;
 import com.robertx22.age_of_exile.gui.screens.OpenInvGuiScreen;
 import com.robertx22.age_of_exile.gui.screens.OpenJewelsScreen;
 import com.robertx22.age_of_exile.gui.screens.OpenSkillGems;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.AscendancyTree;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.TalentsScreen;
 import com.robertx22.age_of_exile.gui.screens.spell.SpellSchoolScreen;
 import com.robertx22.age_of_exile.gui.wiki.BestiaryScreen;
+import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.prophecy.gui.ProphecyScreen;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -231,6 +233,9 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
         rightButtons.add(new SpellSchoolScreen());
         rightButtons.add(new OpenSkillGems());
         rightButtons.add(new TalentsScreen());
+        if (MMORPG.RUN_DEV_TOOLS) {
+            rightButtons.add(new AscendancyTree());
+        }
         rightButtons.add(new OpenJewelsScreen());
         if (WorldUtils.isMapWorldClass(this.mc.level)) {
             rightButtons.add(new ProphecyScreen());

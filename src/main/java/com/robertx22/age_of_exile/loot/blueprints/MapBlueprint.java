@@ -11,7 +11,6 @@ import com.robertx22.age_of_exile.maps.MapAffixData;
 import com.robertx22.age_of_exile.maps.MapItemData;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.item.ItemStack;
 
@@ -90,7 +89,7 @@ public class MapBlueprint extends RarityItemBlueprint {
             while (affixes.contains(affix.GUID()) /*|| affix.isBeneficial()*/) {
                 affix = ExileDB.MapAffixes().getFilterWrapped(x -> x.req.isEmpty()).random();
             }
-            int percent = RandomUtils.RandomRange(0, 100);
+            int percent = rarity.stat_percents.random();
             map.affixes.add(new MapAffixData(affix, percent));
             affixes.add(affix.GUID());
 

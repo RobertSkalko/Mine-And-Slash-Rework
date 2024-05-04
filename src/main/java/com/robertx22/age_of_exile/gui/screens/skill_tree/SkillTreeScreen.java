@@ -35,7 +35,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 import java.awt.*;
-import java.util.List;
 import java.util.*;
 
 public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen {
@@ -188,9 +187,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
     HashMap<PointData, PerkButton> pointPerkButtonMap = new HashMap<>();
 
 
-    public List<TalentTree> schoolsInOrder;
-
-
     public Minecraft mc = Minecraft.getInstance();
 
     PlayerData playerData = Load.player(mc.player);
@@ -224,13 +220,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
             SkillTreeScreen.SEARCH.setFocused(false);
             SkillTreeScreen.SEARCH.setCanLoseFocus(true);
 
-            schoolsInOrder = ExileDB.TalentTrees()
-                    .getFiltered(x -> {
-                        return x.getSchool_type() == this.schoolType;
-                    });
-            schoolsInOrder.sort(Comparator.comparingInt(x -> x.order));
-
-            this.school = schoolsInOrder.get(0);
+            this.school = ExileDB.TalentTrees().getFilterWrapped(x -> x.getSchool_type().equals(this.schoolType)).list.get(0);
 
             refreshButtons();
 
@@ -319,7 +309,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                 var button = new PerkButton(this, playerData, school, e.getKey(), perk, x, y);
 
                 button.perkid = e.getValue();
-                
+
                 this.newButton(button);
             } catch (Exception exception) {
                 exception.printStackTrace();
@@ -529,7 +519,9 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         int savedy = yp;
 
 
-        MutableComponent text = Gui.TALENT_POINTS.locName().append(String.valueOf(playerData.talents.getFreePoints(Load.Unit(mc.player), this.schoolType)));
+        int points = schoolType.getFreePoints(Load.Unit(mc.player), playerData.talents);
+
+        MutableComponent text = Gui.TALENT_POINTS.locName().append(points + "");
 
         int yx = 4;
 

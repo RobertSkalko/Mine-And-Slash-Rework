@@ -61,7 +61,7 @@ public class SpellSchoolScreen extends BaseScreen implements INamedScreen, ILeft
 
     @Override
     public Words screenName() {
-        return Words.AscClasses;
+        return Words.Classes;
     }
 
     static int SLOT_SPACING = 21;
@@ -102,7 +102,7 @@ public class SpellSchoolScreen extends BaseScreen implements INamedScreen, ILeft
                         PointData point = e.getValue();
                         Perk perk = ExileDB.Perks().get(e.getKey());
 
-                        
+
                         if (perk != null && ExileDB.Perks().isRegistered(e.getKey())) {
                             int x = this.guiLeft + 12 + (point.x * SLOT_SPACING);
                             int y = this.guiTop + 178 - (point.y * SLOT_SPACING);

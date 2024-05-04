@@ -74,15 +74,15 @@ public class ServerContainer {
 
         GEAR_DROPRATE = b.defineInRange("gear_drop_rate", 7D, 0, 1000);
         SOUl_DROPRATE = b.defineInRange("soul_drop_rate", 0.3D, 0, 1000);
-        MAP_DROPRATE = b.defineInRange("map_drop_rate", 0.5D, 0, 1000);
+        MAP_DROPRATE = b.defineInRange("map_drop_rate", 1D, 0, 1000);
         MAP_DROPRATE_INSIDE_MAPS = b.defineInRange("MAP_DROPRATE_INSIDE_MAPS", 0.5D, 0, 1000);
         GEM_DROPRATE = b.defineInRange("gem_drop_rate", 1D, 0, 1000);
         UBER_FRAG_DROPRATE = b.defineInRange("UBER_FRAG_DROPRATE", 0.02D, 0, 1000);
         SKILL_GEM_DROPRATE = b.defineInRange("skill_gem_drop_rate", 3D, 0, 1000);
         SUPP_GEM_DROPRATE = b.defineInRange("support_gem_drop_rate", 2D, 0, 1000);
-        AURA_GEM_DROPRATE = b.defineInRange("aura_gem_drop_rate", 1D, 0, 1000);
+        AURA_GEM_DROPRATE = b.defineInRange("aura_gem_drop_rate", 2D, 0, 1000);
         RUNE_DROPRATE = b.defineInRange("rune_drop_rate", 0.5D, 0, 1000);
-        CURRENCY_DROPRATE = b.defineInRange("currency_drop_rate", 0.5D, 0, 1000);
+        CURRENCY_DROPRATE = b.defineInRange("currency_drop_rate", 1D, 0, 1000);
         WATCHER_EYE_DROPRATE = b.defineInRange("WATCHER_EYE_DROPRATE", 33D, 0, 1000);
         JEWEL_DROPRATE = b.defineInRange("jewel_drop_rate", 0.25D, 0, 1000);
         LOOT_CHEST_DROPRATE = b.defineInRange("loot_chest_drop_rate", 0.1D, 0, 1000);

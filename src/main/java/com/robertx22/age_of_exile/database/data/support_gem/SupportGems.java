@@ -31,7 +31,7 @@ public class SupportGems {
 
         new SupportGem("archmage", "Archmage", PlayStyle.INT, 1.25F,
                 Arrays.asList(
-                        OffenseStats.ARCHMAGE_BONUS_MANA_DAMAGE.get().mod(5, 20),
+                        OffenseStats.ARCHMAGE_BONUS_MANA_DAMAGE.get().mod(3, 15),
                         OffenseStats.ARCHMAGE_BONUS_MANA_COST.get().mod(1, 5)
                 ))
                 .levelReq(10).addToSerializables();
@@ -127,7 +127,7 @@ public class SupportGems {
                         .levelReq(10).addToSerializables();
 
                 new SupportGem(ele.guidName + "_flat_dmg", ele.dmgName + " Flat Damage", PlayStyle.INT, 1.1F,
-                        Arrays.asList(new BonusFlatElementalDamage(ele).mod(4, 6)
+                        Arrays.asList(new BonusFlatElementalDamage(ele).mod(6, 8)
                         ))
                         .levelReq(5).addToSerializables();
             }
@@ -180,7 +180,7 @@ public class SupportGems {
 
         new SupportGem("plus_aoe", "Expanded Area", PlayStyle.INT, 1.2F,
                 Arrays.asList(
-                        new StatMod(-10, -25, OffenseStats.AREA_DAMAGE.get(), ModType.MORE),
+                        new StatMod(10, 25, OffenseStats.AREA_DAMAGE.get(), ModType.FLAT),
                         new StatMod(20, 40, SpellChangeStats.INCREASED_AREA.get(), ModType.FLAT)
                 ))
                 .levelReq(10).addToSerializables();

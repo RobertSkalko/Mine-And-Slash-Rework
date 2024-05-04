@@ -97,7 +97,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.sockets = new MinMax(0, 3);
             x.min_lvl = 25;
             x.max_spell_links = 4;
-            x.min_map_rarity_to_drop = IRarity.UNCOMMON;
+            x.min_map_rarity_to_drop = IRarity.COMMON_ID;
             x.lootable_gear_tier = GearRarity.LootableGearTier.MID;
             x.pot = new GearRarity.Potential(50);
             x.min_affixes = 4;
@@ -182,7 +182,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
             x.min_affixes = 0;
             x.weight = 25;
-            x.min_map_rarity_to_drop = IRarity.RARE_ID;
+            x.min_map_rarity_to_drop = IRarity.UNCOMMON;
             x.item_tier_power = 2;
             x.item_value_multi = 2;
             x.item_tier = 5;

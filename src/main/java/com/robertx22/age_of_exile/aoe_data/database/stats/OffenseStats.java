@@ -9,6 +9,7 @@ import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DataPackStatAccessor;
 import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
+import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.tags.imp.SpellTag;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
@@ -77,6 +78,7 @@ public class OffenseStats {
             .worksWithEvent(SpendResourceEvent.ID)
             .setPriority(StatPriority.Damage.BEFORE_DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
+            .addCondition(StatConditions.IS_RESOURCE.get(ResourceType.mana))
             .addEffect(StatEffects.Layers.ADDITIVE_FLAT_MANA_FROM_MANA)
             .setLocName(x -> Stat.format(
                     "Add " + VAL1 + "% of your " + Mana.getInstance().getIconNameFormat() + " to the Mana Cost"

@@ -1,8 +1,6 @@
 package com.robertx22.age_of_exile.saveclasses.perks;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.config.forge.ServerContainer;
-import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.perks.PerkStatus;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
@@ -12,7 +10,6 @@ import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.TalentStatCtx;
-import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -23,45 +20,31 @@ import java.util.*;
 public class TalentsData implements IStatCtx {
 
 
-    SchoolData perks = new SchoolData();
+    HashMap<TalentTree.SchoolType, SchoolData> perks = new HashMap<>();
 
     public int reset_points = 5;
 
 
     public int getAllocatedPoints(TalentTree.SchoolType type) {
-        return this.perks.getAllocatedPointsInSchool();
+        return this.perks.get(type).getAllocatedPointsInSchool();
     }
 
-    public int getFreePoints(EntityData data, TalentTree.SchoolType type) {
 
-        int num = 0;
-
-        num = (int) GameBalanceConfig.get().STARTING_TALENT_POINTS;
-        num += GameBalanceConfig.get().TALENT_POINTS_PER_LVL * data.getLevel();
-
-        num -= this.getAllocatedPoints(type);
-
-        if (data.getEntity() instanceof Player p) {
-            num += MathHelper.clamp(Load.player(p).bonusTalents, 0, ServerContainer.get().MAX_ADDITIONAL_TALENT_POINTS.get());
-        }
-        return num;
-    }
-
-    public SchoolData getSchool() {
-        return perks;
-
+    public SchoolData getSchool(TalentTree.SchoolType type) {
+        return perks.computeIfAbsent(type, x -> new SchoolData()); // todo check if this works how i think it should
     }
 
     public void allocate(Player player, TalentTree school, PointData point) {
-        getSchool().allocate(point);
+        getSchool(school.getSchool_type()).allocate(point);
     }
 
-    public void remove(TalentTree school, PointData point) {
-        getSchool().unAllocate(point);
+    public void remove(TalentTree.SchoolType school, PointData point) {
+        getSchool(school).unAllocate(point);
     }
 
     public boolean hasFreePoints(EntityData data, TalentTree.SchoolType type) {
-        return getFreePoints(data, type) > 0;
+        return type.getFreePoints(data, this) > 0;
+
     }
 
     public boolean canAllocate(TalentTree school, PointData point, EntityData data, Player player) {
@@ -74,7 +57,7 @@ public class TalentsData implements IStatCtx {
 
 
         if (perk.one_kind != null && !perk.one_kind.isEmpty()) {
-            return getAllAllocatedPerks().values().stream().noneMatch(x -> x.one_kind != null && x.one_kind.equals(perk.one_kind));
+            return getAllAllocatedPerks(school.getSchool_type()).values().stream().noneMatch(x -> x.one_kind != null && x.one_kind.equals(perk.one_kind));
         }
 
         // todo you can take multiple starts??
@@ -83,7 +66,7 @@ public class TalentsData implements IStatCtx {
             Set<PointData> con = school.calcData.connections.get(point);
 
             if (con == null || !con.stream()
-                    .anyMatch(x -> getSchool()
+                    .anyMatch(x -> getSchool(school.getSchool_type())
                             .isAllocated(x))) {
                 return false;
             }
@@ -95,7 +78,7 @@ public class TalentsData implements IStatCtx {
 
     public boolean canRemove(TalentTree school, PointData point) {
 
-        if (!getSchool().isAllocated(point)) {
+        if (!getSchool(school.getSchool_type()).isAllocated(point)) {
             return false;
         }
 
@@ -104,7 +87,7 @@ public class TalentsData implements IStatCtx {
         }
 
         for (PointData con : school.calcData.connections.get(point)) {
-            if (getSchool().isAllocated(con)) {
+            if (getSchool(school.getSchool_type()).isAllocated(con)) {
                 Perk perk = school.calcData.getPerk(con);
                 if (perk.is_entry) {
                     continue;
@@ -131,7 +114,7 @@ public class TalentsData implements IStatCtx {
 
             Perk perk = school.calcData.getPerk(current);
 
-            if (current.equals(toRemove) || !getSchool().isAllocated(current)) {
+            if (current.equals(toRemove) || !getSchool(school.getSchool_type()).isAllocated(current)) {
                 continue; // skip exploring this path
             }
 
@@ -152,48 +135,27 @@ public class TalentsData implements IStatCtx {
 
     public void clearAllTalents() {
 
-        this.perks = new SchoolData();
+        this.perks = new HashMap<>();
 
 
     }
 
-    public HashMap<PointData, Perk> getAllAllocatedPerks() {
-
+    public HashMap<PointData, Perk> getAllAllocatedPerks(TalentTree.SchoolType type) {
 
         HashMap<PointData, Perk> perks = new HashMap<>();
 
         TalentTree school = ExileDB.TalentTrees().get("talents");
         if (school != null) {
-            for (PointData p : this.perks.getAllocatedPoints(school)) {
+            for (PointData p : this.getSchool(type).getAllocatedPoints(school)) {
                 perks.put(p, school.calcData.getPerk(p));
             }
         }
 
-        /*
-        for (TalentTree.SchoolType type : TalentTree.SchoolType.values()) {
-            for (Map.Entry<String, SchoolData> x : getPerks(type)
-                    .entrySet()) {
-                if (ExileDB.TalentTrees()
-                        .isRegistered(x.getKey())) {
 
-                    TalentTree school = ExileDB.TalentTrees()
-                            .get(x.getKey());
-                    if (school != null) {
-                        for (PointData p : x.getValue()
-                                .getAllocatedPoints(school)) {
-                            perks.put(p, school.calcData.getPerk(p));
-                        }
-                    }
-                }
-            }
-        }
-
-         */
         return perks;
     }
 
     public PerkStatus getStatus(Player player, TalentTree school, PointData point) {
-
         if (isAllocated(school, point)) {
             return PerkStatus.CONNECTED;
         }
@@ -220,25 +182,27 @@ public class TalentsData implements IStatCtx {
 
 
     public boolean isAllocated(TalentTree school, PointData point) {
-        return getSchool().isAllocated(point);
+        return getSchool(school.getSchool_type()).isAllocated(point);
     }
 
     @Override
     public List<StatContext> getStatAndContext(LivingEntity en) {
         List<StatContext> ctx = new ArrayList<>();
 
-        HashMap<PointData, Perk> map = getAllAllocatedPerks();
+        for (TalentTree.SchoolType type : TalentTree.SchoolType.values()) {
 
-        int lvl = Load.Unit(en).getLevel();
+            HashMap<PointData, Perk> map = getAllAllocatedPerks(type);
 
-        List<ExactStatData> stats = new ArrayList<>();
+            int lvl = Load.Unit(en).getLevel();
 
-        map.forEach((key, value) -> {
-            value.stats.forEach(s -> stats.add(s.toExactStat(lvl)));
-        });
+            List<ExactStatData> stats = new ArrayList<>();
 
-        ctx.add(new TalentStatCtx(stats));
+            map.forEach((key, value) -> {
+                value.stats.forEach(s -> stats.add(s.toExactStat(lvl)));
+            });
 
+            ctx.add(new TalentStatCtx(stats));
+        }
         return ctx;
     }
 

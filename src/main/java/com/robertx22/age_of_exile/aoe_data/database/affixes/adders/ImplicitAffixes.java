@@ -34,7 +34,7 @@ public class ImplicitAffixes implements ExileRegistryInit {
         new Builder(SlotTags.ring).build(x -> {
             x.add("hp_ring", "Coral Ring", Health.getInstance().mod(5, 10));
             x.add("mana_ring", "Paua Ring", Mana.getInstance().mod(10, 20));
-            x.add("ms_ring", "Moonstone Ring", MagicShield.getInstance().mod(10, 20));
+            x.add("ms_ring", "Moonstone Ring", MagicShield.getInstance().mod(5, 10));
             x.add("ene_ring", "Emerald Ring", Energy.getInstance().mod(10, 20));
         });
         new Builder(SlotTags.necklace).build(x -> {

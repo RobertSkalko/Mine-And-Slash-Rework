@@ -114,3 +114,11 @@ v.5.4.6
 - low lvl players no longer get exp debt
 - added a loot boost for players under lvl 10
 - nerfed magic find, it's no longer a flat chance to upgrade rarity, it now depends on how much rarer the higher rarity is. so 100% magic find on a rare drop (1000 weight for example), will have 50% chance to upgrade to epic (500 weight for example)
+
+v.5.4.7
+- halved map mob damage bonus scaling
+- map affixes are now weaker on lower rarity maps
+Should make maps a lot easier, common maps should have +30% phys as fire. Mythics should have +100% etc.
+
+v.5.4.7
+- for absolutely no reason at all, your current talent tree will be wiped. No worries just re-allocate the points!
