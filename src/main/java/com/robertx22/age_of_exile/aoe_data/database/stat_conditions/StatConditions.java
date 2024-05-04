@@ -28,8 +28,25 @@ import java.util.stream.Collectors;
 
 public class StatConditions implements ExileRegistryInit {
 
-    public static StatCondition IF_CRIT = new IsBooleanTrueCondition(EventData.CRIT);
-    public static StatCondition IF_NOT_CRIT = new IsBooleanTrueCondition(EventData.CRIT).flipCondition();
+
+    public static DataHolder<String, StatCondition> IS_BOOLEAN = new DataHolder<>(Arrays.asList(
+            EventData.IS_BLOCKED,
+            EventData.IS_DODGED,
+            EventData.CRIT,
+            EventData.IS_BASIC_ATTACK,
+            EventData.IS_SUMMON_ATTACK,
+            EventData.IS_BASIC_ATTACK
+    ), x -> new IsBooleanTrueCondition(x));
+
+    public static DataHolder<String, StatCondition> IS_FALSE = new DataHolder<>(Arrays.asList(
+            EventData.IS_BLOCKED,
+            EventData.IS_DODGED,
+            EventData.CRIT,
+            EventData.IS_BASIC_ATTACK,
+            EventData.IS_SUMMON_ATTACK,
+            EventData.IS_BASIC_ATTACK
+    ), x -> new IsBooleanTrueCondition(x).flipCondition());
+
     public static StatCondition IF_RANDOM_ROLL = new RandomRollCondition();
     public static StatCondition IS_SPELL = new IsSpellCondition();
     public static StatCondition ELEMENT_MATCH_STAT = new ElementMatchesStat();
@@ -40,7 +57,6 @@ public class StatConditions implements ExileRegistryInit {
     public static StatCondition IS_TARGET_NOT_UNDEAD = new IsUndeadCondition().flipCondition();
     public static StatCondition IS_IN_COMBAT = new IsInCombatCondition();
     public static StatCondition IS_NOT_IN_COMBAT = new IsInCombatCondition().flipCondition();
-    public static StatCondition IS_BASIC_ATTACK = new IsBooleanTrueCondition(EventData.IS_BASIC_ATTACK);
     public static StatCondition IS_TARGET_LOW_HP = new IsHealthBellowPercentCondition("is_target_low_hp", 30, EffectSides.Target);
     public static StatCondition IS_TARGET_LOW_MAGIC_SHIELD = new IsMSBellowPercentCondition("is_target_low_magic_shield", 30, EffectSides.Target);
     public static StatCondition IS_TARGET_LOW = new IsTargetLow("is_target_low", 30, EffectSides.Target);
@@ -48,8 +64,7 @@ public class StatConditions implements ExileRegistryInit {
     public static StatCondition IS_TARGET_NEAR_FULL_HP = new IsHealthAbovePercentCondition("is_target_near_full_hp", 70, EffectSides.Target);
     public static StatCondition IS_ELEMENTAL = new IsElementalDamageCondition();
     public static StatCondition IS_ATTACK_DAMAGE = new StringMatchesCondition(EventData.STYLE, PlayStyle.INT.id).flipCondition();
-    public static StatCondition IS_NOT_SUMMON_ATTACK = new IsBooleanTrueCondition(EventData.IS_SUMMON_ATTACK).flipCondition();
-
+ 
     public static DataHolder<String, StatCondition> IS_NOT_ON_COOLDOWN = new DataHolder<>(Arrays.asList(
             SetCooldownEffect.MISSILE_BARRAGE.cd_id
     ), x -> new IsNotOnCooldownCondition(x));

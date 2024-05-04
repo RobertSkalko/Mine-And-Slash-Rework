@@ -40,8 +40,7 @@ public class SpellDodgeEffect extends BaseDamageEffect {
         float chance = dodge.getUsableValue((int) totalDodge, effect.sourceData.getLevel()) * 100;
 
         if (RandomUtils.roll(chance)) {
-            effect.data.getNumber(EventData.NUMBER).number = 0;
-            effect.data.setBoolean(EventData.IS_DODGED, true);
+            effect.data.setHitAvoided(EventData.IS_DODGED);
         }
 
         return effect;

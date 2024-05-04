@@ -143,14 +143,12 @@ public class TalentsData implements IStatCtx {
     public HashMap<PointData, Perk> getAllAllocatedPerks(TalentTree.SchoolType type) {
 
         HashMap<PointData, Perk> perks = new HashMap<>();
-
-        TalentTree school = ExileDB.TalentTrees().get("talents");
-        if (school != null) {
-            for (PointData p : this.getSchool(type).getAllocatedPoints(school)) {
-                perks.put(p, school.calcData.getPerk(p));
+        
+        ExileDB.TalentTrees().getFilterWrapped(x -> x.getSchool_type() == type).list.stream().findFirst().ifPresent(x -> {
+            for (PointData p : this.getSchool(type).getAllocatedPoints(x)) {
+                perks.put(p, x.calcData.getPerk(p));
             }
-        }
-
+        });
 
         return perks;
     }

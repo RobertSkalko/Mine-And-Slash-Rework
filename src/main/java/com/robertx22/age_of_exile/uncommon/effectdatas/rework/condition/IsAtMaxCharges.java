@@ -29,7 +29,7 @@ public class IsAtMaxCharges extends StatCondition {
 
         var eff = ExileDB.ExileEffects().get(effect);
         if (d.has(eff)) {
-            return d.get(eff).stacks >= eff.max_stacks;
+            return d.get(eff).stacks >= eff.getMaxCharges(event.targetData);
         }
         return false;
     }

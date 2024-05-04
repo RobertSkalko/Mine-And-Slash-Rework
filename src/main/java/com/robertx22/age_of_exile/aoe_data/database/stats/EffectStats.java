@@ -16,12 +16,37 @@ import com.robertx22.age_of_exile.tags.imp.EffectTag;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.ExilePotionEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.TenSecondPlayerTickEvent;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 
 import java.util.Arrays;
 
 public class EffectStats {
+
+    public static DataPackStatAccessor<EffectCtx> APPLY_GOLEM_EFFECT = DatapackStatBuilder
+            .<EffectCtx>of(x -> "apply_golem_effect_" + x.id, x -> x.element)
+            .addAllOfType(Arrays.asList(
+                            ModEffects.ICE_GOLEM_BUFF
+                    )
+            )
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(StatPriority.Damage.FINAL_DAMAGE)
+            .setSide(EffectSides.Source)
+            .addCondition(StatConditions.IS_BOOLEAN.get(EventData.IS_SUMMON_ATTACK))
+            .addEffect(x -> StatEffects.GIVE_EFFECT_TO_SOURCE_30_SEC.get(x))
+            .setLocName(x -> Stat.format(
+                    "Golem Attacks give you " + x.locname
+            ))
+            .setLocDesc(x -> "")
+            .modifyAfterDone(x -> {
+                x.min = 0;
+                x.max = 1;
+                x.is_long = true;
+                x.is_perc = false;
+                x.scaling = StatScaling.NONE;
+            })
+            .build();
 
     public static DataPackStatAccessor<EffectCtx> CURSE_SELF = DatapackStatBuilder
             .<EffectCtx>of(x -> "cursed_by_" + x.id, x -> x.element)
@@ -76,6 +101,7 @@ public class EffectStats {
                 x.scaling = StatScaling.NONE;
             })
             .build();
+
     public static DataPackStatAccessor<ModTag> EFFECT_OF_BUFFS_ON_YOU_PER_EFFECT_TAG = DatapackStatBuilder
             .<ModTag>of(x -> "inc_effect_of_" + x.GUID() + "_buff_on_you", x -> Elements.Physical)
             .addAllOfType(ModTag.MAP.get(TagType.Effect))
@@ -92,6 +118,7 @@ public class EffectStats {
                 x.scaling = StatScaling.NONE;
             })
             .build();
+
     public static DataPackStatAccessor<EmptyAccessor> EFFECT_DURATION_YOU_CAST = DatapackStatBuilder
             .ofSingle("eff_dur_u_cast", Elements.Physical)
             .worksWithEvent(ExilePotionEvent.ID)

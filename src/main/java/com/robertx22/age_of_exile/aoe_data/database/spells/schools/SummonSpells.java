@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.aoe_data.database.spells.PartBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SpellCalcs;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SummonType;
+import com.robertx22.age_of_exile.aoe_data.database.stats.EffectStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
 import com.robertx22.age_of_exile.database.data.spells.components.SpellConfiguration;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.ExileEffectAction;
@@ -48,6 +49,8 @@ public class SummonSpells implements ExileRegistryInit {
                 .levelReq(20)
                 .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(10, 50))
                 .addStat(new SummonHealth().mod(10, 100))
+                .addStat(EffectStats.APPLY_GOLEM_EFFECT.get(ModEffects.FIRE_GOLEM_BUFF).mod(1, 1))
+
                 .build();
 
         SpellBuilder.of(SUMMON_COLD_GOLEM, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(40, 20 * 60, 30).setSummonType(SummonType.GOLEM), "Summon Frost Golem",
@@ -57,6 +60,7 @@ public class SummonSpells implements ExileRegistryInit {
                 .levelReq(20)
                 .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(10, 50))
                 .addStat(new SummonHealth().mod(10, 100))
+                .addStat(EffectStats.APPLY_GOLEM_EFFECT.get(ModEffects.ICE_GOLEM_BUFF).mod(1, 1))
                 .build();
 
         SpellBuilder.of(SUMMON_LIGHTNING_GOLEM, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(40, 20 * 60, 30).setSummonType(SummonType.GOLEM), "Summon Lightning Golem",
@@ -66,6 +70,7 @@ public class SummonSpells implements ExileRegistryInit {
                 .levelReq(20)
                 .addStat(OffenseStats.SUMMON_DAMAGE.get().mod(10, 50))
                 .addStat(new SummonHealth().mod(10, 100))
+                .addStat(EffectStats.APPLY_GOLEM_EFFECT.get(ModEffects.LIGHTNING_GOLEM_BUFF).mod(1, 1))
                 .build();
 
 

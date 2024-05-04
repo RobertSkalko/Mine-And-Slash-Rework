@@ -102,7 +102,7 @@ public class DamageEvent extends EffectEvent {
                         .normalize();
                 vec3d3 = new Vec3(vec3d3.x, 0.0D, vec3d3.z);
                 if (vec3d3.dot(vec3d2) < 0.0D) {
-                    this.data.setBoolean(EventData.IS_BLOCKED, true);
+                    this.data.setHitAvoided(EventData.IS_BLOCKED);
                 }
             }
         }
@@ -278,7 +278,7 @@ public class DamageEvent extends EffectEvent {
 
         DmgByElement info = calculateAllBonusElementalDamage();
 
-        if (data.isDodged()) {
+        if (data.isHitAvoided()) {
             if (attackInfo != null) {
                 attackInfo.setAmount(0);
                 attackInfo.setCanceled(true);
@@ -317,7 +317,7 @@ public class DamageEvent extends EffectEvent {
 
 
         if (this.data.isSpellEffect()) {
-            if (!data.getBoolean(EventData.DISABLE_KNOCKBACK) && dmg > 0 && !data.isDodged()) {
+            if (!data.getBoolean(EventData.DISABLE_KNOCKBACK) && dmg > 0 && !data.isHitAvoided()) {
                 // if magic shield absorbed the damage, still do knockback
                 DashUtils.knockback(source, target);
             }
@@ -420,7 +420,7 @@ public class DamageEvent extends EffectEvent {
         if (source instanceof ServerPlayer) {
             ServerPlayer player = (ServerPlayer) source;
 
-            if (data.isDodged()) {
+            if (data.isHitAvoided()) {
                 if (getAttackType().isAttack()) {
                     text = "Dodge";
                 } else {

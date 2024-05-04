@@ -73,8 +73,7 @@ public class BlockChance extends Stat {
         public DamageEvent activate(DamageEvent effect, StatData data, Stat stat) {
             float chance = data.getValue();
             if (RandomUtils.roll(chance)) {
-                effect.data.getNumber(EventData.NUMBER).number = 0;
-                effect.data.setBoolean(EventData.IS_DODGED, true);
+                effect.data.setHitAvoided(EventData.IS_BLOCKED);
             }
             return effect;
         }

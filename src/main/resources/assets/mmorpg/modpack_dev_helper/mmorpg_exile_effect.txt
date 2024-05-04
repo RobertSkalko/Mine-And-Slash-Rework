@@ -9,6 +9,7 @@ draconic_blood
 essence_of_frost
 frost_lich
 ground
+ice_golem_buff
 inner_calm
 mage_circle
 missile_barrage

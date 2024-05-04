@@ -83,10 +83,7 @@ public class DodgeRating extends Stat implements IUsableStat {
 
         @Override
         public DamageEvent activate(DamageEvent effect, StatData data, Stat stat) {
-
-            effect.data.getNumber(EventData.NUMBER).number = 0;
-            effect.data.setBoolean(EventData.IS_DODGED, true);
-
+            effect.data.setHitAvoided(EventData.IS_DODGED);
             return effect;
         }
 

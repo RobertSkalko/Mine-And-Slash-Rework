@@ -2,10 +2,7 @@ package com.robertx22.age_of_exile.aoe_data.database.stats;
 
 import com.robertx22.age_of_exile.aoe_data.database.stat_conditions.StatConditions;
 import com.robertx22.age_of_exile.aoe_data.database.stat_effects.StatEffects;
-import com.robertx22.age_of_exile.aoe_data.database.stats.base.DatapackStatBuilder;
-import com.robertx22.age_of_exile.aoe_data.database.stats.base.EmptyAccessor;
-import com.robertx22.age_of_exile.aoe_data.database.stats.base.LeechInfo;
-import com.robertx22.age_of_exile.aoe_data.database.stats.base.ResourceAndAttack;
+import com.robertx22.age_of_exile.aoe_data.database.stats.base.*;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DataPackStatAccessor;
@@ -24,6 +21,30 @@ import net.minecraft.ChatFormatting;
 import java.util.Arrays;
 
 public class ResourceStats {
+
+    public static DataPackStatAccessor<ResourceOnAction> RESOURCE_ON_ACTION = DatapackStatBuilder
+            .<ResourceOnAction>of(x -> x.resource.id + "_on_", x -> Elements.Physical)
+            .addAllOfType(ResourceOnAction.allCombos())
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)
+            .setSide(EffectSides.Source)
+            .addCondition(x -> StatConditions.IS_BOOLEAN.get(x.action))
+            .addEffect(e -> StatEffects.LEECH_RESTORE_RESOURCE_BASED_ON_STAT_DATA.get(e.resource)) // todo maybe make this not capped by leech
+            .setLocName(x ->
+                    Stat.format(
+                            "Gain " + x.resource.locname + " on " + x.actionName
+                    )
+            )
+            .setLocDesc(x -> "")
+            .modifyAfterDone(x -> {
+                x.is_long = true;
+                x.min = 0;
+                x.is_perc = false;
+                x.scaling = StatScaling.NORMAL;
+            })
+            .build();
+
+
     public static DataPackStatAccessor<LeechInfo> ELEMENT_LEECH_RESOURCE = DatapackStatBuilder
             .<LeechInfo>of(x -> x.element.guidName + "_" + x.resourceType.id + "_leech", x -> x.element)
             .addAllOfType(LeechInfo.allCombos())
@@ -45,6 +66,7 @@ public class ResourceStats {
                 x.scaling = StatScaling.NONE;
             })
             .build();
+
     public static DataPackStatAccessor<ResourceType> RESOURCE_ON_KILL = DatapackStatBuilder
             .<ResourceType>of(x -> x.id + "_on_kill", x -> Elements.NONE)
             .addAllOfType(Arrays.asList(

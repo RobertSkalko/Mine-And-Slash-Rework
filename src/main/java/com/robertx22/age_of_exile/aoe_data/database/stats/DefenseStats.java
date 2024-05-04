@@ -11,7 +11,6 @@ import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.tags.imp.SpellTag;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
-import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 
 public class DefenseStats {
@@ -46,23 +45,44 @@ public class DefenseStats {
                 x.max = 90;
             })
             .build();
-    public static DataPackStatAccessor<PlayStyle> STYLE_DAMAGE_RECEIVED = DatapackStatBuilder
-            .<PlayStyle>of(x -> x.id + "_dmg_received", x -> Elements.Physical)
-            .addAllOfType(PlayStyle.values())
+
+    public static DataPackStatAccessor<Elements> ELEMENTAL_DAMAGE_REDUCTION = DatapackStatBuilder
+            .<Elements>of(x -> x.guidName + "_dmg_reduction", x -> x)
+            .addAllOfType(Elements.values())
             .worksWithEvent(DamageEvent.ID)
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Target)
-            .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x.getTag()))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
-            .setLocName(x -> x.name + " Damage Received")
-            .setLocDesc(x -> "Magic damage are spells that have tag Magic etc")
+            .addCondition(x -> StatConditions.ELEMENT_MATCH_STAT)
+            .addEffect(StatEffects.Layers.DAMAGE_REDUCTION)
+            .setLocName(x -> x.dmgName + " Damage Reduction")
+            .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
                 x.scaling = StatScaling.NONE;
                 x.group = Stat.StatGroup.Misc;
+                x.min = -500;
                 x.max = 75;
             })
             .build();
+
+    public static DataPackStatAccessor<EmptyAccessor> DAMAGE_REDUCTION = DatapackStatBuilder
+            .<EmptyAccessor>ofSingle("dmg_reduction", Elements.Physical)
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
+            .setSide(EffectSides.Target)
+            .addEffect(StatEffects.Layers.DAMAGE_REDUCTION)
+            .setLocName(x -> "Damage Reduction")
+            .setLocDesc(x -> "")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+                x.scaling = StatScaling.NONE;
+                x.group = Stat.StatGroup.Misc;
+                x.min = -500;
+                x.max = 75;
+            })
+            .build();
+
+
     public static DataPackStatAccessor<EmptyAccessor> PROJECTILE_DAMAGE_RECEIVED = DatapackStatBuilder
             .ofSingle("proj_dmg_received", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)

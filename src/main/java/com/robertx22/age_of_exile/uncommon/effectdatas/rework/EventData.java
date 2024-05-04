@@ -42,6 +42,7 @@ public class EventData {
     public static String GIVE_OR_TAKE = "give_or_take";
     public static String STACKS = "stacks";
 
+    public static String IS_HIT_AVOIDED = "is_hit_avoided";
     public static String IS_DODGED = "is_dodged";
     public static String IS_BLOCKED = "is_blocked";
     public static String DISABLE_KNOCKBACK = "disable_knockback";
@@ -76,6 +77,13 @@ public class EventData {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void setHitAvoided(String avoidtype) {
+        this.setBoolean(IS_HIT_AVOIDED, true);
+        this.setBoolean(avoidtype, true);
+        getNumber(EventData.NUMBER).number = 0;
+
     }
 
     public void setupNumber(String id, float num) {
@@ -124,8 +132,8 @@ public class EventData {
         return getBoolean(CANCELED);
     }
 
-    public boolean isDodged() {
-        return getBoolean(IS_DODGED);
+    public boolean isHitAvoided() {
+        return getBoolean(IS_HIT_AVOIDED);
     }
 
     public Elements getElement() {

@@ -44,6 +44,13 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
     public EffectType type = EffectType.neutral;
     public int max_stacks = 1;
 
+    public int getMaxCharges(EntityData data) {
+
+
+        return data.maxCharges.bonus.getOrDefault(this.GUID(), 0) + this.max_stacks;
+
+    }
+
     public SpellTag remove_on_spell_cast = null;
     public boolean stacks_affect_stats = true;
 

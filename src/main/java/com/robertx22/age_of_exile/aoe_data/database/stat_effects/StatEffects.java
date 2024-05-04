@@ -30,9 +30,11 @@ public class StatEffects implements ExileRegistryInit {
         public static ModifyStatLayerEffect ADDITIVE_DAMAGE_PERCENT = new ModifyStatLayerEffect(StatLayers.Offensive.ADDITIVE_DMG, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, NumberProvider.ofStatData());
         public static ModifyStatLayerEffect CRIT_DAMAGE = new ModifyStatLayerEffect(StatLayers.Offensive.CRIT_DAMAGE, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, NumberProvider.ofStatData());
         public static ModifyStatLayerEffect DOUBLE_DAMAGE = new ModifyStatLayerEffect(StatLayers.Offensive.DOUBLE_DAMAGE, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, NumberProvider.ofStatData());
-
-
         public static ModifyStatLayerEffect ADDITIVE_FLAT_MANA_FROM_MANA = new ModifyStatLayerEffect(StatLayers.Offensive.FLAT_DAMAGE, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.ADD, NumberProvider.ofPercentOfStat(Mana.getInstance().GUID()));
+
+
+        // defensive
+        public static ModifyStatLayerEffect DAMAGE_REDUCTION = new ModifyStatLayerEffect(StatLayers.Defensive.DAMAGE_REDUCTION, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.REDUCE, NumberProvider.ofStatData());
 
 
         // public static ModifyStatLayerEffect ELEMENTAL_RESIST = new ModifyStatLayerEffect(StatLayers.Defensive.ELEMENTAL_MITIGATION, EventData.NUMBER, ModifyStatLayerEffect.ModificationType.REDUCE, ModifyStatLayerEffect.CalculationType.JUST_STAT_NUMBER);
@@ -68,28 +70,19 @@ public class StatEffects implements ExileRegistryInit {
     );
 
     public static DataHolder<ResourceType, StatEffect> LEECH_RESTORE_RESOURCE_BASED_ON_STAT_DATA = new DataHolder<>(
-            Arrays.asList(
-                    ResourceType.mana,
-                    ResourceType.energy,
-                    ResourceType.magic_shield,
-                    ResourceType.health
-            )
+            ResourceType.values()
             , x -> new RestoreResourceAction("restore_" + x.id + "_per_stat_data", NumberProvider.ofStatData(), x, RestoreType.leech)
     );
 
     public static DataHolder<ResourceType, StatEffect> LEECH_PERCENT_OF_DAMAGE_AS_RESOURCE = new DataHolder<>(
-            Arrays.asList(
-                    ResourceType.mana,
-                    ResourceType.energy,
-                    ResourceType.magic_shield,
-                    ResourceType.health
-            )
+            ResourceType.values()
             , x -> new RestoreResourceAction("leech_" + x.id, NumberProvider.ofPercentOfDataNumber(EventData.NUMBER), x, RestoreType.leech)
     );
 
     public static DataHolder<EffectCtx, StatEffect> GIVE_EFFECT_TO_SOURCE_30_SEC = new DataHolder<>(
             Arrays.asList(
-                    ModEffects.ESSENCE_OF_FROST
+                    ModEffects.ESSENCE_OF_FROST,
+                    ModEffects.ICE_GOLEM_BUFF
             )
             , x -> new GiveExileStatusEffect(x.resourcePath, EffectSides.Source, 30));
 

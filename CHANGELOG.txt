@@ -122,3 +122,7 @@ Should make maps a lot easier, common maps should have +30% phys as fire. Mythic
 
 v.5.4.7
 - for absolutely no reason at all, your current talent tree will be wiped. No worries just re-allocate the points!
+- for datapackers: is_dodged is no longer used by both block and dodge, now there's a special is_hit_avoided that all things that make the hit avoid call, but you can also check if is_dodged or is_blocked
+- golems now give you a buff when they attack anything
+- added stat for "plus stat per effect stacks on you", mahj will know
+- 

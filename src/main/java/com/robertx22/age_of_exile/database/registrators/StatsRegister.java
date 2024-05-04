@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.database.registrators;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
+import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.database.data.profession.Profession;
 import com.robertx22.age_of_exile.database.data.profession.all.Professions;
 import com.robertx22.age_of_exile.database.data.profession.stat.DoubleDropChance;
@@ -9,10 +10,7 @@ import com.robertx22.age_of_exile.database.data.profession.stat.ProfExp;
 import com.robertx22.age_of_exile.database.data.profession.stat.TripleDropChance;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
-import com.robertx22.age_of_exile.database.data.stats.types.JewelSocketStat;
-import com.robertx22.age_of_exile.database.data.stats.types.MaxAllSpellLevels;
-import com.robertx22.age_of_exile.database.data.stats.types.MaxSpellLevel;
-import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
+import com.robertx22.age_of_exile.database.data.stats.types.*;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.*;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.AllAttributes;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.*;
@@ -92,6 +90,7 @@ public class StatsRegister implements ExileRegistryInit {
 
                     add(JewelSocketStat.getInstance());
 
+                    add(new BonusChargesStat(ModEffects.ENDURANCE_CHARGE));
                     add(new BonusPhysicalAsElemental(Elements.Elemental));
                     add(new MaxElementalResist(Elements.Elemental));
 

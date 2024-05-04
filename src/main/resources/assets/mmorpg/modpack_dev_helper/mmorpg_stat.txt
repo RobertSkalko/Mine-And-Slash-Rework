@@ -28,6 +28,7 @@ all_physical_damage
 all_resist
 all_vuln_crit
 all_water_damage
+apply_golem_effect_ice_golem_buff
 archmage
 archmage_mana_cost
 area_cast_time
@@ -61,6 +62,7 @@ block_aura_cost
 block_chance
 blood
 blood_leech_cap
+blood_on_
 blood_per_10_strength
 blood_user
 bonus_exp
@@ -86,7 +88,6 @@ chaining_cast_time
 chaining_cdr
 chaining_spell_dmg
 chaining_spell_dmg_taken
-chance_of_barrage_on_spell_crit
 chance_of_blind
 chance_of_slow
 chaos_ailment_aura_cost
@@ -189,6 +190,7 @@ enchanting_misc_drop_bonus
 enchanting_triple_drop
 energy
 energy_leech_cap
+energy_on_
 energy_on_hit_hit
 energy_per_10_dexterity
 energy_per_10_mana
@@ -247,6 +249,7 @@ gear_weapon_damage
 golem_cast_time
 golem_cdr
 golem_damage
+golem_eff_dur_u_cast
 golem_spell_chance
 golem_spell_dmg
 golem_spell_dmg_taken
@@ -263,6 +266,7 @@ heal_spell_dmg
 heal_spell_dmg_taken
 health
 health_leech_cap
+health_on_
 health_on_hit_hit
 health_on_kill
 health_per_10_dexterity
@@ -295,6 +299,8 @@ inc_effect_of_defensive_buff_given
 inc_effect_of_defensive_buff_on_you
 inc_effect_of_food_buff_given
 inc_effect_of_food_buff_on_you
+inc_effect_of_golem_buff_given
+inc_effect_of_golem_buff_on_you
 inc_effect_of_heal_over_time_buff_given
 inc_effect_of_heal_over_time_buff_on_you
 inc_effect_of_immobilizing_buff_given
@@ -429,6 +435,7 @@ magic_shield
 magic_shield_aura_cost
 magic_shield_heal
 magic_shield_leech_cap
+magic_shield_on_
 magic_shield_on_hit_hit
 magic_shield_on_kill
 magic_shield_per_10_mana
@@ -440,6 +447,7 @@ magic_spell_dmg_taken
 mana
 mana_cost
 mana_leech_cap
+mana_on_
 mana_on_hit_hit
 mana_on_kill
 mana_per_10_dexterity

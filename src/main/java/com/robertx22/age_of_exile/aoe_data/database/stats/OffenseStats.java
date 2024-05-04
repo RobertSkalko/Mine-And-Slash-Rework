@@ -14,6 +14,7 @@ import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.tags.imp.SpellTag;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.SpendResourceEvent;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
@@ -26,29 +27,6 @@ import static com.robertx22.age_of_exile.database.data.stats.Stat.format;
 
 public class OffenseStats {
 
-    // todo add generic bonus flat damage stats and gems
-
-
-    /*
-    public static DataPackStatAccessor<Elements> ADDED_ELEMENTAL_FLAT_DAMAGE = DatapackStatBuilder
-            .<Elements>of(x -> "flat_" + x.guidName + "_added_damage", x -> x)
-            .addAllOfType(Elements.values())
-            .worksWithEvent(DamageEvent.ID)
-            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
-            .setSide(EffectSides.Source)
-            .addCondition(StatConditions.ELEMENT_MATCH_STAT)
-            .addEffect(StatEffects.Layers.ADDITIVE_FLAT_DAMAGE)
-            .setLocName(x -> "Added " + x.dmgName + " Damage")
-            .setLocDesc(x -> "You must be dealing dmg of that element to add this flat dmg to it. It's multiplied by damage effectiveness of the hit.")
-            .modifyAfterDone(x -> {
-                x.min = 0;
-                x.scaling = StatScaling.NORMAL;
-                x.is_perc = false;
-                x.group = Stat.StatGroup.ELEMENTAL;
-            })
-            .build();
-
-     */
 
     public static DataPackStatAccessor<EmptyAccessor> ARCHMAGE_BONUS_MANA_DAMAGE = DatapackStatBuilder
             .ofSingle("archmage", Elements.Physical)
@@ -224,7 +202,7 @@ public class OffenseStats {
             .worksWithEvent(DamageEvent.ID)
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
-            .addCondition(StatConditions.IF_CRIT)
+            .addCondition(StatConditions.IS_BOOLEAN.get(EventData.CRIT))
             .addEffect(StatEffects.Layers.CRIT_DAMAGE)
             .setLocName(x -> "Crit Damage")
             .setLocDesc(x -> "If Critical, multiply by x")
@@ -246,7 +224,7 @@ public class OffenseStats {
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
-            .addCondition(StatConditions.IF_NOT_CRIT)
+            .addCondition(StatConditions.IS_FALSE.get(EventData.CRIT))
             .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> "Non Critical Damage")
             .setLocDesc(x -> "If not a Critical, multiply by x")

@@ -8,6 +8,7 @@ public class StatLayers {
         // todo does this work its still confusing and probably buggy!!!
         public static StatLayer PHYS_MITIGATION = new StatLayer("physical_mitigation", "Physical Mitigation", StatLayer.LayerAction.MULTIPLY, 100, 0.1F, Integer.MAX_VALUE);
         public static StatLayer ELEMENTAL_MITIGATION = new StatLayer("elemental_mitigation", "Elemental Mitigation", StatLayer.LayerAction.MULTIPLY, 101, 0.1F, Integer.MAX_VALUE);
+        public static StatLayer DAMAGE_REDUCTION = new StatLayer("damage_reduction", "Damage Reduction", StatLayer.LayerAction.MULTIPLY, 102, 0.25F, Integer.MAX_VALUE);
 
         public static void init() {
 

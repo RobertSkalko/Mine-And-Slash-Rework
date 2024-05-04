@@ -7,6 +7,7 @@ effect_has_tag_curse
 effect_has_tag_defensive
 effect_has_tag_despair
 effect_has_tag_food
+effect_has_tag_golem
 effect_has_tag_heal_over_time
 effect_has_tag_immobilizing
 effect_has_tag_negative
@@ -35,6 +36,12 @@ is_elemental_damage
 is_in_combat
 is_in_combat_is_false
 is_is_basic_atk_true
+is_is_basic_atk_true_is_false
+is_is_blocked_true
+is_is_blocked_true_is_false
+is_is_dodged_true
+is_is_dodged_true_is_false
+is_is_summon_attack_true
 is_is_summon_attack_true_is_false
 is_magic_weapon
 is_melee_weapon

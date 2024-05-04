@@ -5,11 +5,9 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.ResourceStats;
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.base.CoreStatData;
-import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.AddPerPercentOfOther;
-import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.AttributeStat;
-import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.CoreStat;
-import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.MoreXPerYOf;
+import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.*;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
+import com.robertx22.age_of_exile.database.data.stats.types.defense.BlockChance;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
@@ -52,6 +50,10 @@ public class DatapackStats implements ExileRegistryInit {
             new OptScaleExactStat(0.5F, EnergyRegen.getInstance(), ModType.FLAT)
     )));
 
+    public static Stat BLOCK_PER_ENDURANCE_CHARGE = new BonusStatPerEffectStacks("block_per_endurance_charge", "Block Chance per Endurance Charge", BlockChance.getInstance().scaling,
+            CoreStatData.of(Arrays.asList(
+                    new OptScaleExactStat(3, BlockChance.getInstance(), ModType.FLAT)
+            )));
 
     public static Stat HEAL_TO_SPELL_DMG = new AddPerPercentOfOther(ResourceStats.HEAL_STRENGTH.get(), SkillDamage.getInstance());
     public static Stat PHYS_DMG_PER_MANA = new AddPerPercentOfOther(Mana.getInstance(), new BonusAttackDamage(Elements.Physical));
@@ -84,6 +86,7 @@ public class DatapackStats implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
+        BLOCK_PER_ENDURANCE_CHARGE.addToSerializables();
 
         ENERGY_PER_10_MANA.addToSerializables();
         MANA_REG_PER_500_MS.addToSerializables();

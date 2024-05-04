@@ -25,11 +25,13 @@ import java.util.Set;
 
 public class TalentTree implements JsonExileRegistry<TalentTree>, IAutoGson<TalentTree> {
 
+    public static TalentTree EMPTY = new TalentTree();
+
     public static TalentTree SERIALIZER = new TalentTree();
 
     public int order = 0;
     public String text_format;
-    public String identifier;
+    public String identifier = "unknown";
     public String school_type;
     public String icon;
 
@@ -64,7 +66,7 @@ public class TalentTree implements JsonExileRegistry<TalentTree>, IAutoGson<Tale
                     num = GameBalanceConfig.get().MAX_ASCENDANCY_POINTS;
                 }
                 num -= talents.getAllocatedPoints(this);
-           
+
                 return num;
             }
         };

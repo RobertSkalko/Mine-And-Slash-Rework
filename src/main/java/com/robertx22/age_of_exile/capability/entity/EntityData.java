@@ -135,6 +135,7 @@ public class EntityData implements ICap, INeededForClient {
     public DirtySync sync = new DirtySync("endata sync", x -> syncData());
     public DirtySync gear = new DirtySync("gear_recalc", x -> recalcStats());
 
+    public UnsavedMaxEffectStacksData maxCharges = new UnsavedMaxEffectStacksData();
 
     public DamageEvent lastDamageTaken = null;
 
@@ -591,6 +592,8 @@ public class EntityData implements ICap, INeededForClient {
 
             data.getSkillGemInventory().removeSupportGemsIfTooMany(p);
             data.getJewels().checkRemoveJewels(p);
+
+            this.maxCharges.calc(this.unit.getStats());
         }
 
 

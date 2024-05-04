@@ -63,7 +63,7 @@ public class ExilePotionEvent extends EffectEvent {
         if (action == GiveOrTake.take) {
 
             extraData.stacks -= stacks;
-            extraData.stacks = Mth.clamp(extraData.stacks, 0, effect.max_stacks);
+            extraData.stacks = Mth.clamp(extraData.stacks, 0, effect.getMaxCharges(this.targetData));
             extraData.str_multi = data.getNumber();
 
             Load.Unit(target).setEquipsChanged();
@@ -71,7 +71,7 @@ public class ExilePotionEvent extends EffectEvent {
 
 
             extraData.stacks++;
-            extraData.stacks = Mth.clamp(extraData.stacks, 1, effect.max_stacks);
+            extraData.stacks = Mth.clamp(extraData.stacks, 1, effect.getMaxCharges(this.targetData));
 
         }
 

@@ -48,6 +48,14 @@ public class ModEffects implements ExileRegistryInit {
 
     public static List<EffectCtx> ALL = new ArrayList<>();
 
+    public static EffectCtx ICE_GOLEM_BUFF = new EffectCtx("ice_golem_buff", "Ice Golem Buff", Elements.Cold, EffectType.beneficial);
+    public static EffectCtx LIGHTNING_GOLEM_BUFF = new EffectCtx("lightning_golem_buff", "Lightning Golem Buff", Elements.Nature, EffectType.beneficial);
+    public static EffectCtx FIRE_GOLEM_BUFF = new EffectCtx("fire_golem_buff", "Fire Golem Buff", Elements.Fire, EffectType.beneficial);
+
+    public static EffectCtx POWER_CHARGE = new EffectCtx("power_charge", "Power Charge", Elements.Physical, EffectType.beneficial);
+    public static EffectCtx FRENZY_CHARGE = new EffectCtx("frenzy_charge", "Frenzy Charge", Elements.Physical, EffectType.beneficial);
+    public static EffectCtx ENDURANCE_CHARGE = new EffectCtx("endurance_charge", "Endurance Charge", Elements.Physical, EffectType.beneficial);
+
     public static EffectCtx VAMPIRIC_BLOOD = new EffectCtx("vamp_blood", "Vamp Blood", Elements.Fire, EffectType.beneficial);
     public static EffectCtx DRACONIC_BLOOD = new EffectCtx("draconic_blood", "Dragon Blood", Elements.Fire, EffectType.beneficial);
     public static EffectCtx REJUVENATE = new EffectCtx("rejuvenation", "Rejuvenation", Elements.Physical, EffectType.beneficial);
@@ -97,6 +105,50 @@ public class ModEffects implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
+
+        ExileEffectBuilder.of(ENDURANCE_CHARGE)
+                .stat(5, 5, new ElementalResist(Elements.Physical), ModType.FLAT)
+                .stat(5, 5, new ElementalResist(Elements.Fire), ModType.FLAT)
+                .stat(5, 5, new ElementalResist(Elements.Cold), ModType.FLAT)
+                .stat(5, 5, new ElementalResist(Elements.Nature), ModType.FLAT)
+                .maxStacks(3)
+                .addTags(EffectTags.offensive, EffectTags.charge)
+                .build();
+
+        ExileEffectBuilder.of(FRENZY_CHARGE)
+                .stat(3, 3, OffenseStats.TOTAL_DAMAGE.get(), ModType.MORE)
+                .stat(5, 5, SpellChangeStats.CAST_SPEED.get(), ModType.FLAT)
+                .maxStacks(3)
+                .addTags(EffectTags.offensive, EffectTags.charge)
+                .build();
+
+        ExileEffectBuilder.of(POWER_CHARGE)
+                .stat(25, 25, OffenseStats.CRIT_CHANCE.get(), ModType.PERCENT)
+                .maxStacks(3)
+                .addTags(EffectTags.offensive, EffectTags.charge)
+                .build();
+
+        ExileEffectBuilder.of(ICE_GOLEM_BUFF)
+                .stat(2, 5, OffenseStats.CRIT_CHANCE.get(), ModType.FLAT)
+                .stat(5, 10, OffenseStats.ACCURACY.get(), ModType.FLAT)
+                .maxStacks(1)
+                .addTags(EffectTags.offensive, EffectTags.golem)
+                .build();
+
+
+        ExileEffectBuilder.of(FIRE_GOLEM_BUFF)
+                .stat(10, 20, OffenseStats.TOTAL_DAMAGE.get(), ModType.FLAT)
+                .maxStacks(1)
+                .addTags(EffectTags.offensive, EffectTags.golem)
+                .build();
+
+
+        ExileEffectBuilder.of(LIGHTNING_GOLEM_BUFF)
+                .stat(3, 6, SpellChangeStats.CAST_SPEED.get(), ModType.FLAT)
+                .maxStacks(1)
+                .addTags(EffectTags.offensive, EffectTags.golem)
+                .build();
+
 
         ExileEffectBuilder.of(MISSILE_BARRAGE)
                 .maxStacks(5)
