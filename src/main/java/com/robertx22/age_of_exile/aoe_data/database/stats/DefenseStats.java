@@ -82,6 +82,27 @@ public class DefenseStats {
             })
             .build();
 
+    public static DataPackStatAccessor<EmptyAccessor> DAMAGE_REDUCTION_CHANCE = DatapackStatBuilder
+            .<EmptyAccessor>ofSingle("dmg_reduction_chance", Elements.Physical)
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
+            .setSide(EffectSides.Target)
+            .addCondition(StatConditions.IF_RANDOM_ROLL)
+            .addEffect(StatEffects.Layers.DAMAGE_REDUCTION_50)
+            .setLocName(x -> "Damage Reduction Chance").
+            setLocDesc(x -> "Chance to reduce damage by 50%. This stacks with other [Damage Reduction]s").
+            modifyAfterDone(x ->
+            {
+                x.is_perc = true;
+                x.scaling = StatScaling.NONE;
+                x.group = Stat.StatGroup.Misc;
+                x.min = 0;
+                x.max = 100;
+            })
+                    .
+
+            build();
+
 
     public static DataPackStatAccessor<EmptyAccessor> PROJECTILE_DAMAGE_RECEIVED = DatapackStatBuilder
             .ofSingle("proj_dmg_received", Elements.Physical)

@@ -12,6 +12,13 @@ public class NumberProvider {
     public NumberProvider() {
     }
 
+    public static NumberProvider specificNumber(int num) {
+        NumberProvider p = new NumberProvider();
+        p.calc = num + "";
+        p.type = Type.SPECIFIC_NUMBER;
+        return p;
+    }
+
     public static NumberProvider ofPercentOfStat(String stat) {
         NumberProvider p = new NumberProvider();
         p.calc = stat;
@@ -45,6 +52,13 @@ public class NumberProvider {
     }
 
     public enum Type {
+        SPECIFIC_NUMBER() {
+            @Override
+            public float getValue(EffectEvent event, LivingEntity source, StatData data, String calc) {
+                int num = Integer.valueOf(calc);
+                return num;
+            }
+        },
         STAT_DATA() {
             @Override
             public float getValue(EffectEvent event, LivingEntity source, StatData data, String calc) {

@@ -6,6 +6,7 @@ additive_damage_number_add_stat_data
 apply_cd_as_cast_time
 cancel_event
 crit_damage_number_add_stat_data
+damage_reduction_number_reduce_specific_number
 damage_reduction_number_reduce_stat_data
 decrease_cast_ticks_num
 decrease_cd_ticks_num

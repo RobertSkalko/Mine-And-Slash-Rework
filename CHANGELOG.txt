@@ -128,4 +128,11 @@ v.5.4.7
 - added optional mob kill text that that also has a helpful hover text that shows how was loot chance modified
 This should hopefully resolve any "why no loot drop" confusion
 - added optional mob damage text. (THIS SHOWS ALL THE DAMAGE CALCULATIONS!!! VERY USEFUL ESPECIALLY FOR DEBUGGING!!!)
-- added is_bonus_elemental_damage boolean for damage data, this way you can avoid adding flat damage boosts to bonus damages
+This tells you all about how you dealt that much damage, or why the mob dealt so much damage to you!!!
+If something doesn't feel right, report it. The calculations are done top to bottom, so first flat damage is added (if any), and then its multiplied.
+Additive damage increase is most damage stats like "+ fire damage" all added up into 1 multiplier. 
+At the end there are "dmg multipliers", these come from "more fire damage" things, these are multiplied with each other and therefore all separate.
+It tells you how your damage is converted, added, multiplied etc
+Not all code uses this system yet, so it could either be a damage bug, or a tooltip bug, either way report it
+Whenever you want to report a damage bug, please screenshot the bugged damage with this!
+- added is_bonus_element_damage boolean for damage data, this way you can avoid adding flat damage boosts to bonus damages

@@ -22,7 +22,6 @@ import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
-import com.robertx22.age_of_exile.database.data.stats.types.resources.DamageAbsorbedByMana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
 import com.robertx22.age_of_exile.tags.all.EffectTags;
@@ -168,9 +167,7 @@ public class ModEffects implements ExileRegistryInit {
 
         ExileEffectBuilder.of(ModEffects.FROST_LICH)
                 .maxStacks(1)
-
-                .stat(DatapackStats.ARMOR_PER_MANA.mod(0.1F, 1))
-                .stat(DamageAbsorbedByMana.getInstance().mod(5, 25))
+                .stat(DatapackStats.ARMOR_PER_MANA.mod(1, 5))
                 .stat(ProcStats.PROC_SHATTER.get().mod(25, 100))
                 .stat(ProcStats.PROC_SHATTER_MAX_FROST_ESSENCE.get().mod(10, 50))
                 .stat(OffenseStats.TOTAL_DAMAGE.get().mod(-25, -25))

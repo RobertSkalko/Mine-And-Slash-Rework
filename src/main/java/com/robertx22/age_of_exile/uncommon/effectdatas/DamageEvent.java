@@ -123,25 +123,6 @@ public class DamageEvent extends EffectEvent {
             return 0;
         }
 
-        if (source instanceof Player) {
-            if (data.isBasicAttack()) {
-                dmg = modifyByAttackSpeedIfMelee(dmg);
-                dmg = modifyIfArrowDamage(dmg);
-            }
-        }
-
-        if (areBothPlayers()) {
-            dmg *= ServerContainer.get().PVP_DMG_MULTI.get();
-        }
-
-
-        if (this.data.isBasicAttack()) {
-            if (this.attackInfo != null && attackInfo.weaponData != null) {
-                float multi = attackInfo.weaponData.GetBaseGearType().getGearSlot().getBasicDamageMulti();
-                dmg *= multi;
-            }
-        }
-
 
         return dmg;
     }
@@ -176,7 +157,9 @@ public class DamageEvent extends EffectEvent {
     }
 
 
-    private float modifyByAttackSpeedIfMelee(float dmg) {
+    private float getAttackSpeedDamageMulti() {
+
+        float multi = 1;
 
         float cool = data.getNumber(EventData.ATTACK_COOLDOWN).number;
 
@@ -184,20 +167,21 @@ public class DamageEvent extends EffectEvent {
 
         if (cool < 0.1F) {
             // we dont want to allow too fast mob clickings
+            multi = 0;
             this.cancelDamage();
         }
 
 
         if (cool > 0.8F) {
-            dmg *= sourceData.getUnit().getCalculatedStat(FullSwingDamage.getInstance()).getMultiplier();
+            multi = sourceData.getUnit().getCalculatedStat(FullSwingDamage.getInstance()).getMultiplier();
             //ParticleUtils.spawnDefaultSlashingWeaponParticles(source);
         }
 
-        return dmg;
+        return multi;
 
     }
 
-    private float modifyIfArrowDamage(float dmg) {
+    private void modifyIfArrowDamage() {
         if (attackInfo != null && attackInfo.getSource() != null) {
             if (attackInfo.getSource().getDirectEntity() instanceof ProjectileEntityDuck) {
                 if (data.getWeaponType() == WeaponTypes.bow) {
@@ -207,13 +191,12 @@ public class DamageEvent extends EffectEvent {
 
                     float arrowmulti = duck.my$getDmgMulti();
 
-                    dmg *= arrowmulti;
+                    this.addMoreMulti(Words.ARROW_DRAW_AMOUNT_MULTI.locName(), EventData.NUMBER, arrowmulti);
+
                     // multiply dmg by saved charge value
                 }
             }
         }
-
-        return dmg;
 
     }
 
@@ -270,6 +253,27 @@ public class DamageEvent extends EffectEvent {
     @Override
     public void initBeforeActivating() {
         calcAttackCooldown();
+
+        if (source instanceof Player) {
+            if (data.isBasicAttack()) {
+                this.addMoreMulti(Words.ATTACK_SPEED_MULTI.locName(), EventData.NUMBER, getAttackSpeedDamageMulti());
+            }
+            modifyIfArrowDamage();
+
+        }
+
+        // todo this should be in layers too or multis
+        if (areBothPlayers()) {
+            this.addMoreMulti(Words.PVP_DMG_MULTI.locName(), EventData.NUMBER, ServerContainer.get().PVP_DMG_MULTI.get().floatValue());
+        }
+
+
+        if (this.data.isBasicAttack()) {
+            if (this.attackInfo != null && attackInfo.weaponData != null) {
+                float multi = attackInfo.weaponData.GetBaseGearType().getGearSlot().getBasicDamageMulti();
+                this.addMoreMulti(Words.WEAPON_BASIC_ATTACK_DMG_MULTI.locName(), EventData.NUMBER, multi);
+            }
+        }
     }
 
     // todo this is using total ele dmg and saying only 1 ele, fuck
@@ -278,7 +282,7 @@ public class DamageEvent extends EffectEvent {
         MutableComponent ele = Component.literal(getElement().getIconNameDmg());
 
         if (info.isMixedDamage()) {
-            ele = Component.literal("Mixed Damage");
+            ele = Component.literal(Elements.Elemental.getIconNameDmg());
         }
 
         return Words.DAMAGE_MESSAGE.locName(source.getDisplayName(), MMORPG.DECIMAL_FORMAT.format(info.totalDmg), ele)
@@ -312,7 +316,7 @@ public class DamageEvent extends EffectEvent {
 
             for (MoreMultiData multi : this.getMoreMultis()) {
                 if (multi.numberid.equals(EventData.NUMBER)) {
-                    msg.append(multi.stat.locName().append(": ").append(Component.literal("x" + MMORPG.DECIMAL_FORMAT.format(multi.multi)))).append("\n");
+                    msg.append(multi.text.append(": ").append(Component.literal("x" + MMORPG.DECIMAL_FORMAT.format(multi.multi)))).append("\n");
                 }
             }
         }

@@ -153,6 +153,7 @@ dex_dmg
 dexterity
 dmg_received
 dmg_reduction
+dmg_reduction_chance
 dmg_taken_to_mana
 dmg_to_living
 dmg_to_undead
