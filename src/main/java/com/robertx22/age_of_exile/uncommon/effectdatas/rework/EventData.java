@@ -19,6 +19,7 @@ public class EventData {
     public static String IS_PROC = "is_proc"; // ensures procs cant proc procs
     public static String ITEM_ID = "item_id";
     public static String IS_SUMMON_ATTACK = "is_summon_attack";
+    public static String IS_BONUS_ELEMENT_DAMAGE = "is_bonus_element_damage";
     //public static String BONUS_MAX_SUMMONS = "bonus_max_summons";
     public static String BONUS_TOTAL_SUMMONS = "bonus_total_summons";
     public static String SUMMON_TYPE = "summon_type";

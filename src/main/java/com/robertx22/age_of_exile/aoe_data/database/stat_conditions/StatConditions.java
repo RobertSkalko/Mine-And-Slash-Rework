@@ -28,7 +28,6 @@ import java.util.stream.Collectors;
 
 public class StatConditions implements ExileRegistryInit {
 
-
     public static DataHolder<String, StatCondition> IS_BOOLEAN = new DataHolder<>(Arrays.asList(
             EventData.IS_BLOCKED,
             EventData.IS_DODGED,
@@ -40,6 +39,7 @@ public class StatConditions implements ExileRegistryInit {
 
     public static DataHolder<String, StatCondition> IS_FALSE = new DataHolder<>(Arrays.asList(
             EventData.IS_BLOCKED,
+            EventData.IS_BONUS_ELEMENT_DAMAGE,
             EventData.IS_DODGED,
             EventData.CRIT,
             EventData.IS_BASIC_ATTACK,
@@ -64,7 +64,7 @@ public class StatConditions implements ExileRegistryInit {
     public static StatCondition IS_TARGET_NEAR_FULL_HP = new IsHealthAbovePercentCondition("is_target_near_full_hp", 70, EffectSides.Target);
     public static StatCondition IS_ELEMENTAL = new IsElementalDamageCondition();
     public static StatCondition IS_ATTACK_DAMAGE = new StringMatchesCondition(EventData.STYLE, PlayStyle.INT.id).flipCondition();
- 
+
     public static DataHolder<String, StatCondition> IS_NOT_ON_COOLDOWN = new DataHolder<>(Arrays.asList(
             SetCooldownEffect.MISSILE_BARRAGE.cd_id
     ), x -> new IsNotOnCooldownCondition(x));

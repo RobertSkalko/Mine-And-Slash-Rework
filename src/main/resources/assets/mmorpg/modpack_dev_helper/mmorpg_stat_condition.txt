@@ -40,6 +40,7 @@ is_is_basic_atk_true
 is_is_basic_atk_true_is_false
 is_is_blocked_true
 is_is_blocked_true_is_false
+is_is_bonus_element_damage_true_is_false
 is_is_dodged_true
 is_is_dodged_true_is_false
 is_is_summon_attack_true

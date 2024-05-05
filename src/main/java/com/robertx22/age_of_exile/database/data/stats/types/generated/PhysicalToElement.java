@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.stats.types.generated;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageEffect;
+import com.robertx22.age_of_exile.database.data.stats.layers.StatLayers;
 import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.database.data.stats.types.ElementalStat;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -66,7 +67,7 @@ public class PhysicalToElement extends ElementalStat {
 
         @Override
         public StatPriority GetPriority() {
-            return StatPriority.Damage.DAMAGE_TRANSFER;
+            return StatPriority.Damage.DAMAGE_LAYERS;
         }
 
         @Override
@@ -80,8 +81,7 @@ public class PhysicalToElement extends ElementalStat {
             dmg = MathHelper.clamp(dmg, 0, effect.data.getNumber());
             if (dmg > 0) {
                 effect.addBonusEleDmg(stat.getElement(), dmg);
-                effect.data.getNumber(EventData.NUMBER).number -= dmg;
-                effect.data.getOriginalNumber(EventData.NUMBER).number -= dmg; // todo will it fix it
+                effect.getLayer(StatLayers.Offensive.DAMAGE_CONVERSION, EventData.NUMBER, Side()).reduce(dmg);
             }
             return effect;
         }

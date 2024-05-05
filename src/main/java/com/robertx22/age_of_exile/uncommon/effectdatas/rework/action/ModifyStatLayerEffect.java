@@ -67,7 +67,7 @@ public class ModifyStatLayerEffect extends StatEffect {
     @Override
     public void activate(EffectEvent event, EffectSides statSource, StatData data, Stat stat) {
 
-        var layerData = event.getLayer(ExileDB.StatLayers().get(layer), number_to_modify);
+        var layerData = event.getLayer(ExileDB.StatLayers().get(layer), number_to_modify, statSource);
 
 
         float num = this.number_provider.getValue(event, event.getSide(statSource), data);
@@ -78,7 +78,7 @@ public class ModifyStatLayerEffect extends StatEffect {
         this.modification.apply(layerData, num);
 
         if (stat.getMultiUseType() == Stat.MultiUseType.MULTIPLICATIVE_DAMAGE) {
-            event.addMoreMulti(number_to_modify, data.getMoreStatTypeMulti());
+            event.addMoreMulti(stat, number_to_modify, data.getMoreStatTypeMulti());
         }
 
     }

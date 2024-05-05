@@ -2,10 +2,12 @@ package com.robertx22.age_of_exile.uncommon.effectdatas;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
 import com.robertx22.age_of_exile.capability.entity.CooldownsData;
+import com.robertx22.age_of_exile.capability.player.data.PlayerConfigData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffectInstanceData;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
+import com.robertx22.age_of_exile.database.data.stats.layers.StatLayerData;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.FullSwingDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.DamageAbsorbedByMana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
@@ -14,6 +16,7 @@ import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformatio
 import com.robertx22.age_of_exile.mixin_ducks.DamageSourceDuck;
 import com.robertx22.age_of_exile.mixin_ducks.LivingEntityAccesor;
 import com.robertx22.age_of_exile.mixin_ducks.ProjectileEntityDuck;
+import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
@@ -23,12 +26,17 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
+import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.*;
 import com.robertx22.age_of_exile.vanilla_mc.packets.DmgNumPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.HoverEvent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -264,6 +272,84 @@ public class DamageEvent extends EffectEvent {
         calcAttackCooldown();
     }
 
+    // todo this is using total ele dmg and saying only 1 ele, fuck
+    public MutableComponent getDamageMessage(DmgByElement info) {
+
+        MutableComponent ele = Component.literal(getElement().getIconNameDmg());
+
+        if (info.isMixedDamage()) {
+            ele = Component.literal("Mixed Damage");
+        }
+
+        return Words.DAMAGE_MESSAGE.locName(source.getDisplayName(), MMORPG.DECIMAL_FORMAT.format(info.totalDmg), ele)
+                .withStyle(Style.EMPTY.applyFormat(ChatFormatting.RED).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, getInfoHoverMessage(info, true))));
+
+    }
+
+
+    // wait, bonus archmage dmg is applied to any bonus ele dmg??
+
+    public MutableComponent getInfoHoverMessage(DmgByElement info, boolean doBonusDmg) {
+        // int main = info.dmgmap.getOrDefault(getElement(), 0F).intValue();
+
+        MutableComponent msg = Component.empty();
+
+        msg.append(Component.literal("Base Damage: " + (int) this.data.getOriginalNumber(EventData.NUMBER).number + "\n").withStyle(ChatFormatting.BLUE));
+
+        msg.append(Component.literal("Damage Info: \n").withStyle(ChatFormatting.RED));
+
+        for (StatLayerData layerData : this.getSortedLayers()) {
+            if (layerData.numberID.equals(EventData.NUMBER)) {
+                msg.append(layerData.getLayer().getTooltip(layerData).append("\n"));
+            }
+        }
+
+        if (!getMoreMultis().isEmpty()) {
+            msg.append(Component.literal("Multipliers: \n").withStyle(ChatFormatting.LIGHT_PURPLE));
+
+            for (MoreMultiData multi : this.getMoreMultis()) {
+                if (multi.numberid.equals(EventData.NUMBER)) {
+                    msg.append(multi.stat.locName().append(": ").append(Component.literal("x" + MMORPG.DECIMAL_FORMAT.format(multi.multi)))).append("\n");
+                }
+            }
+        }
+
+        msg.append(Component.literal("Final Damage: " + (int) info.dmgmap.getOrDefault(getElement(), 0F).intValue() + "\n").withStyle(ChatFormatting.GOLD));
+
+
+        if (doBonusDmg) {
+            if (info.isMixedDamage()) {
+
+                for (Entry<Elements, Float> en : info.dmgmap.entrySet()) {
+                    if (en.getKey() != getElement()) {
+
+                        msg.append(Component.literal("\nBonus " + en.getKey().getIconNameDmg() + ":\n").withStyle(en.getKey().format));
+
+
+                        var dmg = info.eventMap.get(en.getKey());
+                        msg.append(dmg.getInfoHoverMessage(info, false));
+
+                        /*
+                        if (Screen.hasShiftDown()) {
+                             } else {
+                        
+                         */
+
+                        /*
+                        msg.append(MMORPG.DECIMAL_FORMAT.format(en.getValue()) + en.getKey().getIconNameDmg()).append("\n");
+                        msg.append(Component.literal("Press Shift for More Info\n").withStyle(ChatFormatting.BLUE));
+
+
+                         */
+
+                    }
+                }
+            }
+        }
+
+        return msg;
+    }
+
     @Override
     protected void activate() {
 
@@ -290,6 +376,17 @@ public class DamageEvent extends EffectEvent {
         }
 
         float dmg = info.totalDmg;
+
+        if (target instanceof Player p) {
+            if (Load.player(p).config.isConfigEnabled(PlayerConfigData.Config.DAMAGE_MESSAGES)) {
+                p.sendSystemMessage(getDamageMessage(info));
+            }
+        }
+        if (source instanceof Player p) {
+            if (Load.player(p).config.isConfigEnabled(PlayerConfigData.Config.DAMAGE_MESSAGES)) {
+                p.sendSystemMessage(getDamageMessage(info));
+            }
+        }
 
         if (target instanceof Player p) { // todo this code sucks
             // a getter should not modify anything
@@ -382,7 +479,9 @@ public class DamageEvent extends EffectEvent {
                 }
             }
 
+
             if (source instanceof Player p) {
+
 
                 p.setLastHurtMob(target); // this allows summons to know who to attack
 
@@ -451,9 +550,16 @@ public class DamageEvent extends EffectEvent {
     public static class DmgByElement {
 
         private HashMap<Elements, Float> dmgmap = new HashMap<>();
+        private HashMap<Elements, DamageEvent> eventMap = new HashMap<>();
+
+
         public float totalDmg = 0;
 
-        public void addDmg(float dmg, Elements element) {
+        public boolean isMixedDamage() {
+            return dmgmap.entrySet().stream().filter(x -> x.getValue() > 0).count() > 1;
+        }
+
+        public void addDmg(DamageEvent event, float dmg, Elements element) {
 
             Elements ele = element;
 
@@ -464,6 +570,7 @@ public class DamageEvent extends EffectEvent {
             float total = (dmgmap.getOrDefault(element, 0F) + dmg);
 
             dmgmap.put(ele, total);
+            eventMap.put(ele, event);
 
             totalDmg += dmg;
         }
@@ -486,6 +593,7 @@ public class DamageEvent extends EffectEvent {
                 if (isSpell()) {
                     bonus.data.setString(EventData.SPELL, this.data.getString(EventData.SPELL));
                 }
+                bonus.data.setBoolean(EventData.IS_BONUS_ELEMENT_DAMAGE, true);
 
                 bonus.data.setBoolean(EventData.IS_BASIC_ATTACK, this.data.getBoolean(EventData.IS_BASIC_ATTACK));
                 bonus.data.setBoolean(EventData.IS_ATTACK_FULLY_CHARGED, this.data.getBoolean(EventData.IS_ATTACK_FULLY_CHARGED));
@@ -498,11 +606,11 @@ public class DamageEvent extends EffectEvent {
                 bonus.calculateEffects();
                 float dmg = bonus.getActualDamage();
 
-                info.addDmg(dmg, bonus.getElement());
+                info.addDmg(bonus, dmg, bonus.getElement());
 
             }
         }
-        info.addDmg(this.getActualDamage(), this.getElement());
+        info.addDmg(this, this.getActualDamage(), this.getElement());
 
         return info;
 

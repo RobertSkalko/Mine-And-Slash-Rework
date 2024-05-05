@@ -11,7 +11,6 @@ import com.robertx22.age_of_exile.database.data.stats.layers.StatLayerData;
 import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -20,9 +19,6 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect;
 import com.robertx22.library_of_exile.registry.IGUID;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
@@ -51,38 +47,34 @@ public abstract class EffectEvent implements IGUID {
 
     private List<MoreMultiData> moreMultis = new ArrayList<>(); // todo use this later
 
+    public List<MoreMultiData> getMoreMultis() {
+        return moreMultis;
+    }
 
-    public void addMoreMulti(String number, float multi) {
-        moreMultis.add(new MoreMultiData(multi, number));
+    public void addMoreMulti(Stat stat, String number, float multi) {
+        if (multi != 1) {
+            moreMultis.add(new MoreMultiData(stat, multi, number));
+        }
     }
 
     public static class MoreMultiData {
 
+        public Stat stat;
         public float multi = 1;
         public String numberid = "";
 
-        public MoreMultiData(float multi, String numberid) {
+        public MoreMultiData(Stat stat, float multi, String numberid) {
+            this.stat = stat;
             this.multi = multi;
             this.numberid = numberid;
         }
     }
 
-    /*
-    public StatLayerData getLayer(StatLayer layer, String number) {
+
+    public StatLayerData getLayer(StatLayer layer, String number, EffectSides side) {
         String id = layer.GUID() + "_" + number;
         if (!layers.containsKey(id)) {
-            layers.put(id, new StatLayerData(layer.GUID(), number, ));
-        }
-        return layers.get(id);
-
-    }
-
-     */
-
-    public StatLayerData getLayer(StatLayer layer, String number) {
-        String id = layer.GUID() + "_" + number;
-        if (!layers.containsKey(id)) {
-            var data = new StatLayerData(layer.GUID(), number, 0);
+            var data = new StatLayerData(layer.GUID(), number, 0, side);
 
             layers.put(id, data);
         }
@@ -127,9 +119,6 @@ public abstract class EffectEvent implements IGUID {
         return false;
     }
 
-    public void increaseByPercent(float perc) {
-        increaseByPercent(EventData.NUMBER, perc);
-    }
 
     public void increaseByPercent(String num, float perc) {
         data.getNumber(num).number += data.getOriginalNumber(num).number * perc / 100F;
@@ -154,7 +143,6 @@ public abstract class EffectEvent implements IGUID {
             data.freeze();
 
             if (!data.isCanceled()) {
-
                 activate();
                 this.activated = true;
             }
@@ -164,12 +152,17 @@ public abstract class EffectEvent implements IGUID {
 
     }
 
-    // todo this shouldnt be calculated at the end.. stats like magic shield depend on it
+    public List<StatLayerData> getSortedLayers() {
+        List<StatLayerData> all = new ArrayList<>();
+        all.addAll(layers.values());
+        all.sort(Comparator.comparingInt(x -> x.getLayer().priority));
+        return all;
+    }
+
+    //  this shouldnt be calculated at the end.. stats like magic shield depend on it, that's why i call it with a custom stat
     private void calculateStatLayersAndMoreMultis() {
         if (!this.layers.isEmpty()) {
-            List<StatLayerData> all = new ArrayList<>();
-            all.addAll(layers.values());
-            all.sort(Comparator.comparingInt(x -> x.getLayer().priority)); // todo check if this is correct order
+            List<StatLayerData> all = getSortedLayers();
 
             for (StatLayerData layer : all) {
                 layer.getLayer().action.apply(this, layer, layer.numberID);
@@ -250,35 +243,6 @@ public abstract class EffectEvent implements IGUID {
 
     protected abstract void activate();
 
-    /*
-    protected void TryApplyEffects(LivingEntity en, EntityData data, EffectSides side) {
-
-
-        if (this.data.isCanceled()) {
-            return;
-        }
-
-        List<EffectWithCtx> effectsWithCtx = new ArrayList<>();
-
-        effectsWithCtx = AddEffects(effectsWithCtx, data, en, side);
-
-        effectsWithCtx.sort(EffectWithCtx.COMPARATOR);
-
-        for (EffectWithCtx item : effectsWithCtx) {
-            if (item.stat.isNotZero()) {
-                if (item.effect.Side().equals(side)) {
-                    item.effect.TryModifyEffect(this, item.statSource, item.stat, item.stat.GetStat());
-                } else {
-                    System.out.print("ERORR Stat at wrong side should never be added in the first place! ");
-                }
-            } else {
-                System.out.print("ERORR cant be zero! ");
-            }
-        }
-
-    }
-
-     */
 
     public LivingEntity getSide(EffectSides side) {
         if (side == EffectSides.Source) {
@@ -372,32 +336,6 @@ public abstract class EffectEvent implements IGUID {
                 });
 
 
-        if (MMORPG.deepCombatLogEnabled()) {
-            if (this instanceof DamageEvent) { // todo allow config
-                MutableComponent merged = Component.literal("");
-                for (StatData s : list) {
-                    merged.append(Component.literal(s.getId() + ":" + s.getValue() + ", "));
-                }
-                /// todo
-
-                Player p = null;
-                if (this.source instanceof Player px) {
-                    p = px;
-                    p.sendSystemMessage(Component.literal(getName()).withStyle(ChatFormatting.RED)
-                            .append(Component.literal(", " + side.id).withStyle(ChatFormatting.YELLOW)
-                                    .append(Component.literal(", Used Stats: ").withStyle(ChatFormatting.WHITE)).append(merged).withStyle(ChatFormatting.GREEN)))
-                    ;
-                }
-                if (this.target instanceof Player px) {
-                    p = px;
-                    p.sendSystemMessage(Component.literal(getName()).withStyle(ChatFormatting.RED)
-                            .append(Component.literal(", " + side.id).withStyle(ChatFormatting.YELLOW)
-                                    .append(Component.literal(", Used Stats: ").withStyle(ChatFormatting.WHITE)).append(merged).withStyle(ChatFormatting.GREEN)))
-                    ;
-                }
-
-            }
-        }
         return effects;
     }
 

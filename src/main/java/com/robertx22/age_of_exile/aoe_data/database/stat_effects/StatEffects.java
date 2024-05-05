@@ -111,7 +111,6 @@ public class StatEffects implements ExileRegistryInit {
 
     public static StatEffect SET_IS_CRIT = new SetBooleanEffect(EventData.CRIT);
     public static StatEffect INC_VALUE_PER_CURSE_ON_TARGET = new IncreaseNumberPerCurseOnTarget();
-    public static StatEffect DOUBLE_DAMAGE = new DoubleDamageAction();
     public static StatEffect SET_PIERCE = new SetBooleanEffect(EventData.PIERCE);
     public static StatEffect SET_BARRAGE = new SetBooleanEffect(EventData.BARRAGE);
 

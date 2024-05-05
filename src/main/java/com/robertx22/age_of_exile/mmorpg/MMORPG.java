@@ -62,6 +62,7 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import top.theillusivec4.curios.api.SlotTypeMessage;
 
+import java.text.DecimalFormat;
 import java.util.function.Consumer;
 
 @Mod(SlashRef.MODID)
@@ -71,15 +72,16 @@ public class MMORPG {
     // DISABLE WHEN PUBLIC BUILD
     public static boolean RUN_DEV_TOOLS = true;
 
+
+    public static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.00");
+
+
     public static boolean RUN_DEV_TOOLS_REMOVE_WHEN_DONE = RUN_DEV_TOOLS; // this exists to stop me from making dumb mistakes when testing and forgetting about it
 
     public static boolean combatLogEnabled() {
         return false; // todo, should this be a client config and have server send packets ?
     }
 
-    public static boolean deepCombatLogEnabled() {
-        return false; // todo, should this be a client config and have server send packets ?
-    }
 
     private static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel NETWORK = NetworkRegistry.newSimpleChannel(

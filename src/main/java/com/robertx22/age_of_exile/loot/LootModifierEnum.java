@@ -1,11 +1,11 @@
 package com.robertx22.age_of_exile.loot;
 
+import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.MutableComponent;
 
-import java.text.DecimalFormat;
 import java.util.Locale;
 
 public enum LootModifierEnum implements IAutoLocName {
@@ -45,10 +45,9 @@ public enum LootModifierEnum implements IAutoLocName {
         return locname;
     }
 
-    private static final DecimalFormat format = new DecimalFormat("0.00");
 
     public MutableComponent getFullName(float multi) {
-        return locName().append(" ").append(": x" + format.format(multi)).withStyle(getFormat(multi));
+        return locName().append(" ").append(": x" + MMORPG.DECIMAL_FORMAT.format(multi)).withStyle(getFormat(multi));
     }
 
     public ChatFormatting getFormat(float multi) {

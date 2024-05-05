@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.database.data.stats.effects.base;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
+import com.robertx22.age_of_exile.database.data.stats.layers.StatLayers;
 import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
@@ -25,9 +26,11 @@ public abstract class BaseDamageIncreaseEffect extends BaseDamageEffect {
 
     @Override
     public DamageEvent activate(DamageEvent effect, StatData data, Stat stat) {
-        effect.increaseByPercent(data.getValue());
+        effect.getLayer(StatLayers.Offensive.ADDITIVE_DMG, EventData.NUMBER, Side()).add(data.getValue());
 
-        effect.data.getNumber(EventData.NUMBER).number = effect.data.getNumber() * data.getMoreStatTypeMulti();
+        if (stat.getMultiUseType() == Stat.MultiUseType.MULTIPLICATIVE_DAMAGE) {
+            effect.addMoreMulti(stat, EventData.NUMBER, data.getMoreStatTypeMulti());
+        }
 
         return effect;
     }

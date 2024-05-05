@@ -7,6 +7,11 @@ import java.util.Locale;
 
 // to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
+    SOURCE("Source"),
+    TARGET("Target"),
+
+    DAMAGE_MESSAGE("[%1$s] dealt %2$s %3$s"),
+   
     LOOT_MODIFIERS_INFO("Loot Modifiers:"),
 
     MOB_KILL_LOOT_INFO_MSG("Killed [%1$s]."),
@@ -16,6 +21,7 @@ public enum Words implements IAutoLocName {
 
     CAST_FAIL_MSGS("Spell Casting Failure Messages\n\nWill print helpful messages when you fail to cast a spell\nParticularly Helpful for New Players"),
     MOB_DEATH_MESSAGES("Provides a short message when you kill a mob.\n\nYou can hover over it for useful info like Loot Chance"),
+    DAMAGE_MESSAGES("Provides a short message when you damage a mob.\n\nYou can hover over it for useful info like how was damage modified"),
     AUTOMATIC_PVE("Auto PVE\n\nPlayers who enable this are considered Teamed up and Allies\n- Must be in Nearby (Radius set by config)"),
 
     WHILE_UNDER_AURA("While Under Effect of %1$s:"),

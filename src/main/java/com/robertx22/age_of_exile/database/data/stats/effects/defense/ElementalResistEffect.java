@@ -50,9 +50,9 @@ public class ElementalResistEffect extends BaseDamageEffect {
 
 
         if (stat.getElement() == Elements.Physical) {
-            effect.getLayer(StatLayers.Defensive.PHYS_MITIGATION, EventData.NUMBER).reduce(defense);
+            effect.getLayer(StatLayers.Defensive.PHYS_MITIGATION, EventData.NUMBER, Side()).reduce(defense);
         } else {
-            effect.getLayer(StatLayers.Defensive.ELEMENTAL_MITIGATION, EventData.NUMBER).reduce(defense);
+            effect.getLayer(StatLayers.Defensive.ELEMENTAL_MITIGATION, EventData.NUMBER, Side()).reduce(defense);
         }
 
         effect.data.setBoolean(EventData.RESISTED_ALREADY, true);

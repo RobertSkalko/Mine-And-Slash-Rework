@@ -2,20 +2,24 @@ package com.robertx22.age_of_exile.database.data.stats.layers;
 
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
+import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 
 
 // example: you have 200% fire resist, enemy has 10% fire pene, you end up with 190% fire res which means enemy doesnt do any extra dmg to you
 public class StatLayerData {
 
+    public EffectSides side = EffectSides.Source;
     private String layer = "";
     public String numberID = "";
     private float number = 0;
 
+    //private Set<String> statsThatModifiedThis = new HashSet<>();
 
-    public StatLayerData(String layer, String numberID, float number) {
+    public StatLayerData(String layer, String numberID, float number, EffectSides side) {
         this.layer = layer;
         this.numberID = numberID;
         this.number = number;
+        this.side = side;
     }
 
     public StatLayer getLayer() {

@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.stats.types.defense;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageEffect;
+import com.robertx22.age_of_exile.database.data.stats.layers.StatLayers;
 import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
@@ -60,8 +61,8 @@ public class DamageShield extends Stat {
 
         @Override
         public DamageEvent activate(DamageEvent effect, StatData data, Stat stat) {
-            effect.data.getNumber(EventData.NUMBER).number -= data.getValue();
-
+            effect.getLayer(StatLayers.Defensive.FLAT_DAMAGE_REDUCTION, EventData.NUMBER, Side()).reduce(data.getValue());
+            //      effect.data.getNumber(EventData.NUMBER).number -= data.getValue();
             return effect;
         }
 

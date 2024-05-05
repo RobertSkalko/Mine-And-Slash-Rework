@@ -136,6 +136,13 @@ public class MobStatUtils {
                 .GUID()));
         stats.add(ExactStatData.noScaling(stat, ModType.MORE, Armor.getInstance()
                 .GUID()));
+
+
+        for (Elements ele : Elements.getAllSingle()) {
+            if (ele != Elements.Physical) {
+                stats.add(ExactStatData.noScaling(stat, ModType.MORE, new ElementalResist(ele).GUID()));
+            }
+        }
         stats.add(ExactStatData.noScaling(stat, ModType.MORE, new ElementalResist(Elements.Elemental)
                 .GUID()));
         stats.add(ExactStatData.noScaling(stat, ModType.MORE, Health.getInstance()
@@ -179,8 +186,12 @@ public class MobStatUtils {
                 .GUID(), lvl));
         stats.add(ExactStatData.scaleTo(10 * rar.StatMultiplier(), ModType.FLAT, Armor.getInstance()
                 .GUID(), lvl));
-        stats.add(ExactStatData.noScaling(10 * rar.StatMultiplier(), ModType.FLAT, new ElementalResist(Elements.Elemental)
-                .GUID()));
+
+        for (Elements ele : Elements.getAllSingle()) {
+            if (ele != Elements.Physical) {
+                stats.add(ExactStatData.noScaling(10 * rar.StatMultiplier(), ModType.FLAT, new ElementalResist(ele).GUID()));
+            }
+        }
 
         stats.add(ExactStatData.scaleTo(5 * rar.DamageMultiplier(), ModType.FLAT, OffenseStats.CRIT_CHANCE.get()
                 .GUID(), lvl));

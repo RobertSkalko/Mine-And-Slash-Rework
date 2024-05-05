@@ -2,12 +2,15 @@ package com.robertx22.age_of_exile.database.data.stats.layers;
 
 
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
+import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EffectEvent;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +59,23 @@ public class StatLayer implements JsonExileRegistry<StatLayer>, IAutoGson<StatLa
         };
 
         public abstract void apply(EffectEvent event, StatLayerData layer, String number);
+    }
+
+    public MutableComponent getTooltip(StatLayerData data) {
+
+        // todo can a target effect be modified by the source etc..?
+        MutableComponent sourcetarget = Component.empty().append("[").append(data.side.word.locName().append("]: "));
+
+        MutableComponent number = Component.literal("x" + MMORPG.DECIMAL_FORMAT.format(data.getMultiplier()));
+        if (this.action == LayerAction.ADD) {
+            String plusminus = data.getNumber() < 0 ? "" : "+";
+            number = Component.literal(plusminus + MMORPG.DECIMAL_FORMAT.format(data.getNumber()));
+        }
+
+        MutableComponent t = Component.empty().append(sourcetarget).append(locName().append(": ").append(number));
+
+        return t;
+
     }
 
     public StatLayer(String id, String name, LayerAction action, int priority, float min_multi, float max_multi) {

@@ -60,7 +60,7 @@ public class StatPriority implements IAutoLocName {
         // todo dmg increases are based on original number, which mess with conversion..
         // they should be based on saved value at point of dmg bonus event start
 
-        StatPriority DAMAGE_TRANSFER = damage("DAMAGE_TRANSFER", 0);
+        //StatPriority DAMAGE_TRANSFER = damage("DAMAGE_TRANSFER", 0);
 
         StatPriority BEFORE_HIT_PREVENTION = damage("BEFORE_HIT_PREVENTION", 9); // for stuff like accuracy
         StatPriority HIT_PREVENTION = damage("HIT_PREVENTION", 10); // dodge, block

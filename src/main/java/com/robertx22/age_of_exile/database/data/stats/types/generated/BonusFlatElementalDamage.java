@@ -3,11 +3,13 @@ package com.robertx22.age_of_exile.database.data.stats.types.generated;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageEffect;
+import com.robertx22.age_of_exile.database.data.stats.layers.StatLayers;
 import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.database.data.stats.types.ElementalStat;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.number_provider.NumberModifier;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
@@ -80,13 +82,17 @@ public class BonusFlatElementalDamage extends ElementalStat {
 
         @Override
         public DamageEvent activate(DamageEvent effect, StatData data, Stat stat) {
-            effect.addBonusEleDmg(stat.getElement(), NumberModifier.ModifierType.SPELL_DAMAGE_EFFECTIVENESS_MULTI.modify(effect, data.getValue()));
+            if (stat.getElement() == effect.GetElement()) {
+                effect.getLayer(StatLayers.Offensive.FLAT_DAMAGE, EventData.NUMBER, Side()).add(data.getValue());
+            } else {
+                effect.addBonusEleDmg(stat.getElement(), NumberModifier.ModifierType.SPELL_DAMAGE_EFFECTIVENESS_MULTI.modify(effect, data.getValue()));
+            }
             return effect;
         }
 
         @Override
         public boolean canActivate(DamageEvent effect, StatData data, Stat stat) {
-            return effect.data.getAttackType().isHit();
+            return effect.data.getAttackType().isHit() && !effect.data.getBoolean(EventData.IS_BONUS_ELEMENT_DAMAGE);
         }
 
     }

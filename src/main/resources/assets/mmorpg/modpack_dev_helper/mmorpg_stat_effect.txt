@@ -10,7 +10,6 @@ damage_reduction_number_reduce_stat_data
 decrease_cast_ticks_num
 decrease_cd_ticks_num
 double_damage_number_add_stat_data
-double_dmg
 flat_damage_number_add_stat_data
 flat_damage_number_add_stat_percent
 give_agony_to_source

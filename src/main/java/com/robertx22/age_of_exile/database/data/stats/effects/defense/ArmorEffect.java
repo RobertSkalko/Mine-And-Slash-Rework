@@ -33,7 +33,7 @@ public class ArmorEffect extends InCodeStatEffect<DamageEvent> {
     public DamageEvent activate(DamageEvent effect, StatData data, Stat stat) {
         float pene = effect.getPenetration();
 
-     
+
         IUsableStat armor = (IUsableStat) stat;
 
         float EffectiveArmor = armor.getUsableValue((int) (data.getValue() - pene), effect.sourceData.getLevel());
@@ -49,7 +49,7 @@ public class ArmorEffect extends InCodeStatEffect<DamageEvent> {
 
         float defense = EffectiveArmor * 100F;
 
-        effect.getLayer(StatLayers.Defensive.PHYS_MITIGATION, EventData.NUMBER).reduce(defense);
+        effect.getLayer(StatLayers.Defensive.PHYS_MITIGATION, EventData.NUMBER, Side()).reduce(defense);
 
         return effect;
     }
