@@ -53,7 +53,7 @@ public class WaterSpells implements ExileRegistryInit {
     public void registerAll() {
 
 
-        SpellBuilder.of(FROST_LICH_ARMOR, PlayStyle.INT, SpellConfiguration.Builder.instant(60, 20 * 60), "Frost Lich Armor",
+        SpellBuilder.of(FROST_LICH_ARMOR, PlayStyle.INT, SpellConfiguration.Builder.instant(100, 20 * 60), "Frost Lich Armor",
                         Arrays.asList(SpellTags.BUFF, SpellTags.COLD, SpellTags.PHYSICAL))
                 .manualDesc("Surround yourself with Deadly Frost, granting you additional powers.")
                 .weaponReq(CastingWeapon.ANY_WEAPON)

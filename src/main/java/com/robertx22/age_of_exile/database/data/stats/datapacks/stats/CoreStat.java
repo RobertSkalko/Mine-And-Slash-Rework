@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.stats.datapacks.stats;
 
+import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
@@ -44,6 +45,8 @@ public class CoreStat extends BaseDatapackStat implements ICoreStat {
         this.is_long = false;
 
         this.locname = name;
+
+        DatapackStats.tryAdd(this);
     }
 
     @Override
@@ -109,7 +112,7 @@ public class CoreStat extends BaseDatapackStat implements ICoreStat {
     }
 
     @Override
-    public void addToOtherStats(InCalcStatContainer unitdata, InCalcStatData data) {
+    public void addToOtherStats(EntityData endata, InCalcStatContainer unitdata, InCalcStatData data) {
         for (ExactStatData x : getMods((int) data.getValue())) {
             x.applyToStatInCalc(unitdata);
         }

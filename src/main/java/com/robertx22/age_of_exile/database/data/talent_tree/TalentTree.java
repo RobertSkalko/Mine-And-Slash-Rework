@@ -45,6 +45,7 @@ public class TalentTree implements JsonExileRegistry<TalentTree>, IAutoGson<Tale
                 num = (int) GameBalanceConfig.get().STARTING_TALENT_POINTS;
                 num += GameBalanceConfig.get().TALENT_POINTS_PER_LVL * data.getLevel();
 
+
                 num -= talents.getAllocatedPoints(this);
 
                 if (data.getEntity() instanceof Player p) {
@@ -61,6 +62,9 @@ public class TalentTree implements JsonExileRegistry<TalentTree>, IAutoGson<Tale
                 int perlvl = (int) (data.getLevel() / (float) GameBalanceConfig.get().GIVE_ASCENDANCY_POINTS_EVERY_X_LEVELS);
 
                 num += perlvl;
+                if (num > 0) {
+                    num++; // first point to access the class
+                }
 
                 if (num > GameBalanceConfig.get().MAX_ASCENDANCY_POINTS) {
                     num = GameBalanceConfig.get().MAX_ASCENDANCY_POINTS;

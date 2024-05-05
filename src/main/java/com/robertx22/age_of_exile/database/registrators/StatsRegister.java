@@ -90,7 +90,7 @@ public class StatsRegister implements ExileRegistryInit {
 
                     add(JewelSocketStat.getInstance());
 
-                    add(new BonusChargesStat(ModEffects.ENDURANCE_CHARGE));
+                    add(new MaximumChargesStat(ModEffects.ENDURANCE_CHARGE));
                     add(new BonusPhysicalAsElemental(Elements.Elemental));
                     add(new MaxElementalResist(Elements.Elemental));
 

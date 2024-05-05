@@ -85,7 +85,7 @@ public class StatCalculation {
 
         InCalc incalc = new InCalc(unit);
         incalc.addVanillaHpToStats(entity, statCalc);
-        incalc.modify(statCalc);
+        incalc.modify(data, statCalc);
 
         unit.setStats(statCalc.calculate());
 

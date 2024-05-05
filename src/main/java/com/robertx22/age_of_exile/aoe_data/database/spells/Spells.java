@@ -29,6 +29,6 @@ public class Spells implements ExileRegistryInit {
         new PetSpells().registerAll();
 
         new SummonSpells().registerAll();
-
+        ProcSpells.init();
     }
 }

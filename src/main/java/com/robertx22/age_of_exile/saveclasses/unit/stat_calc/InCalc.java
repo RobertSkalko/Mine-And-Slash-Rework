@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.saveclasses.unit.stat_calc;
 
+import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.base.ICoreStat;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.base.ITransferToOtherStats;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
@@ -29,7 +30,7 @@ public class InCalc {
         }
     }
 
-    public void modify(InCalcStatContainer calc) {
+    public void modify(EntityData data, InCalcStatContainer calc) {
 
         // todo these should probably be after stats are out of calculation..? or they should be another phase
         // apply transfer stats
@@ -41,7 +42,7 @@ public class InCalc {
         // apply core stats
         calc.modifyInCalc(calcStat -> {
             if (calcStat.GetStat() instanceof ICoreStat core) {
-                core.addToOtherStats(calc, calcStat);
+                core.addToOtherStats(data, calc, calcStat);
             }
         });
     }

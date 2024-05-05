@@ -10,10 +10,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BonusChargesStat extends Stat implements IGenerated<BonusChargesStat> {
+public class MaximumChargesStat extends Stat implements IGenerated<MaximumChargesStat> {
     public EffectCtx effect;
 
-    public BonusChargesStat(EffectCtx effect) {
+    public MaximumChargesStat(EffectCtx effect) {
         this.effect = effect;
     }
 
@@ -33,11 +33,11 @@ public class BonusChargesStat extends Stat implements IGenerated<BonusChargesSta
     }
 
     @Override
-    public List<BonusChargesStat> generateAllPossibleStatVariations() {
+    public List<MaximumChargesStat> generateAllPossibleStatVariations() {
         return Arrays.asList(
                         ModEffects.ENDURANCE_CHARGE, ModEffects.POWER_CHARGE, ModEffects.FRENZY_CHARGE
                 )
-                .stream().map(x -> new BonusChargesStat(x)).collect(Collectors.toList());
+                .stream().map(x -> new MaximumChargesStat(x)).collect(Collectors.toList());
     }
 
     @Override

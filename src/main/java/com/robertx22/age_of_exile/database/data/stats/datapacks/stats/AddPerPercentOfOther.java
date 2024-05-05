@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.stats.datapacks.stats;
 
+import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.base.BaseDatapackStat;
@@ -34,6 +35,9 @@ public class AddPerPercentOfOther extends BaseDatapackStat implements AddToAfter
                 + adder_stat.getIconNameFormat()
                 + ChatFormatting.GRAY + " as extra "
                 + stat_to_add_to.getIconNameFormat();
+
+
+        DatapackStats.tryAdd(this);
     }
 
     public AddPerPercentOfOther(String adder_stat, String stat_to_add_to) {

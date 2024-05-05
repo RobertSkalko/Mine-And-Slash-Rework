@@ -41,7 +41,7 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     public double STARTING_TALENT_POINTS = 1;
 
     public double GIVE_ASCENDANCY_POINTS_EVERY_X_LEVELS = 10;
-    public int MAX_ASCENDANCY_POINTS = 8;
+    public int MAX_ASCENDANCY_POINTS = 9;
 
     public double HP_MOB_BONUS_PER_MAP_TIER = 0.1;
     public double DMG_MOB_BONUS_PER_MAP_TIER = 0.05;

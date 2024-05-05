@@ -19,6 +19,13 @@ public class EntityStatusEffectsData {
 
     public HashMap<String, ExileEffectInstanceData> exileMap = new HashMap<>();
 
+    public int getStacks(String eff) {
+        if (exileMap.containsKey(eff)) {
+            return exileMap.get(eff).stacks;
+        }
+        return 0;
+    }
+
     public void tick(LivingEntity en) {
 
         if (exileMap.isEmpty()) {

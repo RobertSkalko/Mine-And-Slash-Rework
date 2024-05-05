@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.aoe_data.database.stat_effects;
 
 import com.robertx22.age_of_exile.aoe_data.DataHolder;
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
+import com.robertx22.age_of_exile.aoe_data.database.spells.schools.ProcSpells;
 import com.robertx22.age_of_exile.aoe_data.database.spells.schools.WaterSpells;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.PositionSource;
@@ -82,6 +83,10 @@ public class StatEffects implements ExileRegistryInit {
 
     public static DataHolder<EffectCtx, StatEffect> GIVE_EFFECT_TO_SOURCE_30_SEC = new DataHolder<>(
             Arrays.asList(
+                    ModEffects.ENDURANCE_CHARGE,
+                    ModEffects.POWER_CHARGE,
+                    ModEffects.FRENZY_CHARGE,
+
                     ModEffects.ESSENCE_OF_FROST,
                     ModEffects.ICE_GOLEM_BUFF,
                     ModEffects.FIRE_GOLEM_BUFF,
@@ -151,6 +156,7 @@ public class StatEffects implements ExileRegistryInit {
 
 
     public static StatEffect PROC_SHATTER = new ProcSpellEffect(WaterSpells.BONE_SHATTER_PROC, PositionSource.TARGET);
+    public static StatEffect PROC_PROFANE_EXPLOSION = new ProcSpellEffect(ProcSpells.PROFANE_EXPLOSION, PositionSource.TARGET);
 
 
     public static void addSerializers() {

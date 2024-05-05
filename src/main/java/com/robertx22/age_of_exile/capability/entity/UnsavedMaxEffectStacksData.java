@@ -1,6 +1,6 @@
 package com.robertx22.age_of_exile.capability.entity;
 
-import com.robertx22.age_of_exile.database.data.stats.types.BonusChargesStat;
+import com.robertx22.age_of_exile.database.data.stats.types.MaximumChargesStat;
 import com.robertx22.age_of_exile.saveclasses.unit.StatContainer;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 
@@ -16,7 +16,7 @@ public class UnsavedMaxEffectStacksData {
     public void calc(StatContainer c) {
 
         for (StatData stat : c.stats.values()) {
-            if (stat.GetStat() instanceof BonusChargesStat b) {
+            if (stat.GetStat() instanceof MaximumChargesStat b) {
                 bonus.put(b.effect.GUID(), (int) stat.getValue());
             }
         }

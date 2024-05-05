@@ -118,12 +118,9 @@ public class DamageEvent extends EffectEvent {
 
     public float getActualDamage() {
         float dmg = this.data.getNumber();
-
         if (dmg <= 0) {
             return 0;
         }
-
-
         return dmg;
     }
 

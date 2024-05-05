@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.stats.datapacks.stats;
 
+import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.base.BaseDatapackStat;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
@@ -31,6 +32,8 @@ public class AttributeStat extends BaseDatapackStat {
         this.attribute = attribute;
         this.is_perc = perc;
         this.scaling = StatScaling.NONE;
+        
+        DatapackStats.tryAdd(this);
     }
 
     @Override

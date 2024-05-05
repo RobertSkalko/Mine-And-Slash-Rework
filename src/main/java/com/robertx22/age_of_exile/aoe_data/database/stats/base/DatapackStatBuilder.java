@@ -52,6 +52,7 @@ public class DatapackStatBuilder<T extends IGUID> {
     public static class EffectMaker<T> {
         private List<Function<T, StatEffect>> effectMaker = new ArrayList<>();
         private List<Function<T, StatCondition>> conditionMaker = new ArrayList<>();
+        private List<Function<T, List<StatCondition>>> conditionListMaker = new ArrayList<>();
 
         private List<StatCondition> conditions = new ArrayList<>();
         private List<StatEffect> effects = new ArrayList<>();
@@ -114,6 +115,8 @@ public class DatapackStatBuilder<T extends IGUID> {
         this.stats.put(t, new DatapackStat());
     }
 
+    // todo can i rework this into a single class that creates a single stat effect?
+
     public DatapackStatBuilder<T> addCondition(StatCondition condition) {
         return addCondition(EffectPlace.FIRST, condition);
     }
@@ -126,7 +129,14 @@ public class DatapackStatBuilder<T extends IGUID> {
 
     public DatapackStatBuilder<T> addCondition(Function<T, StatCondition> condition) {
         Objects.requireNonNull(condition);
+
         EFFECTS.get(EffectPlace.FIRST).conditionMaker.add(condition);
+        return this;
+    }
+
+    public DatapackStatBuilder<T> addConditions(Function<T, List<StatCondition>> condition) {
+        Objects.requireNonNull(condition);
+        EFFECTS.get(EffectPlace.FIRST).conditionListMaker.add(condition);
         return this;
     }
 
@@ -161,6 +171,7 @@ public class DatapackStatBuilder<T extends IGUID> {
         this.priority = priority.GUID();
         return this;
     }
+
 
     public DatapackStatBuilder<T> setSide(EffectSides side) {
         this.side = side;
@@ -242,6 +253,13 @@ public class DatapackStatBuilder<T extends IGUID> {
                         if (effectMaker.conditionMaker != null) {
                             for (Function<T, StatCondition> maker : effectMaker.conditionMaker) {
                                 dataEffect.ifs.add(maker.apply(x.getKey()).GUID());
+                            }
+                        }
+                        if (effectMaker.conditionListMaker != null) {
+                            for (Function<T, List<StatCondition>> maker : effectMaker.conditionListMaker) {
+                                for (StatCondition c : maker.apply(x.getKey())) {
+                                    dataEffect.ifs.add(c.GUID());
+                                }
                             }
                         }
 

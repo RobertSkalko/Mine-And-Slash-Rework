@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffe
 import com.robertx22.age_of_exile.aoe_data.database.stat_conditions.StatConditions;
 import com.robertx22.age_of_exile.aoe_data.database.stat_effects.StatEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.DatapackStatBuilder;
+import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectAndCondition;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EmptyAccessor;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
@@ -23,6 +24,32 @@ import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import java.util.Arrays;
 
 public class EffectStats {
+
+    public static DataPackStatAccessor<EffectAndCondition> CHANCE_TO_GIVE_CASTER_EFFECT = DatapackStatBuilder
+            .<EffectAndCondition>of(x -> x.GUID(), x -> Elements.Physical)
+            .addAllOfType(Arrays.asList(
+                    new EffectAndCondition(ModEffects.FRENZY_CHARGE, EffectAndCondition.Condition.HIT),
+                    new EffectAndCondition(ModEffects.POWER_CHARGE, EffectAndCondition.Condition.HIT),
+                    new EffectAndCondition(ModEffects.ENDURANCE_CHARGE, EffectAndCondition.Condition.HIT))
+            )
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(StatPriority.Damage.FINAL_DAMAGE)
+            .setSide(EffectSides.Source)
+            .addConditions(x -> x.con.con.get())
+            .addEffect(x -> StatEffects.GIVE_EFFECT_TO_SOURCE_30_SEC.get(x.effect))
+            .setLocName(x -> Stat.format(
+                    Stat.VAL1 + "% Chance to get " + x.effect.locname + " On " + x.con.name
+            ))
+            .setLocDesc(x -> "")
+            .modifyAfterDone(x -> {
+                x.min = 0;
+                x.max = 100;
+                x.is_long = true;
+                x.is_perc = true;
+                x.scaling = StatScaling.NONE;
+            })
+            .build();
+
 
     public static DataPackStatAccessor<EffectCtx> APPLY_GOLEM_EFFECT = DatapackStatBuilder
             .<EffectCtx>of(x -> "apply_golem_effect_" + x.id, x -> x.element)

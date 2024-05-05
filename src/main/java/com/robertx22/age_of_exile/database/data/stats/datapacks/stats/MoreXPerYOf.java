@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.stats.datapacks.stats;
 
+import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.base.BaseDatapackStat;
@@ -34,6 +35,7 @@ public class MoreXPerYOf extends BaseDatapackStat implements AddToAfterCalcEnd {
         this.is_long = true;
 
         this.locname = ChatFormatting.GREEN + Stat.VAL1 + " " + stat_to_add_to.getIconNameFormat() + " per " + perEach + " " + adder_stat.getIconNameFormat();
+        DatapackStats.tryAdd(this);
     }
 
     public MoreXPerYOf(String adder_stat, String stat_to_add_to) {
@@ -47,7 +49,7 @@ public class MoreXPerYOf extends BaseDatapackStat implements AddToAfterCalcEnd {
         this.scaling = StatScaling.NONE;
     }
 
-    
+
     // todo this doesnt cap stat values to min max etc
     @Override
     public void affectStats(StatContainer copy, StatContainer stats, StatData statData) {

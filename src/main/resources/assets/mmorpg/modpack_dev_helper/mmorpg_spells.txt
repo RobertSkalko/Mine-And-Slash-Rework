@@ -56,6 +56,7 @@ poison_ball
 poison_cloud
 poison_trap
 power_chord
+profane_explosion
 pull
 quickdraw
 recoil_shot

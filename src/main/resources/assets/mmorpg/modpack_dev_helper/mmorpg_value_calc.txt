@@ -47,6 +47,7 @@ poison_arrow
 poison_cloud
 poisonball
 power_chord
+profane_explosion
 pull
 ranger_trap
 rejuvenation

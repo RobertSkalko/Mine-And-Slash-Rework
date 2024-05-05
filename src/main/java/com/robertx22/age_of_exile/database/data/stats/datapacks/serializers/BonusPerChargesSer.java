@@ -17,6 +17,7 @@ public class BonusPerChargesSer implements IStatSerializer<BonusStatPerEffectSta
         JsonObject json = new JsonObject();
         this.saveBaseStatValues(obj, json);
         json.add("core_stat_data", data);
+        json.addProperty("effect_id", obj.effect);
 
         return json;
     }
@@ -27,7 +28,8 @@ public class BonusPerChargesSer implements IStatSerializer<BonusStatPerEffectSta
         String id = json.get("id").getAsString();
         String name = json.get("name").getAsString();
         StatScaling scaling = StatScaling.valueOf(json.get("scale").getAsString());
-        BonusStatPerEffectStacks stat = new BonusStatPerEffectStacks(id, name, scaling, data);
+        String effect = json.get("effect_id").getAsString();
+        BonusStatPerEffectStacks stat = new BonusStatPerEffectStacks(effect, id, name, scaling, data);
         this.loadBaseStatValues(stat, json);
         return stat;
     }

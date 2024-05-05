@@ -170,9 +170,6 @@ public class ModEffects implements ExileRegistryInit {
                 .stat(DatapackStats.ARMOR_PER_MANA.mod(1, 5))
                 .stat(ProcStats.PROC_SHATTER.get().mod(25, 100))
                 .stat(ProcStats.PROC_SHATTER_MAX_FROST_ESSENCE.get().mod(10, 50))
-                .stat(OffenseStats.TOTAL_DAMAGE.get().mod(-25, -25))
-                .stat(new ElementalResist(Elements.Fire).mod(-25, -25))
-
                 .build();
 
         ExileEffectBuilder.of(ModEffects.BONE_CHILL)

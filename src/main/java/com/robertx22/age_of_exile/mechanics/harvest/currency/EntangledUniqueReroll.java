@@ -40,7 +40,7 @@ public class EntangledUniqueReroll extends BaseHarvestCurrency {
 
             @Override
             public ItemStack modify(LocReqContext ctx, GearItemData gear, ItemStack stack) {
-                gear.uniqueStats.increaseAllBy(gear, 5);
+                gear.uniqueStats.increaseAllBy(gear, 10);
                 StackSaving.GEARS.saveTo(stack, gear);
                 return stack;
             }
@@ -68,7 +68,7 @@ public class EntangledUniqueReroll extends BaseHarvestCurrency {
 
     @Override
     public String locDescForLangFile() {
-        return "Either Upgrades unique stats by +5%" + " or Corrupts the Item, making it Unmodifiable.";
+        return "Either Upgrades unique stats by +10%" + " or Corrupts the Item, making it Unmodifiable.";
     }
 
     @Override

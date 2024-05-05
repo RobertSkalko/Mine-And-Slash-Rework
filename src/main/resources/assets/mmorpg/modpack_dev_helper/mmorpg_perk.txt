@@ -27,6 +27,7 @@ all_resist
 all_resist_big
 all_water_damage
 all_water_damage_big
+arcanist_class
 area_dmg
 area_dmg_big
 armor_dodge
@@ -40,6 +41,7 @@ armor_percent_big
 arrow_barrage
 arrow_storm
 arrow_totem
+assassin_class
 astral_totem
 attack_atk_style_dmg
 aura_effect
@@ -47,6 +49,7 @@ aura_effect_big
 awaken_mana
 axe_damage
 axe_damage_big
+battlemage_class
 black_hole
 bleed_chance
 bleed_chance_big
@@ -75,6 +78,7 @@ cdr_big
 chain_damage
 chain_damage_big
 chain_lightning
+champ_class
 chaos_any_wep_damage
 chaos_any_wep_damage_big
 chaos_dot_damage
@@ -87,6 +91,7 @@ chaos_totem
 chaos_weapon_damage
 charge
 charged_bolt
+chief_class
 chilling_field
 chilling_touch
 circle_of_healing
@@ -145,6 +150,7 @@ electrify_damage
 electrify_damage_big
 electrify_duration
 electrify_duration_big
+elem_class
 elemental_any_wep_damage
 elemental_any_wep_damage_big
 elemental_dot_damage
@@ -204,6 +210,7 @@ golem_damage_big
 golemancer
 gong_strike
 guardian
+guardian_class
 harmony
 healing_aura
 healing_received
@@ -234,6 +241,7 @@ hp_ms
 hp_ms_big
 hp_regen_energy_regen
 hp_regen_energy_regen_big
+hunter_class
 hunter_potion
 ice_comet
 inc_aoe
@@ -248,6 +256,12 @@ int_dmg
 int_dmg_big
 jewel_socket
 less_aggro
+lich_class
+lich_class_0
+lich_class_1
+lich_class_2
+lich_class_3
+lich_class_4
 lifesteal
 lifesteal_big
 lightning_any_wep_damage
@@ -299,6 +313,7 @@ ms_all_in
 ms_energy_regen
 ms_energy_regen_big
 ms_steal
+necro_class
 necromantic_defenses
 nether_enthusiast
 p_armor_pen
@@ -388,11 +403,13 @@ poison_trap
 positive_effect
 positive_effect_big
 power_chord
+profane_explosion
 projectile_damage
 projectile_damage_big
 projection
 pull
 quickdraw
+raider_class
 ranger
 reckless_defender
 recoil_shot
@@ -495,6 +512,7 @@ trap_cdr
 trap_cdr_big
 trap_damage
 trap_damage_big
+trickster_class
 trident_damage
 trident_damage_big
 true_hit

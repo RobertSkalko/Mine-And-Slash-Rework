@@ -29,6 +29,7 @@ all_physical_damage
 all_resist
 all_vuln_crit
 all_water_damage
+aoe_per_power_charge
 apply_golem_effect_fire_golem_buff
 apply_golem_effect_ice_golem_buff
 apply_golem_effect_lightning_golem_buff
@@ -128,6 +129,7 @@ cooking_lesser_drop_bonus
 cooking_medium_drop_bonus
 cooking_misc_drop_bonus
 cooking_triple_drop
+crit_dmg_per_power_charge
 critical_damage
 critical_hit
 crossbow_damage
@@ -151,6 +153,7 @@ defensive_eff_dur_u_cast
 despair_immunity
 dex_dmg
 dexterity
+dmg_per_power_charge
 dmg_received
 dmg_reduction
 dmg_reduction_chance
@@ -197,6 +200,7 @@ enchanting_lesser_drop_bonus
 enchanting_medium_drop_bonus
 enchanting_misc_drop_bonus
 enchanting_triple_drop
+endurance_charge_on_hit
 energy
 energy_leech_cap
 energy_on_hit_hit
@@ -254,6 +258,7 @@ freeze_duration
 freeze_proc_chance
 freeze_resistance
 freeze_strength
+frenzy_charge_on_hit
 full_swing_damage
 gear_defense
 gear_weapon_damage
@@ -334,6 +339,7 @@ int_dmg
 int_dmg_per_5_strength
 intelligence
 jewel_socket
+knockback_resist
 learn_arrow_barrage
 learn_arrow_storm
 learn_arrow_totem
@@ -390,6 +396,7 @@ learn_poison_ball
 learn_poison_cloud
 learn_poison_trap
 learn_power_chord
+learn_profane_explosion
 learn_pull
 learn_quickdraw
 learn_recoil_shot
@@ -592,6 +599,8 @@ poison_proc_chance
 poison_resistance
 poison_strength
 positive_eff_dur_u_cast
+power_charge_on_hit
+proc_profane_explosion
 proc_shatter
 proc_shatter_max_frost
 proj_dmg_received

@@ -18,12 +18,15 @@ give_agony_to_target
 give_blind_to_target
 give_despair_to_source
 give_despair_to_target
+give_endurance_charge_to_source
 give_essence_of_frost_to_source
 give_fire_golem_buff_to_source
+give_frenzy_charge_to_source
 give_ice_golem_buff_to_source
 give_lightning_golem_buff_to_source
 give_missile_barrage_to_source
 give_missile_barrage_to_target
+give_power_charge_to_source
 give_rejuvenation_to_allies_in_radius
 give_slow_to_source
 give_slow_to_target
@@ -48,6 +51,7 @@ leech_health
 leech_magic_shield
 leech_mana
 proc_spell_bone_shatter
+proc_spell_profane_explosion
 proj_count
 reduce_cd_by_ticks
 remove_bone_chill_from_target
