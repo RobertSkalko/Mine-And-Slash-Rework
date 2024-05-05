@@ -37,6 +37,10 @@ public class BonusStatPerEffectStacks extends BaseDatapackStat implements ICoreS
         this.locname = name;
     }
 
+    public BonusStatPerEffectStacks() {
+        super(SER_ID);
+    }
+
     @Override
     public final String locDescForLangFile() {
         return "Adds stats depending on how many effect stacks you have currently.";

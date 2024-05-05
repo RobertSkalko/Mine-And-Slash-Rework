@@ -1,11 +1,12 @@
 package com.robertx22.age_of_exile.saveclasses.unit;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
+import com.robertx22.library_of_exile.registry.IGUID;
 
 import java.util.Arrays;
 import java.util.List;
 
-public enum ResourceType {
+public enum ResourceType implements IGUID {
     health("health", "Health"),
     magic_shield("magic_shield", "Magic Shield"),
     mana("mana", "Mana"),
@@ -41,4 +42,8 @@ public enum ResourceType {
 
     public String locname;
 
+    @Override
+    public String GUID() {
+        return this.id;
+    }
 }

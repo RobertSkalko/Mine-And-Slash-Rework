@@ -6,6 +6,7 @@ additive_damage_number_add_stat_data
 apply_cd_as_cast_time
 cancel_event
 crit_damage_number_add_stat_data
+damage_reduction_number_reduce_stat_data
 decrease_cast_ticks_num
 decrease_cd_ticks_num
 double_damage_number_add_stat_data
@@ -18,7 +19,9 @@ give_blind_to_target
 give_despair_to_source
 give_despair_to_target
 give_essence_of_frost_to_source
+give_fire_golem_buff_to_source
 give_ice_golem_buff_to_source
+give_lightning_golem_buff_to_source
 give_missile_barrage_to_source
 give_missile_barrage_to_target
 give_rejuvenation_to_allies_in_radius

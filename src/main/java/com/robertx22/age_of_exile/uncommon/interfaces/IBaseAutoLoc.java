@@ -10,6 +10,7 @@ public interface IBaseAutoLoc extends IGUID {
 
     enum AutoLocGroup {
         Enchants,
+        LootModifier,
         Foods,
         Runes,
         StatusEffects,

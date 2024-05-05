@@ -125,4 +125,5 @@ v.5.4.7
 - for datapackers: is_dodged is no longer used by both block and dodge, now there's a special is_hit_avoided that all things that make the hit avoid call, but you can also check if is_dodged or is_blocked
 - golems now give you a buff when they attack anything
 - added stat for "plus stat per effect stacks on you", mahj will know
-- 
+- added optional mob kill text that that also has a helpful hover text that shows how was loot chance modified
+This should hopefully resolve any "why no loot drop" confusion

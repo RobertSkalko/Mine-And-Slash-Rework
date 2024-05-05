@@ -27,6 +27,11 @@ public class SetCooldownEffect extends StatEffect {
         public int hashCode() {
             return Objects.hash(cd_id + num);
         }
+
+        @Override
+        public String GUID() {
+            return cd_id + "_" + num;
+        }
     }
 
     public SetCooldownEffect(Data data) {

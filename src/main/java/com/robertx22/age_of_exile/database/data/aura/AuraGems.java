@@ -53,6 +53,10 @@ public class AuraGems {
             return Objects.hash(id);
         }
 
+        @Override
+        public String GUID() {
+            return id;
+        }
     }
 
     public static AuraInfo FIRE_RESIST = new AuraInfo("fire_res", "Flame Barrier");

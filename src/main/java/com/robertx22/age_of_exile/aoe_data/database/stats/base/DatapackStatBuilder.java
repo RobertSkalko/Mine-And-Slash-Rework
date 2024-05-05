@@ -15,12 +15,13 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.rework.condition.StatCond
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ErrorUtils;
+import com.robertx22.library_of_exile.registry.IGUID;
 
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-public class DatapackStatBuilder<T> {
+public class DatapackStatBuilder<T extends IGUID> {
 
     private DataPackStatAccessor<T> accessor;
 
@@ -79,7 +80,7 @@ public class DatapackStatBuilder<T> {
         return b;
     }
 
-    public static <T> DatapackStatBuilder<T> of(Function<T, String> id, Function<T, Elements> ele) {
+    public static <T extends IGUID> DatapackStatBuilder<T> of(Function<T, String> id, Function<T, Elements> ele) {
         DatapackStatBuilder<T> b = new DatapackStatBuilder<T>();
         b.accessor = new DataPackStatAccessor<T>();
         b.idMaker = id;
@@ -214,7 +215,7 @@ public class DatapackStatBuilder<T> {
                         if (effectMaker.isEmpty()) {
                             continue;
                         }
-                        
+
                         DataPackStatEffect dataEffect = new DataPackStatEffect();
                         dataEffect.order = priority;
                         dataEffect.events = events;

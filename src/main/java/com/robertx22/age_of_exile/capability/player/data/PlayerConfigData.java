@@ -19,6 +19,7 @@ public class PlayerConfigData {
         /// todo add more configs like.. minions should attack x?
 
         CAST_FAIL("cast_fail_messages", Words.CAST_FAIL_MSGS),
+        MOB_DEATH_MESSAGES("mob_death_messages", Words.MOB_DEATH_MESSAGES),
         AUTO_PVE("auto_pve", Words.AUTOMATIC_PVE);
         public String id;
         public Words word;

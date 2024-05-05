@@ -96,9 +96,7 @@ public class CoreStat extends BaseDatapackStat implements ICoreStat {
 
         return data.stats.stream()
                 .map(x -> {
-                    ExactStatData exact = ExactStatData.levelScaled(amount * x.v1, x.getStat()
-                            .getStat(), x.getStat()
-                            .getModType(), 1);
+                    ExactStatData exact = ExactStatData.levelScaled(amount * x.v1, x.getStat(), x.getModType(), 1);
                     return exact;
                 })
                 .collect(Collectors.toList());
@@ -107,9 +105,7 @@ public class CoreStat extends BaseDatapackStat implements ICoreStat {
 
     @Override
     public final List<OptScaleExactStat> statsThatBenefit() {
-        return data.stats.stream()
-                .map(e -> e.getStat())
-                .collect(Collectors.toList());
+        return data.stats;
     }
 
     @Override

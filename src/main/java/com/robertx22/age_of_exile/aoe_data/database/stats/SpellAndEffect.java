@@ -20,4 +20,8 @@ public class SpellAndEffect extends AutoHashClass {
         return Objects.hash(spell, effect.resourcePath);
     }
 
+    @Override
+    public String GUID() {
+        return spell + "_" + effect.id;
+    }
 }

@@ -35,4 +35,8 @@ public class ResourceAndAttack extends AutoHashClass {
 
     }
 
+    @Override
+    public String GUID() {
+        return resource.id + "_on_" + attackType.id + "_hit";
+    }
 }

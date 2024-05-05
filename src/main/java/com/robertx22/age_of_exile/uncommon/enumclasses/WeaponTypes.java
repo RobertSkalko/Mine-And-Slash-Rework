@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.uncommon.enumclasses;
 
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
+import com.robertx22.library_of_exile.registry.IGUID;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WeaponTypes {
+public class WeaponTypes implements IGUID {
 
 
     private static List<WeaponTypes> ALL = new ArrayList<>();
@@ -67,5 +68,10 @@ public class WeaponTypes {
     public static List<WeaponTypes> getAll() {
         return ALL.stream().filter(x -> x != none).collect(Collectors.toList());
 
+    }
+
+    @Override
+    public String GUID() {
+        return this.id;
     }
 }

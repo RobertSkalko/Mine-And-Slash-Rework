@@ -82,7 +82,9 @@ public class StatEffects implements ExileRegistryInit {
     public static DataHolder<EffectCtx, StatEffect> GIVE_EFFECT_TO_SOURCE_30_SEC = new DataHolder<>(
             Arrays.asList(
                     ModEffects.ESSENCE_OF_FROST,
-                    ModEffects.ICE_GOLEM_BUFF
+                    ModEffects.ICE_GOLEM_BUFF,
+                    ModEffects.FIRE_GOLEM_BUFF,
+                    ModEffects.LIGHTNING_GOLEM_BUFF
             )
             , x -> new GiveExileStatusEffect(x.resourcePath, EffectSides.Source, 30));
 

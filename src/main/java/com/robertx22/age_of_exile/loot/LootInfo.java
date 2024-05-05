@@ -42,7 +42,6 @@ public class LootInfo {
     public LivingEntity mobKilled;
     public Player player;
     public Level world;
-    public float multi = 1;
     private int minItems = 0;
     private int maxItems = 50;
     public boolean isMapWorld = false;
@@ -102,9 +101,9 @@ public class LootInfo {
         info.setupAllFields();
 
         if (WorldUtils.isMapWorldClass(player.level())) {
-            info.multi += 10;
+            info.lootMods.add(new LootModifier(LootModifierEnum.MAP_CHEST, 10));
         } else {
-            info.multi += 5;
+            info.lootMods.add(new LootModifier(LootModifierEnum.CHEST, 5));
         }
 
         return info;
@@ -207,58 +206,75 @@ public class LootInfo {
         }
     }
 
-    public void setup(BaseLootGen gen) {
+    public List<LootModifier> lootMods = new ArrayList<>();
 
-        float multiplicativeMod = 1F;
 
-        List<Float> multis = new ArrayList<>();
+    private boolean gatheredLootMultis = false;
 
-        multis.add(multi);
+    public void gatherLootMultipliers() {
+
+        if (gatheredLootMultis) {
+            return;
+        }
+
+        this.gatheredLootMultis = true;
 
 
         if (mobKilled != null && mobData != null) {
             if (this.playerEntityData != null) {
-                multis.add(LootUtils.getLevelDistancePunishmentMulti(mobData.getLevel(), playerEntityData.getLevel()));
+                // todo ideally this would be sepearate and per lootgen, as some have distance punishment and some dont. or maybe just leave it?
+                lootMods.add(new LootModifier(LootModifierEnum.LEVEL_DISTANCE_PENALTY, LootUtils.getLevelDistancePunishmentMulti(mobData.getLevel(), playerEntityData.getLevel())));
             }
-            multis.add(LootUtils.getMobHealthBasedLootMulti(mobKilled));
-            multis.add((float) ExileDB.getEntityConfig(mobKilled, this.mobData).loot_multi);
-            multis.add(mobData.getUnit().getCalculatedStat(ExtraMobDropsStat.getInstance()).getMultiplier());
-            multis.add(mobData.getMobRarity().LootMultiplier());
+
+            lootMods.add(new LootModifier(LootModifierEnum.MOB_HEALTH, LootUtils.getMobHealthBasedLootMulti(mobKilled)));
+            lootMods.add(new LootModifier(LootModifierEnum.MOB_DATAPACK, (float) ExileDB.getEntityConfig(mobKilled, this.mobData).loot_multi));
+            lootMods.add(new LootModifier(LootModifierEnum.MOB_BONUS_LOOT_STAT, mobData.getUnit().getCalculatedStat(ExtraMobDropsStat.getInstance()).getMultiplier()));
+            lootMods.add(new LootModifier(LootModifierEnum.MOB_RARITY, mobData.getMobRarity().LootMultiplier()));
+
         }
 
         if (this.playerEntityData != null) {
+
             if (playerEntityData.getLevel() < 10) {
-                multis.add(2F);
+                lootMods.add(new LootModifier(LootModifierEnum.LOW_LEVEL_BOOST, 2));
+
             }
-            multis.add(Load.player(player).favor.getLootExpMulti());
+            lootMods.add(new LootModifier(LootModifierEnum.FAVOR, Load.player(player).favor.getLootExpMulti()));
+
             if (lootOrigin != LootOrigin.LOOT_CRATE) {
-                multis.add(playerEntityData.getUnit().getCalculatedStat(TreasureQuantity.getInstance()).getMultiplier());
+                lootMods.add(new LootModifier(LootModifierEnum.PLAYER_LOOT_QUANTITY, playerEntityData.getUnit().getCalculatedStat(TreasureQuantity.getInstance()).getMultiplier()));
             }
         }
+
         if (world != null) {
-            multis.add(ExileDB.getDimensionConfig(world).all_drop_multi);
+            lootMods.add(new LootModifier(LootModifierEnum.DIMENSION_LOOT, ExileDB.getDimensionConfig(world).all_drop_multi));
         }
 
         if (this.isMapWorld) {
-            multis.add(this.map.map.getBonusLootMulti());
-
-
+            lootMods.add(new LootModifier(LootModifierEnum.ADVENTURE_MAP, this.map.map.getBonusLootMulti()));
         }
 
+        float chance = ExileEvents.SETUP_LOOT_CHANCE.callEvents(new ExileEvents.OnSetupLootChance(mobKilled, player, 1)).lootChance;
 
-        //float additiveMod = 1;
+        lootMods.add(new LootModifier(LootModifierEnum.ANTI_MOB_FARM_MOD, chance));
 
-        for (Float m : multis) {
-            multiplicativeMod *= m;
-            //additiveMod += (m - 1F);
+    }
+
+    // todo this doesnt have to be done 10 times per mob kill, maybe just once
+    public void setup(BaseLootGen gen) {
+
+        float multiplicativeMod = 1F;
+
+        this.gatherLootMultipliers();
+
+        for (LootModifier mod : this.lootMods) {
+            multiplicativeMod *= mod.multi;
         }
-
 
         float chance = gen.baseDropChance();
 
         if (gen.chanceIsModified()) {
             chance *= multiplicativeMod;
-            chance = ExileEvents.SETUP_LOOT_CHANCE.callEvents(new ExileEvents.OnSetupLootChance(mobKilled, player, chance)).lootChance;
         }
 
         amount = LootUtils.WhileRoll(chance);

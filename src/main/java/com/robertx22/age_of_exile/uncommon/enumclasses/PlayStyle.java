@@ -6,8 +6,9 @@ import com.robertx22.age_of_exile.tags.all.SlotTags;
 import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.tags.imp.SlotTag;
 import com.robertx22.age_of_exile.tags.imp.SpellTag;
+import com.robertx22.library_of_exile.registry.IGUID;
 
-public enum PlayStyle {
+public enum PlayStyle implements IGUID {
 
     STR("str", "Melee") {
         @Override
@@ -75,6 +76,11 @@ public enum PlayStyle {
             }
         }
         return PlayStyle.STR;
+    }
+
+    @Override
+    public String GUID() {
+        return id;
     }
 
     PlayStyle(String id, String name) {

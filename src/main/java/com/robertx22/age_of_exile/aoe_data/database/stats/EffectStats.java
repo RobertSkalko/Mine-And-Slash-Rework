@@ -27,7 +27,9 @@ public class EffectStats {
     public static DataPackStatAccessor<EffectCtx> APPLY_GOLEM_EFFECT = DatapackStatBuilder
             .<EffectCtx>of(x -> "apply_golem_effect_" + x.id, x -> x.element)
             .addAllOfType(Arrays.asList(
-                            ModEffects.ICE_GOLEM_BUFF
+                            ModEffects.ICE_GOLEM_BUFF,
+                            ModEffects.FIRE_GOLEM_BUFF,
+                            ModEffects.LIGHTNING_GOLEM_BUFF
                     )
             )
             .worksWithEvent(DamageEvent.ID)

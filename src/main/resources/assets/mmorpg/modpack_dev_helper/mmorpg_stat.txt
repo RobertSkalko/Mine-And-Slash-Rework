@@ -16,6 +16,7 @@ all_all_damage
 all_any_wep_damage
 all_attributes
 all_chaos_damage
+all_dmg_reduction
 all_dmg_when_target_low_hp
 all_dot_damage
 all_elemental_damage
@@ -28,7 +29,9 @@ all_physical_damage
 all_resist
 all_vuln_crit
 all_water_damage
+apply_golem_effect_fire_golem_buff
 apply_golem_effect_ice_golem_buff
+apply_golem_effect_lightning_golem_buff
 archmage
 archmage_mana_cost
 area_cast_time
@@ -60,9 +63,11 @@ bleed_resistance
 bleed_strength
 block_aura_cost
 block_chance
+block_per_endurance_charge
 blood
 blood_leech_cap
-blood_on_
+blood_on_is_blocked
+blood_on_is_dodged
 blood_per_10_strength
 blood_user
 bonus_exp
@@ -95,6 +100,7 @@ chaos_any_wep_damage
 chaos_cast_time
 chaos_cdr
 chaos_damage_aura_cost
+chaos_dmg_reduction
 chaos_dmg_when_target_low_hp
 chaos_dot_damage
 chaos_health_leech
@@ -106,6 +112,7 @@ chaos_spell_dmg
 chaos_spell_dmg_taken
 chaos_vuln_crit
 chaos_weapon_damage
+charge_eff_dur_u_cast
 cold_ailment_aura_cost
 cold_cast_time
 cold_cdr
@@ -143,9 +150,9 @@ damage_to_cursed
 defensive_eff_dur_u_cast
 despair_immunity
 dex_dmg
-dex_dmg_received
 dexterity
 dmg_received
+dmg_reduction
 dmg_taken_to_mana
 dmg_to_living
 dmg_to_undead
@@ -173,6 +180,7 @@ electrify_proc_chance
 electrify_resistance
 electrify_strength
 elemental_any_wep_damage
+elemental_dmg_reduction
 elemental_dmg_when_target_low_hp
 elemental_dot_damage
 elemental_health_leech
@@ -190,8 +198,9 @@ enchanting_misc_drop_bonus
 enchanting_triple_drop
 energy
 energy_leech_cap
-energy_on_
 energy_on_hit_hit
+energy_on_is_blocked
+energy_on_is_dodged
 energy_per_10_dexterity
 energy_per_10_mana
 energy_per_sec
@@ -212,6 +221,7 @@ fire_any_wep_damage
 fire_cast_time
 fire_cdr
 fire_damage_aura_cost
+fire_dmg_reduction
 fire_dmg_when_target_low_hp
 fire_dot_damage
 fire_health_leech
@@ -266,8 +276,9 @@ heal_spell_dmg
 heal_spell_dmg_taken
 health
 health_leech_cap
-health_on_
 health_on_hit_hit
+health_on_is_blocked
+health_on_is_dodged
 health_on_kill
 health_per_10_dexterity
 health_per_10_intelligence
@@ -293,6 +304,8 @@ husbandry_misc_drop_bonus
 husbandry_triple_drop
 immobilizing_eff_dur_u_cast
 inc_aoe
+inc_effect_of_charge_buff_given
+inc_effect_of_charge_buff_on_you
 inc_effect_of_curse_buff_given
 inc_effect_of_curse_buff_on_you
 inc_effect_of_defensive_buff_given
@@ -318,7 +331,6 @@ increase_healing
 increased_quantity
 int_dmg
 int_dmg_per_5_strength
-int_dmg_received
 intelligence
 jewel_socket
 learn_arrow_barrage
@@ -417,6 +429,7 @@ lightning_any_wep_damage
 lightning_cast_time
 lightning_cdr
 lightning_damage_aura_cost
+lightning_dmg_reduction
 lightning_dmg_when_target_low_hp
 lightning_dot_damage
 lightning_health_leech
@@ -435,8 +448,9 @@ magic_shield
 magic_shield_aura_cost
 magic_shield_heal
 magic_shield_leech_cap
-magic_shield_on_
 magic_shield_on_hit_hit
+magic_shield_on_is_blocked
+magic_shield_on_is_dodged
 magic_shield_on_kill
 magic_shield_per_10_mana
 magic_shield_per_sec
@@ -447,8 +461,9 @@ magic_spell_dmg_taken
 mana
 mana_cost
 mana_leech_cap
-mana_on_
 mana_on_hit_hit
+mana_on_is_blocked
+mana_on_is_dodged
 mana_on_kill
 mana_per_10_dexterity
 mana_per_10_intelligence
@@ -462,9 +477,12 @@ manasteal
 max_all_resist
 max_chaos_resist
 max_elemental_resist
+max_endurance_charge_charges
 max_fire_resist
+max_frenzy_charge_charges
 max_lightning_resist
 max_physical_resist
+max_power_charge_charges
 max_total_summons
 max_water_resist
 melee_cast_time
@@ -510,6 +528,7 @@ physical_any_wep_damage
 physical_cast_time
 physical_cdr
 physical_damage_aura_cost
+physical_dmg_reduction
 physical_dmg_when_target_low_hp
 physical_dot_damage
 physical_health_leech
@@ -637,7 +656,6 @@ staff_spell_cdr
 staff_spell_spell_dmg
 staff_spell_spell_dmg_taken
 str_dmg
-str_dmg_received
 strength
 summon_cast_time
 summon_cdr
@@ -669,6 +687,7 @@ trap_spell_dmg_taken
 trident_damage
 unknown
 water_any_wep_damage
+water_dmg_reduction
 water_dmg_when_target_low_hp
 water_dot_damage
 water_health_leech

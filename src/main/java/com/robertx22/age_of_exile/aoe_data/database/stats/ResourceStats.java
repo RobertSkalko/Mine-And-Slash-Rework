@@ -23,7 +23,7 @@ import java.util.Arrays;
 public class ResourceStats {
 
     public static DataPackStatAccessor<ResourceOnAction> RESOURCE_ON_ACTION = DatapackStatBuilder
-            .<ResourceOnAction>of(x -> x.resource.id + "_on_", x -> Elements.Physical)
+            .<ResourceOnAction>of(x -> x.GUID(), x -> Elements.Physical)
             .addAllOfType(ResourceOnAction.allCombos())
             .worksWithEvent(DamageEvent.ID)
             .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)
@@ -46,7 +46,7 @@ public class ResourceStats {
 
 
     public static DataPackStatAccessor<LeechInfo> ELEMENT_LEECH_RESOURCE = DatapackStatBuilder
-            .<LeechInfo>of(x -> x.element.guidName + "_" + x.resourceType.id + "_leech", x -> x.element)
+            .<LeechInfo>of(x -> x.GUID(), x -> x.element)
             .addAllOfType(LeechInfo.allCombos())
             .worksWithEvent(DamageEvent.ID)
             .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)
@@ -88,7 +88,7 @@ public class ResourceStats {
             })
             .build();
     public static DataPackStatAccessor<ResourceAndAttack> RESOURCE_ON_HIT = DatapackStatBuilder
-            .<ResourceAndAttack>of(x -> x.resource.id + "_on_" + x.attackType.id + "_hit", x -> Elements.NONE)
+            .<ResourceAndAttack>of(x -> x.GUID(), x -> Elements.NONE)
             .addAllOfType(ResourceAndAttack.allCombos())
             .worksWithEvent(DamageEvent.ID)
             .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)

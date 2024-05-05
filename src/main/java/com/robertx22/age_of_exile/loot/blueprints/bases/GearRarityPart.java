@@ -70,8 +70,8 @@ public class GearRarityPart extends BlueprintPart<GearRarity, ItemBlueprint> {
         if (this.specialRar != null) {
             return specialRar;
         }
-
-        GearRarity rar = RandomUtils.weightedRandom(getPossibleRarities());
+        var possible = getPossibleRarities();
+        GearRarity rar = RandomUtils.weightedRandom(possible);
 
         if (rar.hasHigherRarity()) {
             var higher = rar.getHigherRarity();

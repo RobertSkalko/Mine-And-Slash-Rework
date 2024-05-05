@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.robertx22.age_of_exile.capability.player.data.PlayerBuffData;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.loot.LootModifierEnum;
 import com.robertx22.age_of_exile.tags.ModTag;
 import com.robertx22.age_of_exile.tags.TagType;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
@@ -169,6 +170,7 @@ public class CreateLangFile {
         list.addAll(Arrays.asList(GemItem.GemRank.values()));
         list.addAll(Arrays.asList(PlayerBuffData.Type.values()));
         list.addAll(Arrays.asList(ChestContent.chestTypeEnum.values()));
+        list.addAll(Arrays.asList(LootModifierEnum.values()));
 
 
         HashMap<IAutoLocName.AutoLocGroup, List<IAutoLocName>> map = new HashMap<>();

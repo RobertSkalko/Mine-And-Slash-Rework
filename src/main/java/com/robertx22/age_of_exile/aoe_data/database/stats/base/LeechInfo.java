@@ -30,4 +30,9 @@ public class LeechInfo extends AutoHashClass {
     public int hashCode() {
         return element.hashCode() + resourceType.hashCode();
     }
+
+    @Override
+    public String GUID() {
+        return element.guidName + "_" + resourceType.id + "_leech";
+    }
 }

@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.tags.all.ElementTags;
 import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.tags.imp.ElementTag;
 import com.robertx22.age_of_exile.tags.imp.SpellTag;
+import com.robertx22.library_of_exile.registry.IGUID;
 import net.minecraft.ChatFormatting;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 // todo for now keep lightning/nature mostly the same, or revert the rename
 // shadow will be chaos and need a few new priest abilities or turn a few to holy
 // todo
-public enum Elements {
+public enum Elements implements IGUID {
 
     Physical(Arrays.asList(), Arrays.asList(ElementTags.PHYSICAL), "Physical", ChatFormatting.GOLD, "physical", "\u2600", SpellTags.PHYSICAL),
     // elementals
@@ -114,4 +115,8 @@ public enum Elements {
         return false;
     }
 
+    @Override
+    public String GUID() {
+        return guidName;
+    }
 }

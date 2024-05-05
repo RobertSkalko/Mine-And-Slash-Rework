@@ -3,6 +3,7 @@ This registry is modify-able through datapacks.
 attack_type_is_dot
 attack_type_is_hit
 effect_has_tag_agony
+effect_has_tag_charge
 effect_has_tag_curse
 effect_has_tag_defensive
 effect_has_tag_despair

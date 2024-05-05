@@ -34,7 +34,7 @@ public class ResourceOnAction extends AutoHashClass {
 
     public static List<ResourceOnAction> allCombos() {
         List<ResourceOnAction> list = new ArrayList<>();
-        
+
         for (ResourceType type : ResourceType.values()) {
             list.add(onBlock(type));
             list.add(onDodge(type));
@@ -44,4 +44,8 @@ public class ResourceOnAction extends AutoHashClass {
 
     }
 
+    @Override
+    public String GUID() {
+        return resource.id + "_on_" + action;
+    }
 }

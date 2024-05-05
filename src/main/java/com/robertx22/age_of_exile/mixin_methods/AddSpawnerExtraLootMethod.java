@@ -1,6 +1,8 @@
 package com.robertx22.age_of_exile.mixin_methods;
 
 import com.robertx22.age_of_exile.loot.LootInfo;
+import com.robertx22.age_of_exile.loot.LootModifier;
+import com.robertx22.age_of_exile.loot.LootModifierEnum;
 import com.robertx22.age_of_exile.loot.MasterLootGen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
@@ -58,7 +60,7 @@ public class AddSpawnerExtraLootMethod {
             BlockPos pos = new BlockPos((int) p.x, (int) p.y, (int) p.z);
 
             LootInfo info = LootInfo.ofSpawner(player, context.getLevel(), pos);
-            info.multi += 2;
+            info.lootMods.add(new LootModifier(LootModifierEnum.BREAK_SPAWNER, 2));
             List<ItemStack> list = MasterLootGen.generateLoot(info);
 
             ci.getReturnValue()
