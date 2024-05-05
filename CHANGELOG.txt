@@ -127,3 +127,5 @@ v.5.4.7
 - added stat for "plus stat per effect stacks on you", mahj will know
 - added optional mob kill text that that also has a helpful hover text that shows how was loot chance modified
 This should hopefully resolve any "why no loot drop" confusion
+- added optional mob damage text. (THIS SHOWS ALL THE DAMAGE CALCULATIONS!!! VERY USEFUL ESPECIALLY FOR DEBUGGING!!!)
+- added is_bonus_elemental_damage boolean for damage data, this way you can avoid adding flat damage boosts to bonus damages

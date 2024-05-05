@@ -292,7 +292,10 @@ public class DamageEvent extends EffectEvent {
     public MutableComponent getInfoHoverMessage(DmgByElement info, boolean doBonusDmg) {
         // int main = info.dmgmap.getOrDefault(getElement(), 0F).intValue();
 
+
         MutableComponent msg = Component.empty();
+
+        msg.append(Component.literal("\n" + getElement().getIconNameDmg() + ":\n").withStyle(getElement().format));
 
         msg.append(Component.literal("Base Damage: " + (int) this.data.getOriginalNumber(EventData.NUMBER).number + "\n").withStyle(ChatFormatting.BLUE));
 
@@ -323,24 +326,10 @@ public class DamageEvent extends EffectEvent {
                 for (Entry<Elements, Float> en : info.dmgmap.entrySet()) {
                     if (en.getKey() != getElement()) {
 
-                        msg.append(Component.literal("\nBonus " + en.getKey().getIconNameDmg() + ":\n").withStyle(en.getKey().format));
-
+                        msg.append(Component.literal("\n- Bonus Damage Types:\n").withStyle(ChatFormatting.YELLOW));
 
                         var dmg = info.eventMap.get(en.getKey());
                         msg.append(dmg.getInfoHoverMessage(info, false));
-
-                        /*
-                        if (Screen.hasShiftDown()) {
-                             } else {
-                        
-                         */
-
-                        /*
-                        msg.append(MMORPG.DECIMAL_FORMAT.format(en.getValue()) + en.getKey().getIconNameDmg()).append("\n");
-                        msg.append(Component.literal("Press Shift for More Info\n").withStyle(ChatFormatting.BLUE));
-
-
-                         */
 
                     }
                 }
