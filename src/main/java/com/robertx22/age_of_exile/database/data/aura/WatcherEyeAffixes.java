@@ -15,7 +15,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 public class WatcherEyeAffixes {
 
     public static void init() {
-       
+
         of(AuraGems.COLD_RESIST, new MaxElementalResist(Elements.Cold).mod(1, 3));
         of(AuraGems.FIRE_RESIST, new MaxElementalResist(Elements.Fire).mod(1, 3));
         of(AuraGems.LIGHTNING_RESIST, new MaxElementalResist(Elements.Nature).mod(1, 3));
@@ -31,7 +31,7 @@ public class WatcherEyeAffixes {
         of(AuraGems.DODGE, DatapackStats.MOVE_SPEED.mod(3, 5));
         of(AuraGems.MAGIC_SHIELD, DatapackStats.MANA_REG_PER_500_MS.mod(1, 3));
 
-        of(AuraGems.mana_reg, DatapackStats.MS_PER_10_MANA.mod(3, 5));
+        of(AuraGems.mana_reg, DatapackStats.MS_PER_10_MANA.mod(1, 3));
         of(AuraGems.energy_reg, ResourceStats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.energy, AttackType.hit)).mod(1, 3));
         of(AuraGems.health_reg, ResourceStats.LEECH_CAP.get(ResourceType.health).mod(1, 3));
         of(AuraGems.magic_shield_reg, ResourceStats.RESOURCE_ON_KILL.get(ResourceType.magic_shield).mod(10, 30));

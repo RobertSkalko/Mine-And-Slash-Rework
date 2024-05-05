@@ -28,6 +28,13 @@ all_resist_big
 all_water_damage
 all_water_damage_big
 arcanist_class
+arcanist_class_0
+arcanist_class_1
+arcanist_class_2
+arcanist_class_3
+arcanist_class_4
+arcanist_class_5
+arcanist_class_6
 area_dmg
 area_dmg_big
 armor_dodge
@@ -262,6 +269,8 @@ lich_class_1
 lich_class_2
 lich_class_3
 lich_class_4
+lich_class_5
+lich_class_6
 lifesteal
 lifesteal_big
 lightning_any_wep_damage

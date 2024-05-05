@@ -44,10 +44,8 @@ public class ElementalResistEffect extends BaseDamageEffect {
 
         int defense = (int) (resist - pene);
 
-        float multi = 1 - (defense / 100F);
-
+        //float multi = 1 - (defense / 100F);
         // effect.data.getNumber(EventData.NUMBER).number *= multi;
-
 
         if (stat.getElement() == Elements.Physical) {
             effect.getLayer(StatLayers.Defensive.PHYS_MITIGATION, EventData.NUMBER, Side()).reduce(defense);
