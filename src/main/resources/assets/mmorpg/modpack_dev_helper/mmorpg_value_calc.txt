@@ -33,6 +33,7 @@ holy_missiles
 hunter_pot_heal
 ice_comet
 iceball
+ignite_explosion
 inner_calm
 lightning_nova
 lightning_spear

@@ -94,12 +94,12 @@ public class StartPerks implements ExileRegistryInit {
                 new OptScaleExactStat(10, DatapackStats.STR, ModType.FLAT),
                 new OptScaleExactStat(15, DatapackStats.DEX, ModType.FLAT)
         );
-        ascendancy(AscendancyPerks.CHAMP,
+        ascendancy(AscendancyPerks.CHAMPION,
                 new OptScaleExactStat(5, DatapackStats.INT, ModType.FLAT),
                 new OptScaleExactStat(15, DatapackStats.STR, ModType.FLAT),
                 new OptScaleExactStat(10, DatapackStats.DEX, ModType.FLAT)
         );
-        ascendancy(AscendancyPerks.CHIEF,
+        ascendancy(AscendancyPerks.CHIEFTAIN,
                 new OptScaleExactStat(10, DatapackStats.INT, ModType.FLAT),
                 new OptScaleExactStat(10, DatapackStats.STR, ModType.FLAT),
                 new OptScaleExactStat(5, DatapackStats.DEX, ModType.FLAT)

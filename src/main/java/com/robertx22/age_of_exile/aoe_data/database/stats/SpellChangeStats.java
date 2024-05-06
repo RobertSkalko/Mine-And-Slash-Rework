@@ -181,6 +181,8 @@ public class SpellChangeStats {
                 x.is_perc = false;
             })
             .build();
+
+    // todo merge this into duration per spell tag
     public static DataPackStatAccessor<EmptyAccessor> SUMMON_DURATION = DatapackStatBuilder
             .ofSingle("summon_duration", Elements.Physical)
             .worksWithEvent(SpellStatsCalculationEvent.ID)

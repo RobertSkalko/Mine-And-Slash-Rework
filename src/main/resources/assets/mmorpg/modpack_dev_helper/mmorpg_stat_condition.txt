@@ -34,6 +34,7 @@ is_crossbow_wep_type
 is_day
 is_day_is_false
 is_elemental_damage
+is_ignite_explosion_not_on_cd
 is_in_combat
 is_in_combat_is_false
 is_is_basic_atk_true
@@ -48,6 +49,7 @@ is_is_summon_attack_true_is_false
 is_magic_weapon
 is_melee_weapon
 is_missile_barrage_not_on_cd
+is_profane_explosion_not_on_cd
 is_projectile
 is_ranged_weapon
 is_source_low_hp

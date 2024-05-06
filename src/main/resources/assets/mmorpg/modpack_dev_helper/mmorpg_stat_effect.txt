@@ -51,6 +51,7 @@ leech_health
 leech_magic_shield
 leech_mana
 proc_spell_bone_shatter
+proc_spell_ignite_explosion
 proc_spell_profane_explosion
 proj_count
 reduce_cd_by_ticks
@@ -63,5 +64,4 @@ restore_mana_per_stat_data
 set_bool_barrage
 set_bool_crit
 set_bool_pierce
-set_cooldown_missile_barrage20
 set_data_num_accuracy

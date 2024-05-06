@@ -87,6 +87,7 @@ chain_damage
 chain_damage_big
 chain_lightning
 champ_class
+champion_class
 chaos_any_wep_damage
 chaos_any_wep_damage_big
 chaos_dot_damage
@@ -100,6 +101,14 @@ chaos_weapon_damage
 charge
 charged_bolt
 chief_class
+chieftain_class
+chieftain_class_0
+chieftain_class_1
+chieftain_class_2
+chieftain_class_3
+chieftain_class_4
+chieftain_class_5
+chieftain_class_6
 chilling_field
 chilling_touch
 circle_of_healing
@@ -260,6 +269,7 @@ hp_regen_energy_regen_big
 hunter_class
 hunter_potion
 ice_comet
+ignite_explosion
 inc_aoe
 inc_aoe_big
 inc_leech

@@ -150,13 +150,14 @@ public class StatEffects implements ExileRegistryInit {
 
     public static DataHolder<SetCooldownEffect.Data, StatEffect> SET_COOLDOWN = new DataHolder<>(
             Arrays.asList(
-                    SetCooldownEffect.MISSILE_BARRAGE
+                    //  SetCooldownEffect.MISSILE_BARRAGE
             )
             , x -> new SetCooldownEffect(x));
 
 
     public static StatEffect PROC_SHATTER = new ProcSpellEffect(WaterSpells.BONE_SHATTER_PROC, PositionSource.TARGET);
     public static StatEffect PROC_PROFANE_EXPLOSION = new ProcSpellEffect(ProcSpells.PROFANE_EXPLOSION, PositionSource.TARGET);
+    public static StatEffect PROC_IGNITE_EXPLOSION = new ProcSpellEffect(ProcSpells.IGNITE_EXPLOSION, PositionSource.TARGET);
 
 
     public static void addSerializers() {

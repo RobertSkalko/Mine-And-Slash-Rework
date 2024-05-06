@@ -9,10 +9,12 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.base.BaseDatapackStat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.base.CoreStatData;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.*;
+import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.BlockChance;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusAttackDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.blood.Blood;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
@@ -106,6 +108,12 @@ public class DatapackStats implements ExileRegistryInit {
     public static Stat PROJ_DMG_PER_STR = new MoreXPerYOf(DatapackStats.STR, OffenseStats.PROJECTILE_DAMAGE.get(), 5);
     public static Stat SPELL_DMG_PER_STR = new MoreXPerYOf(DatapackStats.STR, OffenseStats.STYLE_DAMAGE.get(PlayStyle.INT), 5);
     public static Stat HP_REGEN_PER_MS_REGEN = new MoreXPerYOf(MagicShieldRegen.getInstance(), HealthRegen.getInstance(), 1);
+
+    public static Stat MAX_COLD_PER_MAX_FIRE = new MoreXPerYOf(new MaxElementalResist(Elements.Fire), new MaxElementalResist(Elements.Cold), 1);
+    public static Stat MAX_LIGHTNING_PER_MAX_FIRE = new MoreXPerYOf(new MaxElementalResist(Elements.Fire), new MaxElementalResist(Elements.Nature), 1);
+
+    public static Stat COLDRES_PER_FIRE = new MoreXPerYOf(new ElementalResist(Elements.Fire), new ElementalResist(Elements.Cold), 1);
+    public static Stat LIGHTNINGRES_PER_FIRE = new MoreXPerYOf(new ElementalResist(Elements.Fire), new ElementalResist(Elements.Nature), 1);
 
     @Override
     public void registerAll() {

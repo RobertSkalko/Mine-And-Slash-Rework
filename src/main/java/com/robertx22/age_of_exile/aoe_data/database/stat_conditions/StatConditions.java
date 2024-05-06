@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.aoe_data.database.spells.SummonType;
+import com.robertx22.age_of_exile.aoe_data.database.spells.schools.ProcSpells;
 import com.robertx22.age_of_exile.aoe_data.database.spells.schools.WaterSpells;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
@@ -15,7 +16,6 @@ import com.robertx22.age_of_exile.tags.imp.SpellTag;
 import com.robertx22.age_of_exile.uncommon.effectdatas.ThreatGenType;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
-import com.robertx22.age_of_exile.uncommon.effectdatas.rework.action.SetCooldownEffect;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.condition.*;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
@@ -66,10 +66,11 @@ public class StatConditions implements ExileRegistryInit {
     public static StatCondition IS_ATTACK_DAMAGE = new StringMatchesCondition(EventData.STYLE, PlayStyle.INT.id).flipCondition();
 
     public static DataHolder<String, StatCondition> IS_NOT_ON_COOLDOWN = new DataHolder<>(Arrays.asList(
-            SetCooldownEffect.MISSILE_BARRAGE.cd_id
-    ), x -> new IsNotOnCooldownCondition(x));
+            ProcSpells.PROFANE_EXPLOSION,
+            ProcSpells.IGNITE_EXPLOSION,
+            WaterSpells.BONE_SHATTER_PROC
 
-    public static StatCondition BONE_SHATTER_NO_CD = new IsNotOnCooldownCondition(WaterSpells.BONE_SHATTER_PROC);
+    ), x -> new IsNotOnCooldownCondition(x));
 
 
     public static DataHolder<EffectCtx, StatCondition> TARGET_HAS_EFFECT = new DataHolder<>(Arrays.asList(ModEffects.BONE_CHILL), x -> new IsUnderExileEffect(x, EffectSides.Target));

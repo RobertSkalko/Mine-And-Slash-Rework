@@ -18,6 +18,7 @@ import java.util.Arrays;
 public class ProcSpells {
 
     public static String PROFANE_EXPLOSION = "profane_explosion";
+    public static String IGNITE_EXPLOSION = "ignite_explosion";
 
     public static void init() {
 
@@ -27,11 +28,25 @@ public class ProcSpells {
                 .onCast(PartBuilder.playSound(SoundEvents.GLASS_BREAK, 1D, 1D))
                 .defaultAndMaxLevel(1)
 
-                .onCast(ParticleBuilder.of(ParticleTypes.WITCH, 3.5f).shape(ParticleShape.CIRCLE_2D_EDGE).height(1).amount(200).build())
-                .onCast(ParticleBuilder.of(ParticleTypes.WITCH, 3.5f).shape(ParticleShape.CIRCLE_2D_EDGE).height(1).amount(100).build())
-                .onCast(ParticleBuilder.of(ParticleTypes.PORTAL, 3.5f).shape(ParticleShape.CIRCLE_2D_EDGE).height(1).amount(55).build())
+                .onCast(ParticleBuilder.of(ParticleTypes.WITCH, 2F).shape(ParticleShape.CIRCLE_2D_EDGE).height(1).amount(300).build())
+                .onCast(ParticleBuilder.of(ParticleTypes.WITCH, 1.5F).shape(ParticleShape.CIRCLE_2D_EDGE).height(1).amount(150).build())
+                .onCast(ParticleBuilder.of(ParticleTypes.PORTAL, 1F).shape(ParticleShape.CIRCLE_2D_EDGE).height(1).amount(55).build())
 
                 .onCast(DamageBuilder.radius(Elements.Shadow, 2, SpellCalcs.PROFANE_EXPLOSION).build().noKnock())
+
+                .build();
+
+        SpellBuilder.of(IGNITE_EXPLOSION, PlayStyle.STR, SpellConfiguration.Builder.nonInstant(0, 20 * 1, 0),
+                        "Ignite Explosion", Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.CHAOS))
+                .manualDesc("Causes an fiery explosion dealing " + SpellCalcs.IGNITE_EXPLOSION.getLocDmgTooltip(Elements.Fire))
+                .onCast(PartBuilder.playSound(SoundEvents.GLASS_BREAK, 1D, 1D))
+                .defaultAndMaxLevel(1)
+
+                .onCast(ParticleBuilder.of(ParticleTypes.FLAME, 2.5F).shape(ParticleShape.CIRCLE_2D_EDGE).height(1).amount(300).build())
+                .onCast(ParticleBuilder.of(ParticleTypes.FLAME, 2F).shape(ParticleShape.CIRCLE_2D_EDGE).height(1).amount(150).build())
+                .onCast(ParticleBuilder.of(ParticleTypes.FLAME, 1.5F).shape(ParticleShape.CIRCLE_2D_EDGE).height(1).amount(55).build())
+
+                .onCast(DamageBuilder.radius(Elements.Fire, 2.5F, SpellCalcs.IGNITE_EXPLOSION).build().noKnock())
 
                 .build();
     }

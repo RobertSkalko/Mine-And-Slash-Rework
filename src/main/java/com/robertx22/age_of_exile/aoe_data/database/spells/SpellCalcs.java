@@ -196,6 +196,10 @@ public class SpellCalcs {
             .spellScaling(1, 1)
             .build();
 
+    public static ValueCalculation IGNITE_EXPLOSION = ValueCalcBuilder.of("ignite_explosion")
+            .spellScaling(2, 2)
+            .build();
+
     public static ValueCalculation FLAME_STRIKE = ValueCalcBuilder.of("flame_strike")
             .attackScaling(0.4F, 0.75F)
             .build();

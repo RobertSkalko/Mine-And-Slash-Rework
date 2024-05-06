@@ -384,6 +384,7 @@ learn_healing_aura
 learn_heart_of_ice
 learn_hunter_potion
 learn_ice_comet
+learn_ignite_explosion
 learn_lightning_nova
 learn_lightning_spear
 learn_lightning_totem
@@ -445,6 +446,7 @@ lightning_health_leech
 lightning_mana_leech
 lightning_penetration
 lightning_resist
+lightning_resist_per_1_fire_resist
 lightning_spell_dmg
 lightning_spell_dmg_taken
 lightning_vuln_crit
@@ -491,10 +493,12 @@ max_endurance_charge_charges
 max_fire_resist
 max_frenzy_charge_charges
 max_lightning_resist
+max_lightning_resist_per_1_max_fire_resist
 max_physical_resist
 max_power_charge_charges
 max_total_summons
 max_water_resist
+max_water_resist_per_1_max_fire_resist
 melee_cast_time
 melee_cdr
 melee_spell_dmg
@@ -706,6 +710,7 @@ water_health_leech
 water_mana_leech
 water_penetration
 water_resist
+water_resist_per_1_fire_resist
 water_vuln_crit
 water_weapon_damage
 weak_immunity

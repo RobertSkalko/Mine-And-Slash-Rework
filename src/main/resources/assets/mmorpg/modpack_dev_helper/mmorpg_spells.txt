@@ -43,6 +43,7 @@ healing_aura
 heart_of_ice
 hunter_potion
 ice_comet
+ignite_explosion
 lightning_nova
 lightning_spear
 lightning_totem

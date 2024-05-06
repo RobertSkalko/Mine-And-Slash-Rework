@@ -4,8 +4,10 @@ import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stats.*;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectAndCondition;
+import com.robertx22.age_of_exile.aoe_data.database.stats.base.LeechInfo;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
+import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.MaximumChargesStat;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDamage;
@@ -29,8 +31,8 @@ public class AscendancyPerks {
 
     public static AscendancyKey ARCANIST = new AscendancyKey("arcanist", "Arcanist");
     public static AscendancyKey LICH = new AscendancyKey("lich", "Death Lich");
-    public static AscendancyKey CHIEF = new AscendancyKey("chief", "Chieftain");
-    public static AscendancyKey CHAMP = new AscendancyKey("champ", "Champion");
+    public static AscendancyKey CHIEFTAIN = new AscendancyKey("chieftain", "Chieftain");
+    public static AscendancyKey CHAMPION = new AscendancyKey("champion", "Champion");
     public static AscendancyKey RAIDER = new AscendancyKey("raider", "Raider");
     public static AscendancyKey ARCHER = new AscendancyKey("hunter", "Hunter");
     public static AscendancyKey TRICKSTER = new AscendancyKey("trickster", "Trickster");
@@ -179,6 +181,44 @@ public class AscendancyPerks {
             x.createPerk(6, "Thick Cloak",
                     new OptScaleExactStat(25, MagicShield.getInstance(), ModType.PERCENT),
                     new OptScaleExactStat(10, DefenseStats.DAMAGE_REDUCTION.get(), ModType.FLAT)
+            );
+        });
+
+
+        CHIEFTAIN.of(x -> {
+            x.createPerk(0, "Ignited Explosion",
+                    new OptScaleExactStat(25, ProcStats.IGNITE_EXPLODE_ON_KILL.get(), ModType.FLAT)
+            );
+
+            x.createPerk(1, "Spirit of Fire",
+                    new OptScaleExactStat(3, new MaxElementalResist(Elements.Fire), ModType.FLAT),
+                    new OptScaleExactStat(1, DatapackStats.MAX_COLD_PER_MAX_FIRE, ModType.FLAT),
+                    new OptScaleExactStat(1, DatapackStats.MAX_LIGHTNING_PER_MAX_FIRE, ModType.FLAT)
+            );
+
+            x.createPerk(2, "Skin of Fire",
+                    new OptScaleExactStat(10, new ElementalResist(Elements.Fire), ModType.FLAT),
+                    new OptScaleExactStat(1, DatapackStats.COLDRES_PER_FIRE, ModType.FLAT),
+                    new OptScaleExactStat(1, DatapackStats.LIGHTNINGRES_PER_FIRE, ModType.FLAT)
+            );
+
+            x.createPerk(3, "The Torch",
+                    new OptScaleExactStat(25, new ElementalPenetration(Elements.Fire), ModType.FLAT)
+            );
+
+            x.createPerk(4, "Blooming Flame",
+                    new OptScaleExactStat(20, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.totem), ModType.MORE),
+                    new OptScaleExactStat(25, new AilmentChance(Ailments.BURN), ModType.FLAT)
+            );
+
+            x.createPerk(5, "Swift Burn",
+                    new OptScaleExactStat(30, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.totem), ModType.MORE),
+                    new OptScaleExactStat(-25, SpellChangeStats.TOTEM_DURATION.get(), ModType.FLAT)
+            );
+
+            x.createPerk(6, "Fire Drinker",
+                    new OptScaleExactStat(5, ResourceStats.ELEMENT_LEECH_RESOURCE.get(new LeechInfo(Elements.Fire, ResourceType.health)), ModType.FLAT),
+                    new OptScaleExactStat(50, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Fire), ModType.FLAT)
             );
         });
 
