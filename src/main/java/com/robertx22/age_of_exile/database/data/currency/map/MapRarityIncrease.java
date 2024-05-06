@@ -28,12 +28,16 @@ public class MapRarityIncrease extends Currency {
         MapBlueprint b = new MapBlueprint(LootInfo.ofLevel(data.lvl));
         b.rarity.set(data.getRarity().getHigherRarity());
 
-        data = b.createData();
+        var newdata = b.createData();
+
+        newdata.uber = data.uber;
+        newdata.uber_tier = data.uber_tier;
+
 
         SoundUtils.ding(ctx.player.level(), ctx.player.blockPosition());
         SoundUtils.playSound(ctx.player.level(), ctx.player.blockPosition(), SoundEvents.ANVIL_USE, 1, 1);
 
-        data.saveToStack(stack);
+        newdata.saveToStack(stack);
         return stack;
     }
 

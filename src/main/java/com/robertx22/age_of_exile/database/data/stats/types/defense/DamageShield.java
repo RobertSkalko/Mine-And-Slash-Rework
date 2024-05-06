@@ -51,7 +51,7 @@ public class DamageShield extends Stat {
     private static class Effect extends BaseDamageEffect {
         @Override
         public StatPriority GetPriority() {
-            return StatPriority.Damage.DAMAGE_ABSORBED_BY_SHIELD;
+            return StatPriority.Damage.DAMAGE_LAYERS;
         }
 
         @Override

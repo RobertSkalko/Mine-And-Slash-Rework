@@ -72,8 +72,10 @@ public class StatPriority implements IAutoLocName {
         // todo not using this yet  StatPriority DAMAGE_TAKEN_AS = damage("DAMAGE_TAKEN_AS", 40);
         // todo should this be the same as dmg layer StatPriority DAMAGE_REDUCTION = damage("DAMAGE_REDUCTION", 50);
         //this row must have a custom priority for each type of damage absorb so it's never random!!
-        StatPriority DAMAGE_ABSORBED_BY_SHIELD = damage("DAMAGE_ABSORBED_BY_SHIELD", 60);
-        StatPriority DAMAGE_ABSORBED_BY_MANA = damage("DAMAGE_ABSORBED_BY_MANA", 61);
+
+        // todo i dont think this works
+        // StatPriority DAMAGE_ABSORBED_BY_SHIELD = damage("DAMAGE_ABSORBED_BY_SHIELD", 60);
+        // StatPriority DAMAGE_ABSORBED_BY_MANA = damage("DAMAGE_ABSORBED_BY_MANA", 61);
         // todo this is currently not a stat effect, why?  StatPriority DAMAGE_ABSORBED_BY_MAGIC_SHIELD = damage("DAMAGE_ABSORBED_BY_MAGIC_SHIELD", 62);
         StatPriority FINAL_DAMAGE = damage("FINAL_DAMAGE", 100);
 

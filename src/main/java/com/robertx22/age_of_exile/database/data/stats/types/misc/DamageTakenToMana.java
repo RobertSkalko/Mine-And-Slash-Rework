@@ -51,7 +51,7 @@ public class DamageTakenToMana extends Stat {
 
         @Override
         public StatPriority GetPriority() {
-            return StatPriority.Damage.DAMAGE_ABSORBED_BY_MANA;
+            return StatPriority.Damage.FINAL_DAMAGE;
         }
 
         @Override
