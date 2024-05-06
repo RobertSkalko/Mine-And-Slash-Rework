@@ -12,6 +12,7 @@ import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElement
 import com.robertx22.age_of_exile.database.data.stats.types.MaximumChargesStat;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDuration;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.BlockChance;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
@@ -366,6 +367,40 @@ public class AscendancyPerks {
             x.createPerk(6, "Hunter's Chains",
                     new OptScaleExactStat(25, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.chaining), ModType.MORE),
                     new OptScaleExactStat(25, SpellChangeStats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.chaining), ModType.FLAT)
+            );
+
+        });
+        ASSASSIN.of(x -> {
+
+            x.createPerk(0, "Swift Killer",
+                    new OptScaleExactStat(30, OffenseStats.DAMAGE_WHEN_TARGET_IS_FULL_HP.get(), ModType.MORE)
+            );
+
+            x.createPerk(1, "Stacking Power",
+                    new OptScaleExactStat(1, new MaximumChargesStat(ModEffects.POWER_CHARGE), ModType.FLAT),
+                    new OptScaleExactStat(10, EffectStats.CHANCE_TO_GIVE_CASTER_EFFECT.get(new EffectAndCondition(ModEffects.POWER_CHARGE, EffectAndCondition.Condition.HIT)), ModType.FLAT)
+            );
+
+            x.createPerk(2, "Intense Power",
+                    new OptScaleExactStat(10, DatapackStats.CRIT_DMG_PER_POWER_CHARGE, ModType.FLAT)
+            );
+
+            x.createPerk(3, "Master Of Criticals",
+                    new OptScaleExactStat(50, OffenseStats.CRIT_CHANCE.get(), ModType.PERCENT)
+            );
+
+            x.createPerk(4, "Deadly Poisons",
+                    new OptScaleExactStat(30, new AilmentDamage(Ailments.POISON), ModType.MORE)
+            );
+
+            x.createPerk(5, "Cruel Poisoner",
+                    new OptScaleExactStat(25, new AilmentDuration(Ailments.POISON), ModType.FLAT),
+                    new OptScaleExactStat(25, new AilmentChance(Ailments.POISON), ModType.FLAT)
+            );
+
+            x.createPerk(6, "Stacking Frenzy",
+                    new OptScaleExactStat(1, new MaximumChargesStat(ModEffects.FRENZY_CHARGE), ModType.FLAT),
+                    new OptScaleExactStat(10, EffectStats.CHANCE_TO_GIVE_CASTER_EFFECT.get(new EffectAndCondition(ModEffects.FRENZY_CHARGE, EffectAndCondition.Condition.HIT)), ModType.FLAT)
             );
 
         });

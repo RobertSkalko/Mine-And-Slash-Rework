@@ -49,6 +49,13 @@ arrow_barrage
 arrow_storm
 arrow_totem
 assassin_class
+assassin_class_0
+assassin_class_1
+assassin_class_2
+assassin_class_3
+assassin_class_4
+assassin_class_5
+assassin_class_6
 astral_totem
 attack_atk_style_dmg
 aura_effect
