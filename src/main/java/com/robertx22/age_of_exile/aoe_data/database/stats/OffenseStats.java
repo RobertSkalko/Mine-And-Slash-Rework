@@ -27,6 +27,23 @@ import static com.robertx22.age_of_exile.database.data.stats.Stat.format;
 
 public class OffenseStats {
 
+    public static DataPackStatAccessor<EmptyAccessor> CRIT_IGNORE_ELEMENTAL_RESISTS = DatapackStatBuilder
+            .ofSingle("ignore_ele_res", Elements.Physical)
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(StatPriority.Damage.HIT_PREVENTION)
+            .setSide(EffectSides.Source)
+            .addCondition(StatConditions.IS_ELEMENTAL)
+            .addCondition(StatConditions.IS_BOOLEAN.get(EventData.CRIT))
+            .addEffect(StatEffects.SET_BOOLEAN.get(EventData.RESISTED_ALREADY))
+            .setLocName(x -> "Criticals Ignore Elemental Resists")
+            .setLocDesc(x -> "Ignored resists means resistance stat won't proc, means penetration doesn't boost damage, but neither do enemy resists work.")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+                x.base = 0;
+                x.max = 1;
+                x.is_long = true;
+            })
+            .build();
 
     public static DataPackStatAccessor<EmptyAccessor> ARCHMAGE_BONUS_MANA_DAMAGE = DatapackStatBuilder
             .ofSingle("archmage", Elements.Physical)
@@ -185,7 +202,7 @@ public class OffenseStats {
             .setPriority(StatPriority.Damage.BEFORE_DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IF_RANDOM_ROLL)
-            .addEffect(StatEffects.SET_IS_CRIT)
+            .addEffect(StatEffects.SET_BOOLEAN.get(EventData.CRIT))
             .setLocName(x -> "Crit Chance")
             .setLocDesc(x -> "Chance to multiply attack damage by critical damage")
             .modifyAfterDone(x -> {

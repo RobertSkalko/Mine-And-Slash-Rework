@@ -57,6 +57,13 @@ awaken_mana
 axe_damage
 axe_damage_big
 battlemage_class
+battlemage_class_0
+battlemage_class_1
+battlemage_class_2
+battlemage_class_3
+battlemage_class_4
+battlemage_class_5
+battlemage_class_6
 black_hole
 bleed_chance
 bleed_chance_big

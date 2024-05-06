@@ -261,5 +261,38 @@ public class AscendancyPerks {
                     new OptScaleExactStat(5, ResourceStats.RESOURCE_ON_ACTION.get(ResourceOnAction.onBlock(ResourceType.magic_shield)), ModType.FLAT));
         });
 
+        BATTLEMAGE.of(x -> {
+            x.createPerk(0, "Illusion of Defense",
+                    new OptScaleExactStat(1, OffenseStats.CRIT_IGNORE_ELEMENTAL_RESISTS.get(), ModType.FLAT)
+            );
+
+            x.createPerk(1, "Balance",
+                    new OptScaleExactStat(5, DatapackStats.MANA_PER_10_HEALTH, ModType.FLAT)
+            );
+
+            x.createPerk(2, "Essence Regeneration",
+                    new OptScaleExactStat(1, DatapackStats.MS_REGEN_PER_HP_REGEN, ModType.FLAT)
+            );
+
+            x.createPerk(3, "Elemental Overlord",
+                    new OptScaleExactStat(25, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Elemental), ModType.MORE)
+            );
+
+            x.createPerk(4, "Battle of Wit",
+                    new OptScaleExactStat(1, DatapackStats.CRIT_PER_10_STR, ModType.FLAT),
+                    new OptScaleExactStat(10, OffenseStats.ELEMENTAL_ANY_WEAPON_DAMAGE.get(Elements.Elemental), ModType.MORE)
+            );
+
+            x.createPerk(5, "Resolve",
+                    new OptScaleExactStat(3, DatapackStats.MANA_PER_10_ARMOR, ModType.FLAT),
+                    new OptScaleExactStat(10, OffenseStats.ELEMENTAL_ANY_WEAPON_DAMAGE.get(Elements.Elemental), ModType.MORE)
+            );
+
+            x.createPerk(6, "Final Stand",
+                    new OptScaleExactStat(5, new MaxElementalResist(Elements.Shadow), ModType.FLAT),
+                    new OptScaleExactStat(10, DefenseStats.DAMAGE_REDUCTION.get(), ModType.FLAT)
+            );
+        });
+
     }
 }

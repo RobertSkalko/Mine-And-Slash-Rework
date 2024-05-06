@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DataPackSta
 import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.tags.imp.SpellTag;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 
@@ -22,7 +23,7 @@ public class DefenseStats {
             .setPriority(StatPriority.Damage.BEFORE_DAMAGE_LAYERS)
             .setSide(EffectSides.Target)
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
-            .addEffect(StatEffects.SET_IS_CRIT)
+            .addEffect(StatEffects.SET_BOOLEAN.get(EventData.CRIT))
             .setLocName(x -> Stat.format(x.dmgName + " Damage always crits you."))
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {

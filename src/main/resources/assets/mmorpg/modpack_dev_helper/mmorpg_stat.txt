@@ -133,6 +133,7 @@ cooking_triple_drop
 crit_dmg_per_power_charge
 critical_damage
 critical_hit
+critical_hit_per_10_strength
 crossbow_damage
 curse_cast_time
 curse_cdr
@@ -309,6 +310,7 @@ husbandry_lesser_drop_bonus
 husbandry_medium_drop_bonus
 husbandry_misc_drop_bonus
 husbandry_triple_drop
+ignore_ele_res
 immobilizing_eff_dur_u_cast
 inc_aoe
 inc_effect_of_charge_buff_given
@@ -468,6 +470,7 @@ magic_shield_per_10_mana
 magic_shield_per_sec
 magic_shield_reg_aura_cost
 magic_shield_regen
+magic_shield_regen_per_1_health_regen
 magic_spell_dmg
 magic_spell_dmg_taken
 mana
@@ -477,7 +480,9 @@ mana_on_hit_hit
 mana_on_is_blocked
 mana_on_is_dodged
 mana_on_kill
+mana_per_10_armor
 mana_per_10_dexterity
+mana_per_10_health
 mana_per_10_intelligence
 mana_per_10_strength
 mana_per_sec

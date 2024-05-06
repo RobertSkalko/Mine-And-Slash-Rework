@@ -14,6 +14,7 @@ import com.robertx22.age_of_exile.tags.imp.SpellTag;
 import com.robertx22.age_of_exile.uncommon.effectdatas.GenerateThreatEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.SpellStatsCalculationEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.ThreatGenType;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import net.minecraft.ChatFormatting;
@@ -174,7 +175,7 @@ public class SpellChangeStats {
             .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.projectile))
-            .addEffect(StatEffects.SET_BARRAGE)
+            .addEffect(StatEffects.SET_BOOLEAN.get(EventData.BARRAGE))
             .setLocName(x -> "Projectiles Barrage")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
@@ -248,7 +249,7 @@ public class SpellChangeStats {
             .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.projectile))
-            .addEffect(StatEffects.SET_PIERCE)
+            .addEffect(StatEffects.SET_BOOLEAN.get(EventData.PIERCE))
             .setLocName(x -> "Piercing Projectiles")
             .setLocDesc(x -> "Makes spell pierce enemies and keep on")
             .modifyAfterDone(x -> {

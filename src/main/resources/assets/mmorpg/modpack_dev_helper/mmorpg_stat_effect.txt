@@ -64,4 +64,5 @@ restore_mana_per_stat_data
 set_bool_barrage
 set_bool_crit
 set_bool_pierce
+set_bool_resisted_already
 set_data_num_accuracy

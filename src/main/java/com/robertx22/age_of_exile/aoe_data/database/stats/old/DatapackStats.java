@@ -108,6 +108,12 @@ public class DatapackStats implements ExileRegistryInit {
     public static Stat PROJ_DMG_PER_STR = new MoreXPerYOf(DatapackStats.STR, OffenseStats.PROJECTILE_DAMAGE.get(), 5);
     public static Stat SPELL_DMG_PER_STR = new MoreXPerYOf(DatapackStats.STR, OffenseStats.STYLE_DAMAGE.get(PlayStyle.INT), 5);
     public static Stat HP_REGEN_PER_MS_REGEN = new MoreXPerYOf(MagicShieldRegen.getInstance(), HealthRegen.getInstance(), 1);
+    public static Stat MS_REGEN_PER_HP_REGEN = new MoreXPerYOf(HealthRegen.getInstance(), MagicShieldRegen.getInstance(), 1);
+    public static Stat CRIT_PER_10_STR = new MoreXPerYOf(DatapackStats.STR, OffenseStats.CRIT_CHANCE.get(), 10);
+    public static Stat MANA_PER_10_ARMOR = new MoreXPerYOf(Armor.getInstance(), Mana.getInstance(), 10);
+
+    public static Stat MANA_PER_10_HEALTH = new MoreXPerYOf(Health.getInstance(), Mana.getInstance(), 10);
+
 
     public static Stat MAX_COLD_PER_MAX_FIRE = new MoreXPerYOf(new MaxElementalResist(Elements.Fire), new MaxElementalResist(Elements.Cold), 1);
     public static Stat MAX_LIGHTNING_PER_MAX_FIRE = new MoreXPerYOf(new MaxElementalResist(Elements.Fire), new MaxElementalResist(Elements.Nature), 1);
