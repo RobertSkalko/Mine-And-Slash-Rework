@@ -9,10 +9,12 @@ import com.robertx22.age_of_exile.database.OptScaleExactStat;
 import com.robertx22.age_of_exile.database.data.stats.types.MaximumChargesStat;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalPenetration;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.RegeneratePercentStat;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShieldRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
@@ -143,6 +145,7 @@ public class AscendancyPerks {
                     new OptScaleExactStat(20, new ElementalPenetration(Elements.Nature), ModType.FLAT)
             );
         });
+        
         TRICKSTER.of(x -> {
             x.createPerk(0, "Total Frenzy",
                     new OptScaleExactStat(2, new MaximumChargesStat(ModEffects.FRENZY_CHARGE), ModType.FLAT)
@@ -161,21 +164,20 @@ public class AscendancyPerks {
                     new OptScaleExactStat(3, DatapackStats.DODGE_PER_MS, ModType.FLAT),
                     new OptScaleExactStat(2, DatapackStats.MS_PER_10_DODGE, ModType.FLAT)
             );
-            // todo
-            x.createPerk(4, "Guidance of Stone",
-                    new OptScaleExactStat(50, EffectStats.EFFECT_OF_BUFFS_ON_YOU_PER_EFFECT_TAG.get(EffectTags.golem), ModType.FLAT),
-                    new OptScaleExactStat(10, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.golem), ModType.MORE)
+
+            x.createPerk(4, "Essence Leech",
+                    new OptScaleExactStat(2, ResourceStats.LEECH_CAP.get(ResourceType.magic_shield), ModType.FLAT),
+                    new OptScaleExactStat(25, ResourceStats.INCREASED_LEECH.get(), ModType.FLAT)
             );
 
-            x.createPerk(5, "Doomed Path",
-                    new OptScaleExactStat(25, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.area), ModType.MORE),
-                    new OptScaleExactStat(25, SpellChangeStats.INCREASED_AREA.get(), ModType.FLAT)
+            x.createPerk(5, "Slippery",
+                    new OptScaleExactStat(25, DefenseStats.DAMAGE_REDUCTION_CHANCE.get(), ModType.FLAT),
+                    new OptScaleExactStat(25, DodgeRating.getInstance(), ModType.PERCENT)
             );
 
-            x.createPerk(6, "Futility of Defense",
-                    new OptScaleExactStat(20, new ElementalPenetration(Elements.Fire), ModType.FLAT),
-                    new OptScaleExactStat(20, new ElementalPenetration(Elements.Cold), ModType.FLAT),
-                    new OptScaleExactStat(20, new ElementalPenetration(Elements.Nature), ModType.FLAT)
+            x.createPerk(6, "Thick Cloak",
+                    new OptScaleExactStat(25, MagicShield.getInstance(), ModType.PERCENT),
+                    new OptScaleExactStat(10, DefenseStats.DAMAGE_REDUCTION.get(), ModType.FLAT)
             );
         });
 
