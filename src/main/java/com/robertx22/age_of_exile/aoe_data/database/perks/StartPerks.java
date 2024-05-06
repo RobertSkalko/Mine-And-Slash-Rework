@@ -69,7 +69,7 @@ public class StartPerks implements ExileRegistryInit {
                 new OptScaleExactStat(10, DatapackStats.STR, ModType.FLAT),
                 new OptScaleExactStat(5, DatapackStats.DEX, ModType.FLAT)
         );
-        ascendancy(AscendancyPerks.NECRO,
+        ascendancy(AscendancyPerks.NECROMANCER,
                 new OptScaleExactStat(15, DatapackStats.INT, ModType.FLAT),
                 new OptScaleExactStat(10, DatapackStats.STR, ModType.FLAT),
                 new OptScaleExactStat(5, DatapackStats.DEX, ModType.FLAT)

@@ -5,21 +5,25 @@ import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffe
 import com.robertx22.age_of_exile.aoe_data.database.stats.*;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectAndCondition;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.LeechInfo;
+import com.robertx22.age_of_exile.aoe_data.database.stats.base.ResourceOnAction;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.MaximumChargesStat;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.defense.BlockChance;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalPenetration;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.RegeneratePercentStat;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShieldRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
+import com.robertx22.age_of_exile.database.data.stats.types.summon.SummonHealth;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.tags.all.EffectTags;
 import com.robertx22.age_of_exile.tags.all.SpellTags;
@@ -37,7 +41,7 @@ public class AscendancyPerks {
     public static AscendancyKey ARCHER = new AscendancyKey("hunter", "Hunter");
     public static AscendancyKey TRICKSTER = new AscendancyKey("trickster", "Trickster");
     public static AscendancyKey ASSASSIN = new AscendancyKey("assassin", "Assassin");
-    public static AscendancyKey NECRO = new AscendancyKey("necromancer", "Necromancer");
+    public static AscendancyKey NECROMANCER = new AscendancyKey("necromancer", "Necromancer");
     public static AscendancyKey ELEMENTALIST = new AscendancyKey("elementalist", "Elementalist");
     public static AscendancyKey GUARDIAN = new AscendancyKey("guardian", "Guardian");
     public static AscendancyKey BATTLEMAGE = new AscendancyKey("battlemage", "Battlemage");
@@ -220,6 +224,41 @@ public class AscendancyPerks {
                     new OptScaleExactStat(5, ResourceStats.ELEMENT_LEECH_RESOURCE.get(new LeechInfo(Elements.Fire, ResourceType.health)), ModType.FLAT),
                     new OptScaleExactStat(50, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Fire), ModType.FLAT)
             );
+        });
+        NECROMANCER.of(x -> {
+            x.createPerk(0, "Minion Lord",
+                    new OptScaleExactStat(25, OffenseStats.SUMMON_DAMAGE.get(), ModType.MORE)
+            );
+
+            x.createPerk(1, "Skeletal Shield",
+                    new OptScaleExactStat(4, DatapackStats.BLOCK_PER_ENDURANCE_CHARGE, ModType.FLAT),
+                    new OptScaleExactStat(1, new MaximumChargesStat(ModEffects.ENDURANCE_CHARGE), ModType.FLAT)
+            );
+
+            x.createPerk(2, "Infinite Army",
+                    new OptScaleExactStat(3, SpellChangeStats.MAX_SUMMON_CAPACITY.get(), ModType.FLAT)
+            );
+
+            x.createPerk(3, "Swift Death",
+                    new OptScaleExactStat(20, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.summon), ModType.MORE),
+                    new OptScaleExactStat(50, SpellChangeStats.CAST_TIME_PER_SPELL_TAG.get(SpellTags.summon), ModType.FLAT)
+            );
+
+            x.createPerk(4, "Flesh Army",
+                    new OptScaleExactStat(10, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.summon), ModType.MORE),
+                    new OptScaleExactStat(25, SummonHealth.getInstance(), ModType.MORE)
+            );
+
+            x.createPerk(5, "Bulwark of Rot",
+                    new OptScaleExactStat(20, BlockChance.getInstance(), ModType.FLAT),
+                    new OptScaleExactStat(-25, HealthRegen.getInstance(), ModType.MORE)
+            );
+
+            x.createPerk(6, "Sacrificial Minions",
+                    new OptScaleExactStat(5, ResourceStats.RESOURCE_ON_ACTION.get(ResourceOnAction.onBlock(ResourceType.energy)), ModType.FLAT),
+                    new OptScaleExactStat(5, ResourceStats.RESOURCE_ON_ACTION.get(ResourceOnAction.onBlock(ResourceType.health)), ModType.FLAT),
+                    new OptScaleExactStat(5, ResourceStats.RESOURCE_ON_ACTION.get(ResourceOnAction.onBlock(ResourceType.mana)), ModType.FLAT),
+                    new OptScaleExactStat(5, ResourceStats.RESOURCE_ON_ACTION.get(ResourceOnAction.onBlock(ResourceType.magic_shield)), ModType.FLAT));
         });
 
     }

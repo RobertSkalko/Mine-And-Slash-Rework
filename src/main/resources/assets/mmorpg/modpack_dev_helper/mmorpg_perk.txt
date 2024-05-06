@@ -342,6 +342,13 @@ ms_energy_regen
 ms_energy_regen_big
 ms_steal
 necromancer_class
+necromancer_class_0
+necromancer_class_1
+necromancer_class_2
+necromancer_class_3
+necromancer_class_4
+necromancer_class_5
+necromancer_class_6
 necromantic_defenses
 nether_enthusiast
 p_armor_pen
