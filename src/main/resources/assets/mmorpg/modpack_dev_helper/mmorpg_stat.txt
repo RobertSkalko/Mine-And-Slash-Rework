@@ -155,6 +155,7 @@ defensive_eff_dur_u_cast
 despair_immunity
 dex_dmg
 dexterity
+dmg_per_endurance_charge
 dmg_per_power_charge
 dmg_received
 dmg_reduction
@@ -288,6 +289,7 @@ health_on_hit_hit
 health_on_is_blocked
 health_on_is_dodged
 health_on_kill
+health_per_10_armor
 health_per_10_dexterity
 health_per_10_intelligence
 health_per_10_strength

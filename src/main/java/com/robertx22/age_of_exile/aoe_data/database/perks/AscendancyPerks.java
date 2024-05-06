@@ -12,6 +12,7 @@ import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElement
 import com.robertx22.age_of_exile.database.data.stats.types.MaximumChargesStat;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.BlockChance;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalPenetration;
@@ -292,6 +293,43 @@ public class AscendancyPerks {
                     new OptScaleExactStat(5, new MaxElementalResist(Elements.Shadow), ModType.FLAT),
                     new OptScaleExactStat(10, DefenseStats.DAMAGE_REDUCTION.get(), ModType.FLAT)
             );
+        });
+        GUARDIAN.of(x -> {
+            x.createPerk(0, "Unstoppable",
+                    new OptScaleExactStat(100, DatapackStats.KNOCKBACK_RESIST, ModType.FLAT),
+                    new OptScaleExactStat(10, Health.getInstance(), ModType.MORE)
+            );
+
+            x.createPerk(1, "Beyond Reach",
+                    new OptScaleExactStat(3, new MaxElementalResist(Elements.Fire), ModType.FLAT),
+                    new OptScaleExactStat(3, new MaxElementalResist(Elements.Cold), ModType.FLAT),
+                    new OptScaleExactStat(3, new MaxElementalResist(Elements.Nature), ModType.FLAT),
+                    new OptScaleExactStat(10, Armor.getInstance(), ModType.MORE)
+            );
+
+            x.createPerk(2, "Bulwark of Flesh",
+                    new OptScaleExactStat(2, DatapackStats.HEALTH_PER_10_ARMOR, ModType.FLAT)
+            );
+
+            x.createPerk(3, "Terror",
+                    new OptScaleExactStat(20, OffenseStats.ATTACK_DAMAGE.get(), ModType.MORE),
+                    new OptScaleExactStat(100, OffenseStats.ACCURACY.get(), ModType.MORE)
+            );
+
+            x.createPerk(4, "Unlimited Life",
+                    new OptScaleExactStat(100, HealthRegen.getInstance(), ModType.MORE)
+            );
+
+            x.createPerk(5, "Endurance",
+                    new OptScaleExactStat(1, new MaximumChargesStat(ModEffects.ENDURANCE_CHARGE), ModType.FLAT),
+                    new OptScaleExactStat(3, DatapackStats.BLOCK_PER_ENDURANCE_CHARGE, ModType.MORE)
+            );
+
+            x.createPerk(6, "Unending Pain",
+                    new OptScaleExactStat(1, new MaximumChargesStat(ModEffects.ENDURANCE_CHARGE), ModType.FLAT),
+                    new OptScaleExactStat(5, DatapackStats.DMG_PER_ENDURANCE_CHARGE, ModType.MORE)
+            );
+
         });
 
     }

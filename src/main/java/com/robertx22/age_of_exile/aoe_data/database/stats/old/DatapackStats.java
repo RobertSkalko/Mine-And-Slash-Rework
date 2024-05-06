@@ -49,7 +49,7 @@ public class DatapackStats implements ExileRegistryInit {
 
     // vanilla attributes
     public static Stat MOVE_SPEED = new AttributeStat("move_speed", "Move Speed", UUID.fromString("7e286d81-3fcf-471c-85b8-980072b30907"), Attributes.MOVEMENT_SPEED, true);
-    public static Stat KNOCKBACK_RESIT = new AttributeStat("knockback_resist", "Knockback Resist", UUID.fromString("7e286d81-3fcf-471c-85b8-980072b30905"), Attributes.KNOCKBACK_RESISTANCE, true);
+    public static Stat KNOCKBACK_RESIST = new AttributeStat("knockback_resist", "Knockback Resist", UUID.fromString("7e286d81-3fcf-471c-85b8-980072b30905"), Attributes.KNOCKBACK_RESISTANCE, true);
 
     // core stats
     public static Stat INT = new CoreStat("intelligence", "Intelligence", CoreStatData.of(Arrays.asList(
@@ -73,6 +73,9 @@ public class DatapackStats implements ExileRegistryInit {
     // bonus per effect charges
     public static Stat BLOCK_PER_ENDURANCE_CHARGE = BonusStatPerEffectStacks.of(ModEffects.ENDURANCE_CHARGE, "block_per_endurance_charge", "Block Chance per Endurance Charge",
             new OptScaleExactStat(1, BlockChance.getInstance(), ModType.FLAT
+            ));
+    public static Stat DMG_PER_ENDURANCE_CHARGE = BonusStatPerEffectStacks.of(ModEffects.ENDURANCE_CHARGE, "dmg_per_endurance_charge", "Damage per Endurance Charge",
+            new OptScaleExactStat(1, OffenseStats.TOTAL_DAMAGE.get(), ModType.FLAT
             ));
     public static Stat AOE_PER_POWER_CHARGE = BonusStatPerEffectStacks.of(ModEffects.POWER_CHARGE, "aoe_per_power_charge", "Aoe Increase per Power Charge",
             new OptScaleExactStat(1, SpellChangeStats.INCREASED_AREA.get(), ModType.FLAT));
@@ -111,6 +114,7 @@ public class DatapackStats implements ExileRegistryInit {
     public static Stat MS_REGEN_PER_HP_REGEN = new MoreXPerYOf(HealthRegen.getInstance(), MagicShieldRegen.getInstance(), 1);
     public static Stat CRIT_PER_10_STR = new MoreXPerYOf(DatapackStats.STR, OffenseStats.CRIT_CHANCE.get(), 10);
     public static Stat MANA_PER_10_ARMOR = new MoreXPerYOf(Armor.getInstance(), Mana.getInstance(), 10);
+    public static Stat HEALTH_PER_10_ARMOR = new MoreXPerYOf(Armor.getInstance(), Health.getInstance(), 10);
 
     public static Stat MANA_PER_10_HEALTH = new MoreXPerYOf(Health.getInstance(), Mana.getInstance(), 10);
 

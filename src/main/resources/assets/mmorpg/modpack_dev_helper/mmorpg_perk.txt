@@ -243,6 +243,13 @@ golemancer
 gong_strike
 guardian
 guardian_class
+guardian_class_0
+guardian_class_1
+guardian_class_2
+guardian_class_3
+guardian_class_4
+guardian_class_5
+guardian_class_6
 harmony
 healing_aura
 healing_received
