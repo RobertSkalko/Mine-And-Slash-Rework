@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageEffect;
 import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
+import com.robertx22.age_of_exile.mmorpg.UNICODE;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
@@ -34,7 +35,7 @@ public class DodgeRating extends Stat implements IUsableStat {
 
         this.statEffect = new Effect();
 
-        this.icon = "\u2748";
+        this.icon = UNICODE.STAR;
         this.format = ChatFormatting.DARK_GREEN.getName();
 
     }

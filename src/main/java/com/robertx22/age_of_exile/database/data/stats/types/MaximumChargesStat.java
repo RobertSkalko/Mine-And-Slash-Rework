@@ -29,7 +29,7 @@ public class MaximumChargesStat extends Stat implements IGenerated<MaximumCharge
 
     @Override
     public String locNameForLangFile() {
-        return "Maximum " + effect.locname + " Charges";
+        return "Maximum " + effect.locname;
     }
 
     @Override

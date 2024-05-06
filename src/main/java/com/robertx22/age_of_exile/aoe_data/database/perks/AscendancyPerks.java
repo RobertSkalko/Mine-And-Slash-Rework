@@ -145,7 +145,7 @@ public class AscendancyPerks {
                     new OptScaleExactStat(20, new ElementalPenetration(Elements.Nature), ModType.FLAT)
             );
         });
-        
+
         TRICKSTER.of(x -> {
             x.createPerk(0, "Total Frenzy",
                     new OptScaleExactStat(2, new MaximumChargesStat(ModEffects.FRENZY_CHARGE), ModType.FLAT)
@@ -166,6 +166,7 @@ public class AscendancyPerks {
             );
 
             x.createPerk(4, "Essence Leech",
+                    new OptScaleExactStat(10, OffenseStats.TOTAL_DAMAGE.get(), ModType.MORE),
                     new OptScaleExactStat(2, ResourceStats.LEECH_CAP.get(ResourceType.magic_shield), ModType.FLAT),
                     new OptScaleExactStat(25, ResourceStats.INCREASED_LEECH.get(), ModType.FLAT)
             );

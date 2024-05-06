@@ -167,7 +167,6 @@ dmg_when_target_near_full_hp
 dodge
 dodge_aura_cost
 dodge_per_10_magic_shield
-dodge_per_5_magic_shield
 dot_dmg
 dot_lifesteal
 double_attack_chance
