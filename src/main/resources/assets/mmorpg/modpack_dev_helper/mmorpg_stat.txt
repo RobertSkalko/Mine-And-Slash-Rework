@@ -69,6 +69,7 @@ blood
 blood_leech_cap
 blood_on_is_blocked
 blood_on_is_dodged
+blood_on_kill
 blood_per_10_strength
 blood_user
 bonus_exp
@@ -165,6 +166,7 @@ dmg_when_target_is_low_hp
 dmg_when_target_near_full_hp
 dodge
 dodge_aura_cost
+dodge_per_10_magic_shield
 dodge_per_5_magic_shield
 dot_dmg
 dot_lifesteal
@@ -206,6 +208,7 @@ energy_leech_cap
 energy_on_hit_hit
 energy_on_is_blocked
 energy_on_is_dodged
+energy_on_kill
 energy_per_10_dexterity
 energy_per_10_mana
 energy_per_sec
@@ -459,6 +462,7 @@ magic_shield_on_hit_hit
 magic_shield_on_is_blocked
 magic_shield_on_is_dodged
 magic_shield_on_kill
+magic_shield_per_10_dodge
 magic_shield_per_10_mana
 magic_shield_per_sec
 magic_shield_reg_aura_cost

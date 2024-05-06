@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gems.Gem;
 import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.database.data.runewords.RuneWord;
+import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.support_gem.SupportGem;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -81,13 +82,13 @@ public abstract class BestiaryGroup<T> {
         return new BestiaryEntry.NamedItem(b.createStack(), CLOC.translate(x.locName()));
     });
 
-    /*
-    static BestiaryGroup SPELL = new DBItemEntry<Spell>(ExileRegistryTypes.SPELL, Words.SkillGem, "skill_gem", x -> {
+
+    static BestiaryGroup SPELL = new DBItemEntry<Spell>(ExileRegistryTypes.SPELL, Words.SPELL, "spell", x -> {
         var b = new SkillGemBlueprint(LootInfo.ofLevel(1), SkillGemData.SkillGemType.SKILL);
         b.setType(x.GUID());
         return new BestiaryEntry.NamedItem(b.createStack(), CLOC.translate(x.locName()));
     });
-     */
+
     static BestiaryGroup SUPP = new DBItemEntry<SupportGem>(ExileRegistryTypes.SUPPORT_GEM, Words.SUPPGEM, "supp_gem", x -> {
         var b = new SkillGemBlueprint(LootInfo.ofLevel(1), SkillGemData.SkillGemType.SUPPORT);
         b.setType(x.GUID());
@@ -111,6 +112,7 @@ public abstract class BestiaryGroup<T> {
             all.add(AURA);
             all.add(SUPP);
             all.add(EFFECT);
+            all.add(SPELL);
             all.add(new ProfExpBestiary());
         }
 

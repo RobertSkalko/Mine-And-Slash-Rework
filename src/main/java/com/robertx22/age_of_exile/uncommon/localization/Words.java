@@ -11,6 +11,7 @@ public enum Words implements IAutoLocName {
     ARROW_DRAW_AMOUNT_MULTI("Bow Draw Amount Multi"),
     PVP_DMG_MULTI("PVP Dmg Multi"),
     WEAPON_BASIC_ATTACK_DMG_MULTI("Weapon Basic Attack Dmg Multi"),
+    SPELL("Spell"),
 
     SOURCE("Source"),
     TARGET("Target"),

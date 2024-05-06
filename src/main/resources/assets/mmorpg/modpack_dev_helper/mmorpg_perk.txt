@@ -68,6 +68,7 @@ blizzard
 block_chance
 block_chance_big
 blood_mage
+blood_on_kill
 bloody_dance
 bone_shatter
 boomerang
@@ -175,6 +176,7 @@ elementalist_class_4
 elementalist_class_5
 elementalist_class_6
 energy_claws
+energy_on_kill
 energy_percent
 energy_percent_big
 energy_regen_percent
@@ -529,6 +531,13 @@ trap_cdr_big
 trap_damage
 trap_damage_big
 trickster_class
+trickster_class_0
+trickster_class_1
+trickster_class_2
+trickster_class_3
+trickster_class_4
+trickster_class_5
+trickster_class_6
 trident_damage
 trident_damage_big
 true_hit

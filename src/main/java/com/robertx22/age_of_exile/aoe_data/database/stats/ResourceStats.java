@@ -18,8 +18,6 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import net.minecraft.ChatFormatting;
 
-import java.util.Arrays;
-
 public class ResourceStats {
 
     public static DataPackStatAccessor<ResourceOnAction> RESOURCE_ON_ACTION = DatapackStatBuilder
@@ -69,11 +67,7 @@ public class ResourceStats {
 
     public static DataPackStatAccessor<ResourceType> RESOURCE_ON_KILL = DatapackStatBuilder
             .<ResourceType>of(x -> x.id + "_on_kill", x -> Elements.NONE)
-            .addAllOfType(Arrays.asList(
-                    ResourceType.health,
-                    ResourceType.magic_shield,
-                    ResourceType.mana
-            ))
+            .addAllOfType(ResourceType.values())
             .worksWithEvent(OnMobKilledByDamageEvent.ID)
             .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)
             .setSide(EffectSides.Source)

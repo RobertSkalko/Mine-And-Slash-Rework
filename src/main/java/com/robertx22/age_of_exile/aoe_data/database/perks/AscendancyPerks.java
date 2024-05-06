@@ -2,10 +2,7 @@ package com.robertx22.age_of_exile.aoe_data.database.perks;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
-import com.robertx22.age_of_exile.aoe_data.database.stats.EffectStats;
-import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
-import com.robertx22.age_of_exile.aoe_data.database.stats.ProcStats;
-import com.robertx22.age_of_exile.aoe_data.database.stats.SpellChangeStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.*;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectAndCondition;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
@@ -19,6 +16,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Hea
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShieldRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
+import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.tags.all.EffectTags;
 import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -146,23 +144,24 @@ public class AscendancyPerks {
             );
         });
         TRICKSTER.of(x -> {
-            x.createPerk(0, "Creator of Flames",
-                    new OptScaleExactStat(25, new AilmentChance(Ailments.BURN), ModType.FLAT),
-                    new OptScaleExactStat(25, new AilmentDamage(Ailments.BURN), ModType.MORE)
+            x.createPerk(0, "Total Frenzy",
+                    new OptScaleExactStat(2, new MaximumChargesStat(ModEffects.FRENZY_CHARGE), ModType.FLAT)
             );
-            x.createPerk(1, "Creator of Frost",
-                    new OptScaleExactStat(25, new AilmentChance(Ailments.FREEZE), ModType.FLAT),
-                    new OptScaleExactStat(25, new AilmentDamage(Ailments.FREEZE), ModType.MORE)
+            x.createPerk(1, "Resourceful Thief",
+                    new OptScaleExactStat(10, ResourceStats.RESOURCE_ON_KILL.get(ResourceType.mana), ModType.FLAT),
+                    new OptScaleExactStat(10, ResourceStats.RESOURCE_ON_KILL.get(ResourceType.health), ModType.FLAT),
+                    new OptScaleExactStat(10, ResourceStats.RESOURCE_ON_KILL.get(ResourceType.magic_shield), ModType.FLAT),
+                    new OptScaleExactStat(10, ResourceStats.RESOURCE_ON_KILL.get(ResourceType.energy), ModType.FLAT)
             );
-
-            x.createPerk(2, "Creator of Lightning",
-                    new OptScaleExactStat(25, new AilmentChance(Ailments.ELECTRIFY), ModType.FLAT),
-                    new OptScaleExactStat(25, new AilmentDamage(Ailments.ELECTRIFY), ModType.MORE)
+            x.createPerk(2, "Master of Phasing",
+                    new OptScaleExactStat(10, DatapackStats.MOVE_SPEED, ModType.FLAT),
+                    new OptScaleExactStat(1, EffectStats.EFFECT_IMMUNITY.get(ModEffects.SLOW), ModType.FLAT)
             );
-            x.createPerk(3, "Army of Stone",
-                    new OptScaleExactStat(1, SpellChangeStats.MAX_SUMMON_CAPACITY.get(), ModType.FLAT),
-                    new OptScaleExactStat(25, EffectStats.EFFECT_OF_BUFFS_ON_YOU_PER_EFFECT_TAG.get(EffectTags.golem), ModType.FLAT)
+            x.createPerk(3, "Trickery",
+                    new OptScaleExactStat(3, DatapackStats.DODGE_PER_MS, ModType.FLAT),
+                    new OptScaleExactStat(2, DatapackStats.MS_PER_10_DODGE, ModType.FLAT)
             );
+            // todo
             x.createPerk(4, "Guidance of Stone",
                     new OptScaleExactStat(50, EffectStats.EFFECT_OF_BUFFS_ON_YOU_PER_EFFECT_TAG.get(EffectTags.golem), ModType.FLAT),
                     new OptScaleExactStat(10, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.golem), ModType.MORE)

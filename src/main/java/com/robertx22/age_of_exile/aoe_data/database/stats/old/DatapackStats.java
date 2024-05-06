@@ -96,8 +96,9 @@ public class DatapackStats implements ExileRegistryInit {
     public static Stat ENERGY_PER_10_DEX = new MoreXPerYOf(DatapackStats.DEX, Energy.getInstance(), 10);
     public static Stat ENERGY_PER_10_MANA = new MoreXPerYOf(Mana.getInstance(), Energy.getInstance(), 10);
     public static Stat MS_PER_10_MANA = new MoreXPerYOf(Mana.getInstance(), MagicShield.getInstance(), 10);
+    public static Stat MS_PER_10_DODGE = new MoreXPerYOf(DodgeRating.getInstance(), MagicShield.getInstance(), 10);
     public static Stat MANA_REG_PER_500_MS = new MoreXPerYOf(MagicShield.getInstance(), ManaRegen.getInstance(), 500);
-    public static Stat DODGE_PER_MS = new MoreXPerYOf(MagicShield.getInstance(), DodgeRating.getInstance(), 5);
+    public static Stat DODGE_PER_MS = new MoreXPerYOf(MagicShield.getInstance(), DodgeRating.getInstance(), 10);
     public static Stat HP_REGEN_PER_INT = new MoreXPerYOf(DatapackStats.INT, HealthRegen.getInstance(), 10);
     public static Stat HP_PER_DEX = new MoreXPerYOf(DatapackStats.DEX, Health.getInstance(), 10);
     public static Stat ARMOR_PER_MANA = new MoreXPerYOf(Mana.getInstance(), Armor.getInstance(), 10);

@@ -23,7 +23,7 @@ public class ProcSpells {
 
         SpellBuilder.of(PROFANE_EXPLOSION, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(0, 20 * 1, 0),
                         "Profane Explosion", Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.CHAOS))
-                .manualDesc("Causes an explosion dealing " + SpellCalcs.SHATTER_PROC.getLocDmgTooltip(Elements.Shadow))
+                .manualDesc("Causes an explosion dealing " + SpellCalcs.PROFANE_EXPLOSION.getLocDmgTooltip(Elements.Shadow))
                 .onCast(PartBuilder.playSound(SoundEvents.GLASS_BREAK, 1D, 1D))
                 .defaultAndMaxLevel(1)
 
