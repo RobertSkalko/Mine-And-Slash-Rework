@@ -56,8 +56,8 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
         PerkScreenContext ctx = new PerkScreenContext(this);
 
-        double xadd = button1.perk.getType().width / 2F; // todo idk if this is the problem or
-        double yadd = button1.perk.getType().height / 2F;
+        double xadd = button1.perk.getType().size / 2F; // todo idk if this is the problem or
+        double yadd = button1.perk.getType().size / 2F;
 
 
         double connectionX = button1.getX() + xadd;
@@ -329,8 +329,8 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         float y = (point.y - school.calcData.center.y) * PerkButton.SPACING;
 
         // todo
-        x -= perk.getType().width / 2F;
-        y -= perk.getType().height / 2F;
+        x -= perk.getType().size / 2F;
+        y -= perk.getType().size / 2F;
 
         float tx = (int) (halfx + x);
         float ty = (int) (halfy + y);

@@ -173,17 +173,16 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
     }
 
     public enum PerkType {
-        STAT("stat", 2, 24, 24, 39, 4, ChatFormatting.WHITE),
-        SPECIAL("special", 3, 28, 28, 77, 6, ChatFormatting.LIGHT_PURPLE),
-        MAJOR("major", 1, 33, 33, 1, 9, ChatFormatting.RED),
-        START("start", 4, 28, 28, 115, 6, ChatFormatting.YELLOW);
+        STAT("stat", 24, 16, 4, ChatFormatting.WHITE),
+        SPECIAL("special", 28, 16, 6, ChatFormatting.LIGHT_PURPLE),
+        MAJOR("major", 33, 16, 9, ChatFormatting.RED),
+        START("start", 28, 16, 6, ChatFormatting.YELLOW),
+        ASC("asc", 56, 32, 14, ChatFormatting.GOLD);
 
-        int order;
 
         String id;
-        public int width;
-        public int height;
-        private int xoff;
+        public int size;
+        public int iconSize;
         public int off;
         public ChatFormatting format;
 
@@ -196,12 +195,10 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
         public ResourceLocation noColor = SlashRef.guiId("skill_tree/indic/no");
 
 
-        PerkType(String id, int order, int width, int height, int xoff, int off, ChatFormatting format) {
+        PerkType(String id, int size, int iconSize, int off, ChatFormatting format) {
             this.id = id;
-            this.order = order;
-            this.width = width;
-            this.height = height;
-            this.xoff = xoff;
+            this.size = size;
+            this.iconSize = iconSize;
             this.format = format;
             this.off = off;
 
@@ -229,11 +226,11 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
             return no;
         }
 
-        public int getXOffset() {
-            return xoff;
-        }
 
-        public int getOffset() {
+        public float getOffset() {
+            if (true) {
+                return ((size - iconSize) * 0.5F) + 0.5F;
+            }
             return off;
         }
 

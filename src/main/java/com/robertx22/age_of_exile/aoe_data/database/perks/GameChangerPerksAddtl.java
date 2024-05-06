@@ -59,7 +59,7 @@ public class GameChangerPerksAddtl implements ExileRegistryInit {
 
         PerkBuilder.gameChanger("golemancer", "Golemancer",
                 new OptScaleExactStat(50, SummonHealth.getInstance(), ModType.MORE),
-                new OptScaleExactStat(50, OffenseStats.GOLEM_DAMAGE.get(), ModType.MORE),
+                new OptScaleExactStat(50, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.golem), ModType.MORE),
                 new OptScaleExactStat(25, GolemSpellChance.getInstance(), ModType.FLAT),
                 new OptScaleExactStat(-2, SpellChangeStats.MAX_SUMMON_CAPACITY.get(), ModType.FLAT)
         );

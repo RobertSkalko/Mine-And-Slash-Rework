@@ -27,8 +27,7 @@ public class TalentGrid {
                     grid.add(new ArrayList<>());
                 }
 
-                grid.get(x)
-                        .add(new GridPoint(x, y, s));
+                grid.get(x).add(new GridPoint(x, y, s));
 
                 x++;
 

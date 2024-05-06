@@ -41,6 +41,6 @@ public class AscendancyKey extends AutoHashClass implements IGUID {
         var id = getStartPerkId() + "_" + num;
         Perk perk = PerkBuilder.bigStat(id, name, stats);
         perk.type = Perk.PerkType.MAJOR;
-        perk.icon = new ResourceLocation(SlashRef.MODID, "textures/gui/talent_icons/asc/" + id + ".png").toString();
+        perk.icon = new ResourceLocation(SlashRef.MODID, "textures/gui/talent_icons/asc/" + this.id + "/" + num + ".png").toString();
     }
 }

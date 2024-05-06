@@ -56,8 +56,8 @@ public class PerksAddtl implements ExileRegistryInit {
         PerkBuilder.stat("curse_effect", new OptScaleExactStat(3, EffectStats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.curse), ModType.FLAT));
         PerkBuilder.bigStat("curse_effect_big", new OptScaleExactStat(10, EffectStats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.curse), ModType.FLAT));
 
-        PerkBuilder.stat(new OptScaleExactStat(3, OffenseStats.GOLEM_DAMAGE.get(), ModType.FLAT));
-        PerkBuilder.bigStat(new OptScaleExactStat(10, OffenseStats.GOLEM_DAMAGE.get(), ModType.FLAT));
+        PerkBuilder.stat(new OptScaleExactStat(3, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.golem), ModType.FLAT));
+        PerkBuilder.bigStat(new OptScaleExactStat(10, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.golem), ModType.FLAT));
 
 
         PerkBuilder.stat(new OptScaleExactStat(3, new AilmentChance(Ailments.ELECTRIFY), ModType.FLAT));
@@ -105,8 +105,8 @@ public class PerksAddtl implements ExileRegistryInit {
         PerkBuilder.stat(new OptScaleExactStat(4, SummonHealth.getInstance(), ModType.FLAT));
         PerkBuilder.bigStat(new OptScaleExactStat(15, SummonHealth.getInstance(), ModType.FLAT));
 
-        PerkBuilder.stat(new OptScaleExactStat(3, OffenseStats.GOLEM_DAMAGE.get(), ModType.FLAT));
-        PerkBuilder.bigStat(new OptScaleExactStat(10, OffenseStats.GOLEM_DAMAGE.get(), ModType.FLAT));
+        PerkBuilder.stat(new OptScaleExactStat(3, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.golem), ModType.FLAT));
+        PerkBuilder.bigStat(new OptScaleExactStat(10, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.golem), ModType.FLAT));
 
         PerkBuilder.stat(new OptScaleExactStat(6, OffenseStats.ACCURACY.get(), ModType.PERCENT));
         PerkBuilder.bigStat(new OptScaleExactStat(20, OffenseStats.ACCURACY.get(), ModType.PERCENT));

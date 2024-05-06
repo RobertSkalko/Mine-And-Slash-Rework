@@ -28,7 +28,7 @@ public class ProcStats {
             .addCondition(StatConditions.IS_TARGET_CURSED)
             .addEffect(e -> StatEffects.PROC_PROFANE_EXPLOSION)
             .setLocName(x -> Stat.format(VAL1 + "% Chance to cause a Profane Exposion on kiling a Cursed Enemy."))
-            .setLocDesc(x -> "")
+            .setLocDesc(x -> "This has a short cooldown. You can see the whole spell stats in the Ingame Library TODO")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
                 x.is_long = true;

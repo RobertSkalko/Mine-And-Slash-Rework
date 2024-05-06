@@ -157,7 +157,6 @@ electrify_damage
 electrify_damage_big
 electrify_duration
 electrify_duration_big
-elem_class
 elemental_any_wep_damage
 elemental_any_wep_damage_big
 elemental_dot_damage
@@ -167,6 +166,14 @@ elemental_penetration_big
 elemental_purity
 elemental_resist
 elemental_resist_big
+elementalist_class
+elementalist_class_0
+elementalist_class_1
+elementalist_class_2
+elementalist_class_3
+elementalist_class_4
+elementalist_class_5
+elementalist_class_6
 energy_claws
 energy_percent
 energy_percent_big
@@ -212,8 +219,8 @@ garden_of_thorns
 generosity
 ghast
 glancing_strikes
-golem_damage
-golem_damage_big
+golem_spell_dmg
+golem_spell_dmg_big
 golemancer
 gong_strike
 guardian
@@ -322,7 +329,7 @@ ms_all_in
 ms_energy_regen
 ms_energy_regen_big
 ms_steal
-necro_class
+necromancer_class
 necromantic_defenses
 nether_enthusiast
 p_armor_pen

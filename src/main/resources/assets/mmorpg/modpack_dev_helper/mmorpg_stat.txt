@@ -264,7 +264,6 @@ gear_defense
 gear_weapon_damage
 golem_cast_time
 golem_cdr
-golem_damage
 golem_eff_dur_u_cast
 golem_spell_chance
 golem_spell_dmg

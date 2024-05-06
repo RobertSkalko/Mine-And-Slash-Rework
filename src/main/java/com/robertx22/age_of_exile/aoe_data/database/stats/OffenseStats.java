@@ -432,22 +432,7 @@ public class OffenseStats {
                 x.format = ChatFormatting.RED.getName();
             })
             .build();
-    public static DataPackStatAccessor<EmptyAccessor> GOLEM_DAMAGE = DatapackStatBuilder
-            .ofSingle("golem_damage", Elements.Physical)
-            .worksWithEvent(DamageEvent.ID)
-            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
-            .setSide(EffectSides.Source)
-            .setUsesMoreMultiplier()
-            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.golem))
-            .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
-            .setLocName(x -> "Golem Damage")
-            .setLocDesc(x -> "")
-            .modifyAfterDone(x -> {
-                x.is_perc = true;
-                x.icon = "\u27B9";
-                x.format = ChatFormatting.RED.getName();
-            })
-            .build();
+
     public static DataPackStatAccessor<EmptyAccessor> DAMAGE_WHEN_LOW_HP = DatapackStatBuilder
             .ofSingle("dmg_when_low_hp", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)

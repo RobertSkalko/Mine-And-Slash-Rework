@@ -110,9 +110,11 @@ public class StartPerks implements ExileRegistryInit {
 
         Perk perk = PerkBuilder.bigStat(key.getStartPerkId(), key.name, stats);
         perk.is_entry = true;
-        perk.type = Perk.PerkType.START;
+        perk.type = Perk.PerkType.ASC;
         perk.one_kind = "start";
-        perk.icon = new ResourceLocation(SlashRef.MODID, "textures/gui/stat_icons/start/" + "asc" + ".png").toString();
+        // perk.icon = new ResourceLocation(SlashRef.MODID, "textures/gui/stat_icons/start/" + "asc" + ".png").toString();
+        perk.icon = new ResourceLocation(SlashRef.MODID, "textures/gui/talent_icons/asc/" + key.GUID() + ".png").toString();
+
         return perk;
     }
 
