@@ -11,6 +11,7 @@ essence_of_frost
 fire_golem_buff
 frenzy_charge
 frost_lich
+gale_force
 ground
 ice_golem_buff
 inner_calm

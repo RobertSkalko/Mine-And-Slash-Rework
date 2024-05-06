@@ -281,6 +281,13 @@ hp_ms_big
 hp_regen_energy_regen
 hp_regen_energy_regen_big
 hunter_class
+hunter_class_0
+hunter_class_1
+hunter_class_2
+hunter_class_3
+hunter_class_4
+hunter_class_5
+hunter_class_6
 hunter_potion
 ice_comet
 ignite_explosion

@@ -1,6 +1,7 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
 accuracy
+accuracy_per_10_dexterity
 aggro_radius
 agony_immunity
 ailment_damage
@@ -160,6 +161,7 @@ dmg_per_power_charge
 dmg_received
 dmg_reduction
 dmg_reduction_chance
+dmg_reduction_per_gale_force
 dmg_taken_to_mana
 dmg_to_living
 dmg_to_undead
@@ -264,6 +266,7 @@ freeze_resistance
 freeze_strength
 frenzy_charge_on_hit
 full_swing_damage
+gale_force_on_hit
 gear_defense
 gear_weapon_damage
 golem_cast_time

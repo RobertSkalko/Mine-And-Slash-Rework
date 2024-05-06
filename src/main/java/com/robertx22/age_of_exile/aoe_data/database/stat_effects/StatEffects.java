@@ -83,6 +83,7 @@ public class StatEffects implements ExileRegistryInit {
 
     public static DataHolder<EffectCtx, StatEffect> GIVE_EFFECT_TO_SOURCE_30_SEC = new DataHolder<>(
             Arrays.asList(
+                    ModEffects.GALE_FORCE,
                     ModEffects.ENDURANCE_CHARGE,
                     ModEffects.POWER_CHARGE,
                     ModEffects.FRENZY_CHARGE,

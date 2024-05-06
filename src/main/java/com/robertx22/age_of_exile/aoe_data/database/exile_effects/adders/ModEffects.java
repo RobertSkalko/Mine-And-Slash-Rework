@@ -67,6 +67,7 @@ public class ModEffects implements ExileRegistryInit {
     public static EffectCtx PETRIFY = new EffectCtx("petrify", "Petrify", Elements.Shadow, EffectType.negative);
     public static EffectCtx BLIND = new EffectCtx("blind", "Blind", Elements.Shadow, EffectType.negative);
     public static EffectCtx STUN = new EffectCtx("stun", "Stun", Elements.Physical, EffectType.negative);
+    public static EffectCtx GALE_FORCE = new EffectCtx("gale_force", "Gale Force", Elements.Physical, EffectType.beneficial);
 
     // these could be used for map affixes
     public static EffectCtx SLOW = new EffectCtx("slow", "Slow", Elements.Physical, EffectType.negative);
@@ -104,6 +105,13 @@ public class ModEffects implements ExileRegistryInit {
 
     @Override
     public void registerAll() {
+
+        ExileEffectBuilder.of(ModEffects.GALE_FORCE)
+                .vanillaStat(VanillaStatData.create(MOVEMENT_SPEED, 0.01F, ModType.MORE, UUID.fromString("3fb10485-f309-465f-afc6-a23b0d6cf4c1")))
+                .stat(2, 2, DodgeRating.getInstance(), ModType.PERCENT)
+                .addTags(EffectTags.positive)
+                .maxStacks(20)
+                .build();
 
         ExileEffectBuilder.of(ENDURANCE_CHARGE)
                 .stat(5, 5, new ElementalResist(Elements.Physical), ModType.FLAT)

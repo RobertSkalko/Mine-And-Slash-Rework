@@ -28,6 +28,8 @@ public class EffectStats {
     public static DataPackStatAccessor<EffectAndCondition> CHANCE_TO_GIVE_CASTER_EFFECT = DatapackStatBuilder
             .<EffectAndCondition>of(x -> x.GUID(), x -> Elements.Physical)
             .addAllOfType(Arrays.asList(
+                    new EffectAndCondition(ModEffects.GALE_FORCE, EffectAndCondition.Condition.HIT),
+
                     new EffectAndCondition(ModEffects.FRENZY_CHARGE, EffectAndCondition.Condition.HIT),
                     new EffectAndCondition(ModEffects.POWER_CHARGE, EffectAndCondition.Condition.HIT),
                     new EffectAndCondition(ModEffects.ENDURANCE_CHARGE, EffectAndCondition.Condition.HIT))

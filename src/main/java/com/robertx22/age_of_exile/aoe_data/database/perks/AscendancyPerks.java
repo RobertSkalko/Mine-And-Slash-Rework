@@ -39,7 +39,7 @@ public class AscendancyPerks {
     public static AscendancyKey CHIEFTAIN = new AscendancyKey("chieftain", "Chieftain");
     public static AscendancyKey CHAMPION = new AscendancyKey("champion", "Champion");
     public static AscendancyKey RAIDER = new AscendancyKey("raider", "Raider");
-    public static AscendancyKey ARCHER = new AscendancyKey("hunter", "Hunter");
+    public static AscendancyKey HUNTER = new AscendancyKey("hunter", "Hunter");
     public static AscendancyKey TRICKSTER = new AscendancyKey("trickster", "Trickster");
     public static AscendancyKey ASSASSIN = new AscendancyKey("assassin", "Assassin");
     public static AscendancyKey NECROMANCER = new AscendancyKey("necromancer", "Necromancer");
@@ -328,6 +328,44 @@ public class AscendancyPerks {
             x.createPerk(6, "Unending Pain",
                     new OptScaleExactStat(1, new MaximumChargesStat(ModEffects.ENDURANCE_CHARGE), ModType.FLAT),
                     new OptScaleExactStat(5, DatapackStats.DMG_PER_ENDURANCE_CHARGE, ModType.MORE)
+            );
+
+        });
+
+        HUNTER.of(x -> {
+
+            x.createPerk(0, "Gale Force",
+                    new OptScaleExactStat(10, EffectStats.CHANCE_TO_GIVE_CASTER_EFFECT.get(new EffectAndCondition(ModEffects.GALE_FORCE, EffectAndCondition.Condition.HIT)), ModType.FLAT)
+            );
+
+            x.createPerk(1, "Elusive",
+                    new OptScaleExactStat(1, DatapackStats.DMG_REDUCTION_PER_GALE_FORCE, ModType.FLAT),
+                    new OptScaleExactStat(10, DodgeRating.getInstance(), ModType.MORE)
+            );
+
+            x.createPerk(2, "Ruthless Sniper",
+                    new OptScaleExactStat(25, new AilmentChance(Ailments.BLEED), ModType.FLAT),
+                    new OptScaleExactStat(25, new AilmentDamage(Ailments.BLEED), ModType.MORE)
+            );
+
+            x.createPerk(3, "Multiple Projectiles",
+                    new OptScaleExactStat(2, SpellChangeStats.PROJECTILE_COUNT.get(), ModType.FLAT),
+                    new OptScaleExactStat(-30, OffenseStats.PROJECTILE_DAMAGE.get(), ModType.MORE)
+            );
+
+            x.createPerk(4, "Agile Hands",
+                    new OptScaleExactStat(100, DatapackStats.ACCURACY_PER_10_DEX, ModType.FLAT),
+                    new OptScaleExactStat(25, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Physical), ModType.MORE)
+            );
+
+            x.createPerk(5, "Swift Shooter",
+                    new OptScaleExactStat(25, SpellChangeStats.PROJECTILE_SPEED.get(), ModType.FLAT),
+                    new OptScaleExactStat(25, OffenseStats.PROJECTILE_DAMAGE.get(), ModType.MORE)
+            );
+
+            x.createPerk(6, "Hunter's Chains",
+                    new OptScaleExactStat(25, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.chaining), ModType.MORE),
+                    new OptScaleExactStat(25, SpellChangeStats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.chaining), ModType.FLAT)
             );
 
         });

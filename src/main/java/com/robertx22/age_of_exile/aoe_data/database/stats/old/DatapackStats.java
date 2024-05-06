@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.aoe_data.database.stats.old;
 
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
+import com.robertx22.age_of_exile.aoe_data.database.stats.DefenseStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.ResourceStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.SpellChangeStats;
@@ -86,6 +87,9 @@ public class DatapackStats implements ExileRegistryInit {
     public static Stat CRIT_DMG_PER_POWER_CHARGE = BonusStatPerEffectStacks.of(ModEffects.POWER_CHARGE, "crit_dmg_per_power_charge", "Crit Damage per Power Charge",
             new OptScaleExactStat(1, OffenseStats.CRIT_DAMAGE.get(), ModType.FLAT));
 
+    public static Stat DMG_REDUCTION_PER_GALE_FORCE = BonusStatPerEffectStacks.of(ModEffects.GALE_FORCE, "dmg_reduction_per_gale_force", "Damage Reduction per Gale Force",
+            new OptScaleExactStat(1, DefenseStats.DAMAGE_REDUCTION.get(), ModType.FLAT));
+
     // bonus per percent of other
     public static Stat HEAL_TO_SPELL_DMG = new AddPerPercentOfOther(ResourceStats.HEAL_STRENGTH.get(), SkillDamage.getInstance());
     public static Stat PHYS_DMG_PER_MANA = new AddPerPercentOfOther(Mana.getInstance(), new BonusAttackDamage(Elements.Physical));
@@ -98,6 +102,7 @@ public class DatapackStats implements ExileRegistryInit {
     public static Stat MANA_PER_10_INT = new MoreXPerYOf(DatapackStats.INT, Mana.getInstance(), 10);
     public static Stat MANA_PER_10_STR = new MoreXPerYOf(DatapackStats.STR, Mana.getInstance(), 10);
     public static Stat MANA_PER_10_DEX = new MoreXPerYOf(DatapackStats.DEX, Mana.getInstance(), 10);
+    public static Stat ACCURACY_PER_10_DEX = new MoreXPerYOf(DatapackStats.DEX, OffenseStats.ACCURACY.get(), 10);
     public static Stat ENERGY_PER_10_DEX = new MoreXPerYOf(DatapackStats.DEX, Energy.getInstance(), 10);
     public static Stat ENERGY_PER_10_MANA = new MoreXPerYOf(Mana.getInstance(), Energy.getInstance(), 10);
     public static Stat MS_PER_10_MANA = new MoreXPerYOf(Mana.getInstance(), MagicShield.getInstance(), 10);
