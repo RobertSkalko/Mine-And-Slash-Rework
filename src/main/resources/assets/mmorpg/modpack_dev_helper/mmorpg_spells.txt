@@ -7,6 +7,7 @@ astral_totem
 awaken_mana
 black_hole
 blizzard
+blood_explosion
 bone_shatter
 boomerang
 chain_lightning

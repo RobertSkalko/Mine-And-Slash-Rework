@@ -72,6 +72,10 @@ public class DatapackStats implements ExileRegistryInit {
     )));
 
     // bonus per effect charges
+
+    public static Stat MOVE_SPEED_PER_ENDURANCE_CHARGE = BonusStatPerEffectStacks.of(ModEffects.ENDURANCE_CHARGE, "move_speed_per_endurance_charge", "Move Speed per Endurance Charge",
+            new OptScaleExactStat(1, MOVE_SPEED, ModType.FLAT
+            ));
     public static Stat BLOCK_PER_ENDURANCE_CHARGE = BonusStatPerEffectStacks.of(ModEffects.ENDURANCE_CHARGE, "block_per_endurance_charge", "Block Chance per Endurance Charge",
             new OptScaleExactStat(1, BlockChance.getInstance(), ModType.FLAT
             ));
@@ -90,8 +94,12 @@ public class DatapackStats implements ExileRegistryInit {
     public static Stat DMG_REDUCTION_PER_GALE_FORCE = BonusStatPerEffectStacks.of(ModEffects.GALE_FORCE, "dmg_reduction_per_gale_force", "Damage Reduction per Gale Force",
             new OptScaleExactStat(1, DefenseStats.DAMAGE_REDUCTION.get(), ModType.FLAT));
 
+    public static Stat DODGE_PER_FRENZY_CHARGE = BonusStatPerEffectStacks.of(ModEffects.FRENZY_CHARGE, "dodge_er_power_charge", "Dodge per Frenzy Charge",
+            new OptScaleExactStat(1, DodgeRating.getInstance(), ModType.FLAT).scale());
+
+
     // bonus per percent of other
-    public static Stat HEAL_TO_SPELL_DMG = new AddPerPercentOfOther(ResourceStats.HEAL_STRENGTH.get(), SkillDamage.getInstance());
+    public static Stat HEAL_TO_SKILL_DMG = new AddPerPercentOfOther(ResourceStats.HEAL_STRENGTH.get(), SkillDamage.getInstance());
     public static Stat PHYS_DMG_PER_MANA = new AddPerPercentOfOther(Mana.getInstance(), new BonusAttackDamage(Elements.Physical));
     public static Stat SUMMON_HP_PER_HP = new AddPerPercentOfOther(Health.getInstance(), SummonHealth.getInstance());
 

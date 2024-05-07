@@ -170,6 +170,7 @@ dmg_when_target_is_low_hp
 dmg_when_target_near_full_hp
 dodge
 dodge_aura_cost
+dodge_er_power_charge
 dodge_per_10_magic_shield
 dot_dmg
 dot_lifesteal
@@ -355,6 +356,7 @@ learn_astral_totem
 learn_awaken_mana
 learn_black_hole
 learn_blizzard
+learn_blood_explosion
 learn_bone_shatter
 learn_boomerang
 learn_chain_lightning
@@ -532,6 +534,7 @@ missile_spell_dmg_taken
 more_food_stats
 more_threat_on_take_dmg
 move_speed
+move_speed_per_endurance_charge
 movement_cast_time
 movement_cdr
 movement_spell_dmg
@@ -616,7 +619,10 @@ poison_resistance
 poison_strength
 positive_eff_dur_u_cast
 power_charge_on_hit
+proc_blood_explosion
+proc_ignite_explosion
 proc_profane_explosion
+proc_profane_explosion_any
 proc_shatter
 proc_shatter_max_frost
 proj_dmg_received

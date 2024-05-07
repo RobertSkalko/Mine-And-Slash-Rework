@@ -10,7 +10,6 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.ChatFormatting;
-import net.minecraft.world.item.ShieldItem;
 
 public class BlockChance extends Stat {
 
@@ -22,7 +21,7 @@ public class BlockChance extends Stat {
 
     @Override
     public String locDescForLangFile() {
-        return "Chance to passively block damage, requires a shield in the offhand, but don't have to activate it.";
+        return "Chance to passively block hit damage"; //, requires a shield in the offhand, but don't have to activate it.";
     }
 
     private BlockChance() {
@@ -56,7 +55,6 @@ public class BlockChance extends Stat {
         return "Block Chance";
     }
 
-    // todo might need to make a spearate block effect instead of just using the dodge mech
     private static class Effect extends BaseDamageEffect {
 
         @Override
@@ -80,7 +78,7 @@ public class BlockChance extends Stat {
 
         @Override
         public boolean canActivate(DamageEvent effect, StatData data, Stat stat) {
-            return effect.getAttackType().isHit() && effect.target.getOffhandItem().getItem() instanceof ShieldItem;
+            return effect.getAttackType().isHit(); // && effect.target.getOffhandItem().getItem() instanceof ShieldItem; todo yes or no
         }
     }
 

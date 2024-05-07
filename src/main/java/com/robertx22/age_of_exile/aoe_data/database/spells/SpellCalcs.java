@@ -195,7 +195,9 @@ public class SpellCalcs {
     public static ValueCalculation PROFANE_EXPLOSION = ValueCalcBuilder.of("profane_explosion")
             .spellScaling(1, 1)
             .build();
-
+    public static ValueCalculation BLOOD_EXPLOSION = ValueCalcBuilder.of("blood_explosion")
+            .spellScaling(1, 1)
+            .build();
     public static ValueCalculation IGNITE_EXPLOSION = ValueCalcBuilder.of("ignite_explosion")
             .spellScaling(2, 2)
             .build();

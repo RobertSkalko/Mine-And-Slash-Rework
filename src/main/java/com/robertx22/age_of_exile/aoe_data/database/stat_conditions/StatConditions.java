@@ -68,6 +68,7 @@ public class StatConditions implements ExileRegistryInit {
     public static DataHolder<String, StatCondition> IS_NOT_ON_COOLDOWN = new DataHolder<>(Arrays.asList(
             ProcSpells.PROFANE_EXPLOSION,
             ProcSpells.IGNITE_EXPLOSION,
+            ProcSpells.BLOOD_EXPLOSION,
             WaterSpells.BONE_SHATTER_PROC
 
     ), x -> new IsNotOnCooldownCondition(x));

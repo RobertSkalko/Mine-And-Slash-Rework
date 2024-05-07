@@ -103,7 +103,7 @@ public class GameChangerPerks implements ExileRegistryInit {
         );
 
         PerkBuilder.gameChanger("divinity", "Divinity",
-                new OptScaleExactStat(50, DatapackStats.HEAL_TO_SPELL_DMG, ModType.FLAT),
+                new OptScaleExactStat(50, DatapackStats.HEAL_TO_SKILL_DMG, ModType.FLAT),
                 new OptScaleExactStat(-50, OffenseStats.CRIT_DAMAGE.get(), ModType.MORE)
         );
 

@@ -5,6 +5,7 @@ arrow_totem
 awaken_mana
 black_hole
 blizzard
+blood_explosion
 boomerang
 breath
 chaos_totem

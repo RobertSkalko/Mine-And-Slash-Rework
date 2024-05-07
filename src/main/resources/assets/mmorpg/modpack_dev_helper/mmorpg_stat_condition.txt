@@ -26,6 +26,7 @@ is_ailment_freeze
 is_ailment_poison
 is_attack_or_spell_attack
 is_axe_wep_type
+is_blood_explosion_not_on_cd
 is_bone_shatter_not_on_cd
 is_bow_wep_type
 is_crit_true

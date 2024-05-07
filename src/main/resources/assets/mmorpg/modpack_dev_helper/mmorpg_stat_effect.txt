@@ -51,6 +51,7 @@ leech_energy
 leech_health
 leech_magic_shield
 leech_mana
+proc_spell_blood_explosion
 proc_spell_bone_shatter
 proc_spell_ignite_explosion
 proc_spell_profane_explosion

@@ -166,6 +166,7 @@ public class StatEffects implements ExileRegistryInit {
     public static StatEffect PROC_SHATTER = new ProcSpellEffect(WaterSpells.BONE_SHATTER_PROC, PositionSource.TARGET);
     public static StatEffect PROC_PROFANE_EXPLOSION = new ProcSpellEffect(ProcSpells.PROFANE_EXPLOSION, PositionSource.TARGET);
     public static StatEffect PROC_IGNITE_EXPLOSION = new ProcSpellEffect(ProcSpells.IGNITE_EXPLOSION, PositionSource.TARGET);
+    public static StatEffect PROC_BLOOD_EXPLOSION = new ProcSpellEffect(ProcSpells.BLOOD_EXPLOSION, PositionSource.TARGET);
 
 
     public static void addSerializers() {

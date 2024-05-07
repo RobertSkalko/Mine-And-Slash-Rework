@@ -136,3 +136,4 @@ It tells you how your damage is converted, added, multiplied etc
 Not all code uses this system yet, so it could either be a damage bug, or a tooltip bug, either way report it
 Whenever you want to report a damage bug, please screenshot the bugged damage with this!
 - added is_bonus_element_damage boolean for damage data, this way you can avoid adding flat damage boosts to bonus damages
+- made block chance not require shields, I feel it's too constricting that an entire defense layer needs a specific item?

@@ -70,9 +70,12 @@ public class AscendancyPerks {
                     new OptScaleExactStat(3, RegeneratePercentStat.MAGIC_SHIELD, ModType.FLAT),
                     new OptScaleExactStat(25, MagicShieldRegen.getInstance(), ModType.PERCENT)
             );
+
             x.createPerk(4, "Profane Explosion",
-                    new OptScaleExactStat(50, ProcStats.PROFANE_EXPLOSION_ON_KILL.get(), ModType.FLAT)
+                    new OptScaleExactStat(25, ProcStats.PROFANE_EXPLOSION_ON_KILL.get(), ModType.FLAT),
+                    new OptScaleExactStat(100, ProcStats.PROFANE_EXPLOSION_ON_CURSED_KILL.get(), ModType.FLAT)
             );
+
             x.createPerk(5, "Curse Specialist",
                     new OptScaleExactStat(25, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.curse), ModType.MORE),
                     new OptScaleExactStat(50, SpellChangeStats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.curse), ModType.FLAT)
@@ -405,5 +408,84 @@ public class AscendancyPerks {
 
         });
 
+        CHAMPION.of(x -> {
+
+            x.createPerk(0, "Warrior's Shield",
+                    new OptScaleExactStat(20, BlockChance.getInstance(), ModType.FLAT),
+                    new OptScaleExactStat(5, DatapackStats.DMG_PER_ENDURANCE_CHARGE, ModType.FLAT)
+            );
+
+            x.createPerk(1, "Frenzied Assault",
+                    new OptScaleExactStat(1, new MaximumChargesStat(ModEffects.FRENZY_CHARGE), ModType.FLAT),
+                    new OptScaleExactStat(10, EffectStats.CHANCE_TO_GIVE_CASTER_EFFECT.get(new EffectAndCondition(ModEffects.ENDURANCE_CHARGE, EffectAndCondition.Condition.HIT)), ModType.FLAT)
+            );
+
+            x.createPerk(2, "Blood Splatter",
+                    new OptScaleExactStat(40, ProcStats.BLOOD_EXPLODE_ON_KILL.get(), ModType.FLAT)
+            );
+
+            x.createPerk(3, "Cruel Fate",
+                    new OptScaleExactStat(50, new AilmentChance(Ailments.BLEED), ModType.FLAT),
+                    new OptScaleExactStat(25, new AilmentDamage(Ailments.BLEED), ModType.MORE)
+            );
+
+            x.createPerk(4, "Energized Defense",
+                    new OptScaleExactStat(30, ResourceStats.RESOURCE_ON_ACTION.get(ResourceOnAction.onBlock(ResourceType.energy)), ModType.FLAT),
+                    new OptScaleExactStat(30, ResourceStats.RESOURCE_ON_ACTION.get(ResourceOnAction.onBlock(ResourceType.health)), ModType.FLAT)
+            );
+
+            x.createPerk(5, "Cunning",
+                    new OptScaleExactStat(10, BlockChance.getInstance(), ModType.FLAT),
+                    new OptScaleExactStat(25, DodgeRating.getInstance(), ModType.MORE)
+            );
+
+            x.createPerk(6, "Quick Rage",
+                    new OptScaleExactStat(1, new MaximumChargesStat(ModEffects.ENDURANCE_CHARGE), ModType.FLAT),
+                    new OptScaleExactStat(3, DatapackStats.MOVE_SPEED_PER_ENDURANCE_CHARGE, ModType.FLAT)
+            );
+
+        });
+
+        RAIDER.of(x -> {
+
+            x.createPerk(0, "Frenzied Evasion",
+                    new OptScaleExactStat(1, new MaximumChargesStat(ModEffects.FRENZY_CHARGE), ModType.FLAT),
+                    new OptScaleExactStat(30, DatapackStats.DODGE_PER_FRENZY_CHARGE, ModType.FLAT)
+            );
+
+            x.createPerk(1, "Frenzied Defense",
+                    new OptScaleExactStat(1, new MaximumChargesStat(ModEffects.FRENZY_CHARGE), ModType.FLAT),
+                    new OptScaleExactStat(10, EffectStats.CHANCE_TO_GIVE_CASTER_EFFECT.get(new EffectAndCondition(ModEffects.FRENZY_CHARGE, EffectAndCondition.Condition.HIT)), ModType.FLAT)
+            );
+
+            x.createPerk(2, "Turning Chance",
+                    new OptScaleExactStat(50, OffenseStats.CRIT_CHANCE.get(), ModType.PERCENT),
+                    new OptScaleExactStat(25, DefenseStats.DAMAGE_REDUCTION_CHANCE.get(), ModType.FLAT)
+            );
+
+            x.createPerk(3, "Dexterous",
+                    new OptScaleExactStat(20, OffenseStats.DAMAGE_WHEN_TARGET_IS_FULL_HP.get(), ModType.MORE),
+                    new OptScaleExactStat(100, DodgeRating.getInstance(), ModType.FLAT).scale(),
+                    new OptScaleExactStat(30, DodgeRating.getInstance(), ModType.MORE)
+            );
+
+            x.createPerk(4, "Resistant",
+                    new OptScaleExactStat(20, new ElementalResist(Elements.Elemental), ModType.FLAT),
+                    new OptScaleExactStat(3, new MaxElementalResist(Elements.Fire), ModType.FLAT),
+                    new OptScaleExactStat(3, new MaxElementalResist(Elements.Cold), ModType.FLAT),
+                    new OptScaleExactStat(3, new MaxElementalResist(Elements.Nature), ModType.FLAT)
+            );
+
+            x.createPerk(5, "Pain Tolerance",
+                    new OptScaleExactStat(20, new ElementalResist(Elements.Physical), ModType.FLAT),
+                    new OptScaleExactStat(1, new MaximumChargesStat(ModEffects.ENDURANCE_CHARGE), ModType.FLAT)
+            );
+
+            x.createPerk(6, "Quickness",
+                    new OptScaleExactStat(10, OffenseStats.CRIT_CHANCE.get(), ModType.FLAT),
+                    new OptScaleExactStat(10, DatapackStats.MOVE_SPEED, ModType.FLAT)
+            );
+
+        });
     }
 }

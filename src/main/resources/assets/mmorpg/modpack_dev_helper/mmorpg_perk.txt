@@ -81,6 +81,7 @@ bleed_duration_big
 blizzard
 block_chance
 block_chance_big
+blood_explosion
 blood_mage
 blood_on_kill
 bloody_dance
@@ -102,6 +103,13 @@ chain_damage_big
 chain_lightning
 champ_class
 champion_class
+champion_class_0
+champion_class_1
+champion_class_2
+champion_class_3
+champion_class_4
+champion_class_5
+champion_class_6
 chaos_any_wep_damage
 chaos_any_wep_damage_big
 chaos_dot_damage
@@ -473,6 +481,13 @@ projection
 pull
 quickdraw
 raider_class
+raider_class_0
+raider_class_1
+raider_class_2
+raider_class_3
+raider_class_4
+raider_class_5
+raider_class_6
 ranger
 reckless_defender
 recoil_shot
