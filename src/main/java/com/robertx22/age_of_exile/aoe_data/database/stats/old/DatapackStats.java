@@ -73,6 +73,13 @@ public class DatapackStats implements ExileRegistryInit {
 
     // bonus per effect charges
 
+    public static Stat MORE_DMG_PER_POWER = BonusStatPerEffectStacks.of(ModEffects.POWER_CHARGE, "more_dmg_per_power", "Damage per Power Charge",
+            new OptScaleExactStat(1, OffenseStats.TOTAL_DAMAGE.get(), ModType.MORE
+            ));
+    public static Stat MORE_DMG_PER_FRENZY = BonusStatPerEffectStacks.of(ModEffects.POWER_CHARGE, "more_dmg_per_frenzy", "Damage per Frenzy Charge",
+            new OptScaleExactStat(1, OffenseStats.TOTAL_DAMAGE.get(), ModType.MORE
+            ));
+
     public static Stat MOVE_SPEED_PER_ENDURANCE_CHARGE = BonusStatPerEffectStacks.of(ModEffects.ENDURANCE_CHARGE, "move_speed_per_endurance_charge", "Move Speed per Endurance Charge",
             new OptScaleExactStat(1, MOVE_SPEED, ModType.FLAT
             ));

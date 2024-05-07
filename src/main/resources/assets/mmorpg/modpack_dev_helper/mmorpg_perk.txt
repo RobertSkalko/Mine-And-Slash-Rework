@@ -48,6 +48,14 @@ armor_percent_big
 arrow_barrage
 arrow_storm
 arrow_totem
+ascendant_class
+ascendant_class_0
+ascendant_class_1
+ascendant_class_2
+ascendant_class_3
+ascendant_class_4
+ascendant_class_5
+ascendant_class_6
 assassin_class
 assassin_class_0
 assassin_class_1

@@ -120,8 +120,32 @@ v.5.4.7
 - map affixes are now weaker on lower rarity maps
 Should make maps a lot easier, common maps should have +30% phys as fire. Mythics should have +100% etc.
 
-v.5.4.7
-- for absolutely no reason at all, your current talent tree will be wiped. No worries just re-allocate the points!
+v.5.5.0
+
+Another big update which brings Ascendancy classes!
+These are ways to define your build even further, whether you want to be a Curse specialist, a bard, mana stacker, aurabot, a hybrid..
+
+There are currently 15 Ascendancy classes:
+- Arcanist
+- Death Lich
+- Chieftain
+- Champion
+- Raider
+- Hunter
+- Trickster
+- Assassin
+- Necromancer
+- Elementalist
+- Guardian
+- Battlemage
+- Jester
+- Ascendant
+
+There will be more classes in the future, but even if a class you want is missing, there are quite a few general classes that can be played in many ways.
+Some classes focus more on defenses, some on offenses. Some have ways of exploding killed enemies etc.
+
+Misc:
+- your talents should be wiped (allocate them again)
 - for datapackers: is_dodged is no longer used by both block and dodge, now there's a special is_hit_avoided that all things that make the hit avoid call, but you can also check if is_dodged or is_blocked
 - golems now give you a buff when they attack anything
 - added stat for "plus stat per effect stacks on you", mahj will know
@@ -137,3 +161,4 @@ Not all code uses this system yet, so it could either be a damage bug, or a tool
 Whenever you want to report a damage bug, please screenshot the bugged damage with this!
 - added is_bonus_element_damage boolean for damage data, this way you can avoid adding flat damage boosts to bonus damages
 - made block chance not require shields, I feel it's too constricting that an entire defense layer needs a specific item?
+- added some new supp gems

@@ -1,11 +1,14 @@
 package com.robertx22.age_of_exile.database.data.support_gem;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
+import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stats.EffectStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.ResourceStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.SpellChangeStats;
+import com.robertx22.age_of_exile.aoe_data.database.stats.base.EffectAndCondition;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.ResourceAndAttack;
+import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentChance;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentProcStat;
@@ -28,6 +31,27 @@ public class SupportGems {
     static String PROJ_COUNT = "proj_count";
 
     public static void init() {
+
+        new SupportGem("frenzy_on_crit", "Frenzy on Crit", PlayStyle.DEX, 1.2F,
+                Arrays.asList(
+                        DatapackStats.MORE_DMG_PER_FRENZY.mod(2, 5),
+                        EffectStats.CHANCE_TO_GIVE_CASTER_EFFECT.get(new EffectAndCondition(ModEffects.FRENZY_CHARGE, EffectAndCondition.Condition.CRIT)).mod(3, 10))
+        )
+                .levelReq(10).addToSerializables();
+
+        new SupportGem("power_on_crit", "Power on Crit", PlayStyle.INT, 1.2F,
+                Arrays.asList(
+                        DatapackStats.DMG_PER_POWER_CHARGE.mod(2, 5),
+                        EffectStats.CHANCE_TO_GIVE_CASTER_EFFECT.get(new EffectAndCondition(ModEffects.POWER_CHARGE, EffectAndCondition.Condition.CRIT)).mod(3, 10))
+        ).levelReq(10).addToSerializables();
+
+        /*
+        new SupportGem("endu_on_crit", "Endurance on Crit", PlayStyle.STR, 1.2F,
+                Arrays.asList(
+                        SpellChangeStats.MANA_COST.get().mod(-5, -25),
+                        EffectStats.CHANCE_TO_GIVE_CASTER_EFFECT.get(new EffectAndCondition(ModEffects.ENDURANCE_CHARGE, EffectAndCondition.Condition.CRIT)).mod(3, 10))
+        ).levelReq(10).addToSerializables();
+                 */
 
         new SupportGem("archmage", "Archmage", PlayStyle.INT, 1.25F,
                 Arrays.asList(

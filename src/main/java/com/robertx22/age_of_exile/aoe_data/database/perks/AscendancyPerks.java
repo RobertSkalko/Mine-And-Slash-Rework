@@ -26,6 +26,8 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shie
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShieldRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
+import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCapacity;
+import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.age_of_exile.database.data.stats.types.summon.SummonHealth;
 import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.tags.all.EffectTags;
@@ -49,6 +51,7 @@ public class AscendancyPerks {
     public static AscendancyKey GUARDIAN = new AscendancyKey("guardian", "Guardian");
     public static AscendancyKey BATTLEMAGE = new AscendancyKey("battlemage", "Battlemage");
     public static AscendancyKey JESTER = new AscendancyKey("jester", "Jester");
+    public static AscendancyKey ASCENDANT = new AscendancyKey("ascendant", "Ascendant");
 
     public static void init() {
 
@@ -534,6 +537,43 @@ public class AscendancyPerks {
                     new OptScaleExactStat(10, EnergyRegen.getInstance(), ModType.MORE),
                     new OptScaleExactStat(10, MagicShieldRegen.getInstance(), ModType.MORE)
             );
+
+        });
+        ASCENDANT.of(x -> {
+
+            x.createPerk(0, "Preparation",
+                    new OptScaleExactStat(25, DatapackStats.INT, ModType.FLAT),
+                    new OptScaleExactStat(25, DatapackStats.DEX, ModType.FLAT),
+                    new OptScaleExactStat(25, DatapackStats.STR, ModType.FLAT)
+            );
+
+            x.createPerk(1, "Key to Ascension",
+                    new OptScaleExactStat(25, DatapackStats.INT, ModType.MORE),
+                    new OptScaleExactStat(25, DatapackStats.DEX, ModType.MORE),
+                    new OptScaleExactStat(25, DatapackStats.STR, ModType.MORE)
+            );
+
+            x.createPerk(2, "Boundless",
+                    new OptScaleExactStat(20, AuraCapacity.getInstance(), ModType.PERCENT)
+            );
+
+            x.createPerk(3, "All Encompassing",
+                    new OptScaleExactStat(10, AuraEffect.getInstance(), ModType.FLAT)
+            );
+
+            x.createPerk(4, "Frenzied Path",
+                    new OptScaleExactStat(1, new MaximumChargesStat(ModEffects.FRENZY_CHARGE), ModType.FLAT),
+                    new OptScaleExactStat(5, EffectStats.CHANCE_TO_GIVE_CASTER_EFFECT.get(new EffectAndCondition(ModEffects.FRENZY_CHARGE, EffectAndCondition.Condition.HIT)), ModType.FLAT)
+            );
+            x.createPerk(5, "Path of Power",
+                    new OptScaleExactStat(1, new MaximumChargesStat(ModEffects.POWER_CHARGE), ModType.FLAT),
+                    new OptScaleExactStat(5, EffectStats.CHANCE_TO_GIVE_CASTER_EFFECT.get(new EffectAndCondition(ModEffects.POWER_CHARGE, EffectAndCondition.Condition.HIT)), ModType.FLAT)
+            );
+            x.createPerk(6, "Enduring Path",
+                    new OptScaleExactStat(1, new MaximumChargesStat(ModEffects.ENDURANCE_CHARGE), ModType.FLAT),
+                    new OptScaleExactStat(5, EffectStats.CHANCE_TO_GIVE_CASTER_EFFECT.get(new EffectAndCondition(ModEffects.ENDURANCE_CHARGE, EffectAndCondition.Condition.HIT)), ModType.FLAT)
+            );
+
 
         });
     }

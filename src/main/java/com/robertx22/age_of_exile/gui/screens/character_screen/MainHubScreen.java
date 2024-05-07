@@ -40,7 +40,6 @@ import com.robertx22.age_of_exile.gui.screens.skill_tree.AscendancyTree;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.TalentsScreen;
 import com.robertx22.age_of_exile.gui.screens.spell.SpellSchoolScreen;
 import com.robertx22.age_of_exile.gui.wiki.BestiaryScreen;
-import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.prophecy.gui.ProphecyScreen;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -235,19 +234,16 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
         rightButtons.add(new SpellSchoolScreen());
         rightButtons.add(new OpenSkillGems());
         rightButtons.add(new TalentsScreen());
-        if (MMORPG.RUN_DEV_TOOLS) {
-            rightButtons.add(new AscendancyTree());
-        }
+        rightButtons.add(new AscendancyTree());
         rightButtons.add(new OpenJewelsScreen());
         if (WorldUtils.isMapWorldClass(this.mc.level)) {
             rightButtons.add(new ProphecyScreen());
         }
+                
         List<INamedScreen> leftButtons = new ArrayList<>();
 
         leftButtons.add(new BestiaryScreen());
         leftButtons.add(new CharacterSelectScreen());
-
-
         leftButtons.add(new OpenInvGuiScreen(Words.Salvaging, "salvage", GuiInventoryGrids.ofSalvageConfig()));
         leftButtons.add(new OpenInvGuiScreen(Words.Configs, "configs", GuiInventoryGrids.ofConfigs()));
 
