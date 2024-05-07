@@ -49,7 +49,6 @@ is_is_summon_attack_true
 is_is_summon_attack_true_is_false
 is_magic_weapon
 is_melee_weapon
-is_missile_barrage_not_on_cd
 is_profane_explosion_not_on_cd
 is_projectile
 is_ranged_weapon

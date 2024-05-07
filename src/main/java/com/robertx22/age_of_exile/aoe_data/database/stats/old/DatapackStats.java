@@ -79,6 +79,10 @@ public class DatapackStats implements ExileRegistryInit {
     public static Stat BLOCK_PER_ENDURANCE_CHARGE = BonusStatPerEffectStacks.of(ModEffects.ENDURANCE_CHARGE, "block_per_endurance_charge", "Block Chance per Endurance Charge",
             new OptScaleExactStat(1, BlockChance.getInstance(), ModType.FLAT
             ));
+    public static Stat DODGE_PER_ENDURANCE_CHARGE = BonusStatPerEffectStacks.of(ModEffects.ENDURANCE_CHARGE, "dodge_er_endurance_charge", "Dodge per Endurance Charge",
+            new OptScaleExactStat(1, DodgeRating.getInstance(), ModType.FLAT).scale());
+
+
     public static Stat DMG_PER_ENDURANCE_CHARGE = BonusStatPerEffectStacks.of(ModEffects.ENDURANCE_CHARGE, "dmg_per_endurance_charge", "Damage per Endurance Charge",
             new OptScaleExactStat(1, OffenseStats.TOTAL_DAMAGE.get(), ModType.FLAT
             ));
@@ -121,6 +125,7 @@ public class DatapackStats implements ExileRegistryInit {
     public static Stat HP_PER_DEX = new MoreXPerYOf(DatapackStats.DEX, Health.getInstance(), 10);
     public static Stat ARMOR_PER_MANA = new MoreXPerYOf(Mana.getInstance(), Armor.getInstance(), 10);
     public static Stat ARMOR_PER_DODGE = new MoreXPerYOf(DodgeRating.getInstance(), Armor.getInstance(), 10);
+    public static Stat MANA_PER_DODGE = new MoreXPerYOf(DodgeRating.getInstance(), Mana.getInstance(), 10);
     public static Stat PROJ_DMG_PER_STR = new MoreXPerYOf(DatapackStats.STR, OffenseStats.PROJECTILE_DAMAGE.get(), 5);
     public static Stat SPELL_DMG_PER_STR = new MoreXPerYOf(DatapackStats.STR, OffenseStats.STYLE_DAMAGE.get(PlayStyle.INT), 5);
     public static Stat HP_REGEN_PER_MS_REGEN = new MoreXPerYOf(MagicShieldRegen.getInstance(), HealthRegen.getInstance(), 1);

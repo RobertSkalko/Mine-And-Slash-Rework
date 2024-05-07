@@ -170,6 +170,7 @@ dmg_when_target_is_low_hp
 dmg_when_target_near_full_hp
 dodge
 dodge_aura_cost
+dodge_er_endurance_charge
 dodge_er_power_charge
 dodge_per_10_magic_shield
 dot_dmg
@@ -489,6 +490,7 @@ mana_on_is_dodged
 mana_on_kill
 mana_per_10_armor
 mana_per_10_dexterity
+mana_per_10_dodge
 mana_per_10_health
 mana_per_10_intelligence
 mana_per_10_strength
@@ -500,6 +502,7 @@ mana_shield
 manasteal
 max_all_resist
 max_chaos_resist
+max_charm_charges
 max_elemental_resist
 max_endurance_charge_charges
 max_fire_resist

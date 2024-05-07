@@ -101,7 +101,6 @@ cdr_big
 chain_damage
 chain_damage_big
 chain_lightning
-champ_class
 champion_class
 champion_class_0
 champion_class_1
@@ -122,7 +121,6 @@ chaos_totem
 chaos_weapon_damage
 charge
 charged_bolt
-chief_class
 chieftain_class
 chieftain_class_0
 chieftain_class_1
@@ -316,6 +314,14 @@ int
 int_big
 int_dmg
 int_dmg_big
+jester_class
+jester_class_0
+jester_class_1
+jester_class_2
+jester_class_3
+jester_class_4
+jester_class_5
+jester_class_6
 jewel_socket
 less_aggro
 lich_class

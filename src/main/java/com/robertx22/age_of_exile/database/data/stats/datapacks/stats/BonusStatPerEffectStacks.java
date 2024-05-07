@@ -95,7 +95,7 @@ public class BonusStatPerEffectStacks extends BaseDatapackStat implements ICoreS
 
     @Override
     public boolean IsPercent() {
-        return false;
+        return this.is_perc;
     }
 
     @Override

@@ -29,13 +29,16 @@ public class MaximumChargesStat extends Stat implements IGenerated<MaximumCharge
 
     @Override
     public String locNameForLangFile() {
-        return "Maximum " + effect.locname;
+        return "Maximum " + effect.locname + " Stacks";
     }
 
     @Override
     public List<MaximumChargesStat> generateAllPossibleStatVariations() {
         return Arrays.asList(
-                        ModEffects.ENDURANCE_CHARGE, ModEffects.POWER_CHARGE, ModEffects.FRENZY_CHARGE
+                        ModEffects.CHARM,
+                        ModEffects.ENDURANCE_CHARGE,
+                        ModEffects.POWER_CHARGE,
+                        ModEffects.FRENZY_CHARGE
                 )
                 .stream().map(x -> new MaximumChargesStat(x)).collect(Collectors.toList());
     }

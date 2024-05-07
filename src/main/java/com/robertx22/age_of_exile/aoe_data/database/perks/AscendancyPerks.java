@@ -19,6 +19,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalPenetration;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.RegeneratePercentStat;
+import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.EnergyRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
@@ -47,6 +48,7 @@ public class AscendancyPerks {
     public static AscendancyKey ELEMENTALIST = new AscendancyKey("elementalist", "Elementalist");
     public static AscendancyKey GUARDIAN = new AscendancyKey("guardian", "Guardian");
     public static AscendancyKey BATTLEMAGE = new AscendancyKey("battlemage", "Battlemage");
+    public static AscendancyKey JESTER = new AscendancyKey("jester", "Jester");
 
     public static void init() {
 
@@ -484,6 +486,53 @@ public class AscendancyPerks {
             x.createPerk(6, "Quickness",
                     new OptScaleExactStat(10, OffenseStats.CRIT_CHANCE.get(), ModType.FLAT),
                     new OptScaleExactStat(10, DatapackStats.MOVE_SPEED, ModType.FLAT)
+            );
+
+        });
+
+        JESTER.of(x -> {
+
+            x.createPerk(0, "Charm the Audience",
+                    new OptScaleExactStat(25, ResourceStats.HEAL_STRENGTH.get(), ModType.FLAT),
+                    new OptScaleExactStat(25, EffectStats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.song), ModType.FLAT),
+                    new OptScaleExactStat(3, new MaximumChargesStat(ModEffects.CHARM), ModType.FLAT)
+            );
+
+            x.createPerk(1, "Never-Ending Dance",
+                    new OptScaleExactStat(1, new MaximumChargesStat(ModEffects.ENDURANCE_CHARGE), ModType.FLAT),
+                    new OptScaleExactStat(10, EffectStats.CHANCE_TO_GIVE_CASTER_EFFECT.get(new EffectAndCondition(ModEffects.ENDURANCE_CHARGE, EffectAndCondition.Condition.HIT)), ModType.FLAT),
+                    new OptScaleExactStat(10, DatapackStats.DMG_PER_ENDURANCE_CHARGE, ModType.FLAT)
+            );
+
+            x.createPerk(2, "Soothing Melody",
+                    new OptScaleExactStat(10, ResourceStats.HEAL_STRENGTH.get(), ModType.FLAT),
+                    new OptScaleExactStat(-20, SpellChangeStats.MANA_COST.get(), ModType.FLAT),
+                    new OptScaleExactStat(25, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.song), ModType.MORE)
+            );
+
+            x.createPerk(3, "Illusive Rhythm",
+                    new OptScaleExactStat(25, DatapackStats.DODGE_PER_ENDURANCE_CHARGE, ModType.FLAT),
+                    new OptScaleExactStat(3, DatapackStats.MANA_PER_DODGE, ModType.MORE)
+            );
+
+            x.createPerk(4, "Universal Language",
+                    new OptScaleExactStat(50, DatapackStats.HEAL_TO_SKILL_DMG, ModType.FLAT)
+            );
+
+            x.createPerk(5, "Jack of All Trades",
+                    new OptScaleExactStat(10, EffectStats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.song), ModType.FLAT),
+                    new OptScaleExactStat(25, ResourceStats.HEAL_STRENGTH.get(), ModType.FLAT),
+                    new OptScaleExactStat(1, new MaximumChargesStat(ModEffects.ENDURANCE_CHARGE), ModType.FLAT),
+                    new OptScaleExactStat(1, new MaximumChargesStat(ModEffects.FRENZY_CHARGE), ModType.FLAT),
+                    new OptScaleExactStat(1, new MaximumChargesStat(ModEffects.POWER_CHARGE), ModType.FLAT)
+            );
+
+            x.createPerk(6, "Smell the Roses",
+                    new OptScaleExactStat(25, ResourceStats.HEAL_STRENGTH.get(), ModType.FLAT),
+                    new OptScaleExactStat(10, HealthRegen.getInstance(), ModType.MORE),
+                    new OptScaleExactStat(10, ManaRegen.getInstance(), ModType.MORE),
+                    new OptScaleExactStat(10, EnergyRegen.getInstance(), ModType.MORE),
+                    new OptScaleExactStat(10, MagicShieldRegen.getInstance(), ModType.MORE)
             );
 
         });

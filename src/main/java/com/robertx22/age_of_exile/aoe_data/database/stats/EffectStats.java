@@ -116,9 +116,9 @@ public class EffectStats {
             })
             .build();
 
-    public static DataPackStatAccessor<ModTag> EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG = DatapackStatBuilder
-            .<ModTag>of(x -> "inc_effect_of_" + x.GUID() + "_buff_given", x -> Elements.Physical)
-            .addAllOfType(ModTag.MAP.get(TagType.Effect))
+    public static DataPackStatAccessor<EffectTag> EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG = DatapackStatBuilder
+            .<EffectTag>of(x -> "inc_effect_of_" + x.GUID() + "_buff_given", x -> Elements.Physical)
+            .addAllOfType(EffectTag.getAll())
             .worksWithEvent(ExilePotionEvent.ID)
             .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
