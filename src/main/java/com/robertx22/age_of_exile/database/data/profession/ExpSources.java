@@ -27,6 +27,8 @@ public class ExpSources {
     public static String REQ_GROWTH_STAGE = "req_growth_stage";
     public HashMap<Integer, List<ExpSource>> map = new HashMap<>();
 
+    public ExpData default_xp = new ExpData(50, 0, Arrays.asList());
+
     public enum Type {
         BLOCK, FARM_ITEM, ENTITY, CRAFTING, BLOCK_TAG
     }
@@ -97,7 +99,7 @@ public class ExpSources {
     }
 
     public ExpData getDefaultExp() {
-        return new ExpData(50, 0, new ArrayList<>());
+        return default_xp;
     }
 
     public ExpData exp(int exp, int tier) {

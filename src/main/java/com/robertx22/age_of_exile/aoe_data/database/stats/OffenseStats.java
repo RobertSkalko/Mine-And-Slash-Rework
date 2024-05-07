@@ -30,7 +30,7 @@ public class OffenseStats {
     public static DataPackStatAccessor<EmptyAccessor> CRIT_IGNORE_ELEMENTAL_RESISTS = DatapackStatBuilder
             .ofSingle("ignore_ele_res", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(StatPriority.Damage.HIT_PREVENTION)
+            .setPriority(StatPriority.Damage.BEFORE_DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_ELEMENTAL)
             .addCondition(StatConditions.IS_BOOLEAN.get(EventData.CRIT))
@@ -52,7 +52,6 @@ public class OffenseStats {
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_FALSE.get(EventData.IS_BONUS_ELEMENT_DAMAGE))
             .addEffect(StatEffects.Layers.ADDITIVE_FLAT_DAMAGE_FROM_MANA)
-
             .setLocName(x -> Stat.format(
                     "Add " + VAL1 + "% of your " + Mana.getInstance().getIconNameFormat() + " to Spell Damage"
             ))
@@ -199,7 +198,7 @@ public class OffenseStats {
     public static DataPackStatAccessor<EmptyAccessor> CRIT_CHANCE = DatapackStatBuilder
             .ofSingle("critical_hit", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
-            .setPriority(StatPriority.Damage.BEFORE_DAMAGE_LAYERS)
+            .setPriority(StatPriority.Damage.FIRST)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IF_RANDOM_ROLL)
             .addEffect(StatEffects.SET_BOOLEAN.get(EventData.CRIT))

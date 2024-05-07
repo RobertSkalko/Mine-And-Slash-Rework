@@ -27,8 +27,8 @@ public class MobAffixes implements ExileRegistryInit {
     static void eleAffix(String name, Elements element) {
         new MobAffix(element.guidName + "_mob_affix", name, element.format, Affix.Type.prefix)
                 .setMods(
-                        new StatMod(50, 50, new PhysicalToElement(element)),
-                        new StatMod(50, 50, new BonusPhysicalAsElemental(element), ModType.FLAT),
+                        new StatMod(25, 25, new PhysicalToElement(element)),
+                        new StatMod(100, 100, new BonusPhysicalAsElemental(element), ModType.FLAT),
                         new StatMod(10, 10, ExtraMobDropsStat.getInstance()))
                 .setWeight(2000)
                 .addToSerializables();
@@ -38,7 +38,7 @@ public class MobAffixes implements ExileRegistryInit {
         new MobAffix("full_" + element.guidName, "Of " + element.dmgName, element.format, Affix.Type.suffix)
                 .setMods(
                         new StatMod(100, 100, new PhysicalToElement(element)),
-                        new StatMod(25, 25, new BonusPhysicalAsElemental(element), ModType.FLAT),
+                        new StatMod(50, 50, new BonusPhysicalAsElemental(element), ModType.FLAT),
                         new StatMod(25, 25, new ElementalResist(element))
                 )
                 .setWeight(0)
@@ -61,7 +61,7 @@ public class MobAffixes implements ExileRegistryInit {
                         new StatMod(15, 15, Health.getInstance()),
                         new StatMod(5, 5, new AilmentChance(Ailments.FREEZE)),
                         new StatMod(75, 75, new PhysicalToElement(Cold)),
-                        new StatMod(50, 50, new BonusPhysicalAsElemental(Cold), ModType.FLAT),
+                        new StatMod(100, 100, new BonusPhysicalAsElemental(Cold), ModType.FLAT),
                         new StatMod(20, 20, ExtraMobDropsStat.getInstance()))
                 .icon(Cold.format + Cold.icon)
                 .setWeight(250)
@@ -72,7 +72,7 @@ public class MobAffixes implements ExileRegistryInit {
                         new StatMod(15, 15, Health.getInstance()),
                         new StatMod(5, 5, new AilmentChance(Ailments.BURN)),
                         new StatMod(75, 75, new PhysicalToElement(Fire)),
-                        new StatMod(50, 50, new BonusPhysicalAsElemental(Fire), ModType.FLAT),
+                        new StatMod(100, 100, new BonusPhysicalAsElemental(Fire), ModType.FLAT),
                         new StatMod(20, 20, ExtraMobDropsStat.getInstance()))
                 .icon(Fire.format + Fire.icon)
                 .setWeight(250)
@@ -83,7 +83,7 @@ public class MobAffixes implements ExileRegistryInit {
                         new StatMod(15, 15, Health.getInstance()),
                         new StatMod(5, 5, new AilmentChance(Ailments.POISON)),
                         new StatMod(75, 75, new PhysicalToElement(Shadow)),
-                        new StatMod(50, 50, new BonusPhysicalAsElemental(Shadow), ModType.FLAT),
+                        new StatMod(100, 100, new BonusPhysicalAsElemental(Shadow), ModType.FLAT),
                         new StatMod(20, 20, ExtraMobDropsStat.getInstance()))
                 .icon(Shadow.format + Shadow.icon)
                 .setWeight(250)
@@ -92,7 +92,7 @@ public class MobAffixes implements ExileRegistryInit {
         new MobAffix("phys_lord", "Fighter Lord", ChatFormatting.GRAY, Affix.Type.prefix)
                 .setMods(
                         new StatMod(15, 15, Health.getInstance()),
-                        new StatMod(50, 50, new BonusPhysicalAsElemental(Physical)),
+                        new StatMod(100, 100, new BonusPhysicalAsElemental(Physical)),
                         new StatMod(20, 20, ExtraMobDropsStat.getInstance()))
                 .setWeight(250)
                 .addToSerializables();

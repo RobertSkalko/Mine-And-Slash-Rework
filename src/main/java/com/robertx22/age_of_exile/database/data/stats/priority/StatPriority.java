@@ -61,7 +61,7 @@ public class StatPriority implements IAutoLocName {
         // they should be based on saved value at point of dmg bonus event start
 
         //StatPriority DAMAGE_TRANSFER = damage("DAMAGE_TRANSFER", 0);
-
+        StatPriority FIRST = damage("FIRST", 0);
         StatPriority BEFORE_HIT_PREVENTION = damage("BEFORE_HIT_PREVENTION", 9); // for stuff like accuracy
         StatPriority HIT_PREVENTION = damage("HIT_PREVENTION", 10); // dodge, block
         StatPriority BEFORE_DAMAGE_LAYERS = damage("BEFORE_DAMAGE_LAYERS", 19); // currently only used for old dmg stats that arent converted to datapacks yet

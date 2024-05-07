@@ -1,10 +1,12 @@
 package com.robertx22.age_of_exile.aoe_data.database.affixes.adders.corruption;
 
 import com.robertx22.age_of_exile.aoe_data.database.affixes.AffixBuilder;
+import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.SpellChangeStats;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
+import com.robertx22.age_of_exile.database.data.stats.types.MaximumChargesStat;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCapacity;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
@@ -17,6 +19,10 @@ public class CorruptionAffixes {
 
     public static void init() {
 
+        of(new MaximumChargesStat(ModEffects.POWER_CHARGE), 1, 1, SlotTags.helmet, SlotTags.ring).Build();
+        of(new MaximumChargesStat(ModEffects.ENDURANCE_CHARGE), 1, 1, SlotTags.boots, SlotTags.ring).Build();
+        of(new MaximumChargesStat(ModEffects.FRENZY_CHARGE), 1, 1, SlotTags.pants, SlotTags.ring).Build();
+
         of(AuraCapacity.getInstance(), 1, 3, SlotTags.jewelry_family).Build();
         of(AuraEffect.getInstance(), 1, 3, SlotTags.jewelry_family).Build();
 
@@ -25,6 +31,8 @@ public class CorruptionAffixes {
 
         of(SpellChangeStats.CAST_SPEED.get(), 1, 3, SlotTags.jewelry_family).Build();
         of(SpellChangeStats.COOLDOWN_REDUCTION.get(), 1, 3, SlotTags.jewelry_family).Build();
+
+        of(new ElementalResist(Elements.Physical), 2, 5, SlotTags.armor_family).Build();
 
         for (Elements ele : Elements.getAllSingleElemental()) {
             if (ele != Elements.Physical) {
@@ -35,7 +43,7 @@ public class CorruptionAffixes {
 
     }
 
-    static AffixBuilder of(Stat stat, float v1, float v2, SlotTag fam) {
+    static AffixBuilder of(Stat stat, float v1, float v2, SlotTag... fam) {
 
         return AffixBuilder.Normal(PREFIX + stat.GUID())
                 .stat(stat.mod(v1, v2))

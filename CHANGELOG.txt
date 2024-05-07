@@ -1,131 +1,9 @@
-v.5.4.0
-Warning! This update will need a few bug fixes probably to become stable!
-
-Starting with this update, I will try to create League-like content for the endgame. 
-This update will start with the Prophecy League!
-
-It works like this:
-- you find altars in maps
-- the altars allow you to apply curses to yourself
-- the more curses you have, the more currency you gain by killing mobs in maps
-- spend that currency on your pick of prophecy rewards like "3 rare boots" or "5 runes", it's a way to semi-target farm items you want
-- your curses are reset when you start a new map
-- prophecy altars always appear in maps while the league is ongoing, at the start of next league, altars will be rarer
-- prophecies contain some exclusive gear that is curse themed, you can find it in the reward options
-
--------
-
-Another new Feature is something a lot of players wanted and it's Uber bosses!  
-Kill monsters in maps and find Uber fragments, Combine fragments into the corresponding Uber boss's Arena Maps
-Enter the map, find the portal and slay the Uber Boss!
-Uber bosses drop some exclusive loot btw
-Currently the mod has 1 boss, but Modpacks should be able to easily add more.
-
-
-Other:
-- added a /mine_and_slash report map_problem command
-- fixed the missing crop stage requirement for all the crops and professions.. 
-- added config in main hub for cast fail msgs
-- removed auto pve server config, it's now a per player config in the main hub config section, if 2 players both have auto pve on, they will be automatically grouped, won't be able to damage each other etc.
-This is meant for players who don't want to mess with inviting to parties etc
-- fix harvest generation/tp issues
-- runed items now have a min drop lvl
-- attempt fix double death xp loss etc
-- improved hotbar ui a bit
-- dungeons now have names
-- stats like "+5 hp per 10 mana" now work based on calculated final values, meaning +50% health will work on them, but not +50% mana in this example.
-The code now also creates a copy of the stats which means if you have mana per hp and hp per mana, there won't be any randomness or infinite loops trying to calculate them
-- added force_custom_hp to mob rarity so you can now not worry if the boss mob has 100 times more hp than intended, currently used for uber bosses
-- attempted to cleanup some stat code, expect bugs in the short term.
-- added new currency that rerols a random affix into a random common affix
-- should fix harvest not working
-- attempted to make fake players be able to attack (they are considered players so my code checked if they have energy, if they can use the weapon (stat and lvl req) and also they had 0 stats because they dont TICK...
-Which means they didn't get their stats calculated because that's done on tick.. It's a lot of jank i'm unfamiliar with too
-- stat datapacks now have an effect list instead of just 1 effect, this will make creating some stats more reasonable, but you'll need to fix existing stat datapacks
-- changed how harvest and league mechanics spawn (now its a chance to spawn in the same place mobs spawn, scattered through the dungeon)
-- particles are now sent in 1 packet which should hopefully improve server performance
-- summons will no longer get map mob stats
-- added map lives system, higher rarity maps now have less lives.
-- crafted gear now have lowered potential which means it can be crafted on with currencies less and hopefully dropped gear remains viable in the endgame.
-- you can no longer enter too high level maps (currently max is your lvl + 5
-- fix allies being able to attack summons
-- added jewel corruption, and jewel corruption orb
-- summoned skeletons now fire
-- added new map affixes, player curses
-- new player curse immunity stat, currently found on jewel corruptions
-- reduced max characters to 3 by default, might be too much nbt for some servers
-- if the perk is missing or you're in dev mode, or you shift, talents gui will now show the perk id
-- added aggressive and defensive minion support gems, changing their aggro radius
-- SHIFT+R keybind will now cast when you do it instead of the spell binded to R keybind. (as an example) Meaning keybinds with button modifiers are prioritized
-- gear should now only ever be stat checked requirements after the stat calculation
-- datapack thing: effects can now NOT stack stat buffs per effect stack amount and effects can now decrease their stack count by 1 if casted with a tagged spell.
-This will be used for missile barrage talent. It gives you cast speed and dmg to any missile tag spell, but the buff stacks are reduced by 1 every time you cast any missile tag spell.
-- rune reroll now cant roll stat into lower value than it was before, roll away!
-- fixed the tooltips a bit, now correctly cuts lines only if there is too many (before it counted double blank lines that were removed anyway)
-- added a new system, map resist requirements. Maps of higher rarity and difficulty now require some baseline of elemental resistances to actually enter,
-which should hopefully reduce the amount of complaints about one shots. 
-Maps that have elemental mob damage affixes require higher resists
-If there's some unique way to mitigate elemental damage in the future, like a stat that reduces say Fire damage received by 90%, i'll have to include to allow it to bypass the requirement system.
-- making a bigger runeword on top of a smaller one now overwites the smaller one
-- simplified Currencies and item potential. It now acts as the opposite of instability in earlier versions.
-Now your item starts with say 100 potential and you spend potential to use currencies on the item, at 0 potential, you can't use any more currencies on the item.
-The system was too confusing and nobody knew what it was. It was meant to be a less restrictive system that just reduced your chances of good outcomes the more you crafted but, 
-I decided to just go back to the old system where you either can or can't craft an item anymore.
-
-
-Chaos stats added back
-
-Added a new system for compatibility between vanilla and mns stats.
-The system is simple, you create a datapack that for example:
-- makes it so each point of vanilla armor gives you +3% mine and slash armor
-- maybe another rpg mod has a fire damage stat, you can make that stat give you mine and slash Fire damage % etc
-
-You can make it give flat amounts that scale per player level or percentages that don't need scaling.
-You can even add caps in case you don't want the attribute to give too much of the stat endgame
-
-
-v.5.4.1
-- fixed armor behaving the opposite way (mobs were too tanky)
-
-
-v.5.4.2
-- uber boss map not spending itself
-- should fix maps leaving command blocks 
-
-v.5.4.3
-- Harvest was streamlined and simplified. Now mobs drop items, which can be directly crafted into exclusive currencies 
-- fixed loot being way lower than intended (didnt multiply once..)
-
-v.5.4.4
-- should fix profession stations
-
-v.5.4.5
-- small slimes no longer should drop loot or exp
-- added flat damage support gems, these should be good for early game
-- added archmage support gem
-- fixed stat bug, stats were applied twice
-
-v.5.4.6
-- fixed added flat dmg not being adjusted for dmg effectiveness of spell
-- professions now give between 50% and 100% of xp if you are lower lvl than the ore/crop mined, instead of between 0% and 100%
-- new players have a bit of extra weapon damage from base stat now
-- fixed mob health loot multi, slimes should drop waaaaay less xp and loot now
-- heavily buffed fireball and other starter spells early game
-- low lvl players no longer get exp debt
-- added a loot boost for players under lvl 10
-- nerfed magic find, it's no longer a flat chance to upgrade rarity, it now depends on how much rarer the higher rarity is. so 100% magic find on a rare drop (1000 weight for example), will have 50% chance to upgrade to epic (500 weight for example)
-
-v.5.4.7
-- halved map mob damage bonus scaling
-- map affixes are now weaker on lower rarity maps
-Should make maps a lot easier, common maps should have +30% phys as fire. Mythics should have +100% etc.
-
 v.5.5.0
 
 Another big update which brings Ascendancy classes!
 These are ways to define your build even further, whether you want to be a Curse specialist, a bard, mana stacker, aurabot, a hybrid..
 
-There are currently 15 Ascendancy classes:
+There are currently 14(TM) Ascendancy classes:
 - Arcanist
 - Death Lich
 - Chieftain
@@ -143,6 +21,8 @@ There are currently 15 Ascendancy classes:
 
 There will be more classes in the future, but even if a class you want is missing, there are quite a few general classes that can be played in many ways.
 Some classes focus more on defenses, some on offenses. Some have ways of exploding killed enemies etc.
+
+Reminder, as these are also datapacks, don't be suprised a modpack has additional custom classes!
 
 Misc:
 - your talents should be wiped (allocate them again)
@@ -162,3 +42,7 @@ Whenever you want to report a damage bug, please screenshot the bugged damage wi
 - added is_bonus_element_damage boolean for damage data, this way you can avoid adding flat damage boosts to bonus damages
 - made block chance not require shields, I feel it's too constricting that an entire defense layer needs a specific item?
 - added some new supp gems
+- temporarily removed the bonus ele dmg from mobs, but uncommon mobs now have 1 affix instead of 0
+Will monitor player tankiness after ascendancy release
+- added new item corruptions
+- item corruptions cant be same 2 affixes now

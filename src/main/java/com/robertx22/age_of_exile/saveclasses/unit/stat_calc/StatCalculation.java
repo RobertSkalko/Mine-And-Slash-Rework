@@ -184,7 +184,7 @@ public class StatCalculation {
             } else {
                 statContexts.addAll(MobStatUtils.getAffixStats(entity));
                 statContexts.addAll(MobStatUtils.getWorldMultiplierStats(entity));
-                statContexts.addAll(MobStatUtils.addMobBaseElementalBonusDamages(entity, data));
+                //  statContexts.addAll(MobStatUtils.addMobBaseElementalBonusDamages(entity, data));
                 statContexts.addAll(MobStatUtils.addMapTierStats(entity));
                 statContexts.addAll(MobStatUtils.getMobConfigStats(entity, data));
             }

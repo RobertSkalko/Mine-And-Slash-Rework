@@ -28,7 +28,7 @@ public enum Words implements IAutoLocName {
     CAST_FAIL_MSGS("Spell Casting Failure Messages\n\nWill print helpful messages when you fail to cast a spell\nParticularly Helpful for New Players"),
     MOB_DEATH_MESSAGES("Provides a short message when you kill a mob.\n\nYou can hover over it for useful info like Loot Chance"),
     DAMAGE_MESSAGES("Provides a short message when you damage a mob.\n\nYou can hover over it for useful info like how was damage modified"),
-    AUTOMATIC_PVE("Auto PVE\n\nPlayers who enable this are considered Teamed up and Allies\n- Must be in Nearby (Radius set by config)"),
+    AUTOMATIC_PVE("Auto PVE\n\nPlayers who enable this are considered Teamed up and Allies\n- Must be Nearby (Radius set by config)"),
 
     WHILE_UNDER_AURA("While Under Effect of %1$s:"),
     CURSE_OFFERS("Curse Offers:"),

@@ -207,6 +207,7 @@ enchanting_lesser_drop_bonus
 enchanting_medium_drop_bonus
 enchanting_misc_drop_bonus
 enchanting_triple_drop
+endurance_charge_on_crit
 endurance_charge_on_hit
 energy
 energy_leech_cap
@@ -266,6 +267,7 @@ freeze_duration
 freeze_proc_chance
 freeze_resistance
 freeze_strength
+frenzy_charge_on_crit
 frenzy_charge_on_hit
 full_swing_damage
 gale_force_on_hit
@@ -534,6 +536,8 @@ missile_cast_time
 missile_cdr
 missile_spell_dmg
 missile_spell_dmg_taken
+more_dmg_per_frenzy
+more_dmg_per_power
 more_food_stats
 more_threat_on_take_dmg
 move_speed
@@ -621,6 +625,7 @@ poison_proc_chance
 poison_resistance
 poison_strength
 positive_eff_dur_u_cast
+power_charge_on_crit
 power_charge_on_hit
 proc_blood_explosion
 proc_ignite_explosion

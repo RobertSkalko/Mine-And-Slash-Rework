@@ -87,7 +87,7 @@ public class ServerContainer {
         JEWEL_DROPRATE = b.defineInRange("jewel_drop_rate", 0.25D, 0, 1000);
         LOOT_CHEST_DROPRATE = b.defineInRange("loot_chest_drop_rate", 0.1D, 0, 1000);
 
-        MOB_FLAT_DAMAGE_BONUS = b.defineInRange("MOB_FLAT_DAMAGE_BONUS", 5D, 0, 1000);
+        MOB_FLAT_DAMAGE_BONUS = b.defineInRange("MOB_FLAT_DAMAGE_BONUS", 6D, 0, 1000);
 
 
         BLOCK_COST = b.defineInRange("block_cost", 0.25D, 0, 1000);

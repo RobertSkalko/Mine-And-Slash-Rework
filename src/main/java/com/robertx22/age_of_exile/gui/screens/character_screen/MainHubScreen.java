@@ -26,6 +26,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shie
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShieldRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.ManaRegen;
+import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.bases.BaseScreen;
 import com.robertx22.age_of_exile.gui.bases.INamedScreen;
@@ -234,12 +235,14 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
         rightButtons.add(new SpellSchoolScreen());
         rightButtons.add(new OpenSkillGems());
         rightButtons.add(new TalentsScreen());
-        rightButtons.add(new AscendancyTree());
+        if (Load.player(mc.player).talents.getAllocatedPoints(TalentTree.SchoolType.TALENTS) > 0) {
+            rightButtons.add(new AscendancyTree());
+        }
         rightButtons.add(new OpenJewelsScreen());
         if (WorldUtils.isMapWorldClass(this.mc.level)) {
             rightButtons.add(new ProphecyScreen());
         }
-                
+
         List<INamedScreen> leftButtons = new ArrayList<>();
 
         leftButtons.add(new BestiaryScreen());

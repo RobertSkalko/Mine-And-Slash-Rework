@@ -54,7 +54,9 @@ public class ChaosStat implements JsonExileRegistry<ChaosStat>, IAutoGson<ChaosS
             gear.sockets.addSocket();
         }
 
-        for (int i = 0; i < affix_number; i++) {
+
+        int tries = 0;
+        while (gear.affixes.cor.size() < affix_number || tries > 100) {
 
             FilterListWrap<Affix> list = ExileDB.Affixes().getFilterWrapped(x -> x.type == this.affix_type && x.meetsRequirements(new GearRequestedFor(gear)));
 
@@ -63,7 +65,14 @@ public class ChaosStat implements JsonExileRegistry<ChaosStat>, IAutoGson<ChaosS
             AffixData data = new AffixData(Affix.Type.chaos_stat);
             data.create(gear, affix);
 
-            gear.affixes.cor.add(data);
+            if (gear.affixes.cor.stream().noneMatch(x -> x.id.equals(affix.GUID()))) {
+                gear.affixes.cor.add(data);
+            }
+            tries++;
+        }
+
+        for (int i = 0; i < affix_number; i++) {
+
 
         }
 
