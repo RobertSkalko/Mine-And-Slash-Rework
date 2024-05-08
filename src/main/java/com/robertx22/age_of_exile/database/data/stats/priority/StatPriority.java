@@ -65,8 +65,8 @@ public class StatPriority implements IAutoLocName {
         StatPriority BEFORE_HIT_PREVENTION = damage("BEFORE_HIT_PREVENTION", 9); // for stuff like accuracy
         StatPriority HIT_PREVENTION = damage("HIT_PREVENTION", 10); // dodge, block
         StatPriority BEFORE_DAMAGE_LAYERS = damage("BEFORE_DAMAGE_LAYERS", 19); // currently only used for old dmg stats that arent converted to datapacks yet
-
         StatPriority DAMAGE_LAYERS = damage("DAMAGE_LAYERS", 20); // this one contains a bunch of its own ordered multipliers
+        StatPriority AFTER_DAMAGE_LAYERS = damage("DAMAGE_LAYERS", 21); // this one contains a bunch of its own ordered multipliers
         StatPriority CALC_DAMAGE_LAYERS = damage("CALC_DAMAGE_LAYERS", 30); // this should only be used by the custom stat that exists to fit right here at this place in the order of effect calc
         StatPriority AFTER_DAMAGE_BONUSES = damage("AFTER_DAMAGE_BONUSES", 32); // for stuff like leech, because we don't want absorbs, mana shields etc to stop leech
         // todo not using this yet  StatPriority DAMAGE_TAKEN_AS = damage("DAMAGE_TAKEN_AS", 40);

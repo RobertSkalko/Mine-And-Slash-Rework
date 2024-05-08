@@ -82,12 +82,12 @@ public class JewelAffixes implements ExileRegistryInit {
         AffixBuilder.Normal(PREFIX + "cdr")
                 .stat(SpellChangeStats.COOLDOWN_REDUCTION.get().mod(1, 3))
                 .includesTags(SlotTags.any_jewel)
-                .Weight(1000)
+                .Weight(500)
                 .Suffix()
                 .Build();
 
         AffixBuilder.Normal(PREFIX + "crit")
-                .stat(OffenseStats.CRIT_CHANCE.get().mod(1, 2))
+                .stat(OffenseStats.CRIT_CHANCE.get().mod(0.5F, 1))
                 .includesTags(SlotTags.any_jewel)
                 .Weight(500)
                 .Suffix()

@@ -3,6 +3,8 @@ v.5.5.0
 Another big update which brings Ascendancy classes!
 These are ways to define your build even further, whether you want to be a Curse specialist, a bard, mana stacker, aurabot, a hybrid..
 
+You get a point every 10 levels, and you can't have more than 9 points in total.
+
 There are currently 14(TM) Ascendancy classes:
 - Arcanist
 - Death Lich
