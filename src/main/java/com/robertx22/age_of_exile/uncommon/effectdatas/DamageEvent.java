@@ -337,6 +337,9 @@ public class DamageEvent extends EffectEvent {
             }
         }
 
+        msg.append(Component.literal("Total Combined Damage: " + (int) info.totalDmg + "\n").withStyle(ChatFormatting.GOLD));
+
+
         return msg;
     }
 

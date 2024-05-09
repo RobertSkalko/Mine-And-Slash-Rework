@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.UNICODE;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
+import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.modify.IStatCtxModifier;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
@@ -59,6 +60,7 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
 
     public float min = -1000;
     public float max = Integer.MAX_VALUE;
+    public float softcap = 0;
     public float base = 0;
     public boolean is_perc = false;
     public StatScaling scaling = StatScaling.NONE;
@@ -78,6 +80,18 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
         is_long = true;
         is_perc = true;
         scaling = StatScaling.NONE;
+    }
+
+    public final float getHardCap() {
+        return this.max;
+    }
+
+    public final float getSoftCap(Unit data) {
+        return getHardCap() - softcap + getAdditionalMax(data);
+    }
+
+    public float getAdditionalMax(Unit data) {
+        return 0;
     }
 
     public void setUsesMoreMultiplier() {

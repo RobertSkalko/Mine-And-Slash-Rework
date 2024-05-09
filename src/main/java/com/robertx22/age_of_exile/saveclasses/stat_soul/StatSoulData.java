@@ -122,7 +122,7 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
     }
 
     public boolean isArmor() {
-        return this.fam == SlotFamily.Armor || (this.slot.isEmpty() && ExileDB.GearSlots().get(slot).fam == SlotFamily.Armor);
+        return this.fam == SlotFamily.Armor || (!this.slot.isEmpty() && ExileDB.GearSlots().get(slot).fam == SlotFamily.Armor);
     }
 
     public boolean canApplyTo(ItemStack stack) {

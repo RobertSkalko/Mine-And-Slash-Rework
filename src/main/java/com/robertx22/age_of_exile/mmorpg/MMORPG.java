@@ -70,7 +70,7 @@ public class MMORPG {
 
 
     // DISABLE WHEN PUBLIC BUILD
-    public static boolean RUN_DEV_TOOLS = false;
+    public static boolean RUN_DEV_TOOLS = true;
 
 
     public static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.00");

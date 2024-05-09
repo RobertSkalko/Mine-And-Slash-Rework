@@ -3,11 +3,14 @@ package com.robertx22.age_of_exile.database.data.stats.types.generated;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.ElementalResistEffect;
+import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.ElementalStat;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.wrappers.MapWrapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class ElementalResist extends ElementalStat {
@@ -33,8 +36,20 @@ public class ElementalResist extends ElementalStat {
         this.icon = element.icon;
         this.statEffect = new ElementalResistEffect();
 
-        this.max = 75;
+        this.max = 90;
+        this.softcap = 15;
 
+    }
+
+    static HashMap<Elements, MaxElementalResist> cached = new HashMap<>();
+
+    MaxElementalResist getMaxStat() {
+        return cached.computeIfAbsent(getElement(), x -> new MaxElementalResist(x));
+    }
+
+    @Override
+    public float getAdditionalMax(Unit data) {
+        return data.getCalculatedStat(getMaxStat()).getValue();
     }
 
     @Override

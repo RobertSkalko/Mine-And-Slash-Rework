@@ -36,7 +36,11 @@ public class StatData {
 
 
     public void setValue(float f) {
-        this.v1 = Mth.clamp(f, GetStat().min, GetStat().max);
+        this.v1 = Mth.clamp(f, GetStat().min, GetStat().getHardCap());
+    }
+
+    public void softCapStat(Unit data) {
+        this.v1 = Mth.clamp(this.v1, GetStat().min, GetStat().getSoftCap(data));
     }
 
     public String getId() {

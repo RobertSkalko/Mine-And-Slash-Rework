@@ -48,3 +48,8 @@ Whenever you want to report a damage bug, please screenshot the bugged damage wi
 Will monitor player tankiness after ascendancy release
 - added new item corruptions
 - item corruptions cant be same 2 affixes now
+
+v.5.5.1
+
+- max elemental resist should now reflect correctly in the elemental resist stat
+- soul modifiers can now be applied to non crafted souls

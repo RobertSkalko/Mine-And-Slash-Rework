@@ -22,7 +22,7 @@ public enum Elements implements IGUID {
     // elementals
     Fire(Arrays.asList(), Arrays.asList(ElementTags.ELEMENTAL), "Fire", ChatFormatting.RED, ElementIds.FIRE, "\u2600", SpellTags.FIRE),
     Cold(Arrays.asList(), Arrays.asList(ElementTags.ELEMENTAL), "Cold", ChatFormatting.AQUA, ElementIds.WATER, "\u2600", SpellTags.COLD),
-    Nature(Arrays.asList(), Arrays.asList(ElementTags.ELEMENTAL), "Lightning", ChatFormatting.GREEN, ElementIds.NATURE, "\u2600", SpellTags.LIGHTNING),
+    Nature(Arrays.asList(), Arrays.asList(ElementTags.ELEMENTAL), "Lightning", ChatFormatting.YELLOW, ElementIds.NATURE, "\u2600", SpellTags.LIGHTNING),
     // alignments
     Shadow(Arrays.asList(), Arrays.asList(ElementTags.ALIGNMENT), "Chaos", ChatFormatting.DARK_PURPLE, "chaos", "\u2600", SpellTags.CHAOS),
     //Holy(Arrays.asList(), Arrays.asList(ElementTags.ALIGNMENT), "Holy", ChatFormatting.YELLOW, "holy", "\u2600", SpellTags.HOLY),

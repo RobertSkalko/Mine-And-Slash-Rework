@@ -45,7 +45,7 @@ public class InCalcStatData {
             finalValue *= Multi;
         }
 
-        return Mth.clamp(finalValue, stat.min, stat.max);
+        return Mth.clamp(finalValue, stat.min, stat.getHardCap());
 
     }
 

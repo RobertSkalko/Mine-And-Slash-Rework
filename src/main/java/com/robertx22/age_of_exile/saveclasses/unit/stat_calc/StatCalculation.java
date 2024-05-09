@@ -101,6 +101,10 @@ public class StatCalculation {
             }
         }
 
+        for (StatData stat : unit.getStats().stats.values()) {
+            stat.softCapStat(unit);
+        }
+
         Cached.VANILLA_STAT_UIDS_TO_CLEAR_EVERY_STAT_CALC.forEach(x -> {
             AttributeInstance in = entity.getAttribute(x.left);
             if (in != null && in.getModifier(x.right) != null) {
