@@ -53,3 +53,6 @@ v.5.5.1
 
 - max elemental resist should now reflect correctly in the elemental resist stat
 - soul modifiers can now be applied to non crafted souls
+- added experimental effect duration overlay
+- magic shield users should now get knocked back on hit
+- QOL improvements to supp gem screen

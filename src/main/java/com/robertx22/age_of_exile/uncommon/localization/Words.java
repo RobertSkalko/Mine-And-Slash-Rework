@@ -194,6 +194,10 @@ public enum Words implements IAutoLocName {
     Mob_Affixes("Mob Affixes"),
 
     None("None"),
+    NoSocketedSpell("No Socketed Spell"),
+    IncreaseSpellLevel("Unlock this Support Gem Slot by increasing your Spell Level!"),
+    IncreaseYourLevel("Unlock this Support Gem Slot by leveling up in Mine and Slash!"),
+    LockedSuppGemSlot("Locked Support Gem Slot"),
 
     Player_Affixes("Player Affixes"),
     ProphecyPlayerAffix("Player Gains Debuff:"),

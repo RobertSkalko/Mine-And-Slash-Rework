@@ -470,7 +470,7 @@ public class AscendancyPerks {
 
             x.createPerk(3, "Dexterous",
                     new OptScaleExactStat(20, OffenseStats.DAMAGE_WHEN_TARGET_IS_FULL_HP.get(), ModType.MORE),
-                    new OptScaleExactStat(100, DodgeRating.getInstance(), ModType.FLAT).scale(),
+                    new OptScaleExactStat(25, DodgeRating.getInstance(), ModType.FLAT).scale(),
                     new OptScaleExactStat(30, DodgeRating.getInstance(), ModType.MORE)
             );
 

@@ -10,12 +10,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class RangedDamageUtil {
 
-    private static List<String> VALID_PROJECTILE_NAMES = Arrays.asList("arrow", "bolt", "ammo", "bullet", "dart", "missile");
+    // private static List<String> VALID_PROJECTILE_NAMES = Arrays.asList("arrow", "bolt", "ammo", "bullet", "dart", "missile");
 
     public static boolean isValidAttack(AttackInformation event) {
         if (!(event.getSource().getEntity() instanceof Player)) {

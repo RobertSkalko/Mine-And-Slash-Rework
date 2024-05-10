@@ -82,14 +82,27 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
     public SkillGemType type = SkillGemType.SKILL;
     public int perc = 0;
     public String rar = IRarity.COMMON_ID;
-    public int links = 1;
+    private int links = 1;
     public boolean sal = true;
 
 
+    public void setLinks(int t) {
+        this.links = t;
+    }
+
+    public int getFlatLinks() {
+        return links;
+    }
+
+    public MaxLinks getMaxLinks(Player p) {
+        int total = GameBalanceConfig.get().getTotalLinks(links, p);
+        boolean cappedBySpelllvl = GameBalanceConfig.get().getTotalLinks(total + 1, p) > total;
+        boolean cappedByLevel = !cappedBySpelllvl && links < 5;
+        return new MaxLinks(total, cappedByLevel, cappedBySpelllvl);
+    }
+
     public enum SkillGemType {
         SKILL(), SUPPORT(), AURA();
-
-
     }
 
 

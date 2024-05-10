@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.capability.player.container;
 
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.saveclasses.skill_gem.MaxLinks;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
@@ -37,7 +38,23 @@ public class SkillGemsScreen extends AbstractContainerScreen<SkillGemsMenu> {
             if (i > 3) {
                 xadd = 7;
             }
-            this.addRenderableWidget(new SpellButton(i, x + (i * 25) + xadd, y));
+            var spellb = new SpellButton(i, x + (i * 25) + xadd, y);
+            this.addRenderableWidget(spellb);
+
+            for (int s = 0; s < 5; s++) {
+                boolean can = false;
+
+                MaxLinks suppslots = null;
+
+                if (spellb.getSpell() != null) {
+                    int num = s + 1;
+                    suppslots = spellb.getSpell().getMaxLinks(menu.player);
+                    can = suppslots.links >= num;
+                }
+
+                addRenderableWidget(new SuppGemOverlayButton(can, suppslots, x + (i * 25) + xadd - 2, y + 20 + (s * 18)));
+            }
+
         }
     }
 

@@ -273,6 +273,8 @@ public class DamageEvent extends EffectEvent {
         }
     }
 
+    public boolean absorbedCompletely = false;
+
     // todo this is using total ele dmg and saying only 1 ele, fuck
     public MutableComponent getDamageMessage(DmgByElement info) {
 
@@ -388,6 +390,12 @@ public class DamageEvent extends EffectEvent {
         }
 
         float vanillaDamage = HealthUtils.realToVanilla(target, dmg);
+
+        if (absorbedCompletely) {
+            if (vanillaDamage < 0.0001F) {
+                vanillaDamage = 0.0001F;
+            }
+        }
 
         if (this.data.isCanceled()) {
             cancelDamage();

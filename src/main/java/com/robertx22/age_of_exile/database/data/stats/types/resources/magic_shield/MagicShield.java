@@ -56,6 +56,7 @@ public class MagicShield extends Stat {
         return "Magic Shield";
     }
 
+
     public static float modifyEntityDamage(DamageEvent effect, float dmg) {
 
 
@@ -70,14 +71,20 @@ public class MagicShield extends Stat {
 
                 SoundUtils.playSound(effect.target, SoundEvents.GENERIC_HURT, 0.5F, 1);
                 SoundUtils.playSound(effect.target, SoundEvents.GUARDIAN_HURT, 1, 1);
-           
+
                 if (effect.target instanceof Player) {
                     DeathStatsData.record((Player) effect.target, effect.getElement(), dmgReduced);
                 }
 
                 effect.targetData.getResources().spend(effect.target, ResourceType.magic_shield, dmgReduced);
 
-                return dmg - dmgReduced;
+
+                float finald = dmg - dmgReduced;
+
+                if (finald <= 0) {
+                    effect.absorbedCompletely = true;
+                }
+                return finald;
 
             }
 

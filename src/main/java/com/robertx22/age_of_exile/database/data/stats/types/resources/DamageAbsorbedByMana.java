@@ -7,10 +7,8 @@ import com.robertx22.age_of_exile.saveclasses.unit.ResourceType;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.util.Mth;
-
-import com.robertx22.age_of_exile.database.data.stats.Stat.StatGroup;
+import net.minecraft.world.entity.player.Player;
 
 public class DamageAbsorbedByMana extends Stat {
     public static String GUID = "mana_shield";
@@ -51,25 +49,26 @@ public class DamageAbsorbedByMana extends Stat {
         return "Of Damage Absorbed By Mana";
     }
 
+
     public static float modifyEntityDamage(DamageEvent effect, float dmg) {
 
         StatData data = effect.targetData.getUnit()
-            .getCalculatedStat(DamageAbsorbedByMana.getInstance());
+                .getCalculatedStat(DamageAbsorbedByMana.getInstance());
 
         if (data.getValue() <= 0) {
             return dmg;
         }
 
         float currentMana = effect.targetData.getResources()
-            .getMana();
+                .getMana();
 
         if (currentMana / effect.targetData.getUnit()
-            .manaData()
-            .getValue() > 0.5F) {
+                .manaData()
+                .getValue() > 0.5F) {
 
             float maxMana = effect.targetData.getUnit()
-                .manaData()
-                .getValue();
+                    .manaData()
+                    .getValue();
 
             float dmgReduced = Mth.clamp(dmg * data.getValue() / 100F, 0, currentMana - (maxMana * 0.5F));
 
@@ -80,7 +79,7 @@ public class DamageAbsorbedByMana extends Stat {
                 }
 
                 effect.targetData.getResources()
-                    .spend(effect.target, ResourceType.mana, dmgReduced);
+                        .spend(effect.target, ResourceType.mana, dmgReduced);
 
                 return dmg - dmgReduced;
 

@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.capability.player.helper;
 
-import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
+import com.robertx22.age_of_exile.saveclasses.skill_gem.MaxLinks;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellCastingData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
@@ -29,22 +29,18 @@ public class SocketedGem {
     }
 
 
-    public int getMaxLinks(Player p) {
+    public MaxLinks getMaxLinks(Player p) {
         if (getSkillData() == null) {
-            return 0;
+            return new MaxLinks(0, false, false);
         } else {
-            int links = getSkillData().links;
-
-            links = GameBalanceConfig.get().getTotalLinks(links, p);
-
-            return links;
+            return getSkillData().getMaxLinks(p);
 
         }
     }
 
     public void removeSupportGemsIfTooMany(Player p) {
 
-        if (getSupportDatas().size() > getMaxLinks(p)) {
+        if (getSupportDatas().size() > getMaxLinks(p).links) {
             for (ItemStack s : this.getSupports()) {
                 PlayerUtils.giveItem(s.copy(), p);
                 s.shrink(100);

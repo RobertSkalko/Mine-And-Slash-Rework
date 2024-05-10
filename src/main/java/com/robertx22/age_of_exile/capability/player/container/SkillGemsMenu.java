@@ -62,7 +62,7 @@ public class SkillGemsMenu extends AbstractContainerMenu {
                 index++;
 
                 for (int s = 0; s < GemInventoryHelper.SUPPORT_GEMS_PER_SKILL; s++) {
-                    this.addSlot(new GemSlot(player, SkillGemData.SkillGemType.SUPPORT, data.getGemsInv(), index, xp, 38 + (s * 18)));
+                    this.addSlot(new GemSlot(s, player, SkillGemData.SkillGemType.SUPPORT, data.getGemsInv(), index, xp, 38 + (s * 18)));
                     index++;
                 }
 
@@ -70,7 +70,7 @@ public class SkillGemsMenu extends AbstractContainerMenu {
 
 
             for (int i = 0; i < GemInventoryHelper.TOTAL_AURAS; i++) {
-                this.addSlot(new GemSlot(player, SkillGemData.SkillGemType.AURA, data.getAuraInv(), i, 36 + (i * 18), 148));
+                this.addSlot(new GemSlot(i, player, SkillGemData.SkillGemType.AURA, data.getAuraInv(), i, 36 + (i * 18), 148));
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -85,16 +85,30 @@ public class SkillGemsMenu extends AbstractContainerMenu {
 
         Player p;
 
-        public GemSlot(Player p, SkillGemData.SkillGemType type, Container pContainer, int pSlot, int pX, int pY) {
+        int num;
+
+        public GemSlot(int num, Player p, SkillGemData.SkillGemType type, Container pContainer, int pSlot, int pX, int pY) {
             super(pContainer, pSlot, pX, pY);
             this.type = type;
             this.p = p;
+            this.num = num;
         }
 
         @Override
         public void setByPlayer(ItemStack pStack) {
             Load.Unit(p).gear.setDirty();
             super.setByPlayer(pStack);
+        }
+
+        public boolean canSocket() {
+
+            if (this.type == SkillGemData.SkillGemType.SUPPORT) {
+                int n = num + 1;
+                int slots = Load.player(ClientOnly.getPlayer()).spellCastingData.getSpellData(this.num).getData().getMaxLinks(player).links;
+
+                return slots >= n;
+            }
+            return true;
         }
 
         @Override
@@ -104,7 +118,9 @@ public class SkillGemsMenu extends AbstractContainerMenu {
             if (player != null) {
                 if (data != null && data.canPlayerWear(player)) {
                     if (data.type == type) {
-                        return true;
+                        if (canSocket()) {
+                            return true;
+                        }
                     }
 
                 }

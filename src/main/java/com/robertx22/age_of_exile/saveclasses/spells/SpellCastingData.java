@@ -176,7 +176,7 @@ public class SpellCastingData {
             data.id = id;
             data.type = SkillGemData.SkillGemType.SKILL;
 
-            data.links = 0;
+            data.setLinks(0);
 
             data.perc = (int) ((rankBeforePlusSkills / (float) data.getSpell().max_lvl) * 100);
 
@@ -186,7 +186,9 @@ public class SpellCastingData {
 
                 while (total > 2) {
                     total -= 3;
-                    data.links++;
+
+                    data.setLinks(data.getFlatLinks() + 1);
+
                 }
 
             }
