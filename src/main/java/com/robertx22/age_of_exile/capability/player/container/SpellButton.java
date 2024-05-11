@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.gui.inv_gui.GuiInventoryGrids;
 import com.robertx22.age_of_exile.gui.inv_gui.InvGuiScreen;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.library_of_exile.utils.TextUTIL;
@@ -46,7 +47,15 @@ public class SpellButton extends ImageButton {
     public void renderWidget(GuiGraphics gui, int mouseX, int mouseY, float delta) {
         //  super.renderWidget(gui, mouseX, mouseY, delta);
 
-        gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+
+        boolean flicker = Load.player(ClientOnly.getPlayer()).spellCastingData.learnedSpellButHotbarIsEmpty();
+
+        var mc = Minecraft.getInstance();
+
+        // todo check if this causes seizures
+        float color = flicker ? MathHelper.clamp((mc.player.tickCount % 25 + mc.getPartialTick()) * 0.13f, 0, 3) : 1F;
+
+        gui.setColor(1.0F, color, 1.0F, 1.0F);
         if (hasSpell()) {
             gui.blit(getSpell().getSpell().getIconLoc(), getX(), getY(), BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X, BUTTON_SIZE_X);
         } else {

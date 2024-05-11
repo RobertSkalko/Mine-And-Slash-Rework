@@ -7,6 +7,9 @@ import java.util.Locale;
 
 // to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
+
+    Radius("Radius: %1$sb"),
+
     ATTACK_SPEED_MULTI("Atk Speed Multi"),
     ARROW_DRAW_AMOUNT_MULTI("Bow Draw Amount Multi"),
     PVP_DMG_MULTI("PVP Dmg Multi"),

@@ -97,7 +97,8 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
     public MaxLinks getMaxLinks(Player p) {
         int total = GameBalanceConfig.get().getTotalLinks(links, p);
         boolean cappedBySpelllvl = GameBalanceConfig.get().getTotalLinks(total + 1, p) > total;
-        boolean cappedByLevel = !cappedBySpelllvl && links < 5;
+        boolean cappedByLevel = !cappedBySpelllvl && total < 5;
+
         return new MaxLinks(total, cappedByLevel, cappedBySpelllvl);
     }
 

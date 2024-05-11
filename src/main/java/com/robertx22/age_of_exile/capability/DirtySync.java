@@ -21,6 +21,12 @@ public class DirtySync {
         this.dirty = true;
     }
 
+    // should only be used when you need instant sync
+    public void setDirtyAndSync(Player p) {
+        setDirty();
+        onTickTrySync(p);
+    }
+
     public void onTickTrySync(Entity p) {
         if (dirty) {
             dirty = false;

@@ -43,9 +43,17 @@ public class JewelInvHelper implements IStatCtx {
         }
     }
 
-    public void checkRemoveJewels(Player p) {
+    public int getJewelSocketsMaxStat(Player p) {
         int max = (int) Load.Unit(p).getUnit().getCalculatedStat(JewelSocketStat.getInstance()).getValue();
+        return max;
+    }
 
+    public boolean hasFreeJewelSlots(Player p) {
+        return this.getAllJewels().size() < getJewelSocketsMaxStat(p);
+    }
+
+    public void checkRemoveJewels(Player p) {
+        int max = getJewelSocketsMaxStat(p);
         int total = 0;
 
         List<String> uniques = new ArrayList<>();

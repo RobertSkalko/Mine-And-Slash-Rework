@@ -48,6 +48,12 @@ public class SpellCastingData {
         }
     }
 
+
+    public boolean learnedSpellButHotbarIsEmpty() {
+        return getAllHotbarSpells().isEmpty() && !spells.isEmpty();
+
+    }
+
     public int keyOfSpell(String spell) {
 
         for (Map.Entry<Integer, String> en : hotbar.entrySet()) {

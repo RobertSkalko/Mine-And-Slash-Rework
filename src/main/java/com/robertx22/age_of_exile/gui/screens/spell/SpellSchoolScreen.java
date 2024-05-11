@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.bases.BaseScreen;
+import com.robertx22.age_of_exile.gui.bases.IAlertScreen;
 import com.robertx22.age_of_exile.gui.bases.INamedScreen;
 import com.robertx22.age_of_exile.gui.screens.ILeftRight;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -11,6 +12,7 @@ import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.library_of_exile.utils.GuiUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -20,7 +22,7 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SpellSchoolScreen extends BaseScreen implements INamedScreen, ILeftRight {
+public class SpellSchoolScreen extends BaseScreen implements INamedScreen, ILeftRight, IAlertScreen {
     private static final ResourceLocation BACKGROUND = new ResourceLocation(SlashRef.MODID, "textures/gui/asc_classes/background.png");
 
     static int sizeX = 250;
@@ -176,5 +178,10 @@ public class SpellSchoolScreen extends BaseScreen implements INamedScreen, ILeft
             currentIndex = 0;
         }
         init();
+    }
+
+    @Override
+    public boolean shouldAlert() {
+        return Load.player(ClientOnly.getPlayer()).ascClass.hasFreeAnyPoints(ClientOnly.getPlayer());
     }
 }

@@ -373,21 +373,19 @@ public class EntityData implements ICap, INeededForClient {
 
     }
 
-    public void onDeath() {
+    public void onDeathDoPenalty() {
 
         if (entity instanceof Player p) {
             int loss = (int) (getExpRequiredForLevelUp() * ServerContainer.get().EXP_LOSS_ON_DEATH.get());
             int debt = (int) (getExpRequiredForLevelUp() * ServerContainer.get().EXP_DEBT_ON_DEATH.get());
 
-            if (Load.Unit(p).getLevel() < ServerContainer.get().EXP_DEBT_START_LEVEL.get()) {
-                debt = 0;
-            } else {
-                int maxdebt = (int) (getExpRequiredForLevelUp() * ServerContainer.get().MAX_EXP_DEBT_MULTI.get());
-                this.expDebt += debt;
-                if (debt > maxdebt) {
-                    expDebt = maxdebt;
-                }
+
+            int maxdebt = (int) (getExpRequiredForLevelUp() * ServerContainer.get().MAX_EXP_DEBT_MULTI.get());
+            this.expDebt += debt;
+            if (debt > maxdebt) {
+                expDebt = maxdebt;
             }
+
 
             loss = MathHelper.clamp(loss, 0, exp);
 

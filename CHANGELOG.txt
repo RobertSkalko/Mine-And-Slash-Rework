@@ -56,3 +56,7 @@ v.5.5.1
 - added experimental effect duration overlay
 - magic shield users should now get knocked back on hit
 - QOL improvements to supp gem screen
+- add radius for dmg spells on tooltip
+- added possibly seizure inducing indicator that should hopefully help newbies learn how to socket a spell (Idk how to make a decent "flashing" button)
+- death penalty now only activates after level 25, for both xp loss, xp debt, favor loss and rested xp loss
+- added new highlights if you have points to spend

@@ -57,11 +57,16 @@ public class MainHubButton extends ImageButton {
             RenderUtils.render16Icon(gui, screen.iconLocation(), this.getX() + 80, this.getY() + 6);
         }
         if (shouldAlert) {
+            var mc = Minecraft.getInstance();
+            // float color = MathHelper.clamp((mc.player.tickCount % 25 + mc.getPartialTick()) * 0.3F, 0, 3);
+            gui.setColor(1, 1, 1, 1);
             RenderUtils.render16Icon(gui, EXLAMATION_MARK_TEX, this.getX() + 5, this.getY() + 6);
+            gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+
         }
 
         String str = screen.screenName().translate();
-        
+
 
         if (isHovered()) {
             if (right) {

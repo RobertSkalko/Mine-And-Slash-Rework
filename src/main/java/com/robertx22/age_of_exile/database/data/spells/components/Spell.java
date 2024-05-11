@@ -4,12 +4,14 @@ import com.robertx22.age_of_exile.aoe_data.database.spells.SpellDesc;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
+import com.robertx22.age_of_exile.database.data.spells.components.actions.SpellAction;
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.bases.SpellCastContext;
 import com.robertx22.age_of_exile.database.data.value_calc.MaxLevelProvider;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
+import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
@@ -241,11 +243,10 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         list.add(ExileText.emptyLine().get());
 
         if (true || Screen.hasShiftDown()) {
-
             SpellDesc.getTooltip(ctx.caster, this)
                     .forEach(x -> list.add(Component.literal(x)));
-
         }
+
 
         list.add(ExileText.emptyLine().get());
 
@@ -269,6 +270,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
             list.add(Words.COOLDOWN.locName(getCooldownTicks(ctx) / 20).withStyle(ChatFormatting.YELLOW));
         }
 
+
         int casttime = getCastTimeTicks(ctx);
 
 
@@ -277,6 +279,19 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         } else {
             list.add(Words.CAST_TIME.locName(casttime / 20).withStyle(ChatFormatting.GREEN));
         }
+
+        this.getAttached()
+                .getAllComponents()
+                .forEach(x -> {
+                    x.targets.forEach(a -> {
+                        // adds radius for damage spells
+                        if (x.acts.stream().anyMatch(e -> e.type.equals(SpellAction.DEAL_DAMAGE.GUID())) && a.has(MapField.RADIUS)) {
+                            String rad = MMORPG.formatNumber(a.getOrDefault(MapField.RADIUS, 0D).floatValue());
+                            list.add(Words.Radius.locName(rad).withStyle(ChatFormatting.GOLD));
+                        }
+                    });
+                });
+
 
         list.add(ExileText.emptyLine().get());
 

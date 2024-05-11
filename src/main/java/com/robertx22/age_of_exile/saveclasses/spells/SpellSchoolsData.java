@@ -53,6 +53,10 @@ public class SpellSchoolsData implements IStatCtx {
         return allocated_lvls.getOrDefault(id, 0);
     }
 
+    public boolean hasFreeAnyPoints(LivingEntity entity) {
+        return getFreeSpellPoints(entity) > 0 || getFreePassivePoints(entity) > 0;
+    }
+
     public int getFreeSpellPoints(LivingEntity entity) {
         return (int) (GameBalanceConfig.get().CLASS_POINTS_AT_MAX_LEVEL * LevelUtils.getMaxLevelMultiplier(Load.Unit(entity).getLevel())) - getSpentPoints(PointType.SPELL);
     }

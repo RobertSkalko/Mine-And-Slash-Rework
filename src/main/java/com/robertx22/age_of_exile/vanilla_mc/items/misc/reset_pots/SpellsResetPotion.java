@@ -16,6 +16,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
+import java.util.HashMap;
+
 public class SpellsResetPotion extends AutoItem implements IShapedRecipe {
 
     public SpellsResetPotion() {
@@ -36,6 +38,7 @@ public class SpellsResetPotion extends AutoItem implements IShapedRecipe {
         if (player instanceof Player) {
             Player p = (Player) player;
             Load.player(p).ascClass.reset();
+            Load.player(p).spellCastingData.hotbar = new HashMap<>();
             p.addItem(new ItemStack(Items.GLASS_BOTTLE));
         }
 

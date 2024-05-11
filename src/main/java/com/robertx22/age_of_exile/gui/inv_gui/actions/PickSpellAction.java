@@ -48,7 +48,8 @@ public class PickSpellAction extends GuiAction {
         int slot = (int) data;
 
         Load.player(p).spellCastingData.setHotbar(slot, spell.GUID());
-        Load.player(p).playerDataSync.setDirty();
+
+        Load.player(p).playerDataSync.setDirtyAndSync(p);
     }
 
     @Override
