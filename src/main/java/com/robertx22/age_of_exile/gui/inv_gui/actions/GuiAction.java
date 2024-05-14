@@ -73,7 +73,7 @@ public abstract class GuiAction<T> implements IGUID {
             of(new GuiConfigToggle(v));
 
         }
-  
+
         for (ToggleAutoSalvageRarity.SalvageType type : ToggleAutoSalvageRarity.SalvageType.values()) {
             for (GearRarity rar : ExileDB.GearRarities().getList()) {
                 of(new ToggleAutoSalvageRarity(type, rar));

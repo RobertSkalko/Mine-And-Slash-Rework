@@ -59,7 +59,7 @@ public class ExileDB {
                 .toString();
 
         if (!DimensionConfigs().isRegistered(id)) {
-            return DimensionConfig.DefaultExtra();
+            return ExileDB.DimensionConfigs().get(DimensionConfig.DEFAULT_ID);
         }
 
         return DimensionConfigs().get(id);

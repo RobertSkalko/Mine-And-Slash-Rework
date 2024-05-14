@@ -74,7 +74,7 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
     static ResourceLocation RIGHT = new ResourceLocation(SlashRef.MODID, "textures/gui/main_hub/buttons.png");
 
     static int sizeX = 256;
-    static int sizeY = 178;
+    static int sizeY = 219;
 
     Minecraft mc = Minecraft.getInstance();
 
@@ -99,6 +99,9 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
         }
     }
 
+
+    public static List<List<Stat>> leftStats = new ArrayList<>();
+    public static List<List<Stat>> rightStats = new ArrayList<>();
 
     // todo implement this elsewhere
     public static HashMap<StatType, List<List<Stat>>> STAT_MAP = new HashMap<>();
@@ -149,9 +152,9 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
         addTo(StatType.DAMAGE, Arrays.asList(OffenseStats.ACCURACY.get(), OffenseStats.CRIT_CHANCE.get(), OffenseStats.CRIT_DAMAGE.get()));
         addTo(StatType.DAMAGE, Arrays.asList(SpellChangeStats.COOLDOWN_REDUCTION.get(), SpellChangeStats.CAST_SPEED.get()));
 
-        addTo(StatType.ELE_DAMAGE, OffenseStats.ELEMENTAL_DAMAGE.getAll());
+        addTo(StatType.ELE_DAMAGE, OffenseStats.ELEMENTAL_DAMAGE.getAll().stream().filter(x -> x.getElement().isValid()).collect(Collectors.toList()));
         // addTo(StatType.ELE_DAMAGE, Stats.ELEMENTAL_ANY_WEAPON_DAMAGE.getAll());
-        addTo(StatType.ELE_DAMAGE, OffenseStats.ELEMENTAL_SPELL_DAMAGE.getAll());
+        addTo(StatType.ELE_DAMAGE, OffenseStats.ELEMENTAL_SPELL_DAMAGE.getAll().stream().filter(x -> x.getElement().isValid()).collect(Collectors.toList()));
         addTo(StatType.ELE_DAMAGE, Arrays.asList(ArmorPenetration.getInstance()));
         addTo(StatType.ELE_DAMAGE, new ElementalPenetration(Elements.Elemental).generateAllSingleVariations());
 
@@ -168,6 +171,12 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
         addTo(StatType.RECOVERY, ResourceStats.LEECH_CAP.getAll());
 
         addRemaining(StatType.MISC);
+
+        leftStats.add(Arrays.asList(Health.getInstance(), MagicShield.getInstance(), Mana.getInstance(), Energy.getInstance()));
+        leftStats.add(Arrays.asList(HealthRegen.getInstance(), MagicShieldRegen.getInstance(), ManaRegen.getInstance(), EnergyRegen.getInstance()));
+
+        rightStats.add(Arrays.asList(new ElementalResist(Elements.Fire), new ElementalResist(Elements.Cold), new ElementalResist(Elements.Nature), new ElementalResist(Elements.Shadow)));
+        rightStats.add(Arrays.asList(WeaponDamage.getInstance(), SkillDamage.getInstance(), Armor.getInstance(), DodgeRating.getInstance()));
 
     }
 
@@ -271,16 +280,48 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
             y += MainHubButton.ySize + 0;
         }
 
-        int xp = guiLeft + 30;
-        int yp = guiTop + 118;
+        int xp = guiLeft + 195;
+        int yp = guiTop + 20;
 
+        int i = 0;
         for (StatType type : StatType.values()) {
             publicAddButton(new CharacterStatsButtons(type, xp, yp));
-            xp += 36;
+            yp += 20;
+            i++;
+
+            if (i == 3) {
+                xp += 25;
+                yp = guiTop + 20;
+            }
         }
 
+        int statx = 17;
+        int staty = 103;
 
+        for (List<Stat> stat : leftStats) {
+            addStatButton(false, statx, staty, stat);
+
+            statx += (HubStatButton.xSize + 5);
+        }
+        statx = 200;
+        staty = 103;
+
+        for (List<Stat> stat : rightStats) {
+            addStatButton(true, statx, staty, stat);
+            statx -= (HubStatButton.xSize + 5);
+        }
         publicAddButton(new PlayerGearButton(mc.player, this, this.guiLeft + MainHubScreen.sizeX / 2 - PlayerGearButton.xSize / 2, this.guiTop + 10));
+
+    }
+
+    void addStatButton(boolean isright, int x, int y, List<Stat> stats) {
+
+        int yadd = 0;
+        for (Stat stat : stats) {
+            var statdata = Load.Unit(mc.player).getUnit().getCalculatedStat(stat);
+            publicAddButton(new HubStatButton(isright, statdata, this.guiLeft + x, this.guiTop + y + yadd));
+            yadd += MainHubButton.ySize;
+        }
 
     }
 
@@ -304,16 +345,12 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
 
         super.render(gui, x, y, ticks);
 
-        children().forEach(b -> {
-            //  b.renderToolTip(matrix, x, y);
-        });
-
 
         int p = Load.player(mc.player).statPoints
                 .getFreePoints(mc.player);
         if (p > 0) {
             MutableComponent points = Gui.STATS_POINTS.locName().append(String.valueOf(p));
-            gui.drawString(mc.font, points, guiLeft + sizeX / 2 - mc.font.width(points) / 2, guiTop + sizeY + 10, ChatFormatting.GREEN.getColor());
+            gui.drawString(mc.font, points, guiLeft + 40 - mc.font.width(points) / 2, guiTop + 10, ChatFormatting.GREEN.getColor());
         }
 
     }

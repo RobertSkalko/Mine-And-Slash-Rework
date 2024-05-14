@@ -50,7 +50,7 @@ public class SlashItems {
         station(Professions.COOKING, () -> Items.BREAD);
         station(Professions.SALVAGING, () -> Items.IRON_INGOT);
         station(Professions.GEAR_CRAFTING, () -> Items.GOLD_INGOT);
-        station(Professions.ALCHEMY, () -> Items.CAULDRON);
+        station(Professions.ALCHEMY, () -> Items.IRON_NUGGET);
         station(Professions.ENCHANTING, () -> Items.PAPER);
 
         for (EffectCtx eff : ModEffects.ALL) {

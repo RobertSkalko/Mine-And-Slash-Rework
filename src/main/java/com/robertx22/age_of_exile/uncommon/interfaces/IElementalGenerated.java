@@ -12,8 +12,7 @@ public interface IElementalGenerated<T extends IGUID> extends IGenerated {
 
     default List<T> generateAllSingleVariations() {
         List<T> list = new ArrayList<>();
-        Elements.getAllSingle()
-                .forEach(x -> list.add(newGeneratedInstance(x)));
+        Elements.getAllSingle().forEach(x -> list.add(newGeneratedInstance(x)));
         return list;
 
     }

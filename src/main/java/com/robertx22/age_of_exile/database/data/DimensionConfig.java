@@ -8,6 +8,8 @@ import com.robertx22.library_of_exile.registry.serialization.ISerializable;
 
 public class DimensionConfig implements JsonExileRegistry<DimensionConfig>, ISerializable<DimensionConfig> {
 
+    public static String DEFAULT_ID = "default";
+
     public DimensionConfig() {
     }
 
@@ -52,8 +54,9 @@ public class DimensionConfig implements JsonExileRegistry<DimensionConfig>, ISer
 
     public static DimensionConfig DefaultExtra() {
         DimensionConfig config = new DimensionConfig();
-        config.min_lvl = 25;
+        config.min_lvl = 1;
         config.max_lvl = 100;
+        config.scale_to_nearest_player = true;
         return config;
     }
 

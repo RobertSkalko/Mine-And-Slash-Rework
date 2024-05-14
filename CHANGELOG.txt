@@ -60,3 +60,13 @@ v.5.5.1
 - added possibly seizure inducing indicator that should hopefully help newbies learn how to socket a spell (Idk how to make a decent "flashing" button)
 - death penalty now only activates after level 25, for both xp loss, xp debt, favor loss and rested xp loss
 - added new highlights if you have points to spend
+
+v.5.2.1
+- default dimension config datapack added
+
+v5.2.2
+- fix supp gems
+
+
+v5.2.3
+- fix supp gems

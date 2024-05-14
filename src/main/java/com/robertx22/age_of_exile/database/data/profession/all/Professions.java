@@ -129,6 +129,7 @@ public class Professions {
                 .blockTag(SkillItemTier.TIER0, 15, BlockTags.COAL_ORES)
                 .blockTag(SkillItemTier.TIER1, 20, BlockTags.COPPER_ORES)
                 .blockTag(SkillItemTier.TIER1, 15, BlockTags.REDSTONE_ORES)
+                .blockTag(SkillItemTier.TIER1, 25, BlockTags.LAPIS_ORES)
                 .blockTag(SkillItemTier.TIER2, 50, BlockTags.IRON_ORES)
                 .blockTag(SkillItemTier.TIER3, 75, BlockTags.GOLD_ORES)
                 .blockTag(SkillItemTier.TIER4, 100, BlockTags.EMERALD_ORES)

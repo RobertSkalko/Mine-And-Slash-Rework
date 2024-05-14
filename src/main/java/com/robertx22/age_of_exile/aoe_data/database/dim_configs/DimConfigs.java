@@ -11,7 +11,7 @@ public class DimConfigs implements ExileRegistryInit {
         DimensionConfig.Overworld().addToSerializables();
         DimensionConfig.Nether().addToSerializables();
         DimensionConfig.End().addToSerializables();
-
+        DimensionConfig.DefaultExtra().addToSerializables();
 
     }
 }

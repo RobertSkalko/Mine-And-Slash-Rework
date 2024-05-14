@@ -62,7 +62,7 @@ public class SkillGemsMenu extends AbstractContainerMenu {
                 index++;
 
                 for (int s = 0; s < GemInventoryHelper.SUPPORT_GEMS_PER_SKILL; s++) {
-                    this.addSlot(new GemSlot(s, player, SkillGemData.SkillGemType.SUPPORT, data.getGemsInv(), index, xp, 38 + (s * 18)));
+                    this.addSlot(new GemSlot(i, s, player, SkillGemData.SkillGemType.SUPPORT, data.getGemsInv(), index, xp, 38 + (s * 18)));
                     index++;
                 }
 
@@ -70,7 +70,7 @@ public class SkillGemsMenu extends AbstractContainerMenu {
 
 
             for (int i = 0; i < GemInventoryHelper.TOTAL_AURAS; i++) {
-                this.addSlot(new GemSlot(i, player, SkillGemData.SkillGemType.AURA, data.getAuraInv(), i, 36 + (i * 18), 148));
+                this.addSlot(new GemSlot(i, 0, player, SkillGemData.SkillGemType.AURA, data.getAuraInv(), i, 36 + (i * 18), 148));
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -86,11 +86,13 @@ public class SkillGemsMenu extends AbstractContainerMenu {
         Player p;
 
         int num;
+        int slotIndex;
 
-        public GemSlot(int num, Player p, SkillGemData.SkillGemType type, Container pContainer, int pSlot, int pX, int pY) {
+        public GemSlot(int num, int slotindex, Player p, SkillGemData.SkillGemType type, Container pContainer, int pSlot, int pX, int pY) {
             super(pContainer, pSlot, pX, pY);
             this.type = type;
             this.p = p;
+            this.slotIndex = slotindex;
             this.num = num;
         }
 
@@ -103,10 +105,14 @@ public class SkillGemsMenu extends AbstractContainerMenu {
         public boolean canSocket() {
 
             if (this.type == SkillGemData.SkillGemType.SUPPORT) {
-                int n = num + 1;
-                int slots = Load.player(ClientOnly.getPlayer()).spellCastingData.getSpellData(this.num).getData().getMaxLinks(player).links;
+                var data = Load.player(p).spellCastingData.getSpellData(this.num);
 
-                return slots >= n;
+                // todo why is this null
+                if (data.getData() == null) {
+                    return false;
+                }
+                int slots = data.getData().getMaxLinks(player).links;
+                return slots > this.slotIndex;
             }
             return true;
         }
