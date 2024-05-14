@@ -62,6 +62,10 @@ public class ElementalResistEffect extends BaseDamageEffect {
 
     @Override
     public boolean canActivate(DamageEvent effect, StatData data, Stat stat) {
+        if (stat.getElement() == Elements.Elemental) {
+            // we use ele res as a way to transfer to other stats already
+            return false;
+        }
         if (effect.data.getBoolean(EventData.RESISTED_ALREADY)) {
             return false;
         }
