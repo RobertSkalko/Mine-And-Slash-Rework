@@ -70,3 +70,6 @@ v5.2.2
 
 v5.2.3
 - fix supp gems
+
+v.5.2.4
+- should fix spells sometimes not hitting targets when hitting a wall or the floor

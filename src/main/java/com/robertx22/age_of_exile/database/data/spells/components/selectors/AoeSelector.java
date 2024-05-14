@@ -56,7 +56,10 @@ public class AoeSelector extends BaseTargetSelector {
 
     public static boolean canHit(Vec3 pos, Entity en) {
 
-        if (Explosion.getSeenPercent(pos, en) >= 0.4) {
+
+        float perc = Explosion.getSeenPercent(pos, en);
+
+        if (perc >= 0.4) {
             return true;
         }
         // todo this doesnt work all the time..
