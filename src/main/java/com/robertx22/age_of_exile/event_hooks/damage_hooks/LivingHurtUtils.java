@@ -43,7 +43,7 @@ public class LivingHurtUtils {
 
         LivingEntity target = event.getTargetEntity();
 
-        
+
         if (target.level().isClientSide) {
             return;
         }
@@ -80,7 +80,7 @@ public class LivingHurtUtils {
 
             if (data.getAttackerEntity() instanceof Player p) {
 
-                if (weapondata == null) {
+                if (weapondata == null || !weapondata.GetBaseGearType().weapon_type.damage_validity_check.isValid(data.getSource())) {
                     Load.Unit(p).unarmedAttack(data);
                     return;
                 }

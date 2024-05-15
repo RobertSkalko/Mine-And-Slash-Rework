@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.uncommon.enumclasses;
 
+import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.tags.TagList;
 import com.robertx22.age_of_exile.tags.all.ElementTags;
 import com.robertx22.age_of_exile.tags.all.SpellTags;
@@ -7,6 +8,7 @@ import com.robertx22.age_of_exile.tags.imp.ElementTag;
 import com.robertx22.age_of_exile.tags.imp.SpellTag;
 import com.robertx22.library_of_exile.registry.IGUID;
 import net.minecraft.ChatFormatting;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,6 +60,10 @@ public enum Elements implements IGUID {
         return this != NONE;
     }
 
+    public boolean shouldShowInStatPanel() {
+        return this != NONE && this != Elemental;
+    }
+
     public boolean isSingleElement() {
         return this.multiElements.isEmpty();
     }
@@ -74,6 +80,9 @@ public enum Elements implements IGUID {
         return this.format + this.icon + " " + str + ChatFormatting.GRAY;
     }
 
+    public ResourceLocation getIconLocation() {
+        return SlashRef.guiId("stat_icons/element_icons/" + GUID());
+    }
 
     private static List<Elements> allSingle = Arrays.stream(Elements.values()).filter(x -> x.isSingleElement() && x.isValid()).collect(Collectors.toList());
     private static List<Elements> ele = Arrays.stream(Elements.values()).filter(x -> x.tags.contains(ElementTags.ELEMENTAL) && x.isSingleElement() && x.isValid()).collect(Collectors.toList());

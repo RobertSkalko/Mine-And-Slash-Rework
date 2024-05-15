@@ -267,8 +267,10 @@ public class DamageEvent extends EffectEvent {
 
         if (this.data.isBasicAttack()) {
             if (this.attackInfo != null && attackInfo.weaponData != null) {
-                float multi = attackInfo.weaponData.GetBaseGearType().getGearSlot().getBasicDamageMulti();
-                this.addMoreMulti(Words.WEAPON_BASIC_ATTACK_DMG_MULTI.locName(), EventData.NUMBER, multi);
+                if (!data.getBoolean(EventData.UNARMED_ATTACK)) {
+                    float multi = attackInfo.weaponData.GetBaseGearType().getGearSlot().getBasicDamageMulti();
+                    this.addMoreMulti(Words.WEAPON_BASIC_ATTACK_DMG_MULTI.locName(), EventData.NUMBER, multi);
+                }
             }
         }
     }

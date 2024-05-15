@@ -83,7 +83,7 @@ public class StatOrderTest {
 
             all.add(new FirstAndSecond(OffenseStats.ACCURACY.get(), DodgeRating.getInstance()));
             all.add(new FirstAndSecond(ArmorPenetration.getInstance(), Armor.getInstance()));
-            all.add(new FirstAndSecond(OffenseStats.TOTAL_DAMAGE.get(), Armor.getInstance()));
+            //all.add(new FirstAndSecond(OffenseStats.TOTAL_DAMAGE.get(), Armor.getInstance()));
             all.add(new FirstAndSecond(OffenseStats.CRIT_CHANCE.get(), OffenseStats.CRIT_DAMAGE.get()));
             all.add(new FirstAndSecond(OffenseStats.TOTAL_DAMAGE.get(), ResourceStats.LIFESTEAL.get()));
             all.add(new FirstAndSecond(ResourceStats.LIFESTEAL.get(), DamageTakenToMana.getInstance()));

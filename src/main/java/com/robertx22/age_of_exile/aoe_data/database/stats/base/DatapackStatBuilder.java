@@ -6,6 +6,7 @@ package com.robertx22.age_of_exile.aoe_data.database.stats.base;
 // then either. .generateGenericWith(Elemenets.values)   or .addSpecific(Elements.fire)
 // T can be a wrapper class with multiple enums!
 
+import com.robertx22.age_of_exile.database.data.stats.StatGuiGroup;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DataPackStatAccessor;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DataPackStatEffect;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DatapackStat;
@@ -34,6 +35,8 @@ public class DatapackStatBuilder<T extends IGUID> {
     private Function<T, String> locDescMaker;
     private Function<T, Elements> elementMaker;
 
+
+    private StatGuiGroup group = StatGuiGroup.NONE;
 
     public DatapackStatBuilder() {
 
@@ -178,6 +181,11 @@ public class DatapackStatBuilder<T extends IGUID> {
         return this;
     }
 
+    public DatapackStatBuilder<T> getGroup(StatGuiGroup group) {
+        this.group = group;
+        return this;
+    }
+
     public DatapackStatBuilder<T> setLocName(Function<T, String> id) {
         this.locNameMaker = id;
         return this;
@@ -208,6 +216,7 @@ public class DatapackStatBuilder<T extends IGUID> {
                     stat.ele = elementMaker.apply(x.getKey());
                     stat.locdesc = locDescMaker.apply(x.getKey());
                     stat.locname = locNameMaker.apply(x.getKey());
+                    stat.gui_group = this.group;
 
                     if (usesMoreMulti) {
                         stat.setUsesMoreMultiplier();

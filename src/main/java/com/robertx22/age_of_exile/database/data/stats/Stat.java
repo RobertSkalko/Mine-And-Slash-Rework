@@ -5,6 +5,8 @@ import com.robertx22.age_of_exile.database.data.stats.datapacks.base.BaseDatapac
 import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageIncreaseEffect;
 import com.robertx22.age_of_exile.database.data.stats.name_regex.StatNameRegex;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
+import com.robertx22.age_of_exile.gui.screens.stat_gui.StatIconAndNumberButton;
+import com.robertx22.age_of_exile.gui.screens.stat_gui.StatPanelButton;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.UNICODE;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
@@ -72,6 +74,8 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     private MultiUseType multiUseType = MultiUseType.MULTIPLY_STAT;
     public boolean minus_is_good = false; // so stats like minus mana cost dont have nasty red tooltip
     public boolean show_in_gui = true;
+
+    public StatGuiGroup gui_group = StatGuiGroup.NONE;
 
 
     public void setChanceBasedStatDefaults() {
@@ -203,6 +207,7 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
         return ExileRegistryTypes.STAT;
     }
 
+    public static ResourceLocation MISSING_ICON = new ResourceLocation(SlashRef.MODID, "textures/gui/stat_icons/missing.png");
     public static ResourceLocation DEFAULT_ICON = new ResourceLocation(SlashRef.MODID, "textures/gui/stat_icons/default.png");
 
     public ResourceLocation getIconLocation() {
@@ -217,10 +222,26 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
             if (ClientTextureUtils.textureExists(id)) {
                 cachedIcon = id;
             } else {
-                cachedIcon = Stat.DEFAULT_ICON;
+                cachedIcon = Stat.MISSING_ICON;
             }
         }
         return cachedIcon;
+    }
+
+    public ResourceLocation getIconForRenderingInGroup() {
+        if (this.gui_group.isValid()) {
+            return this.getElement().getIconLocation(); // todo will i use other ways to group render stats?
+        }
+
+        var icon = getIconForRendering();
+        if (icon.equals(MISSING_ICON)) {
+            return DEFAULT_ICON;
+        }
+        return icon;
+    }
+
+    public int getStatGuiPanelButtonYSize() {
+        return gui_group.isValid() ? StatPanelButton.ySize + StatIconAndNumberButton.ySize : StatPanelButton.ySize;
     }
 
     @Override

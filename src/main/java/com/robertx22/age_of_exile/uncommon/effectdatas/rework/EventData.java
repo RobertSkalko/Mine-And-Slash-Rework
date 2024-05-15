@@ -33,6 +33,7 @@ public class EventData {
     public static String ACCURACY = "accuracy";
     public static String SPELL = "spell";
     public static String WEAPON_TYPE = "weapon_type";
+    public static String UNARMED_ATTACK = "unarmed_attack";
     public static String IS_BASIC_ATTACK = "is_basic_atk";
     public static String IS_ATTACK_FULLY_CHARGED = "is_charged_atk";
     public static String ATTACK_COOLDOWN = "attack_cooldown";

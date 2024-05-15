@@ -70,7 +70,7 @@ public class MMORPG {
 
 
     // DISABLE WHEN PUBLIC BUILD
-    public static boolean RUN_DEV_TOOLS = false;
+    public static boolean RUN_DEV_TOOLS = true;
 
     public static String formatNumber(float num) {
         if (num < 10) {
@@ -81,7 +81,7 @@ public class MMORPG {
     }
 
     public static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.00");
-    
+
 
     public static boolean RUN_DEV_TOOLS_REMOVE_WHEN_DONE = RUN_DEV_TOOLS; // this exists to stop me from making dumb mistakes when testing and forgetting about it
 

@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.Block;
 public interface IBaseAutoLoc extends IGUID {
 
     enum AutoLocGroup {
+        StatGroup,
         Enchants,
         LootModifier,
         Foods,

@@ -35,6 +35,7 @@ import com.robertx22.age_of_exile.uncommon.datasaving.UnitNbt;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
 import com.robertx22.age_of_exile.uncommon.effectdatas.SpendResourceEvent;
+import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
@@ -449,14 +450,12 @@ public class EntityData implements ICap, INeededForClient {
                 .getValue();
 
         if (num > 0) {
-
             DamageEvent dmg = EventBuilder.ofDamage(data, data.getAttackerEntity(), data.getTargetEntity(), num)
                     .setupDamage(AttackType.hit, weptype, PlayStyle.STR)
                     .setIsBasicAttack()
                     .build();
-
+            dmg.data.setBoolean(EventData.UNARMED_ATTACK, true);
             dmg.Activate();
-
         }
 
     }

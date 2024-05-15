@@ -40,13 +40,6 @@ public class ArmorEffect extends InCodeStatEffect<DamageEvent> {
 
         EffectiveArmor = Mth.clamp(EffectiveArmor, 0, armor.getMaxMulti());
 
-        /*
-        var id = effect.data.getNumber(EventData.NUMBER);
-        float num = id.number;
-        num *= EffectiveArmor;
-        id.number = num;
-         */
-
         float defense = EffectiveArmor * 100F;
 
         effect.getLayer(StatLayers.Defensive.PHYS_MITIGATION, EventData.NUMBER, Side()).reduce(defense);

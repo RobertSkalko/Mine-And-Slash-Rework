@@ -73,3 +73,8 @@ v5.2.3
 
 v.5.2.4
 - should fix spells sometimes not hitting targets when hitting a wall or the floor
+- reduced map mob dmg per tier from 0.05 to 0.03
+- changed weapon type data in basegears. Now allows you to reduce the amount of checks needed in case you want to make say gun damage from other mods work.
+Just set source check to ANY, and tag_and_id_check check to MATCH_ANY and include whatever the bullet's dmg id is ideally.
+If it's doing something dumb like directly attacking as a player, you can also skip this tag check and just allow the damage by setting tag check to ANY
+- basic attacking with a weapon like bow will now act as an unarmed attack, but you will benefit from the weapon damage, just not the damage multiplier of the weapon
