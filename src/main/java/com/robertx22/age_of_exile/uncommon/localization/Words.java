@@ -8,6 +8,15 @@ import java.util.Locale;
 // to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
 
+    SoftcapInfo("This is the maximum possible value of this stat unless it's modified by for example Max X Resistance stat."),
+    HardcapInfo("This is the maximum possible value of this stat. It can't be modified."),
+    MincapInfo("This is the minimum possible value of this stat. It can't be modified."),
+    UsableValueInfo("Usable Value of the stat. This is used for stuff like Armor to turn it into % damage reduction, the higher level your target, the more value you need to protect against it."),
+    CurrentValueInfo("Current stat Value"),
+    Effects("Effects:"),
+    Conditions("Conditions:"),
+
+    WorksOnEvent("Works on Events:"),
     Radius("Radius: %1$sb"),
 
     ATTACK_SPEED_MULTI("Atk Speed Multi"),
@@ -134,6 +143,7 @@ public enum Words implements IAutoLocName {
     Talents("Talents"),
 
     PressAltForStatInfo("Press Alt for Stat Desc"),
+    PressForMoreInfo("Click for More Info"),
 
     MustBeGear("Must be a Gear Item"),
 

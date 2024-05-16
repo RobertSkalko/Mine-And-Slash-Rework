@@ -109,6 +109,7 @@ public class ResourceStats {
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
                 x.min = 0;
+                x.max = 10;
                 x.is_perc = true;
                 x.scaling = StatScaling.NORMAL;
                 x.group = Stat.StatGroup.RESTORATION;

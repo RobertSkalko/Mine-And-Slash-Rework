@@ -40,6 +40,9 @@ public class RegeneratePercentStat extends Stat {
     Function<EntityData, Float> maxGetter;
 
     private RegeneratePercentStat(Stat statRestored, ResourceType rtype, Function<EntityData, Float> getmax) {
+        this.min = 0;
+        this.max = 25;
+        
         this.statRestored = statRestored;
         this.scaling = StatScaling.NONE;
         this.type = rtype;

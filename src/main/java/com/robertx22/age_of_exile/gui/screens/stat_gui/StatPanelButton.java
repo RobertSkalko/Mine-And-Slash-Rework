@@ -5,13 +5,20 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.library_of_exile.utils.RenderUtils;
+import com.robertx22.library_of_exile.utils.TextUTIL;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StatPanelButton extends ImageButton {
 
@@ -23,7 +30,8 @@ public class StatPanelButton extends ImageButton {
 
 
     public StatPanelButton(StatScreen screen, StatData stat, int xPos, int yPos) {
-        super(xPos, yPos, stat.GetStat().gui_group.isValid() ? xSize : xSize - StatIconAndNumberButton.xSize, ySize, 0, 0, 0, stat.GetStat().gui_group.isValid() ? SlashRef.guiId("stat_gui/group_stat_panel") : SlashRef.guiId("stat_gui/single_stat_panel"), (button) -> {
+        super(xPos, yPos, stat.GetStat().gui_group.isValid() ? xSize : xSize - StatIconAndNumberButton.xSize, ySize, 0, 0, 0, stat.GetStat().gui_group.isValid() ? SlashRef.guiId("stat_gui/group_stat_panel") : SlashRef.guiId("stat_gui/single_stat_panel"), xSize, ySize, (button) -> {
+            screen.setInfo(stat);
         });
 
         var data = Load.Unit(ClientOnly.getPlayer());
@@ -49,13 +57,18 @@ public class StatPanelButton extends ImageButton {
 
     @Override
     public void render(GuiGraphics gui, int x, int y, float ticks) {
-        //super.render(gui, x, y, ticks);
+        super.render(gui, x, y, ticks);
 
+        if (this.isHoveredOrFocused()) {
+            List<MutableComponent> tooltip = new ArrayList<>();
+            tooltip.add(Words.PressForMoreInfo.locName());
+            this.setTooltip(Tooltip.create(TextUTIL.mergeList(tooltip)));
+        }
 
         if (stat == null || stat.GetStat() == null) {
             return;
         }
-        gui.blit(this.resourceLocation, getX(), getY(), 0, 0, this.width, height, width, height);
+        //gui.blit(this.resourceLocation, getX(), getY(), 0, 0, this.width, height, width, height);
 
 
         int iconX = 2;
@@ -68,7 +81,7 @@ public class StatPanelButton extends ImageButton {
 
         RenderUtils.render16Icon(gui, stat.GetStat().getIconForRenderingInGroup(), getX() + iconX, getY() + iconY);
 
-        gui.drawString(Minecraft.getInstance().font, Component.literal(stattext), getX() + numX, getY() + numY, ChatFormatting.YELLOW.getColor());
+        gui.drawString(Minecraft.getInstance().font, Component.literal(stattext), getX() + numX, getY() + numY, ChatFormatting.AQUA.getColor());
 
 //        GuiUtils.renderScaledText(gui, getX() + numX, getY() + numY, 1F, stattext, ChatFormatting.YELLOW);
 

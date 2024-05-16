@@ -78,20 +78,34 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     public StatGuiGroup gui_group = StatGuiGroup.NONE;
 
 
-    public void setChanceBasedStatDefaults() {
-        min = 0;
-        max = 100;
-        is_long = true;
-        is_perc = true;
-        scaling = StatScaling.NONE;
+    public boolean hasSoftCap() {
+        return this.softcap > 0;
     }
 
     public final float getHardCap() {
         return this.max;
     }
 
+    public final String getHardCapTooltipText() {
+        if (max >= Integer.MAX_VALUE) {
+            return "Inf";
+        }
+        return ((int) this.max) + "";
+    }
+
+    public final String getMinCapTooltipText() {
+        if (min <= Integer.MIN_VALUE) {
+            return "Inf";
+        }
+        return ((int) this.min) + "";
+    }
+
     public final float getSoftCap(Unit data) {
         return getHardCap() - softcap + getAdditionalMax(data);
+    }
+
+    public final float getDefaultSoftCap() {
+        return getHardCap() - softcap;
     }
 
     public float getAdditionalMax(Unit data) {

@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.gui.bases.BaseScreen;
 import com.robertx22.age_of_exile.gui.bases.INamedScreen;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -101,6 +102,24 @@ public class StatScreen extends BaseScreen implements INamedScreen {
 
 
     // todo
+
+    public void setInfo(StatData stat) {
+
+        this.renderables.removeIf(x -> x instanceof IStatInfoButton);
+        this.children().removeIf(x -> x instanceof IStatInfoButton);
+
+
+        int x = guiLeft + 38;
+        int y = guiTop + 172;
+
+        for (StatInfoButton.StatInfoType type : StatInfoButton.StatInfoType.values()) {
+            if (type.shouldShow(stat)) {
+                this.publicAddButton(new StatInfoButton(type, stat, x, y));
+                x += StatInfoButton.xSize + 12;
+            }
+        }
+
+    }
 
     public void setupStatsForFilterType() {
 

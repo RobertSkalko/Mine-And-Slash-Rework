@@ -44,7 +44,7 @@ public class SpellChangeStats {
             {
                 x.is_perc = false;
                 x.base = 0;
-                x.min = -100;
+                x.min = 0;
                 x.max = 10;
             }).
             build();

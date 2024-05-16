@@ -20,6 +20,8 @@ public class AilmentChance extends Stat {
         this.ailment = ailment;
         this.is_perc = true;
         this.statEffect = new Effect();
+        this.min = 0;
+        this.max = 100;
     }
 
     private class Effect extends BaseDamageEffect {

@@ -42,7 +42,7 @@ public class StatPriority implements IAutoLocName {
 
     @Override
     public String locNameLangFileGUID() {
-        return SlashRef.MODID + "stat_priority." + id;
+        return SlashRef.MODID + ".stat_priority." + id;
     }
 
     @Override
