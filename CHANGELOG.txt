@@ -78,4 +78,7 @@ v.5.2.4
 Just set source check to ANY, and tag_and_id_check check to MATCH_ANY and include whatever the bullet's dmg id is ideally.
 If it's doing something dumb like directly attacking as a player, you can also skip this tag check and just allow the damage by setting tag check to ANY
 - basic attacking with a weapon like bow will now act as an unarmed attack, but you will benefit from the weapon damage, just not the damage multiplier of the weapon
-- added experimental new stat panel that shows a lot of useful info 
+- added experimental new stat panel that shows a lot of useful info like:
+	- min, max, softcap amounts
+	- what the stat actually does (if it supports localized tooltips)
+	- what event it works on and it's priority

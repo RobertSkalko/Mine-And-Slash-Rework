@@ -74,23 +74,8 @@ public class StatInfoButton extends ImageButton implements IStatInfoButton {
     }
 
     public enum StatInfoType {
-        USABLE_VALUE("usable_value", false) {
-            @Override
-            public MutableComponent getRenderText(StatData data, EntityData unit) {
-                return Component.literal(data.GetStat() instanceof IUsableStat u ? u.getUsableValue((int) data.getValue(), unit.getLevel()) + "%" : "");
-            }
 
-            @Override
-            public boolean shouldShow(StatData data) {
-                return data.GetStat() instanceof IUsableStat;
-            }
-
-            @Override
-            public List<MutableComponent> getTooltip(StatData data) {
-                return Arrays.asList(Words.UsableValueInfo.locName());
-            }
-        },
-        CURRENT_VALUE("current_value", false) {
+        CURRENT_VALUE("current_value", true) {
             @Override
             public MutableComponent getRenderText(StatData data, EntityData unit) {
                 String p = data.GetStat().IsPercent() ? "%" : "";
@@ -107,7 +92,22 @@ public class StatInfoButton extends ImageButton implements IStatInfoButton {
                 return Arrays.asList(Words.CurrentValueInfo.locName());
             }
         },
+        USABLE_VALUE("usable_value", true) {
+            @Override
+            public MutableComponent getRenderText(StatData data, EntityData unit) {
+                return Component.literal(data.GetStat() instanceof IUsableStat u ? u.getUsableValue((int) data.getValue(), unit.getLevel()) + "%" : "");
+            }
 
+            @Override
+            public boolean shouldShow(StatData data) {
+                return data.GetStat() instanceof IUsableStat;
+            }
+
+            @Override
+            public List<MutableComponent> getTooltip(StatData data) {
+                return Arrays.asList(Words.UsableValueInfo.locName());
+            }
+        },
         MIN_VAL("min", true) {
             @Override
             public boolean shouldShow(StatData data) {

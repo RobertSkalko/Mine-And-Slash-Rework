@@ -26,8 +26,9 @@ public class StatIconAndNumberButton extends ImageButton {
     StatData stat;
 
 
-    public StatIconAndNumberButton(StatData stat, int xPos, int yPos) {
+    public StatIconAndNumberButton(StatScreen screen, StatData stat, int xPos, int yPos) {
         super(xPos, yPos, xSize, ySize, 0, 0, 0, SlashRef.guiId("stat_gui/stat_icon"), xSize, ySize, (button) -> {
+            screen.setInfo(stat);
 
         });
 

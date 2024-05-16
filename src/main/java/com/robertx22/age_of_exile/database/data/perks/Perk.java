@@ -142,10 +142,10 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
 
             //list.add(ExileText.newLine().get());
             if (!(stats.get(0).getStat() instanceof LearnSpellStat)) {
-                list.add(Words.PressAltForStatInfo.locName()
-                        .withStyle(ChatFormatting.BLUE));
+                list.add(Words.PressAltForStatInfo.locName().withStyle(ChatFormatting.BLUE));
             }
 
+          
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -43,12 +43,12 @@ public class StatPanelButton extends ImageButton {
             for (Stat s : ExileDB.Stats().getFilterWrapped(x -> x.gui_group.isValid() && x.gui_group == stat.GetStat().gui_group).list) {
                 if (s.getElement().shouldShowInStatPanel()) {
                     var statdata = data.getUnit().getCalculatedStat(s);
-                    screen.publicAddButton(new StatIconAndNumberButton(statdata, getX() + (i * StatIconAndNumberButton.xSize), getY() + ySize));
+                    screen.publicAddButton(new StatIconAndNumberButton(screen, statdata, getX() + (i * StatIconAndNumberButton.xSize), getY() + ySize));
                     i++;
                 }
             }
         } else {
-            screen.publicAddButton(new StatIconAndNumberButton(stat, getX() + 145, getY()));
+            screen.publicAddButton(new StatIconAndNumberButton(screen, stat, getX() + 145, getY()));
 
         }
 
