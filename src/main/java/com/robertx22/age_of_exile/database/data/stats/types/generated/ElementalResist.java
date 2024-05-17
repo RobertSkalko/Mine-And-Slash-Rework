@@ -7,9 +7,11 @@ import com.robertx22.age_of_exile.database.data.stats.effects.defense.ElementalR
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.ElementalStat;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.wrappers.MapWrapper;
+import net.minecraft.ChatFormatting;
 
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +45,23 @@ public class ElementalResist extends ElementalStat {
         this.max = 90;
         this.softcap = 15;
 
+    }
+
+    @Override
+    public ChatFormatting getStatGuiTooltipNumberColor(StatData data) {
+
+        float val = data.getValue();
+
+        if (val > 75) {
+            return ChatFormatting.LIGHT_PURPLE;
+        }
+        if (val > 70) {
+            return ChatFormatting.GREEN;
+        }
+        if (val > 25) {
+            return ChatFormatting.YELLOW;
+        }
+        return ChatFormatting.RED;
     }
 
     static HashMap<Elements, MaxElementalResist> cached = new HashMap<>();

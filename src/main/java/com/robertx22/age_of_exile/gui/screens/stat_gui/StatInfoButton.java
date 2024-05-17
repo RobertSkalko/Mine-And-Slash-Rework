@@ -92,6 +92,23 @@ public class StatInfoButton extends ImageButton implements IStatInfoButton {
                 return Arrays.asList(Words.CurrentValueInfo.locName());
             }
         },
+        DMG_MULTI("dmg_multi", true) {
+            @Override
+            public MutableComponent getRenderText(StatData data, EntityData unit) {
+                String p = "x" + MMORPG.DECIMAL_FORMAT.format(data.getMoreStatTypeMulti());
+                return Component.literal(p);
+            }
+
+            @Override
+            public boolean shouldShow(StatData data) {
+                return data.getMoreStatTypeMulti() != 1 && data.GetStat().getMultiUseType() == Stat.MultiUseType.MULTIPLICATIVE_DAMAGE;
+            }
+
+            @Override
+            public List<MutableComponent> getTooltip(StatData data) {
+                return Arrays.asList(Words.DmgMultiInfo.locName());
+            }
+        },
         USABLE_VALUE("usable_value", true) {
             @Override
             public MutableComponent getRenderText(StatData data, EntityData unit) {
@@ -175,6 +192,9 @@ public class StatInfoButton extends ImageButton implements IStatInfoButton {
                 List<MutableComponent> t = new ArrayList<>();
 
                 Stat stat = data.GetStat();
+
+                t.add(Component.literal("Id: ").append(stat.GUID()));
+
 
                 // todo ideally all stats should be reworked into this one or similar
 

@@ -5,6 +5,7 @@ public enum TagType {
     Spell("spell"),
     Element("element"),
     Mob("mob"),
+    Dungeon("dungeon"),
     GearSlot("gear_slot");
 
     public String id;

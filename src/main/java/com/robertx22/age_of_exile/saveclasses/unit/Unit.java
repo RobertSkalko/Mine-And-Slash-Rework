@@ -61,9 +61,10 @@ public class Unit {
         if (getStats().stats == null) {
             this.initStats();
         }
-        return getStats().stats.getOrDefault(guid, new StatData(guid, 0, 0));
+        return getStats().stats.getOrDefault(guid, new StatData(guid, 0, 1));
     }
 
+    /*
     public StatData getOrCreateCalculatedStat(String guid) {
         if (getStats().stats == null) {
             this.initStats();
@@ -72,6 +73,8 @@ public class Unit {
         getStats().stats.put(guid, data);
         return data;
     }
+
+     */
 
     public Unit() {
 

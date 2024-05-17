@@ -5,11 +5,13 @@ import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.ICreativeTabNbt;
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.utils.LoadSave;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.InteractionHand;
@@ -139,6 +141,10 @@ public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt {
             if (data != null) {
                 for (Component c : data.getTooltip(stack, true)) {
                     tooltip.add(c);
+                }
+                Player p = ClientOnly.getPlayer();
+                if (p != null && p.isCreative()) {
+                    tooltip.add(Words.DRAG_NO_WORK_CREATIVE.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
                 }
             }
         } catch (Exception e) {

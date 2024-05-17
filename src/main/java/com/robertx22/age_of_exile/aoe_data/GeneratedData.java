@@ -39,6 +39,7 @@ import com.robertx22.age_of_exile.database.data.profession.buffs.StatBuffs;
 import com.robertx22.age_of_exile.database.data.stats.layers.StatLayers;
 import com.robertx22.age_of_exile.database.data.support_gem.SupportGems;
 import com.robertx22.age_of_exile.maps.dungeon_reg.Dungeons;
+import com.robertx22.age_of_exile.maps.spawned_map_mobs.SpawnedMobs;
 
 public class GeneratedData {
 
@@ -91,6 +92,7 @@ public class GeneratedData {
 
         new Runewords().registerAll();
 
+        SpawnedMobs.init();
         Dungeons.init();
 
         Professions.init();

@@ -219,6 +219,9 @@ public class EntityData implements ICap, INeededForClient {
         }
         LoadSave.Save(statusEffects, nbt, STATUSES);
 
+        if (unit != null) {
+            UnitNbt.Save(nbt, unit);
+        }
     }
 
     @Override
@@ -245,7 +248,10 @@ public class EntityData implements ICap, INeededForClient {
 
         this.statusEffects = loadOrBlank(EntityStatusEffectsData.class, new EntityStatusEffectsData(), nbt, STATUSES, new EntityStatusEffectsData());
 
-
+        this.unit = UnitNbt.Load(nbt);
+        if (this.unit == null) {
+            this.unit = new Unit();
+        }
     }
 
     @Override
@@ -267,10 +273,6 @@ public class EntityData implements ICap, INeededForClient {
         LoadSave.Save(leech, nbt, LEECH);
         LoadSave.Save(customExactStats, nbt, CUSTOM_STATS);
 
-
-        if (unit != null) {
-            UnitNbt.Save(nbt, unit);
-        }
 
         if (customExactStats != null) {
             CustomExactStats.Save(nbt, customExactStats);
@@ -321,10 +323,6 @@ public class EntityData implements ICap, INeededForClient {
             this.isNewbie = nbt.getBoolean(NEWBIE_STATUS);
         }
 
-        this.unit = UnitNbt.Load(nbt);
-        if (this.unit == null) {
-            this.unit = new Unit();
-        }
 
         try {
             this.summonedPetData = loadOrBlank(SummonedPetData.class, new SummonedPetData(), nbt, PET, new SummonedPetData());

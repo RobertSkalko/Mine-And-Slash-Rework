@@ -24,7 +24,7 @@ public class MaxSpellLevel extends Stat implements IGenerated<MaxSpellLevel> {
 
     @Override
     public String locDescForLangFile() {
-        return "";
+        return MaxAllSpellLevels.DESC;
     }
 
     @Override

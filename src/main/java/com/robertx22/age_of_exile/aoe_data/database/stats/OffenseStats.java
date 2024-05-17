@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.aoe_data.database.stat_effects.StatEffects;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.DatapackStatBuilder;
 import com.robertx22.age_of_exile.aoe_data.database.stats.base.EmptyAccessor;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
+import com.robertx22.age_of_exile.database.data.stats.StatGuiGroup;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DataPackStatAccessor;
 import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
@@ -100,6 +101,7 @@ public class OffenseStats {
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
             .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
+            .getGroup(StatGuiGroup.ELE_DAMAGE)
             .setLocName(x -> x.dmgName + " Damage")
             .setLocDesc(x -> "Increases All dmg of that element, both spells and attacks")
             .modifyAfterDone(x -> {
@@ -132,6 +134,7 @@ public class OffenseStats {
             .setSide(EffectSides.Source)
             .setUsesMoreMultiplier()
             .addCondition(StatConditions.ELEMENT_MATCH_STAT)
+            .getGroup(StatGuiGroup.ELE_SPELL_DAMAGE)
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(SpellTags.magic))
             .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
             .setLocName(x -> x.dmgName + " Spells Damage")

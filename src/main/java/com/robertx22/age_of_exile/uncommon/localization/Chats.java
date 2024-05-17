@@ -32,7 +32,7 @@ public enum Chats implements IAutoLocName {
     NOT_MNS_WEAPON("You need a Mine and Slash Weapon (Imbued with Stats) to Cast spells."),
     CAST_FAILED("[Cast Fail]: "),
     STACKS_DONT_MULTIPLY_STATS("[Buff Stacks Don't multiply Stats]"),
-    SOULLESS_GEAR_INFO("This Gear Lacks a Soul\nSouls contain Mine and Slash Stats\nItems without Souls are mostly useless\nSouls Are Crafted with Stations or Drop from Mobs"),
+    SOULLESS_GEAR_INFO("This Gear Lacks a Soul\nSouls contain Mine and Slash Stats\nSouls Are Crafted with Stations or Drop from Mobs"),
 
     CHARACTER_LOAD_INFO("CLICK to Load this Character\n\nCharacter Feature saves:\n- Your level and exp\n- Your spells, stats, talents, hotbar setup\n\nIt does not save your gear, gems jewels etc.\n\nEach Character starts from Level 1"),
     NO_DUPLICATE_AURA("You can't equip duplicate aura gems."),

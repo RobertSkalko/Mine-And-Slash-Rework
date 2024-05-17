@@ -4,9 +4,7 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 
 // todo use this for every stat, and make sure each is used for its own event.s
@@ -17,7 +15,6 @@ public class StatPriority implements IAutoLocName {
     // todo does this need to be a datapack
     public static HashMap<String, StatPriority> MAP = new HashMap<>();
 
-    public static List<StatPriority> ALL = new ArrayList<>();
 
     private static StatPriority damage(String id, int priority) {
         return new StatPriority(id, DamageEvent.ID, priority);

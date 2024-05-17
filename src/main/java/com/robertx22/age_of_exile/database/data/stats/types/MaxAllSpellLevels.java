@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 
 public class MaxAllSpellLevels extends Stat {
 
+    public static String DESC = "Adds to Spell Levels. Each spell can only have +5 levels above their normal maximum!";
 
     public MaxAllSpellLevels() {
         this.is_perc = false;
@@ -19,7 +20,7 @@ public class MaxAllSpellLevels extends Stat {
 
     @Override
     public String locDescForLangFile() {
-        return "";
+        return DESC;
     }
 
     @Override

@@ -4,12 +4,14 @@ package com.robertx22.age_of_exile.maps;
 import com.robertx22.age_of_exile.capability.world.WorldData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.league.LeagueMechanic;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.maps.feature.DungeonFeature;
 import com.robertx22.age_of_exile.maps.generator.BuiltRoom;
 import com.robertx22.age_of_exile.maps.generator.ChunkProcessData;
 import com.robertx22.age_of_exile.maps.generator.DungeonBuilder;
 import com.robertx22.age_of_exile.maps.processors.DataProcessor;
 import com.robertx22.age_of_exile.maps.processors.DataProcessors;
+import com.robertx22.age_of_exile.tags.imp.DungeonTag;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import net.minecraft.core.BlockPos;
@@ -89,6 +91,11 @@ public class ProcessChunkBlocks {
                 var map = Load.mapAt(level, pos);
 
                 map.dungeonid = builder.dungeon.GUID();
+
+                if (map.mobs.isEmpty()) {
+                    var mobs = ExileDB.MapMobs().getFilterWrapped(x -> builder.dungeon.tags.containsAny(x.possible_dungeon_tags.getTags(DungeonTag.SERIALIZER))).random();
+                    map.mobs = mobs.GUID();
+                }
 
                 for (ChunkPos cpos : terrainChunks) {
                     if (!level.hasChunk(cpos.x, cpos.z)) {

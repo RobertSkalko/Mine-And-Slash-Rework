@@ -10,9 +10,13 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulData;
 import com.robertx22.age_of_exile.uncommon.interfaces.IRarityItem;
+import com.robertx22.age_of_exile.uncommon.localization.Words;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -56,6 +60,11 @@ public class CraftedSoulItem extends AutoItem implements ICreativeTabTiered, IRa
         if (soul != null) {
             for (Component c : soul.getTooltip(pStack, false)) {
                 list.add(c);
+            }
+
+            Player p = ClientOnly.getPlayer();
+            if (p != null && p.isCreative()) {
+                list.add(Words.DRAG_NO_WORK_CREATIVE.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.maps.dungeon_reg;
 
 import com.robertx22.age_of_exile.maps.room_adders.*;
+import com.robertx22.age_of_exile.tags.all.DungeonTags;
 
 public class Dungeons {
 
@@ -8,15 +9,15 @@ public class Dungeons {
 
         Dungeon.Builder.of("cement", "Cemetery", new CementeryAdder()).weight(2000).build();
 
-        Dungeon.Builder.of("warped", "Warped Forest", new WarpedRoomAdder()).weight(2000).build();
-        Dungeon.Builder.of("wn", "Nature's End", new WideNatureRoomAdder()).weight(2000).build();
+        Dungeon.Builder.of("warped", "Warped Forest", new WarpedRoomAdder()).tags(DungeonTags.FOREST).weight(2000).build();
+        Dungeon.Builder.of("wn", "Nature's End", new WideNatureRoomAdder()).tags(DungeonTags.FOREST).weight(2000).build();
         Dungeon.Builder.of("bastion", "The Bastion", new BastionRoomAdder()).weight(2000).build();
         Dungeon.Builder.of("sewer2", "Slime Sewers", new Sewer2RoomAdder()).weight(2000).build();
 
         Dungeon.Builder.of("pyramid", "The Pyramid", new PyramidRoomAdder()).weight(500).build();
 
 
-        Dungeon.Builder.of("nature", "Natural", new NatureRoomAdder()).weight(300).build();
+        Dungeon.Builder.of("nature", "Natural", new NatureRoomAdder()).tags(DungeonTags.FOREST).weight(300).build();
         Dungeon.Builder.of("brick", "Brickhouse", new BrickRoomAdder()).setIsOnlyAsAdditionalRooms().weight(100).build();
         Dungeon.Builder.of("it", "Ice Temple", new IceTempleRoomAdder()).weight(1000).build();
         Dungeon.Builder.of("mossy_brick", "Mossy Temple", new MossyBrickRoomAdder()).weight(750).build();

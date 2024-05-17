@@ -63,7 +63,7 @@ public class SupportGems {
 
         new SupportGem("gmp_barrage", "Greater Barrage Projectiles", PlayStyle.DEX, 1.5F,
                 Arrays.asList(
-                        new StatMod(-65, -65, OffenseStats.TOTAL_DAMAGE.get(), ModType.MORE),
+                        new StatMod(-70, -70, OffenseStats.TOTAL_DAMAGE.get(), ModType.MORE),
                         new StatMod(20, 50, OffenseStats.PROJECTILE_DAMAGE.get(), ModType.FLAT),
                         new StatMod(4, 4, SpellChangeStats.PROJECTILE_COUNT.get(), ModType.FLAT),
                         new StatMod(1, 1, SpellChangeStats.PROJECTILE_BARRAGE.get(), ModType.FLAT)
@@ -74,7 +74,7 @@ public class SupportGems {
 
         new SupportGem("gmp", "Greater Multiple Projectiles", PlayStyle.DEX, 1.5F,
                 Arrays.asList(
-                        new StatMod(-65, -65, OffenseStats.TOTAL_DAMAGE.get(), ModType.MORE),
+                        new StatMod(-70, -70, OffenseStats.TOTAL_DAMAGE.get(), ModType.MORE),
                         new StatMod(20, 50, OffenseStats.PROJECTILE_DAMAGE.get(), ModType.FLAT),
                         new StatMod(4, 4, SpellChangeStats.PROJECTILE_COUNT.get(), ModType.FLAT)
                 ))

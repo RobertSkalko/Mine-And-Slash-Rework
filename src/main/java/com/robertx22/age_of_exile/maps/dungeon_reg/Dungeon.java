@@ -6,6 +6,9 @@ import com.robertx22.age_of_exile.maps.DungeonRoom;
 import com.robertx22.age_of_exile.maps.generator.RoomType;
 import com.robertx22.age_of_exile.maps.room_adders.BaseRoomAdder;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.tags.TagList;
+import com.robertx22.age_of_exile.tags.all.DungeonTags;
+import com.robertx22.age_of_exile.tags.imp.DungeonTag;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
@@ -28,7 +31,7 @@ public class Dungeon implements IAutoGson<Dungeon>, JsonExileRegistry<Dungeon>, 
 
     public boolean can_be_main = true;
 
-    public String mob_list = ""; // todo
+    public TagList<DungeonTag> tags = new TagList<DungeonTag>(Arrays.asList(DungeonTags.DEFAULT));
 
     public List<String> entrances = new ArrayList<>();
     public List<String> four_ways = new ArrayList<>();
@@ -171,6 +174,11 @@ public class Dungeon implements IAutoGson<Dungeon>, JsonExileRegistry<Dungeon>, 
 
         public Builder weight(int w) {
             this.dungeon.weight = w;
+            return this;
+        }
+
+        public Builder tags(DungeonTag... tags) {
+            this.dungeon.tags.addAll(Arrays.asList(tags));
             return this;
         }
 

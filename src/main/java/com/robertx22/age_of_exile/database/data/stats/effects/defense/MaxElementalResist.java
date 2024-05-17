@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.database.data.stats.effects.defense;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
+import com.robertx22.age_of_exile.database.data.stats.StatGuiGroup;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.data.stats.types.ElementalStat;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -19,7 +20,9 @@ public class MaxElementalResist extends ElementalStat {
 
     public MaxElementalResist(Elements element) {
         super(element);
-        this.min = -300;
+        this.min = -100;
+
+        this.gui_group = StatGuiGroup.MAX_RESIST;
 
         this.group = StatGroup.ELEMENTAL;
         this.is_perc = true;

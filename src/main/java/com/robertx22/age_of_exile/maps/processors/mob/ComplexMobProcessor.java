@@ -3,9 +3,9 @@ package com.robertx22.age_of_exile.maps.processors.mob;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.maps.generator.ChunkProcessData;
-import com.robertx22.age_of_exile.maps.mobs.SpawnedMob;
 import com.robertx22.age_of_exile.maps.processors.DataProcessor;
 import com.robertx22.age_of_exile.maps.processors.helpers.MobBuilder;
+import com.robertx22.age_of_exile.maps.spawned_map_mobs.SpawnedMob;
 import com.robertx22.age_of_exile.tags.imp.MobTag;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
@@ -36,6 +36,8 @@ public class ComplexMobProcessor extends DataProcessor {
     public void processImplementation(String key, BlockPos pos, Level world, ChunkProcessData data) {
 
         try {
+
+            var map = Load.mapAt(world, pos);
 
             String[] parts = StringUTIL.split(key, ";");
 
@@ -89,8 +91,7 @@ public class ComplexMobProcessor extends DataProcessor {
                 for (String x : parts) {
                     for (MobTag tag : MobTag.getAll()) {
                         if (x.equals(tag.GUID())) {
-                            filter = SpawnedMob.getAll()
-                                    .stream()
+                            filter = map.getMobSpawns().mobs.stream()
                                     .filter(m -> m.tags.contains(tag));
                         }
                     }
@@ -98,7 +99,7 @@ public class ComplexMobProcessor extends DataProcessor {
             }
 
             if (filter == null) {
-                filter = SpawnedMob.getAll().stream().filter(x -> true); // todo..
+                filter = map.getMobSpawns().mobs.stream().filter(x -> true); // todo..
             }
 
             if (type == null) {
@@ -106,7 +107,7 @@ public class ComplexMobProcessor extends DataProcessor {
 
                     filter = filter.filter(m -> m.canBeBoss);
                 }
-                type = RandomUtils.weightedRandom(filter.collect(Collectors.toList())).type;
+                type = RandomUtils.weightedRandom(filter.collect(Collectors.toList())).getType();
             }
 
             // temps

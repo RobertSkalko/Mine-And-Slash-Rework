@@ -44,7 +44,7 @@ public class DataPackStatEffect implements IStatEffect {
 
         var prio = GetPriority();
 
-        t.add(prio.locName().append(" (" + +prio.priority + ")"));
+        t.add(Component.literal("Priority: ").append(prio.locName()).append(" (" + +prio.priority + ")"));
 
         t.add(side.word.locName());
 

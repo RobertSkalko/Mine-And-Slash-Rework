@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.gui.screens.stat_gui.StatPanelButton;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.UNICODE;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
+import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.modify.IStatCtxModifier;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -230,6 +231,8 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
 
     transient ResourceLocation cachedIcon = null;
 
+    transient Boolean exists = null;
+
     public ResourceLocation getIconForRendering() {
         if (cachedIcon == null) {
             ResourceLocation id = getIconLocation();
@@ -242,6 +245,14 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
         return cachedIcon;
     }
 
+    public ResourceLocation getIconForRenderingWithDefault() {
+        if (exists == null) {
+            ResourceLocation id = getIconLocation();
+            this.exists = ClientTextureUtils.textureExists(id);
+        }
+        return exists ? getIconForRendering() : DEFAULT_ICON;
+    }
+
     public ResourceLocation getIconForRenderingInGroup() {
         if (this.gui_group.isValid()) {
             return this.getElement().getIconLocation(); // todo will i use other ways to group render stats?
@@ -252,6 +263,10 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
             return DEFAULT_ICON;
         }
         return icon;
+    }
+
+    public ChatFormatting getStatGuiTooltipNumberColor(StatData data) {
+        return ChatFormatting.YELLOW;
     }
 
     public int getStatGuiPanelButtonYSize() {

@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.gui.screens.stat_gui;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
-import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -38,14 +37,11 @@ public class StatPanelButton extends ImageButton {
 
 
         if (stat.GetStat().gui_group.isValid()) {
-
             int i = 0;
-            for (Stat s : ExileDB.Stats().getFilterWrapped(x -> x.gui_group.isValid() && x.gui_group == stat.GetStat().gui_group).list) {
-                if (s.getElement().shouldShowInStatPanel()) {
-                    var statdata = data.getUnit().getCalculatedStat(s);
-                    screen.publicAddButton(new StatIconAndNumberButton(screen, statdata, getX() + (i * StatIconAndNumberButton.xSize), getY() + ySize));
-                    i++;
-                }
+            for (Stat st : stat.GetStat().gui_group.getSameGroupStats()) {
+                var statdata = data.getUnit().getCalculatedStat(st);
+                screen.publicAddButton(new StatIconAndNumberButton(screen, statdata, getX() + (i * (StatIconAndNumberButton.xSize + 15)), getY() + ySize));
+                i++;
             }
         } else {
             screen.publicAddButton(new StatIconAndNumberButton(screen, stat, getX() + 145, getY()));
@@ -79,7 +75,7 @@ public class StatPanelButton extends ImageButton {
 
         String stattext = stat.GetStat().gui_group.isValid() ? stat.GetStat().gui_group.locName().getString() : stat.GetStat().locName().getString();
 
-        RenderUtils.render16Icon(gui, stat.GetStat().getIconForRenderingInGroup(), getX() + iconX, getY() + iconY);
+        RenderUtils.render16Icon(gui, stat.GetStat().getIconForRenderingWithDefault(), getX() + iconX, getY() + iconY);
 
         gui.drawString(Minecraft.getInstance().font, Component.literal(stattext), getX() + numX, getY() + numY, ChatFormatting.AQUA.getColor());
 

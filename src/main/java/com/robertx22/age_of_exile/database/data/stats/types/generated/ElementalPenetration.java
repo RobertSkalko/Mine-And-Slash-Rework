@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.database.data.stats.types.generated;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
+import com.robertx22.age_of_exile.database.data.stats.StatGuiGroup;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageEffect;
 import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.database.data.stats.types.ElementalStat;
@@ -30,6 +31,7 @@ public class ElementalPenetration extends ElementalStat {
         this.min = 0;
         this.group = StatGroup.ELEMENTAL;
 
+        this.gui_group = StatGuiGroup.ELE_PENE;
         this.statEffect = new Effect();
     }
 

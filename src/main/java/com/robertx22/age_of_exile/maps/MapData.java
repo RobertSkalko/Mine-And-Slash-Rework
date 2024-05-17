@@ -1,6 +1,8 @@
 package com.robertx22.age_of_exile.maps;
 
 import com.robertx22.age_of_exile.database.data.league.LeagueMechanics;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.maps.spawned_map_mobs.SpawnedMobList;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
@@ -30,6 +32,12 @@ public class MapData {
     private HashMap<String, Integer> lives = new HashMap<>();
 
     public String dungeonid = "";
+
+    public String mobs = "";
+
+    public SpawnedMobList getMobSpawns() {
+        return ExileDB.MapMobs().get(mobs);
+    }
 
     public int getLives(Player p) {
         int cur = lives.getOrDefault(p.getStringUUID(), map.getRarity().map_lives);
@@ -64,6 +72,7 @@ public class MapData {
         data.chunkZ = cp.z;
 
         data.leagues.setupOnMapStart(map, p);
+
 
         return data;
 

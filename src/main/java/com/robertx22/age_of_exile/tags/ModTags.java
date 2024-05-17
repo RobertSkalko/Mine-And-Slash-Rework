@@ -9,6 +9,7 @@ public class ModTags {
     public static SpellTags SPELL = new SpellTags();
     public static SlotTags GEAR_SLOT = new SlotTags();
     public static ElementTags ELEMENT = new ElementTags();
+    public static DungeonTags DUNGEON = new DungeonTags();
 
     public static void init() {
 
@@ -17,6 +18,7 @@ public class ModTags {
         SlotTags.init();
         SpellTags.init();
         ElementTags.init();
+        DungeonTags.init();
 
     }
 

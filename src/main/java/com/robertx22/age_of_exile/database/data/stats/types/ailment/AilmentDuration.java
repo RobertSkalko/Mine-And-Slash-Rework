@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.database.data.stats.types.ailment;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
+import com.robertx22.age_of_exile.database.data.stats.StatGuiGroup;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 
 public class AilmentDuration extends Stat {
@@ -11,7 +12,7 @@ public class AilmentDuration extends Stat {
     public AilmentDuration(Ailment ailment) {
         this.ailment = ailment;
         this.is_perc = true;
-
+        this.gui_group = StatGuiGroup.AILMENT_DURATION;
     }
 
     @Override

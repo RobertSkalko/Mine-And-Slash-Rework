@@ -41,6 +41,7 @@ import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
 import com.robertx22.age_of_exile.maps.dungeon_reg.Dungeon;
+import com.robertx22.age_of_exile.maps.spawned_map_mobs.SpawnedMobList;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.action.StatEffect;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.condition.StatCondition;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.MapManager;
@@ -198,6 +199,11 @@ public class ExileDB {
     public static ExileRegistryContainer<Dungeon> Dungeons() {
         return Database.getRegistry(ExileRegistryTypes.DUNGEON);
     }
+
+    public static ExileRegistryContainer<SpawnedMobList> MapMobs() {
+        return Database.getRegistry(ExileRegistryTypes.SPAWNED_MOBS);
+    }
+
 
     public static ExileRegistryContainer<StatLayer> StatLayers() {
         return Database.getRegistry(ExileRegistryTypes.STAT_LAYER);

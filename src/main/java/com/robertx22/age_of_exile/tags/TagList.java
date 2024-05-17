@@ -36,6 +36,10 @@ public class TagList<T extends ModTag> {
         return tags.contains(tag.GUID());
     }
 
+    public boolean containsAny(List<T> tag) {
+        return tag.stream().anyMatch(x -> tags.contains(x.GUID()));
+    }
+
     public void add(T t) {
         tags.add(t.GUID());
     }

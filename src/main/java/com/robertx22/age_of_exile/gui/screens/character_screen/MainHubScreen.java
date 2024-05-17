@@ -177,7 +177,7 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
         leftStats.add(Arrays.asList(HealthRegen.getInstance(), MagicShieldRegen.getInstance(), ManaRegen.getInstance(), EnergyRegen.getInstance()));
 
         rightStats.add(Arrays.asList(new ElementalResist(Elements.Fire), new ElementalResist(Elements.Cold), new ElementalResist(Elements.Nature), new ElementalResist(Elements.Shadow)));
-        rightStats.add(Arrays.asList(WeaponDamage.getInstance(), SkillDamage.getInstance(), Armor.getInstance(), DodgeRating.getInstance()));
+        rightStats.add(Arrays.asList(OffenseStats.CRIT_CHANCE.get(), OffenseStats.CRIT_DAMAGE.get(), Armor.getInstance(), DodgeRating.getInstance()));
 
     }
 

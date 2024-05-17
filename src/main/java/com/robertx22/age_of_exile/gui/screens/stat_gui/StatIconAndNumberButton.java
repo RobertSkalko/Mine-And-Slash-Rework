@@ -8,7 +8,6 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.library_of_exile.utils.GuiUtils;
 import com.robertx22.library_of_exile.utils.RenderUtils;
 import com.robertx22.library_of_exile.utils.TextUTIL;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Tooltip;
@@ -48,6 +47,9 @@ public class StatIconAndNumberButton extends ImageButton {
             List<Component> tooltip = new ArrayList<>();
             var text = stat.GetStat().locName().append(": " + CharacterStatsButtons.getStatString(stat.GetStat(), Load.Unit(ClientOnly.getPlayer())));
             tooltip.add(text);
+
+            tooltip.addAll(stat.GetStat().getCutDescTooltip());
+
             this.setTooltip(Tooltip.create(TextUTIL.mergeList(tooltip)));
         }
 
@@ -63,7 +65,7 @@ public class StatIconAndNumberButton extends ImageButton {
 
         RenderUtils.render16Icon(gui, stat.GetStat().getIconForRenderingInGroup(), getX() + iconX - 4, getY() + iconY - 3);
 
-        GuiUtils.renderScaledText(gui, getX() + numX, getY() + numY, 1F, stattext, ChatFormatting.YELLOW);
+        GuiUtils.renderScaledText(gui, getX() + numX, getY() + numY, 1F, stattext, stat.GetStat().getStatGuiTooltipNumberColor(stat));
 
 
     }

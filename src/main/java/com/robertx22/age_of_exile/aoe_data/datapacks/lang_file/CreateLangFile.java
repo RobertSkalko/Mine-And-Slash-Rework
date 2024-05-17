@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatGuiGroup;
 import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.gui.screens.stat_gui.StatGuiGroupSection;
 import com.robertx22.age_of_exile.loot.LootModifierEnum;
 import com.robertx22.age_of_exile.tags.ModTag;
 import com.robertx22.age_of_exile.tags.TagType;
@@ -159,11 +160,16 @@ public class CreateLangFile {
 
         list.addAll(Arrays.asList(Chats.values()));
         list.addAll(Arrays.asList(Words.values()));
+        list.addAll(Arrays.asList(StatGuiGroupSection.values()));
         list.addAll(Arrays.asList(Formatter.values()));
         list.addAll(Arrays.asList(Gui.values()));
         list.addAll(Arrays.asList(Itemtips.values()));
         list.addAll(Arrays.asList(StatGuiGroup.values()));
-        list.addAll(Arrays.asList(StatPriority.ALL.toArray(new StatPriority[0])));
+
+        for (StatPriority prio : StatPriority.MAP.values()) {
+            list.add(prio);
+        }
+
 
         //
 

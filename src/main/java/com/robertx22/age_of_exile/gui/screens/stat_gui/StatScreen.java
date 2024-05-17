@@ -40,6 +40,7 @@ public class StatScreen extends BaseScreen implements INamedScreen {
 
     }
 
+
     int currentElement = 0;
     public List<Stat> stats = new ArrayList<>();
     //   int elementsAmount = 1;
@@ -49,6 +50,15 @@ public class StatScreen extends BaseScreen implements INamedScreen {
 
         this.children().clear();
         this.renderables.clear();
+
+        int secX = guiLeft + 9;
+        int secY = guiTop + 18;
+
+        for (StatGuiGroupSection sec : StatGuiGroupSection.values()) {
+            this.publicAddButton(new StatSectionButton(this, sec, secX, secY));
+            secY += StatSectionButton.ySize + 2;
+        }
+
 
         //  this.children().removeIf(x -> x instanceof StatPanelButton || x instanceof StatIconAndNumberButton);
 
@@ -121,16 +131,17 @@ public class StatScreen extends BaseScreen implements INamedScreen {
 
     }
 
-    public void setupStatsForFilterType() {
+    public void showStats(List<Stat> stats) {
 
-        this.stats = getStatsToList();
+        this.stats = stats;
         this.currentElement = 0;
+
+        setupStatButtons();
     }
 
-    public List<Stat> getStatsToList() {
+    public List<Stat> getAllStats() {
 
         if (true) {
-
 
             var stats = Load.Unit(ClientOnly.getPlayer()).getUnit().getStats().stats.values().stream().filter(x -> x.GetStat().show_in_gui).map(x -> x.GetStat()).collect(Collectors.toList());
 
@@ -156,8 +167,9 @@ public class StatScreen extends BaseScreen implements INamedScreen {
     protected void init() {
         super.init();
 
-        setupStatsForFilterType();
-        setupStatButtons();
+
+        showStats(StatGuiGroupSection.CORE.getStats());
+      
 
     }
 

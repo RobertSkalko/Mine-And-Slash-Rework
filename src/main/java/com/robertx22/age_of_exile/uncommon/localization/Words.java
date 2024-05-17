@@ -7,12 +7,14 @@ import java.util.Locale;
 
 // to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
+    DRAG_NO_WORK_CREATIVE("Drag and Drop Interactions Do-NOT work in Creative Mode!"),
 
     SoftcapInfo("This is the maximum possible value of this stat unless it's modified by for example Max X Resistance stat."),
     HardcapInfo("This is the maximum possible value of this stat. It can't be modified."),
     MincapInfo("This is the minimum possible value of this stat. It can't be modified."),
     UsableValueInfo("Usable Value of the stat. This is used for stuff like Armor to turn it into % damage reduction, the higher level your target, the more value you need to protect against it."),
     CurrentValueInfo("Current stat Value"),
+    DmgMultiInfo("Damage Multiplier. This is a multiplicative damage source"),
     Effects("Effects:"),
     Conditions("Conditions:"),
 

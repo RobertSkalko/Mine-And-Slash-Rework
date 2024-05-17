@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.database.data.stats.types.ailment;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
+import com.robertx22.age_of_exile.database.data.stats.StatGuiGroup;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageEffect;
 import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
@@ -20,6 +21,7 @@ public class AilmentProcStat extends Stat {
 
 
         this.statEffect = new Effect();
+        this.gui_group = StatGuiGroup.AILMENT_PROC_CHANCE;
     }
 
     private class Effect extends BaseDamageEffect {
