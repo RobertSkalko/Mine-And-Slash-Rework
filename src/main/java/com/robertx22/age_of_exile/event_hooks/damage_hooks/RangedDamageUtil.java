@@ -24,9 +24,10 @@ public class RangedDamageUtil {
         if (source.is(DamageTypes.PLAYER_ATTACK)) {
             return true;
         } else {
-            var type = gear.GetBaseGearType();
 
             if (gear != null) {
+                var type = gear.GetBaseGearType();
+
                 return type.weapon_type.damage_validity_check.isValid(source);
             }
             return false;

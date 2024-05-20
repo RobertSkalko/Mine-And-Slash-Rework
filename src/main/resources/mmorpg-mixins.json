@@ -14,6 +14,7 @@
     "EntityMixin",
     "StopMobDropWornGearInMapsMixin",
     "DamageSourceMixin",
+    "DamageConflictCheckMixin",
     "AttributeMixin",
     "StopFireInDungeonMixin",
     "RecipeTest"

@@ -57,7 +57,7 @@ public abstract class LivingEntityMixin implements LivingEntityAccesor {
 
     } // ENSURE MY SPECIAL DAMAGE ISNT LOWERED BY ARMOR, ENCHANTS ETC
 
-    
+
     @Inject(method = "getDamageAfterMagicAbsorb", at = @At(value = "RETURN"), cancellable = true)
     public void hookenchreturn(DamageSource source, float amount, CallbackInfoReturnable<Float> ci) {
         LivingEntity en = (LivingEntity) (Object) this;
@@ -90,5 +90,19 @@ public abstract class LivingEntityMixin implements LivingEntityAccesor {
             e.printStackTrace();
         }
     }
+
+/*
+    @ModifyVariable(method = "actuallyHurt", at = @At(value = "HEAD", ordinal = 0), argsOnly = false, ordinal = 0)
+    public float reduceHealPerLevel(float amount, DamageSource source) {
+        if (source instanceof DamageSourceDuck du) {
+            if (du.hasMnsDamageOverride()) {
+                return du.getMnsDamage();
+            }
+        }
+        return amount;
+
+    }
+
+ */
 
 }

@@ -12,10 +12,12 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Hea
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.vanilla_mc.packets.EfficientMobUnitPacket;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.utils.RandomUtils;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobCategory;
 
@@ -32,9 +34,43 @@ public class Unit {
     private StatContainer stats = new StatContainer();
 
 
+    public void toNbt(CompoundTag main) {
+        CompoundTag nbt = new CompoundTag();
+        int i = 0;
+        for (StatData stat : stats.stats.values()) {
+            CompoundTag tag = new CompoundTag();
+            tag.putFloat("v", stat.getValue());
+            tag.putFloat("m", stat.getMoreStatTypeMulti());
+            tag.putString("i", stat.getId());
+            nbt.put("" + i, tag);
+            i++;
+        }
+        main.put(SlashRef.MODID + "_unit", nbt);
+        main.putInt(SlashRef.MODID + "_unit_sn", stats.stats.size());
+
+    }
+
+    public void fromNbt(CompoundTag main) {
+
+        this.stats = new StatContainer();
+
+        CompoundTag nbt = main.getCompound(SlashRef.MODID + "_unit");
+
+        int num = main.getInt(SlashRef.MODID + "_unit_sn");
+
+        for (int i = 0; i < num; i++) {
+            CompoundTag tag = nbt.getCompound(i + "");
+            String id = tag.getString("i");
+            float val = tag.getFloat("v");
+            float mul = tag.getFloat("m");
+            StatData data = new StatData(id, val, mul);
+            stats.stats.put(data.getId(), data);
+        }
+
+    }
+
     public boolean isBloodMage() {
-        return getCalculatedStat(BloodUser.getInstance())
-                .getValue() > 0;
+        return getCalculatedStat(BloodUser.getInstance()).getValue() > 0;
     }
 
     public void clearStats() {

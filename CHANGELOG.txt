@@ -88,3 +88,8 @@ same with mmorpg_entity_config > mmorpg_entity
 - added map_mob_list datapacks. 
 - added tags to map dungeon types. By default, all maps and all mob lists have a "default" tag meaning they can spawn anywhere
 But you're free to make say a mob list containing spiders spawn only in a spider forest dungeon, or maybe some modded mobs..?
+- unused uber items wont show in creative anymore
+- lowered restrictions on rarity drops a bit, epic and unique can now drop outside maps
+- tried to improve proj spell hit code
+- tried to optimize perf a bit (manually saving unitnbt now)
+- reduced map mob dmg even more

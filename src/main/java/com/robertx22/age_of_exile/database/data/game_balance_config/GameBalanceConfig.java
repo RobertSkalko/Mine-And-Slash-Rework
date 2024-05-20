@@ -44,7 +44,7 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     public int MAX_ASCENDANCY_POINTS = 9;
 
     public double HP_MOB_BONUS_PER_MAP_TIER = 0.1;
-    public double DMG_MOB_BONUS_PER_MAP_TIER = 0.03;
+    public double DMG_MOB_BONUS_PER_MAP_TIER = 0.01;
 
     public double CRAFTED_GEAR_POTENTIAL_MULTI = 0.5;
     public int PROPHECY_GAIN_PER_MOB = 10;

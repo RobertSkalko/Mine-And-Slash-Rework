@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.database.data.currency.base.IShapedRecipe;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.MapBlueprint;
+import com.robertx22.age_of_exile.mmorpg.registers.common.ICreativeIgnoreOption;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
@@ -24,7 +25,7 @@ import java.util.List;
 
 import static com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils.splitLongText;
 
-public class UberBossMapItem extends AutoItem implements IShapedRecipe {
+public class UberBossMapItem extends AutoItem implements IShapedRecipe, ICreativeIgnoreOption {
 
     public int uberTier;
     public UberEnum uber;
@@ -33,6 +34,11 @@ public class UberBossMapItem extends AutoItem implements IShapedRecipe {
         super(new Properties().stacksTo(1));
         this.uberTier = uberTier;
         this.uber = uber;
+    }
+
+    @Override
+    public boolean shouldShowInCreative() {
+        return ExileDB.UberBoss().isRegistered(uber.id);
     }
 
     @Override

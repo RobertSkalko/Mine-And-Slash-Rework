@@ -23,6 +23,7 @@ public class NewDamageMain {
             }
         });
 
+        // todo this isnt last sometimes, and other mods might modify it..
         ExileEvents.DAMAGE_AFTER_CALC.register(new EventConsumer<>() {
             @Override
             public void accept(ExileEvents.OnDamageEntity event) {

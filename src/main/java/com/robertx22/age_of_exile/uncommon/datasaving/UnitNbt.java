@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.uncommon.datasaving;
 
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
-import com.robertx22.library_of_exile.utils.LoadSave;
 import net.minecraft.nbt.CompoundTag;
 
 public class UnitNbt {
@@ -13,19 +12,34 @@ public class UnitNbt {
             return null;
         }
 
-        return LoadSave.Load(Unit.class, new Unit(), nbt, LOC);
+        Unit unit = new Unit();
+
+        try {
+            unit.fromNbt(nbt);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return unit;
+
+        // return LoadSave.Load(Unit.class, new Unit(), nbt, LOC);
 
     }
 
     public static void Save(CompoundTag nbt, Unit gear) {
-
         if (nbt == null) {
             return;
         }
 
-        if (gear != null) {
-            LoadSave.Save(gear, nbt, LOC);
+        try {
+            gear.toNbt(nbt);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
+
+        // if (gear != null) {
+        //    LoadSave.Save(gear, nbt, LOC);
+        //}
 
     }
 }

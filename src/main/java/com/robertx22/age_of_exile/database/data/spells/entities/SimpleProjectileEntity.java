@@ -38,7 +38,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -122,6 +121,8 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
         this.xTile = -1;
         this.yTile = -1;
         this.zTile = -1;
+
+        this.setSoundEvent(SoundEvents.EMPTY);
     }
 
     public Entity getEntityHit(HitResult result, double radius) {
@@ -294,30 +295,34 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
     @Override
     protected void onHit(HitResult raytraceResultIn) {
 
+        super.onHit(raytraceResultIn); // adding this back seemed to fix proj a bit
+
         HitResult.Type raytraceresult$type = raytraceResultIn.getType();
         if (raytraceresult$type == HitResult.Type.ENTITY) {
+
             this.onImpact(raytraceResultIn);
-            this.playSound(SoundEvents.SHULKER_BULLET_HIT, 1.0F, 1.2F / (this.random.nextFloat() * 0.2F + 0.9F));
 
         } else if (raytraceresult$type == HitResult.Type.BLOCK) {
 
             if (collidedAlready) {
                 return;
             }
+            this.onImpact(raytraceResultIn);
+
             collidedAlready = true;
 
+            /*
             BlockHitResult blockraytraceresult = (BlockHitResult) raytraceResultIn;
             BlockState blockstate = this.level().getBlockState(blockraytraceresult.getBlockPos());
 
             Vec3 vec3d = blockraytraceresult.getLocation()
                     .subtract(this.getX(), this.getY(), this.getZ());
             this.setDeltaMovement(vec3d);
+            
+             */
 
             this.inGround = true;
 
-            this.onImpact(blockraytraceresult);
-
-            blockstate.onProjectileHit(this.level(), blockstate, blockraytraceresult, this);
         }
 
     }
@@ -355,10 +360,12 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
                 if (!Load.Unit(caster)
                         .alreadyHit(this, en)) {
                     if (!level().isClientSide) {
+                        var ctx = SpellCtx.onHit(caster, this, en, getSpellData());
+
                         this.getSpellData()
                                 .getSpell()
                                 .getAttached()
-                                .tryActivate(getScoreboardName(), SpellCtx.onHit(caster, this, en, getSpellData()));
+                                .tryActivate(getScoreboardName(), ctx);
                     }
                 }
             }

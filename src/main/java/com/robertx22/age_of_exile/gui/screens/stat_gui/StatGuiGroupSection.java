@@ -76,8 +76,11 @@ public enum StatGuiGroupSection implements IAutoLocName {
                     for (Stat stat : type.sup.get()) {
                         if (stat.gui_group.isValid()) {
                             for (Stat s : stat.gui_group.getSameGroupStats()) {
-                                list.remove(s);
+                                list.removeIf(x -> x.GUID().equals(s.GUID()));
                             }
+                        } else {
+                            list.removeIf(x -> x.GUID().equals(stat.GUID()));
+
                         }
                     }
 

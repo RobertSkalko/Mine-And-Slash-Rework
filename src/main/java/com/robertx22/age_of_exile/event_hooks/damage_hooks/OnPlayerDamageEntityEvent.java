@@ -14,6 +14,8 @@ public class OnPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDamag
     public void accept(ExileEvents.OnDamageEntity event) {
 
         if (event.mob.level().isClientSide) {
+            event.canceled = true;
+            event.damage = 0;
             return;
         }
         if (event.source.is(DamageTypes.FELL_OUT_OF_WORLD)) {

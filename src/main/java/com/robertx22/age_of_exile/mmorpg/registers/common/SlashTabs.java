@@ -20,12 +20,20 @@ public class SlashTabs {
             .displayItems((pParameters, x) -> {
                 for (Item item : VanillaUTIL.REGISTRY.items().getAll()) {
                     if (VanillaUTIL.REGISTRY.items().getKey(item).getNamespace().equals(SlashRef.MODID)) {
+
                         if (item instanceof ICreativeTabNbt nbt) {
                             for (ItemStack stack : nbt.createAllVariationsForCreativeTabs()) {
                                 x.accept(stack);
                             }
                         } else {
-                            x.accept(() -> item);
+                            if (item instanceof ICreativeIgnoreOption op) {
+                                if (op.shouldShowInCreative()) {
+                                    x.accept(() -> item);
+                                }
+                            } else {
+                                x.accept(() -> item);
+                            }
+
                         }
                     }
                 }

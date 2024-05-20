@@ -252,12 +252,11 @@ public class LootInfo {
 
         if (this.isMapWorld) {
             lootMods.add(new LootModifier(LootModifierEnum.ADVENTURE_MAP, this.map.map.getBonusLootMulti()));
+        } else {
+            float chance = ExileEvents.SETUP_LOOT_CHANCE.callEvents(new ExileEvents.OnSetupLootChance(mobKilled, player, 1)).lootChance;
+            lootMods.add(new LootModifier(LootModifierEnum.ANTI_MOB_FARM_MOD, chance));
         }
-
-        float chance = ExileEvents.SETUP_LOOT_CHANCE.callEvents(new ExileEvents.OnSetupLootChance(mobKilled, player, 1)).lootChance;
-
-        lootMods.add(new LootModifier(LootModifierEnum.ANTI_MOB_FARM_MOD, chance));
-
+        
     }
 
     // todo this doesnt have to be done 10 times per mob kill, maybe just once

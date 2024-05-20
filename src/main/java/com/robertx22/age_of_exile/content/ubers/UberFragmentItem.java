@@ -1,5 +1,7 @@
 package com.robertx22.age_of_exile.content.ubers;
 
+import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.mmorpg.registers.common.ICreativeIgnoreOption;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
@@ -14,7 +16,7 @@ import java.util.List;
 
 import static com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils.splitLongText;
 
-public class UberFragmentItem extends AutoItem {
+public class UberFragmentItem extends AutoItem implements ICreativeIgnoreOption {
 
     public int uberTier;
     public UberEnum uber;
@@ -40,5 +42,11 @@ public class UberFragmentItem extends AutoItem {
     @Override
     public String GUID() {
         return null;
+    }
+
+
+    @Override
+    public boolean shouldShowInCreative() {
+        return ExileDB.UberBoss().isRegistered(uber.id);
     }
 }
