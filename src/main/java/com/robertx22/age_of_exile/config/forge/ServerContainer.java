@@ -34,8 +34,7 @@ public class ServerContainer {
                 .push("general");
 
         ENERGY_PENALTY = b.define("ENERGY_PENALTY", true);
-        STAT_ORDER_WARNINGS = b.define("STAT_ORDER_WARNINGS", true);
-
+      
         GET_STARTER_ITEMS = b.define("start_items", true);
         ALWAYS_SCALE_MOB_LEVEL_TO_PLAYER = b.define("scale_mob_to_nearby_player_lvl", true);
         ENABLE_LOOT_ANNOUNCEMENTS = b.define("loot_announcements", true);
@@ -192,7 +191,6 @@ public class ServerContainer {
     public ForgeConfigSpec.BooleanValue LOG_ERRORS;
     public ForgeConfigSpec.BooleanValue STOP_ERROR_SPAM;
     public ForgeConfigSpec.BooleanValue ENERGY_PENALTY;
-    public ForgeConfigSpec.BooleanValue STAT_ORDER_WARNINGS;
     public ForgeConfigSpec.IntValue MIN_LEVEL_MAP_DROPS;
     public ForgeConfigSpec.IntValue MIN_SLIME_SIZE_FOR_LOOT;
     public ForgeConfigSpec.IntValue DEATH_PENALTY_START_LEVEL;

@@ -22,6 +22,7 @@ public class PlayerConfigData {
         MOB_DEATH_MESSAGES("mob_death_messages", Words.MOB_DEATH_MESSAGES),
         DAMAGE_MESSAGES("damage_messages", Words.DAMAGE_MESSAGES),
         AUTO_PVE("auto_pve", Words.AUTOMATIC_PVE),
+        STAT_ORDER_TEST("stat_order_test", Words.STAT_ORDER_TEST),
         DAMAGE_CONFLICT_MSG("damage_conflict_check", Words.DMG_CONFLICT_CHECK);
         public String id;
         public Words word;

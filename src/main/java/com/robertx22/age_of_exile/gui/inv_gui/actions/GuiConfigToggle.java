@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.capability.player.data.PlayerConfigData;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.FriendlyByteBuf;
@@ -29,7 +30,14 @@ public class GuiConfigToggle extends GuiAction {
 
     @Override
     public ResourceLocation getIcon() {
+        var p = ClientOnly.getPlayer();
+        if (p != null) {
+            if (Load.player(p).config.isConfigEnabled(config)) {
+                return SlashRef.id("textures/gui/inv_gui/icons/config_on.png");
+            }
+        }
         return SlashRef.id("textures/gui/inv_gui/icons/config.png");
+        
     }
 
     @Override

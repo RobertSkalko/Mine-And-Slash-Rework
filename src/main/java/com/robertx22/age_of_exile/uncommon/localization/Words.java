@@ -43,7 +43,8 @@ public enum Words implements IAutoLocName {
     MOB_DEATH_MESSAGES("Provides a short message when you kill a mob.\n\nYou can hover over it for useful info like Loot Chance"),
     DAMAGE_MESSAGES("Provides a short message when you damage a mob.\n\nYou can hover over it for useful info like how was damage modified"),
     AUTOMATIC_PVE("Auto PVE\n\nPlayers who enable this are considered Teamed up and Allies\n- Must be Nearby (Radius set by config)"),
-    DMG_CONFLICT_CHECK("Mod Conflict Check\n\nChecks if Mine and Slash damage has been overrided by another mod.\nSends a message to player if there's a problem.\n THIS IS A DEBUG OPTION"),
+    STAT_ORDER_TEST("Stat Order Test [Debug Option]\nThis runs a few tests when you attack something to be sure the stats are working in correct order and sends warning message if they don't. Only use when debugging stats. For example, crit chance should work before crit damage stat"),
+    DMG_CONFLICT_CHECK("Mod Conflict Check [Debug Option]\n\nChecks if Mine and Slash damage has been overrided by another mod.\nSends a message to player if there's a problem.\n THIS IS A DEBUG OPTION"),
 
     WHILE_UNDER_AURA("While Under Effect of %1$s:"),
     CURSE_OFFERS("Curse Offers:"),

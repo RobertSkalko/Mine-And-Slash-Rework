@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.uncommon.effectdatas;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
-import com.robertx22.age_of_exile.config.forge.ServerContainer;
+import com.robertx22.age_of_exile.capability.player.data.PlayerConfigData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.test.DataPackStatEffect;
@@ -222,7 +222,7 @@ public abstract class EffectEvent implements IGUID {
 
     public void testEffectsAreOrderedCorrectly(List<EffectWithCtx> sortedEffects) {
 
-        if (ServerContainer.get().STAT_ORDER_WARNINGS.get()) {
+        if (this.source instanceof Player p && Load.player(p).config.isConfigEnabled(PlayerConfigData.Config.STAT_ORDER_TEST)) {
             List<String> toremove = new ArrayList<>();
 
             HashMap<String, Integer> map = new HashMap<>();

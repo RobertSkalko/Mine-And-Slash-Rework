@@ -61,17 +61,15 @@ v.5.5.1
 - death penalty now only activates after level 25, for both xp loss, xp debt, favor loss and rested xp loss
 - added new highlights if you have points to spend
 
-v.5.2.1
+v.5.5.1
 - default dimension config datapack added
 
-v5.2.2
+v5.5.2
+- fix supp gems
+v5.5.3
 - fix supp gems
 
-
-v5.2.3
-- fix supp gems
-
-v.5.2.4
+v.5.5.4
 - should fix spells sometimes not hitting targets when hitting a wall or the floor
 - reduced map mob dmg per tier from 0.05 to 0.03
 - changed weapon type data in basegears. Now allows you to reduce the amount of checks needed in case you want to make say gun damage from other mods work.
@@ -93,3 +91,4 @@ But you're free to make say a mob list containing spiders spawn only in a spider
 - tried to improve proj spell hit code
 - tried to optimize perf a bit (manually saving unitnbt now)
 - reduced map mob dmg even more
+- stat order test is no longer a config but a player option and not enabled by default
