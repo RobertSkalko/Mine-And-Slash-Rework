@@ -52,6 +52,13 @@ public class DamageAction extends SpellAction {
 
                 dmg.data.setupNumber(EventData.DMG_EFFECTIVENESS, dmgEffectiveness);
 
+                if (ctx.calculatedSpellData.getSpell().usesWeaponForDamage()) {
+                    var gear = ctx.getWeapon();
+                    if (gear != null) {
+                        dmg.data.setString(EventData.WEAPON_TYPE, gear.GetBaseGearType().weapon_type.GUID());
+                    }
+                }
+
                 if (data.has(MapField.DMG_EFFECT_TYPE)) {
                     dmg.data.setString(EventData.ATTACK_TYPE, data.getDmgEffectType().name());
                 }

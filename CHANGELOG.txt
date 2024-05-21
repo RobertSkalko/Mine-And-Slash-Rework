@@ -92,3 +92,7 @@ But you're free to make say a mob list containing spiders spawn only in a spider
 - tried to optimize perf a bit (manually saving unitnbt now)
 - reduced map mob dmg even more
 - stat order test is no longer a config but a player option and not enabled by default
+
+v.5.5.5
+
+- spells not tagged as magic now add the caster's weapon type so the damage can benefit from "sword damage" for example

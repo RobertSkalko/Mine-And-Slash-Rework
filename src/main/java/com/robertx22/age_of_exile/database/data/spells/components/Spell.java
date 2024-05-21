@@ -81,6 +81,11 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     public List<String> disabled_dims = new ArrayList<>();
     public String effect_tip = "";
 
+    // todo make this a tag instead of using a negative tag maybe?
+    public boolean usesWeaponForDamage() {
+        return !config.tags.contains(SpellTags.magic);
+    }
+
     public int max_lvl = 16; // first lvl unlocks spell, then every 3 lvls unlocks a supp gem slot?
 
     public List<StatMod> statsForSkillGem = new ArrayList<>();

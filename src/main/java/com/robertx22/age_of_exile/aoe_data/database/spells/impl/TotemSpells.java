@@ -32,7 +32,7 @@ public class TotemSpells implements ExileRegistryInit {
 
     SpellBuilder of(Block block, String id, SpellConfiguration config, String name, List<SpellTag> tags, SimpleParticleType particle) {
 
-        return SpellBuilder.of(id, PlayStyle.STR, config, name, tags)
+        return SpellBuilder.of(id, PlayStyle.INT, config, name, tags)
 
                 .onCast(PartBuilder.playSound(SoundEvents.ILLUSIONER_CAST_SPELL, 1D, 1D))
                 .onCast(PartBuilder.justAction(SpellAction.SUMMON_AT_SIGHT.create(SlashEntities.SIMPLE_PROJECTILE.get(), 1D, 0D)))

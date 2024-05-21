@@ -3,9 +3,12 @@ package com.robertx22.age_of_exile.database.data.spells.spell_classes;
 import com.robertx22.age_of_exile.database.data.spells.components.EntityActivation;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.PositionSource;
 import com.robertx22.age_of_exile.database.data.spells.entities.CalculatedSpellData;
+import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -51,6 +54,17 @@ public class SpellCtx {
 
     public Vec3 getPos() {
         return positionSource.get(this).position();
+    }
+
+    public GearItemData getWeapon() {
+        var stack = Load.Unit(caster).getCurrentGears().get(EquipmentSlot.MAINHAND);
+        if (stack != null) {
+            GearItemData gear = StackSaving.GEARS.loadFrom(stack);
+            if (gear != null) {
+                return gear;
+            }
+        }
+        return null;
     }
 
     private SpellCtx(EntityActivation act, Entity sourceEntity, LivingEntity caster, LivingEntity target, CalculatedSpellData calculatedSpellData) {
