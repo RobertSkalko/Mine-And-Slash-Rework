@@ -24,6 +24,7 @@ import com.robertx22.age_of_exile.uncommon.localization.Formatter;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
+import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -357,7 +358,13 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     public List<ItemStack> getSalvageResult(ItemStack stack) {
 
         if (!data.get(KEYS.SALVAGING_DISABLED)) {
+            if (this.isUnique()) {
+                return Arrays.asList(new ItemStack(RandomUtils.randomFromList(RarityItems.RARITY_STONE.values().stream().toList()).get(), RandomUtils.RandomRange(2, 9)));
+            }
+
+
             int amount = 1;
+
             return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.getOrDefault(getRarity().GUID(), RarityItems.RARITY_STONE.get(IRarity.COMMON_ID)).get(), amount));
         }
 

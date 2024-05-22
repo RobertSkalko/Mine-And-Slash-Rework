@@ -262,8 +262,7 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
         }
 
         if (req > 0) {
-            list.add(TooltipUtils.level(req));
-
+            list.add(Words.Req_level.locName().append(req + "").withStyle(ChatFormatting.YELLOW));
         }
 
         list.add(ExileText.emptyLine().get());

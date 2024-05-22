@@ -30,6 +30,7 @@ public abstract class SummonEntity extends TamableAnimal implements RangedAttack
 
     protected AbstractArrow getArrow(ItemStack pArrowStack, float pVelocity) {
         return ProjectileUtil.getMobArrow(this, pArrowStack, pVelocity);
+
     }
 
 

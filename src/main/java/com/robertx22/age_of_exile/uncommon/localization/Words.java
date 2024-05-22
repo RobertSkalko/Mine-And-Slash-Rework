@@ -7,6 +7,7 @@ import java.util.Locale;
 
 // to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
+    Req_level("Required Level: "),
     DRAG_NO_WORK_CREATIVE("Drag and Drop Interactions Do-NOT work in Creative Mode!"),
 
     SoftcapInfo("This is the maximum possible value of this stat unless it's modified by for example Max X Resistance stat."),
