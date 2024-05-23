@@ -12,7 +12,7 @@ public final class MobRarity implements JsonExileRegistry<MobRarity>, IAutoGson<
     public static MobRarity SERIALIZER = new MobRarity();
 
 
-    public static MobRarity of(String id, String name, int weight, int minlvl, float bonusstatmulti, int affixes, ChatFormatting color) {
+    public static MobRarity of(String id, String name, int weight, int minlvl, float bonusstatmulti, int affixes, ChatFormatting color, boolean summon) {
 
         float lootmulti = 1 + (bonusstatmulti * 0.5F);
 
@@ -24,13 +24,19 @@ public final class MobRarity implements JsonExileRegistry<MobRarity>, IAutoGson<
 
         r.min_lvl = minlvl;
         r.stat_multi = 1 + bonusstatmulti * 1F;
-        r.extra_hp_multi = 1 + bonusstatmulti * 1.5F;
-        r.dmg_multi = 1 + bonusstatmulti * 0.75F;
+        r.extra_hp_multi = 1 + bonusstatmulti * 1F;
+        r.dmg_multi = 1 + bonusstatmulti * 0.25F;
 
         r.loot_multi = lootmulti;
         r.exp_multi = lootmulti;
 
         r.affixes = affixes;
+
+        if (summon) {
+            r.stat_multi = 1;
+            r.extra_hp_multi = 1;
+            r.dmg_multi = 1;
+        }
 
         r.addToSerializables();
 

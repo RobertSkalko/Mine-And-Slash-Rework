@@ -33,6 +33,7 @@ public class C2SPacketRegister {
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new AcceptProphecyPacket(""), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new AcceptProphecyAffixPacket(""), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new LockTogglePacket(), i++);
+        Packets.registerClientToServerPacket(MMORPG.NETWORK, new UnsummonPacket(), i++);
 
 
         // Packets.registerClientToServerPacket(MMORPG.NETWORK, new SetupHotbarPacket(), i++);

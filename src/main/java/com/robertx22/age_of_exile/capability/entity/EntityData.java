@@ -691,15 +691,10 @@ public class EntityData implements ICap, INeededForClient {
 
 
     public float getMobBaseDamage() {
-        MobRarity rar = getMobRarity();
 
         float multi = (float) (ServerContainer.get().VANILLA_MOB_DMG_AS_EXILE_DMG.get().floatValue());
 
-        float num = 8;
-
-        num *= multi * rar.DamageMultiplier();
-
-        num *= ExileDB.getEntityConfig(entity, this).dmg_multi;
+        float num = 8 * multi;
 
         num = StatScaling.MOB_DAMAGE.scale(num, getLevel());
 
@@ -716,15 +711,12 @@ public class EntityData implements ICap, INeededForClient {
 
         cooldowns.setOnCooldown("basic_attack", 5);
 
-        MobRarity rar = getMobRarity();
 
         float multi = (float) (ServerContainer.get().VANILLA_MOB_DMG_AS_EXILE_DMG.get().floatValue());
 
         float num = (data.getAmount() * 0.33F) + ServerContainer.get().MOB_FLAT_DAMAGE_BONUS.get().floatValue();
 
-        num *= multi * rar.DamageMultiplier();
-
-        num *= ExileDB.getEntityConfig(entity, this).dmg_multi;
+        num *= multi;
 
 
         PlayStyle style = PlayStyle.STR;

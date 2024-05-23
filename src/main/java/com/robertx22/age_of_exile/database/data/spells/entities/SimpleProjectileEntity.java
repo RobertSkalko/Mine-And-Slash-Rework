@@ -75,6 +75,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
 
     boolean collidedAlready = false;
 
+
     @Override
     protected ItemStack getPickupItem() {
         return ItemStack.EMPTY;

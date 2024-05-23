@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.gui.screens.character_screen.MainHubScreen;
 import com.robertx22.age_of_exile.mmorpg.registers.client.KeybindsRegister;
 import com.robertx22.age_of_exile.mmorpg.registers.client.SpellKeybind;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ChatUtils;
+import com.robertx22.age_of_exile.vanilla_mc.packets.UnsummonPacket;
 import com.robertx22.age_of_exile.vanilla_mc.packets.spells.TellServerToCastSpellPacket;
 import com.robertx22.library_of_exile.main.Packets;
 import net.minecraft.client.Minecraft;
@@ -29,8 +30,10 @@ public class OnKeyPress {
             return;
         }
 
-
-        if (KeybindsRegister.HUB_SCREEN_KEY.isDown()) {
+        if (KeybindsRegister.UNSUMMON.isDown()) {
+            Packets.sendToServer(new UnsummonPacket());
+            cooldown = 3;
+        } else if (KeybindsRegister.HUB_SCREEN_KEY.isDown()) {
             mc.setScreen(new MainHubScreen());
             cooldown = 10;
         } else {

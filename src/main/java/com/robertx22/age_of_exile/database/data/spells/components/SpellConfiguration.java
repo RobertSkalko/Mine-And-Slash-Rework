@@ -31,7 +31,7 @@ public class SpellConfiguration {
     public TagList<SpellTag> tags = new TagList<>();
     public int tracking_radius = 5;
     public AllyOrEnemy tracks = AllyOrEnemy.enemies;
-
+  
     public int getCastTimeTicks() {
         return cast_time_ticks;
     }

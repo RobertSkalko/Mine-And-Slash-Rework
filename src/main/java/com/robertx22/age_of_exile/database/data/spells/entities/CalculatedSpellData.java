@@ -18,7 +18,7 @@ public class CalculatedSpellData {
     public String spell_id = "";
     public int lvl = 1;
     public int chains_did = 0;
-
+  
     public CalculatedSpellData(SpellStatsCalculationEvent event) {
     }
 

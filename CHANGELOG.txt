@@ -97,3 +97,8 @@ v.5.5.5
 
 - spells not tagged as magic now add the caster's weapon type so the damage can benefit from "sword damage" for example
 - tweaked sound/anim of frost nova, chilling field
+- reduced mob damage scaling even further and added some more mob dmg multipliers to the damage chat info
+- reduced mob hp scaling from rarity
+- added unsummon keybind 
+
+todo check if my new default shift + x keybinds work

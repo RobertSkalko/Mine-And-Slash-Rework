@@ -29,6 +29,10 @@ public class DamageAction extends SpellAction {
     public void tryActivate(Collection<LivingEntity> targets, SpellCtx ctx, MapHolder data) {
 
         if (!ctx.world.isClientSide) {
+
+            Collection<LivingEntity> targetList = targets;
+
+
             Elements ele = data.getElement();
             ValueCalculation calc = data.get(VALUE_CALCULATION);
 
@@ -41,7 +45,7 @@ public class DamageAction extends SpellAction {
                 value *= dmgMulti;
             }
 
-            for (LivingEntity t : targets) {
+            for (LivingEntity t : targetList) {
 
                 if (t == null) {
                     continue;

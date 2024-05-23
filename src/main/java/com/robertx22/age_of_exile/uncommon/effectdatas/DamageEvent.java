@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.capability.player.data.PlayerConfigData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffectInstanceData;
+import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.stats.layers.StatLayerData;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.FullSwingDamage;
@@ -72,6 +73,24 @@ public class DamageEvent extends EffectEvent {
         super(dmg, source, target);
         this.attackInfo = attackInfo;
         calcBlock();
+
+        addMobDamageMultipliers();
+
+    }
+
+    public void addMobDamageMultipliers() {
+        if (source instanceof Player == false) {
+            MobRarity rar = sourceData.getMobRarity();
+
+            float enconfigmulti = (float) ExileDB.getEntityConfig(source, sourceData).dmg_multi;
+
+            this.addMoreMulti(Words.MOB_RARITY_MULTI.locName(), EventData.NUMBER, rar.DamageMultiplier());
+
+            if (enconfigmulti != 1) {
+                this.addMoreMulti(Words.MOB_RARITY_MULTI.locName(), EventData.NUMBER, enconfigmulti);
+            }
+
+        }
     }
 
     public static String dmgSourceName = SlashRef.MODID + ".custom_damage";

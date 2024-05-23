@@ -1,12 +1,11 @@
 package com.robertx22.age_of_exile.database.data.value_calc;
-import com.robertx22.age_of_exile.mmorpg.SlashRef;
+
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
-import com.robertx22.age_of_exile.uncommon.localization.Words;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -76,7 +75,7 @@ public class ScalingCalc {
                 .getValue());
 
         if (getStat() == WeaponDamage.getInstance() && en instanceof Player == false) {
-            val += Load.Unit(en).getMobBaseDamage();
+            val += Load.Unit(en).getMobBaseDamage(); // todo what?
         }
         return val;
 

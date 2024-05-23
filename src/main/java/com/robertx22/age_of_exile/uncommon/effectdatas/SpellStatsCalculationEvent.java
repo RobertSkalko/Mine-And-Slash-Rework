@@ -84,6 +84,7 @@ public class SpellStatsCalculationEvent extends EffectEvent {
         data.lvl = lvl;
         data.caster_uuid = caster.getUUID().toString();
 
+     
         return data;
     }
 

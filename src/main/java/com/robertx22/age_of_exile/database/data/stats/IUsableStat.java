@@ -39,6 +39,7 @@ public interface IUsableStat {
 
             float maximumPossibleValue = stat.scale(ModType.FLAT, valueNeededToReachMaximumPercentAtLevelOne(), lvl);
 
+            // todo this is ..wack
             float percOfMax = (float) value / maximumPossibleValue / (value / maximumPossibleValue + 1.5F);
             percOfMax = Math.min(1, percOfMax);
 
