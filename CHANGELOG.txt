@@ -100,5 +100,6 @@ v.5.5.5
 - reduced mob damage scaling even further and added some more mob dmg multipliers to the damage chat info
 - reduced mob hp scaling from rarity
 - added unsummon keybind 
+- changed armor and dodge formulas to be more sane.. and easily shown in tooltips (ill add a config if needed, formula still wip)
 
 todo check if my new default shift + x keybinds work

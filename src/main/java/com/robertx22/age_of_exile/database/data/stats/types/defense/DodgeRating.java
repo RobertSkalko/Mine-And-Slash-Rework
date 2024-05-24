@@ -67,7 +67,7 @@ public class DodgeRating extends Stat implements IUsableStat {
 
     @Override
     public float valueNeededToReachMaximumPercentAtLevelOne() {
-        return 15;
+        return 100;
     }
 
     private static class Effect extends BaseDamageEffect {

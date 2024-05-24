@@ -56,7 +56,7 @@ public class Armor extends Stat implements IUsableStat {
 
     @Override
     public float valueNeededToReachMaximumPercentAtLevelOne() {
-        return 20;
+        return 100;
     }
 
     @Override

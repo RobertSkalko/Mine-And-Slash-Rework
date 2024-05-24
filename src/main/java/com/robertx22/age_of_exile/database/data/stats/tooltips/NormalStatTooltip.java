@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.stats.tooltips;
 
+import com.robertx22.age_of_exile.database.data.stats.IUsableStat;
 import com.robertx22.age_of_exile.database.data.stats.types.LearnSpellStat;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
@@ -13,6 +14,7 @@ import java.util.List;
 
 
 public class NormalStatTooltip implements IStatTooltipType {
+
 
     @Override
     public List<MutableComponent> getTooltipList(ChatFormatting format, TooltipStatWithContext ctx) {
@@ -42,6 +44,10 @@ public class NormalStatTooltip implements IStatTooltipType {
 
         if (info.shouldShowDescriptions() && !(info.stat instanceof LearnSpellStat)) {
             list.addAll(info.stat.getCutDescTooltip());
+
+            if (ctx.statinfo.stat instanceof IUsableStat usable) {
+                list.add(Component.literal("Formula: Stat Percent = statNum / ( base + statNum)"));
+            }
         }
 
         return list;

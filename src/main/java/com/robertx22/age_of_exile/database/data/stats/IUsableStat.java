@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.stats;
 
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 
 public interface IUsableStat {
@@ -14,13 +15,18 @@ public interface IUsableStat {
      */
     public float valueNeededToReachMaximumPercentAtLevelOne();
 
+    public default float scaledvalueNeededToReachMaximumPercentAtLevelOne(int lvl) {
+        Stat stat = (Stat) this;
+        return stat.scale(ModType.FLAT, valueNeededToReachMaximumPercentAtLevelOne(), lvl);
+    }
+
     default void logUsableAmountTests() {
 
         Stat stat = (Stat) this;
 
         int val = 50;
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 100; i++) {
 
             float multi = getUsableValue(val, 1);
 
@@ -33,18 +39,14 @@ public interface IUsableStat {
 
     public default float getUsableValue(int value, int lvl) {
 
-        if (this instanceof Stat) {
-            Stat stat = (Stat) this;
+        if (this instanceof Stat stat) {
             value = Math.max(0, value);
 
-            float maximumPossibleValue = stat.scale(ModType.FLAT, valueNeededToReachMaximumPercentAtLevelOne(), lvl);
+            float base = scaledvalueNeededToReachMaximumPercentAtLevelOne(lvl);
 
-            // todo this is ..wack
-            float percOfMax = (float) value / maximumPossibleValue / (value / maximumPossibleValue + 1.5F);
-            percOfMax = Math.min(1, percOfMax);
+            float val = value / (value + base);
 
-            return percOfMax * getMaxMulti();
-
+            return MathHelper.clamp(val, 0F, getMaxMulti());
         }
         return 0;
     }
