@@ -2,7 +2,10 @@ package com.robertx22.age_of_exile.aoe_data.database.unique_gears;
 
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.BaseGearType;
+import com.robertx22.age_of_exile.database.data.stats.types.gear_base.GearDamage;
+import com.robertx22.age_of_exile.database.data.stats.types.offense.WeaponDamage;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
+import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ErrorUtils;
 import com.robertx22.library_of_exile.registry.DataGenKey;
 
@@ -32,6 +35,17 @@ public class UniqueGearBuilder {
 
     public UniqueGearBuilder stats(List<StatMod> stats) {
         this.uniq.unique_stats = stats;
+
+        this.addWeaponDamage();
+        return this;
+    }
+
+    public UniqueGearBuilder addWeaponDamage() {
+        if (uniq.unique_stats.stream().anyMatch(x -> x.GetStat() instanceof WeaponDamage)) {
+            uniq.unique_stats.removeIf(x -> x.GetStat() instanceof WeaponDamage);
+            uniq.unique_stats.add(new StatMod(25, 200, GearDamage.getInstance(), ModType.PERCENT));
+            uniq.unique_stats.add(new StatMod(1, 3, GearDamage.getInstance(), ModType.FLAT));
+        }
         return this;
     }
 

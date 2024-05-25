@@ -46,6 +46,8 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     public double HP_MOB_BONUS_PER_MAP_TIER = 0.1;
     public double DMG_MOB_BONUS_PER_MAP_TIER = 0.01;
 
+    public double MIN_SPELL_COOLDOWN_MULTI = 0.2;
+
     public double CRAFTED_GEAR_POTENTIAL_MULTI = 0.5;
     public int PROPHECY_GAIN_PER_MOB = 10;
     public int PROPHECY_GAIN_PER_MOB_UNCURSED = 5;

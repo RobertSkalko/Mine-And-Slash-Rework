@@ -16,6 +16,7 @@ public abstract class SummonStat extends Stat {
 
         return ExactStatData.noScaling(data.getValue(), getModType(), getStatToGiveToSummon().GUID());
 
+
     }
 
 
