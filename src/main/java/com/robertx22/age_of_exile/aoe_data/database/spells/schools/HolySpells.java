@@ -227,7 +227,7 @@ public class HolySpells implements ExileRegistryInit {
                 .onCast(PartBuilder.playSound(SlashSounds.BUFF.get(), 1D, 1D))
                 .onCast(PartBuilder.groundParticles(ParticleTypes.COMPOSTER, 50D, 2D, 0.2D))
                 .onCast(PartBuilder.groundParticles(ParticleTypes.HEART, 20D, 2D, 0.2D))
-                .onCast(PartBuilder.healInAoe(SpellCalcs.HEALING_AURA, 2D))
+                .onCast(PartBuilder.healInAoe(SpellCalcs.HEALING_AURA, 4D))
                 .levelReq(1)
                 .build();
 

@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.maps;
 
+import com.robertx22.age_of_exile.database.data.profession.ProfessionBlockEntity;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
@@ -10,10 +11,12 @@ import com.robertx22.library_of_exile.utils.geometry.Circle2d;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -52,6 +55,19 @@ public class MapBlock extends BaseEntityBlock {
         }
     }
 
+    @Override
+    public void onRemove(BlockState pState, Level level, BlockPos p, BlockState pNewState, boolean pIsMoving) {
+        if (!pState.is(pNewState.getBlock())) {
+            BlockEntity blockentity = level.getBlockEntity(p);
+            if (blockentity instanceof ProfessionBlockEntity be) {
+                if (level instanceof ServerLevel) {
+                    ItemEntity en = new ItemEntity(level, p.getX(), p.getY(), p.getZ(), asItem().getDefaultInstance());
+                    level.addFreshEntity(en);
+                }
+            }
+        }
+        super.onRemove(pState, level, p, pNewState, pIsMoving);
+    }
 
     @Nullable
     @Override

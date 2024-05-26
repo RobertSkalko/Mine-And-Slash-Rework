@@ -30,6 +30,8 @@ public class LootChestItem extends AutoItem implements INeedsNBT {
         try {
             if (!pLevel.isClientSide) {
 
+                p.getCooldowns().addCooldown(this, 20);
+
                 LootChestData data = StackSaving.LOOT_CHEST.loadFrom(stack);
 
                 if (data != null) {

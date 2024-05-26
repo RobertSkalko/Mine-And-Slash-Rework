@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.capability.player.data;
 
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
@@ -61,7 +62,10 @@ public class PlayerConfigData {
                     if (salvages(data.getSalvageType(), data.getRarityId())) {
                         SoundUtils.playSound(player, SoundEvents.EXPERIENCE_ORB_PICKUP, 0.75F, 1.25F);
                         stack.shrink(100);
-                        data.getSalvageResult(stack).forEach(e -> PlayerUtils.giveItem(e, player));
+                        data.getSalvageResult(stack).forEach(e -> {
+                            PlayerUtils.giveItem(e, player);
+                            Load.backpacks(player).getBackpacks().tryAutoPickup(player, stack);
+                        });
 
                         return true;
                     }
