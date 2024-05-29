@@ -4,7 +4,7 @@ license = "All rights reserved"
 issueTrackerURL = "https://github.com/RobertSkalko/Mine-And-Slash-Rework"
 [[mods]]
 modId = "mmorpg"
-version = "5.5.4"
+version = "5.5.5"
 displayName = "Mine and Slash"
 # A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
