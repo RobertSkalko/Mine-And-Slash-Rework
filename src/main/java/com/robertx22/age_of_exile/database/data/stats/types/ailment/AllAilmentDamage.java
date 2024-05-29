@@ -37,7 +37,8 @@ public class AllAilmentDamage extends Stat {
 
         @Override
         public boolean canActivate(DamageEvent effect, StatData data, Stat stat) {
-            return !effect.data.getString(EventData.AILMENT).isEmpty();
+            boolean bo = !effect.data.getString(EventData.AILMENT).isEmpty();
+            return bo;
         }
 
     }

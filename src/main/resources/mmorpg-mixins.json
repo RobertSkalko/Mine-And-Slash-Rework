@@ -9,6 +9,7 @@
     "FallingBlockEntityMixin",
     "DisableMobSpawnsInDungeon",
     "LivingEntityMixin",
+    "SpellStackMixin",
     "LootTableMixin",
     "StopMapMobDropsMixin",
     "EntityMixin",
