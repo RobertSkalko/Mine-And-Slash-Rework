@@ -40,7 +40,7 @@ public class StatData {
     }
 
     public void softCapStat(Unit data) {
-        this.v1 = Mth.clamp(this.v1, GetStat().min, GetStat().getSoftCap(data));
+        this.v1 = Mth.clamp(this.v1, GetStat().min, GetStat().getCap(data));
     }
 
     public String getId() {

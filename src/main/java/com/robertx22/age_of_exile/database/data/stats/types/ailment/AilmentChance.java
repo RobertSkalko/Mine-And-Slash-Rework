@@ -8,8 +8,12 @@ import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
+import com.robertx22.age_of_exile.uncommon.effectdatas.EventBuilder;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
+import com.robertx22.age_of_exile.uncommon.enumclasses.AttackType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
+import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
+import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 
@@ -43,7 +47,22 @@ public class AilmentChance extends Stat {
         public DamageEvent activate(DamageEvent effect, StatData data, Stat stat) {
             // we take the original or base damage of the attack so we don't double dip
             float dmg = effect.data.getOriginalNumber(EventData.NUMBER).number;
-            Load.Unit(effect.target).ailments.onAilmentCausingDamage(effect.source, effect.target, ailment, dmg);
+
+            // todo will probably have to tweak this
+            var event = EventBuilder.ofDamage(effect.source, effect.target, dmg).setupDamage(AttackType.dot, WeaponTypes.none, PlayStyle.INT).set(x -> {
+                x.disableActivation = true; // we dont actually want to do the dmg now
+                x.setElement(ailment.element);
+                x.setisAilmentDamage(ailment);
+                if (effect.isSpell()) {
+                    x.data.setString(EventData.SPELL, effect.data.getString(EventData.SPELL));
+                }
+                x.calcTargetEffects = false;
+            }).build();
+
+            event.Activate();
+
+            Load.Unit(effect.target).ailments.onAilmentCausingDamage(effect.source, effect.target, ailment, event.data.getNumber());
+
             return effect;
         }
 

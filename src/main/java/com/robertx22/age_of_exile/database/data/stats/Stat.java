@@ -63,7 +63,8 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
 
     public float min = -1000;
     public float max = Integer.MAX_VALUE;
-    public float softcap = 0;
+    private float softcap = 0;
+    public boolean has_softcap = false;
     public float base = 0;
     public boolean is_perc = false;
     public StatScaling scaling = StatScaling.NONE;
@@ -76,11 +77,16 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     public boolean minus_is_good = false; // so stats like minus mana cost dont have nasty red tooltip
     public boolean show_in_gui = true;
 
+
     public StatGuiGroup gui_group = StatGuiGroup.NONE;
 
+    public void setSoftCap(float cap) {
+        this.has_softcap = true;
+        this.softcap = cap;
+    }
 
     public boolean hasSoftCap() {
-        return this.softcap > 0;
+        return has_softcap;
     }
 
     public final float getHardCap() {
@@ -102,11 +108,18 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     }
 
     public final float getSoftCap(Unit data) {
-        return getHardCap() - softcap + getAdditionalMax(data);
+        return softcap + getAdditionalMax(data);
+    }
+
+    public final float getCap(Unit data) {
+        if (this.hasSoftCap()) {
+            return softcap + getAdditionalMax(data);
+        }
+        return this.getHardCap();
     }
 
     public final float getDefaultSoftCap() {
-        return getHardCap() - softcap;
+        return softcap;
     }
 
     public float getAdditionalMax(Unit data) {

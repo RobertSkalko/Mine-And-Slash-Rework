@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.stats;
 
+import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 
@@ -20,24 +21,8 @@ public interface IUsableStat {
         return stat.scale(ModType.FLAT, valueNeededToReachMaximumPercentAtLevelOne(), lvl);
     }
 
-    default void logUsableAmountTests() {
 
-        Stat stat = (Stat) this;
-
-        int val = 50;
-
-        for (int i = 0; i < 100; i++) {
-
-            float multi = getUsableValue(val, 1);
-
-            System.out.print("\n For " + val + " " + stat.GUID() + " usable value is: " + multi);
-
-            val += 50;
-        }
-
-    }
-
-    public default float getUsableValue(int value, int lvl) {
+    public default float getUsableValue(Unit unit, int value, int lvl) {
 
         if (this instanceof Stat stat) {
             value = Math.max(0, value);

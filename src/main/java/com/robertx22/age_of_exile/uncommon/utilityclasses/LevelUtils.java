@@ -78,8 +78,12 @@ public class LevelUtils {
     }
 
     public static LevelDetermInfo determineLevel(Level world, BlockPos pos, Player nearestPlayer) {
-
         LevelDetermInfo info = new LevelDetermInfo();
+
+        if (nearestPlayer != null && MMORPG.RUN_DEV_TOOLS) {
+            info.level = Load.Unit(nearestPlayer).getLevel();
+            return info;
+        }
 
         ServerLevel sw = (ServerLevel) world;
 

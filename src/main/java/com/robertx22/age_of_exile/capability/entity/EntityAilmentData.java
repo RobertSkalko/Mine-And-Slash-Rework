@@ -173,6 +173,7 @@ public class EntityAilmentData {
                                 EventBuilder.ofDamage(caster, en, dmg).setupDamage(AttackType.dot, WeaponTypes.none, PlayStyle.INT).set(x -> {
                                             x.setElement(ailment.element);
                                             x.setisAilmentDamage(ailment);
+                                            x.calcSourceEffects = false;
                                         }).build()
                                         .Activate();
                             }

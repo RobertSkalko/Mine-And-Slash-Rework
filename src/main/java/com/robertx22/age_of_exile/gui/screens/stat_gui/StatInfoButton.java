@@ -112,7 +112,7 @@ public class StatInfoButton extends ImageButton implements IStatInfoButton {
         USABLE_VALUE("usable_value", true) {
             @Override
             public MutableComponent getRenderText(StatData data, EntityData unit) {
-                return Component.literal(data.GetStat() instanceof IUsableStat u ? u.getUsableValue((int) data.getValue(), unit.getLevel()) + "%" : "");
+                return Component.literal(data.GetStat() instanceof IUsableStat u ? u.getUsableValue(unit.getUnit(), (int) data.getValue(), unit.getLevel()) + "%" : "");
             }
 
             @Override

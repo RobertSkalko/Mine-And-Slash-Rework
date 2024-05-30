@@ -99,7 +99,7 @@ public class DodgeRating extends Stat implements IUsableStat {
 
             float totalDodge = Mth.clamp(data.getValue() - effect.data.getNumber(EventData.ACCURACY).number, 0, Integer.MAX_VALUE);
 
-            float chance = dodge.getUsableValue((int) totalDodge, effect.sourceData.getLevel()) * 100;
+            float chance = dodge.getUsableValue(effect.targetData.getUnit(), (int) totalDodge, effect.sourceData.getLevel()) * 100;
 
             return effect.getAttackType().isAttack() && RandomUtils.roll(chance);
         }

@@ -66,7 +66,7 @@ public class SlashEntities {
 
         RegObj<EntityType<T>> def = Def.entity(id, () -> EntityType.Builder.of(factory, MobCategory.MISC)
                 .sized(0.5F, 0.5F)
-                .setUpdateInterval(20)
+                .setUpdateInterval(10)
                 .setTrackingRange(4)
                 .build(id));
 

@@ -66,7 +66,7 @@ public enum Words implements IAutoLocName {
     COSTS_FAVOR("Costs %1$s Prophecy Coins"),
     PROPHECIES("Prophecies"),
     CURRENTLY_SELECTED("Currently Selected"),
-    Configs("Configs"),
+    Configs("Features"),
     POSSIBLE_DROS("Possible Gear Drops:"),
     CAN_UPGRADE_MAP_RARITY("Can Upgrade Map Rarity\nThis Depends on Map level"),
     LASTS_SEC("Lasts %1$ss"),

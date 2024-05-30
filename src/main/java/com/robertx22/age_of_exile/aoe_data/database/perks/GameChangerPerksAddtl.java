@@ -35,7 +35,7 @@ public class GameChangerPerksAddtl implements ExileRegistryInit {
 
         PerkBuilder.gameChanger("curse_master", "Curse Master",
                 new OptScaleExactStat(20, OffenseStats.DAMAGE_TO_CURSED.get(), ModType.MORE),
-                new OptScaleExactStat(-20, EffectStats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.curse), ModType.MORE)
+                new OptScaleExactStat(-20, EffectStats.EFFECT_OF_BUFFS_GIVEN_PER_EFFECT_TAG.get(EffectTags.curse), ModType.FLAT)
         );
 
         PerkBuilder.gameChanger("minion_catapult", "Minion Explosion",
@@ -53,7 +53,7 @@ public class GameChangerPerksAddtl implements ExileRegistryInit {
         );
 
         PerkBuilder.gameChanger("shade", "Looming Shade",
-                new OptScaleExactStat(10, ResourceStats.DOT_LIFESTEAL.get(), ModType.MORE),
+                new OptScaleExactStat(10, ResourceStats.DOT_LIFESTEAL.get(), ModType.FLAT),
                 new OptScaleExactStat(-20, OffenseStats.DOT_DAMAGE.get(), ModType.MORE)
         );
 
@@ -163,8 +163,8 @@ public class GameChangerPerksAddtl implements ExileRegistryInit {
         );
 
         PerkBuilder.gameChanger("heretic", "Heretic",
-                new OptScaleExactStat(50, SpellChangeStats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.totem), ModType.MORE),
-                new OptScaleExactStat(20, SpellChangeStats.TOTEM_DURATION.get(), ModType.MORE),
+                new OptScaleExactStat(50, SpellChangeStats.COOLDOWN_REDUCTION_PER_SPELL_TAG.get(SpellTags.totem), ModType.FLAT),
+                new OptScaleExactStat(20, SpellChangeStats.TOTEM_DURATION.get(), ModType.FLAT),
                 new OptScaleExactStat(-50, OffenseStats.DAMAGE_PER_SPELL_TAG.get(SpellTags.weapon_skill), ModType.FLAT)
         );
 

@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.stats.types.generated;
 
+import com.robertx22.age_of_exile.database.data.stats.IUsableStat;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatGuiGroup;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
@@ -9,6 +10,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.ElementalStat;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
+import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.wrappers.MapWrapper;
 import net.minecraft.ChatFormatting;
@@ -16,7 +18,7 @@ import net.minecraft.ChatFormatting;
 import java.util.HashMap;
 import java.util.List;
 
-public class ElementalResist extends ElementalStat {
+public class ElementalResist extends ElementalStat implements IUsableStat {
 
     public static MapWrapper<Elements, ElementalResist> MAP = new MapWrapper();
 
@@ -42,9 +44,7 @@ public class ElementalResist extends ElementalStat {
         this.icon = element.icon;
         this.statEffect = new ElementalResistEffect();
 
-        this.max = 90;
-        this.softcap = 15;
-
+        this.max = 500;
     }
 
     @Override
@@ -101,5 +101,21 @@ public class ElementalResist extends ElementalStat {
     }
 
 
+    @Override
+    public float getMaxMulti() {
+        return 0;
+    }
+
+    @Override
+    public float valueNeededToReachMaximumPercentAtLevelOne() {
+        return 0;
+    }
+
+    @Override
+    public float getUsableValue(Unit unit, int value, int lvl) {
+        float max = MathHelper.clamp(75 + this.getAdditionalMax(unit), min, 90);
+        float min = this.min;
+        return MathHelper.clamp(value, min, max);
+    }
 }
 

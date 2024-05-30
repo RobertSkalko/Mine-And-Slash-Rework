@@ -84,7 +84,7 @@ public class CharacterStatsButtons extends ImageButton {
         if (stat instanceof IUsableStat) {
             IUsableStat usable = (IUsableStat) stat;
 
-            String value = NumberUtils.format(usable.getUsableValue((int) data.getValue(), unitdata.getLevel()) * 100);
+            String value = NumberUtils.format(usable.getUsableValue(unitdata.getUnit(), (int) data.getValue(), unitdata.getLevel()) * 100);
 
             str += " (" + value + "%)";
 

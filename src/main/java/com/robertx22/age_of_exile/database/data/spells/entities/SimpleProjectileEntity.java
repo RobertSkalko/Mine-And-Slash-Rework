@@ -185,17 +185,23 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
         }
     }
 
+    boolean exploded = false;
+
     @Override
     public void remove(RemovalReason r) {
 
-        LivingEntity caster = getCaster();
+        if (!exploded) {
+            exploded = true;
 
-        if (caster != null) {
-            if (!level().isClientSide) {
-                this.getSpellData()
-                        .getSpell()
-                        .getAttached()
-                        .tryActivate(getScoreboardName(), SpellCtx.onExpire(caster, this, getSpellData()));
+            LivingEntity caster = getCaster();
+
+            if (caster != null) {
+                if (!level().isClientSide) {
+                    this.getSpellData()
+                            .getSpell()
+                            .getAttached()
+                            .tryActivate(getScoreboardName(), SpellCtx.onExpire(caster, this, getSpellData()));
+                }
             }
         }
 
@@ -312,16 +318,6 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
 
             collidedAlready = true;
 
-            /*
-            BlockHitResult blockraytraceresult = (BlockHitResult) raytraceResultIn;
-            BlockState blockstate = this.level().getBlockState(blockraytraceresult.getBlockPos());
-
-            Vec3 vec3d = blockraytraceresult.getLocation()
-                    .subtract(this.getX(), this.getY(), this.getZ());
-            this.setDeltaMovement(vec3d);
-            
-             */
-
             this.inGround = true;
 
         }
@@ -356,6 +352,9 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
             if (en == null) {
                 return;
             }
+
+            // dirty fix to solve spell projectiles not hitting the entity they hit...
+            this.setPos(en.getEyePosition());
 
             if (caster != null) {
                 if (!Load.Unit(caster)

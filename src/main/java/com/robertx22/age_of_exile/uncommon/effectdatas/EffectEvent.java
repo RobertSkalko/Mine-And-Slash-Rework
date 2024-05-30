@@ -29,6 +29,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public abstract class EffectEvent implements IGUID {
+    public boolean disableActivation = false;
+
+    public boolean calcSourceEffects = true;
+    public boolean calcTargetEffects = true;
 
     public EntityData sourceData;
     public EntityData targetData;
@@ -148,7 +152,9 @@ public abstract class EffectEvent implements IGUID {
             data.freeze();
 
             if (!data.isCanceled()) {
-                activate();
+                if (!disableActivation) {
+                    activate();
+                }
                 this.activated = true;
             }
 
@@ -196,8 +202,12 @@ public abstract class EffectEvent implements IGUID {
             // todo something is weird, why are some stats used 2 times here?
 
             List<EffectWithCtx> effectsWithCtx = new ArrayList<>();
-            effectsWithCtx = AddEffects(effectsWithCtx, sourceData, source, EffectSides.Source);
-            effectsWithCtx = AddEffects(effectsWithCtx, targetData, target, EffectSides.Target);
+            if (calcSourceEffects) {
+                effectsWithCtx = AddEffects(effectsWithCtx, sourceData, source, EffectSides.Source);
+            }
+            if (calcTargetEffects) {
+                effectsWithCtx = AddEffects(effectsWithCtx, targetData, target, EffectSides.Target);
+            }
             effectsWithCtx.add(CALC_LAYERS_EFFECT);
             effectsWithCtx.sort(EffectWithCtx.COMPARATOR);
 
@@ -210,10 +220,6 @@ public abstract class EffectEvent implements IGUID {
                     System.out.print("ERORR cant be zero! ");
                 }
             }
-
-/*            TryApplyEffects(source, sourceData, EffectSides.Source);
-            TryApplyEffects(target, targetData, EffectSides.Target);
- */
 
 
         }
