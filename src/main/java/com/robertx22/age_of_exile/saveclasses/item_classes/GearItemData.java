@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.data.profession.PlayerUTIL;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.requirements.bases.GearRequestedFor;
+import com.robertx22.age_of_exile.database.data.stat_compat.StatCompat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
@@ -16,11 +17,14 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.*;
 import com.robertx22.age_of_exile.saveclasses.item_classes.rework.DataKey;
 import com.robertx22.age_of_exile.saveclasses.item_classes.rework.DataKeyHolder;
 import com.robertx22.age_of_exile.saveclasses.item_classes.rework.GenericDataHolder;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Formatter;
+import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
@@ -30,13 +34,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -310,6 +313,46 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     public List<IStatsContainer> GetAllStatContainersExceptBase() {
         return this.GetAllStatContainers().stream().filter(x -> x instanceof BaseStatsData == false).collect(Collectors.toList());
 
+
+    }
+
+    public List<MutableComponent> getEnchantCompatTooltip(ItemStack stack) {
+        var ench = getEnchantCompatStats(stack);
+
+        List<MutableComponent> list = new ArrayList<>();
+
+        if (ench == null) {
+            return list;
+        }
+
+        list.add(Words.EnchantCompatStats.locName().withStyle(ChatFormatting.AQUA));
+        var info = new TooltipInfo();
+        for (ExactStatData stat : ench.stats) {
+            list.addAll(stat.GetTooltipString(info));
+        }
+
+        return list;
+
+    }
+
+    public StatContext getEnchantCompatStats(ItemStack stack) {
+        var list = new ArrayList<ExactStatData>();
+
+        for (Map.Entry<Enchantment, Integer> en : stack.getAllEnchantments().entrySet()) {
+            var id = ForgeRegistries.ENCHANTMENTS.getKey(en.getKey()).toString();
+            // todo this could be cached
+            for (StatCompat compat : ExileDB.StatCompat().getFilterWrapped(x -> x.isEnchantCompat() && x.enchant_id.equals(id)).list) {
+                var result = compat.getEnchantCompatResult(stack, lvl);
+                if (result != null) {
+                    list.add(result);
+                }
+            }
+        }
+        if (list.isEmpty()) {
+            return null;
+        }
+        StatContext ctx = new SimpleStatCtx(StatContext.StatCtxType.ENCHANT_COMPAT, list);
+        return ctx;
 
     }
 

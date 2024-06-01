@@ -211,7 +211,12 @@ public class StatCalculation {
             }
             ctxs.add(new GearStatCtx(x.gear, stats));
 
+            var ench = x.gear.getEnchantCompatStats(x.stack);
+            if (ench != null) {
+                ctxs.add(ench);
+            }
         });
+
 
         return ctxs;
 

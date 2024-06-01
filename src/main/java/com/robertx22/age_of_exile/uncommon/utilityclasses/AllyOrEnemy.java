@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.uncommon.utilityclasses;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.NeutralMob;
 import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.player.Player;
 
@@ -13,6 +12,7 @@ import java.util.stream.Collectors;
 public enum AllyOrEnemy {
 
 
+    /*
     summonShouldAttack() {
         @Override
         public <T extends LivingEntity> List<T> getMatchingEntities(List<T> list, Entity caster) {
@@ -52,11 +52,12 @@ public enum AllyOrEnemy {
             return false;
         }
     },
-
+     */
 
     allies() {
         @Override
         public <T extends LivingEntity> List<T> getMatchingEntities(List<T> list, Entity caster) {
+            
             return list.stream().filter(x -> is(caster, x))
                     .collect(Collectors.toList());
         }

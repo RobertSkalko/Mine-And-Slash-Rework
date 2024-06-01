@@ -111,3 +111,8 @@ This also means if mobs have resist above cap, it's now harder to penetrate thei
 - attempt to improve spell projectiles
 - renamed ingame configs to features. Probably still need a better term for it. They're basically client configs but easily modifiable in the mns hub and are something players might want to edit multiple times per play session..
 - attempt to fix ailment supp gems by making attacker's stats proc on hit, and defender's stats proc when the dot ticks. This has a side effect of dot dmg being all "base dmg" so you won't see your dmg multipliers etc
+- fix cast speed to cd tag not being applied to some spells
+- added enchantment compat functionality to stat_compat datapacks! Added one in the base mod, sharpness now gives you 10% damage per level, this is displyed on the vanilla tooltip if you press ctrl
+Maximum dmg is 50% from it (per item). This should hopefully make vanilla stats and enchants useful again, and the caps should allow modpacks to make sure they can't become game breaking (like sharpness 5000 from some mod)
+I say be cautious with compats, I'm not sure if for example fire protection should get any bonus stats. For one, it's already a useful enchant on its own to not die in fire or lava. And two, if it gave say fire resistance stat,
+then fire res would be easy to get, but not other resistances. So don't just try to add compat for everything, it can screw up balance or make players op pretty easily

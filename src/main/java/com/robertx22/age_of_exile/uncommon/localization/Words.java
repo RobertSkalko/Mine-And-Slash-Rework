@@ -20,6 +20,7 @@ public enum Words implements IAutoLocName {
     Conditions("Conditions:"),
 
     WorksOnEvent("Works on Events:"),
+    EnchantCompatStats("Enchantment Stats:"),
     Radius("Radius: %1$sb"),
 
     ATTACK_SPEED_MULTI("Atk Speed Multi"),

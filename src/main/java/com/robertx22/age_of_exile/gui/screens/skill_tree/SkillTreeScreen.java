@@ -18,11 +18,13 @@ import com.robertx22.age_of_exile.gui.bases.INamedScreen;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkButton;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkConnectionRender;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkScreenContext;
+import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
+import com.robertx22.library_of_exile.utils.Watch;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -217,6 +219,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
         try {
 
+            this.addWidget(SkillTreeScreen.SEARCH);
 
             SkillTreeScreen.SEARCH.setFocused(false);
             SkillTreeScreen.SEARCH.setCanLoseFocus(true);
@@ -420,6 +423,10 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     @Override
     public void render(GuiGraphics gui, int x, int y, float ticks) {
+
+        Watch watch = new Watch();
+
+
         ctx = new PerkScreenContext(this);
 
         // String searchTerm = SkillTreeScreen.SEARCH.getValue();
@@ -462,6 +469,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                 mouseRecentlyClickedTicks = 0;
             }
 
+
             super.render(gui, x, y, ticks);
 
             this.tick_count++;
@@ -475,9 +483,13 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
         renderPanels(gui);
 
+        this.msstring = watch.getPrint();
+
         //watch.print(" rendering ");
     }
 
+
+    String msstring = "";
 
     static ResourceLocation BACKGROUND = SlashRef.guiId("skill_tree/background");
 
@@ -498,6 +510,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         //gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 
     }
+
 
     private void renderPanels(GuiGraphics gui) {
 
@@ -537,8 +550,12 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         SkillTreeScreen.SEARCH.setX(tx);
         SkillTreeScreen.SEARCH.setY(yx);
         SkillTreeScreen.SEARCH.render(gui, 0, 0, 0);
-        this.addWidget(SkillTreeScreen.SEARCH);
 
+
+        if (MMORPG.RUN_DEV_TOOLS) {
+            MutableComponent debug = Component.literal("Widgets: " + this.children().size() + " - " + msstring);
+            gui.drawString(mc.font, debug, savedx + 277, yx, ChatFormatting.GREEN.getColor());
+        }
     }
 
 }

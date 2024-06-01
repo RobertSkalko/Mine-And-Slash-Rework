@@ -27,9 +27,11 @@ public class CommonStatUtils {
         List<ExactStatData> list = new ArrayList<>();
 
         for (StatCompat c : ExileDB.StatCompat().getList()) {
-            var data = c.getResult(en, Load.Unit(en).getLevel());
-            if (data != null) {
-                list.add(data);
+            if (c.isAttributeCompat()) {
+                var data = c.getResult(en, Load.Unit(en).getLevel());
+                if (data != null) {
+                    list.add(data);
+                }
             }
         }
 

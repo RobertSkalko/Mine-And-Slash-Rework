@@ -42,10 +42,11 @@ public class TooltipMethod {
 
             if (Screen.hasControlDown()) {
                 GearItemData gear = StackSaving.GEARS.loadFrom(stack);
+
                 if (gear != null) {
+                    tooltip.addAll(gear.getEnchantCompatTooltip(stack));
                     return tooltip;
                 }
-
             }
 
             if (player == null || player.level() == null) {

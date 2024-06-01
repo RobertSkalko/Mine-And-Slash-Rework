@@ -12,7 +12,6 @@ import com.robertx22.age_of_exile.database.data.spells.components.selectors.Targ
 import com.robertx22.age_of_exile.database.data.spells.map_fields.MapField;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.CastingWeapon;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
-import com.robertx22.age_of_exile.tags.TagList;
 import com.robertx22.age_of_exile.tags.imp.SpellTag;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
@@ -38,7 +37,7 @@ public class SpellBuilder {
         builder.spell.loc_name = name;
         builder.spell.config.setStyle(style);
 
-        builder.spell.getConfig().tags = new TagList<SpellTag>();
+        // builder.spell.getConfig().tags = new TagList<SpellTag>();
         builder.spell.getConfig().tags.addAll(tags);
         builder.spell.getConfig().tags.add(style.getTag()); // maybe get rid of style after this
 

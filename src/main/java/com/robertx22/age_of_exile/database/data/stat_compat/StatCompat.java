@@ -16,6 +16,9 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Consumer;
 
@@ -26,6 +29,7 @@ public class StatCompat implements JsonExileRegistry<StatCompat>, IAutoGson<Stat
     public String id = "";
 
     public String attribute_id = "";
+    public String enchant_id = "";
     public StatScaling scaling = StatScaling.NONE;
     public String mns_stat_id = "";
     public float conversion = 0.5F;
@@ -50,11 +54,42 @@ public class StatCompat implements JsonExileRegistry<StatCompat>, IAutoGson<Stat
         return BuiltInRegistries.ATTRIBUTE.get(new ResourceLocation(attribute_id));
     }
 
+    public boolean isAttributeCompat() {
+        return !attribute_id.isEmpty();
+    }
+
+    public boolean isEnchantCompat() {
+        return !enchant_id.isEmpty();
+    }
+
+    public ExactStatData getEnchantCompatResult(ItemStack stack, int lvl) {
+        if (ExileDB.Stats().get(mns_stat_id) instanceof AttributeStat) {
+            return null;
+        }
+
+        Enchantment ench = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(enchant_id));
+        int enchlvl = stack.getEnchantmentLevel(ench);
+
+        if (enchlvl < 1) {
+            return null;
+        }
+
+        int val = (int) (enchlvl * conversion);
+        int value = MathHelper.clamp(val, minimum_cap, maximum_cap);
+
+        if (value != 0) {
+            value = (int) scaling.scale(value, lvl);
+            var data = ExactStatData.noScaling(value, mod_type, mns_stat_id);
+            return data;
+        }
+        return null;
+    }
+
     public ExactStatData getResult(LivingEntity en, int lvl) {
         if (ExileDB.Stats().get(mns_stat_id) instanceof AttributeStat) {
             return null;
         }
-        
+
         int val = (int) (en.getAttributeValue(getAttribute()) * conversion);
         int value = MathHelper.clamp(val, minimum_cap, maximum_cap);
 

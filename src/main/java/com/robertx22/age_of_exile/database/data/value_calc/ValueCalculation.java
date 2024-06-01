@@ -51,20 +51,6 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
 
     public float getDamageEffectiveness(LivingEntity en, MaxLevelProvider provider) {
         return dmg_effectiveness.getMulti().getValue(en, provider);
-
-        /*
-        Optional<ScalingCalc> wep = stat_scalings.stream().filter(x -> x.stat.equals(WeaponDamage.getInstance().GUID())).findFirst();
-        if (wep.isPresent()) {
-            float num = wep.get().getMulti().getValue(en, provider);
-            if (this.capsToWeaponDamage()) {
-                num += (this.cap_to_wep_dmg / 2F); // todo how do i balance dmg effectiveness of spells with stat scalings?
-                // not every reaches the cap
-            }
-            return num;
-        }
-        return 0;
-
-         */
     }
 
     public String getLocDmgTooltip(Elements element) {

@@ -38,7 +38,7 @@ public class UnsummonPacket extends MyPacket<UnsummonPacket> {
 
         EntityFinder.Setup<LivingEntity> finder = EntityFinder.start(p, LivingEntity.class, p.blockPosition())
                 .finder(EntityFinder.SelectionType.RADIUS)
-                .searchFor(AllyOrEnemy.pets)
+                .searchFor(AllyOrEnemy.casters_summons)
                 .radius(100);
 
         for (LivingEntity en : finder.build()) {

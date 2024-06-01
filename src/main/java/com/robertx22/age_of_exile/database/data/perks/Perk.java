@@ -145,7 +145,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
                 list.add(Words.PressAltForStatInfo.locName().withStyle(ChatFormatting.BLUE));
             }
 
-          
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -207,6 +207,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
         }
 
         public ResourceLocation getColorTexture(PerkStatus s) {
+          
             if (s == PerkStatus.BLOCKED) {
                 return noColor;
             }

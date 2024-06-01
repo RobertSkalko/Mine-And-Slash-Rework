@@ -66,6 +66,7 @@ public class PerkButton extends ImageButton {
     }
 
     public boolean isInside(int x, int y) {
+
         float scale = 2 - screen.zoom;
         return GuiUtils.isInRect((int) (this.getX() - ((width / 4) * scale)), (int) (this.getY() - ((height / 4) * scale)), (int) (width * scale), (int) (height * scale), x, y);
     }
@@ -77,7 +78,6 @@ public class PerkButton extends ImageButton {
         int MmouseY = (int) (1F / screen.zoom * mouseY);
 
         if (this.isInside(MmouseX, MmouseY)) {
-
 
             List<Component> tooltip = perk.GetTooltipString(new TooltipInfo(Minecraft.getInstance().player));
 
@@ -149,11 +149,13 @@ public class PerkButton extends ImageButton {
 
     @Override
     public void renderWidget(GuiGraphics gui, int mouseX, int mouseY, float pPartialTick) {
-        setTooltipMOD(gui, mouseX, mouseY);
+
 
         if (!screen.shouldRender(getX(), getY(), screen.ctx)) {
             return;
         }
+        
+        setTooltipMOD(gui, mouseX, mouseY);
 
 
         gui.pose().pushPose();
@@ -163,11 +165,9 @@ public class PerkButton extends ImageButton {
         float posMulti = 1F / scale;
 
 
-        // todo test
         float add = MathHelper.clamp(scale - 1, 0, 2);
         float off = width / -2F * add;
         gui.pose().translate(off, off, 0);
-
         gui.pose().scale(scale, scale, scale);
 
 
@@ -212,6 +212,9 @@ public class PerkButton extends ImageButton {
         int offcolor = (int) ((perk.getType().size - 20) / 2F);
 
         gui.setColor(1.0F, 1.0F, 1.0F, opacity);
+
+
+        // if i can merge these 2 icons into 1, i can remove 20% of the lag todo
         gui.blit(perk.getType().getColorTexture(status), xPos(offcolor, posMulti), yPos(offcolor, posMulti), 20, 20, 0, 0, 20, 20, 20, 20);
         gui.blit(perk.getType().getBorderTexture(status), (int) xPos(0, posMulti), (int) yPos(0, posMulti), 0, 0, this.width, this.height, this.width, this.height);
 
@@ -225,10 +228,12 @@ public class PerkButton extends ImageButton {
         gui.blit(perk.getIcon(), (int) xPos(offset, posMulti), (int) yPos(offset, posMulti), 0, 0, type.iconSize, type.iconSize, type.iconSize, type.iconSize);
 
 
-        gui.pose().scale(1F / scale, 1F / scale, 1F / scale);
+        //   gui.pose().scale(1F / scale, 1F / scale, 1F / scale);
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 
         gui.pose().popPose();
 
     }
+
+
 }
