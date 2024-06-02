@@ -329,12 +329,12 @@ public class RangerSpells implements ExileRegistryInit {
                 .onTick("trap", PartBuilder.aoeParticles(particle, 5D, 1D)
                         .addCondition(EffectCondition.IS_ENTITY_IN_RADIUS.enemiesInRadius(1D))
                         .addActions(SpellAction.EXPIRE.create())
-                        .addActions(SpellAction.SPECIFIC_ACTION.create("expire"))
+                        .addActions(SpellAction.SPECIFIC_ACTION.create("explode"))
                         .tick(2D))
 
-                .addSpecificAction("expire", PartBuilder.damageInAoe(dmg, element, 3D))
-                .addSpecificAction("expire", PartBuilder.aoeParticles(particle, 30D, 3D))
-                .addSpecificAction("expire", PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D));
+                .addSpecificAction("explode", PartBuilder.damageInAoe(dmg, element, 3D))
+                .addSpecificAction("explode", PartBuilder.aoeParticles(particle, 30D, 3D))
+                .addSpecificAction("explode", PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D));
 
     }
 

@@ -116,3 +116,4 @@ This also means if mobs have resist above cap, it's now harder to penetrate thei
 Maximum dmg is 50% from it (per item). This should hopefully make vanilla stats and enchants useful again, and the caps should allow modpacks to make sure they can't become game breaking (like sharpness 5000 from some mod)
 I say be cautious with compats, I'm not sure if for example fire protection should get any bonus stats. For one, it's already a useful enchant on its own to not die in fire or lava. And two, if it gave say fire resistance stat,
 then fire res would be easy to get, but not other resistances. So don't just try to add compat for everything, it can screw up balance or make players op pretty easily
+- should fix fire trap and some other spells crashing

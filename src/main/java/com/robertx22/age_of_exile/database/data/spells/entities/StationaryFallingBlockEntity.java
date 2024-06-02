@@ -141,18 +141,22 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
 
     // todo does this work?
 
+    boolean exploded = false;
+
     @Override
     public void remove(Entity.RemovalReason pReason) {
-
         try {
-            if (getSpellData() != null) {
-                LivingEntity caster = getSpellData().getCaster(level());
+            if (!exploded) {
+                exploded = true;
+                if (getSpellData() != null) {
+                    LivingEntity caster = getSpellData().getCaster(level());
 
-                if (caster != null) {
-                    this.getSpellData()
-                            .getSpell()
-                            .getAttached()
-                            .tryActivate(getScoreboardName(), SpellCtx.onExpire(caster, this, getSpellData()));
+                    if (caster != null) {
+                        this.getSpellData()
+                                .getSpell()
+                                .getAttached()
+                                .tryActivate(getScoreboardName(), SpellCtx.onExpire(caster, this, getSpellData()));
+                    }
                 }
             }
         } catch (Exception e) {

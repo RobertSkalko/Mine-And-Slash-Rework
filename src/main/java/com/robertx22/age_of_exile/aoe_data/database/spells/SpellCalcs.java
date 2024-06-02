@@ -118,7 +118,7 @@ public class SpellCalcs {
             .attackScaling(0.5F, 1F)
             .build();
     public static ValueCalculation RANGER_TRAP = ValueCalcBuilder.of("ranger_trap")
-            .attackScaling(1, 1.5F)
+            .attackScaling(1, 2)
             .build();
     public static ValueCalculation AWAKEN_MANA = ValueCalcBuilder.of("awaken_mana")
             .spellScaling(1, 2)
