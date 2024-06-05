@@ -37,16 +37,6 @@ body:
       description: What version of Minecraft are you using?
     validations:
       required: true
-  - type: dropdown
-    id: lversion
-    attributes:
-      label: Modloader version
-      description: Which modloader are you using? Only Forge/Fabric is supported.
-      options:
-        - Forge
-        - Fabric
-    validations:
-      required: true
   - type: input
     id: logs
     attributes:
