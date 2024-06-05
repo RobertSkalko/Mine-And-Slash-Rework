@@ -18,7 +18,6 @@ import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.data.gems.Gem;
 import com.robertx22.age_of_exile.database.data.profession.ExplainedResult;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
-import com.robertx22.age_of_exile.database.data.stats.types.offense.SkillDamage;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.EnergyRegen;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
@@ -220,7 +219,7 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
 
         @Override
         public List<StatMod> onWeapons() {
-            return Arrays.asList(new StatMod(MIN_WEP_DMG, MAX_WEP_DMG, OffenseStats.ELEMENTAL_DAMAGE.get(ele), ModType.FLAT));
+            return Arrays.asList(new StatMod(5, 25, OffenseStats.ELEMENTAL_DAMAGE.get(ele), ModType.FLAT));
         }
     }
 
@@ -294,7 +293,7 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
         TOPAZ("topaz", "Topaz", ChatFormatting.YELLOW, new GemStatPerTypes() {
             @Override
             public List<StatMod> onArmor() {
-                return Arrays.asList(new StatMod(MIN_RES, MAX_RES, new ElementalResist(Elements.Nature)));
+                return Arrays.asList(new StatMod(1, 5, DatapackStats.INT));
             }
 
             @Override
@@ -304,25 +303,11 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
 
             @Override
             public List<StatMod> onWeapons() {
-                return Arrays.asList(new StatMod(1, 3, ResourceStats.RESOURCE_ON_HIT.get(new ResourceAndAttack(ResourceType.energy, AttackType.hit))));
-            }
-        }),
-        AMETHYST("amethyst", "Amethyst", ChatFormatting.DARK_PURPLE, new GemStatPerTypes() {
-            @Override
-            public List<StatMod> onArmor() {
-                return Arrays.asList(new StatMod(1, 5, DatapackStats.INT));
-            }
-
-            @Override
-            public List<StatMod> onJewelry() {
-                return Arrays.asList(new StatMod(1, 6, SkillDamage.getInstance(), ModType.FLAT));
-            }
-
-            @Override
-            public List<StatMod> onWeapons() {
                 return Arrays.asList(new StatMod(3, 15, OffenseStats.CRIT_DAMAGE.get()));
             }
         }),
+
+        AMETHYST("amethyst", "Amethyst", ChatFormatting.DARK_PURPLE, new EleGem(Elements.Shadow)),
         RUBY("ruby", "Ruby", ChatFormatting.RED, new EleGem(Elements.Fire)),
         EMERALD("emerald", "Emerald", ChatFormatting.GREEN, new EleGem(Elements.Shadow)),
         SAPPHIRE("sapphire", "Sapphire", ChatFormatting.BLUE, new EleGem(Elements.Cold));

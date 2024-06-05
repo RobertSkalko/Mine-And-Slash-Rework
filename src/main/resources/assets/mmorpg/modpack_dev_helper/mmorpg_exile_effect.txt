@@ -17,7 +17,6 @@ ice_golem_buff
 inner_calm
 lightning_golem_buff
 mage_circle
-missile_barrage
 perseverance
 petrify
 power_charge

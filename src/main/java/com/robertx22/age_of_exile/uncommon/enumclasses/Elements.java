@@ -31,7 +31,7 @@ public enum Elements implements IGUID {
     // multi ele
     Elemental(Arrays.asList(ElementIds.NATURE, ElementIds.FIRE, ElementIds.WATER), Arrays.asList(ElementTags.ELEMENTAL), "Elemental", ChatFormatting.LIGHT_PURPLE, "elemental", "\u2600", SpellTags.PHYSICAL),
 
-    NONE(Arrays.asList(), Arrays.asList(), "None", ChatFormatting.LIGHT_PURPLE, "all", "\u2600", SpellTags.PHYSICAL);
+    ALL(Arrays.asList(ElementIds.NATURE, ElementIds.FIRE, ElementIds.WATER, Shadow.GUID()), Arrays.asList(), "", ChatFormatting.LIGHT_PURPLE, "all", "\u2600", SpellTags.PHYSICAL);
 
     public SpellTag spellTag;
 
@@ -57,11 +57,11 @@ public enum Elements implements IGUID {
 
 
     public boolean isValid() {
-        return this != NONE;
+        return this != ALL;
     }
 
     public boolean shouldShowInStatPanel() {
-        return this != NONE && this != Elemental;
+        return this != ALL && this != Elemental;
     }
 
     public boolean isSingleElement() {
@@ -104,10 +104,6 @@ public enum Elements implements IGUID {
 
         if (this == other) {
             return true;
-        }
-
-        if (other == NONE || this == NONE) {
-            return false; // todo
         }
 
         if (this.isSingleElement() && !other.isSingleElement()) {

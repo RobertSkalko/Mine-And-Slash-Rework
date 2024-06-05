@@ -33,7 +33,7 @@ public class SpellChangeStats {
             })
             .build();
     public static DataPackStatAccessor MAX_SUMMON_CAPACITY = DatapackStatBuilder
-            .ofSingle("max_total_summons", Elements.NONE)
+            .ofSingle("max_total_summons", Elements.ALL)
             .worksWithEvent(SpellStatsCalculationEvent.ID)
             .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)

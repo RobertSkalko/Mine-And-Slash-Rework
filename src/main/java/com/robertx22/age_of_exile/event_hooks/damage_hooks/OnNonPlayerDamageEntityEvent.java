@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.event_hooks.damage_hooks;
 
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.DmgSourceUtils;
+import com.robertx22.age_of_exile.mixin_ducks.DamageSourceDuck;
 import com.robertx22.age_of_exile.uncommon.UnstuckMobs;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
@@ -54,6 +55,9 @@ public class OnNonPlayerDamageEntityEvent extends EventConsumer<ExileEvents.OnDa
                 }
             } else {
                 LivingHurtUtils.tryAttack(new AttackInformation(event, AttackInformation.Mitigation.PRE, event.mob, event.source, event.damage));
+
+                var duck = (DamageSourceDuck) event.source;
+                duck.tryOverrideDmgWithMns(event);
             }
         }
     }

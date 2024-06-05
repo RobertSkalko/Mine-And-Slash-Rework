@@ -441,9 +441,10 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
     boolean removeNextTick = false;
 
     public void scheduleRemoval() {
-        this.discard();
-
-        removeNextTick = true;
+        if (!this.isRemoved()) {
+            this.discard();
+            removeNextTick = true;
+        }
     }
 
     static Gson GSON = new Gson();

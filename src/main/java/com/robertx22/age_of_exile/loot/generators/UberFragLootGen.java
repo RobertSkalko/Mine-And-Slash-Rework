@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.loot.generators;
 
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.content.ubers.UberBossTier;
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.ItemBlueprint;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
@@ -19,7 +20,7 @@ public class UberFragLootGen extends BaseLootGen<ItemBlueprint> {
 
     @Override
     public float baseDropChance() {
-
+   
         return (float) (ServerContainer.get().UBER_FRAG_DROPRATE.get().floatValue());
     }
 
@@ -31,7 +32,7 @@ public class UberFragLootGen extends BaseLootGen<ItemBlueprint> {
     @Override
     public boolean condition() {
         var map = Load.mapAt(info.world, info.pos);
-        if (map == null || !map.map.isUber()) {
+        if (map == null || map.map.isUber()) {
             return false;
         }
         return info.level >= UberBossTier.T1.frag_drop_lvl;
@@ -43,8 +44,7 @@ public class UberFragLootGen extends BaseLootGen<ItemBlueprint> {
 
         var tier = UberBossTier.getTierForFragmentDrop(info.level);
 
-
-        var uber = map.map.getUber();
+        var uber = ExileDB.UberBoss().getFilterWrapped(x -> true).random();
 
         Item item = SlashItems.UBER_FRAGS.get(uber.getEnum()).get(tier.tier).get();
 

@@ -29,7 +29,7 @@ public class HitDamage extends Stat {
 
     private class Effect extends BaseDamageIncreaseEffect {
 
-       
+
         @Override
         public EffectSides Side() {
             return EffectSides.Source;
@@ -44,7 +44,7 @@ public class HitDamage extends Stat {
 
     @Override
     public Elements getElement() {
-        return Elements.NONE;
+        return Elements.ALL;
     }
 
     @Override

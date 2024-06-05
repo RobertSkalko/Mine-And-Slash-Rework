@@ -121,6 +121,7 @@ public class StationaryFallingBlockEntity extends FallingBlockEntity implements 
             if (!level().isClientSide) {
                 if (getSpellData() != null) {
                     var caster = getSpellData().getCaster(level());
+
                     if (caster != null) {
                         this.getSpellData()
                                 .getSpell()

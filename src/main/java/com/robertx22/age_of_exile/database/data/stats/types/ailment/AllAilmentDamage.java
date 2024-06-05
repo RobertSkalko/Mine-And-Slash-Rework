@@ -45,7 +45,7 @@ public class AllAilmentDamage extends Stat {
 
     @Override
     public Elements getElement() {
-        return Elements.NONE;
+        return Elements.ALL;
     }
 
     @Override

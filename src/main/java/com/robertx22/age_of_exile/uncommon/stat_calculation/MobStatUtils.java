@@ -97,16 +97,18 @@ public class MobStatUtils {
 
     public static List<StatContext> getWorldMultiplierStats(LivingEntity en) {
 
+        float val = (-1F + ExileDB.getDimensionConfig(en.level()).mob_strength_multi) * 100F;
+
         List<StatContext> list = new ArrayList<>();
+
+        if (val == 0) {
+            return list;
+        }
 
         List<ExactStatData> stats = new ArrayList<>();
 
-        float val = (-1F + ExileDB.getDimensionConfig(en.level()).mob_strength_multi) * 100F;
-
-        stats.add(ExactStatData.noScaling(val, ModType.MORE, Health.getInstance()
-                .GUID()));
-        stats.add(ExactStatData.noScaling(val, ModType.MORE, OffenseStats.TOTAL_DAMAGE.get()
-                .GUID()));
+        stats.add(ExactStatData.noScaling(val, ModType.MORE, Health.getInstance().GUID()));
+        stats.add(ExactStatData.noScaling(val, ModType.MORE, OffenseStats.TOTAL_DAMAGE.get().GUID()));
 
         list.add(new MiscStatCtx(stats));
 

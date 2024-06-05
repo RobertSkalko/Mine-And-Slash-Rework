@@ -140,8 +140,7 @@ public class LevelUtils {
 
     public static int determineLevelPerDistanceFromSpawn(ServerLevel world, BlockPos pos, DimensionConfig config) {
 
-        double distance = world.getSharedSpawnPos()
-                .distManhattan(pos);
+        double distance = world.getSharedSpawnPos().distManhattan(pos);
 
         double scale = Mth.clamp(world.dimensionType().coordinateScale() / 3F, 1, Integer.MAX_VALUE);
 

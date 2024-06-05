@@ -296,8 +296,8 @@ public class OnItemInteract {
             if (player.level().isClientSide) {
                 return;
             }
-            if (x.getClickAction() != ClickAction.PRIMARY) {
-                //  return;
+            if (x.getClickAction() != ClickAction.SECONDARY) {
+                return;
             }
 
             ItemStack currency = x.getStackedOnItem();

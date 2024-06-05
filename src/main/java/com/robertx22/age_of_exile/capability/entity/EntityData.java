@@ -454,8 +454,10 @@ public class EntityData implements ICap, INeededForClient {
                     .build();
             dmg.data.setBoolean(EventData.UNARMED_ATTACK, true);
             dmg.Activate();
+        } else {
+            data.setAmount(0);
+            data.setCanceled(true);
         }
-
     }
 
     public void setUnit(Unit unit) {

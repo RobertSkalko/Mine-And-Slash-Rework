@@ -291,7 +291,7 @@ public class OffenseStats {
             })
             .build();
     public static DataPackStatAccessor<EmptyAccessor> AREA_DAMAGE = DatapackStatBuilder
-            .ofSingle("area_dmg", Elements.NONE)
+            .ofSingle("area_dmg", Elements.ALL)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()
@@ -307,7 +307,7 @@ public class OffenseStats {
             })
             .build();
     public static DataPackStatAccessor<EmptyAccessor> TRAP_AREA_DAMAGE = DatapackStatBuilder
-            .ofSingle("trap_area_dmg", Elements.NONE)
+            .ofSingle("trap_area_dmg", Elements.ALL)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()
@@ -324,7 +324,7 @@ public class OffenseStats {
             })
             .build();
     public static DataPackStatAccessor<EmptyAccessor> DOT_DAMAGE = DatapackStatBuilder
-            .ofSingle("dot_dmg", Elements.NONE)
+            .ofSingle("dot_dmg", Elements.ALL)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
@@ -340,7 +340,7 @@ public class OffenseStats {
             })
             .build();
     public static DataPackStatAccessor<EmptyAccessor> TOTAL_DAMAGE = DatapackStatBuilder
-            .ofSingle("total_damage", Elements.NONE)
+            .ofSingle("total_damage", Elements.ALL)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()
@@ -356,7 +356,7 @@ public class OffenseStats {
             })
             .build();
     public static DataPackStatAccessor<EmptyAccessor> ATTACK_DAMAGE = DatapackStatBuilder
-            .ofSingle("attack_damage", Elements.NONE)
+            .ofSingle("attack_damage", Elements.ALL)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()

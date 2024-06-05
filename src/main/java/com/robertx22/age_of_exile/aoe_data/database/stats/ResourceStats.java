@@ -66,7 +66,7 @@ public class ResourceStats {
             .build();
 
     public static DataPackStatAccessor<ResourceType> RESOURCE_ON_KILL = DatapackStatBuilder
-            .<ResourceType>of(x -> x.id + "_on_kill", x -> Elements.NONE)
+            .<ResourceType>of(x -> x.id + "_on_kill", x -> Elements.ALL)
             .addAllOfType(ResourceType.values())
             .worksWithEvent(OnMobKilledByDamageEvent.ID)
             .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)
@@ -82,7 +82,7 @@ public class ResourceStats {
             })
             .build();
     public static DataPackStatAccessor<ResourceAndAttack> RESOURCE_ON_HIT = DatapackStatBuilder
-            .<ResourceAndAttack>of(x -> x.GUID(), x -> Elements.NONE)
+            .<ResourceAndAttack>of(x -> x.GUID(), x -> Elements.ALL)
             .addAllOfType(ResourceAndAttack.allCombos())
             .worksWithEvent(DamageEvent.ID)
             .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)
@@ -100,7 +100,7 @@ public class ResourceStats {
             })
             .build();
     public static DataPackStatAccessor<ResourceType> LEECH_CAP = DatapackStatBuilder
-            .<ResourceType>of(x -> x.id + "_leech_cap", x -> Elements.NONE)
+            .<ResourceType>of(x -> x.id + "_leech_cap", x -> Elements.ALL)
             .addAllOfType(ResourceType.values())
             //.worksWithEvent(DamageEvent.ID)
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
@@ -116,7 +116,7 @@ public class ResourceStats {
             })
             .build();
     public static DataPackStatAccessor<EmptyAccessor> LOW_HP_HEALING = DatapackStatBuilder
-            .ofSingle("low_hp_healing", Elements.NONE)
+            .ofSingle("low_hp_healing", Elements.ALL)
             .worksWithEvent(RestoreResourceEvent.ID)
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()
@@ -136,7 +136,7 @@ public class ResourceStats {
             })
             .build();
     public static DataPackStatAccessor<EmptyAccessor> OUT_OF_COMBAT_REGEN = DatapackStatBuilder
-            .ofSingle("out_of_combat_regen", Elements.NONE)
+            .ofSingle("out_of_combat_regen", Elements.ALL)
             .worksWithEvent(RestoreResourceEvent.ID)
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()
@@ -154,7 +154,7 @@ public class ResourceStats {
             })
             .build();
     public static DataPackStatAccessor<EmptyAccessor> HEAL_STRENGTH = DatapackStatBuilder
-            .ofSingle("increase_healing", Elements.NONE)
+            .ofSingle("increase_healing", Elements.ALL)
             .worksWithEvent(RestoreResourceEvent.ID)
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()
@@ -173,7 +173,7 @@ public class ResourceStats {
             })
             .build();
     public static DataPackStatAccessor<EmptyAccessor> TOTEM_RESTORATION_STRENGTH = DatapackStatBuilder
-            .ofSingle("totem_resto", Elements.NONE)
+            .ofSingle("totem_resto", Elements.ALL)
             .worksWithEvent(RestoreResourceEvent.ID)
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setUsesMoreMultiplier()
@@ -192,7 +192,7 @@ public class ResourceStats {
             })
             .build();
     public static DataPackStatAccessor<EmptyAccessor> REJUV_HEAL_SELF = DatapackStatBuilder
-            .ofSingle("rejuv_eff_on_self", Elements.NONE)
+            .ofSingle("rejuv_eff_on_self", Elements.ALL)
             .worksWithEvent(RestoreResourceEvent.ID)
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Target)
@@ -211,7 +211,7 @@ public class ResourceStats {
             })
             .build();
     public static DataPackStatAccessor<EmptyAccessor> HEALING_RECEIVED = DatapackStatBuilder
-            .ofSingle("heal_effect_on_self", Elements.NONE)
+            .ofSingle("heal_effect_on_self", Elements.ALL)
             .worksWithEvent(RestoreResourceEvent.ID)
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Target)
@@ -230,7 +230,7 @@ public class ResourceStats {
             })
             .build();
     public static DataPackStatAccessor<EmptyAccessor> LIFESTEAL = DatapackStatBuilder
-            .ofSingle("lifesteal", Elements.NONE)
+            .ofSingle("lifesteal", Elements.ALL)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)
             .setSide(EffectSides.Source)
@@ -248,7 +248,7 @@ public class ResourceStats {
             })
             .build();
     public static DataPackStatAccessor<EmptyAccessor> MANASTEAL = DatapackStatBuilder
-            .ofSingle("manasteal", Elements.NONE)
+            .ofSingle("manasteal", Elements.ALL)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)
             .setSide(EffectSides.Source)
@@ -266,7 +266,7 @@ public class ResourceStats {
             })
             .build();
     public static DataPackStatAccessor<EmptyAccessor> SPELL_LIFESTEAL = DatapackStatBuilder
-            .ofSingle("spell_lifesteal", Elements.NONE)
+            .ofSingle("spell_lifesteal", Elements.ALL)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)
             .setSide(EffectSides.Source)
@@ -284,7 +284,7 @@ public class ResourceStats {
             })
             .build();
     public static DataPackStatAccessor<EmptyAccessor> SPELL_MSSTEAL = DatapackStatBuilder
-            .ofSingle("spell_mssteal", Elements.NONE)
+            .ofSingle("spell_mssteal", Elements.ALL)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)
             .setSide(EffectSides.Source)
@@ -302,7 +302,7 @@ public class ResourceStats {
             })
             .build();
     public static DataPackStatAccessor<EmptyAccessor> DOT_LIFESTEAL = DatapackStatBuilder
-            .ofSingle("dot_lifesteal", Elements.NONE)
+            .ofSingle("dot_lifesteal", Elements.ALL)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)
             .setSide(EffectSides.Source)
@@ -320,7 +320,7 @@ public class ResourceStats {
             })
             .build();
     public static DataPackStatAccessor<EmptyAccessor> INCREASED_LEECH = DatapackStatBuilder
-            .ofSingle("inc_leech", Elements.NONE)
+            .ofSingle("inc_leech", Elements.ALL)
             .worksWithEvent(RestoreResourceEvent.ID)
             .setPriority(StatPriority.Damage.FINAL_DAMAGE)
             .setSide(EffectSides.Source)

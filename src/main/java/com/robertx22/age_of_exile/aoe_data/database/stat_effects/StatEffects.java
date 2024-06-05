@@ -53,7 +53,6 @@ public class StatEffects implements ExileRegistryInit {
     public static DataHolder<EffectCtx, StatEffect> GIVE_SELF_EFFECT_30_SEC = new DataHolder<>(
             Arrays.asList(
                     ModEffects.TAUNT_STANCE,
-                    ModEffects.MISSILE_BARRAGE,
                     ModEffects.CURSE_AGONY,
                     ModEffects.DESPAIR,
                     ModEffects.CURSE_WEAKNESS,
@@ -100,7 +99,6 @@ public class StatEffects implements ExileRegistryInit {
                     ModEffects.STUN,
                     ModEffects.BLIND,
                     ModEffects.TAUNT_STANCE,
-                    ModEffects.MISSILE_BARRAGE,
                     ModEffects.CURSE_AGONY,
                     ModEffects.DESPAIR,
                     ModEffects.CURSE_WEAKNESS,
