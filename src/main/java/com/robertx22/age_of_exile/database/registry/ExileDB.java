@@ -44,13 +44,14 @@ import com.robertx22.age_of_exile.maps.dungeon_reg.Dungeon;
 import com.robertx22.age_of_exile.maps.spawned_map_mobs.SpawnedMobList;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.action.StatEffect;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.condition.StatCondition;
+import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.MapManager;
 import com.robertx22.library_of_exile.registry.Database;
 import com.robertx22.library_of_exile.registry.ExileRegistryContainer;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class ExileDB {
 
@@ -70,10 +71,8 @@ public class ExileDB {
 
     public static EntityConfig getEntityConfig(LivingEntity entity, EntityData data) {
 
-        String monster_id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType())
-                .toString();
-        String mod_id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType())
-                .getNamespace();
+        String monster_id = ForgeRegistries.ENTITY_TYPES.getKey(entity.getType()).toString();
+        String mod_id = ForgeRegistries.ENTITY_TYPES.getKey(entity.getType()).getNamespace();
 
         EntityConfig config = null;
 
@@ -267,6 +266,11 @@ public class ExileDB {
     public static ExileRegistryContainer<ProfessionRecipe> Recipes() {
         return Database.getRegistry(ExileRegistryTypes.RECIPE);
     }
+
+    public static ExileRegistryContainer<WeaponTypes> WeaponTypes() {
+        return Database.getRegistry(ExileRegistryTypes.WEAPON_TYPE);
+    }
+
 
     public static ExileRegistryContainer<StatCompat> StatCompat() {
         return Database.getRegistry(ExileRegistryTypes.STAT_COMPAT);

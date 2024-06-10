@@ -30,6 +30,14 @@ body:
       options:
         - label: Before submitting this issue I updated to the newest version and reproduced it
           required: true
+  - type: checkboxes
+    id: terms2
+    attributes:
+      label: Tested Without Custom Mine and Slash Datapacks
+      description:
+      options:
+        - label: In case I used Mine and Slash datapacks, I ran Mine and Slash in a new instance without custom datapacks and confirmed the bug still exists
+          required: true
   - type: input
     id: mversion
     attributes:

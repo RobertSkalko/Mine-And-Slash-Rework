@@ -26,7 +26,7 @@ public class BaseGearBuilder implements GearDataHelper {
     private List<StatMod> basestats = new ArrayList<>();
     private List<BaseGearType.ItemChance> items = new ArrayList<>();
     private StatRequirement req = new StatRequirement();
-    private WeaponTypes wep = WeaponTypes.none;
+    private String wep = WeaponTypes.none.GUID();
     private int weight = 1000;
 
     public static BaseGearBuilder of(DataGenKey<BaseGearType> id, String slot, String locnamesuffix, StatRequirement req) {
@@ -87,7 +87,7 @@ public class BaseGearBuilder implements GearDataHelper {
     }
 
     public BaseGearBuilder weaponType(WeaponTypes wep) {
-        this.wep = wep;
+        this.wep = wep.GUID();
         return this;
     }
 

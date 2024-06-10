@@ -75,7 +75,7 @@ public class LivingHurtUtils {
 
             if (data.getAttackerEntity() instanceof Player p) {
 
-                if (weapondata == null || !weapondata.GetBaseGearType().weapon_type.damage_validity_check.isValid(data.getSource())) {
+                if (weapondata == null || !weapondata.GetBaseGearType().weaponType().damage_validity_check.isValid(data.getSource())) {
                     Load.Unit(p).unarmedAttack(data);
                     return;
                 }

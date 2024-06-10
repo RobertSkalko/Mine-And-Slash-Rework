@@ -147,7 +147,7 @@ public class EventData {
     }
 
     public WeaponTypes getWeaponType() {
-        return WeaponTypes.getAll().stream().filter(x -> x.id.equals(strings.getOrDefault(WEAPON_TYPE, WeaponTypes.none.id))).findAny().orElse(WeaponTypes.none);
+        return ExileDB.WeaponTypes().get(strings.getOrDefault(WEAPON_TYPE, WeaponTypes.none.id));
     }
 
     public void setElement(Elements ele) {

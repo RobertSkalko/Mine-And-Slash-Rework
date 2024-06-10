@@ -60,6 +60,10 @@ public class ProphecyAltarBlock extends Block {
 
             // nothing is stored in this block, instead by clicking the altar, the player gains the options
 
+        } else {
+
+            // need to delay this for 1 tick at least
+            //ClientOnly.openProphecy();
         }
 
         return InteractionResult.SUCCESS;

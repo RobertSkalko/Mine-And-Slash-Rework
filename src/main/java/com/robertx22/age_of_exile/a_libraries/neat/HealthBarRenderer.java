@@ -14,7 +14,6 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.language.I18n;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -34,6 +33,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.scores.Team;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.joml.Quaternionf;
 
 import java.text.DecimalFormat;
@@ -153,8 +153,8 @@ public class HealthBarRenderer {
         if ((!NeatConfig.instance.renderInF1() && !Minecraft.renderNames()) || !NeatConfig.draw) {
             return false;
         }
-
-        var id = BuiltInRegistries.ENTITY_TYPE.getKey(living.getType());
+        
+        var id = ForgeRegistries.ENTITY_TYPES.getKey(living.getType());
         if (NeatConfig.instance.blacklist().contains(id.toString())) {
             return false;
         }
@@ -340,7 +340,7 @@ public class HealthBarRenderer {
                     mc.font.drawInBatch(percStr, (int) (halfSize / healthValueTextScale) - mc.font.width(percStr) / 2.0F, h, white, false, poseStack.last().pose(), buffers, Font.DisplayMode.NORMAL, black, light);
                 }
                 if (NeatConfig.instance.enableDebugInfo() && mc.options.renderDebug) {
-                    var id = BuiltInRegistries.ENTITY_TYPE.getKey(living.getType());
+                    var id = ForgeRegistries.ENTITY_TYPES.getKey(living.getType());
                     mc.font.drawInBatch("ID: \"" + id + "\"", 0, h + 16, white, false, poseStack.last().pose(), buffers, Font.DisplayMode.NORMAL, black, light);
                 }
                 poseStack.popPose();

@@ -27,7 +27,7 @@ public class RangedDamageUtil {
 
             if (gear != null) {
                 var type = gear.GetBaseGearType();
-                return type.weapon_type.damage_validity_check.isValid(source);
+                return type.weaponType().damage_validity_check.isValid(source);
             }
             return false;
         }

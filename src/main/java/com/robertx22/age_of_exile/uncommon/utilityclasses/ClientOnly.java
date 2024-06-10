@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
+import com.robertx22.age_of_exile.prophecy.gui.ProphecyScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.chat.MutableComponent;
@@ -18,6 +19,10 @@ public class ClientOnly {
     public static void totemAnimWithItem(ItemStack stack) {
         Minecraft.getInstance().player.playSound(SoundEvents.TOTEM_USE, 1, 1);
         Minecraft.getInstance().gameRenderer.displayItemActivation(stack);
+    }
+
+    public static void openProphecy() {
+        Minecraft.getInstance().setScreen(new ProphecyScreen());
     }
 
 

@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulData;
 import com.robertx22.age_of_exile.vanilla_mc.items.crates.gem_crate.LootCrateData;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
+import net.minecraft.world.item.ItemStack;
 
 public class StackSaving {
 
@@ -21,12 +22,14 @@ public class StackSaving {
     public static ItemstackDataSaver<JewelItemData> JEWEL = of(new ItemstackDataSaver<>(SlashRef.MODID + "_jewel", JewelItemData.class, () -> new JewelItemData()));
     public static ItemstackDataSaver<LootChestData> LOOT_CHEST = of(new ItemstackDataSaver<>(SlashRef.MODID + "_loot_chest", LootChestData.class, () -> new LootChestData()));
     public static ItemstackDataSaver<ProfessionToolData> TOOL = of(new ItemstackDataSaver<>(SlashRef.MODID + "_tool_stats", ProfessionToolData.class, () -> new ProfessionToolData()));
-  
+
     static ItemstackDataSaver of(ItemstackDataSaver t) {
         return t;
     }
 
     public static void init() {
 
+        ItemStack stack;
+        stack.too
     }
 }

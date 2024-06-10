@@ -123,3 +123,5 @@ v.5.5.7
 - changed drag and drop interactions to require a right mouse click now
 - fixed uber frags to be able to actually drop normally. (why did nobody report this? :()
 Basically frags only dropped in uber maps, but you can only normally get uber maps by combining the frags.
+- weapon types are now a separate datapack, and basegeartypes now use a string id for them
+This needs just a small edit to basegeartype datapacks and to create a new weapon_type datapack for any new wep types you have

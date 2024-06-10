@@ -126,8 +126,8 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
         MAIN("core", "Core"),
         LESSER("lesser", "Common"),
         MEDIUM("medium", "Rare"),
-        GREATER("greater", "Epic"),
-        MISC("misc", "Misc");
+        GREATER("greater", "Epic");
+        //  MISC("misc", "Misc");
 
         public String id;
         public String locname;

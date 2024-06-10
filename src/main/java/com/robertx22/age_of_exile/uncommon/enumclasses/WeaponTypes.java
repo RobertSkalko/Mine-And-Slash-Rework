@@ -1,7 +1,10 @@
 package com.robertx22.age_of_exile.uncommon.enumclasses;
 
+import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
-import com.robertx22.library_of_exile.registry.IGUID;
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.IAutoGson;
+import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.DamageTypeTags;
@@ -12,8 +15,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WeaponTypes implements IGUID {
+public class WeaponTypes implements JsonExileRegistry<WeaponTypes>, IAutoGson<WeaponTypes> {
 
+    public static WeaponTypes SERIALIZER = new WeaponTypes();
 
     private static List<WeaponTypes> ALL = new ArrayList<>();
 
@@ -27,12 +31,35 @@ public class WeaponTypes implements IGUID {
     public static WeaponTypes crossbow = new WeaponTypes("crossbow", PlayStyle.DEX, WeaponRange.RANGED, true, DamageValidityData.projectile());
 
     static {
-
         init();
+    }
+
+    public WeaponTypes() {
     }
 
     static void init() {
 
+    }
+
+    public static void registerAll() {
+        for (WeaponTypes wep : ALL) {
+            wep.addToSerializables();
+        }
+    }
+
+    @Override
+    public ExileRegistryType getExileRegistryType() {
+        return ExileRegistryTypes.WEAPON_TYPE;
+    }
+
+    @Override
+    public int Weight() {
+        return 1000;
+    }
+
+    @Override
+    public Class<WeaponTypes> getClassForSerialization() {
+        return WeaponTypes.class;
     }
 
     public enum SourceCheck {

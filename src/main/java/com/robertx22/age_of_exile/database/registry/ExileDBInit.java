@@ -44,6 +44,7 @@ public class ExileDBInit {
 
 
         Database.addRegistry(new RarityRegistryContainer<>(ExileRegistryTypes.GEAR_RARITY, IRarity.COMMON_ID).setIsDatapack());
+        Database.addRegistry(new RarityRegistryContainer<>(ExileRegistryTypes.WEAPON_TYPE, UNKNOWN_ID).setIsDatapack());
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.GEAR_SLOT, GearSlots.SWORD).setIsDatapack());
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.GEAR_TYPE, BaseGearTypes.SWORD.GUID()).setIsDatapack());
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.RUNEWORDS, "").setIsDatapack());
