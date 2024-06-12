@@ -32,7 +32,7 @@ public class ToggleAutoSalvageRarity extends GuiAction {
 
         var text = Component.literal("");
 
-        if (Load.player(p).config.salvage.salvagesGearOrJewel(type, rarity.GUID())) {
+        if (Load.player(p).config.salvage.checkAutoSalvage(type, rarity.GUID())) {
             text = Gui.SALVAGE_TIP_ON.locName(rarity.locName(), type.word.locName()).withStyle(ChatFormatting.GREEN);
         } else {
             text = Gui.SALVAGE_TIP_OFF.locName(rarity.locName(), type.word.locName()).withStyle(ChatFormatting.RED);
@@ -46,7 +46,7 @@ public class ToggleAutoSalvageRarity extends GuiAction {
 
     @Override
     public void doAction(Player p, Object data) {
-        Load.player(p).config.salvage.toggle(type, rarity.GUID());
+        Load.player(p).config.salvage.toggleGuiSalvageConfig(type, rarity.GUID());
         Load.player(p).playerDataSync.setDirty();
     }
 

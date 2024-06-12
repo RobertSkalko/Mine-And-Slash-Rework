@@ -13,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 public class PlayerConfigData {
 
@@ -59,19 +60,25 @@ public class PlayerConfigData {
             ICommonDataItem<GearRarity> data = ICommonDataItem.load(stack);
             boolean doSalvage = false;
 
+            Optional<Boolean> specialSupportGemSalvageConfig = Optional.empty();
+
             if (data != null) {
                 if (data.isSalvagable()) {
 
                     if(data.getSalvageType() == ToggleAutoSalvageRarity.SalvageType.SPELL) {
                         SkillGemData gemData = (SkillGemData) data;
 
-                        if(salvagesSupportGem(gemData.id, gemData.rar)) {
+                        if(gemData.type == SkillGemData.SkillGemType.SUPPORT) {
+                            specialSupportGemSalvageConfig = checkSpecialSupportGemSalvage(gemData.id, gemData.rar);
+                        }
+                    }
+
+                    if(specialSupportGemSalvageConfig.isEmpty()) {
+                        if (checkAutoSalvage(data.getSalvageType(), data.getRarityId())) {
                             doSalvage = true;
                         }
                     } else {
-                        if (salvagesGearOrJewel(data.getSalvageType(), data.getRarityId())) {
-                            doSalvage = true;
-                        }
+                        doSalvage = specialSupportGemSalvageConfig.get();
                     }
                 }
 
@@ -90,27 +97,32 @@ public class PlayerConfigData {
             return false;
         }
 
-        private HashMap<ToggleAutoSalvageRarity.SalvageType, HashMap<String, Boolean>> gearAndJewelSalvageMap = new HashMap<>();
+        private HashMap<ToggleAutoSalvageRarity.SalvageType, HashMap<String, Boolean>> guiSalvageConfigMap = new HashMap<>();
 
-        // GUID -> <Rarity, Enabled>
+        // Gem ID -> <Rarity, Enabled>
         private HashMap<String, HashMap<String, Boolean>> supportGemSalvageMap = new HashMap<>();
 
-        public boolean salvagesGearOrJewel(ToggleAutoSalvageRarity.SalvageType type, String rar) {
-            return gearAndJewelSalvageMap.getOrDefault(type, new HashMap<>()).getOrDefault(rar, false);
+        public boolean checkAutoSalvage(ToggleAutoSalvageRarity.SalvageType type, String rar) {
+            return guiSalvageConfigMap.getOrDefault(type, new HashMap<>()).getOrDefault(rar, false);
         }
 
-        public boolean salvagesSupportGem(String id, String rar) {
-            if(supportGemSalvageMap == null) {
-                supportGemSalvageMap = new HashMap<>();
+        public Optional<Boolean> checkSpecialSupportGemSalvage(String id, String rarity) {
+            if(!supportGemSalvageMap.containsKey(id)) {
+                return Optional.empty();
             }
-            return supportGemSalvageMap.getOrDefault(id, new HashMap<>()).getOrDefault(rar, false);
+
+            if(!supportGemSalvageMap.get(id).containsKey(rarity)) {
+                return Optional.empty();
+            }
+
+            return Optional.of(supportGemSalvageMap.get(id).get(rarity));
         }
 
-        public void toggle(ToggleAutoSalvageRarity.SalvageType type, String rarity) {
-            if (!gearAndJewelSalvageMap.containsKey(type)) {
-                gearAndJewelSalvageMap.put(type, new HashMap<>());
+        public void toggleGuiSalvageConfig(ToggleAutoSalvageRarity.SalvageType type, String rarity) {
+            if (!guiSalvageConfigMap.containsKey(type)) {
+                guiSalvageConfigMap.put(type, new HashMap<>());
             }
-            var m2 = gearAndJewelSalvageMap.get(type);
+            var m2 = guiSalvageConfigMap.get(type);
 
             if (!m2.containsKey(rarity)) {
                 m2.put(rarity, false);
@@ -126,10 +138,6 @@ public class PlayerConfigData {
         }
 
         public void setAutoSalvageForSupportGem(String id, String rarity, boolean enabled) {
-            if(supportGemSalvageMap == null) {
-                supportGemSalvageMap = new HashMap<>();
-            }
-
             if(!supportGemSalvageMap.containsKey(id)) {
                 supportGemSalvageMap.put(id, new HashMap<>());
             }

@@ -99,6 +99,8 @@ public class AutoSalvageConfigure {
             }
         }
 
+        Load.player(player).playerDataSync.setDirty();
+
         player.sendSystemMessage(Component.literal("Successfully updated auto_salvage settings for " + gemType + " " + rarity + " to " + enableOrDisable + "d").withStyle(ChatFormatting.GREEN));
 
         return 1;
