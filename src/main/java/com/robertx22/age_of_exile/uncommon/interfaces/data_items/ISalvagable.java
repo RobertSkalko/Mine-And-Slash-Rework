@@ -13,6 +13,8 @@ public interface ISalvagable {
 
     public ToggleAutoSalvageRarity.SalvageType getSalvageType();
 
+    default String getSalvageConfigurationId() { return null;}
+
     default boolean isSalvagable() {
         return true;
     }

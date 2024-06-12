@@ -121,6 +121,11 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         return ToggleAutoSalvageRarity.SalvageType.GEAR;
     }
 
+    @Override
+    public String getSalvageConfigurationId() {
+        return GetBaseGearType().gear_slot;
+    }
+
     public StatRequirement getRequirement() {
         return GetBaseGearType().req;
     }

@@ -58,6 +58,11 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
     }
 
     @Override
+    public String getSalvageConfigurationId() {
+        return id;
+    }
+
+    @Override
     public boolean isSalvagable() {
         return sal;
     }

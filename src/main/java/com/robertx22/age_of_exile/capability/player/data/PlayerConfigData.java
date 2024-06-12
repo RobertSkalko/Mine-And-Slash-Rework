@@ -62,24 +62,10 @@ public class PlayerConfigData {
             ICommonDataItem<GearRarity> data = ICommonDataItem.load(stack);
             boolean doSalvage = false;
 
-            Optional<Boolean> typeSalvageEnabled = Optional.empty();
-
             if (data != null) {
                 if (data.isSalvagable()) {
 
-                    if(data.getSalvageType() == ToggleAutoSalvageRarity.SalvageType.SPELL) {
-                        SkillGemData gemData = (SkillGemData) data;
-
-                        if(gemData.type == SkillGemData.SkillGemType.SUPPORT) {
-                            typeSalvageEnabled = checkTypeSalvageConfig(ToggleAutoSalvageRarity.SalvageType.SPELL, gemData.id);
-                        }
-                    }
-
-                    if(data.getSalvageType() == ToggleAutoSalvageRarity.SalvageType.GEAR) {
-                        GearItemData gearData = (GearItemData) data;
-
-                        typeSalvageEnabled = checkTypeSalvageConfig(ToggleAutoSalvageRarity.SalvageType.GEAR, gearData.GetBaseGearType().gear_slot);
-                    }
+                    Optional<Boolean> typeSalvageEnabled = checkTypeSalvageConfig(data.getSalvageType(), data.getSalvageConfigurationId());
 
                     if(typeSalvageEnabled.isEmpty()) {
                         if (checkRaritySalvageConfig(data.getSalvageType(), data.getRarityId())) {
@@ -121,6 +107,10 @@ public class PlayerConfigData {
         }
 
         public Optional<Boolean> checkTypeSalvageConfig(ToggleAutoSalvageRarity.SalvageType type, String id) {
+            if(id == null) {
+                return Optional.empty();
+            }
+
             if(!typeSalvageConfig.containsKey(type)) {
                 return Optional.empty();
             }
