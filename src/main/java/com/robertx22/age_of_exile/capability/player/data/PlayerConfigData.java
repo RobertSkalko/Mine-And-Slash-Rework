@@ -2,11 +2,13 @@ package com.robertx22.age_of_exile.capability.player.data;
 
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
+import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
+import com.robertx22.age_of_exile.vanilla_mc.commands.auto_salvage.AutoSalvageGenericConfigure;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
@@ -60,7 +62,7 @@ public class PlayerConfigData {
             ICommonDataItem<GearRarity> data = ICommonDataItem.load(stack);
             boolean doSalvage = false;
 
-            Optional<Boolean> specialSupportGemSalvageConfig = Optional.empty();
+            Optional<Boolean> typeSalvageEnabled = Optional.empty();
 
             if (data != null) {
                 if (data.isSalvagable()) {
@@ -69,16 +71,22 @@ public class PlayerConfigData {
                         SkillGemData gemData = (SkillGemData) data;
 
                         if(gemData.type == SkillGemData.SkillGemType.SUPPORT) {
-                            specialSupportGemSalvageConfig = checkSpecialSupportGemSalvage(gemData.id, gemData.rar);
+                            typeSalvageEnabled = checkTypeSalvageConfig(ToggleAutoSalvageRarity.SalvageType.SPELL, gemData.id);
                         }
                     }
 
-                    if(specialSupportGemSalvageConfig.isEmpty()) {
-                        if (checkAutoSalvage(data.getSalvageType(), data.getRarityId())) {
+                    if(data.getSalvageType() == ToggleAutoSalvageRarity.SalvageType.GEAR) {
+                        GearItemData gearData = (GearItemData) data;
+
+                        typeSalvageEnabled = checkTypeSalvageConfig(ToggleAutoSalvageRarity.SalvageType.GEAR, gearData.GetBaseGearType().gear_slot);
+                    }
+
+                    if(typeSalvageEnabled.isEmpty()) {
+                        if (checkRaritySalvageConfig(data.getSalvageType(), data.getRarityId())) {
                             doSalvage = true;
                         }
                     } else {
-                        doSalvage = specialSupportGemSalvageConfig.get();
+                        doSalvage = typeSalvageEnabled.get();
                     }
                 }
 
@@ -97,32 +105,38 @@ public class PlayerConfigData {
             return false;
         }
 
-        private HashMap<ToggleAutoSalvageRarity.SalvageType, HashMap<String, Boolean>> guiSalvageConfigMap = new HashMap<>();
+        // Salvage Type -> <rarity, enabled>
+        private HashMap<ToggleAutoSalvageRarity.SalvageType, HashMap<String, Boolean>> raritySalvageConfig = new HashMap<>();
 
-        // Gem ID -> <Rarity, Enabled>
-        private HashMap<String, HashMap<String, Boolean>> supportGemSalvageMap = new HashMap<>();
+        // Salvage Type -> <ID, enabled>
+        // Ex:
+        // SalvageType.SPELL, <plus_aoe, disabled>
+        // SalvageType.GEAR, <shield, enabled>
 
-        public boolean checkAutoSalvage(ToggleAutoSalvageRarity.SalvageType type, String rar) {
-            return guiSalvageConfigMap.getOrDefault(type, new HashMap<>()).getOrDefault(rar, false);
+        // this configuration should take precedence over the rarity config because it's more specific
+        private HashMap<ToggleAutoSalvageRarity.SalvageType, HashMap<String, Boolean>> typeSalvageConfig = new HashMap<>();
+
+        public boolean checkRaritySalvageConfig(ToggleAutoSalvageRarity.SalvageType type, String rar) {
+            return raritySalvageConfig.getOrDefault(type, new HashMap<>()).getOrDefault(rar, false);
         }
 
-        public Optional<Boolean> checkSpecialSupportGemSalvage(String id, String rarity) {
-            if(!supportGemSalvageMap.containsKey(id)) {
+        public Optional<Boolean> checkTypeSalvageConfig(ToggleAutoSalvageRarity.SalvageType type, String id) {
+            if(!typeSalvageConfig.containsKey(type)) {
                 return Optional.empty();
             }
 
-            if(!supportGemSalvageMap.get(id).containsKey(rarity)) {
+            if(!typeSalvageConfig.get(type).containsKey(id)) {
                 return Optional.empty();
             }
 
-            return Optional.of(supportGemSalvageMap.get(id).get(rarity));
+            return Optional.of(typeSalvageConfig.get(type).get(id));
         }
 
-        public void toggleGuiSalvageConfig(ToggleAutoSalvageRarity.SalvageType type, String rarity) {
-            if (!guiSalvageConfigMap.containsKey(type)) {
-                guiSalvageConfigMap.put(type, new HashMap<>());
+        public void toggleRaritySalvageConfig(ToggleAutoSalvageRarity.SalvageType type, String rarity) {
+            if (!raritySalvageConfig.containsKey(type)) {
+                raritySalvageConfig.put(type, new HashMap<>());
             }
-            var m2 = guiSalvageConfigMap.get(type);
+            var m2 = raritySalvageConfig.get(type);
 
             if (!m2.containsKey(rarity)) {
                 m2.put(rarity, false);
@@ -137,13 +151,27 @@ public class PlayerConfigData {
             }
         }
 
-        public void setAutoSalvageForSupportGem(String id, String rarity, boolean enabled) {
-            if(!supportGemSalvageMap.containsKey(id)) {
-                supportGemSalvageMap.put(id, new HashMap<>());
+        public void setAutoSalvageForTypeAndId(ToggleAutoSalvageRarity.SalvageType salvageType, String id, AutoSalvageGenericConfigure.AutoSalvageConfigAction action) {
+
+            if(action == AutoSalvageGenericConfigure.AutoSalvageConfigAction.CLEAR) {
+                if (!typeSalvageConfig.containsKey(salvageType)) {
+                    return;
+                }
+                var idMap = typeSalvageConfig.get(salvageType);
+                idMap.remove(id);
+                return;
             }
 
-            supportGemSalvageMap.get(id).put(rarity, enabled);
+            if(!typeSalvageConfig.containsKey(salvageType)) {
+                typeSalvageConfig.put(salvageType, new HashMap<>());
+            }
 
+            typeSalvageConfig.get(salvageType).put(id, action == AutoSalvageGenericConfigure.AutoSalvageConfigAction.ENABLE);
+
+        }
+
+        public HashMap<String, Boolean> getConfiguredMapForSalvageType(ToggleAutoSalvageRarity.SalvageType salvageType) {
+            return typeSalvageConfig.getOrDefault(salvageType, new HashMap<>());
         }
 
     }

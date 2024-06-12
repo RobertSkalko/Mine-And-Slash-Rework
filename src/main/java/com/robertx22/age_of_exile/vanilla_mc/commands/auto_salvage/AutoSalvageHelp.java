@@ -19,10 +19,9 @@ public class AutoSalvageHelp {
         dispatcher.register(
                 literal(CommandRefs.ID)
                         .then(literal("auto_salvage")
-                                .then(literal("support_gems")
-                                        .then(literal("help")
-                                                .executes(e -> execute(e.getSource(), e.getSource().getPlayerOrException()))
-                                        )))
+                                .then(literal("help")
+                                        .executes(e -> execute(e.getSource(), e.getSource().getPlayerOrException()))
+                                ))
         );
     }
 
@@ -37,12 +36,14 @@ public class AutoSalvageHelp {
             }
         }
 
-        player.sendSystemMessage(Component.literal("/mine_and_slash auto_salvage support_gems").withStyle(ChatFormatting.GREEN).append(Component.literal(" commands are used to configure more advanced auto-salvaging of Support Gems.").withStyle(ChatFormatting.WHITE)));
-        player.sendSystemMessage(Component.literal("Sometimes you might want to configure all common gems to be auto-salvaged except certain rare ones that you care about. That's what these commands are for.").withStyle(ChatFormatting.WHITE));
+        player.sendSystemMessage(Component.literal("/mine_and_slash auto_salvage").withStyle(ChatFormatting.GREEN).append(Component.literal(" commands are used to configure more advanced auto-salvaging.").withStyle(ChatFormatting.WHITE)));
+        player.sendSystemMessage(Component.literal("Sometimes you want to auto salvage all common support gems except a particular type you want in any rarity. Maybe you don't use shields, so you want to auto salvage all shields, regardless of rarity. These commands help you do that.").withStyle(ChatFormatting.WHITE));
         player.sendSystemMessage(Component.empty());
-        player.sendSystemMessage(Component.literal("/mine_and_slash auto_salvage support_gems list").withStyle(ChatFormatting.GREEN).append(Component.literal(" will show you a list of all possible gems, important for configuring specific gems. You can use an optional search query as a final parameter to search for a specific gem's id.").withStyle(ChatFormatting.WHITE)));
+        player.sendSystemMessage(Component.literal("/mine_and_slash auto_salvage list <support_gems | gear_slot> <search_query> (optional)").withStyle(ChatFormatting.GREEN).append(Component.literal(" will show you a list of all possible types for gear slots or support gems. You can use an optional search query as a final parameter to search for a specific id.").withStyle(ChatFormatting.WHITE)));
         player.sendSystemMessage(Component.empty());
-        player.sendSystemMessage(Component.literal("/mine_and_slash auto_salvage support_gems config <type> <rarity> <enabled>").withStyle(ChatFormatting.GREEN).append(Component.literal(" lets you actually configure your auto salvaging for your Support Gems. There are two special parameters: all_types and all_rarities which do what you'd hope, and configure either all gem types or all rarities at once. They can be combined to configure all gems to be broadly enabled or disabled.").withStyle(ChatFormatting.WHITE)));
+        player.sendSystemMessage(Component.literal("/mine_and_slash auto_salvage show <support_gems | gear_slot> <search_query> (optional)").withStyle(ChatFormatting.GREEN).append(Component.literal(" will show you a list of all your currently configured options for gear slots or support gems. You can use an optional search query as a final parameter to search for a specific id.").withStyle(ChatFormatting.WHITE)));
+        player.sendSystemMessage(Component.empty());
+        player.sendSystemMessage(Component.literal("/mine_and_slash auto_salvage config <support_gems | gear_slot> <id> <enable | disable | clear>").withStyle(ChatFormatting.GREEN).append(Component.literal(" lets you actually configure advanced auto salvaging. Advanced auto salvaging configs take precedence over the rarity config you can configure on the Salvaging configuration screen.").withStyle(ChatFormatting.WHITE)));
 
 
         return 1;
