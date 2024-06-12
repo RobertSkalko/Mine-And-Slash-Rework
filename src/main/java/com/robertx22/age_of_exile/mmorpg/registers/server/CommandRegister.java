@@ -8,6 +8,9 @@ import com.robertx22.age_of_exile.loot.blueprints.LootChestBlueprint;
 import com.robertx22.age_of_exile.loot.blueprints.SkillGemBlueprint;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.vanilla_mc.commands.*;
+import com.robertx22.age_of_exile.vanilla_mc.commands.auto_salvage.AutoSalvageConfigure;
+import com.robertx22.age_of_exile.vanilla_mc.commands.auto_salvage.AutoSalvageHelp;
+import com.robertx22.age_of_exile.vanilla_mc.commands.auto_salvage.AutoSalvageList;
 import com.robertx22.age_of_exile.vanilla_mc.commands.entity.*;
 import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GenericGive;
 import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GiveExactUnique;
@@ -39,6 +42,9 @@ public class CommandRegister {
         new GenericGive("gear", ExileRegistryTypes.GEAR_TYPE, x -> new GearBlueprint(x)).register(dispatcher);
         new GenericGive("loot_chest", ExileRegistryTypes.LOOT_CHEST, x -> new LootChestBlueprint(x)).register(dispatcher);
 
+        AutoSalvageConfigure.register(dispatcher);
+        AutoSalvageList.register(dispatcher);
+        AutoSalvageHelp.register(dispatcher);
 
         SetEntityRarity.register(dispatcher);
         SpawnBoss.register(dispatcher);

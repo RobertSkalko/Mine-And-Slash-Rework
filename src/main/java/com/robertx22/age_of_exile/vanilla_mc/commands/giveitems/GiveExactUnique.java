@@ -30,7 +30,7 @@ public class GiveExactUnique {
                                         .requires(e -> e.hasPermission(2))
                                         .then(argument("target", EntityArgument.player())
                                                 .then(argument("uniqueID", StringArgumentType.word())
-                                                        .suggests(new DatabaseSuggestions(ExileRegistryTypes.UNIQUE_GEAR))
+                                                        .suggests(new DatabaseSuggestions(ExileRegistryTypes.UNIQUE_GEAR, "random"))
                                                         .then(argument("level", IntegerArgumentType.integer())
                                                                 .then(argument("amount", IntegerArgumentType
                                                                         .integer(1, 5000))

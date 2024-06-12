@@ -10,25 +10,39 @@ import java.util.List;
 public class DatabaseSuggestions extends CommandSuggestions {
 
     ExileRegistryType type;
+    String extraSuggestionOption;
 
-    public DatabaseSuggestions(ExileRegistryType type) {
+    public DatabaseSuggestions(ExileRegistryType type, String extraSuggestionOption) {
         this.type = type;
+        this.extraSuggestionOption = extraSuggestionOption;
     }
 
     @Override
     public List<String> suggestions() {
-        List<String> list = new ArrayList<>();
 
-        Database.getRegistry(type)
-            .getList()
-            .stream()
-            .forEach(x -> {
-                IGUID g = (IGUID) x;
-                list.add(g.GUID());
-            });
+        if(extraSuggestionOption != null) {
+            return registrySuggestionsWithExtraOption(extraSuggestionOption);
+        }
 
-        list.add("random");
-        return list;
+        return registrySuggestions();
+    }
+
+    private List<String> registrySuggestions() {
+        return Database.getRegistry(type)
+                .getList()
+                .stream()
+                .map(x -> {
+                    IGUID g = (IGUID) x;
+                    return g.GUID();
+                })
+                .toList();
+    }
+
+    private List<String> registrySuggestionsWithExtraOption(String option) {
+        List<String> registrySuggestions = new ArrayList<>(registrySuggestions());
+        registrySuggestions.add(option);
+
+        return registrySuggestions;
     }
 
 }

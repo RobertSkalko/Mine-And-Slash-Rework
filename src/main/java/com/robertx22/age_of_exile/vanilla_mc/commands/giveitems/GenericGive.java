@@ -44,7 +44,7 @@ public class GenericGive {
                                 .then(literal(id)
                                         .then(argument("target", EntityArgument.player())
                                                 .then(argument("type", StringArgumentType.word())
-                                                        .suggests(type != null ? new DatabaseSuggestions(type) : null)
+                                                        .suggests(type != null ? new DatabaseSuggestions(type, "random") : null)
                                                         .then(argument("level", IntegerArgumentType.integer()).then(argument(
                                                                 "rarity", StringArgumentType.string()).suggests(new GearRaritySuggestions())
                                                                 .then(argument("amount", IntegerArgumentType.integer(1, 5000)).executes(e -> execute(
