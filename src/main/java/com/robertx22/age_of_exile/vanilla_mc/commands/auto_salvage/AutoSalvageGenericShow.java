@@ -83,7 +83,7 @@ public class AutoSalvageGenericShow {
                 }
             } else {
                 if (searchQuery == null || id.toLowerCase().contains(searchQuery)) {
-                    player.sendSystemMessage(Component.literal(id + "[").append(enabled ? enabledTextComponent : disabledTextComponent).append(Component.literal("]").withStyle(ChatFormatting.WHITE)));
+                    player.sendSystemMessage(Component.literal(id + " [").append(enabled ? enabledTextComponent : disabledTextComponent).append(Component.literal("]").withStyle(ChatFormatting.WHITE)));
                 }
             }
         }
