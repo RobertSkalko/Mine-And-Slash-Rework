@@ -25,8 +25,7 @@ public class BaseStatsData implements IRerollable, IStatsContainer, IGearPartToo
     public void RerollFully(GearItemData gear) {
 
         p = gear.getRarity().stat_percents.random();
-
-    
+      
     }
 
     @Override

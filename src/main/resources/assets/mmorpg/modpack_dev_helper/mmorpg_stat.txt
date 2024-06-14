@@ -11,7 +11,6 @@ alchemy_exp_bonus
 alchemy_greater_drop_bonus
 alchemy_lesser_drop_bonus
 alchemy_medium_drop_bonus
-alchemy_misc_drop_bonus
 alchemy_triple_drop
 all_all_damage
 all_any_wep_damage
@@ -129,7 +128,6 @@ cooking_exp_bonus
 cooking_greater_drop_bonus
 cooking_lesser_drop_bonus
 cooking_medium_drop_bonus
-cooking_misc_drop_bonus
 cooking_triple_drop
 crit_dmg_per_power_charge
 critical_damage
@@ -205,7 +203,6 @@ enchanting_exp_bonus
 enchanting_greater_drop_bonus
 enchanting_lesser_drop_bonus
 enchanting_medium_drop_bonus
-enchanting_misc_drop_bonus
 enchanting_triple_drop
 endurance_charge_on_crit
 endurance_charge_on_hit
@@ -227,7 +224,6 @@ farming_exp_bonus
 farming_greater_drop_bonus
 farming_lesser_drop_bonus
 farming_medium_drop_bonus
-farming_misc_drop_bonus
 farming_triple_drop
 faster_projectiles
 fire_ailment_aura_cost
@@ -253,7 +249,6 @@ fishing_exp_bonus
 fishing_greater_drop_bonus
 fishing_lesser_drop_bonus
 fishing_medium_drop_bonus
-fishing_misc_drop_bonus
 fishing_triple_drop
 flat_chaos_added_damage
 flat_fire_added_damage
@@ -317,7 +312,6 @@ husbandry_exp_bonus
 husbandry_greater_drop_bonus
 husbandry_lesser_drop_bonus
 husbandry_medium_drop_bonus
-husbandry_misc_drop_bonus
 husbandry_triple_drop
 ignore_ele_res
 immobilizing_eff_dur_u_cast
@@ -526,7 +520,6 @@ mining_exp_bonus
 mining_greater_drop_bonus
 mining_lesser_drop_bonus
 mining_medium_drop_bonus
-mining_misc_drop_bonus
 mining_triple_drop
 minion_explode_cast_time
 minion_explode_cdr
@@ -657,7 +650,6 @@ salvaging_exp_bonus
 salvaging_greater_drop_bonus
 salvaging_lesser_drop_bonus
 salvaging_medium_drop_bonus
-salvaging_misc_drop_bonus
 salvaging_triple_drop
 shatter_cast_time
 shatter_cdr

@@ -40,7 +40,7 @@ public class ElementalResistEffect extends BaseDamageEffect {
 
         var usable = (IUsableStat) stat;
 
-        resist = usable.getUsableValue(effect.targetData.getUnit(), (int) resist, effect.targetData.getLevel());
+        resist = usable.getUsableValue(effect.targetData.getUnit(), (int) resist, effect.targetData.getLevel()) * 100F;
 
 
         if (stat.getElement() == Elements.Physical) {

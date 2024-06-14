@@ -219,7 +219,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
         try {
 
-            this.addWidget(SkillTreeScreen.SEARCH);
 
             SkillTreeScreen.SEARCH.setFocused(false);
             SkillTreeScreen.SEARCH.setCanLoseFocus(true);
@@ -227,6 +226,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
             this.school = ExileDB.TalentTrees().getFilterWrapped(x -> x.getSchool_type().equals(this.schoolType)).list.get(0);
 
             refreshButtons();
+            this.addWidget(SkillTreeScreen.SEARCH);
 
 
             goToCenter();

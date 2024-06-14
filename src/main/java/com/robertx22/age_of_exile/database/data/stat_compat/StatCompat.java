@@ -12,7 +12,6 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -51,7 +50,7 @@ public class StatCompat implements JsonExileRegistry<StatCompat>, IAutoGson<Stat
     }
 
     private Attribute getAttribute() {
-        return BuiltInRegistries.ATTRIBUTE.get(new ResourceLocation(attribute_id));
+        return ForgeRegistries.ATTRIBUTES.getValue(new ResourceLocation(attribute_id));
     }
 
     public boolean isAttributeCompat() {
@@ -86,18 +85,22 @@ public class StatCompat implements JsonExileRegistry<StatCompat>, IAutoGson<Stat
     }
 
     public ExactStatData getResult(LivingEntity en, int lvl) {
-        if (ExileDB.Stats().get(mns_stat_id) instanceof AttributeStat) {
-            return null;
-        }
+        try {
+            if (ExileDB.Stats().get(mns_stat_id) instanceof AttributeStat) {
+                return null;
+            }
 
-        int val = (int) (en.getAttributeValue(getAttribute()) * conversion);
-        int value = MathHelper.clamp(val, minimum_cap, maximum_cap);
+            int val = (int) (en.getAttributeValue(getAttribute()) * conversion);
+            int value = MathHelper.clamp(val, minimum_cap, maximum_cap);
 
-        if (value != 0) {
-            value = (int) scaling.scale(value, lvl);
-            var data = ExactStatData.noScaling(value, mod_type, mns_stat_id);
-            return data;
+            if (value != 0) {
+                value = (int) scaling.scale(value, lvl);
+                var data = ExactStatData.noScaling(value, mod_type, mns_stat_id);
+                return data;
 
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return null;
     }

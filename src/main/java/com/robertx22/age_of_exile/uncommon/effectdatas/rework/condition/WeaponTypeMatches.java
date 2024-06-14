@@ -8,11 +8,11 @@ import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 
 public class WeaponTypeMatches extends StatCondition {
 
-    public WeaponTypes type;
+    public String type;
 
     public WeaponTypeMatches(WeaponTypes type) {
         super("is_" + type.id + "_wep_type", "wep_type_match");
-        this.type = type;
+        this.type = type.id;
     }
 
     public WeaponTypeMatches() {
@@ -22,8 +22,7 @@ public class WeaponTypeMatches extends StatCondition {
     @Override
     public boolean can(EffectEvent event, EffectSides statSource, StatData data, Stat stat) {
         var wep = event.data.getWeaponType();
-
-        return wep.id.equals(type.id);
+        return wep.id.equals(type);
     }
 
     @Override

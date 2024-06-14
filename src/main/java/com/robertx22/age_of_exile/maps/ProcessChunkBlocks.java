@@ -11,6 +11,7 @@ import com.robertx22.age_of_exile.maps.generator.ChunkProcessData;
 import com.robertx22.age_of_exile.maps.generator.DungeonBuilder;
 import com.robertx22.age_of_exile.maps.processors.DataProcessor;
 import com.robertx22.age_of_exile.maps.processors.DataProcessors;
+import com.robertx22.age_of_exile.maps.processors.league.LeagueSpawnPos;
 import com.robertx22.age_of_exile.tags.imp.DungeonTag;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
@@ -120,7 +121,8 @@ public class ProcessChunkBlocks {
 
                             for (LeagueMechanic mech : opt.get().leagues.getLeagueMechanics()) {
                                 mech.getStructure(map.map).tryGenerate(level, cpos, ran);
-                                generateData(level, chunk, room); // for league mechanics we instantly gen the data because we need to know the spawn pos, which is gained by processing the spawn block..
+                                // todo maybe this is genning mobs too soon outside the league content??
+                                leagueSpawn(level, chunk, room); // for league mechanics we instantly gen the data because we need to know the spawn pos, which is gained by processing the spawn block..
                             }
                             gened++;
                             if (gened >= maxtogen) {
@@ -204,6 +206,44 @@ public class ProcessChunkBlocks {
                 } else {
                     System.out.println("Data block with tag: " + text + " matched no processors! " + tilePos.toString());
                     logRoomForPos(level, tilePos);
+                }
+            }
+
+
+        }
+    }
+
+    static void leagueSpawn(ServerLevel level, LevelChunk chunk, BuiltRoom room) {
+
+
+        ChunkProcessData data = new ChunkProcessData(chunk, room);
+
+
+        for (BlockPos tilePos : chunk.getBlockEntitiesPos()) {
+
+            BlockEntity tile = level.getBlockEntity(tilePos);
+            var text = DataProcessor.getData(tile);
+            if (!text.isEmpty()) {
+                boolean any = false;
+
+                // todo make this work on either signs or these blocks
+                DataProcessor processor = new LeagueSpawnPos();
+                boolean did = processor.process(text, tilePos, level, data);
+                if (did) {
+                    any = true;
+                }
+             
+
+                if (any) {
+                    // only set to air if the processor didnt turn it into another block
+                    if (level.getBlockState(tilePos).getBlock() == Blocks.STRUCTURE_BLOCK || level.getBlockState(tilePos).getBlock() == Blocks.COMMAND_BLOCK) {
+                        level.setBlock(tilePos, Blocks.AIR.defaultBlockState(), 2); // delete data block
+                        level.removeBlockEntity(tilePos);
+                    }
+
+                } else {
+                    //  System.out.println("Data block with tag: " + text + " matched no processors! " + tilePos.toString());
+                    //logRoomForPos(level, tilePos);
                 }
             }
 

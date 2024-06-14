@@ -59,7 +59,7 @@ public class DamageAction extends SpellAction {
                 if (ctx.calculatedSpellData.getSpell().usesWeaponForDamage()) {
                     var gear = ctx.getWeapon();
                     if (gear != null) {
-                        dmg.data.setString(EventData.WEAPON_TYPE, gear.GetBaseGearType().weapon_type.GUID());
+                        dmg.data.setString(EventData.WEAPON_TYPE, gear.GetBaseGearType().weapon_type);
                     }
                 }
 

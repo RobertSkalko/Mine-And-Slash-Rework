@@ -91,8 +91,7 @@ public class ComplexMobProcessor extends DataProcessor {
                 for (String x : parts) {
                     for (MobTag tag : MobTag.getAll()) {
                         if (x.equals(tag.GUID())) {
-                            filter = map.getMobSpawns().mobs.stream()
-                                    .filter(m -> m.tags.contains(tag));
+                            filter = map.getMobSpawns().mobs.stream().filter(m -> m.tags.contains(tag));
                         }
                     }
                 }

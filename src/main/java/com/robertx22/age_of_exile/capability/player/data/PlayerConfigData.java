@@ -51,6 +51,7 @@ public class PlayerConfigData {
 
     public class AutoSalvage {
 
+        private HashMap<ToggleAutoSalvageRarity.SalvageType, HashMap<String, Boolean>> map = new HashMap<>();
 
         // todo test this
         public boolean trySalvageOnPickup(Player player, ItemStack stack) {
@@ -90,6 +91,7 @@ public class PlayerConfigData {
 
             return false;
         }
+
 
         // Salvage Type -> <rarity, enabled>
         private HashMap<ToggleAutoSalvageRarity.SalvageType, HashMap<String, Boolean>> raritySalvageConfig = new HashMap<>();

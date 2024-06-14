@@ -21,7 +21,7 @@ public class StackSaving {
     public static ItemstackDataSaver<JewelItemData> JEWEL = of(new ItemstackDataSaver<>(SlashRef.MODID + "_jewel", JewelItemData.class, () -> new JewelItemData()));
     public static ItemstackDataSaver<LootChestData> LOOT_CHEST = of(new ItemstackDataSaver<>(SlashRef.MODID + "_loot_chest", LootChestData.class, () -> new LootChestData()));
     public static ItemstackDataSaver<ProfessionToolData> TOOL = of(new ItemstackDataSaver<>(SlashRef.MODID + "_tool_stats", ProfessionToolData.class, () -> new ProfessionToolData()));
-  
+
     static ItemstackDataSaver of(ItemstackDataSaver t) {
         return t;
     }

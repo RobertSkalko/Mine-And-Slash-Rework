@@ -40,6 +40,7 @@ import com.robertx22.age_of_exile.maps.spawned_map_mobs.SpawnedMobList;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.action.StatEffect;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.condition.StatCondition;
+import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.SyncTime;
 import com.robertx22.library_of_exile.registry.loaders.BaseDataPackLoader;
@@ -48,6 +49,7 @@ import net.minecraft.ChatFormatting;
 public class ExileRegistryTypes {
 
     public static ExileRegistryType GEAR_RARITY = ExileRegistryType.register(SlashRef.MODID, "gear_rarity", 0, GearRarity.SERIALIZER, SyncTime.ON_LOGIN);
+    public static ExileRegistryType WEAPON_TYPE = ExileRegistryType.register(SlashRef.MODID, "weapon_type", 0, WeaponTypes.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType STAT_LAYER = ExileRegistryType.register(SlashRef.MODID, "stat_layer", 0, StatLayer.SERIALIZER, SyncTime.ON_LOGIN);
 
     public static ExileRegistryType STAT = ExileRegistryType.register(SlashRef.MODID, "stat", 1, BaseDatapackStat.MAIN_SERIALIZER, SyncTime.ON_LOGIN);

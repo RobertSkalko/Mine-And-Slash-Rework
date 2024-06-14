@@ -8,7 +8,6 @@ import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.temp.SkillItemTier;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
@@ -16,6 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,7 +76,7 @@ public class ExpSources {
             }
             if (type == Type.ENTITY) {
                 if (obj instanceof EntityType in) {
-                    return BuiltInRegistries.ENTITY_TYPE.getKey(in).equals(new ResourceLocation(id));
+                    return ForgeRegistries.ENTITY_TYPES.getKey(in).equals(new ResourceLocation(id));
                 }
             }
 

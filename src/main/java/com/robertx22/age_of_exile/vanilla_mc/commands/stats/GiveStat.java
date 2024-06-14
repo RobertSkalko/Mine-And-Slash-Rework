@@ -12,6 +12,7 @@ import com.robertx22.age_of_exile.vanilla_mc.commands.suggestions.StatSuggestion
 import com.robertx22.age_of_exile.vanilla_mc.commands.suggestions.StatTypeSuggestions;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -44,7 +45,7 @@ public class GiveStat {
                                                                 .suggests(new StatSuggestions())
                                                                 .then(argument("statType", StringArgumentType.string())
                                                                         .suggests(new StatTypeSuggestions())
-                                                                        .then(argument("GUID", StringArgumentType
+                                                                        .then(argument("Key/Identifier", StringArgumentType
                                                                                 .string())
                                                                                 .then(argument("value", FloatArgumentType
                                                                                         .floatArg())
@@ -55,7 +56,7 @@ public class GiveStat {
                                                                                                     .getString(ctx, "scaling"), StringArgumentType
                                                                                                     .getString(ctx, "statGUID"), StringArgumentType
                                                                                                     .getString(ctx, "statType"), StringArgumentType
-                                                                                                    .getString(ctx, "GUID"), FloatArgumentType
+                                                                                                    .getString(ctx, "Key/Identifier"), FloatArgumentType
                                                                                                     .getFloat(ctx, "value"));
                                                                                         }))))))))));
     }
@@ -65,12 +66,13 @@ public class GiveStat {
 
         try {
 
-            if (en instanceof LivingEntity) {
+            if (en instanceof LivingEntity e) {
                 EntityData data = Load.Unit(en);
 
                 if (scaling.equals("exact")) {
-                    data.getCustomExactStats()
-                            .addExactStat(GUID, statGUID, v1, ModType.valueOf(statType));
+                    data.getCustomExactStats().addExactStat(GUID, statGUID, v1, ModType.valueOf(statType));
+
+                    e.sendSystemMessage(Component.literal("Stat Applied."));
                 }
             }
 

@@ -40,6 +40,7 @@ import com.robertx22.age_of_exile.database.data.stats.layers.StatLayers;
 import com.robertx22.age_of_exile.database.data.support_gem.SupportGems;
 import com.robertx22.age_of_exile.maps.dungeon_reg.Dungeons;
 import com.robertx22.age_of_exile.maps.spawned_map_mobs.SpawnedMobs;
+import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 
 public class GeneratedData {
 
@@ -50,6 +51,7 @@ public class GeneratedData {
     public static void addAllObjectsToGenerate() {
         AuraGems.initKeys();
 
+        WeaponTypes.registerAll();
         StatLayers.register();
         new StatEffects().registerAll();
         new StatConditions().registerAll();

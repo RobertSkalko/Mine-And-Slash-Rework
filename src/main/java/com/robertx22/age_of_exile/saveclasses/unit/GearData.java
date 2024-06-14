@@ -44,7 +44,7 @@ public class GearData {
                 if (gear.GetBaseGearType().getTags().contains(SlotTags.offhand_family)) {
                     percentStatUtilization = 100;
                 }
-                if (gear.GetBaseGearType().weapon_type.can_dual_wield) {
+                if (gear.GetBaseGearType().weaponType().can_dual_wield) {
                     if (gear.GetBaseGearType().getTags().contains(SlotTags.weapon_family)) {
                         percentStatUtilization = ServerContainer.get().PERC_OFFHAND_WEP_STAT.get();
                     }
@@ -77,7 +77,7 @@ public class GearData {
         BaseGearType type = gear.GetBaseGearType();
 
         if (type.isWeapon()) {
-            if (type.weapon_type.can_dual_wield) {
+            if (type.weaponType().can_dual_wield) {
                 if (slot == EquipmentSlot.OFFHAND) {
                     return true;
                 }
