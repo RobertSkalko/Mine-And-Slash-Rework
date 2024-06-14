@@ -8,6 +8,10 @@ import com.robertx22.age_of_exile.loot.blueprints.LootChestBlueprint;
 import com.robertx22.age_of_exile.loot.blueprints.SkillGemBlueprint;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.vanilla_mc.commands.*;
+import com.robertx22.age_of_exile.vanilla_mc.commands.auto_salvage.AutoSalvageGenericConfigure;
+import com.robertx22.age_of_exile.vanilla_mc.commands.auto_salvage.AutoSalvageGenericShow;
+import com.robertx22.age_of_exile.vanilla_mc.commands.auto_salvage.AutoSalvageHelp;
+import com.robertx22.age_of_exile.vanilla_mc.commands.auto_salvage.AutoSalvageGenericList;
 import com.robertx22.age_of_exile.vanilla_mc.commands.entity.*;
 import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GenericGive;
 import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GiveExactUnique;
@@ -39,6 +43,17 @@ public class CommandRegister {
         new GenericGive("gear", ExileRegistryTypes.GEAR_TYPE, x -> new GearBlueprint(x)).register(dispatcher);
         new GenericGive("loot_chest", ExileRegistryTypes.LOOT_CHEST, x -> new LootChestBlueprint(x)).register(dispatcher);
 
+
+        new AutoSalvageGenericConfigure(ExileRegistryTypes.GEAR_SLOT).register(dispatcher);
+        new AutoSalvageGenericConfigure(ExileRegistryTypes.SUPPORT_GEM).register(dispatcher);
+
+        new AutoSalvageGenericList(ExileRegistryTypes.GEAR_SLOT).register(dispatcher);
+        new AutoSalvageGenericList(ExileRegistryTypes.SUPPORT_GEM).register(dispatcher);
+
+        new AutoSalvageGenericShow(ExileRegistryTypes.GEAR_SLOT).register(dispatcher);
+        new AutoSalvageGenericShow(ExileRegistryTypes.SUPPORT_GEM).register(dispatcher);
+
+        AutoSalvageHelp.register(dispatcher);
 
         SetEntityRarity.register(dispatcher);
         SpawnBoss.register(dispatcher);

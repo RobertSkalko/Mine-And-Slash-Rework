@@ -3,7 +3,10 @@ package com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.GuiAction;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
+import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import net.minecraft.ChatFormatting;
@@ -11,6 +14,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +36,7 @@ public class ToggleAutoSalvageRarity extends GuiAction {
 
         var text = Component.literal("");
 
-        if (Load.player(p).config.salvage.salvages(type, rarity.GUID())) {
+        if (Load.player(p).config.salvage.checkRaritySalvageConfig(type, rarity.GUID())) {
             text = Gui.SALVAGE_TIP_ON.locName(rarity.locName(), type.word.locName()).withStyle(ChatFormatting.GREEN);
         } else {
             text = Gui.SALVAGE_TIP_OFF.locName(rarity.locName(), type.word.locName()).withStyle(ChatFormatting.RED);
@@ -46,7 +50,7 @@ public class ToggleAutoSalvageRarity extends GuiAction {
 
     @Override
     public void doAction(Player p, Object data) {
-        Load.player(p).config.salvage.toggle(type, rarity.GUID());
+        Load.player(p).config.salvage.toggleRaritySalvageConfig(type, rarity.GUID());
         Load.player(p).playerDataSync.setDirty();
     }
 
