@@ -115,7 +115,7 @@ public class ElementalResist extends ElementalStat implements IUsableStat {
     public float getUsableValue(Unit unit, int value, int lvl) {
         float max = MathHelper.clamp(75 + this.getAdditionalMax(unit), min, 90);
         float min = this.min;
-        return MathHelper.clamp(value, min, max);
+        return MathHelper.clamp(value, min, max) / 100F;
     }
 }
 

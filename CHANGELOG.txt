@@ -125,3 +125,9 @@ v.5.5.7
 Basically frags only dropped in uber maps, but you can only normally get uber maps by combining the frags.
 - weapon types are now a separate datapack, and basegeartypes now use a string id for them
 This needs just a small edit to basegeartype datapacks and to create a new weapon_type datapack for any new wep types you have
+
+v.5.5.8
+- added back hotbar swapping as a client config.
+You can now choose to unbind the last 4 keybinds of the hotbar OR keep them and be able to cast the 2nd hotbar spells without swapping the hotbar
+- fix unique base stats
+- a few other fixes

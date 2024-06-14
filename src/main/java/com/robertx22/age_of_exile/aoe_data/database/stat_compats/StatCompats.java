@@ -23,7 +23,7 @@ public class StatCompats implements ExileRegistryInit {
             x.enchant_id = ForgeRegistries.ENCHANTMENTS.getKey(Enchantments.SHARPNESS).toString();
             x.mns_stat_id = OffenseStats.TOTAL_DAMAGE.get().GUID();
             x.mod_type = ModType.FLAT;
-            x.conversion = 10;
+            x.conversion = 5;
             x.maximum_cap = 50;
         });
 

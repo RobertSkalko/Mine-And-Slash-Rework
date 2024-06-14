@@ -37,6 +37,8 @@ public class ClientConfigs {
         ITEM_RARITY_OPACITY = b.defineInRange("ITEM_RARITY_OPACITY", 0.75F, 0, 1F);
         HEALTH_BAR_GUI_SCALE = b.defineInRange("health_bar_gui_scale", 1.25F, 0, 10F);
 
+        HOTBAR_SWAPPING = b.define("HOTBAR_SWAPPING", false);
+
         GUI_POSITION = b.defineEnum("GUI_POSITION", GuiPosition.TOP_LEFT);
         ITEM_RARITY_BACKGROUND_TYPE = b.defineEnum("ITEM_RARITY_BACKGROUND_TYPE", GlintType.FULL);
         PLAYER_GUI_TYPE = b.defineEnum("PLAYER_GUI_TYPE", PlayerGUIs.RPG);
@@ -58,6 +60,7 @@ public class ClientConfigs {
     public ForgeConfigSpec.BooleanValue ALIGN_STAT_TOOLTIPS;
     public ForgeConfigSpec.BooleanValue MODIFY_TOOLTIP_LENGTH;
     public ForgeConfigSpec.BooleanValue IN_DEPTH_TOOLTIPS_BY_DEFAULT;
+    public ForgeConfigSpec.BooleanValue HOTBAR_SWAPPING;
 
     public ForgeConfigSpec.EnumValue<GlintType> ITEM_RARITY_BACKGROUND_TYPE;
     public ForgeConfigSpec.EnumValue<GuiPosition> GUI_POSITION;

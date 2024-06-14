@@ -42,6 +42,7 @@ public class EffectStats {
             .worksWithEvent(DamageEvent.ID)
             .setPriority(StatPriority.Damage.FINAL_DAMAGE)
             .setSide(EffectSides.Source)
+            .addCondition(StatConditions.IF_RANDOM_ROLL)
             .addConditions(x -> x.con.con.get())
             .addEffect(x -> StatEffects.GIVE_EFFECT_TO_SOURCE_30_SEC.get(x.effect))
             .setLocName(x -> Stat.format(

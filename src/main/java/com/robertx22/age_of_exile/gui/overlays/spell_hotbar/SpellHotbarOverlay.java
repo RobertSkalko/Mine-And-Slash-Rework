@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.gui.overlays.EffectsOverlay;
 import com.robertx22.age_of_exile.gui.overlays.GuiPosition;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.registers.client.KeybindsRegister;
+import com.robertx22.age_of_exile.mmorpg.registers.client.SpellKeybind;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ChatUtils;
 import com.robertx22.library_of_exile.utils.CLOC;
@@ -25,6 +26,9 @@ public class SpellHotbarOverlay {
 
     private static final ResourceLocation HOTBAR_TEX = new ResourceLocation(SlashRef.MODID,
             "textures/gui/spells/hotbar.png"
+    );
+    private static final ResourceLocation HOTBAR_SWAP_TEX = new ResourceLocation(SlashRef.MODID,
+            "textures/gui/spells/swap_hotbar.png"
     );
     private static final ResourceLocation COOLDOWN_TEX = new ResourceLocation(SlashRef.MODID,
             "textures/gui/spells/cooldown.png"
@@ -52,8 +56,6 @@ public class SpellHotbarOverlay {
 
     int CHARGE_SIZE = 9;
 
-    static int WIDTH = 22;
-    static int HEIGHT = 162;
 
     Minecraft mc = Minecraft.getInstance();
 
@@ -74,6 +76,13 @@ public class SpellHotbarOverlay {
                 return;
             }
 
+            int WIDTH = 22;
+            int HEIGHT = 162;
+
+            if (ClientConfigs.getConfig().HOTBAR_SWAPPING.get()) {
+                HEIGHT = 82;
+            }
+
 
             RenderSystem.enableBlend(); // enables transparency
 
@@ -84,10 +93,16 @@ public class SpellHotbarOverlay {
             renderHotbar(gui, x, y);
             //renderSpellsOnHotbar(matrix, x, y);
 
-            for (int i = 0; i < 8; i++) {
+            int spells = ClientConfigs.getConfig().HOTBAR_SWAPPING.get() ? 4 : 8;
+
+
+            for (int i = 0; i < spells; i++) {
 
                 int place = i;
 
+                if (ClientConfigs.getConfig().HOTBAR_SWAPPING.get() && SpellKeybind.IS_ON_SECONd_HOTBAR) {
+                    place += 4;
+                }
 
                 renderCurrentSpell(place, i, gui);
 
@@ -106,6 +121,12 @@ public class SpellHotbarOverlay {
     }
 
     private void renderCurrentSpell(int place, int num, GuiGraphics gui) {
+        int WIDTH = 22;
+        int HEIGHT = 162;
+
+        if (ClientConfigs.getConfig().HOTBAR_SWAPPING.get()) {
+            HEIGHT = 82;
+        }
 
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 
@@ -129,8 +150,7 @@ public class SpellHotbarOverlay {
         }
 
         int x = 3;
-        int y = mc.getWindow()
-                .getGuiScaledHeight() / 2 - HEIGHT / 2 + 3;
+        int y = mc.getWindow().getGuiScaledHeight() / 2 - HEIGHT / 2 + 3;
 
         y += num * 20;
 
@@ -240,10 +260,20 @@ public class SpellHotbarOverlay {
     }
 
     private void renderHotbar(GuiGraphics gui, int x, int y) {
+        int WIDTH = 22;
+        int HEIGHT = 162;
+
+        if (ClientConfigs.getConfig().HOTBAR_SWAPPING.get()) {
+            HEIGHT = 82;
+        }
 
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-        gui.blit(HOTBAR_TEX, x, y, 0, 0, WIDTH, HEIGHT);
+        if (ClientConfigs.getConfig().HOTBAR_SWAPPING.get()) {
+            gui.blit(HOTBAR_SWAP_TEX, x, y, 0, 0, WIDTH, HEIGHT);
 
+        } else {
+            gui.blit(HOTBAR_TEX, x, y, 0, 0, WIDTH, HEIGHT);
+        }
     }
 
 }

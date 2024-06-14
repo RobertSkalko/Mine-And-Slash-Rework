@@ -55,7 +55,6 @@ farming_exp
 farming_greater_exp
 farming_lesser_exp
 farming_medium_exp
-farming_misc_exp
 farming_triple
 fire_damage_eye
 fire_ele_dmg_jewelry
@@ -71,7 +70,6 @@ fishing_exp
 fishing_greater_exp
 fishing_lesser_exp
 fishing_medium_exp
-fishing_misc_exp
 fishing_triple
 focused
 gear_corruptaura_effect
@@ -106,7 +104,6 @@ husbandry_exp
 husbandry_greater_exp
 husbandry_lesser_exp
 husbandry_medium_exp
-husbandry_misc_exp
 husbandry_triple
 immortal
 imperial_bow
@@ -166,7 +163,6 @@ mining_exp
 mining_greater_exp
 mining_lesser_exp
 mining_medium_exp
-mining_misc_exp
 mining_triple
 ms_reg
 ms_ring

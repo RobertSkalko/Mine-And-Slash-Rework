@@ -49,6 +49,9 @@ public class SocketData implements IStatsContainer {
             }
 
         });
+        if (list.isEmpty()) {
+            list.add(Component.literal("Socket Display Error"));
+        }
         return list;
     }
 

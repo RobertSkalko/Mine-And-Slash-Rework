@@ -30,12 +30,16 @@ public class OnKeyPress {
             return;
         }
 
+
         if (KeybindsRegister.UNSUMMON.isDown()) {
             Packets.sendToServer(new UnsummonPacket());
             cooldown = 3;
         } else if (KeybindsRegister.HUB_SCREEN_KEY.isDown()) {
             mc.setScreen(new MainHubScreen());
             cooldown = 10;
+        } else if (KeybindsRegister.HOTBAR_SWAP.isDown()) {
+            SpellKeybind.IS_ON_SECONd_HOTBAR = !SpellKeybind.IS_ON_SECONd_HOTBAR;
+            cooldown = 5;
         } else {
 
             int number = -1;

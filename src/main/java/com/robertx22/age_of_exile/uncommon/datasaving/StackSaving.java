@@ -10,7 +10,6 @@ import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulData;
 import com.robertx22.age_of_exile.vanilla_mc.items.crates.gem_crate.LootCrateData;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
-import net.minecraft.world.item.ItemStack;
 
 public class StackSaving {
 
@@ -29,7 +28,5 @@ public class StackSaving {
 
     public static void init() {
 
-        ItemStack stack;
-        stack.too
     }
 }
