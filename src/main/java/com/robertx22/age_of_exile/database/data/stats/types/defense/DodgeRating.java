@@ -7,6 +7,7 @@ import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseDamageEff
 import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
 import com.robertx22.age_of_exile.mmorpg.UNICODE;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
+import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.effectdatas.DamageEvent;
 import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -92,6 +93,9 @@ public class DodgeRating extends Stat implements IUsableStat {
         public boolean canActivate(DamageEvent effect, StatData data, Stat stat) {
 
             if (effect.GetElement() != Elements.Physical) {
+                return false;
+            }
+            if (effect.isSpell() && effect.getSpell().config.tags.contains(SpellTags.magic)) {
                 return false;
             }
 

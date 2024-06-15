@@ -40,6 +40,7 @@ public class EntityAilmentData {
 
         if (dmg > 0) {
             EventBuilder.ofSpellDamage(caster, target, (int) dmg, spell).setupDamage(AttackType.dot, WeaponTypes.none, PlayStyle.INT).set(x -> {
+                        x.calcSourceEffects = false;
                         x.setElement(ailment.element);
                         x.setisAilmentDamage(ailment);
 

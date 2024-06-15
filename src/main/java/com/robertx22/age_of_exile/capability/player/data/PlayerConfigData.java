@@ -2,8 +2,6 @@ package com.robertx22.age_of_exile.capability.player.data;
 
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
-import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
-import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
@@ -27,6 +25,7 @@ public class PlayerConfigData {
         MOB_DEATH_MESSAGES("mob_death_messages", Words.MOB_DEATH_MESSAGES),
         DAMAGE_MESSAGES("damage_messages", Words.DAMAGE_MESSAGES),
         AUTO_PVE("auto_pve", Words.AUTOMATIC_PVE),
+        AGGRESSIVE_SUMMONS("aggressive_summons", Words.AGGRESIVE_SUMMONS),
         STAT_ORDER_TEST("stat_order_test", Words.STAT_ORDER_TEST),
         DAMAGE_CONFLICT_MSG("damage_conflict_check", Words.DMG_CONFLICT_CHECK);
         public String id;
@@ -41,7 +40,6 @@ public class PlayerConfigData {
 
     public AutoSalvage salvage = new AutoSalvage();
 
-
     public HashMap<String, Boolean> configs = new HashMap<>();
 
     public boolean isConfigEnabled(Config id) {
@@ -51,7 +49,24 @@ public class PlayerConfigData {
 
     public class AutoSalvage {
 
+        //  private HashMap<ToggleAutoSalvageRarity.SalvageType, HashMap<String, Boolean>> map = new HashMap<>();
+        // Salvage Type -> <rarity, enabled>
         private HashMap<ToggleAutoSalvageRarity.SalvageType, HashMap<String, Boolean>> map = new HashMap<>();
+
+        // Salvage Type -> <ID, enabled>
+        // Ex:
+        // SalvageType.SPELL, <plus_aoe, disabled>
+        // SalvageType.GEAR, <shield, enabled>
+
+        // this configuration should take precedence over the rarity config because it's more specific
+        private HashMap<ToggleAutoSalvageRarity.SalvageType, HashMap<String, Boolean>> tmap = new HashMap<>();
+
+        public HashMap<ToggleAutoSalvageRarity.SalvageType, HashMap<String, Boolean>> getTMap() {
+            if (tmap == null) {
+                tmap = new HashMap<>();
+            }
+            return tmap;
+        }
 
         // todo test this
         public boolean trySalvageOnPickup(Player player, ItemStack stack) {
@@ -68,7 +83,7 @@ public class PlayerConfigData {
 
                     Optional<Boolean> typeSalvageEnabled = checkTypeSalvageConfig(data.getSalvageType(), data.getSalvageConfigurationId());
 
-                    if(typeSalvageEnabled.isEmpty()) {
+                    if (typeSalvageEnabled.isEmpty()) {
                         if (checkRaritySalvageConfig(data.getSalvageType(), data.getRarityId())) {
                             doSalvage = true;
                         }
@@ -77,7 +92,7 @@ public class PlayerConfigData {
                     }
                 }
 
-                if(doSalvage) {
+                if (doSalvage) {
                     SoundUtils.playSound(player, SoundEvents.EXPERIENCE_ORB_PICKUP, 0.75F, 1.25F);
                     stack.shrink(100);
                     data.getSalvageResult(stack).forEach(e -> {
@@ -93,42 +108,31 @@ public class PlayerConfigData {
         }
 
 
-        // Salvage Type -> <rarity, enabled>
-        private HashMap<ToggleAutoSalvageRarity.SalvageType, HashMap<String, Boolean>> raritySalvageConfig = new HashMap<>();
-
-        // Salvage Type -> <ID, enabled>
-        // Ex:
-        // SalvageType.SPELL, <plus_aoe, disabled>
-        // SalvageType.GEAR, <shield, enabled>
-
-        // this configuration should take precedence over the rarity config because it's more specific
-        private HashMap<ToggleAutoSalvageRarity.SalvageType, HashMap<String, Boolean>> typeSalvageConfig = new HashMap<>();
-
         public boolean checkRaritySalvageConfig(ToggleAutoSalvageRarity.SalvageType type, String rar) {
-            return raritySalvageConfig.getOrDefault(type, new HashMap<>()).getOrDefault(rar, false);
+            return map.getOrDefault(type, new HashMap<>()).getOrDefault(rar, false);
         }
 
         public Optional<Boolean> checkTypeSalvageConfig(ToggleAutoSalvageRarity.SalvageType type, String id) {
-            if(id == null) {
+            if (id == null) {
                 return Optional.empty();
             }
 
-            if(!typeSalvageConfig.containsKey(type)) {
+            if (!getTMap().containsKey(type)) {
                 return Optional.empty();
             }
 
-            if(!typeSalvageConfig.get(type).containsKey(id)) {
+            if (getTMap().containsKey(type) && !getTMap().get(type).containsKey(id)) {
                 return Optional.empty();
             }
 
-            return Optional.of(typeSalvageConfig.get(type).get(id));
+            return Optional.of(tmap.get(type).get(id));
         }
 
         public void toggleRaritySalvageConfig(ToggleAutoSalvageRarity.SalvageType type, String rarity) {
-            if (!raritySalvageConfig.containsKey(type)) {
-                raritySalvageConfig.put(type, new HashMap<>());
+            if (!map.containsKey(type)) {
+                map.put(type, new HashMap<>());
             }
-            var m2 = raritySalvageConfig.get(type);
+            var m2 = map.get(type);
 
             if (!m2.containsKey(rarity)) {
                 m2.put(rarity, false);
@@ -145,25 +149,25 @@ public class PlayerConfigData {
 
         public void setAutoSalvageForTypeAndId(ToggleAutoSalvageRarity.SalvageType salvageType, String id, AutoSalvageGenericConfigure.AutoSalvageConfigAction action) {
 
-            if(action == AutoSalvageGenericConfigure.AutoSalvageConfigAction.CLEAR) {
-                if (!typeSalvageConfig.containsKey(salvageType)) {
+            if (action == AutoSalvageGenericConfigure.AutoSalvageConfigAction.CLEAR) {
+                if (!getTMap().containsKey(salvageType)) {
                     return;
                 }
-                var idMap = typeSalvageConfig.get(salvageType);
+                var idMap = tmap.get(salvageType);
                 idMap.remove(id);
                 return;
             }
 
-            if(!typeSalvageConfig.containsKey(salvageType)) {
-                typeSalvageConfig.put(salvageType, new HashMap<>());
+            if (!tmap.containsKey(salvageType)) {
+                getTMap().put(salvageType, new HashMap<>());
             }
 
-            typeSalvageConfig.get(salvageType).put(id, action == AutoSalvageGenericConfigure.AutoSalvageConfigAction.ENABLE);
+            getTMap().get(salvageType).put(id, action == AutoSalvageGenericConfigure.AutoSalvageConfigAction.ENABLE);
 
         }
 
         public HashMap<String, Boolean> getConfiguredMapForSalvageType(ToggleAutoSalvageRarity.SalvageType salvageType) {
-            return typeSalvageConfig.getOrDefault(salvageType, new HashMap<>());
+            return getTMap().getOrDefault(salvageType, new HashMap<>());
         }
 
     }

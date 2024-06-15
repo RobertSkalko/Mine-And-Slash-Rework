@@ -291,25 +291,29 @@ public class ProfessionBlockEntity extends BlockEntity {
     @Override
     public void load(CompoundTag pTag) {
         super.load(pTag);
-        fromTag(pTag.getList("inv", 10));
-        this.show.fromTag(pTag.getList("show", 10));
-        this.recipe_locked = pTag.getBoolean("locked");
+        try {
+            fromTag(pTag.getList("inv", 10));
+            this.show.fromTag(pTag.getList("show", 10));
+            this.recipe_locked = pTag.getBoolean("locked");
 
-        var state = pTag.getString("state");
-        if (state.isEmpty()) {
-            state = Crafting_State.IDLE.name();
-        }
-        this.craftingState = Crafting_State.valueOf(state);
-        if (craftingState != Crafting_State.STOPPED) {
-            if (pTag.contains("owner"))
-                this.ownerUUID = pTag.getUUID("owner");
-            else {
-                this.ownerUUID = null;
-                craftingState = Crafting_State.STOPPED;
+            var state = pTag.getString("state");
+            if (state.isEmpty()) {
+                state = Crafting_State.IDLE.name();
             }
-        }
-        if (recipe_locked && pTag.contains("recipe")) {
-            this.last_recipe = ExileDB.Recipes().get(pTag.getString("recipe"));
+            this.craftingState = Crafting_State.valueOf(state);
+            if (craftingState != Crafting_State.STOPPED) {
+                if (pTag.contains("owner"))
+                    this.ownerUUID = pTag.getUUID("owner");
+                else {
+                    this.ownerUUID = null;
+                    craftingState = Crafting_State.STOPPED;
+                }
+            }
+            if (recipe_locked && pTag.contains("recipe")) {
+                this.last_recipe = ExileDB.Recipes().get(pTag.getString("recipe"));
+            }
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -317,23 +321,27 @@ public class ProfessionBlockEntity extends BlockEntity {
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
 
-        pTag.put("inv", createTag());
-        pTag.put("show", this.show.createTag());
-        if (recipe_locked) {
-            if (last_recipe != null) {
-                pTag.putBoolean("locked", recipe_locked);
-                pTag.putString("recipe", last_recipe.GUID());
-            } else {
-                pTag.putBoolean("locked", false);
+        try {
+            pTag.put("inv", createTag());
+            pTag.put("show", this.show.createTag());
+            if (recipe_locked) {
+                if (last_recipe != null) {
+                    pTag.putBoolean("locked", recipe_locked);
+                    pTag.putString("recipe", last_recipe.GUID());
+                } else {
+                    pTag.putBoolean("locked", false);
+                }
             }
-        }
-        if (craftingState != Crafting_State.STOPPED) {
-            if (this.ownerUUID != null) {
-                pTag.putUUID("owner", this.ownerUUID);
-                pTag.putString("state", craftingState.name());
-            } else {
-                pTag.putString("state", Crafting_State.STOPPED.name());
+            if (craftingState != Crafting_State.STOPPED) {
+                if (this.ownerUUID != null) {
+                    pTag.putUUID("owner", this.ownerUUID);
+                    pTag.putString("state", craftingState.name());
+                } else {
+                    pTag.putString("state", Crafting_State.STOPPED.name());
+                }
             }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

@@ -20,7 +20,6 @@ public class UberFragLootGen extends BaseLootGen<ItemBlueprint> {
 
     @Override
     public float baseDropChance() {
-   
         return (float) (ServerContainer.get().UBER_FRAG_DROPRATE.get().floatValue());
     }
 

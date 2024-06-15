@@ -19,6 +19,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.chunk.ChunkAccess;
@@ -199,8 +200,8 @@ public class ProcessChunkBlocks {
                 if (any) {
                     // only set to air if the processor didnt turn it into another block
                     if (level.getBlockState(tilePos).getBlock() == Blocks.STRUCTURE_BLOCK || level.getBlockState(tilePos).getBlock() == Blocks.COMMAND_BLOCK) {
-                        level.setBlock(tilePos, Blocks.AIR.defaultBlockState(), 2); // delete data block
                         level.removeBlockEntity(tilePos);
+                        level.setBlock(tilePos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL); // delete data block
                     }
 
                 } else {
@@ -232,12 +233,12 @@ public class ProcessChunkBlocks {
                 if (did) {
                     any = true;
                 }
-             
+
 
                 if (any) {
                     // only set to air if the processor didnt turn it into another block
                     if (level.getBlockState(tilePos).getBlock() == Blocks.STRUCTURE_BLOCK || level.getBlockState(tilePos).getBlock() == Blocks.COMMAND_BLOCK) {
-                        level.setBlock(tilePos, Blocks.AIR.defaultBlockState(), 2); // delete data block
+                        level.setBlock(tilePos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL); // delete data block
                         level.removeBlockEntity(tilePos);
                     }
 

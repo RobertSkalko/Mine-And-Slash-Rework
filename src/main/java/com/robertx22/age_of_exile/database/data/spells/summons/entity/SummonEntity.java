@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.spells.summons.entity;
 
+import com.robertx22.age_of_exile.capability.player.data.PlayerConfigData;
 import com.robertx22.age_of_exile.database.data.spells.components.ProjectileCastHelper;
 import com.robertx22.age_of_exile.database.data.spells.entities.AutoAimingProj;
 import com.robertx22.age_of_exile.mmorpg.registers.common.SlashEntities;
@@ -11,8 +12,10 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.OwnerHurtTargetGoal;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -31,8 +34,29 @@ public abstract class SummonEntity extends TamableAnimal implements RangedAttack
     protected AbstractArrow getArrow(ItemStack pArrowStack, float pVelocity) {
         return ProjectileUtil.getMobArrow(this, pArrowStack, pVelocity);
 
+
     }
 
+    Goal aggroGoal = null;
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (!this.level().isClientSide) {
+
+            if (this.tickCount == 20) {
+                var owner = getOwner();
+                if (owner instanceof Player p) {
+                    if (Load.player(p).config.isConfigEnabled(PlayerConfigData.Config.AGGRESSIVE_SUMMONS)) {
+                        if (aggroGoal == null) {
+                            aggroGoal = new NearestAttackableTargetGoal<>(this, Monster.class, false);
+                            this.targetSelector.addGoal(2, aggroGoal);
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     @Override
     public void performRangedAttack(LivingEntity pTarget, float pDistanceFactor) {
@@ -105,7 +129,6 @@ public abstract class SummonEntity extends TamableAnimal implements RangedAttack
         //this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
 
 
-        // this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Monster.class, false));
         this.targetSelector.addGoal(3, new OwnerHurtByTargetGoal(this));
         this.targetSelector.addGoal(4, new OwnerHurtTargetGoal(this));
     }

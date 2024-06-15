@@ -42,7 +42,7 @@ public class ProphecyLeague extends LeagueMechanic {
 
     @Override
     public void spawnMechanicInMap(ServerLevel level, BlockPos pos) {
-        level.setBlock(pos, SlashBlocks.PROPHECY_ALTAR.get().defaultBlockState(), 0);
+        level.setBlock(pos, SlashBlocks.PROPHECY_ALTAR.get().defaultBlockState(), Block.UPDATE_ALL);
     }
 
     @Override
