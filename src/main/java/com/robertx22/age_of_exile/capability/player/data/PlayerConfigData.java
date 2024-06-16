@@ -21,19 +21,21 @@ public class PlayerConfigData {
 
         /// todo add more configs like.. minions should attack x?
 
-        CAST_FAIL("cast_fail_messages", Words.CAST_FAIL_MSGS),
-        MOB_DEATH_MESSAGES("mob_death_messages", Words.MOB_DEATH_MESSAGES),
-        DAMAGE_MESSAGES("damage_messages", Words.DAMAGE_MESSAGES),
-        AUTO_PVE("auto_pve", Words.AUTOMATIC_PVE),
-        AGGRESSIVE_SUMMONS("aggressive_summons", Words.AGGRESIVE_SUMMONS),
-        STAT_ORDER_TEST("stat_order_test", Words.STAT_ORDER_TEST),
-        DAMAGE_CONFLICT_MSG("damage_conflict_check", Words.DMG_CONFLICT_CHECK);
+        CAST_FAIL("cast_fail_messages", Words.CAST_FAIL_MSGS, false),
+        MOB_DEATH_MESSAGES("mob_death_messages", Words.MOB_DEATH_MESSAGES, false),
+        DAMAGE_MESSAGES("damage_messages", Words.DAMAGE_MESSAGES, false),
+        AUTO_PVE("auto_pve", Words.AUTOMATIC_PVE, false),
+        AGGRESSIVE_SUMMONS("aggressive_summons", Words.AGGRESIVE_SUMMONS, false),
+        STAT_ORDER_TEST("stat_order_test", Words.STAT_ORDER_TEST, true),
+        DAMAGE_CONFLICT_MSG("damage_conflict_check", Words.DMG_CONFLICT_CHECK, true);
         public String id;
         public Words word;
+        public boolean isDebug;
 
-        Config(String id, Words word) {
+        Config(String id, Words word, boolean isdebug) {
             this.id = id;
             this.word = word;
+            this.isDebug = isdebug;
         }
     }
 

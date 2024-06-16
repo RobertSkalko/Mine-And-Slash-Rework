@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.gui.screens.stat_gui;
 
+import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.library_of_exile.utils.TextUTIL;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
@@ -20,7 +21,7 @@ public class StatSectionButton extends ImageButton {
 
     public StatSectionButton(StatScreen screen, StatGuiGroupSection sec, int xPos, int yPos) {
         super(xPos, yPos, xSize, ySize, 0, 0, 0, sec.getIcon(), xSize, ySize, (button) -> {
-            screen.showStats(sec.getStats());
+            screen.showStats(sec.getStats(ClientOnly.getPlayer()), true);
         });
 
         this.sec = sec;

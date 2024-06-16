@@ -161,6 +161,8 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
 
         addTo(StatType.DEFENSE, Arrays.asList(Armor.getInstance(), DodgeRating.getInstance(), BlockChance.getInstance()));
         addTo(StatType.DEFENSE, Arrays.asList(DefenseStats.DAMAGE_RECEIVED.get()));
+        addTo(StatType.DEFENSE, Arrays.asList(DefenseStats.DAMAGE_REDUCTION.get()));
+        addTo(StatType.DEFENSE, Arrays.asList(DefenseStats.DAMAGE_REDUCTION_CHANCE.get()));
         addTo(StatType.DEFENSE, new ElementalResist(Elements.Elemental).generateAllSingleVariations());
         addTo(StatType.DEFENSE, new MaxElementalResist(Elements.Elemental).generateAllSingleVariations());
 

@@ -16,12 +16,16 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class StatScreen extends BaseScreen implements INamedScreen {
@@ -38,18 +42,31 @@ public class StatScreen extends BaseScreen implements INamedScreen {
         gui.blit(BG, mc.getWindow().getGuiScaledWidth() / 2 - sizeX / 2, mc.getWindow().getGuiScaledHeight() / 2 - sizeY / 2, 0, 0, sizeX, sizeY);
         super.render(gui, x, y, ticks);
 
+
+        SEARCH.setX(this.guiLeft - (SEARCH_WIDTH / 2) + sizeX / 2);
+        SEARCH.setY(this.guiTop - SEARCH_HEIGHT - 5);
+        SEARCH.render(gui, 0, 0, 0);
+
     }
+
+    private static int SEARCH_WIDTH = 100;
+    private static int SEARCH_HEIGHT = 14;
+    public static EditBox SEARCH = new EditBox(Minecraft.getInstance().font, 0, 0, SEARCH_WIDTH, SEARCH_HEIGHT,
+            Component.translatable("fml.menu.mods.search"));
 
 
     int currentElement = 0;
     public List<Stat> stats = new ArrayList<>();
+    public List<Stat> searched = new ArrayList<>();
     //   int elementsAmount = 1;
 
 
     public void setupStatButtons() {
+        this.renderables.removeIf(x -> x instanceof EditBox == false);
+        this.children().removeIf(x -> x instanceof EditBox == false);
 
-        this.children().clear();
-        this.renderables.clear();
+        //    this.children().clear();
+        //  this.renderables.clear();
 
         int secX = guiLeft + 9;
         int secY = guiTop + 18;
@@ -75,8 +92,8 @@ public class StatScreen extends BaseScreen implements INamedScreen {
             if (i >= this.stats.size()) {
                 continue;
             } else {
-                if (stats.size() > i) {
-                    Stat entry = stats.get(i);
+                if (searched.size() > i) {
+                    Stat entry = searched.get(i);
                     int ysize = entry.getStatGuiPanelButtonYSize() + 3;
 
                     if (spaceleft >= ysize) {
@@ -106,7 +123,7 @@ public class StatScreen extends BaseScreen implements INamedScreen {
     }
 
     public void setCurrentElement(int element) {
-        this.currentElement = MathHelper.clamp(element, 0, stats.size());
+        this.currentElement = MathHelper.clamp(element, 0, searched.size());
         setupStatButtons();
     }
 
@@ -131,12 +148,23 @@ public class StatScreen extends BaseScreen implements INamedScreen {
 
     }
 
-    public void showStats(List<Stat> stats) {
+    @Override
+    public void tick() {
+        SEARCH.tick();
 
-        this.stats = stats;
+    }
+
+    public void showStats(List<Stat> stats, boolean replaceSaved) {
+
+        if (replaceSaved) {
+            this.stats = stats;
+        }
+        this.searched = stats;
         this.currentElement = 0;
 
         setupStatButtons();
+
+
     }
 
     public List<Stat> getAllStats() {
@@ -168,8 +196,19 @@ public class StatScreen extends BaseScreen implements INamedScreen {
         super.init();
 
 
-        showStats(StatGuiGroupSection.CORE.getStats());
-      
+        SEARCH.setFocused(false);
+        SEARCH.setCanLoseFocus(true);
+        publicAddButton(SEARCH);
+
+        SEARCH.setResponder(x -> {
+            showStats(stats.stream().filter(s -> {
+                String name = s.locName().toString();
+                return name.toLowerCase(Locale.ROOT).contains(x.toLowerCase(Locale.ROOT));
+            }).collect(Collectors.toList()), false);
+        });
+
+
+        showStats(StatGuiGroupSection.CORE.getStats(mc.player), true);
 
     }
 

@@ -38,7 +38,13 @@ public class ProfessionToolData implements ITooltip {
 
     public List<ExactStatData> GetAllStats() {
         List<ExactStatData> list = new ArrayList<>();
-        affixes.stream().forEach(x -> ExileDB.Affixes().get(x.id).getStats().stream().map(e -> e.ToExactStat(x.p, lvl)).forEach(t -> list.add(t)));
+        affixes.stream().forEach(x -> {
+            try {
+                ExileDB.Affixes().get(x.id).getStats().stream().map(e -> e.ToExactStat(x.p, lvl)).forEach(t -> list.add(t));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
         return list;
     }
 

@@ -139,3 +139,10 @@ v5.5.9
 - magic spells can no longer be dodged by dodge rating
 - spell dodge is now for dodging spells tagged as magic (it was int style before, meaning staff attacks were dodged)
 - fixed some map command blocks appearing client side
+
+v.5.5.10
+- added search bar to stat screen
+- players no longer benefit in stats from holding a weapon they dont have requirements for 
+- no longer shows 2 debugging options in features screen, they were apparently confusing
+- fixed display bug showing you are doing physical dmg when your converted dmg was 100%
+- fixed spell tooltips going out of screen (apparently vanilla has different tooltip positioners and i the default one for buttons doesn't like big tooltips)

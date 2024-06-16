@@ -64,7 +64,7 @@ public class DamageEvent extends EffectEvent {
 
     public LivingEntity petEntity;
 
- 
+
     @Override
     public String GUID() {
         return ID;
@@ -580,7 +580,8 @@ public class DamageEvent extends EffectEvent {
         public float totalDmg = 0;
 
         public boolean isMixedDamage() {
-            return dmgmap.entrySet().stream().filter(x -> x.getValue() > 0).count() > 1;
+            int bonusdmg = (int) dmgmap.entrySet().stream().filter(x -> true).count();
+            return bonusdmg > 1;
         }
 
         public void addDmg(DamageEvent event, float dmg, Elements element) {

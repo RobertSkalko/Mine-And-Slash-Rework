@@ -70,7 +70,7 @@ public class GearData {
             return false;
         }
 
-        if (data.getLevel() < gear.lvl) {
+        if (!gear.canPlayerWear(data)) {
             return false;
         }
 

@@ -12,6 +12,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Tooltip;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner;
+import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
 import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
@@ -78,5 +80,9 @@ public class SpellButton extends ImageButton {
 
     }
 
+    @Override
+    protected ClientTooltipPositioner createTooltipPositioner() {
+        return DefaultTooltipPositioner.INSTANCE;
+    }
 
 }

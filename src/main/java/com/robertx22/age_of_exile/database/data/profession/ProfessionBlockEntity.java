@@ -313,7 +313,7 @@ public class ProfessionBlockEntity extends BlockEntity {
                 this.last_recipe = ExileDB.Recipes().get(pTag.getString("recipe"));
             }
         } catch (IllegalArgumentException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
@@ -341,7 +341,7 @@ public class ProfessionBlockEntity extends BlockEntity {
                 }
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 

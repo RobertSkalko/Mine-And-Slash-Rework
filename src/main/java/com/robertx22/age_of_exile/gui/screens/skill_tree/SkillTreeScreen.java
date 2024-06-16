@@ -209,8 +209,9 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         }
     }
 
+    @Override
     public void tick() {
-        SkillTreeScreen.SEARCH.tick();
+        SEARCH.tick();
     }
 
     @Override

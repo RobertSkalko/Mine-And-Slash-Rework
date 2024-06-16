@@ -75,6 +75,11 @@ public class StatPanelButton extends ImageButton {
 
         String stattext = stat.GetStat().gui_group.isValid() ? stat.GetStat().gui_group.locName().getString() : stat.GetStat().locName().getString();
 
+        int maxlength = 20;
+        if (stattext.length() >= maxlength) {
+            stattext = stattext.substring(0, maxlength) + "...";
+        }
+
         RenderUtils.render16Icon(gui, stat.GetStat().getIconForRenderingWithDefault(), getX() + iconX, getY() + iconY);
 
         gui.drawString(Minecraft.getInstance().font, Component.literal(stattext), getX() + numX, getY() + numY, ChatFormatting.AQUA.getColor());

@@ -12,6 +12,7 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class GuiInventoryGrids {
 
@@ -63,7 +64,7 @@ public class GuiInventoryGrids {
 
         List<GuiItemData> lists = new ArrayList<>();
 
-        for (PlayerConfigData.Config v : PlayerConfigData.Config.values()) {
+        for (PlayerConfigData.Config v : Arrays.stream(PlayerConfigData.Config.values()).filter(x -> !x.isDebug).collect(Collectors.toList())) {
             lists.add(new GuiItemData(new GuiConfigToggle(v)));
         }
 

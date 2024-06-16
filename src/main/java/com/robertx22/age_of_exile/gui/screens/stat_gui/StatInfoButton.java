@@ -68,6 +68,7 @@ public class StatInfoButton extends ImageButton implements IStatInfoButton {
             RenderUtils.render16Icon(gui, this.type.getIcon(), getX() + iconX - 3, getY() + iconY - 3);
         }
         var text = type.getRenderText(stat, Load.Unit(ClientOnly.getPlayer()));
+      
         if (text != null) {
             GuiUtils.renderScaledText(gui, getX() + numX, getY() + numY, 0.8F, text.getString(), ChatFormatting.YELLOW);
         }

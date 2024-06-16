@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.gui.bases;
 import com.robertx22.age_of_exile.characters.gui.CharacterSelectScreen;
 import com.robertx22.age_of_exile.event_hooks.player.OnKeyPress;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.SkillTreeScreen;
+import com.robertx22.age_of_exile.gui.screens.stat_gui.StatScreen;
 import com.robertx22.age_of_exile.mmorpg.registers.client.KeybindsRegister;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -34,7 +35,8 @@ public class BaseScreen extends Screen {
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
 
-        if (KeybindsRegister.HUB_SCREEN_KEY.matches(keyCode, scanCode) && !SkillTreeScreen.SEARCH.isFocused() && !CharacterSelectScreen.SEARCH.isFocused()) {
+        // todo make this less wack
+        if (KeybindsRegister.HUB_SCREEN_KEY.matches(keyCode, scanCode) && !StatScreen.SEARCH.isFocused() && !SkillTreeScreen.SEARCH.isFocused() && !CharacterSelectScreen.SEARCH.isFocused()) {
             Minecraft.getInstance().setScreen(null);
             OnKeyPress.cooldown = 5;
             return false;
