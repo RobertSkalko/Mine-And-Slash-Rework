@@ -2554,6 +2554,7 @@
 	"mmorpg.word.dmgmultiinfo": "Damage Multiplier. This is a multiplicative damage source",
 	"mmorpg.word.downgradeaffix": "Downgrades an affix",
 	"mmorpg.word.drag_no_work_creative": "Drag and Drop Interactions Do-NOT work in Creative Mode!",
+	"mmorpg.word.drop_map_chest_contents_on_ground": "Drop Map Chest Contents When Looted\n\nWhen you loot chests in maps, should they drop their contents on the ground automatically? \n\nThis is helpful if you use the Master Backpack or other loot filtering mods like Sophisticated Backpacks.",
 	"mmorpg.word.dungeonkey": "Dungeon Key",
 	"mmorpg.word.easy": "Easy",
 	"mmorpg.word.effects": "Effects:",

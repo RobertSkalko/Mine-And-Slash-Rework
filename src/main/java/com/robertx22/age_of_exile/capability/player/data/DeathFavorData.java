@@ -5,12 +5,15 @@ import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.OnScreenMessageUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
@@ -48,8 +51,11 @@ public class DeathFavorData {
     }
 
     public void onLootChest(Player p) {
-        set(p, favor + ServerContainer.get().FAVOR_CHEST_GAIN.get().floatValue());
 
+        float favorGain = ServerContainer.get().FAVOR_CHEST_GAIN.get().floatValue();
+
+        set(p, favor + favorGain);
+        OnScreenMessageUtils.actionBar((ServerPlayer) p, Component.literal("+" + favorGain + " ").append(Component.literal("Favor (" + favor + ")")).withStyle(ChatFormatting.GREEN));
         //  Load.player(p).prophecy.favor += ServerContainer.get().FAVOR_CHEST_GAIN.get();
     }
 
