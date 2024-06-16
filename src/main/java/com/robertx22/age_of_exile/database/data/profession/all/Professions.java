@@ -80,7 +80,7 @@ public class Professions {
         // this would be a pain to save
 
         Builder.of(SALVAGING)
-                .sometimesDrop(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.SALVAGING), 10)
+                .sometimesDrop(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.SALVAGING), 20)
                 .build();
 
         var FARM_EXP = 30;

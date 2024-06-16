@@ -57,7 +57,7 @@ public enum AllyOrEnemy {
     allies() {
         @Override
         public <T extends LivingEntity> List<T> getMatchingEntities(List<T> list, Entity caster) {
-            
+
             return list.stream().filter(x -> is(caster, x))
                     .collect(Collectors.toList());
         }
@@ -141,6 +141,11 @@ public enum AllyOrEnemy {
                 if (target instanceof Player) {
                     return true;
                 } else {
+                    if (target instanceof OwnableEntity o) {
+                        if (o.getOwner() instanceof Player p) {
+                            return true;
+                        }
+                    }
                     return false;
                 }
             }

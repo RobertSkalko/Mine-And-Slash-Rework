@@ -267,6 +267,8 @@ public class DamageEvent extends EffectEvent {
         return "Damage Event";
     }
 
+    public float wepdmgMulti = 1;
+
     @Override
     public void initBeforeActivating() {
         calcAttackCooldown();
@@ -289,6 +291,7 @@ public class DamageEvent extends EffectEvent {
             if (this.attackInfo != null && attackInfo.weaponData != null) {
                 if (!data.getBoolean(EventData.UNARMED_ATTACK)) {
                     float multi = attackInfo.weaponData.GetBaseGearType().getGearSlot().getBasicDamageMulti();
+                    this.wepdmgMulti = multi;
                     this.addMoreMulti(Words.WEAPON_BASIC_ATTACK_DMG_MULTI.locName(), EventData.NUMBER, multi);
                 }
             }
@@ -612,7 +615,12 @@ public class DamageEvent extends EffectEvent {
                 // this how do i make a copy of the same event that it was at the start..except element
                 DamageEvent bonus = EventBuilder.ofDamage(attackInfo, source, target, entry.getValue())
                         .setupDamage(AttackType.hit, data.getWeaponType(), data.getStyle())
-                        .set(x -> x.setElement(entry.getKey()))
+                        .set(x -> {
+                            if (wepdmgMulti != 1) {
+                                x.addMoreMulti(Words.WEAPON_BASIC_ATTACK_DMG_MULTI.locName(), EventData.NUMBER, wepdmgMulti);
+                            }
+                            x.setElement(entry.getKey());
+                        })
                         .build();
 
                 if (isSpell()) {

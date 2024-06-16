@@ -24,6 +24,7 @@ public class UnequipGear {
     public static List<EquipmentSlot> SLOTS = Arrays.asList(EquipmentSlot.FEET, EquipmentSlot.LEGS, EquipmentSlot.CHEST, EquipmentSlot.HEAD, EquipmentSlot.OFFHAND);
 
     static void drop(Player player, EquipmentSlot slot, ItemStack stack, MutableComponent txt) {
+        ItemStack old = player.getItemBySlot(slot);
         ItemStack copy = stack.copy();
 
         player.setItemSlot(slot, ItemStack.EMPTY); // todo is this good?
@@ -37,13 +38,12 @@ public class UnequipGear {
             player.setItemSlot(slot, copy);
             System.out.print("Error in unequipping gear, weird!!!");
         }
+        player.onEquipItem(slot, old, copy); // todo will this fix modded items leaving effects?
     }
 
     static void drop(Player player, ICurioStacksHandler handler, int number, ItemStack stack, MutableComponent txt) {
-
         ItemStack copy = stack.copy();
-        handler.getStacks()
-                .setStackInSlot(number, ItemStack.EMPTY);
+        handler.getStacks().setStackInSlot(number, ItemStack.EMPTY);
         PlayerUtils.giveItem(copy, player);
         player.displayClientMessage(txt, false);
     }

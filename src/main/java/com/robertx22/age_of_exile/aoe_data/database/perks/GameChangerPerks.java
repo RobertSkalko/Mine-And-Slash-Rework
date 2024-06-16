@@ -66,8 +66,8 @@ public class GameChangerPerks implements ExileRegistryInit {
 
         // put this on physical side of the tree
         PerkBuilder.gameChanger("elemental_purity", "Elemental Purity",
-                new OptScaleExactStat(25, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Elemental), ModType.FLAT),
-                new OptScaleExactStat(-100, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Physical), ModType.FLAT)
+                new OptScaleExactStat(25, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Elemental), ModType.MORE),
+                new OptScaleExactStat(-50, OffenseStats.ELEMENTAL_DAMAGE.get(Elements.Physical), ModType.MORE)
         );
 
         PerkBuilder.gameChanger("refined_taste", "Refined Taste",

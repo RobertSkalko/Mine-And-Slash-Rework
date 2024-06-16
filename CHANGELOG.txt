@@ -146,3 +146,7 @@ v.5.5.10
 - no longer shows 2 debugging options in features screen, they were apparently confusing
 - fixed display bug showing you are doing physical dmg when your converted dmg was 100%
 - fixed spell tooltips going out of screen (apparently vanilla has different tooltip positioners and i the default one for buttons doesn't like big tooltips)
+
+v.5.5.11
+- converted and bonus elemental damage is now affected by wep dmg multiplier
+- fixed summons not being attacked in maps (they were considered allied to mobs lol)
