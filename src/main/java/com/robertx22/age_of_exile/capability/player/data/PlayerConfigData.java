@@ -27,7 +27,9 @@ public class PlayerConfigData {
         AUTO_PVE("auto_pve", Words.AUTOMATIC_PVE, false),
         AGGRESSIVE_SUMMONS("aggressive_summons", Words.AGGRESIVE_SUMMONS, false),
         STAT_ORDER_TEST("stat_order_test", Words.STAT_ORDER_TEST, true),
-        DAMAGE_CONFLICT_MSG("damage_conflict_check", Words.DMG_CONFLICT_CHECK, true);
+        DAMAGE_CONFLICT_MSG("damage_conflict_check", Words.DMG_CONFLICT_CHECK, true),
+        DROP_MAP_CHEST_CONTENTS_ON_GROUND("drop_map_chest_contents_on_ground", Words.DROP_MAP_CHEST_CONTENTS_ON_GROUND, false);
+
         public String id;
         public Words word;
         public boolean isDebug;
