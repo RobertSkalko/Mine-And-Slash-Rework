@@ -21,7 +21,7 @@ public class UnequipGear {
 
     // dont drop weapons becasuse then newbies can't use stuff like axes at low level!
 
-    public static List<EquipmentSlot> SLOTS = Arrays.asList(EquipmentSlot.FEET, EquipmentSlot.LEGS, EquipmentSlot.CHEST, EquipmentSlot.HEAD, EquipmentSlot.OFFHAND);
+    public static List<EquipmentSlot> SLOTS = Arrays.asList(EquipmentSlot.FEET, EquipmentSlot.LEGS, EquipmentSlot.CHEST, EquipmentSlot.HEAD, EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND);
 
     static void drop(Player player, EquipmentSlot slot, ItemStack stack, MutableComponent txt) {
         ItemStack old = player.getItemBySlot(slot);
@@ -31,14 +31,20 @@ public class UnequipGear {
 
         if (player.getItemBySlot(slot)
                 .isEmpty()) {
-            PlayerUtils.giveItem(copy, player);
+            if (slot == EquipmentSlot.MAINHAND) {
+                var en = player.spawnAtLocation(stack, 1F);
+                en.setPickUpDelay(40);
+
+            } else {
+                PlayerUtils.giveItem(copy, player);
+            }
             player.displayClientMessage(txt
                     , false);
         } else {
             player.setItemSlot(slot, copy);
             System.out.print("Error in unequipping gear, weird!!!");
         }
-        player.onEquipItem(slot, old, copy); // todo will this fix modded items leaving effects?
+        // player.onEquipItem(slot, old, copy); // todo will this fix modded items leaving effects?
     }
 
     static void drop(Player player, ICurioStacksHandler handler, int number, ItemStack stack, MutableComponent txt) {

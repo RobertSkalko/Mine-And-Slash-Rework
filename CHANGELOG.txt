@@ -161,3 +161,7 @@ v.5.5.12
 - fixed gear req bug
 - fixed salvaging never giving essence
 - salvaging maps should give stones now
+
+v.5.5.13
+- homing spells now home only if they can see the target, this should stop them from homing on underground etc
+- main hand will now be dropped if you dont meet stat req. This is a bit wonky but needed to stop players from gaining stats from unmet weapon req

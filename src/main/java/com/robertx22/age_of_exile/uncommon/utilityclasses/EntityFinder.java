@@ -167,7 +167,9 @@ public class EntityFinder {
             if (list.isEmpty()) {
                 return null;
             }
-            return list.stream().min(Comparator.comparingInt(x -> (int) x.distanceTo(caster))).get();
+            LivingEntity en = list.stream().min(Comparator.comparingInt(x -> (int) x.distanceTo(caster))).get();
+
+            return en;
 
         }
 
