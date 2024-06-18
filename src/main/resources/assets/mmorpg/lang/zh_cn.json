@@ -1353,13 +1353,21 @@
 	"mmorpg.word.corruptsitemharvest": "将一件装备损坏 (无增益)",
 	"mmorpg.currency.entangled_potential": "混乱潜能宝珠",
 	"item.mmorpg.currency.entangled_potential": "混乱潜能宝珠",
+	"mmorpg.word.addpotential": "增加潜能",	
 	"item.mmorpg.currency.desc.entangled_potential": "提升装备25%的潜能;或者损坏它(潜能变0),使其无法修改",
 	"mmorpg.currency.affix_common_reroll": "新开端宝珠",
 	"item.mmorpg.currency.affix_common_reroll": "新开端宝珠",
 	"item.mmorpg.currency.desc.affix_common_reroll": "将一个随机词缀重置为一个普通稀有的随机词缀",
 	"mmorpg.word.rerollsaffix": "重置一个词条",
 	"mmorpg.word.drag_no_work_creative": "拖拽交互在创造模式下无用\n(用法是在背包中拿起来悬空在装备上再单击就可以打到装备上了，创造模式下在工作台等有格子的地方拖拽也可以打，只不过要点两下)",
-	
+	"mmorpg.currency.map_rarity_upgrade": "地图属性提升宝珠",
+	"item.mmorpg.currency.map_rarity_upgrade": "地图属性提升宝珠",
+	"mmorpg.word.can_upgrade_map_rarity": "可以提升地图的属性\n这取决于地图等级",
+	"item.mmorpg.currency.desc.map_rarity_upgrade": "提升地图的稀有度. 质量更高的地图会提供更高质量的装备，相应的，地图的难度也会随之上升",	
+	"mmorpg.item_tips.unique_stats": "独特属性: ",
+	"item.mmorpg.jewel.watcher_eye": "深渊之眼, 神圣珠宝",
+	"mmorpg.item_tips.jewel_stats": "珠宝属性: ",
+
 
 	"item.mmorpg.uber.map_uber1_tier0": "枯萎之境",
 	"item.mmorpg.uber.map_uber1_tier1": "枯萎之境",
@@ -1371,13 +1379,41 @@
 	"mmorpg.item_tips.uber_boss_frag_tip": "收集更多碎片以合成\n创建一个能引导你进入一个有 UBER BOSS 的地图",
 	"mmorpg.word.areacontains": "区域内有一个前往UBER BOSS所在地点的传送门",
 	"mmorpg.chat.resists_too_low_for_map": "您的抗性不足以前往这张地图",
+	"mmorpg.chat.tp_to_dungeon_mapname": "传送至 [%1$s] 地牢",
+	"mmorpg.chat.prophecy_altar_msg": "祭坛响应了你的接触（原句是这样2333）! (你现在可以打开你预言面板来选择并给自己施加一个诅咒)",
+	"mmorpg.chat.prophecy_map_deathcurrency": "你失去了 %1$s 预言点数",
+	"mmorpg.chat.prophecy_please_spend": "你已经做出了选择. (在挖砍面板中打开预言面板以选择你的词条)",
+	"mmorpg.chat.no_more_lives_remaining": "你没有更多的生命（复活次数）来进入副本了.",
+	"mmorpg.uber_map.uber1": "枯萎之境",
+	"mmorpg.chat.prophecies_guide": "1) 被诅咒（拥有负面预言效果）时杀死地牢怪物以获得预言点数\n\n2)你可以在这个页面购买奖励\n\n3) 你受到的诅咒越多, 你获得的点数越多。\n\n你的点数和预言将会在进入另一张地牢地图时重置。",
+	"mmorpg.word.reward_offers": "奖励选择:",
+	"mmorpg.word.curse_offers": "诅咒选择:",
+	"mmorpg.word.accepted_curses": "已受到的诅咒:",
+	"mmorpg.word.prophecyplayeraffix": "玩家获得（这个）负面效果:",
+	"mmorpg.word.prophecyplayeraffixinfo": "你获得预言点数的概率将会增加.",
+	"mmorpg.word.prophecyplayeraffixtaken": "当前受到的负面效果:",
+	"mmorpg.chat.must_be_in_map_to_accept_prophecy": "你必须位于同一个地牢中才能接受预言奖励",
+	"mmorpg.chat.not_enough_favor_to_buy_prophecy": "当前没有足够的点数去够买这个预言， 你可以在拥有负面预言效果时击杀地牢怪物来获得更多点数.",
+	"mmorpg.prophecy_start.aura_gem": "光环宝石预言",
+	"mmorpg.prophecy_start.gear": "装备预言",
+	"mmorpg.prophecy_start.jewel": "珠宝预言",
+	"mmorpg.prophecy_start.prophecy_unique": "独特预言等级（prophecy League unique）",
+	"mmorpg.prophecy_start.rune": "符文预言",
+	"mmorpg.prophecy_start.support_gem": "辅助宝石预言",
+	"mmorpg.league.harvest": "收获等级（harvest League）",
+	"mmorpg.league.prophecy": "预言等级（prophecy League）",
+	"mmorpg.league.uber": "Uber Boss Mechanic",
+	"mmorpg.word.costs_favor": "花费 %1$s 预言点数",
+	"mmorpg.word.current_prophecy_currency": "当前的预言点数: %1$s",
+	"mmorpg.word.x_items": "奖励数量: %1$s",
 	
-		
+	
     "mmorpg.word.pressformoreinfo": "点击获取更多信息",
 	"mmorpg.word.classes": "职业技能树",
 	"mmorpg.word.hotbar": "技能",
 	"mmorpg.word.configs": "辅助功能",
-	
+	"mmorpg.word.prophecies": "预言",
+
 
     "mmorpg.word.automatic_pve": "智能 PVE\n\n开启这项功能的玩家被视为组队\n- 玩家之间有距离限制 (在配置文件中可以更改生效半径)",
 	"mmorpg.word.cast_fail_msgs": "技能使用失败消息\n\n将会在您释放技能失败的时候发送一条消息\n对新玩家很有帮助(还真是)",
@@ -1398,6 +1434,20 @@
 	"mmorpg.stat.proc_ignite_explosion": "\u00A77\u00A7a[VAL1]\u00A77% 在杀死敌人后引发一场灼烧爆炸的概率\n该爆炸会对范围内敌人造成伤害",
 	"mmorpg.stat.proc_profane_explosion": "\u00A77\u00A7a[VAL1]\u00A77% 在杀死一名被诅咒的敌人后引发一场诅咒爆炸的概率\n该爆炸会对范围内敌人造成伤害",
 	"mmorpg.stat.proc_profane_explosion_any": "\u00A77\u00A7a[VAL1]\u00A77% 在杀死一名敌人后引发一场诅咒爆炸的概率\n该爆炸会对范围内敌人造成伤害",
+
+
+	"mmorpg.stat.cursed_by_agony": "\u00A77受到的苦痛诅咒",
+	"mmorpg.stat.cursed_by_despair": "\u00A77受到的混沌绝望诅咒",
+	"mmorpg.stat.cursed_by_slow": "\u00A77受到的缓慢诅咒",
+	"mmorpg.stat.cursed_by_weak": "\u00A77受到的元素虚弱诅咒",
+	"mmorpg.stat.cursed_by_wounds": "\u00A77受到的受伤诅咒",
+	"mmorpg.word.possible_dros": "可能掉落的装备:",
+	"mmorpg.stat.flat_chaos_added_damage": "额外（Added）混沌伤害",
+	"mmorpg.stat.flat_fire_added_damage": "额外（Added）火焰伤害",
+	"mmorpg.stat.flat_lightning_added_damage": "额外（Added）雷电伤害",
+	"mmorpg.stat.flat_physical_added_damage": "额外（Added）雷电伤害",
+	"mmorpg.stat.flat_water_added_damage": "额外（Added）冰霜伤害",
+	"mmorpg.word.req_level": "所需等级: ",
 
 
 
