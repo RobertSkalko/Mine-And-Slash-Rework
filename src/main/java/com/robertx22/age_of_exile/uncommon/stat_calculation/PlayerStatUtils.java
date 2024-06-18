@@ -5,7 +5,6 @@ import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.misc.BonusExp;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
-import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -25,7 +24,7 @@ public class PlayerStatUtils {
     public static List<StatContext> addToolStats(Player p) {
         ItemStack stack = p.getMainHandItem();
         if (StackSaving.TOOL.has(stack)) {
-            return Arrays.asList(new MiscStatCtx(StackSaving.TOOL.loadFrom(stack).GetAllStats()));
+            return Arrays.asList(new SimpleStatCtx(StatContext.StatCtxType.TOOL, StackSaving.TOOL.loadFrom(stack).GetAllStats()));
         } else {
             return Arrays.asList();
         }

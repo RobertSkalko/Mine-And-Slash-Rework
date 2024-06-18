@@ -6,7 +6,7 @@ import com.robertx22.age_of_exile.database.data.aura.AuraGems;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCapacity;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
-import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.AuraStatCtx;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
@@ -210,7 +210,7 @@ public class GemInventoryHelper {
             SkillGemData data = StackSaving.SKILL_GEM.loadFrom(stack);
             if (data != null) {
                 AuraGem aura = data.getAura();
-                ctx.add(new AuraStatCtx(aura.GetAllStats(Load.Unit(en), data)));
+                ctx.add(new SimpleStatCtx(StatContext.StatCtxType.AURA, aura.GetAllStats(Load.Unit(en), data)));
             }
         }
 

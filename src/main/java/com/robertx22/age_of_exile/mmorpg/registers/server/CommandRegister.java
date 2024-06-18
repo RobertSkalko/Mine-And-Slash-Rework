@@ -9,9 +9,9 @@ import com.robertx22.age_of_exile.loot.blueprints.SkillGemBlueprint;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.vanilla_mc.commands.*;
 import com.robertx22.age_of_exile.vanilla_mc.commands.auto_salvage.AutoSalvageGenericConfigure;
+import com.robertx22.age_of_exile.vanilla_mc.commands.auto_salvage.AutoSalvageGenericList;
 import com.robertx22.age_of_exile.vanilla_mc.commands.auto_salvage.AutoSalvageGenericShow;
 import com.robertx22.age_of_exile.vanilla_mc.commands.auto_salvage.AutoSalvageHelp;
-import com.robertx22.age_of_exile.vanilla_mc.commands.auto_salvage.AutoSalvageGenericList;
 import com.robertx22.age_of_exile.vanilla_mc.commands.entity.*;
 import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GenericGive;
 import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GiveExactUnique;
@@ -75,9 +75,10 @@ public class CommandRegister {
         TeamCommand.register(dispatcher);
         RollCommand.register(dispatcher);
 
-
-        GenerateWikiCommand.register(dispatcher);
+        ListStatSourcesCommand.register(dispatcher);
         
+        GenerateWikiCommand.register(dispatcher);
+
         RunTestCommand.register(dispatcher);
 
 

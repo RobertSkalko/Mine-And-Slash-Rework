@@ -227,7 +227,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
             this.school = ExileDB.TalentTrees().getFilterWrapped(x -> x.getSchool_type().equals(this.schoolType)).list.get(0);
 
             refreshButtons();
-        
+
 
             goToCenter();
         } catch (Exception e) {
@@ -321,7 +321,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         }
         addConnections();
 
-        this.publicAddButton(SEARCH);
+        this.addWidget(SEARCH);
 
     }
 

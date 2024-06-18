@@ -6,7 +6,9 @@ import java.util.List;
 
 public abstract class StatContext {
 
+
     public final StatCtxType type;
+    public String gear_slot = "";
 
     public List<ExactStatData> stats;
 
@@ -15,7 +17,14 @@ public abstract class StatContext {
         this.stats = stats;
     }
 
+    public StatContext(StatCtxType type, String gear_slot, List<ExactStatData> stats) {
+        this.type = type;
+        this.gear_slot = gear_slot;
+        this.stats = stats;
+    }
+
     public enum StatCtxType {
-        GEAR, BASE_STAT, ENCHANT_COMPAT, PROPHECY_CURSE, NEWBIE_RESISTS, JEWEL, VANILLA_STAT_COMPAT, BONUS_XP_PER_CHARACTER, COMMAND_EXACT_STATS, STAT_POINTS, TALENT, POTION_EFFECT, AURA, MISC, MOB_AFFIX, FOOD_BUFF
+        GEAR, INNATE_SPELL, SUPPORT_GEM, BASE_STAT, ENCHANT_COMPAT, PROPHECY_CURSE, NEWBIE_RESISTS, JEWEL, VANILLA_STAT_COMPAT,
+        BONUS_XP_PER_CHARACTER, COMMAND_EXACT_STATS, STAT_POINTS, TALENT, ASCENDANCY, POTION_EFFECT, AURA, MISC, MOB_AFFIX, FOOD_BUFF, TOOL
     }
 }

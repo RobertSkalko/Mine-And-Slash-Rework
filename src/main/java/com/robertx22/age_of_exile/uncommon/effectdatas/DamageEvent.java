@@ -88,7 +88,7 @@ public class DamageEvent extends EffectEvent {
             this.addMoreMulti(Words.MOB_RARITY_MULTI.locName(), EventData.NUMBER, rar.DamageMultiplier());
 
             if (enconfigmulti != 1) {
-                this.addMoreMulti(Words.MOB_RARITY_MULTI.locName(), EventData.NUMBER, enconfigmulti);
+                this.addMoreMulti(Words.MOB_CONFIG_MULTI.locName(), EventData.NUMBER, enconfigmulti);
             }
 
         }

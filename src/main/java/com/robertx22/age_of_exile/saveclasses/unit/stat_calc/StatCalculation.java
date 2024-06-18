@@ -6,7 +6,7 @@ import com.robertx22.age_of_exile.capability.player.helper.GemInventoryHelper;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.AttributeStat;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.age_of_exile.event_hooks.my_events.CollectGearEvent;
-import com.robertx22.age_of_exile.gui.stats.SavedStatCtxList;
+import com.robertx22.age_of_exile.gui.screens.stat_gui.StatCalcInfoData;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.saveclasses.unit.GearData;
@@ -14,7 +14,7 @@ import com.robertx22.age_of_exile.saveclasses.unit.InCalcStatContainer;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.GearStatCtx;
-import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.MiscStatCtx;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.AddToAfterCalcEnd;
@@ -44,6 +44,16 @@ public class StatCalculation {
         statContexts = collectStatsWithCtx(entity, data, gears);
 
         statContexts.removeIf(x -> x.stats.isEmpty());
+
+        if (entity instanceof Player p) {
+            var pd = Load.player(p);
+            pd.ctxs = new StatCalcInfoData();
+            for (StatContext ctx : statContexts) {
+                if (ctx instanceof SimpleStatCtx s) {
+                    pd.ctxs.list.add(s);
+                }
+            }
+        }
 
         return statContexts;
     }
@@ -80,7 +90,7 @@ public class StatCalculation {
 
 
         if (entity instanceof Player p) {
-            Load.player(p).ctxStats = new SavedStatCtxList(sc);
+            //        Load.player(p).ctxStats = new SavedStatCtxList(sc);
         }
 
         InCalc incalc = new InCalc(unit);
@@ -131,13 +141,15 @@ public class StatCalculation {
             var gem = playerData.getSkillGemInventory().getHotbarGem(skillGem);
             for (SkillGemData d : gem.getSupportDatas()) {
                 if (d.getSupport() != null) {
-                    statContexts.add(new MiscStatCtx(d.getSupport().GetAllStats(data, d)));
+                    statContexts.add(new SimpleStatCtx(StatContext.StatCtxType.SUPPORT_GEM, d.getSupport().GetAllStats(data, d)));
                 }
             }
             var spell = gem.getSpell();
             if (spell != null) {
                 var stats = spell.getStats(p);
-                statContexts.add(new MiscStatCtx(stats));
+                if (!stats.isEmpty()) {
+                    statContexts.add(new SimpleStatCtx(StatContext.StatCtxType.INNATE_SPELL, stats));
+                }
             }
         }
         return statContexts;
@@ -209,7 +221,7 @@ public class StatCalculation {
                 float multi = x.percentStatUtilization / 100F;
                 stats.forEach(s -> s.multiplyBy(multi));
             }
-            ctxs.add(new GearStatCtx(x.gear, stats));
+            ctxs.add(GearStatCtx.of(x.gear, stats));
 
             var ench = x.gear.getEnchantCompatStats(x.stack);
             if (ench != null) {

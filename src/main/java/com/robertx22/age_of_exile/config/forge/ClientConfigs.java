@@ -30,7 +30,6 @@ public class ClientConfigs {
         ONLY_RENDER_MOB_LOOKED_AT = b.define("only_render_mob_looked_at", true);
         SHOW_DURABILITY = b.define("show_durability", true);
         ENABLE_FLOATING_DMG = b.define("render_floating_damage", true);
-        ALIGN_STAT_TOOLTIPS = b.define("ALIGN_STAT_TOOLTIPS", false);
         MODIFY_TOOLTIP_LENGTH = b.define("MODIFY_TOOLTIP_LENGTH", true);
         IN_DEPTH_TOOLTIPS_BY_DEFAULT = b.define("IN_DEPTH_TOOLTIPS_BY_DEFAULT", true);
 
@@ -57,7 +56,6 @@ public class ClientConfigs {
     public ForgeConfigSpec.BooleanValue SHOW_DURABILITY;
     public ForgeConfigSpec.BooleanValue RENDER_MOB_HEALTH_GUI;
     public ForgeConfigSpec.BooleanValue ONLY_RENDER_MOB_LOOKED_AT;
-    public ForgeConfigSpec.BooleanValue ALIGN_STAT_TOOLTIPS;
     public ForgeConfigSpec.BooleanValue MODIFY_TOOLTIP_LENGTH;
     public ForgeConfigSpec.BooleanValue IN_DEPTH_TOOLTIPS_BY_DEFAULT;
     public ForgeConfigSpec.BooleanValue HOTBAR_SWAPPING;

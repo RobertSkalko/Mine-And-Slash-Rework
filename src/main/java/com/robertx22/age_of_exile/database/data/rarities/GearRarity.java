@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.database.data.rarities;
 
-import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.MinMax;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
@@ -33,10 +32,11 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
 
     public int favor_needed = 0;
     public float favor_loot_multi = 1;
+    public float favor_per_second = 0;
 
     public float getFavorGainEverySecond() {
-        if (favor_loot_multi <= 1) {
-            return ServerContainer.get().FAVOR_GAIN_PER_SECOND.get().floatValue();
+        if (favor_loot_multi > 0) {
+            return favor_per_second;
         }
         return 0;
     }

@@ -1,15 +1,19 @@
 package com.robertx22.age_of_exile.event_hooks.entity;
 
 import com.robertx22.age_of_exile.capability.entity.EntityData;
+import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.EntityConfig;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
+import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEntity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 
 public class OnMobSpawn {
@@ -21,6 +25,17 @@ public class OnMobSpawn {
         }
         if (entity instanceof Player) {
             return;
+        }
+
+        if (WorldUtils.isMapWorldClass(entity.level())) {
+            if (entity instanceof Mob mob) {
+                if (ServerContainer.get().DO_NOT_DESPAWN_MAP_MOBS.get()) {
+                    // todo have a better check that it was a spawned map mob
+                    if (entity instanceof SummonEntity == false) {
+                        mob.setPersistenceRequired();
+                    }
+                }
+            }
         }
 
         setupNewMobOnSpawn((LivingEntity) entity);
@@ -83,7 +98,7 @@ public class OnMobSpawn {
 
         endata.mobStatsAreSet();
         endata.setEquipsChanged();
-      
+
         return mob;
 
     }

@@ -8,8 +8,8 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatCtx;
+import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
-import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.TalentStatCtx;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -199,7 +199,7 @@ public class TalentsData implements IStatCtx {
                 value.stats.forEach(s -> stats.add(s.toExactStat(lvl)));
             });
 
-            ctx.add(new TalentStatCtx(stats));
+            ctx.add(new SimpleStatCtx(StatContext.StatCtxType.TALENT, stats));
         }
         return ctx;
     }

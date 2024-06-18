@@ -34,7 +34,8 @@ public class ServerContainer {
                 .push("general");
 
         ENERGY_PENALTY = b.define("ENERGY_PENALTY", true);
-      
+        DO_NOT_DESPAWN_MAP_MOBS = b.define("DO_NOT_DESPAWN_MAP_MOBS", true);
+
         GET_STARTER_ITEMS = b.define("start_items", true);
         ALWAYS_SCALE_MOB_LEVEL_TO_PLAYER = b.define("scale_mob_to_nearby_player_lvl", true);
         ENABLE_LOOT_ANNOUNCEMENTS = b.define("loot_announcements", true);
@@ -69,8 +70,7 @@ public class ServerContainer {
 
         FAVOR_DEATH_LOSS = b.defineInRange("favor_death_loss", 50D, 0, 10000);
         FAVOR_CHEST_GAIN = b.defineInRange("favor_chest_gain", 1D, 0, 10000);
-        FAVOR_GAIN_PER_SECOND = b.defineInRange("favor_per_second", 1D / 60D, 0, 10000);
-
+       
         GEAR_DROPRATE = b.defineInRange("gear_drop_rate", 7D, 0, 1000);
         SOUl_DROPRATE = b.defineInRange("soul_drop_rate", 0.3D, 0, 1000);
         MAP_DROPRATE = b.defineInRange("map_drop_rate", 1D, 0, 1000);
@@ -182,6 +182,7 @@ public class ServerContainer {
     public ForgeConfigSpec.ConfigValue<List<? extends String>> GEAR_COMPATS;
     public ForgeConfigSpec.ConfigValue<List<? extends String>> BANNED_ITEMS;
 
+    public ForgeConfigSpec.BooleanValue DO_NOT_DESPAWN_MAP_MOBS;
     public ForgeConfigSpec.BooleanValue GET_STARTER_ITEMS;
     public ForgeConfigSpec.BooleanValue ALWAYS_SCALE_MOB_LEVEL_TO_PLAYER;
     public ForgeConfigSpec.BooleanValue ENABLE_LOOT_ANNOUNCEMENTS;
@@ -220,7 +221,6 @@ public class ServerContainer {
 
     public ForgeConfigSpec.DoubleValue FAVOR_DEATH_LOSS;
     public ForgeConfigSpec.DoubleValue FAVOR_CHEST_GAIN;
-    public ForgeConfigSpec.DoubleValue FAVOR_GAIN_PER_SECOND;
 
     public ForgeConfigSpec.DoubleValue GEAR_DROPRATE;
     public ForgeConfigSpec.DoubleValue SOUl_DROPRATE;

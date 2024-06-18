@@ -3,6 +3,8 @@ package com.robertx22.age_of_exile.mmorpg.registers.client;
 import com.robertx22.age_of_exile.database.data.profession.StationPacket;
 import com.robertx22.age_of_exile.database.data.profession.StationSyncData;
 import com.robertx22.age_of_exile.database.data.spells.components.packets.ParticlesPacket;
+import com.robertx22.age_of_exile.gui.screens.stat_gui.SendStatCalcInfoToClientPacket;
+import com.robertx22.age_of_exile.gui.screens.stat_gui.StatCalcInfoData;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.vanilla_mc.packets.*;
 import com.robertx22.age_of_exile.vanilla_mc.packets.spells.TellClientEntityIsCastingSpellPacket;
@@ -25,6 +27,7 @@ public class S2CPacketRegister {
         Packets.registerServerToClient(MMORPG.NETWORK, new TotemAnimationPacket(), i++);
         Packets.registerServerToClient(MMORPG.NETWORK, new ParticlesPacket(new ParticlesPacket.Data()), i++);
         Packets.registerServerToClient(MMORPG.NETWORK, new StationPacket(new StationSyncData()), i++);
+        Packets.registerServerToClient(MMORPG.NETWORK, new SendStatCalcInfoToClientPacket(new StatCalcInfoData()), i++);
 
 
     }

@@ -120,7 +120,7 @@ public class SpellSchoolsData implements IStatCtx {
                 }
             }
         }
-        return Arrays.asList(new SimpleStatCtx(StatContext.StatCtxType.TALENT, stats));
+        return Arrays.asList(new SimpleStatCtx(StatContext.StatCtxType.ASCENDANCY, stats));
     }
 
 }

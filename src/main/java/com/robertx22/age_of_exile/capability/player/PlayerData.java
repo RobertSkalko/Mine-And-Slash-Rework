@@ -7,7 +7,7 @@ import com.robertx22.age_of_exile.capability.player.helper.JewelInvHelper;
 import com.robertx22.age_of_exile.capability.player.helper.MyInventory;
 import com.robertx22.age_of_exile.characters.CharStorageData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
-import com.robertx22.age_of_exile.gui.stats.SavedStatCtxList;
+import com.robertx22.age_of_exile.gui.screens.stat_gui.StatCalcInfoData;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.prophecy.PlayerProphecies;
 import com.robertx22.age_of_exile.saveclasses.DeathStatsData;
@@ -93,8 +93,11 @@ public class PlayerData implements ICap {
 
     public transient Player player;
 
+
+    public transient StatCalcInfoData ctxs = new StatCalcInfoData();
+
     // so players know where their stats come from in the future gui
-    public SavedStatCtxList ctxStats = new SavedStatCtxList();
+    //ublic SavedStatCtxList ctxStats = new SavedStatCtxList();
 
     public TeamData team = new TeamData();
     public TalentsData talents = new TalentsData();
@@ -150,7 +153,7 @@ public class PlayerData implements ICap {
         LoadSave.Save(buff, nbt, BUFFS);
         LoadSave.Save(rested_xp, nbt, RESTED_XP);
         LoadSave.Save(characters, nbt, CHARACTERS);
-        LoadSave.Save(ctxStats, nbt, "ctx");
+        // LoadSave.Save(ctxStats, nbt, "ctx");
 
         nbt.put(GEMS, skillGemInv.createTag());
         nbt.put(AURAS, auraInv.createTag());
@@ -179,7 +182,7 @@ public class PlayerData implements ICap {
         this.buff = loadOrBlank(PlayerBuffData.class, new PlayerBuffData(), nbt, BUFFS, new PlayerBuffData());
         this.rested_xp = loadOrBlank(RestedExpData.class, new RestedExpData(), nbt, RESTED_XP, new RestedExpData());
         this.characters = loadOrBlank(CharStorageData.class, new CharStorageData(), nbt, CHARACTERS, new CharStorageData());
-        this.ctxStats = loadOrBlank(SavedStatCtxList.class, new SavedStatCtxList(), nbt, "ctx", new SavedStatCtxList());
+        // this.ctxStats = loadOrBlank(SavedStatCtxList.class, new SavedStatCtxList(), nbt, "ctx", new SavedStatCtxList());
 
         skillGemInv.fromTag(nbt.getList(GEMS, 10)); // todo
         auraInv.fromTag(nbt.getList(AURAS, 10)); // todo

@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.mmorpg.registers.common;
 import com.robertx22.age_of_exile.capability.player.data.Backpacks;
 import com.robertx22.age_of_exile.characters.CreateCharPacket;
 import com.robertx22.age_of_exile.characters.LoadCharPacket;
+import com.robertx22.age_of_exile.gui.screens.stat_gui.RequestStatCalcInfoPacket;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.prophecy.AcceptProphecyAffixPacket;
 import com.robertx22.age_of_exile.prophecy.AcceptProphecyPacket;
@@ -34,6 +35,7 @@ public class C2SPacketRegister {
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new AcceptProphecyAffixPacket(""), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new LockTogglePacket(), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new UnsummonPacket(), i++);
+        Packets.registerClientToServerPacket(MMORPG.NETWORK, new RequestStatCalcInfoPacket(), i++);
 
 
         // Packets.registerClientToServerPacket(MMORPG.NETWORK, new SetupHotbarPacket(), i++);

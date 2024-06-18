@@ -17,6 +17,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.map_resist_req = 0;
 
             x.map_tiers = new MinMax(0, 10);
+            x.favor_per_second = 1 / 60F;
             x.favor_loot_multi = 1;
             x.map_xp_multi = 1;
             x.favor_needed = 0;
@@ -39,7 +40,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
             x.map_tiers = new MinMax(10, 20);
             x.map_xp_multi = 1;
-
+            x.favor_per_second = 1 / 60F;
             x.favor_loot_multi = 1.05f;
             x.favor_needed = 50;
             x.sockets = new MinMax(0, 1);

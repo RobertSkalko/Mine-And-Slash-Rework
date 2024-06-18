@@ -150,3 +150,7 @@ v.5.5.10
 v.5.5.11
 - converted and bonus elemental damage is now affected by wep dmg multiplier
 - fixed summons not being attacked in maps (they were considered allied to mobs lol)
+- added new list_stat_sources command which tells you where your stats come from
+- added server config to make map mobs persistent, if your server is shitting bricks from lag due to it, you can disable it
+- favor gain per sec is now per gear rarity datapack, not server config. (it was only regenerating if favor loot multi was less than x1) - as favor in base mns had negative penalties 
+- removed the align tooltip feature, it was a bit hardcoded and idk how to fix it
