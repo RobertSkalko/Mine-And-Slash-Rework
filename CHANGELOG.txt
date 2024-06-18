@@ -154,3 +154,10 @@ v.5.5.11
 - added server config to make map mobs persistent, if your server is shitting bricks from lag due to it, you can disable it
 - favor gain per sec is now per gear rarity datapack, not server config. (it was only regenerating if favor loot multi was less than x1) - as favor in base mns had negative penalties 
 - removed the align tooltip feature, it was a bit hardcoded and idk how to fix it
+
+v.5.5.12
+- dots can no longer crit
+- added dot dmg multiplier stat
+- fixed gear req bug
+- fixed salvaging never giving essence
+- salvaging maps should give stones now

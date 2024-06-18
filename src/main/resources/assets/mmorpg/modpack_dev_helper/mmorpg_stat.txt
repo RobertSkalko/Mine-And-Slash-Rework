@@ -172,6 +172,7 @@ dodge_er_endurance_charge
 dodge_er_power_charge
 dodge_per_10_magic_shield
 dot_dmg
+dot_dmg_multi
 dot_lifesteal
 double_attack_chance
 eff_dur_u_cast

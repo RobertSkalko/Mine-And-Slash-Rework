@@ -25,7 +25,9 @@ public class StringMatchesCondition extends StatCondition {
 
     @Override
     public boolean can(EffectEvent event, EffectSides statSource, StatData data, Stat stat) {
-        return event.data.getString(string_key).equals(string_id);
+        String s = event.data.getString(string_key);
+        Boolean is = s.equals(string_id);
+        return is;
     }
 
     @Override

@@ -137,12 +137,9 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         if (this.getLevel() > data.getLevel()) {
             return false;
         }
-
         if (!getRequirement().meetsReq(this.getLevel(), data)) {
             return false;
         }
-
-
         return true;
 
     }
@@ -409,8 +406,6 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
             if (this.isUnique()) {
                 return Arrays.asList(new ItemStack(RandomUtils.randomFromList(RarityItems.RARITY_STONE.values().stream().toList()).get(), RandomUtils.RandomRange(2, 9)));
             }
-
-
             int amount = 1;
 
             return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.getOrDefault(getRarity().GUID(), RarityItems.RARITY_STONE.get(IRarity.COMMON_ID)).get(), amount));

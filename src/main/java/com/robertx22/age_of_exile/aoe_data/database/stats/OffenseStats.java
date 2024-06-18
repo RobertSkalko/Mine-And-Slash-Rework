@@ -205,6 +205,7 @@ public class OffenseStats {
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IF_RANDOM_ROLL)
             .addEffect(StatEffects.SET_BOOLEAN.get(EventData.CRIT))
+            .addCondition(StatConditions.IS_NOT_DOT)
             .setLocName(x -> "Crit Chance")
             .setLocDesc(x -> "Chance to multiply attack damage by critical damage")
             .modifyAfterDone(x -> {
@@ -217,12 +218,14 @@ public class OffenseStats {
                 x.format = ChatFormatting.YELLOW.getName();
             })
             .build();
+
     public static DataPackStatAccessor<EmptyAccessor> CRIT_DAMAGE = DatapackStatBuilder
             .ofSingle("critical_damage", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.IS_BOOLEAN.get(EventData.CRIT))
+            .addCondition(StatConditions.IS_NOT_DOT)
             .addEffect(StatEffects.Layers.CRIT_DAMAGE)
             .setLocName(x -> "Crit Damage")
             .setLocDesc(x -> "If Critical, multiply by x")
@@ -323,6 +326,7 @@ public class OffenseStats {
                 x.format = ChatFormatting.BLUE.getName();
             })
             .build();
+
     public static DataPackStatAccessor<EmptyAccessor> DOT_DAMAGE = DatapackStatBuilder
             .ofSingle("dot_dmg", Elements.ALL)
             .worksWithEvent(DamageEvent.ID)
@@ -339,6 +343,25 @@ public class OffenseStats {
                 x.format = ChatFormatting.RED.getName();
             })
             .build();
+
+    // todo, use this somewhere
+    public static DataPackStatAccessor<EmptyAccessor> DOT_DAMAGE_MULTI = DatapackStatBuilder
+            .ofSingle("dot_dmg_multi", Elements.ALL)
+            .worksWithEvent(DamageEvent.ID)
+            .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
+            .setSide(EffectSides.Source)
+            .setUsesMoreMultiplier()
+            .addCondition(StatConditions.ATTACK_TYPE_MATCHES.get(AttackType.dot))
+            .addEffect(StatEffects.Layers.DOT_DAMAGE_MULTI)
+            .setLocName(x -> "Damage Over Time Multiplier")
+            .setLocDesc(x -> "Increases dmg of effects that do damage over time, like burn. This is a separate multiplier from the usual additive damage increases")
+            .modifyAfterDone(x -> {
+                x.is_perc = true;
+                x.base = 0;
+                x.format = ChatFormatting.RED.getName();
+            })
+            .build();
+
     public static DataPackStatAccessor<EmptyAccessor> TOTAL_DAMAGE = DatapackStatBuilder
             .ofSingle("total_damage", Elements.ALL)
             .worksWithEvent(DamageEvent.ID)

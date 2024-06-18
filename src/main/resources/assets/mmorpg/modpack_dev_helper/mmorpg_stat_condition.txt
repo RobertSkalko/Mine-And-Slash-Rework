@@ -1,6 +1,7 @@
 These are all default registry entries of this type.
 This registry is modify-able through datapacks.
 attack_type_is_dot
+attack_type_is_dot_is_false
 attack_type_is_hit
 effect_has_tag_agony
 effect_has_tag_charge

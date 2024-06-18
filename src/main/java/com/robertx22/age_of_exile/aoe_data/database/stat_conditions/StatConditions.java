@@ -148,6 +148,7 @@ public class StatConditions implements ExileRegistryInit {
             Arrays.asList(ATTACK_TYPE_MATCHES.get(AttackType.hit).GUID())
     );
 
+    public static StatCondition IS_NOT_DOT = new StringMatchesCondition(EventData.ATTACK_TYPE, AttackType.dot.name()).flipCondition();
 
     public static void loadClass() {
     }
