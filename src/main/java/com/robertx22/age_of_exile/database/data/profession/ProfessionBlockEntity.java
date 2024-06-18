@@ -175,15 +175,18 @@ public class ProfessionBlockEntity extends BlockEntity {
     }
 
     public boolean tryPutToOutputs(List<ItemStack> stacks) {
+        boolean bo = false;
         for (ItemStack stack : stacks) {
             if (!inventory.addStack(OUTPUTS, stack)) {
                 ItemEntity itementity = new ItemEntity(level, getBlockPos().getX(), getBlockPos().getY() + 0.5, getBlockPos().getZ(), stack);
                 itementity.setDefaultPickUpDelay();
                 level.addFreshEntity(itementity);
-            } else
-                return true;
+            } else {
+                bo = true;
+            }
         }
-        return false;
+        bo = false;
+        return bo;
     }
 
     public ExplainedResult trySalvage(Player p) {
