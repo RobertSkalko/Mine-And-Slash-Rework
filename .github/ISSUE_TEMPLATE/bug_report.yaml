@@ -41,8 +41,8 @@ body:
   - type: input
     id: mversion
     attributes:
-      label: Minecraft version
-      description: What version of Minecraft are you using?
+      label: Mine and Slash version
+      description: What version of Mine and Slash are you using?
     validations:
       required: true
   - type: input
