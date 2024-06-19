@@ -29,17 +29,18 @@ public class AutoSalvageGenericShow {
     public AutoSalvageGenericShow(ExileRegistryType registryType) {
         this.registryType = registryType;
     }
+
     public void register(CommandDispatcher<CommandSourceStack> dispatcher) {
 
         dispatcher.register(
                 literal(CommandRefs.ID)
                         .then(literal("auto_salvage")
-                                        .then(literal("show")
-                                                .then(literal(registryType.id)
+                                .then(literal("show")
+                                        .then(literal(registryType.id)
                                                 .executes(e -> execute(e.getSource(), e.getSource().getPlayerOrException(), null))
                                                 .then(argument("search_query", StringArgumentType.word())
-                                                .executes(e -> execute(e.getSource(), e.getSource().getPlayerOrException(), StringArgumentType.getString(e, "search_query")))
-                                        ))))
+                                                        .executes(e -> execute(e.getSource(), e.getSource().getPlayerOrException(), StringArgumentType.getString(e, "search_query")))
+                                                ))))
         );
     }
 
@@ -58,14 +59,14 @@ public class AutoSalvageGenericShow {
         ToggleAutoSalvageRarity.SalvageType salvageType = registryType == ExileRegistryTypes.GEAR_SLOT ? ToggleAutoSalvageRarity.SalvageType.GEAR : ToggleAutoSalvageRarity.SalvageType.SPELL;
         PlayerConfigData playerConfigData = Load.player(player).config;
 
-       HashMap<String, Boolean> configuredMap = playerConfigData.salvage.getConfiguredMapForSalvageType(salvageType);
+        HashMap<String, Boolean> configuredMap = playerConfigData.salvage.getConfiguredMapForSalvageType(salvageType);
 
-       if(configuredMap.isEmpty()) {
-           player.sendSystemMessage(Component.literal("There are no currently configured options for " + registryType.id + " items.").withStyle(ChatFormatting.GRAY));
-           return 1;
-       }
+        if (configuredMap.isEmpty()) {
+            player.sendSystemMessage(Component.literal("There are no currently configured options for " + registryType.id + " items.").withStyle(ChatFormatting.GRAY));
+            return 1;
+        }
 
-        if(searchQuery == null) {
+        if (searchQuery == null) {
             player.sendSystemMessage(Component.literal("--- Listing all configured " + registryType.id + " ids ---"));
         } else {
             player.sendSystemMessage(Component.literal("--- Listing configured " + registryType.id + " ids matching: " + searchQuery + " ---"));
@@ -76,13 +77,13 @@ public class AutoSalvageGenericShow {
 
         for (String id : configuredMap.keySet()) {
             var enabled = configuredMap.get(id);
-            if(registryType == ExileRegistryTypes.SUPPORT_GEM) {
+            if (registryType == ExileRegistryTypes.SUPPORT_GEM) {
                 SupportGem gem = ExileDB.SupportGems().get(id);
-                if(searchQuery == null || gem.id.toLowerCase().contains(searchQuery) || gem.translate().toLowerCase().contains(searchQuery)) {
-                    player.sendSystemMessage(Component.literal("[" + gem.id + "] " + gem.translate() + " [").append(enabled ? enabledTextComponent : disabledTextComponent).append(Component.literal("]").withStyle(ChatFormatting.WHITE)));
+                if (searchQuery == null || gem.id.toLowerCase().contains(searchQuery.toLowerCase()) || gem.locName().getString().toLowerCase().contains(searchQuery.toLowerCase())) {
+                    player.sendSystemMessage(Component.literal("[" + gem.id + "] " + gem.locName().getString() + " [").append(enabled ? enabledTextComponent : disabledTextComponent).append(Component.literal("]").withStyle(ChatFormatting.WHITE)));
                 }
             } else {
-                if (searchQuery == null || id.toLowerCase().contains(searchQuery)) {
+                if (searchQuery == null || id.toLowerCase().contains(searchQuery.toLowerCase())) {
                     player.sendSystemMessage(Component.literal(id + " [").append(enabled ? enabledTextComponent : disabledTextComponent).append(Component.literal("]").withStyle(ChatFormatting.WHITE)));
                 }
             }
