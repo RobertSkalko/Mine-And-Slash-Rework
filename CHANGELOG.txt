@@ -165,3 +165,6 @@ v.5.5.12
 v.5.5.13
 - homing spells now home only if they can see the target, this should stop them from homing on underground etc
 - main hand will now be dropped if you dont meet stat req. This is a bit wonky but needed to stop players from gaining stats from unmet weapon req
+
+v.5.5.14
+- fixed professions
