@@ -62,11 +62,11 @@ public class AutoSalvageGenericList {
         for (String id : allIdsSorted) {
             if(registryType == ExileRegistryTypes.SUPPORT_GEM) {
                 SupportGem gem = ExileDB.SupportGems().get(id);
-                if(searchQuery == null || gem.id.toLowerCase().contains(searchQuery) || gem.translate().toLowerCase().contains(searchQuery)) {
-                    player.sendSystemMessage(Component.literal("[" + gem.id + "] " + gem.translate()));
+                if(searchQuery == null || gem.id.toLowerCase().contains(searchQuery) || gem.locName().getString().toLowerCase().contains(searchQuery.toLowerCase())) {
+                    player.sendSystemMessage(Component.literal("[" + gem.id + "] " + gem.locName().getString()));
                 }
             } else {
-                if (searchQuery == null || id.toLowerCase().contains(searchQuery)) {
+                if (searchQuery == null || id.toLowerCase().contains(searchQuery.toLowerCase())) {
                     player.sendSystemMessage(Component.literal(id));
                 }
             }
