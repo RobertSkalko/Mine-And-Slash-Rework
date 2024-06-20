@@ -4,7 +4,6 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.ResourceStats;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.effects.base.BaseHealEffect;
 import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
-import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.modify.IStatCtxModifier;
@@ -64,14 +63,6 @@ public class SpecialStats {
     public static SpecialStat BETTER_FOOD_BUFFS = new SpecialStat("more_food_stats",
             format("You gain " + VAL1 + "% more stats through Food buffs."),
             new IStatCtxModifier() {
-                @Override
-                public void modify(ExactStatData thisStat, StatContext target) {
-                    float multi = 1F + thisStat.getValue() / 100F;
-                    target.stats.forEach(x -> {
-                        x.multiplyBy(multi);
-                    });
-                }
-
                 @Override
                 public StatContext.StatCtxType getCtxTypeNeeded() {
                     return StatContext.StatCtxType.FOOD_BUFF;

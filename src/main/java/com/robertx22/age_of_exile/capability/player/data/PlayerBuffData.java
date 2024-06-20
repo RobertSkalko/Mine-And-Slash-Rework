@@ -28,7 +28,9 @@ public class PlayerBuffData implements IStatCtx {
         List<ExactStatData> stats = new ArrayList<>();
 
         for (Buff buff : map.values()) {
-            stats.addAll(buff.stats);
+            for (ExactStatData stat : buff.stats) {
+                stats.add(ExactStatData.copy(stat));// this is modified so need to clone it here or make the modification code clone it. Probably best both
+            }
         }
 
         return Arrays.asList(new SimpleStatCtx(StatContext.StatCtxType.FOOD_BUFF, stats));

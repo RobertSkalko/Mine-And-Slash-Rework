@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.vanilla_mc.items.gemrunes;
 
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.IAutoModel;
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.ItemModelManager;
+import com.robertx22.age_of_exile.database.data.MinMax;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.currency.IItemAsCurrency;
 import com.robertx22.age_of_exile.database.data.currency.base.Currency;
@@ -85,7 +86,11 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
 
                             rune.g = RuneItem.this.type.id;
 
-                            int val = LuckyRandom.randomInt(0, 100, LuckyRandom.LuckyUnlucky.UNLUCKY, 5);
+                            int val = LuckyRandom.randomInt(0, 100, LuckyRandom.LuckyUnlucky.UNLUCKY, 2);
+
+                            if (!rune.getRune().uses_unlucky_ran) {
+                                val = new MinMax(0, 100).random();
+                            }
 
                             if (val > rune.p) {
                                 rune.p = val;
@@ -104,7 +109,7 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
                                     gear.sockets.setRuneword(biggest);
                                 }
                             }
-                            
+
 
                             gear.saveToStack(stack);
                             return stack;
@@ -135,6 +140,14 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
             if (rune.getFor(data.GetBaseGearType().family()).isEmpty()) {
                 return ExplainedResult.failure(Chats.NOT_FAMILY.locName());
             }
+
+            var opt = data.sockets.getSocketed().stream().filter(x -> x.isRune() && x.getRune().GUID().equals(RuneItem.this.type.id)).findAny();
+            if (opt.isPresent()) {
+                if (opt.get().p >= 100) {
+                    return ExplainedResult.failure(Chats.RUNE_IS_ALREADY_MAXED.locName());
+                }
+            }
+
 
             int samerunes = (int) data.sockets.getSocketed().stream().filter(x -> x.isRune() && x.getRune().GUID().equals(RuneItem.this.type.id)).count();
             var can = data.getEmptySockets() > 0 || samerunes == 1;

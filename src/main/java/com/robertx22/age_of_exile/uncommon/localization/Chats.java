@@ -64,6 +64,7 @@ public enum Chats implements IAutoLocName {
     THIS_ITEM_CANT_BE_USED_MORE_THAN_X_TIMES("This item has already reached maximum uses: (%1$s)"),
     NOT_GEAR("This is not a gear item."),
     CANT_RUNE_THIS_UNIQUE("Can't insert Runes into this Unique"),
+    RUNE_IS_ALREADY_MAXED("The inserted Rune is already at 100%. You can't to upgrade it any more."),
     GEAR_NO_POTENTIAL("Gear Has no remaining potential and Can't be crafted any further. Note, you can still use currencies that cost 0 potential to craft, like gems, runes etc."),
     NOT_MAP("This is not a map item."),
     NOT_CORRECT_TIER_LEVEL("You are trying to use an in item with a different level range than possible."),
@@ -116,7 +117,7 @@ public enum Chats implements IAutoLocName {
     COMMAND_BLOCK_UNAVALIABLE("Command blocks are disabled, this will stop you from playing Mine and slash Dungeons!"),
     HOW_TO_ENABLE_COMMAND_BLOCK("To enable go to your server.properties file and put enable-command-block as true."),
     WEAPON_REQ_NOT_MET("Weapon requirements not met"),
-    ENEMY_TOO_CLOSE("You can't teleport when enemies are nearby."),
+    ENEMY_TOO_CLOSE("Can't do that. There are enemies nearby."),
     GEM_SOCKETED("Gem Socketed"),
     LEVEL_UP_MESSAGE_UP("Leveled Up!"),
     LEVEL_UP_MESSAGE_DOWN("%1$s Level: %2$s > %3$s!");

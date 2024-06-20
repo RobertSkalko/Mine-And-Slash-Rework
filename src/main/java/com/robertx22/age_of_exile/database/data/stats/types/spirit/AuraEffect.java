@@ -1,7 +1,6 @@
 package com.robertx22.age_of_exile.database.data.stats.types.spirit;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
-import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.modify.IStatCtxModifier;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -14,14 +13,6 @@ public class AuraEffect extends Stat {
         this.format = ChatFormatting.AQUA.getName();
 
         this.statContextModifier = new IStatCtxModifier() {
-            @Override
-            public void modify(ExactStatData stat, StatContext ctx) {
-                float multi = 1F + stat.getValue() / 100F;
-                ctx.stats.forEach(x -> {
-                    x.multiplyBy(multi);
-                });
-            }
-
             @Override
             public StatContext.StatCtxType getCtxTypeNeeded() {
                 return StatContext.StatCtxType.AURA;

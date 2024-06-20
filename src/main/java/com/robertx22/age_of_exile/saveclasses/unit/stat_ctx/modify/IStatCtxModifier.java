@@ -5,7 +5,10 @@ import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 
 public interface IStatCtxModifier {
 
-    void modify(ExactStatData thisStat, StatContext target);
+    default void modify(ExactStatData thisStat, StatContext target) {
+        float multi = 1F + thisStat.getValue() / 100F;
+        target.multiplyStats(multi);
+    }
 
     StatContext.StatCtxType getCtxTypeNeeded();
 

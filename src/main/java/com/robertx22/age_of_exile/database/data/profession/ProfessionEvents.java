@@ -3,10 +3,8 @@ package com.robertx22.age_of_exile.database.data.profession;
 import com.robertx22.age_of_exile.database.data.profession.all.Professions;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.ForgeEvents;
-import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
-import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
@@ -58,7 +56,7 @@ public class ProfessionEvents {
                 var drops = ExileDB.Professions().get(Professions.FISHING).onFish(p);
 
                 if (!drops.isEmpty()) {
-                    p.sendSystemMessage(Chats.CAUGHT_SOMETHING.locName().withStyle(ChatFormatting.GREEN));
+                    // p.sendSystemMessage(Chats.CAUGHT_SOMETHING.locName().withStyle(ChatFormatting.GREEN));
                 }
                 for (ItemStack drop : drops) {
                     var en = p.spawnAtLocation(drop);

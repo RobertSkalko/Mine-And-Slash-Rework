@@ -70,7 +70,7 @@ public class ServerContainer {
 
         FAVOR_DEATH_LOSS = b.defineInRange("favor_death_loss", 50D, 0, 10000);
         FAVOR_CHEST_GAIN = b.defineInRange("favor_chest_gain", 1D, 0, 10000);
-       
+
         GEAR_DROPRATE = b.defineInRange("gear_drop_rate", 7D, 0, 1000);
         SOUl_DROPRATE = b.defineInRange("soul_drop_rate", 0.3D, 0, 1000);
         MAP_DROPRATE = b.defineInRange("map_drop_rate", 1D, 0, 1000);
@@ -93,6 +93,8 @@ public class ServerContainer {
 
         PACK_MOB_MIN = b.defineInRange("pack_mob_min", 3, 0, 20);
         PACK_MOB_MAX = b.defineInRange("pack_mob_max", 6, 0, 20);
+
+        DONT_MAKE_MAP_MOBS_PERSISTENT_IF_MOB_COUNT_IS_ABOVE = b.defineInRange("DONT_MAKE_MAP_MOBS_PERSISTENT_IF_MOB_COUNT_IS_ABOVE", 25, 0, 10000);
 
         MAP_GEN_MOB_RADIUS = b.defineInRange("MAP_GEN_MOB_RADIUS", 1, 0, 20);
         MAP_GEN_TERRAIN_RADIUS = b.defineInRange("MAP_GEN_TERRAIN_RADIUS", 4, 0, 20);
@@ -198,6 +200,7 @@ public class ServerContainer {
 
     public ForgeConfigSpec.IntValue LEVEL_DISTANCE_PENALTY_LEEWAY;
     public ForgeConfigSpec.IntValue PERC_OFFHAND_WEP_STAT;
+    public ForgeConfigSpec.IntValue DONT_MAKE_MAP_MOBS_PERSISTENT_IF_MOB_COUNT_IS_ABOVE;
 
 
     public ForgeConfigSpec.DoubleValue REGEN_HUNGER_COST;

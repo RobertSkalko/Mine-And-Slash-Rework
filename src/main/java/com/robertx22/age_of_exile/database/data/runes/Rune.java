@@ -38,6 +38,8 @@ public class Rune implements IAutoGson<Rune>, JsonExileRegistry<Rune> {
 
     public float min_lvl_multi = 0;
 
+    public boolean uses_unlucky_ran = true;
+
     public int getReqLevelToDrop() {
         return (int) (GameBalanceConfig.get().MAX_LEVEL * min_lvl_multi);
     }

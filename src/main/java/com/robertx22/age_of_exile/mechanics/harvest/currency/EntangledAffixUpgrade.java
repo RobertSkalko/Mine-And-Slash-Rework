@@ -61,7 +61,7 @@ public class EntangledAffixUpgrade extends BaseHarvestCurrency {
 
     @Override
     public int getPotentialLoss() {
-        return 0;
+        return 1;
     }
 
     @Override

@@ -168,3 +168,15 @@ v.5.5.13
 
 v.5.5.14
 - fixed professions
+
+v.5.5.15
+- removed the fishing message
+- reduced the unlucky factor of rune stats
+- added uses_unlucky_ran to rune jsons
+- you will be stopped from runing an item if the inserted rune is at 100% power
+- should fix more food stat and augment effect stat
+- dmg chat info now shows more info
+- fixed orb of imperfection and orb of chaos being useable on corrupted items
+- added cap to map mob persistency. Now doesn't make mobs persistent if there are more than x mobs in a map.
+So if you wanna run around picking up all the prophecy altars, mobs will start despawning
+- you can't use prophecy altars now if enemies are too close

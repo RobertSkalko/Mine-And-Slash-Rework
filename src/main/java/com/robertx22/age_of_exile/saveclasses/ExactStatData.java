@@ -24,6 +24,16 @@ public class ExactStatData implements ISerializable<ExactStatData>, ITooltipList
 
     }
 
+    public static ExactStatData copy(ExactStatData o) {
+        ExactStatData data = new ExactStatData();
+        data.stat = o.stat;
+        data.v1 = o.v1;
+        data.percentIncrease = o.percentIncrease;
+        data.type = o.type;
+        data.scaled = o.scaled;
+        return data;
+    }
+
     public static ExactStatData levelScaled(float first, Stat stat, ModType type, int lvl) {
         ExactStatData data = new ExactStatData();
         data.v1 = first;

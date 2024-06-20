@@ -72,7 +72,7 @@ public class ChaosStatCurrency extends GearCurrency {
 
     @Override
     public int getPotentialLoss() {
-        return 0;
+        return 1;
     }
 
     @Override

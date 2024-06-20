@@ -8,6 +8,8 @@ import com.robertx22.age_of_exile.database.data.spells.summons.entity.SummonEnti
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.unit.Unit;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.AllyOrEnemy;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityFinder;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import net.minecraft.server.level.ServerLevel;
@@ -32,7 +34,10 @@ public class OnMobSpawn {
                 if (ServerContainer.get().DO_NOT_DESPAWN_MAP_MOBS.get()) {
                     // todo have a better check that it was a spawned map mob
                     if (entity instanceof SummonEntity == false) {
-                        mob.setPersistenceRequired();
+                        int count = EntityFinder.start(entity, LivingEntity.class, entity.position()).radius(100).searchFor(AllyOrEnemy.all).build().size();
+                        if (ServerContainer.get().DONT_MAKE_MAP_MOBS_PERSISTENT_IF_MOB_COUNT_IS_ABOVE.get() > count) {
+                            mob.setPersistenceRequired();
+                        }
                     }
                 }
             }

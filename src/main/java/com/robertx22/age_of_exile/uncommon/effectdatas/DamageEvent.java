@@ -323,6 +323,22 @@ public class DamageEvent extends EffectEvent {
 
         MutableComponent msg = Component.empty();
 
+        if (this.isSpell()) {
+            msg.append(Component.literal("Spell: ").append(getSpell().locName()).append("\n").withStyle(ChatFormatting.AQUA));
+        }
+        if (this.data.isBasicAttack()) {
+            msg.append(Component.literal("Basic Attack\n").withStyle(ChatFormatting.RED));
+        }
+        if (this.data.getAttackType() == AttackType.dot) {
+            msg.append(Component.literal("Damage Over Time\n").withStyle(ChatFormatting.RED));
+        }
+
+        if (!this.data.getString(EventData.AILMENT).isEmpty()) {
+            String ailment = this.data.getString(EventData.AILMENT);
+            var ai = ExileDB.Ailments().get(ailment);
+            msg.append(Component.literal("Ailment: ").append(ai.locName()).append("\n").withStyle(ai.element.format));
+        }
+
         msg.append(Component.literal("\n" + getElement().getIconNameDmg() + ":\n").withStyle(getElement().format));
 
         msg.append(Component.literal("Base Damage: " + (int) this.data.getOriginalNumber(EventData.NUMBER).number + "\n").withStyle(ChatFormatting.BLUE));
@@ -400,7 +416,11 @@ public class DamageEvent extends EffectEvent {
 
         if (target instanceof Player p) {
             if (Load.player(p).config.isConfigEnabled(PlayerConfigData.Config.DAMAGE_MESSAGES)) {
-                p.sendSystemMessage(getDamageMessage(info));
+                try {
+                    p.sendSystemMessage(getDamageMessage(info));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
         if (source instanceof Player p) {

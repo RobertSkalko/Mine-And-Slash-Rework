@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.saveclasses.unit.stat_ctx;
 
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class StatContext {
@@ -11,6 +12,16 @@ public abstract class StatContext {
     public String gear_slot = "";
 
     public List<ExactStatData> stats;
+
+    public void multiplyStats(float multi) {
+        List<ExactStatData> modified = new ArrayList<>();
+        stats.forEach(x -> {
+            var stat = ExactStatData.copy(x);
+            stat.multiplyBy(multi);
+            modified.add(stat);
+        });
+        this.stats = modified;
+    }
 
     public StatContext(StatCtxType type, List<ExactStatData> stats) {
         this.type = type;
