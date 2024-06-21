@@ -20,13 +20,13 @@ public class BaseStatsAdder implements ExileRegistryInit {
 
     public static String PLAYER = "player";
     public static String MOB = "mob";
+    public static String EMPTY = "empty";
 
     @Override
     public void registerAll() {
         playerStats().addToSerializables();
         mob().addToSerializables();
-
-
+        empty().addToSerializables();
     }
 
     public static BaseStatsConfig mob() {
@@ -37,6 +37,13 @@ public class BaseStatsAdder implements ExileRegistryInit {
 
         c.scaled(OffenseStats.ACCURACY.get(), 5);
 
+        return c;
+
+    }
+
+    public static BaseStatsConfig empty() {
+        BaseStatsConfig c = new BaseStatsConfig();
+        c.id = EMPTY;
         return c;
 
     }

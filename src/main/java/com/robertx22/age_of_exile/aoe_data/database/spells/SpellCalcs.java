@@ -6,12 +6,19 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shie
 import com.robertx22.age_of_exile.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.age_of_exile.database.data.value_calc.ValueCalcBuilder;
 import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
+import com.robertx22.age_of_exile.database.registry.ExileDBInit;
 
 public class SpellCalcs {
 
     public static void init() {
 
     }
+
+    
+    public static ValueCalculation EMPTY = ValueCalcBuilder.of(ExileDBInit.UNKNOWN_ID)
+            .spellScaling(0, 0)
+            .build();
+
 
     public static ValueCalculation THORN_CONSUME = ValueCalcBuilder.of("thorn_consume")
             .spellScaling(0.5F, 0.5F)

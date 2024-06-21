@@ -9,7 +9,7 @@ public class TreasureQuality extends Stat {
     private TreasureQuality() {
         this.icon = "\u2663";
         this.format = ChatFormatting.AQUA.getName();
-        this.max = 75;
+        this.max = 150;
     }
 
     public static TreasureQuality getInstance() {

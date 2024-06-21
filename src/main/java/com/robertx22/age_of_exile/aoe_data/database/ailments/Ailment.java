@@ -23,7 +23,7 @@ public class Ailment implements ExileRegistry<Ailment>, IAutoLocName, IAutoLocDe
 
     public float damageEffectivenessMulti;
 
-    public int lostOccursEverySeconds = 3;
+    //public int lostOccursEverySeconds = 3;
 
     public float percentLostEveryXSeconds;
 

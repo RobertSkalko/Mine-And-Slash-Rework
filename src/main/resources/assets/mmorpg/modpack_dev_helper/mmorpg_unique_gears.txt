@@ -18,6 +18,7 @@ divine_frost
 doombolt
 ele_aegis
 ele_gamble
+empty
 fire_step
 frostburn_prot
 futility_of_suffering

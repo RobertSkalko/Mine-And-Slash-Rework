@@ -180,3 +180,11 @@ v.5.5.15
 - added cap to map mob persistency. Now doesn't make mobs persistent if there are more than x mobs in a map.
 So if you wanna run around picking up all the prophecy altars, mobs will start despawning
 - you can't use prophecy altars now if enemies are too close
+
+v.5.5.16
+- magic find cap is now 150%
+- invalid stats should no longer crash or log spam, now it returns empty stat
+- added empty defaults to a few registries to prevent future crashes/errors
+- tweaked ailment dmg and stuff
+- added new stat: dot speed.
+- stat source command shouldnt need op anymore

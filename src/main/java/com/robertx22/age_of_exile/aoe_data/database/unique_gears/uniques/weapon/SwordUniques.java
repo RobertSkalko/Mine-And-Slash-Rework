@@ -14,6 +14,7 @@ import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import java.util.Arrays;
 
 public class SwordUniques implements ExileRegistryInit {
+    
     @Override
     public void registerAll() {
 

@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.capability.entity;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
+import com.robertx22.age_of_exile.aoe_data.database.ailments.AilmentSpeed;
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailments;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.stats.types.ailment.AilmentDuration;
@@ -57,6 +58,8 @@ public class EntityAilmentData {
 
         lastAttacker = caster.getStringUUID();
 
+        float speed = Load.Unit(caster).getUnit().getCalculatedStat(AilmentSpeed.INSTANCE).getMultiplier();
+
 
         dmg = dmg * ailment.damageEffectivenessMulti; // make sure this isnt done multiple times
         dmg *= Load.Unit(caster).getUnit().getCalculatedStat(eff).getMultiplier();
@@ -70,9 +73,17 @@ public class EntityAilmentData {
 
 
         if (ailment.isDot) {
+            dmg *= speed;
+
+
             int ticks = ailment.durationTicks;
+            var stat = Load.Unit(caster).getUnit().getCalculatedStat(AilmentSpeed.INSTANCE).getMultiplier();
+            ticks /= stat;
             ticks *= Load.Unit(caster).getUnit().getCalculatedStat(dur).getMultiplier();
 
+            if (ticks < 21) {
+                ticks = 21;
+            }
             if (!dotMap.containsKey(ailment.GUID())) {
                 dotMap.put(ailment.GUID(), new ArrayList<>());
             }
@@ -117,9 +128,10 @@ public class EntityAilmentData {
 
     public void onTick(LivingEntity en) {
 
+
         for (Map.Entry<String, List<DotData>> e : dotMap.entrySet()) {
             for (DotData d : e.getValue()) {
-                d.ticks--;
+                d.ticks -= 1;
             }
         }
 
@@ -129,11 +141,7 @@ public class EntityAilmentData {
                 if (e.getValue() > 0) {
                     Ailment ail = ExileDB.Ailments().get(e.getKey());
 
-                    int ticks = ail.lostOccursEverySeconds;
-
-                    if (en.tickCount % ticks == 0) {
-                        e.setValue(e.getValue() - (e.getValue() * ail.percentLostEveryXSeconds));
-                    }
+                    e.setValue(e.getValue() - (e.getValue() * ail.percentLostEveryXSeconds));
                 }
             }
         }
@@ -169,6 +177,7 @@ public class EntityAilmentData {
 
                             // todo why is this sometimes 0?
                             if (dmg > 1) {
+
                                 Ailment ailment = ExileDB.Ailments().get(e.getKey());
                                 // todo will probably have to tweak this
                                 EventBuilder.ofDamage(caster, en, dmg).setupDamage(AttackType.dot, WeaponTypes.none, PlayStyle.INT).set(x -> {
@@ -194,7 +203,7 @@ public class EntityAilmentData {
 
 
     public class DotData {
-        public int ticks;
+        public float ticks;
         public float dmg;
 
         public DotData(int ticks, float dmg) {

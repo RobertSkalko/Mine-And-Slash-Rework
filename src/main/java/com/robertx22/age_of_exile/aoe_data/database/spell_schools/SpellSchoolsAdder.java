@@ -9,6 +9,8 @@ import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 public class SpellSchoolsAdder implements ExileRegistryInit {
 
 
+    public static String SORCERER = "sorcerer";
+
     @Override
     public void registerAll() {
         // todo
@@ -16,7 +18,7 @@ public class SpellSchoolsAdder implements ExileRegistryInit {
 
         // fire + ice + golems
         // dps, summoner, self sustain
-        SchoolBuilder.of("sorcerer", "Sorcerer")
+        SchoolBuilder.of(SORCERER, "Sorcerer")
                 .add(BasicAttackSpells.FIREBALL_ID, new PointData(1, 0))
                 .add(FireSpells.FIRE_NOVA_ID, new PointData(1, 1))
                 .add(FireSpells.METEOR, new PointData(1, 2))

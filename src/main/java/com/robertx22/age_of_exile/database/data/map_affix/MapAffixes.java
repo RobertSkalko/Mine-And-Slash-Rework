@@ -27,6 +27,8 @@ import java.util.stream.Collectors;
 
 public class MapAffixes {
 
+    public static String crit = "crit";
+
     public static void init() {
 
         prophecyAffixes();
@@ -49,7 +51,7 @@ public class MapAffixes {
         }
 
         // mobs
-        new MapAffix("crit").addMod(new StatMod(25, 100, OffenseStats.CRIT_CHANCE.get())).addToSerializables();
+        new MapAffix(crit).addMod(new StatMod(25, 100, OffenseStats.CRIT_CHANCE.get())).addToSerializables();
         new MapAffix("crit_dmg").addMod(new StatMod(20, 50, OffenseStats.CRIT_DAMAGE.get())).addToSerializables();
 
         var allres = new MapAffix("all_ele_res");

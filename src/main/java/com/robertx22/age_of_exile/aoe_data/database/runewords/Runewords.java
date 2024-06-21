@@ -31,8 +31,16 @@ public class Runewords implements ExileRegistryInit {
 
     // todo add more stuff
 
+    public static String EMPTY = "empty";
+
     @Override
     public void registerAll() {
+        RunewordBuilder.of(EMPTY, EMPTY,
+                Arrays.asList(
+                        GearDamage.getInstance().mod(1, 1).percent()
+                ),
+                Arrays.asList(RuneType.MOS, RuneType.NET, RuneType.ITA, RuneType.XER, RuneType.HAR),
+                GearSlots.STAFF);
 
         // todo turn this into an actual builder so editing later doesnt become a pain
 

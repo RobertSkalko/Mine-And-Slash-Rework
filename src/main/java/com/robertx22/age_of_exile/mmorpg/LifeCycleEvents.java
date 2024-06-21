@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.mmorpg;
 
+import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.registers.server.CommandRegister;
 import com.robertx22.age_of_exile.uncommon.testing.TestManager;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
@@ -42,9 +43,11 @@ public class LifeCycleEvents {
                     .set(false, event.getServer());
 
             if (MMORPG.RUN_DEV_TOOLS) { // CHANGE ON PUBLIC BUILDS TO FALSE
-                TestManager.RunAllTests(event.getServer()
-                        .overworld());
+                TestManager.RunAllTests(event.getServer().overworld());
             }
+
+            ExileDB.checkAllDatabasesHaveDefaultEmpty();
+
         });
 
         ForgeEvents.registerForgeEvent(ServerStoppingEvent.class, event -> {

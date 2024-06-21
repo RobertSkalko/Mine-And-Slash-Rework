@@ -3,6 +3,7 @@ This registry is modify-able through datapacks.
 abyssal_depths
 bramble
 cure
+empty
 flickering_flame
 plague
 the_novice

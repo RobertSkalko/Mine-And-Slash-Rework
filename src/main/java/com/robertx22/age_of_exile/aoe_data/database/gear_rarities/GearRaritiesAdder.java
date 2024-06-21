@@ -44,7 +44,6 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.favor_loot_multi = 1.05f;
             x.favor_needed = 50;
             x.sockets = new MinMax(0, 1);
-            x.max_spell_links = 2;
             x.pot = new GearRarity.Potential(10);
             x.min_affixes = 2;
             x.weight = 2000;
@@ -68,8 +67,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
             x.favor_loot_multi = 1.1F;
             x.favor_needed = 100;
-            x.sockets = new MinMax(0, 2);
-            x.max_spell_links = 3;
+            x.sockets = new MinMax(0, 1);
             x.min_lvl = 10;
             x.lootable_gear_tier = GearRarity.LootableGearTier.MID;
             x.pot = new GearRarity.Potential(25);
@@ -95,9 +93,8 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
             x.favor_loot_multi = 1.15F;
             x.favor_needed = 250;
-            x.sockets = new MinMax(0, 3);
+            x.sockets = new MinMax(0, 2);
             x.min_lvl = 25;
-            x.max_spell_links = 4;
             x.lootable_gear_tier = GearRarity.LootableGearTier.MID;
             x.pot = new GearRarity.Potential(50);
             x.min_affixes = 4;
@@ -123,8 +120,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
             x.favor_loot_multi = 1.2F;
             x.favor_needed = 500;
-            x.sockets = new MinMax(1, 3);
-            x.max_spell_links = 5;
+            x.sockets = new MinMax(1, 2);
             x.min_lvl = 50;
             x.min_map_rarity_to_drop = IRarity.COMMON_ID;
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
@@ -154,10 +150,9 @@ public class GearRaritiesAdder implements ExileRegistryInit {
 
             x.favor_loot_multi = 1.25F;
             x.favor_needed = 1000;
-            x.sockets = new MinMax(2, 3);
+            x.sockets = new MinMax(2, 2);
             x.min_lvl = 75;
             x.min_map_rarity_to_drop = IRarity.EPIC_ID;
-            x.max_spell_links = 5;
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
             x.pot = new GearRarity.Potential(100);
             x.min_affixes = 6;

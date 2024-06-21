@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.aoe_data.database.unique_gears;
 
+import com.robertx22.age_of_exile.aoe_data.database.base_gear_types.BaseGearTypes;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.ProphecyUniques;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.armor.BootsUniques;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.armor.ChestUniques;
@@ -11,12 +12,25 @@ import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.offhand
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.weapon.BowUniques;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.weapon.StaffUniques;
 import com.robertx22.age_of_exile.aoe_data.database.unique_gears.uniques.weapon.SwordUniques;
+import com.robertx22.age_of_exile.database.data.StatMod;
+import com.robertx22.age_of_exile.database.data.stats.types.gear_base.GearDamage;
+import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
+
+import java.util.Arrays;
 
 public class UniqueGearReg implements ExileRegistryInit {
 
+    public static String EMPTY = "empty";
+
     @Override
     public void registerAll() {
+        UniqueGearBuilder.of(EMPTY, "Empty/Invalid Unique", BaseGearTypes.SWORD)
+                .setReplacesName()
+                .stats(Arrays.asList(
+                        new StatMod(1, 1, GearDamage.getInstance(), ModType.PERCENT)
+                ))
+                .build();
 
         new HelmetUniques().registerAll();
         new ChestUniques().registerAll();

@@ -28,7 +28,7 @@ import java.util.Arrays;
 
 public class SupportGems {
 
-    static String PROJ_COUNT = "proj_count";
+    public static String PROJ_COUNT = "proj_count";
 
     public static void init() {
 

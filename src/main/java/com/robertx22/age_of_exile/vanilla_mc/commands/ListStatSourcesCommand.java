@@ -32,7 +32,7 @@ public class ListStatSourcesCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dis) {
         dis.register(
                 literal(CommandRefs.ID)
-                        .then(literal("list_stat_sources").requires(e -> e.hasPermission(2))
+                        .then(literal("list_stat_sources").requires(e -> e.hasPermission(0))
                                 .then(argument("type", StringArgumentType.word()).suggests(new Sugg())
                                         .then(argument("target", EntityArgument.player())
                                                 .executes(ctx -> run(EntityArgument.getPlayer(ctx, "target"), StringArgumentType.getString(ctx, "type")))))));

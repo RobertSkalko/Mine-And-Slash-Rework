@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.database.registrators;
 
 import com.robertx22.age_of_exile.aoe_data.database.ailments.Ailment;
+import com.robertx22.age_of_exile.aoe_data.database.ailments.AilmentSpeed;
 import com.robertx22.age_of_exile.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.age_of_exile.database.data.profession.Profession;
 import com.robertx22.age_of_exile.database.data.profession.all.Professions;
@@ -43,6 +44,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraCapacity;
 import com.robertx22.age_of_exile.database.data.stats.types.spirit.AuraEffect;
 import com.robertx22.age_of_exile.database.data.stats.types.summon.GolemSpellChance;
 import com.robertx22.age_of_exile.database.data.stats.types.summon.SummonHealth;
+import com.robertx22.age_of_exile.database.empty_entries.EmptyStat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.tags.all.SpellTags;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
@@ -64,6 +66,7 @@ public class StatsRegister implements ExileRegistryInit {
         List<Stat> generated = new ArrayList<Stat>() {
             {
                 {
+                    add(AilmentSpeed.INSTANCE);
                     add(new MaxAllSpellLevels());
                     add(new MaxSpellLevel(SpellTags.area));
 
@@ -87,6 +90,7 @@ public class StatsRegister implements ExileRegistryInit {
                         add(new ProfExp(prof));
                     }
 
+                    add(EmptyStat.getInstance());
 
                     add(JewelSocketStat.getInstance());
 

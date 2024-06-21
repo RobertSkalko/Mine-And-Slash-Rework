@@ -68,5 +68,6 @@ torment
 totem_guard
 totem_heal
 totem_mana
+unknown
 whirlwind
 wish

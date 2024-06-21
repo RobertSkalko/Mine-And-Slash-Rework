@@ -63,8 +63,7 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
 
     public float map_xp_multi = 1;
 
-    public int max_spell_links = 1;
-
+    
     public int map_resist_req = 0;
 
     transient ResourceLocation glintFull;

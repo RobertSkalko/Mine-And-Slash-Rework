@@ -48,6 +48,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.MapManager;
 import com.robertx22.library_of_exile.registry.Database;
 import com.robertx22.library_of_exile.registry.ExileRegistryContainer;
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -287,6 +288,20 @@ public class ExileDB {
 
     public static ExileRegistryContainer<BaseStatsConfig> BaseStats() {
         return Database.getRegistry(ExileRegistryTypes.BASE_STATS);
+    }
+
+    public static void checkAllDatabasesHaveDefaultEmpty() {
+
+        for (ExileRegistryType type : ExileRegistryType.getAllInRegisterOrder()) {
+            var reg = Database.getRegistry(type);
+
+            var em = reg.getDefault();
+
+            if (em == null || !reg.isRegistered(em.GUID())) {
+                System.out.println(type.id + " default is null or not registered");
+            }
+
+        }
     }
 
 }
