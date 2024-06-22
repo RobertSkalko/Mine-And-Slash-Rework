@@ -105,7 +105,13 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
                                 var biggest = list.stream().max(Comparator.comparingInt(x -> x.runes.size())).get();
 
                                 var current = gear.sockets.getRuneWord();
-                                if (current == null || biggest.runes.size() > current.runes.size()) {
+
+                                int currentSize = 0;
+
+                                if (current != null && !current.isEmpty()) {
+                                    currentSize = current.runes.size();
+                                }
+                                if (biggest.runes.size() > currentSize) {
                                     gear.sockets.setRuneword(biggest);
                                 }
                             }

@@ -38,6 +38,11 @@ public class RuneWord implements IAutoGson<RuneWord>, JsonExileRegistry<RuneWord
     }
 
 
+    // todo add this to api
+    public boolean isEmpty() {
+        return ExileDB.RuneWords().getDefault() != null && ExileDB.RuneWords().getDefault().GUID().equals(GUID());
+    }
+
     @Override
     public Class<RuneWord> getClassForSerialization() {
         return RuneWord.class;

@@ -188,3 +188,6 @@ v.5.5.16
 - tweaked ailment dmg and stuff
 - added new stat: dot speed.
 - stat source command shouldnt need op anymore
+
+v.5.5.17
+- fix runewords not being made because code checked for null when it's no longer possible (added a default empty value)
