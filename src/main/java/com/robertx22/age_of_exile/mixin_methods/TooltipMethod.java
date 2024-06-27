@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.mixin_methods;
 
+import com.google.common.collect.ImmutableList;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.currency.IItemAsCurrency;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
@@ -114,6 +115,7 @@ public class TooltipMethod {
             }
 
             tooltip = TooltipUtils.removeDoubleBlankLines(tooltip);
+            tooltip = splitLongText(tooltip);
 
         } catch (Exception e) {
             e.printStackTrace();

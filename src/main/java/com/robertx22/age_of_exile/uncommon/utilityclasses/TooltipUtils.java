@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
+import com.google.common.collect.ImmutableList;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
@@ -268,6 +269,7 @@ public class TooltipUtils {
         return Itemtips.USE_TIP.locName().withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD);
     }
 
+
     public static List<MutableComponent> splitLongText(MutableComponent comp) {
         List<MutableComponent> componentList = new ArrayList<>();
         Style format = comp.getStyle();
@@ -277,6 +279,20 @@ public class TooltipUtils {
             componentList.add(ExileText.ofText(comp1).get().withStyle(format));
         }
         return componentList;
+    }
+
+
+    public static List<Component> splitLongText(List<? extends Component> comps) {
+        ImmutableList.Builder<Component> builder = ImmutableList.builder();
+        comps.forEach(comp -> {
+            Style format = comp.getStyle();
+            String[] originalList = comp.getString().split("\n");
+
+            for (String comp1 : originalList) {
+                builder.add(ExileText.ofText(comp1).get().withStyle(format));
+            }
+        });
+        return builder.build();
     }
 
 

@@ -11,6 +11,7 @@ import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.GuiUtils;
 import com.robertx22.library_of_exile.utils.RenderUtils;
 import com.robertx22.library_of_exile.utils.TextUTIL;
@@ -123,7 +124,7 @@ public class StatInfoButton extends ImageButton implements IStatInfoButton {
 
             @Override
             public List<MutableComponent> getTooltip(StatData data) {
-                return Arrays.asList(Words.UsableValueInfo.locName());
+                return TooltipUtils.splitLongText(Words.UsableValueInfo.locName());
             }
         },
         MIN_VAL("min", true) {

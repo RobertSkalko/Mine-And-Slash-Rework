@@ -85,7 +85,7 @@ public class ChaosStatCurrency extends GearCurrency {
 
     @Override
     public String locDescForLangFile() {
-        return "DANGER! Corrupts the item, either destroying it, or upgrading it. Also sets Potential to 0, meaning the item can never be crafted on again.";
+        return "DANGER! Corrupts the item, either destroying it, or upgrading it. \nAlso sets Potential to 0, meaning the item can never be crafted on again.";
     }
 
     @Override

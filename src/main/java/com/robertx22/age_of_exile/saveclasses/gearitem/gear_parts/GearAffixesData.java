@@ -68,7 +68,7 @@ public class GearAffixesData implements IGearPartTooltip {
         }
 
 
-        var color = ChatFormatting.GREEN;
+        var color = ChatFormatting.BLUE;
         if (!getPreStatsWithCtx(gear, info).isEmpty()) {
             TooltipUtils.addEmpty(list);
             list.add(Itemtips.PREFIX_STATS.locName().withStyle(color));

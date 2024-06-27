@@ -22,6 +22,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
@@ -159,20 +160,24 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
         TooltipUtils.addEmpty(tooltip);
 
+        MutableComponent comma = Gui.COMMA_SEPARATOR.locName().withStyle(ChatFormatting.GRAY);
+
+
+
         MutableComponent comp = TooltipUtils.rarityShort(rarity)
-                .append(ChatFormatting.GRAY + ", ")
+                .append(comma)
                 .withStyle(ChatFormatting.GREEN);
 
         comp.append(Itemtips.Exp.locName(this.getBonusExpAmountInPercent()));
 
 
         if (getBonusLootAmountInPercent() > 0) {
-            comp.append(ChatFormatting.GRAY + ", ");
+            comp.append(comma);
 
 
             comp.append(Itemtips.Loot.locName(this.getBonusLootAmountInPercent()).withStyle(ChatFormatting.YELLOW));
         }
-        comp.append(ChatFormatting.GRAY + ", ")
+        comp.append(comma)
                 .append(Itemtips.TIER_TIP.locName().withStyle(ChatFormatting.GOLD)
                         .append(this.tier + ""));
 
@@ -189,12 +194,12 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
         var list = possiblerarities.stream().map(x -> x.textFormatting() + x.locName().getString()).collect(Collectors.toList());
 
-        tooltip.add(Component.literal(Strings.join(list, ", ")));
+        tooltip.add(Gui.COMMA_SEPARATOR.locName());
 
 
         TooltipUtils.addEmpty(tooltip);
         if (!getStatReq().isEmpty()) {
-            tooltip.add(Words.Requirements.locName().append(": ").withStyle(ChatFormatting.GREEN));
+            tooltip.add(Words.Requirements.locName().withStyle(ChatFormatting.GREEN));
             TooltipUtils.addRequirements(tooltip, this.lvl, getStatReq(), Load.Unit(ClientOnly.getPlayer()));
         }
         if (this.isUber()) {
