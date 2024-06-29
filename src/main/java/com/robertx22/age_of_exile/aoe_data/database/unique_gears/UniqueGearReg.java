@@ -27,6 +27,7 @@ public class UniqueGearReg implements ExileRegistryInit {
     public void registerAll() {
         UniqueGearBuilder.of(EMPTY, "Empty/Invalid Unique", BaseGearTypes.SWORD)
                 .setReplacesName()
+                .weight(0)
                 .stats(Arrays.asList(
                         new StatMod(1, 1, GearDamage.getInstance(), ModType.PERCENT)
                 ))

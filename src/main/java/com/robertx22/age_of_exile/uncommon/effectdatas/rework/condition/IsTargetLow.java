@@ -36,8 +36,6 @@ public class IsTargetLow extends StatCondition {
         if (maxhp > msmax) {
             return perc > hp / maxhp * 100;
         } else {
-
-
             return perc > ms / msmax * 100;
         }
 

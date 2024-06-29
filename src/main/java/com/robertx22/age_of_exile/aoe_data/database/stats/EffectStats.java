@@ -114,7 +114,7 @@ public class EffectStats {
             .setLocName(x -> Stat.format(
                     "You are Immune to " + x.locname
             ))
-            .setLocDesc(x -> "")
+            .setLocDesc(x -> "Gives immunity to Mns Effects, NOT vanilla minecraft effects!")
             .modifyAfterDone(x -> {
                 x.min = 0;
                 x.max = 1;

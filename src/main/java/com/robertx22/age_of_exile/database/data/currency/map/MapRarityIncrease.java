@@ -32,7 +32,8 @@ public class MapRarityIncrease extends Currency {
 
         newdata.uber = data.uber;
         newdata.uber_tier = data.uber_tier;
-
+        newdata.lvl = data.lvl;
+        
 
         SoundUtils.ding(ctx.player.level(), ctx.player.blockPosition());
         SoundUtils.playSound(ctx.player.level(), ctx.player.blockPosition(), SoundEvents.ANVIL_USE, 1, 1);

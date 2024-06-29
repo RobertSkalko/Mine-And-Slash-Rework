@@ -102,7 +102,7 @@ public class ProfessionBlockEntity extends BlockEntity {
                             }
                             int ownerLvl = Load.player(p).professions.getLevel(recipe.profession);
                             if (recipe.getLevelRequirement() > ownerLvl) {
-                                p.sendSystemMessage(Chats.PROF_RECIPE_LEVEL_NOT_ENOUGH.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+                                p.sendSystemMessage(Chats.PROF_RECIPE_LEVEL_NOT_ENOUGH.locName(getProfession().locName(), recipe.getLevelRequirement(), ownerLvl).withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
                                 craftingState = Crafting_State.STOPPED;
                                 ownerUUID = null;
                                 return;
@@ -151,7 +151,7 @@ public class ProfessionBlockEntity extends BlockEntity {
         }
         int ownerLvl = Load.player(p).professions.getLevel(getProfession().GUID());
         if (recipe.getLevelRequirement() > ownerLvl) {
-            return ExplainedResult.failure(Chats.PROF_RECIPE_LEVEL_NOT_ENOUGH.locName());
+            return ExplainedResult.failure(Chats.PROF_RECIPE_LEVEL_NOT_ENOUGH.locName(getProfession().locName(), recipe.getLevelRequirement(), ownerLvl));
         }
 
         float expMulti = 1;

@@ -241,6 +241,7 @@ public class SpellChangeStats {
             .setLocDesc(x -> "Spell aoe effects will be larger")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
+                x.max = 100;
             })
             .build();
     public static DataPackStatAccessor<EmptyAccessor> PIERCING_PROJECTILES = DatapackStatBuilder

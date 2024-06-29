@@ -31,6 +31,7 @@ public class Dungeon implements IAutoGson<Dungeon>, JsonExileRegistry<Dungeon>, 
 
     public boolean can_be_main = true;
 
+
     public TagList<DungeonTag> tags = new TagList<DungeonTag>(Arrays.asList(DungeonTags.DEFAULT));
 
     public List<String> entrances = new ArrayList<>();

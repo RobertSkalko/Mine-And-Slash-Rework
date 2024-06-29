@@ -99,6 +99,7 @@ public class ResourceStats {
                 x.group = Stat.StatGroup.RESTORATION;
             })
             .build();
+
     public static DataPackStatAccessor<ResourceType> LEECH_CAP = DatapackStatBuilder
             .<ResourceType>of(x -> x.id + "_leech_cap", x -> Elements.ALL)
             .addAllOfType(ResourceType.values())
@@ -115,6 +116,7 @@ public class ResourceStats {
                 x.group = Stat.StatGroup.RESTORATION;
             })
             .build();
+
     public static DataPackStatAccessor<EmptyAccessor> LOW_HP_HEALING = DatapackStatBuilder
             .ofSingle("low_hp_healing", Elements.ALL)
             .worksWithEvent(RestoreResourceEvent.ID)

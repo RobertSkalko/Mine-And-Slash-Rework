@@ -157,14 +157,6 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
                 .get(rar));
 
 
-        UniqueGear uniq = ExileDB.UniqueGears()
-                .get(this.uniq);
-
-        if (uniq != null) {
-            b.uniquePart.set(uniq);
-            b.rarity.set(uniq.getUniqueRarity());
-        }
-
         GearSlot gearslot = getSlotFor(stack);
         String slotid = gearslot.GUID();
 
@@ -172,6 +164,13 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
                 .getFilterWrapped(x -> x.gear_slot.equals(slotid) && (!forcesTag() ? true : x.tags.contains(force_tag)))
                 .random());
 
+        UniqueGear uniq = ExileDB.UniqueGears().get(this.uniq);
+
+        if (!uniq.isEmpty()) {
+            b.uniquePart.set(uniq);
+            b.rarity.set(uniq.getUniqueRarity());
+            b.gearItemSlot.set(uniq.getBaseGear());
+        }
 
         GearItemData gear = b.createData();
 

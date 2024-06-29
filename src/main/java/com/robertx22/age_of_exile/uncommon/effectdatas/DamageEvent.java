@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.capability.player.data.PlayerConfigData;
 import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffectInstanceData;
+import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.spells.spell_classes.SpellCtx;
 import com.robertx22.age_of_exile.database.data.stats.layers.StatLayerData;
@@ -80,6 +81,7 @@ public class DamageEvent extends EffectEvent {
     }
 
     public void addMobDamageMultipliers() {
+
         if (source instanceof Player == false) {
             MobRarity rar = sourceData.getMobRarity();
 
@@ -91,7 +93,40 @@ public class DamageEvent extends EffectEvent {
                 this.addMoreMulti(Words.MOB_CONFIG_MULTI.locName(), EventData.NUMBER, enconfigmulti);
             }
 
+            if (WorldUtils.isDungeonWorld(source.level())) {
+                if (target instanceof Player) {
+                    var map = Load.mapAt(target.level(), target.blockPosition());
+                    if (map != null && map.map != null) {
+                        if (!map.map.getStatReq().meetsReq(map.map.lvl, Load.Unit(target))) {
+                            float minusres = map.map.getStatReq().getLackingResistNumber(map.map.lvl, Load.Unit(target));
+                            float multi = (float) (minusres * GameBalanceConfig.get().MOB_DMG_MULTI_PER_MAP_RES_REQ_LACKING);
+                            this.addMoreMulti(Words.MAP_RES_REQ_LACK_DMG_MULTI.locName(), EventData.NUMBER, multi);
+                        }
+                    }
+                }
+            }
+
         }
+    }
+
+
+    public Component getDamageName() {
+
+        if (this.data.isBasicAttack()) {
+            return Component.literal("Attack");
+        }
+        if (this.data.isSpellEffect()) {
+            return getSpell().locName();
+        }
+
+        var id = data.getString(EventData.AILMENT);
+
+        if (ExileDB.Ailments().isRegistered(id)) {
+            var ailment = ExileDB.Ailments().get(id);
+            return ailment.locName();
+        }
+
+        return Component.literal("[Error, dmg isn't a basic attack, spell or ailment]");
     }
 
     public static String dmgSourceName = SlashRef.MODID + ".custom_damage";
@@ -309,7 +344,7 @@ public class DamageEvent extends EffectEvent {
             ele = Component.literal(Elements.Elemental.getIconNameDmg());
         }
 
-        return Words.DAMAGE_MESSAGE.locName(source.getDisplayName(), MMORPG.DECIMAL_FORMAT.format(info.totalDmg), ele)
+        return Words.DAMAGE_MESSAGE.locName(source.getDisplayName(), MMORPG.DECIMAL_FORMAT.format(info.totalDmg), ele, getDamageName())
                 .withStyle(Style.EMPTY.applyFormat(ChatFormatting.RED).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, getInfoHoverMessage(info, true))));
 
     }
@@ -397,6 +432,8 @@ public class DamageEvent extends EffectEvent {
         if (stopFriendlyFire()) {
             return;
         }
+
+
         this.targetData.lastDamageTaken = this;
 
         DmgByElement info = calculateAllBonusElementalDamage();
@@ -413,6 +450,7 @@ public class DamageEvent extends EffectEvent {
         }
 
         float dmg = info.totalDmg;
+
 
         if (target instanceof Player p) {
             if (Load.player(p).config.isConfigEnabled(PlayerConfigData.Config.DAMAGE_MESSAGES)) {

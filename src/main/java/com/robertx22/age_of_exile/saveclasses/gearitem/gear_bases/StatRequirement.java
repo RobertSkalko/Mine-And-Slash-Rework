@@ -67,6 +67,28 @@ public class StatRequirement {
 
     }
 
+    public float getLackingResistNumber(int lvl, EntityData data) {
+
+        float lacking = 0;
+
+        for (Map.Entry<String, Float> en : this.scaling_req.entrySet()) {
+            Stat x = ExileDB.Stats().get(en.getKey());
+            int num = getScalingReq(x, lvl);
+            if (num > data.getUnit().getCalculatedStat(x).getValue()) {
+                lacking += Math.abs(num - data.getUnit().getCalculatedStat(x).getValue());
+            }
+        }
+        for (Map.Entry<String, Float> en : this.base_req.entrySet()) {
+            Stat x = ExileDB.Stats().get(en.getKey());
+            int num = getNonScalingReq(x, lvl);
+            if (num > data.getUnit().getCalculatedStat(x).getValue()) {
+                lacking += Math.abs(num - data.getUnit().getCalculatedStat(x).getValue());
+            }
+        }
+        return lacking;
+
+    }
+
     public List<Component> GetTooltipString(int lvl, EntityData data) {
         List<Component> list = new ArrayList<>();
 

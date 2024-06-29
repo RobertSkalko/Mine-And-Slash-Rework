@@ -69,7 +69,7 @@ public class LockTogglePacket extends MyPacket<LockTogglePacket> {
 
                 int ownerLvl = Load.player(exilePacketContext.getPlayer()).professions.getLevel(recipe.profession);
                 if (recipe.getLevelRequirement() > ownerLvl) {
-                    exilePacketContext.getPlayer().sendSystemMessage(Chats.PROF_RECIPE_LEVEL_NOT_ENOUGH.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+                    exilePacketContext.getPlayer().sendSystemMessage(Chats.PROF_RECIPE_LEVEL_NOT_ENOUGH.locName(recipe.profession, recipe.getLevelRequirement(), ownerLvl).withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
                     return;
                 }
                 pbe.recipe_locked = true;

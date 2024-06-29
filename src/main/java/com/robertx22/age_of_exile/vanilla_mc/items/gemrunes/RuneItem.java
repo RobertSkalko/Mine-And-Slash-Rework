@@ -17,6 +17,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.SocketData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
@@ -139,6 +140,15 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
 
             if (data.uniqueStats != null && data.isUnique() && !data.uniqueStats.getUnique(data).runable) {
                 return ExplainedResult.failure(Chats.CANT_RUNE_THIS_UNIQUE.locName());
+            }
+
+            if (!data.rar.equals(IRarity.RUNEWORD_ID)) {
+                int runes = (int) data.sockets.getSocketed().stream().filter(x -> x.isRune()).count();
+                int gems = (int) data.sockets.getSocketed().stream().filter(x -> x.isGem()).count();
+                runes++;
+                if (gems > runes) {
+                    return ExplainedResult.failure(Chats.CANT_HAVE_MORE_RUNES_THAN_GEMS_IN_NON_RUNED.locName());
+                }
             }
 
             Rune rune = ExileDB.Runes().get(RuneItem.this.type.id);

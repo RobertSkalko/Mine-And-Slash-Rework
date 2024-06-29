@@ -24,6 +24,7 @@ public class IsHealthBellowPercentCondition extends StatCondition {
     @Override
     public boolean can(EffectEvent event, EffectSides statSource, StatData data, Stat stat) {
         LivingEntity en = event.getSide(side);
+        
         return perc > en.getHealth() / en.getMaxHealth() * 100;
     }
 

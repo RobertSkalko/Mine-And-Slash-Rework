@@ -191,3 +191,18 @@ v.5.5.16
 
 v.5.5.17
 - fix runewords not being made because code checked for null when it's no longer possible (added a default empty value)
+
+v.5.5.18
+- fix empty unique showing up
+- map rarity upgrade doesnt change lvl now
+- all attribs scales now
+- +aoe% stat capped to 100%. Totems are alread afk-ish builds, but this was a bit much
+- maps now drop up to rarity of current map
+- fix jei recipe gui
+- dmg chat msg now shows the result
+- if your resists go bellow the minus of the map requirement while in map, mobs will now do massively increased damage to you based on 5 * lacking resist by default.
+This is meant to disable the cheese of only giving yourself resists pre-map, then swapping off augments or gear.. But might punish players when their resists naturally drop.
+I'll have to see if i can avoid those, like the elemental weakness map affix.
+- non-runed items now can't have more runes than gems in them
+- "tped to map" msg now shows the map tooltip
+- fix unique stat souls

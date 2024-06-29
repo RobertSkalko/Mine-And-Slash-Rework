@@ -12,7 +12,7 @@ import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GearRarityPart extends BlueprintPart<GearRarity, ItemBlueprint> {
@@ -47,7 +47,18 @@ public class GearRarityPart extends BlueprintPart<GearRarity, ItemBlueprint> {
         }
 
         if (this.blueprint instanceof MapBlueprint) {
-            return Arrays.asList(ExileDB.GearRarities().get(IRarity.COMMON_ID));
+
+            var list = new ArrayList<GearRarity>();
+            var rar = ExileDB.GearRarities().get(IRarity.COMMON_ID);
+            list.add(rar);
+
+            if (blueprint.info.isMapWorld) {
+                while (rar.hasHigherRarity() && rar.getHigherRarity().item_tier <= this.blueprint.info.map.map.getRarity().item_tier) {
+                    rar = rar.getHigherRarity();
+                    list.add(rar);
+                }
+            }
+            return list;
         }
 
 

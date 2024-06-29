@@ -94,8 +94,12 @@ public class CraftingCategory implements IExtendableRecipeCategory<ProfessionRec
 
         List<Component> list = new ArrayList<>();
 
-        list.addAll(recipe.getTooltipJEI());
+        int diffx = (int) Math.abs(mouseX - 70);
+        int diffy = (int) Math.abs(mouseY - 22);
 
+        if (diffx < 10 && diffy < 10) {
+            list.addAll(recipe.getTooltipJEI());
+        }
         list.addAll(recipeExtension.getTooltipStrings(mouseX, mouseY));
 
         return list;

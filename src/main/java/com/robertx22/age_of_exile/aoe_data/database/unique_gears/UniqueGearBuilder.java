@@ -52,6 +52,11 @@ public class UniqueGearBuilder {
         return this;
     }
 
+    public UniqueGearBuilder weight(int w) {
+        this.uniq.weight = w;
+        return this;
+    }
+
     public UniqueGearBuilder setFlavorText(String txt) {
         this.uniq.flavor_text = txt;
         return this;

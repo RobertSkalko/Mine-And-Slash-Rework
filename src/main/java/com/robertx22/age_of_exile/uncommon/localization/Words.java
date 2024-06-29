@@ -27,6 +27,7 @@ public enum Words implements IAutoLocName {
     ARROW_DRAW_AMOUNT_MULTI("Bow Draw Amount Multi"),
     PVP_DMG_MULTI("PVP Dmg Multi"),
     MOB_RARITY_MULTI("Mob Rarity Dmg Multi"),
+    MAP_RES_REQ_LACK_DMG_MULTI("Player Lacking Map Resist Requirement DMG-Multi"),
     MOB_CONFIG_MULTI("Mob Config Dmg Multi"),
     WEAPON_BASIC_ATTACK_DMG_MULTI("Weapon Basic Attack Dmg Multi"),
     SPELL("Spell"),
@@ -34,7 +35,7 @@ public enum Words implements IAutoLocName {
     SOURCE("Source"),
     TARGET("Target"),
 
-    DAMAGE_MESSAGE("[%1$s] dealt %2$s %3$s"),
+    DAMAGE_MESSAGE("[%1$s] dealt %2$s %3$s with %4$s"),
 
     LOOT_MODIFIERS_INFO("Loot Modifiers:"),
 
