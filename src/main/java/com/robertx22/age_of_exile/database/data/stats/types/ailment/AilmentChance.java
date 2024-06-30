@@ -56,7 +56,6 @@ public class AilmentChance extends Stat {
                 if (effect.isSpell()) {
                     x.data.setString(EventData.SPELL, effect.data.getString(EventData.SPELL));
                 }
-                x.calcTargetEffects = false;
             }).build();
 
             event.Activate();

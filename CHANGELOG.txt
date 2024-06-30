@@ -206,3 +206,7 @@ I'll have to see if i can avoid those, like the elemental weakness map affix.
 - non-runed items now can't have more runes than gems in them
 - "tped to map" msg now shows the map tooltip
 - fix unique stat souls
+
+v.5.5.19
+- attempt to fix ele pene not working with ailments
+- fix map loot being a bit too high
