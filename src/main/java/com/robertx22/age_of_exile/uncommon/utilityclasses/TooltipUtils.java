@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
-import com.google.common.collect.ImmutableList;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
@@ -29,6 +28,7 @@ public class TooltipUtils {
 
     public static String CHECKMARK = ChatFormatting.GREEN + "\u2714";
     public static String X = ChatFormatting.RED + "\u2716";
+    static Character CHAR = "§".charAt(0); // TODO WTF INTELIJ
 
     public static MutableComponent color(ChatFormatting format, MutableComponent comp) {
         return Component.literal(format + "").append(comp);
@@ -50,7 +50,6 @@ public class TooltipUtils {
         tip.addAll(req.GetTooltipString(lvl, data));
     }
 
-
     public static void addEmpty(List<Component> tooltip) {
         tooltip.add(CLOC.blank(""));
     }
@@ -62,9 +61,7 @@ public class TooltipUtils {
     }
 
     public static MutableComponent level(int lvl) {
-        return Component.literal(ChatFormatting.YELLOW + "").append(Itemtips.LEVEL_TIP.locName())
-                .append(lvl + "")
-                .withStyle(ChatFormatting.YELLOW);
+        return Component.literal("").append(Itemtips.LEVEL_TIP.locName(lvl).withStyle(ChatFormatting.YELLOW));
 
     }
 
@@ -76,6 +73,8 @@ public class TooltipUtils {
 
     }
 
+    // private static final Pattern PATTERN = Pattern.compile("(?)§[0-9A-FK-OR]");
+
     public static List<MutableComponent> cutIfTooLong(MutableComponent comp, ChatFormatting format) {
         List<String> stringList = cutIfTooLong(CLOC.translate(comp));
         return stringList.stream()
@@ -83,10 +82,6 @@ public class TooltipUtils {
                 .collect(Collectors.toList());
 
     }
-
-    // private static final Pattern PATTERN = Pattern.compile("(?)§[0-9A-FK-OR]");
-
-    static Character CHAR = "§".charAt(0); // TODO WTF INTELIJ
 
     public static List<String> cutIfTooLong(String str) {
         if (true) {
@@ -218,7 +213,7 @@ public class TooltipUtils {
     }
 
     public static MutableComponent tier(int tier) {
-        return Itemtips.TIER_TIP.locName().append(tier + "");
+        return Itemtips.TIER_TIP.locName(tier);
 
     }
 
@@ -283,16 +278,21 @@ public class TooltipUtils {
 
 
     public static List<Component> splitLongText(List<? extends Component> comps) {
-        ImmutableList.Builder<Component> builder = ImmutableList.builder();
-        comps.forEach(comp -> {
-            Style format = comp.getStyle();
-            String[] originalList = comp.getString().split("\n");
+        ArrayList<Component> arrayList = new ArrayList<>();
+        for (Component target : comps) {
+            if (target.getString().contains("\n")) {
+                Style format = target.getStyle();
+                String[] originalList = target.getString().split("\n");
 
-            for (String comp1 : originalList) {
-                builder.add(ExileText.ofText(comp1).get().withStyle(format));
+                for (String comp1 : originalList) {
+                    arrayList.add(Component.literal(comp1).withStyle(format));
+                }
+            } else {
+                arrayList.add(target);
             }
-        });
-        return builder.build();
+
+        }
+        return arrayList;
     }
 
 

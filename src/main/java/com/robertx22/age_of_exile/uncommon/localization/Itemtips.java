@@ -15,7 +15,7 @@ public enum Itemtips implements IAutoLocName {
     ITEM_TYPE("Item Type: "),
     TIER_TIP("Tier: %1$s"),
     ITEM_TIER_TIP("Item Tier: "),
-    LEVEL_TIP("Level "),
+    LEVEL_TIP("Level %1$s"),
 
     LEVEL_REQ("Level Min: %1$s"),
     USE_TIP("[Drag onto gear to use]"),
@@ -26,8 +26,8 @@ public enum Itemtips implements IAutoLocName {
     Unbreakable("Unbreakable"),
     Restores("Restores: %1$s%%"),
 
-    CHEST_CONTAINS("Contains: "),
-    NEED_KEY("Needs Key: "),
+    CHEST_CONTAINS("Contains: %1$s"),
+    NEED_KEY("Needs %1$s "),
     EMPTY_SOCKET("[Socket]"),
 
     AURA_RESERVATION("Aura Reservation: "),
