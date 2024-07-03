@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.maps;
 
 
+import com.google.common.collect.ImmutableList;
 import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
 import com.robertx22.age_of_exile.content.ubers.UberBossArena;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
@@ -8,7 +9,11 @@ import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.database.registry.RarityRegistryContainer;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
+import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
+import com.robertx22.age_of_exile.gui.texts.textblocks.*;
+import com.robertx22.age_of_exile.gui.texts.textblocks.mapblocks.MapStatBlock;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequirement;
@@ -30,7 +35,6 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipStatsAligner;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.library_of_exile.wrappers.ExileText;
-import joptsimple.internal.Strings;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -42,12 +46,8 @@ import java.util.stream.Collectors;
 
 public class MapItemData implements ICommonDataItem<GearRarity> {
 
-    public MapItemData() {
-
-    }
-
     public static int MAX_TIER = 100;
-
+    private static MapItemData empty;
     public int uber_tier = 0;
     public String uber = "";
 
@@ -59,6 +59,19 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
 
     public String uuid = UUID.randomUUID().toString();
+
+    public MapItemData() {
+
+    }
+
+    public static MapItemData empty() {
+        if (empty == null) {
+            empty = new MapItemData();
+        }
+        return empty;
+
+    }
+
 
     public boolean isUber() {
         return ExileDB.UberBoss().isRegistered(uber);
@@ -104,21 +117,9 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
         return stats;
     }
 
-
-    private static MapItemData empty;
-
-    public static MapItemData empty() {
-        if (empty == null) {
-            empty = new MapItemData();
-        }
-        return empty;
-
-    }
-
     public boolean isEmpty() {
         return this.equals(empty());
     }
-
 
     public float getBonusLootMulti() {
         return bonusFormula();
@@ -134,88 +135,59 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
         return getRarity().map_xp_multi;
     }
 
-
     public List<MapAffixData> getAllAffixesThatAffect(AffectedEntities aff) {
         return affixes.stream().filter(x -> x.getAffix() != null && x.getAffix().affected == aff).collect(Collectors.toList());
     }
 
 
-    public List<Component> getTooltip() {
-        List<Component> tooltip = new ArrayList<>();
-
-        GearRarity rarity = getRarity();
-
-        tooltip.add(TooltipUtils.level(this.lvl));
-        TooltipUtils.addEmpty(tooltip);
-
-
-        addAffixTypeToTooltip(this, tooltip, AffectedEntities.Mobs);
-        this.getTierStats().forEach(x -> tooltip.addAll(x.GetTooltipString(new TooltipInfo())));
-
-        addAffixTypeToTooltip(this, tooltip, AffectedEntities.Players);
-        addAffixTypeToTooltip(this, tooltip, AffectedEntities.All);
-
-        TooltipUtils.addEmpty(tooltip);
-
-
-        TooltipUtils.addEmpty(tooltip);
-
-        MutableComponent comma = Gui.COMMA_SEPARATOR.locName().withStyle(ChatFormatting.GRAY);
-
-
-
-        MutableComponent comp = TooltipUtils.rarityShort(rarity)
-                .append(comma)
-                .withStyle(ChatFormatting.GREEN);
-
-        comp.append(Itemtips.Exp.locName(this.getBonusExpAmountInPercent()));
-
-
-        if (getBonusLootAmountInPercent() > 0) {
-            comp.append(comma);
-
-
-            comp.append(Itemtips.Loot.locName(this.getBonusLootAmountInPercent()).withStyle(ChatFormatting.YELLOW));
-        }
-        comp.append(comma)
-                .append(Itemtips.TIER_TIP.locName().withStyle(ChatFormatting.GOLD)
-                        .append(this.tier + ""));
-
-        tooltip.add(comp);
-
-        tooltip.add(ExileText.emptyLine().get());
-
-
-        List<GearRarity> possiblerarities = ExileDB.GearRarities().getFilterWrapped(x -> this.getRarity().item_tier >= ExileDB.GearRarities().get(x.min_map_rarity_to_drop).item_tier).list;
-
-        possiblerarities.sort(Comparator.comparingInt(x -> x.item_tier));
-        tooltip.add(Words.POSSIBLE_DROS.locName());
-        //  tooltip.add(TextUTIL.mergeList(possiblerarities.stream().map(x -> x.locName().withStyle(x.textFormatting())).collect(Collectors.toList())));
-
-        var list = possiblerarities.stream().map(x -> x.textFormatting() + x.locName().getString()).collect(Collectors.toList());
-
-        tooltip.add(Gui.COMMA_SEPARATOR.locName());
-
-
-        TooltipUtils.addEmpty(tooltip);
-        if (!getStatReq().isEmpty()) {
-            tooltip.add(Words.Requirements.locName().withStyle(ChatFormatting.GREEN));
-            TooltipUtils.addRequirements(tooltip, this.lvl, getStatReq(), Load.Unit(ClientOnly.getPlayer()));
-        }
-        if (this.isUber()) {
-            TooltipUtils.addEmpty(tooltip);
-            tooltip.add(Words.AreaContains.locName().withStyle(ChatFormatting.RED));
-        }
-        TooltipUtils.removeDoubleBlankLines(tooltip);
-
-        return tooltip;
-
-    }
-
     @Override
     public void BuildTooltip(TooltipContext ctx) {
         if (ctx.data != null) {
-            ctx.tooltip.addAll(getTooltip());
+            TooltipInfo tooltipInfo = new TooltipInfo();
+            List<Component> release = new ExileTooltips()
+                    .accept(new NameBlock(Collections.singletonList(Component.translatable(ctx.stack.getDescriptionId()))))
+                    .accept(new RequirementBlock()
+                            .setLevelRequirement(this.lvl)
+                            .setStatRequirement(getStatReq()))
+                    .accept(new RarityBlock(this.getRarity()))
+                    .accept(new MapStatBlock(this))
+                    .accept(new AdditionalBlock(() -> ImmutableList.of(
+                            Itemtips.Exp.locName(this.getBonusExpAmountInPercent()),
+                            Itemtips.Loot.locName(this.getBonusLootAmountInPercent()).withStyle(ChatFormatting.YELLOW),
+                            Itemtips.TIER_TIP.locName(this.tier).withStyle(ChatFormatting.GOLD))))
+                    //handle possibleRarities while not pressing Alt
+                    .accept(new AdditionalBlock(() -> {
+                        MutableComponent starter = Component.literal("");
+                        String block = "\u25A0";
+                        RarityRegistryContainer<GearRarity> gearRarityRarityRegistryContainer = ExileDB.GearRarities();
+                        List<GearRarity> possibleRarities = gearRarityRarityRegistryContainer.getFilterWrapped(x -> this.getRarity().item_tier >= gearRarityRarityRegistryContainer.get(x.min_map_rarity_to_drop).item_tier).list;
+                        possibleRarities.sort(Comparator.comparingInt(x -> x.item_tier));
+                        Set<GearRarity> allRarities = new HashSet<>(gearRarityRarityRegistryContainer.getList());
+
+                        possibleRarities.forEach(x -> starter.append(Component.literal(block).withStyle(x.textFormatting())));
+
+                        int leftRarities = allRarities.size() - possibleRarities.size();
+                        for (int i = 0; i < leftRarities; i++) {
+                            starter.append(Component.literal(block).withStyle(ChatFormatting.DARK_GRAY));
+                        }
+                        return Collections.singletonList(starter);
+                    }).showWhen(() -> !tooltipInfo.hasAltDown))
+                    //handle possibleRarities while pressing Alt
+                    .accept(new AdditionalBlock(() -> {
+                        RarityRegistryContainer<GearRarity> gearRarityRarityRegistryContainer = ExileDB.GearRarities();
+                        List<GearRarity> possibleRarities = gearRarityRarityRegistryContainer.getFilterWrapped(x -> this.getRarity().item_tier >= gearRarityRarityRegistryContainer.get(x.min_map_rarity_to_drop).item_tier).list;
+                        possibleRarities.sort(Comparator.comparingInt(x -> x.item_tier));
+
+                        List<MutableComponent> list = possibleRarities.stream().map(x -> x.locName().withStyle(x.textFormatting())).toList();
+
+                        return ImmutableList.of(Words.POSSIBLE_DROPS.locName(),
+                                TooltipUtils.joinMutableComps(list.iterator(), Gui.COMMA_SEPARATOR.locName()));
+                    }).showWhen(() -> tooltipInfo.hasAltDown))
+                    .accept(new AdditionalBlock(Collections.singletonList(Words.AreaContains.locName().withStyle(ChatFormatting.RED))))
+                    .accept(new InformationBlock().onlyAlt()).release();
+            ctx.tooltip.clear();
+            ctx.tooltip.addAll(release);
+
         }
     }
 
@@ -226,44 +198,6 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
     private int getBonusExpAmountInPercent() {
         return (int) ((this.getExpMulti() - 1) * 100);
     }
-
-
-    private static void addAffixTypeToTooltip(MapItemData data, List<Component> tooltip, AffectedEntities affected) {
-
-        List<MapAffixData> affixes = new ArrayList<>(data.getAllAffixesThatAffect(affected));
-
-        if (affixes.size() == 0) {
-            return;
-        }
-
-        MutableComponent str = ExileText.ofText("").get();
-
-        if (affected.equals(AffectedEntities.Players)) {
-            str.append(Words.Player_Affixes.locName());
-        } else if (affected.equals(AffectedEntities.Mobs)) {
-            str.append(Words.Mob_Affixes.locName());
-        } else {
-            str.append(Words.Affixes_Affecting_All.locName());
-        }
-
-        tooltip.add(str.withStyle(ChatFormatting.AQUA));
-
-        List<Component> preList = new ArrayList<>();
-
-        for (MapAffixData affix : affixes) {
-
-            for (ExactStatData statmod : affix.getAffix().getStats(affix.p, data.getLevel())) {
-
-                TooltipInfo info = new TooltipInfo();
-                preList.addAll(statmod.GetTooltipString(info));
-            }
-
-        }
-        List<Component> finalList = new TooltipStatsAligner(preList).buildNewTooltipsStats();
-        tooltip.addAll(finalList);
-
-    }
-
 
     public List<StatContext> getStatAndContext(LivingEntity en) {
         List<ExactStatData> stats = new ArrayList<>();
