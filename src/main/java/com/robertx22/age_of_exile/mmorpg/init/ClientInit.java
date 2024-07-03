@@ -13,6 +13,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.SocketData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.network.chat.contents.LiteralContents;
@@ -77,11 +78,16 @@ public class ClientInit {
                     if (!gems.isEmpty()) {
 
                         List<Either<FormattedText, TooltipComponent>> list = x.getTooltipElements();
-                        for (int i = 0; i < list.size() && e < gems.size(); i++) {
+                        for (int i = 0; i < list.size(); i++) {
                             Optional<FormattedText> o = list.get(i).left();
                             if (o.isPresent() && o.get() instanceof Component comp && comp.getContents() instanceof LiteralContents tc) {
                                 if (tc.text().contains("[SOCKET_PLACEHOLDER]")) {
-                                    list.set(i, Either.right(new SocketTooltip.SocketComponent(x.getItemStack(), Collections.singletonList(gems.get(e)))));
+                                    if (e < gems.size()){
+                                        list.set(i, Either.right(new SocketTooltip.SocketComponent(x.getItemStack(), Collections.singletonList(gems.get(e)))));
+                                    } else {
+                                        list.remove(i);
+                                        i--;
+                                    }
                                     e++;
 
                                 }
