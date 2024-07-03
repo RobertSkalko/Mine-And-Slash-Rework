@@ -371,7 +371,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
             }
         }
 
-        MutableComponent taglist = TooltipUtils.getMutableTags(this.config.tags.getTags(SpellTag.SERIALIZER).stream().map(x -> x.locName()).iterator(), Gui.COMMA_SEPARATOR.locName());
+        MutableComponent taglist = TooltipUtils.joinMutableComps(this.config.tags.getTags(SpellTag.SERIALIZER).stream().map(x -> x.locName()).iterator(), Gui.COMMA_SEPARATOR.locName());
         MutableComponent tagtext = Words.TAGS.locName().append(taglist);
 
         list.add(tagtext);

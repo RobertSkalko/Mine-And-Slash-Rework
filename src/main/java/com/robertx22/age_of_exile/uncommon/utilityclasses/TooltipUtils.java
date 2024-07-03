@@ -296,7 +296,7 @@ public class TooltipUtils {
     }
 
 
-    public static MutableComponent getMutableTags(Iterator<?> iterator, MutableComponent separator) {
+    public static MutableComponent joinMutableComps(Iterator<?> iterator, MutableComponent separator) {
         if (separator == null) {
             separator = ExileText.emptyLine().get();
         }

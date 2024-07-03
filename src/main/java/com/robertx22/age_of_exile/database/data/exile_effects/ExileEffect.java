@@ -191,7 +191,7 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
 
         List<EffectTag> tags = this.tags.getTags(EffectTag.SERIALIZER);
 
-        var tagtext = Words.TAGS.locName().append(TooltipUtils.getMutableTags(tags.stream().map(IAutoLocName::locName).iterator(), Gui.COMMA_SEPARATOR.locName()));
+        var tagtext = Words.TAGS.locName().append(TooltipUtils.joinMutableComps(tags.stream().map(IAutoLocName::locName).iterator(), Gui.COMMA_SEPARATOR.locName()));
 
 
         list.add(tagtext.withStyle(ChatFormatting.YELLOW));
