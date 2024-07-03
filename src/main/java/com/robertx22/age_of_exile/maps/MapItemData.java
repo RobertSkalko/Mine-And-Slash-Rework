@@ -139,54 +139,60 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
         return affixes.stream().filter(x -> x.getAffix() != null && x.getAffix().affected == aff).collect(Collectors.toList());
     }
 
+    public List<Component> getTooltip() {
+        TooltipInfo tooltipInfo = new TooltipInfo();
+        return new ExileTooltips()
+                .accept(new NameBlock(Collections.singletonList(Component.translatable("item.mmorpg.map"))))
+                .accept(new RequirementBlock()
+                        .setLevelRequirement(this.lvl)
+                        .setStatRequirement(getStatReq()))
+                .accept(new RarityBlock(this.getRarity()))
+                .accept(new MapStatBlock(this))
+                .accept(new AdditionalBlock(() -> ImmutableList.of(
+                        Itemtips.Exp.locName(this.getBonusExpAmountInPercent()).withStyle(ChatFormatting.GOLD),
+                        Itemtips.Loot.locName(this.getBonusLootAmountInPercent()).withStyle(ChatFormatting.GOLD),
+                        Itemtips.TIER_TIP.locName(this.tier).withStyle(ChatFormatting.GOLD))))
+                //handle possibleRarities while not pressing Alt
+                .accept(new AdditionalBlock(() -> {
+                    MutableComponent starter = Component.literal("");
+                    String block = "\u25A0";
+                    RarityRegistryContainer<GearRarity> gearRarityRarityRegistryContainer = ExileDB.GearRarities();
+                    Set<GearRarity> possibleRarities = new HashSet<>(gearRarityRarityRegistryContainer.getFilterWrapped(x -> this.getRarity().item_tier >= gearRarityRarityRegistryContainer.get(x.min_map_rarity_to_drop).item_tier).list);
 
+                    List<GearRarity> allRarities = gearRarityRarityRegistryContainer.getList();
+                    allRarities.sort(Comparator.comparingInt(x -> x.item_tier));
+
+                    allRarities
+                            .forEach(x -> {
+                                if (possibleRarities.contains(x)){
+                                    starter.append(Component.literal(block).withStyle(x.textFormatting()));
+                                } else {
+                                    starter.append(Component.literal(block).withStyle(ChatFormatting.DARK_GRAY));
+                                }
+                            });
+
+                    return Collections.singletonList(starter);
+                }).showWhen(() -> !tooltipInfo.hasAltDown))
+                //handle possibleRarities while pressing Alt
+                .accept(new AdditionalBlock(() -> {
+                    RarityRegistryContainer<GearRarity> gearRarityRarityRegistryContainer = ExileDB.GearRarities();
+                    List<GearRarity> possibleRarities = gearRarityRarityRegistryContainer.getFilterWrapped(x -> this.getRarity().item_tier >= gearRarityRarityRegistryContainer.get(x.min_map_rarity_to_drop).item_tier).list;
+                    possibleRarities.sort(Comparator.comparingInt(x -> x.item_tier));
+
+                    List<MutableComponent> list = possibleRarities.stream().map(x -> x.locName().withStyle(x.textFormatting())).toList();
+
+                    return ImmutableList.of(Words.POSSIBLE_DROPS.locName(),
+                            TooltipUtils.joinMutableComps(list.iterator(), Gui.COMMA_SEPARATOR.locName()));
+                }).showWhen(() -> tooltipInfo.hasAltDown))
+                .accept(new AdditionalBlock(Collections.singletonList(Words.AreaContains.locName().withStyle(ChatFormatting.RED))))
+                .accept(new InformationBlock().onlyAlt()).release();
+
+    }
     @Override
     public void BuildTooltip(TooltipContext ctx) {
         if (ctx.data != null) {
-            TooltipInfo tooltipInfo = new TooltipInfo();
-            List<Component> release = new ExileTooltips()
-                    .accept(new NameBlock(Collections.singletonList(Component.translatable(ctx.stack.getDescriptionId()))))
-                    .accept(new RequirementBlock()
-                            .setLevelRequirement(this.lvl)
-                            .setStatRequirement(getStatReq()))
-                    .accept(new RarityBlock(this.getRarity()))
-                    .accept(new MapStatBlock(this))
-                    .accept(new AdditionalBlock(() -> ImmutableList.of(
-                            Itemtips.Exp.locName(this.getBonusExpAmountInPercent()),
-                            Itemtips.Loot.locName(this.getBonusLootAmountInPercent()).withStyle(ChatFormatting.YELLOW),
-                            Itemtips.TIER_TIP.locName(this.tier).withStyle(ChatFormatting.GOLD))))
-                    //handle possibleRarities while not pressing Alt
-                    .accept(new AdditionalBlock(() -> {
-                        MutableComponent starter = Component.literal("");
-                        String block = "\u25A0";
-                        RarityRegistryContainer<GearRarity> gearRarityRarityRegistryContainer = ExileDB.GearRarities();
-                        List<GearRarity> possibleRarities = gearRarityRarityRegistryContainer.getFilterWrapped(x -> this.getRarity().item_tier >= gearRarityRarityRegistryContainer.get(x.min_map_rarity_to_drop).item_tier).list;
-                        possibleRarities.sort(Comparator.comparingInt(x -> x.item_tier));
-                        Set<GearRarity> allRarities = new HashSet<>(gearRarityRarityRegistryContainer.getList());
-
-                        possibleRarities.forEach(x -> starter.append(Component.literal(block).withStyle(x.textFormatting())));
-
-                        int leftRarities = allRarities.size() - possibleRarities.size();
-                        for (int i = 0; i < leftRarities; i++) {
-                            starter.append(Component.literal(block).withStyle(ChatFormatting.DARK_GRAY));
-                        }
-                        return Collections.singletonList(starter);
-                    }).showWhen(() -> !tooltipInfo.hasAltDown))
-                    //handle possibleRarities while pressing Alt
-                    .accept(new AdditionalBlock(() -> {
-                        RarityRegistryContainer<GearRarity> gearRarityRarityRegistryContainer = ExileDB.GearRarities();
-                        List<GearRarity> possibleRarities = gearRarityRarityRegistryContainer.getFilterWrapped(x -> this.getRarity().item_tier >= gearRarityRarityRegistryContainer.get(x.min_map_rarity_to_drop).item_tier).list;
-                        possibleRarities.sort(Comparator.comparingInt(x -> x.item_tier));
-
-                        List<MutableComponent> list = possibleRarities.stream().map(x -> x.locName().withStyle(x.textFormatting())).toList();
-
-                        return ImmutableList.of(Words.POSSIBLE_DROPS.locName(),
-                                TooltipUtils.joinMutableComps(list.iterator(), Gui.COMMA_SEPARATOR.locName()));
-                    }).showWhen(() -> tooltipInfo.hasAltDown))
-                    .accept(new AdditionalBlock(Collections.singletonList(Words.AreaContains.locName().withStyle(ChatFormatting.RED))))
-                    .accept(new InformationBlock().onlyAlt()).release();
             ctx.tooltip.clear();
-            ctx.tooltip.addAll(release);
+            ctx.tooltip.addAll(getTooltip());
 
         }
     }
