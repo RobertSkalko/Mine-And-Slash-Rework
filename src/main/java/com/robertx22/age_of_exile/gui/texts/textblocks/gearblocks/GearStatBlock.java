@@ -108,9 +108,7 @@ public class GearStatBlock extends StatBlock {
 
 
             Map<String, Integer> priorityMap = new HashMap<>();
-            Arrays.asList(Elements.values()).forEach(x -> {
-                priorityMap.put(x.guidName, x.ordinal());
-            });
+            Arrays.asList(Elements.values()).forEach(x -> priorityMap.put(x.guidName, x.ordinal()));
 
 
             Comparator<TooltipStatInfo> eleOrder = (s1, s2) -> {
