@@ -185,7 +185,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                             TooltipUtils.joinMutableComps(list.iterator(), Gui.COMMA_SEPARATOR.locName()));
                 }).showWhen(() -> tooltipInfo.hasAltDown))
                 .accept(new AdditionalBlock(Collections.singletonList(Words.AreaContains.locName().withStyle(ChatFormatting.RED))))
-                .accept(new InformationBlock().onlyAlt()).release();
+                .accept(new InformationBlock().setAll()).release();
 
     }
     @Override

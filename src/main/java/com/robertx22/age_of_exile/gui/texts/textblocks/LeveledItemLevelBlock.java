@@ -1,4 +1,4 @@
-package com.robertx22.age_of_exile.gui.texts.textblocks.gearblocks;
+package com.robertx22.age_of_exile.gui.texts.textblocks;
 
 import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
 import com.robertx22.age_of_exile.gui.texts.textblocks.AbstractTextBlock;

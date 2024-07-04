@@ -1,11 +1,6 @@
 package com.robertx22.age_of_exile.gui.texts;
 
-import com.google.common.collect.ImmutableMap;
 import com.robertx22.age_of_exile.gui.texts.textblocks.*;
-import com.robertx22.age_of_exile.gui.texts.textblocks.gearblocks.DurabilityBlock;
-import com.robertx22.age_of_exile.gui.texts.textblocks.gearblocks.GearStatBlock;
-import com.robertx22.age_of_exile.gui.texts.textblocks.gearblocks.LeveledItemLevelBlock;
-import com.robertx22.age_of_exile.gui.texts.textblocks.mapblocks.MapStatBlock;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import lombok.NoArgsConstructor;

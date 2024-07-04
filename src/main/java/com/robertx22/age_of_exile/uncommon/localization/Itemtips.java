@@ -9,6 +9,9 @@ public enum Itemtips implements IAutoLocName {
     //add "tip" at the end to avoid same variable call
     //you can use \n in here, just remember use the splitLongText() to process it.
     //a special method splitLongText() in TooltipsUtils.java can split the sentence into different line by replacing the "\n", achieving a actual line break function.
+    SHIFT_TIP("[Shift]: Detail"),
+    ALT_TIP("[Alt]: Desc"),
+    CTRL_TIP("[Ctrl]: Hide"),
     TIER_INFLUENCE("Tier Influence For Mob"),
     RARITY_LINE("%1$s Item"),
     RARITY_TIP("Rarity: "),
