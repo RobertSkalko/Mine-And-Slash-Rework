@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.gui.texts.textblocks;
 
 import com.google.common.collect.ImmutableList;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
+import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequirement;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
@@ -75,5 +76,10 @@ public class RequirementBlock extends AbstractTextBlock {
         return builder.build();
 
 
+    }
+
+    @Override
+    public ExileTooltips.BlockCategories getCategory() {
+        return ExileTooltips.BlockCategories.REQUIREMENT;
     }
 }

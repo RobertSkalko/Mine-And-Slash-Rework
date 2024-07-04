@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.gui.texts.textblocks;
 
 import com.google.common.collect.ImmutableList;
+import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
 import lombok.AllArgsConstructor;
 import net.minecraft.network.chat.Component;
 
@@ -18,5 +19,10 @@ public class NameBlock extends AbstractTextBlock{
     public List<? extends Component> getAvailableComponents() {
         //not colorize, leave it to ExileTooltips
         return name;
+    }
+
+    @Override
+    public ExileTooltips.BlockCategories getCategory() {
+        return ExileTooltips.BlockCategories.NAME;
     }
 }

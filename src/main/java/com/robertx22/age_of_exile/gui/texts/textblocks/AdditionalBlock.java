@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.gui.texts.textblocks;
 
 import com.google.common.collect.ImmutableList;
+import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import lombok.RequiredArgsConstructor;
@@ -45,6 +46,11 @@ public class AdditionalBlock extends AbstractTextBlock {
         } else {
             return (List<? extends Component>)EMPTY_LIST;
         }
+    }
+
+    @Override
+    public ExileTooltips.BlockCategories getCategory() {
+        return ExileTooltips.BlockCategories.ADDITIONAL;
     }
 
     public AdditionalBlock showWhen(Supplier<Boolean> condition){

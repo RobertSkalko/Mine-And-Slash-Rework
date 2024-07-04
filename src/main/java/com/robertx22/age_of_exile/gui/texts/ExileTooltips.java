@@ -13,42 +13,20 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @NoArgsConstructor
 public class ExileTooltips {
-
     public static Component EMPTY_LINE = Component.literal("");
-    public final String aBlockPrefix = "additional_";
-    private final HashMap<String, AbstractTextBlock> blockContainer = new HashMap<>();
+
+    private final List<AbstractTextBlock> blockContainer = new ArrayList<>();
     //use this map to standardize the same blocks name in different tooltips.
-    private final ImmutableMap<Class<? extends AbstractTextBlock>, String> blockNameMap = ImmutableMap.of(
-            NameBlock.class, "name",
-            RarityBlock.class, "rarity",
-            RequirementBlock.class, "requirement",
-            StatBlock.class, "stat",
-            GearStatBlock.class, "stat",
-            MapStatBlock.class, "stat",
-            DurabilityBlock.class, "durability",
-            LeveledItemLevelBlock.class, "leveled_item_level",
-            InformationBlock.class, "information"
-    );
-    private int additionalBlockCount;
+
 
     public ExileTooltips accept(AbstractTextBlock block) {
-        if (blockNameMap.containsKey(block.getClass())) {
-            blockContainer.put(blockNameMap.get(block.getClass()), block);
-        } else {
-            // handle AdditionalBlock in this part
-            if (block instanceof AdditionalBlock additionalBlock) {
-                blockContainer.put(aBlockPrefix + additionalBlockCount, additionalBlock);
-                additionalBlockCount++;
-            }
-        }
+        blockContainer.add(block);
         return this;
     }
 
@@ -56,15 +34,18 @@ public class ExileTooltips {
         IgnoreNullList<Component> list = new IgnoreNullList<>();
 
         MutableComponent emptyLine = ExileText.emptyLine().get();
+        Map<BlockCategories, List<AbstractTextBlock>> collect = blockContainer.stream().collect(Collectors.groupingBy(AbstractTextBlock::getCategory));
 
 
         //handle the req, stat. Should be noticed that the order of these blocks are fixed, and thats the point in order to maintain the style consistency of tooltips.
-        Optional.ofNullable(blockContainer.get("name"))
+        Optional.ofNullable(collect.get(BlockCategories.NAME))
+                .map(x -> x.get(0))
                 .map(AbstractTextBlock::getAvailableComponents)
                 .ifPresent(x -> {
-                    if (blockContainer.get("rarity") != null) {
+                    List<AbstractTextBlock> rarity = collect.get(BlockCategories.RARITY);
+                    if (rarity != null) {
                         for (Component component : x) {
-                            list.add(component.copy().withStyle(((RarityBlock) blockContainer.get("rarity")).rarity.textFormatting()));
+                            list.add(component.copy().withStyle(((RarityBlock) rarity.get(0)).rarity.textFormatting()));
                         }
                     } else {
                         for (Component component : x) {
@@ -76,47 +57,67 @@ public class ExileTooltips {
         list.add(emptyLine);
 
         Stream.of(
-                        blockContainer.get("requirement"),
-                        blockContainer.get("stat"),
-                        blockContainer.get("leveled_item_level")
-                ).filter(x -> Objects.nonNull(x) && !x.getAvailableComponents().isEmpty())
+                        collect.get(BlockCategories.REQUIREMENT),
+                        collect.get(BlockCategories.STAT),
+                        collect.get(BlockCategories.LEVELED_ITEM_LEVEL)
+                        )
+                .filter(Objects::nonNull)
+                .map(x -> x.get(0))
+                .filter(x -> !x.getAvailableComponents().isEmpty())
                 .forEachOrdered(x -> {
                     list.addAll(x.getAvailableComponents());
                     list.add(emptyLine);
                 });
 
         //handle additional blocks, the order of aBs is the putting order.
-
-        for (int i = 0; i < additionalBlockCount; i++) {
-            AbstractTextBlock aBlock = blockContainer.get(aBlockPrefix + i);
-            if (aBlock != null && !aBlock.getAvailableComponents().isEmpty()) {
-                list.addAll(aBlock.getAvailableComponents());
-                list.add(emptyLine);
+        List<AbstractTextBlock> additions = collect.get(BlockCategories.ADDITIONAL);
+        if (additions != null){
+            for (AbstractTextBlock abstractTextBlock : additions) {
+                if (abstractTextBlock != null && !abstractTextBlock.getAvailableComponents().isEmpty()) {
+                    list.addAll(abstractTextBlock.getAvailableComponents());
+                    list.add(emptyLine);
+                }
             }
-
         }
 
+
         Stream.of(
-                        blockContainer.get("rarity"),
-                        blockContainer.get("durability")
-                ).filter(x -> Objects.nonNull(x) && !x.getAvailableComponents().isEmpty())
+                        collect.get(BlockCategories.RARITY),
+                        collect.get(BlockCategories.DURABILITY)
+                )
+                .filter(Objects::nonNull)
+                .map(x -> x.get(0))
+                .filter(x -> !x.getAvailableComponents().isEmpty())
                 .forEachOrdered(x -> {
                     list.addAll(x.getAvailableComponents());
                 });
 
         list.add(emptyLine);
-        Optional.ofNullable(blockContainer.get("information"))
+        Optional.ofNullable(collect.get(BlockCategories.INFORMATION))
+                .map(x -> x.get(0))
                 .map(AbstractTextBlock::getAvailableComponents)
                 .ifPresent(list::addAll);
 
 
-        if (list.get(list.size() - 1).getString().isBlank()){
+        if (list.get(list.size() - 1).getString().isBlank()) {
             list.remove(list.size() - 1);
         }
 
         List<Component> postEditList = TooltipUtils.splitLongText(list);
 
         return postEditList;
+
+    }
+
+    public enum BlockCategories {
+        NAME,
+        RARITY,
+        REQUIREMENT,
+        STAT,
+        DURABILITY,
+        LEVELED_ITEM_LEVEL,
+        INFORMATION,
+        ADDITIONAL
 
     }
 

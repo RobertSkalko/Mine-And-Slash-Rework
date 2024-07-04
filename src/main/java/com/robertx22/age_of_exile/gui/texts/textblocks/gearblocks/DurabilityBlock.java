@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.gui.texts.textblocks.gearblocks;
 
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
+import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
 import com.robertx22.age_of_exile.gui.texts.textblocks.AbstractTextBlock;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import lombok.RequiredArgsConstructor;
@@ -28,5 +29,10 @@ public class DurabilityBlock extends AbstractTextBlock {
             }
         }
         return Collections.emptyList();
+    }
+
+    @Override
+    public ExileTooltips.BlockCategories getCategory() {
+        return ExileTooltips.BlockCategories.DURABILITY;
     }
 }

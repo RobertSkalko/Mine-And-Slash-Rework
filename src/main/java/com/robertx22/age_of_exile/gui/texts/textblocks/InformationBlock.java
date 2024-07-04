@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.gui.texts.textblocks;
 
+import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,11 @@ public class InformationBlock extends AbstractTextBlock {
     public List<? extends Component> getAvailableComponents() {
         return onlyAlt ? Collections.singletonList(Words.PressAltForStatInfo.locName().withStyle(ChatFormatting.BLUE))
         : Collections.singletonList(Component.translatable(SlashRef.MODID + ".tooltip." + "press_shift_more_info").withStyle(ChatFormatting.BLUE));
+    }
+
+    @Override
+    public ExileTooltips.BlockCategories getCategory() {
+        return ExileTooltips.BlockCategories.INFORMATION;
     }
 
     public InformationBlock onlyAlt(){
