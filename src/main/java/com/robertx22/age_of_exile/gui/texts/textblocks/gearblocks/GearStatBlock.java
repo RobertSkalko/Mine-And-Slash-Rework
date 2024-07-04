@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.*;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.MergedStats;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
+import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import lombok.RequiredArgsConstructor;
@@ -105,12 +106,12 @@ public class GearStatBlock extends StatBlock {
                 return Integer.compare(p1, p2);
             };
 
+
             Map<String, Integer> priorityMap = new HashMap<>();
-            priorityMap.put("fire", 2);
-            priorityMap.put("lightning", 5);
-            priorityMap.put("cold", 4);
-            priorityMap.put("chaos", 3);
-            priorityMap.put("physical", 1);
+            Arrays.asList(Elements.values()).forEach(x -> {
+                priorityMap.put(x.guidName, x.ordinal());
+            });
+
 
             Comparator<TooltipStatInfo> eleOrder = (s1, s2) -> {
                 int p1 = getPriority(s1.stat.GUID(), priorityMap);
