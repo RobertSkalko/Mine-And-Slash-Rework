@@ -1,0 +1,28 @@
+package com.robertx22.age_of_exile.gui.texts.textblocks.usableitemblocks;
+
+import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
+import com.robertx22.age_of_exile.gui.texts.textblocks.AbstractTextBlock;
+import net.minecraft.network.chat.Component;
+
+import javax.annotation.Nonnull;
+import java.util.List;
+
+public class UsageBlock extends AbstractTextBlock {
+
+    @Nonnull
+    public List<? extends Component> components;
+
+    public UsageBlock(@Nonnull List<? extends Component> components) {
+        this.components = components;
+    }
+
+    @Override
+    public List<? extends Component> getAvailableComponents() {
+        return components;
+    }
+
+    @Override
+    public ExileTooltips.BlockCategories getCategory() {
+        return ExileTooltips.BlockCategories.USAGE;
+    }
+}

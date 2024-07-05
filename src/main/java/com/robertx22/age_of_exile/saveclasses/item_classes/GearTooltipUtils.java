@@ -51,7 +51,7 @@ public class GearTooltipUtils {
                             return Collections.singletonList(Words.Energy_Cost_Per_Mob.locName(cost, permob, damageFactor).withStyle(ChatFormatting.GREEN));
                         }).showWhen(() -> info.hasShiftDown && gear.GetBaseGearType().getGearSlot().weapon_data.damage_multiplier > 0)
                 )
-                .accept(new InformationBlock().setAll())
+                .accept(new OperationTipBlock().setAll())
                 .accept(new DurabilityBlock(stack))
                 .release();
 

@@ -153,7 +153,7 @@ public class ProfessionToolData implements ITooltip {
                 )))
                 .accept(new SimpleItemStatBlock(new TooltipInfo())
                         .accept(Itemtips.PROF_TOOL_STATS_TIP.locName(), this.GetAllStats()))
-                .accept(new InformationBlock().setCtrl().setAlt());
+                .accept(new OperationTipBlock().setCtrl().setAlt());
 
         if (this.force_lvl > -1){
             exileTooltips.accept(new AdditionalBlock(Itemtips.PROF_TOOL_LEVEL_CAP.locName(this.force_lvl).withStyle(ChatFormatting.RED)));

@@ -12,7 +12,7 @@ import java.util.List;
 
 import static java.util.Collections.EMPTY_LIST;
 
-public class InformationBlock extends AbstractTextBlock {
+public class OperationTipBlock extends AbstractTextBlock {
 
     private boolean alt = false;
 
@@ -22,25 +22,25 @@ public class InformationBlock extends AbstractTextBlock {
 
     private final TooltipInfo info = new TooltipInfo();
 
-    public InformationBlock() {
+    public OperationTipBlock() {
     }
 
-    public InformationBlock setAlt() {
+    public OperationTipBlock setAlt() {
         this.alt = true;
         return this;
     }
 
-    public InformationBlock setShift() {
+    public OperationTipBlock setShift() {
         this.shift = true;
         return this;
     }
 
-    public InformationBlock setCtrl() {
+    public OperationTipBlock setCtrl() {
         this.ctrl = true;
         return this;
     }
 
-    public InformationBlock setAll() {
+    public OperationTipBlock setAll() {
         this.ctrl = true;
         this.alt = true;
         this.shift = true;
@@ -64,7 +64,7 @@ public class InformationBlock extends AbstractTextBlock {
 
     @Override
     public ExileTooltips.BlockCategories getCategory() {
-        return ExileTooltips.BlockCategories.INFORMATION;
+        return ExileTooltips.BlockCategories.OPERATION;
     }
 
 }

@@ -1,14 +1,19 @@
 package com.robertx22.age_of_exile.database.data.currency;
 
+import com.google.common.collect.ImmutableList;
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.IAutoModel;
 import com.robertx22.age_of_exile.aoe_data.datapacks.models.ItemModelManager;
 import com.robertx22.age_of_exile.database.data.currency.base.Currency;
 import com.robertx22.age_of_exile.database.data.currency.base.GearCurrency;
 import com.robertx22.age_of_exile.database.data.currency.base.GearOutcome;
+import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
+import com.robertx22.age_of_exile.gui.texts.textblocks.AdditionalBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.usableitemblocks.DragableBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.usableitemblocks.UsageBlock;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
+import com.robertx22.library_of_exile.registry.IWeighted;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -16,6 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
+import java.util.Collections;
 import java.util.List;
 
 public class CurrencyItem extends Item implements IItemAsCurrency, IAutoLocName, IAutoModel, IAutoLocDesc {
@@ -34,31 +40,25 @@ public class CurrencyItem extends Item implements IItemAsCurrency, IAutoLocName,
     public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip,
                                 TooltipFlag flagIn) {
 
-        tooltip.add(locDesc().withStyle(ChatFormatting.YELLOW));
-
-        if (effect instanceof GearCurrency g) {
-            for (GearOutcome o : g.getOutcomes()) {
-                tooltip.add(o.getTooltip(g.getOutcomes().stream().mapToInt(x -> x.Weight()).sum()));
-            }
-        }
-
-
-        TooltipUtils.addEmpty(tooltip);
-
-
-        tooltip.add(TooltipUtils.dragOntoGearToUse());
-
-        TooltipUtils.addEmpty(tooltip);
+        ExileTooltips exileTooltips = new ExileTooltips()
+                .accept(new UsageBlock(ImmutableList.of(
+                        locDesc().withStyle(ChatFormatting.YELLOW)
+                )))
+                .accept(new DragableBlock(DragableBlock.AvailableTarget.GEAR));
 
 
         if (effect instanceof GearCurrency gc) {
+            for (GearOutcome o : gc.getOutcomes()) {
+                exileTooltips.accept(new UsageBlock(Collections.singletonList(o.getTooltip(gc.getOutcomes().stream().mapToInt(IWeighted::Weight).sum()))));
+            }
             if (gc.spendsGearPotential()) {
-                tooltip.add(Words.POTENTIAL_COST.locName(gc.getPotentialLoss()));
+                exileTooltips.accept(new AdditionalBlock(Collections.singletonList(Words.POTENTIAL_COST.locName(gc.getPotentialLoss()))));
             } else {
-                tooltip.add(Words.NOT_A_POTENTIAL_CONSUMER.locName());
+                exileTooltips.accept(new AdditionalBlock(Collections.singletonList(Words.NOT_A_POTENTIAL_CONSUMER.locName())));
             }
         }
 
+        tooltip.addAll(exileTooltips.release());
 
     }
 

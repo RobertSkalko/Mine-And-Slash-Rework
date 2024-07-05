@@ -115,7 +115,7 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
                 )
                 .accept(new RarityBlock(this.getRarity()))
                 .accept(new RequirementBlock(this.lvl))
-                .accept(new InformationBlock().setShift().setAlt())
+                .accept(new OperationTipBlock().setShift().setAlt())
                 .release());
 
 

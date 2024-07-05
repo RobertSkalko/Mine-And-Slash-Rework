@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.gui.texts;
 
 import com.robertx22.age_of_exile.gui.texts.textblocks.*;
+import com.robertx22.age_of_exile.gui.texts.textblocks.usableitemblocks.DragableBlock;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import lombok.NoArgsConstructor;
@@ -55,6 +56,7 @@ public class ExileTooltips {
         Stream.of(
                         collect.get(BlockCategories.REQUIREMENT),
                         collect.get(BlockCategories.STAT),
+                        collect.get(BlockCategories.USAGE),
                         collect.get(BlockCategories.LEVELED_ITEM_LEVEL)
                         )
                 .filter(Objects::nonNull)
@@ -68,6 +70,7 @@ public class ExileTooltips {
         //handle additional blocks, the order of aBs is the putting order.
         List<AbstractTextBlock> additions = collect.get(BlockCategories.ADDITIONAL);
         if (additions != null){
+            additions.sort(Comparator.comparing(x -> x instanceof DragableBlock));
             for (AbstractTextBlock abstractTextBlock : additions) {
                 if (abstractTextBlock != null && !abstractTextBlock.getAvailableComponents().isEmpty()) {
                     list.addAll(abstractTextBlock.getAvailableComponents());
@@ -89,7 +92,7 @@ public class ExileTooltips {
                 });
 
         list.add(emptyLine);
-        Optional.ofNullable(collect.get(BlockCategories.INFORMATION))
+        Optional.ofNullable(collect.get(BlockCategories.OPERATION))
                 .map(x -> x.get(0))
                 .map(AbstractTextBlock::getAvailableComponents)
                 .ifPresent(list::addAll);
@@ -111,8 +114,9 @@ public class ExileTooltips {
         REQUIREMENT,
         STAT,
         DURABILITY,
+        USAGE,
         LEVELED_ITEM_LEVEL,
-        INFORMATION,
+        OPERATION,
         ADDITIONAL
 
     }

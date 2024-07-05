@@ -200,7 +200,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                             TooltipUtils.joinMutableComps(list.iterator(), Gui.COMMA_SEPARATOR.locName()));
                 }).showWhen(tooltipInfo::shouldShowDescriptions))
                 .accept(new AdditionalBlock(Collections.singletonList(Words.AreaContains.locName().withStyle(ChatFormatting.RED))))
-                .accept(new InformationBlock().setAlt()).release();
+                .accept(new OperationTipBlock().setAlt()).release();
 
     }
 

@@ -44,7 +44,7 @@ public class AdditionalBlock extends AbstractTextBlock {
             components1.add(ExileText.emptyLine().get());
             return components1;
         } else {
-            return (List<? extends Component>)EMPTY_LIST;
+            return EMPTY_LIST;
         }
     }
 

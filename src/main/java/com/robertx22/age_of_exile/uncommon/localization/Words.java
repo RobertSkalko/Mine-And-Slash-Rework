@@ -124,7 +124,7 @@ public enum Words implements IAutoLocName {
     RerollsAffix("Rerolls an Affix"),
     UpgradeEnchant("Upgrades or Rerolls the Enchant"),
     UpgradeQuality("Upgrade Quality"),
-    CHAOS_STAT_SUCCESS("Upgrades the Item randomly."),
+    CHAOS_STAT_SUCCESS("Upgrades the Item randomly"),
     DowngradeAffix("Downgrades an affix"),
     DeletesAllAffixes("Deletes all affixes"),
     DestroysItem("DESTROYS the Item"),
