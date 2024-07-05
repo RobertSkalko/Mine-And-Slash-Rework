@@ -259,7 +259,7 @@ public class TooltipUtils {
 
 
     public static MutableComponent dragOntoGearToUse() {
-        return Itemtips.USE_TIP.locName().withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD);
+        return Itemtips.GEAR_SOUL_USE_TIP.locName().withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD);
     }
 
 

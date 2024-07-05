@@ -50,13 +50,13 @@ public class InformationBlock extends AbstractTextBlock {
     @Override
     public List<? extends Component> getAvailableComponents() {
         MutableComponent component = Component.literal("");
-        if (this.shift && info.shouldShowDescriptions()){
+        if (this.shift && !info.hasShiftDown && !info.hasAltDown){
             component.append(Itemtips.SHIFT_TIP.locName()).withStyle(ChatFormatting.BLUE).append(" ");
         }
         if (this.ctrl){
             component.append(Itemtips.CTRL_TIP.locName()).withStyle(ChatFormatting.BLUE).append(" ");
         }
-        if (this.alt && !info.useInDepthStats()){
+        if (this.alt && !info.hasAltDown && !info.hasShiftDown){
             component.append(Itemtips.ALT_TIP.locName()).withStyle(ChatFormatting.BLUE);
         }
         return component.equals(Component.literal(""))? EMPTY_LIST : Collections.singletonList(component);
