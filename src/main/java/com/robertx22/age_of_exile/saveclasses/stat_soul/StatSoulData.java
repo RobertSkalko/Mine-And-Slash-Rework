@@ -11,6 +11,8 @@ import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
 import com.robertx22.age_of_exile.gui.texts.textblocks.AdditionalBlock;
 import com.robertx22.age_of_exile.gui.texts.textblocks.OperationTipBlock;
 import com.robertx22.age_of_exile.gui.texts.textblocks.RarityBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.usableitemblocks.DragableBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.usableitemblocks.UsageBlock;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
@@ -39,6 +41,7 @@ import net.minecraft.world.item.ItemStack;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -237,39 +240,36 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
     public ExileTooltips getTooltip(ItemStack stack, boolean cangen) {
 
         ExileTooltips exileTooltips = new ExileTooltips()
-                .accept(new RarityBlock(getRarity()));
-
+                .accept(new RarityBlock(getRarity()))
+                .accept(new DragableBlock(DragableBlock.AvailableTarget.GEAR_SOUL));
+        List<Component> tooltip = new ArrayList<>();
         if (this.gear != null) {
-            List<Component> tooltip = new ArrayList<>();
+
             this.gear.BuildTooltip(new TooltipContext(stack, tooltip, Load.Unit(ClientOnly.getPlayer())));
             exileTooltips.accept(new AdditionalBlock(tooltip));
         } else {
-            List<Component> tierPart = new ArrayList<>();
-            tierPart.add(TooltipUtils.gearTier(this.tier));
+
+            tooltip.add(TooltipUtils.gearTier(this.tier));
             if (new TooltipInfo().hasAltDown){
-                tierPart.add(Itemtips.SOUL_TIER_TIP.locName().withStyle(ChatFormatting.BLUE));
+                tooltip.add(Itemtips.SOUL_TIER_TIP.locName().withStyle(ChatFormatting.BLUE));
             }
             if (this.canBeOnAnySlot()) {
 
             } else {
                 if (this.fam != SlotFamily.NONE) {
-                    tierPart.add(Itemtips.ITEM_TYPE.locName(Component.literal(this.fam.name()).withStyle(ChatFormatting.BLUE)).withStyle(ChatFormatting.GRAY));
+                    tooltip.add(Itemtips.ITEM_TYPE.locName(Component.literal(this.fam.name()).withStyle(ChatFormatting.BLUE)).withStyle(ChatFormatting.GRAY));
                 } else {
-                    tierPart.add(Itemtips.ITEM_TYPE.locName(ExileDB.GearSlots()
+                    tooltip.add(Itemtips.ITEM_TYPE.locName(ExileDB.GearSlots()
                             .get(this.slot)
                             .locName().withStyle(ChatFormatting.BLUE)).withStyle(ChatFormatting.GRAY));
                 }
             }
-            exileTooltips.accept(new AdditionalBlock(tierPart));
+        }
+        exileTooltips.accept(new UsageBlock(Collections.singletonList(Chats.INFUSES_STATS.locName().withStyle(ChatFormatting.AQUA))));
+        exileTooltips.accept(new UsageBlock(tooltip));
 
-        }
-        ArrayList<Component> thirdPart = new ArrayList<>();
-        thirdPart.add(Chats.INFUSES_STATS.locName().withStyle(ChatFormatting.AQUA));
-        thirdPart.add(TooltipUtils.dragOntoGearToUse());
-        if (cangen) {
-            thirdPart.add(Chats.RIGHT_CLICK_TO_GEN_ITEM.locName().withStyle(ChatFormatting.AQUA));
-        }
-        exileTooltips.accept(new AdditionalBlock(thirdPart));
+
+        exileTooltips.accept(new AdditionalBlock(Collections.singletonList(Chats.RIGHT_CLICK_TO_GEN_ITEM.locName().withStyle(ChatFormatting.BLUE))).showWhen(() -> cangen));
         exileTooltips.accept(new OperationTipBlock().setAlt());
         return exileTooltips;
     }

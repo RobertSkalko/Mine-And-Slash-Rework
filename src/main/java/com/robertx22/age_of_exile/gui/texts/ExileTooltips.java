@@ -36,6 +36,7 @@ public class ExileTooltips {
 
         //handle the req, stat. Should be noticed that the order of these blocks are fixed, and thats the point in order to maintain the style consistency of tooltips.
         Optional.ofNullable(collect.get(BlockCategories.NAME))
+                //can't have multiple name so directly get(0)
                 .map(x -> x.get(0))
                 .map(AbstractTextBlock::getAvailableComponents)
                 .ifPresent(x -> {
@@ -60,7 +61,7 @@ public class ExileTooltips {
                         collect.get(BlockCategories.LEVELED_ITEM_LEVEL)
                         )
                 .filter(Objects::nonNull)
-                .map(x -> x.get(0))
+                .flatMap(Collection::stream)
                 .filter(x -> !x.getAvailableComponents().isEmpty())
                 .forEachOrdered(x -> {
                     list.addAll(x.getAvailableComponents());
@@ -85,7 +86,7 @@ public class ExileTooltips {
                         collect.get(BlockCategories.DURABILITY)
                 )
                 .filter(Objects::nonNull)
-                .map(x -> x.get(0))
+                .flatMap(Collection::stream)
                 .filter(x -> !x.getAvailableComponents().isEmpty())
                 .forEachOrdered(x -> {
                     list.addAll(x.getAvailableComponents());
@@ -93,12 +94,13 @@ public class ExileTooltips {
 
         list.add(emptyLine);
         Optional.ofNullable(collect.get(BlockCategories.OPERATION))
+                //also I don't think we need multiple operation blocks.
                 .map(x -> x.get(0))
                 .map(AbstractTextBlock::getAvailableComponents)
                 .ifPresent(list::addAll);
 
 
-        if (list.get(list.size() - 1).getString().isBlank()) {
+        while (list.get(list.size() - 1).getString().isBlank()) {
             list.remove(list.size() - 1);
         }
 

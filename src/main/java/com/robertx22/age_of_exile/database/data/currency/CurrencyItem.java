@@ -16,6 +16,7 @@ import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.library_of_exile.registry.IWeighted;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -42,19 +43,22 @@ public class CurrencyItem extends Item implements IItemAsCurrency, IAutoLocName,
 
         ExileTooltips exileTooltips = new ExileTooltips()
                 .accept(new UsageBlock(ImmutableList.of(
-                        locDesc().withStyle(ChatFormatting.YELLOW)
+                        locDesc().withStyle(ChatFormatting.AQUA)
                 )))
                 .accept(new DragableBlock(DragableBlock.AvailableTarget.GEAR));
 
 
         if (effect instanceof GearCurrency gc) {
-            for (GearOutcome o : gc.getOutcomes()) {
-                exileTooltips.accept(new UsageBlock(Collections.singletonList(o.getTooltip(gc.getOutcomes().stream().mapToInt(IWeighted::Weight).sum()))));
-            }
+            List<GearOutcome> outcomes = gc.getOutcomes();
+            List<MutableComponent> list = outcomes.stream()
+                    .map(x -> x.getTooltip(outcomes.stream().mapToInt(IWeighted::Weight).sum()).withStyle(ChatFormatting.GRAY))
+                    .toList();
+            exileTooltips.accept(new UsageBlock(list));
+
             if (gc.spendsGearPotential()) {
-                exileTooltips.accept(new AdditionalBlock(Collections.singletonList(Words.POTENTIAL_COST.locName(gc.getPotentialLoss()))));
+                exileTooltips.accept(new AdditionalBlock(Collections.singletonList(Words.POTENTIAL_COST.locName(Component.literal("" + gc.getPotentialLoss()).withStyle(ChatFormatting.GOLD)).withStyle(ChatFormatting.GOLD))));
             } else {
-                exileTooltips.accept(new AdditionalBlock(Collections.singletonList(Words.NOT_A_POTENTIAL_CONSUMER.locName())));
+                exileTooltips.accept(new AdditionalBlock(Collections.singletonList(Words.NOT_A_POTENTIAL_CONSUMER.locName().withStyle(ChatFormatting.GOLD))));
             }
         }
 

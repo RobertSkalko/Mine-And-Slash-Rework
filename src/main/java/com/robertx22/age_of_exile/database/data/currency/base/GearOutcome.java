@@ -5,6 +5,8 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.library_of_exile.registry.IWeighted;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 
@@ -24,7 +26,7 @@ public abstract class GearOutcome implements IWeighted {
     public MutableComponent getTooltip(int totalweight) {
         int chance = (int) ((float) Weight() / (float) totalweight * 100F);
 
-        return Itemtips.OUTCOME_TIP.locName(getName().locName(), chance);
+        return Itemtips.OUTCOME_TIP.locName(getName().locName(), Component.literal( chance + "%").withStyle(ChatFormatting.GREEN));
     }
 
 }
