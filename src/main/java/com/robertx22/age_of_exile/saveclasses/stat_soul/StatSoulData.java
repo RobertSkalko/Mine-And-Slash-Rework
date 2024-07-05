@@ -7,11 +7,16 @@ import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
+import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
+import com.robertx22.age_of_exile.gui.texts.textblocks.AdditionalBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.InformationBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.RarityBlock;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -229,41 +234,44 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
         return StackSaving.STAT_SOULS;
     }
 
-    public List<Component> getTooltip(ItemStack stack, boolean cangen) {
+    public ExileTooltips getTooltip(ItemStack stack, boolean cangen) {
 
-        List<Component> tooltip = new ArrayList<>();
+        ExileTooltips exileTooltips = new ExileTooltips()
+                .accept(new RarityBlock(getRarity()));
 
-        var data = this;
-
-        if (data.gear != null) {
-            data.gear.BuildTooltip(new TooltipContext(stack, tooltip, Load.Unit(ClientOnly.getPlayer())));
+        if (this.gear != null) {
+            List<Component> tooltip = new ArrayList<>();
+            this.gear.BuildTooltip(new TooltipContext(stack, tooltip, Load.Unit(ClientOnly.getPlayer())));
+            exileTooltips.accept(new AdditionalBlock(tooltip));
         } else {
-            tooltip.add(TooltipUtils.gearTier(data.tier));
-            if (data.canBeOnAnySlot()) {
+            List<Component> tierPart = new ArrayList<>();
+            tierPart.add(TooltipUtils.gearTier(this.tier));
+            if (new TooltipInfo().hasAltDown){
+                tierPart.add(Itemtips.SOUL_TIER_TIP.locName().withStyle(ChatFormatting.BLUE));
+            }
+            if (this.canBeOnAnySlot()) {
 
             } else {
-                if (data.fam != SlotFamily.NONE) {
-                    tooltip.add(Itemtips.ITEM_TYPE.locName().withStyle(ChatFormatting.WHITE).append(data.fam.name()).withStyle(ChatFormatting.BLUE));
+                if (this.fam != SlotFamily.NONE) {
+                    tierPart.add(Itemtips.ITEM_TYPE.locName(Component.literal(this.fam.name()).withStyle(ChatFormatting.BLUE)).withStyle(ChatFormatting.GRAY));
                 } else {
-                    tooltip.add(Itemtips.ITEM_TYPE.locName().withStyle(ChatFormatting.WHITE)
-                            .append(ExileDB.GearSlots()
-                                    .get(data.slot)
-                                    .locName()
-                                    .withStyle(ChatFormatting.BLUE)));
+                    tierPart.add(Itemtips.ITEM_TYPE.locName(ExileDB.GearSlots()
+                            .get(this.slot)
+                            .locName().withStyle(ChatFormatting.BLUE)).withStyle(ChatFormatting.GRAY));
                 }
             }
-            tooltip.add(TooltipUtils.gearRarity(ExileDB.GearRarities()
-                    .get(data.rar)));
+            exileTooltips.accept(new AdditionalBlock(tierPart));
 
         }
-        tooltip.add(Component.literal(""));
-
-        tooltip.add(Chats.INFUSES_STATS.locName().withStyle(ChatFormatting.AQUA));
-        tooltip.add(TooltipUtils.dragOntoGearToUse());
+        ArrayList<Component> thirdPart = new ArrayList<>();
+        thirdPart.add(Chats.INFUSES_STATS.locName().withStyle(ChatFormatting.AQUA));
+        thirdPart.add(TooltipUtils.dragOntoGearToUse());
         if (cangen) {
-            tooltip.add(Chats.RIGHT_CLICK_TO_GEN_ITEM.locName().withStyle(ChatFormatting.AQUA));
+            thirdPart.add(Chats.RIGHT_CLICK_TO_GEN_ITEM.locName().withStyle(ChatFormatting.AQUA));
         }
-        return tooltip;
+        exileTooltips.accept(new AdditionalBlock(thirdPart));
+        exileTooltips.accept(new InformationBlock().setAlt());
+        return exileTooltips;
     }
 
     @Override

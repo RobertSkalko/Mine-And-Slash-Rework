@@ -3,6 +3,9 @@ package com.robertx22.age_of_exile.saveclasses.stat_soul;
 import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
+import com.robertx22.age_of_exile.gui.texts.textblocks.AdditionalBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.NameBlock;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
@@ -25,6 +28,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt {
@@ -139,13 +143,15 @@ public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt {
         try {
             StatSoulData data = StackSaving.STAT_SOULS.loadFrom(stack);
             if (data != null) {
-                for (Component c : data.getTooltip(stack, true)) {
-                    tooltip.add(c);
-                }
+                tooltip.clear();
+                ExileTooltips exileTooltips = data.getTooltip(stack, false);
+                exileTooltips.accept(new NameBlock(Collections.singletonList(stack.getHoverName())));
+
                 Player p = ClientOnly.getPlayer();
                 if (p != null && p.isCreative()) {
-                    tooltip.add(Words.DRAG_NO_WORK_CREATIVE.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+                    exileTooltips.accept(new AdditionalBlock(Words.DRAG_NO_WORK_CREATIVE.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD)));
                 }
+                tooltip.addAll(exileTooltips.release());
             }
         } catch (Exception e) {
             e.printStackTrace();

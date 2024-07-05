@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.gui.texts.textblocks;
 
 import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -9,6 +10,8 @@ import net.minecraft.network.chat.MutableComponent;
 import java.util.Collections;
 import java.util.List;
 
+import static java.util.Collections.EMPTY_LIST;
+
 public class InformationBlock extends AbstractTextBlock {
 
     private boolean alt = false;
@@ -16,6 +19,8 @@ public class InformationBlock extends AbstractTextBlock {
     private boolean shift = false;
 
     private boolean ctrl = false;
+
+    private final TooltipInfo info = new TooltipInfo();
 
     public InformationBlock() {
     }
@@ -45,16 +50,16 @@ public class InformationBlock extends AbstractTextBlock {
     @Override
     public List<? extends Component> getAvailableComponents() {
         MutableComponent component = Component.literal("");
-        if (this.shift){
+        if (this.shift && info.shouldShowDescriptions()){
             component.append(Itemtips.SHIFT_TIP.locName()).withStyle(ChatFormatting.BLUE).append(" ");
         }
         if (this.ctrl){
             component.append(Itemtips.CTRL_TIP.locName()).withStyle(ChatFormatting.BLUE).append(" ");
         }
-        if (this.alt){
-            component.append(Itemtips.ALT_TIP.locName()).withStyle(ChatFormatting.BLUE).append(" ");
+        if (this.alt && !info.useInDepthStats()){
+            component.append(Itemtips.ALT_TIP.locName()).withStyle(ChatFormatting.BLUE);
         }
-        return Collections.singletonList(component);
+        return component.equals(Component.literal(""))? EMPTY_LIST : Collections.singletonList(component);
     }
 
     @Override

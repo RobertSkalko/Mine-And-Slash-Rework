@@ -6,10 +6,7 @@ import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
-import com.robertx22.age_of_exile.gui.texts.textblocks.InformationBlock;
-import com.robertx22.age_of_exile.gui.texts.textblocks.LeveledItemLevelBlock;
-import com.robertx22.age_of_exile.gui.texts.textblocks.NameBlock;
-import com.robertx22.age_of_exile.gui.texts.textblocks.RarityBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.*;
 import com.robertx22.age_of_exile.gui.texts.textblocks.affixdatablocks.SimpleItemStatBlock;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
@@ -117,7 +114,7 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
                         .accept(Itemtips.COR_STATS.locName().withStyle(ChatFormatting.RED), cor.stream().flatMap(x -> x.getAllStatsWithCtx(lvl, info).stream()).toList())
                 )
                 .accept(new RarityBlock(this.getRarity()))
-                .accept(new LeveledItemLevelBlock(this.lvl))
+                .accept(new RequirementBlock(this.lvl))
                 .accept(new InformationBlock().setShift().setAlt())
                 .release());
 

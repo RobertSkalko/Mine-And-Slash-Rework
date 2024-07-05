@@ -21,7 +21,6 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
-import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
@@ -30,11 +29,8 @@ import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipStatsAligner;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
-import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -148,10 +144,18 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                         .setStatRequirement(getStatReq()))
                 .accept(new RarityBlock(this.getRarity()))
                 .accept(new MapStatBlock(this))
-                .accept(new AdditionalBlock(() -> ImmutableList.of(
-                        Itemtips.Exp.locName(this.getBonusExpAmountInPercent()).withStyle(ChatFormatting.GOLD),
-                        Itemtips.Loot.locName(this.getBonusLootAmountInPercent()).withStyle(ChatFormatting.GOLD),
-                        Itemtips.TIER_TIP.locName(this.tier).withStyle(ChatFormatting.GOLD))))
+                .accept(new AdditionalBlock(() -> !tooltipInfo.shouldShowDescriptions() ?
+                        ImmutableList.of(
+                                Itemtips.Exp.locName(this.getBonusExpAmountInPercent()).withStyle(ChatFormatting.GOLD),
+                                Itemtips.Loot.locName(this.getBonusLootAmountInPercent()).withStyle(ChatFormatting.GOLD),
+                                TooltipUtils.tier(this.tier).withStyle(ChatFormatting.GOLD))
+                        :
+                        ImmutableList.of(
+                                Itemtips.Exp.locName(this.getBonusExpAmountInPercent()).withStyle(ChatFormatting.GOLD),
+                                Itemtips.Loot.locName(this.getBonusLootAmountInPercent()).withStyle(ChatFormatting.GOLD),
+                                TooltipUtils.tier(this.tier).withStyle(ChatFormatting.GOLD),
+                                Itemtips.MAP_TIER_TIP.locName().withStyle(ChatFormatting.BLUE)
+                        )))
                 //handle possibleRarities while not pressing Alt
                 .accept(new AdditionalBlock(() -> {
                     MutableComponent starter = Component.literal("");
@@ -164,7 +168,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
                     allRarities
                             .forEach(x -> {
-                                if (possibleRarities.contains(x)){
+                                if (possibleRarities.contains(x)) {
                                     starter.append(Component.literal(block).withStyle(x.textFormatting()));
                                 } else {
                                     starter.append(Component.literal(block).withStyle(ChatFormatting.DARK_GRAY));
@@ -175,19 +179,31 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                 }).showWhen(() -> !tooltipInfo.hasAltDown))
                 //handle possibleRarities while pressing Alt
                 .accept(new AdditionalBlock(() -> {
+                    MutableComponent starter = Component.literal("");
                     RarityRegistryContainer<GearRarity> gearRarityRarityRegistryContainer = ExileDB.GearRarities();
-                    List<GearRarity> possibleRarities = gearRarityRarityRegistryContainer.getFilterWrapped(x -> this.getRarity().item_tier >= gearRarityRarityRegistryContainer.get(x.min_map_rarity_to_drop).item_tier).list;
-                    possibleRarities.sort(Comparator.comparingInt(x -> x.item_tier));
+                    Set<GearRarity> possibleRarities = new HashSet<>(gearRarityRarityRegistryContainer.getFilterWrapped(x -> this.getRarity().item_tier >= gearRarityRarityRegistryContainer.get(x.min_map_rarity_to_drop).item_tier).list);
 
-                    List<MutableComponent> list = possibleRarities.stream().map(x -> x.locName().withStyle(x.textFormatting())).toList();
+                    List<GearRarity> allRarities = gearRarityRarityRegistryContainer.getList();
+                    allRarities.sort(Comparator.comparingInt(x -> x.item_tier));
+
+                    List<MutableComponent> list = allRarities
+                            .stream().map(x -> {
+                                if (possibleRarities.contains(x)) {
+                                    return x.locName().withStyle(x.textFormatting());
+                                } else {
+                                    return x.locName().withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC, ChatFormatting.STRIKETHROUGH);
+                                }
+                            })
+                            .toList();
 
                     return ImmutableList.of(Words.POSSIBLE_DROPS.locName(),
                             TooltipUtils.joinMutableComps(list.iterator(), Gui.COMMA_SEPARATOR.locName()));
-                }).showWhen(() -> tooltipInfo.hasAltDown))
+                }).showWhen(tooltipInfo::shouldShowDescriptions))
                 .accept(new AdditionalBlock(Collections.singletonList(Words.AreaContains.locName().withStyle(ChatFormatting.RED))))
-                .accept(new InformationBlock().setAll()).release();
+                .accept(new InformationBlock().setAlt()).release();
 
     }
+
     @Override
     public void BuildTooltip(TooltipContext ctx) {
         if (ctx.data != null) {

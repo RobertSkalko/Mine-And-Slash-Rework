@@ -25,6 +25,7 @@ public class ExileTooltips {
         return this;
     }
 
+
     public List<Component> release() {
         IgnoreNullList<Component> list = new IgnoreNullList<>();
 

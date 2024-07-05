@@ -218,14 +218,12 @@ public class TooltipUtils {
     }
 
     public static MutableComponent gearSlot(GearSlot slot) {
-        return Itemtips.ITEM_TYPE.locName().withStyle(ChatFormatting.WHITE)
-                .append(slot.locName()
-                        .withStyle(ChatFormatting.AQUA));
+        return Itemtips.ITEM_TYPE.locName(slot.locName()
+                        .withStyle(ChatFormatting.AQUA)).withStyle(ChatFormatting.WHITE);
     }
 
     public static MutableComponent gearTier(int tier) {
-        return Itemtips.ITEM_TIER_TIP.locName().withStyle(ChatFormatting.WHITE)
-                .append(Component.literal(tier + "").withStyle(ChatFormatting.AQUA));
+        return Itemtips.ITEM_TIER_TIP.locName(Component.literal(tier + "").withStyle(ChatFormatting.AQUA));
     }
 
     public static MutableComponent gearRarity(GearRarity rarity) {
