@@ -9,6 +9,9 @@ public enum Itemtips implements IAutoLocName {
     //add "tip" at the end to avoid same variable call
     //you can use \n in here, just remember use the splitLongText() to process it.
     //a special method splitLongText() in TooltipsUtils.java can split the sentence into different line by replacing the "\n", achieving a actual line break function.
+    PROF_TOOL_LEVEL_CAP("Capped Drops to LVL %1$s"),
+    PROF_TOOL_STATS_TIP("Tool Stats: "),
+    PROF_TOOL_EXP_TIP("Exp: %1$s/%2$s"),
     SOUL_TIER_TIP("[Soul tier determine the level range of generated gear]"),
     MAP_TIER_TIP("[Map tier indicate the difficulty and loot quality of this map]"),
     SHIFT_TIP("[Shift]: Detail"),

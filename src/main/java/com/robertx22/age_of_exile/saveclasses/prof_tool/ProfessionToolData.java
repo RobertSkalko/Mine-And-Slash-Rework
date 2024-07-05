@@ -1,27 +1,34 @@
 package com.robertx22.age_of_exile.saveclasses.prof_tool;
 
+import com.google.common.collect.ImmutableList;
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.profession.Profession;
 import com.robertx22.age_of_exile.database.data.profession.all.Professions;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
+import com.robertx22.age_of_exile.gui.texts.textblocks.*;
+import com.robertx22.age_of_exile.gui.texts.textblocks.affixdatablocks.SimpleItemStatBlock;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ITooltip;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.tags.all.SlotTags;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.temp.SkillItemTier;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ProfessionToolData implements ITooltip {
@@ -125,23 +132,37 @@ public class ProfessionToolData implements ITooltip {
     @Override
     public void BuildTooltip(TooltipContext ctx) {
 
-        ctx.tooltip.add(Component.empty());
-
-        for (ExactStatData stat : this.GetAllStats()) {
-            ctx.tooltip.addAll(stat.GetTooltipString(new TooltipInfo()));
+        /*while (ctx.tooltip.get(0).getString().equals(ctx.stack.getHoverName().getString()) || ctx.tooltip.get(0).getString().isBlank()){
+            ctx.tooltip.remove(0);
         }
 
-        ctx.tooltip.add(Component.empty());
-
-        ctx.tooltip.add(TooltipUtils.level(lvl));
-        ctx.tooltip.add(Component.literal("Exp: " + xp + "/" + getExpNeeded()).withStyle(ChatFormatting.GREEN));
-        ctx.tooltip.add(TooltipUtils.rarity(getRarity()));
-
-
-        if (this.force_lvl > -1) {
-            ctx.tooltip.add(Component.literal("Capped Drops to LVL " + force_lvl).withStyle(ChatFormatting.RED));
-
+        while (ctx.tooltip.get(ctx.tooltip.size() - 1).getString().isBlank()){
+            ctx.tooltip.remove(ctx.tooltip.size() - 1);
+        }*/
+        if (Screen.hasControlDown()){
+            return;
         }
+
+        ExileTooltips exileTooltips = new ExileTooltips()
+                .accept(new NameBlock(Collections.singletonList(ctx.stack.getHoverName())))
+                //.accept(new AdditionalBlock(ctx.tooltip))
+                .accept(new RarityBlock(getRarity()))
+                .accept(new AdditionalBlock(ImmutableList.of(
+                        TooltipUtils.level(lvl).withStyle(ChatFormatting.GREEN),
+                        Itemtips.PROF_TOOL_EXP_TIP.locName(xp, getExpNeeded()).withStyle(ChatFormatting.GREEN)
+                )))
+                .accept(new SimpleItemStatBlock(new TooltipInfo())
+                        .accept(Itemtips.PROF_TOOL_STATS_TIP.locName(), this.GetAllStats()))
+                .accept(new InformationBlock().setCtrl());
+
+        if (this.force_lvl > -1){
+            exileTooltips.accept(new AdditionalBlock(Itemtips.PROF_TOOL_LEVEL_CAP.locName(this.force_lvl).withStyle(ChatFormatting.RED)));
+        }
+        List<Component> tooltip = ctx.tooltip;
+        tooltip.clear();
+        tooltip.addAll(exileTooltips.release());
+
+
     }
 
     public static class ToolAffix {
