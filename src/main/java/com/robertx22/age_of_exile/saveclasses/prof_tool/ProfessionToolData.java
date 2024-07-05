@@ -74,9 +74,9 @@ public class ProfessionToolData implements ITooltip {
 
         xp += added;
 
-
+        int currentXPNeeded = getExpNeeded();
         if (lvl < GameBalanceConfig.get().MAX_LEVEL) {
-            while (xp >= getExpNeeded()) {
+            while (xp >= currentXPNeeded) {
 
                 if (lvl >= GameBalanceConfig.get().MAX_LEVEL) {
                     break;
@@ -84,7 +84,7 @@ public class ProfessionToolData implements ITooltip {
 
                 var tier = SkillItemTier.fromLevel(lvl);
                 lvl++;
-                xp -= getExpNeeded();
+                xp -= currentXPNeeded;
 
                 var newtier = SkillItemTier.fromLevel(lvl);
 
