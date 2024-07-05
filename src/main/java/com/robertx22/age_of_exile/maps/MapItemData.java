@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.maps;
 
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.robertx22.age_of_exile.aoe_data.database.stats.OffenseStats;
 import com.robertx22.age_of_exile.content.ubers.UberBossArena;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
@@ -12,8 +13,8 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.RarityRegistryContainer;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
+import com.robertx22.age_of_exile.gui.texts.IgnoreNullList;
 import com.robertx22.age_of_exile.gui.texts.textblocks.*;
-import com.robertx22.age_of_exile.gui.texts.textblocks.mapblocks.MapStatBlock;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequirement;
@@ -37,8 +38,12 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
+import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static com.robertx22.age_of_exile.gui.texts.ExileTooltips.EMPTY_LINE;
 
 public class MapItemData implements ICommonDataItem<GearRarity> {
 
@@ -136,6 +141,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
     }
 
     public List<Component> getTooltip() {
+        MapItemData thisMapItemData = this;
         TooltipInfo tooltipInfo = new TooltipInfo();
         return new ExileTooltips()
                 .accept(new NameBlock(Collections.singletonList(Component.translatable("item.mmorpg.map"))))
@@ -143,7 +149,57 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                         .setLevelRequirement(this.lvl)
                         .setStatRequirement(getStatReq()))
                 .accept(new RarityBlock(this.getRarity()))
-                .accept(new MapStatBlock(this))
+                .accept(new StatBlock() {
+                    @Nonnull
+                    private final MapItemData mapItemData = thisMapItemData;
+
+                    private final ImmutableMap<AffectedEntities, MutableComponent> map = ImmutableMap.of(
+                            AffectedEntities.Mobs, Words.Mob_Affixes.locName(),
+                            AffectedEntities.Players, Words.Player_Affixes.locName(),
+                            AffectedEntities.All, Words.Affixes_Affecting_All.locName()
+                    );
+
+                    @Override
+                    public List<? extends Component> getAvailableComponents() {
+
+                        IgnoreNullList<Component> list = new IgnoreNullList<>();
+                        TooltipInfo info = new TooltipInfo();
+
+                        Stream.of(AffectedEntities.Mobs, AffectedEntities.Players, AffectedEntities.All).forEachOrdered(x -> getAffectedStatList(list, info, x));
+
+                        list.add(Itemtips.TIER_INFLUENCE.locName().withStyle(ChatFormatting.BLUE));
+                        mapItemData.getTierStats().forEach(exactStatData -> list.addAll(exactStatData.GetTooltipString(info)));
+
+                        return list;
+                    }
+
+                    private void getAffectedStatList(IgnoreNullList<Component> list, TooltipInfo info, AffectedEntities target) {
+                        List<MutableComponent> list1 = Optional.of(target)
+                                .map(mapItemData::getAllAffixesThatAffect)
+                                .filter(x -> !x.isEmpty())
+                                .stream()
+                                .flatMap(Collection::stream)
+                                .map(x -> x.getAffix().getStats(x.p, mapItemData.getLevel()))
+                                .flatMap(x -> x.stream()
+                                        .map(y -> y.GetTooltipString(info))
+                                        .flatMap(Collection::stream)
+                                )
+                                .sorted((s1, s2) -> {
+                                    //sort long stat
+                                    Boolean s1IfLong = s1.getString().contains("\u25C6");
+                                    Boolean s2IfLong = s2.getString().contains("\u25C6");
+                                    return s1IfLong.compareTo(s2IfLong);
+                                })
+                                .filter(x -> Objects.nonNull(x) && !x.getString().isBlank())
+                                .toList();
+                        if (!list1.isEmpty()) {
+                            list.add(map.get(target).withStyle(ChatFormatting.BLUE));
+                            list.addAll(list1);
+                            list.add(EMPTY_LINE);
+                        }
+
+                    }
+                })
                 .accept(new AdditionalBlock(() -> !tooltipInfo.shouldShowDescriptions() ?
                         ImmutableList.of(
                                 Itemtips.Exp.locName(this.getBonusExpAmountInPercent()).withStyle(ChatFormatting.GOLD),
@@ -156,49 +212,42 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                                 TooltipUtils.tier(this.tier).withStyle(ChatFormatting.GOLD),
                                 Itemtips.MAP_TIER_TIP.locName().withStyle(ChatFormatting.BLUE)
                         )))
-                //handle possibleRarities while not pressing Alt
+                //handle possibleRarities
                 .accept(new AdditionalBlock(() -> {
-                    MutableComponent starter = Component.literal("");
-                    String block = "\u25A0";
+
                     RarityRegistryContainer<GearRarity> gearRarityRarityRegistryContainer = ExileDB.GearRarities();
                     Set<GearRarity> possibleRarities = new HashSet<>(gearRarityRarityRegistryContainer.getFilterWrapped(x -> this.getRarity().item_tier >= gearRarityRarityRegistryContainer.get(x.min_map_rarity_to_drop).item_tier).list);
 
                     List<GearRarity> allRarities = gearRarityRarityRegistryContainer.getList();
                     allRarities.sort(Comparator.comparingInt(x -> x.item_tier));
+                    if (!tooltipInfo.shouldShowDescriptions()){
+                        MutableComponent starter = Component.literal("");
+                        String block = "\u25A0";
+                        allRarities
+                                .forEach(x -> {
+                                    if (possibleRarities.contains(x)) {
+                                        starter.append(Component.literal(block).withStyle(x.textFormatting()));
+                                    } else {
+                                        starter.append(Component.literal(block).withStyle(ChatFormatting.DARK_GRAY));
+                                    }
+                                });
+                        return Collections.singletonList(starter);
+                    } else {
+                        List<MutableComponent> list = allRarities
+                                .stream().map(x -> {
+                                    if (possibleRarities.contains(x)) {
+                                        return x.locName().withStyle(x.textFormatting());
+                                    } else {
+                                        return x.locName().withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC, ChatFormatting.STRIKETHROUGH);
+                                    }
+                                })
+                                .toList();
 
-                    allRarities
-                            .forEach(x -> {
-                                if (possibleRarities.contains(x)) {
-                                    starter.append(Component.literal(block).withStyle(x.textFormatting()));
-                                } else {
-                                    starter.append(Component.literal(block).withStyle(ChatFormatting.DARK_GRAY));
-                                }
-                            });
+                        return ImmutableList.of(Words.POSSIBLE_DROPS.locName(),
+                                TooltipUtils.joinMutableComps(list.iterator(), Gui.COMMA_SEPARATOR.locName()));
+                    }
 
-                    return Collections.singletonList(starter);
-                }).showWhen(() -> !tooltipInfo.hasAltDown))
-                //handle possibleRarities while pressing Alt
-                .accept(new AdditionalBlock(() -> {
-                    MutableComponent starter = Component.literal("");
-                    RarityRegistryContainer<GearRarity> gearRarityRarityRegistryContainer = ExileDB.GearRarities();
-                    Set<GearRarity> possibleRarities = new HashSet<>(gearRarityRarityRegistryContainer.getFilterWrapped(x -> this.getRarity().item_tier >= gearRarityRarityRegistryContainer.get(x.min_map_rarity_to_drop).item_tier).list);
-
-                    List<GearRarity> allRarities = gearRarityRarityRegistryContainer.getList();
-                    allRarities.sort(Comparator.comparingInt(x -> x.item_tier));
-
-                    List<MutableComponent> list = allRarities
-                            .stream().map(x -> {
-                                if (possibleRarities.contains(x)) {
-                                    return x.locName().withStyle(x.textFormatting());
-                                } else {
-                                    return x.locName().withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC, ChatFormatting.STRIKETHROUGH);
-                                }
-                            })
-                            .toList();
-
-                    return ImmutableList.of(Words.POSSIBLE_DROPS.locName(),
-                            TooltipUtils.joinMutableComps(list.iterator(), Gui.COMMA_SEPARATOR.locName()));
-                }).showWhen(tooltipInfo::shouldShowDescriptions))
+                }))
                 .accept(new AdditionalBlock(Collections.singletonList(Words.AreaContains.locName().withStyle(ChatFormatting.RED))))
                 .accept(new OperationTipBlock().setAlt()).release();
 

@@ -7,6 +7,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,6 +22,8 @@ public class OperationTipBlock extends AbstractTextBlock {
     private boolean ctrl = false;
 
     private final TooltipInfo info = new TooltipInfo();
+
+    private List<Component> additionalOperation = new ArrayList<>();
 
     public OperationTipBlock() {
     }
@@ -47,9 +50,23 @@ public class OperationTipBlock extends AbstractTextBlock {
         return this;
     }
 
+    public OperationTipBlock addOperationTipAbove(List<Component> components){
+        this.additionalOperation = components;
+        return this;
+    }
+
+    public OperationTipBlock addDraggableTipAbove(AvailableTarget target){
+        this.additionalOperation.add(target.component);
+        return this;
+    }
+
     @Override
     public List<? extends Component> getAvailableComponents() {
+        ArrayList<Component> components = new ArrayList<>();
         MutableComponent component = Component.literal("");
+        if (this.additionalOperation != null){
+            components.addAll(this.additionalOperation);
+        }
         if (this.shift && !info.hasShiftDown && !info.hasAltDown){
             component.append(Itemtips.SHIFT_TIP.locName()).withStyle(ChatFormatting.BLUE).append(" ");
         }
@@ -59,12 +76,29 @@ public class OperationTipBlock extends AbstractTextBlock {
         if (this.alt && !info.hasAltDown && !info.hasShiftDown){
             component.append(Itemtips.ALT_TIP.locName()).withStyle(ChatFormatting.BLUE);
         }
-        return component.equals(Component.literal(""))? EMPTY_LIST : Collections.singletonList(component);
+        if (!component.equals(Component.literal(""))){
+            components.add(component);
+        }
+
+        return components;
     }
 
     @Override
     public ExileTooltips.BlockCategories getCategory() {
         return ExileTooltips.BlockCategories.OPERATION;
+    }
+
+
+    public enum AvailableTarget{
+        GEAR_SOUL(Itemtips.SOUL_MODIFIER_USE_TIP.locName().withStyle(ChatFormatting.BLUE)),
+
+        GEAR(Itemtips.GEAR_SOUL_USE_TIP.locName().withStyle(ChatFormatting.BLUE));
+
+        public final Component component;
+
+        AvailableTarget(Component component) {
+            this.component = component;
+        }
     }
 
 }

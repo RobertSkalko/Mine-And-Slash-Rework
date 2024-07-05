@@ -6,7 +6,7 @@ import net.minecraft.network.chat.Component;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-
+// This block use to handle the text line, like the currency usage etc. these lines are not stat but still important.
 public class UsageBlock extends AbstractTextBlock {
 
     @Nonnull

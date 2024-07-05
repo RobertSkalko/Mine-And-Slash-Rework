@@ -8,7 +8,7 @@ import com.robertx22.age_of_exile.database.data.currency.base.GearCurrency;
 import com.robertx22.age_of_exile.database.data.currency.base.GearOutcome;
 import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
 import com.robertx22.age_of_exile.gui.texts.textblocks.AdditionalBlock;
-import com.robertx22.age_of_exile.gui.texts.textblocks.usableitemblocks.DragableBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.OperationTipBlock;
 import com.robertx22.age_of_exile.gui.texts.textblocks.usableitemblocks.UsageBlock;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
@@ -45,7 +45,7 @@ public class CurrencyItem extends Item implements IItemAsCurrency, IAutoLocName,
                 .accept(new UsageBlock(ImmutableList.of(
                         locDesc().withStyle(ChatFormatting.AQUA)
                 )))
-                .accept(new DragableBlock(DragableBlock.AvailableTarget.GEAR));
+                .accept(new OperationTipBlock().addDraggableTipAbove(OperationTipBlock.AvailableTarget.GEAR));
 
 
         if (effect instanceof GearCurrency gc) {

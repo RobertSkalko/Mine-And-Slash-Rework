@@ -6,11 +6,13 @@ import com.robertx22.age_of_exile.database.data.profession.ICreativeTabTiered;
 import com.robertx22.age_of_exile.database.data.profession.LeveledItem;
 import com.robertx22.age_of_exile.database.data.profession.buffs.StatBuff;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import com.robertx22.age_of_exile.saveclasses.ExactStatData;
+import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
+import com.robertx22.age_of_exile.gui.texts.textblocks.LeveledItemBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.affixdatablocks.SimpleItemStatBlock;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Formatter;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipStatsAligner;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
 import net.minecraft.network.chat.Component;
@@ -24,13 +26,12 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered {
 
-    PlayerBuffData.Type type;
     public String buff_id;
+    PlayerBuffData.Type type;
     CraftedItemPower power;
 
     public CraftedBuffFoodItem(PlayerBuffData.Type type, String buff_id, CraftedItemPower power) {
@@ -105,19 +106,12 @@ public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered 
 
         try {
             StatBuff buff = getBuff();
-
-            list.add(TooltipUtils.level(LeveledItem.getLevel(stack)));
-
             int lvl = LeveledItem.getLevel(stack);
-            list.add(Component.empty());
 
-            List<Component> preList = new ArrayList<>();
-
-            for (ExactStatData stat : buff.getStats(lvl, power.perc)) {
-                preList.addAll(stat.GetTooltipString(new TooltipInfo()));
-            }
-            List<Component> finalList = new TooltipStatsAligner(preList, false).buildNewTooltipsStats();
-            list.addAll(finalList);
+            list.addAll(new ExileTooltips()
+                    .accept(new SimpleItemStatBlock(new TooltipInfo())
+                            .accept(Itemtips.BUFF_TIP.locName(), buff.getStats(lvl, power.perc)))
+                    .accept(new LeveledItemBlock(stack)).release());
 
 
         } catch (Exception e) {

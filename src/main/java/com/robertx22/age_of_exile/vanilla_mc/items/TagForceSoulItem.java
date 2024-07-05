@@ -1,6 +1,9 @@
 package com.robertx22.age_of_exile.vanilla_mc.items;
 
 import com.robertx22.age_of_exile.database.data.currency.base.IShapelessRecipe;
+import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
+import com.robertx22.age_of_exile.gui.texts.textblocks.OperationTipBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.usableitemblocks.UsageBlock;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
 import net.minecraft.ChatFormatting;
@@ -15,12 +18,15 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public class TagForceSoulItem extends AutoItem implements IShapelessRecipe {
+    public String tag;
     Supplier<Item> item;
+    String tagname;
 
     public TagForceSoulItem(Supplier<Item> si, String tag, String tagname) {
         super(new Properties());
@@ -28,10 +34,6 @@ public class TagForceSoulItem extends AutoItem implements IShapelessRecipe {
         this.tagname = tagname;
         this.item = si;
     }
-
-    public String tag;
-
-    String tagname;
 
     @Override
     public String locNameForLangFile() {
@@ -56,9 +58,10 @@ public class TagForceSoulItem extends AutoItem implements IShapelessRecipe {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        ArrayList<Component> components = new ArrayList<>();
-        components.add(Component.empty());
-        components.add(Itemtips.SOUL_MODIFIER_TIP.locName().withStyle(ChatFormatting.AQUA));
-        components.add(Itemtips.SOUL_MODIFIER_USE_TIP.locName().withStyle(ChatFormatting.AQUA));
+
+        pTooltipComponents.addAll(Objects.requireNonNull(
+                new ExileTooltips()
+                        .accept(new UsageBlock(Collections.singletonList(Itemtips.SOUL_MODIFIER_TIP.locName().withStyle(ChatFormatting.AQUA))))
+                        .accept(new OperationTipBlock().addDraggableTipAbove(OperationTipBlock.AvailableTarget.GEAR_SOUL))).release());
     }
 }
