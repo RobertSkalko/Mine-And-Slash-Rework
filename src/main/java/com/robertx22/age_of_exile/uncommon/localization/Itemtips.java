@@ -9,6 +9,8 @@ public enum Itemtips implements IAutoLocName {
     //add "tip" at the end to avoid same variable call
     //you can use \n in here, just remember use the splitLongText() to process it.
     //a special method splitLongText() in TooltipsUtils.java can split the sentence into different line by replacing the "\n", achieving a actual line break function.
+    CHECK_GEAR_STATS_IN_SOUL("This soul has gear stat, you can press Shift to check out."),
+    SOUL_GENERATE_GEAR_LEVEL_RANGE("Generated Gear Level: %1$s - %2$s"),
     BUFF_TIP("Buff Stats: "),
     SOUL_MODIFIER_TIP("Soul modifier can be applied to gear soul, which then generate \nonly the corresponding gear type when use."),
     SOUL_MODIFIER_USE_TIP("[Drag onto gear soul to use]"),

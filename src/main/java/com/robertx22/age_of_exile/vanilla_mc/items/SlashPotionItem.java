@@ -77,7 +77,7 @@ public class SlashPotionItem extends AutoItem implements ICreativeTabTiered {
                 .accept(new LeveledItemBlock(pStack))
                 .accept(new UsageBlock(Collections.singletonList(Words.COOLDOWN.locName(Component.literal(getCooldownTicks() / 20 + "").withStyle(ChatFormatting.GOLD)).withStyle(ChatFormatting.GOLD))))
                 .release());
-        
+
     }
 
     @Override

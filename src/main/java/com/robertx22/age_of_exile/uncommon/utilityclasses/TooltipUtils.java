@@ -223,7 +223,7 @@ public class TooltipUtils {
     }
 
     public static MutableComponent gearTier(int tier) {
-        return Itemtips.ITEM_TIER_TIP.locName(Component.literal(tier + "").withStyle(ChatFormatting.AQUA));
+        return Itemtips.ITEM_TIER_TIP.locName(Component.literal(tier + "").withStyle(ChatFormatting.GOLD)).withStyle(ChatFormatting.GOLD);
     }
 
     public static MutableComponent gearRarity(GearRarity rarity) {
