@@ -8,12 +8,13 @@ import com.robertx22.age_of_exile.database.data.profession.buffs.StatBuff;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
 import com.robertx22.age_of_exile.gui.texts.textblocks.LeveledItemBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.OperationTipBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.RequirementBlock;
 import com.robertx22.age_of_exile.gui.texts.textblocks.affixdatablocks.SimpleItemStatBlock;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Formatter;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -111,7 +112,10 @@ public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered 
             list.addAll(new ExileTooltips()
                     .accept(new SimpleItemStatBlock(new TooltipInfo())
                             .accept(Itemtips.BUFF_TIP.locName(), buff.getStats(lvl, power.perc)))
-                    .accept(new LeveledItemBlock(stack)).release());
+                    .accept(new RequirementBlock(lvl))
+                    .accept(new OperationTipBlock().setAlt())
+                    .accept(new LeveledItemBlock(stack))
+                    .release());
 
 
         } catch (Exception e) {

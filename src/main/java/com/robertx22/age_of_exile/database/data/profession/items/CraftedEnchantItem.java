@@ -13,18 +13,25 @@ import com.robertx22.age_of_exile.database.data.profession.LeveledItem;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.requirements.bases.GearRequestedFor;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
+import com.robertx22.age_of_exile.gui.texts.textblocks.LeveledItemBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.NameBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.RarityBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.RequirementBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.usableitemblocks.UsageBlock;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.GearEnchantData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.tags.all.SlotTags;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
-import com.robertx22.age_of_exile.uncommon.localization.Gui;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
+import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.temp.SkillItemTier;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -33,6 +40,7 @@ import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class CraftedEnchantItem extends AutoItem implements IItemAsCurrency, ICreativeTabTiered, IRarity {
@@ -50,13 +58,25 @@ public class CraftedEnchantItem extends AutoItem implements IItemAsCurrency, ICr
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> l, TooltipFlag pIsAdvanced) {
         var tier = LeveledItem.getTier(pStack);
-        l.add(TooltipUtils.tier(tier.tier));
-        l.add(Gui.ENCHANTMENT_LEVEL.locName().append(tier.levelRange.getMinLevel() + "-" + tier.levelRange.getMaxLevel()));
+        l.clear();
+        l.addAll(new ExileTooltips()
+                .accept(new NameBlock(Collections.singletonList(pStack.getHoverName())))
+                .accept(new RarityBlock(getRarity()))
+                .accept(new UsageBlock(() -> {
+                    List<GearOutcome> outcomes = ((GearCurrency) this.currencyEffect(pStack)).getOutcomes();
+                    return outcomes.stream()
+                            .map(x -> x.getTooltip(outcomes.stream().mapToInt(IWeighted::Weight).sum()).withStyle(ChatFormatting.GRAY))
+                            .toList();
+
+                }))
+                .accept(new RequirementBlock(Collections.singletonList(Itemtips.ENCHANTMENT_LEVEL.locName(tier.levelRange.getMinLevel(), tier.levelRange.getMaxLevel()))))
+                .accept(new LeveledItemBlock(pStack))
+                .release());
     }
 
     @Override
     public String locNameForLangFile() {
-        return getRarity().textFormatting() + StringUTIL.capitalise(rar) + " " + fam.name() + " Enchantment";
+        return StringUTIL.capitalise(rar) + " " + fam.name() + " Enchantment";
     }
 
     @Override
@@ -108,6 +128,7 @@ public class CraftedEnchantItem extends AutoItem implements IItemAsCurrency, ICr
                             public int Weight() {
                                 return 1000;
                             }
+
                         },
                         new GearOutcome() {
                             @Override

@@ -31,6 +31,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static com.robertx22.age_of_exile.gui.texts.ExileTooltips.EMPTY_LINE;
+
 public class GearTooltipUtils {
 
     public static void BuildTooltip(GearItemData gear, ItemStack stack, List<Component> tooltip, EntityData data) {
@@ -77,7 +79,7 @@ public class GearTooltipUtils {
                     @Override
                     public List<? extends Component> getAvailableComponents() {
                         IgnoreNullList<Component> list = new IgnoreNullList<>();
-                        MutableComponent emptyLine = ExileText.emptyLine().get();
+
 
                         this.implicitStatsData = gearItemData.imp;
                         this.baseStatsData = gearItemData.baseStats;
@@ -88,7 +90,7 @@ public class GearTooltipUtils {
 
                         if (baseStatsData != null) {
                             list.addAll(baseStatsData.GetTooltipString(tinfo, gearItemData));
-                            list.add(emptyLine);
+                            list.add(EMPTY_LINE);
                         }
 
                         boolean showMerge = !tinfo.useInDepthStats();
@@ -155,7 +157,7 @@ public class GearTooltipUtils {
                                 for (TooltipStatInfo tooltipStatInfo : tooltipStatInfos) {
                                     list.addAll(tooltipStatInfo.GetTooltipString(tinfo));
                                 }
-                                list.add(emptyLine);
+                                list.add(EMPTY_LINE);
                             }
 
                             Optional.ofNullable(map.get(true))
@@ -164,7 +166,7 @@ public class GearTooltipUtils {
                                             .toList()
                                     ).ifPresent(list::addAll);
 
-                            list.add(emptyLine);
+                            list.add(EMPTY_LINE);
 
                         } else {
                             List<Component> impComps;
@@ -207,17 +209,20 @@ public class GearTooltipUtils {
                             addOrder.forEachOrdered(x -> {
                                 x.sort(Comparator.comparing(component -> component.getString().contains("\u25C6")));
                                 list.addAll(x);
-                                list.add(emptyLine);
+                                list.add(EMPTY_LINE);
 
                             });
 
                         }
                         //handle sockets and enchantment
                         IgnoreNullList<IGearPartTooltip> list3 = IgnoreNullList.of(gearSocketsData, gearEnchantData);
-                        for (IGearPartTooltip iGearPartTooltip : list3) {
-                            list.addAll(iGearPartTooltip.GetTooltipString(tinfo, gearItemData));
+                        ListIterator<IGearPartTooltip> iGearPartTooltipListIterator = list3.listIterator();
+                        while (iGearPartTooltipListIterator.hasNext()){
+                            list.addAll(iGearPartTooltipListIterator.next().GetTooltipString(tinfo, gearItemData));
+                            if (iGearPartTooltipListIterator.hasNext()){
+                                list.add(EMPTY_LINE);
+                            }
                         }
-
 
                         return list;
                     }

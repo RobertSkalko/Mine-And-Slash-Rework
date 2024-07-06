@@ -29,7 +29,6 @@ public class ExileTooltips {
     public List<Component> release() {
         IgnoreNullList<Component> list = new IgnoreNullList<>();
 
-        MutableComponent emptyLine = ExileText.emptyLine().get();
         Map<BlockCategories, List<AbstractTextBlock>> collect = blockContainer.stream().collect(Collectors.groupingBy(AbstractTextBlock::getCategory));
 
 
@@ -51,7 +50,7 @@ public class ExileTooltips {
                     }
                 });
 
-        list.add(emptyLine);
+        list.add(EMPTY_LINE);
 
         Stream.of(
                         collect.get(BlockCategories.REQUIREMENT),
@@ -64,7 +63,7 @@ public class ExileTooltips {
                 .filter(x -> !x.getAvailableComponents().isEmpty())
                 .forEachOrdered(x -> {
                     list.addAll(x.getAvailableComponents());
-                    list.add(emptyLine);
+                    list.add(EMPTY_LINE);
                 });
 
         //handle additional blocks, the order of aBs is the putting order.
@@ -73,7 +72,7 @@ public class ExileTooltips {
             for (AbstractTextBlock abstractTextBlock : additions) {
                 if (abstractTextBlock != null && !abstractTextBlock.getAvailableComponents().isEmpty()) {
                     list.addAll(abstractTextBlock.getAvailableComponents());
-                    list.add(emptyLine);
+                    list.add(EMPTY_LINE);
                 }
             }
         }
@@ -88,7 +87,7 @@ public class ExileTooltips {
                 .filter(x -> !x.getAvailableComponents().isEmpty())
                 .forEachOrdered(x -> list.addAll(x.getAvailableComponents()));
 
-        list.add(emptyLine);
+        list.add(EMPTY_LINE);
         Optional.ofNullable(collect.get(BlockCategories.OPERATION))
                 //also I don't think we need multiple operation blocks.
                 .map(x -> x.get(0))

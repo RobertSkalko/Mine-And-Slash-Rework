@@ -10,7 +10,7 @@ public enum Itemtips implements IAutoLocName {
     //you can use \n in here, just remember use the splitLongText() to process it.
     //a special method splitLongText() in TooltipsUtils.java can split the sentence into different line by replacing the "\n", achieving a actual line break function.
     BUFF_TIP("Buff Stats: "),
-    SOUL_MODIFIER_TIP("Soul modifier can be applied to gear soul, which then generate only the corresponding gear type when use."),
+    SOUL_MODIFIER_TIP("Soul modifier can be applied to gear soul, which then generate \nonly the corresponding gear type when use."),
     SOUL_MODIFIER_USE_TIP("[Drag onto gear soul to use]"),
     PROF_TOOL_LEVEL_CAP("Capped Drops to LVL %1$s"),
     PROF_TOOL_STATS_TIP("Tool Stats: "),
@@ -24,7 +24,7 @@ public enum Itemtips implements IAutoLocName {
     RARITY_LINE("%1$s Item"),
     RARITY_TIP("Rarity: "),
     ITEM_TYPE("Item Type: %1$s"),
-    TIER_TIP("Tier: %1$s"),
+    TIER_TIP("Tier %1$s"),
     ITEM_TIER_TIP("Item Tier: %1$s"),
     LEVEL_TIP("Level %1$s"),
 
@@ -57,7 +57,7 @@ public enum Itemtips implements IAutoLocName {
     STONE_REPAIRE_DURABILITY("Repairs %1$s durability."),
     SOUL_CLEANER_USAGE_AND_WARNING("Click on items to remove their soul.\nThe item remains but the stats will be deleted."),
     SOCKET_EXTRACTOR_USAGE("Click on gear to extract a gem."),
-    Enchanted("Enchanted: "),
+    Enchanted("Enchanted(%1$s/10): "),
     OUTCOME_TIP("%1$s, Chance: %2$s", "for currency tooltips"),
     Exp("Bonus Exp: %1$s%%"),
     Loot("Bonus Loot: %1$s%%"),
@@ -67,7 +67,7 @@ public enum Itemtips implements IAutoLocName {
     UNIQUE_STATS("Unique Stats: "),
     JEWEL_STATS("Jewel Stats: "),
     SUFFIX_STATS("Suffix Stats: "),
-    MAP_LEAGUE_SPAWN("Can Spawn: ");
+    MAP_LEAGUE_SPAWN("Can Spawn: "), ENCHANTMENT_LEVEL("Applied Gear Level: %1$s - %2$s");
 
     private String localization = "";
 

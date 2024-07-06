@@ -6,11 +6,13 @@ import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequirement;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -22,7 +24,7 @@ import static com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatReq
 @Setter
 @Accessors(chain = true)
 public class RequirementBlock extends AbstractTextBlock {
-    private final EntityData playerData = Load.Unit(Minecraft.getInstance().player);
+    private final EntityData playerData = Load.Unit(ClientOnly.getPlayer());
 
     @Nullable
     public StatRequirement statRequirement;
@@ -30,24 +32,32 @@ public class RequirementBlock extends AbstractTextBlock {
     @Nullable
     public Integer levelRequirement;
 
+    @Nullable
+    public List<? extends Component> customComponents;
+
     public RequirementBlock() {
         super();
     }
 
-    public RequirementBlock(@Nullable StatRequirement statRequirement) {
+    public RequirementBlock(@NotNull StatRequirement statRequirement) {
         super();
         this.statRequirement = statRequirement;
     }
 
-    public RequirementBlock(@Nullable StatRequirement statRequirement, @Nullable Integer levelRequirement) {
+    public RequirementBlock(@NotNull StatRequirement statRequirement, @NotNull Integer levelRequirement) {
         super();
         this.statRequirement = statRequirement;
         this.levelRequirement = levelRequirement;
     }
 
-    public RequirementBlock(@Nullable Integer levelRequirement) {
+    public RequirementBlock(@NotNull Integer levelRequirement) {
         super();
         this.levelRequirement = levelRequirement;
+    }
+
+    public RequirementBlock(@NotNull List<? extends Component> customComponents) {
+        this.customComponents = customComponents.stream()
+                .map(x -> Component.literal("").append(Component.literal("\u003F" + " ").withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)).append((x.copy().withStyle(ChatFormatting.GRAY)))).toList();
     }
 
 
@@ -71,6 +81,10 @@ public class RequirementBlock extends AbstractTextBlock {
                     .map(req -> req.GetTooltipString(this.levelRequirement, this.playerData))
                     .ifPresent(x -> x.forEach(builder::add));
 
+        }
+
+        if (this.customComponents != null){
+            builder.addAll(this.customComponents);
         }
 
         return builder.build();

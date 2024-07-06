@@ -17,7 +17,8 @@ public class LeveledItemBlock extends AbstractTextBlock {
     @Override
     public List<? extends Component> getAvailableComponents() {
         return ImmutableList.of(
-                Itemtips.LEVEL_TIP.locName(Component.literal("" + LeveledItem.getLevel(stack)).withStyle(LeveledItem.getTier(stack).format)).withStyle(ChatFormatting.GOLD)
+                Itemtips.LEVEL_TIP.locName(Component.literal("" + LeveledItem.getLevel(stack)).withStyle(ChatFormatting.GOLD)).withStyle(ChatFormatting.GOLD),
+                Itemtips.TIER_TIP.locName(Component.literal("" + LeveledItem.getTier(stack).tier).withStyle(ChatFormatting.GOLD)).withStyle(ChatFormatting.GOLD)
         );
     }
 

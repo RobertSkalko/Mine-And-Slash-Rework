@@ -16,6 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
@@ -57,11 +58,11 @@ public class TagForceSoulItem extends AutoItem implements IShapelessRecipe {
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
+    public void appendHoverText(@NotNull ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, @NotNull TooltipFlag pIsAdvanced) {
 
-        pTooltipComponents.addAll(Objects.requireNonNull(
+        pTooltipComponents.addAll(
                 new ExileTooltips()
                         .accept(new UsageBlock(Collections.singletonList(Itemtips.SOUL_MODIFIER_TIP.locName().withStyle(ChatFormatting.AQUA))))
-                        .accept(new OperationTipBlock().addDraggableTipAbove(OperationTipBlock.AvailableTarget.GEAR_SOUL))).release());
+                        .accept(new OperationTipBlock().addDraggableTipAbove(OperationTipBlock.AvailableTarget.GEAR_SOUL)).release());
     }
 }
