@@ -2,9 +2,7 @@ package com.robertx22.age_of_exile.gui.texts.textblocks;
 
 import com.google.common.collect.ImmutableList;
 import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.library_of_exile.wrappers.ExileText;
-import lombok.RequiredArgsConstructor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
@@ -16,7 +14,7 @@ import java.util.function.Supplier;
 
 import static java.util.Collections.EMPTY_LIST;
 
-@RequiredArgsConstructor
+
 public class AdditionalBlock extends AbstractTextBlock {
 
     @Nonnull
@@ -24,7 +22,7 @@ public class AdditionalBlock extends AbstractTextBlock {
     @Nullable
     public Supplier<Boolean> ifShow = () -> true;
 
-    public <T> AdditionalBlock(@Nonnull Supplier<List<? extends Component>> components) {
+    public AdditionalBlock(@Nonnull Supplier<List<? extends Component>> components) {
         this.components = components.get();
     }
 
@@ -32,7 +30,9 @@ public class AdditionalBlock extends AbstractTextBlock {
         this.components = ImmutableList.of(components);
     }
 
-
+    public AdditionalBlock(@Nonnull List<? extends Component> components) {
+        this.components = components;
+    }
 
     @Override
     public List<? extends Component> getAvailableComponents() {
@@ -53,7 +53,7 @@ public class AdditionalBlock extends AbstractTextBlock {
         return ExileTooltips.BlockCategories.ADDITIONAL;
     }
 
-    public AdditionalBlock showWhen(Supplier<Boolean> condition){
+    public AdditionalBlock showWhen(Supplier<Boolean> condition) {
         this.ifShow = condition;
         return this;
     }

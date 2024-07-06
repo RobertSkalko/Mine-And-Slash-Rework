@@ -116,11 +116,7 @@ dependencies {
         annotationProcessor 'org.spongepowered:mixin:0.8.3:processor'
     }
 
-    compileOnly 'org.projectlombok:lombok:1.18.34'
-    annotationProcessor 'org.projectlombok:lombok:1.18.34'
 
-    testCompileOnly 'org.projectlombok:lombok:1.18.34'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
 
     implementation fg.deobf("blank:Library_of_Exile-1.20.1:1.4.4")
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")

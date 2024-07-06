@@ -73,7 +73,7 @@ public class SlashPotionItem extends AutoItem implements ICreativeTabTiered {
         pTooltipComponents.addAll(new ExileTooltips()
                 .accept(new NameBlock(pStack.getHoverName()))
                 .accept(new RarityBlock(getRarity()))
-                .accept(new UsageBlock(Collections.singletonList(Itemtips.Restores.locName(Component.literal(num + "").withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.GRAY))))
+                .accept(new UsageBlock(Collections.singletonList(Itemtips.Restores.locName(Component.literal(num + "%").withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.GRAY))))
                 .accept(new LeveledItemBlock(pStack))
                 .accept(new UsageBlock(Collections.singletonList(Words.COOLDOWN.locName(Component.literal(getCooldownTicks() / 20 + "").withStyle(ChatFormatting.GOLD)).withStyle(ChatFormatting.GOLD))))
                 .release());

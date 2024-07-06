@@ -37,7 +37,7 @@ public enum Itemtips implements IAutoLocName {
     QUALITY("Quality: %1$s%%"),
     Durability("Durability: "),
     Unbreakable("Unbreakable"),
-    Restores("Restores: %1$s%%"),
+    Restores("Restores: %1$s"),
 
     CHEST_CONTAINS("Contains: %1$s"),
     NEED_KEY("Needs %1$s "),

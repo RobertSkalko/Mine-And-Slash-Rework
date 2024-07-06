@@ -75,7 +75,7 @@ public class IgnoreNullList<E> extends AbstractList<E> {
 
     @Override
     public boolean addAll(@NotNull Collection<? extends E> c) {
-        if (!c.isEmpty()){
+        if (!c.isEmpty()) {
             for (E element : c) {
                 if (element != null) add(element);
             }

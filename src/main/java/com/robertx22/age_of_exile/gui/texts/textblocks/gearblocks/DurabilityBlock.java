@@ -4,7 +4,6 @@ import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
 import com.robertx22.age_of_exile.gui.texts.textblocks.AbstractTextBlock;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
-import lombok.RequiredArgsConstructor;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -12,11 +11,15 @@ import net.minecraft.world.item.ItemStack;
 import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.List;
-@RequiredArgsConstructor
+
 public class DurabilityBlock extends AbstractTextBlock {
 
     @Nonnull
     public ItemStack stack;
+
+    public DurabilityBlock(@Nonnull ItemStack stack) {
+        this.stack = stack;
+    }
 
     @Override
     public List<? extends Component> getAvailableComponents() {

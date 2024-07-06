@@ -7,10 +7,7 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequiremen
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
-import lombok.Setter;
-import lombok.experimental.Accessors;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,8 +18,6 @@ import java.util.Optional;
 import static com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequirement.CHECK_YES_ICON;
 import static com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequirement.NO_ICON;
 
-@Setter
-@Accessors(chain = true)
 public class RequirementBlock extends AbstractTextBlock {
     private final EntityData playerData = Load.Unit(ClientOnly.getPlayer());
 
@@ -60,6 +55,15 @@ public class RequirementBlock extends AbstractTextBlock {
                 .map(x -> Component.literal("").append(Component.literal("\u003F" + " ").withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)).append((x.copy().withStyle(ChatFormatting.GRAY)))).toList();
     }
 
+    public RequirementBlock setStatRequirement(@Nullable StatRequirement statRequirement) {
+        this.statRequirement = statRequirement;
+        return this;
+    }
+
+    public RequirementBlock setLevelRequirement(@Nullable Integer levelRequirement) {
+        this.levelRequirement = levelRequirement;
+        return this;
+    }
 
     @Override
     public List<? extends Component> getAvailableComponents() {
@@ -67,7 +71,7 @@ public class RequirementBlock extends AbstractTextBlock {
         if (levelRequirement != null) {
             boolean ifMetLevel = playerData.getLevel() >= levelRequirement;
 
-            if (ifMetLevel){
+            if (ifMetLevel) {
                 builder.add(Component.literal("").append(Component.literal(CHECK_YES_ICON).withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD)).append(Component.literal(" ")).append(Itemtips.LEVEL_REQ.locName(levelRequirement).withStyle().withStyle(ChatFormatting.GRAY)));
             } else {
                 builder.add(Component.literal("").append(Component.literal(NO_ICON).withStyle(ChatFormatting.RED, ChatFormatting.BOLD)).append(Component.literal(" ")).append(Itemtips.LEVEL_REQ.locName(levelRequirement).withStyle().withStyle(ChatFormatting.DARK_GRAY)));
@@ -83,7 +87,7 @@ public class RequirementBlock extends AbstractTextBlock {
 
         }
 
-        if (this.customComponents != null){
+        if (this.customComponents != null) {
             builder.addAll(this.customComponents);
         }
 

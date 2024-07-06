@@ -4,20 +4,19 @@ import com.google.common.collect.ImmutableList;
 import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.Rarity;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
-import lombok.RequiredArgsConstructor;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.List;
-@RequiredArgsConstructor
-public class RarityBlock extends AbstractTextBlock{
+
+public class RarityBlock extends AbstractTextBlock {
 
     @Nonnull
     public Rarity rarity;
 
+    public RarityBlock(@Nonnull Rarity rarity) {
+        this.rarity = rarity;
+    }
 
     @Override
     public List<? extends Component> getAvailableComponents() {

@@ -1,24 +1,25 @@
 package com.robertx22.age_of_exile.gui.texts;
 
-import com.robertx22.age_of_exile.gui.texts.textblocks.*;
+import com.robertx22.age_of_exile.gui.texts.textblocks.AbstractTextBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.RarityBlock;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
-import com.robertx22.library_of_exile.wrappers.ExileText;
-import lombok.NoArgsConstructor;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@NoArgsConstructor
+
 public class ExileTooltips {
     public static Component EMPTY_LINE = Component.literal("");
 
     private final List<AbstractTextBlock> blockContainer = new ArrayList<>();
     //use this map to standardize the same blocks name in different tooltips.
 
+
+    public ExileTooltips() {
+    }
 
     public ExileTooltips accept(AbstractTextBlock block) {
         blockContainer.add(block);
@@ -57,7 +58,7 @@ public class ExileTooltips {
                         collect.get(BlockCategories.STAT),
                         collect.get(BlockCategories.USAGE),
                         collect.get(BlockCategories.LEVELED_ITEM)
-                        )
+                )
                 .filter(Objects::nonNull)
                 .flatMap(Collection::stream)
                 .filter(x -> !x.getAvailableComponents().isEmpty())
@@ -68,7 +69,7 @@ public class ExileTooltips {
 
         //handle additional blocks, the order of aBs is the putting order.
         List<AbstractTextBlock> additions = collect.get(BlockCategories.ADDITIONAL);
-        if (additions != null){
+        if (additions != null) {
             for (AbstractTextBlock abstractTextBlock : additions) {
                 if (abstractTextBlock != null && !abstractTextBlock.getAvailableComponents().isEmpty()) {
                     list.addAll(abstractTextBlock.getAvailableComponents());
