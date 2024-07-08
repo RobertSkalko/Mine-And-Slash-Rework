@@ -66,7 +66,7 @@ public class CraftedSoulItem extends AutoItem implements ICreativeTabTiered, IRa
 
         if (soul != null) {
             list.clear();
-            if (Screen.hasShiftDown()){
+            if (Screen.hasShiftDown() && soul.gear != null) {
                 soul.gear.BuildTooltip(new TooltipContext(pStack, list, Load.Unit(ClientOnly.getPlayer())));
             } else {
                 ExileTooltips tooltip = soul.getTooltip(pStack, false);

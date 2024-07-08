@@ -144,7 +144,7 @@ public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt {
             StatSoulData data = StackSaving.STAT_SOULS.loadFrom(stack);
             if (data != null) {
                 tooltip.clear();
-                if (Screen.hasShiftDown()) {
+                if (Screen.hasShiftDown() && data.gear != null) {
                     data.gear.BuildTooltip(new TooltipContext(stack, tooltip, Load.Unit(ClientOnly.getPlayer())));
                 } else {
                     ExileTooltips exileTooltips = data.getTooltip(stack, false);
