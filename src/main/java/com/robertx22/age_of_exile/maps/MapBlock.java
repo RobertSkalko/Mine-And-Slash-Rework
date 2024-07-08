@@ -123,28 +123,33 @@ public class MapBlock extends BaseEntityBlock {
 
                 var map = Load.worldData(level).map.getMapFromPlayerID(be.getMapId());
 
+                if (map.isPresent()) {
+                    MapData mapData = map.get();
 
-                if (map.get().getLives(p) < 1) {
-                    p.sendSystemMessage(Chats.NO_MORE_LIVES_REMAINING.locName().withStyle(ChatFormatting.RED));
+                    if (mapData.getLives(p) < 1) {
+                        p.sendSystemMessage(Chats.NO_MORE_LIVES_REMAINING.locName().withStyle(ChatFormatting.RED));
+                        return InteractionResult.FAIL;
+                    }
+
+                    if (!mapData.map.getStatReq().meetsReq(mapData.map.lvl, Load.Unit(p))) {
+                        p.sendSystemMessage(Chats.RESISTS_TOO_LOW_FOR_MAP.locName().withStyle(ChatFormatting.RED));
+                        return InteractionResult.FAIL;
+                    }
+                    if (Load.Unit(p).getLevel() < (mapData.map.lvl - 5)) {
+                        p.sendSystemMessage(Chats.TOO_LOW_LEVEL.locName().withStyle(ChatFormatting.RED));
+                        return InteractionResult.FAIL;
+                    }
+                    if (p.getInventory().countItem(SlashItems.TP_BACK.get()) < 1) {
+                        p.sendSystemMessage(Chats.NEED_PEARL.locName(SlashItems.TP_BACK.get().getDefaultInstance().getHoverName()));
+                        return InteractionResult.SUCCESS;
+                    }
+
+                    mapData.teleportToMap(p);
+
+                } else {
+
                     return InteractionResult.FAIL;
                 }
-
-                if (!map.get().map.getStatReq().meetsReq(map.get().map.lvl, Load.Unit(p))) {
-                    p.sendSystemMessage(Chats.RESISTS_TOO_LOW_FOR_MAP.locName().withStyle(ChatFormatting.RED));
-                    return InteractionResult.FAIL;
-                }
-                if (Load.Unit(p).getLevel() < (map.get().map.lvl - 5)) {
-                    p.sendSystemMessage(Chats.TOO_LOW_LEVEL.locName().withStyle(ChatFormatting.RED));
-                    return InteractionResult.FAIL;
-                }
-                if (p.getInventory().countItem(SlashItems.TP_BACK.get()) < 1) {
-                    p.sendSystemMessage(Chats.NEED_PEARL.locName(SlashItems.TP_BACK.get().getDefaultInstance().getHoverName()));
-                    return InteractionResult.SUCCESS;
-                }
-
-                map.ifPresent(x -> {
-                    x.teleportToMap(p);
-                });
 
             }
 
