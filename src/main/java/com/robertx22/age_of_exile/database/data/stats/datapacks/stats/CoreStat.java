@@ -55,7 +55,7 @@ public class CoreStat extends BaseDatapackStat implements ICoreStat {
         String str = "Determines your total: ";
         for (OptScaleExactStat x : this.statsThatBenefit()) {
             str += x.getStat()
-                    .translate() + ", ";
+                    .locName().getString() + ", ";
         }
         str = str.substring(0, str.length() - 2);
 
