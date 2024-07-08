@@ -116,8 +116,6 @@ dependencies {
         annotationProcessor 'org.spongepowered:mixin:0.8.3:processor'
     }
 
-
-
     implementation fg.deobf("blank:Library_of_Exile-1.20.1:1.4.4")
     implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
 

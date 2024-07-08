@@ -79,7 +79,7 @@ public enum Words implements IAutoLocName {
     CAPPED_BECAUSE_PLAYER_LEVEL(" - Next Slot Unlocks at Player Level %1$s"),
     IMPLICIT_STATS("Implicit Stats: "),
     ON_SLOTS("Slots: "),
-    SHIFT_TO_SHOW_EFFECT("Shift to Show Status Effect info."),
+    SHIFT_TO_SHOW_EFFECT("Press [Shift] to Show Status Effect info."),
     ONLY_SHOW_ALLOCATED("Only Show Allocated Talents, Toggle ON/OFF"),
 
     SPELL_STATS("Spell Stats:"),

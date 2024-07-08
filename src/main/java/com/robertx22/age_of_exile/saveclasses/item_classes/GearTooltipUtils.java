@@ -15,10 +15,13 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.*;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.MergedStats;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
+import com.robertx22.age_of_exile.tags.imp.SlotTag;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
+import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -240,6 +243,8 @@ public class GearTooltipUtils {
 
                             return Collections.singletonList(Words.Energy_Cost_Per_Mob.locName(cost, permob, damageFactor).withStyle(ChatFormatting.GREEN));
                         }).showWhen(() -> info.hasShiftDown && gear.GetBaseGearType().getGearSlot().weapon_data.damage_multiplier > 0)
+                )
+                .accept(new AdditionalBlock(() -> ImmutableList.of(Words.TAGS.locName().append(TooltipUtils.joinMutableComps(gear.GetBaseGearType().getTags().getTags(SlotTag.SERIALIZER).stream().map(x -> ((SlotTag)x).locName()).toList().iterator(), Gui.COMMA_SEPARATOR.locName())))).showWhen(() -> info.hasShiftDown)
                 )
                 .accept(new OperationTipBlock().setAll())
                 .accept(new DurabilityBlock(stack))
