@@ -42,12 +42,10 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
+import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.threat_aggro.ThreatData;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityTypeUtils;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.OnScreenMessageUtils;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.*;
 import com.robertx22.age_of_exile.vanilla_mc.packets.EntityUnitPacket;
 import com.robertx22.age_of_exile.vanilla_mc.potion_effects.EntityStatusEffectsData;
 import com.robertx22.library_of_exile.components.ICap;
@@ -58,6 +56,7 @@ import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -800,8 +799,7 @@ public class EntityData implements ICap, INeededForClient {
         if (player.isDeadOrDying()) {
             return i;
         }
-        //MutableComponent txt = ExileText.ofText("+" + (int) i + " Experience").format(ChatFormatting.GREEN).get();
-        // todo  OnScreenMessageUtils.sendMessage((ServerPlayer) player, txt, ClientboundSetTitlesPacket.Type.ACTIONBAR);
+
 
         if (expDebt > 0) {
             int reduced = MathHelper.clamp(i / 2, 0, expDebt);
@@ -819,7 +817,12 @@ public class EntityData implements ICap, INeededForClient {
             i += added;
         }
 
+
+
         setExp(exp + i);
+
+        int perc = MathHelper.clamp((int) (exp / getExpRequiredForLevelUp() * 100F), 0, 100);
+        OnScreenMessageUtils.actionBar((ServerPlayer) player, Gui.EXP_GAIN_PERCENT.locName(exp, "", perc).withStyle(ChatFormatting.GREEN));
 
         if (exp >= this.getExpRequiredForLevelUp()) {
             if (this.CheckIfCanLevelUp() && this.CheckLevelCap()) {
@@ -879,8 +882,9 @@ public class EntityData implements ICap, INeededForClient {
 
             // fully restore on lvlup
 
-            this.setLevel(level + 1);
             setExp(getRemainingExp());
+            this.setLevel_player(level + 1, player);
+
 
             OnScreenMessageUtils.sendLevelUpMessage(player, Words.LEVEL_UP_TYPE_PLAYER.locName(), level - 1, level);
 
