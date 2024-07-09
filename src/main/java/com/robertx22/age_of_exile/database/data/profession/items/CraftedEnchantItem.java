@@ -69,7 +69,7 @@ public class CraftedEnchantItem extends AutoItem implements IItemAsCurrency, ICr
                             .toList();
 
                 }))
-                .accept(new RequirementBlock(Collections.singletonList(Itemtips.SOUL_GENERATE_GEAR_LEVEL_RANGE.locName(tier.levelRange.getMinLevel(), tier.levelRange.getMaxLevel()))))
+                .accept(new RequirementBlock(Collections.singletonList(Itemtips.ENCHANTMENT_GEAR_LEVEL_RANGE.locName(tier.levelRange.getMinLevel(), tier.levelRange.getMaxLevel()))))
                 .accept(new LeveledItemBlock(pStack))
                 .release());
     }
