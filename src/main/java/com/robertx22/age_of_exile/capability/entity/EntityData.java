@@ -822,7 +822,7 @@ public class EntityData implements ICap, INeededForClient {
         setExp(exp + i);
 
         int perc = MathHelper.clamp((int) (exp / getExpRequiredForLevelUp() * 100F), 0, 100);
-        OnScreenMessageUtils.actionBar((ServerPlayer) player, Gui.EXP_GAIN_PERCENT.locName(exp, "", perc).withStyle(ChatFormatting.GREEN));
+        OnScreenMessageUtils.actionBar((ServerPlayer) player, Gui.EXP_GAIN_PERCENT.locName(i, "", perc).withStyle(ChatFormatting.GREEN));
 
         if (exp >= this.getExpRequiredForLevelUp()) {
             if (this.CheckIfCanLevelUp() && this.CheckLevelCap()) {
