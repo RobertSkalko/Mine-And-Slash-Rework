@@ -7,6 +7,9 @@ import java.util.Locale;
 
 // to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
+    GEAR_LOCKED_TYPE_PLATE("Plate"),
+    GEAR_LOCKED_TYPE_LEATHER("Leather"),
+    GEAR_LOCKED_TYPE_CLOTH("Cloth"),
     Req_level("Required Level: "),
     DRAG_NO_WORK_CREATIVE("Drag and Drop Interactions Do-NOT work in Creative Mode!"),
 

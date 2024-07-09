@@ -31,6 +31,7 @@ import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
+import com.robertx22.age_of_exile.vanilla_mc.items.TagForceSoulItem;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.temp.SkillItemTier;
 import net.minecraft.ChatFormatting;
@@ -40,10 +41,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 
 public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevelTier {
@@ -246,15 +244,16 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
 
 
         if (this.gear != null) {
-
             //this.gear.BuildTooltip(new TooltipContext(stack, tooltip, Load.Unit(ClientOnly.getPlayer())));
             exileTooltips.accept(new AdditionalBlock(Itemtips.CHECK_GEAR_STATS_IN_SOUL.locName().withStyle(ChatFormatting.AQUA)));
+            exileTooltips.accept(new OperationTipBlock().setAlt().setShift().addDraggableTipAbove(OperationTipBlock.AvailableTarget.GEAR));
         } else {
+
             List<Component> tooltip = new ArrayList<>();
             LevelRange levelRange = LevelUtils.tierToLevel(tier);
             tooltip.add(Itemtips.SOUL_GENERATE_GEAR_LEVEL_RANGE
-                    .locName(Component.literal(levelRange.getMinLevel() + "").withStyle(ChatFormatting.GOLD),
-                            Component.literal(levelRange.getMaxLevel() + "").withStyle(ChatFormatting.GOLD))
+                    .locName(Component.literal(levelRange.getMinLevel() + ""),
+                            Component.literal(levelRange.getMaxLevel() + ""))
                     .withStyle(ChatFormatting.GOLD));
             tooltip.add(TooltipUtils.gearTier(this.tier));
             if (new TooltipInfo().hasAltDown) {
@@ -271,11 +270,17 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
                             .locName().withStyle(ChatFormatting.BLUE)).withStyle(ChatFormatting.GRAY));
                 }
             }
+            if (!Objects.equals(this.force_tag, "")){
+                Arrays.stream(TagForceSoulItem.AvailableTags.values()).filter(x -> x.tag.equals(this.force_tag)).findFirst().ifPresent(x ->{
+                    tooltip.add(Itemtips.SOUL_LOCKED_TO_TYPE.locName(x.translation).withStyle(ChatFormatting.GOLD));
+                });
+            }
             exileTooltips.accept(new UsageBlock(tooltip));
+            exileTooltips.accept(new OperationTipBlock().setAlt().addDraggableTipAbove(OperationTipBlock.AvailableTarget.GEAR));
         }
 
         exileTooltips.accept(new AdditionalBlock(Collections.singletonList(Chats.RIGHT_CLICK_TO_GEN_ITEM.locName().withStyle(ChatFormatting.BLUE))).showWhen(() -> cangen));
-        exileTooltips.accept(new OperationTipBlock().setAlt().setShift().addDraggableTipAbove(OperationTipBlock.AvailableTarget.GEAR));
+
         return exileTooltips;
     }
 

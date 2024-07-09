@@ -90,7 +90,7 @@ public class OnItemInteract {
                     if (craftedStack.getCount() == 1) {
                         StatSoulData data = StackSaving.STAT_SOULS.loadFrom(craftedStack);
                         if (data != null && data.isArmor()) {
-                            data.force_tag = force.tag;
+                            data.force_tag = force.tag.tag;
                             data.saveToStack(craftedStack);
                             currency.shrink(1);
 
@@ -99,7 +99,7 @@ public class OnItemInteract {
                         } else {
                             if (craftedStack.getItem() instanceof CraftedSoulItem i) {
                                 if (i.getSoul(craftedStack) != null && i.getSoul(craftedStack).isArmor()) {
-                                    craftedStack.getOrCreateTag().putString("force_tag", force.tag);
+                                    craftedStack.getOrCreateTag().putString("force_tag", force.tag.tag);
                                     currency.shrink(1);
                                     return new Result(true).ding();
                                 }

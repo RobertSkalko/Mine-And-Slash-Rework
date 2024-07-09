@@ -4,13 +4,16 @@ import com.robertx22.age_of_exile.database.data.currency.base.IShapelessRecipe;
 import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
 import com.robertx22.age_of_exile.gui.texts.textblocks.OperationTipBlock;
 import com.robertx22.age_of_exile.gui.texts.textblocks.usableitemblocks.UsageBlock;
+import com.robertx22.age_of_exile.tags.all.SlotTags;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
+import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.critereon.EnchantedItemTrigger;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -25,20 +28,19 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 public class TagForceSoulItem extends AutoItem implements IShapelessRecipe {
-    public String tag;
-    Supplier<Item> item;
-    String tagname;
 
-    public TagForceSoulItem(Supplier<Item> si, String tag, String tagname) {
+    public AvailableTags tag;
+    Supplier<Item> item;
+
+    public TagForceSoulItem(Supplier<Item> item, AvailableTags tag) {
         super(new Properties());
         this.tag = tag;
-        this.tagname = tagname;
-        this.item = si;
+        this.item = item;
     }
 
     @Override
     public String locNameForLangFile() {
-        return tagname + " Soul Modifier";
+        return tag.tagName + " Soul Modifier";
     }
 
     @Override
@@ -64,5 +66,21 @@ public class TagForceSoulItem extends AutoItem implements IShapelessRecipe {
                 new ExileTooltips()
                         .accept(new UsageBlock(Collections.singletonList(Itemtips.SOUL_MODIFIER_TIP.locName().withStyle(ChatFormatting.AQUA))))
                         .accept(new OperationTipBlock().addDraggableTipAbove(OperationTipBlock.AvailableTarget.GEAR_SOUL)).release());
+    }
+
+    public enum AvailableTags{
+        PLATE(SlotTags.magic_shield_stat.GUID(), "Plate", Words.GEAR_LOCKED_TYPE_PLATE.locName()),
+        LEATHER(SlotTags.dodge_stat.GUID(), "Leather", Words.GEAR_LOCKED_TYPE_LEATHER.locName()),
+        CLOTH(SlotTags.armor_stat.GUID(), "Cloth", Words.GEAR_LOCKED_TYPE_CLOTH.locName());
+
+        public final String tag;
+        public final String tagName;
+        public final MutableComponent translation;
+
+        AvailableTags(String tag, String tagName, MutableComponent translation) {
+            this.tag = tag;
+            this.tagName = tagName;
+            this.translation = translation;
+        }
     }
 }
