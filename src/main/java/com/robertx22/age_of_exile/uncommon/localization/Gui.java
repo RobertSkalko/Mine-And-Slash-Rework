@@ -16,7 +16,6 @@ public enum Gui implements IAutoLocName {
 
     STATUS_BAR_LEVEL("Level %1$s %2$s%%"),
     MAINHUB_LEVEL("Level: "),
-    ENCHANTMENT_LEVEL("Level: "),
     STATS_POINTS("Points: "),
     TALENT_RESET_POINTS("Respecs: "),
     TALENT_POINTS("Points: "),
@@ -34,7 +33,7 @@ public enum Gui implements IAutoLocName {
     FAVOR_REGEN_PER_HOUR(ChatFormatting.LIGHT_PURPLE + "Regenerates %1$s " + ChatFormatting.LIGHT_PURPLE + "per Hour"),
     FAVOR_PER_CHEST(ChatFormatting.GREEN + "Gain %1$s per Chest Looted"),
     FAVOR_PER_DEATH(ChatFormatting.RED + "You Lose %1$s on Death"),
-    TAG_SEPARATOR(", ");
+    COMMA_SEPARATOR(", ");
 
 
     private String localization = "";

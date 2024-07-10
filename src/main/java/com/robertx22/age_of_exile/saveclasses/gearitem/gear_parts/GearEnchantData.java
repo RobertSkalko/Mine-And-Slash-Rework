@@ -38,7 +38,7 @@ public class GearEnchantData implements IStatsContainer, IGearPartTooltip {
 
         GearRarity rarity = ExileDB.GearRarities().get(rar);
 
-        list.add(Itemtips.Enchanted.locName().withStyle(rarity.textFormatting()));
+        list.add(Itemtips.Enchanted.locName(Component.literal(gear.data.get(GearItemData.KEYS.ENCHANT_TIMES) + "").withStyle(rarity.textFormatting())).withStyle(rarity.textFormatting()));
 
         for (ExactStatData stat : GetAllStats(gear)) {
             list.addAll(stat.GetTooltipString(info));

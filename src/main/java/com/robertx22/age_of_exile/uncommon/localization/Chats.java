@@ -13,7 +13,7 @@ public enum Chats implements IAutoLocName {
     TP_TO_DUNGEON_MAPNAME("Teleported to the [%1$s] Dungeon"),
     ITEM_CANT_CORRUPT_TWICE("This item is already corrupted."),
     CORRUPT_CANT_BE_MODIFIED("Corrupted Items can't be modified. They can only be sockeded with Gems etc."),
-    ALT_TO_SHOW_OTHER_SPELL("[Alt] to show the other Spell"),
+    ALT_TO_SHOW_OTHER_SPELL("Press [Alt] to show the other Spell"),
     MUST_BE_IN_MAP_TO_ACCEPT_PROPHECY("You must be inside the same Map Dungeon to accept Prophecy Rewards"),
     NOT_ENOUGH_FAVOR_TO_BUY_PROPHECY("Not enough Currency to buy the Prophecy. You can gain more Currency by killing dungeon mobs while under Prophecy Debuffs."),
     RESISTS_TOO_LOW_FOR_MAP("You lack Resistances to Open/Enter this Map."),

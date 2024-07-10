@@ -28,6 +28,7 @@ public class TooltipUtils {
 
     public static String CHECKMARK = ChatFormatting.GREEN + "\u2714";
     public static String X = ChatFormatting.RED + "\u2716";
+    static Character CHAR = "§".charAt(0); // TODO WTF INTELIJ
 
     public static MutableComponent color(ChatFormatting format, MutableComponent comp) {
         return Component.literal(format + "").append(comp);
@@ -49,7 +50,6 @@ public class TooltipUtils {
         tip.addAll(req.GetTooltipString(lvl, data));
     }
 
-
     public static void addEmpty(List<Component> tooltip) {
         tooltip.add(CLOC.blank(""));
     }
@@ -61,9 +61,7 @@ public class TooltipUtils {
     }
 
     public static MutableComponent level(int lvl) {
-        return Component.literal(ChatFormatting.YELLOW + "").append(Itemtips.LEVEL_TIP.locName())
-                .append(lvl + "")
-                .withStyle(ChatFormatting.YELLOW);
+        return Component.literal("").append(Itemtips.LEVEL_TIP.locName(lvl).withStyle(ChatFormatting.YELLOW));
 
     }
 
@@ -75,6 +73,8 @@ public class TooltipUtils {
 
     }
 
+    // private static final Pattern PATTERN = Pattern.compile("(?)§[0-9A-FK-OR]");
+
     public static List<MutableComponent> cutIfTooLong(MutableComponent comp, ChatFormatting format) {
         List<String> stringList = cutIfTooLong(CLOC.translate(comp));
         return stringList.stream()
@@ -82,10 +82,6 @@ public class TooltipUtils {
                 .collect(Collectors.toList());
 
     }
-
-    // private static final Pattern PATTERN = Pattern.compile("(?)§[0-9A-FK-OR]");
-
-    static Character CHAR = "§".charAt(0); // TODO WTF INTELIJ
 
     public static List<String> cutIfTooLong(String str) {
         if (true) {
@@ -217,19 +213,17 @@ public class TooltipUtils {
     }
 
     public static MutableComponent tier(int tier) {
-        return Itemtips.TIER_TIP.locName().append(tier + "");
+        return Itemtips.TIER_TIP.locName(tier);
 
     }
 
     public static MutableComponent gearSlot(GearSlot slot) {
-        return Itemtips.ITEM_TYPE.locName().withStyle(ChatFormatting.WHITE)
-                .append(slot.locName()
-                        .withStyle(ChatFormatting.AQUA));
+        return Itemtips.ITEM_TYPE.locName(slot.locName()
+                        .withStyle(ChatFormatting.AQUA)).withStyle(ChatFormatting.WHITE);
     }
 
     public static MutableComponent gearTier(int tier) {
-        return Itemtips.ITEM_TIER_TIP.locName().withStyle(ChatFormatting.WHITE)
-                .append(Component.literal(tier + "").withStyle(ChatFormatting.AQUA));
+        return Itemtips.ITEM_TIER_TIP.locName(Component.literal(tier + "").withStyle(ChatFormatting.GOLD)).withStyle(ChatFormatting.GOLD);
     }
 
     public static MutableComponent gearRarity(GearRarity rarity) {
@@ -265,8 +259,9 @@ public class TooltipUtils {
 
 
     public static MutableComponent dragOntoGearToUse() {
-        return Itemtips.USE_TIP.locName().withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD);
+        return Itemtips.GEAR_SOUL_USE_TIP.locName().withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD);
     }
+
 
     public static List<MutableComponent> splitLongText(MutableComponent comp) {
         List<MutableComponent> componentList = new ArrayList<>();
@@ -280,18 +275,37 @@ public class TooltipUtils {
     }
 
 
-    public static MutableComponent getMutableTags(Iterator<?> iterator, MutableComponent separator) {
+    public static List<Component> splitLongText(List<? extends Component> comps) {
+        ArrayList<Component> arrayList = new ArrayList<>();
+        for (Component target : comps) {
+            if (target.getString().contains("\n")) {
+                Style format = target.getStyle();
+                String[] originalList = target.getString().split("\n");
+
+                for (String comp1 : originalList) {
+                    arrayList.add(Component.literal(comp1).withStyle(format));
+                }
+            } else {
+                arrayList.add(target);
+            }
+
+        }
+        return arrayList;
+    }
+
+
+    public static MutableComponent joinMutableComps(Iterator<?> iterator, MutableComponent separator) {
         if (separator == null) {
-            separator = ExileText.emptyLine().get();
+            separator = Component.literal("");
         }
 
-        ExileText Etext = ExileText.emptyLine();
+        MutableComponent starter = Component.literal("");
         while (iterator.hasNext()) {
-            Etext.append((MutableComponent) iterator.next());
+            starter.append((MutableComponent) iterator.next());
             if (iterator.hasNext()) {
-                Etext.append(separator);
+                starter.append(separator);
             }
         }
-        return Etext.get();
+        return starter;
     }
 }

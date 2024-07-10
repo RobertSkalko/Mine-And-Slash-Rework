@@ -24,7 +24,7 @@ public class NormalStatTooltip implements IStatTooltipType {
 
         List<MutableComponent> list = new ArrayList<>();
 
-        MutableComponent txt = Component.literal(ChatFormatting.BLUE + info.stat.getStatNameRegex().translate(format, ctx, info.type, info.firstValue, info.stat));
+        MutableComponent txt = Component.literal("").append(Component.literal(info.stat.getStatNameRegex().translate(format, ctx, info.type, info.firstValue, info.stat)).withStyle(ChatFormatting.BLUE));
 
         if (ctx.statinfo.stat.is_long) {
             return longStat(ctx, txt);
@@ -36,7 +36,7 @@ public class NormalStatTooltip implements IStatTooltipType {
         }
         if (ctx.showStatRanges()) {
             if (ctx.statinfo.affix_rarity != null) {
-                txt.append(ctx.statinfo.affix_rarity.textFormatting() + " [").append(TooltipUtils.rarityShort(ctx.statinfo.affix_rarity)).append("]" + ChatFormatting.RESET);
+                txt.append(Component.literal(" [" + TooltipUtils.rarityShort(ctx.statinfo.affix_rarity).getString() + "]").withStyle(ctx.statinfo.affix_rarity.textFormatting()));
             }
         }
 
@@ -69,7 +69,7 @@ public class NormalStatTooltip implements IStatTooltipType {
             format = ChatFormatting.LIGHT_PURPLE;
         }
 
-        return Component.literal(format + " [" + perc + "%]" + ChatFormatting.RESET);
+        return Component.literal(" [" + perc + "%]").withStyle(format);
 
     }
 

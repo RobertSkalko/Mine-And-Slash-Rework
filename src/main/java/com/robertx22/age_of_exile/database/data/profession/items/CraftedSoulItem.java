@@ -7,14 +7,20 @@ import com.robertx22.age_of_exile.database.data.profession.ICreativeTabTiered;
 import com.robertx22.age_of_exile.database.data.profession.LeveledItem;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
+import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
+import com.robertx22.age_of_exile.gui.texts.textblocks.AdditionalBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.NameBlock;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.age_of_exile.saveclasses.stat_soul.StatSoulData;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.IRarityItem;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.age_of_exile.vanilla_mc.items.misc.AutoItem;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -23,6 +29,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
 
 public class CraftedSoulItem extends AutoItem implements ICreativeTabTiered, IRarityItem {
@@ -58,13 +65,18 @@ public class CraftedSoulItem extends AutoItem implements ICreativeTabTiered, IRa
         var soul = getSoul(pStack);
 
         if (soul != null) {
-            for (Component c : soul.getTooltip(pStack, false)) {
-                list.add(c);
-            }
+            list.clear();
+            if (Screen.hasShiftDown() && soul.gear != null) {
+                soul.gear.BuildTooltip(new TooltipContext(pStack, list, Load.Unit(ClientOnly.getPlayer())));
+            } else {
+                ExileTooltips tooltip = soul.getTooltip(pStack, false);
+                tooltip.accept(new NameBlock(Collections.singletonList(pStack.getHoverName())));
 
-            Player p = ClientOnly.getPlayer();
-            if (p != null && p.isCreative()) {
-                list.add(Words.DRAG_NO_WORK_CREATIVE.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+                Player p = ClientOnly.getPlayer();
+                if (p != null && p.isCreative()) {
+                    tooltip.accept(new AdditionalBlock(Words.DRAG_NO_WORK_CREATIVE.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD)));
+                }
+                list.addAll(tooltip.release());
             }
         }
     }
@@ -76,7 +88,7 @@ public class CraftedSoulItem extends AutoItem implements ICreativeTabTiered, IRa
 
     @Override
     public String locNameForLangFile() {
-        return ExileDB.GearRarities().get(rar).textFormatting() + "Crafted " + StringUTIL.capitalise(rar) + " " + StringUTIL.capitalise(fam.id) + " Soul";
+        return "Crafted " + StringUTIL.capitalise(rar) + " " + StringUTIL.capitalise(fam.id) + " Soul";
     }
 
     @Override

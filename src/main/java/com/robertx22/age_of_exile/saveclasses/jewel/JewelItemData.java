@@ -5,6 +5,9 @@ import com.robertx22.age_of_exile.database.data.affixes.Affix;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
+import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
+import com.robertx22.age_of_exile.gui.texts.textblocks.*;
+import com.robertx22.age_of_exile.gui.texts.textblocks.affixdatablocks.SimpleItemStatBlock;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
@@ -21,8 +24,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipStatsAligner;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.ChatFormatting;
@@ -34,6 +36,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
@@ -98,14 +101,30 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
     public void BuildTooltip(TooltipContext ctx) {
 
         ctx.tooltip.clear();
-
-        ctx.tooltip.add(Component.literal("").append(ctx.stack.getHoverName()).withStyle(getRarity().textFormatting()));
-
         TooltipInfo info = new TooltipInfo(ctx.data);
 
-        ctx.tooltip.add(Component.empty());
+        ctx.tooltip.addAll(new ExileTooltips()
+                .accept(new NameBlock(Collections.singletonList(ctx.stack.getHoverName())))
+                .accept(new RarityBlock(getRarity()))
+                .accept(new SimpleItemStatBlock(info)
 
-        if (!cor.isEmpty()) {
+                        .acceptIf(Itemtips.JEWEL_STATS.locName().withStyle(ChatFormatting.BLUE),
+                                affixes.stream().flatMap(x -> x.getAllStatsWithCtx(lvl, info).stream()).toList(),
+                                this.auraStats.isEmpty())
+
+                        .acceptIf(Itemtips.UNIQUE_STATS.locName().withStyle(ChatFormatting.YELLOW),
+                                this.auraStats.stream().flatMap(x -> x.getStatAndContext(ClientOnly.getPlayer()).stream().flatMap(statContext -> statContext.stats.stream())).toList(),
+                                !this.auraStats.isEmpty())
+
+                        .accept(Itemtips.COR_STATS.locName().withStyle(ChatFormatting.RED), cor.stream().flatMap(x -> x.getAllStatsWithCtx(lvl, info).stream()).toList())
+                )
+                .accept(new RequirementBlock(this.lvl))
+                .accept(new OperationTipBlock().setShift().setAlt())
+                .release());
+
+
+
+/*        if (!cor.isEmpty()) {
             ctx.tooltip.add(Itemtips.COR_STATS.locName().withStyle(ChatFormatting.RED));
             for (AffixData affix : cor) {
                 ctx.tooltip.addAll(affix.GetTooltipString(info, lvl));
@@ -124,7 +143,7 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
             List<Component> finalList = new TooltipStatsAligner(preList).buildNewTooltipsStats();
             ctx.tooltip.addAll(finalList);
             ctx.tooltip.add(Component.literal(""));
-
+//todo is this still working?
             if (uniq.isUnique()) {
                 if (uniq.isCraftableUnique()) {
                     if (uniq.getCraftedTier().canUpgradeMore()) {
@@ -142,11 +161,8 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
                 ctx.tooltip.addAll(aura.getTooltip());
                 ctx.tooltip.add(Component.empty());
             }
-        }
+        }*/
 
-
-        ctx.tooltip.add(TooltipUtils.gearRarity(getRarity()));
-        ctx.tooltip.add(TooltipUtils.level(lvl));
     }
 
     public boolean canWear(EntityData data) {

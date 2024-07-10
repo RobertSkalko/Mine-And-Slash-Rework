@@ -163,8 +163,8 @@ public class StatRequirement {
         } else {
 
             return Component.literal(ChatFormatting.RED + "" + ChatFormatting.BOLD + NO_ICON + " ").append(Itemtips.Stat_Req.locName(stat.locName())
-                            .withStyle(ChatFormatting.GRAY))
-                    .append("" + ChatFormatting.GRAY + req + perc + " ");
+                            .withStyle(ChatFormatting.DARK_GRAY))
+                    .append("" + ChatFormatting.DARK_GRAY + req + perc + " ");
 
         }
 

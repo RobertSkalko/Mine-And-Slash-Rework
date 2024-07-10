@@ -315,7 +315,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
         List<ExileEffect> effect = new ArrayList<>();
         List<String> ticks = new ArrayList<>();
-        //In CTE2 the duration of some effects is not a integer.
+        //In CTE2 the duration of some effects is not an integer.
         DecimalFormat decimalFormat = new DecimalFormat("0.0");
 
         if (ExileDB.ExileEffects().isRegistered(effect_tip)) {
@@ -345,6 +345,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
                 AtomicInteger i = new AtomicInteger();
                 effect.forEach(x -> {
                     list.add(x.locName().withStyle(ChatFormatting.BLUE));
+                    list.add(Words.Stats.locName().append(Words.PER_STACK.locName()).withStyle(ChatFormatting.GREEN));
                     List<ExactStatData> stats = x.getExactStats(ctx.caster, this, 1, 1);
                     for (ExactStatData stat : stats) {
                         list.addAll(stat.GetTooltipString(info));
@@ -371,7 +372,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
             }
         }
 
-        MutableComponent taglist = TooltipUtils.getMutableTags(this.config.tags.getTags(SpellTag.SERIALIZER).stream().map(x -> x.locName()).iterator(), Gui.TAG_SEPARATOR.locName());
+        MutableComponent taglist = TooltipUtils.joinMutableComps(this.config.tags.getTags(SpellTag.SERIALIZER).stream().map(x -> x.locName()).iterator(), Gui.COMMA_SEPARATOR.locName());
         MutableComponent tagtext = Words.TAGS.locName().append(taglist);
 
         list.add(tagtext);

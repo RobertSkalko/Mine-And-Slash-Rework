@@ -12,6 +12,8 @@ import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
@@ -65,7 +67,7 @@ public class UniqueStatsData implements IGearPartTooltip, IRerollable, IStatsCon
         info.minmax = getMinMax(gear);
 
         List<Component> list = new ArrayList<Component>();
-
+        list.add(Itemtips.UNIQUE_STATS.locName().withStyle(ChatFormatting.YELLOW));
         getAllStatsWithCtx(gear, info).forEach(x -> {
             if (true || !x.mod.GetStat().is_long) {
                 list.addAll(x.GetTooltipString(info));

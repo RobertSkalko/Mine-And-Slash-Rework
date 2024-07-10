@@ -7,13 +7,16 @@ import java.util.Locale;
 
 // to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
+    GEAR_LOCKED_TYPE_PLATE("Plate"),
+    GEAR_LOCKED_TYPE_LEATHER("Leather"),
+    GEAR_LOCKED_TYPE_CLOTH("Cloth"),
     Req_level("Required Level: "),
     DRAG_NO_WORK_CREATIVE("Drag and Drop Interactions Do-NOT work in Creative Mode!"),
 
     SoftcapInfo("This is the maximum possible value of this stat unless it's modified by for example Max X Resistance stat."),
     HardcapInfo("This is the maximum possible value of this stat. It can't be modified."),
     MincapInfo("This is the minimum possible value of this stat. It can't be modified."),
-    UsableValueInfo("Usable Value of the stat. This is used for stuff like Armor to turn it into % damage reduction, the higher level your target, the more value you need to protect against it."),
+    UsableValueInfo("Usable Value of the stat. This is used for stuff like Armor to turn it into % damage reduction. \nthe higher level your target, the more value you need to protect against it."),
     CurrentValueInfo("Current stat Value"),
     DmgMultiInfo("Damage Multiplier. This is a multiplicative damage source"),
     Effects("Effects:"),
@@ -71,7 +74,7 @@ public enum Words implements IAutoLocName {
     PROPHECIES("Prophecies"),
     CURRENTLY_SELECTED("Currently Selected"),
     Configs("Features"),
-    POSSIBLE_DROS("Possible Gear Drops:"),
+    POSSIBLE_DROPS("Possible Gear Drops:"),
     CAN_UPGRADE_MAP_RARITY("Can Upgrade Map Rarity\nThis Depends on Map level"),
     LASTS_SEC("Lasts %1$ss"),
     MOD_NAME("Mine and Slash"),
@@ -79,7 +82,7 @@ public enum Words implements IAutoLocName {
     CAPPED_BECAUSE_PLAYER_LEVEL(" - Next Slot Unlocks at Player Level %1$s"),
     IMPLICIT_STATS("Implicit Stats: "),
     ON_SLOTS("Slots: "),
-    SHIFT_TO_SHOW_EFFECT("Shift to Show Status Effect info."),
+    SHIFT_TO_SHOW_EFFECT("Press [Shift] to Show Status Effect info."),
     ONLY_SHOW_ALLOCATED("Only Show Allocated Talents, Toggle ON/OFF"),
 
     SPELL_STATS("Spell Stats:"),
@@ -124,7 +127,7 @@ public enum Words implements IAutoLocName {
     RerollsAffix("Rerolls an Affix"),
     UpgradeEnchant("Upgrades or Rerolls the Enchant"),
     UpgradeQuality("Upgrade Quality"),
-    CHAOS_STAT_SUCCESS("Upgrades the Item randomly."),
+    CHAOS_STAT_SUCCESS("Upgrades the Item randomly"),
     DowngradeAffix("Downgrades an affix"),
     DeletesAllAffixes("Deletes all affixes"),
     DestroysItem("DESTROYS the Item"),
@@ -191,7 +194,7 @@ public enum Words implements IAutoLocName {
 
     Normal_Gear("Normal Gear"),
 
-    Requirements("Requirements"),
+    Requirements("Requirements: "),
     AreaContains("Area Contains an Uber Boss Portal"),
 
 

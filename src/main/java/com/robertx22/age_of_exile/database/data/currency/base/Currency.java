@@ -88,8 +88,7 @@ public abstract class Currency implements IWeighted, IAutoLocName, IAutoLocDesc,
         if (!this.requirements().isEmpty()) {
 
             if (Screen.hasShiftDown()) {
-                tooltip.add(TooltipUtils.color(ChatFormatting.RED, Words.Requirements.locName()
-                        .append(": ")));
+                tooltip.add(TooltipUtils.color(ChatFormatting.RED, Words.Requirements.locName()));
 
                 for (BaseLocRequirement req : requirements()) {
                     tooltip.add(TooltipUtils.color(ChatFormatting.RED,

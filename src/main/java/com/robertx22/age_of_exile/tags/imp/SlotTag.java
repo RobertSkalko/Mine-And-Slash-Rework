@@ -10,6 +10,9 @@ import java.util.stream.Collectors;
 // purely for syntax
 public class SlotTag extends NormalModTag {
 
+    public static SlotTag SERIALIZER = new SlotTag("");
+
+
     public static SlotTag of(String id) {
         return (SlotTag) register(TagType.GearSlot, new SlotTag(id));
     }
@@ -17,7 +20,7 @@ public class SlotTag extends NormalModTag {
     public static List<SlotTag> getAll() {
         return ModTag.MAP.get(TagType.GearSlot).stream().map(x -> (SlotTag) x).collect(Collectors.toList());
     }
-
+    
     public SlotTag(String id) {
         super(id);
     }

@@ -1,8 +1,14 @@
 package com.robertx22.age_of_exile.database.data.loot_chest.base;
 
+import com.google.common.collect.ImmutableList;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
+import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
+import com.robertx22.age_of_exile.gui.texts.textblocks.AdditionalBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.NameBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.RarityBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.usableitemblocks.UsageBlock;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
@@ -13,14 +19,16 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+
+import static java.util.Collections.EMPTY_LIST;
 
 public class LootChestData implements ICommonDataItem<GearRarity> {
 
@@ -86,29 +94,26 @@ public class LootChestData implements ICommonDataItem<GearRarity> {
 
         tip.clear();
 
+        tip.addAll(new ExileTooltips()
+                .accept(new NameBlock(Collections.singletonList(ctx.stack.getHoverName())))
+                .accept(new RarityBlock(getRarity()))
+                .accept(new UsageBlock(ImmutableList.of(
+                        Itemtips.CHEST_CONTAINS.locName(new ChestContent(getLootChest().GUID()).get().locName().withStyle(ChatFormatting.YELLOW)),
+                        TooltipUtils.level(lvl))
+                ))
+                .accept(new AdditionalBlock(ImmutableList.of(Chats.OPEN_LOOT_CHEST.locName().withStyle(ChatFormatting.AQUA))))
+                .accept(new AdditionalBlock(() -> {
+                    //weird
+                    if (getKeyItem() != null) {
+                        return ImmutableList.of(Itemtips.NEED_KEY.locName(getKeyItem().getDefaultInstance().getHoverName()).withStyle(ChatFormatting.GOLD));
+                    } else {
+                        return EMPTY_LIST;
+                    }
+                }).showWhen(this::isLocked))
+                .release());
 
-        GearRarity rar = getRarity();
 
-        tip.add(Component.literal(rar.textFormatting() + "").withStyle(rar.textFormatting()).append(ctx.stack.getHoverName()).withStyle(rar.textFormatting()));
-
-
-        tip.add(Component.empty());
-
-        tip.add(Itemtips.CHEST_CONTAINS.locName().append(new ChestContent(getLootChest().GUID()).get().locName()));
-
-        tip.add(Component.empty());
-
-        tip.add(Chats.OPEN_LOOT_CHEST.locName().withStyle(ChatFormatting.GRAY));
-
-        if (isLocked()) {
-            tip.add(Itemtips.NEED_KEY.locName().append(getKeyItem().getDefaultInstance().getHoverName()));
-        }
-
-        tip.add(Component.empty());
-
-        tip.add(TooltipUtils.level(lvl));
-        tip.add(TooltipUtils.rarity(rar));
-
+        //tip.add(TooltipUtils.level(lvl));
     }
 
     @Override

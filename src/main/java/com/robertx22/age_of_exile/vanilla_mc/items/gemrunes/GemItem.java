@@ -455,7 +455,6 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
 
             tooltip.addAll(getBaseTooltip());
 
-            tooltip.add(Component.literal(""));
 
         } catch (Exception e) {
             e.printStackTrace();

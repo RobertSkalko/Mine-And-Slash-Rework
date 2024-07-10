@@ -29,7 +29,7 @@ public class ProfDropTierPickerCurrency extends ProfCurrency {
 
     @Override
     public String locDescForLangFile() {
-        return "Caps the level of drops possible with a profession tool. Useful in case you want lower level drops, in case you still need materials to level up your crafting skills.";
+        return "Caps the level of drops possible with a profession tool. \nUseful in case you want lower level drops, in case you still need materials \nto level up your crafting skills.";
     }
 
     @Override
