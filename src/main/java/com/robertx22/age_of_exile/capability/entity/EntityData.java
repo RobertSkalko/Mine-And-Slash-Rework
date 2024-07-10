@@ -879,7 +879,7 @@ public class EntityData implements ICap, INeededForClient {
 
             // fully restore on lvlup
 
-            this.setLevel_player(level + 1, player);
+            this.setLevel(level + 1);
             setExp(getRemainingExp());
 
             OnScreenMessageUtils.sendLevelUpMessage(player, Words.LEVEL_UP_TYPE_PLAYER.locName(), level - 1, level);
@@ -897,15 +897,15 @@ public class EntityData implements ICap, INeededForClient {
     public void setLevel(int lvl) {
         level = Mth.clamp(lvl, 1, GameBalanceConfig.get().MAX_LEVEL);
 
+        if (entity instanceof Player p) {
+            p.resetStat(Stats.CUSTOM.get(PlayerStats.LEVELS_GAINED));
+            p.awardStat(Stats.CUSTOM.get(PlayerStats.LEVELS_GAINED), lvl);
+        }
+
         this.gear.setDirty();
         this.sync.setDirty();
     }
 
-    public void setLevel_player(int lvl, Player player) {
-        setLevel(lvl);
-        player.resetStat(Stats.CUSTOM.get(PlayerStats.LEVELS_GAINED));
-        player.awardStat(Stats.CUSTOM.get(PlayerStats.LEVELS_GAINED), lvl);
-    }
 
     public int getExp() {
         return exp;

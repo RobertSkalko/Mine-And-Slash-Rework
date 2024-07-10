@@ -24,6 +24,13 @@ public class GuiInventoryGrids {
 
         PickSpellAction.SLOT = slot;
 
+        /*
+        for (Spell spell : ExileDB.Spells().getFilterWrapped(x -> x.config.hotbarUsable && x.getLevelOf(p) > 0).list) {
+            list.add(new GuiItemData(new PickSpellAction(spell)));
+        }
+        */
+
+        // todo stopped this feature because then i'd be using up hotbar slots with spells that cant be casted by themselves..
         for (SpellCastingData.InsertedSpell spell : Load.player(p).spellCastingData.spells) {
             list.add(new GuiItemData(new PickSpellAction(spell.getData().getSpell())));
         }

@@ -85,6 +85,11 @@ public abstract class LeagueStructure {
     public final void tryGenerate(ServerLevel level, ChunkPos pos, Random ran) {
         try {
             var md = Load.mapAt(level, pos.getBlockAt(0, 0, 0));
+
+            if (md == null || md.map == null) {
+                return;
+            }
+
             var map = md.map;
 
             var list = getPieces(map);

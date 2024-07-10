@@ -4,19 +4,11 @@ import com.robertx22.age_of_exile.capability.player.data.RestedExpData;
 import com.robertx22.age_of_exile.capability.player.data.StatPointsData;
 import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.perks.TalentsData;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellSchoolsData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.achievement.StatsScreen;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.stats.StatFormatter;
-import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
@@ -78,7 +70,7 @@ public class CharacterData {
 
         data.name = this.name;
 
-        unit.setLevel_player(this.lvl, p);
+        unit.setLevel(this.lvl);
         unit.setExp(this.xp);
 
     }

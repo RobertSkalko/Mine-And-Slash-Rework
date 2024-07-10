@@ -125,6 +125,8 @@ public class PlayerData implements ICap {
 
     public int bonusTalents = 0;
 
+    public int emptyMapTicks = 0;
+
     public PlayerData(Player player) {
         this.player = player;
     }
