@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.NumberUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.OnScreenMessageUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -56,8 +57,8 @@ public class PlayerProfessionsData {
         var data = map.get(id);
         data.exp += exp;
 
-        int perc = MathHelper.clamp((int) (map.get(id).exp / (float) map.get(id).getExpNeeded() * 100F), 0, 100);
-        OnScreenMessageUtils.actionBar((ServerPlayer) p, Gui.EXP_GAIN_PERCENT.locName(exp, ExileDB.Professions().get(id).locName(), perc).withStyle(ChatFormatting.GREEN));
+        float perc = MathHelper.clamp(((1.0f * map.get(id).exp) / (1.0f *  map.get(id).getExpNeeded()) * 100F), 0, 100);
+        OnScreenMessageUtils.actionBar((ServerPlayer) p, Gui.EXP_GAIN_PERCENT.locName(exp, ExileDB.Professions().get(id).locName(), NumberUtils.singleDigitFloat(perc)).withStyle(ChatFormatting.GREEN));
 
         if (data.canLvl() && Load.Unit(p).getLevel() > data.lvl) {
             data.levelUp();
