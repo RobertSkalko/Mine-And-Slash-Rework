@@ -24,6 +24,12 @@ public class PlayerProfessionsData {
         return map.getOrDefault(id, new Data()).lvl;
     }
 
+    public void setLevel(String id, int num) {
+        var data = map.getOrDefault(id, new Data());
+        data.lvl = num;
+        map.put(id, data);
+    }
+
     public int getExp(String id) {
         return map.getOrDefault(id, new Data()).exp;
     }

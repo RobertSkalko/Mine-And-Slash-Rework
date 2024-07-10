@@ -82,48 +82,56 @@ public class DamageEvent extends EffectEvent {
 
     public void addMobDamageMultipliers() {
 
-        if (source instanceof Player == false) {
-            MobRarity rar = sourceData.getMobRarity();
+        try {
+            if (source instanceof Player == false) {
+                MobRarity rar = sourceData.getMobRarity();
 
-            float enconfigmulti = (float) ExileDB.getEntityConfig(source, sourceData).dmg_multi;
+                float enconfigmulti = (float) ExileDB.getEntityConfig(source, sourceData).dmg_multi;
 
-            this.addMoreMulti(Words.MOB_RARITY_MULTI.locName(), EventData.NUMBER, rar.DamageMultiplier());
+                this.addMoreMulti(Words.MOB_RARITY_MULTI.locName(), EventData.NUMBER, rar.DamageMultiplier());
 
-            if (enconfigmulti != 1) {
-                this.addMoreMulti(Words.MOB_CONFIG_MULTI.locName(), EventData.NUMBER, enconfigmulti);
-            }
+                if (enconfigmulti != 1) {
+                    this.addMoreMulti(Words.MOB_CONFIG_MULTI.locName(), EventData.NUMBER, enconfigmulti);
+                }
 
-            if (WorldUtils.isDungeonWorld(source.level())) {
-                if (target instanceof Player) {
-                    var map = Load.mapAt(target.level(), target.blockPosition());
-                    if (map != null && map.map != null) {
-                        if (!map.map.getStatReq().meetsReq(map.map.lvl, Load.Unit(target))) {
-                            float minusres = map.map.getStatReq().getLackingResistNumber(map.map.lvl, Load.Unit(target));
-                            float multi = (float) (minusres * GameBalanceConfig.get().MOB_DMG_MULTI_PER_MAP_RES_REQ_LACKING);
-                            this.addMoreMulti(Words.MAP_RES_REQ_LACK_DMG_MULTI.locName(), EventData.NUMBER, multi);
+                if (WorldUtils.isDungeonWorld(source.level())) {
+                    if (target instanceof Player) {
+                        var map = Load.mapAt(target.level(), target.blockPosition());
+                        if (map != null && map.map != null) {
+                            if (!map.map.getStatReq().meetsReq(map.map.lvl, Load.Unit(target))) {
+                                float minusres = map.map.getStatReq().getLackingResistNumber(map.map.lvl, Load.Unit(target));
+                                float multi = (float) (minusres * GameBalanceConfig.get().MOB_DMG_MULTI_PER_MAP_RES_REQ_LACKING);
+                                this.addMoreMulti(Words.MAP_RES_REQ_LACK_DMG_MULTI.locName(), EventData.NUMBER, multi);
+                            }
                         }
                     }
                 }
-            }
 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
 
     public Component getDamageName() {
 
-        if (this.data.isBasicAttack()) {
-            return Component.literal("Attack");
-        }
-        if (this.data.isSpellEffect()) {
-            return getSpell().locName();
-        }
+        try {
+            if (this.data.isBasicAttack()) {
+                return Component.literal("Attack");
+            }
+            if (this.data.isSpellEffect()) {
+                return getSpell().locName();
+            }
 
-        var id = data.getString(EventData.AILMENT);
+            var id = data.getString(EventData.AILMENT);
 
-        if (ExileDB.Ailments().isRegistered(id)) {
-            var ailment = ExileDB.Ailments().get(id);
-            return ailment.locName();
+            if (ExileDB.Ailments().isRegistered(id)) {
+                var ailment = ExileDB.Ailments().get(id);
+                return ailment.locName();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return Component.literal("[Error, dmg isn't a basic attack, spell or ailment]");

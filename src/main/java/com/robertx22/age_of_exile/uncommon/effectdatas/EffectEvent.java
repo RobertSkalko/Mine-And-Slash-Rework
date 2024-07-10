@@ -19,6 +19,7 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.rework.EventData;
 import com.robertx22.age_of_exile.uncommon.interfaces.EffectSides;
 import com.robertx22.age_of_exile.uncommon.interfaces.IStatEffect;
 import com.robertx22.library_of_exile.registry.IGUID;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -57,7 +58,7 @@ public abstract class EffectEvent implements IGUID {
     }
 
     public void addMoreMulti(Stat stat, String number, float multi) {
-        addMoreMulti(stat.locName(), number, multi);
+        addMoreMulti(Component.literal("Stat: ").append(stat.locName()), number, multi);
     }
 
     public void addMoreMulti(MutableComponent text, String number, float multi) {

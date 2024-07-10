@@ -210,3 +210,8 @@ I'll have to see if i can avoid those, like the elemental weakness map affix.
 v.5.5.19
 - attempt to fix ele pene not working with ailments
 - fix map loot being a bit too high
+
+v.5.5.20
+- set level command now works on any entity, not just players
+- set prof level command
+- being in empty map will now kick the player

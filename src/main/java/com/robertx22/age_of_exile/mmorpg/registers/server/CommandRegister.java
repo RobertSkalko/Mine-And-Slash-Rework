@@ -24,6 +24,8 @@ import com.robertx22.age_of_exile.vanilla_mc.commands.stats.ClearStats;
 import com.robertx22.age_of_exile.vanilla_mc.commands.stats.GiveStat;
 import com.robertx22.age_of_exile.vanilla_mc.commands.stats.ListStats;
 import com.robertx22.age_of_exile.vanilla_mc.commands.stats.RemoveStat;
+import com.robertx22.age_of_exile.vanilla_mc.new_commands.EntityCommands;
+import com.robertx22.age_of_exile.vanilla_mc.new_commands.PlayerCommands;
 import net.minecraft.commands.CommandSourceStack;
 
 public class CommandRegister {
@@ -31,6 +33,9 @@ public class CommandRegister {
     public static void Register(CommandDispatcher<CommandSourceStack> dispatcher) {
         System.out.println("Registering Mine and slash Commands.");
 
+
+        EntityCommands.init(dispatcher);
+        PlayerCommands.init(dispatcher);
 
         GiveExactUnique.register(dispatcher);
         GiveMap.register(dispatcher);
@@ -57,7 +62,7 @@ public class CommandRegister {
 
         SetEntityRarity.register(dispatcher);
         SpawnBoss.register(dispatcher);
-        SetLevel.register(dispatcher);
+
         SetProphecyFavor.register(dispatcher);
         GiveExp.register(dispatcher);
         SetFavor.register(dispatcher);
@@ -76,7 +81,7 @@ public class CommandRegister {
         RollCommand.register(dispatcher);
 
         ListStatSourcesCommand.register(dispatcher);
-        
+
         GenerateWikiCommand.register(dispatcher);
 
         RunTestCommand.register(dispatcher);

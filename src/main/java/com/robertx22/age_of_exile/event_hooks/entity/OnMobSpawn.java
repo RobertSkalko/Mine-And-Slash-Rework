@@ -94,6 +94,7 @@ public class OnMobSpawn {
             rar = config.set_rar;
         }
 
+
         endata.setRarity(rar);
 
         MobRarity rarity = ExileDB.MobRarities().get(rar);

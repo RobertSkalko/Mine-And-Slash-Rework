@@ -92,6 +92,10 @@ public class ProcessChunkBlocks {
 
                 var map = Load.mapAt(level, pos);
 
+                if (map == null || map.map == null) {
+                    return;
+                }
+
                 map.dungeonid = builder.dungeon.GUID();
 
                 if (map.mobs.isEmpty()) {

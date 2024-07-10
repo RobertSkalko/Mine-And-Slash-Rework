@@ -9,6 +9,7 @@ public enum Chats implements IAutoLocName {
     PROPHECIES_GUIDE("1) Kill Monsters while Cursed to gain Prophecy Coins\n\n2) You can Buy Rewards in this GUI\n\n3) The More curses you accept, the more coins you will earn.\n\nYour Coins and Prophecies reset on entering another map."),
 
     PROPHECY_MAP_DEATHCURRENCY("You lost %1$s Prophecy Coins"),
+    EMPTY_MAP_FORCED_TP("The Map you're currently inside was deleted. This can happen if you entered another player's map and they started a new one."),
     TP_TO_DUNGEON_MAPNAME("Teleported to the [%1$s] Dungeon"),
     ITEM_CANT_CORRUPT_TWICE("This item is already corrupted."),
     CORRUPT_CANT_BE_MODIFIED("Corrupted Items can't be modified. They can only be sockeded with Gems etc."),

@@ -45,6 +45,19 @@ public class OnServerTick {
 
                     var map = Load.mapAt(player.level(), player.blockPosition());
 
+                    if (map == null || map.map == null) {
+                        playerData.emptyMapTicks++;
+
+                        if (playerData.emptyMapTicks > 30) {
+                            player.sendSystemMessage(Chats.EMPTY_MAP_FORCED_TP.locName().withStyle(ChatFormatting.RED));
+                            playerData.map.teleportBack(player);
+                            return;
+                        }
+
+                    } else {
+                        playerData.emptyMapTicks = 0;
+                    }
+
                     var pro = Load.player(player).prophecy;
 
                     if (!pro.mapid.equals(map.map.uuid)) {
