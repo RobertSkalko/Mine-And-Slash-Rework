@@ -86,7 +86,7 @@ public abstract class StatNameRegex {
         }
 
         if (stat.is_long) {
-            String txt = CLOC.translate(stat.locName());
+            String txt = stat.locName().getString();
 
             txt = txt.replace(Stat.VAL1, plusminus + v1s); // todo dont think i need to add % here because i add it whenever needed in the manual long tooltip
 

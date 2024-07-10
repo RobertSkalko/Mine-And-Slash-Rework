@@ -312,7 +312,6 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
 
     public abstract Elements getElement();
 
-    @OnlyIn(Dist.CLIENT)
     public List<MutableComponent> getTooltipList(TooltipStatWithContext info) {
         return info.statinfo.tooltipInfo.statTooltipType.impl.getTooltipList(null, info);
     }

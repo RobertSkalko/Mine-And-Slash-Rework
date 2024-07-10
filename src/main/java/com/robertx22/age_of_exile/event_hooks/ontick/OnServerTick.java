@@ -58,7 +58,7 @@ public class OnServerTick {
                             if (Load.player(player).map.sendMapTpMsg) {
                                 Load.player(player).map.sendMapTpMsg = false;
 
-                                var info = TextUTIL.mergeList(map.map.getTooltip());
+                                var info = TextUTIL.mergeList(map.map.getTooltipOnServer(player));
 
                                 var event = new HoverEvent(HoverEvent.Action.SHOW_TEXT, info);
                                 player.sendSystemMessage(Chats.TP_TO_DUNGEON_MAPNAME.locName(ExileDB.Dungeons().get(map.dungeonid).locName()

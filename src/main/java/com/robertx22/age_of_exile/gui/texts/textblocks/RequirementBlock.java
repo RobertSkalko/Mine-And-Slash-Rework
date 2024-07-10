@@ -9,17 +9,21 @@ import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequirement.CHECK_YES_ICON;
 import static com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequirement.NO_ICON;
 
 public class RequirementBlock extends AbstractTextBlock {
-    private final EntityData playerData = Load.Unit(ClientOnly.getPlayer());
+    private EntityData playerData = null;
 
     @Nullable
     public StatRequirement statRequirement;
@@ -34,16 +38,11 @@ public class RequirementBlock extends AbstractTextBlock {
         super();
     }
 
-    public RequirementBlock(@NotNull StatRequirement statRequirement) {
+    public RequirementBlock(Player player) {
         super();
-        this.statRequirement = statRequirement;
+        this.playerData = Load.Unit(player);
     }
 
-    public RequirementBlock(@NotNull StatRequirement statRequirement, @NotNull Integer levelRequirement) {
-        super();
-        this.statRequirement = statRequirement;
-        this.levelRequirement = levelRequirement;
-    }
 
     public RequirementBlock(@NotNull Integer levelRequirement) {
         super();
@@ -68,8 +67,12 @@ public class RequirementBlock extends AbstractTextBlock {
     @Override
     public List<? extends Component> getAvailableComponents() {
         ImmutableList.Builder<Component> builder = ImmutableList.builder();
+        if (this.playerData == null){
+            this.playerData = Load.Unit(ClientOnly.getPlayer());
+        }
+
         if (levelRequirement != null) {
-            boolean ifMetLevel = playerData.getLevel() >= levelRequirement;
+            boolean ifMetLevel = this.playerData.getLevel() >= levelRequirement;
 
             if (ifMetLevel) {
                 builder.add(Component.literal("").append(Component.literal(CHECK_YES_ICON).withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD)).append(Component.literal(" ")).append(Itemtips.LEVEL_REQ.locName(levelRequirement).withStyle().withStyle(ChatFormatting.GRAY)));

@@ -48,6 +48,13 @@ public class TooltipInfo implements Cloneable {
         this.hasAltDown = Screen.hasAltDown();
         this.hasShiftDown = Screen.hasShiftDown();
     }
+    public TooltipInfo(boolean onServer) {
+        this.hasAltDown = false;
+        this.hasShiftDown = false;
+
+        this.player = null;
+        this.unitdata = null;
+    }
 
     public TooltipInfo setIsSet() {
         this.isSet = true;
