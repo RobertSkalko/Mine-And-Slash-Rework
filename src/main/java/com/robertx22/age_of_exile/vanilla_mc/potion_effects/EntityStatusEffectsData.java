@@ -12,12 +12,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 public class EntityStatusEffectsData {
 
 
-    public HashMap<String, ExileEffectInstanceData> exileMap = new HashMap<>();
+    public ConcurrentHashMap<String, ExileEffectInstanceData> exileMap = new ConcurrentHashMap<>();
 
     public int getStacks(String eff) {
         if (exileMap.containsKey(eff)) {
