@@ -298,14 +298,14 @@ public class TooltipUtils {
     }
 
 
-    public static MutableComponent joinMutableComps(Iterator<?> iterator, MutableComponent separator) {
+    public static MutableComponent joinMutableComps(Iterator<? extends Component> iterator, MutableComponent separator) {
         if (separator == null) {
             separator = Component.literal("");
         }
 
         MutableComponent starter = Component.literal("");
         while (iterator.hasNext()) {
-            starter.append((MutableComponent) iterator.next());
+            starter.append(iterator.next());
             if (iterator.hasNext()) {
                 starter.append(separator);
             }

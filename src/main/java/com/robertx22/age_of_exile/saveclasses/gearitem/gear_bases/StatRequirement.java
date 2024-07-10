@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatScaling;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -64,6 +65,29 @@ public class StatRequirement {
             }
         }
         return true;
+
+    }
+
+    public List<Component> getReqDifference(int lvl, EntityData data) {
+        ArrayList<Component> components = new ArrayList<>();
+
+        for (Map.Entry<String, Float> en : this.scaling_req.entrySet()) {
+            Stat x = ExileDB.Stats().get(en.getKey());
+            int num = getScalingReq(x, lvl);
+            float targetValue = data.getUnit().getCalculatedStat(x).getValue();
+            if (num > targetValue) {
+                components.add(Chats.NOT_MEET_MAP_REQ.locName(x.locName(), num, targetValue));
+            }
+        }
+        for (Map.Entry<String, Float> en : this.base_req.entrySet()) {
+            Stat x = ExileDB.Stats().get(en.getKey());
+            int num = getNonScalingReq(x, lvl);
+            float targetValue = data.getUnit().getCalculatedStat(x).getValue();
+            if (num > targetValue) {
+                components.add(Chats.NOT_MEET_MAP_REQ.locName(x.locName(), num, targetValue));
+            }
+        }
+        return components;
 
     }
 

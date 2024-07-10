@@ -22,10 +22,13 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.CLOC;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 
@@ -56,11 +59,9 @@ public abstract class BestiaryGroup<T> {
 
                 var slotsText = Words.ON_SLOTS.locName();
 
-                for (String slot : x.slots) {
-                    GearSlot s = ExileDB.GearSlots().get(slot);
-                    slotsText.append(s.locName()).append(", ");
-                }
-                tooltip.add(slotsText);
+                List<MutableComponent> list = x.slots.stream().map(string -> ExileDB.GearSlots().get(string).locName()).toList();
+
+                tooltip.add(slotsText.append(TooltipUtils.joinMutableComps(list.iterator(), Gui.COMMA_SEPARATOR.locName())));
                 tooltip.add(Component.empty());
 
 
