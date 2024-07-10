@@ -119,9 +119,9 @@ public class MapHolder {
         }
     }
 
-    public SimpleParticleType getParticle() {
+    /*public SimpleParticleType getParticle() {
         return (SimpleParticleType) BuiltInRegistries.PARTICLE_TYPE.get(new ResourceLocation(get(MapField.PARTICLE_TYPE)));
-    }
+    }*/
 
     public Block getBlock() {
         return VanillaUTIL.REGISTRY.blocks().get(new ResourceLocation(get(MapField.BLOCK)));
