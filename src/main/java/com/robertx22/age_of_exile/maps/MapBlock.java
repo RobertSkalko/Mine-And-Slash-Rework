@@ -11,6 +11,7 @@ import com.robertx22.library_of_exile.utils.geometry.Circle2d;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
@@ -26,6 +27,8 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class MapBlock extends BaseEntityBlock {
     public MapBlock() {
@@ -100,6 +103,11 @@ public class MapBlock extends BaseEntityBlock {
                     }
                     if (!data.getStatReq().meetsReq(data.lvl, Load.Unit(p))) {
                         p.sendSystemMessage(Chats.RESISTS_TOO_LOW_FOR_MAP.locName().withStyle(ChatFormatting.RED));
+                        List<Component> reqDifference = data.getStatReq().getReqDifference(data.lvl, Load.Unit(p));
+                        if (!reqDifference.isEmpty()) {
+                            p.sendSystemMessage(Chats.NOT_MEET_MAP_REQ_FIRST_LINE.locName());
+                            reqDifference.forEach(p::sendSystemMessage);
+                        }
                         return InteractionResult.FAIL;
                     }
 
@@ -130,12 +138,17 @@ public class MapBlock extends BaseEntityBlock {
                         p.sendSystemMessage(Chats.NO_MORE_LIVES_REMAINING.locName().withStyle(ChatFormatting.RED));
                         return InteractionResult.FAIL;
                     }
-
-                    if (!mapData.map.getStatReq().meetsReq(mapData.map.lvl, Load.Unit(p))) {
+                    MapItemData map1 = mapData.map;
+                    if (!map1.getStatReq().meetsReq(map1.lvl, Load.Unit(p))) {
                         p.sendSystemMessage(Chats.RESISTS_TOO_LOW_FOR_MAP.locName().withStyle(ChatFormatting.RED));
+                        List<Component> reqDifference = map1.getStatReq().getReqDifference(map1.lvl, Load.Unit(p));
+                        if (!reqDifference.isEmpty()) {
+                            p.sendSystemMessage(Chats.NOT_MEET_MAP_REQ_FIRST_LINE.locName());
+                            reqDifference.forEach(p::sendSystemMessage);
+                        }
                         return InteractionResult.FAIL;
                     }
-                    if (Load.Unit(p).getLevel() < (mapData.map.lvl - 5)) {
+                    if (Load.Unit(p).getLevel() < (map1.lvl - 5)) {
                         p.sendSystemMessage(Chats.TOO_LOW_LEVEL.locName().withStyle(ChatFormatting.RED));
                         return InteractionResult.FAIL;
                     }
