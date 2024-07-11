@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.saveclasses.item_classes;
 
 import com.google.common.collect.ImmutableList;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
+import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.MinMax;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
@@ -22,10 +23,8 @@ import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
-import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nonnull;
@@ -79,6 +78,7 @@ public class GearTooltipUtils {
                                 .min(Integer::compare)
                                 .orElse(Integer.MAX_VALUE);
                     }
+
                     @Override
                     public List<? extends Component> getAvailableComponents() {
                         IgnoreNullList<Component> list = new IgnoreNullList<>();
@@ -97,6 +97,10 @@ public class GearTooltipUtils {
                         }
 
                         boolean showMerge = !tinfo.useInDepthStats();
+                        if (ClientConfigs.getConfig().IN_DEPTH_TOOLTIPS_BY_DEFAULT.get()) {
+                            showMerge = false;
+                        }
+
                         if (showMerge) {
 
                             List<ExactStatData> stats = new ArrayList<>();
@@ -160,7 +164,7 @@ public class GearTooltipUtils {
                                 for (TooltipStatInfo tooltipStatInfo : tooltipStatInfos) {
                                     list.addAll(tooltipStatInfo.GetTooltipString(tinfo));
                                 }
-                                list.add(EMPTY_LINE);
+                                //list.add(EMPTY_LINE);
                             }
 
                             Optional.ofNullable(map.get(true))
@@ -178,7 +182,8 @@ public class GearTooltipUtils {
                             List<Component> corComps = new ArrayList<>();
                             List<Component> suffixComps = new ArrayList<>();
                             impComps = implicitStatsData.GetTooltipString(tinfo, gearItemData);
-                            if (uniqueStatsData != null) uniComps = uniqueStatsData.GetTooltipString(tinfo, gearItemData);
+                            if (uniqueStatsData != null)
+                                uniComps = uniqueStatsData.GetTooltipString(tinfo, gearItemData);
                             var color = ChatFormatting.BLUE;
                             if (!gearAffixesData.getPreStatsWithCtx(gearItemData, tinfo).isEmpty()) {
                                 prefixComps.add(Itemtips.PREFIX_STATS.locName().withStyle(color));
@@ -220,9 +225,9 @@ public class GearTooltipUtils {
                         //handle sockets and enchantment
                         IgnoreNullList<IGearPartTooltip> list3 = IgnoreNullList.of(gearSocketsData, gearEnchantData);
                         ListIterator<IGearPartTooltip> iGearPartTooltipListIterator = list3.listIterator();
-                        while (iGearPartTooltipListIterator.hasNext()){
+                        while (iGearPartTooltipListIterator.hasNext()) {
                             list.addAll(iGearPartTooltipListIterator.next().GetTooltipString(tinfo, gearItemData));
-                            if (iGearPartTooltipListIterator.hasNext()){
+                            if (iGearPartTooltipListIterator.hasNext()) {
                                 list.add(EMPTY_LINE);
                             }
                         }
@@ -235,7 +240,7 @@ public class GearTooltipUtils {
                                 gear.isCorrupted() ? Component.literal("").append(Itemtips.POTENTIAL.locName(gear.getPotentialNumber()).withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.STRIKETHROUGH)).append(Component.literal(" ")).append(Words.Corrupted.locName().withStyle(ChatFormatting.RED)) : Itemtips.POTENTIAL.locName(gear.getPotentialNumber()).withStyle(ChatFormatting.GOLD),
                                 Itemtips.QUALITY.locName(gear.getQuality()).withStyle(ChatFormatting.GOLD)
                         )
-                ))
+                ).showWhen(() -> info.hasShiftDown))
                 .accept(new AdditionalBlock(() -> {
                             int cost = (int) Energy.getInstance().scale(ModType.FLAT, gear.GetBaseGearType().getGearSlot().weapon_data.energy_cost_per_swing, data.getLevel());
                             int permob = (int) Energy.getInstance().scale(ModType.FLAT, gear.GetBaseGearType().getGearSlot().weapon_data.energy_cost_per_mob_attacked, data.getLevel());
@@ -244,7 +249,7 @@ public class GearTooltipUtils {
                             return Collections.singletonList(Words.Energy_Cost_Per_Mob.locName(cost, permob, damageFactor).withStyle(ChatFormatting.GREEN));
                         }).showWhen(() -> info.hasShiftDown && gear.GetBaseGearType().getGearSlot().weapon_data.damage_multiplier > 0)
                 )
-                .accept(new AdditionalBlock(() -> ImmutableList.of(Words.TAGS.locName().append(TooltipUtils.joinMutableComps(gear.GetBaseGearType().getTags().getTags(SlotTag.SERIALIZER).stream().map(x -> ((SlotTag)x).locName()).toList().iterator(), Gui.COMMA_SEPARATOR.locName())))).showWhen(() -> info.hasShiftDown)
+                .accept(new AdditionalBlock(() -> ImmutableList.of(Words.TAGS.locName().append(TooltipUtils.joinMutableComps(gear.GetBaseGearType().getTags().getTags(SlotTag.SERIALIZER).stream().map(x -> ((SlotTag) x).locName()).toList().iterator(), Gui.COMMA_SEPARATOR.locName())))).showWhen(() -> info.hasShiftDown)
                 )
                 .accept(new OperationTipBlock().setAll())
                 .accept(new DurabilityBlock(stack))

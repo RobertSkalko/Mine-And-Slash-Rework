@@ -21,6 +21,10 @@ public class GearEnchantData implements IStatsContainer, IGearPartTooltip {
     public String rar = IRarity.COMMON_ID;
 
 
+    public boolean isEmpty() {
+        return !ExileDB.Affixes().isRegistered(en);
+    }
+
     @Override
     public Part getPart() {
         return Part.OTHER;

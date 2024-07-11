@@ -76,7 +76,7 @@ public class CraftedEnchantItem extends AutoItem implements IItemAsCurrency, ICr
 
     @Override
     public String locNameForLangFile() {
-        return StringUTIL.capitalise(rar) + " " + fam.name() + " Enchantment";
+        return StringUTIL.capitalise(rar) + " " + fam.name() + " Infusion";
     }
 
     @Override
@@ -106,13 +106,16 @@ public class CraftedEnchantItem extends AutoItem implements IItemAsCurrency, ICr
 
                                 GearEnchantData en = new GearEnchantData();
 
-                                // todo test this
-                                Affix affix = ExileDB.Affixes().getFilterWrapped(x -> {
-                                    return x.type == Affix.Type.enchant && x.requirements.satisfiesAllRequirements(new GearRequestedFor(gear)) && x.getAllTagReq().contains(SlotTags.enchantment.GUID());
-                                }).random();
+                                if (en.isEmpty()) {
+                                    Affix affix = ExileDB.Affixes().getFilterWrapped(x -> {
+                                        return x.type == Affix.Type.enchant && x.requirements.satisfiesAllRequirements(new GearRequestedFor(gear)) && x.getAllTagReq().contains(SlotTags.enchantment.GUID());
+                                    }).random();
 
-                                en.en = affix.GUID();
+                                    en.en = affix.GUID();
+                                }
+
                                 en.rar = rar;
+
 
                                 gear.ench = en;
 
@@ -197,7 +200,7 @@ public class CraftedEnchantItem extends AutoItem implements IItemAsCurrency, ICr
 
             @Override
             public String locDescForLangFile() {
-                return "Tries to enchant the item, adding stats. Item can only attempt enchants 10 times.";
+                return "Tries to Infuse the item, adding stats. Item can only attempt infusion 10 times. As this can fail, some items will never reach maximum rarity Infusions.";
             }
 
             @Override

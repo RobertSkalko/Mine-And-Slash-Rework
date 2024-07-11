@@ -79,14 +79,14 @@ public class Professions {
         // or maybe blocks only have tiers, but you get less xp loot the more you farm them, so if you just farm wheat you will get less and less etc.
         // this would be a pain to save
 
-        Builder.of(SALVAGING)
+        Builder.of(SALVAGING, "Salvaging")
                 .sometimesDrop(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.SALVAGING), 20)
                 .build();
 
         var FARM_EXP = 30;
         var ORE_EXP = 100;
 
-        Builder.of(FARMING)
+        Builder.of(FARMING, "Farming")
                 .tool(SlotTags.farming_tool)
 
                 .crop(SkillItemTier.TIER0, FARM_EXP, Items.WHEAT, ExpSources.REQ_GROWTH_STAGE)
@@ -103,7 +103,7 @@ public class Professions {
 
                 .build();
 
-        Builder.of(FISHING)
+        Builder.of(FISHING, "Fishing")
                 .tool(SlotTags.fishing_tool)
 
                 // todo locked crates
@@ -113,7 +113,7 @@ public class Professions {
 
                 .build();
 
-        Builder.of(HUSBANDRY)
+        Builder.of(HUSBANDRY, "Animal Breeding")
                 .tool(SlotTags.husbandry_tool)
 
                 .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(HUSBANDRY), 1)
@@ -123,7 +123,7 @@ public class Professions {
                 .build();
 
         // todo each should really be separate and have chance for tag..
-        Builder.of(MINING)
+        Builder.of(MINING, "Mining")
                 .tool(SlotTags.mining_tool)
 
                 .blockTag(SkillItemTier.TIER0, 15, BlockTags.COAL_ORES)
@@ -141,20 +141,20 @@ public class Professions {
 
                 .build();
 
-        Builder.of(COOKING)
+        Builder.of(COOKING, "Cooking")
 
                 .build();
 
 
-        Builder.of(ALCHEMY)
+        Builder.of(ALCHEMY, "Alchemy")
 
                 .build();
 
-        Builder.of(ENCHANTING)
+        Builder.of(ENCHANTING, "Infusing")
 
                 .build();
 
-        Builder.of(GEAR_CRAFTING)
+        Builder.of(GEAR_CRAFTING, "Gear Crafting")
 
                 .build();
 
@@ -165,9 +165,10 @@ public class Professions {
     private static class Builder {
         Profession p = new Profession();
 
-        public static Builder of(String id) {
+        public static Builder of(String id, String locname) {
             Builder b = new Builder();
             b.p.id = id;
+            b.p.locname = locname;
             return b;
         }
 

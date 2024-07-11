@@ -102,6 +102,8 @@ public class ExileTooltips {
 
         List<Component> postEditList = TooltipUtils.splitLongText(list);
 
+        postEditList = TooltipUtils.removeDoubleBlankLines(postEditList);
+
         return postEditList;
 
     }

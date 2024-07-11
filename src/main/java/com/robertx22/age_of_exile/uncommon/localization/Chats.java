@@ -57,6 +57,7 @@ public enum Chats implements IAutoLocName {
     RIGHT_CLICK_OPEN("Right Click to Open"),
 
     MAX_STACKS("Maximum Stacks: %1$s"),
+    NO_ENCHANT_ON_ITEM("There's no Mns Enchant on this item"),
 
     ITEM_NON_NBT("This is an empty item, without any NBT/Random Stats, this means you got it through creative mode or a /give command. If you want to test the mod, you can use the /mine_and_slash give command which creates items with working NBT."),
 

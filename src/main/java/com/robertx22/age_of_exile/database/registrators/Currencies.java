@@ -38,6 +38,7 @@ public class Currencies implements ExileRegistryInit {
         ALL.add(new OrbUniqueReroll());
         ALL.add(new EntangledPotentialUpgrade());
         ALL.add(new EntangledUniqueReroll());
+        ALL.add(new EnchantRerollCurrency());
 
         for (SkillItemTier tier : SkillItemTier.values()) {
             ALL.add(new SharpeningStone(tier));

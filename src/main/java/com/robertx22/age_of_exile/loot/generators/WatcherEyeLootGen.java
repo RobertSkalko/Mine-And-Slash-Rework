@@ -35,7 +35,7 @@ public class WatcherEyeLootGen extends BaseLootGen<MapBlueprint> {
 
     @Override
     public boolean condition() {
-        
+
         return info.mobData != null && info.mobData.getMobRarity().GUID().equals(IRarity.UBER);
     }
 

@@ -215,3 +215,8 @@ v.5.5.20
 - set level command now works on any entity, not just players
 - set prof level command
 - being in empty map will now kick the player
+- enchants no longer get randomized
+- enchanting renamed to infusing
+- husbandry renamed to animal breeding
+- added new infusion reroll currency
+- merged PR to streamline tooltips, might be bugs, please report

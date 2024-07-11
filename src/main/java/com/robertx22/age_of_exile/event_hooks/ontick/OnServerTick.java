@@ -18,8 +18,8 @@ import com.robertx22.age_of_exile.uncommon.effectdatas.rework.RestoreType;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.library_of_exile.main.Packets;
-import com.robertx22.library_of_exile.utils.TextUTIL;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerLevel;
@@ -71,9 +71,9 @@ public class OnServerTick {
                             if (Load.player(player).map.sendMapTpMsg) {
                                 Load.player(player).map.sendMapTpMsg = false;
 
-                                var info = TextUTIL.mergeList(map.map.getTooltipOnServer(player));
+                                // var info = TextUTIL.mergeList(map.map.getTooltipOnServer(player));
 
-                                var event = new HoverEvent(HoverEvent.Action.SHOW_TEXT, info);
+                                var event = new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.empty());
                                 player.sendSystemMessage(Chats.TP_TO_DUNGEON_MAPNAME.locName(ExileDB.Dungeons().get(map.dungeonid).locName()
                                                 .withStyle(ChatFormatting.DARK_PURPLE))
                                         .withStyle(ChatFormatting.LIGHT_PURPLE).withStyle(Style.EMPTY.withHoverEvent(event)));

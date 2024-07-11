@@ -334,14 +334,14 @@ public class SupportGems {
 
         new SupportGem("threat", "Greater Threat", PlayStyle.STR, 0.95F,
                 Arrays.asList(
-                        new StatMod(25, 50, SpellChangeStats.THREAT_GENERATED.get(), ModType.MORE),
+                        new StatMod(25, 50, SpellChangeStats.THREAT_GENERATED.get(), ModType.FLAT),
                         new StatMod(20, 50, OffenseStats.TOTAL_DAMAGE.get(), ModType.FLAT)
                 ))
                 .levelReq(5).addToSerializables();
 
         new SupportGem("minion_threat", "Minion Threat", PlayStyle.STR, 0.95F,
                 Arrays.asList(
-                        new StatMod(25, 50, SpellChangeStats.THREAT_GENERATED.get(), ModType.MORE),
+                        new StatMod(25, 50, SpellChangeStats.THREAT_GENERATED.get(), ModType.FLAT),
                         new StatMod(25, 100, SummonHealth.getInstance(), ModType.MORE)
                 ))
                 .levelReq(5).addToSerializables();

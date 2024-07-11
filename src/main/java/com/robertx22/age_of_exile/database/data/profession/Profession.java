@@ -13,7 +13,6 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
@@ -39,6 +38,7 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
     public static Profession SERIALIZER = new Profession();
 
     public String id = "";
+    public transient String locname = "";
 
     // blocks/entities that give exp
 
@@ -191,11 +191,7 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
 
     @Override
     public String locNameForLangFile() {
-        if (id.contains("_")) {
-            var list = Arrays.stream(StringUTIL.split(id, "_")).map(x -> StringUTIL.capitalise(x)).iterator();
-            return StringUTIL.join(list, " ");
-        }
-        return StringUTIL.capitalise(id);
+        return locname;
     }
 
     public enum Type {

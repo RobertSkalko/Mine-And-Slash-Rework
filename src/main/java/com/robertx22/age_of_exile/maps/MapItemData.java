@@ -216,11 +216,14 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                 .accept(new AdditionalBlock(() -> {
 
                     RarityRegistryContainer<GearRarity> gearRarityRarityRegistryContainer = ExileDB.GearRarities();
-                    Set<GearRarity> possibleRarities = new HashSet<>(gearRarityRarityRegistryContainer.getFilterWrapped(x -> this.getRarity().item_tier >= gearRarityRarityRegistryContainer.get(x.min_map_rarity_to_drop).item_tier).list);
+                    Set<GearRarity> possibleRarities = new HashSet<>(gearRarityRarityRegistryContainer.getFilterWrapped(
+                            x -> this.tier >= ExileDB.GearRarities().get(x.min_map_rarity_to_drop).map_tiers.min
+                    ).list);
+
 
                     List<GearRarity> allRarities = gearRarityRarityRegistryContainer.getList();
                     allRarities.sort(Comparator.comparingInt(x -> x.item_tier));
-                    if (!tooltipInfo.shouldShowDescriptions()){
+                    if (!tooltipInfo.shouldShowDescriptions()) {
                         MutableComponent starter = Component.literal("");
                         String block = "\u25A0";
                         allRarities
