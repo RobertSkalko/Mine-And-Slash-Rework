@@ -17,6 +17,7 @@ public class ClientConfigs {
     }
 
     ClientConfigs(ForgeConfigSpec.Builder b) {
+        
         b.comment("Client Configs")
                 .push("general");
 
@@ -44,6 +45,7 @@ public class ClientConfigs {
         SKILL_TREE_ZOOM_SPEED = b.defineInRange("SKILL_TREE_ZOOM_SPEED", 0.15D, 0.000001D, 1D);
 
         REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES = b.defineInRange("REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES", 35, 0, 1000);
+
 
         b.pop();
     }

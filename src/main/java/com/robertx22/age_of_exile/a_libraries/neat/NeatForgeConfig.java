@@ -16,10 +16,10 @@ public class NeatForgeConfig {
     public static void init() {
         Pair<ForgeNeatConfig, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(ForgeNeatConfig::new);
         NeatConfig.instance = specPair.getLeft();
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, specPair.getRight(), defaultConfigName(ModConfig.Type.CLIENT, "mns_neat"));
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, specPair.getRight(), defaultConfigName(ModConfig.Type.CLIENT, "mine_and_slash_neat_gui"));
     }
 
-    private static String defaultConfigName(ModConfig.Type type, String modId) {
+    public static String defaultConfigName(ModConfig.Type type, String modId) {
         // config file name would be "forge-client.toml" and "forge-server.toml"
         return String.format(Locale.ROOT, "%s-%s.toml", modId, type.extension());
     }

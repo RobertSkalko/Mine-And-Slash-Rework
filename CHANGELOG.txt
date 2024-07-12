@@ -220,3 +220,5 @@ v.5.5.20
 - husbandry renamed to animal breeding
 - added new infusion reroll currency
 - merged PR to streamline tooltips, might be bugs, please report
+- CONFIGS ARE RENAMED TO mine_and_slash[...] (from mmorpg)
+- neat config was also renamed, this is the gui config!

@@ -150,14 +150,16 @@ public class HealthBarRenderer {
             return false;
         }
 
+
         if ((!NeatConfig.instance.renderInF1() && !Minecraft.renderNames()) || !NeatConfig.draw) {
             return false;
         }
-        
+
         var id = ForgeRegistries.ENTITY_TYPES.getKey(living.getType());
         if (NeatConfig.instance.blacklist().contains(id.toString())) {
             return false;
         }
+    
 
         float distance = living.distanceTo(cameraEntity);
         if (distance > NeatConfig.instance.maxDistance()

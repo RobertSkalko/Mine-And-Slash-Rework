@@ -100,7 +100,7 @@ public class MMORPG {
 
 
         ModLoadingContext.get()
-                .registerConfig(ModConfig.Type.SERVER, ServerContainer.spec);
+                .registerConfig(ModConfig.Type.SERVER, ServerContainer.spec, NeatForgeConfig.defaultConfigName(ModConfig.Type.SERVER, "mine_and_slash"));
 
         ExileEvents.CHECK_IF_DEV_TOOLS_SHOULD_RUN.register(new EventConsumer<ExileEvents.OnCheckIsDevToolsRunning>() {
             @Override
@@ -131,7 +131,7 @@ public class MMORPG {
 
             NeatForgeConfig.register();
 
-            ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfigs.clientSpec);
+            ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfigs.clientSpec, NeatForgeConfig.defaultConfigName(ModConfig.Type.CLIENT, "mine_and_slash"));
             bus.addListener(ClientInit::onInitializeClient);
 
             ForgeEvents.registerForgeEvent(RegisterKeyMappingsEvent.class, x -> {
