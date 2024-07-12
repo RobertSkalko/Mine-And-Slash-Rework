@@ -115,14 +115,15 @@ public class DamageEvent extends EffectEvent {
                     this.addMoreMulti(Words.MOB_CONFIG_MULTI.locName(), EventData.NUMBER, enconfigmulti);
                 }
 
-            if (WorldUtils.isDungeonWorld(source.level())) {
-                if (target instanceof Player) {
-                    var map = Load.mapAt(target.level(), target.blockPosition());
-                    if (map != null && map.map != null) {
-                        if (!map.map.getStatReq().meetsReq(map.map.lvl, Load.Unit(target))) {
-                            float minusres = map.map.getStatReq().getLackingResistNumber(map.map.lvl, Load.Unit(target));
-                            float multi = Math.max((float) (minusres * GameBalanceConfig.get().MOB_DMG_MULTI_PER_MAP_RES_REQ_LACKING), 2.0f);
-                            this.addMoreMulti(Words.MAP_RES_REQ_LACK_DMG_MULTI.locName(), EventData.NUMBER, multi);
+                if (WorldUtils.isDungeonWorld(source.level())) {
+                    if (target instanceof Player) {
+                        var map = Load.mapAt(target.level(), target.blockPosition());
+                        if (map != null && map.map != null) {
+                            if (!map.map.getStatReq().meetsReq(map.map.lvl, Load.Unit(target))) {
+                                float minusres = map.map.getStatReq().getLackingResistNumber(map.map.lvl, Load.Unit(target));
+                                float multi = Math.max((float) (minusres * GameBalanceConfig.get().MOB_DMG_MULTI_PER_MAP_RES_REQ_LACKING), 2.0f);
+                                this.addMoreMulti(Words.MAP_RES_REQ_LACK_DMG_MULTI.locName(), EventData.NUMBER, multi);
+                            }
                         }
                     }
                 }
