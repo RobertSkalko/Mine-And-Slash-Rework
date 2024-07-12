@@ -105,7 +105,7 @@ public class MapBlock extends BaseEntityBlock {
                         p.sendSystemMessage(Chats.RESISTS_TOO_LOW_FOR_MAP.locName().withStyle(ChatFormatting.RED));
                         List<Component> reqDifference = data.getStatReq().getReqDifference(data.lvl, Load.Unit(p));
                         if (!reqDifference.isEmpty()) {
-                            p.sendSystemMessage(Chats.NOT_MEET_MAP_REQ_FIRST_LINE.locName());
+                            p.sendSystemMessage(Chats.NOT_MEET_MAP_REQ_FIRST_LINE.locName().withStyle(ChatFormatting.RED));
                             reqDifference.forEach(p::sendSystemMessage);
                         }
                         return InteractionResult.FAIL;
@@ -143,7 +143,7 @@ public class MapBlock extends BaseEntityBlock {
                         p.sendSystemMessage(Chats.RESISTS_TOO_LOW_FOR_MAP.locName().withStyle(ChatFormatting.RED));
                         List<Component> reqDifference = map1.getStatReq().getReqDifference(map1.lvl, Load.Unit(p));
                         if (!reqDifference.isEmpty()) {
-                            p.sendSystemMessage(Chats.NOT_MEET_MAP_REQ_FIRST_LINE.locName());
+                            p.sendSystemMessage(Chats.NOT_MEET_MAP_REQ_FIRST_LINE.locName().withStyle(ChatFormatting.RED));
                             reqDifference.forEach(p::sendSystemMessage);
                         }
                         return InteractionResult.FAIL;

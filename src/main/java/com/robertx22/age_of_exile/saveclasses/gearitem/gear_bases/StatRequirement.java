@@ -76,7 +76,7 @@ public class StatRequirement {
             int num = getScalingReq(x, lvl);
             float targetValue = data.getUnit().getCalculatedStat(x).getValue();
             if (num > targetValue) {
-                components.add(Chats.NOT_MEET_MAP_REQ.locName(x.locName(), num, targetValue));
+                components.add(Chats.NOT_MEET_MAP_REQ.locName(x.locName(), targetValue, num).withStyle(ChatFormatting.RED));
             }
         }
         for (Map.Entry<String, Float> en : this.base_req.entrySet()) {
@@ -84,7 +84,7 @@ public class StatRequirement {
             int num = getNonScalingReq(x, lvl);
             float targetValue = data.getUnit().getCalculatedStat(x).getValue();
             if (num > targetValue) {
-                components.add(Chats.NOT_MEET_MAP_REQ.locName(x.locName(), num, targetValue));
+                components.add(Chats.NOT_MEET_MAP_REQ.locName(x.locName(), targetValue, num).withStyle(ChatFormatting.RED));
             }
         }
         return components;
