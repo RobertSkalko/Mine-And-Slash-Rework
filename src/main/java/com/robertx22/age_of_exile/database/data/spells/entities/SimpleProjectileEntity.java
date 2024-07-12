@@ -304,7 +304,7 @@ public class SimpleProjectileEntity extends AbstractArrow implements IMyRenderAs
     @Override
     protected void onHit(HitResult raytraceResultIn) {
 
-        super.onHit(raytraceResultIn); // adding this back seemed to fix proj a bit
+        // super.onHit(raytraceResultIn); // adding this back seemed to fix proj a bit
 
         HitResult.Type raytraceresult$type = raytraceResultIn.getType();
         if (raytraceresult$type == HitResult.Type.ENTITY) {
