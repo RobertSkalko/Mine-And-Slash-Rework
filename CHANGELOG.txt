@@ -222,3 +222,8 @@ v.5.5.20
 - merged PR to streamline tooltips, might be bugs, please report
 - CONFIGS ARE RENAMED TO mine_and_slash[...] (from mmorpg)
 - neat config was also renamed, this is the gui config!
+- added MOB_HP_POWER_SCALING and dmg to balance datapack. 
+- fixed spells triggering bow attacks
+
+v.5.5.21
+- some configs are enabled by default now

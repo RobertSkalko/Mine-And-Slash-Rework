@@ -67,7 +67,7 @@ public class DimensionConfig implements JsonExileRegistry<DimensionConfig>, ISer
 
     public String dimension_id = "default";
 
-    public int mob_tier = 0;
+    public int mob_tier = 0; // todo unused?
 
     public float all_drop_multi = 1F;
     public float exp_multi = 1F;

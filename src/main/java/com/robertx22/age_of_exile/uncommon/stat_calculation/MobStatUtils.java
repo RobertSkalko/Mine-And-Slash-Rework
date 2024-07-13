@@ -9,7 +9,6 @@ import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.data.stats.types.SummonStat;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.Armor;
 import com.robertx22.age_of_exile.database.data.stats.types.defense.DodgeRating;
-import com.robertx22.age_of_exile.database.data.stats.types.generated.BonusPhysicalAsElemental;
 import com.robertx22.age_of_exile.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.Health;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.health.HealthRegen;
@@ -51,18 +50,6 @@ public class MobStatUtils {
                 }
             }
 
-        }
-        return Arrays.asList(new MiscStatCtx(stats));
-
-    }
-
-    public static List<StatContext> addMobBaseElementalBonusDamages(LivingEntity en, EntityData data) {
-        List<ExactStatData> stats = new ArrayList<>();
-
-        for (Elements ele : Elements.getAllSingle()) {
-            if (ele != Elements.Physical) {
-                stats.add(ExactStatData.noScaling(GameBalanceConfig.get().PERCENT_OF_PHYS_AS_BONUS_OF_EACH_ELEMENT_DMG_FOR_MOBS, ModType.FLAT, new BonusPhysicalAsElemental(ele).GUID()));
-            }
         }
         return Arrays.asList(new MiscStatCtx(stats));
 
@@ -128,8 +115,8 @@ public class MobStatUtils {
         float dmg = (float) ((-1F + config.dmg_multi) * 100F);
         float stat = (float) ((-1F + config.stat_multi) * 100F);
 
-        stats.add(ExactStatData.noScaling(hp, ModType.MORE, Health.getInstance()
-                .GUID()));
+        stats.add(ExactStatData.noScaling(hp, ModType.MORE, Health.getInstance().GUID()));
+        stats.add(ExactStatData.noScaling((float) Math.pow(GameBalanceConfig.get().MOB_HP_POWER_SCALING, unitdata.getLevel()), ModType.MORE, Health.getInstance().GUID()));
         stats.add(ExactStatData.noScaling(dmg, ModType.FLAT, OffenseStats.TOTAL_DAMAGE.get()
                 .GUID()));
 

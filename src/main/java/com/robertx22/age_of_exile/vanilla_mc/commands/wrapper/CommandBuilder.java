@@ -43,10 +43,11 @@ public class CommandBuilder {
 
     public void build(CommandDispatcher<CommandSourceStack> commandDispatcher) {
 
-        List<String> ids = Arrays.asList(CommandRefs.ID, "mns", "slash");
+        List<String> ids = Arrays.asList(CommandRefs.ID);
 
         for (String id : ids) {
 
+            // dont add different prefixes for commands unless ALL commands are made this way
             var first = literal(id);
 
             List<ArgumentBuilder> list = new ArrayList<>();

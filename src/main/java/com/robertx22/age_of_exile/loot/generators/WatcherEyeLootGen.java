@@ -16,6 +16,7 @@ public class WatcherEyeLootGen extends BaseLootGen<MapBlueprint> {
         super(info);
     }
 
+    // todo add a command for this
     @Override
     public float baseDropChance() {
 

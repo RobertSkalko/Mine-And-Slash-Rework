@@ -21,23 +21,26 @@ public class PlayerConfigData {
 
         /// todo add more configs like.. minions should attack x?
 
-        CAST_FAIL("cast_fail_messages", Words.CAST_FAIL_MSGS, false),
-        MOB_DEATH_MESSAGES("mob_death_messages", Words.MOB_DEATH_MESSAGES, false),
-        DAMAGE_MESSAGES("damage_messages", Words.DAMAGE_MESSAGES, false),
-        AUTO_PVE("auto_pve", Words.AUTOMATIC_PVE, false),
-        AGGRESSIVE_SUMMONS("aggressive_summons", Words.AGGRESIVE_SUMMONS, false),
-        STAT_ORDER_TEST("stat_order_test", Words.STAT_ORDER_TEST, true),
-        DAMAGE_CONFLICT_MSG("damage_conflict_check", Words.DMG_CONFLICT_CHECK, true),
-        DROP_MAP_CHEST_CONTENTS_ON_GROUND("drop_map_chest_contents_on_ground", Words.DROP_MAP_CHEST_CONTENTS_ON_GROUND, false);
+        CAST_FAIL("cast_fail_messages", true, Words.CAST_FAIL_MSGS, false),
+        MOB_DEATH_MESSAGES("mob_death_messages", false, Words.MOB_DEATH_MESSAGES, false),
+        DAMAGE_MESSAGES("damage_messages", false, Words.DAMAGE_MESSAGES, false),
+        AUTO_PVE("auto_pve", false, Words.AUTOMATIC_PVE, false),
+        AGGRESSIVE_SUMMONS("aggressive_summons", true, Words.AGGRESIVE_SUMMONS, false),
+        STAT_ORDER_TEST("stat_order_test", false, Words.STAT_ORDER_TEST, true),
+        DAMAGE_CONFLICT_MSG("damage_conflict_check", false, Words.DMG_CONFLICT_CHECK, true),
+        DROP_MAP_CHEST_CONTENTS_ON_GROUND("drop_map_chest_contents_on_ground", false, Words.DROP_MAP_CHEST_CONTENTS_ON_GROUND, false);
 
         public String id;
         public Words word;
         public boolean isDebug;
+        public boolean enabledByDefault;
 
-        Config(String id, Words word, boolean isdebug) {
+
+        Config(String id, boolean enabledByDefault, Words word, boolean isdebug) {
             this.id = id;
             this.word = word;
             this.isDebug = isdebug;
+            this.enabledByDefault = enabledByDefault;
         }
     }
 
@@ -47,7 +50,10 @@ public class PlayerConfigData {
     public HashMap<String, Boolean> configs = new HashMap<>();
 
     public boolean isConfigEnabled(Config id) {
-        return configs.getOrDefault(id.id, false);
+        if (!configs.containsKey(id.id)) {
+            configs.put(id.id, id.enabledByDefault);
+        }
+        return configs.getOrDefault(id.id, id.enabledByDefault);
     }
 
 

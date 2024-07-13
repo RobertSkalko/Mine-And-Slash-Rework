@@ -705,7 +705,7 @@ public class EntityData implements ICap, INeededForClient {
 
     public void mobBasicAttack(AttackInformation data) {
 
-
+     
         if (this.cooldowns.isOnCooldown("basic_attack")) {
             data.setCanceled(true);
             return;

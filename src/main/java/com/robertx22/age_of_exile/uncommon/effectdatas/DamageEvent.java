@@ -84,6 +84,14 @@ public class DamageEvent extends EffectEvent {
 
         try {
             if (source instanceof Player == false) {
+
+                var balance = GameBalanceConfig.get();
+
+                if (balance.MOB_DMG_POWER_SCALING != 1) {
+                    float multi = (float) Math.pow(balance.MOB_DMG_POWER_SCALING, sourceData.getLevel());
+                    this.addMoreMulti(Words.LVL_EXPONENT_MOB_DMG.locName(), EventData.NUMBER, multi);
+                }
+
                 MobRarity rar = sourceData.getMobRarity();
 
                 float enconfigmulti = (float) ExileDB.getEntityConfig(source, sourceData).dmg_multi;

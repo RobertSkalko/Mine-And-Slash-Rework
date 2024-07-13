@@ -29,6 +29,7 @@ public enum Words implements IAutoLocName {
     ATTACK_SPEED_MULTI("Atk Speed Multi"),
     ARROW_DRAW_AMOUNT_MULTI("Bow Draw Amount Multi"),
     PVP_DMG_MULTI("PVP Dmg Multi"),
+    LVL_EXPONENT_MOB_DMG("Leveled Exponent Mob DMG"),
     MOB_RARITY_MULTI("Mob Rarity Dmg Multi"),
     MAP_RES_REQ_LACK_DMG_MULTI("Player Lacking Map Resist Requirement DMG-Multi"),
     MOB_CONFIG_MULTI("Mob Config Dmg Multi"),
