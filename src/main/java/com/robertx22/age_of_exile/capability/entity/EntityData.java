@@ -883,7 +883,7 @@ public class EntityData implements ICap, INeededForClient {
             // fully restore on lvlup
 
             setExp(getRemainingExp());
-            this.setLevel_player(level + 1, player);
+            this.setLevel(level + 1);
 
 
             OnScreenMessageUtils.sendLevelUpMessage(player, Words.LEVEL_UP_TYPE_PLAYER.locName(), level - 1, level);
