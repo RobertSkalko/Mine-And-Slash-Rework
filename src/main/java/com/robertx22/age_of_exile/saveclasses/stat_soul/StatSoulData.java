@@ -258,7 +258,7 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
                     .withStyle(ChatFormatting.GOLD));
             tooltip.add(TooltipUtils.gearTier(this.tier));
             if (new TooltipInfo().hasAltDown) {
-                tooltip.add(Itemtips.SOUL_TIER_TIP.locName().withStyle(ChatFormatting.BLUE));
+                tooltip.add(Component.literal("[" + Itemtips.MAP_TIER_TIP.locName().getString() + "]").withStyle(ChatFormatting.BLUE));
             }
             if (this.canBeOnAnySlot()) {
 

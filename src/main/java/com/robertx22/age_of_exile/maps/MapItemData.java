@@ -211,7 +211,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                                 Itemtips.Exp.locName(this.getBonusExpAmountInPercent()).withStyle(ChatFormatting.GOLD),
                                 Itemtips.Loot.locName(this.getBonusLootAmountInPercent()).withStyle(ChatFormatting.GOLD),
                                 TooltipUtils.tier(this.tier).withStyle(ChatFormatting.GOLD),
-                                Itemtips.MAP_TIER_TIP.locName().withStyle(ChatFormatting.BLUE)
+                                Component.literal("[" + Itemtips.SOUL_TIER_TIP.locName().getString() + "]").withStyle(ChatFormatting.BLUE)
                         )))
                 //handle possibleRarities
                 .accept(new AdditionalBlock(() -> {
