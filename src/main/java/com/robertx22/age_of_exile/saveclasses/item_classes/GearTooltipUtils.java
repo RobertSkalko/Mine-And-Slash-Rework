@@ -251,6 +251,7 @@ public class GearTooltipUtils {
                 )
                 .accept(new AdditionalBlock(() -> ImmutableList.of(Words.TAGS.locName().append(TooltipUtils.joinMutableComps(gear.GetBaseGearType().getTags().getTags(SlotTag.SERIALIZER).stream().map(x -> ((SlotTag) x).locName()).toList().iterator(), Gui.COMMA_SEPARATOR.locName())))).showWhen(() -> info.hasShiftDown)
                 )
+                .accept(new SalvageBlock(gear))
                 .accept(new OperationTipBlock().setAll())
                 .accept(new DurabilityBlock(stack))
                 .release();

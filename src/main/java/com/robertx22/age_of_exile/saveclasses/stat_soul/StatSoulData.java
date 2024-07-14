@@ -12,6 +12,7 @@ import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
 import com.robertx22.age_of_exile.gui.texts.textblocks.AdditionalBlock;
 import com.robertx22.age_of_exile.gui.texts.textblocks.OperationTipBlock;
 import com.robertx22.age_of_exile.gui.texts.textblocks.RarityBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.SalvageBlock;
 import com.robertx22.age_of_exile.gui.texts.textblocks.usableitemblocks.UsageBlock;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
@@ -279,7 +280,9 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
             exileTooltips.accept(new OperationTipBlock().setAlt().addDraggableTipAbove(OperationTipBlock.AvailableTarget.GEAR));
         }
 
-        exileTooltips.accept(new AdditionalBlock(Collections.singletonList(Chats.RIGHT_CLICK_TO_GEN_ITEM.locName().withStyle(ChatFormatting.BLUE))).showWhen(() -> cangen));
+        exileTooltips
+                .accept(new AdditionalBlock(Collections.singletonList(Chats.RIGHT_CLICK_TO_GEN_ITEM.locName().withStyle(ChatFormatting.BLUE))).showWhen(() -> cangen))
+                .accept(new SalvageBlock(this));
 
         return exileTooltips;
     }

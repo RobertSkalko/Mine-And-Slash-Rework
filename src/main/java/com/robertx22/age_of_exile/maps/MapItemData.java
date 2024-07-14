@@ -252,6 +252,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                     }
 
                 }))
+                .accept(new SalvageBlock(this))
                 .accept(new AdditionalBlock(Collections.singletonList(Words.AreaContains.locName().withStyle(ChatFormatting.RED))))
                 .accept(new OperationTipBlock().setAlt()).release();
 

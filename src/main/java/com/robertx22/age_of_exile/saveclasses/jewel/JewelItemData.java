@@ -121,6 +121,7 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
                         .accept(Itemtips.COR_STATS.locName().withStyle(ChatFormatting.RED), cor.stream().flatMap(x -> x.getAllStatsWithCtx(lvl, info).stream()).toList())
                 )
                 .accept(new RequirementBlock(this.lvl))
+                .accept(new SalvageBlock(this))
                 .accept(new OperationTipBlock().setShift().setAlt())
                 .release());
 
