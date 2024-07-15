@@ -4,6 +4,7 @@ import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISalvagable;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class SalvageBlock extends AbstractTextBlock{
     @Override
     public List<? extends Component> getAvailableComponents() {
         if (info.useInDepthStats()){
-            return Collections.singletonList(data.isSalvagable() ? Words.SALVAGEABLE.locName() : Words.UNSALVAGEABLE.locName());
+            return Collections.singletonList(data.isSalvagable() ? Words.SALVAGEABLE.locName().withStyle(ChatFormatting.GREEN) : Words.UNSALVAGEABLE.locName().withStyle(ChatFormatting.RED));
         }
         return Collections.emptyList();
     }
