@@ -15,6 +15,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.resources.DamageAbso
 import com.robertx22.age_of_exile.database.data.stats.types.resources.magic_shield.MagicShield;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.event_hooks.damage_hooks.util.AttackInformation;
+import com.robertx22.age_of_exile.loot.LootUtils;
 import com.robertx22.age_of_exile.mixin_ducks.DamageSourceDuck;
 import com.robertx22.age_of_exile.mixin_ducks.LivingEntityAccesor;
 import com.robertx22.age_of_exile.mixin_ducks.ProjectileEntityDuck;
@@ -85,7 +86,19 @@ public class DamageEvent extends EffectEvent {
         try {
             if (source instanceof Player == false) {
 
+                if (target instanceof Player) {
+                    if (sourceData.getLevel() > targetData.getLevel()) {
+                        float penalty = LootUtils.getLevelDistancePunishmentMulti(sourceData.getLevel(), targetData.getLevel());
+
+                        if (penalty < 1) {
+                            float dmgmulti = 2F - penalty;
+                            this.addMoreMulti(Words.HIGH_LVL_MOB_DMG_MULTI.locName(), EventData.NUMBER, dmgmulti);
+                        }
+                    }
+                }
+
                 var balance = GameBalanceConfig.get();
+
 
                 if (balance.MOB_DMG_POWER_SCALING != 1) {
                     float multi = (float) Math.pow(balance.MOB_DMG_POWER_SCALING, sourceData.getLevel());
@@ -111,6 +124,16 @@ public class DamageEvent extends EffectEvent {
                                 float multi = (float) (minusres * GameBalanceConfig.get().MOB_DMG_MULTI_PER_MAP_RES_REQ_LACKING);
                                 this.addMoreMulti(Words.MAP_RES_REQ_LACK_DMG_MULTI.locName(), EventData.NUMBER, multi);
                             }
+                        }
+                    }
+                }
+
+            } else {
+                if (targetData.getLevel() > sourceData.getLevel()) {
+                    if (target instanceof Player == false) {
+                        float penalty = LootUtils.getLevelDistancePunishmentMulti(sourceData.getLevel(), targetData.getLevel());
+                        if (penalty < 1) {
+                            this.addMoreMulti(Words.DMG_TO_HIGH_LVL_MOB_DMG_MULTI.locName(), EventData.NUMBER, penalty);
                         }
                     }
                 }

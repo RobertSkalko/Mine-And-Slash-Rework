@@ -7,9 +7,11 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.library_of_exile.utils.Watch;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.fml.ModList;
 
 public class OnLogin {
 
@@ -22,6 +24,10 @@ public class OnLogin {
         }
 
         try {
+
+            if (ModList.get().isLoaded("majruszlibrary")) {
+                player.sendSystemMessage(Component.literal("[WARNING] You have majruszlibrary mod installed, which currently has a bug and makes Mine and Slash professions not work! It's recommended to remove the mod, until the issue is fixed."));
+            }
 
             if (!player.getServer()
                     .isCommandBlockEnabled()) {
@@ -40,7 +46,7 @@ public class OnLogin {
 
             data.sync.setDirty();
 
-          
+
             Load.player(player).playerDataSync.setDirty();
 
 

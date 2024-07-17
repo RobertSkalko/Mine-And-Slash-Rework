@@ -37,6 +37,8 @@ public class RestoreResourceAction extends StatEffect {
 
         if (this.restore_type == RestoreType.leech) {
             event.sourceData.leech.addLeech(type, val);
+
+            // todo show this in chat msg feature or somehow on gui?
             return;
         }
 

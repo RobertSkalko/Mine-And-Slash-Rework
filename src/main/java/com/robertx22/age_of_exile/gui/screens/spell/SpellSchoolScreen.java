@@ -127,16 +127,21 @@ public class SpellSchoolScreen extends BaseScreen implements INamedScreen, ILeft
         return false;
     }
 
+    // so 1 guy can mixin to replace it
+    public void mnsRenderBG(GuiGraphics gui) {
+        gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+        gui.blit(BACKGROUND, mc.getWindow()
+                        .getGuiScaledWidth() / 2 - sizeX / 2,
+                mc.getWindow()
+                        .getGuiScaledHeight() / 2 - sizeY / 2, 0, 0, sizeX, sizeY
+        );
+    }
+
     @Override
     public void render(GuiGraphics gui, int x, int y, float ticks) {
 
         try {
-            gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-            gui.blit(BACKGROUND, mc.getWindow()
-                            .getGuiScaledWidth() / 2 - sizeX / 2,
-                    mc.getWindow()
-                            .getGuiScaledHeight() / 2 - sizeY / 2, 0, 0, sizeX, sizeY
-            );
+            mnsRenderBG(gui);
 
             gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
             gui.blit(currentSchool().getIconLoc(), guiLeft + 107, guiTop + 8, 36, 36, 36, 36, 36, 36);

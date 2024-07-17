@@ -70,7 +70,19 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     public AttachedSpell attached = new AttachedSpell();
     public SpellConfiguration config = new SpellConfiguration();
 
+
+    public Boolean hasCost(ResourceType type) {
+        if (type == ResourceType.energy) {
+            return config.ene_cost.min > 0;
+        }
+        if (type == ResourceType.mana) {
+            return config.mana_cost.min > 0;
+        }
+        return null;
+    }
+
     public int min_lvl = 1;
+
 
     public int default_lvl = 0;
 

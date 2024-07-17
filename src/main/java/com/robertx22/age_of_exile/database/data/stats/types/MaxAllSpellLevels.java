@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.database.data.stats.types;
 
 import com.robertx22.age_of_exile.database.data.stats.Stat;
+import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 
 public class MaxAllSpellLevels extends Stat {
@@ -11,6 +12,11 @@ public class MaxAllSpellLevels extends Stat {
         this.is_perc = false;
 
         this.show_in_gui = false;
+    }
+
+    @Override
+    public String locDescLangFileGUID() {
+        return SlashRef.MODID + ".stat_desc." + "plus_spell_lvls_desc";
     }
 
     @Override

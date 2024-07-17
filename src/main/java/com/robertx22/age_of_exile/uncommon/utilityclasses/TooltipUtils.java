@@ -16,6 +16,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -217,9 +218,9 @@ public class TooltipUtils {
 
     }
 
-    public static MutableComponent gearSlot(GearSlot slot) {
+    public static @NotNull MutableComponent gearSlot(GearSlot slot) {
         return Itemtips.ITEM_TYPE.locName(slot.locName()
-                        .withStyle(ChatFormatting.AQUA)).withStyle(ChatFormatting.WHITE);
+                .withStyle(ChatFormatting.AQUA)).withStyle(ChatFormatting.WHITE);
     }
 
     public static MutableComponent gearTier(int tier) {
@@ -264,6 +265,7 @@ public class TooltipUtils {
 
 
     public static List<MutableComponent> splitLongText(MutableComponent comp) {
+        //   if (true) return Arrays.asList(comp);
         List<MutableComponent> componentList = new ArrayList<>();
         Style format = comp.getStyle();
         String[] originalList = comp.getString().split("\n");
@@ -276,6 +278,8 @@ public class TooltipUtils {
 
 
     public static List<Component> splitLongText(List<? extends Component> comps) {
+        //  if (true) return comps.stream().collect(Collectors.toList());
+
         ArrayList<Component> arrayList = new ArrayList<>();
         for (Component target : comps) {
             if (target.getString().contains("\n")) {

@@ -86,9 +86,8 @@ public class StatConditions implements ExileRegistryInit {
     public static DataHolder<EffectCtx, StatCondition> IS_EFFECT = new DataHolder<>(ModEffects.getCurses(), x -> new IsEffectCondition(x));
 
 
-    public static DataHolder<ResourceType, StatCondition> IS_RESOURCE = new DataHolder<>(
-            ResourceType.values()
-            , x -> new StringMatchesCondition(EventData.RESOURCE_TYPE, x.name()));
+    public static DataHolder<ResourceType, StatCondition> IS_RESOURCE = new DataHolder<>(ResourceType.values(), x -> new StringMatchesCondition(EventData.RESOURCE_TYPE, x.name()));
+    public static DataHolder<ResourceType, StatCondition> SPELL_HAS_RESOURCE_TYPE_COST = new DataHolder<>(ResourceType.values(), x -> new SpellHasResourceCost(x));
 
     public static DataHolder<ThreatGenType, StatCondition> IS_THREAT_GEN_TYPE = new DataHolder<>(
             ThreatGenType.values()

@@ -6,7 +6,10 @@ import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
-import com.robertx22.age_of_exile.gui.texts.textblocks.*;
+import com.robertx22.age_of_exile.gui.texts.textblocks.NameBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.OperationTipBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.RarityBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.RequirementBlock;
 import com.robertx22.age_of_exile.gui.texts.textblocks.affixdatablocks.SimpleItemStatBlock;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
@@ -28,7 +31,6 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -217,9 +219,13 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
     @Override
     public List<ItemStack> getSalvageResult(ItemStack stack) {
         int amount = 1;
-        return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(getRarity().GUID()).get(), amount)); // todo fix this
 
+        if (RarityItems.RARITY_STONE.containsKey(getRarity().GUID())) {
+            return Arrays.asList(new ItemStack(RarityItems.RARITY_STONE.get(getRarity().GUID()).get(), amount));
+        }
+        return Arrays.asList(new ItemStack(RandomUtils.randomFromList(RarityItems.RARITY_STONE.values().stream().toList()).get(), RandomUtils.RandomRange(1, 5)));
     }
+
 
     @Override
     public List<StatContext> getStatAndContext(LivingEntity en) {

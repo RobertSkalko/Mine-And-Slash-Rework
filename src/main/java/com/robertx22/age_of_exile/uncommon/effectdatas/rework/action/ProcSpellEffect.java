@@ -18,6 +18,9 @@ public class ProcSpellEffect extends StatEffect {
     PositionSource pos = PositionSource.TARGET;
     boolean can_proc_from_procs = false;
 
+    EffectSides source = EffectSides.Source;
+    EffectSides target = EffectSides.Target;
+
     public ProcSpellEffect(String spellId, PositionSource pos) {
         super("proc_spell_" + spellId, "proc_spell");
         this.spellId = spellId;
@@ -38,13 +41,16 @@ public class ProcSpellEffect extends StatEffect {
         // be careful not to make it proc itself
         var spell = ExileDB.Spells().get(spellId);
 
-        var ctx = new SpellCastContext(event.source, 0, spell);
+        var SO = event.getSide(source);
+        var TA = event.getSide(target);
 
-        var c = SpellCtx.onCast(event.source, ctx.calcData);
+        var ctx = new SpellCastContext(SO, 0, spell);
+
+        var c = SpellCtx.onCast(SO, ctx.calcData);
         c.isProc = true;
 
         c.setPositionSource(pos);
-        c.target = event.target;
+        c.target = TA;
 
         spell.attached.onCast(c);
 

@@ -51,6 +51,7 @@ public class OffenseStats {
             .worksWithEvent(DamageEvent.ID)
             .setPriority(StatPriority.Damage.DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
+            .addCondition(StatConditions.SPELL_HAS_RESOURCE_TYPE_COST.get(ResourceType.mana))
             .addCondition(StatConditions.IS_FALSE.get(EventData.IS_BONUS_ELEMENT_DAMAGE))
             .addEffect(StatEffects.Layers.ADDITIVE_FLAT_DAMAGE_FROM_MANA)
             .setLocName(x -> Stat.format(
@@ -74,6 +75,7 @@ public class OffenseStats {
             .worksWithEvent(SpendResourceEvent.ID)
             .setPriority(StatPriority.Damage.BEFORE_DAMAGE_LAYERS)
             .setSide(EffectSides.Source)
+            .addCondition(StatConditions.SPELL_HAS_RESOURCE_TYPE_COST.get(ResourceType.mana))
             .addCondition(StatConditions.IS_RESOURCE.get(ResourceType.mana))
             .addEffect(StatEffects.Layers.ADDITIVE_FLAT_MANA_FROM_MANA)
             .setLocName(x -> Stat.format(

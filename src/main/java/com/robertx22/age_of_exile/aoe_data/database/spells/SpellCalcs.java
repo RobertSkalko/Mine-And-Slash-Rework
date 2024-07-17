@@ -14,7 +14,7 @@ public class SpellCalcs {
 
     }
 
-    
+
     public static ValueCalculation EMPTY = ValueCalcBuilder.of(ExileDBInit.UNKNOWN_ID)
             .spellScaling(0, 0)
             .build();
@@ -105,9 +105,6 @@ public class SpellCalcs {
 
     public static ValueCalculation WHIRLWIND = ValueCalcBuilder.of("whirlwind")
             .attackScaling(0.2F, 0.6F)
-            .build();
-    public static ValueCalculation BREATH = ValueCalcBuilder.of("breath")
-            .spellScaling(0.2F, 0.6F)
             .build();
 
     public static ValueCalculation ARROW_STORM = ValueCalcBuilder.of("arrow_storm")

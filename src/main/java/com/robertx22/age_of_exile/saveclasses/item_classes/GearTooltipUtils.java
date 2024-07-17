@@ -213,7 +213,7 @@ public class GearTooltipUtils {
                             }
 
 
-                            Stream<List<Component>> addOrder = Stream.of(uniComps, prefixComps, impComps, suffixComps, corComps);
+                            Stream<List<Component>> addOrder = Stream.of(impComps, uniComps, prefixComps, suffixComps, corComps);
                             addOrder.forEachOrdered(x -> {
                                 x.sort(Comparator.comparing(component -> component.getString().contains("\u25C6")));
                                 list.addAll(x);

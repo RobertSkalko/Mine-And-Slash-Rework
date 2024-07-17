@@ -416,9 +416,6 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
 
     @Override
     public boolean isSalvagable() {
-        if (this.isUnique()) {
-            return false; // todo add salvage for uniques
-        }
         return !data.get(KEYS.SALVAGING_DISABLED);
     }
 

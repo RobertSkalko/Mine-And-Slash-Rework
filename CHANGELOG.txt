@@ -227,3 +227,10 @@ v.5.5.20
 
 v.5.5.21
 - some configs are enabled by default now
+- uniques can now be salvaged into random stones
+- select summons now only selects summons (no more exploding chocobos as much as i find it funny)
+- added a warning msg if majruszlibrary is installed
+- dmg done and taken from mobs higher level than you by many levels (enough to proc loot penalty), is now increased
+- proc_spell DATAPACK now includes source and target fields so you can specify
+- added spell_has_resource_type_cost spell condition DATAPACK which can be used to make archmage not give bonus dmg or work on spells without a mana cost (or energy etc)
+- this change also makes archmage not work on spells that dont cost mana, neither the mana increase nor the dmg addition

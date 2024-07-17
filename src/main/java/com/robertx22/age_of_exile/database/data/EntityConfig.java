@@ -1,14 +1,11 @@
 package com.robertx22.age_of_exile.database.data;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.EntityTypeUtils;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
-import com.robertx22.library_of_exile.registry.serialization.ISerializable;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -17,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-public class EntityConfig implements JsonExileRegistry<EntityConfig>, ISerializable<EntityConfig> {
+public class EntityConfig implements JsonExileRegistry<EntityConfig>, IAutoGson<EntityConfig> {
 
     public EntityConfig() {
 
@@ -33,6 +30,7 @@ public class EntityConfig implements JsonExileRegistry<EntityConfig>, ISerializa
         this.identifier = ForgeRegistries.ENTITY_TYPES.getKey(type).toString();
         this.loot_multi = loot;
         this.exp_multi = loot;
+
     }
 
     public boolean set_health_damage_override = false;
@@ -77,17 +75,10 @@ public class EntityConfig implements JsonExileRegistry<EntityConfig>, ISerializa
         }
     }
 
-    static Gson GSON = new Gson();
 
     @Override
-    public JsonObject toJson() {
-        return new JsonParser().parse(GSON.toJson(this))
-                .getAsJsonObject();
-    }
-
-    @Override
-    public EntityConfig fromJson(JsonObject json) {
-        return GSON.fromJson(json, EntityConfig.class);
+    public Class<EntityConfig> getClassForSerialization() {
+        return EntityConfig.class;
     }
 
     @Override
