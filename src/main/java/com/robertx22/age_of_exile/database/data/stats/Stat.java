@@ -36,6 +36,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDesc, JsonExileRegistry<BaseDatapackStat> {
 
@@ -46,8 +47,11 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     public static String format(String str) {
 
         str = FORMAT + str;
-
-        str = str.replace(VAL1, NUMBER + VAL1 + FORMAT);
+        if (str.contains(VAL1 + "%")) {
+            str = str.replace(VAL1 + "%", NUMBER + VAL1 + "%" + FORMAT);
+        } else {
+            str = str.replace(VAL1, NUMBER + VAL1 + FORMAT);
+        }
 
         return str;
     }
