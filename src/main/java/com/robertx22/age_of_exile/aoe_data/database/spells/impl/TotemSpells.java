@@ -39,7 +39,7 @@ public class TotemSpells implements ExileRegistryInit {
                 .onExpire(PartBuilder.justAction(SpellAction.SUMMON_BLOCK.create(block, 20D * 7.5D)
                         .put(MapField.ENTITY_NAME, "block")
                         .put(MapField.BLOCK_FALL_SPEED, 0D)
-                        .put(MapField.FIND_NEAREST_SURFACE, false)
+                        .put(MapField.FIND_NEAREST_SURFACE, true)
                         .put(MapField.IS_BLOCK_FALLING, false)))
 
 
