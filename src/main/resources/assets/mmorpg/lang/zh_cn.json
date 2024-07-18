@@ -2000,7 +2000,7 @@
 	"mmorpg.chat.not_tool":"此物不是工具，或者此物没有任何属性",
 	"mmorpg.chat.only_one_of_type":"该种天赋只能点亮一个：",
 	"mmorpg.chat.open_loot_chest":"右击即可打开战利品箱！",
-	"mmorpg.chat.player_touched_altar_again":"你已使用过改祭坛",
+	"mmorpg.chat.player_touched_altar_again":"你已使用过该祭坛",
 	"mmorpg.chat.prof_mat_dropguide":"挖砍副职业材料",
 	"mmorpg.chat.prof_mat_dropguide_common":"常见掉落",
 	"mmorpg.chat.prof_mat_dropguide_rare":"稀有掉落",
