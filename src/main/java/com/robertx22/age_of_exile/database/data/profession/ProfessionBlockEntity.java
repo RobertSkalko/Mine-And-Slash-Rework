@@ -19,9 +19,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -60,6 +58,13 @@ public class ProfessionBlockEntity extends BlockEntity {
     }
 
 
+    public boolean onTryInsertItem(ItemStack stack) {
+
+        craftingState = Crafting_State.ACTIVE;
+
+        return true;
+    }
+
     public void onTickWhenPlayerWatching(Player p) {
         var recipe = this.getCurrentRecipe();
 
@@ -71,16 +76,35 @@ public class ProfessionBlockEntity extends BlockEntity {
         }
     }
 
+    int lastInputs = 0;
+
     public void tick(Level level) {
         try {
+
+            if (craftingState != Crafting_State.ACTIVE) {
+                if (craftingState == Crafting_State.IDLE) {
+                    var inv = this.inventory.getInventory(INPUTS);
+                    int inputs = 0;
+                    for (int i = 0; i < inv.getContainerSize(); i++) {
+                        if (inv.getItem(i).isEmpty()) {
+                            inputs++;
+                        }
+                    }
+                    if (inputs != lastInputs) {
+                        craftingState = Crafting_State.ACTIVE;
+                        lastInputs = inputs;
+                    }
+                }
+            }
+
             if (craftingState == Crafting_State.ACTIVE) {
                 boolean ifOnlyDestroy = getMats().stream().filter(x -> !x.toString().equals(Blocks.AIR.asItem().getDefaultInstance().toString())).allMatch(x -> x.toString().equals(SlashItems.DESTROY_OUTPUT.get().getDefaultInstance().toString()));
                 if (this.inventory.getInventory(INPUTS).isEmpty() || ifOnlyDestroy) {
                     if (recipe_locked)
                         craftingState = Crafting_State.IDLE;
                     else {
-                        craftingState = Crafting_State.STOPPED;
-                        ownerUUID = null;
+                        craftingState = Crafting_State.IDLE;
+                        //ownerUUID = null;
                     }
                     return;
                 }
@@ -100,15 +124,15 @@ public class ProfessionBlockEntity extends BlockEntity {
                             ProfessionRecipe recipe = getCurrentRecipe();
                             if (recipe == null) {
                                 p.sendSystemMessage(Chats.PROF_RECIPE_NOT_FOUND.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
-                                craftingState = Crafting_State.STOPPED;
-                                ownerUUID = null;
+                                craftingState = Crafting_State.IDLE;
+                                //ownerUUID = null;
                                 return;
                             }
                             int ownerLvl = Load.player(p).professions.getLevel(recipe.profession);
                             if (recipe.getLevelRequirement() > ownerLvl) {
                                 p.sendSystemMessage(Chats.PROF_RECIPE_LEVEL_NOT_ENOUGH.locName(getProfession().locName(), recipe.getLevelRequirement(), ownerLvl).withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
-                                craftingState = Crafting_State.STOPPED;
-                                ownerUUID = null;
+                                craftingState = Crafting_State.IDLE;
+                                //ownerUUID = null;
                                 return;
                             }
 
@@ -116,8 +140,8 @@ public class ProfessionBlockEntity extends BlockEntity {
                                 var rec = tryRecipe(p);
                                 if (!rec.can) {
                                     show.clearContent();
-                                    craftingState = Crafting_State.STOPPED;
-                                    ownerUUID = null;
+                                    craftingState = Crafting_State.IDLE;
+                                    //ownerUUID = null;
                                 }
                             }
                         }

@@ -5,16 +5,15 @@ import com.robertx22.age_of_exile.database.data.profession.ProfessionBlockEntity
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class CraftPacket extends MyPacket<CraftPacket> {
 
     public BlockPos block_pos;
+
     public CraftPacket() {
 
     }
@@ -44,17 +43,13 @@ public class CraftPacket extends MyPacket<CraftPacket> {
         BlockEntity be = exilePacketContext.getPlayer().level().getBlockEntity(this.block_pos);
         if (be instanceof ProfessionBlockEntity) {
             ProfessionBlockEntity pbe = (ProfessionBlockEntity) be;
-            if(pbe.craftingState == Crafting_State.ACTIVE) {
-                if(pbe.ownerUUID.compareTo(exilePacketContext.getPlayer().getUUID()) == 0){
-                    pbe.craftingState = Crafting_State.STOPPED;
-                    pbe.ownerUUID = null;
-                }else{
-                    exilePacketContext.getPlayer().sendSystemMessage(Component.literal("This Station is currently claimed by another player").withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
-                }
-            }else if(pbe.craftingState == Crafting_State.IDLE){
+
+            pbe.ownerUUID = exilePacketContext.getPlayer().getUUID();
+
+            if (pbe.craftingState == Crafting_State.IDLE || pbe.craftingState == Crafting_State.ACTIVE) {
                 pbe.craftingState = Crafting_State.STOPPED;
-                pbe.ownerUUID = null;
-            }else{
+                // pbe.ownerUUID = null;
+            } else {
                 pbe.craftingState = Crafting_State.ACTIVE;
                 pbe.ownerUUID = exilePacketContext.getPlayer().getUUID();
             }

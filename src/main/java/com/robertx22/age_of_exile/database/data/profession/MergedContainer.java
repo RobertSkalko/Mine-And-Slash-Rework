@@ -34,8 +34,8 @@ public class MergedContainer extends SimpleContainer implements WorldlyContainer
                 setItem(index, stack.copy());
                 return true;
             }
-            if(current.getItem() == stack.getItem()){
-                if(current.getCount() + stack.getCount() <= current.getMaxStackSize()){
+            if (current.getItem() == stack.getItem()) {
+                if (current.getCount() + stack.getCount() <= current.getMaxStackSize()) {
                     current.setCount(current.getCount() + stack.getCount());
                     return true;
                 }
@@ -110,22 +110,11 @@ public class MergedContainer extends SimpleContainer implements WorldlyContainer
 
     @Override
     public boolean canPlaceItemThroughFace(int pIndex, ItemStack pItemStack, @Nullable Direction pDirection) {
-        if(pDirection != Direction.UP)
+        if (pDirection != Direction.UP)
             return false;
 
-        if(pbe.recipe_locked){
-            for(ItemStack item : pbe.last_recipe.getMaterials()){
-                if(item.getItem() == pItemStack.getItem()){
-                    if(pbe.craftingState == Crafting_State.IDLE)
-                        pbe.craftingState = Crafting_State.ACTIVE;
-                    return true;
-                }
-            }
-            return false;
-        }
-        if(pbe.craftingState == Crafting_State.IDLE)
-            pbe.craftingState = Crafting_State.ACTIVE;
-        return true;
+        return pbe.onTryInsertItem(pItemStack);
+
     }
 
     @Override

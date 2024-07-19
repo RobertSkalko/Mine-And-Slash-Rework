@@ -56,7 +56,7 @@ public class LockTogglePacket extends MyPacket<LockTogglePacket> {
                 pbe.last_recipe = null;
                 //pbe.show.clearContent();
                 if (pbe.ownerUUID != null && pbe.ownerUUID.compareTo(exilePacketContext.getPlayer().getUUID()) != 0) {
-                    pbe.ownerUUID = null;
+                    // pbe.ownerUUID = null;
                 }
             } else if (pbe.craftingState == Crafting_State.ACTIVE && !pbe.recipe_locked) {
                 exilePacketContext.getPlayer().sendSystemMessage(Component.literal("Stop auto crafting before locking the recipe").withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
