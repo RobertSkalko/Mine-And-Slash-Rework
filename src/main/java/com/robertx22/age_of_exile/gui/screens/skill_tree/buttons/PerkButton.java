@@ -181,11 +181,14 @@ public class PerkButton extends ImageButton {
 
         var search = SkillTreeScreen.SEARCH.getValue();
 
-        boolean containsSearchStat = !search.isEmpty() && perk.stats.stream()
-                .anyMatch(item -> item.getStat().translate().toLowerCase().contains(search.toLowerCase()));
+        boolean containsSearchStat = perk.stats.stream()
+                .anyMatch(item -> item.getStat().locName().getString().toLowerCase().contains(search.toLowerCase()));
+
+        boolean containsName = perk.locName().getString().toLowerCase().contains(search.toLowerCase());
 
 
-        float opacity = containsSearchStat || search.isEmpty() ? 1F : 0.2f;
+
+        float opacity = search.isEmpty() || containsSearchStat || containsName ? 1F : 0.2f;
 
 
         if (!search.isEmpty()) {

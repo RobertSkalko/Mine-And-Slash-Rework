@@ -165,6 +165,7 @@ public class CreateLangFile {
         list.addAll(Arrays.asList(Gui.values()));
         list.addAll(Arrays.asList(Itemtips.values()));
         list.addAll(Arrays.asList(StatGuiGroup.values()));
+        list.addAll(Arrays.asList(Command.values()));
 
         for (StatPriority prio : StatPriority.MAP.values()) {
             list.add(prio);

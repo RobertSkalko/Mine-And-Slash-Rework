@@ -62,7 +62,7 @@ public class ProphecyAltarBlock extends Block {
 
             SoundUtils.playSound(p, SoundEvents.EXPERIENCE_ORB_PICKUP);
 
-            level.setBlock(pPos, Blocks.AIR.defaultBlockState(), 0);
+            level.setBlock(pPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
 
             Load.player(p).playerDataSync.setDirty();
 

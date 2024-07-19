@@ -357,7 +357,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
                 AtomicInteger i = new AtomicInteger();
                 effect.forEach(x -> {
                     list.add(x.locName().withStyle(ChatFormatting.BLUE));
-                    list.add(Words.Stats.locName().append(Words.PER_STACK.locName()).withStyle(ChatFormatting.GREEN));
+                    list.add(x.max_stacks > 1 ? Words.Stats.locName().append(Words.PER_STACK.locName()).withStyle(ChatFormatting.GREEN) :  Words.Stats.locName().withStyle(ChatFormatting.GREEN));
                     List<ExactStatData> stats = x.getExactStats(ctx.caster, this, 1, 1);
                     for (ExactStatData stat : stats) {
                         list.addAll(stat.GetTooltipString(info));

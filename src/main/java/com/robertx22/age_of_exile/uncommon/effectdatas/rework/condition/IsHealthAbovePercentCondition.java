@@ -29,7 +29,7 @@ public class IsHealthAbovePercentCondition extends StatCondition {
 
     @Override
     public Class<? extends StatCondition> getSerClass() {
-        return IsHealthBellowPercentCondition.class;
+        return IsHealthAbovePercentCondition.class;
     }
 
 }

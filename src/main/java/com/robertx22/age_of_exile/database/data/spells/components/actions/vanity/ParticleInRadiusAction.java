@@ -30,7 +30,7 @@ public class ParticleInRadiusAction extends SpellAction {
 
             ParticleShape shape = data.getParticleShape();
 
-            SimpleParticleType particle = data.getParticle();
+            //SimpleParticleType particle = data.getParticle();
 
             float radius = data.get(RADIUS).floatValue();
 

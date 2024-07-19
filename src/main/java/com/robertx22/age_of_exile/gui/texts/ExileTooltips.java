@@ -81,7 +81,8 @@ public class ExileTooltips {
 
         Stream.of(
                         collect.get(BlockCategories.RARITY),
-                        collect.get(BlockCategories.DURABILITY)
+                        collect.get(BlockCategories.DURABILITY),
+                        collect.get(BlockCategories.SALVAGE)
                 )
                 .filter(Objects::nonNull)
                 .map(x -> x.get(0))
@@ -117,6 +118,7 @@ public class ExileTooltips {
         USAGE,
         LEVELED_ITEM,
         OPERATION,
+        SALVAGE,
         ADDITIONAL
 
     }

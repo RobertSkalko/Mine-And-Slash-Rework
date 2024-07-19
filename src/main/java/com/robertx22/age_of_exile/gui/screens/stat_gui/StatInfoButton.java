@@ -11,6 +11,7 @@ import com.robertx22.age_of_exile.saveclasses.unit.StatData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.NumberUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.GuiUtils;
 import com.robertx22.library_of_exile.utils.RenderUtils;
@@ -114,7 +115,7 @@ public class StatInfoButton extends ImageButton implements IStatInfoButton {
         USABLE_VALUE("usable_value", true) {
             @Override
             public MutableComponent getRenderText(StatData data, EntityData unit) {
-                return Component.literal(data.GetStat() instanceof IUsableStat u ? u.getUsableValue(unit.getUnit(), (int) data.getValue(), unit.getLevel()) + "%" : "");
+                return Component.literal(data.GetStat() instanceof IUsableStat u ? NumberUtils.singleDigitFloat(u.getUsableValue(unit.getUnit(), (int) data.getValue(), unit.getLevel()) * 100F) + "%" : "");
             }
 
             @Override

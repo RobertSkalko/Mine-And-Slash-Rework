@@ -36,6 +36,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nonnull;
@@ -210,7 +211,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                                 Itemtips.Exp.locName(this.getBonusExpAmountInPercent()).withStyle(ChatFormatting.GOLD),
                                 Itemtips.Loot.locName(this.getBonusLootAmountInPercent()).withStyle(ChatFormatting.GOLD),
                                 TooltipUtils.tier(this.tier).withStyle(ChatFormatting.GOLD),
-                                Itemtips.MAP_TIER_TIP.locName().withStyle(ChatFormatting.BLUE)
+                                Component.literal("[" + Itemtips.SOUL_TIER_TIP.locName().getString() + "]").withStyle(ChatFormatting.BLUE)
                         )))
                 //handle possibleRarities
                 .accept(new AdditionalBlock(() -> {
@@ -251,8 +252,100 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                     }
 
                 }))
+                .accept(new SalvageBlock(this))
                 .accept(new AdditionalBlock(Collections.singletonList(Words.AreaContains.locName().withStyle(ChatFormatting.RED))))
                 .accept(new OperationTipBlock().setAlt()).release();
+
+    }
+    public List<Component> getTooltipOnServer(Player player) {
+        MapItemData thisMapItemData = this;
+        return new ExileTooltips()
+                .accept(new NameBlock(Collections.singletonList(Component.translatable("item.mmorpg.map"))))
+                .accept(new RequirementBlock(player)
+                        .setLevelRequirement(this.lvl)
+                        .setStatRequirement(getStatReq()))
+                .accept(new RarityBlock(this.getRarity()))
+                .accept(new StatBlock() {
+                    @Nonnull
+                    private final MapItemData mapItemData = thisMapItemData;
+
+                    private final ImmutableMap<AffectedEntities, MutableComponent> map = ImmutableMap.of(
+                            AffectedEntities.Mobs, Words.Mob_Affixes.locName(),
+                            AffectedEntities.Players, Words.Player_Affixes.locName(),
+                            AffectedEntities.All, Words.Affixes_Affecting_All.locName()
+                    );
+
+                    @Override
+                    public List<? extends Component> getAvailableComponents() {
+
+                        IgnoreNullList<Component> list = new IgnoreNullList<>();
+                        TooltipInfo info = new TooltipInfo(true);
+
+                        Stream.of(AffectedEntities.Mobs, AffectedEntities.Players, AffectedEntities.All).forEachOrdered(x -> getAffectedStatList(list, info, x));
+
+                        list.add(Itemtips.TIER_INFLUENCE.locName().withStyle(ChatFormatting.BLUE));
+                        mapItemData.getTierStats().forEach(exactStatData -> list.addAll(exactStatData.GetTooltipString(info)));
+
+                        return list;
+                    }
+
+                    private void getAffectedStatList(IgnoreNullList<Component> list, TooltipInfo info, AffectedEntities target) {
+                        List<MutableComponent> list1 = Optional.of(target)
+                                .map(mapItemData::getAllAffixesThatAffect)
+                                .filter(x -> !x.isEmpty())
+                                .stream()
+                                .flatMap(Collection::stream)
+                                .map(x -> x.getAffix().getStats(x.p, mapItemData.getLevel()))
+                                .flatMap(x -> x.stream()
+                                        .map(y -> y.GetTooltipString(info))
+                                        .flatMap(Collection::stream)
+                                )
+                                .sorted((s1, s2) -> {
+                                    //sort long stat
+                                    Boolean s1IfLong = s1.getString().contains("\u25C6");
+                                    Boolean s2IfLong = s2.getString().contains("\u25C6");
+                                    return s1IfLong.compareTo(s2IfLong);
+                                })
+                                .filter(x -> Objects.nonNull(x) && !x.getString().isBlank())
+                                .toList();
+                        if (!list1.isEmpty()) {
+                            list.add(map.get(target).withStyle(ChatFormatting.BLUE));
+                            list.addAll(list1);
+                            list.add(EMPTY_LINE);
+                        }
+
+                    }
+                })
+                .accept(new AdditionalBlock(() ->
+                        ImmutableList.of(
+                                Itemtips.Exp.locName(this.getBonusExpAmountInPercent()).withStyle(ChatFormatting.GOLD),
+                                Itemtips.Loot.locName(this.getBonusLootAmountInPercent()).withStyle(ChatFormatting.GOLD),
+                                TooltipUtils.tier(this.tier).withStyle(ChatFormatting.GOLD))
+                        ))
+                //handle possibleRarities
+                .accept(new AdditionalBlock(() -> {
+
+                    RarityRegistryContainer<GearRarity> gearRarityRarityRegistryContainer = ExileDB.GearRarities();
+                    Set<GearRarity> possibleRarities = new HashSet<>(gearRarityRarityRegistryContainer.getFilterWrapped(x -> this.getRarity().item_tier >= gearRarityRarityRegistryContainer.get(x.min_map_rarity_to_drop).item_tier).list);
+
+                    List<GearRarity> allRarities = gearRarityRarityRegistryContainer.getList();
+                    allRarities.sort(Comparator.comparingInt(x -> x.item_tier));
+
+                        MutableComponent starter = Component.literal("");
+                        String block = "\u25A0";
+                        allRarities
+                                .forEach(x -> {
+                                    if (possibleRarities.contains(x)) {
+                                        starter.append(Component.literal(block).withStyle(x.textFormatting()));
+                                    } else {
+                                        starter.append(Component.literal(block).withStyle(ChatFormatting.DARK_GRAY));
+                                    }
+                                });
+                        return Collections.singletonList(starter);
+
+                }))
+                .accept(new AdditionalBlock(Collections.singletonList(Words.AreaContains.locName().withStyle(ChatFormatting.RED))))
+                .release();
 
     }
 
