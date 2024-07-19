@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
 import com.robertx22.age_of_exile.gui.texts.textblocks.AdditionalBlock;
 import com.robertx22.age_of_exile.gui.texts.textblocks.NameBlock;
 import com.robertx22.age_of_exile.gui.texts.textblocks.RarityBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.SalvageBlock;
 import com.robertx22.age_of_exile.gui.texts.textblocks.usableitemblocks.UsageBlock;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
@@ -110,6 +111,7 @@ public class LootChestData implements ICommonDataItem<GearRarity> {
                         return EMPTY_LIST;
                     }
                 }).showWhen(this::isLocked))
+                .accept(new SalvageBlock(this))
                 .release());
 
 

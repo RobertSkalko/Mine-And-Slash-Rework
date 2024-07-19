@@ -50,11 +50,11 @@ public class SimpleItemStatBlock extends StatBlock {
             List<MutableComponent> componentList = value.stream()
                     .flatMap(x -> x.GetTooltipString(info).stream())
                     .filter(component -> !component.getString().isBlank())
-                    .collect(Collectors.toList());
+                    .toList();
 
             if (!componentList.isEmpty()) {
-                components.add(colorMap.get(key.getString()) != null ? key.copy().withStyle(colorMap.get(key.getString())) : key.copy().withStyle(ChatFormatting.BLUE));
-                componentList.sort(Comparator.comparing(x -> x.getString().length()));
+                ChatFormatting chatFormatting = colorMap.get(key.getString());
+                components.add(chatFormatting != null ? key.copy().withStyle(chatFormatting) : key.copy().withStyle(ChatFormatting.BLUE));
                 components.addAll(componentList);
                 components.add(EMPTY_LINE);
             }

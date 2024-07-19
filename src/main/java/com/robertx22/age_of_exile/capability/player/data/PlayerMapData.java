@@ -40,7 +40,7 @@ public class PlayerMapData {
             return;
         }
         BlockPos pos = getTeleportBackPos();
-        TeleportUtils.teleport((ServerPlayer) p, pos, new ResourceLocation(tpbackdim));
+        TeleportUtils.teleport((ServerPlayer) p, pos, new ResourceLocation(tpbackdim.isEmpty() ? "minecraft:overworld" : tpbackdim));
 
     }
 }

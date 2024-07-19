@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.capability.player.data;
 
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
+import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
@@ -106,8 +107,26 @@ public class PlayerConfigData {
                     SoundUtils.playSound(player, SoundEvents.EXPERIENCE_ORB_PICKUP, 0.75F, 1.25F);
                     stack.shrink(100);
                     data.getSalvageResult(stack).forEach(e -> {
-                        PlayerUtils.giveItem(e, player);
-                        Load.backpacks(player).getBackpacks().tryAutoPickup(player, stack);
+                        Backpacks backpacks = Load.backpacks(player).getBackpacks();
+                        //copy tryAutoPickup() but without playing sound
+                        if (player.getInventory().countItem(SlashItems.MASTER_BAG.get()) >= 1) {
+                            for (Backpacks.BackpackType type : Backpacks.BackpackType.values()) {
+                                if (type.isValid(e)) {
+                                    var bag = backpacks.getInv(type);
+
+                                    if (bag.hasFreeSlots()) {
+                                        bag.addItem(e.copy());
+                                        e.shrink(e.getCount() + 10);
+                                    } else {
+                                        PlayerUtils.giveItem(e, player);
+                                    }
+                                }
+                            }
+
+                        } else {
+                            PlayerUtils.giveItem(e, player);
+                        }
+                        backpacks.tryAutoPickup(player, stack);
                     });
                     return true;
                 }

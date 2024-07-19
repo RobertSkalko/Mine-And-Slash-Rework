@@ -6,6 +6,8 @@ import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import java.util.Locale;
 
 public enum Chats implements IAutoLocName {
+    NOT_MEET_MAP_REQ_FIRST_LINE("You haven't met the map requirement: "),
+    NOT_MEET_MAP_REQ("%1$s: %2$s/%3$s"),
     PROPHECIES_GUIDE("1) Kill Monsters while Cursed to gain Prophecy Coins\n\n2) You can Buy Rewards in this GUI\n\n3) The More curses you accept, the more coins you will earn.\n\nYour Coins and Prophecies reset on entering another map."),
 
     PROPHECY_MAP_DEATHCURRENCY("You lost %1$s Prophecy Coins"),
@@ -24,6 +26,7 @@ public enum Chats implements IAutoLocName {
     ALREADY_CASTING("Already Casting a Spell"),
     PROPHECY_ALTAR_MSG("The altar reacted to your touch! (You can now open your prophecies GUI and choose to a curse to apply to yourself)"),
     SPELL_IS_ON_CD("Spell is on cooldown"),
+    PLAYER_TOUCHED_ALTAR_AGAIN("You've used this altar before"),
     PROPHECY_PLEASE_SPEND("You already have a choice. (Open your prophecy gui from the main hub and pick an affix)"),
     USING_TEST_SPELL("You are trying to use a test spell outside test environment"),
     NO_CHARGES("You lack spell charges."),

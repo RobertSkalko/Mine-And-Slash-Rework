@@ -121,7 +121,7 @@ public class DamageEvent extends EffectEvent {
                         if (map != null && map.map != null) {
                             if (!map.map.getStatReq().meetsReq(map.map.lvl, Load.Unit(target))) {
                                 float minusres = map.map.getStatReq().getLackingResistNumber(map.map.lvl, Load.Unit(target));
-                                float multi = (float) (minusres * GameBalanceConfig.get().MOB_DMG_MULTI_PER_MAP_RES_REQ_LACKING);
+                                float multi = Math.max((float) (minusres * GameBalanceConfig.get().MOB_DMG_MULTI_PER_MAP_RES_REQ_LACKING), 2.0f);
                                 this.addMoreMulti(Words.MAP_RES_REQ_LACK_DMG_MULTI.locName(), EventData.NUMBER, multi);
                             }
                         }

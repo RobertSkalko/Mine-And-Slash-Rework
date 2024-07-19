@@ -240,7 +240,9 @@ public enum Words implements IAutoLocName {
 
     Tier("Tier"),
 
-    Unsalvagable("Unsalvageable"),
+    UNSALVAGEABLE("Unsalvageable"),
+
+    SALVAGEABLE("Salvageable"),
 
     UsableOn("Usable On: "),
 

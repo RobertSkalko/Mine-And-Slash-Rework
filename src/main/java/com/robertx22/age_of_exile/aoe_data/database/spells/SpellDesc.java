@@ -33,7 +33,7 @@ public class SpellDesc {
 
     public static List<String> getTooltip(LivingEntity caster, Spell spell) {
 
-        String tip = CLOC.translate(spell.locDesc());
+        String tip = spell.locDesc().getString();
         String copy = tip;
 
         int amount = countMatches(tip, "calc:");
@@ -43,7 +43,7 @@ public class SpellDesc {
                 .getList()) {
             String id = "[calc:" + calc.id + "]";
 
-            tip = tip.replace(id, CLOC.translate(calc.getShortTooltip(caster, spell)));
+            tip = tip.replace(id, calc.getShortTooltip(caster, spell).getString());
 
             if (!tip.equals(copy)) {
                 counted++;

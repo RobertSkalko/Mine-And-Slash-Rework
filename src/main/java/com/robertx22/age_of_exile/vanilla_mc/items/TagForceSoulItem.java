@@ -69,9 +69,9 @@ public class TagForceSoulItem extends AutoItem implements IShapelessRecipe {
     }
 
     public enum AvailableTags{
-        PLATE(SlotTags.magic_shield_stat.GUID(), "Plate", Words.GEAR_LOCKED_TYPE_PLATE.locName()),
+        PLATE(SlotTags.armor_stat.GUID(), "Plate", Words.GEAR_LOCKED_TYPE_PLATE.locName()),
         LEATHER(SlotTags.dodge_stat.GUID(), "Leather", Words.GEAR_LOCKED_TYPE_LEATHER.locName()),
-        CLOTH(SlotTags.armor_stat.GUID(), "Cloth", Words.GEAR_LOCKED_TYPE_CLOTH.locName());
+        CLOTH(SlotTags.magic_shield_stat.GUID(), "Cloth", Words.GEAR_LOCKED_TYPE_CLOTH.locName());
 
         public final String tag;
         public final String tagName;

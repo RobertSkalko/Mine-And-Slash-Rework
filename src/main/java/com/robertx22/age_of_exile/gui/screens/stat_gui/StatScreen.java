@@ -202,7 +202,7 @@ public class StatScreen extends BaseScreen implements INamedScreen {
 
         SEARCH.setResponder(x -> {
             showStats(stats.stream().filter(s -> {
-                String name = s.locName().toString();
+                String name = s.locName().getString();
                 return name.toLowerCase(Locale.ROOT).contains(x.toLowerCase(Locale.ROOT));
             }).collect(Collectors.toList()), false);
         });

@@ -102,7 +102,7 @@ public class MapData {
 
         Load.player(p).map.sendMapTpMsg = true;
 
-        Load.player(p).map.tpbackdim = p.level().dimensionTypeId().location().toString();
+        Load.player(p).map.tpbackdim = p.level().dimension().location().toString();
         Load.player(p).map.tp_back_pos = p.blockPosition().asLong();
 
 

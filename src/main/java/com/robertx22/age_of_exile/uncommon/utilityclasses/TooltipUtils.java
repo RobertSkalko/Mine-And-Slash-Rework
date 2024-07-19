@@ -67,7 +67,7 @@ public class TooltipUtils {
     }
 
     public static List<Component> cutIfTooLong(MutableComponent comp) {
-        List<String> stringList = cutIfTooLong(CLOC.translate(comp));
+        List<String> stringList = cutIfTooLong(comp.getString());
         return stringList.stream()
                 .map(x -> ExileText.ofText(x).get())
                 .collect(Collectors.toList());
@@ -77,7 +77,7 @@ public class TooltipUtils {
     // private static final Pattern PATTERN = Pattern.compile("(?)§[0-9A-FK-OR]");
 
     public static List<MutableComponent> cutIfTooLong(MutableComponent comp, ChatFormatting format) {
-        List<String> stringList = cutIfTooLong(CLOC.translate(comp));
+        List<String> stringList = cutIfTooLong(comp.getString());
         return stringList.stream()
                 .map(x -> ExileText.ofText(x).format(format).get())
                 .collect(Collectors.toList());
@@ -298,14 +298,14 @@ public class TooltipUtils {
     }
 
 
-    public static MutableComponent joinMutableComps(Iterator<?> iterator, MutableComponent separator) {
+    public static MutableComponent joinMutableComps(Iterator<? extends Component> iterator, MutableComponent separator) {
         if (separator == null) {
             separator = Component.literal("");
         }
 
         MutableComponent starter = Component.literal("");
         while (iterator.hasNext()) {
-            starter.append((MutableComponent) iterator.next());
+            starter.append(iterator.next());
             if (iterator.hasNext()) {
                 starter.append(separator);
             }

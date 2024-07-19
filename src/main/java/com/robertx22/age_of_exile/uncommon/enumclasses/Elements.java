@@ -72,6 +72,10 @@ public enum Elements implements IGUID {
         return getIconNameFormat(dmgName) + " Damage";
     }
 
+    public String getIconNameDmgWithSpecialColor(ChatFormatting color) {
+        return getIconNameFormat(dmgName) + color + " Damage";
+    }
+
     public String getIconNameFormat() {
         return getIconNameFormat(dmgName);
     }
