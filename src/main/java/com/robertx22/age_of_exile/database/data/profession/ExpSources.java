@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.profession;
 
+import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.profession.stat.ProfExp;
 import com.robertx22.age_of_exile.saveclasses.prof_tool.ProfessionToolData;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
@@ -139,12 +140,22 @@ public class ExpSources {
         }
 
         public void giveExp(Player p, Profession pro) {
-            float lvlmulti = MathHelper.clamp((float) Load.player(p).professions.getLevel(pro.GUID()) / (float) getLevelOfMastery(), 0.5F, 1F);
+            int proflvl = Load.player(p).professions.getLevel(pro.GUID());
+
+            float lvlmulti = MathHelper.clamp((float) proflvl / (float) getLevelOfMastery(), 0.5F, 1F);
 
             var fx = LevelUtils.scaleExpReward(exp, Load.player(p).professions.getLevel(pro.id));
 
+            float lowRecipeLvlPenalty = 1;
+
+            if (proflvl > getLevelOfMastery()) {
+                int diff = Math.abs(proflvl - getLevelOfMastery());
+                lowRecipeLvlPenalty -= (diff * GameBalanceConfig.get().PROFESSION_EXP_PENALTY_PER_LOWER_LEVEL);
+            }
+
             fx *= Load.Unit(p).getUnit().getCalculatedStat(new ProfExp(pro.id)).getMultiplier();
             fx *= lvlmulti;
+            fx *= lowRecipeLvlPenalty;
 
             levelTool(p, pro, fx);
 
