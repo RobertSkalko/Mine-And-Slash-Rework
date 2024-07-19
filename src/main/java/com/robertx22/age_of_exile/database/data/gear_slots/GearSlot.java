@@ -74,8 +74,7 @@ public class GearSlot implements JsonExileRegistry<GearSlot>, IAutoGson<GearSlot
             return CACHED.get(item);
         }
 
-        for (GearSlot slot : ExileDB.GearSlots()
-                .getList()) {
+        for (GearSlot slot : ExileDB.GearSlots().getList()) {
             if (isItemOfThisSlot(slot, item)) {
                 CACHED.put(item, slot);
                 return slot;

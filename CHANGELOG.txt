@@ -236,3 +236,5 @@ v.5.5.21
 - this change also makes archmage not work on spells that dont cost mana, neither the mana increase nor the dmg addition
 - added enabled = false will now unregister the datapack
 - added PROFESSION_EXP_PENALTY_PER_LOWER_LEVEL to gamebalance datapack
+- should fix thrown weapons (if their datapack is correctly setup)
+- stations no longer get stopped

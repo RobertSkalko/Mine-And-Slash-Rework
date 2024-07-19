@@ -48,6 +48,9 @@ public class WeaponFinderUtil {
                 ItemStack wep = getWeaponStackFromThrownEntity(sourceEntity);
                 if (wep != null) {
                     gear = StackSaving.GEARS.loadFrom(wep);
+                    if (gear != null) {
+                        return wep;
+                    }
                 }
             }
         }

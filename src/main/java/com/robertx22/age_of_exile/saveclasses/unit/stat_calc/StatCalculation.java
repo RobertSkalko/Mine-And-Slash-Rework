@@ -90,6 +90,8 @@ public class StatCalculation {
 
 
         if (entity instanceof Player p) {
+            
+
             //        Load.player(p).ctxStats = new SavedStatCtxList(sc);
         }
 
