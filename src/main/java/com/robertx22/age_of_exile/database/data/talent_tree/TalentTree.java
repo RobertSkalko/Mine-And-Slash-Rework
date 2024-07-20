@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class TalentTree implements JsonExileRegistry<TalentTree>, IAutoGson<TalentTree> {
 
@@ -158,8 +159,8 @@ public class TalentTree implements JsonExileRegistry<TalentTree>, IAutoGson<Tale
 
         public PointData center;
 
-        public transient HashMap<PointData, Set<PointData>> connections = new HashMap<>();
-        public transient HashMap<PointData, String> perks = new HashMap<>();
+        public transient ConcurrentHashMap<PointData, Set<PointData>> connections = new ConcurrentHashMap<>();
+        public transient ConcurrentHashMap<PointData, String> perks = new ConcurrentHashMap<>();
 
         public Perk getPerk(PointData point) {
             if (ExileDB.Perks().isRegistered(perks.get(point))) {
