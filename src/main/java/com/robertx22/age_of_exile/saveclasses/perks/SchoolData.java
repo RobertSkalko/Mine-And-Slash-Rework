@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.saveclasses.perks;
 
+import com.google.common.collect.ImmutableSet;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 
@@ -32,6 +33,9 @@ public class SchoolData {
 
     }
 
+    public Set<PointData> getAllocatedPoints() {
+        return ImmutableSet.copyOf(list);
+    }
 
     public int getAllocatedPointsInSchool() {
         return list.size();

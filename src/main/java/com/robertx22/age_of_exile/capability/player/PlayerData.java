@@ -7,10 +7,12 @@ import com.robertx22.age_of_exile.capability.player.helper.JewelInvHelper;
 import com.robertx22.age_of_exile.capability.player.helper.MyInventory;
 import com.robertx22.age_of_exile.characters.CharStorageData;
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkConnectionCache;
 import com.robertx22.age_of_exile.gui.screens.stat_gui.StatCalcInfoData;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.prophecy.PlayerProphecies;
 import com.robertx22.age_of_exile.saveclasses.DeathStatsData;
+import com.robertx22.age_of_exile.saveclasses.perks.SchoolData;
 import com.robertx22.age_of_exile.saveclasses.perks.TalentsData;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellCastingData;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellSchoolsData;
@@ -37,6 +39,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class PlayerData implements ICap {
@@ -172,7 +175,15 @@ public class PlayerData implements ICap {
 
         this.team = loadOrBlank(TeamData.class, new TeamData(), nbt, TEAM_DATA, new TeamData());
         this.prophecy = loadOrBlank(PlayerProphecies.class, new PlayerProphecies(), nbt, PROPHECY, new PlayerProphecies());
-        this.talents = loadOrBlank(TalentsData.class, new TalentsData(), nbt, TALENTS_DATA, new TalentsData());
+        TalentsData newTalentsData = loadOrBlank(TalentsData.class, new TalentsData(), nbt, TALENTS_DATA, new TalentsData());
+        var newData = newTalentsData.getPerks().values().stream().map(SchoolData::getAllocatedPoints).collect(Collectors.toSet());
+        var oldData = this.talents.getPerks().values().stream().map(SchoolData::getAllocatedPoints).collect(Collectors.toSet());
+        this.talents = newTalentsData;
+        //!oldData.isEmpty() to avoid the first sync when player join world, otherwise the first perk player allocated will bug
+        if (!oldData.isEmpty() && !newData.equals(oldData)){
+            PerkConnectionCache.canUpdate = true;
+
+        }
         this.statPoints = loadOrBlank(StatPointsData.class, new StatPointsData(), nbt, STAT_POINTS, new StatPointsData());
         this.deathStats = loadOrBlank(DeathStatsData.class, new DeathStatsData(), nbt, DEATH_STATS, new DeathStatsData());
         this.map = loadOrBlank(PlayerMapData.class, new PlayerMapData(), nbt, MAP, new PlayerMapData());
@@ -196,7 +207,6 @@ public class PlayerData implements ICap {
         if (bonusTalents < 0) {
             bonusTalents = 0;
         }
-
     }
 
     private void syncData() {

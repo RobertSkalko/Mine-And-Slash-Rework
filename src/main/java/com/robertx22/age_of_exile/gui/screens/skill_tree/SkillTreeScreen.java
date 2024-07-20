@@ -45,17 +45,16 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     public SchoolType schoolType;
 
-    public HashSet<PerkConnectionRender> buttonConnections = new HashSet<>();
+    //public HashSet<PerkConnectionRender> buttonConnections = new HashSet<>();
 
     static ResourceLocation CON = SlashRef.id("textures/gui/skill_tree/skill_connection.png");
 
-
-    private void renderConnection(GuiGraphics graphics, PerkConnectionRender connection) {
+    private void renderConnection(GuiGraphics graphics, PerkConnectionRender2 connection) {
 
         graphics.pose().pushPose();
-
-        PerkButton button1 = pointPerkButtonMap.get(connection.perk1);
-        PerkButton button2 = pointPerkButtonMap.get(connection.perk2);
+        //Watch watch = new Watch();
+        PerkButton button1 = pointPerkButtonMap.get(connection.pair.perk1);
+        PerkButton button2 = pointPerkButtonMap.get(connection.pair.perk2);
 
         PerkScreenContext ctx = new PerkScreenContext(this);
 
@@ -90,7 +89,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         }
 
         graphics.blit(CON, 0, -3, length, 6, 0, off, length, 6, 50, 16);
-
+        //System.out.println("blit time: " + watch1.getPrint());
         graphics.pose().popPose();
     }
 
@@ -154,7 +153,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     private void renderConnections(GuiGraphics gui) {
 
-        for (PerkConnectionRender con : this.buttonConnections) {
+        for (PerkConnectionRender2 con : PerkConnectionCache.rendersCache.get(this.schoolType.toString().hashCode()).values()) {
             this.renderConnection(gui, con);
         }
     }
@@ -187,7 +186,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
     public int scrollY = 0;
 
     HashMap<AbstractWidget, PointData> originalButtonLocMap = new HashMap<>();
-    HashMap<PointData, PerkButton> pointPerkButtonMap = new HashMap<>();
+    public HashMap<PointData, PerkButton> pointPerkButtonMap = new HashMap<>();
 
 
     public Minecraft mc = Minecraft.getInstance();
@@ -225,10 +224,8 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
             SkillTreeScreen.SEARCH.setCanLoseFocus(true);
 
             this.school = ExileDB.TalentTrees().getFilterWrapped(x -> x.getSchool_type().equals(this.schoolType)).list.get(0);
-
             refreshButtons();
-
-
+            PerkConnectionCache.init(this);
             goToCenter();
         } catch (Exception e) {
             e.printStackTrace();
@@ -240,7 +237,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         this.addRenderableWidget(b);
     }
 
-    private void addConnections() {
+    /*private void addConnections() {
 
         buttonConnections = new HashSet<>();
 
@@ -278,7 +275,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
         });
 
-    }
+    }*/
 
 
     public void refreshButtons() {
@@ -319,7 +316,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                 exception.printStackTrace();
             }
         }
-        addConnections();
+        //addConnections();
 
         this.addWidget(SEARCH);
 
@@ -458,17 +455,16 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                         //b.search = searchTerm;
                     }
             }
+            //Watch watch1 = new Watch();
 
+            PerkConnectionCache.updateRenders(this);
+            //System.out.println(watch1.getPrint());
 
             this.renderConnections(gui);
 
 
             ticks++;
 
-            if (mouseRecentlyClickedTicks > 1) {
-                addConnections();
-                mouseRecentlyClickedTicks = 0;
-            }
 
 
             super.render(gui, x, y, ticks);
