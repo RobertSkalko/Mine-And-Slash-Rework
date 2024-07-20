@@ -75,7 +75,7 @@ public class BasicAttackSpells implements ExileRegistryInit {
 
         SpellBuilder.of(POISONBALL_ID, PlayStyle.INT, SpellConfiguration.Builder.instant(mana, cd)
                                 .setSwingArm()
-                                .applyCastSpeedToCooldown(), "Poison Blast",
+                                .applyCastSpeedToCooldown(), "Acid Blast",
                         Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.CHAOS))
                 .manualDesc(
                         "Blast out a ball of poison, dealing " + SpellCalcs.POISON_BALL.getLocDmgTooltip()

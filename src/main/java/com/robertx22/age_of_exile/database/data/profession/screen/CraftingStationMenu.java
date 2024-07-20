@@ -21,7 +21,7 @@ public class CraftingStationMenu extends AbstractContainerMenu {
 
     int size = 19;
 
-    public ProfessionBlockEntity professionBlockEntity;
+    public ProfessionBlockEntity be;
 
     public CraftingStationMenu(int pContainerId, Container pContainer) {
         this(pContainerId, pContainer, new SimpleContainer(18), new SimpleContainer(1));
@@ -29,7 +29,7 @@ public class CraftingStationMenu extends AbstractContainerMenu {
 
     public CraftingStationMenu(int pContainerId, Container pContainer, ProfessionBlockEntity be) {
         this(pContainerId, pContainer, be.inventory, be.show);
-        professionBlockEntity = be;
+        this.be = be;
     }
 
     private CraftingStationMenu(int pContainerId, Container pinv, Container inv, Container show) {
@@ -111,24 +111,24 @@ public class CraftingStationMenu extends AbstractContainerMenu {
 
         @Override
         public boolean mayPlace(ItemStack pStack) {
-            if (professionBlockEntity == null) {
+            if (be == null) {
                 return true; // todo why would this be null
             }
-            if (professionBlockEntity.recipe_locked) {
-                if (professionBlockEntity.last_recipe == null)
+            if (be.recipe_locked) {
+                if (be.last_recipe == null)
                     return false;
 
-                for (ItemStack item : professionBlockEntity.last_recipe.getMaterials()) {
+                for (ItemStack item : be.last_recipe.getMaterials()) {
                     if (item.getItem() == pStack.getItem()) {
-                        if (professionBlockEntity.craftingState == Crafting_State.IDLE)
-                            professionBlockEntity.craftingState = Crafting_State.ACTIVE;
+                        if (be.craftingState == Crafting_State.IDLE)
+                            be.craftingState = Crafting_State.ACTIVE;
                         return true;
                     }
                 }
                 return false;
             }
-            if (professionBlockEntity.craftingState == Crafting_State.IDLE)
-                professionBlockEntity.craftingState = Crafting_State.ACTIVE;
+            if (be.craftingState == Crafting_State.IDLE)
+                be.craftingState = Crafting_State.ACTIVE;
             return true;
         }
 
@@ -166,9 +166,9 @@ public class CraftingStationMenu extends AbstractContainerMenu {
             }
         }
 
-        if (professionBlockEntity != null) {
-            if (professionBlockEntity.craftingState == Crafting_State.IDLE)
-                professionBlockEntity.craftingState = Crafting_State.ACTIVE;
+        if (be != null) {
+            if (be.craftingState == Crafting_State.IDLE)
+                be.craftingState = Crafting_State.ACTIVE;
         }
         return itemstack;
     }

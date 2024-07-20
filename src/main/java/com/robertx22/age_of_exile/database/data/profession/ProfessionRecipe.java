@@ -129,7 +129,7 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
         }
     }
 
-    private static class CraftingMaterial {
+    public static class CraftingMaterial {
 
         public String id = "";
         public int num = 1;
@@ -174,6 +174,22 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
                 }
             }
         }
+    }
+
+    public List<CraftingMaterial> getMissingMaterials(List<ItemStack> stacks) {
+        List<CraftingMaterial> list = new ArrayList<>();
+        for (CraftingMaterial mat : this.mats) {
+            boolean has = false;
+            for (ItemStack stack : stacks) {
+                if (mat.matches(stack)) {
+                    has = true;
+                }
+            }
+            if (!has) {
+                list.add(mat);
+            }
+        }
+        return list;
     }
 
     public boolean canCraft(List<ItemStack> stacks) {

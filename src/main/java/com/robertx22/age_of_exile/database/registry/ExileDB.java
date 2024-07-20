@@ -72,8 +72,9 @@ public class ExileDB {
 
     public static EntityConfig getEntityConfig(LivingEntity entity, EntityData data) {
 
-        String monster_id = ForgeRegistries.ENTITY_TYPES.getKey(entity.getType()).toString();
-        String mod_id = ForgeRegistries.ENTITY_TYPES.getKey(entity.getType()).getNamespace();
+        var id = ForgeRegistries.ENTITY_TYPES.getKey(entity.getType());
+        String monster_id = id.toString();
+        String mod_id = id.getNamespace();
 
         EntityConfig config = null;
 

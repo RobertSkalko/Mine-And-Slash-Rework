@@ -4,7 +4,6 @@ import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.value_calc.ValueCalculation;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
-import com.robertx22.library_of_exile.utils.CLOC;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -44,7 +43,7 @@ public class SpellDesc {
             String id = "[calc:" + calc.id + "]";
 
             tip = tip.replace(id, calc.getShortTooltip(caster, spell).getString());
-
+            
             if (!tip.equals(copy)) {
                 counted++;
                 copy = tip;

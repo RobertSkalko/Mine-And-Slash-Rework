@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.a_libraries.jei;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.robertx22.age_of_exile.database.data.profession.ProfessionRecipe;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.ICraftingGridHelper;
@@ -34,7 +35,7 @@ public class CraftingExtension implements ICraftingCategoryExtension {
 
         craftingGridHelper.createAndSetOutputs(builder, List.of(resultItem));
         craftingGridHelper.createAndSetInputs(builder, inputs, width, height);
-        
+
     }
 
     @Nullable
@@ -51,5 +52,10 @@ public class CraftingExtension implements ICraftingCategoryExtension {
     @Override
     public int getHeight() {
         return 3;
+    }
+
+    @Override
+    public boolean handleInput(double mouseX, double mouseY, InputConstants.Key input) {
+        return false;
     }
 }

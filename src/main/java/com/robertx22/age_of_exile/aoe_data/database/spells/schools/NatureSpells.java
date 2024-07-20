@@ -77,7 +77,7 @@ public class NatureSpells implements ExileRegistryInit {
                                 .setSwingArm(), "Thorn Bush",
                         Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.totem, SpellTags.thorns, SpellTags.PHYSICAL))
                 .manualDesc("Summon a thorny bush that deals "
-                        + SpellCalcs.THORN_BUSH.getLocDmgTooltip()
+                        + SpellCalcs.THORN_BUSH.getLocDmgTooltip() + " "
                         + Elements.Physical.getIconNameDmg() + " in an area every second and applies Thorned. " +
                         "Thorned enemies consume the stack of thorns every time they are basic attacked to deal "
                         + SpellCalcs.THORN_CONSUME.getLocDmgTooltip(Elements.Physical))
@@ -100,7 +100,7 @@ public class NatureSpells implements ExileRegistryInit {
                 .levelReq(20)
                 .build();
 
-        SpellBuilder.of(POISON_CLOUD, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 45), "Poison Cloud",
+        SpellBuilder.of(POISON_CLOUD, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 45), "Acid Cloud",
                         Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.CHAOS))
                 .manualDesc(
                         "Erupt with poisonous gas, dealing " + SpellCalcs.POISON_CLOUD.getLocDmgTooltip()

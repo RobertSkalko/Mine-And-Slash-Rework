@@ -33,6 +33,7 @@ public class JeiIntegration implements IModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registration) {
         IGuiHelper helper = registration.getJeiHelpers().getGuiHelper();
 
+        
         init();
 
         for (Map.Entry<String, RecipeType<ProfessionRecipe>> en : map.entrySet()) {

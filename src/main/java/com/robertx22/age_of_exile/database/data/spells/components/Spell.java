@@ -32,6 +32,7 @@ import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
+import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.MapManager;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
@@ -349,7 +350,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         } catch (Exception e) {
             e.printStackTrace();
         }
-        MutableComponent showEffectTip = Component.literal("");
+        MutableComponent showEffectTip = null;
         try {
             if (showeffect) {
                 //int lvl = this.getLevelOf(ctx.caster);
@@ -357,7 +358,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
                 AtomicInteger i = new AtomicInteger();
                 effect.forEach(x -> {
                     list.add(x.locName().withStyle(ChatFormatting.BLUE));
-                    list.add(x.max_stacks > 1 ? Words.Stats.locName().append(Words.PER_STACK.locName()).withStyle(ChatFormatting.GREEN) :  Words.Stats.locName().withStyle(ChatFormatting.GREEN));
+                    list.add(x.max_stacks > 1 ? Words.Stats.locName().append(Words.PER_STACK.locName()).withStyle(ChatFormatting.GREEN) : Words.Stats.locName().withStyle(ChatFormatting.GREEN));
                     List<ExactStatData> stats = x.getExactStats(ctx.caster, this, 1, 1);
                     for (ExactStatData stat : stats) {
                         list.addAll(stat.GetTooltipString(info));
@@ -389,7 +390,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
         list.add(tagtext);
 
-        if (!showEffectTip.getString().isBlank()) {
+        if (showEffectTip != null) {
             list.add(showEffectTip);
         }
 
@@ -414,6 +415,9 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
             }
         }
 
+        if (showEffectTip == null) {
+            list.add(Itemtips.SHIFT_TIP.locName().withStyle(ChatFormatting.BLUE).append(" "));
+        }
 
         TooltipUtils.removeDoubleBlankLines(list);
 

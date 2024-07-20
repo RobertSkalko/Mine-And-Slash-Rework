@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.database.data.profession;
 
 
 import net.minecraft.core.Direction;
-import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.item.ItemStack;
@@ -63,7 +62,7 @@ public class MergedContainer extends SimpleContainer implements WorldlyContainer
         return new int[0];
     }
 
-    public Container getInventory(Inventory inv) {
+    public SimpleContainer getInventory(Inventory inv) {
         return new SimpleContainer(getAllStacks(inv).toArray(new ItemStack[inv.size]));
     }
 

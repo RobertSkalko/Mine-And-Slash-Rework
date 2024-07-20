@@ -37,7 +37,7 @@ public class FireSpells implements ExileRegistryInit {
                                 .setSwingArm(), "Magma Totem",
                         Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.totem, SpellTags.FIRE))
                 .manualDesc("Summon a flaming totem that deals "
-                        + SpellCalcs.MAGMA_FLOWER.getLocDmgTooltip()
+                        + SpellCalcs.MAGMA_FLOWER.getLocDmgTooltip() + " "
                         + Elements.Fire.getIconNameDmg() + " in an area every second.")
 
                 .onCast(PartBuilder.playSound(SoundEvents.GRASS_PLACE, 1D, 1D))

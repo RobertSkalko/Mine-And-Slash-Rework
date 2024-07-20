@@ -191,7 +191,7 @@ public class WaterSpells implements ExileRegistryInit {
                 .weaponReq(CastingWeapon.ANY_WEAPON)
 
                 .manualDesc("Spawn a cloud of bone-chilling frost, damaging enemies for "
-                        + SpellCalcs.CHILLING_FIELD.getLocDmgTooltip()
+                        + SpellCalcs.CHILLING_FIELD.getLocDmgTooltip() + " "
                         + Elements.Cold.getIconNameDmg() + " every second and applying slow and Bone Chill.")
 
                 .onCast(PartBuilder.playSound(SoundEvents.END_PORTAL_SPAWN, 1D, 1D))

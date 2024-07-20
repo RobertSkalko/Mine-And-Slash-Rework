@@ -118,7 +118,7 @@ public class RangerSpells implements ExileRegistryInit {
                 .build();
 
         trap(FROST_TRAP, "Frost Trap", ParticleTypes.ITEM_SNOWBALL, SpellCalcs.RANGER_TRAP, Elements.Cold).levelReq(10).build();
-        trap(POISON_TRAP, "Poison Trap", ParticleTypes.ITEM_SLIME, SpellCalcs.RANGER_TRAP, Elements.Shadow).levelReq(30).build();
+        trap(POISON_TRAP, "Acid Trap", ParticleTypes.ITEM_SLIME, SpellCalcs.RANGER_TRAP, Elements.Shadow).levelReq(30).build();
         trap(FIRE_TRAP, "Fire Trap", ParticleTypes.FLAME, SpellCalcs.RANGER_TRAP, Elements.Fire).levelReq(1).build();
 
         SpellBuilder.of(SMOKE_BOMB, PlayStyle.DEX, SpellConfiguration.Builder.instant(7, 20 * 60), "Smoke Bomb",

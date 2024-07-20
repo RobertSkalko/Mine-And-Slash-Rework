@@ -237,4 +237,7 @@ v.5.5.21
 - added enabled = false will now unregister the datapack
 - added PROFESSION_EXP_PENALTY_PER_LOWER_LEVEL to gamebalance datapack
 - should fix thrown weapons (if their datapack is correctly setup)
-- stations no longer get stopped
+- stations no longer get stopped, might be buggy
+- spells no longer show weapon dmg scalings by default. (to make tooltips less scary to newbies). Now you have to press shift
+- renamed poison spells to acid (to avoid confusion with poison the ailment)
+- stations will attempt to suck nearby chests of materials for the currently locked recipe

@@ -12,6 +12,7 @@ import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.LivingEntity;
@@ -103,8 +104,11 @@ public class ValueCalculation implements JsonExileRegistry<ValueCalculation>, IA
         int val = getCalculatedValue(en, provider);
 
 
-        text.append( "" + ChatFormatting.GREEN + val + ChatFormatting.GRAY);
+        text.append("" + ChatFormatting.GREEN + val + ChatFormatting.GRAY);
 
+        if (!Screen.hasShiftDown()) {
+            return text;
+        }
 
         stat_scalings.forEach(x -> {
             text.append(" ").append(x.GetTooltipString(en, provider));

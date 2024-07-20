@@ -15,6 +15,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -58,9 +59,96 @@ public class ProfessionBlockEntity extends BlockEntity {
     }
 
 
+    public void tryInputRecipe(ProfessionRecipe recipe, Player p) {
+
+
+        if (!recipe.profession.equals(getProfession().GUID())) {
+            return;
+        }
+
+        this.ownerUUID = p.getUUID();
+
+        this.recipe_locked = true;
+        this.last_recipe = recipe;
+
+
+    }
+
+    public void tryTakeMaterialsFromNearbyChests() {
+
+        if (last_recipe != null) {
+
+            if (!level.isClientSide) {
+                var mats = getMats();
+
+                boolean hasfree = false;
+
+                var inputinv = inventory.getInventory(INPUTS);
+
+                for (int i = 0; i < inputinv.getContainerSize(); i++) {
+                    if (inputinv.getItem(i).isEmpty()) {
+                        hasfree = true;
+                    }
+                }
+                if (hasfree) {
+
+                    for (ProfessionRecipe.CraftingMaterial mat : last_recipe.getMissingMaterials(mats)) {
+                        boolean did = false;
+
+                        ItemStack stacked = ItemStack.EMPTY;
+
+                        for (Container inv : getNearbyInventories()) {
+                            if (did) {
+                                break;
+                            }
+
+                            for (int i = 0; i < inv.getContainerSize(); i++) {
+                                ItemStack stack = inv.getItem(i);
+                                if (mat.matches(stack)) {
+                                    if (stacked.isEmpty()) {
+                                        stacked = stack.copy();
+                                        stack.shrink(stack.getCount());
+                                    } else {
+                                        int can = stacked.getMaxStackSize() - stacked.getCount();
+                                        int transfer = Math.min(can, stack.getCount());
+                                        stack.shrink(transfer);
+                                        stacked.grow(transfer);
+                                    }
+
+
+                                }
+                            }
+
+                        }
+                        if (this.inventory.addStack(INPUTS, stacked.copy())) {
+
+                            //stacked.shrink(stacked.getCount());
+                            // did = true;
+                            //break;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    public List<Container> getNearbyInventories() {
+        List<Container> list = new ArrayList<>();
+        for (Direction dir : Arrays.asList(Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST)) {
+            BlockPos pos = getBlockPos().offset(dir.getNormal());
+            if (this.getLevel().getBlockEntity(pos) instanceof Container inv) {
+                list.add(inv);
+            }
+        }
+
+        return list;
+    }
+
     public boolean onTryInsertItem(ItemStack stack) {
 
         craftingState = Crafting_State.ACTIVE;
+
 
         return true;
     }
@@ -82,7 +170,7 @@ public class ProfessionBlockEntity extends BlockEntity {
         try {
 
             if (craftingState != Crafting_State.ACTIVE) {
-                if (craftingState == Crafting_State.IDLE) {
+                if (true || craftingState == Crafting_State.IDLE) {
                     var inv = this.inventory.getInventory(INPUTS);
                     int inputs = 0;
                     for (int i = 0; i < inv.getContainerSize(); i++) {
@@ -93,6 +181,8 @@ public class ProfessionBlockEntity extends BlockEntity {
                     if (inputs != lastInputs) {
                         craftingState = Crafting_State.ACTIVE;
                         lastInputs = inputs;
+                        this.tryTakeMaterialsFromNearbyChests();
+
                     }
                 }
             }

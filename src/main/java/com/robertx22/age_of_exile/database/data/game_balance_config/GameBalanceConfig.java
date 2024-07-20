@@ -60,6 +60,9 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     public double MOB_HP_POWER_SCALING = 1.01; // the lvl acts as the exponent
     public double MOB_DMG_POWER_SCALING = 1.01;
 
+    public double MOB_DMG_POWER_SCALING_BASE = 1;
+    public double MOB_HP_POWER_SCALING_BASE = 1;
+
     public double PROFESSION_EXP_PENALTY_PER_LOWER_LEVEL = 0.02;
 
     public int link_1_lvl = 1;

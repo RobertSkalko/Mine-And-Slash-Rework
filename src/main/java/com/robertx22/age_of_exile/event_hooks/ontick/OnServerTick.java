@@ -139,8 +139,8 @@ public class OnServerTick {
 
             if (player.containerMenu instanceof CraftingStationMenu men) {
                 if (player.tickCount % 5 == 0) {
-                    men.professionBlockEntity.onTickWhenPlayerWatching(player);
-                    Packets.sendToClient(player, new StationPacket(new StationSyncData(men.professionBlockEntity)));
+                    men.be.onTickWhenPlayerWatching(player);
+                    Packets.sendToClient(player, new StationPacket(new StationSyncData(men.be)));
                 }
             }
 

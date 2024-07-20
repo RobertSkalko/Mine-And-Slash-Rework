@@ -32,6 +32,8 @@ public class PlayerMapData {
             pos = MapData.getDungeonStartTeleportPos(p.blockPosition());
         }
 
+        pos = pos.above();
+        
         TeleportUtils.teleport((ServerPlayer) p, pos);
     }
 

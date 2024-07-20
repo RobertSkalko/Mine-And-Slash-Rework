@@ -116,7 +116,7 @@ public enum Chats implements IAutoLocName {
     Can_not_go_over_maximum_level("Can not go over maximum level"),
     OPEN_LOOT_CHEST("Right-click to open Loot Chest!"),
     VINES_SHRINK("The Vines appear to shrink, for now..."),
-    PROF_RECIPE_NOT_FOUND("Recipe not found"),
+    PROF_RECIPE_NOT_FOUND("Recipe not found. Most recipes need multiple of the same item, so double-check the item numbers."),
     PROF_OUTPUT_SLOT_NOT_EMPTY("Needs at least 1 empty Output slot."),
     PROF_RECIPE_LEVEL_NOT_ENOUGH("This Recipe requires %1$s level %2$s. But your profession level is only %3$s"),
     GEAR_DROP("You do not meet the requirements of that item."),
