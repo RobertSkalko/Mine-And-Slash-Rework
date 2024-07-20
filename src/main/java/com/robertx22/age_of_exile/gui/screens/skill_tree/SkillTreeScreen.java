@@ -1,6 +1,5 @@
 package com.robertx22.age_of_exile.gui.screens.skill_tree;
 
-import com.google.common.collect.Sets;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.Tesselator;
@@ -15,16 +14,14 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.bases.BaseScreen;
 import com.robertx22.age_of_exile.gui.bases.IAlertScreen;
 import com.robertx22.age_of_exile.gui.bases.INamedScreen;
-import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkButton;
-import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkConnectionRender;
-import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkScreenContext;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.*;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.library_of_exile.utils.Watch;
+import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -38,7 +35,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 import java.awt.*;
+import java.text.DecimalFormat;
 import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen, IAlertScreen {
     static ResourceLocation BIG_PANEL = new ResourceLocation(SlashRef.MODID, "textures/gui/skill_tree/bar.png");
@@ -87,7 +86,8 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         if (connection.connection == Perk.Connection.BLOCKED) {
             off = 6 + 5;
         }
-
+        //System.out.println("calc time: " + watch.getPrint());
+        //Watch watch1 = new Watch();
         graphics.blit(CON, 0, -3, length, 6, 0, off, length, 6, 50, 16);
         //System.out.println("blit time: " + watch1.getPrint());
         graphics.pose().popPose();
@@ -342,9 +342,15 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     }
 
+    private int targetScrollX;
+
+    private int targetScrollY;
+
     public void goToCenter() {
         this.scrollX = 0;
         this.scrollY = 0;
+        targetScrollX = 0;
+        targetScrollY = 0;
     }
 
     private void newButton(AbstractWidget b) {
@@ -385,9 +391,12 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         zoom = 1;
         targetZoom = zoom;
     }
-
+    private boolean canSmoothHandleScroll;
+    private boolean canSmoothHandleZoom;
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scroll) {
+        targetScrollX -= (int) (((scroll < 0 || (scroll > 0 && zoom >= 0.5) ? 0 : 1F / zoom) * (mouseX - this.width / 2F)) / 3);
+        targetScrollY -= (int) (((scroll < 0 || (scroll > 0 && zoom >= 0.5) ? 0 : 1F / zoom) * (mouseY - this.height / 2F)) / 3);
         if (scroll < 0) {
             targetZoom -= 0.1F;
         }
@@ -395,9 +404,12 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
             targetZoom += 0.1F;
         }
 
-        this.targetZoom = Mth.clamp(targetZoom, 0.15F, 1);
+        targetScrollX = Mth.clamp(targetScrollX, -3333, 3333);
+        targetScrollY = Mth.clamp(targetScrollY, -3333, 3333);
 
-        this.zoom = targetZoom;
+        this.targetZoom = ((float)Math.round(Mth.clamp(targetZoom, 0.15F, 1) * 10000)) / 10000;
+        canSmoothHandleScroll = true;
+        canSmoothHandleZoom = true;
 
         return true;
     }
@@ -408,15 +420,81 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     @Override
     public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
+        canSmoothHandleScroll = false;
+        canSmoothHandleZoom = false;
         this.scrollX += 1F / zoom * deltaX;
         this.scrollY += 1F / zoom * deltaY;
 
-        scrollY = Mth.clamp(scrollY, -3333, 3333);
+        this.scrollX = Mth.clamp(this.scrollX, -3333, 3333);
+        this.scrollY = Mth.clamp(this.scrollY, -3333, 3333);
 
         return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
     }
 
     public PerkScreenContext ctx = new PerkScreenContext(this);
+
+    private void handleZoom(){
+        if (!canSmoothHandleZoom){
+            zoom = targetZoom;
+            return;
+        }
+        if (zoom != targetZoom){
+            zoom = ((float) Math.round(zoom * 10000)) / 10000;
+            if (zoom > targetZoom){
+                if (zoom < targetZoom * 0.99f){
+                    zoom = targetZoom;
+                } else {
+                    zoom = Mth.lerp(ClientConfigs.getConfig().SKILL_TREE_ZOOM_SPEED.get().floatValue(), zoom, targetZoom);
+                }
+            } else {
+                if (zoom > targetZoom * 0.99f){
+                    zoom = targetZoom;
+                } else {
+                    zoom = Mth.lerp(ClientConfigs.getConfig().SKILL_TREE_ZOOM_SPEED.get().floatValue(), zoom, targetZoom);
+                }
+            }
+        }
+    }
+
+    private void handleScroll(){
+        if (!canSmoothHandleScroll){
+            targetScrollX = scrollX;
+            targetScrollY = scrollY;
+            return;
+        }
+        if (scrollX != targetScrollX){
+            if (scrollX > targetScrollX){
+                if (scrollX < targetScrollX - 2){
+                    scrollX = targetScrollX;
+                } else {
+                    scrollX = Mth.lerpInt(ClientConfigs.getConfig().SKILL_TREE_ZOOM_SPEED.get().floatValue(), scrollX, targetScrollX);
+                }
+            } else {
+                if (scrollX > targetScrollX - 2){
+                    scrollX = targetScrollX;
+                } else {
+                    scrollX = Mth.lerpInt(ClientConfigs.getConfig().SKILL_TREE_ZOOM_SPEED.get().floatValue(), scrollX, targetScrollX);
+                }
+            }
+        }
+
+        if (scrollY != targetScrollY){
+            if (scrollY > targetScrollY){
+                if (scrollY < targetScrollY - 2){
+                    scrollY = targetScrollY;
+                } else {
+                    scrollY = Mth.lerpInt(ClientConfigs.getConfig().SKILL_TREE_ZOOM_SPEED.get().floatValue(), scrollY, targetScrollY);
+                }
+            } else {
+                if (scrollY > targetScrollY - 2){
+                    scrollY = targetScrollY;
+                } else {
+                    scrollY = Mth.lerpInt(ClientConfigs.getConfig().SKILL_TREE_ZOOM_SPEED.get().floatValue(), scrollY, targetScrollY);
+                }
+            }
+        }
+    }
+
 
 
     @Override
@@ -433,8 +511,8 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         mouseRecentlyClickedTicks--;
 
         renderBackgroundDirt(gui, this, 0);
-        zoom = Mth.lerp(ClientConfigs.getConfig().SKILL_TREE_ZOOM_SPEED.get().floatValue(), zoom, targetZoom);
-
+        handleZoom();
+        handleScroll();
         gui.pose().scale(zoom, zoom, zoom);
 
         try {
