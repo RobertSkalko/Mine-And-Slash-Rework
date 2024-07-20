@@ -101,7 +101,7 @@ public class DamageEvent extends EffectEvent {
 
 
                 if (balance.MOB_DMG_POWER_SCALING != 1) {
-                    float multi = (float) Math.pow(balance.MOB_DMG_POWER_SCALING, sourceData.getLevel());
+                    float multi = (float) (balance.MOB_DMG_POWER_SCALING_BASE * (float) Math.pow(sourceData.getLevel(), balance.MOB_DMG_POWER_SCALING));
                     this.addMoreMulti(Words.LVL_EXPONENT_MOB_DMG.locName(), EventData.NUMBER, multi);
                 }
 
@@ -590,7 +590,7 @@ public class DamageEvent extends EffectEvent {
 
             // todo can this be done better?
             if (this.data.isBasicAttack()) {
-                for (Entry<String, ExileEffectInstanceData> e : targetData.getStatusEffectsData().exileMap.entrySet()) {
+                for (Entry<String, ExileEffectInstanceData> e : targetData.getStatusEffectsData().exileMap.entrySet().stream().toList()) {
                     if (!e.getValue().shouldRemove()) {
                         var data = e.getValue();
                         var sd = data.calcSpell;
