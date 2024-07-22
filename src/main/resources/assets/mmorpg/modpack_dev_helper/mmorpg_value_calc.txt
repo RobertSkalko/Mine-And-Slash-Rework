@@ -7,7 +7,6 @@ black_hole
 blizzard
 blood_explosion
 boomerang
-breath
 chaos_totem
 charge
 charged_bolt

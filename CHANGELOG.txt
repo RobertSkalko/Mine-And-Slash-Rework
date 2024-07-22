@@ -242,3 +242,9 @@ v.5.5.21
 - renamed poison spells to acid (to avoid confusion with poison the ailment)
 - stations will attempt to suck nearby chests of materials for the currently locked recipe
 - fixed map tooltip bug, it showed maps have uber boss when they dont
+
+v.5.5.22
+- resource on hit/kill renamed to include leech in name
+
+v.5.5.23
+- hotfix the leveled exponent dmg and hp not working correctly (I blame the pink one)

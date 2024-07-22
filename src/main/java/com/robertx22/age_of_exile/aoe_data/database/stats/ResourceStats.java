@@ -72,7 +72,7 @@ public class ResourceStats {
             .setPriority(StatPriority.Damage.AFTER_DAMAGE_BONUSES)
             .setSide(EffectSides.Source)
             .addEffect(e -> StatEffects.LEECH_RESTORE_RESOURCE_BASED_ON_STAT_DATA.get(e))
-            .setLocName(x -> x.locname + " on Kill")
+            .setLocName(x -> "Leech " + x.locname + " on Kill")
             .setLocDesc(x -> "Leeches resource every time you kill an enemy. This is capped as all other leech")
             .modifyAfterDone(x -> {
                 x.min = 0;
@@ -90,7 +90,7 @@ public class ResourceStats {
             .addCondition(x -> StatConditions.ATTACK_TYPE_MATCHES.get(x.attackType))
             //.addCondition(x -> StatConditions.IS_NOT_SUMMON_ATTACK) // todo why did i do this?
             .addEffect(e -> StatEffects.LEECH_RESTORE_RESOURCE_BASED_ON_STAT_DATA.get(e.resource))
-            .setLocName(x -> x.resource.locname + " on " + x.attackType.locname)
+            .setLocName(x -> "Leech " + x.resource.locname + " on " + x.attackType.locname)
             .setLocDesc(x -> "Adds X amount of resource per hit to leech table and is capped by leech cap")
             .modifyAfterDone(x -> {
                 x.min = 0;

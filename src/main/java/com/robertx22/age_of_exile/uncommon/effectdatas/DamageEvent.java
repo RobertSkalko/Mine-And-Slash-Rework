@@ -101,7 +101,7 @@ public class DamageEvent extends EffectEvent {
 
 
                 if (balance.MOB_DMG_POWER_SCALING != 1) {
-                    float multi = (float) (balance.MOB_DMG_POWER_SCALING_BASE * (float) Math.pow(sourceData.getLevel(), balance.MOB_DMG_POWER_SCALING));
+                    float multi = (float) (balance.MOB_DMG_POWER_SCALING_BASE * (float) Math.pow(balance.MOB_DMG_POWER_SCALING, sourceData.getLevel()));
                     this.addMoreMulti(Words.LVL_EXPONENT_MOB_DMG.locName(), EventData.NUMBER, multi);
                 }
 

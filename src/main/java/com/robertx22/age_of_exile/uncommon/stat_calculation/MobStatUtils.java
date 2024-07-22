@@ -115,8 +115,9 @@ public class MobStatUtils {
         float dmg = (float) ((-1F + config.dmg_multi) * 100F);
         float stat = (float) ((-1F + config.stat_multi) * 100F);
 
+        float expo = 100f * (float) (GameBalanceConfig.get().MOB_HP_POWER_SCALING_BASE * (float) Math.pow(GameBalanceConfig.get().MOB_HP_POWER_SCALING, unitdata.getLevel()));
         stats.add(ExactStatData.noScaling(hp, ModType.MORE, Health.getInstance().GUID()));
-        stats.add(ExactStatData.noScaling((float) (GameBalanceConfig.get().MOB_HP_POWER_SCALING_BASE * (float) Math.pow(unitdata.getLevel(), GameBalanceConfig.get().MOB_HP_POWER_SCALING)), ModType.MORE, Health.getInstance().GUID()));
+        stats.add(ExactStatData.noScaling(expo, ModType.MORE, Health.getInstance().GUID()));
         stats.add(ExactStatData.noScaling(dmg, ModType.FLAT, OffenseStats.TOTAL_DAMAGE.get()
                 .GUID()));
 

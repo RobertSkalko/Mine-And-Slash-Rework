@@ -57,8 +57,8 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     public int MAX_BONUS_SPELL_LEVELS = 5;
     public int PROPHECY_CURRENCY_LOST_ON_MAP_DEATH = 1000;
 
-    public double MOB_HP_POWER_SCALING = 1.01; // the lvl acts as the exponent
-    public double MOB_DMG_POWER_SCALING = 1.01;
+    public double MOB_HP_POWER_SCALING = 1.003; // the lvl acts as the exponent
+    public double MOB_DMG_POWER_SCALING = 1.003;
 
     public double MOB_DMG_POWER_SCALING_BASE = 1;
     public double MOB_HP_POWER_SCALING_BASE = 1;
