@@ -98,7 +98,9 @@ public class OnItemInteract {
 
                         } else {
                             if (craftedStack.getItem() instanceof CraftedSoulItem i) {
-                                if (i.getSoul(craftedStack) != null && i.getSoul(craftedStack).isArmor()) {
+                                var soul = i.getSoul(craftedStack);
+
+                                if (soul != null && soul.isArmor()) {
                                     craftedStack.getOrCreateTag().putString("force_tag", force.tag.tag);
                                     currency.shrink(1);
                                     return new Result(true).ding();

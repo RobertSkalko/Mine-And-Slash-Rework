@@ -241,3 +241,4 @@ v.5.5.21
 - spells no longer show weapon dmg scalings by default. (to make tooltips less scary to newbies). Now you have to press shift
 - renamed poison spells to acid (to avoid confusion with poison the ailment)
 - stations will attempt to suck nearby chests of materials for the currently locked recipe
+- fixed map tooltip bug, it showed maps have uber boss when they dont

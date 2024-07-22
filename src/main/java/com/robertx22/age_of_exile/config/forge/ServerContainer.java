@@ -44,6 +44,7 @@ public class ServerContainer {
         MAPS_DONT_DROP_IN_MAPS = b.define("maps_dont_drop_in_maps", false);
         LOG_ERRORS = b.define("log_errors", true);
         STOP_ERROR_SPAM = b.define("stop_error_spam", true);
+        STATION_SUCK_NEARBY_CHESTS = b.define("STATION_SUCK_NEARBY_CHESTS", false);
         MIN_LEVEL_MAP_DROPS = b.defineInRange("min_level_map_drops", 10, 0, Integer.MAX_VALUE);
         MIN_SLIME_SIZE_FOR_LOOT = b.defineInRange("MIN_SLIME_SIZE_FOR_LOOT", 3, 0, Integer.MAX_VALUE);
         DEATH_PENALTY_START_LEVEL = b.defineInRange("DEATH_PENALTY_START_LEVEL", 25, 0, Integer.MAX_VALUE);
@@ -194,6 +195,8 @@ public class ServerContainer {
     public ForgeConfigSpec.BooleanValue LOG_ERRORS;
     public ForgeConfigSpec.BooleanValue STOP_ERROR_SPAM;
     public ForgeConfigSpec.BooleanValue ENERGY_PENALTY;
+    public ForgeConfigSpec.BooleanValue STATION_SUCK_NEARBY_CHESTS;
+
     public ForgeConfigSpec.IntValue MIN_LEVEL_MAP_DROPS;
     public ForgeConfigSpec.IntValue MIN_SLIME_SIZE_FOR_LOOT;
     public ForgeConfigSpec.IntValue DEATH_PENALTY_START_LEVEL;

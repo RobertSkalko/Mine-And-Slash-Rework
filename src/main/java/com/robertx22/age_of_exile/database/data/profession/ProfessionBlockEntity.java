@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.profession;
 
+import com.robertx22.age_of_exile.config.forge.ServerContainer;
 import com.robertx22.age_of_exile.database.data.profession.all.Professions;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.mmorpg.ModErrors;
@@ -75,6 +76,10 @@ public class ProfessionBlockEntity extends BlockEntity {
     }
 
     public void tryTakeMaterialsFromNearbyChests() {
+
+        if (!ServerContainer.get().STATION_SUCK_NEARBY_CHESTS.get()) {
+            return;
+        }
 
         if (last_recipe != null) {
 

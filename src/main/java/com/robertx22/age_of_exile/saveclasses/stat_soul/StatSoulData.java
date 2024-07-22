@@ -29,14 +29,11 @@ import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.ISettableLevelTier;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.age_of_exile.vanilla_mc.items.TagForceSoulItem;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.temp.SkillItemTier;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -256,7 +253,7 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
                     .locName(Component.literal(levelRange.getMinLevel() + ""),
                             Component.literal(levelRange.getMaxLevel() + ""))
                     .withStyle(ChatFormatting.GOLD));
-            tooltip.add(TooltipUtils.gearTier(this.tier));
+            //tooltip.add(TooltipUtils.gearTier(this.tier));
             if (new TooltipInfo().hasAltDown) {
                 tooltip.add(Component.literal("[" + Itemtips.MAP_TIER_TIP.locName().getString() + "]").withStyle(ChatFormatting.BLUE));
             }
@@ -271,8 +268,8 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
                             .locName().withStyle(ChatFormatting.BLUE)).withStyle(ChatFormatting.GRAY));
                 }
             }
-            if (!Objects.equals(this.force_tag, "")){
-                Arrays.stream(TagForceSoulItem.AvailableTags.values()).filter(x -> x.tag.equals(this.force_tag)).findFirst().ifPresent(x ->{
+            if (!Objects.equals(this.force_tag, "")) {
+                Arrays.stream(TagForceSoulItem.AvailableTags.values()).filter(x -> x.tag.equals(this.force_tag)).findFirst().ifPresent(x -> {
                     tooltip.add(Itemtips.SOUL_LOCKED_TO_TYPE.locName(x.translation).withStyle(ChatFormatting.GOLD));
                 });
             }
