@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.saveclasses.jewel;
 
+import com.google.common.collect.ImmutableList;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
@@ -124,21 +125,20 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
                 )
                 .accept(new RequirementBlock(this.lvl))
                 .accept(new SalvageBlock(this))
+                .accept(new AdditionalBlock(() -> {
+                        var up = uniq.getCraftedTier().upgradeStack.get();
+                        return ImmutableList.of(
+                                Itemtips.JEWEL_UPGRADE_1.locName(up.getCount(), up.getHoverName()).withStyle(ChatFormatting.AQUA),
+                                Itemtips.JEWEL_UPGRADE_2.locName(up.getCount(), up.getHoverName()).withStyle(ChatFormatting.AQUA)
+                        );
+
+                    }).showWhen(() -> this.auraStats.isEmpty()&&uniq.isUnique() && uniq.isCraftableUnique() && uniq.getCraftedTier().canUpgradeMore()))
+
                 .accept(new OperationTipBlock().setShift().setAlt())
                 .release());
 
 
-        if (uniq.isUnique()) {
-            if (uniq.isCraftableUnique()) {
-                if (uniq.getCraftedTier().canUpgradeMore()) {
-                    var up = uniq.getCraftedTier().upgradeStack.get();
-                    ctx.tooltip.add(Component.literal("To Upgrade needs: " + up.getCount() + "x ").append(up.getHoverName()));
-                    ctx.tooltip.add(Component.literal("[Click the Jewel with the Stone]"));
-                }
 
-            }
-        }
- 
     }
 
     public boolean canWear(EntityData data) {
