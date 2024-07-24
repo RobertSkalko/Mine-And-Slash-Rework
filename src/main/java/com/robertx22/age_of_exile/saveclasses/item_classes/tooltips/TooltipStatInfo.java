@@ -5,7 +5,7 @@ import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ITooltipList;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import net.minecraft.network.chat.MutableComponent;
 
@@ -21,13 +21,13 @@ public class TooltipStatInfo implements ITooltipList {
 
     public ModType type;
 
-    public TooltipInfo tooltipInfo;
+    public StatRangeInfo tooltipInfo;
 
     public int percent = -99;
 
     public GearRarity affix_rarity = null;
 
-    public TooltipStatInfo(ExactStatData data, int percent, TooltipInfo info) {
+    public TooltipStatInfo(ExactStatData data, int percent, StatRangeInfo info) {
 
         this.stat = data.getStat();
         this.firstValue = data.getFirstValue();
@@ -36,7 +36,7 @@ public class TooltipStatInfo implements ITooltipList {
         this.percent = percent;
     }
 
-    public TooltipStatInfo(OptScaleExactStat data, TooltipInfo info) {
+    public TooltipStatInfo(OptScaleExactStat data, StatRangeInfo info) {
         this.stat = data.getStat();
         this.firstValue = data.v1;
         this.type = data.getModType();
@@ -62,7 +62,7 @@ public class TooltipStatInfo implements ITooltipList {
     }
 
     @Override
-    public List<MutableComponent> GetTooltipString(TooltipInfo info) {
+    public List<MutableComponent> GetTooltipString() {
         return stat.getTooltipList(new TooltipStatWithContext(this, null, null));
     }
 

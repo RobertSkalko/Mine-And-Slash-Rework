@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.vanilla_mc.commands.stats;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
@@ -47,22 +48,23 @@ public class GiveStat {
                                                                         .suggests(new StatTypeSuggestions())
                                                                         .then(argument("Key/Identifier", StringArgumentType
                                                                                 .string())
-                                                                                .then(argument("value", FloatArgumentType
-                                                                                        .floatArg())
-
-                                                                                        .executes(ctx -> {
-                                                                                            return run(EntityArgument
-                                                                                                    .getPlayer(ctx, "target"), StringArgumentType
-                                                                                                    .getString(ctx, "scaling"), StringArgumentType
-                                                                                                    .getString(ctx, "statGUID"), StringArgumentType
-                                                                                                    .getString(ctx, "statType"), StringArgumentType
-                                                                                                    .getString(ctx, "Key/Identifier"), FloatArgumentType
-                                                                                                    .getFloat(ctx, "value"));
-                                                                                        }))))))))));
+                                                                                .then(argument("value", FloatArgumentType.floatArg())
+                                                                                        .then(argument("Silent", BoolArgumentType.bool())
+                                                                                                .executes(ctx -> {
+                                                                                                    return run(EntityArgument
+                                                                                                            .getPlayer(ctx, "target"), StringArgumentType
+                                                                                                            .getString(ctx, "scaling"), StringArgumentType
+                                                                                                            .getString(ctx, "statGUID"), StringArgumentType
+                                                                                                            .getString(ctx, "statType"), StringArgumentType
+                                                                                                            .getString(ctx, "Key/Identifier"), FloatArgumentType
+                                                                                                            .getFloat(ctx, "value"), BoolArgumentType
+                                                                                                            .getBool(ctx, "Silent")
+                                                                                                    );
+                                                                                                })))))))))));
     }
 
     private static int run(Entity en, String scaling, String statGUID, String statType,
-                           String GUID, float v1) {
+                           String GUID, float v1, Boolean silent) {
 
         try {
 
@@ -71,8 +73,9 @@ public class GiveStat {
 
                 if (scaling.equals("exact")) {
                     data.getCustomExactStats().addExactStat(GUID, statGUID, v1, ModType.valueOf(statType));
-
-                    e.sendSystemMessage(Component.literal("Stat Applied."));
+                    if (!silent) {
+                        e.sendSystemMessage(Component.literal("Stat Applied."));
+                    }
                 }
             }
 

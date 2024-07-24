@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.database.data.spells.entities;
 import com.robertx22.age_of_exile.database.data.spells.components.ProjectileCastHelper;
 import com.robertx22.library_of_exile.utils.geometry.MyPosition;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -21,6 +22,12 @@ public class AutoAimingProj extends AbstractHurtingProjectile {
     public LivingEntity target;
 
     public float speed = 1;
+
+
+    @Override
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        return true;
+    }
 
     @Override
     protected void onHitEntity(EntityHitResult pResult) {

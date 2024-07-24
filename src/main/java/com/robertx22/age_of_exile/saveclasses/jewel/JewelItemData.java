@@ -12,8 +12,9 @@ import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatCtx;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ModRange;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.AffixData;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
@@ -28,6 +29,7 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -99,8 +101,11 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
     @Override
     public void BuildTooltip(TooltipContext ctx) {
 
+
         ctx.tooltip.clear();
-        TooltipInfo info = new TooltipInfo(ctx.data);
+
+
+        StatRangeInfo info = new StatRangeInfo(ModRange.of(this.getRarity().stat_percents));
 
         ctx.tooltip.addAll(new ExileTooltips()
                 .accept(new NameBlock(Collections.singletonList(ctx.stack.getHoverName())))
@@ -108,14 +113,14 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
                 .accept(new SimpleItemStatBlock(info)
 
                         .acceptIf(Itemtips.JEWEL_STATS.locName().withStyle(ChatFormatting.BLUE),
-                                affixes.stream().flatMap(x -> x.getAllStatsWithCtx(lvl, info).stream()).toList(),
+                                affixes.stream().flatMap(x -> x.getAllStatsWithCtx(lvl, this.getRarity()).stream()).toList(),
                                 this.auraStats.isEmpty())
 
                         .acceptIf(Itemtips.UNIQUE_STATS.locName().withStyle(ChatFormatting.YELLOW),
                                 this.auraStats.stream().flatMap(x -> x.getStatAndContext(ClientOnly.getPlayer()).stream().flatMap(statContext -> statContext.stats.stream())).toList(),
                                 !this.auraStats.isEmpty())
 
-                        .accept(Itemtips.COR_STATS.locName().withStyle(ChatFormatting.RED), cor.stream().flatMap(x -> x.getAllStatsWithCtx(lvl, info).stream()).toList())
+                        .accept(Itemtips.COR_STATS.locName().withStyle(ChatFormatting.RED), cor.stream().flatMap(x -> x.getAllStatsWithCtx(lvl, getRarity()).stream()).toList())
                 )
                 .accept(new RequirementBlock(this.lvl))
                 .accept(new SalvageBlock(this))
@@ -123,46 +128,17 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
                 .release());
 
 
+        if (uniq.isUnique()) {
+            if (uniq.isCraftableUnique()) {
+                if (uniq.getCraftedTier().canUpgradeMore()) {
+                    var up = uniq.getCraftedTier().upgradeStack.get();
+                    ctx.tooltip.add(Component.literal("To Upgrade needs: " + up.getCount() + "x ").append(up.getHoverName()));
+                    ctx.tooltip.add(Component.literal("[Click the Jewel with the Stone]"));
+                }
 
-/*        if (!cor.isEmpty()) {
-            ctx.tooltip.add(Itemtips.COR_STATS.locName().withStyle(ChatFormatting.RED));
-            for (AffixData affix : cor) {
-                ctx.tooltip.addAll(affix.GetTooltipString(info, lvl));
             }
         }
-
-        ctx.tooltip.add(Component.empty());
-
-        if (this.auraStats.isEmpty()) {
-            ctx.tooltip.add(Itemtips.JEWEL_STATS.locName().withStyle(ChatFormatting.GREEN));
-
-            List<Component> preList = new ArrayList<>();
-            for (AffixData affix : affixes) {
-                preList.addAll(affix.GetTooltipString(info, lvl));
-            }
-            List<Component> finalList = new TooltipStatsAligner(preList).buildNewTooltipsStats();
-            ctx.tooltip.addAll(finalList);
-            ctx.tooltip.add(Component.literal(""));
-//todo is this still working?
-            if (uniq.isUnique()) {
-                if (uniq.isCraftableUnique()) {
-                    if (uniq.getCraftedTier().canUpgradeMore()) {
-                        var up = uniq.getCraftedTier().upgradeStack.get();
-                        ctx.tooltip.add(Component.literal("To Upgrade needs: " + up.getCount() + "x ").append(up.getHoverName()));
-                        ctx.tooltip.add(Component.literal("[Click the Jewel with the Stone]"));
-                    }
-
-                }
-            }
-        } else {
-            ctx.tooltip.add(Itemtips.UNIQUE_STATS.locName().withStyle(ChatFormatting.YELLOW));
-
-            for (StatsWhileUnderAuraData aura : this.auraStats) {
-                ctx.tooltip.addAll(aura.getTooltip());
-                ctx.tooltip.add(Component.empty());
-            }
-        }*/
-
+ 
     }
 
     public boolean canWear(EntityData data) {

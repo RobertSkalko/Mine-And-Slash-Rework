@@ -8,14 +8,14 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IRerollable;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatsContainer;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ModRange;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.library_of_exile.registry.FilterListWrap;
 import com.robertx22.library_of_exile.utils.RandomUtils;
-import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -96,12 +96,6 @@ public class AffixData implements IRerollable, IStatsContainer {
     }
 
 
-    public List<Component> GetTooltipString(TooltipInfo info, int lvl) {
-        List<Component> list = new ArrayList<Component>();
-        getAllStatsWithCtx(lvl, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
-        return list;
-    }
-
     public Affix getAffix() {
         return ExileDB.Affixes()
                 .get(this.id);
@@ -122,13 +116,13 @@ public class AffixData implements IRerollable, IStatsContainer {
                 .get(id);
     }
 
-    public List<TooltipStatWithContext> getAllStatsWithCtx(int lvl, TooltipInfo info) {
+    public List<TooltipStatWithContext> getAllStatsWithCtx(int lvl, GearRarity rar) {
         List<TooltipStatWithContext> list = new ArrayList<>();
         this.BaseAffix()
                 .getStats()
                 .forEach(x -> {
                     ExactStatData exact = x.ToExactStat(p, lvl);
-                    TooltipStatInfo confo = new TooltipStatInfo(exact, p, info);
+                    TooltipStatInfo confo = new TooltipStatInfo(exact, p, new StatRangeInfo(ModRange.of(getMinMax())));
                     confo.affix_rarity = this.getRarity();
                     list.add(new TooltipStatWithContext(confo, x, (int) lvl));
                 });

@@ -1,17 +1,15 @@
 package com.robertx22.age_of_exile.gui.texts.textblocks;
 
 import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ModRange;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-
-import static java.util.Collections.EMPTY_LIST;
 
 public class OperationTipBlock extends AbstractTextBlock {
 
@@ -21,7 +19,7 @@ public class OperationTipBlock extends AbstractTextBlock {
 
     private boolean ctrl = false;
 
-    private final TooltipInfo info = new TooltipInfo();
+    private final StatRangeInfo info = new StatRangeInfo(ModRange.hide());
 
     private List<Component> additionalOperation = new ArrayList<>();
 
@@ -50,12 +48,12 @@ public class OperationTipBlock extends AbstractTextBlock {
         return this;
     }
 
-    public OperationTipBlock addOperationTipAbove(List<Component> components){
+    public OperationTipBlock addOperationTipAbove(List<Component> components) {
         this.additionalOperation = components;
         return this;
     }
 
-    public OperationTipBlock addDraggableTipAbove(AvailableTarget target){
+    public OperationTipBlock addDraggableTipAbove(AvailableTarget target) {
         this.additionalOperation.add(target.component);
         return this;
     }
@@ -64,19 +62,19 @@ public class OperationTipBlock extends AbstractTextBlock {
     public List<? extends Component> getAvailableComponents() {
         ArrayList<Component> components = new ArrayList<>();
         MutableComponent component = Component.literal("");
-        if (this.additionalOperation != null){
+        if (this.additionalOperation != null) {
             components.addAll(this.additionalOperation);
         }
-        if (this.shift && !info.hasShiftDown && !info.hasAltDown){
+        if (this.shift && !info.hasShiftDown && !info.hasAltDown) {
             component.append(Itemtips.SHIFT_TIP.locName()).withStyle(ChatFormatting.BLUE).append(" ");
         }
-        if (this.ctrl){
+        if (this.ctrl) {
             component.append(Itemtips.CTRL_TIP.locName()).withStyle(ChatFormatting.BLUE).append(" ");
         }
-        if (this.alt && !info.hasAltDown && !info.hasShiftDown){
+        if (this.alt && !info.hasAltDown && !info.hasShiftDown) {
             component.append(Itemtips.ALT_TIP.locName()).withStyle(ChatFormatting.BLUE);
         }
-        if (!component.equals(Component.literal(""))){
+        if (!component.equals(Component.literal(""))) {
             components.add(component);
         }
 
@@ -89,7 +87,7 @@ public class OperationTipBlock extends AbstractTextBlock {
     }
 
 
-    public enum AvailableTarget{
+    public enum AvailableTarget {
         GEAR_SOUL(Itemtips.SOUL_MODIFIER_USE_TIP.locName().withStyle(ChatFormatting.BLUE)),
 
         GEAR(Itemtips.GEAR_SOUL_USE_TIP.locName().withStyle(ChatFormatting.BLUE));

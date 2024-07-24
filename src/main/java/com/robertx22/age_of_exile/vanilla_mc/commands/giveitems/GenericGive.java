@@ -74,7 +74,6 @@ public class GenericGive {
             if (ExileDB.GearRarities().isRegistered(rarity)) {
                 blueprint.rarity.set(ExileDB.GearRarities().get(rarity));
             }
-
             if (blueprint instanceof ITypeBlueprint typeb) {
                 if (!type.equals("random")) {
                     typeb.setType(type);

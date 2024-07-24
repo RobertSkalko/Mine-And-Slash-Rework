@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface IGearPartTooltip extends IGearPart {
 
-    public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear);
+    public List<Component> GetTooltipString(StatRangeInfo info, GearItemData gear);
 
     default MinMax getMinMax(GearItemData gear) {
         return new MinMax(0, 100);

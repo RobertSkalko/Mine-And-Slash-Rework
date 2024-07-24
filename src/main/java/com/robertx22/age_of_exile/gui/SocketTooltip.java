@@ -2,7 +2,8 @@ package com.robertx22.age_of_exile.gui;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ModRange;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.SocketData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import net.minecraft.client.Minecraft;
@@ -69,7 +70,7 @@ public class SocketTooltip implements ClientTooltipComponent {
     }
 
     public static Component getSocketDesc(ItemStack socketed, SocketData gemStack) {
-        return gemStack.GetTooltipString(new TooltipInfo(), StackSaving.GEARS.loadFrom(socketed), false).get(0);
+        return gemStack.GetTooltipString(new StatRangeInfo(ModRange.always(gemStack.p)), StackSaving.GEARS.loadFrom(socketed), false).get(0);
 
     }
 

@@ -2,7 +2,6 @@ package com.robertx22.age_of_exile.database.data.requirements;
 
 import com.robertx22.age_of_exile.database.data.requirements.bases.BaseRequirement;
 import com.robertx22.age_of_exile.database.data.requirements.bases.GearRequestedFor;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.tags.TagList;
 import com.robertx22.age_of_exile.tags.TagType;
 import net.minecraft.network.chat.MutableComponent;
@@ -45,12 +44,12 @@ public class TagRequirement extends BaseRequirement<TagRequirement> {
         } else {
             return included.stream().anyMatch(x -> list.contains(x));
         }
-        
+
     }
 
 
     @Override
-    public List<MutableComponent> GetTooltipString(TooltipInfo info) {
+    public List<MutableComponent> GetTooltipString() {
         return new ArrayList<>();
     }
 }

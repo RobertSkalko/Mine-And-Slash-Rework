@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts;
 
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 
@@ -20,7 +20,7 @@ public class CraftStatData {
         return s;
     }
 
-    public List<TooltipStatWithContext> getAllStatsWithCtx(TooltipInfo info) {
+    public List<TooltipStatWithContext> getAllStatsWithCtx(StatRangeInfo info) {
         List<TooltipStatWithContext> list = new ArrayList<>();
         list.add(new TooltipStatWithContext(new TooltipStatInfo(s, p, info), null, 1));
         return list;

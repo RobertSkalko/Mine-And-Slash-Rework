@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.saveclasses.item_classes;
 import com.google.common.collect.ImmutableList;
 import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.config.forge.ClientConfigs;
-import com.robertx22.age_of_exile.database.data.MinMax;
 import com.robertx22.age_of_exile.database.data.stats.types.resources.energy.Energy;
 import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
 import com.robertx22.age_of_exile.gui.texts.IgnoreNullList;
@@ -12,7 +11,8 @@ import com.robertx22.age_of_exile.gui.texts.textblocks.*;
 import com.robertx22.age_of_exile.gui.texts.textblocks.gearblocks.DurabilityBlock;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPartTooltip;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ModRange;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.*;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.MergedStats;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
@@ -42,7 +42,7 @@ public class GearTooltipUtils {
         if (gear.GetBaseGearType() == null) {
             return;
         }
-        TooltipInfo info = new TooltipInfo(data, new MinMax(0, 100));
+        StatRangeInfo info = new StatRangeInfo(ModRange.hide());
         tooltip.clear();
 
         List<Component> release = new ExileTooltips()
@@ -55,7 +55,7 @@ public class GearTooltipUtils {
                     @Nonnull
                     private final GearItemData gearItemData = gear;
                     @Nonnull
-                    private final TooltipInfo tinfo = info;
+                    private final StatRangeInfo tinfo = info;
 
                     public BaseStatsData baseStatsData;
 
@@ -162,14 +162,14 @@ public class GearTooltipUtils {
                                 tooltipStatInfos.sort(eleOrder);
                                 tooltipStatInfos.sort(damageAndPenetration);
                                 for (TooltipStatInfo tooltipStatInfo : tooltipStatInfos) {
-                                    list.addAll(tooltipStatInfo.GetTooltipString(tinfo));
+                                    list.addAll(tooltipStatInfo.GetTooltipString());
                                 }
                                 //list.add(EMPTY_LINE);
                             }
 
                             Optional.ofNullable(map.get(true))
                                     .map(x -> x.stream()
-                                            .flatMap(y -> y.GetTooltipString(tinfo).stream())
+                                            .flatMap(y -> y.GetTooltipString().stream())
                                             .toList()
                                     ).ifPresent(list::addAll);
 
@@ -189,7 +189,7 @@ public class GearTooltipUtils {
                                 prefixComps.add(Itemtips.PREFIX_STATS.locName().withStyle(color));
                                 prefixComps.addAll(gearAffixesData.getPreStatsWithCtx(gearItemData, tinfo)
                                         .stream()
-                                        .flatMap(x -> x.GetTooltipString(tinfo).stream())
+                                        .flatMap(x -> x.GetTooltipString().stream())
                                         .map(x -> (Component) x)
                                         .toList());
                             }
@@ -198,7 +198,7 @@ public class GearTooltipUtils {
                                 corComps.add(Itemtips.COR_STATS.locName().withStyle(ChatFormatting.RED));
                                 corComps.addAll(gearAffixesData.getCorStatsWithCtx(gearItemData, tinfo)
                                         .stream()
-                                        .flatMap(x -> x.GetTooltipString(tinfo).stream())
+                                        .flatMap(x -> x.GetTooltipString().stream())
                                         .map(x -> (Component) x)
                                         .toList());
                             }
@@ -207,7 +207,7 @@ public class GearTooltipUtils {
                                 suffixComps.add(Itemtips.SUFFIX_STATS.locName().withStyle(color));
                                 suffixComps.addAll(gearAffixesData.getSufStatsWithCtx(gearItemData, tinfo)
                                         .stream()
-                                        .flatMap(x -> x.GetTooltipString(tinfo).stream())
+                                        .flatMap(x -> x.GetTooltipString().stream())
                                         .map(x -> (Component) x)
                                         .toList());
                             }

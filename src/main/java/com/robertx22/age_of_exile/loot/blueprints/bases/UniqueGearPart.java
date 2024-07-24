@@ -19,7 +19,7 @@ public class UniqueGearPart extends BlueprintPart<UniqueGear, GearBlueprint> {
                     .of(x -> x.rarity.equals(blueprint.rarity.get().GUID()))
                     .of(x -> blueprint.info.map_tier >= x.min_tier)
                     .of(x -> x.canSpawnInLeague(blueprint.info.league))
-                    .of(x -> x.getBaseGear().gear_slot.equals(blueprint.gearItemSlot.get().gear_slot));
+                    .of(x -> x.getBaseGear().GUID().equals(blueprint.gearItemSlot.get().GUID()));
 
             if (!filt.list.isEmpty()) {
                 var uniq = filt.random();

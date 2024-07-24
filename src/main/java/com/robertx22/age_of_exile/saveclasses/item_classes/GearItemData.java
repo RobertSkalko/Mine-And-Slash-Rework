@@ -328,9 +328,8 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         }
 
         list.add(Words.EnchantCompatStats.locName().withStyle(ChatFormatting.AQUA));
-        var info = new TooltipInfo();
         for (ExactStatData stat : ench.stats) {
-            list.addAll(stat.GetTooltipString(info));
+            list.addAll(stat.GetTooltipString());
         }
 
         return list;

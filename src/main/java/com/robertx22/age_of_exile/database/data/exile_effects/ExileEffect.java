@@ -9,7 +9,7 @@ import com.robertx22.age_of_exile.database.data.value_calc.LeveledValue;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.tags.TagList;
 import com.robertx22.age_of_exile.tags.imp.EffectTag;
 import com.robertx22.age_of_exile.tags.imp.SpellTag;
@@ -166,7 +166,7 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
 
     }
 
-    public List<Component> GetTooltipString(TooltipInfo info) {
+    public List<Component> GetTooltipString(StatRangeInfo info) {
         List<Component> list = new ArrayList<>();
 
         list.add(Words.STATUS_EFFECT.locName().append(": ").append(this.locName())

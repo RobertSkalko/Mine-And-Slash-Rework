@@ -14,7 +14,7 @@ import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.ISkillGem;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellCastingData;
@@ -250,7 +250,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         return (int) ctx.event.data.getNumber(EventData.ENERGY_COST).number;
     }
 
-    public final List<Component> GetTooltipString(TooltipInfo info) {
+    public final List<Component> GetTooltipString(StatRangeInfo info) {
 
         SpellCastContext ctx = new SpellCastContext(info.player, 0, this);
 
@@ -361,7 +361,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
                     list.add(x.max_stacks > 1 ? Words.Stats.locName().append(Words.PER_STACK.locName()).withStyle(ChatFormatting.GREEN) : Words.Stats.locName().withStyle(ChatFormatting.GREEN));
                     List<ExactStatData> stats = x.getExactStats(ctx.caster, this, 1, 1);
                     for (ExactStatData stat : stats) {
-                        list.addAll(stat.GetTooltipString(info));
+                        list.addAll(stat.GetTooltipString());
                     }
                     list.add(Words.LASTS_SEC.locName(ticks.get(i.get())));
                     i.getAndIncrement();
@@ -381,7 +381,7 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         if (!this.statsForSkillGem.isEmpty()) {
             list.add(Words.SPELL_STATS.locName());
             for (ExactStatData stat : getStats(info.player)) {
-                list.addAll(stat.GetTooltipString(info));
+                list.addAll(stat.GetTooltipString());
             }
         }
 

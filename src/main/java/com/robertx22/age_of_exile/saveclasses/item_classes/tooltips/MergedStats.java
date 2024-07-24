@@ -2,7 +2,7 @@ package com.robertx22.age_of_exile.saveclasses.item_classes.tooltips;
 
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPartTooltip;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import net.minecraft.network.chat.Component;
 
@@ -13,9 +13,9 @@ public class MergedStats implements IGearPartTooltip {
 
     public List<TooltipStatInfo> mergedList;
 
-    public MergedStats(List<ExactStatData> stats, TooltipInfo info) {
+    public MergedStats(List<ExactStatData> stats, StatRangeInfo info) {
 
-        
+
         stats.removeIf(x -> x.getStat().is_long);
 
         List<TooltipStatInfo> infolist = new ArrayList<>();
@@ -30,9 +30,9 @@ public class MergedStats implements IGearPartTooltip {
     }
 
     @Override
-    public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {
+    public List<Component> GetTooltipString(StatRangeInfo info, GearItemData gear) {
         List<Component> tooltip = new ArrayList<>();
-        mergedList.forEach(x -> tooltip.addAll(x.GetTooltipString(info)));
+        mergedList.forEach(x -> tooltip.addAll(x.GetTooltipString()));
         return tooltip;
     }
 

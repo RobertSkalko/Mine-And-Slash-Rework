@@ -17,9 +17,10 @@ import com.robertx22.age_of_exile.gui.texts.IgnoreNullList;
 import com.robertx22.age_of_exile.gui.texts.textblocks.*;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ModRange;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequirement;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
@@ -142,7 +143,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
     public List<Component> getTooltip() {
         MapItemData thisMapItemData = this;
-        TooltipInfo tooltipInfo = new TooltipInfo();
+        StatRangeInfo tooltipInfo = new StatRangeInfo(ModRange.of(getRarity().stat_percents));
         var tip = new ExileTooltips()
                 .accept(new NameBlock(Collections.singletonList(Component.translatable("item.mmorpg.map"))))
                 .accept(new RequirementBlock()
@@ -161,19 +162,14 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
                     @Override
                     public List<? extends Component> getAvailableComponents() {
-
                         IgnoreNullList<Component> list = new IgnoreNullList<>();
-                        TooltipInfo info = new TooltipInfo();
-
-                        Stream.of(AffectedEntities.Mobs, AffectedEntities.Players, AffectedEntities.All).forEachOrdered(x -> getAffectedStatList(list, info, x));
-
+                        Stream.of(AffectedEntities.Mobs, AffectedEntities.Players, AffectedEntities.All).forEachOrdered(x -> getAffectedStatList(list, tooltipInfo, x));
                         list.add(Itemtips.TIER_INFLUENCE.locName().withStyle(ChatFormatting.BLUE));
-                        mapItemData.getTierStats().forEach(exactStatData -> list.addAll(exactStatData.GetTooltipString(info)));
-
+                        mapItemData.getTierStats().forEach(exactStatData -> list.addAll(exactStatData.GetTooltipString()));
                         return list;
                     }
 
-                    private void getAffectedStatList(IgnoreNullList<Component> list, TooltipInfo info, AffectedEntities target) {
+                    private void getAffectedStatList(IgnoreNullList<Component> list, StatRangeInfo info, AffectedEntities target) {
                         List<MutableComponent> list1 = Optional.of(target)
                                 .map(mapItemData::getAllAffixesThatAffect)
                                 .filter(x -> !x.isEmpty())
@@ -181,7 +177,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                                 .flatMap(Collection::stream)
                                 .map(x -> x.getAffix().getStats(x.p, mapItemData.getLevel()))
                                 .flatMap(x -> x.stream()
-                                        .map(y -> y.GetTooltipString(info))
+                                        .map(y -> y.GetTooltipString())
                                         .flatMap(Collection::stream)
                                 )
                                 .sorted((s1, s2) -> {

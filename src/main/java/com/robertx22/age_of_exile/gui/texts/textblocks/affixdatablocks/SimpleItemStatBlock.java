@@ -3,15 +3,17 @@ package com.robertx22.age_of_exile.gui.texts.textblocks.affixdatablocks;
 import com.google.common.collect.ImmutableMap;
 import com.robertx22.age_of_exile.gui.texts.textblocks.StatBlock;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ITooltipList;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
 import javax.annotation.Nonnull;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import static com.robertx22.age_of_exile.gui.texts.ExileTooltips.EMPTY_LINE;
 
@@ -21,13 +23,13 @@ public class SimpleItemStatBlock extends StatBlock {
     private final Map<Component, List<? extends ITooltipList>> map = new LinkedHashMap<>();
 
     @Nonnull
-    private final TooltipInfo info;
+    private final StatRangeInfo info;
     private final ImmutableMap<String, ChatFormatting> colorMap = ImmutableMap.of(
             Itemtips.COR_STATS.locName().getString(), ChatFormatting.RED,
             Itemtips.UNIQUE_STATS.locName().getString(), ChatFormatting.YELLOW
     );
 
-    public SimpleItemStatBlock(@Nonnull TooltipInfo info) {
+    public SimpleItemStatBlock(@Nonnull StatRangeInfo info) {
         this.info = info;
     }
 
@@ -48,7 +50,7 @@ public class SimpleItemStatBlock extends StatBlock {
         ArrayList<Component> components = new ArrayList<>();
         map.forEach((key, value) -> {
             List<MutableComponent> componentList = value.stream()
-                    .flatMap(x -> x.GetTooltipString(info).stream())
+                    .flatMap(x -> x.GetTooltipString().stream())
                     .filter(component -> !component.getString().isBlank())
                     .toList();
 

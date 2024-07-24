@@ -4,7 +4,6 @@ import com.robertx22.age_of_exile.database.data.map_affix.MapAffix;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.prophecy.AcceptProphecyAffixPacket;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
@@ -57,7 +56,7 @@ public class ProphecyAffixButton extends ImageButton {
         }
 
         for (ExactStatData stat : stats) {
-            tip.addAll(stat.GetTooltipString(new TooltipInfo()));
+            tip.addAll(stat.GetTooltipString());
         }
 
 
@@ -66,7 +65,7 @@ public class ProphecyAffixButton extends ImageButton {
         if (info == Info.IS_OFFER) {
             tip.add(Words.ProphecyPlayerAffixInfo.locName());
         }
-        
+
         this.setTooltip(Tooltip.create(TextUTIL.mergeList(tip)));
 
 

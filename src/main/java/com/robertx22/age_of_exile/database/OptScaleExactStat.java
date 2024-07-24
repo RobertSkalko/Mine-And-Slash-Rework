@@ -3,7 +3,7 @@ package com.robertx22.age_of_exile.database;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
@@ -42,13 +42,13 @@ public class OptScaleExactStat {
         return "_" + getModType().id;
     }
 
-    public List<Component> GetTooltipString(TooltipInfo info, int lvl) {
+    public List<Component> GetTooltipString(StatRangeInfo info, int lvl) {
         Stat stat = getStat();
         TooltipStatInfo statInfo = new TooltipStatInfo(this.toExactStat(this.scale_to_lvl ? lvl : 1), -99, info);
         return new ArrayList<>(stat.getTooltipList(new TooltipStatWithContext(statInfo, null, null)));
     }
 
-    public List<MutableComponent> GetTooltipString(TooltipInfo info) {
+    public List<MutableComponent> GetTooltipString(StatRangeInfo info) {
         Stat stat = getStat();
         TooltipStatInfo statInfo = new TooltipStatInfo(this.toExactStat(this.scale_to_lvl ? info.unitdata.getLevel() : 1), -99, info);
         return new ArrayList<>(stat.getTooltipList(new TooltipStatWithContext(statInfo, null, null)));

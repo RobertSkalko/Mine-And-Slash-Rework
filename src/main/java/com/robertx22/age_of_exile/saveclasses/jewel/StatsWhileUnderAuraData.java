@@ -7,7 +7,6 @@ import com.robertx22.age_of_exile.database.data.aura.AuraGem;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatCtx;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
@@ -64,7 +63,7 @@ public class StatsWhileUnderAuraData implements IStatCtx {
 
         for (StatContext ctx : getStatAndContext(ClientOnly.getPlayer())) {
             for (ExactStatData stat : ctx.stats) {
-                list.addAll(stat.GetTooltipString(new TooltipInfo()));
+                list.addAll(stat.GetTooltipString());
             }
         }
 

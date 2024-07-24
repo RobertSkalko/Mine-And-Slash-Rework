@@ -5,7 +5,8 @@ import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ITooltipList;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ModRange;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.age_of_exile.saveclasses.unit.InCalcStatContainer;
@@ -142,13 +143,14 @@ public class ExactStatData implements ISerializable<ExactStatData>, ITooltipList
     }
 
     @Override
-    public List<MutableComponent> GetTooltipString(TooltipInfo info) {
+    public List<MutableComponent> GetTooltipString() {
 
         Stat stat = getStat();
-        TooltipStatInfo statInfo = new TooltipStatInfo(this, 100, info);
+        TooltipStatInfo statInfo = new TooltipStatInfo(this, 100, new StatRangeInfo(ModRange.hide()));
         return new ArrayList<>(stat.getTooltipList(new TooltipStatWithContext(statInfo, null, null)));
 
     }
+
 
     @Override
     public JsonObject toJson() {
@@ -182,47 +184,5 @@ public class ExactStatData implements ISerializable<ExactStatData>, ITooltipList
         return data;
     }
 
-    public static void combine(List<ExactStatData> list) {
 
-        List<ExactStatData> combined = new ArrayList<>();
-
-        ExactStatData current = null;
-
-        int i = 0;
-
-        while (!list.isEmpty()) {
-
-            List<ExactStatData> toRemove = new ArrayList<>();
-
-            for (ExactStatData stat : list) {
-
-                if (i == 0) {
-                    toRemove.add(stat);
-                    current = ExactStatData.levelScaled(stat.v1, stat.getStat(), stat.getType(), 1);
-                    i++;
-                    continue;
-                }
-
-                if (current.stat.equals(stat.stat)) {
-                    if (current.type.equals(stat.type)) {
-                        if (current.scaled == stat.scaled) {
-                            current.v1 += stat.v1;
-                            toRemove.add(stat);
-                        }
-                    }
-                }
-
-                i++;
-
-            }
-
-            i = 0;
-            combined.add(current);
-            toRemove.forEach(n -> list.removeAll(toRemove));
-
-        }
-
-        list.addAll(combined);
-
-    }
 }

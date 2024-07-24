@@ -8,12 +8,16 @@ import com.robertx22.age_of_exile.database.data.profession.all.Professions;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
-import com.robertx22.age_of_exile.gui.texts.textblocks.*;
+import com.robertx22.age_of_exile.gui.texts.textblocks.AdditionalBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.NameBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.OperationTipBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.RarityBlock;
 import com.robertx22.age_of_exile.gui.texts.textblocks.affixdatablocks.SimpleItemStatBlock;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ITooltip;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ModRange;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.tags.all.SlotTags;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
@@ -139,7 +143,7 @@ public class ProfessionToolData implements ITooltip {
         while (ctx.tooltip.get(ctx.tooltip.size() - 1).getString().isBlank()){
             ctx.tooltip.remove(ctx.tooltip.size() - 1);
         }*/
-        if (Screen.hasControlDown()){
+        if (Screen.hasControlDown()) {
             return;
         }
 
@@ -151,11 +155,11 @@ public class ProfessionToolData implements ITooltip {
                         TooltipUtils.level(lvl).withStyle(ChatFormatting.GREEN),
                         Itemtips.PROF_TOOL_EXP_TIP.locName(xp, getExpNeeded()).withStyle(ChatFormatting.GREEN)
                 )))
-                .accept(new SimpleItemStatBlock(new TooltipInfo())
+                .accept(new SimpleItemStatBlock(new StatRangeInfo(ModRange.hide()))
                         .accept(Itemtips.PROF_TOOL_STATS_TIP.locName(), this.GetAllStats()))
                 .accept(new OperationTipBlock().setCtrl().setAlt());
 
-        if (this.force_lvl > -1){
+        if (this.force_lvl > -1) {
             exileTooltips.accept(new AdditionalBlock(Itemtips.PROF_TOOL_LEVEL_CAP.locName(this.force_lvl).withStyle(ChatFormatting.RED)));
         }
         List<Component> tooltip = ctx.tooltip;

@@ -9,7 +9,6 @@ import com.robertx22.age_of_exile.database.data.stats.datapacks.base.CoreStatDat
 import com.robertx22.age_of_exile.database.data.stats.name_regex.StatNameRegex;
 import com.robertx22.age_of_exile.database.data.stats.types.core_stats.base.ICoreStat;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.unit.InCalcStatContainer;
 import com.robertx22.age_of_exile.saveclasses.unit.InCalcStatData;
 import com.robertx22.age_of_exile.saveclasses.unit.StatData;
@@ -68,15 +67,14 @@ public class CoreStat extends BaseDatapackStat implements ICoreStat {
 
     public List<Component> getCoreStatTooltip(EntityData unitdata, StatData data) {
 
-        TooltipInfo info = new TooltipInfo(unitdata, null);
-
+     
         int val = (int) getValue(data);
 
         List<Component> list = new ArrayList<>();
 
         list.add(Gui.STATS_INFLUENCE.locName().withStyle(ChatFormatting.GREEN));
         List<Component> preList = new ArrayList<>();
-        getMods(1).forEach(x -> preList.addAll(x.GetTooltipString(info)));
+        getMods(1).forEach(x -> preList.addAll(x.GetTooltipString()));
         List<Component> finalList = new TooltipStatsAligner(preList, false).buildNewTooltipsStats();
         list.addAll(finalList);
 
@@ -86,7 +84,7 @@ public class CoreStat extends BaseDatapackStat implements ICoreStat {
                 Gui.STAT_TOTAL.locName().withStyle(ChatFormatting.GREEN));
 
         List<Component> prelist = new ArrayList<>();
-        getMods(val).forEach(x -> prelist.addAll(x.GetTooltipString(info)));
+        getMods(val).forEach(x -> prelist.addAll(x.GetTooltipString()));
         List<Component> finallist = new TooltipStatsAligner(prelist, false).buildNewTooltipsStats();
         list.addAll(finallist);
 

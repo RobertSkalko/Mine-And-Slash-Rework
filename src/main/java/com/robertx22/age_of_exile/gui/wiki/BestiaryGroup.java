@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.gui.wiki;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.aura.AuraGem;
 import com.robertx22.age_of_exile.database.data.exile_effects.ExileEffect;
-import com.robertx22.age_of_exile.database.data.gear_slots.GearSlot;
 import com.robertx22.age_of_exile.database.data.gems.Gem;
 import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.database.data.runewords.RuneWord;
@@ -19,7 +18,8 @@ import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 import com.robertx22.age_of_exile.loot.blueprints.SkillGemBlueprint;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ModRange;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
@@ -46,7 +46,7 @@ public abstract class BestiaryGroup<T> {
     public static BestiaryGroup EFFECT = new DBItemEntry<ExileEffect>(ExileRegistryTypes.EXILE_EFFECT, Words.STATUS_EFFECT, "effect",
             x -> {
                 var tooltip = new ArrayList<Component>();
-                tooltip.addAll(x.GetTooltipString(new TooltipInfo()));
+                tooltip.addAll(x.GetTooltipString(new StatRangeInfo(ModRange.hide())));
                 return new BestiaryEntry.Tooltip(x.getEffectDisplayItem().getDefaultInstance(), CLOC.translate(x.locName()), tooltip);
             });
 

@@ -9,13 +9,13 @@ import com.robertx22.age_of_exile.gui.overlays.GuiPosition;
 import com.robertx22.age_of_exile.mmorpg.ForgeEvents;
 import com.robertx22.age_of_exile.mmorpg.event_registers.Client;
 import com.robertx22.age_of_exile.mmorpg.registers.client.ClientSetup;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ModRange;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.SocketData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.FormattedText;
 import net.minecraft.network.chat.MutableComponent;
@@ -85,14 +85,14 @@ public class ClientInit {
                             Optional<FormattedText> o = list.get(i).left();
                             if (o.isPresent() && o.get() instanceof Component comp && comp.getContents() instanceof LiteralContents tc) {
                                 if (tc.text().contains("[SOCKET_PLACEHOLDER]")) {
-                                    if (e < gems.size()){
-                                        if (!new TooltipInfo().shouldShowDescriptions()){
+                                    if (e < gems.size()) {
+                                        if (!new StatRangeInfo(ModRange.hide()).shouldShowDescriptions()) {
                                             list.set(i, Either.right(new SocketTooltip.SocketComponent(x.getItemStack(), Collections.singletonList(gems.get(e)))));
                                         } else {
                                             list.set(i, Either.right(new SocketTooltip.SocketComponent(x.getItemStack(), Collections.singletonList(gems.get(e)))));
                                             int finalI = i;
                                             list.get(i + 1).left().ifPresent(formattedText -> {
-                                                if (formattedText instanceof Component && formattedText.getString().contains("[SOCKET_PLACEHOLDER]")){
+                                                if (formattedText instanceof Component && formattedText.getString().contains("[SOCKET_PLACEHOLDER]")) {
                                                     String replaced = formattedText.getString().replace("[SOCKET_PLACEHOLDER]", "");
                                                     MutableComponent desc = Component.literal(replaced).withStyle(ChatFormatting.BLUE);
                                                     list.set(finalI + 1, Either.left(desc));

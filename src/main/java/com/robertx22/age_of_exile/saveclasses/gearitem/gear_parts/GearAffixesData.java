@@ -3,7 +3,7 @@ package com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts;
 import com.robertx22.age_of_exile.database.data.affixes.Affix;
 import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPartTooltip;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
@@ -29,41 +29,41 @@ public class GearAffixesData implements IGearPartTooltip {
     }
 
 
-    public List<TooltipStatWithContext> getAllStatsWithCtx(GearItemData gear, TooltipInfo info) {
+    public List<TooltipStatWithContext> getAllStatsWithCtx(GearItemData gear, StatRangeInfo info) {
         List<TooltipStatWithContext> list = new ArrayList<>();
-        this.suf.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), info)));
-        this.pre.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), info)));
-        this.cor.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), info)));
+        this.suf.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), gear.getRarity())));
+        this.pre.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), gear.getRarity())));
+        this.cor.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), gear.getRarity())));
         return list;
     }
 
-    public List<TooltipStatWithContext> getSufStatsWithCtx(GearItemData gear, TooltipInfo info) {
+    public List<TooltipStatWithContext> getSufStatsWithCtx(GearItemData gear, StatRangeInfo info) {
         List<TooltipStatWithContext> list = new ArrayList<>();
-        this.suf.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), info)));
+        this.suf.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), gear.getRarity())));
         return list;
     }
 
-    public List<TooltipStatWithContext> getPreStatsWithCtx(GearItemData gear, TooltipInfo info) {
+    public List<TooltipStatWithContext> getPreStatsWithCtx(GearItemData gear, StatRangeInfo info) {
         List<TooltipStatWithContext> list = new ArrayList<>();
-        this.pre.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), info)));
+        this.pre.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), gear.getRarity())));
         return list;
     }
 
-    public List<TooltipStatWithContext> getCorStatsWithCtx(GearItemData gear, TooltipInfo info) {
+    public List<TooltipStatWithContext> getCorStatsWithCtx(GearItemData gear, StatRangeInfo info) {
         List<TooltipStatWithContext> list = new ArrayList<>();
-        this.cor.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), info)));
+        this.cor.forEach(x -> list.addAll(x.getAllStatsWithCtx(gear.getLevel(), gear.getRarity())));
         return list;
     }
 
     @Override
-    public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {
+    public List<Component> GetTooltipString(StatRangeInfo info, GearItemData gear) {
         List<Component> list = new ArrayList<Component>();
 
 
         if (!getCorStatsWithCtx(gear, info).isEmpty()) {
             TooltipUtils.addEmpty(list);
             list.add(Itemtips.COR_STATS.locName().withStyle(ChatFormatting.RED));
-            getCorStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
+            getCorStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString()));
             TooltipUtils.addEmpty(list);
         }
 
@@ -72,7 +72,7 @@ public class GearAffixesData implements IGearPartTooltip {
         if (!getPreStatsWithCtx(gear, info).isEmpty()) {
             TooltipUtils.addEmpty(list);
             list.add(Itemtips.PREFIX_STATS.locName().withStyle(color));
-            getPreStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
+            getPreStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString()));
             TooltipUtils.addEmpty(list);
         }
 
@@ -80,7 +80,7 @@ public class GearAffixesData implements IGearPartTooltip {
         if (!getSufStatsWithCtx(gear, info).isEmpty()) {
             TooltipUtils.addEmpty(list);
             list.add(Itemtips.SUFFIX_STATS.locName().withStyle(color));
-            getSufStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
+            getSufStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString()));
             TooltipUtils.addEmpty(list);
         }
 
@@ -210,7 +210,7 @@ public class GearAffixesData implements IGearPartTooltip {
 
         list.addAll(pre);
         list.addAll(suf);
-    
+
         return list;
     }
 

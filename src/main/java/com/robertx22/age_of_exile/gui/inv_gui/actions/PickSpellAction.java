@@ -1,7 +1,8 @@
 package com.robertx22.age_of_exile.gui.inv_gui.actions;
 
 import com.robertx22.age_of_exile.database.data.spells.components.Spell;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ModRange;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.vanilla_mc.packets.OpenContainerPacket;
 import com.robertx22.library_of_exile.main.Packets;
@@ -40,7 +41,7 @@ public class PickSpellAction extends GuiAction {
 
     @Override
     public List<Component> getTooltip(Player p) {
-        return spell.GetTooltipString(new TooltipInfo(p));
+        return spell.GetTooltipString(new StatRangeInfo(ModRange.hide()));
     }
 
     @Override

@@ -5,7 +5,8 @@ import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.types.LearnSpellStat;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ModRange;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.saveclasses.spells.SpellSchoolsData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
@@ -77,7 +78,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
     }
 
 
-    public List<Component> GetTooltipString(TooltipInfo info) {
+    public List<Component> GetTooltipString(StatRangeInfo info) {
         List<Component> list = new ArrayList<>();
 
         try {
@@ -108,7 +109,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
                     return d;
                 });
 
-                scaled.forEach(x -> list.addAll(x.GetTooltipString(info)));
+                scaled.forEach(x -> list.addAll(x.GetTooltipString()));
 
             } else {
                 List<Component> preList = new ArrayList<>();
@@ -135,7 +136,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
                     if (data.rank > 0) {
                         list.addAll(data.getData().getTooltip(info.player));
                     } else {
-                        list.addAll(spell.spell.GetTooltipString(new TooltipInfo()));
+                        list.addAll(spell.spell.GetTooltipString(new StatRangeInfo(ModRange.alwaysMax())));
                     }
                 }
             }
@@ -207,7 +208,7 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
         }
 
         public ResourceLocation getColorTexture(PerkStatus s) {
-          
+
             if (s == PerkStatus.BLOCKED) {
                 return noColor;
             }

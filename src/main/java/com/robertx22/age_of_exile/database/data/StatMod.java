@@ -6,7 +6,8 @@ import com.robertx22.age_of_exile.database.data.stats.name_regex.StatNameRegex;
 import com.robertx22.age_of_exile.database.data.stats.tooltips.StatTooltipType;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ModRange;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
@@ -169,10 +170,10 @@ public class StatMod implements ISerializable<StatMod> {
                     StatNameRegex.JUST_NAME.translate(ChatFormatting.GREEN, null, getModType(), min, GetStat())
             ).get());
         }
-        var c = new TooltipStatWithContext(new TooltipStatInfo(this.ToExactStat(100, lvl), 100, new TooltipInfo()), this, lvl);
+        var c = new TooltipStatWithContext(new TooltipStatInfo(this.ToExactStat(100, lvl), 100, new StatRangeInfo(ModRange.of(new MinMax(0, 100)))), this, lvl);
         c.showNumber = false;
         c.disablestatranges = true;
-        
+
         Component add = StatTooltipType.NORMAL.impl.getTooltipList(null, c).get(0);
 
         Component txt = getRangeToShow(lvl).append(" ").append(add);
@@ -180,7 +181,7 @@ public class StatMod implements ISerializable<StatMod> {
 
         list.add(txt);
 
-        var info = new TooltipInfo();
+        var info = new StatRangeInfo(ModRange.hide());
         if (info.shouldShowDescriptions()) {
             list.addAll(GetStat().getCutDescTooltip());
         }

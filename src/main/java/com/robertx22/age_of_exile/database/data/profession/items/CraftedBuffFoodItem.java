@@ -11,7 +11,8 @@ import com.robertx22.age_of_exile.gui.texts.textblocks.LeveledItemBlock;
 import com.robertx22.age_of_exile.gui.texts.textblocks.OperationTipBlock;
 import com.robertx22.age_of_exile.gui.texts.textblocks.RequirementBlock;
 import com.robertx22.age_of_exile.gui.texts.textblocks.affixdatablocks.SimpleItemStatBlock;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ModRange;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Formatter;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
@@ -110,7 +111,7 @@ public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered 
             int lvl = LeveledItem.getLevel(stack);
 
             list.addAll(new ExileTooltips()
-                    .accept(new SimpleItemStatBlock(new TooltipInfo())
+                    .accept(new SimpleItemStatBlock(new StatRangeInfo(ModRange.always(power.perc)))
                             .accept(Itemtips.BUFF_TIP.locName(), buff.getStats(lvl, power.perc)))
                     .accept(new RequirementBlock(lvl))
                     .accept(new OperationTipBlock().setAlt())

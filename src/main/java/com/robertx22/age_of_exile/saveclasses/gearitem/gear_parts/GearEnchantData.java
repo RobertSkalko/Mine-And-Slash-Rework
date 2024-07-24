@@ -5,7 +5,7 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPartTooltip;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatsContainer;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
@@ -36,7 +36,7 @@ public class GearEnchantData implements IStatsContainer, IGearPartTooltip {
     }
 
     @Override
-    public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {
+    public List<Component> GetTooltipString(StatRangeInfo info, GearItemData gear) {
 
         List<Component> list = new ArrayList<>();
 
@@ -45,7 +45,7 @@ public class GearEnchantData implements IStatsContainer, IGearPartTooltip {
         list.add(Itemtips.Enchanted.locName(Component.literal(gear.data.get(GearItemData.KEYS.ENCHANT_TIMES) + "").withStyle(rarity.textFormatting())).withStyle(rarity.textFormatting()));
 
         for (ExactStatData stat : GetAllStats(gear)) {
-            list.addAll(stat.GetTooltipString(info));
+            list.addAll(stat.GetTooltipString());
         }
 
         return list;

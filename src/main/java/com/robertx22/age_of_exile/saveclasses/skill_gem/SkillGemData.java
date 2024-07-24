@@ -10,8 +10,9 @@ import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSal
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SkillGemsItems;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ModRange;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
@@ -205,7 +206,7 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
             if (spell == null) {
                 return list;
             }
-            for (Component c : spell.GetTooltipString(new TooltipInfo(p))) {
+            for (Component c : spell.GetTooltipString(new StatRangeInfo(ModRange.of(rar.stat_percents)))) {
                 list.add(c);
             }
             // mahj to-do need to change to current level rather than the "minimum" level
@@ -233,7 +234,7 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
         if (this.type == SkillGemType.SUPPORT) {
             SupportGem supp = getSupport();
             for (ExactStatData ex : supp.GetAllStats(Load.Unit(p), this)) {
-                list.addAll(ex.GetTooltipString(new TooltipInfo(p)));
+                list.addAll(ex.GetTooltipString());
             }
 
             list.add(ExileText.emptyLine().get());
@@ -249,7 +250,7 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
             AuraGem aura = getAura();
 
             for (ExactStatData ex : aura.GetAllStats(Load.Unit(p), this)) {
-                list.addAll(ex.GetTooltipString(new TooltipInfo(p)));
+                list.addAll(ex.GetTooltipString());
             }
 
             list.add(ExileText.emptyLine().get());

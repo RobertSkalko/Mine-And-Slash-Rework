@@ -4,10 +4,7 @@ import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.unique_items.UniqueGear;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPartTooltip;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IRerollable;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatsContainer;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.*;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
@@ -62,16 +59,13 @@ public class UniqueStatsData implements IGearPartTooltip, IRerollable, IStatsCon
 
 
     @Override
-    public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {
+    public List<Component> GetTooltipString(StatRangeInfo info, GearItemData gear) {
 
-        info.minmax = getMinMax(gear);
 
         List<Component> list = new ArrayList<Component>();
         list.add(Itemtips.UNIQUE_STATS.locName().withStyle(ChatFormatting.YELLOW));
-        getAllStatsWithCtx(gear, info).forEach(x -> {
-            if (true || !x.mod.GetStat().is_long) {
-                list.addAll(x.GetTooltipString(info));
-            }
+        getAllStatsWithCtx(gear, new StatRangeInfo(ModRange.of(gear.getRarity().stat_percents))).forEach(x -> {
+            list.addAll(x.GetTooltipString());
         });
 
         return list;
@@ -88,7 +82,7 @@ public class UniqueStatsData implements IGearPartTooltip, IRerollable, IStatsCon
         return Part.UNIQUE_STATS;
     }
 
-    public List<TooltipStatWithContext> getAllStatsWithCtx(GearItemData gear, TooltipInfo info) {
+    public List<TooltipStatWithContext> getAllStatsWithCtx(GearItemData gear, StatRangeInfo info) {
         List<TooltipStatWithContext> list = new ArrayList<>();
         int i = 0;
         for (StatMod mod : getUnique(gear).uniqueStats()) {

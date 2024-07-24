@@ -18,8 +18,9 @@ import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ModRange;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipContext;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -254,7 +255,7 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
                             Component.literal(levelRange.getMaxLevel() + ""))
                     .withStyle(ChatFormatting.GOLD));
             //tooltip.add(TooltipUtils.gearTier(this.tier));
-            if (new TooltipInfo().hasAltDown) {
+            if (new StatRangeInfo(ModRange.hide()).hasAltDown) {
                 tooltip.add(Component.literal("[" + Itemtips.MAP_TIER_TIP.locName().getString() + "]").withStyle(ChatFormatting.BLUE));
             }
             if (this.canBeOnAnySlot()) {

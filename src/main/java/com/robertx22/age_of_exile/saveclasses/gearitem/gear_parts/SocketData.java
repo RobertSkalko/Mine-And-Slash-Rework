@@ -6,7 +6,7 @@ import com.robertx22.age_of_exile.database.data.runes.Rune;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatsContainer;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -40,11 +40,11 @@ public class SocketData implements IStatsContainer {
         return getRune() != null;
     }
 
-    public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear, boolean addplaceholder) {
+    public List<Component> GetTooltipString(StatRangeInfo info, GearItemData gear, boolean addplaceholder) {
         List<Component> list = new ArrayList<Component>();
         GetAllStats(gear).forEach(x -> {
             String placeholder = addplaceholder ? "[SOCKET_PLACEHOLDER]" : " ";
-            for (MutableComponent m : x.GetTooltipString(info)) {
+            for (MutableComponent m : x.GetTooltipString()) {
                 list.add(Component.literal(placeholder).append(m));
             }
 

@@ -10,7 +10,8 @@ import com.robertx22.age_of_exile.gui.screens.skill_tree.SkillTreeScreen;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.PointData;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ModRange;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.vanilla_mc.packets.perks.PerkChangePacket;
 import com.robertx22.library_of_exile.main.Packets;
@@ -79,7 +80,7 @@ public class PerkButton extends ImageButton {
 
         if (this.isInside(MmouseX, MmouseY)) {
 
-            List<Component> tooltip = perk.GetTooltipString(new TooltipInfo(Minecraft.getInstance().player));
+            List<Component> tooltip = perk.GetTooltipString(new StatRangeInfo(ModRange.hide()));
 
             if (perk.stats.stream().anyMatch(x -> x.stat.equals(new UnknownStat().GUID()))) {
                 tooltip.add(Component.literal("No Perk of this ID found: " + perkid));
@@ -154,7 +155,7 @@ public class PerkButton extends ImageButton {
         if (!screen.shouldRender(getX(), getY(), screen.ctx)) {
             return;
         }
-        
+
         setTooltipMOD(gui, mouseX, mouseY);
 
 
@@ -185,7 +186,6 @@ public class PerkButton extends ImageButton {
                 .anyMatch(item -> item.getStat().locName().getString().toLowerCase().contains(search.toLowerCase()));
 
         boolean containsName = perk.locName().getString().toLowerCase().contains(search.toLowerCase());
-
 
 
         float opacity = search.isEmpty() || containsSearchStat || containsName ? 1F : 0.2f;

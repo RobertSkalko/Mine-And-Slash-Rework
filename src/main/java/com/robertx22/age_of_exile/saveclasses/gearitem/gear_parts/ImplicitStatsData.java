@@ -7,7 +7,7 @@ import com.robertx22.age_of_exile.saveclasses.ExactStatData;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IGearPartTooltip;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IRerollable;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatsContainer;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
@@ -44,7 +44,7 @@ public class ImplicitStatsData implements IGearPartTooltip, IRerollable, IStatsC
     }
 
     @Override
-    public List<Component> GetTooltipString(TooltipInfo info, GearItemData gear) {
+    public List<Component> GetTooltipString(StatRangeInfo info, GearItemData gear) {
 
         List<Component> list = new ArrayList<>();
 
@@ -54,7 +54,7 @@ public class ImplicitStatsData implements IGearPartTooltip, IRerollable, IStatsC
         if (!stats.isEmpty()) {
             list.add(Words.IMPLICIT_STATS.locName().withStyle(ChatFormatting.BLUE));
 
-            getAllStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString(info)));
+            getAllStatsWithCtx(gear, info).forEach(x -> list.addAll(x.GetTooltipString()));
             list.add(ExileText.ofText("").get());
 
         }
@@ -75,7 +75,7 @@ public class ImplicitStatsData implements IGearPartTooltip, IRerollable, IStatsC
         return Part.IMPLICIT_STATS;
     }
 
-    public List<TooltipStatWithContext> getAllStatsWithCtx(GearItemData gear, TooltipInfo info) {
+    public List<TooltipStatWithContext> getAllStatsWithCtx(GearItemData gear, StatRangeInfo info) {
         List<TooltipStatWithContext> list = new ArrayList<>();
 
         if (has()) {

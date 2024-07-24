@@ -5,7 +5,8 @@ import com.robertx22.age_of_exile.database.data.BaseGem;
 import com.robertx22.age_of_exile.database.data.StatMod;
 import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ModRange;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import net.minecraft.ChatFormatting;
@@ -57,7 +58,7 @@ public abstract class BaseGemItem extends Item {
         BaseGem gem = getBaseRuneGem();
 
 
-        TooltipInfo info = new TooltipInfo();
+        StatRangeInfo info = new StatRangeInfo(ModRange.hide());
 
         tooltip.add(Component.literal(""));
         List<OptScaleExactStat> wep = gem.getFor(SlotFamily.Weapon);

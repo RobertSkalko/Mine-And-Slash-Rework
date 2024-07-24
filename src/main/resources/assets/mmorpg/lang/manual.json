@@ -88,6 +88,7 @@
 "entity.mmorpg.lightning_golem": "Lightning Golem",
 
 "entity.mmorpg.boss_golem": "Corrupted Golem",
+"entity.mmorpg.auto_aim_skull": "Summoned Skull",
 
 "effect.mmorpg.food_health_regen": "Health Regen",
 "effect.mmorpg.food_mana_regen": "Mana Regen",

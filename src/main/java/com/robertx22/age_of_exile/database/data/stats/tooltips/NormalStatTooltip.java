@@ -1,7 +1,10 @@
 package com.robertx22.age_of_exile.database.data.stats.tooltips;
 
+import com.robertx22.age_of_exile.database.data.StatMod;
+import com.robertx22.age_of_exile.database.data.rarities.GearRarity;
 import com.robertx22.age_of_exile.database.data.stats.IUsableStat;
 import com.robertx22.age_of_exile.database.data.stats.types.LearnSpellStat;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ModRange;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.age_of_exile.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
@@ -32,12 +35,7 @@ public class NormalStatTooltip implements IStatTooltipType {
 
 
         if (ctx.showStatRanges()) {
-            txt.append(" ").append(getPercentageView(ctx.statinfo.percent));
-        }
-        if (ctx.showStatRanges()) {
-            if (ctx.statinfo.affix_rarity != null) {
-                txt.append(Component.literal(" [" + TooltipUtils.rarityShort(ctx.statinfo.affix_rarity).getString() + "]").withStyle(ctx.statinfo.affix_rarity.textFormatting()));
-            }
+            txt.append(" ").append(getPercentageView(info.percent, ctx.mod, ctx.statinfo.affix_rarity, ctx.level, info.tooltipInfo.minmax));
         }
 
         list.add(txt);
@@ -54,7 +52,12 @@ public class NormalStatTooltip implements IStatTooltipType {
 
     }
 
-    public static MutableComponent getPercentageView(int perc) {
+    public static MutableComponent getPercentageView(int perc, StatMod mod, GearRarity rar, int lvl, ModRange max) {
+        if (mod == null || max.hide) {
+            return Component.empty();
+        }
+
+
         ChatFormatting format = ChatFormatting.RED;
         if (perc > 25) {
             format = ChatFormatting.YELLOW;
@@ -69,7 +72,24 @@ public class NormalStatTooltip implements IStatTooltipType {
             format = ChatFormatting.LIGHT_PURPLE;
         }
 
-        return Component.literal(" [" + perc + "%]").withStyle(format);
+        if (rar != null) {
+            format = rar.textFormatting();
+        }
+
+        var v1 = mod.ToExactStat(max.minmax.min, lvl).getValue();
+        var v2 = mod.ToExactStat(max.minmax.max, lvl).getValue();
+
+        var mid = Component.literal((int) v1 + "" + " - " + (int) v2 + "");
+
+        var text = Component.literal(" [").append(mid).append("%]").withStyle(format);
+
+        if (rar != null) {
+            text.append(Component.literal(" [" + TooltipUtils.rarityShort(rar).getString() + "]").withStyle(rar.textFormatting()));
+        }
+
+        text.append(Component.literal(" [" + perc + "%]" + " {" + max.minmax.min + "%" + "-" + max.minmax.max + "%}").withStyle(format));
+
+        return text;
 
     }
 

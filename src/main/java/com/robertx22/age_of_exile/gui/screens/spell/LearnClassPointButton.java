@@ -3,7 +3,8 @@ package com.robertx22.age_of_exile.gui.screens.spell;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.gui.TextUtils;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.TooltipInfo;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ModRange;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.vanilla_mc.packets.AllocateClassPointPacket;
@@ -82,7 +83,7 @@ public class LearnClassPointButton extends ImageButton {
 
         List<Component> tooltip = new ArrayList<>();
 
-        TooltipInfo info = new TooltipInfo(mc.player);
+        StatRangeInfo info = new StatRangeInfo(ModRange.hide());
 
         tooltip.addAll(perk.GetTooltipString(info));
 
