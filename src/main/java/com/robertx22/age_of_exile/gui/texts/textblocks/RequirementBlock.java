@@ -49,9 +49,9 @@ public class RequirementBlock extends AbstractTextBlock {
         this.levelRequirement = levelRequirement;
     }
 
-    public RequirementBlock(@NotNull List<? extends Component> customComponents) {
+    public RequirementBlock(@NotNull List<? extends Component> customComponents, String icon) {
         this.customComponents = customComponents.stream()
-                .map(x -> Component.literal("").append(Component.literal("\u003F" + " ").withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)).append((x.copy().withStyle(ChatFormatting.GRAY)))).toList();
+                .map(x -> Component.literal("").append(Component.literal(icon).withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)).append((x.copy().withStyle(ChatFormatting.GRAY)))).toList();
     }
 
     public RequirementBlock setStatRequirement(@Nullable StatRequirement statRequirement) {
