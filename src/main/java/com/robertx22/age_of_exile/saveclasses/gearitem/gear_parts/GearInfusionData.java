@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GearEnchantData implements IStatsContainer, IGearPartTooltip {
+public class GearInfusionData implements IStatsContainer, IGearPartTooltip {
 
     public String en = "";
     public String rar = IRarity.COMMON_ID;
@@ -42,7 +42,7 @@ public class GearEnchantData implements IStatsContainer, IGearPartTooltip {
 
         GearRarity rarity = ExileDB.GearRarities().get(rar);
 
-        list.add(Itemtips.Enchanted.locName(Component.literal(gear.data.get(GearItemData.KEYS.ENCHANT_TIMES) + "").withStyle(rarity.textFormatting())).withStyle(rarity.textFormatting()));
+        list.add(Itemtips.INFUSED.locName(Component.literal(gear.data.get(GearItemData.KEYS.ENCHANT_TIMES) + "").withStyle(rarity.textFormatting())).withStyle(rarity.textFormatting()));
 
         for (ExactStatData stat : GetAllStats(gear)) {
             list.addAll(stat.GetTooltipString());

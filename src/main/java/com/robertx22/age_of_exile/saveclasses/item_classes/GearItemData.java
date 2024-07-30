@@ -69,7 +69,7 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
     public GearAffixesData affixes = new GearAffixesData();
     public GearSocketsData sockets = new GearSocketsData();
     public UniqueStatsData uniqueStats;
-    public GearEnchantData ench;
+    public GearInfusionData ench;
 
     public GenericDataHolder data = new GenericDataHolder();
 

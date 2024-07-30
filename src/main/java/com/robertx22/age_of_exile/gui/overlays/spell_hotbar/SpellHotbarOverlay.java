@@ -111,7 +111,13 @@ public class SpellHotbarOverlay {
             RenderSystem.disableBlend(); // enables transparency
 
             if (ClientConfigs.getConfig().GUI_POSITION.get() != GuiPosition.TOP_LEFT) {
-                EffectsOverlay.render(3, y + 85, mc.player, gui, false);
+
+                int offset = 0;
+                if (!ClientConfigs.getConfig().HOTBAR_SWAPPING.get()) {
+                    offset = 80;
+                }
+
+                EffectsOverlay.render(3, y + 85 + offset, mc.player, gui, false);
             }
 
         } catch (Exception e) {

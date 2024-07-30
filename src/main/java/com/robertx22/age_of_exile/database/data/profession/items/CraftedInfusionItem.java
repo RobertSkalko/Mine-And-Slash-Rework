@@ -19,7 +19,8 @@ import com.robertx22.age_of_exile.gui.texts.textblocks.NameBlock;
 import com.robertx22.age_of_exile.gui.texts.textblocks.RarityBlock;
 import com.robertx22.age_of_exile.gui.texts.textblocks.RequirementBlock;
 import com.robertx22.age_of_exile.gui.texts.textblocks.usableitemblocks.UsageBlock;
-import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.GearEnchantData;
+import com.robertx22.age_of_exile.mmorpg.UNICODE;
+import com.robertx22.age_of_exile.saveclasses.gearitem.gear_parts.GearInfusionData;
 import com.robertx22.age_of_exile.saveclasses.item_classes.GearItemData;
 import com.robertx22.age_of_exile.tags.all.SlotTags;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
@@ -43,12 +44,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class CraftedEnchantItem extends AutoItem implements IItemAsCurrency, ICreativeTabTiered, IRarity {
+public class CraftedInfusionItem extends AutoItem implements IItemAsCurrency, ICreativeTabTiered, IRarity {
 
     public SlotFamily fam;
     String rar;
 
-    public CraftedEnchantItem(SlotFamily fam, String rar) {
+    public CraftedInfusionItem(SlotFamily fam, String rar) {
         super(new Properties());
         this.rar = rar;
         this.fam = fam;
@@ -69,7 +70,7 @@ public class CraftedEnchantItem extends AutoItem implements IItemAsCurrency, ICr
                             .toList();
 
                 }))
-                .accept(new RequirementBlock(Collections.singletonList(Itemtips.ENCHANTMENT_GEAR_LEVEL_RANGE.locName(tier.levelRange.getMinLevel(), tier.levelRange.getMaxLevel())), "\uD83D\uDD28"))
+                .accept(new RequirementBlock(Collections.singletonList(Itemtips.INFUSION_GEAR_LEVEL_RANGE.locName(tier.levelRange.getMinLevel(), tier.levelRange.getMaxLevel())), UNICODE.ROTATED_CUBE + " "))
                 .accept(new LeveledItemBlock(pStack))
                 .release());
     }
@@ -93,7 +94,7 @@ public class CraftedEnchantItem extends AutoItem implements IItemAsCurrency, ICr
                         new GearOutcome() {
                             @Override
                             public Words getName() {
-                                return Words.UpgradeEnchant;
+                                return Words.UpgradeInfusion;
                             }
 
                             @Override
@@ -104,7 +105,7 @@ public class CraftedEnchantItem extends AutoItem implements IItemAsCurrency, ICr
                             @Override
                             public ItemStack modify(LocReqContext ctx, GearItemData gear, ItemStack stack) {
 
-                                GearEnchantData en = new GearEnchantData();
+                                GearInfusionData en = new GearInfusionData();
 
                                 if (en.isEmpty()) {
                                     Affix affix = ExileDB.Affixes().getFilterWrapped(x -> {

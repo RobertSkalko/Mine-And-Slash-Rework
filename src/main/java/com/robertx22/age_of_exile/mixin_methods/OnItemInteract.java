@@ -299,7 +299,7 @@ public class OnItemInteract {
                 return;
             }
             if (x.getClickAction() != ClickAction.SECONDARY) {
-                return;
+                // return;
             }
 
             ItemStack currency = x.getStackedOnItem();

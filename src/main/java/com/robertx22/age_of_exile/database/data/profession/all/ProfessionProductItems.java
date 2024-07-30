@@ -5,7 +5,7 @@ import com.robertx22.age_of_exile.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.age_of_exile.database.data.profession.CraftedItemHolder;
 import com.robertx22.age_of_exile.database.data.profession.buffs.StatBuffs;
 import com.robertx22.age_of_exile.database.data.profession.items.CraftedBuffFoodItem;
-import com.robertx22.age_of_exile.database.data.profession.items.CraftedEnchantItem;
+import com.robertx22.age_of_exile.database.data.profession.items.CraftedInfusionItem;
 import com.robertx22.age_of_exile.database.data.profession.items.CraftedSoulItem;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.age_of_exile.mmorpg.registers.deferred_wrapper.RegObj;
@@ -62,7 +62,7 @@ public class ProfessionProductItems {
                     if (!CRAFTED_ENCHANTS.containsKey(fam)) {
                         CRAFTED_ENCHANTS.put(fam, new HashMap<>());
                     }
-                    RegObj<Item> obj = Def.item(id, () -> new CraftedEnchantItem(fam, rar));
+                    RegObj<Item> obj = Def.item(id, () -> new CraftedInfusionItem(fam, rar));
                     CRAFTED_ENCHANTS.get(fam).put(rar, obj);
 
                 }

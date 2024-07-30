@@ -7,6 +7,7 @@ import java.util.Locale;
 
 // to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
+    SUCCESS("Sucess"),
     GEAR_LOCKED_TYPE_PLATE("Plate"),
     GEAR_LOCKED_TYPE_LEATHER("Leather"),
     GEAR_LOCKED_TYPE_CLOTH("Cloth"),
@@ -50,7 +51,7 @@ public enum Words implements IAutoLocName {
     ENABLED("Enabled"),
     DISABLED("Disabled"),
 
-    CAST_FAIL_MSGS("Spell Casting Failure Messages\n\nWill print helpful messages when you fail to cast a spell\nParticularly Helpful for New Players"),
+    CAST_FAIL_MSGS("Spell Casting Failure Messages\n\nWill print helpful messages when you fail to cast a spell\nParticularly Helpful for New Players\nPlayers below lvl 10 can't disable this option."),
     MOB_DEATH_MESSAGES("Provides a short message when you kill a mob.\n\nYou can hover over it for useful info like Loot Chance"),
     DAMAGE_MESSAGES("Provides a short message when you damage a mob.\n\nYou can hover over it for useful info like how was damage modified"),
     AUTOMATIC_PVE("Auto-Team Nearby Players\n\nPlayers who enable this are considered Teamed up and Allies\n- Must be Nearby (Radius set by config)"),
@@ -128,7 +129,7 @@ public enum Words implements IAutoLocName {
 
     UpgradeAffix("Upgrades an affix"),
     RerollsAffix("Rerolls an Affix"),
-    UpgradeEnchant("Upgrades or Rerolls the Enchant"),
+    UpgradeInfusion("Upgrades or Rerolls the Infusion"),
     UpgradeQuality("Upgrade Quality"),
     CHAOS_STAT_SUCCESS("Upgrades the Item randomly"),
     DowngradeAffix("Downgrades an affix"),

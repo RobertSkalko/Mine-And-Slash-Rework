@@ -60,12 +60,12 @@ public enum Chats implements IAutoLocName {
     RIGHT_CLICK_OPEN("Right Click to Open"),
 
     MAX_STACKS("Maximum Stacks: %1$s"),
-    NO_ENCHANT_ON_ITEM("There's no Mns Enchant on this item"),
+    NO_ENCHANT_ON_ITEM("There's no Mns Infusion on this item"),
 
     ITEM_NON_NBT("This is an empty item, without any NBT/Random Stats, this means you got it through creative mode or a /give command. If you want to test the mod, you can use the /mine_and_slash give command which creates items with working NBT."),
 
     NOT_FAMILY("Can't be applied to an item of that slot family."),
-    ENCHANT_UPGRADE_RARITY("Enchants must be applied consecutively. A common enchant has to come before an uncommon enchant may be applied."),
+    ENCHANT_UPGRADE_RARITY("Infusions must be applied consecutively. A common Infusion has to come before an uncommon Infusion may be applied."),
     THIS_ITEM_CANT_BE_USED_MORE_THAN_X_TIMES("This item has already reached maximum uses: (%1$s)"),
     NOT_GEAR("This is not a gear item."),
     CANT_RUNE_THIS_UNIQUE("Can't insert Runes into this Unique"),

@@ -35,7 +35,7 @@ public class PantsUniques implements ExileRegistryInit {
                 ))
                 .build();
 
-        UniqueGearBuilder.of("burning_desire", "Burning Desire", BaseGearTypes.PLATE_CHEST)
+        UniqueGearBuilder.of("burning_desire", "Burning Desire", BaseGearTypes.PLATE_PANTS)
                 .keepsBaseName()
                 .stats(Arrays.asList(
                         new StatMod(50, 100, GearDefense.getInstance(), ModType.PERCENT),

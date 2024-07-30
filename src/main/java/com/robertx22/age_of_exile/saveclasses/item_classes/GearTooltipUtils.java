@@ -69,7 +69,7 @@ public class GearTooltipUtils {
                     public GearSocketsData gearSocketsData;
 
                     @Nullable
-                    public GearEnchantData gearEnchantData;
+                    public GearInfusionData gearEnchantData;
 
                     private static int getPriority(String s, Map<String, Integer> priorityMap) {
                         return priorityMap.entrySet().stream()

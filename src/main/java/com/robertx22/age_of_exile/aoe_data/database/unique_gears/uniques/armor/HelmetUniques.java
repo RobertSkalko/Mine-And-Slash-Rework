@@ -73,7 +73,7 @@ public class HelmetUniques implements ExileRegistryInit {
                 .build();
 
 
-        UniqueGearBuilder.of("haste_price", "Price of Haste", BaseGearTypes.PLATE_BOOTS)
+        UniqueGearBuilder.of("haste_price", "Price of Haste", BaseGearTypes.PLATE_HELMET)
                 .keepsBaseName()
                 .stat(GearDefense.getInstance().mod(50, 100).percent())
                 .stat(SpellChangeStats.COOLDOWN_REDUCTION.get().mod(15, 30))

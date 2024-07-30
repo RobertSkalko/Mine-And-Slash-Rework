@@ -440,7 +440,7 @@ public class OffenseStats {
             .setUsesMoreMultiplier()
             .addCondition(x -> StatConditions.SPELL_HAS_TAG.get(x))
             .addEffect(StatEffects.Layers.ADDITIVE_DAMAGE_PERCENT)
-            .setLocName(x -> x.locNameForLangFile() + "  Spell Tag Damage")
+            .setLocName(x -> x.locNameForLangFile() + " Spell Tag Damage")
             .setLocDesc(x -> "Increases damage of spells with this tag. Totem Damage increases dmg of totems, etc.")
             .modifyAfterDone(x -> {
                 x.is_perc = true;

@@ -1,4 +1,6 @@
-v.5.5.24
-- give silent mode for stat command
-- fix give gear command to correctly give cloth leather etc instead of randomly when using unique as rarity
-- attempt to give more info in affix range tooltips
+v.5.5.26
+- Item inventory interactions (the drag and click) now work on left click and right click again. 
+The lack of left click interactions was confusing some people and it didn't seem to fix problems with sort mods anyway
+- effect bars now dont overlap with 8bar hotbar
+- cast fail messages are now forced on level 10 players and below
+- small loc fixes

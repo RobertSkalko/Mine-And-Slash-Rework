@@ -20,8 +20,6 @@ public class PlayerConfigData {
 
     public enum Config {
 
-        /// todo add more configs like.. minions should attack x?
-
         CAST_FAIL("cast_fail_messages", true, Words.CAST_FAIL_MSGS, false),
         MOB_DEATH_MESSAGES("mob_death_messages", false, Words.MOB_DEATH_MESSAGES, false),
         DAMAGE_MESSAGES("damage_messages", false, Words.DAMAGE_MESSAGES, false),
