@@ -21,7 +21,7 @@ public class PlayerWrapper extends ArgumentWrapper<Player> {
     }
 
     @Override
-    public Player get(CommandContext<CommandSourceStack> ctx) {
+    public Player getter(CommandContext<CommandSourceStack> ctx) {
         Player en = null;
         try {
             en = EntityArgument.getPlayer(ctx, id());
@@ -34,4 +34,6 @@ public class PlayerWrapper extends ArgumentWrapper<Player> {
 
         return en;
     }
+
+
 }

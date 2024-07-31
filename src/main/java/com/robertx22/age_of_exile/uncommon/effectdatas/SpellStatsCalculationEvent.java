@@ -32,8 +32,7 @@ public class SpellStatsCalculationEvent extends EffectEvent {
     public SpellStatsCalculationEvent(LivingEntity caster, String spellid) {
         super(caster, caster);
 
-        Spell spell = ExileDB.Spells()
-                .get(spellid);
+        Spell spell = ExileDB.Spells().get(spellid);
 
 
         this.savedData = create(Load.Unit(caster).getLevel(), caster, spell);

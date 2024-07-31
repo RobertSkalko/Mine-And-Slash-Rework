@@ -12,7 +12,6 @@ public class PetAttackUTIL {
 
     public static void tryAttack(LivingEntity summon, LivingEntity caster, LivingEntity target) {
 
-
         if (caster != null) {
 
             Spell spell = ExileDB.Spells().get(Load.Unit(summon).summonedPetData.spell);

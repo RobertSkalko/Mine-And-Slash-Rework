@@ -4,3 +4,4 @@ The lack of left click interactions was confusing some people and it didn't seem
 - effect bars now dont overlap with 8bar hotbar
 - cast fail messages are now forced on level 10 players and below
 - small loc fixes
+- added operation and cut_by_hundred fields to attribute stat datapacks and fixed them

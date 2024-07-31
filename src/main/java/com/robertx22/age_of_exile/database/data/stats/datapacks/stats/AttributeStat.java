@@ -21,10 +21,13 @@ public class AttributeStat extends BaseDatapackStat {
     public UUID uuid;
     public String attributeId;
     public Attribute attribute;
+    public AttributeModifier.Operation operation = AttributeModifier.Operation.ADDITION;
+    public boolean cut_by_hundred = true;
 
-    public AttributeStat(String id, String locname, UUID uuid, Attribute attribute, boolean perc) {
+    public AttributeStat(String id, String locname, UUID uuid, Attribute attribute, boolean perc, AttributeModifier.Operation operation) {
         super(SER_ID);
         this.id = id;
+        this.operation = operation;
         this.locname = locname;
         this.uuid = uuid;
         this.attributeId = BuiltInRegistries.ATTRIBUTE.getKey(attribute)
@@ -32,7 +35,7 @@ public class AttributeStat extends BaseDatapackStat {
         this.attribute = attribute;
         this.is_perc = perc;
         this.scaling = StatScaling.NONE;
-        
+
         DatapackStats.tryAdd(this);
     }
 
@@ -50,12 +53,8 @@ public class AttributeStat extends BaseDatapackStat {
 
         float val = data.getValue();
 
-        AttributeModifier.Operation operation = AttributeModifier.Operation.ADDITION;
-
-        if (IsPercent()) {
-            operation = AttributeModifier.Operation.MULTIPLY_TOTAL;
-
-            val = (00F + val) / 100F;
+        if (cut_by_hundred) {
+            val = val / 100F;
         }
 
         AttributeModifier mod = new AttributeModifier(
@@ -71,8 +70,9 @@ public class AttributeStat extends BaseDatapackStat {
             if (atri.hasModifier(mod)) {
                 atri.removeModifier(mod); // KEEP THIS OR UPDATE WONT MAKE HP CORRECT!!!
             }
-            atri.addPermanentModifier(mod);
+            atri.addTransientModifier(mod);
         }
+
 
     }
 }

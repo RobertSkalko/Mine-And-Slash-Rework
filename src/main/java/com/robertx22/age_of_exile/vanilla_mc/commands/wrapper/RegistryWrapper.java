@@ -15,7 +15,7 @@ public class RegistryWrapper<T extends ExileRegistry> extends StringWrapper {
     }
 
     @Override
-    public String get(CommandContext ctx) {
+    public String getter(CommandContext ctx) {
         var id = super.get(ctx);
 
         if (id.equals("random")) {
@@ -25,14 +25,5 @@ public class RegistryWrapper<T extends ExileRegistry> extends StringWrapper {
         return id;
     }
 
-    public T getFromDB(CommandContext ctx) {
-        var id = get(ctx);
-
-        if (id.equals("random")) {
-            return (T) Database.getRegistry(type).random();
-        }
-
-        return (T) Database.getRegistry(type).get(id);
-    }
-
+ 
 }

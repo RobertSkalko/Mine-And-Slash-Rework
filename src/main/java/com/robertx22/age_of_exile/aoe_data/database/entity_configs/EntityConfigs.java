@@ -41,7 +41,8 @@ public class EntityConfigs implements ExileRegistryInit {
         polarbear.addToSerializables();
 
         new EntityConfig(EntityType.ZOMBIFIED_PIGLIN, 0.5F).addToSerializables();
-        new EntityConfig(EntityType.ZOMBIE, 0.75F).addToSerializables();
+        var zombie = new EntityConfig(EntityType.ZOMBIE, 0.75F);
+        zombie.addToSerializables();
         new EntityConfig(EntityType.DROWNED, 0.75F).addToSerializables();
         new EntityConfig(EntityType.BEE, 0.8F).addToSerializables();
         new EntityConfig(EntityType.WOLF, 0.5F).addToSerializables();
@@ -65,7 +66,7 @@ public class EntityConfigs implements ExileRegistryInit {
         EntityConfig blue = new EntityConfig("blue_skies", 1);
         blue.set_health_damage_override = true;
         blue.addToSerializables();
-        
+
     }
 
     void setupMyMobs() {

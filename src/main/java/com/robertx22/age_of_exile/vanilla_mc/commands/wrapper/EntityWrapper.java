@@ -10,18 +10,10 @@ import net.minecraft.world.entity.Entity;
 import static net.minecraft.commands.Commands.argument;
 
 public class EntityWrapper extends ArgumentWrapper<Entity> {
-    @Override
-    public String id() {
-        return "entity";
-    }
+
 
     @Override
-    public RequiredArgumentBuilder getType() {
-        return argument(id(), EntityArgument.entity());
-    }
-
-    @Override
-    public Entity get(CommandContext<CommandSourceStack> ctx) {
+    public Entity getter(CommandContext<CommandSourceStack> ctx) {
         Entity en = null;
         try {
             en = EntityArgument.getEntity(ctx, id());
@@ -34,4 +26,15 @@ public class EntityWrapper extends ArgumentWrapper<Entity> {
 
         return en;
     }
+
+    @Override
+    public String id() {
+        return "entity";
+    }
+
+    @Override
+    public RequiredArgumentBuilder getType() {
+        return argument(id(), EntityArgument.entity());
+    }
+
 }

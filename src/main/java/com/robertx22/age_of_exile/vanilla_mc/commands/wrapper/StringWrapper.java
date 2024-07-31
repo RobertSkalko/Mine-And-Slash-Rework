@@ -8,6 +8,7 @@ import com.robertx22.library_of_exile.registry.Database;
 import com.robertx22.library_of_exile.registry.ExileRegistryContainer;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IGUID;
+import net.minecraft.commands.CommandSourceStack;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +16,12 @@ import java.util.stream.Collectors;
 import static net.minecraft.commands.Commands.argument;
 
 public class StringWrapper extends ArgumentWrapper<String> {
+    
+    @Override
+    public String getter(CommandContext<CommandSourceStack> ctx) {
+        return StringArgumentType.getString(ctx, id());
+    }
+
     @Override
     public String id() {
         return "string";
@@ -24,11 +31,6 @@ public class StringWrapper extends ArgumentWrapper<String> {
     public RequiredArgumentBuilder getType() {
         var b = argument(id(), StringArgumentType.string());
         return b;
-    }
-
-    @Override
-    public String get(CommandContext ctx) {
-        return StringArgumentType.getString(ctx, id());
     }
 
 

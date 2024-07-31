@@ -6,11 +6,31 @@ import com.robertx22.age_of_exile.database.data.rarities.MobRarity;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.vanilla_mc.commands.wrapper.*;
+import net.minecraft.network.chat.Component;
 
 public class EntityCommands {
 
     public static void init(CommandDispatcher dis) {
+        CommandBuilder.of(dis, x -> {
+            EntityWrapper enarg = new EntityWrapper();
+            IntWrapper intarg = new IntWrapper();
+            intarg.setOptional(999);
 
+            x.addLiteral("test", PermWrapper.OP);
+            x.addLiteral("optional", PermWrapper.OP);
+
+
+            x.addArg(enarg);
+            x.addArg(intarg);
+
+            x.action(e -> {
+                var en = enarg.get(e);
+                var num = intarg.get(e);
+                EntityData data = Load.Unit(en);
+                en.sendSystemMessage(Component.literal(num + ""));
+            });
+
+        });
         CommandBuilder.of(dis, x -> {
             EntityWrapper enarg = new EntityWrapper();
             IntWrapper intarg = new IntWrapper();

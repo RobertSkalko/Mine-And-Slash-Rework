@@ -560,6 +560,9 @@ public class DamageEvent extends EffectEvent {
             if (target.getHealth() <= 0) {
                 target.die(target.damageSources().mobAttack(this.source));
             }
+            if (attackInfo != null) {
+                attackInfo.setAmount(0.000001F);
+            }
         } else {
             if (attackInfo != null) {
                 DamageSourceDuck duck = (DamageSourceDuck) attackInfo.getSource();

@@ -35,6 +35,7 @@ public class CommandBuilder {
         return this;
     }
 
+
     public CommandBuilder action(Consumer<CommandContext<CommandSourceStack>> ctx) {
         this.action = ctx;
         return this;
@@ -47,22 +48,32 @@ public class CommandBuilder {
 
         for (String id : ids) {
 
+
             // dont add different prefixes for commands unless ALL commands are made this way
             var first = literal(id);
 
+            List<Integer> optionals = new ArrayList<>();
             List<ArgumentBuilder> list = new ArrayList<>();
             list.add(first);
 
+            int x = 0;
+
+
             for (LiteralWrapper literal : literals) {
-                var next = literal(literal.id).requires(x -> x.hasPermission(literal.perm.perm));
+                var next = literal(literal.id).requires(e -> e.hasPermission(literal.perm.perm));
                 list.add(next);
+                x++;
             }
             for (ArgumentWrapper arg : args) {
+                if (arg.isOptional()) {
+                    optionals.add(x);
+                }
                 var next = arg.getType();
                 if (arg.suggestions != null) {
                     next.suggests(arg.suggestions);
                 }
                 list.add(next);
+                x++;
             }
 
 
@@ -70,13 +81,14 @@ public class CommandBuilder {
                 var v1 = list.get(i);
                 var v2 = list.get(i - 1);
 
-                if (i == list.size() - 1) {
+                if (optionals.contains(i) || i == list.size() - 1) {
                     v1.executes(e -> {
                         action.accept(e);
                         return 0;
                     });
                 }
                 v2.then(v1);
+
             }
 
 

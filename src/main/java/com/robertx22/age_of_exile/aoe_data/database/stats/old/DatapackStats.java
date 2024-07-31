@@ -31,6 +31,7 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.Elements;
 import com.robertx22.age_of_exile.uncommon.enumclasses.ModType;
 import com.robertx22.age_of_exile.uncommon.enumclasses.PlayStyle;
 import com.robertx22.library_of_exile.registry.ExileRegistryInit;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
 import java.util.ArrayList;
@@ -49,8 +50,8 @@ public class DatapackStats implements ExileRegistryInit {
     }
 
     // vanilla attributes
-    public static Stat MOVE_SPEED = new AttributeStat("move_speed", "Move Speed", UUID.fromString("7e286d81-3fcf-471c-85b8-980072b30907"), Attributes.MOVEMENT_SPEED, true);
-    public static Stat KNOCKBACK_RESIST = new AttributeStat("knockback_resist", "Knockback Resist", UUID.fromString("7e286d81-3fcf-471c-85b8-980072b30905"), Attributes.KNOCKBACK_RESISTANCE, true);
+    public static Stat MOVE_SPEED = new AttributeStat("move_speed", "Move Speed", UUID.fromString("7e286d81-3fcf-471c-85b8-980072b30907"), Attributes.MOVEMENT_SPEED, true, AttributeModifier.Operation.MULTIPLY_TOTAL);
+    public static Stat KNOCKBACK_RESIST = new AttributeStat("knockback_resist", "Knockback Resist", UUID.fromString("7e286d81-3fcf-471c-85b8-980072b30905"), Attributes.KNOCKBACK_RESISTANCE, true, AttributeModifier.Operation.ADDITION);
 
     // core stats
     public static Stat INT = new CoreStat("intelligence", "Intelligence", CoreStatData.of(Arrays.asList(
