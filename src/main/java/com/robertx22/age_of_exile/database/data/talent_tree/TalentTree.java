@@ -8,6 +8,9 @@ import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.data.talent_tree.parser.TalentGrid;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.AllPerkButtonPainter;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.ButtonIdentifier;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.PerkButtonPainter;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.saveclasses.perks.TalentsData;
@@ -18,10 +21,10 @@ import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import net.minecraft.world.entity.player.Player;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TalentTree implements JsonExileRegistry<TalentTree>, IAutoGson<TalentTree> {
@@ -120,6 +123,25 @@ public class TalentTree implements JsonExileRegistry<TalentTree>, IAutoGson<Tale
 
         grid.loadIntoTree();
 
+        CompletableFuture.runAsync(() -> {
+            HashSet<ButtonIdentifier> buttonIdentifiers = new HashSet<>();
+            for (Map.Entry<PointData, String> e : this.calcData.perks.entrySet()) {
+
+                Perk perk = ExileDB.Perks().get(e.getValue());
+
+                if (perk == null) {
+                    perk = ExileDB.Perks().get(new UnknownStat().GUID());
+
+                }
+
+                ButtonIdentifier buttonIdentifier = new ButtonIdentifier(this, e.getKey(), perk);
+                PerkButtonPainter.addToWait(buttonIdentifier);
+                buttonIdentifiers.add(buttonIdentifier);
+            }
+            PerkButtonPainter.handlePaintQueue();
+            //can't run this here, cuz at this moment not all the perk status is ready!
+            //AllPerkButtonPainter.getPainter(this.getSchool_type()).init(buttonIdentifiers);
+        });
     }
 
     @Override
