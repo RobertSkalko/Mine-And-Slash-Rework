@@ -39,6 +39,12 @@ public abstract class BaseDatapackStat extends Stat implements ISerializable<Sta
     }
 
     @Override
+    public void compareLoadedJsonAndFinalClass(JsonObject json, Boolean editmode) {
+        System.out.println("[Mine and Slash Datapack Log]: " + this.GUID() + " loaded. Datapack Mns Stats currently don't have a way to print warnings. Ignore this log, it's just mean to inform modpack-devs");
+        // todo
+    }
+
+    @Override
     public final Elements getElement() {
         return element;
     }
@@ -63,7 +69,7 @@ public abstract class BaseDatapackStat extends Stat implements ISerializable<Sta
         IStatSerializer seri = StatSerializers.INSTANCE.map.get(serializer);
 
         JsonElement serjson = seri
-            .statToJson(this);
+                .statToJson(this);
 
         json.add("data", serjson);
         return json;
@@ -72,7 +78,7 @@ public abstract class BaseDatapackStat extends Stat implements ISerializable<Sta
     @Override
     public Stat fromJson(JsonObject json) {
         this.serializer = json.get("ser")
-            .getAsString();
+                .getAsString();
 
         if (serializer.equals(DatapackStat.SER)) {
             return DatapackStat.SERIALIZER.fromJson(json);
@@ -81,8 +87,8 @@ public abstract class BaseDatapackStat extends Stat implements ISerializable<Sta
         Preconditions.checkArgument(StatSerializers.INSTANCE.map.containsKey(serializer));
 
         BaseDatapackStat stat = StatSerializers.INSTANCE.map.get(serializer)
-            .getStatFromJson(json.get("data")
-                .getAsJsonObject());
+                .getStatFromJson(json.get("data")
+                        .getAsJsonObject());
 
         return stat;
     }

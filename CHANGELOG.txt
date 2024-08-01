@@ -1,7 +1,10 @@
-v.5.5.26
-- Item inventory interactions (the drag and click) now work on left click and right click again. 
-The lack of left click interactions was confusing some people and it didn't seem to fix problems with sort mods anyway
-- effect bars now dont overlap with 8bar hotbar
-- cast fail messages are now forced on level 10 players and below
-- small loc fixes
-- added operation and cut_by_hundred fields to attribute stat datapacks and fixed them
+v.5.5.27
+- datapacks are now checked and a warning is printed to console if the json you used in a datapack is different from the json the class serializes back to.
+What this means is, mns should give you a warning that one of your datapacks is faulty, like:
+- it will warn if you used a field that doesn't exist
+- it will warn if you didn't use all the existing fields
+
+It won't actually tell you what's wrong but for now it just tells you SOMETHING is wrong with that specific json and shows you a comparison.
+
+- datapacks now default to loader = "REPLACE_FULLY", if you want to only replace some values, use REPLACE_FIELDS
+Full replace means it loads the json and turns it into a new class. Replace fields means it only replaces the fields you put in the json

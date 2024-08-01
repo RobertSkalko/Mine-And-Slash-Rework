@@ -4,7 +4,7 @@ license = "All rights reserved"
 issueTrackerURL = "https://github.com/RobertSkalko/Mine-And-Slash-Rework"
 [[mods]]
 modId = "mmorpg"
-version = "5.5.26"
+version = "5.5.27"
 displayName = "Mine and Slash"
 # A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
@@ -33,7 +33,7 @@ side = "BOTH"
 [[dependencies.mmorpg]]
 modId = "library_of_exile"
 mandatory = true
-versionRange = "[1.4.4,)"
+versionRange = "[1.4.6,)"
 ordering = "NONE"
 side = "BOTH"
 [[dependencies.mmorpg]]
