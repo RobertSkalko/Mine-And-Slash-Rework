@@ -14,14 +14,19 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.bases.BaseScreen;
 import com.robertx22.age_of_exile.gui.bases.IAlertScreen;
 import com.robertx22.age_of_exile.gui.bases.INamedScreen;
-import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.*;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkButton;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.AllPerkButtonPainter;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.connections.PerkConnectionCache;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.connections.PerkConnectionPainter;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.connections.PerkConnectionRenderer;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkScreenContext;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.opacity.OpacityController;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.library_of_exile.utils.Watch;
-import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -35,25 +40,100 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 import java.awt.*;
-import java.text.DecimalFormat;
-import java.util.*;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen, IAlertScreen {
     static ResourceLocation BIG_PANEL = new ResourceLocation(SlashRef.MODID, "textures/gui/skill_tree/bar.png");
-
-    public SchoolType schoolType;
-
-    //public HashSet<PerkConnectionRender> buttonConnections = new HashSet<>();
-
     static ResourceLocation CON = SlashRef.id("textures/gui/skill_tree/skill_connection.png");
 
-    private void renderConnection(GuiGraphics graphics, PerkConnectionRender2 connection) {
+    //public HashSet<PerkConnectionRender> buttonConnections = new HashSet<>();
+    static ResourceLocation BACKGROUND = SlashRef.guiId("skill_tree/background");
+    private static int SEARCH_WIDTH = 100;
+    private static int SEARCH_HEIGHT = 14;
+    public static EditBox SEARCH = new EditBox(Minecraft.getInstance().font, 0, 0, SEARCH_WIDTH, SEARCH_HEIGHT, Component.translatable("fml.menu.mods.search"));
+    public SchoolType schoolType;
+    public PointData pointClicked = new PointData(0, 0);
+    public int mouseRecentlyClickedTicks = 0;
+    public int scrollX = 0;
+    public int scrollY = 0;
+    public HashMap<PointData, PerkButton> pointPerkButtonMap = new HashMap<>();
+    public Minecraft mc = Minecraft.getInstance();
+    public TalentTree school;
+    public static float originalZoom = 0.3f;
+    public float zoom = originalZoom;
+    public float targetZoom = zoom;
+    public PerkScreenContext ctx = new PerkScreenContext(this);
+    int ticks = 0;
+    int tick_count = 0;
+    HashMap<AbstractWidget, PointData> originalButtonLocMap = new HashMap<>();
+    PlayerData playerData = Load.player(mc.player);
+    String msstring = "";
+    private int targetScrollX;
+    private int targetScrollY;
+    private boolean canSmoothHandleScroll;
+    private boolean canSmoothHandleZoom;
+
+    public boolean clicked = false;
+
+    public AllPerkButtonPainter painter;
+
+    public SearchHandler searchHandler;
+
+    private final OpacityController opacityController = new OpacityController(null);
+    public SkillTreeScreen(SchoolType type) {
+        super(Minecraft.getInstance()
+                .getWindow()
+                .getGuiScaledWidth(), Minecraft.getInstance()
+                .getWindow()
+                .getGuiScaledHeight());
+        this.schoolType = type;
+        this.painter  = AllPerkButtonPainter.getPainter(schoolType);
+    }
+
+    public static int sizeX() {
+        return Minecraft.getInstance().getWindow().getWidth();
+    }
+
+    public static int sizeY() {
+        return Minecraft.getInstance().getWindow().getHeight();
+    }
+
+    public static boolean searchFocused() {
+        if (SkillTreeScreen.SEARCH != null) {
+            return SkillTreeScreen.SEARCH.isFocused();
+        } else {
+            // Handle the case when search is not initialized
+            return false;
+        }
+    }
+
+    public static void renderBackgroundDirt(GuiGraphics gui, Screen screen, int vOffset) {
+        //copied from Screen
+
+        Tesselator tessellator = Tesselator.getInstance();
+        BufferBuilder bufferBuilder = tessellator.getBuilder();
+
+        RenderSystem.setShaderTexture(0, BACKGROUND);
+
+        Minecraft mc = Minecraft.getInstance();
+
+        // todo test
+        //gui.setColor(0.25F, 0.25F, 0.25F, 1.0F);
+        int i = 32;
+        gui.blit(BACKGROUND, 0, 0, 0, 0.0F, 0.0F, mc.screen.width, mc.screen.height, 32, 32);
+        //gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+
+    }
+
+    private void renderConnection(GuiGraphics graphics, PerkConnectionRenderer connection) {
 
         graphics.pose().pushPose();
         //Watch watch = new Watch();
-        PerkButton button1 = pointPerkButtonMap.get(connection.pair.perk1);
-        PerkButton button2 = pointPerkButtonMap.get(connection.pair.perk2);
+        PerkButton button1 = pointPerkButtonMap.get(connection.pair().perk1());
+        PerkButton button2 = pointPerkButtonMap.get(connection.pair().perk2());
+        if (!shouldRender(button1.getX(), button1.getY(), ctx) && !shouldRender(button2.getX(), button2.getY(), ctx)) return;
 
         PerkScreenContext ctx = new PerkScreenContext(this);
 
@@ -76,20 +156,19 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         //graphics.pose().scale(1F, 1.5F, 1F); // thicken it a bit
 
         int off = 0;
-
-        if (connection.connection == Perk.Connection.LINKED) {
+        Perk.Connection connection1 = connection.connection();
+        if (connection1 == Perk.Connection.LINKED) {
             off = 0;
         }
-        if (connection.connection == Perk.Connection.POSSIBLE) {
+        if (connection1 == Perk.Connection.POSSIBLE) {
             off = 6;
         }
-        if (connection.connection == Perk.Connection.BLOCKED) {
+        if (connection1 == Perk.Connection.BLOCKED) {
             off = 6 + 5;
         }
-        //System.out.println("calc time: " + watch.getPrint());
-        //Watch watch1 = new Watch();
+
         graphics.blit(CON, 0, -3, length, 6, 0, off, length, 6, 50, 16);
-        //System.out.println("blit time: " + watch1.getPrint());
+
         graphics.pose().popPose();
     }
 
@@ -105,7 +184,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         return Mth.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
     }
 
-
     protected float getAngleBetweenButtons(PerkButton button1, PerkButton button2) {
         float x1 = button1.getX() + button1.getWidth() / 2F;
         float y1 = button1.getY() + button1.getHeight() / 2F;
@@ -118,21 +196,11 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         return (float) Mth.atan2(y2 - y1, x2 - x1);
     }
 
-    public SkillTreeScreen(SchoolType type) {
-        super(Minecraft.getInstance()
-                .getWindow()
-                .getGuiScaledWidth(), Minecraft.getInstance()
-                .getWindow()
-                .getGuiScaledHeight());
-        this.schoolType = type;
-
-    }
-
-    public PointData pointClicked = new PointData(0, 0);
-    public int mouseRecentlyClickedTicks = 0;
-
     @Override
     public boolean mouseReleased(double x, double y, int ticks) {
+        this.clicked = !this.clicked;
+        /*Window instance = Minecraft.getInstance().getWindow();
+        System.out.println(this.width + " " + instance.getWidth() + " " + instance.getGuiScaledWidth() + " " + AllPerkButtonPainter.getPainter(schoolType).imageWidth);*/
 
         mouseRecentlyClickedTicks = 25;
 
@@ -140,24 +208,12 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     }
 
-    public static int sizeX() {
-        return Minecraft.getInstance().getWindow().getWidth();
-    }
-
-    public static int sizeY() {
-        return Minecraft.getInstance().getWindow().getHeight();
-    }
-
-    int ticks = 0;
-
-
     private void renderConnections(GuiGraphics gui) {
-
-        for (PerkConnectionRender2 con : PerkConnectionCache.rendersCache.get(this.schoolType.toString().hashCode()).values()) {
+        int typeHash = this.schoolType.toString().hashCode();
+        for (PerkConnectionRenderer con : PerkConnectionCache.renderersCache.get(typeHash).values()) {
             this.renderConnection(gui, con);
         }
     }
-
 
     public boolean shouldRender(int x, int y, PerkScreenContext ctx) {
 
@@ -168,7 +224,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
             }
         }
         return false;
-
     }
 
     @Override
@@ -179,33 +234,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         }
         return super.keyPressed(keyCode, scanCode, modifiers);
 
-    }
-
-    int tick_count = 0;
-    public int scrollX = 0;
-    public int scrollY = 0;
-
-    HashMap<AbstractWidget, PointData> originalButtonLocMap = new HashMap<>();
-    public HashMap<PointData, PerkButton> pointPerkButtonMap = new HashMap<>();
-
-
-    public Minecraft mc = Minecraft.getInstance();
-
-    PlayerData playerData = Load.player(mc.player);
-
-    public TalentTree school;
-
-    private static int SEARCH_WIDTH = 100;
-    private static int SEARCH_HEIGHT = 14;
-    public static EditBox SEARCH = new EditBox(Minecraft.getInstance().font, 0, 0, SEARCH_WIDTH, SEARCH_HEIGHT, Component.translatable("fml.menu.mods.search"));
-
-    public static boolean searchFocused() {
-        if (SkillTreeScreen.SEARCH != null) {
-            return SkillTreeScreen.SEARCH.isFocused();
-        } else {
-            // Handle the case when search is not initialized
-            return false;
-        }
     }
 
     @Override
@@ -225,7 +253,13 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
             this.school = ExileDB.TalentTrees().getFilterWrapped(x -> x.getSchool_type().equals(this.schoolType)).list.get(0);
             refreshButtons();
+            this.searchHandler = new SearchHandler(this);
+
             PerkConnectionCache.init(this);
+            PerkConnectionPainter.init(this);
+
+            painter.onSkillScreenOpen(this.pointPerkButtonMap.values().stream().map(x -> x.buttonIdentifier).toList());
+
             goToCenter();
         } catch (Exception e) {
             e.printStackTrace();
@@ -236,47 +270,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
     public void addButtonPublic(AbstractWidget b) {
         this.addRenderableWidget(b);
     }
-
-    /*private void addConnections() {
-
-        buttonConnections = new HashSet<>();
-
-        HashSet<PointData> def = new HashSet();
-
-        Set<Set<PointData>> cons = new HashSet<>();
-        var data = Load.player(ClientOnly.getPlayer());
-
-
-        new ArrayList<>(children()).forEach(b -> {
-            if (b instanceof PerkButton) {
-                PerkButton pb = (PerkButton) b;
-
-                Set<PointData> connections = this.school.calcData.connections.getOrDefault(pb.point, def);
-
-                for (PointData p : connections) {
-
-                    if (cons.stream().anyMatch(x -> x.contains(p) && x.contains(pb.point))) {
-                        continue;
-                    }
-
-                    cons.add(Sets.newHashSet(p, pb.point));
-
-                    PerkButton sb = this.pointPerkButtonMap.get(p);
-
-                    if (sb == null) {
-                        continue;
-                    }
-
-                    var con = data.talents.getConnection(school, sb.point, pb.point);
-                    var result = new PerkConnectionRender(pb.point, sb.point, con);
-                    buttonConnections.add(result);
-                }
-            }
-
-        });
-
-    }*/
-
 
     public void refreshButtons() {
 
@@ -320,6 +313,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
         this.addWidget(SEARCH);
 
+
     }
 
     private Point getPosForPoint(PointData point, Perk perk) {
@@ -342,10 +336,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     }
 
-    private int targetScrollX;
-
-    private int targetScrollY;
-
     public void goToCenter() {
         this.scrollX = 0;
         this.scrollY = 0;
@@ -363,13 +353,12 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         }
     }
 
-
-    public float zoom = 0.3F;
-    public float targetZoom = zoom;
-
-
     @Override
     public void onClose() {
+
+
+        PerkConnectionPainter.handleUpdateQueue();
+
 
         super.onClose();
 
@@ -391,8 +380,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         zoom = 1;
         targetZoom = zoom;
     }
-    private boolean canSmoothHandleScroll;
-    private boolean canSmoothHandleZoom;
+
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scroll) {
         targetScrollX -= (int) (((scroll < 0 || (scroll > 0 && zoom >= 0.5) ? 0 : 1F / zoom) * (mouseX - this.width / 2F)) / 3);
@@ -407,7 +395,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         targetScrollX = Mth.clamp(targetScrollX, -3333, 3333);
         targetScrollY = Mth.clamp(targetScrollY, -3333, 3333);
 
-        this.targetZoom = ((float)Math.round(Mth.clamp(targetZoom, 0.15F, 1) * 10000)) / 10000;
+        this.targetZoom = ((float) Math.round(Mth.clamp(targetZoom, 0.15F, 1) * 10000)) / 10000;
         canSmoothHandleScroll = true;
         canSmoothHandleZoom = true;
 
@@ -431,23 +419,21 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
     }
 
-    public PerkScreenContext ctx = new PerkScreenContext(this);
-
-    private void handleZoom(){
-        if (!canSmoothHandleZoom){
-            zoom = targetZoom;
+    private void handleZoom() {
+        if (!canSmoothHandleZoom) {
+            targetZoom = zoom;
             return;
         }
-        if (zoom != targetZoom){
+        if (zoom != targetZoom) {
             zoom = ((float) Math.round(zoom * 10000)) / 10000;
-            if (zoom > targetZoom){
-                if (zoom < targetZoom * 0.99f){
+            if (zoom > targetZoom) {
+                if (zoom < targetZoom * 0.999f) {
                     zoom = targetZoom;
                 } else {
                     zoom = Mth.lerp(ClientConfigs.getConfig().SKILL_TREE_ZOOM_SPEED.get().floatValue(), zoom, targetZoom);
                 }
             } else {
-                if (zoom > targetZoom * 0.99f){
+                if (zoom > targetZoom * 0.999f) {
                     zoom = targetZoom;
                 } else {
                     zoom = Mth.lerp(ClientConfigs.getConfig().SKILL_TREE_ZOOM_SPEED.get().floatValue(), zoom, targetZoom);
@@ -456,21 +442,21 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         }
     }
 
-    private void handleScroll(){
-        if (!canSmoothHandleScroll){
+    private void handleScroll() {
+        if (!canSmoothHandleScroll) {
             targetScrollX = scrollX;
             targetScrollY = scrollY;
             return;
         }
-        if (scrollX != targetScrollX){
-            if (scrollX > targetScrollX){
-                if (scrollX < targetScrollX - 2){
+        if (scrollX != targetScrollX) {
+            if (scrollX > targetScrollX) {
+                if (scrollX < targetScrollX - 2) {
                     scrollX = targetScrollX;
                 } else {
                     scrollX = Mth.lerpInt(ClientConfigs.getConfig().SKILL_TREE_ZOOM_SPEED.get().floatValue(), scrollX, targetScrollX);
                 }
             } else {
-                if (scrollX > targetScrollX - 2){
+                if (scrollX > targetScrollX - 2) {
                     scrollX = targetScrollX;
                 } else {
                     scrollX = Mth.lerpInt(ClientConfigs.getConfig().SKILL_TREE_ZOOM_SPEED.get().floatValue(), scrollX, targetScrollX);
@@ -478,15 +464,15 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
             }
         }
 
-        if (scrollY != targetScrollY){
-            if (scrollY > targetScrollY){
-                if (scrollY < targetScrollY - 2){
+        if (scrollY != targetScrollY) {
+            if (scrollY > targetScrollY) {
+                if (scrollY < targetScrollY - 2) {
                     scrollY = targetScrollY;
                 } else {
                     scrollY = Mth.lerpInt(ClientConfigs.getConfig().SKILL_TREE_ZOOM_SPEED.get().floatValue(), scrollY, targetScrollY);
                 }
             } else {
-                if (scrollY > targetScrollY - 2){
+                if (scrollY > targetScrollY - 2) {
                     scrollY = targetScrollY;
                 } else {
                     scrollY = Mth.lerpInt(ClientConfigs.getConfig().SKILL_TREE_ZOOM_SPEED.get().floatValue(), scrollY, targetScrollY);
@@ -494,8 +480,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
             }
         }
     }
-
-
 
     @Override
     public void render(GuiGraphics gui, int x, int y, float ticks) {
@@ -515,6 +499,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         handleScroll();
         gui.pose().scale(zoom, zoom, zoom);
 
+
         try {
 
             float addx = (1F / zoom - 1) * this.width / 2F;
@@ -533,21 +518,42 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                         //b.search = searchTerm;
                     }
             }
-            //Watch watch1 = new Watch();
+
+            //must handle this before all the render thing
+            if (!this.searchHandler.isUpdating) this.searchHandler.tickThis();
+            opacityController.detectCurrentState(playerData);
 
             PerkConnectionCache.updateRenders(this);
             //System.out.println(watch1.getPrint());
 
             this.renderConnections(gui);
 
+            if (painter.isAllowedToPaint()) {
+                //System.out.println("start render all button!");
+                int connectionX = (int) (addx + scrollX);
+                int connectionY = (int) (addy + scrollY);
+                int startX = painter.minX - (school.calcData.center.x * PerkButton.SPACING);
+                int startY = painter.minY - (school.calcData.center.y * PerkButton.SPACING);
+                List<AllPerkButtonPainter.ResourceLocationAndSize> locations = painter.getCurrentPaintings();
+                int i = 0;
 
+                gui.setColor(1.0f, 1.0f, 1.0f, opacityController.getWholeImage());
+                for (AllPerkButtonPainter.ResourceLocationAndSize location : locations) {
+
+                    gui.blit(location.location(), startX + i * location.width() + connectionX, startY + connectionY, 0, 0, location.width(), location.height(), location.width(), location.height());
+                    i++;
+                }
+                gui.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+            }
             ticks++;
-
 
 
             super.render(gui, x, y, ticks);
 
             this.tick_count++;
+
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -562,30 +568,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
         //watch.print(" rendering ");
     }
-
-
-    String msstring = "";
-
-    static ResourceLocation BACKGROUND = SlashRef.guiId("skill_tree/background");
-
-    public static void renderBackgroundDirt(GuiGraphics gui, Screen screen, int vOffset) {
-        //copied from Screen
-
-        Tesselator tessellator = Tesselator.getInstance();
-        BufferBuilder bufferBuilder = tessellator.getBuilder();
-
-        RenderSystem.setShaderTexture(0, BACKGROUND);
-
-        Minecraft mc = Minecraft.getInstance();
-
-        // todo test
-        //gui.setColor(0.25F, 0.25F, 0.25F, 1.0F);
-        int i = 32;
-        gui.blit(BACKGROUND, 0, 0, 0, 0.0F, 0.0F, mc.screen.width, mc.screen.height, 32, 32);
-        //gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-
-    }
-
 
     private void renderPanels(GuiGraphics gui) {
 
