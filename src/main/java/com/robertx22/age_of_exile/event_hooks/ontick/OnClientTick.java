@@ -3,7 +3,6 @@ package com.robertx22.age_of_exile.event_hooks.ontick;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.AllPerkButtonPainter;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.PerkButtonPainter;
-import com.robertx22.age_of_exile.gui.screens.skill_tree.connections.PerkConnectionPainter;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ChatUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
@@ -45,7 +44,6 @@ public class OnClientTick {
             RenderSystem.recordRenderCall(() -> {
                 PerkButtonPainter.handleRegisterQueue();
                 container.values().forEach(AllPerkButtonPainter::tryRegister);
-                PerkConnectionPainter.handleRegisterQueue();
             });
 
 

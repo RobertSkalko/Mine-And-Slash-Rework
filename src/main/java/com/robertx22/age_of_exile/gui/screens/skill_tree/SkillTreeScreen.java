@@ -17,7 +17,6 @@ import com.robertx22.age_of_exile.gui.bases.INamedScreen;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkButton;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.AllPerkButtonPainter;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.connections.PerkConnectionCache;
-import com.robertx22.age_of_exile.gui.screens.skill_tree.connections.PerkConnectionPainter;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.connections.PerkConnectionRenderer;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkScreenContext;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.opacity.OpacityController;
@@ -256,7 +255,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
             this.searchHandler = new SearchHandler(this);
 
             PerkConnectionCache.init(this);
-            PerkConnectionPainter.init(this);
 
             painter.onSkillScreenOpen(this.pointPerkButtonMap.values().stream().map(x -> x.buttonIdentifier).toList());
 
@@ -357,7 +355,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
     public void onClose() {
 
 
-        PerkConnectionPainter.handleUpdateQueue();
 
 
         super.onClose();
