@@ -6,6 +6,8 @@ import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import java.util.Locale;
 
 public enum Formatter implements IAutoLocName {
+
+    UNIQUE_NAME_FORMAT("%1$s %2$s"),
     GEM_ITEM_NAME("%1$s %2$s", "Use to control the order and space of gem item name, like \"(cracked) (ruby)\""),
     BUFF_CONSUMPTIONS_NAME("%1$s %2$s %3$s", "control the order and space of buff consumption."),
     GEAR_ITEM_NAME_ALL("%1$s %2$s %3$s", "Use to control the order and space of gear item name, like \"(Giant) (Rusted Sword) (of Penetration)\""),
