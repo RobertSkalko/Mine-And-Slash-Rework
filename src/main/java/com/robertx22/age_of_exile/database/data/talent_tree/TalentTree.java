@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.data.talent_tree.parser.TalentGrid;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.TreeOptimizationHandler;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.AllPerkButtonPainter;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.ButtonIdentifier;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.PerkButtonPainter;
@@ -123,25 +124,26 @@ public class TalentTree implements JsonExileRegistry<TalentTree>, IAutoGson<Tale
 
         grid.loadIntoTree();
 
-        CompletableFuture.runAsync(() -> {
-            HashSet<ButtonIdentifier> buttonIdentifiers = new HashSet<>();
-            for (Map.Entry<PointData, String> e : this.calcData.perks.entrySet()) {
+        if (TreeOptimizationHandler.isOptEnable()){
+            CompletableFuture.runAsync(() -> {
+                for (Map.Entry<PointData, String> e : this.calcData.perks.entrySet()) {
 
-                Perk perk = ExileDB.Perks().get(e.getValue());
+                    Perk perk = ExileDB.Perks().get(e.getValue());
 
-                if (perk == null) {
-                    perk = ExileDB.Perks().get(new UnknownStat().GUID());
+                    if (perk == null) {
+                        perk = ExileDB.Perks().get(new UnknownStat().GUID());
 
+                    }
+
+                    ButtonIdentifier buttonIdentifier = new ButtonIdentifier(this, e.getKey(), perk);
+                    PerkButtonPainter.addToWait(buttonIdentifier);
                 }
+                PerkButtonPainter.handlePaintQueue();
+                //can't run this here, cuz at this moment not all the perk status is ready!
+                //AllPerkButtonPainter.getPainter(this.getSchool_type()).init(buttonIdentifiers);
+            });
 
-                ButtonIdentifier buttonIdentifier = new ButtonIdentifier(this, e.getKey(), perk);
-                PerkButtonPainter.addToWait(buttonIdentifier);
-                buttonIdentifiers.add(buttonIdentifier);
-            }
-            PerkButtonPainter.handlePaintQueue();
-            //can't run this here, cuz at this moment not all the perk status is ready!
-            //AllPerkButtonPainter.getPainter(this.getSchool_type()).init(buttonIdentifiers);
-        });
+        }
     }
 
     @Override

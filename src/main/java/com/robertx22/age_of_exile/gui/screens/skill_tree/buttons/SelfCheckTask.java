@@ -33,7 +33,7 @@ public class SelfCheckTask {
     }
 
     public void sendTo(PerkButton button){
-        if (button.selfCheckTasks.stream().anyMatch(x -> x.equals(this))) return;
-        button.selfCheckTasks.add(this);
+        if (button.getOptimizedState().selfCheckTasks.stream().anyMatch(x -> x.equals(this))) return;
+        button.getOptimizedState().selfCheckTasks.add(this);
     }
 }

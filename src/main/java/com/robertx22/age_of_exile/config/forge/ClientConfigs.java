@@ -21,7 +21,7 @@ public class ClientConfigs {
         b.comment("Client Configs")
                 .push("general");
 
-
+        ENABLE_SKILL_TREE_OPTIMIZATION = b.define("enable_talent_tree_optimization", true);
         SHOW_LOW_ENERGY_MANA_WARNING = b.define("show_low_mana_warning", true);
         RENDER_SIMPLE_MOB_BAR = b.define("render_mob_bar", true);
         RENDER_DEATH_STATISTICS = b.define("render_death_stats", true);
@@ -70,6 +70,8 @@ public class ClientConfigs {
     public ForgeConfigSpec.DoubleValue SKILL_TREE_ZOOM_SPEED;
 
     public ForgeConfigSpec.IntValue REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES;
+
+    public ForgeConfigSpec.BooleanValue ENABLE_SKILL_TREE_OPTIMIZATION;
 
 
     public enum GlintType {

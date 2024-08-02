@@ -2,6 +2,7 @@ package com.robertx22.age_of_exile.vanilla_mc.items.misc.reset_pots;
 
 import com.robertx22.age_of_exile.database.data.currency.base.IShapedRecipe;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.TreeOptimizationHandler;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.AllPerkButtonPainter;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.connections.PerkConnectionCache;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -42,11 +43,15 @@ public class TalentResetPotion extends AutoItem implements IShapedRecipe {
             p.addItem(new ItemStack(Items.GLASS_BOTTLE));
         }
         if (world.isClientSide){
-            for (TalentTree.SchoolType value : TalentTree.SchoolType.values()) {
-                AllPerkButtonPainter.getPainter(value).startANewRun();
-                PerkConnectionCache.reset();
+            if (TreeOptimizationHandler.isOptEnable()){
+                for (TalentTree.SchoolType value : TalentTree.SchoolType.values()) {
+                    AllPerkButtonPainter.getPainter(value).startANewRun();
+                    PerkConnectionCache.reset();
+                }
+
             }
         }
+
         return stack;
     }
 

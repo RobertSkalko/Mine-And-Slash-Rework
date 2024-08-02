@@ -62,7 +62,7 @@ public class SearchHandler {
             Iterator<PerkButton> iterator = allButtons.iterator();
             while (iterator.hasNext()) {
                 PerkButton next = iterator.next();
-                if (next.matchStrings.stream().anyMatch(x -> x.contains(thisTimeSearch)) || next.perk.locName().getString().toLowerCase().contains(thisTimeSearch))
+                if (next.getOptimizedState().matchStrings.stream().anyMatch(x -> x.contains(thisTimeSearch)) || next.perk.locName().getString().toLowerCase().contains(thisTimeSearch))
                     qualifiedButtons.add(next);
             }
             //System.out.println("add all!");
@@ -76,7 +76,7 @@ public class SearchHandler {
                 Iterator<PerkButton> iterator = qualifiedButtons.iterator();
                 while (iterator.hasNext()) {
                     PerkButton next = iterator.next();
-                    if (next.matchStrings.stream().noneMatch(x -> x.contains(thisTimeSearch)) && !next.perk.locName().getString().toLowerCase().contains(thisTimeSearch))
+                    if (next.getOptimizedState().matchStrings.stream().noneMatch(x -> x.contains(thisTimeSearch)) && !next.perk.locName().getString().toLowerCase().contains(thisTimeSearch))
                         iterator.remove();
                 }
             } else {
@@ -85,7 +85,7 @@ public class SearchHandler {
                 Iterator<PerkButton> iterator = allButtons.iterator();
                 while (iterator.hasNext()) {
                     PerkButton next = iterator.next();
-                    if (next.matchStrings.stream().anyMatch(x -> x.contains(thisTimeSearch)) || next.perk.locName().getString().toLowerCase().contains(thisTimeSearch))
+                    if (next.getOptimizedState().matchStrings.stream().anyMatch(x -> x.contains(thisTimeSearch)) || next.perk.locName().getString().toLowerCase().contains(thisTimeSearch))
                         qualifiedButtons.add(next);
                 }
             }

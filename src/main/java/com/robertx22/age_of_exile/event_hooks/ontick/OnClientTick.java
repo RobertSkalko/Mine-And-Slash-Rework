@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.event_hooks.ontick;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.TreeOptimizationHandler;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.AllPerkButtonPainter;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.PerkButtonPainter;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
@@ -34,18 +35,18 @@ public class OnClientTick {
 
         try {
             Player player = Minecraft.getInstance().player;
-
-            container.values().forEach(x -> {
-                x.checkIfNeedRepaint();
-                x.scheduleRepaint();
-            });
+            if (TreeOptimizationHandler.isOptEnable()){
+                container.values().forEach(x -> {
+                    x.checkIfNeedRepaint();
+                    x.scheduleRepaint();
+                });
 
 
             RenderSystem.recordRenderCall(() -> {
                 PerkButtonPainter.handleRegisterQueue();
                 container.values().forEach(AllPerkButtonPainter::tryRegister);
             });
-
+            }
 
             if (player == null) {
                 return;

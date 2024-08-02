@@ -68,8 +68,7 @@ public class AllPerkButtonPainter {
             allPerkButtonPainter = new AllPerkButtonPainter(schoolType);
             OnClientTick.container.put(i, allPerkButtonPainter);
         }
-        AllPerkButtonPainter allPerkButtonPainter1 = OnClientTick.container.get(i);
-        return allPerkButtonPainter1;
+        return OnClientTick.container.get(i);
     }
 
     public void onSkillScreenOpen(Collection<ButtonIdentifier> identifiers) {
@@ -113,7 +112,7 @@ public class AllPerkButtonPainter {
     }
 
     public boolean isThisButtonIsUpdating(PerkButton button) {
-        return this.updateOnThisScreen.contains(button.buttonIdentifier) || this.updateInThinRun.contains(button.buttonIdentifier) || this.paintState.waitingToBePainted.contains(button.buttonIdentifier);
+        return this.updateOnThisScreen.contains(button.getOptimizedState().buttonIdentifier) || this.updateInThinRun.contains(button.getOptimizedState().buttonIdentifier) || this.paintState.waitingToBePainted.contains(button.getOptimizedState().buttonIdentifier);
     }
 
     public void checkIfNeedRepaint() {
