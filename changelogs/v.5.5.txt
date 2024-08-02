@@ -1,0 +1,286 @@
+v.5.5.0
+
+Another big update which brings Ascendancy classes! These are ways to define your build even further, whether you want to be a Curse specialist, a bard, mana stacker, aurabot, a hybrid..
+
+You get a point every 10 levels, and you can't have more than 9 points in total.
+
+There are currently 14(TM) Ascendancy classes:
+
+    Arcanist
+    Death Lich
+    Chieftain
+    Champion
+    Raider
+    Hunter
+    Trickster
+    Assassin
+    Necromancer
+    Elementalist
+    Guardian
+    Battlemage
+    Jester
+    Ascendant
+
+There will be more classes in the future, but even if a class you want is missing, there are quite a few general classes that can be played in many ways. Some classes focus more on defenses, some on offenses. Some have ways of exploding killed enemies etc.
+
+Reminder, as these are also datapacks, don't be suprised a modpack has additional custom classes!
+
+Misc:
+
+    your talents should be wiped (allocate them again)
+    for datapackers: is_dodged is no longer used by both block and dodge, now there's a special is_hit_avoided that all things that make the hit avoid call, but you can also check if is_dodged or is_blocked
+    golems now give you a buff when they attack anything
+    added stat for "plus stat per effect stacks on you", mahj will know
+    added optional mob kill text that that also has a helpful hover text that shows how was loot chance modified This should hopefully resolve any "why no loot drop" confusion
+    added optional mob damage text. (THIS SHOWS ALL THE DAMAGE CALCULATIONS!!! VERY USEFUL ESPECIALLY FOR DEBUGGING!!!) This tells you all about how you dealt that much damage, or why the mob dealt so much damage to you!!! If something doesn't feel right, report it. The calculations are done top to bottom, so first flat damage is added (if any), and then its multiplied. Additive damage increase is most damage stats like "+ fire damage" all added up into 1 multiplier. At the end there are "dmg multipliers", these come from "more fire damage" things, these are multiplied with each other and therefore all separate. It tells you how your damage is converted, added, multiplied etc Not all code uses this system yet, so it could either be a damage bug, or a tooltip bug, either way report it Whenever you want to report a damage bug, please screenshot the bugged damage with this!
+    added is_bonus_element_damage boolean for damage data, this way you can avoid adding flat damage boosts to bonus damages
+    made block chance not require shields, I feel it's too constricting that an entire defense layer needs a specific item?
+    added some new supp gems
+    temporarily removed the bonus ele dmg from mobs, but uncommon mobs now have 1 affix instead of 0 Will monitor player tankiness after ascendancy release
+    added new item corruptions
+    item corruptions cant be same 2 affixes now
+
+v.5.5.1
+
+    max elemental resist should now reflect correctly in the elemental resist stat
+    soul modifiers can now be applied to non crafted souls
+    added experimental effect duration overlay
+    magic shield users should now get knocked back on hit
+    QOL improvements to supp gem screen
+    add radius for dmg spells on tooltip
+    added possibly seizure inducing indicator that should hopefully help newbies learn how to socket a spell (Idk how to make a decent "flashing" button)
+    death penalty now only activates after level 25, for both xp loss, xp debt, favor loss and rested xp loss
+    added new highlights if you have points to spend
+
+v.5.5.1
+
+    default dimension config datapack added
+
+v5.5.2
+
+    fix supp gems v5.5.3
+    fix supp gems
+
+v.5.5.4
+
+    should fix spells sometimes not hitting targets when hitting a wall or the floor
+
+    reduced map mob dmg per tier from 0.05 to 0.03
+
+    changed weapon type data in basegears. Now allows you to reduce the amount of checks needed in case you want to make say gun damage from other mods work. Just set source check to ANY, and tag_and_id_check check to MATCH_ANY and include whatever the bullet's dmg id is ideally. If it's doing something dumb like directly attacking as a player, you can also skip this tag check and just allow the damage by setting tag check to ANY
+
+    basic attacking with a weapon like bow will now act as an unarmed attack, but you will benefit from the weapon damage, just not the damage multiplier of the weapon
+
+    added experimental new stat panel that shows a lot of useful info like:
+        min, max, softcap amounts
+        what the stat actually does (if it supports localized tooltips)
+        what event it works on and it's priority
+
+    renamed mmorpg_dimension_config datapack to mmorpg_dimension to avoid confusion. just rename your folder if you used any same with mmorpg_entity_config > mmorpg_entity
+
+    added map_mob_list datapacks.
+
+    added tags to map dungeon types. By default, all maps and all mob lists have a "default" tag meaning they can spawn anywhere But you're free to make say a mob list containing spiders spawn only in a spider forest dungeon, or maybe some modded mobs..?
+
+    unused uber items wont show in creative anymore
+
+    lowered restrictions on rarity drops a bit, epic and unique can now drop outside maps
+
+    tried to improve proj spell hit code
+
+    tried to optimize perf a bit (manually saving unitnbt now)
+
+    reduced map mob dmg even more
+
+    stat order test is no longer a config but a player option and not enabled by default
+
+v.5.5.5
+
+    spells not tagged as magic now add the caster's weapon type so the damage can benefit from "sword damage" for example
+    tweaked sound/anim of frost nova, chilling field
+    reduced mob damage scaling even further and added some more mob dmg multipliers to the damage chat info
+    reduced mob hp scaling from rarity
+    added unsummon keybind
+    changed armor and dodge formulas to be more sane.. and easily shown in tooltips (ill add a config if needed, formula still wip)
+    will autopickup salvaged stuff into master bagpack now
+    fixed explode summons not exploding summons
+
+v.5.5.6
+
+    elemental resist reworked, it's now uncapped so you can protect against penetration by having more resist. The actual soft and hardcaps didn't change, it's still 75 and 90. This also means if mobs have resist above cap, it's now harder to penetrate their resists
+    attempt to improve spell projectiles
+    renamed ingame configs to features. Probably still need a better term for it. They're basically client configs but easily modifiable in the mns hub and are something players might want to edit multiple times per play session..
+    attempt to fix ailment supp gems by making attacker's stats proc on hit, and defender's stats proc when the dot ticks. This has a side effect of dot dmg being all "base dmg" so you won't see your dmg multipliers etc
+    fix cast speed to cd tag not being applied to some spells
+    added enchantment compat functionality to stat_compat datapacks! Added one in the base mod, sharpness now gives you 10% damage per level, this is displyed on the vanilla tooltip if you press ctrl Maximum dmg is 50% from it (per item). This should hopefully make vanilla stats and enchants useful again, and the caps should allow modpacks to make sure they can't become game breaking (like sharpness 5000 from some mod) I say be cautious with compats, I'm not sure if for example fire protection should get any bonus stats. For one, it's already a useful enchant on its own to not die in fire or lava. And two, if it gave say fire resistance stat, then fire res would be easy to get, but not other resistances. So don't just try to add compat for everything, it can screw up balance or make players op pretty easily
+    should fix fire trap and some other spells crashing
+
+v.5.5.7
+
+    fix vanilla dmg leak when wep dmg is 0 on unarmed attack
+    changed drag and drop interactions to require a right mouse click now
+    fixed uber frags to be able to actually drop normally. (why did nobody report this? :() Basically frags only dropped in uber maps, but you can only normally get uber maps by combining the frags.
+    weapon types are now a separate datapack, and basegeartypes now use a string id for them This needs just a small edit to basegeartype datapacks and to create a new weapon_type datapack for any new wep types you have
+
+v.5.5.8
+
+    added back hotbar swapping as a client config. You can now choose to unbind the last 4 keybinds of the hotbar OR keep them and be able to cast the 2nd hotbar spells without swapping the hotbar
+    fix unique base stats
+    a few other fixes
+
+v5.5.9
+
+    added aggressive minions feature in mns hub
+    fixed uber frag dropping as lvl 50 always
+    fixed shatter/electrify benefiting from player stats.. twice.
+    magic spells can no longer be dodged by dodge rating
+    spell dodge is now for dodging spells tagged as magic (it was int style before, meaning staff attacks were dodged)
+    fixed some map command blocks appearing client side
+
+v.5.5.10
+
+    added search bar to stat screen
+    players no longer benefit in stats from holding a weapon they dont have requirements for
+    no longer shows 2 debugging options in features screen, they were apparently confusing
+    fixed display bug showing you are doing physical dmg when your converted dmg was 100%
+    fixed spell tooltips going out of screen (apparently vanilla has different tooltip positioners and i the default one for buttons doesn't like big tooltips)
+
+v.5.5.11
+
+    converted and bonus elemental damage is now affected by wep dmg multiplier
+    fixed summons not being attacked in maps (they were considered allied to mobs lol)
+    added new list_stat_sources command which tells you where your stats come from
+    added server config to make map mobs persistent, if your server is shitting bricks from lag due to it, you can disable it
+    favor gain per sec is now per gear rarity datapack, not server config. (it was only regenerating if favor loot multi was less than x1) - as favor in base mns had negative penalties
+    removed the align tooltip feature, it was a bit hardcoded and idk how to fix it
+
+v.5.5.12
+
+    dots can no longer crit
+    added dot dmg multiplier stat
+    fixed gear req bug
+    fixed salvaging never giving essence
+    salvaging maps should give stones now
+
+v.5.5.13
+
+    homing spells now home only if they can see the target, this should stop them from homing on underground etc
+    main hand will now be dropped if you dont meet stat req. This is a bit wonky but needed to stop players from gaining stats from unmet weapon req
+
+v.5.5.14
+
+    fixed professions
+
+v.5.5.15
+
+    removed the fishing message
+    reduced the unlucky factor of rune stats
+    added uses_unlucky_ran to rune jsons
+    you will be stopped from runing an item if the inserted rune is at 100% power
+    should fix more food stat and augment effect stat
+    dmg chat info now shows more info
+    fixed orb of imperfection and orb of chaos being useable on corrupted items
+    added cap to map mob persistency. Now doesn't make mobs persistent if there are more than x mobs in a map. So if you wanna run around picking up all the prophecy altars, mobs will start despawning
+    you can't use prophecy altars now if enemies are too close
+
+v.5.5.16
+
+    magic find cap is now 150%
+    invalid stats should no longer crash or log spam, now it returns empty stat
+    added empty defaults to a few registries to prevent future crashes/errors
+    tweaked ailment dmg and stuff
+    added new stat: dot speed.
+    stat source command shouldnt need op anymore
+
+v.5.5.17
+
+    fix runewords not being made because code checked for null when it's no longer possible (added a default empty value)
+
+v.5.5.18
+
+    fix empty unique showing up
+    map rarity upgrade doesnt change lvl now
+    all attribs scales now
+    +aoe% stat capped to 100%. Totems are alread afk-ish builds, but this was a bit much
+    maps now drop up to rarity of current map
+    fix jei recipe gui
+    dmg chat msg now shows the result
+    if your resists go bellow the minus of the map requirement while in map, mobs will now do massively increased damage to you based on 5 * lacking resist by default. This is meant to disable the cheese of only giving yourself resists pre-map, then swapping off augments or gear.. But might punish players when their resists naturally drop. I'll have to see if i can avoid those, like the elemental weakness map affix.
+    non-runed items now can't have more runes than gems in them
+    "tped to map" msg now shows the map tooltip
+    fix unique stat souls
+
+v.5.5.19
+
+    attempt to fix ele pene not working with ailments
+    fix map loot being a bit too high
+
+v.5.5.20
+
+    set level command now works on any entity, not just players
+    set prof level command
+    being in empty map will now kick the player
+    enchants no longer get randomized
+    enchanting renamed to infusing
+    husbandry renamed to animal breeding
+    added new infusion reroll currency
+    merged PR to streamline tooltips, might be bugs, please report
+    CONFIGS ARE RENAMED TO mine_and_slash[...] (from mmorpg)
+    neat config was also renamed, this is the gui config!
+    added MOB_HP_POWER_SCALING and dmg to balance datapack.
+    fixed spells triggering bow attacks
+
+v.5.5.21
+
+    some configs are enabled by default now
+    uniques can now be salvaged into random stones
+    select summons now only selects summons (no more exploding chocobos as much as i find it funny)
+    added a warning msg if majruszlibrary is installed
+    dmg done and taken from mobs higher level than you by many levels (enough to proc loot penalty), is now increased
+    proc_spell DATAPACK now includes source and target fields so you can specify
+    added spell_has_resource_type_cost spell condition DATAPACK which can be used to make archmage not give bonus dmg or work on spells without a mana cost (or energy etc)
+    this change also makes archmage not work on spells that dont cost mana, neither the mana increase nor the dmg addition
+    added enabled = false will now unregister the datapack
+    added PROFESSION_EXP_PENALTY_PER_LOWER_LEVEL to gamebalance datapack
+    should fix thrown weapons (if their datapack is correctly setup)
+    stations no longer get stopped, might be buggy
+    spells no longer show weapon dmg scalings by default. (to make tooltips less scary to newbies). Now you have to press shift
+    renamed poison spells to acid (to avoid confusion with poison the ailment)
+    stations will attempt to suck nearby chests of materials for the currently locked recipe
+    fixed map tooltip bug, it showed maps have uber boss when they dont
+
+v.5.5.22
+
+    resource on hit/kill renamed to include leech in name
+
+v.5.5.23
+
+    hotfix the leveled exponent dmg and hp not working correctly (I blame the pink one)
+
+
+
+v.5.5.24
+
+    give silent mode for stat command
+    fix give gear command to correctly give cloth leather etc instead of randomly when using unique as rarity
+    attempt to give more info in affix range tooltips
+
+
+v.5.5.26
+
+    Item inventory interactions (the drag and click) now work on left click and right click again. The lack of left click interactions was confusing some people and it didn't seem to fix problems with sort mods anyway
+    effect bars now dont overlap with 8bar hotbar
+    cast fail messages are now forced on level 10 players and below
+    small loc fixes
+    added operation and cut_by_hundred fields to attribute stat datapacks and fixed them
+
+
+5.5.27
+    datapacks are now checked and a warning is printed to console if the json you used in a datapack is different from the json the class serializes back to. What this means is, mns should give you a warning that one of your datapacks is faulty, like:
+    it will warn if you used a field that doesn't exist
+    it will warn if you didn't use all the existing fields
+
+It won't actually tell you what's wrong but for now it just tells you SOMETHING is wrong with that specific json and shows you a comparison.
+
+    datapacks now default to loader = "REPLACE_FULLY", if you want to only replace some values, use REPLACE_FIELDS Full replace means it loads the json and turns it into a new class. Replace fields means it only replaces the fields you put in the json
+
