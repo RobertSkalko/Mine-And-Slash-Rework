@@ -28,7 +28,7 @@ public class BossSpells implements ExileRegistryInit {
                 .weight(0)
                 .onCast(PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
 
-                .onCast(PartBuilder.aoeParticles(ParticleTypes.WITCH, 500D, 3D))
+                .onCast(PartBuilder.aoeParticles(ParticleTypes.WITCH, 300D, 3D))
                 .onCast(PartBuilder.aoeParticles(ParticleTypes.EXPLOSION, 100D, 3D))
 
                 .onCast(PartBuilder.groundEdgeParticles(ParticleTypes.WITCH, 500D, 6D, 1D))
@@ -43,16 +43,14 @@ public class BossSpells implements ExileRegistryInit {
                 .weight(0)
                 .onCast(PartBuilder.playSound(SoundEvents.GENERIC_EXPLODE, 1D, 1D))
 
-                .onCast(PartBuilder.nova(ParticleTypes.WITCH, 200D, 3D, 0.05D))
-                .onCast(PartBuilder.nova(ParticleTypes.EXPLOSION, 50D, 3D, 0.05D))
+                .onCast(PartBuilder.nova(ParticleTypes.WITCH, 150D, 3D, 0.05D))
 
-                .onCast(PartBuilder.nova(ParticleTypes.WITCH, 100D, 2D, 0.05D))
-                .onCast(PartBuilder.nova(ParticleTypes.EXPLOSION, 25D, 2D, 0.05D))
+                .onCast(PartBuilder.nova(ParticleTypes.WITCH, 50D, 2D, 0.05D))
 
-                .onCast(PartBuilder.nova(ParticleTypes.WITCH, 100D, 1D, 0.05D))
+                .onCast(PartBuilder.nova(ParticleTypes.WITCH, 50D, 1D, 0.05D))
                 .onCast(PartBuilder.nova(ParticleTypes.EXPLOSION, 10D, 1D, 0.05D))
 
-                .onCast(PartBuilder.nova(ParticleTypes.SMOKE, 200D, 1D, 0.05D))
+                .onCast(PartBuilder.nova(ParticleTypes.SMOKE, 50D, 1D, 0.05D))
                 .onCast(PartBuilder.groundEdgeParticles(ParticleTypes.EXPLOSION, 1D, 0D, 0.2D))
 
                 .onCast(PartBuilder.damageInAoe(SpellCalcs.BOSS_CLOSE_NOVA, Elements.Fire, 3D))

@@ -19,6 +19,7 @@ public class AttributeStatSer implements IStatSerializer<AttributeStat> {
         json.addProperty("uuid", obj.uuid.toString());
         json.addProperty("operation", obj.operation.name());
 
+        
         this.saveBaseStatValues(obj, json);
         return json;
     }
@@ -32,7 +33,7 @@ public class AttributeStatSer implements IStatSerializer<AttributeStat> {
         Attribute attri = BuiltInRegistries.ATTRIBUTE.get(ide);
 
         var oper = AttributeModifier.Operation.valueOf(json.get("operation").getAsString());
-        
+
         AttributeStat stat = new AttributeStat("", "", UUID.fromString(json.get("uuid")
                 .getAsString()), attri, false,
                 oper); // percent and id is loaded by basevalues

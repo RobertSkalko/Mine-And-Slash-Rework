@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.spells.components.packets;
 
+import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.vanity.ParticleMotion;
 import com.robertx22.age_of_exile.database.data.spells.components.actions.vanity.ParticleShape;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -67,6 +68,10 @@ public class ParticlesPacket extends MyPacket<ParticlesPacket> {
 
     @Override
     public void onReceived(ExilePacketContext ctx) {
+
+        if (this.data.amount > ClientConfigs.getConfig().DONT_CULL_PARTICLES_UNDER.get()) {
+            this.data.amount *= ClientConfigs.getConfig().SPELL_PARTICLE_MULTI.get();
+        }
 
         Player p = ctx.getPlayer();
         Level world = p.level();

@@ -1,10 +1,3 @@
-v.5.5.27
-- datapacks are now checked and a warning is printed to console if the json you used in a datapack is different from the json the class serializes back to.
-What this means is, mns should give you a warning that one of your datapacks is faulty, like:
-- it will warn if you used a field that doesn't exist
-- it will warn if you didn't use all the existing fields
-
-It won't actually tell you what's wrong but for now it just tells you SOMETHING is wrong with that specific json and shows you a comparison.
-
-- datapacks now default to loader = "REPLACE_FULLY", if you want to only replace some values, use REPLACE_FIELDS
-Full replace means it loads the json and turns it into a new class. Replace fields means it only replaces the fields you put in the json
+v.5.5.28
+- added SPELL_PARTICLE_MULTI client config, with this you can lower particle amount if your PC can't handle the FPS lag. Note: this won't improve server performance.
+Also added DONT_CULL_PARTICLES_UNDER , this defaults to 50 which means it only reduces particles on spells that add a lot of them at once

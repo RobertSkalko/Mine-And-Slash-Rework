@@ -40,6 +40,7 @@ public class ParticleInRadiusAction extends SpellAction {
             int amount = data.get(PARTICLE_COUNT).intValue();
             amount *= ctx.calculatedSpellData.data.getNumber(EventData.AREA_MULTI, 1F).number;
 
+         
             ParticleMotion motion = null;
 
             try {

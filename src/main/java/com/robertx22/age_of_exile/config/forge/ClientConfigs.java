@@ -17,7 +17,7 @@ public class ClientConfigs {
     }
 
     ClientConfigs(ForgeConfigSpec.Builder b) {
-        
+
         b.comment("Client Configs")
                 .push("general");
 
@@ -36,6 +36,9 @@ public class ClientConfigs {
 
         ITEM_RARITY_OPACITY = b.defineInRange("ITEM_RARITY_OPACITY", 0.75F, 0, 1F);
         HEALTH_BAR_GUI_SCALE = b.defineInRange("health_bar_gui_scale", 1.25F, 0, 10F);
+
+        SPELL_PARTICLE_MULTI = b.defineInRange("SPELL_PARTICLE_MULTI", 1, 0.1F, 1F);
+        DONT_CULL_PARTICLES_UNDER = b.defineInRange("DONT_CULL_PARTICLES_UNDER", 50D, 0D, 5000D);
 
         HOTBAR_SWAPPING = b.define("HOTBAR_SWAPPING", false);
 
@@ -68,6 +71,8 @@ public class ClientConfigs {
     public ForgeConfigSpec.DoubleValue ITEM_RARITY_OPACITY;
     public ForgeConfigSpec.DoubleValue HEALTH_BAR_GUI_SCALE;
     public ForgeConfigSpec.DoubleValue SKILL_TREE_ZOOM_SPEED;
+    public ForgeConfigSpec.DoubleValue SPELL_PARTICLE_MULTI;
+    public ForgeConfigSpec.DoubleValue DONT_CULL_PARTICLES_UNDER;
 
     public ForgeConfigSpec.IntValue REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES;
 
