@@ -12,6 +12,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.resources.ResourceLocation;
 
+import javax.annotation.Nullable;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -21,10 +22,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Queue;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 // todo maybe need rewrite this with state machine design mode
 public class AllPerkButtonPainter {
@@ -47,7 +45,7 @@ public class AllPerkButtonPainter {
     public int minX = 10000;
     public int maxY = 0;
     public int minY = 10000;
-    private int drawInWindowWidth = 0;
+    private int lastRecordWindowWidth = 0;
     private boolean isPainting = false;
     private boolean isRepainting = false;
     private int repaintTimer = maxRepaintTimer;
@@ -59,6 +57,7 @@ public class AllPerkButtonPainter {
         this.registerState = new RegisterState(this);
         this.standByState = new StandbyState(this);
         this.state = this.initState;
+        this.lastRecordWindowWidth = Minecraft.getInstance().getWindow().getGuiScaledWidth();
     }
 
     public static AllPerkButtonPainter getPainter(TalentTree.SchoolType schoolType) {
@@ -117,8 +116,8 @@ public class AllPerkButtonPainter {
 
     public void checkIfNeedRepaint() {
         // due to window size change
-        if (this.drawInWindowWidth != 0 && Minecraft.getInstance().getWindow().getGuiScaledWidth() != this.drawInWindowWidth) {
-            this.drawInWindowWidth = Minecraft.getInstance().getWindow().getGuiScaledWidth();
+        if (Minecraft.getInstance().getWindow().getGuiScaledWidth() != this.lastRecordWindowWidth) {
+            this.lastRecordWindowWidth = Minecraft.getInstance().getWindow().getGuiScaledWidth();
             repaint();
         }
     }
@@ -201,7 +200,7 @@ public class AllPerkButtonPainter {
 
     class PaintState extends PainterState<ButtonIdentifier> {
         public final ConcurrentLinkedQueue<ButtonIdentifier> waitingToBePainted = new ConcurrentLinkedQueue<>();
-        private CompletableFuture<Void> voidCompletableFuture;
+        private Future<?> paintTask = null;
 
         public PaintState(AllPerkButtonPainter painter) {
             super(painter);
@@ -214,21 +213,20 @@ public class AllPerkButtonPainter {
 
         @Override
         public void onPaint() {
-            if (voidCompletableFuture == null || voidCompletableFuture.isDone()) {
+            paintTask = paintThread.submit(() -> {
+
+                SeparableBufferedImage image;
+                try {
+                    image = tryPaint();
+                } catch (InterruptedException | IOException e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println("add to register!");
+                if (image == null) return;
+                painter.changeState(painter.registerState).transferData(image.getSeparatedImage());
 
 
-                voidCompletableFuture = CompletableFuture.runAsync(() -> {
-                    SeparableBufferedImage image;
-                    try {
-                        image = tryPaint();
-                    } catch (InterruptedException | IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                    System.out.println("add to register!");
-                    painter.changeState(painter.registerState).transferData(image.getSeparatedImage());
-                }, paintThread);
-
-            }
+            });
         }
 
         @Override
@@ -238,7 +236,7 @@ public class AllPerkButtonPainter {
 
         @Override
         public void onRepaint() {
-            if (voidCompletableFuture != null) voidCompletableFuture.cancel(true);
+            if (paintTask != null) paintTask.cancel(true);
             waitingToBePainted.clear();
             painter.changeState(painter.registerState).onRepaint();
         }
@@ -248,13 +246,13 @@ public class AllPerkButtonPainter {
         public Queue<ButtonIdentifier> getHandledContainer() {
             return this.waitingToBePainted;
         }
-
+        @Nullable
         private SeparableBufferedImage tryPaint() throws InterruptedException, IOException {
             Minecraft mc = Minecraft.getInstance();
             Window window = mc.getWindow();
             BufferedImage image = new BufferedImage(window.getGuiScaledWidth() * PerkButton.SPACING, window.getGuiScaledHeight() * PerkButton.SPACING, BufferedImage.TYPE_INT_ARGB);
 
-            painter.drawInWindowWidth = window.getGuiScaledWidth();
+            if (Thread.currentThread().isInterrupted()) return null;
             Graphics2D graphics = image.createGraphics();
 
             float halfx = mc.getWindow().getGuiScaledWidth() / 2F;
@@ -266,6 +264,9 @@ public class AllPerkButtonPainter {
             // prefer a little multi.
             float singleButtonZoom = 1.4f;
             while (!waitingToBePainted.isEmpty()) {
+                if (Thread.currentThread().isInterrupted()) {
+                    return null;
+                }
                 PainterController.paintLimiter.acquire();
                 ButtonIdentifier identifier = waitingToBePainted.poll();
                 Perk.PerkType type = identifier.perk().getType();
@@ -314,6 +315,7 @@ public class AllPerkButtonPainter {
             painter.minY = minY;
             painter.maxX = maxX;
             painter.maxY = maxY;
+            if (Thread.currentThread().isInterrupted()) return null;
             return new SeparableBufferedImage(newImage);
 
         }
