@@ -279,7 +279,7 @@ public class PerkButton extends ImageButton implements IDelayChecker {
         @Override
         public boolean onMouseClicked(double mouseX, double mouseY, int button) {
 
-            screen.mouseRecentlyClickedTicks = 25;
+            screen.getVanillaState().mouseRecentlyClickedTicks = 25;
             screen.pointClicked = super.button.point;
 
             mouseX = 1F / screen.zoom * mouseX;

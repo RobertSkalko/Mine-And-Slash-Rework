@@ -61,7 +61,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
     public static EditBox SEARCH = new EditBox(Minecraft.getInstance().font, 0, 0, SEARCH_WIDTH, SEARCH_HEIGHT, Component.translatable("fml.menu.mods.search"));
     public SchoolType schoolType;
     public PointData pointClicked = new PointData(0, 0);
-    public int mouseRecentlyClickedTicks = 0;
     public int scrollX = 0;
     public int scrollY = 0;
     public HashMap<PointData, PerkButton> pointPerkButtonMap = new HashMap<>();
@@ -207,11 +206,8 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
     @Override
     public boolean mouseReleased(double x, double y, int ticks) {
-
-        mouseRecentlyClickedTicks = 25;
-
+        this.currentState.onMouseReleased(x, y, ticks);
         return super.mouseReleased(x, y, ticks);
-
     }
 
     private void renderConnections(GuiGraphics gui) {
@@ -451,12 +447,18 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         public void OnResetZoom() {
             zoom = 1;
         }
+
+        public abstract void onMouseReleased(double x, double y, int ticks);
     }
-    class VanillaState extends SkillTreeState {
+    public class VanillaState extends SkillTreeState {
         public HashSet<PerkConnectionRenderer> buttonConnections = new HashSet<>();
+
+        public int mouseRecentlyClickedTicks = 0;
+
         public VanillaState(SkillTreeScreen screen) {
             super(screen);
         }
+
 
         @Override
         public void onInit() {
@@ -577,19 +579,23 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
             scrollY = Mth.clamp(scrollY, -3333, 3333);
         }
 
+        @Override
+        public void onMouseReleased(double x, double y, int ticks) {
+            mouseRecentlyClickedTicks = 25;
+        }
+
         private void addConnections() {
 
             this.buttonConnections = new HashSet<>();
-            Int2ReferenceOpenHashMap<PerkConnectionRenderer> map = new Int2ReferenceOpenHashMap<>();
 
             var data = Load.player(ClientOnly.getPlayer());
 
             List<? extends GuiEventListener> children = this.screen.children();
 
             if (children.size() > 1500) {
-                ConcurrentHashMap.KeySetView<Integer, Boolean> integers = ConcurrentHashMap.newKeySet(2000);
+                ConcurrentHashMap.KeySetView<Integer, Boolean> historyRendererHash = ConcurrentHashMap.newKeySet(2000);
                 //use parallel if too many renderer
-                ConcurrentHashMap.KeySetView<PerkConnectionRenderer, Boolean> objects = ConcurrentHashMap.newKeySet(2000);
+                ConcurrentHashMap.KeySetView<PerkConnectionRenderer, Boolean> renderers = ConcurrentHashMap.newKeySet(2000);
                 children.parallelStream().forEach(b -> {
                     if (b instanceof PerkButton pb) {
 
@@ -599,25 +605,24 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
                             PerkButton sb = this.screen.pointPerkButtonMap.get(p);
                             PerkPointPair pair = new PerkPointPair(pb.point, sb.point);
-                            if (!integers.contains(pair.hashCode())) {
+                            if (!historyRendererHash.contains(pair.hashCode())) {
                                 if (sb == null) {
                                     continue;
                                 }
 
                                 var con = data.talents.getConnection(this.screen.school, sb.point, pb.point);
                                 var result = new PerkConnectionRenderer(pair, con);
-                                objects.add(result);
-                                integers.add(pair.hashCode());
+                                renderers.add(result);
+                                historyRendererHash.add(pair.hashCode());
                             }
 
                         }
                     }
 
                 });
-                System.out.println("render count: " + objects.size());
-                objects.forEach(x -> map.put(x.hashCode(), x));
+                buttonConnections.addAll(renderers);
             } else {
-                IntOpenHashSet integers = new IntOpenHashSet(2000);
+                IntOpenHashSet historyRendererHash = new IntOpenHashSet(2000);
                 children.forEach(b -> {
                     if (b instanceof PerkButton pb) {
 
@@ -627,12 +632,15 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
                             PerkButton sb = this.screen.pointPerkButtonMap.get(p);
                             PerkPointPair pair = new PerkPointPair(pb.point, sb.point);
-                            if (!integers.contains(pair.hashCode())) {
+                            if (!historyRendererHash.contains(pair.hashCode())) {
+                                if (sb == null) {
+                                    continue;
+                                }
 
                                 var con = data.talents.getConnection(this.screen.school, sb.point, pb.point);
-                                var result = new PerkConnectionRenderer(pair, con);
-                                map.put(result.hashCode(), result);
-                                integers.add(pair.hashCode());
+                                PerkConnectionRenderer result = new PerkConnectionRenderer(pair, con);
+                                buttonConnections.add(result);
+                                historyRendererHash.add(pair.hashCode());
                             }
 
                         }
@@ -702,8 +710,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
 
             ctx = new PerkScreenContext(this.screen);
-
-            mouseRecentlyClickedTicks--;
 
             renderBackgroundDirt(gui, this.screen, 0);
             handleZoom();
@@ -819,6 +825,11 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         public void OnResetZoom() {
             super.OnResetZoom();
             targetZoom = zoom;
+        }
+
+        @Override
+        public void onMouseReleased(double x, double y, int ticks) {
+
         }
 
         private void handleZoom() {
