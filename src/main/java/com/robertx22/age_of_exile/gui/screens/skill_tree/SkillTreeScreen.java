@@ -684,7 +684,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                 this.searchHandler = new SearchHandler(this.screen);
 
                 PerkConnectionCache.init(this.screen);
-                PerkConnectionPainter.init(this.screen);
 
                 painter.onSkillScreenOpen(this.screen.pointPerkButtonMap.values().stream().map(x -> x.getOptimizedState().buttonIdentifier).toList());
 
@@ -818,7 +817,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         @Override
         public void onClose() {
             super.onClose();
-            PerkConnectionPainter.handleUpdateQueue();
         }
 
         @Override
