@@ -176,16 +176,8 @@ public class PlayerData implements ICap {
 
         this.team = loadOrBlank(TeamData.class, new TeamData(), nbt, TEAM_DATA, new TeamData());
         this.prophecy = loadOrBlank(PlayerProphecies.class, new PlayerProphecies(), nbt, PROPHECY, new PlayerProphecies());
-        TalentsData newTalentsData = loadOrBlank(TalentsData.class, new TalentsData(), nbt, TALENTS_DATA, new TalentsData());
-        var newData = newTalentsData.getPerks().values().stream().map(SchoolData::getAllocatedPoints).collect(Collectors.toSet());
-        var oldData = this.talents.getPerks().values().stream().map(SchoolData::getAllocatedPoints).collect(Collectors.toSet());
-        this.talents = newTalentsData;
+        this.talents = loadOrBlank(TalentsData.class, new TalentsData(), nbt, TALENTS_DATA, new TalentsData());
         //!oldData.isEmpty() to avoid the first sync when player join world, otherwise the first perk player allocated will bug
-        if (!oldData.isEmpty() && !newData.equals(oldData)){
-            PainterController.setAllowUpdate();
-        } else {
-            PainterController.setForbidUpdate();
-        }
         this.statPoints = loadOrBlank(StatPointsData.class, new StatPointsData(), nbt, STAT_POINTS, new StatPointsData());
         this.deathStats = loadOrBlank(DeathStatsData.class, new DeathStatsData(), nbt, DEATH_STATS, new DeathStatsData());
         this.map = loadOrBlank(PlayerMapData.class, new PlayerMapData(), nbt, MAP, new PlayerMapData());

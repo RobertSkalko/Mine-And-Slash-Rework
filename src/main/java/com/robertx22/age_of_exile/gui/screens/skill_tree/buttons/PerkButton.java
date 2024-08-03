@@ -10,6 +10,11 @@ import com.robertx22.age_of_exile.gui.screens.skill_tree.SkillTreeScreen;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.ButtonIdentifier;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.PerkButtonPainter;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.connections.PerkConnectionCache;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.connections.PerkConnectionRenderer;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.delaycheck.ButtonStatusUpdateTask;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.delaycheck.IDelayCheckTask;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.delaycheck.IDelayChecker;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.delaycheck.RendererUpdateTask;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.opacity.OpacityController;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.opacity.states.NonSearching;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
@@ -26,8 +31,8 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.age_of_exile.vanilla_mc.packets.perks.PerkChangePacket;
 import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.GuiUtils;
-import com.robertx22.library_of_exile.utils.LoadSave;
 import com.robertx22.library_of_exile.utils.TextUTIL;
+import it.unimi.dsi.fastutil.ints.Int2ReferenceOpenHashMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
@@ -36,14 +41,11 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
-public class PerkButton extends ImageButton {
+public class PerkButton extends ImageButton implements IDelayChecker {
 
     private PerkButtonState currentState;
     private VanillaState vanillaState;
@@ -135,6 +137,7 @@ public class PerkButton extends ImageButton {
             setTooltip(null);
         }
     }
+
     int xPos(float offset, float multi) {
         return (int) ((this.getX() * multi) + offset);
 
@@ -144,7 +147,7 @@ public class PerkButton extends ImageButton {
         return (int) ((getY() * multi) + offset);
     }
 
-    private void changeState(PerkButtonState state){
+    private void changeState(PerkButtonState state) {
         this.currentState = state;
     }
 
@@ -159,6 +162,12 @@ public class PerkButton extends ImageButton {
         this.currentState.onRenderWidget(gui, mouseX, mouseY, pPartialTick);
     }
 
+
+
+    @Override
+    public ArrayList<ButtonStatusUpdateTask> getTasksContainer() {
+        return this.optimizedState.updateList;
+    }
 
 
     abstract class PerkButtonState {
@@ -309,7 +318,7 @@ public class PerkButton extends ImageButton {
         private ResourceLocation wholeTexture;
         private final OpacityController opacityController;
         public final ButtonIdentifier buttonIdentifier;
-        public final List<SelfCheckTask> selfCheckTasks = new ArrayList<>();
+        public final ArrayList<ButtonStatusUpdateTask> updateList = new ArrayList<>();
         public final List<String> matchStrings;
 
         public OptimizedState(PerkButton button) {
@@ -333,9 +342,8 @@ public class PerkButton extends ImageButton {
             if (screen.getOptimizedState().painter.isAllowedToPaint()) {
                 int MmouseX = (int) (1F / screen.zoom * mouseX);
                 int MmouseY = (int) (1F / screen.zoom * mouseY);
-                handleSelfCheck();
+                handleTaskList();
                 boolean inside = isInside(MmouseX, MmouseY);
-                // this is a mess...
 
                 // the principle of this whole image render is keep the whole image at low opacity, and check if any button needs to use the normal render system.
                 // opacityController can detect the current situation, and highlight the necessary buttons.
@@ -387,8 +395,8 @@ public class PerkButton extends ImageButton {
                     }
                     super.button.onClick(mouseX, mouseY);
                     updateRelatedButtonStatus();
-                    PerkConnectionCache.addToUpdate(this.button);
                     screen.getOptimizedState().painter.addToUpdate(this.buttonIdentifier);
+                    updateRelatedRenderer();
 
                     return true;
                 }
@@ -398,12 +406,12 @@ public class PerkButton extends ImageButton {
             }
 
         }
+
         private void normalRender(GuiGraphics gui, int mouseX, int mouseY, boolean isPaintBackup) {
-            handleSelfCheck();
             float scale = this.getScale(mouseX, mouseY);
 
             float posMulti = 1F / scale;
-
+            handleTaskList();
 
             float add = MathHelper.clamp(scale - 1, 0, 2);
             float off = width / -2F * add;
@@ -470,7 +478,6 @@ public class PerkButton extends ImageButton {
             float scale = 2 - screen.zoom;
             if (isInside((int) (1F / screen.zoom * mouseX), (int) (1F / screen.zoom * mouseY))) {
                 scale = MathHelper.clamp(scale * 1.3f, 1.7f, 2.0f);
-                ;
             }
 
             return MathHelper.clamp(scale, 1.5f, 2.0f);
@@ -484,15 +491,15 @@ public class PerkButton extends ImageButton {
         public PerkStatus getLazyStatus() {
             return lazyStatus;
         }
+
         // use getStatus in a per-tick situation will affect performance a lot, this is a lazy version replacement.
         // invoke this when clicking a button
         public void updateRelatedButtonStatus() {
-
             TalentTree school = this.button.school;
             TalentTree.SchoolType schoolType = school.getSchool_type();
             Perk perk = school.calcData.getPerk(this.button.point);
             //wait for the playerData update.
-            SelfCheckTask waitingStatusUpdate = new SelfCheckTask(x -> {
+            ButtonStatusUpdateTask waitingStatusUpdate = new ButtonStatusUpdateTask(x -> {
                 return x.optimizedState.getLazyStatus() != playerData.talents.getStatus(ClientOnly.getPlayer(), x.school, x.point);
             }, x -> {
                 x.optimizedState.updateLazyStatus(playerData.talents.getStatus(ClientOnly.getPlayer(), x.school, x.point));
@@ -506,41 +513,38 @@ public class PerkButton extends ImageButton {
                 while (iterator.hasNext()) {
                     PerkButton next = iterator.next();
                     if (qualifiedPerk.contains(next.perk.id)) {
-                        waitingStatusUpdate.sendTo(next);
+                        next.receive(waitingStatusUpdate);
                     }
                 }
-
             }
 
             Set<PointData> con = school.calcData.connections.get(this.button.point);
             // todo if player don't have free points, and it closes the skill screen, this task will lose forever, it means that if a player closes the screen, and reopen it with no free point, and they get a new free point when this reopened screen is on, the button's status won't change at all, player must reopen the screen again to get the right status.
 
-            con.stream().filter(x -> x != null && !playerData.talents.getSchool(schoolType).isAllocated(x)).forEach(x -> waitingStatusUpdate.sendTo(this.button.getScreen().pointPerkButtonMap.get(x)));
-            waitingStatusUpdate.sendTo(this.button);
-
+            con.stream().filter(x -> x != null && !playerData.talents.getSchool(schoolType).isAllocated(x)).forEach(x -> this.button.getScreen().pointPerkButtonMap.get(x).receive(waitingStatusUpdate));
+            this.button.receive(waitingStatusUpdate);
 
         }
-        private void handleSelfCheck() {
-            if (selfCheckTasks.isEmpty()) return;
-            Iterator<SelfCheckTask> iterator = selfCheckTasks.iterator();
-            while (iterator.hasNext()) {
-                SelfCheckTask next = iterator.next();
-                if (next.getCondition().test(this.button)) {
-                    next.getTask().accept(this.button);
-                    iterator.remove();
-                } else {
-                    Integer ticker = next.getLastTime();
-                    if (ticker == null) return;
-                    if (ticker > 0) {
-                        next.setLastTime(ticker - 1);
-                    } else {
-                        System.out.println("discard!");
-                        iterator.remove();
-                    }
 
-                }
+        public void updateRelatedRenderer() {
+            Set<PointData> connections = this.button.school.calcData.connections.getOrDefault(this.button.point, Collections.EMPTY_SET);
+            Int2ReferenceOpenHashMap<PerkConnectionRenderer> perkConnectionRendererInt2ReferenceOpenHashMap = PerkConnectionCache.renderersCache.get(this.button.school.getSchool_type().toString().hashCode());
+            RendererUpdateTask rendererUpdateTask = new RendererUpdateTask(x -> x.connection() != Load.player(ClientOnly.getPlayer()).talents.getConnection(this.button.school, x.pair().perk1(), x.pair().perk2()), x -> x.mutateConnectionTo(Load.player(ClientOnly.getPlayer()).talents.getConnection(this.button.school, x.pair().perk1(), x.pair().perk2())), 1000);
+
+            for (PointData p : connections) {
+
+                PerkButton sb = this.button.screen.pointPerkButtonMap.get(p);
+                PerkPointPair pair = new PerkPointPair(this.button.point, sb.point);
+
+                perkConnectionRendererInt2ReferenceOpenHashMap.get(pair.hashCode()).receive(rendererUpdateTask);
             }
+
         }
     }
-
 }
+
+
+
+
+
+

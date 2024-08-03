@@ -22,6 +22,8 @@ import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.ButtonId
 import com.robertx22.age_of_exile.gui.screens.skill_tree.connections.PerkConnectionCache;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.connections.PerkConnectionRenderer;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkScreenContext;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.delaycheck.ButtonStatusUpdateTask;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.delaycheck.RendererUpdateTask;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.opacity.OpacityController;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -689,6 +691,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         public void onRenderConnections(GuiGraphics gui) {
             int typeHash = this.screen.schoolType.toString().hashCode();
             for (PerkConnectionRenderer con : PerkConnectionCache.renderersCache.get(typeHash).values()) {
+                con.handleTaskList();
                 this.screen.renderConnection(gui, con);
             }
         }
@@ -731,7 +734,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                 if (!this.searchHandler.isUpdating) this.searchHandler.tickThis();
                 opacityController.detectCurrentState(playerData);
 
-                PerkConnectionCache.updateRenders(this.screen);
 
                 this.screen.renderConnections(gui);
 

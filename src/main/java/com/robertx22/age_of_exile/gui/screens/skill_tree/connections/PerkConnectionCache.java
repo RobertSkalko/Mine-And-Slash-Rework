@@ -29,45 +29,6 @@ public class PerkConnectionCache {
     public static ConcurrentLinkedQueue<PerkButton> update = new ConcurrentLinkedQueue<>();
 
 
-
-    public static void addToUpdate(PerkButton button) {
-        update.add(button);
-    }
-
-    @SuppressWarnings({"unchecked"})
-    public static void updateRenders(SkillTreeScreen skillTreeScreen) {
-        if (update.isEmpty()) return;
-        if (!PainterController.isAllowedUpdate(new PerkConnectionCache())) return;
-        PainterController.passOnePaintAction(new PerkConnectionCache());
-        var data = Load.player(ClientOnly.getPlayer());
-        while (!update.isEmpty()) {
-            PerkButton poll = update.poll();
-            int buttonSchoolTypeHash = skillTreeScreen.schoolType.toString().hashCode();
-            //System.out.println("take a point: " + poll);
-            Set<PointData> connections = skillTreeScreen.school.calcData.connections.getOrDefault(poll.point, Collections.EMPTY_SET);
-
-            //System.out.println("related points: " + connections);
-            for (PointData connection : connections) {
-
-                PerkButton sb = skillTreeScreen.pointPerkButtonMap.get(connection);
-
-                if (sb == null) {
-                    continue;
-                }
-
-                var con = data.talents.getConnection(skillTreeScreen.school, sb.point, poll.point);
-                var result = new PerkConnectionRenderer(new PerkPointPair(poll.point, sb.point), con);
-                //System.out.println("update point connection: " + poll.point + "     " + sb.point);
-                renderersCache.get(buttonSchoolTypeHash).merge(result.hashCode(), result, (oldOne, newOne) -> {
-                    //System.out.println(oldOne.connection);
-                    //System.out.println(newOne.connection);
-                    return newOne;
-                });
-            }
-        }
-
-    }
-
     @SuppressWarnings("unchecked")
     private static Int2ReferenceOpenHashMap<PerkConnectionRenderer> initAllConnection(SkillTreeScreen skillTreeScreen) {
 
