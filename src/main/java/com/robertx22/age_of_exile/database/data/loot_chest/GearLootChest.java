@@ -6,8 +6,8 @@ import com.robertx22.age_of_exile.database.data.loot_chest.base.LootChestData;
 import com.robertx22.age_of_exile.loot.LootInfo;
 import com.robertx22.age_of_exile.loot.blueprints.GearBlueprint;
 import com.robertx22.age_of_exile.loot.req.DropRequirement;
-import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
+import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -31,6 +31,9 @@ public class GearLootChest extends LootChest {
 
     @Override
     public Item getChestItem(LootChestData data) {
+        if (!RarityItems.GEAR_CHESTS.containsKey(data.getRarity())) {
+            return RarityItems.GEAR_CHESTS.get(IRarity.COMMON_ID).get();
+        }
         return RarityItems.GEAR_CHESTS.get(data.getRarity().GUID()).get();
     }
 

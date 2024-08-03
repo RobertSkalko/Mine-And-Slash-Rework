@@ -1,3 +1,8 @@
+Changelog of recent updates: https://github.com/RobertSkalko/Mine-And-Slash-Rework/blob/1.20-Forge/changelogs/v.5.5.txt
+
 v.5.5.28
 - added SPELL_PARTICLE_MULTI client config, with this you can lower particle amount if your PC can't handle the FPS lag. Note: this won't improve server performance.
 Also added DONT_CULL_PARTICLES_UNDER , this defaults to 50 which means it only reduces particles on spells that add a lot of them at once
+- added warning if Mo' Enchantments is installed. It's a closed source mc-creator mod that breaks my Item NBTs..
+- changelogs now only contain the actual update patchnotes but also come with a link to saved patchnotes of all updates of the current big version
+- league mechanics like prophecy were meant to give a random unique-including the league uniques, but were only giving prophecy uniques

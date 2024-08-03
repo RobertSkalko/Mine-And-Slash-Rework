@@ -40,12 +40,10 @@ public class UniqueGear implements JsonExileRegistry<UniqueGear>, IAutoLocName, 
 
 
     public boolean canSpawnInLeague(LeagueMechanic league) {
-
-        if (league.isEmpty() && this.league.isEmpty()) {
-            return true;
+        if (!this.league.isEmpty()) {
+            return this.league.equals(league.GUID());
         }
-
-        return this.league.equals(league.GUID());
+        return true;
     }
 
     @Override

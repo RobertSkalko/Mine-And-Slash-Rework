@@ -26,7 +26,10 @@ public class OnLogin {
         try {
 
             if (ModList.get().isLoaded("majruszlibrary")) {
-                player.sendSystemMessage(Component.literal("[WARNING] You have majruszlibrary mod installed, which currently has a bug and makes Mine and Slash professions not work! It's recommended to remove the mod, until the issue is fixed."));
+                player.sendSystemMessage(Component.literal("[WARNING] You have majruszlibrary mod installed, which currently has a bug and makes Mine and Slash professions not work! It's recommended to remove the mod (and all the mods that depend on that library), until the issue is fixed."));
+            }
+            if (ModList.get().isLoaded("enchantments_plus")) {
+                player.sendSystemMessage(Component.literal("[WARNING] You have Mo' Enchantments mod installed, which currently has a bug and makes Mine and Slash NBT on items break!!! It's recommended to remove the mod, until the issue is fixed."));
             }
 
             if (!player.getServer()
