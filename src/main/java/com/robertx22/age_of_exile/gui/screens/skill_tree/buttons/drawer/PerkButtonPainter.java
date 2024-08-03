@@ -26,9 +26,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class PerkButtonPainter {
 
 
-    public final static HashMap<ResourceLocation, BufferedImage> handledBufferedImage = new HashMap<>(6000);
+    public final static HashMap<ResourceLocation, BufferedImage> handledBufferedImage = new HashMap<>(10000);
 
-    public final static HashSet<ResourceLocation> handledLocation = new HashSet<>(6000);
+    public final static HashSet<ResourceLocation> handledLocation = new HashSet<>(10000);
 
     public final static ConcurrentLinkedQueue<ButtonIdentifier> waitingToBePaintedQueue = new ConcurrentLinkedQueue<>();
     public final static ConcurrentLinkedQueue<PainterController.BufferedImagePack> waitingToBeRegisteredQueue = new ConcurrentLinkedQueue<>();
