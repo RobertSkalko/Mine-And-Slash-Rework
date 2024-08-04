@@ -521,7 +521,7 @@ public class PerkButton extends ImageButton implements IDelayChecker {
             }
 
             Set<PointData> con = school.calcData.connections.get(this.button.point);
-            // todo if player don't have free points, and it closes the skill screen, this task will lose forever, it means that if a player closes the screen, and reopen it with no free point, and they get a new free point when this reopened screen is on, the button's status won't change at all, player must reopen the screen again to get the right status.
+            // todo if player don't have free points, and it closes the skill screen, this task will lose forever because each time open the screen, screen will re-create all button. it means that if a player closes the screen, and reopen it with no free point, and they get a new free point when this reopened screen is on, the button's status won't change at all, player must reopen the screen again to get the right status.
 
             con.stream().filter(x -> x != null && !playerData.talents.getSchool(schoolType).isAllocated(x)).forEach(x -> this.button.getScreen().pointPerkButtonMap.get(x).receive(waitingStatusUpdate));
             this.button.receive(waitingStatusUpdate);
