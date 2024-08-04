@@ -12,6 +12,8 @@ public enum Itemtips implements IAutoLocName {
     JEWEL_UPGRADE_2("[Click the Jewel with the Stone]"),
     JEWEL_UPGRADE_1("To Upgrade needs: %1$sx %2$s"),
     SOUL_LOCKED_TO_TYPE("Locked Armor type: %1$s"),
+    PROF_MAT_LEVEL_RANGE_INFO("Gained when your profession level is:"),
+
     CHECK_GEAR_STATS_IN_SOUL("This soul has gear stat, you can press Shift to check out."),
     INFUSION_GEAR_LEVEL_RANGE("Gear level range: %1$s - %2$s"),
     SOUL_GENERATE_GEAR_LEVEL_RANGE("Generated Gear Level: %1$s - %2$s"),
@@ -34,7 +36,7 @@ public enum Itemtips implements IAutoLocName {
     ITEM_TIER_TIP("Item Tier: %1$s"),
     LEVEL_TIP("Level %1$s"),
 
-    LEVEL_REQ("Level Min: %1$s"),
+    LEVEL_REQ("Player Level Min: %1$s"), // todo is this too long
     GEAR_SOUL_USE_TIP("[Drag onto gear to use]"),
     Stat_Req("%1$s Min: "),
     POTENTIAL("Potential: %1$s"),

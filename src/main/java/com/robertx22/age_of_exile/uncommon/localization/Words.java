@@ -11,7 +11,6 @@ public enum Words implements IAutoLocName {
     GEAR_LOCKED_TYPE_PLATE("Plate"),
     GEAR_LOCKED_TYPE_LEATHER("Leather"),
     GEAR_LOCKED_TYPE_CLOTH("Cloth"),
-    Req_level("Required Level: "),
     DRAG_NO_WORK_CREATIVE("Drag and Drop Interactions Do-NOT work in Creative Mode!"),
 
     SoftcapInfo("This is the maximum possible value of this stat unless it's modified by for example Max X Resistance stat."),
@@ -129,7 +128,7 @@ public enum Words implements IAutoLocName {
 
     UpgradeAffix("Upgrades an affix"),
     RerollsAffix("Rerolls an Affix"),
-    UpgradeInfusion("Upgrades or Rerolls the Infusion"),
+    UpgradeInfusion("Upgrades the Infusion"),
     UpgradeQuality("Upgrade Quality"),
     CHAOS_STAT_SUCCESS("Upgrades the Item randomly"),
     DowngradeAffix("Downgrades an affix"),

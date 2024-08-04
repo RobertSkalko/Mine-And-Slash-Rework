@@ -29,7 +29,7 @@ public class SummonedPetData {
 
     public void tick(LivingEntity en) {
         if (!en.level().isClientSide) {
-            if (en.tickCount > ticks) {
+            if (ticks-- < 1) {
                 SoundUtils.playSound(en, SoundEvents.GENERIC_DEATH);
                 en.discard();
             }

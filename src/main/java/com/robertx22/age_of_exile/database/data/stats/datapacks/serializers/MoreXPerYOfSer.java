@@ -19,13 +19,10 @@ public class MoreXPerYOfSer implements IStatSerializer<MoreXPerYOf> {
 
     @Override
     public MoreXPerYOf getStatFromJson(JsonObject json) {
-        String adder = json.get("adder_stat")
-            .getAsString();
-        String addto = json.get("add_to")
-            .getAsString();
+        String adder = json.get("adder_stat").getAsString();
+        String addto = json.get("add_to").getAsString();
         MoreXPerYOf stat = new MoreXPerYOf(adder, addto);
-        stat.perEach = json.get("per_amount")
-            .getAsInt();
+        stat.perEach = json.get("per_amount").getAsInt();
         this.loadBaseStatValues(stat, json);
         return stat;
     }

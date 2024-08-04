@@ -6,3 +6,9 @@ Also added DONT_CULL_PARTICLES_UNDER , this defaults to 50 which means it only r
 - added warning if Mo' Enchantments is installed. It's a closed source mc-creator mod that breaks my Item NBTs..
 - changelogs now only contain the actual update patchnotes but also come with a link to saved patchnotes of all updates of the current big version
 - league mechanics like prophecy were meant to give a random unique-including the league uniques, but were only giving prophecy uniques
+- skeleton summon proj now despawn after 15s
+- mobs should now heal normally by % hp 
+- summoned mobs now should despawn properly (you could unload their chunk and reload them to have infinite summon duration)
+- prof mat items now say where they are gotten from
+- professions now have descriptions on the mat items
+- improved supp gem tooltips a bit

@@ -7,6 +7,11 @@ import com.robertx22.age_of_exile.database.data.spells.components.Spell;
 import com.robertx22.age_of_exile.database.data.support_gem.SupportGem;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
+import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
+import com.robertx22.age_of_exile.gui.texts.textblocks.AdditionalBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.RarityBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.RequirementBlock;
+import com.robertx22.age_of_exile.gui.texts.textblocks.StatBlock;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SkillGemsItems;
 import com.robertx22.age_of_exile.saveclasses.ExactStatData;
@@ -21,7 +26,6 @@ import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.localization.Words;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
@@ -231,49 +235,53 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
         list.add(ExileText.emptyLine().get());
 
 
+        ExileTooltips tip = new ExileTooltips();
+
+
         if (this.type == SkillGemType.SUPPORT) {
             SupportGem supp = getSupport();
+            List<MutableComponent> stats = new ArrayList<>();
             for (ExactStatData ex : supp.GetAllStats(Load.Unit(p), this)) {
-                list.addAll(ex.GetTooltipString());
+                stats.addAll(ex.GetTooltipString());
             }
-
-            list.add(ExileText.emptyLine().get());
-
-            list.add(Itemtips.SUPPORT_GEM_COST.locName((int) (supp.manaMulti * 100)));
-
+            tip.accept(new StatBlock() {
+                @Override
+                public List<? extends Component> getAvailableComponents() {
+                    return stats;
+                }
+            });
+            tip.accept(new AdditionalBlock(Itemtips.SUPPORT_GEM_COST.locName((int) (supp.manaMulti * 100)).withStyle(ChatFormatting.RED)));
             if (supp.isOneOfAKind()) {
-                list.add(Itemtips.SUPPORT_GEM_ONLY_ONE.locName().append(supp.one_of_a_kind + ""));
+                tip.accept(new AdditionalBlock(Itemtips.SUPPORT_GEM_ONLY_ONE.locName().append(supp.one_of_a_kind + "")));
             }
         }
 
         if (this.type == SkillGemType.AURA) {
             AuraGem aura = getAura();
+            List<MutableComponent> stats = new ArrayList<>();
 
             for (ExactStatData ex : aura.GetAllStats(Load.Unit(p), this)) {
-                list.addAll(ex.GetTooltipString());
+                stats.addAll(ex.GetTooltipString());
             }
-
-            list.add(ExileText.emptyLine().get());
-
-            list.add(Itemtips.AURA_RESERVATION.locName().append((int) (aura.reservation * 100) + ""));
-
+            tip.accept(new StatBlock() {
+                @Override
+                public List<? extends Component> getAvailableComponents() {
+                    return stats;
+                }
+            });
+            tip.accept(new AdditionalBlock(Itemtips.AURA_RESERVATION.locName().append((int) (aura.reservation * 100) + "").withStyle(ChatFormatting.RED)));
 
             int spiritLeft = (int) Load.player(p).getSkillGemInventory().getRemainingSpirit(p);
-
-            list.add(ExileText.emptyLine().get());
-
-            list.add(Itemtips.REMAINING_AURA_CAPACITY.locName().append(spiritLeft + "").withStyle(ChatFormatting.AQUA));
-
+            tip.accept(new AdditionalBlock(Itemtips.REMAINING_AURA_CAPACITY.locName().append(spiritLeft + "").withStyle(ChatFormatting.AQUA)));
 
         }
 
         if (req > 0) {
-            list.add(Words.Req_level.locName().append(req + "").withStyle(ChatFormatting.YELLOW));
+            tip.accept(new RequirementBlock().setLevelRequirement(req));
         }
+        tip.accept(new RarityBlock(rar));
 
-        list.add(ExileText.emptyLine().get());
-
-        list.add(TooltipUtils.rarity(rar));
+        list.addAll(tip.release());
 
         return list;
 

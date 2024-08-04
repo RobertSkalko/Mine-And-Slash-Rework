@@ -38,19 +38,19 @@ public class ProfessionMatItems {
 
         for (SkillItemTier tier : SkillItemTier.values()) {
 
-            TIERED_MAIN_MATS.get(Professions.MINING).put(tier, Def.item("material/mining/" + tier.tier, () -> new MaterialItem(tier, "Ore")));
-            TIERED_MAIN_MATS.get(Professions.FARMING).put(tier, Def.item("material/farming/" + tier.tier, () -> new MaterialItem(tier, "Produce")));
-            TIERED_MAIN_MATS.get(Professions.HUSBANDRY).put(tier, Def.item("material/meat/" + tier.tier, () -> new MaterialItem(tier, "Raw Meat")));
-            TIERED_MAIN_MATS.get(Professions.FISHING).put(tier, Def.item("material/fishing/" + tier.tier, () -> new MaterialItem(tier, "Raw Fish")));
+            TIERED_MAIN_MATS.get(Professions.MINING).put(tier, Def.item("material/mining/" + tier.tier, () -> new MaterialItem(Professions.MINING, tier, "Ore")));
+            TIERED_MAIN_MATS.get(Professions.FARMING).put(tier, Def.item("material/farming/" + tier.tier, () -> new MaterialItem(Professions.FARMING, tier, "Produce")));
+            TIERED_MAIN_MATS.get(Professions.HUSBANDRY).put(tier, Def.item("material/meat/" + tier.tier, () -> new MaterialItem(Professions.HUSBANDRY, tier, "Raw Meat")));
+            TIERED_MAIN_MATS.get(Professions.FISHING).put(tier, Def.item("material/fishing/" + tier.tier, () -> new MaterialItem(Professions.FISHING, tier, "Raw Fish")));
         }
 
 
         for (CraftedItemPower power : CraftedItemPower.values()) {
-            POWERED_RARE_MATS.get(Professions.FISHING).put(power, Def.item("rare_mats/" + Professions.FISHING + "/" + power.id, () -> new RareMaterialItem(power, "Fish")));
-            POWERED_RARE_MATS.get(Professions.MINING).put(power, Def.item("rare_mats/" + Professions.MINING + "/" + power.id, () -> new RareMaterialItem(power, "Crystal")));
-            POWERED_RARE_MATS.get(Professions.HUSBANDRY).put(power, Def.item("rare_mats/" + Professions.HUSBANDRY + "/" + power.id, () -> new RareMaterialItem(power, "Beef")));
-            POWERED_RARE_MATS.get(Professions.FARMING).put(power, Def.item("rare_mats/" + Professions.FARMING + "/" + power.id, () -> new RareMaterialItem(power, "Produce")));
-            POWERED_RARE_MATS.get(Professions.SALVAGING).put(power, Def.item("rare_mats/" + Professions.SALVAGING + "/" + power.id, () -> new RareMaterialItem(power, "Essence")));
+            POWERED_RARE_MATS.get(Professions.FISHING).put(power, Def.item("rare_mats/" + Professions.FISHING + "/" + power.id, () -> new RareMaterialItem(Professions.FISHING, power, "Fish")));
+            POWERED_RARE_MATS.get(Professions.MINING).put(power, Def.item("rare_mats/" + Professions.MINING + "/" + power.id, () -> new RareMaterialItem(Professions.MINING, power, "Crystal")));
+            POWERED_RARE_MATS.get(Professions.HUSBANDRY).put(power, Def.item("rare_mats/" + Professions.HUSBANDRY + "/" + power.id, () -> new RareMaterialItem(Professions.HUSBANDRY, power, "Beef")));
+            POWERED_RARE_MATS.get(Professions.FARMING).put(power, Def.item("rare_mats/" + Professions.FARMING + "/" + power.id, () -> new RareMaterialItem(Professions.FARMING, power, "Produce")));
+            POWERED_RARE_MATS.get(Professions.SALVAGING).put(power, Def.item("rare_mats/" + Professions.SALVAGING + "/" + power.id, () -> new RareMaterialItem(Professions.SALVAGING, power, "Essence")));
         }
 
 

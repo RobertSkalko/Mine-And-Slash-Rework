@@ -11,6 +11,7 @@ import com.robertx22.age_of_exile.mmorpg.SlashRef;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.age_of_exile.uncommon.interfaces.IAutoLocName;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
@@ -34,11 +35,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Profession>, IAutoLocName {
+public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Profession>, IAutoLocName, IAutoLocDesc {
     public static Profession SERIALIZER = new Profession();
 
     public String id = "";
     public transient String locname = "";
+    public transient String desc = "";
 
     // blocks/entities that give exp
 
@@ -120,6 +122,21 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
 
 
         return list;
+    }
+
+    @Override
+    public AutoLocGroup locDescGroup() {
+        return AutoLocGroup.Misc;
+    }
+
+    @Override
+    public String locDescLangFileGUID() {
+        return SlashRef.MODID + ".profession.desc." + GUID();
+    }
+
+    @Override
+    public String locDescForLangFile() {
+        return desc;
     }
 
     public static enum DropCategory {

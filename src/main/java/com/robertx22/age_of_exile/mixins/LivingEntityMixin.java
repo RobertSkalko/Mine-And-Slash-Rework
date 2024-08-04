@@ -10,6 +10,7 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.gen.Invoker;
@@ -43,8 +44,10 @@ public abstract class LivingEntityMixin implements LivingEntityAccesor {
     @ModifyVariable(method = "heal(F)V", at = @At(value = "HEAD"), argsOnly = true, ordinal = 0)
     public float reduceHealPerLevel(float amount, float arg) {
         LivingEntity en = (LivingEntity) (Object) this;
-        return HealthUtils.realToVanilla(en, amount);
-
+        if (en instanceof Player) {
+            return HealthUtils.realToVanilla(en, amount);
+        }
+        return amount;
     }
 
     // ENSURE MY SPECIAL DAMAGE ISNT LOWERED BY ARMOR, ENCHANTS ETC

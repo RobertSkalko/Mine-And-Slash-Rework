@@ -2,10 +2,8 @@ package com.robertx22.age_of_exile.aoe_data.datapacks.lang_file;
 
 import com.google.common.collect.Lists;
 import com.robertx22.age_of_exile.capability.player.data.PlayerBuffData;
-import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.StatGuiGroup;
 import com.robertx22.age_of_exile.database.data.stats.priority.StatPriority;
-import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.gui.screens.stat_gui.StatGuiGroupSection;
 import com.robertx22.age_of_exile.loot.LootModifierEnum;
 import com.robertx22.age_of_exile.tags.ModTag;
@@ -55,7 +53,18 @@ public class CreateLangFile {
             for (IAutoLocName iauto : entry.getValue()) {
 
 
-                if (!iauto.locNameLangFileGUID().isEmpty() && iauto.shouldRegisterLangName() && iauto.locNameForLangFile() != null && !iauto.locNameForLangFile().isEmpty()) {
+                boolean bad = false;
+                if (iauto.locNameLangFileGUID().isEmpty()) {
+                    bad = true;
+                }
+                if (!iauto.shouldRegisterLangName()) {
+                    bad = true;
+                }
+                if (iauto.locNameForLangFile() == null || iauto.locNameForLangFile().isEmpty()) {
+                    bad = true;
+                }
+
+                if (!bad) {
 
                     if (iauto.locNameForLangFile().contains("\"")) {
                         try {
@@ -90,8 +99,7 @@ public class CreateLangFile {
 
             json += CreateLangFileUtils.comment(entry.getKey());
             for (IAutoLocDesc iauto : entry.getValue()) {
-                if (!iauto.locDescLangFileGUID().isEmpty() && iauto.shouldRegisterLangDesc() && iauto.locDescForLangFile()
-                        .isEmpty() == false) {
+                if (!iauto.locDescLangFileGUID().isEmpty() && iauto.shouldRegisterLangDesc() && iauto.locDescForLangFile() != null && iauto.locDescForLangFile().isEmpty() == false) {
 
                     if (iauto.locDescForLangFile()
                             .contains("\"")) {
@@ -210,6 +218,21 @@ public class CreateLangFile {
     public static HashMap<String, List<IAutoLocDesc>> getDescMap() {
         HashSet<IAutoLocDesc> list = CreateLangFileUtils.getFromRegistries(IAutoLocDesc.class);
 
+        for (ExileRegistryContainer reg : Database.getAllRegistries()) {
+            for (Object o : reg.getSerializable()) {
+                if (o instanceof IAutoLocDesc loc) {
+                    list.add(loc);
+                }
+            }
+            for (Object o : reg.getList()) {
+                if (o instanceof IAutoLocDesc loc) {
+                    list.add(loc);
+                }
+            }
+
+        }
+        /*
+        list.addAll(ExileDB.Professions().getSerializable());
         list.addAll(ExileDB.Spells().getSerializable());
         list.addAll(ExileDB.UberBoss().getSerializable());
 
@@ -223,6 +246,8 @@ public class CreateLangFile {
 
         list.addAll(stats);
         list.addAll(ExileDB.UniqueGears().getSerializable());
+
+         */
 
         HashMap<IAutoLocName.AutoLocGroup, List<IAutoLocDesc>> map = new HashMap<>();
 

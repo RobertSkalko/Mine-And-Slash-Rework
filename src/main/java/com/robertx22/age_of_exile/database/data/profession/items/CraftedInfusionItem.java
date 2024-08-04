@@ -70,6 +70,7 @@ public class CraftedInfusionItem extends AutoItem implements IItemAsCurrency, IC
                             .toList();
 
                 }))
+                .accept(new UsageBlock(() -> Arrays.asList(Chats.ENCHANT_UPGRADE_RARITY.locName().withStyle(ChatFormatting.BLUE))))
                 .accept(new RequirementBlock(Collections.singletonList(Itemtips.INFUSION_GEAR_LEVEL_RANGE.locName(tier.levelRange.getMinLevel(), tier.levelRange.getMaxLevel())), UNICODE.ROTATED_CUBE + " "))
                 .accept(new LeveledItemBlock(pStack))
                 .release());
@@ -82,7 +83,7 @@ public class CraftedInfusionItem extends AutoItem implements IItemAsCurrency, IC
 
     @Override
     public String GUID() {
-        return null;
+        return "infusion";
     }
 
     @Override
@@ -201,7 +202,8 @@ public class CraftedInfusionItem extends AutoItem implements IItemAsCurrency, IC
 
             @Override
             public String locDescForLangFile() {
-                return "Tries to Infuse the item, adding stats. Item can only attempt infusion 10 times. As this can fail, some items will never reach maximum rarity Infusions.";
+                return "Tries to Infuse the item, adding stats. Item can only attempt infusion 10 times. As this can fail, some items will never reach maximum rarity Infusions." +
+                        "The item must be infused through the rarities progressively. So first you have to infuse a common enchant, then an uncommon etc";
             }
 
             @Override
@@ -211,7 +213,7 @@ public class CraftedInfusionItem extends AutoItem implements IItemAsCurrency, IC
 
             @Override
             public String GUID() {
-                return "";
+                return "infusion";
             }
 
             @Override

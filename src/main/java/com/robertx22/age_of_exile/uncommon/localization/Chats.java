@@ -91,10 +91,13 @@ public enum Chats implements IAutoLocName {
     FAILED_TO_AWARD_TALENTS("Failed to give more talent points, you have reached the cap. The maximum allowed bonus talent points is controlled by the config file."),
 
     NEED_PEARL("You need to have at least one %1$s in your inventory to enter."),
+    LEVEL_EXPLANATION("Your player level, otherwise known as your Mine and Slash level."),
     PROF_MAT_DROPGUIDE("Mine and Slash Profession Material"),
     PROF_MAT_DROPGUIDE_COMMON("Common Drop"),
     PROF_MAT_DROPGUIDE_RARE("Rare Drop"),
     CAUGHT_SOMETHING("You caught something!"),
+    PROF_MAT_SOURCE("Can be gained through the %1$s Profession"),
+
     TOOL_ADD_STAT("%1$s has been Upgraded to %2$s!"),
     TOOL_LEVEL_UP("%1$s has reached level %2$s!"),
     PROFESSION_LEVEL_UP("Your %1$s level has increased to level %2$s!"),

@@ -17,6 +17,7 @@ import net.minecraft.world.phys.HitResult;
 public class AutoAimingProj extends AbstractHurtingProjectile {
     public AutoAimingProj(EntityType<? extends AbstractHurtingProjectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
+
     }
 
     public LivingEntity target;
@@ -92,10 +93,11 @@ public class AutoAimingProj extends AbstractHurtingProjectile {
 
                 this.setDeltaMovement(move);
                 this.hurtMarked = true;
-
-
             }
 
+            if (this.tickCount > (20 * 15)) {
+                this.discard();
+            }
         }
 
 

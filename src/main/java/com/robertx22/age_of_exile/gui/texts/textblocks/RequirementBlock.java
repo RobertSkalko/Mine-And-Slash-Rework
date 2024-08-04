@@ -5,19 +5,17 @@ import com.robertx22.age_of_exile.capability.entity.EntityData;
 import com.robertx22.age_of_exile.gui.texts.ExileTooltips;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequirement;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.localization.Chats;
 import com.robertx22.age_of_exile.uncommon.localization.Itemtips;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicReference;
 
 import static com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequirement.CHECK_YES_ICON;
 import static com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRequirement.NO_ICON;
@@ -27,7 +25,6 @@ public class RequirementBlock extends AbstractTextBlock {
 
     @Nullable
     public StatRequirement statRequirement;
-    //Is the item level means the level req? idk but after search the usage of TooltipUtils.addRequirements, the lvl member in gear and map are use as lvl req.
     @Nullable
     public Integer levelRequirement;
 
@@ -36,11 +33,6 @@ public class RequirementBlock extends AbstractTextBlock {
 
     public RequirementBlock() {
         super();
-    }
-
-    public RequirementBlock(Player player) {
-        super();
-        this.playerData = Load.Unit(player);
     }
 
 
@@ -67,7 +59,7 @@ public class RequirementBlock extends AbstractTextBlock {
     @Override
     public List<? extends Component> getAvailableComponents() {
         ImmutableList.Builder<Component> builder = ImmutableList.builder();
-        if (this.playerData == null){
+        if (this.playerData == null) {
             this.playerData = Load.Unit(ClientOnly.getPlayer());
         }
 
@@ -79,7 +71,9 @@ public class RequirementBlock extends AbstractTextBlock {
             } else {
                 builder.add(Component.literal("").append(Component.literal(NO_ICON).withStyle(ChatFormatting.RED, ChatFormatting.BOLD)).append(Component.literal(" ")).append(Itemtips.LEVEL_REQ.locName(levelRequirement).withStyle().withStyle(ChatFormatting.DARK_GRAY)));
             }
-
+            if (Screen.hasAltDown()) {
+                builder.add(Chats.LEVEL_EXPLANATION.locName());
+            }
         }
 
         if (statRequirement != null) {

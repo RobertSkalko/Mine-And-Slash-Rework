@@ -79,14 +79,14 @@ public class Professions {
         // or maybe blocks only have tiers, but you get less xp loot the more you farm them, so if you just farm wheat you will get less and less etc.
         // this would be a pain to save
 
-        Builder.of(SALVAGING, "Salvaging")
+        Builder.of(SALVAGING, "Salvaging", "Salvaging is the process of turning junk loot into useful materials in the Salvaging Station. You can only salvage Gear with Mine and Slash souls and other Mine and Slash rarity items like Support gems, jewels.")
                 .sometimesDrop(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.SALVAGING), 20)
                 .build();
 
         var FARM_EXP = 30;
         var ORE_EXP = 100;
 
-        Builder.of(FARMING, "Farming")
+        Builder.of(FARMING, "Farming", "Farming gives you a chance to obtain extra custom materials by chopping wheat, potatoes and so on. You can see what gives experience in the Mine and Slash HUB > Library screen.")
                 .tool(SlotTags.farming_tool)
 
                 .crop(SkillItemTier.TIER0, FARM_EXP, Items.WHEAT, ExpSources.REQ_GROWTH_STAGE)
@@ -103,7 +103,7 @@ public class Professions {
 
                 .build();
 
-        Builder.of(FISHING, "Fishing")
+        Builder.of(FISHING, "Fishing", "Fishing gives you a chance to obtain extra custom materials by fishing.")
                 .tool(SlotTags.fishing_tool)
 
                 // todo locked crates
@@ -113,7 +113,7 @@ public class Professions {
 
                 .build();
 
-        Builder.of(HUSBANDRY, "Animal Breeding")
+        Builder.of(HUSBANDRY, "Animal Breeding", "Animal Breeding gives you a chance to obtain extra custom materials by breeding animals.")
                 .tool(SlotTags.husbandry_tool)
 
                 .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(HUSBANDRY), 1)
@@ -123,7 +123,7 @@ public class Professions {
                 .build();
 
         // todo each should really be separate and have chance for tag..
-        Builder.of(MINING, "Mining")
+        Builder.of(MINING, "Mining", "Mining gives you chance to obtain extra custom materials by mining ores. You can see which ores give experience in the Mine and Slash HUB > Library screen.")
                 .tool(SlotTags.mining_tool)
 
                 .blockTag(SkillItemTier.TIER0, 15, BlockTags.COAL_ORES)
@@ -141,20 +141,20 @@ public class Professions {
 
                 .build();
 
-        Builder.of(COOKING, "Cooking")
+        Builder.of(COOKING, "Cooking", "Cooking is a crafting profession that turns materials from gathering professions into foods that can provide stat buffs.")
 
                 .build();
 
 
-        Builder.of(ALCHEMY, "Alchemy")
+        Builder.of(ALCHEMY, "Alchemy", "Alchemy is a crafting profession that turns materials from gathering professions into Potions.")
 
                 .build();
 
-        Builder.of(ENCHANTING, "Infusing")
+        Builder.of(ENCHANTING, "Infusing", "Infusing is a crafting profession that turns materials from gathering professions into scrolls that can infuse extra power into your gear.")
 
                 .build();
 
-        Builder.of(GEAR_CRAFTING, "Gear Crafting")
+        Builder.of(GEAR_CRAFTING, "Gear Crafting", "Gear Crafting is a crafting profession that turns materials from gathering professions into new pieces of gear.")
 
                 .build();
 
@@ -165,9 +165,10 @@ public class Professions {
     private static class Builder {
         Profession p = new Profession();
 
-        public static Builder of(String id, String locname) {
+        public static Builder of(String id, String locname, String desc) {
             Builder b = new Builder();
             b.p.id = id;
+            b.p.desc = desc;
             b.p.locname = locname;
             return b;
         }

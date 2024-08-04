@@ -25,6 +25,14 @@ public class OnLogin {
 
         try {
 
+
+            /*
+            if (MMORPG.RUN_DEV_TOOLS_REMOVE_WHEN_DONE) {
+                   var test = new UniqueGearTest(ExileDB.UniqueGears().random());
+                System.out.println(test.generateDocumentation());
+            }
+             */
+
             if (ModList.get().isLoaded("majruszlibrary")) {
                 player.sendSystemMessage(Component.literal("[WARNING] You have majruszlibrary mod installed, which currently has a bug and makes Mine and Slash professions not work! It's recommended to remove the mod (and all the mods that depend on that library), until the issue is fixed."));
             }

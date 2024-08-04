@@ -23,7 +23,7 @@ public class BonusStatPerEffectStacks extends BaseDatapackStat implements ICoreS
 
     public CoreStatData data = new CoreStatData();
 
-    String locname;
+    transient String locname;
 
     public String effect;
 

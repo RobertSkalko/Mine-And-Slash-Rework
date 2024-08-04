@@ -236,6 +236,10 @@ public class GearItemData implements ICommonDataItem<GearRarity> {
         if (this.uniqueStats == null) {
             return base;
         } else {
+            var uniq = uniqueStats.getUnique(this);
+            if (uniq.replaces_name) {
+                return uniq.locName().withStyle(getRarity().textFormatting());
+            }
             return Formatter.UNIQUE_NAME_FORMAT.locName(uniqueStats.getUnique(this).locName(), base).withStyle(getRarity().textFormatting());
         }
     }

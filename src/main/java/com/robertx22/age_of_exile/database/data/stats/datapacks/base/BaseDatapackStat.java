@@ -29,6 +29,7 @@ public abstract class BaseDatapackStat extends Stat implements ISerializable<Sta
 
     public BaseDatapackStat(String serializer) {
         this.serializer = serializer;
+
     }
 
     protected String serializer;
@@ -38,11 +39,6 @@ public abstract class BaseDatapackStat extends Stat implements ISerializable<Sta
         return this.is_perc;
     }
 
-    @Override
-    public void compareLoadedJsonAndFinalClass(JsonObject json, Boolean editmode) {
-        System.out.println("[Mine and Slash Datapack Log]: " + this.GUID() + " loaded. Datapack Mns Stats currently don't have a way to print warnings. Ignore this log, it's just mean to inform modpack-devs");
-        // todo
-    }
 
     @Override
     public final Elements getElement() {

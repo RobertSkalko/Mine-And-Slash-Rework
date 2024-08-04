@@ -226,12 +226,7 @@ public class MMORPG {
 
     }
 
-    public static void devToolsLog(String string) {
-        if (RUN_DEV_TOOLS) {
-            System.out.println(string);
-        }
-    }
-
+ 
     public static void devToolsErrorLog(String string) {
         if (RUN_DEV_TOOLS) {
             try {
