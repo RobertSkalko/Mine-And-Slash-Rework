@@ -18,7 +18,6 @@ public class OpacityController {
     private OpacityControllerState state;
     private final OpacityControllerState nonSearching;
     private final OpacityControllerState searching;
-    public PlayerData playerData = Load.player(ClientOnly.getPlayer());
     public static final float HIGHLIGHT = 1.0f;
     public static final float HIDE = 0.2f;
 
@@ -29,12 +28,9 @@ public class OpacityController {
     }
 
     public void detectCurrentState(PlayerData playerData){
-        this.playerData = playerData;
         boolean searching = SkillTreeScreen.SEARCH.getValue().isEmpty();
 
         boolean newbie = playerData.talents.getAllocatedPoints(TalentTree.SchoolType.TALENTS) < 1;
-        //System.out.println("search? " + searching);
-        //System.out.println("talent? " + (newbie));
         this.state =  searching ? this.nonSearching : this.searching;
     }
 

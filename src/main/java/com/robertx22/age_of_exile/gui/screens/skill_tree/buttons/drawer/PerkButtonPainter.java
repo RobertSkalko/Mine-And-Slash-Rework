@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.age_of_exile.event_hooks.ontick.OnClientTick;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.ExileTreeTexture;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.PainterController;
+import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
@@ -151,9 +152,12 @@ public class PerkButtonPainter {
 
     public static void handleRegisterQueue() {
         //make sure register all image after all image is painted.
-        if (!waitingToBePaintedQueue.isEmpty()) return;
+        if (!waitingToBePaintedQueue.isEmpty()) {
+            OnClientTick.isRegistering = false;
+            return;
+        }
+        OnClientTick.isRegistering = true;
         while (!waitingToBeRegisteredQueue.isEmpty()){
-            OnClientTick.isRegistering = true;
             //can't use acquire() here, I run this on main thread.
             if (!PainterController.registerLimiter.tryAcquire(Duration.ofNanos(300))){
                 break;

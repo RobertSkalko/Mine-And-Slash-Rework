@@ -42,16 +42,16 @@ public class TalentResetPotion extends AutoItem implements IShapedRecipe {
                     .clearAllTalents();
             p.addItem(new ItemStack(Items.GLASS_BOTTLE));
         }
-        if (world.isClientSide){
-            if (TreeOptimizationHandler.isOptEnable()){
+        if (TreeOptimizationHandler.isOptEnable()) {
+            TreeOptimizationHandler.runOptTask(() -> {
                 for (TalentTree.SchoolType value : TalentTree.SchoolType.values()) {
                     AllPerkButtonPainter.getPainter(value).startANewRun();
                     PerkConnectionCache.reset();
                 }
 
-            }
-        }
+            });
 
+        }
         return stack;
     }
 

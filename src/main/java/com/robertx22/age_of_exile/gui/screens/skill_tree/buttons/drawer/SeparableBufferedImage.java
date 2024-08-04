@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableList;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -33,18 +34,19 @@ public class SeparableBufferedImage {
 
     public List<BufferedImage> getSeparatedImage() {
         if (this.separateTo == 0){
-            Collections.singletonList(originalImage);
+            return Collections.singletonList(originalImage);
         }
         System.out.println("separate");
         ImmutableList.Builder<BufferedImage> builder = ImmutableList.builder();
+        boolean isDivisible = width % separateTo == 0;
         int handleWidth;
         int leftPart = 0;
         int singleWidth = 0;
-        if (width % separateTo != 0) {
+        if (isDivisible) {
+            handleWidth = width;
+        } else {
             handleWidth = width - (width % separateTo);
             leftPart = width % separateTo;
-        } else {
-            handleWidth = width;
         }
         singleWidth = handleWidth / separateTo;
         int a = 0;
@@ -53,7 +55,7 @@ public class SeparableBufferedImage {
             a++;
         }
         if (leftPart != 0){
-            builder.add(originalImage.getSubimage(width - handleWidth, 0, leftPart, height));
+            builder.add(originalImage.getSubimage(handleWidth, 0, leftPart, height));
         }
         return builder.build();
     }

@@ -5,6 +5,8 @@ import com.robertx22.age_of_exile.gui.screens.skill_tree.SearchHandler;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.SkillTreeScreen;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkButton;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.opacity.OpacityController;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.EditBox;
 
@@ -26,7 +28,7 @@ public class Searching extends OpacityControllerState {
         SearchHandler searchHandler = button.getScreen().getOptimizedState().searchHandler;
 
         if (searchHandler.checkThisButtonIsSearchResult(button)) return OpacityController.HIGHLIGHT;
-        PerkStatus status = opacityController.playerData.talents.getStatus(Minecraft.getInstance().player, button.school, button.point);
+        PerkStatus status = Load.player(ClientOnly.getPlayer()).talents.getStatus(Minecraft.getInstance().player, button.school, button.point);
 
         if (search.getValue().equals("all")) {
             if (status == PerkStatus.CONNECTED) return OpacityController.HIGHLIGHT;

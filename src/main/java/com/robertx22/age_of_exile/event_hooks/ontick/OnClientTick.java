@@ -42,8 +42,11 @@ public class OnClientTick {
                 });
 
 
+
             RenderSystem.recordRenderCall(() -> {
-                PerkButtonPainter.handleRegisterQueue();
+                if (!isRegistering){
+                    PerkButtonPainter.handleRegisterQueue();
+                }
                 container.values().forEach(AllPerkButtonPainter::tryRegister);
             });
             }

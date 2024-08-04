@@ -124,24 +124,25 @@ public class TalentTree implements JsonExileRegistry<TalentTree>, IAutoGson<Tale
 
         grid.loadIntoTree();
 
-        if (TreeOptimizationHandler.isOptEnable()){
-            CompletableFuture.runAsync(() -> {
-                for (Map.Entry<PointData, String> e : this.calcData.perks.entrySet()) {
+        if (TreeOptimizationHandler.isOptEnable()) {
+            TreeOptimizationHandler.runOptTask(() ->
+                    CompletableFuture.runAsync(() -> {
+                        for (Map.Entry<PointData, String> e : this.calcData.perks.entrySet()) {
 
-                    Perk perk = ExileDB.Perks().get(e.getValue());
+                            Perk perk = ExileDB.Perks().get(e.getValue());
 
-                    if (perk == null) {
-                        perk = ExileDB.Perks().get(new UnknownStat().GUID());
+                            if (perk == null) {
+                                perk = ExileDB.Perks().get(new UnknownStat().GUID());
 
-                    }
+                            }
 
-                    ButtonIdentifier buttonIdentifier = new ButtonIdentifier(this, e.getKey(), perk);
-                    PerkButtonPainter.addToWait(buttonIdentifier);
-                }
-                PerkButtonPainter.handlePaintQueue();
-                //can't run this here, cuz at this moment not all the perk status is ready!
-                //AllPerkButtonPainter.getPainter(this.getSchool_type()).init(buttonIdentifiers);
-            });
+                            ButtonIdentifier buttonIdentifier = new ButtonIdentifier(this, e.getKey(), perk);
+                            PerkButtonPainter.addToWait(buttonIdentifier);
+                        }
+                        PerkButtonPainter.handlePaintQueue();
+                        //can't run this here, cuz at this moment not all the perk status is ready!
+                        //AllPerkButtonPainter.getPainter(this.getSchool_type()).init(buttonIdentifiers);
+                    }));
 
         }
     }
