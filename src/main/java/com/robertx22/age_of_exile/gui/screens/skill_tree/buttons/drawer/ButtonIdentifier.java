@@ -40,6 +40,10 @@ public record ButtonIdentifier(TalentTree tree, PointData point, Perk perk){
         return perkStatusResourceLocationHashMap;
     }
 
+    public PerkStatus getCurrentStatus(){
+        return Load.player(Minecraft.getInstance().player).talents.getStatus(Minecraft.getInstance().player, tree, point);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

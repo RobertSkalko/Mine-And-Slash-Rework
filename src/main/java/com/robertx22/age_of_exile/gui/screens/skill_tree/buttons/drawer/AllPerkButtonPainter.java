@@ -8,6 +8,7 @@ import com.robertx22.age_of_exile.event_hooks.ontick.OnClientTick;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.ExileTreeTexture;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.PainterController;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkButton;
+import it.unimi.dsi.fastutil.Hash;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.resources.ResourceLocation;
@@ -173,7 +174,7 @@ public class AllPerkButtonPainter {
         @Override
         public void onInit() {
             if (cache.isEmpty()) return;
-            //System.out.println("init all painter");
+            System.out.println("init all painter");
             painter.changeState(painter.paintState).transferData(cache).onPaint();
         }
 
@@ -202,6 +203,8 @@ public class AllPerkButtonPainter {
         public final ConcurrentLinkedQueue<ButtonIdentifier> waitingToBePainted = new ConcurrentLinkedQueue<>();
         private Future<?> paintTask = null;
 
+        private HashMap<ButtonIdentifier, Integer> tryHistory = new HashMap<>();
+
         public PaintState(AllPerkButtonPainter painter) {
             super(painter);
         }
@@ -214,14 +217,13 @@ public class AllPerkButtonPainter {
         @Override
         public void onPaint() {
             paintTask = paintThread.submit(() -> {
-
                 SeparableBufferedImage image;
                 try {
                     image = tryPaint();
                 } catch (InterruptedException | IOException e) {
                     throw new RuntimeException(e);
                 }
-                //System.out.println("add to register!");
+                System.out.println("add to register!");
                 if (image == null) return;
                 painter.changeState(painter.registerState).transferData(image.getSeparatedImage());
 
@@ -276,6 +278,8 @@ public class AllPerkButtonPainter {
                 BufferedImage singleButton = PerkButtonPainter.handledBufferedImage.get(wholeTexture);
                 if (singleButton == null) {
                     waitingToBePainted.add(identifier);
+                    if (tryHistory.getOrDefault(identifier, 0) >= 3) continue;
+                    tryHistory.merge(identifier, 1, Integer::sum);
                     Thread.sleep(2000);
                     continue;
                 }
@@ -410,7 +414,7 @@ public class AllPerkButtonPainter {
 
         private void tryCleanUp() {
             if (!needRegister.isEmpty()) return;
-            //.println("clean up!");
+            System.out.println("clean up!");
             painter.changeState(painter.standByState).transferData(results);
             resetTimer();
             clearHandledCollection();
@@ -451,7 +455,7 @@ public class AllPerkButtonPainter {
 
         @Override
         public void onRepaint() {
-            //System.out.println("repaint!");
+            System.out.println("repaint!");
             locations.clear();
             painter.updateInThinRun.clear();
             painter.updateOnThisScreen.clear();
