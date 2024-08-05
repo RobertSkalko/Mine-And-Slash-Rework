@@ -112,7 +112,8 @@ public class AllPerkButtonPainter {
     }
 
     public boolean isThisButtonIsUpdating(PerkButton button) {
-        return this.updateOnThisScreen.contains(button.getOptimizedState().buttonIdentifier) || this.updateInThinRun.contains(button.getOptimizedState().buttonIdentifier) || this.paintState.waitingToBePainted.contains(button.getOptimizedState().buttonIdentifier);
+        ButtonIdentifier buttonIdentifier = button.getOptimizedState().buttonIdentifier;
+        return this.updateOnThisScreen.contains(buttonIdentifier) || this.updateInThinRun.contains(buttonIdentifier) || this.paintState.waitingToBePainted.contains(buttonIdentifier) || this.paintState.tryHistory.containsKey(buttonIdentifier);
     }
 
     public void checkIfNeedRepaint() {
@@ -126,6 +127,10 @@ public class AllPerkButtonPainter {
     private void repaint() {
         this.state.onRepaint();
         this.repaintTimer = maxRepaintTimer;
+    }
+
+    public void resetRepaintSchedule(){
+        repaintTimer = 0;
     }
 
     @SuppressWarnings("all")
@@ -174,7 +179,6 @@ public class AllPerkButtonPainter {
         @Override
         public void onInit() {
             if (cache.isEmpty()) return;
-            System.out.println("init all painter");
             painter.changeState(painter.paintState).transferData(cache).onPaint();
         }
 
@@ -223,7 +227,6 @@ public class AllPerkButtonPainter {
                 } catch (InterruptedException | IOException e) {
                     throw new RuntimeException(e);
                 }
-                System.out.println("add to register!");
                 if (image == null) return;
                 painter.changeState(painter.registerState).transferData(image.getSeparatedImage());
 
@@ -280,7 +283,7 @@ public class AllPerkButtonPainter {
                     waitingToBePainted.add(identifier);
                     if (tryHistory.getOrDefault(identifier, 0) >= 3) continue;
                     tryHistory.merge(identifier, 1, Integer::sum);
-                    Thread.sleep(2000);
+                    Thread.sleep(1000);
                     continue;
                 }
 
@@ -414,7 +417,6 @@ public class AllPerkButtonPainter {
 
         private void tryCleanUp() {
             if (!needRegister.isEmpty()) return;
-            System.out.println("clean up!");
             painter.changeState(painter.standByState).transferData(results);
             resetTimer();
             clearHandledCollection();
@@ -455,7 +457,6 @@ public class AllPerkButtonPainter {
 
         @Override
         public void onRepaint() {
-            System.out.println("repaint!");
             locations.clear();
             painter.updateInThinRun.clear();
             painter.updateOnThisScreen.clear();

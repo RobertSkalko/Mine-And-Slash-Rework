@@ -27,16 +27,13 @@ public class SeparableBufferedImage {
         byte[] bytes = byteArrayOutputStream.toByteArray();
         byteArrayOutputStream.close();
         byteArrayOutputStream = null;
-        System.out.println("length is " + bytes.length);
         this.separateTo = bytes.length / (25 * 1024);
-        System.out.println("separate to " + separateTo);
     }
 
     public List<BufferedImage> getSeparatedImage() {
         if (this.separateTo == 0){
             return Collections.singletonList(originalImage);
         }
-        System.out.println("separate");
         ImmutableList.Builder<BufferedImage> builder = ImmutableList.builder();
         boolean isDivisible = width % separateTo == 0;
         int handleWidth;

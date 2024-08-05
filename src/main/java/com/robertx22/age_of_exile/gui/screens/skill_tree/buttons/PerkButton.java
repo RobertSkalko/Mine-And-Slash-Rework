@@ -394,7 +394,7 @@ public class PerkButton extends ImageButton implements IDelayChecker {
                         Packets.sendToServer(new PerkChangePacket(school, point, PerkChangePacket.ACTION.REMOVE));
                     }
                     super.button.onClick(mouseX, mouseY);
-                    if (this.buttonIdentifier.getCurrentStatus() == PerkStatus.POSSIBLE){
+                    if (this.buttonIdentifier.getCurrentStatus() != PerkStatus.BLOCKED){
                         updateRelatedButtonStatus();
                         screen.getOptimizedState().painter.addToUpdate(this.buttonIdentifier);
                         updateRelatedRenderer();

@@ -131,7 +131,6 @@ public class PerkButtonPainter {
         while (!waitingToBePaintedQueue.isEmpty()) {
             //though use acquire() directly is ok here, but I still don't wanna block any thread.
             PainterController.paintLimiter.tryAcquire(Duration.ofNanos(300));
-            //System.out.println("paint one single button!");
             ButtonIdentifier identifier = waitingToBePaintedQueue.poll();
             HashMap<PerkStatus, List<ResourceLocation>> allNewLocation = identifier.getAllNewLocation();
             allNewLocation.forEach((k, v) -> {
@@ -162,9 +161,6 @@ public class PerkButtonPainter {
             if (!PainterController.registerLimiter.tryAcquire(Duration.ofNanos(300))){
                 break;
             }
-            //System.out.println(PainterController.registerLimiter.getRate());
-            System.out.println(waitingToBeRegisteredQueue.size());
-            //System.out.println("register one");
             PainterController.BufferedImagePack pack = waitingToBeRegisteredQueue.poll();
             ResourceLocation resourceLocation = pack.resourceLocation();
             ByteArrayOutputStream baos = new ByteArrayOutputStream();

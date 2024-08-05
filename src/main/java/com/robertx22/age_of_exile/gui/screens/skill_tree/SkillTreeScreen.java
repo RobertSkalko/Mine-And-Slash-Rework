@@ -707,7 +707,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         public void onRender(GuiGraphics gui, int x, int y, float ticks) {
             Watch watch = new Watch();
 
-
+            painter.resetRepaintSchedule();
             ctx = new PerkScreenContext(this.screen);
 
             renderBackgroundDirt(gui, this.screen, 0);
