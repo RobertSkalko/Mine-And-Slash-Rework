@@ -11,7 +11,6 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.NumberUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.OnScreenMessageUtils;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
@@ -41,6 +40,12 @@ public class PlayerProfessionsData {
     }
 
     public void addExp(Player p, String id, int exp) {
+
+        if (exp < 0) {
+            System.out.println("Tried to give minus profession exp!");
+            return;
+        }
+
         if (!map.containsKey(id)) {
             map.put(id, new Data());
         }
@@ -57,7 +62,7 @@ public class PlayerProfessionsData {
         var data = map.get(id);
         data.exp += exp;
 
-        float perc = MathHelper.clamp(((1.0f * map.get(id).exp) / (1.0f *  map.get(id).getExpNeeded()) * 100F), 0, 100);
+        float perc = MathHelper.clamp(((1.0f * map.get(id).exp) / (1.0f * map.get(id).getExpNeeded()) * 100F), 0, 100);
         OnScreenMessageUtils.actionBar((ServerPlayer) p, Gui.EXP_GAIN_PERCENT.locName(exp, ExileDB.Professions().get(id).locName(), NumberUtils.singleDigitFloat(perc)).withStyle(ChatFormatting.GREEN));
 
         if (data.canLvl() && Load.Unit(p).getLevel() > data.lvl) {
@@ -83,7 +88,7 @@ public class PlayerProfessionsData {
 
         public void levelUp() {
             int needExp = getExpNeeded();
-            while (exp >= needExp){
+            while (exp >= needExp) {
                 exp -= needExp;
                 lvl++;
                 needExp = getExpNeeded();

@@ -10,7 +10,6 @@ import com.robertx22.age_of_exile.uncommon.utilityclasses.ItemUtils;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.LivingEntity;
@@ -116,15 +115,8 @@ public class MasterLootGen {
 
         if (Load.player(killer).config.isConfigEnabled(PlayerConfigData.Config.MOB_DEATH_MESSAGES)) {
 
-            var hovertext = Component.empty();
-            hovertext.append(Words.LOOT_MODIFIERS_INFO.locName().withStyle(ChatFormatting.BLUE, ChatFormatting.BOLD).append("\n"));
-
-            for (LootModifier mod : info.lootMods) {
-                hovertext.append(mod.name.getFullName(mod.multi)).append("\n");
-            }
-
+            var hovertext = info.lootMods.getHoverText();
             var hover = new HoverEvent(HoverEvent.Action.SHOW_TEXT, hovertext);
-
             var msg = Words.MOB_KILL_LOOT_INFO_MSG.locName(victim.getDisplayName()).withStyle(ChatFormatting.GREEN);
             msg = msg.append(Words.MOB_DROPS_INFO.locName(items.size()).withStyle(Style.EMPTY.withHoverEvent(hover).applyFormats(ChatFormatting.YELLOW)));
             killer.sendSystemMessage(msg);

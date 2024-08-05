@@ -19,9 +19,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LootInfo {
 
     private LootInfo(LootOrigin lootOrigin) {
@@ -206,7 +203,7 @@ public class LootInfo {
         }
     }
 
-    public List<LootModifier> lootMods = new ArrayList<>();
+    public LootModifiersList lootMods = new LootModifiersList();
 
 
     private boolean gatheredLootMultis = false;
@@ -256,7 +253,7 @@ public class LootInfo {
             float chance = ExileEvents.SETUP_LOOT_CHANCE.callEvents(new ExileEvents.OnSetupLootChance(mobKilled, player, 1)).lootChance;
             lootMods.add(new LootModifier(LootModifierEnum.ANTI_MOB_FARM_MOD, chance));
         }
-        
+
     }
 
     // todo this doesnt have to be done 10 times per mob kill, maybe just once
@@ -266,7 +263,7 @@ public class LootInfo {
 
         this.gatherLootMultipliers();
 
-        for (LootModifier mod : this.lootMods) {
+        for (LootModifier mod : this.lootMods.all) {
             multiplicativeMod *= mod.multi;
         }
 

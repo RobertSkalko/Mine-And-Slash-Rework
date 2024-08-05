@@ -1,14 +1,22 @@
 package com.robertx22.age_of_exile.database.data.profession;
 
+import com.robertx22.age_of_exile.capability.player.data.PlayerConfigData;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.age_of_exile.database.data.profession.stat.ProfExp;
+import com.robertx22.age_of_exile.loot.LootModifier;
+import com.robertx22.age_of_exile.loot.LootModifierEnum;
+import com.robertx22.age_of_exile.loot.LootModifiersList;
 import com.robertx22.age_of_exile.saveclasses.prof_tool.ProfessionToolData;
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.datasaving.StackSaving;
+import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.temp.SkillItemTier;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.HoverEvent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
@@ -140,8 +148,10 @@ public class ExpSources {
         }
 
         public void giveExp(Player p, Profession pro) {
-            int proflvl = Load.player(p).professions.getLevel(pro.GUID());
 
+            var lootMods = new LootModifiersList();
+
+            int proflvl = Load.player(p).professions.getLevel(pro.GUID());
             float lvlmulti = MathHelper.clamp((float) proflvl / (float) getLevelOfMastery(), 0.5F, 1F);
 
             var fx = LevelUtils.scaleExpReward(exp, Load.player(p).professions.getLevel(pro.id));
@@ -153,13 +163,32 @@ public class ExpSources {
                 lowRecipeLvlPenalty -= (diff * GameBalanceConfig.get().PROFESSION_EXP_PENALTY_PER_LOWER_LEVEL);
             }
 
+
+            lootMods.add(new LootModifier(LootModifierEnum.PROFESSION_BONUS_STAT, Load.Unit(p).getUnit().getCalculatedStat(new ProfExp(pro.id)).getMultiplier()));
+            lootMods.add(new LootModifier(LootModifierEnum.LEVEL_DISTANCE_PENALTY, lvlmulti));
+            lootMods.add(new LootModifier(LootModifierEnum.LOW_LEVEL_RECIPE_PENALTY, lowRecipeLvlPenalty));
+
             fx *= Load.Unit(p).getUnit().getCalculatedStat(new ProfExp(pro.id)).getMultiplier();
             fx *= lvlmulti;
             fx *= lowRecipeLvlPenalty;
 
-            levelTool(p, pro, fx);
 
+            for (LootModifier mod : lootMods.all) {
+                fx *= mod.multi;
+            }
+
+            levelTool(p, pro, fx);
             Load.player(p).professions.addExp(p, pro.GUID(), fx);
+
+
+            if (Load.player(p).config.isConfigEnabled(PlayerConfigData.Config.PROFESSION_MESSAGES)) {
+                var hovertext = lootMods.getHoverText();
+                var hover = new HoverEvent(HoverEvent.Action.SHOW_TEXT, hovertext);
+
+                var text = Gui.PROF_EXP_GAIN_CHAT.locName(fx, pro.locName());
+                text.setStyle(Style.EMPTY.withHoverEvent(hover)).withStyle(ChatFormatting.GREEN);
+                p.sendSystemMessage(text);
+            }
         }
 
 

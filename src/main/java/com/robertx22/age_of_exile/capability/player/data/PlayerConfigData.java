@@ -23,6 +23,7 @@ public class PlayerConfigData {
         CAST_FAIL("cast_fail_messages", true, Words.CAST_FAIL_MSGS, false),
         MOB_DEATH_MESSAGES("mob_death_messages", false, Words.MOB_DEATH_MESSAGES, false),
         DAMAGE_MESSAGES("damage_messages", false, Words.DAMAGE_MESSAGES, false),
+        PROFESSION_MESSAGES("profession_exp_messages", false, Words.PROFESSION_MESSAGES, false),
         AUTO_PVE("auto_pve", false, Words.AUTOMATIC_PVE, false),
         AGGRESSIVE_SUMMONS("aggressive_summons", true, Words.AGGRESIVE_SUMMONS, false),
         STAT_ORDER_TEST("stat_order_test", false, Words.STAT_ORDER_TEST, true),

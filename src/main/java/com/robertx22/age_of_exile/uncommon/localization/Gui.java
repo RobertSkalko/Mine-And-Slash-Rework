@@ -8,6 +8,7 @@ import java.util.Locale;
 
 public enum Gui implements IAutoLocName {
     EXP_GAIN_PERCENT("+%1$s %2$s Exp (%3$s%%)"),
+    PROF_EXP_GAIN_CHAT("+%1$s %2$s Exp"),
     RESTED_COMBAT_EXP("Rested Combat Exp: "),
     RESTED_PROF_EXP("Rested Prof. Exp: "),
 

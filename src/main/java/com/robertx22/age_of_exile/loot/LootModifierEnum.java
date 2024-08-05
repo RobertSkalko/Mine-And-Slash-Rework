@@ -9,6 +9,10 @@ import net.minecraft.network.chat.MutableComponent;
 import java.util.Locale;
 
 public enum LootModifierEnum implements IAutoLocName {
+    PROFESSION_BONUS_STAT("Profession Bonus Stat"),
+    LOW_LEVEL_RECIPE_PENALTY("Low-LVL Recipe penalty"),
+
+
     MAP_CHEST("Map Chest"),
     CHEST("Chest"),
     BREAK_SPAWNER("Break Spawner"),
