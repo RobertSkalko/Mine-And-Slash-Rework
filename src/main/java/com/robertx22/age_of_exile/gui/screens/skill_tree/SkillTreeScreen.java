@@ -17,13 +17,11 @@ import com.robertx22.age_of_exile.gui.bases.INamedScreen;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkButton;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkPointPair;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.TreeOptimizationHandler;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.animation.AnimationConstructor;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.AllPerkButtonPainter;
-import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.ButtonIdentifier;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.connections.PerkConnectionCache;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.connections.PerkConnectionRenderer;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkScreenContext;
-import com.robertx22.age_of_exile.gui.screens.skill_tree.delaycheck.ButtonStatusUpdateTask;
-import com.robertx22.age_of_exile.gui.screens.skill_tree.delaycheck.RendererUpdateTask;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.opacity.OpacityController;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.mmorpg.SlashRef;
@@ -32,7 +30,6 @@ import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Gui;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.library_of_exile.utils.Watch;
-import it.unimi.dsi.fastutil.ints.Int2ReferenceOpenHashMap;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -666,10 +663,15 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         public AllPerkButtonPainter painter;
 
         public SearchHandler searchHandler;
+        public AnimationConstructor animationHandler;
+        private boolean animationDone = false;
+        public static float startWithZoom = 0.2f;
+        public static float startWithTargetZoom = 0.15f;
 
         public OptimizedState(SkillTreeScreen screen) {
             super(screen);
             this.painter = AllPerkButtonPainter.getPainter(schoolType);
+            this.animationHandler = new AnimationConstructor(screen);
         }
 
         @Override
@@ -686,6 +688,10 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                 PerkConnectionCache.init(this.screen);
 
                 painter.onSkillScreenOpen(this.screen.pointPerkButtonMap.values().stream().map(x -> x.getOptimizedState().buttonIdentifier).toList());
+
+                zoom = startWithZoom;
+                targetZoom = startWithTargetZoom;
+                canSmoothHandleZoom = true;
 
                 goToCenter();
             } catch (Exception e) {
@@ -742,6 +748,8 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
 
                 this.screen.renderConnections(gui);
 
+
+
                 if (painter.isAllowedToPaint()) {
                     int connectionX = (int) (addx + scrollX);
                     int connectionY = (int) (addy + scrollY);
@@ -750,13 +758,23 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                     List<AllPerkButtonPainter.ResourceLocationAndSize> locations = painter.getCurrentPaintings();
                     int i = 0;
 
-                    gui.setColor(1.0f, 1.0f, 1.0f, opacityController.getWholeImage());
-                    for (AllPerkButtonPainter.ResourceLocationAndSize location : locations) {
-
-                        gui.blit(location.location(), startX + i * location.width() + connectionX, startY + connectionY, 0, 0, location.width(), location.height(), location.width(), location.height());
-                        i++;
+                    if (!animationHandler.isLoaded){
+                        System.out.println("init animation");
+                        animationHandler.load(locations, gui, startX, startY, connectionX, connectionY);
                     }
-                    gui.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+                    if (!this.animationDone && !this.animationHandler.isAllDone()) {
+                        this.animationHandler.play();
+                    } else {
+                        this.animationDone = true;
+                        gui.setColor(1.0f, 1.0f, 1.0f, opacityController.getWholeImage());
+                        for (AllPerkButtonPainter.ResourceLocationAndSize location : locations) {
+
+                            gui.blit(location.location(), startX + i * location.width() + connectionX, startY + connectionY, 0, 0, location.width(), location.height(), location.width(), location.height());
+                            i++;
+                        }
+                        gui.setColor(1.0f, 1.0f, 1.0f, 1.0f);
+                    }
 
                 }
                 ticks++;
@@ -817,6 +835,11 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         @Override
         public void onClose() {
             super.onClose();
+            targetZoom = 0.0f;
+            targetScrollX = 0;
+            targetScrollY = 0;
+            canSmoothHandleZoom = false;
+            canSmoothHandleScroll = false;
         }
 
         @Override
