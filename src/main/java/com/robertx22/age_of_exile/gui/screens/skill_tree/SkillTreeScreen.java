@@ -656,17 +656,16 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
     public class OptimizedState extends SkillTreeState {
         private int targetScrollX;
         private int targetScrollY;
-        private boolean canSmoothHandleScroll;
-        private boolean canSmoothHandleZoom;
-
+        private boolean canSmoothHandleScroll = true;
+        private boolean canSmoothHandleZoom = true;
 
         public AllPerkButtonPainter painter;
 
         public SearchHandler searchHandler;
         public AnimationConstructor animationHandler;
         private boolean animationDone = false;
-        public static float startWithZoom = 0.2f;
-        public static float startWithTargetZoom = 0.15f;
+        public final float startWithZoom = 0.2f;
+        public final float startWithTargetZoom = 0.15f;
 
         public OptimizedState(SkillTreeScreen screen) {
             super(screen);
@@ -759,7 +758,6 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                     int i = 0;
 
                     if (!animationHandler.isLoaded){
-                        System.out.println("init animation");
                         animationHandler.load(locations, gui, startX, startY, connectionX, connectionY);
                     }
 
@@ -835,7 +833,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         @Override
         public void onClose() {
             super.onClose();
-            targetZoom = 0.0f;
+            targetZoom = 0.15f;
             targetScrollX = 0;
             targetScrollY = 0;
             canSmoothHandleZoom = false;

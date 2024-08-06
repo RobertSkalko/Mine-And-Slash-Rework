@@ -5,6 +5,7 @@ import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkButton;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
 // we don't want to run the String contain check on each perk button, handle it by using this class instead, because it will bring us some performance benefits
@@ -90,12 +91,24 @@ public class SearchHandler {
                 }
             }
         }
-        //cuz this method is so long, value may sometimes change in this handle process.
-        //but really? I think this is the cause of that bug but I can't confirm.
-        if (!value.equals(thisTimeSearch)) return;
-        lastTimeSearch = thisTimeSearch;
-        searchHistory.put(thisTimeSearch, new HashSet<>(qualifiedButtons));
+        CompletableFuture.runAsync(this::validateAndAddToHistory);
 
+    }
+
+    private void validateAndAddToHistory() {
+        boolean isRight = true;
+        Iterator<PerkButton> iterator = qualifiedButtons.iterator();
+        while (iterator.hasNext()) {
+            PerkButton next = iterator.next();
+            if (next.getOptimizedState().matchStrings.stream().noneMatch(x -> x.contains(thisTimeSearch)) && !next.perk.locName().getString().toLowerCase().contains(thisTimeSearch)) {
+                isRight = false;
+                break;
+            }
+        }
+        if (isRight){
+            lastTimeSearch = thisTimeSearch;
+            searchHistory.put(thisTimeSearch, qualifiedButtons);
+        }
     }
 
     public boolean checkThisButtonIsSearchResult(PerkButton button) {

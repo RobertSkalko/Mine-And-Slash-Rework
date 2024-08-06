@@ -3,6 +3,7 @@ package com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.platform.Window;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
+import com.robertx22.age_of_exile.database.data.perks.PerkStatus;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.age_of_exile.event_hooks.ontick.OnClientTick;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.ExileTreeTexture;
@@ -268,6 +269,7 @@ public class AllPerkButtonPainter {
             int minY = 10000;
             // prefer a little multi.
             float singleButtonZoom = 1.4f;
+            AlphaComposite alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.9f);
             while (!waitingToBePainted.isEmpty()) {
                 if (Thread.currentThread().isInterrupted()) {
                     return null;
@@ -286,11 +288,17 @@ public class AllPerkButtonPainter {
                     Thread.sleep(1000);
                     continue;
                 }
-
+                //make it a little smaller than vanilla button size, otherwise this button can be covered when we need vanilla button to be rendered.
                 int singleButtonSize = (int) (type.size * singleButtonZoom + 1);
                 BufferedImage redesignSingleButton = new BufferedImage(singleButtonSize, singleButtonSize, BufferedImage.TYPE_INT_ARGB);
                 Graphics2D redesignSingleButtonGraphics = redesignSingleButton.createGraphics();
 
+                /*redesignSingleButtonGraphics.setRenderingHint(java.awt.RenderingHints.KEY_INTERPOLATION,
+                        java.awt.RenderingHints.VALUE_INTERPOLATION_BILINEAR);*/
+
+                if (identifier.getCurrentStatus() == PerkStatus.BLOCKED){
+                    redesignSingleButtonGraphics.setComposite(alphaComposite);
+                }
                 redesignSingleButtonGraphics.drawImage(singleButton, 0, 0, singleButtonSize, singleButtonSize, null);
 
                 redesignSingleButtonGraphics.dispose();
