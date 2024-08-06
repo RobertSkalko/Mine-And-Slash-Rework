@@ -10,11 +10,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum GuiPosition {
+    NONE {
+        @Override
+        public List<GuiPartConfig> getGuiConfig(EntityData data, Player p) {
+            List<GuiPartConfig> middle = new ArrayList<>();
+            return middle;
+        }
 
+        @Override
+        public PointData getPos() {
+            return new PointData(mc().getWindow().getGuiScaledWidth() / 2, mc().getWindow().getGuiScaledHeight());
+        }
+    },
     BOTTOM_CENTER {
         @Override
         public List<GuiPartConfig> getGuiConfig(EntityData data, Player p) {
-            
+
             List<GuiPartConfig> middle = new ArrayList<>();
             middle.add(new GuiPartConfig(BarGuiType.HEALTH, new PointData(-198, -22)));
             middle.add(new GuiPartConfig(BarGuiType.EXP, new PointData(-198, -11)));

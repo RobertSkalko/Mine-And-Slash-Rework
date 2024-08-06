@@ -284,3 +284,17 @@ It won't actually tell you what's wrong but for now it just tells you SOMETHING 
 
     datapacks now default to loader = "REPLACE_FULLY", if you want to only replace some values, use REPLACE_FIELDS Full replace means it loads the json and turns it into a new class. Replace fields means it only replaces the fields you put in the json
 
+v.5.5.28
+- added SPELL_PARTICLE_MULTI client config, with this you can lower particle amount if your PC can't handle the FPS lag. Note: this won't improve server performance.
+Also added DONT_CULL_PARTICLES_UNDER , this defaults to 50 which means it only reduces particles on spells that add a lot of them at once
+- added warning if Mo' Enchantments is installed. It's a closed source mc-creator mod that breaks my Item NBTs..
+- changelogs now only contain the actual update patchnotes but also come with a link to saved patchnotes of all updates of the current big version
+- league mechanics like prophecy were meant to give a random unique-including the league uniques, but were only giving prophecy uniques
+- skeleton summon proj now despawn after 15s
+- mobs should now heal normally by % hp 
+- summoned mobs now should despawn properly (you could unload their chunk and reload them to have infinite summon duration)
+- prof mat items now say where they are gotten from
+- professions now have descriptions on the mat items
+- improved supp gem tooltips a bit
+- added prof exp chat messages feature with extra info
+- added NONE gui pos

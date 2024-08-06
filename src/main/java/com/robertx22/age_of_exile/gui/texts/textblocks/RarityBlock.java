@@ -21,7 +21,8 @@ public class RarityBlock extends AbstractTextBlock {
     @Override
     public List<? extends Component> getAvailableComponents() {
 
-        return ImmutableList.of(Itemtips.RARITY_LINE.locName(rarity.locName().withStyle(rarity.textFormatting())).withStyle(rarity.textFormatting()));
+        return ImmutableList.of(Component.literal("").withStyle(rarity.textFormatting()).append(
+                Itemtips.RARITY_LINE.locName(rarity.locName().withStyle(rarity.textFormatting())).withStyle(rarity.textFormatting())));
     }
 
     @Override

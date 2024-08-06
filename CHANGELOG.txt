@@ -13,3 +13,4 @@ Also added DONT_CULL_PARTICLES_UNDER , this defaults to 50 which means it only r
 - professions now have descriptions on the mat items
 - improved supp gem tooltips a bit
 - added prof exp chat messages feature with extra info
+- added NONE gui pos

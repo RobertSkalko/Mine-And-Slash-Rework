@@ -70,7 +70,7 @@ public class MMORPG {
 
 
     // DISABLE WHEN PUBLIC BUILD
-    public static boolean RUN_DEV_TOOLS = true;
+    public static boolean RUN_DEV_TOOLS = false;
 
     public static String formatNumber(float num) {
 
@@ -226,7 +226,7 @@ public class MMORPG {
 
     }
 
- 
+
     public static void devToolsErrorLog(String string) {
         if (RUN_DEV_TOOLS) {
             try {
