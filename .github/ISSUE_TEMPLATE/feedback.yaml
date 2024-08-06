@@ -1,0 +1,16 @@
+name: Suggestion
+description: Post a Suggestion
+title: "[SUGGESTION]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for giving suggestions!
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Tell us about your Suggestion
+      description: Please make sure it's not a duplicate of an existing Suggestion
+      placeholder: I want potatoes
+    validations:
+      required: true
