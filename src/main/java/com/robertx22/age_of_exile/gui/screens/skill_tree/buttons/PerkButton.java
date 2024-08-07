@@ -334,7 +334,7 @@ public class PerkButton extends ImageButton implements IDelayChecker {
         @Override
         public void onRenderWidget(GuiGraphics gui, int mouseX, int mouseY, float pPartialTick) {
             if (!screen.shouldRender(getX(), getY(), screen.ctx)) return;
-
+            if (!screen.getOptimizedState().isAnimationDone()) return;
 
             setTooltipMOD(gui, mouseX, mouseY);
 

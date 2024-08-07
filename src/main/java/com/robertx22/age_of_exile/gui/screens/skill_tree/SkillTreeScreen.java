@@ -673,6 +673,10 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
             this.animationHandler = new AnimationConstructor(screen);
         }
 
+        public boolean isAnimationDone() {
+            return animationDone;
+        }
+
         @Override
         public void onInit() {
             try {
