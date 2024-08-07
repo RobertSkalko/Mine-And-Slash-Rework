@@ -5,6 +5,8 @@ import com.robertx22.age_of_exile.uncommon.enumclasses.PlayerGUIs;
 import net.minecraftforge.common.ForgeConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.Locale;
+
 public class ClientConfigs {
 
     public static final ForgeConfigSpec clientSpec;
@@ -20,7 +22,8 @@ public class ClientConfigs {
 
         b.comment("Client Configs")
                 .push("general");
-
+        PAINTED_TEXTURE_REGISTER_SPEED = b.defineInRange("painted_texture_register_speed", 1000D, 1, 10000D);
+        ENABLE_SKILL_TREE_OPTIMIZATION = b.define("enable_talent_tree_optimization", true);
 
         SHOW_LOW_ENERGY_MANA_WARNING = b.define("show_low_mana_warning", true);
         RENDER_SIMPLE_MOB_BAR = b.define("render_mob_bar", true);
@@ -52,7 +55,7 @@ public class ClientConfigs {
 
         b.pop();
     }
-
+    public ForgeConfigSpec.DoubleValue PAINTED_TEXTURE_REGISTER_SPEED;
     public ForgeConfigSpec.BooleanValue SHOW_LOW_ENERGY_MANA_WARNING;
     public ForgeConfigSpec.BooleanValue ENABLE_FLOATING_DMG;
     public ForgeConfigSpec.BooleanValue RENDER_SIMPLE_MOB_BAR;
@@ -75,6 +78,8 @@ public class ClientConfigs {
     public ForgeConfigSpec.DoubleValue DONT_CULL_PARTICLES_UNDER;
 
     public ForgeConfigSpec.IntValue REMOVE_EMPTY_TOOLTIP_LINES_IF_MORE_THAN_X_LINES;
+
+    public ForgeConfigSpec.BooleanValue ENABLE_SKILL_TREE_OPTIMIZATION;
 
 
     public enum GlintType {

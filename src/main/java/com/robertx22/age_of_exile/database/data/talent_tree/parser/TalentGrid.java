@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.database.data.talent_tree.parser;
 
+import com.google.common.collect.ImmutableMap;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.library_of_exile.utils.Watch;
 
@@ -60,21 +61,39 @@ public class TalentGrid {
 
         Watch fast2 = new Watch().min(1);
         // this can take a long time if the "hasPath" checks aren't minimized
-        perks
-                .forEach(one -> {
-                    Set<String> connectorTypes = getConnectorTypes(one);
-                    perks
-                            .forEach(two -> {
-                                if (!school.calcData.isConnected(one.getPoint(), two.getPoint())) {
-                                    if (one.isInDistanceOf(two)) {
-                                        if (hasPath(one, two, connectorTypes)) {
-                                            this.school.calcData.addConnection(one.getPoint(), two.getPoint());
-                                        }
+        if (perks.size() < 400){
+            perks.forEach(one -> {
+                Set<String> connectorTypes = getConnectorTypes(one);
+                perks
+                        .forEach(two -> {
+                            if (!school.calcData.isConnected(one.getPoint(), two.getPoint())) {
+                                if (one.isInDistanceOf(two)) {
+                                    if (hasPath(one, two, connectorTypes)) {
+                                        this.school.calcData.addConnection(one.getPoint(), two.getPoint());
                                     }
                                 }
-                            });
+                            }
+                        });
 
-                });
+            });
+
+        } else {
+            perks.parallelStream().forEach(one -> {
+                Set<String> connectorTypes = getConnectorTypes(one);
+                perks
+                        .forEach(two -> {
+                            if (!school.calcData.isConnected(one.getPoint(), two.getPoint())) {
+                                if (one.isInDistanceOf(two)) {
+                                    if (hasPath(one, two, connectorTypes)) {
+                                        this.school.calcData.addConnection(one.getPoint(), two.getPoint());
+                                    }
+                                }
+                            }
+                        });
+
+            });
+
+        }
 
         fast2.print(" Connecting talent tree ");
 

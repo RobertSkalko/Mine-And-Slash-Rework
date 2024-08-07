@@ -38,10 +38,20 @@ public class PointData {
 
     @Override
     public int hashCode() {
-        long bits = java.lang.Double.doubleToLongBits(x);
-        bits ^= java.lang.Double.doubleToLongBits(y) * 31;
-        return (((int) bits) ^ ((int) (bits >> 32)));
+        long bitsX = Double.doubleToLongBits(x);
+        long bitsY = Double.doubleToLongBits(y);
+
+        long h = bitsX ^ (bitsY * 31);
+        h = (h >>> 32) ^ h;
+        h = h * 0x27d4eb2d;
+        h = h ^ (h >>> 33);
+        h = h * 0x165667b1;
+        h = h ^ (h >>> 31);
+
+        return (int) (h ^ (h >>> 32));
     }
+
+
 
     @Override
     public boolean equals(Object obj) { // otherwise hashmaps dont work

@@ -34,6 +34,10 @@ public class TalentsData implements IStatCtx {
         return perks.computeIfAbsent(type, x -> new SchoolData()); // todo check if this works how i think it should
     }
 
+    public HashMap<TalentTree.SchoolType, SchoolData> getPerks() {
+        return perks;
+    }
+
     public void allocate(Player player, TalentTree school, PointData point) {
         getSchool(school.getSchool_type()).allocate(point);
     }
