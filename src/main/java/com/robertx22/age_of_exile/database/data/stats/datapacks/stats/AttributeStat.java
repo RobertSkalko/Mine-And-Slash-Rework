@@ -24,12 +24,13 @@ public class AttributeStat extends BaseDatapackStat {
     public AttributeModifier.Operation operation = AttributeModifier.Operation.ADDITION;
     public boolean cut_by_hundred = true;
 
-    public AttributeStat(String id, String locname, UUID uuid, Attribute attribute, boolean perc, AttributeModifier.Operation operation) {
+    public AttributeStat(String id, String locname, UUID uuid, Attribute attribute, boolean perc, AttributeModifier.Operation operation, boolean cut) {
         super(SER_ID);
         this.id = id;
         this.operation = operation;
         this.locname = locname;
         this.uuid = uuid;
+        this.cut_by_hundred = cut;
         this.attributeId = BuiltInRegistries.ATTRIBUTE.getKey(attribute)
                 .toString();
         this.attribute = attribute;

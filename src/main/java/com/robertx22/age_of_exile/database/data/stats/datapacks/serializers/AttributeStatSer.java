@@ -18,8 +18,8 @@ public class AttributeStatSer implements IStatSerializer<AttributeStat> {
         json.addProperty("attribute_id", obj.attributeId);
         json.addProperty("uuid", obj.uuid.toString());
         json.addProperty("operation", obj.operation.name());
+        json.addProperty("cut_by_hundred", obj.cut_by_hundred);
 
-        
         this.saveBaseStatValues(obj, json);
         return json;
     }
@@ -27,16 +27,17 @@ public class AttributeStatSer implements IStatSerializer<AttributeStat> {
     @Override
     public AttributeStat getStatFromJson(JsonObject json) {
 
-        ResourceLocation ide = new ResourceLocation(json.get("attribute_id")
-                .getAsString());
+        ResourceLocation ide = new ResourceLocation(json.get("attribute_id").getAsString());
 
         Attribute attri = BuiltInRegistries.ATTRIBUTE.get(ide);
 
         var oper = AttributeModifier.Operation.valueOf(json.get("operation").getAsString());
 
+        boolean cut = json.get("cut_by_hundred").getAsBoolean();
+
         AttributeStat stat = new AttributeStat("", "", UUID.fromString(json.get("uuid")
                 .getAsString()), attri, false,
-                oper); // percent and id is loaded by basevalues
+                oper, cut); // percent and id is loaded by basevalues
 
         this.loadBaseStatValues(stat, json);
         return stat;

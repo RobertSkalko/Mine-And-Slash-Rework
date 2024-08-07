@@ -5,13 +5,21 @@ import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.localization.Chats;
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.library_of_exile.utils.Watch;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.HoverEvent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.ModList;
+
+import java.util.Map;
+import java.util.Set;
 
 public class OnLogin {
 
@@ -24,6 +32,9 @@ public class OnLogin {
         }
 
         try {
+
+
+
 
 
             /*
@@ -40,6 +51,7 @@ public class OnLogin {
                 player.sendSystemMessage(Component.literal("[WARNING] You have Mo' Enchantments mod installed, which currently has a bug and makes Mine and Slash NBT on items break!!! It's recommended to remove the mod, until the issue is fixed."));
             }
 
+
             if (!player.getServer()
                     .isCommandBlockEnabled()) {
                 player.displayClientMessage(Chats.COMMAND_BLOCK_UNAVALIABLE.locName().withStyle(ChatFormatting.RED), false);
@@ -54,6 +66,49 @@ public class OnLogin {
             EntityData data = Load.Unit(player);
 
             data.onLogin(player);
+
+            if (!JsonExileRegistry.NOT_LOADED_JSONS_MAP.isEmpty()) {
+                int count = 0;
+                String hovertext = "";
+                for (Map.Entry<ExileRegistryType, Set<ResourceLocation>> en : JsonExileRegistry.NOT_LOADED_JSONS_MAP.entrySet()) {
+                    for (ResourceLocation s : en.getValue()) {
+                        hovertext += en.getKey().id + ": " + s.toString() + "\n";
+                        count++;
+                    }
+                }
+
+                var hover = new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal(hovertext));
+
+                player.sendSystemMessage(Component.literal("Mine and Slash Datapack Error: " + count + " Jsons errored while loading.").withStyle(
+                        Style.EMPTY.withHoverEvent(hover)
+                ));
+
+            }
+            // idk if this one is ever called, but better be safe
+            if (!JsonExileRegistry.INVALID_JSONS_MAP.isEmpty()) {
+                int count = 0;
+
+                String hovertext = "";
+                for (Map.Entry<ExileRegistryType, Set<String>> en : JsonExileRegistry.INVALID_JSONS_MAP.entrySet()) {
+                    for (String s : en.getValue()) {
+                        hovertext += en.getKey().id + ": " + s + "\n";
+                        count++;
+                    }
+                }
+
+                var hover = new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal(hovertext));
+
+                player.sendSystemMessage(Component.literal("Mine and Slash Datapack Error: " + count + " Jsons were marked as invalid with automatic error checking.").withStyle(
+                        Style.EMPTY.withHoverEvent(hover)
+                ));
+            }
+
+            if (!JsonExileRegistry.INVALID_JSONS_MAP.isEmpty() || !JsonExileRegistry.NOT_LOADED_JSONS_MAP.isEmpty()) {
+
+                player.sendSystemMessage(Component.literal("Check the log file for more info. Note, this is still an experimental error checking feature. " +
+                        "It won't tell you exactly where the problem is, but you can use a json diff checker linked in the log file to easily compare and see the error."));
+
+            }
 
             data.sync.setDirty();
 
