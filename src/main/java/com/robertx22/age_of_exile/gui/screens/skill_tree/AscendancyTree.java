@@ -25,6 +25,6 @@ public class AscendancyTree extends SkillTreeScreen {
 
     @Override
     public boolean shouldAlert() {
-        return Load.player(ClientOnly.getPlayer()).talents.hasFreePoints(Load.Unit(ClientOnly.getPlayer()), TalentTree.SchoolType.ASCENDANCY);
+        return Load.player(ClientOnly.getPlayer()).talents.hasFreePoints(ClientOnly.getPlayer(), TalentTree.SchoolType.ASCENDANCY);
     }
 }

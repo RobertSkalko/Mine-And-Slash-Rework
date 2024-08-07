@@ -42,8 +42,6 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
     transient ResourceLocation cachedIcon = null;
 
     public SpellSchoolsData.PointType getPointType() {
-
-
         return isSpell() ? SpellSchoolsData.PointType.SPELL : SpellSchoolsData.PointType.PASSIVE;
     }
 

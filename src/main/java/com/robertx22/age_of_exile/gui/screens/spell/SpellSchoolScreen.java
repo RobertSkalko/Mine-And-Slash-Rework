@@ -1,5 +1,6 @@
 package com.robertx22.age_of_exile.gui.screens.spell;
 
+import com.robertx22.age_of_exile.database.data.game_balance_config.PlayerPointsType;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -154,10 +155,10 @@ public class SpellSchoolScreen extends BaseScreen implements INamedScreen, ILeft
 
             super.render(gui, x, y, ticks);
 
-            String txt = Gui.SPELL_POINTS.locName().append(String.valueOf(Load.player(mc.player).ascClass.getFreeSpellPoints(mc.player))).getString();
+            String txt = Gui.SPELL_POINTS.locName().append(String.valueOf(PlayerPointsType.SPELLS.getFreePoints(mc.player))).getString();
             GuiUtils.renderScaledText(gui, guiLeft + 50, guiTop + 215, 1, txt, ChatFormatting.WHITE);
 
-            String tx2 = Gui.PASSIVE_POINTS.locName().append(String.valueOf(Load.player(mc.player).ascClass.getFreePassivePoints(mc.player))).getString();
+            String tx2 = Gui.PASSIVE_POINTS.locName().append(String.valueOf(PlayerPointsType.PASSIVES.getFreePoints(mc.player))).getString();
             GuiUtils.renderScaledText(gui, guiLeft + 195, guiTop + 215, 1, tx2, ChatFormatting.WHITE);
 
             //buttons.forEach(b -> b.renderToolTip(matrix, x, y));
@@ -187,6 +188,7 @@ public class SpellSchoolScreen extends BaseScreen implements INamedScreen, ILeft
 
     @Override
     public boolean shouldAlert() {
-        return Load.player(ClientOnly.getPlayer()).ascClass.hasFreeAnyPoints(ClientOnly.getPlayer());
+        var p = ClientOnly.getPlayer();
+        return PlayerPointsType.SPELLS.hasFreePoints(p) || PlayerPointsType.PASSIVES.hasFreePoints(p);
     }
 }

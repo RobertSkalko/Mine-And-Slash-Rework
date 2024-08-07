@@ -1,4 +1,4 @@
-package com.robertx22.age_of_exile.vanilla_mc.commands.wrapper;
+package com.robertx22.age_of_exile.vanilla_mc.new_commands.wrapper;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
@@ -11,15 +11,22 @@ import com.robertx22.library_of_exile.registry.IGUID;
 import net.minecraft.commands.CommandSourceStack;
 
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import static net.minecraft.commands.Commands.argument;
 
 public class StringWrapper extends ArgumentWrapper<String> {
-    
+
+    public StringWrapper(String argName, Supplier<List<String>> sugg) {
+        super(argName);
+        this.suggests(sugg);
+    }
+
+
     @Override
     public String getter(CommandContext<CommandSourceStack> ctx) {
-        return StringArgumentType.getString(ctx, id());
+        return StringArgumentType.getString(ctx, argName);
     }
 
     @Override
@@ -29,7 +36,7 @@ public class StringWrapper extends ArgumentWrapper<String> {
 
     @Override
     public RequiredArgumentBuilder getType() {
-        var b = argument(id(), StringArgumentType.string());
+        var b = argument(argName, StringArgumentType.string());
         return b;
     }
 

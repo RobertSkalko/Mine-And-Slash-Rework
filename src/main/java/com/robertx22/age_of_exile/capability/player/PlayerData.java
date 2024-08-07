@@ -88,6 +88,7 @@ public class PlayerData implements ICap {
     private static final String NAME = "name";
     private static final String CHARACTERS = "chars";
     private static final String BONUS_TALENTS = "btal";
+    private static final String POINTS = "points";
 
     public DirtySync playerDataSync = new DirtySync("playerdata_sync", x -> syncData());
 
@@ -112,6 +113,7 @@ public class PlayerData implements ICap {
     public PlayerProfessionsData professions = new PlayerProfessionsData();
     public PlayerBuffData buff = new PlayerBuffData();
     public RestedExpData rested_xp = new RestedExpData();
+    public PlayerPointsData points = new PlayerPointsData();
 
     private MyInventory skillGemInv = new MyInventory(GemInventoryHelper.TOTAL_SLOTS);
     private MyInventory auraInv = new MyInventory(GemInventoryHelper.TOTAL_AURAS);
@@ -155,6 +157,7 @@ public class PlayerData implements ICap {
         LoadSave.Save(buff, nbt, BUFFS);
         LoadSave.Save(rested_xp, nbt, RESTED_XP);
         LoadSave.Save(characters, nbt, CHARACTERS);
+        LoadSave.Save(points, nbt, POINTS);
         // LoadSave.Save(ctxStats, nbt, "ctx");
 
         nbt.put(GEMS, skillGemInv.createTag());
@@ -183,6 +186,7 @@ public class PlayerData implements ICap {
         this.professions = loadOrBlank(PlayerProfessionsData.class, new PlayerProfessionsData(), nbt, PROFESSIONS, new PlayerProfessionsData());
         this.buff = loadOrBlank(PlayerBuffData.class, new PlayerBuffData(), nbt, BUFFS, new PlayerBuffData());
         this.rested_xp = loadOrBlank(RestedExpData.class, new RestedExpData(), nbt, RESTED_XP, new RestedExpData());
+        this.points = loadOrBlank(PlayerPointsData.class, new PlayerPointsData(), nbt, POINTS, new PlayerPointsData());
         this.characters = loadOrBlank(CharStorageData.class, new CharStorageData(), nbt, CHARACTERS, new CharStorageData());
         // this.ctxStats = loadOrBlank(SavedStatCtxList.class, new SavedStatCtxList(), nbt, "ctx", new SavedStatCtxList());
 

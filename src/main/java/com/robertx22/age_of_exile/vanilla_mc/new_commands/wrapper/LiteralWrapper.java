@@ -1,4 +1,4 @@
-package com.robertx22.age_of_exile.vanilla_mc.commands.wrapper;
+package com.robertx22.age_of_exile.vanilla_mc.new_commands.wrapper;
 
 public class LiteralWrapper {
 

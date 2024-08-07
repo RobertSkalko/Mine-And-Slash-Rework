@@ -1,4 +1,4 @@
-package com.robertx22.age_of_exile.vanilla_mc.commands.wrapper;
+package com.robertx22.age_of_exile.vanilla_mc.new_commands.wrapper;
 
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
@@ -12,11 +12,15 @@ import static net.minecraft.commands.Commands.argument;
 public class EntityWrapper extends ArgumentWrapper<Entity> {
 
 
+    public EntityWrapper() {
+        super("entity");
+    }
+
     @Override
     public Entity getter(CommandContext<CommandSourceStack> ctx) {
         Entity en = null;
         try {
-            en = EntityArgument.getEntity(ctx, id());
+            en = EntityArgument.getEntity(ctx, argName);
         } catch (CommandSyntaxException e) {
             e.printStackTrace();
         }
@@ -34,7 +38,7 @@ public class EntityWrapper extends ArgumentWrapper<Entity> {
 
     @Override
     public RequiredArgumentBuilder getType() {
-        return argument(id(), EntityArgument.entity());
+        return argument(argName, EntityArgument.entity());
     }
 
 }

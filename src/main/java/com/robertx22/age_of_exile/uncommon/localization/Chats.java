@@ -87,8 +87,9 @@ public enum Chats implements IAutoLocName {
     BE_UNIQUE("The item must be of unique rarity."),
     DESTROYS_OUTPUT("When Placed in a Profession Station with other inputs/materials, it will make all recipes produced give 3X the EXP but it will destroy the output."),
     CANT_GO_ABOVE("Can't upgrade past %1$s"),
-    AWARDED_TALENTS("You have been rewarded %1$s Talent Points."),
-    FAILED_TO_AWARD_TALENTS("Failed to give more talent points, you have reached the cap. The maximum allowed bonus talent points is controlled by the config file."),
+    AWARDED_POINTS("You have been rewarded %1$s %2$s Points."),
+    RESET_POINTS("Your %1$s Points were reset."),
+    FAILED_TO_AWARD_POINTS("Failed to give more %1$s points, you have reached the cap. The maximum allowed bonus talent points is %2$s. This is controlled by the Game balance datapack"),
 
     NEED_PEARL("You need to have at least one %1$s in your inventory to enter."),
     LEVEL_EXPLANATION("Your player level, otherwise known as your Mine and Slash level."),

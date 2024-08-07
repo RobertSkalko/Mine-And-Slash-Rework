@@ -32,6 +32,8 @@ import com.robertx22.age_of_exile.aoe_data.database.unique_gears.UniqueGearReg;
 import com.robertx22.age_of_exile.content.ubers.UberBosses;
 import com.robertx22.age_of_exile.database.data.aura.AuraGems;
 import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
+import com.robertx22.age_of_exile.database.data.game_balance_config.PlayerPointsConfig;
+import com.robertx22.age_of_exile.database.data.game_balance_config.PlayerPointsType;
 import com.robertx22.age_of_exile.database.data.map_affix.MapAffixes;
 import com.robertx22.age_of_exile.database.data.profession.all.ProfessionRecipes;
 import com.robertx22.age_of_exile.database.data.profession.all.Professions;
@@ -111,6 +113,11 @@ public class GeneratedData {
         UberBosses.init();
 
         GameBalanceConfig c = new GameBalanceConfig();
+        c.player_points.put(PlayerPointsType.TALENTS, new PlayerPointsConfig(PlayerPointsType.TALENTS, 1, 1, 30, 200));
+        c.player_points.put(PlayerPointsType.ASCENDANCY, new PlayerPointsConfig(PlayerPointsType.ASCENDANCY, 0, 0.1F, 0, 9));
+        c.player_points.put(PlayerPointsType.SPELLS, new PlayerPointsConfig(PlayerPointsType.SPELLS, 0, 1, 10, 150));
+        c.player_points.put(PlayerPointsType.PASSIVES, new PlayerPointsConfig(PlayerPointsType.PASSIVES, 0, 1, 10, 150));
+        c.player_points.put(PlayerPointsType.STATS, new PlayerPointsConfig(PlayerPointsType.STATS, 0, 2, 50, 300));
         c.addToSerializables();
 
     }

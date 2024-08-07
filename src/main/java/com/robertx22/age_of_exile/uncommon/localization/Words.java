@@ -58,6 +58,7 @@ public enum Words implements IAutoLocName {
     STAT_ORDER_TEST("Stat Order Test [Debug Option]\nThis runs a few tests when you attack something to be sure the stats are working in correct order and sends warning message if they don't. Only use when debugging stats. For example, crit chance should work before crit damage stat"),
     DMG_CONFLICT_CHECK("Mod Conflict Check [Debug Option]\n\nChecks if Mine and Slash damage has been overrided by another mod.\nSends a message to player if there's a problem.\n THIS IS A DEBUG OPTION"),
     AGGRESIVE_SUMMONS("Aggressive Summons\n\nYour summons will now attack anything they guess is an enemy, and on longer need guidance from you.\n\nYou need to Re-Summon your minions for this to take effect"),
+    EVERYONE_IS_ALLY("Everyone is Considered an Ally\n\nBy default your spells only target your MNS team members and yourself.\n\nWith this enabled, your heals, buffs etc will target everyone, including possible enemies!"),
     DROP_MAP_CHEST_CONTENTS_ON_GROUND("Drop Map Chest Contents When Looted\n\nWhen you loot chests in maps, should they drop their contents on the ground automatically? \n\nThis is helpful if you use the Master Backpack or other loot filtering mods like Sophisticated Backpacks."),
 
     WHILE_UNDER_AURA("While Under Effect of %1$s:"),
@@ -159,6 +160,8 @@ public enum Words implements IAutoLocName {
     Crate("Crate"),
 
     Talents("Talents"),
+    Passive("Passive"),
+
 
     PressAltForStatInfo("Press Alt for Stat Desc"),
     PressForMoreInfo("Click for More Info"),
@@ -238,7 +241,7 @@ public enum Words implements IAutoLocName {
     Character("Character"),
     Characters("Characters"),
     Stats("Stats"),
-
+    Stat("Stat"),
     Tier("Tier"),
 
     UNSALVAGEABLE("Unsalvageable"),

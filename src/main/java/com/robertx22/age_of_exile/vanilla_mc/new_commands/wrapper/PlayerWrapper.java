@@ -1,4 +1,4 @@
-package com.robertx22.age_of_exile.vanilla_mc.commands.wrapper;
+package com.robertx22.age_of_exile.vanilla_mc.new_commands.wrapper;
 
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
@@ -10,6 +10,10 @@ import net.minecraft.world.entity.player.Player;
 import static net.minecraft.commands.Commands.argument;
 
 public class PlayerWrapper extends ArgumentWrapper<Player> {
+    public PlayerWrapper() {
+        super("player");
+    }
+
     @Override
     public String id() {
         return "player";
@@ -17,14 +21,14 @@ public class PlayerWrapper extends ArgumentWrapper<Player> {
 
     @Override
     public RequiredArgumentBuilder getType() {
-        return argument(id(), EntityArgument.player());
+        return argument(argName, EntityArgument.player());
     }
 
     @Override
     public Player getter(CommandContext<CommandSourceStack> ctx) {
         Player en = null;
         try {
-            en = EntityArgument.getPlayer(ctx, id());
+            en = EntityArgument.getPlayer(ctx, argName);
         } catch (CommandSyntaxException e) {
             e.printStackTrace();
         }

@@ -28,6 +28,7 @@ public class PlayerConfigData {
         AGGRESSIVE_SUMMONS("aggressive_summons", true, Words.AGGRESIVE_SUMMONS, false),
         STAT_ORDER_TEST("stat_order_test", false, Words.STAT_ORDER_TEST, true),
         DAMAGE_CONFLICT_MSG("damage_conflict_check", false, Words.DMG_CONFLICT_CHECK, true),
+        EVERYONE_IS_ALLY("everyone_is_ally", false, Words.EVERYONE_IS_ALLY, false),
         DROP_MAP_CHEST_CONTENTS_ON_GROUND("drop_map_chest_contents_on_ground", false, Words.DROP_MAP_CHEST_CONTENTS_ON_GROUND, false);
 
         public String id;

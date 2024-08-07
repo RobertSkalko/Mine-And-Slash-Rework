@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.saveclasses.spells;
 
 import com.robertx22.age_of_exile.database.OptScaleExactStat;
-import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
+import com.robertx22.age_of_exile.database.data.game_balance_config.PlayerPointsType;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.spell_school.SpellSchool;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -10,8 +10,8 @@ import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.IStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.age_of_exile.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
-import com.robertx22.age_of_exile.uncommon.utilityclasses.LevelUtils;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.*;
 
@@ -30,6 +30,10 @@ public class SpellSchoolsData implements IStatCtx {
     public enum PointType {
         SPELL, PASSIVE;
 
+        public PlayerPointsType getGeneralType() {
+            return this == SPELL ? PlayerPointsType.SPELLS : PlayerPointsType.PASSIVES;
+        }
+
         public boolean is(String perkid) {
             if (this == SPELL) {
                 return ExileDB.Perks().get(perkid).isSpell();
@@ -40,30 +44,11 @@ public class SpellSchoolsData implements IStatCtx {
         }
     }
 
-    public int getRemainingPoints(LivingEntity en, PointType type) {
-        if (type == PointType.SPELL) {
-            return getFreeSpellPoints(en);
-        } else {
-            return getFreePassivePoints(en);
-        }
-    }
-
 
     public int getLevel(String id) {
         return allocated_lvls.getOrDefault(id, 0);
     }
 
-    public boolean hasFreeAnyPoints(LivingEntity entity) {
-        return getFreeSpellPoints(entity) > 0 || getFreePassivePoints(entity) > 0;
-    }
-
-    public int getFreeSpellPoints(LivingEntity entity) {
-        return (int) (GameBalanceConfig.get().CLASS_POINTS_AT_MAX_LEVEL * LevelUtils.getMaxLevelMultiplier(Load.Unit(entity).getLevel())) - getSpentPoints(PointType.SPELL);
-    }
-
-    public int getFreePassivePoints(LivingEntity entity) {
-        return (int) (GameBalanceConfig.get().PASSIVE_POINTS_AT_MAX_LEVEL * LevelUtils.getMaxLevelMultiplier(Load.Unit(entity).getLevel())) - getSpentPoints(PointType.PASSIVE);
-    }
 
     public int getSpentPoints(PointType type) {
         int total = 0;
@@ -77,11 +62,11 @@ public class SpellSchoolsData implements IStatCtx {
         return total;
     }
 
-    public boolean canLearn(LivingEntity en, SpellSchool school, Perk perk) {
+    public boolean canLearn(Player en, SpellSchool school, Perk perk) {
 
         PointType type = perk.getPointType();
 
-        if (getRemainingPoints(en, type) < 1) {
+        if (type.getGeneralType().getFreePoints(en) < 1) {
             return false;
         }
         if (!school.isLevelEnoughFor(en, perk)) {

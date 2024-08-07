@@ -236,6 +236,9 @@ public class SpellHotbarOverlay {
 
                 String txt = CLOC.translate(KeybindsRegister.getSpellHotbar(place).key.getKey().getDisplayName()).toUpperCase(Locale.ROOT);
                 txt = txt.substring(0, 1);
+                if (KeybindsRegister.getSpellHotbar(place).key.isUnbound()) {
+                    txt = "UNBOUND KEY";
+                }
                 GuiUtils.renderScaledText(gui, xkey - 1, ykey, 1, txt, ChatFormatting.GREEN);
 
                 var key = KeybindsRegister.getSpellHotbar(place);

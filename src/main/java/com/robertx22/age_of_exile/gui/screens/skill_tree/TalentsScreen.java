@@ -25,6 +25,6 @@ public class TalentsScreen extends SkillTreeScreen {
 
     @Override
     public boolean shouldAlert() {
-        return Load.player(ClientOnly.getPlayer()).talents.hasFreePoints(Load.Unit(ClientOnly.getPlayer()), TalentTree.SchoolType.TALENTS);
+        return Load.player(ClientOnly.getPlayer()).talents.hasFreePoints(ClientOnly.getPlayer(), TalentTree.SchoolType.TALENTS);
     }
 }

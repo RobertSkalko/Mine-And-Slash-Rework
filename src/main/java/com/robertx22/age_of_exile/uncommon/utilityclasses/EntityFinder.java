@@ -1,5 +1,7 @@
 package com.robertx22.age_of_exile.uncommon.utilityclasses;
 
+import com.robertx22.age_of_exile.capability.player.data.PlayerConfigData;
+import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -185,6 +187,14 @@ public class EntityFinder {
 
         public Setup<T> searchFor(AllyOrEnemy f) {
             this.entityPredicate = f;
+
+            if (f == AllyOrEnemy.allies) {
+                if (this.caster instanceof Player p) {
+                    if (Load.player(p).config.isConfigEnabled(PlayerConfigData.Config.EVERYONE_IS_ALLY)) {
+                        this.entityPredicate = AllyOrEnemy.all;
+                    }
+                }
+            }
             return this;
         }
 

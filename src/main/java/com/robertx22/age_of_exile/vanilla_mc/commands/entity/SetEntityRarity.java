@@ -15,6 +15,8 @@ import static net.minecraft.commands.Commands.argument;
 import static net.minecraft.commands.Commands.literal;
 
 
+// todo this one might be needed.. for maps? 1 or 2 maps probably use set rarity to spawn custom mobs...
+
 public class SetEntityRarity {
 
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {

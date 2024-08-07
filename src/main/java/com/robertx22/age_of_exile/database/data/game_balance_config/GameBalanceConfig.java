@@ -9,6 +9,8 @@ import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import net.minecraft.world.entity.player.Player;
 
+import java.util.HashMap;
+
 public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, IAutoGson<GameBalanceConfig> {
 
     public static GameBalanceConfig SERIALIZER = new GameBalanceConfig();
@@ -34,15 +36,11 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     public LevelScalingConfig STAT_REQ_SCALING = new LevelScalingConfig(2, 2, true);
     public LevelScalingConfig MOB_DAMAGE_SCALING = new LevelScalingConfig(1, 0.25F, false);
 
-    public double TALENT_POINTS_PER_LVL = 1;
-    public double STAT_POINTS_PER_LEVEL = 2;
-    public int CLASS_POINTS_AT_MAX_LEVEL = 100;
-    public int PASSIVE_POINTS_AT_MAX_LEVEL = 100;
-    public double STARTING_TALENT_POINTS = 1;
+
+    public HashMap<PlayerPointsType, PlayerPointsConfig> player_points = new HashMap<>();
+
     public double MOB_DMG_MULTI_PER_MAP_RES_REQ_LACKING = 0.05;
 
-    public double GIVE_ASCENDANCY_POINTS_EVERY_X_LEVELS = 10;
-    public int MAX_ASCENDANCY_POINTS = 9;
 
     public double HP_MOB_BONUS_PER_MAP_TIER = 0.1;
     public double DMG_MOB_BONUS_PER_MAP_TIER = 0.01;

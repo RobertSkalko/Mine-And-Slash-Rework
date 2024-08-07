@@ -42,14 +42,14 @@ public class TalentsData implements IStatCtx {
         getSchool(school).unAllocate(point);
     }
 
-    public boolean hasFreePoints(EntityData data, TalentTree.SchoolType type) {
-        return type.getFreePoints(data, this) > 0;
+    public boolean hasFreePoints(Player p, TalentTree.SchoolType type) {
+        return type.getPointType().getFreePoints(p) > 0;
 
     }
 
     public boolean canAllocate(TalentTree school, PointData point, EntityData data, Player player) {
 
-        if (!hasFreePoints(data, school.getSchool_type())) {
+        if (!hasFreePoints(player, school.getSchool_type())) {
             return false;
         }
 

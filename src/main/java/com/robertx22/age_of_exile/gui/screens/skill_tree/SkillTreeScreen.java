@@ -534,7 +534,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         int savedy = yp;
 
 
-        int points = schoolType.getFreePoints(Load.Unit(mc.player), playerData.talents);
+        int points = schoolType.getPointType().getFreePoints(mc.player);
 
         MutableComponent text = Gui.TALENT_POINTS.locName().append(points + "");
 

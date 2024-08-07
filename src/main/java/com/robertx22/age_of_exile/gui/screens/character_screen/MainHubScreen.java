@@ -6,6 +6,7 @@ import com.robertx22.age_of_exile.aoe_data.database.stats.ResourceStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.SpellChangeStats;
 import com.robertx22.age_of_exile.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.age_of_exile.characters.gui.CharacterSelectScreen;
+import com.robertx22.age_of_exile.database.data.game_balance_config.PlayerPointsType;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.CoreStat;
 import com.robertx22.age_of_exile.database.data.stats.effects.defense.MaxElementalResist;
@@ -350,8 +351,7 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
         super.render(gui, x, y, ticks);
 
 
-        int p = Load.player(mc.player).statPoints
-                .getFreePoints(mc.player);
+        int p = PlayerPointsType.STATS.getFreePoints(mc.player);
         if (p > 0) {
             MutableComponent points = Gui.STATS_POINTS.locName().append(String.valueOf(p));
             gui.drawString(mc.font, points, guiLeft + 40 - mc.font.width(points) / 2, guiTop + 10, ChatFormatting.GREEN.getColor());

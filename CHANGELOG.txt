@@ -2,3 +2,11 @@ Changelog of recent updates: https://github.com/RobertSkalko/Mine-And-Slash-Rewo
 
 v.5.5.29
 - datapack warnings are now printed to each player that logs in, but only a short summary
+- unbound key should now show that and not just "N"
+- new feature: everyone is ally. When spells target only allies, this means they will target anything
+- reset spell cooldowns command now merged with other reset player data commands
+- small rename of command reset_player_data > reset player_data
+- MODPACK WARNING: all point types like (talents, spells etc) are now in the game balance datapack! 
+They now use the same system so i can more easily allow stuff like bonus points for stuff besides talents. (bonus talent points will be preserved for now as legacy code)
+Previously point configs were spread to both configs and datapacks, and each used different methods..
+- added give and reset bonus point commands to all point types now, removed the old talent point commands

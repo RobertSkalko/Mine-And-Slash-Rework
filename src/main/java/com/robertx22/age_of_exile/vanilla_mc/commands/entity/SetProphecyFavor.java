@@ -14,6 +14,8 @@ import java.util.Objects;
 import static net.minecraft.commands.Commands.argument;
 import static net.minecraft.commands.Commands.literal;
 
+
+// remove this after i rework favor into an item
 public class SetProphecyFavor {
 
     public static void register(CommandDispatcher<CommandSourceStack> commandDispatcher) {

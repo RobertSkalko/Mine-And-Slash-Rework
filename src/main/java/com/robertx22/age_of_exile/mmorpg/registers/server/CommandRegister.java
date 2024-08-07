@@ -7,7 +7,10 @@ import com.robertx22.age_of_exile.loot.blueprints.JewelBlueprint;
 import com.robertx22.age_of_exile.loot.blueprints.LootChestBlueprint;
 import com.robertx22.age_of_exile.loot.blueprints.SkillGemBlueprint;
 import com.robertx22.age_of_exile.saveclasses.skill_gem.SkillGemData;
-import com.robertx22.age_of_exile.vanilla_mc.commands.*;
+import com.robertx22.age_of_exile.vanilla_mc.commands.ListStatSourcesCommand;
+import com.robertx22.age_of_exile.vanilla_mc.commands.RollCommand;
+import com.robertx22.age_of_exile.vanilla_mc.commands.RunTestCommand;
+import com.robertx22.age_of_exile.vanilla_mc.commands.TeamCommand;
 import com.robertx22.age_of_exile.vanilla_mc.commands.auto_salvage.AutoSalvageGenericConfigure;
 import com.robertx22.age_of_exile.vanilla_mc.commands.auto_salvage.AutoSalvageGenericList;
 import com.robertx22.age_of_exile.vanilla_mc.commands.auto_salvage.AutoSalvageGenericShow;
@@ -16,14 +19,12 @@ import com.robertx22.age_of_exile.vanilla_mc.commands.entity.*;
 import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GenericGive;
 import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GiveExactUnique;
 import com.robertx22.age_of_exile.vanilla_mc.commands.giveitems.GiveMap;
-import com.robertx22.age_of_exile.vanilla_mc.commands.open_gui.OpenHub;
 import com.robertx22.age_of_exile.vanilla_mc.commands.report.ReportMapIssue;
-import com.robertx22.age_of_exile.vanilla_mc.commands.reset.ResetCommand;
-import com.robertx22.age_of_exile.vanilla_mc.commands.reset.ResetSpellCooldowns;
 import com.robertx22.age_of_exile.vanilla_mc.commands.stats.ClearStats;
 import com.robertx22.age_of_exile.vanilla_mc.commands.stats.GiveStat;
 import com.robertx22.age_of_exile.vanilla_mc.commands.stats.ListStats;
 import com.robertx22.age_of_exile.vanilla_mc.commands.stats.RemoveStat;
+import com.robertx22.age_of_exile.vanilla_mc.new_commands.DevCommands;
 import com.robertx22.age_of_exile.vanilla_mc.new_commands.EntityCommands;
 import com.robertx22.age_of_exile.vanilla_mc.new_commands.PlayerCommands;
 import net.minecraft.commands.CommandSourceStack;
@@ -36,6 +37,7 @@ public class CommandRegister {
 
         EntityCommands.init(dispatcher);
         PlayerCommands.init(dispatcher);
+        DevCommands.init(dispatcher);
 
         GiveExactUnique.register(dispatcher);
         GiveMap.register(dispatcher);
@@ -65,12 +67,8 @@ public class CommandRegister {
 
         SetProphecyFavor.register(dispatcher);
         GiveExp.register(dispatcher);
-        SetFavor.register(dispatcher);
         GivePerLvlExp.register(dispatcher);
 
-        ResetSpellCooldowns.register(dispatcher);
-
-        ResetCommand.register(dispatcher);
 
         GiveStat.register(dispatcher);
         RemoveStat.register(dispatcher);
@@ -82,16 +80,12 @@ public class CommandRegister {
 
         ListStatSourcesCommand.register(dispatcher);
 
-        GenerateWikiCommand.register(dispatcher);
 
         RunTestCommand.register(dispatcher);
 
 
-        GivePoints.giveCommand(dispatcher);
-        GivePoints.resetCommand(dispatcher);
-
-        OpenHub.register(dispatcher);
-
         ReportMapIssue.register(dispatcher);
+
+
     }
 }

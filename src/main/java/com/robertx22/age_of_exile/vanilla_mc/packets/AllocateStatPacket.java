@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.vanilla_mc.packets;
 
 import com.robertx22.age_of_exile.capability.player.PlayerData;
+import com.robertx22.age_of_exile.database.data.game_balance_config.PlayerPointsType;
 import com.robertx22.age_of_exile.database.data.stats.Stat;
 import com.robertx22.age_of_exile.database.data.stats.datapacks.stats.CoreStat;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
@@ -55,12 +56,11 @@ public class AllocateStatPacket extends MyPacket<AllocateStatPacket> {
 
         PlayerData cap = Load.player(ctx.getPlayer());
 
-        if (cap.statPoints.getFreePoints(ctx.getPlayer()) > 0) {
+        if (PlayerPointsType.STATS.getFreePoints(ctx.getPlayer()) > 0) {
             if (ExileDB.Stats().get(stat) instanceof CoreStat) {
                 cap.statPoints.map.put(stat, 1 + cap.statPoints.map.getOrDefault(stat, 0));
 
                 //TODO abandoncaptian, add Stat Rewards
-
                 Load.Unit(ctx.getPlayer()).setEquipsChanged();
                 cap.playerDataSync.setDirty();
             }
