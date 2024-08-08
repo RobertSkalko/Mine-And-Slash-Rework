@@ -27,7 +27,7 @@ public class Searching extends OpacityControllerState {
     public float onSingleButton() {
         SearchHandler searchHandler = button.getScreen().getOptimizedState().searchHandler;
 
-        if (searchHandler.checkThisButtonIsSearchResult(button)) return OpacityController.HIGHLIGHT;
+        if (searchHandler.isThisButtonBeingSearched(search.getValue(), button)) return OpacityController.HIGHLIGHT;
         PerkStatus status = Load.player(ClientOnly.getPlayer()).talents.getStatus(Minecraft.getInstance().player, button.school, button.point);
 
         if (search.getValue().equals("all")) {

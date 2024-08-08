@@ -745,7 +745,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                 }
 
                 //must handle this before all the render thing
-                if (!this.searchHandler.isUpdating) this.searchHandler.tickThis();
+                this.searchHandler.tickThis();
                 opacityController.detectCurrentState(playerData);
 
 

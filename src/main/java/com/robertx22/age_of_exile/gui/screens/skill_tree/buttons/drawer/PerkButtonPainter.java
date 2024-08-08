@@ -183,7 +183,7 @@ public class PerkButtonPainter {
     }
 
     public static ResourceLocation getNewLocation(TalentTree tree, ResourceLocation color, ResourceLocation border, ResourceLocation perk){
-        //todo sometimes it'll got a weird bug about the getSchool_type() don't have return value due to ClassNotFoundException, means that it can't find the SchoolType class but it really makes no sense.
+        //todo sometimes it'll got a weird bug about the getSchool_type() don't have return value due to ClassNotFoundException, means that it can't find the SchoolType class but it really makes no sense. won't crash the game tho.
         return new ResourceLocation(PainterController.nameSpace, tree.getSchool_type().toString().hashCode() + "_" + color.getPath() + "_" + border.getPath() + "_" + perk.getPath());
     }
 
