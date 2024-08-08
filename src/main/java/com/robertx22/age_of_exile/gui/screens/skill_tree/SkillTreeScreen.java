@@ -762,7 +762,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
                     int i = 0;
 
                     if (!animationHandler.isLoaded){
-                        animationHandler.load(locations, gui, startX, startY, connectionX, connectionY);
+                        animationHandler.load(locations, gui, startX, startY);
                     }
 
                     if (!this.animationDone && !this.animationHandler.isAllDone()) {

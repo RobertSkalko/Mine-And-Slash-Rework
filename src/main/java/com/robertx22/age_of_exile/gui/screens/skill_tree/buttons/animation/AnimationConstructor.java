@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AnimationConstructor {
-    private final ArrayList<IOrderExecuteAnimationPiece> animationList = new ArrayList<>();
+    private final ArrayList<IOrderExecuteAnimationPiece<?>> animationList = new ArrayList<>();
     private SkillTreeScreen screen;
     public boolean isLoaded = false;
 
@@ -16,14 +16,14 @@ public class AnimationConstructor {
         this.screen = screen;
     }
 
-    public AnimationConstructor load(List<AllPerkButtonPainter.ResourceLocationAndSize> materials, GuiGraphics gui, int startX, int startY, int connectionX, int connectionY) {
+    public AnimationConstructor load(List<AllPerkButtonPainter.ResourceLocationAndSize> materials, GuiGraphics gui, int startX, int startY) {
 
         RightFadeInPiece animation = null;
         for (AllPerkButtonPainter.ResourceLocationAndSize material : materials) {
             if (animation == null){
-                animation = new RightFadeInPiece(material, gui, startX, startY, connectionX,connectionY, materials.indexOf(material), screen);
+                animation = new RightFadeInPiece(material, gui, startX, startY, materials.indexOf(material), screen);
             } else {
-                animation = animation.append(new RightFadeInPiece(material, gui, startX, startY, connectionX,connectionY, materials.indexOf(material), screen));
+                animation = animation.append(new RightFadeInPiece(material, gui, startX, startY, materials.indexOf(material), screen));
             }
         }
         animationList.add(animation.goBack());
@@ -38,7 +38,7 @@ public class AnimationConstructor {
 
     public void play(){
         if (this.animationList.isEmpty()) return;
-        for (IOrderExecuteAnimationPiece iOrderExecuteAnimationPiece : animationList) {
+        for (IOrderExecuteAnimationPiece<?> iOrderExecuteAnimationPiece : animationList) {
             iOrderExecuteAnimationPiece.executeThis();
         }
     }

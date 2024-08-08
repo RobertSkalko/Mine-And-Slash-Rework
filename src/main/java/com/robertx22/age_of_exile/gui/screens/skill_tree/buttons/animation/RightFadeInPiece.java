@@ -6,12 +6,10 @@ import net.minecraft.client.gui.GuiGraphics;
 
 import javax.annotation.Nullable;
 
-public class RightFadeInPiece implements IOrderExecuteAnimationPiece {
+public class RightFadeInPiece implements IOrderExecuteAnimationPiece<RightFadeInPiece> {
 
     private final int startX;
     private final int startY;
-    private final int connectionX;
-    private final int connectionY;
     private final int order;
     public boolean allDone = false;
     @Nullable
@@ -26,13 +24,11 @@ public class RightFadeInPiece implements IOrderExecuteAnimationPiece {
     private SkillTreeScreen screen;
 
 
-    public RightFadeInPiece(AllPerkButtonPainter.ResourceLocationAndSize thisLocation, GuiGraphics gui, int startX, int startY, int connectionX, int connectionY, int order, SkillTreeScreen screen) {
+    public RightFadeInPiece(AllPerkButtonPainter.ResourceLocationAndSize thisLocation, GuiGraphics gui, int startX, int startY, int order, SkillTreeScreen screen) {
         this.thisLocation = thisLocation;
         this.gui = gui;
         this.startX = startX;
         this.startY = startY;
-        this.connectionX = connectionX;
-        this.connectionY = connectionY;
         this.order = order;
         this.screen = screen;
     }
@@ -70,16 +66,16 @@ public class RightFadeInPiece implements IOrderExecuteAnimationPiece {
     }
 
     @Override
-    public <T extends IOrderExecuteAnimationPiece> T append(T next) {
-        this.next = (RightFadeInPiece) next;
+    public RightFadeInPiece append(RightFadeInPiece next) {
+        this.next = next;
         this.next.last = this;
         return next;
     }
 
     @Override
-    public <T extends IOrderExecuteAnimationPiece> T goBack() {
+    public RightFadeInPiece goBack() {
         if (last == null) {
-            return (T) this;
+            return this;
         } else {
             return last.goBack();
         }
