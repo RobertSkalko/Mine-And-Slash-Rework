@@ -1,10 +1,8 @@
 package com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.animation;
 
-import com.robertx22.age_of_exile.config.forge.ClientConfigs;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.SkillTreeScreen;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.AllPerkButtonPainter;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.util.Mth;
 
 import javax.annotation.Nullable;
 
@@ -16,11 +14,11 @@ public class RightFadeInPiece implements IOrderExecuteAnimationPiece {
     private final int connectionY;
     private final int order;
     public boolean allDone = false;
+    @Nullable
+    public RightFadeInPiece last;
     private int frameInterval = 1;
     private int animationFrames = 5;
     private int currentFrame = 0;
-    @Nullable
-    public RightFadeInPiece last;
     @Nullable
     private RightFadeInPiece next;
     private AllPerkButtonPainter.ResourceLocationAndSize thisLocation;
@@ -49,6 +47,7 @@ public class RightFadeInPiece implements IOrderExecuteAnimationPiece {
 
         float v = currentFrame * 1.0f / animationFrames;
         gui.pose().pushPose();
+        gui.pose().setIdentity();
         gui.pose().scale(screen.zoom, screen.zoom, screen.zoom);
         //handleZoom();
         gui.setColor(1.0f, 1.0f, 1.0f, 0.0f + v);
@@ -72,15 +71,15 @@ public class RightFadeInPiece implements IOrderExecuteAnimationPiece {
 
     @Override
     public <T extends IOrderExecuteAnimationPiece> T append(T next) {
-        this.next = (RightFadeInPiece)next;
+        this.next = (RightFadeInPiece) next;
         this.next.last = this;
         return next;
     }
 
     @Override
     public <T extends IOrderExecuteAnimationPiece> T goBack() {
-        if (last == null){
-            return (T)this;
+        if (last == null) {
+            return (T) this;
         } else {
             return last.goBack();
         }
