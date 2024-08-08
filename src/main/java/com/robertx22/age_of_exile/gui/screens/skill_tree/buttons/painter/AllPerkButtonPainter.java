@@ -1,4 +1,4 @@
-package com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer;
+package com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.painter;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.platform.Window;
@@ -9,7 +9,6 @@ import com.robertx22.age_of_exile.event_hooks.ontick.OnClientTick;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.ExileTreeTexture;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.PainterController;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkButton;
-import it.unimi.dsi.fastutil.Hash;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.resources.ResourceLocation;

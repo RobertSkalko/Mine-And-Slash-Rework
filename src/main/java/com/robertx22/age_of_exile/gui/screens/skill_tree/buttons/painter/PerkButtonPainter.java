@@ -1,4 +1,4 @@
-package com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer;
+package com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.painter;
 
 import com.mojang.blaze3d.platform.NativeImage;
 import com.robertx22.age_of_exile.database.data.perks.PerkStatus;
@@ -6,7 +6,6 @@ import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.age_of_exile.event_hooks.ontick.OnClientTick;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.ExileTreeTexture;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.PainterController;
-import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;

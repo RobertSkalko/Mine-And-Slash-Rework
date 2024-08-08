@@ -18,7 +18,7 @@ import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkButton;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkPointPair;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.TreeOptimizationHandler;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.animation.AnimationConstructor;
-import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.AllPerkButtonPainter;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.painter.AllPerkButtonPainter;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.connections.PerkConnectionCache;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.connections.PerkConnectionRenderer;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkScreenContext;

@@ -1,7 +1,7 @@
 package com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.animation;
 
 import com.robertx22.age_of_exile.gui.screens.skill_tree.SkillTreeScreen;
-import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.AllPerkButtonPainter;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.painter.AllPerkButtonPainter;
 import net.minecraft.client.gui.GuiGraphics;
 
 import javax.annotation.Nullable;

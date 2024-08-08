@@ -1,4 +1,4 @@
-package com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer;
+package com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.painter;
 
 import com.google.common.base.Objects;
 import com.robertx22.age_of_exile.capability.player.PlayerData;
@@ -8,7 +8,6 @@ import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;

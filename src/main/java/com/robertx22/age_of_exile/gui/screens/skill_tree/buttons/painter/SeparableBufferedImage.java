@@ -1,11 +1,10 @@
-package com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer;
+package com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.painter;
 
 import com.google.common.collect.ImmutableList;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;

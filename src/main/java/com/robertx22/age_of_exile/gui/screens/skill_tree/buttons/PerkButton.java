@@ -7,12 +7,11 @@ import com.robertx22.age_of_exile.database.data.perks.PerkStatus;
 import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.SkillTreeScreen;
-import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.ButtonIdentifier;
-import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.drawer.PerkButtonPainter;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.painter.ButtonIdentifier;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.painter.PerkButtonPainter;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.connections.PerkConnectionCache;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.connections.PerkConnectionRenderer;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.delaycheck.ButtonStatusUpdateTask;
-import com.robertx22.age_of_exile.gui.screens.skill_tree.delaycheck.IDelayCheckTask;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.delaycheck.IDelayChecker;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.delaycheck.RendererUpdateTask;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.opacity.OpacityController;
@@ -23,7 +22,6 @@ import com.robertx22.age_of_exile.saveclasses.PointData;
 
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.ModRange;
 import com.robertx22.age_of_exile.saveclasses.gearitem.gear_bases.StatRangeInfo;
-import com.robertx22.age_of_exile.saveclasses.perks.TalentsData;
 
 import com.robertx22.age_of_exile.uncommon.MathHelper;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
