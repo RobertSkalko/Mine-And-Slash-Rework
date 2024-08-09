@@ -10,6 +10,7 @@ import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.TreeOptimizationHandler;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.painter.ButtonIdentifier;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.painter.PaintingTransformer;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.painter.PerkButtonPainter;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.saveclasses.PointData;
@@ -20,6 +21,7 @@ import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import net.minecraft.world.entity.player.Player;
+import org.lwjgl.openal.SOFTDeferredUpdates;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -123,27 +125,6 @@ public class TalentTree implements JsonExileRegistry<TalentTree>, IAutoGson<Tale
 
         grid.loadIntoTree();
 
-        if (TreeOptimizationHandler.isOptEnable()) {
-            TreeOptimizationHandler.runOptTask(() ->
-                    CompletableFuture.runAsync(() -> {
-                        for (Map.Entry<PointData, String> e : this.calcData.perks.entrySet()) {
-
-                            Perk perk = ExileDB.Perks().get(e.getValue());
-
-                            if (perk == null) {
-                                perk = ExileDB.Perks().get(new UnknownStat().GUID());
-
-                            }
-
-                            ButtonIdentifier buttonIdentifier = new ButtonIdentifier(this, e.getKey(), perk);
-                            PerkButtonPainter.addToWait(buttonIdentifier);
-                        }
-                        PerkButtonPainter.handlePaintQueue();
-                        //can't run this here, cuz at this moment not all the perk status is ready!
-                        //AllPerkButtonPainter.getPainter(this.getSchool_type()).init(buttonIdentifiers);
-                    }));
-
-        }
     }
 
     @Override

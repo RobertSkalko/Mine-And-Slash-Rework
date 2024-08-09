@@ -56,4 +56,5 @@ public record ButtonIdentifier(TalentTree tree, PointData point, Perk perk){
         return Objects.hashCode(tree, point, perk);
     }
 
+
 }

@@ -23,6 +23,7 @@ import com.robertx22.age_of_exile.database.data.stats.types.special.SpecialStats
 import com.robertx22.age_of_exile.database.registrators.Currencies;
 import com.robertx22.age_of_exile.database.registry.ExileDBInit;
 import com.robertx22.age_of_exile.gui.SocketTooltip;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.painter.CacheHandler;
 import com.robertx22.age_of_exile.maps.MapEvents;
 import com.robertx22.age_of_exile.mmorpg.event_registers.CommonEvents;
 import com.robertx22.age_of_exile.mmorpg.init.ClientInit;
@@ -46,6 +47,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -193,6 +195,8 @@ public class MMORPG {
         MapEvents.init();
         ProfessionEvents.init();
         DerivedRegistries.init();
+
+        MinecraftForge.EVENT_BUS.register(CacheHandler.class);
 
         watch.print("Mine and slash mod initialization ");
 

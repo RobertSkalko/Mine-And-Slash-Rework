@@ -47,8 +47,6 @@ public class AllPerkButtonPainter {
     public int maxY = 0;
     public int minY = 10000;
     private int lastRecordWindowWidth = 0;
-    private boolean isPainting = false;
-    private boolean isRepainting = false;
     private int repaintTimer = maxRepaintTimer;
 
     public AllPerkButtonPainter(TalentTree.SchoolType type) {
@@ -90,7 +88,7 @@ public class AllPerkButtonPainter {
             repaintTimer--;
         } else {
             startANewRun();
-            repaintTimer = maxRepaintTimer;
+            resetRepaintSchedule();
         }
     }
 
@@ -126,11 +124,11 @@ public class AllPerkButtonPainter {
 
     private void repaint() {
         this.state.onRepaint();
-        this.repaintTimer = maxRepaintTimer;
+        resetRepaintSchedule();
     }
 
     public void resetRepaintSchedule(){
-        repaintTimer = 0;
+        repaintTimer = maxRepaintTimer;
     }
 
     @SuppressWarnings("all")
@@ -282,7 +280,9 @@ public class AllPerkButtonPainter {
                 BufferedImage singleButton = PerkButtonPainter.handledBufferedImage.get(wholeTexture);
                 if (singleButton == null) {
                     waitingToBePainted.add(identifier);
-                    if (tryHistory.getOrDefault(identifier, 0) >= 3) continue;
+                    PerkButtonPainter.addToWait(identifier);
+                    PerkButtonPainter.handlePaintQueue();
+                    if (tryHistory.getOrDefault(identifier, 0) >= 2) continue;
                     tryHistory.merge(identifier, 1, Integer::sum);
                     Thread.sleep(1000);
                     continue;

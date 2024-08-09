@@ -2,7 +2,9 @@ package com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.animation;
 
 import com.robertx22.age_of_exile.gui.screens.skill_tree.SkillTreeScreen;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.painter.AllPerkButtonPainter;
+import com.robertx22.age_of_exile.uncommon.utilityclasses.MathUtils;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.util.Mth;
 
 import javax.annotation.Nullable;
 
@@ -46,7 +48,8 @@ public class RightFadeInPiece implements IOrderExecuteAnimationPiece<RightFadeIn
         gui.pose().setIdentity();
         gui.pose().scale(screen.zoom, screen.zoom, screen.zoom);
         //handleZoom();
-        gui.setColor(1.0f, 1.0f, 1.0f, 0.0f + v);
+        float wholeImage = screen.getOpacityController().getWholeImage();
+        gui.setColor(1.0f, 1.0f, 1.0f, Mth.clamp(0.0f + v, 0, wholeImage));
         gui.blit(thisLocation.location(), startX + order * thisLocation.width() + (int) ((1F / screen.zoom - 1) * this.screen.width / 2F + screen.scrollX), startY + (int) ((1F / screen.zoom - 1) * this.screen.height / 2F + screen.scrollY) + (int) (20 - 20 * v), 0, 0, thisLocation.width(), thisLocation.height(), thisLocation.width(), thisLocation.height());
         gui.setColor(1.0f, 1.0f, 1.0f, 1.0f);
         gui.pose().popPose();

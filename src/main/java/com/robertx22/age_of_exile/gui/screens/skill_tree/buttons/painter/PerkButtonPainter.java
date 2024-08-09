@@ -1,6 +1,7 @@
 package com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.painter;
 
 import com.mojang.blaze3d.platform.NativeImage;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.database.data.perks.PerkStatus;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
 import com.robertx22.age_of_exile.event_hooks.ontick.OnClientTick;
@@ -18,6 +19,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Duration;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -32,7 +34,7 @@ public class PerkButtonPainter {
 
     public final static ConcurrentLinkedQueue<ButtonIdentifier> waitingToBePaintedQueue = new ConcurrentLinkedQueue<>();
     public final static ConcurrentLinkedQueue<PainterController.BufferedImagePack> waitingToBeRegisteredQueue = new ConcurrentLinkedQueue<>();
-    public static final IntOpenHashSet addHistory = new IntOpenHashSet(500);
+    public static final HashSet<String> addHistory = new HashSet<>(1000);
 
     private static BufferedImage tryPaintWholeIcon(ResourceLocation color, ResourceLocation border, ResourceLocation perk, ButtonIdentifier identifier, PerkStatus status) throws IOException {
         ResourceManager resourceManager = Minecraft.getInstance().getResourceManager();
@@ -116,11 +118,12 @@ public class PerkButtonPainter {
 
 
     public static boolean addToWait(ButtonIdentifier identifier) {
-        //no equal button allow go into the queue
-        int hash = identifier.hashCode();
-        if (!addHistory.contains(hash)) {
+        //don't let any same RL pass
+        //it still makes me confused, I've tried to use perk.hashCode() to filter same identifier out but it always says there are some buttons which have the same perk but also have different color+border+icon texture.
+        String rl = identifier.getCurrentButtonLocation().toString();
+        if (!addHistory.contains(rl)) {
             waitingToBePaintedQueue.add(identifier);
-            addHistory.add(hash);
+            addHistory.add(rl);
             return true;
         }
         return false;
@@ -144,14 +147,10 @@ public class PerkButtonPainter {
                 }
             });
         }
-
-
     }
 
     public static void handleRegisterQueue() {
-        //make sure register all image after all image is painted.
-        if (!waitingToBePaintedQueue.isEmpty()) {
-            OnClientTick.isRegistering = false;
+        if (waitingToBeRegisteredQueue.isEmpty()) {
             return;
         }
         OnClientTick.isRegistering = true;
@@ -168,7 +167,9 @@ public class PerkButtonPainter {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            try (NativeImage image = NativeImage.read(baos.toByteArray())) {
+            byte[] byteArray = baos.toByteArray();
+            PaintingTransformer.map.put(resourceLocation.toString(), Base64.getEncoder().encodeToString(byteArray.clone()));
+            try (NativeImage image = NativeImage.read(byteArray)) {
                 ExileTreeTexture exileTreeTexture = new ExileTreeTexture(resourceLocation, image);
                 Minecraft.getInstance().getTextureManager().register(resourceLocation, exileTreeTexture);
                 handledLocation.add(resourceLocation);

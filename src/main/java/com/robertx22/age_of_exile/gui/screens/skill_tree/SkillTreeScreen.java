@@ -97,6 +97,10 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         return optimizedState;
     }
 
+    public OpacityController getOpacityController() {
+        return opacityController;
+    }
+
     public static int sizeX() {
         return Minecraft.getInstance().getWindow().getWidth();
     }
@@ -716,7 +720,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         public void onRender(GuiGraphics gui, int x, int y, float ticks) {
             Watch watch = new Watch();
 
-            painter.resetRepaintSchedule();
+            //painter.resetRepaintSchedule();
             ctx = new PerkScreenContext(this.screen);
 
             renderBackgroundDirt(gui, this.screen, 0);
