@@ -249,6 +249,15 @@ public class AllPerkButtonPainter {
         public Queue<ButtonIdentifier> getHandledContainer() {
             return this.waitingToBePainted;
         }
+        public void tryCleanHistory(){
+            Iterator<Map.Entry<ButtonIdentifier, Integer>> iterator = this.tryHistory.entrySet().iterator();
+           while (iterator.hasNext()){
+               Map.Entry<ButtonIdentifier, Integer> next = iterator.next();
+               if (PerkButtonPainter.handledBufferedImage.get(next.getKey().getCurrentButtonLocation()) == null){
+                   iterator.remove();
+               }
+           }
+        }
         @Nullable
         private SeparableBufferedImage tryPaint() throws InterruptedException, IOException {
             Minecraft mc = Minecraft.getInstance();
@@ -414,6 +423,7 @@ public class AllPerkButtonPainter {
         private void clearHandledCollection() {
             updateInThinRun.clear();
             results.clear();
+            painter.paintState.tryCleanHistory();
         }
 
         private void resetTimer() {
