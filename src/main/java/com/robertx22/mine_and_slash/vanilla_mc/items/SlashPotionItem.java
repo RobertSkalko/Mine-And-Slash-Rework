@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.vanilla_mc.items;
 
+import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.mine_and_slash.database.data.profession.ICreativeTabTiered;
 import com.robertx22.mine_and_slash.database.data.profession.LeveledItem;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
@@ -19,7 +20,6 @@ import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.HealthUtils;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.mine_and_slash.vanilla_mc.items.misc.AutoItem;
-import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.temp.SkillItemTier;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -72,7 +72,7 @@ public class SlashPotionItem extends AutoItem implements ICreativeTabTiered {
         pTooltipComponents.addAll(new ExileTooltips()
                 .accept(new NameBlock(pStack.getHoverName()))
                 .accept(new RarityBlock(getRarity()))
-                .accept(new UsageBlock(Collections.singletonList(Itemtips.Restores.locName(Component.literal(num + "%").withStyle(ChatFormatting.GREEN)).withStyle(ChatFormatting.GRAY))))
+                .accept(new UsageBlock(Collections.singletonList(Itemtips.Restores.locName(Component.literal(num + "%").withStyle(ChatFormatting.GREEN), this.type.name).withStyle(ChatFormatting.GRAY))))
                 .accept(new LeveledItemBlock(pStack))
                 .accept(new UsageBlock(Collections.singletonList(Words.COOLDOWN.locName(Component.literal(getCooldownTicks() / 20 + "").withStyle(ChatFormatting.GOLD)).withStyle(ChatFormatting.GOLD))))
                 .release());
@@ -133,7 +133,8 @@ public class SlashPotionItem extends AutoItem implements ICreativeTabTiered {
     }
 
     public enum Type {
-        HP("Restoration", Items.POTATO), MANA("Invigoration", Items.CARROT);
+        HP("Health", Items.POTATO),
+        MANA("Mana", Items.CARROT);
         String name;
 
         Item craftItem;

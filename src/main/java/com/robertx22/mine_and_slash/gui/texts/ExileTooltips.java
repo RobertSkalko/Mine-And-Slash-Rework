@@ -79,8 +79,7 @@ public class ExileTooltips {
         }
 
 
-        Stream.of(
-                        collect.get(BlockCategories.RARITY),
+        Stream.of(collect.get(BlockCategories.RARITY),
                         collect.get(BlockCategories.DURABILITY),
                         collect.get(BlockCategories.SALVAGE)
                 )

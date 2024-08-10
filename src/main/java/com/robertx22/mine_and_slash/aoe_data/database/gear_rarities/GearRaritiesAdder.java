@@ -1,9 +1,9 @@
 package com.robertx22.mine_and_slash.aoe_data.database.gear_rarities;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import com.robertx22.mine_and_slash.database.data.MinMax;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 
 // check if loot drops in maps
 public class GearRaritiesAdder implements ExileRegistryInit {
@@ -194,7 +194,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.min_lvl = 15;
             x.sockets = new MinMax(2, 6);
             x.lootable_gear_tier = GearRarity.LootableGearTier.HIGH;
-            x.pot = new GearRarity.Potential(25);
+            x.pot = new GearRarity.Potential(30);
             x.min_affixes = 0;
             x.weight = 150;
             x.item_tier_power = 2;
@@ -203,6 +203,7 @@ public class GearRaritiesAdder implements ExileRegistryInit {
             x.setRunewordFields();
             x.addToSerializables();
             x.announce_in_chat = false;
+            x.can_have_runewords = true;
             x.is_unique_item = false;
         });
 

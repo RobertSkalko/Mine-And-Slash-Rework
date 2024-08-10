@@ -1,5 +1,8 @@
 package com.robertx22.mine_and_slash.vanilla_mc.items.gemrunes;
 
+import com.robertx22.library_of_exile.registry.IGUID;
+import com.robertx22.library_of_exile.registry.IWeighted;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.mine_and_slash.aoe_data.datapacks.models.IAutoModel;
 import com.robertx22.mine_and_slash.aoe_data.datapacks.models.ItemModelManager;
 import com.robertx22.mine_and_slash.database.data.MinMax;
@@ -9,10 +12,15 @@ import com.robertx22.mine_and_slash.database.data.currency.base.Currency;
 import com.robertx22.mine_and_slash.database.data.currency.base.GearCurrency;
 import com.robertx22.mine_and_slash.database.data.currency.base.GearOutcome;
 import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.LocReqContext;
+import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.mine_and_slash.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.mine_and_slash.database.data.profession.ExplainedResult;
 import com.robertx22.mine_and_slash.database.data.runes.Rune;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.DropLevelBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.StatBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageBlock;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.SocketData;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
@@ -24,9 +32,6 @@ import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.mine_and_slash.vanilla_mc.LuckyRandom;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.proxies.OpenGuiWrapper;
-import com.robertx22.library_of_exile.registry.IGUID;
-import com.robertx22.library_of_exile.registry.IWeighted;
-import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -101,22 +106,24 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
                                 gear.sockets.getSocketed().add(rune);
                             }
 
-                            var list = ExileDB.RuneWords().getFilterWrapped(x -> x.canApplyOnItem(stack) && x.hasMatchingRunesToCreate(gear)).list;
-                            if (!list.isEmpty()) {
-                                var biggest = list.stream().max(Comparator.comparingInt(x -> x.runes.size())).get();
 
-                                var current = gear.sockets.getRuneWord();
+                            if (gear.getRarity().can_have_runewords) {
+                                var list = ExileDB.RuneWords().getFilterWrapped(x -> x.canApplyOnItem(stack) && x.hasMatchingRunesToCreate(gear)).list;
+                                if (!list.isEmpty()) {
+                                    var biggest = list.stream().max(Comparator.comparingInt(x -> x.runes.size())).get();
 
-                                int currentSize = 0;
+                                    var current = gear.sockets.getRuneWord();
 
-                                if (current != null && !current.isEmpty()) {
-                                    currentSize = current.runes.size();
-                                }
-                                if (biggest.runes.size() > currentSize) {
-                                    gear.sockets.setRuneword(biggest);
+                                    int currentSize = 0;
+
+                                    if (current != null && !current.isEmpty()) {
+                                        currentSize = current.runes.size();
+                                    }
+                                    if (biggest.runes.size() > currentSize) {
+                                        gear.sockets.setRuneword(biggest);
+                                    }
                                 }
                             }
-
 
                             gear.saveToStack(stack);
                             return stack;
@@ -264,11 +271,22 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
 
         try {
 
-            tooltip.addAll(statsTooltip());
+            ExileTooltips t = new ExileTooltips();
 
-            tooltip.addAll(splitLongText(Itemtips.RUNE_ITEM_USAGE.locName().withStyle(ChatFormatting.RED)));
+            t.accept(new StatBlock() {
+                @Override
+                public List<? extends Component> getAvailableComponents() {
+                    return statsTooltip();
+                }
+            });
+            t.accept(new UsageBlock(splitLongText(Itemtips.RUNE_ITEM_USAGE.locName().withStyle(ChatFormatting.BLUE))));
+            Rune rune = this.getRune();
 
+            if (rune.Weight() > 0) {
+                t.accept(new DropLevelBlock(rune.getReqLevelToDrop(), GameBalanceConfig.get().MAX_LEVEL));
+            }
 
+            tooltip.addAll(t.release());
         } catch (Exception e) {
             e.printStackTrace();
         }

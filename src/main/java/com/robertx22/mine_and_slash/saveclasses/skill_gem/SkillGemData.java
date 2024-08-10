@@ -1,5 +1,7 @@
 package com.robertx22.mine_and_slash.saveclasses.skill_gem;
 
+import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
+import com.robertx22.library_of_exile.wrappers.ExileText;
 import com.robertx22.mine_and_slash.database.data.aura.AuraGem;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
@@ -8,10 +10,7 @@ import com.robertx22.mine_and_slash.database.data.support_gem.SupportGem;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
-import com.robertx22.mine_and_slash.gui.texts.textblocks.AdditionalBlock;
-import com.robertx22.mine_and_slash.gui.texts.textblocks.RarityBlock;
-import com.robertx22.mine_and_slash.gui.texts.textblocks.RequirementBlock;
-import com.robertx22.mine_and_slash.gui.texts.textblocks.StatBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.*;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SkillGemsItems;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
@@ -26,8 +25,6 @@ import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.uncommon.localization.Gui;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
-import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
-import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -254,6 +251,8 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
             if (supp.isOneOfAKind()) {
                 tip.accept(new AdditionalBlock(Itemtips.SUPPORT_GEM_ONLY_ONE.locName().append(supp.one_of_a_kind + "")));
             }
+
+            tip.accept(new DropLevelBlock(supp.min_lvl, GameBalanceConfig.get().MAX_LEVEL));
         }
 
         if (this.type == SkillGemType.AURA) {
@@ -273,6 +272,7 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
 
             int spiritLeft = (int) Load.player(p).getSkillGemInventory().getRemainingSpirit(p);
             tip.accept(new AdditionalBlock(Itemtips.REMAINING_AURA_CAPACITY.locName().append(spiritLeft + "").withStyle(ChatFormatting.AQUA)));
+            tip.accept(new DropLevelBlock(aura.min_lvl, GameBalanceConfig.get().MAX_LEVEL));
 
         }
 

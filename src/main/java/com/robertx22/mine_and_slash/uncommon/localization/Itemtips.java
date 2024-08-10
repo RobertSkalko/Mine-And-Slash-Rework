@@ -11,6 +11,7 @@ public enum Itemtips implements IAutoLocName {
     //a special method splitLongText() in TooltipsUtils.java can split the sentence into different line by replacing the "\n", achieving a actual line break function.
     JEWEL_UPGRADE_2("[Click the Jewel with the Stone]"),
     JEWEL_UPGRADE_1("To Upgrade needs: %1$sx %2$s"),
+    DROP_LEVEL_RANGE("Drops at Levels: %1$s"),
     SOUL_LOCKED_TO_TYPE("Locked Armor type: %1$s"),
     PROF_MAT_LEVEL_RANGE_INFO("Gained when your profession level is:"),
 
@@ -43,7 +44,7 @@ public enum Itemtips implements IAutoLocName {
     QUALITY("Quality: %1$s%%"),
     Durability("Durability: "),
     Unbreakable("Unbreakable"),
-    Restores("Restores: %1$s"),
+    Restores("Restores: %1$s %2$s"),
 
     CHEST_CONTAINS("Contains: %1$s"),
     NEED_KEY("Needs %1$s "),
@@ -62,6 +63,7 @@ public enum Itemtips implements IAutoLocName {
     UBER_BOSS_MAP_TIP("Right click to Generate Map Item\nLeads to a Boss Fight"),
     UBER_BOSS_FRAG_TIP("Combine with More Fragments in the Crafting Table\nCreates a Map That contains an Uber Boss"),
     RUNE_ITEM_USAGE("Use on Gear with sockets to Insert\nIf same rune is already socketed, rerolls it\n\nAll Runewords are shown in the Wiki.\nUse to view craftable Runewords."),
+    GEM_ITEM_USAGE("Use on Gear with sockets to Insert.\nCan also be Crafted"),
     STONE_REPAIRE_DURABILITY("Repairs %1$s durability."),
     SOUL_CLEANER_USAGE_AND_WARNING("Click on items to remove their soul.\nThe item remains but the stats will be deleted."),
     SOCKET_EXTRACTOR_USAGE("Click on gear to extract a gem."),

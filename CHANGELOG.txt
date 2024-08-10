@@ -17,3 +17,7 @@ Previously point configs were spread to both configs and datapacks, and each use
 - you can now remove singular spell, passive, and stat points
 - resetting talents no longer resets ascendancy
 - asc points now use different reset points potion
+- reset potion ids changed btw
+- reset points potion now give 10 instead of 5 points
+- added can_have_runewords to rarity datapack
+- runes, gems, augment and supp gems now show what level they start dropping at 

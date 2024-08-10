@@ -1,13 +1,13 @@
 package com.robertx22.mine_and_slash.database.data.rarities;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.mine_and_slash.database.data.MinMax;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientTextureUtils;
-import com.robertx22.library_of_exile.registry.ExileRegistryType;
-import com.robertx22.library_of_exile.registry.IAutoGson;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Optional;
@@ -56,6 +56,7 @@ public final class GearRarity extends BaseRarity implements IGearRarity, IAutoGs
     public String min_map_rarity_to_drop = IRarity.COMMON_ID;
     public float item_value_multi;
     public boolean announce_in_chat = false;
+    public boolean can_have_runewords = false;
     public boolean is_unique_item = false;
     public MinMax map_tiers = new MinMax(0, 100);
 
