@@ -19,6 +19,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
+import static com.robertx22.age_of_exile.gui.screens.skill_tree.PainterController.resetAllPaintingWhenDrinkResetPotion;
+
 public class TalentResetPotion extends AutoItem implements IShapedRecipe {
 
     public TalentResetPotion() {
@@ -42,16 +44,7 @@ public class TalentResetPotion extends AutoItem implements IShapedRecipe {
                     .clearAllTalents();
             p.addItem(new ItemStack(Items.GLASS_BOTTLE));
         }
-        if (TreeOptimizationHandler.isOptEnable()) {
-            TreeOptimizationHandler.runOptTask(() -> {
-                for (TalentTree.SchoolType value : TalentTree.SchoolType.values()) {
-                    AllPerkButtonPainter.getPainter(value).startANewRun();
-                    PerkConnectionCache.reset();
-                }
-
-            });
-
-        }
+        resetAllPaintingWhenDrinkResetPotion();
         return stack;
     }
 

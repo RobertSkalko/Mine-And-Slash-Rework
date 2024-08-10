@@ -34,9 +34,9 @@ public class PaintingTransformer {
 
     public static void outputPainting() throws IOException {
         Gson gson = new Gson();
-        String json = gson.toJson(map);
         if (!cache.exists()) {
             cache.createNewFile();
+            String json = gson.toJson(map);
             try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(cache))) {
                 bufferedWriter.write(json);
             } catch (IOException e) {
@@ -46,6 +46,7 @@ public class PaintingTransformer {
         } else {
             if (cacheSize < map.size()) {
                 try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(cache))) {
+                    String json = gson.toJson(map);
                     bufferedWriter.write(json);
                 }
             }
@@ -92,7 +93,7 @@ public class PaintingTransformer {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, ()->()->{
             if (isCacheExists()){
                 readPainting();
-                //I think the they are empty only if the JSON is broken.
+                //I think they are empty only if the JSON is broken.
                 if (handledBufferedImage.isEmpty() || waitingToBeRegisteredQueue.isEmpty()){
                     needToRegenerateCache = true;
                 }

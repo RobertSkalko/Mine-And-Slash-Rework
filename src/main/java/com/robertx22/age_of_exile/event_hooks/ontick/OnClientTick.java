@@ -1,9 +1,6 @@
 package com.robertx22.age_of_exile.event_hooks.ontick;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.TreeOptimizationHandler;
-import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.painter.AllPerkButtonPainter;
-import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.painter.PerkButtonPainter;
+import com.robertx22.age_of_exile.gui.screens.skill_tree.PainterController;
 import com.robertx22.age_of_exile.uncommon.datasaving.Load;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ChatUtils;
 import com.robertx22.age_of_exile.uncommon.utilityclasses.ClientOnly;
@@ -12,16 +9,12 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class OnClientTick {
 
     public static HashMap<String, Integer> COOLDOWN_READY_MAP = new HashMap<>();
-    public static ConcurrentHashMap<Integer, AllPerkButtonPainter> container = new ConcurrentHashMap<>();
-    public static boolean isRegistering = false;
     static int TICKS_TO_SHOW = 50;
     private static int NO_MANA_SOUND_COOLDOWN = 0;
-    private static int handleDrawInterval = 0;
 
     public static boolean canSoundNoMana() {
         return NO_MANA_SOUND_COOLDOWN <= 0;
@@ -35,21 +28,7 @@ public class OnClientTick {
 
         try {
             Player player = Minecraft.getInstance().player;
-            if (TreeOptimizationHandler.isOptEnable()){
-                container.values().forEach(x -> {
-                    x.checkIfNeedRepaint();
-                    x.scheduleRepaint();
-                });
-
-
-
-            RenderSystem.recordRenderCall(() -> {
-                if (!isRegistering){
-                    PerkButtonPainter.handleRegisterQueue();
-                }
-                container.values().forEach(AllPerkButtonPainter::tryRegister);
-            });
-            }
+            PainterController.performEachTickPainterJob();
 
             if (player == null) {
                 return;

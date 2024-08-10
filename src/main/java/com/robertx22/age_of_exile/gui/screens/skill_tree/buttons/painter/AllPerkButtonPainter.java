@@ -5,7 +5,6 @@ import com.mojang.blaze3d.platform.Window;
 import com.robertx22.age_of_exile.database.data.perks.Perk;
 import com.robertx22.age_of_exile.database.data.perks.PerkStatus;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
-import com.robertx22.age_of_exile.event_hooks.ontick.OnClientTick;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.ExileTreeTexture;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.PainterController;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.PerkButton;
@@ -62,11 +61,11 @@ public class AllPerkButtonPainter {
     public static AllPerkButtonPainter getPainter(TalentTree.SchoolType schoolType) {
         AllPerkButtonPainter allPerkButtonPainter;
         int i = schoolType.toString().hashCode();
-        if (!OnClientTick.container.containsKey(i)) {
+        if (!PainterController.container.containsKey(i)) {
             allPerkButtonPainter = new AllPerkButtonPainter(schoolType);
-            OnClientTick.container.put(i, allPerkButtonPainter);
+            PainterController.container.put(i, allPerkButtonPainter);
         }
-        return OnClientTick.container.get(i);
+        return PainterController.container.get(i);
     }
 
     public void onSkillScreenOpen(Collection<ButtonIdentifier> identifiers) {
@@ -108,7 +107,7 @@ public class AllPerkButtonPainter {
     public boolean isAllowedToPaint() {
         return this.state instanceof StandbyState;
     }
-
+    // If a perk button is updating, it means it needs to be rendered on vanilla way because of the status change.
     public boolean isThisButtonIsUpdating(PerkButton button) {
         ButtonIdentifier buttonIdentifier = button.getOptimizedState().buttonIdentifier;
         return this.updateOnThisScreen.contains(buttonIdentifier) || this.updateInThinRun.contains(buttonIdentifier) || this.paintState.waitingToBePainted.contains(buttonIdentifier) || this.paintState.tryHistory.containsKey(buttonIdentifier);
@@ -300,11 +299,12 @@ public class AllPerkButtonPainter {
                 int singleButtonSize = (int) (type.size * singleButtonZoom + 1);
                 BufferedImage redesignSingleButton = new BufferedImage(singleButtonSize, singleButtonSize, BufferedImage.TYPE_INT_ARGB);
                 Graphics2D redesignSingleButtonGraphics = redesignSingleButton.createGraphics();
-
+                //this will dramatically increase the BufferImage size.
                 /*redesignSingleButtonGraphics.setRenderingHint(java.awt.RenderingHints.KEY_INTERPOLATION,
                         java.awt.RenderingHints.VALUE_INTERPOLATION_BILINEAR);*/
 
                 if (identifier.getCurrentStatus() == PerkStatus.BLOCKED){
+                    // BLOCKED perk should be darker
                     redesignSingleButtonGraphics.setComposite(alphaComposite);
                 }
                 redesignSingleButtonGraphics.drawImage(singleButton, 0, 0, singleButtonSize, singleButtonSize, null);
@@ -332,6 +332,7 @@ public class AllPerkButtonPainter {
                 updateInThinRun.add(identifier);
             }
             graphics.dispose();
+            //the output image is very large, and most of it is empty, so we have to cut it to a proper size.
             //unless there are some icons bigger than 50
             var newImage = image.getSubimage(minX, minY, (int) (maxX - minX + 50 * singleButtonZoom), (int) (maxY - minY + 50 * singleButtonZoom));
             painter.minX = minX;
@@ -339,6 +340,7 @@ public class AllPerkButtonPainter {
             painter.maxX = maxX;
             painter.maxY = maxY;
             if (Thread.currentThread().isInterrupted()) return null;
+            //cut it to be smaller, because Minecraft can't load an image bigger than 64k.
             return new SeparableBufferedImage(newImage);
 
         }

@@ -8,10 +8,6 @@ import com.robertx22.age_of_exile.database.data.stats.types.UnknownStat;
 import com.robertx22.age_of_exile.database.data.talent_tree.parser.TalentGrid;
 import com.robertx22.age_of_exile.database.registry.ExileDB;
 import com.robertx22.age_of_exile.database.registry.ExileRegistryTypes;
-import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.TreeOptimizationHandler;
-import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.painter.ButtonIdentifier;
-import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.painter.PaintingTransformer;
-import com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.painter.PerkButtonPainter;
 import com.robertx22.age_of_exile.mmorpg.MMORPG;
 import com.robertx22.age_of_exile.saveclasses.PointData;
 import com.robertx22.age_of_exile.saveclasses.perks.TalentsData;
@@ -21,13 +17,11 @@ import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import net.minecraft.world.entity.player.Player;
-import org.lwjgl.openal.SOFTDeferredUpdates;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class TalentTree implements JsonExileRegistry<TalentTree>, IAutoGson<TalentTree> {
 
@@ -164,8 +158,8 @@ public class TalentTree implements JsonExileRegistry<TalentTree>, IAutoGson<Tale
 
         public PointData center;
 
-        public transient ConcurrentHashMap<PointData, Set<PointData>> connections = new ConcurrentHashMap<>();
-        public transient ConcurrentHashMap<PointData, String> perks = new ConcurrentHashMap<>();
+        public transient HashMap<PointData, Set<PointData>> connections = new HashMap<>();
+        public transient HashMap<PointData, String> perks = new HashMap<>();
 
         public Perk getPerk(PointData point) {
             if (ExileDB.Perks().isRegistered(perks.get(point))) {

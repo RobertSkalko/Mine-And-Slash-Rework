@@ -1,13 +1,10 @@
 package com.robertx22.age_of_exile.gui.screens.skill_tree.buttons.painter;
 
 import com.mojang.blaze3d.platform.NativeImage;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.robertx22.age_of_exile.database.data.perks.PerkStatus;
 import com.robertx22.age_of_exile.database.data.talent_tree.TalentTree;
-import com.robertx22.age_of_exile.event_hooks.ontick.OnClientTick;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.ExileTreeTexture;
 import com.robertx22.age_of_exile.gui.screens.skill_tree.PainterController;
-import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -153,7 +150,7 @@ public class PerkButtonPainter {
         if (waitingToBeRegisteredQueue.isEmpty()) {
             return;
         }
-        OnClientTick.isRegistering = true;
+        PainterController.isRegistering = true;
         while (!waitingToBeRegisteredQueue.isEmpty()){
             //can't use acquire() here, I run this on main thread.
             if (!PainterController.registerLimiter.tryAcquire(Duration.ofNanos(300))){
@@ -178,7 +175,7 @@ public class PerkButtonPainter {
             }
 
         }
-        OnClientTick.isRegistering = false;
+        PainterController.isRegistering = false;
 
     }
 
