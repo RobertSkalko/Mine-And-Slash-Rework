@@ -10,3 +10,6 @@ v.5.5.29
 They now use the same system so i can more easily allow stuff like bonus points for stuff besides talents. (bonus talent points will be preserved for now as legacy code)
 Previously point configs were spread to both configs and datapacks, and each used different methods..
 - added give and reset bonus point commands to all point types now, removed the old talent point commands
+- changed favor_per_second in rarity datapack to favor_per_hour
+- renamed age of exile package to mine and slash, otherwise loggers would confuse people because package name was age_of_exile
+- switched to using loggers so they actually write to log file

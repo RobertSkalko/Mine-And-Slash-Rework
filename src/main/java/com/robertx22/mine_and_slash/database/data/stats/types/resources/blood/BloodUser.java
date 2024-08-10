@@ -1,0 +1,65 @@
+package com.robertx22.mine_and_slash.database.data.stats.types.resources.blood;
+
+import com.robertx22.mine_and_slash.database.data.stats.Stat;
+import com.robertx22.mine_and_slash.database.data.stats.StatScaling;
+import com.robertx22.mine_and_slash.database.data.stats.effects.game_changers.BloodUserEffect;
+import com.robertx22.mine_and_slash.database.data.stats.name_regex.StatNameRegex;
+import com.robertx22.mine_and_slash.database.data.stats.types.resources.mana.Mana;
+import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
+import net.minecraft.ChatFormatting;
+
+public class BloodUser extends Stat {
+    public static String GUID = "blood_user";
+
+    private BloodUser() {
+        this.min = 0;
+        this.scaling = StatScaling.NORMAL;
+        this.group = StatGroup.Misc;
+        this.is_long = true;
+
+        this.statEffect = BloodUserEffect.getInstance();
+
+    }
+
+    @Override
+    public StatNameRegex getStatNameRegex() {
+        return StatNameRegex.JUST_NAME;
+    }
+
+
+    @Override
+    public String locDescForLangFile() {
+        return "";
+    }
+
+    @Override
+    public String GUID() {
+        return GUID;
+    }
+
+    @Override
+    public Elements getElement() {
+        return null;
+    }
+
+    @Override
+    public boolean IsPercent() {
+        return false;
+    }
+
+    @Override
+    public String locNameForLangFile() {
+        return ChatFormatting.GRAY + "You now use " + Blood.getInstance()
+                .getIconNameFormat() + " instead of " + Mana.getInstance()
+                .getIconNameFormat();
+    }
+
+    public static BloodUser getInstance() {
+        return BloodUser.SingletonHolder.INSTANCE;
+    }
+
+    private static class SingletonHolder {
+        private static final BloodUser INSTANCE = new BloodUser();
+    }
+}
+

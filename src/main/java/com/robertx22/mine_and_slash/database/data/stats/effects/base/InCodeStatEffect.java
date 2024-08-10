@@ -1,0 +1,48 @@
+package com.robertx22.mine_and_slash.database.data.stats.effects.base;
+
+import com.robertx22.mine_and_slash.database.data.stats.Stat;
+import com.robertx22.mine_and_slash.saveclasses.unit.StatData;
+import com.robertx22.mine_and_slash.saveclasses.unit.Unit;
+import com.robertx22.mine_and_slash.uncommon.effectdatas.EffectEvent;
+import com.robertx22.mine_and_slash.uncommon.interfaces.EffectSides;
+import com.robertx22.mine_and_slash.uncommon.interfaces.IStatEffect;
+
+public abstract class InCodeStatEffect<T extends EffectEvent> implements IStatEffect {
+
+    Class<T> theclass;
+
+    public InCodeStatEffect(Class<T> theclass) {
+        this.theclass = theclass;
+    }
+
+    public abstract T activate(T effect, StatData data, Stat stat);
+
+    public boolean worksOnEvent(EffectEvent ev) {
+        return theclass.isAssignableFrom(ev.getClass());
+    }
+
+    public abstract boolean canActivate(T effect, StatData data, Stat stat);
+
+    public Unit getSource(EffectEvent effect) {
+        if (Side() == EffectSides.Target) {
+            return effect.targetData.getUnit();
+        } else {
+            return effect.sourceData.getUnit();
+        }
+    }
+
+    @Override
+    public final void TryModifyEffect(EffectEvent effect, EffectSides statSource, StatData data, Stat stat) {
+
+        try {
+            if (!effect.data.isCanceled()) {
+                if (canActivate((T) effect, data, stat)) {
+                    activate((T) effect, data, stat);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+}

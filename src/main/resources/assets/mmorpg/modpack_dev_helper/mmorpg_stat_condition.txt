@@ -48,8 +48,6 @@ is_is_dodged_true
 is_is_dodged_true_is_false
 is_is_summon_attack_true
 is_is_summon_attack_true_is_false
-is_magic_weapon
-is_melee_weapon
 is_profane_explosion_not_on_cd
 is_projectile
 is_ranged_weapon

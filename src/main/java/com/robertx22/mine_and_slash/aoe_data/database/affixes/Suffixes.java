@@ -1,0 +1,39 @@
+package com.robertx22.mine_and_slash.aoe_data.database.affixes;
+
+import com.robertx22.mine_and_slash.aoe_data.database.affixes.adders.EnchantAffixes;
+import com.robertx22.mine_and_slash.aoe_data.database.affixes.adders.GearSlotPowerAffixesAdder;
+import com.robertx22.mine_and_slash.aoe_data.database.affixes.adders.NonWeaponSuffixes;
+import com.robertx22.mine_and_slash.aoe_data.database.affixes.adders.WeaponSuffixes;
+import com.robertx22.mine_and_slash.aoe_data.database.affixes.adders.jewelry.JewelrySuffixes;
+import com.robertx22.mine_and_slash.database.base.IRandomDefault;
+import com.robertx22.mine_and_slash.database.data.affixes.Affix;
+import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.database.registry.ExileFilters;
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
+
+import java.util.List;
+
+public class Suffixes implements IRandomDefault<Affix>, ExileRegistryInit {
+
+    public static Suffixes INSTANCE = new Suffixes();
+
+    @Override
+    public void registerAll() {
+        new EnchantAffixes().registerAll();
+
+        new GearSlotPowerAffixesAdder().registerAll();
+
+        new WeaponSuffixes().registerAll();
+        new NonWeaponSuffixes().registerAll();
+        new JewelrySuffixes().registerAll();
+
+    }
+
+    @Override
+    public List<Affix> All() {
+        return ExileDB.Affixes()
+                .getWrapped()
+                .of(ExileFilters.ofAffixType(Affix.Type.suffix)).list;
+    }
+
+}

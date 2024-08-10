@@ -1,10 +1,10 @@
 package com.robertx22.temp;
 
 
-import com.robertx22.age_of_exile.database.data.game_balance_config.GameBalanceConfig;
-import com.robertx22.age_of_exile.database.data.level_ranges.LevelRange;
-import com.robertx22.age_of_exile.database.registrators.LevelRanges;
-import com.robertx22.age_of_exile.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanceConfig;
+import com.robertx22.mine_and_slash.database.data.level_ranges.LevelRange;
+import com.robertx22.mine_and_slash.database.registrators.LevelRanges;
+import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import net.minecraft.ChatFormatting;
 
 import java.util.Arrays;

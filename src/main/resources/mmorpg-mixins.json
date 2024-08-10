@@ -2,7 +2,7 @@
   "minVersion": "0.8",
   "required": true,
   "refmap": "mmorpg.refmap.json",
-  "package": "com.robertx22.age_of_exile.mixins",
+  "package": "com.robertx22.mine_and_slash.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "ArrowShootMixin",

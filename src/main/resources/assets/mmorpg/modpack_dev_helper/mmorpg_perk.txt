@@ -79,6 +79,8 @@ battlemage_class_3
 battlemage_class_4
 battlemage_class_5
 battlemage_class_6
+big_attack_atk_style_dmg
+big_spell_atk_style_dmg
 black_hole
 bleed_chance
 bleed_chance_big
