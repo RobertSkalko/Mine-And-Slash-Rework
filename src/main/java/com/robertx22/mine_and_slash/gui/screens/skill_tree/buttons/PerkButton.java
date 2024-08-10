@@ -116,7 +116,7 @@ public class PerkButton extends ImageButton {
         if (this.active && this.visible) {
             boolean bl = this.clicked(mouseX, mouseY);
             if (bl) {
-//                MMORPG.LOGGER.log(this.getX() + "_" + getY() + " : " + perk.GUID());
+//                ExileLog.get().log(this.getX() + "_" + getY() + " : " + perk.GUID());
 
 
                 this.playDownSound(Minecraft.getInstance()

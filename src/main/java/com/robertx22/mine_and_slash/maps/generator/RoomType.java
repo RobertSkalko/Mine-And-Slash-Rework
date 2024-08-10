@@ -1,10 +1,10 @@
 package com.robertx22.mine_and_slash.maps.generator;
 
-import com.robertx22.mine_and_slash.maps.DungeonRoom;
-import com.robertx22.mine_and_slash.maps.dungeon_reg.Dungeon;
-import com.robertx22.mine_and_slash.mmorpg.MMORPG;
+import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.library_of_exile.utils.RandomUtils;
+import com.robertx22.mine_and_slash.maps.DungeonRoom;
+import com.robertx22.mine_and_slash.maps.dungeon_reg.Dungeon;
 import net.minecraft.world.level.block.Rotation;
 
 import java.util.ArrayList;
@@ -125,7 +125,7 @@ public enum RoomType implements IWeighted {
         }
 
         if (possible.isEmpty()) {
-            MMORPG.LOGGER.log("No possible rooms?");
+            ExileLog.get().warn("No possible rooms?");
         }
 
         if (builder.builtDungeon.bossRooms >= builder.maxBossRooms) {

@@ -7,6 +7,7 @@ import com.robertx22.mine_and_slash.content.ubers.UberBossMapItem;
 import com.robertx22.mine_and_slash.content.ubers.UberBossTier;
 import com.robertx22.mine_and_slash.content.ubers.UberEnum;
 import com.robertx22.mine_and_slash.content.ubers.UberFragmentItem;
+import com.robertx22.mine_and_slash.database.data.game_balance_config.PlayerPointsType;
 import com.robertx22.mine_and_slash.database.data.loot_chest.base.LootChestItem;
 import com.robertx22.mine_and_slash.database.data.profession.all.Professions;
 import com.robertx22.mine_and_slash.database.data.profession.items.DestroyOutputMegaExpItem;
@@ -24,14 +25,7 @@ import com.robertx22.mine_and_slash.vanilla_mc.items.gearitems.bases.TomeItem;
 import com.robertx22.mine_and_slash.vanilla_mc.items.gearitems.baubles.ItemNecklace;
 import com.robertx22.mine_and_slash.vanilla_mc.items.gearitems.baubles.ItemRing;
 import com.robertx22.mine_and_slash.vanilla_mc.items.gearitems.weapons.StaffWeapon;
-import com.robertx22.mine_and_slash.vanilla_mc.items.misc.ItemNewbieGearBag;
-import com.robertx22.mine_and_slash.vanilla_mc.items.misc.LootTableItem;
-import com.robertx22.mine_and_slash.vanilla_mc.items.misc.ProjectileItem;
-import com.robertx22.mine_and_slash.vanilla_mc.items.misc.SoulCleanerItem;
-import com.robertx22.mine_and_slash.vanilla_mc.items.misc.reset_pots.ResetStatsPotion;
-import com.robertx22.mine_and_slash.vanilla_mc.items.misc.reset_pots.SingleTalentResetPotion;
-import com.robertx22.mine_and_slash.vanilla_mc.items.misc.reset_pots.SpellsResetPotion;
-import com.robertx22.mine_and_slash.vanilla_mc.items.misc.reset_pots.TalentResetPotion;
+import com.robertx22.mine_and_slash.vanilla_mc.items.misc.*;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -56,6 +50,10 @@ public class SlashItems {
             EFFECT_DISPLAY.put(eff.GUID(), Def.item(() -> new EffectDisplayItem(), "mob_effects/" + eff.GUID()));
         }
 
+        for (PlayerPointsType type : PlayerPointsType.values()) {
+            FULL_RESET_POTIONS.put(type, Def.item(() -> new ResetPotion(type, ResetPotion.ResetType.FULL_RESET), "potions/" + ResetPotion.ResetType.FULL_RESET.id + "_" + type.GUID()));
+            RESET_POINT_POTIONS.put(type, Def.item(() -> new ResetPotion(type, ResetPotion.ResetType.ADD_POINTS), "potions/" + ResetPotion.ResetType.ADD_POINTS.id + "_" + type.GUID()));
+        }
 
         for (UberBossTier tier : UberBossTier.map.values()) {
             for (UberEnum uber : UberEnum.values()) {
@@ -84,6 +82,9 @@ public class SlashItems {
     public static HashMap<UberEnum, HashMap<Integer, RegObj<UberBossMapItem>>> UBER_MAPS = new HashMap<>();
     public static HashMap<UberEnum, HashMap<Integer, RegObj<UberFragmentItem>>> UBER_FRAGS = new HashMap<>();
 
+
+    public static HashMap<PlayerPointsType, RegObj<Item>> FULL_RESET_POTIONS = new HashMap<>();
+    public static HashMap<PlayerPointsType, RegObj<Item>> RESET_POINT_POTIONS = new HashMap<>();
 
     public static RegObj<CommonGearProducerItem> COMMON_SOUL_PRODUCE = Def.item(() -> new CommonGearProducerItem(), "common_soul_produce");
 
@@ -119,10 +120,6 @@ public class SlashItems {
     public static RegObj<Item> GOLDEN_ORB = Def.item(() -> new SimpleMatItem(), "mat/golden_orb");
     public static RegObj<Item> MYTHIC_ESSENCE = Def.item(() -> new SimpleMatItem(), "mat/mythic_essence");
 
-    public static RegObj<TalentResetPotion> RESET_ALL_PERKS = Def.item(() -> new TalentResetPotion(), "potions/reset_all_perks");
-    public static RegObj<SingleTalentResetPotion> ADD_RESET_PERK_POINTS = Def.item(() -> new SingleTalentResetPotion(), "potions/add_reset_perk_points");
-    public static RegObj<SpellsResetPotion> RESET_SPELLS = Def.item(() -> new SpellsResetPotion(), "potions/reset_spells");
-    public static RegObj<ResetStatsPotion> RESET_STATS = Def.item(() -> new ResetStatsPotion(), "potions/reset_stats");
 
     public static RegObj<LootChestItem> CURRENCY_CHEST = Def.item(() -> new LootChestItem("Currency"), "chest/currency");
 

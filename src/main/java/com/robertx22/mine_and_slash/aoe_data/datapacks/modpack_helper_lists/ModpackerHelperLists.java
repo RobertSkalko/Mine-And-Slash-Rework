@@ -17,7 +17,7 @@ public class ModpackerHelperLists {
 
     public static void generate() {
 
-        //  MMORPG.LOGGER.log("Starting to create lang file");
+        //  ExileLog.get().log("Starting to create lang file");
 
         Database.getAllRegistries()
                 .forEach(x -> {

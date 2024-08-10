@@ -32,7 +32,7 @@ import net.minecraft.commands.CommandSourceStack;
 public class CommandRegister {
 
     public static void Register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        //MMORPG.LOGGER.log("Registering Mine and slash Commands.");
+        //ExileLog.get().log("Registering Mine and slash Commands.");
 
 
         EntityCommands.init(dispatcher);

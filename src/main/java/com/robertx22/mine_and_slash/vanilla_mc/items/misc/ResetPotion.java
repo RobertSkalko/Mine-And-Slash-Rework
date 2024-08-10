@@ -1,10 +1,8 @@
-package com.robertx22.mine_and_slash.vanilla_mc.items.misc.reset_pots;
+package com.robertx22.mine_and_slash.vanilla_mc.items.misc;
 
 import com.robertx22.mine_and_slash.database.data.currency.base.IShapedRecipe;
-import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
+import com.robertx22.mine_and_slash.database.data.game_balance_config.PlayerPointsType;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
-import com.robertx22.mine_and_slash.vanilla_mc.items.misc.AutoItem;
-import com.robertx22.mine_and_slash.vanilla_mc.items.misc.RarityStoneItem;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -16,18 +14,38 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
-import java.util.HashMap;
+import java.util.function.Supplier;
 
-public class SpellsResetPotion extends AutoItem implements IShapedRecipe {
+public class ResetPotion extends AutoItem implements IShapedRecipe {
 
-    public SpellsResetPotion() {
-        super(new Item.Properties()
-                .stacksTo(10));
+    PlayerPointsType pointsType;
+    ResetType reset;
+
+    public ResetPotion(PlayerPointsType pointsType, ResetType reset) {
+        super(new Item.Properties().stacksTo(64));
+        this.pointsType = pointsType;
+        this.reset = reset;
+    }
+
+    public enum ResetType {
+        ADD_POINTS(() -> RarityStoneItem.of(IRarity.COMMON_ID), "Reset Points", "reset_points"),
+        FULL_RESET(() -> RarityStoneItem.of(IRarity.MYTHIC_ID), "Full Reset", "full_reset");
+
+        public Supplier<Item> mat;
+        public String name;
+        public String id;
+
+        ResetType(Supplier<Item> mat, String name, String id) {
+            this.mat = mat;
+            this.name = name;
+            this.id = id;
+        }
+
     }
 
     @Override
     public String GUID() {
-        return "potions/reset_spells";
+        return "";
     }
 
     @Override
@@ -37,8 +55,11 @@ public class SpellsResetPotion extends AutoItem implements IShapedRecipe {
 
         if (player instanceof Player) {
             Player p = (Player) player;
-            Load.player(p).ascClass.reset();
-            Load.player(p).spellCastingData.hotbar = new HashMap<>();
+            if (reset == ResetType.FULL_RESET) {
+                this.pointsType.fullReset(p);
+            } else {
+                this.pointsType.addResetPoints(p, 10);
+            }
             p.addItem(new ItemStack(Items.GLASS_BOTTLE));
         }
 
@@ -65,18 +86,18 @@ public class SpellsResetPotion extends AutoItem implements IShapedRecipe {
     @Override
     public ShapedRecipeBuilder getRecipe() {
         return shaped(this)
-                .define('t', RarityStoneItem.of(IRarity.UNCOMMON))
-                .define('v', Items.IRON_AXE)
+                .define('t', reset.mat.get())
+                .define('v', pointsType.matItem())
                 .define('b', Items.GLASS_BOTTLE)
-                .define('c', Items.GOLD_INGOT)
-                .pattern("cvc")
+                .pattern("vvv")
                 .pattern("vtv")
-                .pattern("cbc")
+                .pattern("vbv")
                 .unlockedBy("player_level", trigger());
     }
 
     @Override
     public String locNameForLangFile() {
-        return "Class Reset Potion";
+        return reset.name + " " + pointsType.word().locNameForLangFile() + " Potion";
     }
+
 }

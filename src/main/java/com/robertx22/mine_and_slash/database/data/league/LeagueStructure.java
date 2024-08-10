@@ -1,11 +1,11 @@
 package com.robertx22.mine_and_slash.database.data.league;
 
+import com.robertx22.library_of_exile.main.ExileLog;
+import com.robertx22.library_of_exile.utils.TeleportUtils;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.maps.MapItemData;
-import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.mmorpg.ModErrors;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
-import com.robertx22.library_of_exile.utils.TeleportUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -131,7 +131,7 @@ public abstract class LeagueStructure {
                     BlockPos position = cpos.getBlockAt(0, startY(), 0);
 
                     if (template == null) {
-                        MMORPG.LOGGER.log("FATAL ERROR: Structure does not exist (" + room.toString() + ")");
+                        ExileLog.get().warn("FATAL ERROR: Structure does not exist (" + room.toString() + ")");
                         return false;
                     }
                     settings.setRotation(Rotation.NONE);

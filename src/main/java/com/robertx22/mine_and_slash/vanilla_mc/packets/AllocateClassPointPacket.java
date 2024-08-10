@@ -1,12 +1,12 @@
 package com.robertx22.mine_and_slash.vanilla_mc.packets;
 
+import com.robertx22.library_of_exile.main.MyPacket;
+import com.robertx22.library_of_exile.packets.ExilePacketContext;
 import com.robertx22.mine_and_slash.database.data.perks.Perk;
 import com.robertx22.mine_and_slash.database.data.spell_school.SpellSchool;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
-import com.robertx22.library_of_exile.main.MyPacket;
-import com.robertx22.library_of_exile.packets.ExilePacketContext;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
@@ -55,15 +55,19 @@ public class AllocateClassPointPacket extends MyPacket<AllocateClassPointPacket>
     public void onReceived(ExilePacketContext ctx) {
 
 
-        Perk perk = ExileDB.Perks()
-                .get(this.id);
-        SpellSchool school = ExileDB.SpellSchools()
-                .get(this.schoolid);
+        Perk perk = ExileDB.Perks().get(this.id);
+        SpellSchool school = ExileDB.SpellSchools().get(this.schoolid);
 
         var data = Load.player(ctx.getPlayer()).ascClass;
 
-        if (data.canLearn(ctx.getPlayer(), school, perk)) {
-            data.learn(perk, school);
+        if (action == ACTION.ALLOCATE) {
+            if (data.canLearn(ctx.getPlayer(), school, perk)) {
+                data.learn(perk, school);
+            }
+        } else {
+            if (data.canUnlearn(ctx.getPlayer(), school, perk)) {
+                data.unlearn(ctx.getPlayer(), perk, school);
+            }
         }
 
         Load.Unit(ctx.getPlayer()).setEquipsChanged();

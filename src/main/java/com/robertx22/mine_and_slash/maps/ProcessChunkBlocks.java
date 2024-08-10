@@ -1,6 +1,7 @@
 package com.robertx22.mine_and_slash.maps;
 
 
+import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.mine_and_slash.capability.world.WorldData;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.database.data.league.LeagueMechanic;
@@ -12,7 +13,6 @@ import com.robertx22.mine_and_slash.maps.generator.DungeonBuilder;
 import com.robertx22.mine_and_slash.maps.processors.DataProcessor;
 import com.robertx22.mine_and_slash.maps.processors.DataProcessors;
 import com.robertx22.mine_and_slash.maps.processors.league.LeagueSpawnPos;
-import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.tags.imp.DungeonTag;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
@@ -40,7 +40,7 @@ public class ProcessChunkBlocks {
             builder.build();
             BuiltRoom room = builder.builtDungeon.getRoomForChunk(cpos);
 
-            MMORPG.LOGGER.log("Room affected: " + room.getStructure()
+            ExileLog.get().log("Room affected: " + room.getStructure()
                     .toString());
         } catch (Exception e) {
             e.printStackTrace();
@@ -210,7 +210,7 @@ public class ProcessChunkBlocks {
                     }
 
                 } else {
-                    MMORPG.LOGGER.log("Data block with tag: " + text + " matched no processors! " + tilePos.toString());
+                    ExileLog.get().warn("Data block with tag: " + text + " matched no processors! " + tilePos.toString());
                     logRoomForPos(level, tilePos);
                 }
             }
@@ -248,7 +248,7 @@ public class ProcessChunkBlocks {
                     }
 
                 } else {
-                    //  MMORPG.LOGGER.log("Data block with tag: " + text + " matched no processors! " + tilePos.toString());
+                    //  ExileLog.get().log("Data block with tag: " + text + " matched no processors! " + tilePos.toString());
                     //logRoomForPos(level, tilePos);
                 }
             }

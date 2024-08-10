@@ -1,5 +1,7 @@
 package com.robertx22.mine_and_slash.gui.screens.spell;
 
+import com.robertx22.library_of_exile.main.Packets;
+import com.robertx22.library_of_exile.utils.TextUTIL;
 import com.robertx22.mine_and_slash.database.data.perks.Perk;
 import com.robertx22.mine_and_slash.gui.TextUtils;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
@@ -8,8 +10,6 @@ import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRangeInf
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.AllocateClassPointPacket;
-import com.robertx22.library_of_exile.main.Packets;
-import com.robertx22.library_of_exile.utils.TextUTIL;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -40,12 +40,35 @@ public class LearnClassPointButton extends ImageButton {
 
     public LearnClassPointButton(SpellSchoolScreen screen, Perk perk, int xPos, int yPos) {
         super(xPos, yPos, BUTTON_SIZE_X, BUTTON_SIZE_Y, 0, 0, BUTTON_SIZE_Y, SPELL_SLOT, (button) -> {
-            Packets.sendToServer(new AllocateClassPointPacket(screen.currentSchool(), perk, AllocateClassPointPacket.ACTION.ALLOCATE));
+
+            //    Packets.sendToServer(new AllocateClassPointPacket(screen.currentSchool(), perk, AllocateClassPointPacket.ACTION.ALLOCATE));
 
         });
         this.screen = screen;
         this.perk = perk;
 
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+
+        if (this.active && this.visible) {
+            boolean bl = this.clicked(mouseX, mouseY);
+            if (bl) {
+                this.playDownSound(Minecraft.getInstance().getSoundManager());
+                if (button == 0) {
+                    Packets.sendToServer(new AllocateClassPointPacket(screen.currentSchool(), perk, AllocateClassPointPacket.ACTION.ALLOCATE));
+                }
+                if (button == 1) {
+                    Packets.sendToServer(new AllocateClassPointPacket(screen.currentSchool(), perk, AllocateClassPointPacket.ACTION.REMOVE));
+                }
+                this.onClick(mouseX, mouseY);
+                return true;
+            }
+            return false;
+        } else {
+            return false;
+        }
     }
 
     @Override

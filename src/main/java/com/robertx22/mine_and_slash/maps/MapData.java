@@ -1,11 +1,11 @@
 package com.robertx22.mine_and_slash.maps;
 
+import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.utils.TeleportUtils;
 import com.robertx22.mine_and_slash.database.data.league.LeagueMechanics;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.maps.spawned_map_mobs.SpawnedMobList;
-import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.uncommon.MathHelper;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
@@ -142,7 +142,7 @@ public class MapData {
 
         while (pos == null || maps.getMap(pos).isPresent()) {
             if (tries > 200) {
-                MMORPG.LOGGER.log("Tried too many times to find random dungeon pos and failed, please delete the map dimension folder");
+                ExileLog.get().warn("Tried too many times to find random dungeon pos and failed, please delete the map dimension folder");
                 return null;
             }
             int x = RandomUtils.RandomRange(50, max);
@@ -154,7 +154,7 @@ public class MapData {
         }
 
         if (tries > 1000) {
-            MMORPG.LOGGER.log("It took more than 1000 tries to find random free dungeon, either you are insanely unlucky, or the world is close to filled! Dungeon worlds are cleared on next server boot if they reach too close to capacity.");
+            ExileLog.get().warn("It took more than 1000 tries to find random free dungeon, either you are insanely unlucky, or the world is close to filled! Dungeon worlds are cleared on next server boot if they reach too close to capacity.");
         }
 
         return pos;

@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.mmorpg;
 
+import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.mine_and_slash.maps.dungeon_reg.Dungeon;
 
 import java.lang.reflect.Field;
@@ -14,12 +15,12 @@ public class TestReflection {
             Class klass = c.getClass();
             Field[] fields = getAllFields(klass);
             for (Field field : fields) {
-                MMORPG.LOGGER.log(field.getName());
+                ExileLog.get().log(field.getName());
             }
         } catch (Throwable a_th) {
             a_th.printStackTrace();
         }
-        MMORPG.LOGGER.log("DONE TESTING REFLECTION");
+        ExileLog.get().log("DONE TESTING REFLECTION");
 
     }
 

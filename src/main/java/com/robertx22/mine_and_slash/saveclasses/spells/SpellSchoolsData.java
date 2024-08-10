@@ -14,17 +14,54 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class SpellSchoolsData implements IStatCtx {
 
     public HashMap<String, Integer> allocated_lvls = new HashMap<>();
-    public List<String> school = new ArrayList<>();
 
 
-    public void reset() {
-        this.allocated_lvls = new HashMap<>();
-        this.school = new ArrayList<>();
+    public Set<String> school() {
+        Set<String> list = new HashSet<>();
+        for (Perk perk : getAllPerks()) {
+            var sc = perk.getSpellSchool();
+            if (!sc.isPresent()) {
+                allocated_lvls.remove(perk.GUID());
+            } else {
+                list.add(sc.get().GUID());
+            }
+        }
+        return list;
+    }
+
+
+    public List<Perk> getAllPerks() {
+        return allocated_lvls.keySet().stream().map(x -> ExileDB.Perks().get(x)).collect(Collectors.toList());
+    }
+
+
+    public void reset(PointType type) {
+
+        var schools = school();
+
+        // just in case of updates
+        for (Perk perk : getAllPerks()) {
+            var sch = perk.getSpellSchool();
+            if (!sch.isPresent() || sch.get() == null || !schools.contains(sch.get().GUID())) {
+                this.allocated_lvls.remove(perk.GUID());
+            }
+        }
+        for (Perk perk : getAllPerks()) {
+
+            if (type == PointType.SPELL && perk.isSpell()) {
+                this.allocated_lvls.remove(perk.GUID());
+            }
+            if (type == PointType.PASSIVE && perk.isPassive()) {
+                this.allocated_lvls.remove(perk.GUID());
+            }
+        }
+
     }
 
     public enum PointType {
@@ -72,7 +109,7 @@ public class SpellSchoolsData implements IStatCtx {
         if (!school.isLevelEnoughFor(en, perk)) {
             return false;
         }
-        if (this.school.size() > 1 && !this.school.contains(school.GUID())) {
+        if (this.school().size() > 1 && !this.school().contains(school.GUID())) {
             return false;
         }
         if (allocated_lvls.getOrDefault(perk.GUID(), 0) >= perk.getMaxLevel()) {
@@ -81,14 +118,34 @@ public class SpellSchoolsData implements IStatCtx {
         return true;
     }
 
-    public void learn(Perk perk, SpellSchool school) {
+    public boolean canUnlearn(Player en, SpellSchool school, Perk perk) {
+        if (getLevel(perk.id) < 1) {
+            return false;
+        }
+        if (!perk.getPointType().getGeneralType().hasResetPoints(en)) {
+            return false;
+        }
+        return true;
+    }
 
-        if (!this.school.contains(school.GUID())) {
-            this.school.add(school.GUID());
+
+    public void learn(Perk perk, SpellSchool school) {
+        if (!this.school().contains(school.GUID())) {
+            this.school().add(school.GUID());
         }
         int current = allocated_lvls.getOrDefault(perk.GUID(), 0);
         allocated_lvls.put(perk.GUID(), current + 1);
+    }
 
+    public void unlearn(Player p, Perk perk, SpellSchool school) {
+        if (!this.school().contains(school.GUID())) {
+            this.school().add(school.GUID());
+        }
+        int current = allocated_lvls.getOrDefault(perk.GUID(), 0);
+        if (current > 0) {
+            perk.getPointType().getGeneralType().reduceResetPoints(p, 1);
+            allocated_lvls.put(perk.GUID(), current - 1);
+        }
     }
 
 

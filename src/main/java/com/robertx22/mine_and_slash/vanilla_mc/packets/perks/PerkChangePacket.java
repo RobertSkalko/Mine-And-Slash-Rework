@@ -1,14 +1,15 @@
 package com.robertx22.mine_and_slash.vanilla_mc.packets.perks;
 
+import com.robertx22.library_of_exile.main.MyPacket;
+import com.robertx22.library_of_exile.packets.ExilePacketContext;
 import com.robertx22.mine_and_slash.capability.player.PlayerData;
+import com.robertx22.mine_and_slash.database.data.game_balance_config.PlayerPointsType;
 import com.robertx22.mine_and_slash.database.data.talent_tree.TalentTree;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.saveclasses.PointData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
-import com.robertx22.library_of_exile.main.MyPacket;
-import com.robertx22.library_of_exile.packets.ExilePacketContext;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
@@ -60,8 +61,9 @@ public class PerkChangePacket extends MyPacket<PerkChangePacket> {
     @Override
     public void onReceived(ExilePacketContext ctx) {
         PlayerData playerData = Load.player(ctx.getPlayer());
-        TalentTree sc = ExileDB.TalentTrees()
-                .get(school);
+        TalentTree sc = ExileDB.TalentTrees().get(school);
+
+        PlayerPointsType type = sc.getSchool_type().getPointType();
 
         if (sc == null) {
             MMORPG.logError("school is null: " + this.school);
@@ -74,9 +76,9 @@ public class PerkChangePacket extends MyPacket<PerkChangePacket> {
                 playerData.talents.allocate(ctx.getPlayer(), sc, new PointData(x, y));
             }
         } else if (action == ACTION.REMOVE) {
-            if (playerData.talents.canRemove(sc, point)) {
+            if (playerData.talents.canRemove(ctx.getPlayer(), sc, point)) {
                 playerData.talents.remove(sc.getSchool_type(), new PointData(x, y));
-                playerData.talents.reset_points--;
+                type.reduceResetPoints(ctx.getPlayer(), 1);
             }
         }
 

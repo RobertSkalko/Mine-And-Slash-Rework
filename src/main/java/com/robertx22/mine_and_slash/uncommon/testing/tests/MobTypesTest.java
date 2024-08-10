@@ -1,6 +1,6 @@
 package com.robertx22.mine_and_slash.uncommon.testing.tests;
 
-import com.robertx22.mine_and_slash.mmorpg.MMORPG;
+import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.EntityTypeUtils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -19,7 +19,7 @@ public class MobTypesTest {
             if (en instanceof LivingEntity) {
                 EntityTypeUtils.EntityClassification ent = EntityTypeUtils.getType((LivingEntity) en);
 
-                MMORPG.LOGGER.log(ForgeRegistries.ENTITY_TYPES.getKey(type).toString() + ": " + ent.id);
+                ExileLog.get().log(ForgeRegistries.ENTITY_TYPES.getKey(type).toString() + ": " + ent.id);
             }
 
         }

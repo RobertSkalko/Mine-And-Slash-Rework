@@ -129,7 +129,7 @@ public class CreateLangFile {
         json = CreateLangFileUtils.replaceLast(json, ",", ""); // removes last , or else json wont work
 
         try {
-            //  MMORPG.LOGGER.log("Starting to create lang file");
+            //  ExileLog.get().log("Starting to create lang file");
 
             if (Files.exists(Paths.get(DirUtils.langFilePath())) == false) {
                 Files.createFile(Paths.get(DirUtils.langFilePath()));
@@ -140,7 +140,7 @@ public class CreateLangFile {
             FileWriter fw = new FileWriter(file);
             fw.write(json);
             fw.close();
-            //MMORPG.LOGGER.log("Saved lang file to " + file.toPath()                    .toString());
+            //ExileLog.get().log("Saved lang file to " + file.toPath()                    .toString());
 
         } catch (Exception e) {
             e.printStackTrace();

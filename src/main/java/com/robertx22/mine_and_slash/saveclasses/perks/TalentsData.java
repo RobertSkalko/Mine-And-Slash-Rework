@@ -22,8 +22,6 @@ public class TalentsData implements IStatCtx {
 
     HashMap<TalentTree.SchoolType, SchoolData> perks = new HashMap<>();
 
-    public int reset_points = 5;
-
 
     public int getAllocatedPoints(TalentTree.SchoolType type) {
         return getSchool(type).getAllocatedPointsInSchool();
@@ -76,13 +74,12 @@ public class TalentsData implements IStatCtx {
 
     }
 
-    public boolean canRemove(TalentTree school, PointData point) {
+    public boolean canRemove(Player p, TalentTree school, PointData point) {
 
         if (!getSchool(school.getSchool_type()).isAllocated(point)) {
             return false;
         }
-
-        if (reset_points < 1) {
+        if (school.getSchool_type().getPointType().getResetPoints(p) < 1) {
             return false;
         }
 
@@ -133,9 +130,8 @@ public class TalentsData implements IStatCtx {
         return false;
     }
 
-    public void clearAllTalents() {
-
-        this.perks = new HashMap<>();
+    public void clearAllTalents(TalentTree.SchoolType school) {
+        this.perks.put(school, new SchoolData());
 
 
     }

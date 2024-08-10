@@ -1,8 +1,13 @@
 package com.robertx22.mine_and_slash.database.data.perks;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.IAutoGson;
+import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.mine_and_slash.database.OptScaleExactStat;
+import com.robertx22.mine_and_slash.database.data.spell_school.SpellSchool;
 import com.robertx22.mine_and_slash.database.data.stats.Stat;
 import com.robertx22.mine_and_slash.database.data.stats.types.LearnSpellStat;
+import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.ModRange;
@@ -15,15 +20,13 @@ import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientTextureUtils;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.TooltipStatsAligner;
-import com.robertx22.library_of_exile.registry.ExileRegistryType;
-import com.robertx22.library_of_exile.registry.IAutoGson;
-import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocName {
     public static Perk SERIALIZER = new Perk();
@@ -56,6 +59,11 @@ public class Perk implements JsonExileRegistry<Perk>, IAutoGson<Perk>, IAutoLocN
 
     public boolean isPassive() {
         return !isSpell() && this.max_lvls > 1;
+    }
+
+    public Optional<SpellSchool> getSpellSchool() {
+        var opt = ExileDB.SpellSchools().getList().stream().filter(x -> x.perks.containsKey(GUID())).findFirst();
+        return opt;
     }
 
     public ResourceLocation getIcon() {

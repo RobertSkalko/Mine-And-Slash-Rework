@@ -1,11 +1,11 @@
 package com.robertx22.mine_and_slash.saveclasses;
 
 import com.google.gson.JsonObject;
+import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.library_of_exile.registry.serialization.ISerializable;
 import com.robertx22.mine_and_slash.database.data.StatMod;
 import com.robertx22.mine_and_slash.database.data.stats.Stat;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
-import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.ITooltipList;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.ModRange;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRangeInfo;
@@ -114,7 +114,7 @@ public class ExactStatData implements ISerializable<ExactStatData>, ITooltipList
         if (type == other.type) {
             v1 += other.v1;
         } else {
-            MMORPG.LOGGER.log("error wrong types");
+            ExileLog.get().warn("Trying to add ExactStatData with different ModTypes");
         }
     }
 

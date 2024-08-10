@@ -1,13 +1,13 @@
 package com.robertx22.mine_and_slash.uncommon.effectdatas.rework.condition;
 
 import com.google.gson.JsonObject;
+import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.library_of_exile.registry.Database;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.mine_and_slash.database.data.stats.Stat;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
-import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.saveclasses.unit.StatData;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.EffectEvent;
 import com.robertx22.mine_and_slash.uncommon.interfaces.EffectSides;
@@ -67,7 +67,7 @@ public abstract class StatCondition implements JsonExileRegistry<StatCondition>,
         String ser = json.get("ser").getAsString();
 
         if (!SERIALIZERS.containsKey(ser)) {
-            MMORPG.LOGGER.log(this.id + " has no serializer!");
+            ExileLog.get().warn(this.id + " has no serializer!");
         }
 
         StatCondition t = null;

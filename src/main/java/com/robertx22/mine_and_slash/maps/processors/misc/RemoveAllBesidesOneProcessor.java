@@ -1,9 +1,9 @@
 package com.robertx22.mine_and_slash.maps.processors.misc;
 
+import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.mine_and_slash.maps.generator.ChunkProcessData;
 import com.robertx22.mine_and_slash.maps.processors.DataProcessor;
-import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
@@ -66,7 +66,7 @@ public class RemoveAllBesidesOneProcessor extends DataProcessor {
                 list.forEach(x -> world.setBlock(x, Blocks.AIR.defaultBlockState(), 2));
 
             } else {
-                MMORPG.LOGGER.log("Didn't find any correct blocks?");
+                ExileLog.get().warn("Didn't find any correct blocks?");
             }
         } catch (Exception e) {
             e.printStackTrace();

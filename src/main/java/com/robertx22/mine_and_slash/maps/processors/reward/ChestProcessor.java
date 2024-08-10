@@ -1,9 +1,9 @@
 package com.robertx22.mine_and_slash.maps.processors.reward;
 
+import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.mine_and_slash.maps.generator.ChunkProcessData;
 import com.robertx22.mine_and_slash.maps.processors.DataProcessor;
-import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.LevelUtils;
 import net.minecraft.core.BlockPos;
@@ -74,7 +74,7 @@ public class ChestProcessor extends DataProcessor {
             chest.setLootTable(world, world.getRandom(), pos, table);
 
         } else {
-            MMORPG.LOGGER.log("Chest gen failed, tile not instanceof vanilla chest.");
+            ExileLog.get().warn("Chest gen failed, tile not instanceof vanilla chest.");
         }
 
 

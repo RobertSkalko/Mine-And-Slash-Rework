@@ -85,7 +85,7 @@ public class CharacterData {
     }
 
     public List<SpellSchool> getClasses() {
-        return this.player_class.school.stream().map(x -> ExileDB.SpellSchools().get(x)).collect(Collectors.toList());
+        return this.player_class.school().stream().map(x -> ExileDB.SpellSchools().get(x)).collect(Collectors.toList());
     }
 
 }

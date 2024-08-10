@@ -2,10 +2,10 @@ package com.robertx22.mine_and_slash.maps.generator;
 
 
 import com.google.common.base.Preconditions;
+import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.mine_and_slash.maps.DungeonRoom;
 import com.robertx22.mine_and_slash.maps.MapData;
-import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.saveclasses.PointData;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.ChunkPos;
@@ -152,7 +152,7 @@ public class BuiltDungeon {
                         var other = getRoomFacing(dir, x, z);
 
                         if (other.data.sides.getSideOfDirection(dir.getOpposite()) != RoomSide.DOOR) {
-                            MMORPG.LOGGER.log("Room has no matching door " + x + "_" + z);
+                            ExileLog.get().warn("Room has no matching door " + x + "_" + z);
                         }
                     }
                 }
@@ -177,7 +177,7 @@ public class BuiltDungeon {
                     for (Direction dir : dirs) {
                         if (hasDoorButNoRoom(new PointData(x, z), dir)) {
                             this.addRandomRoom(x, z);
-                            MMORPG.LOGGER.log("added missing room at " + x + "_" + z);
+                            ExileLog.get().log("added missing room at " + x + "_" + z);
                             did = true;
                         }
                     }
@@ -397,7 +397,7 @@ public class BuiltDungeon {
 
         } else {
             // i think the problem is when adding rooms, its not taking into account unbuilts!
-            //MMORPG.LOGGER.log("Error, setting room that already exists!");
+            //ExileLog.get().log("Error, setting room that already exists!");
         }
     }
 

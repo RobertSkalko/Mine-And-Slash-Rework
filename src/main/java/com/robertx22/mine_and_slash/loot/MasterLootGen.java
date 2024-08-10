@@ -1,11 +1,11 @@
 package com.robertx22.mine_and_slash.loot;
 
+import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.mine_and_slash.capability.player.data.PlayerConfigData;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.loot.generators.*;
-import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
@@ -39,7 +39,7 @@ public class MasterLootGen {
 
                 tries++;
                 if (tries > 20) {
-                    MMORPG.LOGGER.log("Tried to generate loot many times but failed! " + info.toString());
+                    ExileLog.get().warn("Tried to generate loot many times but failed! " + info.toString());
                     break;
                 }
                 List<ItemStack> extra = populateOnce(info);
@@ -53,7 +53,7 @@ public class MasterLootGen {
             while (items.size() > info.getMaxItems()) {
                 tries++;
                 if (tries > 50) {
-                    MMORPG.LOGGER.log("Took too many tries to remove items from masterlootgen");
+                    ExileLog.get().warn("Took too many tries to remove items from masterlootgen");
                     break;
                 }
                 items.remove(RandomUtils.RandomRange(0, items.size() - 1));

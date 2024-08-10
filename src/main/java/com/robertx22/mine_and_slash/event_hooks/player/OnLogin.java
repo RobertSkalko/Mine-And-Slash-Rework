@@ -35,7 +35,7 @@ public class OnLogin {
             /*
             if (MMORPG.RUN_DEV_TOOLS_REMOVE_WHEN_DONE) {
                    var test = new UniqueGearTest(ExileDB.UniqueGears().random());
-                MMORPG.LOGGER.log(test.generateDocumentation());
+                ExileLog.get().log(test.generateDocumentation());
             }
              */
 
@@ -94,14 +94,15 @@ public class OnLogin {
                 var hover = new HoverEvent(HoverEvent.Action.SHOW_TEXT, Component.literal(hovertext));
 
                 player.sendSystemMessage(Component.literal("Mine and Slash Datapack Error: " + count + " Jsons were marked as wrong with automatic error checking.").withStyle(
-                        Style.EMPTY.withHoverEvent(hover)
+                        Style.EMPTY.withHoverEvent(hover).applyFormats(ChatFormatting.RED)
                 ));
             }
 
             if (!JsonExileRegistry.INVALID_JSONS_MAP.isEmpty() || !JsonExileRegistry.NOT_LOADED_JSONS_MAP.isEmpty()) {
 
                 player.sendSystemMessage(Component.literal("Check the log file for more info. Note, this is still an experimental error checking feature. " +
-                        "It won't tell you exactly where the problem is, but you can use a json diff checker linked in the log file to easily compare and see the error."));
+                                "It won't tell you exactly where the problem is, but you can use a json diff checker linked in the log file to easily compare and see the error.")
+                        .withStyle(ChatFormatting.YELLOW));
 
             }
 

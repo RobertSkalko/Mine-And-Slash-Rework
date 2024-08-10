@@ -13,3 +13,7 @@ Previously point configs were spread to both configs and datapacks, and each use
 - changed favor_per_second in rarity datapack to favor_per_hour
 - renamed age of exile package to mine and slash, otherwise loggers would confuse people because package name was age_of_exile
 - switched to using loggers so they actually write to log file
+- reset potions reworked. Now ALL point types have their own full reset potions and point resets
+- you can now remove singular spell, passive, and stat points
+- resetting talents no longer resets ascendancy
+- asc points now use different reset points potion

@@ -1,9 +1,9 @@
 package com.robertx22.mine_and_slash.capability.player.data;
 
+import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.mine_and_slash.database.data.profession.Profession;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
-import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.uncommon.MathHelper;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
@@ -43,7 +43,7 @@ public class PlayerProfessionsData {
     public void addExp(Player p, String id, int exp) {
 
         if (exp < 0) {
-            MMORPG.LOGGER.log("Tried to give minus profession exp!");
+            ExileLog.get().warn("Tried to give minus profession exp!");
             return;
         }
 

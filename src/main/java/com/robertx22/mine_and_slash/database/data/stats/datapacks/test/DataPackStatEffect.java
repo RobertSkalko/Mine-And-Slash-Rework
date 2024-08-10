@@ -1,9 +1,9 @@
 package com.robertx22.mine_and_slash.database.data.stats.datapacks.test;
 
+import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.mine_and_slash.database.data.stats.Stat;
 import com.robertx22.mine_and_slash.database.data.stats.priority.StatPriority;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
-import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.saveclasses.unit.StatData;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.EffectEvent;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.rework.action.StatEffect;
@@ -71,7 +71,7 @@ public class DataPackStatEffect implements IStatEffect {
         var p = StatPriority.MAP.get(order);
         if (p == null) {
             // todo find better error way
-            MMORPG.LOGGER.log("No such stat priority: " + order);
+            ExileLog.get().warn("No such stat priority: " + order);
             return StatPriority.Spell.FIRST;
         }
         return p;

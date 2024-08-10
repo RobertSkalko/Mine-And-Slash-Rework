@@ -1,5 +1,9 @@
 package com.robertx22.mine_and_slash.gui.screens.character_screen;
 
+import com.robertx22.library_of_exile.main.Packets;
+import com.robertx22.library_of_exile.utils.RenderUtils;
+import com.robertx22.library_of_exile.utils.TextUTIL;
+import com.robertx22.library_of_exile.wrappers.ExileText;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.DefenseStats;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.OffenseStats;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.ResourceStats;
@@ -51,10 +55,6 @@ import com.robertx22.mine_and_slash.uncommon.localization.Gui;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.AllocateStatPacket;
-import com.robertx22.library_of_exile.main.Packets;
-import com.robertx22.library_of_exile.utils.RenderUtils;
-import com.robertx22.library_of_exile.utils.TextUTIL;
-import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -372,13 +372,33 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
 
         public AllocateStatButton(String stat, int xPos, int yPos) {
             super(xPos, yPos, SIZEX, SIZEY, 0, 0, SIZEY, BUTTON_TEX, (button) -> {
-                Packets.sendToServer(new AllocateStatPacket(ExileDB.Stats()
-                        .get(stat)));
+                //  Packets.sendToServer(new AllocateStatPacket(ExileDB.Stats()                        .get(stat)));
             });
             this.stat = ExileDB.Stats()
                     .get(stat);
         }
 
+        @Override
+        public boolean mouseClicked(double mouseX, double mouseY, int button) {
+
+            if (this.active && this.visible) {
+                boolean bl = this.clicked(mouseX, mouseY);
+                if (bl) {
+                    this.playDownSound(Minecraft.getInstance().getSoundManager());
+                    if (button == 0) {
+                        Packets.sendToServer(new AllocateStatPacket(stat, AllocateStatPacket.ACTION.ALLOCATE));
+                    }
+                    if (button == 1) {
+                        Packets.sendToServer(new AllocateStatPacket(stat, AllocateStatPacket.ACTION.REMOVE));
+                    }
+                    this.onClick(mouseX, mouseY);
+                    return true;
+                }
+                return false;
+            } else {
+                return false;
+            }
+        }
 
         public void setTooltipMod() {
 

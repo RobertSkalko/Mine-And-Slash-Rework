@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.gui.screens.spell;
 
+import com.robertx22.library_of_exile.utils.GuiUtils;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.PlayerPointsType;
 import com.robertx22.mine_and_slash.database.data.perks.Perk;
 import com.robertx22.mine_and_slash.database.data.spell_school.SpellSchool;
@@ -14,7 +15,6 @@ import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.localization.Gui;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
-import com.robertx22.library_of_exile.utils.GuiUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -41,7 +41,6 @@ public class SpellSchoolScreen extends BaseScreen implements INamedScreen, ILeft
         return schoolsInOrder.get(currentIndex);
     }
 
-
     public void setCurrent(SpellSchool sc) {
         for (int i = 0; i < schoolsInOrder.size(); i++) {
             if (sc.GUID().equals(schoolsInOrder.get(i).GUID())) {
@@ -50,7 +49,6 @@ public class SpellSchoolScreen extends BaseScreen implements INamedScreen, ILeft
                 break;
             }
         }
-
     }
 
     public SpellSchoolScreen() {
@@ -79,7 +77,7 @@ public class SpellSchoolScreen extends BaseScreen implements INamedScreen, ILeft
 
         try {
 
-            var all = Load.player(mc.player).ascClass.school.stream().map(x -> ExileDB.SpellSchools().get(x)).collect(Collectors.toList());
+            var all = Load.player(mc.player).ascClass.school().stream().map(x -> ExileDB.SpellSchools().get(x)).collect(Collectors.toList());
 
             LEFT_SCHOOL = new SchoolButton(this, guiLeft + 41, guiTop + 13);
             RIGHT_SCHOOL = new SchoolButton(this, guiLeft + 185, guiTop + 13);

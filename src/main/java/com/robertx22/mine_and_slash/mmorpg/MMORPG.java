@@ -2,7 +2,6 @@ package com.robertx22.mine_and_slash.mmorpg;
 
 import com.robertx22.library_of_exile.events.base.EventConsumer;
 import com.robertx22.library_of_exile.events.base.ExileEvents;
-import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.utils.Watch;
 import com.robertx22.mine_and_slash.a_libraries.curios.CurioEvents;
@@ -68,9 +67,6 @@ import java.util.function.Consumer;
 
 @Mod(SlashRef.MODID)
 public class MMORPG {
-
-    // this is needed or else it won't log to the latest.log
-    public static final ExileLog LOGGER = new ExileLog();
 
     // DISABLE WHEN PUBLIC BUILD
     public static boolean RUN_DEV_TOOLS = true;

@@ -5,6 +5,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.math.Axis;
+import com.robertx22.library_of_exile.utils.Watch;
 import com.robertx22.mine_and_slash.capability.player.PlayerData;
 import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
 import com.robertx22.mine_and_slash.database.data.perks.Perk;
@@ -24,7 +25,6 @@ import com.robertx22.mine_and_slash.saveclasses.PointData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.localization.Gui;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
-import com.robertx22.library_of_exile.utils.Watch;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -541,7 +541,7 @@ public abstract class SkillTreeScreen extends BaseScreen implements INamedScreen
         int yx = 4;
 
         gui.drawString(mc.font, text, savedx + 15, yx, ChatFormatting.YELLOW.getColor());
-        text = Gui.TALENT_RESET_POINTS.locName().append(String.valueOf(playerData.talents.reset_points));
+        text = Gui.TALENT_RESET_POINTS.locName().append(String.valueOf(this.schoolType.getPointType().getResetPoints(mc.player)));
         gui.drawString(mc.font, text, savedx + (BG_WIDTH) - mc.font.width(text) - 15, yx, ChatFormatting.YELLOW.getColor());
 
         int tx = savedx + BG_WIDTH;

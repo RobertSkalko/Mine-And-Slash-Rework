@@ -27,7 +27,7 @@ public class AttachedSpell {
                     entry.tryActivate(ctx);
                 }
             } else {
-                //MMORPG.LOGGER.log("Spell doesn't have data for spell entity called: " + entity_name + ". Spell id: " + ctx.calculatedSpellData.getSpell()
+                //ExileLog.get().log("Spell doesn't have data for spell entity called: " + entity_name + ". Spell id: " + ctx.calculatedSpellData.getSpell()
                 //   .GUID());
             }
         } catch (Exception e) {

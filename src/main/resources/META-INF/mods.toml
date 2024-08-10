@@ -33,7 +33,7 @@ side = "BOTH"
 [[dependencies.mmorpg]]
 modId = "library_of_exile"
 mandatory = true
-versionRange = "[1.5.0,)"
+versionRange = "[1.5.1,)"
 ordering = "NONE"
 side = "BOTH"
 [[dependencies.mmorpg]]

@@ -1,5 +1,7 @@
 package com.robertx22.mine_and_slash.vanilla_mc.packets;
 
+import com.robertx22.library_of_exile.main.MyPacket;
+import com.robertx22.library_of_exile.packets.ExilePacketContext;
 import com.robertx22.mine_and_slash.capability.player.PlayerData;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.PlayerPointsType;
 import com.robertx22.mine_and_slash.database.data.stats.Stat;
@@ -7,8 +9,6 @@ import com.robertx22.mine_and_slash.database.data.stats.datapacks.stats.CoreStat
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
-import com.robertx22.library_of_exile.main.MyPacket;
-import com.robertx22.library_of_exile.packets.ExilePacketContext;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
@@ -25,9 +25,9 @@ public class AllocateStatPacket extends MyPacket<AllocateStatPacket> {
 
     }
 
-    public AllocateStatPacket(Stat stat) {
+    public AllocateStatPacket(Stat stat, ACTION act) {
         this.stat = stat.GUID();
-        this.action = ACTION.ALLOCATE;
+        this.action = act;
     }
 
     @Override
@@ -56,15 +56,24 @@ public class AllocateStatPacket extends MyPacket<AllocateStatPacket> {
 
         PlayerData cap = Load.player(ctx.getPlayer());
 
-        if (PlayerPointsType.STATS.getFreePoints(ctx.getPlayer()) > 0) {
-            if (ExileDB.Stats().get(stat) instanceof CoreStat) {
-                cap.statPoints.map.put(stat, 1 + cap.statPoints.map.getOrDefault(stat, 0));
-
-                //TODO abandoncaptian, add Stat Rewards
-                Load.Unit(ctx.getPlayer()).setEquipsChanged();
-                cap.playerDataSync.setDirty();
+        if (action == ACTION.ALLOCATE) {
+            if (PlayerPointsType.STATS.getFreePoints(ctx.getPlayer()) > 0) {
+                if (ExileDB.Stats().get(stat) instanceof CoreStat) {
+                    cap.statPoints.map.put(stat, 1 + cap.statPoints.map.getOrDefault(stat, 0));
+                }
+            }
+        } else {
+            if (PlayerPointsType.STATS.getResetPoints(ctx.getPlayer()) > 0) {
+                if (ExileDB.Stats().get(stat) instanceof CoreStat) {
+                    int current = cap.statPoints.map.getOrDefault(stat, 0);
+                    if (current > 0) {
+                        cap.statPoints.map.put(stat, current - 1);
+                    }
+                }
             }
         }
+        Load.Unit(ctx.getPlayer()).setEquipsChanged();
+        cap.playerDataSync.setDirty();
     }
 
     @Override

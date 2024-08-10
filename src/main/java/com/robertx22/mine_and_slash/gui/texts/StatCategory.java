@@ -62,14 +62,14 @@ public enum StatCategory {
         boolean isRegular = false;
         for (StatCategory value : values()) {
             if (value.predicate.test(tooltipStatInfo.stat)) {
-                //MMORPG.LOGGER.log("distribute " + tooltipStatInfo.stat.GUID() + " to " + value.name());
+                //ExileLog.get().log("distribute " + tooltipStatInfo.stat.GUID() + " to " + value.name());
                 container.get(value.name()).add(tooltipStatInfo);
                 isRegular = true;
                 break;
             }
         }
         if (!isRegular) {
-            //MMORPG.LOGGER.log("distribute " + tooltipStatInfo.stat.GUID() + " to other");
+            //ExileLog.get().log("distribute " + tooltipStatInfo.stat.GUID() + " to other");
             container.get("other").add(tooltipStatInfo);
         }
     }

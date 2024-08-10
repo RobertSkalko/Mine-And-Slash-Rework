@@ -1,5 +1,9 @@
 package com.robertx22.mine_and_slash.database.registry;
 
+import com.robertx22.library_of_exile.main.ExileLog;
+import com.robertx22.library_of_exile.registry.Database;
+import com.robertx22.library_of_exile.registry.ExileRegistryContainer;
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.mine_and_slash.aoe_data.database.ailments.Ailment;
 import com.robertx22.mine_and_slash.aoe_data.database.boss_spell.BossSpell;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
@@ -42,14 +46,10 @@ import com.robertx22.mine_and_slash.database.data.unique_items.UniqueGear;
 import com.robertx22.mine_and_slash.database.data.value_calc.ValueCalculation;
 import com.robertx22.mine_and_slash.maps.dungeon_reg.Dungeon;
 import com.robertx22.mine_and_slash.maps.spawned_map_mobs.SpawnedMobList;
-import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.rework.action.StatEffect;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.rework.condition.StatCondition;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.MapManager;
-import com.robertx22.library_of_exile.registry.Database;
-import com.robertx22.library_of_exile.registry.ExileRegistryContainer;
-import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -300,7 +300,7 @@ public class ExileDB {
             var em = reg.getDefault();
 
             if (em == null || !reg.isRegistered(em.GUID())) {
-                MMORPG.LOGGER.log(type.id + " default is null or not registered");
+                ExileLog.get().warn(type.id + " default is null or not registered");
             }
 
         }

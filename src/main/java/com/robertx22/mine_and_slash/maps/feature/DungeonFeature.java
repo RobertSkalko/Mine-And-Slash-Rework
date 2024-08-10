@@ -1,9 +1,9 @@
 package com.robertx22.mine_and_slash.maps.feature;
 
+import com.robertx22.library_of_exile.main.ExileLog;
 import com.robertx22.mine_and_slash.maps.MapData;
 import com.robertx22.mine_and_slash.maps.generator.BuiltRoom;
 import com.robertx22.mine_and_slash.maps.generator.DungeonBuilder;
-import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
@@ -64,7 +64,7 @@ public class DungeonFeature {
         BlockPos position = cpos.getBlockAt(0, 50, 0);
 
         if (template == null) {
-            MMORPG.LOGGER.log("FATAL ERROR: Structure does not exist (" + room.getStructure() + ")");
+            ExileLog.get().warn("FATAL ERROR: Structure does not exist (" + room.getStructure() + ")");
             return false;
         }
 
