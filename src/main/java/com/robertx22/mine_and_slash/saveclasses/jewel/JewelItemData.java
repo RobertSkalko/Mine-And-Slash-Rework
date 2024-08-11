@@ -1,6 +1,8 @@
 package com.robertx22.mine_and_slash.saveclasses.jewel;
 
 import com.google.common.collect.ImmutableList;
+import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
+import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.database.data.affixes.Affix;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
@@ -17,6 +19,7 @@ import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.ModRange;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.AffixData;
+import com.robertx22.mine_and_slash.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.SimpleStatCtx;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.mine_and_slash.tags.all.SlotTags;
@@ -26,10 +29,9 @@ import com.robertx22.mine_and_slash.uncommon.enumclasses.PlayStyle;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
-import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
-import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -107,37 +109,59 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
 
         StatRangeInfo info = new StatRangeInfo(ModRange.of(this.getRarity().stat_percents));
 
-        ctx.tooltip.addAll(new ExileTooltips()
-                .accept(new NameBlock(Collections.singletonList(ctx.stack.getHoverName())))
-                .accept(new RarityBlock(getRarity()))
-                .accept(new SimpleItemStatBlock(info)
+        var tip = new ExileTooltips();
 
-                        .acceptIf(Itemtips.JEWEL_STATS.locName().withStyle(ChatFormatting.BLUE),
-                                affixes.stream().flatMap(x -> x.getAllStatsWithCtx(lvl, this.getRarity()).stream()).toList(),
-                                this.auraStats.isEmpty())
+        tip.accept(new NameBlock(Collections.singletonList(ctx.stack.getHoverName())));
+        tip.accept(new RarityBlock(getRarity()));
 
-                        .acceptIf(Itemtips.UNIQUE_STATS.locName().withStyle(ChatFormatting.YELLOW),
-                                this.auraStats.stream().flatMap(x -> x.getStatAndContext(ClientOnly.getPlayer()).stream().flatMap(statContext -> statContext.stats.stream())).toList(),
-                                !this.auraStats.isEmpty())
 
-                        .accept(Itemtips.COR_STATS.locName().withStyle(ChatFormatting.RED), cor.stream().flatMap(x -> x.getAllStatsWithCtx(lvl, getRarity()).stream()).toList())
-                )
-                .accept(new RequirementBlock(this.lvl))
+        if (this.auraStats.isEmpty()) {
+            tip.accept(new SimpleItemStatBlock(info)
+                    .acceptIf(Itemtips.JEWEL_STATS.locName().withStyle(ChatFormatting.BLUE),
+                            affixes.stream().flatMap(x -> x.getAllStatsWithCtx(lvl, this.getRarity()).stream()).toList(),
+                            this.auraStats.isEmpty())
+            );
+        } else {
+            tip.accept(new StatBlock() {
+                @Override
+                public List<? extends Component> getAvailableComponents() {
+                    List<MutableComponent> list = new ArrayList<>();
+                    for (StatsWhileUnderAuraData aura : auraStats) {
+                        list.addAll(aura.getTooltip());
+                        list.add(Component.empty());
+                    }
+                    return list;
+                }
+            });
+        }
+        if (!this.cor.isEmpty()) {
+            tip.accept(new StatBlock() {
+                @Override
+                public List<? extends Component> getAvailableComponents() {
+                    List<MutableComponent> list = new ArrayList<>();
+                    list.add(Itemtips.COR_STATS.locName().withStyle(ChatFormatting.RED));
+                    for (TooltipStatWithContext c : cor.stream().flatMap(x -> x.getAllStatsWithCtx(lvl, getRarity()).stream()).toList()) {
+                        list.addAll(c.GetTooltipString());
+                    }
+                    return list;
+                }
+            });
+        }
+        tip.accept(new RequirementBlock(this.lvl))
                 .accept(new SalvageBlock(this))
                 .accept(new AdditionalBlock(() -> {
-                        var up = uniq.getCraftedTier().upgradeStack.get();
-                        return ImmutableList.of(
-                                Itemtips.JEWEL_UPGRADE_1.locName(up.getCount(), up.getHoverName()).withStyle(ChatFormatting.AQUA),
-                                Itemtips.JEWEL_UPGRADE_2.locName(up.getCount(), up.getHoverName()).withStyle(ChatFormatting.AQUA)
-                        );
+                    var up = uniq.getCraftedTier().upgradeStack.get();
+                    return ImmutableList.of(
+                            Itemtips.JEWEL_UPGRADE_1.locName(up.getCount(), up.getHoverName()).withStyle(ChatFormatting.AQUA),
+                            Itemtips.JEWEL_UPGRADE_2.locName(up.getCount(), up.getHoverName()).withStyle(ChatFormatting.AQUA)
+                    );
 
-                    }).showWhen(() -> this.auraStats.isEmpty()&&uniq.isUnique() && uniq.isCraftableUnique() && uniq.getCraftedTier().canUpgradeMore()))
+                }).showWhen(() -> this.auraStats.isEmpty() && uniq.isUnique() && uniq.isCraftableUnique() && uniq.getCraftedTier().canUpgradeMore()))
 
-                .accept(new OperationTipBlock().setShift().setAlt())
-                .release());
-
+                .accept(new OperationTipBlock().setShift().setAlt());
 
 
+        ctx.tooltip.addAll(tip.release());
     }
 
     public boolean canWear(EntityData data) {
