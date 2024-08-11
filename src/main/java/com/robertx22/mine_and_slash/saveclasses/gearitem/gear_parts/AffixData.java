@@ -1,5 +1,7 @@
 package com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts;
 
+import com.robertx22.library_of_exile.registry.FilterListWrap;
+import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.mine_and_slash.database.Weighted;
 import com.robertx22.mine_and_slash.database.data.MinMax;
 import com.robertx22.mine_and_slash.database.data.affixes.Affix;
@@ -14,8 +16,6 @@ import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.tooltips.TooltipStatInfo;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.tooltips.TooltipStatWithContext;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
-import com.robertx22.library_of_exile.registry.FilterListWrap;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -167,12 +167,13 @@ public class AffixData implements IRerollable, IStatsContainer {
         RerollNumbers(gear);
     }
 
+
+    // todo this needs an entire blueprint part to allow stuff like.. x affixes are more common, etc
     @Override
     public void RerollFully(GearItemData gear) {
 
         Affix affix = null;
         try {
-
             FilterListWrap<Affix> list = ExileDB.Affixes()
                     .getFilterWrapped(x -> x.type == getAffixType() && gear.canGetAffix(x));
 
@@ -180,8 +181,7 @@ public class AffixData implements IRerollable, IStatsContainer {
                 System.out.print("Gear Type: " + gear.gtype + " affixtype: " + this.ty.name());
             }
 
-            affix = list
-                    .random();
+            affix = list.random();
 
             this.randomizeTier(gear.getRarity());
 

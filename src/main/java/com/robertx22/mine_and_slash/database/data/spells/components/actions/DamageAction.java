@@ -73,9 +73,7 @@ public class DamageAction extends SpellAction {
                     dmg.petEntity = (LivingEntity) ctx.sourceEntity;
                     dmg.data.setBoolean(EventData.IS_SUMMON_ATTACK, true);
                 }
-                if (ctx.isProc) {
-                    dmg.data.setBoolean(EventData.IS_PROC, true);
-                }
+               
 
                 dmg.setElement(ele);
                 dmg.Activate();

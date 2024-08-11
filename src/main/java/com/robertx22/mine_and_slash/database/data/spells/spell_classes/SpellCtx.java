@@ -30,8 +30,7 @@ public class SpellCtx {
 
     public CalculatedSpellData calculatedSpellData;
 
-    public boolean isProc = false;
-
+   
     public SpellCtx setSourceEntity(Entity en) {
         this.sourceEntity = en;
         return this;

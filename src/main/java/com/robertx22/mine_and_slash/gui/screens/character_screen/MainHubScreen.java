@@ -357,6 +357,10 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
             gui.drawString(mc.font, points, guiLeft + 40 - mc.font.width(points) / 2, guiTop + 10, ChatFormatting.GREEN.getColor());
         }
 
+        int lvl = Load.player(mc.player).miscInfo.area_lvl;
+        MutableComponent areaLevel = Gui.AREA_LEVEL.locName().append(String.valueOf(lvl));
+        gui.drawString(mc.font, areaLevel, guiLeft + sizeX / 2 - mc.font.width(areaLevel) / 2, guiTop + sizeY + 5, ChatFormatting.YELLOW.getColor());
+
     }
 
 

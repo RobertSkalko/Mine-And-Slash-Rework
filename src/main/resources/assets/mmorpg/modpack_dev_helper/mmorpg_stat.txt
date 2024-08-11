@@ -627,7 +627,6 @@ proc_ignite_explosion
 proc_profane_explosion
 proc_profane_explosion_any
 proc_shatter
-proc_shatter_max_frost
 proj_dmg_received
 projectile_barrage
 projectile_cast_time

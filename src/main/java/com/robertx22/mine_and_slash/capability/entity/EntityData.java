@@ -771,7 +771,7 @@ public class EntityData implements ICap, INeededForClient {
 
     private void setMobLvlNormally(LivingEntity entity, Player nearestPlayer) {
 
-        LevelInfo lvl = LevelUtils.determineLevel(entity, entity.level(), entity.blockPosition(), nearestPlayer);
+        LevelInfo lvl = LevelUtils.determineLevel(entity, entity.level(), entity.blockPosition(), nearestPlayer, true);
 
         this.setLevel(lvl.getLevel());
     }

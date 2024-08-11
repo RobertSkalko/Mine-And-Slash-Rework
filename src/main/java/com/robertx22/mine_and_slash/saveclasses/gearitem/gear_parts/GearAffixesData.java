@@ -152,8 +152,7 @@ public class GearAffixesData implements IGearPartTooltip {
 
         GearRarity rar = gear.getRarity();
 
-        for (int i = 0; i < rar
-                .maximumOfOneAffixType(); i++) {
+        for (int i = 0; i < rar.maximumOfOneAffixType(); i++) {
 
             AffixData suffix = new AffixData(Affix.Type.suffix);
             suffix.RerollFully(gear);

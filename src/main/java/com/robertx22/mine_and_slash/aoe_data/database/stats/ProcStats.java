@@ -3,7 +3,6 @@ package com.robertx22.mine_and_slash.aoe_data.database.stats;
 import com.robertx22.mine_and_slash.aoe_data.database.ailments.Ailments;
 import com.robertx22.mine_and_slash.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.schools.ProcSpells;
-import com.robertx22.mine_and_slash.aoe_data.database.spells.schools.WaterSpells;
 import com.robertx22.mine_and_slash.aoe_data.database.stat_conditions.StatConditions;
 import com.robertx22.mine_and_slash.aoe_data.database.stat_effects.StatEffects;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.base.DatapackStatBuilder;
@@ -11,7 +10,6 @@ import com.robertx22.mine_and_slash.aoe_data.database.stats.base.EmptyAccessor;
 import com.robertx22.mine_and_slash.database.data.stats.Stat;
 import com.robertx22.mine_and_slash.database.data.stats.datapacks.test.DataPackStatAccessor;
 import com.robertx22.mine_and_slash.database.data.stats.priority.StatPriority;
-import com.robertx22.mine_and_slash.tags.all.SpellTags;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.DamageEvent;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.OnMobKilledByDamageEvent;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
@@ -88,25 +86,7 @@ public class ProcStats {
             })
             .build();
 
-    public static DataPackStatAccessor<EmptyAccessor> PROC_SHATTER_MAX_FROST_ESSENCE = DatapackStatBuilder
-            .ofSingle("proc_shatter_max_frost", Elements.Cold)
-            .worksWithEvent(DamageEvent.ID)
-            .setPriority(StatPriority.Spell.FIRST)
-            .setSide(EffectSides.Source)
-            .addCondition(StatConditions.IF_RANDOM_ROLL)
-            .addCondition(StatConditions.ELEMENT_MATCH_STAT)
-            .addCondition(StatConditions.IS_SOURCE_MAX_CHARGES.get(ModEffects.ESSENCE_OF_FROST))
-            .addCondition(StatConditions.IS_NOT_ON_COOLDOWN.get(WaterSpells.BONE_SHATTER_PROC))
-            .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.SHATTER))
-            .addEffect(e -> StatEffects.PROC_SHATTER)
-            .setLocName(x -> Stat.format(VAL1 + "% Chance to casts Bone Shatter while at max Essence of Frost charges. This only works on spells have the Shatter tag."))
-            .setLocDesc(x -> "")
-            .modifyAfterDone(x -> {
-                x.is_perc = true;
-                x.is_long = true;
-                x.max = 100;
-            })
-            .build();
+ 
     public static DataPackStatAccessor<EmptyAccessor> PROC_SHATTER = DatapackStatBuilder
             .ofSingle("proc_shatter", Elements.Physical)
             .worksWithEvent(DamageEvent.ID)
@@ -115,10 +95,10 @@ public class ProcStats {
             .addCondition(StatConditions.IF_RANDOM_ROLL)
             .addCondition(StatConditions.IS_EVENT_AILMENT.get(Ailments.FREEZE))
             .addCondition(StatConditions.TARGET_HAS_EFFECT.get(ModEffects.BONE_CHILL))
-            .addCondition(StatConditions.IS_NOT_ON_COOLDOWN.get(WaterSpells.BONE_SHATTER_PROC))
             .addEffect(e -> StatEffects.PROC_SHATTER)
             .addEffect(e -> StatEffects.GIVE_EFFECT_TO_SOURCE_30_SEC.get(ModEffects.ESSENCE_OF_FROST))
             .addEffect(e -> StatEffects.REMOVE_EFFECT_FROM_TARGET.get(ModEffects.BONE_CHILL))
+
             .setLocName(x -> Stat.format(VAL1 + "% Chance to casts Bone Shatter when you shatter a bone-chilled enemy. Also gives you Essence of Frost"))
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {

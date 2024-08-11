@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class SetCooldownEffect extends StatEffect {
 
-    //public static SetCooldownEffect.Data MISSILE_BARRAGE = new Data("missile_barrage", 20);
+    public static SetCooldownEffect.Data BONE_SHATTER = new Data("bone_shatter", 20);
 
     public Data data = new Data("", 0);
 

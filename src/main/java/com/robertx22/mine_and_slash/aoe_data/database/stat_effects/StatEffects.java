@@ -156,7 +156,7 @@ public class StatEffects implements ExileRegistryInit {
 
     public static DataHolder<SetCooldownEffect.Data, StatEffect> SET_COOLDOWN = new DataHolder<>(
             Arrays.asList(
-                    //  SetCooldownEffect.MISSILE_BARRAGE
+                    SetCooldownEffect.BONE_SHATTER
             )
             , x -> new SetCooldownEffect(x));
 

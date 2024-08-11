@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.saveclasses.spells;
 
+import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.database.data.exile_effects.ExileEffect;
 import com.robertx22.mine_and_slash.database.data.exile_effects.ExileEffectInstanceData;
@@ -22,7 +23,6 @@ import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.SpendResourceEvent;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.NoManaPacket;
-import com.robertx22.library_of_exile.main.Packets;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -150,7 +150,6 @@ public class SpellCastingData {
 
 
     public String getSpellId(int slot) {
-
         return hotbar.getOrDefault(slot, "");
     }
 
@@ -431,9 +430,7 @@ public class SpellCastingData {
             Player p = (Player) ctx.caster;
             if (p.isCreative()) {
                 if (cd > 20) {
-                    ctx.data.getCooldowns()
-                            .setOnCooldown(ctx.spell.GUID(), 20);
-
+                    ctx.data.getCooldowns().setOnCooldown(ctx.spell.GUID(), 20);
                 }
             }
         }

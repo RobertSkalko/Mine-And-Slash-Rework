@@ -26,3 +26,6 @@ Previously point configs were spread to both configs and datapacks, and each use
 - removed ALWAYS_SCALE_MOB_LEVEL_TO_PLAYER config because the datapack for it exists (per dimension), and it confused players
 - added give watcher_eye_jewel command
 - fixed watcher eye tooltips
+- proc stats now properly set the cooldown of the spell procced and will not cast if the spell is on cooldown.
+- removed can_proc_from_procs because not possible to ensure all the following things arent procs.. Like say you proc chill blast, which procs freeze/shatter, which procs ... 
+To be safe, i'll go with limiting each proc with spell cooldown

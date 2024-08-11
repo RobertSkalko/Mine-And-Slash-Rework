@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.aoe_data.database.exile_effects.adders;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import com.robertx22.mine_and_slash.aoe_data.database.ailments.Ailments;
 import com.robertx22.mine_and_slash.aoe_data.database.exile_effects.ExileEffectBuilder;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.PartBuilder;
@@ -30,7 +31,6 @@ import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.EntityFinder;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 
@@ -168,7 +168,6 @@ public class ModEffects implements ExileRegistryInit {
                 .maxStacks(1)
                 .stat(DatapackStats.ARMOR_PER_MANA.mod(1, 5))
                 .stat(ProcStats.PROC_SHATTER.get().mod(25, 100))
-                .stat(ProcStats.PROC_SHATTER_MAX_FROST_ESSENCE.get().mod(10, 50))
                 .build();
 
         ExileEffectBuilder.of(ModEffects.BONE_CHILL)

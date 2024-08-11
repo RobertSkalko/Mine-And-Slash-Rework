@@ -1,5 +1,9 @@
 package com.robertx22.mine_and_slash.capability.player;
 
+import com.robertx22.library_of_exile.components.ICap;
+import com.robertx22.library_of_exile.main.Packets;
+import com.robertx22.library_of_exile.packets.SyncPlayerCapToClient;
+import com.robertx22.library_of_exile.utils.LoadSave;
 import com.robertx22.mine_and_slash.capability.DirtySync;
 import com.robertx22.mine_and_slash.capability.player.data.*;
 import com.robertx22.mine_and_slash.capability.player.helper.GemInventoryHelper;
@@ -18,10 +22,6 @@ import com.robertx22.mine_and_slash.saveclasses.unit.Unit;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_calc.StatCalculation;
 import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
-import com.robertx22.library_of_exile.components.ICap;
-import com.robertx22.library_of_exile.main.Packets;
-import com.robertx22.library_of_exile.packets.SyncPlayerCapToClient;
-import com.robertx22.library_of_exile.utils.LoadSave;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -89,6 +89,7 @@ public class PlayerData implements ICap {
     private static final String CHARACTERS = "chars";
     private static final String BONUS_TALENTS = "btal";
     private static final String POINTS = "points";
+    private static final String MISC_INFO = "minfo";
 
     public DirtySync playerDataSync = new DirtySync("playerdata_sync", x -> syncData());
 
@@ -114,6 +115,7 @@ public class PlayerData implements ICap {
     public PlayerBuffData buff = new PlayerBuffData();
     public RestedExpData rested_xp = new RestedExpData();
     public PlayerPointsData points = new PlayerPointsData();
+    public MiscSyncData miscInfo = new MiscSyncData();
 
     private MyInventory skillGemInv = new MyInventory(GemInventoryHelper.TOTAL_SLOTS);
     private MyInventory auraInv = new MyInventory(GemInventoryHelper.TOTAL_AURAS);
@@ -158,6 +160,7 @@ public class PlayerData implements ICap {
         LoadSave.Save(rested_xp, nbt, RESTED_XP);
         LoadSave.Save(characters, nbt, CHARACTERS);
         LoadSave.Save(points, nbt, POINTS);
+        LoadSave.Save(miscInfo, nbt, MISC_INFO);
         // LoadSave.Save(ctxStats, nbt, "ctx");
 
         nbt.put(GEMS, skillGemInv.createTag());
@@ -188,6 +191,7 @@ public class PlayerData implements ICap {
         this.rested_xp = loadOrBlank(RestedExpData.class, new RestedExpData(), nbt, RESTED_XP, new RestedExpData());
         this.points = loadOrBlank(PlayerPointsData.class, new PlayerPointsData(), nbt, POINTS, new PlayerPointsData());
         this.characters = loadOrBlank(CharStorageData.class, new CharStorageData(), nbt, CHARACTERS, new CharStorageData());
+        this.miscInfo = loadOrBlank(MiscSyncData.class, new MiscSyncData(), nbt, MISC_INFO, new MiscSyncData());
         // this.ctxStats = loadOrBlank(SavedStatCtxList.class, new SavedStatCtxList(), nbt, "ctx", new SavedStatCtxList());
 
         skillGemInv.fromTag(nbt.getList(GEMS, 10)); // todo

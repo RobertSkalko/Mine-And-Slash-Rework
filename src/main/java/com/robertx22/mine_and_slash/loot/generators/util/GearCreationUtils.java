@@ -38,7 +38,7 @@ public class GearCreationUtils {
         data.rar = rarity.GUID();
 
         data.setPotential(rarity.pot.total);
-        
+
         int sockets = rarity.sockets.random();
 
         for (int i = 0; i < sockets; i++) {
@@ -51,9 +51,7 @@ public class GearCreationUtils {
 
             Preconditions.checkNotNull(unique);
 
-            data.rar = ExileDB.GearRarities()
-                    .get(unique.rarity)
-                    .GUID();
+            data.rar = ExileDB.GearRarities().get(unique.rarity).GUID();
 
             data.gtype = unique.base_gear;
             data.data.set(GearItemData.KEYS.UNIQUE_ID, unique.GUID());

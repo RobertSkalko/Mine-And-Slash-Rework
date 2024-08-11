@@ -64,7 +64,7 @@ public class LevelUtils {
     }
 
 
-    public static LevelInfo determineLevel(@Nullable LivingEntity en, Level world, BlockPos pos, Player nearestPlayer) {
+    public static LevelInfo determineLevel(@Nullable LivingEntity en, Level world, BlockPos pos, Player nearestPlayer, boolean usevariance) {
 
         LevelInfo info = new LevelInfo();
 
@@ -85,7 +85,7 @@ public class LevelUtils {
             }
         }
         DimensionConfig dimConfig = ExileDB.getDimensionConfig(world);
-        
+
         if (isInMinLevelArea(sw, pos, dimConfig)) {
             info.set(LevelInfo.LevelSource.MIN_LEVEL_AREA, dimConfig.min_lvl);
         } else {
@@ -96,10 +96,11 @@ public class LevelUtils {
             }
         }
 
-        var varianceConfig = ServerContainer.get().MOB_LEVEL_VARIANCE.get();
-        int variance = RandomUtils.RandomRange(-varianceConfig, varianceConfig);
-
-        info.add(LevelInfo.LevelSource.LEVEL_VARIANCE, variance);
+        if (usevariance) {
+            var varianceConfig = ServerContainer.get().MOB_LEVEL_VARIANCE.get();
+            int variance = RandomUtils.RandomRange(-varianceConfig, varianceConfig);
+            info.add(LevelInfo.LevelSource.LEVEL_VARIANCE, variance);
+        }
         info.capToRange(LevelInfo.LevelSource.DIMENSION, new MinMax(dimConfig.min_lvl, dimConfig.max_lvl));
         info.capToRange(LevelInfo.LevelSource.MAX_LEVEL, new MinMax(1, GameBalanceConfig.get().MAX_LEVEL));
 
@@ -146,13 +147,5 @@ public class LevelUtils {
 
     }
 
-    public static double getBlocksForEachLevelDistance(ServerLevel world) {
-        DimensionConfig config = ExileDB.getDimensionConfig(world);
-
-        double scale = Mth.clamp(world.dimensionType()
-                .coordinateScale() / 3F, 1, Integer.MAX_VALUE);
-
-        return config.mob_lvl_per_distance / scale;
-    }
 
 }

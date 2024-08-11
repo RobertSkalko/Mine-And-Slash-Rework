@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.event_hooks.ontick;
 
+import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.capability.player.PlayerData;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
@@ -16,8 +17,8 @@ import com.robertx22.mine_and_slash.uncommon.effectdatas.RestoreResourceEvent;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.TenSecondPlayerTickEvent;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.rework.RestoreType;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
-import com.robertx22.library_of_exile.main.Packets;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
@@ -118,6 +119,10 @@ public class OnServerTick {
             if (age % (20 * 3) == 0) {
                 unitdata.setEquipsChanged();
                 playerData.playerDataSync.setDirty();
+            }
+
+            if (age % (20 * 10) == 0) {
+                playerData.miscInfo.area_lvl = LevelUtils.determineLevel(null, player.level(), player.blockPosition(), player, false).getLevel();
             }
 
             if (age % 5 == 0) {

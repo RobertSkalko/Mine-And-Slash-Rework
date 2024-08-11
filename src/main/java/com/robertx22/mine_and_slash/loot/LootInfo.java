@@ -155,12 +155,11 @@ public class LootInfo {
 
 
     private void setLevel() {
-
         if (level <= 0) {
             if (mobData != null) {
                 level = mobData.getLevel();
             } else {
-                level = LevelUtils.determineLevel(null, world, pos, player).getLevel();
+                level = LevelUtils.determineLevel(null, world, pos, player, false).getLevel();
             }
         }
 

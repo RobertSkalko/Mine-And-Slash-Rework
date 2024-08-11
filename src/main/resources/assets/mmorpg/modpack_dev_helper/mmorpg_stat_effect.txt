@@ -67,4 +67,5 @@ set_bool_barrage
 set_bool_crit
 set_bool_pierce
 set_bool_resisted_already
+set_cooldown_bone_shatter20
 set_data_num_accuracy

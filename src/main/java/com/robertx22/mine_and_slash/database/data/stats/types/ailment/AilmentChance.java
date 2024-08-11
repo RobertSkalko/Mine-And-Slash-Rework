@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.database.data.stats.types.ailment;
 
+import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.mine_and_slash.aoe_data.database.ailments.Ailment;
 import com.robertx22.mine_and_slash.database.data.stats.Stat;
 import com.robertx22.mine_and_slash.database.data.stats.StatGuiGroup;
@@ -15,7 +16,6 @@ import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.PlayStyle;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.mine_and_slash.uncommon.interfaces.EffectSides;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 
 public class AilmentChance extends Stat {
 
@@ -47,6 +47,10 @@ public class AilmentChance extends Stat {
         public DamageEvent activate(DamageEvent effect, StatData data, Stat stat) {
             // we take the original or base damage of the attack so we don't double dip
             float dmg = effect.data.getOriginalNumber(EventData.NUMBER).number;
+
+            if (dmg <= 0) {
+                return effect;
+            }
 
             // todo will probably have to tweak this
             var event = EventBuilder.ofDamage(effect.source, effect.target, dmg).setupDamage(AttackType.dot, WeaponTypes.none, PlayStyle.INT).set(x -> {
