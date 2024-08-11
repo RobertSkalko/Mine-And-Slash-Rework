@@ -98,7 +98,10 @@ public enum Chats implements IAutoLocName {
     PROF_MAT_DROPGUIDE_COMMON("Common Drop"),
     PROF_MAT_DROPGUIDE_RARE("Rare Drop"),
     CAUGHT_SOMETHING("You caught something!"),
+    RESET_POINTS_POTION_DESC("Gives 10 Reset Points\n\nThese Can be used to selectively un-learn things"),
+    RESET_FULL_POTION_DESC("Resets and refunds All spent Points."),
     PROF_MAT_SOURCE("Can be gained through the %1$s Profession"),
+    CRAFT_PROF_MAT_SOURCE("Crafted through the %1$s Profession's Station"),
 
     TOOL_ADD_STAT("%1$s has been Upgraded to %2$s!"),
     TOOL_LEVEL_UP("%1$s has reached level %2$s!"),

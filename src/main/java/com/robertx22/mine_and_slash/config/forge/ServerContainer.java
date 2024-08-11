@@ -1,8 +1,8 @@
 package com.robertx22.mine_and_slash.config.forge;
 
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.mine_and_slash.database.data.gear_slots.GearSlot;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
-import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -117,7 +117,7 @@ public class ServerContainer {
 
         MAX_CHARACTERS = b.defineInRange("MAX_CHARACTERS", 3, 1, 7);
 
-        UNARMED_ENERGY_COST = b.defineInRange("UNARMED_ENERGY_COST", 5D, 0D, 100D);
+        UNARMED_ENERGY_COST = b.defineInRange("UNARMED_ENERGY_COST", 10D, 0D, 100D);
 
         List<String> list = new ArrayList<>();
 

@@ -1,5 +1,7 @@
 package com.robertx22.mine_and_slash.uncommon.utilityclasses;
 
+import com.robertx22.library_of_exile.utils.CLOC;
+import com.robertx22.library_of_exile.wrappers.ExileText;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
 import com.robertx22.mine_and_slash.database.data.gear_slots.GearSlot;
@@ -9,8 +11,6 @@ import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRequirem
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
-import com.robertx22.library_of_exile.utils.CLOC;
-import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -256,11 +256,6 @@ public class TooltipUtils {
                 .withStyle(color)
                 .append(Component.literal(lvl + "")
                         .withStyle(color));
-    }
-
-
-    public static MutableComponent dragOntoGearToUse() {
-        return Itemtips.GEAR_SOUL_USE_TIP.locName().withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD);
     }
 
 

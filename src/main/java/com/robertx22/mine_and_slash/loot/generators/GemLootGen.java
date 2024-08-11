@@ -1,6 +1,8 @@
 package com.robertx22.mine_and_slash.loot.generators;
 
+import com.robertx22.library_of_exile.registry.FilterListWrap;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
+import com.robertx22.mine_and_slash.database.data.gems.Gem;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.loot.LootInfo;
 import com.robertx22.mine_and_slash.loot.blueprints.GearBlueprint;
@@ -11,7 +13,6 @@ public class GemLootGen extends BaseLootGen<GearBlueprint> {
 
     public GemLootGen(LootInfo info) {
         super(info);
-
     }
 
     @Override
@@ -26,12 +27,16 @@ public class GemLootGen extends BaseLootGen<GearBlueprint> {
 
     @Override
     public boolean condition() {
-        return !ExileDB.Gems().getFilterWrapped(x -> this.info.level >= x.getReqLevelToDrop()).list.isEmpty();
+        return !droppableAtLevel(info.level).list.isEmpty();
     }
 
     @Override
     public ItemStack generateOne() {
-        return ExileDB.Gems().getFilterWrapped(x -> this.info.level >= x.getReqLevelToDrop()).random().getItem().getDefaultInstance();
+        return droppableAtLevel(this.info.level).random().getItem().getDefaultInstance();
+    }
+
+    public static FilterListWrap<Gem> droppableAtLevel(int lvl) {
+        return ExileDB.Gems().getFilterWrapped(x -> lvl >= x.getReqLevelToDrop());
     }
 
 }

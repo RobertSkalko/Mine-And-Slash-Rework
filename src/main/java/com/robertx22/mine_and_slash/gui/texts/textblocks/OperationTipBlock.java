@@ -89,7 +89,6 @@ public class OperationTipBlock extends AbstractTextBlock {
 
     public enum AvailableTarget {
         GEAR_SOUL(Itemtips.SOUL_MODIFIER_USE_TIP.locName().withStyle(ChatFormatting.BLUE)),
-
         GEAR(Itemtips.GEAR_SOUL_USE_TIP.locName().withStyle(ChatFormatting.BLUE));
 
         public final Component component;

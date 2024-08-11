@@ -1,19 +1,24 @@
 package com.robertx22.mine_and_slash.vanilla_mc.items.gemrunes;
 
 import com.robertx22.mine_and_slash.database.OptScaleExactStat;
-import com.robertx22.mine_and_slash.database.data.BaseGem;
 import com.robertx22.mine_and_slash.database.data.StatMod;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.mine_and_slash.database.data.gear_types.bases.SlotFamily;
+import com.robertx22.mine_and_slash.database.data.gems.Gem;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
-import com.robertx22.mine_and_slash.gui.texts.textblocks.DropLevelBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.OperationTipBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.StatBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.DropChanceBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.DropLevelBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageBlock;
+import com.robertx22.mine_and_slash.loot.generators.GemLootGen;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.ModRange;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRangeInfo;
+import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -29,7 +34,7 @@ public abstract class BaseGemItem extends Item {
 
     public int weight;
 
-    public abstract BaseGem getBaseRuneGem();
+    public abstract Gem getBaseGem();
 
     public abstract float getStatValueMulti();
 
@@ -58,13 +63,13 @@ public abstract class BaseGemItem extends Item {
 
         if (ExileDB.Runes()
                 .isEmpty() || ExileDB.Gems()
-                .isEmpty() || getBaseRuneGem() == null) {
+                .isEmpty() || getBaseGem() == null) {
             return tooltip; // datapacks didnt register yet
         }
 
         ExileTooltips t = new ExileTooltips();
 
-        BaseGem gem = getBaseRuneGem();
+        Gem gem = getBaseGem();
 
 
         t.accept(new StatBlock() {
@@ -94,14 +99,15 @@ public abstract class BaseGemItem extends Item {
                     stats.addAll(x.GetTooltipString(info));
                 }
 
-                stats.add(Words.PressAltForStatInfo.locName().withStyle(ChatFormatting.BLUE));
-
                 return stats;
             }
         });
         t.accept(new UsageBlock(Arrays.asList(Itemtips.GEM_ITEM_USAGE.locName().withStyle(ChatFormatting.BLUE))));
         t.accept(new DropLevelBlock(gem.getReqLevelToDrop(), GameBalanceConfig.get().MAX_LEVEL));
-        
+        t.accept(new OperationTipBlock().setAlt().setShift());
+
+        var lvl = Load.Unit(ClientOnly.getPlayer()).getLevel();
+        t.accept(new DropChanceBlock(GemLootGen.droppableAtLevel(lvl).getDropChance(gem)));
         return t.release();
     }
 

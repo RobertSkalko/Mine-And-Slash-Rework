@@ -3,8 +3,10 @@ package com.robertx22.mine_and_slash.database.data.profession.items;
 import com.google.common.collect.ImmutableList;
 import com.robertx22.mine_and_slash.capability.player.data.Backpacks;
 import com.robertx22.mine_and_slash.capability.player.data.IGoesToBackpack;
+import com.robertx22.mine_and_slash.database.data.profession.Profession;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.ProfessionDropSourceBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageBlock;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
@@ -17,6 +19,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -37,22 +40,28 @@ public class MaterialItem extends AutoItem implements IGoesToBackpack {
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> l, TooltipFlag pIsAdvanced) {
         var pro = ExileDB.Professions().get(prof);
+        var tip = makeTooltip(pro, tier);
+        tip.accept(new UsageBlock(Arrays.asList(Chats.PROF_MAT_DROPGUIDE_COMMON.locName().withStyle(ChatFormatting.AQUA))));
+        l.addAll(tip.release());
+    }
+
+    public static ExileTooltips makeTooltip(Profession pro, @Nullable SkillItemTier tier) {
 
         var tip = new ExileTooltips();
 
         tip.accept(new UsageBlock(ImmutableList.of(
-                Chats.PROF_MAT_DROPGUIDE.locName().withStyle(ChatFormatting.AQUA),
-                Chats.PROF_MAT_DROPGUIDE_COMMON.locName().withStyle(ChatFormatting.AQUA),
-                Chats.PROF_MAT_SOURCE.locName(pro.locName().withStyle(ChatFormatting.YELLOW)).withStyle(ChatFormatting.GREEN)
+                Chats.PROF_MAT_DROPGUIDE.locName().withStyle(ChatFormatting.AQUA)
         )));
-        tip.accept(new UsageBlock(ImmutableList.of(
-                Itemtips.PROF_MAT_LEVEL_RANGE_INFO.locName().withStyle(ChatFormatting.RED),
-                Itemtips.LEVEL_TIP.locName(tier.levelRange.getMinLevel() + "-" + tier.levelRange.getMaxLevel()).withStyle(ChatFormatting.RED))));
-
+        if (tier != null) {
+            tip.accept(new UsageBlock(ImmutableList.of(
+                    Itemtips.PROF_MAT_LEVEL_RANGE_INFO.locName().withStyle(ChatFormatting.RED),
+                    Itemtips.LEVEL_TIP.locName(tier.levelRange.getMinLevel() + "-" + tier.levelRange.getMaxLevel()).withStyle(ChatFormatting.RED))));
+        }
+        tip.accept(new ProfessionDropSourceBlock(pro.GUID()));
         tip.accept(new UsageBlock(ImmutableList.of(pro.locDesc().withStyle(ChatFormatting.YELLOW))));
 
-        l.addAll(tip.release());
 
+        return tip;
     }
 
     @Override

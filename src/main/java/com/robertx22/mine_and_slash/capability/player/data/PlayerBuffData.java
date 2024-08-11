@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.capability.player.data;
 
+import com.robertx22.mine_and_slash.database.data.profession.all.Professions;
 import com.robertx22.mine_and_slash.database.data.profession.buffs.StatBuff;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
@@ -37,18 +38,20 @@ public class PlayerBuffData implements IStatCtx {
     }
 
     public enum Type implements IAutoLocName {
-        POTION("potion", "Potion", 20 * 60 * 30, () -> SlashPotions.POTION.get()),
+        POTION("potion", "Potion", 20 * 60 * 30, () -> SlashPotions.POTION.get(), Professions.ALCHEMY),
         // ELIXIR("elixir", "Elixir", 20 * 60 * 15),
-        MEAL("meal", "Meal", 20 * 60 * 60, () -> SlashPotions.MEAL.get()),
-        FISH("fish", "Seafood", 20 * 60 * 60, () -> SlashPotions.FISH.get());
+        MEAL("meal", "Meal", 20 * 60 * 60, () -> SlashPotions.MEAL.get(), Professions.COOKING),
+        FISH("fish", "Seafood", 20 * 60 * 60, () -> SlashPotions.FISH.get(), Professions.COOKING);
 
         public String id;
         public String name;
         public int durationTicks;
         public Supplier<MobEffect> effect;
+        public String profession;
 
-        Type(String id, String name, int durationTicks, Supplier<MobEffect> sup) {
+        Type(String id, String name, int durationTicks, Supplier<MobEffect> sup, String prof) {
             this.id = id;
+            this.profession = prof;
             this.name = name;
             this.effect = sup;
             this.durationTicks = durationTicks;

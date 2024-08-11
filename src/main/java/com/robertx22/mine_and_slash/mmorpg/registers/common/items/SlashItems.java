@@ -44,7 +44,7 @@ public class SlashItems {
         station(Professions.SALVAGING, () -> Items.IRON_INGOT);
         station(Professions.GEAR_CRAFTING, () -> Items.GOLD_INGOT);
         station(Professions.ALCHEMY, () -> Items.IRON_NUGGET);
-        station(Professions.ENCHANTING, () -> Items.PAPER);
+        station(Professions.INFUSING, () -> Items.PAPER);
 
         for (EffectCtx eff : ModEffects.ALL) {
             EFFECT_DISPLAY.put(eff.GUID(), Def.item(() -> new EffectDisplayItem(), "mob_effects/" + eff.GUID()));

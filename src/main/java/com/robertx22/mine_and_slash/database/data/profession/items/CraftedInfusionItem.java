@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.database.data.profession.items;
 
+import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.mine_and_slash.database.data.affixes.Affix;
 import com.robertx22.mine_and_slash.database.data.currency.IItemAsCurrency;
 import com.robertx22.mine_and_slash.database.data.currency.base.Currency;
@@ -10,6 +11,7 @@ import com.robertx22.mine_and_slash.database.data.gear_types.bases.SlotFamily;
 import com.robertx22.mine_and_slash.database.data.profession.ExplainedResult;
 import com.robertx22.mine_and_slash.database.data.profession.ICreativeTabTiered;
 import com.robertx22.mine_and_slash.database.data.profession.LeveledItem;
+import com.robertx22.mine_and_slash.database.data.profession.all.Professions;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.database.data.requirements.bases.GearRequestedFor;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
@@ -18,6 +20,7 @@ import com.robertx22.mine_and_slash.gui.texts.textblocks.LeveledItemBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.NameBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.RarityBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.RequirementBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.ProfessionDropSourceBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageBlock;
 import com.robertx22.mine_and_slash.mmorpg.UNICODE;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.GearInfusionData;
@@ -30,7 +33,6 @@ import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.mine_and_slash.vanilla_mc.items.misc.AutoItem;
-import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.temp.SkillItemTier;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -70,6 +72,7 @@ public class CraftedInfusionItem extends AutoItem implements IItemAsCurrency, IC
                             .toList();
 
                 }))
+                .accept(new ProfessionDropSourceBlock(Professions.INFUSING))
                 .accept(new UsageBlock(() -> Arrays.asList(Chats.ENCHANT_UPGRADE_RARITY.locName().withStyle(ChatFormatting.BLUE))))
                 .accept(new RequirementBlock(Collections.singletonList(Itemtips.INFUSION_GEAR_LEVEL_RANGE.locName(tier.levelRange.getMinLevel(), tier.levelRange.getMaxLevel())), UNICODE.ROTATED_CUBE + " "))
                 .accept(new LeveledItemBlock(pStack))

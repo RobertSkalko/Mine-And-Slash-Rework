@@ -5,17 +5,16 @@ import com.robertx22.mine_and_slash.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.loot.blueprints.GearBlueprint;
 
-public class GearTypePart extends BlueprintPart<BaseGearType, GearBlueprint> {
+public class BaseGearTypePart extends BlueprintPart<BaseGearType, GearBlueprint> {
 
-    public GearTypePart(GearBlueprint blueprint) {
+    public BaseGearTypePart(GearBlueprint blueprint) {
         super(blueprint);
     }
 
     @Override
     protected BaseGearType generateIfNull() {
 
-        GearSlot slot = ExileDB.GearSlots()
-                .random();
+        GearSlot slot = ExileDB.GearSlots().random();
 
 
         return ExileDB.GearTypes()
@@ -26,8 +25,7 @@ public class GearTypePart extends BlueprintPart<BaseGearType, GearBlueprint> {
     }
 
     public void set(String id) {
-        super.set(ExileDB.GearTypes()
-                .get(id));
+        super.set(ExileDB.GearTypes().get(id));
     }
 
 }

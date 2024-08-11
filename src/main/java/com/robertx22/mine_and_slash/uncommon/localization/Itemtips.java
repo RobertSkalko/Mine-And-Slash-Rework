@@ -12,6 +12,8 @@ public enum Itemtips implements IAutoLocName {
     JEWEL_UPGRADE_2("[Click the Jewel with the Stone]"),
     JEWEL_UPGRADE_1("To Upgrade needs: %1$sx %2$s"),
     DROP_LEVEL_RANGE("Drops at Levels: %1$s"),
+    DROP_CHANCE("Drop Chance: %1$s"),
+    DROP_CHANCE_EXTRA_INFO("Drop Chance assumes you're killing a mob of your level"),
     SOUL_LOCKED_TO_TYPE("Locked Armor type: %1$s"),
     PROF_MAT_LEVEL_RANGE_INFO("Gained when your profession level is:"),
 

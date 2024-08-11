@@ -1,19 +1,24 @@
 package com.robertx22.mine_and_slash.vanilla_mc.items.misc;
 
+import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.mine_and_slash.aoe_data.datapacks.models.IAutoModel;
 import com.robertx22.mine_and_slash.aoe_data.datapacks.models.ItemModelManager;
+import com.robertx22.mine_and_slash.database.data.profession.all.Professions;
+import com.robertx22.mine_and_slash.database.data.profession.items.MaterialItem;
+import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.OperationTipBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageBlock;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
-import com.robertx22.mine_and_slash.uncommon.utilityclasses.TooltipUtils;
-import com.robertx22.library_of_exile.registry.IWeighted;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nullable;
+import java.util.Arrays;
 import java.util.List;
 
 public class RarityStoneItem extends Item implements IWeighted, IAutoModel {
@@ -37,17 +42,12 @@ public class RarityStoneItem extends Item implements IWeighted, IAutoModel {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
-    public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {
-
-        //  tooltip.add(Words.CreatedInSalvageStation.locName());
-
-        tooltip.add(Component.literal(""));
-
-        tooltip.add(Itemtips.STONE_REPAIRE_DURABILITY.locName(getTotalRepair()));
-
-        tooltip.add(TooltipUtils.dragOntoGearToUse());
-
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> l, TooltipFlag pIsAdvanced) {
+        var pro = ExileDB.Professions().get(Professions.SALVAGING);
+        var tip = MaterialItem.makeTooltip(pro, null);
+        tip.accept(new UsageBlock(Arrays.asList(Itemtips.STONE_REPAIRE_DURABILITY.locName(getTotalRepair()).withStyle(ChatFormatting.GREEN))));
+        tip.accept(new OperationTipBlock().addDraggableTipAbove(OperationTipBlock.AvailableTarget.GEAR));
+        l.addAll(tip.release());
     }
 
 

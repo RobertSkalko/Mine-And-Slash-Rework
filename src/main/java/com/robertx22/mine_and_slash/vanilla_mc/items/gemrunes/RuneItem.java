@@ -18,9 +18,12 @@ import com.robertx22.mine_and_slash.database.data.profession.ExplainedResult;
 import com.robertx22.mine_and_slash.database.data.runes.Rune;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
-import com.robertx22.mine_and_slash.gui.texts.textblocks.DropLevelBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.OperationTipBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.StatBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.DropChanceBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.DropLevelBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageBlock;
+import com.robertx22.mine_and_slash.loot.blueprints.bases.RunePart;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.SocketData;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
@@ -279,11 +282,14 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
                     return statsTooltip();
                 }
             });
+            t.accept(new OperationTipBlock().setAlt());
             t.accept(new UsageBlock(splitLongText(Itemtips.RUNE_ITEM_USAGE.locName().withStyle(ChatFormatting.BLUE))));
             Rune rune = this.getRune();
 
             if (rune.Weight() > 0) {
+                var lvl = Load.Unit(ClientOnly.getPlayer()).getLevel();
                 t.accept(new DropLevelBlock(rune.getReqLevelToDrop(), GameBalanceConfig.get().MAX_LEVEL));
+                t.accept(new DropChanceBlock(RunePart.droppableAtLevel(lvl).getDropChance(rune)));
             }
 
             tooltip.addAll(t.release());
@@ -332,7 +338,7 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
             }
         }
         tooltip.add(Component.literal(""));
-        tooltip.add(Words.PressAltForStatInfo.locName().withStyle(ChatFormatting.BLUE));
+
 
         return tooltip;
     }

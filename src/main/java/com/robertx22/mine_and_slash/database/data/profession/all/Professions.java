@@ -1,12 +1,12 @@
 package com.robertx22.mine_and_slash.database.data.profession.all;
 
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.mine_and_slash.database.data.profession.CraftedItemPower;
 import com.robertx22.mine_and_slash.database.data.profession.ExpSources;
 import com.robertx22.mine_and_slash.database.data.profession.Profession;
 import com.robertx22.mine_and_slash.mmorpg.registers.deferred_wrapper.RegObj;
 import com.robertx22.mine_and_slash.tags.all.SlotTags;
 import com.robertx22.mine_and_slash.tags.imp.SlotTag;
-import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.temp.SkillItemTier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
@@ -27,7 +27,7 @@ public class Professions {
     // crafting
     public static String COOKING = "cooking";
     public static String ALCHEMY = "alchemy";
-    public static String ENCHANTING = "enchanting";
+    public static String INFUSING = "enchanting";
     public static String GEAR_CRAFTING = "gear_crafting";
 
     // misc
@@ -39,7 +39,7 @@ public class Professions {
             SALVAGING,
             ALCHEMY,
             GEAR_CRAFTING,
-            ENCHANTING
+            INFUSING
     );
 
     public static List<String> TOOL_PROFESSIONS = Arrays.asList(
@@ -67,7 +67,7 @@ public class Professions {
             HUSBANDRY,
             COOKING,
             ALCHEMY,
-            ENCHANTING
+            INFUSING
     );
 
 
@@ -150,7 +150,7 @@ public class Professions {
 
                 .build();
 
-        Builder.of(ENCHANTING, "Infusing", "Infusing is a crafting profession that turns materials from gathering professions into scrolls that can infuse extra power into your gear.")
+        Builder.of(INFUSING, "Infusing", "Infusing is a crafting profession that turns materials from gathering professions into scrolls that can infuse extra power into your gear.")
 
                 .build();
 

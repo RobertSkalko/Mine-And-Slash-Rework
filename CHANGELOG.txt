@@ -21,3 +21,5 @@ Previously point configs were spread to both configs and datapacks, and each use
 - reset points potion now give 10 instead of 5 points
 - added can_have_runewords to rarity datapack
 - runes, gems, augment and supp gems now show what level they start dropping at 
+- more misc tooltip tweaks
+- doubled unarmed energy cost

@@ -35,7 +35,7 @@ public class ProfessionRecipes {
                 for (String rar : IRarity.NORMAL_GEAR_RARITIES) {
                     float finalRarnumMulti = rarnumMulti;
 
-                    var b = ProfessionRecipe.TierBuilder.of(x -> ProfessionProductItems.CRAFTED_ENCHANTS.get(fam).get(rar).get(), Professions.ENCHANTING, 3)
+                    var b = ProfessionRecipe.TierBuilder.of(x -> ProfessionProductItems.CRAFTED_ENCHANTS.get(fam).get(rar).get(), Professions.INFUSING, 3)
                             .onlyOnTier(x -> new ItemStack(ProfessionMatItems.TIERED_MAIN_MATS.get(Professions.MINING).get(x).get(), (int) ((x.tier + 1) * finalRarnumMulti)))
                             .onTierOrAbove(SkillItemTier.TIER0, RarityItems.RARITY_STONE.get(rar).get(), 2 + rarnum)
                             .onTierOrAbove(SkillItemTier.TIER0, Items.PAPER, 1)

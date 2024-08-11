@@ -1,12 +1,14 @@
 package com.robertx22.mine_and_slash.vanilla_mc.items.gemrunes;
 
+import com.robertx22.library_of_exile.registry.IGUID;
+import com.robertx22.library_of_exile.registry.IWeighted;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.OffenseStats;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.ResourceStats;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.base.ResourceAndAttack;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.mine_and_slash.aoe_data.datapacks.models.IAutoModel;
 import com.robertx22.mine_and_slash.aoe_data.datapacks.models.ItemModelManager;
-import com.robertx22.mine_and_slash.database.data.BaseGem;
 import com.robertx22.mine_and_slash.database.data.StatMod;
 import com.robertx22.mine_and_slash.database.data.currency.IItemAsCurrency;
 import com.robertx22.mine_and_slash.database.data.currency.base.Currency;
@@ -37,9 +39,6 @@ import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.localization.Formatter;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
-import com.robertx22.library_of_exile.registry.IGUID;
-import com.robertx22.library_of_exile.registry.IWeighted;
-import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.ChatFormatting;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
@@ -97,7 +96,7 @@ public class GemItem extends BaseGemItem implements IGUID, IAutoModel, IItemAsCu
     static float MAX_ELE_DMG = 10;
 
     @Override
-    public BaseGem getBaseRuneGem() {
+    public Gem getBaseGem() {
         return getGem();
     }
 

@@ -1,6 +1,7 @@
-package com.robertx22.mine_and_slash.gui.texts.textblocks;
+package com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks;
 
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.AbstractTextBlock;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;

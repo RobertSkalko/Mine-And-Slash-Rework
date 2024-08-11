@@ -7,10 +7,10 @@ import com.robertx22.mine_and_slash.database.data.profession.LeveledItem;
 import com.robertx22.mine_and_slash.database.data.profession.buffs.StatBuff;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
-import com.robertx22.mine_and_slash.gui.texts.textblocks.LeveledItemBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.OperationTipBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.RequirementBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.affixdatablocks.SimpleItemStatBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.ProfessionDropSourceBlock;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.ModRange;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
@@ -107,6 +107,7 @@ public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered 
     public void appendHoverText(ItemStack stack, @Nullable Level pLevel, List<Component> list, TooltipFlag pIsAdvanced) {
 
         try {
+
             StatBuff buff = getBuff();
             int lvl = LeveledItem.getLevel(stack);
 
@@ -115,7 +116,8 @@ public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered 
                             .accept(Itemtips.BUFF_TIP.locName(), buff.getStats(lvl, power.perc)))
                     .accept(new RequirementBlock(lvl))
                     .accept(new OperationTipBlock().setAlt())
-                    .accept(new LeveledItemBlock(stack))
+                    .accept(new ProfessionDropSourceBlock(this.type.profession))
+                    //.accept(new LeveledItemBlock(stack))
                     .release());
 
 

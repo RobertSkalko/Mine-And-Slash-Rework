@@ -1,12 +1,12 @@
 package com.robertx22.mine_and_slash.loot.blueprints;
 
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.mine_and_slash.loot.LootInfo;
-import com.robertx22.mine_and_slash.loot.blueprints.bases.GearTypePart;
+import com.robertx22.mine_and_slash.loot.blueprints.bases.BaseGearTypePart;
 import com.robertx22.mine_and_slash.loot.blueprints.bases.UniqueGearPart;
 import com.robertx22.mine_and_slash.loot.generators.SoulLootGen;
 import com.robertx22.mine_and_slash.loot.generators.util.GearCreationUtils;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
-import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -24,7 +24,7 @@ public class GearBlueprint extends RarityItemBlueprint implements ITypeBlueprint
     }
 
 
-    public GearTypePart gearItemSlot = new GearTypePart(this);
+    public BaseGearTypePart gearItemSlot = new BaseGearTypePart(this);
     public UniqueGearPart uniquePart = new UniqueGearPart(this);
 
 

@@ -3,17 +3,20 @@ package com.robertx22.mine_and_slash.vanilla_mc.items.misc;
 import com.robertx22.mine_and_slash.database.data.currency.base.IShapedRecipe;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.PlayerPointsType;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.mine_and_slash.uncommon.localization.Chats;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.TooltipUtils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 
+import javax.annotation.Nullable;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class ResetPotion extends AutoItem implements IShapedRecipe {
@@ -81,6 +84,15 @@ public class ResetPotion extends AutoItem implements IShapedRecipe {
     @Override
     public int getUseDuration(ItemStack stack) {
         return 30;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> l, TooltipFlag pIsAdvanced) {
+        if (reset == ResetType.ADD_POINTS) {
+            l.addAll(TooltipUtils.splitLongText(Chats.RESET_POINTS_POTION_DESC.locName().withStyle(ChatFormatting.AQUA)));
+        } else {
+            l.add(Chats.RESET_FULL_POTION_DESC.locName().withStyle(ChatFormatting.AQUA));
+        }
     }
 
     @Override

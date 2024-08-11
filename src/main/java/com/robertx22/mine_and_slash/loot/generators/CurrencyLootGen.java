@@ -30,7 +30,6 @@ public class CurrencyLootGen extends BaseLootGen<ItemBlueprint> {
 
     @Override
     public boolean condition() {
-
         return info.level > 5;
     }
 
