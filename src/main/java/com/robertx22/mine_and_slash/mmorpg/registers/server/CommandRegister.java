@@ -49,7 +49,7 @@ public class CommandRegister {
 
         new GenericGive("gear", ExileRegistryTypes.GEAR_TYPE, x -> new GearBlueprint(x)).register(dispatcher);
         new GenericGive("loot_chest", ExileRegistryTypes.LOOT_CHEST, x -> new LootChestBlueprint(x)).register(dispatcher);
-
+      
 
         new AutoSalvageGenericConfigure(ExileRegistryTypes.GEAR_SLOT).register(dispatcher);
         new AutoSalvageGenericConfigure(ExileRegistryTypes.SUPPORT_GEM).register(dispatcher);

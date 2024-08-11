@@ -65,12 +65,9 @@ public class MapBlueprint extends RarityItemBlueprint {
 
         data.lvl = level.get();
 
-
         if (this.uberMap) {
             data.uber = this.uber.GUID();
-            data.uber_tier = this.uberTier.tier;
         }
-
         genAffixes(data, rarity);
 
         return data;

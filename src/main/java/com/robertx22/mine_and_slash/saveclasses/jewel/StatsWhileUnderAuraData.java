@@ -12,7 +12,7 @@ import com.robertx22.mine_and_slash.saveclasses.unit.stat_ctx.StatContext;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.LivingEntity;
 
 import java.util.ArrayList;
@@ -55,9 +55,9 @@ public class StatsWhileUnderAuraData implements IStatCtx {
         return Arrays.asList(new SimpleStatCtx(StatContext.StatCtxType.JEWEL, stats));
     }
 
-    public List<Component> getTooltip() {
+    public List<MutableComponent> getTooltip() {
 
-        List<Component> list = new ArrayList<>();
+        List<MutableComponent> list = new ArrayList<>();
 
         list.add(Words.WHILE_UNDER_AURA.locName(getAura().locName().withStyle(ChatFormatting.LIGHT_PURPLE)).withStyle(ChatFormatting.GOLD));
 

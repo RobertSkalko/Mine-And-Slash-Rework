@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.database.data.currency.map;
 
+import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.database.data.currency.base.Currency;
 import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.BaseLocRequirement;
@@ -12,7 +13,6 @@ import com.robertx22.mine_and_slash.maps.MapItemData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
-import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
 
@@ -31,9 +31,8 @@ public class MapRarityIncrease extends Currency {
         var newdata = b.createData();
 
         newdata.uber = data.uber;
-        newdata.uber_tier = data.uber_tier;
         newdata.lvl = data.lvl;
-        
+
 
         SoundUtils.ding(ctx.player.level(), ctx.player.blockPosition());
         SoundUtils.playSound(ctx.player.level(), ctx.player.blockPosition(), SoundEvents.ANVIL_USE, 1, 1);

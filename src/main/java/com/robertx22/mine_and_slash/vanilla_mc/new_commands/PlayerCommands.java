@@ -1,16 +1,20 @@
 package com.robertx22.mine_and_slash.vanilla_mc.new_commands;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.mine_and_slash.capability.player.PlayerData;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.PlayerPointsType;
 import com.robertx22.mine_and_slash.database.data.profession.Profession;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
+import com.robertx22.mine_and_slash.loot.LootInfo;
+import com.robertx22.mine_and_slash.loot.blueprints.WatcherEyeBlueprint;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.mine_and_slash.vanilla_mc.new_commands.parts.ResetPlayerData;
 import com.robertx22.mine_and_slash.vanilla_mc.new_commands.wrapper.*;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.OpenGuiPacket;
-import com.robertx22.library_of_exile.main.Packets;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -18,6 +22,28 @@ import java.util.stream.Collectors;
 public class PlayerCommands {
 
     public static void init(CommandDispatcher dis) {
+        
+        CommandBuilder.of(dis, x -> {
+            PlayerWrapper PLAYER = new PlayerWrapper();
+            IntWrapper NUMBER = new IntWrapper("level");
+
+            x.addLiteral("give", PermWrapper.OP);
+            x.addLiteral("watcher_eye_jewel", PermWrapper.OP);
+
+            x.addArg(PLAYER);
+            x.addArg(NUMBER);
+
+            x.action(e -> {
+                var p = PLAYER.get(e);
+                var num = NUMBER.get(e);
+
+                var info = LootInfo.ofLevel(num);
+                WatcherEyeBlueprint b = new WatcherEyeBlueprint(info);
+                ItemStack stack = b.createStack();
+                PlayerUtils.giveItem(stack, p);
+            });
+
+        }, "Gives a random watcher eye jewel, affix count depends on level");
 
         CommandBuilder.of(dis, x -> {
             PlayerWrapper PLAYER = new PlayerWrapper();

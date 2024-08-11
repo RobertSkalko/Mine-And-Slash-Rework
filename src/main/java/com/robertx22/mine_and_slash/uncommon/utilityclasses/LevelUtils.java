@@ -85,16 +85,17 @@ public class LevelUtils {
             }
         }
         DimensionConfig dimConfig = ExileDB.getDimensionConfig(world);
-
-        if (dimConfig.scale_to_nearest_player && nearestPlayer != null) {
-            info.set(LevelInfo.LevelSource.NEAREST_PLAYER, Load.Unit(nearestPlayer).getLevel());
+        
+        if (isInMinLevelArea(sw, pos, dimConfig)) {
+            info.set(LevelInfo.LevelSource.MIN_LEVEL_AREA, dimConfig.min_lvl);
         } else {
-            if (isInMinLevelArea(sw, pos, dimConfig)) {
-                info.set(LevelInfo.LevelSource.MIN_LEVEL_AREA, dimConfig.min_lvl);
+            if (dimConfig.scale_to_nearest_player && nearestPlayer != null) {
+                info.set(LevelInfo.LevelSource.NEAREST_PLAYER, Load.Unit(nearestPlayer).getLevel());
             } else {
                 info.set(LevelInfo.LevelSource.DISTANCE_FROM_SPAWN, determineLevelPerDistanceFromSpawn(sw, pos, dimConfig));
             }
         }
+
         var varianceConfig = ServerContainer.get().MOB_LEVEL_VARIANCE.get();
         int variance = RandomUtils.RandomRange(-varianceConfig, varianceConfig);
 

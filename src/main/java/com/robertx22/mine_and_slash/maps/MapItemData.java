@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.maps;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.OffenseStats;
 import com.robertx22.mine_and_slash.content.ubers.UberBossArena;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanceConfig;
@@ -32,7 +33,6 @@ import com.robertx22.mine_and_slash.uncommon.localization.Gui;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.TooltipUtils;
-import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -50,7 +50,6 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
 
     public static int MAX_TIER = 100;
     private static MapItemData empty;
-    public int uber_tier = 0;
     public String uber = "";
 
     public int lvl = 1;
@@ -272,7 +271,8 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
     }
 
     private int getBonusExpAmountInPercent() {
-        return (int) ((this.getExpMulti() - 1) * 100);
+        int exp = (int) ((this.getExpMulti() - 1) * 100);
+        return exp;
     }
 
     public List<StatContext> getStatAndContext(LivingEntity en) {

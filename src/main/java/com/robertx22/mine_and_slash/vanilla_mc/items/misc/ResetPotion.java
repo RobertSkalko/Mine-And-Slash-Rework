@@ -31,8 +31,8 @@ public class ResetPotion extends AutoItem implements IShapedRecipe {
     }
 
     public enum ResetType {
-        ADD_POINTS(() -> RarityStoneItem.of(IRarity.COMMON_ID), "Reset Points", "reset_points"),
-        FULL_RESET(() -> RarityStoneItem.of(IRarity.MYTHIC_ID), "Full Reset", "full_reset");
+        ADD_POINTS(() -> RarityStoneItem.of(IRarity.COMMON_ID), "Minor Reset", "reset_points"),
+        FULL_RESET(() -> RarityStoneItem.of(IRarity.MYTHIC_ID), "Major Reset", "full_reset");
 
         public Supplier<Item> mat;
         public String name;
