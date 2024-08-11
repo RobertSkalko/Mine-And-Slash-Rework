@@ -1,19 +1,24 @@
 package com.robertx22.mine_and_slash.uncommon.utilityclasses;
 
+import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.database.data.DimensionConfig;
+import com.robertx22.mine_and_slash.database.data.MinMax;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.mine_and_slash.database.data.level_ranges.LevelRange;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
-import com.robertx22.library_of_exile.utils.RandomUtils;
+import com.robertx22.mine_and_slash.uncommon.levels.LevelInfo;
 import com.robertx22.temp.SkillItemTier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+
+import javax.annotation.Nullable;
 
 public class LevelUtils {
 
@@ -25,16 +30,11 @@ public class LevelUtils {
 
     public static void runTests() {
         if (MMORPG.RUN_DEV_TOOLS) {
-
             // Preconditions.checkArgument(levelToTier(15) == 0);
             //Preconditions.checkArgument(levelToTier(25) == 1);
-
         }
     }
 
-    public static String tierToRomanNumeral(int tier) {
-        return RomanNumber.toRoman(tier);
-    }
 
     public static LevelRange tierToLevel(int tier) {
         return SkillItemTier.of(tier).levelRange;
@@ -44,14 +44,6 @@ public class LevelUtils {
         return SkillItemTier.fromLevel(level).tier;
     }
 
-    public static SkillItemTier levelToSkillTier(int lvl) {
-        return SkillItemTier.fromLevel(lvl);
-    }
-
-    public static int getDistanceFromMaxLevel(int lvl) {
-        int max = GameBalanceConfig.get().MAX_LEVEL;
-        return Math.abs(lvl - max);
-    }
 
     public static float getMaxLevelMultiplier(float lvl) {
         float max = GameBalanceConfig.get().MAX_LEVEL;
@@ -71,54 +63,49 @@ public class LevelUtils {
         return (int) (Math.pow(exp * GameBalanceConfig.get().NORMAL_STAT_SCALING.getMultiFor(level), 1.1F));
     }
 
-    public static class LevelDetermInfo {
 
-        public int level;
+    public static LevelInfo determineLevel(@Nullable LivingEntity en, Level world, BlockPos pos, Player nearestPlayer) {
 
-    }
-
-    public static LevelDetermInfo determineLevel(Level world, BlockPos pos, Player nearestPlayer) {
-        LevelDetermInfo info = new LevelDetermInfo();
-
-        if (nearestPlayer != null && MMORPG.RUN_DEV_TOOLS) {
-            info.level = Load.Unit(nearestPlayer).getLevel();
-            return info;
-        }
+        LevelInfo info = new LevelInfo();
 
         ServerLevel sw = (ServerLevel) world;
 
+        if (WorldUtils.isMapWorldClass(world)) {
+            try {
+                var data = Load.mapAt(world, pos);
+                if (data != null) {
+                    info.set(LevelInfo.LevelSource.MAP_DIMENSION, data.map.getLevel());
+                    return info;
+                } else {
+                    System.out.print("A mob spawned in a dungeon world without a dungeon data nearby!");
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         DimensionConfig dimConfig = ExileDB.getDimensionConfig(world);
 
-        int lvl = 0;
-
-        if (ServerContainer.get().ALWAYS_SCALE_MOB_LEVEL_TO_PLAYER.get() || dimConfig.scale_to_nearest_player) {
-            if (nearestPlayer != null) {
-
-                if (isInMinLevelArea(sw, pos, dimConfig)) {
-                    lvl = dimConfig.min_lvl;
-                } else {
-                    lvl = Load.Unit(nearestPlayer)
-                            .getLevel();
-                }
-            } else {
-                lvl = determineLevelPerDistanceFromSpawn(sw, pos, dimConfig);
-            }
+        if (dimConfig.scale_to_nearest_player && nearestPlayer != null) {
+            info.set(LevelInfo.LevelSource.NEAREST_PLAYER, Load.Unit(nearestPlayer).getLevel());
         } else {
-            lvl = determineLevelPerDistanceFromSpawn(sw, pos, dimConfig);
+            if (isInMinLevelArea(sw, pos, dimConfig)) {
+                info.set(LevelInfo.LevelSource.MIN_LEVEL_AREA, dimConfig.min_lvl);
+            } else {
+                info.set(LevelInfo.LevelSource.DISTANCE_FROM_SPAWN, determineLevelPerDistanceFromSpawn(sw, pos, dimConfig));
+            }
         }
+        var varianceConfig = ServerContainer.get().MOB_LEVEL_VARIANCE.get();
+        int variance = RandomUtils.RandomRange(-varianceConfig, varianceConfig);
 
-        var LevelVariance = ServerContainer.get().MOB_LEVEL_VARIANCE.get();
+        info.add(LevelInfo.LevelSource.LEVEL_VARIANCE, variance);
+        info.capToRange(LevelInfo.LevelSource.DIMENSION, new MinMax(dimConfig.min_lvl, dimConfig.max_lvl));
+        info.capToRange(LevelInfo.LevelSource.MAX_LEVEL, new MinMax(1, GameBalanceConfig.get().MAX_LEVEL));
 
-        lvl = RandomUtils.RandomRange(lvl - LevelVariance, lvl + LevelVariance);
-
-        lvl = Mth.clamp(lvl, dimConfig.min_lvl, dimConfig.max_lvl);
-        lvl = Mth.clamp(lvl, 1, GameBalanceConfig.get().MAX_LEVEL);
-
-
-        lvl = Mth.clamp(lvl, dimConfig.min_lvl, dimConfig.max_lvl);
-        lvl = Mth.clamp(lvl, 1, GameBalanceConfig.get().MAX_LEVEL);
-
-        info.level = lvl;
+        if (en != null) {
+            var enconfig = ExileDB.getEntityConfig(en, Load.Unit(en));
+            info.capToRange(LevelInfo.LevelSource.ENTITY_CONFIG, new MinMax(enconfig.min_lvl, enconfig.max_lvl));
+        }
 
         return info;
     }

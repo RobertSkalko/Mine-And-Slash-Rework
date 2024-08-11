@@ -1,6 +1,7 @@
 package com.robertx22.mine_and_slash.database.data;
 
 import com.robertx22.library_of_exile.utils.RandomUtils;
+import com.robertx22.mine_and_slash.uncommon.MathHelper;
 
 public class MinMax {
 
@@ -20,6 +21,10 @@ public class MinMax {
         }
         return false;
 
+    }
+
+    public int capNumber(int num) {
+        return MathHelper.clamp(num, min, max);
     }
 
     public int random() {

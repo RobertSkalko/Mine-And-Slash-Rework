@@ -37,7 +37,6 @@ public class ServerContainer {
         DO_NOT_DESPAWN_MAP_MOBS = b.define("DO_NOT_DESPAWN_MAP_MOBS", true);
 
         GET_STARTER_ITEMS = b.define("start_items", true);
-        ALWAYS_SCALE_MOB_LEVEL_TO_PLAYER = b.define("scale_mob_to_nearby_player_lvl", true);
         ENABLE_LOOT_ANNOUNCEMENTS = b.define("loot_announcements", true);
         REQUIRE_TEAM_FOR_TEAM_DUNGEONS = b.define("require_team_for_dungeons", true);
         DONT_SYNC_DATA_OF_AMBIENT_MOBS = b.define("dont_sync_ambient_mob_data", true);
@@ -186,7 +185,6 @@ public class ServerContainer {
 
     public ForgeConfigSpec.BooleanValue DO_NOT_DESPAWN_MAP_MOBS;
     public ForgeConfigSpec.BooleanValue GET_STARTER_ITEMS;
-    public ForgeConfigSpec.BooleanValue ALWAYS_SCALE_MOB_LEVEL_TO_PLAYER;
     public ForgeConfigSpec.BooleanValue ENABLE_LOOT_ANNOUNCEMENTS;
     public ForgeConfigSpec.BooleanValue REQUIRE_TEAM_FOR_TEAM_DUNGEONS;
     public ForgeConfigSpec.BooleanValue DONT_SYNC_DATA_OF_AMBIENT_MOBS;

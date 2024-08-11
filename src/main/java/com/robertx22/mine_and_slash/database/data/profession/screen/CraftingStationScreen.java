@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
+// todo sepearate screens for each station
 public class CraftingStationScreen extends AbstractContainerScreen<CraftingStationMenu> {
     public static final ResourceLocation BACKGROUND_LOCATION = new ResourceLocation(SlashRef.MODID, "textures/gui/crafting_table2.png");
 
@@ -30,6 +31,7 @@ public class CraftingStationScreen extends AbstractContainerScreen<CraftingStati
         super.init();
         this.addRenderableWidget(new LockButton(leftPos + 79, topPos + 33, this));
         this.addRenderableWidget(new CraftButton(leftPos + 79, topPos + 51, this));
+
 
     }
 

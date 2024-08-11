@@ -3,7 +3,6 @@ package com.robertx22.mine_and_slash.a_libraries.jei;
 import com.robertx22.mine_and_slash.database.data.profession.Profession;
 import com.robertx22.mine_and_slash.database.data.profession.ProfessionRecipe;
 import com.robertx22.mine_and_slash.database.data.profession.all.Professions;
-import com.robertx22.mine_and_slash.database.data.profession.screen.CraftingStationScreen;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.SlashBlocks;
@@ -33,7 +32,7 @@ public class JeiIntegration implements IModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registration) {
         IGuiHelper helper = registration.getJeiHelpers().getGuiHelper();
 
-        
+
         init();
 
         for (Map.Entry<String, RecipeType<ProfessionRecipe>> en : map.entrySet()) {
@@ -70,10 +69,17 @@ public class JeiIntegration implements IModPlugin {
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
         init();
 
+
+        //   registration.addRecipeClickArea(CraftingStationScreen.class, 125, 1, 25, 14, map.get(Professions.GEAR_CRAFTING));
+
+        // todo because i use the same screen class, it ends up showing all the recipe types (well the last one in list..)
+
+        /*
         for (RecipeType<ProfessionRecipe> value : map.values()) {
-            //registration.addRecipeClickArea(CraftingStationScreen.class, 79, 16, 16, 16, value);
-            registration.addRecipeClickArea(CraftingStationScreen.class, 0, 0, 0, 0, value);
+            registration.addRecipeClickArea(CraftingStationScreen.class, 79, 16, 16, 16, value);
+                 registration.addRecipeClickArea(CraftingStationScreen.class, 125, 1, 25, 14, value);
         }
+         */
     }
 
     @Override

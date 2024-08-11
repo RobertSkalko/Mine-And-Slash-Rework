@@ -1,11 +1,15 @@
 package com.robertx22.mine_and_slash.capability.entity;
 
+import com.robertx22.library_of_exile.components.ICap;
+import com.robertx22.library_of_exile.main.Packets;
+import com.robertx22.library_of_exile.utils.CLOC;
+import com.robertx22.library_of_exile.utils.LoadSave;
+import com.robertx22.library_of_exile.wrappers.ExileText;
 import com.robertx22.mine_and_slash.capability.DirtySync;
 import com.robertx22.mine_and_slash.capability.bases.EntityGears;
 import com.robertx22.mine_and_slash.capability.bases.INeededForClient;
 import com.robertx22.mine_and_slash.characters.PlayerStats;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
-import com.robertx22.mine_and_slash.database.data.EntityConfig;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.mine_and_slash.database.data.gear_slots.GearSlot;
 import com.robertx22.mine_and_slash.database.data.mob_affixes.MobAffix;
@@ -41,6 +45,7 @@ import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.PlayStyle;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
+import com.robertx22.mine_and_slash.uncommon.levels.LevelInfo;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.localization.Gui;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
@@ -48,11 +53,6 @@ import com.robertx22.mine_and_slash.uncommon.threat_aggro.ThreatData;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.*;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.EntityUnitPacket;
 import com.robertx22.mine_and_slash.vanilla_mc.potion_effects.EntityStatusEffectsData;
-import com.robertx22.library_of_exile.components.ICap;
-import com.robertx22.library_of_exile.main.Packets;
-import com.robertx22.library_of_exile.utils.CLOC;
-import com.robertx22.library_of_exile.utils.LoadSave;
-import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -703,7 +703,7 @@ public class EntityData implements ICap, INeededForClient {
 
     public void mobBasicAttack(AttackInformation data) {
 
-     
+
         if (this.cooldowns.isOnCooldown("basic_attack")) {
             data.setCanceled(true);
             return;
@@ -765,33 +765,15 @@ public class EntityData implements ICap, INeededForClient {
         this.setMobStats = true;
 
 
-        if (WorldUtils.isMapWorldClass(entity.level())) {
-            try {
-                var data = Load.mapAt(entity.level(), entity.blockPosition());
-                if (data != null) {
-                    this.setLevel(data.map.getLevel());
-                    return;
-                } else {
-                    System.out.print("A mob spawned in a dungeon world without a dungeon data nearby!");
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-
         setMobLvlNormally(entity, nearestPlayer);
 
     }
 
     private void setMobLvlNormally(LivingEntity entity, Player nearestPlayer) {
-        EntityConfig entityConfig = ExileDB.getEntityConfig(entity, this);
 
-        LevelUtils.LevelDetermInfo lvl = LevelUtils.determineLevel(entity.level(), entity.blockPosition(), nearestPlayer);
+        LevelInfo lvl = LevelUtils.determineLevel(entity, entity.level(), entity.blockPosition(), nearestPlayer);
 
-
-        setLevel(Mth.clamp(lvl.level, entityConfig.min_lvl, entityConfig.max_lvl));
+        this.setLevel(lvl.getLevel());
     }
 
     public int GiveExp(Player player, int i) {
@@ -815,7 +797,6 @@ public class EntityData implements ICap, INeededForClient {
             rested.bonusCombatExp -= added;
             i += added;
         }
-
 
 
         setExp(exp + i);

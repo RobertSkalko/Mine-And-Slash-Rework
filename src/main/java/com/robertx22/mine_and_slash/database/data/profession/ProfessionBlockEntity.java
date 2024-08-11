@@ -62,7 +62,6 @@ public class ProfessionBlockEntity extends BlockEntity {
 
     public void tryInputRecipe(ProfessionRecipe recipe, Player p) {
 
-
         if (!recipe.profession.equals(getProfession().GUID())) {
             return;
         }

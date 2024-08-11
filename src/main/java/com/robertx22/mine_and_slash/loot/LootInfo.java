@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.loot;
 
+import com.robertx22.library_of_exile.events.base.ExileEvents;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.database.data.league.LeagueMechanic;
 import com.robertx22.mine_and_slash.database.data.league.LeagueMechanics;
@@ -12,7 +13,6 @@ import com.robertx22.mine_and_slash.maps.MapData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
-import com.robertx22.library_of_exile.events.base.ExileEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
@@ -160,22 +160,7 @@ public class LootInfo {
             if (mobData != null) {
                 level = mobData.getLevel();
             } else {
-                if (WorldUtils.isMapWorldClass(world)) {
-                    try {
-                        var data = Load.mapAt(world, pos);
-                        if (data != null) {
-                            level = data.map.getLevel();
-                            return;
-                        } else {
-                            System.out.print("A mob spawned in a dungeon world without a dungeon data nearby!");
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    level = LevelUtils.determineLevel(world, pos, player).level;
-                }
+                level = LevelUtils.determineLevel(null, world, pos, player).getLevel();
             }
         }
 
