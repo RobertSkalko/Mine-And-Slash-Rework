@@ -1,10 +1,10 @@
 package com.robertx22.mine_and_slash.a_libraries.jei;
 
+import com.robertx22.library_of_exile.main.MyPacket;
+import com.robertx22.library_of_exile.packets.ExilePacketContext;
 import com.robertx22.mine_and_slash.database.data.profession.screen.CraftingStationMenu;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
-import com.robertx22.library_of_exile.main.MyPacket;
-import com.robertx22.library_of_exile.packets.ExilePacketContext;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -24,13 +24,13 @@ public class LockRecipePacket extends MyPacket<LockRecipePacket> {
 
     @Override
     public void loadFromData(FriendlyByteBuf buf) {
-
+        this.recipeId = buf.readUtf();
         // todo
     }
 
     @Override
     public void saveToData(FriendlyByteBuf buf) {
-
+        buf.writeUtf(recipeId);
     }
 
     @Override
@@ -38,13 +38,13 @@ public class LockRecipePacket extends MyPacket<LockRecipePacket> {
 
         Player p = ctx.getPlayer();
 
+
         if (p.containerMenu instanceof CraftingStationMenu menu) {
             if (menu.be != null) {
-
                 var rec = ExileDB.Recipes().get(recipeId);
-
-                menu.be.tryInputRecipe(rec, p);
-
+                if (rec != null) {
+                    menu.be.tryInputRecipe(rec, p);
+                }
             }
         }
 

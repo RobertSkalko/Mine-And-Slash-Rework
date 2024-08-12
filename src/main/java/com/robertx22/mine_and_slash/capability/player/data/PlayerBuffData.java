@@ -38,8 +38,7 @@ public class PlayerBuffData implements IStatCtx {
     }
 
     public enum Type implements IAutoLocName {
-        POTION("potion", "Potion", 20 * 60 * 30, () -> SlashPotions.POTION.get(), Professions.ALCHEMY),
-        // ELIXIR("elixir", "Elixir", 20 * 60 * 15),
+        POTION("buff_potion", "Elixir", 20 * 60 * 30, () -> SlashPotions.POTION.get(), Professions.ALCHEMY),
         MEAL("meal", "Meal", 20 * 60 * 60, () -> SlashPotions.MEAL.get(), Professions.COOKING),
         FISH("fish", "Seafood", 20 * 60 * 60, () -> SlashPotions.FISH.get(), Professions.COOKING);
 

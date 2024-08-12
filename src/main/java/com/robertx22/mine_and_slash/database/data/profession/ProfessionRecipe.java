@@ -1,19 +1,17 @@
 package com.robertx22.mine_and_slash.database.data.profession;
 
-import com.robertx22.mine_and_slash.database.data.profession.all.ProfessionMatItems;
-import com.robertx22.mine_and_slash.database.data.profession.stat.ProfExp;
-import com.robertx22.mine_and_slash.database.registry.ExileDB;
-import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
-import com.robertx22.mine_and_slash.mmorpg.registers.deferred_wrapper.RegObj;
-import com.robertx22.mine_and_slash.uncommon.MathHelper;
-import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
-import com.robertx22.mine_and_slash.uncommon.localization.Words;
-import com.robertx22.mine_and_slash.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
+import com.robertx22.mine_and_slash.database.data.profession.stat.ProfExp;
+import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
+import com.robertx22.mine_and_slash.uncommon.MathHelper;
+import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
+import com.robertx22.mine_and_slash.uncommon.localization.Words;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.temp.SkillItemTier;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -22,7 +20,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -33,12 +34,13 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
     public String id = "";
     public String profession = "";
 
+    public boolean set_tier_nbt = true;
+
     private List<CraftingMaterial> mats = new ArrayList<>();
     public String result = "";
     private int result_num = 1;
     private int exp = 100;
 
-    public String power = "";
     public int tier = 0;
 
     public int getLevelRequirement() {
@@ -53,23 +55,10 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
 
         list.add(prof.locName().append(" ").append(TooltipUtils.level(getLevelRequirement())));
 
-        /*
-        list.add(Component.empty());
-        for (RecipeDifficulty diff : RecipeDifficulty.values()) {
-            list.add(diff.word.locName().append(" Mastery level: " + getLevelForMasteringDifficulty(diff)).withStyle(diff.color));
-        }         */
 
         return list;
     }
-
-    public int getLevelForMasteringDifficulty(RecipeDifficulty diff) {
-        return this.getLevelRequirement() + diff.masteryLvls;
-    }
-
-
-    public CraftedItemPower getPower() {
-        return CraftedItemPower.ofId(power);
-    }
+  
 
     public SkillItemTier getTier() {
         return SkillItemTier.of(tier);
@@ -92,7 +81,7 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
     public ItemStack toResultStackForJei() {
         ItemStack stack = new ItemStack(VanillaUTIL.REGISTRY.items().get(new ResourceLocation(result)), result_num);
 
-        if (true) { // todo not all items might need tiers
+        if (set_tier_nbt) {
             LeveledItem.setTier(stack, tier);
         }
 
@@ -192,6 +181,13 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
         return list;
     }
 
+
+    public boolean isMadeWithPrimaryMats(Item tier, Item rar) {
+        ItemStack v1 = new ItemStack(tier, 64);
+        ItemStack v2 = new ItemStack(rar, 64);
+        return this.mats.stream().anyMatch(x -> x.matches(v1)) && mats.stream().anyMatch(x -> x.matches(v2));
+    }
+
     public boolean canCraft(List<ItemStack> stacks) {
         return mats.stream().allMatch(x -> stacks.stream().anyMatch(e -> x.matches(e)));
     }
@@ -200,7 +196,9 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
         List<ItemStack> list = new ArrayList<>();
 
         ItemStack stack = new ItemStack(VanillaUTIL.REGISTRY.items().get(new ResourceLocation(result)), result_num);
-        LeveledItem.setTier(stack, tier);
+        if (set_tier_nbt) {
+            LeveledItem.setTier(stack, tier);
+        }
         list.add(stack);
 
         ProfessionRecipe.RecipeDifficulty diff = ProfessionRecipe.RecipeDifficulty.get(Load.player(p).professions.getLevel(this.profession), getLevelRequirement());
@@ -248,13 +246,11 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
     public static class Data {
 
         public SkillItemTier tier;
-        public CraftedItemPower power;
         public ProfessionRecipe recipe;
 
 
-        public Data(SkillItemTier tier, CraftedItemPower power, ProfessionRecipe recipe) {
+        public Data(SkillItemTier tier, ProfessionRecipe recipe) {
             this.tier = tier;
-            this.power = power;
             this.recipe = recipe;
         }
     }
@@ -302,18 +298,6 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
             return this;
         }
 
-        public TierBuilder forRarityPower(String rar, HashMap<CraftedItemPower, RegObj<Item>> map) {
-            CraftedItemPower power = CraftedItemPower.ofRarity(rar);
-            this.actions.add(data -> {
-                if (data.power.perc >= power.perc) {
-                    var id = VanillaUTIL.REGISTRY.items().getKey(map.get(power).get());
-                    data.recipe.mats.add(CraftingMaterial.item(id.toString(), 1));
-                }
-            });
-            return this;
-        }
-
-
         public TierBuilder onTierOrAbove(SkillItemTier tier, Item item, int num) {
             this.actions.add(data -> {
                 if (data.tier.tier >= tier.tier) {
@@ -333,8 +317,7 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
         public void buildEachTier() {
             for (SkillItemTier tier : SkillItemTier.values()) {
                 ProfessionRecipe r = new ProfessionRecipe();
-                Data data = new Data(tier, CraftedItemPower.GREATER, r);
-                r.power = data.power.id;
+                Data data = new Data(tier, r);
                 for (Consumer<Data> action : this.actions) {
                     action.accept(data);
                 }
@@ -343,90 +326,5 @@ public class ProfessionRecipe implements JsonExileRegistry<ProfessionRecipe>, IA
         }
     }
 
-    public static class TierPowerBuilder {
-        SkillItemTier lowest;
 
-        List<Consumer<Data>> actions = new ArrayList<>();
-
-        public static TierPowerBuilder of(CraftedItemHolder hold, SkillItemTier lowestTier, String proff, int num) {
-            TierPowerBuilder b = new TierPowerBuilder();
-            b.lowest = lowestTier;
-            b.actions.add((data) -> {
-                var id = VanillaUTIL.REGISTRY.items().getKey(hold.get(data.tier, data.power).getItem());
-                data.recipe.id = id.getPath().replaceAll("/", "_") + data.tier.tier; // todo test
-                data.recipe.result = id.toString();
-                data.recipe.profession = proff;
-                data.recipe.result_num = num;
-                data.recipe.tier = data.tier.tier;
-            });
-            return b;
-        }
-
-
-        public TierPowerBuilder coreMaterials(String prof) {
-            materialItems(ProfessionMatItems.TIERED_MAIN_MATS.get(prof));
-            return this;
-        }
-
-        private TierPowerBuilder materialItems(HashMap<SkillItemTier, RegObj<Item>>... items) {
-            this.actions.add(data -> {
-                for (HashMap<SkillItemTier, RegObj<Item>> item : items) {
-                    var id = VanillaUTIL.REGISTRY.items().getKey(item.get(data.tier).get());
-                    data.recipe.mats.add(CraftingMaterial.item(id.toString(), data.power.matItems));
-                }
-            });
-            return this;
-        }
-
-        public TierPowerBuilder lesser(Item item, int num) {
-            return material(CraftedItemPower.LESSER, item, num);
-        }
-
-        public TierPowerBuilder medium(Item item, int num) {
-            return material(CraftedItemPower.MEDIUM, item, num);
-        }
-
-        public TierPowerBuilder greater(Item item, int num) {
-            return material(CraftedItemPower.GREATER, item, num);
-        }
-
-        public TierPowerBuilder forPowers(HashMap<CraftedItemPower, RegObj<Item>> map, int num) {
-            for (CraftedItemPower p : CraftedItemPower.values()) {
-                material(CraftedItemPower.MEDIUM, map.get(p).get(), num);
-            }
-            return this;
-        }
-
-        private TierPowerBuilder material(CraftedItemPower forPower, Item item, int num) {
-            this.actions.add(data -> {
-                if (data.power.perc >= forPower.perc) {
-                    var id = VanillaUTIL.REGISTRY.items().getKey(item);
-                    data.recipe.mats.add(CraftingMaterial.item(id.toString(), num));
-                }
-            });
-            return this;
-        }
-
-        public TierPowerBuilder exp(int xp) {
-            this.actions.add(x -> x.recipe.exp = xp);
-            return this;
-        }
-
-        public void buildEachTierAndPower() {
-            for (SkillItemTier tier : SkillItemTier.values()) {
-                if (tier.tier >= lowest.tier) {
-                    for (CraftedItemPower power : CraftedItemPower.values()) {
-                        ProfessionRecipe r = new ProfessionRecipe();
-                        Data data = new Data(tier, power, r);
-                        r.power = power.id;
-                        for (Consumer<Data> action : this.actions) {
-                            action.accept(data);
-                        }
-                        r.addToSerializables();
-                    }
-                }
-            }
-        }
-
-    }
 }

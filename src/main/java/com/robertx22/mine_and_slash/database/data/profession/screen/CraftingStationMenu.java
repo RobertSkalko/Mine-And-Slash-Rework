@@ -38,14 +38,14 @@ public class CraftingStationMenu extends AbstractContainerMenu {
         //Player Inventory
         for (int k = 0; k < 3; ++k) {
             for (int i1 = 0; i1 < 9; ++i1) {
-                var slot = new Slot(pinv, i1 + k * 9 + 9, 8 + i1 * 18, 84 + k * 18);
+                var slot = new Slot(pinv, i1 + k * 9 + 9, 8 + i1 * 18, 100 + k * 18);
                 invslots.add(slot);
                 this.addSlot(slot);
             }
         }
 
         for (int l = 0; l < 9; ++l) {
-            var slot = new Slot(pinv, l, 8 + l * 18, 142);
+            var slot = new Slot(pinv, l, 8 + l * 18, 158);
             invslots.add(slot);
             this.addSlot(slot);
         }

@@ -52,9 +52,6 @@ energy_reg_eye
 farming_core_exp
 farming_double
 farming_exp
-farming_greater_exp
-farming_lesser_exp
-farming_medium_exp
 farming_triple
 fire_damage_eye
 fire_ele_dmg_jewelry
@@ -67,9 +64,6 @@ firejewel_res
 fishing_core_exp
 fishing_double
 fishing_exp
-fishing_greater_exp
-fishing_lesser_exp
-fishing_medium_exp
 fishing_triple
 focused
 gear_corruptaura_effect
@@ -101,9 +95,6 @@ hunter_hood
 husbandry_core_exp
 husbandry_double
 husbandry_exp
-husbandry_greater_exp
-husbandry_lesser_exp
-husbandry_medium_exp
 husbandry_triple
 immortal
 imperial_bow
@@ -160,9 +151,6 @@ mind_cage
 mining_core_exp
 mining_double
 mining_exp
-mining_greater_exp
-mining_lesser_exp
-mining_medium_exp
 mining_triple
 ms_reg
 ms_ring

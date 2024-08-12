@@ -65,7 +65,7 @@ public class ProfessionBlockEntity extends BlockEntity {
         if (!recipe.profession.equals(getProfession().GUID())) {
             return;
         }
-
+     
         this.ownerUUID = p.getUUID();
 
         this.recipe_locked = true;
@@ -360,6 +360,16 @@ public class ProfessionBlockEntity extends BlockEntity {
 
     public ProfessionRecipe getCurrentRecipe() {
 
+        if (this.recipe_locked) {
+            if (this.last_recipe != null) {
+                return last_recipe;
+            }
+        }
+
+        if (true) {
+            return null; // todo i dont want these?
+        }
+
         var mats = getMats();
         if (mats.stream().anyMatch(x -> !x.isEmpty())) {
 
@@ -374,7 +384,7 @@ public class ProfessionBlockEntity extends BlockEntity {
                 return null;
             }
             // higher power versions usually just require more materials, so to make sure it always uses the highest power recipe, we do this
-            return list.stream().max(Comparator.comparingInt(x -> x.getPower().perc)).get();
+            return list.stream().max(Comparator.comparingInt(x -> x.tier)).get();
         }
         return null;
     }

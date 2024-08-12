@@ -2,11 +2,11 @@ package com.robertx22.mine_and_slash.database.data.profession.all;
 
 import com.robertx22.mine_and_slash.capability.player.data.PlayerBuffData;
 import com.robertx22.mine_and_slash.database.data.gear_types.bases.SlotFamily;
-import com.robertx22.mine_and_slash.database.data.profession.CraftedItemHolder;
 import com.robertx22.mine_and_slash.database.data.profession.buffs.StatBuffs;
 import com.robertx22.mine_and_slash.database.data.profession.items.CraftedBuffFoodItem;
 import com.robertx22.mine_and_slash.database.data.profession.items.CraftedInfusionItem;
 import com.robertx22.mine_and_slash.database.data.profession.items.CraftedSoulItem;
+import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItemHolder;
 import com.robertx22.mine_and_slash.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.mine_and_slash.mmorpg.registers.deferred_wrapper.RegObj;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
@@ -19,25 +19,26 @@ public class ProfessionProductItems {
     public static HashMap<SlotFamily, HashMap<String, RegObj<Item>>> CRAFTED_SOULS = new HashMap<>();
     public static HashMap<SlotFamily, HashMap<String, RegObj<Item>>> CRAFTED_ENCHANTS = new HashMap<>();
 
-    public static HashMap<StatBuffs.AlchemyBuff, CraftedItemHolder> POTIONS = new HashMap<>();
-    public static HashMap<StatBuffs.FoodBuff, CraftedItemHolder> FOODS = new HashMap<>();
-    public static HashMap<StatBuffs.SeaFoodBuff, CraftedItemHolder> SEAFOOD = new HashMap<>();
+    public static HashMap<StatBuffs.AlchemyBuff, RarityItemHolder> POTIONS = new HashMap<>();
+    public static HashMap<StatBuffs.FoodBuff, RarityItemHolder> FOODS = new HashMap<>();
+    public static HashMap<StatBuffs.SeaFoodBuff, RarityItemHolder> SEAFOOD = new HashMap<>();
 
     public static void init() {
 
         for (StatBuffs.AlchemyBuff buff : StatBuffs.ALCHEMY) {
-            CraftedItemHolder ho = new CraftedItemHolder(buff.id, new CraftedItemHolder.Maker("buff_potion",
-                    x -> new CraftedBuffFoodItem(PlayerBuffData.Type.POTION, buff.id, x)));
+            RarityItemHolder ho = new RarityItemHolder(buff.id,
+                    new RarityItemHolder.Maker("buff_potion", x -> new CraftedBuffFoodItem(PlayerBuffData.Type.POTION, buff.id, x)));
             POTIONS.put(buff, ho);
         }
         for (StatBuffs.FoodBuff buff : StatBuffs.FOOD_BUFFS) {
-            CraftedItemHolder ho = new CraftedItemHolder(buff.id, new CraftedItemHolder.Maker("food",
-                    x -> new CraftedBuffFoodItem(PlayerBuffData.Type.MEAL, buff.id, x)));
+
+            RarityItemHolder ho = new RarityItemHolder(buff.id,
+                    new RarityItemHolder.Maker("food", x -> new CraftedBuffFoodItem(PlayerBuffData.Type.MEAL, buff.id, x)));
             FOODS.put(buff, ho);
         }
         for (StatBuffs.SeaFoodBuff buff : StatBuffs.SEAFOOD_BUFFS) {
-            CraftedItemHolder ho = new CraftedItemHolder(buff.id, new CraftedItemHolder.Maker("seafood",
-                    x -> new CraftedBuffFoodItem(PlayerBuffData.Type.FISH, buff.id, x)));
+            RarityItemHolder ho = new RarityItemHolder(buff.id,
+                    new RarityItemHolder.Maker("seafood", x -> new CraftedBuffFoodItem(PlayerBuffData.Type.FISH, buff.id, x)));
             SEAFOOD.put(buff, ho);
         }
 

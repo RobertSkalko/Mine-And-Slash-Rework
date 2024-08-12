@@ -47,8 +47,6 @@ public class CraftedSoulItem extends AutoItem implements ICreativeTabTiered, IRa
 
     @Override
     public void generateModel(ItemModelManager manager) {
-
-
         new ModelHelper(this, ModelHelper.Type.GENERATED, SlashRef.id("item/stat_soul/family/" + fam.id).toString()).generate();
     }
 
@@ -74,7 +72,7 @@ public class CraftedSoulItem extends AutoItem implements ICreativeTabTiered, IRa
                 ExileTooltips tooltip = soul.getTooltip(pStack, false);
                 tooltip.accept(new NameBlock(Collections.singletonList(pStack.getHoverName())));
                 tooltip.accept(new ProfessionDropSourceBlock(Professions.GEAR_CRAFTING));
-                
+
                 Player p = ClientOnly.getPlayer();
                 if (p != null && p.isCreative()) {
                     tooltip.accept(new AdditionalBlock(Words.DRAG_NO_WORK_CREATIVE.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD)));

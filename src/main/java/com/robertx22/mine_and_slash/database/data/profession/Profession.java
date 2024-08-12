@@ -1,5 +1,10 @@
 package com.robertx22.mine_and_slash.database.data.profession;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.IAutoGson;
+import com.robertx22.library_of_exile.registry.JsonExileRegistry;
+import com.robertx22.library_of_exile.utils.RandomUtils;
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.mine_and_slash.database.Weighted;
 import com.robertx22.mine_and_slash.database.data.profession.stat.DoubleDropChance;
 import com.robertx22.mine_and_slash.database.data.profession.stat.ProfCategoryDropStat;
@@ -14,11 +19,6 @@ import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.LevelUtils;
-import com.robertx22.library_of_exile.registry.ExileRegistryType;
-import com.robertx22.library_of_exile.registry.IAutoGson;
-import com.robertx22.library_of_exile.registry.JsonExileRegistry;
-import com.robertx22.library_of_exile.utils.RandomUtils;
-import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.temp.SkillItemTier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -140,10 +140,8 @@ public class Profession implements JsonExileRegistry<Profession>, IAutoGson<Prof
     }
 
     public static enum DropCategory {
-        MAIN("core", "Core"),
-        LESSER("lesser", "Common"),
-        MEDIUM("medium", "Rare"),
-        GREATER("greater", "Epic");
+        MAIN("core", "Core");
+
         //  MISC("misc", "Misc");
 
         public String id;

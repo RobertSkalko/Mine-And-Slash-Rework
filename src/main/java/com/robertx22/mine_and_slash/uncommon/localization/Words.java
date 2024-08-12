@@ -7,6 +7,9 @@ import java.util.Locale;
 
 // to use a "%" here, do %% or '%'
 public enum Words implements IAutoLocName {
+    PRIMARY_TIER_MAT("Primary Tier/Level Material"),
+    PRIMARY_RARITY_MAT("Primary Rarity Material"),
+
     SUCCESS("Sucess"),
     GEAR_LOCKED_TYPE_PLATE("Plate"),
     GEAR_LOCKED_TYPE_LEATHER("Leather"),

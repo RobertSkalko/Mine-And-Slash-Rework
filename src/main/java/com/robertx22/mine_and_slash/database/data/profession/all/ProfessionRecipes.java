@@ -2,13 +2,14 @@ package com.robertx22.mine_and_slash.database.data.profession.all;
 
 import com.robertx22.mine_and_slash.database.data.currency.gear.SharpeningStone;
 import com.robertx22.mine_and_slash.database.data.gear_types.bases.SlotFamily;
-import com.robertx22.mine_and_slash.database.data.profession.CraftedItemPower;
 import com.robertx22.mine_and_slash.database.data.profession.ProfessionRecipe;
 import com.robertx22.mine_and_slash.database.data.profession.buffs.StatBuffs;
 import com.robertx22.mine_and_slash.database.data.profession.items.ProfDropTierPickerCurrency;
+import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItemHolder;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.temp.SkillItemTier;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
@@ -16,11 +17,9 @@ public class ProfessionRecipes {
 
     public static void init() {
 
-        foods();
-        potions();
+        buffConsumes();
         gearCrafting();
         enchanting();
-        seafoods();
     }
 
     private static void enchanting() {
@@ -41,18 +40,6 @@ public class ProfessionRecipes {
                             .onTierOrAbove(SkillItemTier.TIER0, Items.PAPER, 1)
                             .onTierOrAbove(SkillItemTier.TIER0, fam.craftItem.get(), 1);
 
-                    if (rarnum > 0) {
-                        b.onTierOrAbove(SkillItemTier.TIER0, ProfessionMatItems.POWERED_RARE_MATS.get(Professions.MINING).get(CraftedItemPower.LESSER).get(), 1);
-                    }
-                    if (rarnum > 2) {
-                        b.onTierOrAbove(SkillItemTier.TIER0, ProfessionMatItems.POWERED_RARE_MATS.get(Professions.MINING).get(CraftedItemPower.MEDIUM).get(), 1);
-
-                    }
-                    if (rarnum > 4) {
-                        b.onTierOrAbove(SkillItemTier.TIER0, ProfessionMatItems.POWERED_RARE_MATS.get(Professions.MINING).get(CraftedItemPower.GREATER).get(), 1);
-
-                    }
-
                     b.buildEachTier();
 
                     rarnumMulti += 0.2F;
@@ -62,11 +49,44 @@ public class ProfessionRecipes {
 
         }
 
+
     }
 
-    private static void potions() {
 
-        int potions = 6;
+    private static void buffPotion(String prof, String matprof, RarityItemHolder holder, Item mat) {
+        for (String rar : IRarity.NORMAL_GEAR_RARITIES) {
+            ProfessionRecipe.TierBuilder.of(x -> holder.get(rar), prof, 1)
+                    .onlyOnTier(x -> new ItemStack(ProfessionMatItems.TIERED_MAIN_MATS.get(matprof).get(x).get(), 5))
+                    .onTierOrAbove(SkillItemTier.TIER0, RarityItems.RARITY_STONE.get(rar).get(), 10)
+                    .onTierOrAbove(SkillItemTier.TIER0, mat, 1)
+                    .exp(100)
+                    .buildEachTier();
+        }
+    }
+
+
+    private static void buffConsumes() {
+
+
+        // buff pots
+        buffPotion(Professions.ALCHEMY, Professions.FARMING, StatBuffs.INT.getHolder(), Items.GOLDEN_APPLE);
+        buffPotion(Professions.ALCHEMY, Professions.FARMING, StatBuffs.DEX.getHolder(), Items.GOLDEN_CARROT);
+        buffPotion(Professions.ALCHEMY, Professions.FARMING, StatBuffs.STR.getHolder(), Items.GOLD_INGOT);
+        buffPotion(Professions.ALCHEMY, Professions.FARMING, StatBuffs.CRIT.getHolder(), Items.ENCHANTED_GOLDEN_APPLE);
+        buffPotion(Professions.ALCHEMY, Professions.FARMING, StatBuffs.ARCANE.getHolder(), Items.BEETROOT);
+        buffPotion(Professions.ALCHEMY, Professions.FARMING, StatBuffs.MIGHT.getHolder(), Items.APPLE);
+        buffPotion(Professions.ALCHEMY, Professions.FARMING, StatBuffs.INT.getHolder(), Items.GOLDEN_CARROT);
+
+
+        // buff meat
+        buffPotion(Professions.COOKING, Professions.HUSBANDRY, StatBuffs.HEALTH.getHolder(), Items.COOKED_BEEF);
+        buffPotion(Professions.COOKING, Professions.HUSBANDRY, StatBuffs.MANA.getHolder(), Items.COOKED_CHICKEN);
+        buffPotion(Professions.COOKING, Professions.HUSBANDRY, StatBuffs.ENERGY.getHolder(), Items.COOKED_RABBIT);
+        buffPotion(Professions.COOKING, Professions.HUSBANDRY, StatBuffs.MAGIC.getHolder(), Items.COOKED_MUTTON);
+
+        // buff seafood
+        buffPotion(Professions.COOKING, Professions.FISHING, StatBuffs.EXP.getHolder(), Items.TROPICAL_FISH);
+        buffPotion(Professions.COOKING, Professions.FISHING, StatBuffs.LOOT.getHolder(), Items.PUFFERFISH);
 
 
         for (String rar : IRarity.NORMAL_GEAR_RARITIES) {
@@ -76,7 +96,6 @@ public class ProfessionRecipes {
                     .onTierOrAbove(SkillItemTier.TIER0, RarityItems.RARITY_STONE.get(rar).get(), 1)
                     .onTierOrAbove(SkillItemTier.TIER0, Items.MELON_SLICE, 1)
                     .onTierOrAbove(SkillItemTier.TIER1, Items.NETHER_WART, 1)
-                    .forRarityPower(rar, ProfessionMatItems.POWERED_RARE_MATS.get(Professions.FARMING))
                     .exp(100)
                     .buildEachTier();
 
@@ -85,47 +104,12 @@ public class ProfessionRecipes {
                     .onTierOrAbove(SkillItemTier.TIER0, RarityItems.RARITY_STONE.get(rar).get(), 1)
                     .onTierOrAbove(SkillItemTier.TIER0, Items.CARROT, 1)
                     .onTierOrAbove(SkillItemTier.TIER1, Items.BEETROOT, 1)
-                    .forRarityPower(rar, ProfessionMatItems.POWERED_RARE_MATS.get(Professions.FARMING))
                     .exp(100)
                     .buildEachTier();
 
+
         }
 
-        ProfessionRecipe.TierPowerBuilder.of(StatBuffs.INT.getHolder(), SkillItemTier.TIER0, Professions.ALCHEMY, potions)
-                .coreMaterials(Professions.FARMING) // general farming produce
-                .lesser(Items.NETHER_WART, 3) // Vanilla material
-                .forPowers(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.SALVAGING), 1)
-                .buildEachTierAndPower();
-
-        ProfessionRecipe.TierPowerBuilder.of(StatBuffs.DEX.getHolder(), SkillItemTier.TIER0, Professions.ALCHEMY, potions)
-                .coreMaterials(Professions.FARMING)
-                .lesser(Items.CARROT, 3)
-                .forPowers(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.SALVAGING), 1)
-                .buildEachTierAndPower();
-
-        ProfessionRecipe.TierPowerBuilder.of(StatBuffs.STR.getHolder(), SkillItemTier.TIER0, Professions.ALCHEMY, potions)
-                .coreMaterials(Professions.FARMING)
-                .lesser(Items.POTATO, 3)
-                .forPowers(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.SALVAGING), 1)
-                .buildEachTierAndPower();
-
-        ProfessionRecipe.TierPowerBuilder.of(StatBuffs.CRIT.getHolder(), SkillItemTier.TIER0, Professions.ALCHEMY, potions)
-                .coreMaterials(Professions.FARMING)
-                .lesser(Items.GOLDEN_CARROT, 1)
-                .forPowers(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.SALVAGING), 1)
-                .buildEachTierAndPower();
-
-        ProfessionRecipe.TierPowerBuilder.of(StatBuffs.ARCANE.getHolder(), SkillItemTier.TIER0, Professions.ALCHEMY, potions)
-                .coreMaterials(Professions.FARMING)
-                .lesser(Items.BEETROOT, 5)
-                .forPowers(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.SALVAGING), 1)
-                .buildEachTierAndPower();
-
-        ProfessionRecipe.TierPowerBuilder.of(StatBuffs.MIGHT.getHolder(), SkillItemTier.TIER0, Professions.ALCHEMY, potions)
-                .coreMaterials(Professions.FARMING)
-                .lesser(Items.APPLE, 1)
-                .forPowers(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.SALVAGING), 1)
-                .buildEachTierAndPower();
 
     }
 
@@ -150,8 +134,6 @@ public class ProfessionRecipes {
                             .onlyOnTier(x -> new ItemStack(ProfessionMatItems.TIERED_MAIN_MATS.get(Professions.MINING).get(x).get(), (int) ((x.tier + 1) * finalRarnumMulti)))
                             .onTierOrAbove(SkillItemTier.TIER0, RarityItems.RARITY_STONE.get(rar).get(), (int) (3 + (rarnum * 1.5F) * famMulti))
                             .onTierOrAbove(SkillItemTier.TIER0, fam.craftItem.get(), 1);
-
-                    b.forRarityPower(rar, ProfessionMatItems.POWERED_RARE_MATS.get(Professions.MINING));
 
                     b.exp(250);
                     b.buildEachTier();
@@ -184,52 +166,5 @@ public class ProfessionRecipes {
 
     }
 
-    // todo add husbandry drops here
 
-    private static void foods() {
-        int foods = 2;
-
-        ProfessionRecipe.TierPowerBuilder.of(StatBuffs.HEALTH.getHolder(), SkillItemTier.TIER0, Professions.COOKING, foods)
-                .coreMaterials(Professions.HUSBANDRY)
-                .lesser(Items.APPLE, 1)
-                .forPowers(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.FARMING), 1)
-                .buildEachTierAndPower();
-
-        ProfessionRecipe.TierPowerBuilder.of(StatBuffs.MANA.getHolder(), SkillItemTier.TIER0, Professions.COOKING, foods)
-                .coreMaterials(Professions.HUSBANDRY)
-                .lesser(Items.BEETROOT, 1)
-                .forPowers(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.FARMING), 1)
-                .buildEachTierAndPower();
-
-        ProfessionRecipe.TierPowerBuilder.of(StatBuffs.ENERGY.getHolder(), SkillItemTier.TIER0, Professions.COOKING, foods)
-                .coreMaterials(Professions.HUSBANDRY)
-                .lesser(Items.CARROT, 1)
-                .forPowers(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.FARMING), 1)
-                .buildEachTierAndPower();
-
-        ProfessionRecipe.TierPowerBuilder.of(StatBuffs.MAGIC.getHolder(), SkillItemTier.TIER0, Professions.COOKING, foods)
-                .coreMaterials(Professions.HUSBANDRY)
-                .lesser(Items.POTATO, 1)
-                .forPowers(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.FARMING), 1)
-                .buildEachTierAndPower();
-
-    }
-
-    private static void seafoods() {
-        int foods = 3;
-
-        ProfessionRecipe.TierPowerBuilder.of(StatBuffs.EXP.getHolder(), SkillItemTier.TIER0, Professions.COOKING, foods)
-                .coreMaterials(Professions.FISHING)
-                .lesser(Items.TROPICAL_FISH, 1)
-                .forPowers(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.FISHING), 1)
-                .buildEachTierAndPower();
-
-        ProfessionRecipe.TierPowerBuilder.of(StatBuffs.LOOT.getHolder(), SkillItemTier.TIER0, Professions.COOKING, foods)
-                .coreMaterials(Professions.FISHING)
-                .lesser(Items.PUFFERFISH, 1)
-                .forPowers(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.FISHING), 1)
-                .buildEachTierAndPower();
-
-
-    }
 }

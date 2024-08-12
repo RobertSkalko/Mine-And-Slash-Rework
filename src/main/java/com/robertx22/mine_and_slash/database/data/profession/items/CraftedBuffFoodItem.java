@@ -1,7 +1,8 @@
 package com.robertx22.mine_and_slash.database.data.profession.items;
 
+import com.robertx22.mine_and_slash.aoe_data.datapacks.models.ItemModelManager;
+import com.robertx22.mine_and_slash.aoe_data.datapacks.models.ModelHelper;
 import com.robertx22.mine_and_slash.capability.player.data.PlayerBuffData;
-import com.robertx22.mine_and_slash.database.data.profession.CraftedItemPower;
 import com.robertx22.mine_and_slash.database.data.profession.ICreativeTabTiered;
 import com.robertx22.mine_and_slash.database.data.profession.LeveledItem;
 import com.robertx22.mine_and_slash.database.data.profession.buffs.StatBuff;
@@ -11,13 +12,20 @@ import com.robertx22.mine_and_slash.gui.texts.textblocks.OperationTipBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.RequirementBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.affixdatablocks.SimpleItemStatBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.ProfessionDropSourceBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageBlock;
+import com.robertx22.mine_and_slash.mmorpg.SlashRef;
+import com.robertx22.mine_and_slash.mmorpg.UNICODE;
+import com.robertx22.mine_and_slash.mmorpg.registers.common.items.CraftedRarity;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.ModRange;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRangeInfo;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.localization.Formatter;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.TooltipUtils;
 import com.robertx22.mine_and_slash.vanilla_mc.items.misc.AutoItem;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -28,15 +36,16 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered {
 
     public String buff_id;
     PlayerBuffData.Type type;
-    CraftedItemPower power;
+    CraftedRarity power;
 
-    public CraftedBuffFoodItem(PlayerBuffData.Type type, String buff_id, CraftedItemPower power) {
+    public CraftedBuffFoodItem(PlayerBuffData.Type type, String buff_id, CraftedRarity power) {
         super(getProp(type));
         this.buff_id = buff_id;
         this.power = power;
@@ -52,6 +61,11 @@ public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered 
     }
 
     @Override
+    public void generateModel(ItemModelManager manager) {
+        new ModelHelper(this, ModelHelper.Type.GENERATED, SlashRef.id("item/" + this.type.id + "/" + buff_id).toString()).generate();
+    }
+
+    @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         return ItemUtils.startUsingInstantly(pLevel, pPlayer, pUsedHand);
     }
@@ -60,7 +74,7 @@ public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered 
     public ItemStack finishUsingItem(ItemStack stack, Level pLevel, LivingEntity pLivingEntity) {
         if (!pLevel.isClientSide) {
             if (pLivingEntity instanceof Player p) {
-                boolean did = Load.player(p).buff.tryAdd(p, getBuff(), LeveledItem.getLevel(stack), power.perc, type, getTicksDuration());
+                boolean did = Load.player(p).buff.tryAdd(p, getBuff(), LeveledItem.getLevel(stack), power.getPercent(), type, getTicksDuration());
                 if (did) {
                     pLivingEntity.addEffect(new MobEffectInstance(this.type.effect.get(), getTicksDuration()));
                     stack.shrink(1);
@@ -98,7 +112,7 @@ public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered 
     // Greater intelligence potion = power + name
     @Override
     public Component getName(ItemStack stack) {
-        return Formatter.BUFF_CONSUMPTIONS_NAME.locName(power.word.locName(), getBuff().mods.get(0).GetStat().locName(), type.locName())
+        return Formatter.BUFF_CONSUMPTIONS_NAME.locName(this.power.getRarity().locName(), getBuff().mods.get(0).GetStat().locName(), type.locName())
                 .withStyle(LeveledItem.getTier(stack).format);
     }
 
@@ -111,13 +125,18 @@ public class CraftedBuffFoodItem extends AutoItem implements ICreativeTabTiered 
             StatBuff buff = getBuff();
             int lvl = LeveledItem.getLevel(stack);
 
+            List<MutableComponent> info = new ArrayList<>();
+            info.add(Component.literal(UNICODE.STAR + " ").append(Itemtips.BUFF_CONSUMABLE_TYPE.locName(this.type.locName().withStyle(ChatFormatting.YELLOW))).withStyle(ChatFormatting.AQUA));
+            info.addAll(TooltipUtils.splitLongText(Itemtips.BUFF_CONSUMABLE_INFO.locName().withStyle(ChatFormatting.AQUA)));
+
+
             list.addAll(new ExileTooltips()
-                    .accept(new SimpleItemStatBlock(new StatRangeInfo(ModRange.always(power.perc)))
-                            .accept(Itemtips.BUFF_TIP.locName(), buff.getStats(lvl, power.perc)))
+                    .accept(new SimpleItemStatBlock(new StatRangeInfo(ModRange.always(power.getPercent())))
+                            .accept(Itemtips.BUFF_TIP.locName(), buff.getStats(lvl, power.getPercent())))
                     .accept(new RequirementBlock(lvl))
                     .accept(new OperationTipBlock().setAlt())
                     .accept(new ProfessionDropSourceBlock(this.type.profession))
-                    //.accept(new LeveledItemBlock(stack))
+                    .accept(new UsageBlock(info))
                     .release());
 
 

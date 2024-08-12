@@ -23,13 +23,13 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class MaterialItem extends AutoItem implements IGoesToBackpack {
+public class ProfTierMatItem extends AutoItem implements IGoesToBackpack {
 
     public SkillItemTier tier;
     String name;
     String prof;
 
-    public MaterialItem(String prof, SkillItemTier tier, String name) {
+    public ProfTierMatItem(String prof, SkillItemTier tier, String name) {
         super(new Properties());
         this.tier = tier;
         this.name = name;

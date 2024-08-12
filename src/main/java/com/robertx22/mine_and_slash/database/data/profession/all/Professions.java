@@ -1,7 +1,6 @@
 package com.robertx22.mine_and_slash.database.data.profession.all;
 
 import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
-import com.robertx22.mine_and_slash.database.data.profession.CraftedItemPower;
 import com.robertx22.mine_and_slash.database.data.profession.ExpSources;
 import com.robertx22.mine_and_slash.database.data.profession.Profession;
 import com.robertx22.mine_and_slash.mmorpg.registers.deferred_wrapper.RegObj;
@@ -80,7 +79,7 @@ public class Professions {
         // this would be a pain to save
 
         Builder.of(SALVAGING, "Salvaging", "Salvaging is the process of turning junk loot into useful materials in the Salvaging Station. You can only salvage Gear with Mine and Slash souls and other Mine and Slash rarity items like Support gems, jewels.")
-                .sometimesDrop(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.SALVAGING), 20)
+                //  .sometimesDrop(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.SALVAGING), 20)
                 .build();
 
         var FARM_EXP = 30;
@@ -99,7 +98,7 @@ public class Professions {
 
                 .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(FARMING), 1)
 
-                .sometimesDrop(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.FARMING), 5)
+//                .sometimesDrop(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.FARMING), 5)
 
                 .build();
 
@@ -109,7 +108,7 @@ public class Professions {
                 // todo locked crates
 
                 .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(FISHING), 3)
-                .sometimesDrop(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.FISHING), 15)
+                //    .sometimesDrop(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.FISHING), 15)
 
                 .build();
 
@@ -118,7 +117,7 @@ public class Professions {
 
                 .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(HUSBANDRY), 1)
 
-                .sometimesDrop(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.HUSBANDRY), 10)
+                //          .sometimesDrop(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.HUSBANDRY), 10)
 
                 .build();
 
@@ -137,7 +136,7 @@ public class Professions {
 
                 .dropTiered(ProfessionMatItems.TIERED_MAIN_MATS.get(MINING), 1)
 
-                .sometimesDrop(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.MINING), 10)
+                //  .sometimesDrop(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.MINING), 10)
 
                 .build();
 
@@ -221,6 +220,7 @@ public class Professions {
             return this;
         }
 
+        /*
         public Builder sometimesDrop(HashMap<CraftedItemPower, RegObj<Item>> map, float chance) {
             List<Profession.ProfessionDrop> drops = new ArrayList<>();
 
@@ -234,6 +234,8 @@ public class Professions {
             }
             return this;
         }
+
+         */
 
         public void build() {
             p.addToSerializables();

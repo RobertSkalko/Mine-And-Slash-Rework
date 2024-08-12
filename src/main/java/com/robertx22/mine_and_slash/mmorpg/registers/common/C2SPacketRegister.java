@@ -1,5 +1,7 @@
 package com.robertx22.mine_and_slash.mmorpg.registers.common;
 
+import com.robertx22.library_of_exile.main.Packets;
+import com.robertx22.mine_and_slash.a_libraries.jei.LockRecipePacket;
 import com.robertx22.mine_and_slash.capability.player.data.Backpacks;
 import com.robertx22.mine_and_slash.characters.CreateCharPacket;
 import com.robertx22.mine_and_slash.characters.LoadCharPacket;
@@ -11,7 +13,6 @@ import com.robertx22.mine_and_slash.vanilla_mc.packets.*;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.perks.PerkChangePacket;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.spells.TellServerToCancelSpellCast;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.spells.TellServerToCastSpellPacket;
-import com.robertx22.library_of_exile.main.Packets;
 
 public class C2SPacketRegister {
 
@@ -36,6 +37,7 @@ public class C2SPacketRegister {
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new LockTogglePacket(), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new UnsummonPacket(), i++);
         Packets.registerClientToServerPacket(MMORPG.NETWORK, new RequestStatCalcInfoPacket(), i++);
+        Packets.registerClientToServerPacket(MMORPG.NETWORK, new LockRecipePacket(""), i++);
 
 
         // Packets.registerClientToServerPacket(MMORPG.NETWORK, new SetupHotbarPacket(), i++);

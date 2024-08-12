@@ -4,7 +4,6 @@ import com.robertx22.mine_and_slash.aoe_data.database.stats.OffenseStats;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.ResourceStats;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.old.DatapackStats;
 import com.robertx22.mine_and_slash.database.data.StatMod;
-import com.robertx22.mine_and_slash.database.data.profession.CraftedItemHolder;
 import com.robertx22.mine_and_slash.database.data.profession.all.ProfessionProductItems;
 import com.robertx22.mine_and_slash.database.data.stats.types.loot.TreasureQuantity;
 import com.robertx22.mine_and_slash.database.data.stats.types.misc.BonusExp;
@@ -16,6 +15,7 @@ import com.robertx22.mine_and_slash.database.data.stats.types.resources.magic_sh
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.magic_shield.MagicShieldRegen;
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.mana.ManaRegen;
+import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItemHolder;
 import com.robertx22.mine_and_slash.tags.all.SpellTags;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 
@@ -53,7 +53,7 @@ public class StatBuffs {
             ALCHEMY.add(this);
         }
 
-        public CraftedItemHolder getHolder() {
+        public RarityItemHolder getHolder() {
             return ProfessionProductItems.POTIONS.get(this);
         }
     }
@@ -71,7 +71,7 @@ public class StatBuffs {
             SEAFOOD_BUFFS.add(this);
         }
 
-        public CraftedItemHolder getHolder() {
+        public RarityItemHolder getHolder() {
             return ProfessionProductItems.SEAFOOD.get(this);
         }
     }
@@ -89,7 +89,7 @@ public class StatBuffs {
             FOOD_BUFFS.add(this);
         }
 
-        public CraftedItemHolder getHolder() {
+        public RarityItemHolder getHolder() {
             return ProfessionProductItems.FOODS.get(this);
         }
     }
