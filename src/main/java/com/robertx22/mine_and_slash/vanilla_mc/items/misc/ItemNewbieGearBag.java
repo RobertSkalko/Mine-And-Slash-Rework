@@ -1,8 +1,6 @@
 package com.robertx22.mine_and_slash.vanilla_mc.items.misc;
 
 import com.robertx22.mine_and_slash.aoe_data.database.gear_slots.GearSlots;
-import com.robertx22.mine_and_slash.aoe_data.database.spells.schools.BasicAttackSpells;
-import com.robertx22.mine_and_slash.aoe_data.database.spells.schools.WaterSpells;
 import com.robertx22.mine_and_slash.database.data.gear_types.bases.BaseGearType;
 import com.robertx22.mine_and_slash.database.data.perks.Perk;
 import com.robertx22.mine_and_slash.database.data.talent_tree.TalentTree;
@@ -40,8 +38,7 @@ public class ItemNewbieGearBag extends Item {
 
     static HashMap<String, NewbieContent> MAP = new HashMap<>();
     static NewbieContent defaultContent = new NewbieContent(Arrays.asList(GearSlots.STAFF, GearSlots.SWORD, GearSlots.BOW));
-    static List<String> spells = Arrays.asList(BasicAttackSpells.FIREBALL_ID, WaterSpells.TIDAL_STRIKE, "quickdraw");
-
+   
     static {
     }
 

@@ -29,3 +29,5 @@ Previously point configs were spread to both configs and datapacks, and each use
 - proc stats now properly set the cooldown of the spell procced and will not cast if the spell is on cooldown.
 - removed can_proc_from_procs because not possible to ensure all the following things arent procs.. Like say you proc chill blast, which procs freeze/shatter, which procs ... 
 To be safe, i'll go with limiting each proc with spell cooldown
+- new info area_level command to see how area lvl was calculated
+- added cheat_give points command, so you don't need to edit datapacks to remove point limits for testing

@@ -1,6 +1,9 @@
 package com.robertx22.mine_and_slash.uncommon.levels;
 
 import com.robertx22.mine_and_slash.database.data.MinMax;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.TooltipUtils;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +17,28 @@ public class LevelInfo {
     }
 
     public List<LevelChangeData> changes = new ArrayList<>();
+
+    public Component getTooltip() {
+
+        List<MutableComponent> list = new ArrayList<>();
+
+        int last = -1;
+        for (LevelChangeData change : changes) {
+            if (last < 0) {
+                last = 0;
+            }
+            boolean changed = last != change.levelAfterChange;
+            last = change.levelAfterChange;
+
+            String changedtext = changed ? "" : " - Didn't Change";
+            list.add(Component.literal(change.change.name() + " " + change.source.name() + "\nLevel after Change: " + change.levelAfterChange + changedtext));
+        }
+
+        list.add(Component.literal("Final Level: " + level));
+
+        return TooltipUtils.joinMutableComps(list.listIterator(), Component.literal("\n"));
+
+    }
 
     public void set(LevelSource source, int num) {
         var data = new LevelChangeData(num, ChangeType.SET, source);

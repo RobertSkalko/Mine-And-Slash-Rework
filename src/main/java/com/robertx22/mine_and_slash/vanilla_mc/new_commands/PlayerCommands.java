@@ -10,6 +10,7 @@ import com.robertx22.mine_and_slash.loot.LootInfo;
 import com.robertx22.mine_and_slash.loot.blueprints.WatcherEyeBlueprint;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.mine_and_slash.vanilla_mc.new_commands.parts.ResetPlayerData;
 import com.robertx22.mine_and_slash.vanilla_mc.new_commands.wrapper.*;
@@ -22,7 +23,24 @@ import java.util.stream.Collectors;
 public class PlayerCommands {
 
     public static void init(CommandDispatcher dis) {
-        
+
+        CommandBuilder.of(dis, x -> {
+            PlayerWrapper PLAYER = new PlayerWrapper();
+
+            x.addLiteral("info", PermWrapper.OP);
+            x.addLiteral("area_level", PermWrapper.OP);
+
+            x.addArg(PLAYER);
+
+            x.action(e -> {
+                var p = PLAYER.get(e);
+                var info = LevelUtils.determineLevel(null, p.level(), p.blockPosition(), p, true);
+                p.sendSystemMessage(info.getTooltip());
+            });
+
+        }, "Tells you how exactly the area level was calculated.");
+
+
         CommandBuilder.of(dis, x -> {
             PlayerWrapper PLAYER = new PlayerWrapper();
             IntWrapper NUMBER = new IntWrapper("level");
@@ -72,6 +90,35 @@ public class PlayerCommands {
             });
 
         }, "Give player bonus points. The amount you can give is managed by the Game balance datapack. These are separate from points gained per level");
+
+        CommandBuilder.of(dis, x -> {
+            PlayerWrapper PLAYER = new PlayerWrapper();
+            IntWrapper NUMBER = new IntWrapper("point_amount");
+            StringWrapper POINT_TYPE = new StringWrapper("point_type", () -> Arrays.stream(PlayerPointsType.values()).map(e -> e.name()).collect(Collectors.toList()));
+
+            x.addLiteral("points", PermWrapper.OP);
+            x.addLiteral("cheat_give", PermWrapper.OP);
+
+            x.addArg(PLAYER);
+            x.addArg(POINT_TYPE);
+            x.addArg(NUMBER);
+
+            x.action(e -> {
+                var p = PLAYER.get(e);
+                var num = NUMBER.get(e);
+                var type = PlayerPointsType.valueOf(POINT_TYPE.get(e));
+
+                var data = Load.player(p).points.get(type);
+
+                var result = data.giveCheatPoints(num);
+
+                if (result.answer != null) {
+                    p.sendSystemMessage(result.answer);
+                }
+            });
+
+        }, "Give player bonus points. These are considered cheats and uncapped. Only meant for testing. These are separate from points gained per level");
+
 
         CommandBuilder.of(dis, x -> {
             PlayerWrapper PLAYER = new PlayerWrapper();

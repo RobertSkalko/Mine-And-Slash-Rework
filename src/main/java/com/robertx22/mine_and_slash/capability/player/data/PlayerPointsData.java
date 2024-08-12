@@ -44,7 +44,11 @@ public class PlayerPointsData {
                 return ExplainedResult.failure(Chats.FAILED_TO_AWARD_POINTS.locName(type.word().locName(), type.getConfig().max_bonus_points));
             }
             return ExplainedResult.success(Chats.AWARDED_POINTS.locName(num, type.word().locName()));
+        }
 
+        public ExplainedResult giveCheatPoints(int num) {
+            bonus_points += num;
+            return ExplainedResult.success(Chats.AWARDED_POINTS.locName(num, type.word().locName()));
         }
     }
 
