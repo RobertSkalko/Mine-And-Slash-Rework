@@ -23,17 +23,17 @@ public class CraftingStationMenu extends AbstractContainerMenu {
 
     public ProfessionBlockEntity be;
 
-    public CraftingStationMenu(int pContainerId, Container pContainer) {
-        this(pContainerId, pContainer, new SimpleContainer(18), new SimpleContainer(1));
+    public CraftingStationMenu(String prof, int pContainerId, Container pContainer) {
+        this(prof, pContainerId, pContainer, new SimpleContainer(18), new SimpleContainer(1));
     }
 
-    public CraftingStationMenu(int pContainerId, Container pContainer, ProfessionBlockEntity be) {
-        this(pContainerId, pContainer, be.inventory, be.show);
+    public CraftingStationMenu(String prof, int pContainerId, Container pContainer, ProfessionBlockEntity be) {
+        this(prof, pContainerId, pContainer, be.inventory, be.show);
         this.be = be;
     }
 
-    private CraftingStationMenu(int pContainerId, Container pinv, Container inv, Container show) {
-        super(SlashContainers.CRAFTING.get(), pContainerId);
+    private CraftingStationMenu(String prof, int pContainerId, Container pinv, Container inv, Container show) {
+        super(SlashContainers.STATIONS.get(prof).get(), pContainerId);
 
         //Player Inventory
         for (int k = 0; k < 3; ++k) {
@@ -78,7 +78,7 @@ public class CraftingStationMenu extends AbstractContainerMenu {
         }
     }
 
-  
+
     static class ShowSlot extends Slot {
 
         public ShowSlot(Container pContainer, int pSlot, int pX, int pY) {

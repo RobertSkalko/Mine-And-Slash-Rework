@@ -92,7 +92,7 @@ public class ProfessionBlock extends BaseEntityBlock implements WorldlyContainer
 
                 @Override
                 public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-                    return new CraftingStationMenu(pContainerId, pPlayerInventory, be);
+                    return new CraftingStationMenu(be.getProfession().GUID(), pContainerId, pPlayerInventory, be);
                 }
             });
 

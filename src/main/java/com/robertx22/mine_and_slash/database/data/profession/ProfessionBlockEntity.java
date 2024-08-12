@@ -83,6 +83,7 @@ public class ProfessionBlockEntity extends BlockEntity {
         if (last_recipe != null) {
 
             if (!level.isClientSide) {
+
                 var mats = getMats();
 
                 boolean hasfree = false;
@@ -124,12 +125,7 @@ public class ProfessionBlockEntity extends BlockEntity {
                             }
 
                         }
-                        if (this.inventory.addStack(INPUTS, stacked.copy())) {
 
-                            //stacked.shrink(stacked.getCount());
-                            // did = true;
-                            //break;
-                        }
                     }
                 }
             }
@@ -151,8 +147,9 @@ public class ProfessionBlockEntity extends BlockEntity {
 
     public boolean onTryInsertItem(ItemStack stack) {
 
-        craftingState = Crafting_State.ACTIVE;
-
+        if (this.recipe_locked) {
+            craftingState = Crafting_State.ACTIVE;
+        }
 
         return true;
     }
@@ -174,7 +171,7 @@ public class ProfessionBlockEntity extends BlockEntity {
         try {
 
             if (craftingState != Crafting_State.ACTIVE) {
-                if (true || craftingState == Crafting_State.IDLE) {
+                if (craftingState == Crafting_State.IDLE) {
                     var inv = this.inventory.getInventory(INPUTS);
                     int inputs = 0;
                     for (int i = 0; i < inv.getContainerSize(); i++) {

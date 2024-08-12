@@ -13,9 +13,11 @@ import java.util.Optional;
 
 public class CraftingTransfer implements IRecipeTransferInfo<CraftingStationMenu, ProfessionRecipe> {
     RecipeType<ProfessionRecipe> type;
+    String prof;
 
-    public CraftingTransfer(RecipeType<ProfessionRecipe> type) {
+    public CraftingTransfer(String prof, RecipeType<ProfessionRecipe> type) {
         this.type = type;
+        this.prof = prof;
     }
 
 
@@ -26,7 +28,7 @@ public class CraftingTransfer implements IRecipeTransferInfo<CraftingStationMenu
 
     @Override
     public Optional<MenuType<CraftingStationMenu>> getMenuType() {
-        return Optional.of(SlashContainers.CRAFTING.get());
+        return Optional.of(SlashContainers.STATIONS.get(prof).get());
     }
 
     @Override
