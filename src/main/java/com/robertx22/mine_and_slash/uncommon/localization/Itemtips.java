@@ -13,7 +13,7 @@ public enum Itemtips implements IAutoLocName {
     JEWEL_UPGRADE_1("To Upgrade needs: %1$sx %2$s"),
     DROP_LEVEL_RANGE("Drops at Levels: %1$s"),
     DROP_CHANCE("Drop Chance: %1$s"),
-    PRIMARY_PROFESSION_MAT_INFO("All Professions have 2 primary material types:\nThe Tier Material, gotten through gathering professions\nand the Rarity material, gained by Salvaging.\nInserting both Tier and Rarity materials will List all matching Recipes!!!"),
+    PRIMARY_PROFESSION_MAT_INFO("All Professions have 2 primary material types:\n - Tier Material from Gathering professions\n - Rarity Material from Salvaging.\nInsert both to see Recipes!"),
     PRIMARY_PROFESSION_USE_JEI("You can Use JEI Mod Too"),
     BUFF_CONSUMABLE_TYPE("%1$s Consumable"),
     BUFF_CONSUMABLE_INFO("You can have One Consumable active per each type:\nElixirs, Meals and Seafoods."),

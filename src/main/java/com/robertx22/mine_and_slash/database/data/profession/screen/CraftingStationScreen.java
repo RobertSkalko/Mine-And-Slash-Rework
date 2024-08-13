@@ -75,8 +75,8 @@ public abstract class CraftingStationScreen extends AbstractContainerScreen<Craf
         this.addRenderableWidget(new CraftButton(leftPos + 79, topPos + 51, this));
 
         if (this.primaryTier != null) {
-            this.addRenderableWidget(new PrimaryMatInfoButton(primaryTier, leftPos + 19, topPos + 70));
-            this.addRenderableWidget(new PrimaryMatInfoButton(primaryRar, leftPos + 40, topPos + 70));
+            this.addRenderableWidget(new PrimaryMatInfoButton(primaryTier, leftPos + 15, topPos + 75));
+            this.addRenderableWidget(new PrimaryMatInfoButton(primaryRar, leftPos + 35, topPos + 75));
         }
 
         this.refreshPossibleRecipes();

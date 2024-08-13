@@ -11,6 +11,7 @@ import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import java.util.List;
 public class PrimaryMatInfoButton extends ImageButton {
 
     public static int XS = 18;
-    public static int YS = 19;
+    public static int YS = 17;
 
     Minecraft mc = Minecraft.getInstance();
 
@@ -55,11 +56,13 @@ public class PrimaryMatInfoButton extends ImageButton {
     @Override
     public void renderWidget(GuiGraphics gui, int mouseX, int mouseY, float delta) {
 
-        gui.renderFakeItem(info.icon.getDefaultInstance(), getX() + 1, getY() + 6);
 
-        //     ResourceLocation tex = SlashRef.guiId("craftbutton");
-        //    gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-        //    gui.blit(tex, getX(), getY(), 0, (pbe.getSyncedData().craftingState == Crafting_State.ACTIVE || pbe.getSyncedData().craftingState == Crafting_State.IDLE) ? 0 : 19, 18, 19);
+        ResourceLocation tex = SlashRef.guiId("primary_info");
+        gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
+        gui.blit(tex, getX(), getY(), 0, 0, 18, 17, 18, 17);
+
+        gui.renderFakeItem(info.icon.getDefaultInstance(), getX() + 1, getY() + 1);
+
     }
 
     public void setModTooltip() {

@@ -2,6 +2,7 @@ package com.robertx22.mine_and_slash.database.data.profession;
 
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.database.data.profession.all.Professions;
+import com.robertx22.mine_and_slash.database.data.profession.screen.CraftingStationMenu;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.mmorpg.ModErrors;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.SlashBlockEntities;
@@ -65,7 +66,7 @@ public class ProfessionBlockEntity extends BlockEntity {
         if (!recipe.profession.equals(getProfession().GUID())) {
             return;
         }
-     
+
         this.ownerUUID = p.getUUID();
 
         this.recipe_locked = true;
@@ -208,7 +209,11 @@ public class ProfessionBlockEntity extends BlockEntity {
                     } else {
                         if (recipe_locked) {
                             if (last_recipe.canCraft(getMats())) {
-                                tryRecipe(p);
+                                var can = tryRecipe(p);
+                                if (!can.can && p.containerMenu instanceof CraftingStationMenu) {
+                                    p.sendSystemMessage(can.answer);
+                                    craftingState = Crafting_State.IDLE;
+                                }
                             } else
                                 craftingState = Crafting_State.IDLE;
                         } else {
@@ -260,10 +265,11 @@ public class ProfessionBlockEntity extends BlockEntity {
     public ExplainedResult tryRecipe(Player p) {
         ProfessionRecipe recipe;
 
-        if (recipe_locked)
+        if (recipe_locked) {
             recipe = last_recipe;
-        else
+        } else {
             recipe = getCurrentRecipe();
+        }
 
         if (recipe == null) {
             return ExplainedResult.failure(Chats.PROF_RECIPE_NOT_FOUND.locName());
