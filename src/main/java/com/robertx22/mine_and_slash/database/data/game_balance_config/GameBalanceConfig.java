@@ -1,12 +1,12 @@
 package com.robertx22.mine_and_slash.database.data.game_balance_config;
 
-import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
-import com.robertx22.mine_and_slash.uncommon.MathHelper;
-import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.library_of_exile.registry.Database;
 import com.robertx22.library_of_exile.registry.ExileRegistryType;
 import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
+import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
+import com.robertx22.mine_and_slash.uncommon.MathHelper;
+import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.HashMap;
@@ -48,12 +48,9 @@ public class GameBalanceConfig implements JsonExileRegistry<GameBalanceConfig>, 
     public double MIN_SPELL_COOLDOWN_MULTI = 0.2;
 
     public double CRAFTED_GEAR_POTENTIAL_MULTI = 0.5;
-    public int PROPHECY_GAIN_PER_MOB = 10;
-    public int PROPHECY_GAIN_PER_MOB_UNCURSED = 5;
-
+  
 
     public int MAX_BONUS_SPELL_LEVELS = 5;
-    public int PROPHECY_CURRENCY_LOST_ON_MAP_DEATH = 1000;
 
     public double MOB_HP_POWER_SCALING = 1.003; // the lvl acts as the exponent
     public double MOB_DMG_POWER_SCALING = 1.003;

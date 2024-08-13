@@ -8,16 +8,15 @@ import java.util.Locale;
 public enum Chats implements IAutoLocName {
     NOT_MEET_MAP_REQ_FIRST_LINE("You haven't met the map requirement: "),
     NOT_MEET_MAP_REQ("%1$s: %2$s/%3$s"),
-    PROPHECIES_GUIDE("1) Kill Monsters while Cursed to gain Prophecy Coins\n\n2) You can Buy Rewards in this GUI\n\n3) The More curses you accept, the more coins you will earn.\n\nYour Coins and Prophecies reset on entering another map."),
+    PROPHECIES_GUIDE("1) Kill Monsters while Cursed to gain Prophecy Coins\n\n2) You can Buy Rewards in this GUI\n\n3) The More curses you accept, the more coins you will earn.\n\nCoins earned in Low-level maps won't work in High level maps."),
 
-    PROPHECY_MAP_DEATHCURRENCY("You lost %1$s Prophecy Coins"),
     EMPTY_MAP_FORCED_TP("The Map you're currently inside was deleted. This can happen if you entered another player's map and they started a new one."),
     TP_TO_DUNGEON_MAPNAME("Teleported to the [%1$s] Dungeon"),
     ITEM_CANT_CORRUPT_TWICE("This item is already corrupted."),
     CORRUPT_CANT_BE_MODIFIED("Corrupted Items can't be modified. They can only be sockeded with Gems etc."),
     ALT_TO_SHOW_OTHER_SPELL("Press [Alt] to show the other Spell"),
     MUST_BE_IN_MAP_TO_ACCEPT_PROPHECY("You must be inside the same Map Dungeon to accept Prophecy Rewards"),
-    NOT_ENOUGH_FAVOR_TO_BUY_PROPHECY("Not enough Currency to buy the Prophecy. You can gain more Currency by killing dungeon mobs while under Prophecy Debuffs."),
+    NOT_ENOUGH_FAVOR_TO_BUY_PROPHECY("Not enough Prophecy Coins to claim the Prophecy. You can gain more Coins by killing map mobs while under Prophecy Curses."),
     RESISTS_TOO_LOW_FOR_MAP("You lack Resistances to Open/Enter this Map."),
     MAX_MAP_RARITY_FOR_LVL("This map is at maximum possible rarity for it's level."),
     MAX_MAP_RARITY("This map is at maximum possible rarity."),

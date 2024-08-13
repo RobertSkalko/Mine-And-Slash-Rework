@@ -29,7 +29,6 @@ public class ClientConfigs {
         SHOW_DURABILITY = b.define("show_durability", true);
         RENDER_MOB_HEALTH_GUI = b.define("render_mob_hp_gui", true);
         ONLY_RENDER_MOB_LOOKED_AT = b.define("only_render_mob_looked_at", true);
-        SHOW_DURABILITY = b.define("show_durability", true);
         ENABLE_FLOATING_DMG = b.define("render_floating_damage", true);
         MODIFY_TOOLTIP_LENGTH = b.define("MODIFY_TOOLTIP_LENGTH", true);
         IN_DEPTH_TOOLTIPS_BY_DEFAULT = b.define("IN_DEPTH_TOOLTIPS_BY_DEFAULT", true);
@@ -40,7 +39,7 @@ public class ClientConfigs {
         SPELL_PARTICLE_MULTI = b.defineInRange("SPELL_PARTICLE_MULTI", 1, 0.1F, 1F);
         DONT_CULL_PARTICLES_UNDER = b.defineInRange("DONT_CULL_PARTICLES_UNDER", 50D, 0D, 5000D);
 
-        HOTBAR_SWAPPING = b.define("HOTBAR_SWAPPING", false);
+        HOTBAR_SWAPPING = b.comment("When OFF: 8 bars, 8 keybinds. When ON: 4 bars, 5 keybinds(4 for each bar, 1 for hotbar swap button)").define("HOTBAR_SWAPPING", false);
 
         GUI_POSITION = b.defineEnum("GUI_POSITION", GuiPosition.TOP_LEFT);
         ITEM_RARITY_BACKGROUND_TYPE = b.defineEnum("ITEM_RARITY_BACKGROUND_TYPE", GlintType.FULL);

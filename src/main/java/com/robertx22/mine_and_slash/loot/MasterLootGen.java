@@ -95,6 +95,7 @@ public class MasterLootGen {
             items.addAll(new LootChestGen(info).tryGenerate());
 
             items.addAll(new WatcherEyeLootGen(info).tryGenerate());
+            items.addAll(new ProphecyCoinLootGen(info).tryGenerate());
 
 
         } catch (Exception e) {

@@ -12,6 +12,7 @@ public enum Itemtips implements IAutoLocName {
     JEWEL_UPGRADE_2("[Click the Jewel with the Stone]"),
     JEWEL_UPGRADE_1("To Upgrade needs: %1$sx %2$s"),
     DROP_LEVEL_RANGE("Drops at Levels: %1$s"),
+    LEVEL_RANGE("Levels: %1$s"),
     DROP_CHANCE("Drop Chance: %1$s"),
     PRIMARY_PROFESSION_MAT_INFO("All Professions have 2 primary material types:\n - Tier Material from Gathering professions\n - Rarity Material from Salvaging.\nInsert both to see Recipes!"),
     PRIMARY_PROFESSION_USE_JEI("You can Use JEI Mod Too"),

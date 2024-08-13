@@ -1,7 +1,7 @@
 package com.robertx22.mine_and_slash.uncommon.enumclasses;
 
-import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.library_of_exile.registry.IGUID;
+import com.robertx22.mine_and_slash.uncommon.localization.Words;
 
 public enum LootType implements IGUID {
 
@@ -18,6 +18,7 @@ public enum LootType implements IGUID {
     LootChest("Loot Chest", "loot_chest", Words.Loot, 8),
     UberFrag("Uber Fragment", "uber_frag", Words.UBER_FRAG, 9),
     WatcherEye("Watcher Eye", "watcher_eye", Words.None, 10),
+    ProphecyCoin("Prophecy Coin", "prophecy_coin", Words.None, 11),
     All("All", "all", Words.All, 0);
 
     public int custommodeldata;

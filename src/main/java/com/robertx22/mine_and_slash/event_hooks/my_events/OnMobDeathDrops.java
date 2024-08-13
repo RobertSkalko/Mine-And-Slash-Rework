@@ -1,5 +1,8 @@
 package com.robertx22.mine_and_slash.event_hooks.my_events;
 
+import com.robertx22.library_of_exile.components.EntityInfoComponent;
+import com.robertx22.library_of_exile.events.base.EventConsumer;
+import com.robertx22.library_of_exile.events.base.ExileEvents;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.database.data.EntityConfig;
@@ -14,9 +17,6 @@ import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.TeamUtils;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
-import com.robertx22.library_of_exile.components.EntityInfoComponent;
-import com.robertx22.library_of_exile.events.base.EventConsumer;
-import com.robertx22.library_of_exile.events.base.ExileEvents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
@@ -81,8 +81,6 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
                         if (WorldUtils.isDungeonWorld(mobKilled.level())) {
                             var map = Load.mapAt(mobKilled.level(), mobKilled.blockPosition());
                             if (map != null) {
-                                Load.player(player).prophecy.onKillMobInMap(player, mobKilled);
-
                                 // map.trySpawnMechanic(mobKilled.level(), mobKilled.blockPosition());
 
                                 var mech = LeagueStructure.getMechanicFromPosition((ServerLevel) player.level(), mobKilled.blockPosition());

@@ -44,3 +44,5 @@ To be safe, i'll go with limiting each proc with spell cooldown
 - foods now show duration
 - supp gems and auras now unequip if too low level
 - swap button added to overlay, shows swap key if hub is open
+- prophecy coins are now items. You can now save them in-between maps but they now come in leveled tiers.
+Hopefully they feel more tangible now, and players can now share or distribute them. And hope no exploits

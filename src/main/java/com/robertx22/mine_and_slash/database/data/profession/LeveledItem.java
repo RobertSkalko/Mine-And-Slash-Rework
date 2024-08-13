@@ -7,25 +7,19 @@ import net.minecraft.world.item.ItemStack;
 public class LeveledItem {
 
 
+    // todo remove levels, not used
+
     public static int getLevel(ItemStack stack) {
-
         if (stack.hasTag()) {
-            return stack.getOrCreateTag().getInt("level");
+            return LevelUtils.tierToLevel(getTier(stack).tier).getMinLevel();
         }
-
         return 0;
     }
 
-    public static void setLevel(ItemStack stack, int lvl) {
-        stack.getOrCreateTag().putInt("level", lvl);
-    }
-
     public static int getTierNum(ItemStack stack) {
-
         if (stack.hasTag()) {
             return stack.getOrCreateTag().getInt("tier");
         }
-
         return 0;
     }
 
@@ -35,8 +29,5 @@ public class LeveledItem {
 
     public static void setTier(ItemStack stack, int lvl) {
         stack.getOrCreateTag().putInt("tier", lvl);
-        stack.getOrCreateTag().putInt("level", LevelUtils.tierToLevel(lvl).getMinLevel());
-
-
     }
 }

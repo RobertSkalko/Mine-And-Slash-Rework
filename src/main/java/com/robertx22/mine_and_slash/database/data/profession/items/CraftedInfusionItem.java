@@ -16,7 +16,6 @@ import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.database.data.requirements.bases.GearRequestedFor;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
-import com.robertx22.mine_and_slash.gui.texts.textblocks.LeveledItemBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.NameBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.RarityBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.RequirementBlock;
@@ -76,7 +75,7 @@ public class CraftedInfusionItem extends AutoItem implements IRarityItem, IItemA
                 .accept(new ProfessionDropSourceBlock(Professions.INFUSING))
                 .accept(new UsageBlock(() -> Arrays.asList(Chats.ENCHANT_UPGRADE_RARITY.locName().withStyle(ChatFormatting.BLUE))))
                 .accept(new RequirementBlock(Collections.singletonList(Itemtips.INFUSION_GEAR_LEVEL_RANGE.locName(tier.levelRange.getMinLevel(), tier.levelRange.getMaxLevel())), UNICODE.ROTATED_CUBE + " "))
-                .accept(new LeveledItemBlock(pStack))
+                //  .accept(new LeveledItemBlock(pStack))
                 .release());
     }
 

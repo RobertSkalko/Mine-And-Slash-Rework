@@ -15,7 +15,10 @@ import com.robertx22.mine_and_slash.vanilla_mc.commands.auto_salvage.AutoSalvage
 import com.robertx22.mine_and_slash.vanilla_mc.commands.auto_salvage.AutoSalvageGenericList;
 import com.robertx22.mine_and_slash.vanilla_mc.commands.auto_salvage.AutoSalvageGenericShow;
 import com.robertx22.mine_and_slash.vanilla_mc.commands.auto_salvage.AutoSalvageHelp;
-import com.robertx22.mine_and_slash.vanilla_mc.commands.entity.*;
+import com.robertx22.mine_and_slash.vanilla_mc.commands.entity.GiveExp;
+import com.robertx22.mine_and_slash.vanilla_mc.commands.entity.GivePerLvlExp;
+import com.robertx22.mine_and_slash.vanilla_mc.commands.entity.SetEntityRarity;
+import com.robertx22.mine_and_slash.vanilla_mc.commands.entity.SpawnBoss;
 import com.robertx22.mine_and_slash.vanilla_mc.commands.giveitems.GenericGive;
 import com.robertx22.mine_and_slash.vanilla_mc.commands.giveitems.GiveExactUnique;
 import com.robertx22.mine_and_slash.vanilla_mc.commands.giveitems.GiveMap;
@@ -49,7 +52,7 @@ public class CommandRegister {
 
         new GenericGive("gear", ExileRegistryTypes.GEAR_TYPE, x -> new GearBlueprint(x)).register(dispatcher);
         new GenericGive("loot_chest", ExileRegistryTypes.LOOT_CHEST, x -> new LootChestBlueprint(x)).register(dispatcher);
-      
+
 
         new AutoSalvageGenericConfigure(ExileRegistryTypes.GEAR_SLOT).register(dispatcher);
         new AutoSalvageGenericConfigure(ExileRegistryTypes.SUPPORT_GEM).register(dispatcher);
@@ -65,7 +68,6 @@ public class CommandRegister {
         SetEntityRarity.register(dispatcher);
         SpawnBoss.register(dispatcher);
 
-        SetProphecyFavor.register(dispatcher);
         GiveExp.register(dispatcher);
         GivePerLvlExp.register(dispatcher);
 

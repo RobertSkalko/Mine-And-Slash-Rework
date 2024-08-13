@@ -1,9 +1,9 @@
 package com.robertx22.mine_and_slash.prophecy;
 
+import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.mine_and_slash.database.data.prophecy.ProphecyModifierType;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.Arrays;
@@ -19,13 +19,13 @@ public class ProphecyGeneration {
 
         var map = Load.mapAt(p.level(), p.blockPosition());
 
-        
+
         int lvl = map.map.lvl;
         int tier = map.map.tier;
 
         // GearRarity rar = ExileDB.GearRarities().getFilterWrapped(x -> x.map_tiers.isInRange(tier)).list.get(0);
 
-        int cost = 1000;
+        float cost = 10;
 
         List<ProphecyModifierType> modtypes = Arrays.stream(ProphecyModifierType.values()).toList();
 
@@ -59,7 +59,7 @@ public class ProphecyGeneration {
             }
         }
 
-        data.cost = cost;
+        data.cost = (int) cost;
 
         return data;
 

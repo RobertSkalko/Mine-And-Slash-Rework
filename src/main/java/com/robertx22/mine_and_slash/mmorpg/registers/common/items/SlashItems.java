@@ -17,6 +17,8 @@ import com.robertx22.mine_and_slash.mmorpg.registers.common.SlashBlocks;
 import com.robertx22.mine_and_slash.mmorpg.registers.deferred_wrapper.Def;
 import com.robertx22.mine_and_slash.mmorpg.registers.deferred_wrapper.RegObj;
 import com.robertx22.mine_and_slash.saveclasses.stat_soul.StatSoulItem;
+import com.robertx22.mine_and_slash.uncommon.coins.Coin;
+import com.robertx22.mine_and_slash.uncommon.coins.CoinItem;
 import com.robertx22.mine_and_slash.vanilla_mc.items.*;
 import com.robertx22.mine_and_slash.vanilla_mc.items.crates.gem_crate.LootCrateItem;
 import com.robertx22.mine_and_slash.vanilla_mc.items.gearitems.VanillaMaterial;
@@ -39,6 +41,10 @@ import java.util.function.Supplier;
 public class SlashItems {
 
     public static void init() {
+
+        for (Coin coin : Coin.ALL.values()) {
+            coin(coin);
+        }
 
         station(Professions.COOKING, () -> Items.BREAD);
         station(Professions.SALVAGING, () -> Items.IRON_INGOT);
@@ -73,6 +79,13 @@ public class SlashItems {
         }
 
     }
+
+    private static void coin(Coin coin) {
+        var c = Def.item(() -> new CoinItem(coin), "coin/" + coin.id);
+        COINS.put(coin.id, c);
+    }
+
+    public static HashMap<String, RegObj<CoinItem>> COINS = new HashMap<>();
 
     private static void station(String pro, Supplier<Item> sup) {
         STATIONS.put(pro, Def.item(pro + "_station", () -> new StationBlockItem(SlashBlocks.STATIONS.get(pro).get(), new Item.Properties(), sup)));

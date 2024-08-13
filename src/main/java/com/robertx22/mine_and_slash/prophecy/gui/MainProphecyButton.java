@@ -1,10 +1,10 @@
 package com.robertx22.mine_and_slash.prophecy.gui;
 
+import com.robertx22.library_of_exile.utils.TextUTIL;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
-import com.robertx22.library_of_exile.utils.TextUTIL;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
@@ -57,7 +57,7 @@ public class MainProphecyButton extends ImageButton {
 
         list.add(Component.literal(""));
 
-        list.add(Words.CURRENT_PROPHECY_CURRENCY.locName(data.getCurrency()));
+        //list.add(Words.CURRENT_PROPHECY_CURRENCY.locName(Coin.PROPHECY.getTotalFromInventory(mc.player)));
         //list.add(Words.AVG_LVL.locName(data.getAverageLevel()));
         //list.add(Words.AVG_TIER.locName(data.getAverageTier()));
 

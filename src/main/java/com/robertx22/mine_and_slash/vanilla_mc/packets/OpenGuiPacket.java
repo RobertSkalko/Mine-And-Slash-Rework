@@ -1,12 +1,13 @@
 package com.robertx22.mine_and_slash.vanilla_mc.packets;
 
-import com.robertx22.mine_and_slash.mmorpg.SlashRef;
-import com.robertx22.mine_and_slash.vanilla_mc.packets.proxies.OpenGuiWrapper;
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
+import com.robertx22.mine_and_slash.mmorpg.SlashRef;
+import com.robertx22.mine_and_slash.vanilla_mc.packets.proxies.OpenGuiWrapper;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
+// todo pick curse gui
 public class OpenGuiPacket extends MyPacket<OpenGuiPacket> {
 
     public enum GuiType {
