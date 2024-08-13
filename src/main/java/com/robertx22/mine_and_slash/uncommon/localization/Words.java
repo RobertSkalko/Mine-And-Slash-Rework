@@ -53,7 +53,7 @@ public enum Words implements IAutoLocName {
     ENABLED("Enabled"),
     DISABLED("Disabled"),
 
-    CAST_FAIL_MSGS("Spell Casting Failure Messages\n\nWill print helpful messages when you fail to cast a spell\nParticularly Helpful for New Players\nPlayers below lvl 10 can't disable this option."),
+    CAST_FAIL_MSGS("Spell Casting Failure Messages\n\nWill print helpful messages when you fail to cast a spell\nParticularly Helpful for New Players\nPlayers below lvl 15 can't disable this option."),
     MOB_DEATH_MESSAGES("Provides a short message when you kill a mob.\n\nYou can hover over it for useful info like Loot Chance"),
     DAMAGE_MESSAGES("Provides a short message when you damage a mob.\n\nYou can hover over it for useful info like how was damage modified"),
     PROFESSION_MESSAGES("Provides a short message when you gain profession exp.\n\nYou can hover over it for useful info like how the exp was modified"),

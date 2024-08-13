@@ -51,7 +51,7 @@ public class AttributeStat extends BaseDatapackStat {
     }
 
     public void addToEntity(LivingEntity en, StatData data) {
-
+        
         float val = data.getValue();
         if (cut_by_hundred) {
             val = val / 100F;

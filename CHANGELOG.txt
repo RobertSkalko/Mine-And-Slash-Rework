@@ -34,7 +34,7 @@ Previously point configs were spread to both configs and datapacks, and each use
 - fixed watcher eye tooltips
 - proc stats now properly set the cooldown of the spell procced and will not cast if the spell is on cooldown.
 - removed can_proc_from_procs because not possible to ensure all the following things arent procs.. Like say you proc chill blast, which procs freeze/shatter, which procs ... 
-To be safe, i'll go with limiting each proc with spell cooldown
+To be safe, i'll go with limiting each proc with spell cooldown. This means currently all procs can proc from procs too. So try to make the proc conditions a bit more strict if needed, or more chance-y
 - new info area_level command to see how area lvl was calculated
 - added cheat_give points command, so you don't need to edit datapacks to remove point limits for testing
 - stations are now separate guis, have names, can click to show recipes etc
@@ -46,3 +46,4 @@ To be safe, i'll go with limiting each proc with spell cooldown
 - swap button added to overlay, shows swap key if hub is open
 - prophecy coins are now items. You can now save them in-between maps but they now come in leveled tiers.
 Hopefully they feel more tangible now, and players can now share or distribute them. And hope no exploits
+- lowered radius of nearby mobs prophecy altar check

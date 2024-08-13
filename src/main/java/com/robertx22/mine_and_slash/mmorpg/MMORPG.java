@@ -38,6 +38,7 @@ import com.robertx22.mine_and_slash.mmorpg.registers.common.SlashCapabilities;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.SlashItemTags;
 import com.robertx22.mine_and_slash.mmorpg.registers.deferred_wrapper.SlashDeferred;
 import com.robertx22.mine_and_slash.tags.ModTags;
+import com.robertx22.mine_and_slash.uncommon.coins.Coin;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.rework.action.StatEffect;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.rework.condition.StatCondition;
@@ -107,6 +108,8 @@ public class MMORPG {
                 event.run = MMORPG.RUN_DEV_TOOLS;
             }
         });
+
+        Coin.init();
 
         StatPriority.init();
 

@@ -4,6 +4,7 @@ import com.robertx22.mine_and_slash.database.data.profession.ICreativeTabTiered;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.LeveledItemBlock;
 import com.robertx22.mine_and_slash.vanilla_mc.items.misc.AutoItem;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -23,7 +24,7 @@ public class CoinItem extends AutoItem implements ICreativeTabTiered {
 
     @Override
     public String locNameForLangFile() {
-        return coin.locname + " Coin";
+        return ChatFormatting.LIGHT_PURPLE + coin.locname + " Coin";
     }
 
     @Override

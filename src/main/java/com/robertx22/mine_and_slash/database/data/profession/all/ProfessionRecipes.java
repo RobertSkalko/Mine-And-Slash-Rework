@@ -75,8 +75,7 @@ public class ProfessionRecipes {
         buffPotion(Professions.ALCHEMY, Professions.FARMING, StatBuffs.CRIT.getHolder(), Items.ENCHANTED_GOLDEN_APPLE);
         buffPotion(Professions.ALCHEMY, Professions.FARMING, StatBuffs.ARCANE.getHolder(), Items.BEETROOT);
         buffPotion(Professions.ALCHEMY, Professions.FARMING, StatBuffs.MIGHT.getHolder(), Items.APPLE);
-        buffPotion(Professions.ALCHEMY, Professions.FARMING, StatBuffs.INT.getHolder(), Items.GOLDEN_CARROT);
-
+   
 
         // buff meat
         buffPotion(Professions.COOKING, Professions.HUSBANDRY, StatBuffs.HEALTH.getHolder(), Items.COOKED_BEEF);

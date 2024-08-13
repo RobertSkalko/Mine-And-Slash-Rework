@@ -1,13 +1,13 @@
 package com.robertx22.mine_and_slash.vanilla_mc.packets.spells;
 
+import com.robertx22.library_of_exile.main.MyPacket;
+import com.robertx22.library_of_exile.packets.ExilePacketContext;
 import com.robertx22.mine_and_slash.capability.player.data.PlayerConfigData;
 import com.robertx22.mine_and_slash.database.data.spells.components.Spell;
 import com.robertx22.mine_and_slash.database.data.spells.spell_classes.bases.SpellCastContext;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
-import com.robertx22.library_of_exile.main.MyPacket;
-import com.robertx22.library_of_exile.packets.ExilePacketContext;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -65,7 +65,7 @@ public class TellServerToCastSpellPacket extends MyPacket<TellServerToCastSpellP
                 if (!cds.isOnCooldown("spell_fail")) {
                     cds.setOnCooldown("spell_fail", 40);
                     if (can.answer != null) {
-                        if (Load.Unit(player).getLevel() < 10 || Load.player(player).config.isConfigEnabled(PlayerConfigData.Config.CAST_FAIL)) {
+                        if (Load.Unit(player).getLevel() < 15 || Load.player(player).config.isConfigEnabled(PlayerConfigData.Config.CAST_FAIL)) {
                             player.sendSystemMessage(Chats.CAST_FAILED.locName().append(can.answer));
                         }
                     }

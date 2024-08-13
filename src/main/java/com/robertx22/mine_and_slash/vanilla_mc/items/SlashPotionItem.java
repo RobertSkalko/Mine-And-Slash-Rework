@@ -3,12 +3,14 @@ package com.robertx22.mine_and_slash.vanilla_mc.items;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.mine_and_slash.database.data.profession.ICreativeTabTiered;
 import com.robertx22.mine_and_slash.database.data.profession.LeveledItem;
+import com.robertx22.mine_and_slash.database.data.profession.all.Professions;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.LeveledItemBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.NameBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.RarityBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.ProfessionDropSourceBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageBlock;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.mine_and_slash.saveclasses.unit.ResourceType;
@@ -72,6 +74,7 @@ public class SlashPotionItem extends AutoItem implements ICreativeTabTiered {
         pTooltipComponents.addAll(new ExileTooltips()
                 .accept(new NameBlock(pStack.getHoverName()))
                 .accept(new RarityBlock(getRarity()))
+                .accept(new ProfessionDropSourceBlock(Professions.ALCHEMY))
                 .accept(new UsageBlock(Collections.singletonList(Itemtips.Restores.locName(Component.literal(num + "%").withStyle(ChatFormatting.GREEN), this.type.name).withStyle(ChatFormatting.GRAY))))
                 .accept(new LeveledItemBlock(pStack))
                 .accept(new UsageBlock(Collections.singletonList(Words.COOLDOWN.locName(Component.literal(getCooldownTicks() / 20 + "").withStyle(ChatFormatting.GOLD)).withStyle(ChatFormatting.GOLD))))
