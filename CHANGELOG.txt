@@ -40,3 +40,7 @@ To be safe, i'll go with limiting each proc with spell cooldown
 - stations are now separate guis, have names, can click to show recipes etc
 - improved consumable buff item tooltips
 - new set_tier_nbt boolean to prof recipes, in case you want to craft something that doesnt set tier nbt
+- foods and infusions now have rarity glint backgrounds
+- foods now show duration
+- supp gems and auras now unequip if too low level
+- swap button added to overlay, shows swap key if hub is open

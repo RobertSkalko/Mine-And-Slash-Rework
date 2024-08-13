@@ -4,6 +4,7 @@ import com.robertx22.mine_and_slash.database.data.spells.components.Spell;
 import com.robertx22.mine_and_slash.saveclasses.skill_gem.MaxLinks;
 import com.robertx22.mine_and_slash.saveclasses.skill_gem.SkillGemData;
 import com.robertx22.mine_and_slash.saveclasses.spells.SpellCastingData;
+import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.PlayerUtils;
@@ -39,6 +40,14 @@ public class SocketedGem {
     }
 
     public void removeSupportGemsIfTooMany(Player p) {
+
+        if (this.getSupportDatas().stream().anyMatch(x -> x.getSupport().min_lvl > Load.Unit(p).getLevel())) {
+            for (ItemStack s : getSupports()) {
+                PlayerUtils.giveItem(s.copy(), p);
+                s.shrink(100);
+            }
+            p.sendSystemMessage(Chats.TOO_LOW_LEVEL.locName());
+        }
 
         if (getSupportDatas().size() > getMaxLinks(p).links) {
             for (ItemStack s : this.getSupports()) {
@@ -84,10 +93,6 @@ public class SocketedGem {
 
     }
 
-
-    public int getHotbarSlot() {
-        return skillGem / (GemInventoryHelper.SUPPORT_GEMS_PER_SKILL + 1); // todo is this correct
-    }
 
     public Spell getSpell() {
         var data = getSkillData();

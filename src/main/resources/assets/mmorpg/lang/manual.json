@@ -129,9 +129,9 @@
 "mmorpg.chest_type.rune": "Rune",
 "mmorpg.chest_type.support_gem": "Support Gem",
 
-"mmorpg.skill_gems.support.int": "Support Gem",
-"mmorpg.skill_gems.support.dex": "Support Gem",
-"mmorpg.skill_gems.support.str": "Support Gem",
+"item.mmorpg.skill_gems.support.int": "Support Gem",
+"item.mmorpg.skill_gems.support.dex": "Support Gem",
+"item.mmorpg.skill_gems.support.str": "Support Gem",
 
 
 "stat.mmorpg.levels_gained": "M&S Level",

@@ -175,6 +175,13 @@ public class GemInventoryHelper {
 
     public void removeAurasIfCantWear(Player p) {
 
+        if (this.getAurasGems().stream().anyMatch(x -> x.getAura().min_lvl > Load.Unit(p).getLevel())) {
+            for (ItemStack s : getAuras()) {
+                PlayerUtils.giveItem(s.copy(), p);
+                s.shrink(100);
+            }
+            p.sendSystemMessage(Chats.TOO_LOW_LEVEL.locName());
+        }
         if (getRemainingSpirit(p) < 0) {
             for (ItemStack s : getAuras()) {
                 PlayerUtils.giveItem(s.copy(), p);
@@ -182,7 +189,6 @@ public class GemInventoryHelper {
             }
             p.sendSystemMessage(Chats.LACK_AURA_CAPACITY.locName());
         }
-
         if (hasDuplicates()) {
             for (ItemStack s : getAuras()) {
                 PlayerUtils.giveItem(s.copy(), p);

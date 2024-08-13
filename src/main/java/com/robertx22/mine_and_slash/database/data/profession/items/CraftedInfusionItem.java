@@ -27,6 +27,7 @@ import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.GearInfusion
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.tags.all.SlotTags;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
+import com.robertx22.mine_and_slash.uncommon.interfaces.IRarityItem;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
@@ -46,7 +47,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class CraftedInfusionItem extends AutoItem implements IItemAsCurrency, ICreativeTabTiered, IRarity {
+public class CraftedInfusionItem extends AutoItem implements IRarityItem, IItemAsCurrency, ICreativeTabTiered, IRarity {
 
     public SlotFamily fam;
     String rar;
@@ -238,6 +239,11 @@ public class CraftedInfusionItem extends AutoItem implements IItemAsCurrency, IC
 
     @Override
     public GearRarity getRarity() {
+        return ExileDB.GearRarities().get(rar);
+    }
+
+    @Override
+    public GearRarity getItemRarity(ItemStack stack) {
         return ExileDB.GearRarities().get(rar);
     }
 }

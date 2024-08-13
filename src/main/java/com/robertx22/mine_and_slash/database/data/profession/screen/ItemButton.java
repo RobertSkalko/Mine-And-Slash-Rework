@@ -1,6 +1,7 @@
 package com.robertx22.mine_and_slash.database.data.profession.screen;
 
 import com.robertx22.library_of_exile.utils.TextUTIL;
+import com.robertx22.mine_and_slash.mmorpg.UNICODE;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -54,7 +55,8 @@ public class ItemButton extends ImageButton {
 
 
         var tip = new ArrayList<Component>();
-        tip.add(Itemtips.RECIPE_MATERIAL.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+        tip.add(Component.literal(UNICODE.CUBE + " ").append(Itemtips.RECIPE_MATERIAL.locName()).append(" " + UNICODE.CUBE).withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+        tip.add(Component.empty());
         tip.addAll(stack.getTooltipLines(mc.player, TooltipFlag.NORMAL));
 
         this.setTooltip(Tooltip.create(TextUTIL.mergeList(tip)));

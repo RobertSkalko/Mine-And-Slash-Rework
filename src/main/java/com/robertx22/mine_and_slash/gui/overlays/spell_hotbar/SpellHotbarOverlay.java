@@ -1,18 +1,19 @@
 package com.robertx22.mine_and_slash.gui.overlays.spell_hotbar;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.robertx22.library_of_exile.utils.CLOC;
+import com.robertx22.library_of_exile.utils.GuiUtils;
 import com.robertx22.mine_and_slash.capability.entity.CooldownsData;
 import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
 import com.robertx22.mine_and_slash.database.data.spells.components.Spell;
 import com.robertx22.mine_and_slash.gui.overlays.EffectsOverlay;
 import com.robertx22.mine_and_slash.gui.overlays.GuiPosition;
+import com.robertx22.mine_and_slash.gui.screens.character_screen.MainHubScreen;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.mmorpg.registers.client.KeybindsRegister;
 import com.robertx22.mine_and_slash.mmorpg.registers.client.SpellKeybind;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.ChatUtils;
-import com.robertx22.library_of_exile.utils.CLOC;
-import com.robertx22.library_of_exile.utils.GuiUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -23,7 +24,9 @@ import net.minecraftforge.client.settings.KeyModifier;
 import java.util.Locale;
 
 public class SpellHotbarOverlay {
-
+    private static final ResourceLocation SWAP_BUTTON = new ResourceLocation(SlashRef.MODID,
+            "textures/gui/spells/swap_button.png"
+    );
     private static final ResourceLocation HOTBAR_TEX = new ResourceLocation(SlashRef.MODID,
             "textures/gui/spells/hotbar.png"
     );
@@ -36,9 +39,7 @@ public class SpellHotbarOverlay {
     private static final ResourceLocation SPELL_READY_TEX = new ResourceLocation(SlashRef.MODID,
             "textures/gui/spells/spell_ready.png"
     );
-    private static final ResourceLocation SPELl_NO_MANA = new ResourceLocation(SlashRef.MODID,
-            "textures/gui/spells/no_mana.png"
-    );
+
 
     private static final ResourceLocation SPELL_ON_COOLDOWN = new ResourceLocation(SlashRef.MODID,
             "textures/gui/spells/on_cooldown.png"
@@ -204,8 +205,7 @@ public class SpellHotbarOverlay {
 
                 } else {
 
-                    CooldownsData cds = Load.Unit(mc.player)
-                            .getCooldowns();
+                    CooldownsData cds = Load.Unit(mc.player).getCooldowns();
 
                     float percent = (float) cds.getCooldownTicks(spell.GUID()) / (float) cds.getNeededTicks(spell.GUID());
                     if (cds.getCooldownTicks(spell.GUID()) > 1) {
@@ -279,6 +279,17 @@ public class SpellHotbarOverlay {
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
         if (ClientConfigs.getConfig().HOTBAR_SWAPPING.get()) {
             gui.blit(HOTBAR_SWAP_TEX, x, y, 0, 0, WIDTH, HEIGHT);
+
+            gui.blit(SWAP_BUTTON, x, y - 11, 0, 0, 22, 11, 22, 11);
+
+            String txt = "Swap";
+
+            if (mc.screen instanceof MainHubScreen) {
+                txt += ":  " + CLOC.translate(KeybindsRegister.HOTBAR_SWAP.getKey().getDisplayName()).toUpperCase(Locale.ROOT);
+            }
+
+            //CLOC.translate(KeybindsRegister.HOTBAR_SWAP.getKey().getDisplayName()).toUpperCase(Locale.ROOT).substring(0, 5);
+            GuiUtils.renderScaledText(gui, (int) (x + 5 + mc.font.width(txt) / 2F * 0.6F), y - 5, 0.6F, txt, ChatFormatting.RED);
 
         } else {
             gui.blit(HOTBAR_TEX, x, y, 0, 0, WIDTH, HEIGHT);
