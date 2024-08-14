@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.prophecy.gui;
 
+import com.robertx22.library_of_exile.utils.GuiUtils;
 import com.robertx22.mine_and_slash.database.data.map_affix.MapAffix;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.bases.BaseScreen;
@@ -8,7 +9,6 @@ import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.prophecy.ProphecyData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
-import com.robertx22.library_of_exile.utils.GuiUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -67,7 +67,7 @@ public class ProphecyScreen extends BaseScreen implements INamedScreen {
             }
 
             i = 0;
-
+/*
             if (data.numMobAffixesCanAdd > 0) {
                 for (String id : data.affixOffers) {
                     MapAffix affix = ExileDB.MapAffixes().get(id);
@@ -77,6 +77,8 @@ public class ProphecyScreen extends BaseScreen implements INamedScreen {
                     i++;
                 }
             }
+
+ */
             i = 0;
             for (String id : data.affixesTaken) {
                 MapAffix affix = ExileDB.MapAffixes().get(id);

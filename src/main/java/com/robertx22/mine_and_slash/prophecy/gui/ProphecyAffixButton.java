@@ -1,15 +1,12 @@
 package com.robertx22.mine_and_slash.prophecy.gui;
 
+import com.robertx22.library_of_exile.utils.TextUTIL;
 import com.robertx22.mine_and_slash.database.data.map_affix.MapAffix;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
-import com.robertx22.mine_and_slash.prophecy.AcceptProphecyAffixPacket;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
-import com.robertx22.library_of_exile.main.Packets;
-import com.robertx22.library_of_exile.utils.TextUTIL;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Tooltip;
@@ -32,8 +29,8 @@ public class ProphecyAffixButton extends ImageButton {
     public ProphecyAffixButton(MapAffix data, Info info, boolean canTake, int x, int y) {
         super(x, y, 16, 16, 0, 0, 1, ID, (action) -> {
             if (canTake) {
-                Packets.sendToServer(new AcceptProphecyAffixPacket(data.GUID()));
-                Minecraft.getInstance().setScreen(null);
+                //Packets.sendToServer(new AcceptProphecyAffixPacket(data.GUID()));
+                //Minecraft.getInstance().setScreen(null);
             }
         });
         this.info = info;

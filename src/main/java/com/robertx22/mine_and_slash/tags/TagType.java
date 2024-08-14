@@ -5,6 +5,7 @@ public enum TagType {
     Spell("spell"),
     Element("element"),
     Mob("mob"),
+    MapAffix("map_affix"),
     Dungeon("dungeon"),
     GearSlot("gear_slot");
 

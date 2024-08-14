@@ -56,7 +56,13 @@ public class PlayerProphecies implements IStatCtx {
         this.affixOffers.clear();
 
         for (int i = 0; i < 3; i++) {
-            MapAffix affix = ExileDB.MapAffixes().getFilterWrapped(x -> x.req.equals(LeagueMechanics.PROPHECY.GUID()) && x.affected == AffectedEntities.Players).random();
+            // todo did i figure it out correctly
+            MapAffix affix = ExileDB.MapAffixes()
+                    .getFilterWrapped(x ->
+                            x.req.equals(LeagueMechanics.PROPHECY.GUID()) &&
+                                    x.affected == AffectedEntities.Players &&
+                                    affixesTaken.stream().map(a -> ExileDB.MapAffixes().get(a)).allMatch(e -> !e.prophecy_type.equals(x.prophecy_type))
+                    ).random();
             affixOffers.add(affix.GUID());
         }
     }

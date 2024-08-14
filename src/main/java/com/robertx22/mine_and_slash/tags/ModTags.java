@@ -10,6 +10,7 @@ public class ModTags {
     public static SlotTags GEAR_SLOT = new SlotTags();
     public static ElementTags ELEMENT = new ElementTags();
     public static DungeonTags DUNGEON = new DungeonTags();
+    public static MapAffixTags MAP_AFFIX = new MapAffixTags();
 
     public static void init() {
 
@@ -19,7 +20,7 @@ public class ModTags {
         SpellTags.init();
         ElementTags.init();
         DungeonTags.init();
-
+        MapAffixTags.init();
     }
 
 

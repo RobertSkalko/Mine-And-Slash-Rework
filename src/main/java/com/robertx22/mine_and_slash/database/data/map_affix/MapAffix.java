@@ -1,5 +1,8 @@
 package com.robertx22.mine_and_slash.database.data.map_affix;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.IAutoGson;
+import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.mine_and_slash.database.data.StatMod;
 import com.robertx22.mine_and_slash.database.data.league.ProphecyLeague;
 import com.robertx22.mine_and_slash.database.data.mob_affixes.MobAffix;
@@ -7,9 +10,6 @@ import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
 import com.robertx22.mine_and_slash.maps.AffectedEntities;
 import com.robertx22.mine_and_slash.saveclasses.ExactStatData;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
-import com.robertx22.library_of_exile.registry.ExileRegistryType;
-import com.robertx22.library_of_exile.registry.IAutoGson;
-import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +23,10 @@ public class MapAffix implements JsonExileRegistry<MobAffix>, IAutoGson<MapAffix
     String id = "";
     int weight = 1000;
     public AffectedEntities affected = AffectedEntities.Mobs;
-
     public Elements map_resist = Elements.Physical;
     public int map_resist_bonus_needed = 0;
+
+    public String prophecy_type = "";
 
     public String req = "";
 

@@ -20,6 +20,7 @@ minus_ene_reg
 minus_hp_reg
 minus_mana_reg
 minus_ms_reg
+prophecy_agony
 prophecy_always_critchaos
 prophecy_always_critfire
 prophecy_always_critlightning
@@ -28,6 +29,7 @@ prophecy_always_critwater
 prophecy_armor
 prophecy_crit
 prophecy_crit_dmg
+prophecy_despair
 prophecy_dodge
 prophecy_ele_dmgchaos
 prophecy_ele_dmgfire
@@ -43,7 +45,10 @@ prophecy_max_ele_reslightning
 prophecy_max_ele_resphysical
 prophecy_max_ele_reswater
 prophecy_ms
+prophecy_slow
 prophecy_total_dmg
+prophecy_weak
+prophecy_wounds
 slow_curse
 water_atk
 water_minus_res

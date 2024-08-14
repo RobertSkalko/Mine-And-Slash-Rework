@@ -19,6 +19,8 @@ import com.robertx22.mine_and_slash.database.data.stats.types.resources.magic_sh
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.magic_shield.MagicShieldRegen;
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.mana.Mana;
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.mana.ManaRegen;
+import com.robertx22.mine_and_slash.tags.all.MapAffixTags;
+import com.robertx22.mine_and_slash.tags.imp.MapAffixTag;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
 
@@ -75,30 +77,34 @@ public class MapAffixes {
 
     private static void prophecyAffixes() {
 
-
         List<Elements> elements = Elements.getAllSingle();
 
+        for (EffectCtx curse : ModEffects.getCurses()) {
+            prophecyAffix("prophecy_" + curse.GUID(), MapAffixTags.CURSE).addMod(new StatMod(1, 1, EffectStats.CURSE_SELF.get(curse)));
+        }
+
         for (Elements element : elements) {
-            prophecyAffix("prophecy_max_ele_res" + element.guidName).addMod(new MaxElementalResist(element).mod(-5, -5)).addMod(new ElementalResist(element).mod(-25, -25));
-            prophecyAffix("prophecy_ele_dmg" + element.guidName).addMod(OffenseStats.ELEMENTAL_DAMAGE.get(element).mod(-50, -50));
-            prophecyAffix("prophecy_always_crit" + element.guidName).addMod(DefenseStats.ALWAYS_CRIT_WHEN_HIT_BY_ELEMENT.get(element).mod(1, 1));
+            prophecyAffix("prophecy_max_ele_res" + element.guidName, MapAffixTags.DMG_TAKEN).addMod(new MaxElementalResist(element).mod(-5, -5)).addMod(new ElementalResist(element).mod(-25, -25));
+            prophecyAffix("prophecy_ele_dmg" + element.guidName, MapAffixTags.DMG_DEALT).addMod(OffenseStats.ELEMENTAL_DAMAGE.get(element).mod(-50, -50));
+            prophecyAffix("prophecy_always_crit" + element.guidName, MapAffixTags.DMG_TAKEN).addMod(DefenseStats.ALWAYS_CRIT_WHEN_HIT_BY_ELEMENT.get(element).mod(1, 1));
 
         }
-        prophecyAffix("prophecy_hp").addMod(Health.getInstance().mod(-25, -25).percent());
-        prophecyAffix("prophecy_mana").addMod(Mana.getInstance().mod(-25, -25).percent());
-        prophecyAffix("prophecy_ene").addMod(Energy.getInstance().mod(-25, -25).percent());
-        prophecyAffix("prophecy_ms").addMod(MagicShield.getInstance().mod(-25, -25).percent());
-        prophecyAffix("prophecy_armor").addMod(Armor.getInstance().mod(-25, -25).percent());
-        prophecyAffix("prophecy_dodge").addMod(DodgeRating.getInstance().mod(-25, -25).percent());
+        prophecyAffix("prophecy_hp", MapAffixTags.DMG_TAKEN).addMod(Health.getInstance().mod(-25, -25).percent());
+        prophecyAffix("prophecy_mana", MapAffixTags.LESS_RESOURCE).addMod(Mana.getInstance().mod(-25, -25).percent());
+        prophecyAffix("prophecy_ene", MapAffixTags.LESS_RESOURCE).addMod(Energy.getInstance().mod(-25, -25).percent());
+        prophecyAffix("prophecy_ms", MapAffixTags.DMG_TAKEN).addMod(MagicShield.getInstance().mod(-25, -25).percent());
+        prophecyAffix("prophecy_armor", MapAffixTags.DMG_TAKEN).addMod(Armor.getInstance().mod(-25, -25).percent());
+        prophecyAffix("prophecy_dodge", MapAffixTags.DMG_TAKEN).addMod(DodgeRating.getInstance().mod(-25, -25).percent());
 
-        prophecyAffix("prophecy_total_dmg").addMod(OffenseStats.TOTAL_DAMAGE.get().mod(-10, -10).more());
-        prophecyAffix("prophecy_crit").addMod(OffenseStats.CRIT_CHANCE.get().mod(-25, -25).more());
-        prophecyAffix("prophecy_crit_dmg").addMod(OffenseStats.CRIT_DAMAGE.get().mod(-25, -25).more());
+        prophecyAffix("prophecy_total_dmg", MapAffixTags.DMG_DEALT).addMod(OffenseStats.TOTAL_DAMAGE.get().mod(-10, -10).more());
+        prophecyAffix("prophecy_crit", MapAffixTags.LESS_CRIT).addMod(OffenseStats.CRIT_CHANCE.get().mod(-25, -25).more());
+        prophecyAffix("prophecy_crit_dmg", MapAffixTags.LESS_CRIT).addMod(OffenseStats.CRIT_DAMAGE.get().mod(-25, -25).more());
 
     }
 
-    static MapAffix prophecyAffix(String id) {
+    static MapAffix prophecyAffix(String id, MapAffixTag tag) {
         var m = new MapAffix(id).setProphecyLeague().affectsPlayer();
+        m.prophecy_type = tag.GUID();
         m.addToSerializables();
         return m;
     }

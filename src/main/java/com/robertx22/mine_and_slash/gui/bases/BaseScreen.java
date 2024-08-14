@@ -12,7 +12,7 @@ import net.minecraft.network.chat.Component;
 
 public class BaseScreen extends Screen {
 
-    protected BaseScreen(int width, int height) {
+    public BaseScreen(int width, int height) {
         super(Component.literal(""));
         this.sizeX = width;
         this.sizeY = height;

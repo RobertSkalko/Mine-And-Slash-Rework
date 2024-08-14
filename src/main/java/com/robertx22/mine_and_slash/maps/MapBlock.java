@@ -1,14 +1,19 @@
 package com.robertx22.mine_and_slash.maps;
 
+import com.robertx22.library_of_exile.utils.SoundUtils;
+import com.robertx22.library_of_exile.utils.geometry.Circle2d;
 import com.robertx22.mine_and_slash.database.data.profession.ProfessionBlockEntity;
+import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.gui.card_picker.CardPickScreen;
+import com.robertx22.mine_and_slash.gui.card_picker.ProphecyCurseCard;
+import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SlashItems;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
-import com.robertx22.library_of_exile.utils.SoundUtils;
-import com.robertx22.library_of_exile.utils.geometry.Circle2d;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -28,6 +33,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class MapBlock extends BaseEntityBlock {
@@ -85,6 +91,16 @@ public class MapBlock extends BaseEntityBlock {
 
     @Override
     public InteractionResult use(BlockState pState, Level level, BlockPos pPos, Player p, InteractionHand pHand, BlockHitResult pHit) {
+
+        if (MMORPG.RUN_DEV_TOOLS_REMOVE_WHEN_DONE && level.isClientSide) {
+            // todo test
+
+            Minecraft.getInstance().setScreen(new CardPickScreen(Arrays.asList(
+                    new ProphecyCurseCard(ExileDB.MapAffixes().getFilterWrapped(x -> !x.prophecy_type.isEmpty()).random()),
+                    new ProphecyCurseCard(ExileDB.MapAffixes().getFilterWrapped(x -> !x.prophecy_type.isEmpty()).random()),
+                    new ProphecyCurseCard(ExileDB.MapAffixes().getFilterWrapped(x -> !x.prophecy_type.isEmpty()).random())
+            )));
+        }
 
         if (!level.isClientSide) {
 
