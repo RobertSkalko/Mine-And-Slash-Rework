@@ -55,6 +55,7 @@ import com.robertx22.mine_and_slash.uncommon.localization.Gui;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.AllocateStatPacket;
+import com.robertx22.mine_and_slash.vanilla_mc.packets.proxies.OpenGuiWrapper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -252,8 +253,14 @@ public class MainHubScreen extends BaseScreen implements INamedScreen {
             rightButtons.add(new AscendancyTree());
         }
         rightButtons.add(new OpenJewelsScreen());
+
         if (WorldUtils.isMapWorldClass(this.mc.level)) {
-            rightButtons.add(new ProphecyScreen());
+            if (Load.player(mc.player).prophecy.affixOffers.isEmpty()) {
+                rightButtons.add(new ProphecyScreen());
+            } else {
+                rightButtons.add(OpenGuiWrapper.getProphecyCardsScreen());
+
+            }
         }
 
         List<INamedScreen> leftButtons = new ArrayList<>();

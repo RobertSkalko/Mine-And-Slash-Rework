@@ -23,7 +23,7 @@ public enum Chats implements IAutoLocName {
     NO_MORE_LIVES_REMAINING("You have no more lives remaining."),
     MAP_DEATH_LIVES_LOSS("You have died, you can only enter the map %1$s more times."),
     ALREADY_CASTING("Already Casting a Spell"),
-    PROPHECY_ALTAR_MSG("The altar reacted to your touch! (You can now open your prophecies GUI and choose to a curse to apply to yourself)"),
+    PROPHECY_ALTAR_MSG("The altar reacted to your touch! Pick a Curse of your liking. (You can open the Prophecy Gui from Hub if you failed to pick)"),
     SPELL_IS_ON_CD("Spell is on cooldown"),
     PLAYER_TOUCHED_ALTAR_AGAIN("You've used this altar before"),
     PROPHECY_PLEASE_SPEND("You already have a choice. (Open your prophecy gui from the main hub and pick an affix)"),

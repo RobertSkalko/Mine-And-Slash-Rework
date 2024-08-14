@@ -7,6 +7,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 
@@ -43,7 +44,7 @@ public class CardPickButton extends ImageButton {
         gui.drawString(mc.font, card.getName(), this.getX() + SIZE_X / 2 - mc.font.width(card.getName()) / 2, getY() + 20, ChatFormatting.RED.getColor());
 
 
-        var tip = TextUTIL.mergeList(card.getTooltip(mc.player));
+        var tip = TextUTIL.mergeList(card.getScreenText(mc.player));
 
         var split = mc.font.split(tip, 96);
 
@@ -60,7 +61,7 @@ public class CardPickButton extends ImageButton {
 
 
     public void setModTooltip() {
-        //    this.setTooltip(Tooltip.create(TextUTIL.mergeList(card.getTooltip(mc.player))));
+        this.setTooltip(Tooltip.create(TextUTIL.mergeList(card.getTooltip(mc.player))));
     }
 
 

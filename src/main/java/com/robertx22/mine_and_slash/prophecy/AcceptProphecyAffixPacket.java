@@ -8,6 +8,8 @@ import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.ArrayList;
+
 public class AcceptProphecyAffixPacket extends MyPacket<AcceptProphecyPacket> {
 
     String id;
@@ -43,6 +45,8 @@ public class AcceptProphecyAffixPacket extends MyPacket<AcceptProphecyPacket> {
                 data.affixesTaken.removeIf(x -> x == null || x.isEmpty() || !ExileDB.MapAffixes().isRegistered(x));
 
                 data.affixesTaken.add(id);
+                
+                data.affixOffers = new ArrayList<>();
 
                 data.numMobAffixesCanAdd--;
             }

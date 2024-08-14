@@ -1,11 +1,13 @@
 package com.robertx22.mine_and_slash.prophecy;
 
+import com.robertx22.library_of_exile.main.Packets;
 import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.library_of_exile.utils.geometry.Circle2d;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.AllyOrEnemy;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.EntityFinder;
+import com.robertx22.mine_and_slash.vanilla_mc.packets.OpenGuiPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -41,7 +43,7 @@ public class ProphecyAltarBlock extends Block {
     public InteractionResult use(BlockState pState, Level level, BlockPos pPos, Player p, InteractionHand pHand, BlockHitResult pHit) {
 
         if (!level.isClientSide) {
-
+          
             if (!EntityFinder.start(p, Mob.class, p.blockPosition()).radius(6).searchFor(AllyOrEnemy.enemies).build().isEmpty()) {
                 p.sendSystemMessage(Chats.ENEMY_TOO_CLOSE.locName());
                 return InteractionResult.FAIL;
@@ -62,9 +64,15 @@ public class ProphecyAltarBlock extends Block {
 
             SoundUtils.playSound(p, SoundEvents.EXPERIENCE_ORB_PICKUP);
 
+
             level.setBlock(pPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
 
+
             Load.player(p).playerDataSync.setDirty();
+            Load.player(p).playerDataSync.onTickTrySync(p);
+            // todo does this open before the player receives sync data packet?
+            Packets.sendToClient(p, new OpenGuiPacket(OpenGuiPacket.GuiType.PICK_PROPHECY_CURSE));
+
 
             // nothing is stored in this block, instead by clicking the altar, the player gains the options
 

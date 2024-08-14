@@ -14,5 +14,7 @@ public interface ICard {
 
     List<MutableComponent> getTooltip(Player p);
 
+    List<MutableComponent> getScreenText(Player p);
+
     MutableComponent getName();
 }

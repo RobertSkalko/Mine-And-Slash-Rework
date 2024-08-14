@@ -37,6 +37,12 @@ public class ProphecyCurseCard implements ICard {
     @Override
     public List<MutableComponent> getTooltip(Player p) {
         List<MutableComponent> list = new ArrayList<>();
+        return list;
+    }
+
+    @Override
+    public List<MutableComponent> getScreenText(Player p) {
+        List<MutableComponent> list = new ArrayList<>();
         // todo
 
         for (ExactStatData stat : affix.getStats(100, Load.Unit(p).getLevel())) {

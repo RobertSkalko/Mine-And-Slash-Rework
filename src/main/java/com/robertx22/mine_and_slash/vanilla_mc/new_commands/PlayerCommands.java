@@ -146,18 +146,20 @@ public class PlayerCommands {
 
         CommandBuilder.of(dis, x -> {
             PlayerWrapper PLAYER = new PlayerWrapper();
+            StringWrapper TYPE = new StringWrapper("gui_type", () -> Arrays.stream(OpenGuiPacket.GuiType.values()).map(e -> e.name()).collect(Collectors.toList()));
 
             x.addLiteral("open", PermWrapper.OP);
-            x.addLiteral("hub", PermWrapper.OP);
-
             x.addArg(PLAYER);
+            x.addArg(TYPE);
 
             x.action(e -> {
                 var p = PLAYER.get(e);
-                Packets.sendToClient(p, new OpenGuiPacket(OpenGuiPacket.GuiType.MAIN_HUB));
+                var type = OpenGuiPacket.GuiType.valueOf(TYPE.get(e));
+
+                Packets.sendToClient(p, new OpenGuiPacket(type));
             });
 
-        }, "Opens MNS Hub Gui");
+        }, "Sends a packet from server to open a gui from the client, useful for testing");
 
         /*
         CommandBuilder.of(dis, x -> {
@@ -175,7 +177,7 @@ public class PlayerCommands {
 
         }, "Opens MNS Hub Gui");
          */
-        
+
         CommandBuilder.of(dis, x -> {
             PlayerWrapper PLAYER = new PlayerWrapper();
             IntWrapper NUMBER = new IntWrapper("level");

@@ -11,10 +11,10 @@ import net.minecraft.resources.ResourceLocation;
 public class OpenGuiPacket extends MyPacket<OpenGuiPacket> {
 
     public enum GuiType {
-        TALENTS,
-        PICK_STATS,
-        SPELLS,
-        MAIN_HUB
+        PICK_PROPHECY_CURSE,
+        MAIN_HUB;
+
+
     }
 
     GuiType type;
@@ -29,12 +29,12 @@ public class OpenGuiPacket extends MyPacket<OpenGuiPacket> {
 
     @Override
     public void loadFromData(FriendlyByteBuf buf) {
-        type = GuiType.valueOf(buf.readUtf(44));
+        type = GuiType.valueOf(buf.readUtf());
     }
 
     @Override
     public void saveToData(FriendlyByteBuf buf) {
-        buf.writeUtf(type.name(), 44);
+        buf.writeUtf(type.name());
     }
 
     @Override
@@ -42,7 +42,9 @@ public class OpenGuiPacket extends MyPacket<OpenGuiPacket> {
         if (type == GuiType.MAIN_HUB) {
             OpenGuiWrapper.openMainHub();
         }
-
+        if (type == GuiType.PICK_PROPHECY_CURSE) {
+            OpenGuiWrapper.openProphecyCards();
+        }
     }
 
     @Override
