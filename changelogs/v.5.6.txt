@@ -1,4 +1,4 @@
-Changelog of recent updates: https://github.com/RobertSkalko/Mine-And-Slash-Rework/blob/1.20-Forge/changelogs/v.5.5.txt
+Changelog of recent updates: https://github.com/RobertSkalko/Mine-And-Slash-Rework/blob/1.20-Forge/changelogs/v.5.6.txt
 
 v.5.6.0
 - Medium Profession refactor:

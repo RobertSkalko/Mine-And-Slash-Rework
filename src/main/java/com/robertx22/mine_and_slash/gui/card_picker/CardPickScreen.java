@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 
 import java.util.List;
 
+// one problem is how do i Send a packet from server for the cards? there should be a card loader or something
 public class CardPickScreen extends BaseScreen implements INamedScreen {
     List<ICard> cards;
 
