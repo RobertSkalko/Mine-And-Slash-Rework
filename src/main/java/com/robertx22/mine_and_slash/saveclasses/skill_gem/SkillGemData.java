@@ -252,8 +252,10 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
             if (supp.isOneOfAKind()) {
                 tip.accept(new AdditionalBlock(Itemtips.SUPPORT_GEM_ONLY_ONE.locName().append(supp.one_of_a_kind + "")));
             }
-
+            tip.accept(new AdditionalBlock(Itemtips.SUPPORT_GEM_EXPLANATION.locName().withStyle(ChatFormatting.AQUA)));
             tip.accept(new DropLevelBlock(supp.min_lvl, GameBalanceConfig.get().MAX_LEVEL));
+            tip.accept(new ClickToOpenGuiBlock());
+
         }
 
         if (this.type == SkillGemType.AURA) {
@@ -274,6 +276,9 @@ public class SkillGemData implements ICommonDataItem<GearRarity> {
             int spiritLeft = (int) Load.player(p).getSkillGemInventory().getRemainingSpirit(p);
             tip.accept(new AdditionalBlock(Itemtips.REMAINING_AURA_CAPACITY.locName().append(spiritLeft + "").withStyle(ChatFormatting.AQUA)));
             tip.accept(new DropLevelBlock(aura.min_lvl, GameBalanceConfig.get().MAX_LEVEL));
+            tip.accept(new AdditionalBlock(Itemtips.AUGMENT_EXPLANATION.locName().withStyle(ChatFormatting.AQUA)));
+
+            tip.accept(new ClickToOpenGuiBlock());
 
         }
 

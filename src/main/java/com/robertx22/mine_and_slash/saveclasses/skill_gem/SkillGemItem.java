@@ -4,7 +4,6 @@ import com.robertx22.mine_and_slash.capability.player.container.SkillGemsMenu;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.interfaces.INeedsNBT;
-import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -25,7 +24,7 @@ public class SkillGemItem extends Item implements INeedsNBT {
     public SkillGemItem() {
         super(new Properties().stacksTo(1));
 
-        
+
     }
 
     @Override
@@ -39,7 +38,6 @@ public class SkillGemItem extends Item implements INeedsNBT {
                     return Component.empty();
                 }
 
-                @org.jetbrains.annotations.Nullable
                 @Override
                 public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
                     return new SkillGemsMenu(Load.player(pPlayer), pContainerId, pPlayerInventory);
@@ -66,13 +64,10 @@ public class SkillGemItem extends Item implements INeedsNBT {
                 for (Component m : data.getTooltip(ClientOnly.getPlayer())) {
                     list.add(m);
                 }
-
-                list.add(Itemtips.GEM_OPEN_GUI_TIP.locName());
             }
         } catch (Exception e) {
-            //  throw new RuntimeException(e);
+            e.printStackTrace();
         }
-
 
     }
 }

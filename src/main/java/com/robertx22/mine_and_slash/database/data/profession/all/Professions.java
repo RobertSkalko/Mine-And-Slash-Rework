@@ -78,7 +78,7 @@ public class Professions {
         // or maybe blocks only have tiers, but you get less xp loot the more you farm them, so if you just farm wheat you will get less and less etc.
         // this would be a pain to save
 
-        Builder.of(SALVAGING, "Salvaging", "Salvaging is the process of turning junk loot into useful materials in the Salvaging Station. You can only salvage Gear with Mine and Slash souls and other Mine and Slash rarity items like Support gems, jewels.")
+        Builder.of(SALVAGING, "Salvaging", "Salvaging is the process of turning junk loot into useful materials in the Salvaging Station. You can only salvage Gear with Mine and Slash souls and other Mine and Slash rarity items.")
                 //  .sometimesDrop(ProfessionMatItems.POWERED_RARE_MATS.get(Professions.SALVAGING), 20)
                 .build();
 

@@ -70,7 +70,7 @@ public class ModEffects implements ExileRegistryInit {
     public static EffectCtx GALE_FORCE = new EffectCtx("gale_force", "Gale Force", Elements.Physical, EffectType.beneficial);
 
     // these could be used for map affixes
-    public static EffectCtx SLOW = new EffectCtx("slow", "Slow", Elements.Physical, EffectType.negative);
+    public static EffectCtx SLOW = new EffectCtx("slow", "Lethargy", Elements.Physical, EffectType.negative);
     public static EffectCtx WOUNDS = new EffectCtx("wounds", "Wounds", Elements.Physical, EffectType.negative);
     public static EffectCtx CURSE_AGONY = new EffectCtx("agony", "Physical Agony", Elements.Elemental, EffectType.negative);
     public static EffectCtx CURSE_WEAKNESS = new EffectCtx("weak", "Elemental Weakness", Elements.Elemental, EffectType.negative);

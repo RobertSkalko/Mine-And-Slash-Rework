@@ -160,6 +160,7 @@ public class JewelItemData implements ICommonDataItem<GearRarity>, IStatCtx {
 
                 .accept(new OperationTipBlock().setShift().setAlt());
 
+        tip.accept(new ClickToOpenGuiBlock());
 
         ctx.tooltip.addAll(tip.release());
     }
