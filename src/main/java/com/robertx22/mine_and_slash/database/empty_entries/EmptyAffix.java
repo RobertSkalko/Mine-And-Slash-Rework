@@ -12,6 +12,11 @@ public class EmptyAffix extends Affix {
     }
 
     @Override
+    public boolean isRegistryEntryValid() {
+        return true;
+    }
+
+    @Override
     public String GUID() {
         return "unknown_affix";
     }

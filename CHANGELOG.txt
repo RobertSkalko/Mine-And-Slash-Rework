@@ -2,3 +2,4 @@ Changelog of recent updates: https://github.com/RobertSkalko/Mine-And-Slash-Rewo
 
 v.5.6.1
 - can now right click jewels to open gui to equip them
+- affixes no longer error when missing, now only log once and return empty affix

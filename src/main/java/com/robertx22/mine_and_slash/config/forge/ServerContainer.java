@@ -33,10 +33,10 @@ public class ServerContainer {
         b.comment("General Configs")
                 .push("general");
 
-        ENERGY_PENALTY = b.define("ENERGY_PENALTY", true);
+        ENERGY_PENALTY = b.comment("When trying to attack on low energy, you will get slow and hunger.").define("ENERGY_PENALTY", true);
         DO_NOT_DESPAWN_MAP_MOBS = b.define("DO_NOT_DESPAWN_MAP_MOBS", true);
 
-        GET_STARTER_ITEMS = b.define("start_items", true);
+        GET_STARTER_ITEMS = b.define("GET_STARTER_ITEMS", true);
         ENABLE_LOOT_ANNOUNCEMENTS = b.define("loot_announcements", true);
         REQUIRE_TEAM_FOR_TEAM_DUNGEONS = b.define("require_team_for_dungeons", true);
         DONT_SYNC_DATA_OF_AMBIENT_MOBS = b.define("dont_sync_ambient_mob_data", true);

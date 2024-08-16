@@ -1,12 +1,12 @@
 package com.robertx22.mine_and_slash.database.data.affixes;
 
+import com.robertx22.library_of_exile.registry.*;
 import com.robertx22.mine_and_slash.database.base.IhasRequirements;
 import com.robertx22.mine_and_slash.database.data.StatMod;
 import com.robertx22.mine_and_slash.database.data.requirements.Requirements;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
-import com.robertx22.library_of_exile.registry.*;
 
 import java.util.ArrayList;
 import java.util.List;

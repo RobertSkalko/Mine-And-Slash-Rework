@@ -299,7 +299,7 @@ public class ExileDB {
 
             var em = reg.getDefault();
 
-            if (em == null || !reg.isRegistered(em.GUID())) {
+            if (em == null) {
                 ExileLog.get().warn(type.id + " default is null or not registered");
             }
 
