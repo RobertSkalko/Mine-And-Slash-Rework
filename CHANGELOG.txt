@@ -1,5 +1,5 @@
 Changelog of recent updates: https://github.com/RobertSkalko/Mine-And-Slash-Rework/blob/1.20-Forge/changelogs/v.5.6.txt
 
-v.5.6.1
-- can now right click jewels to open gui to equip them
-- affixes no longer error when missing, now only log once and return empty affix
+v.5.6.2
+- fix move speed stat and others (i didnt need to add +1 to it..)
+- fix mixin connector wrong package name

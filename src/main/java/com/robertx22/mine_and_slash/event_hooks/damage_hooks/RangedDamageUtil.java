@@ -21,16 +21,11 @@ public class RangedDamageUtil {
         DamageSource source = event.getSource();
         GearItemData gear = StackSaving.GEARS.loadFrom(en.getMainHandItem());
 
-        if (source.is(DamageTypes.PLAYER_ATTACK)) {
-            return true;
-        } else {
-
-            if (gear != null) {
-                var type = gear.GetBaseGearType();
-                return type.weaponType().damage_validity_check.isValid(source);
-            }
-            return false;
+        if (gear != null) {
+            var type = gear.GetBaseGearType();
+            return type.weaponType().damage_validity_check.isValid(source);
         }
-
+        
+        return source.is(DamageTypes.PLAYER_ATTACK);
     }
 }

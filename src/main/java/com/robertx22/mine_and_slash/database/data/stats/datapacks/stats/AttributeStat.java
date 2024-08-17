@@ -51,15 +51,12 @@ public class AttributeStat extends BaseDatapackStat {
     }
 
     public void addToEntity(LivingEntity en, StatData data) {
-        
+
         float val = data.getValue();
         if (cut_by_hundred) {
             val = val / 100F;
         }
-        if (operation != AttributeModifier.Operation.ADDITION) {
-            val += 1; // todo will this work for all 3 usecases?
-        }
-
+   
         AttributeModifier mod = new AttributeModifier(
                 uuid,
                 attributeId,

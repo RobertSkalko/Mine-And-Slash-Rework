@@ -178,6 +178,9 @@ public class ModEffects implements ExileRegistryInit {
 
         ExileEffectBuilder.of(ModEffects.THORN)
                 .maxStacks(5)
+                .desc("Attacking an enemy with Thorns consumes the thorns to deal "
+                        + SpellCalcs.THORN_BUSH.getLocDmgTooltip() + " "
+                        + Elements.Physical.getIconNameDmg())
                 .spell(SpellBuilder.forEffect()
                         .addSpecificAction(SpellCtx.ON_ENTITY_ATTACKED, PartBuilder.damage(SpellCalcs.THORN_CONSUME, Elements.Physical))
                         .addSpecificAction(SpellCtx.ON_ENTITY_ATTACKED, PartBuilder.removeExileEffectStacksToTarget(ModEffects.THORN.resourcePath))

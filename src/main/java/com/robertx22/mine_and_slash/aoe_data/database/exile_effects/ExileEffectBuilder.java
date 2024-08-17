@@ -56,6 +56,11 @@ public class ExileEffectBuilder {
         return this;
     }
 
+    public ExileEffectBuilder desc(String desc) {
+        this.effect.locdesc = desc;
+        return this;
+    }
+
     public ExileEffectBuilder oneOfAKind(String kind) {
         this.effect.one_of_a_kind_id = kind;
         return this;
@@ -70,6 +75,7 @@ public class ExileEffectBuilder {
         this.effect.stats.add(stat);
         return this;
     }
+
 
     public ExileEffectBuilder vanillaStat(VanillaStatData stat) {
         this.effect.mc_stats.add(stat);

@@ -134,7 +134,7 @@ dependencies {
 jar {
     manifest {
         attributes([
-                "MixinConnector": "com.robertx22.age_of_exile.mmorpg.MixinConnector",
+                "MixinConnector": "com.robertx22.mine_and_slash.mmorpg.MixinConnector",
                 "MixinConfigs"  : "mmorpg-mixins.json"
         ])
     }

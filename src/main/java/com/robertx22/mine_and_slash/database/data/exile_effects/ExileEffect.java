@@ -1,5 +1,9 @@
 package com.robertx22.mine_and_slash.database.data.exile_effects;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.IAutoGson;
+import com.robertx22.library_of_exile.registry.JsonExileRegistry;
+import com.robertx22.library_of_exile.wrappers.ExileText;
 import com.robertx22.mine_and_slash.capability.entity.EntityData;
 import com.robertx22.mine_and_slash.database.data.StatMod;
 import com.robertx22.mine_and_slash.database.data.spells.components.AttachedSpell;
@@ -14,15 +18,12 @@ import com.robertx22.mine_and_slash.tags.TagList;
 import com.robertx22.mine_and_slash.tags.imp.EffectTag;
 import com.robertx22.mine_and_slash.tags.imp.SpellTag;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
+import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.localization.Gui;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.TooltipUtils;
-import com.robertx22.library_of_exile.registry.ExileRegistryType;
-import com.robertx22.library_of_exile.registry.IAutoGson;
-import com.robertx22.library_of_exile.registry.JsonExileRegistry;
-import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -35,7 +36,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<ExileEffect>, IAutoLocName {
+public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<ExileEffect>, IAutoLocName, IAutoLocDesc {
 
     public static ExileEffect SERIALIZER = new ExileEffect();
 
@@ -55,6 +56,7 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
     public boolean stacks_affect_stats = true;
 
     public transient String locName = "";
+    public transient String locdesc = "";
 
     public TagList<EffectTag> tags = new TagList<>();
     public TagList<SpellTag> spell_tags = new TagList<>(); // used for augments
@@ -194,6 +196,9 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
         var tagtext = Words.TAGS.locName().append(TooltipUtils.joinMutableComps(tags.stream().map(IAutoLocName::locName).iterator(), Gui.COMMA_SEPARATOR.locName()));
 
 
+        //   SpellDesc.getTooltip(info.player, this.spell)
+        //         .forEach(x -> list.add(Component.literal(x)));
+
         list.add(tagtext.withStyle(ChatFormatting.YELLOW));
 
         list.add(ExileText.emptyLine().get());
@@ -256,5 +261,20 @@ public class ExileEffect implements JsonExileRegistry<ExileEffect>, IAutoGson<Ex
     @Override
     public int Weight() {
         return 1000;
+    }
+
+    @Override
+    public AutoLocGroup locDescGroup() {
+        return AutoLocGroup.StatusEffects;
+    }
+
+    @Override
+    public String locDescLangFileGUID() {
+        return SlashRef.MODID + ".effect.desc." + GUID();
+    }
+
+    @Override
+    public String locDescForLangFile() {
+        return locdesc;
     }
 }
