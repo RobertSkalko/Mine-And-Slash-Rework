@@ -2,12 +2,12 @@ package com.robertx22.mine_and_slash.database.empty_entries;
 
 import com.robertx22.mine_and_slash.database.data.affixes.Affix;
 
-public class EmptyAffix extends Affix {
+public class AffixSerializer extends Affix {
 
-    private EmptyAffix() {
+    private AffixSerializer() {
     }
 
-    public static EmptyAffix getInstance() {
+    public static AffixSerializer getInstance() {
         return SingletonHolder.INSTANCE;
     }
 
@@ -27,6 +27,6 @@ public class EmptyAffix extends Affix {
     }
 
     private static class SingletonHolder {
-        private static final EmptyAffix INSTANCE = new EmptyAffix();
+        private static final AffixSerializer INSTANCE = new AffixSerializer();
     }
 }

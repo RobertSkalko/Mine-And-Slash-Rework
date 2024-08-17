@@ -194,6 +194,7 @@ thicket_crossbow
 thorn_rapier
 true_hit
 twilight_blade
+unknown
 vampiric
 vdo_mask
 water_ele_dmg_jewelry

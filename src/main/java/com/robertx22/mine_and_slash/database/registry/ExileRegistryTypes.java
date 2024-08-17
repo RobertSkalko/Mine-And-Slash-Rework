@@ -1,5 +1,8 @@
 package com.robertx22.mine_and_slash.database.registry;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.SyncTime;
+import com.robertx22.library_of_exile.registry.loaders.BaseDataPackLoader;
 import com.robertx22.mine_and_slash.content.ubers.UberBossArena;
 import com.robertx22.mine_and_slash.database.Serializers;
 import com.robertx22.mine_and_slash.database.data.DimensionConfig;
@@ -34,16 +37,13 @@ import com.robertx22.mine_and_slash.database.data.support_gem.SupportGem;
 import com.robertx22.mine_and_slash.database.data.talent_tree.TalentTree;
 import com.robertx22.mine_and_slash.database.data.unique_items.UniqueGear;
 import com.robertx22.mine_and_slash.database.data.value_calc.ValueCalculation;
-import com.robertx22.mine_and_slash.database.empty_entries.EmptyAffix;
+import com.robertx22.mine_and_slash.database.empty_entries.AffixSerializer;
 import com.robertx22.mine_and_slash.maps.dungeon_reg.Dungeon;
 import com.robertx22.mine_and_slash.maps.spawned_map_mobs.SpawnedMobList;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.rework.action.StatEffect;
 import com.robertx22.mine_and_slash.uncommon.effectdatas.rework.condition.StatCondition;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.WeaponTypes;
-import com.robertx22.library_of_exile.registry.ExileRegistryType;
-import com.robertx22.library_of_exile.registry.SyncTime;
-import com.robertx22.library_of_exile.registry.loaders.BaseDataPackLoader;
 import net.minecraft.ChatFormatting;
 
 public class ExileRegistryTypes {
@@ -59,7 +59,7 @@ public class ExileRegistryTypes {
     public static ExileRegistryType GEM = ExileRegistryType.register(SlashRef.MODID, "gems", 6, Gem.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType RUNE = ExileRegistryType.register(SlashRef.MODID, "runes", 7, Rune.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType MOB_AFFIX = ExileRegistryType.register(SlashRef.MODID, "mob_affix", 8, new MobAffix("empty", "empty", ChatFormatting.AQUA, Affix.Type.prefix), SyncTime.ON_LOGIN);
-    public static ExileRegistryType AFFIX = ExileRegistryType.register(SlashRef.MODID, "affixes", 10, EmptyAffix.getInstance(), SyncTime.ON_LOGIN);
+    public static ExileRegistryType AFFIX = ExileRegistryType.register(SlashRef.MODID, "affixes", 10, AffixSerializer.getInstance(), SyncTime.ON_LOGIN);
     public static ExileRegistryType UNIQUE_GEAR = ExileRegistryType.register(SlashRef.MODID, "unique_gears", 11, UniqueGear.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType RUNEWORDS = ExileRegistryType.register(SlashRef.MODID, "runeword", 12, RuneWord.SERIALIZER, SyncTime.ON_LOGIN);
     public static ExileRegistryType CURRENCY_ITEMS = ExileRegistryType.register(new ExileRegistryType(SlashRef.MODID, "currency_item", 12, null, SyncTime.NEVER) {

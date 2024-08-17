@@ -52,3 +52,6 @@ Hopefully they feel more tangible now, and players can now share or distribute t
 v.5.6.2
 - fix move speed stat and others (i didnt need to add +1 to it..)
 - fix mixin connector wrong package name
+
+v.5.6.3
+- fix empty affix causing null errors when searching

@@ -1,5 +1,7 @@
 package com.robertx22.mine_and_slash.database.registry;
 
+import com.robertx22.library_of_exile.registry.Database;
+import com.robertx22.library_of_exile.registry.ExileRegistryContainer;
 import com.robertx22.mine_and_slash.aoe_data.database.ailments.Ailments;
 import com.robertx22.mine_and_slash.aoe_data.database.base_gear_types.BaseGearTypes;
 import com.robertx22.mine_and_slash.aoe_data.database.base_stats.BaseStatsAdder;
@@ -18,15 +20,12 @@ import com.robertx22.mine_and_slash.database.data.league.HarvestLeague;
 import com.robertx22.mine_and_slash.database.data.loot_chest.GearLootChest;
 import com.robertx22.mine_and_slash.database.data.map_affix.MapAffixes;
 import com.robertx22.mine_and_slash.database.data.support_gem.SupportGems;
-import com.robertx22.mine_and_slash.database.empty_entries.EmptyAffix;
 import com.robertx22.mine_and_slash.database.empty_entries.EmptyStat;
 import com.robertx22.mine_and_slash.database.registrators.StatsRegister;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.vanilla_mc.items.gemrunes.GemItem;
 import com.robertx22.mine_and_slash.vanilla_mc.items.gemrunes.RuneType;
-import com.robertx22.library_of_exile.registry.Database;
-import com.robertx22.library_of_exile.registry.ExileRegistryContainer;
 
 public class ExileDBInit {
 
@@ -62,7 +61,8 @@ public class ExileDBInit {
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.GEAR_TYPE, BaseGearTypes.SWORD.GUID()).setIsDatapack());
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.RUNEWORDS, Runewords.EMPTY).setIsDatapack());
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.EXILE_EFFECT, "").setIsDatapack());
-        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.AFFIX, EmptyAffix.getInstance().GUID()).setIsDatapack());
+        Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.AFFIX, ExileDBInit.UNKNOWN_ID).setIsDatapack())
+        ;
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.MOB_AFFIX, MobAffixes.FULL_COLD).setIsDatapack());
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.UNIQUE_GEAR, UniqueGearReg.EMPTY).setIsDatapack());
         Database.addRegistry(new ExileRegistryContainer<>(ExileRegistryTypes.GEM, GemItem.GemType.RUBY.GUID()).setIsDatapack());
