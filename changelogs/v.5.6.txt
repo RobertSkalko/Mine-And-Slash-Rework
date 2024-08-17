@@ -48,3 +48,7 @@ To be safe, i'll go with limiting each proc with spell cooldown. This means curr
 Hopefully they feel more tangible now, and players can now share or distribute them. And hope no exploits
 - prophecy curses are now an actual card-picker gui
 - lowered radius of nearby mobs prophecy altar check
+
+v.5.6.2
+- fix move speed stat and others (i didnt need to add +1 to it..)
+- fix mixin connector wrong package name
