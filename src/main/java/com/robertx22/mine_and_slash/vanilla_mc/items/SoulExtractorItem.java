@@ -1,10 +1,15 @@
 package com.robertx22.mine_and_slash.vanilla_mc.items;
 
 import com.robertx22.mine_and_slash.database.data.currency.base.IShapelessRecipe;
+import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
+import com.robertx22.mine_and_slash.database.registry.ExileDB;
+import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.AdditionalBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.RarityListBlock;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItems;
-import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
+import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.mine_and_slash.vanilla_mc.items.misc.AutoItem;
 import com.robertx22.mine_and_slash.vanilla_mc.items.misc.RarityStoneItem;
@@ -23,20 +28,20 @@ import java.util.List;
 
 import static com.robertx22.mine_and_slash.uncommon.utilityclasses.TooltipUtils.splitLongText;
 
-public class SoulMakerItem extends AutoItem implements IShapelessRecipe {
+public class SoulExtractorItem extends AutoItem implements IShapelessRecipe {
 
     String rar;
 
-    public SoulMakerItem(String rar) {
+    public SoulExtractorItem(String rar) {
         super(new Properties().stacksTo(64));
         this.rar = rar;
     }
 
-    public boolean canExtract(GearItemData gear) {
-        if (!IRarity.NORMAL_GEAR_RARITIES.contains(gear.rar)) {
-            return rar.equals(IRarity.MYTHIC_ID);
+    public boolean canExtract(GearRarity rarity) {
+        if (!IRarity.NORMAL_GEAR_RARITIES.contains(rarity.GUID())) {
+            return this.rar.equals(IRarity.MYTHIC_ID);
         }
-        return gear.rar.equals(rar);
+        return this.rar.equals(rarity.GUID());
     }
 
     @Override
@@ -51,9 +56,13 @@ public class SoulMakerItem extends AutoItem implements IShapelessRecipe {
 
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {
-        tooltip.addAll(splitLongText(Itemtips.SOUL_EXTRACTOR_TIP.locName().withStyle(ChatFormatting.RED)));
+        ExileTooltips tip = new ExileTooltips();
+        tip.accept(new AdditionalBlock(splitLongText(Itemtips.SOUL_EXTRACTOR_TIP.locName().withStyle(ChatFormatting.RED))));
+        tip.accept(new RarityListBlock(ExileDB.GearRarities().getFilterWrapped(x -> canExtract(x)).list, Words.USABLE_ON.locName()));
+        tooltip.addAll(tip.release());
 
     }
+
 
     @Override
     public ShapelessRecipeBuilder getRecipe() {

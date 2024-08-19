@@ -1,4 +1,5 @@
 Changelog of recent updates: https://github.com/RobertSkalko/Mine-And-Slash-Rework/blob/1.20-Forge/changelogs/v.5.6.txt
 
-v.5.6.3
-- fix empty affix causing null errors when searching
+v.5.6.4
+- added a temp-fix for possible lag during map teleports. First 5s will be silenced
+- extractors now tell what rarity gear they can be used on

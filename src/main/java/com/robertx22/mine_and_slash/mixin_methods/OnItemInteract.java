@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.mixin_methods;
 
+import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.mine_and_slash.database.data.auto_item.AutoItem;
 import com.robertx22.mine_and_slash.database.data.currency.IItemAsCurrency;
 import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.LocReqContext;
@@ -12,10 +13,9 @@ import com.robertx22.mine_and_slash.saveclasses.stat_soul.StatSoulData;
 import com.robertx22.mine_and_slash.saveclasses.stat_soul.StatSoulItem;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.PlayerUtils;
-import com.robertx22.mine_and_slash.vanilla_mc.items.SoulMakerItem;
+import com.robertx22.mine_and_slash.vanilla_mc.items.SoulExtractorItem;
 import com.robertx22.mine_and_slash.vanilla_mc.items.TagForceSoulItem;
 import com.robertx22.mine_and_slash.vanilla_mc.items.misc.RarityStoneItem;
-import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
@@ -239,14 +239,14 @@ public class OnItemInteract {
         CLICKS.add(new ClickFeature() {
             @Override
             public Result tryApply(Player player, ItemStack craftedStack, ItemStack currency, Slot slot) {
-                if (currency.getItem() instanceof SoulMakerItem se) {
+                if (currency.getItem() instanceof SoulExtractorItem se) {
 
                     GearItemData gear = StackSaving.GEARS.loadFrom(craftedStack);
 
                     if (gear != null) {
                         try {
 
-                            if (se.canExtract(gear)) {
+                            if (se.canExtract(gear.getRarity())) {
                                 StatSoulData soul = new StatSoulData();
                                 soul.slot = gear.GetBaseGearType().getGearSlot().GUID();
                                 soul.gear = gear;

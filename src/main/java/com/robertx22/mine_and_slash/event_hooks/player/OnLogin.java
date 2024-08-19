@@ -100,9 +100,10 @@ public class OnLogin {
 
             if (!JsonExileRegistry.INVALID_JSONS_MAP.isEmpty() || !JsonExileRegistry.NOT_LOADED_JSONS_MAP.isEmpty()) {
 
-                player.sendSystemMessage(Component.literal("Check the log file for more info. Note, this is still an experimental error checking feature. " +
-                                "It won't tell you exactly where the problem is, but you can use a json diff checker linked in the log file to easily compare and see the error.")
+                player.sendSystemMessage(Component.literal("Check the log file for more info. Note, this is still an experimental error checking feature.")
                         .withStyle(ChatFormatting.YELLOW));
+                player.sendSystemMessage(Component.literal("THIS MEANS YOUR MINE AND SLASH DATAPACKS ARE LIKELY BROKEN AND MIGHT BUG IN-GAME UNLESS FIXED")
+                        .withStyle(ChatFormatting.LIGHT_PURPLE));
 
             }
 

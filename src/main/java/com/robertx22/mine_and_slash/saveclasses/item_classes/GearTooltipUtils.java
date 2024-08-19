@@ -245,11 +245,13 @@ public class GearTooltipUtils {
                             int cost = (int) Energy.getInstance().scale(ModType.FLAT, gear.GetBaseGearType().getGearSlot().weapon_data.energy_cost_per_swing, data.getLevel());
                             int permob = (int) Energy.getInstance().scale(ModType.FLAT, gear.GetBaseGearType().getGearSlot().weapon_data.energy_cost_per_mob_attacked, data.getLevel());
                             float damageFactor = (gear.GetBaseGearType().getGearSlot().getBasicDamageMulti() * 100) / 100F;
-
                             return Collections.singletonList(Words.Energy_Cost_Per_Mob.locName(cost, permob, damageFactor).withStyle(ChatFormatting.GREEN));
                         }).showWhen(() -> info.hasShiftDown && gear.GetBaseGearType().getGearSlot().weapon_data.damage_multiplier > 0)
                 )
-                .accept(new AdditionalBlock(() -> ImmutableList.of(Words.TAGS.locName().append(TooltipUtils.joinMutableComps(gear.GetBaseGearType().getTags().getTags(SlotTag.SERIALIZER).stream().map(x -> ((SlotTag) x).locName()).toList().iterator(), Gui.COMMA_SEPARATOR.locName())))).showWhen(() -> info.hasShiftDown)
+                .accept(new AdditionalBlock(() -> {
+                            return ImmutableList.of(Itemtips.ITEM_TYPE.locName(gear.GetBaseGearType().locName().withStyle(ChatFormatting.BLUE)),
+                                    Words.TAGS.locName().append(TooltipUtils.joinMutableComps(gear.GetBaseGearType().getTags().getTags(SlotTag.SERIALIZER).stream().map(x -> ((SlotTag) x).locName()).toList().iterator(), Gui.COMMA_SEPARATOR.locName())));
+                        }).showWhen(() -> info.hasShiftDown)
                 )
                 .accept(new SalvageBlock(gear))
                 .accept(new OperationTipBlock().setAll())

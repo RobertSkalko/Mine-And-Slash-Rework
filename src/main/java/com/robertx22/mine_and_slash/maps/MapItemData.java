@@ -11,7 +11,6 @@ import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.database.data.stats.types.generated.ElementalResist;
 import com.robertx22.mine_and_slash.database.data.stats.types.resources.health.Health;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
-import com.robertx22.mine_and_slash.database.registry.RarityRegistryContainer;
 import com.robertx22.mine_and_slash.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
 import com.robertx22.mine_and_slash.gui.texts.IgnoreNullList;
@@ -29,7 +28,6 @@ import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.ModType;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.ICommonDataItem;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
-import com.robertx22.mine_and_slash.uncommon.localization.Gui;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.TooltipUtils;
@@ -208,44 +206,9 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                                 Component.literal("[" + Itemtips.SOUL_TIER_TIP.locName().getString() + "]").withStyle(ChatFormatting.BLUE)
                         )))
                 //handle possibleRarities
-                .accept(new AdditionalBlock(() -> {
-
-                    RarityRegistryContainer<GearRarity> gearRarityRarityRegistryContainer = ExileDB.GearRarities();
-                    Set<GearRarity> possibleRarities = new HashSet<>(gearRarityRarityRegistryContainer.getFilterWrapped(
-                            x -> this.tier >= ExileDB.GearRarities().get(x.min_map_rarity_to_drop).map_tiers.min
-                    ).list);
-
-
-                    List<GearRarity> allRarities = gearRarityRarityRegistryContainer.getList();
-                    allRarities.sort(Comparator.comparingInt(x -> x.item_tier));
-                    if (!tooltipInfo.shouldShowDescriptions()) {
-                        MutableComponent starter = Component.literal("");
-                        String block = "\u25A0";
-                        allRarities
-                                .forEach(x -> {
-                                    if (possibleRarities.contains(x)) {
-                                        starter.append(Component.literal(block).withStyle(x.textFormatting()));
-                                    } else {
-                                        starter.append(Component.literal(block).withStyle(ChatFormatting.DARK_GRAY));
-                                    }
-                                });
-                        return Collections.singletonList(starter);
-                    } else {
-                        List<MutableComponent> list = allRarities
-                                .stream().map(x -> {
-                                    if (possibleRarities.contains(x)) {
-                                        return x.locName().withStyle(x.textFormatting());
-                                    } else {
-                                        return x.locName().withStyle(ChatFormatting.DARK_GRAY, ChatFormatting.ITALIC, ChatFormatting.STRIKETHROUGH);
-                                    }
-                                })
-                                .toList();
-
-                        return ImmutableList.of(Words.POSSIBLE_DROPS.locName(),
-                                TooltipUtils.joinMutableComps(list.iterator(), Gui.COMMA_SEPARATOR.locName()));
-                    }
-
-                }))
+                .accept(new RarityListBlock(ExileDB.GearRarities().getFilterWrapped(
+                        x -> this.tier >= ExileDB.GearRarities().get(x.min_map_rarity_to_drop).map_tiers.min
+                ).list, Words.POSSIBLE_DROPS.locName()))
                 .accept(new SalvageBlock(this));
         if (this.isUber()) {
             tip.accept(new AdditionalBlock(Collections.singletonList(Words.AreaContains.locName().withStyle(ChatFormatting.RED))));

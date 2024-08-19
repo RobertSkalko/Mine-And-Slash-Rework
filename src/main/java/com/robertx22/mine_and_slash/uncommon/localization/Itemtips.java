@@ -65,7 +65,7 @@ public enum Itemtips implements IAutoLocName {
     SUPPORT_GEM_ONLY_ONE("Only One Allowed: "),
     SUPPORT_GEM_EXPLANATION("Boost the power of the Spell it's socketed into."),
     AUGMENT_EXPLANATION("Enhances Player stats when equipped."),
-    SOUL_EXTRACTOR_TIP("Click on items to extract their soul.\nWorks only on that rarity.\nDeletes the Item in the process."),
+    SOUL_EXTRACTOR_TIP("Click on items to extract their soul.\nDeletes the Item in the process."),
 
     GEM_OPEN_GUI_TIP("Right Click to Open Gui"),
     SOUL_STONE_TIP("Right click to produce a common gear soul."),

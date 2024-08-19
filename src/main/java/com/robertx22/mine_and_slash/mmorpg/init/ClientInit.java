@@ -14,6 +14,8 @@ import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.StatRangeInf
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_parts.SocketData;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -24,6 +26,7 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderTooltipEvent;
+import net.minecraftforge.client.event.sound.PlaySoundEvent;
 import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
@@ -32,6 +35,18 @@ import java.util.*;
 public class ClientInit {
 
     public static void onInitializeClient(final FMLClientSetupEvent event) {
+
+
+        // todo
+        // experimental fix for massive 1 min lag after joining a map. No clue what causes it
+        ForgeEvents.registerForgeEvent(PlaySoundEvent.class, x -> {
+            var p = ClientOnly.getPlayer();
+            if (p != null && p.tickCount < (20 * 5)) {
+                if (WorldUtils.isMapWorldClass(Minecraft.getInstance().level)) {
+                    x.setSound(null); // forge wtf.. not cancellable but set nullable?
+                }
+            }
+        });
 
         /*
         ForgeEvents.registerForgeEvent(ScreenEvent.Init.class, x -> {

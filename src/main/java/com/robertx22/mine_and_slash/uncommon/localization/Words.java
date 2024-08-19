@@ -83,6 +83,7 @@ public enum Words implements IAutoLocName {
     CURRENTLY_SELECTED("Currently Selected"),
     Configs("Features"),
     POSSIBLE_DROPS("Possible Gear Drops:"),
+    USABLE_ON("Usable On:"),
     CAN_UPGRADE_MAP_RARITY("Can Upgrade Map Rarity\nThis Depends on Map level"),
     LASTS_SEC("Lasts %1$ss"),
     MOD_NAME("Mine and Slash"),
