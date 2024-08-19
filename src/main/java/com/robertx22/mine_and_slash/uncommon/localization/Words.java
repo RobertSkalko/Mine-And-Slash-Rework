@@ -9,7 +9,8 @@ import java.util.Locale;
 public enum Words implements IAutoLocName {
     PRIMARY_TIER_MAT("Primary Tier/Level Material"),
     PRIMARY_RARITY_MAT("Primary Rarity Material"),
-
+    RARITIES("Rarities:"),
+    ITEM_TYPES("Item Types:"),
     SUCCESS("Sucess"),
     GEAR_LOCKED_TYPE_PLATE("Plate"),
     GEAR_LOCKED_TYPE_LEATHER("Leather"),
@@ -152,6 +153,9 @@ public enum Words implements IAutoLocName {
     SkillGem("Skill Gem"),
     Hotbar("Spell Hotbar"),
     Gear("Gear"),
+    Gear_DESC("Armors, Weapons and Jewlery. It's a Gear as long as it has Mine and Slash stats."),
+
+
     All("All"),
     Rune("Rune"),
     Runeword("Runeword"),

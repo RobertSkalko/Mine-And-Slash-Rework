@@ -19,6 +19,7 @@ import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.NameBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.RarityBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.RequirementBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.ProfessionDropSourceBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageBlock;
 import com.robertx22.mine_and_slash.mmorpg.UNICODE;
@@ -63,6 +64,7 @@ public class CraftedInfusionItem extends AutoItem implements IRarityItem, IItemA
         var tier = LeveledItem.getTier(pStack);
         l.clear();
         l.addAll(new ExileTooltips()
+                .accept(new WorksOnBlock(WorksOnBlock.Type.USABLE_ON).itemTypes(WorksOnBlock.ItemType.GEAR))
                 .accept(new NameBlock(Collections.singletonList(pStack.getHoverName())))
                 .accept(new RarityBlock(getRarity()))
                 .accept(new UsageBlock(() -> {

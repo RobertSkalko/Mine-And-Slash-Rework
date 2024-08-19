@@ -1,6 +1,10 @@
 package com.robertx22.mine_and_slash.vanilla_mc.items.misc;
 
 import com.robertx22.mine_and_slash.database.data.currency.base.IShapelessRecipe;
+import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.AdditionalBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.OperationTipBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.critereon.EnchantedItemTrigger;
@@ -35,9 +39,14 @@ public class SoulCleanerItem extends AutoItem implements IShapelessRecipe {
         return "soul_cleaner";
     }
 
+
     @Override
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {
-        tooltip.addAll(splitLongText(Itemtips.SOUL_CLEANER_USAGE_AND_WARNING.locName().withStyle(ChatFormatting.RED)));
+        ExileTooltips tip = new ExileTooltips();
+        tip.accept(new AdditionalBlock(splitLongText(Itemtips.SOUL_CLEANER_USAGE_AND_WARNING.locName().withStyle(ChatFormatting.RED))));
+        tip.accept(new WorksOnBlock(WorksOnBlock.Type.USABLE_ON).itemTypes(WorksOnBlock.ItemType.GEAR));
+        tip.accept(new OperationTipBlock().setShift());
+        tooltip.addAll(tip.release());
     }
 
     @Override

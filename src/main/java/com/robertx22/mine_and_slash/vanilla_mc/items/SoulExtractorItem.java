@@ -5,11 +5,11 @@ import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.AdditionalBlock;
-import com.robertx22.mine_and_slash.gui.texts.textblocks.RarityListBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.OperationTipBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.IRarity;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
-import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.mine_and_slash.vanilla_mc.items.misc.AutoItem;
 import com.robertx22.mine_and_slash.vanilla_mc.items.misc.RarityStoneItem;
@@ -58,9 +58,9 @@ public class SoulExtractorItem extends AutoItem implements IShapelessRecipe {
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {
         ExileTooltips tip = new ExileTooltips();
         tip.accept(new AdditionalBlock(splitLongText(Itemtips.SOUL_EXTRACTOR_TIP.locName().withStyle(ChatFormatting.RED))));
-        tip.accept(new RarityListBlock(ExileDB.GearRarities().getFilterWrapped(x -> canExtract(x)).list, Words.USABLE_ON.locName()));
+        tip.accept(new WorksOnBlock(WorksOnBlock.Type.USABLE_ON).itemTypes(WorksOnBlock.ItemType.GEAR).rarities(ExileDB.GearRarities().getFilterWrapped(x -> canExtract(x)).list));
+        tip.accept(new OperationTipBlock().setShift());
         tooltip.addAll(tip.release());
-
     }
 
 

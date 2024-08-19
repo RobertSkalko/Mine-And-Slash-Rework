@@ -20,6 +20,7 @@ import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.OperationTipBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.StatBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.DropChanceBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.DropLevelBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageBlock;
@@ -282,7 +283,8 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
                     return statsTooltip();
                 }
             });
-            t.accept(new OperationTipBlock().setAlt());
+            t.accept(new OperationTipBlock().setAlt().setShift());
+            t.accept(new WorksOnBlock(WorksOnBlock.Type.USABLE_ON).itemTypes(WorksOnBlock.ItemType.GEAR));
             t.accept(new UsageBlock(splitLongText(Itemtips.RUNE_ITEM_USAGE.locName().withStyle(ChatFormatting.BLUE))));
             Rune rune = this.getRune();
 

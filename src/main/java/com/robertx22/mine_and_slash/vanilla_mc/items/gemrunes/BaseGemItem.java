@@ -9,6 +9,7 @@ import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.OperationTipBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.StatBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.DropChanceBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.DropLevelBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageBlock;
@@ -102,6 +103,8 @@ public abstract class BaseGemItem extends Item {
                 return stats;
             }
         });
+        t.accept(new WorksOnBlock(WorksOnBlock.Type.USABLE_ON).itemTypes(WorksOnBlock.ItemType.GEAR));
+
         t.accept(new UsageBlock(Arrays.asList(Itemtips.GEM_ITEM_USAGE.locName().withStyle(ChatFormatting.BLUE))));
         t.accept(new DropLevelBlock(gem.getReqLevelToDrop(), GameBalanceConfig.get().MAX_LEVEL));
         t.accept(new OperationTipBlock().setAlt().setShift());

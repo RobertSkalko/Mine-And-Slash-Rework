@@ -206,9 +206,9 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                                 Component.literal("[" + Itemtips.SOUL_TIER_TIP.locName().getString() + "]").withStyle(ChatFormatting.BLUE)
                         )))
                 //handle possibleRarities
-                .accept(new RarityListBlock(ExileDB.GearRarities().getFilterWrapped(
+                .accept(new WorksOnBlock(WorksOnBlock.Type.POSSIBLE_GEAR_DROPS).rarities(ExileDB.GearRarities().getFilterWrapped(
                         x -> this.tier >= ExileDB.GearRarities().get(x.min_map_rarity_to_drop).map_tiers.min
-                ).list, Words.POSSIBLE_DROPS.locName()))
+                ).list))
                 .accept(new SalvageBlock(this));
         if (this.isUber()) {
             tip.accept(new AdditionalBlock(Collections.singletonList(Words.AreaContains.locName().withStyle(ChatFormatting.RED))));
