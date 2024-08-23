@@ -10,8 +10,8 @@ import java.util.List;
 
 public class LootModifiersList {
 
-
     public List<LootModifier> all = new ArrayList<>();
+
 
     public void add(LootModifier mod) {
         all.add(mod);

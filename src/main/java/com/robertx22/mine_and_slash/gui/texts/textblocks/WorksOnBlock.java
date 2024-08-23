@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
+// todo rework currencies to have localized requirements on tooltip so like: works on gear: - must be lvl 5 - must be common rarity .. etc
+
 public class WorksOnBlock extends AbstractTextBlock {
 
 

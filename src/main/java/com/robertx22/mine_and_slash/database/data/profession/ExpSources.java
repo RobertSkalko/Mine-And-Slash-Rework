@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.database.data.profession;
 
+import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.mine_and_slash.capability.player.data.PlayerConfigData;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.mine_and_slash.database.data.profession.stat.ProfExp;
@@ -12,7 +13,6 @@ import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.localization.Gui;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.LevelUtils;
-import com.robertx22.library_of_exile.vanilla_util.main.VanillaUTIL;
 import com.robertx22.temp.SkillItemTier;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.HoverEvent;

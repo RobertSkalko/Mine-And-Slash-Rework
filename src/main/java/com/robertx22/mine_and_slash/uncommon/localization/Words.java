@@ -12,6 +12,7 @@ public enum Words implements IAutoLocName {
     RARITIES("Rarities:"),
     ITEM_TYPES("Item Types:"),
     SUCCESS("Sucess"),
+    MULTI_ELEMENT("Multi-Element Damage"),
     GEAR_LOCKED_TYPE_PLATE("Plate"),
     GEAR_LOCKED_TYPE_LEATHER("Leather"),
     GEAR_LOCKED_TYPE_CLOTH("Cloth"),
@@ -47,7 +48,7 @@ public enum Words implements IAutoLocName {
 
     DAMAGE_MESSAGE("[%1$s] dealt %2$s %3$s with %4$s"),
 
-    LOOT_MODIFIERS_INFO("Loot Modifiers:"),
+    LOOT_MODIFIERS_INFO("Modifiers:"),
 
     MOB_KILL_LOOT_INFO_MSG("Killed [%1$s]."),
     MOB_DROPS_INFO(" +%1$s Drops"),
@@ -56,6 +57,7 @@ public enum Words implements IAutoLocName {
 
     CAST_FAIL_MSGS("Spell Casting Failure Messages\n\nWill print helpful messages when you fail to cast a spell\nParticularly Helpful for New Players\nPlayers below lvl 15 can't disable this option."),
     MOB_DEATH_MESSAGES("Provides a short message when you kill a mob.\n\nYou can hover over it for useful info like Loot Chance"),
+    EXP_CHAT_MESSAGES("Sends a Message in chat when you gain Exp\n\nYou can hover over it for useful info like exp multipliers"),
     DAMAGE_MESSAGES("Provides a short message when you damage a mob.\n\nYou can hover over it for useful info like how was damage modified"),
     PROFESSION_MESSAGES("Provides a short message when you gain profession exp.\n\nYou can hover over it for useful info like how the exp was modified"),
     AUTOMATIC_PVE("Auto-Team Nearby Players\n\nPlayers who enable this are considered Teamed up and Allies\n- Must be Nearby (Radius set by config)"),
@@ -153,7 +155,7 @@ public enum Words implements IAutoLocName {
     SkillGem("Skill Gem"),
     Hotbar("Spell Hotbar"),
     Gear("Gear"),
-    Gear_DESC("Armors, Weapons and Jewlery. It's a Gear as long as it has Mine and Slash stats."),
+    Gear_DESC("Armors, Weapons and Jewelry. It's a Gear as long as it has Mine and Slash stats."),
 
 
     All("All"),

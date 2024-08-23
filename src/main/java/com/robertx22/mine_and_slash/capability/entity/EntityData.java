@@ -8,6 +8,7 @@ import com.robertx22.library_of_exile.wrappers.ExileText;
 import com.robertx22.mine_and_slash.capability.DirtySync;
 import com.robertx22.mine_and_slash.capability.bases.EntityGears;
 import com.robertx22.mine_and_slash.capability.bases.INeededForClient;
+import com.robertx22.mine_and_slash.capability.player.data.PlayerConfigData;
 import com.robertx22.mine_and_slash.characters.PlayerStats;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanceConfig;
@@ -23,6 +24,7 @@ import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.mine_and_slash.event_hooks.ontick.UnequipGear;
 import com.robertx22.mine_and_slash.event_hooks.player.OnLogin;
+import com.robertx22.mine_and_slash.loot.LootModifiersList;
 import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.saveclasses.CustomExactStatsData;
@@ -56,7 +58,9 @@ import com.robertx22.mine_and_slash.vanilla_mc.potion_effects.EntityStatusEffect
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
@@ -776,18 +780,15 @@ public class EntityData implements ICap, INeededForClient {
         this.setLevel(lvl.getLevel());
     }
 
-    public int GiveExp(Player player, int i) {
+    public int GiveExp(Player player, int i, LootModifiersList mods) {
         if (player.isDeadOrDying()) {
             return i;
         }
-
-
         if (expDebt > 0) {
             int reduced = MathHelper.clamp(i / 2, 0, expDebt);
             i -= reduced;
             this.expDebt -= reduced;
         }
-
         var rested = Load.player(player).rested_xp;
 
         rested.onGiveCombatExp(i);
@@ -798,11 +799,18 @@ public class EntityData implements ICap, INeededForClient {
             i += added;
         }
 
-
         setExp(exp + i);
 
         float perc = MathHelper.clamp(1.0f * exp / getExpRequiredForLevelUp() * 100F, 0.0f, 100.0f);
-        OnScreenMessageUtils.actionBar((ServerPlayer) player, Gui.EXP_GAIN_PERCENT.locName(i, "", NumberUtils.singleDigitFloat(perc)).withStyle(ChatFormatting.GREEN));
+        var msg = Gui.EXP_GAIN_PERCENT.locName(i, "", NumberUtils.singleDigitFloat(perc)).withStyle(ChatFormatting.GREEN);
+
+        if (mods != null) {
+            if (Load.player(player).config.isConfigEnabled(PlayerConfigData.Config.EXP_CHAT_MESSAGES)) {
+                msg.withStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, mods.getHoverText())));
+                player.sendSystemMessage(msg);
+            }
+        }
+        OnScreenMessageUtils.actionBar((ServerPlayer) player, msg);
 
         if (exp >= this.getExpRequiredForLevelUp()) {
             if (this.CheckIfCanLevelUp() && this.CheckLevelCap()) {

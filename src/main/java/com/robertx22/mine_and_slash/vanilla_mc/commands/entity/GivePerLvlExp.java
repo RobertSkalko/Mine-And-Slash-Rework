@@ -2,6 +2,7 @@ package com.robertx22.mine_and_slash.vanilla_mc.commands.entity;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.robertx22.mine_and_slash.loot.LootModifiersList;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.vanilla_mc.commands.CommandRefs;
 import net.minecraft.commands.CommandSourceStack;
@@ -28,7 +29,7 @@ public class GivePerLvlExp {
 
         try {
             int total = xp * Load.Unit(player).getLevel();
-            Load.Unit(player).GiveExp(player, total);
+            Load.Unit(player).GiveExp(player, total, new LootModifiersList());
 
         } catch (Exception e) {
             e.printStackTrace();

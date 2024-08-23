@@ -9,9 +9,7 @@ import com.robertx22.mine_and_slash.database.data.EntityConfig;
 import com.robertx22.mine_and_slash.database.data.league.LeagueStructure;
 import com.robertx22.mine_and_slash.database.data.stats.types.misc.BonusExp;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
-import com.robertx22.mine_and_slash.loot.LootInfo;
-import com.robertx22.mine_and_slash.loot.LootUtils;
-import com.robertx22.mine_and_slash.loot.MasterLootGen;
+import com.robertx22.mine_and_slash.loot.*;
 import com.robertx22.mine_and_slash.maps.MapData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.LevelUtils;
@@ -110,6 +108,8 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
 
     }
 
+
+    // todo REWORK XP TO USE MULTIS
     private static void GiveExp(LivingEntity victim, Player killer, EntityData killerData, EntityData mobData, float multi) {
 
         float exp = LevelUtils.getBaseExpMobReward(mobData.getLevel());
@@ -118,22 +118,26 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
             exp++;
         }
 
+        LootModifiersList mods = new LootModifiersList();
 
-        exp *= LootUtils.getMobHealthBasedLootMulti(victim);
-        exp *= mobData.getMobRarity().expMulti();
-        exp *= multi;
-        exp *= ServerContainer.get().EXP_GAIN_MULTI.get();
-        exp *= ExileDB.getDimensionConfig(victim.level()).exp_multi;
-        exp *= killerData.getUnit().getCalculatedStat(BonusExp.getInstance()).getMultiplier();
-        exp *= Load.player(killer).favor.getLootExpMulti();
+        mods.add(new LootModifier(LootModifierEnum.MOB_HEALTH, LootUtils.getMobHealthBasedLootMulti(victim)));
+        mods.add(new LootModifier(LootModifierEnum.MOB_RARITY, mobData.getMobRarity().expMulti()));
+        mods.add(new LootModifier(LootModifierEnum.ENTITY_DATAPACK, multi));
+        mods.add(new LootModifier(LootModifierEnum.CONFIG, ServerContainer.get().EXP_GAIN_MULTI.get().floatValue()));
+        mods.add(new LootModifier(LootModifierEnum.DIMENSION_LOOT, ExileDB.getDimensionConfig(victim.level()).exp_multi));
+        mods.add(new LootModifier(LootModifierEnum.PLAYER_BONUS_EXP, killerData.getUnit().getCalculatedStat(BonusExp.getInstance()).getMultiplier()));
+        mods.add(new LootModifier(LootModifierEnum.FAVOR, Load.player(killer).favor.getLootExpMulti()));
 
         if (WorldUtils.isMapWorldClass(victim.level())) {
             MapData map = Load.mapAt(victim.level(), victim.blockPosition());
             if (map != null) {
-                exp *= map.map.getExpMulti();
+                mods.add(new LootModifier(LootModifierEnum.ADVENTURE_MAP, map.map.getExpMulti()));
             }
         }
 
+        for (LootModifier mod : mods.all) {
+            exp *= mod.multi;
+        }
 
         exp = ExileEvents.MOB_EXP_DROP.callEvents(new ExileEvents.OnMobExpDrop(victim, exp)).exp;
 
@@ -157,7 +161,7 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
                 int splitExp = (int) (exp * LootUtils.getLevelDistancePunishmentMulti(mobData.getLevel(), Load.Unit(player).getLevel()));
 
                 if (splitExp > 0) {
-                    Load.Unit(player).GiveExp(player, (int) splitExp);
+                    Load.Unit(player).GiveExp(player, (int) splitExp, mods);
                 }
             }
 

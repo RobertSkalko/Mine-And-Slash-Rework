@@ -31,11 +31,13 @@ import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ClientInit {
 
     public static void onInitializeClient(final FMLClientSetupEvent event) {
 
+        AtomicInteger sounds = new AtomicInteger();
 
         // todo
         // experimental fix for massive 1 min lag after joining a map. No clue what causes it
@@ -43,8 +45,12 @@ public class ClientInit {
             var p = ClientOnly.getPlayer();
             if (p != null && p.tickCount < (20 * 5)) {
                 if (WorldUtils.isMapWorldClass(Minecraft.getInstance().level)) {
+                    //Minecraft.getInstance().player.sendSystemMessage(Component.literal("Sounds blocked: " + sounds + " - " + x.getName()));
+                    sounds.getAndIncrement();
                     x.setSound(null); // forge wtf.. not cancellable but set nullable?
                 }
+            } else {
+                sounds.set(0);
             }
         });
 

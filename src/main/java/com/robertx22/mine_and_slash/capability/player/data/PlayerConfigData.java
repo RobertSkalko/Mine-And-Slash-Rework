@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.capability.player.data;
 
+import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SlashItems;
@@ -8,7 +9,6 @@ import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.ICommonDataIt
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.mine_and_slash.vanilla_mc.commands.auto_salvage.AutoSalvageGenericConfigure;
-import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -22,6 +22,7 @@ public class PlayerConfigData {
 
         CAST_FAIL("cast_fail_messages", true, Words.CAST_FAIL_MSGS, false),
         MOB_DEATH_MESSAGES("mob_death_messages", false, Words.MOB_DEATH_MESSAGES, false),
+        EXP_CHAT_MESSAGES("exp_chat_messages", false, Words.EXP_CHAT_MESSAGES, false),
         DAMAGE_MESSAGES("damage_messages", false, Words.DAMAGE_MESSAGES, false),
         PROFESSION_MESSAGES("profession_exp_messages", false, Words.PROFESSION_MESSAGES, false),
         AUTO_PVE("auto_pve", false, Words.AUTOMATIC_PVE, false),
