@@ -133,6 +133,7 @@ public class EntityData implements ICap, INeededForClient {
     private static final String CUSTOM_STATS = "custom_stats";
     private static final String LEECH = "leech";
     private static final String MAP_ID = "mapid";
+    private static final String MAP_MOB = "map_mob";
 
 
     public DirtySync sync = new DirtySync("endata sync", x -> syncData());
@@ -150,6 +151,7 @@ public class EntityData implements ICap, INeededForClient {
     public SummonedPetData summonedPetData = new SummonedPetData();
 
     public String mapUUID = "";
+    public boolean isCorrectlySpawnedMapMob = false;
 
     // sync these for mobs
     transient Unit unit = new Unit();
@@ -268,6 +270,7 @@ public class EntityData implements ICap, INeededForClient {
         nbt.putString(MAP_ID, this.mapUUID);
         nbt.putBoolean(SET_MOB_STATS, setMobStats);
         nbt.putBoolean(NEWBIE_STATUS, this.isNewbie);
+        nbt.putBoolean(MAP_MOB, this.isCorrectlySpawnedMapMob);
 
         LoadSave.Save(cooldowns, nbt, COOLDOWNS);
         LoadSave.Save(ailments, nbt, AILMENTS);
@@ -321,10 +324,11 @@ public class EntityData implements ICap, INeededForClient {
         this.uuid = nbt.getString(UUID);
         this.mapUUID = nbt.getString(MAP_ID);
         this.setMobStats = nbt.getBoolean(SET_MOB_STATS);
+
         if (nbt.contains(NEWBIE_STATUS)) {
             this.isNewbie = nbt.getBoolean(NEWBIE_STATUS);
         }
-
+        this.isCorrectlySpawnedMapMob = nbt.getBoolean(MAP_MOB);
 
         try {
             this.summonedPetData = loadOrBlank(SummonedPetData.class, new SummonedPetData(), nbt, PET, new SummonedPetData());

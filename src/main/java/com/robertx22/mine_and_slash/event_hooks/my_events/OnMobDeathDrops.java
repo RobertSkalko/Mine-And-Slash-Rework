@@ -18,6 +18,7 @@ import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Vex;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.List;
@@ -74,11 +75,20 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
                     float exp_multi = (float) config.exp_multi;
 
                     if (loot_multi > 0) {
-                        MasterLootGen.genAndDrop(mobKilled, player);
 
                         if (WorldUtils.isDungeonWorld(mobKilled.level())) {
+                            if (!Load.Unit(mobKilled).isCorrectlySpawnedMapMob) {
+                                // if we didn't spawn the mob, dont give any loot
+                                // TODO, this can't be done as long as some maps use command blocks to spawn mobs..
+                                // return
+                            }
+                            if (mobKilled instanceof Vex) {
+                                return;
+                            }
+
                             var map = Load.mapAt(mobKilled.level(), mobKilled.blockPosition());
                             if (map != null) {
+
                                 // map.trySpawnMechanic(mobKilled.level(), mobKilled.blockPosition());
 
                                 var mech = LeagueStructure.getMechanicFromPosition((ServerLevel) player.level(), mobKilled.blockPosition());
@@ -89,6 +99,9 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
 
                             }
                         }
+
+                        MasterLootGen.genAndDrop(mobKilled, player);
+
 
                     }
                     if (exp_multi > 0) {
@@ -109,7 +122,6 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
     }
 
 
-    // todo REWORK XP TO USE MULTIS
     private static void GiveExp(LivingEntity victim, Player killer, EntityData killerData, EntityData mobData, float multi) {
 
         float exp = LevelUtils.getBaseExpMobReward(mobData.getLevel());
@@ -139,6 +151,7 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
             exp *= mod.multi;
         }
 
+        // todo rework this into multi
         exp = ExileEvents.MOB_EXP_DROP.callEvents(new ExileEvents.OnMobExpDrop(victim, exp)).exp;
 
 
