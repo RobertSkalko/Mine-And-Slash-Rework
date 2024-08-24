@@ -52,7 +52,10 @@ import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.localization.Gui;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.threat_aggro.ThreatData;
-import com.robertx22.mine_and_slash.uncommon.utilityclasses.*;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.EntityTypeUtils;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.LevelUtils;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.NumberUtils;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.OnScreenMessageUtils;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.EntityUnitPacket;
 import com.robertx22.mine_and_slash.vanilla_mc.potion_effects.EntityStatusEffectsData;
 import net.minecraft.ChatFormatting;
@@ -66,9 +69,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -153,6 +154,7 @@ public class EntityData implements ICap, INeededForClient {
     public String mapUUID = "";
     public boolean isCorrectlySpawnedMapMob = false;
 
+
     // sync these for mobs
     transient Unit unit = new Unit();
     String rarity = IRarity.COMMON_ID;
@@ -191,23 +193,15 @@ public class EntityData implements ICap, INeededForClient {
         boss.setupRandomBoss();
     }
 
-    public boolean canDespawnMapMob() {
-        if (this.entity instanceof Player) {
-            return false;
-        }
-        if (!WorldUtils.isDungeonWorld(entity.level())) {
-            return false;
-        }
-        var map = Load.mapAt(entity.level(), entity.blockPosition());
 
-        if (map == null) {
+    public boolean isValidMapMob() {
+        if (isCorrectlySpawnedMapMob) {
             return true;
         }
-        if (map.map != null && !map.map.uuid.equals(this.mapUUID)) {
-            return true;
+        if (this.entity instanceof Mob mob) {
+            return mob.getSpawnType() == MobSpawnType.COMMAND;
         }
-        return false;
-
+        return true;
     }
 
     @Override

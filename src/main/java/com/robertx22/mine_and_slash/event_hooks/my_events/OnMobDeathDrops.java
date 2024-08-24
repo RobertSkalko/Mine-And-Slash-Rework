@@ -11,14 +11,15 @@ import com.robertx22.mine_and_slash.database.data.stats.types.misc.BonusExp;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.loot.*;
 import com.robertx22.mine_and_slash.maps.MapData;
+import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.TeamUtils;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.Vex;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.List;
@@ -77,12 +78,13 @@ public class OnMobDeathDrops extends EventConsumer<ExileEvents.OnMobDeath> {
                     if (loot_multi > 0) {
 
                         if (WorldUtils.isDungeonWorld(mobKilled.level())) {
-                            if (!Load.Unit(mobKilled).isCorrectlySpawnedMapMob) {
-                                // if we didn't spawn the mob, dont give any loot
-                                // TODO, this can't be done as long as some maps use command blocks to spawn mobs..
-                                // return
-                            }
-                            if (mobKilled instanceof Vex) {
+
+                            if (!Load.Unit(mobKilled).isValidMapMob()) {
+                                // if we didn't spawn the mob and a command didnt do it, dont give any loot
+                                // todo, maybe some indicator? is it needed?
+                                if (MMORPG.RUN_DEV_TOOLS) {
+                                    player.sendSystemMessage(Component.literal("Killed Mob wasn't properly spawned"));
+                                }
                                 return;
                             }
 
