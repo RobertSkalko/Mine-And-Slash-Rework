@@ -148,7 +148,7 @@ public class SpellChangeStats {
             .setSide(EffectSides.Source)
             .addCondition(StatConditions.SPELL_HAS_TAG.get(SpellTags.projectile))
             .addEffect(StatEffects.INCREASE_PROJ_SPEED)
-            .setLocName(x -> "Faster Projectiles")
+            .setLocName(x -> "Projectile Speed")
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
