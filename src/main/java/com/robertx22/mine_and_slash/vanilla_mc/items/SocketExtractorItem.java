@@ -1,5 +1,8 @@
 package com.robertx22.mine_and_slash.vanilla_mc.items;
 
+import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.AdditionalBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
 import com.robertx22.mine_and_slash.vanilla_mc.items.misc.AutoItem;
 import net.minecraft.ChatFormatting;
@@ -32,6 +35,15 @@ public class SocketExtractorItem extends AutoItem {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {
-        tooltip.add(Itemtips.SOCKET_EXTRACTOR_USAGE.locName().withStyle(ChatFormatting.RED));
+
+        ExileTooltips tip = new ExileTooltips();
+
+     
+        tip.accept(new AdditionalBlock(Itemtips.SOCKET_EXTRACTOR_USAGE.locName().withStyle(ChatFormatting.RED)));
+
+        tip.accept(WorksOnBlock.usableOn(WorksOnBlock.ItemType.GEAR));
+
+        tooltip.addAll(tip.release());
+
     }
 }

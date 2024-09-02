@@ -28,7 +28,8 @@ public enum Itemtips implements IAutoLocName {
     SOUL_GENERATE_GEAR_LEVEL_RANGE("Generated Gear Level: %1$s - %2$s"),
     BUFF_TIP("Buff Stats: "),
     SOUL_MODIFIER_TIP("Soul modifier can be applied to gear soul, which then generate \nonly the corresponding gear type when use."),
-    SOUL_MODIFIER_USE_TIP("[Drag onto gear soul to use]"),
+    DRAG_AND_DROP_TO_USE("[Drag and Drop on item to Use]"),
+    DRAG_AND_DROP_TO_USE_DESC("- Hold the item in inventory, drag it towards the item you want to use it on, and click."),
     PROF_TOOL_LEVEL_CAP("Capped Drops to LVL %1$s"),
     PROF_TOOL_STATS_TIP("Tool Stats: "),
     PROF_TOOL_EXP_TIP("Exp: %1$s/%2$s"),
@@ -46,7 +47,6 @@ public enum Itemtips implements IAutoLocName {
     LEVEL_TIP("Level %1$s"),
 
     LEVEL_REQ("Player Level Min: %1$s"), // todo is this too long
-    GEAR_SOUL_USE_TIP("[Drag onto gear to use]"),
     Stat_Req("%1$s Min: "),
     POTENTIAL("Potential: %1$s"),
     QUALITY("Quality: %1$s%%"),
@@ -76,8 +76,9 @@ public enum Itemtips implements IAutoLocName {
     RUNE_ITEM_USAGE("Use on Gear with sockets to Insert\nIf same rune is already socketed, rerolls it\n\nAll Runewords are shown in the Wiki.\nUse to view craftable Runewords."),
     GEM_ITEM_USAGE("Use on Gear with sockets to Insert.\nCan also be Crafted"),
     STONE_REPAIRE_DURABILITY("Repairs %1$s durability."),
+    NOT_A_RANDOM_MNS_DROP_CHECK_MODPACK("No normal Drop-rate, this item might be obtainable in other ways. Check your Modpack's guide."),
     SOUL_CLEANER_USAGE_AND_WARNING("Click on items to remove their soul.\nThe item remains but the stats will be deleted."),
-    SOCKET_EXTRACTOR_USAGE("Click on gear to extract a gem."),
+    SOCKET_EXTRACTOR_USAGE("Extracts a Gem from the Item"),
     INFUSED("Infused(%1$s/10): "),
     OUTCOME_TIP("%1$s, Chance: %2$s", "for currency tooltips"),
     Exp("Bonus Exp: %1$s%%"),

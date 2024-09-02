@@ -103,7 +103,7 @@ public abstract class BaseGemItem extends Item {
                 return stats;
             }
         });
-        t.accept(new WorksOnBlock(WorksOnBlock.Type.USABLE_ON).itemTypes(WorksOnBlock.ItemType.GEAR));
+        t.accept(WorksOnBlock.usableOn(WorksOnBlock.ItemType.GEAR));
 
         t.accept(new UsageBlock(Arrays.asList(Itemtips.GEM_ITEM_USAGE.locName().withStyle(ChatFormatting.BLUE))));
         t.accept(new DropLevelBlock(gem.getReqLevelToDrop(), GameBalanceConfig.get().MAX_LEVEL));

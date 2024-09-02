@@ -80,7 +80,7 @@ public class OrbSocketAdder extends GearCurrency {
 
     @Override
     public String locDescForLangFile() {
-        return "Has a chance to add a socket or do nothing";
+        return "Has a chance to add a socket or do nothing. Can't add more sockets than the item's rarity allows.";
     }
 
     @Override

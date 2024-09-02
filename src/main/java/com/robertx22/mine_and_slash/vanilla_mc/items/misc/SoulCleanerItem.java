@@ -44,7 +44,7 @@ public class SoulCleanerItem extends AutoItem implements IShapelessRecipe {
     public void appendHoverText(ItemStack stack, Level world, List<Component> tooltip, TooltipFlag context) {
         ExileTooltips tip = new ExileTooltips();
         tip.accept(new AdditionalBlock(splitLongText(Itemtips.SOUL_CLEANER_USAGE_AND_WARNING.locName().withStyle(ChatFormatting.RED))));
-        tip.accept(new WorksOnBlock(WorksOnBlock.Type.USABLE_ON).itemTypes(WorksOnBlock.ItemType.GEAR));
+        tip.accept(WorksOnBlock.usableOn(WorksOnBlock.ItemType.GEAR));
         tip.accept(new OperationTipBlock().setShift());
         tooltip.addAll(tip.release());
     }

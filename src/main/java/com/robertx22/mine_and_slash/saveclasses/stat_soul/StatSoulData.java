@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.saveclasses.stat_soul;
 
+import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanceConfig;
 import com.robertx22.mine_and_slash.database.data.gear_slots.GearSlot;
 import com.robertx22.mine_and_slash.database.data.gear_types.bases.SlotFamily;
@@ -9,10 +10,7 @@ import com.robertx22.mine_and_slash.database.data.unique_items.UniqueGear;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
-import com.robertx22.mine_and_slash.gui.texts.textblocks.AdditionalBlock;
-import com.robertx22.mine_and_slash.gui.texts.textblocks.OperationTipBlock;
-import com.robertx22.mine_and_slash.gui.texts.textblocks.RarityBlock;
-import com.robertx22.mine_and_slash.gui.texts.textblocks.SalvageBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.*;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageBlock;
 import com.robertx22.mine_and_slash.loot.LootInfo;
 import com.robertx22.mine_and_slash.loot.blueprints.GearBlueprint;
@@ -32,7 +30,6 @@ import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.mine_and_slash.vanilla_mc.items.TagForceSoulItem;
-import com.robertx22.library_of_exile.utils.ItemstackDataSaver;
 import com.robertx22.temp.SkillItemTier;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -245,7 +242,7 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
         if (this.gear != null) {
             //this.gear.BuildTooltip(new TooltipContext(stack, tooltip, Load.Unit(ClientOnly.getPlayer())));
             exileTooltips.accept(new AdditionalBlock(Itemtips.CHECK_GEAR_STATS_IN_SOUL.locName().withStyle(ChatFormatting.AQUA)));
-            exileTooltips.accept(new OperationTipBlock().setAlt().setShift().addDraggableTipAbove(OperationTipBlock.AvailableTarget.GEAR));
+            exileTooltips.accept(new OperationTipBlock().setAlt().setShift());
         } else {
 
             List<Component> tooltip = new ArrayList<>();
@@ -275,8 +272,9 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
                 });
             }
             exileTooltips.accept(new UsageBlock(tooltip));
-            exileTooltips.accept(new OperationTipBlock().setAlt().addDraggableTipAbove(OperationTipBlock.AvailableTarget.GEAR));
+            exileTooltips.accept(new OperationTipBlock().setAlt());
         }
+        exileTooltips.accept(WorksOnBlock.usableOn(WorksOnBlock.ItemType.GEAR));
 
         exileTooltips
                 .accept(new AdditionalBlock(Collections.singletonList(Chats.RIGHT_CLICK_TO_GEN_ITEM.locName().withStyle(ChatFormatting.BLUE))).showWhen(() -> cangen))

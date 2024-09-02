@@ -1,6 +1,7 @@
 package com.robertx22.mine_and_slash.database.data.currency;
 
 import com.google.common.collect.ImmutableList;
+import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.mine_and_slash.aoe_data.datapacks.models.IAutoModel;
 import com.robertx22.mine_and_slash.aoe_data.datapacks.models.ItemModelManager;
 import com.robertx22.mine_and_slash.database.data.currency.base.Currency;
@@ -9,11 +10,11 @@ import com.robertx22.mine_and_slash.database.data.currency.base.GearOutcome;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.AdditionalBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.OperationTipBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageBlock;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
-import com.robertx22.library_of_exile.registry.IWeighted;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -45,7 +46,9 @@ public class CurrencyItem extends Item implements IItemAsCurrency, IAutoLocName,
                 .accept(new UsageBlock(ImmutableList.of(
                         locDesc().withStyle(ChatFormatting.AQUA)
                 )))
-                .accept(new OperationTipBlock().addDraggableTipAbove(OperationTipBlock.AvailableTarget.GEAR));
+                .accept(new OperationTipBlock());
+
+        exileTooltips.accept(WorksOnBlock.usableOn(WorksOnBlock.ItemType.GEAR));
 
 
         if (effect instanceof GearCurrency gc) {

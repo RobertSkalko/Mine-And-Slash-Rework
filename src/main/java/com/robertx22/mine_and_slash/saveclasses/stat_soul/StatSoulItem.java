@@ -1,10 +1,11 @@
 package com.robertx22.mine_and_slash.saveclasses.stat_soul;
 
+import com.robertx22.library_of_exile.registry.IGUID;
+import com.robertx22.library_of_exile.utils.LoadSave;
 import com.robertx22.mine_and_slash.database.data.gear_slots.GearSlot;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
-import com.robertx22.mine_and_slash.gui.texts.textblocks.AdditionalBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.NameBlock;
 import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.TooltipContext;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
@@ -14,9 +15,6 @@ import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.mine_and_slash.vanilla_mc.items.misc.ICreativeTabNbt;
-import com.robertx22.library_of_exile.registry.IGUID;
-import com.robertx22.library_of_exile.utils.LoadSave;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -150,10 +148,6 @@ public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt {
                     ExileTooltips exileTooltips = data.getTooltip(stack, false);
                     exileTooltips.accept(new NameBlock(Collections.singletonList(stack.getHoverName())));
 
-                    Player p = ClientOnly.getPlayer();
-                    if (p != null && p.isCreative()) {
-                        exileTooltips.accept(new AdditionalBlock(Words.DRAG_NO_WORK_CREATIVE.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD)));
-                    }
                     tooltip.addAll(exileTooltips.release());
                 }
             }

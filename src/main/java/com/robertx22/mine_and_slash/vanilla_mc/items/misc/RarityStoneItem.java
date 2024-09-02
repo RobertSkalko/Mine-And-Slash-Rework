@@ -7,6 +7,7 @@ import com.robertx22.mine_and_slash.database.data.profession.all.Professions;
 import com.robertx22.mine_and_slash.database.data.profession.items.ProfTierMatItem;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.OperationTipBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageBlock;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.RarityItems;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
@@ -46,7 +47,8 @@ public class RarityStoneItem extends Item implements IWeighted, IAutoModel {
         var pro = ExileDB.Professions().get(Professions.SALVAGING);
         var tip = ProfTierMatItem.makeTooltip(pro, null);
         tip.accept(new UsageBlock(Arrays.asList(Itemtips.STONE_REPAIRE_DURABILITY.locName(getTotalRepair()).withStyle(ChatFormatting.GREEN))));
-        tip.accept(new OperationTipBlock().addDraggableTipAbove(OperationTipBlock.AvailableTarget.GEAR));
+        tip.accept((WorksOnBlock.usableOn(WorksOnBlock.ItemType.GEAR)));
+        tip.accept(new OperationTipBlock());
         l.addAll(tip.release());
     }
 
