@@ -274,7 +274,7 @@ public class StatSoulData implements ICommonDataItem<GearRarity>, ISettableLevel
             exileTooltips.accept(new UsageBlock(tooltip));
             exileTooltips.accept(new OperationTipBlock().setAlt());
         }
-        exileTooltips.accept(WorksOnBlock.usableOn(WorksOnBlock.ItemType.GEAR));
+        exileTooltips.accept(WorksOnBlock.usableOn(WorksOnBlock.ItemType.SOULLESS_GEAR));
 
         exileTooltips
                 .accept(new AdditionalBlock(Collections.singletonList(Chats.RIGHT_CLICK_TO_GEN_ITEM.locName().withStyle(ChatFormatting.BLUE))).showWhen(() -> cangen))

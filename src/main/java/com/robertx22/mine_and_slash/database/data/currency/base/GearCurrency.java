@@ -1,13 +1,14 @@
 package com.robertx22.mine_and_slash.database.data.currency.base;
 
+import com.robertx22.library_of_exile.utils.RandomUtils;
+import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.BaseLocRequirement;
 import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.mine_and_slash.database.data.profession.ExplainedResult;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
 import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
-import com.robertx22.library_of_exile.utils.RandomUtils;
-import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -18,6 +19,10 @@ import java.util.List;
 
 public abstract class GearCurrency extends Currency {
 
+    @Override
+    public WorksOnBlock.ItemType usedOn() {
+        return WorksOnBlock.ItemType.GEAR;
+    }
 
     public abstract List<GearOutcome> getOutcomes();
 

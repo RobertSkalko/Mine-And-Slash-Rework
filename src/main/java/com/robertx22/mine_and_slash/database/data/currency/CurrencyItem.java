@@ -48,7 +48,7 @@ public class CurrencyItem extends Item implements IItemAsCurrency, IAutoLocName,
                 )))
                 .accept(new OperationTipBlock());
 
-        exileTooltips.accept(WorksOnBlock.usableOn(WorksOnBlock.ItemType.GEAR));
+        exileTooltips.accept(WorksOnBlock.usableOn(effect.usedOn()));
 
 
         if (effect instanceof GearCurrency gc) {

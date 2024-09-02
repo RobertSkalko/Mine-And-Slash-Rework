@@ -78,11 +78,32 @@ public class WorksOnBlock extends AbstractTextBlock {
         } else {
             MutableComponent c = Component.literal(" " + UNICODE.ROTATED_CUBE + " ").append(TooltipUtils.joinMutableComps(items.stream().map(x -> x.name.locName()).iterator(), Gui.COMMA_SEPARATOR.locName())).withStyle(ChatFormatting.YELLOW);
             //all.add(c);
-            
+
             all.add(types.append(c));
 
         }
 
+
+        return all;
+    }
+
+
+    @Override
+    public List<? extends Component> getAvailableComponents() {
+        List<MutableComponent> all = new ArrayList<>();
+
+        all.add(name.withStyle(ChatFormatting.AQUA));
+
+        if (!items.isEmpty()) {
+            for (MutableComponent m : itemTypesTooltip()) {
+                all.add(Component.literal(" ").append(m));
+            }
+        }
+        if (this.rarities != null) {
+            for (MutableComponent m : rarities.getTooltip()) {
+                all.add(Component.literal(" ").append(m));
+            }
+        }
 
         // todo maybe some items won't be drag and droppable?
         if (true) {
@@ -95,23 +116,6 @@ public class WorksOnBlock extends AbstractTextBlock {
                 all.add(Words.DRAG_NO_WORK_CREATIVE.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
             }
         }
-
-        return all;
-    }
-
-    @Override
-    public List<? extends Component> getAvailableComponents() {
-        List<MutableComponent> all = new ArrayList<>();
-
-        all.add(name.withStyle(ChatFormatting.AQUA));
-
-        if (!items.isEmpty()) {
-            all.addAll(itemTypesTooltip());
-        }
-        if (this.rarities != null) {
-            all.addAll(rarities.getTooltip());
-        }
-
         return all;
     }
 
@@ -122,7 +126,12 @@ public class WorksOnBlock extends AbstractTextBlock {
 
 
     public enum ItemType {
-        GEAR(Words.Gear, Words.Gear_DESC);
+        GEAR(Words.Gear, Words.Gear_DESC),
+        TOOLS(Words.TOOL, Words.TOOL_DESC),
+        JEWEL(Words.Jewel, Words.Jewel_DESC),
+        MAP(Words.Map, Words.MapDESC),
+        SOUL(Words.Soul, Words.Gear_DESC),
+        SOULLESS_GEAR(Words.SOULLESS_Gear, Words.SOULLESS_Gear_DESC);
         public Words name;
         public Words desc;
 

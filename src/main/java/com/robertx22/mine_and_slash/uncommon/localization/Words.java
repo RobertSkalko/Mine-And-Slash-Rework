@@ -12,6 +12,8 @@ public enum Words implements IAutoLocName {
     RARITIES("Rarities:"),
     ITEM_TYPES("Item Types:"),
     SUCCESS("Sucess"),
+    TOOL("Tool"),
+    TOOL_DESC("Items used for gathering Professions. Gaining Profession Exp once with a tool will give it a soul."),
     MULTI_ELEMENT("Multi-Element Damage"),
     GEAR_LOCKED_TYPE_PLATE("Plate"),
     GEAR_LOCKED_TYPE_LEATHER("Leather"),
@@ -158,6 +160,8 @@ public enum Words implements IAutoLocName {
     UpgradesUniqueStats("Adds 10% to unique stats"),
 
     Soul("Soul"),
+    GEAR_SOUL("Gear Soul"),
+    GEAR_SOUL_DESC("Souls are one way of adding Mine and Slash stats to Gear."),
     DungeonKey("Dungeon Key"),
     Corrupted("Corrupted"),
     CorruptsItemHarvest("Turns the Item Corrupted (no benefits)"),
@@ -167,6 +171,8 @@ public enum Words implements IAutoLocName {
     SkillGem("Skill Gem"),
     Hotbar("Spell Hotbar"),
     Gear("Gear"),
+    SOULLESS_Gear("Soul-less Gear"),
+    SOULLESS_Gear_DESC("Armor, jewelry or weapon item that does not have Mine and Slash stats yet."),
     Gear_DESC("Armors, Weapons and Jewelry. It's a Gear as long as it has Mine and Slash stats."),
 
 
@@ -228,6 +234,7 @@ public enum Words implements IAutoLocName {
 
 
     Jewel("Jewel"),
+    Jewel_DESC("Items that boost a player's stats if socketed into the Jewel gui."),
     Jewels("Jewels"),
 
 
@@ -242,6 +249,7 @@ public enum Words implements IAutoLocName {
     Level("Level"),
 
     Map("Map"),
+    MapDESC("Items used to travel to a Dungeon Dimension using the Map Device."),
 
     Maps("Maps"),
 

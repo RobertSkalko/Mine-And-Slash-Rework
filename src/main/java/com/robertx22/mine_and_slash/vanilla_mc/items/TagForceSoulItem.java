@@ -65,7 +65,7 @@ public class TagForceSoulItem extends AutoItem implements IShapelessRecipe {
         pTooltipComponents.addAll(
                 new ExileTooltips()
                         .accept(new UsageBlock(Collections.singletonList(Itemtips.SOUL_MODIFIER_TIP.locName().withStyle(ChatFormatting.AQUA))))
-                        .accept((WorksOnBlock.usableOn(WorksOnBlock.ItemType.GEAR)))
+                        .accept((WorksOnBlock.usableOn(WorksOnBlock.ItemType.SOUL)))
                         .accept(new OperationTipBlock()).release());
     }
 

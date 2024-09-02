@@ -27,6 +27,7 @@ public enum Itemtips implements IAutoLocName {
     INFUSION_GEAR_LEVEL_RANGE("Gear level range: %1$s - %2$s"),
     SOUL_GENERATE_GEAR_LEVEL_RANGE("Generated Gear Level: %1$s - %2$s"),
     BUFF_TIP("Buff Stats: "),
+    LOOT_CHEST_KEY_DESC("Used to unlock Loot chests obtained from the Fishing Profession."),
     SOUL_MODIFIER_TIP("Soul modifier can be applied to gear soul, which then generate \nonly the corresponding gear type when use."),
     DRAG_AND_DROP_TO_USE("[Drag and Drop on item to Use]"),
     DRAG_AND_DROP_TO_USE_DESC("- Hold the item in inventory, drag it towards the item you want to use it on, and click."),

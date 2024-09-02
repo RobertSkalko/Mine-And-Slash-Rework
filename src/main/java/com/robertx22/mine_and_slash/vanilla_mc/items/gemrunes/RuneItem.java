@@ -284,9 +284,9 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
                     return statsTooltip();
                 }
             });
-            t.accept(new OperationTipBlock().setAlt().setShift());
             t.accept(new UsageBlock(splitLongText(Itemtips.RUNE_ITEM_USAGE.locName().withStyle(ChatFormatting.BLUE))));
             t.accept(WorksOnBlock.usableOn(WorksOnBlock.ItemType.GEAR));
+            t.accept(new OperationTipBlock().setAlt().setShift());
             Rune rune = this.getRune();
 
             if (rune.Weight() > 0) {
