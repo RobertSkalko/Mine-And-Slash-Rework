@@ -37,7 +37,7 @@ public class GuiConfigToggle extends GuiAction {
             }
         }
         return SlashRef.id("textures/gui/inv_gui/icons/config.png");
-        
+
     }
 
     @Override
@@ -48,6 +48,9 @@ public class GuiConfigToggle extends GuiAction {
     @Override
     public List<Component> getTooltip(Player p) {
         List<Component> t = new ArrayList<>();
+
+        t.add(config.title.locName().withStyle(ChatFormatting.LIGHT_PURPLE, ChatFormatting.BOLD));
+
         t.addAll(TooltipUtils.splitLongText(config.word.locName()));
 
         var text = Component.literal("");

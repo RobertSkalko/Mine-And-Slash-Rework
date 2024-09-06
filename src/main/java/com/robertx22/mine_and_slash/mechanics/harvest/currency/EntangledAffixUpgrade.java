@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.mechanics.harvest.currency;
 
+import com.robertx22.library_of_exile.utils.RandomUtils;
 import com.robertx22.mine_and_slash.database.data.currency.base.GearOutcome;
 import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.mine_and_slash.database.data.profession.ExplainedResult;
@@ -9,7 +10,6 @@ import com.robertx22.mine_and_slash.saveclasses.item_classes.GearItemData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
-import com.robertx22.library_of_exile.utils.RandomUtils;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -91,4 +91,6 @@ public class EntangledAffixUpgrade extends BaseHarvestCurrency {
     public int Weight() {
         return 250;
     }
+
+ 
 }

@@ -206,7 +206,7 @@ public class MapItemData implements ICommonDataItem<GearRarity> {
                                 Component.literal("[" + Itemtips.SOUL_TIER_TIP.locName().getString() + "]").withStyle(ChatFormatting.BLUE)
                         )))
                 //handle possibleRarities
-                .accept(new WorksOnBlock(WorksOnBlock.Type.POSSIBLE_GEAR_DROPS).rarities(ExileDB.GearRarities().getFilterWrapped(
+                .accept(WorksOnBlock.possibleDrops(ExileDB.GearRarities().getFilterWrapped(
                         x -> this.tier >= ExileDB.GearRarities().get(x.min_map_rarity_to_drop).map_tiers.min
                 ).list))
                 .accept(new SalvageBlock(this));

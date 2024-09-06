@@ -1,5 +1,6 @@
 package com.robertx22.mine_and_slash.capability.player.data;
 
+import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.gui.inv_gui.actions.auto_salvage.ToggleAutoSalvageRarity;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.SlashItems;
@@ -8,7 +9,6 @@ import com.robertx22.mine_and_slash.uncommon.interfaces.data_items.ICommonDataIt
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.PlayerUtils;
 import com.robertx22.mine_and_slash.vanilla_mc.commands.auto_salvage.AutoSalvageGenericConfigure;
-import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -20,25 +20,29 @@ public class PlayerConfigData {
 
     public enum Config {
 
-        CAST_FAIL("cast_fail_messages", true, Words.CAST_FAIL_MSGS, false),
-        MOB_DEATH_MESSAGES("mob_death_messages", false, Words.MOB_DEATH_MESSAGES, false),
-        DAMAGE_MESSAGES("damage_messages", false, Words.DAMAGE_MESSAGES, false),
-        PROFESSION_MESSAGES("profession_exp_messages", false, Words.PROFESSION_MESSAGES, false),
-        AUTO_PVE("auto_pve", false, Words.AUTOMATIC_PVE, false),
-        AGGRESSIVE_SUMMONS("aggressive_summons", true, Words.AGGRESIVE_SUMMONS, false),
-        STAT_ORDER_TEST("stat_order_test", false, Words.STAT_ORDER_TEST, true),
-        DAMAGE_CONFLICT_MSG("damage_conflict_check", false, Words.DMG_CONFLICT_CHECK, true),
-        EVERYONE_IS_ALLY("everyone_is_ally", false, Words.EVERYONE_IS_ALLY, false),
-        DROP_MAP_CHEST_CONTENTS_ON_GROUND("drop_map_chest_contents_on_ground", false, Words.DROP_MAP_CHEST_CONTENTS_ON_GROUND, false);
+        CAST_FAIL("cast_fail_messages", true, Words.TITLE_FEATURE_CAST_FAIL, Words.CAST_FAIL_MSGS, false),
+        MOB_DEATH_MESSAGES("mob_death_messages", false, Words.TITLE_FEATURE_MOB_KILL_LOOT, Words.MOB_DEATH_MESSAGES, false),
+        EXP_CHAT_MESSAGES("exp_chat_messages", false, Words.TITLE_FEATURE_EXP_MSG, Words.EXP_CHAT_MESSAGES, false),
+        DAMAGE_MESSAGES("damage_messages", false, Words.TITLE_FEATURE_DAMAGE_LOG, Words.DAMAGE_MESSAGES, false),
+        PROFESSION_MESSAGES("profession_exp_messages", false, Words.TITLE_FEATURE_PROF_EXP, Words.PROFESSION_MESSAGES, false),
+        AUTO_PVE("auto_pve", false, Words.TITLE_FEATURE_AUTO_TEAM, Words.AUTOMATIC_PVE, false),
+        AGGRESSIVE_SUMMONS("aggressive_summons", true, Words.TITLE_FEATURE_AGGRO_SUMMONS, Words.AGGRESIVE_SUMMONS, false),
+        STAT_ORDER_TEST("stat_order_test", false, Words.TITLE_FEATURE_STAT_ORDER_DEBUG, Words.STAT_ORDER_TEST, true),
+        DAMAGE_CONFLICT_MSG("damage_conflict_check", false, Words.TITLE_FEATURE_DMG_CONFLICT_DEBUG, Words.DMG_CONFLICT_CHECK, true),
+        EVERYONE_IS_ALLY("everyone_is_ally", false, Words.TITLE_FEATURE_EVERYONE_ALLY, Words.EVERYONE_IS_ALLY, false),
+        DROP_MAP_CHEST_CONTENTS_ON_GROUND("drop_map_chest_contents_on_ground", false, Words.TITLE_FEATURE_DROP_MAP_CHEST_ITEMS, Words.DROP_MAP_CHEST_CONTENTS_ON_GROUND, false);
 
         public String id;
+        public Words title;
+
         public Words word;
         public boolean isDebug;
         public boolean enabledByDefault;
 
 
-        Config(String id, boolean enabledByDefault, Words word, boolean isdebug) {
+        Config(String id, boolean enabledByDefault, Words title, Words word, boolean isdebug) {
             this.id = id;
+            this.title = title;
             this.word = word;
             this.isDebug = isdebug;
             this.enabledByDefault = enabledByDefault;

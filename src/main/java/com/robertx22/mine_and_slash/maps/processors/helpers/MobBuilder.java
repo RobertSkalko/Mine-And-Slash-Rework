@@ -1,11 +1,11 @@
 package com.robertx22.mine_and_slash.maps.processors.helpers;
 
+import com.robertx22.library_of_exile.utils.geometry.MyPosition;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.event_hooks.entity.OnMobSpawn;
 import com.robertx22.mine_and_slash.mmorpg.ModErrors;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
-import com.robertx22.library_of_exile.utils.geometry.MyPosition;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -56,7 +56,8 @@ public class MobBuilder {
         if (rarity != null) {
             Load.Unit(mob).setRarity(rarity.GUID());
         }
-
+        Load.Unit(mob).isCorrectlySpawnedMapMob = true;
+        
         try {
             if (WorldUtils.isMapWorldClass(world)) {
                 var map = Load.mapAt(world, p);

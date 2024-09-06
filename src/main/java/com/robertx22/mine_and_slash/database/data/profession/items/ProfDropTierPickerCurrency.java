@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.database.data.profession.items;
 import com.robertx22.mine_and_slash.database.data.currency.base.ProfCurrency;
 import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.mine_and_slash.database.data.profession.ExplainedResult;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
 import com.robertx22.mine_and_slash.saveclasses.prof_tool.ProfessionToolData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.StackSaving;
 import com.robertx22.temp.SkillItemTier;
@@ -45,5 +46,10 @@ public class ProfDropTierPickerCurrency extends ProfCurrency {
     @Override
     public int Weight() {
         return 0;
+    }
+
+    @Override
+    public WorksOnBlock.ItemType usedOn() {
+        return WorksOnBlock.ItemType.TOOLS;
     }
 }

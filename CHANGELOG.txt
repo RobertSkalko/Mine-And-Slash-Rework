@@ -3,3 +3,9 @@ Changelog of recent updates: https://github.com/RobertSkalko/Mine-And-Slash-Rewo
 v.5.6.4
 - added a temp-fix for possible lag during map teleports. First 5s will be silenced
 - extractors now tell what rarity gear they can be used on
+- added new config, chat exp messages
+- added names to features
+- map mobs now no longer drop loot and exp if they aren't spawned properly. 
+Currently there's 2 ways to spawn a mob properly: mob processors (custom mine and slash feature) and command blocks with /summon command.
+The summon command compat only exists temporarily because a few maps use them to spawn mobs.
+Any mobs not spawned this way will drop ZERO loot and exp. So vexes spawned by illagers, or any mobs spawned with unintentional mechanics will just drop zero rewards.

@@ -64,7 +64,7 @@ public class CraftedInfusionItem extends AutoItem implements IRarityItem, IItemA
         var tier = LeveledItem.getTier(pStack);
         l.clear();
         l.addAll(new ExileTooltips()
-                .accept(new WorksOnBlock(WorksOnBlock.Type.USABLE_ON).itemTypes(WorksOnBlock.ItemType.GEAR))
+                .accept(WorksOnBlock.usableOn(WorksOnBlock.ItemType.GEAR))
                 .accept(new NameBlock(Collections.singletonList(pStack.getHoverName())))
                 .accept(new RarityBlock(getRarity()))
                 .accept(new UsageBlock(() -> {

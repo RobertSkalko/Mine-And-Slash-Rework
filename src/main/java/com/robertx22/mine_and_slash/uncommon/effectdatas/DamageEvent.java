@@ -1,5 +1,7 @@
 package com.robertx22.mine_and_slash.uncommon.effectdatas;
 
+import com.robertx22.library_of_exile.main.Packets;
+import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.mine_and_slash.aoe_data.database.ailments.Ailment;
 import com.robertx22.mine_and_slash.capability.entity.CooldownsData;
 import com.robertx22.mine_and_slash.capability.player.data.PlayerConfigData;
@@ -32,8 +34,6 @@ import com.robertx22.mine_and_slash.uncommon.enumclasses.WeaponTypes;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.*;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.DmgNumPacket;
-import com.robertx22.library_of_exile.main.Packets;
-import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -380,7 +380,7 @@ public class DamageEvent extends EffectEvent {
         MutableComponent ele = Component.literal(getElement().getIconNameDmg());
 
         if (info.isMixedDamage()) {
-            ele = Component.literal(Elements.Elemental.getIconNameDmg());
+            ele = Component.literal("\u2600" + " ").append(Words.MULTI_ELEMENT.locName()).withStyle(ChatFormatting.LIGHT_PURPLE);
         }
 
         return Words.DAMAGE_MESSAGE.locName(source.getDisplayName(), MMORPG.DECIMAL_FORMAT.format(info.totalDmg), ele, getDamageName())

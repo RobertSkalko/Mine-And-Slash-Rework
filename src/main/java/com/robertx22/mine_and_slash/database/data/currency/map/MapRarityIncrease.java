@@ -6,6 +6,7 @@ import com.robertx22.mine_and_slash.database.data.currency.base.Currency;
 import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.BaseLocRequirement;
 import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.mine_and_slash.database.data.profession.ExplainedResult;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
 import com.robertx22.mine_and_slash.loot.LootInfo;
 import com.robertx22.mine_and_slash.loot.blueprints.MapBlueprint;
 import com.robertx22.mine_and_slash.loot.req.DropRequirement;
@@ -20,6 +21,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MapRarityIncrease extends Currency {
+    @Override
+    public WorksOnBlock.ItemType usedOn() {
+        return WorksOnBlock.ItemType.MAP;
+    }
 
     @Override
     public ItemStack internalModifyMethod(LocReqContext ctx, ItemStack stack, ItemStack currency) {

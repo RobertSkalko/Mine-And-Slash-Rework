@@ -89,11 +89,21 @@ public class ExileTooltips {
                 .forEachOrdered(x -> list.addAll(x.getAvailableComponents()));
 
         list.add(EMPTY_LINE);
+
+        Optional.ofNullable(collect.get(BlockCategories.OPERATION)).ifPresent(x -> {
+            for (AbstractTextBlock text : x) {
+                list.addAll(text.getAvailableComponents());
+            }
+        });
+        // why did he only allow 1 operation block?
+/*
         Optional.ofNullable(collect.get(BlockCategories.OPERATION))
                 //also I don't think we need multiple operation blocks.
                 .map(x -> x.get(0))
                 .map(AbstractTextBlock::getAvailableComponents)
                 .ifPresent(list::addAll);
+
+ */
 
 
         while (list.get(list.size() - 1).getString().isBlank()) {

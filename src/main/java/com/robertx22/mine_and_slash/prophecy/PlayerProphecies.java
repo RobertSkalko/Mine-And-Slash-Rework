@@ -43,7 +43,6 @@ public class PlayerProphecies implements IStatCtx {
 
         this.mapid = map.uuid;
 
-
         numMobAffixesCanAdd = 0;
         affixesTaken.clear();
 
@@ -119,8 +118,11 @@ public class PlayerProphecies implements IStatCtx {
         List<ExactStatData> list = new ArrayList<>();
 
         if (WorldUtils.isMapWorldClass(en.level())) {
-            for (String s : this.affixesTaken) {
-                list.addAll(ExileDB.MapAffixes().get(s).getStats(100, Load.Unit(en).getLevel()));
+            var map = Load.mapAt(en.level(), en.blockPosition());
+            if (map != null && map.map.uuid.equals(this.mapid)) {
+                for (String s : this.affixesTaken) {
+                    list.addAll(ExileDB.MapAffixes().get(s).getStats(100, Load.Unit(en).getLevel()));
+                }
             }
         }
 

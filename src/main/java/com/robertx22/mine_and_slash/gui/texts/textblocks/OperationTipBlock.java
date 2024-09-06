@@ -53,10 +53,6 @@ public class OperationTipBlock extends AbstractTextBlock {
         return this;
     }
 
-    public OperationTipBlock addDraggableTipAbove(AvailableTarget target) {
-        this.additionalOperation.add(target.component);
-        return this;
-    }
 
     @Override
     public List<? extends Component> getAvailableComponents() {
@@ -86,16 +82,5 @@ public class OperationTipBlock extends AbstractTextBlock {
         return ExileTooltips.BlockCategories.OPERATION;
     }
 
-
-    public enum AvailableTarget {
-        GEAR_SOUL(Itemtips.SOUL_MODIFIER_USE_TIP.locName().withStyle(ChatFormatting.BLUE)),
-        GEAR(Itemtips.GEAR_SOUL_USE_TIP.locName().withStyle(ChatFormatting.BLUE));
-
-        public final Component component;
-
-        AvailableTarget(Component component) {
-            this.component = component;
-        }
-    }
 
 }

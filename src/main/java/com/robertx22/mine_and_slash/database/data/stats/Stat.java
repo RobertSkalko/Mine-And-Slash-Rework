@@ -1,5 +1,10 @@
 package com.robertx22.mine_and_slash.database.data.stats;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.IGUID;
+import com.robertx22.library_of_exile.registry.IWeighted;
+import com.robertx22.library_of_exile.registry.JsonExileRegistry;
+import com.robertx22.library_of_exile.wrappers.ExileText;
 import com.robertx22.mine_and_slash.database.data.StatMod;
 import com.robertx22.mine_and_slash.database.data.stats.datapacks.base.BaseDatapackStat;
 import com.robertx22.mine_and_slash.database.data.stats.effects.base.BaseDamageIncreaseEffect;
@@ -22,11 +27,6 @@ import com.robertx22.mine_and_slash.uncommon.localization.Formatter;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientTextureUtils;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.TooltipUtils;
-import com.robertx22.library_of_exile.registry.ExileRegistryType;
-import com.robertx22.library_of_exile.registry.IGUID;
-import com.robertx22.library_of_exile.registry.IWeighted;
-import com.robertx22.library_of_exile.registry.JsonExileRegistry;
-import com.robertx22.library_of_exile.wrappers.ExileText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -63,7 +63,7 @@ public abstract class Stat implements IGUID, IAutoLocName, IWeighted, IAutoLocDe
     public transient IStatCtxModifier statContextModifier;
 
     public float min = -1000;
-    public float max = Integer.MAX_VALUE;
+    public float max = 99999999F;
     private float softcap = 0;
     public boolean has_softcap = false;
     public float base = 0;

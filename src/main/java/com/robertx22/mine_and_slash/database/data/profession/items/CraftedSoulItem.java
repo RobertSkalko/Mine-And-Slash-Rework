@@ -9,7 +9,6 @@ import com.robertx22.mine_and_slash.database.data.profession.all.Professions;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
-import com.robertx22.mine_and_slash.gui.texts.textblocks.AdditionalBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.NameBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.dropblocks.ProfessionDropSourceBlock;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
@@ -17,14 +16,11 @@ import com.robertx22.mine_and_slash.saveclasses.gearitem.gear_bases.TooltipConte
 import com.robertx22.mine_and_slash.saveclasses.stat_soul.StatSoulData;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IRarityItem;
-import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.ClientOnly;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.StringUTIL;
 import com.robertx22.mine_and_slash.vanilla_mc.items.misc.AutoItem;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -72,11 +68,6 @@ public class CraftedSoulItem extends AutoItem implements ICreativeTabTiered, IRa
                 ExileTooltips tooltip = soul.getTooltip(pStack, false);
                 tooltip.accept(new NameBlock(Collections.singletonList(pStack.getHoverName())));
                 tooltip.accept(new ProfessionDropSourceBlock(Professions.GEAR_CRAFTING));
-
-                Player p = ClientOnly.getPlayer();
-                if (p != null && p.isCreative()) {
-                    tooltip.accept(new AdditionalBlock(Words.DRAG_NO_WORK_CREATIVE.locName().withStyle(ChatFormatting.RED, ChatFormatting.BOLD)));
-                }
                 list.addAll(tooltip.release());
             }
         }

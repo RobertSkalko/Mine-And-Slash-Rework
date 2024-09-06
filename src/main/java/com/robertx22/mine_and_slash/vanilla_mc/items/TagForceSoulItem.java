@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.vanilla_mc.items;
 import com.robertx22.mine_and_slash.database.data.currency.base.IShapelessRecipe;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.OperationTipBlock;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.usableitemblocks.UsageBlock;
 import com.robertx22.mine_and_slash.tags.all.SlotTags;
 import com.robertx22.mine_and_slash.uncommon.localization.Itemtips;
@@ -64,10 +65,11 @@ public class TagForceSoulItem extends AutoItem implements IShapelessRecipe {
         pTooltipComponents.addAll(
                 new ExileTooltips()
                         .accept(new UsageBlock(Collections.singletonList(Itemtips.SOUL_MODIFIER_TIP.locName().withStyle(ChatFormatting.AQUA))))
-                        .accept(new OperationTipBlock().addDraggableTipAbove(OperationTipBlock.AvailableTarget.GEAR_SOUL)).release());
+                        .accept((WorksOnBlock.usableOn(WorksOnBlock.ItemType.SOUL)))
+                        .accept(new OperationTipBlock()).release());
     }
 
-    public enum AvailableTags{
+    public enum AvailableTags {
         PLATE(SlotTags.armor_stat.GUID(), "Plate", Words.GEAR_LOCKED_TYPE_PLATE.locName()),
         LEATHER(SlotTags.dodge_stat.GUID(), "Leather", Words.GEAR_LOCKED_TYPE_LEATHER.locName()),
         CLOTH(SlotTags.magic_shield_stat.GUID(), "Cloth", Words.GEAR_LOCKED_TYPE_CLOTH.locName());

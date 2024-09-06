@@ -1,11 +1,12 @@
 package com.robertx22.mine_and_slash.database.data.currency.jewel;
 
+import com.robertx22.library_of_exile.utils.RandomUtils;
+import com.robertx22.library_of_exile.utils.SoundUtils;
 import com.robertx22.mine_and_slash.database.data.currency.base.JewelCurrency;
 import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.mine_and_slash.database.data.profession.ExplainedResult;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
 import com.robertx22.mine_and_slash.saveclasses.jewel.JewelItemData;
-import com.robertx22.library_of_exile.utils.RandomUtils;
-import com.robertx22.library_of_exile.utils.SoundUtils;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -49,5 +50,10 @@ public class JewelCorruptCurrency extends JewelCurrency {
     @Override
     public int Weight() {
         return 500;
+    }
+
+    @Override
+    public WorksOnBlock.ItemType usedOn() {
+        return WorksOnBlock.ItemType.JEWEL;
     }
 }

@@ -128,11 +128,12 @@ public class SlashItems {
     public static RegObj<Item> SOUL_CLEANER = Def.item(() -> new SoulCleanerItem(), "soul_cleaner");
 
 
+    /*
     public static RegObj<Item> INFUSED_IRON = Def.item(() -> new SimpleMatItem(), "mat/infused_iron");
     public static RegObj<Item> CRYSTALLIZED_ESSENCE = Def.item(() -> new SimpleMatItem(), "mat/crystallized_essence");
     public static RegObj<Item> GOLDEN_ORB = Def.item(() -> new SimpleMatItem(), "mat/golden_orb");
     public static RegObj<Item> MYTHIC_ESSENCE = Def.item(() -> new SimpleMatItem(), "mat/mythic_essence");
-
+     */
 
     public static RegObj<LootChestItem> CURRENCY_CHEST = Def.item(() -> new LootChestItem("Currency"), "chest/currency");
 

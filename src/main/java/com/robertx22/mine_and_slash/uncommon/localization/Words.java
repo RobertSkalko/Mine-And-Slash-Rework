@@ -12,6 +12,9 @@ public enum Words implements IAutoLocName {
     RARITIES("Rarities:"),
     ITEM_TYPES("Item Types:"),
     SUCCESS("Sucess"),
+    TOOL("Tool"),
+    TOOL_DESC("Items used for gathering Professions. Gaining Profession Exp once with a tool will give it a soul."),
+    MULTI_ELEMENT("Multi-Element Damage"),
     GEAR_LOCKED_TYPE_PLATE("Plate"),
     GEAR_LOCKED_TYPE_LEATHER("Leather"),
     GEAR_LOCKED_TYPE_CLOTH("Cloth"),
@@ -47,23 +50,36 @@ public enum Words implements IAutoLocName {
 
     DAMAGE_MESSAGE("[%1$s] dealt %2$s %3$s with %4$s"),
 
-    LOOT_MODIFIERS_INFO("Loot Modifiers:"),
+    LOOT_MODIFIERS_INFO("Modifiers:"),
 
     MOB_KILL_LOOT_INFO_MSG("Killed [%1$s]."),
     MOB_DROPS_INFO(" +%1$s Drops"),
     ENABLED("Enabled"),
     DISABLED("Disabled"),
 
-    CAST_FAIL_MSGS("Spell Casting Failure Messages\n\nWill print helpful messages when you fail to cast a spell\nParticularly Helpful for New Players\nPlayers below lvl 15 can't disable this option."),
+    TITLE_FEATURE_CAST_FAIL("Spell-Cast Failure Messages"),
+    TITLE_FEATURE_MOB_KILL_LOOT("Mob-Kill Loot Drop Messages"),
+    TITLE_FEATURE_EXP_MSG("Exp Gain Messages"),
+    TITLE_FEATURE_DAMAGE_LOG("Damage Chat-Log"),
+    TITLE_FEATURE_PROF_EXP("Profession Exp Messages"),
+    TITLE_FEATURE_AUTO_TEAM("Auto-Team Nearby Players"),
+    TITLE_FEATURE_STAT_ORDER_DEBUG("STAT ORDER DEBUG"),
+    TITLE_FEATURE_DMG_CONFLICT_DEBUG("DMG CONFLICT DEBUG"),
+    TITLE_FEATURE_AGGRO_SUMMONS("Aggressive Summons"),
+    TITLE_FEATURE_EVERYONE_ALLY("Everyone is Considered an Ally"),
+    TITLE_FEATURE_DROP_MAP_CHEST_ITEMS("Drop Map Chest Contents When Looted"),
+
+    CAST_FAIL_MSGS("Will print helpful messages when you fail to cast a spell\nParticularly Helpful for New Players\nPlayers below lvl 15 can't disable this option."),
     MOB_DEATH_MESSAGES("Provides a short message when you kill a mob.\n\nYou can hover over it for useful info like Loot Chance"),
+    EXP_CHAT_MESSAGES("Sends a Message in chat when you gain Exp\n\nYou can hover over it for useful info like exp multipliers"),
     DAMAGE_MESSAGES("Provides a short message when you damage a mob.\n\nYou can hover over it for useful info like how was damage modified"),
     PROFESSION_MESSAGES("Provides a short message when you gain profession exp.\n\nYou can hover over it for useful info like how the exp was modified"),
-    AUTOMATIC_PVE("Auto-Team Nearby Players\n\nPlayers who enable this are considered Teamed up and Allies\n- Must be Nearby (Radius set by config)"),
+    AUTOMATIC_PVE("Players who enable this are considered Teamed up and Allies\n- Must be Nearby (Radius set by config)"),
     STAT_ORDER_TEST("Stat Order Test [Debug Option]\nThis runs a few tests when you attack something to be sure the stats are working in correct order and sends warning message if they don't. Only use when debugging stats. For example, crit chance should work before crit damage stat"),
     DMG_CONFLICT_CHECK("Mod Conflict Check [Debug Option]\n\nChecks if Mine and Slash damage has been overrided by another mod.\nSends a message to player if there's a problem.\n THIS IS A DEBUG OPTION"),
-    AGGRESIVE_SUMMONS("Aggressive Summons\n\nYour summons will now attack anything they guess is an enemy, and on longer need guidance from you.\n\nYou need to Re-Summon your minions for this to take effect"),
-    EVERYONE_IS_ALLY("Everyone is Considered an Ally\n\nBy default your spells only target your MNS team members and yourself.\n\nWith this enabled, your heals, buffs etc will target everyone, including possible enemies!"),
-    DROP_MAP_CHEST_CONTENTS_ON_GROUND("Drop Map Chest Contents When Looted\n\nWhen you loot chests in maps, should they drop their contents on the ground automatically? \n\nThis is helpful if you use the Master Backpack or other loot filtering mods like Sophisticated Backpacks."),
+    AGGRESIVE_SUMMONS("Your summons will now attack anything they guess is an enemy, and on longer need guidance from you.\n\nYou need to Re-Summon your minions for this to take effect"),
+    EVERYONE_IS_ALLY("By default your spells only target your MNS team members and yourself.\n\nWith this enabled, your heals, buffs etc will target everyone, including possible enemies!"),
+    DROP_MAP_CHEST_CONTENTS_ON_GROUND("When you loot chests in maps, should they drop their contents on the ground automatically? \n\nThis is helpful if you use the Master Backpack or other loot filtering mods like Sophisticated Backpacks."),
 
     WHILE_UNDER_AURA("While Under Effect of %1$s:"),
     CURSE_OFFERS("Curse Offers:"),
@@ -144,6 +160,8 @@ public enum Words implements IAutoLocName {
     UpgradesUniqueStats("Adds 10% to unique stats"),
 
     Soul("Soul"),
+    GEAR_SOUL("Gear Soul"),
+    GEAR_SOUL_DESC("Souls are one way of adding Mine and Slash stats to Gear."),
     DungeonKey("Dungeon Key"),
     Corrupted("Corrupted"),
     CorruptsItemHarvest("Turns the Item Corrupted (no benefits)"),
@@ -153,7 +171,9 @@ public enum Words implements IAutoLocName {
     SkillGem("Skill Gem"),
     Hotbar("Spell Hotbar"),
     Gear("Gear"),
-    Gear_DESC("Armors, Weapons and Jewlery. It's a Gear as long as it has Mine and Slash stats."),
+    SOULLESS_Gear("Soul-less Gear"),
+    SOULLESS_Gear_DESC("Armor, jewelry or weapon item that does not have Mine and Slash stats yet."),
+    Gear_DESC("Armors, Weapons and Jewelry. It's a Gear as long as it has Mine and Slash stats."),
 
 
     All("All"),
@@ -214,6 +234,7 @@ public enum Words implements IAutoLocName {
 
 
     Jewel("Jewel"),
+    Jewel_DESC("Items that boost a player's stats if socketed into the Jewel gui."),
     Jewels("Jewels"),
 
 
@@ -228,6 +249,7 @@ public enum Words implements IAutoLocName {
     Level("Level"),
 
     Map("Map"),
+    MapDESC("Items used to travel to a Dungeon Dimension using the Map Device."),
 
     Maps("Maps"),
 

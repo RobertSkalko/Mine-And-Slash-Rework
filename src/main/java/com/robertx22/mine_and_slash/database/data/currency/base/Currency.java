@@ -1,9 +1,14 @@
 package com.robertx22.mine_and_slash.database.data.currency.base;
 
+import com.robertx22.library_of_exile.registry.ExileRegistry;
+import com.robertx22.library_of_exile.registry.ExileRegistryType;
+import com.robertx22.library_of_exile.registry.IGUID;
+import com.robertx22.library_of_exile.registry.IWeighted;
 import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.BaseLocRequirement;
 import com.robertx22.mine_and_slash.database.data.currency.loc_reqs.LocReqContext;
 import com.robertx22.mine_and_slash.database.data.profession.ExplainedResult;
 import com.robertx22.mine_and_slash.database.registry.ExileRegistryTypes;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
 import com.robertx22.mine_and_slash.loot.req.DropRequirement;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.mmorpg.registers.common.items.CurrencyItems;
@@ -11,10 +16,6 @@ import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocDesc;
 import com.robertx22.mine_and_slash.uncommon.interfaces.IAutoLocName;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.TooltipUtils;
-import com.robertx22.library_of_exile.registry.ExileRegistry;
-import com.robertx22.library_of_exile.registry.ExileRegistryType;
-import com.robertx22.library_of_exile.registry.IGUID;
-import com.robertx22.library_of_exile.registry.IWeighted;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -33,6 +34,8 @@ public abstract class Currency implements IWeighted, IAutoLocName, IAutoLocDesc,
 
     }
 
+
+    public abstract WorksOnBlock.ItemType usedOn();
 
     public Item getCurrencyItem() {
 

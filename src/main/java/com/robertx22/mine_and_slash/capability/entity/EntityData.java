@@ -8,6 +8,7 @@ import com.robertx22.library_of_exile.wrappers.ExileText;
 import com.robertx22.mine_and_slash.capability.DirtySync;
 import com.robertx22.mine_and_slash.capability.bases.EntityGears;
 import com.robertx22.mine_and_slash.capability.bases.INeededForClient;
+import com.robertx22.mine_and_slash.capability.player.data.PlayerConfigData;
 import com.robertx22.mine_and_slash.characters.PlayerStats;
 import com.robertx22.mine_and_slash.config.forge.ServerContainer;
 import com.robertx22.mine_and_slash.database.data.game_balance_config.GameBalanceConfig;
@@ -23,6 +24,7 @@ import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.event_hooks.damage_hooks.util.AttackInformation;
 import com.robertx22.mine_and_slash.event_hooks.ontick.UnequipGear;
 import com.robertx22.mine_and_slash.event_hooks.player.OnLogin;
+import com.robertx22.mine_and_slash.loot.LootModifiersList;
 import com.robertx22.mine_and_slash.mmorpg.MMORPG;
 import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.saveclasses.CustomExactStatsData;
@@ -50,21 +52,24 @@ import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.localization.Gui;
 import com.robertx22.mine_and_slash.uncommon.localization.Words;
 import com.robertx22.mine_and_slash.uncommon.threat_aggro.ThreatData;
-import com.robertx22.mine_and_slash.uncommon.utilityclasses.*;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.EntityTypeUtils;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.LevelUtils;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.NumberUtils;
+import com.robertx22.mine_and_slash.uncommon.utilityclasses.OnScreenMessageUtils;
 import com.robertx22.mine_and_slash.vanilla_mc.packets.EntityUnitPacket;
 import com.robertx22.mine_and_slash.vanilla_mc.potion_effects.EntityStatusEffectsData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -129,6 +134,7 @@ public class EntityData implements ICap, INeededForClient {
     private static final String CUSTOM_STATS = "custom_stats";
     private static final String LEECH = "leech";
     private static final String MAP_ID = "mapid";
+    private static final String MAP_MOB = "map_mob";
 
 
     public DirtySync sync = new DirtySync("endata sync", x -> syncData());
@@ -146,6 +152,8 @@ public class EntityData implements ICap, INeededForClient {
     public SummonedPetData summonedPetData = new SummonedPetData();
 
     public String mapUUID = "";
+    public boolean isCorrectlySpawnedMapMob = false;
+
 
     // sync these for mobs
     transient Unit unit = new Unit();
@@ -185,23 +193,15 @@ public class EntityData implements ICap, INeededForClient {
         boss.setupRandomBoss();
     }
 
-    public boolean canDespawnMapMob() {
-        if (this.entity instanceof Player) {
-            return false;
-        }
-        if (!WorldUtils.isDungeonWorld(entity.level())) {
-            return false;
-        }
-        var map = Load.mapAt(entity.level(), entity.blockPosition());
 
-        if (map == null) {
+    public boolean isValidMapMob() {
+        if (isCorrectlySpawnedMapMob) {
             return true;
         }
-        if (map.map != null && !map.map.uuid.equals(this.mapUUID)) {
-            return true;
+        if (this.entity instanceof Mob mob) {
+            return mob.getSpawnType() == MobSpawnType.COMMAND;
         }
-        return false;
-
+        return true;
     }
 
     @Override
@@ -264,6 +264,7 @@ public class EntityData implements ICap, INeededForClient {
         nbt.putString(MAP_ID, this.mapUUID);
         nbt.putBoolean(SET_MOB_STATS, setMobStats);
         nbt.putBoolean(NEWBIE_STATUS, this.isNewbie);
+        nbt.putBoolean(MAP_MOB, this.isCorrectlySpawnedMapMob);
 
         LoadSave.Save(cooldowns, nbt, COOLDOWNS);
         LoadSave.Save(ailments, nbt, AILMENTS);
@@ -317,10 +318,11 @@ public class EntityData implements ICap, INeededForClient {
         this.uuid = nbt.getString(UUID);
         this.mapUUID = nbt.getString(MAP_ID);
         this.setMobStats = nbt.getBoolean(SET_MOB_STATS);
+
         if (nbt.contains(NEWBIE_STATUS)) {
             this.isNewbie = nbt.getBoolean(NEWBIE_STATUS);
         }
-
+        this.isCorrectlySpawnedMapMob = nbt.getBoolean(MAP_MOB);
 
         try {
             this.summonedPetData = loadOrBlank(SummonedPetData.class, new SummonedPetData(), nbt, PET, new SummonedPetData());
@@ -776,18 +778,15 @@ public class EntityData implements ICap, INeededForClient {
         this.setLevel(lvl.getLevel());
     }
 
-    public int GiveExp(Player player, int i) {
+    public int GiveExp(Player player, int i, LootModifiersList mods) {
         if (player.isDeadOrDying()) {
             return i;
         }
-
-
         if (expDebt > 0) {
             int reduced = MathHelper.clamp(i / 2, 0, expDebt);
             i -= reduced;
             this.expDebt -= reduced;
         }
-
         var rested = Load.player(player).rested_xp;
 
         rested.onGiveCombatExp(i);
@@ -798,11 +797,18 @@ public class EntityData implements ICap, INeededForClient {
             i += added;
         }
 
-
         setExp(exp + i);
 
         float perc = MathHelper.clamp(1.0f * exp / getExpRequiredForLevelUp() * 100F, 0.0f, 100.0f);
-        OnScreenMessageUtils.actionBar((ServerPlayer) player, Gui.EXP_GAIN_PERCENT.locName(i, "", NumberUtils.singleDigitFloat(perc)).withStyle(ChatFormatting.GREEN));
+        var msg = Gui.EXP_GAIN_PERCENT.locName(i, "", NumberUtils.singleDigitFloat(perc)).withStyle(ChatFormatting.GREEN);
+
+        if (mods != null) {
+            if (Load.player(player).config.isConfigEnabled(PlayerConfigData.Config.EXP_CHAT_MESSAGES)) {
+                msg.withStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, mods.getHoverText())));
+                player.sendSystemMessage(msg);
+            }
+        }
+        OnScreenMessageUtils.actionBar((ServerPlayer) player, msg);
 
         if (exp >= this.getExpRequiredForLevelUp()) {
             if (this.CheckIfCanLevelUp() && this.CheckLevelCap()) {

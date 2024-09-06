@@ -18,6 +18,7 @@ import com.robertx22.mine_and_slash.database.data.profession.ExplainedResult;
 import com.robertx22.mine_and_slash.database.data.runes.Rune;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
 import com.robertx22.mine_and_slash.gui.texts.ExileTooltips;
+import com.robertx22.mine_and_slash.gui.texts.textblocks.AdditionalBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.OperationTipBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.StatBlock;
 import com.robertx22.mine_and_slash.gui.texts.textblocks.WorksOnBlock;
@@ -283,15 +284,17 @@ public class RuneItem extends Item implements IGUID, IAutoModel, IAutoLocName, I
                     return statsTooltip();
                 }
             });
-            t.accept(new OperationTipBlock().setAlt().setShift());
-            t.accept(new WorksOnBlock(WorksOnBlock.Type.USABLE_ON).itemTypes(WorksOnBlock.ItemType.GEAR));
             t.accept(new UsageBlock(splitLongText(Itemtips.RUNE_ITEM_USAGE.locName().withStyle(ChatFormatting.BLUE))));
+            t.accept(WorksOnBlock.usableOn(WorksOnBlock.ItemType.GEAR));
+            t.accept(new OperationTipBlock().setAlt().setShift());
             Rune rune = this.getRune();
 
             if (rune.Weight() > 0) {
                 var lvl = Load.Unit(ClientOnly.getPlayer()).getLevel();
                 t.accept(new DropLevelBlock(rune.getReqLevelToDrop(), GameBalanceConfig.get().MAX_LEVEL));
                 t.accept(new DropChanceBlock(RunePart.droppableAtLevel(lvl).getDropChance(rune)));
+            } else {
+                t.accept(new AdditionalBlock(Itemtips.NOT_A_RANDOM_MNS_DROP_CHECK_MODPACK.locName().withStyle(ChatFormatting.BLUE)));
             }
 
             tooltip.addAll(t.release());
