@@ -1,4 +1,4 @@
-package com.robertx22.mine_and_slash.vanilla_mc.packets;
+package com.robertx22.mine_and_slash.vanilla_mc.packets.spells.result;
 
 import com.robertx22.library_of_exile.main.MyPacket;
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap;
@@ -8,9 +8,9 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.function.Supplier;
 
-public abstract class ExileNumberParticlePacket extends MyPacket<ExileNumberParticlePacket> {
+public abstract class ExileSpellResultParticlePacket extends MyPacket<ExileSpellResultParticlePacket> {
 
-    public static Object2ObjectMap<ResourceLocation, Supplier<ExileNumberParticlePacket>> map = new Object2ObjectArrayMap<>();
+    public static Object2ObjectMap<ResourceLocation, Supplier<ExileSpellResultParticlePacket>> map = new Object2ObjectArrayMap<>();
     public static void registerAll(){
         new ElementDamageParticlePacket().register();
     }

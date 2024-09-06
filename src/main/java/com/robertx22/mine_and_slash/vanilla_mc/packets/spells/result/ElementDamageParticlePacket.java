@@ -1,4 +1,4 @@
-package com.robertx22.mine_and_slash.vanilla_mc.packets;
+package com.robertx22.mine_and_slash.vanilla_mc.packets.spells.result;
 
 import com.robertx22.library_of_exile.main.MyPacket;
 import com.robertx22.library_of_exile.packets.ExilePacketContext;
@@ -7,7 +7,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
 
-public class ElementDamageParticlePacket extends ExileNumberParticlePacket {
+public class ElementDamageParticlePacket extends ExileSpellResultParticlePacket {
 
     @Override
     public String spawnParticle(Vec3 position) {
@@ -35,7 +35,7 @@ public class ElementDamageParticlePacket extends ExileNumberParticlePacket {
     }
 
     @Override
-    public MyPacket<ExileNumberParticlePacket> newInstance() {
+    public MyPacket<ExileSpellResultParticlePacket> newInstance() {
         return null;
     }
 }
