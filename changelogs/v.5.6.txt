@@ -65,3 +65,6 @@ v.5.6.4
 Currently there's 2 ways to spawn a mob properly: mob processors (custom mine and slash feature) and command blocks with /summon command.
 The summon command compat only exists temporarily because a few maps use them to spawn mobs.
 Any mobs not spawned this way will drop ZERO loot and exp. So vexes spawned by illagers, or any mobs spawned with unintentional mechanics will just drop zero rewards.
+
+v.5.6.5
+- try to fix the datapack error check false positive

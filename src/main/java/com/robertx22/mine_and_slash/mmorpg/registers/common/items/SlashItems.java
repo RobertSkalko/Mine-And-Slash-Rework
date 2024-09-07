@@ -103,7 +103,7 @@ public class SlashItems {
 
     public static RegObj<StatSoulItem> STAT_SOUL = Def.item(() -> new StatSoulItem(), "stat_soul");
     public static RegObj<MapItem> MAP = Def.item(() -> new MapItem(), "map");
-    public static RegObj<Item> MAP_SETTER = Def.item(() -> new Item(new Item.Properties()), "set_map");
+    public static RegObj<Item> MAP_SETTER = Def.item(() -> new Item(new Item.Properties()), "set_map"); // todo add tooltips for this
     public static RegObj<Item> MAP_DEVICE = Def.item(() -> new BlockItem(SlashBlocks.MAP.get(), new Item.Properties()), "teleporter");
     public static RegObj<Item> TP_BACK = Def.item(() -> new TpBackItem(), "tp_back");
     public static RegObj<Item> INVISIBLE_ICON = Def.item(() -> new Item(new Item.Properties()), "invisible_item");

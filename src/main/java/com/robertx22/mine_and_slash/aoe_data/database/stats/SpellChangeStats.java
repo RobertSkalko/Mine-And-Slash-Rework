@@ -25,7 +25,7 @@ public class SpellChangeStats {
             .addAllOfType(AuraGems.ALL)
             .setPriority(StatPriority.Spell.FIRST)
             .setSide(EffectSides.Source)
-            .setLocName(x -> Stat.format(x.name + " Cost"))
+            .setLocName(x -> Stat.format(x.name + " Augment Cost"))
             .setLocDesc(x -> "")
             .modifyAfterDone(x -> {
                 x.is_perc = true;
