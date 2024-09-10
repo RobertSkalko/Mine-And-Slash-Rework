@@ -46,7 +46,13 @@ public class SpellHotbarOverlay {
     );
 
     private static final ResourceLocation CHARGE = new ResourceLocation(SlashRef.MODID,
-            "textures/gui/spells/charge_icon.png"
+            "textures/gui/spells/full_charges.png"
+    );
+    private static final ResourceLocation LOW_CHARGE = new ResourceLocation(SlashRef.MODID,
+            "textures/gui/spells/low_charges.png"
+    );
+    private static final ResourceLocation NO_CHARGE = new ResourceLocation(SlashRef.MODID,
+            "textures/gui/spells/no_charges.png"
     );
     private static final ResourceLocation KEY_BG = new ResourceLocation(SlashRef.MODID,
             "textures/gui/spells/keybind_bg.png"
@@ -55,7 +61,7 @@ public class SpellHotbarOverlay {
             "textures/gui/spells/modbg.png"
     );
 
-    int CHARGE_SIZE = 9;
+    int CHARGE_SIZE = 20;
 
 
     Minecraft mc = Minecraft.getInstance();
@@ -183,6 +189,17 @@ public class SpellHotbarOverlay {
                     int charges = Load.player(mc.player)
                             .spellCastingData.charges.getCharges(spell.config.charge_name);
 
+                    ResourceLocation chargeTex = CHARGE;
+
+                    if (charges == 0) {
+                        chargeTex = NO_CHARGE;
+
+                    } else {
+                        if (charges != spell.config.charges) {
+                            chargeTex = LOW_CHARGE;
+                        }
+                    }
+
                     if (charges == 0) {
                         float needed = (float) spell.config.charge_regen;
                         float currentticks = (float) Load.player(mc.player)
@@ -196,12 +213,11 @@ public class SpellHotbarOverlay {
 
                     }
 
-                    int chargex = x + 21;
+                    int chargex = x - 2;
 
-                    for (int i = 0; i < charges; i++) {
-                        gui.blit(CHARGE, chargex, y + 5, 0, 0, CHARGE_SIZE, CHARGE_SIZE, CHARGE_SIZE, CHARGE_SIZE);
-                        chargex += CHARGE_SIZE + 1;
-                    }
+                    gui.blit(chargeTex, chargex, y - 2, 0, 0, CHARGE_SIZE, CHARGE_SIZE, CHARGE_SIZE, CHARGE_SIZE);
+                    //    chargex += CHARGE_SIZE + 1;
+
 
                 } else {
 
