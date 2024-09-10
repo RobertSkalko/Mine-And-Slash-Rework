@@ -2,6 +2,7 @@ package com.robertx22.mine_and_slash.saveclasses.stat_soul;
 
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.utils.LoadSave;
+import com.robertx22.mine_and_slash.a_libraries.jei.iHideJei;
 import com.robertx22.mine_and_slash.database.data.gear_slots.GearSlot;
 import com.robertx22.mine_and_slash.database.data.rarities.GearRarity;
 import com.robertx22.mine_and_slash.database.registry.ExileDB;
@@ -32,7 +33,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt {
+public class StatSoulItem extends Item implements IGUID, ICreativeTabNbt, iHideJei {
 
     public static String TAG = "stat_soul";
 

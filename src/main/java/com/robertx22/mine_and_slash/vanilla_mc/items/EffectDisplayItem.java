@@ -1,10 +1,11 @@
 package com.robertx22.mine_and_slash.vanilla_mc.items;
 
+import com.robertx22.mine_and_slash.a_libraries.jei.iHideJei;
 import com.robertx22.mine_and_slash.aoe_data.datapacks.models.IAutoModel;
 import com.robertx22.mine_and_slash.aoe_data.datapacks.models.ItemModelManager;
 import net.minecraft.world.item.Item;
 
-public class EffectDisplayItem extends Item implements IAutoModel {
+public class EffectDisplayItem extends Item implements IAutoModel, iHideJei {
 
     public EffectDisplayItem() {
         super(new Properties());

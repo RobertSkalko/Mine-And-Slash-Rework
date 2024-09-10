@@ -1,4 +1,4 @@
 Changelog of recent updates: https://github.com/RobertSkalko/Mine-And-Slash-Rework/blob/1.20-Forge/changelogs/v.5.6.txt
 
-v.5.6.5
-- try to fix the datapack error check false positive
+v.5.6.6
+- Some useless/confusing items are now hidden from JEI, still available in creative tabs

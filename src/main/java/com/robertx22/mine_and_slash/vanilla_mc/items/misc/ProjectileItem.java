@@ -1,6 +1,8 @@
 package com.robertx22.mine_and_slash.vanilla_mc.items.misc;
 
-public class ProjectileItem extends AutoItem {
+import com.robertx22.mine_and_slash.a_libraries.jei.iHideJei;
+
+public class ProjectileItem extends AutoItem implements iHideJei {
     String id;
 
     public ProjectileItem(String id) {

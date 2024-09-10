@@ -196,7 +196,9 @@ public class MMORPG {
         ProfessionEvents.init();
         DerivedRegistries.init();
 
+    
         watch.print("Mine and slash mod initialization ");
+
 
     }
 
