@@ -16,15 +16,16 @@ public abstract class ExileSpellResultParticle extends Particle{
     private float scale;
     private float prevScale;
 
-    private final IParticleRenderStrategy strategy = new Original();
+    private final IParticleRenderStrategy strategy;
 
 
-    protected ExileSpellResultParticle(ClientLevel clientLevel, double x, double y, double z) {
+    protected ExileSpellResultParticle(ClientLevel clientLevel, double x, double y, double z, IParticleRenderStrategy strategy) {
         super(clientLevel, x, y, z);
         this.lifetime = 15 + clientLevel.random.nextInt(5);
         this.scale = 1.0F;
         this.yd = 0.2F + Math.random() * 0.2F;
         this.gravity = 1.3F;
+        this.strategy = strategy;
     }
 
     @Override

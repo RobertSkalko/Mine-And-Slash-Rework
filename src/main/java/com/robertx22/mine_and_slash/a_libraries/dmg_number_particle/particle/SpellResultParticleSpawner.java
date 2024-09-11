@@ -1,50 +1,60 @@
 package com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle;
 
 import com.google.common.collect.ImmutableMap;
-import com.robertx22.library_of_exile.main.Packets;
-import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.style.IParticleRenderStrategy;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.style.Original;
-import com.robertx22.mine_and_slash.aoe_data.database.unique_gears.uniques.armor.PantsUniques;
+import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
-import com.robertx22.mine_and_slash.uncommon.utilityclasses.NumberUtils;
-import com.robertx22.mine_and_slash.vanilla_mc.packets.DmgNumPacket;
+import com.robertx22.mine_and_slash.vanilla_mc.packets.interaction.IParticleSpawnNotifier;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.Entity;
 
 import java.util.Map;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 public class SpellResultParticleSpawner {
 
-    public static <T> void spawn(Consumer<T> spawnWay, T mat){
-        spawnWay.accept(mat);
-    }
+    public enum SpawnType {
+        DAMAGE(ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().damageStrategy),
+        NULLIFIED_DAMAGE(ClientConfigs.getConfig().DAMAGE_PARTICLE_STYLE.get().nullifiedDamageStrategy);
+        public final BiConsumer<IParticleSpawnNotifier, Entity> strategy;
 
-    public enum Modes{
-        ORIGINAL(Original::new, info -> {
-            var mat = (ElementDamageParticle.DamageInformation)info;
-            SpellResultParticleSpawner.spawn(m -> {
-                ImmutableMap<Elements, Float> dmgMap = m.getDmgMap();
-                for (Map.Entry<Elements, Float> entry : dmgMap.entrySet()) {
-                    if (entry.getValue()
-                            .intValue() > 0) {
-
-                        entry.getKey().format + NumberUtils.formatDamageNumber(this, entry.getValue()
-                                .intValue());
-
-                        DmgNumPacket packet = new DmgNumPacket(target, text, data.isCrit(), entry.getKey().format);
-                        Packets.sendToClient(player, packet);
-                    }
-                }
-            }, mat);
-        }),
-        WYNN;
-
-        public final Supplier<IParticleRenderStrategy> strategySupplier;
-        public final Consumer<?> spawn;
-
-        Modes(Supplier<IParticleRenderStrategy> strategySupplier, Consumer<?> spawn) {
-            this.strategySupplier = strategySupplier;
-            this.spawn = spawn;
+        SpawnType(BiConsumer<IParticleSpawnNotifier, Entity> Strategy) {
+            this.strategy = Strategy;
         }
     }
+
+    public enum ClientParticleSpawnStrategy {
+        ORIGINAL((info, entity) -> {
+            var mat = (ElementDamageParticle.DamageInformation) info;
+            ImmutableMap<Elements, Float> dmgMap = mat.getDmgMap();
+            double x = entity.getRandomX(1.0D);
+            double y = entity.getEyeY();
+            double z = entity.getRandomZ(1.0D);
+
+            boolean crit = ((ElementDamageParticle.DamageInformation) info).isCrit();
+            for (Map.Entry<Elements, Float> entry : dmgMap.entrySet()) {
+                if (entry.getValue()
+                        .intValue() > 0) {
+                    Minecraft.getInstance().particleEngine.add(new ElementDamageParticle(Minecraft.getInstance().level, x, y, z, new Original(), entry.getKey().format.getColor(), crit ? entry.getValue() + "!" : entry.getValue() + ""));
+                }
+            }
+        },
+                (type, entity) -> {
+                    var mat = (DamageNullifiedParticle.Type) type;
+                    double x = entity.getRandomX(1.0D);
+                    double y = entity.getEyeY();
+                    double z = entity.getRandomZ(1.0D);
+                    Minecraft.getInstance().particleEngine.add(new DamageNullifiedParticle(Minecraft.getInstance().level, x, y, z, new Original(), mat));
+                });
+
+        public final BiConsumer<IParticleSpawnNotifier, Entity> damageStrategy;
+        public final BiConsumer<IParticleSpawnNotifier, Entity> nullifiedDamageStrategy;
+
+        ClientParticleSpawnStrategy(BiConsumer<IParticleSpawnNotifier, Entity> damageStrategy, BiConsumer<IParticleSpawnNotifier, Entity> nullifiedDamageStrategy) {
+            this.damageStrategy = damageStrategy;
+            this.nullifiedDamageStrategy = nullifiedDamageStrategy;
+        }
+    }
+
 }

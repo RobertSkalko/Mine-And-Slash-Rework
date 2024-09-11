@@ -1,15 +1,12 @@
 package com.robertx22.mine_and_slash.event.server;
 
-public class NotifyClientToSpawnParticleEvent {
-    public Type type;
+import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.particle.InteractionType;
 
-    public NotifyClientToSpawnParticleEvent(Type type) {
+public class NotifyClientToSpawnParticleEvent {
+    public InteractionType type;
+
+    public NotifyClientToSpawnParticleEvent(InteractionType type) {
         this.type = type;
     }
 
-    public enum Type{
-        DAMAGE,
-        NULLIFIED_DAMAGE,
-        HEAL
-    }
 }
