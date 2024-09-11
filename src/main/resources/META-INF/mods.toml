@@ -42,3 +42,9 @@ mandatory = true
 versionRange = "[0,)"
 ordering = "NONE"
 side = "BOTH"
+[[dependencies.mmorpg]]
+modId = "playeranimator"
+mandatory = true
+versionRange = "[0,)"
+ordering = "NONE"
+side = "CLIENT"

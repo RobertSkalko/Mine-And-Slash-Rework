@@ -20,6 +20,7 @@ import com.robertx22.mine_and_slash.uncommon.localization.Chats;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.LevelUtils;
 import com.robertx22.mine_and_slash.uncommon.utilityclasses.WorldUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.Style;
@@ -27,10 +28,21 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.GameType;
+
+import java.util.UUID;
 
 public class OnServerTick {
 
+    public static AttributeModifier CASTING_SPEED_SLOW = new AttributeModifier(
+            UUID.fromString("3fb10485-f309-128f-afc6-a23b0d6cf4c1"),
+            BuiltInRegistries.ATTRIBUTE.getKey(Attributes.MOVEMENT_SPEED).toString(),
+            -0.5,
+            AttributeModifier.Operation.MULTIPLY_TOTAL
+    );
 
     public static void onEndTick(ServerPlayer player) {
         try {
@@ -123,6 +135,19 @@ public class OnServerTick {
 
             if (age % (20 * 10) == 0) {
                 playerData.miscInfo.area_lvl = LevelUtils.determineLevel(null, player.level(), player.blockPosition(), player, false).getLevel();
+            }
+
+            AttributeInstance atri = player.getAttribute(Attributes.MOVEMENT_SPEED);
+            if (atri != null) {
+                if (playerData.spellCastingData.isCasting() && playerData.spellCastingData.castTickLeft > 0) {
+                    if (!atri.hasModifier(CASTING_SPEED_SLOW)) {
+                        atri.addTransientModifier(CASTING_SPEED_SLOW);
+                    }
+                } else {
+                    if (atri.hasModifier(CASTING_SPEED_SLOW)) {
+                        atri.removeModifier(CASTING_SPEED_SLOW);
+                    }
+                }
             }
 
             if (age % 5 == 0) {

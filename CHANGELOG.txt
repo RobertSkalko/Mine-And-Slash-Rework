@@ -1,5 +1,10 @@
 Changelog of recent updates: https://github.com/RobertSkalko/Mine-And-Slash-Rework/blob/1.20-Forge/changelogs/v.5.6.txt
 
 v.5.6.6
+- Spell casting now has custom animations! This requires a new dependency mod: player animator
+Spell animations are dictated through each spell's datapack json so you can change them, add new ones etc.
+The actual animations file is in the assets\mmorpg\player_animation folder
 - Some useless/confusing items are now hidden from JEI, still available in creative tabs
 - charge gui redesigned
+- cast bar gui redesigned
+- player is now slowed when casting (like when using an item, unsure if feels the same though)

@@ -1,21 +1,23 @@
 package com.robertx22.mine_and_slash.gui.overlays.spell_cast_bar;
 
+import com.robertx22.mine_and_slash.database.data.spells.components.Spell;
+import com.robertx22.mine_and_slash.mmorpg.SlashRef;
 import com.robertx22.mine_and_slash.uncommon.datasaving.Load;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.BossEvent;
 
 public class SpellCastBarOverlay {
 
-    private static final ResourceLocation GUI_BARS_TEXTURES = new ResourceLocation("textures/gui/bars.png");
+    static ResourceLocation GUI_BARS_TEXTURES = new ResourceLocation(SlashRef.MODID, "textures/gui/spells/cast_bar/cast_bar.png");
+    static ResourceLocation FILLED = new ResourceLocation(SlashRef.MODID, "textures/gui/spells/cast_bar/cast_bar_fill.png");
 
-    static int WIDTH = 182;
-    static int HEIGHT = 5;
+    static int WIDTH = 172;
+    static int HEIGHT = 20;
 
     Minecraft mc = Minecraft.getInstance();
 
-    public void onHudRender(GuiGraphics gui) {
+    public void onHudRender(GuiGraphics gui, float partialtick) {
 
         var data = Load.player(mc.player);
 
@@ -23,42 +25,41 @@ public class SpellCastBarOverlay {
             return;
         }
 
-        if (data.spellCastingData
-                .isCasting() && data.spellCastingData.castTickLeft > 0) {
+        if (data.spellCastingData.isCasting() && data.spellCastingData.castTickLeft > 0) {
 
-            int x = mc.getWindow()
-                    .getGuiScaledWidth() / 2 - WIDTH / 2;
-            int y = (int) (mc.getWindow()
-                    .getGuiScaledHeight() / 1.25F - HEIGHT / 2);
+            float total = data.spellCastingData.spellTotalCastTicks;
+            float current = data.spellCastingData.castTickLeft;
 
-            float percent =
-                    ((float) data.spellCastingData.spellTotalCastTicks - (float) data.spellCastingData.castTickLeft) / (float) data
-                            .spellCastingData.spellTotalCastTicks;
+            float percent = (total - current + partialtick) / total;
+    
+            renderCastBar(gui, data.spellCastingData.getSpellBeingCast(), percent);
 
-            render(gui, x, y, BossEvent.BossBarColor.PURPLE, BossEvent.BossBarOverlay.NOTCHED_20, percent);
         }
 
-      
+
     }
 
-    private void render(GuiGraphics gui, int x, int y, BossEvent.BossBarColor color, BossEvent.
-            BossBarOverlay overlay, float percent) {
+    private void renderCastBar(GuiGraphics gui, Spell spell, float percent) {
+
+        int spellSize = 14;
+
+
+        int x = mc.getWindow().getGuiScaledWidth() / 2 - WIDTH / 2;
+        int y = (int) (mc.getWindow().getGuiScaledHeight() / 1.25F - HEIGHT / 2);
+
 
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 
-        gui.blit(GUI_BARS_TEXTURES, x, y, 0, color.ordinal() * 5 * 2, WIDTH, HEIGHT);
-        if (overlay != BossEvent.BossBarOverlay.PROGRESS) {
-            gui.blit(GUI_BARS_TEXTURES, x, y, 0, 80 + (overlay.ordinal() - 1) * 5 * 2, WIDTH, HEIGHT);
+        gui.blit(GUI_BARS_TEXTURES, x, y, 0, 0, WIDTH, HEIGHT, WIDTH, HEIGHT);
+
+        int i = (int) (percent * (float) WIDTH);
+        if (i > 0) {
+            gui.blit(FILLED, x, y, 0, 0, i, HEIGHT, WIDTH, HEIGHT);
         }
 
-        int i = (int) (percent * 183.0F);
-        if (i > 0) {
-            gui.blit(GUI_BARS_TEXTURES, x, y, 0, color.ordinal() * 5 * 2 + 5, i, HEIGHT);
-            if (overlay != BossEvent.BossBarOverlay.PROGRESS) {
-                gui.blit(GUI_BARS_TEXTURES, x, y, 0, 80 + (overlay.ordinal() - 1) * 5 * 2 + 5, i, HEIGHT);
-            }
-        }
+        gui.blit(spell.getIconLoc(), x + 79, y + 3, 0, 0, spellSize, spellSize, spellSize, spellSize);
 
     }
+
 
 }

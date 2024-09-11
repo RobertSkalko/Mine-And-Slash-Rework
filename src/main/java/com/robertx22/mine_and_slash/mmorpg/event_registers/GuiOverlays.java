@@ -29,7 +29,7 @@ public class GuiOverlays {
         event.registerAbove(VanillaGuiOverlay.CHAT_PANEL.id(), SlashRef.MODID + ".cast_bar", new IGuiOverlay() {
             @Override
             public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
-                new SpellCastBarOverlay().onHudRender(guiGraphics);
+                new SpellCastBarOverlay().onHudRender(guiGraphics, partialTick);
             }
         });
         event.registerAbove(VanillaGuiOverlay.CHAT_PANEL.id(), SlashRef.MODID + ".rpg_gui", new IGuiOverlay() {

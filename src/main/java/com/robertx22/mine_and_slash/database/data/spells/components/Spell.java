@@ -6,6 +6,9 @@ import com.robertx22.library_of_exile.registry.IAutoGson;
 import com.robertx22.library_of_exile.registry.IGUID;
 import com.robertx22.library_of_exile.registry.JsonExileRegistry;
 import com.robertx22.library_of_exile.wrappers.ExileText;
+import com.robertx22.mine_and_slash.a_libraries.player_animations.AnimationHolder;
+import com.robertx22.mine_and_slash.a_libraries.player_animations.PlayerAnimations;
+import com.robertx22.mine_and_slash.a_libraries.player_animations.SpellAnimations;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.SpellDesc;
 import com.robertx22.mine_and_slash.database.data.StatMod;
 import com.robertx22.mine_and_slash.database.data.exile_effects.ExileEffect;
@@ -47,7 +50,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -72,6 +74,8 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
     public AttachedSpell attached = new AttachedSpell();
     public SpellConfiguration config = new SpellConfiguration();
 
+    public SpellAnimationData cast_animation = new SpellAnimationData(SpellAnimations.STEADY_CAST);
+    public SpellAnimationData cast_finish_animation = new SpellAnimationData(SpellAnimations.CAST_FINISH);
 
     public Boolean hasCost(ResourceType type) {
         if (type == ResourceType.energy) {
@@ -199,9 +203,10 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
 
         ctx.castedThisTick = true;
 
-        if (this.config.swing_arm) {
-            caster.swingTime = -1; // this makes sure hand swings
-            caster.swing(InteractionHand.MAIN_HAND);
+        // todo
+        if (MMORPG.RUN_DEV_TOOLS_REMOVE_WHEN_DONE && this.config.swing_arm) {
+            //    caster.swingTime = -1; // this makes sure hand swings
+            //   caster.swing(InteractionHand.MAIN_HAND);
         }
 
 
@@ -450,6 +455,23 @@ public final class Spell implements ISkillGem, IGUID, IAutoGson<Spell>, JsonExil
         return lvl;
     }
 
+
+    // todo need to make my own animations
+    public AnimationHolder getAnimation(PlayerAnimations.CastEnum e) {
+        if (e == PlayerAnimations.CastEnum.CAST_START) {
+            if (false) {
+                return SpellAnimations.CAST_FINISH;
+            }
+            return this.cast_animation.getAnim();
+        }
+        if (e == PlayerAnimations.CastEnum.CAST_FINISH) {
+            if (false) {
+                return SpellAnimations.CAST_FINISH;
+            }
+            return this.cast_finish_animation.getAnim();
+        }
+        return AnimationHolder.none();
+    }
 
     @Override
     public Class<Spell> getClassForSerialization() {

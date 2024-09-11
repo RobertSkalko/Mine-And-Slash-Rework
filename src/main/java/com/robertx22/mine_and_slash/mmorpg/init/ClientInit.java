@@ -3,6 +3,7 @@ package com.robertx22.mine_and_slash.mmorpg.init;
 import com.mojang.datafixers.util.Either;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.DamageParticle;
 import com.robertx22.mine_and_slash.a_libraries.dmg_number_particle.DamageParticleRenderer;
+import com.robertx22.mine_and_slash.a_libraries.player_animations.PlayerAnimations;
 import com.robertx22.mine_and_slash.config.forge.ClientConfigs;
 import com.robertx22.mine_and_slash.gui.SocketTooltip;
 import com.robertx22.mine_and_slash.gui.overlays.GuiPosition;
@@ -36,6 +37,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ClientInit {
 
     public static void onInitializeClient(final FMLClientSetupEvent event) {
+
+        PlayerAnimations.initClient();
 
         AtomicInteger sounds = new AtomicInteger();
 

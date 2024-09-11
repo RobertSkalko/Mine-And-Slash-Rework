@@ -1,5 +1,8 @@
 package com.robertx22.mine_and_slash.aoe_data.database.spells.schools;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
+import com.robertx22.mine_and_slash.a_libraries.player_animations.AnimationHolder;
+import com.robertx22.mine_and_slash.a_libraries.player_animations.SpellAnimations;
 import com.robertx22.mine_and_slash.aoe_data.database.ailments.Ailments;
 import com.robertx22.mine_and_slash.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.PartBuilder;
@@ -21,7 +24,6 @@ import com.robertx22.mine_and_slash.mmorpg.registers.common.SlashSounds;
 import com.robertx22.mine_and_slash.tags.all.SpellTags;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.PlayStyle;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffects;
@@ -80,10 +82,11 @@ public class WaterSpells implements ExileRegistryInit {
 
                 .build();
 
-        SpellBuilder.of(BLIZZARD, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(35, 20 * 25, 20),
+        SpellBuilder.of(BLIZZARD, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(35, 20 * 25, 30),
                         "Blizzard",
                         Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.COLD, SpellTags.PHYSICAL, SpellTags.SHATTER)
                 )
+                .animations(SpellAnimations.STAFF_CAST_WAVE_LOOP, SpellAnimations.STAFF_CAST_FINISH)
                 .manualDesc("Create a Cloud that sends cold waves, damaging enemies for " + SpellCalcs.BLIZZARD.getLocDmgTooltip(Elements.Cold)
                 )
                 .weaponReq(CastingWeapon.MAGE_WEAPON)
@@ -97,14 +100,14 @@ public class WaterSpells implements ExileRegistryInit {
                         .put(MapField.FIND_NEAREST_SURFACE, false)
                         .put(MapField.IS_BLOCK_FALLING, false)))
 
-                .onTick("cloud", ParticleBuilder.of(ParticleTypes.SNOWFLAKE, 3f).shape(ParticleShape.CIRCLE_2D).amount(100).randomY(0.5F).height(6).build())
-                .onTick("cloud", ParticleBuilder.of(ParticleTypes.ITEM_SNOWBALL, 3f).shape(ParticleShape.CIRCLE_2D).amount(50).randomY(0.5F).height(6).build())
+                .onTick("cloud", ParticleBuilder.of(ParticleTypes.SNOWFLAKE, 3f).shape(ParticleShape.CIRCLE_2D).amount(80).randomY(0.5F).height(6).build())
+                .onTick("cloud", ParticleBuilder.of(ParticleTypes.ITEM_SNOWBALL, 3f).shape(ParticleShape.CIRCLE_2D).amount(40).randomY(0.5F).height(6).build())
 
                 .onTick("cloud", DamageBuilder.radius(Elements.Cold, 3, SpellCalcs.BLIZZARD).build().noKnock().tick(20D))
 
                 .build();
 
-        SpellBuilder.of(FROZEN_ORB, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 30)
+        SpellBuilder.of(FROZEN_ORB, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(30, 20 * 30, 25)
                                 .setSwingArm(), "Frozen orb",
                         Arrays.asList(SpellTags.projectile, SpellTags.damage, SpellTags.area, SpellTags.COLD))
                 .manualDesc(
@@ -157,10 +160,11 @@ public class WaterSpells implements ExileRegistryInit {
                 .build();
 
 
-        SpellBuilder.of(ICE_COMET, PlayStyle.INT, SpellConfiguration.Builder.instant(18, 20).setChargesAndRegen(ICE_COMET, 3, 20 * 20),
+        SpellBuilder.of(ICE_COMET, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(18, 20, 20).setChargesAndRegen(ICE_COMET, 3, 20 * 20),
                         "Ice Comet",
                         Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.COLD)
                 )
+                .animations(SpellAnimations.HAND_UP_CAST, SpellAnimations.CAST_FINISH)
                 .manualDesc("Summon a meteor that falls from the sky, dealing " +
                         SpellCalcs.ICE_COMET.getLocDmgTooltip(Elements.Cold))
 
@@ -185,7 +189,7 @@ public class WaterSpells implements ExileRegistryInit {
                 .levelReq(20)
                 .build();
 
-        SpellBuilder.of(CHILLING_FIELD, PlayStyle.INT, SpellConfiguration.Builder.instant(30, 20 * 30)
+        SpellBuilder.of(CHILLING_FIELD, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(30, 20 * 30, 30)
                                 .setSwingArm(), "Chilling Field",
                         Arrays.asList(SpellTags.damage, SpellTags.area, SpellTags.COLD))
                 .weaponReq(CastingWeapon.ANY_WEAPON)
@@ -266,6 +270,7 @@ public class WaterSpells implements ExileRegistryInit {
         SpellBuilder.of(TIDAL_STRIKE, PlayStyle.STR, SpellConfiguration.Builder.instant(8, 12)
                                 .setSwingArm(), "Tidal Strike",
                         Arrays.asList(SpellTags.weapon_skill, SpellTags.area, SpellTags.damage, SpellTags.COLD))
+                .animations(AnimationHolder.none(), SpellAnimations.MELEE_SLASH)
                 .manualDesc("Strike enemies in front of you for " + SpellCalcs.TIDAL_STRIKE.getLocDmgTooltip(Elements.Cold))
                 .weaponReq(CastingWeapon.MELEE_WEAPON)
                 .onCast(PartBuilder.playSound(SoundEvents.TRIDENT_THROW, 1D, 1D))

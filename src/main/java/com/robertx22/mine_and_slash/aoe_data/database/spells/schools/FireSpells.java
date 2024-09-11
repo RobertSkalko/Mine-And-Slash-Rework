@@ -1,5 +1,7 @@
 package com.robertx22.mine_and_slash.aoe_data.database.spells.schools;
 
+import com.robertx22.library_of_exile.registry.ExileRegistryInit;
+import com.robertx22.mine_and_slash.a_libraries.player_animations.SpellAnimations;
 import com.robertx22.mine_and_slash.aoe_data.database.exile_effects.adders.ModEffects;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.PartBuilder;
 import com.robertx22.mine_and_slash.aoe_data.database.spells.SpellBuilder;
@@ -13,7 +15,6 @@ import com.robertx22.mine_and_slash.mmorpg.registers.common.SlashEntities;
 import com.robertx22.mine_and_slash.tags.all.SpellTags;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.Elements;
 import com.robertx22.mine_and_slash.uncommon.enumclasses.PlayStyle;
-import com.robertx22.library_of_exile.registry.ExileRegistryInit;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.Blocks;
@@ -91,6 +92,8 @@ public class FireSpells implements ExileRegistryInit {
         SpellBuilder.of(METEOR, PlayStyle.INT, SpellConfiguration.Builder.instant(18, 20).setChargesAndRegen(METEOR, 3, 20 * 20), "Meteor",
                         Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.FIRE)
                 )
+                .animations(SpellAnimations.HAND_UP_CAST, SpellAnimations.CAST_FINISH)
+
                 .manualDesc("Summon a meteor that falls from the sky, dealing " +
                         SpellCalcs.METEOR.getLocDmgTooltip(Elements.Fire) + " in an area.")
 

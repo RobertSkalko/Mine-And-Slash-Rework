@@ -46,13 +46,13 @@ public class SpellHotbarOverlay {
     );
 
     private static final ResourceLocation CHARGE = new ResourceLocation(SlashRef.MODID,
-            "textures/gui/spells/full_charges.png"
+            "textures/gui/spells/charges/full_charges.png"
     );
     private static final ResourceLocation LOW_CHARGE = new ResourceLocation(SlashRef.MODID,
-            "textures/gui/spells/low_charges.png"
+            "textures/gui/spells/charges/low_charges.png"
     );
     private static final ResourceLocation NO_CHARGE = new ResourceLocation(SlashRef.MODID,
-            "textures/gui/spells/no_charges.png"
+            "textures/gui/spells/charges/no_charges.png"
     );
     private static final ResourceLocation KEY_BG = new ResourceLocation(SlashRef.MODID,
             "textures/gui/spells/keybind_bg.png"

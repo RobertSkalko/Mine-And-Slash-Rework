@@ -1,11 +1,9 @@
 package com.robertx22.mine_and_slash.aoe_data.database.spells;
 
+import com.robertx22.mine_and_slash.a_libraries.player_animations.AnimationHolder;
 import com.robertx22.mine_and_slash.aoe_data.database.stats.base.EffectCtx;
 import com.robertx22.mine_and_slash.database.data.StatMod;
-import com.robertx22.mine_and_slash.database.data.spells.components.ComponentPart;
-import com.robertx22.mine_and_slash.database.data.spells.components.EntityActivation;
-import com.robertx22.mine_and_slash.database.data.spells.components.Spell;
-import com.robertx22.mine_and_slash.database.data.spells.components.SpellConfiguration;
+import com.robertx22.mine_and_slash.database.data.spells.components.*;
 import com.robertx22.mine_and_slash.database.data.spells.components.actions.SpellAction;
 import com.robertx22.mine_and_slash.database.data.spells.components.actions.SummonPetAction;
 import com.robertx22.mine_and_slash.database.data.spells.components.selectors.TargetSelector;
@@ -200,6 +198,15 @@ public class SpellBuilder {
 
     public SpellBuilder addEffectToTooltip(EffectCtx eff) {
         this.spell.effect_tip = eff.resourcePath;
+        return this;
+    }
+
+    public SpellBuilder animations(AnimationHolder castStart, AnimationHolder castFinish) {
+
+        this.spell.cast_animation = new SpellAnimationData(castStart);
+        this.spell.cast_finish_animation = new SpellAnimationData(castFinish);
+
+
         return this;
     }
 

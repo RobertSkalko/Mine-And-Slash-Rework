@@ -1,8 +1,9 @@
 buildscript {
     repositories {
+
+
         maven { url = 'https://maven.minecraftforge.net' }
         maven { url = 'https://maven.parchmentmc.org' }
-
         maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
         mavenCentral()
     }
@@ -32,9 +33,9 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
-    maven {
-        url = "https://maven.theillusivec4.top/"
-    }
+    maven { url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" } // geckolib
+    maven { url = "https://maven.kosmx.dev/" } // player animations
+    maven { url = "https://maven.theillusivec4.top/" } // curios
     maven { url '"https://maven.theillusivec4.top/' }
 
     maven {
@@ -124,6 +125,9 @@ dependencies {
     runtimeOnly fg.deobf("mezz.jei:jei-1.20.1-forge:${project.jei_version}") //Full for runtime
 
 
+    implementation fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:${player_animator_version}")
+    //implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${geckolib_version}")
+
     //  compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
     // at runtime, use the full JEI jar
     // runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
@@ -167,6 +171,7 @@ publishMods {
 
         requires { slug = "library-of-exile" }
         requires { slug = "curios" }
+		requires { slug = "playeranimator" }
 
     }
 }
