@@ -40,6 +40,7 @@ public class ClientConfigs {
         DONT_CULL_PARTICLES_UNDER = b.defineInRange("DONT_CULL_PARTICLES_UNDER", 50D, 0D, 5000D);
 
         HOTBAR_SWAPPING = b.comment("When OFF: 8 bars, 8 keybinds. When ON: 4 bars, 5 keybinds(4 for each bar, 1 for hotbar swap button)").define("HOTBAR_SWAPPING", false);
+        HORIZONTAL_HOTBAR = b.comment("Instead of hotbar being on the side of the screen, it would be placed above the vanilla game's hotbar").define("HORIZONTAL_HOTBAR", false);
 
         GUI_POSITION = b.defineEnum("GUI_POSITION", GuiPosition.TOP_LEFT);
         ITEM_RARITY_BACKGROUND_TYPE = b.defineEnum("ITEM_RARITY_BACKGROUND_TYPE", GlintType.FULL);
@@ -63,6 +64,7 @@ public class ClientConfigs {
     public ForgeConfigSpec.BooleanValue MODIFY_TOOLTIP_LENGTH;
     public ForgeConfigSpec.BooleanValue IN_DEPTH_TOOLTIPS_BY_DEFAULT;
     public ForgeConfigSpec.BooleanValue HOTBAR_SWAPPING;
+    public ForgeConfigSpec.BooleanValue HORIZONTAL_HOTBAR;
 
     public ForgeConfigSpec.EnumValue<GlintType> ITEM_RARITY_BACKGROUND_TYPE;
     public ForgeConfigSpec.EnumValue<GuiPosition> GUI_POSITION;

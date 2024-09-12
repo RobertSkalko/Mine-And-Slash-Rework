@@ -71,7 +71,6 @@ public class SpellStatsCalculationEvent extends EffectEvent {
 
         int cd = (int) Mth.clamp(data.getNumber(EventData.COOLDOWN_TICKS).number, getSpell().config.cooldown_ticks * GameBalanceConfig.get().MIN_SPELL_COOLDOWN_MULTI, 1000000);
         this.data.getNumber(EventData.COOLDOWN_TICKS).number = cd; // cap it to 80% cooldown
-
         this.savedData.data = data;
     }
 

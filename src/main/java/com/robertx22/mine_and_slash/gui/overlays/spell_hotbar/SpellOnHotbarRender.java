@@ -30,6 +30,7 @@ public class SpellOnHotbarRender {
     private static final ResourceLocation MOD_BG = new ResourceLocation(SlashRef.MODID, "textures/gui/spells/modbg.png");
     private static final ResourceLocation COOLDOWN_TEX = new ResourceLocation(SlashRef.MODID, "textures/gui/spells/cooldown.png");
 
+
     public int place;
     public GuiGraphics gui;
     public int x;
@@ -76,13 +77,14 @@ public class SpellOnHotbarRender {
     public void render() {
         var mc = Minecraft.getInstance();
 
-        int HEIGHT = 162;
-
 
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 
-
-        y += place * 20;
+        if (ClientConfigs.getConfig().HORIZONTAL_HOTBAR.get()) {
+            x += place * 20;
+        } else {
+            y += place * 20;
+        }
 
         try {
             int xs = (int) (x);
@@ -196,7 +198,7 @@ public class SpellOnHotbarRender {
         CooldownsData cds = Load.Unit(mc.player).getCooldowns();
 
         if (cds.getCooldownTicks(spell.GUID()) > 1) {
-            gui.blit(COOLDOWN_TEX, xs, xs, 0, 0, 16, (int) (16 * percent), 16, 16);
+            gui.blit(COOLDOWN_TEX, this.x, this.y, 0, 0, 16, (int) (16 * percent), 16, 16);
         } else {
             return;
         }
@@ -204,7 +206,7 @@ public class SpellOnHotbarRender {
         int cdsec = cds.getCooldownTicks(spell.GUID()) / 20;
         if (cdsec > 1) {
             String stext = cdsec + "s";
-            GuiUtils.renderScaledText(gui, xs + 27, ys + 10, 0.75F, stext, ChatFormatting.YELLOW);
+            //  GuiUtils.renderScaledText(gui, xs + 27, ys + 10, 0.75F, stext, ChatFormatting.YELLOW);
         }
     }
 }

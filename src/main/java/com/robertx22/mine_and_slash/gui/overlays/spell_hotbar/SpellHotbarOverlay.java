@@ -14,16 +14,16 @@ import net.minecraft.resources.ResourceLocation;
 
 public class SpellHotbarOverlay {
 
-    private static final ResourceLocation HOTBAR_TEX = new ResourceLocation(SlashRef.MODID,
-            "textures/gui/spells/hotbar.png"
-    );
-    private static final ResourceLocation HOTBAR_SWAP_1 = new ResourceLocation(SlashRef.MODID,
-            "textures/gui/spells/hotbar_swap1.png"
-    );
-    private static final ResourceLocation HOTBAR_SWAP_2 = new ResourceLocation(SlashRef.MODID,
-            "textures/gui/spells/hotbar_swap2.png"
-    );
 
+    public static ResourceLocation getHotbarTex() {
+        return hotbarTex(ClientConfigs.getConfig().HORIZONTAL_HOTBAR.get(), ClientConfigs.getConfig().HOTBAR_SWAPPING.get(), SpellKeybind.IS_ON_SECONd_HOTBAR ? 2 : 1);
+    }
+
+    static ResourceLocation hotbarTex(Boolean horizontal, Boolean swap, Integer swapnum) {
+        String swaptex = swap ? "_swap" + swapnum : "";
+        String horizontaltex = horizontal ? "_horizontal" : "";
+        return new ResourceLocation(SlashRef.MODID, "textures/gui/spells/hotbar/" + "hotbar" + swaptex + horizontaltex + ".png");
+    }
 
     Minecraft mc = Minecraft.getInstance();
 
@@ -37,7 +37,7 @@ public class SpellHotbarOverlay {
             if (mc.player.isSpectator()) {
                 return;
             }
-            if (ChatUtils.isChatOpen()) {
+            if (ChatUtils.isChatOpen() && !ClientConfigs.getConfig().HORIZONTAL_HOTBAR.get()) {
                 return;
             }
             if (Load.player(mc.player) == null) {
@@ -47,41 +47,41 @@ public class SpellHotbarOverlay {
             int WIDTH = 22;
             int HEIGHT = 162;
 
-            if (ClientConfigs.getConfig().HOTBAR_SWAPPING.get()) {
-                //        HEIGHT = 82;
+            if (ClientConfigs.getConfig().HORIZONTAL_HOTBAR.get()) {
+                WIDTH = 162;
+                HEIGHT = 22;
             }
-
 
             RenderSystem.enableBlend(); // enables transparency
 
             int x = 0;
-            int y = mc.getWindow()
-                    .getGuiScaledHeight() / 2 - HEIGHT / 2;
+            int y = mc.getWindow().getGuiScaledHeight() / 2 - HEIGHT / 2;
+
+            if (ClientConfigs.getConfig().HORIZONTAL_HOTBAR.get()) {
+                x = mc.getWindow().getGuiScaledWidth() / 2 - WIDTH / 2;
+                y = (int) (mc.getWindow().getGuiScaledHeight() - HEIGHT / 2 - 60);
+            }
 
             renderHotbar(gui, x, y);
-         
+
             int spells = ClientConfigs.getConfig().HOTBAR_SWAPPING.get() ? 8 : 8;
 
 
             for (int i = 0; i < spells; i++) {
 
                 int place = i;
-                int xp = 3;
-                int yp = mc.getWindow().getGuiScaledHeight() / 2 - HEIGHT / 2 + 3;
+                int xp = x + 3;
+                int yp = y + 3;
 
                 var spellRen = new SpellOnHotbarRender(place, gui, xp, yp);
                 spellRen.render();
-
             }
 
             RenderSystem.disableBlend(); // enables transparency
 
             if (ClientConfigs.getConfig().GUI_POSITION.get() != GuiPosition.TOP_LEFT) {
-
                 int offset = 0;
                 offset = 80;
-
-
                 EffectsOverlay.render(3, y + 85 + offset, mc.player, gui, false);
             }
 
@@ -96,18 +96,14 @@ public class SpellHotbarOverlay {
         int WIDTH = 22;
         int HEIGHT = 162;
 
+        if (ClientConfigs.getConfig().HORIZONTAL_HOTBAR.get()) {
+            WIDTH = 162;
+            HEIGHT = 22;
+        }
 
         gui.setColor(1.0F, 1.0F, 1.0F, 1.0F);
 
-        var hotbar = HOTBAR_TEX;
-
-        if (ClientConfigs.getConfig().HOTBAR_SWAPPING.get()) {
-            if (SpellKeybind.IS_ON_SECONd_HOTBAR) {
-                hotbar = HOTBAR_SWAP_2;
-            } else {
-                hotbar = HOTBAR_SWAP_1;
-            }
-        }
+        var hotbar = getHotbarTex();
 
         gui.blit(hotbar, x, y, 0, 0, WIDTH, HEIGHT);
 

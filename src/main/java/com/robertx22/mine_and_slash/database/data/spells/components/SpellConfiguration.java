@@ -32,7 +32,7 @@ public class SpellConfiguration {
     public int tracking_radius = 5;
     public AllyOrEnemy tracks = AllyOrEnemy.enemies;
 
-  
+
     public int getCastTimeTicks() {
         return cast_time_ticks;
     }
@@ -71,9 +71,9 @@ public class SpellConfiguration {
 
 
         if (ticksToRegen > (20 * 30)) {
-            this.cooldown_ticks = 20; // we force the cooldown to be the same for all spells with charges so it feels consistent and good
+            this.cooldown_ticks = 0; // we force the cooldown to be the same for all spells with charges so it feels consistent and good
         } else {
-            this.cooldown_ticks = 10; // we force the cooldown to be the same for all spells with charges so it feels consistent and good
+            this.cooldown_ticks = 0; // we force the cooldown to be the same for all spells with charges so it feels consistent and good
         }
 
 

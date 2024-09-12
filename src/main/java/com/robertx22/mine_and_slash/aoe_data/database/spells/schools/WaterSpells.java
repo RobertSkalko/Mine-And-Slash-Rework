@@ -160,7 +160,7 @@ public class WaterSpells implements ExileRegistryInit {
                 .build();
 
 
-        SpellBuilder.of(ICE_COMET, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(18, 20, 20).setChargesAndRegen(ICE_COMET, 3, 20 * 20),
+        SpellBuilder.of(ICE_COMET, PlayStyle.INT, SpellConfiguration.Builder.nonInstant(18, 0, 20).setChargesAndRegen(ICE_COMET, 3, 20 * 20),
                         "Ice Comet",
                         Arrays.asList(SpellTags.area, SpellTags.damage, SpellTags.COLD)
                 )
